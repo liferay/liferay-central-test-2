@@ -40,58 +40,48 @@ import com.liferay.portlet.journal.model.JournalArticle;
 public interface JournalCreationStrategy {
 
     /**
-     * Constant returned by getAuhtorUserId() and/or getApprovalUserId()
-     * that indicates that the default portlet data import user Id strategy
-     * should be used to determine the user id.
-     * 
-     * @see com.liferay.portal.kernel.lar.UserIdStrategy
-     * @see #getAuthorUserId(long, long, Object)
-     * @see #getApprovalUserId(long, long, Object)
+     * Constant returned by getAuthorUserId() and/or getApprovalUserId()
+     * that indicates the default portlet data import user id strategy that
+	 * should be used to determine the user id.
      */
     public static final long USE_DEFAULT_USER_ID_STRATEGY = 0;
-    
-    
+
     /**
      * Constant returned by getTransformedContent() to indicate that the
      * article text should remained unchanged.
-     * 
-     * @see #getTransformedContent(long, long, JournalArticle)
      */
     public static final String ARTICLE_CONTENT_UNCHANGED = null;
-    
-    
+
 	/**
 	 * Returns the author's user id to assign to newly created content. If zero
-	 * is returned, the default user id import strategy will determine the author Id.
+	 * is returned, the default user id import strategy will determine the
+	 * author id.
 	 *
 	 * @param		companyId the company id of the layout
 	 * @param		groupId the group id of the layout
 	 * @param		journalObj the new object must be an instance of
-	 *				JournalArticle, JournalStructure or JournalTemplate
-	 * @return		the author's user id, or USE_DEFAULT_USER_ID_STRATEGY to use the default user Id strategy
-     * 
-     * @see #USE_DEFAULT_USER_ID_STRATEGY
+	 *				JournalArticle, JournalStructure, or JournalTemplate
+	 * @return		the author's user id or USE_DEFAULT_USER_ID_STRATEGY to use
+	 *				the default user id strategy
 	 */
 	public long getAuthorUserId(long companyId, long groupId, Object journalObj)
 		throws Exception;
 
-    
 	/**
 	 * Returns the approver's user id to assign to newly created content. If
-	 * zero is returned, the default user id import strategy will determine the author Id
+	 * zero is returned, the default user id import strategy will determine the
+	 * author id.
 	 *
 	 * @param		companyId the company id of the layout
 	 * @param		groupId the group id of the layout
 	 * @param		journalObj the new object must be an instance of
-	 *				JournalArticle, JournalStructure or JournalTemplate
-	 * @return		the approver's user id, or USE_DEFAULT_USER_ID_STRATEGY to use the default user Id strategy
-     *
-     * @see #USE_DEFAULT_USER_ID_STRATEGY
+	 *				JournalArticle, JournalStructure, or JournalTemplate
+	 * @return		the approver's user id or USE_DEFAULT_USER_ID_STRATEGY to
+	 *				use the default user id strategy
 	 */
 	public long getApprovalUserId(
 			long companyId, long groupId, Object journalObj)
 		throws Exception;
-
 
 	/**
 	 * Gives the content creation strategy an opportunity to transform the
@@ -103,10 +93,9 @@ public interface JournalCreationStrategy {
 	 * @param		companyId the company id of the layout
 	 * @param		groupId the group id of the layout
 	 * @param		newArticle the new article being created
-	 * @return		the transformed content to save in the database or ARTICLE_CONTENT_UNCHANGED if
-	 *				the content should be added unchanged
-     *
-     * @see #ARTICLE_CONTENT_UNCHANGED
+	 * @return		the transformed content to save in the database or
+	 *				ARTICLE_CONTENT_UNCHANGED if the content should be added
+	 *				unchanged
 	 */
 	public String getTransformedContent(
 			long companyId, long groupId, JournalArticle newArticle)
@@ -119,7 +108,7 @@ public interface JournalCreationStrategy {
 	 * @param		companyId the company id of the layout
 	 * @param		groupId the group id of the layout
 	 * @param		journalObj the new object must be an instance of
-	 *				JournalArticle, JournalStructure or JournalTemplate
+	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		true if default community permissions should be added to the
 	 *				specified journalObj
 	 */
@@ -134,7 +123,7 @@ public interface JournalCreationStrategy {
 	 * @param		companyId the company id of the layout
 	 * @param		groupId the group id of the layout
 	 * @param		journalObj the new object must be an instance of
-	 *				JournalArticle, JournalStructure or JournalTemplate
+	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		true if default guest permissions should be added to the
 	 *				specified journalObj
 	 */

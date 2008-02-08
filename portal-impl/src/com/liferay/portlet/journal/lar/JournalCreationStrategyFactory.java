@@ -23,7 +23,7 @@
 package com.liferay.portlet.journal.lar;
 
 import com.liferay.portal.kernel.util.InstancePool;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="JournalCreationStrategyFactory.java.html"><b><i>View Source</i></b>
@@ -34,12 +34,9 @@ import com.liferay.portal.util.PropsUtil;
  */
 public class JournalCreationStrategyFactory {
 
-	public static final String CREATION_STRATEGY_IMPL =
-		PropsUtil.get(PropsUtil.JOURNAL_LAR_CREATION_STRATEGY);
-
 	public static JournalCreationStrategy getInstance() {
 		return (JournalCreationStrategy)InstancePool.get(
-			CREATION_STRATEGY_IMPL);
+			PropsValues.JOURNAL_LAR_CREATION_STRATEGY);
 	}
 
 }

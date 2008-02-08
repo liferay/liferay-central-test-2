@@ -310,6 +310,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JOURNAL_FEED_FORCE_AUTOGENERATE_ID));
 
+	public static final String JOURNAL_LAR_CREATION_STRATEGY =
+		PropsUtil.get(PropsUtil.JOURNAL_LAR_CREATION_STRATEGY);
+
 	public static final boolean JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JOURNAL_STRUCTURE_FORCE_AUTOGENERATE_ID));

@@ -60,6 +60,7 @@ import org.dom4j.Element;
 /**
  * <a href="JournalContentPortletDataHandlerImpl.java.html"><b><i>View Source
  * </i></b></a>
+ *
  * <p>
  * Provides the Journal Content portlet export and import functionality, which
  * is to clone the article, structure, and template referenced in the
@@ -82,9 +83,9 @@ import org.dom4j.Element;
  * @author Raymond Augé
  * @author Bruno Farache
  *
- * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
  * @see com.liferay.portal.kernel.lar.PortletDataHandler
  * @see com.liferay.portlet.journal.lar.JournalCreationStrategy
+ * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
  *
  */
 public class JournalContentPortletDataHandlerImpl

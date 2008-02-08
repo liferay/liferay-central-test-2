@@ -30,15 +30,15 @@ import com.liferay.portlet.journal.model.JournalArticle;
  * <p>
  * Provides the strategy for creating new content when new Journal content is
  * imported into a layout set from a LAR. The default strategy implemented by
- * this class is to return zero for the author and approval user Ids, which
- * causes the default "user Id import strategy" to be used.
- * Content will be added as is (i.e. no transformations).
+ * this class is to return zero for the author and approval user ids, which
+ * causes the default user id import strategy to be used. Content will be added
+ * as is with no transformations.
  * </p>
  *
  * @author Joel Kozikowski
  *
- * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
  * @see com.liferay.portlet.journal.lar.JournalContentPortletDataHandlerImpl
+ * @see com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl
  *
  */
 public class JournalCreationStrategyImpl implements JournalCreationStrategy {
@@ -47,18 +47,16 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 			long companyId, long groupId, Object journalObj)
 		throws Exception {
 
-        return JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY;
+		return JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY;
 	}
 
-    
 	public long getApprovalUserId(
 			long companyId, long groupId, Object journalObj)
 		throws Exception {
 
-        return JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY;
+		return JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY;
 	}
 
-    
 	public String getTransformedContent(
 			long companyId, long groupId, JournalArticle newArticle)
 		throws Exception {
@@ -66,7 +64,6 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 		return JournalCreationStrategy.ARTICLE_CONTENT_UNCHANGED;
 	}
 
-    
 	public boolean addCommunityPermissions(
 			long companyId, long groupId, Object journalObj)
 		throws Exception {
@@ -74,7 +71,6 @@ public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 		return true;
 	}
 
-    
 	public boolean addGuestPermissions(
 			long companyId, long groupId, Object journalObj)
 		throws Exception {
