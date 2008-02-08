@@ -37,6 +37,8 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import javax.sql.DataSource;
+
 /**
  * <a href="PortletContextListener.java.html"><b><i>View Source</i></b></a>
  *
@@ -55,11 +57,25 @@ public class PortletContextListener
 				_log.debug("Dynamically binding the Liferay data source");
 			}
 
+			DataSource dataSource = PortalJNDIUtil.getDataSource();
+
+			if (dataSource == null) {
+				if (_log.isDebugEnabled()) {
+					_log.debug(
+						"Abort dynamically binding the Liferay data source " +
+							"because it is not available");
+				}
+
+				return;
+			}
+
 			Context ctx = new InitialContext();
 
 			ctx.createSubcontext(_JNDI_JDBC);
 
 			ctx.bind(_JNDI_JDBC_LIFERAY_POOL, PortalJNDIUtil.getDataSource());
+
+			_bindLiferayPool = true;
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
@@ -84,6 +100,12 @@ public class PortletContextListener
 				Thread.currentThread().getContextClassLoader()));
 
 		try {
+			if (!_bindLiferayPool) {
+				return;
+			}
+
+			_bindLiferayPool = false;
+
 			if (_log.isDebugEnabled()) {
 				_log.debug("Dynamically unbinding the Liferay data source");
 			}
@@ -113,5 +135,6 @@ public class PortletContextListener
 
 	private ClassLoader _classLoader;
 	private ServletContext _ctx;
+	private boolean _bindLiferayPool;
 
 }
