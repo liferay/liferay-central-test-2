@@ -288,8 +288,8 @@
 }
 
 .ie6.js .lfr-flyout.has-children ul {
-	width: 150px;
 	height: 1%;
+	width: 150px;
 }
 
 .ie6.js .interactive-mode li {
