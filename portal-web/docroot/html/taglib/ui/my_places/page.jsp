@@ -31,7 +31,7 @@ List myPlaces = user.getMyPlaces();
 %>
 
 <c:if test="<%= myPlaces.size() > 0 %>">
-	<ul>
+	<ul class="taglib-my-places">
 
 		<%
 		PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
