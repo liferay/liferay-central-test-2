@@ -49,6 +49,7 @@ import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.util.JournalRSSUtil;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.RSSUtil;
+
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndContentImpl;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -59,6 +60,7 @@ import com.sun.syndication.io.FeedException;
 
 import java.io.IOException;
 import java.io.OutputStream;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -72,6 +74,7 @@ import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
+
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
@@ -80,7 +83,7 @@ import org.dom4j.XPath;
 /**
  * <a href="RSSAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class RSSAction extends PortletAction {
