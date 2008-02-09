@@ -129,6 +129,9 @@
 .js .interactive-mode .my-places li h3 {
 }
 
+.js .lfr-dock.interactive-mode .my-places li h3 a {
+}
+
 .js .interactive-mode .lfr-flyout.has-children ul {
 }
 
@@ -141,10 +144,10 @@
 .js .interactive-mode .my-places li.current a {
 }
 
-.ie.js .lfr-dock .my-places h3 {
+.ie.js .interactive-mode .lfr-flyout.has-children {
 }
 
-.ie.js .interactive-mode .lfr-flyout.has-children {
+.ie.js .interactive-mode .taglib-my-places > li {
 }
 
 .ie6.js .lfr-dock.interactive-mode {

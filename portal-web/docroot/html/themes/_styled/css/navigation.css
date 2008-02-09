@@ -230,12 +230,13 @@
 }
 
 .js .interactive-mode .my-places li h3 {
-	background: url(../images/dock/my_place.png) no-repeat 0 50%;
 	font-size: 1em;
+	font-weight: normal;
 	margin: 0;
-	margin-left: 4px;
-	padding: 0.5em 0 0.5em 22px;
-	padding-left: 20px;
+}
+
+.js .lfr-dock.interactive-mode .my-places li h3 a {
+	background-image: url(../images/dock/my_place.png);
 }
 
 .js .interactive-mode .lfr-flyout.has-children ul {
@@ -260,12 +261,12 @@
 	padding-left: 3.5em;
 }
 
-.ie.js .lfr-dock .my-places h3 {
-	font-size: 1.1em;
-}
-
 .ie.js .interactive-mode .lfr-flyout.has-children {
 	min-width: 175px;
+}
+
+.ie.js .interactive-mode .taglib-my-places > li {
+	height: 24px;
 }
 
 .ie6.js .lfr-dock.interactive-mode {
