@@ -265,12 +265,7 @@
 }
 
 .ie.js .interactive-mode .lfr-flyout.has-children {
-	float: left;
 	min-width: 175px;
-}
-
-.ie.js .lfr-dock.expanded .lfr-dock-list-container, .ie.js .lfr-dock.expanded .lfr-dock-list {
-	height: 1%;
 }
 
 .ie6.js .lfr-dock.interactive-mode {
@@ -281,19 +276,6 @@
 .ie6.js .lfr-dock.interactive-mode li {
 	height: 1%;
 	width: 100%;
-}
-
-.ie6.js .lfr-dock.interactive-mode li a {
-	height: 1%;
-}
-
-.ie6.js .lfr-flyout.has-children ul {
-	height: 1%;
-	width: 150px;
-}
-
-.ie6.js .interactive-mode li {
-	width: 162px;
 }
 
 .ie6.js .interactive-mode .lfr-flyout.has-children {
@@ -367,9 +349,9 @@
 }
 
 .nav-menu li a.selected {
+	text-decoration: none;
 	color: black;
 	font-weight: bold;
-	text-decoration: none;
 }
 
 .nav-menu ul {
