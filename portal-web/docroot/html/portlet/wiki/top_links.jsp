@@ -64,7 +64,7 @@ portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 			frontPageURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 			%>
 
-			<liferay-ui:icon image="all_pages" message="<%= WikiPageImpl.FRONT_PAGE %>" url="<%= frontPageURL.toString() %>" label="<%= true %>" />
+			<liferay-ui:icon image="page" message="<%= WikiPageImpl.FRONT_PAGE %>" url="<%= frontPageURL.toString() %>" label="<%= true %>" />
 		</td>
 		<td>
 
@@ -104,7 +104,7 @@ portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 			%>
 
 			<td>
-				<liferay-ui:icon image="all_pages" message="manage-nodes" url="<%= portletURL.toString() %>" label="<%= true %>" />
+				<liferay-ui:icon image="manage_nodes" message="manage-nodes" url="<%= portletURL.toString() %>" label="<%= true %>" />
 			</td>
 		</c:if>
 	</tr>
