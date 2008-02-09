@@ -955,18 +955,27 @@ li.toggle-expand a {
 
 /* ---------- Taglib calendar ---------- */
 
+.taglib-calendar {
+	width: 190px;
+}
+
 .taglib-calendar table {
 	border: 1px solid #999;
+	width: 100%;
 }
 
 .taglib-calendar tr th, .taglib-calendar tr td {
+	height: 25px;
+	text-align: center;
+	border-bottom: 1px solid #999;
+}
+
+.taglib-calendar tr.portlet-section-header th, .taglib-calendar tr td {
 	border: 1px solid #999;
 	border-bottom: none;
 	border-top: none;
-	height: 25px;
 	padding: 0;
 	width: 26px;
-	text-align: center;
 }
 
 .taglib-calendar tr td a {
