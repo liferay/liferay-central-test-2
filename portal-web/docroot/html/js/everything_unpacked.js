@@ -18447,6 +18447,10 @@ Liferay.Dock = {
 						if (this.className.indexOf('my-places') > -1) {
 							jQuery('.current-community > ul', this).show();
 						}
+						else if (this.parentNode.className.indexOf('taglib-my-places') > -1) {
+							jQuery('ul', this.parentNode).hide();
+							jQuery('> ul', this).show();
+						}
 					}
 				}
 			);

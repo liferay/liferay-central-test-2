@@ -349,9 +349,9 @@
 }
 
 .nav-menu li a.selected {
-	text-decoration: none;
 	color: black;
 	font-weight: bold;
+	text-decoration: none;
 }
 
 .nav-menu ul {
