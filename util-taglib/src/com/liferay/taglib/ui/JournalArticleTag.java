@@ -39,7 +39,8 @@ public class JournalArticleTag extends IncludeTag {
 		ServletRequest req = pageContext.getRequest();
 
 		req.setAttribute(
-			"liferay-ui:journal-article:classPK", String.valueOf(_classPK));
+			"liferay-ui:journal-article:articleResourceId",
+			String.valueOf(_articleResourceId));
 		req.setAttribute("liferay-ui:journal-article:languageId", _languageId);
 		req.setAttribute(
 			"liferay-ui:journal-article:articlePage",
@@ -54,8 +55,8 @@ public class JournalArticleTag extends IncludeTag {
 		return EVAL_BODY_BUFFERED;
 	}
 
-	public void setClassPK(long classPK) {
-		_classPK = classPK;
+	public void setArticleResourceId(long articleResourceId) {
+		_articleResourceId = articleResourceId;
 	}
 
 	public void setLanguageId(String languageId) {
@@ -85,7 +86,7 @@ public class JournalArticleTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/journal_article/page.jsp";
 
-	private long _classPK;
+	private long _articleResourceId;
 	private String _languageId;
 	private int _articlePage = 1;
 	private String _xmlRequest = StringPool.BLANK;

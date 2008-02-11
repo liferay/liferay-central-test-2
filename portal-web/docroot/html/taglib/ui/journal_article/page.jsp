@@ -30,14 +30,15 @@
 <%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil"%>
 
 <%
-long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:journal-article:classPK"));
-String languageId = (String)request.getAttribute("liferay-ui:journal-article:languageId");
+long articleResourceId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:journal-article:articleResourceId"));
+String languageId = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:languageId"), LanguageUtil.getLanguageId(request));
 int articlePage = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:journal-article:articlePage"));
-String xmlRequest = (String)request.getAttribute("liferay-ui:journal-article:xmlRequest");
+String xmlRequest = GetterUtil.getString((String)request.getAttribute("liferay-ui:journal-article:xmlRequest"), PortletRequestUtil.toXML(renderRequest, renderResponse));
+
 boolean showTitle = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:journal-article:showTitle"));
 boolean showAvailableLocales = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:journal-article:showAvailableLocales"));
 
-JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(classPK);
+JournalArticleResource articleResource = JournalArticleResourceLocalServiceUtil.getArticleResource(articleResourceId);
 
 JournalArticleDisplay articleDisplay = JournalContentUtil.getDisplay(articleResource.getGroupId(), articleResource.getArticleId(), null, languageId, themeDisplay, articlePage, xmlRequest);
 

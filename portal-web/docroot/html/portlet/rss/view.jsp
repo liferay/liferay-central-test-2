@@ -27,18 +27,10 @@
 <%
 String url = ParamUtil.getString(request, "url");
 String title = StringPool.BLANK;
-
-String languageId = null;
-String xmlRequest = null;
-
-if ((headerArticleResouceId > 0) || (footerArticleResouceId > 0)) {
-	languageId = LanguageUtil.getLanguageId(request);
-	xmlRequest = PortletRequestUtil.toXML(renderRequest, renderResponse);
-}
 %>
 
 <c:if test="<%= headerArticleResouceId > 0 %>">
-	<liferay-ui:journal-article classPK="<%= headerArticleResouceId %>" languageId="<%= languageId %>" xmlRequest="<%= xmlRequest %>" />
+	<liferay-ui:journal-article articleResourceId="<%= headerArticleResouceId %>" />
 </c:if>
 
 <%
@@ -89,5 +81,5 @@ for (int i = 0; i < urls.length; i++) {
 </script>
 
 <c:if test="<%= footerArticleResouceId > 0 %>">
-	<liferay-ui:journal-article classPK="<%= footerArticleResouceId %>" languageId="<%= languageId %>" xmlRequest="<%= xmlRequest %>" />
+	<liferay-ui:journal-article articleResourceId="<%= footerArticleResouceId %>" />
 </c:if>
