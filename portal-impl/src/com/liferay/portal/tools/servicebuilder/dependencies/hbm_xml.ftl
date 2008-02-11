@@ -31,7 +31,7 @@
 						<#assign class = serviceBuilder.getGeneratorClass("${column.idType}")>
 
 						<#if class == "class">
-							<#assign class = column.IdParam>
+							<#assign class = column.idParam>
 						</#if>
 					<#else>
 						<#assign class = "assigned">
@@ -40,7 +40,7 @@
 					<generator class="${class}"
 
 					<#if class == "sequence">
-							<param name="sequence">${column.IdParam}</param>
+							<param name="sequence">${column.idParam}</param>
 						</generator>
 					<#else>
 						/>
