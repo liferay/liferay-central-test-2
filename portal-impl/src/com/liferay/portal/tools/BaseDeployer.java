@@ -329,10 +329,6 @@ public class BaseDeployer {
 			File srcFile, String displayName, PluginPackage pluginPackage)
 		throws Exception {
 
-		if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
-			copyDependencyXml("context.xml", srcFile + "/META-INF");
-		}
-
 		if (appServerType.startsWith(ServerDetector.GERONIMO_ID)) {
 			copyDependencyXml("geronimo-web.xml", srcFile + "/WEB-INF");
 		}

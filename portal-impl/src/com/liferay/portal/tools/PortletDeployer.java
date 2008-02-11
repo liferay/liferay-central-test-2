@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.plugin.PluginPackage;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
@@ -97,6 +98,17 @@ public class PortletDeployer extends BaseDeployer {
 		if (Validator.isNull(portletTaglibDTD)) {
 			throw new IllegalArgumentException(
 				"The system property deployer.portlet.taglib.dtd is not set");
+		}
+	}
+
+	protected void copyXmls(
+			File srcFile, String displayName, PluginPackage pluginPackage)
+		throws Exception {
+
+		super.copyXmls(srcFile, displayName, pluginPackage);
+
+		if (appServerType.equals(ServerDetector.TOMCAT_ID)) {
+			copyDependencyXml("context.xml", srcFile + "/META-INF");
 		}
 	}
 
