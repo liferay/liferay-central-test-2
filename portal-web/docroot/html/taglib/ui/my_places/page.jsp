@@ -168,17 +168,19 @@ List myPlaces = user.getMyPlaces();
 
 				<li class="<%= selectedCommunity ? "current-community" : "" %>">
 					<h3>
-						<c:choose>
-							<c:when test="<%= organizationCommunity %>">
-								<%= organization.getName() %>
-							</c:when>
-							<c:when test="<%= userCommunity %>">
-								<liferay-ui:message key="my-community" />
-							</c:when>
-							<c:otherwise>
-								<%= myPlace.getName() %>
-							</c:otherwise>
-						</c:choose>
+						<a href="javascript: ;">
+							<c:choose>
+								<c:when test="<%= organizationCommunity %>">
+									<%= organization.getName() %>
+								</c:when>
+								<c:when test="<%= userCommunity %>">
+									<liferay-ui:message key="my-community" />
+								</c:when>
+								<c:otherwise>
+									<%= myPlace.getName() %>
+								</c:otherwise>
+							</c:choose>
+						</a>
 					</h3>
 
 					<ul>
