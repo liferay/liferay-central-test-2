@@ -38,6 +38,7 @@ catch (Exception e) {
 }
 %>
 
+<%@page import="com.sun.syndication.feed.synd.SyndContent"%>
 <c:choose>
 	<c:when test="<%= (url != null) && (feed != null) %>">
 		<div class="feed">
@@ -83,6 +84,15 @@ catch (Exception e) {
 					String author = entry.getAuthor();
 
 					SyndContent content = entry.getDescription();
+
+					List contents = new ArrayList();
+
+					if (content == null) {
+						contents = entry.getContents();
+					}
+					else {
+						contents.add(content);
+					}
 				%>
 
 					<div class="feed-entry">
@@ -101,9 +111,16 @@ catch (Exception e) {
 								<span class="feed-entry-author"><%= author %></span>
 							</c:if>
 
-							<c:if test="<%= content != null %>">
-								<%= content.getValue() %>
-							</c:if>
+							<%
+							for (int k = 0; k < contents.size(); k++) {
+								content = (SyndContent)contents.get(k);
+								if (content != null || Validator.isNotNull(content.getValue())) {
+							%>
+							<%= content.getValue() %>
+							<%
+								}
+							}
+							%>
 						</div>
 					</div>
 
