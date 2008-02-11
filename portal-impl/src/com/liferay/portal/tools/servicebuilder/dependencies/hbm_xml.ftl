@@ -40,7 +40,7 @@
 					<generator class="${class}"
 
 					<#if class == "sequence">
-							<param name="sequence">${column.idParam}</param>
+							><param name="sequence">${column.idParam}</param>
 						</generator>
 					<#else>
 						/>
