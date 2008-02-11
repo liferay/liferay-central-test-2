@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -308,6 +309,10 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 				WikiPage.class, page.getPrimaryKeyObj());
 		}
 
+		PortletPreferences prefs = null;
+
+		ThemeDisplay themeDisplay = null;
+
 		WikiPage existingPage = null;
 
 		try {
@@ -323,20 +328,21 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					existingPage = WikiPageLocalServiceUtil.updatePage(
 						userId, nodeId, existingPage.getTitle(),
 						page.getContent(), page.getFormat(),
-						page.getRedirectTo(), tagsEntries);
+						page.getRedirectTo(), tagsEntries, null, null);
 				}
 				catch (NoSuchPageException nspe) {
 					existingPage = WikiPageLocalServiceUtil.addPage(
 						page.getUuid(), userId, nodeId, page.getTitle(),
 						page.getVersion(), page.getContent(), page.getFormat(),
-						page.getHead(), page.getRedirectTo(), tagsEntries);
+						page.getHead(), page.getRedirectTo(), tagsEntries,
+						prefs, themeDisplay);
 				}
 			}
 			else {
 				existingPage = WikiPageLocalServiceUtil.addPage(
 					null, userId, nodeId, page.getTitle(), page.getVersion(),
 					page.getContent(), page.getFormat(), page.getHead(),
-					page.getRedirectTo(), tagsEntries);
+					page.getRedirectTo(), tagsEntries, prefs, themeDisplay);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "comments")) {

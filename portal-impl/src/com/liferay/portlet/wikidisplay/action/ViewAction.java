@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -60,6 +61,9 @@ public class ViewAction extends PortletAction {
 		throws Exception {
 
 		try {
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
 			PortletPreferences prefs = req.getPreferences();
 
 			long nodeId = GetterUtil.getLong(
@@ -75,7 +79,8 @@ public class ViewAction extends PortletAction {
 				wikiPage = WikiPageServiceUtil.getPage(nodeId, title);
 			}
 			catch (NoSuchPageException nspe) {
-				wikiPage = WikiPageServiceUtil.addPage(nodeId, title);
+				wikiPage = WikiPageServiceUtil.addPage(
+					nodeId, title, prefs, themeDisplay);
 			}
 
 			req.setAttribute(WebKeys.WIKI_NODE, node);

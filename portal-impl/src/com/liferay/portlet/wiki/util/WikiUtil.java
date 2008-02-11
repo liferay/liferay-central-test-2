@@ -25,11 +25,15 @@ package com.liferay.portlet.wiki.util;
 import com.germinus.easyconf.Filter;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.WikiFormatException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
@@ -42,6 +46,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
+import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
 
 /**
@@ -53,6 +58,8 @@ import javax.portlet.PortletURL;
  */
 public class WikiUtil {
 
+	public static final String POP_PORTLET_PREFIX = "wiki.";
+
 	public static String convert(
 			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL)
 		throws PageContentException, WikiFormatException {
@@ -62,6 +69,143 @@ public class WikiUtil {
 
 	public static String getEditPage(String format) {
 		return _instance._getEditPage(format);
+	}
+
+	public static String getEmailFromAddress(PortletPreferences prefs) {
+		String emailFromAddress = PropsUtil.get(
+			PropsUtil.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS);
+
+		return prefs.getValue("email-from-address", emailFromAddress);
+	}
+
+	public static String getEmailFromName(PortletPreferences prefs) {
+		String emailFromName = PropsUtil.get(
+			PropsUtil.MESSAGE_BOARDS_EMAIL_FROM_NAME);
+
+		return prefs.getValue("email-from-name", emailFromName);
+	}
+
+	public static boolean getEmailPageAddedEnabled(
+		PortletPreferences prefs) {
+
+		String emailPageAddedEnabled = prefs.getValue(
+			"email-page-added-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageAddedEnabled)) {
+			return GetterUtil.getBoolean(emailPageAddedEnabled);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.WIKI_EMAIL_PAGE_ADDED_ENABLED));
+		}
+	}
+
+	public static String getEmailPageAddedBody(PortletPreferences prefs)
+		throws IOException {
+
+		String emailPageAddedBody = prefs.getValue(
+			"email-page-added-body", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageAddedBody)) {
+			return emailPageAddedBody;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.WIKI_EMAIL_PAGE_ADDED_BODY));
+		}
+	}
+
+	public static String getEmailPageAddedSignature(PortletPreferences prefs)
+		throws IOException {
+
+		String emailPageAddedSignature = prefs.getValue(
+			"email-page-added-signature", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageAddedSignature)) {
+			return emailPageAddedSignature;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.WIKI_EMAIL_PAGE_ADDED_SIGNATURE));
+		}
+	}
+
+	public static String getEmailPageAddedSubjectPrefix(
+			PortletPreferences prefs)
+		throws IOException {
+
+		String emailPageAddedSubjectPrefix = prefs.getValue(
+			"email-page-added-subject-prefix", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageAddedSubjectPrefix)) {
+			return emailPageAddedSubjectPrefix;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.WIKI_EMAIL_PAGE_ADDED_SUBJECT_PREFIX));
+		}
+	}
+
+	public static boolean getEmailPageUpdatedEnabled(
+		PortletPreferences prefs) {
+
+		String emailPageUpdatedEnabled = prefs.getValue(
+			"email-page-updated-enabled", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageUpdatedEnabled)) {
+			return GetterUtil.getBoolean(emailPageUpdatedEnabled);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.WIKI_EMAIL_PAGE_UPDATED_ENABLED));
+		}
+	}
+
+	public static String getEmailPageUpdatedBody(PortletPreferences prefs)
+		throws IOException {
+
+		String emailPageUpdatedBody = prefs.getValue(
+			"email-page-updated-body", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageUpdatedBody)) {
+			return emailPageUpdatedBody;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.WIKI_EMAIL_PAGE_UPDATED_BODY));
+		}
+	}
+
+	public static String getEmailPageUpdatedSignature(
+			PortletPreferences prefs)
+		throws IOException {
+
+		String emailPageUpdatedSignature = prefs.getValue(
+			"email-page-updated-signature", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageUpdatedSignature)) {
+			return emailPageUpdatedSignature;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.WIKI_EMAIL_PAGE_UPDATED_SIGNATURE));
+		}
+	}
+
+	public static String getEmailPageUpdatedSubjectPrefix(
+			PortletPreferences prefs)
+		throws IOException {
+
+		String emailPageUpdatedSubject = prefs.getValue(
+			"email-page-updated-subject-prefix", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailPageUpdatedSubject)) {
+			return emailPageUpdatedSubject;
+		}
+		else {
+			return ContentUtil.get(PropsUtil.get(
+				PropsUtil.WIKI_EMAIL_PAGE_UPDATED_SUBJECT_PREFIX));
+		}
 	}
 
 	public static String getHelpPage(String format) {
@@ -82,6 +226,23 @@ public class WikiUtil {
 		throws PageContentException, WikiFormatException {
 
 		return _instance._isLinkedTo(page, title);
+	}
+
+	public static String getMailId(String mx, long nodeId, long pageId) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(StringPool.LESS_THAN);
+		sm.append(POP_PORTLET_PREFIX);
+		sm.append(nodeId);
+		sm.append(StringPool.PERIOD);
+		sm.append(pageId);
+		sm.append(StringPool.AT);
+		sm.append(PropsValues.POP_SERVER_SUBDOMAIN);
+		sm.append(StringPool.PERIOD);
+		sm.append(mx);
+		sm.append(StringPool.GREATER_THAN);
+
+		return sm.toString();
 	}
 
 	public static boolean validate(

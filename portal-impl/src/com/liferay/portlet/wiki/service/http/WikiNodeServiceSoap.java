@@ -141,6 +141,28 @@ public class WikiNodeServiceSoap {
 		}
 	}
 
+	public static void subscribeNode(long nodeId) throws RemoteException {
+		try {
+			WikiNodeServiceUtil.subscribeNode(nodeId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void unsubscribeNode(long nodeId) throws RemoteException {
+		try {
+			WikiNodeServiceUtil.unsubscribeNode(nodeId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNodeSoap updateNode(
 		long nodeId, java.lang.String name, java.lang.String description)
 		throws RemoteException {

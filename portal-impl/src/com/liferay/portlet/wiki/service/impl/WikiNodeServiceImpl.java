@@ -86,6 +86,24 @@ public class WikiNodeServiceImpl extends WikiNodeServiceBaseImpl {
 		return wikiNodeLocalService.getNode(nodeId);
 	}
 
+	public void subscribeNode(long nodeId)
+		throws PortalException, SystemException {
+
+		WikiNodePermission.check(
+			getPermissionChecker(), nodeId, ActionKeys.SUBSCRIBE);
+
+		wikiNodeLocalService.subscribeNode(getUserId(), nodeId);
+	}
+
+	public void unsubscribeNode(long nodeId)
+		throws PortalException, SystemException {
+
+		WikiNodePermission.check(
+			getPermissionChecker(), nodeId, ActionKeys.SUBSCRIBE);
+
+		wikiNodeLocalService.unsubscribeNode(getUserId(), nodeId);
+	}
+
 	public WikiNode updateNode(long nodeId, String name, String description)
 		throws PortalException, SystemException {
 

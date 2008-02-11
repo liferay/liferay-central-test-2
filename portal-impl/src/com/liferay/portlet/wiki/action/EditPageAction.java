@@ -45,6 +45,7 @@ import com.liferay.util.servlet.SessionErrors;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
@@ -80,6 +81,12 @@ public class EditPageAction extends PortletAction {
 			}
 			else if (cmd.equals(Constants.REVERT)) {
 				revertPage(req);
+			}
+			else if (cmd.equals(Constants.SUBSCRIBE)) {
+				subscribePage(req);
+			}
+			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
+				unsubscribePage(req);
 			}
 
 			if (Validator.isNotNull(cmd)) {
@@ -191,14 +198,39 @@ public class EditPageAction extends PortletAction {
 	}
 
 	protected void revertPage(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletPreferences prefs = req.getPreferences();
+
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
 		double version = ParamUtil.getDouble(req, "version");
 
-		WikiPageServiceUtil.revertPage(nodeId, title, version);
+		WikiPageServiceUtil.revertPage(
+			nodeId, title, version, prefs, themeDisplay);
+	}
+
+	protected void subscribePage(ActionRequest req) throws Exception {
+		long nodeId = ParamUtil.getLong(req, "nodeId");
+		String title = ParamUtil.getString(req, "title");
+
+		WikiPageServiceUtil.subscribePage(nodeId, title);
+	}
+
+	protected void unsubscribePage(ActionRequest req) throws Exception {
+		long nodeId = ParamUtil.getLong(req, "nodeId");
+		String title = ParamUtil.getString(req, "title");
+
+		WikiPageServiceUtil.unsubscribePage(nodeId, title);
 	}
 
 	protected WikiPage updatePage(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletPreferences prefs = req.getPreferences();
+
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
 
@@ -209,7 +241,7 @@ public class EditPageAction extends PortletAction {
 			ParamUtil.getString(req, "tagsEntries"));
 
 		return WikiPageServiceUtil.updatePage(
-			nodeId, title, content, format, tagsEntries);
+			nodeId, title, content, format, tagsEntries, prefs, themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

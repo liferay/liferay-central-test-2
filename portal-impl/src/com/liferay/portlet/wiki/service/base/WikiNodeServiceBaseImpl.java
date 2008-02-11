@@ -31,6 +31,8 @@ import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.ResourceServiceFactory;
+import com.liferay.portal.service.SubscriptionLocalService;
+import com.liferay.portal.service.SubscriptionLocalServiceFactory;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
@@ -40,6 +42,8 @@ import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
+import com.liferay.portal.service.persistence.SubscriptionPersistence;
+import com.liferay.portal.service.persistence.SubscriptionUtil;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -198,6 +202,24 @@ public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
 		this.resourceFinder = resourceFinder;
 	}
 
+	public SubscriptionLocalService getSubscriptionLocalService() {
+		return subscriptionLocalService;
+	}
+
+	public void setSubscriptionLocalService(
+		SubscriptionLocalService subscriptionLocalService) {
+		this.subscriptionLocalService = subscriptionLocalService;
+	}
+
+	public SubscriptionPersistence getSubscriptionPersistence() {
+		return subscriptionPersistence;
+	}
+
+	public void setSubscriptionPersistence(
+		SubscriptionPersistence subscriptionPersistence) {
+		this.subscriptionPersistence = subscriptionPersistence;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -321,6 +343,14 @@ public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
 			resourceFinder = ResourceFinderUtil.getFinder();
 		}
 
+		if (subscriptionLocalService == null) {
+			subscriptionLocalService = SubscriptionLocalServiceFactory.getImpl();
+		}
+
+		if (subscriptionPersistence == null) {
+			subscriptionPersistence = SubscriptionUtil.getPersistence();
+		}
+
 		if (userLocalService == null) {
 			userLocalService = UserLocalServiceFactory.getImpl();
 		}
@@ -368,6 +398,8 @@ public abstract class WikiNodeServiceBaseImpl extends PrincipalBean
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;
 	protected ResourceFinder resourceFinder;
+	protected SubscriptionLocalService subscriptionLocalService;
+	protected SubscriptionPersistence subscriptionPersistence;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;

@@ -135,6 +135,71 @@ public class WikiPageLocalServiceUtil {
 		wikiPageLocalService.setWikiPageResourcePersistence(wikiPageResourcePersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getCompanyPersistence();
+	}
+
+	public static void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.setCompanyPersistence(companyPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getGroupPersistence();
+	}
+
+	public static void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.setGroupPersistence(groupPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.GroupFinder getGroupFinder() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getGroupFinder();
+	}
+
+	public static void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.setGroupFinder(groupFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getPortletPreferencesPersistence();
+	}
+
+	public static void setPortletPreferencesPersistence(
+		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getPortletPreferencesFinder();
+	}
+
+	public static void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
@@ -159,6 +224,19 @@ public class WikiPageLocalServiceUtil {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		wikiPageLocalService.setResourceFinder(resourceFinder);
+	}
+
+	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getSubscriptionPersistence();
+	}
+
+	public static void setSubscriptionPersistence(
+		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence) {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.setSubscriptionPersistence(subscriptionPersistence);
 	}
 
 	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
@@ -246,37 +324,57 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
-		long nodeId, java.lang.String title)
+		long nodeId, java.lang.String title,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
-		return wikiPageLocalService.addPage(userId, nodeId, title);
+		return wikiPageLocalService.addPage(userId, nodeId, title, prefs,
+			themeDisplay);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
+		long nodeId, java.lang.String title, double version,
+		java.lang.String content, java.lang.String format, boolean head,
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.addPage(userId, nodeId, title, version,
+			content, format, head, tagsEntries, prefs, themeDisplay);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
 		java.lang.String uuid, long userId, long nodeId,
 		java.lang.String title, double version, java.lang.String content,
-		java.lang.String format, boolean head, java.lang.String[] tagsEntries)
+		java.lang.String format, boolean head, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.addPage(uuid, userId, nodeId, title,
-			version, content, format, head, tagsEntries);
+			version, content, format, head, tagsEntries, prefs, themeDisplay);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
 		java.lang.String uuid, long userId, long nodeId,
 		java.lang.String title, double version, java.lang.String content,
 		java.lang.String format, boolean head, java.lang.String redirectTo,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.addPage(uuid, userId, nodeId, title,
-			version, content, format, head, redirectTo, tagsEntries);
+			version, content, format, head, redirectTo, tagsEntries, prefs,
+			themeDisplay);
 	}
 
 	public static void addPageResources(long nodeId, java.lang.String title,
@@ -463,33 +561,72 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static void movePage(long userId, long nodeId,
-		java.lang.String title, java.lang.String newTitle)
+		java.lang.String title, java.lang.String newTitle,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
-		wikiPageLocalService.movePage(userId, nodeId, title, newTitle);
+		wikiPageLocalService.movePage(userId, nodeId, title, newTitle, prefs,
+			themeDisplay);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
-		long userId, long nodeId, java.lang.String title, double version)
+		long userId, long nodeId, java.lang.String title, double version,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
-		return wikiPageLocalService.revertPage(userId, nodeId, title, version);
+		return wikiPageLocalService.revertPage(userId, nodeId, title, version,
+			prefs, themeDisplay);
+	}
+
+	public static void subscribePage(long userId, long nodeId,
+		java.lang.String title)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.subscribePage(userId, nodeId, title);
+	}
+
+	public static void unsubscribePage(long userId, long nodeId,
+		java.lang.String title)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.unsubscribePage(userId, nodeId, title);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		long userId, long nodeId, java.lang.String title,
 		java.lang.String content, java.lang.String format,
-		java.lang.String redirectTo, java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		return wikiPageLocalService.updatePage(userId, nodeId, title, content,
-			format, redirectTo, tagsEntries);
+			format, tagsEntries, prefs, themeDisplay);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
+		long userId, long nodeId, java.lang.String title,
+		java.lang.String content, java.lang.String format,
+		java.lang.String redirectTo, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.updatePage(userId, nodeId, title, content,
+			format, redirectTo, tagsEntries, prefs, themeDisplay);
 	}
 
 	public static void updateTagsAsset(long userId,

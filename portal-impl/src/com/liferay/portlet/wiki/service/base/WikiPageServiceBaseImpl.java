@@ -27,19 +27,43 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.service.CompanyLocalService;
+import com.liferay.portal.service.CompanyLocalServiceFactory;
+import com.liferay.portal.service.CompanyService;
+import com.liferay.portal.service.CompanyServiceFactory;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupLocalServiceFactory;
+import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.GroupServiceFactory;
+import com.liferay.portal.service.PortletPreferencesLocalService;
+import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.ResourceServiceFactory;
+import com.liferay.portal.service.SubscriptionLocalService;
+import com.liferay.portal.service.SubscriptionLocalServiceFactory;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.CompanyUtil;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupFinderUtil;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.GroupUtil;
+import com.liferay.portal.service.persistence.PortletPreferencesFinder;
+import com.liferay.portal.service.persistence.PortletPreferencesFinderUtil;
+import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
+import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
+import com.liferay.portal.service.persistence.SubscriptionPersistence;
+import com.liferay.portal.service.persistence.SubscriptionUtil;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
@@ -173,6 +197,89 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
+	public CompanyLocalService getCompanyLocalService() {
+		return companyLocalService;
+	}
+
+	public void setCompanyLocalService(CompanyLocalService companyLocalService) {
+		this.companyLocalService = companyLocalService;
+	}
+
+	public CompanyService getCompanyService() {
+		return companyService;
+	}
+
+	public void setCompanyService(CompanyService companyService) {
+		this.companyService = companyService;
+	}
+
+	public CompanyPersistence getCompanyPersistence() {
+		return companyPersistence;
+	}
+
+	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
+		this.companyPersistence = companyPersistence;
+	}
+
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
+	}
+
+	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
+		return portletPreferencesLocalService;
+	}
+
+	public void setPortletPreferencesLocalService(
+		PortletPreferencesLocalService portletPreferencesLocalService) {
+		this.portletPreferencesLocalService = portletPreferencesLocalService;
+	}
+
+	public PortletPreferencesPersistence getPortletPreferencesPersistence() {
+		return portletPreferencesPersistence;
+	}
+
+	public void setPortletPreferencesPersistence(
+		PortletPreferencesPersistence portletPreferencesPersistence) {
+		this.portletPreferencesPersistence = portletPreferencesPersistence;
+	}
+
+	public PortletPreferencesFinder getPortletPreferencesFinder() {
+		return portletPreferencesFinder;
+	}
+
+	public void setPortletPreferencesFinder(
+		PortletPreferencesFinder portletPreferencesFinder) {
+		this.portletPreferencesFinder = portletPreferencesFinder;
+	}
+
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -204,6 +311,24 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 
 	public void setResourceFinder(ResourceFinder resourceFinder) {
 		this.resourceFinder = resourceFinder;
+	}
+
+	public SubscriptionLocalService getSubscriptionLocalService() {
+		return subscriptionLocalService;
+	}
+
+	public void setSubscriptionLocalService(
+		SubscriptionLocalService subscriptionLocalService) {
+		this.subscriptionLocalService = subscriptionLocalService;
+	}
+
+	public SubscriptionPersistence getSubscriptionPersistence() {
+		return subscriptionPersistence;
+	}
+
+	public void setSubscriptionPersistence(
+		SubscriptionPersistence subscriptionPersistence) {
+		this.subscriptionPersistence = subscriptionPersistence;
 	}
 
 	public UserLocalService getUserLocalService() {
@@ -347,6 +472,46 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 			counterService = CounterServiceFactory.getImpl();
 		}
 
+		if (companyLocalService == null) {
+			companyLocalService = CompanyLocalServiceFactory.getImpl();
+		}
+
+		if (companyService == null) {
+			companyService = CompanyServiceFactory.getImpl();
+		}
+
+		if (companyPersistence == null) {
+			companyPersistence = CompanyUtil.getPersistence();
+		}
+
+		if (groupLocalService == null) {
+			groupLocalService = GroupLocalServiceFactory.getImpl();
+		}
+
+		if (groupService == null) {
+			groupService = GroupServiceFactory.getImpl();
+		}
+
+		if (groupPersistence == null) {
+			groupPersistence = GroupUtil.getPersistence();
+		}
+
+		if (groupFinder == null) {
+			groupFinder = GroupFinderUtil.getFinder();
+		}
+
+		if (portletPreferencesLocalService == null) {
+			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
+		}
+
+		if (portletPreferencesPersistence == null) {
+			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
+		}
+
+		if (portletPreferencesFinder == null) {
+			portletPreferencesFinder = PortletPreferencesFinderUtil.getFinder();
+		}
+
 		if (resourceLocalService == null) {
 			resourceLocalService = ResourceLocalServiceFactory.getImpl();
 		}
@@ -361,6 +526,14 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 
 		if (resourceFinder == null) {
 			resourceFinder = ResourceFinderUtil.getFinder();
+		}
+
+		if (subscriptionLocalService == null) {
+			subscriptionLocalService = SubscriptionLocalServiceFactory.getImpl();
+		}
+
+		if (subscriptionPersistence == null) {
+			subscriptionPersistence = SubscriptionUtil.getPersistence();
 		}
 
 		if (userLocalService == null) {
@@ -422,10 +595,22 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected CompanyLocalService companyLocalService;
+	protected CompanyService companyService;
+	protected CompanyPersistence companyPersistence;
+	protected GroupLocalService groupLocalService;
+	protected GroupService groupService;
+	protected GroupPersistence groupPersistence;
+	protected GroupFinder groupFinder;
+	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	protected PortletPreferencesPersistence portletPreferencesPersistence;
+	protected PortletPreferencesFinder portletPreferencesFinder;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;
 	protected ResourceFinder resourceFinder;
+	protected SubscriptionLocalService subscriptionLocalService;
+	protected SubscriptionPersistence subscriptionPersistence;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;

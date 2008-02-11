@@ -71,15 +71,6 @@ import org.json.JSONObject;
  *
  */
 public class WikiPageServiceJSON {
-	public static JSONObject addPage(long nodeId, java.lang.String title)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.addPage(nodeId,
-				title);
-
-		return WikiPageJSONSerializer.toJSONObject(returnValue);
-	}
-
 	public static void deletePage(long nodeId, java.lang.String title)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -105,31 +96,15 @@ public class WikiPageServiceJSON {
 		return WikiPageJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void movePage(long nodeId, java.lang.String title,
-		java.lang.String newTitle)
+	public static void subscribePage(long nodeId, java.lang.String title)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		WikiPageServiceUtil.movePage(nodeId, title, newTitle);
+		WikiPageServiceUtil.subscribePage(nodeId, title);
 	}
 
-	public static JSONObject revertPage(long nodeId, java.lang.String title,
-		double version)
+	public static void unsubscribePage(long nodeId, java.lang.String title)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.revertPage(nodeId,
-				title, version);
-
-		return WikiPageJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject updatePage(long nodeId, java.lang.String title,
-		java.lang.String content, java.lang.String format,
-		java.lang.String[] tagsEntries)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.updatePage(nodeId,
-				title, content, format, tagsEntries);
-
-		return WikiPageJSONSerializer.toJSONObject(returnValue);
+		WikiPageServiceUtil.unsubscribePage(nodeId, title);
 	}
 }

@@ -107,6 +107,18 @@ public class WikiNodeServiceJSON {
 		return WikiNodeJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void subscribeNode(long nodeId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		WikiNodeServiceUtil.subscribeNode(nodeId);
+	}
+
+	public static void unsubscribeNode(long nodeId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		WikiNodeServiceUtil.unsubscribeNode(nodeId);
+	}
+
 	public static JSONObject updateNode(long nodeId, java.lang.String name,
 		java.lang.String description)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,

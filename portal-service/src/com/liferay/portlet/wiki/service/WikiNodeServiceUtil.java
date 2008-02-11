@@ -90,6 +90,22 @@ public class WikiNodeServiceUtil {
 		return wikiNodeService.getNode(nodeId);
 	}
 
+	public static void subscribeNode(long nodeId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
+
+		wikiNodeService.subscribeNode(nodeId);
+	}
+
+	public static void unsubscribeNode(long nodeId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiNodeService wikiNodeService = WikiNodeServiceFactory.getService();
+
+		wikiNodeService.unsubscribeNode(nodeId);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiNode updateNode(
 		long nodeId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException,

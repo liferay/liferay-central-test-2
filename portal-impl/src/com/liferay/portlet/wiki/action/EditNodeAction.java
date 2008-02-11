@@ -65,6 +65,12 @@ public class EditNodeAction extends PortletAction {
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteNode(req);
 			}
+			else if (cmd.equals(Constants.SUBSCRIBE)) {
+				subscribeNode(req);
+			}
+			else if (cmd.equals(Constants.UNSUBSCRIBE)) {
+				unsubscribeNode(req);
+			}
 
 			sendRedirect(req, res);
 		}
@@ -113,6 +119,18 @@ public class EditNodeAction extends PortletAction {
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 
 		WikiNodeServiceUtil.deleteNode(nodeId);
+	}
+
+	protected void subscribeNode(ActionRequest req) throws Exception {
+		long nodeId = ParamUtil.getLong(req, "nodeId");
+
+		WikiNodeServiceUtil.subscribeNode(nodeId);
+	}
+
+	protected void unsubscribeNode(ActionRequest req) throws Exception {
+		long nodeId = ParamUtil.getLong(req, "nodeId");
+
+		WikiNodeServiceUtil.unsubscribeNode(nodeId);
 	}
 
 	protected void updateNode(ActionRequest req) throws Exception {

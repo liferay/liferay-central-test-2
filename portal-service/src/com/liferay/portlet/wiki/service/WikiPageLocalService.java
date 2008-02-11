@@ -85,6 +85,31 @@ public interface WikiPageLocalService {
 	public void setWikiPageResourcePersistence(
 		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence);
 
+	public com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence();
+
+	public void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence);
+
+	public com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence();
+
+	public void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence);
+
+	public com.liferay.portal.service.persistence.GroupFinder getGroupFinder();
+
+	public void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder);
+
+	public com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence();
+
+	public void setPortletPreferencesPersistence(
+		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence);
+
+	public com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder();
+
+	public void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder);
+
 	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
 
 	public void setResourcePersistence(
@@ -94,6 +119,11 @@ public interface WikiPageLocalService {
 
 	public void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
+	public com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence();
+
+	public void setSubscriptionPersistence(
+		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence);
 
 	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
 
@@ -128,14 +158,26 @@ public interface WikiPageLocalService {
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
-		long nodeId, java.lang.String title)
+		long nodeId, java.lang.String title,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.wiki.model.WikiPage addPage(long userId,
+		long nodeId, java.lang.String title, double version,
+		java.lang.String content, java.lang.String format, boolean head,
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage addPage(
 		java.lang.String uuid, long userId, long nodeId,
 		java.lang.String title, double version, java.lang.String content,
-		java.lang.String format, boolean head, java.lang.String[] tagsEntries)
+		java.lang.String format, boolean head, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -143,7 +185,8 @@ public interface WikiPageLocalService {
 		java.lang.String uuid, long userId, long nodeId,
 		java.lang.String title, double version, java.lang.String content,
 		java.lang.String format, boolean head, java.lang.String redirectTo,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -236,19 +279,39 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public void movePage(long userId, long nodeId, java.lang.String title,
-		java.lang.String newTitle)
+		java.lang.String newTitle, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long userId,
-		long nodeId, java.lang.String title, double version)
+		long nodeId, java.lang.String title, double version,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void subscribePage(long userId, long nodeId, java.lang.String title)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void unsubscribePage(long userId, long nodeId, java.lang.String title)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.wiki.model.WikiPage updatePage(long userId,
+		long nodeId, java.lang.String title, java.lang.String content,
+		java.lang.String format, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long userId,
 		long nodeId, java.lang.String title, java.lang.String content,
 		java.lang.String format, java.lang.String redirectTo,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

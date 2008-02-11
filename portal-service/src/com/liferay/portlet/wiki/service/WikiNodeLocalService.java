@@ -95,6 +95,11 @@ public interface WikiNodeLocalService {
 	public void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
 
+	public com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence();
+
+	public void setSubscriptionPersistence(
+		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence);
+
 	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
 
 	public void setUserPersistence(
@@ -200,6 +205,14 @@ public interface WikiNodeLocalService {
 	public com.liferay.portal.kernel.search.Hits search(long companyId,
 		long groupId, long[] nodeIds, java.lang.String keywords)
 		throws com.liferay.portal.SystemException;
+
+	public void subscribeNode(long userId, long nodeId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void unsubscribeNode(long userId, long nodeId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiNode updateNode(long nodeId,
 		java.lang.String name, java.lang.String description)

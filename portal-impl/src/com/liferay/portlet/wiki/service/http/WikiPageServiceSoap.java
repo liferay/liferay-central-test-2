@@ -81,21 +81,6 @@ import java.rmi.RemoteException;
  *
  */
 public class WikiPageServiceSoap {
-	public static com.liferay.portlet.wiki.model.WikiPageSoap addPage(
-		long nodeId, java.lang.String title) throws RemoteException {
-		try {
-			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.addPage(nodeId,
-					title);
-
-			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static void deletePage(long nodeId, java.lang.String title)
 		throws RemoteException {
 		try {
@@ -139,10 +124,10 @@ public class WikiPageServiceSoap {
 		}
 	}
 
-	public static void movePage(long nodeId, java.lang.String title,
-		java.lang.String newTitle) throws RemoteException {
+	public static void subscribePage(long nodeId, java.lang.String title)
+		throws RemoteException {
 		try {
-			WikiPageServiceUtil.movePage(nodeId, title, newTitle);
+			WikiPageServiceUtil.subscribePage(nodeId, title);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -151,31 +136,10 @@ public class WikiPageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.wiki.model.WikiPageSoap revertPage(
-		long nodeId, java.lang.String title, double version)
+	public static void unsubscribePage(long nodeId, java.lang.String title)
 		throws RemoteException {
 		try {
-			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.revertPage(nodeId,
-					title, version);
-
-			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.wiki.model.WikiPageSoap updatePage(
-		long nodeId, java.lang.String title, java.lang.String content,
-		java.lang.String format, java.lang.String[] tagsEntries)
-		throws RemoteException {
-		try {
-			com.liferay.portlet.wiki.model.WikiPage returnValue = WikiPageServiceUtil.updatePage(nodeId,
-					title, content, format, tagsEntries);
-
-			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
+			WikiPageServiceUtil.unsubscribePage(nodeId, title);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

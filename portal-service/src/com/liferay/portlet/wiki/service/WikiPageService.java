@@ -50,7 +50,8 @@ package com.liferay.portlet.wiki.service;
  */
 public interface WikiPageService {
 	public com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
-		java.lang.String title)
+		java.lang.String title, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -69,18 +70,31 @@ public interface WikiPageService {
 			com.liferay.portal.PortalException;
 
 	public void movePage(long nodeId, java.lang.String title,
-		java.lang.String newTitle)
+		java.lang.String newTitle, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage revertPage(long nodeId,
-		java.lang.String title, double version)
+		java.lang.String title, double version,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void subscribePage(long nodeId, java.lang.String title)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void unsubscribePage(long nodeId, java.lang.String title)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long nodeId,
 		java.lang.String title, java.lang.String content,
-		java.lang.String format, java.lang.String[] tagsEntries)
+		java.lang.String format, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

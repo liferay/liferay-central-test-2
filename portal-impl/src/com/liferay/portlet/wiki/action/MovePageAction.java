@@ -25,6 +25,8 @@ package com.liferay.portlet.wiki.action;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.DuplicatePageException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -36,6 +38,7 @@ import com.liferay.util.servlet.SessionErrors;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -110,11 +113,17 @@ public class MovePageAction extends PortletAction {
 	}
 
 	protected void movePage(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		PortletPreferences prefs = req.getPreferences();
+
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
 		String newTitle = ParamUtil.getString(req, "newTitle");
 
-		WikiPageServiceUtil.movePage(nodeId, title, newTitle);
+		WikiPageServiceUtil.movePage(
+			nodeId, title, newTitle, prefs, themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

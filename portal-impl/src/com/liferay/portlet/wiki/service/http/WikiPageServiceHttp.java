@@ -74,7 +74,9 @@ import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
  */
 public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(
-		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title)
+		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -86,8 +88,22 @@ public class WikiPageServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj2 = prefs;
+
+			if (prefs == null) {
+				paramObj2 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj3 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj3 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
-					"addPage", new Object[] { paramObj0, paramObj1 });
+					"addPage",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			Object returnObj = null;
 
@@ -241,7 +257,9 @@ public class WikiPageServiceHttp {
 	}
 
 	public static void movePage(HttpPrincipal httpPrincipal, long nodeId,
-		java.lang.String title, java.lang.String newTitle)
+		java.lang.String title, java.lang.String newTitle,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -259,8 +277,24 @@ public class WikiPageServiceHttp {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj3 = prefs;
+
+			if (prefs == null) {
+				paramObj3 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj4 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
-					"movePage", new Object[] { paramObj0, paramObj1, paramObj2 });
+					"movePage",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -286,7 +320,8 @@ public class WikiPageServiceHttp {
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
-		double version)
+		double version, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -300,9 +335,24 @@ public class WikiPageServiceHttp {
 
 			Object paramObj2 = new DoubleWrapper(version);
 
+			Object paramObj3 = prefs;
+
+			if (prefs == null) {
+				paramObj3 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj4 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj4 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"revertPage",
-					new Object[] { paramObj0, paramObj1, paramObj2 });
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
 
 			Object returnObj = null;
 
@@ -330,10 +380,87 @@ public class WikiPageServiceHttp {
 		}
 	}
 
+	public static void subscribePage(HttpPrincipal httpPrincipal, long nodeId,
+		java.lang.String title)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(nodeId);
+
+			Object paramObj1 = title;
+
+			if (title == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
+					"subscribePage", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void unsubscribePage(HttpPrincipal httpPrincipal,
+		long nodeId, java.lang.String title)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(nodeId);
+
+			Object paramObj1 = title;
+
+			if (title == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
+					"unsubscribePage", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
 		java.lang.String content, java.lang.String format,
-		java.lang.String[] tagsEntries)
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -363,10 +490,24 @@ public class WikiPageServiceHttp {
 				paramObj4 = new NullWrapper("[Ljava.lang.String;");
 			}
 
+			Object paramObj5 = prefs;
+
+			if (prefs == null) {
+				paramObj5 = new NullWrapper("javax.portlet.PortletPreferences");
+			}
+
+			Object paramObj6 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj6 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"updatePage",
 					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;

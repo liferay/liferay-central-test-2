@@ -220,6 +220,11 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			node.getCompanyId(), WikiNode.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, node.getNodeId());
 
+		// Subscriptions
+
+		subscriptionLocalService.deleteSubscriptions(
+			node.getCompanyId(), WikiNode.class.getName(), node.getNodeId());
+
 		// Node
 
 		wikiNodePersistence.remove(node.getNodeId());
@@ -379,6 +384,20 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		catch (Exception e) {
 			return LuceneUtil.closeSearcher(searcher, keywords, e);
 		}
+	}
+
+	public void subscribeNode(long userId, long nodeId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.addSubscription(
+			userId, WikiNode.class.getName(), nodeId);
+	}
+
+	public void unsubscribeNode(long userId, long nodeId)
+		throws PortalException, SystemException {
+
+		subscriptionLocalService.deleteSubscription(
+			userId, WikiNode.class.getName(), nodeId);
 	}
 
 	public WikiNode updateNode(long nodeId, String name, String description)

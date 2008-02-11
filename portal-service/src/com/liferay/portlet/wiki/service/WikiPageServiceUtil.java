@@ -52,17 +52,18 @@ package com.liferay.portlet.wiki.service;
  */
 public class WikiPageServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage addPage(long nodeId,
-		java.lang.String title)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		java.lang.String title, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-		return wikiPageService.addPage(nodeId, title);
+		return wikiPageService.addPage(nodeId, title, prefs, themeDisplay);
 	}
 
 	public static void deletePage(long nodeId, java.lang.String title)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
 		wikiPageService.deletePage(nodeId, title);
@@ -70,8 +71,8 @@ public class WikiPageServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
 		return wikiPageService.getPage(nodeId, title);
@@ -79,39 +80,61 @@ public class WikiPageServiceUtil {
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title, double version)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
 		return wikiPageService.getPage(nodeId, title, version);
 	}
 
 	public static void movePage(long nodeId, java.lang.String title,
-		java.lang.String newTitle)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		java.lang.String newTitle, javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-		wikiPageService.movePage(nodeId, title, newTitle);
+		wikiPageService.movePage(nodeId, title, newTitle, prefs, themeDisplay);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage revertPage(
-		long nodeId, java.lang.String title, double version)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		long nodeId, java.lang.String title, double version,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-		return wikiPageService.revertPage(nodeId, title, version);
+		return wikiPageService.revertPage(nodeId, title, version, prefs,
+			themeDisplay);
+	}
+
+	public static void subscribePage(long nodeId, java.lang.String title)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+
+		wikiPageService.subscribePage(nodeId, title);
+	}
+
+	public static void unsubscribePage(long nodeId, java.lang.String title)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+
+		wikiPageService.unsubscribePage(nodeId, title);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		long nodeId, java.lang.String title, java.lang.String content,
-		java.lang.String format, java.lang.String[] tagsEntries)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		java.lang.String format, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
 		return wikiPageService.updatePage(nodeId, title, content, format,
-			tagsEntries);
+			tagsEntries, prefs, themeDisplay);
 	}
 }

@@ -52,6 +52,31 @@ WikiNode node = (WikiNode)row.getObject();
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
+	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.SUBSCRIBE) %>">
+		<c:choose>
+			<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), WikiNode.class.getName(), node.getNodeId()) %>">
+				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
+					<portlet:param name="struts_action" value="/wiki/edit_node" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+				</portlet:actionURL>
+
+				<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" />
+			</c:when>
+			<c:otherwise>
+				<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
+					<portlet:param name="struts_action" value="/wiki/edit_node" />
+					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
+					<portlet:param name="redirect" value="<%= currentURL %>" />
+					<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+				</portlet:actionURL>
+
+				<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" />
+			</c:otherwise>
+		</c:choose>
+	</c:if>
+
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteURL">
 			<portlet:param name="struts_action" value="/wiki/edit_node" />

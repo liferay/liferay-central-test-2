@@ -25,10 +25,13 @@ package com.liferay.portlet.wiki.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.base.WikiPageServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
+
+import javax.portlet.PortletPreferences;
 
 /**
  * <a href="WikiPageServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -38,13 +41,16 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
  */
 public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
-	public WikiPage addPage(long nodeId, String title)
+	public WikiPage addPage(
+			long nodeId, String title, PortletPreferences prefs,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
 			getPermissionChecker(), nodeId, ActionKeys.ADD_PAGE);
 
-		return wikiPageLocalService.addPage(getUserId(), nodeId, title);
+		return wikiPageLocalService.addPage(
+			getUserId(), nodeId, title, prefs, themeDisplay);
 	}
 
 	public void deletePage(long nodeId, String title)
@@ -74,7 +80,9 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		return wikiPageLocalService.getPage(nodeId, title, version);
 	}
 
-	public void movePage(long nodeId, String title, String newTitle)
+	public void movePage(
+			long nodeId, String title, String newTitle,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -83,29 +91,52 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
-		wikiPageLocalService.movePage(getUserId(), nodeId, title, newTitle);
+		wikiPageLocalService.movePage(
+			getUserId(), nodeId, title, newTitle, prefs, themeDisplay);
 	}
 
-	public WikiPage revertPage(long nodeId, String title, double version)
+	public WikiPage revertPage(
+			long nodeId, String title, double version, PortletPreferences prefs,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		return wikiPageLocalService.revertPage(
-			getUserId(), nodeId, title, version);
+			getUserId(), nodeId, title, version, prefs, themeDisplay);
+	}
+
+	public void subscribePage(long nodeId, String title)
+		throws PortalException, SystemException {
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.SUBSCRIBE);
+
+		wikiPageLocalService.subscribePage(getUserId(), nodeId, title);
+	}
+
+	public void unsubscribePage(long nodeId, String title)
+		throws PortalException, SystemException {
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.SUBSCRIBE);
+
+		wikiPageLocalService.unsubscribePage(getUserId(), nodeId, title);
 	}
 
 	public WikiPage updatePage(
 			long nodeId, String title, String content, String format,
-			String[] tagsEntries)
+			String[] tagsEntries, PortletPreferences prefs,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		return wikiPageLocalService.updatePage(
-			getUserId(), nodeId, title, content, format, null, tagsEntries);
+			getUserId(), nodeId, title, content, format, tagsEntries, prefs,
+			themeDisplay);
 	}
 
 }
