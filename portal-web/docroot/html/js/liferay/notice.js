@@ -15,6 +15,7 @@ Liferay.Notice = new Class({
 		instance._useCloseButton = true;
 		instance._onClose = params.onClose;
 		instance._closeText = params.closeText;
+		instance._body = jQuery('body');
 
 		instance._useToggleButton = false;
 		instance._hideText = '';
@@ -51,8 +52,14 @@ Liferay.Notice = new Class({
 
 		var staticAlerts = jQuery('.popup-alert-notice, .popup-alert-warning').not('[@dynamic=true]');
 
-		instance._useCloseButton = true;
-		instance._addCloseButton(staticAlerts);
+		if (staticAlerts.length) {
+			instance._useCloseButton = true;
+			instance._addCloseButton(staticAlerts);
+			if (!instance._body) {
+				instance._body = jQuery('body');
+			}
+			instance._body.addClass('has-alerts')	
+		}
 	},
 
 	_createHTML: function() {
@@ -65,7 +72,8 @@ Liferay.Notice = new Class({
 		instance._addCloseButton(notice);
 		instance._addToggleButton(notice);
 
-		notice.appendTo('body');
+		instance._body.append(notice);
+		instance._body.addClass('has-alerts');
 
 		instance._notice = notice;
 	},
@@ -92,6 +100,7 @@ Liferay.Notice = new Class({
 					notice.slideUp('normal',
 						function() {
 							notice.remove();
+							instance._body.removeClass('has-alerts');
 						}
 					);
 
