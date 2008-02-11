@@ -1133,6 +1133,10 @@
 
 	<definition name="portlet.wiki" extends="portlet" />
 
+	<definition name="portlet.wiki.compare_versions" extends="portlet.wiki">
+		<put name="portlet_content" value="/portlet/wiki/compare_versions.jsp" />
+	</definition>
+
 	<definition name="portlet.wiki.edit_node" extends="portlet.wiki">
 		<put name="portlet_content" value="/portlet/wiki/edit_node.jsp" />
 	</definition>

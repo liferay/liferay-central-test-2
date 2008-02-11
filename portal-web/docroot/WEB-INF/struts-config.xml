@@ -1291,6 +1291,11 @@
 
 		<!-- Wiki -->
 
+		<action path="/wiki/compare_versions" type="com.liferay.portlet.wiki.action.CompareVersionsAction">
+			<forward name="portlet.wiki.compare_versions" path="portlet.wiki.compare_versions" />
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+		</action>
+
 		<action path="/wiki/edit_node" type="com.liferay.portlet.wiki.action.EditNodeAction">
 			<forward name="portlet.wiki.edit_node" path="portlet.wiki.edit_node" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />

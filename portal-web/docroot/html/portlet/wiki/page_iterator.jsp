@@ -24,11 +24,85 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
+<script type="text/javascript">
+	function <portlet:namespace />compare() {
+		var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]:checked');
+		var sourceVersion = jQuery('input[@name="<portlet:namespace />sourceVersion"]');
+		var targetVersion = jQuery('input[@name="<portlet:namespace />targetVersion"]');
+
+		if (rowIds.length == 1) {
+			sourceVersion.val(rowIds[0].value);
+		}
+		else if (rowIds.length == 2) {
+			sourceVersion.val(rowIds[1].value);
+			targetVersion.val(rowIds[0].value);
+		}
+
+		submitForm(document.<portlet:namespace />fm);
+	}
+
+	function <portlet:namespace />inactivateRowIds(element) {
+  		var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]');
+
+  		var found = 0;
+  		var totalChecked = jQuery('input[@name=<portlet:namespace />rowIds]:checked').length;
+
+  		for (i = 0; i < rowIds.length; i++) {
+  			if (rowIds[i].checked && (found < 2)) {
+  				fund++;
+  			}
+  			else if (totalChecked == 0) {
+
+				// Enable everything
+
+				rowIds[i].checked = false;
+      			rowIds[i].disabled = false;
+    		}
+    		else if ((found == 0) && (totalChecked == 1)) {
+
+				// Disable everything up to the first one
+
+				rowIds[i].checked = false;
+     			rowIds[i].disabled = true;
+    		}
+    		else if ((found == 1) && (totalChecked >= 1)) {
+
+				// Unselect everything after the first one
+
+				rowIds[i].checked = false;
+      			rowIds[i].disabled = false;
+    		}
+    		else if ((found == 2) && (totalChecked >= 2)) {
+
+				// Disable elements after the second one
+				rowIds[i].checked = false;
+      			rowIds[i].disabled = true;
+    		}
+		}
+	}
+
+	jQuery(document).ready(
+		function() {
+			jQuery('input[@name=<portlet:namespace />rowIds]').click(
+				function() {
+					<portlet:namespace />inactivateRowIds(this);
+				}
+			);
+		}
+	);
+</script>
+
 <%
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String type = ParamUtil.getString(request, "type");
+
+boolean comparePages = false;
+
+if (type.equals("page_history")) {
+	comparePages = true;
+}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -58,6 +132,10 @@ else if (type.equals("recent_changes")) {
 }
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, emptyResultsMessage);
+
+if (comparePages) {
+	searchContainer.setRowChecker(new RowChecker(renderResponse, RowChecker.ALIGN, RowChecker.VALIGN, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS));
+}
 
 int total = 0;
 List results = null;
@@ -109,7 +187,7 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	WikiPage curWikiPage = (WikiPage)results.get(i);
 
-	ResultRow row = new ResultRow(curWikiPage, curWikiPage.getPageId(), i);
+	ResultRow row = new ResultRow(curWikiPage, String.valueOf(curWikiPage.getVersion()), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
@@ -147,4 +225,25 @@ for (int i = 0; i < results.size(); i++) {
 }
 %>
 
+<%
+if (comparePages && (results.size() > 1)) {
+	WikiPage lastWikiPageVersion = (WikiPage)results.get(1);
+%>
+
+	<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/compare_versions" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />compare(); return false;">
+	<input name="<portlet:namespace />backURL" type="hidden" value="<%= currentURL %>" />
+	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
+	<input name="<portlet:namespace />title" type="hidden" value="<%= wikiPage.getTitle() %>" />
+	<input name="<portlet:namespace />sourceVersion" type="hidden" value="<%= lastWikiPageVersion.getVersion() %>" />
+	<input name="<portlet:namespace />targetVersion" type="hidden" value="<%= wikiPage.getVersion() %>" />
+
+	<input type="submit" value="<liferay-ui:message key="compare-versions" />" />
+
+	</form>
+
+	<br />
+
+<%
+}
+%>
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
