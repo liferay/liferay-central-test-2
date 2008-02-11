@@ -348,14 +348,14 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 				try {
 					String key = entry.getKey();
 					String[] value = entry.getValue();
-	
+
 					if (key == null) {
 						throw new IllegalArgumentException();
 					}
 					else if (value == null) {
 						throw new IllegalArgumentException();
 					}
-	
+
 					newParams.put(key, value);
 				}
 				catch (ClassCastException cce) {
