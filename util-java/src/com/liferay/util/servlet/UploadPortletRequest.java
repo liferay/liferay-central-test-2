@@ -99,13 +99,13 @@ public class UploadPortletRequest extends HttpServletRequestWrapper {
 		return parameter;
 	}
 
-	public Map getParameterMap() {
-		Map map = new HashMap();
+	public Map<String, String[]> getParameterMap() {
+		Map<String, String[]> map = new HashMap<String, String[]>();
 
-		Enumeration enu = getParameterNames();
+		Enumeration<String> enu = getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			map.put(name, getParameterValues(name));
 		}
@@ -113,13 +113,13 @@ public class UploadPortletRequest extends HttpServletRequestWrapper {
 		return map;
 	}
 
-	public Enumeration getParameterNames() {
-		List parameterNames = new ArrayList();
+	public Enumeration<String> getParameterNames() {
+		List<String> parameterNames = new ArrayList<String>();
 
-		Enumeration enu = _req.getParameterNames();
+		Enumeration<String> enu = _req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (name.startsWith(_namespace)) {
 				parameterNames.add(

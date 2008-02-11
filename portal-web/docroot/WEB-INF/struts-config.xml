@@ -1395,19 +1395,6 @@
 			<forward name="portlet.workflow.view" path="portlet.workflow.view" />
 		</action>
 
-		<!-- WSRP Consumer -->
-
-		<action path="/wsrp/edit" forward="/portlet/wsrp/edit.jsp" />
-
-		<action path="/wsrp/edit_local_preferences" type="com.liferay.portlet.wsrp.action.EditLocalPreferencesAction">
-			<forward name="portlet.wsrp.edit_local_preferences" path="/portlet/wsrp/edit_local_preferences.jsp" />
-			<forward name="portlet.wsrp.edit" path="/portlet/wsrp/edit.jsp" />
-		</action>
-
-		<!-- WSRP Producer -->
-
-		<action path="/wsrp" type="com.liferay.portal.wsrp.WSRPAction" />
-
 		<!-- XSL Content -->
 
 		<action path="/xsl_content/view" type="com.liferay.portlet.xslcontent.action.ViewAction">

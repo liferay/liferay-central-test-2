@@ -40,10 +40,10 @@ import javax.servlet.ServletContext;
 public class DynamicFilterConfig implements FilterConfig {
 
 	public DynamicFilterConfig(FilterConfig config) {
-		Enumeration enu = config.getInitParameterNames();
+		Enumeration<String> enu = config.getInitParameterNames();
 
         while (enu.hasMoreElements()) {
-        	String name = (String)enu.nextElement();
+        	String name = enu.nextElement();
 
             addInitParameter(name, config.getInitParameter(name));
         }
@@ -67,15 +67,16 @@ public class DynamicFilterConfig implements FilterConfig {
 	}
 
 	public String getInitParameter(String name) {
-		return (String)_parameters.get(name);
+		return _parameters.get(name);
 	}
 
-	public Enumeration getInitParameterNames() {
+	public Enumeration<String> getInitParameterNames() {
 		return Collections.enumeration(_parameters.keySet());
 	}
 
 	private String _filterName;
 	private ServletContext _ctx;
-	private Map _parameters = new LinkedHashMap();
+	private Map<String, String> _parameters =
+		new LinkedHashMap<String, String>();
 
 }

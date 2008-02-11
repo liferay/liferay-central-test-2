@@ -28,11 +28,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.portlet.RenderRequest;
+import javax.portlet.filter.RenderRequestWrapper;
 
 /**
  * <a href="DynamicRenderRequest.java.html"><b><i>View Source</i></b></a>
@@ -43,31 +43,29 @@ import javax.portlet.RenderRequest;
 public class DynamicRenderRequest extends RenderRequestWrapper {
 
 	public DynamicRenderRequest(RenderRequest req) {
-		this(req, new HashMap(), true);
+		this(req, new HashMap<String, String[]>(), true);
 	}
 
-	public DynamicRenderRequest(RenderRequest req, Map params) {
+	public DynamicRenderRequest(
+		RenderRequest req, Map<String, String[]> params) {
+
 		this(req, params, true);
 	}
 
 	public DynamicRenderRequest(RenderRequest req, boolean inherit) {
-		this(req, new HashMap(), inherit);
+		this(req, new HashMap<String, String[]>(), inherit);
 	}
 
-	public DynamicRenderRequest(RenderRequest req, Map params,
-								boolean inherit) {
+	public DynamicRenderRequest(
+		RenderRequest req, Map<String, String[]> params, boolean inherit) {
 
 		super(req);
 
-		_params = new HashMap();
+		_params = new HashMap<String, String[]>();
 		_inherit = inherit;
 
 		if (params != null) {
-			Iterator itr = params.entrySet().iterator();
-
-			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
-
+			for (Map.Entry<String, String[]> entry : params.entrySet()) {
 				_params.put(entry.getKey(), entry.getValue());
 			}
 		}
@@ -75,20 +73,16 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 		if (_inherit && (req instanceof DynamicRenderRequest)) {
 			DynamicRenderRequest dynamicReq = (DynamicRenderRequest)req;
 
-			setPortletRequest(dynamicReq.getPortletRequest());
+			setRequest(dynamicReq.getRequest());
 
 			params = dynamicReq.getDynamicParameterMap();
 
 			if (params != null) {
-				Iterator itr = params.entrySet().iterator();
+				for (Map.Entry<String, String[]> entry : params.entrySet()) {
+					String name = entry.getKey();
+					String[] oldValues = entry.getValue();
 
-				while (itr.hasNext()) {
-					Map.Entry entry = (Map.Entry)itr.next();
-
-					String name = (String)entry.getKey();
-					String[] oldValues = (String[])entry.getValue();
-
-					String[] curValues = (String[])_params.get(name);
+					String[] curValues = _params.get(name);
 
 					if (curValues == null) {
 						_params.put(name, oldValues);
@@ -105,7 +99,7 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 	}
 
 	public String getParameter(String name) {
-		String[] values = (String[])_params.get(name);
+		String[] values = _params.get(name);
 
 		if (_inherit && (values == null)) {
 			return super.getParameter(name);
@@ -119,13 +113,13 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 		}
 	}
 
-	public Map getParameterMap() {
-		Map map = new HashMap();
+	public Map<String, String[]> getParameterMap() {
+		Map<String, String[]> map = new HashMap<String, String[]>();
 
-		Enumeration enu = getParameterNames();
+		Enumeration<String> enu = getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String s = (String)enu.nextElement();
+			String s = enu.nextElement();
 
 			map.put(s, getParameterValues(s));
 		}
@@ -133,22 +127,18 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 		return map;
 	}
 
-	public Enumeration getParameterNames() {
-		List names = new ArrayList();
+	public Enumeration<String> getParameterNames() {
+		List<String> names = new ArrayList<String>();
 
 		if (_inherit) {
-			Enumeration enu = super.getParameterNames();
+			Enumeration<String> enu = super.getParameterNames();
 
 			while (enu.hasMoreElements()) {
 				names.add(enu.nextElement());
 			}
 		}
 
-		Iterator i = _params.keySet().iterator();
-
-		while (i.hasNext()) {
-			String s = (String)i.next();
-
+		for (String s : _params.keySet()) {
 			if (!names.contains(s)) {
 				names.add(s);
 			}
@@ -158,7 +148,7 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 	}
 
 	public String[] getParameterValues(String name) {
-		String[] values = (String[])_params.get(name);
+		String[] values = _params.get(name);
 
 		if (_inherit && (values == null)) {
 			return super.getParameterValues(name);
@@ -175,11 +165,11 @@ public class DynamicRenderRequest extends RenderRequestWrapper {
 		_params.put(name, values);
 	}
 
-	public Map getDynamicParameterMap() {
+	public Map<String, String[]> getDynamicParameterMap() {
 		return _params;
 	}
 
-	private Map _params;
+	private Map<String, String[]> _params;
 	private boolean _inherit;
 
 }

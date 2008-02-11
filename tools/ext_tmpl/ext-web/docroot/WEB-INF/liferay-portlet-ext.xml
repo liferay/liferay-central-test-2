@@ -294,11 +294,6 @@
 		<include>true</include>
 	</portlet>
 	<portlet>
-		<portlet-name>68</portlet-name>
-		<struts-path>wsrp</struts-path>
-		<include>true</include>
-	</portlet>
-	<portlet>
 		<portlet-name>70</portlet-name>
 		<struts-path>password_generator</struts-path>
 		<include>true</include>

@@ -37,16 +37,18 @@ import javax.servlet.ServletContext;
  */
 public class DynamicServletConfig implements ServletConfig {
 
-	public DynamicServletConfig(ServletConfig config, Map params) {
+	public DynamicServletConfig(
+		ServletConfig config, Map<String, String> params) {
+
 		_config = config;
 		_params = params;
 	}
 
 	public String getInitParameter(String name) {
-		return (String)_params.get(name);
+		return _params.get(name);
 	}
 
-	public Enumeration getInitParameterNames() {
+	public Enumeration<String> getInitParameterNames() {
 		return Collections.enumeration(_params.keySet());
 	}
 
@@ -59,6 +61,6 @@ public class DynamicServletConfig implements ServletConfig {
 	}
 
 	private ServletConfig _config;
-	private Map _params;
+	private Map<String, String> _params;
 
 }

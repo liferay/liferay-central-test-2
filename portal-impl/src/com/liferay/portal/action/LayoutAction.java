@@ -65,7 +65,6 @@ import com.liferay.util.servlet.UploadServletRequest;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.portlet.PortletConfig;
@@ -403,7 +402,7 @@ public class LayoutAction extends Action {
 
 				RenderParametersPool.put(
 					req, layout.getPlid(), portletId,
-					actionResponseImpl.getRenderParameters());
+					actionResponseImpl.getRenderParameterMap());
 			}
 			finally {
 				if (uploadReq != null) {
@@ -444,22 +443,14 @@ public class LayoutAction extends Action {
 			actionRequestImpl, actionRequestImpl.getPortletName(),
 			layout.getLayoutId(), false);
 
-		Map renderParameters = actionResponseImpl.getRenderParameters();
+		Map<String, String[]> renderParameters =
+			actionResponseImpl.getRenderParameterMap();
 
-		Iterator itr = renderParameters.entrySet().iterator();
+		for (Map.Entry<String, String[]> entry : renderParameters.entrySet()) {
+			String key = entry.getKey();
+			String[] value = entry.getValue();
 
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String key = (String)entry.getKey();
-			Object value = entry.getValue();
-
-			if (value instanceof String) {
-				portletURL.setParameter(key, (String)value);
-			}
-			else if (value instanceof String[]) {
-				portletURL.setParameter(key, (String[])value);
-			}
+			portletURL.setParameter(key, value);
 		}
 
 		res.sendRedirect(portletURL.toString());

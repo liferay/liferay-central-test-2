@@ -48,13 +48,13 @@ public class EncryptedServletRequest extends HttpServletRequestWrapper {
 	public EncryptedServletRequest(HttpServletRequest req, Key key) {
 		super(req);
 
-		_params = new HashMap();
+		_params = new HashMap<String, String[]>();
 		_key = key;
 
-		Enumeration enu = getParameterNames();
+		Enumeration<String> enu = getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 			String[] values = super.getParameterValues(name);
 
 			for (int i = 0; i < values.length; i++) {
@@ -73,7 +73,7 @@ public class EncryptedServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getParameter(String name) {
-		String[] values = (String[])_params.get(name);
+		String[] values = _params.get(name);
 
 		if ((values != null) && (values.length > 0)) {
 			return values[0];
@@ -83,15 +83,15 @@ public class EncryptedServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	public Map getParameterMap() {
+	public Map<String, String[]> getParameterMap() {
 		return Collections.unmodifiableMap(_params);
 	}
 
 	public String[] getParameterValues(String name) {
-		return (String[])_params.get(name);
+		return _params.get(name);
 	}
 
-	private Map _params;
+	private Map<String, String[]> _params;
 	private Key _key;
 
 }

@@ -23,6 +23,7 @@
 package com.liferay.portal.kernel.portlet;
 
 import javax.portlet.RenderRequest;
+import javax.portlet.filter.RenderRequestWrapper;
 
 /**
  * <a href="ProtectedRenderRequest.java.html"><b><i>View Source</i></b></a>

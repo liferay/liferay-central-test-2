@@ -267,19 +267,19 @@ public class ServicePreAction extends Action {
 			WebKeys.VIRTUAL_HOST_LAYOUT_SET);
 
 		if (layoutSet != null) {
-			List layouts = LayoutLocalServiceUtil.getLayouts(
+			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
 				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() > 0) {
-				Layout layout = (Layout)layouts.get(0);
+				Layout layout = layouts.get(0);
 
 				return new Object[] {layout, layouts};
 			}
 		}
 
 		Layout layout = null;
-		List layouts = null;
+		List<Layout> layouts = null;
 
 		if (signedIn) {
 
@@ -298,22 +298,23 @@ public class ServicePreAction extends Action {
 			}
 
 			if (layouts.size() > 0) {
-				layout = (Layout)layouts.get(0);
+				layout = layouts.get(0);
 			}
 
 			// Check the user's communities
 
 			if (layout == null) {
-				LinkedHashMap groupParams = new LinkedHashMap();
+				LinkedHashMap<String, Object> groupParams =
+					new LinkedHashMap<String, Object>();
 
 				groupParams.put("usersGroups", new Long(user.getUserId()));
 
-				List groups = GroupLocalServiceUtil.search(
+				List<Group> groups = GroupLocalServiceUtil.search(
 					user.getCompanyId(), null, null, groupParams,
 					QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 				for (int i = 0; i < groups.size(); i++) {
-					Group group = (Group)groups.get(i);
+					Group group = groups.get(i);
 
 					layouts = LayoutLocalServiceUtil.getLayouts(
 						group.getGroupId(), true,
@@ -326,7 +327,7 @@ public class ServicePreAction extends Action {
 					}
 
 					if (layouts.size() > 0) {
-						layout = (Layout)layouts.get(0);
+						layout = layouts.get(0);
 
 						break;
 					}
@@ -345,7 +346,7 @@ public class ServicePreAction extends Action {
 				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() > 0) {
-				layout = (Layout)layouts.get(0);
+				layout = layouts.get(0);
 			}
 		}
 
@@ -356,7 +357,7 @@ public class ServicePreAction extends Action {
 			long userId, long groupId, boolean privateLayout, File larFile)
 		throws PortalException, SystemException {
 
-		Map parameterMap = new HashMap();
+		Map<String, String> parameterMap = new HashMap<String, String>();
 
 		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS, Boolean.TRUE.toString());
@@ -409,7 +410,8 @@ public class ServicePreAction extends Action {
 
 	protected Object[] getViewableLayouts(
 			HttpServletRequest req, User user,
-			PermissionChecker permissionChecker, Layout layout, List layouts)
+			PermissionChecker permissionChecker, Layout layout,
+			List<Layout> layouts)
 		throws PortalException, SystemException {
 
 		if ((layouts != null) && (layouts.size() > 0)) {
@@ -421,10 +423,10 @@ public class ServicePreAction extends Action {
 				replaceLayout = false;
 			}
 
-			List accessibleLayouts = new ArrayList();
+			List<Layout> accessibleLayouts = new ArrayList<Layout>();
 
 			for (int i = 0; i < layouts.size(); i++) {
-				Layout curLayout = (Layout)layouts.get(i);
+				Layout curLayout = layouts.get(i);
 
 				if (!curLayout.isHidden() &&
 					LayoutPermissionUtil.contains(
@@ -594,8 +596,9 @@ public class ServicePreAction extends Action {
 		return false;
 	}
 
-	protected List mergeAdditionalLayouts(
-			User user, Layout layout, List layouts, HttpServletRequest req)
+	protected List<Layout> mergeAdditionalLayouts(
+			User user, Layout layout, List<Layout> layouts,
+			HttpServletRequest req)
 		throws PortalException, SystemException {
 
 		if ((layout == null) || layout.isPrivateLayout()) {
@@ -619,7 +622,7 @@ public class ServicePreAction extends Action {
 				return layouts;
 			}
 
-			List guestLayouts = LayoutLocalServiceUtil.getLayouts(
+			List<Layout> guestLayouts = LayoutLocalServiceUtil.getLayouts(
 				guestGroup.getGroupId(), false,
 				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
@@ -657,9 +660,10 @@ public class ServicePreAction extends Action {
 					return layouts;
 				}
 
-				List previousLayouts = LayoutLocalServiceUtil.getLayouts(
-					previousGroupId.longValue(), false,
-					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				List<Layout> previousLayouts =
+					LayoutLocalServiceUtil.getLayouts(
+						previousGroupId.longValue(), false,
+						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 				layouts.addAll(previousLayouts);
 			}
@@ -827,7 +831,7 @@ public class ServicePreAction extends Action {
 					locale = LanguageUtil.getLocale(locale.getLanguage());
 				}
 
-				List availableLocales = ListUtil.fromArray(
+				List<Locale> availableLocales = ListUtil.fromArray(
 					LanguageUtil.getAvailableLocales());
 
 				if (!availableLocales.contains(locale)) {
@@ -874,7 +878,7 @@ public class ServicePreAction extends Action {
 		}
 
 		Layout layout = null;
-		List layouts = null;
+		List<Layout> layouts = null;
 
 		long plid = ParamUtil.getLong(req, "p_l_id");
 
@@ -925,7 +929,7 @@ public class ServicePreAction extends Action {
 			Object[] defaultLayout = getDefaultLayout(req, user, signedIn);
 
 			layout = (Layout)defaultLayout[0];
-			layouts = (List)defaultLayout[1];
+			layouts = (List<Layout>)defaultLayout[1];
 
 			req.setAttribute(WebKeys.LAYOUT_DEFAULT, Boolean.TRUE);
 		}
@@ -936,7 +940,7 @@ public class ServicePreAction extends Action {
 		String layoutSetLogo = null;
 
 		layout = (Layout)viewableLayouts[0];
-		layouts = (List)viewableLayouts[1];
+		layouts = (List<Layout>)viewableLayouts[1];
 
 		LayoutTypePortlet layoutTypePortlet = null;
 

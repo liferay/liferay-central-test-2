@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.portlet;
 import java.io.IOException;
 
 import javax.portlet.ActionResponse;
+import javax.portlet.filter.ActionResponseWrapper;
 
 /**
  * <a href="NoRedirectActionResponse.java.html"><b><i>View Source</i></b></a>

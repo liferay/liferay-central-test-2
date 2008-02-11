@@ -30,7 +30,6 @@ import java.io.File;
 
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -44,9 +43,9 @@ import java.util.Set;
  */
 public class AutoDeployDir {
 
-	public AutoDeployDir(String name, File deployDir, File destDir,
-						 long interval, int blacklistThreshold,
-						 List listeners) {
+	public AutoDeployDir(
+		String name, File deployDir, File destDir, long interval,
+		int blacklistThreshold, List<AutoDeployListener> listeners) {
 
 		_name = name;
 		_deployDir = deployDir;
@@ -54,8 +53,8 @@ public class AutoDeployDir {
 		_interval = interval;
 		_blacklistThreshold = blacklistThreshold;
 		_listeners = listeners;
-		_inProcessFiles = new HashMap();
-		_blacklistFiles = new HashSet();
+		_inProcessFiles = new HashMap<String, IntegerWrapper>();
+		_blacklistFiles = new HashSet<String>();
 	}
 
 	public String getName() {
@@ -78,7 +77,7 @@ public class AutoDeployDir {
 		return _blacklistThreshold;
 	}
 
-	public List getListeners() {
+	public List<AutoDeployListener> getListeners() {
 		return _listeners;
 	}
 
@@ -171,7 +170,7 @@ public class AutoDeployDir {
 			return;
 		}
 
-		IntegerWrapper attempt = (IntegerWrapper)_inProcessFiles.get(fileName);
+		IntegerWrapper attempt = _inProcessFiles.get(fileName);
 
 		if (attempt == null) {
 			attempt = new IntegerWrapper(1);
@@ -191,11 +190,7 @@ public class AutoDeployDir {
 		}
 
 		try {
-			Iterator itr = _listeners.iterator();
-
-			while (itr.hasNext()) {
-				AutoDeployListener listener = (AutoDeployListener)itr.next();
-
+			for (AutoDeployListener listener : _listeners) {
 				listener.deploy(file);
 			}
 
@@ -234,9 +229,9 @@ public class AutoDeployDir {
 	private File _destDir;
 	private long _interval;
 	private int _blacklistThreshold;
-	private List _listeners;
-	private Map _inProcessFiles;
-	private Set _blacklistFiles;
+	private List<AutoDeployListener> _listeners;
+	private Map<String, IntegerWrapper> _inProcessFiles;
+	private Set<String> _blacklistFiles;
 	private AutoDeployScanner _scanner;
 
 }

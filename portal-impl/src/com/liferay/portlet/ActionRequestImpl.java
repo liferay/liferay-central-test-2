@@ -46,22 +46,14 @@ import org.apache.commons.logging.LogFactory;
 public class ActionRequestImpl
 	extends RenderRequestImpl implements ActionRequest {
 
-	public PortletPreferences getPreferences() {
-		return new PortletPreferencesWrapper(getPreferencesImpl(), true);
+	public void defineObjects(PortletConfig portletConfig, ActionResponse res) {
+		setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
+		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
+		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
 	}
 
 	public String getCharacterEncoding() {
 		return getHttpServletRequest().getCharacterEncoding();
-	}
-
-	public void setCharacterEncoding(String enc)
-		throws UnsupportedEncodingException {
-
-		if (_calledGetReader) {
-			throw new IllegalStateException();
-		}
-
-		getHttpServletRequest().setCharacterEncoding(enc);
 	}
 
 	public int getContentLength() {
@@ -72,8 +64,16 @@ public class ActionRequestImpl
 		return getHttpServletRequest().getContentType();
 	}
 
+	public String getMethod() {
+		return getHttpServletRequest().getMethod();
+	}
+
 	public InputStream getPortletInputStream() throws IOException {
 		return getHttpServletRequest().getInputStream();
+	}
+
+	public PortletPreferences getPreferences() {
+		return new PortletPreferencesWrapper(getPreferencesImpl(), true);
 	}
 
 	public BufferedReader getReader()
@@ -84,14 +84,18 @@ public class ActionRequestImpl
 		return getHttpServletRequest().getReader();
 	}
 
-	public void defineObjects(PortletConfig portletConfig, ActionResponse res) {
-		setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
-		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
-		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
+	public boolean isAction() {
+		return _ACTION;
 	}
 
-	public boolean isAction() {
-		return true;
+	public void setCharacterEncoding(String enc)
+		throws UnsupportedEncodingException {
+
+		if (_calledGetReader) {
+			throw new IllegalStateException();
+		}
+
+		getHttpServletRequest().setCharacterEncoding(enc);
 	}
 
 	protected ActionRequestImpl() {
@@ -109,6 +113,8 @@ public class ActionRequestImpl
 
 		_calledGetReader = false;
 	}
+
+	private static final boolean _ACTION = true;
 
 	private static Log _log = LogFactory.getLog(ActionRequestImpl.class);
 

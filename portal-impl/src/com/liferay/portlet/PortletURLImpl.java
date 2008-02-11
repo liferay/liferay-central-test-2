@@ -47,7 +47,9 @@ import com.liferay.util.EncryptorException;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 
+import java.io.IOException;
 import java.io.Serializable;
+import java.io.Writer;
 
 import java.security.Key;
 
@@ -105,42 +107,74 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		_plid = plid;
 		_secure = req.isSecure();
 		_action = action;
-		_params = new LinkedHashMap();
-		_parametersIncludedInPath = new LinkedHashSet();
+		_params = new LinkedHashMap<String, String[]>();
+		_parametersIncludedInPath = new LinkedHashSet<String>();
 	}
 
-	public HttpServletRequest getReq() {
+	public void addParameterIncludedInPath(String name) {
+		_parametersIncludedInPath.add(name);
+	}
+
+	public void addProperty(String key, String value) {
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public HttpServletRequest getHttpServletRequest() {
 		return _req;
 	}
 
-	public PortletRequest getPortletReq() {
-		return _portletReq;
+	public String getNamespace() {
+		if (_namespace == null) {
+			_namespace = PortalUtil.getPortletNamespace(_portletId);
+		}
+
+		return _namespace;
 	}
 
-	public String getPortletId() {
-		return _portletId;
+	public Layout getLayout() {
+		if (_layout == null) {
+			try {
+				if (_plid > 0) {
+					_layout = LayoutLocalServiceUtil.getLayout(_plid);
+				}
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Layout cannot be found for " + _plid);
+				}
+			}
+		}
+
+		return _layout;
 	}
 
-	public void setPortletId(String portletId) {
-		_portletId = portletId;
-
-		// Clear cache
-
-		_toString = null;
+	public String getLayoutFriendlyURL() {
+		return _layoutFriendlyURL;
 	}
 
-	/**
-	 * @deprecated Use <code>getPortletId</code>.
-	 */
-	public String getPortletName() {
-		return getPortletId();
+	public String getParameter(String name) {
+		String[] values = _params.get(name);
+
+		if ((values != null) && (values.length > 0)) {
+			return values[0];
+		}
+		else {
+			return null;
+		}
 	}
 
-	/**
-	 * @deprecated Use <code>setPortletId</code>.
-	 */
-	public void setPortletName(String portletName) {
-		setPortletId(portletName);
+	public Map<String, String[]> getParameterMap() {
+		return _params;
+	}
+
+	public Set<String> getParametersIncludedInPath() {
+		return _parametersIncludedInPath;
+	}
+
+	public long getPlid() {
+		return _plid;
 	}
 
 	public Portlet getPortlet() {
@@ -178,41 +212,53 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		return portletFriendlyURLPath;
 	}
 
-	public String getNamespace() {
-		if (_namespace == null) {
-			_namespace = PortalUtil.getPortletNamespace(_portletId);
-		}
-
-		return _namespace;
+	public String getPortletId() {
+		return _portletId;
 	}
 
-	public long getPlid() {
-		return _plid;
+	public PortletMode getPortletMode() {
+		return _portletMode;
 	}
 
-	public Layout getLayout() {
-		if (_layout == null) {
-			try {
-				if (_plid > 0) {
-					_layout = LayoutLocalServiceUtil.getLayout(_plid);
-				}
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn("Layout cannot be found for " + _plid);
-				}
-			}
-		}
-
-		return _layout;
+	public PortletRequest getPortletRequest() {
+		return _portletReq;
 	}
 
-	public String getLayoutFriendlyURL() {
-		return _layoutFriendlyURL;
+	public WindowState getWindowState() {
+		return _windowState;
 	}
 
 	public boolean isAction() {
 		return _action;
+	}
+
+	public boolean isAnchor() {
+		return _anchor;
+	}
+
+	public boolean isEncrypt() {
+		return _encrypt;
+	}
+
+	public boolean isParameterIncludedInPath(String name) {
+		if (_parametersIncludedInPath.contains(name)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isSecure() {
+		return _secure;
+	}
+
+	public void removePublicRenderParameter(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		_params.remove(name);
 	}
 
 	public void setAction(boolean action) {
@@ -223,75 +269,28 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		_toString = null;
 	}
 
-	public WindowState getWindowState() {
-		return _windowState;
-	}
-
-	public void setWindowState(WindowState windowState)
-		throws WindowStateException {
-
-		if (_portletReq != null) {
-			if (!_portletReq.isWindowStateAllowed(windowState)) {
-				throw new WindowStateException(
-					windowState.toString(), windowState);
-			}
-		}
-
-		if (LiferayWindowState.isWindowStatePreserved(
-				getWindowState(), windowState)) {
-
-			_windowState = windowState;
-		}
+	public void setAnchor(boolean anchor) {
+		_anchor = anchor;
 
 		// Clear cache
 
 		_toString = null;
 	}
 
-	public void setWindowState(String windowState)
-		throws WindowStateException {
-
-		setWindowState(new WindowState(windowState));
-	}
-
-	public PortletMode getPortletMode() {
-		return _portletMode;
-	}
-
-	public void setPortletMode(PortletMode portletMode)
-		throws PortletModeException {
-
-		if (_portletReq != null) {
-			if (!getPortlet().hasPortletMode(
-					_portletReq.getResponseContentType(), portletMode)) {
-
-				throw new PortletModeException(
-					portletMode.toString(), portletMode);
-			}
-		}
-
-		_portletMode = portletMode;
+	public void setDoAsUserId(long doAsUserId) {
+		_doAsUserId = doAsUserId;
 
 		// Clear cache
 
 		_toString = null;
 	}
 
-	public void setPortletMode(String portletMode)
-		throws PortletModeException {
+	public void setEncrypt(boolean encrypt) {
+		_encrypt = encrypt;
 
-		setPortletMode(new PortletMode(portletMode));
-	}
+		// Clear cache
 
-	public String getParameter(String name) {
-		String[] values = (String[])_params.get(name);
-
-		if ((values != null) && (values.length > 0)) {
-			return values[0];
-		}
-		else {
-			return null;
-		}
+		_toString = null;
 	}
 
 	public void setParameter(String name, String value) {
@@ -322,7 +321,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		}
 
 		if (append && _params.containsKey(name)) {
-			String[] oldValues = (String[])_params.get(name);
+			String[] oldValues = _params.get(name);
 
 			String[] newValues = ArrayUtil.append(oldValues, values);
 
@@ -337,33 +336,30 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		_toString = null;
 	}
 
-	public void setParameters(Map params) {
+	public void setParameters(Map<String, String[]> params) {
 		if (params == null) {
 			throw new IllegalArgumentException();
 		}
 		else {
-			Map newParams = new LinkedHashMap();
+			Map<String, String[]> newParams =
+				new LinkedHashMap<String, String[]>();
 
-			Iterator itr = params.entrySet().iterator();
-
-			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
-
-				Object key = entry.getKey();
-				Object value = entry.getValue();
-
-				if (key == null) {
-					throw new IllegalArgumentException();
-				}
-				else if (value == null) {
-					throw new IllegalArgumentException();
-				}
-
-				if (value instanceof String[]) {
+			for (Map.Entry<String, String[]> entry : params.entrySet()) {
+				try {
+					String key = entry.getKey();
+					String[] value = entry.getValue();
+	
+					if (key == null) {
+						throw new IllegalArgumentException();
+					}
+					else if (value == null) {
+						throw new IllegalArgumentException();
+					}
+	
 					newParams.put(key, value);
 				}
-				else {
-					throw new IllegalArgumentException();
+				catch (ClassCastException cce) {
+					throw new IllegalArgumentException(cce);
 				}
 			}
 
@@ -375,29 +371,41 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		_toString = null;
 	}
 
-	public Map getParameterMap() {
-		return _params;
+	public void setPortletId(String portletId) {
+		_portletId = portletId;
+
+		// Clear cache
+
+		_toString = null;
 	}
 
-	public Set getParametersIncludedInPath() {
-		return _parametersIncludedInPath;
+	public void setPortletMode(String portletMode) throws PortletModeException {
+		setPortletMode(new PortletMode(portletMode));
 	}
 
-	public void addParameterIncludedInPath(String name) {
-		_parametersIncludedInPath.add(name);
-	}
+	public void setPortletMode(PortletMode portletMode)
+		throws PortletModeException {
 
-	public boolean isParameterIncludedInPath(String name) {
-		if (_parametersIncludedInPath.contains(name)) {
-			return true;
+		if (_portletReq != null) {
+			if (!getPortlet().hasPortletMode(
+					_portletReq.getResponseContentType(), portletMode)) {
+
+				throw new PortletModeException(
+					portletMode.toString(), portletMode);
+			}
 		}
-		else {
-			return false;
-		}
+
+		_portletMode = portletMode;
+
+		// Clear cache
+
+		_toString = null;
 	}
 
-	public boolean isSecure() {
-		return _secure;
+	public void setProperty(String key, String value) {
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
 	}
 
 	public void setSecure(boolean secure) throws PortletSecurityException {
@@ -408,32 +416,25 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		_toString = null;
 	}
 
-	public boolean isAnchor() {
-		return _anchor;
+	public void setWindowState(String windowState) throws WindowStateException {
+		setWindowState(new WindowState(windowState));
 	}
 
-	public void setAnchor(boolean anchor) {
-		_anchor = anchor;
+	public void setWindowState(WindowState windowState)
+		throws WindowStateException {
 
-		// Clear cache
+		if (_portletReq != null) {
+			if (!_portletReq.isWindowStateAllowed(windowState)) {
+				throw new WindowStateException(
+					windowState.toString(), windowState);
+			}
+		}
 
-		_toString = null;
-	}
+		if (LiferayWindowState.isWindowStatePreserved(
+				getWindowState(), windowState)) {
 
-	public boolean isEncrypt() {
-		return _encrypt;
-	}
-
-	public void setEncrypt(boolean encrypt) {
-		_encrypt = encrypt;
-
-		// Clear cache
-
-		_toString = null;
-	}
-
-	public void setDoAsUserId(long doAsUserId) {
-		_doAsUserId = doAsUserId;
+			_windowState = windowState;
+		}
 
 		// Clear cache
 
@@ -448,6 +449,14 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		_toString = generateToString();
 
 		return _toString;
+	}
+
+	public void write(Writer writer) throws IOException {
+		write(writer, _ESCAPE_XML);
+	}
+
+	public void write(Writer writer, boolean escapeXML) throws IOException {
+		writer.write(toString());
 	}
 
 	protected String generateToString() {
@@ -630,13 +639,14 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 			}
 		}
 
-		Iterator itr = _params.entrySet().iterator();
+		Iterator<Map.Entry<String, String[]>> itr =
+			_params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, String[]> entry = itr.next();
 
-			String name = (String)entry.getKey();
-			String[] values = (String[])entry.getValue();
+			String name = entry.getKey();
+			String[] values = entry.getValue();
 
 			for (int i = 0; i < values.length; i++) {
 				if (isParameterIncludedInPath(name)) {
@@ -711,6 +721,8 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		}
 	}
 
+	private static final boolean _ESCAPE_XML = true;
+
 	private static Log _log = LogFactory.getLog(PortletURLImpl.class);
 
 	private HttpServletRequest _req;
@@ -724,8 +736,8 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 	private boolean _action;
 	private WindowState _windowState;
 	private PortletMode _portletMode;
-	private Map _params;
-	private Set _parametersIncludedInPath;
+	private Map<String, String[]> _params;
+	private Set<String> _parametersIncludedInPath;
 	private boolean _secure;
 	private boolean _anchor = true;
 	private boolean _encrypt = false;

@@ -24,12 +24,9 @@ package com.liferay.portal.kernel.portlet;
 
 import java.io.Serializable;
 
-import java.util.Map;
 import java.util.Set;
 
-import javax.portlet.PortletMode;
 import javax.portlet.PortletURL;
-import javax.portlet.WindowState;
 
 /**
  * <a href="LiferayPortletURL.java.html"><b><i>View Source</i></b></a>
@@ -39,42 +36,36 @@ import javax.portlet.WindowState;
  */
 public interface LiferayPortletURL extends PortletURL, Serializable {
 
-	public String getPortletId();
-
-	public void setPortletId(String portletId);
-
-	public boolean isAction();
-
-	public void setAction(boolean action);
-
-	public WindowState getWindowState();
-
-	public PortletMode getPortletMode();
+	public void addParameterIncludedInPath(String name);
 
 	public String getParameter(String name);
 
-	public void setParameter(String name, String value, boolean append);
+	public String getPortletId();
 
-	public void setParameter(String name, String[] values, boolean append);
+	public boolean isAction();
 
-	public Map getParameterMap();
+	public boolean isAnchor();
 
-	public Set getParametersIncludedInPath();
-
-	public void addParameterIncludedInPath(String name);
+	public boolean isEncrypt();
 
 	public boolean isParameterIncludedInPath(String name);
 
 	public boolean isSecure();
 
-	public boolean isAnchor();
+	public void setAction(boolean action);
+
+	public void setParameter(String name, String value, boolean append);
+
+	public void setParameter(String name, String[] values, boolean append);
+
+	public Set<String> getParametersIncludedInPath();
 
 	public void setAnchor(boolean anchor);
 
-	public boolean isEncrypt();
+	public void setDoAsUserId(long doAsUserId);
 
 	public void setEncrypt(boolean encrypt);
 
-	public void setDoAsUserId(long doAsUserId);
+	public void setPortletId(String portletId);
 
 }

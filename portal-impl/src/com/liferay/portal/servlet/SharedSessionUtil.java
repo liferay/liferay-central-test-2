@@ -23,10 +23,10 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.CollectionFactory;
 
 import java.util.Enumeration;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -46,15 +46,18 @@ public class SharedSessionUtil {
 	public static final String[] SHARED_SESSION_ATTRIBUTES =
 		PropsUtil.getArray(PropsUtil.SESSION_SHARED_ATTRIBUTES);
 
-	public static Map getSharedSessionAttributes(HttpServletRequest req) {
-		Map map = CollectionFactory.getSyncHashMap();
+	public static Map<String, Object> getSharedSessionAttributes(
+		HttpServletRequest req) {
+
+		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 
 		HttpSession ses = req.getSession();
 
-		Enumeration enu = ses.getAttributeNames();
+		Enumeration<String> enu = ses.getAttributeNames();
 
 		while (enu.hasMoreElements()) {
-			String attrName = (String)enu.nextElement();
+			String attrName = enu.nextElement();
+
 			Object attrValue = ses.getAttribute(attrName);
 
 			if (attrValue != null) {

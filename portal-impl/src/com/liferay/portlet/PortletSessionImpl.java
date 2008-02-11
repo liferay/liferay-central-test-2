@@ -28,7 +28,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.StringTokenizer;
 
 import javax.portlet.PortletContext;
@@ -62,9 +64,9 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		return portletScopeName;
 	}
 
-	public PortletSessionImpl(HttpServletRequest req, String portletName,
-							  PortletContext ctx, String portalSessionId,
-							  long plid) {
+	public PortletSessionImpl(
+		HttpServletRequest req, String portletName, PortletContext ctx,
+		String portalSessionId, long plid) {
 
 		_req = req;
 		_portletName = portletName;
@@ -76,47 +78,6 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		_invalid = false;
 		_portalSessionId = portalSessionId;
 		_plid = plid;
-	}
-
-	public PortletContext getPortletContext() {
-		return _ctx;
-	}
-
-	public String getId() {
-		return getHttpSession().getId();
-	}
-
-	public long getCreationTime() {
-		if (_invalid) {
-			throw new IllegalStateException();
-		}
-
-		return _creationTime;
-	}
-
-	public long getLastAccessedTime() {
-		return _lastAccessedTime;
-	}
-
-	public void setLastAccessedTime(long lastAccessedTime) {
-		_lastAccessedTime = lastAccessedTime;
-		_new = false;
-	}
-
-	public int getMaxInactiveInterval() {
-		return _interval;
-	}
-
-	public void setMaxInactiveInterval(int interval) {
-		_interval = interval;
-	}
-
-	public boolean isNew() {
-		if (_invalid) {
-			throw new IllegalStateException();
-		}
-
-		return _new;
 	}
 
 	public Object getAttribute(String name) {
@@ -148,7 +109,27 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		}
 	}
 
-	public Enumeration getAttributeNames() {
+	public Map<String, Object> getAttributeMap() {
+		return getAttributeMap(PortletSession.PORTLET_SCOPE);
+	}
+
+	public Map<String, Object> getAttributeMap(int scope) {
+		Map<String, Object> map = new HashMap<String, Object>();
+
+		Enumeration<String> enu = getAttributeNames(scope);
+
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			Object value = getAttribute(name);
+
+			map.put(name, value);
+		}
+
+		return map;
+	}
+
+	public Enumeration<String> getAttributeNames() {
 		if (_invalid) {
 			throw new IllegalStateException();
 		}
@@ -156,20 +137,20 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		return getAttributeNames(PortletSession.PORTLET_SCOPE);
 	}
 
-	public Enumeration getAttributeNames(int scope) {
+	public Enumeration<String> getAttributeNames(int scope) {
 		if (_invalid) {
 			throw new IllegalStateException();
 		}
 
 		if (scope == PortletSession.PORTLET_SCOPE) {
-			List attributeNames = new ArrayList();
+			List<String> attributeNames = new ArrayList<String>();
 
 			String portletScope = getPortletScope(_portletName, _plid);
 
-			Enumeration enu = getHttpSession().getAttributeNames();
+			Enumeration<String> enu = getHttpSession().getAttributeNames();
 
 			while (enu.hasMoreElements()) {
-				String name = (String)enu.nextElement();
+				String name = enu.nextElement();
 
 				StringTokenizer st = new StringTokenizer(
 					name, StringPool.QUESTION);
@@ -186,6 +167,65 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		else {
 			return getHttpSession().getAttributeNames();
 		}
+	}
+
+	public long getCreationTime() {
+		if (_invalid) {
+			throw new IllegalStateException();
+		}
+
+		return _creationTime;
+	}
+
+	public HttpSession getHttpSession() {
+		if (_ses == null) {
+			return _req.getSession();
+		}
+		else {
+			return _ses;
+		}
+	}
+
+	public String getId() {
+		return getHttpSession().getId();
+	}
+
+	public long getLastAccessedTime() {
+		return _lastAccessedTime;
+	}
+
+	public int getMaxInactiveInterval() {
+		return _interval;
+	}
+
+	public String getPortalSessionId() {
+		return _portalSessionId;
+	}
+
+	public PortletContext getPortletContext() {
+		return _ctx;
+	}
+
+	public void invalidate() {
+		if (_invalid) {
+			throw new IllegalStateException();
+		}
+
+		getHttpSession().invalidate();
+
+		_invalid = true;
+	}
+
+	public boolean isNew() {
+		if (_invalid) {
+			throw new IllegalStateException();
+		}
+
+		return _new;
+	}
+
+	public boolean isValid() {
+		return !_invalid;
 	}
 
 	public void removeAttribute(String name) {
@@ -246,35 +286,17 @@ public class PortletSessionImpl implements LiferayPortletSession {
 		}
 	}
 
-	public void invalidate() {
-		if (_invalid) {
-			throw new IllegalStateException();
-		}
-
-		getHttpSession().invalidate();
-
-		_invalid = true;
-	}
-
-	public boolean isValid() {
-		return !_invalid;
-	}
-
-	public String getPortalSessionId() {
-		return _portalSessionId;
-	}
-
-	public HttpSession getHttpSession() {
-		if (_ses == null) {
-			return _req.getSession();
-		}
-		else {
-			return _ses;
-		}
-	}
-
 	public void setHttpSession(HttpSession ses) {
 		_ses = ses;
+	}
+
+	public void setLastAccessedTime(long lastAccessedTime) {
+		_lastAccessedTime = lastAccessedTime;
+		_new = false;
+	}
+
+	public void setMaxInactiveInterval(int interval) {
+		_interval = interval;
 	}
 
 	private String _getPortletScopeName(String name) {

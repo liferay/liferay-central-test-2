@@ -36,7 +36,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -75,7 +74,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 
 		super(req);
 
-		_params = new LinkedHashMap();
+		_params = new LinkedHashMap<String, LiferayFileItem[]>();
 
 		try {
 			ServletFileUpload servletFileUpload = new LiferayFileUpload(
@@ -85,17 +84,15 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 
 			_lsr = new LiferayServletRequest(req);
 
-			List list = servletFileUpload.parseRequest(_lsr);
+			List<LiferayFileItem> list = servletFileUpload.parseRequest(_lsr);
 
-			for (int i = 0; i < list.size(); i++) {
-				LiferayFileItem fileItem = (LiferayFileItem)list.get(i);
-
+			for (LiferayFileItem fileItem : list) {
 				if (fileItem.isFormField()) {
 					fileItem.setString(req.getCharacterEncoding());
 				}
 
 				LiferayFileItem[] fileItems =
-					(LiferayFileItem[])_params.get(fileItem.getFieldName());
+					_params.get(fileItem.getFieldName());
 
 				if (fileItems == null) {
 					fileItems = new LiferayFileItem[] {fileItem};
@@ -121,7 +118,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getContentType(String name) {
-		LiferayFileItem[] fileItems = (LiferayFileItem[])_params.get(name);
+		LiferayFileItem[] fileItems = _params.get(name);
 
 		if ((fileItems != null) && (fileItems.length > 0)) {
 			return fileItems[0].getContentType();
@@ -136,7 +133,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 			return null;
 		}
 
-		LiferayFileItem[] fileItems = (LiferayFileItem[])_params.get(name);
+		LiferayFileItem[] fileItems = _params.get(name);
 
 		if ((fileItems != null) && (fileItems.length > 0)) {
 			return fileItems[0].getStoreLocation();
@@ -147,7 +144,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getFileName(String name) {
-		LiferayFileItem[] fileItems = (LiferayFileItem[])_params.get(name);
+		LiferayFileItem[] fileItems = _params.get(name);
 
 		if ((fileItems != null) && (fileItems.length > 0)) {
 			return fileItems[0].getFileName();
@@ -158,7 +155,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getFullFileName(String name) {
-		LiferayFileItem[] fileItems = (LiferayFileItem[])_params.get(name);
+		LiferayFileItem[] fileItems = _params.get(name);
 
 		if ((fileItems != null) && (fileItems.length > 0)) {
 			return fileItems[0].getFullFileName();
@@ -173,7 +170,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getParameter(String name) {
-		LiferayFileItem[] fileItems = (LiferayFileItem[])_params.get(name);
+		LiferayFileItem[] fileItems = _params.get(name);
 
 		if ((fileItems != null) && (fileItems.length > 0)) {
 			return fileItems[0].getString();
@@ -183,13 +180,13 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	public Map getParameterMap() {
-		Map map = new HashMap();
+	public Map<String, String[]> getParameterMap() {
+		Map<String, String[]> map = new HashMap<String, String[]>();
 
-		Enumeration enu = getParameterNames();
+		Enumeration<String> enu = getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			map.put(name, getParameterValues(name));
 		}
@@ -197,24 +194,20 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		return map;
 	}
 
-	public Enumeration getParameterNames() {
-		List parameterNames = new ArrayList();
+	public Enumeration<String> getParameterNames() {
+		List<String> parameterNames = new ArrayList<String>();
 
-		Enumeration enu = super.getParameterNames();
+		Enumeration<String> enu = super.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (!_params.containsKey(name)) {
 				parameterNames.add(name);
 			}
 		}
 
-		Iterator itr = _params.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String name = (String)itr.next();
-
+		for (String name : _params.keySet()) {
 			parameterNames.add(name);
 		}
 
@@ -224,7 +217,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 	public String[] getParameterValues(String name) {
 		String[] parentValues = super.getParameterValues(name);
 
-		LiferayFileItem[] fileItems = (LiferayFileItem[])_params.get(name);
+		LiferayFileItem[] fileItems = _params.get(name);
 
 		if ((fileItems == null) || (fileItems.length == 0)) {
 			return parentValues;
@@ -253,12 +246,12 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	public Map getMultipartParameterMap() {
+	public Map<String, LiferayFileItem[]> getMultipartParameterMap() {
 		return _params;
 	}
 
 	public Boolean isFormField(String name) {
-		LiferayFileItem[] fileItems = (LiferayFileItem[])_params.get(name);
+		LiferayFileItem[] fileItems = _params.get(name);
 
 		if ((fileItems != null) && (fileItems.length > 0)) {
 			return new Boolean(fileItems[0].isFormField());
@@ -270,11 +263,7 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 
 	public void cleanUp() {
 		if ((_params != null) && !_params.isEmpty()) {
-			Iterator itr = _params.values().iterator();
-
-			while (itr.hasNext()) {
-				LiferayFileItem[] fileItems = (LiferayFileItem[])itr.next();
-
+			for (LiferayFileItem[] fileItems : _params.values()) {
 				for (int i = 0; i < fileItems.length; i++) {
 					fileItems[i].delete();
 				}
@@ -285,6 +274,6 @@ public class UploadServletRequest extends HttpServletRequestWrapper {
 	private static Log _log = LogFactory.getLog(UploadServletRequest.class);
 
 	private LiferayServletRequest _lsr;
-	private Map _params;
+	private Map<String, LiferayFileItem[]> _params;
 
 }

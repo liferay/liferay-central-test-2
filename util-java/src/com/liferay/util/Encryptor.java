@@ -85,7 +85,7 @@ public class Encryptor {
 		throws ClassNotFoundException, IllegalAccessException,
 			   InstantiationException {
 
-		Class providerClass = null;
+		Class<?> providerClass = null;
 
 		try {
 			providerClass = Class.forName(PROVIDER_CLASS);

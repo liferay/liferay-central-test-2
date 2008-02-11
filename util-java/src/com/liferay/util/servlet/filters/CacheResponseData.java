@@ -22,10 +22,12 @@
 
 package com.liferay.util.servlet.filters;
 
-import com.liferay.util.CollectionFactory;
+import com.liferay.util.servlet.Header;
 
 import java.io.Serializable;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -36,8 +38,8 @@ import java.util.Map;
  */
 public class CacheResponseData implements Serializable {
 
-	public CacheResponseData(byte[] data, String contentType, Map headers) {
-		super();
+	public CacheResponseData(
+		byte[] data, String contentType, Map<String, List<Header>> headers) {
 
 		_data = data;
 		_contentType = contentType;
@@ -52,7 +54,7 @@ public class CacheResponseData implements Serializable {
 		return _contentType;
 	}
 
-	public Map getHeaders() {
+	public Map<String, List<Header>> getHeaders() {
 		return _headers;
 	}
 
@@ -66,7 +68,7 @@ public class CacheResponseData implements Serializable {
 
 	private byte[] _data;
 	private String _contentType;
-	private Map _headers;
-	private Map _attributes = CollectionFactory.getHashMap();
+	private Map<String, List<Header>> _headers;
+	private Map<String, Object> _attributes = new HashMap<String, Object>();
 
 }

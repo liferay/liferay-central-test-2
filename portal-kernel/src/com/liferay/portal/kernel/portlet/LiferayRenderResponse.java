@@ -34,13 +34,13 @@ public interface LiferayRenderResponse extends RenderResponse {
 
 	public void addDateHeader(String name, long date);
 
-	public void setDateHeader(String name, long date);
-
 	public void addHeader(String name, String value);
 
-	public void setHeader(String name, String value);
-
 	public void addIntHeader(String name, int value);
+
+	public void setDateHeader(String name, long date);
+
+	public void setHeader(String name, String value);
 
 	public void setIntHeader(String name, int value);
 

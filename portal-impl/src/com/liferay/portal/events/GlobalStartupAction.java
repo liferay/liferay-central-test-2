@@ -42,7 +42,6 @@ import com.liferay.portal.util.PropsValues;
 import java.io.File;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -56,8 +55,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class GlobalStartupAction extends SimpleAction {
 
-	public static List getAutoDeployListeners() {
-		List list = new ArrayList();
+	public static List<AutoDeployListener> getAutoDeployListeners() {
+		List<AutoDeployListener> list = new ArrayList<AutoDeployListener>();
 
 		String[] autoDeployListeners =
 			PropsUtil.getArray(PropsUtil.AUTO_DEPLOY_LISTENERS);
@@ -82,8 +81,8 @@ public class GlobalStartupAction extends SimpleAction {
 		return list;
 	}
 
-	public static List getHotDeployListeners() {
-		List list = new ArrayList();
+	public static List<HotDeployListener> getHotDeployListeners() {
+		List<HotDeployListener> list = new ArrayList<HotDeployListener>();
 
 		String[] hotDeployListeners =
 			PropsUtil.getArray(PropsUtil.HOT_DEPLOY_LISTENERS);
@@ -116,11 +115,7 @@ public class GlobalStartupAction extends SimpleAction {
 			_log.debug("Registering hot deploy listeners");
 		}
 
-		Iterator itr = getHotDeployListeners().iterator();
-
-		while (itr.hasNext()) {
-			HotDeployListener hotDeployListener = (HotDeployListener)itr.next();
-
+		for (HotDeployListener hotDeployListener : getHotDeployListeners()) {
 			HotDeployUtil.registerListener(hotDeployListener);
 		}
 
@@ -147,7 +142,8 @@ public class GlobalStartupAction extends SimpleAction {
 					PropsUtil.AUTO_DEPLOY_BLACKLIST_THRESHOLD,
 					PropsValues.AUTO_DEPLOY_BLACKLIST_THRESHOLD);
 
-				List autoDeployListeners = getAutoDeployListeners();
+				List<AutoDeployListener> autoDeployListeners =
+					getAutoDeployListeners();
 
 				AutoDeployDir autoDeployDir = new AutoDeployDir(
 					"defaultAutoDeployDir", deployDir, destDir, interval,

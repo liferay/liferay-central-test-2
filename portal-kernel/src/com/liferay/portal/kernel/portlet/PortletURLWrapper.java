@@ -22,6 +22,9 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import java.io.IOException;
+import java.io.Writer;
+
 import java.util.Map;
 
 import javax.portlet.PortletMode;
@@ -43,16 +46,24 @@ public class PortletURLWrapper implements PortletURL {
 		_portletURL = portletURL;
 	}
 
-	public void setWindowState(WindowState windowState)
-		throws WindowStateException {
-
-		_portletURL.setWindowState(windowState);
+	public void addProperty(String key, String value) {
+		_portletURL.addProperty(key, value);
 	}
 
-	public void setPortletMode(PortletMode portletMode)
-		throws PortletModeException{
+	public Map<String, String[]> getParameterMap() {
+		return _portletURL.getParameterMap();
+	}
 
-		_portletURL.setPortletMode(portletMode);
+	public PortletMode getPortletMode() {
+		return _portletURL.getPortletMode();
+	}
+
+	public WindowState getWindowState() {
+		return _portletURL.getWindowState();
+	}
+
+	public void removePublicRenderParameter(String name) {
+		_portletURL.removePublicRenderParameter(name);
 	}
 
 	public void setParameter(String name, String value) {
@@ -63,16 +74,40 @@ public class PortletURLWrapper implements PortletURL {
 		_portletURL.setParameter(name, values);
 	}
 
-	public void setParameters(Map parameters) {
+	public void setParameters(Map<String, String[]> parameters) {
 		_portletURL.setParameters(parameters);
+	}
+
+	public void setPortletMode(PortletMode portletMode)
+		throws PortletModeException{
+
+		_portletURL.setPortletMode(portletMode);
+	}
+
+	public void setProperty(String key, String value) {
+		_portletURL.setProperty(key, value);
 	}
 
 	public void setSecure(boolean secure) throws PortletSecurityException {
 		_portletURL.setSecure(secure);
 	}
 
+	public void setWindowState(WindowState windowState)
+		throws WindowStateException {
+
+		_portletURL.setWindowState(windowState);
+	}
+
 	public String toString() {
 		return _portletURL.toString();
+	}
+
+	public void write(Writer writer) throws IOException {
+		_portletURL.write(writer);
+	}
+
+	public void write(Writer writer, boolean escapeXML) throws IOException {
+		_portletURL.write(writer, escapeXML);
 	}
 
 	private PortletURL _portletURL;

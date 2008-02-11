@@ -37,12 +37,13 @@ import com.liferay.util.servlet.DynamicServletRequest;
 import java.io.IOException;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
 import javax.portlet.PortletException;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletRequestDispatcher;
+import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -65,20 +66,27 @@ import org.apache.struts.Globals;
  */
 public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
-	public PortletRequestDispatcherImpl(RequestDispatcher rd,
-										PortletContextImpl portletCtxImpl) {
+	public PortletRequestDispatcherImpl(
+		RequestDispatcher rd, PortletContextImpl portletCtxImpl) {
 
 		this(rd, portletCtxImpl, null);
 	}
 
-	public PortletRequestDispatcherImpl(RequestDispatcher rd,
-										PortletContextImpl portletCtxImpl,
-										String path) {
+	public PortletRequestDispatcherImpl(
+		RequestDispatcher rd, PortletContextImpl portletCtxImpl, String path) {
 
 		_rd = rd;
 		_portlet = portletCtxImpl.getPortlet();
 		_portletCtxImpl = portletCtxImpl;
 		_path = path;
+	}
+
+	public void forward(PortletRequest req, PortletResponse res)
+		throws IllegalStateException, IOException {
+	}
+
+	public void include(PortletRequest req, PortletResponse res)
+		throws IOException, PortletException {
 	}
 
 	public void include(RenderRequest req, RenderResponse res)
@@ -121,7 +129,8 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					pathNoQueryString = _path.substring(0, pos);
 					queryString = _path.substring(pos + 1, _path.length());
 
-					Map queryParams = new HashMap();
+					Map<String, String[]> queryParams =
+						new HashMap<String, String[]>();
 
 					String[] queryParamsArray =
 						StringUtil.split(queryString, StringPool.AMPERSAND);
@@ -132,7 +141,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 						String name = nameValuePair[0];
 						String value = nameValuePair[1];
 
-						String[] values = (String[])queryParams.get(name);
+						String[] values = queryParams.get(name);
 
 						if (values == null) {
 							queryParams.put(name, new String[] {value});
@@ -163,13 +172,11 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 						dynamicReq = new DynamicServletRequest(httpReq);
 					}
 
-					Iterator itr = queryParams.entrySet().iterator();
+					for (Map.Entry<String, String[]> entry :
+							queryParams.entrySet()) {
 
-					while (itr.hasNext()) {
-						Map.Entry entry = (Map.Entry)itr.next();
-
-						String name = (String)entry.getKey();
-						String[] values = (String[])entry.getValue();
+						String name = entry.getKey();
+						String[] values = entry.getValue();
 
 						String[] oldValues =
 							dynamicReq.getParameterValues(name);
@@ -188,14 +195,10 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					httpReq = dynamicReq;
 				}
 
-				List servletURLPatterns =
+				List<String> servletURLPatterns =
 					reqImpl.getPortlet().getServletURLPatterns();
 
-				Iterator itr = servletURLPatterns.iterator();
-
-				while (itr.hasNext()) {
-					String urlPattern = (String)itr.next();
-
+				for (String urlPattern : servletURLPatterns) {
 					if (urlPattern.endsWith("/*")) {
 						pos = urlPattern.indexOf("/*");
 

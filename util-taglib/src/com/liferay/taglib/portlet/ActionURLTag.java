@@ -51,7 +51,8 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 			boolean action, String windowState, String portletMode, String var,
 			String varImpl, Boolean secure, String portletName, Boolean anchor,
 			Boolean encrypt, long doAsUserId, Boolean portletConfiguration,
-			Map params, boolean writeOutput, PageContext pageContext)
+			Map<String, String[]> params, boolean writeOutput,
+			PageContext pageContext)
 		throws Exception {
 
 		Object returnObj = null;

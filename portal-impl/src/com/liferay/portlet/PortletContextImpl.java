@@ -59,20 +59,74 @@ public class PortletContextImpl implements PortletContext {
 		_ctxName = GetterUtil.getString(_ctx.getServletContextName());
 	}
 
-	public String getServerInfo() {
-		return ReleaseInfo.getServerInfo();
+	public Object getAttribute(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		return _ctx.getAttribute(name);
+	}
+
+	public Enumeration<String> getAttributeNames() {
+		return _ctx.getAttributeNames();
+	}
+
+	public Enumeration<String> getContainerRuntimeOptions() {
+		return null;
+	}
+
+	public String getInitParameter(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		return _ctx.getInitParameter(name);
+	}
+
+	public Enumeration<String> getInitParameterNames() {
+		return _ctx.getInitParameterNames();
 	}
 
 	public int getMajorVersion() {
 		return _MAJOR_VERSION;
 	}
 
+	public String getMimeType(String file) {
+		return _ctx.getMimeType(file);
+	}
+
 	public int getMinorVersion() {
 		return _MINOR_VERSION;
 	}
 
+	public PortletRequestDispatcher getNamedDispatcher(String name) {
+		RequestDispatcher rd = null;
+
+		try {
+			rd = _ctx.getNamedDispatcher(name);
+		}
+		catch (IllegalArgumentException iae) {
+			return null;
+		}
+
+		if (rd != null) {
+			return new PortletRequestDispatcherImpl(rd, this);
+		}
+		else {
+			return null;
+		}
+	}
+
+	public Portlet getPortlet() {
+		return _portlet;
+	}
+
 	public String getPortletContextName() {
 		return _ctxName;
+	}
+
+	public String getRealPath(String path) {
+		return _ctx.getRealPath(path);
 	}
 
 	public PortletRequestDispatcher getRequestDispatcher(String path) {
@@ -113,36 +167,6 @@ public class PortletContextImpl implements PortletContext {
 		}
 	}
 
-	public PortletRequestDispatcher getNamedDispatcher(String name) {
-		RequestDispatcher rd = null;
-
-		try {
-			rd = _ctx.getNamedDispatcher(name);
-		}
-		catch (IllegalArgumentException iae) {
-			return null;
-		}
-
-		if (rd != null) {
-			return new PortletRequestDispatcherImpl(rd, this);
-		}
-		else {
-			return null;
-		}
-	}
-
-	public String getMimeType(String file) {
-		return _ctx.getMimeType(file);
-	}
-
-	public String getRealPath(String path) {
-		return _ctx.getRealPath(path);
-	}
-
-	public Set getResourcePaths(String path) {
-		return _ctx.getResourcePaths(path);
-	}
-
 	public URL getResource(String path) throws MalformedURLException {
 		if ((path == null) || (!path.startsWith(StringPool.SLASH))) {
 			throw new MalformedURLException();
@@ -155,48 +179,12 @@ public class PortletContextImpl implements PortletContext {
 		return _ctx.getResourceAsStream(path);
 	}
 
-	public Object getAttribute(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException();
-		}
-
-		return _ctx.getAttribute(name);
+	public Set<String> getResourcePaths(String path) {
+		return _ctx.getResourcePaths(path);
 	}
 
-	public void removeAttribute(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException();
-		}
-
-		_ctx.removeAttribute(name);
-	}
-
-	public void setAttribute(String name, Object obj) {
-		if (name == null) {
-			throw new IllegalArgumentException();
-		}
-
-		_ctx.setAttribute(name, obj);
-	}
-
-	public Enumeration getAttributeNames() {
-		return _ctx.getAttributeNames();
-	}
-
-	public String getInitParameter(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException();
-		}
-
-		return _ctx.getInitParameter(name);
-	}
-
-	public Enumeration getInitParameterNames() {
-		return _ctx.getInitParameterNames();
-	}
-
-	public Portlet getPortlet() {
-		return _portlet;
+	public String getServerInfo() {
+		return ReleaseInfo.getServerInfo();
 	}
 
 	public ServletContext getServletContext() {
@@ -213,6 +201,22 @@ public class PortletContextImpl implements PortletContext {
 		if (_log.isInfoEnabled()) {
 			_log.info(msg, throwable);
 		}
+	}
+
+	public void removeAttribute(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		_ctx.removeAttribute(name);
+	}
+
+	public void setAttribute(String name, Object obj) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		_ctx.setAttribute(name, obj);
 	}
 
 	private static int _MAJOR_VERSION = 1;

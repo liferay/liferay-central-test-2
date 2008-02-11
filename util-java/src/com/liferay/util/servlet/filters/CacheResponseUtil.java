@@ -27,7 +27,6 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -44,14 +43,11 @@ public class CacheResponseUtil {
 	public static void write(HttpServletResponse res, CacheResponseData data)
 		throws IOException {
 
-		Map headers = data.getHeaders();
+		Map<String, List<Header>> headers = data.getHeaders();
 
-		Iterator itr = headers.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String headerKey = (String)itr.next();
-
-			List headerValues = (List)headers.get(headerKey);
+		for (Map.Entry<String, List<Header>> entry : headers.entrySet()) {
+			String headerKey = entry.getKey();
+			List<Header> headerValues = entry.getValue();
 
 			for (int i = 0; i < headerValues.size(); i++) {
 				Header header = (Header)headerValues.get(i);

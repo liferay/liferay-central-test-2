@@ -37,7 +37,6 @@
 		<ant dir="util-bridges" target="clean" inheritAll="false" />
 		<ant dir="util-java" target="clean" inheritAll="false" />
 		<ant dir="util-taglib" target="clean" inheritAll="false" />
-		<ant dir="util-wsrp" target="clean" inheritAll="false" />
 
 		<ant dir="filters" target="clean" inheritAll="false" />
 
@@ -231,7 +230,6 @@
 
 		<ant dir="util-java" target="compile" inheritAll="false" />
 		<ant dir="util-bridges" target="compile" inheritAll="false" />
-		<ant dir="util-wsrp" target="compile" inheritAll="false" />
 
 		<ant dir="portal-impl" target="compile-common" inheritAll="false" />
 
@@ -255,7 +253,6 @@
 		<ant dir="util-bridges" target="jar" inheritAll="false" />
 		<ant dir="util-java" target="jar" inheritAll="false" />
 		<ant dir="util-taglib" target="jar" inheritAll="false" />
-		<ant dir="util-wsrp" target="jar" inheritAll="false" />
 
 		<ant dir="filters" target="jar" inheritAll="false" />
 
@@ -280,7 +277,6 @@
 		<ant dir="util-bridges" target="java2html" inheritAll="false" />
 		<ant dir="util-java" target="java2html" inheritAll="false" />
 		<ant dir="util-taglib" target="java2html" inheritAll="false" />
-		<ant dir="util-wsrp" target="java2html" inheritAll="false" />
 
 		<ant dir="filters" target="java2html" inheritAll="false" />
 
@@ -300,7 +296,6 @@
 		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
 		<ant dir="util-java" target="javadoc" inheritAll="false" />
 		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
-		<ant dir="util-wsrp" target="javadoc" inheritAll="false" />
 
 		<ant dir="filters" target="javadoc" inheritAll="false" />
 
@@ -329,7 +324,6 @@
 		<ant dir="util-bridges" target="deploy" inheritAll="false" />
 		<ant dir="util-java" target="deploy" inheritAll="false" />
 		<ant dir="util-taglib" target="deploy" inheritAll="false" />
-		<ant dir="util-wsrp" target="deploy" inheritAll="false" />
 
 		<ant dir="filters" target="deploy" inheritAll="false" />
 
@@ -1203,7 +1197,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<fileset dir="util-bridges" includes="util-bridges.jar" />
 			<fileset dir="util-java" includes="util-java.jar" />
 			<fileset dir="util-taglib" includes="util-taglib.jar" />
-			<fileset dir="util-wsrp" includes="util-wsrp.jar" />
 		</copy>
 
 		<copy todir="${lp.ext.dir}/modules" preservelastmodified="true">

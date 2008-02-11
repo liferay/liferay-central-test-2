@@ -32,8 +32,6 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
-import com.liferay.portal.kernel.portlet.PortletRequestWrapper;
-import com.liferay.portal.kernel.portlet.PortletResponseWrapper;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -86,9 +84,7 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.UserAttributes;
-import com.liferay.portlet.wsrp.URLGeneratorImpl;
 import com.liferay.util.BeanUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.Encryptor;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
@@ -109,13 +105,12 @@ import java.net.URL;
 
 import java.rmi.RemoteException;
 
-import java.security.Key;
-
 import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
@@ -138,6 +133,8 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
+import javax.portlet.filter.PortletRequestWrapper;
+import javax.portlet.filter.PortletResponseWrapper;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletContext;
@@ -155,8 +152,6 @@ import org.apache.struts.Globals;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.io.SAXReader;
-
-import org.hibernate.util.FastHashMap;
 
 /**
  * <a href="PortalUtil.java.html"><b><i>View Source</i></b></a>
@@ -198,14 +193,15 @@ public class PortalUtil {
 		try {
 			ActionResponseImpl resImpl = (ActionResponseImpl)res;
 
-			Map renderParameters = resImpl.getRenderParameters();
+			Map<String, String[]> renderParameters =
+				resImpl.getRenderParameterMap();
 
 			res.setRenderParameter("p_p_action", "1");
 
-			Enumeration enu = req.getParameterNames();
+			Enumeration<String> enu = req.getParameterNames();
 
 			while (enu.hasMoreElements()) {
-				String param = (String)enu.nextElement();
+				String param = enu.nextElement();
 				String[] values = req.getParameterValues(param);
 
 				if (renderParameters.get(
@@ -220,24 +216,6 @@ public class PortalUtil {
 			// This should only happen if the developer called
 			// sendRedirect of javax.portlet.ActionResponse
 
-		}
-	}
-
-	public static String createSecureProxyURL(
-		String url, Key key, boolean secure) {
-
-		// Use this method to fetch external content that may not be available
-		// in secure mode. See how the Weather portlet fetches images.
-
-		if (!secure) {
-			return url;
-		}
-		else {
-			Map params = CollectionFactory.getHashMap();
-
-			params.put(org.apache.wsrp4j.util.Constants.URL, url);
-
-			return URLGeneratorImpl.getResourceProxyURL(params, key);
 		}
 	}
 
@@ -258,7 +236,7 @@ public class PortalUtil {
 		}
 	}
 
-	public static long getClassNameId(Class classObj) {
+	public static long getClassNameId(Class<?> classObj) {
 		return getClassNameId(classObj.getName());
 	}
 
@@ -526,7 +504,7 @@ public class PortalUtil {
 		else if (req instanceof PortletRequestWrapper) {
 			PortletRequestWrapper reqWrapper = (PortletRequestWrapper)req;
 
-			return getHttpServletRequest(reqWrapper.getPortletRequest());
+			return getHttpServletRequest(reqWrapper.getRequest());
 		}
 		else {
 			throw new RuntimeException(
@@ -551,7 +529,7 @@ public class PortalUtil {
 		else if (res instanceof PortletResponseWrapper) {
 			PortletResponseWrapper resWrapper = (PortletResponseWrapper)res;
 
-			return getHttpServletResponse(resWrapper.getPortletResponse());
+			return getHttpServletResponse(resWrapper.getResponse());
 		}
 		else if (res instanceof RenderResponse) {
 			RenderResponseImpl resImpl = getRenderResponseImpl(
@@ -632,7 +610,7 @@ public class PortalUtil {
 	public static String getLayoutActualURL(Layout layout, String mainPath)
 		throws PortalException, SystemException {
 
-		Map vars = new FastHashMap();
+		Map<Object, Object> vars = new HashMap<Object, Object>();
 
 		vars.put("liferay:mainPath", mainPath);
 		vars.put("liferay:plid", String.valueOf(layout.getPlid()));
@@ -656,18 +634,18 @@ public class PortalUtil {
 
 	public static String getLayoutActualURL(
 			long groupId, boolean privateLayout, String mainPath,
-			String friendlyURL, Map params)
+			String friendlyURL, Map<String, String> params)
 		throws PortalException, SystemException {
 
 		Layout layout = null;
 		String queryString = StringPool.BLANK;
 
 		if (Validator.isNull(friendlyURL)) {
-			List layouts = LayoutLocalServiceUtil.getLayouts(
+			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 				groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() > 0) {
-				layout = (Layout)layouts.get(0);
+				layout = layouts.get(0);
 			}
 			else {
 				throw new NoSuchLayoutException(
@@ -1016,19 +994,20 @@ public class PortalUtil {
 	}
 
 	public static Object[] getPortletFriendlyURLMapper(
-			long groupId, boolean privateLayout, String url, Map params)
+			long groupId, boolean privateLayout, String url,
+			Map<String, String> params)
 		throws PortalException, SystemException {
 
 		String friendlyURL = url;
 		String queryString = StringPool.BLANK;
 
-		List friendlyURLMappers =
+		List<FriendlyURLMapper> friendlyURLMappers =
 			PortletLocalServiceUtil.getFriendlyURLMappers();
 
-		Iterator itr = friendlyURLMappers.iterator();
+		Iterator<FriendlyURLMapper> itr = friendlyURLMappers.iterator();
 
 		while (itr.hasNext()) {
-			FriendlyURLMapper friendlyURLMapper = (FriendlyURLMapper)itr.next();
+			FriendlyURLMapper friendlyURLMapper = itr.next();
 
 			if (url.endsWith(
 					StringPool.SLASH + friendlyURLMapper.getMapping())) {
@@ -1043,13 +1022,13 @@ public class PortalUtil {
 			if (pos != -1) {
 				friendlyURL = url.substring(0, pos);
 
-				Map actualParams = null;
+				Map<String, String> actualParams = null;
 
 				if (params != null) {
-					actualParams = new HashMap(params);
+					actualParams = new HashMap<String, String>(params);
 				}
 				else {
-					actualParams = new HashMap();
+					actualParams = new HashMap<String, String>();
 				}
 
 				/*Object action = actualParams.get("p_p_action");
@@ -1245,7 +1224,7 @@ public class PortalUtil {
 				Method method = MethodCache.get(
 					res.getClass().getName(), "getResponse");
 
-				Object obj = method.invoke(res, null);
+				Object obj = method.invoke(res, (Object[])null);
 
 				resImpl = getRenderResponseImpl((RenderResponse)obj);
 			}
@@ -1325,10 +1304,10 @@ public class PortalUtil {
 
 		int strutsActionCount = 0;
 
-		Enumeration enu = req.getParameterNames();
+		Enumeration<String> enu = req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			int pos = name.indexOf("_struts_action");
 
@@ -1950,8 +1929,7 @@ public class PortalUtil {
 		PortletPreferencesWrapper prefsWrapper =
 			(PortletPreferencesWrapper)prefs;
 
-		PortletPreferencesImpl prefsImpl =
-			(PortletPreferencesImpl)prefsWrapper.getPreferencesImpl();
+		PortletPreferencesImpl prefsImpl = prefsWrapper.getPreferencesImpl();
 
 		prefsImpl.store();
 	}
@@ -2457,7 +2435,7 @@ public class PortalUtil {
 
 		// Reserved parameter names
 
-		_reservedParams = CollectionFactory.getHashSet();
+		_reservedParams = new HashSet<String>();
 
 		_reservedParams.add("p_l_id");
 		_reservedParams.add("p_l_reset");
@@ -2499,9 +2477,10 @@ public class PortalUtil {
 			redirectParam = getPortletNamespace(portletId) + redirectParam;
 		}
 
-		Map parameterMap = HttpUtil.parameterMapFromString(queryString);
+		Map<String, String[]> parameterMap = HttpUtil.parameterMapFromString(
+			queryString);
 
-		String[] redirectValues = (String[])parameterMap.get(redirectParam);
+		String[] redirectValues = parameterMap.get(redirectParam);
 
 		if ((redirectValues != null) && (redirectValues.length > 0)) {
 
@@ -2518,11 +2497,10 @@ public class PortalUtil {
 				String subqueryString = redirect.substring(
 					pos + 1, redirect.length());
 
-				Map subparameterMap = HttpUtil.parameterMapFromString(
-					subqueryString);
+				Map<String, String[]> subparameterMap =
+					HttpUtil.parameterMapFromString(subqueryString);
 
-				String[] subredirectValues = (String[])subparameterMap.get(
-					redirectParam);
+				String[] subredirectValues = subparameterMap.get(redirectParam);
 
 				if ((subredirectValues != null) &&
 					(subredirectValues.length > 0)) {
@@ -2663,6 +2641,6 @@ public class PortalUtil {
 	private String[] _sortedSystemGroups;
 	private String[] _sortedSystemOrganizationRoles;
 	private String[] _sortedSystemRoles;
-	private Set _reservedParams;
+	private Set<String> _reservedParams;
 
 }

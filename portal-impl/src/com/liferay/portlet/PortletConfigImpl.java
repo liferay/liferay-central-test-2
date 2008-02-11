@@ -29,12 +29,13 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.util.CollectionFactory;
+import com.liferay.portal.util.PortalUtil;
 
 import java.io.ByteArrayInputStream;
 
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
@@ -42,6 +43,8 @@ import java.util.ResourceBundle;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
+
+import javax.xml.namespace.QName;
 
 /**
  * <a href="PortletConfigImpl.java.html"><b><i>View Source</i></b></a>
@@ -51,9 +54,10 @@ import javax.portlet.PortletContext;
  */
 public class PortletConfigImpl implements PortletConfig {
 
-	public PortletConfigImpl(String portletName, PortletContext portletCtx,
-							 Map params, String resourceBundle,
-							 PortletInfo portletInfo) {
+	public PortletConfigImpl(
+		String portletName, PortletContext portletCtx,
+		Map<String, String> params, String resourceBundle,
+		PortletInfo portletInfo) {
 
 		_rootPortletId = PortletImpl.getRootPortletId(portletName);
 		_portletId = portletName;
@@ -71,7 +75,31 @@ public class PortletConfigImpl implements PortletConfig {
 		_params = params;
 		_resourceBundle = resourceBundle;
 		_portletInfo = portletInfo;
-		_bundlePool = CollectionFactory.getHashMap();
+		_bundlePool = new HashMap<String, ResourceBundle>();
+	}
+
+	public Map<String, String[]> getContainerRuntimeOptions() {
+		return null;
+	}
+
+	public String getDefaultNamespace() {
+		return PortalUtil.getPortletNamespace(_rootPortletId);
+	}
+
+	public String getInitParameter(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		return _params.get(name);
+	}
+
+	public Enumeration<String> getInitParameterNames() {
+		return Collections.enumeration(_params.keySet());
+	}
+
+	public PortletContext getPortletContext() {
+		return _portletCtx;
 	}
 
 	public String getPortletId() {
@@ -82,19 +110,23 @@ public class PortletConfigImpl implements PortletConfig {
 		return _portletName;
 	}
 
-	public boolean isWARFile() {
-		return _warFile;
+	public Enumeration<QName> getProcessingEventQNames() {
+		return null;
 	}
 
-	public PortletContext getPortletContext() {
-		return _portletCtx;
+	public Enumeration<String> getPublicRenderParameterNames() {
+		return null;
+	}
+
+	public Enumeration<QName> getPublishingEventQNames() {
+		return null;
 	}
 
 	public ResourceBundle getResourceBundle(Locale locale) {
 		if (_resourceBundle == null) {
 			String poolId = _portletId;
 
-			ResourceBundle bundle = (ResourceBundle)_bundlePool.get(poolId);
+			ResourceBundle bundle = _bundlePool.get(poolId);
 
 			if (bundle == null) {
 				StringMaker sm = new StringMaker();
@@ -130,7 +162,7 @@ public class PortletConfigImpl implements PortletConfig {
 		else {
 			String poolId = _portletId + "." + locale.toString();
 
-			ResourceBundle bundle = (ResourceBundle)_bundlePool.get(poolId);
+			ResourceBundle bundle = _bundlePool.get(poolId);
 
 			if (bundle == null) {
 				if (!_warFile &&
@@ -158,16 +190,12 @@ public class PortletConfigImpl implements PortletConfig {
 		}
 	}
 
-	public String getInitParameter(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException();
-		}
-
-		return (String)_params.get(name);
+	public Enumeration<Locale> getSupportedLocales() {
+		return null;
 	}
 
-	public Enumeration getInitParameterNames() {
-		return Collections.enumeration(_params.keySet());
+	public boolean isWARFile() {
+		return _warFile;
 	}
 
 	private String _rootPortletId;
@@ -175,9 +203,9 @@ public class PortletConfigImpl implements PortletConfig {
 	private String _portletName;
 	private boolean _warFile;
 	private PortletContext _portletCtx;
-	private Map _params;
+	private Map<String, String> _params;
 	private String _resourceBundle;
 	private PortletInfo _portletInfo;
-	private Map _bundlePool;
+	private Map<String, ResourceBundle> _bundlePool;
 
 }

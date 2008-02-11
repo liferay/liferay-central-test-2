@@ -23,7 +23,6 @@
 package com.liferay.util.servlet.filters;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.Header;
 
 import java.io.IOException;
@@ -31,6 +30,7 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,10 +53,10 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	}
 
 	public void addDateHeader(String name, long value) {
-		List values = (List)_headers.get(name);
+		List<Header> values = _headers.get(name);
 
 		if (values == null) {
-			values = new ArrayList();
+			values = new ArrayList<Header>();
 
 			_headers.put(name, values);
 		}
@@ -70,10 +70,10 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	}
 
 	public void addHeader(String name, String value) {
-		List values = (List)_headers.get(name);
+		List<Header> values = _headers.get(name);
 
 		if (values == null) {
-			values = new ArrayList();
+			values = new ArrayList<Header>();
 
 			_headers.put(name, values);
 		}
@@ -87,10 +87,10 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	}
 
 	public void addIntHeader(String name, int value) {
-		List values = (List)_headers.get(name);
+		List<Header> values = _headers.get(name);
 
 		if (values == null) {
-			values = new ArrayList();
+			values = new ArrayList<Header>();
 
 			_headers.put(name, values);
 		}
@@ -132,7 +132,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		return _bam.toByteArray();
 	}
 
-	public Map getHeaders() {
+	public Map<String, List<Header>> getHeaders() {
 		return _headers;
 	}
 
@@ -142,7 +142,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		}
 
 		if (_stream == null) {
-			_stream = _createOutputStream();
+			_stream = createOutputStream();
 		}
 
 		return _stream;
@@ -157,7 +157,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 			throw new IllegalStateException();
 		}
 
-		_stream = _createOutputStream();
+		_stream = createOutputStream();
 
 		_writer = new PrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
@@ -185,7 +185,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	}
 
 	public void setDateHeader(String name, long value) {
-		List values = new ArrayList();
+		List<Header> values = new ArrayList<Header>();
 
 		_headers.put(name, values);
 
@@ -198,7 +198,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	}
 
 	public void setHeader(String name, String value) {
-		List values = new ArrayList();
+		List<Header> values = new ArrayList<Header>();
 
 		_headers.put(name, values);
 
@@ -211,7 +211,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	}
 
 	public void setIntHeader(String name, int value) {
-		List values = new ArrayList();
+		List<Header> values = new ArrayList<Header>();
 
 		_headers.put(name, values);
 
@@ -223,7 +223,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 		values.add(header);
 	}
 
-	private CacheResponseStream _createOutputStream() throws IOException {
+	protected CacheResponseStream createOutputStream() throws IOException {
 		return new CacheResponseStream(_bam);
 	}
 
@@ -232,6 +232,7 @@ public class CacheResponse extends HttpServletResponseWrapper {
 	private CacheResponseStream _stream;
 	private PrintWriter _writer;
 	private String _contentType;
-	private Map _headers = CollectionFactory.getHashMap();
+	private Map<String, List<Header>> _headers =
+		new HashMap<String, List<Header>>();
 
 }

@@ -460,11 +460,6 @@
 		<load-on-startup>9</load-on-startup>
 	</servlet>
 	<servlet>
-		<servlet-name>ResourceProxyServlet</servlet-name>
-		<servlet-class>com.liferay.portal.wsrp.servlet.ResourceProxyServlet</servlet-class>
-		<load-on-startup>10</load-on-startup>
-	</servlet>
-	<servlet>
 		<servlet-name>PortletBridgeServlet</servlet-name>
 		<servlet-class>org.portletbridge.portlet.PortletBridgeServlet</servlet-class>
 		<init-param>
@@ -487,17 +482,17 @@
 			<param-name>ignorePostToGetRequestHeaders</param-name>
 			<param-value>content-type,content-length</param-value>
 		</init-param>
-		<load-on-startup>11</load-on-startup>
+		<load-on-startup>10</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>SoftwareCatalogServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.SoftwareCatalogServlet</servlet-class>
-		<load-on-startup>12</load-on-startup>
+		<load-on-startup>11</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>DisplayChart</servlet-name>
 		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
-		<load-on-startup>13</load-on-startup>
+		<load-on-startup>12</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
@@ -530,10 +525,6 @@
 	<servlet-mapping>
 		<servlet-name>PortalDelegatorServlet</servlet-name>
 		<url-pattern>/delegate/*</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
-		<servlet-name>ResourceProxyServlet</servlet-name>
-		<url-pattern>/wsrp/resource_proxy/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>PortletBridgeServlet</servlet-name>

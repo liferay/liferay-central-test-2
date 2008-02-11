@@ -42,11 +42,6 @@ public class PortalUtil_IW {
 		PortalUtil.copyRequestParameters(req, res);
 	}
 
-	public java.lang.String createSecureProxyURL(java.lang.String url,
-		java.security.Key key, boolean secure) {
-		return PortalUtil.createSecureProxyURL(url, key, secure);
-	}
-
 	public java.lang.String getCDNHost() {
 		return PortalUtil.getCDNHost();
 	}

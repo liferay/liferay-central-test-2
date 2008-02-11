@@ -60,7 +60,7 @@ public class MethodInvoker {
 		String methodName = methodWrapper.getMethodName();
 		Object[] args = methodWrapper.getArgs();
 
-		List parameterTypes = new ArrayList();
+		List<Object> parameterTypes = new ArrayList<Object>();
 
 		for (int i = 0; i < args.length; i++) {
 			if (args[i] == null) {
@@ -69,7 +69,7 @@ public class MethodInvoker {
 						" on position " + i + " because it is null");
 			}
 
-			Class argClass = args[i].getClass();
+			Class<?> argClass = args[i].getClass();
 
 			if (ClassUtil.isSubclass(argClass, PrimitiveWrapper.class)) {
 				parameterTypes.add(argClass.getField("TYPE").get(args[i]));
@@ -97,7 +97,7 @@ public class MethodInvoker {
 		Object classObj = contextClassLoader.loadClass(className);
 
 		if (newInstance) {
-			classObj = ((Class)classObj).newInstance();
+			classObj = ((Class<?>)classObj).newInstance();
 		}
 
 		Method method = null;
@@ -116,11 +116,11 @@ public class MethodInvoker {
 				methods = classObj.getClass().getMethods();
 			}
 			else {
-				methods = ((Class)classObj).getMethods();
+				methods = ((Class<?>)classObj).getMethods();
 			}
 
 			for (int i = 0; i < methods.length; i++) {
-				Class[] methodParameterTypes = methods[i].getParameterTypes();
+				Class<?>[] methodParameterTypes = methods[i].getParameterTypes();
 
 				if (methods[i].getName().equals(methodName) &&
 					methodParameterTypes.length == parameterTypes.size()) {
@@ -128,8 +128,8 @@ public class MethodInvoker {
 					boolean correctParams = true;
 
 					for (int j = 0; j < parameterTypes.size(); j++) {
-						Class a = (Class)parameterTypes.get(j);
-						Class b = methodParameterTypes[j];
+						Class<?> a = (Class<?>)parameterTypes.get(j);
+						Class<?> b = methodParameterTypes[j];
 
 						if (!ClassUtil.isSubclass(a, b)) {
 							correctParams = false;

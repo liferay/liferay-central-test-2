@@ -59,7 +59,7 @@ public class NullSession implements HttpSession {
 		return _attributes.get(name);
 	}
 
-	public Enumeration getAttributeNames() {
+	public Enumeration<String> getAttributeNames() {
 		return Collections.enumeration(_attributes.keySet());
 	}
 
@@ -95,9 +95,9 @@ public class NullSession implements HttpSession {
 	}
 
 	public String[] getValueNames() {
-		List names = ListUtil.fromEnumeration(getAttributeNames());
+		List<String> names = ListUtil.fromEnumeration(getAttributeNames());
 
-		return (String[])names.toArray(new String[0]);
+		return names.toArray(new String[0]);
 	}
 
 	public void invalidate() {
@@ -128,7 +128,7 @@ public class NullSession implements HttpSession {
 		_maxInactiveInterval = maxInactiveInterval;
 	}
 
-	private Map _attributes;
+	private Map<String, Object> _attributes;
 	private long _creationTime;
 	private String _id;
 	private long _lastAccessedTime;

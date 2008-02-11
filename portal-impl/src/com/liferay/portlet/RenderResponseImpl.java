@@ -37,7 +37,6 @@ import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.CollectionFactory;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -45,21 +44,29 @@ import java.io.PrintWriter;
 
 import java.lang.reflect.Constructor;
 
+import java.util.Collection;
 import java.util.Enumeration;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Locale;
 import java.util.Map;
 
+import javax.portlet.CacheControl;
+import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
+import javax.portlet.ResourceURL;
 import javax.portlet.WindowStateException;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.w3c.dom.DOMException;
+import org.w3c.dom.Element;
 
 /**
  * <a href="RenderResponseImpl.java.html"><b><i>View Source</i></b></a>
@@ -69,15 +76,99 @@ import org.apache.commons.logging.LogFactory;
  */
 public class RenderResponseImpl implements LiferayRenderResponse {
 
-	public void addProperty(String key, String value) {
-	}
-
-	public void setProperty(String key, String value) {
-		if (_properties == null) {
-			_properties = CollectionFactory.getHashMap();
+	public void addDateHeader(String name, long date) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
 		}
 
-		_properties.put(key, new String[] {value});
+		if (_headers.containsKey(name)) {
+			Long[] values = (Long[])_headers.get(name);
+
+			ArrayUtil.append(values, new Long(date));
+
+			_headers.put(name, values);
+		}
+		else {
+			setDateHeader(name, date);
+		}
+	}
+
+	public void addHeader(String name, String value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (_headers.containsKey(name)) {
+			String[] values = (String[])_headers.get(name);
+
+			ArrayUtil.append(values, value);
+
+			_headers.put(name, values);
+		}
+		else {
+			setHeader(name, value);
+		}
+	}
+
+	public void addIntHeader(String name, int value) {
+		if (Validator.isNull(name)) {
+			throw new IllegalArgumentException();
+		}
+
+		if (_headers.containsKey(name)) {
+			Integer[] values = (Integer[])_headers.get(name);
+
+			ArrayUtil.append(values, new Integer(value));
+
+			_headers.put(name, values);
+		}
+		else {
+			setIntHeader(name, value);
+		}
+	}
+
+	public void addProperty(Cookie cookie) {
+		if (cookie == null) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public void addProperty(String key, Element element) {
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public void addProperty(String key, String value) {
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
+	}
+
+	public PortletURL createActionURL() {
+		return createActionURL(_portletName);
+	}
+
+	public PortletURL createActionURL(String portletName) {
+		PortletURL portletURL = createPortletURL(portletName, true);
+
+		try {
+			portletURL.setWindowState(_req.getWindowState());
+		}
+		catch (WindowStateException wse) {
+		}
+
+		try {
+			portletURL.setPortletMode(_req.getPortletMode());
+		}
+		catch (PortletModeException pme) {
+		}
+
+		return portletURL;
+	}
+
+	public Element createElement(String tagName) throws DOMException {
+		return null;
 	}
 
 	public PortletURL createPortletURL(boolean action) {
@@ -94,12 +185,12 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		String portletURLClass = portlet.getPortletURLClass();
 
 		if (portlet.getPortletId().equals(portletName) &&
-				Validator.isNotNull(portletURLClass)) {
+			Validator.isNotNull(portletURLClass)) {
 
 			try {
-				Class portletURLClassObj = Class.forName(portletURLClass);
+				Class<?> portletURLClassObj = Class.forName(portletURLClass);
 
-				Constructor constructor = portletURLClassObj.getConstructor(
+				Constructor<?> constructor = portletURLClassObj.getConstructor(
 					new Class[] {
 						com.liferay.portlet.RenderResponseImpl.class,
 						boolean.class
@@ -143,28 +234,6 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		return new PortletURLImpl(_req, portletName, plid, action);
 	}
 
-	public PortletURL createActionURL() {
-		return createActionURL(_portletName);
-	}
-
-	public PortletURL createActionURL(String portletName) {
-		PortletURL portletURL = createPortletURL(portletName, true);
-
-		try {
-			portletURL.setWindowState(_req.getWindowState());
-		}
-		catch (WindowStateException wse) {
-		}
-
-		try {
-			portletURL.setPortletMode(_req.getPortletMode());
-		}
-		catch (PortletModeException pme) {
-		}
-
-		return portletURL;
-	}
-
 	public PortletURL createRenderURL() {
 		return createRenderURL(_portletName);
 	}
@@ -187,16 +256,8 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		return portletURL;
 	}
 
-	public String getNamespace() {
-		if (_namespace == null) {
-			_namespace = PortalUtil.getPortletNamespace(_portletName);
-		}
-
-		return _namespace;
-	}
-
-	public void setURLEncoder(URLEncoder urlEncoder) {
-		_urlEncoder = urlEncoder;
+	public ResourceURL createResourceURL() {
+		return null;
 	}
 
 	public String encodeURL(String path) {
@@ -218,6 +279,14 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		}
 	}
 
+	public int getBufferSize() {
+		return _res.getBufferSize();
+	}
+
+	public CacheControl getCacheControl() {
+		return null;
+	}
+
 	public String getCharacterEncoding() {
 		return _res.getCharacterEncoding();
 	}
@@ -226,17 +295,106 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		return _contentType;
 	}
 
+	public HttpServletResponse getHttpServletResponse() {
+		return _res;
+	}
+
+	public Locale getLocale() {
+		return _req.getLocale();
+	}
+
+	public String getNamespace() {
+		if (_namespace == null) {
+			_namespace = PortalUtil.getPortletNamespace(_portletName);
+		}
+
+		return _namespace;
+	}
+
+	public Portlet getPortlet() {
+		if (_portlet == null) {
+			try {
+				_portlet = PortletLocalServiceUtil.getPortletById(
+					_companyId, _portletName);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return _portlet;
+	}
+
+	public OutputStream getPortletOutputStream() throws IOException {
+		if (_calledGetWriter) {
+			throw new IllegalStateException();
+		}
+
+		if (_contentType == null) {
+			throw new IllegalStateException();
+		}
+
+		_calledGetPortletOutputStream = true;
+
+		return _res.getOutputStream();
+	}
+
+	public String getResourceName() {
+		return _resourceName;
+	}
+
+	public String getTitle() {
+		return _title;
+	}
+
+	public Boolean getUseDefaultTemplate() {
+		return _useDefaultTemplate;
+	}
+
+	public PrintWriter getWriter() throws IOException {
+		if (_calledGetPortletOutputStream) {
+			throw new IllegalStateException();
+		}
+
+		if (_contentType == null) {
+			throw new IllegalStateException();
+		}
+
+		_calledGetWriter = true;
+
+		return _res.getWriter();
+	}
+
+	public void flushBuffer() throws IOException {
+		_res.flushBuffer();
+	}
+
+	public boolean isCommitted() {
+		return false;
+	}
+
+	public void reset() {
+	}
+
+	public void resetBuffer() {
+		_res.resetBuffer();
+	}
+
+	public void setBufferSize(int size) {
+		_res.setBufferSize(size);
+	}
+
 	public void setContentType(String contentType) {
 		if (Validator.isNull(contentType)) {
 			throw new IllegalArgumentException();
 		}
 
-		Enumeration enu = _req.getResponseContentTypes();
+		Enumeration<String> enu = _req.getResponseContentTypes();
 
 		boolean valid = false;
 
 		while (enu.hasMoreElements()) {
-			String resContentType = (String)enu.nextElement();
+			String resContentType = enu.nextElement();
 
 			if (contentType.startsWith(resContentType)) {
 				valid = true;
@@ -256,121 +414,6 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		_contentType = contentType;
 	}
 
-	public Locale getLocale() {
-		return _req.getLocale();
-	}
-
-	public OutputStream getPortletOutputStream() throws IOException {
-		if (_calledGetWriter) {
-			throw new IllegalStateException();
-		}
-
-		if (_contentType == null) {
-			throw new IllegalStateException();
-		}
-
-		_calledGetPortletOutputStream = true;
-
-		return _res.getOutputStream();
-	}
-
-	public String getTitle() {
-		return _title;
-	}
-
-	public void setTitle(String title) {
-		_title = title;
-
-		// See LEP-2188
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
-
-		portletDisplay.setTitle(_title);
-	}
-
-	public Boolean getUseDefaultTemplate() {
-		return _useDefaultTemplate;
-	}
-
-	public void setUseDefaultTemplate(Boolean useDefaultTemplate) {
-		_useDefaultTemplate = useDefaultTemplate;
-	}
-
-	public PrintWriter getWriter() throws IOException {
-		if (_calledGetPortletOutputStream) {
-			throw new IllegalStateException();
-		}
-
-		if (_contentType == null) {
-			throw new IllegalStateException();
-		}
-
-		_calledGetWriter = true;
-
-		return _res.getWriter();
-	}
-
-	public int getBufferSize() {
-		return _res.getBufferSize();
-	}
-
-	public void setBufferSize(int size) {
-		_res.setBufferSize(size);
-	}
-
-	public void flushBuffer() throws IOException {
-		_res.flushBuffer();
-	}
-
-	public void resetBuffer() {
-		_res.resetBuffer();
-	}
-
-	public boolean isCommitted() {
-		return false;
-	}
-
-	public void reset() {
-	}
-
-	public HttpServletResponse getHttpServletResponse() {
-		return _res;
-	}
-
-	public Portlet getPortlet() {
-		if (_portlet == null) {
-			try {
-				_portlet = PortletLocalServiceUtil.getPortletById(
-					_companyId, _portletName);
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return _portlet;
-	}
-
-	public void addDateHeader(String name, long date) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (_headers.containsKey(name)) {
-			Long[] values = (Long[])_headers.get(name);
-
-			ArrayUtil.append(values, new Long(date));
-
-			_headers.put(name, values);
-		}
-		else {
-			setDateHeader(name, date);
-		}
-	}
-
 	public void setDateHeader(String name, long date) {
 		if (Validator.isNull(name)) {
 			throw new IllegalArgumentException();
@@ -381,23 +424,6 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		}
 		else {
 			_headers.put(name, new Long[] {new Long(date)});
-		}
-	}
-
-	public void addHeader(String name, String value) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (_headers.containsKey(name)) {
-			String[] values = (String[])_headers.get(name);
-
-			ArrayUtil.append(values, value);
-
-			_headers.put(name, values);
-		}
-		else {
-			setHeader(name, value);
 		}
 	}
 
@@ -414,23 +440,6 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		}
 	}
 
-	public void addIntHeader(String name, int value) {
-		if (Validator.isNull(name)) {
-			throw new IllegalArgumentException();
-		}
-
-		if (_headers.containsKey(name)) {
-			Integer[] values = (Integer[])_headers.get(name);
-
-			ArrayUtil.append(values, new Integer(value));
-
-			_headers.put(name, values);
-		}
-		else {
-			setIntHeader(name, value);
-		}
-	}
-
 	public void setIntHeader(String name, int value) {
 		if (Validator.isNull(name)) {
 			throw new IllegalArgumentException();
@@ -444,21 +453,50 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		}
 	}
 
-	public String getResourceName() {
-		return _resourceName;
+	public void setProperty(String key, String value) {
+		if (key == null) {
+			throw new IllegalArgumentException();
+		}
+
+		if (_properties == null) {
+			_properties = new HashMap<String, String[]>();
+		}
+
+		_properties.put(key, new String[] {value});
 	}
 
 	public void setResourceName(String resourceName) {
 		_resourceName = resourceName;
 	}
 
+	public void setNextPossiblePortletModes(
+		Collection<PortletMode> portletModes) {
+	}
+
+	public void setTitle(String title) {
+		_title = title;
+
+		// See LEP-2188
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
+
+		portletDisplay.setTitle(_title);
+	}
+
+	public void setURLEncoder(URLEncoder urlEncoder) {
+		_urlEncoder = urlEncoder;
+	}
+
+	public void setUseDefaultTemplate(Boolean useDefaultTemplate) {
+		_useDefaultTemplate = useDefaultTemplate;
+	}
+
 	public void transferHeaders(HttpServletResponse res) {
-		Iterator itr = _headers.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String name = (String)entry.getKey();
+		for (Map.Entry<String, Object> entry : _headers.entrySet()) {
+			String name = entry.getKey();
 			Object values = entry.getValue();
 
 			if (values instanceof Integer[]) {
@@ -506,6 +544,30 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		}
 	}
 
+	protected long getCompanyId() {
+		return _companyId;
+	}
+
+	protected long getPlid() {
+		return _plid;
+	}
+
+	protected String getPortletName() {
+		return _portletName;
+	}
+
+	protected Map<String, String[]> getProperties() {
+		return _properties;
+	}
+
+	protected RenderRequestImpl getRenderRequest() {
+		return _req;
+	}
+
+	protected URLEncoder getUrlEncoder() {
+		return _urlEncoder;
+	}
+
 	protected void init(
 		RenderRequestImpl req, HttpServletResponse res, String portletName,
 		long companyId, long plid) {
@@ -516,6 +578,14 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		_companyId = companyId;
 		setPlid(plid);
 		_headers.clear();
+	}
+
+	protected boolean isCalledGetPortletOutputStream() {
+		return _calledGetPortletOutputStream;
+	}
+
+	protected boolean isCalledGetWriter() {
+		return _calledGetWriter;
 	}
 
 	protected void recycle() {
@@ -540,22 +610,6 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		_resourceName = null;
 	}
 
-	protected RenderRequestImpl getReq() {
-		return _req;
-	}
-
-	protected String getPortletName() {
-		return _portletName;
-	}
-
-	protected long getCompanyId() {
-		return _companyId;
-	}
-
-	protected long getPlid() {
-		return _plid;
-	}
-
 	protected void setPlid(long plid) {
 		_plid = plid;
 
@@ -568,22 +622,6 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 		}
 	}
 
-	protected Map getProperties() {
-		return _properties;
-	}
-
-	protected URLEncoder getUrlEncoder() {
-		return _urlEncoder;
-	}
-
-	protected boolean isCalledGetPortletOutputStream() {
-		return _calledGetPortletOutputStream;
-	}
-
-	protected boolean isCalledGetWriter() {
-		return _calledGetWriter;
-	}
-
 	private static Log _log = LogFactory.getLog(RenderRequestImpl.class);
 
 	private RenderRequestImpl _req;
@@ -593,14 +631,15 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 	private String _namespace;
 	private long _companyId;
 	private long _plid;
-	private Map _properties;
+	private Map<String, String[]> _properties;
 	private URLEncoder _urlEncoder;
 	private String _title;
  	private Boolean _useDefaultTemplate;
 	private String _contentType;
 	private boolean _calledGetPortletOutputStream;
  	private boolean _calledGetWriter;
-	private LinkedHashMap _headers = new LinkedHashMap();
+	private LinkedHashMap<String, Object> _headers =
+		new LinkedHashMap<String, Object>();
 	private String _resourceName;
 
 }

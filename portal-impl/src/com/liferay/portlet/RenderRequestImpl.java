@@ -41,7 +41,6 @@ import com.liferay.portal.servlet.PortletContextPool;
 import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.ProtectedPrincipal;
 import com.liferay.util.servlet.SharedSessionServletRequest;
@@ -52,7 +51,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -68,6 +66,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
 
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
@@ -84,132 +83,10 @@ import org.apache.struts.Globals;
  */
 public class RenderRequestImpl implements LiferayRenderRequest {
 
-	public WindowState getWindowState() {
-		return _windowState;
-	}
-
-	public void setWindowState(WindowState windowState) {
-		_windowState = windowState;
-	}
-
-	public boolean isWindowStateAllowed(WindowState windowState) {
-		return PortalContextImpl.isSupportedWindowState(windowState);
-	}
-
-	public PortletMode getPortletMode() {
-		return _portletMode;
-	}
-
-	public void setPortletMode(PortletMode portletMode) {
-		_portletMode = portletMode;
-	}
-
-	public boolean isPortletModeAllowed(PortletMode portletMode) {
-		if ((portletMode == null) || Validator.isNull(portletMode.toString())) {
-			return true;
-		}
-		else {
-			return _portlet.hasPortletMode(
-				getResponseContentType(), portletMode);
-		}
-	}
-
-	public PortletPreferences getPreferences() {
-		return new PortletPreferencesWrapper(getPreferencesImpl(), false);
-	}
-
-	public PortletPreferencesImpl getPreferencesImpl() {
-		return (PortletPreferencesImpl)_prefs;
-	}
-
-	public PortletSession getPortletSession() {
-		return _ses;
-	}
-
-	public PortletSession getPortletSession(boolean create) {
-		/*HttpSession httpSes = _req.getSession(create);
-
-		if (httpSes == null) {
-			return null;
-		}
-		else {
-			if (create) {
-				_ses = new PortletSessionImpl(
-					_req, _portletName, _portletCtx, _portalSessionId,
-					_plid);
-			}
-
-			return _ses;
-		}*/
-
-		/*if ((_ses == null) && create) {
-			_req.getSession(create);
-
-			_ses = new PortletSessionImpl(
-				_req, _portletName, _portletCtx, _portalSessionId, _plid);
-		}*/
-
-		return _ses;
-	}
-
-	public String getProperty(String name) {
-		return _portalCtx.getProperty(name);
-	}
-
-	public Enumeration getProperties(String name) {
-		List values = new ArrayList();
-
-		String value = _portalCtx.getProperty(name);
-
-		if (value != null) {
-			values.add(value);
-		}
-
-		return Collections.enumeration(values);
-	}
-
-	public Enumeration getPropertyNames() {
-		return _portalCtx.getPropertyNames();
-	}
-
-	public PortalContext getPortalContext() {
-		return _portalCtx;
-	}
-
-	public String getAuthType() {
-		return _req.getAuthType();
-	}
-
-	public String getContextPath() {
-		//return StringPool.SLASH + _req.getContextPath();
-		return StringPool.SLASH + _portletCtx.getPortletContextName();
-	}
-
-	public String getRemoteUser() {
-		return _remoteUser;
-	}
-
-	public Principal getUserPrincipal() {
-		return _userPrincipal;
-	}
-
-	public boolean isUserInRole(String role) {
-		if (_remoteUserId <= 0) {
-			return false;
-		}
-		else {
-			try {
-				long companyId = PortalUtil.getCompanyId(_req);
-
-				return RoleLocalServiceUtil.hasUserRole(
-					_remoteUserId, companyId, role, true);
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-
-			return _req.isUserInRole(role);
-		}
+	public void defineObjects(PortletConfig portletConfig, RenderResponse res) {
+		setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
+		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
+		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
 	}
 
 	public Object getAttribute(String name) {
@@ -219,7 +96,8 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 
 		if (name.equals(RenderRequest.USER_INFO)) {
 			if (getRemoteUser() != null) {
-				LinkedHashMap userInfo = new LinkedHashMap();
+				LinkedHashMap<String, String> userInfo =
+					new LinkedHashMap<String, String>();
 
 				// Liferay user attributes
 
@@ -242,10 +120,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 
 					// Portlet user attributes
 
-					Iterator itr = _portlet.getUserAttributes().iterator();
-
-					while (itr.hasNext()) {
-						String attrName = (String)itr.next();
+					for (String attrName : _portlet.getUserAttributes()) {
 						String attrValue = userAttributes.getValue(attrName);
 
 						if (attrValue != null) {
@@ -257,30 +132,28 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 					e.printStackTrace();
 				}
 
-				Map unmodifiableUserInfo =
-					Collections.unmodifiableMap((Map)userInfo.clone());
+				Map<String, String> unmodifiableUserInfo =
+					Collections.unmodifiableMap(
+						(Map<String, String>)userInfo.clone());
 
 				// Custom user attributes
 
-				Map cuaInstances = CollectionFactory.getHashMap();
+				Map<String, CustomUserAttributes> cuaInstances =
+					new HashMap<String, CustomUserAttributes>();
 
-				Iterator itr =
-					_portlet.getCustomUserAttributes().entrySet().iterator();
+				for (Map.Entry<String, String> entry :
+						_portlet.getCustomUserAttributes().entrySet()) {
 
-				while (itr.hasNext()) {
-					Map.Entry entry = (Map.Entry)itr.next();
-
-					String attrName = (String)entry.getKey();
-					String attrCustomClass = (String)entry.getValue();
+					String attrName = entry.getKey();
+					String attrCustomClass = entry.getValue();
 
 					CustomUserAttributes cua =
-						(CustomUserAttributes)cuaInstances.get(attrCustomClass);
+						cuaInstances.get(attrCustomClass);
 
 					if (cua == null) {
 						if (_portlet.isWARFile()) {
-							PortletContextWrapper pcw =
-								(PortletContextWrapper)PortletContextPool.get(
-									_portlet.getRootPortletId());
+							PortletContextWrapper pcw = PortletContextPool.get(
+								_portlet.getRootPortletId());
 
 							cua =
 								(CustomUserAttributes)
@@ -319,34 +192,13 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		return _req.getAttribute(name);
 	}
 
-	public void setAttribute(String name, Object obj) {
-		if (name == null) {
-			throw new IllegalArgumentException();
-		}
+	public Enumeration<String> getAttributeNames() {
+		List<String> names = new ArrayList<String>();
 
-		if (obj == null) {
-			removeAttribute(name);
-		}
-		else {
-			_req.setAttribute(name, obj);
-		}
-	}
-
-	public void removeAttribute(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException();
-		}
-
-		_req.removeAttribute(name);
-	}
-
-	public Enumeration getAttributeNames() {
-		List names = new ArrayList();
-
-		Enumeration enu = _req.getAttributeNames();
+		Enumeration<String> enu = _req.getAttributeNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (!name.equals(JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
 				names.add(name);
@@ -356,62 +208,25 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		return Collections.enumeration(names);
 	}
 
-	public String getParameter(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException();
-		}
-
-		return _req.getParameter(name);
+	public String getAuthType() {
+		return _req.getAuthType();
 	}
 
-	public Enumeration getParameterNames() {
-		return _req.getParameterNames();
+	public String getContextPath() {
+		//return StringPool.SLASH + _req.getContextPath();
+		return StringPool.SLASH + _portletCtx.getPortletContextName();
 	}
 
-	public String[] getParameterValues(String name) {
-		if (name == null) {
-			throw new IllegalArgumentException();
-		}
-
-		return _req.getParameterValues(name);
+	public Cookie[] getCookies() {
+		return null;
 	}
 
-	public Map getParameterMap() {
-		return _req.getParameterMap();
+	public String getETag() {
+		return null;
 	}
 
-	public boolean isSecure() {
-		return _req.isSecure();
-	}
-
-	public String getRequestedSessionId() {
-		return _req.getSession().getId();
-	}
-
-	public boolean isRequestedSessionIdValid() {
-		if (_ses != null) {
-			return _ses.isValid();
-		}
-		else {
-			return _req.isRequestedSessionIdValid();
-		}
-	}
-
-	public String getResponseContentType() {
-		if (_wapTheme) {
-			return ContentTypes.XHTML_MP;
-		}
-		else {
-			return ContentTypes.TEXT_HTML;
-		}
-	}
-
-	public Enumeration getResponseContentTypes() {
-		List responseContentTypes = new ArrayList();
-
-		responseContentTypes.add(getResponseContentType());
-
-		return Collections.enumeration(responseContentTypes);
+	public HttpServletRequest getHttpServletRequest() {
+		return _req;
 	}
 
 	public Locale getLocale() {
@@ -428,8 +243,143 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		return locale;
 	}
 
-	public Enumeration getLocales() {
+	public Enumeration<Locale> getLocales() {
 		return _req.getLocales();
+	}
+
+	public String getParameter(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		return _req.getParameter(name);
+	}
+
+	public Map<String, String[]> getParameterMap() {
+		return _req.getParameterMap();
+	}
+
+	public Enumeration<String> getParameterNames() {
+		return _req.getParameterNames();
+	}
+
+	public String[] getParameterValues(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		return _req.getParameterValues(name);
+	}
+
+	public PortalContext getPortalContext() {
+		return _portalCtx;
+	}
+
+	public Portlet getPortlet() {
+		return _portlet;
+	}
+
+	public PortletMode getPortletMode() {
+		return _portletMode;
+	}
+
+	public String getPortletName() {
+		return _portletName;
+	}
+
+	public PortletSession getPortletSession() {
+		return _ses;
+	}
+
+	public PortletSession getPortletSession(boolean create) {
+		/*HttpSession httpSes = _req.getSession(create);
+
+		if (httpSes == null) {
+			return null;
+		}
+		else {
+			if (create) {
+				_ses = new PortletSessionImpl(
+					_req, _portletName, _portletCtx, _portalSessionId,
+					_plid);
+			}
+
+			return _ses;
+		}*/
+
+		/*if ((_ses == null) && create) {
+			_req.getSession(create);
+
+			_ses = new PortletSessionImpl(
+				_req, _portletName, _portletCtx, _portalSessionId, _plid);
+		}*/
+
+		return _ses;
+	}
+
+	public PortletPreferences getPreferences() {
+		return new PortletPreferencesWrapper(getPreferencesImpl(), false);
+	}
+
+	public PortletPreferencesImpl getPreferencesImpl() {
+		return (PortletPreferencesImpl)_prefs;
+	}
+
+	public Map<String, String[]> getPrivateParameterMap() {
+		return _req.getParameterMap();
+	}
+
+	public Enumeration<String> getProperties(String name) {
+		List<String> values = new ArrayList<String>();
+
+		String value = _portalCtx.getProperty(name);
+
+		if (value != null) {
+			values.add(value);
+		}
+
+		return Collections.enumeration(values);
+	}
+
+	public String getProperty(String name) {
+		return _portalCtx.getProperty(name);
+	}
+
+	public Enumeration<String> getPropertyNames() {
+		return _portalCtx.getPropertyNames();
+	}
+
+	public Map<String, String[]> getPublicParameterMap() {
+		return _req.getParameterMap();
+	}
+
+	public String getRemoteUser() {
+		return _remoteUser;
+	}
+
+	public Map<String, String[]> getRenderParameters() {
+		return RenderParametersPool.get(_req, _plid, _portletName);
+	}
+
+	public String getRequestedSessionId() {
+		return _req.getSession().getId();
+	}
+
+	public String getResponseContentType() {
+		if (_wapTheme) {
+			return ContentTypes.XHTML_MP;
+		}
+		else {
+			return ContentTypes.TEXT_HTML;
+		}
+	}
+
+	public Enumeration<String> getResponseContentTypes() {
+		List<String> responseContentTypes = new ArrayList<String>();
+
+		responseContentTypes.add(getResponseContentType());
+
+		return Collections.enumeration(responseContentTypes);
 	}
 
 	public String getScheme() {
@@ -444,34 +394,99 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		return _req.getServerPort();
 	}
 
-	public HttpServletRequest getHttpServletRequest() {
-		return _req;
+	public Principal getUserPrincipal() {
+		return _userPrincipal;
 	}
 
-	public String getPortletName() {
-		return _portletName;
+	public String getWindowID() {
+		return null;
 	}
 
-	public Portlet getPortlet() {
-		return _portlet;
+	public WindowState getWindowState() {
+		return _windowState;
+	}
+
+	public boolean isAction() {
+		return _ACTION;
+	}
+
+	public boolean isPortletModeAllowed(PortletMode portletMode) {
+		if ((portletMode == null) || Validator.isNull(portletMode.toString())) {
+			return true;
+		}
+		else {
+			return _portlet.hasPortletMode(
+				getResponseContentType(), portletMode);
+		}
 	}
 
 	public boolean isPrivateRequestAttributes() {
 		return _portlet.isPrivateRequestAttributes();
 	}
 
-	public Map getRenderParameters() {
-		return RenderParametersPool.get(_req, _plid, _portletName);
+	public boolean isRequestedSessionIdValid() {
+		if (_ses != null) {
+			return _ses.isValid();
+		}
+		else {
+			return _req.isRequestedSessionIdValid();
+		}
 	}
 
-	public void defineObjects(PortletConfig portletConfig, RenderResponse res) {
-		setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
-		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
-		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
+	public boolean isSecure() {
+		return _req.isSecure();
 	}
 
-	public boolean isAction() {
-		return false;
+	public boolean isUserInRole(String role) {
+		if (_remoteUserId <= 0) {
+			return false;
+		}
+		else {
+			try {
+				long companyId = PortalUtil.getCompanyId(_req);
+
+				return RoleLocalServiceUtil.hasUserRole(
+					_remoteUserId, companyId, role, true);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+
+			return _req.isUserInRole(role);
+		}
+	}
+
+	public boolean isWindowStateAllowed(WindowState windowState) {
+		return PortalContextImpl.isSupportedWindowState(windowState);
+	}
+
+	public void removeAttribute(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		_req.removeAttribute(name);
+	}
+
+	public void setAttribute(String name, Object obj) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		if (obj == null) {
+			removeAttribute(name);
+		}
+		else {
+			_req.setAttribute(name, obj);
+		}
+	}
+
+	public void setPortletMode(PortletMode portletMode) {
+		_portletMode = portletMode;
+	}
+
+	public void setWindowState(WindowState windowState) {
+		_windowState = windowState;
 	}
 
 	protected RenderRequestImpl() {
@@ -489,7 +504,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 
 		String portletNamespace = PortalUtil.getPortletNamespace(_portletName);
 
-		Map sharedSessionAttributes =
+		Map<String, Object> sharedSessionAttributes =
 			SharedSessionUtil.getSharedSessionAttributes(req);
 
 		boolean portalSessionShared = false;
@@ -511,9 +526,9 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 			dynamicReq = new DynamicServletRequest(req, false);
 		}
 
-		Enumeration enu = null;
+		Enumeration<String> enu = null;
 
-		Map renderParameters = null;
+		Map<String, String[]> renderParameters = null;
 
 		boolean portletFocus = false;
 
@@ -539,7 +554,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		}
 
 		if (portletFocus) {
-			renderParameters = new HashMap();
+			renderParameters = new HashMap<String, String[]>();
 
 			if (!isAction() &&
 				!LiferayWindowState.isExclusive(req) &&
@@ -556,7 +571,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 				req, plid, _portletName);
 
 			if (!_portletName.equals(req.getParameter("p_p_id"))) {
-				_putNamespaceParams(
+				putNamespaceParams(
 					req, portletNamespace, plid, renderParameters);
 			}
 
@@ -564,7 +579,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		}
 
 		while (enu.hasMoreElements()) {
-			String param = (String)enu.nextElement();
+			String param = enu.nextElement();
 
 			if (param.startsWith(portletNamespace) &&
 				!cachePortlet.isFacesPortlet()) {
@@ -579,7 +594,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 					renderParameters.put(param, values);
 				}
 				else {
-					values = (String[])renderParameters.get(param);
+					values = renderParameters.get(param);
 				}
 
 				dynamicReq.setParameterValues(newParam, values);
@@ -601,7 +616,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 						renderParameters.put(param, values);
 					}
 					else {
-						values = (String[])renderParameters.get(param);
+						values = renderParameters.get(param);
 					}
 
 					dynamicReq.setParameterValues(param, values);
@@ -657,6 +672,27 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		_plid = plid;
 	}
 
+	protected void putNamespaceParams(
+		HttpServletRequest req, String prefix, long plid,
+		Map<String, String[]> renderParameters) {
+
+		// Adds params that are prefixed with given prefix to parameters pool.
+		// Functionality added by Sergey Ponomarev to allow passing parameters
+		// to multiple portlets in one portlet URL.
+
+		Enumeration<String> names = req.getParameterNames();
+
+		while (names.hasMoreElements()) {
+			String key = names.nextElement();
+
+			if (key.startsWith(prefix)) {
+				renderParameters.put(key, req.getParameterValues(key));
+			}
+		}
+
+		RenderParametersPool.put(req, plid, _portletName, renderParameters);
+	}
+
 	protected void recycle() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Recycling instance " + hashCode());
@@ -683,26 +719,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 		_plid = 0;
 	}
 
-	private void _putNamespaceParams(
-		HttpServletRequest req, String prefix, long plid,
-		Map renderParameters) {
-
-		// Adds params that are prefixed with given prefix to parameters pool.
-		// Functionality added by Sergey Ponomarev to allow passing parameters
-		// to multiple portlets in one portlet URL.
-
-		Enumeration names = req.getParameterNames();
-
-		while (names.hasMoreElements()) {
-			String key = (String)(names.nextElement());
-
-			if (key.startsWith(prefix)) {
-				renderParameters.put(key, req.getParameterValues(key));
-			}
-		}
-
-		RenderParametersPool.put(req, plid, _portletName, renderParameters);
-	}
+	private static final boolean _ACTION = false;
 
 	private static Log _log = LogFactory.getLog(RenderRequestImpl.class);
 
