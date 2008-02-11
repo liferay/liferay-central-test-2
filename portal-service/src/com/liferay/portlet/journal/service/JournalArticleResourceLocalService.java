@@ -127,7 +127,7 @@ public interface JournalArticleResourceLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.journal.model.JournalArticleResource getArticleResource(
-		long articleResourceId)
+		long articleResourcePrimKey)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

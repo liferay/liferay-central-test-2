@@ -55,14 +55,14 @@ boolean showFeedDescription = GetterUtil.getBoolean(prefs.getValue("show-feed-de
 boolean showFeedImage = GetterUtil.getBoolean(prefs.getValue("show-feed-image", Boolean.TRUE.toString()));
 String feedImageAlignment = prefs.getValue("feed-image-alignment", "right");
 
-String[] headerArticleResouceValues = prefs.getValues("header-article-resouce-values", new String[] {"0", ""});
+String[] headerArticleResouceValues = prefs.getValues("header-article-resource-values", new String[] {"0", ""});
 
-long headerArticleResouceId = GetterUtil.getLong(headerArticleResouceValues[0]);
+long headerArticleResourcePrimKey = GetterUtil.getLong(headerArticleResouceValues[0]);
 String headerArticleResouceTitle = headerArticleResouceValues[1];
 
-String[] footerArticleResouceValues = prefs.getValues("footer-article-resouce-values", new String[] {"0", ""});
+String[] footerArticleResouceValues = prefs.getValues("footer-article-resource-values", new String[] {"0", ""});
 
-long footerArticleResouceId = GetterUtil.getLong(footerArticleResouceValues[0]);
+long footerArticleResourcePrimKey = GetterUtil.getLong(footerArticleResouceValues[0]);
 String footerArticleResouceTitle = footerArticleResouceValues[1];
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);

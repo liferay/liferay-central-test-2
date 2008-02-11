@@ -73,7 +73,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		submitForm(document.<portlet:namespace />fm, '<%= configurationActionURL.toString() %>');
 	}
 
-	function <portlet:namespace />selectAsset(resourceId, resourceTitle, assetOrder) {
+	function <portlet:namespace />selectAsset(resourcePrimKey, resourceTitle, assetOrder) {
 		if (assetOrder == 1) {
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-footer-article';
 		}
@@ -81,7 +81,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = 'set-header-article';
 		}
 
-		document.<portlet:namespace />fm.<portlet:namespace />resourceId.value = resourceId;
+		document.<portlet:namespace />fm.<portlet:namespace />resourcePrimKey.value = resourcePrimKey;
 		document.<portlet:namespace />fm.<portlet:namespace />resourceTitle.value = resourceTitle;
 		submitForm(document.<portlet:namespace />fm);
 	}
@@ -102,7 +102,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
 <input name="<portlet:namespace />typeSelection" type="hidden" value="" />
-<input name="<portlet:namespace />resourceId" type="hidden" value="" />
+<input name="<portlet:namespace />resourcePrimKey" type="hidden" value="" />
 <input name="<portlet:namespace />resourceTitle" type="hidden" value="" />
 <input name="<portlet:namespace />assetOrder" type="hidden" value="-1" />
 

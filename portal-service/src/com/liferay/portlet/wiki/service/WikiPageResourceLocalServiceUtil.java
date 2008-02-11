@@ -151,12 +151,12 @@ public class WikiPageResourceLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource getPageResource(
-		long pageResourceId)
+		long pageResourcePrimKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
 
-		return wikiPageResourceLocalService.getPageResource(pageResourceId);
+		return wikiPageResourceLocalService.getPageResource(pageResourcePrimKey);
 	}
 
 	public static long getPageResourcePrimKey(long nodeId,

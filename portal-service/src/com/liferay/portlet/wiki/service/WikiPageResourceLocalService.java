@@ -92,7 +92,7 @@ public interface WikiPageResourceLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource getPageResource(
-		long pageResourceId)
+		long pageResourcePrimKey)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

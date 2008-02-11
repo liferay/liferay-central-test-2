@@ -244,12 +244,12 @@ public class JournalArticleResourceLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource getArticleResource(
-		long articleResourceId)
+		long articleResourcePrimKey)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
 
-		return journalArticleResourceLocalService.getArticleResource(articleResourceId);
+		return journalArticleResourceLocalService.getArticleResource(articleResourcePrimKey);
 	}
 
 	public static long getArticleResourcePrimKey(long groupId,

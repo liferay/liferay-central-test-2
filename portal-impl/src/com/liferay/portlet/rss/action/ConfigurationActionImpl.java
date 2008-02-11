@@ -99,7 +99,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		throws Exception {
 
 		prefs.setValues(
-			"footer-article-resouce-values", new String[] {"0", ""});
+			"footer-article-resource-values", new String[] {"0", ""});
 	}
 
 	protected void removeHeaderArticle(
@@ -107,31 +107,35 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		throws Exception {
 
 		prefs.setValues(
-			"header-article-resouce-values", new String[] {"0", ""});
+			"header-article-resource-values", new String[] {"0", ""});
 	}
 
 	protected void setFooterArticle(ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String footerArticleResouceId = ParamUtil.getString(req, "resourceId");
+		String footerArticleResourcePrimKey = ParamUtil.getString(
+			req, "resourcePrimKey");
 		String footerArticleResouceTitle = ParamUtil.getString(
 			req, "resourceTitle");
 
 		prefs.setValues(
-			"footer-article-resouce-values",
-			new String[] {footerArticleResouceId, footerArticleResouceTitle});
+			"footer-article-resource-values",
+			new String[] {
+				footerArticleResourcePrimKey, footerArticleResouceTitle
+			});
 	}
 
 	protected void setHeaderArticle(ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String headerArticleResouceId = ParamUtil.getString(req, "resourceId");
+		String headerArticleResourcePrimKey = ParamUtil.getString(
+			req, "resourcePrimKey");
 		String headerArticleResouceTitle = ParamUtil.getString(
 			req, "resourceTitle");
 
 		prefs.setValues(
-			"header-article-resouce-values",
-		new String[] {headerArticleResouceId, headerArticleResouceTitle});
+			"header-article-resource-values",
+		new String[] {headerArticleResourcePrimKey, headerArticleResouceTitle});
 	}
 
 	protected void updateConfiguration(
@@ -149,10 +153,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean showFeedImage = ParamUtil.getBoolean(req, "showFeedImage");
 		String feedImageAlignment = ParamUtil.getString(
 			req, "feedImageAlignment");
-		long headerArticleResouceId = ParamUtil.getLong(
-			req, "headerArticleResouceId");
-		long footerArticleResouceId = ParamUtil.getLong(
-			req, "footerArticleResouceId");
 
 		if (urls != null && titles != null) {
 			prefs.setValues("urls", urls);
@@ -172,12 +172,6 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("show-feed-image", String.valueOf(showFeedImage));
 		prefs.setValue(
 			"feed-image-alignment", String.valueOf(feedImageAlignment));
-		prefs.setValue(
-			"header-article-resouce-id",
-			String.valueOf(headerArticleResouceId));
-		prefs.setValue(
-			"footer-article-resouce-id",
-			String.valueOf(footerArticleResouceId));
 	}
 
 }

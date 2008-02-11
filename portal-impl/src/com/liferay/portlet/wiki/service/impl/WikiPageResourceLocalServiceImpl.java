@@ -43,10 +43,11 @@ public class WikiPageResourceLocalServiceImpl
 		wikiPageResourcePersistence.removeByN_T(nodeId, title);
 	}
 
-	public WikiPageResource getPageResource(long pageResourceId)
+	public WikiPageResource getPageResource(long pageResourcePrimKey)
 		throws PortalException, SystemException {
 
-		return wikiPageResourcePersistence.findByPrimaryKey(pageResourceId);
+		return wikiPageResourcePersistence.findByPrimaryKey(
+			pageResourcePrimKey);
 	}
 
 	public long getPageResourcePrimKey(long nodeId, String title)
