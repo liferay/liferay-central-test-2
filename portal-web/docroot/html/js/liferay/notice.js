@@ -55,10 +55,12 @@ Liferay.Notice = new Class({
 		if (staticAlerts.length) {
 			instance._useCloseButton = true;
 			instance._addCloseButton(staticAlerts);
+
 			if (!instance._body) {
 				instance._body = jQuery('body');
 			}
-			instance._body.addClass('has-alerts')	
+
+			instance._body.addClass('has-alerts')
 		}
 	},
 
