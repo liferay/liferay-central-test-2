@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.webdav.Resource;
-import com.liferay.portal.webdav.Status;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portlet.journal.NoSuchStructureException;
@@ -56,28 +55,6 @@ import javax.servlet.http.HttpServletResponse;
  *
  */
 public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
-
-	public Status addCollection(WebDAVRequest webDavReq)
-		throws WebDAVException {
-
-		return new Status(HttpServletResponse.SC_FORBIDDEN);
-	}
-
-	public int copyCollectionResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
-			boolean overwrite, long depth)
-		throws WebDAVException {
-
-		return HttpServletResponse.SC_FORBIDDEN;
-	}
-
-	public int copySimpleResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
-			boolean overwrite)
-		throws WebDAVException {
-
-		return HttpServletResponse.SC_FORBIDDEN;
-	}
 
 	public int deleteResource(WebDAVRequest webDavReq) throws WebDAVException {
 		try {
@@ -124,17 +101,18 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] pathArray = webDavReq.getPathArray();
 
 			if (pathArray.length == 3) {
-				//String companyId = pathArray[0];
-				//String groupId = pathArray[1];
-				String type = pathArray[2];
+				String path = getRootPath() + webDavReq.getPath();
+
+				return new BaseResourceImpl(path, StringPool.BLANK, getToken());
+			}
+			else if (pathArray.length == 4) {
+				String type = pathArray[3];
 
 				return toResource(webDavReq, type, false);
 			}
-			else if (pathArray.length == 4) {
-				//String companyId = pathArray[0];
-				//String groupId = pathArray[1];
-				String type = pathArray[2];
-				String journalTypeId = pathArray[3];
+			else if (pathArray.length == 5) {
+				String type = pathArray[3];
+				String journalTypeId = pathArray[4];
 
 				if (type.equals(_TYPE_STRUCTURES)) {
 					try {
@@ -175,11 +153,11 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		try {
 			String[] pathArray = webDavReq.getPathArray();
 
-			if (pathArray.length == 2) {
+			if (pathArray.length == 3) {
 				return getFolders(webDavReq);
 			}
-			else if (pathArray.length == 3) {
-				String type = pathArray[2];
+			else if (pathArray.length == 4) {
+				String type = pathArray[3];
 
 				if (type.equals(_TYPE_STRUCTURES)) {
 					return getStructures(webDavReq);
@@ -194,22 +172,6 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		catch (Exception e) {
 			throw new WebDAVException(e);
 		}
-	}
-
-	public int moveCollectionResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
-			boolean overwrite)
-		throws WebDAVException {
-
-		return HttpServletResponse.SC_FORBIDDEN;
-	}
-
-	public int moveSimpleResource(
-			WebDAVRequest webDavReq, Resource resource, String destination,
-			boolean overwrite)
-		throws WebDAVException {
-
-		return HttpServletResponse.SC_FORBIDDEN;
 	}
 
 	public int putResource(WebDAVRequest webDavReq) throws WebDAVException {

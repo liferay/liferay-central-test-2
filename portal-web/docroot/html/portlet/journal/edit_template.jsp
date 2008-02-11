@@ -30,6 +30,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 JournalTemplate template = (JournalTemplate)request.getAttribute(WebKeys.JOURNAL_TEMPLATE);
 
 long groupId = BeanParamUtil.getLong(template, request, "groupId", portletGroupId.longValue());
+Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 String templateId = BeanParamUtil.getString(template, request, "templateId");
 String newTemplateId = ParamUtil.getString(request, "newTemplateId");
@@ -235,7 +236,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/journal/" + company.getCompanyId() + "/" + portletGroupId + "/Templates/" + templateId %>'
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getResolvedFriendlyURL() + "/journal/Templates/" + templateId %>'
 			/>
 		</td>
 	</tr>

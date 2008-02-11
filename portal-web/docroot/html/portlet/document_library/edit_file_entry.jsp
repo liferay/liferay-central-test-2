@@ -294,14 +294,13 @@ portletURL.setParameter("name", name);
 			<liferay-ui:message key="webdav-url" />
 		</td>
 		<td>
-
 			<%
 			StringBuffer sb = new StringBuffer();
 
 			DLFolder curFolder = DLFolderLocalServiceUtil.getFolder(folderId);
 
 			while (true) {
-				sb.insert(0, curFolder.getName());
+				sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
 				sb.insert(0, StringPool.SLASH);
 
 				if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
@@ -310,17 +309,18 @@ portletURL.setParameter("name", name);
 				else {
 					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
 				}
+
+				System.out.println(sb);
 			}
 
-			sb.insert(0, curFolder.getGroupId());
-			sb.insert(0, StringPool.SLASH);
-
 			sb.append(StringPool.SLASH);
-			sb.append(titleWithExtension);
+			sb.append(HttpUtil.encodeURL(titleWithExtension, true));
+
+			Group group = layout.getGroup();
 			%>
 
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/document_library/" + company.getCompanyId() + sb.toString() %>'
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getResolvedFriendlyURL() + "/document_library" + sb.toString() %>'
 			/>
 		</td>
 	</tr>

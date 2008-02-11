@@ -22,14 +22,10 @@
 
 package com.liferay.portal.webdav.methods;
 
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Tuple;
-import com.liferay.portal.model.Group;
 import com.liferay.portal.model.WebDAVProps;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.WebDAVPropsLocalServiceUtil;
-import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.Resource;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVStorage;
@@ -266,8 +262,6 @@ public abstract class BasePropMethodImpl implements Method {
 
 		WebDAVStorage storage = webDavReq.getWebDAVStorage();
 
-		long companyId = webDavReq.getCompanyId();
-		long groupId = webDavReq.getGroupId();
 		long depth = WebDAVUtil.getDepth(webDavReq.getHttpServletRequest());
 
 		DocumentFactory docFactory = DocumentFactory.getInstance();
@@ -279,69 +273,20 @@ public abstract class BasePropMethodImpl implements Method {
 
 		doc.setRootElement(multistatus);
 
-		if (companyId <= 0) {
-			return getResponseXML(doc);
-		}
-
-		if (groupId == 0) {
-			addResponse(
-				webDavReq,
-				new BaseResourceImpl(
-					storage.getRootPath(), companyId, companyId),
-				props, multistatus);
-
-			if (props.size() > 0) {
-				Iterator<Resource> itr = storage.getCommunities(
-					webDavReq).iterator();
-
-				while (itr.hasNext()) {
-					Resource resource = itr.next();
-
-					addResponse(webDavReq, resource, props, multistatus);
-				}
-			}
-
-			return getResponseXML(doc);
-		}
-
 		Resource resource = storage.getResource(webDavReq);
 
-		if ((resource == null) && !webDavReq.isGroupPath()) {
-			String href = storage.getRootPath() + webDavReq.getPath();
+		if (resource != null) {
+			addResponse(
+				storage, webDavReq, resource, props, multistatus, depth);
+		}
+		else {
+			String path = storage.getRootPath() + webDavReq.getPath();
 
 			if (_log.isWarnEnabled()) {
-				_log.warn("No resource found for " + webDavReq.getPath());
+				_log.warn("No resource found for " + path);
 			}
 
-			addResponse(href, multistatus);
-
-			return getResponseXML(doc);
-		}
-
-		try {
-			if (resource != null) {
-				addResponse(
-					storage, webDavReq, resource, props, multistatus, depth);
-			}
-			else if (webDavReq.isGroupPath()) {
-				Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-				resource = new BaseResourceImpl(
-					storage.getRootPath() + StringPool.SLASH + companyId,
-					groupId, group.getName());
-
-				addResponse(
-					storage, webDavReq, resource, props, multistatus, depth);
-			}
-		}
-		catch (NoSuchGroupException nsge) {
-			String href = storage.getRootPath() + webDavReq.getPath();
-
-			if (_log.isWarnEnabled()) {
-				_log.warn("No group found for " + href);
-			}
-
-			addResponse(href, multistatus);
+			addResponse(path, multistatus);
 		}
 
 		return getResponseXML(doc);

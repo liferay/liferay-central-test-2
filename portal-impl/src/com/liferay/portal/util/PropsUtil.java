@@ -848,6 +848,10 @@ public class PropsUtil {
 	// WebDAV
 
 	public static final String WEBDAV_LITMUS = "webdav.litmus";
+	
+	public static final String WEBDAV_STORAGE_TOKEN = "webdav.storage.token-";
+
+	public static final String WEBDAV_STORAGE_CLASS = "webdav.storage.class-";
 
 	// Admin Portlet
 

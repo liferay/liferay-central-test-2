@@ -24,7 +24,6 @@ package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.HttpUtil;
 
@@ -77,8 +76,7 @@ public class BaseResourceImpl implements Resource {
 		_href = parentPath;
 
 		if (Validator.isNotNull(name)) {
-			name = HttpUtil.encodeURL(name);
-			name = StringUtil.replace(name, StringPool.PLUS, "%20");
+			name = HttpUtil.encodeURL(name, true);
 
 			_href += StringPool.SLASH + name;
 		}

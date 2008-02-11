@@ -22,9 +22,23 @@
 
 package com.liferay.portal.webdav;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsUtil;
+
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -54,22 +68,23 @@ public class WebDAVUtil {
 		return path;
 	}
 
-	public static long getCompanyId(String path) {
-		return getCompanyId(path, false);
-	}
-
-	public static long getCompanyId(String path, boolean fixPath) {
-		if (fixPath) {
-			path = fixPath(path);
-		}
-
+	public static long getCompanyId(String path) throws WebDAVException {
 		String[] pathArray = getPathArray(path);
 
-		if (pathArray.length <= 0) {
-			return 0;
+		return getCompanyId(pathArray);
+	}
+
+	public static long getCompanyId(String[] pathArray) throws WebDAVException {
+		try {
+			String webId = getWebId(pathArray);
+
+			Company company =
+				CompanyLocalServiceUtil.getCompanyByWebId(webId);
+
+			return company.getCompanyId();
 		}
-		else {
-			return GetterUtil.getLong(pathArray[0]);
+		catch (Exception e) {
+			throw new WebDAVException(e);
 		}
 	}
 
@@ -104,7 +119,7 @@ public class WebDAVUtil {
 	}
 
 	public static String getEntryName(String[] pathArray) {
-		if (pathArray.length <= 2) {
+		if (pathArray.length <= 3) {
 			return StringPool.BLANK;
 		}
 		else {
@@ -112,27 +127,50 @@ public class WebDAVUtil {
 		}
 	}
 
-	public static long getGroupId(String path) {
-		return getGroupId(path, false);
-	}
-
-	public static long getGroupId(String[] pathArray) {
-		if (pathArray.length <= 1) {
-			return 0;
-		}
-		else {
-			return GetterUtil.getLong(pathArray[1]);
-		}
-	}
-
-	public static long getGroupId(String path, boolean fixPath) {
-		if (fixPath) {
-			path = fixPath(path);
-		}
-
+	public static long getGroupId(String path) throws WebDAVException {
 		String[] pathArray = getPathArray(path);
 
 		return getGroupId(pathArray);
+	}
+
+	public static long getGroupId(String[] pathArray) throws WebDAVException {
+		long groupId = 0;
+
+		try {
+			if (pathArray.length > 1) {
+				long companyId = getCompanyId(pathArray);
+
+				String name = pathArray[1];
+
+				try {
+					Group group =
+						GroupLocalServiceUtil.getGroup(companyId, name);
+
+					groupId = group.getGroupId();
+				}
+				catch (NoSuchGroupException nsge) {
+					try {
+						Group group = GroupLocalServiceUtil.getFriendlyURLGroup(
+							companyId, name);
+
+						groupId = group.getGroupId();
+					}
+					catch (NoSuchGroupException nsge2) {
+						User user = UserLocalServiceUtil.getUserByScreenName(
+							companyId, name);
+
+						Group group = user.getGroup();
+
+						groupId = group.getGroupId();
+					}
+				}
+			}
+		}
+		catch (Exception e) {
+			throw new WebDAVException(e);
+		}
+
+		return groupId;
 	}
 
 	public static String[] getPathArray(String path) {
@@ -151,22 +189,44 @@ public class WebDAVUtil {
 		return StringUtil.split(path, StringPool.SLASH);
 	}
 
-	public static boolean isGroupPath(String path) {
-		return isGroupPath(path, false);
+	public static String getStorageToken(String className) {
+		return (String)_storageMap.get(className);
 	}
 
-	public static boolean isGroupPath(String path, boolean fixPath) {
-		if (fixPath) {
-			path = fixPath(path);
+	public static Collection getStorageTokens() {
+		return _storageMap.values();
+	}
+
+	public static String getStorageClass(String token) {
+		if (_storageMap.containsValue(token)) {
+			Iterator itr = _storageMap.keySet().iterator();
+
+			while (itr.hasNext()) {
+				String key = (String)itr.next();
+
+				if (_storageMap.get(key).equals(token)) {
+					return key;
+				}
+			}
 		}
 
+		return null;
+	}
+
+	public static String getWebId(String path) throws WebDAVException {
 		String[] pathArray = getPathArray(path);
 
-		if (pathArray.length == 2) {
-			return true;
+		return getWebId(pathArray);
+	}
+
+	public static String getWebId(String[] pathArray) throws WebDAVException {
+		if (pathArray.length > 0) {
+			String webId = pathArray[0];
+
+			return webId;
 		}
 		else {
-			return false;
+			throw new WebDAVException();
 		}
 	}
 
@@ -178,6 +238,24 @@ public class WebDAVUtil {
 		}
 		else {
 			return true;
+		}
+	}
+
+	private static final Map _storageMap;
+
+	static {
+		_storageMap = new HashMap();
+
+		for (int i = 1; true; i++) {
+			String className =
+				PropsUtil.get(PropsUtil.WEBDAV_STORAGE_CLASS + i);
+			String token = PropsUtil.get(PropsUtil.WEBDAV_STORAGE_TOKEN + i);
+
+			if (Validator.isNull(className) || Validator.isNull(token)) {
+				break;
+			}
+
+			_storageMap.put(className, token);
 		}
 	}
 

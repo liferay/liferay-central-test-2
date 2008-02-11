@@ -51,9 +51,6 @@ public interface WebDAVStorage {
 
 	public int deleteResource(WebDAVRequest webDavReq) throws WebDAVException;
 
-	public List<Resource> getCommunities(WebDAVRequest webDavReq)
-	throws WebDAVException;
-
 	public Resource getResource(WebDAVRequest webDavReq) throws WebDAVException;
 
 	public List<Resource> getResources(WebDAVRequest webDavReq)

@@ -144,30 +144,30 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 			<liferay-ui:message key="webdav-url" />
 		</td>
 		<td>
-
 			<%
 			StringBuffer sb = new StringBuffer();
 
-			DLFolder curFolder = folder;
+			if (folder != null) {
+				DLFolder curFolder = folder;
 
-			while (true) {
-				sb.insert(0, curFolder.getName());
-				sb.insert(0, StringPool.SLASH);
+				while (true) {
+					sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
+					sb.insert(0, StringPool.SLASH);
 
-				if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-					break;
-				}
-				else {
-					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+					if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+						break;
+					}
+					else {
+						curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+					}
 				}
 			}
 
-			sb.insert(0, layout.getGroupId());
-			sb.insert(0, StringPool.SLASH);
+			Group group = layout.getGroup();
 			%>
 
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/document_library/" + company.getCompanyId() + sb.toString() %>'
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getResolvedFriendlyURL() + "/document_library" + sb.toString() %>'
 			/>
 		</td>
 	</tr>

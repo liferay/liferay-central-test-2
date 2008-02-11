@@ -65,6 +65,8 @@ public interface Group extends GroupModel {
 
 	public java.lang.String getDescriptiveName();
 
+	public java.lang.String getResolvedFriendlyURL();
+
 	public java.lang.String getTypeLabel();
 
 	public java.lang.String getTypeSettings();

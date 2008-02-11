@@ -22,17 +22,7 @@
 
 package com.liferay.portal.webdav;
 
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.util.dao.hibernate.QueryUtil;
-
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.LinkedHashMap;
-import java.util.List;
+import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="BaseWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
@@ -42,49 +32,46 @@ import java.util.List;
  */
 public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 
+	public Status addCollection(WebDAVRequest webDavReq)
+		throws WebDAVException {
+
+		return new Status(HttpServletResponse.SC_FORBIDDEN);
+	}
+
+	public int copyCollectionResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite, long depth)
+		throws WebDAVException {
+
+		return HttpServletResponse.SC_FORBIDDEN;
+	}
+
+	public int copySimpleResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite)
+		throws WebDAVException {
+
+		return HttpServletResponse.SC_FORBIDDEN;
+	}
+
+	public int deleteResource(WebDAVRequest webDavReq) throws WebDAVException {
+		return HttpServletResponse.SC_FORBIDDEN;
+	}
+
 	public String getRootPath() {
 		return _rootPath;
 	}
 
-	public void setRootPath(String rootPath) {
-		_rootPath = rootPath;
+	public String getToken() {
+		return WebDAVUtil.getStorageToken(getClass().getName());
 	}
 
-	public List<Resource> getCommunities(WebDAVRequest webDavReq)
-		throws WebDAVException {
+	public int putResource(WebDAVRequest webDavReq) throws WebDAVException {
+		return HttpServletResponse.SC_FORBIDDEN;
+	}
 
-		try {
-			LinkedHashMap<String, Object> groupParams =
-				new LinkedHashMap<String, Object>();
-
-			groupParams.put("usersGroups", new Long(webDavReq.getUserId()));
-
-			List<Resource> communities = new ArrayList<Resource>();
-
-			Iterator<Group> itr = GroupLocalServiceUtil.search(
-				webDavReq.getCompanyId(), null, null, groupParams,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS).iterator();
-
-			while (itr.hasNext()) {
-				Group group = itr.next();
-
-				Resource resource = getResource(group);
-
-				communities.add(resource);
-			}
-
-			Group group = GroupLocalServiceUtil.getUserGroup(
-				webDavReq.getCompanyId(), webDavReq.getUserId());
-
-			Resource resource = getResource(group);
-
-			communities.add(resource);
-
-			return communities;
-		}
-		catch (Exception e) {
-			throw new WebDAVException(e);
-		}
+	public void setRootPath(String rootPath) {
+		_rootPath = rootPath;
 	}
 
 	public boolean isAvailable(WebDAVRequest webDavReq)
@@ -98,26 +85,20 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		}
 	}
 
-	protected Resource getResource(Group group) throws WebDAVException {
-		try {
-			String parentPath =
-				getRootPath() + StringPool.SLASH + group.getCompanyId();
+	public int moveCollectionResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite)
+		throws WebDAVException {
 
-			String name = group.getName();
+		return HttpServletResponse.SC_FORBIDDEN;
+	}
 
-			if (group.isUser()) {
-				long userId = group.getClassPK();
+	public int moveSimpleResource(
+			WebDAVRequest webDavReq, Resource resource, String destination,
+			boolean overwrite)
+		throws WebDAVException {
 
-				User user = UserLocalServiceUtil.getUserById(userId);
-
-				name = user.getFullName();
-			}
-
-			return new BaseResourceImpl(parentPath, group.getGroupId(), name);
-		}
-		catch (Exception e) {
-			throw new WebDAVException(e);
-		}
+		return HttpServletResponse.SC_FORBIDDEN;
 	}
 
 	private String _rootPath;

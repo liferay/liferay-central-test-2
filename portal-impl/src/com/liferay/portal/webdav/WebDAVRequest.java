@@ -37,15 +37,15 @@ import javax.servlet.http.HttpServletResponse;
  */
 public class WebDAVRequest {
 
-	public WebDAVRequest(WebDAVStorage storage, HttpServletRequest req,
-						 HttpServletResponse res,
-						 PermissionChecker permissionChecker) {
+	public WebDAVRequest(
+			WebDAVStorage storage, HttpServletRequest req,
+			HttpServletResponse res, PermissionChecker permissionChecker)
+		throws WebDAVException {
 
 		_storage = storage;
 		_req = req;
 		_res = res;
 		_path = WebDAVUtil.fixPath(_req.getPathInfo());
-		_groupPath = WebDAVUtil.isGroupPath(_path);
 		_companyId = WebDAVUtil.getCompanyId(_path);
 		_groupId = WebDAVUtil.getGroupId(_path);
 		_userId = GetterUtil.getLong(_req.getRemoteUser());
@@ -76,10 +76,6 @@ public class WebDAVRequest {
 		return WebDAVUtil.getPathArray(_path);
 	}
 
-	public boolean isGroupPath() {
-		return _groupPath;
-	}
-
 	public long getCompanyId() {
 		return _companyId;
 	}
@@ -100,7 +96,6 @@ public class WebDAVRequest {
 	private HttpServletRequest _req;
 	private HttpServletResponse _res;
 	private String _path = StringPool.BLANK;
-	private boolean _groupPath;
 	private long _companyId;
 	private long _groupId;
 	private long _userId;

@@ -54,12 +54,22 @@ public class HttpUtil {
 	public static final String ENCODING = "UTF-8";
 
 	public static String decodeURL(String url) {
+		return decodeURL(url, false);
+	}
+
+	public static String decodeURL(String url, boolean unescapeSpace) {
 		if (url == null) {
 			return null;
 		}
 
 		try {
-			return URLDecoder.decode(url, ENCODING);
+			url = URLDecoder.decode(url, ENCODING);
+
+			if (unescapeSpace) {
+				url = StringUtil.replace(url, "%20", StringPool.PLUS);
+			}
+
+			return url;
 		}
 		catch (UnsupportedEncodingException uee) {
 			_log.error(uee, uee);
@@ -69,12 +79,22 @@ public class HttpUtil {
 	}
 
 	public static String encodeURL(String url) {
+		return encodeURL(url, false);
+	}
+
+	public static String encodeURL(String url, boolean escapeSpace) {
 		if (url == null) {
 			return null;
 		}
 
 		try {
-			return URLEncoder.encode(url, ENCODING);
+			url = URLEncoder.encode(url, ENCODING);
+
+			if (escapeSpace) {
+				url = StringUtil.replace(url, StringPool.PLUS, "%20");
+			}
+
+			return url;
 		}
 		catch (UnsupportedEncodingException uee) {
 			_log.error(uee, uee);

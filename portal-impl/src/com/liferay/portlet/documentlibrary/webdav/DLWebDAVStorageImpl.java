@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
@@ -360,6 +361,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getEntryName(pathArray);
 
+			if (Validator.isNull(name)) {
+				String path = getRootPath() + webDavReq.getPath();
+
+				return new BaseResourceImpl(path, StringPool.BLANK, getToken());
+			}
+
 			try {
 				DLFolder folder = DLFolderServiceUtil.getFolder(
 					webDavReq.getGroupId(), parentFolderId, name);
@@ -667,7 +674,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				x--;
 			}
 
-			for (int i = 2; i < x; i++) {
+			for (int i = 3; i < x; i++) {
 				String name = pathArray[i];
 
 				DLFolder folder = DLFolderServiceUtil.getFolder(

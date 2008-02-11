@@ -30,6 +30,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 JournalStructure structure = (JournalStructure)request.getAttribute(WebKeys.JOURNAL_STRUCTURE);
 
 long groupId = BeanParamUtil.getLong(structure, request, "groupId", portletGroupId.longValue());
+Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 String structureId = BeanParamUtil.getString(structure, request, "structureId");
 String newStructureId = ParamUtil.getString(request, "newStructureId");
@@ -296,7 +297,7 @@ int tabIndex = 1;
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/journal/" + company.getCompanyId() + "/" + portletGroupId + "/Structures/" + structureId %>'
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getResolvedFriendlyURL() + "/journal/Structures/" + structureId %>'
 			/>
 		</td>
 	</tr>
