@@ -992,11 +992,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<PollsQuestion> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			PollsQuestion pollsQuestion = itr.next();
-
+		for (PollsQuestion pollsQuestion : findByUuid(uuid)) {
 			remove(pollsQuestion);
 		}
 	}
@@ -1009,20 +1005,14 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<PollsQuestion> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			PollsQuestion pollsQuestion = itr.next();
-
+		for (PollsQuestion pollsQuestion : findByGroupId(groupId)) {
 			remove(pollsQuestion);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<PollsQuestion> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (PollsQuestion pollsQuestion : findAll()) {
+			remove(pollsQuestion);
 		}
 	}
 

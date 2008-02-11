@@ -1605,64 +1605,41 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<ActivityTracker> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			ActivityTracker activityTracker = itr.next();
-
+		for (ActivityTracker activityTracker : findByGroupId(groupId)) {
 			remove(activityTracker);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<ActivityTracker> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			ActivityTracker activityTracker = itr.next();
-
+		for (ActivityTracker activityTracker : findByCompanyId(companyId)) {
 			remove(activityTracker);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<ActivityTracker> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			ActivityTracker activityTracker = itr.next();
-
+		for (ActivityTracker activityTracker : findByUserId(userId)) {
 			remove(activityTracker);
 		}
 	}
 
 	public void removeByReceiverUserId(long receiverUserId)
 		throws SystemException {
-		Iterator<ActivityTracker> itr = findByReceiverUserId(receiverUserId)
-											.iterator();
-
-		while (itr.hasNext()) {
-			ActivityTracker activityTracker = itr.next();
-
+		for (ActivityTracker activityTracker : findByReceiverUserId(
+				receiverUserId)) {
 			remove(activityTracker);
 		}
 	}
 
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Iterator<ActivityTracker> itr = findByC_C(classNameId, classPK)
-											.iterator();
-
-		while (itr.hasNext()) {
-			ActivityTracker activityTracker = itr.next();
-
+		for (ActivityTracker activityTracker : findByC_C(classNameId, classPK)) {
 			remove(activityTracker);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ActivityTracker> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ActivityTracker activityTracker : findAll()) {
+			remove(activityTracker);
 		}
 	}
 

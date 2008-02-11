@@ -1291,33 +1291,22 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<JournalArticleImage> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticleImage journalArticleImage = itr.next();
-
+		for (JournalArticleImage journalArticleImage : findByGroupId(groupId)) {
 			remove(journalArticleImage);
 		}
 	}
 
 	public void removeByTempImage(boolean tempImage) throws SystemException {
-		Iterator<JournalArticleImage> itr = findByTempImage(tempImage).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticleImage journalArticleImage = itr.next();
-
+		for (JournalArticleImage journalArticleImage : findByTempImage(
+				tempImage)) {
 			remove(journalArticleImage);
 		}
 	}
 
 	public void removeByG_A_V(long groupId, String articleId, double version)
 		throws SystemException {
-		Iterator<JournalArticleImage> itr = findByG_A_V(groupId, articleId,
-				version).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticleImage journalArticleImage = itr.next();
-
+		for (JournalArticleImage journalArticleImage : findByG_A_V(groupId,
+				articleId, version)) {
 			remove(journalArticleImage);
 		}
 	}
@@ -1332,10 +1321,8 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<JournalArticleImage> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (JournalArticleImage journalArticleImage : findAll()) {
+			remove(journalArticleImage);
 		}
 	}
 

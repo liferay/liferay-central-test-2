@@ -1368,11 +1368,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<JournalStructure> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			JournalStructure journalStructure = itr.next();
-
+		for (JournalStructure journalStructure : findByUuid(uuid)) {
 			remove(journalStructure);
 		}
 	}
@@ -1385,23 +1381,14 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<JournalStructure> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalStructure journalStructure = itr.next();
-
+		for (JournalStructure journalStructure : findByGroupId(groupId)) {
 			remove(journalStructure);
 		}
 	}
 
 	public void removeByStructureId(String structureId)
 		throws SystemException {
-		Iterator<JournalStructure> itr = findByStructureId(structureId)
-											 .iterator();
-
-		while (itr.hasNext()) {
-			JournalStructure journalStructure = itr.next();
-
+		for (JournalStructure journalStructure : findByStructureId(structureId)) {
 			remove(journalStructure);
 		}
 	}
@@ -1414,10 +1401,8 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<JournalStructure> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (JournalStructure journalStructure : findAll()) {
+			remove(journalStructure);
 		}
 	}
 

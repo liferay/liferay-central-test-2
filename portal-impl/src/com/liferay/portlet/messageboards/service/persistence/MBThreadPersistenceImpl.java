@@ -603,20 +603,14 @@ public class MBThreadPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCategoryId(long categoryId) throws SystemException {
-		Iterator<MBThread> itr = findByCategoryId(categoryId).iterator();
-
-		while (itr.hasNext()) {
-			MBThread mbThread = itr.next();
-
+		for (MBThread mbThread : findByCategoryId(categoryId)) {
 			remove(mbThread);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<MBThread> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (MBThread mbThread : findAll()) {
+			remove(mbThread);
 		}
 	}
 

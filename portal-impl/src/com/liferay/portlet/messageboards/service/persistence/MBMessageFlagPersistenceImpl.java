@@ -916,21 +916,13 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<MBMessageFlag> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessageFlag mbMessageFlag = itr.next();
-
+		for (MBMessageFlag mbMessageFlag : findByUserId(userId)) {
 			remove(mbMessageFlag);
 		}
 	}
 
 	public void removeByMessageId(long messageId) throws SystemException {
-		Iterator<MBMessageFlag> itr = findByMessageId(messageId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessageFlag mbMessageFlag = itr.next();
-
+		for (MBMessageFlag mbMessageFlag : findByMessageId(messageId)) {
 			remove(mbMessageFlag);
 		}
 	}
@@ -943,10 +935,8 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<MBMessageFlag> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (MBMessageFlag mbMessageFlag : findAll()) {
+			remove(mbMessageFlag);
 		}
 	}
 

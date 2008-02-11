@@ -456,10 +456,8 @@ public class ClassNamePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ClassName> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ClassName className : findAll()) {
+			remove(className);
 		}
 	}
 

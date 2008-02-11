@@ -1163,41 +1163,27 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<SCFrameworkVersion> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			SCFrameworkVersion scFrameworkVersion = itr.next();
-
+		for (SCFrameworkVersion scFrameworkVersion : findByGroupId(groupId)) {
 			remove(scFrameworkVersion);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<SCFrameworkVersion> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			SCFrameworkVersion scFrameworkVersion = itr.next();
-
+		for (SCFrameworkVersion scFrameworkVersion : findByCompanyId(companyId)) {
 			remove(scFrameworkVersion);
 		}
 	}
 
 	public void removeByG_A(long groupId, boolean active)
 		throws SystemException {
-		Iterator<SCFrameworkVersion> itr = findByG_A(groupId, active).iterator();
-
-		while (itr.hasNext()) {
-			SCFrameworkVersion scFrameworkVersion = itr.next();
-
+		for (SCFrameworkVersion scFrameworkVersion : findByG_A(groupId, active)) {
 			remove(scFrameworkVersion);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<SCFrameworkVersion> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (SCFrameworkVersion scFrameworkVersion : findAll()) {
+			remove(scFrameworkVersion);
 		}
 	}
 

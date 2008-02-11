@@ -600,20 +600,14 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 
 	public void removeByOrganizationId(long organizationId)
 		throws SystemException {
-		Iterator<OrgLabor> itr = findByOrganizationId(organizationId).iterator();
-
-		while (itr.hasNext()) {
-			OrgLabor orgLabor = itr.next();
-
+		for (OrgLabor orgLabor : findByOrganizationId(organizationId)) {
 			remove(orgLabor);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<OrgLabor> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (OrgLabor orgLabor : findAll()) {
+			remove(orgLabor);
 		}
 	}
 

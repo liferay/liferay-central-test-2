@@ -1099,11 +1099,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<JournalFeed> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			JournalFeed journalFeed = itr.next();
-
+		for (JournalFeed journalFeed : findByUuid(uuid)) {
 			remove(journalFeed);
 		}
 	}
@@ -1116,11 +1112,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<JournalFeed> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalFeed journalFeed = itr.next();
-
+		for (JournalFeed journalFeed : findByGroupId(groupId)) {
 			remove(journalFeed);
 		}
 	}
@@ -1133,10 +1125,8 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<JournalFeed> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (JournalFeed journalFeed : findAll()) {
+			remove(journalFeed);
 		}
 	}
 

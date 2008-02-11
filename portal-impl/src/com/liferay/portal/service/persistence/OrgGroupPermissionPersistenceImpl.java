@@ -820,32 +820,22 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<OrgGroupPermission> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			OrgGroupPermission orgGroupPermission = itr.next();
-
+		for (OrgGroupPermission orgGroupPermission : findByGroupId(groupId)) {
 			remove(orgGroupPermission);
 		}
 	}
 
 	public void removeByPermissionId(long permissionId)
 		throws SystemException {
-		Iterator<OrgGroupPermission> itr = findByPermissionId(permissionId)
-											   .iterator();
-
-		while (itr.hasNext()) {
-			OrgGroupPermission orgGroupPermission = itr.next();
-
+		for (OrgGroupPermission orgGroupPermission : findByPermissionId(
+				permissionId)) {
 			remove(orgGroupPermission);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<OrgGroupPermission> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (OrgGroupPermission orgGroupPermission : findAll()) {
+			remove(orgGroupPermission);
 		}
 	}
 

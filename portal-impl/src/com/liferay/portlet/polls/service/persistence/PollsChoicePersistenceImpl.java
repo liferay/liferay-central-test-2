@@ -999,21 +999,13 @@ public class PollsChoicePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<PollsChoice> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			PollsChoice pollsChoice = itr.next();
-
+		for (PollsChoice pollsChoice : findByUuid(uuid)) {
 			remove(pollsChoice);
 		}
 	}
 
 	public void removeByQuestionId(long questionId) throws SystemException {
-		Iterator<PollsChoice> itr = findByQuestionId(questionId).iterator();
-
-		while (itr.hasNext()) {
-			PollsChoice pollsChoice = itr.next();
-
+		for (PollsChoice pollsChoice : findByQuestionId(questionId)) {
 			remove(pollsChoice);
 		}
 	}
@@ -1026,10 +1018,8 @@ public class PollsChoicePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<PollsChoice> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (PollsChoice pollsChoice : findAll()) {
+			remove(pollsChoice);
 		}
 	}
 

@@ -1090,7 +1090,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 			</#list>
 
 			) throws SystemException {
-				Iterator<${entity.name}> itr = findBy${finder.name}(
+				for (${entity.name} ${entity.varName} : findBy${finder.name}(
 
 				<#list finderColsList as finderCol>
 					${finderCol.name}
@@ -1100,11 +1100,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					</#if>
 				</#list>
 
-				).iterator();
-
-				while (itr.hasNext()) {
-					${entity.name} ${entity.varName} = itr.next();
-
+				)) {
 					remove(${entity.varName});
 				}
 			}
@@ -1138,10 +1134,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	</#list>
 
 	public void removeAll() throws SystemException {
-		Iterator<${entity.name}> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (${entity.name} ${entity.varName} : findAll()) {
+			remove(${entity.varName});
 		}
 	}
 

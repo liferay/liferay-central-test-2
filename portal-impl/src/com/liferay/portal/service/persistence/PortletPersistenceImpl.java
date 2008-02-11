@@ -675,11 +675,7 @@ public class PortletPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<Portlet> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			Portlet portlet = itr.next();
-
+		for (Portlet portlet : findByCompanyId(companyId)) {
 			remove(portlet);
 		}
 	}
@@ -692,10 +688,8 @@ public class PortletPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Portlet> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Portlet portlet : findAll()) {
+			remove(portlet);
 		}
 	}
 

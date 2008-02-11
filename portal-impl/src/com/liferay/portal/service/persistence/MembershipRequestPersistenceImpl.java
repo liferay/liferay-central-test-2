@@ -1125,41 +1125,27 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<MembershipRequest> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			MembershipRequest membershipRequest = itr.next();
-
+		for (MembershipRequest membershipRequest : findByGroupId(groupId)) {
 			remove(membershipRequest);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<MembershipRequest> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			MembershipRequest membershipRequest = itr.next();
-
+		for (MembershipRequest membershipRequest : findByUserId(userId)) {
 			remove(membershipRequest);
 		}
 	}
 
 	public void removeByG_S(long groupId, int statusId)
 		throws SystemException {
-		Iterator<MembershipRequest> itr = findByG_S(groupId, statusId).iterator();
-
-		while (itr.hasNext()) {
-			MembershipRequest membershipRequest = itr.next();
-
+		for (MembershipRequest membershipRequest : findByG_S(groupId, statusId)) {
 			remove(membershipRequest);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<MembershipRequest> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (MembershipRequest membershipRequest : findAll()) {
+			remove(membershipRequest);
 		}
 	}
 

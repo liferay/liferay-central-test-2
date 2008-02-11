@@ -587,20 +587,14 @@ public class ImagePersistenceImpl extends BasePersistence
 	}
 
 	public void removeBySize(int size) throws SystemException {
-		Iterator<Image> itr = findBySize(size).iterator();
-
-		while (itr.hasNext()) {
-			Image image = itr.next();
-
+		for (Image image : findBySize(size)) {
 			remove(image);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Image> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Image image : findAll()) {
+			remove(image);
 		}
 	}
 

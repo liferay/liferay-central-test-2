@@ -1224,21 +1224,13 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<MBStatsUser> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			MBStatsUser mbStatsUser = itr.next();
-
+		for (MBStatsUser mbStatsUser : findByGroupId(groupId)) {
 			remove(mbStatsUser);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<MBStatsUser> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			MBStatsUser mbStatsUser = itr.next();
-
+		for (MBStatsUser mbStatsUser : findByUserId(userId)) {
 			remove(mbStatsUser);
 		}
 	}
@@ -1252,20 +1244,14 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 
 	public void removeByG_M(long groupId, int messageCount)
 		throws SystemException {
-		Iterator<MBStatsUser> itr = findByG_M(groupId, messageCount).iterator();
-
-		while (itr.hasNext()) {
-			MBStatsUser mbStatsUser = itr.next();
-
+		for (MBStatsUser mbStatsUser : findByG_M(groupId, messageCount)) {
 			remove(mbStatsUser);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<MBStatsUser> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (MBStatsUser mbStatsUser : findAll()) {
+			remove(mbStatsUser);
 		}
 	}
 

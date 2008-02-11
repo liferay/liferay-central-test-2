@@ -2193,54 +2193,34 @@ public class WikiPagePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<WikiPage> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			WikiPage wikiPage = itr.next();
-
+		for (WikiPage wikiPage : findByUuid(uuid)) {
 			remove(wikiPage);
 		}
 	}
 
 	public void removeByNodeId(long nodeId) throws SystemException {
-		Iterator<WikiPage> itr = findByNodeId(nodeId).iterator();
-
-		while (itr.hasNext()) {
-			WikiPage wikiPage = itr.next();
-
+		for (WikiPage wikiPage : findByNodeId(nodeId)) {
 			remove(wikiPage);
 		}
 	}
 
 	public void removeByN_T(long nodeId, String title)
 		throws SystemException {
-		Iterator<WikiPage> itr = findByN_T(nodeId, title).iterator();
-
-		while (itr.hasNext()) {
-			WikiPage wikiPage = itr.next();
-
+		for (WikiPage wikiPage : findByN_T(nodeId, title)) {
 			remove(wikiPage);
 		}
 	}
 
 	public void removeByN_H(long nodeId, boolean head)
 		throws SystemException {
-		Iterator<WikiPage> itr = findByN_H(nodeId, head).iterator();
-
-		while (itr.hasNext()) {
-			WikiPage wikiPage = itr.next();
-
+		for (WikiPage wikiPage : findByN_H(nodeId, head)) {
 			remove(wikiPage);
 		}
 	}
 
 	public void removeByN_R(long nodeId, String redirectTo)
 		throws SystemException {
-		Iterator<WikiPage> itr = findByN_R(nodeId, redirectTo).iterator();
-
-		while (itr.hasNext()) {
-			WikiPage wikiPage = itr.next();
-
+		for (WikiPage wikiPage : findByN_R(nodeId, redirectTo)) {
 			remove(wikiPage);
 		}
 	}
@@ -2254,20 +2234,14 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 	public void removeByN_T_H(long nodeId, String title, boolean head)
 		throws SystemException {
-		Iterator<WikiPage> itr = findByN_T_H(nodeId, title, head).iterator();
-
-		while (itr.hasNext()) {
-			WikiPage wikiPage = itr.next();
-
+		for (WikiPage wikiPage : findByN_T_H(nodeId, title, head)) {
 			remove(wikiPage);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<WikiPage> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (WikiPage wikiPage : findAll()) {
+			remove(wikiPage);
 		}
 	}
 

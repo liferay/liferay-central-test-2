@@ -614,20 +614,14 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByItemId(long itemId) throws SystemException {
-		Iterator<ShoppingItemPrice> itr = findByItemId(itemId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingItemPrice shoppingItemPrice = itr.next();
-
+		for (ShoppingItemPrice shoppingItemPrice : findByItemId(itemId)) {
 			remove(shoppingItemPrice);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ShoppingItemPrice> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ShoppingItemPrice shoppingItemPrice : findAll()) {
+			remove(shoppingItemPrice);
 		}
 	}
 

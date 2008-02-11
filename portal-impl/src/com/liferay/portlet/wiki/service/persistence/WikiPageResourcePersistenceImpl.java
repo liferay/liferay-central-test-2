@@ -478,10 +478,8 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<WikiPageResource> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (WikiPageResource wikiPageResource : findAll()) {
+			remove(wikiPageResource);
 		}
 	}
 

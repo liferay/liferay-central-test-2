@@ -1751,21 +1751,13 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<User> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			User user = itr.next();
-
+		for (User user : findByUuid(uuid)) {
 			remove(user);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<User> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			User user = itr.next();
-
+		for (User user : findByCompanyId(companyId)) {
 			remove(user);
 		}
 	}
@@ -1800,11 +1792,7 @@ public class UserPersistenceImpl extends BasePersistence
 
 	public void removeByC_P(long companyId, String password)
 		throws SystemException {
-		Iterator<User> itr = findByC_P(companyId, password).iterator();
-
-		while (itr.hasNext()) {
-			User user = itr.next();
-
+		for (User user : findByC_P(companyId, password)) {
 			remove(user);
 		}
 	}
@@ -1824,10 +1812,8 @@ public class UserPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<User> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (User user : findAll()) {
+			remove(user);
 		}
 	}
 

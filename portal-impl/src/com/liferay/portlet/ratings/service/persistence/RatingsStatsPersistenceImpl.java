@@ -470,10 +470,8 @@ public class RatingsStatsPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<RatingsStats> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (RatingsStats ratingsStats : findAll()) {
+			remove(ratingsStats);
 		}
 	}
 

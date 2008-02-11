@@ -608,20 +608,14 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<PasswordTracker> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			PasswordTracker passwordTracker = itr.next();
-
+		for (PasswordTracker passwordTracker : findByUserId(userId)) {
 			remove(passwordTracker);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<PasswordTracker> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (PasswordTracker passwordTracker : findAll()) {
+			remove(passwordTracker);
 		}
 	}
 

@@ -1503,11 +1503,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<IGFolder> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			IGFolder igFolder = itr.next();
-
+		for (IGFolder igFolder : findByUuid(uuid)) {
 			remove(igFolder);
 		}
 	}
@@ -1520,41 +1516,27 @@ public class IGFolderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<IGFolder> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			IGFolder igFolder = itr.next();
-
+		for (IGFolder igFolder : findByGroupId(groupId)) {
 			remove(igFolder);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<IGFolder> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			IGFolder igFolder = itr.next();
-
+		for (IGFolder igFolder : findByCompanyId(companyId)) {
 			remove(igFolder);
 		}
 	}
 
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
-		Iterator<IGFolder> itr = findByG_P(groupId, parentFolderId).iterator();
-
-		while (itr.hasNext()) {
-			IGFolder igFolder = itr.next();
-
+		for (IGFolder igFolder : findByG_P(groupId, parentFolderId)) {
 			remove(igFolder);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<IGFolder> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (IGFolder igFolder : findAll()) {
+			remove(igFolder);
 		}
 	}
 

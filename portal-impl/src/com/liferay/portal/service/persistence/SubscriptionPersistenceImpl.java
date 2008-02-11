@@ -989,23 +989,15 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<Subscription> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			Subscription subscription = itr.next();
-
+		for (Subscription subscription : findByUserId(userId)) {
 			remove(subscription);
 		}
 	}
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Iterator<Subscription> itr = findByC_C_C(companyId, classNameId, classPK)
-										 .iterator();
-
-		while (itr.hasNext()) {
-			Subscription subscription = itr.next();
-
+		for (Subscription subscription : findByC_C_C(companyId, classNameId,
+				classPK)) {
 			remove(subscription);
 		}
 	}
@@ -1019,10 +1011,8 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Subscription> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Subscription subscription : findAll()) {
+			remove(subscription);
 		}
 	}
 

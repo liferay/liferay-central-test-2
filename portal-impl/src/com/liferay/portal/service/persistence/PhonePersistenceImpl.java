@@ -1707,65 +1707,42 @@ public class PhonePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<Phone> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			Phone phone = itr.next();
-
+		for (Phone phone : findByCompanyId(companyId)) {
 			remove(phone);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<Phone> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			Phone phone = itr.next();
-
+		for (Phone phone : findByUserId(userId)) {
 			remove(phone);
 		}
 	}
 
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Iterator<Phone> itr = findByC_C(companyId, classNameId).iterator();
-
-		while (itr.hasNext()) {
-			Phone phone = itr.next();
-
+		for (Phone phone : findByC_C(companyId, classNameId)) {
 			remove(phone);
 		}
 	}
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Iterator<Phone> itr = findByC_C_C(companyId, classNameId, classPK)
-								  .iterator();
-
-		while (itr.hasNext()) {
-			Phone phone = itr.next();
-
+		for (Phone phone : findByC_C_C(companyId, classNameId, classPK)) {
 			remove(phone);
 		}
 	}
 
 	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
-		Iterator<Phone> itr = findByC_C_C_P(companyId, classNameId, classPK,
-				primary).iterator();
-
-		while (itr.hasNext()) {
-			Phone phone = itr.next();
-
+		for (Phone phone : findByC_C_C_P(companyId, classNameId, classPK,
+				primary)) {
 			remove(phone);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Phone> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Phone phone : findAll()) {
+			remove(phone);
 		}
 	}
 

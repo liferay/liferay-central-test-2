@@ -1538,62 +1538,40 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<UserGroupRole> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = itr.next();
-
+		for (UserGroupRole userGroupRole : findByUserId(userId)) {
 			remove(userGroupRole);
 		}
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<UserGroupRole> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = itr.next();
-
+		for (UserGroupRole userGroupRole : findByGroupId(groupId)) {
 			remove(userGroupRole);
 		}
 	}
 
 	public void removeByRoleId(long roleId) throws SystemException {
-		Iterator<UserGroupRole> itr = findByRoleId(roleId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = itr.next();
-
+		for (UserGroupRole userGroupRole : findByRoleId(roleId)) {
 			remove(userGroupRole);
 		}
 	}
 
 	public void removeByU_G(long userId, long groupId)
 		throws SystemException {
-		Iterator<UserGroupRole> itr = findByU_G(userId, groupId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = itr.next();
-
+		for (UserGroupRole userGroupRole : findByU_G(userId, groupId)) {
 			remove(userGroupRole);
 		}
 	}
 
 	public void removeByG_R(long groupId, long roleId)
 		throws SystemException {
-		Iterator<UserGroupRole> itr = findByG_R(groupId, roleId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = itr.next();
-
+		for (UserGroupRole userGroupRole : findByG_R(groupId, roleId)) {
 			remove(userGroupRole);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<UserGroupRole> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (UserGroupRole userGroupRole : findAll()) {
+			remove(userGroupRole);
 		}
 	}
 

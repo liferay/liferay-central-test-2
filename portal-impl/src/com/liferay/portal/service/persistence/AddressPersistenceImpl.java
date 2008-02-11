@@ -2035,77 +2035,50 @@ public class AddressPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<Address> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			Address address = itr.next();
-
+		for (Address address : findByCompanyId(companyId)) {
 			remove(address);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<Address> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			Address address = itr.next();
-
+		for (Address address : findByUserId(userId)) {
 			remove(address);
 		}
 	}
 
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Iterator<Address> itr = findByC_C(companyId, classNameId).iterator();
-
-		while (itr.hasNext()) {
-			Address address = itr.next();
-
+		for (Address address : findByC_C(companyId, classNameId)) {
 			remove(address);
 		}
 	}
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Iterator<Address> itr = findByC_C_C(companyId, classNameId, classPK)
-									.iterator();
-
-		while (itr.hasNext()) {
-			Address address = itr.next();
-
+		for (Address address : findByC_C_C(companyId, classNameId, classPK)) {
 			remove(address);
 		}
 	}
 
 	public void removeByC_C_C_M(long companyId, long classNameId, long classPK,
 		boolean mailing) throws SystemException {
-		Iterator<Address> itr = findByC_C_C_M(companyId, classNameId, classPK,
-				mailing).iterator();
-
-		while (itr.hasNext()) {
-			Address address = itr.next();
-
+		for (Address address : findByC_C_C_M(companyId, classNameId, classPK,
+				mailing)) {
 			remove(address);
 		}
 	}
 
 	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
-		Iterator<Address> itr = findByC_C_C_P(companyId, classNameId, classPK,
-				primary).iterator();
-
-		while (itr.hasNext()) {
-			Address address = itr.next();
-
+		for (Address address : findByC_C_C_P(companyId, classNameId, classPK,
+				primary)) {
 			remove(address);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Address> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Address address : findAll()) {
+			remove(address);
 		}
 	}
 

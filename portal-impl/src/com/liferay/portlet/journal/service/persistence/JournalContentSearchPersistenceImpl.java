@@ -1996,60 +1996,40 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		Iterator<JournalContentSearch> itr = findByG_P(groupId, privateLayout)
-												 .iterator();
-
-		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = itr.next();
-
+		for (JournalContentSearch journalContentSearch : findByG_P(groupId,
+				privateLayout)) {
 			remove(journalContentSearch);
 		}
 	}
 
 	public void removeByG_A(long groupId, String articleId)
 		throws SystemException {
-		Iterator<JournalContentSearch> itr = findByG_A(groupId, articleId)
-												 .iterator();
-
-		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = itr.next();
-
+		for (JournalContentSearch journalContentSearch : findByG_A(groupId,
+				articleId)) {
 			remove(journalContentSearch);
 		}
 	}
 
 	public void removeByG_P_L(long groupId, boolean privateLayout, long layoutId)
 		throws SystemException {
-		Iterator<JournalContentSearch> itr = findByG_P_L(groupId,
-				privateLayout, layoutId).iterator();
-
-		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = itr.next();
-
+		for (JournalContentSearch journalContentSearch : findByG_P_L(groupId,
+				privateLayout, layoutId)) {
 			remove(journalContentSearch);
 		}
 	}
 
 	public void removeByG_P_A(long groupId, boolean privateLayout,
 		String articleId) throws SystemException {
-		Iterator<JournalContentSearch> itr = findByG_P_A(groupId,
-				privateLayout, articleId).iterator();
-
-		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = itr.next();
-
+		for (JournalContentSearch journalContentSearch : findByG_P_A(groupId,
+				privateLayout, articleId)) {
 			remove(journalContentSearch);
 		}
 	}
 
 	public void removeByG_P_L_P(long groupId, boolean privateLayout,
 		long layoutId, String portletId) throws SystemException {
-		Iterator<JournalContentSearch> itr = findByG_P_L_P(groupId,
-				privateLayout, layoutId, portletId).iterator();
-
-		while (itr.hasNext()) {
-			JournalContentSearch journalContentSearch = itr.next();
-
+		for (JournalContentSearch journalContentSearch : findByG_P_L_P(
+				groupId, privateLayout, layoutId, portletId)) {
 			remove(journalContentSearch);
 		}
 	}
@@ -2064,10 +2044,8 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<JournalContentSearch> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (JournalContentSearch journalContentSearch : findAll()) {
+			remove(journalContentSearch);
 		}
 	}
 

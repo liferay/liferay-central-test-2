@@ -807,11 +807,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<UserIdMapper> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			UserIdMapper userIdMapper = itr.next();
-
+		for (UserIdMapper userIdMapper : findByUserId(userId)) {
 			remove(userIdMapper);
 		}
 	}
@@ -831,10 +827,8 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<UserIdMapper> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (UserIdMapper userIdMapper : findAll()) {
+			remove(userIdMapper);
 		}
 	}
 

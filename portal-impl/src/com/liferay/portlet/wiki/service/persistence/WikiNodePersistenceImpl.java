@@ -1214,11 +1214,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<WikiNode> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			WikiNode wikiNode = itr.next();
-
+		for (WikiNode wikiNode : findByUuid(uuid)) {
 			remove(wikiNode);
 		}
 	}
@@ -1231,30 +1227,20 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<WikiNode> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			WikiNode wikiNode = itr.next();
-
+		for (WikiNode wikiNode : findByGroupId(groupId)) {
 			remove(wikiNode);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<WikiNode> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			WikiNode wikiNode = itr.next();
-
+		for (WikiNode wikiNode : findByCompanyId(companyId)) {
 			remove(wikiNode);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<WikiNode> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (WikiNode wikiNode : findAll()) {
+			remove(wikiNode);
 		}
 	}
 

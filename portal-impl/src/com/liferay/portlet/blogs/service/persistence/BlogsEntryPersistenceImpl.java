@@ -1874,11 +1874,7 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<BlogsEntry> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry blogsEntry = itr.next();
-
+		for (BlogsEntry blogsEntry : findByUuid(uuid)) {
 			remove(blogsEntry);
 		}
 	}
@@ -1891,32 +1887,20 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<BlogsEntry> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry blogsEntry = itr.next();
-
+		for (BlogsEntry blogsEntry : findByGroupId(groupId)) {
 			remove(blogsEntry);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<BlogsEntry> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry blogsEntry = itr.next();
-
+		for (BlogsEntry blogsEntry : findByCompanyId(companyId)) {
 			remove(blogsEntry);
 		}
 	}
 
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
-		Iterator<BlogsEntry> itr = findByG_U(groupId, userId).iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry blogsEntry = itr.next();
-
+		for (BlogsEntry blogsEntry : findByG_U(groupId, userId)) {
 			remove(blogsEntry);
 		}
 	}
@@ -1930,20 +1914,14 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 	public void removeByC_U(long companyId, long userId)
 		throws SystemException {
-		Iterator<BlogsEntry> itr = findByC_U(companyId, userId).iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry blogsEntry = itr.next();
-
+		for (BlogsEntry blogsEntry : findByC_U(companyId, userId)) {
 			remove(blogsEntry);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<BlogsEntry> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (BlogsEntry blogsEntry : findAll()) {
+			remove(blogsEntry);
 		}
 	}
 

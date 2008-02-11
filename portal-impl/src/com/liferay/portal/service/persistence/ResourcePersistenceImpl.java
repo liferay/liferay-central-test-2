@@ -678,11 +678,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCodeId(long codeId) throws SystemException {
-		Iterator<Resource> itr = findByCodeId(codeId).iterator();
-
-		while (itr.hasNext()) {
-			Resource resource = itr.next();
-
+		for (Resource resource : findByCodeId(codeId)) {
 			remove(resource);
 		}
 	}
@@ -695,10 +691,8 @@ public class ResourcePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Resource> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Resource resource : findAll()) {
+			remove(resource);
 		}
 	}
 

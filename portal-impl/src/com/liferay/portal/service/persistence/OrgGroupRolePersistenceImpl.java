@@ -806,30 +806,20 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<OrgGroupRole> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			OrgGroupRole orgGroupRole = itr.next();
-
+		for (OrgGroupRole orgGroupRole : findByGroupId(groupId)) {
 			remove(orgGroupRole);
 		}
 	}
 
 	public void removeByRoleId(long roleId) throws SystemException {
-		Iterator<OrgGroupRole> itr = findByRoleId(roleId).iterator();
-
-		while (itr.hasNext()) {
-			OrgGroupRole orgGroupRole = itr.next();
-
+		for (OrgGroupRole orgGroupRole : findByRoleId(roleId)) {
 			remove(orgGroupRole);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<OrgGroupRole> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (OrgGroupRole orgGroupRole : findAll()) {
+			remove(orgGroupRole);
 		}
 	}
 

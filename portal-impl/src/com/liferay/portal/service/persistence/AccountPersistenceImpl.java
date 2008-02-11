@@ -348,10 +348,8 @@ public class AccountPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Account> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Account account : findAll()) {
+			remove(account);
 		}
 	}
 

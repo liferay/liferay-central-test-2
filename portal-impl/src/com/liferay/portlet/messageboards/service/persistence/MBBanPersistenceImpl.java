@@ -1119,31 +1119,19 @@ public class MBBanPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<MBBan> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			MBBan mbBan = itr.next();
-
+		for (MBBan mbBan : findByGroupId(groupId)) {
 			remove(mbBan);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<MBBan> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			MBBan mbBan = itr.next();
-
+		for (MBBan mbBan : findByUserId(userId)) {
 			remove(mbBan);
 		}
 	}
 
 	public void removeByBanUserId(long banUserId) throws SystemException {
-		Iterator<MBBan> itr = findByBanUserId(banUserId).iterator();
-
-		while (itr.hasNext()) {
-			MBBan mbBan = itr.next();
-
+		for (MBBan mbBan : findByBanUserId(banUserId)) {
 			remove(mbBan);
 		}
 	}
@@ -1156,10 +1144,8 @@ public class MBBanPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<MBBan> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (MBBan mbBan : findAll()) {
+			remove(mbBan);
 		}
 	}
 

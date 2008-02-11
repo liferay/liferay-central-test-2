@@ -755,10 +755,8 @@ public class CompanyPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Company> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Company company : findAll()) {
+			remove(company);
 		}
 	}
 

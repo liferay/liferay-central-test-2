@@ -890,32 +890,22 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<ShoppingCategory> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingCategory shoppingCategory = itr.next();
-
+		for (ShoppingCategory shoppingCategory : findByGroupId(groupId)) {
 			remove(shoppingCategory);
 		}
 	}
 
 	public void removeByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
-		Iterator<ShoppingCategory> itr = findByG_P(groupId, parentCategoryId)
-											 .iterator();
-
-		while (itr.hasNext()) {
-			ShoppingCategory shoppingCategory = itr.next();
-
+		for (ShoppingCategory shoppingCategory : findByG_P(groupId,
+				parentCategoryId)) {
 			remove(shoppingCategory);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ShoppingCategory> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ShoppingCategory shoppingCategory : findAll()) {
+			remove(shoppingCategory);
 		}
 	}
 

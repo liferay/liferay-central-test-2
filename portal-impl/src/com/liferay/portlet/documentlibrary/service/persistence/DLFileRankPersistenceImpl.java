@@ -1028,22 +1028,14 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<DLFileRank> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			DLFileRank dlFileRank = itr.next();
-
+		for (DLFileRank dlFileRank : findByUserId(userId)) {
 			remove(dlFileRank);
 		}
 	}
 
 	public void removeByF_N(long folderId, String name)
 		throws SystemException {
-		Iterator<DLFileRank> itr = findByF_N(folderId, name).iterator();
-
-		while (itr.hasNext()) {
-			DLFileRank dlFileRank = itr.next();
-
+		for (DLFileRank dlFileRank : findByF_N(folderId, name)) {
 			remove(dlFileRank);
 		}
 	}
@@ -1056,10 +1048,8 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<DLFileRank> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (DLFileRank dlFileRank : findAll()) {
+			remove(dlFileRank);
 		}
 	}
 

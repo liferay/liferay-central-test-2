@@ -1032,11 +1032,7 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<ShoppingOrder> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingOrder shoppingOrder = itr.next();
-
+		for (ShoppingOrder shoppingOrder : findByGroupId(groupId)) {
 			remove(shoppingOrder);
 		}
 	}
@@ -1050,21 +1046,15 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 	public void removeByG_U_PPPS(long groupId, long userId,
 		String ppPaymentStatus) throws SystemException {
-		Iterator<ShoppingOrder> itr = findByG_U_PPPS(groupId, userId,
-				ppPaymentStatus).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingOrder shoppingOrder = itr.next();
-
+		for (ShoppingOrder shoppingOrder : findByG_U_PPPS(groupId, userId,
+				ppPaymentStatus)) {
 			remove(shoppingOrder);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ShoppingOrder> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ShoppingOrder shoppingOrder : findAll()) {
+			remove(shoppingOrder);
 		}
 	}
 

@@ -1123,41 +1123,27 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<DLFileShortcut> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			DLFileShortcut dlFileShortcut = itr.next();
-
+		for (DLFileShortcut dlFileShortcut : findByUuid(uuid)) {
 			remove(dlFileShortcut);
 		}
 	}
 
 	public void removeByFolderId(long folderId) throws SystemException {
-		Iterator<DLFileShortcut> itr = findByFolderId(folderId).iterator();
-
-		while (itr.hasNext()) {
-			DLFileShortcut dlFileShortcut = itr.next();
-
+		for (DLFileShortcut dlFileShortcut : findByFolderId(folderId)) {
 			remove(dlFileShortcut);
 		}
 	}
 
 	public void removeByTF_TN(long toFolderId, String toName)
 		throws SystemException {
-		Iterator<DLFileShortcut> itr = findByTF_TN(toFolderId, toName).iterator();
-
-		while (itr.hasNext()) {
-			DLFileShortcut dlFileShortcut = itr.next();
-
+		for (DLFileShortcut dlFileShortcut : findByTF_TN(toFolderId, toName)) {
 			remove(dlFileShortcut);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<DLFileShortcut> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (DLFileShortcut dlFileShortcut : findAll()) {
+			remove(dlFileShortcut);
 		}
 	}
 

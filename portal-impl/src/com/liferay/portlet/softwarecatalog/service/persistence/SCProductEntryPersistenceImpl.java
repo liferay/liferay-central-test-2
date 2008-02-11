@@ -1279,32 +1279,20 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<SCProductEntry> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			SCProductEntry scProductEntry = itr.next();
-
+		for (SCProductEntry scProductEntry : findByGroupId(groupId)) {
 			remove(scProductEntry);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<SCProductEntry> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			SCProductEntry scProductEntry = itr.next();
-
+		for (SCProductEntry scProductEntry : findByCompanyId(companyId)) {
 			remove(scProductEntry);
 		}
 	}
 
 	public void removeByG_U(long groupId, long userId)
 		throws SystemException {
-		Iterator<SCProductEntry> itr = findByG_U(groupId, userId).iterator();
-
-		while (itr.hasNext()) {
-			SCProductEntry scProductEntry = itr.next();
-
+		for (SCProductEntry scProductEntry : findByG_U(groupId, userId)) {
 			remove(scProductEntry);
 		}
 	}
@@ -1317,10 +1305,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<SCProductEntry> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (SCProductEntry scProductEntry : findAll()) {
+			remove(scProductEntry);
 		}
 	}
 

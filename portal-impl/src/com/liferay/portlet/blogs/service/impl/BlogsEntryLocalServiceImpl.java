@@ -53,7 +53,6 @@ import com.liferay.util.lucene.HitsImpl;
 import java.io.IOException;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -244,12 +243,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 	public void deleteEntries(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator<BlogsEntry> itr = blogsEntryPersistence.findByGroupId(
-			groupId).iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry entry = itr.next();
-
+		for (BlogsEntry entry : blogsEntryPersistence.findByGroupId(groupId)) {
 			deleteEntry(entry);
 		}
 	}
@@ -432,11 +426,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator<BlogsEntry> itr = blogsEntryPersistence.findByCompanyId(
-				companyId).iterator();
-
-			while (itr.hasNext()) {
-				BlogsEntry entry = itr.next();
+			for (BlogsEntry entry :
+					blogsEntryPersistence.findByCompanyId(companyId)) {
 
 				long groupId = entry.getGroupId();
 				long userId = entry.getUserId();

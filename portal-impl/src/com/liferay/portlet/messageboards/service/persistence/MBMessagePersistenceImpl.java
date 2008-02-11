@@ -1917,72 +1917,46 @@ public class MBMessagePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<MBMessage> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			MBMessage mbMessage = itr.next();
-
+		for (MBMessage mbMessage : findByUuid(uuid)) {
 			remove(mbMessage);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<MBMessage> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessage mbMessage = itr.next();
-
+		for (MBMessage mbMessage : findByCompanyId(companyId)) {
 			remove(mbMessage);
 		}
 	}
 
 	public void removeByCategoryId(long categoryId) throws SystemException {
-		Iterator<MBMessage> itr = findByCategoryId(categoryId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessage mbMessage = itr.next();
-
+		for (MBMessage mbMessage : findByCategoryId(categoryId)) {
 			remove(mbMessage);
 		}
 	}
 
 	public void removeByThreadId(long threadId) throws SystemException {
-		Iterator<MBMessage> itr = findByThreadId(threadId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessage mbMessage = itr.next();
-
+		for (MBMessage mbMessage : findByThreadId(threadId)) {
 			remove(mbMessage);
 		}
 	}
 
 	public void removeByC_T(long categoryId, long threadId)
 		throws SystemException {
-		Iterator<MBMessage> itr = findByC_T(categoryId, threadId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessage mbMessage = itr.next();
-
+		for (MBMessage mbMessage : findByC_T(categoryId, threadId)) {
 			remove(mbMessage);
 		}
 	}
 
 	public void removeByT_P(long threadId, long parentMessageId)
 		throws SystemException {
-		Iterator<MBMessage> itr = findByT_P(threadId, parentMessageId).iterator();
-
-		while (itr.hasNext()) {
-			MBMessage mbMessage = itr.next();
-
+		for (MBMessage mbMessage : findByT_P(threadId, parentMessageId)) {
 			remove(mbMessage);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<MBMessage> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (MBMessage mbMessage : findAll()) {
+			remove(mbMessage);
 		}
 	}
 

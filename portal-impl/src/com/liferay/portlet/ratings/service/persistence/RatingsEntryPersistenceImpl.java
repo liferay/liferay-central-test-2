@@ -727,11 +727,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 
 	public void removeByC_C(long classNameId, long classPK)
 		throws SystemException {
-		Iterator<RatingsEntry> itr = findByC_C(classNameId, classPK).iterator();
-
-		while (itr.hasNext()) {
-			RatingsEntry ratingsEntry = itr.next();
-
+		for (RatingsEntry ratingsEntry : findByC_C(classNameId, classPK)) {
 			remove(ratingsEntry);
 		}
 	}
@@ -744,10 +740,8 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<RatingsEntry> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (RatingsEntry ratingsEntry : findAll()) {
+			remove(ratingsEntry);
 		}
 	}
 

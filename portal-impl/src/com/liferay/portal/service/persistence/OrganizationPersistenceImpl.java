@@ -1273,33 +1273,21 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<Organization> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			Organization organization = itr.next();
-
+		for (Organization organization : findByCompanyId(companyId)) {
 			remove(organization);
 		}
 	}
 
 	public void removeByLocations(long companyId) throws SystemException {
-		Iterator<Organization> itr = findByLocations(companyId).iterator();
-
-		while (itr.hasNext()) {
-			Organization organization = itr.next();
-
+		for (Organization organization : findByLocations(companyId)) {
 			remove(organization);
 		}
 	}
 
 	public void removeByC_P(long companyId, long parentOrganizationId)
 		throws SystemException {
-		Iterator<Organization> itr = findByC_P(companyId, parentOrganizationId)
-										 .iterator();
-
-		while (itr.hasNext()) {
-			Organization organization = itr.next();
-
+		for (Organization organization : findByC_P(companyId,
+				parentOrganizationId)) {
 			remove(organization);
 		}
 	}
@@ -1312,10 +1300,8 @@ public class OrganizationPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Organization> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Organization organization : findAll()) {
+			remove(organization);
 		}
 	}
 

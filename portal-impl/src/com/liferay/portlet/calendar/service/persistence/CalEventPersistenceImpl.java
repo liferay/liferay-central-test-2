@@ -1551,11 +1551,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<CalEvent> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			CalEvent calEvent = itr.next();
-
+		for (CalEvent calEvent : findByUuid(uuid)) {
 			remove(calEvent);
 		}
 	}
@@ -1568,42 +1564,28 @@ public class CalEventPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<CalEvent> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			CalEvent calEvent = itr.next();
-
+		for (CalEvent calEvent : findByGroupId(groupId)) {
 			remove(calEvent);
 		}
 	}
 
 	public void removeByG_T(long groupId, String type)
 		throws SystemException {
-		Iterator<CalEvent> itr = findByG_T(groupId, type).iterator();
-
-		while (itr.hasNext()) {
-			CalEvent calEvent = itr.next();
-
+		for (CalEvent calEvent : findByG_T(groupId, type)) {
 			remove(calEvent);
 		}
 	}
 
 	public void removeByG_R(long groupId, boolean repeating)
 		throws SystemException {
-		Iterator<CalEvent> itr = findByG_R(groupId, repeating).iterator();
-
-		while (itr.hasNext()) {
-			CalEvent calEvent = itr.next();
-
+		for (CalEvent calEvent : findByG_R(groupId, repeating)) {
 			remove(calEvent);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<CalEvent> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (CalEvent calEvent : findAll()) {
+			remove(calEvent);
 		}
 	}
 

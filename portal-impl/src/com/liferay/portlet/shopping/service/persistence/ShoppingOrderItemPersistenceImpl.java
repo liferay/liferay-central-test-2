@@ -614,20 +614,14 @@ public class ShoppingOrderItemPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByOrderId(long orderId) throws SystemException {
-		Iterator<ShoppingOrderItem> itr = findByOrderId(orderId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingOrderItem shoppingOrderItem = itr.next();
-
+		for (ShoppingOrderItem shoppingOrderItem : findByOrderId(orderId)) {
 			remove(shoppingOrderItem);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ShoppingOrderItem> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ShoppingOrderItem shoppingOrderItem : findAll()) {
+			remove(shoppingOrderItem);
 		}
 	}
 

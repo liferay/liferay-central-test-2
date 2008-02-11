@@ -1538,31 +1538,19 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<DLFileEntry> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			DLFileEntry dlFileEntry = itr.next();
-
+		for (DLFileEntry dlFileEntry : findByUuid(uuid)) {
 			remove(dlFileEntry);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<DLFileEntry> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			DLFileEntry dlFileEntry = itr.next();
-
+		for (DLFileEntry dlFileEntry : findByCompanyId(companyId)) {
 			remove(dlFileEntry);
 		}
 	}
 
 	public void removeByFolderId(long folderId) throws SystemException {
-		Iterator<DLFileEntry> itr = findByFolderId(folderId).iterator();
-
-		while (itr.hasNext()) {
-			DLFileEntry dlFileEntry = itr.next();
-
+		for (DLFileEntry dlFileEntry : findByFolderId(folderId)) {
 			remove(dlFileEntry);
 		}
 	}
@@ -1576,20 +1564,14 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 	public void removeByF_T(long folderId, String title)
 		throws SystemException {
-		Iterator<DLFileEntry> itr = findByF_T(folderId, title).iterator();
-
-		while (itr.hasNext()) {
-			DLFileEntry dlFileEntry = itr.next();
-
+		for (DLFileEntry dlFileEntry : findByF_T(folderId, title)) {
 			remove(dlFileEntry);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<DLFileEntry> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (DLFileEntry dlFileEntry : findAll()) {
+			remove(dlFileEntry);
 		}
 	}
 

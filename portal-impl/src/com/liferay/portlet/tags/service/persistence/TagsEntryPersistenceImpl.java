@@ -505,10 +505,8 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<TagsEntry> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (TagsEntry tagsEntry : findAll()) {
+			remove(tagsEntry);
 		}
 	}
 

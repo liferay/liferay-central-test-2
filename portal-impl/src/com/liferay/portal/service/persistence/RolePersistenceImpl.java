@@ -860,11 +860,7 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<Role> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			Role role = itr.next();
-
+		for (Role role : findByCompanyId(companyId)) {
 			remove(role);
 		}
 	}
@@ -884,10 +880,8 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Role> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Role role : findAll()) {
+			remove(role);
 		}
 	}
 

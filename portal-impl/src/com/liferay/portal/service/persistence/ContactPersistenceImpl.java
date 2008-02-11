@@ -570,20 +570,14 @@ public class ContactPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<Contact> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			Contact contact = itr.next();
-
+		for (Contact contact : findByCompanyId(companyId)) {
 			remove(contact);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Contact> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Contact contact : findAll()) {
+			remove(contact);
 		}
 	}
 

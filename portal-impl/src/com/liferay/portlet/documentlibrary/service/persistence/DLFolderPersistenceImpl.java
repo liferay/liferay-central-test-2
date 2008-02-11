@@ -1924,11 +1924,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<DLFolder> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			DLFolder dlFolder = itr.next();
-
+		for (DLFolder dlFolder : findByUuid(uuid)) {
 			remove(dlFolder);
 		}
 	}
@@ -1941,43 +1937,27 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<DLFolder> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			DLFolder dlFolder = itr.next();
-
+		for (DLFolder dlFolder : findByGroupId(groupId)) {
 			remove(dlFolder);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<DLFolder> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			DLFolder dlFolder = itr.next();
-
+		for (DLFolder dlFolder : findByCompanyId(companyId)) {
 			remove(dlFolder);
 		}
 	}
 
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
-		Iterator<DLFolder> itr = findByG_P(groupId, parentFolderId).iterator();
-
-		while (itr.hasNext()) {
-			DLFolder dlFolder = itr.next();
-
+		for (DLFolder dlFolder : findByG_P(groupId, parentFolderId)) {
 			remove(dlFolder);
 		}
 	}
 
 	public void removeByP_N(long parentFolderId, String name)
 		throws SystemException {
-		Iterator<DLFolder> itr = findByP_N(parentFolderId, name).iterator();
-
-		while (itr.hasNext()) {
-			DLFolder dlFolder = itr.next();
-
+		for (DLFolder dlFolder : findByP_N(parentFolderId, name)) {
 			remove(dlFolder);
 		}
 	}
@@ -1990,10 +1970,8 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<DLFolder> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (DLFolder dlFolder : findAll()) {
+			remove(dlFolder);
 		}
 	}
 

@@ -950,21 +950,13 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<ResourceCode> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			ResourceCode resourceCode = itr.next();
-
+		for (ResourceCode resourceCode : findByCompanyId(companyId)) {
 			remove(resourceCode);
 		}
 	}
 
 	public void removeByName(String name) throws SystemException {
-		Iterator<ResourceCode> itr = findByName(name).iterator();
-
-		while (itr.hasNext()) {
-			ResourceCode resourceCode = itr.next();
-
+		for (ResourceCode resourceCode : findByName(name)) {
 			remove(resourceCode);
 		}
 	}
@@ -977,10 +969,8 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ResourceCode> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ResourceCode resourceCode : findAll()) {
+			remove(resourceCode);
 		}
 	}
 

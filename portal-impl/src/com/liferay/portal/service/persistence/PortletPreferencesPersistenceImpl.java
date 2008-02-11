@@ -1282,34 +1282,22 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByPlid(long plid) throws SystemException {
-		Iterator<PortletPreferences> itr = findByPlid(plid).iterator();
-
-		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = itr.next();
-
+		for (PortletPreferences portletPreferences : findByPlid(plid)) {
 			remove(portletPreferences);
 		}
 	}
 
 	public void removeByP_P(long plid, String portletId)
 		throws SystemException {
-		Iterator<PortletPreferences> itr = findByP_P(plid, portletId).iterator();
-
-		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = itr.next();
-
+		for (PortletPreferences portletPreferences : findByP_P(plid, portletId)) {
 			remove(portletPreferences);
 		}
 	}
 
 	public void removeByO_O_P(long ownerId, int ownerType, long plid)
 		throws SystemException {
-		Iterator<PortletPreferences> itr = findByO_O_P(ownerId, ownerType, plid)
-											   .iterator();
-
-		while (itr.hasNext()) {
-			PortletPreferences portletPreferences = itr.next();
-
+		for (PortletPreferences portletPreferences : findByO_O_P(ownerId,
+				ownerType, plid)) {
 			remove(portletPreferences);
 		}
 	}
@@ -1324,10 +1312,8 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<PortletPreferences> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (PortletPreferences portletPreferences : findAll()) {
+			remove(portletPreferences);
 		}
 	}
 

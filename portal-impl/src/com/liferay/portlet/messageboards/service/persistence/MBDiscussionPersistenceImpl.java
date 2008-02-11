@@ -471,10 +471,8 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<MBDiscussion> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (MBDiscussion mbDiscussion : findAll()) {
+			remove(mbDiscussion);
 		}
 	}
 

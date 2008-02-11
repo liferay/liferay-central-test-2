@@ -614,20 +614,14 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByItemId(long itemId) throws SystemException {
-		Iterator<ShoppingItemField> itr = findByItemId(itemId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingItemField shoppingItemField = itr.next();
-
+		for (ShoppingItemField shoppingItemField : findByItemId(itemId)) {
 			remove(shoppingItemField);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ShoppingItemField> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ShoppingItemField shoppingItemField : findAll()) {
+			remove(shoppingItemField);
 		}
 	}
 

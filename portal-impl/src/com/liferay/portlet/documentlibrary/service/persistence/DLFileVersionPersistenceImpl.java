@@ -798,11 +798,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 
 	public void removeByF_N(long folderId, String name)
 		throws SystemException {
-		Iterator<DLFileVersion> itr = findByF_N(folderId, name).iterator();
-
-		while (itr.hasNext()) {
-			DLFileVersion dlFileVersion = itr.next();
-
+		for (DLFileVersion dlFileVersion : findByF_N(folderId, name)) {
 			remove(dlFileVersion);
 		}
 	}
@@ -815,10 +811,8 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<DLFileVersion> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (DLFileVersion dlFileVersion : findAll()) {
+			remove(dlFileVersion);
 		}
 	}
 

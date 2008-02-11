@@ -707,11 +707,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<TagsAsset> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			TagsAsset tagsAsset = itr.next();
-
+		for (TagsAsset tagsAsset : findByCompanyId(companyId)) {
 			remove(tagsAsset);
 		}
 	}
@@ -724,10 +720,8 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<TagsAsset> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (TagsAsset tagsAsset : findAll()) {
+			remove(tagsAsset);
 		}
 	}
 

@@ -1247,21 +1247,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<IGImage> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			IGImage igImage = itr.next();
-
+		for (IGImage igImage : findByUuid(uuid)) {
 			remove(igImage);
 		}
 	}
 
 	public void removeByFolderId(long folderId) throws SystemException {
-		Iterator<IGImage> itr = findByFolderId(folderId).iterator();
-
-		while (itr.hasNext()) {
-			IGImage igImage = itr.next();
-
+		for (IGImage igImage : findByFolderId(folderId)) {
 			remove(igImage);
 		}
 	}
@@ -1295,10 +1287,8 @@ public class IGImagePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<IGImage> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (IGImage igImage : findAll()) {
+			remove(igImage);
 		}
 	}
 

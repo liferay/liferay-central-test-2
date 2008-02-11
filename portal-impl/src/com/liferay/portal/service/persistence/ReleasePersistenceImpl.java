@@ -348,10 +348,8 @@ public class ReleasePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Release> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Release release : findAll()) {
+			remove(release);
 		}
 	}
 

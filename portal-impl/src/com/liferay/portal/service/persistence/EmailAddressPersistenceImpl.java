@@ -1743,65 +1743,43 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<EmailAddress> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			EmailAddress emailAddress = itr.next();
-
+		for (EmailAddress emailAddress : findByCompanyId(companyId)) {
 			remove(emailAddress);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<EmailAddress> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			EmailAddress emailAddress = itr.next();
-
+		for (EmailAddress emailAddress : findByUserId(userId)) {
 			remove(emailAddress);
 		}
 	}
 
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Iterator<EmailAddress> itr = findByC_C(companyId, classNameId).iterator();
-
-		while (itr.hasNext()) {
-			EmailAddress emailAddress = itr.next();
-
+		for (EmailAddress emailAddress : findByC_C(companyId, classNameId)) {
 			remove(emailAddress);
 		}
 	}
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Iterator<EmailAddress> itr = findByC_C_C(companyId, classNameId, classPK)
-										 .iterator();
-
-		while (itr.hasNext()) {
-			EmailAddress emailAddress = itr.next();
-
+		for (EmailAddress emailAddress : findByC_C_C(companyId, classNameId,
+				classPK)) {
 			remove(emailAddress);
 		}
 	}
 
 	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
-		Iterator<EmailAddress> itr = findByC_C_C_P(companyId, classNameId,
-				classPK, primary).iterator();
-
-		while (itr.hasNext()) {
-			EmailAddress emailAddress = itr.next();
-
+		for (EmailAddress emailAddress : findByC_C_C_P(companyId, classNameId,
+				classPK, primary)) {
 			remove(emailAddress);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<EmailAddress> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (EmailAddress emailAddress : findAll()) {
+			remove(emailAddress);
 		}
 	}
 

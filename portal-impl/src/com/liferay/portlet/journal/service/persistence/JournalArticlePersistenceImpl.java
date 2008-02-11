@@ -2825,11 +2825,7 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<JournalArticle> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle journalArticle = itr.next();
-
+		for (JournalArticle journalArticle : findByUuid(uuid)) {
 			remove(journalArticle);
 		}
 	}
@@ -2842,66 +2838,41 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<JournalArticle> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle journalArticle = itr.next();
-
+		for (JournalArticle journalArticle : findByGroupId(groupId)) {
 			remove(journalArticle);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<JournalArticle> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle journalArticle = itr.next();
-
+		for (JournalArticle journalArticle : findByCompanyId(companyId)) {
 			remove(journalArticle);
 		}
 	}
 
 	public void removeBySmallImageId(long smallImageId)
 		throws SystemException {
-		Iterator<JournalArticle> itr = findBySmallImageId(smallImageId)
-										   .iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle journalArticle = itr.next();
-
+		for (JournalArticle journalArticle : findBySmallImageId(smallImageId)) {
 			remove(journalArticle);
 		}
 	}
 
 	public void removeByG_A(long groupId, String articleId)
 		throws SystemException {
-		Iterator<JournalArticle> itr = findByG_A(groupId, articleId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle journalArticle = itr.next();
-
+		for (JournalArticle journalArticle : findByG_A(groupId, articleId)) {
 			remove(journalArticle);
 		}
 	}
 
 	public void removeByG_S(long groupId, String structureId)
 		throws SystemException {
-		Iterator<JournalArticle> itr = findByG_S(groupId, structureId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle journalArticle = itr.next();
-
+		for (JournalArticle journalArticle : findByG_S(groupId, structureId)) {
 			remove(journalArticle);
 		}
 	}
 
 	public void removeByG_T(long groupId, String templateId)
 		throws SystemException {
-		Iterator<JournalArticle> itr = findByG_T(groupId, templateId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle journalArticle = itr.next();
-
+		for (JournalArticle journalArticle : findByG_T(groupId, templateId)) {
 			remove(journalArticle);
 		}
 	}
@@ -2915,21 +2886,15 @@ public class JournalArticlePersistenceImpl extends BasePersistence
 
 	public void removeByG_A_A(long groupId, String articleId, boolean approved)
 		throws SystemException {
-		Iterator<JournalArticle> itr = findByG_A_A(groupId, articleId, approved)
-										   .iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle journalArticle = itr.next();
-
+		for (JournalArticle journalArticle : findByG_A_A(groupId, articleId,
+				approved)) {
 			remove(journalArticle);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<JournalArticle> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (JournalArticle journalArticle : findAll()) {
+			remove(journalArticle);
 		}
 	}
 

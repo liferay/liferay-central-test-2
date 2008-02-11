@@ -882,10 +882,8 @@ public class GroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Group> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Group group : findAll()) {
+			remove(group);
 		}
 	}
 

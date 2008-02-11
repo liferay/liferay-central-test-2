@@ -612,20 +612,14 @@ public class ListTypePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByType(String type) throws SystemException {
-		Iterator<ListType> itr = findByType(type).iterator();
-
-		while (itr.hasNext()) {
-			ListType listType = itr.next();
-
+		for (ListType listType : findByType(type)) {
 			remove(listType);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ListType> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ListType listType : findAll()) {
+			remove(listType);
 		}
 	}
 

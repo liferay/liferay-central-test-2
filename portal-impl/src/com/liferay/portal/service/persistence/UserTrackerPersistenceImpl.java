@@ -1050,40 +1050,26 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<UserTracker> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			UserTracker userTracker = itr.next();
-
+		for (UserTracker userTracker : findByCompanyId(companyId)) {
 			remove(userTracker);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<UserTracker> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			UserTracker userTracker = itr.next();
-
+		for (UserTracker userTracker : findByUserId(userId)) {
 			remove(userTracker);
 		}
 	}
 
 	public void removeBySessionId(String sessionId) throws SystemException {
-		Iterator<UserTracker> itr = findBySessionId(sessionId).iterator();
-
-		while (itr.hasNext()) {
-			UserTracker userTracker = itr.next();
-
+		for (UserTracker userTracker : findBySessionId(sessionId)) {
 			remove(userTracker);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<UserTracker> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (UserTracker userTracker : findAll()) {
+			remove(userTracker);
 		}
 	}
 

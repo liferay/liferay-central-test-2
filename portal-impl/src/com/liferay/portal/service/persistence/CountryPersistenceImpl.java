@@ -590,20 +590,14 @@ public class CountryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByActive(boolean active) throws SystemException {
-		Iterator<Country> itr = findByActive(active).iterator();
-
-		while (itr.hasNext()) {
-			Country country = itr.next();
-
+		for (Country country : findByActive(active)) {
 			remove(country);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Country> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Country country : findAll()) {
+			remove(country);
 		}
 	}
 

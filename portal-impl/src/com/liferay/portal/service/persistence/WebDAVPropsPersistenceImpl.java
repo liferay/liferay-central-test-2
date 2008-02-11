@@ -467,10 +467,8 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<WebDAVProps> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (WebDAVProps webDAVProps : findAll()) {
+			remove(webDAVProps);
 		}
 	}
 

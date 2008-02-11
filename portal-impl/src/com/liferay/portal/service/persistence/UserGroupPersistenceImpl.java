@@ -1001,23 +1001,14 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<UserGroup> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			UserGroup userGroup = itr.next();
-
+		for (UserGroup userGroup : findByCompanyId(companyId)) {
 			remove(userGroup);
 		}
 	}
 
 	public void removeByC_P(long companyId, long parentUserGroupId)
 		throws SystemException {
-		Iterator<UserGroup> itr = findByC_P(companyId, parentUserGroupId)
-									  .iterator();
-
-		while (itr.hasNext()) {
-			UserGroup userGroup = itr.next();
-
+		for (UserGroup userGroup : findByC_P(companyId, parentUserGroupId)) {
 			remove(userGroup);
 		}
 	}
@@ -1030,10 +1021,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<UserGroup> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (UserGroup userGroup : findAll()) {
+			remove(userGroup);
 		}
 	}
 

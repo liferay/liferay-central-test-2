@@ -775,11 +775,7 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<LayoutSet> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			LayoutSet layoutSet = itr.next();
-
+		for (LayoutSet layoutSet : findByGroupId(groupId)) {
 			remove(layoutSet);
 		}
 	}
@@ -799,10 +795,8 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<LayoutSet> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (LayoutSet layoutSet : findAll()) {
+			remove(layoutSet);
 		}
 	}
 

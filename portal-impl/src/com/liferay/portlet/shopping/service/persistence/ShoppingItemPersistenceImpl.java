@@ -1017,11 +1017,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCategoryId(long categoryId) throws SystemException {
-		Iterator<ShoppingItem> itr = findByCategoryId(categoryId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingItem shoppingItem = itr.next();
-
+		for (ShoppingItem shoppingItem : findByCategoryId(categoryId)) {
 			remove(shoppingItem);
 		}
 	}
@@ -1055,10 +1051,8 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ShoppingItem> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ShoppingItem shoppingItem : findAll()) {
+			remove(shoppingItem);
 		}
 	}
 

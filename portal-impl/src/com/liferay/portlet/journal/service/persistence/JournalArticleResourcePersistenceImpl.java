@@ -705,11 +705,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<JournalArticleResource> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticleResource journalArticleResource = itr.next();
-
+		for (JournalArticleResource journalArticleResource : findByGroupId(
+				groupId)) {
 			remove(journalArticleResource);
 		}
 	}
@@ -723,10 +720,8 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<JournalArticleResource> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (JournalArticleResource journalArticleResource : findAll()) {
+			remove(journalArticleResource);
 		}
 	}
 

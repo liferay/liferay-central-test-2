@@ -594,10 +594,8 @@ public class PasswordPolicyRelPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<PasswordPolicyRel> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (PasswordPolicyRel passwordPolicyRel : findAll()) {
+			remove(passwordPolicyRel);
 		}
 	}
 

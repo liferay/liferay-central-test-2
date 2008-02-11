@@ -1836,21 +1836,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<Layout> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = itr.next();
-
+		for (Layout layout : findByGroupId(groupId)) {
 			remove(layout);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<Layout> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = itr.next();
-
+		for (Layout layout : findByCompanyId(companyId)) {
 			remove(layout);
 		}
 	}
@@ -1871,11 +1863,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 	public void removeByG_P(long groupId, boolean privateLayout)
 		throws SystemException {
-		Iterator<Layout> itr = findByG_P(groupId, privateLayout).iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = itr.next();
-
+		for (Layout layout : findByG_P(groupId, privateLayout)) {
 			remove(layout);
 		}
 	}
@@ -1889,12 +1877,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 	public void removeByG_P_P(long groupId, boolean privateLayout,
 		long parentLayoutId) throws SystemException {
-		Iterator<Layout> itr = findByG_P_P(groupId, privateLayout,
-				parentLayoutId).iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = itr.next();
-
+		for (Layout layout : findByG_P_P(groupId, privateLayout, parentLayoutId)) {
 			remove(layout);
 		}
 	}
@@ -1907,10 +1890,8 @@ public class LayoutPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Layout> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Layout layout : findAll()) {
+			remove(layout);
 		}
 	}
 

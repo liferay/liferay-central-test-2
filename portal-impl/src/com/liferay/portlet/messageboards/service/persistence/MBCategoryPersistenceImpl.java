@@ -1513,11 +1513,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<MBCategory> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			MBCategory mbCategory = itr.next();
-
+		for (MBCategory mbCategory : findByUuid(uuid)) {
 			remove(mbCategory);
 		}
 	}
@@ -1530,42 +1526,27 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<MBCategory> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			MBCategory mbCategory = itr.next();
-
+		for (MBCategory mbCategory : findByGroupId(groupId)) {
 			remove(mbCategory);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<MBCategory> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			MBCategory mbCategory = itr.next();
-
+		for (MBCategory mbCategory : findByCompanyId(companyId)) {
 			remove(mbCategory);
 		}
 	}
 
 	public void removeByG_P(long groupId, long parentCategoryId)
 		throws SystemException {
-		Iterator<MBCategory> itr = findByG_P(groupId, parentCategoryId)
-									   .iterator();
-
-		while (itr.hasNext()) {
-			MBCategory mbCategory = itr.next();
-
+		for (MBCategory mbCategory : findByG_P(groupId, parentCategoryId)) {
 			remove(mbCategory);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<MBCategory> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (MBCategory mbCategory : findAll()) {
+			remove(mbCategory);
 		}
 	}
 

@@ -587,21 +587,15 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 
 	public void removeByUserTrackerId(long userTrackerId)
 		throws SystemException {
-		Iterator<UserTrackerPath> itr = findByUserTrackerId(userTrackerId)
-											.iterator();
-
-		while (itr.hasNext()) {
-			UserTrackerPath userTrackerPath = itr.next();
-
+		for (UserTrackerPath userTrackerPath : findByUserTrackerId(
+				userTrackerId)) {
 			remove(userTrackerPath);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<UserTrackerPath> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (UserTrackerPath userTrackerPath : findAll()) {
+			remove(userTrackerPath);
 		}
 	}
 

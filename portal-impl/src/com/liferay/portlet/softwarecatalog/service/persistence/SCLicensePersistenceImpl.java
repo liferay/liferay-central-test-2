@@ -898,31 +898,21 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByActive(boolean active) throws SystemException {
-		Iterator<SCLicense> itr = findByActive(active).iterator();
-
-		while (itr.hasNext()) {
-			SCLicense scLicense = itr.next();
-
+		for (SCLicense scLicense : findByActive(active)) {
 			remove(scLicense);
 		}
 	}
 
 	public void removeByA_R(boolean active, boolean recommended)
 		throws SystemException {
-		Iterator<SCLicense> itr = findByA_R(active, recommended).iterator();
-
-		while (itr.hasNext()) {
-			SCLicense scLicense = itr.next();
-
+		for (SCLicense scLicense : findByA_R(active, recommended)) {
 			remove(scLicense);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<SCLicense> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (SCLicense scLicense : findAll()) {
+			remove(scLicense);
 		}
 	}
 

@@ -920,12 +920,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 	public void removeByProductEntryId(long productEntryId)
 		throws SystemException {
-		Iterator<SCProductScreenshot> itr = findByProductEntryId(productEntryId)
-												.iterator();
-
-		while (itr.hasNext()) {
-			SCProductScreenshot scProductScreenshot = itr.next();
-
+		for (SCProductScreenshot scProductScreenshot : findByProductEntryId(
+				productEntryId)) {
 			remove(scProductScreenshot);
 		}
 	}
@@ -953,10 +949,8 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<SCProductScreenshot> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (SCProductScreenshot scProductScreenshot : findAll()) {
+			remove(scProductScreenshot);
 		}
 	}
 

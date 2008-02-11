@@ -1494,21 +1494,13 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<BlogsStatsUser> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			BlogsStatsUser blogsStatsUser = itr.next();
-
+		for (BlogsStatsUser blogsStatsUser : findByGroupId(groupId)) {
 			remove(blogsStatsUser);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<BlogsStatsUser> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			BlogsStatsUser blogsStatsUser = itr.next();
-
+		for (BlogsStatsUser blogsStatsUser : findByUserId(userId)) {
 			remove(blogsStatsUser);
 		}
 	}
@@ -1522,32 +1514,21 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 	public void removeByG_E(long groupId, int entryCount)
 		throws SystemException {
-		Iterator<BlogsStatsUser> itr = findByG_E(groupId, entryCount).iterator();
-
-		while (itr.hasNext()) {
-			BlogsStatsUser blogsStatsUser = itr.next();
-
+		for (BlogsStatsUser blogsStatsUser : findByG_E(groupId, entryCount)) {
 			remove(blogsStatsUser);
 		}
 	}
 
 	public void removeByC_E(long companyId, int entryCount)
 		throws SystemException {
-		Iterator<BlogsStatsUser> itr = findByC_E(companyId, entryCount)
-										   .iterator();
-
-		while (itr.hasNext()) {
-			BlogsStatsUser blogsStatsUser = itr.next();
-
+		for (BlogsStatsUser blogsStatsUser : findByC_E(companyId, entryCount)) {
 			remove(blogsStatsUser);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<BlogsStatsUser> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (BlogsStatsUser blogsStatsUser : findAll()) {
+			remove(blogsStatsUser);
 		}
 	}
 

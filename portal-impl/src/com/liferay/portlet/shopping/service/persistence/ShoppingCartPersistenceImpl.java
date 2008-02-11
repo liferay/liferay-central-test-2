@@ -909,21 +909,13 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<ShoppingCart> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingCart shoppingCart = itr.next();
-
+		for (ShoppingCart shoppingCart : findByGroupId(groupId)) {
 			remove(shoppingCart);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<ShoppingCart> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingCart shoppingCart = itr.next();
-
+		for (ShoppingCart shoppingCart : findByUserId(userId)) {
 			remove(shoppingCart);
 		}
 	}
@@ -936,10 +928,8 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ShoppingCart> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ShoppingCart shoppingCart : findAll()) {
+			remove(shoppingCart);
 		}
 	}
 

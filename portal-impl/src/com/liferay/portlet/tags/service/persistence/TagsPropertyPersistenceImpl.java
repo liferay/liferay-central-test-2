@@ -1253,32 +1253,20 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<TagsProperty> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			TagsProperty tagsProperty = itr.next();
-
+		for (TagsProperty tagsProperty : findByCompanyId(companyId)) {
 			remove(tagsProperty);
 		}
 	}
 
 	public void removeByEntryId(long entryId) throws SystemException {
-		Iterator<TagsProperty> itr = findByEntryId(entryId).iterator();
-
-		while (itr.hasNext()) {
-			TagsProperty tagsProperty = itr.next();
-
+		for (TagsProperty tagsProperty : findByEntryId(entryId)) {
 			remove(tagsProperty);
 		}
 	}
 
 	public void removeByC_K(long companyId, String key)
 		throws SystemException {
-		Iterator<TagsProperty> itr = findByC_K(companyId, key).iterator();
-
-		while (itr.hasNext()) {
-			TagsProperty tagsProperty = itr.next();
-
+		for (TagsProperty tagsProperty : findByC_K(companyId, key)) {
 			remove(tagsProperty);
 		}
 	}
@@ -1291,10 +1279,8 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<TagsProperty> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (TagsProperty tagsProperty : findAll()) {
+			remove(tagsProperty);
 		}
 	}
 

@@ -1090,41 +1090,27 @@ public class RegionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCountryId(long countryId) throws SystemException {
-		Iterator<Region> itr = findByCountryId(countryId).iterator();
-
-		while (itr.hasNext()) {
-			Region region = itr.next();
-
+		for (Region region : findByCountryId(countryId)) {
 			remove(region);
 		}
 	}
 
 	public void removeByActive(boolean active) throws SystemException {
-		Iterator<Region> itr = findByActive(active).iterator();
-
-		while (itr.hasNext()) {
-			Region region = itr.next();
-
+		for (Region region : findByActive(active)) {
 			remove(region);
 		}
 	}
 
 	public void removeByC_A(long countryId, boolean active)
 		throws SystemException {
-		Iterator<Region> itr = findByC_A(countryId, active).iterator();
-
-		while (itr.hasNext()) {
-			Region region = itr.next();
-
+		for (Region region : findByC_A(countryId, active)) {
 			remove(region);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Region> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Region region : findAll()) {
+			remove(region);
 		}
 	}
 

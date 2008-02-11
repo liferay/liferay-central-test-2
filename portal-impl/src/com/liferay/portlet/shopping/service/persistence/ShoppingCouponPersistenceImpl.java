@@ -708,11 +708,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<ShoppingCoupon> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			ShoppingCoupon shoppingCoupon = itr.next();
-
+		for (ShoppingCoupon shoppingCoupon : findByGroupId(groupId)) {
 			remove(shoppingCoupon);
 		}
 	}
@@ -725,10 +721,8 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ShoppingCoupon> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ShoppingCoupon shoppingCoupon : findAll()) {
+			remove(shoppingCoupon);
 		}
 	}
 

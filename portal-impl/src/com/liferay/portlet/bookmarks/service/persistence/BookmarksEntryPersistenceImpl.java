@@ -886,30 +886,20 @@ public class BookmarksEntryPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<BookmarksEntry> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			BookmarksEntry bookmarksEntry = itr.next();
-
+		for (BookmarksEntry bookmarksEntry : findByUuid(uuid)) {
 			remove(bookmarksEntry);
 		}
 	}
 
 	public void removeByFolderId(long folderId) throws SystemException {
-		Iterator<BookmarksEntry> itr = findByFolderId(folderId).iterator();
-
-		while (itr.hasNext()) {
-			BookmarksEntry bookmarksEntry = itr.next();
-
+		for (BookmarksEntry bookmarksEntry : findByFolderId(folderId)) {
 			remove(bookmarksEntry);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<BookmarksEntry> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (BookmarksEntry bookmarksEntry : findAll()) {
+			remove(bookmarksEntry);
 		}
 	}
 

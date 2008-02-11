@@ -741,12 +741,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 	public void removeByProductEntryId(long productEntryId)
 		throws SystemException {
-		Iterator<SCProductVersion> itr = findByProductEntryId(productEntryId)
-											 .iterator();
-
-		while (itr.hasNext()) {
-			SCProductVersion scProductVersion = itr.next();
-
+		for (SCProductVersion scProductVersion : findByProductEntryId(
+				productEntryId)) {
 			remove(scProductVersion);
 		}
 	}
@@ -759,10 +755,8 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<SCProductVersion> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (SCProductVersion scProductVersion : findAll()) {
+			remove(scProductVersion);
 		}
 	}
 

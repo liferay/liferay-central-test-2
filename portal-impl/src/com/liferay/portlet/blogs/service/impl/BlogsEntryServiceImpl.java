@@ -275,11 +275,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		syndFeed.setEntries(entries);
 
-		Iterator<BlogsEntry> itr = blogsEntries.iterator();
-
-		while (itr.hasNext()) {
-			BlogsEntry entry = itr.next();
-
+		for (BlogsEntry entry : blogsEntries) {
 			String author = PortalUtil.getUserName(
 				entry.getUserId(), entry.getUserName());
 

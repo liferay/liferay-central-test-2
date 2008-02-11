@@ -718,11 +718,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<PluginSetting> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			PluginSetting pluginSetting = itr.next();
-
+		for (PluginSetting pluginSetting : findByCompanyId(companyId)) {
 			remove(pluginSetting);
 		}
 	}
@@ -736,10 +732,8 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<PluginSetting> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (PluginSetting pluginSetting : findAll()) {
+			remove(pluginSetting);
 		}
 	}
 

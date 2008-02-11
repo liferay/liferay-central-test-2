@@ -1520,11 +1520,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByUuid(String uuid) throws SystemException {
-		Iterator<BookmarksFolder> itr = findByUuid(uuid).iterator();
-
-		while (itr.hasNext()) {
-			BookmarksFolder bookmarksFolder = itr.next();
-
+		for (BookmarksFolder bookmarksFolder : findByUuid(uuid)) {
 			remove(bookmarksFolder);
 		}
 	}
@@ -1537,42 +1533,27 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByGroupId(long groupId) throws SystemException {
-		Iterator<BookmarksFolder> itr = findByGroupId(groupId).iterator();
-
-		while (itr.hasNext()) {
-			BookmarksFolder bookmarksFolder = itr.next();
-
+		for (BookmarksFolder bookmarksFolder : findByGroupId(groupId)) {
 			remove(bookmarksFolder);
 		}
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<BookmarksFolder> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			BookmarksFolder bookmarksFolder = itr.next();
-
+		for (BookmarksFolder bookmarksFolder : findByCompanyId(companyId)) {
 			remove(bookmarksFolder);
 		}
 	}
 
 	public void removeByG_P(long groupId, long parentFolderId)
 		throws SystemException {
-		Iterator<BookmarksFolder> itr = findByG_P(groupId, parentFolderId)
-											.iterator();
-
-		while (itr.hasNext()) {
-			BookmarksFolder bookmarksFolder = itr.next();
-
+		for (BookmarksFolder bookmarksFolder : findByG_P(groupId, parentFolderId)) {
 			remove(bookmarksFolder);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<BookmarksFolder> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (BookmarksFolder bookmarksFolder : findAll()) {
+			remove(bookmarksFolder);
 		}
 	}
 

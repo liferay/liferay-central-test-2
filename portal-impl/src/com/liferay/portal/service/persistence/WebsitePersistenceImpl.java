@@ -1711,65 +1711,42 @@ public class WebsitePersistenceImpl extends BasePersistence
 	}
 
 	public void removeByCompanyId(long companyId) throws SystemException {
-		Iterator<Website> itr = findByCompanyId(companyId).iterator();
-
-		while (itr.hasNext()) {
-			Website website = itr.next();
-
+		for (Website website : findByCompanyId(companyId)) {
 			remove(website);
 		}
 	}
 
 	public void removeByUserId(long userId) throws SystemException {
-		Iterator<Website> itr = findByUserId(userId).iterator();
-
-		while (itr.hasNext()) {
-			Website website = itr.next();
-
+		for (Website website : findByUserId(userId)) {
 			remove(website);
 		}
 	}
 
 	public void removeByC_C(long companyId, long classNameId)
 		throws SystemException {
-		Iterator<Website> itr = findByC_C(companyId, classNameId).iterator();
-
-		while (itr.hasNext()) {
-			Website website = itr.next();
-
+		for (Website website : findByC_C(companyId, classNameId)) {
 			remove(website);
 		}
 	}
 
 	public void removeByC_C_C(long companyId, long classNameId, long classPK)
 		throws SystemException {
-		Iterator<Website> itr = findByC_C_C(companyId, classNameId, classPK)
-									.iterator();
-
-		while (itr.hasNext()) {
-			Website website = itr.next();
-
+		for (Website website : findByC_C_C(companyId, classNameId, classPK)) {
 			remove(website);
 		}
 	}
 
 	public void removeByC_C_C_P(long companyId, long classNameId, long classPK,
 		boolean primary) throws SystemException {
-		Iterator<Website> itr = findByC_C_C_P(companyId, classNameId, classPK,
-				primary).iterator();
-
-		while (itr.hasNext()) {
-			Website website = itr.next();
-
+		for (Website website : findByC_C_C_P(companyId, classNameId, classPK,
+				primary)) {
 			remove(website);
 		}
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Website> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Website website : findAll()) {
+			remove(website);
 		}
 	}
 

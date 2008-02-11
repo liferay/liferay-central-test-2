@@ -752,12 +752,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 	public void removeByBuildNamespace(String buildNamespace)
 		throws SystemException {
-		Iterator<ServiceComponent> itr = findByBuildNamespace(buildNamespace)
-											 .iterator();
-
-		while (itr.hasNext()) {
-			ServiceComponent serviceComponent = itr.next();
-
+		for (ServiceComponent serviceComponent : findByBuildNamespace(
+				buildNamespace)) {
 			remove(serviceComponent);
 		}
 	}
@@ -771,10 +767,8 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<ServiceComponent> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (ServiceComponent serviceComponent : findAll()) {
+			remove(serviceComponent);
 		}
 	}
 

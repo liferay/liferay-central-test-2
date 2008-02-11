@@ -735,11 +735,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeByResourceId(long resourceId) throws SystemException {
-		Iterator<Permission> itr = findByResourceId(resourceId).iterator();
-
-		while (itr.hasNext()) {
-			Permission permission = itr.next();
-
+		for (Permission permission : findByResourceId(resourceId)) {
 			remove(permission);
 		}
 	}
@@ -752,10 +748,8 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public void removeAll() throws SystemException {
-		Iterator<Permission> itr = findAll().iterator();
-
-		while (itr.hasNext()) {
-			remove(itr.next());
+		for (Permission permission : findAll()) {
+			remove(permission);
 		}
 	}
 
