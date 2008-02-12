@@ -473,21 +473,22 @@ public class JournalStructureLocalServiceUtil {
 		return journalStructureLocalService.getStructure(groupId, structureId);
 	}
 
-	public static java.util.List getStructures()
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> getStructures()
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
 		return journalStructureLocalService.getStructures();
 	}
 
-	public static java.util.List getStructures(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> getStructures(
+		long groupId) throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
 		return journalStructureLocalService.getStructures(groupId);
 	}
 
-	public static java.util.List getStructures(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> getStructures(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -501,9 +502,9 @@ public class JournalStructureLocalServiceUtil {
 		return journalStructureLocalService.getStructuresCount(groupId);
 	}
 
-	public static java.util.List search(long companyId, long groupId,
-		java.lang.String keywords, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> search(
+		long companyId, long groupId, java.lang.String keywords, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
@@ -511,9 +512,10 @@ public class JournalStructureLocalServiceUtil {
 			keywords, begin, end, obc);
 	}
 
-	public static java.util.List search(long companyId, long groupId,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, boolean andOperator, int begin, int end,
+	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> search(
+		long companyId, long groupId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();

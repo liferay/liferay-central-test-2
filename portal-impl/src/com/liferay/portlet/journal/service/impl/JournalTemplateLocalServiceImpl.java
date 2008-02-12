@@ -53,7 +53,6 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -337,23 +336,21 @@ public class JournalTemplateLocalServiceImpl
 	public void deleteTemplates(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = journalTemplatePersistence.findByGroupId(
-			groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalTemplate template = (JournalTemplate)itr.next();
+		for (JournalTemplate template :
+				journalTemplatePersistence.findByGroupId(groupId)) {
 
 			deleteTemplate(template);
 		}
 	}
 
-	public List getStructureTemplates(long groupId, String structureId)
+	public List<JournalTemplate> getStructureTemplates(
+			long groupId, String structureId)
 		throws SystemException {
 
 		return journalTemplatePersistence.findByG_S(groupId, structureId);
 	}
 
-	public List getStructureTemplates(
+	public List<JournalTemplate> getStructureTemplates(
 			long groupId, String structureId, int begin, int end)
 		throws SystemException {
 
@@ -384,8 +381,9 @@ public class JournalTemplateLocalServiceImpl
 					"required since 4.2.0. Please update all custom code and " +
 						"data that references templates without a group id.");
 
-			List templates = journalTemplatePersistence.findByTemplateId(
-				templateId);
+			List<JournalTemplate> templates =
+				journalTemplatePersistence.findByTemplateId(
+					templateId);
 
 			if (templates.size() == 0) {
 				throw new NoSuchTemplateException(
@@ -393,7 +391,7 @@ public class JournalTemplateLocalServiceImpl
 						templateId);
 			}
 			else {
-				return (JournalTemplate)templates.get(0);
+				return templates.get(0);
 			}
 		}
 		else {
@@ -407,15 +405,17 @@ public class JournalTemplateLocalServiceImpl
 		return journalTemplatePersistence.findBySmallImageId(smallImageId);
 	}
 
-	public List getTemplates() throws SystemException {
+	public List<JournalTemplate> getTemplates() throws SystemException {
 		return journalTemplatePersistence.findAll();
 	}
 
-	public List getTemplates(long groupId) throws SystemException {
+	public List<JournalTemplate> getTemplates(long groupId)
+		throws SystemException {
+
 		return journalTemplatePersistence.findByGroupId(groupId);
 	}
 
-	public List getTemplates(long groupId, int begin, int end)
+	public List<JournalTemplate> getTemplates(long groupId, int begin, int end)
 		throws SystemException {
 
 		return journalTemplatePersistence.findByGroupId(groupId, begin, end);
@@ -438,7 +438,7 @@ public class JournalTemplateLocalServiceImpl
 		}
 	}
 
-	public List search(
+	public List<JournalTemplate> search(
 			long companyId, long groupId, String keywords, String structureId,
 			String structureIdComparator, int begin, int end,
 			OrderByComparator obc)
@@ -449,7 +449,7 @@ public class JournalTemplateLocalServiceImpl
 			begin, end, obc);
 	}
 
-	public List search(
+	public List<JournalTemplate> search(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,
 			boolean andOperator, int begin, int end, OrderByComparator obc)

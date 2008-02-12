@@ -30,7 +30,7 @@ import java.util.Stack;
  * @author Brian Wing Shun Chan
  *
  */
-public class FiniteStack extends Stack {
+public class FiniteStack<E> extends Stack<E> {
 
 	public FiniteStack(int maxSize) {
 		super();
@@ -38,7 +38,7 @@ public class FiniteStack extends Stack {
 		_maxSize = maxSize;
 	}
 
-	public Object push(Object item) {
+	public E push(E item) {
 		super.push(item);
 
 		int size = size();

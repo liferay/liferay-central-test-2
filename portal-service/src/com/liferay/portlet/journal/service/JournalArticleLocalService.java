@@ -204,7 +204,7 @@ public interface JournalArticleLocalService {
 		int reviewDateDay, int reviewDateYear, int reviewDateHour,
 		int reviewDateMinute, boolean neverReview, boolean indexable,
 		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.util.Map images,
+		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -223,7 +223,7 @@ public interface JournalArticleLocalService {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.util.Map images,
+		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
@@ -242,7 +242,7 @@ public interface JournalArticleLocalService {
 		int reviewDateDay, int reviewDateYear, int reviewDateHour,
 		int reviewDateMinute, boolean neverReview, boolean indexable,
 		boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.util.Map images,
+		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
@@ -262,7 +262,7 @@ public interface JournalArticleLocalService {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.util.Map images,
+		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
@@ -284,7 +284,7 @@ public interface JournalArticleLocalService {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.util.Map images,
+		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
@@ -454,21 +454,23 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getArticles()
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticles(long groupId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticles(long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getArticles(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticlesBySmallImageId(long smallImageId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesBySmallImageId(
+		long smallImageId) throws com.liferay.portal.SystemException;
 
 	public int getArticlesCount(long groupId)
 		throws com.liferay.portal.SystemException;
@@ -497,22 +499,24 @@ public interface JournalArticleLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getStructureArticles(long groupId,
-		java.lang.String structureId) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getStructureArticles(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List getStructureArticles(long groupId,
-		java.lang.String structureId, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getStructureArticles(
+		long groupId, java.lang.String structureId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getStructureArticlesCount(long groupId,
 		java.lang.String structureId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getTemplateArticles(long groupId,
-		java.lang.String templateId) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getTemplateArticles(
+		long groupId, java.lang.String templateId)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List getTemplateArticles(long groupId,
-		java.lang.String templateId, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getTemplateArticles(
+		long groupId, java.lang.String templateId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -549,34 +553,37 @@ public interface JournalArticleLocalService {
 		long groupId, java.lang.String keywords, java.lang.String sortField)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, long groupId,
-		java.lang.String keywords, java.lang.Double version,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, java.lang.Boolean approved,
-		java.lang.Boolean expired, java.util.Date reviewDate, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List search(long companyId, long groupId,
-		java.lang.String articleId, java.lang.Double version,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
+		long companyId, long groupId, java.lang.String keywords,
+		java.lang.Double version, java.lang.String type,
 		java.lang.String structureId, java.lang.String templateId,
 		java.util.Date displayDateGT, java.util.Date displayDateLT,
 		java.lang.Boolean approved, java.lang.Boolean expired,
-		java.util.Date reviewDate, boolean andOperator, int begin, int end,
+		java.util.Date reviewDate, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, long groupId,
-		java.lang.String articleId, java.lang.Double version,
-		java.lang.String title, java.lang.String description,
-		java.lang.String content, java.lang.String type,
-		java.lang.String[] structureIds, java.lang.String[] templateIds,
-		java.util.Date displayDateGT, java.util.Date displayDateLT,
-		java.lang.Boolean approved, java.lang.Boolean expired,
-		java.util.Date reviewDate, boolean andOperator, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
+		long companyId, long groupId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String structureId,
+		java.lang.String templateId, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, java.lang.Boolean approved,
+		java.lang.Boolean expired, java.util.Date reviewDate,
+		boolean andOperator, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> search(
+		long companyId, long groupId, java.lang.String articleId,
+		java.lang.Double version, java.lang.String title,
+		java.lang.String description, java.lang.String content,
+		java.lang.String type, java.lang.String[] structureIds,
+		java.lang.String[] templateIds, java.util.Date displayDateGT,
+		java.util.Date displayDateLT, java.lang.Boolean approved,
+		java.lang.Boolean expired, java.util.Date reviewDate,
+		boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -620,7 +627,7 @@ public interface JournalArticleLocalService {
 		int reviewDateMonth, int reviewDateDay, int reviewDateYear,
 		int reviewDateHour, int reviewDateMinute, boolean neverReview,
 		boolean indexable, boolean smallImage, java.lang.String smallImageURL,
-		java.io.File smallFile, java.util.Map images,
+		java.io.File smallFile, java.util.Map<String, byte[]> images,
 		java.lang.String articleURL, javax.portlet.PortletPreferences prefs,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException,

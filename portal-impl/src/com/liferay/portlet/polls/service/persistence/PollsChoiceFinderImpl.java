@@ -66,7 +66,7 @@ public class PollsChoiceFinderImpl implements PollsChoiceFinder {
 			qPos.add(uuid);
 			qPos.add(groupId);
 
-			List list = q.list();
+			List<PollsChoice> list = q.list();
 
 			if (list.size() == 0) {
 				StringMaker sm = new StringMaker();
@@ -80,7 +80,7 @@ public class PollsChoiceFinderImpl implements PollsChoiceFinder {
 				throw new NoSuchChoiceException(sm.toString());
 			}
 			else {
-				return (PollsChoice)list.get(0);
+				return list.get(0);
 			}
 		}
 		catch (NoSuchChoiceException nsce) {

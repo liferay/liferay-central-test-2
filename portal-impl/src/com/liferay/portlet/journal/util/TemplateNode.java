@@ -41,8 +41,8 @@ public class TemplateNode {
 		_name = name;
 		_data = data;
 		_type = type;
-		_options = new ArrayList();
-		_children = new ArrayList();
+		_options = new ArrayList<String>();
+		_children = new ArrayList<TemplateNode>();
 	}
 
 	public String getName() {
@@ -61,11 +61,11 @@ public class TemplateNode {
 		_options.add(option);
 	}
 
-	public void appendOptions(List options) {
+	public void appendOptions(List<String> options) {
 		_options.addAll(options);
 	}
 
-	public List getOptions() {
+	public List<String> getOptions() {
 		return _options;
 	}
 
@@ -73,11 +73,11 @@ public class TemplateNode {
 		_children.add(child);
 	}
 
-	public void appendChildren(List children) {
+	public void appendChildren(List<TemplateNode> children) {
 		_children.addAll(children);
 	}
 
-	public List getChildren() {
+	public List<TemplateNode> getChildren() {
 		return _children;
 	}
 
@@ -102,7 +102,7 @@ public class TemplateNode {
 	private String _name;
 	private String _data;
 	private String _type;
-	private List _options;
-	private List _children;
+	private List<String> _options;
+	private List<TemplateNode> _children;
 
 }

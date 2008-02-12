@@ -33,6 +33,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
@@ -60,7 +61,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class JournalRSSUtil {
 
-	public static List getArticles(JournalFeed feed) throws SystemException {
+	public static List<JournalArticle> getArticles(JournalFeed feed)
+		throws SystemException {
+
 		long companyId = feed.getCompanyId();
 		long groupId = feed.getGroupId();
 		String articleId = null;
@@ -112,8 +115,10 @@ public class JournalRSSUtil {
 			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	public static List getDLEnclosures(String portalURL, String url) {
-		List enclosures = new ArrayList();
+	public static List<SyndEnclosure> getDLEnclosures(
+		String portalURL, String url) {
+
+		List<SyndEnclosure> enclosures = new ArrayList<SyndEnclosure>();
 
 		DLFileEntry fileEntry = getDLFileEntry(url);
 
@@ -139,15 +144,16 @@ public class JournalRSSUtil {
 
 		String queryString = HttpUtil.getQueryString(url);
 
-		Map parameters = HttpUtil.parameterMapFromString(queryString);
+		Map<String, String[]> parameters = HttpUtil.parameterMapFromString(
+			queryString);
 
 		if (parameters.containsKey("folderId") &&
 			parameters.containsKey("name")) {
 
 			try {
 				long folderId = GetterUtil.getLong(
-					((String[])parameters.get("folderId"))[0]);
-				String name = ((String[])parameters.get("name"))[0];
+					parameters.get("folderId")[0]);
+				String name = parameters.get("name")[0];
 
 				fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(
 					folderId, name);
@@ -162,9 +168,8 @@ public class JournalRSSUtil {
 				 parameters.containsKey("groupId")) {
 
 			try {
-				String uuid = ((String[])parameters.get("uuid"))[0];
-				long groupId = GetterUtil.getLong(
-					((String[])parameters.get("groupId"))[0]);
+				String uuid = parameters.get("uuid")[0];
+				long groupId = GetterUtil.getLong(parameters.get("groupId")[0]);
 
 				fileEntry =
 					DLFileEntryLocalServiceUtil.getFileEntryByUuidAndGroupId(
@@ -180,8 +185,8 @@ public class JournalRSSUtil {
 		return fileEntry;
 	}
 
-	public static List getDLLinks(String portalURL, String url) {
-		List links = new ArrayList();
+	public static List<SyndLink> getDLLinks(String portalURL, String url) {
+		List<SyndLink> links = new ArrayList<SyndLink>();
 
 		DLFileEntry fileEntry = getDLFileEntry(url);
 
@@ -204,8 +209,10 @@ public class JournalRSSUtil {
 		return links;
 	}
 
-	public static List getIGEnclosures(String portalURL, String url) {
-		List enclosures = new ArrayList();
+	public static List<SyndEnclosure> getIGEnclosures(
+		String portalURL, String url) {
+
+		List<SyndEnclosure> enclosures = new ArrayList<SyndEnclosure>();
 
 		Image image = getImage(url);
 
@@ -225,8 +232,8 @@ public class JournalRSSUtil {
 		return enclosures;
 	}
 
-	public static List getIGLinks(String portalURL, String url) {
-		List links = new ArrayList();
+	public static List<SyndLink> getIGLinks(String portalURL, String url) {
+		List<SyndLink> links = new ArrayList<SyndLink>();
 
 		Image image = getImage(url);
 
@@ -253,7 +260,8 @@ public class JournalRSSUtil {
 
 		String queryString = HttpUtil.getQueryString(url);
 
-		Map parameters = HttpUtil.parameterMapFromString(queryString);
+		Map<String, String[]> parameters = HttpUtil.parameterMapFromString(
+			queryString);
 
 		if (parameters.containsKey("image_id") ||
 			parameters.containsKey("img_id") ||
@@ -263,16 +271,13 @@ public class JournalRSSUtil {
 				long imageId = 0;
 
 				if (parameters.containsKey("image_id")) {
-					imageId = GetterUtil.getLong(
-						((String[])parameters.get("image_id"))[0]);
+					imageId = GetterUtil.getLong(parameters.get("image_id")[0]);
 				}
 				else if (parameters.containsKey("img_id")) {
-					imageId = GetterUtil.getLong(
-						((String[])parameters.get("img_id"))[0]);
+					imageId = GetterUtil.getLong(parameters.get("img_id")[0]);
 				}
 				else if (parameters.containsKey("i_id")) {
-					imageId = GetterUtil.getLong(
-						((String[])parameters.get("i_id"))[0]);
+					imageId = GetterUtil.getLong(parameters.get("i_id")[0]);
 				}
 
 				image = ImageLocalUtil.getImage(imageId);
@@ -287,9 +292,8 @@ public class JournalRSSUtil {
 				 parameters.containsKey("groupId")) {
 
 			try {
-				String uuid = ((String[])parameters.get("uuid"))[0];
-				long groupId = GetterUtil.getLong(
-					((String[])parameters.get("groupId"))[0]);
+				String uuid = parameters.get("uuid")[0];
+				long groupId = GetterUtil.getLong(parameters.get("groupId")[0]);
 
 				IGImage igImage =
 					IGImageLocalServiceUtil.getImageByUuidAndGroupId(

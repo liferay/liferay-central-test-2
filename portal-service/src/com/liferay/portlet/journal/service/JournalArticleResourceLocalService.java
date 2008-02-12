@@ -136,6 +136,6 @@ public interface JournalArticleResourceLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getArticleResources(long groupId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getArticleResources(
+		long groupId) throws com.liferay.portal.SystemException;
 }

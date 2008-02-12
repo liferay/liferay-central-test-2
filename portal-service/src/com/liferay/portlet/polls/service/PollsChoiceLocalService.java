@@ -102,8 +102,8 @@ public interface PollsChoiceLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getChoices(long questionId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.polls.model.PollsChoice> getChoices(
+		long questionId) throws com.liferay.portal.SystemException;
 
 	public int getChoicesCount(long questionId)
 		throws com.liferay.portal.SystemException;

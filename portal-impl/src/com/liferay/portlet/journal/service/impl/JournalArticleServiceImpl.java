@@ -35,7 +35,6 @@ import com.liferay.portlet.journal.service.permission.JournalArticlePermission;
 
 import java.io.File;
 
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -59,9 +58,9 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			int reviewDateDay, int reviewDateYear, int reviewDateHour,
 			int reviewDateMinute, boolean neverReview, boolean indexable,
 			boolean smallImage, String smallImageURL, File smallFile,
-			Map images, String articleURL, PortletPreferences prefs,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			Map<String, byte[]> images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -91,9 +90,9 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			int reviewDateDay, int reviewDateYear, int reviewDateHour,
 			int reviewDateMinute, boolean neverReview, boolean indexable,
 			boolean smallImage, String smallImageURL, File smallFile,
-			Map images, String articleURL, PortletPreferences prefs,
-			String[] tagsEntries, String[] communityPermissions,
-			String[] guestPermissions)
+			Map<String, byte[]> images, String articleURL,
+			PortletPreferences prefs, String[] tagsEntries,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -189,11 +188,8 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 	public void removeArticleLocale(long companyId, String languageId)
 		throws PortalException, SystemException {
 
-		Iterator itr = journalArticlePersistence.findByCompanyId(
-			companyId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle article = (JournalArticle)itr.next();
+		for (JournalArticle article :
+				journalArticlePersistence.findByCompanyId(companyId)) {
 
 			removeArticleLocale(
 				article.getGroupId(), article.getArticleId(),
@@ -223,7 +219,7 @@ public class JournalArticleServiceImpl extends JournalArticleServiceBaseImpl {
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map images,
+			String smallImageURL, File smallFile, Map<String, byte[]> images,
 			String articleURL, PortletPreferences prefs, String[] tagsEntries)
 		throws PortalException, SystemException {
 

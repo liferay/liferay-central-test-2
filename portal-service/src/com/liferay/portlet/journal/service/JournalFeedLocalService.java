@@ -277,25 +277,28 @@ public interface JournalFeedLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getFeeds() throws com.liferay.portal.SystemException;
-
-	public java.util.List getFeeds(long groupId)
+	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> getFeeds()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFeeds(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> getFeeds(
+		long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> getFeeds(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getFeedsCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, long groupId,
-		java.lang.String keywords, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> search(
+		long companyId, long groupId, java.lang.String keywords, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, long groupId,
-		java.lang.String feedId, java.lang.String name,
-		java.lang.String description, boolean andOperator, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalFeed> search(
+		long companyId, long groupId, java.lang.String feedId,
+		java.lang.String name, java.lang.String description,
+		boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

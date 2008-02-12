@@ -86,7 +86,6 @@ import java.io.StringReader;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -133,8 +132,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			String smallImageURL, File smallFile, Map<String, byte[]> images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -162,8 +161,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			String smallImageURL, File smallFile, Map<String, byte[]> images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -191,8 +190,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			String smallImageURL, File smallFile, Map<String, byte[]> images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -219,8 +218,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			String smallImageURL, File smallFile, Map<String, byte[]> images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -251,8 +250,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries,
+			String smallImageURL, File smallFile, Map<String, byte[]> images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -498,19 +497,18 @@ public class JournalArticleLocalServiceImpl
 	public void checkArticles() throws PortalException, SystemException {
 		Date now = new Date();
 
-		List articles = journalArticleFinder.findByExpirationDate(
-			Boolean.FALSE, now,
-			new Date(now.getTime() - CheckArticleJob.INTERVAL));
+		List<JournalArticle> articles =
+			journalArticleFinder.findByExpirationDate(
+				Boolean.FALSE, now,
+				new Date(now.getTime() - CheckArticleJob.INTERVAL));
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Expiring " + articles.size() + " articles");
 		}
 
-		Set companies = new HashSet();
+		Set<Long> companyIds = new HashSet<Long>();
 
-		for (int i = 0; i < articles.size(); i++) {
-			JournalArticle article = (JournalArticle)articles.get(i);
-
+		for (JournalArticle article : articles) {
 			article.setApproved(false);
 			article.setExpired(true);
 
@@ -530,14 +528,10 @@ public class JournalArticleLocalServiceImpl
 				article.getGroupId(), article.getArticleId(),
 				article.getTemplateId());
 
-			companies.add(new Long(article.getCompanyId()));
+			companyIds.add(article.getCompanyId());
 		}
 
-		Iterator itr = companies.iterator();
-
-		while (itr.hasNext()) {
-			long companyId = ((Long)itr.next()).longValue();
-
+		for (long companyId : companyIds) {
 			LayoutCacheUtil.clearCache(companyId);
 		}
 
@@ -550,9 +544,7 @@ public class JournalArticleLocalServiceImpl
 					" articles");
 		}
 
-		for (int i = 0; i < articles.size(); i++) {
-			JournalArticle article = (JournalArticle)articles.get(i);
-
+		for (JournalArticle article : articles) {
 			Date reviewDate = article.getReviewDate();
 
 			if (reviewDate != null) {
@@ -712,11 +704,8 @@ public class JournalArticleLocalServiceImpl
 	public void deleteArticles(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = journalArticlePersistence.findByGroupId(
-			groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle article = (JournalArticle)itr.next();
+		for (JournalArticle article :
+				journalArticlePersistence.findByGroupId(groupId)) {
 
 			deleteArticle(article, null, null);
 		}
@@ -931,7 +920,8 @@ public class JournalArticleLocalServiceImpl
 
 		boolean cacheable = true;
 
-		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
+		Map<String, String> tokens = JournalUtil.getTokens(
+			groupId, themeDisplay);
 
 		tokens.put(
 			"article_resource_pk",
@@ -957,7 +947,7 @@ public class JournalArticleLocalServiceImpl
 					request = reader.read(new StringReader(xmlRequest));
 				}
 
-				List pages = root.elements("page");
+				List<Element> pages = root.elements("page");
 
 				if (pages.size() > 0) {
 					pageFlow = true;
@@ -989,7 +979,7 @@ public class JournalArticleLocalServiceImpl
 							page = 1;
 						}
 
-						pageEl = (Element)pages.get(page - 1);
+						pageEl = pages.get(page - 1);
 
 						doc = docFactory.createDocument(pageEl);
 
@@ -1091,21 +1081,23 @@ public class JournalArticleLocalServiceImpl
 			numberOfPages, page, paginate, cacheable);
 	}
 
-	public List getArticles() throws SystemException {
+	public List<JournalArticle> getArticles() throws SystemException {
 		return journalArticlePersistence.findAll();
 	}
 
-	public List getArticles(long groupId) throws SystemException {
+	public List<JournalArticle> getArticles(long groupId)
+		throws SystemException {
+
 		return journalArticlePersistence.findByGroupId(groupId);
 	}
 
-	public List getArticles(long groupId, int begin, int end)
+	public List<JournalArticle> getArticles(long groupId, int begin, int end)
 		throws SystemException {
 
 		return journalArticlePersistence.findByGroupId(groupId, begin, end);
 	}
 
-	public List getArticles(
+	public List<JournalArticle> getArticles(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -1113,7 +1105,7 @@ public class JournalArticleLocalServiceImpl
 			groupId, begin, end, obc);
 	}
 
-	public List getArticlesBySmallImageId(long smallImageId)
+	public List<JournalArticle> getArticlesBySmallImageId(long smallImageId)
 		throws SystemException {
 
 		return journalArticlePersistence.findBySmallImageId(smallImageId);
@@ -1126,7 +1118,7 @@ public class JournalArticleLocalServiceImpl
 	public JournalArticle getDisplayArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 
-		List articles = journalArticlePersistence.findByG_A_A(
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A_A(
 			groupId, articleId, true);
 
 		if (articles.size() == 0) {
@@ -1138,14 +1130,14 @@ public class JournalArticleLocalServiceImpl
 		Date now = new Date();
 
 		for (int i = 0; i < articles.size(); i++) {
-			JournalArticle article = (JournalArticle)articles.get(i);
+			JournalArticle article = articles.get(i);
 
 			if (article.getDisplayDate().before(now)) {
 				return article;
 			}
 		}
 
-		return (JournalArticle)articles.get(0);
+		return articles.get(0);
 	}
 
 	public JournalArticle getLatestArticle(long groupId, String articleId)
@@ -1158,7 +1150,7 @@ public class JournalArticleLocalServiceImpl
 			long groupId, String articleId, Boolean approved)
 		throws PortalException, SystemException {
 
-		List articles = null;
+		List<JournalArticle> articles = null;
 
 		if (approved == null) {
 			articles = journalArticlePersistence.findByG_A(
@@ -1173,7 +1165,7 @@ public class JournalArticleLocalServiceImpl
 			throw new NoSuchArticleException();
 		}
 
-		return (JournalArticle)articles.get(0);
+		return articles.get(0);
 	}
 
 	public double getLatestVersion(long groupId, String articleId)
@@ -1193,13 +1185,13 @@ public class JournalArticleLocalServiceImpl
 		return article.getVersion();
 	}
 
-	public List getStructureArticles(long groupId, String structureId)
+	public List<JournalArticle> getStructureArticles(long groupId, String structureId)
 		throws SystemException {
 
 		return journalArticlePersistence.findByG_S(groupId, structureId);
 	}
 
-	public List getStructureArticles(
+	public List<JournalArticle> getStructureArticles(
 			long groupId, String structureId, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -1214,13 +1206,13 @@ public class JournalArticleLocalServiceImpl
 		return journalArticlePersistence.countByG_S(groupId, structureId);
 	}
 
-	public List getTemplateArticles(long groupId, String templateId)
+	public List<JournalArticle> getTemplateArticles(long groupId, String templateId)
 		throws SystemException {
 
 		return journalArticlePersistence.findByG_T(groupId, templateId);
 	}
 
-	public List getTemplateArticles(
+	public List<JournalArticle> getTemplateArticles(
 			long groupId, String templateId, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -1284,11 +1276,8 @@ public class JournalArticleLocalServiceImpl
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr = journalArticlePersistence.findByCompanyId(
-				companyId).iterator();
-
-			while (itr.hasNext()) {
-				JournalArticle article = (JournalArticle)itr.next();
+			for (JournalArticle article :
+					journalArticlePersistence.findByCompanyId(companyId)) {
 
 				if (article.isApproved() && article.isIndexable()) {
 					long resourcePrimKey = article.getResourcePrimKey();
@@ -1429,7 +1418,7 @@ public class JournalArticleLocalServiceImpl
 		}
 	}
 
-	public List search(
+	public List<JournalArticle> search(
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
 			Date displayDateGT, Date displayDateLT, Boolean approved,
@@ -1443,7 +1432,7 @@ public class JournalArticleLocalServiceImpl
 			reviewDate, begin, end, obc);
 	}
 
-	public List search(
+	public List<JournalArticle> search(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
@@ -1458,7 +1447,7 @@ public class JournalArticleLocalServiceImpl
 			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	public List search(
+	public List<JournalArticle> search(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
@@ -1525,8 +1514,8 @@ public class JournalArticleLocalServiceImpl
 			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
 			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
 			boolean neverReview, boolean indexable, boolean smallImage,
-			String smallImageURL, File smallFile, Map images, String articleURL,
-			PortletPreferences prefs, String[] tagsEntries)
+			String smallImageURL, File smallFile, Map<String, byte[]> images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		// Article
@@ -1750,11 +1739,7 @@ public class JournalArticleLocalServiceImpl
 	protected void checkStructure(Document contentDoc, Element root)
 		throws PortalException {
 
-		Iterator itr = root.elements().iterator();
-
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
-
+		for (Element el : (List<Element>)root.elements()) {
 			checkStructureField(el, contentDoc);
 
 			checkStructure(contentDoc, el);
@@ -1768,7 +1753,7 @@ public class JournalArticleLocalServiceImpl
 
 		elPath.append(el.attributeValue("name"));
 
-		Element elParent = (Element)el.getParent();
+		Element elParent = el.getParent();
 
 		for (;;) {
 			if ((elParent == null) ||
@@ -1780,7 +1765,7 @@ public class JournalArticleLocalServiceImpl
 			elPath.insert(
 				0, elParent.attributeValue("name") + StringPool.COMMA);
 
-			elParent = (Element)elParent.getParent();
+			elParent = elParent.getParent();
 		}
 
 		String[] elPathNames = StringUtil.split(elPath.toString());
@@ -1790,11 +1775,7 @@ public class JournalArticleLocalServiceImpl
 		for (int i = 0; i < elPathNames.length; i++) {
 			boolean foundEl = false;
 
-			Iterator itr = contentEl.elements().iterator();
-
-			while (itr.hasNext()) {
-				Element tempEl = (Element)itr.next();
-
+			for (Element tempEl : (List<Element>)contentEl.elements()) {
 				if (elPathNames[i].equals(
 						tempEl.attributeValue("name", StringPool.BLANK))) {
 
@@ -1821,7 +1802,7 @@ public class JournalArticleLocalServiceImpl
 	protected String format(
 			long groupId, String articleId, double version,
 			boolean incrementVersion, String content, String structureId,
-			Map images)
+			Map<String, byte[]> images)
 		throws SystemException {
 
 		if (Validator.isNotNull(structureId)) {
@@ -1855,14 +1836,10 @@ public class JournalArticleLocalServiceImpl
 
 	protected void format(
 			long groupId, String articleId, double version,
-			boolean incrementVersion, Element root, Map images)
+			boolean incrementVersion, Element root, Map<String, byte[]> images)
 		throws SystemException {
 
-		Iterator itr = root.elements().iterator();
-
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
-
+		for (Element el : (List<Element>)root.elements()) {
 			String elName = el.attributeValue("name", StringPool.BLANK);
 			String elType = el.attributeValue("type", StringPool.BLANK);
 
@@ -1899,16 +1876,13 @@ public class JournalArticleLocalServiceImpl
 
 	protected void formatImage(
 			long groupId, String articleId, double version,
-			boolean incrementVersion, Element el, String elName, Map images)
+			boolean incrementVersion, Element el, String elName,
+			Map<String, byte[]> images)
 		throws SystemException {
 
-		List imageContents = el.elements("dynamic-content");
+		List<Element> imageContents = el.elements("dynamic-content");
 
-		Iterator itr = imageContents.listIterator();
-
-		while (itr.hasNext()) {
-			Element dynamicContent = (Element)itr.next();
-
+		for (Element dynamicContent : imageContents) {
 			String elLanguage = dynamicContent.attributeValue(
 				"language-id", StringPool.BLANK);
 
@@ -1955,7 +1929,7 @@ public class JournalArticleLocalServiceImpl
 				continue;
 			}
 
-			byte[] bytes = (byte[])images.get(elName + elLanguage);
+			byte[] bytes = images.get(elName + elLanguage);
 
 			if (bytes != null && (bytes.length > 0)) {
 				dynamicContent.setText(elContent);

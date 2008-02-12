@@ -94,7 +94,7 @@ public class JournalContentPortletLayoutListener
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portletId, StringPool.BLANK);
 
-		String articleId = (String)prefs.getValue("article-id", null);
+		String articleId = prefs.getValue("article-id", null);
 
 		if (Validator.isNull(articleId)) {
 			return;

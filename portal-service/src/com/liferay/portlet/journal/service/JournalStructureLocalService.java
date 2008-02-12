@@ -245,26 +245,28 @@ public interface JournalStructureLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getStructures()
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> getStructures()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getStructures(long groupId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> getStructures(
+		long groupId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getStructures(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> getStructures(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getStructuresCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, long groupId,
-		java.lang.String keywords, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> search(
+		long companyId, long groupId, java.lang.String keywords, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, long groupId,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, boolean andOperator, int begin, int end,
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> search(
+		long companyId, long groupId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 

@@ -50,7 +50,6 @@ import com.liferay.portlet.journal.service.persistence.JournalArticleImageUtil;
 import com.liferay.portlet.journal.service.persistence.JournalArticleUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
 
@@ -61,6 +60,7 @@ import java.io.IOException;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -117,13 +117,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			if (!context.addPrimaryKey(
 					JournalPortletDataHandlerImpl.class, "deleteData")) {
 
-				List articles = JournalArticleUtil.findByGroupId(
-					context.getGroupId());
+				List<JournalArticle> articles =
+					JournalArticleUtil.findByGroupId(
+						context.getGroupId());
 
-				Iterator itr = articles.iterator();
-
-				while (itr.hasNext()) {
-					JournalArticle article = (JournalArticle)itr.next();
+				for (JournalArticle article : articles) {
 
 					// Templates
 
@@ -165,24 +163,26 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Structures
 
-			List obj = JournalStructureUtil.findByGroupId(context.getGroupId());
+			List<JournalStructure> structures =
+				JournalStructureUtil.findByGroupId(
+					context.getGroupId());
 
-			Iterator itr = obj.iterator();
+			Iterator<JournalStructure> structuresItr = structures.iterator();
 
-			while (itr.hasNext()) {
-				JournalStructure structure = (JournalStructure)itr.next();
+			while (structuresItr.hasNext()) {
+				JournalStructure structure = structuresItr.next();
 
 				if (context.addPrimaryKey(
 						JournalStructure.class, structure.getPrimaryKeyObj())) {
 
-					itr.remove();
+					structuresItr.remove();
 				}
 				else {
 					exportStructure(structure);
 				}
 			}
 
-			String xml = xStream.toXML(obj);
+			String xml = xStream.toXML(structures);
 
 			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
 
@@ -192,24 +192,25 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Templates
 
-			obj = JournalTemplateUtil.findByGroupId(context.getGroupId());
+			List<JournalTemplate> templates =
+				JournalTemplateUtil.findByGroupId(context.getGroupId());
 
-			itr = obj.iterator();
+			Iterator<JournalTemplate> templatesItr = templates.iterator();
 
-			while (itr.hasNext()) {
-				JournalTemplate template = (JournalTemplate)itr.next();
+			while (templatesItr.hasNext()) {
+				JournalTemplate template = templatesItr.next();
 
 				if (context.addPrimaryKey(
 						JournalTemplate.class, template.getPrimaryKeyObj())) {
 
-					itr.remove();
+					templatesItr.remove();
 				}
 				else {
 					exportTemplate(context, template);
 				}
 			}
 
-			xml = xStream.toXML(obj);
+			xml = xStream.toXML(templates);
 
 			el = root.addElement("journal-templates");
 
@@ -219,24 +220,25 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Articles
 
-			obj = JournalArticleUtil.findByGroupId(context.getGroupId());
+			List<JournalArticle> articles = JournalArticleUtil.findByGroupId(
+				context.getGroupId());
 
-			itr = obj.iterator();
+			Iterator<JournalArticle> articlesItr = articles.iterator();
 
-			while (itr.hasNext()) {
-				JournalArticle article = (JournalArticle)itr.next();
+			while (articlesItr.hasNext()) {
+				JournalArticle article = articlesItr.next();
 
 				if (context.addPrimaryKey(
 						JournalArticle.class, article.getPrimaryKeyObj())) {
 
-					itr.remove();
+					articlesItr.remove();
 				}
 				else {
 					exportArticle(context, article);
 				}
 			}
 
-			xml = xStream.toXML(obj);
+			xml = xStream.toXML(articles);
 
 			el = root.addElement("journal-articles");
 
@@ -287,16 +289,13 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map structurePKs = CollectionFactory.getHashMap();
+			Map<String, String> structureIds = new HashMap<String, String>();
 
-			List structures = (List)xStream.fromXML(tempDoc.asXML());
+			List<JournalStructure> structures =
+				(List<JournalStructure>)xStream.fromXML(tempDoc.asXML());
 
-			Iterator itr = structures.iterator();
-
-			while (itr.hasNext()) {
-				JournalStructure structure = (JournalStructure)itr.next();
-
-				importStructure(context, structurePKs, structure);
+			for (JournalStructure structure : structures) {
+				importStructure(context, structureIds, structure);
 			}
 
 			// Templates
@@ -307,16 +306,13 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map templatePKs = CollectionFactory.getHashMap();
+			Map<String, String> templateIds = new HashMap<String, String>();
 
-			List templates = (List)xStream.fromXML(tempDoc.asXML());
+			List<JournalTemplate> templates =
+				(List<JournalTemplate>)xStream.fromXML(tempDoc.asXML());
 
-			itr = templates.iterator();
-
-			while (itr.hasNext()) {
-				JournalTemplate template = (JournalTemplate)itr.next();
-
-				importTemplate(context, structurePKs, templatePKs, template);
+			for (JournalTemplate template : templates) {
+				importTemplate(context, structureIds, templateIds, template);
 			}
 
 			// Articles
@@ -327,14 +323,11 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			List articles = (List)xStream.fromXML(tempDoc.asXML());
+			List<JournalArticle> articles =
+				(List<JournalArticle>)xStream.fromXML(tempDoc.asXML());
 
-			itr = articles.iterator();
-
-			while (itr.hasNext()) {
-				JournalArticle article = (JournalArticle)itr.next();
-
-				importArticle(context, structurePKs, templatePKs, article);
+			for (JournalArticle article : articles) {
+				importArticle(context, structureIds, templateIds, article);
 			}
 
 			return null;
@@ -362,16 +355,12 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		if (context.getBooleanParameter(_NAMESPACE, "images")) {
-			List articleImages = JournalArticleImageUtil.findByG_A_V(
-				context.getGroupId(), article.getArticleId(),
-				article.getVersion());
+			List<JournalArticleImage> articleImages =
+				JournalArticleImageUtil.findByG_A_V(
+					context.getGroupId(), article.getArticleId(),
+					article.getVersion());
 
-			Iterator itr = articleImages.iterator();
-
-			while (itr.hasNext()) {
-				JournalArticleImage articleImage =
-					(JournalArticleImage)itr.next();
-
+			for (JournalArticleImage articleImage : articleImages) {
 				try {
 					Image image = ImageUtil.findByPrimaryKey(
 						articleImage.getArticleImageId());
@@ -449,8 +438,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static JournalArticle importArticle(
-			PortletDataContext context, Map structurePKs, Map templatePKs,
-			JournalArticle article)
+			PortletDataContext context, Map<String, String> structureIds,
+			Map<String, String> templateIds, JournalArticle article)
 		throws Exception {
 
 		long userId = context.getUserId(article.getUserUuid());
@@ -470,9 +459,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		boolean incrementVersion = false;
 
 		String parentStructureId = MapUtil.getString(
-			structurePKs, article.getStructureId(), article.getStructureId());
+			structureIds, article.getStructureId(), article.getStructureId());
 		String parentTemplateId = MapUtil.getString(
-			templatePKs, article.getTemplateId(), article.getTemplateId());
+			templateIds, article.getTemplateId(), article.getTemplateId());
 
 		Date displayDate = article.getDisplayDate();
 
@@ -551,20 +540,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			FileUtil.write(smallFile, byteArray);
 		}
 
-		Map images = CollectionFactory.getHashMap();
+		Map<String, byte[]> images = new HashMap<String, byte[]>();
 
 		if (context.getBooleanParameter(_NAMESPACE, "images")) {
-			List imageFiles =
-				(List)context.getZipReader().getFolderEntries().get(
+			List<ObjectValuePair<String, byte[]>> imageFiles =
+				context.getZipReader().getFolderEntries().get(
 					getArticleImageDir(article));
 
-			if (imageFiles != null && imageFiles.size() > 0) {
-				Iterator itr = imageFiles.iterator();
-
-				while (itr.hasNext()) {
-					ObjectValuePair imageFile = (ObjectValuePair)itr.next();
-
-					String fileName = (String)imageFile.getKey();
+			if (imageFiles != null) {
+				for (ObjectValuePair<String, byte[]> imageFile : imageFiles) {
+					String fileName = imageFile.getKey();
 
 					int pos = fileName.lastIndexOf(".");
 
@@ -716,7 +701,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static void importStructure(
-			PortletDataContext context, Map structurePKs,
+			PortletDataContext context, Map<String, String> structureIds,
 			JournalStructure structure)
 		throws Exception {
 
@@ -782,7 +767,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					addGuestPermissions);
 		}
 
-		structurePKs.put(
+		structureIds.put(
 			structure.getStructureId(), existingStructure.getStructureId());
 
 		if (!structureId.equals(existingStructure.getStructureId())) {
@@ -796,8 +781,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected static void importTemplate(
-			PortletDataContext context, Map structurePKs, Map templatePKs,
-			JournalTemplate template)
+			PortletDataContext context, Map<String, String> structureIds,
+			Map<String, String> templateIds, JournalTemplate template)
 		throws Exception {
 
 		long userId = context.getUserId(template.getUserUuid());
@@ -814,7 +799,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		String parentStructureId = MapUtil.getString(
-			structurePKs, template.getStructureId(), template.getStructureId());
+			structureIds, template.getStructureId(), template.getStructureId());
 
 		boolean formatXsl = false;
 
@@ -889,7 +874,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 					addCommunityPermissions, addGuestPermissions);
 		}
 
-		templatePKs.put(
+		templateIds.put(
 			template.getTemplateId(), existingTemplate.getTemplateId());
 
 		if (!templateId.equals(existingTemplate.getTemplateId())) {

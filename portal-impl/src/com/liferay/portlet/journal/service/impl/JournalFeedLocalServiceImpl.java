@@ -314,15 +314,15 @@ public class JournalFeedLocalServiceImpl
 		return journalFeedPersistence.findByG_F(groupId, feedId);
 	}
 
-	public List getFeeds() throws SystemException {
+	public List<JournalFeed> getFeeds() throws SystemException {
 		return journalFeedPersistence.findAll();
 	}
 
-	public List getFeeds(long groupId) throws SystemException {
+	public List<JournalFeed> getFeeds(long groupId) throws SystemException {
 		return journalFeedPersistence.findByGroupId(groupId);
 	}
 
-	public List getFeeds(long groupId, int begin, int end)
+	public List<JournalFeed> getFeeds(long groupId, int begin, int end)
 		throws SystemException {
 
 		return journalFeedPersistence.findByGroupId(groupId, begin, end);
@@ -332,7 +332,7 @@ public class JournalFeedLocalServiceImpl
 		return journalFeedPersistence.countByGroupId(groupId);
 	}
 
-	public List search(
+	public List<JournalFeed> search(
 			long companyId, long groupId, String keywords, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -341,7 +341,7 @@ public class JournalFeedLocalServiceImpl
 			companyId, groupId, keywords, begin, end, obc);
 	}
 
-	public List search(
+	public List<JournalFeed> search(
 			long companyId, long groupId, String feedId, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)

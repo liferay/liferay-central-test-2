@@ -52,7 +52,6 @@ import com.liferay.portlet.journal.util.comparator.ArticleIDComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleReviewDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.FiniteUniqueStack;
 import com.liferay.util.Http;
 import com.liferay.util.Time;
@@ -64,6 +63,7 @@ import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -102,7 +102,7 @@ public class JournalUtil {
 		PortletRequest req, JournalArticle article) {
 
 		if (article != null) {
-			Stack stack = getRecentArticles(req);
+			Stack<JournalArticle> stack = getRecentArticles(req);
 
 			stack.push(article);
 		}
@@ -112,7 +112,7 @@ public class JournalUtil {
 		PortletRequest req, JournalStructure structure) {
 
 		if (structure != null) {
-			Stack stack = getRecentStructures(req);
+			Stack<JournalStructure> stack = getRecentStructures(req);
 
 			stack.push(structure);
 		}
@@ -122,26 +122,26 @@ public class JournalUtil {
 		PortletRequest req, JournalTemplate template) {
 
 		if (template != null) {
-			Stack stack = getRecentTemplates(req);
+			Stack<JournalTemplate> stack = getRecentTemplates(req);
 
 			stack.push(template);
 		}
 	}
 
 	public static void addReservedEl(
-		Element root, Map tokens, String name, double value) {
+		Element root, Map<String, String> tokens, String name, double value) {
 
 		addReservedEl(root, tokens, name, String.valueOf(value));
 	}
 
 	public static void addReservedEl(
-		Element root, Map tokens, String name, Date value) {
+		Element root, Map<String, String> tokens, String name, Date value) {
 
 		addReservedEl(root, tokens, name, Time.getRFC822(value));
 	}
 
 	public static void addReservedEl(
-		Element root, Map tokens, String name, String value) {
+		Element root, Map<String, String> tokens, String name, String value) {
 
 		// XML
 
@@ -173,7 +173,7 @@ public class JournalUtil {
 	}
 
 	public static void addAllReservedEls(
-		Element root, Map tokens, JournalArticle article) {
+		Element root, Map<String, String> tokens, JournalArticle article) {
 
 		JournalUtil.addReservedEl(
 			root, tokens, JournalStructureImpl.RESERVED_ARTICLE_ID,
@@ -526,14 +526,16 @@ public class JournalUtil {
 		}
 	}
 
-	public static Stack getRecentArticles(PortletRequest req) {
+	public static Stack<JournalArticle> getRecentArticles(PortletRequest req) {
 		PortletSession ses = req.getPortletSession();
 
-		Stack recentArticles =
-			(Stack)ses.getAttribute(WebKeys.JOURNAL_RECENT_ARTICLES);
+		Stack<JournalArticle> recentArticles =
+			(Stack<JournalArticle>)ses.getAttribute(
+				WebKeys.JOURNAL_RECENT_ARTICLES);
 
 		if (recentArticles == null) {
-			recentArticles = new FiniteUniqueStack(MAX_STACK_SIZE);
+			recentArticles = new FiniteUniqueStack<JournalArticle>(
+				MAX_STACK_SIZE);
 
 			ses.setAttribute(WebKeys.JOURNAL_RECENT_ARTICLES, recentArticles);
 		}
@@ -541,14 +543,18 @@ public class JournalUtil {
 		return recentArticles;
 	}
 
-	public static Stack getRecentStructures(PortletRequest req) {
+	public static Stack<JournalStructure> getRecentStructures(
+		PortletRequest req) {
+
 		PortletSession ses = req.getPortletSession();
 
-		Stack recentStructures =
-			(Stack)ses.getAttribute(WebKeys.JOURNAL_RECENT_STRUCTURES);
+		Stack<JournalStructure> recentStructures =
+			(Stack<JournalStructure>)ses.getAttribute(
+				WebKeys.JOURNAL_RECENT_STRUCTURES);
 
 		if (recentStructures == null) {
-			recentStructures = new FiniteUniqueStack(MAX_STACK_SIZE);
+			recentStructures = new FiniteUniqueStack<JournalStructure>(
+				MAX_STACK_SIZE);
 
 			ses.setAttribute(
 				WebKeys.JOURNAL_RECENT_STRUCTURES, recentStructures);
@@ -557,14 +563,18 @@ public class JournalUtil {
 		return recentStructures;
 	}
 
-	public static Stack getRecentTemplates(PortletRequest req) {
+	public static Stack<JournalTemplate> getRecentTemplates(
+		PortletRequest req) {
+
 		PortletSession ses = req.getPortletSession();
 
-		Stack recentTemplates =
-			(Stack)ses.getAttribute(WebKeys.JOURNAL_RECENT_TEMPLATES);
+		Stack<JournalTemplate> recentTemplates =
+			(Stack<JournalTemplate>)ses.getAttribute(
+				WebKeys.JOURNAL_RECENT_TEMPLATES);
 
 		if (recentTemplates == null) {
-			recentTemplates = new FiniteUniqueStack(MAX_STACK_SIZE);
+			recentTemplates = new FiniteUniqueStack<JournalTemplate>(
+				MAX_STACK_SIZE);
 
 			ses.setAttribute(WebKeys.JOURNAL_RECENT_TEMPLATES, recentTemplates);
 		}
@@ -573,15 +583,16 @@ public class JournalUtil {
 	}
 
 	public static String getTemplateScript(
-			long groupId, String templateId, Map tokens, String languageId)
+			long groupId, String templateId, Map<String, String> tokens,
+			String languageId)
 		throws PortalException, SystemException {
 
 		return getTemplateScript(groupId, templateId, tokens, languageId, true);
 	}
 
 	public static String getTemplateScript(
-			long groupId, String templateId, Map tokens, String languageId,
-			boolean transform)
+			long groupId, String templateId, Map<String, String> tokens,
+			String languageId, boolean transform)
 		throws PortalException, SystemException {
 
 		JournalTemplate template = JournalTemplateLocalServiceUtil.getTemplate(
@@ -591,8 +602,8 @@ public class JournalUtil {
 	}
 
 	public static String getTemplateScript(
-			JournalTemplate template, Map tokens, String languageId,
-			boolean transform)
+			JournalTemplate template, Map<String, String> tokens,
+			String languageId, boolean transform)
 		throws PortalException, SystemException {
 
 		String script = template.getXsl();
@@ -631,8 +642,10 @@ public class JournalUtil {
 		return script;
 	}
 
-	public static Map getTokens(long groupId, ThemeDisplay themeDisplay) {
-		Map tokens = CollectionFactory.getHashMap();
+	public static Map<String, String> getTokens(
+		long groupId, ThemeDisplay themeDisplay) {
+
+		Map<String, String> tokens = new HashMap<String, String>();
 
 		if (themeDisplay == null) {
 			return tokens;
@@ -690,7 +703,7 @@ public class JournalUtil {
 				"available-locales",
 				newContentRoot.attributeValue("available-locales"));
 
-			Stack path = new Stack();
+			Stack<String> path = new Stack<String>();
 
 			path.push(xsdRoot.getName());
 
@@ -746,15 +759,11 @@ public class JournalUtil {
 	public static void removeArticleLocale(Element el, String languageId)
 		throws SystemException {
 
-		Iterator itr1 = el.elements("dynamic-element").iterator();
+		for (Element dynamicEl :
+				(List<Element>)el.elements("dynamic-element")) {
 
-		while (itr1.hasNext()) {
-			Element dynamicEl = (Element)itr1.next();
-
-			Iterator itr2 = dynamicEl.elements("dynamic-content").iterator();
-
-			while (itr2.hasNext()) {
-				Element dynamicContentEl = (Element)itr2.next();
+			for (Element dynamicContentEl :
+					(List<Element>)dynamicEl.elements("dynamic-content")) {
 
 				String curLanguageId = GetterUtil.getString(
 					dynamicContentEl.attributeValue("language-id"));
@@ -784,7 +793,7 @@ public class JournalUtil {
 
 			Element contentRoot = contentDoc.getRootElement();
 
-			Stack path = new Stack();
+			Stack<String> path = new Stack<String>();
 
 			path.push(contentRoot.getName());
 
@@ -802,12 +811,12 @@ public class JournalUtil {
 	public static void removeRecentArticle(
 		PortletRequest req, String articleId) {
 
-		Stack stack = getRecentArticles(req);
+		Stack<JournalArticle> stack = getRecentArticles(req);
 
-		Iterator itr = stack.iterator();
+		Iterator<JournalArticle> itr = stack.iterator();
 
 		while (itr.hasNext()) {
-			JournalArticle journalArticle = (JournalArticle)itr.next();
+			JournalArticle journalArticle = itr.next();
 
 			if (journalArticle.getArticleId().equals(articleId)) {
 				itr.remove();
@@ -820,12 +829,12 @@ public class JournalUtil {
 	public static void removeRecentStructure(
 		PortletRequest req, String structureId) {
 
-		Stack stack = getRecentStructures(req);
+		Stack<JournalStructure> stack = getRecentStructures(req);
 
-		Iterator itr = stack.iterator();
+		Iterator<JournalStructure> itr = stack.iterator();
 
 		while (itr.hasNext()) {
-			JournalStructure journalStructure = (JournalStructure)itr.next();
+			JournalStructure journalStructure = itr.next();
 
 			if (journalStructure.getStructureId().equals(structureId)) {
 				itr.remove();
@@ -838,12 +847,12 @@ public class JournalUtil {
 	public static void removeRecentTemplate(
 		PortletRequest req, String templateId) {
 
-		Stack stack = getRecentTemplates(req);
+		Stack<JournalTemplate> stack = getRecentTemplates(req);
 
-		Iterator itr = stack.iterator();
+		Iterator<JournalTemplate> itr = stack.iterator();
 
 		while (itr.hasNext()) {
-			JournalTemplate journalTemplate = (JournalTemplate)itr.next();
+			JournalTemplate journalTemplate = itr.next();
 
 			if (journalTemplate.getTemplateId().equals(templateId)) {
 				itr.remove();
@@ -854,8 +863,8 @@ public class JournalUtil {
 	}
 
 	public static String transform(
-			Map tokens, String languageId, String xml, String script,
-			String langType)
+			Map<String, String> tokens, String languageId, String xml,
+			String script, String langType)
 		throws TransformException, UnsupportedEncodingException {
 
 		// Setup Listeners
@@ -874,7 +883,8 @@ public class JournalUtil {
 			_logTransformBefore.debug(xml);
 		}
 
-		List listenersList = new ArrayList();
+		List<TransformerListener> listenersList =
+			new ArrayList<TransformerListener>();
 
 		String[] listeners = PropsUtil.getArray(
 			PropsUtil.JOURNAL_TRANSFORMER_LISTENER);
@@ -948,8 +958,7 @@ public class JournalUtil {
 		// Postprocess output
 
 		for (int i = 0; i < listenersList.size(); i++) {
-			TransformerListener listener =
-				(TransformerListener)listenersList.get(i);
+			TransformerListener listener = listenersList.get(i);
 
 			// Modify output
 
@@ -972,7 +981,7 @@ public class JournalUtil {
 	}
 
 	private static void _mergeLocaleContent(
-			Stack path, Document curDoc, Document newDoc, Element xsdEl,
+			Stack<String> path, Document curDoc, Document newDoc, Element xsdEl,
 			String defaultLocale)
 		throws SystemException {
 
@@ -996,7 +1005,7 @@ public class JournalUtil {
 	}
 
 	private static void _mergeLocaleContent(
-			Stack path, Document curDoc, Document newDoc, Element xsdEl,
+			Stack<String> path, Document curDoc, Document newDoc, Element xsdEl,
 			String defaultLocale, String elPath)
 		throws SystemException {
 
@@ -1008,14 +1017,15 @@ public class JournalUtil {
 
 		XPath xPathSelector = DocumentHelper.createXPath(fullPath);
 
-		List curElements = xPathSelector.selectNodes(curDoc);
+		List<Element> curElements = xPathSelector.selectNodes(curDoc);
 
 		Element newEl = (Element)xPathSelector.selectNodes(newDoc).get(0);
 
 		if (curElements.size() > 0) {
-			Element curEl = (Element)curElements.get(0);
+			Element curEl = curElements.get(0);
 
-			List curDynamicContents = curEl.elements("dynamic-content");
+			List<Element> curDynamicContents = curEl.elements(
+				"dynamic-content");
 
 			Element newContentEl = newEl.element("dynamic-content");
 
@@ -1024,7 +1034,7 @@ public class JournalUtil {
 
 			if (newContentLanguageId.equals(StringPool.BLANK)) {
 				for (int k = curDynamicContents.size() - 1; k >= 0 ; k--) {
-					Element curContentEl = (Element)curDynamicContents.get(k);
+					Element curContentEl = curDynamicContents.get(k);
 
 					String curContentLanguageId = curContentEl.attributeValue(
 						"language-id", StringPool.BLANK);
@@ -1048,7 +1058,7 @@ public class JournalUtil {
 				boolean match = false;
 
 				for (int k = curDynamicContents.size() - 1; k >= 0 ; k--) {
-					Element curContentEl = (Element)curDynamicContents.get(k);
+					Element curContentEl = curDynamicContents.get(k);
 
 					String curContentLanguageId = curContentEl.attributeValue(
 						"language-id", StringPool.BLANK);
@@ -1095,7 +1105,7 @@ public class JournalUtil {
 	}
 
 	private static void _removeOldContent(
-			Stack path, Element contentEl, Document xsdDoc)
+			Stack<String> path, Element contentEl, Document xsdDoc)
 		throws SystemException {
 
 		String elPath = "";
@@ -1114,7 +1124,8 @@ public class JournalUtil {
 	}
 
 	private static void _removeOldContent(
-			Stack path, Element contentEl, Document xsdDoc, String elPath)
+			Stack<String> path, Element contentEl, Document xsdDoc,
+			String elPath)
 		throws SystemException {
 
 		String name = contentEl.attributeValue("name");
@@ -1129,7 +1140,7 @@ public class JournalUtil {
 
 		XPath xPathSelector = DocumentHelper.createXPath(fullPath);
 
-		List curElements = xPathSelector.selectNodes(xsdDoc);
+		List<Element> curElements = xPathSelector.selectNodes(xsdDoc);
 
 		if (curElements.size() == 0) {
 			contentEl.detach();

@@ -37,7 +37,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import java.util.Date;
-import java.util.Iterator;
+import java.util.List;
 
 import javax.portlet.PortletURL;
 
@@ -216,11 +216,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	private static void _getIndexableContent(StringMaker sm, Element root)
 		throws Exception {
 
-		Iterator itr = root.elements().iterator();
-
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
-
+		for (Element el : (List<Element>)root.elements()) {
 			String elType = el.attributeValue("type", StringPool.BLANK);
 
 			if (elType.equals("text") || elType.equals("text_box") ||

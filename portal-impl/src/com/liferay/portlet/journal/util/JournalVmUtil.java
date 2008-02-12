@@ -39,7 +39,6 @@ import java.io.StringWriter;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -67,7 +66,8 @@ public class JournalVmUtil {
 			PropsUtil.JOURNAL_TEMPLATE_VELOCITY_RESTRICTED_VARIABLES);
 
 	public static String transform(
-			Map tokens, String languageId, String xml, String script)
+			Map<String, String> tokens, String languageId, String xml,
+			String script)
 		throws TransformException {
 
 		StringWriter output = new StringWriter();
@@ -83,22 +83,17 @@ public class JournalVmUtil {
 
 			Element root = doc.getRootElement();
 
-			List nodes = _extractDynamicContents(root);
+			List<TemplateNode> nodes = _extractDynamicContents(root);
 
-			Iterator itr = nodes.iterator();
-
-			while (itr.hasNext()) {
-				TemplateNode node = (TemplateNode)itr.next();
-
+			for (TemplateNode node : nodes) {
 				context.put(node.getName(), node);
 			}
 
 			context.put(
 				"request", _insertRequestVariables(root.element("request")));
 
-			long companyId = GetterUtil.getLong(
-				(String)tokens.get("company_id"));
-			long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
+			long companyId = GetterUtil.getLong(tokens.get("company_id"));
+			long groupId = GetterUtil.getLong(tokens.get("group_id"));
 			String journalTemplatesPath =
 				VelocityResourceListener.JOURNAL_SEPARATOR + StringPool.SLASH +
 					companyId + StringPool.SLASH + groupId;
@@ -151,43 +146,39 @@ public class JournalVmUtil {
 		return output.toString();
 	}
 
-	private static List _extractDynamicContents(Element parent)
+	private static List<TemplateNode> _extractDynamicContents(Element parent)
 		throws TransformException {
 
-		List nodes = new ArrayList();
+		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
 
-		Iterator itr1 = parent.elementIterator("dynamic-element");
+		for (Element el :
+				(List<Element>)parent.elementIterator("dynamic-element")) {
 
-		while (itr1.hasNext()) {
-			Element element = (Element)itr1.next();
-
-			Element content = element.element("dynamic-content");
+			Element content = el.element("dynamic-content");
 
 			if (content == null) {
 				throw new TransformException(
 					"Element missing \"dynamic-content\"");
 			}
 
-			String name = element.attributeValue("name", "");
+			String name = el.attributeValue("name", "");
 
 			if (name.length() == 0) {
 				throw new TransformException(
 					"Element missing \"name\" attribute");
 			}
 
-			String type = element.attributeValue("type", "");
+			String type = el.attributeValue("type", "");
 
 			TemplateNode node = new TemplateNode(
 				name, CDATAUtil.strip(content.getText()), type);
 
-			if (element.element("dynamic-element") != null) {
-				node.appendChildren(_extractDynamicContents(element));
+			if (el.element("dynamic-element") != null) {
+				node.appendChildren(_extractDynamicContents(el));
 			}
 			else if (content.element("option") != null) {
-				Iterator itr2 = content.elementIterator("option");
-
-				while (itr2.hasNext()) {
-					Element option = (Element)itr2.next();
+				for (Element option :
+						(List<Element>)content.elementIterator("option")) {
 
 					node.appendOption(CDATAUtil.strip(option.getText()));
 				}
@@ -206,10 +197,8 @@ public class JournalVmUtil {
 
 		Document doc = reader.read(new StringReader(xml));
 
-		Iterator itr = doc.selectNodes("//dynamic-element").iterator();
-
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+		for (Element el :
+				(List<Element>)doc.selectNodes("//dynamic-element")) {
 
 			String name = GetterUtil.getString(el.attributeValue("name"));
 			String type = GetterUtil.getString(el.attributeValue("type"));
@@ -226,18 +215,16 @@ public class JournalVmUtil {
 		return script;
 	}
 
-	private static Map _insertRequestVariables(Element parent) {
-		Map map = new HashMap();
+	private static Map<String, Object> _insertRequestVariables(
+		Element parent) {
+
+		Map<String, Object> map = new HashMap<String, Object>();
 
 		if (parent == null) {
 			return map;
 		}
 
-		Iterator itr1 = parent.elements().iterator();
-
-		while (itr1.hasNext()) {
-			Element el = (Element)itr1.next();
-
+		for (Element el : (List<Element>)parent.elements()) {
 			String name = el.getName();
 
 			if (name.equals("attribute")) {
@@ -246,19 +233,15 @@ public class JournalVmUtil {
 			else if (name.equals("parameter")) {
 				name = el.element("name").getText();
 
-				List valueEls = el.elements("value");
+				List<Element> valueEls = el.elements("value");
 
 				if (valueEls.size() == 1) {
-					map.put(name, ((Element)valueEls.get(0)).getText());
+					map.put(name, (valueEls.get(0)).getText());
 				}
 				else {
-					List values = new ArrayList();
+					List<String> values = new ArrayList<String>();
 
-					Iterator itr2 = valueEls.iterator();
-
-					while (itr2.hasNext()) {
-						Element valueEl = (Element)itr2.next();
-
+					for (Element valueEl : valueEls) {
 						values.add(valueEl.getText());
 					}
 

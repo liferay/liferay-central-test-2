@@ -262,8 +262,8 @@ public class JournalArticleResourceLocalServiceUtil {
 			articleId);
 	}
 
-	public static java.util.List getArticleResources(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> getArticleResources(
+		long groupId) throws com.liferay.portal.SystemException {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
 
 		return journalArticleResourceLocalService.getArticleResources(groupId);

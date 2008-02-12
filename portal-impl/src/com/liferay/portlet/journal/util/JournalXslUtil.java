@@ -49,12 +49,13 @@ import javax.xml.transform.stream.StreamSource;
 public class JournalXslUtil {
 
 	public static String transform(
-			Map tokens, String languageId, String xml, String script)
+			Map<String, String> tokens, String languageId, String xml,
+			String script)
 		throws TransformException, UnsupportedEncodingException {
 
 		ByteArrayMaker bam = new ByteArrayMaker();
 
-		long companyId = GetterUtil.getLong((String)tokens.get("company_id"));
+		long companyId = GetterUtil.getLong(tokens.get("company_id"));
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		JournalXslErrorListener errorListener = new JournalXslErrorListener(

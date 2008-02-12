@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -81,30 +80,26 @@ public class TokensTransformerListener extends TransformerListener {
 	 * @return		the processed string
 	 */
 	protected String replaceTokens(String s) {
-		Map tokens = getTokens();
+		Map<String, String> tokens = getTokens();
 
-		Set tokensSet = tokens.entrySet();
+		Set<Map.Entry<String, String>> tokensSet = tokens.entrySet();
 
 		if (tokensSet.size() == 0) {
 			return s;
 		}
 
-		List escapedKeysList = new ArrayList();
-		List escapedValuesList = new ArrayList();
+		List<String> escapedKeysList = new ArrayList<String>();
+		List<String> escapedValuesList = new ArrayList<String>();
 
-		List keysList = new ArrayList();
-		List valuesList = new ArrayList();
+		List<String> keysList = new ArrayList<String>();
+		List<String> valuesList = new ArrayList<String>();
 
-		List tempEscapedKeysList = new ArrayList();
-		List tempEscapedValuesList = new ArrayList();
+		List<String> tempEscapedKeysList = new ArrayList<String>();
+		List<String> tempEscapedValuesList = new ArrayList<String>();
 
-		Iterator itr = tokensSet.iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String key = (String)entry.getKey();
-			String value = GetterUtil.getString((String)entry.getValue());
+		for (Map.Entry<String, String> entry : tokensSet) {
+			String key = entry.getKey();
+			String value = GetterUtil.getString(entry.getValue());
 
 			if (Validator.isNotNull(key)) {
 				String escapedKey =
@@ -129,18 +124,19 @@ public class TokensTransformerListener extends TransformerListener {
 
 		s = StringUtil.replace(
 			s,
-			(String[])escapedKeysList.toArray(new String[0]),
-			(String[])escapedValuesList.toArray(new String[0]));
+			escapedKeysList.toArray(new String[escapedKeysList.size()]),
+			escapedValuesList.toArray(new String[escapedValuesList.size()]));
 
 		s = StringUtil.replace(
 			s,
-			(String[])keysList.toArray(new String[0]),
-			(String[])valuesList.toArray(new String[0]));
+			keysList.toArray(new String[keysList.size()]),
+			valuesList.toArray(new String[valuesList.size()]));
 
 		s = StringUtil.replace(
 			s,
-			(String[])tempEscapedKeysList.toArray(new String[0]),
-			(String[])tempEscapedValuesList.toArray(new String[0]));
+			tempEscapedKeysList.toArray(new String[tempEscapedKeysList.size()]),
+			tempEscapedValuesList.toArray(
+				new String[tempEscapedValuesList.size()]));
 
 		return s;
 	}

@@ -90,7 +90,9 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		return friendlyURLPath;
 	}
 
-	public void populateParams(String friendlyURLPath, Map params) {
+	public void populateParams(
+		String friendlyURLPath, Map<String, String> params) {
+
 		int w = friendlyURLPath.indexOf("/", 1);
 		int x = friendlyURLPath.indexOf("/", w + 1);
 		int y = friendlyURLPath.indexOf("/", x + 1);

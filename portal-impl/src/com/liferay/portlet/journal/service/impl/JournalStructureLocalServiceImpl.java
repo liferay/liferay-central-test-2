@@ -48,7 +48,6 @@ import java.io.StringReader;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -300,11 +299,8 @@ public class JournalStructureLocalServiceImpl
 	public void deleteStructures(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = journalStructurePersistence.findByGroupId(
-			groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalStructure structure = (JournalStructure)itr.next();
+		for (JournalStructure structure :
+				journalStructurePersistence.findByGroupId(groupId)) {
 
 			deleteStructure(structure);
 		}
@@ -327,8 +323,8 @@ public class JournalStructureLocalServiceImpl
 					"required since 4.2.0. Please update all custom code and " +
 						"data that references structures without a group id.");
 
-			List structures = journalStructurePersistence.findByStructureId(
-				structureId);
+			List<JournalStructure> structures =
+				journalStructurePersistence.findByStructureId(structureId);
 
 			if (structures.size() == 0) {
 				throw new NoSuchStructureException(
@@ -336,7 +332,7 @@ public class JournalStructureLocalServiceImpl
 						structureId);
 			}
 			else {
-				return (JournalStructure)structures.get(0);
+				return structures.get(0);
 			}
 		}
 		else {
@@ -344,15 +340,18 @@ public class JournalStructureLocalServiceImpl
 		}
 	}
 
-	public List getStructures() throws SystemException {
+	public List<JournalStructure> getStructures() throws SystemException {
 		return journalStructurePersistence.findAll();
 	}
 
-	public List getStructures(long groupId) throws SystemException {
+	public List<JournalStructure> getStructures(long groupId)
+		throws SystemException {
+
 		return journalStructurePersistence.findByGroupId(groupId);
 	}
 
-	public List getStructures(long groupId, int begin, int end)
+	public List<JournalStructure> getStructures(
+			long groupId, int begin, int end)
 		throws SystemException {
 
 		return journalStructurePersistence.findByGroupId(groupId, begin, end);
@@ -362,7 +361,7 @@ public class JournalStructureLocalServiceImpl
 		return journalStructurePersistence.countByGroupId(groupId);
 	}
 
-	public List search(
+	public List<JournalStructure> search(
 			long companyId, long groupId, String keywords, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -371,7 +370,7 @@ public class JournalStructureLocalServiceImpl
 			companyId, groupId, keywords, begin, end, obc);
 	}
 
-	public List search(
+	public List<JournalStructure> search(
 			long companyId, long groupId, String structureId, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
@@ -476,13 +475,13 @@ public class JournalStructureLocalServiceImpl
 
 				Element root = doc.getRootElement();
 
-				List children = root.elements();
+				List<Element> children = root.elements();
 
 				if (children.size() == 0) {
 					throw new StructureXsdException();
 				}
 
-				Set elNames = new HashSet();
+				Set<String> elNames = new HashSet<String>();
 
 				validate(children, elNames);
 			}
@@ -492,12 +491,10 @@ public class JournalStructureLocalServiceImpl
 		}
 	}
 
-	protected void validate(List children, Set elNames) throws PortalException {
-		Iterator itr = children.iterator();
+	protected void validate(List<Element> children, Set<String> elNames)
+		throws PortalException {
 
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
-
+		for (Element el : children) {
 			String elName = el.attributeValue("name", StringPool.BLANK);
 			String elType = el.attributeValue("type", StringPool.BLANK);
 

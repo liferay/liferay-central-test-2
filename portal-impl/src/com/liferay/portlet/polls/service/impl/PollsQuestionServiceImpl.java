@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
+import com.liferay.portlet.polls.model.PollsChoice;
 import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.base.PollsQuestionServiceBaseImpl;
 import com.liferay.portlet.polls.service.permission.PollsQuestionPermission;
@@ -45,8 +46,9 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			long plid, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, List choices,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			int expirationDateMinute, boolean neverExpire,
+			List<PollsChoice> choices, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -64,8 +66,9 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			long plid, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, List choices,
-			String[] communityPermissions, String[] guestPermissions)
+			int expirationDateMinute, boolean neverExpire,
+			List<PollsChoice> choices, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		PortletPermissionUtil.check(
@@ -101,7 +104,8 @@ public class PollsQuestionServiceImpl extends PollsQuestionServiceBaseImpl {
 			long questionId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, List choices)
+			int expirationDateMinute, boolean neverExpire,
+			List<PollsChoice> choices)
 		throws PortalException, SystemException {
 
 		PollsQuestionPermission.check(

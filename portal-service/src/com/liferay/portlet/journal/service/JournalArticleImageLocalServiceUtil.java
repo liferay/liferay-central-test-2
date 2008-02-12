@@ -295,8 +295,8 @@ public class JournalArticleImageLocalServiceUtil {
 			articleId, version, elName, languageId, tempImage);
 	}
 
-	public static java.util.List getArticleImages(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> getArticleImages(
+		long groupId) throws com.liferay.portal.SystemException {
 		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
 
 		return journalArticleImageLocalService.getArticleImages(groupId);

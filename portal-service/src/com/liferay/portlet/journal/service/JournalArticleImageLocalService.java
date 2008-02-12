@@ -151,6 +151,6 @@ public interface JournalArticleImageLocalService {
 		double version, java.lang.String elName, java.lang.String languageId,
 		boolean tempImage) throws com.liferay.portal.SystemException;
 
-	public java.util.List getArticleImages(long groupId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> getArticleImages(
+		long groupId) throws com.liferay.portal.SystemException;
 }

@@ -150,8 +150,9 @@ public class PollsVoteLocalServiceUtil {
 		return pollsVoteLocalService.addVote(userId, questionId, choiceId);
 	}
 
-	public static java.util.List getChoiceVotes(long choiceId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getChoiceVotes(
+		long choiceId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 
 		return pollsVoteLocalService.getChoiceVotes(choiceId, begin, end);
@@ -173,8 +174,9 @@ public class PollsVoteLocalServiceUtil {
 		return pollsVoteLocalService.getVote(questionId, userId);
 	}
 
-	public static java.util.List getQuestionVotes(long questionId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> getQuestionVotes(
+		long questionId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		PollsVoteLocalService pollsVoteLocalService = PollsVoteLocalServiceFactory.getService();
 
 		return pollsVoteLocalService.getQuestionVotes(questionId, begin, end);

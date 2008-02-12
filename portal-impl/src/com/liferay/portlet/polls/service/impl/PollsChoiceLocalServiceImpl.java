@@ -75,7 +75,9 @@ public class PollsChoiceLocalServiceImpl
 		return pollsChoicePersistence.findByPrimaryKey(choiceId);
 	}
 
-	public List getChoices(long questionId) throws SystemException {
+	public List<PollsChoice> getChoices(long questionId)
+		throws SystemException {
+
 		return pollsChoicePersistence.findByQuestionId(questionId);
 	}
 

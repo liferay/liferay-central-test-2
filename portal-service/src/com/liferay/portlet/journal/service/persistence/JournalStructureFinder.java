@@ -42,20 +42,22 @@ public interface JournalStructureFinder {
 		java.lang.String[] descriptions, boolean andOperator)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByKeywords(long companyId, long groupId,
-		java.lang.String keywords, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_G_S_N_D(long companyId, long groupId,
-		java.lang.String structureId, java.lang.String name,
-		java.lang.String description, boolean andOperator, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_G_S_N_D(long companyId, long groupId,
-		java.lang.String[] structureIds, java.lang.String[] names,
-		java.lang.String[] descriptions, boolean andOperator, int begin,
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByKeywords(
+		long companyId, long groupId, java.lang.String keywords, int begin,
 		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByC_G_S_N_D(
+		long companyId, long groupId, java.lang.String structureId,
+		java.lang.String name, java.lang.String description,
+		boolean andOperator, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> findByC_G_S_N_D(
+		long companyId, long groupId, java.lang.String[] structureIds,
+		java.lang.String[] names, java.lang.String[] descriptions,
+		boolean andOperator, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 }

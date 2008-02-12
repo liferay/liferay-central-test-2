@@ -34,8 +34,6 @@ import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceUtil;
 import com.liferay.portlet.polls.service.PollsVoteLocalServiceUtil;
 
-import java.util.Iterator;
-
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
 
@@ -61,11 +59,8 @@ public class PollsUtil {
 
 		String seriesName = StringPool.BLANK;
 
-		Iterator itr = PollsChoiceLocalServiceUtil.getChoices(
-			questionId).iterator();
-
-		while (itr.hasNext()) {
-			PollsChoice choice = (PollsChoice)itr.next();
+		for (PollsChoice choice :
+				PollsChoiceLocalServiceUtil.getChoices(questionId)) {
 
 			Integer number = new Integer(
 				PollsVoteLocalServiceUtil.getChoiceVotesCount(

@@ -93,15 +93,19 @@ public class ZipReader implements Serializable {
 					fileName = currentName.substring(pos + 1);
 				}
 
-				List files = (List)_folderEntries.get(folderPath);
+				List<ObjectValuePair<String, byte[]>> files =
+					_folderEntries.get(folderPath);
 
 				if (files == null) {
-					files = new ArrayList();
+					files = new ArrayList<ObjectValuePair<String, byte[]>>();
 
 					_folderEntries.put(folderPath, files);
 				}
 
-				files.add(new ObjectValuePair(fileName, byteArray));
+				ObjectValuePair<String, byte[]> ovp =
+					new ObjectValuePair<String, byte[]>(fileName, byteArray);
+
+				files.add(ovp);
 			}
 		}
 		catch (IOException ioe) {
@@ -119,7 +123,7 @@ public class ZipReader implements Serializable {
 		}
 	}
 
-	public Map getEntries() {
+	public Map<String, byte[]> getEntries() {
 		return _entries;
 	}
 
@@ -134,10 +138,12 @@ public class ZipReader implements Serializable {
 	}
 
 	public byte[] getEntryAsByteArray(String name) {
-		return (byte[])_entries.get(name);
+		return _entries.get(name);
 	}
 
-	public Map getFolderEntries() {
+	public Map<String, List<ObjectValuePair<String, byte[]>>>
+		getFolderEntries() {
+
 		return _folderEntries;
 	}
 
@@ -146,8 +152,9 @@ public class ZipReader implements Serializable {
 	private static Log _log = LogFactoryUtil.getLog(ZipReader.class);
 
 	private ZipInputStream _zis;
-	private Map _entries = new LinkedHashMap();
-	private Map _folderEntries = new LinkedHashMap();
+	private Map<String, byte[]> _entries = new LinkedHashMap<String, byte[]>();
+	private Map<String, List<ObjectValuePair<String, byte[]>>> _folderEntries =
+		new LinkedHashMap<String, List<ObjectValuePair<String, byte[]>>>();
 	private byte[] _data = new byte[_BUFFER];
 
 }

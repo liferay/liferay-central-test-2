@@ -129,7 +129,8 @@ public interface PollsQuestionLocalService {
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, java.util.List choices,
+		int expirationDateMinute, boolean neverExpire,
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -138,7 +139,8 @@ public interface PollsQuestionLocalService {
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, java.util.List choices,
+		int expirationDateMinute, boolean neverExpire,
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
@@ -148,7 +150,8 @@ public interface PollsQuestionLocalService {
 		java.lang.String uuid, long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, java.util.List choices,
+		int expirationDateMinute, boolean neverExpire,
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -198,10 +201,11 @@ public interface PollsQuestionLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getQuestions(long groupId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.polls.model.PollsQuestion> getQuestions(
+		long groupId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getQuestions(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.polls.model.PollsQuestion> getQuestions(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getQuestionsCount(long groupId)
@@ -219,7 +223,8 @@ public interface PollsQuestionLocalService {
 		long userId, long questionId, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,
 		int expirationDateDay, int expirationDateYear, int expirationDateHour,
-		int expirationDateMinute, boolean neverExpire, java.util.List choices)
+		int expirationDateMinute, boolean neverExpire,
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

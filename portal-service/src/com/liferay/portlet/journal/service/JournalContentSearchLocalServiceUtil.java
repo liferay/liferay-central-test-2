@@ -355,22 +355,23 @@ public class JournalContentSearchLocalServiceUtil {
 			privateLayout);
 	}
 
-	public static java.util.List getArticleContentSearches()
+	public static java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getArticleContentSearches()
 		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
 		return journalContentSearchLocalService.getArticleContentSearches();
 	}
 
-	public static java.util.List getArticleContentSearches(long groupId,
-		java.lang.String articleId) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> getArticleContentSearches(
+		long groupId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
 		return journalContentSearchLocalService.getArticleContentSearches(groupId,
 			articleId);
 	}
 
-	public static java.util.List getLayoutIds(long groupId,
+	public static java.util.List<Long> getLayoutIds(long groupId,
 		boolean privateLayout, java.lang.String articleId)
 		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
@@ -409,9 +410,9 @@ public class JournalContentSearchLocalServiceUtil {
 			privateLayout, layoutId, portletId, articleId, purge);
 	}
 
-	public static java.util.List updateContentSearch(long groupId,
-		boolean privateLayout, long layoutId, java.lang.String portletId,
-		java.lang.String[] articleIds)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> updateContentSearch(
+		long groupId, boolean privateLayout, long layoutId,
+		java.lang.String portletId, java.lang.String[] articleIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();

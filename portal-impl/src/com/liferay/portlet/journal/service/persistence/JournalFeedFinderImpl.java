@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -130,10 +131,10 @@ public class JournalFeedFinderImpl implements JournalFeedFinder {
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -150,7 +151,7 @@ public class JournalFeedFinderImpl implements JournalFeedFinder {
 		}
 	}
 
-	public List findByKeywords(
+	public List<JournalFeed> findByKeywords(
 			long companyId, long groupId, String keywords, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -174,7 +175,7 @@ public class JournalFeedFinderImpl implements JournalFeedFinder {
 			begin, end, obc);
 	}
 
-	public List findByC_G_F_N_D(
+	public List<JournalFeed> findByC_G_F_N_D(
 			long companyId, long groupId, String feedId, String name,
 			String description, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
@@ -185,7 +186,7 @@ public class JournalFeedFinderImpl implements JournalFeedFinder {
 			new String[] {description}, andOperator, begin, end, obc);
 	}
 
-	public List findByC_G_F_N_D(
+	public List<JournalFeed> findByC_G_F_N_D(
 			long companyId, long groupId, String[] feedIds, String[] names,
 			String[] descriptions, boolean andOperator, int begin, int end,
 			OrderByComparator obc)
@@ -232,7 +233,8 @@ public class JournalFeedFinderImpl implements JournalFeedFinder {
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<JournalFeed>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -166,10 +167,10 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -186,7 +187,7 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 		}
 	}
 
-	public List findByKeywords(
+	public List<JournalTemplate> findByKeywords(
 			long companyId, long groupId, String keywords, String structureId,
 			String structureIdComparator, int begin, int end,
 			OrderByComparator obc)
@@ -211,7 +212,7 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 			names, descriptions, andOperator, begin, end, obc);
 	}
 
-	public List findByC_G_T_S_N_D(
+	public List<JournalTemplate> findByC_G_T_S_N_D(
 			long companyId, long groupId, String templateId, String structureId,
 			String structureIdComparator, String name, String description,
 			boolean andOperator, int begin, int end, OrderByComparator obc)
@@ -223,7 +224,7 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 			new String[] {description}, andOperator, begin, end, obc);
 	}
 
-	public List findByC_G_T_S_N_D(
+	public List<JournalTemplate> findByC_G_T_S_N_D(
 			long companyId, long groupId, String[] templateIds,
 			String structureId, String structureIdComparator, String[] names,
 			String[] descriptions, boolean andOperator, int begin, int end,
@@ -300,7 +301,8 @@ public class JournalTemplateFinderImpl implements JournalTemplateFinder {
 			qPos.add(names, 2);
 			qPos.add(descriptions, 2);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<JournalTemplate>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

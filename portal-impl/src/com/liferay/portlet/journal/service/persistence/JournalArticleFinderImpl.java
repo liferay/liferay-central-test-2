@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -227,10 +228,10 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			qPos.add(reviewDate_TS);
 			qPos.add(reviewDate_TS);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -247,7 +248,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 		}
 	}
 
-	public List findByExpirationDate(
+	public List<JournalArticle> findByExpirationDate(
 			Boolean expired, Date expirationDateLT, Date expirationDateGT)
 		throws SystemException {
 
@@ -289,7 +290,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 		}
 	}
 
-	public List findByKeywords(
+	public List<JournalArticle> findByKeywords(
 			long companyId, long groupId, String keywords, Double version,
 			String type, String structureId, String templateId,
 			Date displayDateGT, Date displayDateLT, Boolean approved,
@@ -320,7 +321,8 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	public List findByReviewDate(Date reviewDateLT, Date reviewDateGT)
+	public List<JournalArticle> findByReviewDate(
+			Date reviewDateLT, Date reviewDateGT)
 		throws SystemException {
 
 		Timestamp reviewDateLT_TS = CalendarUtil.getTimestamp(reviewDateLT);
@@ -351,7 +353,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 		}
 	}
 
-	public List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String structureId, String templateId, Date displayDateGT,
@@ -367,7 +369,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	public List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String articleId, Double version,
 			String title, String description, String content, String type,
 			String[] structureIds, String[] templateIds, Date displayDateGT,
@@ -384,7 +386,7 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			andOperator, begin, end, obc);
 	}
 
-	public List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public List<JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 			long companyId, long groupId, String[] articleIds, Double version,
 			String[] titles, String[] descriptions, String[] contents,
 			String type, String[] structureIds, String[] templateIds,
@@ -485,7 +487,8 @@ public class JournalArticleFinderImpl implements JournalArticleFinder {
 			qPos.add(reviewDate_TS);
 			qPos.add(reviewDate_TS);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<JournalArticle>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

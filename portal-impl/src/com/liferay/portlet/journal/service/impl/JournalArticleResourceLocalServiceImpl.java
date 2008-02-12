@@ -74,7 +74,9 @@ public class JournalArticleResourceLocalServiceImpl
 		return articleResource.getResourcePrimKey();
 	}
 
-	public List getArticleResources(long groupId) throws SystemException {
+	public List<JournalArticleResource> getArticleResources(long groupId)
+		throws SystemException {
+
 		return journalArticleResourcePersistence.findByGroupId(groupId);
 	}
 

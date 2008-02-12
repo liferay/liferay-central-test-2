@@ -30,7 +30,6 @@ import com.liferay.portlet.journal.NoSuchArticleImageException;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.service.base.JournalArticleImageLocalServiceBaseImpl;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -100,11 +99,9 @@ public class JournalArticleImageLocalServiceImpl
 	public void deleteImages(long groupId, String articleId, double version)
 		throws SystemException {
 
-		Iterator itr = journalArticleImagePersistence.findByG_A_V(
-			groupId, articleId, version).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticleImage articleImage = (JournalArticleImage)itr.next();
+		for (JournalArticleImage articleImage :
+				journalArticleImagePersistence.findByG_A_V(
+					groupId, articleId, version)) {
 
 			ImageLocalUtil.deleteImage(articleImage.getArticleImageId());
 
@@ -155,7 +152,9 @@ public class JournalArticleImageLocalServiceImpl
 		return articleImage.getArticleImageId();
 	}
 
-	public List getArticleImages(long groupId) throws SystemException {
+	public List<JournalArticleImage> getArticleImages(long groupId)
+		throws SystemException {
+
 		return journalArticleImagePersistence.findByGroupId(groupId);
 	}
 

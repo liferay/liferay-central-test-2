@@ -28,13 +28,13 @@ package com.liferay.util;
  * @author Brian Wing Shun Chan
  *
  */
-public class FiniteUniqueStack extends FiniteStack {
+public class FiniteUniqueStack<E> extends FiniteStack<E> {
 
 	public FiniteUniqueStack(int maxSize) {
 		super(maxSize);
 	}
 
-	public Object push(Object item) {
+	public E push(E item) {
 		if (!contains(item)) {
 			super.push(item);
 		}

@@ -30,7 +30,7 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.Html;
 
-import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -98,15 +98,11 @@ public class ContentTransformerListener extends TransformerListener {
 	}
 
 	protected void replaceContent(Element root) throws Exception {
-		Map tokens = getTokens();
+		Map<String, String> tokens = getTokens();
 
-		long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
+		long groupId = GetterUtil.getLong(tokens.get("group_id"));
 
-		Iterator itr = root.elements().iterator();
-
-		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
-
+		for (Element el : (List<Element>)root.elements()) {
 			Element dynamicContent = el.element("dynamic-content");
 
 			if (dynamicContent != null) {
@@ -162,11 +158,7 @@ public class ContentTransformerListener extends TransformerListener {
 
 			Element root = doc.getRootElement();
 
-			Iterator itr = root.elements().iterator();
-
-			while (itr.hasNext()) {
-				Element el = (Element)itr.next();
-
+			for (Element el : (List<Element>)root.elements()) {
 				String elName = el.attributeValue("name", StringPool.BLANK);
 
 				if (elName.equals(elementName)) {

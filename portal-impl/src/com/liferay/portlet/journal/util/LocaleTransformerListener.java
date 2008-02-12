@@ -127,12 +127,12 @@ public class LocaleTransformerListener extends TransformerListener {
 	}
 
 	protected void localize(Element root) {
-		List children = root.elements();
+		List<Element> children = root.elements();
 
 		int listIndex = children.size() - 1;
 
 		while (listIndex >= 0) {
-			Element child = (Element)children.get(listIndex);
+			Element child = children.get(listIndex);
 
 			String languageId =
 				child.attributeValue("language-id", getLanguageId());

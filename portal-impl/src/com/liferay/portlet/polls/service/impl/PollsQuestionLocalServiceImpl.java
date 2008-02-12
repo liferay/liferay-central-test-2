@@ -37,7 +37,6 @@ import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.service.base.PollsQuestionLocalServiceBaseImpl;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -86,8 +85,9 @@ public class PollsQuestionLocalServiceImpl
 			long userId, long plid, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, List choices,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			int expirationDateMinute, boolean neverExpire,
+			List<PollsChoice> choices, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addQuestion(
@@ -102,8 +102,9 @@ public class PollsQuestionLocalServiceImpl
 			long userId, long plid, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, List choices,
-			String[] communityPermissions, String[] guestPermissions)
+			int expirationDateMinute, boolean neverExpire,
+			List<PollsChoice> choices, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addQuestion(
@@ -117,9 +118,10 @@ public class PollsQuestionLocalServiceImpl
 			String uuid, long userId, long plid, String title,
 			String description, int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, List choices,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			int expirationDateMinute, boolean neverExpire,
+			List<PollsChoice> choices, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Question
@@ -172,15 +174,9 @@ public class PollsQuestionLocalServiceImpl
 
 		// Choices
 
-		if (choices != null) {
-			Iterator itr = choices.iterator();
-
-			while (itr.hasNext()) {
-				PollsChoice choice = (PollsChoice)itr.next();
-
-				pollsChoiceLocalService.addChoice(
-					questionId, choice.getName(), choice.getDescription());
-			}
+		for (PollsChoice choice : choices) {
+			pollsChoiceLocalService.addChoice(
+				questionId, choice.getName(), choice.getDescription());
 		}
 
 		return question;
@@ -266,11 +262,8 @@ public class PollsQuestionLocalServiceImpl
 	public void deleteQuestions(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = pollsQuestionPersistence.findByGroupId(
-			groupId).iterator();
-
-		while (itr.hasNext()) {
-			PollsQuestion question = (PollsQuestion)itr.next();
+		for (PollsQuestion question :
+				pollsQuestionPersistence.findByGroupId(groupId)) {
 
 			deleteQuestion(question);
 		}
@@ -282,11 +275,13 @@ public class PollsQuestionLocalServiceImpl
 		return pollsQuestionPersistence.findByPrimaryKey(questionId);
 	}
 
-	public List getQuestions(long groupId) throws SystemException {
+	public List<PollsQuestion> getQuestions(long groupId)
+		throws SystemException {
+
 		return pollsQuestionPersistence.findByGroupId(groupId);
 	}
 
-	public List getQuestions(long groupId, int begin, int end)
+	public List<PollsQuestion> getQuestions(long groupId, int begin, int end)
 		throws SystemException {
 
 		return pollsQuestionPersistence.findByGroupId(groupId, begin, end);
@@ -313,7 +308,8 @@ public class PollsQuestionLocalServiceImpl
 			long userId, long questionId, String title, String description,
 			int expirationDateMonth, int expirationDateDay,
 			int expirationDateYear, int expirationDateHour,
-			int expirationDateMinute, boolean neverExpire, List choices)
+			int expirationDateMinute, boolean neverExpire,
+			List<PollsChoice> choices)
 		throws PortalException, SystemException {
 
 		// Question
@@ -343,41 +339,35 @@ public class PollsQuestionLocalServiceImpl
 
 		// Choices
 
-		if (choices != null) {
-			int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
-				questionId);
+		int oldChoicesCount = pollsChoicePersistence.countByQuestionId(
+			questionId);
 
-			if (oldChoicesCount > choices.size()) {
-				throw new QuestionChoiceException();
+		if (oldChoicesCount > choices.size()) {
+			throw new QuestionChoiceException();
+		}
+
+		for (PollsChoice choice : choices) {
+			String choiceName = choice.getName();
+			String choiceDescription = choice.getDescription();
+
+			choice = pollsChoicePersistence.fetchByQ_N(questionId, choiceName);
+
+			if (choice == null) {
+				pollsChoiceLocalService.addChoice(
+					questionId, choiceName, choiceDescription);
 			}
-
-			Iterator itr = choices.iterator();
-
-			while (itr.hasNext()) {
-				PollsChoice choice = (PollsChoice)itr.next();
-
-				String choiceName = choice.getName();
-				String choiceDescription = choice.getDescription();
-
-				choice = pollsChoicePersistence.fetchByQ_N(
-					questionId, choiceName);
-
-				if (choice == null) {
-					pollsChoiceLocalService.addChoice(
-						questionId, choiceName, choiceDescription);
-				}
-				else {
-					pollsChoiceLocalService.updateChoice(
-						choice.getChoiceId(), questionId, choiceName,
-						choiceDescription);
-				}
+			else {
+				pollsChoiceLocalService.updateChoice(
+					choice.getChoiceId(), questionId, choiceName,
+					choiceDescription);
 			}
 		}
 
 		return question;
 	}
 
-	protected void validate(String title, String description, List choices)
+	protected void validate(
+			String title, String description, List<PollsChoice> choices)
 		throws PortalException {
 
 		if (Validator.isNull(title)) {
@@ -387,7 +377,7 @@ public class PollsQuestionLocalServiceImpl
 			throw new QuestionDescriptionException();
 		}
 
-		if ((choices != null) && (choices.size() < 2)) {
+		if (choices.size() < 2) {
 			throw new QuestionChoiceException();
 		}
 	}

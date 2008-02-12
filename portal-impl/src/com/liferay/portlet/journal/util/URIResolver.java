@@ -43,7 +43,7 @@ import org.apache.commons.logging.LogFactory;
  */
 public class URIResolver implements javax.xml.transform.URIResolver {
 
-	public URIResolver(Map tokens, String languageId) {
+	public URIResolver(Map<String, String> tokens, String languageId) {
 		_tokens = tokens;
 		_languageId = languageId;
 	}
@@ -58,8 +58,7 @@ public class URIResolver implements javax.xml.transform.URIResolver {
 				int templateIdIndex =
 					templatePathIndex + _GET_TEMPLATE_PATH.length();
 
-				long groupId = GetterUtil.getLong(
-					(String)_tokens.get("group_id"));
+				long groupId = GetterUtil.getLong(_tokens.get("group_id"));
 				String templateId =
 					href.substring(templateIdIndex, href.length());
 
@@ -84,7 +83,7 @@ public class URIResolver implements javax.xml.transform.URIResolver {
 
 	private static Log _log = LogFactory.getLog(URIResolver.class);
 
-	private Map _tokens;
+	private Map<String, String> _tokens;
 	private String _languageId;
 
 }

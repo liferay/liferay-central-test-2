@@ -71,12 +71,12 @@ public class JournalOpenSearchImpl extends HitsOpenSearchImpl {
 		String articleId = result.get("articleId");
 		String version = result.get("version");
 
-		List hitLayoutIds =
+		List<Long> hitLayoutIds =
 			JournalContentSearchLocalServiceUtil.getLayoutIds(
 				layout.getGroupId(), layout.isPrivateLayout(), articleId);
 
 		if (hitLayoutIds.size() > 0) {
-			Long hitLayoutId = (Long)hitLayoutIds.get(0);
+			Long hitLayoutId = hitLayoutIds.get(0);
 
 			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),

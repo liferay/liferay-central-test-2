@@ -41,10 +41,10 @@ import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
-import com.liferay.util.CollectionFactory;
 
 import com.thoughtworks.xstream.XStream;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -160,7 +160,7 @@ public class JournalContentPortletDataHandlerImpl
 
 			Element root = doc.addElement("journal-content");
 
-			List content = root.content();
+			List<Element> content = root.content();
 
 			if (!context.addPrimaryKey(
 					JournalArticle.class, article.getPrimaryKeyObj())) {
@@ -257,7 +257,7 @@ public class JournalContentPortletDataHandlerImpl
 
 			Document tempDoc = DocumentHelper.createDocument();
 
-			Map structurePKs = CollectionFactory.getHashMap();
+			Map<String, String> structureIds = new HashMap<String, String>();
 
 			if (el != null) {
 				tempDoc.content().add(el.createCopy());
@@ -266,12 +266,12 @@ public class JournalContentPortletDataHandlerImpl
 					tempDoc.asXML());
 
 				JournalPortletDataHandlerImpl.importStructure(
-					context, structurePKs, structure);
+					context, structureIds, structure);
 			}
 
 			el = root.element(JournalTemplateImpl.class.getName());
 
-			Map templatePKs = CollectionFactory.getHashMap();
+			Map<String, String> templateIds = new HashMap<String, String>();
 
 			if (el != null) {
 				tempDoc = DocumentHelper.createDocument();
@@ -282,7 +282,7 @@ public class JournalContentPortletDataHandlerImpl
 					tempDoc.asXML());
 
 				JournalPortletDataHandlerImpl.importTemplate(
-					context, structurePKs, templatePKs, template);
+					context, structureIds, templateIds, template);
 			}
 
 			el = root.element(JournalArticleImpl.class.getName());
@@ -296,7 +296,7 @@ public class JournalContentPortletDataHandlerImpl
 					tempDoc.asXML());
 
 				article = JournalPortletDataHandlerImpl.importArticle(
-					context, structurePKs, templatePKs, article);
+					context, structureIds, templateIds, article);
 
 				prefs.setValue(
 					"group-id", String.valueOf(context.getGroupId()));

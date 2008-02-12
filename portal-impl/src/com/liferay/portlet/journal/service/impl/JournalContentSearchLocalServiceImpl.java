@@ -36,7 +36,6 @@ import com.liferay.portlet.journal.service.base.JournalContentSearchLocalService
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
@@ -61,13 +60,12 @@ public class JournalContentSearchLocalServiceImpl
 			_log.info("Checking journal content search for " + companyId);
 		}
 
-		List layouts = new ArrayList();
+		List<Layout> layouts = new ArrayList<Layout>();
 
-		List groups = groupLocalService.search(
+		List<Group> groups = groupLocalService.search(
 			companyId, null, null, null, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-		for (int i = 0; i < groups.size(); i++) {
-			Group group = (Group)groups.get(i);
+		for (Group group : groups) {
 
 			// Private layouts
 
@@ -84,17 +82,13 @@ public class JournalContentSearchLocalServiceImpl
 				layoutLocalService.getLayouts(group.getGroupId(), false));
 		}
 
-		for (int i = 0; i < layouts.size(); i++) {
-			Layout layout = (Layout)layouts.get(i);
-
+		for (Layout layout : layouts) {
 			LayoutTypePortlet layoutTypePortlet =
 				(LayoutTypePortlet)layout.getLayoutType();
 
-			List portletIds = layoutTypePortlet.getPortletIds();
+			List<String> portletIds = layoutTypePortlet.getPortletIds();
 
-			for (int j = 0; j < portletIds.size(); j++) {
-				String portletId = (String)portletIds.get(j);
-
+			for (String portletId : portletIds) {
 				String rootPortletId = PortletImpl.getRootPortletId(portletId);
 
 				if (rootPortletId.equals(PortletKeys.JOURNAL_CONTENT)) {
@@ -147,29 +141,30 @@ public class JournalContentSearchLocalServiceImpl
 		journalContentSearchPersistence.removeByG_P(groupId, privateLayout);
 	}
 
-	public List getArticleContentSearches() throws SystemException {
+	public List<JournalContentSearch> getArticleContentSearches()
+		throws SystemException {
+
 		return journalContentSearchPersistence.findAll();
 	}
 
-	public List getArticleContentSearches(long groupId, String articleId)
+	public List<JournalContentSearch> getArticleContentSearches(
+			long groupId, String articleId)
 		throws SystemException {
 
 		return journalContentSearchPersistence.findByG_A(groupId, articleId);
 	}
 
-	public List getLayoutIds(
+	public List<Long> getLayoutIds(
 			long groupId, boolean privateLayout, String articleId)
 		throws SystemException {
 
-		List layoutIds = new ArrayList();
+		List<Long> layoutIds = new ArrayList<Long>();
 
-		Iterator itr = journalContentSearchPersistence.findByG_P_A(
-			groupId, privateLayout, articleId).iterator();
+		List<JournalContentSearch> contentSearches =
+			journalContentSearchPersistence.findByG_P_A(
+				groupId, privateLayout, articleId);
 
-		while (itr.hasNext()) {
-			JournalContentSearch contentSearch =
-				(JournalContentSearch)itr.next();
-
+		for (JournalContentSearch contentSearch : contentSearches) {
 			layoutIds.add(new Long(contentSearch.getLayoutId()));
 		}
 
@@ -228,7 +223,7 @@ public class JournalContentSearchLocalServiceImpl
 		return contentSearch;
 	}
 
-	public List updateContentSearch(
+	public List<JournalContentSearch> updateContentSearch(
 			long groupId, boolean privateLayout, long layoutId,
 			String portletId, String[] articleIds)
 		throws PortalException, SystemException {
@@ -236,12 +231,12 @@ public class JournalContentSearchLocalServiceImpl
 		journalContentSearchPersistence.removeByG_P_L_P(
 			groupId, privateLayout, layoutId, portletId);
 
-		List contentSearches = new ArrayList();
+		List<JournalContentSearch> contentSearches =
+			new ArrayList<JournalContentSearch>();
 
-		for (int i = 0; i < articleIds.length; i++) {
+		for (String articleId : articleIds) {
 			JournalContentSearch contentSearch = updateContentSearch(
-				groupId, privateLayout, layoutId, portletId, articleIds[i],
-				false);
+				groupId, privateLayout, layoutId, portletId, articleId, false);
 
 			contentSearches.add(contentSearch);
 		}

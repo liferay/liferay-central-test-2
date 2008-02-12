@@ -71,9 +71,9 @@ public class ViewCounterTransformerListener extends TransformerListener {
 	 * @return		the processed string
 	 */
 	protected String replaceViewCounterToken(String s) {
-		Map tokens = getTokens();
+		Map<String, String> tokens = getTokens();
 
-		String articleResourcePK = (String)tokens.get("article_resource_pk");
+		String articleResourcePK = tokens.get("article_resource_pk");
 
 		String counterToken = StringPool.AT + "view_counter" + StringPool.AT;
 

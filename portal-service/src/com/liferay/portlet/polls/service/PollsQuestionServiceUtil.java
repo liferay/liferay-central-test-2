@@ -55,8 +55,8 @@ public class PollsQuestionServiceUtil {
 		long plid, java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List choices, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();
@@ -71,7 +71,8 @@ public class PollsQuestionServiceUtil {
 		long plid, java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List choices, java.lang.String[] communityPermissions,
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -104,7 +105,7 @@ public class PollsQuestionServiceUtil {
 		long questionId, java.lang.String title, java.lang.String description,
 		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
 		int expirationDateHour, int expirationDateMinute, boolean neverExpire,
-		java.util.List choices)
+		java.util.List<com.liferay.portlet.polls.model.PollsChoice> choices)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PollsQuestionService pollsQuestionService = PollsQuestionServiceFactory.getService();

@@ -26,9 +26,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
@@ -81,9 +81,9 @@ public class PropertiesTransformerListener extends TransformerListener {
 	 * @return		the processed string
 	 */
 	protected String replaceProperties(String s) {
-		Map tokens = getTokens();
+		Map<String, String> tokens = getTokens();
 
-		String templateId = (String)tokens.get("template_id");
+		String templateId = tokens.get("template_id");
 
 		if ((templateId == null) ||
 			((templateId != null) && (templateId.equals(_GLOBAL_PROPERTIES)))) {
@@ -97,13 +97,13 @@ public class PropertiesTransformerListener extends TransformerListener {
 		Properties props = new Properties();
 
 		try {
-			Map newTokens = CollectionFactory.getHashMap();
+			Map<String, String> newTokens = new HashMap<String, String>();
 
 			MapUtil.copy(tokens, newTokens);
 
 			newTokens.put("template_id", _GLOBAL_PROPERTIES);
 
-			long groupId = GetterUtil.getLong((String)tokens.get("group_id"));
+			long groupId = GetterUtil.getLong(tokens.get("group_id"));
 
 			String script = JournalUtil.getTemplateScript(
 				groupId, _GLOBAL_PROPERTIES, newTokens, getLanguageId());
@@ -131,10 +131,10 @@ public class PropertiesTransformerListener extends TransformerListener {
 
 		int counter = 0;
 
-		Iterator itr = props.entrySet().iterator();
+		Iterator<Map.Entry<Object, Object>> itr = props.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<Object, Object> entry = itr.next();
 
 			String key = (String)entry.getKey();
 			String value = (String)entry.getValue();

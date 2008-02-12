@@ -51,11 +51,11 @@ public abstract class TransformerListener {
 		_languageId = languageId;
 	}
 
-	public Map getTokens() {
+	public Map<String, String> getTokens() {
 		return _tokens;
 	}
 
-	public void setTokens(Map tokens) {
+	public void setTokens(Map<String, String> tokens) {
 		_tokens = tokens;
 	}
 
@@ -67,6 +67,6 @@ public abstract class TransformerListener {
 
 	private boolean _templateDriven;
 	private String _languageId;
-	private Map _tokens;
+	private Map<String, String> _tokens;
 
 }
