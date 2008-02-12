@@ -113,13 +113,17 @@ catch (Exception e) {
 							<%
 							for (int k = 0; k < contents.size(); k++) {
 								content = (SyndContent)contents.get(k);
-								if (content != null && Validator.isNotNull(content.getValue())) {
+
+								if ((content != null) && Validator.isNotNull(content.getValue())) {
 							%>
-							<%= content.getValue() %>
+
+									<%= content.getValue() %>
+
 							<%
 								}
 							}
 							%>
+
 						</div>
 					</div>
 
