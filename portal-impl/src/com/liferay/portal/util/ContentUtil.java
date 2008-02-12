@@ -23,10 +23,10 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.CollectionFactory;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -49,11 +49,11 @@ public class ContentUtil {
 	}
 
 	private ContentUtil() {
-		_contentPool = CollectionFactory.getHashMap();
+		_contentPool = new HashMap<String, String>();
 	}
 
 	private String _get(String location, boolean all) {
-		String content = (String)_contentPool.get(location);
+		String content = _contentPool.get(location);
 
 		if (content == null) {
 			try {
@@ -78,6 +78,6 @@ public class ContentUtil {
 
 	private static ContentUtil _instance = new ContentUtil();
 
-	private Map _contentPool;
+	private Map<String, String> _contentPool;
 
 }

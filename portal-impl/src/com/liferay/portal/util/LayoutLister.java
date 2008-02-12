@@ -51,7 +51,7 @@ public class LayoutLister {
 		_locale = locale;
 		_nodeId = 1;
 
-		_list = new ArrayList();
+		_list = new ArrayList<String>();
 
 		_list.add(
 			"1|0|0|" + LayoutImpl.DEFAULT_PLID + "|" + rootNodeName + "|0");
@@ -65,11 +65,11 @@ public class LayoutLister {
 			long parentLayoutId, int parentId, int depth)
 		throws PortalException, SystemException {
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			_groupId, _privateLayout, parentLayoutId);
 
 		for (int i = 0; i < layouts.size(); i++) {
-			Layout layout = (Layout)layouts.get(i);
+			Layout layout = layouts.get(i);
 
 			if (i == 0) {
 				depth++;
@@ -109,7 +109,7 @@ public class LayoutLister {
 	private boolean _privateLayout;
 	private Locale _locale;
 	private int _nodeId;
-	private List _list;
+	private List<String> _list;
 	private int _depth;
 
 }

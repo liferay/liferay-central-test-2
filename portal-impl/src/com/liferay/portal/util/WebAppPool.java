@@ -25,6 +25,7 @@ package com.liferay.portal.util;
 import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="WebAppPool.java.html"><b><i>View Source</i></b></a>
@@ -51,7 +52,8 @@ public class WebAppPool {
 	}
 
 	private Object _get(String webAppId, String key) {
-		Map map = (Map)_webAppPool.get(webAppId);
+		Map<String, Object> map = (Map<String, Object>)_webAppPool.get(
+			webAppId);
 
 		if (map == null) {
 			return null;
@@ -62,10 +64,11 @@ public class WebAppPool {
 	}
 
 	private void _put(String webAppId, String key, Object obj) {
-		Map map = (Map)_webAppPool.get(webAppId);
+		Map<String, Object> map = (Map<String, Object>)_webAppPool.get(
+			webAppId);
 
 		if (map == null) {
-			map = CollectionFactory.getSyncHashMap();
+			map = new ConcurrentHashMap<String, Object>();
 
 			_webAppPool.put(webAppId, map);
 		}
@@ -74,7 +77,8 @@ public class WebAppPool {
 	}
 
 	private Object _remove(String webAppId, String key) {
-		Map map = (Map)_webAppPool.get(webAppId);
+		Map<String, Object> map = (Map<String, Object>)_webAppPool.get(
+			webAppId);
 
 		if (map == null) {
 			return null;
@@ -86,6 +90,6 @@ public class WebAppPool {
 
 	private static WebAppPool _instance = new WebAppPool();
 
-	private Map _webAppPool;
+	private Map<String, Object> _webAppPool;
 
 }

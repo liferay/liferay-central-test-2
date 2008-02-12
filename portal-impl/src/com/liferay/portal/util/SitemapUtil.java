@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -50,13 +49,13 @@ public class SitemapUtil {
 			long groupId, boolean privateLayout, String urlPrefix)
 		throws PortalException, SystemException {
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout);
 
 		return getSitemap(layouts, urlPrefix);
 	}
 
-	public static String getSitemap(List layouts, String urlPrefix)
+	public static String getSitemap(List<Layout> layouts, String urlPrefix)
 		throws PortalException, SystemException {
 
 		Document doc = DocumentHelper.createDocument();
@@ -79,14 +78,10 @@ public class SitemapUtil {
 	}
 
 	private static void _visitLayouts(
-			Element element, List layouts, String urlPrefix)
+			Element element, List<Layout> layouts, String urlPrefix)
 		throws PortalException, SystemException {
 
-		Iterator itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
-
+		for (Layout layout : layouts) {
 			Properties props = layout.getTypeSettingsProperties();
 
 			if (PortalUtil.isLayoutSitemapable(layout) && !layout.isHidden() &&
@@ -112,7 +107,7 @@ public class SitemapUtil {
 					url.addElement("priority").addText(priority);
 				}
 
-				List children = layout.getChildren();
+				List<Layout> children = layout.getChildren();
 
 				_visitLayouts(element, children, urlPrefix);
 			}

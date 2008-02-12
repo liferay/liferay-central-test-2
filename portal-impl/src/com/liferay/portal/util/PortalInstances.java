@@ -41,7 +41,6 @@ import com.liferay.util.Http;
 import com.liferay.util.SetUtil;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
@@ -193,11 +192,9 @@ public class PortalInstances {
 		}
 
 		try {
-			Iterator itr = CompanyLocalServiceUtil.getCompanies().iterator();
+			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
 
-			while (itr.hasNext()) {
-				Company company = (Company)itr.next();
-
+			for (Company company : companies) {
 				if (company.getVirtualHost().equals(host)) {
 					return company.getCompanyId();
 				}
@@ -245,19 +242,15 @@ public class PortalInstances {
 		}
 
 		try {
-			List companies = CompanyLocalServiceUtil.getCompanies();
+			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
 
-			List webIdsList = new ArrayList(companies.size());
+			List<String> webIdsList = new ArrayList<String>(companies.size());
 
-			Iterator itr = companies.iterator();
-
-			while (itr.hasNext()) {
-				Company company = (Company)itr.next();
-
+			for (Company company : companies) {
 				webIdsList.add(company.getWebId());
 			}
 
-			_webIds = (String[])webIdsList.toArray(new String[0]);
+			_webIds = webIdsList.toArray(new String[webIdsList.size()]);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -410,7 +403,7 @@ public class PortalInstances {
 
 	private long[] _companyIds;
 	private String[] _webIds;
-	private Set _ignoreHosts;
-	private Set _ignorePaths;
+	private Set<String> _ignoreHosts;
+	private Set<String> _ignorePaths;
 
 }

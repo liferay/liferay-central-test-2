@@ -30,6 +30,7 @@ import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
 
+import java.util.HashSet;
 import java.util.Set;
 
 /**
@@ -45,7 +46,7 @@ public class SetUtil {
 			return CollectionFactory.getHashSet();
 		}
 
-		Set set = CollectionFactory.getHashSet(array.length);
+		Set set = new HashSet(array.length);
 
 		for (int i = 0; i < array.length; i++) {
 			set.add(array[i]);
@@ -59,7 +60,7 @@ public class SetUtil {
 	}
 
 	public static Set fromFile(File file) throws IOException {
-		Set set = CollectionFactory.getHashSet();
+		Set set = new HashSet();
 
 		BufferedReader br = new BufferedReader(new FileReader(file));
 

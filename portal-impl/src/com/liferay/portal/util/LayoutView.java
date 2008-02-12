@@ -36,15 +36,15 @@ import java.util.List;
 public class LayoutView implements Serializable {
 
 	public LayoutView() {
-		this(new ArrayList(), 0);
+		this(new ArrayList<String>(), 0);
 	}
 
-	public LayoutView(List list, int depth) {
+	public LayoutView(List<String> list, int depth) {
 		_list = list;
 		_depth = depth;
 	}
 
-	public List getList() {
+	public List<String> getList() {
 		return _list;
 	}
 
@@ -52,7 +52,7 @@ public class LayoutView implements Serializable {
 		return _depth;
 	}
 
-	private List _list;
+	private List<String> _list;
 	private int _depth;
 
 }
