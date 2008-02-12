@@ -207,9 +207,7 @@ public class VerifyImage extends VerifyProcess {
 			_log.debug("Processing " + images.size() + " stale images");
 		}
 
-		for (int i = 0; i < images.size(); i++) {
-			Image image = (Image)images.get(i);
-
+		for (Image image : images) {
 			if (isStaleImage(image)) {
 				if (_log.isInfoEnabled()) {
 					_log.info("Deleting stale image " + image.getImageId());

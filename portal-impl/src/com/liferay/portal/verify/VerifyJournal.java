@@ -71,9 +71,7 @@ public class VerifyJournal extends VerifyProcess {
 		List<JournalStructure> structures =
 			JournalStructureLocalServiceUtil.getStructures();
 
-		for (int i = 0; i  < structures.size(); i++) {
-			JournalStructure structure = (JournalStructure)structures.get(i);
-
+		for (JournalStructure structure : structures) {
 			ResourceLocalServiceUtil.addResources(
 				structure.getCompanyId(), 0, 0,
 				JournalStructure.class.getName(), structure.getId(), false,
@@ -89,9 +87,7 @@ public class VerifyJournal extends VerifyProcess {
 		List<JournalTemplate> templates =
 			JournalTemplateLocalServiceUtil.getTemplates();
 
-		for (int i = 0; i < templates.size(); i++) {
-			JournalTemplate template = (JournalTemplate)templates.get(i);
-
+		for (JournalTemplate template : templates) {
 			ResourceLocalServiceUtil.addResources(
 				template.getCompanyId(), 0, 0,
 				JournalTemplate.class.getName(), template.getId(), false, true,
@@ -107,9 +103,7 @@ public class VerifyJournal extends VerifyProcess {
 		List<JournalArticle> articles =
 			JournalArticleLocalServiceUtil.getArticles();
 
-		for (int i = 0; i < articles.size(); i++) {
-			JournalArticle article = (JournalArticle)articles.get(i);
-
+		for (JournalArticle article : articles) {
 			long groupId = article.getGroupId();
 			String articleId = article.getArticleId();
 			double version = article.getVersion();

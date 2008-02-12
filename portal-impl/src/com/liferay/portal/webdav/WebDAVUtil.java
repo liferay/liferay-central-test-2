@@ -37,7 +37,6 @@ import com.liferay.portal.util.PropsUtil;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -195,7 +194,7 @@ public class WebDAVUtil {
 		return _instance._getStorageToken(className);
 	}
 
-	public static Collection getStorageTokens() {
+	public static Collection<String> getStorageTokens() {
 		return _instance._getStorageTokens();
 	}
 
@@ -228,7 +227,7 @@ public class WebDAVUtil {
 	}
 
 	private WebDAVUtil() {
-		_storageMap = new HashMap();
+		_storageMap = new HashMap<String, String>();
 
 		for (int i = 1; true; i++) {
 			String className = PropsUtil.get(
@@ -245,11 +244,7 @@ public class WebDAVUtil {
 
 	private String _getStorageClass(String token) {
 		if (_storageMap.containsValue(token)) {
-			Iterator itr = _storageMap.keySet().iterator();
-
-			while (itr.hasNext()) {
-				String key = (String)itr.next();
-
+			for (String key :  _storageMap.keySet()) {
 				if (_storageMap.get(key).equals(token)) {
 					return key;
 				}
@@ -260,10 +255,10 @@ public class WebDAVUtil {
 	}
 
 	private String _getStorageToken(String className) {
-		return (String)_storageMap.get(className);
+		return _storageMap.get(className);
 	}
 
-	private Collection _getStorageTokens() {
+	private Collection<String> _getStorageTokens() {
 		return _storageMap.values();
 	}
 
@@ -271,6 +266,6 @@ public class WebDAVUtil {
 
 	private static WebDAVUtil _instance = new WebDAVUtil();
 
-	private final Map _storageMap;
+	private final Map<String, String> _storageMap;
 
 }

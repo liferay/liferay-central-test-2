@@ -31,7 +31,7 @@ import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserTrackerLocalServiceUtil;
 import com.liferay.portal.service.persistence.UserTrackerUtil;
-import com.liferay.util.CollectionFactory;
+import com.liferay.util.ConcurrentHashSet;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
@@ -41,6 +41,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -61,7 +62,7 @@ public class LiveUsers {
 		_instance._deleteGroup(groupId);
 	}
 
-	public static Set getGroupUsers(long groupId) {
+	public static Set<Long> getGroupUsers(long groupId) {
 		return _instance._getGroupUsers(_instance._getLiveUsers(), groupId);
 	}
 
@@ -69,8 +70,8 @@ public class LiveUsers {
 		return getGroupUsers(groupId).size();
 	}
 
-	public static Map getSessionUsers() {
-		return _instance._getSessionUsers(_instance._getLiveUsers());
+	public static Map<String, UserTracker> getSessionUsers() {
+		return _instance._getSessionUsers();
 	}
 
 	public static int getSessionUsersCount() {
@@ -111,51 +112,52 @@ public class LiveUsers {
 	}
 
 	private void _addUserTracker(long userId, UserTracker userTracker) {
-		List userTrackers = _getUserTrackers(userId);
+		List<UserTracker> userTrackers = _getUserTrackers(userId);
 
 		if (userTrackers != null) {
 			userTrackers.add(userTracker);
 		}
 		else {
-			userTrackers = new ArrayList();
+			userTrackers = new ArrayList<UserTracker>();
 
 			userTrackers.add(userTracker);
 
-			Map userTrackersMap = _getUserTrackersMap();
+			Map<Long, List<UserTracker>> userTrackersMap =
+				_getUserTrackersMap();
 
-			userTrackersMap.put(new Long(userId), userTrackers);
+			userTrackersMap.put(userId, userTrackers);
 		}
 	}
 
 	private void _deleteGroup(long groupId) {
-		Map liveUsers = _getLiveUsers();
+		Map<Long, Set<Long>> liveUsers = _getLiveUsers();
 
-		liveUsers.remove(new Long(groupId));
+		liveUsers.remove(groupId);
 	}
 
-	private Set _getGroupUsers(Map liveUsers, long groupId) {
-		Long groupIdObj = new Long(groupId);
+	private Set<Long> _getGroupUsers(
+		Map<Long, Set<Long>> liveUsers, long groupId) {
 
-		Set groupUsers = (Set)liveUsers.get(groupIdObj);
+		Set<Long> groupUsers = liveUsers.get(groupId);
 
 		if (groupUsers == null) {
-			groupUsers = CollectionFactory.getSyncHashSet();
+			groupUsers = new ConcurrentHashSet<Long>();
 
-			liveUsers.put(groupIdObj, groupUsers);
+			liveUsers.put(groupId, groupUsers);
 		}
 
 		return groupUsers;
 	}
 
-	private Map _getLiveUsers() {
+	private Map<Long, Set<Long>> _getLiveUsers() {
 		String companyIdString = String.valueOf(
 			CompanyThreadLocal.getCompanyId());
 
-		Map liveUsers = (Map)WebAppPool.get(
+		Map<Long, Set<Long>> liveUsers = (Map<Long, Set<Long>>)WebAppPool.get(
 			companyIdString, WebKeys.LIVE_USERS);
 
 		if (liveUsers == null) {
-			liveUsers = CollectionFactory.getSyncHashMap();
+			liveUsers = new ConcurrentHashMap<Long, Set<Long>>();
 
 			WebAppPool.put(companyIdString, WebKeys.LIVE_USERS, liveUsers);
 		}
@@ -163,102 +165,102 @@ public class LiveUsers {
 		return liveUsers;
 	}
 
-	private Map _getSessionUsers(Map liveUsers) {
-		Long groupIdObj = new Long(0);
+	private Map<String, UserTracker> _getSessionUsers() {
+		String companyIdString = String.valueOf(
+			CompanyThreadLocal.getCompanyId());
 
-		Map sessionUsers = (Map)liveUsers.get(groupIdObj);
+		Map<String, UserTracker> sessionUsers =
+			(Map<String, UserTracker>)WebAppPool.get(
+				companyIdString, WebKeys.LIVE_SESSION_USERS);
 
 		if (sessionUsers == null) {
-			sessionUsers = CollectionFactory.getSyncHashMap();
+			sessionUsers = new ConcurrentHashMap<String, UserTracker>();
 
-			liveUsers.put(groupIdObj, sessionUsers);
+			WebAppPool.put(
+				companyIdString, WebKeys.LIVE_SESSION_USERS, sessionUsers);
 		}
 
 		return sessionUsers;
 	}
 
 	private UserTracker _getUserTracker(String sesId) {
-		Map liveUsers = _getLiveUsers();
+		Map<String, UserTracker> sessionUsers = _getSessionUsers();
 
-		Map sessionUsers = _getSessionUsers(liveUsers);
-
-		return (UserTracker)sessionUsers.get(sesId);
+		return sessionUsers.get(sesId);
 	}
 
-	private List _getUserTrackers(long userId) {
-		Map userTrackersMap = _getUserTrackersMap();
+	private List<UserTracker> _getUserTrackers(long userId) {
+		Map<Long, List<UserTracker>> userTrackersMap = _getUserTrackersMap();
 
-		return (List)userTrackersMap.get(new Long(userId));
+		return userTrackersMap.get(userId);
 	}
 
-	private Map _getUserTrackersMap() {
-		Map liveUsers = _getLiveUsers();
+	private Map<Long, List<UserTracker>> _getUserTrackersMap() {
+		String companyIdString = String.valueOf(
+			CompanyThreadLocal.getCompanyId());
 
-		Long groupIdObj = new Long(-1);
-
-		Map userTrackersMap = (Map)liveUsers.get(groupIdObj);
+		Map<Long, List<UserTracker>> userTrackersMap =
+			(Map<Long, List<UserTracker>>)WebAppPool.get(
+				companyIdString, WebKeys.LIVE_USER_TRACKERS);
 
 		if (userTrackersMap == null) {
-			userTrackersMap = CollectionFactory.getSyncHashMap();
+			userTrackersMap = new ConcurrentHashMap<Long, List<UserTracker>>();
 
-			liveUsers.put(groupIdObj, userTrackersMap);
+			WebAppPool.put(
+				companyIdString, WebKeys.LIVE_USER_TRACKERS, userTrackersMap);
 		}
 
 		return userTrackersMap;
 	}
 
 	private void _joinGroup(long userId, long groupId) {
-		Map liveUsers = _getLiveUsers();
+		Map<Long, Set<Long>> liveUsers = _getLiveUsers();
 
-		Set groupUsers = _getGroupUsers(liveUsers, groupId);
+		Set<Long> groupUsers = _getGroupUsers(liveUsers, groupId);
 
 		if (_getUserTrackers(userId) != null) {
-			groupUsers.add(new Long(userId));
+			groupUsers.add(userId);
 		}
 	}
 
 	private void _joinGroup(long[] userIds, long groupId) {
-		Map liveUsers = _getLiveUsers();
+		Map<Long, Set<Long>> liveUsers = _getLiveUsers();
 
-		Set groupUsers = _getGroupUsers(liveUsers, groupId);
+		Set<Long> groupUsers = _getGroupUsers(liveUsers, groupId);
 
-		for (int i = 0; i < userIds.length; i++) {
-			long userId = userIds[i];
-
+		for (long userId : userIds) {
 			if (_getUserTrackers(userId) != null) {
-				groupUsers.add(new Long(userId));
+				groupUsers.add(userId);
 			}
 		}
 	}
 
 	private void _leaveGroup(long userId, long groupId) {
-		Map liveUsers = _getLiveUsers();
+		Map<Long, Set<Long>> liveUsers = _getLiveUsers();
 
-		Set groupUsers = _getGroupUsers(liveUsers, groupId);
+		Set<Long> groupUsers = _getGroupUsers(liveUsers, groupId);
 
-		groupUsers.remove(new Long(userId));
+		groupUsers.remove(userId);
 	}
 
 	private void _leaveGroup(long[] userIds, long groupId) {
-		Map liveUsers = _getLiveUsers();
+		Map<Long, Set<Long>> liveUsers = _getLiveUsers();
 
-		Set groupUsers = _getGroupUsers(liveUsers, groupId);
+		Set<Long> groupUsers = _getGroupUsers(liveUsers, groupId);
 
-		for (int i = 0; i < userIds.length; i++) {
-			long userId = userIds[i];
-
-			groupUsers.remove(new Long(userId));
+		for (long userId : userIds) {
+			groupUsers.remove(userId);
 		}
 	}
 
 	private void _removeUserTracker(long userId, UserTracker userTracker) {
-		List userTrackers = _getUserTrackers(userId);
+		List<UserTracker> userTrackers = _getUserTrackers(userId);
 
 		if (userTrackers != null) {
-			Iterator itr = userTrackers.iterator();
+			Iterator<UserTracker> itr = userTrackers.iterator();
 
 			while (itr.hasNext()) {
-				UserTracker curUserTracker = (UserTracker)itr.next();
+				UserTracker curUserTracker = itr.next();
 
 				if (userTracker.equals(curUserTracker)) {
 					itr.remove();
@@ -266,9 +268,10 @@ public class LiveUsers {
 			}
 
 			if (userTrackers.size() == 0) {
-				Map userTrackersMap = _getUserTrackersMap();
+				Map<Long, List<UserTracker>> userTrackersMap =
+					_getUserTrackersMap();
 
-				userTrackersMap.remove(new Long(userId));
+				userTrackersMap.remove(userId);
 			}
 		}
 	}
@@ -279,16 +282,15 @@ public class LiveUsers {
 		long companyId = CompanyThreadLocal.getCompanyId();
 		long userId = GetterUtil.getLong(req.getRemoteUser());
 
-		Map liveUsers = _updateGroupStatus(userId, true);
+		_updateGroupStatus(userId, true);
 
-		Map sessionUsers = _getSessionUsers(liveUsers);
+		Map<String, UserTracker> sessionUsers = _getSessionUsers();
 
-		List userTrackers = _getUserTrackers(userId);
+		List<UserTracker> userTrackers = _getUserTrackers(userId);
 
 		if (!PropsValues.AUTH_SIMULTANEOUS_LOGINS) {
 			if (userTrackers != null) {
-				for (int i = 0; i < userTrackers.size(); i++) {
-					UserTracker userTracker = (UserTracker)userTrackers.get(i);
+				for (UserTracker userTracker : userTrackers) {
 
 					// Disable old login
 
@@ -298,7 +300,7 @@ public class LiveUsers {
 			}
 		}
 
-		UserTracker userTracker = (UserTracker)sessionUsers.get(ses.getId());
+		UserTracker userTracker = sessionUsers.get(ses.getId());
 
 		if ((userTracker == null) &&
 			(PropsValues.SESSION_TRACKER_MEMORY_ENABLED)) {
@@ -320,21 +322,15 @@ public class LiveUsers {
 	}
 
 	private void _signOut(String sesId, long userId) throws SystemException {
-		List userTrackers = _getUserTrackers(userId);
-
-		Map liveUsers = null;
+		List<UserTracker> userTrackers = _getUserTrackers(userId);
 
 		if ((userTrackers == null) || (userTrackers.size() <= 1)) {
-			liveUsers = _updateGroupStatus(userId, false);
+			_updateGroupStatus(userId, false);
 		}
 
-		if (liveUsers == null) {
-			liveUsers = _getLiveUsers();
-		}
+		Map<String, UserTracker> sessionUsers = _getSessionUsers();
 
-		Map sessionUsers = _getSessionUsers(liveUsers);
-
-		UserTracker userTracker = (UserTracker)sessionUsers.remove(sesId);
+		UserTracker userTracker = sessionUsers.remove(sesId);
 
 		if (userTracker != null) {
 			try {
@@ -354,33 +350,32 @@ public class LiveUsers {
 		}
 	}
 
-	private Map _updateGroupStatus(long userId, boolean signedIn)
+	private Map<Long, Set<Long>> _updateGroupStatus(
+			long userId, boolean signedIn)
 		throws SystemException {
-
-		Long userIdObj = new Long(userId);
 
 		long companyId = CompanyThreadLocal.getCompanyId();
 
-		Map liveUsers = _getLiveUsers();
+		Map<Long, Set<Long>> liveUsers = _getLiveUsers();
 
-		LinkedHashMap groupParams = new LinkedHashMap();
+		LinkedHashMap<String, Object> groupParams =
+			new LinkedHashMap<String, Object>();
 
-		groupParams.put("usersGroups", userIdObj);
+		groupParams.put("usersGroups", userId);
 
-		List communities = GroupLocalServiceUtil.search(
+		List<Group> communities = GroupLocalServiceUtil.search(
 			companyId, null, null, groupParams, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
-		for (int i = 0; i < communities.size(); i++) {
-			Group community = (Group)communities.get(i);
-
-			Set groupUsers = _getGroupUsers(liveUsers, community.getGroupId());
+		for (Group community : communities) {
+			Set<Long> groupUsers = _getGroupUsers(
+				liveUsers, community.getGroupId());
 
 			if (signedIn) {
-				groupUsers.add(userIdObj);
+				groupUsers.add(userId);
 			}
 			else {
-				groupUsers.remove(userIdObj);
+				groupUsers.remove(userId);
 			}
 		}
 

@@ -59,9 +59,7 @@ public class VerifyMessageBoards extends VerifyProcess {
 					" messages with no tags assets");
 		}
 
-		for (int i = 0; i < messages.size(); i++) {
-			MBMessage message = (MBMessage)messages.get(i);
-
+		for (MBMessage message : messages) {
 			try {
 				MBMessageLocalServiceUtil.updateTagsAsset(
 					message.getUserId(), message, new String[0]);

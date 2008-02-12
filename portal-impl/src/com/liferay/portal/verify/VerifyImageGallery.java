@@ -57,9 +57,7 @@ public class VerifyImageGallery extends VerifyProcess {
 				"Processing " + images.size() + " images with no tags assets");
 		}
 
-		for (int i = 0; i < images.size(); i++) {
-			IGImage image = (IGImage)images.get(i);
-
+		for (IGImage image : images) {
 			try {
 				IGImageLocalServiceUtil.updateTagsAsset(
 					image.getUserId(), image, new String[0]);

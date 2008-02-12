@@ -59,9 +59,7 @@ public class VerifyBlogs extends VerifyProcess {
 					" entries with no tags assets");
 		}
 
-		for (int i = 0; i < entries.size(); i++) {
-			BlogsEntry entry = (BlogsEntry)entries.get(i);
-
+		for (BlogsEntry entry : entries) {
 			try {
 				BlogsEntryLocalServiceUtil.updateTagsAsset(
 					entry.getUserId(), entry, new String[0]);

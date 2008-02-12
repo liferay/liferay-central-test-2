@@ -30,7 +30,6 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 
@@ -51,24 +50,25 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			path, StringPool.BLANK, WebDAVUtil.getWebId(path));
 	}
 
-	public List getResources(WebDAVRequest webDavReq) throws WebDAVException {
+	public List<Resource> getResources(WebDAVRequest webDavReq)
+		throws WebDAVException {
+
 		try {
-			LinkedHashMap groupParams = new LinkedHashMap();
+			LinkedHashMap<String, Object> groupParams =
+				new LinkedHashMap<String, Object>();
 
 			groupParams.put("usersGroups", new Long(webDavReq.getUserId()));
 
-			List communities = new ArrayList();
+			List<Resource> resources = new ArrayList<Resource>();
 
-			Iterator itr = GroupLocalServiceUtil.search(
+			List<Group> groups = GroupLocalServiceUtil.search(
 				webDavReq.getCompanyId(), null, null, groupParams,
-				QueryUtil.ALL_POS, QueryUtil.ALL_POS).iterator();
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-			while (itr.hasNext()) {
-				Group group = (Group)itr.next();
-
+			for (Group group : groups) {
 				Resource resource = getResource(group);
 
-				communities.add(resource);
+				resources.add(resource);
 			}
 
 			Group group = GroupLocalServiceUtil.getUserGroup(
@@ -76,9 +76,9 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			Resource resource = getResource(group);
 
-			communities.add(resource);
+			resources.add(resource);
 
-			return communities;
+			return resources;
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);

@@ -25,7 +25,6 @@ package com.liferay.portal.webdav;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -45,20 +44,18 @@ public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			path, StringPool.BLANK, WebDAVUtil.getWebId(path));
 	}
 
-	public List getResources(WebDAVRequest webDavReq) throws WebDAVException {
-		List list = new ArrayList();
+	public List<Resource> getResources(WebDAVRequest webDavReq)
+		throws WebDAVException {
+
+		List<Resource> resources = new ArrayList<Resource>();
 
 		String path = getRootPath() + webDavReq.getPath();
 
-		Iterator itr = WebDAVUtil.getStorageTokens().iterator();
-
-		while (itr.hasNext()) {
-			String token = (String)itr.next();
-
-			list.add(new BaseResourceImpl(path, token, token));
+		for (String token : WebDAVUtil.getStorageTokens()) {
+			resources.add(new BaseResourceImpl(path, token, token));
 		}
 
-		return list;
+		return resources;
 	}
 
 }

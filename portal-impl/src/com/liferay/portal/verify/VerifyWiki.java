@@ -57,9 +57,7 @@ public class VerifyWiki extends VerifyProcess {
 				"Processing " + pages.size() + " pages with no tags assets");
 		}
 
-		for (int i = 0; i < pages.size(); i++) {
-			WikiPage page = (WikiPage)pages.get(i);
-
+		for (WikiPage page : pages) {
 			try {
 				WikiPageLocalServiceUtil.updateTagsAsset(
 					page.getUserId(), page, new String[0]);

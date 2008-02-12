@@ -107,6 +107,10 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String LAYOUTS = "LAYOUTS";
 
+	public static final String LIVE_SESSION_USERS = "LIVE_SESSION_USERS";
+
+	public static final String LIVE_USER_TRACKERS = "LIVE_USER_TRACKERS";
+
 	public static final String LIVE_USERS = "LIVE_USERS";
 
 	public static final String JABBER_XMPP_SESSION = "JABBER_XMPP_SESSION";

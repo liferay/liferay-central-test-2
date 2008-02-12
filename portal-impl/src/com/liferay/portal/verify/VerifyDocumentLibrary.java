@@ -59,9 +59,7 @@ public class VerifyDocumentLibrary extends VerifyProcess {
 					" file entries with no tags assets");
 		}
 
-		for (int i = 0; i < fileEntries.size(); i++) {
-			DLFileEntry fileEntry = (DLFileEntry)fileEntries.get(i);
-
+		for (DLFileEntry fileEntry : fileEntries) {
 			try {
 				DLFileEntryLocalServiceUtil.updateTagsAsset(
 					fileEntry.getUserId(), fileEntry, new String[0]);

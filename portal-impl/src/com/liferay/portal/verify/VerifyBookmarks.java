@@ -59,9 +59,7 @@ public class VerifyBookmarks extends VerifyProcess {
 					" entries with no tags assets");
 		}
 
-		for (int i = 0; i < entries.size(); i++) {
-			BookmarksEntry entry = (BookmarksEntry)entries.get(i);
-
+		for (BookmarksEntry entry : entries) {
 			try {
 				BookmarksEntryLocalServiceUtil.updateTagsAsset(
 					entry.getUserId(), entry, new String[0]);
