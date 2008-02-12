@@ -393,7 +393,7 @@ public class BBCodeUtil {
 		"[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[s]", "[/s]",
 		"[img]", "[/img]",
 		"[left]", "[center]", "[right]", "[indent]",
-		"[/left]", "[/center]", "[/right]", "[/indent]"
+		"[/left]", "[/center]", "[/right]", "[/indent]" ,"[tt]" ,"[/tt]"
 	};
 
 	private static final String[] _HTML_TAGS = {
@@ -401,7 +401,7 @@ public class BBCodeUtil {
 		"<img src='", "' />",
 		"<div style='text-align: left'>", "<div style='text-align: center'>",
 		"<div style='text-align: right'>", "<div style='margin-left: 15px'>",
-		"</div>", "</div>", "</div>", "</div>"
+		"</div>", "</div>", "</div>", "</div>", "<tt>", "</tt>"
 	};
 
 	private static Log _log = LogFactory.getLog(BBCodeUtil.class);
