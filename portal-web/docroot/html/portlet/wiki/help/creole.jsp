@@ -31,7 +31,6 @@
 <pre>
 //italics//
 **bold**
-Force\\linebreak
 </pre>
 
 <h4>
@@ -71,5 +70,13 @@ Force\\linebreak
 <pre>
 {{attached-image.png}}
 {{Page Name/other-image.jpg|label}}
-{{http://foo.bar/remote-image.gif}}
+</pre>
+
+<h4>
+	<liferay-ui:message key="other" />
+</h4>
+
+<pre>
+&lt;&lt;TableOfContents&gt;&gt;
+{{{ Preformatted }}}
 </pre>

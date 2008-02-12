@@ -276,6 +276,9 @@ public class WikiUtil {
 			liferayEditURL.setParameter(
 				"nodeId", String.valueOf(page.getNodeId()));
 
+			content = _replaceLinks(
+				page.getTitle(), content, liferayPageURL, liferayEditURL);
+
 			Iterator itr = engine.getOutgoingLinks(page).keySet().iterator();
 
 			while (itr.hasNext()) {

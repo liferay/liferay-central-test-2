@@ -28,6 +28,28 @@
 	color: red;
 }
 
+.portlet-wiki .toc {
+	border: 1px solid #aaa;
+	background-color: #f9f9f9;
+	padding: 5px;
+}
+
+.portlet-wiki .toc ul {
+ 	margin-top: 0px;
+}
+.portlet-wiki .toc li.toclevel-1 {
+	margin-left: 0px;
+	list-style-type: decimal;
+}
+
+.portlet-wiki .toc li.toclevel-2 {
+	margin-left: 15px;
+}
+
+.portlet-wiki .toc li.toclevel-3 {
+	margin-left: 30px;
+}
+
 .portlet-wiki .taglib-tags-summary {
 	margin: -10px 0px 10px 0px;
 	color: #7d7d7d;
