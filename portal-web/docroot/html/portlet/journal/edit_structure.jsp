@@ -30,6 +30,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 JournalStructure structure = (JournalStructure)request.getAttribute(WebKeys.JOURNAL_STRUCTURE);
 
 long groupId = BeanParamUtil.getLong(structure, request, "groupId", portletGroupId.longValue());
+
 Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 String structureId = BeanParamUtil.getString(structure, request, "structureId");

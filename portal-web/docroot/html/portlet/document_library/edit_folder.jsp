@@ -144,6 +144,7 @@ long parentFolderId = BeanParamUtil.getLong(folder, request, "parentFolderId", D
 			<liferay-ui:message key="webdav-url" />
 		</td>
 		<td>
+
 			<%
 			StringBuffer sb = new StringBuffer();
 

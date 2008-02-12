@@ -65,8 +65,6 @@ public interface Group extends GroupModel {
 
 	public java.lang.String getDescriptiveName();
 
-	public java.lang.String getResolvedFriendlyURL();
-
 	public java.lang.String getTypeLabel();
 
 	public java.lang.String getTypeSettings();
@@ -84,6 +82,8 @@ public interface Group extends GroupModel {
 	public java.lang.String getDefaultFriendlyURL(boolean privateLayout)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
+
+	public java.lang.String getResolvedFriendlyURL();
 
 	public long getDefaultPrivatePlid();
 

@@ -392,6 +392,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				<liferay-ui:message key="webdav-url" />
 			</td>
 			<td>
+
 				<%
 				StringBuffer sb = new StringBuffer();
 

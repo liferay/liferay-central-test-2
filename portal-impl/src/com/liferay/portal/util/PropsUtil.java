@@ -848,10 +848,10 @@ public class PropsUtil {
 	// WebDAV
 
 	public static final String WEBDAV_LITMUS = "webdav.litmus";
-	
-	public static final String WEBDAV_STORAGE_TOKEN = "webdav.storage.token-";
 
-	public static final String WEBDAV_STORAGE_CLASS = "webdav.storage.class-";
+	public static final String WEBDAV_STORAGE_TOKEN = "webdav.storage.token.";
+
+	public static final String WEBDAV_STORAGE_CLASS = "webdav.storage.class.";
 
 	// Admin Portlet
 
@@ -1214,7 +1214,7 @@ public class PropsUtil {
 	public static final String WEB_FORM_PORTLET_MAX_FIELDS = "web.form.portlet.max.fields";
 
 	// Wiki Portlet
-	
+
 	public static final String WIKI_EMAIL_FROM_NAME = "wiki.email.from.name";
 
 	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";

@@ -294,6 +294,7 @@ portletURL.setParameter("name", name);
 			<liferay-ui:message key="webdav-url" />
 		</td>
 		<td>
+
 			<%
 			StringBuffer sb = new StringBuffer();
 
@@ -309,8 +310,6 @@ portletURL.setParameter("name", name);
 				else {
 					curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
 				}
-
-				System.out.println(sb);
 			}
 
 			sb.append(StringPool.SLASH);

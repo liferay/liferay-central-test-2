@@ -55,7 +55,6 @@
 <%@ page import="com.liferay.portlet.documentlibrary.util.DocumentConversionUtil" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearchTerms" %>
-<%@ page import="com.liferay.util.HttpUtil" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

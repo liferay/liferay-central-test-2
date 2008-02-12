@@ -66,14 +66,6 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		return WebDAVUtil.getStorageToken(getClass().getName());
 	}
 
-	public int putResource(WebDAVRequest webDavReq) throws WebDAVException {
-		return HttpServletResponse.SC_FORBIDDEN;
-	}
-
-	public void setRootPath(String rootPath) {
-		_rootPath = rootPath;
-	}
-
 	public boolean isAvailable(WebDAVRequest webDavReq)
 		throws WebDAVException {
 
@@ -99,6 +91,14 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		throws WebDAVException {
 
 		return HttpServletResponse.SC_FORBIDDEN;
+	}
+
+	public int putResource(WebDAVRequest webDavReq) throws WebDAVException {
+		return HttpServletResponse.SC_FORBIDDEN;
+	}
+
+	public void setRootPath(String rootPath) {
+		_rootPath = rootPath;
 	}
 
 	private String _rootPath;

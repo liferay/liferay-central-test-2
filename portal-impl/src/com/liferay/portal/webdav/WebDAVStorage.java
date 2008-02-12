@@ -33,10 +33,6 @@ import java.util.List;
  */
 public interface WebDAVStorage {
 
-	public String getRootPath();
-
-	public void setRootPath(String rootPath);
-
 	public Status addCollection(WebDAVRequest webDavReq) throws WebDAVException;
 
 	public int copyCollectionResource(
@@ -56,6 +52,8 @@ public interface WebDAVStorage {
 	public List<Resource> getResources(WebDAVRequest webDavReq)
 		throws WebDAVException;
 
+	public String getRootPath();
+
 	public boolean isAvailable(WebDAVRequest webDavReq) throws WebDAVException;
 
 	public int moveCollectionResource(
@@ -69,5 +67,7 @@ public interface WebDAVStorage {
 		throws WebDAVException;
 
 	public int putResource(WebDAVRequest webDavReq) throws WebDAVException;
+
+	public void setRootPath(String rootPath);
 
 }

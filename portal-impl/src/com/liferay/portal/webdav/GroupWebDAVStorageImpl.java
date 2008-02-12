@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.StringPool;
@@ -46,6 +47,7 @@ public class GroupWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	public List getResources(WebDAVRequest webDavReq) throws WebDAVException {
 		List list = new ArrayList();
+
 		String path = getRootPath() + webDavReq.getPath();
 
 		Iterator itr = WebDAVUtil.getStorageTokens().iterator();

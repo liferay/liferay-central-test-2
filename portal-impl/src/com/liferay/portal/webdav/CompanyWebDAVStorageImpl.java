@@ -19,6 +19,7 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portal.webdav;
 
 import com.liferay.portal.kernel.util.StringPool;
@@ -86,13 +87,12 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	protected Resource getResource(Group group) throws WebDAVException {
 		try {
-			Company company =
-				CompanyLocalServiceUtil.getCompanyById(group.getCompanyId());
+			Company company = CompanyLocalServiceUtil.getCompanyById(
+				group.getCompanyId());
 
 			String webId = company.getWebId();
 
-			String parentPath =
-				getRootPath() + StringPool.SLASH + webId;
+			String parentPath = getRootPath() + StringPool.SLASH + webId;
 
 			String name = group.getResolvedFriendlyURL();
 

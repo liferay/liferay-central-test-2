@@ -234,29 +234,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		return name;
 	}
 
-	public String getResolvedFriendlyURL() {
-		String friendlyURL = getFriendlyURL();
-
-		try {
-			if (isUser()) {
-				long userId = getClassPK();
-
-				User user = UserLocalServiceUtil.getUserById(userId);
-
-				friendlyURL = StringPool.SLASH + user.getScreenName();
-			}
-			else if (Validator.isNull(friendlyURL)) {
-				friendlyURL = StringPool.SLASH + getGroupId();
-			}
-		}
-		catch (Exception e) {
-			_log.error(
-				"Error getting resolved friendly URL for " + getGroupId(), e);
-		}
-
-		return friendlyURL;
-	}
-
 	public String getTypeLabel() {
 		return getTypeLabel(getType());
 	}
@@ -327,6 +304,29 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		else {
 			return StringPool.SLASH + String.valueOf(getGroupId());
 		}
+	}
+
+	public String getResolvedFriendlyURL() {
+		String friendlyURL = getFriendlyURL();
+
+		try {
+			if (isUser()) {
+				long userId = getClassPK();
+
+				User user = UserLocalServiceUtil.getUserById(userId);
+
+				friendlyURL = StringPool.SLASH + user.getScreenName();
+			}
+			else if (Validator.isNull(friendlyURL)) {
+				friendlyURL = StringPool.SLASH + getGroupId();
+			}
+		}
+		catch (Exception e) {
+			_log.error(
+				"Error getting resolved friendly URL for " + getGroupId(), e);
+		}
+
+		return friendlyURL;
 	}
 
 	public long getDefaultPrivatePlid() {

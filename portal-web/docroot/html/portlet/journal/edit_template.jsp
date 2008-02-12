@@ -30,6 +30,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 JournalTemplate template = (JournalTemplate)request.getAttribute(WebKeys.JOURNAL_TEMPLATE);
 
 long groupId = BeanParamUtil.getLong(template, request, "groupId", portletGroupId.longValue());
+
 Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 String templateId = BeanParamUtil.getString(template, request, "templateId");
