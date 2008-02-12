@@ -1113,6 +1113,8 @@ public class PropsUtil {
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SIGNATURE = "message.boards.email.message.added.signature";
 
+	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_HTML_FORMAT = "message.boards.email.message.html.format";
+
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED = "message.boards.email.message.updated.enabled";
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX = "message.boards.email.message.updated.subject.prefix";
