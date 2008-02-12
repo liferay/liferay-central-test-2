@@ -28,6 +28,11 @@
 	color: red;
 }
 
+.portlet-wiki .taglib-tags-summary {
+	margin: -10px 0px 10px 0px;
+	color: #7d7d7d;
+}
+
 .portlet-wiki h1.wiki-page-title {
 	border-bottom: 1px solid #AAAAAA;
 	margin: 0px;
@@ -57,13 +62,18 @@
 .portlet-wiki .wiki-body a.wiki-external-link {
 	background: transparent url(<%= themeImagesPath %>/wiki/external.png) right top no-repeat;
 	text-decoration: none;
-	padding-right: 11px;
+	padding-right: 10px;
 }
 
 .portlet-wiki .wiki-body a.wiki-external-link:hover {
 	background: transparent url(<%= themeImagesPath %>/wiki/external.png) right top no-repeat;
 	text-decoration: underline;
 	padding-right: 11px;
+}
+
+.portlet-wiki .wiki-node-current {
+	text-decoration: none;
+	font-weight: bold;
 }
 
 .portlet-wiki .wiki-page-actions {
@@ -96,9 +106,8 @@
 	width: auto;
 }
 
-.portlet-wiki .wiki-search {
+.portlet-wiki .wiki-popup-print {
 	float: right;
-	margin-bottom: 3px;
 }
 
 .portlet-wiki .wiki-syntax-help {
@@ -108,4 +117,8 @@
 
 .portlet-wiki .wiki-top-links {
 	padding-bottom: 10px;
+}
+
+.portlet-wiki .wiki-top-links table {
+	width: 100%;
 }

@@ -81,10 +81,35 @@ import java.rmi.RemoteException;
  *
  */
 public class WikiPageServiceSoap {
+	public static void addPageAttachments(long nodeId, java.lang.String title,
+		java.util.List files) throws RemoteException {
+		try {
+			WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deletePage(long nodeId, java.lang.String title)
 		throws RemoteException {
 		try {
 			WikiPageServiceUtil.deletePage(nodeId, title);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deletePageAttachment(long nodeId,
+		java.lang.String title, java.lang.String fileName)
+		throws RemoteException {
+		try {
+			WikiPageServiceUtil.deletePageAttachment(nodeId, title, fileName);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

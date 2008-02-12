@@ -24,12 +24,26 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
+<%
+ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-<liferay-util:include page="/html/portlet/wiki/page_info_tabs.jsp">
-	<liferay-util:param name="tab" value="page-history" />
-</liferay-util:include>
+Object[] object = (Object[])row.getObject();
+WikiNode node = (WikiNode)object[0];
+WikiPage wikiPage = (WikiPage)object[1];
+String fileName = (String)object[2];
+%>
 
-<liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
-	<liferay-util:param name="type" value="page_history" />
-</liferay-util:include>
+<liferay-ui:icon-menu>
+	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
+		<portlet:actionURL var="deleteURL">
+			<portlet:param name="struts_action" value="/wiki/edit_page_attachment" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="nodeId" value="<%= String.valueOf(node.getPrimaryKey()) %>" />
+			<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
+			<portlet:param name="fileName" value="<%= fileName %>" />
+		</portlet:actionURL>
+
+		<liferay-ui:icon-delete url="<%= deleteURL %>" />
+	</c:if>
+</liferay-ui:icon-menu>

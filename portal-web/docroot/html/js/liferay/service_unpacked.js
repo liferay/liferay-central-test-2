@@ -331,6 +331,20 @@ Liferay.Service.Portal.LayoutSet = {
 Liferay.Service.Portal.ListType = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "ListType" + Liferay.Service.classNameSuffix,
 
+	addListType: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addListType";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteListType: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteListType";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getListType: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getListType";
@@ -2455,9 +2469,23 @@ Liferay.Service.Wiki.WikiNode = {
 Liferay.Service.Wiki.WikiPage = {
 	serviceClassName: Liferay.Service.Wiki.servicePackage + "WikiPage" + Liferay.Service.classNameSuffix,
 
+	addPageAttachments: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addPageAttachments";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	deletePage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "deletePage";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deletePageAttachment: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deletePageAttachment";
 
 		return Liferay.Service.ajax(params, callback);
 	},

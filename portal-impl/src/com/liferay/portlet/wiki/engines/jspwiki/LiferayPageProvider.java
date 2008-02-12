@@ -61,7 +61,7 @@ public class LiferayPageProvider implements WikiPageProvider {
 			engine, page.getTitle());
 
 		jspWikiPage.setAuthor(page.getUserName());
-		jspWikiPage.setVersion((int)page.getVersion());
+		jspWikiPage.setVersion((int)(page.getVersion() * 10));
 		jspWikiPage.setLastModified(page.getCreateDate());
 
 		return jspWikiPage;

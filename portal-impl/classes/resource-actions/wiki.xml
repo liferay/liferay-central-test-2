@@ -24,6 +24,7 @@
 			<portlet-name>36</portlet-name>
 		</portlet-ref>
 		<supports>
+			<action-key>ADD_ATTACHMENT</action-key>
 			<action-key>ADD_PAGE</action-key>
 			<action-key>DELETE</action-key>
 			<action-key>PERMISSIONS</action-key>
@@ -32,6 +33,7 @@
 			<action-key>VIEW</action-key>
 		</supports>
 		<community-defaults>
+			<action-key>ADD_ATTACHMENT</action-key>
 			<action-key>ADD_PAGE</action-key>
 			<action-key>SUBSCRIBE</action-key>
 			<action-key>VIEW</action-key>

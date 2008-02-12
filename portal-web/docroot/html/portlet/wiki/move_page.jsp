@@ -34,7 +34,7 @@ String title = wikiPage.getTitle();
 String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 %>
 
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <liferay-ui:error exception="<%= DuplicatePageException.class %>" message="there-is-already-a-page-with-the-specified-title" />
 <liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-valid-title" />

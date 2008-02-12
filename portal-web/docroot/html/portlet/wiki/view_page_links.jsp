@@ -24,33 +24,11 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<%
-WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
-WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
+<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-String title = wikiPage.getTitle();
-
-PortletURL viewPageLinksURL = renderResponse.createRenderURL();
-
-viewPageLinksURL.setParameter("struts_action", "/wiki/view_page_links");
-viewPageLinksURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-viewPageLinksURL.setParameter("title", wikiPage.getTitle());
-
-PortletURL viewPageHistoryURL = PortletURLUtil.clone(viewPageLinksURL, renderResponse);
-
-viewPageHistoryURL.setParameter("struts_action", "/wiki/view_page_history");
-%>
-
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
-
-<%@ include file="/html/portlet/wiki/page_name.jspf" %>
-
-<liferay-ui:tabs
-	names="page-history,page-links"
-	value="page-links"
-	url0="<%= viewPageHistoryURL.toString() %>"
-	url1="<%= viewPageLinksURL.toString() %>"
-/>
+<liferay-util:include page="/html/portlet/wiki/page_info_tabs.jsp">
+	<liferay-util:param name="tab" value="page-links" />
+</liferay-util:include>
 
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="page_links" />

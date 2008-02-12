@@ -403,7 +403,9 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<ajaxable>false</ajaxable>
 		<header-portlet-css>/html/portlet/wiki/css.jsp</header-portlet-css>
+		<header-portal-javascript>/html/js/misc/swfupload/swfupload.js</header-portal-javascript>
 		<css-class-wrapper>portlet-wiki</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>

@@ -60,7 +60,16 @@ Force\\linebreak
 <pre>
 * Item
 ** Subitem
-
 # Ordered Item
 ## Ordered Subitem
+</pre>
+
+<h4>
+	<liferay-ui:message key="images" />
+</h4>
+
+<pre>
+{{attached-image.png}}
+{{Page Name/other-image.jpg|label}}
+{{http://foo.bar/remote-image.gif}}
 </pre>

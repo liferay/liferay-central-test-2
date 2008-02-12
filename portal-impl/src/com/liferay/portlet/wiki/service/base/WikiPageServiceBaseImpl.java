@@ -27,6 +27,11 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.documentlibrary.service.DLLocalService;
+import com.liferay.documentlibrary.service.DLLocalServiceFactory;
+import com.liferay.documentlibrary.service.DLService;
+import com.liferay.documentlibrary.service.DLServiceFactory;
+
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -195,6 +200,22 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	public DLLocalService getDLLocalService() {
+		return dlLocalService;
+	}
+
+	public void setDLLocalService(DLLocalService dlLocalService) {
+		this.dlLocalService = dlLocalService;
+	}
+
+	public DLService getDLService() {
+		return dlService;
+	}
+
+	public void setDLService(DLService dlService) {
+		this.dlService = dlService;
 	}
 
 	public CompanyLocalService getCompanyLocalService() {
@@ -472,6 +493,14 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 			counterService = CounterServiceFactory.getImpl();
 		}
 
+		if (dlLocalService == null) {
+			dlLocalService = DLLocalServiceFactory.getImpl();
+		}
+
+		if (dlService == null) {
+			dlService = DLServiceFactory.getImpl();
+		}
+
 		if (companyLocalService == null) {
 			companyLocalService = CompanyLocalServiceFactory.getImpl();
 		}
@@ -595,6 +624,8 @@ public abstract class WikiPageServiceBaseImpl extends PrincipalBean
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected DLLocalService dlLocalService;
+	protected DLService dlService;
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;

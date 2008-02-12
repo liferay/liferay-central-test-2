@@ -49,4 +49,13 @@ package com.liferay.portlet.wiki.model;
  *
  */
 public interface WikiPageResource extends WikiPageResourceModel {
+	public java.lang.String[] getAttachmentFileNames()
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.lang.String getAttachmentsDir();
+
+	public void setAttachmentsDir(java.lang.String attachmentsDir);
+
+	public com.liferay.portlet.wiki.model.WikiNode getNode();
 }

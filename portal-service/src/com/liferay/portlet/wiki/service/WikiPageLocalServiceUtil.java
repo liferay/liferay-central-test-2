@@ -377,6 +377,15 @@ public class WikiPageLocalServiceUtil {
 			themeDisplay);
 	}
 
+	public static void addPageAttachments(long nodeId, java.lang.String title,
+		java.util.List files)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.addPageAttachments(nodeId, title, files);
+	}
+
 	public static void addPageResources(long nodeId, java.lang.String title,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -437,6 +446,15 @@ public class WikiPageLocalServiceUtil {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
 		wikiPageLocalService.deletePage(page);
+	}
+
+	public static void deletePageAttachment(long nodeId,
+		java.lang.String title, java.lang.String fileName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.deletePageAttachment(nodeId, title, fileName);
 	}
 
 	public static void deletePages(long nodeId)
@@ -616,7 +634,7 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
-		long userId, long nodeId, java.lang.String title,
+		long userId, long nodeId, java.lang.String title, double sourceVersion,
 		java.lang.String content, java.lang.String format,
 		java.lang.String redirectTo, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
@@ -625,8 +643,9 @@ public class WikiPageLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
-		return wikiPageLocalService.updatePage(userId, nodeId, title, content,
-			format, redirectTo, tagsEntries, prefs, themeDisplay);
+		return wikiPageLocalService.updatePage(userId, nodeId, title,
+			sourceVersion, content, format, redirectTo, tagsEntries, prefs,
+			themeDisplay);
 	}
 
 	public static void updateTagsAsset(long userId,

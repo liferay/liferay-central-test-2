@@ -2198,7 +2198,8 @@ public class PortalUtil {
 
 		if (path.equals("/portal/fckeditor") ||
 			strutsAction.equals("/document_library/edit_file_entry") ||
-			strutsAction.equals("/image_gallery/edit_image")) {
+			strutsAction.equals("/image_gallery/edit_image") ||
+			strutsAction.equals("/wiki/edit_page_attachment")) {
 
 			alwaysAllowDoAsUser = true;
 		}

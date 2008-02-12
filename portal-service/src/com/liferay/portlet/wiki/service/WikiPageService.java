@@ -55,7 +55,17 @@ public interface WikiPageService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void addPageAttachments(long nodeId, java.lang.String title,
+		java.util.List files)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deletePage(long nodeId, java.lang.String title)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deletePageAttachment(long nodeId, java.lang.String title,
+		java.lang.String fileName)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -91,9 +101,9 @@ public interface WikiPageService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long nodeId,
-		java.lang.String title, java.lang.String content,
-		java.lang.String format, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		java.lang.String title, double sourceVersion, java.lang.String content,
+		java.lang.String format, java.lang.String redirectTo,
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

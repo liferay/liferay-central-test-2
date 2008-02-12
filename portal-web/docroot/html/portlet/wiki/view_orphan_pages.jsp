@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <h1 class="wiki-page-title"><liferay-ui:message key="orphan-pages" /></h1>
 

@@ -59,4 +59,8 @@ public interface WikiPage extends WikiPageModel {
 	public com.liferay.portlet.wiki.model.WikiPage getRedirectToPage()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.wiki.model.WikiPageResource getWikiPageResource()
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 }

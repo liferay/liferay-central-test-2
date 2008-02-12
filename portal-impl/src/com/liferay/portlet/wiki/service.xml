@@ -116,6 +116,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.documentlibrary" entity="DL" />
 		<reference package-path="com.liferay.portal" entity="Company" />
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
@@ -154,6 +155,7 @@
 		<exception>NoSuchPage</exception>
 		<exception>PageContent</exception>
 		<exception>PageTitle</exception>
+		<exception>PageVersion</exception>
 		<exception>WikiFormat</exception>
 	</exceptions>
 </service-builder>

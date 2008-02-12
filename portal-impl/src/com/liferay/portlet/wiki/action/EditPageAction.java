@@ -38,6 +38,7 @@ import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
+import com.liferay.portlet.wiki.PageVersionException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -115,6 +116,7 @@ public class EditPageAction extends PortletAction {
 				setForward(req, "portlet.wiki.error");
 			}
 			else if (e instanceof PageContentException ||
+					 e instanceof PageVersionException ||
 					 e instanceof PageTitleException) {
 
 				SessionErrors.add(req, e.getClass().getName());
@@ -233,6 +235,7 @@ public class EditPageAction extends PortletAction {
 
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
+		double version = ParamUtil.getDouble(req, "version", 0);
 
 		String content = ParamUtil.getString(req, "content");
 		String format = ParamUtil.getString(req, "format");
@@ -241,7 +244,8 @@ public class EditPageAction extends PortletAction {
 			ParamUtil.getString(req, "tagsEntries"));
 
 		return WikiPageServiceUtil.updatePage(
-			nodeId, title, content, format, tagsEntries, prefs, themeDisplay);
+			nodeId, title, version, content, format, null, tagsEntries, prefs,
+			themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

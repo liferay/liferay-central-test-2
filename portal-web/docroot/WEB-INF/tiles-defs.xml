@@ -1145,6 +1145,10 @@
 		<put name="portlet_content" value="/portlet/wiki/edit_page.jsp" />
 	</definition>
 
+	<definition name="portlet.wiki.edit_page_attachment" extends="portlet.wiki">
+		<put name="portlet_content" value="/portlet/wiki/edit_page_attachment.jsp" />
+	</definition>
+
 	<definition name="portlet.wiki.error" extends="portlet.wiki">
 		<put name="portlet_content" value="/portlet/wiki/error.jsp" />
 	</definition>
@@ -1173,8 +1177,16 @@
 		<put name="portlet_content" value="/portlet/wiki/view_nodes.jsp" />
 	</definition>
 
+	<definition name="portlet.wiki.view_page_attachments" extends="portlet.wiki">
+		<put name="portlet_content" value="/portlet/wiki/view_page_attachments.jsp" />
+	</definition>
+
 	<definition name="portlet.wiki.view_page_history" extends="portlet.wiki">
 		<put name="portlet_content" value="/portlet/wiki/view_page_history.jsp" />
+	</definition>
+
+	<definition name="portlet.wiki.view_page_info" extends="portlet.wiki">
+		<put name="portlet_content" value="/portlet/wiki/view_page_info.jsp" />
 	</definition>
 
 	<definition name="portlet.wiki.view_page_links" extends="portlet.wiki">

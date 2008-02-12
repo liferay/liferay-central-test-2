@@ -61,12 +61,30 @@ public class WikiPageServiceUtil {
 		return wikiPageService.addPage(nodeId, title, prefs, themeDisplay);
 	}
 
+	public static void addPageAttachments(long nodeId, java.lang.String title,
+		java.util.List files)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+
+		wikiPageService.addPageAttachments(nodeId, title, files);
+	}
+
 	public static void deletePage(long nodeId, java.lang.String title)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
 		wikiPageService.deletePage(nodeId, title);
+	}
+
+	public static void deletePageAttachment(long nodeId,
+		java.lang.String title, java.lang.String fileName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+
+		wikiPageService.deletePageAttachment(nodeId, title, fileName);
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
@@ -126,15 +144,16 @@ public class WikiPageServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
-		long nodeId, java.lang.String title, java.lang.String content,
-		java.lang.String format, java.lang.String[] tagsEntries,
+		long nodeId, java.lang.String title, double sourceVersion,
+		java.lang.String content, java.lang.String format,
+		java.lang.String redirectTo, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-		return wikiPageService.updatePage(nodeId, title, content, format,
-			tagsEntries, prefs, themeDisplay);
+		return wikiPageService.updatePage(nodeId, title, sourceVersion,
+			content, format, redirectTo, tagsEntries, prefs, themeDisplay);
 	}
 }

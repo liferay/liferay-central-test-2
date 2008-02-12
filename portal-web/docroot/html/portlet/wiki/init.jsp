@@ -24,8 +24,10 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.documentlibrary.service.DLServiceUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portlet.documentlibrary.util.DLUtil" %>
 <%@ page import="com.liferay.portlet.wiki.DuplicatePageException" %>
 <%@ page import="com.liferay.portlet.wiki.NodeNameException" %>
 <%@ page import="com.liferay.portlet.wiki.NoSuchNodeException" %>
@@ -35,7 +37,9 @@
 <%@ page import="com.liferay.portlet.wiki.WikiFormatException" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiPageResource" %>
 <%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
+<%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.permission.WikiNodePermission" %>

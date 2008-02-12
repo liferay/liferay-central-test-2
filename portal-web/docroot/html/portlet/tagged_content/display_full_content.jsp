@@ -279,13 +279,14 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 
 				PortletURL editURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
 
-				editURL.setWindowState(WindowState.MAXIMIZED);
 				editURL.setPortletMode(PortletMode.VIEW);
 
 				editURL.setParameter("struts_action", "/wiki/edit_page");
+
+				String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
 			%>
 
-				<%= WikiUtil.convert(wikiPage, editURL, editURL) %>
+				<%= WikiUtil.convert(wikiPage, pageURL, editURL, attachmentURLPrefix) %>
 
 			<%
 			}

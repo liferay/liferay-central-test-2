@@ -41,7 +41,7 @@ if (node != null) {
 String keywords = ParamUtil.getString(request, "keywords");
 %>
 
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 

@@ -61,10 +61,12 @@ public class WikiUtil {
 	public static final String POP_PORTLET_PREFIX = "wiki.";
 
 	public static String convert(
-			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL)
+			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
+			String attachmentURLPrefix)
 		throws PageContentException, WikiFormatException {
 
-		return _instance._convert(page, viewPageURL, editPageURL);
+		return _instance._convert(
+			page, viewPageURL, editPageURL, attachmentURLPrefix);
 	}
 
 	public static String getEditPage(String format) {
@@ -253,7 +255,8 @@ public class WikiUtil {
 	}
 
 	private String _convert(
-			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL)
+			WikiPage page, PortletURL viewPageURL, PortletURL editPageURL,
+			String attachmentURLPrefix)
 		throws PageContentException, WikiFormatException {
 
 		WikiEngine engine = _getEngine(page.getFormat());
@@ -281,6 +284,9 @@ public class WikiUtil {
 				content = _replaceLinks(
 					title, content, liferayPageURL, liferayEditURL);
 			}
+
+			content = _replaceAttachments(
+				content, page.getTitle(), attachmentURLPrefix);
 		}
 
 		return content;
@@ -379,6 +385,17 @@ public class WikiUtil {
 		else {
 			return StringPool.BLANK;
 		}
+	}
+
+	private String _replaceAttachments(
+		String content, String title, String attachmentURLPrefix) {
+
+		content = StringUtil.replace(content, "[$WIKI_PAGE_NAME$]", title);
+
+		content = StringUtil.replace(
+			content, "[$ATTACHMENT_URL_PREFIX$]", attachmentURLPrefix);
+
+		return content;
 	}
 
 	private String _replaceLinks(

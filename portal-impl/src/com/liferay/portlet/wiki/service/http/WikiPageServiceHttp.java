@@ -131,6 +131,51 @@ public class WikiPageServiceHttp {
 		}
 	}
 
+	public static void addPageAttachments(HttpPrincipal httpPrincipal,
+		long nodeId, java.lang.String title, java.util.List files)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(nodeId);
+
+			Object paramObj1 = title;
+
+			if (title == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = files;
+
+			if (files == null) {
+				paramObj2 = new NullWrapper("java.util.List");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
+					"addPageAttachments",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void deletePage(HttpPrincipal httpPrincipal, long nodeId,
 		java.lang.String title)
 		throws com.liferay.portal.SystemException,
@@ -146,6 +191,51 @@ public class WikiPageServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
 					"deletePage", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deletePageAttachment(HttpPrincipal httpPrincipal,
+		long nodeId, java.lang.String title, java.lang.String fileName)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(nodeId);
+
+			Object paramObj1 = title;
+
+			if (title == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = fileName;
+
+			if (fileName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
+					"deletePageAttachment",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -458,7 +548,8 @@ public class WikiPageServiceHttp {
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
-		java.lang.String content, java.lang.String format,
+		double sourceVersion, java.lang.String content,
+		java.lang.String format, java.lang.String redirectTo,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
@@ -472,34 +563,42 @@ public class WikiPageServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = content;
+			Object paramObj2 = new DoubleWrapper(sourceVersion);
+
+			Object paramObj3 = content;
 
 			if (content == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = format;
-
-			if (format == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = tagsEntries;
+			Object paramObj4 = format;
+
+			if (format == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = redirectTo;
+
+			if (redirectTo == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj5 = prefs;
+			Object paramObj7 = prefs;
 
 			if (prefs == null) {
-				paramObj5 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj7 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
-			Object paramObj6 = themeDisplay;
+			Object paramObj8 = themeDisplay;
 
 			if (themeDisplay == null) {
-				paramObj6 = new NullWrapper(
+				paramObj8 = new NullWrapper(
 						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
@@ -507,7 +606,7 @@ public class WikiPageServiceHttp {
 					"updatePage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;

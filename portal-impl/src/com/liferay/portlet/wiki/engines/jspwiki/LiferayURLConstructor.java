@@ -27,6 +27,7 @@ import com.ecyrd.jspwiki.url.URLConstructor;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.util.HttpUtil;
 
 import java.io.IOException;
 
@@ -81,6 +82,16 @@ public class LiferayURLConstructor implements URLConstructor {
 		}
 		else if (context.equals(WikiContext.VIEW)) {
 			path = "[$BEGIN_PAGE_TITLE$]" + name + "[$END_PAGE_TITLE$]";
+		}
+		else if (context.equals(WikiContext.ATTACH)) {
+			if (name.indexOf(StringPool.SLASH) == -1) {
+				path =
+					"[$ATTACHMENT_URL_PREFIX$][$WIKI_PAGE_NAME$]/" +
+						HttpUtil.encodeURL(name);
+			}
+			else {
+				path = "[$ATTACHMENT_URL_PREFIX$]" + HttpUtil.encodeURL(name);
+			}
 		}
 		else {
 			path = name;

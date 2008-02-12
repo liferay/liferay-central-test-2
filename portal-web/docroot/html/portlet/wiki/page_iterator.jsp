@@ -223,9 +223,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	resultRows.add(row);
 }
-%>
 
-<%
 if (comparePages && (results.size() > 1)) {
 	WikiPage lastWikiPageVersion = (WikiPage)results.get(1);
 %>
@@ -246,4 +244,31 @@ if (comparePages && (results.size() > 1)) {
 <%
 }
 %>
+
+<c:if test='<%= type.equals("all_pages") && WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_ATTACHMENT) %>'>
+
+	<%
+	PortletURL addPageURL = renderResponse.createRenderURL();
+
+	addPageURL.setParameter("struts_action", "/wiki/edit_page");
+	addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+	%>
+
+	<script type="text/javascript">
+		function <portlet:namespace />addPage() {
+			var pageName = prompt('<liferay-ui:message key="page-name" />', '');
+
+			if ((pageName != null) && (pageName.length > 0)) {
+				window.location = Liferay.Util.addParams('<portlet:namespace />title=' + pageName, '<%= addPageURL.toString() %>');
+			}
+		}
+	</script>
+
+	<input type="button" value="<liferay-ui:message key="add-page" />" onClick="<portlet:namespace/>addPage();" />
+
+	<br/><br/>
+
+</c:if>
+
+
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

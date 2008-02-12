@@ -190,6 +190,11 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void addPageAttachments(long nodeId, java.lang.String title,
+		java.util.List files)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void addPageResources(long nodeId, java.lang.String title,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
@@ -219,6 +224,11 @@ public interface WikiPageLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deletePage(com.liferay.portlet.wiki.model.WikiPage page)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deletePageAttachment(long nodeId, java.lang.String title,
+		java.lang.String fileName)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -308,9 +318,10 @@ public interface WikiPageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long userId,
-		long nodeId, java.lang.String title, java.lang.String content,
-		java.lang.String format, java.lang.String redirectTo,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		long nodeId, java.lang.String title, double sourceVersion,
+		java.lang.String content, java.lang.String format,
+		java.lang.String redirectTo, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

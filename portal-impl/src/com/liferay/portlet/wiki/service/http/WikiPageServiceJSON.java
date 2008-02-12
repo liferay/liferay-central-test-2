@@ -71,10 +71,24 @@ import org.json.JSONObject;
  *
  */
 public class WikiPageServiceJSON {
+	public static void addPageAttachments(long nodeId, java.lang.String title,
+		java.util.List files)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
+	}
+
 	public static void deletePage(long nodeId, java.lang.String title)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		WikiPageServiceUtil.deletePage(nodeId, title);
+	}
+
+	public static void deletePageAttachment(long nodeId,
+		java.lang.String title, java.lang.String fileName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		WikiPageServiceUtil.deletePageAttachment(nodeId, title, fileName);
 	}
 
 	public static JSONObject getPage(long nodeId, java.lang.String title)

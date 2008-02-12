@@ -31,6 +31,8 @@ import com.liferay.portlet.wiki.service.base.WikiPageServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 
+import java.util.List;
+
 import javax.portlet.PortletPreferences;
 
 /**
@@ -53,6 +55,15 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getUserId(), nodeId, title, prefs, themeDisplay);
 	}
 
+	public void addPageAttachments(long nodeId, String title, List files)
+		throws PortalException, SystemException {
+
+		WikiNodePermission.check(
+			getPermissionChecker(), nodeId, ActionKeys.ADD_ATTACHMENT);
+
+		wikiPageLocalService.addPageAttachments(nodeId, title, files);
+	}
+
 	public void deletePage(long nodeId, String title)
 		throws PortalException, SystemException {
 
@@ -60,6 +71,15 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, title, ActionKeys.DELETE);
 
 		wikiPageLocalService.deletePage(nodeId, title);
+	}
+
+	public void deletePageAttachment(long nodeId, String title, String fileName)
+		throws PortalException, SystemException {
+
+		WikiPagePermission.check(
+			getPermissionChecker(), nodeId, title, ActionKeys.DELETE);
+
+		wikiPageLocalService.deletePageAttachment(nodeId, title, fileName);
 	}
 
 	public WikiPage getPage(long nodeId, String title)
@@ -126,17 +146,17 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	}
 
 	public WikiPage updatePage(
-			long nodeId, String title, String content, String format,
-			String[] tagsEntries, PortletPreferences prefs,
-			ThemeDisplay themeDisplay)
+			long nodeId, String title, double sourceVersion, String content,
+			String format, String redirectTo, String[] tagsEntries,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		return wikiPageLocalService.updatePage(
-			getUserId(), nodeId, title, content, format, tagsEntries, prefs,
-			themeDisplay);
+			getUserId(), nodeId, title, sourceVersion, content, format,
+			redirectTo, tagsEntries, prefs, themeDisplay);
 	}
 
 }

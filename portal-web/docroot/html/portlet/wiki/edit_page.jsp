@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portlet.wiki.PageVersionException" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -55,8 +56,14 @@ if (wikiPage == null) {
 
 boolean editable = false;
 
+String[] fileNames = null;
+
 if (wikiPage != null) {
 	editable = true;
+	if (wikiPage != null) {
+		fileNames = wikiPage.getWikiPageResource().getAttachmentFileNames();
+	}
+
 }
 else if (Validator.isNotNull(title)) {
 	try {
@@ -66,6 +73,10 @@ else if (Validator.isNotNull(title)) {
 	}
 	catch (PortalException pe) {
 	}
+}
+
+if (fileNames == null) {
+	fileNames = new String[0];
 }
 
 PortletURL viewPageURL = renderResponse.createRenderURL();
@@ -84,7 +95,7 @@ if (Validator.isNull(redirect)) {
 }
 %>
 
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
@@ -152,8 +163,13 @@ if (Validator.isNull(redirect)) {
 <input name="<portlet:namespace />title" type="hidden" value="<%= title %>" />
 <input name="<portlet:namespace />preview" type="hidden" value="<%= preview %>" />
 <input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
+<c:if test="<%= wikiPage != null %>">
+	<input name="<portlet:namespace />version" type="hidden" value="<%= String.valueOf(wikiPage.getVersion()) %>" />
+</c:if>
 
 <liferay-ui:tags-error />
+<liferay-ui:error exception="<%= PageVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-go-back-and-edit-again"/>
+<liferay-ui:error exception="<%= PageContentException.class %>" message="the-content-is-not-valid"/>
 
 <c:if test="<%= newPage %>">
 	<c:choose>
@@ -212,6 +228,26 @@ if (Validator.isNull(redirect)) {
 	<br />
 
 	<table class="lfr-table">
+	<c:if test="<%= fileNames.length > 0 %>">
+		<tr>
+			<td>
+				<liferay-ui:message key="attachments" />
+			</td>
+			<td>
+				<%
+				for (int j = 0; j < fileNames.length; j++) {
+					String fileName = FileUtil.getShortFileName(fileNames[j]);
+				%>
+					<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/wiki/get_page_attachment" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /><portlet:param name="fileName" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a><%= (j < (fileNames.length-1))?",":"" %>
+				<%
+				}
+				%>
+			</td>
+		</tr>
+		<tr>
+			<td>&nbsp;</td>
+		</tr>
+	</c:if>
 	<tr>
 		<td>
 			<liferay-ui:message key="tags" />

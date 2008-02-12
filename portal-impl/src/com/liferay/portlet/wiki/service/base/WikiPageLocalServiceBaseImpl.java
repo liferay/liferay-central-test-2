@@ -27,6 +27,11 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.documentlibrary.service.DLLocalService;
+import com.liferay.documentlibrary.service.DLLocalServiceFactory;
+import com.liferay.documentlibrary.service.DLService;
+import com.liferay.documentlibrary.service.DLServiceFactory;
+
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.CompanyLocalService;
@@ -247,6 +252,22 @@ public abstract class WikiPageLocalServiceBaseImpl
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	public DLLocalService getDLLocalService() {
+		return dlLocalService;
+	}
+
+	public void setDLLocalService(DLLocalService dlLocalService) {
+		this.dlLocalService = dlLocalService;
+	}
+
+	public DLService getDLService() {
+		return dlService;
+	}
+
+	public void setDLService(DLService dlService) {
+		this.dlService = dlService;
 	}
 
 	public CompanyLocalService getCompanyLocalService() {
@@ -520,6 +541,14 @@ public abstract class WikiPageLocalServiceBaseImpl
 			counterService = CounterServiceFactory.getImpl();
 		}
 
+		if (dlLocalService == null) {
+			dlLocalService = DLLocalServiceFactory.getImpl();
+		}
+
+		if (dlService == null) {
+			dlService = DLServiceFactory.getImpl();
+		}
+
 		if (companyLocalService == null) {
 			companyLocalService = CompanyLocalServiceFactory.getImpl();
 		}
@@ -642,6 +671,8 @@ public abstract class WikiPageLocalServiceBaseImpl
 	protected WikiPageResourcePersistence wikiPageResourcePersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected DLLocalService dlLocalService;
+	protected DLService dlService;
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;

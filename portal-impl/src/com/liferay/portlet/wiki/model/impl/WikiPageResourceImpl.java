@@ -22,12 +22,25 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
+import com.liferay.documentlibrary.NoSuchDirectoryException;
+import com.liferay.documentlibrary.service.DLServiceUtil;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPageResource;
+import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
+
+import java.rmi.RemoteException;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="WikiPageResourceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class WikiPageResourceImpl
@@ -35,5 +48,54 @@ public class WikiPageResourceImpl
 
 	public WikiPageResourceImpl() {
 	}
+
+	public String[] getAttachmentFileNames()
+		throws PortalException, SystemException {
+
+		String[] fileNames = null;
+
+		try {
+			fileNames = DLServiceUtil.getFileNames(
+				getNode().getCompanyId(), CompanyImpl.SYSTEM,
+				getAttachmentsDir());
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
+		catch (RemoteException e) {
+			_log.error("Could not obtain the wiki page attachments", e);
+		}
+
+		return fileNames;
+	}
+
+	public String getAttachmentsDir() {
+		if (_attachmentDirs == null) {
+			_attachmentDirs = "wiki/" + getPrimaryKey();
+		}
+		return _attachmentDirs;
+	}
+
+	public void setAttachmentsDir(String attachmentsDir) {
+		_attachmentDirs = attachmentsDir;
+	}
+
+	public WikiNode getNode() {
+		WikiNode node = null;
+
+		try {
+			node = WikiNodeLocalServiceUtil.getNode(getNodeId());
+		}
+		catch (Exception e) {
+			node = new WikiNodeImpl();
+
+			_log.error(e);
+		}
+
+		return node;
+	}
+
+	private static Log _log = LogFactory.getLog(WikiPageImpl.class);
+
+	private String _attachmentDirs;
 
 }

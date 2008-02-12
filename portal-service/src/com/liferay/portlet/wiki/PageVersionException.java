@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,16 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/wiki/init.jsp" %>
+package com.liferay.portlet.wiki;
 
-<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
+import com.liferay.portal.PortalException;
 
-<liferay-util:include page="/html/portlet/wiki/page_info_tabs.jsp">
-	<liferay-util:param name="tab" value="page-history" />
-</liferay-util:include>
+/**
+ * <a href="PageVersionException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class PageVersionException extends PortalException {
 
-<liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
-	<liferay-util:param name="type" value="page_history" />
-</liferay-util:include>
+	public PageVersionException() {
+		super();
+	}
+
+	public PageVersionException(String msg) {
+		super(msg);
+	}
+
+	public PageVersionException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public PageVersionException(Throwable cause) {
+		super(cause);
+	}
+
+}

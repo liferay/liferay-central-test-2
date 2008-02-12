@@ -24,39 +24,11 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/wiki/node_tabs.jsp" />
+<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<%
-WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
-WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
-
-String title = wikiPage.getTitle();
-
-String tabsNames = "page-history,page-links";
-
-PortletURL viewPageLinksURL = renderResponse.createRenderURL();
-
-viewPageLinksURL.setWindowState(WindowState.MAXIMIZED);
-
-viewPageLinksURL.setParameter("struts_action", "/wiki/view_page_links");
-viewPageLinksURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-viewPageLinksURL.setParameter("title", wikiPage.getTitle());
-
-PortletURL viewPageHistoryURL = renderResponse.createRenderURL();
-
-viewPageHistoryURL.setWindowState(WindowState.MAXIMIZED);
-
-viewPageHistoryURL.setParameter("struts_action", "/wiki/view_page_history");
-viewPageHistoryURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-viewPageHistoryURL.setParameter("title", wikiPage.getTitle());
-
-%>
-
-<%@ include file="/html/portlet/wiki/page_name.jspf" %>
-
-<liferay-ui:tabs names="<%= tabsNames %>"
-	url0="<%= viewPageHistoryURL.toString() %>"
-	url1="<%= viewPageLinksURL.toString() %>"/>
+<liferay-util:include page="/html/portlet/wiki/page_info_tabs.jsp">
+	<liferay-util:param name="tab" value="page-history" />
+</liferay-util:include>
 
 <%
 String backURL = ParamUtil.getString(request, "backURL");
