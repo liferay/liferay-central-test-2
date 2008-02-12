@@ -393,7 +393,7 @@ public class BBCodeUtil {
 		"[b]", "[/b]", "[i]", "[/i]", "[u]", "[/u]", "[s]", "[/s]",
 		"[img]", "[/img]",
 		"[left]", "[center]", "[right]", "[indent]",
-		"[/left]", "[/center]", "[/right]", "[/indent]" ,"[tt]" ,"[/tt]"
+		"[/left]", "[/center]", "[/right]", "[/indent]", "[tt]", "[/tt]"
 	};
 
 	private static final String[] _HTML_TAGS = {
