@@ -31,6 +31,7 @@ String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", MBUti
 String emailMessageAddedSubjectPrefix = ParamUtil.getString(request, "emailMessageAddedSubjectPrefix", MBUtil.getEmailMessageAddedSubjectPrefix(prefs));
 String emailMessageAddedBody = ParamUtil.getString(request, "emailMessageAddedBody", MBUtil.getEmailMessageAddedBody(prefs));
 String emailMessageAddedSignature = ParamUtil.getString(request, "emailMessageAddedSignature", MBUtil.getEmailMessageAddedSignature(prefs));
+boolean emailMessageHtmlFormat = ParamUtil.getBoolean(request, "emailMessageHtmlFormat", MBUtil.getEmailMessageHtmlFormat(prefs));
 
 String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMessageUpdatedSubjectPrefix", MBUtil.getEmailMessageUpdatedSubjectPrefix(prefs));
 String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(prefs));
@@ -114,6 +115,14 @@ String redirect = ParamUtil.getString(request, "redirect");
 			</td>
 			<td>
 				<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="html-format" />
+			</td>
+			<td>
+				<input name="<portlet:namespace />emailMessageHtmlFormat" type="checkbox" <%= (emailMessageHtmlFormat ? "checked" : "" ) %> />
 			</td>
 		</tr>
 		</table>

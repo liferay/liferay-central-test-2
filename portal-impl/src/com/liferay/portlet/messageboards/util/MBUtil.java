@@ -288,6 +288,21 @@ public class MBUtil {
 		}
 	}
 
+	public static boolean getEmailMessageHtmlFormat(
+		PortletPreferences prefs) {
+
+		String emailMessageHtmlFormat = prefs.getValue(
+			"email-message-html-format", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailMessageHtmlFormat)) {
+			return GetterUtil.getBoolean(emailMessageHtmlFormat);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_HTML_FORMAT));
+		}
+	}
+
 	public static boolean getEmailMessageUpdatedEnabled(
 		PortletPreferences prefs) {
 

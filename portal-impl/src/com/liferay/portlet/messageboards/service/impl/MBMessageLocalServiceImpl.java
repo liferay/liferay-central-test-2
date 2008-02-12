@@ -1378,6 +1378,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String subjectPrefix = null;
 			String body = null;
 			String signature = null;
+			boolean htmlFormat = MBUtil.getEmailMessageHtmlFormat(prefs);
 
 			if (update) {
 				subjectPrefix = MBUtil.getEmailMessageUpdatedSubjectPrefix(
@@ -1494,7 +1495,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					StringUtil.merge(categoryIds),
 					String.valueOf(message.getThreadId()),
 					fromName, fromAddress, subject, body, replyToAddress,
-					messageId, inReplyTo
+					messageId, inReplyTo, String.valueOf(htmlFormat)
 				});
 		}
 		catch (IOException ioe) {

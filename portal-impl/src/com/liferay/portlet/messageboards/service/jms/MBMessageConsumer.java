@@ -33,6 +33,7 @@ import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.util.BBCodeUtil;
 import com.liferay.util.CollectionFactory;
 
 import java.util.List;
@@ -106,6 +107,7 @@ public class MBMessageConsumer implements MessageListener {
 		String replyToAddress = array[8];
 		String messageId = array[9];
 		String inReplyTo = array[10];
+		boolean htmlFormat = GetterUtil.getBoolean(array[11]);
 
 		Set sent = CollectionFactory.getHashSet();
 
@@ -123,7 +125,7 @@ public class MBMessageConsumer implements MessageListener {
 
 		_sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, messageId, inReplyTo);
+			replyToAddress, messageId, inReplyTo, htmlFormat);
 
 		// Categories
 
@@ -134,7 +136,7 @@ public class MBMessageConsumer implements MessageListener {
 
 			_sendEmail(
 				userId, fromName, fromAddress, subject, body, subscriptions,
-				sent, replyToAddress, messageId, inReplyTo);
+				sent, replyToAddress, messageId, inReplyTo, htmlFormat);
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -145,7 +147,7 @@ public class MBMessageConsumer implements MessageListener {
 	private void _sendEmail(
 			long userId, String fromName, String fromAddress, String subject,
 			String body, List subscriptions, Set sent, String replyToAddress,
-			String messageId, String inReplyTo)
+			String messageId, String inReplyTo, boolean htmlFormat)
 		throws Exception {
 
 		for (int i = 0; i < subscriptions.size(); i++) {
@@ -223,8 +225,12 @@ public class MBMessageConsumer implements MessageListener {
 				InternetAddress replyTo = new InternetAddress(
 					replyToAddress, replyToAddress);
 
+				if (htmlFormat) {
+					curBody = BBCodeUtil.getHTML(curBody);
+				}
+
 				MailMessage message = new MailMessage(
-					from, to, curSubject, curBody, false);
+					from, to, curSubject, curBody, htmlFormat);
 
 				message.setReplyTo(new InternetAddress[] {replyTo});
 				message.setMessageId(messageId);
