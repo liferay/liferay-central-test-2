@@ -151,9 +151,7 @@ public class JournalVmUtil {
 
 		List<TemplateNode> nodes = new ArrayList<TemplateNode>();
 
-		for (Element el :
-				(List<Element>)parent.elementIterator("dynamic-element")) {
-
+		for (Element el : (List<Element>)parent.elements("dynamic-element")) {
 			Element content = el.element("dynamic-content");
 
 			if (content == null) {
@@ -178,7 +176,7 @@ public class JournalVmUtil {
 			}
 			else if (content.element("option") != null) {
 				for (Element option :
-						(List<Element>)content.elementIterator("option")) {
+						(List<Element>)content.elements("option")) {
 
 					node.appendOption(CDATAUtil.strip(option.getText()));
 				}
