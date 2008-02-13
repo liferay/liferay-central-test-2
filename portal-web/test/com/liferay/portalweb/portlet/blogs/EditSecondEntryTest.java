@@ -25,14 +25,14 @@ package com.liferay.portalweb.portlet.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddEntryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditSecondEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddEntryTest extends BaseTestCase {
-	public void testAddEntry() throws Exception {
-		selenium.click("//input[@value='Add Blog Entry']");
+public class EditSecondEntryTest extends BaseTestCase {
+	public void testEditSecondEntry() throws Exception {
+		selenium.click("link=Edit");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -51,7 +51,7 @@ public class AddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_title", "Test Entry");
+		selenium.type("_33_title", "Second Test Entry");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -105,27 +105,12 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body", "This is a test entry!");
+		selenium.type("//body", "This is an edited second test entry!");
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent(
+				"This is an edited second test entry!"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -133,7 +118,7 @@ public class AddEntryTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=0 Comments")) {
+				if (selenium.isElementPresent("link=Blogs Test Page")) {
 					break;
 				}
 			}
@@ -142,5 +127,8 @@ public class AddEntryTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click("link=Blogs Test Page");
+		selenium.waitForPageToLoad("30000");
 	}
 }

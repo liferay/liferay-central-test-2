@@ -22,29 +22,23 @@
 
 package com.liferay.portalweb.portlet.blogs;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSecondEntryCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsTests extends BaseTests {
-
-	public BlogsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddEntryTest.class);
-		addTestSuite(AddEntryCommentTest.class);
-		addTestSuite(AddSecondEntryTest.class);
-		addTestSuite(AddSecondEntryCommentTest.class);
-		addTestSuite(EditSecondCommentTest.class);
-		addTestSuite(EditSecondEntryTest.class);
-		addTestSuite(SearchBlogsTest.class);
-		addTestSuite(DeleteSecondCommentTest.class);
-		addTestSuite(DeleteSecondEntryTest.class);
-		addTestSuite(AddIncorrectEntryTest.class);
+public class AddSecondEntryCommentTest extends BaseTestCase {
+	public void testAddSecondEntryComment() throws Exception {
+		selenium.click("link=0 Comments");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Post Reply");
+		selenium.typeKeys("_33_postReplyBody0",
+			"This is a second entry comment!");
+		selenium.click("_33_postReplyButton0");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("This is a second entry comment!"));
 	}
-
 }

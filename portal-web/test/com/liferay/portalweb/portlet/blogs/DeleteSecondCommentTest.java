@@ -22,29 +22,40 @@
 
 package com.liferay.portalweb.portlet.blogs;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteSecondCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsTests extends BaseTests {
+public class DeleteSecondCommentTest extends BaseTestCase {
+	public void testDeleteSecondComment() throws Exception {
+		selenium.click("link=Second Test Entry");
+		selenium.waitForPageToLoad("30000");
 
-	public BlogsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddEntryTest.class);
-		addTestSuite(AddEntryCommentTest.class);
-		addTestSuite(AddSecondEntryTest.class);
-		addTestSuite(AddSecondEntryCommentTest.class);
-		addTestSuite(EditSecondCommentTest.class);
-		addTestSuite(EditSecondEntryTest.class);
-		addTestSuite(SearchBlogsTest.class);
-		addTestSuite(DeleteSecondCommentTest.class);
-		addTestSuite(DeleteSecondEntryTest.class);
-		addTestSuite(AddIncorrectEntryTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Delete")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//td[4]/nobr/a[2]");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+		verifyTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
 	}
-
 }

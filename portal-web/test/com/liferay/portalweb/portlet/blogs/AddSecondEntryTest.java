@@ -25,13 +25,15 @@ package com.liferay.portalweb.portlet.blogs;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddEntryTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSecondEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddEntryTest extends BaseTestCase {
-	public void testAddEntry() throws Exception {
+public class AddSecondEntryTest extends BaseTestCase {
+	public void testAddSecondEntry() throws Exception {
+		selenium.click("link=Blogs Test Page");
+		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Blog Entry']");
 		Thread.sleep(5000);
 
@@ -51,7 +53,7 @@ public class AddEntryTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("_33_title", "Test Entry");
+		selenium.typeKeys("_33_title", "Second Test Entry");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -105,25 +107,8 @@ public class AddEntryTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_33_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body", "This is a test entry!");
+		selenium.typeKeys("//body", "This is a second test entry!");
 		selenium.selectFrame("relative=top");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//input[@value='Save']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 

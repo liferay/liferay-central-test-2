@@ -22,29 +22,54 @@
 
 package com.liferay.portalweb.portlet.blogs;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchBlogsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsTests extends BaseTests {
+public class SearchBlogsTest extends BaseTestCase {
+	public void testSearchBlogs() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public BlogsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddEntryTest.class);
-		addTestSuite(AddEntryCommentTest.class);
-		addTestSuite(AddSecondEntryTest.class);
-		addTestSuite(AddSecondEntryCommentTest.class);
-		addTestSuite(EditSecondCommentTest.class);
-		addTestSuite(EditSecondEntryTest.class);
-		addTestSuite(SearchBlogsTest.class);
-		addTestSuite(DeleteSecondCommentTest.class);
-		addTestSuite(DeleteSecondEntryTest.class);
-		addTestSuite(AddIncorrectEntryTest.class);
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Search Entries']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_33_keywords", "Test Entry");
+		selenium.click("//input[@value='Search Entries']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=\u00ab Back");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Add Blog Entry']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }

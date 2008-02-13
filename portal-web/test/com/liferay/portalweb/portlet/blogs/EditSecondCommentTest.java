@@ -22,29 +22,38 @@
 
 package com.liferay.portalweb.portlet.blogs;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="BlogsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditSecondCommentTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BlogsTests extends BaseTests {
+public class EditSecondCommentTest extends BaseTestCase {
+	public void testEditSecondComment() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public BlogsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddEntryTest.class);
-		addTestSuite(AddEntryCommentTest.class);
-		addTestSuite(AddSecondEntryTest.class);
-		addTestSuite(AddSecondEntryCommentTest.class);
-		addTestSuite(EditSecondCommentTest.class);
-		addTestSuite(EditSecondEntryTest.class);
-		addTestSuite(SearchBlogsTest.class);
-		addTestSuite(DeleteSecondCommentTest.class);
-		addTestSuite(DeleteSecondEntryTest.class);
-		addTestSuite(AddIncorrectEntryTest.class);
+			try {
+				if (selenium.isElementPresent(
+							"//td[2]/table[1]/tbody/tr/td[3]/nobr/a[2]")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//td[2]/table[1]/tbody/tr/td[3]/nobr/a[2]");
+		selenium.type("_33_editBody1", "This is an edited second entry comment!");
+		selenium.click("_33_updateReplyButton1");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent(
+				"This is an edited second entry comment!"));
 	}
-
 }

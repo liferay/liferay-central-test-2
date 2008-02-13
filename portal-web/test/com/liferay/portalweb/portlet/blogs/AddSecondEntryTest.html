@@ -1,13 +1,18 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>AddEntryTest</title>
+<title>AddSecondEntryTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">AddEntryTest</td></tr>
+<tr><td rowspan="1" colspan="3">AddSecondEntryTest</td></tr>
 </thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Blogs Test Page</td>
+	<td></td>
+</tr>
 <tr>
 	<td>click</td>
 	<td>//input[@value='Add Blog Entry']</td>
@@ -26,7 +31,7 @@
 <tr>
 	<td>typeKeys</td>
 	<td>_33_title</td>
-	<td>Test Entry</td>
+	<td>Second Test Entry</td>
 </tr>
 <tr>
 	<td>pause</td>
@@ -66,16 +71,11 @@
 <tr>
 	<td>typeKeys</td>
 	<td>//body</td>
-	<td>This is a test entry!</td>
+	<td>This is a second test entry!</td>
 </tr>
 <tr>
 	<td>selectFrame</td>
 	<td>relative=top</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForElementPresent</td>
-	<td>//input[@value='Save']</td>
 	<td></td>
 </tr>
 <tr>
