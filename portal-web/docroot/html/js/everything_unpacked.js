@@ -19756,7 +19756,7 @@ Liferay.Notice = new Class({
 				instance._body = jQuery('body');
 			}
 
-			instance._body.addClass('has-alerts')	
+			instance._body.addClass('has-alerts')
 		}
 	},
 

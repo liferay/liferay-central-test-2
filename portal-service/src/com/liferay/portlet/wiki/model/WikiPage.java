@@ -60,7 +60,11 @@ public interface WikiPage extends WikiPageModel {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.wiki.model.WikiPageResource getWikiPageResource()
+	public java.lang.String getAttachmentsDir();
+
+	public void setAttachmentsDir(java.lang.String attachmentsDir);
+
+	public java.lang.String[] getAttachmentsFiles()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

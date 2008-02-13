@@ -24,85 +24,11 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<script type="text/javascript">
-	function <portlet:namespace />compare() {
-		var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]:checked');
-		var sourceVersion = jQuery('input[@name="<portlet:namespace />sourceVersion"]');
-		var targetVersion = jQuery('input[@name="<portlet:namespace />targetVersion"]');
-
-		if (rowIds.length == 1) {
-			sourceVersion.val(rowIds[0].value);
-		}
-		else if (rowIds.length == 2) {
-			sourceVersion.val(rowIds[1].value);
-			targetVersion.val(rowIds[0].value);
-		}
-
-		submitForm(document.<portlet:namespace />fm);
-	}
-
-	function <portlet:namespace />inactivateRowIds(element) {
-  		var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]');
-
-  		var found = 0;
-  		var totalChecked = jQuery('input[@name=<portlet:namespace />rowIds]:checked').length;
-
-  		for (i = 0; i < rowIds.length; i++) {
-  			if (rowIds[i].checked && (found < 2)) {
-  				fund++;
-  			}
-  			else if (totalChecked == 0) {
-
-				// Enable everything
-
-				rowIds[i].checked = false;
-      			rowIds[i].disabled = false;
-    		}
-    		else if ((found == 0) && (totalChecked == 1)) {
-
-				// Disable everything up to the first one
-
-				rowIds[i].checked = false;
-     			rowIds[i].disabled = true;
-    		}
-    		else if ((found == 1) && (totalChecked >= 1)) {
-
-				// Unselect everything after the first one
-
-				rowIds[i].checked = false;
-      			rowIds[i].disabled = false;
-    		}
-    		else if ((found == 2) && (totalChecked >= 2)) {
-
-				// Disable elements after the second one
-				rowIds[i].checked = false;
-      			rowIds[i].disabled = true;
-    		}
-		}
-	}
-
-	jQuery(document).ready(
-		function() {
-			jQuery('input[@name=<portlet:namespace />rowIds]').click(
-				function() {
-					<portlet:namespace />inactivateRowIds(this);
-				}
-			);
-		}
-	);
-</script>
-
 <%
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String type = ParamUtil.getString(request, "type");
-
-boolean comparePages = false;
-
-if (type.equals("page_history")) {
-	comparePages = true;
-}
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -111,20 +37,93 @@ portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 if (wikiPage != null) {
 	portletURL.setParameter("title", wikiPage.getTitle());
 }
+%>
 
+<c:if test='<%= type.equals("history") %>'>
+	<script type="text/javascript">
+		function <portlet:namespace />compare() {
+			var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]:checked');
+			var sourceVersion = jQuery('input[@name="<portlet:namespace />sourceVersion"]');
+			var targetVersion = jQuery('input[@name="<portlet:namespace />targetVersion"]');
+
+			if (rowIds.length == 1) {
+				sourceVersion.val(rowIds[0].value);
+			}
+			else if (rowIds.length == 2) {
+				sourceVersion.val(rowIds[1].value);
+				targetVersion.val(rowIds[0].value);
+			}
+
+			submitForm(document.<portlet:namespace />fm);
+		}
+
+		function <portlet:namespace />inactivateRowIds(element) {
+			var rowIds = jQuery('input[@name=<portlet:namespace />rowIds]');
+
+			var found = 0;
+			var totalChecked = jQuery('input[@name=<portlet:namespace />rowIds]:checked').length;
+
+			for (i = 0; i < rowIds.length; i++) {
+				if (rowIds[i].checked && (found < 2)) {
+					found++;
+				}
+				else if (totalChecked == 0) {
+
+					// Enable everything
+
+					rowIds[i].checked = false;
+					rowIds[i].disabled = false;
+				}
+				else if ((found == 0) && (totalChecked == 1)) {
+
+					// Disable everything up to the first one
+
+					rowIds[i].checked = false;
+					rowIds[i].disabled = true;
+				}
+				else if ((found == 1) && (totalChecked >= 1)) {
+
+					// Unselect everything after the first one
+
+					rowIds[i].checked = false;
+					rowIds[i].disabled = false;
+				}
+				else if ((found == 2) && (totalChecked >= 2)) {
+
+					// Disable elements after the second one
+
+					rowIds[i].checked = false;
+					rowIds[i].disabled = true;
+				}
+			}
+		}
+
+		jQuery(document).ready(
+			function() {
+				jQuery('input[@name=<portlet:namespace />rowIds]').click(
+					function() {
+						<portlet:namespace />inactivateRowIds(this);
+					}
+				);
+			}
+		);
+	</script>
+</c:if>
+
+<%
 List headerNames = new ArrayList();
 
 headerNames.add("page");
 headerNames.add("revision");
 headerNames.add("date");
 
-if (type.equals("page_history")) {
+if (type.equals("history")) {
 	headerNames.add(StringPool.BLANK);
 }
 
 String emptyResultsMessage = null;
 
-if (type.equals("page_links")) {
+if (type.equals("links")) {
 	emptyResultsMessage = "there-are-no-pages-that-link-to-this-page";
 }
 else if (type.equals("recent_changes")) {
@@ -133,7 +132,7 @@ else if (type.equals("recent_changes")) {
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, emptyResultsMessage);
 
-if (comparePages) {
+if (type.equals("history")) {
 	searchContainer.setRowChecker(new RowChecker(renderResponse, RowChecker.ALIGN, RowChecker.VALIGN, RowChecker.FORM_NAME, null, RowChecker.ROW_IDS));
 }
 
@@ -142,44 +141,30 @@ List results = null;
 
 if (type.equals("all_pages")) {
 	total = WikiPageLocalServiceUtil.getPagesCount(node.getNodeId(), true);
-
-	searchContainer.setTotal(total);
-
 	results = WikiPageLocalServiceUtil.getPages(node.getNodeId(), true, searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("orphan_pages")) {
 	List orphans = WikiPageLocalServiceUtil.getOrphans(node.getNodeId());
 
 	total = orphans.size();
-
-	searchContainer.setTotal(total);
-
 	results = ListUtil.subList(orphans, searchContainer.getStart(), searchContainer.getEnd());
 }
-else if (type.equals("page_history")) {
+else if (type.equals("history")) {
 	total = WikiPageLocalServiceUtil.getPagesCount(wikiPage.getNodeId(), wikiPage.getTitle());
-
-	searchContainer.setTotal(total);
-
 	results = WikiPageLocalServiceUtil.getPages(wikiPage.getNodeId(), wikiPage.getTitle(), searchContainer.getStart(), searchContainer.getEnd());
 }
-else if (type.equals("page_links")) {
+else if (type.equals("links")) {
 	List links = WikiPageLocalServiceUtil.getIncomingLinks(wikiPage.getNodeId(), wikiPage.getTitle());
 
 	total = links.size();
-
-	searchContainer.setTotal(total);
-
 	results = ListUtil.subList(links, searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("recent_changes")) {
 	total = WikiPageLocalServiceUtil.getRecentChangesCount(node.getNodeId());
-
-	searchContainer.setTotal(total);
-
 	results = WikiPageLocalServiceUtil.getRecentChanges(node.getNodeId(), searchContainer.getStart(), searchContainer.getEnd());
 }
 
+searchContainer.setTotal(total);
 searchContainer.setResults(results);
 
 List resultRows = searchContainer.getResultRows();
@@ -210,7 +195,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Action
 
-	if (type.equals("page_history")) {
+	if (type.equals("history")) {
 		if (curWikiPage.isHead()) {
 			row.addText(StringPool.BLANK);
 		}
@@ -223,16 +208,19 @@ for (int i = 0; i < results.size(); i++) {
 
 	resultRows.add(row);
 }
-
-if (comparePages && (results.size() > 1)) {
-	WikiPage lastWikiPageVersion = (WikiPage)results.get(1);
 %>
+
+<c:if test='<%= type.equals("history") && (results.size() > 1) %>'>
+
+	<%
+	WikiPage latestWikiPageVersion = (WikiPage)results.get(0);
+	%>
 
 	<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/compare_versions" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />compare(); return false;">
 	<input name="<portlet:namespace />backURL" type="hidden" value="<%= currentURL %>" />
 	<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 	<input name="<portlet:namespace />title" type="hidden" value="<%= wikiPage.getTitle() %>" />
-	<input name="<portlet:namespace />sourceVersion" type="hidden" value="<%= lastWikiPageVersion.getVersion() %>" />
+	<input name="<portlet:namespace />sourceVersion" type="hidden" value="<%= latestWikiPageVersion.getVersion() %>" />
 	<input name="<portlet:namespace />targetVersion" type="hidden" value="<%= wikiPage.getVersion() %>" />
 
 	<input type="submit" value="<liferay-ui:message key="compare-versions" />" />
@@ -240,35 +228,24 @@ if (comparePages && (results.size() > 1)) {
 	</form>
 
 	<br />
-
-<%
-}
-%>
+</c:if>
 
 <c:if test='<%= type.equals("all_pages") && WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_ATTACHMENT) %>'>
-
-	<%
-	PortletURL addPageURL = renderResponse.createRenderURL();
-
-	addPageURL.setParameter("struts_action", "/wiki/edit_page");
-	addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-	%>
-
 	<script type="text/javascript">
 		function <portlet:namespace />addPage() {
 			var pageName = prompt('<liferay-ui:message key="page-name" />', '');
 
 			if ((pageName != null) && (pageName.length > 0)) {
-				window.location = Liferay.Util.addParams('<portlet:namespace />title=' + pageName, '<%= addPageURL.toString() %>');
+				window.location = Liferay.Util.addParams('<portlet:namespace />title=' + pageName, '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /></portlet:renderURL>');
 			}
 		}
 	</script>
 
-	<input type="button" value="<liferay-ui:message key="add-page" />" onClick="<portlet:namespace/>addPage();" />
+	<div>
+		<input type="button" value="<liferay-ui:message key="add-page" />" onClick="<portlet:namespace/>addPage();" />
+	</div>
 
-	<br/><br/>
-
+	<br />
 </c:if>
-
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

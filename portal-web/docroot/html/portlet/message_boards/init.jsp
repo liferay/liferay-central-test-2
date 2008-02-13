@@ -26,7 +26,6 @@
 
 <%@ page import="com.liferay.documentlibrary.FileNameException" %>
 <%@ page import="com.liferay.documentlibrary.FileSizeException" %>
-<%@ page import="com.liferay.documentlibrary.NoSuchDirectoryException" %>
 <%@ page import="com.liferay.documentlibrary.service.DLServiceUtil" %>
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>

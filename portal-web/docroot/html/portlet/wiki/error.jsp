@@ -26,7 +26,7 @@
 
 <liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
 
-<liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-node-could-not-be-found" />
+<liferay-ui:error exception="<%= NoSuchNodeException.class %>" message="the-wiki-could-not-be-found" />
 <liferay-ui:error exception="<%= NoSuchPageException.class %>" message="the-page-could-not-be-found" />
 <liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-page-title" />
 <liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />

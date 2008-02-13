@@ -30,41 +30,31 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String title = wikiPage.getTitle();
 
-String tab = ParamUtil.getString(request, "tab");
+PortletURL viewPageGeneralURL = renderResponse.createRenderURL();
 
-String tabsNames = "page-info,page-history,page-links,attachments";
+viewPageGeneralURL.setParameter("struts_action", "/wiki/view_page_general");
+viewPageGeneralURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+viewPageGeneralURL.setParameter("title", wikiPage.getTitle());
 
-PortletURL viewPageInfoURL = renderResponse.createRenderURL();
-
-viewPageInfoURL.setParameter("struts_action", "/wiki/view_page_info");
-viewPageInfoURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-viewPageInfoURL.setParameter("title", wikiPage.getTitle());
-
-PortletURL viewPageHistoryURL = renderResponse.createRenderURL();
+PortletURL viewPageHistoryURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
 
 viewPageHistoryURL.setParameter("struts_action", "/wiki/view_page_history");
-viewPageHistoryURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-viewPageHistoryURL.setParameter("title", wikiPage.getTitle());
 
-PortletURL viewPageLinksURL = renderResponse.createRenderURL();
+PortletURL viewPageLinksURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
 
 viewPageLinksURL.setParameter("struts_action", "/wiki/view_page_links");
-viewPageLinksURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-viewPageLinksURL.setParameter("title", wikiPage.getTitle());
 
-PortletURL attachmentsURL = renderResponse.createRenderURL();
+PortletURL attachmentsURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
 
 attachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
-attachmentsURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-attachmentsURL.setParameter("title", wikiPage.getTitle());
-
 %>
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
-<liferay-ui:tabs names="<%= tabsNames %>"
-	value="<%= tab %>"
-	url0="<%= viewPageInfoURL.toString() %>"
+<liferay-ui:tabs
+	names="general,history,links,attachments"
+	url0="<%= viewPageGeneralURL.toString() %>"
 	url1="<%= viewPageHistoryURL.toString() %>"
 	url2="<%= viewPageLinksURL.toString() %>"
-	url3="<%= attachmentsURL.toString() %>"/>
+	url3="<%= attachmentsURL.toString() %>"
+/>

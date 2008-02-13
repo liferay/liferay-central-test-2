@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/calendar/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
+
+String redirect = ParamUtil.getString(request, "redirect");
+
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
@@ -34,10 +38,6 @@ String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", CalUt
 
 String emailEventReminderSubject = ParamUtil.getString(request, "emailEventReminderSubject", CalUtil.getEmailEventReminderSubject(prefs));
 String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminderBody", CalUtil.getEmailEventReminderBody(prefs));
-
-String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
-
-String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">

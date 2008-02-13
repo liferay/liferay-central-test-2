@@ -1217,26 +1217,6 @@ public class PropsUtil {
 
 	// Wiki Portlet
 
-	public static final String WIKI_EMAIL_FROM_NAME = "wiki.email.from.name";
-
-	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";
-
-	public static final String WIKI_EMAIL_PAGE_ADDED_ENABLED = "wiki.email.page.added.enabled";
-
-	public static final String WIKI_EMAIL_PAGE_ADDED_SUBJECT_PREFIX = "wiki.email.page.added.subject.prefix";
-
-	public static final String WIKI_EMAIL_PAGE_ADDED_BODY = "wiki.email.page.added.body";
-
-	public static final String WIKI_EMAIL_PAGE_ADDED_SIGNATURE = "wiki.email.page.added.signature";
-
-	public static final String WIKI_EMAIL_PAGE_UPDATED_ENABLED = "wiki.email.page.updated.enabled";
-
-	public static final String WIKI_EMAIL_PAGE_UPDATED_SUBJECT_PREFIX = "wiki.email.page.updated.subject.prefix";
-
-	public static final String WIKI_EMAIL_PAGE_UPDATED_BODY = "wiki.email.page.updated.body";
-
-	public static final String WIKI_EMAIL_PAGE_UPDATED_SIGNATURE = "wiki.email.page.updated.signature";
-
 	public static final String WIKI_FRONT_PAGE_NAME = "wiki.front.page.name";
 
 	public static final String WIKI_INITIAL_NODE_NAME = "wiki.initial.node.name";
@@ -1258,6 +1238,26 @@ public class PropsUtil {
 	public static final String WIKI_FORMATS_HELP_PAGE = "wiki.formats.help.page";
 
 	public static final String WIKI_FORMATS_HELP_URL = "wiki.formats.help.url";
+
+	public static final String WIKI_EMAIL_FROM_NAME = "wiki.email.from.name";
+
+	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";
+
+	public static final String WIKI_EMAIL_PAGE_ADDED_ENABLED = "wiki.email.page.added.enabled";
+
+	public static final String WIKI_EMAIL_PAGE_ADDED_SUBJECT_PREFIX = "wiki.email.page.added.subject.prefix";
+
+	public static final String WIKI_EMAIL_PAGE_ADDED_BODY = "wiki.email.page.added.body";
+
+	public static final String WIKI_EMAIL_PAGE_ADDED_SIGNATURE = "wiki.email.page.added.signature";
+
+	public static final String WIKI_EMAIL_PAGE_UPDATED_ENABLED = "wiki.email.page.updated.enabled";
+
+	public static final String WIKI_EMAIL_PAGE_UPDATED_SUBJECT_PREFIX = "wiki.email.page.updated.subject.prefix";
+
+	public static final String WIKI_EMAIL_PAGE_UPDATED_BODY = "wiki.email.page.updated.body";
+
+	public static final String WIKI_EMAIL_PAGE_UPDATED_SIGNATURE = "wiki.email.page.updated.signature";
 
 	public static boolean containsKey(String key) {
 		return _getInstance().containsKey(key);

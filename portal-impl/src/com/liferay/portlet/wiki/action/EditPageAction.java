@@ -235,7 +235,7 @@ public class EditPageAction extends PortletAction {
 
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
-		double version = ParamUtil.getDouble(req, "version", 0);
+		double version = ParamUtil.getDouble(req, "version");
 
 		String content = ParamUtil.getString(req, "content");
 		String format = ParamUtil.getString(req, "format");

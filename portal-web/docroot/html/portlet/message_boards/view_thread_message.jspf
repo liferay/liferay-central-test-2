@@ -344,56 +344,45 @@
 				<c:if test="<%= message.isAttachments() %>">
 
 					<%
-					String[] fileNames = null;
+					String[] attachments = message.getAttachmentsFiles();
 
-					try {
-						fileNames = DLServiceUtil.getFileNames(company.getCompanyId(), CompanyImpl.SYSTEM, message.getAttachmentsDir());
-					}
-					catch (NoSuchDirectoryException nsde) {
+					for (int j = 0; j < attachments.length; j++) {
+						String fileName = FileUtil.getShortFileName(attachments[j]);
+
+						if (StringUtil.endsWith(fileName, ".gif") || StringUtil.endsWith(fileName, ".jpg") || StringUtil.endsWith(fileName, ".png")) {
+					%>
+
+							<img src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= HttpUtil.encodeURL(fileName) %>" />
+
+							<br /><br />
+
+					<%
+						}
 					}
 					%>
 
-					<c:if test="<%= fileNames != null %>">
+					<table class="lfr-table">
+					<tr>
+						<td valign="top">
+							<b><liferay-ui:message key="attachments" />:</b>
+						</td>
+						<td>
 
-						<%
-						for (int j = 0; j < fileNames.length; j++) {
-							String fileName = FileUtil.getShortFileName(fileNames[j]);
+							<%
+							for (int j = 0; j < attachments.length; j++) {
+								String fileName = FileUtil.getShortFileName(attachments[j]);
+								long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyImpl.SYSTEM, attachments[j]);
+							%>
 
-							if (StringUtil.endsWith(fileName, ".gif") || StringUtil.endsWith(fileName, ".jpg") || StringUtil.endsWith(fileName, ".png")) {
-						%>
+								<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)
 
-								<img src="<%= themeDisplay.getPathMain() %>/message_boards/get_message_attachment?messageId=<%= message.getMessageId() %>&attachment=<%= HttpUtil.encodeURL(fileName) %>" />
-
-								<br /><br />
-
-						<%
+							<%
 							}
-						}
-						%>
+							%>
 
-						<table class="lfr-table">
-						<tr>
-							<td valign="top">
-								<b><liferay-ui:message key="attachments" />:</b>
-							</td>
-							<td>
-
-								<%
-								for (int j = 0; j < fileNames.length; j++) {
-									String fileName = FileUtil.getShortFileName(fileNames[j]);
-									long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyImpl.SYSTEM, fileNames[j]);
-								%>
-
-									<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)&nbsp;&nbsp;&nbsp;
-
-								<%
-								}
-								%>
-
-							</td>
-						</tr>
-						</table>
-					</c:if>
+						</td>
+					</tr>
+					</table>
 				</c:if>
 			</div>
 		</td>

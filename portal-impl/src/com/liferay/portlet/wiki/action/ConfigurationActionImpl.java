@@ -55,8 +55,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		String portletResource = ParamUtil.getString(
-			req, "portletResource");
+		String portletResource = ParamUtil.getString(req, "portletResource");
 
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
@@ -127,11 +126,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(req, "emailPageAddedBody");
 		}
 		else {
+			prefs.setValue("email-page-added-enabled", emailPageAddedEnabled);
 			prefs.setValue(
-				"email-page-added-enabled", emailPageAddedEnabled);
-			prefs.setValue(
-				"email-page-added-subject-prefix",
-				emailPageAddedSubjectPrefix);
+				"email-page-added-subject-prefix", emailPageAddedSubjectPrefix);
 			prefs.setValue("email-page-added-body", emailPageAddedBody);
 			prefs.setValue(
 				"email-page-added-signature", emailPageAddedSignature);
@@ -163,11 +160,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.setValue(
 				"email-page-updated-subject-prefix",
 				emailPageUpdatedSubjectPrefix);
+			prefs.setValue("email-page-updated-body", emailPageUpdatedBody);
 			prefs.setValue(
-				"email-page-updated-body", emailPageUpdatedBody);
-			prefs.setValue(
-				"email-page-updated-signature",
-				emailPageUpdatedSignature);
+				"email-page-updated-signature", emailPageUpdatedSignature);
 		}
 	}
 

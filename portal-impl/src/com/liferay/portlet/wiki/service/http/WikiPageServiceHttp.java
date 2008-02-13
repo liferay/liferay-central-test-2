@@ -548,9 +548,9 @@ public class WikiPageServiceHttp {
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
-		double sourceVersion, java.lang.String content,
-		java.lang.String format, java.lang.String redirectTo,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		double version, java.lang.String content, java.lang.String format,
+		java.lang.String redirectTo, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -563,7 +563,7 @@ public class WikiPageServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new DoubleWrapper(sourceVersion);
+			Object paramObj2 = new DoubleWrapper(version);
 
 			Object paramObj3 = content;
 

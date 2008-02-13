@@ -28,25 +28,19 @@
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-WikiPageResource wikiPageResource = wikiPage.getWikiPageResource();
-String[] fileNames = wikiPageResource.getAttachmentFileNames();
-
-if (fileNames == null) {
-	fileNames = new String[0];
-}
+String[] attachments = wikiPage.getAttachmentsFiles();
 
 PortletURL portletURL = renderResponse.createActionURL();
 
-portletURL.setParameter("struts_action", "/wiki/get_page_attachment");
+portletURL.setParameter("struts_action", "/wiki/view_page_attachments");
 portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 portletURL.setParameter("title", wikiPage.getTitle());
-
 %>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<liferay-util:include page="/html/portlet/wiki/page_info_tabs.jsp">
-	<liferay-util:param name="tab" value="attachments" />
+<liferay-util:include page="/html/portlet/wiki/page_tabs.jsp">
+	<liferay-util:param name="tabs1" value="attachments" />
 </liferay-util:include>
 
 <%
@@ -56,12 +50,13 @@ headerNames.add("file-name");
 headerNames.add("size");
 headerNames.add(StringPool.BLANK);
 
-String emptyResultsMessage = "there-are-no-file-attachments-in-this-page";
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, "this-page-does-not-have-any-file-attachments");
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, emptyResultsMessage);
+int total = attachments.length;
 
-int total = fileNames.length;
-List results = ListUtil.fromArray(fileNames);
+searchContainer.setTotal(total);
+
+List results = ListUtil.fromArray(attachments);
 
 searchContainer.setResults(results);
 
@@ -69,6 +64,7 @@ List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
 	String fileName = (String)results.get(i);
+
 	String shortFileName = FileUtil.getShortFileName(fileName);
 
 	long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyImpl.SYSTEM, fileName);
@@ -109,12 +105,14 @@ for (int i = 0; i < results.size(); i++) {
 
 	resultRows.add(row);
 }
-
 %>
-<c:if test="<%= WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_ATTACHMENT) %>">
-	<input type="button" value="<liferay-ui:message key="add-attachment" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>"/><portlet:param name="title" value="<%= wikiPage.getTitle() %>"/><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 
-	<br/><br/>
+<c:if test="<%= WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_ATTACHMENT) %>">
+	<div>
+		<input type="button" value="<liferay-ui:message key="add-attachments" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+	</div>
+
+	<br />
 </c:if>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />

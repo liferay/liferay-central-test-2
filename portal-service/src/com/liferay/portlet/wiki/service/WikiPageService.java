@@ -101,7 +101,7 @@ public interface WikiPageService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.wiki.model.WikiPage updatePage(long nodeId,
-		java.lang.String title, double sourceVersion, java.lang.String content,
+		java.lang.String title, double version, java.lang.String content,
 		java.lang.String format, java.lang.String redirectTo,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)

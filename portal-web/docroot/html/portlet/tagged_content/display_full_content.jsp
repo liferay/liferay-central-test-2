@@ -271,22 +271,22 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 			WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
 			try {
-				PortletURL pageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
+				PortletURL viewPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
 
-				pageURL.setPortletMode(PortletMode.VIEW);
+				viewPageURL.setPortletMode(PortletMode.VIEW);
 
-				pageURL.setParameter("struts_action", "/wiki/view");
+				viewPageURL.setParameter("struts_action", "/wiki/view");
 
-				PortletURL editURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
+				PortletURL editPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
 
-				editURL.setPortletMode(PortletMode.VIEW);
+				editPageURL.setPortletMode(PortletMode.VIEW);
 
-				editURL.setParameter("struts_action", "/wiki/edit_page");
+				editPageURL.setParameter("struts_action", "/wiki/edit_page");
 
 				String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
 			%>
 
-				<%= WikiUtil.convert(wikiPage, pageURL, editURL, attachmentURLPrefix) %>
+				<%= WikiUtil.convert(wikiPage, viewPageURL, editPageURL, attachmentURLPrefix) %>
 
 			<%
 			}

@@ -328,7 +328,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					existingPage = WikiPageLocalServiceUtil.updatePage(
 						userId, nodeId, existingPage.getTitle(), 0,
 						page.getContent(), page.getFormat(),
-						page.getRedirectTo(), tagsEntries, null, null);
+						page.getRedirectTo(), tagsEntries, prefs, themeDisplay);
 				}
 				catch (NoSuchPageException nspe) {
 					existingPage = WikiPageLocalServiceUtil.addPage(

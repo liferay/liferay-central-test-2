@@ -131,16 +131,15 @@ public class EditPageAttachmentAction extends PortletAction {
 
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
-		int numOfFiles = ParamUtil.getInteger(req, "numOfFiles", 0);
+		int numOfFiles = ParamUtil.getInteger(req, "numOfFiles");
 
-		List<ObjectValuePair> files = new ArrayList<ObjectValuePair>();
+		List files = new ArrayList();
 
 		if (numOfFiles == 0) {
 			File file = uploadReq.getFile("file");
 			String fileName = uploadReq.getFileName("file");
 
 			if (file != null) {
-
 				byte[] bytes = FileUtil.getBytes(file);
 
 				if ((bytes != null) && (bytes.length > 0)) {
@@ -148,7 +147,6 @@ public class EditPageAttachmentAction extends PortletAction {
 
 					files.add(ovp);
 				}
-
 			}
 		}
 		else {
@@ -158,7 +156,6 @@ public class EditPageAttachmentAction extends PortletAction {
 				String fileName = uploadReq.getFileName("file" + i);
 
 				if (file != null) {
-
 					byte[] bytes = FileUtil.getBytes(file);
 
 					if ((bytes != null) && (bytes.length > 0)) {
@@ -173,11 +170,5 @@ public class EditPageAttachmentAction extends PortletAction {
 
 		WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
 	}
-
-	protected boolean isCheckMethodOnProcessAction() {
-		return _CHECK_METHOD_ON_PROCESS_ACTION;
-	}
-
-	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 }

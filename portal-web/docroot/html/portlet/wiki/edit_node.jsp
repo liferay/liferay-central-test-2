@@ -45,7 +45,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
 <liferay-ui:tabs
-	names="node"
+	names="wiki"
 	backURL="<%= redirect %>"
 />
 

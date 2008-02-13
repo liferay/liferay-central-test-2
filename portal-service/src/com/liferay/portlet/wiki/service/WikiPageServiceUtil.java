@@ -144,7 +144,7 @@ public class WikiPageServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
-		long nodeId, java.lang.String title, double sourceVersion,
+		long nodeId, java.lang.String title, double version,
 		java.lang.String content, java.lang.String format,
 		java.lang.String redirectTo, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
@@ -153,7 +153,7 @@ public class WikiPageServiceUtil {
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
-		return wikiPageService.updatePage(nodeId, title, sourceVersion,
-			content, format, redirectTo, tagsEntries, prefs, themeDisplay);
+		return wikiPageService.updatePage(nodeId, title, version, content,
+			format, redirectTo, tagsEntries, prefs, themeDisplay);
 	}
 }

@@ -75,14 +75,13 @@ public class WikiUtil {
 
 	public static String getEmailFromAddress(PortletPreferences prefs) {
 		String emailFromAddress = PropsUtil.get(
-			PropsUtil.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS);
+			PropsUtil.WIKI_EMAIL_FROM_ADDRESS);
 
 		return prefs.getValue("email-from-address", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences prefs) {
-		String emailFromName = PropsUtil.get(
-			PropsUtil.MESSAGE_BOARDS_EMAIL_FROM_NAME);
+		String emailFromName = PropsUtil.get(PropsUtil.WIKI_EMAIL_FROM_NAME);
 
 		return prefs.getValue("email-from-name", emailFromName);
 	}
@@ -266,18 +265,21 @@ public class WikiUtil {
 		if ((editPageURL != null) &&
 			(editPageURL instanceof LiferayPortletURL)) {
 
-			LiferayPortletURL liferayPageURL = (LiferayPortletURL)viewPageURL;
+			LiferayPortletURL liferayViewPageURL =
+				(LiferayPortletURL)viewPageURL;
 
-			liferayPageURL.setParameter(
+			liferayViewPageURL.setParameter(
 				"nodeId", String.valueOf(page.getNodeId()));
 
-			LiferayPortletURL liferayEditURL = (LiferayPortletURL)editPageURL;
+			LiferayPortletURL liferayEditPageURL =
+				(LiferayPortletURL)editPageURL;
 
-			liferayEditURL.setParameter(
+			liferayEditPageURL.setParameter(
 				"nodeId", String.valueOf(page.getNodeId()));
 
 			content = _replaceLinks(
-				page.getTitle(), content, liferayPageURL, liferayEditURL);
+				page.getTitle(), content, liferayViewPageURL,
+				liferayEditPageURL);
 
 			Iterator itr = engine.getOutgoingLinks(page).keySet().iterator();
 
@@ -285,7 +287,7 @@ public class WikiUtil {
 				String title = (String)itr.next();
 
 				content = _replaceLinks(
-					title, content, liferayPageURL, liferayEditURL);
+					title, content, liferayViewPageURL, liferayEditPageURL);
 			}
 
 			content = _replaceAttachments(

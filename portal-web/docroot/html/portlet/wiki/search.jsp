@@ -63,7 +63,7 @@ portletURL.setParameter("keywords", keywords);
 List headerNames = new ArrayList();
 
 headerNames.add("#");
-headerNames.add("node");
+headerNames.add("wiki");
 headerNames.add("page");
 headerNames.add("score");
 

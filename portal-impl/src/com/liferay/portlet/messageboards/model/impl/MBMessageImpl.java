@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.messageboards.model.impl;
 
+import com.liferay.documentlibrary.NoSuchDirectoryException;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.impl.CompanyImpl;
@@ -32,6 +34,8 @@ import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
+
+import java.rmi.RemoteException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -100,16 +104,13 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		}
 	}
 
-	public double getPriority() throws PortalException, SystemException {
-		if (_priority == -1) {
-			_priority = MBThreadLocalServiceUtil.getThread(getThreadId()).
-				getPriority();
+	public String getBody(boolean translated) {
+		if (translated) {
+			return BBCodeUtil.getHTML(getBody());
 		}
-		return _priority;
-	}
-
-	public void setPriority(double priority) {
-		_priority = priority;
+		else {
+			return getBody();
+		}
 	}
 
 	public String getThreadAttachmentsDir() {
@@ -120,6 +121,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		if (_attachmentDirs == null) {
 			_attachmentDirs = getThreadAttachmentsDir() + "/" + getMessageId();
 		}
+
 		return _attachmentDirs;
 	}
 
@@ -127,13 +129,35 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		_attachmentDirs = attachmentsDir;
 	}
 
-	public String getBody(boolean translated) {
-		if (translated) {
-			return BBCodeUtil.getHTML(getBody());
+	public String[] getAttachmentsFiles()
+		throws PortalException, SystemException {
+
+		String[] fileNames = new String[0];
+
+		try {
+			fileNames = DLServiceUtil.getFileNames(
+				getCompanyId(), CompanyImpl.SYSTEM, getAttachmentsDir());
 		}
-		else {
-			return getBody();
+		catch (NoSuchDirectoryException nsde) {
 		}
+		catch (RemoteException re) {
+			_log.error(re);
+		}
+
+		return fileNames;
+	}
+
+	public double getPriority() throws PortalException, SystemException {
+		if (_priority == -1) {
+			_priority = MBThreadLocalServiceUtil.getThread(getThreadId()).
+				getPriority();
+		}
+
+		return _priority;
+	}
+
+	public void setPriority(double priority) {
+		_priority = priority;
 	}
 
 	public String[] getTagsEntries() throws PortalException, SystemException {

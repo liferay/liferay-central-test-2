@@ -1349,14 +1349,14 @@
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
+		<action path="/wiki/view_page_general" type="com.liferay.portlet.wiki.action.ViewPageAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_general" />
+		</action>
+
 		<action path="/wiki/view_page_history" type="com.liferay.portlet.wiki.action.ViewPageAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_history" />
-		</action>
-
-		<action path="/wiki/view_page_info" type="com.liferay.portlet.wiki.action.ViewPageAction">
-			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
-			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_info" />
 		</action>
 
 		<action path="/wiki/view_page_links" type="com.liferay.portlet.wiki.action.ViewPageAction">

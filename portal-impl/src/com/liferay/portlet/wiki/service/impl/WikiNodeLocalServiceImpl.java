@@ -210,6 +210,11 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 			_log.error("Deleting index " + node.getNodeId(), pe);
 		}
 
+		// Subscriptions
+
+		subscriptionLocalService.deleteSubscriptions(
+			node.getCompanyId(), WikiNode.class.getName(), node.getNodeId());
+
 		// Pages
 
 		wikiPageLocalService.deletePages(node.getNodeId());
@@ -219,11 +224,6 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		resourceLocalService.deleteResource(
 			node.getCompanyId(), WikiNode.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, node.getNodeId());
-
-		// Subscriptions
-
-		subscriptionLocalService.deleteSubscriptions(
-			node.getCompanyId(), WikiNode.class.getName(), node.getNodeId());
 
 		// Node
 

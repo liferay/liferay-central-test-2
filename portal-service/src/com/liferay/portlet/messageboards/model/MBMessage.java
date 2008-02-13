@@ -62,11 +62,7 @@ public interface MBMessage extends MBMessageModel {
 
 	public boolean isDiscussion();
 
-	public double getPriority()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void setPriority(double priority);
+	public java.lang.String getBody(boolean translated);
 
 	public java.lang.String getThreadAttachmentsDir();
 
@@ -74,7 +70,15 @@ public interface MBMessage extends MBMessageModel {
 
 	public void setAttachmentsDir(java.lang.String attachmentsDir);
 
-	public java.lang.String getBody(boolean translated);
+	public java.lang.String[] getAttachmentsFiles()
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public double getPriority()
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void setPriority(double priority);
 
 	public java.lang.String[] getTagsEntries()
 		throws com.liferay.portal.SystemException,

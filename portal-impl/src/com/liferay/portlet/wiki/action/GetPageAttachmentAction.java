@@ -34,8 +34,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.wiki.NoSuchPageException;
-import com.liferay.portlet.wiki.model.WikiPageResource;
-import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
+import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.InputStream;
@@ -105,27 +105,21 @@ public class GetPageAttachmentAction extends PortletAction {
 			HttpServletResponse res)
 		throws Exception {
 
-		int x = fileName.indexOf(StringPool.SLASH);
+		int pos = fileName.indexOf(StringPool.SLASH);
 
-		if (x != -1) {
-			title = fileName.substring(0, x);
-			fileName = fileName.substring(x + 1);
+		if (pos != -1) {
+			title = fileName.substring(0, pos);
+			fileName = fileName.substring(pos + 1);
 		}
 
 		InputStream is = null;
 
 		try {
-			long pageResourceId =
-				WikiPageResourceLocalServiceUtil.getPageResourcePrimKey(
-					nodeId, title);
-
-			WikiPageResource pageResource =
-				WikiPageResourceLocalServiceUtil.getPageResource(
-					pageResourceId);
+			WikiPage page = WikiPageServiceUtil.getPage(nodeId, title);
 
 			is = DLLocalServiceUtil.getFileAsStream(
-				pageResource.getNode().getCompanyId(), CompanyImpl.SYSTEM,
-				pageResource.getAttachmentsDir() + "/" + fileName);
+				page.getCompanyId(), CompanyImpl.SYSTEM,
+				page.getAttachmentsDir() + "/" + fileName);
 
 			String contentType = MimeTypesUtil.getContentType(fileName);
 

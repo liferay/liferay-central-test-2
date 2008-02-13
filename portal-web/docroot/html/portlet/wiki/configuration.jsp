@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
+
+String redirect = ParamUtil.getString(request, "redirect");
+
 String emailFromName = ParamUtil.getString(request, "emailFromName", WikiUtil.getEmailFromName(prefs));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", WikiUtil.getEmailFromAddress(prefs));
 
@@ -35,10 +39,6 @@ String emailPageAddedSignature = ParamUtil.getString(request, "emailPageAddedSig
 String emailPageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailPageUpdatedSubjectPrefix", WikiUtil.getEmailPageUpdatedSubjectPrefix(prefs));
 String emailPageUpdatedBody = ParamUtil.getString(request, "emailPageUpdatedBody", WikiUtil.getEmailPageUpdatedBody(prefs));
 String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdatedSignature", WikiUtil.getEmailPageUpdatedSignature(prefs));
-
-String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
-
-String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">

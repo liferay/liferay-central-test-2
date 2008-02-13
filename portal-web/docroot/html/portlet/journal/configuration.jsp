@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/journal/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
+
+String redirect = ParamUtil.getString(request, "redirect");
+
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
@@ -43,10 +47,6 @@ String emailArticleApprovalRequestedBody = ParamUtil.getString(request, "emailAr
 
 String emailArticleReviewSubject = ParamUtil.getString(request, "emailArticleReviewSubject", JournalUtil.getEmailArticleReviewSubject(portletSetup));
 String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReviewBody", JournalUtil.getEmailArticleReviewBody(portletSetup));
-
-String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
-
-String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">

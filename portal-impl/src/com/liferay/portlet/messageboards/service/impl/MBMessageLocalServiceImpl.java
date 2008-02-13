@@ -380,7 +380,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setAttachments((files.size() > 0 ? true : false));
 		message.setAnonymous(anonymous);
 
-		// File attachments
+		// Attachments
 
 		if (files.size() > 0) {
 			long companyId = message.getCompanyId();
@@ -459,17 +459,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		logAddMessage(messageId, stopWatch, 6);
 
-		// Subscriptions
-
-		notifySubscribers(category, message, prefs, themeDisplay, false);
-
-		logAddMessage(messageId, stopWatch, 7);
-
 		// Category
 
 		category.setLastPostDate(now);
 
 		mbCategoryPersistence.update(category);
+
+		logAddMessage(messageId, stopWatch, 7);
+
+		// Subscriptions
+
+		notifySubscribers(category, message, prefs, themeDisplay, false);
 
 		logAddMessage(messageId, stopWatch, 8);
 
@@ -641,7 +641,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			_log.error("Deleting index " + message.getMessageId(), ioe);
 		}
 
-		// File attachments
+		// Attachments
 
 		if (message.isAttachments()) {
 			long companyId = message.getCompanyId();
@@ -666,7 +666,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (count == 1) {
 
-			// File attachments
+			// Attachments
 
 			long companyId = message.getCompanyId();
 			String portletId = CompanyImpl.SYSTEM_STRING;
@@ -1071,7 +1071,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		validate(subject, body);
 
-		// File attachments
+		// Attachments
 
 		if (files.size() > 0) {
 			long companyId = message.getCompanyId();
@@ -1120,10 +1120,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		mbMessagePersistence.update(message);
 
-		// Subscriptions
-
-		notifySubscribers(category, message, prefs, themeDisplay, true);
-
 		// Thread
 
 		MBThread thread = mbThreadPersistence.findByPrimaryKey(
@@ -1140,6 +1136,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		category.setLastPostDate(now);
 
 		mbCategoryPersistence.update(category);
+
+		// Subscriptions
+
+		notifySubscribers(category, message, prefs, themeDisplay, true);
 
 		// Tags
 
@@ -1325,7 +1325,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			}
 
 			String replyToAddress = mailingListAddress;
-			String messageId = MBUtil.getMailId(
+			String mailId = MBUtil.getMailId(
 				company.getMx(), message.getCategoryId(),
 				message.getMessageId());
 
@@ -1495,7 +1495,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					StringUtil.merge(categoryIds),
 					String.valueOf(message.getThreadId()),
 					fromName, fromAddress, subject, body, replyToAddress,
-					messageId, inReplyTo, String.valueOf(htmlFormat)
+					mailId, inReplyTo, String.valueOf(htmlFormat)
 				});
 		}
 		catch (IOException ioe) {

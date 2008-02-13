@@ -22,9 +22,12 @@
 
 package com.liferay.portlet.wiki.model.impl;
 
+import com.liferay.documentlibrary.NoSuchDirectoryException;
+import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -32,7 +35,8 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil;
+
+import java.rmi.RemoteException;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -94,24 +98,40 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return WikiPageLocalServiceUtil.getPage(getNodeId(), getRedirectTo());
 	}
 
-	public WikiPageResource getWikiPageResource()
-		throws PortalException, SystemException {
-
-		if (_wikiPageResource == null) {
-			long primKey =
-				WikiPageResourceLocalServiceUtil.getPageResourcePrimKey(
-					getNodeId(), getTitle());
-
-			_wikiPageResource =
-				WikiPageResourceLocalServiceUtil.getPageResource(primKey);
+	public String getAttachmentsDir() {
+		if (_attachmentDirs == null) {
+			_attachmentDirs = "wiki/" + getResourcePrimKey();
 		}
 
-		return _wikiPageResource;
+		return _attachmentDirs;
+	}
+
+	public void setAttachmentsDir(String attachmentsDir) {
+		_attachmentDirs = attachmentsDir;
+	}
+
+	public String[] getAttachmentsFiles()
+		throws PortalException, SystemException {
+
+		String[] fileNames = new String[0];
+
+		try {
+			fileNames = DLServiceUtil.getFileNames(
+				getCompanyId(), CompanyImpl.SYSTEM, getAttachmentsDir());
+		}
+		catch (NoSuchDirectoryException nsde) {
+		}
+		catch (RemoteException re) {
+			_log.error(re);
+		}
+
+		return fileNames;
 	}
 
 	private static Log _log = LogFactory.getLog(WikiPageImpl.class);
 
+	private WikiPageResource _resource;
 	private String _userUuid;
-	private WikiPageResource _wikiPageResource;
+	private String _attachmentDirs;
 
 }

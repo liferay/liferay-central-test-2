@@ -66,7 +66,9 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <c:if test="<%= editable %>">
-	<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_org_labor" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" /></portlet:renderURL>';" /><br />
+	<div>
+		<input type="button" value="<liferay-ui:message key="add" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_org_labor" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="organizationId" value="<%= String.valueOf(organization.getOrganizationId()) %>" /></portlet:renderURL>';" />
+	</div>
 
 	<br />
 </c:if>

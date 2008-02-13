@@ -28,19 +28,6 @@
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-WikiPageResource wikiPageResource = null;
-
-String[] fileNames = null;
-
-if (wikiPage != null) {
-	wikiPageResource = wikiPage.getWikiPageResource();
-	fileNames = wikiPageResource.getAttachmentFileNames();
-}
-
-if (fileNames == null) {
-	fileNames = new String[0];
-}
-
 WikiPage originalPage = null;
 
 if (wikiPage.getRedirectToPage() != null) {
@@ -49,6 +36,12 @@ if (wikiPage.getRedirectToPage() != null) {
 }
 
 String title = wikiPage.getTitle();
+
+String[] attachments = new String[0];
+
+if (wikiPage != null) {
+	attachments = wikiPage.getAttachmentsFiles();
+}
 
 boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
@@ -77,7 +70,7 @@ printPageURL.setParameter("print", "true");
 		</script>
 
 		<div class="wiki-popup-print">
-			<liferay-ui:icon image="print" message="print" url="javascript: print();"/>
+			<liferay-ui:icon image="print" message="print" url="javascript: print();" />
 		</div>
 	</c:when>
 	<c:otherwise>
@@ -103,12 +96,12 @@ printPageURL.setParameter("print", "true");
 			<c:if test="<%= portletName.equals(PortletKeys.WIKI) %>">
 
 				<%
-				PortletURL viewPageHistoryURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+				PortletURL viewPageGeneralURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
-				viewPageHistoryURL.setParameter("struts_action", "/wiki/view_page_info");
+				viewPageGeneralURL.setParameter("struts_action", "/wiki/view_page_general");
 				%>
 
-				<liferay-ui:icon image="history" message="info-history-links-and-attachments" url="<%= viewPageHistoryURL.toString() %>" />
+				<liferay-ui:icon image="history" message="properties" url="<%= viewPageGeneralURL.toString() %>" />
 			</c:if>
 		</div>
 	</c:if>
@@ -139,15 +132,17 @@ printPageURL.setParameter("print", "true");
 	<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 </div>
 
+<c:if test="<%= attachments.length > 0 %>">
 
-<c:if test="<%= fileNames.length > 0 %>">
 	<%
 	PortletURL viewAttachmentsURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
 	viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 	%>
-	<img align="absmiddle" src="<%= themeDisplay.getPathThemeImages() %>/common/clip.png"/><a href="<%= viewAttachmentsURL.toString() %>"><%= LanguageUtil.format(pageContext, "x-attachments", fileNames.length) %></a>
 
-	<br/>
+	<div>
+		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" label="<%= true %>" />
+	</div>
 </c:if>
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">

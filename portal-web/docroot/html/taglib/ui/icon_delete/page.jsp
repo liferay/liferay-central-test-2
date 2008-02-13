@@ -22,9 +22,12 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/icon/init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
 
 <%
+String url = (String)request.getAttribute("liferay-ui:icon:url");
+boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
+
 if (url.startsWith("javascript: ")) {
 	url = url.substring(12);
 }

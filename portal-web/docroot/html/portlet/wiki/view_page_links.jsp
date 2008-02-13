@@ -26,10 +26,10 @@
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<liferay-util:include page="/html/portlet/wiki/page_info_tabs.jsp">
-	<liferay-util:param name="tab" value="page-links" />
+<liferay-util:include page="/html/portlet/wiki/page_tabs.jsp">
+	<liferay-util:param name="tabs1" value="links" />
 </liferay-util:include>
 
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
-	<liferay-util:param name="type" value="page_links" />
+	<liferay-util:param name="type" value="links" />
 </liferay-util:include>

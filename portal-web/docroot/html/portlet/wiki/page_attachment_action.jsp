@@ -27,10 +27,11 @@
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-Object[] object = (Object[])row.getObject();
-WikiNode node = (WikiNode)object[0];
-WikiPage wikiPage = (WikiPage)object[1];
-String fileName = (String)object[2];
+Object[] objArray = (Object[])row.getObject();
+
+WikiNode node = (WikiNode)objArray[0];
+WikiPage wikiPage = (WikiPage)objArray[1];
+String fileName = (String)objArray[2];
 %>
 
 <liferay-ui:icon-menu>

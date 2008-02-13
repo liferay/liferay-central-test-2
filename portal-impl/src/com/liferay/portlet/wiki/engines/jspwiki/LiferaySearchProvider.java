@@ -49,10 +49,10 @@ public class LiferaySearchProvider implements SearchProvider {
 	}
 
 	public String getProviderInfo() {
-		return _PROVIDER_INFO;
+		return LiferaySearchProvider.class.getName();
 	}
 
-	public void initialize(WikiEngine engine, Properties properties)
+	public void initialize(WikiEngine engine, Properties props)
 		throws IOException, NoRequiredPropertyException{
 	}
 
@@ -63,7 +63,5 @@ public class LiferaySearchProvider implements SearchProvider {
 	}
 
 	private static final Collection _EMPTY_COLLECTION = new ArrayList();
-
-	private static final String _PROVIDER_INFO = "Liferay Search Provider";
 
 }

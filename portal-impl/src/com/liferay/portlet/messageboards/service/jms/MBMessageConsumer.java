@@ -105,7 +105,7 @@ public class MBMessageConsumer implements MessageListener {
 		String subject = array[6];
 		String body = array[7];
 		String replyToAddress = array[8];
-		String messageId = array[9];
+		String mailId = array[9];
 		String inReplyTo = array[10];
 		boolean htmlFormat = GetterUtil.getBoolean(array[11]);
 
@@ -113,9 +113,8 @@ public class MBMessageConsumer implements MessageListener {
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Sending notifications for {messageId=" + messageId +
-					", threadId=" + threadId + ", categoryIds=" + array[2] +
-						"}");
+				"Sending notifications for {mailId=" + mailId + ", threadId=" +
+					threadId + ", categoryIds=" + array[2] + "}");
 		}
 
 		// Threads
@@ -125,7 +124,7 @@ public class MBMessageConsumer implements MessageListener {
 
 		_sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, messageId, inReplyTo, htmlFormat);
+			replyToAddress, mailId, inReplyTo, htmlFormat);
 
 		// Categories
 
@@ -136,7 +135,7 @@ public class MBMessageConsumer implements MessageListener {
 
 			_sendEmail(
 				userId, fromName, fromAddress, subject, body, subscriptions,
-				sent, replyToAddress, messageId, inReplyTo, htmlFormat);
+				sent, replyToAddress, mailId, inReplyTo, htmlFormat);
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -147,7 +146,7 @@ public class MBMessageConsumer implements MessageListener {
 	private void _sendEmail(
 			long userId, String fromName, String fromAddress, String subject,
 			String body, List subscriptions, Set sent, String replyToAddress,
-			String messageId, String inReplyTo, boolean htmlFormat)
+			String mailId, String inReplyTo, boolean htmlFormat)
 		throws Exception {
 
 		for (int i = 0; i < subscriptions.size(); i++) {
@@ -232,9 +231,9 @@ public class MBMessageConsumer implements MessageListener {
 				MailMessage message = new MailMessage(
 					from, to, curSubject, curBody, htmlFormat);
 
-				message.setReplyTo(new InternetAddress[] {replyTo});
-				message.setMessageId(messageId);
+				message.setMessageId(mailId);
 				message.setInReplyTo(inReplyTo);
+				message.setReplyTo(new InternetAddress[] {replyTo});
 
 				MailServiceUtil.sendEmail(message);
 			}

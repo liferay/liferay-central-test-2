@@ -24,12 +24,6 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
-
-<liferay-util:include page="/html/portlet/wiki/page_info_tabs.jsp">
-	<liferay-util:param name="tab" value="page-history" />
-</liferay-util:include>
-
 <%
 String backURL = ParamUtil.getString(request, "backURL");
 
@@ -38,7 +32,11 @@ String targetName = (String)renderRequest.getAttribute(WebKeys.TARGET_NAME);
 List[] diffResults = (List[])renderRequest.getAttribute(WebKeys.DIFF_RESULTS);
 %>
 
-<input type="button" onclick="document.location='<%=backURL %>'" value="<%= LanguageUtil.get(pageContext, "back") %>"/>
+<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
+
+<liferay-util:include page="/html/portlet/wiki/page_tabs.jsp">
+	<liferay-util:param name="tabs1" value="history" />
+</liferay-util:include>
 
 <liferay-ui:diff
 	sourceName="<%= sourceName %>"

@@ -146,7 +146,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	}
 
 	public WikiPage updatePage(
-			long nodeId, String title, double sourceVersion, String content,
+			long nodeId, String title, double version, String content,
 			String format, String redirectTo, String[] tagsEntries,
 			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -155,8 +155,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getPermissionChecker(), nodeId, title, ActionKeys.UPDATE);
 
 		return wikiPageLocalService.updatePage(
-			getUserId(), nodeId, title, sourceVersion, content, format,
-			redirectTo, tagsEntries, prefs, themeDisplay);
+			getUserId(), nodeId, title, version, content, format, redirectTo,
+			tagsEntries, prefs, themeDisplay);
 	}
 
 }

@@ -48,13 +48,15 @@ import java.util.Properties;
  * <a href="LiferayAttachmentProvider.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 
-	public void deleteVersion(Attachment att) throws ProviderException {
+	public void deleteAttachment(Attachment attachment)
+		throws ProviderException {
 	}
 
-	public void deleteAttachment(Attachment att) throws ProviderException {
+	public void deleteVersion(Attachment attachment) throws ProviderException {
 	}
 
 	public Collection findAttachments(QueryItem[] query) {
@@ -62,12 +64,13 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 	}
 
 	public InputStream getAttachmentData(Attachment attachment)
-		throws ProviderException, IOException {
+		throws IOException, ProviderException {
+
 		return _EMPTY_STREAM;
 	}
 
 	public Attachment getAttachmentInfo(
-		com.ecyrd.jspwiki.WikiPage page, String name, int version)
+			com.ecyrd.jspwiki.WikiPage page, String name, int version)
 		throws ProviderException {
 
 		WikiPage wikiPage = null;
@@ -76,16 +79,13 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 			wikiPage = WikiPageLocalServiceUtil.getPage(
 				_nodeId, page.getName());
 
-			String[] attachments =
-				wikiPage.getWikiPageResource().getAttachmentFileNames();
+			String[] attachments = wikiPage.getAttachmentsFiles();
 
-			if (attachments != null) {
-				for (int i = 0; i < attachments.length; i++) {
-					String fileName = FileUtil.getShortFileName(attachments[i]);
+			for (int i = 0; i < attachments.length; i++) {
+				String fileName = FileUtil.getShortFileName(attachments[i]);
 
-					if (fileName.equals(name)) {
-						return new Attachment(_engine, page.getName(), name);
-					}
+				if (fileName.equals(name)) {
+					return new Attachment(_engine, page.getName(), name);
 				}
 			}
 
@@ -97,21 +97,22 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 	}
 
 	public String getProviderInfo() {
-		return "Liferay Attachment Provider";
+		return LiferayAttachmentProvider.class.getName();
 	}
 
-	public List getVersionHistory(Attachment attachment) {
-		List history = new ArrayList();
+	public List<Attachment> getVersionHistory(Attachment attachment) {
+		List<Attachment> history = new ArrayList<Attachment>();
 
 		history.add(attachment);
 
 		return history;
 	}
 
-	public void initialize(WikiEngine engine, Properties properties)
-		throws NoRequiredPropertyException, IOException {
+	public void initialize(WikiEngine engine, Properties props)
+		throws IOException, NoRequiredPropertyException {
+
 		_engine = engine;
-		_nodeId = GetterUtil.getLong(properties.getProperty("nodeId"));
+		_nodeId = GetterUtil.getLong(props.getProperty("nodeId"));
 	}
 
 	public List listAllChanged(Date timestamp) throws ProviderException {
@@ -120,21 +121,22 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 
 	public Collection listAttachments(com.ecyrd.jspwiki.WikiPage page)
 		throws ProviderException {
+
 		return _EMPTY_LIST;
 	}
 
-	public void moveAttachmentsForPage(
-		String oldParent, String newParent) throws ProviderException {
+	public void moveAttachmentsForPage(String oldParent, String newParent)
+		throws ProviderException {
 	}
 
 	public void putAttachmentData(Attachment attachment, InputStream data)
-		throws ProviderException, IOException {
+		throws IOException, ProviderException {
 	}
+
+	private static final List _EMPTY_LIST = new ArrayList();
 
 	private static final InputStream _EMPTY_STREAM =
 		new ByteArrayInputStream(new byte[0]);
-
-	private static final List _EMPTY_LIST = new ArrayList();
 
 	private WikiEngine _engine;
 	private long _nodeId;

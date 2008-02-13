@@ -90,7 +90,7 @@ public class WikiPageConsumer implements MessageListener {
 			_onMessage(array);
 		}
 		catch (Exception e) {
-			_log.error("Error wiki notifications", e);
+			_log.error("Error sending wiki notifications", e);
 		}
 	}
 
@@ -104,34 +104,34 @@ public class WikiPageConsumer implements MessageListener {
 		String subject = array[6];
 		String body = array[7];
 		String replyToAddress = array[8];
-		String messageId = array[9];
+		String mailId = array[9];
 
 		Set sent = CollectionFactory.getHashSet();
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
-				"Sending notifications for {messageId=" + messageId +
+				"Sending notifications for {mailId=" + mailId +
 					", pageResourcePrimKey=" + pageResourcePrimKey +
 						", nodeId=" + nodeId + "}");
 		}
 
-		// Nodes
-
-		List subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
-			companyId, WikiNode.class.getName(), nodeId);
-
-		_sendEmail(
-			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, messageId);
-
 		// Pages
 
-		subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
+		List subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
 			companyId, WikiPage.class.getName(), pageResourcePrimKey);
 
 		_sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
-			replyToAddress, messageId);
+			replyToAddress, mailId);
+
+		// Nodes
+
+		subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
+			companyId, WikiNode.class.getName(), nodeId);
+
+		_sendEmail(
+			userId, fromName, fromAddress, subject, body, subscriptions, sent,
+			replyToAddress, mailId);
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Finished sending notifications");
@@ -141,7 +141,7 @@ public class WikiPageConsumer implements MessageListener {
 	private void _sendEmail(
 			long userId, String fromName, String fromAddress, String subject,
 			String body, List subscriptions, Set sent, String replyToAddress,
-			String messageId)
+			String mailId)
 		throws Exception {
 
 		for (int i = 0; i < subscriptions.size(); i++) {
@@ -223,7 +223,7 @@ public class WikiPageConsumer implements MessageListener {
 					from, to, curSubject, curBody, false);
 
 				message.setReplyTo(new InternetAddress[] {replyTo});
-				message.setMessageId(messageId);
+				message.setMessageId(mailId);
 
 				MailServiceUtil.sendEmail(message);
 			}

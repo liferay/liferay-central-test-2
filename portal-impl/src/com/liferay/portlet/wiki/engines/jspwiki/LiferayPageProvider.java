@@ -198,16 +198,15 @@ public class LiferayPageProvider implements WikiPageProvider {
 		return _EMPTY_LIST;
 	}
 
-	public void initialize(WikiEngine engine, Properties properties)
+	public void initialize(WikiEngine engine, Properties props)
 		throws IOException, NoRequiredPropertyException {
 
 		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Invoking initialize(" + engine + ", " + properties + ")");
+			_log.debug("Invoking initialize(" + engine + ", " + props + ")");
 		}
 
 		_engine = engine;
-		_nodeId = GetterUtil.getLong(properties.getProperty("nodeId"));
+		_nodeId = GetterUtil.getLong(props.getProperty("nodeId"));
 	}
 
 	public void movePage(String from, String to) throws ProviderException {

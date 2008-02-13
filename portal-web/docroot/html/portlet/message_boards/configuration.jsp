@@ -25,6 +25,10 @@
 <%@ include file="/html/portlet/message_boards/init.jsp" %>
 
 <%
+String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
+
+String redirect = ParamUtil.getString(request, "redirect");
+
 String emailFromName = ParamUtil.getString(request, "emailFromName", MBUtil.getEmailFromName(prefs));
 String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", MBUtil.getEmailFromAddress(prefs));
 
@@ -36,10 +40,6 @@ boolean emailMessageHtmlFormat = ParamUtil.getBoolean(request, "emailMessageHtml
 String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMessageUpdatedSubjectPrefix", MBUtil.getEmailMessageUpdatedSubjectPrefix(prefs));
 String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(prefs));
 String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessageUpdatedSignature", MBUtil.getEmailMessageUpdatedSignature(prefs));
-
-String tabs2 = ParamUtil.getString(request, "tabs2", "email-from");
-
-String redirect = ParamUtil.getString(request, "redirect");
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL" portletConfiguration="true">
