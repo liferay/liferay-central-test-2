@@ -104,10 +104,11 @@ public class BBCodeUtil {
 			String[] emoticon = emoticons[i];
 
 			String image = emoticon[0];
-			String text = emoticon[1];
+			String code = emoticon[1];
 
-			emoticon[0] = "@theme_images_path@/emoticons/" + image;
-			emoticon[1] = Html.escape(text);
+			emoticon[0] =
+				"<img src='@theme_images_path@/emoticons/" + image + "' />";
+			emoticon[1] = Html.escape(code);
 		}
 	}
 
@@ -119,9 +120,7 @@ public class BBCodeUtil {
 		for (int i = 0; i < emoticons.length; i++) {
 			String[] emoticon = emoticons[i];
 
-			String imgTag = "<img src='" + emoticon[0] + "' />";
-
-			html = StringUtil.replace(html, emoticon[1], imgTag);
+			html = StringUtil.replace(html, emoticon[1], emoticon[0]);
 		}
 
 		BBCodeTag tag = null;
