@@ -46,6 +46,45 @@ public class BBCodeUtil {
 
 	static Map listStyles = new HashMap();
 
+	static String[][] emoticons = {
+		{"angry.gif", ":angry:"},
+		{"bashful.gif", ":bashful:"},
+		{"big_grin.gif", ":grin:"},
+		{"blink.gif", ":blink:"},
+		{"blush.gif", ":*)"},
+		{"bored.gif", ":bored:"},
+		{"closed_eyes.gif", "-_-"},
+		{"cold.gif", ":cold:"},
+		{"cool.gif", "B)"},
+		{"darth_vader.gif", ":vader:"},
+		{"dry.gif", "<_<"},
+		{"exclamation.gif", ":what:"},
+		{"girl.gif", ":girl:"},
+		{"glare.gif", ">_>"},
+		{"happy.gif", ":)"},
+		{"huh.gif", ":huh:"},
+		{"in_love.gif", "<3"},
+		{"karate_kid.gif", ":kid:"},
+		{"kiss.gif", ":#"},
+		{"laugh.gif", ":lol:"},
+		{"mad.gif", ":mad:"},
+		{"mellow.gif", ":mellow:"},
+		{"ninja.gif", ":ph34r:"},
+		{"oh_my.gif", ":O"},
+		{"pac_man.gif", ":V"},
+		{"roll_eyes.gif", ":rolleyes:"},
+		{"sad.gif", ":("},
+		{"sleep.gif", ":sleep:"},
+		{"smile.gif", ":D"},
+		{"smug.gif", ":smug:"},
+		{"suspicious.gif", "8o"},
+		{"tongue.gif", ":P"},
+		{"unsure.gif", ":unsure:"},
+		{"wacko.gif", ":wacko:"},
+		{"wink.gif", ":wink:"},
+		{"wub.gif", ":wub:"}
+	};
+
 	static {
 		fontSizes.put(new Integer(1), "<span style='font-size: 0.7em';>");
 		fontSizes.put(new Integer(2), "<span style='font-size: 0.8em';>");
@@ -60,56 +99,29 @@ public class BBCodeUtil {
 		listStyles.put("I", "<ol style='list-style-type: upper-roman';>");
 		listStyles.put("a", "<ol style='list-style-type: lower-alpha';>");
 		listStyles.put("A", "<ol style='list-style-type: upper-alpha';>");
-	}
 
-	public static final String[][] EMOTICONS = {
-		{"@theme_images_path@/emoticons/angry.gif", Html.escape(":angry:")},
-		{"@theme_images_path@/emoticons/bashful.gif", Html.escape(":bashful:")},
-		{"@theme_images_path@/emoticons/big_grin.gif", Html.escape(":grin:")},
-		{"@theme_images_path@/emoticons/blink.gif", Html.escape(":blink:")},
-		{"@theme_images_path@/emoticons/blush.gif", Html.escape(":*)")},
-		{"@theme_images_path@/emoticons/bored.gif", Html.escape(":bored:")},
-		{"@theme_images_path@/emoticons/closed_eyes.gif", Html.escape("-_-")},
-		{"@theme_images_path@/emoticons/cold.gif", Html.escape(":cold:")},
-		{"@theme_images_path@/emoticons/cool.gif", Html.escape("B)")},
-		{"@theme_images_path@/emoticons/darth_vader.gif", Html.escape(":vader:")},
-		{"@theme_images_path@/emoticons/dry.gif", Html.escape("<_<")},
-		{"@theme_images_path@/emoticons/exclamation.gif", Html.escape(":what:")},
-		{"@theme_images_path@/emoticons/girl.gif", Html.escape(":girl:")},
-		{"@theme_images_path@/emoticons/glare.gif", Html.escape(">_>")},
-		{"@theme_images_path@/emoticons/happy.gif", Html.escape(":)")},
-		{"@theme_images_path@/emoticons/huh.gif", Html.escape(":huh:")},
-		{"@theme_images_path@/emoticons/in_love.gif", Html.escape("<3")},
-		{"@theme_images_path@/emoticons/karate_kid.gif", Html.escape(":kid:")},
-		{"@theme_images_path@/emoticons/kiss.gif", Html.escape(":#")},
-		{"@theme_images_path@/emoticons/laugh.gif", Html.escape(":lol:")},
-		{"@theme_images_path@/emoticons/mad.gif", Html.escape(":mad:")},
-		{"@theme_images_path@/emoticons/mellow.gif", Html.escape(":mellow:")},
-		{"@theme_images_path@/emoticons/ninja.gif", Html.escape(":ph34r:")},
-		{"@theme_images_path@/emoticons/oh_my.gif", Html.escape(":O")},
-		{"@theme_images_path@/emoticons/pac_man.gif", Html.escape(":V")},
-		{"@theme_images_path@/emoticons/roll_eyes.gif", Html.escape(":rolleyes:")},
-		{"@theme_images_path@/emoticons/sad.gif", Html.escape(":(")},
-		{"@theme_images_path@/emoticons/sleep.gif", Html.escape(":sleep:")},
-		{"@theme_images_path@/emoticons/smile.gif", Html.escape(":D")},
-		{"@theme_images_path@/emoticons/smug.gif", Html.escape(":smug:")},
-		{"@theme_images_path@/emoticons/suspicious.gif", Html.escape("8o")},
-		{"@theme_images_path@/emoticons/tongue.gif", Html.escape(":P")},
-		{"@theme_images_path@/emoticons/unsure.gif", Html.escape(":unsure:")},
-		{"@theme_images_path@/emoticons/wacko.gif", Html.escape(":wacko:")},
-		{"@theme_images_path@/emoticons/wink.gif", Html.escape(":wink:")},
-		{"@theme_images_path@/emoticons/wub.gif", Html.escape(":wub:")}
-	};
+		for (int i = 0; i < emoticons.length; i++) {
+			String[] emoticon = emoticons[i];
+
+			String image = emoticon[0];
+			String text = emoticon[1];
+
+			emoticon[0] = "@theme_images_path@/emoticons/" + image;
+			emoticon[1] = Html.escape(text);
+		}
+	}
 
 	public static String getHTML(String bbcode) {
 		String html = Html.escape(bbcode);
 
 		html = StringUtil.replace(html, _BBCODE_TAGS, _HTML_TAGS);
 
-		for (int i = 0; i < EMOTICONS.length; i++) {
-			String imgTag = "<img src='" + EMOTICONS[i][0] + "' />";
+		for (int i = 0; i < emoticons.length; i++) {
+			String[] emoticon = emoticons[i];
 
-			html = StringUtil.replace(html, EMOTICONS[i][1], imgTag);
+			String imgTag = "<img src='" + emoticon[0] + "' />";
+
+			html = StringUtil.replace(html, emoticon[1], imgTag);
 		}
 
 		BBCodeTag tag = null;
