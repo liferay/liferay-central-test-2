@@ -42,6 +42,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	margin: 0;
 	padding: 0;
 	list-style: none;
+	
 }
 
 /* ---------- Add content styles ---------- */
@@ -1174,6 +1175,15 @@ li.toggle-expand a {
 
 .portlet-document-library .upload-file {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/document_library/page.png);
+}
+
+/* ---------- Wiki ---------- */
+
+.portlet-wiki .wiki-page-info tr th, .portlet-wiki .wiki-page-info tr td {
+	border: 1px solid #ccc;
+	border-left: none;
+	border-right: none;
+	padding: 5px;
 }
 
 /* ---------- Quick note ---------- */

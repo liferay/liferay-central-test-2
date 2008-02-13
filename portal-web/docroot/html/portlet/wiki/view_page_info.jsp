@@ -54,6 +54,8 @@ PortletURL editPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 editPageURL.setParameter("struts_action", "/wiki/edit_page");
 editPageURL.setParameter("redirect", currentURL);
+
+boolean hasPreviousRow = false;
 %>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
@@ -63,7 +65,7 @@ editPageURL.setParameter("redirect", currentURL);
 </liferay-util:include>
 
 <table class="lfr-table wiki-page-info">
-	<tr>
+	<tr class="portlet-section-body">
 		<th>
 			<liferay-ui:message key="title"/>
 		</th>
@@ -71,7 +73,7 @@ editPageURL.setParameter("redirect", currentURL);
 			<%= wikiPage.getTitle() %>
 		</td>
 	</tr>
-	<tr>
+	<tr class="portlet-section-body-alternate">
 		<th>
 			<liferay-ui:message key="format"/>
 		</th>
@@ -79,7 +81,7 @@ editPageURL.setParameter("redirect", currentURL);
 			<liferay-ui:message key="<%= "wiki.formats." + wikiPage.getFormat() %>"/>
 		</td>
 	</tr>
-	<tr>
+	<tr class="portlet-section-body">
 		<th>
 			<liferay-ui:message key="current-version"/>
 		</th>
@@ -87,7 +89,7 @@ editPageURL.setParameter("redirect", currentURL);
 			<%= wikiPage.getVersion() %>
 		</td>
 	</tr>
-	<tr>
+	<tr class="portlet-section-body-alternate">
 		<th>
 			<liferay-ui:message key="created-by"/>
 		</th>
@@ -95,7 +97,7 @@ editPageURL.setParameter("redirect", currentURL);
 			<%= initialPage.getUserName() %> (<%= dateFormatDateTime.format(initialPage.getCreateDate()) %>)
 		</td>
 	</tr>
-	<tr>
+	<tr class="portlet-section-body">
 		<th>
 			<liferay-ui:message key="last-changed-by"/>
 		</th>
@@ -103,7 +105,7 @@ editPageURL.setParameter("redirect", currentURL);
 			<%= wikiPage.getUserName() %> (<%= dateFormatDateTime.format(wikiPage.getCreateDate()) %>)
 		</td>
 	</tr>
-	<tr>
+	<tr class="portlet-section-body-alternate">
 		<th>
 			<liferay-ui:message key="attachments"/>
 		</th>
@@ -131,7 +133,7 @@ editPageURL.setParameter("redirect", currentURL);
 	</tr>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.SUBSCRIBE) %>">
-		<tr>
+		<tr class="portlet-section-body<%= hasPreviousRow ? "-alternate" : "" %>">
 			<th>
 				<liferay-ui:message key="subscription"/>
 			</th>
@@ -197,10 +199,13 @@ editPageURL.setParameter("redirect", currentURL);
 
 			</td>
 		</tr>
+		<%
+			hasPreviousRow = true;
+		 %>
 	</c:if>
 
 	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.PERMISSIONS) || (WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE)) || WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.DELETE) %>">
-	<tr>
+	<tr class="portlet-section-body<%= hasPreviousRow ? "-alternate" : "" %>">
 		<th>
 			<liferay-ui:message key="advanced-actions"/>
 		</th>
