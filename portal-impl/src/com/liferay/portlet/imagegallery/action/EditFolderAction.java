@@ -79,6 +79,7 @@ public class EditFolderAction extends PortletAction {
 			}
 			else if (e instanceof DuplicateFolderNameException ||
 					 e instanceof FolderNameException) {
+
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {

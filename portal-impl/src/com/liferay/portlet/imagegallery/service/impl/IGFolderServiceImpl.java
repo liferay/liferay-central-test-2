@@ -89,32 +89,13 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 	public IGFolder getFolder(long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
-		IGFolder folder =
-			igFolderLocalService.getFolder(groupId, parentFolderId, name);
+		IGFolder folder = igFolderLocalService.getFolder(
+			groupId, parentFolderId, name);
 
 		IGFolderPermission.check(
 			getPermissionChecker(), folder.getFolderId(), ActionKeys.VIEW);
 
 		return folder;
-	}
-
-	public List<IGFolder> getFolders(long groupId, long parentFolderId)
-		throws PortalException, SystemException {
-
-		List<IGFolder> folders =
-			igFolderLocalService.getFolders(groupId, parentFolderId);
-
-		List<IGFolder> sanitized = new ArrayList<IGFolder>(folders.size());
-
-		for (IGFolder folder : folders) {
-			if (IGFolderPermission.contains(
-					getPermissionChecker(), folder, ActionKeys.VIEW)) {
-
-				sanitized.add(folder);
-			}
-		}
-
-		return sanitized;
 	}
 
 	public IGFolder updateFolder(

@@ -89,24 +89,6 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		return igImageLocalService.getImage(imageId);
 	}
 
-	public List<IGImage> getImages(long folderId)
-		throws PortalException, SystemException {
-
-		List<IGImage> images = igImageLocalService.getImages(folderId);
-
-		List<IGImage> sanitized = new ArrayList<IGImage>(images.size());
-
-		for (IGImage image : images) {
-			if (IGImagePermission.contains(
-					getPermissionChecker(), image, ActionKeys.VIEW)) {
-
-				sanitized.add(image);
-			}
-		}
-
-		return sanitized;
-	}
-
 	public IGImage getImageByLargeImageId(long largeImageId)
 		throws PortalException, SystemException {
 

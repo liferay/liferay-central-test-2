@@ -291,42 +291,6 @@ public class IGImageServiceHttp {
 		}
 	}
 
-	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
-		HttpPrincipal httpPrincipal, long folderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		try {
-			Object paramObj0 = new LongWrapper(folderId);
-
-			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
-					"getImages", new Object[] { paramObj0 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portlet.imagegallery.model.IGImage>)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByLargeImageId(
 		HttpPrincipal httpPrincipal, long largeImageId)
 		throws com.liferay.portal.SystemException,
