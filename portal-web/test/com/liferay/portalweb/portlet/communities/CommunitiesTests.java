@@ -35,6 +35,7 @@ public class CommunitiesTests extends BaseTests {
 	public CommunitiesTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(AddCommunitiesTest.class);
 	}
 
 }
