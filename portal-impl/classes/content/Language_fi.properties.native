@@ -1796,7 +1796,6 @@ no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Annetuil
 no=Ei
 node-id=Solmun ID
 node=Solmu
-nodes-and-pages=Solmut ja sivut
 nodes-require-at-least-one-read-role=Solmut edellyttävät ainakin yhtä lukuroolia.
 nodes-require-at-least-one-write-role=Solmut edellyttävät ainakin yhtä kirjoitusroolia.
 nodes=Solmut

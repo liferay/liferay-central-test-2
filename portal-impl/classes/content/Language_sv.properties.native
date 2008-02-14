@@ -1746,7 +1746,6 @@ no-zip-codes-were-found-associated-with-the-given-street-city-and-state=Inga pos
 no=Nej
 node-id=Nod ID
 node=Nod
-nodes-and-pages=Noder och sidor
 nodes-require-at-least-one-read-role=Noder kräver minst en läs roll.
 nodes-require-at-least-one-write-role=Noder kräver minst en skriv roll.
 nodes=Noder

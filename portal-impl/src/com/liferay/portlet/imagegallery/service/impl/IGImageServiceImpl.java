@@ -32,9 +32,6 @@ import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
 
 import java.io.File;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <a href="IGImageServiceImpl.java.html"><b><i>View Source</i></b></a>
  *

@@ -29,9 +29,6 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.service.base.IGFolderServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /**
  * <a href="IGFolderServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
