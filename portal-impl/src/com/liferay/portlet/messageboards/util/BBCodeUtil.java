@@ -112,6 +112,8 @@ public class BBCodeUtil {
 		}
 	}
 
+	public static final String[][] EMOTICONS = emoticons;
+
 	public static String getHTML(String bbcode) {
 		String html = Html.escape(bbcode);
 

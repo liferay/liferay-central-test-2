@@ -330,13 +330,16 @@
 			String path = themeDisplay.getPathThemeImages() + "/emoticons/";
 
 			for (int i = 0; i < BBCodeUtil.EMOTICONS.length; i++) {
+				String image = StringUtil.replace(BBCodeUtil.EMOTICONS[i][0], "@theme_images_path@", themeDisplay.getPathThemeImages());
+
+				image = image.substring(0, image.length() - 2) + "onClick=\"" + renderResponse.getNamespace() + "insertEmoticon('" + BBCodeUtil.EMOTICONS[i][1] + "')\" />";
 			%>
 
 				<c:if test="<%= (i % 3) == 0 %>">
 					<tr>
 				</c:if>
 
-				<td align="center"><img src='<%= StringUtil.replace(BBCodeUtil.EMOTICONS[i][0], "@theme_images_path@", themeDisplay.getPathThemeImages()) %>' onClick="<portlet:namespace />insertEmoticon('<%= BBCodeUtil.EMOTICONS[i][1] %>')" /></td>
+				<td align="center"><%= image %></td>
 
 				<c:if test="<%= (i % 3) == 2 %>">
 					</tr>
