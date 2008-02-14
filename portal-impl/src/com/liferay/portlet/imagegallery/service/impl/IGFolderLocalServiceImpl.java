@@ -32,7 +32,9 @@ import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
+import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
@@ -126,7 +128,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		parentFolderId = getParentFolderId(groupId, parentFolderId);
 		Date now = new Date();
 
-		validate(name);
+		validate(groupId, parentFolderId, name);
 
 		long folderId = counterLocalService.increment();
 
@@ -257,6 +259,12 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return igFolderPersistence.findByPrimaryKey(folderId);
+	}
+
+	public IGFolder getFolder(long groupId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
+		return igFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
 	}
 
 	public List<IGFolder> getFolders(long groupId) throws SystemException {
@@ -436,7 +444,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
-		validate(name);
+		validate(folder.getGroupId(), parentFolderId, name);
 
 		folder.setModifiedDate(new Date());
 		folder.setParentFolderId(parentFolderId);
@@ -535,11 +543,21 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		igFolderPersistence.remove(fromFolder.getFolderId());
 	}
 
-	protected void validate(String name) throws PortalException {
+	protected void validate(long groupId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
 		if ((Validator.isNull(name)) || (name.indexOf("\\\\") != -1) ||
 			(name.indexOf("//") != -1)) {
 
 			throw new FolderNameException();
+		}
+
+		try {
+			igFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
+
+			throw new DuplicateFolderNameException();
+		}
+		catch (NoSuchFolderException nsfe) {
 		}
 	}
 

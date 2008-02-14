@@ -45,6 +45,11 @@
 			<finder-column name="groupId" />
 			<finder-column name="parentFolderId" />
 		</finder>
+		<finder name="G_P_N" return-type="IGFolder">
+			<finder-column name="groupId" />
+			<finder-column name="parentFolderId" />
+			<finder-column name="name" />
+		</finder>
 
 		<!-- References -->
 
@@ -107,6 +112,7 @@
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>
 	<exceptions>
+		<exception>DuplicateFolderName</exception>
 		<exception>FolderName</exception>
 		<exception>ImageName</exception>
 		<exception>ImageSize</exception>

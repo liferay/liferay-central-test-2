@@ -249,6 +249,19 @@ public class IGFolderUtil {
 				   .findByG_P_PrevAndNext(folderId, groupId, parentFolderId, obc);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolder findByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchFolderException {
+		return getPersistence().findByG_P_N(groupId, parentFolderId, name);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGFolder fetchByG_P_N(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_P_N(groupId, parentFolderId, name);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -304,6 +317,13 @@ public class IGFolderUtil {
 		getPersistence().removeByG_P(groupId, parentFolderId);
 	}
 
+	public static void removeByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchFolderException {
+		getPersistence().removeByG_P_N(groupId, parentFolderId, name);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -331,6 +351,11 @@ public class IGFolderUtil {
 	public static int countByG_P(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_P(groupId, parentFolderId);
+	}
+
+	public static int countByG_P_N(long groupId, long parentFolderId,
+		java.lang.String name) throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_P_N(groupId, parentFolderId, name);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

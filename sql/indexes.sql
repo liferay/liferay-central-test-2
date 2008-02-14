@@ -92,6 +92,7 @@ create index LIFERAY_001 on Groups_Permissions (permissionId);
 create index IX_60214CF6 on IGFolder (companyId);
 create index IX_206498F8 on IGFolder (groupId);
 create index IX_1A605E9F on IGFolder (groupId, parentFolderId);
+create index IX_9BBAFB1E on IGFolder (groupId, parentFolderId, name);
 create index IX_F73C0982 on IGFolder (uuid_);
 create index IX_B10EFD68 on IGFolder (uuid_, groupId);
 

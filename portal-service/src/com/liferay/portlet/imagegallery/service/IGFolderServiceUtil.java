@@ -92,6 +92,24 @@ public class IGFolderServiceUtil {
 		return igFolderService.getFolder(folderId);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolder getFolder(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGFolderService igFolderService = IGFolderServiceFactory.getService();
+
+		return igFolderService.getFolder(groupId, parentFolderId, name);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGFolderService igFolderService = IGFolderServiceFactory.getService();
+
+		return igFolderService.getFolders(groupId, parentFolderId);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(
 		long folderId, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean mergeWithParentFolder)

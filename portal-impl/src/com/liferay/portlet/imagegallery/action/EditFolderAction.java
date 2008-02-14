@@ -28,6 +28,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
@@ -76,7 +77,8 @@ public class EditFolderAction extends PortletAction {
 
 				setForward(req, "portlet.image_gallery.error");
 			}
-			else if (e instanceof FolderNameException) {
+			else if (e instanceof DuplicateFolderNameException ||
+					 e instanceof FolderNameException) {
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {

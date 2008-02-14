@@ -1383,6 +1383,134 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public IGFolder findByG_P_N(long groupId, long parentFolderId, String name)
+		throws NoSuchFolderException, SystemException {
+		IGFolder igFolder = fetchByG_P_N(groupId, parentFolderId, name);
+
+		if (igFolder == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No IGFolder exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("parentFolderId=" + parentFolderId);
+
+			msg.append(", ");
+			msg.append("name=" + name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFolderException(msg.toString());
+		}
+
+		return igFolder;
+	}
+
+	public IGFolder fetchByG_P_N(long groupId, long parentFolderId, String name)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
+		String finderClassName = IGFolder.class.getName();
+		String finderMethodName = "fetchByG_P_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(parentFolderId),
+				
+				name
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("parentFolderId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("folderId ASC, ");
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setLong(queryPos++, parentFolderId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				List<IGFolder> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<IGFolder> list = (List<IGFolder>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
 	public List<IGFolder> findWithDynamicQuery(
 		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
@@ -1532,6 +1660,13 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		for (IGFolder igFolder : findByG_P(groupId, parentFolderId)) {
 			remove(igFolder);
 		}
+	}
+
+	public void removeByG_P_N(long groupId, long parentFolderId, String name)
+		throws NoSuchFolderException, SystemException {
+		IGFolder igFolder = findByG_P_N(groupId, parentFolderId, name);
+
+		remove(igFolder);
 	}
 
 	public void removeAll() throws SystemException {
@@ -1873,6 +2008,99 @@ public class IGFolderPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, groupId);
 
 				q.setLong(queryPos++, parentFolderId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByG_P_N(long groupId, long parentFolderId, String name)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = IGFolderModelImpl.CACHE_ENABLED;
+		String finderClassName = IGFolder.class.getName();
+		String finderMethodName = "countByG_P_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(),
+				String.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(parentFolderId),
+				
+				name
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGFolder WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("parentFolderId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setLong(queryPos++, parentFolderId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
 
 				Long count = null;
 

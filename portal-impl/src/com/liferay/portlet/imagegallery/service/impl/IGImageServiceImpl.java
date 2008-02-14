@@ -32,6 +32,9 @@ import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
 
 import java.io.File;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <a href="IGImageServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -84,6 +87,24 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 			getPermissionChecker(), imageId, ActionKeys.VIEW);
 
 		return igImageLocalService.getImage(imageId);
+	}
+
+	public List<IGImage> getImages(long folderId)
+		throws PortalException, SystemException {
+
+		List<IGImage> images = igImageLocalService.getImages(folderId);
+
+		List<IGImage> sanitized = new ArrayList<IGImage>(images.size());
+
+		for (IGImage image : images) {
+			if (IGImagePermission.contains(
+					getPermissionChecker(), image, ActionKeys.VIEW)) {
+
+				sanitized.add(image);
+			}
+		}
+
+		return sanitized;
 	}
 
 	public IGImage getImageByLargeImageId(long largeImageId)

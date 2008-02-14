@@ -195,6 +195,11 @@ public interface IGFolderLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.imagegallery.model.IGFolder getFolder(
+		long groupId, long parentFolderId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
 		long groupId) throws com.liferay.portal.SystemException;
 

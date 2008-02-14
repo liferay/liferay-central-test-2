@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.service.http;
 
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -83,6 +84,15 @@ public class IGImageServiceJSON {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(imageId);
 
 		return IGImageJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONArray getImages(long folderId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
+			IGImageServiceUtil.getImages(folderId);
+
+		return IGImageJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONObject getImageByLargeImageId(long largeImageId)

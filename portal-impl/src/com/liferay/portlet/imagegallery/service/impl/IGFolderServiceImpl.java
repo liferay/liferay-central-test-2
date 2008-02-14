@@ -29,6 +29,9 @@ import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.service.base.IGFolderServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * <a href="IGFolderServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -81,6 +84,37 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			getPermissionChecker(), folderId, ActionKeys.VIEW);
 
 		return igFolderLocalService.getFolder(folderId);
+	}
+
+	public IGFolder getFolder(long groupId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
+		IGFolder folder =
+			igFolderLocalService.getFolder(groupId, parentFolderId, name);
+
+		IGFolderPermission.check(
+			getPermissionChecker(), folder.getFolderId(), ActionKeys.VIEW);
+
+		return folder;
+	}
+
+	public List<IGFolder> getFolders(long groupId, long parentFolderId)
+		throws PortalException, SystemException {
+
+		List<IGFolder> folders =
+			igFolderLocalService.getFolders(groupId, parentFolderId);
+
+		List<IGFolder> sanitized = new ArrayList<IGFolder>(folders.size());
+
+		for (IGFolder folder : folders) {
+			if (IGFolderPermission.contains(
+					getPermissionChecker(), folder, ActionKeys.VIEW)) {
+
+				sanitized.add(folder);
+			}
+		}
+
+		return sanitized;
 	}
 
 	public IGFolder updateFolder(
