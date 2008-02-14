@@ -166,6 +166,6 @@ public class RSSAction extends PortletAction {
 
 	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
-	private static Log _log = LogFactory.getLog(com.liferay.portlet.blogs.action.RSSAction.class);
+	private static Log _log = LogFactory.getLog(RSSAction.class);
 
 }
