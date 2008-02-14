@@ -48,7 +48,7 @@ public class AddUserGroupTest extends BaseTestCase {
 			"selenium");
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("_79_rowIds");
+		selenium.click("document._79_fm._79_rowIds[1]");
 		selenium.click("//input[@value='Update Associations']");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(

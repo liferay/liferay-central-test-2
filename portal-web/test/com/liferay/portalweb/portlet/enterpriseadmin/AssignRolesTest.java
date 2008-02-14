@@ -22,29 +22,30 @@
 
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AssignRolesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
-
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddUserTest.class);
-		addTestSuite(AddOrganizationTest.class);
-		addTestSuite(AddUserGroupTest.class);
-		addTestSuite(AddRolesTest.class);
-		addTestSuite(AssignRolesTest.class);
-		addTestSuite(BlogsRolesTest.class);
-		addTestSuite(CalendarRolesTest.class);
-		addTestSuite(LoginTest.class);
-		addTestSuite(AddPasswordPoliciesTest.class);
-		addTestSuite(EditSettingsTest.class);
+public class AssignRolesTest extends BaseTestCase {
+	public void testAssignRoles() throws Exception {
+		selenium.click("link=Roles");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Assign Members");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Available");
+		selenium.waitForPageToLoad("30000");
+		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
+			"Selenium");
+		selenium.click("//input[@value='Search Users']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_79_allRowIds");
+		selenium.click("//input[@value='Update Associations']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

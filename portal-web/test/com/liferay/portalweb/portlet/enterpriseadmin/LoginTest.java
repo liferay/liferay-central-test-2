@@ -22,29 +22,25 @@
 
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="LoginTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
-
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddUserTest.class);
-		addTestSuite(AddOrganizationTest.class);
-		addTestSuite(AddUserGroupTest.class);
-		addTestSuite(AddRolesTest.class);
-		addTestSuite(AssignRolesTest.class);
-		addTestSuite(BlogsRolesTest.class);
-		addTestSuite(CalendarRolesTest.class);
-		addTestSuite(LoginTest.class);
-		addTestSuite(AddPasswordPoliciesTest.class);
-		addTestSuite(EditSettingsTest.class);
+public class LoginTest extends BaseTestCase {
+	public void testLogin() throws Exception {
+		selenium.click("link=Sign Out");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Sign In");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("login", "test@liferay.com");
+		selenium.type("password", "test");
+		selenium.click("//input[@value='Sign In']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//a[@id=\"my-community-private-pages\"]");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
