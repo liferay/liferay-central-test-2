@@ -26,7 +26,7 @@
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<h1 class="wiki-page-title"><liferay-ui:message key="all-pages" /></h1>
+<h1 class="page-title"><liferay-ui:message key="all-pages" /></h1>
 
 <br />
 

@@ -55,7 +55,7 @@
 	color: #7d7d7d;
 }
 
-.portlet-wiki h1.wiki-page-title {
+.portlet-wiki h1.page-title {
 	border-bottom: 1px solid #AAAAAA;
 	margin: 0px;
 	padding-bottom: 5px;
@@ -67,87 +67,87 @@
 	padding: 3px;
 }
 
-.portlet-wiki .wiki-body .wiki-code {
+.portlet-wiki .content-body .wiki-code {
 	background: #fff;
 	border: 1px solid #777;
 	font-family: monospace;
 	white-space: pre;
 }
 
-.portlet-wiki .wiki-body .wiki-code-lines {
+.portlet-wiki .content-body .code-lines {
 	border-right: 1px solid #ccc;
 	color: #000;
 	margin-right: 5px;
 	padding: 0px 5px 0px 5px;
 }
 
-.portlet-wiki .wiki-body a.wiki-external-link {
+.portlet-wiki .content-body a.external-link {
 	background: transparent url(<%= themeImagesPath %>/wiki/external.png) right top no-repeat;
 	text-decoration: none;
 	padding-right: 10px;
 }
 
-.portlet-wiki .wiki-body a.wiki-external-link:hover {
+.portlet-wiki .content-body a.external-link:hover {
 	background: transparent url(<%= themeImagesPath %>/wiki/external.png) right top no-repeat;
 	text-decoration: underline;
 	padding-right: 11px;
 }
 
-.portlet-wiki .wiki-node-current {
+.portlet-wiki .node-current {
 	text-decoration: none;
 	font-weight: bold;
 }
 
-.portlet-wiki .wiki-page-actions {
+.portlet-wiki .page-actions {
 	float: right;
 }
 
-.portlet-wiki .wiki-page-actions a {
+.portlet-wiki .page-actions a {
 	text-decoration: none;
 }
 
-.portlet-wiki .wiki-page-actions a:hover {
+.portlet-wiki .page-actions a:hover {
 	text-decoration: underline;
 }
 
-.portlet-wiki .wiki-page-info tr th, .portlet-wiki .wiki-page-info tr td {
+.portlet-wiki .page-info tr th, .portlet-wiki .page-info tr td {
 	border: 1px solid #ccc;
 	border-left: none;
 	border-right: none;
 	padding: 5px;
 }
 
-.portlet-wiki .wiki-page-old-version a {
+.portlet-wiki .page-old-version a {
 	color: #ff9933;
 }
 
-.portlet-wiki .wiki-page-old-version {
+.portlet-wiki .page-old-version {
 	color: #ff9933;
 	line-height: 1.2em;
 	margin: -1em 0pt 1.4em 0em;
 	width: auto;
 }
 
-.portlet-wiki .wiki-page-redirect {
+.portlet-wiki .page-redirect {
 	color: #7d7d7d;
 	line-height: 1.2em;
 	margin: -1em 0pt 1.4em 0em;
 	width: auto;
 }
 
-.portlet-wiki .wiki-popup-print {
+.portlet-wiki .popup-print {
 	float: right;
 }
 
-.portlet-wiki .wiki-syntax-help {
+.portlet-wiki .syntax-help {
 	border: 1px dotted gray;
 	padding-left: 10px;
 }
 
-.portlet-wiki .wiki-top-links {
+.portlet-wiki .top-links {
 	padding-bottom: 10px;
 }
 
-.portlet-wiki .wiki-top-links table {
+.portlet-wiki .top-links table {
 	width: 100%;
 }

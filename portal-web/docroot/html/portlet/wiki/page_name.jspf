@@ -23,7 +23,7 @@
 %>
 
 <c:if test="<%= Validator.isNotNull(title) %>">
-	<h1 class="wiki-page-title">
+	<h1 class="page-title">
 		<c:choose>
 			<c:when test="<%= wikiPage != null %>">
 				<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= title %>" /></portlet:renderURL>">

@@ -84,7 +84,7 @@ public class CodeBlock extends AbstractStringFetcher {
 					padding += "&#0149;";
 				}
 
-				sm.append("<span class=\"wiki-code-lines\">");
+				sm.append("<span class=\"code-lines\">");
 				sm.append(padding + (i + 1));
 				sm.append("</span>");
 

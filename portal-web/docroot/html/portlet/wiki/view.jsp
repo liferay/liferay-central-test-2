@@ -69,7 +69,7 @@ printPageURL.setParameter("print", "true");
 			print();
 		</script>
 
-		<div class="wiki-popup-print">
+		<div class="popup-print">
 			<liferay-ui:icon image="print" message="print" url="javascript: print();" />
 		</div>
 	</c:when>
@@ -84,9 +84,9 @@ printPageURL.setParameter("print", "true");
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<h1 class="wiki-page-title">
+<h1 class="page-title">
 	<c:if test="<%= !print %>">
-		<div class="wiki-page-actions">
+		<div class="page-actions">
 			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 				<liferay-ui:icon image="edit" url="<%= editPageURL.toString() %>" />
 			</c:if>
@@ -112,13 +112,13 @@ printPageURL.setParameter("print", "true");
 <br />
 
 <c:if test="<%= originalPage != null %>">
-	<div class="wiki-page-redirect">
+	<div class="page-redirect">
 		(<%= LanguageUtil.format(pageContext, "redirected-from-x", originalPage.getTitle()) %>)
 	</div>
 </c:if>
 
 <c:if test="<%= !wikiPage.isHead() %>">
-	<div class="wiki-page-old-version">
+	<div class="page-old-version">
 		(<liferay-ui:message key="you-are-viewing-an-archived-version-of-this-page" /> (<%= wikiPage.getVersion() %>), <a href="<%= viewPageURL %>"><liferay-ui:message key="go-to-the-latest-version" /></a>)
 	</div>
 </c:if>

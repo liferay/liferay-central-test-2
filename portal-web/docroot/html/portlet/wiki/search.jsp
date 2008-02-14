@@ -49,7 +49,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
 
-<h1 class="wiki-page-title"><liferay-ui:message key="search-results" /></h1>
+<h1 class="page-title"><liferay-ui:message key="search-results" /></h1>
 
 <br />
 

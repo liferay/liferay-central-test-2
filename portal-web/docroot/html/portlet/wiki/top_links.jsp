@@ -52,7 +52,7 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 	portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	%>
 
-	<div class="wiki-top-links">
+	<div class="top-links">
 		<table class="lfr-table">
 		<tr>
 			<td valign="top" width="16">
@@ -74,7 +74,7 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 						WikiNode curNode = (WikiNode)nodes.get(i);
 					%>
 
-						<%= (i == 0) ? "" : "|" %> <a <%= (curNode.getNodeId() == node.getNodeId()) ? "class=\"wiki-node-current\"" : "" %> href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeId" value="<%= String.valueOf(curNode.getNodeId()) %>" /></portlet:renderURL>"><nobr><%= curNode.getName() %></nobr></a>
+						<%= (i == 0) ? "" : "|" %> <a <%= (curNode.getNodeId() == node.getNodeId()) ? "class=\"node-current\"" : "" %> href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeId" value="<%= String.valueOf(curNode.getNodeId()) %>" /></portlet:renderURL>"><nobr><%= curNode.getName() %></nobr></a>
 
 					<%
 					}

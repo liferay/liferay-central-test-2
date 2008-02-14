@@ -263,7 +263,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 	<c:when test="<%= className.equals(WikiPage.class.getName()) %>">
 		<h3 class="journal-content-title"><%= title %></h3>
 
-		<div class="wiki-body">
+		<div class="content-body">
 
 			<%
 			WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
