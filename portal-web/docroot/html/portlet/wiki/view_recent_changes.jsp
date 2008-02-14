@@ -33,3 +33,14 @@
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="recent_changes" />
 </liferay-util:include>
+
+<br />
+
+<%
+WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+%>
+
+<liferay-ui:icon image="rss" label="<%= true %>" message="Atom 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParamsAtom %>' target="_blank" /> &nbsp;&nbsp;
+<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParamsRSS10 %>' target="_blank" /> &nbsp;&nbsp;
+<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 2.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParamsRSS20 %>' target="_blank" /> &nbsp;&nbsp;
+

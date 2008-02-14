@@ -429,18 +429,6 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 				</select>
 			</td>
 		</tr>
-		<tr>
-			<td>
-				<liferay-ui:message key="format" />
-			</td>
-			<td>
-				<select name="<portlet:namespace />rssFormat">
-					<option <%= (rssFormat.equals("rss10")) ? "selected" : "" %> value="rss10">RSS 1.0</option>
-					<option <%= (rssFormat.equals("rss20")) ? "selected" : "" %> value="rss20">RSS 2.0</option>
-					<option <%= (rssFormat.equals("atom10")) ? "selected" : "" %> value="atom10">Atom 1.0</option>
-				</select>
-			</td>
-		</tr>
 		</table>
 	</c:when>
 </c:choose>

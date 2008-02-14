@@ -177,11 +177,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		int rssDelta = ParamUtil.getInteger(req, "rssDelta");
 		String rssDisplayStyle = ParamUtil.getString(req, "rssDisplayStyle");
-		String rssFormat = ParamUtil.getString(req, "rssFormat");
 
 		prefs.setValue("rss-delta", String.valueOf(rssDelta));
 		prefs.setValue("rss-display-style", rssDisplayStyle);
-		prefs.setValue("rss-format", rssFormat);
 	}
 
 }
