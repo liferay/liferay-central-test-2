@@ -24,6 +24,13 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
+.portlet-rss .header {
+	cursor: default;
+	font-weight: bold;
+	margin-top: 2px;
+	padding: 2px 5px;
+}
+
 .portlet-rss .feed-date {
 	background: url(<%= themeImagesPath %>/common/time.png) no-repeat 0 50%;
 	margin: 0.3em 0;

@@ -206,7 +206,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				<c:if test="<%= folders.size() > 0 %>">
-					<link type="text/css" rel="stylesheet" href="<%= themeDisplay.getPathContext() %>/html/portlet/document_library/portlet.css">
+					<link type="text/css" rel="stylesheet" href="<%= themeDisplay.getPathContext() %>/html/portlet/document_library/css.jsp">
 
 					<style type="text/css">
 
