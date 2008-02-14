@@ -87,6 +87,26 @@ public class WikiPageServiceUtil {
 		wikiPageService.deletePageAttachment(nodeId, title, fileName);
 	}
 
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getNodePages(
+		long nodeId, int max)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+
+		return wikiPageService.getNodePages(nodeId, max);
+	}
+
+	public static java.lang.String getNodePagesRSS(long nodeId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+
+		return wikiPageService.getNodePagesRSS(nodeId, max, type, version,
+			displayStyle, feedURL, entryURL);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
 		throws com.liferay.portal.PortalException,
@@ -103,6 +123,18 @@ public class WikiPageServiceUtil {
 		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
 
 		return wikiPageService.getPage(nodeId, title, version);
+	}
+
+	public static java.lang.String getPagesRSS(long companyId, long nodeId,
+		java.lang.String title, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL, java.util.Locale locale)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		WikiPageService wikiPageService = WikiPageServiceFactory.getService();
+
+		return wikiPageService.getPagesRSS(companyId, nodeId, title, max, type,
+			version, displayStyle, feedURL, entryURL, locale);
 	}
 
 	public static void movePage(long nodeId, java.lang.String title,

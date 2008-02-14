@@ -69,6 +69,17 @@ public interface WikiPageService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getNodePages(
+		long nodeId, int max)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.lang.String getNodePagesRSS(long nodeId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
@@ -76,6 +87,13 @@ public interface WikiPageService {
 
 	public com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title, double version)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.lang.String getPagesRSS(long companyId, long nodeId,
+		java.lang.String title, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL, java.util.Locale locale)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

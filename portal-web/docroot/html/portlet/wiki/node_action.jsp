@@ -52,6 +52,8 @@ WikiNode node = (WikiNode)row.getObject();
 		<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 	</c:if>
 
+	<liferay-ui:icon image="rss" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParams %>' target="_blank" />
+
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.SUBSCRIBE) %>">
 		<c:choose>
 			<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), WikiNode.class.getName(), node.getNodeId()) %>">

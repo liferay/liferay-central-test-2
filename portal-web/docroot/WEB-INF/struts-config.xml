@@ -1322,6 +1322,8 @@
 			<forward name="portlet.wiki.move_page" path="portlet.wiki.move_page" />
 		</action>
 
+		<action path="/wiki/rss" type="com.liferay.portlet.wiki.action.RSSAction" />
+
 		<action path="/wiki/search" type="com.liferay.portlet.wiki.action.EditNodeAction">
 			<forward name="portlet.wiki.edit_node" path="portlet.wiki.search" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />

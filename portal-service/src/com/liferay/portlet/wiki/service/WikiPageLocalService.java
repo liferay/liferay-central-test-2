@@ -246,6 +246,10 @@ public interface WikiPageLocalService {
 	public java.util.List getPages(long nodeId, java.lang.String title,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
+	public java.util.List getPages(long nodeId, java.lang.String title,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getPages(long nodeId, boolean head, int begin, int end)
 		throws com.liferay.portal.SystemException;
 

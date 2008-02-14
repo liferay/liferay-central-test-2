@@ -2490,9 +2490,30 @@ Liferay.Service.Wiki.WikiPage = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getNodePages: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getNodePages";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getNodePagesRSS: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getNodePagesRSS";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getPage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getPage";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getPagesRSS: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getPagesRSS";
 
 		return Liferay.Service.ajax(params, callback);
 	},

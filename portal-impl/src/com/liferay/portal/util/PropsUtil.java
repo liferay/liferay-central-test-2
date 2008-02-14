@@ -1239,6 +1239,8 @@ public class PropsUtil {
 
 	public static final String WIKI_FORMATS_HELP_URL = "wiki.formats.help.url";
 
+	public static final String WIKI_RSS_ABSTRACT_LENGTH = "wiki.rss.abstract.length";
+
 	public static final String WIKI_EMAIL_FROM_NAME = "wiki.email.from.name";
 
 	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";

@@ -25,6 +25,7 @@ package com.liferay.portlet.wiki.service.http;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.DoubleWrapper;
+import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
@@ -259,6 +260,114 @@ public class WikiPageServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getNodePages(
+		HttpPrincipal httpPrincipal, long nodeId, int max)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(nodeId);
+
+			Object paramObj1 = new IntegerWrapper(max);
+
+			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
+					"getNodePages", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.wiki.model.WikiPage>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.lang.String getNodePagesRSS(
+		HttpPrincipal httpPrincipal, long nodeId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(nodeId);
+
+			Object paramObj1 = new IntegerWrapper(max);
+
+			Object paramObj2 = type;
+
+			if (type == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new DoubleWrapper(version);
+
+			Object paramObj4 = displayStyle;
+
+			if (displayStyle == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = feedURL;
+
+			if (feedURL == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = entryURL;
+
+			if (entryURL == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
+					"getNodePagesRSS",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException,
@@ -338,6 +447,91 @@ public class WikiPageServiceHttp {
 			}
 
 			return (com.liferay.portlet.wiki.model.WikiPage)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.lang.String getPagesRSS(HttpPrincipal httpPrincipal,
+		long companyId, long nodeId, java.lang.String title, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL,
+		java.util.Locale locale)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(companyId);
+
+			Object paramObj1 = new LongWrapper(nodeId);
+
+			Object paramObj2 = title;
+
+			if (title == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(max);
+
+			Object paramObj4 = type;
+
+			if (type == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = new DoubleWrapper(version);
+
+			Object paramObj6 = displayStyle;
+
+			if (displayStyle == null) {
+				paramObj6 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj7 = feedURL;
+
+			if (feedURL == null) {
+				paramObj7 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj8 = entryURL;
+
+			if (entryURL == null) {
+				paramObj8 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj9 = locale;
+
+			if (locale == null) {
+				paramObj9 = new NullWrapper("java.util.Locale");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WikiPageServiceUtil.class.getName(),
+					"getPagesRSS",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
+						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.lang.String)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

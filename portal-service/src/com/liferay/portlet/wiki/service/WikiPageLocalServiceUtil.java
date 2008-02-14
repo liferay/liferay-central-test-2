@@ -494,6 +494,14 @@ public class WikiPageLocalServiceUtil {
 		return wikiPageLocalService.getPages(nodeId, title, begin, end);
 	}
 
+	public static java.util.List getPages(long nodeId, java.lang.String title,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getPages(nodeId, title, begin, end, obc);
+	}
+
 	public static java.util.List getPages(long nodeId, boolean head, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();

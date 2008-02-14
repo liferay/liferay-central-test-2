@@ -214,6 +214,8 @@ int count = 0;
 				<liferay-ui:icon image="permissions" message="permissions" url="<%= permissionsURL %>" label="<%= true %>" />
 			</c:if>
 
+			<liferay-ui:icon image="rss" label="<%= true %>" message="RSS" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() +  rssURLParams %>' target="_blank" /> &nbsp;&nbsp;
+
 			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) && WikiNodePermission.contains(permissionChecker, wikiPage.getNodeId(), ActionKeys.ADD_PAGE) %>">
 
 				<%

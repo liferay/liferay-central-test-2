@@ -31,6 +31,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -503,6 +504,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		return wikiPagePersistence.findByN_T(
 			nodeId, title, begin, end, new PageCreateDateComparator(false));
+	}
+
+	public List getPages(
+			long nodeId, String title, int begin, int end,
+			OrderByComparator obc)
+		throws SystemException {
+
+		return wikiPagePersistence.findByN_T(nodeId, title, begin, end, obc);
 	}
 
 	public List getPages(long nodeId, boolean head, int begin, int end)

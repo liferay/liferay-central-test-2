@@ -24,6 +24,7 @@ package com.liferay.portlet.wiki.service.http;
 
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -91,6 +92,26 @@ public class WikiPageServiceJSON {
 		WikiPageServiceUtil.deletePageAttachment(nodeId, title, fileName);
 	}
 
+	public static JSONArray getNodePages(long nodeId, int max)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.List<com.liferay.portlet.wiki.model.WikiPage> returnValue = WikiPageServiceUtil.getNodePages(nodeId,
+				max);
+
+		return WikiPageJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static java.lang.String getNodePagesRSS(long nodeId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.lang.String returnValue = WikiPageServiceUtil.getNodePagesRSS(nodeId,
+				max, type, version, displayStyle, feedURL, entryURL);
+
+		return returnValue;
+	}
+
 	public static JSONObject getPage(long nodeId, java.lang.String title)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -108,6 +129,19 @@ public class WikiPageServiceJSON {
 				title, version);
 
 		return WikiPageJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static java.lang.String getPagesRSS(long companyId, long nodeId,
+		java.lang.String title, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL, String locale)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.lang.String returnValue = WikiPageServiceUtil.getPagesRSS(companyId,
+				nodeId, title, max, type, version, displayStyle, feedURL,
+				entryURL, new java.util.Locale(locale));
+
+		return returnValue;
 	}
 
 	public static void subscribePage(long nodeId, java.lang.String title)

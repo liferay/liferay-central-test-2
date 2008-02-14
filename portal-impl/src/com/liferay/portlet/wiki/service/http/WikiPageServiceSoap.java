@@ -118,6 +118,38 @@ public class WikiPageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPageSoap[] getNodePages(
+		long nodeId, int max) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.wiki.model.WikiPage> returnValue = WikiPageServiceUtil.getNodePages(nodeId,
+					max);
+
+			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getNodePagesRSS(long nodeId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws RemoteException {
+		try {
+			java.lang.String returnValue = WikiPageServiceUtil.getNodePagesRSS(nodeId,
+					max, type, version, displayStyle, feedURL, entryURL);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPageSoap getPage(
 		long nodeId, java.lang.String title) throws RemoteException {
 		try {
@@ -141,6 +173,24 @@ public class WikiPageServiceSoap {
 					title, version);
 
 			return com.liferay.portlet.wiki.model.WikiPageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getPagesRSS(long companyId, long nodeId,
+		java.lang.String title, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL, String locale) throws RemoteException {
+		try {
+			java.lang.String returnValue = WikiPageServiceUtil.getPagesRSS(companyId,
+					nodeId, title, max, type, version, displayStyle, feedURL,
+					entryURL, new java.util.Locale(locale));
+
+			return returnValue;
 		}
 		catch (Exception e) {
 			_log.error(e, e);

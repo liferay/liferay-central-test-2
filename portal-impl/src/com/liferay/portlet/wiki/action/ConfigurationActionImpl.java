@@ -71,6 +71,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		else if (tabs2.equals("page-updated-email")) {
 			updateEmailPageUpdated(req, prefs);
 		}
+		else if (tabs2.equals("rss")) {
+			updateRSS(req, prefs);
+		}
 
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
@@ -167,6 +170,18 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.setValue(
 				"email-page-updated-signature", emailPageUpdatedSignature);
 		}
+	}
+
+	protected void updateRSS(ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		int rssDelta = ParamUtil.getInteger(req, "rssDelta");
+		String rssDisplayStyle = ParamUtil.getString(req, "rssDisplayStyle");
+		String rssFormat = ParamUtil.getString(req, "rssFormat");
+
+		prefs.setValue("rss-delta", String.valueOf(rssDelta));
+		prefs.setValue("rss-display-style", rssDisplayStyle);
+		prefs.setValue("rss-format", rssFormat);
 	}
 
 }
