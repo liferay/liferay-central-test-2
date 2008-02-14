@@ -39,6 +39,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.base.WikiPageServiceBaseImpl;
 import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
+import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
@@ -337,8 +338,10 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			Locale locale)
 		throws Exception {
 
-		String sourceContent = _addBreakLines(lastPageVersion.getContent());
-		String targetContent = _addBreakLines(page.getContent());
+		String sourceContent = WikiUtil.processContent(
+			lastPageVersion.getContent());
+		String targetContent = WikiUtil.processContent(
+			page.getContent());
 
 		sourceContent = Html.escape(sourceContent);
 		targetContent = Html.escape(targetContent);
@@ -365,14 +368,6 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		variables.put("targetResults", diffResults[1]);
 
 		return VelocityUtil.evaluate(template, variables);
-	}
-
-	private String _addBreakLines(String content) {
-		content = content.replaceAll("</p>", "</p>\n");
-		content = content.replaceAll("</br>", "</br>\n");
-		content = content.replaceAll("</div>", "</div>\n");
-
-		return content;
 	}
 
 	private static final int _MAX_END = 200;

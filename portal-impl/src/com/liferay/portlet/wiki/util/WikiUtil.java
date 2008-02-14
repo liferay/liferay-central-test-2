@@ -246,6 +246,14 @@ public class WikiUtil {
 		return sm.toString();
 	}
 
+	public static String processContent(String content) {
+		content = content.replaceAll("</p>", "</p>\n");
+		content = content.replaceAll("</br>", "</br>\n");
+		content = content.replaceAll("</div>", "</div>\n");
+
+		return content;
+	}
+
 	public static boolean validate(
 			long nodeId, String content, String format)
 		throws WikiFormatException {

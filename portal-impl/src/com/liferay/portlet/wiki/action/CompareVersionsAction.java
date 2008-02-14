@@ -29,6 +29,7 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
+import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.util.Html;
 import com.liferay.util.diff.DiffUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -96,8 +97,8 @@ public class CompareVersionsAction extends PortletAction {
 		String sourceContent = sourcePage.getContent();
 		String targetContent = targetPage.getContent();
 
-		sourceContent = processContent(sourceContent);
-		targetContent = processContent(targetContent);
+		sourceContent = WikiUtil.processContent(sourceContent);
+		targetContent = WikiUtil.processContent(targetContent);
 
 		if (type.equals("escape")) {
 			sourceContent = Html.escape(sourceContent);
@@ -116,14 +117,6 @@ public class CompareVersionsAction extends PortletAction {
 		req.setAttribute(
 			WebKeys.TARGET_NAME, title + StringPool.SPACE + targetVersion);
 		req.setAttribute(WebKeys.DIFF_RESULTS, diffResults);
-	}
-
-	protected String processContent(String content) {
-		content = content.replaceAll("</p>", "</p>\n");
-		content = content.replaceAll("</br>", "</br>\n");
-		content = content.replaceAll("</div>", "</div>\n");
-
-		return content;
 	}
 
 }
