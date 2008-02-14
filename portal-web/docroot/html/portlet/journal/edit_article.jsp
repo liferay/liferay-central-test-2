@@ -891,7 +891,7 @@ String[] availableLocales = null;
 		<div>
 			<br />
 
-			<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.UPDATE) %>">
+			<c:if test="<%= JournalArticlePermission.contains(permissionChecker, groupId, articleId, ActionKeys.UPDATE) %>">
 				<input type="submit" value="<liferay-ui:message key="save" />" />
 
 				<input name="save-and-continue" type="button" value="<liferay-ui:message key="save-and-continue" />" onClick="<portlet:namespace />saveAndContinueArticle();" />
