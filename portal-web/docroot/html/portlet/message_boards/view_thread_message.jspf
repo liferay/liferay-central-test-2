@@ -344,10 +344,10 @@
 				<c:if test="<%= message.isAttachments() %>">
 
 					<%
-					String[] attachments = message.getAttachmentsFiles();
+					String[] attachmentsFiles = message.getAttachmentsFiles();
 
-					for (int j = 0; j < attachments.length; j++) {
-						String fileName = FileUtil.getShortFileName(attachments[j]);
+					for (int j = 0; j < attachmentsFiles.length; j++) {
+						String fileName = FileUtil.getShortFileName(attachmentsFiles[j]);
 
 						if (StringUtil.endsWith(fileName, ".gif") || StringUtil.endsWith(fileName, ".jpg") || StringUtil.endsWith(fileName, ".png")) {
 					%>
@@ -369,9 +369,9 @@
 						<td>
 
 							<%
-							for (int j = 0; j < attachments.length; j++) {
-								String fileName = FileUtil.getShortFileName(attachments[j]);
-								long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyImpl.SYSTEM, attachments[j]);
+							for (int j = 0; j < attachmentsFiles.length; j++) {
+								String fileName = FileUtil.getShortFileName(attachmentsFiles[j]);
+								long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyImpl.SYSTEM, attachmentsFiles[j]);
 							%>
 
 								<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/message_boards/get_message_attachment" /><portlet:param name="messageId" value="<%= String.valueOf(message.getMessageId()) %>" /><portlet:param name="attachment" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a> (<%= TextFormatter.formatKB(fileSize, locale) %>k)
