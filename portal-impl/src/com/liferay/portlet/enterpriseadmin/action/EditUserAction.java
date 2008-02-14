@@ -248,10 +248,10 @@ public class EditUserAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		boolean autoPassword = true;
-		String password1 = null;
-		String password2 = null;
-		boolean autoScreenName = false;
+		boolean autoPassword = ParamUtil.getBoolean(req, "autoPassword", true);
+		String password1 = ParamUtil.getString(req, "password1");
+		String password2 = ParamUtil.getString(req, "password2");
+		boolean autoScreenName = ParamUtil.getBoolean(req, "autoScreenName");
 		String screenName = ParamUtil.getString(req, "screenName");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
 		String languageId = ParamUtil.getString(req, "languageId");
@@ -262,7 +262,7 @@ public class EditUserAction extends PortletAction {
 		String lastName = ParamUtil.getString(req, "lastName");
 		int prefixId = ParamUtil.getInteger(req, "prefixId");
 		int suffixId = ParamUtil.getInteger(req, "suffixId");
-		boolean male = ParamUtil.get(req, "male", true);
+		boolean male = ParamUtil.getBoolean(req, "male", true);
 		int birthdayMonth = ParamUtil.getInteger(req, "birthdayMonth");
 		int birthdayDay = ParamUtil.getInteger(req, "birthdayDay");
 		int birthdayYear = ParamUtil.getInteger(req, "birthdayYear");
