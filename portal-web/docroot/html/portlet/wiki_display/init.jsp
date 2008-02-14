@@ -43,4 +43,5 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 long nodeId = GetterUtil.getLong(prefs.getValue("node-id", StringPool.BLANK));
+String title = GetterUtil.getString(prefs.getValue("title", WikiPageImpl.FRONT_PAGE));
 %>

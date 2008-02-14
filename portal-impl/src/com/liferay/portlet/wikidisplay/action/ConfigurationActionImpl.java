@@ -59,6 +59,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			}
 
 			long nodeId = ParamUtil.getLong(req, "nodeId");
+			String title = ParamUtil.getString(req, "title");
 
 			WikiNode node = WikiNodeServiceUtil.getNode(nodeId);
 
@@ -70,6 +71,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 					req, portletResource);
 
 			prefs.setValue("node-id", String.valueOf(node.getNodeId()));
+			prefs.setValue("title", title);
 
 			prefs.store();
 
