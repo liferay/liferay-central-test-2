@@ -106,7 +106,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String emailEventReminderEnabled = ParamUtil.getString(
+		boolean emailEventReminderEnabled = ParamUtil.getBoolean(
 			req, "emailEventReminderEnabled");
 		String emailEventReminderSubject = ParamUtil.getString(
 			req, "emailEventReminderSubject");
@@ -121,7 +121,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 		else {
 			prefs.setValue(
-				"email-event-reminder-enabled", emailEventReminderEnabled);
+				"email-event-reminder-enabled",
+				String.valueOf(emailEventReminderEnabled));
 			prefs.setValue(
 				"email-event-reminder-subject", emailEventReminderSubject);
 			prefs.setValue("email-event-reminder-body", emailEventReminderBody);

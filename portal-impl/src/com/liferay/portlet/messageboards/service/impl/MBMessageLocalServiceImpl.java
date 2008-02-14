@@ -1378,7 +1378,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String subjectPrefix = null;
 			String body = null;
 			String signature = null;
-			boolean htmlFormat = MBUtil.getEmailMessageHtmlFormat(prefs);
+			boolean htmlFormat = MBUtil.getEmailHtmlFormat(prefs);
 
 			if (update) {
 				subjectPrefix = MBUtil.getEmailMessageUpdatedSubjectPrefix(

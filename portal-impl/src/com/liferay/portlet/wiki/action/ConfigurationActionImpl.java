@@ -110,7 +110,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String emailPageAddedEnabled = ParamUtil.getString(
+		boolean emailPageAddedEnabled = ParamUtil.getBoolean(
 			req, "emailPageAddedEnabled");
 		String emailPageAddedSubjectPrefix = ParamUtil.getString(
 			req, "emailPageAddedSubjectPrefix");
@@ -126,7 +126,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(req, "emailPageAddedBody");
 		}
 		else {
-			prefs.setValue("email-page-added-enabled", emailPageAddedEnabled);
+			prefs.setValue(
+				"email-page-added-enabled",
+				String.valueOf(emailPageAddedEnabled));
 			prefs.setValue(
 				"email-page-added-subject-prefix", emailPageAddedSubjectPrefix);
 			prefs.setValue("email-page-added-body", emailPageAddedBody);
@@ -139,7 +141,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String emailPageUpdatedEnabled = ParamUtil.getString(
+		boolean emailPageUpdatedEnabled = ParamUtil.getBoolean(
 			req, "emailPageUpdatedEnabled");
 		String emailPageUpdatedSubjectPrefix = ParamUtil.getString(
 			req, "emailPageUpdatedSubjectPrefix");
@@ -156,7 +158,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 		else {
 			prefs.setValue(
-				"email-page-updated-enabled", emailPageUpdatedEnabled);
+				"email-page-updated-enabled",
+				String.valueOf(emailPageUpdatedEnabled));
 			prefs.setValue(
 				"email-page-updated-subject-prefix",
 				emailPageUpdatedSubjectPrefix);

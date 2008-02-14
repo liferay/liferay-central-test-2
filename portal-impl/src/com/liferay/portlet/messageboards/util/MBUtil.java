@@ -227,6 +227,19 @@ public class MBUtil {
 		return prefs.getValue("email-from-name", emailFromName);
 	}
 
+	public static boolean getEmailHtmlFormat(PortletPreferences prefs) {
+		String emailHtmlFormat = prefs.getValue(
+			"email-html-format", StringPool.BLANK);
+
+		if (Validator.isNotNull(emailHtmlFormat)) {
+			return GetterUtil.getBoolean(emailHtmlFormat);
+		}
+		else {
+			return GetterUtil.getBoolean(PropsUtil.get(
+				PropsUtil.MESSAGE_BOARDS_EMAIL_HTML_FORMAT));
+		}
+	}
+
 	public static boolean getEmailMessageAddedEnabled(
 		PortletPreferences prefs) {
 
@@ -285,21 +298,6 @@ public class MBUtil {
 		else {
 			return ContentUtil.get(PropsUtil.get(
 				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT_PREFIX));
-		}
-	}
-
-	public static boolean getEmailMessageHtmlFormat(
-		PortletPreferences prefs) {
-
-		String emailMessageHtmlFormat = prefs.getValue(
-			"email-message-html-format", StringPool.BLANK);
-
-		if (Validator.isNotNull(emailMessageHtmlFormat)) {
-			return GetterUtil.getBoolean(emailMessageHtmlFormat);
-		}
-		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_HTML_FORMAT));
 		}
 	}
 

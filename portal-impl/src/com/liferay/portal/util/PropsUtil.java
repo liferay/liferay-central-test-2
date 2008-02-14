@@ -1105,6 +1105,8 @@ public class PropsUtil {
 
 	public static final String MESSAGE_BOARDS_EMAIL_FROM_ADDRESS = "message.boards.email.from.address";
 
+	public static final String MESSAGE_BOARDS_EMAIL_HTML_FORMAT = "message.boards.email.html.format";
+
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED = "message.boards.email.message.added.enabled";
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT_PREFIX = "message.boards.email.message.added.subject.prefix";
@@ -1112,8 +1114,6 @@ public class PropsUtil {
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY = "message.boards.email.message.added.body";
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SIGNATURE = "message.boards.email.message.added.signature";
-
-	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_HTML_FORMAT = "message.boards.email.message.html.format";
 
 	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED = "message.boards.email.message.updated.enabled";
 

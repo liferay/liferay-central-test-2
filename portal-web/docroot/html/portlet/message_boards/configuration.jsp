@@ -35,7 +35,6 @@ String emailFromAddress = ParamUtil.getString(request, "emailFromAddress", MBUti
 String emailMessageAddedSubjectPrefix = ParamUtil.getString(request, "emailMessageAddedSubjectPrefix", MBUtil.getEmailMessageAddedSubjectPrefix(prefs));
 String emailMessageAddedBody = ParamUtil.getString(request, "emailMessageAddedBody", MBUtil.getEmailMessageAddedBody(prefs));
 String emailMessageAddedSignature = ParamUtil.getString(request, "emailMessageAddedSignature", MBUtil.getEmailMessageAddedSignature(prefs));
-boolean emailMessageHtmlFormat = ParamUtil.getBoolean(request, "emailMessageHtmlFormat", MBUtil.getEmailMessageHtmlFormat(prefs));
 
 String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(request, "emailMessageUpdatedSubjectPrefix", MBUtil.getEmailMessageUpdatedSubjectPrefix(prefs));
 String emailMessageUpdatedBody = ParamUtil.getString(request, "emailMessageUpdatedBody", MBUtil.getEmailMessageUpdatedBody(prefs));
@@ -122,7 +121,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 				<liferay-ui:message key="html-format" />
 			</td>
 			<td>
-				<input name="<portlet:namespace />emailMessageHtmlFormat" type="checkbox" <%= (emailMessageHtmlFormat ? "checked" : "" ) %> />
+				<liferay-ui:input-checkbox param="emailHtmlFormat" defaultValue="<%= MBUtil.getEmailHtmlFormat(prefs) %>" />
 			</td>
 		</tr>
 		</table>

@@ -125,8 +125,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 		String emailFromName = ParamUtil.getString(req, "emailFromName");
 		String emailFromAddress = ParamUtil.getString(req, "emailFromAddress");
-		String emailMessageHtmlFormat = ParamUtil.getString(
-				req, "emailMessageHtmlFormat");
+		boolean emailHtmlFormat = ParamUtil.getBoolean(req, "emailHtmlFormat");
 
 		if (Validator.isNull(emailFromName)) {
 			SessionErrors.add(req, "emailFromName");
@@ -140,7 +139,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.setValue("email-from-name", emailFromName);
 			prefs.setValue("email-from-address", emailFromAddress);
 			prefs.setValue(
-					"email-message-html-format", emailMessageHtmlFormat);
+				"email-html-format", String.valueOf(emailHtmlFormat));
 		}
 	}
 
@@ -148,7 +147,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String emailMessageAddedEnabled = ParamUtil.getString(
+		boolean emailMessageAddedEnabled = ParamUtil.getBoolean(
 			req, "emailMessageAddedEnabled");
 		String emailMessageAddedSubjectPrefix = ParamUtil.getString(
 			req, "emailMessageAddedSubjectPrefix");
@@ -165,7 +164,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 		else {
 			prefs.setValue(
-				"email-message-added-enabled", emailMessageAddedEnabled);
+				"email-message-added-enabled",
+				String.valueOf(emailMessageAddedEnabled));
 			prefs.setValue(
 				"email-message-added-subject-prefix",
 				emailMessageAddedSubjectPrefix);
@@ -179,7 +179,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String emailMessageUpdatedEnabled = ParamUtil.getString(
+		boolean emailMessageUpdatedEnabled = ParamUtil.getBoolean(
 			req, "emailMessageUpdatedEnabled");
 		String emailMessageUpdatedSubjectPrefix = ParamUtil.getString(
 			req, "emailMessageUpdatedSubjectPrefix");
@@ -196,7 +196,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 		else {
 			prefs.setValue(
-				"email-message-updated-enabled", emailMessageUpdatedEnabled);
+				"email-message-updated-enabled",
+				String.valueOf(emailMessageUpdatedEnabled));
 			prefs.setValue(
 				"email-message-updated-subject-prefix",
 				emailMessageUpdatedSubjectPrefix);

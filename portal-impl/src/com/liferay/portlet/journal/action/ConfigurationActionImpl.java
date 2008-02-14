@@ -115,7 +115,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String emailArticleApprovalDeniedEnabled = ParamUtil.getString(
+		boolean emailArticleApprovalDeniedEnabled = ParamUtil.getBoolean(
 			req, "emailArticleApprovalDeniedEnabled");
 		String emailArticleApprovalDeniedSubject = ParamUtil.getString(
 			req, "emailArticleApprovalDeniedSubject");
@@ -131,7 +131,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		else {
 			prefs.setValue(
 				"email-article-approval-denied-enabled",
-				emailArticleApprovalDeniedEnabled);
+				String.valueOf(emailArticleApprovalDeniedEnabled));
 			prefs.setValue(
 				"email-article-approval-denied-subject",
 				emailArticleApprovalDeniedSubject);
@@ -145,7 +145,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String emailArticleApprovalGrantedEnabled = ParamUtil.getString(
+		boolean emailArticleApprovalGrantedEnabled = ParamUtil.getBoolean(
 			req, "emailArticleApprovalGrantedEnabled");
 		String emailArticleApprovalGrantedSubject = ParamUtil.getString(
 			req, "emailArticleApprovalGrantedSubject");
@@ -161,7 +161,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		else {
 			prefs.setValue(
 				"email-article-approval-granted-enabled",
-				emailArticleApprovalGrantedEnabled);
+				String.valueOf(emailArticleApprovalGrantedEnabled));
 			prefs.setValue(
 				"email-article-approval-granted-subject",
 				emailArticleApprovalGrantedSubject);
@@ -175,7 +175,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String emailArticleApprovalRequestedEnabled = ParamUtil.getString(
+		boolean emailArticleApprovalRequestedEnabled = ParamUtil.getBoolean(
 			req, "emailArticleApprovalRequestedEnabled");
 		String emailArticleApprovalRequestedSubject = ParamUtil.getString(
 			req, "emailArticleApprovalRequestedSubject");
@@ -191,7 +191,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		else {
 			prefs.setValue(
 				"email-article-approval-requested-enabled",
-				emailArticleApprovalRequestedEnabled);
+				String.valueOf(emailArticleApprovalRequestedEnabled));
 			prefs.setValue(
 				"email-article-approval-requested-subject",
 				emailArticleApprovalRequestedSubject);
@@ -205,7 +205,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		String emailArticleReviewEnabled = ParamUtil.getString(
+		boolean emailArticleReviewEnabled = ParamUtil.getBoolean(
 			req, "emailArticleReviewEnabled");
 		String emailArticleReviewSubject = ParamUtil.getString(
 			req, "emailArticleReviewSubject");
@@ -220,7 +220,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 		else {
 			prefs.setValue(
-				"email-article-review-enabled", emailArticleReviewEnabled);
+				"email-article-review-enabled",
+				String.valueOf(emailArticleReviewEnabled));
 			prefs.setValue(
 				"email-article-review-subject", emailArticleReviewSubject);
 			prefs.setValue("email-article-review-body", emailArticleReviewBody);
