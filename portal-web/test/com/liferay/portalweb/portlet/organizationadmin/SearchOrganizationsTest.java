@@ -22,22 +22,26 @@
 
 package com.liferay.portalweb.portlet.organizationadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="OrganizationAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchOrganizationsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class OrganizationAdminTests extends BaseTests {
-
-	public OrganizationAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(SearchUsersTest.class);
-		addTestSuite(SearchOrganizationsTest.class);
-		addTestSuite(SearchUserGroupsTest.class);
+public class SearchOrganizationsTest extends BaseTestCase {
+	public void testSearchOrganizations() throws Exception {
+		selenium.click("link=Organizations");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("toggle_id_enterprise_admin_organization_searchkeywords",
+			"liferay");
+		selenium.click("//input[@value='Search Organizations']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("Liferay Hong Kong"));
+		verifyTrue(selenium.isTextPresent("Liferay Los Angeles"));
+		verifyTrue(selenium.isTextPresent("Liferay, Inc."));
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

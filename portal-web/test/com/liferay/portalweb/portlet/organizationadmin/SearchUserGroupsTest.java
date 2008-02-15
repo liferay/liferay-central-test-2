@@ -22,22 +22,23 @@
 
 package com.liferay.portalweb.portlet.organizationadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="OrganizationAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchUserGroupsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class OrganizationAdminTests extends BaseTests {
-
-	public OrganizationAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(SearchUsersTest.class);
-		addTestSuite(SearchOrganizationsTest.class);
-		addTestSuite(SearchUserGroupsTest.class);
+public class SearchUserGroupsTest extends BaseTestCase {
+	public void testSearchUserGroups() throws Exception {
+		selenium.click("link=User Groups");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_80_name", "selenium");
+		selenium.click("//input[@value='Search User Groups']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("Selenium"));
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
