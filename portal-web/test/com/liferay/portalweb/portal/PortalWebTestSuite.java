@@ -95,7 +95,6 @@ import com.liferay.portalweb.portlet.words.WordsTests;
 import com.liferay.portalweb.portlet.wsrpproxy.WSRPProxyTests;
 import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 
-
 /**
  * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
  *
