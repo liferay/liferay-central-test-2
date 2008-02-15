@@ -30,6 +30,7 @@
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
 <%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 

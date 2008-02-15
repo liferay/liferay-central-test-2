@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -59,6 +58,7 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 		</select>
 	</td>
 </tr>
+
 <c:if test="<%= nodeId > 0 %>">
 	<tr>
 		<td>
@@ -66,16 +66,17 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 		</td>
 		<td>
 			<select name="<portlet:namespace />title">
+
 				<%
 				int total = WikiPageLocalServiceUtil.getPagesCount(nodeId, true);
 
 				List pages = WikiPageLocalServiceUtil.getPages(nodeId, true, 0, total);
 
 				for (int i = 0; i < pages.size(); i++) {
-					WikiPage curPage = (WikiPage)pages.get(i);
+					WikiPage wikiPage = (WikiPage)pages.get(i);
 				%>
 
-					<option <%= (curPage.getTitle().equals(title)) ? "selected" : "" %> value="<%= curPage.getTitle()%>"><%= curPage.getTitle() %></option>
+					<option <%= (wikiPage.getTitle().equals(title) || (Validator.isNull(title) && wikiPage.getTitle().equals(WikiPageImpl.FRONT_PAGE))) ? "selected" : "" %> value="<%= wikiPage.getTitle()%>"><%= wikiPage.getTitle() %></option>
 
 				<%
 				}
@@ -85,6 +86,7 @@ List nodes = WikiNodeLocalServiceUtil.getNodes(portletGroupId.longValue());
 		</td>
 	</tr>
 </c:if>
+
 </table>
 
 <br />
