@@ -478,6 +478,39 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return orphans;
 	}
 
+	public List getOutgoingLinks(long nodeId, String title)
+		throws PortalException, SystemException {
+
+		WikiPage page = getPage(nodeId, title);
+
+		List pages = new UniqueList();
+
+		Map links = WikiUtil.getLinks(page);
+
+		Iterator itr = links.keySet().iterator();
+
+		while (itr.hasNext()) {
+			String curTitle = (String)itr.next();
+
+			Boolean exists = (Boolean)links.get(curTitle);
+
+			if (exists) {
+				pages.add(getPage(nodeId, curTitle));
+			}
+			else {
+				WikiPageImpl newPage = new WikiPageImpl();
+
+				newPage.setNew(true);
+				newPage.setNodeId(nodeId);
+				newPage.setTitle(curTitle);
+
+				pages.add(newPage);
+			}
+		}
+
+		return pages;
+	}
+
 	public WikiPage getPage(long nodeId, String title)
 		throws PortalException, SystemException {
 

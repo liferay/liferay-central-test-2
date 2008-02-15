@@ -123,8 +123,11 @@ if (type.equals("history")) {
 
 String emptyResultsMessage = null;
 
-if (type.equals("links")) {
+if (type.equals("incoming_links")) {
 	emptyResultsMessage = "there-are-no-pages-that-link-to-this-page";
+}
+else if (type.equals("outgoing_links")) {
+	emptyResultsMessage = "this-page-has-no-links";
 }
 else if (type.equals("recent_changes")) {
 	emptyResultsMessage = "there-are-no-recent-changes";
@@ -153,8 +156,14 @@ else if (type.equals("history")) {
 	total = WikiPageLocalServiceUtil.getPagesCount(wikiPage.getNodeId(), wikiPage.getTitle());
 	results = WikiPageLocalServiceUtil.getPages(wikiPage.getNodeId(), wikiPage.getTitle(), searchContainer.getStart(), searchContainer.getEnd());
 }
-else if (type.equals("links")) {
+else if (type.equals("incoming_links")) {
 	List links = WikiPageLocalServiceUtil.getIncomingLinks(wikiPage.getNodeId(), wikiPage.getTitle());
+
+	total = links.size();
+	results = ListUtil.subList(links, searchContainer.getStart(), searchContainer.getEnd());
+}
+else if (type.equals("outgoing_links")) {
+	List links = WikiPageLocalServiceUtil.getOutgoingLinks(wikiPage.getNodeId(), wikiPage.getTitle());
 
 	total = links.size();
 	results = ListUtil.subList(links, searchContainer.getStart(), searchContainer.getEnd());
@@ -176,7 +185,13 @@ for (int i = 0; i < results.size(); i++) {
 
 	PortletURL rowURL = renderResponse.createRenderURL();
 
-	rowURL.setParameter("struts_action", "/wiki/view");
+	if (!curWikiPage.isNew()) {
+		rowURL.setParameter("struts_action", "/wiki/view");
+	}
+	else {
+		rowURL.setParameter("struts_action", "/wiki/edit_page");
+	}
+
 	rowURL.setParameter("nodeId", String.valueOf(curWikiPage.getNodeId()));
 	rowURL.setParameter("title", curWikiPage.getTitle());
 	rowURL.setParameter("version", String.valueOf(curWikiPage.getVersion()));
@@ -187,11 +202,21 @@ for (int i = 0; i < results.size(); i++) {
 
 	// Revision
 
-	row.addText(String.valueOf(curWikiPage.getVersion()), rowURL);
+	if (!curWikiPage.isNew()) {
+		row.addText(String.valueOf(curWikiPage.getVersion()), rowURL);
+	}
+	else {
+		row.addText(StringPool.BLANK);
+	}
 
 	// Date
 
-	row.addText(dateFormatDateTime.format(curWikiPage.getCreateDate()), rowURL);
+	if (!curWikiPage.isNew()) {
+		row.addText(dateFormatDateTime.format(curWikiPage.getCreateDate()), rowURL);
+	}
+	else {
+		row.addText(StringPool.BLANK);
+	}
 
 	// Action
 

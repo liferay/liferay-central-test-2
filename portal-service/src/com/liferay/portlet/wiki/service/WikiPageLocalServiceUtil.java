@@ -462,6 +462,15 @@ public class WikiPageLocalServiceUtil {
 		return wikiPageLocalService.getOrphans(nodeId);
 	}
 
+	public static java.util.List getOutgoingLinks(long nodeId,
+		java.lang.String title)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getOutgoingLinks(nodeId, title);
+	}
+
 	public static com.liferay.portlet.wiki.model.WikiPage getPage(long nodeId,
 		java.lang.String title)
 		throws com.liferay.portal.PortalException,

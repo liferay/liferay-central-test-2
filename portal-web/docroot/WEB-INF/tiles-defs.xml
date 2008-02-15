@@ -1189,8 +1189,12 @@
 		<put name="portlet_content" value="/portlet/wiki/view_page_history.jsp" />
 	</definition>
 
-	<definition name="portlet.wiki.view_page_links" extends="portlet.wiki">
-		<put name="portlet_content" value="/portlet/wiki/view_page_links.jsp" />
+	<definition name="portlet.wiki.view_page_incoming_links" extends="portlet.wiki">
+		<put name="portlet_content" value="/portlet/wiki/view_page_incoming_links.jsp" />
+	</definition>
+
+	<definition name="portlet.wiki.view_page_outgoing_links" extends="portlet.wiki">
+		<put name="portlet_content" value="/portlet/wiki/view_page_outgoing_links.jsp" />
 	</definition>
 
 	<definition name="portlet.wiki.view_recent_changes" extends="portlet.wiki">

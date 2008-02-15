@@ -40,9 +40,13 @@ PortletURL viewPageHistoryURL = PortletURLUtil.clone(viewPageGeneralURL, renderR
 
 viewPageHistoryURL.setParameter("struts_action", "/wiki/view_page_history");
 
-PortletURL viewPageLinksURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
+PortletURL viewPageIncomingLinksURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
 
-viewPageLinksURL.setParameter("struts_action", "/wiki/view_page_links");
+viewPageIncomingLinksURL.setParameter("struts_action", "/wiki/view_page_incoming_links");
+
+PortletURL viewPageOutgoingLinksURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
+
+viewPageOutgoingLinksURL.setParameter("struts_action", "/wiki/view_page_outgoing_links");
 
 PortletURL attachmentsURL = PortletURLUtil.clone(viewPageGeneralURL, renderResponse);
 
@@ -52,9 +56,10 @@ attachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
 <liferay-ui:tabs
-	names="general,history,links,attachments"
+	names="general,history,incoming-links,outgoing-links,attachments"
 	url0="<%= viewPageGeneralURL.toString() %>"
 	url1="<%= viewPageHistoryURL.toString() %>"
-	url2="<%= viewPageLinksURL.toString() %>"
-	url3="<%= attachmentsURL.toString() %>"
+	url2="<%= viewPageIncomingLinksURL.toString() %>"
+	url3="<%= viewPageOutgoingLinksURL.toString() %>"
+	url4="<%= attachmentsURL.toString() %>"
 />
