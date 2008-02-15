@@ -35,6 +35,7 @@ import com.liferay.portalweb.portlet.calendar.CalendarTests;
 import com.liferay.portalweb.portlet.chat.ChatTests;
 import com.liferay.portalweb.portlet.communities.CommunitiesTests;
 import com.liferay.portalweb.portlet.communityannouncements.CommunityAnnouncementsTests;
+import com.liferay.portalweb.portlet.companyannouncements.CompanyAnnouncementsTests;
 import com.liferay.portalweb.portlet.currencyconverter.CurrencyConverterTests;
 import com.liferay.portalweb.portlet.dictionary.DictionaryTests;
 import com.liferay.portalweb.portlet.directory.DirectoryTests;
@@ -94,6 +95,7 @@ import com.liferay.portalweb.portlet.words.WordsTests;
 import com.liferay.portalweb.portlet.wsrpproxy.WSRPProxyTests;
 import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 
+
 /**
  * <a href="PortalWebTestSuite.java.html"><b><i>View Source</i></b></a>
  *
@@ -118,6 +120,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(ChatTests.class);
 		addTestSuite(CommunitiesTests.class);
 		addTestSuite(CommunityAnnouncementsTests.class);
+		addTestSuite(CompanyAnnouncementsTests.class);
 		addTestSuite(CurrencyConverterTests.class);
 		addTestSuite(DictionaryTests.class);
 		addTestSuite(DirectoryTests.class);
