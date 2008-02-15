@@ -138,11 +138,11 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		String name = company.getName();
-
+		String description = name;
 		List<BlogsEntry> blogsEntries = getCompanyEntries(companyId, max);
 
 		return exportToRSS(
-			name, null, type, version, displayStyle, feedURL, entryURL,
+			name, description, type, version, displayStyle, feedURL, entryURL,
 			blogsEntries);
 	}
 
@@ -195,11 +195,11 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		String name = group.getDescriptiveName();
-
+		String description = name;
 		List<BlogsEntry> blogsEntries = getGroupEntries(groupId, max);
 
 		return exportToRSS(
-			name, null, type, version, displayStyle, feedURL, entryURL,
+			name, description, type, version, displayStyle, feedURL, entryURL,
 			blogsEntries);
 	}
 
@@ -233,12 +233,12 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 			organizationId);
 
 		String name = organization.getName();
-
+		String description = name;
 		List<BlogsEntry> blogsEntries = getOrganizationEntries(
 			organizationId, max);
 
 		return exportToRSS(
-			name, null, type, version, displayStyle, feedURL, entryURL,
+			name, description, type, version, displayStyle, feedURL, entryURL,
 			blogsEntries);
 	}
 
@@ -269,7 +269,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		syndFeed.setFeedType(type + "_" + version);
 		syndFeed.setTitle(name);
 		syndFeed.setLink(feedURL);
-		syndFeed.setDescription(GetterUtil.getString(description, name));
+		syndFeed.setDescription(description);
 
 		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 

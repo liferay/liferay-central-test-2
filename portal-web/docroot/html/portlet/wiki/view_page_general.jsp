@@ -133,9 +133,11 @@ int count = 0;
 		<liferay-ui:message key="rss-subscription" />
 	</th>
 	<td>
-		<liferay-ui:icon image="rss" label="<%= true %>" message="Atom 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() +  rssURLParamsAtom %>' target="_blank" /> &nbsp;&nbsp;
-		<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() +  rssURLParamsRSS10 %>' target="_blank" /> &nbsp;&nbsp;
-		<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 2.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() +  rssURLParamsRSS20 %>' target="_blank" /> &nbsp;&nbsp;
+		<liferay-ui:icon image="rss" message="Atom 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() + rssURLAtomParams %>' target="_blank" label="<%= true %>" />
+
+		<liferay-ui:icon image="rss" message="RSS 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() + rssURLRSS10Params %>' target="_blank" label="<%= true %>" />
+
+		<liferay-ui:icon image="rss" message="RSS 2.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&companyId=" + company.getCompanyId() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + wikiPage.getTitle() + rssURLRSS20Params %>' target="_blank" label="<%= true %>" />
 	</td>
 </tr>
 

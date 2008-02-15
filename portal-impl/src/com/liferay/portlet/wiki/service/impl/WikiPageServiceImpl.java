@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -54,7 +55,6 @@ import com.sun.syndication.feed.synd.SyndFeedImpl;
 import com.sun.syndication.io.FeedException;
 
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.StringReader;
 
 import java.util.ArrayList;
@@ -139,19 +139,21 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
+		WikiNodePermission.check(
+			getPermissionChecker(), nodeId, ActionKeys.VIEW);
+
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
-		long companyId = 0;
+		long companyId = node.getCompanyId();
 		String name = node.getName();
 		String description = node.getDescription();
-
 		List<WikiPage> pages = getNodePages(nodeId, max);
-
+		boolean diff = false;
 		Locale locale = null;
 
 		return exportToRSS(
 			companyId, name, description, type, version, displayStyle,
-			feedURL, entryURL, pages, false, locale);
+			feedURL, entryURL, pages, diff, locale);
 	}
 
 	public WikiPage getPage(long nodeId, String title)
@@ -181,12 +183,14 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		WikiPagePermission.check(
 			getPermissionChecker(), nodeId, title, ActionKeys.VIEW);
 
+		String description = title;
 		List<WikiPage> pages = wikiPageLocalService.getPages(
 			nodeId, title, 0, _MAX_END, new PageCreateDateComparator(true));
+		boolean diff = true;
 
 		return exportToRSS(
-			companyId, title, null, type, version, displayStyle, feedURL,
-			entryURL, pages, true, locale);
+			companyId, title, description, type, version, displayStyle, feedURL,
+			entryURL, pages, diff, locale);
 	}
 
 	public void movePage(
@@ -251,8 +255,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	protected String exportToRSS(
 			long companyId, String name, String description, String type,
 			double version, String displayStyle, String feedURL,
-			String entryURL, List<WikiPage> wikiPages, boolean diff,
-			Locale locale)
+			String entryURL, List<WikiPage> pages, boolean diff, Locale locale)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -260,19 +263,18 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		syndFeed.setFeedType(type + "_" + version);
 		syndFeed.setTitle(name);
 		syndFeed.setLink(feedURL);
-		syndFeed.setDescription(GetterUtil.getString(description, name));
+		syndFeed.setDescription(description);
 
 		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 
 		syndFeed.setEntries(entries);
 
-		WikiPage lastPageVersion = null;
+		WikiPage latestPage = null;
 
-		for (WikiPage page : wikiPages) {
+		for (WikiPage page : pages) {
 			String author = PortalUtil.getUserName(
 				page.getUserId(), page.getUserName());
 
-			String value = null;
 			String link = entryURL;
 
 			SyndEntry syndEntry = new SyndEntryImpl();
@@ -286,24 +288,24 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			syndContent.setType("html");
 
 			if (diff) {
-				if (lastPageVersion != null) {
-					link = entryURL + "?_" + PortletKeys.WIKI +
-						"_version=" + page.getVersion();
+				if (latestPage != null) {
+					link +=
+						"?" + PortalUtil.getPortletNamespace(PortletKeys.WIKI) +
+							"version=" + page.getVersion();
 
-					try {
-						value = getPageDiff(
-							companyId, lastPageVersion, page, locale);
+					String value = getPageDiff(
+						companyId, latestPage, page, locale);
 
-						syndContent.setValue(value);
-						syndEntry.setDescription(syndContent);
-						entries.add(syndEntry);
-					}
-					catch (Exception e) {
-						throw new SystemException(e);
-					}
+					syndContent.setValue(value);
+
+					syndEntry.setDescription(syndContent);
+
+					entries.add(syndEntry);
 				}
 			}
 			else {
+				String value = null;
+
 				if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
 					value = StringUtil.shorten(
 						Html.stripHtml(page.getContent()), _RSS_ABSTRACT_LENGTH,
@@ -314,12 +316,15 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 				}
 
 				syndContent.setValue(value);
+
 				syndEntry.setDescription(syndContent);
+
 				entries.add(syndEntry);
 			}
 
 			syndEntry.setLink(link);
-			lastPageVersion = page;
+
+			latestPage = page;
 		}
 
 		try {
@@ -334,14 +339,12 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 	}
 
 	protected String getPageDiff(
-			long companyId, WikiPage lastPageVersion, WikiPage page,
+			long companyId, WikiPage latestPage, WikiPage page,
 			Locale locale)
-		throws Exception {
+		throws SystemException {
 
-		String sourceContent = WikiUtil.processContent(
-			lastPageVersion.getContent());
-		String targetContent = WikiUtil.processContent(
-			page.getContent());
+		String sourceContent = WikiUtil.processContent(latestPage.getContent());
+		String targetContent = WikiUtil.processContent(page.getContent());
 
 		sourceContent = Html.escape(sourceContent);
 		targetContent = Html.escape(targetContent);
@@ -349,25 +352,25 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		List[] diffResults = DiffUtil.diff(
 			new StringReader(sourceContent), new StringReader(targetContent));
 
-		ClassLoader classLoader = getClass().getClassLoader();
-
-		InputStream is = classLoader.getResourceAsStream(
+		String template = ContentUtil.get(
 			"com/liferay/portlet/wiki/dependencies/rss.vm");
 
-		String template = StringUtil.read(is);
-
-		is.close();
-
 		Map<String, Object> variables = new HashMap<String, Object>();
-		variables.put("languageUtil", LanguageUtil.getLanguage());
-		variables.put("locale", locale);
+
+		variables.put("companyId", companyId);
 		variables.put("contextLine", DiffUtil.CONTEXT_LINE);
 		variables.put("diffUtil", new DiffUtil());
-		variables.put("companyId", companyId);
+		variables.put("languageUtil", LanguageUtil.getLanguage());
+		variables.put("locale", locale);
 		variables.put("sourceResults", diffResults[0]);
 		variables.put("targetResults", diffResults[1]);
 
-		return VelocityUtil.evaluate(template, variables);
+		try {
+			return VelocityUtil.evaluate(template, variables);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 	}
 
 	private static final int _MAX_END = 200;

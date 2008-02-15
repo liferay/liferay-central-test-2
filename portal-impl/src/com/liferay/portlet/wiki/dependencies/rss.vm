@@ -22,38 +22,46 @@
 
 #if ($size > 0)
 	#set ($size = $size - 1)
+
 	<table width="100%">
-			#foreach ($count in [0..$size])
-				#set ($sourceResult = $sourceResults.get($count))
-				#set ($targetResult = $targetResults.get($count))
-				<tr>
-					<td width="50%" valign="top">
-						$languageUtil.get($companyId, $locale, "line") $sourceResult.getLineNumber()
-					</td>
-					<td width="50%" valign="top">
-						$languageUtil.get($companyId, $locale, "line") $targetResult.getLineNumber()
-					</td>
-				</tr>
-				<tr>
-					<td>
-						<table style="border-collapse: separate; border-spacing: 5pt; width: 100%;">
-							#foreach ($changedLine in $sourceResult.getChangedLines())
-								<tr valign="top">
-									#processColumn( $changedLine )
-								</tr>
-							#end
-						</table>
-					</td>
-					<td>
-						<table style="border-collapse: separate; border-spacing: 5pt; width: 100%;">
-							#foreach ($changedLine in $targetResult.getChangedLines())
-								<tr valign="top">
-									#processColumn( $changedLine )
-								</tr>
-							#end
-						</table>
-					</td>
-				</tr>
-			#end
+
+	#foreach ($count in [0..$size])
+		#set ($sourceResult = $sourceResults.get($count))
+		#set ($targetResult = $targetResults.get($count))
+
+		<tr>
+			<td width="50%" valign="top">
+				$languageUtil.get($companyId, $locale, "line") $sourceResult.getLineNumber()
+			</td>
+			<td width="50%" valign="top">
+				$languageUtil.get($companyId, $locale, "line") $targetResult.getLineNumber()
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<table style="border-collapse: separate; border-spacing: 5pt; width: 100%;">
+
+				#foreach ($changedLine in $sourceResult.getChangedLines())
+					<tr valign="top">
+						#processColumn($changedLine)
+					</tr>
+				#end
+
+				</table>
+			</td>
+			<td>
+				<table style="border-collapse: separate; border-spacing: 5pt; width: 100%;">
+
+				#foreach ($changedLine in $targetResult.getChangedLines())
+					<tr valign="top">
+						#processColumn($changedLine)
+					</tr>
+				#end
+
+				</table>
+			</td>
+		</tr>
+	#end
+
 	</table>
 #end

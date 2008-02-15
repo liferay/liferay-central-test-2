@@ -62,25 +62,33 @@ StringMaker rssURLParams = new StringMaker();
 
 if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
 	if (rssDelta != SearchContainer.DEFAULT_DELTA) {
-		rssURLParams.append("&max=" + rssDelta);
+		rssURLParams.append("&max=");
+		rssURLParams.append(rssDelta);
 	}
 
 	if (!rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
-		rssURLParams.append("&displayStyle=" + rssDisplayStyle);
+		rssURLParams.append("&displayStyle=");
+		rssURLParams.append(rssDisplayStyle);
 	}
 }
 
-StringMaker rssURLParamsAtom = new StringMaker(rssURLParams.toString());
-rssURLParamsAtom.append("&type=" + RSSUtil.ATOM);
-rssURLParamsAtom.append("&version=1.0");
+StringMaker rssURLAtomParams = new StringMaker(rssURLParams.toString());
 
-StringMaker rssURLParamsRSS10 = new StringMaker(rssURLParams.toString());
-rssURLParamsRSS10.append("&type=" + RSSUtil.RSS);
-rssURLParamsRSS10.append("&version=1.0");
+rssURLAtomParams.append("&type=");
+rssURLAtomParams.append(RSSUtil.ATOM);
+rssURLAtomParams.append("&version=1.0");
 
-StringMaker rssURLParamsRSS20 = new StringMaker(rssURLParams.toString());
-rssURLParamsRSS20.append("&type=" + RSSUtil.RSS);
-rssURLParamsRSS20.append("&version=2.0");
+StringMaker rssURLRSS10Params = new StringMaker(rssURLParams.toString());
+
+rssURLRSS10Params.append("&type=");
+rssURLRSS10Params.append(RSSUtil.RSS);
+rssURLRSS10Params.append("&version=1.0");
+
+StringMaker rssURLRSS20Params = new StringMaker(rssURLParams.toString());
+
+rssURLRSS20Params.append("&type=");
+rssURLRSS20Params.append(RSSUtil.RSS);
+rssURLRSS20Params.append("&version=2.0");
 
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>

@@ -32,7 +32,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
@@ -130,7 +129,6 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
 	private static Log _log = LogFactory.getLog(WikiPageImpl.class);
 
-	private WikiPageResource _resource;
 	private String _userUuid;
 	private String _attachmentDirs;
 

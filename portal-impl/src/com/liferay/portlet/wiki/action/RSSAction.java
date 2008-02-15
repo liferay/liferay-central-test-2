@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -104,6 +103,8 @@ public class RSSAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
+		Layout layout = themeDisplay.getLayout();
+
 		long plid = ParamUtil.getLong(req, "p_l_id");
 		long companyId = ParamUtil.getLong(req, "companyId");
 		long nodeId = ParamUtil.getLong(req, "nodeId");
@@ -116,15 +117,14 @@ public class RSSAction extends PortletAction {
 		String displayStyle = ParamUtil.getString(
 			req, "displayStyle", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 
-		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 		String feedURL =
-			PortalUtil.getPortalURL(req) +
+			themeDisplay.getURLPortal() +
 				PortalUtil.getLayoutURL(layout, themeDisplay) + "/wiki/" +
 					nodeId;
 
 		String entryURL = feedURL + StringPool.SLASH + title;
 
-		Locale locale = req.getLocale();
+		Locale locale = themeDisplay.getLocale();
 
 		String rss = StringPool.BLANK;
 
@@ -134,11 +134,9 @@ public class RSSAction extends PortletAction {
 					companyId, nodeId, title, max, type, version, displayStyle,
 					feedURL, entryURL, locale);
 			}
-			catch (Exception e) {
-				if (!(e instanceof NoSuchPageException)) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(e);
-					}
+			catch (NoSuchPageException nspe) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nspe);
 				}
 			}
 		}
@@ -148,11 +146,9 @@ public class RSSAction extends PortletAction {
 					nodeId, max, type, version, displayStyle, feedURL,
 					entryURL);
 			}
-			catch (Exception e) {
-				if (!(e instanceof NoSuchNodeException)) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(e);
-					}
+			catch (NoSuchNodeException nsne) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(nsne);
 				}
 			}
 		}

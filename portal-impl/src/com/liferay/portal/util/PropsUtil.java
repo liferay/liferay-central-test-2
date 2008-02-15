@@ -1239,8 +1239,6 @@ public class PropsUtil {
 
 	public static final String WIKI_FORMATS_HELP_URL = "wiki.formats.help.url";
 
-	public static final String WIKI_RSS_ABSTRACT_LENGTH = "wiki.rss.abstract.length";
-
 	public static final String WIKI_EMAIL_FROM_NAME = "wiki.email.from.name";
 
 	public static final String WIKI_EMAIL_FROM_ADDRESS = "wiki.email.from.address";
@@ -1260,6 +1258,8 @@ public class PropsUtil {
 	public static final String WIKI_EMAIL_PAGE_UPDATED_BODY = "wiki.email.page.updated.body";
 
 	public static final String WIKI_EMAIL_PAGE_UPDATED_SIGNATURE = "wiki.email.page.updated.signature";
+
+	public static final String WIKI_RSS_ABSTRACT_LENGTH = "wiki.rss.abstract.length";
 
 	public static boolean containsKey(String key) {
 		return _getInstance().containsKey(key);

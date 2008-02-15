@@ -71,23 +71,27 @@ else if (rssFormat.equals("atom10")) {
 	rssFormatVersion = 1.0;
 }
 
-String rssURLParams = StringPool.BLANK;
+StringMaker rssURLParams = new StringMaker();
 
 if ((rssDelta != SearchContainer.DEFAULT_DELTA) || !rssFormatType.equals(RSSUtil.DEFAULT_TYPE) || (rssFormatVersion != RSSUtil.DEFAULT_VERSION) || !rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
 	if (rssDelta != SearchContainer.DEFAULT_DELTA) {
-		rssURLParams += "&max=" + rssDelta;
+		rssURLParams.append("&max=");
+		rssURLParams.append(rssDelta);
 	}
 
 	if (!rssFormatType.equals(RSSUtil.DEFAULT_TYPE)) {
-		rssURLParams += "&type=" + rssFormatType;
+		rssURLParams.append("&type=");
+		rssURLParams.append(rssFormatType);
 	}
 
 	if (rssFormatVersion != RSSUtil.DEFAULT_VERSION) {
-		rssURLParams += "&version=" + rssFormatVersion;
+		rssURLParams.append("&version=");
+		rssURLParams.append(rssFormatVersion);
 	}
 
 	if (!rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT)) {
-		rssURLParams += "&displayStyle=" + rssDisplayStyle;
+		rssURLParams.append("&displayStyle=");
+		rssURLParams.append(rssDisplayStyle);
 	}
 }
 

@@ -24,6 +24,10 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
+<%
+WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
+%>
+
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <h1 class="page-title"><liferay-ui:message key="recent-changes" /></h1>
@@ -36,10 +40,8 @@
 
 <br />
 
-<%
-WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
-%>
+<liferay-ui:icon image="rss" message="Atom 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLAtomParams %>' target="_blank" label="<%= true %>" />
 
-<liferay-ui:icon image="rss" label="<%= true %>" message="Atom 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParamsAtom %>' target="_blank" /> &nbsp;&nbsp;
-<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParamsRSS10 %>' target="_blank" /> &nbsp;&nbsp;
-<liferay-ui:icon image="rss" label="<%= true %>" message="RSS 2.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLParamsRSS20 %>' target="_blank" /> &nbsp;&nbsp;
+<liferay-ui:icon image="rss" message="RSS 1.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLRSS10Params %>' target="_blank" label="<%= true %>" />
+
+<liferay-ui:icon image="rss" message="RSS 2.0" url='<%= themeDisplay.getPathMain() + "/wiki/rss?p_l_id=" + plid + "&nodeId=" + node.getNodeId() + rssURLRSS20Params %>' target="_blank" label="<%= true %>" />
