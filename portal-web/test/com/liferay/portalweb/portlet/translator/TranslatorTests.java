@@ -35,7 +35,27 @@ public class TranslatorTests extends BaseTests {
 	public TranslatorTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
-		addTestSuite(TranslateTest.class);
+		addTestSuite(TranslateEnglishChineseCTest.class);
+		addTestSuite(TranslateEnglishChineseTTest.class);
+		addTestSuite(TranslateEnglishDutchTest.class);
+		addTestSuite(TranslateEnglishFrenchTest.class);
+		addTestSuite(TranslateEnglishGermanTest.class);
+		addTestSuite(TranslateEnglishItalianTest.class);
+		addTestSuite(TranslateEnglishJapaneseTest.class);
+		addTestSuite(TranslateEnglishPortugueseTest.class);
+		addTestSuite(TranslateEnglishSpanishTest.class);
+		addTestSuite(TranslateChineseCEnglishTest.class);
+		addTestSuite(TranslateChineseTEnglishTest.class);
+		addTestSuite(TranslateDutchEnglishTest.class);
+		addTestSuite(TranslateFrenchEnglishTest.class);
+		addTestSuite(TranslateFrenchGermanTest.class);
+		addTestSuite(TranslateGermanEnglishTest.class);
+		addTestSuite(TranslateGermanFrenchTest.class);
+		addTestSuite(TranslateItalianEnglishTest.class);
+		addTestSuite(TranslateJapaneseEnglishTest.class);
+		addTestSuite(TranslatePortugueseEnglishTest.class);
+		addTestSuite(TranslateSpanishEnglishTest.class);
+
 	}
 
 }
