@@ -50,11 +50,12 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addImage(
 			long companyId, long groupId, long folderId, long imageId,
-			String description, String[] tagsEntries)
+			String name, String description, String[] tagsEntries)
 		throws IOException {
 
 		Document doc = getAddImageDocument(
-			companyId, groupId, folderId, imageId, description, tagsEntries);
+			companyId, groupId, folderId, imageId, name, description,
+			tagsEntries);
 
 		IndexWriter writer = null;
 
@@ -81,7 +82,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static Document getAddImageDocument(
 		long companyId, long groupId, long folderId, long imageId,
-		String description, String[] tagsEntries) {
+		String name, String description, String[] tagsEntries) {
 
 		Document doc = new Document();
 
@@ -92,6 +93,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
 		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
 
+		LuceneUtil.addText(doc, LuceneFields.NAME, name);
 		LuceneUtil.addText(doc, LuceneFields.DESCRIPTION, description);
 
 		LuceneUtil.addModifiedDate(doc);
@@ -106,7 +108,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void updateImage(
 			long companyId, long groupId, long folderId, long imageId,
-			String description, String[] tagsEntries)
+			String name, String description, String[] tagsEntries)
 		throws IOException {
 
 		try {
@@ -116,7 +118,8 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		}
 
 		addImage(
-			companyId, groupId, folderId, imageId, description, tagsEntries);
+			companyId, groupId, folderId, imageId, name, description,
+			tagsEntries);
 	}
 
 	public DocumentSummary getDocumentSummary(

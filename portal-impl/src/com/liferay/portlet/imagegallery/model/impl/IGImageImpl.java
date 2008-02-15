@@ -22,10 +22,11 @@
 
 package com.liferay.portlet.imagegallery.model.impl;
 
-import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.persistence.ImageUtil;
+import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
@@ -68,11 +69,16 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		return folder;
 	}
 
-	public String getImageType() throws PortalException, SystemException {
+	public String getImageType()  {
 		if (_imageType == null) {
-			Image largeImage = ImageUtil.findByPrimaryKey(getLargeImageId());
+			try {
+				Image largeImage = ImageLocalUtil.getImage(getLargeImageId());
 
-			_imageType = largeImage.getType();
+				_imageType = largeImage.getType();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 
 		return _imageType;
@@ -80,6 +86,21 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 
 	public void setImageType(String imageType) {
 		_imageType = imageType;
+	}
+
+	public String getNameWithExtension() {
+		String nameWithExtension = getName();
+		String type = getImageType();
+
+		return getNameWithExtension(nameWithExtension, type);
+	}
+
+	public static String getNameWithExtension(String name, String type) {
+		if (Validator.isNotNull(type)) {
+			name += StringPool.PERIOD + type;
+		}
+
+		return name;
 	}
 
 	private static Log _log = LogFactory.getLog(IGImageImpl.class);

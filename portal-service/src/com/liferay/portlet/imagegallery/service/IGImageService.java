@@ -50,15 +50,17 @@ package com.liferay.portlet.imagegallery.service;
  */
 public interface IGImageService {
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long folderId, java.lang.String description, java.io.File file,
-		java.lang.String contentType, java.lang.String[] tagsEntries,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+		long folderId, java.lang.String name, java.lang.String description,
+		java.io.File file, java.lang.String contentType,
+		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long folderId, java.lang.String description, java.io.File file,
-		java.lang.String contentType, java.lang.String[] tagsEntries,
+		long folderId, java.lang.String name, java.lang.String description,
+		java.io.File file, java.lang.String contentType,
+		java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
@@ -83,9 +85,9 @@ public interface IGImageService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		long imageId, long folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries)
+		long imageId, long folderId, java.lang.String name,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

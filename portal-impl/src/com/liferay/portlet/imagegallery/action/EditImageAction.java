@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
 import com.liferay.portlet.imagegallery.NoSuchFolderException;
@@ -88,7 +89,8 @@ public class EditImageAction extends PortletAction {
 
 				setForward(req, "portlet.image_gallery.error");
 			}
-			else if (e instanceof ImageNameException ||
+			else if (e instanceof DuplicateImageNameException ||
+					 e instanceof ImageNameException ||
 					 e instanceof ImageSizeException ||
 					 e instanceof NoSuchFolderException) {
 
@@ -169,11 +171,10 @@ public class EditImageAction extends PortletAction {
 		long imageId = ParamUtil.getLong(uploadReq, "imageId");
 
 		long folderId = ParamUtil.getLong(uploadReq, "folderId");
-		String description = ParamUtil.getString(uploadReq, "description");
-
-		if (Validator.isNull(description)) {
-			description = uploadReq.getFileName("file");
-		}
+		String fileName = uploadReq.getFileName("file");
+		String name = ParamUtil.getString(uploadReq, "name");
+		String description =
+			ParamUtil.getString(uploadReq, "description", fileName);
 
 		File file = uploadReq.getFile("file");
 		String contentType = getContentType(uploadReq, file);
@@ -206,8 +207,12 @@ public class EditImageAction extends PortletAction {
 
 			// Add image
 
+			if (Validator.isNull(name)) {
+				name = fileName;
+			}
+
 			IGImage image = IGImageServiceUtil.addImage(
-				folderId, description, file, contentType, tagsEntries,
+				folderId, name, description, file, contentType, tagsEntries,
 				communityPermissions, guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
@@ -217,14 +222,13 @@ public class EditImageAction extends PortletAction {
 
 			// Update image
 
-			String fileName = uploadReq.getFileName("file");
-
 			if (Validator.isNull(fileName)) {
 				file = null;
 			}
 
 			IGImageServiceUtil.updateImage(
-				imageId, folderId, description, file, contentType, tagsEntries);
+				imageId, folderId, name, description, file, contentType,
+				tagsEntries);
 		}
 
 		AssetPublisherUtil.addRecentFolderId(

@@ -41,31 +41,31 @@ import java.io.File;
 public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 
 	public IGImage addImage(
-			long folderId, String description, File file, String contentType,
-			String[] tagsEntries, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long folderId, String name, String description, File file,
+			String contentType, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
 
 		return igImageLocalService.addImage(
-			getUserId(), folderId, description, file, contentType, tagsEntries,
-			addCommunityPermissions, addGuestPermissions);
+			getUserId(), folderId, name, description, file, contentType,
+			tagsEntries, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public IGImage addImage(
-			long folderId, String description, File file, String contentType,
-			String[] tagsEntries, String[] communityPermissions,
-			String[] guestPermissions)
+			long folderId, String name, String description, File file,
+			String contentType, String[] tagsEntries,
+			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		IGFolderPermission.check(
 			getPermissionChecker(), folderId, ActionKeys.ADD_IMAGE);
 
 		return igImageLocalService.addImage(
-			getUserId(), folderId, description, file, contentType, tagsEntries,
-			communityPermissions, guestPermissions);
+			getUserId(), folderId, name, description, file, contentType,
+			tagsEntries, communityPermissions, guestPermissions);
 	}
 
 	public void deleteImage(long imageId)
@@ -111,16 +111,16 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 	}
 
 	public IGImage updateImage(
-			long imageId, long folderId, String description, File file,
-			String contentType, String[] tagsEntries)
+			long imageId, long folderId, String name, String description,
+			File file, String contentType, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		IGImagePermission.check(
 			getPermissionChecker(), imageId, ActionKeys.UPDATE);
 
 		return igImageLocalService.updateImage(
-			getUserId(), imageId, folderId, description, file, contentType,
-			tagsEntries);
+			getUserId(), imageId, folderId, name, description, file,
+			contentType, tagsEntries);
 	}
 
 }

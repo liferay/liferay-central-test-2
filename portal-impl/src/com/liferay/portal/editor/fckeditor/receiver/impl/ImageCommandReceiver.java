@@ -85,8 +85,8 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 				group.getGroupId(), arg.getCurrentFolder());
 
 			IGImageServiceUtil.addImage(
-				folder.getFolderId(), fileName, file, extension, new String[0],
-				true, true);
+				folder.getFolderId(), fileName, fileName, file, extension,
+				new String[0], true, true);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);

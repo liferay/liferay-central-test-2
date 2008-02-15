@@ -38,6 +38,14 @@ IGImage image = (IGImage)request.getAttribute(WebKeys.IMAGE_GALLERY_IMAGE);
 long imageId = BeanParamUtil.getLong(image, request, "imageId");
 
 long folderId = BeanParamUtil.getLong(image, request, "folderId");
+
+String name = BeanParamUtil.getString(image, request, "name");
+
+String extension = StringPool.BLANK;
+
+if (image != null) {
+	extension = StringPool.PERIOD + image.getImageType();
+}
 %>
 
 <script type="text/javascript">
@@ -70,6 +78,7 @@ long folderId = BeanParamUtil.getLong(image, request, "folderId");
 <input name="<portlet:namespace />imageId" type="hidden" value="<%= imageId %>" />
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 
+<liferay-ui:error exception="<%= DuplicateImageNameException.class %>" message="please-enter-a-unique-image-name" />
 <liferay-ui:error exception="<%= ImageNameException.class %>">
 	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>.
 </liferay-ui:error>
@@ -130,6 +139,14 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 	</td>
 	<td>
 		<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="name" />
+	</td>
+	<td>
+		<liferay-ui:input-field model="<%= IGImage.class %>" bean="<%= image %>" field="name" /><%= extension %>
 	</td>
 </tr>
 <tr>

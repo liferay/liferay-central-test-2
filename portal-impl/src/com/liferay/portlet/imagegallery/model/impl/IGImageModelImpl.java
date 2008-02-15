@@ -83,6 +83,9 @@ public class IGImageModelImpl extends BaseModelImpl {
 			{ "folderId", new Integer(Types.BIGINT) },
 			
 
+			{ "name", new Integer(Types.VARCHAR) },
+			
+
 			{ "description", new Integer(Types.VARCHAR) },
 			
 
@@ -97,7 +100,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 
 			{ "custom2ImageId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,description STRING null,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table IGImage (uuid_ VARCHAR(75) null,imageId LONG not null primary key,companyId LONG,userId LONG,createDate DATE null,modifiedDate DATE null,folderId LONG,name VARCHAR(75) null,description STRING null,smallImageId LONG,largeImageId LONG,custom1ImageId LONG,custom2ImageId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table IGImage";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.imagegallery.model.IGImage"),
@@ -196,6 +199,18 @@ public class IGImageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getName() {
+		return GetterUtil.getString(_name);
+	}
+
+	public void setName(String name) {
+		if (((name == null) && (_name != null)) ||
+				((name != null) && (_name == null)) ||
+				((name != null) && (_name != null) && !name.equals(_name))) {
+			_name = name;
+		}
+	}
+
 	public String getDescription() {
 		return GetterUtil.getString(_description);
 	}
@@ -265,6 +280,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setFolderId(getFolderId());
+			model.setName(Html.escape(getName()));
 			model.setDescription(Html.escape(getDescription()));
 			model.setSmallImageId(getSmallImageId());
 			model.setLargeImageId(getLargeImageId());
@@ -289,6 +305,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
 		clone.setFolderId(getFolderId());
+		clone.setName(getName());
 		clone.setDescription(getDescription());
 		clone.setSmallImageId(getSmallImageId());
 		clone.setLargeImageId(getLargeImageId());
@@ -359,6 +376,7 @@ public class IGImageModelImpl extends BaseModelImpl {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _folderId;
+	private String _name;
 	private String _description;
 	private long _smallImageId;
 	private long _largeImageId;

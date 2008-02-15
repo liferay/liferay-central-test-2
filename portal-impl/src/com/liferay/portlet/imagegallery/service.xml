@@ -74,6 +74,7 @@
 		<!-- Other fields -->
 
 		<column name="folderId" type="long" />
+		<column name="name" type="String" />
 		<column name="description" type="String" />
 		<column name="smallImageId" type="long" />
 		<column name="largeImageId" type="long" />
@@ -103,6 +104,10 @@
 		<finder name="Custom2ImageId" return-type="IGImage">
 			<finder-column name="custom2ImageId" />
 		</finder>
+		<finder name="F_N" return-type="Collection">
+			<finder-column name="folderId" />
+			<finder-column name="name" />
+		</finder>
 
 		<!-- References -->
 
@@ -113,6 +118,7 @@
 	</entity>
 	<exceptions>
 		<exception>DuplicateFolderName</exception>
+		<exception>DuplicateImageName</exception>
 		<exception>FolderName</exception>
 		<exception>ImageName</exception>
 		<exception>ImageSize</exception>

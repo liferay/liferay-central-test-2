@@ -57,6 +57,7 @@ public class IGImageSoap implements Serializable {
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
 		soapModel.setFolderId(model.getFolderId());
+		soapModel.setName(model.getName());
 		soapModel.setDescription(model.getDescription());
 		soapModel.setSmallImageId(model.getSmallImageId());
 		soapModel.setLargeImageId(model.getLargeImageId());
@@ -145,6 +146,14 @@ public class IGImageSoap implements Serializable {
 		_folderId = folderId;
 	}
 
+	public String getName() {
+		return _name;
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
 	public String getDescription() {
 		return _description;
 	}
@@ -192,6 +201,7 @@ public class IGImageSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _folderId;
+	private String _name;
 	private String _description;
 	private long _smallImageId;
 	private long _largeImageId;

@@ -29,7 +29,9 @@ import com.liferay.portal.upgrade.util.TempUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.UpgradeTable;
 import com.liferay.portal.upgrade.v5_0_0.util.IGFolderNameColumnImpl;
+import com.liferay.portal.upgrade.v5_0_0.util.IGImageNameColumnImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderModelImpl;
+import com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -68,6 +70,19 @@ public class UpgradeImageGallery extends UpgradeProcess {
 		UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 			IGFolderModelImpl.TABLE_NAME, IGFolderModelImpl.TABLE_COLUMNS,
 			groupIdColumn, parentFolderIdColumn, igFolderNameColumn);
+
+		upgradeTable.updateTable();
+
+		// IGImage
+
+		UpgradeColumn imageIdColumn = new TempUpgradeColumnImpl("imageId");
+
+		IGImageNameColumnImpl imageNameColumn =
+			new IGImageNameColumnImpl(imageIdColumn);
+
+		upgradeTable = new DefaultUpgradeTableImpl(
+			IGImageModelImpl.TABLE_NAME, IGImageModelImpl.TABLE_COLUMNS,
+			imageIdColumn, imageNameColumn);
 
 		upgradeTable.updateTable();
 	}

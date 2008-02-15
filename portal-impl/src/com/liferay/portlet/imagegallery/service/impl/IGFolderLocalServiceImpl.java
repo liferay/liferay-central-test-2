@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -40,6 +41,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.base.IGFolderLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
+import com.liferay.util.FileUtil;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
@@ -336,6 +338,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 					long groupId = folder.getGroupId();
 					long imageId = image.getImageId();
+					String name = image.getName();
 					String description = image.getDescription();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
@@ -343,8 +346,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 					try {
 						Document doc = Indexer.getAddImageDocument(
-							companyId, groupId, folderId, imageId, description,
-							tagsEntries);
+							companyId, groupId, folderId, imageId, name,
+							description, tagsEntries);
 
 						writer.addDocument(doc);
 					}
@@ -558,6 +561,19 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			throw new DuplicateFolderNameException();
 		}
 		catch (NoSuchFolderException nsfe) {
+		}
+
+		if (name.indexOf(StringPool.PERIOD) != -1) {
+			String nameProper = FileUtil.stripExtension(name);
+
+			List<IGImage> images =
+				igImagePersistence.findByF_N(parentFolderId, nameProper);
+
+			for (IGImage image : images) {
+				if (name.equals(image.getNameWithExtension())) {
+					throw new DuplicateFolderNameException();
+				}
+			}
 		}
 	}
 

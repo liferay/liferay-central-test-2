@@ -378,22 +378,22 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 					IGImageLocalServiceUtil.updateImage(
 						userId, existingImage.getImageId(), folderId,
-						igImage.getDescription(), imageFile,
+						igImage.getName(), igImage.getDescription(), imageFile,
 						igImage.getImageType(), tagsEntries);
 				}
 				catch (NoSuchImageException nsie) {
 					IGImageLocalServiceUtil.addImage(
 						igImage.getUuid(), userId, folderId,
-						igImage.getDescription(), imageFile,
+						igImage.getName(), igImage.getDescription(), imageFile,
 						igImage.getImageType(), tagsEntries,
 						addCommunityPermissions, addGuestPermissions);
 				}
 			}
 			else {
 				IGImageLocalServiceUtil.addImage(
-					userId, folderId, igImage.getDescription(), imageFile,
-					igImage.getImageType(), tagsEntries,
-					addCommunityPermissions, addGuestPermissions);
+					userId, folderId, igImage.getName(),
+					igImage.getDescription(), imageFile, igImage.getImageType(),
+					tagsEntries, addCommunityPermissions, addGuestPermissions);
 			}
 		}
 		catch (NoSuchFolderException nsfe) {

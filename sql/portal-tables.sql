@@ -359,6 +359,7 @@ create table IGImage (
 	createDate DATE null,
 	modifiedDate DATE null,
 	folderId LONG,
+	name VARCHAR(75) null,
 	description STRING null,
 	smallImageId LONG,
 	largeImageId LONG,

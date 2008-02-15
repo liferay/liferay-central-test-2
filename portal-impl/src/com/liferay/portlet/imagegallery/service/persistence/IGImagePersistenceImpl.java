@@ -1128,6 +1128,295 @@ public class IGImagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List<IGImage> findByF_N(long folderId, String name)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
+		String finderClassName = IGImage.class.getName();
+		String finderMethodName = "findByF_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(folderId), name };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+				query.append("folderId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("imageId ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, folderId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				List<IGImage> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<IGImage>)result;
+		}
+	}
+
+	public List<IGImage> findByF_N(long folderId, String name, int begin,
+		int end) throws SystemException {
+		return findByF_N(folderId, name, begin, end, null);
+	}
+
+	public List<IGImage> findByF_N(long folderId, String name, int begin,
+		int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
+		String finderClassName = IGImage.class.getName();
+		String finderMethodName = "findByF_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(folderId),
+				
+				name,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+				query.append("folderId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("imageId ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, folderId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<IGImage>)result;
+		}
+	}
+
+	public IGImage findByF_N_First(long folderId, String name,
+		OrderByComparator obc) throws NoSuchImageException, SystemException {
+		List<IGImage> list = findByF_N(folderId, name, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No IGImage exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
+			msg.append(", ");
+			msg.append("name=" + name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchImageException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public IGImage findByF_N_Last(long folderId, String name,
+		OrderByComparator obc) throws NoSuchImageException, SystemException {
+		int count = countByF_N(folderId, name);
+
+		List<IGImage> list = findByF_N(folderId, name, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No IGImage exists with the key {");
+
+			msg.append("folderId=" + folderId);
+
+			msg.append(", ");
+			msg.append("name=" + name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchImageException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public IGImage[] findByF_N_PrevAndNext(long imageId, long folderId,
+		String name, OrderByComparator obc)
+		throws NoSuchImageException, SystemException {
+		IGImage igImage = findByPrimaryKey(imageId);
+
+		int count = countByF_N(folderId, name);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+			query.append("folderId = ?");
+
+			query.append(" AND ");
+
+			if (name == null) {
+				query.append("name IS NULL");
+			}
+			else {
+				query.append("name = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("imageId ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, folderId);
+
+			if (name != null) {
+				q.setString(queryPos++, name);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
+
+			IGImage[] array = new IGImageImpl[3];
+
+			array[0] = (IGImage)objArray[0];
+			array[1] = (IGImage)objArray[1];
+			array[2] = (IGImage)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<IGImage> findWithDynamicQuery(
 		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
@@ -1284,6 +1573,13 @@ public class IGImagePersistenceImpl extends BasePersistence
 		IGImage igImage = findByCustom2ImageId(custom2ImageId);
 
 		remove(igImage);
+	}
+
+	public void removeByF_N(long folderId, String name)
+		throws SystemException {
+		for (IGImage igImage : findByF_N(folderId, name)) {
+			remove(igImage);
+		}
 	}
 
 	public void removeAll() throws SystemException {
@@ -1666,6 +1962,87 @@ public class IGImagePersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, custom2ImageId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByF_N(long folderId, String name) throws SystemException {
+		boolean finderClassNameCacheEnabled = IGImageModelImpl.CACHE_ENABLED;
+		String finderClassName = IGImage.class.getName();
+		String finderMethodName = "countByF_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(folderId), name };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.imagegallery.model.IGImage WHERE ");
+
+				query.append("folderId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, folderId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
 
 				Long count = null;
 

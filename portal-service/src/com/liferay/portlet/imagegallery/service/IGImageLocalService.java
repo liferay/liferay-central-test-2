@@ -113,15 +113,7 @@ public interface IGImageLocalService {
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long userId, long folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		java.lang.String uuid, long userId, long folderId,
+		long userId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -129,9 +121,17 @@ public interface IGImageLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
-		long userId, long folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries,
+		java.lang.String uuid, long userId, long folderId,
+		java.lang.String name, java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage addImage(
+		long userId, long folderId, java.lang.String name,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
@@ -139,7 +139,7 @@ public interface IGImageLocalService {
 
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		java.lang.String uuid, long userId, long folderId,
-		java.lang.String description, java.io.File file,
+		java.lang.String name, java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
@@ -252,9 +252,9 @@ public interface IGImageLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGImage updateImage(
-		long userId, long imageId, long folderId, java.lang.String description,
-		java.io.File file, java.lang.String contentType,
-		java.lang.String[] tagsEntries)
+		long userId, long imageId, long folderId, java.lang.String name,
+		java.lang.String description, java.io.File file,
+		java.lang.String contentType, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

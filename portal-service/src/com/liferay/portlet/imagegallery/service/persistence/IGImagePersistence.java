@@ -149,6 +149,37 @@ public interface IGImagePersistence {
 	public com.liferay.portlet.imagegallery.model.IGImage fetchByCustom2ImageId(
 		long custom2ImageId) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
+		long folderId, java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByF_N(
+		long folderId, java.lang.String name, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage findByF_N_First(
+		long folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage findByF_N_Last(
+		long folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
+	public com.liferay.portlet.imagegallery.model.IGImage[] findByF_N_PrevAndNext(
+		long imageId, long folderId, java.lang.String name,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.imagegallery.NoSuchImageException;
+
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -189,6 +220,9 @@ public interface IGImagePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.imagegallery.NoSuchImageException;
 
+	public void removeByF_N(long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUuid(java.lang.String uuid)
@@ -207,6 +241,9 @@ public interface IGImagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByCustom2ImageId(long custom2ImageId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByF_N(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

@@ -74,7 +74,7 @@ import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
  */
 public class IGImageServiceHttp {
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		HttpPrincipal httpPrincipal, long folderId,
+		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
@@ -83,39 +83,45 @@ public class IGImageServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
-			Object paramObj1 = description;
+			Object paramObj1 = name;
 
-			if (description == null) {
+			if (name == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = file;
+			Object paramObj2 = description;
+
+			if (description == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = file;
 
 			if (file == null) {
-				paramObj2 = new NullWrapper("java.io.File");
+				paramObj3 = new NullWrapper("java.io.File");
 			}
 
-			Object paramObj3 = contentType;
+			Object paramObj4 = contentType;
 
 			if (contentType == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = tagsEntries;
+			Object paramObj5 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
+				paramObj5 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
+			Object paramObj6 = new BooleanWrapper(addCommunityPermissions);
 
-			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj7 = new BooleanWrapper(addGuestPermissions);
 
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"addImage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;
@@ -145,7 +151,7 @@ public class IGImageServiceHttp {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage addImage(
-		HttpPrincipal httpPrincipal, long folderId,
+		HttpPrincipal httpPrincipal, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
@@ -155,47 +161,53 @@ public class IGImageServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(folderId);
 
-			Object paramObj1 = description;
+			Object paramObj1 = name;
 
-			if (description == null) {
+			if (name == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = file;
+			Object paramObj2 = description;
+
+			if (description == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = file;
 
 			if (file == null) {
-				paramObj2 = new NullWrapper("java.io.File");
+				paramObj3 = new NullWrapper("java.io.File");
 			}
 
-			Object paramObj3 = contentType;
+			Object paramObj4 = contentType;
 
 			if (contentType == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = tagsEntries;
+			Object paramObj5 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj4 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj5 = communityPermissions;
-
-			if (communityPermissions == null) {
 				paramObj5 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj6 = guestPermissions;
+			Object paramObj6 = communityPermissions;
+
+			if (communityPermissions == null) {
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
+			}
+
+			Object paramObj7 = guestPermissions;
 
 			if (guestPermissions == null) {
-				paramObj6 = new NullWrapper("[Ljava.lang.String;");
+				paramObj7 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"addImage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;
@@ -365,7 +377,7 @@ public class IGImageServiceHttp {
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateImage(
 		HttpPrincipal httpPrincipal, long imageId, long folderId,
-		java.lang.String description, java.io.File file,
+		java.lang.String name, java.lang.String description, java.io.File file,
 		java.lang.String contentType, java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -374,35 +386,41 @@ public class IGImageServiceHttp {
 
 			Object paramObj1 = new LongWrapper(folderId);
 
-			Object paramObj2 = description;
+			Object paramObj2 = name;
 
-			if (description == null) {
+			if (name == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = file;
+			Object paramObj3 = description;
+
+			if (description == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj4 = file;
 
 			if (file == null) {
-				paramObj3 = new NullWrapper("java.io.File");
+				paramObj4 = new NullWrapper("java.io.File");
 			}
 
-			Object paramObj4 = contentType;
+			Object paramObj5 = contentType;
 
 			if (contentType == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = tagsEntries;
+			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(IGImageServiceUtil.class.getName(),
 					"updateImage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;

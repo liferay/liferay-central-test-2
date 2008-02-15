@@ -61,6 +61,7 @@ public class IGImageJSONSerializer {
 		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
 		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
 		JSONUtil.put(jsonObj, "folderId", model.getFolderId());
+		JSONUtil.put(jsonObj, "name", model.getName());
 		JSONUtil.put(jsonObj, "description", model.getDescription());
 		JSONUtil.put(jsonObj, "smallImageId", model.getSmallImageId());
 		JSONUtil.put(jsonObj, "largeImageId", model.getLargeImageId());

@@ -217,7 +217,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			<%
 			headerNames.clear();
 
-			headerNames.add("image");
+			headerNames.add("name");
+			headerNames.add("thumbnail");
 			headerNames.add("height");
 			headerNames.add("width");
 			headerNames.add("size");
@@ -241,6 +242,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 
 				ResultRow row = new ResultRow(image, image.getImageId(), i);
+
+				// Name
+
+				row.addText(image.getNameWithExtension());
 
 				// Thumbnail
 
@@ -311,6 +316,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		List headerNames = new ArrayList();
 
+		headerNames.add("name");
 		headerNames.add("thumbnail");
 		headerNames.add("height");
 		headerNames.add("width");
@@ -335,6 +341,10 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
 
 			ResultRow row = new ResultRow(image, image.getImageId(), i);
+
+			// Name
+
+			row.addText(image.getNameWithExtension());
 
 			// Thumbnail
 

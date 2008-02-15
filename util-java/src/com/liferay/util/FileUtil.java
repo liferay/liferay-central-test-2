@@ -449,6 +449,21 @@ public class FileUtil {
 		return directoryList.toArray(new File[directoryList.size()]);
 	}
 
+	public static String stripExtension(String fileName) {
+		if (fileName == null) {
+			return null;
+		}
+
+		int pos = fileName.lastIndexOf(StringPool.PERIOD);
+
+		if (pos != -1) {
+			return fileName.substring(0, pos);
+		}
+		else {
+			return fileName;
+		}
+	}
+
 	public static String replaceSeparator(String fileName) {
 		return StringUtil.replace(
 			fileName, StringPool.BACK_SLASH, StringPool.SLASH);

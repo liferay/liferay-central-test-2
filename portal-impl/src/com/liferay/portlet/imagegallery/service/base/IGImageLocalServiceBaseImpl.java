@@ -92,6 +92,7 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		igImage.setCreateDate(model.getCreateDate());
 		igImage.setModifiedDate(model.getModifiedDate());
 		igImage.setFolderId(model.getFolderId());
+		igImage.setName(model.getName());
 		igImage.setDescription(model.getDescription());
 		igImage.setSmallImageId(model.getSmallImageId());
 		igImage.setLargeImageId(model.getLargeImageId());
@@ -125,6 +126,7 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 		igImage.setCreateDate(model.getCreateDate());
 		igImage.setModifiedDate(model.getModifiedDate());
 		igImage.setFolderId(model.getFolderId());
+		igImage.setName(model.getName());
 		igImage.setDescription(model.getDescription());
 		igImage.setSmallImageId(model.getSmallImageId());
 		igImage.setLargeImageId(model.getLargeImageId());
