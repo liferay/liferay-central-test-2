@@ -208,13 +208,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 				String fileName = (String)ovp.getKey();
 				byte[] byteArray = (byte[])ovp.getValue();
 
+				if (Validator.isNull(fileName)) {
+					continue;
+				}
+
 				try {
-					if (Validator.isNotNull(fileName)) {
-						dlService.addFile(
-							companyId, portletId, groupId, repositoryId,
-							dirName + "/" + fileName, StringPool.BLANK,
-							new String[0], byteArray);
-					}
+					dlService.addFile(
+						companyId, portletId, groupId, repositoryId,
+						dirName + "/" + fileName, StringPool.BLANK,
+						new String[0], byteArray);
 				}
 				catch (DuplicateFileException dfe) {
 				}

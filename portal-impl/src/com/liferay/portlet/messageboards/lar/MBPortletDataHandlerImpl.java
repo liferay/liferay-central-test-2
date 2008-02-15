@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards.lar;
 
-import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
@@ -182,27 +181,20 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 							_NAMESPACE, "attachments") &&
 						message.isAttachments()) {
 
-						String[] fileNames = null;
+						String[] attachments = message.getAttachmentsFiles();
 
-						try {
-							fileNames = DLServiceUtil.getFileNames(
+						for (int i = 0; i < attachments.length; i++) {
+							String attachment = attachments[i];
+
+							byte[] byteArray = DLServiceUtil.getFile(
 								context.getCompanyId(), CompanyImpl.SYSTEM,
-								message.getAttachmentsDir());
+								attachment);
 
-							for (int i = 0; i < fileNames.length; i++) {
-								byte[] byteArray = DLServiceUtil.getFile(
-									context.getCompanyId(), CompanyImpl.SYSTEM,
-									fileNames[i]);
-
-								context.getZipWriter().addEntry(
-									fileNames[i], byteArray);
-							}
-
-							message.setAttachmentsDir(
-								message.getAttachmentsDir());
+							context.getZipWriter().addEntry(
+								attachment, byteArray);
 						}
-						catch (NoSuchDirectoryException nsde) {
-						}
+
+						message.setAttachmentsDir(message.getAttachmentsDir());
 					}
 
 					if (context.getBooleanParameter(_NAMESPACE, "flags")) {
@@ -525,7 +517,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
 			message.isAttachments()) {
 
-			files = (List)context.getZipReader().getFolderEntries().get(
+			files = context.getZipReader().getFolderEntries().get(
 				message.getAttachmentsDir() + "/");
 
 			if (files == null) {

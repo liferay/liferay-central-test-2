@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.wiki.lar;
 
-import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
@@ -171,26 +170,20 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					if (context.getBooleanParameter(
 							_NAMESPACE, "attachments") && page.isHead()) {
 
-						String[] fileNames = null;
+						String[] attachments = page.getAttachmentsFiles();
 
-						try {
-							fileNames = DLServiceUtil.getFileNames(
+						for (int i = 0; i < attachments.length; i++) {
+							String attachment = attachments[i];
+
+							byte[] byteArray = DLServiceUtil.getFile(
 								context.getCompanyId(), CompanyImpl.SYSTEM,
-								page.getAttachmentsDir());
+								attachment);
 
-							for (int i = 0; i < fileNames.length; i++) {
-								byte[] byteArray = DLServiceUtil.getFile(
-									context.getCompanyId(), CompanyImpl.SYSTEM,
-									fileNames[i]);
-
-								context.getZipWriter().addEntry(
-									fileNames[i], byteArray);
-							}
-
-							page.setAttachmentsDir(page.getAttachmentsDir());
+							context.getZipWriter().addEntry(
+								attachment, byteArray);
 						}
-						catch (NoSuchDirectoryException nsde) {
-						}
+
+						page.setAttachmentsDir(page.getAttachmentsDir());
 					}
 
 				}
@@ -376,6 +369,18 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					page.getRedirectTo(), tagsEntries, prefs, themeDisplay);
 			}
 
+			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
+				page.isHead()) {
+
+				List files = context.getZipReader().getFolderEntries().get(
+					page.getAttachmentsDir() + "/");
+
+				if (files != null) {
+					WikiPageLocalServiceUtil.addPageAttachments(
+						nodeId, page.getTitle(), files);
+				}
+			}
+
 			if (context.getBooleanParameter(_NAMESPACE, "comments")) {
 				context.importComments(
 					WikiPage.class, new Long(page.getResourcePrimKey()),
@@ -388,19 +393,6 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					WikiPage.class, new Long(page.getResourcePrimKey()),
 					new Long(existingPage.getResourcePrimKey()));
 			}
-
-			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
-					page.isHead()) {
-
-				List files = context.getZipReader().getFolderEntries().get(
-					page.getAttachmentsDir() + "/");
-
-				if (files != null) {
-					WikiPageLocalServiceUtil.addPageAttachments(
-						nodeId, page.getTitle(), files);
-				}
-			}
-
 		}
 		catch (NoSuchNodeException nsne) {
 			_log.error(
