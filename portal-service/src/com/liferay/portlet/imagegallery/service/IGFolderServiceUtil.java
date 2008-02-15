@@ -75,6 +75,18 @@ public class IGFolderServiceUtil {
 			description, communityPermissions, guestPermissions);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolder copyFolder(
+		long plid, long sourceFolderId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGFolderService igFolderService = IGFolderServiceFactory.getService();
+
+		return igFolderService.copyFolder(plid, sourceFolderId, parentFolderId,
+			name, description, addCommunityPermissions, addGuestPermissions);
+	}
+
 	public static void deleteFolder(long folderId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -99,6 +111,15 @@ public class IGFolderServiceUtil {
 		IGFolderService igFolderService = IGFolderServiceFactory.getService();
 
 		return igFolderService.getFolder(groupId, parentFolderId, name);
+	}
+
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> getFolders(
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGFolderService igFolderService = IGFolderServiceFactory.getService();
+
+		return igFolderService.getFolders(groupId, parentFolderId);
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGFolder updateFolder(

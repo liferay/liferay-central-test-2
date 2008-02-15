@@ -116,7 +116,7 @@ public class WebDAVUtil {
 		return destination;
 	}
 
-	public static String getEntryName(String[] pathArray) {
+	public static String getResourceName(String[] pathArray) {
 		if (pathArray.length <= 3) {
 			return StringPool.BLANK;
 		}
@@ -133,7 +133,7 @@ public class WebDAVUtil {
 
 	public static long getGroupId(String[] pathArray) throws WebDAVException {
 		try {
-			if (pathArray.length == 0) {
+			if (pathArray.length <= 1) {
 				return 0;
 			}
 

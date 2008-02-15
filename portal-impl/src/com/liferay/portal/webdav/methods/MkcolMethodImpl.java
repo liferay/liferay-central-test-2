@@ -52,7 +52,7 @@ public class MkcolMethodImpl implements Method {
 		int statusCode = HttpServletResponse.SC_FORBIDDEN;
 
 		if (groupId != 0) {
-			Status status = storage.addCollection(webDavReq);
+			Status status = storage.makeCollection(webDavReq);
 
 			if (Validator.isNotNull(status.getLocation())) {
 				res.setHeader(

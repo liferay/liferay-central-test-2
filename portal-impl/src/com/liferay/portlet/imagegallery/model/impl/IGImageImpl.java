@@ -69,7 +69,23 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		return folder;
 	}
 
-	public String getImageType()  {
+	public int getImageSize() {
+		if (_imageSize <= 0) {
+			try {
+				Image largeImage =
+					ImageLocalUtil.getImage(getLargeImageId());
+
+				_imageSize = largeImage.getSize();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return _imageSize;
+	}
+
+	public String getImageType() {
 		if (_imageType == null) {
 			try {
 				Image largeImage = ImageLocalUtil.getImage(getLargeImageId());
@@ -107,5 +123,6 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 
 	private String _userUuid;
 	private String _imageType;
+	private int _imageSize = 0;
 
 }

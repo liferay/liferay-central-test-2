@@ -180,6 +180,23 @@ public class FileUtil {
 		}
 	}
 
+	public static File createTempFile() {
+		return createTempFile(null);
+	}
+
+	public static File createTempFile(String extension) {
+		String fileName =
+			SystemProperties.get(SystemProperties.TMP_DIR) +
+				StringPool.SLASH + Time.getTimestamp() +
+					PwdGenerator.getPassword(PwdGenerator.KEY2, 8);
+
+		if (Validator.isNotNull(extension)) {
+			fileName += StringPool.PERIOD + extension;
+		}
+
+		return new File(fileName);
+	}
+
 	public static boolean delete(String file) {
 		return delete(new File(file));
 	}

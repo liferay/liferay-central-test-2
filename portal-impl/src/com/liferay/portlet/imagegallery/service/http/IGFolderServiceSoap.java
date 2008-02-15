@@ -117,6 +117,25 @@ public class IGFolderServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGFolderSoap copyFolder(
+		long plid, long sourceFolderId, long parentFolderId,
+		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.copyFolder(plid,
+					sourceFolderId, parentFolderId, name, description,
+					addCommunityPermissions, addGuestPermissions);
+
+			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteFolder(long folderId) throws RemoteException {
 		try {
 			IGFolderServiceUtil.deleteFolder(folderId);
@@ -150,6 +169,21 @@ public class IGFolderServiceSoap {
 					parentFolderId, name);
 
 			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGFolderSoap[] getFolders(
+		long groupId, long parentFolderId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> returnValue =
+				IGFolderServiceUtil.getFolders(groupId, parentFolderId);
+
+			return com.liferay.portlet.imagegallery.model.IGFolderSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

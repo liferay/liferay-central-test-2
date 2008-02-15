@@ -62,6 +62,12 @@ public class WebDAVServlet extends HttpServlet {
 		int status = HttpServletResponse.SC_NOT_IMPLEMENTED;
 
 		try {
+			if (ignoreResource(req)) {
+				status = HttpServletResponse.SC_NOT_FOUND;
+
+				return;
+			}
+
 			WebDAVStorage storage = getStorage(req);
 
 			// Set the path only if it has not already been set. This works
@@ -111,8 +117,8 @@ public class WebDAVServlet extends HttpServlet {
 			if (status > 0) {
 				res.setStatus(status);
 
-				if (_log.isInfoEnabled()) {
-					_log.info("Returning status code " + status);
+				if (_log.isDebugEnabled()) {
+					_log.debug("Returning status code " + status);
 				}
 			}
 
@@ -162,6 +168,28 @@ public class WebDAVServlet extends HttpServlet {
 		}
 
 		return (WebDAVStorage)InstancePool.get(storageClass);
+	}
+
+	protected boolean ignoreResource(HttpServletRequest req) {
+		String[] ignoreList = new String[] {
+				".DS_Store", ".TemporaryItems", ".Trashes", ".Spotlight-V100",
+				".metadata_index_homes_only", ".metadata_never_index"
+			};
+
+		String[] pathArray = WebDAVUtil.getPathArray(req.getPathInfo(), true);
+		String resourceName = pathArray[pathArray.length - 1];
+
+		for (String ignoredName : ignoreList) {
+			if (ignoredName.equals(resourceName)) {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Skipping over resource " + resourceName);
+				}
+
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	private static Log _log = LogFactory.getLog(WebDAVServlet.class);

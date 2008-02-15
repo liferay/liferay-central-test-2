@@ -19,17 +19,16 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-
-package com.liferay.portlet.documentlibrary.webdav;
+package com.liferay.portlet.imagegallery.webdav;
 
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.BaseWebDAVStorageImpl;
 import com.liferay.portal.webdav.Resource;
@@ -37,22 +36,15 @@ import com.liferay.portal.webdav.Status;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portal.webdav.WebDAVRequest;
 import com.liferay.portal.webdav.WebDAVUtil;
-import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
-import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
-import com.liferay.portlet.documentlibrary.NoSuchFolderException;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
-import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
-import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
-import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
+import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
+import com.liferay.portlet.imagegallery.NoSuchFolderException;
+import com.liferay.portlet.imagegallery.NoSuchImageException;
+import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
+import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
+import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.PwdGenerator;
-import com.liferay.util.SystemProperties;
-import com.liferay.util.Time;
 
 import java.io.File;
 import java.io.InputStream;
@@ -60,7 +52,6 @@ import java.io.InputStream;
 import java.rmi.RemoteException;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -70,13 +61,12 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="DLWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="IGWebDAVStorageImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
  * @author Alexander Chow
  *
  */
-public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
+public class IGWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 	public int copyCollectionResource(
 			WebDAVRequest webDavReq, Resource resource, String destination,
@@ -84,10 +74,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		throws WebDAVException {
 
 		try {
-			String[] destinationArray = WebDAVUtil.getPathArray(
-				destination, true);
+			IGFolder srcFolder = (IGFolder)resource.getModel();
 
-			long parentFolderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+			String[] destinationArray =
+				WebDAVUtil.getPathArray(destination, true);
+
+			long parentFolderId;
 
 			try {
 				parentFolderId = getParentFolderId(destinationArray);
@@ -96,12 +88,10 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				return HttpServletResponse.SC_CONFLICT;
 			}
 
-			DLFolder folder = (DLFolder)resource.getModel();
-
 			long groupId = WebDAVUtil.getGroupId(destination);
 			long plid = getPlid(groupId);
 			String name = WebDAVUtil.getResourceName(destinationArray);
-			String description = folder.getDescription();
+			String description = srcFolder.getDescription();
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
 
@@ -114,13 +104,13 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			if (depth == 0) {
-				DLFolderServiceUtil.addFolder(
+				IGFolderServiceUtil.addFolder(
 					plid, parentFolderId, name, description,
 					addCommunityPermissions, addGuestPermissions);
 			}
 			else {
-				DLFolderServiceUtil.copyFolder(
-					plid, folder.getFolderId(), parentFolderId, name,
+				IGFolderServiceUtil.copyFolder(
+					plid, srcFolder.getFolderId(), parentFolderId, name,
 					description, addCommunityPermissions, addGuestPermissions);
 			}
 
@@ -145,6 +135,8 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		File file = null;
 
 		try {
+			IGImage image = (IGImage)resource.getModel();
+
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
 
@@ -157,27 +149,18 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				return HttpServletResponse.SC_CONFLICT;
 			}
 
-			DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
-
-			DLFileEntryPermission.check(
-				webDavReq.getPermissionChecker(), fileEntry,
-				ActionKeys.VIEW);
-
-			long userId = webDavReq.getUserId();
-			long groupId = webDavReq.getGroupId();
-			String name = StringPool.BLANK;
-			String title = WebDAVUtil.getResourceName(destinationArray);
-			String description = fileEntry.getDescription();
+			long groupId = WebDAVUtil.getGroupId(destination);
+			String name = WebDAVUtil.getResourceName(destinationArray);
+			String srcName = image.getNameWithExtension();
+			String contentType = ContentTypeUtil.getContentType(srcName);
+			String description = image.getDescription();
 			String[] tagsEntries = new String[0];
-			String extraSettings = fileEntry.getExtraSettings();
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
 
-			file = FileUtil.createTempFile();
+			file = FileUtil.createTempFile(image.getImageType());
 
-			InputStream is = DLFileEntryLocalServiceUtil.getFileAsStream(
-				fileEntry.getCompanyId(), userId, fileEntry.getFolderId(),
-				fileEntry.getName());
+			InputStream is = resource.getContentAsStream();
 
 			FileUtil.write(file, is);
 
@@ -185,22 +168,17 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 				_log.debug("Writing request to file " + file.getName());
 			}
 
-			DLFolderPermission.check(
-				webDavReq.getPermissionChecker(), parentFolderId,
-				ActionKeys.ADD_DOCUMENT);
-
 			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
-				if (deleteResource(groupId, parentFolderId, title)) {
+				if (deleteResource(groupId, parentFolderId, name)) {
 					status = HttpServletResponse.SC_NO_CONTENT;
 				}
 			}
 
-			DLFileEntryLocalServiceUtil.addFileEntry(
-				userId, parentFolderId, name, title, description, tagsEntries,
-				extraSettings, file, addCommunityPermissions,
-				addGuestPermissions);
+			IGImageServiceUtil.addImage(
+				parentFolderId, name, description, file, contentType,
+				tagsEntries, addCommunityPermissions, addGuestPermissions);
 
 			return status;
 		}
@@ -233,16 +211,15 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			Object model = resource.getModel();
 
-			if (model instanceof DLFolder) {
-				DLFolder folder = (DLFolder)model;
+			if (model instanceof IGFolder) {
+				IGFolder folder = (IGFolder)model;
 
-				DLFolderServiceUtil.deleteFolder(folder.getFolderId());
+				IGFolderServiceUtil.deleteFolder(folder.getFolderId());
 			}
 			else {
-				DLFileEntry fileEntry = (DLFileEntry)model;
+				IGImage image = (IGImage)model;
 
-				DLFileEntryServiceUtil.deleteFileEntry(
-					fileEntry.getFolderId(), fileEntry.getName());
+				IGImageServiceUtil.deleteImage(image.getImageId());
 			}
 
 			return HttpServletResponse.SC_NO_CONTENT;
@@ -271,7 +248,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 
 			try {
-				DLFolder folder = DLFolderServiceUtil.getFolder(
+				IGFolder folder = IGFolderServiceUtil.getFolder(
 					webDavReq.getGroupId(), parentFolderId, name);
 
 				if ((folder.getParentFolderId() != parentFolderId) ||
@@ -284,19 +261,14 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			}
 			catch (NoSuchFolderException nsfe) {
 				try {
-					String titleWithExtension = name;
+					IGImage image =
+						IGImageServiceUtil.
+							getImageByFolderIdAndNameWithExtension(
+								parentFolderId, name);
 
-					DLFileEntry fileEntry =
-						DLFileEntryLocalServiceUtil.getFileEntryByTitle(
-							parentFolderId, titleWithExtension);
-
-					DLFileEntryPermission.check(
-						webDavReq.getPermissionChecker(), fileEntry,
-						ActionKeys.VIEW);
-
-					return toResource(webDavReq, fileEntry, false);
+					return toResource(webDavReq, image, false);
 				}
-				catch (NoSuchFileEntryException nsfee) {
+				catch (NoSuchImageException nsfee) {
 					return null;
 				}
 			}
@@ -313,13 +285,13 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			long folderId = getFolderId(webDavReq.getPathArray());
 
 			List<Resource> folders = getFolders(webDavReq, folderId);
-			List<Resource> fileEntries = getFileEntries(webDavReq, folderId);
+			List<Resource> images = getImages(webDavReq, folderId);
 
 			List<Resource> resources = new ArrayList<Resource>(
-				folders.size() + fileEntries.size());
+				folders.size() + images.size());
 
 			resources.addAll(folders);
-			resources.addAll(fileEntries);
+			resources.addAll(images);
 
 			return resources;
 		}
@@ -342,22 +314,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] pathArray = webDavReq.getPathArray();
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
-
-			try {
-				DLFileEntryLocalServiceUtil.getFileEntryByTitle(
-					parentFolderId, name);
-
-				return new Status(HttpServletResponse.SC_CONFLICT);
-			}
-			catch (Exception e) {
-			}
-
 			long plid = getPlid(webDavReq.getGroupId());
 			String description = StringPool.BLANK;
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
 
-			DLFolderServiceUtil.addFolder(
+			IGFolderServiceUtil.addFolder(
 				plid, parentFolderId, name, description,
 				addCommunityPermissions, addGuestPermissions);
 
@@ -388,36 +350,29 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
 
-			DLFolder folder = (DLFolder)resource.getModel();
+			IGFolder folder = (IGFolder)resource.getModel();
 
-			long groupId = webDavReq.getGroupId();
 			long folderId = folder.getFolderId();
-			long parentFolderId = getParentFolderId(destinationArray);
-			String name = WebDAVUtil.getResourceName(destinationArray);
 			String description = folder.getDescription();
-
-			if (parentFolderId != folder.getParentFolderId()) {
-				name = folder.getName();
-			}
+			long destGroupId = WebDAVUtil.getGroupId(destinationArray);
+			long destParentFolderId = getParentFolderId(destinationArray);
+			String destName = WebDAVUtil.getResourceName(destinationArray);
 
 			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
-				if (deleteResource(groupId, parentFolderId, name)) {
+				if (deleteResource(destGroupId, destParentFolderId, destName)) {
 					status = HttpServletResponse.SC_NO_CONTENT;
 				}
 			}
 
-			DLFolderServiceUtil.updateFolder(
-				folderId, parentFolderId, name, description);
+			IGFolderServiceUtil.updateFolder(
+				folderId, destParentFolderId, destName, description, false);
 
 			return status;
 		}
 		catch (PrincipalException pe) {
 			return HttpServletResponse.SC_FORBIDDEN;
-		}
-		catch (DuplicateFileException dfe) {
-			return HttpServletResponse.SC_PRECONDITION_FAILED;
 		}
 		catch (DuplicateFolderNameException dfne) {
 			return HttpServletResponse.SC_PRECONDITION_FAILED;
@@ -436,30 +391,27 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			String[] destinationArray = WebDAVUtil.getPathArray(
 				destination, true);
 
-			DLFileEntry fileEntry = (DLFileEntry)resource.getModel();
+			IGImage image = (IGImage)resource.getModel();
 
-			long groupId = WebDAVUtil.getGroupId(destinationArray);
-			long folderId = fileEntry.getFolderId();
-			long parentFolderId = getParentFolderId(destinationArray);
-			String name = fileEntry.getName();
-			String sourceFileName = null;
-			String title = WebDAVUtil.getResourceName(destinationArray);
-			String description = fileEntry.getDescription();
+			long imageId = image.getImageId();
+			long folderId = image.getFolderId();
+			String description = image.getDescription();
+			long destGroupId = WebDAVUtil.getGroupId(destinationArray);
+			long destParentFolderId = getParentFolderId(destinationArray);
+			String destName = WebDAVUtil.getResourceName(destinationArray);
 			String[] tagsEntries = new String[0];
-			String extraSettings = fileEntry.getExtraSettings();
-			byte[] byteArray = null;
 
 			int status = HttpServletResponse.SC_CREATED;
 
 			if (overwrite) {
-				if (deleteResource(groupId, parentFolderId, title)) {
+				if (deleteResource(destGroupId, destParentFolderId, destName)) {
 					status = HttpServletResponse.SC_NO_CONTENT;
 				}
 			}
 
-			DLFileEntryServiceUtil.updateFileEntry(
-				folderId, parentFolderId, name, sourceFileName, title,
-				description, tagsEntries, extraSettings, byteArray);
+			IGImageServiceUtil.updateImage(
+				imageId, folderId, destName, description, null, null,
+				tagsEntries);
 
 			return status;
 		}
@@ -483,38 +435,26 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		try {
 			HttpServletRequest req = webDavReq.getHttpServletRequest();
 			String[] pathArray = webDavReq.getPathArray();
-			long userId = webDavReq.getUserId();
 
 			long parentFolderId = getParentFolderId(pathArray);
 			String name = WebDAVUtil.getResourceName(pathArray);
-			String title = name;
-			String description = StringPool.BLANK;
+			String description = name;
+			String contentType = ContentTypeUtil.getContentType(name);
 			String[] tagsEntries = new String[0];
-			String extraSettings = StringPool.BLANK;
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
 
-			String fileName =
-				SystemProperties.get(SystemProperties.TMP_DIR) +
-					StringPool.SLASH + Time.getTimestamp() +
-						PwdGenerator.getPassword(PwdGenerator.KEY2, 8);
-
-			file = new File(fileName);
+			file = FileUtil.createTempFile(FileUtil.getExtension(name));
 
 			FileUtil.write(file, req.getInputStream());
 
 			if (_log.isDebugEnabled()) {
-				_log.debug("Writing request to file " + fileName);
+				_log.debug("Writing request to file " + file.getName());
 			}
 
-			DLFolderPermission.check(
-				webDavReq.getPermissionChecker(), parentFolderId,
-				ActionKeys.ADD_DOCUMENT);
-
-			DLFileEntryLocalServiceUtil.addFileEntry(
-				userId, parentFolderId, name, title, description, tagsEntries,
-				extraSettings, file, addCommunityPermissions,
-				addGuestPermissions);
+			IGImageServiceUtil.addImage(
+				parentFolderId, name, description, file, contentType,
+				tagsEntries, addCommunityPermissions, addGuestPermissions);
 
 			return HttpServletResponse.SC_CREATED;
 		}
@@ -545,57 +485,68 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		boolean deleted = false;
 
 		try {
-			DLFolder destFolder = DLFolderServiceUtil.getFolder(
+			IGFolder destFolder = IGFolderServiceUtil.getFolder(
 				groupId, parentFolderId, name);
 
-			DLFolderServiceUtil.deleteFolder(
-				destFolder.getFolderId());
+			IGFolderServiceUtil.deleteFolder(destFolder.getFolderId());
 
 			deleted = true;
 		}
 		catch (NoSuchFolderException nsfe) {
 			try {
-				DLFileEntryServiceUtil.deleteFileEntryByTitle(
-					parentFolderId, name);
+				if (name.indexOf(StringPool.PERIOD) != -1) {
+					IGImage image =
+						IGImageServiceUtil.
+							getImageByFolderIdAndNameWithExtension(
+								parentFolderId, name);
 
-				deleted = true;
+					IGImageServiceUtil.deleteImage(image.getImageId());
+
+					deleted = true;
+				}
 			}
-			catch (NoSuchFileEntryException nsfee) {
+			catch (NoSuchImageException nsfee) {
 			}
 		}
 
 		return deleted;
 	}
 
-	protected List<Resource> getFileEntries(
+	protected List<Resource> getFolders(
 			WebDAVRequest webDavReq, long parentFolderId)
 		throws Exception {
 
-		List<Resource> fileEntries = new ArrayList<Resource>();
+		List<Resource> resources = new ArrayList<Resource>();
 
-		long plid = getPlid(webDavReq.getGroupId());
+		long groupId = webDavReq.getGroupId();
 
-		DLFolderPermission.check(
-			webDavReq.getPermissionChecker(), plid, parentFolderId,
-			ActionKeys.VIEW);
+		List<IGFolder> folders = IGFolderServiceUtil.getFolders(
+			groupId, parentFolderId);
 
-		Iterator<DLFileEntry> itr = DLFileEntryLocalServiceUtil.getFileEntries(
-			parentFolderId).iterator();
+		for (IGFolder folder : folders) {
+			Resource resource = toResource(webDavReq, folder, true);
 
-		while (itr.hasNext()) {
-			DLFileEntry fileEntry = itr.next();
-
-			if (DLFileEntryPermission.contains(
-					webDavReq.getPermissionChecker(), fileEntry,
-					ActionKeys.VIEW)) {
-
-				Resource resource = toResource(webDavReq, fileEntry, true);
-
-				fileEntries.add(resource);
-			}
+			resources.add(resource);
 		}
 
-		return fileEntries;
+		return resources;
+	}
+
+	protected List<Resource> getImages(
+			WebDAVRequest webDavReq, long parentFolderId)
+		throws Exception {
+
+		List<Resource> resources = new ArrayList<Resource>();
+
+		List<IGImage> images = IGImageServiceUtil.getImages(parentFolderId);
+
+		for (IGImage image : images) {
+			Resource resource = toResource(webDavReq, image, true);
+
+			resources.add(resource);
+		}
+
+		return resources;
 	}
 
 	protected long getFolderId(String[] pathArray) throws Exception {
@@ -605,7 +556,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	protected long getFolderId(String[] pathArray, boolean parent)
 		throws Exception {
 
-		long folderId = DLFolderImpl.DEFAULT_PARENT_FOLDER_ID;
+		long folderId = IGFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		if (pathArray.length <= 2) {
 			return folderId;
@@ -622,7 +573,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			for (int i = 3; i < x; i++) {
 				String name = pathArray[i];
 
-				DLFolder folder = DLFolderServiceUtil.getFolder(
+				IGFolder folder = IGFolderServiceUtil.getFolder(
 					groupId, folderId, name);
 
 				if (groupId == folder.getGroupId()) {
@@ -634,58 +585,30 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 		return folderId;
 	}
 
-	protected List<Resource> getFolders(
-			WebDAVRequest webDavReq, long parentFolderId)
-		throws Exception {
-
-		List<Resource> folders = new ArrayList<Resource>();
-
-		long plid = getPlid(webDavReq.getGroupId());
-		long groupId = webDavReq.getGroupId();
-
-		DLFolderPermission.check(
-			webDavReq.getPermissionChecker(), plid, parentFolderId,
-			ActionKeys.VIEW);
-
-		Iterator<DLFolder> itr = DLFolderLocalServiceUtil.getFolders(
-			groupId, parentFolderId).iterator();
-
-		while (itr.hasNext()) {
-			DLFolder folder = itr.next();
-
-			if (DLFolderPermission.contains(
-					webDavReq.getPermissionChecker(), folder,
-					ActionKeys.VIEW)) {
-
-				Resource resource = toResource(webDavReq, folder, true);
-
-				folders.add(resource);
-			}
-		}
-
-		return folders;
-	}
-
 	protected long getParentFolderId(String[] pathArray) throws Exception {
 		return getFolderId(pathArray, true);
 	}
 
 	protected Resource toResource(
-		WebDAVRequest webDavReq, DLFileEntry fileEntry, boolean appendPath) {
+		WebDAVRequest webDavReq, IGImage image, boolean appendPath) {
 
 		String parentPath = getRootPath() + webDavReq.getPath();
 		String name = StringPool.BLANK;
 
 		if (appendPath) {
-			name = fileEntry.getTitleWithExtension();
+			try {
+				name = image.getNameWithExtension();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 
-		return new DLFileEntryResourceImpl(
-			webDavReq, fileEntry, parentPath, name);
+		return new IGImageResourceImpl(image, parentPath, name);
 	}
 
 	protected Resource toResource(
-		WebDAVRequest webDavReq, DLFolder folder, boolean appendPath) {
+		WebDAVRequest webDavReq, IGFolder folder, boolean appendPath) {
 
 		String parentPath = getRootPath() + webDavReq.getPath();
 		String name = StringPool.BLANK;
@@ -699,12 +622,12 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 			folder.getModifiedDate());
 
 		resource.setModel(folder);
-		resource.setClassName(DLFolder.class.getName());
+		resource.setClassName(IGFolder.class.getName());
 		resource.setPrimaryKey(folder.getPrimaryKey());
 
 		return resource;
 	}
 
-	private static Log _log = LogFactory.getLog(DLWebDAVStorageImpl.class);
+	private static Log _log = LogFactory.getLog(IGWebDAVStorageImpl.class);
 
 }

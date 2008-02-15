@@ -38,6 +38,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
+import com.liferay.portlet.imagegallery.NoSuchImageException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
@@ -402,6 +403,24 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		throws SystemException {
 
 		return igImagePersistence.findByFolderId(folderId, begin, end, obc);
+	}
+
+	public IGImage getImageByFolderIdAndNameWithExtension(
+			long folderId, String nameWithExtension)
+		throws PortalException, SystemException {
+
+		String nameProper = FileUtil.stripExtension(nameWithExtension);
+
+		List<IGImage> images =
+			igImagePersistence.findByF_N(folderId, nameProper);
+
+		for (IGImage image : images) {
+			if (nameWithExtension.equals(image.getNameWithExtension())) {
+				return image;
+			}
+		}
+
+		throw new NoSuchImageException();
 	}
 
 	public int getImagesCount(long folderId) throws SystemException {

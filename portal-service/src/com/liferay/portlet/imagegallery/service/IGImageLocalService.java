@@ -245,6 +245,11 @@ public interface IGImageLocalService {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
+		long folderId, java.lang.String nameWithExtension)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public int getImagesCount(long folderId)
 		throws com.liferay.portal.SystemException;
 

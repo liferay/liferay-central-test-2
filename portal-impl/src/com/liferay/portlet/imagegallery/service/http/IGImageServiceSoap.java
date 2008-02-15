@@ -106,6 +106,37 @@ public class IGImageServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImageSoap[] getImages(
+		long folderId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
+				IGImageServiceUtil.getImages(folderId);
+
+			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImageSoap getImageByFolderIdAndNameWithExtension(
+		long folderId, java.lang.String nameWithExtension)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageByFolderIdAndNameWithExtension(folderId,
+					nameWithExtension);
+
+			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImageSoap getImageByLargeImageId(
 		long largeImageId) throws RemoteException {
 		try {

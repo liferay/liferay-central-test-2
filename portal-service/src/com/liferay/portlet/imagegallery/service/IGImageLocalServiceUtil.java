@@ -453,6 +453,16 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.getImages(folderId, begin, end, obc);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
+		long folderId, java.lang.String nameWithExtension)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getImageByFolderIdAndNameWithExtension(folderId,
+			nameWithExtension);
+	}
+
 	public static int getImagesCount(long folderId)
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();

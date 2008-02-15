@@ -22,6 +22,9 @@
 
 package com.liferay.portal.webdav;
 
+import com.liferay.portal.SystemException;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -32,7 +35,7 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 
-	public Status addCollection(WebDAVRequest webDavReq)
+	public Status makeCollection(WebDAVRequest webDavReq)
 		throws WebDAVException {
 
 		return new Status(HttpServletResponse.SC_FORBIDDEN);
@@ -99,6 +102,10 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 
 	public void setRootPath(String rootPath) {
 		_rootPath = rootPath;
+	}
+
+	protected long getPlid(long groupId) throws SystemException {
+		return LayoutLocalServiceUtil.getDefaultPlid(groupId);
 	}
 
 	private String _rootPath;

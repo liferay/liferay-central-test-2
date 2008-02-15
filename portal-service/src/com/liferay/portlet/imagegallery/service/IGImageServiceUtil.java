@@ -96,6 +96,25 @@ public class IGImageServiceUtil {
 		return igImageService.getImage(imageId);
 	}
 
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
+		long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGImageService igImageService = IGImageServiceFactory.getService();
+
+		return igImageService.getImages(folderId);
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
+		long folderId, java.lang.String nameWithExtension)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		IGImageService igImageService = IGImageServiceFactory.getService();
+
+		return igImageService.getImageByFolderIdAndNameWithExtension(folderId,
+			nameWithExtension);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.PortalException,

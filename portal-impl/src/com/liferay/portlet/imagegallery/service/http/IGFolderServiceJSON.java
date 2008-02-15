@@ -24,6 +24,7 @@ package com.liferay.portlet.imagegallery.service.http;
 
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -96,6 +97,19 @@ public class IGFolderServiceJSON {
 		return IGFolderJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject copyFolder(long plid, long sourceFolderId,
+		long parentFolderId, java.lang.String name,
+		java.lang.String description, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
+		com.liferay.portlet.imagegallery.model.IGFolder returnValue = IGFolderServiceUtil.copyFolder(plid,
+				sourceFolderId, parentFolderId, name, description,
+				addCommunityPermissions, addGuestPermissions);
+
+		return IGFolderJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static void deleteFolder(long folderId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -118,6 +132,15 @@ public class IGFolderServiceJSON {
 				parentFolderId, name);
 
 		return IGFolderJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONArray getFolders(long groupId, long parentFolderId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> returnValue =
+			IGFolderServiceUtil.getFolders(groupId, parentFolderId);
+
+		return IGFolderJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONObject updateFolder(long folderId, long parentFolderId,
