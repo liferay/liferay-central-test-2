@@ -389,6 +389,8 @@
 		<if>
 			<equals arg1="${app.server.type}" arg2="tomcat" />
 			<then>
+		  		<ant dir="../portal-impl" target="build-themes" inheritAll="false" />
+
 				<copy todir="${app.server.portal.dir}">
 					<fileset dir="docroot">
 						<include name="**/*.css" />
