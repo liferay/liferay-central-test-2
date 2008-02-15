@@ -92,12 +92,6 @@
 		};
 
 		var mainPath = themeDisplay.getPathMain();
-
-		var propsUtil = {
-			SESSION_ENABLE_PERSISTENT_COOKIES: function() {
-				return <%= PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES %>;
-			}
-		};
 	//]]>
 </script>
 

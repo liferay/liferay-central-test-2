@@ -316,7 +316,7 @@ Liferay.Util = {
 	},
 
 	getURLWithSessionId: function(url) {
-		if (propsUtil.SESSION_ENABLE_PERSISTENT_COOKIES) {
+		if (document.cookie && document.cookie.length > 0) {
 			return url;
 		}
 

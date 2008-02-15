@@ -53,6 +53,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.util.CookieUtil;
 import com.liferay.util.Http;
 import com.liferay.util.LocalizationUtil;
 
@@ -684,7 +685,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		String url = PortalUtil.getLayoutURL(this, themeDisplay);
 
-		if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
+		if (!CookieUtil.checkSessionCookie(req)) {
 			url = PortalUtil.getURLWithSessionId(url, req.getSession().getId());
 		}
 

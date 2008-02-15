@@ -42,6 +42,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.CookieUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Http;
@@ -691,7 +692,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 			result = result.substring(0, result.length() - 1);
 		}
 
-		if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
+		if (!CookieUtil.checkSessionCookie(_req)) {
 			result = PortalUtil.getURLWithSessionId(
 				result, _req.getSession().getId());
 		}

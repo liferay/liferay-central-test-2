@@ -25,7 +25,7 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.util.CookieUtil;
 
 import java.io.IOException;
 
@@ -58,7 +58,7 @@ public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {
 			redirect = portalURL + redirect;
 		}
 
-		if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
+		if (!CookieUtil.checkSessionCookie(_req)) {
 			redirect = PortalUtil.getURLWithSessionId(
 				redirect, _req.getSession().getId());
 		}

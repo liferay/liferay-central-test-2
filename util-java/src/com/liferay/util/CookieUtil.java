@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="CookieUtil.java.html"><b><i>View Source</i></b></a>
@@ -34,6 +35,11 @@ import javax.servlet.http.Cookie;
  *
  */
 public class CookieUtil {
+
+	public static boolean checkSessionCookie(HttpServletRequest req) {
+		Cookie[] cookies = req.getCookies();
+		return get(cookies, "jsessionid") != null;
+	}
 
 	public static String get(Cookie[] cookies, String name) {
 		if ((cookies != null) && (cookies.length > 0)) {

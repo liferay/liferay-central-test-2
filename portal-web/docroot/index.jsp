@@ -22,8 +22,8 @@
  */
 %>
 
+<%@ page import="com.liferay.util.CookieUtil" %>
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
-<%@ page import="com.liferay.portal.util.PropsValues" %>
 
 <%
 
@@ -37,7 +37,7 @@
 
 String mainPath = PortalUtil.getPathMain();
 
-if (!PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
+if (!CookieUtil.checkSessionCookie(request)) {
 	mainPath = PortalUtil.getURLWithSessionId(PortalUtil.getPathMain(), session.getId());
 }
 %>
