@@ -30,7 +30,8 @@ try {
 	PortletURL curEditPageURL = PortletURLUtil.clone(editPageURL, renderResponse);
 	String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
 
-	pageContent = WikiUtil.convert(wikiPage, curViewPageURL, curEditPageURL, attachmentURLPrefix);
+	WikiPageDisplay pageDisplay = WikiCacheUtil.getDisplay(wikiPage.getNodeId(), wikiPage.getTitle(), curViewPageURL, curEditPageURL, attachmentURLPrefix);
+	pageContent = pageDisplay.getHtmlContent();
 %>
 
 	<div class="wiki-body">

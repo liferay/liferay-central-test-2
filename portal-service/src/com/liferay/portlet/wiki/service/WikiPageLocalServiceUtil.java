@@ -480,6 +480,19 @@ public class WikiPageLocalServiceUtil {
 		return wikiPageLocalService.getPage(nodeId, title, version);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiPageDisplay getPageDisplay(
+		long nodeId, java.lang.String title,
+		javax.portlet.PortletURL viewPageURL,
+		javax.portlet.PortletURL editPageURL,
+		java.lang.String attachmentURLPrefix)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getPageDisplay(nodeId, title, viewPageURL,
+			editPageURL, attachmentURLPrefix);
+	}
+
 	public static java.util.List getPages(long nodeId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();

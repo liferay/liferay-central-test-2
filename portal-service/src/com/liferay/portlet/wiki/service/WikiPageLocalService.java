@@ -240,6 +240,14 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.wiki.model.WikiPageDisplay getPageDisplay(
+		long nodeId, java.lang.String title,
+		javax.portlet.PortletURL viewPageURL,
+		javax.portlet.PortletURL editPageURL,
+		java.lang.String attachmentURLPrefix)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List getPages(long nodeId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 

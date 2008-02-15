@@ -38,11 +38,13 @@
 <%@ page import="com.liferay.portlet.wiki.WikiFormatException" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiPageDisplay" %>
 <%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiNodeLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.permission.WikiNodePermission" %>
 <%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %>
+<%@ page import="com.liferay.portlet.wiki.util.WikiCacheUtil" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 

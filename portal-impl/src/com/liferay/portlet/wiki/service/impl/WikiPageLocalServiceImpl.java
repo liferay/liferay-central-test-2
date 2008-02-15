@@ -52,11 +52,14 @@ import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.PageVersionException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.WikiPageDisplay;
 import com.liferay.portlet.wiki.model.WikiPageResource;
+import com.liferay.portlet.wiki.model.impl.WikiPageDisplayImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.base.WikiPageLocalServiceBaseImpl;
 import com.liferay.portlet.wiki.service.jms.WikiPageProducer;
 import com.liferay.portlet.wiki.util.Indexer;
+import com.liferay.portlet.wiki.util.WikiCacheUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.util.MathUtil;
@@ -79,6 +82,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletURL;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -147,6 +151,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setRedirectTo(redirectTo);
 
 		wikiPagePersistence.update(page);
+
+		// Cache
+
+		clearReferralsCache(page);
 
 		// Resources
 
@@ -296,6 +304,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			_log.error("Deleting index " + page.getPrimaryKey(), ioe);
 		}
+
+		// Cache
+
+		clearReferralsCache(page);
 
 		// Attachments
 
@@ -492,6 +504,22 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 
 		return page;
+	}
+
+	public WikiPageDisplay getPageDisplay(
+			long nodeId, String title, PortletURL viewPageURL,
+			PortletURL editPageURL, String attachmentURLPrefix)
+		throws PortalException, SystemException {
+
+		WikiPage page = getPage(nodeId, title);
+
+		String htmlContent = WikiUtil.convert(
+			page, viewPageURL, editPageURL, attachmentURLPrefix);
+
+		return new WikiPageDisplayImpl(
+			page.getNodeId(), page.getTitle(), page.getUserId(),
+			page.getVersion(), page.getContent(), htmlContent, page.getFormat(),
+			page.getHead(), page.getRedirectTo(), page.getAttachmentsFiles());
 	}
 
 	public List getPages(long nodeId, int begin, int end)
@@ -790,6 +818,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			_log.error("Indexing " + page.getPrimaryKey(), ioe);
 		}
 
+		// Cache
+
+		clearPageCache(page);
+
 		return page;
 	}
 
@@ -814,6 +846,22 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			if (!matcher.matches()) {
 				throw new PageTitleException();
 			}
+		}
+	}
+
+	protected void clearPageCache(WikiPage page)
+		throws PortalException, SystemException {
+		WikiCacheUtil.clearCache(page.getNodeId(), page.getTitle());
+	}
+
+	protected void clearReferralsCache(WikiPage page)
+		throws PortalException, SystemException {
+		List links = getIncomingLinks(page.getNodeId(), page.getTitle());
+
+		for (int i = 0; i < links.size(); i++) {
+			WikiPage curPage = (WikiPage) links.get(i);
+
+			WikiCacheUtil.clearCache(curPage.getNodeId(), curPage.getTitle());
 		}
 	}
 

@@ -284,9 +284,11 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				editPageURL.setParameter("struts_action", "/wiki/edit_page");
 
 				String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
+
+				WikiPageDisplay pageDisplay = WikiCacheUtil.getDisplay(wikiPage.getNodeId(), wikiPage.getTitle(), curViewPageURL, curEditPageURL, attachmentURLPrefix);
 			%>
 
-				<%= WikiUtil.convert(wikiPage, viewPageURL, editPageURL, attachmentURLPrefix) %>
+				<%= pageDisplay.getHtmlContent() %>
 
 			<%
 			}
