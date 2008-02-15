@@ -849,6 +849,8 @@ public class PropsUtil {
 
 	public static final String WEBDAV_LITMUS = "webdav.litmus";
 
+	public static final String WEBDAV_IGNORE = "webdav.ignore";
+
 	public static final String WEBDAV_STORAGE_TOKEN = "webdav.storage.token.";
 
 	public static final String WEBDAV_STORAGE_CLASS = "webdav.storage.class.";

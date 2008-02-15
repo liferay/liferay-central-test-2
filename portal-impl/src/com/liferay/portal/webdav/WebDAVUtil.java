@@ -166,7 +166,8 @@ public class WebDAVUtil {
 			return group.getGroupId();
 		}
 		catch (Exception e) {
-			throw new WebDAVException(e);
+			throw new WebDAVException(
+				"Unable to find group for " + pathArray[1], e);
 		}
 	}
 
@@ -244,7 +245,7 @@ public class WebDAVUtil {
 
 	private String _getStorageClass(String token) {
 		if (_storageMap.containsValue(token)) {
-			for (String key :  _storageMap.keySet()) {
+			for (String key: _storageMap.keySet()) {
 				if (_storageMap.get(key).equals(token)) {
 					return key;
 				}
