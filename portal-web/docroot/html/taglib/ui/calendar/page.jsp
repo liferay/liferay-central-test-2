@@ -86,9 +86,17 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 		<%
 		for (int i = 0; i < 7;  i++) {
 			int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
+			String className = "";
+			
+			if (i == 0) {
+				className = "first";
+			}
+			else if(i == 6) {
+				className = "last";
+			}
 		%>
 
-			<th>
+			<th class="<%= className %>">
 				<%= LanguageUtil.get(pageContext, CalendarUtil.DAYS_ABBREVIATION[daysIndex]) %>
 			</th>
 
@@ -112,9 +120,17 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 		maxDayOfPrevMonth = (maxDayOfPrevMonth - dayOfWeek) + 1;
 
 		for (int i = 1; i < dayOfWeek; i++) {
+			String className = "calendar-inactive calendar-previous-month";
+			
+			if (i == 1) {
+				className += " first";
+			}
+			else if (i == 7) {
+				className += " last";
+			}
 		%>
 
-			<td class="calendar-inactive calendar-previous-month"><%= maxDayOfPrevMonth + i %></td>
+			<td class="<%= className %>"><%= maxDayOfPrevMonth + i %></td>
 
 		<%
 		}
@@ -130,7 +146,6 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 				dayOfWeek = 1;
 			}
 
-			dayOfWeek++;
 
 			Calendar tempCal = (Calendar)selCal.clone();
 
@@ -152,10 +167,18 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 			if (hasData) {
 				className += " has-events";
 			}
+
+			if (dayOfWeek == 1) {
+				className += " first";
+			}
+			else if(dayOfWeek == 7) {
+				className += " last";
+			}
+			dayOfWeek++;
 		%>
 
 			<td class="<%= className %>">
-				<a href="javascript: <%= namespace %>updateCalendar(<%= selMonth %>, <%= i %>, <%= selYear %>);"><%= i %></a>
+				<a href="javascript: <%= namespace %>updateCalendar(<%= selMonth %>, <%= i %>, <%= selYear %>);"><span><%= i %></span></a>
 			</td>
 
 		<%
@@ -164,9 +187,17 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 		int dayOfNextMonth = 1;
 
 		for (int i = 7; i >= dayOfWeek; i--) {
+			String className = "calendar-inactive calendar-next-month";
+			
+			if (i == 1) {
+				className += " first";
+			}
+			else if (i == 7) {
+				className += " last";
+			}
 		%>
 
-			<td class="calendar-inactive calendar-next-month"><%= dayOfNextMonth++ %></td>
+			<td class="<%= className %>"><%= dayOfNextMonth++ %></td>
 
 		<%
 		}

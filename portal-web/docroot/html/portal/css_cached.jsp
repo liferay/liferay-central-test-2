@@ -978,6 +978,14 @@ li.toggle-expand a {
 	width: 26px;
 }
 
+.taglib-calendar tr.portlet-section-header th.first, .taglib-calendar tr td.first {
+	border-left: none;
+}
+
+.taglib-calendar tr.portlet-section-header th.last, .taglib-calendar tr td.last {
+	border-right: none;
+}
+
 .taglib-calendar tr td a {
 	display: block;
 	height: 15px;

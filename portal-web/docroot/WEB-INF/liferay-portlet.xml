@@ -104,6 +104,7 @@
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
+		<header-portlet-css>/html/portlet/calendar/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-calendar</css-class-wrapper>
 	</portlet>
 	<portlet>

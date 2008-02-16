@@ -21,6 +21,7 @@
  * SOFTWARE.
  */
 %>
+<%@ page import="com.liferay.portal.kernel.util.DateUtil_IW" %>
 
 <script type="text/javascript">
 	function <portlet:namespace />updateCalendar(month, day, year) {
@@ -28,38 +29,45 @@
 	}
 </script>
 
+<%
+	int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
+
+	Set data = new HashSet();
+
+	for (int i = 1; i <= maxDayOfMonth; i++) {
+		Calendar tempCal = (Calendar)selCal.clone();
+		tempCal.set(Calendar.MONTH, selMonth);
+		tempCal.set(Calendar.DATE, i);
+		tempCal.set(Calendar.YEAR, selYear);
+
+		boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId.longValue(), tempCal, eventType);
+
+		if (hasEvents) {
+			data.add(new Integer(i));
+		}
+	}
+	DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
+%>
+
 <table width="100%">
 <tr>
-	<td valign="top" width="1%">
+	<td style="padding-right: 10px;" valign="top" width="1%">
 
-		<%
-		int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
+		<div class="calendar-container float-container">
+			<div class="calendar-day">
+		    	<h2 class="day-text"><%= DateUtil_IW.getInstance().getCurrentDate("EEEE", locale) %></h2>
+		        <h3 class="day-number"><%= curDay %></h3>
+		    </div>
 
-		Set data = new HashSet();
-
-		for (int i = 1; i <= maxDayOfMonth; i++) {
-			Calendar tempCal = (Calendar)selCal.clone();
-			tempCal.set(Calendar.MONTH, selMonth);
-			tempCal.set(Calendar.DATE, i);
-			tempCal.set(Calendar.YEAR, selYear);
-
-			boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId.longValue(), tempCal, eventType);
-
-			if (hasEvents) {
-				data.add(new Integer(i));
-			}
-		}
-		%>
-
-		<liferay-ui:calendar
-			month="<%= selMonth %>"
-			day="<%= selDay %>"
-			year="<%= selYear %>"
-			headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG, locale) %>"
-			data="<%= data %>"
-		/>
+			<liferay-ui:calendar
+				month="<%= selMonth %>"
+				day="<%= selDay %>"
+				year="<%= selYear %>"
+				headerFormat="<%= DateFormat.getDateInstance(DateFormat.LONG, locale) %>"
+				data="<%= data %>"
+			/>
+		</div>
 	</td>
-	<td style="padding-left: 10px;"></td>
 	<td valign="top">
 		<%@ include file="/html/portlet/calendar/event_iterator.jspf" %>
 	</td>
