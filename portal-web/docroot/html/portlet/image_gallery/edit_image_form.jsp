@@ -79,6 +79,7 @@ if (image != null) {
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 
 <liferay-ui:error exception="<%= DuplicateImageNameException.class %>" message="please-enter-a-unique-image-name" />
+
 <liferay-ui:error exception="<%= ImageNameException.class %>">
 	<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>.
 </liferay-ui:error>

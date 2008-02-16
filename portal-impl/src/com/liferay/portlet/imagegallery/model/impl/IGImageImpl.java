@@ -43,6 +43,14 @@ import org.apache.commons.logging.LogFactory;
  */
 public class IGImageImpl extends IGImageModelImpl implements IGImage {
 
+	public static String getNameWithExtension(String name, String type) {
+		if (Validator.isNotNull(type)) {
+			name += StringPool.PERIOD + type;
+		}
+
+		return name;
+	}
+
 	public IGImageImpl() {
 	}
 
@@ -69,23 +77,14 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		return folder;
 	}
 
-	public int getImageSize() {
-		if (_imageSize <= 0) {
-			try {
-				Image largeImage =
-					ImageLocalUtil.getImage(getLargeImageId());
+	public String getNameWithExtension() {
+		String nameWithExtension = getName();
+		String type = getImageType();
 
-				_imageSize = largeImage.getSize();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return _imageSize;
+		return getNameWithExtension(nameWithExtension, type);
 	}
 
-	public String getImageType() {
+	public String getImageType()  {
 		if (_imageType == null) {
 			try {
 				Image largeImage = ImageLocalUtil.getImage(getLargeImageId());
@@ -104,19 +103,19 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 		_imageType = imageType;
 	}
 
-	public String getNameWithExtension() {
-		String nameWithExtension = getName();
-		String type = getImageType();
+	public int getImageSize() {
+		if (_imageSize <= 0) {
+			try {
+				Image largeImage = ImageLocalUtil.getImage(getLargeImageId());
 
-		return getNameWithExtension(nameWithExtension, type);
-	}
-
-	public static String getNameWithExtension(String name, String type) {
-		if (Validator.isNotNull(type)) {
-			name += StringPool.PERIOD + type;
+				_imageSize = largeImage.getSize();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
 		}
 
-		return name;
+		return _imageSize;
 	}
 
 	private static Log _log = LogFactory.getLog(IGImageImpl.class);

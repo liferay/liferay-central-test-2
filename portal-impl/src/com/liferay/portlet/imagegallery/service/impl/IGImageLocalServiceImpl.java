@@ -120,14 +120,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			// Image
 
-			byte[] bytes = FileUtil.getBytes(file);
-
 			String extension = FileUtil.getExtension(file.getName());
 			String nameWithExtension = name;
 
 			if (Validator.isNotNull(name) && name.endsWith(extension)) {
 				name = FileUtil.stripExtension(name);
 			}
+
+			byte[] bytes = FileUtil.getBytes(file);
 
 			validate(folderId, nameWithExtension, file, bytes);
 
@@ -140,7 +140,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			long imageId = counterLocalService.increment();
 
 			if (Validator.isNull(name)) {
-				name = Long.toString(imageId);
+				name = String.valueOf(imageId);
 			}
 
 			IGImage image = igImagePersistence.create(imageId);
@@ -448,7 +448,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			RenderedImage renderedImage = null;
 			byte[] bytes = null;
 
-			if (file != null && file.exists()) {
+			if ((file != null) && file.exists()) {
 				renderedImage = ImageUtil.read(file).getRenderedImage();
 				bytes = FileUtil.getBytes(file);
 
@@ -456,9 +456,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			}
 
 			if (Validator.isNotNull(name) && !name.equals(image.getName())) {
-				String nameWithExtension =
-					IGImageImpl.getNameWithExtension(
-						name, image.getImageType());
+				String nameWithExtension = IGImageImpl.getNameWithExtension(
+					name, image.getImageType());
 
 				validate(folderId, nameWithExtension);
 			}
@@ -667,8 +666,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		String imageNameProper = FileUtil.stripExtension(nameWithExtension);
 		String imageType = FileUtil.getExtension(nameWithExtension);
 
-		List<IGImage> list =
-			igImagePersistence.findByF_N(folderId, imageNameProper);
+		List<IGImage> images = igImagePersistence.findByF_N(
+			folderId, imageNameProper);
 
 		if (imageType.matches("^jpe?g$")) {
 			imageType = ImageUtil.TYPE_JPEG;
@@ -677,10 +676,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			imageType = ImageUtil.TYPE_TIFF;
 		}
 
-		for (IGImage image : list) {
-			String currType = image.getImageType();
-
-			if (currType.equals(imageType)) {
+		for (IGImage image : images) {
+			if (imageType.equals(image.getImageType())) {
 				throw new DuplicateImageNameException();
 			}
 		}
@@ -703,7 +700,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		}
 
 		validate(folderId, nameWithExtension);
-
 		validate(bytes);
 	}
 

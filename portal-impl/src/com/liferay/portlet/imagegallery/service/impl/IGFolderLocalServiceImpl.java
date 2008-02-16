@@ -566,8 +566,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		if (name.indexOf(StringPool.PERIOD) != -1) {
 			String nameProper = FileUtil.stripExtension(name);
 
-			List<IGImage> images =
-				igImagePersistence.findByF_N(parentFolderId, nameProper);
+			List<IGImage> images = igImagePersistence.findByF_N(
+				parentFolderId, nameProper);
 
 			for (IGImage image : images) {
 				if (name.equals(image.getNameWithExtension())) {

@@ -171,10 +171,10 @@ public class EditImageAction extends PortletAction {
 		long imageId = ParamUtil.getLong(uploadReq, "imageId");
 
 		long folderId = ParamUtil.getLong(uploadReq, "folderId");
-		String fileName = uploadReq.getFileName("file");
 		String name = ParamUtil.getString(uploadReq, "name");
-		String description =
-			ParamUtil.getString(uploadReq, "description", fileName);
+		String fileName = uploadReq.getFileName("file");
+		String description = ParamUtil.getString(
+			uploadReq, "description", fileName);
 
 		File file = uploadReq.getFile("file");
 		String contentType = getContentType(uploadReq, file);
