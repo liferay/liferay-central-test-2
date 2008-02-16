@@ -41,6 +41,10 @@
 		<finder name="CompanyId" return-type="Collection">
 			<finder-column name="companyId" />
 		</finder>
+		<finder name="G_N" return-type="WikiNode">
+			<finder-column name="groupId" />
+			<finder-column name="name" />
+		</finder>
 
 		<!-- References -->
 
@@ -149,6 +153,7 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<exceptions>
+		<exception>DuplicateNodeName</exception>
 		<exception>DuplicatePage</exception>
 		<exception>NodeName</exception>
 		<exception>NoSuchNode</exception>

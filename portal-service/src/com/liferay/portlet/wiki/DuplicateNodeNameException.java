@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,20 +19,33 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<c:if test="<%= Validator.isNotNull(title) %>">
-	<h1 class="page-title">
-		<c:choose>
-			<c:when test="<%= wikiPage != null %>">
-				<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeName" value="<%= String.valueOf(node.getName()) %>" /><portlet:param name="title" value="<%= title %>" /></portlet:renderURL>">
-				<%= title %></a>
-			</c:when>
-			<c:otherwise>
-				<%= title %>
-			</c:otherwise>
-		</c:choose>
-	</h1>
+package com.liferay.portlet.wiki;
 
-	<br />
-</c:if>
+import com.liferay.portal.PortalException;
+
+/**
+ * <a href="DuplicateNodeNameException.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class DuplicateNodeNameException extends PortalException {
+
+	public DuplicateNodeNameException() {
+		super();
+	}
+
+	public DuplicateNodeNameException(String msg) {
+		super(msg);
+	}
+
+	public DuplicateNodeNameException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public DuplicateNodeNameException(Throwable cause) {
+		super(cause);
+	}
+
+}

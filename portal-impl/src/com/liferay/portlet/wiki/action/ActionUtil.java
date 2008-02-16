@@ -24,6 +24,7 @@ package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.wiki.NoSuchPageException;
@@ -61,11 +62,19 @@ public class ActionUtil {
 
 	public static void getNode(HttpServletRequest req) throws Exception {
 		long nodeId = ParamUtil.getLong(req, "nodeId");
+		String nodeName = ParamUtil.getString(req, "nodeName");
 
 		WikiNode node = null;
 
 		if (nodeId > 0) {
 			node = WikiNodeServiceUtil.getNode(nodeId);
+		}
+		else if (Validator.isNotNull(nodeName)) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
+
+			node = WikiNodeServiceUtil.getNode(
+				themeDisplay.getLayout().getGroupId(), nodeName);
 		}
 
 		req.setAttribute(WebKeys.WIKI_NODE, node);

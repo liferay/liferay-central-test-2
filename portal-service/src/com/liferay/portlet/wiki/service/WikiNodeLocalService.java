@@ -190,6 +190,11 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.wiki.model.WikiNode getNode(long groupId,
+		java.lang.String nodeName)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List getNodes(long groupId)
 		throws com.liferay.portal.SystemException;
 

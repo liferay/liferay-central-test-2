@@ -47,6 +47,16 @@ public class WikiNodePermission {
 	}
 
 	public static void check(
+			PermissionChecker permissionChecker, long groupId, String name,
+			String actionId)
+		throws PortalException, SystemException {
+
+		if (!contains(permissionChecker, groupId, name, actionId)) {
+			throw new PrincipalException();
+		}
+	}
+
+	public static void check(
 			PermissionChecker permissionChecker, WikiNode node, String actionId)
 		throws PortalException, SystemException {
 
@@ -60,6 +70,16 @@ public class WikiNodePermission {
 		throws PortalException, SystemException {
 
 		WikiNode node = WikiNodeLocalServiceUtil.getNode(nodeId);
+
+		return contains(permissionChecker, node, actionId);
+	}
+
+	public static boolean contains(
+			PermissionChecker permissionChecker, long groupId, String name,
+			String actionId)
+		throws PortalException, SystemException {
+
+		WikiNode node = WikiNodeLocalServiceUtil.getNode(groupId, name);
 
 		return contains(permissionChecker, node, actionId);
 	}

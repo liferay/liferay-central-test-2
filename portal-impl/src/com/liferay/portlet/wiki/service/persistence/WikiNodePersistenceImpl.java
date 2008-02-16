@@ -1096,6 +1096,119 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public WikiNode findByG_N(long groupId, String name)
+		throws NoSuchNodeException, SystemException {
+		WikiNode wikiNode = fetchByG_N(groupId, name);
+
+		if (wikiNode == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No WikiNode exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("name=" + name);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchNodeException(msg.toString());
+		}
+
+		return wikiNode;
+	}
+
+	public WikiNode fetchByG_N(long groupId, String name)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = WikiNodeModelImpl.CACHE_ENABLED;
+		String finderClassName = WikiNode.class.getName();
+		String finderMethodName = "fetchByG_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(groupId), name };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("name ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
+				List<WikiNode> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<WikiNode> list = (List<WikiNode>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
 	public List<WikiNode> findWithDynamicQuery(
 		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
@@ -1236,6 +1349,13 @@ public class WikiNodePersistenceImpl extends BasePersistence
 		for (WikiNode wikiNode : findByCompanyId(companyId)) {
 			remove(wikiNode);
 		}
+	}
+
+	public void removeByG_N(long groupId, String name)
+		throws NoSuchNodeException, SystemException {
+		WikiNode wikiNode = findByG_N(groupId, name);
+
+		remove(wikiNode);
 	}
 
 	public void removeAll() throws SystemException {
@@ -1500,6 +1620,87 @@ public class WikiNodePersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, companyId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByG_N(long groupId, String name) throws SystemException {
+		boolean finderClassNameCacheEnabled = WikiNodeModelImpl.CACHE_ENABLED;
+		String finderClassName = WikiNode.class.getName();
+		String finderMethodName = "countByG_N";
+		String[] finderParams = new String[] {
+				Long.class.getName(), String.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(groupId), name };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.wiki.model.WikiNode WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("name = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
 
 				Long count = null;
 

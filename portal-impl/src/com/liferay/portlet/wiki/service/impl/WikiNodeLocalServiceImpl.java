@@ -32,6 +32,8 @@ import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.wiki.DuplicateNodeNameException;
+import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -111,7 +113,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		long groupId = PortalUtil.getPortletGroupId(plid);
 		Date now = new Date();
 
-		validate(name);
+		validate(groupId, name);
 
 		long nodeId = counterLocalService.increment();
 
@@ -246,6 +248,12 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return wikiNodePersistence.findByPrimaryKey(nodeId);
+	}
+
+	public WikiNode getNode(long groupId, String nodeName)
+		throws PortalException, SystemException {
+
+		return wikiNodePersistence.findByG_N(groupId, nodeName);
 	}
 
 	public List getNodes(long groupId) throws SystemException {
@@ -403,9 +411,9 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public WikiNode updateNode(long nodeId, String name, String description)
 		throws PortalException, SystemException {
 
-		validate(name);
-
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
+
+		validate(node.getGroupId(), name);
 
 		node.setModifiedDate(new Date());
 		node.setName(name);
@@ -416,9 +424,19 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return node;
 	}
 
-	protected void validate(String name) throws PortalException {
+	protected void validate(long groupId, String name)
+		throws PortalException, SystemException {
+
 		if (!Validator.isName(name)) {
 			throw new NodeNameException();
+		}
+
+		try {
+			wikiNodePersistence.findByG_N(groupId, name);
+
+			throw new DuplicateNodeNameException();
+		}
+		catch (NoSuchNodeException nsfe) {
 		}
 	}
 

@@ -153,6 +153,14 @@ public interface WikiNodePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchNodeException;
 
+	public com.liferay.portlet.wiki.model.WikiNode findByG_N(long groupId,
+		java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchNodeException;
+
+	public com.liferay.portlet.wiki.model.WikiNode fetchByG_N(long groupId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -184,6 +192,10 @@ public interface WikiNodePersistence {
 	public void removeByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByG_N(long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchNodeException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUuid(java.lang.String uuid)
@@ -196,6 +208,9 @@ public interface WikiNodePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_N(long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

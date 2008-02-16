@@ -262,6 +262,48 @@ public class WikiNodeServiceHttp {
 		}
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNode getNode(
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(WikiNodeServiceUtil.class.getName(),
+					"getNode", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.wiki.model.WikiNode)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static void subscribeNode(HttpPrincipal httpPrincipal, long nodeId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {

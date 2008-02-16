@@ -110,11 +110,15 @@
 	text-decoration: underline;
 }
 
+.portlet-wiki .page-info {
+	width: 100%;
+}
+
 .portlet-wiki .page-info tr th, .portlet-wiki .page-info tr td {
 	border: 1px solid #ccc;
 	border-left: none;
 	border-right: none;
-	padding: 5px;
+	padding: 0.3em 1em;
 }
 
 .portlet-wiki .page-old-version a {

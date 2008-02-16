@@ -61,16 +61,23 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		if (strutsAction.equals("/wiki/view")) {
 			String title = portletURL.getParameter("title");
 			String nodeId = portletURL.getParameter("nodeId");
+			String nodeName = portletURL.getParameter("nodeName");
 
-			if (Validator.isNotNull(nodeId)) {
+			if (Validator.isNotNull(nodeId) || Validator.isNotNull(nodeName)) {
 				StringMaker sm = new StringMaker();
 
 				sm.append(StringPool.SLASH);
 				sm.append(_MAPPING);
 				sm.append(StringPool.SLASH);
-				sm.append(nodeId);
 
-				portletURL.addParameterIncludedInPath("nodeId");
+				if (Validator.isNotNull(nodeId)) {
+					sm.append(nodeId);
+					portletURL.addParameterIncludedInPath("nodeId");
+				}
+				else if (Validator.isNotNull(nodeName)) {
+					sm.append(nodeName);
+					portletURL.addParameterIncludedInPath("nodeName");
+				}
 
 				if (Validator.isNotNull(title)) {
 					sm.append(StringPool.SLASH);
@@ -113,7 +120,12 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		if (urlFragments.length >= 1) {
 			String nodeId = urlFragments[0];
 
-			addParam(params, "nodeId", nodeId);
+			if (Validator.isNumber(nodeId)) {
+				addParam(params, "nodeId", nodeId);
+			}
+			else {
+				addParam(params, "nodeName", nodeId);
+			}
 
 			if (urlFragments.length >= 2) {
 				String title = urlFragments[1];

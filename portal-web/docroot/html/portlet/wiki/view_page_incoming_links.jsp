@@ -22,18 +22,14 @@
  */
 %>
 
-<c:if test="<%= Validator.isNotNull(title) %>">
-	<h1 class="page-title">
-		<c:choose>
-			<c:when test="<%= wikiPage != null %>">
-				<a href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeName" value="<%= String.valueOf(node.getName()) %>" /><portlet:param name="title" value="<%= title %>" /></portlet:renderURL>">
-				<%= title %></a>
-			</c:when>
-			<c:otherwise>
-				<%= title %>
-			</c:otherwise>
-		</c:choose>
-	</h1>
+<%@ include file="/html/portlet/wiki/init.jsp" %>
 
-	<br />
-</c:if>
+<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
+
+<liferay-util:include page="/html/portlet/wiki/page_tabs.jsp">
+	<liferay-util:param name="tabs1" value="incoming-links" />
+</liferay-util:include>
+
+<liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
+	<liferay-util:param name="type" value="incoming_links" />
+</liferay-util:include>

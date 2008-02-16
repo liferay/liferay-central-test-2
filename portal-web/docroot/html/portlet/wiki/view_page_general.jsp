@@ -40,13 +40,15 @@ WikiPage initialPage = (WikiPage)WikiPageLocalServiceUtil.getPages(wikiPage.getN
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
 viewPageURL.setParameter("struts_action", "/wiki/view");
-viewPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+viewPageURL.setParameter("nodeName", node.getName());
 viewPageURL.setParameter("title", wikiPage.getTitle());
 
-PortletURL editPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+PortletURL editPageURL = renderResponse.createRenderURL();
 
 editPageURL.setParameter("struts_action", "/wiki/edit_page");
 editPageURL.setParameter("redirect", currentURL);
+editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+editPageURL.setParameter("title", wikiPage.getTitle());
 %>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
@@ -59,7 +61,7 @@ editPageURL.setParameter("redirect", currentURL);
 int count = 0;
 %>
 
-<table class="lfr-table wiki-page-info">
+<table class="lfr-table page-info">
 <tr class="portlet-section-body<%= MathUtil.isOdd(count++) ? "-alternate" : "" %>">
 	<th>
 		<liferay-ui:message key="title" />

@@ -48,15 +48,17 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
 viewPageURL.setParameter("struts_action", "/wiki/view");
-viewPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+viewPageURL.setParameter("nodeName", node.getName());
 viewPageURL.setParameter("title", title);
 
-PortletURL editPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+PortletURL editPageURL = renderResponse.createRenderURL();
 
 editPageURL.setParameter("struts_action", "/wiki/edit_page");
 editPageURL.setParameter("redirect", currentURL);
+editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+editPageURL.setParameter("title", title);
 
-PortletURL printPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+PortletURL printPageURL = PortletURLUtil.clone(editPageURL, renderResponse);
 
 printPageURL.setWindowState(LiferayWindowState.POP_UP);
 

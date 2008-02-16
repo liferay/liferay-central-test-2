@@ -75,13 +75,15 @@ else if (Validator.isNotNull(title)) {
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
 viewPageURL.setParameter("struts_action", "/wiki/view");
-viewPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+viewPageURL.setParameter("nodeName", node.getName());
 viewPageURL.setParameter("title", title);
 
-PortletURL editPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+PortletURL editPageURL = renderResponse.createRenderURL();
 
 editPageURL.setParameter("struts_action", "/wiki/edit_page");
 editPageURL.setParameter("redirect", currentURL);
+editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+editPageURL.setParameter("title", title);
 
 if (Validator.isNull(redirect)) {
 	redirect = viewPageURL.toString();

@@ -276,14 +276,8 @@ public class WikiUtil {
 			LiferayPortletURL liferayViewPageURL =
 				(LiferayPortletURL)viewPageURL;
 
-			liferayViewPageURL.setParameter(
-				"nodeId", String.valueOf(page.getNodeId()));
-
 			LiferayPortletURL liferayEditPageURL =
 				(LiferayPortletURL)editPageURL;
-
-			liferayEditPageURL.setParameter(
-				"nodeId", String.valueOf(page.getNodeId()));
 
 			content = _replaceLinks(
 				page.getTitle(), content, liferayViewPageURL,

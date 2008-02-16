@@ -380,6 +380,7 @@ create index IX_F75690BB on Website (userId);
 
 create index IX_5D6FE3F0 on WikiNode (companyId);
 create index IX_B480A672 on WikiNode (groupId);
+create index IX_920CD8B1 on WikiNode (groupId, name);
 create index IX_6C112D7C on WikiNode (uuid_);
 create index IX_7609B2AE on WikiNode (uuid_, groupId);
 

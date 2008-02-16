@@ -205,6 +205,19 @@ public class WikiNodeUtil {
 				   .findByCompanyId_PrevAndNext(nodeId, companyId, obc);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNode findByG_N(
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchNodeException {
+		return getPersistence().findByG_N(groupId, name);
+	}
+
+	public static com.liferay.portlet.wiki.model.WikiNode fetchByG_N(
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByG_N(groupId, name);
+	}
+
 	public static java.util.List findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -255,6 +268,12 @@ public class WikiNodeUtil {
 		getPersistence().removeByCompanyId(companyId);
 	}
 
+	public static void removeByG_N(long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchNodeException {
+		getPersistence().removeByG_N(groupId, name);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -277,6 +296,11 @@ public class WikiNodeUtil {
 	public static int countByCompanyId(long companyId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByG_N(long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_N(groupId, name);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

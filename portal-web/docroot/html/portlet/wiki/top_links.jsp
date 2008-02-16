@@ -49,7 +49,7 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
 	PortletURL portletURL = renderResponse.createRenderURL();
 
-	portletURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+	portletURL.setParameter("nodeName", node.getName());
 	%>
 
 	<div class="top-links">

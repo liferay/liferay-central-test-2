@@ -359,6 +359,15 @@ public class WikiNodeLocalServiceUtil {
 		return wikiNodeLocalService.getNode(nodeId);
 	}
 
+	public static com.liferay.portlet.wiki.model.WikiNode getNode(
+		long groupId, java.lang.String nodeName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		return wikiNodeLocalService.getNode(groupId, nodeName);
+	}
+
 	public static java.util.List getNodes(long groupId)
 		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();

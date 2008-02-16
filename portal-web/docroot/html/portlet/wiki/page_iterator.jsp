@@ -213,12 +213,13 @@ for (int i = 0; i < results.size(); i++) {
 
 	if (!curWikiPage.isNew()) {
 		rowURL.setParameter("struts_action", "/wiki/view");
+		rowURL.setParameter("nodeName", curWikiPage.getNode().getName());
 	}
 	else {
 		rowURL.setParameter("struts_action", "/wiki/edit_page");
+		rowURL.setParameter("nodeId", String.valueOf(curWikiPage.getNodeId()));
 	}
 
-	rowURL.setParameter("nodeId", String.valueOf(curWikiPage.getNodeId()));
 	rowURL.setParameter("title", curWikiPage.getTitle());
 	rowURL.setParameter("version", String.valueOf(curWikiPage.getVersion()));
 
