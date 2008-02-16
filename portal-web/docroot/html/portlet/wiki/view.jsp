@@ -215,7 +215,7 @@ taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 </c:if>
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
-	<c:if test="<%= Validator.isNotNull(htmlContent) %>">
+	<c:if test="<%= Validator.isNotNull(formattedContent) %>">
 		<br />
 	</c:if>
 

@@ -44,6 +44,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="WikiCacheUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class WikiCacheUtil {
 
@@ -71,15 +72,14 @@ public class WikiCacheUtil {
 		String key = _encodeKey(nodeId, title, viewPageURL);
 		String groupKey = _encodeGroupKey(nodeId, title);
 
-		WikiPageDisplay pageDisplay =
-			(WikiPageDisplay) MultiVMPoolUtil.get(_cache, key);
+		WikiPageDisplay pageDisplay = (WikiPageDisplay)MultiVMPoolUtil.get(
+			_cache, key);
 
 		if (pageDisplay == null) {
 			pageDisplay = _getPageDisplay(
 				nodeId, title, viewPageURL, editPageURL, attachmentURLPrefix);
 
-			MultiVMPoolUtil.put(
-				_cache, key, _groups, groupKey, pageDisplay);
+			MultiVMPoolUtil.put(_cache, key, _groups, groupKey, pageDisplay);
 		}
 
 		if (_log.isDebugEnabled()) {
@@ -92,9 +92,31 @@ public class WikiCacheUtil {
 		return pageDisplay;
 	}
 
+	private static String _encodeGroupKey(long nodeId, String title) {
+		return _encodeKey(nodeId, title, null);
+	}
+
+	private static String _encodeKey(
+		long nodeId, String title, PortletURL viewPageURL) {
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(CACHE_NAME);
+		sm.append(StringPool.POUND);
+		sm.append(nodeId);
+		sm.append(title);
+
+		if (viewPageURL != null) {
+			sm.append(viewPageURL);
+		}
+
+		return sm.toString();
+	}
+
 	private static WikiPageDisplay _getPageDisplay(
 		long nodeId, String title, PortletURL viewPageURL,
 		PortletURL editPageURL, String attachmentURLPrefix) {
+
 		try {
 			if (_log.isInfoEnabled()) {
 				_log.info(
@@ -116,30 +138,10 @@ public class WikiCacheUtil {
 		}
 	}
 
-	private static String _encodeGroupKey(
-		long nodeId, String title) {
-		return _encodeKey(nodeId, title, null);
-	}
-
-	private static String _encodeKey(
-		long nodeId, String title, PortletURL viewPageURL) {
-		StringMaker sm = new StringMaker();
-
-		sm.append(CACHE_NAME);
-		sm.append(StringPool.POUND);
-		sm.append(nodeId);
-		sm.append(title);
-
-		if (viewPageURL != null) {
-			sm.append(viewPageURL);
-		}
-
-		return sm.toString();
-	}
-
 	private static Log _log = LogFactory.getLog(WikiUtil.class);
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
+
 	private static Map _groups = CollectionFactory.getSyncHashMap();
 
 }

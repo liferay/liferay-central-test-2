@@ -34,11 +34,11 @@ public interface WikiPageDisplay extends Serializable {
 
 	public long getUserId();
 
+	public void setUserId(long userId);
+
 	public long getNodeId();
 
 	public void setNodeId(long nodeId);
-
-	public String[] getAttachments();
 
 	public String getTitle();
 
@@ -52,7 +52,9 @@ public interface WikiPageDisplay extends Serializable {
 
 	public void setContent(String content);
 
-	public String getHtmlContent();
+	public String getFormattedContent();
+
+	public void setFormattedContent(String formattedContent);
 
 	public String getFormat();
 
@@ -67,5 +69,9 @@ public interface WikiPageDisplay extends Serializable {
 	public String getRedirectTo();
 
 	public void setRedirectTo(String redirectTo);
+
+	public String[] getAttachments();
+
+	public void setAttachments(String[] attachments);
 
 }

@@ -288,7 +288,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				WikiPageDisplay pageDisplay = WikiCacheUtil.getDisplay(wikiPage.getNodeId(), wikiPage.getTitle(), curViewPageURL, curEditPageURL, attachmentURLPrefix);
 			%>
 
-				<%= pageDisplay.getHtmlContent() %>
+				<%= pageDisplay.getFormattedContent() %>
 
 			<%
 			}

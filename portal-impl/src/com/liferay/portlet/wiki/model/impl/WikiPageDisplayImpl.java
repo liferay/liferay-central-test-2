@@ -33,16 +33,16 @@ import com.liferay.portlet.wiki.model.WikiPageDisplay;
 public class WikiPageDisplayImpl implements WikiPageDisplay {
 
 	public WikiPageDisplayImpl(
-		long nodeId, String title, long userId,
-		double version, String content, String htmlContent, String format,
-		boolean head, String redirectTo, String[] attachments) {
+		long userId, long nodeId, String title, double version, String content,
+		String formattedContent, String format, boolean head, String redirectTo,
+		String[] attachments) {
 
+		_userId = userId;
 		_nodeId = nodeId;
 		_title = title;
-		_userId = userId;
 		_version = version;
 		_content = content;
-		_htmlContent = htmlContent;
+		_formattedContent = formattedContent;
 		_format = format;
 		_head = head;
 		_redirectTo = redirectTo;
@@ -53,16 +53,16 @@ public class WikiPageDisplayImpl implements WikiPageDisplay {
 		return _userId;
 	}
 
+	public void setUserId(long userId) {
+		_userId = userId;
+	}
+
 	public long getNodeId() {
 		return _nodeId;
 	}
 
 	public void setNodeId(long nodeId) {
 		_nodeId = nodeId;
-	}
-
-	public String[] getAttachments() {
-		return _attachments;
 	}
 
 	public String getTitle() {
@@ -89,8 +89,12 @@ public class WikiPageDisplayImpl implements WikiPageDisplay {
 		_content = content;
 	}
 
-	public String getHtmlContent() {
-		return _htmlContent;
+	public String getFormattedContent() {
+		return _formattedContent;
+	}
+
+	public void setFormattedContent(String formattedContent) {
+		_formattedContent = formattedContent;
 	}
 
 	public String getFormat() {
@@ -121,15 +125,23 @@ public class WikiPageDisplayImpl implements WikiPageDisplay {
 		_redirectTo = redirectTo;
 	}
 
-	private String _content;
-	private String[] _attachments;
-	private String _format;
-	private boolean _head;
-	private String _htmlContent;
-	private long _nodeId;
-	private String _redirectTo;
+	public String[] getAttachments() {
+		return _attachments;
+	}
+
+	public void setAttachments(String[] attachments) {
+		_attachments = attachments;
+	}
+
 	private long _userId;
+	private long _nodeId;
 	private String _title;
 	private double _version;
+	private String _content;
+	private String _formattedContent;
+	private String _format;
+	private boolean _head;
+	private String _redirectTo;
+	private String[] _attachments;
 
 }

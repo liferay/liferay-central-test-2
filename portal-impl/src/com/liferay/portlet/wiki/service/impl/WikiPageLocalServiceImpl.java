@@ -155,10 +155,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		wikiPagePersistence.update(page);
 
-		// Cache
-
-		clearReferralsCache(page);
-
 		// Resources
 
 		addPageResources(page.getNode(), page, true, true);
@@ -187,6 +183,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		catch (IOException ioe) {
 			_log.error("Indexing " + pageId, ioe);
 		}
+
+		// Cache
+
+		clearReferralsCache(page);
 
 		return page;
 	}
@@ -308,10 +308,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			_log.error("Deleting index " + page.getPrimaryKey(), ioe);
 		}
 
-		// Cache
-
-		clearReferralsCache(page);
-
 		// Attachments
 
 		long companyId = page.getCompanyId();
@@ -372,6 +368,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// All referrals
 
 		wikiPagePersistence.removeByN_R(page.getNodeId(), page.getTitle());
+
+		// Cache
+
+		clearReferralsCache(page);
 	}
 
 	public void deletePageAttachment(long nodeId, String title, String fileName)
@@ -565,13 +565,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiPage page = getPage(nodeId, title);
 
-		String htmlContent = WikiUtil.convert(
+		String formattedContent = WikiUtil.convert(
 			page, viewPageURL, editPageURL, attachmentURLPrefix);
 
 		return new WikiPageDisplayImpl(
-			page.getNodeId(), page.getTitle(), page.getUserId(),
-			page.getVersion(), page.getContent(), htmlContent, page.getFormat(),
-			page.getHead(), page.getRedirectTo(), page.getAttachmentsFiles());
+			page.getUserId(), page.getNodeId(), page.getTitle(),
+			page.getVersion(), page.getContent(), formattedContent,
+			page.getFormat(), page.getHead(), page.getRedirectTo(),
+			page.getAttachmentsFiles());
 	}
 
 	public List getPages(long nodeId, int begin, int end)
@@ -907,17 +908,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	protected void clearPageCache(WikiPage page)
-		throws PortalException, SystemException {
+	protected void clearPageCache(WikiPage page) {
 		WikiCacheUtil.clearCache(page.getNodeId(), page.getTitle());
 	}
 
 	protected void clearReferralsCache(WikiPage page)
 		throws PortalException, SystemException {
+
 		List links = getIncomingLinks(page.getNodeId(), page.getTitle());
 
 		for (int i = 0; i < links.size(); i++) {
-			WikiPage curPage = (WikiPage) links.get(i);
+			WikiPage curPage = (WikiPage)links.get(i);
 
 			WikiCacheUtil.clearCache(curPage.getNodeId(), curPage.getTitle());
 		}

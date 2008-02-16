@@ -23,7 +23,7 @@
 %>
 
 <%
-String htmlContent = null;
+String formattedContent = null;
 
 try {
 	PortletURL curViewPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
@@ -31,24 +31,24 @@ try {
 	String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
 
 	WikiPageDisplay pageDisplay = WikiCacheUtil.getDisplay(wikiPage.getNodeId(), title, curViewPageURL, curEditPageURL, attachmentURLPrefix);
-	
+
 	if (pageDisplay != null) {
-		htmlContent = pageDisplay.getHtmlContent();
+		formattedContent = pageDisplay.getFormattedContent();
 	}
 	else {
-		htmlContent = WikiUtil.convert(wikiPage, curViewPageURL, curEditPageURL, attachmentURLPrefix);
+		formattedContent = WikiUtil.convert(wikiPage, curViewPageURL, curEditPageURL, attachmentURLPrefix);
 	}
 %>
 
 	<div class="wiki-body">
 		<c:choose>
-			<c:when test="<%= Validator.isNull(htmlContent) && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
+			<c:when test="<%= Validator.isNull(formattedContent) && WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 				<div class="portlet-msg-info">
 					<a href="<%= editPageURL %>"><liferay-ui:message key="this-page-is-empty-edit-it-to-add-some-text" /></a>
 				</div>
 			</c:when>
 			<c:otherwise>
-				<%= htmlContent %>
+				<%= formattedContent %>
 			</c:otherwise>
 		</c:choose>
 	</div>

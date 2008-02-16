@@ -119,8 +119,8 @@ public class JournalContentUtil {
 		articleId = GetterUtil.getString(articleId).toUpperCase();
 		templateId = GetterUtil.getString(templateId).toUpperCase();
 
-		String key =
-			_encodeKey(groupId, articleId, templateId, languageId, page);
+		String key = _encodeKey(
+			groupId, articleId, templateId, languageId, page);
 
 		JournalArticleDisplay articleDisplay =
 			(JournalArticleDisplay)MultiVMPoolUtil.get(_cache, key);
