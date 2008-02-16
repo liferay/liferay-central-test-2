@@ -29,6 +29,7 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 String type = ParamUtil.getString(request, "type");
+String tag = ParamUtil.getString(renderRequest, "tag");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -132,6 +133,9 @@ else if (type.equals("outgoing_links")) {
 else if (type.equals("recent_changes")) {
 	emptyResultsMessage = "there-are-no-recent-changes";
 }
+else if (type.equals("tagged_pages")) {
+	emptyResultsMessage = "there-are-no-pages-with-this-tag";
+}
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, emptyResultsMessage);
 
@@ -171,6 +175,28 @@ else if (type.equals("outgoing_links")) {
 else if (type.equals("recent_changes")) {
 	total = WikiPageLocalServiceUtil.getRecentChangesCount(node.getNodeId());
 	results = WikiPageLocalServiceUtil.getRecentChanges(node.getNodeId(), searchContainer.getStart(), searchContainer.getEnd());
+}
+else if (type.equals("tagged_pages")) {
+	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), new String[]{tag});
+	long[] notEntryIds = new long[]{};
+	Date now = new Date();
+	long classNameId = ClassNameLocalServiceUtil.getClassName(WikiPage.class.getName()).getClassNameId();
+
+	total = TagsAssetLocalServiceUtil.getAssetsCount(portletGroupId.longValue(), new long[]{classNameId}, entryIds, notEntryIds, false, false, now, now);
+	List assets = TagsAssetLocalServiceUtil.getAssets(portletGroupId.longValue(), new long[]{classNameId}, entryIds, notEntryIds, false, null, null, null, null, false, now, now, searchContainer.getStart(), searchContainer.getEnd());
+
+	results = new ArrayList();
+
+	for (int assetIndex = 0; assetIndex < assets.size(); assetIndex++) {
+		TagsAsset asset = (TagsAsset)assets.get(assetIndex);
+
+		long classPK = asset.getClassPK();
+
+		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
+		WikiPage assetPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
+
+		results.add(assetPage);
+	}
 }
 
 searchContainer.setTotal(total);

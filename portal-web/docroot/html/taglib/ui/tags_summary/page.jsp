@@ -24,9 +24,12 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.tags.model.TagsEntry" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 
 <%
+LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:tags_summary:portletURL");
+
 String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_summary:classPK"));
 String message = (String)request.getAttribute("liferay-ui:tags_summary:message");
@@ -36,12 +39,28 @@ if (message == null) {
 }
 
 List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK);
-
-String curTags = ListUtil.toString(entries, "name", ", ");
 %>
 
 <c:if test="<%= entries.size() > 0 %>">
 	<div class="taglib-tags-summary">
-		<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %><%= curTags %>
+		<%= Validator.isNotNull(message) ? (LanguageUtil.get(pageContext, message) + ": ") : "" %>
+
+		<c:choose>
+			<c:when test="<%= portletURL != null %>">
+				<%
+				for (int i = 0; i < entries.size(); i++) {
+					TagsEntry tag = (TagsEntry)entries.get(i);
+
+					portletURL.setParameter("tag", tag.getName());
+				%>
+					<a href="<%= portletURL.toString() %>"><%= tag.getName() %></a>
+				<%
+				}
+				%>
+			</c:when>
+			<c:otherwise>
+				<%= ListUtil.toString(entries, "name", ", ") %>
+			</c:otherwise>
+		</c:choose>
 	</div>
 </c:if>

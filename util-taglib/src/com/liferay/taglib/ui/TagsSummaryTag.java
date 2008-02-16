@@ -24,6 +24,8 @@ package com.liferay.taglib.ui;
 
 import com.liferay.taglib.util.IncludeTag;
 
+import javax.portlet.PortletURL;
+
 import javax.servlet.ServletRequest;
 
 /**
@@ -41,6 +43,7 @@ public class TagsSummaryTag extends IncludeTag {
 		req.setAttribute(
 			"liferay-ui:tags_summary:classPK", String.valueOf(_classPK));
 		req.setAttribute("liferay-ui:tags_summary:message", _message);
+		req.setAttribute("liferay-ui:tags_summary:portletURL", _portletURL);
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -57,6 +60,14 @@ public class TagsSummaryTag extends IncludeTag {
 		_message = message;
 	}
 
+	public PortletURL getPortletURL() {
+		return _portletURL;
+	}
+
+	public void setPortletURL(PortletURL portletURL) {
+		_portletURL = portletURL;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -66,5 +77,6 @@ public class TagsSummaryTag extends IncludeTag {
 	private String _className;
 	private long _classPK;
 	private String _message;
+	private PortletURL _portletURL;
 
 }

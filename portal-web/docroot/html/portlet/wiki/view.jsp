@@ -61,6 +61,11 @@ PortletURL printPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 printPageURL.setWindowState(LiferayWindowState.POP_UP);
 
 printPageURL.setParameter("print", "true");
+
+PortletURL taggedPagesURL = renderResponse.createRenderURL();
+
+taggedPagesURL.setParameter("struts_action", "/wiki/view_tagged_pages");
+taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 %>
 
 <c:choose>
@@ -126,6 +131,7 @@ printPageURL.setParameter("print", "true");
 <liferay-ui:tags-summary
 	className="<%= WikiPage.class.getName() %>"
 	classPK="<%= wikiPage.getResourcePrimKey() %>"
+	portletURL="<%= taggedPagesURL %>"
 />
 
 <div>

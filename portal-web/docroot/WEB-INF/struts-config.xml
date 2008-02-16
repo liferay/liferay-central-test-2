@@ -1376,6 +1376,11 @@
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
+		<action path="/wiki/view_tagged_pages" type="com.liferay.portlet.wiki.action.EditNodeAction">
+			<forward name="portlet.wiki.edit_node" path="portlet.wiki.view_tagged_pages" />
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+		</action>
+
 		<!-- Wiki Display -->
 
 		<action path="/wiki_display/edit_page" type="com.liferay.portlet.wiki.action.EditPageAction">
