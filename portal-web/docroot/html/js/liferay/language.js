@@ -21,8 +21,9 @@ Liferay.Language = {
 
 		var xHR = jQuery.ajax(
 			{
-				url: url,
-				async: false
+				async: false,
+				type: 'GET',
+				url: url
 			}
 		);
 

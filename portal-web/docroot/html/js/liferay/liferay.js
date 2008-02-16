@@ -43,6 +43,12 @@ jQuery.ajax = function(options) {
 	return jQuery.ajaxOld(options);
 };
 
+jQuery.ajaxSetup(
+	{
+		type: 'POST'
+	}
+);
+
 Liferay = function() {
 	var $ = jQuery;
 
