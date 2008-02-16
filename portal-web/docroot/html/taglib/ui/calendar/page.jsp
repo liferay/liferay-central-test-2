@@ -87,7 +87,7 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 		for (int i = 0; i < 7;  i++) {
 			int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
 			String className = "";
-			
+
 			if (i == 0) {
 				className = "first";
 			}
@@ -121,7 +121,7 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 
 		for (int i = 1; i < dayOfWeek; i++) {
 			String className = "calendar-inactive calendar-previous-month";
-			
+
 			if (i == 1) {
 				className += " first";
 			}
@@ -188,7 +188,7 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 
 		for (int i = 7; i >= dayOfWeek; i--) {
 			String className = "calendar-inactive calendar-next-month";
-			
+
 			if (i == 1) {
 				className += " first";
 			}
