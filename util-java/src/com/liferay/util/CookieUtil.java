@@ -24,6 +24,7 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -128,7 +129,7 @@ public class CookieUtil {
 		StringMaker sm = new StringMaker();
 
 		sm.append(cookie);
-		sm.append(tag.substring(1, tag.length());
+		sm.append(tag.substring(1, tag.length()));
 		sm.append(sub);
 		sm.append(StringPool.SEMICOLON);
 
