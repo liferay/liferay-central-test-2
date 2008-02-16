@@ -64,6 +64,7 @@ import org.dom4j.Element;
  * <a href="WikiPortletDataHandlerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
+ * @author Jorge Ferrer
  *
  */
 public class WikiPortletDataHandlerImpl implements PortletDataHandler {
@@ -352,21 +353,23 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 					existingPage = WikiPageLocalServiceUtil.updatePage(
 						userId, nodeId, existingPage.getTitle(), 0,
 						page.getContent(), page.getFormat(),
-						page.getRedirectTo(), tagsEntries, prefs, themeDisplay);
+						page.getRedirectTo(), page.getParent(), tagsEntries,
+						prefs, themeDisplay);
 				}
 				catch (NoSuchPageException nspe) {
 					existingPage = WikiPageLocalServiceUtil.addPage(
 						page.getUuid(), userId, nodeId, page.getTitle(),
 						page.getVersion(), page.getContent(), page.getFormat(),
-						page.getHead(), page.getRedirectTo(), tagsEntries,
-						prefs, themeDisplay);
+						page.getHead(), page.getRedirectTo(),
+						page.getParent(), tagsEntries, prefs, themeDisplay);
 				}
 			}
 			else {
 				existingPage = WikiPageLocalServiceUtil.addPage(
 					null, userId, nodeId, page.getTitle(), page.getVersion(),
 					page.getContent(), page.getFormat(), page.getHead(),
-					page.getRedirectTo(), tagsEntries, prefs, themeDisplay);
+					page.getRedirectTo(), page.getParent(), tagsEntries, prefs,
+					themeDisplay);
 			}
 
 			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&

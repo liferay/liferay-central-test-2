@@ -176,6 +176,37 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_P(
+		long nodeId, java.lang.String parent)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_P(
+		long nodeId, java.lang.String parent, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_P(
+		long nodeId, java.lang.String parent, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiPage findByN_P_First(
+		long nodeId, java.lang.String parent,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException;
+
+	public com.liferay.portlet.wiki.model.WikiPage findByN_P_Last(long nodeId,
+		java.lang.String parent,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException;
+
+	public com.liferay.portlet.wiki.model.WikiPage[] findByN_P_PrevAndNext(
+		long pageId, long nodeId, java.lang.String parent,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException;
+
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByN_R(
 		long nodeId, java.lang.String redirectTo)
 		throws com.liferay.portal.SystemException;
@@ -277,6 +308,9 @@ public interface WikiPagePersistence {
 	public void removeByN_H(long nodeId, boolean head)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByN_P(long nodeId, java.lang.String parent)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByN_R(long nodeId, java.lang.String redirectTo)
 		throws com.liferay.portal.SystemException;
 
@@ -300,6 +334,9 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByN_H(long nodeId, boolean head)
+		throws com.liferay.portal.SystemException;
+
+	public int countByN_P(long nodeId, java.lang.String parent)
 		throws com.liferay.portal.SystemException;
 
 	public int countByN_R(long nodeId, java.lang.String redirectTo)

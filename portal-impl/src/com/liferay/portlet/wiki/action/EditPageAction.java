@@ -39,7 +39,9 @@ import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.PageTitleException;
 import com.liferay.portlet.wiki.PageVersionException;
+import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -137,7 +139,7 @@ public class EditPageAction extends PortletAction {
 
 		try {
 			ActionUtil.getNode(req);
-			ActionUtil.getPage(req);
+			getPage(req);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchNodeException ||
@@ -166,6 +168,38 @@ public class EditPageAction extends PortletAction {
 		String title = ParamUtil.getString(req, "title");
 
 		WikiPageServiceUtil.deletePage(nodeId, title);
+	}
+
+	protected void getPage(RenderRequest req) throws Exception {
+		long nodeId = ParamUtil.getLong(req, "nodeId");
+		String title = ParamUtil.getString(req, "title");
+		double version = ParamUtil.getDouble(req, "version");
+
+		if (nodeId == 0) {
+			WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
+
+			if (node != null) {
+				nodeId = node.getNodeId();
+			}
+		}
+
+		WikiPage page = null;
+
+		if (Validator.isNotNull(title)) {
+			try {
+				page = WikiPageServiceUtil.getPage(nodeId, title, version);
+			}
+			catch (NoSuchPageException nspe) {
+				if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
+					page = WikiPageServiceUtil.addPage(nodeId, title, null, null);
+				}
+				else {
+					throw nspe;
+				}
+			}
+		}
+
+		req.setAttribute(WebKeys.WIKI_PAGE, page);
 	}
 
 	protected String getSaveAndContinueRedirect(
@@ -239,13 +273,14 @@ public class EditPageAction extends PortletAction {
 
 		String content = ParamUtil.getString(req, "content");
 		String format = ParamUtil.getString(req, "format");
+		String parent = ParamUtil.getString(req, "parent");
 
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(req, "tagsEntries"));
 
 		return WikiPageServiceUtil.updatePage(
-			nodeId, title, version, content, format, null, tagsEntries, prefs,
-			themeDisplay);
+			nodeId, title, version, content, format, null, parent, tagsEntries,
+			prefs, themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

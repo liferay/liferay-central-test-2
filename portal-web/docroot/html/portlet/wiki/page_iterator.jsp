@@ -221,7 +221,10 @@ for (int i = 0; i < results.size(); i++) {
 	}
 
 	rowURL.setParameter("title", curWikiPage.getTitle());
-	rowURL.setParameter("version", String.valueOf(curWikiPage.getVersion()));
+
+	if (type.equals("history")) {
+		rowURL.setParameter("version", String.valueOf(curWikiPage.getVersion()));
+	}
 
 	// Title
 
@@ -283,18 +286,8 @@ for (int i = 0; i < results.size(); i++) {
 </c:if>
 
 <c:if test='<%= type.equals("all_pages") && WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_ATTACHMENT) %>'>
-	<script type="text/javascript">
-		function <portlet:namespace />addPage() {
-			var pageName = prompt('<liferay-ui:message key="page-name" />', '');
-
-			if ((pageName != null) && (pageName.length > 0)) {
-				window.location = Liferay.Util.addParams('<portlet:namespace />title=' + pageName, '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /></portlet:renderURL>');
-			}
-		}
-	</script>
-
 	<div>
-		<input type="button" value="<liferay-ui:message key="add-page" />" onClick="<portlet:namespace/>addPage();" />
+		<input type="button" value="<liferay-ui:message key="add-page" />" onClick="window.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="editTitle" value="1"></portlet:param></portlet:renderURL>'" />
 	</div>
 
 	<br />

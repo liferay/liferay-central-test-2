@@ -109,5 +109,9 @@ public interface WikiPageModel extends BaseModel {
 
 	public void setRedirectTo(String redirectTo);
 
+	public String getParent();
+
+	public void setParent(String parent);
+
 	public WikiPage toEscapedModel();
 }

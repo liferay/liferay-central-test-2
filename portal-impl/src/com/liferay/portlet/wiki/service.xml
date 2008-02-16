@@ -80,6 +80,7 @@
 		<column name="format" type="String" />
 		<column name="head" type="boolean" />
 		<column name="redirectTo" type="String" />
+		<column name="parent" type="String" />
 
 		<!-- Order -->
 
@@ -101,6 +102,10 @@
 		<finder name="N_H" return-type="Collection">
 			<finder-column name="nodeId" />
 			<finder-column name="head" />
+		</finder>
+		<finder name="N_P" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="parent" />
 		</finder>
 		<finder name="N_R" return-type="Collection">
 			<finder-column name="nodeId" />

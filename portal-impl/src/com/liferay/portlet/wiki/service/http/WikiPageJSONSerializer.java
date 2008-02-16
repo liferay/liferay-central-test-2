@@ -68,6 +68,7 @@ public class WikiPageJSONSerializer {
 		JSONUtil.put(jsonObj, "format", model.getFormat());
 		JSONUtil.put(jsonObj, "head", model.getHead());
 		JSONUtil.put(jsonObj, "redirectTo", model.getRedirectTo());
+		JSONUtil.put(jsonObj, "parent", model.getParent());
 
 		return jsonObj;
 	}

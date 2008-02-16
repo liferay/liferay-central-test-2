@@ -67,6 +67,11 @@
 	padding: 3px;
 }
 
+.portlet-wiki .children-pages li {
+	font-weight: bold;
+	font-size: 1.1em;
+}
+
 .portlet-wiki .content-body .wiki-code {
 	background: #fff;
 	border: 1px solid #777;

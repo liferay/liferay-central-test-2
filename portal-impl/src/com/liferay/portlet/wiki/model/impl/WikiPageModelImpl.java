@@ -101,9 +101,12 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			{ "head", new Integer(Types.BOOLEAN) },
 			
 
-			{ "redirectTo", new Integer(Types.VARCHAR) }
+			{ "redirectTo", new Integer(Types.VARCHAR) },
+			
+
+			{ "parent", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN,redirectTo VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table WikiPage (uuid_ VARCHAR(75) null,pageId LONG not null primary key,resourcePrimKey LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,nodeId LONG,title VARCHAR(75) null,version DOUBLE,content TEXT null,format VARCHAR(75) null,head BOOLEAN,redirectTo VARCHAR(75) null,parent VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table WikiPage";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.wiki.model.WikiPage"),
@@ -287,6 +290,19 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getParent() {
+		return GetterUtil.getString(_parent);
+	}
+
+	public void setParent(String parent) {
+		if (((parent == null) && (_parent != null)) ||
+				((parent != null) && (_parent == null)) ||
+				((parent != null) && (_parent != null) &&
+				!parent.equals(_parent))) {
+			_parent = parent;
+		}
+	}
+
 	public WikiPage toEscapedModel() {
 		if (isEscapedModel()) {
 			return (WikiPage)this;
@@ -310,6 +326,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 			model.setFormat(Html.escape(getFormat()));
 			model.setHead(getHead());
 			model.setRedirectTo(Html.escape(getRedirectTo()));
+			model.setParent(Html.escape(getParent()));
 
 			model = (WikiPage)Proxy.newProxyInstance(WikiPage.class.getClassLoader(),
 					new Class[] { WikiPage.class },
@@ -336,6 +353,7 @@ public class WikiPageModelImpl extends BaseModelImpl {
 		clone.setFormat(getFormat());
 		clone.setHead(getHead());
 		clone.setRedirectTo(getRedirectTo());
+		clone.setParent(getParent());
 
 		return clone;
 	}
@@ -429,4 +447,5 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	private String _format;
 	private boolean _head;
 	private String _redirectTo;
+	private String _parent;
 }

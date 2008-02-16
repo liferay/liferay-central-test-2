@@ -386,6 +386,7 @@ create index IX_7609B2AE on WikiNode (uuid_, groupId);
 
 create index IX_C8A9C476 on WikiPage (nodeId);
 create index IX_E7F635CA on WikiPage (nodeId, head);
+create index IX_4BE11814 on WikiPage (nodeId, parent);
 create index IX_AFDEFA1 on WikiPage (nodeId, redirectTo);
 create index IX_997EEDD2 on WikiPage (nodeId, title);
 create index IX_E745EA26 on WikiPage (nodeId, title, head);

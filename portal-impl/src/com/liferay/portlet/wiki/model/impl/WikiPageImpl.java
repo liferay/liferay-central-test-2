@@ -37,6 +37,9 @@ import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.rmi.RemoteException;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -44,6 +47,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="WikiPageImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
@@ -72,6 +76,22 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		_userUuid = userUuid;
 	}
 
+	public List getChildren() {
+		List children = null;
+
+		try {
+			children = WikiPageLocalServiceUtil.getChildren(
+				getNodeId(), getTitle());
+		}
+		catch (Exception e) {
+			children = new ArrayList();
+
+			_log.error(e);
+		}
+
+		return children;
+	}
+
 	public WikiNode getNode() {
 		WikiNode node = null;
 
@@ -85,6 +105,36 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		}
 
 		return node;
+	}
+
+	public WikiPage getParentPage() {
+		if (Validator.isNull(getParent())) {
+			return null;
+		}
+
+		WikiPage page = null;
+
+		try {
+			page = WikiPageLocalServiceUtil.getPage(getNodeId(), getParent());
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return page;
+	}
+
+	public List getParentPages() {
+		List parentPages = new ArrayList();
+
+		WikiPage parentPage = getParentPage();
+
+		if (parentPage != null) {
+			parentPages.add(parentPage);
+			parentPages.addAll(parentPage.getParentPages());
+		}
+
+		return parentPages;
 	}
 
 	public WikiPage getRedirectToPage()

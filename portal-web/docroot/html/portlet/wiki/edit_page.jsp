@@ -44,6 +44,9 @@ String title = BeanParamUtil.getString(wikiPage, request, "title");
 
 String content = BeanParamUtil.getString(wikiPage, request, "content");
 String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
+String parent = BeanParamUtil.getString(wikiPage, request, "parent");
+
+boolean editTitle = ParamUtil.getBoolean(request, "editTitle");
 
 String[] attachments = new String[0];
 
@@ -70,6 +73,14 @@ else if (Validator.isNotNull(title)) {
 	}
 	catch (PortalException pe) {
 	}
+}
+else if ((wikiPage == null) && editTitle) {
+	editable = true;
+	wikiPage = new WikiPageImpl();
+	wikiPage.setNew(true);
+	wikiPage.setNodeId(node.getNodeId());
+	wikiPage.setFormat(format);
+	wikiPage.setParent(parent);
 }
 
 PortletURL viewPageURL = renderResponse.createRenderURL();
@@ -155,7 +166,12 @@ if (Validator.isNull(redirect)) {
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= originalRedirect %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
-<input name="<portlet:namespace />title" type="hidden" value="<%= title %>" />
+<input name="<portlet:namespace />parent" type="hidden" value="<%= parent %>" />
+<input name="<portlet:namespace />editTitle" type="hidden" value="<%= editTitle %>" />
+
+<c:if test="<%= !editTitle %>">
+	<input name="<portlet:namespace />title" type="hidden" value="<%= title %>" />
+</c:if>
 
 <c:if test="<%= wikiPage != null %>">
 	<input name="<portlet:namespace />version" type="hidden" value="<%= wikiPage.getVersion() %>" />
@@ -188,6 +204,16 @@ if (Validator.isNull(redirect)) {
 <c:if test="<%= editable %>">
 	<c:if test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
 		<table class="lfr-table">
+		<c:if test="<%= editTitle %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="title" />
+				</td>
+				<td>
+					<input name="<portlet:namespace />title" type="text" value='<%= LanguageUtil.get(pageContext, "enter-the-page-title-here") %>' />
+				</td>
+			</tr>
+		</c:if>
 		<tr>
 			<td>
 				<liferay-ui:message key="format" />
@@ -208,6 +234,16 @@ if (Validator.isNull(redirect)) {
 				</select>
 			</td>
 		</tr>
+		<c:if test="<%= Validator.isNotNull(parent) %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="parent" />
+				</td>
+				<td>
+					<%= parent %>
+				</td>
+			</tr>
+		</c:if>
 		</table>
 	</c:if>
 
@@ -286,7 +322,7 @@ if (Validator.isNull(redirect)) {
 	<c:if test="<%= !preview %>">
 		<script type="text/javascript">
 			if (!window.<portlet:namespace />editor) {
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />content);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= editTitle?"title":"content"%>);
 			}
 		</script>
 	</c:if>

@@ -54,7 +54,13 @@ public interface WikiPage extends WikiPageModel {
 
 	public void setUserUuid(java.lang.String userUuid);
 
+	public java.util.List getChildren();
+
 	public com.liferay.portlet.wiki.model.WikiNode getNode();
+
+	public com.liferay.portlet.wiki.model.WikiPage getParentPage();
+
+	public java.util.List getParentPages();
 
 	public com.liferay.portlet.wiki.model.WikiPage getRedirectToPage()
 		throws com.liferay.portal.SystemException,

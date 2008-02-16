@@ -37,6 +37,8 @@ if (wikiPage.getRedirectToPage() != null) {
 
 String title = wikiPage.getTitle();
 
+List children = wikiPage.getChildren();
+
 String[] attachments = new String[0];
 
 if (wikiPage != null) {
@@ -57,6 +59,16 @@ editPageURL.setParameter("struts_action", "/wiki/edit_page");
 editPageURL.setParameter("redirect", currentURL);
 editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 editPageURL.setParameter("title", title);
+
+PortletURL addPageURL = renderResponse.createRenderURL();
+
+addPageURL.setParameter("struts_action", "/wiki/edit_page");
+addPageURL.setParameter("redirect", currentURL);
+addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+addPageURL.setParameter("editTitle", "1");
+if (wikiPage != null) {
+	addPageURL.setParameter("parent", wikiPage.getTitle());
+}
 
 PortletURL printPageURL = PortletURLUtil.clone(editPageURL, renderResponse);
 
@@ -90,6 +102,26 @@ taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 </c:choose>
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
+
+<c:if test="<%= Validator.isNotNull(wikiPage.getParent()) %>">
+	<div class="breadcrumbs">
+		<%
+		PortletURL viewParentPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+		List parentPages = wikiPage.getParentPages();
+
+			for (int i = 0; i < parentPages.size(); i++) {
+				WikiPage curParentPage = (WikiPage) parentPages.get(i);
+
+				viewParentPageURL.setParameter("title", curParentPage.getTitle());
+		%>
+			<a href="<%= viewParentPageURL %>"><%= curParentPage.getTitle() %></a>
+			<%= ((i + 1) < parentPages.size())?"&raquo;":"" %>
+		<%
+			}
+		%>
+	</div>
+</c:if>
 
 <h1 class="page-title">
 	<c:if test="<%= !print %>">
@@ -140,6 +172,35 @@ taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 </div>
 
+<c:if test="<%= wikiPage != null %>">
+	<div class="separator"><!-- --></div>
+
+	<c:if test="<%= (children != null) && (children.size() > 0) %>">
+
+		<h3><liferay-ui:message key="children"/></h3>
+
+		<ol class="children-pages">
+			<%
+			PortletURL curPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+			for (int i = 0; i < children.size(); i++) {
+				WikiPage curPage = (WikiPage)children.get(i);
+
+				curPageURL.setParameter("title", curPage.getTitle());
+			%>
+				<li><a href="<%= curPageURL %>"><%= curPage.getTitle() %></a></li>
+			<%
+			}
+			%>
+		</ol>
+	</c:if>
+
+	<liferay-ui:icon image="add_article" message='add-children-page' url="<%= addPageURL.toString() %>" label="<%= true %>" />
+
+	<br/>
+
+</c:if>
+
 <c:if test="<%= attachments.length > 0 %>">
 
 	<%
@@ -154,7 +215,7 @@ taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 </c:if>
 
 <c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
-	<c:if test="<%= Validator.isNotNull(pageContent) %>">
+	<c:if test="<%= Validator.isNotNull(htmlContent) %>">
 		<br />
 	</c:if>
 

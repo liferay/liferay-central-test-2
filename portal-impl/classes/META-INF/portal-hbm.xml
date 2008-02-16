@@ -1435,6 +1435,7 @@
 		<property name="format" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="head" type="com.liferay.util.dao.hibernate.BooleanType" />
 		<property name="redirectTo" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="parent" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl" table="WikiPageResource">
 		<cache usage="read-write" />
