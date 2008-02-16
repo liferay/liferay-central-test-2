@@ -692,7 +692,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 			result = result.substring(0, result.length() - 1);
 		}
 
-		if (!CookieUtil.checkSessionCookie(_req)) {
+		if (!CookieUtil.hasSessionIdCookie(_req)) {
 			result = PortalUtil.getURLWithSessionId(
 				result, _req.getSession().getId());
 		}

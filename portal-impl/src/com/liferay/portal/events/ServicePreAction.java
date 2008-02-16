@@ -1152,7 +1152,7 @@ public class ServicePreAction extends Action {
 
 		String urlHome = PortalUtil.getPortalURL(req) + contextPath;
 
-		if (!CookieUtil.checkSessionCookie(req)) {
+		if (!CookieUtil.hasSessionIdCookie(req)) {
 			urlHome = PortalUtil.getURLWithSessionId(urlHome, ses.getId());
 		}
 

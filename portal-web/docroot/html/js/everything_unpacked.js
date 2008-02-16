@@ -13942,6 +13942,12 @@ jQuery.ajax = function(options) {
 	return jQuery.ajaxOld(options);
 };
 
+jQuery.ajaxSetup(
+	{
+		type: 'POST'
+	}
+);
+
 Liferay = function() {
 	var $ = jQuery;
 
@@ -14572,7 +14578,7 @@ Liferay.Util = {
 	},
 
 	getURLWithSessionId: function(url) {
-		if (document.cookie && document.cookie.length > 0) {
+		if (document.cookie && (document.cookie.length > 0)) {
 			return url;
 		}
 
@@ -15477,8 +15483,9 @@ Liferay.Language = {
 
 		var xHR = jQuery.ajax(
 			{
-				url: url,
-				async: false
+				async: false,
+				type: 'GET',
+				url: url
 			}
 		);
 

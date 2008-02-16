@@ -58,7 +58,7 @@ public class AbsoluteRedirectsResponse extends HttpServletResponseWrapper {
 			redirect = portalURL + redirect;
 		}
 
-		if (!CookieUtil.checkSessionCookie(_req)) {
+		if (!CookieUtil.hasSessionIdCookie(_req)) {
 			redirect = PortalUtil.getURLWithSessionId(
 				redirect, _req.getSession().getId());
 		}

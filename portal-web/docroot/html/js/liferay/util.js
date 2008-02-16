@@ -316,7 +316,7 @@ Liferay.Util = {
 	},
 
 	getURLWithSessionId: function(url) {
-		if (document.cookie && document.cookie.length > 0) {
+		if (document.cookie && (document.cookie.length > 0)) {
 			return url;
 		}
 
