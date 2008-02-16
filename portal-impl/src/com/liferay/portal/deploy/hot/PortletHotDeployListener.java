@@ -310,7 +310,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 					}
 				}
 
-				Map<String, Object> customUserAttributes = new HashMap<String, Object>();
+				Map<String, Object> customUserAttributes =
+					new HashMap<String, Object>();
 
 				Iterator<Map.Entry<String, String>> itr2 =
 					portlet.getCustomUserAttributes().entrySet().iterator();
