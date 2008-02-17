@@ -46,6 +46,7 @@ if (wikiPage != null) {
 }
 
 boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
+boolean preview = false;
 
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
@@ -70,7 +71,7 @@ if (wikiPage != null) {
 	addPageURL.setParameter("parent", wikiPage.getTitle());
 }
 
-PortletURL printPageURL = PortletURLUtil.clone(editPageURL, renderResponse);
+PortletURL printPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 printPageURL.setWindowState(LiferayWindowState.POP_UP);
 
@@ -179,7 +180,7 @@ taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 		<h3><liferay-ui:message key="children"/></h3>
 
-		<ol class="children-pages">
+		<ul class="children-pages">
 			<%
 			PortletURL curPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
@@ -192,7 +193,7 @@ taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 			<%
 			}
 			%>
-		</ol>
+		</ul>
 	</c:if>
 
 	<liferay-ui:icon image="add_article" message='add-children-page' url="<%= addPageURL.toString() %>" label="<%= true %>" />

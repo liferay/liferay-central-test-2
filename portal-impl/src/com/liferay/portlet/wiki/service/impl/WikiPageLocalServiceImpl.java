@@ -697,6 +697,20 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			wikiPagePersistence.update(page);
 		}
 
+		// Update children pages
+
+		List children = wikiPagePersistence.findByN_P(nodeId, title);
+
+		itr = children.iterator();
+
+		while (itr.hasNext()) {
+			WikiPage page = (WikiPage)itr.next();
+
+			page.setParent(newTitle);
+
+			wikiPagePersistence.update(page);
+		}
+
 		WikiPage page = (WikiPage)pageVersions.get(pageVersions.size() - 1);
 
 		// Rename page resource

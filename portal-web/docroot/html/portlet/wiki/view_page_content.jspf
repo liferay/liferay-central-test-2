@@ -30,7 +30,11 @@ try {
 	PortletURL curEditPageURL = PortletURLUtil.clone(editPageURL, renderResponse);
 	String attachmentURLPrefix = themeDisplay.getPathMain() + "/wiki/get_page_attachment?p_l_id=" + themeDisplay.getPlid() + "&nodeId=" + wikiPage.getNodeId() + "&title=" + HttpUtil.encodeURL(wikiPage.getTitle()) + "&fileName=";
 
-	WikiPageDisplay pageDisplay = WikiCacheUtil.getDisplay(wikiPage.getNodeId(), title, curViewPageURL, curEditPageURL, attachmentURLPrefix);
+	WikiPageDisplay pageDisplay = null;
+
+	if (!preview) {
+		pageDisplay = WikiCacheUtil.getDisplay(wikiPage.getNodeId(), title, curViewPageURL, curEditPageURL, attachmentURLPrefix);
+	}
 
 	if (pageDisplay != null) {
 		formattedContent = pageDisplay.getFormattedContent();

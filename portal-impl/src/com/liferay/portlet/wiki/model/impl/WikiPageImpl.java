@@ -130,8 +130,8 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		WikiPage parentPage = getParentPage();
 
 		if (parentPage != null) {
-			parentPages.add(parentPage);
 			parentPages.addAll(parentPage.getParentPages());
+			parentPages.add(parentPage);
 		}
 
 		return parentPages;
