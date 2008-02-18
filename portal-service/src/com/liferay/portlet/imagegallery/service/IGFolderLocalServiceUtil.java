@@ -122,6 +122,32 @@ public class IGFolderLocalServiceUtil {
 		igFolderLocalService.setIGImageFinder(igImageFinder);
 	}
 
+	public static com.liferay.portal.service.persistence.LayoutPersistence getLayoutPersistence() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getLayoutPersistence();
+	}
+
+	public static void setLayoutPersistence(
+		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		igFolderLocalService.setLayoutPersistence(layoutPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder() {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		return igFolderLocalService.getLayoutFinder();
+	}
+
+	public static void setLayoutFinder(
+		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
+		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
+
+		igFolderLocalService.setLayoutFinder(layoutFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
 		IGFolderLocalService igFolderLocalService = IGFolderLocalServiceFactory.getService();
 

@@ -37,7 +37,6 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGFolderServiceUtil;
-import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
 import com.liferay.portlet.imagegallery.service.IGImageServiceUtil;
 
 import java.io.File;
@@ -62,11 +61,18 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			Group group = arg.getCurrentGroup();
 
 			IGFolder folder = _getFolder(
-				group.getGroupId(), "/" + arg.getCurrentFolder());
+				group.getGroupId(), StringPool.SLASH + arg.getCurrentFolder());
+
+			long plid = arg.getPlid();
+			long parentFolderId = folder.getFolderId();
+			String name = arg.getNewFolder();
+			String description = StringPool.BLANK;
+			boolean addCommunityPermissions = true;
+			boolean addGuestPermissions = true;
 
 			IGFolderServiceUtil.addFolder(
-				arg.getPlid(), folder.getFolderId(), arg.getNewFolder(),
-				StringPool.BLANK, true, true);
+				plid, parentFolderId, name, description,
+				addCommunityPermissions, addGuestPermissions);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -84,9 +90,17 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			IGFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
 
+			long folderId = folder.getFolderId();
+			String name = fileName;
+			String description = StringPool.BLANK;
+			String contentType = extension;
+			String[] tagsEntries = null;
+			boolean addCommunityPermissions = true;
+			boolean addGuestPermissions = true;
+
 			IGImageServiceUtil.addImage(
-				folder.getFolderId(), fileName, fileName, file, extension,
-				new String[0], true, true);
+				folderId, name, description, file, contentType, tagsEntries,
+				addCommunityPermissions, addGuestPermissions);
 		}
 		catch (Exception e) {
 			throw new FCKException(e);
@@ -123,43 +137,43 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 		root.appendChild(filesEl);
 
-		if (Validator.isNotNull(arg.getCurrentGroupName())) {
-			Group group = arg.getCurrentGroup();
+		if (Validator.isNull(arg.getCurrentGroupName())) {
+			return;
+		}
 
-			IGFolder folder = _getFolder(
-				group.getGroupId(), arg.getCurrentFolder());
+		Group group = arg.getCurrentGroup();
 
-			List images = IGImageLocalServiceUtil.getImages(
-				folder.getFolderId());
+		IGFolder folder = _getFolder(
+			group.getGroupId(), arg.getCurrentFolder());
 
-			for (int i = 0; i < images.size(); i++) {
-				IGImage image = (IGImage)images.get(i);
+		List images = IGImageServiceUtil.getImages(folder.getFolderId());
 
-				long largeImageId = image.getLargeImageId();
+		for (int i = 0; i < images.size(); i++) {
+			IGImage image = (IGImage)images.get(i);
 
-				Image portalImage = ImageLocalUtil.getImageOrDefault(
-					largeImageId);
+			long largeImageId = image.getLargeImageId();
 
-				Element fileEl = doc.createElement("File");
+			Image portalImage = ImageLocalUtil.getImageOrDefault(largeImageId);
 
-				filesEl.appendChild(fileEl);
+			Element fileEl = doc.createElement("File");
 
-				fileEl.setAttribute("name", String.valueOf(image.getImageId()));
-				fileEl.setAttribute("desc", image.getDescription());
-				fileEl.setAttribute("size", getSize(portalImage.getSize()));
+			filesEl.appendChild(fileEl);
 
-				StringMaker url = new StringMaker();
+			fileEl.setAttribute("name", String.valueOf(image.getImageId()));
+			fileEl.setAttribute("desc", image.getDescription());
+			fileEl.setAttribute("size", getSize(portalImage.getSize()));
 
-				ThemeDisplay themeDisplay = arg.getThemeDisplay();
+			StringMaker url = new StringMaker();
 
-				url.append(themeDisplay.getPathContext());
-				url.append("/image/image_gallery?img_id=");
-				url.append(largeImageId);
-				url.append("&t=");
-				url.append(ImageServletTokenUtil.getToken(largeImageId));
+			ThemeDisplay themeDisplay = arg.getThemeDisplay();
 
-				fileEl.setAttribute("url", url.toString());
-			}
+			url.append(themeDisplay.getPathContext());
+			url.append("/image/image_gallery?img_id=");
+			url.append(largeImageId);
+			url.append("&t=");
+			url.append(ImageServletTokenUtil.getToken(largeImageId));
+
+			fileEl.setAttribute("url", url.toString());
 		}
 	}
 
@@ -170,23 +184,25 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 		folder.setFolderId(IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
-		if (!folderName.equals("/")) {
-			StringTokenizer st = new StringTokenizer(folderName, "/");
+		if (folderName.equals(StringPool.SLASH)) {
+			return folder;
+		}
 
-			while (st.hasMoreTokens()) {
-				String curFolderName = (String)st.nextToken();
+		StringTokenizer st = new StringTokenizer(folderName, StringPool.SLASH);
 
-				List folders = IGFolderLocalServiceUtil.getFolders(
-					groupId, folder.getFolderId());
+		while (st.hasMoreTokens()) {
+			String curFolderName = (String)st.nextToken();
 
-				for (int i = 0; i < folders.size(); i++) {
-					IGFolder curFolder = (IGFolder)folders.get(i);
+			List folders = IGFolderLocalServiceUtil.getFolders(
+				groupId, folder.getFolderId());
 
-					if (curFolder.getName().equals(curFolderName)) {
-						folder = curFolder;
+			for (int i = 0; i < folders.size(); i++) {
+				IGFolder curFolder = (IGFolder)folders.get(i);
 
-						break;
-					}
+				if (curFolder.getName().equals(curFolderName)) {
+					folder = curFolder;
+
+					break;
 				}
 			}
 		}
@@ -201,7 +217,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 		root.appendChild(foldersEl);
 
-		if (arg.getCurrentFolder().equals("/")) {
+		if (arg.getCurrentFolder().equals(StringPool.SLASH)) {
 			getRootFolders(arg, doc, foldersEl);
 		}
 		else {

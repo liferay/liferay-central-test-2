@@ -92,12 +92,12 @@ public class IGImageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.imagegallery.model.IGImageSoap getImage(
-		long imageId) throws RemoteException {
+	public static void deleteImageByFolderIdAndNameWithExtension(
+		long folderId, java.lang.String nameWithExtension)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(imageId);
-
-			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModel(returnValue);
+			IGImageServiceUtil.deleteImageByFolderIdAndNameWithExtension(folderId,
+				nameWithExtension);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -106,13 +106,12 @@ public class IGImageServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.imagegallery.model.IGImageSoap[] getImages(
-		long folderId) throws RemoteException {
+	public static com.liferay.portlet.imagegallery.model.IGImageSoap getImage(
+		long imageId) throws RemoteException {
 		try {
-			java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
-				IGImageServiceUtil.getImages(folderId);
+			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(imageId);
 
-			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModels(returnValue);
+			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -157,6 +156,21 @@ public class IGImageServiceSoap {
 			com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageBySmallImageId(smallImageId);
 
 			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.imagegallery.model.IGImageSoap[] getImages(
+		long folderId) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
+				IGImageServiceUtil.getImages(folderId);
+
+			return com.liferay.portlet.imagegallery.model.IGImageSoap.toSoapModels(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

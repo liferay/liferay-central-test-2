@@ -80,6 +80,16 @@ public interface IGFolderLocalService {
 	public void setIGImageFinder(
 		com.liferay.portlet.imagegallery.service.persistence.IGImageFinder igImageFinder);
 
+	public com.liferay.portal.service.persistence.LayoutPersistence getLayoutPersistence();
+
+	public void setLayoutPersistence(
+		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence);
+
+	public com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder();
+
+	public void setLayoutFinder(
+		com.liferay.portal.service.persistence.LayoutFinder layoutFinder);
+
 	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
 
 	public void setResourcePersistence(

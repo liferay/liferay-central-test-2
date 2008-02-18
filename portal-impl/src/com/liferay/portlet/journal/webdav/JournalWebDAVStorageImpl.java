@@ -42,7 +42,6 @@ import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 import java.io.File;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -243,41 +242,39 @@ public class JournalWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 	protected List<Resource> getStructures(WebDAVRequest webDavReq)
 		throws Exception {
 
-		List<Resource> templates = new ArrayList<Resource>();
+		List<Resource> resources = new ArrayList<Resource>();
 
-		Iterator<JournalStructure> itr =
-			JournalStructureLocalServiceUtil.getStructures(
-				webDavReq.getGroupId()).iterator();
+		long groupId = webDavReq.getGroupId();
 
-		while (itr.hasNext()) {
-			JournalStructure structure = itr.next();
+		List<JournalStructure> structures =
+			JournalStructureLocalServiceUtil.getStructures(groupId);
 
+		for (JournalStructure structure : structures) {
 			Resource resource = toResource(webDavReq, structure, true);
 
-			templates.add(resource);
+			resources.add(resource);
 		}
 
-		return templates;
+		return resources;
 	}
 
 	protected List<Resource> getTemplates(WebDAVRequest webDavReq)
 		throws Exception {
 
-		List<Resource> templates = new ArrayList<Resource>();
+		List<Resource> resources = new ArrayList<Resource>();
 
-		Iterator<JournalTemplate> itr =
-			JournalTemplateLocalServiceUtil.getTemplates(
-				webDavReq.getGroupId()).iterator();
+		long groupId = webDavReq.getGroupId();
 
-		while (itr.hasNext()) {
-			JournalTemplate template = itr.next();
+		List<JournalTemplate> templates =
+			JournalTemplateLocalServiceUtil.getTemplates(groupId);
 
+		for (JournalTemplate template : templates) {
 			Resource resource = toResource(webDavReq, template, true);
 
-			templates.add(resource);
+			resources.add(resource);
 		}
 
-		return templates;
+		return resources;
 	}
 
 	protected Resource toResource(

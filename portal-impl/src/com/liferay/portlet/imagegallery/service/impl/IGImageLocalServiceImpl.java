@@ -370,6 +370,23 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		return igImagePersistence.findByCustom2ImageId(custom2ImageId);
 	}
 
+	public IGImage getImageByFolderIdAndNameWithExtension(
+			long folderId, String nameWithExtension)
+		throws PortalException, SystemException {
+
+		String name = FileUtil.stripExtension(nameWithExtension);
+
+		List<IGImage> images = igImagePersistence.findByF_N(folderId, name);
+
+		for (IGImage image : images) {
+			if (nameWithExtension.equals(image.getNameWithExtension())) {
+				return image;
+			}
+		}
+
+		throw new NoSuchImageException();
+	}
+
 	public IGImage getImageByLargeImageId(long largeImageId)
 		throws PortalException, SystemException {
 
@@ -403,24 +420,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		throws SystemException {
 
 		return igImagePersistence.findByFolderId(folderId, begin, end, obc);
-	}
-
-	public IGImage getImageByFolderIdAndNameWithExtension(
-			long folderId, String nameWithExtension)
-		throws PortalException, SystemException {
-
-		String nameProper = FileUtil.stripExtension(nameWithExtension);
-
-		List<IGImage> images =
-			igImagePersistence.findByF_N(folderId, nameProper);
-
-		for (IGImage image : images) {
-			if (nameWithExtension.equals(image.getNameWithExtension())) {
-				return image;
-			}
-		}
-
-		throw new NoSuchImageException();
 	}
 
 	public int getImagesCount(long folderId) throws SystemException {

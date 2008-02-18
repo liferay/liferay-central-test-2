@@ -84,7 +84,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 
 		Node root = _createRoot(
 			doc, arg.getCommand(), arg.getType(), arg.getCurrentFolder(),
-			"");
+			StringPool.BLANK);
 
 		Element errorEl = doc.createElement("Error");
 

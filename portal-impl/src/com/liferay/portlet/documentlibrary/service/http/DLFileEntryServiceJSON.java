@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -118,6 +119,15 @@ public class DLFileEntryServiceJSON {
 			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		DLFileEntryServiceUtil.deleteFileEntryByTitle(folderId,
 			titleWithExtension);
+	}
+
+	public static JSONArray getFileEntries(long folderId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> returnValue =
+			DLFileEntryServiceUtil.getFileEntries(folderId);
+
+		return DLFileEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONObject getFileEntry(long folderId, java.lang.String name)

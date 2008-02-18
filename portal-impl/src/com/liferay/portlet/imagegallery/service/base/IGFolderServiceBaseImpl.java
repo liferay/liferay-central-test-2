@@ -27,6 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.service.LayoutLocalService;
+import com.liferay.portal.service.LayoutLocalServiceFactory;
+import com.liferay.portal.service.LayoutService;
+import com.liferay.portal.service.LayoutServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -36,6 +40,10 @@ import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.LayoutFinder;
+import com.liferay.portal.service.persistence.LayoutFinderUtil;
+import com.liferay.portal.service.persistence.LayoutPersistence;
+import com.liferay.portal.service.persistence.LayoutUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -140,6 +148,38 @@ public abstract class IGFolderServiceBaseImpl extends PrincipalBean
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
+	}
+
+	public LayoutLocalService getLayoutLocalService() {
+		return layoutLocalService;
+	}
+
+	public void setLayoutLocalService(LayoutLocalService layoutLocalService) {
+		this.layoutLocalService = layoutLocalService;
+	}
+
+	public LayoutService getLayoutService() {
+		return layoutService;
+	}
+
+	public void setLayoutService(LayoutService layoutService) {
+		this.layoutService = layoutService;
+	}
+
+	public LayoutPersistence getLayoutPersistence() {
+		return layoutPersistence;
+	}
+
+	public void setLayoutPersistence(LayoutPersistence layoutPersistence) {
+		this.layoutPersistence = layoutPersistence;
+	}
+
+	public LayoutFinder getLayoutFinder() {
+		return layoutFinder;
+	}
+
+	public void setLayoutFinder(LayoutFinder layoutFinder) {
+		this.layoutFinder = layoutFinder;
 	}
 
 	public ResourceLocalService getResourceLocalService() {
@@ -274,6 +314,22 @@ public abstract class IGFolderServiceBaseImpl extends PrincipalBean
 			counterService = CounterServiceFactory.getImpl();
 		}
 
+		if (layoutLocalService == null) {
+			layoutLocalService = LayoutLocalServiceFactory.getImpl();
+		}
+
+		if (layoutService == null) {
+			layoutService = LayoutServiceFactory.getImpl();
+		}
+
+		if (layoutPersistence == null) {
+			layoutPersistence = LayoutUtil.getPersistence();
+		}
+
+		if (layoutFinder == null) {
+			layoutFinder = LayoutFinderUtil.getFinder();
+		}
+
 		if (resourceLocalService == null) {
 			resourceLocalService = ResourceLocalServiceFactory.getImpl();
 		}
@@ -331,6 +387,10 @@ public abstract class IGFolderServiceBaseImpl extends PrincipalBean
 	protected IGImageFinder igImageFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected LayoutLocalService layoutLocalService;
+	protected LayoutService layoutService;
+	protected LayoutPersistence layoutPersistence;
+	protected LayoutFinder layoutFinder;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;

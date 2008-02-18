@@ -24,6 +24,7 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
@@ -137,66 +138,69 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 	private void _getFiles(CommandArgument arg, Document doc, Node root)
 		throws Exception {
 
-		if (!arg.getCurrentFolder().equals("/")) {
-			Element filesEl = doc.createElement("Files");
+		if (arg.getCurrentFolder().equals(StringPool.SLASH)) {
+			return;
+		}
 
-			root.appendChild(filesEl);
+		Element filesEl = doc.createElement("Files");
 
-			Group group = arg.getCurrentGroup();
+		root.appendChild(filesEl);
 
-			List layouts = LayoutLocalServiceUtil.getLayouts(
-				group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+		Group group = arg.getCurrentGroup();
 
-			if (("/" + arg.getCurrentGroupName() + "/").equals(
-					arg.getCurrentFolder())) {
+		List layouts = LayoutLocalServiceUtil.getLayouts(
+			group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
-				for (int i = 0; i < layouts.size(); i++) {
-					Layout layout = (Layout)layouts.get(i);
+		if (("/" + arg.getCurrentGroupName() + "/").equals(
+				arg.getCurrentFolder())) {
 
-					Element fileEl = doc.createElement("File");
+			for (int i = 0; i < layouts.size(); i++) {
+				Layout layout = (Layout)layouts.get(i);
 
-					filesEl.appendChild(fileEl);
+				Element fileEl = doc.createElement("File");
 
-					fileEl.setAttribute("name", _getLayoutName(layout));
-					fileEl.setAttribute("desc", _getLayoutName(layout));
-					fileEl.setAttribute("size", "");
-					fileEl.setAttribute(
-						"url",
-						PortalUtil.getLayoutURL(layout,arg.getThemeDisplay()));
-				}
+				filesEl.appendChild(fileEl);
+
+				fileEl.setAttribute("name", _getLayoutName(layout));
+				fileEl.setAttribute("desc", _getLayoutName(layout));
+				fileEl.setAttribute("size", StringPool.BLANK);
+				fileEl.setAttribute(
+					"url",
+					PortalUtil.getLayoutURL(layout,arg.getThemeDisplay()));
 			}
-			else {
-				String layoutName = _getLayoutName(arg.getCurrentFolder());
+		}
+		else {
+			String layoutName = _getLayoutName(arg.getCurrentFolder());
 
-				Layout layout = null;
+			Layout layout = null;
 
-				for (int i = 0; i < layouts.size(); i++) {
-					layout = _getLayout(layoutName, (Layout)layouts.get(i));
-
-					if (layout != null) {
-						break;
-					}
-				}
+			for (int i = 0; i < layouts.size(); i++) {
+				layout = _getLayout(layoutName, (Layout)layouts.get(i));
 
 				if (layout != null) {
-					List layoutChildren = layout.getChildren();
-
-					for (int i = 0; i < layoutChildren.size(); i++) {
-						layout = (Layout)layoutChildren.get(i);
-
-						Element fileEl = doc.createElement("File");
-
-						filesEl.appendChild(fileEl);
-
-						fileEl.setAttribute("name", _getLayoutName(layout));
-						fileEl.setAttribute("desc", _getLayoutName(layout));
-						fileEl.setAttribute("size", getSize());
-						fileEl.setAttribute(
-							"url",
-							PortalUtil.getLayoutURL(
-								layout, arg.getThemeDisplay()));
-					}
+					break;
 				}
+			}
+
+			if (layout == null) {
+				return;
+			}
+
+			List layoutChildren = layout.getChildren();
+
+			for (int i = 0; i < layoutChildren.size(); i++) {
+				layout = (Layout)layoutChildren.get(i);
+
+				Element fileEl = doc.createElement("File");
+
+				filesEl.appendChild(fileEl);
+
+				fileEl.setAttribute("name", _getLayoutName(layout));
+				fileEl.setAttribute("desc", _getLayoutName(layout));
+				fileEl.setAttribute("size", getSize());
+				fileEl.setAttribute(
+					"url",
+					PortalUtil.getLayoutURL(layout, arg.getThemeDisplay()));
 			}
 		}
 	}
@@ -208,7 +212,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 
 		root.appendChild(foldersEl);
 
-		if (arg.getCurrentFolder().equals("/")) {
+		if (arg.getCurrentFolder().equals(StringPool.SLASH)) {
 			getRootFolders(arg, doc, foldersEl);
 		}
 		else {

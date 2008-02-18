@@ -92,6 +92,8 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 				_imageType = largeImage.getType();
 			}
 			catch (Exception e) {
+				_imageType = StringPool.BLANK;
+
 				_log.error(e);
 			}
 		}
@@ -104,24 +106,26 @@ public class IGImageImpl extends IGImageModelImpl implements IGImage {
 	}
 
 	public int getImageSize() {
-		if (_imageSize <= 0) {
+		if (_imageSize == null) {
 			try {
 				Image largeImage = ImageLocalUtil.getImage(getLargeImageId());
 
-				_imageSize = largeImage.getSize();
+				_imageSize = new Integer(largeImage.getSize());
 			}
 			catch (Exception e) {
+				_imageSize = new Integer(0);
+
 				_log.error(e);
 			}
 		}
 
-		return _imageSize;
+		return _imageSize.intValue();
 	}
 
 	private static Log _log = LogFactory.getLog(IGImageImpl.class);
 
 	private String _userUuid;
 	private String _imageType;
-	private int _imageSize = 0;
+	private Integer _imageSize;
 
 }

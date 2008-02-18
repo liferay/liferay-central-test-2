@@ -33,7 +33,12 @@ import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermiss
 import com.liferay.portlet.documentlibrary.service.permission.DLFolderPermission;
 import com.liferay.portlet.documentlibrary.util.DLUtil;
 
+import java.io.File;
+
 import java.rmi.RemoteException;
+
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * <a href="DLFileEntryServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -42,6 +47,21 @@ import java.rmi.RemoteException;
  *
  */
 public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
+
+	public DLFileEntry addFileEntry(
+			long folderId, String name, String title, String description,
+			String[] tagsEntries, String extraSettings, File file,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
+
+		return dlFileEntryLocalService.addFileEntry(
+			getUserId(), folderId, name, title, description, tagsEntries,
+			extraSettings, file, addCommunityPermissions,
+			addGuestPermissions);
+	}
 
 	public DLFileEntry addFileEntry(
 			long folderId, String name, String title, String description,
@@ -56,6 +76,20 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			getUserId(), folderId, name, title, description, tagsEntries,
 			extraSettings, byteArray, addCommunityPermissions,
 			addGuestPermissions);
+	}
+
+	public DLFileEntry addFileEntry(
+			long folderId, String name, String title, String description,
+			String[] tagsEntries, String extraSettings, File file,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException {
+
+		DLFolderPermission.check(
+			getPermissionChecker(), folderId, ActionKeys.ADD_DOCUMENT);
+
+		return dlFileEntryLocalService.addFileEntry(
+			getUserId(), folderId, name, title, description, tagsEntries,
+			extraSettings, file, communityPermissions, guestPermissions);
 	}
 
 	public DLFileEntry addFileEntry(
@@ -143,6 +177,27 @@ public class DLFileEntryServiceImpl extends DLFileEntryServiceBaseImpl {
 			folderId, titleWithExtension);
 
 		deleteFileEntry(folderId, fileEntry.getName());
+	}
+
+	public List<DLFileEntry> getFileEntries(long folderId)
+		throws PortalException, SystemException {
+
+		List<DLFileEntry> fileEntries = dlFileEntryLocalService.getFileEntries(
+			folderId);
+
+		Iterator<DLFileEntry> itr = fileEntries.iterator();
+
+		while (itr.hasNext()) {
+			DLFileEntry fileEntry = itr.next();
+
+			if (!DLFileEntryPermission.contains(
+					getPermissionChecker(), fileEntry, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return fileEntries;
 	}
 
 	public DLFileEntry getFileEntry(long folderId, String name)

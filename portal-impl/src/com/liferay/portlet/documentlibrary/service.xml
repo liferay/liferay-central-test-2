@@ -109,6 +109,7 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="Layout" />
 	</entity>
 	<entity name="DLFileShortcut" uuid="true" local-service="true" remote-service="true">
 

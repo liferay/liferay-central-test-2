@@ -78,21 +78,20 @@ public class IGImageServiceJSON {
 		IGImageServiceUtil.deleteImage(imageId);
 	}
 
+	public static void deleteImageByFolderIdAndNameWithExtension(
+		long folderId, java.lang.String nameWithExtension)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		IGImageServiceUtil.deleteImageByFolderIdAndNameWithExtension(folderId,
+			nameWithExtension);
+	}
+
 	public static JSONObject getImage(long imageId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImage(imageId);
 
 		return IGImageJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONArray getImages(long folderId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
-			IGImageServiceUtil.getImages(folderId);
-
-		return IGImageJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONObject getImageByFolderIdAndNameWithExtension(
@@ -119,5 +118,14 @@ public class IGImageServiceJSON {
 		com.liferay.portlet.imagegallery.model.IGImage returnValue = IGImageServiceUtil.getImageBySmallImageId(smallImageId);
 
 		return IGImageJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONArray getImages(long folderId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.List<com.liferay.portlet.imagegallery.model.IGImage> returnValue =
+			IGImageServiceUtil.getImages(folderId);
+
+		return IGImageJSONSerializer.toJSONArray(returnValue);
 	}
 }

@@ -25,9 +25,7 @@ package com.liferay.portlet.imagegallery.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Image;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portlet.imagegallery.model.IGFolder;
@@ -35,17 +33,12 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.service.base.IGFolderServiceBaseImpl;
 import com.liferay.portlet.imagegallery.service.permission.IGFolderPermission;
 import com.liferay.util.FileUtil;
-import com.liferay.util.PwdGenerator;
-import com.liferay.util.SystemProperties;
-import com.liferay.util.Time;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-import java.io.InputStream;
 
 import java.rmi.RemoteException;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -139,21 +132,23 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 	public List<IGFolder> getFolders(long groupId, long parentFolderId)
 		throws PortalException, SystemException {
 
-		List<IGFolder> folders =
-			igFolderLocalService.getFolders(groupId, parentFolderId);
+		List<IGFolder> folders = igFolderLocalService.getFolders(
+			groupId, parentFolderId);
 
-		List<IGFolder> sanitized = new ArrayList<IGFolder>(folders.size());
+		Iterator<IGFolder> itr = folders.iterator();
 
-		for (IGFolder folder : folders) {
-			if (IGFolderPermission.contains(
+		while (itr.hasNext()) {
+			IGFolder folder = itr.next();
+
+			if (!IGFolderPermission.contains(
 					getPermissionChecker(), folder.getFolderId(),
 					ActionKeys.VIEW)) {
 
-				sanitized.add(folder);
+				itr.remove();
 			}
 		}
 
-		return sanitized;
+		return folders;
 	}
 
 	public IGFolder updateFolder(
@@ -173,40 +168,24 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, RemoteException, SystemException {
 
-		long srcFolderId = srcFolder.getFolderId();
-		long destFolderId = destFolder.getFolderId();
-		long srcGroupId = srcFolder.getGroupId();
-		long destGroupId = destFolder.getGroupId();
+		List<IGImage> srcImages = igImageService.getImages(
+			srcFolder.getFolderId());
 
-		// Copy all viewable images
-
-		List<IGImage> images = igImageService.getImages(srcFolderId);
-
-		for (IGImage image : images) {
-			String name = image.getName();
-			String description = image.getDescription();
-			String contentType =
-				ContentTypeUtil.getContentType(image.getImageType());
-			String[] tagsEntries = null;
+		for (IGImage srcImage : srcImages) {
+			String name = srcImage.getName();
+			String description = srcImage.getDescription();
 
 			File file = null;
 
 			try {
-				String fileName =
-					SystemProperties.get(SystemProperties.TMP_DIR) +
-						StringPool.SLASH + Time.getTimestamp() +
-							PwdGenerator.getPassword(PwdGenerator.KEY2, 8);
+				file = FileUtil.createTempFile(srcImage.getImageType());
 
-				file = new File(fileName);
+				Image image = ImageLocalUtil.getImage(
+					srcImage.getLargeImageId());
 
-				Image imageObj =
-					ImageLocalUtil.getImage(image.getLargeImageId());
+				byte[] byteArray = image.getTextObj();
 
-				byte[] byteArray = imageObj.getTextObj();
-
-				InputStream is = new ByteArrayInputStream(byteArray);
-
-				FileUtil.write(file, is);
+				FileUtil.write(file, byteArray);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -214,32 +193,37 @@ public class IGFolderServiceImpl extends IGFolderServiceBaseImpl {
 				continue;
 			}
 
+			String contentType = ContentTypeUtil.getContentType(
+				srcImage.getImageType());
+			String[] tagsEntries = null;
+
 			igImageService.addImage(
-				destFolderId, name, description, file, contentType,
+				destFolder.getFolderId(), name, description, file, contentType,
 				tagsEntries, addCommunityPermissions, addGuestPermissions);
+
+			file.delete();
 		}
 
-		// Copy all viewable folders
+		long destPlid = layoutLocalService.getDefaultPlid(
+			destFolder.getGroupId());
 
-		List<IGFolder> srcSubFolders = getFolders(srcGroupId, srcFolderId);
+		List<IGFolder> srcSubfolders = getFolders(
+			srcFolder.getGroupId(), srcFolder.getFolderId());
 
-		long destPlid = LayoutLocalServiceUtil.getDefaultPlid(destGroupId);
+		for (IGFolder srcSubfolder : srcSubfolders) {
+			String name = srcSubfolder.getName();
+			String description = srcSubfolder.getDescription();
 
-		for (IGFolder srcSubFolder : srcSubFolders) {
-			String name = srcSubFolder.getName();
-			String description = srcSubFolder.getDescription();
-
-			IGFolder destSubFolder = addFolder(
-				destPlid, destFolderId, name, description,
+			IGFolder destSubfolder = addFolder(
+				destPlid, destFolder.getFolderId(), name, description,
 				addCommunityPermissions, addGuestPermissions);
 
-			// Recursively copy all subfolders
-
 			copyFolder(
-				srcSubFolder, destSubFolder, addCommunityPermissions,
+				srcSubfolder, destSubfolder, addCommunityPermissions,
 				addGuestPermissions);
 		}
 	}
 
 	private static Log _log = LogFactory.getLog(IGFolderServiceImpl.class);
+
 }

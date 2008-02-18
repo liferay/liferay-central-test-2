@@ -32,7 +32,7 @@ import com.liferay.portlet.imagegallery.service.permission.IGImagePermission;
 
 import java.io.File;
 
-import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -80,6 +80,17 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 		igImageLocalService.deleteImage(imageId);
 	}
 
+	public void deleteImageByFolderIdAndNameWithExtension(
+			long folderId, String nameWithExtension)
+		throws PortalException, SystemException {
+
+		IGImage image =
+			igImageLocalService.getImageByFolderIdAndNameWithExtension(
+				folderId, nameWithExtension);
+
+		deleteImage(image.getImageId());
+	}
+
 	public IGImage getImage(long imageId)
 		throws PortalException, SystemException {
 
@@ -87,24 +98,6 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 			getPermissionChecker(), imageId, ActionKeys.VIEW);
 
 		return igImageLocalService.getImage(imageId);
-	}
-
-	public List<IGImage> getImages(long folderId)
-		throws PortalException, SystemException {
-
-		List<IGImage> images = igImageLocalService.getImages(folderId);
-
-		List<IGImage> sanitized = new ArrayList<IGImage>(images.size());
-
-		for (IGImage image : images) {
-			if (IGImagePermission.contains(
-					getPermissionChecker(), image, ActionKeys.VIEW)) {
-
-				sanitized.add(image);
-			}
-		}
-
-		return sanitized;
 	}
 
 	public IGImage getImageByFolderIdAndNameWithExtension(
@@ -143,6 +136,26 @@ public class IGImageServiceImpl extends IGImageServiceBaseImpl {
 			getPermissionChecker(), image.getImageId(), ActionKeys.VIEW);
 
 		return image;
+	}
+
+	public List<IGImage> getImages(long folderId)
+		throws PortalException, SystemException {
+
+		List<IGImage> images = igImageLocalService.getImages(folderId);
+
+		Iterator<IGImage> itr = images.iterator();
+
+		while (itr.hasNext()) {
+			IGImage image = itr.next();
+
+			if (!IGImagePermission.contains(
+					getPermissionChecker(), image, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return images;
 	}
 
 	public IGImage updateImage(

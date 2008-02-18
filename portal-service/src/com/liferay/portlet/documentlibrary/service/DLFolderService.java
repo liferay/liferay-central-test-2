@@ -67,8 +67,8 @@ public interface DLFolderService {
 		long plid, long sourceFolderId, long parentFolderId,
 		java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException, java.rmi.RemoteException;
 
 	public void deleteFolder(long folderId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
@@ -91,6 +91,11 @@ public interface DLFolderService {
 
 	public long getFolderId(long groupId, long parentFolderId,
 		java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

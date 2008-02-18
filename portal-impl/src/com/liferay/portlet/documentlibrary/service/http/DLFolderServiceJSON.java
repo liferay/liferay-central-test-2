@@ -24,6 +24,7 @@ package com.liferay.portlet.documentlibrary.service.http;
 
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -100,8 +101,8 @@ public class DLFolderServiceJSON {
 		long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		com.liferay.portlet.documentlibrary.model.DLFolder returnValue = DLFolderServiceUtil.copyFolder(plid,
 				sourceFolderId, parentFolderId, name, description,
 				addCommunityPermissions, addGuestPermissions);
@@ -148,6 +149,15 @@ public class DLFolderServiceJSON {
 				parentFolderId, name);
 
 		return returnValue;
+	}
+
+	public static JSONArray getFolders(long groupId, long parentFolderId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> returnValue =
+			DLFolderServiceUtil.getFolders(groupId, parentFolderId);
+
+		return DLFolderJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static void reIndexSearch(long companyId)

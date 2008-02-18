@@ -110,6 +110,16 @@ public interface DLFileRankLocalService {
 	public void setDLFolderPersistence(
 		com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistence dlFolderPersistence);
 
+	public com.liferay.portal.service.persistence.LayoutPersistence getLayoutPersistence();
+
+	public void setLayoutPersistence(
+		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence);
+
+	public com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder();
+
+	public void setLayoutFinder(
+		com.liferay.portal.service.persistence.LayoutFinder layoutFinder);
+
 	public void afterPropertiesSet();
 
 	public void deleteFileRanks(long userId)

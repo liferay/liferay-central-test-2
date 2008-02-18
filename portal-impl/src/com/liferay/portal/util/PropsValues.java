@@ -116,8 +116,8 @@ public class PropsValues {
 	public static final boolean AUTO_DEPLOY_UNPACK_WAR =
 		GetterUtil.getBoolean(PropsUtil.get(PropsUtil.AUTO_DEPLOY_UNPACK_WAR));
 
-	public static final String[] AUTO_LOGIN_HOOKS = PropsUtil.getArray(
-		PropsUtil.AUTO_LOGIN_HOOKS);
+	public static final String[] AUTO_LOGIN_HOOKS =
+		PropsUtil.getArray(PropsUtil.AUTO_LOGIN_HOOKS);
 
 	public static final int BLOGS_PAGE_ABSTRACT_LENGTH = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.BLOGS_PAGE_ABSTRACT_LENGTH));
@@ -215,8 +215,8 @@ public class PropsValues {
 	public static final String[] DL_COMPARABLE_FILE_EXTENSIONS =
 		PropsUtil.getArray(PropsUtil.DL_COMPARABLE_FILE_EXTENSIONS);
 
-	public static final String[] DL_FILE_EXTENSIONS = PropsUtil.getArray(
-		PropsUtil.DL_FILE_EXTENSIONS);
+	public static final String[] DL_FILE_EXTENSIONS =
+		PropsUtil.getArray(PropsUtil.DL_FILE_EXTENSIONS);
 
 	public static final int DL_FILE_MAX_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.DL_FILE_MAX_SIZE));
@@ -271,8 +271,8 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_2_MAX_WIDTH));
 
-	public static final String[] IG_IMAGE_EXTENSIONS = PropsUtil.getArray(
-		PropsUtil.IG_IMAGE_EXTENSIONS);
+	public static final String[] IG_IMAGE_EXTENSIONS =
+		PropsUtil.getArray(PropsUtil.IG_IMAGE_EXTENSIONS);
 
 	public static final int IG_IMAGE_MAX_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE));
@@ -405,14 +405,14 @@ public class PropsValues {
 	public static final boolean LOCALE_DEFAULT_REQUEST = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LOCALE_DEFAULT_REQUEST));
 
-	public static final String[] LOCALES = PropsUtil.getArray(
-		PropsUtil.LOCALES);
+	public static final String[] LOCALES =
+		PropsUtil.getArray(PropsUtil.LOCALES);
 
-	public static final String[] LOGIN_EVENTS_POST = PropsUtil.getArray(
-		PropsUtil.LOGIN_EVENTS_POST);
+	public static final String[] LOGIN_EVENTS_POST =
+		PropsUtil.getArray(PropsUtil.LOGIN_EVENTS_POST);
 
-	public static final String[] LOGIN_EVENTS_PRE = PropsUtil.getArray(
-		PropsUtil.LOGIN_EVENTS_PRE);
+	public static final String[] LOGIN_EVENTS_PRE =
+		PropsUtil.getArray(PropsUtil.LOGIN_EVENTS_PRE);
 
 	public static final boolean LOOK_AND_FEEL_MODIFIABLE =
 		GetterUtil.getBoolean(
@@ -543,8 +543,8 @@ public class PropsValues {
 			PropsUtil.get(PropsUtil.PLUGIN_REPOSITORIES_UNTRUSTED),
 			StringPool.NEW_LINE);
 
-	public static final String[] PLUGIN_TYPES = PropsUtil.getArray(
-		PropsUtil.PLUGIN_TYPES);
+	public static final String[] PLUGIN_TYPES =
+		PropsUtil.getArray(PropsUtil.PLUGIN_TYPES);
 
 	public static final boolean POP_SERVER_NOTIFICATIONS_ENABLED =
 		GetterUtil.getBoolean(
@@ -695,8 +695,8 @@ public class PropsValues {
 	public static final String WEB_SERVER_PROTOCOL = PropsUtil.get(
 		PropsUtil.WEB_SERVER_PROTOCOL);
 
-	public static final String[] WEBDAV_IGNORE = PropsUtil.getArray(
-		PropsUtil.WEBDAV_IGNORE);
+	public static final String[] WEBDAV_IGNORE =
+		PropsUtil.getArray(PropsUtil.WEBDAV_IGNORE);
 
 	public static final boolean WEBDAV_LITMUS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.WEBDAV_LITMUS));

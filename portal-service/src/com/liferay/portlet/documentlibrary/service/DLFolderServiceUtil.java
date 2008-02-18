@@ -131,6 +131,15 @@ public class DLFolderServiceUtil {
 		return dlFolderService.getFolderId(groupId, parentFolderId, name);
 	}
 
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFolderService dlFolderService = DLFolderServiceFactory.getService();
+
+		return dlFolderService.getFolders(groupId, parentFolderId);
+	}
+
 	public static void reIndexSearch(long companyId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

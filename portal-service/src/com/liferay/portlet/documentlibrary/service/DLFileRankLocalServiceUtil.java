@@ -200,6 +200,32 @@ public class DLFileRankLocalServiceUtil {
 		dlFileRankLocalService.setDLFolderPersistence(dlFolderPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.LayoutPersistence getLayoutPersistence() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getLayoutPersistence();
+	}
+
+	public static void setLayoutPersistence(
+		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence) {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		dlFileRankLocalService.setLayoutPersistence(layoutPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder() {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		return dlFileRankLocalService.getLayoutFinder();
+	}
+
+	public static void setLayoutFinder(
+		com.liferay.portal.service.persistence.LayoutFinder layoutFinder) {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		dlFileRankLocalService.setLayoutFinder(layoutFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 

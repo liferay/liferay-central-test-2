@@ -70,12 +70,12 @@ public interface IGImageService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
+	public void deleteImageByFolderIdAndNameWithExtension(long folderId,
+		java.lang.String nameWithExtension)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
-		long folderId)
+	public com.liferay.portlet.imagegallery.model.IGImage getImage(long imageId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -91,6 +91,11 @@ public interface IGImageService {
 
 	public com.liferay.portlet.imagegallery.model.IGImage getImageBySmallImageId(
 		long smallImageId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List<com.liferay.portlet.imagegallery.model.IGImage> getImages(
+		long folderId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

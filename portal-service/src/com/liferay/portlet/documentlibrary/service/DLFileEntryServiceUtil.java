@@ -54,6 +54,20 @@ public class DLFileEntryServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
 		long folderId, java.lang.String name, java.lang.String title,
 		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, java.io.File file,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
+		return dlFileEntryService.addFileEntry(folderId, name, title,
+			description, tagsEntries, extraSettings, file,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+		long folderId, java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
 		java.lang.String extraSettings, byte[] byteArray,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -63,6 +77,21 @@ public class DLFileEntryServiceUtil {
 		return dlFileEntryService.addFileEntry(folderId, name, title,
 			description, tagsEntries, extraSettings, byteArray,
 			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
+		long folderId, java.lang.String name, java.lang.String title,
+		java.lang.String description, java.lang.String[] tagsEntries,
+		java.lang.String extraSettings, java.io.File file,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
+		return dlFileEntryService.addFileEntry(folderId, name, title,
+			description, tagsEntries, extraSettings, file,
+			communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addFileEntry(
@@ -104,6 +133,15 @@ public class DLFileEntryServiceUtil {
 		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
 
 		dlFileEntryService.deleteFileEntryByTitle(folderId, titleWithExtension);
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> getFileEntries(
+		long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		DLFileEntryService dlFileEntryService = DLFileEntryServiceFactory.getService();
+
+		return dlFileEntryService.getFileEntries(folderId);
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry getFileEntry(

@@ -402,6 +402,16 @@ public class IGImageLocalServiceUtil {
 		return igImageLocalService.getImageByCustom2ImageId(custom2ImageId);
 	}
 
+	public static com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
+		long folderId, java.lang.String nameWithExtension)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		return igImageLocalService.getImageByFolderIdAndNameWithExtension(folderId,
+			nameWithExtension);
+	}
+
 	public static com.liferay.portlet.imagegallery.model.IGImage getImageByLargeImageId(
 		long largeImageId)
 		throws com.liferay.portal.PortalException,
@@ -451,16 +461,6 @@ public class IGImageLocalServiceUtil {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
 		return igImageLocalService.getImages(folderId, begin, end, obc);
-	}
-
-	public static com.liferay.portlet.imagegallery.model.IGImage getImageByFolderIdAndNameWithExtension(
-		long folderId, java.lang.String nameWithExtension)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
-
-		return igImageLocalService.getImageByFolderIdAndNameWithExtension(folderId,
-			nameWithExtension);
 	}
 
 	public static int getImagesCount(long folderId)

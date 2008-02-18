@@ -208,7 +208,7 @@ public class DLFolderServiceHttp {
 		java.lang.String description, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+			com.liferay.portal.PortalException, java.rmi.RemoteException {
 		try {
 			Object paramObj0 = new LongWrapper(plid);
 
@@ -251,6 +251,10 @@ public class DLFolderServiceHttp {
 
 				if (e instanceof com.liferay.portal.PortalException) {
 					throw (com.liferay.portal.PortalException)e;
+				}
+
+				if (e instanceof java.rmi.RemoteException) {
+					throw (java.rmi.RemoteException)e;
 				}
 
 				throw new com.liferay.portal.SystemException(e);
@@ -456,6 +460,44 @@ public class DLFolderServiceHttp {
 			}
 
 			return ((Long)returnObj).longValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		HttpPrincipal httpPrincipal, long groupId, long parentFolderId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = new LongWrapper(parentFolderId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(DLFolderServiceUtil.class.getName(),
+					"getFolders", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

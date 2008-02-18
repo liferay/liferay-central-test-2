@@ -1362,6 +1362,13 @@ Liferay.Service.DL.DLFileEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getFileEntries: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getFileEntries";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getFileEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getFileEntry";
@@ -1468,6 +1475,13 @@ Liferay.Service.DL.DLFolder = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getFolders: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getFolders";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	reIndexSearch: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "reIndexSearch";
@@ -1543,16 +1557,16 @@ Liferay.Service.IG.IGImage = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getImage: function(params, callback) {
+	deleteImageByFolderIdAndNameWithExtension: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getImage";
+		params.serviceMethodName = "deleteImageByFolderIdAndNameWithExtension";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getImages: function(params, callback) {
+	getImage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getImages";
+		params.serviceMethodName = "getImage";
 
 		return Liferay.Service.ajax(params, callback);
 	},
@@ -1574,6 +1588,13 @@ Liferay.Service.IG.IGImage = {
 	getImageBySmallImageId: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getImageBySmallImageId";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getImages: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getImages";
 
 		return Liferay.Service.ajax(params, callback);
 	}

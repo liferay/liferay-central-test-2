@@ -29,6 +29,14 @@ import com.liferay.counter.service.CounterServiceFactory;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.service.LayoutLocalService;
+import com.liferay.portal.service.LayoutLocalServiceFactory;
+import com.liferay.portal.service.LayoutService;
+import com.liferay.portal.service.LayoutServiceFactory;
+import com.liferay.portal.service.persistence.LayoutFinder;
+import com.liferay.portal.service.persistence.LayoutFinderUtil;
+import com.liferay.portal.service.persistence.LayoutPersistence;
+import com.liferay.portal.service.persistence.LayoutUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
@@ -276,6 +284,38 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
+	public LayoutLocalService getLayoutLocalService() {
+		return layoutLocalService;
+	}
+
+	public void setLayoutLocalService(LayoutLocalService layoutLocalService) {
+		this.layoutLocalService = layoutLocalService;
+	}
+
+	public LayoutService getLayoutService() {
+		return layoutService;
+	}
+
+	public void setLayoutService(LayoutService layoutService) {
+		this.layoutService = layoutService;
+	}
+
+	public LayoutPersistence getLayoutPersistence() {
+		return layoutPersistence;
+	}
+
+	public void setLayoutPersistence(LayoutPersistence layoutPersistence) {
+		this.layoutPersistence = layoutPersistence;
+	}
+
+	public LayoutFinder getLayoutFinder() {
+		return layoutFinder;
+	}
+
+	public void setLayoutFinder(LayoutFinder layoutFinder) {
+		this.layoutFinder = layoutFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (dlFileEntryLocalService == null) {
 			dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getImpl();
@@ -348,6 +388,22 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		if (counterService == null) {
 			counterService = CounterServiceFactory.getImpl();
 		}
+
+		if (layoutLocalService == null) {
+			layoutLocalService = LayoutLocalServiceFactory.getImpl();
+		}
+
+		if (layoutService == null) {
+			layoutService = LayoutServiceFactory.getImpl();
+		}
+
+		if (layoutPersistence == null) {
+			layoutPersistence = LayoutUtil.getPersistence();
+		}
+
+		if (layoutFinder == null) {
+			layoutFinder = LayoutFinderUtil.getFinder();
+		}
 	}
 
 	protected DLFileEntryLocalService dlFileEntryLocalService;
@@ -368,4 +424,8 @@ public abstract class DLFileRankLocalServiceBaseImpl
 	protected DLFolderPersistence dlFolderPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected LayoutLocalService layoutLocalService;
+	protected LayoutService layoutService;
+	protected LayoutPersistence layoutPersistence;
+	protected LayoutFinder layoutFinder;
 }
