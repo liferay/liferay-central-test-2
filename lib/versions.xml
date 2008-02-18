@@ -72,7 +72,7 @@
 	</library>
 	<library>
 		<file-name>development/catalina.jar</file-name>
-		<version>5.5.25</version>
+		<version>5.5.26</version>
 		<project-name>Tomcat</project-name>
 		<project-url>http://tomcat.apache.org</project-url>
 		<licenses>
@@ -424,7 +424,7 @@
 	</library>
 	<library>
 		<file-name>development/naming-factory.jar</file-name>
-		<version>5.5.25</version>
+		<version>5.5.26</version>
 		<project-name>Apache Tomcat</project-name>
 		<project-url>http://tomcat.apache.org</project-url>
 		<licenses>
@@ -604,7 +604,7 @@
 	</library>
 	<library>
 		<file-name>development/tomcat-coyote.jar</file-name>
-		<version>5.5.25</version>
+		<version>5.5.26</version>
 		<project-name>Tomcat</project-name>
 		<project-url>http://tomcat.apache.org</project-url>
 		<licenses>
@@ -615,7 +615,7 @@
 	</library>
 	<library>
 		<file-name>development/tomcat-util.jar</file-name>
-		<version>5.5.25</version>
+		<version>5.5.26</version>
 		<project-name>Tomcat</project-name>
 		<project-url>http://tomcat.apache.org</project-url>
 		<licenses>

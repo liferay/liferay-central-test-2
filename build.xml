@@ -1099,7 +1099,7 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 	<target name="build-dist-tomcat-5.5">
 		<delete dir="${app.server.tomcat.dir}" />
 
-		<unzip src="${app.server.parent.dir}/tomcat-5.5.25.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/tomcat-5.5.26.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=tomcat</echo>
 
@@ -1109,14 +1109,14 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 	</target>
 
 	<target name="build-dist-tomcat-6.0">
-		<delete dir="${app.server.parent.dir}/tomcat-6.0.14" />
+		<delete dir="${app.server.parent.dir}/tomcat-6.0.16" />
 
-		<unzip src="${app.server.parent.dir}/tomcat-6.0.14.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/tomcat-6.0.16.zip" dest="${app.server.parent.dir}" />
 
 		<echo file="app.server.${user.name}.properties">app.server.type=tomcat
 
 app.server.tomcat.version=6.0
-app.server.tomcat.dir=${app.server.parent.dir}/tomcat-6.0.14
+app.server.tomcat.dir=${app.server.parent.dir}/tomcat-6.0.16
 app.server.tomcat.classes.global.dir=$${app.server.tomcat.dir}/lib
 app.server.tomcat.lib.endorsed.dir=$${app.server.tomcat.dir}/lib/ext
 app.server.tomcat.lib.global.dir=$${app.server.tomcat.dir}/lib/ext
@@ -1691,13 +1691,13 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<delete file="dist/liferay-portal-tomcat-6.0-${lp.version.file.name}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
-			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.14/webapps" />
+			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.16/webapps" />
 			<param name="deployer.app.server.type" value="tomcat" />
 		</antcall>
 
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tomcat-6.0" />
-			<param name="zip.executable.dir" value="${app.server.parent.dir}/tomcat-6.0.14" />
+			<param name="zip.executable.dir" value="${app.server.parent.dir}/tomcat-6.0.16" />
 		</antcall>
 	</target>
 
