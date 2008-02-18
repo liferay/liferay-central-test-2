@@ -379,7 +379,7 @@
 		<antcall target="deploy-properties" />
 
 		<copy todir="${app.server.lib.global.dir}">
-			<fileset dir="lib/development" includes="hsql.jar" />
+			<fileset dir="lib/development" includes="hsql.jar,mysql.jar,postgresql.jar" />
 			<fileset dir="lib/global" />
 		</copy>
 
@@ -825,7 +825,7 @@
 			/>
 			<zipfileset
 				dir="lib/development"
-				includes="hsql.jar"
+				includes="hsql.jar,mysql.jar,postgresql.jar"
 			/>
 			<zipfileset
 				dir="lib/global"

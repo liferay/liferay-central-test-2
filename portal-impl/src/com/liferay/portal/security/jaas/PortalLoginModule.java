@@ -24,7 +24,7 @@ package com.liferay.portal.security.jaas;
 
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.Map;
 
@@ -45,12 +45,10 @@ import org.apache.commons.logging.LogFactory;
 public class PortalLoginModule implements LoginModule {
 
 	public PortalLoginModule() {
-		String jaasImpl = PropsUtil.get(PropsUtil.PORTAL_JAAS_IMPL);
-
-		if (Validator.isNotNull(jaasImpl)) {
+		if (Validator.isNotNull(PropsValues.PORTAL_JAAS_IMPL)) {
 			try {
 				_loginModule = (LoginModule)Class.forName(
-					jaasImpl).newInstance();
+					PropsValues.PORTAL_JAAS_IMPL).newInstance();
 			}
 			catch (Exception e) {
 				_log.error(e);

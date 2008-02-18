@@ -451,9 +451,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					return true;
 				}
 
-				if (!GetterUtil.getBoolean(PropsUtil.get(
-						PropsUtil.PORTAL_JAAS_STRICT_PASSWORD))) {
-
+				if (!PropsValues.PORTAL_JAAS_STRICT_PASSWORD) {
 					encPwd = PwdEncryptor.encrypt(encPwd, password);
 
 					if (password.equals(encPwd)) {
@@ -462,9 +460,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				}
 			}
 			else {
-				if (!GetterUtil.getBoolean(PropsUtil.get(
-						PropsUtil.PORTAL_JAAS_STRICT_PASSWORD))) {
-
+				if (!PropsValues.PORTAL_JAAS_STRICT_PASSWORD) {
 					if (password.equals(encPwd)) {
 						return true;
 					}

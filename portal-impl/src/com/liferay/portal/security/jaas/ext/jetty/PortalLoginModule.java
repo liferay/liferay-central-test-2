@@ -22,8 +22,8 @@
 
 package com.liferay.portal.security.jaas.ext.jetty;
 
-import com.liferay.portal.security.jaas.PortalGroup;
-import com.liferay.portal.security.jaas.PortalPrincipal;
+import com.liferay.portal.kernel.security.jaas.PortalGroup;
+import com.liferay.portal.kernel.security.jaas.PortalPrincipal;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 
 /**

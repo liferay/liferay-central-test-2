@@ -20,19 +20,15 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.jaas;
+package com.liferay.portal.kernel.security.jaas;
 
 /**
  * <a href="PortalRole.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated This class has been repackaged at
- * <code>com.liferay.portal.kernel.security.jaas</code>.
- *
  */
-public class PortalRole
-	extends com.liferay.portal.kernel.security.jaas.PortalRole {
+public class PortalRole extends PortalPrincipal {
 
 	public PortalRole() {
 		super();

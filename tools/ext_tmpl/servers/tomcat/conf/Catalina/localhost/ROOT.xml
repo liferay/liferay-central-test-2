@@ -135,10 +135,8 @@
 	<Realm
 		className="org.apache.catalina.realm.JAASRealm"
 		appName="PortalRealm"
-		userClassNames="com.liferay.portal.security.jaas.PortalPrincipal"
-		roleClassNames="com.liferay.portal.security.jaas.PortalRole"
-		debug="99"
-		useContextClassLoader="false"
+		userClassNames="com.liferay.portal.kernel.security.jaas.PortalPrincipal"
+		roleClassNames="com.liferay.portal.kernel.security.jaas.PortalRole"
 	/>
 
 	<!--

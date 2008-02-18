@@ -560,6 +560,13 @@ public class PropsValues {
 	public static final boolean PORTAL_JAAS_ENABLE = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.PORTAL_JAAS_ENABLE));
 
+	public static final String PORTAL_JAAS_IMPL =
+		PropsUtil.get(PropsUtil.PORTAL_JAAS_IMPL);
+
+	public static final boolean PORTAL_JAAS_STRICT_PASSWORD =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.PORTAL_JAAS_STRICT_PASSWORD));
+
 	public static final boolean PORTLET_CSS_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.PORTLET_CSS_ENABLED));
 

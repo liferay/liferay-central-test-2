@@ -20,22 +20,78 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.security.jaas;
+package com.liferay.portal.kernel.security.jaas;
+
+import java.io.Serializable;
+
+import java.security.Principal;
+import java.security.acl.Group;
+
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * <a href="PortalGroup.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
- * @deprecated This class has been repackaged at
- * <code>com.liferay.portal.kernel.security.jaas</code>.
- *
  */
 public class PortalGroup
-	extends com.liferay.portal.kernel.security.jaas.PortalGroup {
+	extends PortalPrincipal implements Group, Serializable {
 
 	public PortalGroup(String groupName) {
 		super(groupName);
 	}
+
+	public boolean addMember(Principal user) {
+		if (!_members.containsKey(user)) {
+			_members.put(user, user);
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public boolean isMember(Principal member) {
+		boolean isMember = _members.containsKey(member);
+
+		if (!isMember) {
+			Iterator itr = _members.values().iterator();
+
+			while (!isMember && itr.hasNext()) {
+				Object obj = itr.next();
+
+				if (obj instanceof Group) {
+					Group group = (Group)obj;
+
+					isMember = group.isMember(member);
+				}
+			}
+		}
+
+		return isMember;
+	}
+
+	public Enumeration members() {
+		return Collections.enumeration(_members.values());
+	}
+
+	public boolean removeMember(Principal user) {
+		Object obj = _members.remove(user);
+
+		if (obj != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private Map _members = new HashMap();
 
 }

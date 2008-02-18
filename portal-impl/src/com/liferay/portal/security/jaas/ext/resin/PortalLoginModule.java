@@ -22,7 +22,7 @@
 
 package com.liferay.portal.security.jaas.ext.resin;
 
-import com.liferay.portal.security.jaas.PortalRole;
+import com.liferay.portal.kernel.security.jaas.PortalRole;
 import com.liferay.portal.security.jaas.ext.BasicLoginModule;
 
 /**
