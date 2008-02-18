@@ -187,7 +187,7 @@ public class FileUtil {
 
 	public static File createTempFile(String extension) {
 		StringMaker sm = new StringMaker();
-		
+
 		sm.append(SystemProperties.get(SystemProperties.TMP_DIR));
 		sm.append(StringPool.SLASH);
 		sm.append(Time.getTimestamp());
