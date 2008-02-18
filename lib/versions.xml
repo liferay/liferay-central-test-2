@@ -1038,7 +1038,7 @@
 	</library>
 	<library>
 		<file-name>portal/creolefilter.jar</file-name>
-		<version>1.0.3</version>
+		<version>1.0.4</version>
 		<project-name>Creole Filter</project-name>
 		<project-url>http://www.i3g.hs-heilbronn.de/Wiki.jsp?page=JSPWikiCreoleFilter</project-url>
 		<licenses>
