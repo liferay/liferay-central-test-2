@@ -22,7 +22,7 @@
 
 package com.liferay.portal.security.jaas;
 
-import com.liferay.util.servlet.ProtectedPrincipal;
+import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 
 /**
  * <a href="PortalPrincipal.java.html"><b><i>View Source</i></b></a>

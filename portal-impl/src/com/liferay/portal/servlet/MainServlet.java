@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.PortletSessionTracker;
+import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -69,7 +70,6 @@ import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 import com.liferay.util.servlet.EncryptedServletRequest;
-import com.liferay.util.servlet.ProtectedServletRequest;
 
 import java.io.IOException;
 

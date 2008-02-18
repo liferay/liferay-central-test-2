@@ -26,6 +26,7 @@ import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
+import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
@@ -36,7 +37,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.servlet.ProtectedServletRequest;
 
 import java.io.IOException;
 
@@ -52,7 +52,7 @@ import javax.servlet.http.HttpSession;
  * <a href="AutoLoginFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class AutoLoginFilter extends BaseFilter {

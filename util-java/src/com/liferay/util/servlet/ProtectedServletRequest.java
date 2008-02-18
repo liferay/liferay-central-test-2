@@ -22,48 +22,22 @@
 
 package com.liferay.util.servlet;
 
-import java.security.Principal;
-
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
  * <a href="ProtectedServletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been repackaged at
+ * <code>com.liferay.portal.kernel.servlet</code>.
+ *
  */
-public class ProtectedServletRequest extends HttpServletRequestWrapper {
+public class ProtectedServletRequest
+	extends com.liferay.portal.kernel.servlet.ProtectedServletRequest {
 
 	public ProtectedServletRequest(HttpServletRequest req, String remoteUser) {
-		super(req);
-
-		_remoteUser = remoteUser;
-
-		if (remoteUser != null) {
-			_userPrincipal = new ProtectedPrincipal(remoteUser);
-		}
+		super(req, remoteUser);
 	}
-
-	public String getRemoteUser() {
-		if (_remoteUser != null) {
-			return _remoteUser;
-		}
-		else {
-			return super.getRemoteUser();
-		}
-	}
-
-	public Principal getUserPrincipal() {
-		if (_userPrincipal != null) {
-			return _userPrincipal;
-		}
-		else {
-			return super.getUserPrincipal();
-		}
-	}
-
-	private String _remoteUser;
-	private Principal _userPrincipal;
 
 }

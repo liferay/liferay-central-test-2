@@ -22,6 +22,10 @@
 
 package com.liferay.portal.kernel.portlet;
 
+import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
+
+import java.security.Principal;
+
 import javax.portlet.RenderRequest;
 import javax.portlet.filter.RenderRequestWrapper;
 
@@ -37,12 +41,31 @@ public class ProtectedRenderRequest extends RenderRequestWrapper {
 		super(req);
 
 		_remoteUser = remoteUser;
+
+		if (remoteUser != null) {
+			_userPrincipal = new ProtectedPrincipal(remoteUser);
+		}
 	}
 
 	public String getRemoteUser() {
-		return _remoteUser;
+		if (_remoteUser != null) {
+			return _remoteUser;
+		}
+		else {
+			return super.getRemoteUser();
+		}
+	}
+
+	public Principal getUserPrincipal() {
+		if (_userPrincipal != null) {
+			return _userPrincipal;
+		}
+		else {
+			return super.getUserPrincipal();
+		}
 	}
 
 	private String _remoteUser;
+	private Principal _userPrincipal;
 
 }

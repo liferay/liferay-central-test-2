@@ -20,24 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.portlet;
-
-import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
+package com.liferay.portal.kernel.servlet;
 
 import java.security.Principal;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.filter.ActionRequestWrapper;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletRequestWrapper;
 
 /**
- * <a href="ProtectedActionRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProtectedServletRequest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ProtectedActionRequest extends ActionRequestWrapper {
+public class ProtectedServletRequest extends HttpServletRequestWrapper {
 
-	public ProtectedActionRequest(ActionRequest req, String remoteUser) {
+	public ProtectedServletRequest(HttpServletRequest req, String remoteUser) {
 		super(req);
 
 		_remoteUser = remoteUser;

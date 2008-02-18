@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.portlet.LiferayRenderRequest;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
+import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -42,7 +43,6 @@ import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
-import com.liferay.util.servlet.ProtectedPrincipal;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
 import java.security.Principal;

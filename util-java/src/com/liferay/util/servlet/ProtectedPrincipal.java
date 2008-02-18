@@ -22,64 +22,24 @@
 
 package com.liferay.util.servlet;
 
-import com.liferay.portal.kernel.util.StringPool;
-
-import java.io.Serializable;
-
-import java.security.Principal;
-
 /**
  * <a href="ProtectedPrincipal.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been repackaged at
+ * <code>com.liferay.portal.kernel.servlet</code>.
+ *
  */
-public class ProtectedPrincipal implements Principal, Serializable {
+public class ProtectedPrincipal
+	extends com.liferay.portal.kernel.servlet.ProtectedPrincipal {
 
 	public ProtectedPrincipal() {
-		this(StringPool.BLANK);
+		super();
 	}
 
 	public ProtectedPrincipal(String name) {
-		_name = name;
+		super(name);
 	}
-
-	public String getName() {
-		return _name;
-	}
-
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-
-		if (this == obj) {
-			return true;
-		}
-
-		if (obj instanceof ProtectedPrincipal) {
-			ProtectedPrincipal protectedPrincipal = (ProtectedPrincipal)obj;
-
-			if (protectedPrincipal.getName().equals(_name)) {
-				return true;
-			}
-			else {
-				return false;
-			}
-		}
-		else {
-			return false;
-		}
-	}
-
-	public int hashCode() {
-		return _name.hashCode();
-	}
-
-	public String toString() {
-		return _name;
-	}
-
-	private String _name;
 
 }

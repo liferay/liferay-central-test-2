@@ -25,6 +25,7 @@ package com.liferay.portal.servlet.filters.servletauthorizing;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
+import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
@@ -37,7 +38,6 @@ import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.servlet.ProtectedServletRequest;
 
 import java.io.IOException;
 
@@ -53,7 +53,7 @@ import org.apache.struts.Globals;
 /**
  * <a href="ServletAuthorizingFilter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class ServletAuthorizingFilter extends BaseFilter {

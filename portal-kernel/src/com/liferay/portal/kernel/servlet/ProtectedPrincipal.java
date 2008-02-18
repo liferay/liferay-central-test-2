@@ -20,52 +20,66 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.portlet;
+package com.liferay.portal.kernel.servlet;
 
-import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
+import com.liferay.portal.kernel.util.StringPool;
+
+import java.io.Serializable;
 
 import java.security.Principal;
 
-import javax.portlet.ActionRequest;
-import javax.portlet.filter.ActionRequestWrapper;
-
 /**
- * <a href="ProtectedActionRequest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProtectedPrincipal.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ProtectedActionRequest extends ActionRequestWrapper {
+public class ProtectedPrincipal implements Principal, Serializable {
 
-	public ProtectedActionRequest(ActionRequest req, String remoteUser) {
-		super(req);
-
-		_remoteUser = remoteUser;
-
-		if (remoteUser != null) {
-			_userPrincipal = new ProtectedPrincipal(remoteUser);
-		}
+	public ProtectedPrincipal() {
+		this(StringPool.BLANK);
 	}
 
-	public String getRemoteUser() {
-		if (_remoteUser != null) {
-			return _remoteUser;
+	public ProtectedPrincipal(String name) {
+		_name = name;
+	}
+
+	public String getName() {
+		return _name;
+	}
+
+	public boolean equals(Object obj) {
+		if (obj == null) {
+			return false;
+		}
+
+		if (this == obj) {
+			return true;
+		}
+
+		if (obj instanceof ProtectedPrincipal) {
+			ProtectedPrincipal protectedPrincipal = (ProtectedPrincipal)obj;
+
+			if (protectedPrincipal.getName().equals(_name)) {
+				return true;
+			}
+			else {
+				return false;
+			}
 		}
 		else {
-			return super.getRemoteUser();
+			return false;
 		}
 	}
 
-	public Principal getUserPrincipal() {
-		if (_userPrincipal != null) {
-			return _userPrincipal;
-		}
-		else {
-			return super.getUserPrincipal();
-		}
+	public int hashCode() {
+		return _name.hashCode();
 	}
 
-	private String _remoteUser;
-	private Principal _userPrincipal;
+	public String toString() {
+		return _name;
+	}
+
+	private String _name;
 
 }
