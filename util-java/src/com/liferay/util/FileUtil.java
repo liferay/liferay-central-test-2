@@ -24,6 +24,7 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -185,16 +186,19 @@ public class FileUtil {
 	}
 
 	public static File createTempFile(String extension) {
-		String fileName =
-			SystemProperties.get(SystemProperties.TMP_DIR) +
-				StringPool.SLASH + Time.getTimestamp() +
-					PwdGenerator.getPassword(PwdGenerator.KEY2, 8);
+		StringMaker sm = new StringMaker();
+		
+		sm.append(SystemProperties.get(SystemProperties.TMP_DIR));
+		sm.append(StringPool.SLASH);
+		sm.append(Time.getTimestamp());
+		sm.append(PwdGenerator.getPassword(PwdGenerator.KEY2, 8));
 
 		if (Validator.isNotNull(extension)) {
-			fileName += StringPool.PERIOD + extension;
+			sm.append(StringPool.PERIOD);
+			sm.append(extension);
 		}
 
-		return new File(fileName);
+		return new File(sm.toString());
 	}
 
 	public static boolean delete(String file) {

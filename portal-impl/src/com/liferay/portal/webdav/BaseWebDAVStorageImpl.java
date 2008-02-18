@@ -35,12 +35,6 @@ import javax.servlet.http.HttpServletResponse;
  */
 public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 
-	public Status makeCollection(WebDAVRequest webDavReq)
-		throws WebDAVException {
-
-		return new Status(HttpServletResponse.SC_FORBIDDEN);
-	}
-
 	public int copyCollectionResource(
 			WebDAVRequest webDavReq, Resource resource, String destination,
 			boolean overwrite, long depth)
@@ -78,6 +72,12 @@ public abstract class BaseWebDAVStorageImpl implements WebDAVStorage {
 		else {
 			return true;
 		}
+	}
+
+	public Status makeCollection(WebDAVRequest webDavReq)
+		throws WebDAVException {
+
+		return new Status(HttpServletResponse.SC_FORBIDDEN);
 	}
 
 	public int moveCollectionResource(

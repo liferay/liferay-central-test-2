@@ -116,15 +116,6 @@ public class WebDAVUtil {
 		return destination;
 	}
 
-	public static String getResourceName(String[] pathArray) {
-		if (pathArray.length <= 3) {
-			return StringPool.BLANK;
-		}
-		else {
-			return pathArray[pathArray.length - 1];
-		}
-	}
-
 	public static long getGroupId(String path) throws WebDAVException {
 		String[] pathArray = getPathArray(path);
 
@@ -166,8 +157,7 @@ public class WebDAVUtil {
 			return group.getGroupId();
 		}
 		catch (Exception e) {
-			throw new WebDAVException(
-				"Unable to find group for " + pathArray[1], e);
+			throw new WebDAVException(e);
 		}
 	}
 
@@ -185,6 +175,15 @@ public class WebDAVUtil {
 		}
 
 		return StringUtil.split(path, StringPool.SLASH);
+	}
+
+	public static String getResourceName(String[] pathArray) {
+		if (pathArray.length <= 3) {
+			return StringPool.BLANK;
+		}
+		else {
+			return pathArray[pathArray.length - 1];
+		}
 	}
 
 	public static String getStorageClass(String token) {
@@ -245,7 +244,7 @@ public class WebDAVUtil {
 
 	private String _getStorageClass(String token) {
 		if (_storageMap.containsValue(token)) {
-			for (String key: _storageMap.keySet()) {
+			for (String key : _storageMap.keySet()) {
 				if (_storageMap.get(key).equals(token)) {
 					return key;
 				}

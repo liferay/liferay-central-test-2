@@ -33,6 +33,7 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.webdav.methods.Method;
 import com.liferay.portal.webdav.methods.MethodFactory;
 
@@ -63,7 +64,7 @@ public class WebDAVServlet extends HttpServlet {
 		int status = HttpServletResponse.SC_NOT_IMPLEMENTED;
 
 		try {
-			if (ignoreResource(req)) {
+			if (isIgnoredResource(req)) {
 				status = HttpServletResponse.SC_NOT_FOUND;
 
 				return;
@@ -171,12 +172,12 @@ public class WebDAVServlet extends HttpServlet {
 		return (WebDAVStorage)InstancePool.get(storageClass);
 	}
 
-	protected boolean ignoreResource(HttpServletRequest req) {
+	protected boolean isIgnoredResource(HttpServletRequest req) {
 		String[] pathArray = WebDAVUtil.getPathArray(req.getPathInfo(), true);
 		String resourceName = pathArray[pathArray.length - 1];
 
-		for (String ignoredName : _IGNORE_LIST) {
-			if (ignoredName.equals(resourceName)) {
+		for (String ignore : PropsValues.WEBDAV_IGNORE) {
+			if (ignore.equals(resourceName)) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Skipping over resource " + resourceName);
 				}
@@ -187,9 +188,6 @@ public class WebDAVServlet extends HttpServlet {
 
 		return false;
 	}
-
-	private static final String[] _IGNORE_LIST =
-		PropsUtil.getArray(PropsUtil.WEBDAV_IGNORE);
 
 	private static Log _log = LogFactory.getLog(WebDAVServlet.class);
 
