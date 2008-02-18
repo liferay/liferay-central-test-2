@@ -662,16 +662,15 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			throw new ImageNameException();
 		}
 
-		String imageNameProper = FileUtil.stripExtension(nameWithExtension);
+		String name = FileUtil.stripExtension(nameWithExtension);
 		String imageType = FileUtil.getExtension(nameWithExtension);
 
-		List<IGImage> images = igImagePersistence.findByF_N(
-			folderId, imageNameProper);
+		List<IGImage> images = igImagePersistence.findByF_N(folderId, name);
 
-		if (imageType.matches("^jpe?g$")) {
+		if (imageType.equals("jpeg")) {
 			imageType = ImageUtil.TYPE_JPEG;
 		}
-		else if (imageType.matches("^tiff?$")) {
+		else if (imageType.equals("tif")) {
 			imageType = ImageUtil.TYPE_TIFF;
 		}
 
