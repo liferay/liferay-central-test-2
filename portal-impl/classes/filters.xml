@@ -2,6 +2,6 @@
 
 <pagefilters>
 	<filter>
-		<class>com.ecyrd.jspwiki.filters.CreoleFilter</class>
+		<class>org.wikiwizard.jspwiki.filters.CreoleFilter</class>
 	</filter>
 </pagefilters>

@@ -1037,6 +1037,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/creolefilter.jar</file-name>
+		<version>1.0.3</version>
+		<project-name>Creole Filter</project-name>
+		<project-url>http://www.i3g.hs-heilbronn.de/Wiki.jsp?page=JSPWikiCreoleFilter</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 2.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/crypt.jar</file-name>
 		<version></version>
 		<project-name>Unix Crypt</project-name>
