@@ -4,5 +4,7 @@ alter table IGImage add custom2ImageId LONG null;
 
 update Group_ set type_ = 3 where type_ = 0;
 
+update Image set type_ = 'jpg' where type_ = 'jpeg';
+
 alter table WikiPage add redirectTo VARCHAR(75) null;
 alter table WikiPage add parent VARCHAR(75) null;

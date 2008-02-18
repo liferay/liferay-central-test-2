@@ -66,7 +66,7 @@ public class ImageUtil {
 
 	public static final String TYPE_GIF = "gif";
 
-	public static final String TYPE_JPEG = "jpeg";
+	public static final String TYPE_JPEG = "jpg";
 
 	public static final String TYPE_PNG = "png";
 
