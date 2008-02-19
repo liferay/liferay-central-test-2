@@ -30,14 +30,17 @@ ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_
 WikiPage wikiPage = (WikiPage)row.getObject();
 %>
 
-<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
-	<portlet:actionURL var="revertURL">
-		<portlet:param name="struts_action" value="/wiki/edit_page" />
-		<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.REVERT %>" />
-		<portlet:param name="redirect" value="<%= currentURL %>" />
-		<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
-		<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
-	</portlet:actionURL>
+<liferay-ui:icon-menu>
+	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
+		<portlet:actionURL var="revertURL">
+			<portlet:param name="struts_action" value="/wiki/edit_page" />
+			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.REVERT %>" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+			<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
+			<portlet:param name="title" value="<%= wikiPage.getTitle() %>" />
+		</portlet:actionURL>
 
-	<input type="button" value="<liferay-ui:message key="revert" />" onClick="self.location = '<%= revertURL %>'" />
-</c:if>
+		<%--<input type="button" value="<liferay-ui:message key="revert" />" onClick="self.location = '<%= revertURL %>'" />--%>
+		<liferay-ui:icon image="undo" message="revert" url="<%= revertURL %>" />
+	</c:if>
+</liferay-ui:icon-menu>

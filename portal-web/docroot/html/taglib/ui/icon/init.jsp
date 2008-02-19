@@ -25,6 +25,14 @@
 <%@ include file="/html/taglib/init.jsp" %>
 
 <%
+IntegerWrapper iconListIconCount = (IntegerWrapper)request.getAttribute("liferay-ui:icon-list:icon-count");
+
+if (iconListIconCount != null) {
+	iconListIconCount.increment();
+}
+
+Boolean iconListSingleIcon = (Boolean)request.getAttribute("liferay-ui:icon-list:single-icon");
+
 IntegerWrapper iconMenuIconCount = (IntegerWrapper)request.getAttribute("liferay-ui:icon-menu:icon-count");
 
 if (iconMenuIconCount != null) {

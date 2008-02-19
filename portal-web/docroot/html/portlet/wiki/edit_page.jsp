@@ -48,8 +48,6 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
 String parentTitle = BeanParamUtil.getString(wikiPage, request, "parentTitle");
 
-String[] attachments = new String[0];
-
 boolean preview = ParamUtil.getBoolean(request, "preview");
 
 boolean newPage = false;
@@ -61,8 +59,6 @@ if (wikiPage == null) {
 boolean editable = false;
 
 if (wikiPage != null) {
-	attachments = wikiPage.getAttachmentsFiles();
-
 	editable = true;
 }
 else if (Validator.isNotNull(title)) {
@@ -215,7 +211,7 @@ if (Validator.isNull(redirect)) {
 					<liferay-ui:message key="title" />
 				</td>
 				<td>
-					<input name="<portlet:namespace />title" size="30" type="text" value="" />
+					<input name="<portlet:namespace />title" size="30" type="text" value="<%= title %>" />
 				</td>
 			</tr>
 		</c:if>
@@ -269,34 +265,6 @@ if (Validator.isNull(redirect)) {
 	<br />
 
 	<table class="lfr-table">
-
-	<c:if test="<%= attachments.length > 0 %>">
-		<tr>
-			<td>
-				<liferay-ui:message key="attachments" />
-			</td>
-			<td>
-
-				<%
-				for (int i = 0; i < attachments.length; i++) {
-					String fileName = FileUtil.getShortFileName(attachments[i]);
-				%>
-
-					<a href="<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/wiki/get_page_attachment" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= wikiPage.getTitle() %>" /><portlet:param name="fileName" value="<%= fileName %>" /></portlet:actionURL>"><%= fileName %></a><%= (i < (attachments.length - 1)) ? ", " : "" %>
-
-				<%
-				}
-				%>
-
-			</td>
-		</tr>
-		<tr>
-			<td colspan="2">
-				<br />
-			</td>
-		</tr>
-	</c:if>
-
 	<tr>
 		<td>
 			<liferay-ui:message key="tags" />

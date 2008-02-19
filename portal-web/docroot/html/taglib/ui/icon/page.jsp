@@ -37,6 +37,9 @@ if (!target.equals("_self")) {
 %>
 
 <c:choose>
+	<c:when test="<%= (iconListIconCount != null) && (iconListSingleIcon == null) %>">
+		<li><nobr><a href="<%= url %>" <%= targetHtml %>><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /></a> <a href="<%= url %>" <%= targetHtml %>><liferay-ui:message key="<%= message %>" /></a></nobr></li>
+	</c:when>
 	<c:when test="<%= (iconMenuIconCount != null) && (iconMenuSingleIcon == null) %>">
 		<li><nobr><a href="<%= url %>" <%= targetHtml %>><img align="absmiddle" border="0" src="<%= src %>" <%= details %> /> <liferay-ui:message key="<%= message %>" /></a></nobr></li>
 	</c:when>
