@@ -93,7 +93,7 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			long folderId = folder.getFolderId();
 			String name = fileName;
 			String description = StringPool.BLANK;
-			String contentType = extension;
+			String contentType = extension.toLowerCase();
 			String[] tagsEntries = null;
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
