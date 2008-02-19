@@ -24,11 +24,11 @@
 
 <%@ include file="/html/portlet/wiki/init.jsp" %>
 
-<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
-
 <%
 String tag = ParamUtil.getString(renderRequest, "tag");
 %>
+
+<liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <h1 class="page-title"><%= LanguageUtil.format(pageContext, "pages-with-tag-x", tag) %></h1>
 

@@ -42,11 +42,11 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 long nodeId = BeanParamUtil.getLong(wikiPage, request, "nodeId");
 String title = BeanParamUtil.getString(wikiPage, request, "title");
 
+boolean editTitle = ParamUtil.getBoolean(request, "editTitle");
+
 String content = BeanParamUtil.getString(wikiPage, request, "content");
 String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
-String parent = BeanParamUtil.getString(wikiPage, request, "parent");
-
-boolean editTitle = ParamUtil.getBoolean(request, "editTitle");
+String parentTitle = BeanParamUtil.getString(wikiPage, request, "parentTitle");
 
 String[] attachments = new String[0];
 
@@ -76,11 +76,13 @@ else if (Validator.isNotNull(title)) {
 }
 else if ((wikiPage == null) && editTitle) {
 	editable = true;
+
 	wikiPage = new WikiPageImpl();
+
 	wikiPage.setNew(true);
 	wikiPage.setNodeId(node.getNodeId());
 	wikiPage.setFormat(format);
-	wikiPage.setParent(parent);
+	wikiPage.setParentTitle(parentTitle);
 }
 
 PortletURL viewPageURL = renderResponse.createRenderURL();
@@ -166,12 +168,13 @@ if (Validator.isNull(redirect)) {
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />originalRedirect" type="hidden" value="<%= originalRedirect %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= nodeId %>" />
-<input name="<portlet:namespace />parent" type="hidden" value="<%= parent %>" />
-<input name="<portlet:namespace />editTitle" type="hidden" value="<%= editTitle %>" />
 
 <c:if test="<%= !editTitle %>">
 	<input name="<portlet:namespace />title" type="hidden" value="<%= title %>" />
 </c:if>
+
+<input name="<portlet:namespace />parentTitle" type="hidden" value="<%= parentTitle %>" />
+<input name="<portlet:namespace />editTitle" type="hidden" value="<%= editTitle %>" />
 
 <c:if test="<%= wikiPage != null %>">
 	<input name="<portlet:namespace />version" type="hidden" value="<%= wikiPage.getVersion() %>" />
@@ -181,6 +184,7 @@ if (Validator.isNull(redirect)) {
 <input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
 
 <liferay-ui:error exception="<%= PageContentException.class %>" message="the-content-is-not-valid" />
+<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-valid-title" />
 <liferay-ui:error exception="<%= PageVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-go-back-and-edit-again" />
 <liferay-ui:tags-error />
 
@@ -204,16 +208,18 @@ if (Validator.isNull(redirect)) {
 <c:if test="<%= editable %>">
 	<c:if test="<%= (WikiPageImpl.FORMATS.length > 1) %>">
 		<table class="lfr-table">
+
 		<c:if test="<%= editTitle %>">
 			<tr>
 				<td>
 					<liferay-ui:message key="title" />
 				</td>
 				<td>
-					<input name="<portlet:namespace />title" type="text" value='<%= LanguageUtil.get(pageContext, "enter-the-page-title-here") %>' />
+					<input name="<portlet:namespace />title" size="30" type="text" value="" />
 				</td>
 			</tr>
 		</c:if>
+
 		<tr>
 			<td>
 				<liferay-ui:message key="format" />
@@ -234,16 +240,18 @@ if (Validator.isNull(redirect)) {
 				</select>
 			</td>
 		</tr>
-		<c:if test="<%= Validator.isNotNull(parent) %>">
+
+		<c:if test="<%= Validator.isNotNull(parentTitle) %>">
 			<tr>
 				<td>
 					<liferay-ui:message key="parent" />
 				</td>
 				<td>
-					<%= parent %>
+					<%= parentTitle %>
 				</td>
 			</tr>
 		</c:if>
+
 		</table>
 	</c:if>
 
@@ -280,6 +288,11 @@ if (Validator.isNull(redirect)) {
 				}
 				%>
 
+			</td>
+		</tr>
+		<tr>
+			<td colspan="2">
+				<br />
 			</td>
 		</tr>
 	</c:if>
@@ -322,7 +335,7 @@ if (Validator.isNull(redirect)) {
 	<c:if test="<%= !preview %>">
 		<script type="text/javascript">
 			if (!window.<portlet:namespace />editor) {
-				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= editTitle?"title":"content"%>);
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= editTitle ? "title" : "content" %>);
 			}
 		</script>
 	</c:if>

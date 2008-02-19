@@ -266,35 +266,27 @@ public class WikiUtil {
 			String attachmentURLPrefix)
 		throws PageContentException, WikiFormatException {
 
+		LiferayPortletURL liferayViewPageURL = (LiferayPortletURL)viewPageURL;
+		LiferayPortletURL liferayEditPageURL = (LiferayPortletURL)editPageURL;
+
 		WikiEngine engine = _getEngine(page.getFormat());
 
 		String content = engine.convert(page, editPageURL);
 
-		if ((editPageURL != null) &&
-			(editPageURL instanceof LiferayPortletURL)) {
+		content = _replaceLinks(
+			page.getTitle(), content, liferayViewPageURL, liferayEditPageURL);
 
-			LiferayPortletURL liferayViewPageURL =
-				(LiferayPortletURL)viewPageURL;
+		Iterator itr = engine.getOutgoingLinks(page).keySet().iterator();
 
-			LiferayPortletURL liferayEditPageURL =
-				(LiferayPortletURL)editPageURL;
+		while (itr.hasNext()) {
+			String title = (String)itr.next();
 
 			content = _replaceLinks(
-				page.getTitle(), content, liferayViewPageURL,
-				liferayEditPageURL);
-
-			Iterator itr = engine.getOutgoingLinks(page).keySet().iterator();
-
-			while (itr.hasNext()) {
-				String title = (String)itr.next();
-
-				content = _replaceLinks(
-					title, content, liferayViewPageURL, liferayEditPageURL);
-			}
-
-			content = _replaceAttachments(
-				content, page.getTitle(), attachmentURLPrefix);
+				title, content, liferayViewPageURL, liferayEditPageURL);
 		}
+
+		content = _replaceAttachments(
+			content, page.getTitle(), attachmentURLPrefix);
 
 		return content;
 	}

@@ -79,8 +79,8 @@
 		<column name="content" type="String" />
 		<column name="format" type="String" />
 		<column name="head" type="boolean" />
-		<column name="redirectTo" type="String" />
-		<column name="parent" type="String" />
+		<column name="parentTitle" type="String" />
+		<column name="redirectTitle" type="String" />
 
 		<!-- Order -->
 
@@ -105,11 +105,11 @@
 		</finder>
 		<finder name="N_P" return-type="Collection">
 			<finder-column name="nodeId" />
-			<finder-column name="parent" />
+			<finder-column name="parentTitle" />
 		</finder>
 		<finder name="N_R" return-type="Collection">
 			<finder-column name="nodeId" />
-			<finder-column name="redirectTo" />
+			<finder-column name="redirectTitle" />
 		</finder>
 		<finder name="N_T_V" return-type="WikiPage">
 			<finder-column name="nodeId" />
@@ -120,6 +120,11 @@
 			<finder-column name="nodeId" />
 			<finder-column name="title" />
 			<finder-column name="head" />
+		</finder>
+		<finder name="N_H_P" return-type="Collection">
+			<finder-column name="nodeId" />
+			<finder-column name="head" />
+			<finder-column name="parentTitle" />
 		</finder>
 
 		<!-- References -->

@@ -436,7 +436,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 			throw new DuplicateNodeNameException();
 		}
-		catch (NoSuchNodeException nsfe) {
+		catch (NoSuchNodeException nsne) {
 		}
 	}
 

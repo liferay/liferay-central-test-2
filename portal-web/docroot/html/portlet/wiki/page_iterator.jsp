@@ -177,22 +177,19 @@ else if (type.equals("recent_changes")) {
 	results = WikiPageLocalServiceUtil.getRecentChanges(node.getNodeId(), searchContainer.getStart(), searchContainer.getEnd());
 }
 else if (type.equals("tagged_pages")) {
-	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), new String[]{tag});
-	long[] notEntryIds = new long[]{};
+	long classNameId = PortalUtil.getClassNameId(WikiPage.class.getName());
+	long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), new String[] {tag});
+	long[] notEntryIds = new long[0];
 	Date now = new Date();
-	long classNameId = ClassNameLocalServiceUtil.getClassName(WikiPage.class.getName()).getClassNameId();
 
-	total = TagsAssetLocalServiceUtil.getAssetsCount(portletGroupId.longValue(), new long[]{classNameId}, entryIds, notEntryIds, false, false, now, now);
-	List assets = TagsAssetLocalServiceUtil.getAssets(portletGroupId.longValue(), new long[]{classNameId}, entryIds, notEntryIds, false, null, null, null, null, false, now, now, searchContainer.getStart(), searchContainer.getEnd());
+	total = TagsAssetLocalServiceUtil.getAssetsCount(portletGroupId.longValue(), new long[] {classNameId}, entryIds, notEntryIds, false, false, now, now);
+	List<TagsAsset> assets = TagsAssetLocalServiceUtil.getAssets(portletGroupId.longValue(), new long[] {classNameId}, entryIds, notEntryIds, false, null, null, null, null, false, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
 	results = new ArrayList();
 
-	for (int assetIndex = 0; assetIndex < assets.size(); assetIndex++) {
-		TagsAsset asset = (TagsAsset)assets.get(assetIndex);
+	for (TagsAsset asset : assets) {
+		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(asset.getClassPK());
 
-		long classPK = asset.getClassPK();
-
-		WikiPageResource pageResource = WikiPageResourceLocalServiceUtil.getPageResource(classPK);
 		WikiPage assetPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
 		results.add(assetPage);
@@ -287,7 +284,7 @@ for (int i = 0; i < results.size(); i++) {
 
 <c:if test='<%= type.equals("all_pages") && WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_ATTACHMENT) %>'>
 	<div>
-		<input type="button" value="<liferay-ui:message key="add-page" />" onClick="window.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="editTitle" value="1"></portlet:param></portlet:renderURL>'" />
+		<input type="button" value="<liferay-ui:message key="add-page" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="editTitle" value="1" /></portlet:renderURL>'" />
 	</div>
 
 	<br />

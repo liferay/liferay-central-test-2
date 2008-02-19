@@ -106,20 +106,20 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String content = null;
 		String format = WikiPageImpl.DEFAULT_FORMAT;
 		boolean head = true;
-		String redirectTo = null;
-		String parent = null;
+		String parentTitle = null;
+		String redirectTitle = null;
 		String[] tagsEntries = null;
 
 		return addPage(
 			uuid, userId, nodeId, title, version, content, format, head,
-			redirectTo, parent, tagsEntries, prefs, themeDisplay);
+			parentTitle, redirectTitle, tagsEntries, prefs, themeDisplay);
 	}
 
 	public WikiPage addPage(
 			String uuid, long userId, long nodeId, String title, double version,
-			String content, String format, boolean head, String redirectTo,
-	        String parent, String[] tagsEntries, PortletPreferences prefs,
-			ThemeDisplay themeDisplay)
+			String content, String format, boolean head, String parentTitle,
+			String redirectTitle, String[] tagsEntries,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Page
@@ -150,8 +150,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setContent(content);
 		page.setFormat(format);
 		page.setHead(head);
-		page.setRedirectTo(redirectTo);
-		page.setParent(parent);
+		page.setParentTitle(parentTitle);
+		page.setRedirectTitle(redirectTitle);
 
 		wikiPagePersistence.update(page);
 
@@ -187,6 +187,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Cache
 
 		clearReferralsCache(page);
+		clearPageCache(page);
 
 		return page;
 	}
@@ -298,6 +299,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public void deletePage(WikiPage page)
 		throws PortalException, SystemException {
 
+		// Children
+
+		List children = wikiPagePersistence.findByN_P(
+			page.getNodeId(), page.getTitle());
+
+		for (int i = 0; i < children.size(); i++) {
+			WikiPage curPage = (WikiPage)children.get(i);
+
+			deletePage(curPage);
+		}
+
 		// Lucene
 
 		try {
@@ -323,16 +335,6 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 		catch (RemoteException re) {
 			throw new SystemException(re);
-		}
-
-		// Children
-
-		List children = page.getChildren();
-
-		for (int i = 0; i < children.size(); i++) {
-			WikiPage curPage = (WikiPage)children.get(i);
-
-			deletePage(curPage);
 		}
 
 		// Tags
@@ -409,10 +411,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		}
 	}
 
-	public List getChildren(long nodeId, String parent)
+	public List getChildren(long nodeId, boolean head, String parentTitle)
 		throws PortalException, SystemException {
 
-		return wikiPagePersistence.findByN_P(nodeId, parent);
+		return wikiPagePersistence.findByN_H_P(nodeId, head, parentTitle);
 	}
 
 	public List getIncomingLinks(long nodeId, String title)
@@ -571,8 +573,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return new WikiPageDisplayImpl(
 			page.getUserId(), page.getNodeId(), page.getTitle(),
 			page.getVersion(), page.getContent(), formattedContent,
-			page.getFormat(), page.getHead(), page.getRedirectTo(),
-			page.getAttachmentsFiles());
+			page.getFormat(), page.getHead(), page.getParentTitle(),
+			page.getRedirectTitle(), page.getAttachmentsFiles());
 	}
 
 	public List getPages(long nodeId, int begin, int end)
@@ -679,7 +681,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 		}
 
-		// Move all versions
+		// All versions
 
 		List pageVersions = wikiPagePersistence.findByN_T(nodeId, title);
 
@@ -697,7 +699,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			wikiPagePersistence.update(page);
 		}
 
-		// Update children pages
+		// Children
 
 		List children = wikiPagePersistence.findByN_P(nodeId, title);
 
@@ -706,14 +708,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			WikiPage page = (WikiPage)itr.next();
 
-			page.setParent(newTitle);
+			page.setParentTitle(newTitle);
 
 			wikiPagePersistence.update(page);
 		}
 
 		WikiPage page = (WikiPage)pageVersions.get(pageVersions.size() - 1);
 
-		// Rename page resource
+		// Page resource
 
 		WikiPageResource wikiPageResource =
 			wikiPageResourcePersistence.findByPrimaryKey(
@@ -730,13 +732,13 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		String content = WikiPageImpl.MOVED;
 		String format = page.getFormat();
 		boolean head = true;
-		String redirectTo = page.getTitle();
-		String parent = page.getParent();
+		String parentTitle = page.getParentTitle();
+		String redirectTitle = page.getTitle();
 		String[] tagsEntries = null;
 
 		addPage(
 			uuid, userId, nodeId, title, version, content, format, head,
-			redirectTo, parent, tagsEntries, prefs, themeDisplay);
+			parentTitle, redirectTitle, tagsEntries, prefs, themeDisplay);
 
 		// Move redirects to point to the page with the new title
 
@@ -747,7 +749,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			WikiPage redirectedPage = (WikiPage)itr.next();
 
-			redirectedPage.setRedirectTo(newTitle);
+			redirectedPage.setRedirectTitle(newTitle);
 
 			wikiPagePersistence.update(redirectedPage);
 		}
@@ -800,9 +802,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 	public WikiPage updatePage(
 			long userId, long nodeId, String title, double version,
-			String content, String format, String redirectTo, String parent,
-			String[] tagsEntries, PortletPreferences prefs,
-			ThemeDisplay themeDisplay)
+			String content, String format, String parentTitle,
+			String redirectTitle, String[] tagsEntries,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Page
@@ -820,8 +822,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		catch (NoSuchPageException nspe) {
 			return addPage(
 				null, userId, nodeId, title, WikiPageImpl.DEFAULT_VERSION,
-				content, format, true, redirectTo, parent, tagsEntries, prefs,
-				themeDisplay);
+				content, format, true, parentTitle, redirectTitle, tagsEntries,
+				prefs, themeDisplay);
 		}
 
 		double oldVersion = page.getVersion();
@@ -854,12 +856,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setFormat(format);
 		page.setHead(true);
 
-		if (Validator.isNotNull(redirectTo)) {
-			page.setRedirectTo(redirectTo);
+		if (Validator.isNotNull(parentTitle)) {
+			page.setParentTitle(parentTitle);
 		}
 
-		if (Validator.isNotNull(parent)) {
-			page.setParent(parent);
+		if (Validator.isNotNull(redirectTitle)) {
+			page.setRedirectTitle(redirectTitle);
 		}
 
 		wikiPagePersistence.update(page);

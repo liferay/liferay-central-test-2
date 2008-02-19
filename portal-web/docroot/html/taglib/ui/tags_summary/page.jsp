@@ -28,15 +28,10 @@
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
 
 <%
-LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:tags_summary:portletURL");
-
 String className = (String)request.getAttribute("liferay-ui:tags_summary:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_summary:classPK"));
-String message = (String)request.getAttribute("liferay-ui:tags_summary:message");
-
-if (message == null) {
-	message = "tags";
-}
+String message = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_summary:message"), "tags");
+LiferayPortletURL portletURL = (LiferayPortletURL)request.getAttribute("liferay-ui:tags_summary:portletURL");
 
 List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK);
 %>
@@ -47,16 +42,20 @@ List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK);
 
 		<c:choose>
 			<c:when test="<%= portletURL != null %>">
+
 				<%
 				for (int i = 0; i < entries.size(); i++) {
-					TagsEntry tag = (TagsEntry)entries.get(i);
+					TagsEntry entry = (TagsEntry)entries.get(i);
 
-					portletURL.setParameter("tag", tag.getName());
+					portletURL.setParameter("tag", entry.getName());
 				%>
-					<a href="<%= portletURL.toString() %>"><%= tag.getName() %></a>
+
+					<a href="<%= portletURL.toString() %>"><%= entry.getName() %></a>
+
 				<%
 				}
 				%>
+
 			</c:when>
 			<c:otherwise>
 				<%= ListUtil.toString(entries, "name", ", ") %>

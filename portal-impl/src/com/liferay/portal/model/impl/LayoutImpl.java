@@ -178,20 +178,19 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public long getAncestorPlid() {
-		long ancestorPlid = 0;
+		long plid = 0;
 
 		try {
-			Layout ancestorLayout = this;
+			Layout layout = this;
 
 			while (true) {
-				if (!ancestorLayout.isRootLayout()) {
-					ancestorLayout = LayoutLocalServiceUtil.getLayout(
-						ancestorLayout.getGroupId(),
-						ancestorLayout.isPrivateLayout(),
-						ancestorLayout.getParentLayoutId());
+				if (!layout.isRootLayout()) {
+					layout = LayoutLocalServiceUtil.getLayout(
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layout.getParentLayoutId());
 				}
 				else {
-					ancestorPlid = ancestorLayout.getPlid();
+					plid = layout.getPlid();
 
 					break;
 				}
@@ -201,24 +200,23 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			_log.error(e);
 		}
 
-		return ancestorPlid;
+		return plid;
 	}
 
 	public long getAncestorLayoutId() {
-		long ancestorLayoutId = 0;
+		long layoutId = 0;
 
 		try {
-			Layout ancestorLayout = this;
+			Layout layout = this;
 
 			while (true) {
-				if (!ancestorLayout.isRootLayout()) {
-					ancestorLayout = LayoutLocalServiceUtil.getLayout(
-						ancestorLayout.getGroupId(),
-						ancestorLayout.isPrivateLayout(),
-						ancestorLayout.getParentLayoutId());
+				if (!layout.isRootLayout()) {
+					layout = LayoutLocalServiceUtil.getLayout(
+						layout.getGroupId(), layout.isPrivateLayout(),
+						layout.getParentLayoutId());
 				}
 				else {
-					ancestorLayoutId = ancestorLayout.getLayoutId();
+					layoutId = layout.getLayoutId();
 
 					break;
 				}
@@ -228,11 +226,11 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			_log.error(e);
 		}
 
-		return ancestorLayoutId;
+		return layoutId;
 	}
 
 	public List getAncestors() throws SystemException, PortalException {
-		List ancestors = new ArrayList();
+		List layouts = new ArrayList();
 
 		Layout layout = this;
 
@@ -242,14 +240,14 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 					layout.getGroupId(), layout.isPrivateLayout(),
 					layout.getParentLayoutId());
 
-				ancestors.add(layout);
+				layouts.add(layout);
 			}
 			else {
 				break;
 			}
 		}
 
-		return ancestors;
+		return layouts;
 	}
 
 	public boolean hasAncestor(long layoutId)
@@ -305,18 +303,18 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public List getAllChildren() throws PortalException, SystemException {
-		List allChildren = new ArrayList();
+		List layouts = new ArrayList();
 
 		Iterator itr = getChildren().iterator();
 
 		while (itr.hasNext()) {
-			Layout child = (Layout)itr.next();
+			Layout layout = (Layout)itr.next();
 
-			allChildren.add(child);
-			allChildren.addAll(child.getChildren());
+			layouts.add(layout);
+			layouts.addAll(layout.getChildren());
 		}
 
-		return allChildren;
+		return layouts;
 	}
 
 	public List getChildren(PermissionChecker permissionChecker)

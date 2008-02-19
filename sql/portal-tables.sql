@@ -1355,8 +1355,8 @@ create table WikiPage (
 	content TEXT null,
 	format VARCHAR(75) null,
 	head BOOLEAN,
-	redirectTo VARCHAR(75) null,
-	parent VARCHAR(75) null
+	parentTitle VARCHAR(75) null,
+	redirectTitle VARCHAR(75) null
 );
 
 create table WikiPageResource (

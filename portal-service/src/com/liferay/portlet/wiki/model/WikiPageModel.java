@@ -105,13 +105,13 @@ public interface WikiPageModel extends BaseModel {
 
 	public void setHead(boolean head);
 
-	public String getRedirectTo();
+	public String getParentTitle();
 
-	public void setRedirectTo(String redirectTo);
+	public void setParentTitle(String parentTitle);
 
-	public String getParent();
+	public String getRedirectTitle();
 
-	public void setParent(String parent);
+	public void setRedirectTitle(String redirectTitle);
 
 	public WikiPage toEscapedModel();
 }

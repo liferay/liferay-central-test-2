@@ -103,6 +103,9 @@ public class EditPageAction extends PortletAction {
 						redirect = getSaveAndContinueRedirect(
 							config, req, page, redirect);
 					}
+					else if (redirect.endsWith("title=")) {
+						redirect += page.getTitle();
+					}
 				}
 
 				sendRedirect(req, res, redirect);
@@ -191,7 +194,8 @@ public class EditPageAction extends PortletAction {
 			}
 			catch (NoSuchPageException nspe) {
 				if (title.equals(WikiPageImpl.FRONT_PAGE) && (version == 0)) {
-					page = WikiPageServiceUtil.addPage(nodeId, title, null, null);
+					page = WikiPageServiceUtil.addPage(
+						nodeId, title, null, null);
 				}
 				else {
 					throw nspe;
@@ -273,14 +277,15 @@ public class EditPageAction extends PortletAction {
 
 		String content = ParamUtil.getString(req, "content");
 		String format = ParamUtil.getString(req, "format");
-		String parent = ParamUtil.getString(req, "parent");
+		String parentTitle = ParamUtil.getString(req, "parentTitle");
+		String redirectTitle = null;
 
 		String[] tagsEntries = StringUtil.split(
 			ParamUtil.getString(req, "tagsEntries"));
 
 		return WikiPageServiceUtil.updatePage(
-			nodeId, title, version, content, format, null, parent, tagsEntries,
-			prefs, themeDisplay);
+			nodeId, title, version, content, format, parentTitle, redirectTitle,
+			tagsEntries, prefs, themeDisplay);
 	}
 
 	protected boolean isCheckMethodOnProcessAction() {

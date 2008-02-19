@@ -8,6 +8,10 @@
 		</layout>
 	</appender>
 
+	<category name="com.ecyrd.jspwiki">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.germinus.easyconf">
 		<priority value="ERROR" />
 	</category>

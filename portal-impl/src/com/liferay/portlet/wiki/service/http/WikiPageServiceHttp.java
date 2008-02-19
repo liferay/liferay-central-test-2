@@ -743,7 +743,7 @@ public class WikiPageServiceHttp {
 	public static com.liferay.portlet.wiki.model.WikiPage updatePage(
 		HttpPrincipal httpPrincipal, long nodeId, java.lang.String title,
 		double version, java.lang.String content, java.lang.String format,
-		java.lang.String redirectTo, java.lang.String parent,
+		java.lang.String parentTitle, java.lang.String redirectTitle,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
@@ -771,15 +771,15 @@ public class WikiPageServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = redirectTo;
+			Object paramObj5 = parentTitle;
 
-			if (redirectTo == null) {
+			if (parentTitle == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = parent;
+			Object paramObj6 = redirectTitle;
 
-			if (parent == null) {
+			if (redirectTitle == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 

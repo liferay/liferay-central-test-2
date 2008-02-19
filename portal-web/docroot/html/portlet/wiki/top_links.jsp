@@ -55,16 +55,17 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 	<div class="top-links">
 		<table class="lfr-table">
 		<tr>
-			<td valign="top" width="16">
-				<c:if test="<%= themeDisplay.isSignedIn() && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE) %>">
+			<c:if test="<%= themeDisplay.isSignedIn() && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.WIKI, ActionKeys.ADD_NODE) %>">
+				<td valign="top" width="16">
 
 					<%
 					portletURL.setParameter("struts_action", "/wiki/view_nodes");
 					%>
 
 					<liferay-ui:icon image="manage_nodes" message="manage-wikis" url="<%= portletURL.toString() %>" />
-				</c:if>
-			</td>
+				</td>
+			</c:if>
+
 			<td valign="top">
 
 				<c:if test="<%= nodes.size() > 1 %>">
@@ -74,7 +75,7 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 						WikiNode curNode = (WikiNode)nodes.get(i);
 					%>
 
-						<%= (i == 0) ? "" : "|" %> <a <%= (curNode.getNodeId() == node.getNodeId()) ? "class=\"node-current\"" : "" %> href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeId" value="<%= String.valueOf(curNode.getNodeId()) %>" /></portlet:renderURL>"><nobr><%= curNode.getName() %></nobr></a>
+						<%= (i == 0) ? "" : "|" %> <a <%= (curNode.getNodeId() == node.getNodeId()) ? "class=\"node-current\"" : "" %> href="<portlet:renderURL><portlet:param name="struts_action" value="/wiki/view" /><portlet:param name="nodeName" value="<%= curNode.getName() %>" /><portlet:param name="title" value="<%= WikiPageImpl.FRONT_PAGE %>" /></portlet:renderURL>"><nobr><%= curNode.getName() %></nobr></a>
 
 					<%
 					}

@@ -76,22 +76,6 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		_userUuid = userUuid;
 	}
 
-	public List getChildren() {
-		List children = null;
-
-		try {
-			children = WikiPageLocalServiceUtil.getChildren(
-				getNodeId(), getTitle());
-		}
-		catch (Exception e) {
-			children = new ArrayList();
-
-			_log.error(e);
-		}
-
-		return children;
-	}
-
 	public WikiNode getNode() {
 		WikiNode node = null;
 
@@ -108,14 +92,15 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 	}
 
 	public WikiPage getParentPage() {
-		if (Validator.isNull(getParent())) {
+		if (Validator.isNull(getParentTitle())) {
 			return null;
 		}
 
 		WikiPage page = null;
 
 		try {
-			page = WikiPageLocalServiceUtil.getPage(getNodeId(), getParent());
+			page = WikiPageLocalServiceUtil.getPage(
+				getNodeId(), getParentTitle());
 		}
 		catch (Exception e) {
 			_log.error(e);
@@ -137,14 +122,38 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return parentPages;
 	}
 
-	public WikiPage getRedirectToPage()
-		throws PortalException, SystemException {
+	public List getChildPages() {
+		List pages = null;
 
-		if (Validator.isNull(getRedirectTo())) {
+		try {
+			pages = WikiPageLocalServiceUtil.getChildren(
+				getNodeId(), true, getTitle());
+		}
+		catch (Exception e) {
+			pages = new ArrayList();
+
+			_log.error(e);
+		}
+
+		return pages;
+	}
+
+	public WikiPage getRedirectPage() {
+		if (Validator.isNull(getRedirectTitle())) {
 			return null;
 		}
 
-		return WikiPageLocalServiceUtil.getPage(getNodeId(), getRedirectTo());
+		WikiPage page = null;
+
+		try {
+			page = WikiPageLocalServiceUtil.getPage(
+				getNodeId(), getRedirectTitle());
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return page;
 	}
 
 	public String getAttachmentsDir() {

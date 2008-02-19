@@ -29,15 +29,16 @@ WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 WikiPage originalPage = null;
+WikiPage redirectPage = wikiPage.getRedirectPage();
 
-if (wikiPage.getRedirectToPage() != null) {
+if (redirectPage != null) {
 	originalPage = wikiPage;
-	wikiPage = wikiPage.getRedirectToPage();
+	wikiPage = redirectPage;
 }
 
 String title = wikiPage.getTitle();
 
-List children = wikiPage.getChildren();
+List childPages = wikiPage.getChildPages();
 
 String[] attachments = new String[0];
 
@@ -45,8 +46,8 @@ if (wikiPage != null) {
 	attachments = wikiPage.getAttachmentsFiles();
 }
 
-boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 boolean preview = false;
+boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
 PortletURL viewPageURL = renderResponse.createRenderURL();
 
@@ -54,22 +55,23 @@ viewPageURL.setParameter("struts_action", "/wiki/view");
 viewPageURL.setParameter("nodeName", node.getName());
 viewPageURL.setParameter("title", title);
 
-PortletURL editPageURL = renderResponse.createRenderURL();
-
-editPageURL.setParameter("struts_action", "/wiki/edit_page");
-editPageURL.setParameter("redirect", currentURL);
-editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
-editPageURL.setParameter("title", title);
-
 PortletURL addPageURL = renderResponse.createRenderURL();
 
 addPageURL.setParameter("struts_action", "/wiki/edit_page");
 addPageURL.setParameter("redirect", currentURL);
 addPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 addPageURL.setParameter("editTitle", "1");
+
 if (wikiPage != null) {
-	addPageURL.setParameter("parent", wikiPage.getTitle());
+	addPageURL.setParameter("parentTitle", wikiPage.getTitle());
 }
+
+PortletURL editPageURL = renderResponse.createRenderURL();
+
+editPageURL.setParameter("struts_action", "/wiki/edit_page");
+editPageURL.setParameter("redirect", currentURL);
+editPageURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+editPageURL.setParameter("title", title);
 
 PortletURL printPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
@@ -81,6 +83,10 @@ PortletURL taggedPagesURL = renderResponse.createRenderURL();
 
 taggedPagesURL.setParameter("struts_action", "/wiki/view_tagged_pages");
 taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
+
+PortletURL viewAttachmentsURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 %>
 
 <c:choose>
@@ -104,23 +110,30 @@ taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
-<c:if test="<%= Validator.isNotNull(wikiPage.getParent()) %>">
+<c:if test="<%= Validator.isNotNull(wikiPage.getParentTitle()) %>">
 	<div class="breadcrumbs">
+
 		<%
 		PortletURL viewParentPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
 		List parentPages = wikiPage.getParentPages();
 
-			for (int i = 0; i < parentPages.size(); i++) {
-				WikiPage curParentPage = (WikiPage) parentPages.get(i);
+		for (int i = 0; i < parentPages.size(); i++) {
+			WikiPage curParentPage = (WikiPage)parentPages.get(i);
 
-				viewParentPageURL.setParameter("title", curParentPage.getTitle());
+			viewParentPageURL.setParameter("title", curParentPage.getTitle());
 		%>
+
 			<a href="<%= viewParentPageURL %>"><%= curParentPage.getTitle() %></a>
-			<%= ((i + 1) < parentPages.size())?"&raquo;":"" %>
+
+			<c:if test="<%= (i + 1) < parentPages.size() %>">
+				&raquo;
+			</c:if>
+
 		<%
-			}
+		}
 		%>
+
 	</div>
 </c:if>
 
@@ -173,68 +186,65 @@ taggedPagesURL.setParameter("nodeId", String.valueOf(node.getNodeId()));
 	<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 </div>
 
-<c:if test="<%= wikiPage != null %>">
-	<div class="separator"><!-- --></div>
-
-	<c:if test="<%= (children != null) && (children.size() > 0) %>">
-
-		<h3><liferay-ui:message key="children"/></h3>
-
-		<ul class="children-pages">
-			<%
-			PortletURL curPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
-
-			for (int i = 0; i < children.size(); i++) {
-				WikiPage curPage = (WikiPage)children.get(i);
-
-				curPageURL.setParameter("title", curPage.getTitle());
-			%>
-				<li><a href="<%= curPageURL %>"><%= curPage.getTitle() %></a></li>
-			<%
-			}
-			%>
-		</ul>
-	</c:if>
-
-	<liferay-ui:icon image="add_article" message='add-children-page' url="<%= addPageURL.toString() %>" label="<%= true %>" />
-
-	<br/>
-
-</c:if>
-
-<c:if test="<%= attachments.length > 0 %>">
-
-	<%
-	PortletURL viewAttachmentsURL = PortletURLUtil.clone(viewPageURL, renderResponse);
-
-	viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
-	%>
-
+<c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) %>">
 	<div>
 		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" label="<%= true %>" />
 	</div>
-</c:if>
 
-<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
-	<c:if test="<%= Validator.isNotNull(formattedContent) %>">
-		<br />
+	<c:if test="<%= (childPages.size() > 0) || WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
+		<div class="separator"><!-- --></div>
 	</c:if>
 
-	<liferay-ui:tabs names="comments" />
+	<c:if test="<%= childPages.size() > 0 %>">
+		<h3><liferay-ui:message key="children" /></h3>
 
-	<portlet:actionURL var="discussionURL">
-		<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
-	</portlet:actionURL>
+		<ul class="child-pages">
 
-	<liferay-ui:discussion
-		formName="fm2"
-		formAction="<%= discussionURL %>"
-		className="<%= WikiPage.class.getName() %>"
-		classPK="<%= wikiPage.getResourcePrimKey() %>"
-		userId="<%= wikiPage.getUserId() %>"
-		subject="<%= wikiPage.getTitle() %>"
-		redirect="<%= currentURL %>"
-	/>
+			<%
+			PortletURL curPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+
+			for (int i = 0; i < childPages.size(); i++) {
+				WikiPage curPage = (WikiPage)childPages.get(i);
+
+				curPageURL.setParameter("title", curPage.getTitle());
+			%>
+
+				<li>
+					<a href="<%= curPageURL %>"><%= curPage.getTitle() %></a>
+				</li>
+
+			<%
+			}
+			%>
+
+		</ul>
+	</c:if>
+
+	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
+		<div>
+			<liferay-ui:icon image="add_article" message="add-child-page" url="<%= addPageURL.toString() %>" label="<%= true %>" />
+		</div>
+	</c:if>
+
+	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
+		<br />
+
+		<liferay-ui:tabs names="comments" />
+
+		<portlet:actionURL var="discussionURL">
+			<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
+		</portlet:actionURL>
+
+		<liferay-ui:discussion
+			formName="fm2"
+			formAction="<%= discussionURL %>"
+			className="<%= WikiPage.class.getName() %>"
+			classPK="<%= wikiPage.getResourcePrimKey() %>"
+			userId="<%= wikiPage.getUserId() %>"
+			subject="<%= wikiPage.getTitle() %>"
+			redirect="<%= currentURL %>"
+		/>
+	</c:if>
 </c:if>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">

@@ -34,8 +34,8 @@ public class WikiPageDisplayImpl implements WikiPageDisplay {
 
 	public WikiPageDisplayImpl(
 		long userId, long nodeId, String title, double version, String content,
-		String formattedContent, String format, boolean head, String redirectTo,
-		String[] attachments) {
+		String formattedContent, String format, boolean head,
+		String parentTitle, String redirectTitle, String[] attachments) {
 
 		_userId = userId;
 		_nodeId = nodeId;
@@ -45,7 +45,8 @@ public class WikiPageDisplayImpl implements WikiPageDisplay {
 		_formattedContent = formattedContent;
 		_format = format;
 		_head = head;
-		_redirectTo = redirectTo;
+		_parentTitle = parentTitle;
+		_redirectTitle = redirectTitle;
 		_attachments = attachments;
 	}
 
@@ -117,12 +118,20 @@ public class WikiPageDisplayImpl implements WikiPageDisplay {
 		_head = head;
 	}
 
-	public String getRedirectTo() {
-		return _redirectTo;
+	public String getParentTitle() {
+		return _parentTitle;
 	}
 
-	public void setRedirectTo(String redirectTo) {
-		_redirectTo = redirectTo;
+	public void setParentTitle(String parentTitle) {
+		_parentTitle = parentTitle;
+	}
+
+	public String getRedirectTitle() {
+		return _redirectTitle;
+	}
+
+	public void setRedirectTitle(String redirectTitle) {
+		_redirectTitle = redirectTitle;
 	}
 
 	public String[] getAttachments() {
@@ -141,7 +150,8 @@ public class WikiPageDisplayImpl implements WikiPageDisplay {
 	private String _formattedContent;
 	private String _format;
 	private boolean _head;
-	private String _redirectTo;
+	private String _parentTitle;
+	private String _redirectTitle;
 	private String[] _attachments;
 
 }

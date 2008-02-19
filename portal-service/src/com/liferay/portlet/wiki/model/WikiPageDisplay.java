@@ -66,9 +66,13 @@ public interface WikiPageDisplay extends Serializable {
 
 	public void setHead(boolean head);
 
-	public String getRedirectTo();
+	public String getParentTitle();
 
-	public void setRedirectTo(String redirectTo);
+	public void setParentTitle(String parentTitle);
+
+	public String getRedirectTitle();
+
+	public void setRedirectTitle(String redirectTitle);
 
 	public String[] getAttachments();
 

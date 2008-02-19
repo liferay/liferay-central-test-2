@@ -59,9 +59,9 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 			portletURL.getParameter("struts_action"));
 
 		if (strutsAction.equals("/wiki/view")) {
-			String title = portletURL.getParameter("title");
 			String nodeId = portletURL.getParameter("nodeId");
 			String nodeName = portletURL.getParameter("nodeName");
+			String title = portletURL.getParameter("title");
 
 			if (Validator.isNotNull(nodeId) || Validator.isNotNull(nodeName)) {
 				StringMaker sm = new StringMaker();
@@ -72,10 +72,12 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 				if (Validator.isNotNull(nodeId)) {
 					sm.append(nodeId);
+
 					portletURL.addParameterIncludedInPath("nodeId");
 				}
 				else if (Validator.isNotNull(nodeName)) {
 					sm.append(nodeName);
+
 					portletURL.addParameterIncludedInPath("nodeName");
 				}
 

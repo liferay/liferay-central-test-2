@@ -82,8 +82,8 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		newWikiPage.setContent(randomString());
 		newWikiPage.setFormat(randomString());
 		newWikiPage.setHead(randomBoolean());
-		newWikiPage.setRedirectTo(randomString());
-		newWikiPage.setParent(randomString());
+		newWikiPage.setParentTitle(randomString());
+		newWikiPage.setRedirectTitle(randomString());
 
 		_persistence.update(newWikiPage);
 
@@ -104,9 +104,10 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingWikiPage.getContent(), newWikiPage.getContent());
 		assertEquals(existingWikiPage.getFormat(), newWikiPage.getFormat());
 		assertEquals(existingWikiPage.getHead(), newWikiPage.getHead());
-		assertEquals(existingWikiPage.getRedirectTo(),
-			newWikiPage.getRedirectTo());
-		assertEquals(existingWikiPage.getParent(), newWikiPage.getParent());
+		assertEquals(existingWikiPage.getParentTitle(),
+			newWikiPage.getParentTitle());
+		assertEquals(existingWikiPage.getRedirectTitle(),
+			newWikiPage.getRedirectTitle());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -162,8 +163,8 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		wikiPage.setContent(randomString());
 		wikiPage.setFormat(randomString());
 		wikiPage.setHead(randomBoolean());
-		wikiPage.setRedirectTo(randomString());
-		wikiPage.setParent(randomString());
+		wikiPage.setParentTitle(randomString());
+		wikiPage.setRedirectTitle(randomString());
 
 		_persistence.update(wikiPage);
 

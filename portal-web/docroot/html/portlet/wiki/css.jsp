@@ -67,7 +67,7 @@
 	padding: 3px;
 }
 
-.portlet-wiki .children-pages li {
+.portlet-wiki .child-pages li {
 	font-weight: bold;
 	font-size: 1.1em;
 }

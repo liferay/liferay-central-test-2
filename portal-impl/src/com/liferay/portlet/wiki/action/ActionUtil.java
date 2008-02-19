@@ -61,6 +61,9 @@ public class ActionUtil {
 	}
 
 	public static void getNode(HttpServletRequest req) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String nodeName = ParamUtil.getString(req, "nodeName");
 
@@ -70,11 +73,8 @@ public class ActionUtil {
 			node = WikiNodeServiceUtil.getNode(nodeId);
 		}
 		else if (Validator.isNotNull(nodeName)) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
-
 			node = WikiNodeServiceUtil.getNode(
-				themeDisplay.getLayout().getGroupId(), nodeName);
+				themeDisplay.getPortletGroupId(), nodeName);
 		}
 
 		req.setAttribute(WebKeys.WIKI_NODE, node);
