@@ -901,6 +901,7 @@ String[] availableLocales = null;
 				hasSavePermission = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE);
 			}
 			%>
+
 			<c:if test="<%= hasSavePermission %>">
 				<input type="submit" value="<liferay-ui:message key="save" />" />
 
