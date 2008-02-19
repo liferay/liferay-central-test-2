@@ -159,8 +159,8 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 
 			filesEl.appendChild(fileEl);
 
-			fileEl.setAttribute("name", String.valueOf(image.getImageId()));
-			fileEl.setAttribute("desc", image.getDescription());
+			fileEl.setAttribute("name", image.getNameWithExtension());
+			fileEl.setAttribute("desc", image.getNameWithExtension());
 			fileEl.setAttribute("size", getSize(portalImage.getSize()));
 
 			StringMaker url = new StringMaker();

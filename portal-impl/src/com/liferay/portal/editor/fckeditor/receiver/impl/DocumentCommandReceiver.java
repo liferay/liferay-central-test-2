@@ -156,7 +156,7 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			filesEl.appendChild(fileEl);
 
 			fileEl.setAttribute("name", fileEntry.getTitleWithExtension());
-			fileEl.setAttribute("desc", fileEntry.getTitle());
+			fileEl.setAttribute("desc", fileEntry.getTitleWithExtension());
 			fileEl.setAttribute("size", getSize(fileEntry.getSize()));
 
 			StringMaker url = new StringMaker();
