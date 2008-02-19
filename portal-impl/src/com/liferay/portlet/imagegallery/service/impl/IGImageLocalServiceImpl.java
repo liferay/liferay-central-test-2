@@ -123,7 +123,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			String extension = FileUtil.getExtension(file.getName());
 			String nameWithExtension = name;
 
-			if (Validator.isNotNull(name) && name.endsWith(extension)) {
+			if (Validator.isNotNull(name) &&
+				StringUtil.endsWith(name, extension)) {
+
 				name = FileUtil.stripExtension(name);
 			}
 
@@ -692,7 +694,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			if (Validator.isNull(nameWithExtension)) {
 				nameWithExtension = fileName;
 			}
-			else if (!nameWithExtension.endsWith(extension)) {
+			else if (!StringUtil.endsWith(nameWithExtension, extension)) {
 				throw new ImageNameException();
 			}
 		}
