@@ -959,7 +959,7 @@ public class PortalUtil {
 					(PropsValues.WEB_SERVER_HTTP_PORT != Http.HTTP_PORT)) {
 
 					sm.append(StringPool.COLON);
-					sm.append(PropsValues.WEB_SERVER_PROTOCOL);
+					sm.append(PropsValues.WEB_SERVER_HTTP_PORT);
 				}
 			}
 		}
