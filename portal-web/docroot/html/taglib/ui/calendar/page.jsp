@@ -86,12 +86,13 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 		<%
 		for (int i = 0; i < 7;  i++) {
 			int daysIndex = (selCal.getFirstDayOfWeek() + i - 1) % 7;
-			String className = "";
+
+			String className = StringPool.BLANK;
 
 			if (i == 0) {
 				className = "first";
 			}
-			else if(i == 6) {
+			else if (i == 6) {
 				className = "last";
 			}
 		%>
@@ -146,7 +147,6 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 				dayOfWeek = 1;
 			}
 
-
 			Calendar tempCal = (Calendar)selCal.clone();
 
 			tempCal.set(Calendar.MONTH, selMonth);
@@ -174,6 +174,7 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 			else if(dayOfWeek == 7) {
 				className += " last";
 			}
+
 			dayOfWeek++;
 		%>
 

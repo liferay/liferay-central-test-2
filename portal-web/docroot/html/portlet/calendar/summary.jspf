@@ -21,7 +21,6 @@
  * SOFTWARE.
  */
 %>
-<%@ page import="com.liferay.portal.kernel.util.DateUtil_IW" %>
 
 <script type="text/javascript">
 	function <portlet:namespace />updateCalendar(month, day, year) {
@@ -30,32 +29,30 @@
 </script>
 
 <%
-	int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
+int maxDayOfMonth = selCal.getActualMaximum(Calendar.DATE);
 
-	Set data = new HashSet();
+Set data = new HashSet();
 
-	for (int i = 1; i <= maxDayOfMonth; i++) {
-		Calendar tempCal = (Calendar)selCal.clone();
-		tempCal.set(Calendar.MONTH, selMonth);
-		tempCal.set(Calendar.DATE, i);
-		tempCal.set(Calendar.YEAR, selYear);
+for (int i = 1; i <= maxDayOfMonth; i++) {
+	Calendar tempCal = (Calendar)selCal.clone();
+	tempCal.set(Calendar.MONTH, selMonth);
+	tempCal.set(Calendar.DATE, i);
+	tempCal.set(Calendar.YEAR, selYear);
 
-		boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId.longValue(), tempCal, eventType);
+	boolean hasEvents = CalEventLocalServiceUtil.hasEvents(portletGroupId.longValue(), tempCal, eventType);
 
-		if (hasEvents) {
-			data.add(new Integer(i));
-		}
+	if (hasEvents) {
+		data.add(new Integer(i));
 	}
-	DateFormat dateFormat = DateFormat.getDateInstance(DateFormat.LONG, locale);
+}
 %>
 
 <table width="100%">
 <tr>
 	<td style="padding-right: 10px;" valign="top" width="1%">
-
 		<div class="calendar-container float-container">
 			<div class="calendar-day">
-		    	<h2 class="day-text"><%= DateUtil_IW.getInstance().getCurrentDate("EEEE", locale) %></h2>
+		    	<h2 class="day-text"><%= DateUtil.getCurrentDate("EEEE", locale) %></h2>
 		        <h3 class="day-number"><%= curDay %></h3>
 		    </div>
 

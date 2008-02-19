@@ -62,14 +62,10 @@ for (int i = 0; i < results.size(); i++) {
 	}
 	else {
 		if (event.isTimeZoneSensitive()) {
-			row.addText(
-				dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) + " &#150; " + dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)),
-				rowURL);
+			row.addText(dateFormatTime.format(Time.getDate(event.getStartDate(), timeZone)) + " &#150; " + dateFormatTime.format(Time.getDate(CalUtil.getEndTime(event), timeZone)), rowURL);
 		}
 		else {
-			row.addText(
-				dateFormatTime.format(event.getStartDate()) + " &#150; " + dateFormatTime.format(CalUtil.getEndTime(event)),
-				rowURL);
+			row.addText(dateFormatTime.format(event.getStartDate()) + " &#150; " + dateFormatTime.format(CalUtil.getEndTime(event)), rowURL);
 		}
 	}
 
