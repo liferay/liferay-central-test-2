@@ -146,7 +146,7 @@ alter table Layout add iconImage BOOLEAN;
 alter table Layout add iconImageId LONG;
 alter table Layout add wapThemeId VARCHAR(75) null;
 alter table Layout add wapColorSchemeId VARCHAR(75) null;
-alter table Layout add css VARCHAR(75) null;
+alter table Layout add css STRING null;
 update Layout set parentLayoutId = '0' where parentLayoutId = '-1';
 
 alter table LayoutSet add layoutSetId LONG;
@@ -154,7 +154,7 @@ alter table LayoutSet add logo BOOLEAN;
 alter table LayoutSet add logoId LONG;
 alter table LayoutSet add wapThemeId VARCHAR(75) null;
 alter table LayoutSet add wapColorSchemeId VARCHAR(75) null;
-alter table LayoutSet add css VARCHAR(75) null;
+alter table LayoutSet add css STRING null;
 
 COMMIT_TRANSACTION;
 
