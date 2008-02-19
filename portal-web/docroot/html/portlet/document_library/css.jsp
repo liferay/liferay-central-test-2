@@ -95,5 +95,5 @@
 }
 
 .portlet-document-library .upload-file {
-	background-image: url(<%= themeDisplay.getPathThemeImages() %>/document_library/page.png);
+	background-image: url(<%= themeImagesPath %>/document_library/page.png);
 }
