@@ -32,6 +32,7 @@ import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -237,7 +238,10 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultUser.setEmailAddress("default@" + company.getMx());
 			defaultUser.setLanguageId(null);
 			defaultUser.setTimeZoneId(null);
-			defaultUser.setGreeting("Welcome!");
+			defaultUser.setGreeting(
+				LanguageUtil.format(
+					companyId, defaultUser.getLocale(), "welcome-x",
+					StringPool.BLANK));
 			defaultUser.setLoginDate(now);
 			defaultUser.setFailedLoginAttempts(0);
 			defaultUser.setAgreedToTermsOfUse(true);

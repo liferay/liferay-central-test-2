@@ -234,9 +234,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		String fullName = UserImpl.getFullName(firstName, middleName, lastName);
 
-		String greeting =
-			LanguageUtil.get(companyId, locale, "welcome") + ", " + fullName +
-				"!";
+		String greeting = LanguageUtil.format(
+			companyId, locale, "welcome-x", " " + fullName);
 
 		User user = userPersistence.create(userId);
 
