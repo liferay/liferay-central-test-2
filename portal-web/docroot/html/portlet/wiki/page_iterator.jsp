@@ -290,4 +290,4 @@ for (int i = 0; i < results.size(); i++) {
 	<br />
 </c:if>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= type.equals("history")?false:true %>" />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= type.equals("history") ? false : true %>" />
