@@ -81,11 +81,13 @@
 <%@ page import="com.liferay.portlet.tags.util.TagsUtil" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiNode" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPage" %>
+<%@ page import="com.liferay.portlet.wiki.model.WikiPageDisplay" %>
 <%@ page import="com.liferay.portlet.wiki.model.WikiPageResource" %>
 <%@ page import="com.liferay.portlet.wiki.model.impl.WikiPageImpl" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.WikiPageResourceLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %>
+<%@ page import="com.liferay.portlet.wiki.util.WikiCacheUtil" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
 <%@ page import="com.liferay.util.xml.DocUtil" %>
 
