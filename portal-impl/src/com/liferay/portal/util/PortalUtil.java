@@ -680,10 +680,6 @@ public class PortalUtil {
 
 		String layoutFriendlyURL = layout.getFriendlyURL();
 
-		if (Validator.isNull(layoutFriendlyURL)) {
-			layoutFriendlyURL = layout.getDefaultFriendlyURL();
-		}
-
 		LayoutSet layoutSet = layout.getLayoutSet();
 
 		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
@@ -859,30 +855,13 @@ public class PortalUtil {
 			Layout layout = null;
 
 			try {
-
-				// Start by trying to parse the url part as a layout id because
-				// it is faster to eliminate this possibility first
-
-				long layoutId = GetterUtil.getLong(urlParts[3]);
-
-				layout = LayoutLocalServiceUtil.getLayout(
-					group.getGroupId(), privateLayout, layoutId);
+				layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+					group.getGroupId(), privateLayout,
+					StringPool.SLASH + urlParts[3]);
 
 				return layout.getPlid();
 			}
-			catch (Exception e1) {
-				try {
-
-					// Now try as a friendly url
-
-					layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-						group.getGroupId(), privateLayout,
-						StringPool.SLASH + urlParts[3]);
-
-					return layout.getPlid();
-				}
-				catch (Exception e2) {
-				}
+			catch (Exception e) {
 			}
 		}
 
@@ -1062,18 +1041,8 @@ public class PortalUtil {
 			friendlyURL = friendlyURL.substring(0, friendlyURL.length() - 1);
 		}
 
-		Layout layout = null;
-
-		try {
-			layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
-				groupId, privateLayout, friendlyURL);
-		}
-		catch(NoSuchLayoutException nsle) {
-			long layoutId = GetterUtil.getLong(friendlyURL.substring(1));
-
-			layout = LayoutLocalServiceUtil.getLayout(
-				groupId, privateLayout, layoutId);
-		}
+		Layout layout = LayoutLocalServiceUtil.getFriendlyURLLayout(
+			groupId, privateLayout, friendlyURL);
 
 		return new Object[] {layout, queryString};
 	}

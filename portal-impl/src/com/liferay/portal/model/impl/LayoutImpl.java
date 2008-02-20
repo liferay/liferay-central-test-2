@@ -453,10 +453,6 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		super.setTypeSettings(PropertiesUtil.toString(_typeSettingsProperties));
 	}
 
-	public String getDefaultFriendlyURL() {
-		return StringPool.SLASH + getLayoutId();
-	}
-
 	public LayoutSet getLayoutSet() {
 		LayoutSet layoutSet = null;
 

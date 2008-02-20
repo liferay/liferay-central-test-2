@@ -25,7 +25,6 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -84,15 +83,8 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 
 		String friendlyURL = layout.getFriendlyURL();
 
-		if (Validator.isNotNull(friendlyURL)) {
-			if (layoutName.equals(friendlyURL)) {
-				return layout;
-			}
-		}
-		else {
-			if (layoutName.equals(String.valueOf(layout.getPlid()))) {
-				return layout;
-			}
+		if (layoutName.equals(friendlyURL)) {
+			return layout;
 		}
 
 		List layoutChildren = layout.getChildren();
@@ -116,14 +108,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 	}
 
 	private String _getLayoutName(Layout layout) {
-		String friendlyURL = layout.getFriendlyURL();
-
-		if (Validator.isNotNull(friendlyURL)) {
-			return friendlyURL;
-		}
-		else {
-			return String.valueOf(layout.getPlid());
-		}
+		return layout.getFriendlyURL();
 	}
 
 	private String _getLayoutName(String folderName) {

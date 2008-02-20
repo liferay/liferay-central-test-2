@@ -121,8 +121,6 @@ public interface Layout extends LayoutModel {
 	public void setTypeSettingsProperties(
 		java.util.Properties typeSettingsProperties);
 
-	public java.lang.String getDefaultFriendlyURL();
-
 	public com.liferay.portal.model.LayoutSet getLayoutSet();
 
 	public boolean isInheritLookAndFeel();
