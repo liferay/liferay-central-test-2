@@ -52,11 +52,28 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalStructureLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalStructure addJournalStructure(
-		com.liferay.portlet.journal.model.JournalStructure model)
+		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
-		return journalStructureLocalService.addJournalStructure(model);
+		return journalStructureLocalService.addJournalStructure(journalStructure);
+	}
+
+	public static void deleteJournalStructure(long id)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		journalStructureLocalService.deleteJournalStructure(id);
+	}
+
+	public static void deleteJournalStructure(
+		com.liferay.portlet.journal.model.JournalStructure journalStructure)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
+
+		journalStructureLocalService.deleteJournalStructure(journalStructure);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalStructure> dynamicQuery(
@@ -77,11 +94,11 @@ public class JournalStructureLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalStructure updateJournalStructure(
-		com.liferay.portlet.journal.model.JournalStructure model)
+		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException {
 		JournalStructureLocalService journalStructureLocalService = JournalStructureLocalServiceFactory.getService();
 
-		return journalStructureLocalService.updateJournalStructure(model);
+		return journalStructureLocalService.updateJournalStructure(journalStructure);
 	}
 
 	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {

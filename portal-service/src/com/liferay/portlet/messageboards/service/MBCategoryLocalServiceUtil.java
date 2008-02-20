@@ -52,11 +52,28 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBCategoryLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBCategory addMBCategory(
-		com.liferay.portlet.messageboards.model.MBCategory model)
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
-		return mbCategoryLocalService.addMBCategory(model);
+		return mbCategoryLocalService.addMBCategory(mbCategory);
+	}
+
+	public static void deleteMBCategory(long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		mbCategoryLocalService.deleteMBCategory(categoryId);
+	}
+
+	public static void deleteMBCategory(
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		mbCategoryLocalService.deleteMBCategory(mbCategory);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> dynamicQuery(
@@ -76,11 +93,11 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBCategory updateMBCategory(
-		com.liferay.portlet.messageboards.model.MBCategory model)
+		com.liferay.portlet.messageboards.model.MBCategory mbCategory)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
-		return mbCategoryLocalService.updateMBCategory(model);
+		return mbCategoryLocalService.updateMBCategory(mbCategory);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

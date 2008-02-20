@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class ImageLocalServiceUtil {
 	public static com.liferay.portal.model.Image addImage(
-		com.liferay.portal.model.Image model)
+		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
-		return imageLocalService.addImage(model);
+		return imageLocalService.addImage(image);
+	}
+
+	public static void deleteImage(long imageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		imageLocalService.deleteImage(imageId);
+	}
+
+	public static void deleteImage(com.liferay.portal.model.Image image)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
+
+		imageLocalService.deleteImage(image);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Image> dynamicQuery(
@@ -76,11 +92,11 @@ public class ImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Image updateImage(
-		com.liferay.portal.model.Image model)
+		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
-		return imageLocalService.updateImage(model);
+		return imageLocalService.updateImage(image);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -789,13 +805,6 @@ public class ImageLocalServiceUtil {
 		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
 
 		imageLocalService.afterPropertiesSet();
-	}
-
-	public static void deleteImage(long imageId)
-		throws com.liferay.portal.SystemException {
-		ImageLocalService imageLocalService = ImageLocalServiceFactory.getService();
-
-		imageLocalService.deleteImage(imageId);
 	}
 
 	public static com.liferay.portal.model.Image getImage(long imageId)

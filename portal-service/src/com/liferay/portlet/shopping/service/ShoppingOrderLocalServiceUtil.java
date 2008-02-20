@@ -52,11 +52,28 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingOrderLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingOrder addShoppingOrder(
-		com.liferay.portlet.shopping.model.ShoppingOrder model)
+		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
 		throws com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
 
-		return shoppingOrderLocalService.addShoppingOrder(model);
+		return shoppingOrderLocalService.addShoppingOrder(shoppingOrder);
+	}
+
+	public static void deleteShoppingOrder(long orderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
+
+		shoppingOrderLocalService.deleteShoppingOrder(orderId);
+	}
+
+	public static void deleteShoppingOrder(
+		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
+
+		shoppingOrderLocalService.deleteShoppingOrder(shoppingOrder);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> dynamicQuery(
@@ -77,11 +94,11 @@ public class ShoppingOrderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrder updateShoppingOrder(
-		com.liferay.portlet.shopping.model.ShoppingOrder model)
+		com.liferay.portlet.shopping.model.ShoppingOrder shoppingOrder)
 		throws com.liferay.portal.SystemException {
 		ShoppingOrderLocalService shoppingOrderLocalService = ShoppingOrderLocalServiceFactory.getService();
 
-		return shoppingOrderLocalService.updateShoppingOrder(model);
+		return shoppingOrderLocalService.updateShoppingOrder(shoppingOrder);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {

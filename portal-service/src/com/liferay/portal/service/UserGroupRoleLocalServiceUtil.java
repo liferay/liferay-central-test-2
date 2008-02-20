@@ -52,11 +52,29 @@ package com.liferay.portal.service;
  */
 public class UserGroupRoleLocalServiceUtil {
 	public static com.liferay.portal.model.UserGroupRole addUserGroupRole(
-		com.liferay.portal.model.UserGroupRole model)
+		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 
-		return userGroupRoleLocalService.addUserGroupRole(model);
+		return userGroupRoleLocalService.addUserGroupRole(userGroupRole);
+	}
+
+	public static void deleteUserGroupRole(
+		com.liferay.portal.service.persistence.UserGroupRolePK userGroupRolePK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		userGroupRoleLocalService.deleteUserGroupRole(userGroupRolePK);
+	}
+
+	public static void deleteUserGroupRole(
+		com.liferay.portal.model.UserGroupRole userGroupRole)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		userGroupRoleLocalService.deleteUserGroupRole(userGroupRole);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroupRole> dynamicQuery(
@@ -77,11 +95,11 @@ public class UserGroupRoleLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroupRole updateUserGroupRole(
-		com.liferay.portal.model.UserGroupRole model)
+		com.liferay.portal.model.UserGroupRole userGroupRole)
 		throws com.liferay.portal.SystemException {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 
-		return userGroupRoleLocalService.updateUserGroupRole(model);
+		return userGroupRoleLocalService.updateUserGroupRole(userGroupRole);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

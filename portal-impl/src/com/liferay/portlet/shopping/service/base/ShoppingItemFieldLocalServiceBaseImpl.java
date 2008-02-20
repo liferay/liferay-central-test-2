@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.shopping.service.base;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.shopping.model.ShoppingItemField;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -85,19 +85,21 @@ import java.util.List;
  */
 public abstract class ShoppingItemFieldLocalServiceBaseImpl
 	implements ShoppingItemFieldLocalService, InitializingBean {
-	public ShoppingItemField addShoppingItemField(ShoppingItemField model)
-		throws SystemException {
-		ShoppingItemField shoppingItemField = new ShoppingItemFieldImpl();
-
+	public ShoppingItemField addShoppingItemField(
+		ShoppingItemField shoppingItemField) throws SystemException {
 		shoppingItemField.setNew(true);
 
-		shoppingItemField.setItemFieldId(model.getItemFieldId());
-		shoppingItemField.setItemId(model.getItemId());
-		shoppingItemField.setName(model.getName());
-		shoppingItemField.setValues(model.getValues());
-		shoppingItemField.setDescription(model.getDescription());
-
 		return shoppingItemFieldPersistence.update(shoppingItemField);
+	}
+
+	public void deleteShoppingItemField(long itemFieldId)
+		throws PortalException, SystemException {
+		shoppingItemFieldPersistence.remove(itemFieldId);
+	}
+
+	public void deleteShoppingItemField(ShoppingItemField shoppingItemField)
+		throws PortalException, SystemException {
+		shoppingItemFieldPersistence.remove(shoppingItemField);
 	}
 
 	public List<ShoppingItemField> dynamicQuery(
@@ -112,9 +114,11 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ShoppingItemField updateShoppingItemField(ShoppingItemField model)
-		throws SystemException {
-		return shoppingItemFieldPersistence.update(model, true);
+	public ShoppingItemField updateShoppingItemField(
+		ShoppingItemField shoppingItemField) throws SystemException {
+		shoppingItemField.setNew(false);
+
+		return shoppingItemFieldPersistence.update(shoppingItemField, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

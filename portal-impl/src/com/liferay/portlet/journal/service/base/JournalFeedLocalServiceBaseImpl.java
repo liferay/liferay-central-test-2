@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -47,7 +48,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.journal.model.JournalFeed;
-import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -102,37 +102,21 @@ import java.util.List;
  */
 public abstract class JournalFeedLocalServiceBaseImpl
 	implements JournalFeedLocalService, InitializingBean {
-	public JournalFeed addJournalFeed(JournalFeed model)
+	public JournalFeed addJournalFeed(JournalFeed journalFeed)
 		throws SystemException {
-		JournalFeed journalFeed = new JournalFeedImpl();
-
 		journalFeed.setNew(true);
 
-		journalFeed.setUuid(model.getUuid());
-		journalFeed.setId(model.getId());
-		journalFeed.setGroupId(model.getGroupId());
-		journalFeed.setCompanyId(model.getCompanyId());
-		journalFeed.setUserId(model.getUserId());
-		journalFeed.setUserName(model.getUserName());
-		journalFeed.setCreateDate(model.getCreateDate());
-		journalFeed.setModifiedDate(model.getModifiedDate());
-		journalFeed.setFeedId(model.getFeedId());
-		journalFeed.setName(model.getName());
-		journalFeed.setDescription(model.getDescription());
-		journalFeed.setType(model.getType());
-		journalFeed.setStructureId(model.getStructureId());
-		journalFeed.setTemplateId(model.getTemplateId());
-		journalFeed.setRendererTemplateId(model.getRendererTemplateId());
-		journalFeed.setDelta(model.getDelta());
-		journalFeed.setOrderByCol(model.getOrderByCol());
-		journalFeed.setOrderByType(model.getOrderByType());
-		journalFeed.setTargetLayoutFriendlyUrl(model.getTargetLayoutFriendlyUrl());
-		journalFeed.setTargetPortletId(model.getTargetPortletId());
-		journalFeed.setContentField(model.getContentField());
-		journalFeed.setFeedType(model.getFeedType());
-		journalFeed.setFeedVersion(model.getFeedVersion());
-
 		return journalFeedPersistence.update(journalFeed);
+	}
+
+	public void deleteJournalFeed(long id)
+		throws PortalException, SystemException {
+		journalFeedPersistence.remove(id);
+	}
+
+	public void deleteJournalFeed(JournalFeed journalFeed)
+		throws PortalException, SystemException {
+		journalFeedPersistence.remove(journalFeed);
 	}
 
 	public List<JournalFeed> dynamicQuery(
@@ -147,9 +131,11 @@ public abstract class JournalFeedLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public JournalFeed updateJournalFeed(JournalFeed model)
+	public JournalFeed updateJournalFeed(JournalFeed journalFeed)
 		throws SystemException {
-		return journalFeedPersistence.update(model, true);
+		journalFeed.setNew(false);
+
+		return journalFeedPersistence.update(journalFeed, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

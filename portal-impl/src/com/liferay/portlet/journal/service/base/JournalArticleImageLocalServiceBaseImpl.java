@@ -27,11 +27,11 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.journal.model.JournalArticleImage;
-import com.liferay.portlet.journal.model.impl.JournalArticleImageImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceFactory;
@@ -88,21 +88,22 @@ import java.util.List;
  */
 public abstract class JournalArticleImageLocalServiceBaseImpl
 	implements JournalArticleImageLocalService, InitializingBean {
-	public JournalArticleImage addJournalArticleImage(JournalArticleImage model)
-		throws SystemException {
-		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
-
+	public JournalArticleImage addJournalArticleImage(
+		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage.setNew(true);
 
-		journalArticleImage.setArticleImageId(model.getArticleImageId());
-		journalArticleImage.setGroupId(model.getGroupId());
-		journalArticleImage.setArticleId(model.getArticleId());
-		journalArticleImage.setVersion(model.getVersion());
-		journalArticleImage.setElName(model.getElName());
-		journalArticleImage.setLanguageId(model.getLanguageId());
-		journalArticleImage.setTempImage(model.getTempImage());
-
 		return journalArticleImagePersistence.update(journalArticleImage);
+	}
+
+	public void deleteJournalArticleImage(long articleImageId)
+		throws PortalException, SystemException {
+		journalArticleImagePersistence.remove(articleImageId);
+	}
+
+	public void deleteJournalArticleImage(
+		JournalArticleImage journalArticleImage)
+		throws PortalException, SystemException {
+		journalArticleImagePersistence.remove(journalArticleImage);
 	}
 
 	public List<JournalArticleImage> dynamicQuery(
@@ -118,8 +119,10 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 	}
 
 	public JournalArticleImage updateJournalArticleImage(
-		JournalArticleImage model) throws SystemException {
-		return journalArticleImagePersistence.update(model, true);
+		JournalArticleImage journalArticleImage) throws SystemException {
+		journalArticleImage.setNew(false);
+
+		return journalArticleImagePersistence.update(journalArticleImage, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

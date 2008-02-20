@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface ActivityTrackerLocalService {
 	public com.liferay.portal.model.ActivityTracker addActivityTracker(
-		com.liferay.portal.model.ActivityTracker model)
+		com.liferay.portal.model.ActivityTracker activityTracker)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteActivityTracker(long activityTrackerId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteActivityTracker(
+		com.liferay.portal.model.ActivityTracker activityTracker)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.ActivityTracker> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface ActivityTrackerLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ActivityTracker updateActivityTracker(
-		com.liferay.portal.model.ActivityTracker model)
+		com.liferay.portal.model.ActivityTracker activityTracker)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

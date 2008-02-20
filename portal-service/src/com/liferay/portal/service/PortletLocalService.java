@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface PortletLocalService {
 	public com.liferay.portal.model.Portlet addPortlet(
-		com.liferay.portal.model.Portlet model)
+		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException;
+
+	public void deletePortlet(long id)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deletePortlet(com.liferay.portal.model.Portlet portlet)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Portlet> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface PortletLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Portlet updatePortlet(
-		com.liferay.portal.model.Portlet model)
+		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

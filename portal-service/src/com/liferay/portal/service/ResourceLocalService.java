@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface ResourceLocalService {
 	public com.liferay.portal.model.Resource addResource(
-		com.liferay.portal.model.Resource model)
+		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteResource(long resourceId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteResource(com.liferay.portal.model.Resource resource)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Resource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface ResourceLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Resource updateResource(
-		com.liferay.portal.model.Resource model)
+		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -371,14 +379,6 @@ public interface ResourceLocalService {
 		java.lang.String name, java.lang.String primKey,
 		boolean portletActions, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteResource(long resourceId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteResource(com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

@@ -50,8 +50,17 @@ package com.liferay.portlet.imagegallery.service;
  */
 public interface IGFolderLocalService {
 	public com.liferay.portlet.imagegallery.model.IGFolder addIGFolder(
-		com.liferay.portlet.imagegallery.model.IGFolder model)
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteIGFolder(long folderId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteIGFolder(
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.imagegallery.model.IGFolder> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface IGFolderLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.model.IGFolder updateIGFolder(
-		com.liferay.portlet.imagegallery.model.IGFolder model)
+		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence();

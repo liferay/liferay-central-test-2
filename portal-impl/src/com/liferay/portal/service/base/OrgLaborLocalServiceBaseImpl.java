@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.OrgLabor;
-import com.liferay.portal.model.impl.OrgLaborImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,30 +275,20 @@ import java.util.List;
  */
 public abstract class OrgLaborLocalServiceBaseImpl
 	implements OrgLaborLocalService, InitializingBean {
-	public OrgLabor addOrgLabor(OrgLabor model) throws SystemException {
-		OrgLabor orgLabor = new OrgLaborImpl();
-
+	public OrgLabor addOrgLabor(OrgLabor orgLabor) throws SystemException {
 		orgLabor.setNew(true);
 
-		orgLabor.setOrgLaborId(model.getOrgLaborId());
-		orgLabor.setOrganizationId(model.getOrganizationId());
-		orgLabor.setTypeId(model.getTypeId());
-		orgLabor.setSunOpen(model.getSunOpen());
-		orgLabor.setSunClose(model.getSunClose());
-		orgLabor.setMonOpen(model.getMonOpen());
-		orgLabor.setMonClose(model.getMonClose());
-		orgLabor.setTueOpen(model.getTueOpen());
-		orgLabor.setTueClose(model.getTueClose());
-		orgLabor.setWedOpen(model.getWedOpen());
-		orgLabor.setWedClose(model.getWedClose());
-		orgLabor.setThuOpen(model.getThuOpen());
-		orgLabor.setThuClose(model.getThuClose());
-		orgLabor.setFriOpen(model.getFriOpen());
-		orgLabor.setFriClose(model.getFriClose());
-		orgLabor.setSatOpen(model.getSatOpen());
-		orgLabor.setSatClose(model.getSatClose());
-
 		return orgLaborPersistence.update(orgLabor);
+	}
+
+	public void deleteOrgLabor(long orgLaborId)
+		throws PortalException, SystemException {
+		orgLaborPersistence.remove(orgLaborId);
+	}
+
+	public void deleteOrgLabor(OrgLabor orgLabor)
+		throws PortalException, SystemException {
+		orgLaborPersistence.remove(orgLabor);
 	}
 
 	public List<OrgLabor> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -313,8 +303,10 @@ public abstract class OrgLaborLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public OrgLabor updateOrgLabor(OrgLabor model) throws SystemException {
-		return orgLaborPersistence.update(model, true);
+	public OrgLabor updateOrgLabor(OrgLabor orgLabor) throws SystemException {
+		orgLabor.setNew(false);
+
+		return orgLaborPersistence.update(orgLabor, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

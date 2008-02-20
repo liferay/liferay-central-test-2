@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Permission;
-import com.liferay.portal.model.impl.PermissionImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,17 +275,21 @@ import java.util.List;
  */
 public abstract class PermissionLocalServiceBaseImpl
 	implements PermissionLocalService, InitializingBean {
-	public Permission addPermission(Permission model) throws SystemException {
-		Permission permission = new PermissionImpl();
-
+	public Permission addPermission(Permission permission)
+		throws SystemException {
 		permission.setNew(true);
 
-		permission.setPermissionId(model.getPermissionId());
-		permission.setCompanyId(model.getCompanyId());
-		permission.setActionId(model.getActionId());
-		permission.setResourceId(model.getResourceId());
-
 		return permissionPersistence.update(permission);
+	}
+
+	public void deletePermission(long permissionId)
+		throws PortalException, SystemException {
+		permissionPersistence.remove(permissionId);
+	}
+
+	public void deletePermission(Permission permission)
+		throws PortalException, SystemException {
+		permissionPersistence.remove(permission);
 	}
 
 	public List<Permission> dynamicQuery(
@@ -300,9 +304,11 @@ public abstract class PermissionLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public Permission updatePermission(Permission model)
+	public Permission updatePermission(Permission permission)
 		throws SystemException {
-		return permissionPersistence.update(model, true);
+		permission.setNew(false);
+
+		return permissionPersistence.update(permission, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

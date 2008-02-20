@@ -27,11 +27,11 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.polls.model.PollsChoice;
-import com.liferay.portlet.polls.model.impl.PollsChoiceImpl;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
 import com.liferay.portlet.polls.service.PollsQuestionLocalServiceFactory;
@@ -62,19 +62,21 @@ import java.util.List;
  */
 public abstract class PollsChoiceLocalServiceBaseImpl
 	implements PollsChoiceLocalService, InitializingBean {
-	public PollsChoice addPollsChoice(PollsChoice model)
+	public PollsChoice addPollsChoice(PollsChoice pollsChoice)
 		throws SystemException {
-		PollsChoice pollsChoice = new PollsChoiceImpl();
-
 		pollsChoice.setNew(true);
 
-		pollsChoice.setUuid(model.getUuid());
-		pollsChoice.setChoiceId(model.getChoiceId());
-		pollsChoice.setQuestionId(model.getQuestionId());
-		pollsChoice.setName(model.getName());
-		pollsChoice.setDescription(model.getDescription());
-
 		return pollsChoicePersistence.update(pollsChoice);
+	}
+
+	public void deletePollsChoice(long choiceId)
+		throws PortalException, SystemException {
+		pollsChoicePersistence.remove(choiceId);
+	}
+
+	public void deletePollsChoice(PollsChoice pollsChoice)
+		throws PortalException, SystemException {
+		pollsChoicePersistence.remove(pollsChoice);
 	}
 
 	public List<PollsChoice> dynamicQuery(
@@ -89,9 +91,11 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public PollsChoice updatePollsChoice(PollsChoice model)
+	public PollsChoice updatePollsChoice(PollsChoice pollsChoice)
 		throws SystemException {
-		return pollsChoicePersistence.update(model, true);
+		pollsChoice.setNew(false);
+
+		return pollsChoicePersistence.update(pollsChoice, true);
 	}
 
 	public PollsChoicePersistence getPollsChoicePersistence() {

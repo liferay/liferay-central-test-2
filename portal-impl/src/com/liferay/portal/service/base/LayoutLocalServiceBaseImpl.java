@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -298,35 +298,19 @@ import java.util.List;
  */
 public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 	InitializingBean {
-	public Layout addLayout(Layout model) throws SystemException {
-		Layout layout = new LayoutImpl();
-
+	public Layout addLayout(Layout layout) throws SystemException {
 		layout.setNew(true);
 
-		layout.setPlid(model.getPlid());
-		layout.setGroupId(model.getGroupId());
-		layout.setCompanyId(model.getCompanyId());
-		layout.setPrivateLayout(model.getPrivateLayout());
-		layout.setLayoutId(model.getLayoutId());
-		layout.setParentLayoutId(model.getParentLayoutId());
-		layout.setName(model.getName());
-		layout.setTitle(model.getTitle());
-		layout.setDescription(model.getDescription());
-		layout.setType(model.getType());
-		layout.setTypeSettings(model.getTypeSettings());
-		layout.setHidden(model.getHidden());
-		layout.setFriendlyURL(model.getFriendlyURL());
-		layout.setIconImage(model.getIconImage());
-		layout.setIconImageId(model.getIconImageId());
-		layout.setThemeId(model.getThemeId());
-		layout.setColorSchemeId(model.getColorSchemeId());
-		layout.setWapThemeId(model.getWapThemeId());
-		layout.setWapColorSchemeId(model.getWapColorSchemeId());
-		layout.setCss(model.getCss());
-		layout.setPriority(model.getPriority());
-		layout.setDlFolderId(model.getDlFolderId());
-
 		return layoutPersistence.update(layout);
+	}
+
+	public void deleteLayout(long plid) throws PortalException, SystemException {
+		layoutPersistence.remove(plid);
+	}
+
+	public void deleteLayout(Layout layout)
+		throws PortalException, SystemException {
+		layoutPersistence.remove(layout);
 	}
 
 	public List<Layout> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -340,8 +324,10 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 			end);
 	}
 
-	public Layout updateLayout(Layout model) throws SystemException {
-		return layoutPersistence.update(model, true);
+	public Layout updateLayout(Layout layout) throws SystemException {
+		layout.setNew(false);
+
+		return layoutPersistence.update(layout, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

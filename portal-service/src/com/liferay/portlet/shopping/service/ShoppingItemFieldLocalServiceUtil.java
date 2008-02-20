@@ -52,11 +52,28 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingItemFieldLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItemField addShoppingItemField(
-		com.liferay.portlet.shopping.model.ShoppingItemField model)
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
 		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
 
-		return shoppingItemFieldLocalService.addShoppingItemField(model);
+		return shoppingItemFieldLocalService.addShoppingItemField(shoppingItemField);
+	}
+
+	public static void deleteShoppingItemField(long itemFieldId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
+
+		shoppingItemFieldLocalService.deleteShoppingItemField(itemFieldId);
+	}
+
+	public static void deleteShoppingItemField(
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
+
+		shoppingItemFieldLocalService.deleteShoppingItemField(shoppingItemField);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> dynamicQuery(
@@ -77,11 +94,11 @@ public class ShoppingItemFieldLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemField updateShoppingItemField(
-		com.liferay.portlet.shopping.model.ShoppingItemField model)
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException {
 		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
 
-		return shoppingItemFieldLocalService.updateShoppingItemField(model);
+		return shoppingItemFieldLocalService.updateShoppingItemField(shoppingItemField);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {

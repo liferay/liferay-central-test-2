@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.tags.service.base;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.tags.model.TagsSource;
-import com.liferay.portlet.tags.model.impl.TagsSourceImpl;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -69,17 +69,21 @@ import java.util.List;
  */
 public abstract class TagsSourceLocalServiceBaseImpl
 	implements TagsSourceLocalService, InitializingBean {
-	public TagsSource addTagsSource(TagsSource model) throws SystemException {
-		TagsSource tagsSource = new TagsSourceImpl();
-
+	public TagsSource addTagsSource(TagsSource tagsSource)
+		throws SystemException {
 		tagsSource.setNew(true);
 
-		tagsSource.setSourceId(model.getSourceId());
-		tagsSource.setParentSourceId(model.getParentSourceId());
-		tagsSource.setName(model.getName());
-		tagsSource.setAcronym(model.getAcronym());
-
 		return tagsSourcePersistence.update(tagsSource);
+	}
+
+	public void deleteTagsSource(long sourceId)
+		throws PortalException, SystemException {
+		tagsSourcePersistence.remove(sourceId);
+	}
+
+	public void deleteTagsSource(TagsSource tagsSource)
+		throws PortalException, SystemException {
+		tagsSourcePersistence.remove(tagsSource);
 	}
 
 	public List<TagsSource> dynamicQuery(
@@ -94,9 +98,11 @@ public abstract class TagsSourceLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public TagsSource updateTagsSource(TagsSource model)
+	public TagsSource updateTagsSource(TagsSource tagsSource)
 		throws SystemException {
-		return tagsSourcePersistence.update(model, true);
+		tagsSource.setNew(false);
+
+		return tagsSourcePersistence.update(tagsSource, true);
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {

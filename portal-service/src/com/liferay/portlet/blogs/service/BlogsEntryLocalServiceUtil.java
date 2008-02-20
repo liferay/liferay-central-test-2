@@ -52,11 +52,28 @@ package com.liferay.portlet.blogs.service;
  */
 public class BlogsEntryLocalServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsEntry addBlogsEntry(
-		com.liferay.portlet.blogs.model.BlogsEntry model)
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
-		return blogsEntryLocalService.addBlogsEntry(model);
+		return blogsEntryLocalService.addBlogsEntry(blogsEntry);
+	}
+
+	public static void deleteBlogsEntry(long entryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		blogsEntryLocalService.deleteBlogsEntry(entryId);
+	}
+
+	public static void deleteBlogsEntry(
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
+
+		blogsEntryLocalService.deleteBlogsEntry(blogsEntry);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> dynamicQuery(
@@ -76,11 +93,11 @@ public class BlogsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateBlogsEntry(
-		com.liferay.portlet.blogs.model.BlogsEntry model)
+		com.liferay.portlet.blogs.model.BlogsEntry blogsEntry)
 		throws com.liferay.portal.SystemException {
 		BlogsEntryLocalService blogsEntryLocalService = BlogsEntryLocalServiceFactory.getService();
 
-		return blogsEntryLocalService.updateBlogsEntry(model);
+		return blogsEntryLocalService.updateBlogsEntry(blogsEntry);
 	}
 
 	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence() {

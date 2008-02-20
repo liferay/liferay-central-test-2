@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface PortletPreferencesLocalService {
 	public com.liferay.portal.model.PortletPreferences addPortletPreferences(
-		com.liferay.portal.model.PortletPreferences model)
+		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException;
+
+	public void deletePortletPreferences(long portletPreferencesId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deletePortletPreferences(
+		com.liferay.portal.model.PortletPreferences portletPreferences)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.PortletPreferences> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface PortletPreferencesLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletPreferences updatePortletPreferences(
-		com.liferay.portal.model.PortletPreferences model)
+		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -336,10 +345,6 @@ public interface PortletPreferencesLocalService {
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
 	public void afterPropertiesSet();
-
-	public void deletePortletPreferences(long portletPreferencesId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
 
 	public void deletePortletPreferences(long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException,

@@ -52,11 +52,28 @@ package com.liferay.portlet.wiki.service;
  */
 public class WikiPageLocalServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPage addWikiPage(
-		com.liferay.portlet.wiki.model.WikiPage model)
+		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
-		return wikiPageLocalService.addWikiPage(model);
+		return wikiPageLocalService.addWikiPage(wikiPage);
+	}
+
+	public static void deleteWikiPage(long pageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.deleteWikiPage(pageId);
+	}
+
+	public static void deleteWikiPage(
+		com.liferay.portlet.wiki.model.WikiPage wikiPage)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		wikiPageLocalService.deleteWikiPage(wikiPage);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> dynamicQuery(
@@ -76,11 +93,11 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPage updateWikiPage(
-		com.liferay.portlet.wiki.model.WikiPage model)
+		com.liferay.portlet.wiki.model.WikiPage wikiPage)
 		throws com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
 
-		return wikiPageLocalService.updateWikiPage(model);
+		return wikiPageLocalService.updateWikiPage(wikiPage);
 	}
 
 	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {

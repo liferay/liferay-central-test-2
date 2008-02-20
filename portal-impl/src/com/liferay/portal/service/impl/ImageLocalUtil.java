@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.impl;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.model.Image;
@@ -54,7 +55,16 @@ import org.apache.commons.logging.LogFactory;
 public class ImageLocalUtil {
 
 	public static void deleteImage(long imageId) throws SystemException {
-		ImageLocalServiceUtil.deleteImage(imageId);
+		try {
+			ImageLocalServiceUtil.deleteImage(imageId);
+		}
+		catch (PortalException pe) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Unable to delete image " + imageId + ": " +
+						pe.getMessage());
+			}
+		}
 	}
 
 	public static Image getCompanyLogo(long imageId) {

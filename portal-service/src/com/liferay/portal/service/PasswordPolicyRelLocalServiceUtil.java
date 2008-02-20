@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class PasswordPolicyRelLocalServiceUtil {
 	public static com.liferay.portal.model.PasswordPolicyRel addPasswordPolicyRel(
-		com.liferay.portal.model.PasswordPolicyRel model)
+		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
 		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
 
-		return passwordPolicyRelLocalService.addPasswordPolicyRel(model);
+		return passwordPolicyRelLocalService.addPasswordPolicyRel(passwordPolicyRel);
+	}
+
+	public static void deletePasswordPolicyRel(long passwordPolicyRelId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
+
+		passwordPolicyRelLocalService.deletePasswordPolicyRel(passwordPolicyRelId);
+	}
+
+	public static void deletePasswordPolicyRel(
+		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
+
+		passwordPolicyRelLocalService.deletePasswordPolicyRel(passwordPolicyRel);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicyRel> dynamicQuery(
@@ -77,11 +94,11 @@ public class PasswordPolicyRelLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.PasswordPolicyRel updatePasswordPolicyRel(
-		com.liferay.portal.model.PasswordPolicyRel model)
+		com.liferay.portal.model.PasswordPolicyRel passwordPolicyRel)
 		throws com.liferay.portal.SystemException {
 		PasswordPolicyRelLocalService passwordPolicyRelLocalService = PasswordPolicyRelLocalServiceFactory.getService();
 
-		return passwordPolicyRelLocalService.updatePasswordPolicyRel(model);
+		return passwordPolicyRelLocalService.updatePasswordPolicyRel(passwordPolicyRel);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

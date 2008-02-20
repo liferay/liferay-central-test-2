@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -59,7 +60,6 @@ import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
-import com.liferay.portlet.softwarecatalog.model.impl.SCProductEntryImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -98,30 +98,21 @@ import java.util.List;
  */
 public abstract class SCProductEntryLocalServiceBaseImpl
 	implements SCProductEntryLocalService, InitializingBean {
-	public SCProductEntry addSCProductEntry(SCProductEntry model)
+	public SCProductEntry addSCProductEntry(SCProductEntry scProductEntry)
 		throws SystemException {
-		SCProductEntry scProductEntry = new SCProductEntryImpl();
-
 		scProductEntry.setNew(true);
 
-		scProductEntry.setProductEntryId(model.getProductEntryId());
-		scProductEntry.setGroupId(model.getGroupId());
-		scProductEntry.setCompanyId(model.getCompanyId());
-		scProductEntry.setUserId(model.getUserId());
-		scProductEntry.setUserName(model.getUserName());
-		scProductEntry.setCreateDate(model.getCreateDate());
-		scProductEntry.setModifiedDate(model.getModifiedDate());
-		scProductEntry.setName(model.getName());
-		scProductEntry.setType(model.getType());
-		scProductEntry.setTags(model.getTags());
-		scProductEntry.setShortDescription(model.getShortDescription());
-		scProductEntry.setLongDescription(model.getLongDescription());
-		scProductEntry.setPageURL(model.getPageURL());
-		scProductEntry.setAuthor(model.getAuthor());
-		scProductEntry.setRepoGroupId(model.getRepoGroupId());
-		scProductEntry.setRepoArtifactId(model.getRepoArtifactId());
-
 		return scProductEntryPersistence.update(scProductEntry);
+	}
+
+	public void deleteSCProductEntry(long productEntryId)
+		throws PortalException, SystemException {
+		scProductEntryPersistence.remove(productEntryId);
+	}
+
+	public void deleteSCProductEntry(SCProductEntry scProductEntry)
+		throws PortalException, SystemException {
+		scProductEntryPersistence.remove(scProductEntry);
 	}
 
 	public List<SCProductEntry> dynamicQuery(
@@ -136,9 +127,11 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public SCProductEntry updateSCProductEntry(SCProductEntry model)
+	public SCProductEntry updateSCProductEntry(SCProductEntry scProductEntry)
 		throws SystemException {
-		return scProductEntryPersistence.update(model, true);
+		scProductEntry.setNew(false);
+
+		return scProductEntryPersistence.update(scProductEntry, true);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

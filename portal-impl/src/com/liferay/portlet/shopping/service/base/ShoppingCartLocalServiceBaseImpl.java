@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.UserLocalService;
@@ -39,7 +40,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingCart;
-import com.liferay.portlet.shopping.model.impl.ShoppingCartImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceFactory;
@@ -98,25 +98,21 @@ import java.util.List;
  */
 public abstract class ShoppingCartLocalServiceBaseImpl
 	implements ShoppingCartLocalService, InitializingBean {
-	public ShoppingCart addShoppingCart(ShoppingCart model)
+	public ShoppingCart addShoppingCart(ShoppingCart shoppingCart)
 		throws SystemException {
-		ShoppingCart shoppingCart = new ShoppingCartImpl();
-
 		shoppingCart.setNew(true);
 
-		shoppingCart.setCartId(model.getCartId());
-		shoppingCart.setGroupId(model.getGroupId());
-		shoppingCart.setCompanyId(model.getCompanyId());
-		shoppingCart.setUserId(model.getUserId());
-		shoppingCart.setUserName(model.getUserName());
-		shoppingCart.setCreateDate(model.getCreateDate());
-		shoppingCart.setModifiedDate(model.getModifiedDate());
-		shoppingCart.setItemIds(model.getItemIds());
-		shoppingCart.setCouponCodes(model.getCouponCodes());
-		shoppingCart.setAltShipping(model.getAltShipping());
-		shoppingCart.setInsure(model.getInsure());
-
 		return shoppingCartPersistence.update(shoppingCart);
+	}
+
+	public void deleteShoppingCart(long cartId)
+		throws PortalException, SystemException {
+		shoppingCartPersistence.remove(cartId);
+	}
+
+	public void deleteShoppingCart(ShoppingCart shoppingCart)
+		throws PortalException, SystemException {
+		shoppingCartPersistence.remove(shoppingCart);
 	}
 
 	public List<ShoppingCart> dynamicQuery(
@@ -131,9 +127,11 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ShoppingCart updateShoppingCart(ShoppingCart model)
+	public ShoppingCart updateShoppingCart(ShoppingCart shoppingCart)
 		throws SystemException {
-		return shoppingCartPersistence.update(model, true);
+		shoppingCart.setNew(false);
+
+		return shoppingCartPersistence.update(shoppingCart, true);
 	}
 
 	public ShoppingCartPersistence getShoppingCartPersistence() {

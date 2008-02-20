@@ -52,11 +52,28 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public class DLFileShortcutLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut addDLFileShortcut(
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut model)
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
-		return dlFileShortcutLocalService.addDLFileShortcut(model);
+		return dlFileShortcutLocalService.addDLFileShortcut(dlFileShortcut);
+	}
+
+	public static void deleteDLFileShortcut(long fileShortcutId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		dlFileShortcutLocalService.deleteDLFileShortcut(fileShortcutId);
+	}
+
+	public static void deleteDLFileShortcut(
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
+
+		dlFileShortcutLocalService.deleteDLFileShortcut(dlFileShortcut);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> dynamicQuery(
@@ -77,11 +94,11 @@ public class DLFileShortcutLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileShortcut updateDLFileShortcut(
-		com.liferay.portlet.documentlibrary.model.DLFileShortcut model)
+		com.liferay.portlet.documentlibrary.model.DLFileShortcut dlFileShortcut)
 		throws com.liferay.portal.SystemException {
 		DLFileShortcutLocalService dlFileShortcutLocalService = DLFileShortcutLocalServiceFactory.getService();
 
-		return dlFileShortcutLocalService.updateDLFileShortcut(model);
+		return dlFileShortcutLocalService.updateDLFileShortcut(dlFileShortcut);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {

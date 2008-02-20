@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class PhoneLocalServiceUtil {
 	public static com.liferay.portal.model.Phone addPhone(
-		com.liferay.portal.model.Phone model)
+		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
-		return phoneLocalService.addPhone(model);
+		return phoneLocalService.addPhone(phone);
+	}
+
+	public static void deletePhone(long phoneId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		phoneLocalService.deletePhone(phoneId);
+	}
+
+	public static void deletePhone(com.liferay.portal.model.Phone phone)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
+
+		phoneLocalService.deletePhone(phone);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Phone> dynamicQuery(
@@ -76,11 +92,11 @@ public class PhoneLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Phone updatePhone(
-		com.liferay.portal.model.Phone model)
+		com.liferay.portal.model.Phone phone)
 		throws com.liferay.portal.SystemException {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 
-		return phoneLocalService.updatePhone(model);
+		return phoneLocalService.updatePhone(phone);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -800,14 +816,6 @@ public class PhoneLocalServiceUtil {
 
 		return phoneLocalService.addPhone(userId, className, classPK, number,
 			extension, typeId, primary);
-	}
-
-	public static void deletePhone(long phoneId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.deletePhone(phoneId);
 	}
 
 	public static void deletePhones(long companyId, java.lang.String className,

@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface CompanyLocalService {
 	public com.liferay.portal.model.Company addCompany(
-		com.liferay.portal.model.Company model)
+		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteCompany(long companyId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteCompany(com.liferay.portal.model.Company company)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Company> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface CompanyLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Company updateCompany(
-		com.liferay.portal.model.Company model)
+		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

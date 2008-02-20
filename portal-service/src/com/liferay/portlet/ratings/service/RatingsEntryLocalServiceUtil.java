@@ -52,11 +52,28 @@ package com.liferay.portlet.ratings.service;
  */
 public class RatingsEntryLocalServiceUtil {
 	public static com.liferay.portlet.ratings.model.RatingsEntry addRatingsEntry(
-		com.liferay.portlet.ratings.model.RatingsEntry model)
+		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
 		throws com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
-		return ratingsEntryLocalService.addRatingsEntry(model);
+		return ratingsEntryLocalService.addRatingsEntry(ratingsEntry);
+	}
+
+	public static void deleteRatingsEntry(long entryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
+		ratingsEntryLocalService.deleteRatingsEntry(entryId);
+	}
+
+	public static void deleteRatingsEntry(
+		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
+
+		ratingsEntryLocalService.deleteRatingsEntry(ratingsEntry);
 	}
 
 	public static java.util.List<com.liferay.portlet.ratings.model.RatingsEntry> dynamicQuery(
@@ -77,11 +94,11 @@ public class RatingsEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.ratings.model.RatingsEntry updateRatingsEntry(
-		com.liferay.portlet.ratings.model.RatingsEntry model)
+		com.liferay.portlet.ratings.model.RatingsEntry ratingsEntry)
 		throws com.liferay.portal.SystemException {
 		RatingsEntryLocalService ratingsEntryLocalService = RatingsEntryLocalServiceFactory.getService();
 
-		return ratingsEntryLocalService.updateRatingsEntry(model);
+		return ratingsEntryLocalService.updateRatingsEntry(ratingsEntry);
 	}
 
 	public static com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence getRatingsEntryPersistence() {

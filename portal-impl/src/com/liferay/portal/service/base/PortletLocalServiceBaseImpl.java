@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,18 +275,19 @@ import java.util.List;
  */
 public abstract class PortletLocalServiceBaseImpl implements PortletLocalService,
 	InitializingBean {
-	public Portlet addPortlet(Portlet model) throws SystemException {
-		Portlet portlet = new PortletImpl();
-
+	public Portlet addPortlet(Portlet portlet) throws SystemException {
 		portlet.setNew(true);
 
-		portlet.setId(model.getId());
-		portlet.setCompanyId(model.getCompanyId());
-		portlet.setPortletId(model.getPortletId());
-		portlet.setRoles(model.getRoles());
-		portlet.setActive(model.getActive());
-
 		return portletPersistence.update(portlet);
+	}
+
+	public void deletePortlet(long id) throws PortalException, SystemException {
+		portletPersistence.remove(id);
+	}
+
+	public void deletePortlet(Portlet portlet)
+		throws PortalException, SystemException {
+		portletPersistence.remove(portlet);
 	}
 
 	public List<Portlet> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -301,8 +302,10 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 			end);
 	}
 
-	public Portlet updatePortlet(Portlet model) throws SystemException {
-		return portletPersistence.update(model, true);
+	public Portlet updatePortlet(Portlet portlet) throws SystemException {
+		portlet.setNew(false);
+
+		return portletPersistence.update(portlet, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

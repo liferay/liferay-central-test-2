@@ -22,10 +22,10 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Account;
-import com.liferay.portal.model.impl.AccountImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.ActivityTrackerLocalService;
 import com.liferay.portal.service.ActivityTrackerLocalServiceFactory;
@@ -270,29 +270,20 @@ import java.util.List;
  */
 public abstract class AccountLocalServiceBaseImpl implements AccountLocalService,
 	InitializingBean {
-	public Account addAccount(Account model) throws SystemException {
-		Account account = new AccountImpl();
-
+	public Account addAccount(Account account) throws SystemException {
 		account.setNew(true);
 
-		account.setAccountId(model.getAccountId());
-		account.setCompanyId(model.getCompanyId());
-		account.setUserId(model.getUserId());
-		account.setUserName(model.getUserName());
-		account.setCreateDate(model.getCreateDate());
-		account.setModifiedDate(model.getModifiedDate());
-		account.setParentAccountId(model.getParentAccountId());
-		account.setName(model.getName());
-		account.setLegalName(model.getLegalName());
-		account.setLegalId(model.getLegalId());
-		account.setLegalType(model.getLegalType());
-		account.setSicCode(model.getSicCode());
-		account.setTickerSymbol(model.getTickerSymbol());
-		account.setIndustry(model.getIndustry());
-		account.setType(model.getType());
-		account.setSize(model.getSize());
-
 		return accountPersistence.update(account);
+	}
+
+	public void deleteAccount(long accountId)
+		throws PortalException, SystemException {
+		accountPersistence.remove(accountId);
+	}
+
+	public void deleteAccount(Account account)
+		throws PortalException, SystemException {
+		accountPersistence.remove(account);
 	}
 
 	public List<Account> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -307,8 +298,10 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 			end);
 	}
 
-	public Account updateAccount(Account model) throws SystemException {
-		return accountPersistence.update(model, true);
+	public Account updateAccount(Account account) throws SystemException {
+		account.setNew(false);
+
+		return accountPersistence.update(account, true);
 	}
 
 	public AccountPersistence getAccountPersistence() {

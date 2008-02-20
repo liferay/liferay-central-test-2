@@ -50,8 +50,17 @@ package com.liferay.portlet.polls.service;
  */
 public interface PollsVoteLocalService {
 	public com.liferay.portlet.polls.model.PollsVote addPollsVote(
-		com.liferay.portlet.polls.model.PollsVote model)
+		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException;
+
+	public void deletePollsVote(long voteId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deletePollsVote(
+		com.liferay.portlet.polls.model.PollsVote pollsVote)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.polls.model.PollsVote> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface PollsVoteLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.model.PollsVote updatePollsVote(
-		com.liferay.portlet.polls.model.PollsVote model)
+		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence();

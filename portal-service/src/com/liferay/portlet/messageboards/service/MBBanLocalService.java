@@ -50,8 +50,16 @@ package com.liferay.portlet.messageboards.service;
  */
 public interface MBBanLocalService {
 	public com.liferay.portlet.messageboards.model.MBBan addMBBan(
-		com.liferay.portlet.messageboards.model.MBBan model)
+		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteMBBan(long banId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteMBBan(com.liferay.portlet.messageboards.model.MBBan mbBan)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface MBBanLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBBan updateMBBan(
-		com.liferay.portlet.messageboards.model.MBBan model)
+		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence();

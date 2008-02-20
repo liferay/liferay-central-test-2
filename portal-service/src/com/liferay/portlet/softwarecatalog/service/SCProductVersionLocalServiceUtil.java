@@ -52,11 +52,28 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public class SCProductVersionLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion addSCProductVersion(
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion model)
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
 
-		return scProductVersionLocalService.addSCProductVersion(model);
+		return scProductVersionLocalService.addSCProductVersion(scProductVersion);
+	}
+
+	public static void deleteSCProductVersion(long productVersionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		scProductVersionLocalService.deleteSCProductVersion(productVersionId);
+	}
+
+	public static void deleteSCProductVersion(
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
+
+		scProductVersionLocalService.deleteSCProductVersion(scProductVersion);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> dynamicQuery(
@@ -77,11 +94,11 @@ public class SCProductVersionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductVersion updateSCProductVersion(
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion model)
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException {
 		SCProductVersionLocalService scProductVersionLocalService = SCProductVersionLocalServiceFactory.getService();
 
-		return scProductVersionLocalService.updateSCProductVersion(model);
+		return scProductVersionLocalService.updateSCProductVersion(scProductVersion);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {

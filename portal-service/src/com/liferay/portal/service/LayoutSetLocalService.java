@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface LayoutSetLocalService {
 	public com.liferay.portal.model.LayoutSet addLayoutSet(
-		com.liferay.portal.model.LayoutSet model)
+		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteLayoutSet(long layoutSetId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteLayoutSet(com.liferay.portal.model.LayoutSet layoutSet)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.LayoutSet> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface LayoutSetLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.LayoutSet updateLayoutSet(
-		com.liferay.portal.model.LayoutSet model)
+		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

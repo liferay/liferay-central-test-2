@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class EmailAddressLocalServiceUtil {
 	public static com.liferay.portal.model.EmailAddress addEmailAddress(
-		com.liferay.portal.model.EmailAddress model)
+		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
-		return emailAddressLocalService.addEmailAddress(model);
+		return emailAddressLocalService.addEmailAddress(emailAddress);
+	}
+
+	public static void deleteEmailAddress(long emailAddressId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		emailAddressLocalService.deleteEmailAddress(emailAddressId);
+	}
+
+	public static void deleteEmailAddress(
+		com.liferay.portal.model.EmailAddress emailAddress)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		emailAddressLocalService.deleteEmailAddress(emailAddress);
 	}
 
 	public static java.util.List<com.liferay.portal.model.EmailAddress> dynamicQuery(
@@ -77,11 +94,11 @@ public class EmailAddressLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.EmailAddress updateEmailAddress(
-		com.liferay.portal.model.EmailAddress model)
+		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 
-		return emailAddressLocalService.updateEmailAddress(model);
+		return emailAddressLocalService.updateEmailAddress(emailAddress);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -801,14 +818,6 @@ public class EmailAddressLocalServiceUtil {
 
 		return emailAddressLocalService.addEmailAddress(userId, className,
 			classPK, address, typeId, primary);
-	}
-
-	public static void deleteEmailAddress(long emailAddressId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		emailAddressLocalService.deleteEmailAddress(emailAddressId);
 	}
 
 	public static void deleteEmailAddresses(long companyId,

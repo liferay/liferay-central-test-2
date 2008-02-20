@@ -52,11 +52,28 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingItemPriceLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice addShoppingItemPrice(
-		com.liferay.portlet.shopping.model.ShoppingItemPrice model)
+		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {
 		ShoppingItemPriceLocalService shoppingItemPriceLocalService = ShoppingItemPriceLocalServiceFactory.getService();
 
-		return shoppingItemPriceLocalService.addShoppingItemPrice(model);
+		return shoppingItemPriceLocalService.addShoppingItemPrice(shoppingItemPrice);
+	}
+
+	public static void deleteShoppingItemPrice(long itemPriceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingItemPriceLocalService shoppingItemPriceLocalService = ShoppingItemPriceLocalServiceFactory.getService();
+
+		shoppingItemPriceLocalService.deleteShoppingItemPrice(itemPriceId);
+	}
+
+	public static void deleteShoppingItemPrice(
+		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingItemPriceLocalService shoppingItemPriceLocalService = ShoppingItemPriceLocalServiceFactory.getService();
+
+		shoppingItemPriceLocalService.deleteShoppingItemPrice(shoppingItemPrice);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> dynamicQuery(
@@ -77,11 +94,11 @@ public class ShoppingItemPriceLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItemPrice updateShoppingItemPrice(
-		com.liferay.portlet.shopping.model.ShoppingItemPrice model)
+		com.liferay.portlet.shopping.model.ShoppingItemPrice shoppingItemPrice)
 		throws com.liferay.portal.SystemException {
 		ShoppingItemPriceLocalService shoppingItemPriceLocalService = ShoppingItemPriceLocalServiceFactory.getService();
 
-		return shoppingItemPriceLocalService.updateShoppingItemPrice(model);
+		return shoppingItemPriceLocalService.updateShoppingItemPrice(shoppingItemPrice);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {

@@ -50,8 +50,17 @@ package com.liferay.portlet.calendar.service;
  */
 public interface CalEventLocalService {
 	public com.liferay.portlet.calendar.model.CalEvent addCalEvent(
-		com.liferay.portlet.calendar.model.CalEvent model)
+		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteCalEvent(long eventId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteCalEvent(
+		com.liferay.portlet.calendar.model.CalEvent calEvent)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.calendar.model.CalEvent> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface CalEventLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
-		com.liferay.portlet.calendar.model.CalEvent model)
+		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.calendar.service.persistence.CalEventPersistence getCalEventPersistence();

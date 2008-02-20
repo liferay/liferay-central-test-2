@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface EmailAddressLocalService {
 	public com.liferay.portal.model.EmailAddress addEmailAddress(
-		com.liferay.portal.model.EmailAddress model)
+		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteEmailAddress(long emailAddressId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteEmailAddress(
+		com.liferay.portal.model.EmailAddress emailAddress)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.EmailAddress> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface EmailAddressLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.EmailAddress updateEmailAddress(
-		com.liferay.portal.model.EmailAddress model)
+		com.liferay.portal.model.EmailAddress emailAddress)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -340,10 +349,6 @@ public interface EmailAddressLocalService {
 	public com.liferay.portal.model.EmailAddress addEmailAddress(long userId,
 		java.lang.String className, long classPK, java.lang.String address,
 		int typeId, boolean primary)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteEmailAddress(long emailAddressId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

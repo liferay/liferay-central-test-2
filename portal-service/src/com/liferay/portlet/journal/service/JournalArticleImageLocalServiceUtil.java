@@ -52,11 +52,28 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalArticleImageLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticleImage addJournalArticleImage(
-		com.liferay.portlet.journal.model.JournalArticleImage model)
+		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException {
 		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
 
-		return journalArticleImageLocalService.addJournalArticleImage(model);
+		return journalArticleImageLocalService.addJournalArticleImage(journalArticleImage);
+	}
+
+	public static void deleteJournalArticleImage(long articleImageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		journalArticleImageLocalService.deleteJournalArticleImage(articleImageId);
+	}
+
+	public static void deleteJournalArticleImage(
+		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
+
+		journalArticleImageLocalService.deleteJournalArticleImage(journalArticleImage);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> dynamicQuery(
@@ -77,11 +94,11 @@ public class JournalArticleImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleImage updateJournalArticleImage(
-		com.liferay.portlet.journal.model.JournalArticleImage model)
+		com.liferay.portlet.journal.model.JournalArticleImage journalArticleImage)
 		throws com.liferay.portal.SystemException {
 		JournalArticleImageLocalService journalArticleImageLocalService = JournalArticleImageLocalServiceFactory.getService();
 
-		return journalArticleImageLocalService.updateJournalArticleImage(model);
+		return journalArticleImageLocalService.updateJournalArticleImage(journalArticleImage);
 	}
 
 	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {

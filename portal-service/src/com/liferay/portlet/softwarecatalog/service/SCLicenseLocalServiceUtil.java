@@ -52,11 +52,28 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public class SCLicenseLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense addSCLicense(
-		com.liferay.portlet.softwarecatalog.model.SCLicense model)
+		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
-		return scLicenseLocalService.addSCLicense(model);
+		return scLicenseLocalService.addSCLicense(scLicense);
+	}
+
+	public static void deleteSCLicense(long licenseId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		scLicenseLocalService.deleteSCLicense(licenseId);
+	}
+
+	public static void deleteSCLicense(
+		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
+
+		scLicenseLocalService.deleteSCLicense(scLicense);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> dynamicQuery(
@@ -76,11 +93,11 @@ public class SCLicenseLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCLicense updateSCLicense(
-		com.liferay.portlet.softwarecatalog.model.SCLicense model)
+		com.liferay.portlet.softwarecatalog.model.SCLicense scLicense)
 		throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
-		return scLicenseLocalService.updateSCLicense(model);
+		return scLicenseLocalService.updateSCLicense(scLicense);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {

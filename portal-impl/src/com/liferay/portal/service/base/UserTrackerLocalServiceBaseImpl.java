@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.UserTracker;
-import com.liferay.portal.model.impl.UserTrackerImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,22 +277,21 @@ import java.util.List;
  */
 public abstract class UserTrackerLocalServiceBaseImpl
 	implements UserTrackerLocalService, InitializingBean {
-	public UserTracker addUserTracker(UserTracker model)
+	public UserTracker addUserTracker(UserTracker userTracker)
 		throws SystemException {
-		UserTracker userTracker = new UserTrackerImpl();
-
 		userTracker.setNew(true);
 
-		userTracker.setUserTrackerId(model.getUserTrackerId());
-		userTracker.setCompanyId(model.getCompanyId());
-		userTracker.setUserId(model.getUserId());
-		userTracker.setModifiedDate(model.getModifiedDate());
-		userTracker.setSessionId(model.getSessionId());
-		userTracker.setRemoteAddr(model.getRemoteAddr());
-		userTracker.setRemoteHost(model.getRemoteHost());
-		userTracker.setUserAgent(model.getUserAgent());
-
 		return userTrackerPersistence.update(userTracker);
+	}
+
+	public void deleteUserTracker(long userTrackerId)
+		throws PortalException, SystemException {
+		userTrackerPersistence.remove(userTrackerId);
+	}
+
+	public void deleteUserTracker(UserTracker userTracker)
+		throws PortalException, SystemException {
+		userTrackerPersistence.remove(userTracker);
 	}
 
 	public List<UserTracker> dynamicQuery(
@@ -307,9 +306,11 @@ public abstract class UserTrackerLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public UserTracker updateUserTracker(UserTracker model)
+	public UserTracker updateUserTracker(UserTracker userTracker)
 		throws SystemException {
-		return userTrackerPersistence.update(model, true);
+		userTracker.setNew(false);
+
+		return userTrackerPersistence.update(userTracker, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

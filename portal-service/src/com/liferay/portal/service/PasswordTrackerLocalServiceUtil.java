@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class PasswordTrackerLocalServiceUtil {
 	public static com.liferay.portal.model.PasswordTracker addPasswordTracker(
-		com.liferay.portal.model.PasswordTracker model)
+		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 
-		return passwordTrackerLocalService.addPasswordTracker(model);
+		return passwordTrackerLocalService.addPasswordTracker(passwordTracker);
+	}
+
+	public static void deletePasswordTracker(long passwordTrackerId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		passwordTrackerLocalService.deletePasswordTracker(passwordTrackerId);
+	}
+
+	public static void deletePasswordTracker(
+		com.liferay.portal.model.PasswordTracker passwordTracker)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
+
+		passwordTrackerLocalService.deletePasswordTracker(passwordTracker);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordTracker> dynamicQuery(
@@ -77,11 +94,11 @@ public class PasswordTrackerLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.PasswordTracker updatePasswordTracker(
-		com.liferay.portal.model.PasswordTracker model)
+		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 
-		return passwordTrackerLocalService.updatePasswordTracker(model);
+		return passwordTrackerLocalService.updatePasswordTracker(passwordTracker);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

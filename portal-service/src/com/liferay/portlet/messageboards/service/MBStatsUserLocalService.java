@@ -50,8 +50,17 @@ package com.liferay.portlet.messageboards.service;
  */
 public interface MBStatsUserLocalService {
 	public com.liferay.portlet.messageboards.model.MBStatsUser addMBStatsUser(
-		com.liferay.portlet.messageboards.model.MBStatsUser model)
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteMBStatsUser(long statsUserId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteMBStatsUser(
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface MBStatsUserLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
-		com.liferay.portlet.messageboards.model.MBStatsUser model)
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence();

@@ -52,11 +52,28 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public class SCFrameworkVersionLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addSCFrameworkVersion(
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion model)
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 
-		return scFrameworkVersionLocalService.addSCFrameworkVersion(model);
+		return scFrameworkVersionLocalService.addSCFrameworkVersion(scFrameworkVersion);
+	}
+
+	public static void deleteSCFrameworkVersion(long frameworkVersionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		scFrameworkVersionLocalService.deleteSCFrameworkVersion(frameworkVersionId);
+	}
+
+	public static void deleteSCFrameworkVersion(
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
+
+		scFrameworkVersionLocalService.deleteSCFrameworkVersion(scFrameworkVersion);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> dynamicQuery(
@@ -77,11 +94,11 @@ public class SCFrameworkVersionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion updateSCFrameworkVersion(
-		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion model)
+		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 
-		return scFrameworkVersionLocalService.updateSCFrameworkVersion(model);
+		return scFrameworkVersionLocalService.updateSCFrameworkVersion(scFrameworkVersion);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {

@@ -50,8 +50,17 @@ package com.liferay.portlet.shopping.service;
  */
 public interface ShoppingItemFieldLocalService {
 	public com.liferay.portlet.shopping.model.ShoppingItemField addShoppingItemField(
-		com.liferay.portlet.shopping.model.ShoppingItemField model)
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteShoppingItemField(long itemFieldId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteShoppingItemField(
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface ShoppingItemFieldLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItemField updateShoppingItemField(
-		com.liferay.portlet.shopping.model.ShoppingItemField model)
+		com.liferay.portlet.shopping.model.ShoppingItemField shoppingItemField)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence();

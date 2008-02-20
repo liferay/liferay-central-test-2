@@ -35,6 +35,7 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ActivityTrackerLocalService;
@@ -93,7 +94,6 @@ import com.liferay.portlet.blogs.service.persistence.BlogsEntryFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
 import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -162,27 +162,21 @@ import java.util.List;
  */
 public abstract class MBMessageLocalServiceBaseImpl
 	implements MBMessageLocalService, InitializingBean {
-	public MBMessage addMBMessage(MBMessage model) throws SystemException {
-		MBMessage mbMessage = new MBMessageImpl();
-
+	public MBMessage addMBMessage(MBMessage mbMessage)
+		throws SystemException {
 		mbMessage.setNew(true);
 
-		mbMessage.setUuid(model.getUuid());
-		mbMessage.setMessageId(model.getMessageId());
-		mbMessage.setCompanyId(model.getCompanyId());
-		mbMessage.setUserId(model.getUserId());
-		mbMessage.setUserName(model.getUserName());
-		mbMessage.setCreateDate(model.getCreateDate());
-		mbMessage.setModifiedDate(model.getModifiedDate());
-		mbMessage.setCategoryId(model.getCategoryId());
-		mbMessage.setThreadId(model.getThreadId());
-		mbMessage.setParentMessageId(model.getParentMessageId());
-		mbMessage.setSubject(model.getSubject());
-		mbMessage.setBody(model.getBody());
-		mbMessage.setAttachments(model.getAttachments());
-		mbMessage.setAnonymous(model.getAnonymous());
-
 		return mbMessagePersistence.update(mbMessage);
+	}
+
+	public void deleteMBMessage(long messageId)
+		throws PortalException, SystemException {
+		mbMessagePersistence.remove(messageId);
+	}
+
+	public void deleteMBMessage(MBMessage mbMessage)
+		throws PortalException, SystemException {
+		mbMessagePersistence.remove(mbMessage);
 	}
 
 	public List<MBMessage> dynamicQuery(
@@ -197,8 +191,11 @@ public abstract class MBMessageLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public MBMessage updateMBMessage(MBMessage model) throws SystemException {
-		return mbMessagePersistence.update(model, true);
+	public MBMessage updateMBMessage(MBMessage mbMessage)
+		throws SystemException {
+		mbMessage.setNew(false);
+
+		return mbMessagePersistence.update(mbMessage, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

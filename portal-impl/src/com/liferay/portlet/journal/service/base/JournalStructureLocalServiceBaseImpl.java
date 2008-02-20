@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -51,7 +52,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 
 import com.liferay.portlet.journal.model.JournalStructure;
-import com.liferay.portlet.journal.model.impl.JournalStructureImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -106,26 +106,21 @@ import java.util.List;
  */
 public abstract class JournalStructureLocalServiceBaseImpl
 	implements JournalStructureLocalService, InitializingBean {
-	public JournalStructure addJournalStructure(JournalStructure model)
-		throws SystemException {
-		JournalStructure journalStructure = new JournalStructureImpl();
-
+	public JournalStructure addJournalStructure(
+		JournalStructure journalStructure) throws SystemException {
 		journalStructure.setNew(true);
 
-		journalStructure.setUuid(model.getUuid());
-		journalStructure.setId(model.getId());
-		journalStructure.setGroupId(model.getGroupId());
-		journalStructure.setCompanyId(model.getCompanyId());
-		journalStructure.setUserId(model.getUserId());
-		journalStructure.setUserName(model.getUserName());
-		journalStructure.setCreateDate(model.getCreateDate());
-		journalStructure.setModifiedDate(model.getModifiedDate());
-		journalStructure.setStructureId(model.getStructureId());
-		journalStructure.setName(model.getName());
-		journalStructure.setDescription(model.getDescription());
-		journalStructure.setXsd(model.getXsd());
-
 		return journalStructurePersistence.update(journalStructure);
+	}
+
+	public void deleteJournalStructure(long id)
+		throws PortalException, SystemException {
+		journalStructurePersistence.remove(id);
+	}
+
+	public void deleteJournalStructure(JournalStructure journalStructure)
+		throws PortalException, SystemException {
+		journalStructurePersistence.remove(journalStructure);
 	}
 
 	public List<JournalStructure> dynamicQuery(
@@ -140,9 +135,11 @@ public abstract class JournalStructureLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public JournalStructure updateJournalStructure(JournalStructure model)
-		throws SystemException {
-		return journalStructurePersistence.update(model, true);
+	public JournalStructure updateJournalStructure(
+		JournalStructure journalStructure) throws SystemException {
+		journalStructure.setNew(false);
+
+		return journalStructurePersistence.update(journalStructure, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

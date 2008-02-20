@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.LayoutLocalService;
@@ -55,7 +56,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.imagegallery.model.IGFolder;
-import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalService;
 import com.liferay.portlet.imagegallery.service.IGImageLocalServiceFactory;
@@ -88,23 +88,20 @@ import java.util.List;
  */
 public abstract class IGFolderLocalServiceBaseImpl
 	implements IGFolderLocalService, InitializingBean {
-	public IGFolder addIGFolder(IGFolder model) throws SystemException {
-		IGFolder igFolder = new IGFolderImpl();
-
+	public IGFolder addIGFolder(IGFolder igFolder) throws SystemException {
 		igFolder.setNew(true);
 
-		igFolder.setUuid(model.getUuid());
-		igFolder.setFolderId(model.getFolderId());
-		igFolder.setGroupId(model.getGroupId());
-		igFolder.setCompanyId(model.getCompanyId());
-		igFolder.setUserId(model.getUserId());
-		igFolder.setCreateDate(model.getCreateDate());
-		igFolder.setModifiedDate(model.getModifiedDate());
-		igFolder.setParentFolderId(model.getParentFolderId());
-		igFolder.setName(model.getName());
-		igFolder.setDescription(model.getDescription());
-
 		return igFolderPersistence.update(igFolder);
+	}
+
+	public void deleteIGFolder(long folderId)
+		throws PortalException, SystemException {
+		igFolderPersistence.remove(folderId);
+	}
+
+	public void deleteIGFolder(IGFolder igFolder)
+		throws PortalException, SystemException {
+		igFolderPersistence.remove(igFolder);
 	}
 
 	public List<IGFolder> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -119,8 +116,10 @@ public abstract class IGFolderLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public IGFolder updateIGFolder(IGFolder model) throws SystemException {
-		return igFolderPersistence.update(model, true);
+	public IGFolder updateIGFolder(IGFolder igFolder) throws SystemException {
+		igFolder.setNew(false);
+
+		return igFolderPersistence.update(igFolder, true);
 	}
 
 	public IGFolderPersistence getIGFolderPersistence() {

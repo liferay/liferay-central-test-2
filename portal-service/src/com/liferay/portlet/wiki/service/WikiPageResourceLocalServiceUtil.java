@@ -52,11 +52,28 @@ package com.liferay.portlet.wiki.service;
  */
 public class WikiPageResourceLocalServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiPageResource addWikiPageResource(
-		com.liferay.portlet.wiki.model.WikiPageResource model)
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
 
-		return wikiPageResourceLocalService.addWikiPageResource(model);
+		return wikiPageResourceLocalService.addWikiPageResource(wikiPageResource);
+	}
+
+	public static void deleteWikiPageResource(long resourcePrimKey)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		wikiPageResourceLocalService.deleteWikiPageResource(resourcePrimKey);
+	}
+
+	public static void deleteWikiPageResource(
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
+
+		wikiPageResourceLocalService.deleteWikiPageResource(wikiPageResource);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> dynamicQuery(
@@ -77,11 +94,11 @@ public class WikiPageResourceLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiPageResource updateWikiPageResource(
-		com.liferay.portlet.wiki.model.WikiPageResource model)
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException {
 		WikiPageResourceLocalService wikiPageResourceLocalService = WikiPageResourceLocalServiceFactory.getService();
 
-		return wikiPageResourceLocalService.updateWikiPageResource(model);
+		return wikiPageResourceLocalService.updateWikiPageResource(wikiPageResource);
 	}
 
 	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {

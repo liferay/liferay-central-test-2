@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.PortletPreferences;
-import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,20 +277,21 @@ import java.util.List;
  */
 public abstract class PortletPreferencesLocalServiceBaseImpl
 	implements PortletPreferencesLocalService, InitializingBean {
-	public PortletPreferences addPortletPreferences(PortletPreferences model)
-		throws SystemException {
-		PortletPreferences portletPreferences = new PortletPreferencesImpl();
-
+	public PortletPreferences addPortletPreferences(
+		PortletPreferences portletPreferences) throws SystemException {
 		portletPreferences.setNew(true);
 
-		portletPreferences.setPortletPreferencesId(model.getPortletPreferencesId());
-		portletPreferences.setOwnerId(model.getOwnerId());
-		portletPreferences.setOwnerType(model.getOwnerType());
-		portletPreferences.setPlid(model.getPlid());
-		portletPreferences.setPortletId(model.getPortletId());
-		portletPreferences.setPreferences(model.getPreferences());
-
 		return portletPreferencesPersistence.update(portletPreferences);
+	}
+
+	public void deletePortletPreferences(long portletPreferencesId)
+		throws PortalException, SystemException {
+		portletPreferencesPersistence.remove(portletPreferencesId);
+	}
+
+	public void deletePortletPreferences(PortletPreferences portletPreferences)
+		throws PortalException, SystemException {
+		portletPreferencesPersistence.remove(portletPreferences);
 	}
 
 	public List<PortletPreferences> dynamicQuery(
@@ -305,9 +306,11 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public PortletPreferences updatePortletPreferences(PortletPreferences model)
-		throws SystemException {
-		return portletPreferencesPersistence.update(model, true);
+	public PortletPreferences updatePortletPreferences(
+		PortletPreferences portletPreferences) throws SystemException {
+		portletPreferences.setNew(false);
+
+		return portletPreferencesPersistence.update(portletPreferences, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

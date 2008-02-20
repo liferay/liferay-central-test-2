@@ -52,11 +52,28 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public class DLFileEntryLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry addDLFileEntry(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry model)
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.addDLFileEntry(model);
+		return dlFileEntryLocalService.addDLFileEntry(dlFileEntry);
+	}
+
+	public static void deleteDLFileEntry(long fileEntryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		dlFileEntryLocalService.deleteDLFileEntry(fileEntryId);
+	}
+
+	public static void deleteDLFileEntry(
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
+
+		dlFileEntryLocalService.deleteDLFileEntry(dlFileEntry);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> dynamicQuery(
@@ -76,11 +93,11 @@ public class DLFileEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileEntry updateDLFileEntry(
-		com.liferay.portlet.documentlibrary.model.DLFileEntry model)
+		com.liferay.portlet.documentlibrary.model.DLFileEntry dlFileEntry)
 		throws com.liferay.portal.SystemException {
 		DLFileEntryLocalService dlFileEntryLocalService = DLFileEntryLocalServiceFactory.getService();
 
-		return dlFileEntryLocalService.updateDLFileEntry(model);
+		return dlFileEntryLocalService.updateDLFileEntry(dlFileEntry);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {

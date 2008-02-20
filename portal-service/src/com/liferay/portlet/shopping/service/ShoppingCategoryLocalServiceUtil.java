@@ -52,11 +52,28 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingCategoryLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCategory addShoppingCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory model)
+		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
-		return shoppingCategoryLocalService.addShoppingCategory(model);
+		return shoppingCategoryLocalService.addShoppingCategory(shoppingCategory);
+	}
+
+	public static void deleteShoppingCategory(long categoryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
+		shoppingCategoryLocalService.deleteShoppingCategory(categoryId);
+	}
+
+	public static void deleteShoppingCategory(
+		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
+
+		shoppingCategoryLocalService.deleteShoppingCategory(shoppingCategory);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> dynamicQuery(
@@ -77,11 +94,11 @@ public class ShoppingCategoryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCategory updateShoppingCategory(
-		com.liferay.portlet.shopping.model.ShoppingCategory model)
+		com.liferay.portlet.shopping.model.ShoppingCategory shoppingCategory)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
-		return shoppingCategoryLocalService.updateShoppingCategory(model);
+		return shoppingCategoryLocalService.updateShoppingCategory(shoppingCategory);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {

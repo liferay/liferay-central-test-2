@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class UserIdMapperLocalServiceUtil {
 	public static com.liferay.portal.model.UserIdMapper addUserIdMapper(
-		com.liferay.portal.model.UserIdMapper model)
+		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 
-		return userIdMapperLocalService.addUserIdMapper(model);
+		return userIdMapperLocalService.addUserIdMapper(userIdMapper);
+	}
+
+	public static void deleteUserIdMapper(long userIdMapperId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		userIdMapperLocalService.deleteUserIdMapper(userIdMapperId);
+	}
+
+	public static void deleteUserIdMapper(
+		com.liferay.portal.model.UserIdMapper userIdMapper)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		userIdMapperLocalService.deleteUserIdMapper(userIdMapper);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserIdMapper> dynamicQuery(
@@ -77,11 +94,11 @@ public class UserIdMapperLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.UserIdMapper updateUserIdMapper(
-		com.liferay.portal.model.UserIdMapper model)
+		com.liferay.portal.model.UserIdMapper userIdMapper)
 		throws com.liferay.portal.SystemException {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 
-		return userIdMapperLocalService.updateUserIdMapper(model);
+		return userIdMapperLocalService.updateUserIdMapper(userIdMapper);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

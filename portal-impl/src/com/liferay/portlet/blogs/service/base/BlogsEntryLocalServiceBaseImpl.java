@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.CompanyLocalService;
@@ -69,7 +70,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory;
@@ -122,25 +122,21 @@ import java.util.List;
  */
 public abstract class BlogsEntryLocalServiceBaseImpl
 	implements BlogsEntryLocalService, InitializingBean {
-	public BlogsEntry addBlogsEntry(BlogsEntry model) throws SystemException {
-		BlogsEntry blogsEntry = new BlogsEntryImpl();
-
+	public BlogsEntry addBlogsEntry(BlogsEntry blogsEntry)
+		throws SystemException {
 		blogsEntry.setNew(true);
 
-		blogsEntry.setUuid(model.getUuid());
-		blogsEntry.setEntryId(model.getEntryId());
-		blogsEntry.setGroupId(model.getGroupId());
-		blogsEntry.setCompanyId(model.getCompanyId());
-		blogsEntry.setUserId(model.getUserId());
-		blogsEntry.setUserName(model.getUserName());
-		blogsEntry.setCreateDate(model.getCreateDate());
-		blogsEntry.setModifiedDate(model.getModifiedDate());
-		blogsEntry.setTitle(model.getTitle());
-		blogsEntry.setUrlTitle(model.getUrlTitle());
-		blogsEntry.setContent(model.getContent());
-		blogsEntry.setDisplayDate(model.getDisplayDate());
-
 		return blogsEntryPersistence.update(blogsEntry);
+	}
+
+	public void deleteBlogsEntry(long entryId)
+		throws PortalException, SystemException {
+		blogsEntryPersistence.remove(entryId);
+	}
+
+	public void deleteBlogsEntry(BlogsEntry blogsEntry)
+		throws PortalException, SystemException {
+		blogsEntryPersistence.remove(blogsEntry);
 	}
 
 	public List<BlogsEntry> dynamicQuery(
@@ -155,9 +151,11 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public BlogsEntry updateBlogsEntry(BlogsEntry model)
+	public BlogsEntry updateBlogsEntry(BlogsEntry blogsEntry)
 		throws SystemException {
-		return blogsEntryPersistence.update(model, true);
+		blogsEntry.setNew(false);
+
+		return blogsEntryPersistence.update(blogsEntry, true);
 	}
 
 	public BlogsEntryPersistence getBlogsEntryPersistence() {

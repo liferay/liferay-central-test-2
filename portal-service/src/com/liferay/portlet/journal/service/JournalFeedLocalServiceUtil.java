@@ -52,11 +52,28 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalFeedLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalFeed addJournalFeed(
-		com.liferay.portlet.journal.model.JournalFeed model)
+		com.liferay.portlet.journal.model.JournalFeed journalFeed)
 		throws com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
-		return journalFeedLocalService.addJournalFeed(model);
+		return journalFeedLocalService.addJournalFeed(journalFeed);
+	}
+
+	public static void deleteJournalFeed(long id)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
+
+		journalFeedLocalService.deleteJournalFeed(id);
+	}
+
+	public static void deleteJournalFeed(
+		com.liferay.portlet.journal.model.JournalFeed journalFeed)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
+
+		journalFeedLocalService.deleteJournalFeed(journalFeed);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> dynamicQuery(
@@ -76,11 +93,11 @@ public class JournalFeedLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalFeed updateJournalFeed(
-		com.liferay.portlet.journal.model.JournalFeed model)
+		com.liferay.portlet.journal.model.JournalFeed journalFeed)
 		throws com.liferay.portal.SystemException {
 		JournalFeedLocalService journalFeedLocalService = JournalFeedLocalServiceFactory.getService();
 
-		return journalFeedLocalService.updateJournalFeed(model);
+		return journalFeedLocalService.updateJournalFeed(journalFeed);
 	}
 
 	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {

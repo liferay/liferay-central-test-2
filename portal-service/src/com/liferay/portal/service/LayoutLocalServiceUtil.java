@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class LayoutLocalServiceUtil {
 	public static com.liferay.portal.model.Layout addLayout(
-		com.liferay.portal.model.Layout model)
+		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-		return layoutLocalService.addLayout(model);
+		return layoutLocalService.addLayout(layout);
+	}
+
+	public static void deleteLayout(long plid)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		layoutLocalService.deleteLayout(plid);
+	}
+
+	public static void deleteLayout(com.liferay.portal.model.Layout layout)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		layoutLocalService.deleteLayout(layout);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> dynamicQuery(
@@ -76,11 +92,11 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(
-		com.liferay.portal.model.Layout model)
+		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 
-		return layoutLocalService.updateLayout(model);
+		return layoutLocalService.updateLayout(layout);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -909,14 +925,6 @@ public class LayoutLocalServiceUtil {
 		return layoutLocalService.addLayout(userId, groupId, privateLayout,
 			parentLayoutId, localeNamesMap, localeTitlesMap, description, type,
 			hidden, friendlyURL, dlFolderId);
-	}
-
-	public static void deleteLayout(long plid)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
-
-		layoutLocalService.deleteLayout(plid);
 	}
 
 	public static void deleteLayout(long groupId, boolean privateLayout,

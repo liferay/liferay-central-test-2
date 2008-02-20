@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface ContactLocalService {
 	public com.liferay.portal.model.Contact addContact(
-		com.liferay.portal.model.Contact model)
+		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteContact(long contactId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteContact(com.liferay.portal.model.Contact contact)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Contact> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface ContactLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Contact updateContact(
-		com.liferay.portal.model.Contact model)
+		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -338,14 +346,6 @@ public interface ContactLocalService {
 	public void afterPropertiesSet();
 
 	public com.liferay.portal.model.Contact getContact(long contactId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteContact(long contactId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteContact(com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

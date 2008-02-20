@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.CompanyLocalService;
@@ -97,7 +98,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
-import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsEntryLocalService;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceFactory;
@@ -152,35 +152,21 @@ import java.util.List;
  */
 public abstract class TagsAssetLocalServiceBaseImpl
 	implements TagsAssetLocalService, InitializingBean {
-	public TagsAsset addTagsAsset(TagsAsset model) throws SystemException {
-		TagsAsset tagsAsset = new TagsAssetImpl();
-
+	public TagsAsset addTagsAsset(TagsAsset tagsAsset)
+		throws SystemException {
 		tagsAsset.setNew(true);
 
-		tagsAsset.setAssetId(model.getAssetId());
-		tagsAsset.setGroupId(model.getGroupId());
-		tagsAsset.setCompanyId(model.getCompanyId());
-		tagsAsset.setUserId(model.getUserId());
-		tagsAsset.setUserName(model.getUserName());
-		tagsAsset.setCreateDate(model.getCreateDate());
-		tagsAsset.setModifiedDate(model.getModifiedDate());
-		tagsAsset.setClassNameId(model.getClassNameId());
-		tagsAsset.setClassPK(model.getClassPK());
-		tagsAsset.setStartDate(model.getStartDate());
-		tagsAsset.setEndDate(model.getEndDate());
-		tagsAsset.setPublishDate(model.getPublishDate());
-		tagsAsset.setExpirationDate(model.getExpirationDate());
-		tagsAsset.setMimeType(model.getMimeType());
-		tagsAsset.setTitle(model.getTitle());
-		tagsAsset.setDescription(model.getDescription());
-		tagsAsset.setSummary(model.getSummary());
-		tagsAsset.setUrl(model.getUrl());
-		tagsAsset.setHeight(model.getHeight());
-		tagsAsset.setWidth(model.getWidth());
-		tagsAsset.setPriority(model.getPriority());
-		tagsAsset.setViewCount(model.getViewCount());
-
 		return tagsAssetPersistence.update(tagsAsset);
+	}
+
+	public void deleteTagsAsset(long assetId)
+		throws PortalException, SystemException {
+		tagsAssetPersistence.remove(assetId);
+	}
+
+	public void deleteTagsAsset(TagsAsset tagsAsset)
+		throws PortalException, SystemException {
+		tagsAssetPersistence.remove(tagsAsset);
 	}
 
 	public List<TagsAsset> dynamicQuery(
@@ -195,8 +181,11 @@ public abstract class TagsAssetLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public TagsAsset updateTagsAsset(TagsAsset model) throws SystemException {
-		return tagsAssetPersistence.update(model, true);
+	public TagsAsset updateTagsAsset(TagsAsset tagsAsset)
+		throws SystemException {
+		tagsAsset.setNew(false);
+
+		return tagsAssetPersistence.update(tagsAsset, true);
 	}
 
 	public TagsAssetPersistence getTagsAssetPersistence() {

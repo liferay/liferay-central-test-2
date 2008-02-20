@@ -30,6 +30,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.CompanyLocalService;
@@ -62,7 +63,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -145,43 +145,21 @@ import java.util.List;
  */
 public abstract class JournalArticleLocalServiceBaseImpl
 	implements JournalArticleLocalService, InitializingBean {
-	public JournalArticle addJournalArticle(JournalArticle model)
+	public JournalArticle addJournalArticle(JournalArticle journalArticle)
 		throws SystemException {
-		JournalArticle journalArticle = new JournalArticleImpl();
-
 		journalArticle.setNew(true);
 
-		journalArticle.setUuid(model.getUuid());
-		journalArticle.setId(model.getId());
-		journalArticle.setResourcePrimKey(model.getResourcePrimKey());
-		journalArticle.setGroupId(model.getGroupId());
-		journalArticle.setCompanyId(model.getCompanyId());
-		journalArticle.setUserId(model.getUserId());
-		journalArticle.setUserName(model.getUserName());
-		journalArticle.setCreateDate(model.getCreateDate());
-		journalArticle.setModifiedDate(model.getModifiedDate());
-		journalArticle.setArticleId(model.getArticleId());
-		journalArticle.setVersion(model.getVersion());
-		journalArticle.setTitle(model.getTitle());
-		journalArticle.setDescription(model.getDescription());
-		journalArticle.setContent(model.getContent());
-		journalArticle.setType(model.getType());
-		journalArticle.setStructureId(model.getStructureId());
-		journalArticle.setTemplateId(model.getTemplateId());
-		journalArticle.setDisplayDate(model.getDisplayDate());
-		journalArticle.setApproved(model.getApproved());
-		journalArticle.setApprovedByUserId(model.getApprovedByUserId());
-		journalArticle.setApprovedByUserName(model.getApprovedByUserName());
-		journalArticle.setApprovedDate(model.getApprovedDate());
-		journalArticle.setExpired(model.getExpired());
-		journalArticle.setExpirationDate(model.getExpirationDate());
-		journalArticle.setReviewDate(model.getReviewDate());
-		journalArticle.setIndexable(model.getIndexable());
-		journalArticle.setSmallImage(model.getSmallImage());
-		journalArticle.setSmallImageId(model.getSmallImageId());
-		journalArticle.setSmallImageURL(model.getSmallImageURL());
-
 		return journalArticlePersistence.update(journalArticle);
+	}
+
+	public void deleteJournalArticle(long id)
+		throws PortalException, SystemException {
+		journalArticlePersistence.remove(id);
+	}
+
+	public void deleteJournalArticle(JournalArticle journalArticle)
+		throws PortalException, SystemException {
+		journalArticlePersistence.remove(journalArticle);
 	}
 
 	public List<JournalArticle> dynamicQuery(
@@ -196,9 +174,11 @@ public abstract class JournalArticleLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public JournalArticle updateJournalArticle(JournalArticle model)
+	public JournalArticle updateJournalArticle(JournalArticle journalArticle)
 		throws SystemException {
-		return journalArticlePersistence.update(model, true);
+		journalArticle.setNew(false);
+
+		return journalArticlePersistence.update(journalArticle, true);
 	}
 
 	public JournalArticlePersistence getJournalArticlePersistence() {

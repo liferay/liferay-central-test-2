@@ -30,10 +30,10 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.MembershipRequest;
-import com.liferay.portal.model.impl.MembershipRequestImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -278,24 +278,21 @@ import java.util.List;
  */
 public abstract class MembershipRequestLocalServiceBaseImpl
 	implements MembershipRequestLocalService, InitializingBean {
-	public MembershipRequest addMembershipRequest(MembershipRequest model)
-		throws SystemException {
-		MembershipRequest membershipRequest = new MembershipRequestImpl();
-
+	public MembershipRequest addMembershipRequest(
+		MembershipRequest membershipRequest) throws SystemException {
 		membershipRequest.setNew(true);
 
-		membershipRequest.setMembershipRequestId(model.getMembershipRequestId());
-		membershipRequest.setCompanyId(model.getCompanyId());
-		membershipRequest.setUserId(model.getUserId());
-		membershipRequest.setCreateDate(model.getCreateDate());
-		membershipRequest.setGroupId(model.getGroupId());
-		membershipRequest.setComments(model.getComments());
-		membershipRequest.setReplyComments(model.getReplyComments());
-		membershipRequest.setReplyDate(model.getReplyDate());
-		membershipRequest.setReplierUserId(model.getReplierUserId());
-		membershipRequest.setStatusId(model.getStatusId());
-
 		return membershipRequestPersistence.update(membershipRequest);
+	}
+
+	public void deleteMembershipRequest(long membershipRequestId)
+		throws PortalException, SystemException {
+		membershipRequestPersistence.remove(membershipRequestId);
+	}
+
+	public void deleteMembershipRequest(MembershipRequest membershipRequest)
+		throws PortalException, SystemException {
+		membershipRequestPersistence.remove(membershipRequest);
 	}
 
 	public List<MembershipRequest> dynamicQuery(
@@ -310,9 +307,11 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public MembershipRequest updateMembershipRequest(MembershipRequest model)
-		throws SystemException {
-		return membershipRequestPersistence.update(model, true);
+	public MembershipRequest updateMembershipRequest(
+		MembershipRequest membershipRequest) throws SystemException {
+		membershipRequest.setNew(false);
+
+		return membershipRequestPersistence.update(membershipRequest, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

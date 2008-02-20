@@ -52,11 +52,28 @@ package com.liferay.portlet.bookmarks.service;
  */
 public class BookmarksEntryLocalServiceUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry addBookmarksEntry(
-		com.liferay.portlet.bookmarks.model.BookmarksEntry model)
+		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
 		throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
-		return bookmarksEntryLocalService.addBookmarksEntry(model);
+		return bookmarksEntryLocalService.addBookmarksEntry(bookmarksEntry);
+	}
+
+	public static void deleteBookmarksEntry(long entryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		bookmarksEntryLocalService.deleteBookmarksEntry(entryId);
+	}
+
+	public static void deleteBookmarksEntry(
+		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
+
+		bookmarksEntryLocalService.deleteBookmarksEntry(bookmarksEntry);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> dynamicQuery(
@@ -77,11 +94,11 @@ public class BookmarksEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksEntry updateBookmarksEntry(
-		com.liferay.portlet.bookmarks.model.BookmarksEntry model)
+		com.liferay.portlet.bookmarks.model.BookmarksEntry bookmarksEntry)
 		throws com.liferay.portal.SystemException {
 		BookmarksEntryLocalService bookmarksEntryLocalService = BookmarksEntryLocalServiceFactory.getService();
 
-		return bookmarksEntryLocalService.updateBookmarksEntry(model);
+		return bookmarksEntryLocalService.updateBookmarksEntry(bookmarksEntry);
 	}
 
 	public static com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence getBookmarksEntryPersistence() {

@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class PermissionLocalServiceUtil {
 	public static com.liferay.portal.model.Permission addPermission(
-		com.liferay.portal.model.Permission model)
+		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
-		return permissionLocalService.addPermission(model);
+		return permissionLocalService.addPermission(permission);
+	}
+
+	public static void deletePermission(long permissionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		permissionLocalService.deletePermission(permissionId);
+	}
+
+	public static void deletePermission(
+		com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		permissionLocalService.deletePermission(permission);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Permission> dynamicQuery(
@@ -76,11 +93,11 @@ public class PermissionLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Permission updatePermission(
-		com.liferay.portal.model.Permission model)
+		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
-		return permissionLocalService.updatePermission(model);
+		return permissionLocalService.updatePermission(permission);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

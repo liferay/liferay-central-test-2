@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class ReleaseLocalServiceUtil {
 	public static com.liferay.portal.model.Release addRelease(
-		com.liferay.portal.model.Release model)
+		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
-		return releaseLocalService.addRelease(model);
+		return releaseLocalService.addRelease(release);
+	}
+
+	public static void deleteRelease(long releaseId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		releaseLocalService.deleteRelease(releaseId);
+	}
+
+	public static void deleteRelease(com.liferay.portal.model.Release release)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		releaseLocalService.deleteRelease(release);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Release> dynamicQuery(
@@ -76,11 +92,11 @@ public class ReleaseLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Release updateRelease(
-		com.liferay.portal.model.Release model)
+		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
-		return releaseLocalService.updateRelease(model);
+		return releaseLocalService.updateRelease(release);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

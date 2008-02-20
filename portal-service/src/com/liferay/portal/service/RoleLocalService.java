@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface RoleLocalService {
 	public com.liferay.portal.model.Role addRole(
-		com.liferay.portal.model.Role model)
+		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteRole(long roleId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteRole(com.liferay.portal.model.Role role)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Role> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface RoleLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role updateRole(
-		com.liferay.portal.model.Role model)
+		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -353,10 +361,6 @@ public interface RoleLocalService {
 			com.liferay.portal.PortalException;
 
 	public void checkSystemRoles(long companyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteRole(long roleId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

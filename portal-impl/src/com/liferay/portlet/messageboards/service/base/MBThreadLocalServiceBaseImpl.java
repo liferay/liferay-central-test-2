@@ -32,6 +32,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceFactory;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.service.DLServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ActivityTrackerLocalService;
@@ -58,7 +59,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.messageboards.model.MBThread;
-import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -119,21 +119,20 @@ import java.util.List;
  */
 public abstract class MBThreadLocalServiceBaseImpl
 	implements MBThreadLocalService, InitializingBean {
-	public MBThread addMBThread(MBThread model) throws SystemException {
-		MBThread mbThread = new MBThreadImpl();
-
+	public MBThread addMBThread(MBThread mbThread) throws SystemException {
 		mbThread.setNew(true);
 
-		mbThread.setThreadId(model.getThreadId());
-		mbThread.setCategoryId(model.getCategoryId());
-		mbThread.setRootMessageId(model.getRootMessageId());
-		mbThread.setMessageCount(model.getMessageCount());
-		mbThread.setViewCount(model.getViewCount());
-		mbThread.setLastPostByUserId(model.getLastPostByUserId());
-		mbThread.setLastPostDate(model.getLastPostDate());
-		mbThread.setPriority(model.getPriority());
-
 		return mbThreadPersistence.update(mbThread);
+	}
+
+	public void deleteMBThread(long threadId)
+		throws PortalException, SystemException {
+		mbThreadPersistence.remove(threadId);
+	}
+
+	public void deleteMBThread(MBThread mbThread)
+		throws PortalException, SystemException {
+		mbThreadPersistence.remove(mbThread);
 	}
 
 	public List<MBThread> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -148,8 +147,10 @@ public abstract class MBThreadLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public MBThread updateMBThread(MBThread model) throws SystemException {
-		return mbThreadPersistence.update(model, true);
+	public MBThread updateMBThread(MBThread mbThread) throws SystemException {
+		mbThread.setNew(false);
+
+		return mbThreadPersistence.update(mbThread, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

@@ -30,6 +30,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.CompanyLocalService;
@@ -62,7 +63,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.calendar.model.CalEvent;
-import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.service.CalEventLocalService;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinder;
 import com.liferay.portlet.calendar.service.persistence.CalEventFinderUtil;
@@ -81,35 +81,20 @@ import java.util.List;
  */
 public abstract class CalEventLocalServiceBaseImpl
 	implements CalEventLocalService, InitializingBean {
-	public CalEvent addCalEvent(CalEvent model) throws SystemException {
-		CalEvent calEvent = new CalEventImpl();
-
+	public CalEvent addCalEvent(CalEvent calEvent) throws SystemException {
 		calEvent.setNew(true);
 
-		calEvent.setUuid(model.getUuid());
-		calEvent.setEventId(model.getEventId());
-		calEvent.setGroupId(model.getGroupId());
-		calEvent.setCompanyId(model.getCompanyId());
-		calEvent.setUserId(model.getUserId());
-		calEvent.setUserName(model.getUserName());
-		calEvent.setCreateDate(model.getCreateDate());
-		calEvent.setModifiedDate(model.getModifiedDate());
-		calEvent.setTitle(model.getTitle());
-		calEvent.setDescription(model.getDescription());
-		calEvent.setStartDate(model.getStartDate());
-		calEvent.setEndDate(model.getEndDate());
-		calEvent.setDurationHour(model.getDurationHour());
-		calEvent.setDurationMinute(model.getDurationMinute());
-		calEvent.setAllDay(model.getAllDay());
-		calEvent.setTimeZoneSensitive(model.getTimeZoneSensitive());
-		calEvent.setType(model.getType());
-		calEvent.setRepeating(model.getRepeating());
-		calEvent.setRecurrence(model.getRecurrence());
-		calEvent.setRemindBy(model.getRemindBy());
-		calEvent.setFirstReminder(model.getFirstReminder());
-		calEvent.setSecondReminder(model.getSecondReminder());
-
 		return calEventPersistence.update(calEvent);
+	}
+
+	public void deleteCalEvent(long eventId)
+		throws PortalException, SystemException {
+		calEventPersistence.remove(eventId);
+	}
+
+	public void deleteCalEvent(CalEvent calEvent)
+		throws PortalException, SystemException {
+		calEventPersistence.remove(calEvent);
 	}
 
 	public List<CalEvent> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -124,8 +109,10 @@ public abstract class CalEventLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public CalEvent updateCalEvent(CalEvent model) throws SystemException {
-		return calEventPersistence.update(model, true);
+	public CalEvent updateCalEvent(CalEvent calEvent) throws SystemException {
+		calEvent.setNew(false);
+
+		return calEventPersistence.update(calEvent, true);
 	}
 
 	public CalEventPersistence getCalEventPersistence() {

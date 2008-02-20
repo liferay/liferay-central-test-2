@@ -50,8 +50,17 @@ package com.liferay.portlet.ratings.service;
  */
 public interface RatingsStatsLocalService {
 	public com.liferay.portlet.ratings.model.RatingsStats addRatingsStats(
-		com.liferay.portlet.ratings.model.RatingsStats model)
+		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteRatingsStats(long statsId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteRatingsStats(
+		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.ratings.model.RatingsStats> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface RatingsStatsLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.ratings.model.RatingsStats updateRatingsStats(
-		com.liferay.portlet.ratings.model.RatingsStats model)
+		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence getRatingsEntryPersistence();

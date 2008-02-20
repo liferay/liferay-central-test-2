@@ -52,11 +52,28 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public class DLFileVersionLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion addDLFileVersion(
-		com.liferay.portlet.documentlibrary.model.DLFileVersion model)
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 
-		return dlFileVersionLocalService.addDLFileVersion(model);
+		return dlFileVersionLocalService.addDLFileVersion(dlFileVersion);
+	}
+
+	public static void deleteDLFileVersion(long fileVersionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		dlFileVersionLocalService.deleteDLFileVersion(fileVersionId);
+	}
+
+	public static void deleteDLFileVersion(
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
+
+		dlFileVersionLocalService.deleteDLFileVersion(dlFileVersion);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> dynamicQuery(
@@ -77,11 +94,11 @@ public class DLFileVersionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileVersion updateDLFileVersion(
-		com.liferay.portlet.documentlibrary.model.DLFileVersion model)
+		com.liferay.portlet.documentlibrary.model.DLFileVersion dlFileVersion)
 		throws com.liferay.portal.SystemException {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 
-		return dlFileVersionLocalService.updateDLFileVersion(model);
+		return dlFileVersionLocalService.updateDLFileVersion(dlFileVersion);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {

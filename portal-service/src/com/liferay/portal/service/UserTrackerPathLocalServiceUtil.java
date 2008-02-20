@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class UserTrackerPathLocalServiceUtil {
 	public static com.liferay.portal.model.UserTrackerPath addUserTrackerPath(
-		com.liferay.portal.model.UserTrackerPath model)
+		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
 
-		return userTrackerPathLocalService.addUserTrackerPath(model);
+		return userTrackerPathLocalService.addUserTrackerPath(userTrackerPath);
+	}
+
+	public static void deleteUserTrackerPath(long userTrackerPathId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
+		userTrackerPathLocalService.deleteUserTrackerPath(userTrackerPathId);
+	}
+
+	public static void deleteUserTrackerPath(
+		com.liferay.portal.model.UserTrackerPath userTrackerPath)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
+
+		userTrackerPathLocalService.deleteUserTrackerPath(userTrackerPath);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserTrackerPath> dynamicQuery(
@@ -77,11 +94,11 @@ public class UserTrackerPathLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.UserTrackerPath updateUserTrackerPath(
-		com.liferay.portal.model.UserTrackerPath model)
+		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException {
 		UserTrackerPathLocalService userTrackerPathLocalService = UserTrackerPathLocalServiceFactory.getService();
 
-		return userTrackerPathLocalService.updateUserTrackerPath(model);
+		return userTrackerPathLocalService.updateUserTrackerPath(userTrackerPath);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

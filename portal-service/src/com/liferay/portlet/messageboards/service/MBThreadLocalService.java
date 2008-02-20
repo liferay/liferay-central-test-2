@@ -50,8 +50,17 @@ package com.liferay.portlet.messageboards.service;
  */
 public interface MBThreadLocalService {
 	public com.liferay.portlet.messageboards.model.MBThread addMBThread(
-		com.liferay.portlet.messageboards.model.MBThread model)
+		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteMBThread(long threadId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteMBThread(
+		com.liferay.portlet.messageboards.model.MBThread mbThread)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface MBThreadLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBThread updateMBThread(
-		com.liferay.portlet.messageboards.model.MBThread model)
+		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence();

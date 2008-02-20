@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class AddressLocalServiceUtil {
 	public static com.liferay.portal.model.Address addAddress(
-		com.liferay.portal.model.Address model)
+		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
-		return addressLocalService.addAddress(model);
+		return addressLocalService.addAddress(address);
+	}
+
+	public static void deleteAddress(long addressId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		addressLocalService.deleteAddress(addressId);
+	}
+
+	public static void deleteAddress(com.liferay.portal.model.Address address)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
+
+		addressLocalService.deleteAddress(address);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Address> dynamicQuery(
@@ -76,11 +92,11 @@ public class AddressLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Address updateAddress(
-		com.liferay.portal.model.Address model)
+		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 
-		return addressLocalService.updateAddress(model);
+		return addressLocalService.updateAddress(address);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -803,14 +819,6 @@ public class AddressLocalServiceUtil {
 		return addressLocalService.addAddress(userId, className, classPK,
 			street1, street2, street3, city, zip, regionId, countryId, typeId,
 			mailing, primary);
-	}
-
-	public static void deleteAddress(long addressId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		addressLocalService.deleteAddress(addressId);
 	}
 
 	public static void deleteAddresses(long companyId,

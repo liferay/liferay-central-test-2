@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.UserLocalService;
@@ -39,7 +40,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
-import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -96,32 +96,21 @@ import java.util.List;
  */
 public abstract class ShoppingCouponLocalServiceBaseImpl
 	implements ShoppingCouponLocalService, InitializingBean {
-	public ShoppingCoupon addShoppingCoupon(ShoppingCoupon model)
+	public ShoppingCoupon addShoppingCoupon(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
-		ShoppingCoupon shoppingCoupon = new ShoppingCouponImpl();
-
 		shoppingCoupon.setNew(true);
 
-		shoppingCoupon.setCouponId(model.getCouponId());
-		shoppingCoupon.setGroupId(model.getGroupId());
-		shoppingCoupon.setCompanyId(model.getCompanyId());
-		shoppingCoupon.setUserId(model.getUserId());
-		shoppingCoupon.setUserName(model.getUserName());
-		shoppingCoupon.setCreateDate(model.getCreateDate());
-		shoppingCoupon.setModifiedDate(model.getModifiedDate());
-		shoppingCoupon.setCode(model.getCode());
-		shoppingCoupon.setName(model.getName());
-		shoppingCoupon.setDescription(model.getDescription());
-		shoppingCoupon.setStartDate(model.getStartDate());
-		shoppingCoupon.setEndDate(model.getEndDate());
-		shoppingCoupon.setActive(model.getActive());
-		shoppingCoupon.setLimitCategories(model.getLimitCategories());
-		shoppingCoupon.setLimitSkus(model.getLimitSkus());
-		shoppingCoupon.setMinOrder(model.getMinOrder());
-		shoppingCoupon.setDiscount(model.getDiscount());
-		shoppingCoupon.setDiscountType(model.getDiscountType());
-
 		return shoppingCouponPersistence.update(shoppingCoupon);
+	}
+
+	public void deleteShoppingCoupon(long couponId)
+		throws PortalException, SystemException {
+		shoppingCouponPersistence.remove(couponId);
+	}
+
+	public void deleteShoppingCoupon(ShoppingCoupon shoppingCoupon)
+		throws PortalException, SystemException {
+		shoppingCouponPersistence.remove(shoppingCoupon);
 	}
 
 	public List<ShoppingCoupon> dynamicQuery(
@@ -136,9 +125,11 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ShoppingCoupon updateShoppingCoupon(ShoppingCoupon model)
+	public ShoppingCoupon updateShoppingCoupon(ShoppingCoupon shoppingCoupon)
 		throws SystemException {
-		return shoppingCouponPersistence.update(model, true);
+		shoppingCoupon.setNew(false);
+
+		return shoppingCouponPersistence.update(shoppingCoupon, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

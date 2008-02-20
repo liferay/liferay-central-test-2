@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -47,7 +48,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
-import com.liferay.portlet.softwarecatalog.model.impl.SCFrameworkVersionImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCLicenseLocalServiceFactory;
@@ -86,25 +86,21 @@ import java.util.List;
  */
 public abstract class SCFrameworkVersionLocalServiceBaseImpl
 	implements SCFrameworkVersionLocalService, InitializingBean {
-	public SCFrameworkVersion addSCFrameworkVersion(SCFrameworkVersion model)
-		throws SystemException {
-		SCFrameworkVersion scFrameworkVersion = new SCFrameworkVersionImpl();
-
+	public SCFrameworkVersion addSCFrameworkVersion(
+		SCFrameworkVersion scFrameworkVersion) throws SystemException {
 		scFrameworkVersion.setNew(true);
 
-		scFrameworkVersion.setFrameworkVersionId(model.getFrameworkVersionId());
-		scFrameworkVersion.setGroupId(model.getGroupId());
-		scFrameworkVersion.setCompanyId(model.getCompanyId());
-		scFrameworkVersion.setUserId(model.getUserId());
-		scFrameworkVersion.setUserName(model.getUserName());
-		scFrameworkVersion.setCreateDate(model.getCreateDate());
-		scFrameworkVersion.setModifiedDate(model.getModifiedDate());
-		scFrameworkVersion.setName(model.getName());
-		scFrameworkVersion.setUrl(model.getUrl());
-		scFrameworkVersion.setActive(model.getActive());
-		scFrameworkVersion.setPriority(model.getPriority());
-
 		return scFrameworkVersionPersistence.update(scFrameworkVersion);
+	}
+
+	public void deleteSCFrameworkVersion(long frameworkVersionId)
+		throws PortalException, SystemException {
+		scFrameworkVersionPersistence.remove(frameworkVersionId);
+	}
+
+	public void deleteSCFrameworkVersion(SCFrameworkVersion scFrameworkVersion)
+		throws PortalException, SystemException {
+		scFrameworkVersionPersistence.remove(scFrameworkVersion);
 	}
 
 	public List<SCFrameworkVersion> dynamicQuery(
@@ -119,9 +115,11 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public SCFrameworkVersion updateSCFrameworkVersion(SCFrameworkVersion model)
-		throws SystemException {
-		return scFrameworkVersionPersistence.update(model, true);
+	public SCFrameworkVersion updateSCFrameworkVersion(
+		SCFrameworkVersion scFrameworkVersion) throws SystemException {
+		scFrameworkVersion.setNew(false);
+
+		return scFrameworkVersionPersistence.update(scFrameworkVersion, true);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

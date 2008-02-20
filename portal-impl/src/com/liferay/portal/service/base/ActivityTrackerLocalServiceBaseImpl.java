@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.ActivityTracker;
-import com.liferay.portal.model.impl.ActivityTrackerImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,26 +277,21 @@ import java.util.List;
  */
 public abstract class ActivityTrackerLocalServiceBaseImpl
 	implements ActivityTrackerLocalService, InitializingBean {
-	public ActivityTracker addActivityTracker(ActivityTracker model)
+	public ActivityTracker addActivityTracker(ActivityTracker activityTracker)
 		throws SystemException {
-		ActivityTracker activityTracker = new ActivityTrackerImpl();
-
 		activityTracker.setNew(true);
 
-		activityTracker.setActivityTrackerId(model.getActivityTrackerId());
-		activityTracker.setGroupId(model.getGroupId());
-		activityTracker.setCompanyId(model.getCompanyId());
-		activityTracker.setUserId(model.getUserId());
-		activityTracker.setUserName(model.getUserName());
-		activityTracker.setCreateDate(model.getCreateDate());
-		activityTracker.setClassNameId(model.getClassNameId());
-		activityTracker.setClassPK(model.getClassPK());
-		activityTracker.setActivity(model.getActivity());
-		activityTracker.setExtraData(model.getExtraData());
-		activityTracker.setReceiverUserId(model.getReceiverUserId());
-		activityTracker.setReceiverUserName(model.getReceiverUserName());
-
 		return activityTrackerPersistence.update(activityTracker);
+	}
+
+	public void deleteActivityTracker(long activityTrackerId)
+		throws PortalException, SystemException {
+		activityTrackerPersistence.remove(activityTrackerId);
+	}
+
+	public void deleteActivityTracker(ActivityTracker activityTracker)
+		throws PortalException, SystemException {
+		activityTrackerPersistence.remove(activityTracker);
 	}
 
 	public List<ActivityTracker> dynamicQuery(
@@ -311,9 +306,11 @@ public abstract class ActivityTrackerLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ActivityTracker updateActivityTracker(ActivityTracker model)
-		throws SystemException {
-		return activityTrackerPersistence.update(model, true);
+	public ActivityTracker updateActivityTracker(
+		ActivityTracker activityTracker) throws SystemException {
+		activityTracker.setNew(false);
+
+		return activityTrackerPersistence.update(activityTracker, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

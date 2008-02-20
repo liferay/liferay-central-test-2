@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class PluginSettingLocalServiceUtil {
 	public static com.liferay.portal.model.PluginSetting addPluginSetting(
-		com.liferay.portal.model.PluginSetting model)
+		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 
-		return pluginSettingLocalService.addPluginSetting(model);
+		return pluginSettingLocalService.addPluginSetting(pluginSetting);
+	}
+
+	public static void deletePluginSetting(long pluginSettingId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		pluginSettingLocalService.deletePluginSetting(pluginSettingId);
+	}
+
+	public static void deletePluginSetting(
+		com.liferay.portal.model.PluginSetting pluginSetting)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		pluginSettingLocalService.deletePluginSetting(pluginSetting);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PluginSetting> dynamicQuery(
@@ -77,11 +94,11 @@ public class PluginSettingLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.PluginSetting updatePluginSetting(
-		com.liferay.portal.model.PluginSetting model)
+		com.liferay.portal.model.PluginSetting pluginSetting)
 		throws com.liferay.portal.SystemException {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 
-		return pluginSettingLocalService.updatePluginSetting(model);
+		return pluginSettingLocalService.updatePluginSetting(pluginSetting);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

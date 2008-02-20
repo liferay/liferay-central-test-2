@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -47,7 +48,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalService;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceFactory;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryService;
@@ -80,24 +80,21 @@ import java.util.List;
  */
 public abstract class BookmarksFolderLocalServiceBaseImpl
 	implements BookmarksFolderLocalService, InitializingBean {
-	public BookmarksFolder addBookmarksFolder(BookmarksFolder model)
+	public BookmarksFolder addBookmarksFolder(BookmarksFolder bookmarksFolder)
 		throws SystemException {
-		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
-
 		bookmarksFolder.setNew(true);
 
-		bookmarksFolder.setUuid(model.getUuid());
-		bookmarksFolder.setFolderId(model.getFolderId());
-		bookmarksFolder.setGroupId(model.getGroupId());
-		bookmarksFolder.setCompanyId(model.getCompanyId());
-		bookmarksFolder.setUserId(model.getUserId());
-		bookmarksFolder.setCreateDate(model.getCreateDate());
-		bookmarksFolder.setModifiedDate(model.getModifiedDate());
-		bookmarksFolder.setParentFolderId(model.getParentFolderId());
-		bookmarksFolder.setName(model.getName());
-		bookmarksFolder.setDescription(model.getDescription());
-
 		return bookmarksFolderPersistence.update(bookmarksFolder);
+	}
+
+	public void deleteBookmarksFolder(long folderId)
+		throws PortalException, SystemException {
+		bookmarksFolderPersistence.remove(folderId);
+	}
+
+	public void deleteBookmarksFolder(BookmarksFolder bookmarksFolder)
+		throws PortalException, SystemException {
+		bookmarksFolderPersistence.remove(bookmarksFolder);
 	}
 
 	public List<BookmarksFolder> dynamicQuery(
@@ -112,9 +109,11 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public BookmarksFolder updateBookmarksFolder(BookmarksFolder model)
-		throws SystemException {
-		return bookmarksFolderPersistence.update(model, true);
+	public BookmarksFolder updateBookmarksFolder(
+		BookmarksFolder bookmarksFolder) throws SystemException {
+		bookmarksFolder.setNew(false);
+
+		return bookmarksFolderPersistence.update(bookmarksFolder, true);
 	}
 
 	public BookmarksEntryLocalService getBookmarksEntryLocalService() {

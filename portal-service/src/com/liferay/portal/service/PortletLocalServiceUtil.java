@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class PortletLocalServiceUtil {
 	public static com.liferay.portal.model.Portlet addPortlet(
-		com.liferay.portal.model.Portlet model)
+		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-		return portletLocalService.addPortlet(model);
+		return portletLocalService.addPortlet(portlet);
+	}
+
+	public static void deletePortlet(long id)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		portletLocalService.deletePortlet(id);
+	}
+
+	public static void deletePortlet(com.liferay.portal.model.Portlet portlet)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
+
+		portletLocalService.deletePortlet(portlet);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Portlet> dynamicQuery(
@@ -76,11 +92,11 @@ public class PortletLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Portlet updatePortlet(
-		com.liferay.portal.model.Portlet model)
+		com.liferay.portal.model.Portlet portlet)
 		throws com.liferay.portal.SystemException {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 
-		return portletLocalService.updatePortlet(model);
+		return portletLocalService.updatePortlet(portlet);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

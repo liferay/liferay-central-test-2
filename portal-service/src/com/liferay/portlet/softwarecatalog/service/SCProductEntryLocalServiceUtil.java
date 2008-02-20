@@ -52,11 +52,28 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public class SCProductEntryLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry addSCProductEntry(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry model)
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
-		return scProductEntryLocalService.addSCProductEntry(model);
+		return scProductEntryLocalService.addSCProductEntry(scProductEntry);
+	}
+
+	public static void deleteSCProductEntry(long productEntryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		scProductEntryLocalService.deleteSCProductEntry(productEntryId);
+	}
+
+	public static void deleteSCProductEntry(
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
+
+		scProductEntryLocalService.deleteSCProductEntry(scProductEntry);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> dynamicQuery(
@@ -77,11 +94,11 @@ public class SCProductEntryLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductEntry updateSCProductEntry(
-		com.liferay.portlet.softwarecatalog.model.SCProductEntry model)
+		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException {
 		SCProductEntryLocalService scProductEntryLocalService = SCProductEntryLocalServiceFactory.getService();
 
-		return scProductEntryLocalService.updateSCProductEntry(model);
+		return scProductEntryLocalService.updateSCProductEntry(scProductEntry);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {

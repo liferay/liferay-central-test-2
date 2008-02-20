@@ -50,8 +50,17 @@ package com.liferay.portlet.journal.service;
  */
 public interface JournalStructureLocalService {
 	public com.liferay.portlet.journal.model.JournalStructure addJournalStructure(
-		com.liferay.portlet.journal.model.JournalStructure model)
+		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteJournalStructure(long id)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteJournalStructure(
+		com.liferay.portlet.journal.model.JournalStructure journalStructure)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.journal.model.JournalStructure> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface JournalStructureLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalStructure updateJournalStructure(
-		com.liferay.portlet.journal.model.JournalStructure model)
+		com.liferay.portlet.journal.model.JournalStructure journalStructure)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence();

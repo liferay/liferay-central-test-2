@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class WebsiteLocalServiceUtil {
 	public static com.liferay.portal.model.Website addWebsite(
-		com.liferay.portal.model.Website model)
+		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
-		return websiteLocalService.addWebsite(model);
+		return websiteLocalService.addWebsite(website);
+	}
+
+	public static void deleteWebsite(long websiteId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+
+		websiteLocalService.deleteWebsite(websiteId);
+	}
+
+	public static void deleteWebsite(com.liferay.portal.model.Website website)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
+
+		websiteLocalService.deleteWebsite(website);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Website> dynamicQuery(
@@ -76,11 +92,11 @@ public class WebsiteLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Website updateWebsite(
-		com.liferay.portal.model.Website model)
+		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 
-		return websiteLocalService.updateWebsite(model);
+		return websiteLocalService.updateWebsite(website);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -800,14 +816,6 @@ public class WebsiteLocalServiceUtil {
 
 		return websiteLocalService.addWebsite(userId, className, classPK, url,
 			typeId, primary);
-	}
-
-	public static void deleteWebsite(long websiteId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		websiteLocalService.deleteWebsite(websiteId);
 	}
 
 	public static void deleteWebsites(long companyId,

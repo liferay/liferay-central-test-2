@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class PortletPreferencesLocalServiceUtil {
 	public static com.liferay.portal.model.PortletPreferences addPortletPreferences(
-		com.liferay.portal.model.PortletPreferences model)
+		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
-		return portletPreferencesLocalService.addPortletPreferences(model);
+		return portletPreferencesLocalService.addPortletPreferences(portletPreferences);
+	}
+
+	public static void deletePortletPreferences(long portletPreferencesId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		portletPreferencesLocalService.deletePortletPreferences(portletPreferencesId);
+	}
+
+	public static void deletePortletPreferences(
+		com.liferay.portal.model.PortletPreferences portletPreferences)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
+
+		portletPreferencesLocalService.deletePortletPreferences(portletPreferences);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletPreferences> dynamicQuery(
@@ -77,11 +94,11 @@ public class PortletPreferencesLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.PortletPreferences updatePortletPreferences(
-		com.liferay.portal.model.PortletPreferences model)
+		com.liferay.portal.model.PortletPreferences portletPreferences)
 		throws com.liferay.portal.SystemException {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
-		return portletPreferencesLocalService.updatePortletPreferences(model);
+		return portletPreferencesLocalService.updatePortletPreferences(portletPreferences);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -790,14 +807,6 @@ public class PortletPreferencesLocalServiceUtil {
 		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
 
 		portletPreferencesLocalService.afterPropertiesSet();
-	}
-
-	public static void deletePortletPreferences(long portletPreferencesId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		PortletPreferencesLocalService portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getService();
-
-		portletPreferencesLocalService.deletePortletPreferences(portletPreferencesId);
 	}
 
 	public static void deletePortletPreferences(long ownerId, int ownerType,

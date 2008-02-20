@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface SubscriptionLocalService {
 	public com.liferay.portal.model.Subscription addSubscription(
-		com.liferay.portal.model.Subscription model)
+		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteSubscription(long subscriptionId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteSubscription(
+		com.liferay.portal.model.Subscription subscription)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Subscription> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface SubscriptionLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Subscription updateSubscription(
-		com.liferay.portal.model.Subscription model)
+		com.liferay.portal.model.Subscription subscription)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -344,10 +353,6 @@ public interface SubscriptionLocalService {
 
 	public com.liferay.portal.model.Subscription addSubscription(long userId,
 		java.lang.String className, long classPK, java.lang.String frequency)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteSubscription(long subscriptionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

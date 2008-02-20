@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface ImageLocalService {
 	public com.liferay.portal.model.Image addImage(
-		com.liferay.portal.model.Image model)
+		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteImage(long imageId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteImage(com.liferay.portal.model.Image image)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Image> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface ImageLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image updateImage(
-		com.liferay.portal.model.Image model)
+		com.liferay.portal.model.Image image)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -336,9 +344,6 @@ public interface ImageLocalService {
 		com.liferay.portal.service.persistence.WebsitePersistence websitePersistence);
 
 	public void afterPropertiesSet();
-
-	public void deleteImage(long imageId)
-		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Image getImage(long imageId)
 		throws com.liferay.portal.SystemException,

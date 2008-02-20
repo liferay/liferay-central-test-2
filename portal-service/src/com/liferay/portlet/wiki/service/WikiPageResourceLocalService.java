@@ -50,8 +50,17 @@ package com.liferay.portlet.wiki.service;
  */
 public interface WikiPageResourceLocalService {
 	public com.liferay.portlet.wiki.model.WikiPageResource addWikiPageResource(
-		com.liferay.portlet.wiki.model.WikiPageResource model)
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteWikiPageResource(long resourcePrimKey)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteWikiPageResource(
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPageResource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface WikiPageResourceLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPageResource updateWikiPageResource(
-		com.liferay.portlet.wiki.model.WikiPageResource model)
+		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence();

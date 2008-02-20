@@ -50,8 +50,17 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public interface SCProductVersionLocalService {
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion addSCProductVersion(
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion model)
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteSCProductVersion(long productVersionId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteSCProductVersion(
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface SCProductVersionLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.model.SCProductVersion updateSCProductVersion(
-		com.liferay.portlet.softwarecatalog.model.SCProductVersion model)
+		com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence();

@@ -50,8 +50,17 @@ package com.liferay.portlet.messageboards.service;
  */
 public interface MBMessageFlagLocalService {
 	public com.liferay.portlet.messageboards.model.MBMessageFlag addMBMessageFlag(
-		com.liferay.portlet.messageboards.model.MBMessageFlag model)
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteMBMessageFlag(long messageFlagId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteMBMessageFlag(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface MBMessageFlagLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
-		com.liferay.portlet.messageboards.model.MBMessageFlag model)
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence();

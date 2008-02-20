@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface WebDAVPropsLocalService {
 	public com.liferay.portal.model.WebDAVProps addWebDAVProps(
-		com.liferay.portal.model.WebDAVProps model)
+		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteWebDAVProps(long webDavPropsId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteWebDAVProps(
+		com.liferay.portal.model.WebDAVProps webDAVProps)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.WebDAVProps> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface WebDAVPropsLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.WebDAVProps updateWebDAVProps(
-		com.liferay.portal.model.WebDAVProps model)
+		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

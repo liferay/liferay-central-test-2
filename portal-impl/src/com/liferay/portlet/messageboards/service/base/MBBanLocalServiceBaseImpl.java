@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.UserLocalService;
@@ -39,7 +40,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.messageboards.model.MBBan;
-import com.liferay.portlet.messageboards.model.impl.MBBanImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalService;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceFactory;
@@ -92,21 +92,19 @@ import java.util.List;
  */
 public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	InitializingBean {
-	public MBBan addMBBan(MBBan model) throws SystemException {
-		MBBan mbBan = new MBBanImpl();
-
+	public MBBan addMBBan(MBBan mbBan) throws SystemException {
 		mbBan.setNew(true);
 
-		mbBan.setBanId(model.getBanId());
-		mbBan.setGroupId(model.getGroupId());
-		mbBan.setCompanyId(model.getCompanyId());
-		mbBan.setUserId(model.getUserId());
-		mbBan.setUserName(model.getUserName());
-		mbBan.setCreateDate(model.getCreateDate());
-		mbBan.setModifiedDate(model.getModifiedDate());
-		mbBan.setBanUserId(model.getBanUserId());
-
 		return mbBanPersistence.update(mbBan);
+	}
+
+	public void deleteMBBan(long banId) throws PortalException, SystemException {
+		mbBanPersistence.remove(banId);
+	}
+
+	public void deleteMBBan(MBBan mbBan)
+		throws PortalException, SystemException {
+		mbBanPersistence.remove(mbBan);
 	}
 
 	public List<MBBan> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -120,8 +118,10 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 			end);
 	}
 
-	public MBBan updateMBBan(MBBan model) throws SystemException {
-		return mbBanPersistence.update(model, true);
+	public MBBan updateMBBan(MBBan mbBan) throws SystemException {
+		mbBan.setNew(false);
+
+		return mbBanPersistence.update(mbBan, true);
 	}
 
 	public MBBanPersistence getMBBanPersistence() {

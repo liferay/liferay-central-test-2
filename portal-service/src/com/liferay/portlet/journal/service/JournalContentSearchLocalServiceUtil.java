@@ -52,11 +52,28 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalContentSearchLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalContentSearch addJournalContentSearch(
-		com.liferay.portlet.journal.model.JournalContentSearch model)
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-		return journalContentSearchLocalService.addJournalContentSearch(model);
+		return journalContentSearchLocalService.addJournalContentSearch(journalContentSearch);
+	}
+
+	public static void deleteJournalContentSearch(long contentSearchId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		journalContentSearchLocalService.deleteJournalContentSearch(contentSearchId);
+	}
+
+	public static void deleteJournalContentSearch(
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
+
+		journalContentSearchLocalService.deleteJournalContentSearch(journalContentSearch);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalContentSearch> dynamicQuery(
@@ -77,11 +94,11 @@ public class JournalContentSearchLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalContentSearch updateJournalContentSearch(
-		com.liferay.portlet.journal.model.JournalContentSearch model)
+		com.liferay.portlet.journal.model.JournalContentSearch journalContentSearch)
 		throws com.liferay.portal.SystemException {
 		JournalContentSearchLocalService journalContentSearchLocalService = JournalContentSearchLocalServiceFactory.getService();
 
-		return journalContentSearchLocalService.updateJournalContentSearch(model);
+		return journalContentSearchLocalService.updateJournalContentSearch(journalContentSearch);
 	}
 
 	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {

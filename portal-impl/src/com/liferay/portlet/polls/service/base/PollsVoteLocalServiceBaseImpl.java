@@ -27,11 +27,11 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.polls.model.PollsVote;
-import com.liferay.portlet.polls.model.impl.PollsVoteImpl;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
@@ -60,18 +60,21 @@ import java.util.List;
  */
 public abstract class PollsVoteLocalServiceBaseImpl
 	implements PollsVoteLocalService, InitializingBean {
-	public PollsVote addPollsVote(PollsVote model) throws SystemException {
-		PollsVote pollsVote = new PollsVoteImpl();
-
+	public PollsVote addPollsVote(PollsVote pollsVote)
+		throws SystemException {
 		pollsVote.setNew(true);
 
-		pollsVote.setVoteId(model.getVoteId());
-		pollsVote.setUserId(model.getUserId());
-		pollsVote.setQuestionId(model.getQuestionId());
-		pollsVote.setChoiceId(model.getChoiceId());
-		pollsVote.setVoteDate(model.getVoteDate());
-
 		return pollsVotePersistence.update(pollsVote);
+	}
+
+	public void deletePollsVote(long voteId)
+		throws PortalException, SystemException {
+		pollsVotePersistence.remove(voteId);
+	}
+
+	public void deletePollsVote(PollsVote pollsVote)
+		throws PortalException, SystemException {
+		pollsVotePersistence.remove(pollsVote);
 	}
 
 	public List<PollsVote> dynamicQuery(
@@ -86,8 +89,11 @@ public abstract class PollsVoteLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public PollsVote updatePollsVote(PollsVote model) throws SystemException {
-		return pollsVotePersistence.update(model, true);
+	public PollsVote updatePollsVote(PollsVote pollsVote)
+		throws SystemException {
+		pollsVote.setNew(false);
+
+		return pollsVotePersistence.update(pollsVote, true);
 	}
 
 	public PollsChoiceLocalService getPollsChoiceLocalService() {

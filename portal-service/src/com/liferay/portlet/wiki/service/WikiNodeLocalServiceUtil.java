@@ -52,11 +52,28 @@ package com.liferay.portlet.wiki.service;
  */
 public class WikiNodeLocalServiceUtil {
 	public static com.liferay.portlet.wiki.model.WikiNode addWikiNode(
-		com.liferay.portlet.wiki.model.WikiNode model)
+		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
-		return wikiNodeLocalService.addWikiNode(model);
+		return wikiNodeLocalService.addWikiNode(wikiNode);
+	}
+
+	public static void deleteWikiNode(long nodeId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		wikiNodeLocalService.deleteWikiNode(nodeId);
+	}
+
+	public static void deleteWikiNode(
+		com.liferay.portlet.wiki.model.WikiNode wikiNode)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
+
+		wikiNodeLocalService.deleteWikiNode(wikiNode);
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> dynamicQuery(
@@ -76,11 +93,11 @@ public class WikiNodeLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
-		com.liferay.portlet.wiki.model.WikiNode model)
+		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
-		return wikiNodeLocalService.updateWikiNode(model);
+		return wikiNodeLocalService.updateWikiNode(wikiNode);
 	}
 
 	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {

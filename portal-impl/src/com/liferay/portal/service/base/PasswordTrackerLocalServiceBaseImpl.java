@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.PasswordTracker;
-import com.liferay.portal.model.impl.PasswordTrackerImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,18 +277,21 @@ import java.util.List;
  */
 public abstract class PasswordTrackerLocalServiceBaseImpl
 	implements PasswordTrackerLocalService, InitializingBean {
-	public PasswordTracker addPasswordTracker(PasswordTracker model)
+	public PasswordTracker addPasswordTracker(PasswordTracker passwordTracker)
 		throws SystemException {
-		PasswordTracker passwordTracker = new PasswordTrackerImpl();
-
 		passwordTracker.setNew(true);
 
-		passwordTracker.setPasswordTrackerId(model.getPasswordTrackerId());
-		passwordTracker.setUserId(model.getUserId());
-		passwordTracker.setCreateDate(model.getCreateDate());
-		passwordTracker.setPassword(model.getPassword());
-
 		return passwordTrackerPersistence.update(passwordTracker);
+	}
+
+	public void deletePasswordTracker(long passwordTrackerId)
+		throws PortalException, SystemException {
+		passwordTrackerPersistence.remove(passwordTrackerId);
+	}
+
+	public void deletePasswordTracker(PasswordTracker passwordTracker)
+		throws PortalException, SystemException {
+		passwordTrackerPersistence.remove(passwordTracker);
 	}
 
 	public List<PasswordTracker> dynamicQuery(
@@ -303,9 +306,11 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public PasswordTracker updatePasswordTracker(PasswordTracker model)
-		throws SystemException {
-		return passwordTrackerPersistence.update(model, true);
+	public PasswordTracker updatePasswordTracker(
+		PasswordTracker passwordTracker) throws SystemException {
+		passwordTracker.setNew(false);
+
+		return passwordTrackerPersistence.update(passwordTracker, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

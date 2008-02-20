@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,20 +275,20 @@ import java.util.List;
  */
 public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService,
 	InitializingBean {
-	public Company addCompany(Company model) throws SystemException {
-		Company company = new CompanyImpl();
-
+	public Company addCompany(Company company) throws SystemException {
 		company.setNew(true);
 
-		company.setCompanyId(model.getCompanyId());
-		company.setAccountId(model.getAccountId());
-		company.setWebId(model.getWebId());
-		company.setKey(model.getKey());
-		company.setVirtualHost(model.getVirtualHost());
-		company.setMx(model.getMx());
-		company.setLogoId(model.getLogoId());
-
 		return companyPersistence.update(company);
+	}
+
+	public void deleteCompany(long companyId)
+		throws PortalException, SystemException {
+		companyPersistence.remove(companyId);
+	}
+
+	public void deleteCompany(Company company)
+		throws PortalException, SystemException {
+		companyPersistence.remove(company);
 	}
 
 	public List<Company> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -303,8 +303,10 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 			end);
 	}
 
-	public Company updateCompany(Company model) throws SystemException {
-		return companyPersistence.update(model, true);
+	public Company updateCompany(Company company) throws SystemException {
+		company.setNew(false);
+
+		return companyPersistence.update(company, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

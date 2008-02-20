@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface ReleaseLocalService {
 	public com.liferay.portal.model.Release addRelease(
-		com.liferay.portal.model.Release model)
+		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteRelease(long releaseId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteRelease(com.liferay.portal.model.Release release)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Release> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface ReleaseLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Release updateRelease(
-		com.liferay.portal.model.Release model)
+		com.liferay.portal.model.Release release)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

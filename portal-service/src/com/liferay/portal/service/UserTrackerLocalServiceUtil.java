@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class UserTrackerLocalServiceUtil {
 	public static com.liferay.portal.model.UserTracker addUserTracker(
-		com.liferay.portal.model.UserTracker model)
+		com.liferay.portal.model.UserTracker userTracker)
 		throws com.liferay.portal.SystemException {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
-		return userTrackerLocalService.addUserTracker(model);
+		return userTrackerLocalService.addUserTracker(userTracker);
+	}
+
+	public static void deleteUserTracker(long userTrackerId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		userTrackerLocalService.deleteUserTracker(userTrackerId);
+	}
+
+	public static void deleteUserTracker(
+		com.liferay.portal.model.UserTracker userTracker)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		userTrackerLocalService.deleteUserTracker(userTracker);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserTracker> dynamicQuery(
@@ -76,11 +93,11 @@ public class UserTrackerLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.UserTracker updateUserTracker(
-		com.liferay.portal.model.UserTracker model)
+		com.liferay.portal.model.UserTracker userTracker)
 		throws com.liferay.portal.SystemException {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 
-		return userTrackerLocalService.updateUserTracker(model);
+		return userTrackerLocalService.updateUserTracker(userTracker);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -802,14 +819,6 @@ public class UserTrackerLocalServiceUtil {
 		return userTrackerLocalService.addUserTracker(companyId, userId,
 			modifiedDate, sessionId, remoteAddr, remoteHost, userAgent,
 			userTrackerPaths);
-	}
-
-	public static void deleteUserTracker(long userTrackerId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		userTrackerLocalService.deleteUserTracker(userTrackerId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserTracker> getUserTrackers(

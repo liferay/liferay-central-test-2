@@ -52,11 +52,28 @@ package com.liferay.portlet.blogs.service;
  */
 public class BlogsStatsUserLocalServiceUtil {
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser addBlogsStatsUser(
-		com.liferay.portlet.blogs.model.BlogsStatsUser model)
+		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 
-		return blogsStatsUserLocalService.addBlogsStatsUser(model);
+		return blogsStatsUserLocalService.addBlogsStatsUser(blogsStatsUser);
+	}
+
+	public static void deleteBlogsStatsUser(long statsUserId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		blogsStatsUserLocalService.deleteBlogsStatsUser(statsUserId);
+	}
+
+	public static void deleteBlogsStatsUser(
+		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
+
+		blogsStatsUserLocalService.deleteBlogsStatsUser(blogsStatsUser);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> dynamicQuery(
@@ -77,11 +94,11 @@ public class BlogsStatsUserLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsStatsUser updateBlogsStatsUser(
-		com.liferay.portlet.blogs.model.BlogsStatsUser model)
+		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException {
 		BlogsStatsUserLocalService blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getService();
 
-		return blogsStatsUserLocalService.updateBlogsStatsUser(model);
+		return blogsStatsUserLocalService.updateBlogsStatsUser(blogsStatsUser);
 	}
 
 	public static com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence() {

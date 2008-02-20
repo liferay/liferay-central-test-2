@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface UserLocalService {
 	public com.liferay.portal.model.User addUser(
-		com.liferay.portal.model.User model)
+		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteUser(long userId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteUser(com.liferay.portal.model.User user)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface UserLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.User updateUser(
-		com.liferay.portal.model.User model)
+		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -482,10 +490,6 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteRoleUser(long roleId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteUser(long userId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

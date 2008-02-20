@@ -50,8 +50,16 @@ package com.liferay.portlet.wiki.service;
  */
 public interface WikiNodeLocalService {
 	public com.liferay.portlet.wiki.model.WikiNode addWikiNode(
-		com.liferay.portlet.wiki.model.WikiNode model)
+		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteWikiNode(long nodeId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteWikiNode(com.liferay.portlet.wiki.model.WikiNode wikiNode)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface WikiNodeLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiNode updateWikiNode(
-		com.liferay.portlet.wiki.model.WikiNode model)
+		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence();

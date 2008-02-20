@@ -52,11 +52,28 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBBanLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBBan addMBBan(
-		com.liferay.portlet.messageboards.model.MBBan model)
+		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 
-		return mbBanLocalService.addMBBan(model);
+		return mbBanLocalService.addMBBan(mbBan);
+	}
+
+	public static void deleteMBBan(long banId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		mbBanLocalService.deleteMBBan(banId);
+	}
+
+	public static void deleteMBBan(
+		com.liferay.portlet.messageboards.model.MBBan mbBan)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
+
+		mbBanLocalService.deleteMBBan(mbBan);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> dynamicQuery(
@@ -76,11 +93,11 @@ public class MBBanLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBBan updateMBBan(
-		com.liferay.portlet.messageboards.model.MBBan model)
+		com.liferay.portlet.messageboards.model.MBBan mbBan)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 
-		return mbBanLocalService.updateMBBan(model);
+		return mbBanLocalService.updateMBBan(mbBan);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

@@ -22,10 +22,10 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Release;
-import com.liferay.portal.model.impl.ReleaseImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -272,19 +272,20 @@ import java.util.List;
  */
 public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService,
 	InitializingBean {
-	public Release addRelease(Release model) throws SystemException {
-		Release release = new ReleaseImpl();
-
+	public Release addRelease(Release release) throws SystemException {
 		release.setNew(true);
 
-		release.setReleaseId(model.getReleaseId());
-		release.setCreateDate(model.getCreateDate());
-		release.setModifiedDate(model.getModifiedDate());
-		release.setBuildNumber(model.getBuildNumber());
-		release.setBuildDate(model.getBuildDate());
-		release.setVerified(model.getVerified());
-
 		return releasePersistence.update(release);
+	}
+
+	public void deleteRelease(long releaseId)
+		throws PortalException, SystemException {
+		releasePersistence.remove(releaseId);
+	}
+
+	public void deleteRelease(Release release)
+		throws PortalException, SystemException {
+		releasePersistence.remove(release);
 	}
 
 	public List<Release> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -299,8 +300,10 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 			end);
 	}
 
-	public Release updateRelease(Release model) throws SystemException {
-		return releasePersistence.update(model, true);
+	public Release updateRelease(Release release) throws SystemException {
+		release.setNew(false);
+
+		return releasePersistence.update(release, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

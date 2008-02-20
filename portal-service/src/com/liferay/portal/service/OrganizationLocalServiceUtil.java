@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class OrganizationLocalServiceUtil {
 	public static com.liferay.portal.model.Organization addOrganization(
-		com.liferay.portal.model.Organization model)
+		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
-		return organizationLocalService.addOrganization(model);
+		return organizationLocalService.addOrganization(organization);
+	}
+
+	public static void deleteOrganization(long organizationId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		organizationLocalService.deleteOrganization(organizationId);
+	}
+
+	public static void deleteOrganization(
+		com.liferay.portal.model.Organization organization)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		organizationLocalService.deleteOrganization(organization);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> dynamicQuery(
@@ -77,11 +94,11 @@ public class OrganizationLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Organization updateOrganization(
-		com.liferay.portal.model.Organization model)
+		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 
-		return organizationLocalService.updateOrganization(model);
+		return organizationLocalService.updateOrganization(organization);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -831,23 +848,6 @@ public class OrganizationLocalServiceUtil {
 
 		organizationLocalService.addPasswordPolicyOrganizations(passwordPolicyId,
 			organizationIds);
-	}
-
-	public static void deleteOrganization(long organizationId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.deleteOrganization(organizationId);
-	}
-
-	public static void deleteOrganization(
-		com.liferay.portal.model.Organization organization)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
-
-		organizationLocalService.deleteOrganization(organization);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Organization> getGroupOrganizations(

@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface ResourceCodeLocalService {
 	public com.liferay.portal.model.ResourceCode addResourceCode(
-		com.liferay.portal.model.ResourceCode model)
+		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteResourceCode(long codeId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteResourceCode(
+		com.liferay.portal.model.ResourceCode resourceCode)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.ResourceCode> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface ResourceCodeLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.ResourceCode updateResourceCode(
-		com.liferay.portal.model.ResourceCode model)
+		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -51,7 +52,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.messageboards.model.MBCategory;
-import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -112,25 +112,21 @@ import java.util.List;
  */
 public abstract class MBCategoryLocalServiceBaseImpl
 	implements MBCategoryLocalService, InitializingBean {
-	public MBCategory addMBCategory(MBCategory model) throws SystemException {
-		MBCategory mbCategory = new MBCategoryImpl();
-
+	public MBCategory addMBCategory(MBCategory mbCategory)
+		throws SystemException {
 		mbCategory.setNew(true);
 
-		mbCategory.setUuid(model.getUuid());
-		mbCategory.setCategoryId(model.getCategoryId());
-		mbCategory.setGroupId(model.getGroupId());
-		mbCategory.setCompanyId(model.getCompanyId());
-		mbCategory.setUserId(model.getUserId());
-		mbCategory.setUserName(model.getUserName());
-		mbCategory.setCreateDate(model.getCreateDate());
-		mbCategory.setModifiedDate(model.getModifiedDate());
-		mbCategory.setParentCategoryId(model.getParentCategoryId());
-		mbCategory.setName(model.getName());
-		mbCategory.setDescription(model.getDescription());
-		mbCategory.setLastPostDate(model.getLastPostDate());
-
 		return mbCategoryPersistence.update(mbCategory);
+	}
+
+	public void deleteMBCategory(long categoryId)
+		throws PortalException, SystemException {
+		mbCategoryPersistence.remove(categoryId);
+	}
+
+	public void deleteMBCategory(MBCategory mbCategory)
+		throws PortalException, SystemException {
+		mbCategoryPersistence.remove(mbCategory);
 	}
 
 	public List<MBCategory> dynamicQuery(
@@ -145,9 +141,11 @@ public abstract class MBCategoryLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public MBCategory updateMBCategory(MBCategory model)
+	public MBCategory updateMBCategory(MBCategory mbCategory)
 		throws SystemException {
-		return mbCategoryPersistence.update(model, true);
+		mbCategory.setNew(false);
+
+		return mbCategoryPersistence.update(mbCategory, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

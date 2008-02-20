@@ -50,8 +50,17 @@ package com.liferay.portlet.tags.service;
  */
 public interface TagsSourceLocalService {
 	public com.liferay.portlet.tags.model.TagsSource addTagsSource(
-		com.liferay.portlet.tags.model.TagsSource model)
+		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteTagsSource(long sourceId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteTagsSource(
+		com.liferay.portlet.tags.model.TagsSource tagsSource)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsSource> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface TagsSourceLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsSource updateTagsSource(
-		com.liferay.portlet.tags.model.TagsSource model)
+		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();

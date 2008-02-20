@@ -32,6 +32,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceFactory;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.service.DLServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.LayoutLocalService;
@@ -64,7 +65,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
@@ -109,25 +109,20 @@ import java.util.List;
  */
 public abstract class DLFolderLocalServiceBaseImpl
 	implements DLFolderLocalService, InitializingBean {
-	public DLFolder addDLFolder(DLFolder model) throws SystemException {
-		DLFolder dlFolder = new DLFolderImpl();
-
+	public DLFolder addDLFolder(DLFolder dlFolder) throws SystemException {
 		dlFolder.setNew(true);
 
-		dlFolder.setUuid(model.getUuid());
-		dlFolder.setFolderId(model.getFolderId());
-		dlFolder.setGroupId(model.getGroupId());
-		dlFolder.setCompanyId(model.getCompanyId());
-		dlFolder.setUserId(model.getUserId());
-		dlFolder.setUserName(model.getUserName());
-		dlFolder.setCreateDate(model.getCreateDate());
-		dlFolder.setModifiedDate(model.getModifiedDate());
-		dlFolder.setParentFolderId(model.getParentFolderId());
-		dlFolder.setName(model.getName());
-		dlFolder.setDescription(model.getDescription());
-		dlFolder.setLastPostDate(model.getLastPostDate());
-
 		return dlFolderPersistence.update(dlFolder);
+	}
+
+	public void deleteDLFolder(long folderId)
+		throws PortalException, SystemException {
+		dlFolderPersistence.remove(folderId);
+	}
+
+	public void deleteDLFolder(DLFolder dlFolder)
+		throws PortalException, SystemException {
+		dlFolderPersistence.remove(dlFolder);
 	}
 
 	public List<DLFolder> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -142,8 +137,10 @@ public abstract class DLFolderLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public DLFolder updateDLFolder(DLFolder model) throws SystemException {
-		return dlFolderPersistence.update(model, true);
+	public DLFolder updateDLFolder(DLFolder dlFolder) throws SystemException {
+		dlFolder.setNew(false);
+
+		return dlFolderPersistence.update(dlFolder, true);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

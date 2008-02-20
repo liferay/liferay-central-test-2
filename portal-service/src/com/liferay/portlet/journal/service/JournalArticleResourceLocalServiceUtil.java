@@ -52,11 +52,28 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalArticleResourceLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticleResource addJournalArticleResource(
-		com.liferay.portlet.journal.model.JournalArticleResource model)
+		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
 
-		return journalArticleResourceLocalService.addJournalArticleResource(model);
+		return journalArticleResourceLocalService.addJournalArticleResource(journalArticleResource);
+	}
+
+	public static void deleteJournalArticleResource(long resourcePrimKey)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
+		journalArticleResourceLocalService.deleteJournalArticleResource(resourcePrimKey);
+	}
+
+	public static void deleteJournalArticleResource(
+		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
+
+		journalArticleResourceLocalService.deleteJournalArticleResource(journalArticleResource);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleResource> dynamicQuery(
@@ -77,11 +94,11 @@ public class JournalArticleResourceLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticleResource updateJournalArticleResource(
-		com.liferay.portlet.journal.model.JournalArticleResource model)
+		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException {
 		JournalArticleResourceLocalService journalArticleResourceLocalService = JournalArticleResourceLocalServiceFactory.getService();
 
-		return journalArticleResourceLocalService.updateJournalArticleResource(model);
+		return journalArticleResourceLocalService.updateJournalArticleResource(journalArticleResource);
 	}
 
 	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {

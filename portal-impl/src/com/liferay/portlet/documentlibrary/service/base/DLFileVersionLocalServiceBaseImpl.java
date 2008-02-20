@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.documentlibrary.service.base;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileVersionImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
@@ -73,23 +73,21 @@ import java.util.List;
  */
 public abstract class DLFileVersionLocalServiceBaseImpl
 	implements DLFileVersionLocalService, InitializingBean {
-	public DLFileVersion addDLFileVersion(DLFileVersion model)
+	public DLFileVersion addDLFileVersion(DLFileVersion dlFileVersion)
 		throws SystemException {
-		DLFileVersion dlFileVersion = new DLFileVersionImpl();
-
 		dlFileVersion.setNew(true);
 
-		dlFileVersion.setFileVersionId(model.getFileVersionId());
-		dlFileVersion.setCompanyId(model.getCompanyId());
-		dlFileVersion.setUserId(model.getUserId());
-		dlFileVersion.setUserName(model.getUserName());
-		dlFileVersion.setCreateDate(model.getCreateDate());
-		dlFileVersion.setFolderId(model.getFolderId());
-		dlFileVersion.setName(model.getName());
-		dlFileVersion.setVersion(model.getVersion());
-		dlFileVersion.setSize(model.getSize());
-
 		return dlFileVersionPersistence.update(dlFileVersion);
+	}
+
+	public void deleteDLFileVersion(long fileVersionId)
+		throws PortalException, SystemException {
+		dlFileVersionPersistence.remove(fileVersionId);
+	}
+
+	public void deleteDLFileVersion(DLFileVersion dlFileVersion)
+		throws PortalException, SystemException {
+		dlFileVersionPersistence.remove(dlFileVersion);
 	}
 
 	public List<DLFileVersion> dynamicQuery(
@@ -104,9 +102,11 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public DLFileVersion updateDLFileVersion(DLFileVersion model)
+	public DLFileVersion updateDLFileVersion(DLFileVersion dlFileVersion)
 		throws SystemException {
-		return dlFileVersionPersistence.update(model, true);
+		dlFileVersion.setNew(false);
+
+		return dlFileVersionPersistence.update(dlFileVersion, true);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

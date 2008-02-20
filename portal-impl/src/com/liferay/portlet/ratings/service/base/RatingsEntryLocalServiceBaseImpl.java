@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.UserLocalService;
@@ -53,7 +54,6 @@ import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinderUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserUtil;
 import com.liferay.portlet.ratings.model.RatingsEntry;
-import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
@@ -74,23 +74,21 @@ import java.util.List;
  */
 public abstract class RatingsEntryLocalServiceBaseImpl
 	implements RatingsEntryLocalService, InitializingBean {
-	public RatingsEntry addRatingsEntry(RatingsEntry model)
+	public RatingsEntry addRatingsEntry(RatingsEntry ratingsEntry)
 		throws SystemException {
-		RatingsEntry ratingsEntry = new RatingsEntryImpl();
-
 		ratingsEntry.setNew(true);
 
-		ratingsEntry.setEntryId(model.getEntryId());
-		ratingsEntry.setCompanyId(model.getCompanyId());
-		ratingsEntry.setUserId(model.getUserId());
-		ratingsEntry.setUserName(model.getUserName());
-		ratingsEntry.setCreateDate(model.getCreateDate());
-		ratingsEntry.setModifiedDate(model.getModifiedDate());
-		ratingsEntry.setClassNameId(model.getClassNameId());
-		ratingsEntry.setClassPK(model.getClassPK());
-		ratingsEntry.setScore(model.getScore());
-
 		return ratingsEntryPersistence.update(ratingsEntry);
+	}
+
+	public void deleteRatingsEntry(long entryId)
+		throws PortalException, SystemException {
+		ratingsEntryPersistence.remove(entryId);
+	}
+
+	public void deleteRatingsEntry(RatingsEntry ratingsEntry)
+		throws PortalException, SystemException {
+		ratingsEntryPersistence.remove(ratingsEntry);
 	}
 
 	public List<RatingsEntry> dynamicQuery(
@@ -105,9 +103,11 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public RatingsEntry updateRatingsEntry(RatingsEntry model)
+	public RatingsEntry updateRatingsEntry(RatingsEntry ratingsEntry)
 		throws SystemException {
-		return ratingsEntryPersistence.update(model, true);
+		ratingsEntry.setNew(false);
+
+		return ratingsEntryPersistence.update(ratingsEntry, true);
 	}
 
 	public RatingsEntryPersistence getRatingsEntryPersistence() {

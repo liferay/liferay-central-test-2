@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class UserGroupLocalServiceUtil {
 	public static com.liferay.portal.model.UserGroup addUserGroup(
-		com.liferay.portal.model.UserGroup model)
+		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
-		return userGroupLocalService.addUserGroup(model);
+		return userGroupLocalService.addUserGroup(userGroup);
+	}
+
+	public static void deleteUserGroup(long userGroupId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		userGroupLocalService.deleteUserGroup(userGroupId);
+	}
+
+	public static void deleteUserGroup(
+		com.liferay.portal.model.UserGroup userGroup)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		userGroupLocalService.deleteUserGroup(userGroup);
 	}
 
 	public static java.util.List<com.liferay.portal.model.UserGroup> dynamicQuery(
@@ -76,11 +93,11 @@ public class UserGroupLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.UserGroup updateUserGroup(
-		com.liferay.portal.model.UserGroup model)
+		com.liferay.portal.model.UserGroup userGroup)
 		throws com.liferay.portal.SystemException {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
-		return userGroupLocalService.updateUserGroup(model);
+		return userGroupLocalService.updateUserGroup(userGroup);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -815,14 +832,6 @@ public class UserGroupLocalServiceUtil {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 
 		userGroupLocalService.clearUserUserGroups(userId);
-	}
-
-	public static void deleteUserGroup(long userGroupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
-
-		userGroupLocalService.deleteUserGroup(userGroupId);
 	}
 
 	public static com.liferay.portal.model.UserGroup getUserGroup(

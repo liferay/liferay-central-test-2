@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface MembershipRequestLocalService {
 	public com.liferay.portal.model.MembershipRequest addMembershipRequest(
-		com.liferay.portal.model.MembershipRequest model)
+		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteMembershipRequest(long membershipRequestId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteMembershipRequest(
+		com.liferay.portal.model.MembershipRequest membershipRequest)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.MembershipRequest> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface MembershipRequestLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.MembershipRequest updateMembershipRequest(
-		com.liferay.portal.model.MembershipRequest model)
+		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

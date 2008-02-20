@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.shopping.service.base;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
-import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -85,24 +85,21 @@ import java.util.List;
  */
 public abstract class ShoppingItemPriceLocalServiceBaseImpl
 	implements ShoppingItemPriceLocalService, InitializingBean {
-	public ShoppingItemPrice addShoppingItemPrice(ShoppingItemPrice model)
-		throws SystemException {
-		ShoppingItemPrice shoppingItemPrice = new ShoppingItemPriceImpl();
-
+	public ShoppingItemPrice addShoppingItemPrice(
+		ShoppingItemPrice shoppingItemPrice) throws SystemException {
 		shoppingItemPrice.setNew(true);
 
-		shoppingItemPrice.setItemPriceId(model.getItemPriceId());
-		shoppingItemPrice.setItemId(model.getItemId());
-		shoppingItemPrice.setMinQuantity(model.getMinQuantity());
-		shoppingItemPrice.setMaxQuantity(model.getMaxQuantity());
-		shoppingItemPrice.setPrice(model.getPrice());
-		shoppingItemPrice.setDiscount(model.getDiscount());
-		shoppingItemPrice.setTaxable(model.getTaxable());
-		shoppingItemPrice.setShipping(model.getShipping());
-		shoppingItemPrice.setUseShippingFormula(model.getUseShippingFormula());
-		shoppingItemPrice.setStatus(model.getStatus());
-
 		return shoppingItemPricePersistence.update(shoppingItemPrice);
+	}
+
+	public void deleteShoppingItemPrice(long itemPriceId)
+		throws PortalException, SystemException {
+		shoppingItemPricePersistence.remove(itemPriceId);
+	}
+
+	public void deleteShoppingItemPrice(ShoppingItemPrice shoppingItemPrice)
+		throws PortalException, SystemException {
+		shoppingItemPricePersistence.remove(shoppingItemPrice);
 	}
 
 	public List<ShoppingItemPrice> dynamicQuery(
@@ -117,9 +114,11 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ShoppingItemPrice updateShoppingItemPrice(ShoppingItemPrice model)
-		throws SystemException {
-		return shoppingItemPricePersistence.update(model, true);
+	public ShoppingItemPrice updateShoppingItemPrice(
+		ShoppingItemPrice shoppingItemPrice) throws SystemException {
+		shoppingItemPrice.setNew(false);
+
+		return shoppingItemPricePersistence.update(shoppingItemPrice, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

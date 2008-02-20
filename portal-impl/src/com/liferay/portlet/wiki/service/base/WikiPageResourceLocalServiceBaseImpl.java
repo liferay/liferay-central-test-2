@@ -27,11 +27,11 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
-import com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiNodeService;
@@ -62,17 +62,21 @@ import java.util.List;
  */
 public abstract class WikiPageResourceLocalServiceBaseImpl
 	implements WikiPageResourceLocalService, InitializingBean {
-	public WikiPageResource addWikiPageResource(WikiPageResource model)
-		throws SystemException {
-		WikiPageResource wikiPageResource = new WikiPageResourceImpl();
-
+	public WikiPageResource addWikiPageResource(
+		WikiPageResource wikiPageResource) throws SystemException {
 		wikiPageResource.setNew(true);
 
-		wikiPageResource.setResourcePrimKey(model.getResourcePrimKey());
-		wikiPageResource.setNodeId(model.getNodeId());
-		wikiPageResource.setTitle(model.getTitle());
-
 		return wikiPageResourcePersistence.update(wikiPageResource);
+	}
+
+	public void deleteWikiPageResource(long resourcePrimKey)
+		throws PortalException, SystemException {
+		wikiPageResourcePersistence.remove(resourcePrimKey);
+	}
+
+	public void deleteWikiPageResource(WikiPageResource wikiPageResource)
+		throws PortalException, SystemException {
+		wikiPageResourcePersistence.remove(wikiPageResource);
 	}
 
 	public List<WikiPageResource> dynamicQuery(
@@ -87,9 +91,11 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public WikiPageResource updateWikiPageResource(WikiPageResource model)
-		throws SystemException {
-		return wikiPageResourcePersistence.update(model, true);
+	public WikiPageResource updateWikiPageResource(
+		WikiPageResource wikiPageResource) throws SystemException {
+		wikiPageResource.setNew(false);
+
+		return wikiPageResourcePersistence.update(wikiPageResource, true);
 	}
 
 	public WikiNodeLocalService getWikiNodeLocalService() {

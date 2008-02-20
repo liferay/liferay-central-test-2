@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class GroupLocalServiceUtil {
 	public static com.liferay.portal.model.Group addGroup(
-		com.liferay.portal.model.Group model)
+		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-		return groupLocalService.addGroup(model);
+		return groupLocalService.addGroup(group);
+	}
+
+	public static void deleteGroup(long groupId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.deleteGroup(groupId);
+	}
+
+	public static void deleteGroup(com.liferay.portal.model.Group group)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.deleteGroup(group);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Group> dynamicQuery(
@@ -76,11 +92,11 @@ public class GroupLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(
-		com.liferay.portal.model.Group model)
+		com.liferay.portal.model.Group group)
 		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
-		return groupLocalService.updateGroup(model);
+		return groupLocalService.updateGroup(group);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -1214,14 +1230,6 @@ public class GroupLocalServiceUtil {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		groupLocalService.checkSystemGroups(companyId);
-	}
-
-	public static void deleteGroup(long groupId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
-
-		groupLocalService.deleteGroup(groupId);
 	}
 
 	public static com.liferay.portal.model.Group getFriendlyURLGroup(

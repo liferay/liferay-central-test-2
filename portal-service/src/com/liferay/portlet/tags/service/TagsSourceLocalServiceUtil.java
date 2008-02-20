@@ -52,11 +52,28 @@ package com.liferay.portlet.tags.service;
  */
 public class TagsSourceLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsSource addTagsSource(
-		com.liferay.portlet.tags.model.TagsSource model)
+		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
 
-		return tagsSourceLocalService.addTagsSource(model);
+		return tagsSourceLocalService.addTagsSource(tagsSource);
+	}
+
+	public static void deleteTagsSource(long sourceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		tagsSourceLocalService.deleteTagsSource(sourceId);
+	}
+
+	public static void deleteTagsSource(
+		com.liferay.portlet.tags.model.TagsSource tagsSource)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
+
+		tagsSourceLocalService.deleteTagsSource(tagsSource);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsSource> dynamicQuery(
@@ -76,11 +93,11 @@ public class TagsSourceLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsSource updateTagsSource(
-		com.liferay.portlet.tags.model.TagsSource model)
+		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException {
 		TagsSourceLocalService tagsSourceLocalService = TagsSourceLocalServiceFactory.getService();
 
-		return tagsSourceLocalService.updateTagsSource(model);
+		return tagsSourceLocalService.updateTagsSource(tagsSource);
 	}
 
 	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {

@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class PasswordPolicyLocalServiceUtil {
 	public static com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
-		com.liferay.portal.model.PasswordPolicy model)
+		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
-		return passwordPolicyLocalService.addPasswordPolicy(model);
+		return passwordPolicyLocalService.addPasswordPolicy(passwordPolicy);
+	}
+
+	public static void deletePasswordPolicy(long passwordPolicyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		passwordPolicyLocalService.deletePasswordPolicy(passwordPolicyId);
+	}
+
+	public static void deletePasswordPolicy(
+		com.liferay.portal.model.PasswordPolicy passwordPolicy)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		passwordPolicyLocalService.deletePasswordPolicy(passwordPolicy);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PasswordPolicy> dynamicQuery(
@@ -77,11 +94,11 @@ public class PasswordPolicyLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
-		com.liferay.portal.model.PasswordPolicy model)
+		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
-		return passwordPolicyLocalService.updatePasswordPolicy(model);
+		return passwordPolicyLocalService.updatePasswordPolicy(passwordPolicy);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -817,14 +834,6 @@ public class PasswordPolicyLocalServiceUtil {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 
 		passwordPolicyLocalService.checkDefaultPasswordPolicy(companyId);
-	}
-
-	public static void deletePasswordPolicy(long passwordPolicyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
-
-		passwordPolicyLocalService.deletePasswordPolicy(passwordPolicyId);
 	}
 
 	public static com.liferay.portal.model.PasswordPolicy getDefaultPasswordPolicy(

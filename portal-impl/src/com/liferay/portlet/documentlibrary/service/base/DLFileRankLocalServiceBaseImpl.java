@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.LayoutLocalService;
@@ -39,7 +40,6 @@ import com.liferay.portal.service.persistence.LayoutPersistence;
 import com.liferay.portal.service.persistence.LayoutUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
@@ -86,19 +86,21 @@ import java.util.List;
  */
 public abstract class DLFileRankLocalServiceBaseImpl
 	implements DLFileRankLocalService, InitializingBean {
-	public DLFileRank addDLFileRank(DLFileRank model) throws SystemException {
-		DLFileRank dlFileRank = new DLFileRankImpl();
-
+	public DLFileRank addDLFileRank(DLFileRank dlFileRank)
+		throws SystemException {
 		dlFileRank.setNew(true);
 
-		dlFileRank.setFileRankId(model.getFileRankId());
-		dlFileRank.setCompanyId(model.getCompanyId());
-		dlFileRank.setUserId(model.getUserId());
-		dlFileRank.setCreateDate(model.getCreateDate());
-		dlFileRank.setFolderId(model.getFolderId());
-		dlFileRank.setName(model.getName());
-
 		return dlFileRankPersistence.update(dlFileRank);
+	}
+
+	public void deleteDLFileRank(long fileRankId)
+		throws PortalException, SystemException {
+		dlFileRankPersistence.remove(fileRankId);
+	}
+
+	public void deleteDLFileRank(DLFileRank dlFileRank)
+		throws PortalException, SystemException {
+		dlFileRankPersistence.remove(dlFileRank);
 	}
 
 	public List<DLFileRank> dynamicQuery(
@@ -113,9 +115,11 @@ public abstract class DLFileRankLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public DLFileRank updateDLFileRank(DLFileRank model)
+	public DLFileRank updateDLFileRank(DLFileRank dlFileRank)
 		throws SystemException {
-		return dlFileRankPersistence.update(model, true);
+		dlFileRank.setNew(false);
+
+		return dlFileRankPersistence.update(dlFileRank, true);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

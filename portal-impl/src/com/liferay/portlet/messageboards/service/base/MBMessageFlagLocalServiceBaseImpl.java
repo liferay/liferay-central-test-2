@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.UserLocalService;
@@ -39,7 +40,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
-import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -94,18 +94,21 @@ import java.util.List;
  */
 public abstract class MBMessageFlagLocalServiceBaseImpl
 	implements MBMessageFlagLocalService, InitializingBean {
-	public MBMessageFlag addMBMessageFlag(MBMessageFlag model)
+	public MBMessageFlag addMBMessageFlag(MBMessageFlag mbMessageFlag)
 		throws SystemException {
-		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
-
 		mbMessageFlag.setNew(true);
 
-		mbMessageFlag.setMessageFlagId(model.getMessageFlagId());
-		mbMessageFlag.setUserId(model.getUserId());
-		mbMessageFlag.setMessageId(model.getMessageId());
-		mbMessageFlag.setFlag(model.getFlag());
-
 		return mbMessageFlagPersistence.update(mbMessageFlag);
+	}
+
+	public void deleteMBMessageFlag(long messageFlagId)
+		throws PortalException, SystemException {
+		mbMessageFlagPersistence.remove(messageFlagId);
+	}
+
+	public void deleteMBMessageFlag(MBMessageFlag mbMessageFlag)
+		throws PortalException, SystemException {
+		mbMessageFlagPersistence.remove(mbMessageFlag);
 	}
 
 	public List<MBMessageFlag> dynamicQuery(
@@ -120,9 +123,11 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public MBMessageFlag updateMBMessageFlag(MBMessageFlag model)
+	public MBMessageFlag updateMBMessageFlag(MBMessageFlag mbMessageFlag)
 		throws SystemException {
-		return mbMessageFlagPersistence.update(model, true);
+		mbMessageFlag.setNew(false);
+
+		return mbMessageFlagPersistence.update(mbMessageFlag, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

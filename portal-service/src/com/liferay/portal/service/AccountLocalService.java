@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface AccountLocalService {
 	public com.liferay.portal.model.Account addAccount(
-		com.liferay.portal.model.Account model)
+		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteAccount(long accountId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteAccount(com.liferay.portal.model.Account account)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Account> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface AccountLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Account updateAccount(
-		com.liferay.portal.model.Account model)
+		com.liferay.portal.model.Account account)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

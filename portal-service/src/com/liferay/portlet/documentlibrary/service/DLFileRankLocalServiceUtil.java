@@ -52,11 +52,28 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public class DLFileRankLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank addDLFileRank(
-		com.liferay.portlet.documentlibrary.model.DLFileRank model)
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 
-		return dlFileRankLocalService.addDLFileRank(model);
+		return dlFileRankLocalService.addDLFileRank(dlFileRank);
+	}
+
+	public static void deleteDLFileRank(long fileRankId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		dlFileRankLocalService.deleteDLFileRank(fileRankId);
+	}
+
+	public static void deleteDLFileRank(
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
+
+		dlFileRankLocalService.deleteDLFileRank(dlFileRank);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> dynamicQuery(
@@ -76,11 +93,11 @@ public class DLFileRankLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFileRank updateDLFileRank(
-		com.liferay.portlet.documentlibrary.model.DLFileRank model)
+		com.liferay.portlet.documentlibrary.model.DLFileRank dlFileRank)
 		throws com.liferay.portal.SystemException {
 		DLFileRankLocalService dlFileRankLocalService = DLFileRankLocalServiceFactory.getService();
 
-		return dlFileRankLocalService.updateDLFileRank(model);
+		return dlFileRankLocalService.updateDLFileRank(dlFileRank);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {

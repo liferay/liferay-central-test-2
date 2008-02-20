@@ -30,10 +30,10 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -311,42 +311,18 @@ import java.util.List;
  */
 public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	InitializingBean {
-	public User addUser(User model) throws SystemException {
-		User user = new UserImpl();
-
+	public User addUser(User user) throws SystemException {
 		user.setNew(true);
 
-		user.setUuid(model.getUuid());
-		user.setUserId(model.getUserId());
-		user.setCompanyId(model.getCompanyId());
-		user.setCreateDate(model.getCreateDate());
-		user.setModifiedDate(model.getModifiedDate());
-		user.setDefaultUser(model.getDefaultUser());
-		user.setContactId(model.getContactId());
-		user.setPassword(model.getPassword());
-		user.setPasswordEncrypted(model.getPasswordEncrypted());
-		user.setPasswordReset(model.getPasswordReset());
-		user.setPasswordModifiedDate(model.getPasswordModifiedDate());
-		user.setGraceLoginCount(model.getGraceLoginCount());
-		user.setScreenName(model.getScreenName());
-		user.setEmailAddress(model.getEmailAddress());
-		user.setPortraitId(model.getPortraitId());
-		user.setLanguageId(model.getLanguageId());
-		user.setTimeZoneId(model.getTimeZoneId());
-		user.setGreeting(model.getGreeting());
-		user.setComments(model.getComments());
-		user.setLoginDate(model.getLoginDate());
-		user.setLoginIP(model.getLoginIP());
-		user.setLastLoginDate(model.getLastLoginDate());
-		user.setLastLoginIP(model.getLastLoginIP());
-		user.setLastFailedLoginDate(model.getLastFailedLoginDate());
-		user.setFailedLoginAttempts(model.getFailedLoginAttempts());
-		user.setLockout(model.getLockout());
-		user.setLockoutDate(model.getLockoutDate());
-		user.setAgreedToTermsOfUse(model.getAgreedToTermsOfUse());
-		user.setActive(model.getActive());
-
 		return userPersistence.update(user);
+	}
+
+	public void deleteUser(long userId) throws PortalException, SystemException {
+		userPersistence.remove(userId);
+	}
+
+	public void deleteUser(User user) throws PortalException, SystemException {
+		userPersistence.remove(user);
 	}
 
 	public List<User> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -359,8 +335,10 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		return userPersistence.findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public User updateUser(User model) throws SystemException {
-		return userPersistence.update(model, true);
+	public User updateUser(User user) throws SystemException {
+		user.setNew(false);
+
+		return userPersistence.update(user, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

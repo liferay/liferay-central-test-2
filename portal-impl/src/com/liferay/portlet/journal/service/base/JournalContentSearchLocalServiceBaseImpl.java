@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.GroupLocalService;
@@ -53,7 +54,6 @@ import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 
 import com.liferay.portlet.journal.model.JournalContentSearch;
-import com.liferay.portlet.journal.model.impl.JournalContentSearchImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -111,20 +111,21 @@ import java.util.List;
 public abstract class JournalContentSearchLocalServiceBaseImpl
 	implements JournalContentSearchLocalService, InitializingBean {
 	public JournalContentSearch addJournalContentSearch(
-		JournalContentSearch model) throws SystemException {
-		JournalContentSearch journalContentSearch = new JournalContentSearchImpl();
-
+		JournalContentSearch journalContentSearch) throws SystemException {
 		journalContentSearch.setNew(true);
 
-		journalContentSearch.setContentSearchId(model.getContentSearchId());
-		journalContentSearch.setGroupId(model.getGroupId());
-		journalContentSearch.setCompanyId(model.getCompanyId());
-		journalContentSearch.setPrivateLayout(model.getPrivateLayout());
-		journalContentSearch.setLayoutId(model.getLayoutId());
-		journalContentSearch.setPortletId(model.getPortletId());
-		journalContentSearch.setArticleId(model.getArticleId());
-
 		return journalContentSearchPersistence.update(journalContentSearch);
+	}
+
+	public void deleteJournalContentSearch(long contentSearchId)
+		throws PortalException, SystemException {
+		journalContentSearchPersistence.remove(contentSearchId);
+	}
+
+	public void deleteJournalContentSearch(
+		JournalContentSearch journalContentSearch)
+		throws PortalException, SystemException {
+		journalContentSearchPersistence.remove(journalContentSearch);
 	}
 
 	public List<JournalContentSearch> dynamicQuery(
@@ -140,8 +141,10 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 	}
 
 	public JournalContentSearch updateJournalContentSearch(
-		JournalContentSearch model) throws SystemException {
-		return journalContentSearchPersistence.update(model, true);
+		JournalContentSearch journalContentSearch) throws SystemException {
+		journalContentSearch.setNew(false);
+
+		return journalContentSearchPersistence.update(journalContentSearch, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

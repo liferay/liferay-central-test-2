@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,16 +275,20 @@ import java.util.List;
  */
 public abstract class ResourceLocalServiceBaseImpl
 	implements ResourceLocalService, InitializingBean {
-	public Resource addResource(Resource model) throws SystemException {
-		Resource resource = new ResourceImpl();
-
+	public Resource addResource(Resource resource) throws SystemException {
 		resource.setNew(true);
 
-		resource.setResourceId(model.getResourceId());
-		resource.setCodeId(model.getCodeId());
-		resource.setPrimKey(model.getPrimKey());
-
 		return resourcePersistence.update(resource);
+	}
+
+	public void deleteResource(long resourceId)
+		throws PortalException, SystemException {
+		resourcePersistence.remove(resourceId);
+	}
+
+	public void deleteResource(Resource resource)
+		throws PortalException, SystemException {
+		resourcePersistence.remove(resource);
 	}
 
 	public List<Resource> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -299,8 +303,10 @@ public abstract class ResourceLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public Resource updateResource(Resource model) throws SystemException {
-		return resourcePersistence.update(model, true);
+	public Resource updateResource(Resource resource) throws SystemException {
+		resource.setNew(false);
+
+		return resourcePersistence.update(resource, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

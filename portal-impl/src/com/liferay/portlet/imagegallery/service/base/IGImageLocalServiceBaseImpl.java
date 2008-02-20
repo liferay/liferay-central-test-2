@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -47,7 +48,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalService;
 import com.liferay.portlet.imagegallery.service.IGFolderLocalServiceFactory;
 import com.liferay.portlet.imagegallery.service.IGFolderService;
@@ -80,26 +80,20 @@ import java.util.List;
  */
 public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService,
 	InitializingBean {
-	public IGImage addIGImage(IGImage model) throws SystemException {
-		IGImage igImage = new IGImageImpl();
-
+	public IGImage addIGImage(IGImage igImage) throws SystemException {
 		igImage.setNew(true);
 
-		igImage.setUuid(model.getUuid());
-		igImage.setImageId(model.getImageId());
-		igImage.setCompanyId(model.getCompanyId());
-		igImage.setUserId(model.getUserId());
-		igImage.setCreateDate(model.getCreateDate());
-		igImage.setModifiedDate(model.getModifiedDate());
-		igImage.setFolderId(model.getFolderId());
-		igImage.setName(model.getName());
-		igImage.setDescription(model.getDescription());
-		igImage.setSmallImageId(model.getSmallImageId());
-		igImage.setLargeImageId(model.getLargeImageId());
-		igImage.setCustom1ImageId(model.getCustom1ImageId());
-		igImage.setCustom2ImageId(model.getCustom2ImageId());
-
 		return igImagePersistence.update(igImage);
+	}
+
+	public void deleteIGImage(long imageId)
+		throws PortalException, SystemException {
+		igImagePersistence.remove(imageId);
+	}
+
+	public void deleteIGImage(IGImage igImage)
+		throws PortalException, SystemException {
+		igImagePersistence.remove(igImage);
 	}
 
 	public List<IGImage> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -114,8 +108,10 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 			end);
 	}
 
-	public IGImage updateIGImage(IGImage model) throws SystemException {
-		return igImagePersistence.update(model, true);
+	public IGImage updateIGImage(IGImage igImage) throws SystemException {
+		igImage.setNew(false);
+
+		return igImagePersistence.update(igImage, true);
 	}
 
 	public IGFolderLocalService getIGFolderLocalService() {

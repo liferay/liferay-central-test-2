@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.shopping.service.base;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
-import com.liferay.portlet.shopping.model.impl.ShoppingOrderItemImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -85,24 +85,21 @@ import java.util.List;
  */
 public abstract class ShoppingOrderItemLocalServiceBaseImpl
 	implements ShoppingOrderItemLocalService, InitializingBean {
-	public ShoppingOrderItem addShoppingOrderItem(ShoppingOrderItem model)
-		throws SystemException {
-		ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItemImpl();
-
+	public ShoppingOrderItem addShoppingOrderItem(
+		ShoppingOrderItem shoppingOrderItem) throws SystemException {
 		shoppingOrderItem.setNew(true);
 
-		shoppingOrderItem.setOrderItemId(model.getOrderItemId());
-		shoppingOrderItem.setOrderId(model.getOrderId());
-		shoppingOrderItem.setItemId(model.getItemId());
-		shoppingOrderItem.setSku(model.getSku());
-		shoppingOrderItem.setName(model.getName());
-		shoppingOrderItem.setDescription(model.getDescription());
-		shoppingOrderItem.setProperties(model.getProperties());
-		shoppingOrderItem.setPrice(model.getPrice());
-		shoppingOrderItem.setQuantity(model.getQuantity());
-		shoppingOrderItem.setShippedDate(model.getShippedDate());
-
 		return shoppingOrderItemPersistence.update(shoppingOrderItem);
+	}
+
+	public void deleteShoppingOrderItem(long orderItemId)
+		throws PortalException, SystemException {
+		shoppingOrderItemPersistence.remove(orderItemId);
+	}
+
+	public void deleteShoppingOrderItem(ShoppingOrderItem shoppingOrderItem)
+		throws PortalException, SystemException {
+		shoppingOrderItemPersistence.remove(shoppingOrderItem);
 	}
 
 	public List<ShoppingOrderItem> dynamicQuery(
@@ -117,9 +114,11 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ShoppingOrderItem updateShoppingOrderItem(ShoppingOrderItem model)
-		throws SystemException {
-		return shoppingOrderItemPersistence.update(model, true);
+	public ShoppingOrderItem updateShoppingOrderItem(
+		ShoppingOrderItem shoppingOrderItem) throws SystemException {
+		shoppingOrderItem.setNew(false);
+
+		return shoppingOrderItemPersistence.update(shoppingOrderItem, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

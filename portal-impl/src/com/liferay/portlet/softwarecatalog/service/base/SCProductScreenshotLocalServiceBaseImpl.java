@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.softwarecatalog.service.base;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
-import com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -67,21 +67,22 @@ import java.util.List;
  */
 public abstract class SCProductScreenshotLocalServiceBaseImpl
 	implements SCProductScreenshotLocalService, InitializingBean {
-	public SCProductScreenshot addSCProductScreenshot(SCProductScreenshot model)
-		throws SystemException {
-		SCProductScreenshot scProductScreenshot = new SCProductScreenshotImpl();
-
+	public SCProductScreenshot addSCProductScreenshot(
+		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshot.setNew(true);
 
-		scProductScreenshot.setProductScreenshotId(model.getProductScreenshotId());
-		scProductScreenshot.setCompanyId(model.getCompanyId());
-		scProductScreenshot.setGroupId(model.getGroupId());
-		scProductScreenshot.setProductEntryId(model.getProductEntryId());
-		scProductScreenshot.setThumbnailId(model.getThumbnailId());
-		scProductScreenshot.setFullImageId(model.getFullImageId());
-		scProductScreenshot.setPriority(model.getPriority());
-
 		return scProductScreenshotPersistence.update(scProductScreenshot);
+	}
+
+	public void deleteSCProductScreenshot(long productScreenshotId)
+		throws PortalException, SystemException {
+		scProductScreenshotPersistence.remove(productScreenshotId);
+	}
+
+	public void deleteSCProductScreenshot(
+		SCProductScreenshot scProductScreenshot)
+		throws PortalException, SystemException {
+		scProductScreenshotPersistence.remove(scProductScreenshot);
 	}
 
 	public List<SCProductScreenshot> dynamicQuery(
@@ -97,8 +98,10 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 	}
 
 	public SCProductScreenshot updateSCProductScreenshot(
-		SCProductScreenshot model) throws SystemException {
-		return scProductScreenshotPersistence.update(model, true);
+		SCProductScreenshot scProductScreenshot) throws SystemException {
+		scProductScreenshot.setNew(false);
+
+		return scProductScreenshotPersistence.update(scProductScreenshot, true);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

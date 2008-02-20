@@ -22,10 +22,10 @@
 
 package com.liferay.portal.service.base;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.UserGroupRole;
-import com.liferay.portal.model.impl.UserGroupRoleImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -242,6 +242,7 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserGroupFinder;
 import com.liferay.portal.service.persistence.UserGroupFinderUtil;
 import com.liferay.portal.service.persistence.UserGroupPersistence;
+import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.service.persistence.UserGroupRolePersistence;
 import com.liferay.portal.service.persistence.UserGroupRoleUtil;
 import com.liferay.portal.service.persistence.UserGroupUtil;
@@ -270,17 +271,21 @@ import java.util.List;
  */
 public abstract class UserGroupRoleLocalServiceBaseImpl
 	implements UserGroupRoleLocalService, InitializingBean {
-	public UserGroupRole addUserGroupRole(UserGroupRole model)
+	public UserGroupRole addUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
-		UserGroupRole userGroupRole = new UserGroupRoleImpl();
-
 		userGroupRole.setNew(true);
 
-		userGroupRole.setUserId(model.getUserId());
-		userGroupRole.setGroupId(model.getGroupId());
-		userGroupRole.setRoleId(model.getRoleId());
-
 		return userGroupRolePersistence.update(userGroupRole);
+	}
+
+	public void deleteUserGroupRole(UserGroupRolePK userGroupRolePK)
+		throws PortalException, SystemException {
+		userGroupRolePersistence.remove(userGroupRolePK);
+	}
+
+	public void deleteUserGroupRole(UserGroupRole userGroupRole)
+		throws PortalException, SystemException {
+		userGroupRolePersistence.remove(userGroupRole);
 	}
 
 	public List<UserGroupRole> dynamicQuery(
@@ -295,9 +300,11 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public UserGroupRole updateUserGroupRole(UserGroupRole model)
+	public UserGroupRole updateUserGroupRole(UserGroupRole userGroupRole)
 		throws SystemException {
-		return userGroupRolePersistence.update(model, true);
+		userGroupRole.setNew(false);
+
+		return userGroupRolePersistence.update(userGroupRole, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -52,11 +52,28 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBMessageLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMBMessage(
-		com.liferay.portlet.messageboards.model.MBMessage model)
+		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.addMBMessage(model);
+		return mbMessageLocalService.addMBMessage(mbMessage);
+	}
+
+	public static void deleteMBMessage(long messageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		mbMessageLocalService.deleteMBMessage(messageId);
+	}
+
+	public static void deleteMBMessage(
+		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		mbMessageLocalService.deleteMBMessage(mbMessage);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> dynamicQuery(
@@ -76,11 +93,11 @@ public class MBMessageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMBMessage(
-		com.liferay.portlet.messageboards.model.MBMessage model)
+		com.liferay.portlet.messageboards.model.MBMessage mbMessage)
 		throws com.liferay.portal.SystemException {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
-		return mbMessageLocalService.updateMBMessage(model);
+		return mbMessageLocalService.updateMBMessage(mbMessage);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

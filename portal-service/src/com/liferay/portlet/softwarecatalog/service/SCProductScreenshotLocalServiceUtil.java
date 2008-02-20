@@ -52,11 +52,28 @@ package com.liferay.portlet.softwarecatalog.service;
  */
 public class SCProductScreenshotLocalServiceUtil {
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot addSCProductScreenshot(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot model)
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
 
-		return scProductScreenshotLocalService.addSCProductScreenshot(model);
+		return scProductScreenshotLocalService.addSCProductScreenshot(scProductScreenshot);
+	}
+
+	public static void deleteSCProductScreenshot(long productScreenshotId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
+		scProductScreenshotLocalService.deleteSCProductScreenshot(productScreenshotId);
+	}
+
+	public static void deleteSCProductScreenshot(
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
+
+		scProductScreenshotLocalService.deleteSCProductScreenshot(scProductScreenshot);
 	}
 
 	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> dynamicQuery(
@@ -77,11 +94,11 @@ public class SCProductScreenshotLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.softwarecatalog.model.SCProductScreenshot updateSCProductScreenshot(
-		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot model)
+		com.liferay.portlet.softwarecatalog.model.SCProductScreenshot scProductScreenshot)
 		throws com.liferay.portal.SystemException {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
 
-		return scProductScreenshotLocalService.updateSCProductScreenshot(model);
+		return scProductScreenshotLocalService.updateSCProductScreenshot(scProductScreenshot);
 	}
 
 	public static com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence() {

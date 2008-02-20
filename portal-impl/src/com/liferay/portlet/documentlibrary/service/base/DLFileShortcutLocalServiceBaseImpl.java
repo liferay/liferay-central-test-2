@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -47,7 +48,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceFactory;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryService;
@@ -92,24 +92,21 @@ import java.util.List;
  */
 public abstract class DLFileShortcutLocalServiceBaseImpl
 	implements DLFileShortcutLocalService, InitializingBean {
-	public DLFileShortcut addDLFileShortcut(DLFileShortcut model)
+	public DLFileShortcut addDLFileShortcut(DLFileShortcut dlFileShortcut)
 		throws SystemException {
-		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
-
 		dlFileShortcut.setNew(true);
 
-		dlFileShortcut.setUuid(model.getUuid());
-		dlFileShortcut.setFileShortcutId(model.getFileShortcutId());
-		dlFileShortcut.setCompanyId(model.getCompanyId());
-		dlFileShortcut.setUserId(model.getUserId());
-		dlFileShortcut.setUserName(model.getUserName());
-		dlFileShortcut.setCreateDate(model.getCreateDate());
-		dlFileShortcut.setModifiedDate(model.getModifiedDate());
-		dlFileShortcut.setFolderId(model.getFolderId());
-		dlFileShortcut.setToFolderId(model.getToFolderId());
-		dlFileShortcut.setToName(model.getToName());
-
 		return dlFileShortcutPersistence.update(dlFileShortcut);
+	}
+
+	public void deleteDLFileShortcut(long fileShortcutId)
+		throws PortalException, SystemException {
+		dlFileShortcutPersistence.remove(fileShortcutId);
+	}
+
+	public void deleteDLFileShortcut(DLFileShortcut dlFileShortcut)
+		throws PortalException, SystemException {
+		dlFileShortcutPersistence.remove(dlFileShortcut);
 	}
 
 	public List<DLFileShortcut> dynamicQuery(
@@ -124,9 +121,11 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public DLFileShortcut updateDLFileShortcut(DLFileShortcut model)
+	public DLFileShortcut updateDLFileShortcut(DLFileShortcut dlFileShortcut)
 		throws SystemException {
-		return dlFileShortcutPersistence.update(model, true);
+		dlFileShortcut.setNew(false);
+
+		return dlFileShortcutPersistence.update(dlFileShortcut, true);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

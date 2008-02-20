@@ -52,11 +52,28 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingCouponLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon addShoppingCoupon(
-		com.liferay.portlet.shopping.model.ShoppingCoupon model)
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-		return shoppingCouponLocalService.addShoppingCoupon(model);
+		return shoppingCouponLocalService.addShoppingCoupon(shoppingCoupon);
+	}
+
+	public static void deleteShoppingCoupon(long couponId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
+		shoppingCouponLocalService.deleteShoppingCoupon(couponId);
+	}
+
+	public static void deleteShoppingCoupon(
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
+
+		shoppingCouponLocalService.deleteShoppingCoupon(shoppingCoupon);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> dynamicQuery(
@@ -77,11 +94,11 @@ public class ShoppingCouponLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingCoupon updateShoppingCoupon(
-		com.liferay.portlet.shopping.model.ShoppingCoupon model)
+		com.liferay.portlet.shopping.model.ShoppingCoupon shoppingCoupon)
 		throws com.liferay.portal.SystemException {
 		ShoppingCouponLocalService shoppingCouponLocalService = ShoppingCouponLocalServiceFactory.getService();
 
-		return shoppingCouponLocalService.updateShoppingCoupon(model);
+		return shoppingCouponLocalService.updateShoppingCoupon(shoppingCoupon);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {

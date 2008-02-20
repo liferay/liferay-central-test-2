@@ -52,11 +52,28 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBMessageFlagLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag addMBMessageFlag(
-		com.liferay.portlet.messageboards.model.MBMessageFlag model)
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 
-		return mbMessageFlagLocalService.addMBMessageFlag(model);
+		return mbMessageFlagLocalService.addMBMessageFlag(mbMessageFlag);
+	}
+
+	public static void deleteMBMessageFlag(long messageFlagId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		mbMessageFlagLocalService.deleteMBMessageFlag(messageFlagId);
+	}
+
+	public static void deleteMBMessageFlag(
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
+
+		mbMessageFlagLocalService.deleteMBMessageFlag(mbMessageFlag);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessageFlag> dynamicQuery(
@@ -77,11 +94,11 @@ public class MBMessageFlagLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessageFlag updateMBMessageFlag(
-		com.liferay.portlet.messageboards.model.MBMessageFlag model)
+		com.liferay.portlet.messageboards.model.MBMessageFlag mbMessageFlag)
 		throws com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();
 
-		return mbMessageFlagLocalService.updateMBMessageFlag(model);
+		return mbMessageFlagLocalService.updateMBMessageFlag(mbMessageFlag);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

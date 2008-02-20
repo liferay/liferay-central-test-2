@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.UserLocalService;
@@ -39,7 +40,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.tags.model.TagsProperty;
-import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -82,23 +82,21 @@ import java.util.List;
  */
 public abstract class TagsPropertyLocalServiceBaseImpl
 	implements TagsPropertyLocalService, InitializingBean {
-	public TagsProperty addTagsProperty(TagsProperty model)
+	public TagsProperty addTagsProperty(TagsProperty tagsProperty)
 		throws SystemException {
-		TagsProperty tagsProperty = new TagsPropertyImpl();
-
 		tagsProperty.setNew(true);
 
-		tagsProperty.setPropertyId(model.getPropertyId());
-		tagsProperty.setCompanyId(model.getCompanyId());
-		tagsProperty.setUserId(model.getUserId());
-		tagsProperty.setUserName(model.getUserName());
-		tagsProperty.setCreateDate(model.getCreateDate());
-		tagsProperty.setModifiedDate(model.getModifiedDate());
-		tagsProperty.setEntryId(model.getEntryId());
-		tagsProperty.setKey(model.getKey());
-		tagsProperty.setValue(model.getValue());
-
 		return tagsPropertyPersistence.update(tagsProperty);
+	}
+
+	public void deleteTagsProperty(long propertyId)
+		throws PortalException, SystemException {
+		tagsPropertyPersistence.remove(propertyId);
+	}
+
+	public void deleteTagsProperty(TagsProperty tagsProperty)
+		throws PortalException, SystemException {
+		tagsPropertyPersistence.remove(tagsProperty);
 	}
 
 	public List<TagsProperty> dynamicQuery(
@@ -113,9 +111,11 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public TagsProperty updateTagsProperty(TagsProperty model)
+	public TagsProperty updateTagsProperty(TagsProperty tagsProperty)
 		throws SystemException {
-		return tagsPropertyPersistence.update(model, true);
+		tagsProperty.setNew(false);
+
+		return tagsPropertyPersistence.update(tagsProperty, true);
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {

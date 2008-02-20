@@ -52,11 +52,28 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingItemLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingItem addShoppingItem(
-		com.liferay.portlet.shopping.model.ShoppingItem model)
+		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException {
 		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
 
-		return shoppingItemLocalService.addShoppingItem(model);
+		return shoppingItemLocalService.addShoppingItem(shoppingItem);
+	}
+
+	public static void deleteShoppingItem(long itemId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		shoppingItemLocalService.deleteShoppingItem(itemId);
+	}
+
+	public static void deleteShoppingItem(
+		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
+
+		shoppingItemLocalService.deleteShoppingItem(shoppingItem);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> dynamicQuery(
@@ -77,11 +94,11 @@ public class ShoppingItemLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingItem updateShoppingItem(
-		com.liferay.portlet.shopping.model.ShoppingItem model)
+		com.liferay.portlet.shopping.model.ShoppingItem shoppingItem)
 		throws com.liferay.portal.SystemException {
 		ShoppingItemLocalService shoppingItemLocalService = ShoppingItemLocalServiceFactory.getService();
 
-		return shoppingItemLocalService.updateShoppingItem(model);
+		return shoppingItemLocalService.updateShoppingItem(shoppingItem);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {

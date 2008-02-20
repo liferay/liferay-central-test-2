@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Subscription;
-import com.liferay.portal.model.impl.SubscriptionImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,23 +277,21 @@ import java.util.List;
  */
 public abstract class SubscriptionLocalServiceBaseImpl
 	implements SubscriptionLocalService, InitializingBean {
-	public Subscription addSubscription(Subscription model)
+	public Subscription addSubscription(Subscription subscription)
 		throws SystemException {
-		Subscription subscription = new SubscriptionImpl();
-
 		subscription.setNew(true);
 
-		subscription.setSubscriptionId(model.getSubscriptionId());
-		subscription.setCompanyId(model.getCompanyId());
-		subscription.setUserId(model.getUserId());
-		subscription.setUserName(model.getUserName());
-		subscription.setCreateDate(model.getCreateDate());
-		subscription.setModifiedDate(model.getModifiedDate());
-		subscription.setClassNameId(model.getClassNameId());
-		subscription.setClassPK(model.getClassPK());
-		subscription.setFrequency(model.getFrequency());
-
 		return subscriptionPersistence.update(subscription);
+	}
+
+	public void deleteSubscription(long subscriptionId)
+		throws PortalException, SystemException {
+		subscriptionPersistence.remove(subscriptionId);
+	}
+
+	public void deleteSubscription(Subscription subscription)
+		throws PortalException, SystemException {
+		subscriptionPersistence.remove(subscription);
 	}
 
 	public List<Subscription> dynamicQuery(
@@ -308,9 +306,11 @@ public abstract class SubscriptionLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public Subscription updateSubscription(Subscription model)
+	public Subscription updateSubscription(Subscription subscription)
 		throws SystemException {
-		return subscriptionPersistence.update(model, true);
+		subscription.setNew(false);
+
+		return subscriptionPersistence.update(subscription, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

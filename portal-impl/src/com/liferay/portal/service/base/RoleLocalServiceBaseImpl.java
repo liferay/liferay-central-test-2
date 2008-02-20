@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,20 +275,18 @@ import java.util.List;
  */
 public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	InitializingBean {
-	public Role addRole(Role model) throws SystemException {
-		Role role = new RoleImpl();
-
+	public Role addRole(Role role) throws SystemException {
 		role.setNew(true);
 
-		role.setRoleId(model.getRoleId());
-		role.setCompanyId(model.getCompanyId());
-		role.setClassNameId(model.getClassNameId());
-		role.setClassPK(model.getClassPK());
-		role.setName(model.getName());
-		role.setDescription(model.getDescription());
-		role.setType(model.getType());
-
 		return rolePersistence.update(role);
+	}
+
+	public void deleteRole(long roleId) throws PortalException, SystemException {
+		rolePersistence.remove(roleId);
+	}
+
+	public void deleteRole(Role role) throws PortalException, SystemException {
+		rolePersistence.remove(role);
 	}
 
 	public List<Role> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -301,8 +299,10 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 		return rolePersistence.findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public Role updateRole(Role model) throws SystemException {
-		return rolePersistence.update(model, true);
+	public Role updateRole(Role role) throws SystemException {
+		role.setNew(false);
+
+		return rolePersistence.update(role, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

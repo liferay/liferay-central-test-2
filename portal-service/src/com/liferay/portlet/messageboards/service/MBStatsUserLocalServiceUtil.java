@@ -52,11 +52,28 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBStatsUserLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBStatsUser addMBStatsUser(
-		com.liferay.portlet.messageboards.model.MBStatsUser model)
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
-		return mbStatsUserLocalService.addMBStatsUser(model);
+		return mbStatsUserLocalService.addMBStatsUser(mbStatsUser);
+	}
+
+	public static void deleteMBStatsUser(long statsUserId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		mbStatsUserLocalService.deleteMBStatsUser(statsUserId);
+	}
+
+	public static void deleteMBStatsUser(
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
+
+		mbStatsUserLocalService.deleteMBStatsUser(mbStatsUser);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> dynamicQuery(
@@ -76,11 +93,11 @@ public class MBStatsUserLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBStatsUser updateMBStatsUser(
-		com.liferay.portlet.messageboards.model.MBStatsUser model)
+		com.liferay.portlet.messageboards.model.MBStatsUser mbStatsUser)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 
-		return mbStatsUserLocalService.updateMBStatsUser(model);
+		return mbStatsUserLocalService.updateMBStatsUser(mbStatsUser);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

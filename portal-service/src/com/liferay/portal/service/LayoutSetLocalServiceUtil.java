@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class LayoutSetLocalServiceUtil {
 	public static com.liferay.portal.model.LayoutSet addLayoutSet(
-		com.liferay.portal.model.LayoutSet model)
+		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
-		return layoutSetLocalService.addLayoutSet(model);
+		return layoutSetLocalService.addLayoutSet(layoutSet);
+	}
+
+	public static void deleteLayoutSet(long layoutSetId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		layoutSetLocalService.deleteLayoutSet(layoutSetId);
+	}
+
+	public static void deleteLayoutSet(
+		com.liferay.portal.model.LayoutSet layoutSet)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
+
+		layoutSetLocalService.deleteLayoutSet(layoutSet);
 	}
 
 	public static java.util.List<com.liferay.portal.model.LayoutSet> dynamicQuery(
@@ -76,11 +93,11 @@ public class LayoutSetLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.LayoutSet updateLayoutSet(
-		com.liferay.portal.model.LayoutSet model)
+		com.liferay.portal.model.LayoutSet layoutSet)
 		throws com.liferay.portal.SystemException {
 		LayoutSetLocalService layoutSetLocalService = LayoutSetLocalServiceFactory.getService();
 
-		return layoutSetLocalService.updateLayoutSet(model);
+		return layoutSetLocalService.updateLayoutSet(layoutSet);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

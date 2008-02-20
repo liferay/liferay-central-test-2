@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,24 +275,21 @@ import java.util.List;
  */
 public abstract class OrganizationLocalServiceBaseImpl
 	implements OrganizationLocalService, InitializingBean {
-	public Organization addOrganization(Organization model)
+	public Organization addOrganization(Organization organization)
 		throws SystemException {
-		Organization organization = new OrganizationImpl();
-
 		organization.setNew(true);
 
-		organization.setOrganizationId(model.getOrganizationId());
-		organization.setCompanyId(model.getCompanyId());
-		organization.setParentOrganizationId(model.getParentOrganizationId());
-		organization.setName(model.getName());
-		organization.setLocation(model.getLocation());
-		organization.setRecursable(model.getRecursable());
-		organization.setRegionId(model.getRegionId());
-		organization.setCountryId(model.getCountryId());
-		organization.setStatusId(model.getStatusId());
-		organization.setComments(model.getComments());
-
 		return organizationPersistence.update(organization);
+	}
+
+	public void deleteOrganization(long organizationId)
+		throws PortalException, SystemException {
+		organizationPersistence.remove(organizationId);
+	}
+
+	public void deleteOrganization(Organization organization)
+		throws PortalException, SystemException {
+		organizationPersistence.remove(organization);
 	}
 
 	public List<Organization> dynamicQuery(
@@ -307,9 +304,11 @@ public abstract class OrganizationLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public Organization updateOrganization(Organization model)
+	public Organization updateOrganization(Organization organization)
 		throws SystemException {
-		return organizationPersistence.update(model, true);
+		organization.setNew(false);
+
+		return organizationPersistence.update(organization, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

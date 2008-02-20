@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -51,7 +52,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 
 import com.liferay.portlet.journal.model.JournalTemplate;
-import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalService;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceFactory;
 import com.liferay.portlet.journal.service.JournalArticleLocalService;
@@ -106,32 +106,21 @@ import java.util.List;
  */
 public abstract class JournalTemplateLocalServiceBaseImpl
 	implements JournalTemplateLocalService, InitializingBean {
-	public JournalTemplate addJournalTemplate(JournalTemplate model)
+	public JournalTemplate addJournalTemplate(JournalTemplate journalTemplate)
 		throws SystemException {
-		JournalTemplate journalTemplate = new JournalTemplateImpl();
-
 		journalTemplate.setNew(true);
 
-		journalTemplate.setUuid(model.getUuid());
-		journalTemplate.setId(model.getId());
-		journalTemplate.setGroupId(model.getGroupId());
-		journalTemplate.setCompanyId(model.getCompanyId());
-		journalTemplate.setUserId(model.getUserId());
-		journalTemplate.setUserName(model.getUserName());
-		journalTemplate.setCreateDate(model.getCreateDate());
-		journalTemplate.setModifiedDate(model.getModifiedDate());
-		journalTemplate.setTemplateId(model.getTemplateId());
-		journalTemplate.setStructureId(model.getStructureId());
-		journalTemplate.setName(model.getName());
-		journalTemplate.setDescription(model.getDescription());
-		journalTemplate.setXsl(model.getXsl());
-		journalTemplate.setLangType(model.getLangType());
-		journalTemplate.setCacheable(model.getCacheable());
-		journalTemplate.setSmallImage(model.getSmallImage());
-		journalTemplate.setSmallImageId(model.getSmallImageId());
-		journalTemplate.setSmallImageURL(model.getSmallImageURL());
-
 		return journalTemplatePersistence.update(journalTemplate);
+	}
+
+	public void deleteJournalTemplate(long id)
+		throws PortalException, SystemException {
+		journalTemplatePersistence.remove(id);
+	}
+
+	public void deleteJournalTemplate(JournalTemplate journalTemplate)
+		throws PortalException, SystemException {
+		journalTemplatePersistence.remove(journalTemplate);
 	}
 
 	public List<JournalTemplate> dynamicQuery(
@@ -146,9 +135,11 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public JournalTemplate updateJournalTemplate(JournalTemplate model)
-		throws SystemException {
-		return journalTemplatePersistence.update(model, true);
+	public JournalTemplate updateJournalTemplate(
+		JournalTemplate journalTemplate) throws SystemException {
+		journalTemplate.setNew(false);
+
+		return journalTemplatePersistence.update(journalTemplate, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

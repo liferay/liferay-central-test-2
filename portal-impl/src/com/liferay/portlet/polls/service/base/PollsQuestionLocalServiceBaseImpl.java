@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -47,7 +48,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.polls.model.PollsQuestion;
-import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 import com.liferay.portlet.polls.service.PollsChoiceLocalService;
 import com.liferay.portlet.polls.service.PollsChoiceLocalServiceFactory;
 import com.liferay.portlet.polls.service.PollsQuestionLocalService;
@@ -76,26 +76,21 @@ import java.util.List;
  */
 public abstract class PollsQuestionLocalServiceBaseImpl
 	implements PollsQuestionLocalService, InitializingBean {
-	public PollsQuestion addPollsQuestion(PollsQuestion model)
+	public PollsQuestion addPollsQuestion(PollsQuestion pollsQuestion)
 		throws SystemException {
-		PollsQuestion pollsQuestion = new PollsQuestionImpl();
-
 		pollsQuestion.setNew(true);
 
-		pollsQuestion.setUuid(model.getUuid());
-		pollsQuestion.setQuestionId(model.getQuestionId());
-		pollsQuestion.setGroupId(model.getGroupId());
-		pollsQuestion.setCompanyId(model.getCompanyId());
-		pollsQuestion.setUserId(model.getUserId());
-		pollsQuestion.setUserName(model.getUserName());
-		pollsQuestion.setCreateDate(model.getCreateDate());
-		pollsQuestion.setModifiedDate(model.getModifiedDate());
-		pollsQuestion.setTitle(model.getTitle());
-		pollsQuestion.setDescription(model.getDescription());
-		pollsQuestion.setExpirationDate(model.getExpirationDate());
-		pollsQuestion.setLastVoteDate(model.getLastVoteDate());
-
 		return pollsQuestionPersistence.update(pollsQuestion);
+	}
+
+	public void deletePollsQuestion(long questionId)
+		throws PortalException, SystemException {
+		pollsQuestionPersistence.remove(questionId);
+	}
+
+	public void deletePollsQuestion(PollsQuestion pollsQuestion)
+		throws PortalException, SystemException {
+		pollsQuestionPersistence.remove(pollsQuestion);
 	}
 
 	public List<PollsQuestion> dynamicQuery(
@@ -110,9 +105,11 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public PollsQuestion updatePollsQuestion(PollsQuestion model)
+	public PollsQuestion updatePollsQuestion(PollsQuestion pollsQuestion)
 		throws SystemException {
-		return pollsQuestionPersistence.update(model, true);
+		pollsQuestion.setNew(false);
+
+		return pollsQuestionPersistence.update(pollsQuestion, true);
 	}
 
 	public PollsChoiceLocalService getPollsChoiceLocalService() {

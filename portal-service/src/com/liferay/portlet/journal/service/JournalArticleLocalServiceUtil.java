@@ -52,11 +52,28 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalArticleLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalArticle addJournalArticle(
-		com.liferay.portlet.journal.model.JournalArticle model)
+		com.liferay.portlet.journal.model.JournalArticle journalArticle)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
-		return journalArticleLocalService.addJournalArticle(model);
+		return journalArticleLocalService.addJournalArticle(journalArticle);
+	}
+
+	public static void deleteJournalArticle(long id)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		journalArticleLocalService.deleteJournalArticle(id);
+	}
+
+	public static void deleteJournalArticle(
+		com.liferay.portlet.journal.model.JournalArticle journalArticle)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		journalArticleLocalService.deleteJournalArticle(journalArticle);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> dynamicQuery(
@@ -77,11 +94,11 @@ public class JournalArticleLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalArticle updateJournalArticle(
-		com.liferay.portlet.journal.model.JournalArticle model)
+		com.liferay.portlet.journal.model.JournalArticle journalArticle)
 		throws com.liferay.portal.SystemException {
 		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
 
-		return journalArticleLocalService.updateJournalArticle(model);
+		return journalArticleLocalService.updateJournalArticle(journalArticle);
 	}
 
 	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {

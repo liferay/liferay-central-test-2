@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class ContactLocalServiceUtil {
 	public static com.liferay.portal.model.Contact addContact(
-		com.liferay.portal.model.Contact model)
+		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
-		return contactLocalService.addContact(model);
+		return contactLocalService.addContact(contact);
+	}
+
+	public static void deleteContact(long contactId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		contactLocalService.deleteContact(contactId);
+	}
+
+	public static void deleteContact(com.liferay.portal.model.Contact contact)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		contactLocalService.deleteContact(contact);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Contact> dynamicQuery(
@@ -76,11 +92,11 @@ public class ContactLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Contact updateContact(
-		com.liferay.portal.model.Contact model)
+		com.liferay.portal.model.Contact contact)
 		throws com.liferay.portal.SystemException {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
-		return contactLocalService.updateContact(model);
+		return contactLocalService.updateContact(contact);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -797,21 +813,5 @@ public class ContactLocalServiceUtil {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 
 		return contactLocalService.getContact(contactId);
-	}
-
-	public static void deleteContact(long contactId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		contactLocalService.deleteContact(contactId);
-	}
-
-	public static void deleteContact(com.liferay.portal.model.Contact contact)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
-
-		contactLocalService.deleteContact(contact);
 	}
 }

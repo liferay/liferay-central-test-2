@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.PluginSetting;
-import com.liferay.portal.model.impl.PluginSettingImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,20 +275,21 @@ import java.util.List;
  */
 public abstract class PluginSettingLocalServiceBaseImpl
 	implements PluginSettingLocalService, InitializingBean {
-	public PluginSetting addPluginSetting(PluginSetting model)
+	public PluginSetting addPluginSetting(PluginSetting pluginSetting)
 		throws SystemException {
-		PluginSetting pluginSetting = new PluginSettingImpl();
-
 		pluginSetting.setNew(true);
 
-		pluginSetting.setPluginSettingId(model.getPluginSettingId());
-		pluginSetting.setCompanyId(model.getCompanyId());
-		pluginSetting.setPluginId(model.getPluginId());
-		pluginSetting.setPluginType(model.getPluginType());
-		pluginSetting.setRoles(model.getRoles());
-		pluginSetting.setActive(model.getActive());
-
 		return pluginSettingPersistence.update(pluginSetting);
+	}
+
+	public void deletePluginSetting(long pluginSettingId)
+		throws PortalException, SystemException {
+		pluginSettingPersistence.remove(pluginSettingId);
+	}
+
+	public void deletePluginSetting(PluginSetting pluginSetting)
+		throws PortalException, SystemException {
+		pluginSettingPersistence.remove(pluginSetting);
 	}
 
 	public List<PluginSetting> dynamicQuery(
@@ -303,9 +304,11 @@ public abstract class PluginSettingLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public PluginSetting updatePluginSetting(PluginSetting model)
+	public PluginSetting updatePluginSetting(PluginSetting pluginSetting)
 		throws SystemException {
-		return pluginSettingPersistence.update(model, true);
+		pluginSetting.setNew(false);
+
+		return pluginSettingPersistence.update(pluginSetting, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

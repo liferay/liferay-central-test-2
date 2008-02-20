@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class ResourceLocalServiceUtil {
 	public static com.liferay.portal.model.Resource addResource(
-		com.liferay.portal.model.Resource model)
+		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
-		return resourceLocalService.addResource(model);
+		return resourceLocalService.addResource(resource);
+	}
+
+	public static void deleteResource(long resourceId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		resourceLocalService.deleteResource(resourceId);
+	}
+
+	public static void deleteResource(
+		com.liferay.portal.model.Resource resource)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		resourceLocalService.deleteResource(resource);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Resource> dynamicQuery(
@@ -76,11 +93,11 @@ public class ResourceLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Resource updateResource(
-		com.liferay.portal.model.Resource model)
+		com.liferay.portal.model.Resource resource)
 		throws com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 
-		return resourceLocalService.updateResource(model);
+		return resourceLocalService.updateResource(resource);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -858,23 +875,6 @@ public class ResourceLocalServiceUtil {
 		resourceLocalService.addResources(companyId, groupId, userId, name,
 			primKey, portletActions, addCommunityPermissions,
 			addGuestPermissions);
-	}
-
-	public static void deleteResource(long resourceId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		resourceLocalService.deleteResource(resourceId);
-	}
-
-	public static void deleteResource(
-		com.liferay.portal.model.Resource resource)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		resourceLocalService.deleteResource(resource);
 	}
 
 	public static void deleteResource(long companyId, java.lang.String name,

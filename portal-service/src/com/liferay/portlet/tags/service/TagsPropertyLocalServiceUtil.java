@@ -52,11 +52,28 @@ package com.liferay.portlet.tags.service;
  */
 public class TagsPropertyLocalServiceUtil {
 	public static com.liferay.portlet.tags.model.TagsProperty addTagsProperty(
-		com.liferay.portlet.tags.model.TagsProperty model)
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
-		return tagsPropertyLocalService.addTagsProperty(model);
+		return tagsPropertyLocalService.addTagsProperty(tagsProperty);
+	}
+
+	public static void deleteTagsProperty(long propertyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		tagsPropertyLocalService.deleteTagsProperty(propertyId);
+	}
+
+	public static void deleteTagsProperty(
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
+
+		tagsPropertyLocalService.deleteTagsProperty(tagsProperty);
 	}
 
 	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> dynamicQuery(
@@ -77,11 +94,11 @@ public class TagsPropertyLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsProperty updateTagsProperty(
-		com.liferay.portlet.tags.model.TagsProperty model)
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
-		return tagsPropertyLocalService.updateTagsProperty(model);
+		return tagsPropertyLocalService.updateTagsProperty(tagsProperty);
 	}
 
 	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {

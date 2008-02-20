@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface WebsiteLocalService {
 	public com.liferay.portal.model.Website addWebsite(
-		com.liferay.portal.model.Website model)
+		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteWebsite(long websiteId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteWebsite(com.liferay.portal.model.Website website)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Website> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface WebsiteLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Website updateWebsite(
-		com.liferay.portal.model.Website model)
+		com.liferay.portal.model.Website website)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -340,10 +348,6 @@ public interface WebsiteLocalService {
 	public com.liferay.portal.model.Website addWebsite(long userId,
 		java.lang.String className, long classPK, java.lang.String url,
 		int typeId, boolean primary)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteWebsite(long websiteId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

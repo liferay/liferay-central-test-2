@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class CompanyLocalServiceUtil {
 	public static com.liferay.portal.model.Company addCompany(
-		com.liferay.portal.model.Company model)
+		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-		return companyLocalService.addCompany(model);
+		return companyLocalService.addCompany(company);
+	}
+
+	public static void deleteCompany(long companyId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+
+		companyLocalService.deleteCompany(companyId);
+	}
+
+	public static void deleteCompany(com.liferay.portal.model.Company company)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
+
+		companyLocalService.deleteCompany(company);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Company> dynamicQuery(
@@ -76,11 +92,11 @@ public class CompanyLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Company updateCompany(
-		com.liferay.portal.model.Company model)
+		com.liferay.portal.model.Company company)
 		throws com.liferay.portal.SystemException {
 		CompanyLocalService companyLocalService = CompanyLocalServiceFactory.getService();
 
-		return companyLocalService.updateCompany(model);
+		return companyLocalService.updateCompany(company);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

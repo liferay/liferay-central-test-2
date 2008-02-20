@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class MembershipRequestLocalServiceUtil {
 	public static com.liferay.portal.model.MembershipRequest addMembershipRequest(
-		com.liferay.portal.model.MembershipRequest model)
+		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 
-		return membershipRequestLocalService.addMembershipRequest(model);
+		return membershipRequestLocalService.addMembershipRequest(membershipRequest);
+	}
+
+	public static void deleteMembershipRequest(long membershipRequestId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
+
+		membershipRequestLocalService.deleteMembershipRequest(membershipRequestId);
+	}
+
+	public static void deleteMembershipRequest(
+		com.liferay.portal.model.MembershipRequest membershipRequest)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
+
+		membershipRequestLocalService.deleteMembershipRequest(membershipRequest);
 	}
 
 	public static java.util.List<com.liferay.portal.model.MembershipRequest> dynamicQuery(
@@ -77,11 +94,11 @@ public class MembershipRequestLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.MembershipRequest updateMembershipRequest(
-		com.liferay.portal.model.MembershipRequest model)
+		com.liferay.portal.model.MembershipRequest membershipRequest)
 		throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 
-		return membershipRequestLocalService.updateMembershipRequest(model);
+		return membershipRequestLocalService.updateMembershipRequest(membershipRequest);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

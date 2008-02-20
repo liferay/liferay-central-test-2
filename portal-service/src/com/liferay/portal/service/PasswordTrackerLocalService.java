@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface PasswordTrackerLocalService {
 	public com.liferay.portal.model.PasswordTracker addPasswordTracker(
-		com.liferay.portal.model.PasswordTracker model)
+		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException;
+
+	public void deletePasswordTracker(long passwordTrackerId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deletePasswordTracker(
+		com.liferay.portal.model.PasswordTracker passwordTracker)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.PasswordTracker> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface PasswordTrackerLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordTracker updatePasswordTracker(
-		com.liferay.portal.model.PasswordTracker model)
+		com.liferay.portal.model.PasswordTracker passwordTracker)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

@@ -52,11 +52,28 @@ package com.liferay.portlet.messageboards.service;
  */
 public class MBThreadLocalServiceUtil {
 	public static com.liferay.portlet.messageboards.model.MBThread addMBThread(
-		com.liferay.portlet.messageboards.model.MBThread model)
+		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-		return mbThreadLocalService.addMBThread(model);
+		return mbThreadLocalService.addMBThread(mbThread);
+	}
+
+	public static void deleteMBThread(long threadId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		mbThreadLocalService.deleteMBThread(threadId);
+	}
+
+	public static void deleteMBThread(
+		com.liferay.portlet.messageboards.model.MBThread mbThread)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		mbThreadLocalService.deleteMBThread(mbThread);
 	}
 
 	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> dynamicQuery(
@@ -76,11 +93,11 @@ public class MBThreadLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBThread updateMBThread(
-		com.liferay.portlet.messageboards.model.MBThread model)
+		com.liferay.portlet.messageboards.model.MBThread mbThread)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
-		return mbThreadLocalService.updateMBThread(model);
+		return mbThreadLocalService.updateMBThread(mbThread);
 	}
 
 	public static com.liferay.portlet.messageboards.service.persistence.MBBanPersistence getMBBanPersistence() {

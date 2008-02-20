@@ -52,11 +52,28 @@ package com.liferay.portlet.bookmarks.service;
  */
 public class BookmarksFolderLocalServiceUtil {
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder addBookmarksFolder(
-		com.liferay.portlet.bookmarks.model.BookmarksFolder model)
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
-		return bookmarksFolderLocalService.addBookmarksFolder(model);
+		return bookmarksFolderLocalService.addBookmarksFolder(bookmarksFolder);
+	}
+
+	public static void deleteBookmarksFolder(long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		bookmarksFolderLocalService.deleteBookmarksFolder(folderId);
+	}
+
+	public static void deleteBookmarksFolder(
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
+
+		bookmarksFolderLocalService.deleteBookmarksFolder(bookmarksFolder);
 	}
 
 	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksFolder> dynamicQuery(
@@ -77,11 +94,11 @@ public class BookmarksFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.bookmarks.model.BookmarksFolder updateBookmarksFolder(
-		com.liferay.portlet.bookmarks.model.BookmarksFolder model)
+		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException {
 		BookmarksFolderLocalService bookmarksFolderLocalService = BookmarksFolderLocalServiceFactory.getService();
 
-		return bookmarksFolderLocalService.updateBookmarksFolder(model);
+		return bookmarksFolderLocalService.updateBookmarksFolder(bookmarksFolder);
 	}
 
 	public static com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence getBookmarksEntryPersistence() {

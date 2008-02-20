@@ -27,11 +27,11 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.messageboards.model.MBStatsUser;
-import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -86,19 +86,21 @@ import java.util.List;
  */
 public abstract class MBStatsUserLocalServiceBaseImpl
 	implements MBStatsUserLocalService, InitializingBean {
-	public MBStatsUser addMBStatsUser(MBStatsUser model)
+	public MBStatsUser addMBStatsUser(MBStatsUser mbStatsUser)
 		throws SystemException {
-		MBStatsUser mbStatsUser = new MBStatsUserImpl();
-
 		mbStatsUser.setNew(true);
 
-		mbStatsUser.setStatsUserId(model.getStatsUserId());
-		mbStatsUser.setGroupId(model.getGroupId());
-		mbStatsUser.setUserId(model.getUserId());
-		mbStatsUser.setMessageCount(model.getMessageCount());
-		mbStatsUser.setLastPostDate(model.getLastPostDate());
-
 		return mbStatsUserPersistence.update(mbStatsUser);
+	}
+
+	public void deleteMBStatsUser(long statsUserId)
+		throws PortalException, SystemException {
+		mbStatsUserPersistence.remove(statsUserId);
+	}
+
+	public void deleteMBStatsUser(MBStatsUser mbStatsUser)
+		throws PortalException, SystemException {
+		mbStatsUserPersistence.remove(mbStatsUser);
 	}
 
 	public List<MBStatsUser> dynamicQuery(
@@ -113,9 +115,11 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public MBStatsUser updateMBStatsUser(MBStatsUser model)
+	public MBStatsUser updateMBStatsUser(MBStatsUser mbStatsUser)
 		throws SystemException {
-		return mbStatsUserPersistence.update(model, true);
+		mbStatsUser.setNew(false);
+
+		return mbStatsUserPersistence.update(mbStatsUser, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

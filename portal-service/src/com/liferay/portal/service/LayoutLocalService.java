@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface LayoutLocalService {
 	public com.liferay.portal.model.Layout addLayout(
-		com.liferay.portal.model.Layout model)
+		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteLayout(long plid)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteLayout(com.liferay.portal.model.Layout layout)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Layout> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface LayoutLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Layout updateLayout(
-		com.liferay.portal.model.Layout model)
+		com.liferay.portal.model.Layout layout)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -390,10 +398,6 @@ public interface LayoutLocalService {
 		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL, long dlFolderId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteLayout(long plid)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

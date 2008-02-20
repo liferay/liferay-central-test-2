@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.UserIdMapper;
-import com.liferay.portal.model.impl.UserIdMapperImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,19 +277,21 @@ import java.util.List;
  */
 public abstract class UserIdMapperLocalServiceBaseImpl
 	implements UserIdMapperLocalService, InitializingBean {
-	public UserIdMapper addUserIdMapper(UserIdMapper model)
+	public UserIdMapper addUserIdMapper(UserIdMapper userIdMapper)
 		throws SystemException {
-		UserIdMapper userIdMapper = new UserIdMapperImpl();
-
 		userIdMapper.setNew(true);
 
-		userIdMapper.setUserIdMapperId(model.getUserIdMapperId());
-		userIdMapper.setUserId(model.getUserId());
-		userIdMapper.setType(model.getType());
-		userIdMapper.setDescription(model.getDescription());
-		userIdMapper.setExternalUserId(model.getExternalUserId());
-
 		return userIdMapperPersistence.update(userIdMapper);
+	}
+
+	public void deleteUserIdMapper(long userIdMapperId)
+		throws PortalException, SystemException {
+		userIdMapperPersistence.remove(userIdMapperId);
+	}
+
+	public void deleteUserIdMapper(UserIdMapper userIdMapper)
+		throws PortalException, SystemException {
+		userIdMapperPersistence.remove(userIdMapper);
 	}
 
 	public List<UserIdMapper> dynamicQuery(
@@ -304,9 +306,11 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public UserIdMapper updateUserIdMapper(UserIdMapper model)
+	public UserIdMapper updateUserIdMapper(UserIdMapper userIdMapper)
 		throws SystemException {
-		return userIdMapperPersistence.update(model, true);
+		userIdMapper.setNew(false);
+
+		return userIdMapperPersistence.update(userIdMapper, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

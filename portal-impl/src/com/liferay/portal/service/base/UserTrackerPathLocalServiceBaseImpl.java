@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.UserTrackerPath;
-import com.liferay.portal.model.impl.UserTrackerPathImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,18 +277,21 @@ import java.util.List;
  */
 public abstract class UserTrackerPathLocalServiceBaseImpl
 	implements UserTrackerPathLocalService, InitializingBean {
-	public UserTrackerPath addUserTrackerPath(UserTrackerPath model)
+	public UserTrackerPath addUserTrackerPath(UserTrackerPath userTrackerPath)
 		throws SystemException {
-		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
-
 		userTrackerPath.setNew(true);
 
-		userTrackerPath.setUserTrackerPathId(model.getUserTrackerPathId());
-		userTrackerPath.setUserTrackerId(model.getUserTrackerId());
-		userTrackerPath.setPath(model.getPath());
-		userTrackerPath.setPathDate(model.getPathDate());
-
 		return userTrackerPathPersistence.update(userTrackerPath);
+	}
+
+	public void deleteUserTrackerPath(long userTrackerPathId)
+		throws PortalException, SystemException {
+		userTrackerPathPersistence.remove(userTrackerPathId);
+	}
+
+	public void deleteUserTrackerPath(UserTrackerPath userTrackerPath)
+		throws PortalException, SystemException {
+		userTrackerPathPersistence.remove(userTrackerPath);
 	}
 
 	public List<UserTrackerPath> dynamicQuery(
@@ -303,9 +306,11 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public UserTrackerPath updateUserTrackerPath(UserTrackerPath model)
-		throws SystemException {
-		return userTrackerPathPersistence.update(model, true);
+	public UserTrackerPath updateUserTrackerPath(
+		UserTrackerPath userTrackerPath) throws SystemException {
+		userTrackerPath.setNew(false);
+
+		return userTrackerPathPersistence.update(userTrackerPath, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

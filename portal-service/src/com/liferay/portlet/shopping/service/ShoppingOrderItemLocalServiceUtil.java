@@ -52,11 +52,28 @@ package com.liferay.portlet.shopping.service;
  */
 public class ShoppingOrderItemLocalServiceUtil {
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem addShoppingOrderItem(
-		com.liferay.portlet.shopping.model.ShoppingOrderItem model)
+		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
 
-		return shoppingOrderItemLocalService.addShoppingOrderItem(model);
+		return shoppingOrderItemLocalService.addShoppingOrderItem(shoppingOrderItem);
+	}
+
+	public static void deleteShoppingOrderItem(long orderItemId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
+		shoppingOrderItemLocalService.deleteShoppingOrderItem(orderItemId);
+	}
+
+	public static void deleteShoppingOrderItem(
+		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
+
+		shoppingOrderItemLocalService.deleteShoppingOrderItem(shoppingOrderItem);
 	}
 
 	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> dynamicQuery(
@@ -77,11 +94,11 @@ public class ShoppingOrderItemLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.shopping.model.ShoppingOrderItem updateShoppingOrderItem(
-		com.liferay.portlet.shopping.model.ShoppingOrderItem model)
+		com.liferay.portlet.shopping.model.ShoppingOrderItem shoppingOrderItem)
 		throws com.liferay.portal.SystemException {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
 
-		return shoppingOrderItemLocalService.updateShoppingOrderItem(model);
+		return shoppingOrderItemLocalService.updateShoppingOrderItem(shoppingOrderItem);
 	}
 
 	public static com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence getShoppingCartPersistence() {

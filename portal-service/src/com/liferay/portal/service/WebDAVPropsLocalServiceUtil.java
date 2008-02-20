@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class WebDAVPropsLocalServiceUtil {
 	public static com.liferay.portal.model.WebDAVProps addWebDAVProps(
-		com.liferay.portal.model.WebDAVProps model)
+		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException {
 		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
 
-		return webDAVPropsLocalService.addWebDAVProps(model);
+		return webDAVPropsLocalService.addWebDAVProps(webDAVProps);
+	}
+
+	public static void deleteWebDAVProps(long webDavPropsId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
+
+		webDAVPropsLocalService.deleteWebDAVProps(webDavPropsId);
+	}
+
+	public static void deleteWebDAVProps(
+		com.liferay.portal.model.WebDAVProps webDAVProps)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
+
+		webDAVPropsLocalService.deleteWebDAVProps(webDAVProps);
 	}
 
 	public static java.util.List<com.liferay.portal.model.WebDAVProps> dynamicQuery(
@@ -76,11 +93,11 @@ public class WebDAVPropsLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.WebDAVProps updateWebDAVProps(
-		com.liferay.portal.model.WebDAVProps model)
+		com.liferay.portal.model.WebDAVProps webDAVProps)
 		throws com.liferay.portal.SystemException {
 		WebDAVPropsLocalService webDAVPropsLocalService = WebDAVPropsLocalServiceFactory.getService();
 
-		return webDAVPropsLocalService.updateWebDAVProps(model);
+		return webDAVPropsLocalService.updateWebDAVProps(webDAVProps);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

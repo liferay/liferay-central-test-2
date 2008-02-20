@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Phone;
-import com.liferay.portal.model.impl.PhoneImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,25 +275,20 @@ import java.util.List;
  */
 public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	InitializingBean {
-	public Phone addPhone(Phone model) throws SystemException {
-		Phone phone = new PhoneImpl();
-
+	public Phone addPhone(Phone phone) throws SystemException {
 		phone.setNew(true);
 
-		phone.setPhoneId(model.getPhoneId());
-		phone.setCompanyId(model.getCompanyId());
-		phone.setUserId(model.getUserId());
-		phone.setUserName(model.getUserName());
-		phone.setCreateDate(model.getCreateDate());
-		phone.setModifiedDate(model.getModifiedDate());
-		phone.setClassNameId(model.getClassNameId());
-		phone.setClassPK(model.getClassPK());
-		phone.setNumber(model.getNumber());
-		phone.setExtension(model.getExtension());
-		phone.setTypeId(model.getTypeId());
-		phone.setPrimary(model.getPrimary());
-
 		return phonePersistence.update(phone);
+	}
+
+	public void deletePhone(long phoneId)
+		throws PortalException, SystemException {
+		phonePersistence.remove(phoneId);
+	}
+
+	public void deletePhone(Phone phone)
+		throws PortalException, SystemException {
+		phonePersistence.remove(phone);
 	}
 
 	public List<Phone> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -307,8 +302,10 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 			end);
 	}
 
-	public Phone updatePhone(Phone model) throws SystemException {
-		return phonePersistence.update(model, true);
+	public Phone updatePhone(Phone phone) throws SystemException {
+		phone.setNew(false);
+
+		return phonePersistence.update(phone, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class ResourceCodeLocalServiceUtil {
 	public static com.liferay.portal.model.ResourceCode addResourceCode(
-		com.liferay.portal.model.ResourceCode model)
+		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 
-		return resourceCodeLocalService.addResourceCode(model);
+		return resourceCodeLocalService.addResourceCode(resourceCode);
+	}
+
+	public static void deleteResourceCode(long codeId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		resourceCodeLocalService.deleteResourceCode(codeId);
+	}
+
+	public static void deleteResourceCode(
+		com.liferay.portal.model.ResourceCode resourceCode)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		resourceCodeLocalService.deleteResourceCode(resourceCode);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ResourceCode> dynamicQuery(
@@ -77,11 +94,11 @@ public class ResourceCodeLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.ResourceCode updateResourceCode(
-		com.liferay.portal.model.ResourceCode model)
+		com.liferay.portal.model.ResourceCode resourceCode)
 		throws com.liferay.portal.SystemException {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 
-		return resourceCodeLocalService.updateResourceCode(model);
+		return resourceCodeLocalService.updateResourceCode(resourceCode);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

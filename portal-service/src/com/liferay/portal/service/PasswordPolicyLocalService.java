@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface PasswordPolicyLocalService {
 	public com.liferay.portal.model.PasswordPolicy addPasswordPolicy(
-		com.liferay.portal.model.PasswordPolicy model)
+		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException;
+
+	public void deletePasswordPolicy(long passwordPolicyId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deletePasswordPolicy(
+		com.liferay.portal.model.PasswordPolicy passwordPolicy)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.PasswordPolicy> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface PasswordPolicyLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PasswordPolicy updatePasswordPolicy(
-		com.liferay.portal.model.PasswordPolicy model)
+		com.liferay.portal.model.PasswordPolicy passwordPolicy)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -349,10 +358,6 @@ public interface PasswordPolicyLocalService {
 			com.liferay.portal.PortalException;
 
 	public void checkDefaultPasswordPolicy(long companyId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deletePasswordPolicy(long passwordPolicyId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

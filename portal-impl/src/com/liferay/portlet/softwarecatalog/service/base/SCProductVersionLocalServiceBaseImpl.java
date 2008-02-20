@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.UserLocalService;
@@ -39,7 +40,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
-import com.liferay.portlet.softwarecatalog.model.impl.SCProductVersionImpl;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalService;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionLocalServiceFactory;
 import com.liferay.portlet.softwarecatalog.service.SCFrameworkVersionService;
@@ -78,26 +78,21 @@ import java.util.List;
  */
 public abstract class SCProductVersionLocalServiceBaseImpl
 	implements SCProductVersionLocalService, InitializingBean {
-	public SCProductVersion addSCProductVersion(SCProductVersion model)
-		throws SystemException {
-		SCProductVersion scProductVersion = new SCProductVersionImpl();
-
+	public SCProductVersion addSCProductVersion(
+		SCProductVersion scProductVersion) throws SystemException {
 		scProductVersion.setNew(true);
 
-		scProductVersion.setProductVersionId(model.getProductVersionId());
-		scProductVersion.setCompanyId(model.getCompanyId());
-		scProductVersion.setUserId(model.getUserId());
-		scProductVersion.setUserName(model.getUserName());
-		scProductVersion.setCreateDate(model.getCreateDate());
-		scProductVersion.setModifiedDate(model.getModifiedDate());
-		scProductVersion.setProductEntryId(model.getProductEntryId());
-		scProductVersion.setVersion(model.getVersion());
-		scProductVersion.setChangeLog(model.getChangeLog());
-		scProductVersion.setDownloadPageURL(model.getDownloadPageURL());
-		scProductVersion.setDirectDownloadURL(model.getDirectDownloadURL());
-		scProductVersion.setRepoStoreArtifact(model.getRepoStoreArtifact());
-
 		return scProductVersionPersistence.update(scProductVersion);
+	}
+
+	public void deleteSCProductVersion(long productVersionId)
+		throws PortalException, SystemException {
+		scProductVersionPersistence.remove(productVersionId);
+	}
+
+	public void deleteSCProductVersion(SCProductVersion scProductVersion)
+		throws PortalException, SystemException {
+		scProductVersionPersistence.remove(scProductVersion);
 	}
 
 	public List<SCProductVersion> dynamicQuery(
@@ -112,9 +107,11 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public SCProductVersion updateSCProductVersion(SCProductVersion model)
-		throws SystemException {
-		return scProductVersionPersistence.update(model, true);
+	public SCProductVersion updateSCProductVersion(
+		SCProductVersion scProductVersion) throws SystemException {
+		scProductVersion.setNew(false);
+
+		return scProductVersionPersistence.update(scProductVersion, true);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

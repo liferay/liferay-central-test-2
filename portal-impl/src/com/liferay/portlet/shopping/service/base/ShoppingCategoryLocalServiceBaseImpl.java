@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -47,7 +48,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingCategory;
-import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -104,24 +104,21 @@ import java.util.List;
  */
 public abstract class ShoppingCategoryLocalServiceBaseImpl
 	implements ShoppingCategoryLocalService, InitializingBean {
-	public ShoppingCategory addShoppingCategory(ShoppingCategory model)
-		throws SystemException {
-		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
-
+	public ShoppingCategory addShoppingCategory(
+		ShoppingCategory shoppingCategory) throws SystemException {
 		shoppingCategory.setNew(true);
 
-		shoppingCategory.setCategoryId(model.getCategoryId());
-		shoppingCategory.setGroupId(model.getGroupId());
-		shoppingCategory.setCompanyId(model.getCompanyId());
-		shoppingCategory.setUserId(model.getUserId());
-		shoppingCategory.setUserName(model.getUserName());
-		shoppingCategory.setCreateDate(model.getCreateDate());
-		shoppingCategory.setModifiedDate(model.getModifiedDate());
-		shoppingCategory.setParentCategoryId(model.getParentCategoryId());
-		shoppingCategory.setName(model.getName());
-		shoppingCategory.setDescription(model.getDescription());
-
 		return shoppingCategoryPersistence.update(shoppingCategory);
+	}
+
+	public void deleteShoppingCategory(long categoryId)
+		throws PortalException, SystemException {
+		shoppingCategoryPersistence.remove(categoryId);
+	}
+
+	public void deleteShoppingCategory(ShoppingCategory shoppingCategory)
+		throws PortalException, SystemException {
+		shoppingCategoryPersistence.remove(shoppingCategory);
 	}
 
 	public List<ShoppingCategory> dynamicQuery(
@@ -136,9 +133,11 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ShoppingCategory updateShoppingCategory(ShoppingCategory model)
-		throws SystemException {
-		return shoppingCategoryPersistence.update(model, true);
+	public ShoppingCategory updateShoppingCategory(
+		ShoppingCategory shoppingCategory) throws SystemException {
+		shoppingCategory.setNew(false);
+
+		return shoppingCategoryPersistence.update(shoppingCategory, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

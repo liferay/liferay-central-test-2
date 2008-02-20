@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.EmailAddress;
-import com.liferay.portal.model.impl.EmailAddressImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,25 +275,21 @@ import java.util.List;
  */
 public abstract class EmailAddressLocalServiceBaseImpl
 	implements EmailAddressLocalService, InitializingBean {
-	public EmailAddress addEmailAddress(EmailAddress model)
+	public EmailAddress addEmailAddress(EmailAddress emailAddress)
 		throws SystemException {
-		EmailAddress emailAddress = new EmailAddressImpl();
-
 		emailAddress.setNew(true);
 
-		emailAddress.setEmailAddressId(model.getEmailAddressId());
-		emailAddress.setCompanyId(model.getCompanyId());
-		emailAddress.setUserId(model.getUserId());
-		emailAddress.setUserName(model.getUserName());
-		emailAddress.setCreateDate(model.getCreateDate());
-		emailAddress.setModifiedDate(model.getModifiedDate());
-		emailAddress.setClassNameId(model.getClassNameId());
-		emailAddress.setClassPK(model.getClassPK());
-		emailAddress.setAddress(model.getAddress());
-		emailAddress.setTypeId(model.getTypeId());
-		emailAddress.setPrimary(model.getPrimary());
-
 		return emailAddressPersistence.update(emailAddress);
+	}
+
+	public void deleteEmailAddress(long emailAddressId)
+		throws PortalException, SystemException {
+		emailAddressPersistence.remove(emailAddressId);
+	}
+
+	public void deleteEmailAddress(EmailAddress emailAddress)
+		throws PortalException, SystemException {
+		emailAddressPersistence.remove(emailAddress);
 	}
 
 	public List<EmailAddress> dynamicQuery(
@@ -308,9 +304,11 @@ public abstract class EmailAddressLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public EmailAddress updateEmailAddress(EmailAddress model)
+	public EmailAddress updateEmailAddress(EmailAddress emailAddress)
 		throws SystemException {
-		return emailAddressPersistence.update(model, true);
+		emailAddress.setNew(false);
+
+		return emailAddressPersistence.update(emailAddress, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

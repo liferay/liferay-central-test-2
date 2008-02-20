@@ -35,6 +35,7 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 import com.liferay.lock.service.LockService;
 import com.liferay.lock.service.LockServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -59,7 +60,6 @@ import com.liferay.portal.service.persistence.WebDAVPropsPersistence;
 import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalService;
 import com.liferay.portlet.documentlibrary.service.DLFileRankLocalServiceFactory;
@@ -124,31 +124,21 @@ import java.util.List;
  */
 public abstract class DLFileEntryLocalServiceBaseImpl
 	implements DLFileEntryLocalService, InitializingBean {
-	public DLFileEntry addDLFileEntry(DLFileEntry model)
+	public DLFileEntry addDLFileEntry(DLFileEntry dlFileEntry)
 		throws SystemException {
-		DLFileEntry dlFileEntry = new DLFileEntryImpl();
-
 		dlFileEntry.setNew(true);
 
-		dlFileEntry.setUuid(model.getUuid());
-		dlFileEntry.setFileEntryId(model.getFileEntryId());
-		dlFileEntry.setCompanyId(model.getCompanyId());
-		dlFileEntry.setUserId(model.getUserId());
-		dlFileEntry.setUserName(model.getUserName());
-		dlFileEntry.setVersionUserId(model.getVersionUserId());
-		dlFileEntry.setVersionUserName(model.getVersionUserName());
-		dlFileEntry.setCreateDate(model.getCreateDate());
-		dlFileEntry.setModifiedDate(model.getModifiedDate());
-		dlFileEntry.setFolderId(model.getFolderId());
-		dlFileEntry.setName(model.getName());
-		dlFileEntry.setTitle(model.getTitle());
-		dlFileEntry.setDescription(model.getDescription());
-		dlFileEntry.setVersion(model.getVersion());
-		dlFileEntry.setSize(model.getSize());
-		dlFileEntry.setReadCount(model.getReadCount());
-		dlFileEntry.setExtraSettings(model.getExtraSettings());
-
 		return dlFileEntryPersistence.update(dlFileEntry);
+	}
+
+	public void deleteDLFileEntry(long fileEntryId)
+		throws PortalException, SystemException {
+		dlFileEntryPersistence.remove(fileEntryId);
+	}
+
+	public void deleteDLFileEntry(DLFileEntry dlFileEntry)
+		throws PortalException, SystemException {
+		dlFileEntryPersistence.remove(dlFileEntry);
 	}
 
 	public List<DLFileEntry> dynamicQuery(
@@ -163,9 +153,11 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public DLFileEntry updateDLFileEntry(DLFileEntry model)
+	public DLFileEntry updateDLFileEntry(DLFileEntry dlFileEntry)
 		throws SystemException {
-		return dlFileEntryPersistence.update(model, true);
+		dlFileEntry.setNew(false);
+
+		return dlFileEntryPersistence.update(dlFileEntry, true);
 	}
 
 	public DLFileEntryPersistence getDLFileEntryPersistence() {

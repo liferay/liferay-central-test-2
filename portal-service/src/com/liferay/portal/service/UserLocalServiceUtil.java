@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class UserLocalServiceUtil {
 	public static com.liferay.portal.model.User addUser(
-		com.liferay.portal.model.User model)
+		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.addUser(model);
+		return userLocalService.addUser(user);
+	}
+
+	public static void deleteUser(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		userLocalService.deleteUser(userId);
+	}
+
+	public static void deleteUser(com.liferay.portal.model.User user)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		userLocalService.deleteUser(user);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> dynamicQuery(
@@ -76,11 +92,11 @@ public class UserLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.User updateUser(
-		com.liferay.portal.model.User model)
+		com.liferay.portal.model.User user)
 		throws com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.updateUser(model);
+		return userLocalService.updateUser(user);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -1103,14 +1119,6 @@ public class UserLocalServiceUtil {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		userLocalService.deleteRoleUser(roleId, userId);
-	}
-
-	public static void deleteUser(long userId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		UserLocalService userLocalService = UserLocalServiceFactory.getService();
-
-		userLocalService.deleteUser(userId);
 	}
 
 	public static java.lang.String encryptUserId(java.lang.String name)

@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface UserTrackerPathLocalService {
 	public com.liferay.portal.model.UserTrackerPath addUserTrackerPath(
-		com.liferay.portal.model.UserTrackerPath model)
+		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteUserTrackerPath(long userTrackerPathId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteUserTrackerPath(
+		com.liferay.portal.model.UserTrackerPath userTrackerPath)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.UserTrackerPath> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface UserTrackerPathLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.UserTrackerPath updateUserTrackerPath(
-		com.liferay.portal.model.UserTrackerPath model)
+		com.liferay.portal.model.UserTrackerPath userTrackerPath)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();

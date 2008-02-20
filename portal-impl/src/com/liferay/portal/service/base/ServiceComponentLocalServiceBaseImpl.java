@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.ServiceComponent;
-import com.liferay.portal.model.impl.ServiceComponentImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,19 +277,21 @@ import java.util.List;
  */
 public abstract class ServiceComponentLocalServiceBaseImpl
 	implements ServiceComponentLocalService, InitializingBean {
-	public ServiceComponent addServiceComponent(ServiceComponent model)
-		throws SystemException {
-		ServiceComponent serviceComponent = new ServiceComponentImpl();
-
+	public ServiceComponent addServiceComponent(
+		ServiceComponent serviceComponent) throws SystemException {
 		serviceComponent.setNew(true);
 
-		serviceComponent.setServiceComponentId(model.getServiceComponentId());
-		serviceComponent.setBuildNamespace(model.getBuildNamespace());
-		serviceComponent.setBuildNumber(model.getBuildNumber());
-		serviceComponent.setBuildDate(model.getBuildDate());
-		serviceComponent.setData(model.getData());
-
 		return serviceComponentPersistence.update(serviceComponent);
+	}
+
+	public void deleteServiceComponent(long serviceComponentId)
+		throws PortalException, SystemException {
+		serviceComponentPersistence.remove(serviceComponentId);
+	}
+
+	public void deleteServiceComponent(ServiceComponent serviceComponent)
+		throws PortalException, SystemException {
+		serviceComponentPersistence.remove(serviceComponent);
 	}
 
 	public List<ServiceComponent> dynamicQuery(
@@ -304,9 +306,11 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ServiceComponent updateServiceComponent(ServiceComponent model)
-		throws SystemException {
-		return serviceComponentPersistence.update(model, true);
+	public ServiceComponent updateServiceComponent(
+		ServiceComponent serviceComponent) throws SystemException {
+		serviceComponent.setNew(false);
+
+		return serviceComponentPersistence.update(serviceComponent, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

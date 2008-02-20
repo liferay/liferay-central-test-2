@@ -50,8 +50,17 @@ package com.liferay.portlet.tags.service;
  */
 public interface TagsPropertyLocalService {
 	public com.liferay.portlet.tags.model.TagsProperty addTagsProperty(
-		com.liferay.portlet.tags.model.TagsProperty model)
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteTagsProperty(long propertyId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteTagsProperty(
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface TagsPropertyLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty updateTagsProperty(
-		com.liferay.portlet.tags.model.TagsProperty model)
+		com.liferay.portlet.tags.model.TagsProperty tagsProperty)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();

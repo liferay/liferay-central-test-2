@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class OrgLaborLocalServiceUtil {
 	public static com.liferay.portal.model.OrgLabor addOrgLabor(
-		com.liferay.portal.model.OrgLabor model)
+		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
-		return orgLaborLocalService.addOrgLabor(model);
+		return orgLaborLocalService.addOrgLabor(orgLabor);
+	}
+
+	public static void deleteOrgLabor(long orgLaborId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		orgLaborLocalService.deleteOrgLabor(orgLaborId);
+	}
+
+	public static void deleteOrgLabor(
+		com.liferay.portal.model.OrgLabor orgLabor)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		orgLaborLocalService.deleteOrgLabor(orgLabor);
 	}
 
 	public static java.util.List<com.liferay.portal.model.OrgLabor> dynamicQuery(
@@ -76,11 +93,11 @@ public class OrgLaborLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
-		com.liferay.portal.model.OrgLabor model)
+		com.liferay.portal.model.OrgLabor orgLabor)
 		throws com.liferay.portal.SystemException {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 
-		return orgLaborLocalService.updateOrgLabor(model);
+		return orgLaborLocalService.updateOrgLabor(orgLabor);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -803,14 +820,6 @@ public class OrgLaborLocalServiceUtil {
 		return orgLaborLocalService.addOrgLabor(organizationId, typeId,
 			sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen,
 			wedClose, thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
-	}
-
-	public static void deleteOrgLabor(long orgLaborId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
-
-		orgLaborLocalService.deleteOrgLabor(orgLaborId);
 	}
 
 	public static com.liferay.portal.model.OrgLabor getOrgLabor(long orgLaborId)

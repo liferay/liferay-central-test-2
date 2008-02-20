@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface AddressLocalService {
 	public com.liferay.portal.model.Address addAddress(
-		com.liferay.portal.model.Address model)
+		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteAddress(long addressId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteAddress(com.liferay.portal.model.Address address)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Address> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface AddressLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Address updateAddress(
-		com.liferay.portal.model.Address model)
+		com.liferay.portal.model.Address address)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -342,10 +350,6 @@ public interface AddressLocalService {
 		java.lang.String street2, java.lang.String street3,
 		java.lang.String city, java.lang.String zip, long regionId,
 		long countryId, int typeId, boolean mailing, boolean primary)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteAddress(long addressId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

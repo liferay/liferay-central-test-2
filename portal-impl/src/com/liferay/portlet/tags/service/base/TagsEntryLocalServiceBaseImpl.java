@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.UserLocalService;
@@ -39,7 +40,6 @@ import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.tags.model.TagsEntry;
-import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -82,20 +82,21 @@ import java.util.List;
  */
 public abstract class TagsEntryLocalServiceBaseImpl
 	implements TagsEntryLocalService, InitializingBean {
-	public TagsEntry addTagsEntry(TagsEntry model) throws SystemException {
-		TagsEntry tagsEntry = new TagsEntryImpl();
-
+	public TagsEntry addTagsEntry(TagsEntry tagsEntry)
+		throws SystemException {
 		tagsEntry.setNew(true);
 
-		tagsEntry.setEntryId(model.getEntryId());
-		tagsEntry.setCompanyId(model.getCompanyId());
-		tagsEntry.setUserId(model.getUserId());
-		tagsEntry.setUserName(model.getUserName());
-		tagsEntry.setCreateDate(model.getCreateDate());
-		tagsEntry.setModifiedDate(model.getModifiedDate());
-		tagsEntry.setName(model.getName());
-
 		return tagsEntryPersistence.update(tagsEntry);
+	}
+
+	public void deleteTagsEntry(long entryId)
+		throws PortalException, SystemException {
+		tagsEntryPersistence.remove(entryId);
+	}
+
+	public void deleteTagsEntry(TagsEntry tagsEntry)
+		throws PortalException, SystemException {
+		tagsEntryPersistence.remove(tagsEntry);
 	}
 
 	public List<TagsEntry> dynamicQuery(
@@ -110,8 +111,11 @@ public abstract class TagsEntryLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public TagsEntry updateTagsEntry(TagsEntry model) throws SystemException {
-		return tagsEntryPersistence.update(model, true);
+	public TagsEntry updateTagsEntry(TagsEntry tagsEntry)
+		throws SystemException {
+		tagsEntry.setNew(false);
+
+		return tagsEntryPersistence.update(tagsEntry, true);
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {

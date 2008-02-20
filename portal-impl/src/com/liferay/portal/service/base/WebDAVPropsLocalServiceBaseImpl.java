@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.WebDAVProps;
-import com.liferay.portal.model.impl.WebDAVPropsImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,21 +277,21 @@ import java.util.List;
  */
 public abstract class WebDAVPropsLocalServiceBaseImpl
 	implements WebDAVPropsLocalService, InitializingBean {
-	public WebDAVProps addWebDAVProps(WebDAVProps model)
+	public WebDAVProps addWebDAVProps(WebDAVProps webDAVProps)
 		throws SystemException {
-		WebDAVProps webDAVProps = new WebDAVPropsImpl();
-
 		webDAVProps.setNew(true);
 
-		webDAVProps.setWebDavPropsId(model.getWebDavPropsId());
-		webDAVProps.setCompanyId(model.getCompanyId());
-		webDAVProps.setCreateDate(model.getCreateDate());
-		webDAVProps.setModifiedDate(model.getModifiedDate());
-		webDAVProps.setClassNameId(model.getClassNameId());
-		webDAVProps.setClassPK(model.getClassPK());
-		webDAVProps.setProps(model.getProps());
-
 		return webDAVPropsPersistence.update(webDAVProps);
+	}
+
+	public void deleteWebDAVProps(long webDavPropsId)
+		throws PortalException, SystemException {
+		webDAVPropsPersistence.remove(webDavPropsId);
+	}
+
+	public void deleteWebDAVProps(WebDAVProps webDAVProps)
+		throws PortalException, SystemException {
+		webDAVPropsPersistence.remove(webDAVProps);
 	}
 
 	public List<WebDAVProps> dynamicQuery(
@@ -306,9 +306,11 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public WebDAVProps updateWebDAVProps(WebDAVProps model)
+	public WebDAVProps updateWebDAVProps(WebDAVProps webDAVProps)
 		throws SystemException {
-		return webDAVPropsPersistence.update(model, true);
+		webDAVProps.setNew(false);
+
+		return webDAVPropsPersistence.update(webDAVProps, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

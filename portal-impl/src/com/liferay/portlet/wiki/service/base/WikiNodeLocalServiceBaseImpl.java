@@ -27,6 +27,7 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.ResourceLocalService;
@@ -59,7 +60,6 @@ import com.liferay.portlet.tags.service.persistence.TagsEntryFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsEntryPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsEntryUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
-import com.liferay.portlet.wiki.model.impl.WikiNodeImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiPageLocalService;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceFactory;
@@ -88,24 +88,20 @@ import java.util.List;
  */
 public abstract class WikiNodeLocalServiceBaseImpl
 	implements WikiNodeLocalService, InitializingBean {
-	public WikiNode addWikiNode(WikiNode model) throws SystemException {
-		WikiNode wikiNode = new WikiNodeImpl();
-
+	public WikiNode addWikiNode(WikiNode wikiNode) throws SystemException {
 		wikiNode.setNew(true);
 
-		wikiNode.setUuid(model.getUuid());
-		wikiNode.setNodeId(model.getNodeId());
-		wikiNode.setGroupId(model.getGroupId());
-		wikiNode.setCompanyId(model.getCompanyId());
-		wikiNode.setUserId(model.getUserId());
-		wikiNode.setUserName(model.getUserName());
-		wikiNode.setCreateDate(model.getCreateDate());
-		wikiNode.setModifiedDate(model.getModifiedDate());
-		wikiNode.setName(model.getName());
-		wikiNode.setDescription(model.getDescription());
-		wikiNode.setLastPostDate(model.getLastPostDate());
-
 		return wikiNodePersistence.update(wikiNode);
+	}
+
+	public void deleteWikiNode(long nodeId)
+		throws PortalException, SystemException {
+		wikiNodePersistence.remove(nodeId);
+	}
+
+	public void deleteWikiNode(WikiNode wikiNode)
+		throws PortalException, SystemException {
+		wikiNodePersistence.remove(wikiNode);
 	}
 
 	public List<WikiNode> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -120,8 +116,10 @@ public abstract class WikiNodeLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public WikiNode updateWikiNode(WikiNode model) throws SystemException {
-		return wikiNodePersistence.update(model, true);
+	public WikiNode updateWikiNode(WikiNode wikiNode) throws SystemException {
+		wikiNode.setNew(false);
+
+		return wikiNodePersistence.update(wikiNode, true);
 	}
 
 	public WikiNodePersistence getWikiNodePersistence() {

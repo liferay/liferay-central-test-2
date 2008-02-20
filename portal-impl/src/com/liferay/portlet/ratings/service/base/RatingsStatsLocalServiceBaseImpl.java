@@ -27,11 +27,11 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.ratings.model.RatingsStats;
-import com.liferay.portlet.ratings.model.impl.RatingsStatsImpl;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalService;
 import com.liferay.portlet.ratings.service.RatingsEntryLocalServiceFactory;
 import com.liferay.portlet.ratings.service.RatingsEntryService;
@@ -54,20 +54,21 @@ import java.util.List;
  */
 public abstract class RatingsStatsLocalServiceBaseImpl
 	implements RatingsStatsLocalService, InitializingBean {
-	public RatingsStats addRatingsStats(RatingsStats model)
+	public RatingsStats addRatingsStats(RatingsStats ratingsStats)
 		throws SystemException {
-		RatingsStats ratingsStats = new RatingsStatsImpl();
-
 		ratingsStats.setNew(true);
 
-		ratingsStats.setStatsId(model.getStatsId());
-		ratingsStats.setClassNameId(model.getClassNameId());
-		ratingsStats.setClassPK(model.getClassPK());
-		ratingsStats.setTotalEntries(model.getTotalEntries());
-		ratingsStats.setTotalScore(model.getTotalScore());
-		ratingsStats.setAverageScore(model.getAverageScore());
-
 		return ratingsStatsPersistence.update(ratingsStats);
+	}
+
+	public void deleteRatingsStats(long statsId)
+		throws PortalException, SystemException {
+		ratingsStatsPersistence.remove(statsId);
+	}
+
+	public void deleteRatingsStats(RatingsStats ratingsStats)
+		throws PortalException, SystemException {
+		ratingsStatsPersistence.remove(ratingsStats);
 	}
 
 	public List<RatingsStats> dynamicQuery(
@@ -82,9 +83,11 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public RatingsStats updateRatingsStats(RatingsStats model)
+	public RatingsStats updateRatingsStats(RatingsStats ratingsStats)
 		throws SystemException {
-		return ratingsStatsPersistence.update(model, true);
+		ratingsStats.setNew(false);
+
+		return ratingsStatsPersistence.update(ratingsStats, true);
 	}
 
 	public RatingsEntryLocalService getRatingsEntryLocalService() {

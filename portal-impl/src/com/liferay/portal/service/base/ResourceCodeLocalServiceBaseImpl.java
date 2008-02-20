@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.ResourceCode;
-import com.liferay.portal.model.impl.ResourceCodeImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -277,18 +277,21 @@ import java.util.List;
  */
 public abstract class ResourceCodeLocalServiceBaseImpl
 	implements ResourceCodeLocalService, InitializingBean {
-	public ResourceCode addResourceCode(ResourceCode model)
+	public ResourceCode addResourceCode(ResourceCode resourceCode)
 		throws SystemException {
-		ResourceCode resourceCode = new ResourceCodeImpl();
-
 		resourceCode.setNew(true);
 
-		resourceCode.setCodeId(model.getCodeId());
-		resourceCode.setCompanyId(model.getCompanyId());
-		resourceCode.setName(model.getName());
-		resourceCode.setScope(model.getScope());
-
 		return resourceCodePersistence.update(resourceCode);
+	}
+
+	public void deleteResourceCode(long codeId)
+		throws PortalException, SystemException {
+		resourceCodePersistence.remove(codeId);
+	}
+
+	public void deleteResourceCode(ResourceCode resourceCode)
+		throws PortalException, SystemException {
+		resourceCodePersistence.remove(resourceCode);
 	}
 
 	public List<ResourceCode> dynamicQuery(
@@ -303,9 +306,11 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ResourceCode updateResourceCode(ResourceCode model)
+	public ResourceCode updateResourceCode(ResourceCode resourceCode)
 		throws SystemException {
-		return resourceCodePersistence.update(model, true);
+		resourceCode.setNew(false);
+
+		return resourceCodePersistence.update(resourceCode, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

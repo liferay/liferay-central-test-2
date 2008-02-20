@@ -32,6 +32,7 @@ import com.liferay.documentlibrary.service.DLLocalServiceFactory;
 import com.liferay.documentlibrary.service.DLService;
 import com.liferay.documentlibrary.service.DLServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.CompanyLocalService;
@@ -92,7 +93,6 @@ import com.liferay.portlet.tags.service.persistence.TagsAssetFinderUtil;
 import com.liferay.portlet.tags.service.persistence.TagsAssetPersistence;
 import com.liferay.portlet.tags.service.persistence.TagsAssetUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiNodeService;
@@ -121,28 +121,20 @@ import java.util.List;
  */
 public abstract class WikiPageLocalServiceBaseImpl
 	implements WikiPageLocalService, InitializingBean {
-	public WikiPage addWikiPage(WikiPage model) throws SystemException {
-		WikiPage wikiPage = new WikiPageImpl();
-
+	public WikiPage addWikiPage(WikiPage wikiPage) throws SystemException {
 		wikiPage.setNew(true);
 
-		wikiPage.setUuid(model.getUuid());
-		wikiPage.setPageId(model.getPageId());
-		wikiPage.setResourcePrimKey(model.getResourcePrimKey());
-		wikiPage.setCompanyId(model.getCompanyId());
-		wikiPage.setUserId(model.getUserId());
-		wikiPage.setUserName(model.getUserName());
-		wikiPage.setCreateDate(model.getCreateDate());
-		wikiPage.setNodeId(model.getNodeId());
-		wikiPage.setTitle(model.getTitle());
-		wikiPage.setVersion(model.getVersion());
-		wikiPage.setContent(model.getContent());
-		wikiPage.setFormat(model.getFormat());
-		wikiPage.setHead(model.getHead());
-		wikiPage.setParentTitle(model.getParentTitle());
-		wikiPage.setRedirectTitle(model.getRedirectTitle());
-
 		return wikiPagePersistence.update(wikiPage);
+	}
+
+	public void deleteWikiPage(long pageId)
+		throws PortalException, SystemException {
+		wikiPagePersistence.remove(pageId);
+	}
+
+	public void deleteWikiPage(WikiPage wikiPage)
+		throws PortalException, SystemException {
+		wikiPagePersistence.remove(wikiPage);
 	}
 
 	public List<WikiPage> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -157,8 +149,10 @@ public abstract class WikiPageLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public WikiPage updateWikiPage(WikiPage model) throws SystemException {
-		return wikiPagePersistence.update(model, true);
+	public WikiPage updateWikiPage(WikiPage wikiPage) throws SystemException {
+		wikiPage.setNew(false);
+
+		return wikiPagePersistence.update(wikiPage, true);
 	}
 
 	public WikiNodeLocalService getWikiNodeLocalService() {

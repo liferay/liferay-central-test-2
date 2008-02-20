@@ -30,6 +30,7 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.service.CompanyLocalService;
@@ -56,7 +57,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil
 import com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.shopping.model.ShoppingOrder;
-import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalService;
@@ -113,65 +113,21 @@ import java.util.List;
  */
 public abstract class ShoppingOrderLocalServiceBaseImpl
 	implements ShoppingOrderLocalService, InitializingBean {
-	public ShoppingOrder addShoppingOrder(ShoppingOrder model)
+	public ShoppingOrder addShoppingOrder(ShoppingOrder shoppingOrder)
 		throws SystemException {
-		ShoppingOrder shoppingOrder = new ShoppingOrderImpl();
-
 		shoppingOrder.setNew(true);
 
-		shoppingOrder.setOrderId(model.getOrderId());
-		shoppingOrder.setGroupId(model.getGroupId());
-		shoppingOrder.setCompanyId(model.getCompanyId());
-		shoppingOrder.setUserId(model.getUserId());
-		shoppingOrder.setUserName(model.getUserName());
-		shoppingOrder.setCreateDate(model.getCreateDate());
-		shoppingOrder.setModifiedDate(model.getModifiedDate());
-		shoppingOrder.setNumber(model.getNumber());
-		shoppingOrder.setTax(model.getTax());
-		shoppingOrder.setShipping(model.getShipping());
-		shoppingOrder.setAltShipping(model.getAltShipping());
-		shoppingOrder.setRequiresShipping(model.getRequiresShipping());
-		shoppingOrder.setInsure(model.getInsure());
-		shoppingOrder.setInsurance(model.getInsurance());
-		shoppingOrder.setCouponCodes(model.getCouponCodes());
-		shoppingOrder.setCouponDiscount(model.getCouponDiscount());
-		shoppingOrder.setBillingFirstName(model.getBillingFirstName());
-		shoppingOrder.setBillingLastName(model.getBillingLastName());
-		shoppingOrder.setBillingEmailAddress(model.getBillingEmailAddress());
-		shoppingOrder.setBillingCompany(model.getBillingCompany());
-		shoppingOrder.setBillingStreet(model.getBillingStreet());
-		shoppingOrder.setBillingCity(model.getBillingCity());
-		shoppingOrder.setBillingState(model.getBillingState());
-		shoppingOrder.setBillingZip(model.getBillingZip());
-		shoppingOrder.setBillingCountry(model.getBillingCountry());
-		shoppingOrder.setBillingPhone(model.getBillingPhone());
-		shoppingOrder.setShipToBilling(model.getShipToBilling());
-		shoppingOrder.setShippingFirstName(model.getShippingFirstName());
-		shoppingOrder.setShippingLastName(model.getShippingLastName());
-		shoppingOrder.setShippingEmailAddress(model.getShippingEmailAddress());
-		shoppingOrder.setShippingCompany(model.getShippingCompany());
-		shoppingOrder.setShippingStreet(model.getShippingStreet());
-		shoppingOrder.setShippingCity(model.getShippingCity());
-		shoppingOrder.setShippingState(model.getShippingState());
-		shoppingOrder.setShippingZip(model.getShippingZip());
-		shoppingOrder.setShippingCountry(model.getShippingCountry());
-		shoppingOrder.setShippingPhone(model.getShippingPhone());
-		shoppingOrder.setCcName(model.getCcName());
-		shoppingOrder.setCcType(model.getCcType());
-		shoppingOrder.setCcNumber(model.getCcNumber());
-		shoppingOrder.setCcExpMonth(model.getCcExpMonth());
-		shoppingOrder.setCcExpYear(model.getCcExpYear());
-		shoppingOrder.setCcVerNumber(model.getCcVerNumber());
-		shoppingOrder.setComments(model.getComments());
-		shoppingOrder.setPpTxnId(model.getPpTxnId());
-		shoppingOrder.setPpPaymentStatus(model.getPpPaymentStatus());
-		shoppingOrder.setPpPaymentGross(model.getPpPaymentGross());
-		shoppingOrder.setPpReceiverEmail(model.getPpReceiverEmail());
-		shoppingOrder.setPpPayerEmail(model.getPpPayerEmail());
-		shoppingOrder.setSendOrderEmail(model.getSendOrderEmail());
-		shoppingOrder.setSendShippingEmail(model.getSendShippingEmail());
-
 		return shoppingOrderPersistence.update(shoppingOrder);
+	}
+
+	public void deleteShoppingOrder(long orderId)
+		throws PortalException, SystemException {
+		shoppingOrderPersistence.remove(orderId);
+	}
+
+	public void deleteShoppingOrder(ShoppingOrder shoppingOrder)
+		throws PortalException, SystemException {
+		shoppingOrderPersistence.remove(shoppingOrder);
 	}
 
 	public List<ShoppingOrder> dynamicQuery(
@@ -186,9 +142,11 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 			begin, end);
 	}
 
-	public ShoppingOrder updateShoppingOrder(ShoppingOrder model)
+	public ShoppingOrder updateShoppingOrder(ShoppingOrder shoppingOrder)
 		throws SystemException {
-		return shoppingOrderPersistence.update(model, true);
+		shoppingOrder.setNew(false);
+
+		return shoppingOrderPersistence.update(shoppingOrder, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

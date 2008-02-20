@@ -52,11 +52,28 @@ package com.liferay.portlet.polls.service;
  */
 public class PollsQuestionLocalServiceUtil {
 	public static com.liferay.portlet.polls.model.PollsQuestion addPollsQuestion(
-		com.liferay.portlet.polls.model.PollsQuestion model)
+		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-		return pollsQuestionLocalService.addPollsQuestion(model);
+		return pollsQuestionLocalService.addPollsQuestion(pollsQuestion);
+	}
+
+	public static void deletePollsQuestion(long questionId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		pollsQuestionLocalService.deletePollsQuestion(questionId);
+	}
+
+	public static void deletePollsQuestion(
+		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
+
+		pollsQuestionLocalService.deletePollsQuestion(pollsQuestion);
 	}
 
 	public static java.util.List<com.liferay.portlet.polls.model.PollsQuestion> dynamicQuery(
@@ -77,11 +94,11 @@ public class PollsQuestionLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.polls.model.PollsQuestion updatePollsQuestion(
-		com.liferay.portlet.polls.model.PollsQuestion model)
+		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException {
 		PollsQuestionLocalService pollsQuestionLocalService = PollsQuestionLocalServiceFactory.getService();
 
-		return pollsQuestionLocalService.updatePollsQuestion(model);
+		return pollsQuestionLocalService.updatePollsQuestion(pollsQuestion);
 	}
 
 	public static com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence() {

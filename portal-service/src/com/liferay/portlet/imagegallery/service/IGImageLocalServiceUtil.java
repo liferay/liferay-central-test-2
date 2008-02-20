@@ -52,11 +52,28 @@ package com.liferay.portlet.imagegallery.service;
  */
 public class IGImageLocalServiceUtil {
 	public static com.liferay.portlet.imagegallery.model.IGImage addIGImage(
-		com.liferay.portlet.imagegallery.model.IGImage model)
+		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-		return igImageLocalService.addIGImage(model);
+		return igImageLocalService.addIGImage(igImage);
+	}
+
+	public static void deleteIGImage(long imageId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		igImageLocalService.deleteIGImage(imageId);
+	}
+
+	public static void deleteIGImage(
+		com.liferay.portlet.imagegallery.model.IGImage igImage)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
+
+		igImageLocalService.deleteIGImage(igImage);
 	}
 
 	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> dynamicQuery(
@@ -76,11 +93,11 @@ public class IGImageLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.imagegallery.model.IGImage updateIGImage(
-		com.liferay.portlet.imagegallery.model.IGImage model)
+		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException {
 		IGImageLocalService igImageLocalService = IGImageLocalServiceFactory.getService();
 
-		return igImageLocalService.updateIGImage(model);
+		return igImageLocalService.updateIGImage(igImage);
 	}
 
 	public static com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence() {

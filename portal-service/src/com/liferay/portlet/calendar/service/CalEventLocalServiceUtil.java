@@ -52,11 +52,28 @@ package com.liferay.portlet.calendar.service;
  */
 public class CalEventLocalServiceUtil {
 	public static com.liferay.portlet.calendar.model.CalEvent addCalEvent(
-		com.liferay.portlet.calendar.model.CalEvent model)
+		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-		return calEventLocalService.addCalEvent(model);
+		return calEventLocalService.addCalEvent(calEvent);
+	}
+
+	public static void deleteCalEvent(long eventId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		calEventLocalService.deleteCalEvent(eventId);
+	}
+
+	public static void deleteCalEvent(
+		com.liferay.portlet.calendar.model.CalEvent calEvent)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
+
+		calEventLocalService.deleteCalEvent(calEvent);
 	}
 
 	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> dynamicQuery(
@@ -76,11 +93,11 @@ public class CalEventLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.calendar.model.CalEvent updateCalEvent(
-		com.liferay.portlet.calendar.model.CalEvent model)
+		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException {
 		CalEventLocalService calEventLocalService = CalEventLocalServiceFactory.getService();
 
-		return calEventLocalService.updateCalEvent(model);
+		return calEventLocalService.updateCalEvent(calEvent);
 	}
 
 	public static com.liferay.portlet.calendar.service.persistence.CalEventPersistence getCalEventPersistence() {

@@ -52,11 +52,28 @@ package com.liferay.portal.service;
  */
 public class ServiceComponentLocalServiceUtil {
 	public static com.liferay.portal.model.ServiceComponent addServiceComponent(
-		com.liferay.portal.model.ServiceComponent model)
+		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
 		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
 
-		return serviceComponentLocalService.addServiceComponent(model);
+		return serviceComponentLocalService.addServiceComponent(serviceComponent);
+	}
+
+	public static void deleteServiceComponent(long serviceComponentId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		serviceComponentLocalService.deleteServiceComponent(serviceComponentId);
+	}
+
+	public static void deleteServiceComponent(
+		com.liferay.portal.model.ServiceComponent serviceComponent)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		serviceComponentLocalService.deleteServiceComponent(serviceComponent);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ServiceComponent> dynamicQuery(
@@ -77,11 +94,11 @@ public class ServiceComponentLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.ServiceComponent updateServiceComponent(
-		com.liferay.portal.model.ServiceComponent model)
+		com.liferay.portal.model.ServiceComponent serviceComponent)
 		throws com.liferay.portal.SystemException {
 		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
 
-		return serviceComponentLocalService.updateServiceComponent(model);
+		return serviceComponentLocalService.updateServiceComponent(serviceComponent);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {

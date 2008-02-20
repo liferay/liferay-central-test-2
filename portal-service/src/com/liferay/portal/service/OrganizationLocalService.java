@@ -50,8 +50,17 @@ package com.liferay.portal.service;
  */
 public interface OrganizationLocalService {
 	public com.liferay.portal.model.Organization addOrganization(
-		com.liferay.portal.model.Organization model)
+		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException;
+
+	public void deleteOrganization(long organizationId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteOrganization(
+		com.liferay.portal.model.Organization organization)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Organization> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +71,7 @@ public interface OrganizationLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Organization updateOrganization(
-		com.liferay.portal.model.Organization model)
+		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
@@ -355,15 +364,6 @@ public interface OrganizationLocalService {
 
 	public void addPasswordPolicyOrganizations(long passwordPolicyId,
 		long[] organizationIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteOrganization(long organizationId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteOrganization(
-		com.liferay.portal.model.Organization organization)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

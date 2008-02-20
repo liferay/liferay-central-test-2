@@ -52,11 +52,28 @@ package com.liferay.portlet.journal.service;
  */
 public class JournalTemplateLocalServiceUtil {
 	public static com.liferay.portlet.journal.model.JournalTemplate addJournalTemplate(
-		com.liferay.portlet.journal.model.JournalTemplate model)
+		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.SystemException {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-		return journalTemplateLocalService.addJournalTemplate(model);
+		return journalTemplateLocalService.addJournalTemplate(journalTemplate);
+	}
+
+	public static void deleteJournalTemplate(long id)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		journalTemplateLocalService.deleteJournalTemplate(id);
+	}
+
+	public static void deleteJournalTemplate(
+		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
+
+		journalTemplateLocalService.deleteJournalTemplate(journalTemplate);
 	}
 
 	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> dynamicQuery(
@@ -77,11 +94,11 @@ public class JournalTemplateLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.journal.model.JournalTemplate updateJournalTemplate(
-		com.liferay.portlet.journal.model.JournalTemplate model)
+		com.liferay.portlet.journal.model.JournalTemplate journalTemplate)
 		throws com.liferay.portal.SystemException {
 		JournalTemplateLocalService journalTemplateLocalService = JournalTemplateLocalServiceFactory.getService();
 
-		return journalTemplateLocalService.updateJournalTemplate(model);
+		return journalTemplateLocalService.updateJournalTemplate(journalTemplate);
 	}
 
 	public static com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence() {

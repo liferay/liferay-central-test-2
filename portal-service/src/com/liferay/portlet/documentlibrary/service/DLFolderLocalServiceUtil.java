@@ -52,11 +52,28 @@ package com.liferay.portlet.documentlibrary.service;
  */
 public class DLFolderLocalServiceUtil {
 	public static com.liferay.portlet.documentlibrary.model.DLFolder addDLFolder(
-		com.liferay.portlet.documentlibrary.model.DLFolder model)
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
-		return dlFolderLocalService.addDLFolder(model);
+		return dlFolderLocalService.addDLFolder(dlFolder);
+	}
+
+	public static void deleteDLFolder(long folderId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		dlFolderLocalService.deleteDLFolder(folderId);
+	}
+
+	public static void deleteDLFolder(
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
+
+		dlFolderLocalService.deleteDLFolder(dlFolder);
 	}
 
 	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> dynamicQuery(
@@ -76,11 +93,11 @@ public class DLFolderLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.documentlibrary.model.DLFolder updateDLFolder(
-		com.liferay.portlet.documentlibrary.model.DLFolder model)
+		com.liferay.portlet.documentlibrary.model.DLFolder dlFolder)
 		throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
-		return dlFolderLocalService.updateDLFolder(model);
+		return dlFolderLocalService.updateDLFolder(dlFolder);
 	}
 
 	public static com.liferay.portlet.documentlibrary.service.persistence.DLFileEntryPersistence getDLFileEntryPersistence() {

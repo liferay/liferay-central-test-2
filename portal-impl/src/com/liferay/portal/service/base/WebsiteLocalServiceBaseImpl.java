@@ -27,10 +27,10 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portal.model.Website;
-import com.liferay.portal.model.impl.WebsiteImpl;
 import com.liferay.portal.service.AccountLocalService;
 import com.liferay.portal.service.AccountLocalServiceFactory;
 import com.liferay.portal.service.AccountService;
@@ -275,24 +275,20 @@ import java.util.List;
  */
 public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService,
 	InitializingBean {
-	public Website addWebsite(Website model) throws SystemException {
-		Website website = new WebsiteImpl();
-
+	public Website addWebsite(Website website) throws SystemException {
 		website.setNew(true);
 
-		website.setWebsiteId(model.getWebsiteId());
-		website.setCompanyId(model.getCompanyId());
-		website.setUserId(model.getUserId());
-		website.setUserName(model.getUserName());
-		website.setCreateDate(model.getCreateDate());
-		website.setModifiedDate(model.getModifiedDate());
-		website.setClassNameId(model.getClassNameId());
-		website.setClassPK(model.getClassPK());
-		website.setUrl(model.getUrl());
-		website.setTypeId(model.getTypeId());
-		website.setPrimary(model.getPrimary());
-
 		return websitePersistence.update(website);
+	}
+
+	public void deleteWebsite(long websiteId)
+		throws PortalException, SystemException {
+		websitePersistence.remove(websiteId);
+	}
+
+	public void deleteWebsite(Website website)
+		throws PortalException, SystemException {
+		websitePersistence.remove(website);
 	}
 
 	public List<Website> dynamicQuery(DynamicQueryInitializer queryInitializer)
@@ -307,8 +303,10 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 			end);
 	}
 
-	public Website updateWebsite(Website model) throws SystemException {
-		return websitePersistence.update(model, true);
+	public Website updateWebsite(Website website) throws SystemException {
+		website.setNew(false);
+
+		return websitePersistence.update(website, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

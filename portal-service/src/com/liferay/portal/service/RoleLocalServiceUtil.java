@@ -52,11 +52,27 @@ package com.liferay.portal.service;
  */
 public class RoleLocalServiceUtil {
 	public static com.liferay.portal.model.Role addRole(
-		com.liferay.portal.model.Role model)
+		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.addRole(model);
+		return roleLocalService.addRole(role);
+	}
+
+	public static void deleteRole(long roleId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		roleLocalService.deleteRole(roleId);
+	}
+
+	public static void deleteRole(com.liferay.portal.model.Role role)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
+
+		roleLocalService.deleteRole(role);
 	}
 
 	public static java.util.List<com.liferay.portal.model.Role> dynamicQuery(
@@ -76,11 +92,11 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.Role updateRole(
-		com.liferay.portal.model.Role model)
+		com.liferay.portal.model.Role role)
 		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
-		return roleLocalService.updateRole(model);
+		return roleLocalService.updateRole(role);
 	}
 
 	public static com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence() {
@@ -827,14 +843,6 @@ public class RoleLocalServiceUtil {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		roleLocalService.checkSystemRoles(companyId);
-	}
-
-	public static void deleteRole(long roleId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		roleLocalService.deleteRole(roleId);
 	}
 
 	public static com.liferay.portal.model.Role getGroupRole(long companyId,

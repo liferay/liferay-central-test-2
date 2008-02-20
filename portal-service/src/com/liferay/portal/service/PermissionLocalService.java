@@ -50,8 +50,16 @@ package com.liferay.portal.service;
  */
 public interface PermissionLocalService {
 	public com.liferay.portal.model.Permission addPermission(
-		com.liferay.portal.model.Permission model)
+		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException;
+
+	public void deletePermission(long permissionId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deletePermission(com.liferay.portal.model.Permission permission)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Permission> dynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -62,7 +70,7 @@ public interface PermissionLocalService {
 		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Permission updatePermission(
-		com.liferay.portal.model.Permission model)
+		com.liferay.portal.model.Permission permission)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.service.persistence.AccountPersistence getAccountPersistence();
