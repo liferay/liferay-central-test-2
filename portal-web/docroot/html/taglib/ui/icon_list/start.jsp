@@ -1,1 +1,1 @@
-<ul>
+<ul class="lfr-component taglib-icon-list">

@@ -38,7 +38,7 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	width: 100%;
 }
 
-.lfr-component, .lfr-component ul, .lfr-component li {
+.lfr-component, .lfr-component ul, .lfr-component li, .lfr-component dl, .lfr-component dt, .lfr-component dd {
 	margin: 0;
 	padding: 0;
 	list-style: none;
@@ -1039,6 +1039,25 @@ li.toggle-expand a {
 	border-collapse: separate;
 	border-spacing: 5pt;
 	width: 100%;
+}
+
+/* ---------- Taglib icon list ---------- */
+
+.taglib-icon-list li {
+	float: left;
+	margin-right: 1em;
+}
+
+.taglib-icon-list:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .taglib-icon-list {
+	height: 1%;
 }
 
 /* ---------- Taglib search iterator ---------- */

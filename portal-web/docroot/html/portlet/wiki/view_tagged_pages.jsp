@@ -32,8 +32,6 @@ String tag = ParamUtil.getString(renderRequest, "tag");
 
 <h1 class="page-title"><%= LanguageUtil.format(pageContext, "pages-with-tag-x", tag) %></h1>
 
-<br />
-
 <liferay-util:include page="/html/portlet/wiki/page_iterator.jsp">
 	<liferay-util:param name="type" value="tagged_pages" />
 </liferay-util:include>

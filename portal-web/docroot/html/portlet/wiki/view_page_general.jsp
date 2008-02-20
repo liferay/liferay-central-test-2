@@ -132,77 +132,81 @@ int count = 0;
 			<liferay-ui:message key="email-subscription" />
 		</th>
 		<td>
-			<dl>
-				<c:choose>
-					<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), WikiPage.class.getName(), wikiPage.getResourcePrimKey()) %>">
-						<dt>
-							<liferay-ui:message key="you-are-subscribed-to-this-page" />
-						</dt>
-						<dd>
-							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
-								<portlet:param name="struts_action" value="/wiki/edit_page" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
-								<portlet:param name="title" value="<%= String.valueOf(wikiPage.getTitle()) %>" />
-							</portlet:actionURL>
-
-							<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
-						</dd>
-					</c:when>
-					<c:otherwise>
-						<dt>
-							<liferay-ui:message key="you-are-not-subscribed-to-this-page" />
-						</dt>
-						<dd>
-							<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
-								<portlet:param name="struts_action" value="/wiki/edit_page" />
-								<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
-								<portlet:param name="redirect" value="<%= currentURL %>" />
-								<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
-								<portlet:param name="title" value="<%= String.valueOf(wikiPage.getTitle()) %>" />
-							</portlet:actionURL>
-
-							<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
-						</dd>
-					</c:otherwise>
-				</c:choose>
-
-				<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.SUBSCRIBE) %>">
+			<table class="lfr-table subscription-info">
+				<tr>
 					<c:choose>
-						<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), WikiNode.class.getName(), node.getNodeId()) %>">
-							<dt>
-								<liferay-ui:message key="you-are-subscribed-to-this-wiki" />
-							</dt>
-							<dd>
+						<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), WikiPage.class.getName(), wikiPage.getResourcePrimKey()) %>">
+							<td>
+								<liferay-ui:message key="you-are-subscribed-to-this-page" />
+							</td>
+							<td>
 								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
-									<portlet:param name="struts_action" value="/wiki/edit_node" />
+									<portlet:param name="struts_action" value="/wiki/edit_page" />
 									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+									<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
+									<portlet:param name="title" value="<%= String.valueOf(wikiPage.getTitle()) %>" />
 								</portlet:actionURL>
 
 								<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
-							</dd>
+							</td>
 						</c:when>
 						<c:otherwise>
-							<dt>
-								<liferay-ui:message key="you-are-not-subscribed-to-this-wiki" />
-							</dt>
-							<dd>
+							<td>
+								<liferay-ui:message key="you-are-not-subscribed-to-this-page" />
+							</td>
+							<td>
 								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
-									<portlet:param name="struts_action" value="/wiki/edit_node" />
+									<portlet:param name="struts_action" value="/wiki/edit_page" />
 									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
-									<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+									<portlet:param name="nodeId" value="<%= String.valueOf(wikiPage.getNodeId()) %>" />
+									<portlet:param name="title" value="<%= String.valueOf(wikiPage.getTitle()) %>" />
 								</portlet:actionURL>
 
 								<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
-							</dd>
+							</td>
 						</c:otherwise>
-					</c:choose>
+					</c:choose>					
+				</tr>
+
+				<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.SUBSCRIBE) %>">
+					<tr>
+						<c:choose>
+							<c:when test="<%= SubscriptionLocalServiceUtil.isSubscribed(user.getCompanyId(), user.getUserId(), WikiNode.class.getName(), node.getNodeId()) %>">
+								<td>
+									<liferay-ui:message key="you-are-subscribed-to-this-wiki" />
+								</td>
+								<td>
+									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="unsubscribeURL">
+										<portlet:param name="struts_action" value="/wiki/edit_node" />
+										<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UNSUBSCRIBE %>" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+									</portlet:actionURL>
+
+									<liferay-ui:icon image="unsubscribe" url="<%= unsubscribeURL %>" label="<%= true %>" />
+								</td>
+							</c:when>
+							<c:otherwise>
+								<td>
+									<liferay-ui:message key="you-are-not-subscribed-to-this-wiki" />
+								</td>
+								<td>
+									<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="subscribeURL">
+										<portlet:param name="struts_action" value="/wiki/edit_node" />
+										<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SUBSCRIBE %>" />
+										<portlet:param name="redirect" value="<%= currentURL %>" />
+										<portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" />
+									</portlet:actionURL>
+
+									<liferay-ui:icon image="subscribe" url="<%= subscribeURL %>" label="<%= true %>" />
+								</td>
+							</c:otherwise>
+						</c:choose>
+					</tr>
 				</c:if>
-			</dl>
+			</table>
 		</td>
 	</tr>
 </c:if>

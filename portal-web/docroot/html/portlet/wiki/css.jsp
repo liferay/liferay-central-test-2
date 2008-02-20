@@ -58,13 +58,37 @@
 .portlet-wiki h1.page-title {
 	border-bottom: 1px solid #AAAAAA;
 	margin: 0px;
+	margin-bottom: 0.5em;
 	padding-bottom: 5px;
+}
+
+.portlet-wiki h1.page-title .return-to-page {
+	background: url(<%= themeImagesPath %>/wiki/return_to_page.png) no-repeat 0 50%;
+	padding-left: 20px;
+	text-decoration: none;
 }
 
 .portlet-wiki .preview {
 	background: #ffc;
 	border: 1px dotted gray;
 	padding: 3px;
+}
+
+.portlet-wiki .meta-info {
+	margin-top: 1.5em;
+}
+
+.portlet-wiki .child-pages h3 {
+	font-size: 1.2em;
+	margin-bottom: 0.3em;
+}
+
+.ie .portlet-wiki .child-pages h3 {
+	margin-bottom: 0.2em;
+}
+
+.portlet-wiki .child-pages ul {
+	margin-top: 0;
 }
 
 .portlet-wiki .child-pages li {
@@ -153,10 +177,27 @@
 	padding-left: 10px;
 }
 
+.portlet-wiki .syntax-help h4 {
+	margin-bottom: 0.5em;
+}
+.ie .portlet-wiki .syntax-help h4 {
+	margin-bottom: 0.3em;
+}
+
+.portlet-wiki .syntax-help pre {
+	margin-left: 1em;
+	margin-bottom: 1em;
+}
+
 .portlet-wiki .top-links {
 	padding-bottom: 10px;
 }
 
 .portlet-wiki .top-links table {
 	width: 100%;
+}
+
+.portlet-wiki .subscription-info tr td {
+	border: none;
+	padding: 0.1em 10px 0.1em 0;
 }

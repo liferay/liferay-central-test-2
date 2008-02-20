@@ -51,8 +51,6 @@ String keywords = ParamUtil.getString(request, "keywords");
 
 <h1 class="page-title"><liferay-ui:message key="search-results" /></h1>
 
-<br />
-
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 

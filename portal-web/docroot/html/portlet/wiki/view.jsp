@@ -162,8 +162,6 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 	<%= title %>
 </h1>
 
-<br />
-
 <c:if test="<%= originalPage != null %>">
 	<div class="page-redirect">
 		(<%= LanguageUtil.format(pageContext, "redirected-from-x", originalPage.getTitle()) %>)
@@ -187,7 +185,7 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 </div>
 
 <c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) %>">
-	<div>
+	<div class="meta-info">
 		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" label="<%= true %>" />
 	</div>
 
@@ -196,32 +194,34 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 	</c:if>
 
 	<c:if test="<%= childPages.size() > 0 %>">
-		<h3><liferay-ui:message key="children" /></h3>
+		<div class="child-pages">
+			<h3><liferay-ui:message key="children" /></h3>
 
-		<ul class="child-pages">
+			<ul class="child-pages">
 
-			<%
-			PortletURL curPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+				<%
+				PortletURL curPageURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
-			for (int i = 0; i < childPages.size(); i++) {
-				WikiPage curPage = (WikiPage)childPages.get(i);
+				for (int i = 0; i < childPages.size(); i++) {
+					WikiPage curPage = (WikiPage)childPages.get(i);
 
-				curPageURL.setParameter("title", curPage.getTitle());
-			%>
+					curPageURL.setParameter("title", curPage.getTitle());
+				%>
 
-				<li>
-					<a href="<%= curPageURL %>"><%= curPage.getTitle() %></a>
-				</li>
+					<li>
+						<a href="<%= curPageURL %>"><%= curPage.getTitle() %></a>
+					</li>
 
-			<%
-			}
-			%>
+				<%
+				}
+				%>
 
-		</ul>
+			</ul>
+		</div>
 	</c:if>
 
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
-		<div>
+		<div class="meta-info">
 			<liferay-ui:icon image="add_article" message="add-child-page" url="<%= addPageURL.toString() %>" label="<%= true %>" />
 		</div>
 	</c:if>
