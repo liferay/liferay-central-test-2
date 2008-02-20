@@ -265,7 +265,7 @@ for (int i = 0; i < results.size(); i++) {
 <c:if test='<%= type.equals("history") && (results.size() > 1) %>'>
 
 	<%
-	WikiPage latestWikiPage = (WikiPage)results.get(0);
+	WikiPage latestWikiPage = (WikiPage)results.get(1);
 	%>
 
 	<form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/wiki/compare_versions" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />compare(); return false;">
