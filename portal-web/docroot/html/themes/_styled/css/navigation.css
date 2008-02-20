@@ -261,6 +261,10 @@
 	padding-left: 3.5em;
 }
 
+.js .interactive-mode .group-end {
+	border-bottom: 2px solid #ccc;
+}
+
 .ie.js .interactive-mode .lfr-flyout.has-children {
 	min-width: 175px;
 }
