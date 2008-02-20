@@ -31,7 +31,11 @@
 .portlet-wiki .toc {
 	border: 1px solid #aaa;
 	background-color: #f9f9f9;
-	padding: 5px;
+	padding: 10px;
+}
+
+.portlet-wiki .toc h4 {
+	margin-bottom: 0.7em;
 }
 
 .portlet-wiki .toc ul {
@@ -72,10 +76,6 @@
 	background: #ffc;
 	border: 1px dotted gray;
 	padding: 3px;
-}
-
-.portlet-wiki .meta-info {
-	margin-top: 1.5em;
 }
 
 .portlet-wiki .child-pages h3 {
@@ -128,10 +128,15 @@
 }
 
 .portlet-wiki .page-actions {
-	float: right;
+	margin-top: 1.5em;
 }
 
-.portlet-wiki .page-actions a {
+.portlet-wiki .page-title .page-actions {
+	float: right;
+	margin-top: 0;
+}
+
+.portlet-wiki .page-title .page-actions a {
 	text-decoration: none;
 }
 

@@ -185,7 +185,7 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 </div>
 
 <c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) %>">
-	<div class="meta-info">
+	<div class="page-actions">
 		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" label="<%= true %>" />
 	</div>
 
@@ -221,7 +221,7 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 	</c:if>
 
 	<c:if test="<%= WikiNodePermission.contains(permissionChecker, node, ActionKeys.ADD_PAGE) %>">
-		<div class="meta-info">
+		<div class="page-actions">
 			<liferay-ui:icon image="add_article" message="add-child-page" url="<%= addPageURL.toString() %>" label="<%= true %>" />
 		</div>
 	</c:if>
