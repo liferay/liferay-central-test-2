@@ -114,6 +114,15 @@ public class Entity {
 		return TextFormatter.formatPlural(new String(getVarName()));
 	}
 
+	public String getShortName() {
+		if (_name.startsWith(_portletShortName)) {
+			return _name.substring(_portletShortName.length());
+		}
+		else {
+			return _name;
+		}
+	}
+
 	public String getTable() {
 		return _table;
 	}

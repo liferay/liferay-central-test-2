@@ -1293,6 +1293,45 @@ public class ServiceBuilder {
 		}
 	}
 
+	public boolean isDuplicateMethod(JavaMethod method, Map tempMap) {
+		StringMaker sm = new StringMaker();
+
+		sm.append("isDuplicateMethod ");
+		sm.append(method.getReturns().getValue());
+		sm.append(method.getReturnsGenericsName());
+		sm.append(getDimensions(method.getReturns().getDimensions()));
+		sm.append(StringPool.SPACE);
+		sm.append(method.getName());
+		sm.append(StringPool.OPEN_PARENTHESIS);
+
+		JavaParameter[] parameters = method.getParameters();
+
+		for (int i = 0; i < parameters.length; i++) {
+			JavaParameter javaParameter = parameters[i];
+
+			sm.append(javaParameter.getType().getValue());
+			sm.append(javaParameter.getGenericsName());
+			sm.append(getDimensions(javaParameter.getType().getDimensions()));
+
+			if ((i + 1) != parameters.length) {
+				sm.append(StringPool.COMMA);
+			}
+		}
+
+		sm.append(StringPool.CLOSE_PARENTHESIS);
+
+		String key = sm.toString();
+
+		if (tempMap.containsKey(key)) {
+			return true;
+		}
+		else {
+			tempMap.put(key, key);
+
+			return false;
+		}
+	}
+
 	public boolean isSoapMethod(JavaMethod method) {
 		String returnValueName = method.getReturns().getValue();
 
@@ -2916,7 +2955,11 @@ public class ServiceBuilder {
 		return xml;
 	}
 
-	private Map _getContext() {
+	private Map _getContext() throws TemplateModelException {
+		BeansWrapper wrapper = BeansWrapper.getDefaultInstance();
+
+		TemplateHashModel staticModels = wrapper.getStaticModels();
+
 		Map context = new HashMap();
 
 		context.put("hbmFileName", _hbmFileName);
@@ -2943,25 +2986,15 @@ public class ServiceBuilder {
 		context.put("packagePath", _packagePath);
 		context.put("serviceBuilder", this);
 
+		context.put(
+			"modelHintsUtil",
+			staticModels.get("com.liferay.portal.model.ModelHintsUtil"));
 		context.put("stringUtil", StringUtil_IW.getInstance());
-
-		try {
-			BeansWrapper wrapper = BeansWrapper.getDefaultInstance();
-
-			TemplateHashModel staticModels = wrapper.getStaticModels();
-
-			context.put(
-				"modelHintsUtil",
-				staticModels.get("com.liferay.portal.model.ModelHintsUtil"));
-			context.put(
-				"system",
-				staticModels.get("java.lang.System"));
-			context.put(
-				"validator",
-				staticModels.get("com.liferay.portal.kernel.util.Validator"));
-		}
-		catch (TemplateModelException tme) {
-		}
+		context.put("system", staticModels.get("java.lang.System"));
+		context.put("tempMap", wrapper.wrap(new HashMap()));
+		context.put(
+			"validator",
+			staticModels.get("com.liferay.portal.kernel.util.Validator"));
 
 		return context;
 	}

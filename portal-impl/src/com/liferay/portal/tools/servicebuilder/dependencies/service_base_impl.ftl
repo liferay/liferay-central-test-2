@@ -7,8 +7,13 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 </#if>
 
 <#if entity.hasColumns()>
+	<#if entity.hasCompoundPK()>
+		import ${packagePath}.service.persistence.${entity.name}PK;
+	</#if>
+
 	import ${packagePath}.model.${entity.name};
 	import ${packagePath}.model.impl.${entity.name}Impl;
+	import com.liferay.portal.PortalException;
 	import com.liferay.portal.SystemException;
 	import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 	import java.util.List;
@@ -51,16 +56,18 @@ import org.springframework.beans.factory.InitializingBean;
 </#if>
 
 <#if sessionTypeName == "Local" && entity.hasColumns()>
-	public ${entity.name} add${entity.name}(${entity.name} model) throws SystemException {
-		${entity.name} ${entity.varName} = new ${entity.name}Impl();
-
+	public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) throws SystemException {
 		${entity.varName}.setNew(true);
 
-		<#list entity.regularColList as column>
-			${entity.varName}.set${column.methodName}(model.get${column.methodName}());
-		</#list>
-
 		return ${entity.varName}Persistence.update(${entity.varName});
+	}
+
+	public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws PortalException, SystemException {
+		${entity.varName}Persistence.remove(${entity.PKVarName});
+	}
+
+	public void delete${entity.name}(${entity.name} ${entity.varName}) throws PortalException, SystemException {
+		${entity.varName}Persistence.remove(${entity.varName});
 	}
 
 	public List<${entity.name}> dynamicQuery(DynamicQueryInitializer queryInitializer) throws SystemException {
@@ -71,8 +78,10 @@ import org.springframework.beans.factory.InitializingBean;
 		return ${entity.varName}Persistence.findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public ${entity.name} update${entity.name}(${entity.name} model) throws SystemException {
-		return ${entity.varName}Persistence.update(model, true);
+	public ${entity.name} update${entity.name}(${entity.name} ${entity.varName}) throws SystemException {
+		${entity.varName}.setNew(false);
+
+		return ${entity.varName}Persistence.update(${entity.varName}, true);
 	}
 </#if>
 
