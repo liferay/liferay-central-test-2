@@ -72,15 +72,7 @@ import org.springframework.beans.factory.InitializingBean;
 	}
 
 	public ${entity.name} update${entity.name}(${entity.name} model) throws SystemException {
-		${entity.name} ${entity.varName} = new ${entity.name}Impl();
-
-		${entity.varName}.setNew(false);
-
-		<#list entity.regularColList as column>
-			${entity.varName}.set${column.methodName}(model.get${column.methodName}());
-		</#list>
-
-		return ${entity.varName}Persistence.update(${entity.varName});
+		return ${entity.varName}Persistence.update(model, true);
 	}
 </#if>
 
