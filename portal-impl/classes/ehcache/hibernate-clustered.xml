@@ -1,5 +1,5 @@
 <ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="ehcache.xsd">
-	<diskStore path="user.home/liferay/ehcache/hibernate" />
+	<diskStore path="resource.repositories.root/ehcache/hibernate" />
 	<cacheManagerEventListenerFactory class="" properties="" />
 	<cacheManagerPeerProviderFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"

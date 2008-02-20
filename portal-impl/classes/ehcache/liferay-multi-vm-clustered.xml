@@ -4,7 +4,7 @@
 	Caches in this file can be clustered and are configured to be clustered.
 	-->
 
-	<diskStore path="user.home/liferay/ehcache/liferay-multi-vm" />
+	<diskStore path="resource.repositories.root/ehcache/liferay-multi-vm" />
 	<cacheManagerEventListenerFactory class="" properties="" />
 	<cacheManagerPeerProviderFactory
 		class="net.sf.ehcache.distribution.RMICacheManagerPeerProviderFactory"

@@ -1116,7 +1116,7 @@
 	</library>
 	<library>
 		<file-name>portal/ehcache.jar</file-name>
-		<version>1.3.0</version>
+		<version>1.4.0</version>
 		<project-name>Ehcache</project-name>
 		<project-url>http://ehcache.sourceforge.net</project-url>
 		<licenses>
@@ -1125,6 +1125,11 @@
 				<copyright-notice>Copyright (c) 2003-2007 Greg Luck</copyright-notice>
 			</license>
 		</licenses>
+		<comments>
+			This includes a modification to DiskStoreConfiguration so that it
+			makes the system property "resource.repositories.root" available to
+			the Ehcache configuration files.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/freemarker.jar</file-name>
@@ -1528,6 +1533,17 @@
 		<licenses>
 			<license>
 				<license-name>LGPL 2.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/jsr107cache.jar</file-name>
+		<version>1.0</version>
+		<project-name>JSR 107</project-name>
+		<project-url>http://sourceforge.net/projects/jsr107cache</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>

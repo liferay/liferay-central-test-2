@@ -111,6 +111,13 @@ public class InitAction extends SimpleAction {
 			e.printStackTrace();
 		}
 
+		// Set the portal property "resource.repositories.root" as a system
+		// property as well so it can be referenced by Ehcache.
+
+		SystemProperties.set(
+			PropsUtil.RESOURCE_REPOSITORIES_ROOT,
+			PropsUtil.get(PropsUtil.RESOURCE_REPOSITORIES_ROOT));
+
 		// Bean locator
 
 		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());

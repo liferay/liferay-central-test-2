@@ -4,7 +4,7 @@
 	Caches in this file can be clustered but are not configured to be clustered.
 	-->
 
-	<diskStore path="user.home/liferay/ehcache/liferay-multi-vm" />
+	<diskStore path="resource.repositories.root/ehcache/liferay-multi-vm" />
 	<cacheManagerEventListenerFactory class="" properties="" />
 	<defaultCache
 		maxElementsInMemory="10000"

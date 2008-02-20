@@ -45,6 +45,10 @@ public class PropsUtil {
 
 	public static final String PORTAL_CTX = "portal.ctx";
 
+	// Resource Repositories Root
+
+	public static final String RESOURCE_REPOSITORIES_ROOT = "resource.repositories.root";
+
 	// TCK
 
 	public static final String TCK_URL = "tck.url";

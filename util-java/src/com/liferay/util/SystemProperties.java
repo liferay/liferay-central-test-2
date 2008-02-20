@@ -66,6 +66,8 @@ public class SystemProperties {
 	}
 
 	public static void set(String key, String value) {
+		System.setProperty(key, value);
+
 		_instance._props.put(key, value);
 	}
 
