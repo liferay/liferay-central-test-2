@@ -2832,6 +2832,7 @@ the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=이 전�
 the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=이 페이지의 체재는 지원하지 않는다. 페이지 내용은 포맷 전에게 보일 것이다.
 the-framework-version-could-not-be-found=기구 버전은 발견될 수 없었다.
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
+the-friendly-url-may-conflict-with-another-page=친절한url은 다른 페이지에 투쟁할지도 모른다.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=필수 체계 그룹 이기 때문에 그룹은 삭제될.
 the-group-could-not-be-found=그룹은 발견될 수 없었다.
 the-item-could-not-be-found=품목은 발견될 수 없었다.

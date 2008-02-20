@@ -2832,6 +2832,7 @@ the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=El forma
 the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=El formato de esta página no se apoya. El contenido de la página será demostrado sin formato.
 the-framework-version-could-not-be-found=La versión del marco no podía ser encontrada.
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=La URL amigable se añade al prefijo <b>{0}</b> para las páginas públicas y al prefijo <b>{1}</b> para las páginas privadas.
+the-friendly-url-may-conflict-with-another-page=El URL amistoso puede estar en conflicto con otra página.
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=El grupo no puede ser suprimido porque es un grupo requerido del sistema.
 the-group-could-not-be-found=El grupo no ha sido encontrado.
 the-item-could-not-be-found=El artículo no ha sido encontrado.

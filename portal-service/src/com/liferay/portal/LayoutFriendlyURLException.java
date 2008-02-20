@@ -44,6 +44,8 @@ public class LayoutFriendlyURLException extends PortalException {
 
 	public static final int KEYWORD_CONFLICT = 7;
 
+	public static final int POSSIBLE_DUPLICATE = 8;
+
 	public LayoutFriendlyURLException(int type) {
 		_type = type;
 	}

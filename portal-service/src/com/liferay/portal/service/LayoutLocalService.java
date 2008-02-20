@@ -473,6 +473,9 @@ public interface LayoutLocalService {
 		long companyId, java.lang.String portletId, java.lang.String prefsKey,
 		java.lang.String prefsValue) throws com.liferay.portal.SystemException;
 
+	public java.util.List getNullFriendlyURLLayouts()
+		throws com.liferay.portal.SystemException;
+
 	public void importLayouts(long userId, long groupId, boolean privateLayout,
 		java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.SystemException,
@@ -497,6 +500,11 @@ public interface LayoutLocalService {
 
 	public void setLayouts(long groupId, boolean privateLayout,
 		long parentLayoutId, long[] layoutIds)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Layout updateFriendlyURL(long plid,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

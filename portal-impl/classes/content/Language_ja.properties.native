@@ -2832,6 +2832,7 @@ the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=この�
 the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=このページのフォーマットは支えられない。ページの内容は不定様式に示される。
 the-framework-version-could-not-be-found=フレームワーク版は見つけることができなかった。
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
+the-friendly-url-may-conflict-with-another-page=友好的なurl は別のページと対立するかもしれない。
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=グループはそれが必須システムグループであるので削除されることができない。
 the-group-could-not-be-found=グループは見つけられることができなかった。
 the-item-could-not-be-found=項目は見つけられることができなかった。

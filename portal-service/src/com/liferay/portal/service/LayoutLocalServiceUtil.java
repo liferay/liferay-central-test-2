@@ -1077,6 +1077,13 @@ public class LayoutLocalServiceUtil {
 			prefsValue);
 	}
 
+	public static java.util.List getNullFriendlyURLLayouts()
+		throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getNullFriendlyURLLayouts();
+	}
+
 	public static void importLayouts(long userId, long groupId,
 		boolean privateLayout, java.util.Map parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException,
@@ -1128,6 +1135,15 @@ public class LayoutLocalServiceUtil {
 
 		layoutLocalService.setLayouts(groupId, privateLayout, parentLayoutId,
 			layoutIds);
+	}
+
+	public static com.liferay.portal.model.Layout updateFriendlyURL(long plid,
+		java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.updateFriendlyURL(plid, friendlyURL);
 	}
 
 	public static com.liferay.portal.model.Layout updateLayout(long groupId,

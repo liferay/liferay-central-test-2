@@ -204,6 +204,16 @@
 				(Users_Groups.groupId = Group_.groupId)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByNullFriendlyURL">
+		<![CDATA[
+			SELECT
+				{Layout.*}
+			FROM
+				Layout
+			WHERE
+				(friendlyURL = '' OR friendlyURL IS NULL)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.LayoutFinder.findByC_P_P">
 		<![CDATA[
 			SELECT

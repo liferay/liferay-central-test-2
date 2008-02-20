@@ -197,7 +197,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		long layoutId = getNextLayoutId(groupId, privateLayout);
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
-		friendlyURL = getFriendlyURL(friendlyURL);
+		friendlyURL = getFriendlyURL(layoutId, friendlyURL);
 		int priority = getNextPriority(groupId, privateLayout, parentLayoutId);
 
 		validate(
@@ -844,6 +844,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return (LayoutReference[])list.toArray(new LayoutReference[0]);
 	}
 
+	public List getNullFriendlyURLLayouts() throws SystemException {
+		return layoutFinder.findByNullFriendlyURL();
+	}
+
 	public void importLayouts(
 			long userId, long groupId, boolean privateLayout, Map parameterMap,
 			File file)
@@ -1398,6 +1402,22 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
 	}
 
+	public Layout updateFriendlyURL(long plid, String friendlyURL)
+		throws PortalException, SystemException {
+
+		Layout layout = layoutPersistence.findByPrimaryKey(plid);
+
+		validateFriendlyURL(
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+			friendlyURL);
+
+		layout.setFriendlyURL(friendlyURL);
+
+		layoutPersistence.update(layout);
+
+		return layout;
+	}
+
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
 			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
@@ -1421,7 +1441,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		parentLayoutId = getParentLayoutId(
 			groupId, privateLayout, parentLayoutId);
-		friendlyURL = getFriendlyURL(friendlyURL);
+		friendlyURL = getFriendlyURL(layoutId, friendlyURL);
 
 		validate(
 			groupId, privateLayout, layoutId, parentLayoutId, type, hidden,
@@ -2637,6 +2657,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return Normalizer.normalizeToAscii(friendlyURL.trim().toLowerCase());
 	}
 
+	protected String getFriendlyURL(long layoutId, String friendlyURL) {
+		friendlyURL = getFriendlyURL(friendlyURL);
+
+		if (Validator.isNull(friendlyURL)) {
+			friendlyURL = StringPool.SLASH + layoutId;
+		}
+
+		return friendlyURL;
+	}
+
 	protected long getNextLayoutId(long groupId, boolean privateLayout)
 		throws SystemException {
 
@@ -3501,48 +3531,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		if (Validator.isNotNull(friendlyURL)) {
-			int exceptionType = LayoutImpl.validateFriendlyURL(friendlyURL);
-
-			if (exceptionType != -1) {
-				throw new LayoutFriendlyURLException(exceptionType);
-			}
-
-			try {
-				Layout layout = layoutPersistence.findByG_P_F(
-					groupId, privateLayout, friendlyURL);
-
-				if (layout.getLayoutId() != layoutId) {
-					throw new LayoutFriendlyURLException(
-						LayoutFriendlyURLException.DUPLICATE);
-				}
-			}
-			catch (NoSuchLayoutException nsle) {
-			}
-
-			LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
-
-			List friendlyURLMappers =
-				portletLocalService.getFriendlyURLMappers();
-
-			Iterator itr = friendlyURLMappers.iterator();
-
-			while (itr.hasNext()) {
-				FriendlyURLMapper friendlyURLMapper =
-					(FriendlyURLMapper)itr.next();
-
-				if (friendlyURL.indexOf(friendlyURLMapper.getMapping()) != -1) {
-					LayoutFriendlyURLException lfurle =
-						new LayoutFriendlyURLException(
-							LayoutFriendlyURLException.KEYWORD_CONFLICT);
-
-					lfurle.setKeywordConflict(friendlyURLMapper.getMapping());
-
-					throw lfurle;
-				}
-			}
-
-		}
+		validateFriendlyURL(groupId, privateLayout, layoutId, friendlyURL);
 	}
 
 	protected void validateFirstLayout(String type, boolean hidden)
@@ -3554,6 +3543,67 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		if (hidden) {
 			throw new LayoutHiddenException();
+		}
+	}
+
+	protected void validateFriendlyURL(
+			long groupId, boolean privateLayout, long layoutId,
+			String friendlyURL)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(friendlyURL)) {
+			return;
+		}
+
+		int exceptionType = LayoutImpl.validateFriendlyURL(friendlyURL);
+
+		if (exceptionType != -1) {
+			throw new LayoutFriendlyURLException(exceptionType);
+		}
+
+		try {
+			Layout layout = layoutPersistence.findByG_P_F(
+				groupId, privateLayout, friendlyURL);
+
+			if (layout.getLayoutId() != layoutId) {
+				throw new LayoutFriendlyURLException(
+					LayoutFriendlyURLException.DUPLICATE);
+			}
+		}
+		catch (NoSuchLayoutException nsle) {
+		}
+
+		LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
+
+		List friendlyURLMappers = portletLocalService.getFriendlyURLMappers();
+
+		Iterator itr = friendlyURLMappers.iterator();
+
+		while (itr.hasNext()) {
+			FriendlyURLMapper friendlyURLMapper = (FriendlyURLMapper)itr.next();
+
+			if (friendlyURL.indexOf(friendlyURLMapper.getMapping()) != -1) {
+				LayoutFriendlyURLException lfurle =
+					new LayoutFriendlyURLException(
+						LayoutFriendlyURLException.KEYWORD_CONFLICT);
+
+				lfurle.setKeywordConflict(friendlyURLMapper.getMapping());
+
+				throw lfurle;
+			}
+		}
+
+		friendlyURL = friendlyURL.substring(1);
+
+		if (Validator.isNumber(friendlyURL) &&
+			!friendlyURL.equals(String.valueOf(layoutId))) {
+
+			LayoutFriendlyURLException lfurle = new LayoutFriendlyURLException(
+				LayoutFriendlyURLException.POSSIBLE_DUPLICATE);
+
+			lfurle.setKeywordConflict(friendlyURL);
+
+			throw lfurle;
 		}
 	}
 

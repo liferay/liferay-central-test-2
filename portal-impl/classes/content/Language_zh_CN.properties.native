@@ -2832,6 +2832,7 @@ the-format-of-this-email-is-incomplete-and-cannot-be-displayed-properly=这电�
 the-format-of-this-page-is-not-supported-the-page-content-will-be-shown-unformatted=这页格式不支持。页内容将被显示未编排。
 the-framework-version-could-not-be-found=框架版本不能被发现。
 the-friendly-url-is-appended-to-x-for-public-pages-and-x-for-private-pages=The friendly URL is appended to <b>{0}</b> for public pages and <b>{1}</b> for private pages.
+the-friendly-url-may-conflict-with-another-page=友好的url 也许相冲突与其它页。
 the-group-cannot-be-deleted-because-it-is-a-required-system-group=小组无法被删除因为这是一个必需的系统小组。
 the-group-could-not-be-found=群组找不到。
 the-item-could-not-be-found=项目找不到。

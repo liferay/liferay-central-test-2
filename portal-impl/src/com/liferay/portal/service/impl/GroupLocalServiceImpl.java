@@ -638,37 +638,38 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			long groupId, long companyId, String friendlyURL)
 		throws PortalException, SystemException {
 
-		if (Validator.isNotNull(friendlyURL)) {
-			int exceptionType = LayoutImpl.validateFriendlyURL(friendlyURL);
+		if (Validator.isNull(friendlyURL)) {
+			return;
+		}
 
-			if (exceptionType != -1) {
-				throw new GroupFriendlyURLException(exceptionType);
-			}
+		int exceptionType = LayoutImpl.validateFriendlyURL(friendlyURL);
 
-			try {
-				Group group = groupPersistence.findByC_F(
-					companyId, friendlyURL);
+		if (exceptionType != -1) {
+			throw new GroupFriendlyURLException(exceptionType);
+		}
 
-				if ((groupId <= 0) || (group.getGroupId() != groupId)) {
-					throw new GroupFriendlyURLException(
-						GroupFriendlyURLException.DUPLICATE);
-				}
-			}
-			catch (NoSuchGroupException nsge) {
-			}
+		try {
+			Group group = groupPersistence.findByC_F(companyId, friendlyURL);
 
-			String screenName = friendlyURL;
-
-			if (screenName.startsWith(StringPool.SLASH)) {
-				screenName = friendlyURL.substring(1, friendlyURL.length());
-			}
-
-			User user = userPersistence.fetchByC_SN(companyId, screenName);
-
-			if (user != null) {
+			if ((groupId <= 0) || (group.getGroupId() != groupId)) {
 				throw new GroupFriendlyURLException(
 					GroupFriendlyURLException.DUPLICATE);
 			}
+		}
+		catch (NoSuchGroupException nsge) {
+		}
+
+		String screenName = friendlyURL;
+
+		if (screenName.startsWith(StringPool.SLASH)) {
+			screenName = friendlyURL.substring(1, friendlyURL.length());
+		}
+
+		User user = userPersistence.fetchByC_SN(companyId, screenName);
+
+		if (user != null) {
+			throw new GroupFriendlyURLException(
+				GroupFriendlyURLException.DUPLICATE);
 		}
 	}
 

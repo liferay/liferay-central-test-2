@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSoap;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -46,8 +47,33 @@ import org.hibernate.Session;
  */
 public class LayoutFinderImpl implements LayoutFinder {
 
+	public static String FIND_BY_NULL_FRIENDLY_URL =
+		LayoutFinder.class.getName() + ".findByNullFriendlyURL";
+
 	public static String FIND_BY_C_P_P =
 		LayoutFinder.class.getName() + ".findByC_P_P";
+
+	public List findByNullFriendlyURL() throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NULL_FRIENDLY_URL);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Layout", LayoutImpl.class);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
 
 	public List findByC_P_P(
 			long companyId, String portletId, String prefsKey,

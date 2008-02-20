@@ -612,6 +612,10 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 				<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.KEYWORD_CONFLICT %>">
 					<%= LanguageUtil.format(pageContext, "please-enter-a-friendly-url-that-does-not-conflict-with-the-keyword-x", lfurle.getKeywordConflict()) %>
 				</c:if>
+
+				<c:if test="<%= lfurle.getType() == LayoutFriendlyURLException.POSSIBLE_DUPLICATE %>">
+					<liferay-ui:message key="the-friendly-url-may-conflict-with-another-page" />
+				</c:if>
 			</liferay-ui:error>
 
 			<liferay-ui:error exception="<%= LayoutHiddenException.class %>" message="your-first-page-must-not-be-hidden" />
