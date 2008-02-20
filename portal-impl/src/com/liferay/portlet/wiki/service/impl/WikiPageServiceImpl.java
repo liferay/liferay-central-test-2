@@ -282,8 +282,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			SyndEntry syndEntry = new SyndEntryImpl();
 
 			syndEntry.setAuthor(author);
-			syndEntry.setTitle(page.getTitle() + StringPool.SPACE +
-				page.getVersion());
+			syndEntry.setTitle(
+				page.getTitle() + StringPool.SPACE + page.getVersion());
 			syndEntry.setPublishedDate(page.getCreateDate());
 
 			SyndContent syndContent = new SyndContentImpl();
