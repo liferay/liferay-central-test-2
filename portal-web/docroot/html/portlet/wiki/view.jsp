@@ -226,25 +226,23 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 		</div>
 	</c:if>
 
-	<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.ADD_DISCUSSION) %>">
-		<br />
+	<br />
 
-		<liferay-ui:tabs names="comments" />
+	<liferay-ui:tabs names="comments" />
 
-		<portlet:actionURL var="discussionURL">
-			<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
-		</portlet:actionURL>
+	<portlet:actionURL var="discussionURL">
+		<portlet:param name="struts_action" value="/wiki/edit_page_discussion" />
+	</portlet:actionURL>
 
-		<liferay-ui:discussion
-			formName="fm2"
-			formAction="<%= discussionURL %>"
-			className="<%= WikiPage.class.getName() %>"
-			classPK="<%= wikiPage.getResourcePrimKey() %>"
-			userId="<%= wikiPage.getUserId() %>"
-			subject="<%= wikiPage.getTitle() %>"
-			redirect="<%= currentURL %>"
-		/>
-	</c:if>
+	<liferay-ui:discussion
+		formName="fm2"
+		formAction="<%= discussionURL %>"
+		className="<%= WikiPage.class.getName() %>"
+		classPK="<%= wikiPage.getResourcePrimKey() %>"
+		userId="<%= wikiPage.getUserId() %>"
+		subject="<%= wikiPage.getTitle() %>"
+		redirect="<%= currentURL %>"
+	/>
 </c:if>
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
