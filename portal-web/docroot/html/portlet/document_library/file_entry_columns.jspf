@@ -58,7 +58,7 @@ for (int j = 0; j < fileEntryColumns.length; j++) {
 		row.addText(String.valueOf(fileEntry.getReadCount()), rowHREF);
 	}
 	else if (fileEntryColumn.equals("locked")) {
-		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
+		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), Html.unescape(fileEntry.getName())));
 
 		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 	}

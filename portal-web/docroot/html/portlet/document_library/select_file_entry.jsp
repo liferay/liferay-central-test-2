@@ -159,7 +159,7 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("', '");
 		sm.append(UnicodeFormatter.toString(fileEntry.getName()));
 		sm.append("', '");
-		sm.append(UnicodeFormatter.toString(fileEntry.getTitle()));
+		sm.append(UnicodeFormatter.toString(fileEntry.getTitleWithExtension()));
 		sm.append("'); window.close();");
 
 		String rowHREF = sm.toString();
@@ -173,7 +173,7 @@ for (int i = 0; i < results.size(); i++) {
 		sm.append("/document_library/");
 		sm.append(DLUtil.getFileExtension(fileEntry.getName()));
 		sm.append(".png\">");
-		sm.append(fileEntry.getTitle());
+		sm.append(fileEntry.getTitleWithExtension());
 
 		if (Validator.isNotNull(fileEntry.getDescription())) {
 			sm.append("<br />");
@@ -189,7 +189,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Locked
 
-		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), fileEntry.getName()));
+		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), Html.unescape(fileEntry.getName())));
 
 		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 
