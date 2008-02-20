@@ -20,60 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher;
+package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EditConfigurationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSecondSubcategorytest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationTest extends BaseTestCase {
-	public void testEditConfiguration() throws Exception {
-		selenium.click("//img[@title='Configuration']");
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_selectionStyle", "label=Manual");
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_assetType", "label=Blogs Entry");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Test Entry");
-		selenium.waitForPageToLoad("30000");
+public class AddSecondSubcategorytest extends BaseTestCase {
+	public void testAddSecondSubcategory() throws Exception {
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
+		selenium.click("//b");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Add Subcategory']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_19_name", "S\u00e9cond T\u00e9st Subcat\u00e9gory");
+		selenium.type("_19_description",
+			"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent(
+				"S\u00e9cond T\u00e9st Subcat\u00e9gory"));
 	}
 }

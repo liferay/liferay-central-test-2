@@ -20,60 +20,25 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher;
+package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EditConfigurationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddDeletableMessageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationTest extends BaseTestCase {
-	public void testEditConfiguration() throws Exception {
-		selenium.click("//img[@title='Configuration']");
+public class AddDeletableMessageTest extends BaseTestCase {
+	public void testAddDeletableMessage() throws Exception {
+		selenium.click("//input[@value='Post New Thread']");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_selectionStyle", "label=Manual");
+		selenium.type("_19_subject",
+			"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d");
+		selenium.type("textArea",
+			"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!");
+		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_assetType", "label=Blogs Entry");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Test Entry");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 	}
 }

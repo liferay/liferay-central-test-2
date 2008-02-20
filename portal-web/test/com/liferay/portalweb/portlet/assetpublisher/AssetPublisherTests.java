@@ -35,6 +35,7 @@ public class AssetPublisherTests extends BaseTests {
 	public AssetPublisherTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(EditConfigurationTest.class);
 	}
 
 }

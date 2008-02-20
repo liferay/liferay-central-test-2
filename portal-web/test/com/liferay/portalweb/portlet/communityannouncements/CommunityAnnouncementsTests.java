@@ -36,10 +36,10 @@ public class CommunityAnnouncementsTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(AddEnglishAnnouncementsTest.class);
-		addTestSuite(AddSpanishAnnouncementsTest.class);
-		addTestSuite(AddJapaneseAnnouncementsTest.class);
-		addTestSuite(AddChineseAnnouncementsTest.class);
-		addTestSuite(AddPortugueseAnnouncementsTest.class);
+//		addTestSuite(AddSpanishAnnouncementsTest.class);
+//		addTestSuite(AddJapaneseAnnouncementsTest.class);
+//		addTestSuite(AddChineseAnnouncementsTest.class);
+//		addTestSuite(AddPortugueseAnnouncementsTest.class);
 	}
 
 }

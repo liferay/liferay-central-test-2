@@ -20,23 +20,19 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher;
+package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EditConfigurationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="RecentPostsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationTest extends BaseTestCase {
-	public void testEditConfiguration() throws Exception {
-		selenium.click("//img[@title='Configuration']");
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_selectionStyle", "label=Manual");
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_assetType", "label=Blogs Entry");
+public class RecentPostsTest extends BaseTestCase {
+	public void testRecentPosts() throws Exception {
+		selenium.click("//div/nobr/a[2]");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -45,7 +41,8 @@ public class EditConfigurationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
+				if (selenium.isElementPresent(
+							"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d")) {
 					break;
 				}
 			}
@@ -55,18 +52,14 @@ public class EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Entry");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
+				if (selenium.isElementPresent(
+							"link=T\u00e9st M\u00e9ssag\u00e9")) {
 					break;
 				}
 			}
@@ -75,5 +68,9 @@ public class EditConfigurationTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click(
+			"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d");
+		selenium.waitForPageToLoad("30000");
 	}
 }

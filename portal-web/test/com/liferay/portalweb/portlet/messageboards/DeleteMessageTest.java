@@ -20,57 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.blogs;
+package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="SearchBlogsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteMessageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SearchBlogsTest extends BaseTestCase {
-	public void testSearchBlogs() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"//input[@value='Search Entries']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.type("_33_keywords", "Test Entry");
-		selenium.click("//input[@value='Search Entries']");
+public class DeleteMessageTest extends BaseTestCase {
+	public void testDeleteMessage() throws Exception {
+		selenium.click(
+			"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=\u00ab Back");
-		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Delete");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,7 +46,7 @@ public class SearchBlogsTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//input[@value='Add Blog Entry']")) {
+							"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d")) {
 					break;
 				}
 			}
@@ -88,5 +55,76 @@ public class SearchBlogsTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		verifyFalse(selenium.isTextPresent(
+				"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED"));
+		selenium.click("link=Delete");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Mov\u00e9 it back!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Delete");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Post New Thread']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		verifyTrue(selenium.isTextPresent(
+				"Your request processed successfully."));
+		selenium.click("link=T\u00e9st Cat\u00e9gory");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Delete");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"//input[@value='Post New Thread']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		verifyFalse(selenium.isTextPresent(
+				"S\u00e9cond T\u00e9st Subcat\u00e9gory"));
 	}
 }

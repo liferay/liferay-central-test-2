@@ -20,23 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.assetpublisher;
+package com.liferay.portalweb.portlet.messageboards;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EditConfigurationTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddIncorrectEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EditConfigurationTest extends BaseTestCase {
-	public void testEditConfiguration() throws Exception {
-		selenium.click("//img[@title='Configuration']");
+public class AddIncorrectEntryTest extends BaseTestCase {
+	public void testAddIncorrectEntry() throws Exception {
+		selenium.click(
+			"//a[text()='S\u00e9cond T\u00e9st Subcat\u00e9gory\nThis is a s\u00e9cond t\u00e9st subcat\u00e9gory!']");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_selectionStyle", "label=Manual");
-		selenium.waitForPageToLoad("30000");
-		selenium.select("_86_assetType", "label=Blogs Entry");
+		selenium.click("//input[@value='Post New Thread']");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -45,7 +44,7 @@ public class EditConfigurationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
+				if (selenium.isElementPresent("_19_subject")) {
 					break;
 				}
 			}
@@ -55,25 +54,11 @@ public class EditConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Entry");
+		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		verifyTrue(selenium.isTextPresent(
+				"You have entered invalid data. Please try again."));
+		selenium.click("link=\u00ab Back");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Test Entry")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 	}
 }
