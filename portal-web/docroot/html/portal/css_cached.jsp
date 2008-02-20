@@ -1157,7 +1157,21 @@ li.toggle-expand a {
 
 /* ---------- Taglib social bookmark ---------- */
 
-.taglib-social-bookmarks {
+.taglib-social-bookmarks li {
+	float: left;
+	margin-right: 1em;
+}
+
+.taglib-social-bookmarks:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .taglib-social-bookmarks {
+	height: 1%;
 }
 
 .taglib-social-bookmark-blinklist {
