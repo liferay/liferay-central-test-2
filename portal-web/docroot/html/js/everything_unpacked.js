@@ -21398,7 +21398,7 @@ Liferay.Upload = new Class({
 		instance._uploader = new SWFUpload({
 			upload_script: instance._uploadFile,
 			target: instance._uploadTargetId,
-			flash_path: '/html/js/misc/swfupload/SWFUpload.swf',
+			flash_path: themeDisplay.getPathContext() + '/html/js/misc/swfupload/SWFUpload.swf',
 			allowed_filesize: instance._maxFileSize,
 			allowed_filetypes: instance._allowedFileTypes,
 			allowed_filetypes_description: instance._fileTypesDescriptionText,
