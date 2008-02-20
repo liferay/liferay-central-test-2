@@ -22,22 +22,21 @@
 
 package com.liferay.portalweb.portlet.journal;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="JournalTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalTests extends BaseTests {
-
-	public JournalTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddStructuresTest.class);
-		addTestSuite(SearchTest.class);
+public class SearchTest extends BaseTestCase {
+	public void testSearch() throws Exception {
+		selenium.type("toggle_id_journal_article_searchkeywords", "test");
+		selenium.click("//input[@value='Search Articles']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("Test Journal Article"));
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

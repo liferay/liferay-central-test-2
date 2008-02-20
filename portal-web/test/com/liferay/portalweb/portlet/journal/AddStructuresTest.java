@@ -22,22 +22,47 @@
 
 package com.liferay.portalweb.portlet.journal;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="JournalTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddStructuresTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalTests extends BaseTests {
+public class AddStructuresTest extends BaseTestCase {
+	public void testAddStructures() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public JournalTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddStructuresTest.class);
-		addTestSuite(SearchTest.class);
+			try {
+				if (selenium.isElementPresent("link=Structures")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Structures");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Add Structure']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_15_newStructureId", "Test");
+		selenium.type("_15_name", "Test Journal Structure");
+		selenium.type("_15_description", "This is a test Journal Structure!");
+		selenium.click("//input[@value='Add Row']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_15_structure_el0_name", "Test");
+		selenium.select("_15_structure_el0_type", "label=Text");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("Test Journal Structure"));
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
