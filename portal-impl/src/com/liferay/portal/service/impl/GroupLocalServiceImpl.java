@@ -92,19 +92,12 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		className = GetterUtil.getString(className);
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		if ((classNameId <= 0) || (classPK <= 0)) {
-			validateName(0, user.getCompanyId(), name);
-		}
-
-		friendlyURL = getFriendlyURL(classNameId, friendlyURL);
-
-		validateFriendlyURL(0, user.getCompanyId(), friendlyURL);
-
 		long groupId = counterLocalService.increment();
 
-		if ((classNameId > 0) && (classPK > 0)) {
-			name = String.valueOf(groupId);
-		}
+		friendlyURL = getFriendlyURL(groupId, friendlyURL);
+
+		validateFriendlyURL(
+			groupId, user.getCompanyId(), classNameId, classPK, friendlyURL);
 
 		Group group = groupPersistence.create(groupId);
 
@@ -377,6 +370,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupFinder.findByC_N(companyId, name);
 	}
 
+	public List getNullFriendlyURLGroups() throws SystemException {
+		return groupFinder.findByNullFriendlyURL();
+	}
+
 	public Group getOrganizationGroup(long companyId, long organizationId)
 		throws PortalException, SystemException {
 
@@ -527,16 +524,33 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	public Group updateFriendlyURL(long groupId, String friendlyURL)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		validateFriendlyURL(
+			group.getGroupId(), group.getCompanyId(), group.getClassNameId(),
+			group.getClassPK(), friendlyURL);
+
+		group.setFriendlyURL(friendlyURL);
+
+		groupPersistence.update(group);
+
+		return group;
+	}
+
 	public Group updateGroup(
 			long groupId, String name, String description, int type,
 			String friendlyURL, boolean active)
 		throws PortalException, SystemException {
 
+		friendlyURL = getFriendlyURL(groupId, friendlyURL);
+
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		long classNameId = group.getClassNameId();
 		long classPK = group.getClassPK();
-		friendlyURL = getFriendlyURL(classNameId, friendlyURL);
 
 		if ((classNameId <= 0) || (classPK <= 0)) {
 			validateName(group.getGroupId(), group.getCompanyId(), name);
@@ -549,7 +563,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		validateFriendlyURL(
-			group.getGroupId(), group.getCompanyId(), friendlyURL);
+			group.getGroupId(), group.getCompanyId(), group.getClassNameId(),
+			group.getClassPK(), friendlyURL);
 
 		group.setName(name);
 		group.setDescription(description);
@@ -581,11 +596,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			group.getCompanyId());
 		String name = PropsUtil.get(PropsUtil.DEFAULT_GUEST_LAYOUT_NAME);
 
-		String friendlyURL = StringPool.BLANK;
-
-		if (Validator.isNotNull(group.getFriendlyURL())) {
-			friendlyURL = PropsUtil.get(PropsUtil.DEFAULT_GUEST_FRIENDLY_URL);
-		}
+		String friendlyURL = PropsUtil.get(
+			PropsUtil.DEFAULT_GUEST_FRIENDLY_URL);
 
 		friendlyURL = getFriendlyURL(friendlyURL);
 
@@ -635,7 +647,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected void validateFriendlyURL(
-			long groupId, long companyId, String friendlyURL)
+			long groupId, long companyId, long classNameId, long classPK,
+			String friendlyURL)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(friendlyURL)) {
@@ -651,7 +664,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		try {
 			Group group = groupPersistence.findByC_F(companyId, friendlyURL);
 
-			if ((groupId <= 0) || (group.getGroupId() != groupId)) {
+			if (group.getGroupId() != groupId) {
 				throw new GroupFriendlyURLException(
 					GroupFriendlyURLException.DUPLICATE);
 			}
@@ -659,17 +672,34 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		catch (NoSuchGroupException nsge) {
 		}
 
-		String screenName = friendlyURL;
+		String groupIdFriendlyURL = friendlyURL.substring(1);
 
-		if (screenName.startsWith(StringPool.SLASH)) {
-			screenName = friendlyURL.substring(1, friendlyURL.length());
+		if (Validator.isNumber(groupIdFriendlyURL) &&
+			!groupIdFriendlyURL.equals(String.valueOf(groupId))) {
+
+			GroupFriendlyURLException gfurle = new GroupFriendlyURLException(
+				GroupFriendlyURLException.POSSIBLE_DUPLICATE);
+
+			gfurle.setKeywordConflict(groupIdFriendlyURL);
+
+			throw gfurle;
 		}
+
+		String screenName = friendlyURL.substring(1);
 
 		User user = userPersistence.fetchByC_SN(companyId, screenName);
 
 		if (user != null) {
-			throw new GroupFriendlyURLException(
-				GroupFriendlyURLException.DUPLICATE);
+			long userClassNameId = PortalUtil.getClassNameId(
+				User.class.getName());
+
+			if ((classNameId == userClassNameId) &&
+				(classPK == user.getUserId())) {
+			}
+			else {
+				throw new GroupFriendlyURLException(
+					GroupFriendlyURLException.DUPLICATE);
+			}
 		}
 	}
 

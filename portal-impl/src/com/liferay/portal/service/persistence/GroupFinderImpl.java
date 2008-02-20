@@ -76,6 +76,9 @@ public class GroupFinderImpl implements GroupFinder {
 	public static String COUNT_BY_C_N_D =
 		GroupFinder.class.getName() + ".countByC_N_D";
 
+	public static String FIND_BY_NULL_FRIENDLY_URL =
+		GroupFinder.class.getName() + ".findByNullFriendlyURL";
+
 	public static String FIND_BY_C_N =
 		GroupFinder.class.getName() + ".findByC_N";
 
@@ -240,6 +243,28 @@ public class GroupFinderImpl implements GroupFinder {
 			}
 
 			return count;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List findByNullFriendlyURL() throws SystemException {
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NULL_FRIENDLY_URL);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("Group_", GroupImpl.class);
+
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

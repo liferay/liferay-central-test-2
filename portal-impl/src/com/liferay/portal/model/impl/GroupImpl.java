@@ -22,12 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -289,44 +285,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		else {
 			return themeDisplay.getPathFriendlyURLPublic();
 		}
-	}
-
-	public String getDefaultFriendlyURL(boolean privateLayout)
-		throws PortalException, SystemException {
-
-		if (isUser()) {
-			long userId = getClassPK();
-
-			User user = UserLocalServiceUtil.getUserById(userId);
-
-			return StringPool.SLASH + user.getScreenName();
-		}
-		else {
-			return StringPool.SLASH + String.valueOf(getGroupId());
-		}
-	}
-
-	public String getResolvedFriendlyURL() {
-		String friendlyURL = getFriendlyURL();
-
-		try {
-			if (isUser()) {
-				long userId = getClassPK();
-
-				User user = UserLocalServiceUtil.getUserById(userId);
-
-				friendlyURL = StringPool.SLASH + user.getScreenName();
-			}
-			else if (Validator.isNull(friendlyURL)) {
-				friendlyURL = StringPool.SLASH + getGroupId();
-			}
-		}
-		catch (Exception e) {
-			_log.error(
-				"Error getting resolved friendly URL for " + getGroupId(), e);
-		}
-
-		return friendlyURL;
 	}
 
 	public long getDefaultPrivatePlid() {

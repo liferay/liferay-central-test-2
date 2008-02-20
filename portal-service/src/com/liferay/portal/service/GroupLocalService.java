@@ -526,6 +526,9 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List getNullFriendlyURLGroups()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group getOrganizationGroup(long companyId,
 		long organizationId)
 		throws com.liferay.portal.SystemException,
@@ -597,6 +600,11 @@ public interface GroupLocalService {
 			com.liferay.portal.PortalException;
 
 	public void unsetUserGroups(long userId, long[] groupIds)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Group updateFriendlyURL(long groupId,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

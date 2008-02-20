@@ -63,7 +63,7 @@ import org.apache.commons.logging.LogFactory;
 public class VerifyImage extends VerifyProcess {
 
 	public void verify() throws VerifyException {
-		_log.info("Verifying integrity");
+		_log.info("Verifying");
 
 		try {
 			verifyImage();

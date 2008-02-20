@@ -702,13 +702,6 @@ public class PortalUtil {
 
 		Group group = layout.getGroup();
 
-		String parentFriendlyURL = group.getFriendlyURL();
-
-		if (Validator.isNull(parentFriendlyURL)) {
-			parentFriendlyURL = group.getDefaultFriendlyURL(
-				layout.isPrivateLayout());
-		}
-
 		String friendlyURL = null;
 
 		if (layout.isPrivateLayout()) {
@@ -723,7 +716,7 @@ public class PortalUtil {
 			friendlyURL = getPathFriendlyURLPublic();
 		}
 
-		return friendlyURL + parentFriendlyURL + layoutFriendlyURL;
+		return friendlyURL + group.getFriendlyURL() + layoutFriendlyURL;
 	}
 
 	public static String getLayoutTarget(Layout layout) {
@@ -831,24 +824,10 @@ public class PortalUtil {
 		Group group = null;
 
 		try {
-
-			// Start by trying to parse the url part as a group id because it is
-			// faster to eliminate this possibility first
-
-			long groupId = GetterUtil.getLong(urlParts[2]);
-
-			group = GroupLocalServiceUtil.getGroup(groupId);
+			group = GroupLocalServiceUtil.getFriendlyURLGroup(
+				companyId, StringPool.SLASH + urlParts[2]);
 		}
-		catch (Exception e1) {
-			try {
-
-				// Now try as a friendly url
-
-				group = GroupLocalServiceUtil.getFriendlyURLGroup(
-					companyId, StringPool.SLASH + urlParts[2]);
-			}
-			catch (Exception e2) {
-			}
+		catch (Exception e) {
 		}
 
 		if (group != null) {

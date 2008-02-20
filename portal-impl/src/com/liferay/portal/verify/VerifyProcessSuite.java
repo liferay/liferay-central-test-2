@@ -34,12 +34,13 @@ import org.apache.commons.logging.LogFactory;
 public class VerifyProcessSuite extends VerifyProcess {
 
 	public void verify() throws VerifyException {
-		_log.info("Verifying integrity");
+		_log.info("Verifying");
 
 		verify(new VerifyLucene());
 		verify(new VerifyBlogs());
 		verify(new VerifyBookmarks());
 		verify(new VerifyDocumentLibrary());
+		verify(new VerifyGroup());
 		verify(new VerifyImageGallery());
 		verify(new VerifyJournal());
 		verify(new VerifyLayout());

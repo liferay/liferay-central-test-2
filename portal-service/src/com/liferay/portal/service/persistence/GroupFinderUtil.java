@@ -40,6 +40,11 @@ public class GroupFinderUtil {
 		return getFinder().countByC_N_D(companyId, name, description, params);
 	}
 
+	public static java.util.List findByNullFriendlyURL()
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByNullFriendlyURL();
+	}
+
 	public static com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException,

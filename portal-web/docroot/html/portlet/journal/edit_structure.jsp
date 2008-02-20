@@ -298,7 +298,7 @@ int tabIndex = 1;
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getResolvedFriendlyURL() + "/journal/Structures/" + structureId %>'
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Structures/" + structureId %>'
 			/>
 		</td>
 	</tr>

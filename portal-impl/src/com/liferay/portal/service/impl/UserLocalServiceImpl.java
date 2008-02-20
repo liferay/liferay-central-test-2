@@ -207,15 +207,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			autoScreenName = true;
 		}
 
+		long userId = counterLocalService.increment();
+
 		validate(
-			companyId, autoPassword, password1, password2, autoScreenName,
-			screenName, emailAddress, firstName, lastName, organizationIds);
+			companyId, userId, autoPassword, password1, password2,
+			autoScreenName, screenName, emailAddress, firstName, lastName,
+			organizationIds);
 
 		if (autoPassword) {
 			password1 = PwdToolkitUtil.generate();
 		}
-
-		long userId = counterLocalService.increment();
 
 		if (autoScreenName) {
 			ScreenNameGenerator screenNameGenerator =
@@ -326,7 +327,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupLocalService.addGroup(
 			user.getUserId(), User.class.getName(), user.getUserId(), null,
-			null, 0, null, true);
+			null, 0, StringPool.SLASH + screenName, true);
 
 		// Default groups
 
@@ -1721,6 +1722,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		updateOrganizations(userId, organizationIds);
 
+		// Group
+
+		Group group = groupLocalService.getUserGroup(
+			user.getCompanyId(), userId);
+
+		group.setFriendlyURL(StringPool.SLASH + screenName);
+
+		groupPersistence.update(group);
+
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
@@ -2051,7 +2061,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		if (!user.getScreenName().equalsIgnoreCase(screenName)) {
-			validateScreenName(user.getCompanyId(), screenName);
+			validateScreenName(user.getCompanyId(), userId, screenName);
 		}
 
 		validateEmailAddress(emailAddress);
@@ -2094,14 +2104,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	protected void validate(
-			long companyId, boolean autoPassword, String password1,
+			long companyId, long userId, boolean autoPassword, String password1,
 			String password2, boolean autoScreenName, String screenName,
 			String emailAddress, String firstName, String lastName,
 			long[] organizationIds)
 		throws PortalException, SystemException {
 
 		if (!autoScreenName) {
-			validateScreenName(companyId, screenName);
+			validateScreenName(companyId, userId, screenName);
 		}
 
 		if (!autoPassword) {
@@ -2174,7 +2184,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			companyId, userId, password1, password2, passwordPolicy);
 	}
 
-	protected void validateScreenName(long companyId, String screenName)
+	protected void validateScreenName(
+			long companyId, long userId, String screenName)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(screenName)) {
@@ -2189,6 +2200,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (!screenNameValidator.validate(companyId, screenName)) {
 				throw new UserScreenNameException();
 			}
+		}
+
+		if (Validator.isNumber(screenName) &&
+			!screenName.equals(String.valueOf(userId))) {
+
+			throw new UserScreenNameException();
 		}
 
 		String[] anonymousNames = PrincipalBean.ANONYMOUS_NAMES;

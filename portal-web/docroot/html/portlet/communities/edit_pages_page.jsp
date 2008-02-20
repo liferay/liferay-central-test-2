@@ -172,14 +172,7 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 
 					if (Validator.isNull(virtualHost) || (friendlyURLBase.indexOf(virtualHost) == -1)) {
 						friendlyURLBase.append(group.getPathFriendlyURL(privateLayout, themeDisplay));
-
-						String parentFriendlyURL = group.getFriendlyURL();
-
-						if (Validator.isNull(parentFriendlyURL)) {
-							parentFriendlyURL = group.getDefaultFriendlyURL(privateLayout);
-						}
-
-						friendlyURLBase.append(parentFriendlyURL);
+						friendlyURLBase.append(group.getFriendlyURL());
 					}
 					%>
 

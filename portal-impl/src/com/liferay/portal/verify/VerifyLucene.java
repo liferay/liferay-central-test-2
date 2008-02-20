@@ -36,7 +36,7 @@ import org.apache.commons.logging.LogFactory;
 public class VerifyLucene extends VerifyProcess {
 
 	public void verify() throws VerifyException {
-		_log.info("Verifying integrity");
+		_log.info("Verifying");
 
 		try {
 			verifyLucene();

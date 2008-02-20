@@ -37,6 +37,9 @@ public interface GroupFinder {
 		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List findByNullFriendlyURL()
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portal.model.Group findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException,

@@ -22,8 +22,11 @@
 
 package com.liferay.portal.verify;
 
-import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.imagegallery.service.IGImageLocalServiceUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.GroupLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
 
 import java.util.List;
 
@@ -31,51 +34,42 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="VerifyImageGallery.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyGroup.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class VerifyImageGallery extends VerifyProcess {
+public class VerifyGroup extends VerifyProcess {
 
 	public void verify() throws VerifyException {
 		_log.info("Verifying");
 
 		try {
-			verifyImageGallery();
+			verifyGroup();
 		}
 		catch (Exception e) {
 			throw new VerifyException(e);
 		}
 	}
 
-	protected void verifyImageGallery() throws Exception {
-		List<IGImage> images = IGImageLocalServiceUtil.getNoAssetImages();
+	protected void verifyGroup() throws Exception {
+		List<Group> groups = GroupLocalServiceUtil.getNullFriendlyURLGroups();
 
-		if (_log.isDebugEnabled()) {
-			_log.debug(
-				"Processing " + images.size() + " images with no tags assets");
-		}
+		for (Group group : groups) {
+			String friendlyURL = StringPool.SLASH + group.getGroupId();
 
-		for (IGImage image : images) {
-			try {
-				IGImageLocalServiceUtil.updateTagsAsset(
-					image.getUserId(), image, new String[0]);
+			if (group.isUser()) {
+				User user = UserLocalServiceUtil.getUserById(
+					group.getClassPK());
+
+				friendlyURL = StringPool.SLASH + user.getScreenName();
 			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"Unable to update tags asset for image " +
-							image.getImageId() + ": " + e.getMessage());
-				}
-			}
-		}
 
-		if (_log.isDebugEnabled()) {
-			_log.debug("Tags assets verified for images");
+			GroupLocalServiceUtil.updateFriendlyURL(
+				group.getGroupId(), friendlyURL);
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyImageGallery.class);
+	private static Log _log = LogFactory.getLog(VerifyGroup.class);
 
 }

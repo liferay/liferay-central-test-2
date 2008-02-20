@@ -1250,6 +1250,13 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getGroup(companyId, name);
 	}
 
+	public static java.util.List getNullFriendlyURLGroups()
+		throws com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getNullFriendlyURLGroups();
+	}
+
 	public static com.liferay.portal.model.Group getOrganizationGroup(
 		long companyId, long organizationId)
 		throws com.liferay.portal.PortalException,
@@ -1390,6 +1397,15 @@ public class GroupLocalServiceUtil {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		groupLocalService.unsetUserGroups(userId, groupIds);
+	}
+
+	public static com.liferay.portal.model.Group updateFriendlyURL(
+		long groupId, java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.updateFriendlyURL(groupId, friendlyURL);
 	}
 
 	public static com.liferay.portal.model.Group updateGroup(long groupId,

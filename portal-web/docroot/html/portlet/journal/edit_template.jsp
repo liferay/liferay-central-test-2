@@ -237,7 +237,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getResolvedFriendlyURL() + "/journal/Templates/" + templateId %>'
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/journal/Templates/" + templateId %>'
 			/>
 		</td>
 	</tr>

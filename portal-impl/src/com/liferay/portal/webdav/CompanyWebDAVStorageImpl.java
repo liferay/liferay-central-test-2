@@ -94,7 +94,7 @@ public class CompanyWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			String parentPath = getRootPath() + StringPool.SLASH + webId;
 
-			String name = group.getResolvedFriendlyURL();
+			String name = group.getFriendlyURL();
 
 			name = name.substring(1, name.length());
 

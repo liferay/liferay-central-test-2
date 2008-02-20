@@ -30,7 +30,6 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -68,7 +67,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class VirtualHostFilter extends BaseFilter {
@@ -201,14 +200,7 @@ public class VirtualHostFilter extends BaseFilter {
 				Group group = GroupLocalServiceUtil.getGroup(
 					layoutSet.getGroupId());
 
-				if (Validator.isNotNull(group.getFriendlyURL())) {
-					prefix.append(group.getFriendlyURL());
-				}
-				else {
-					prefix.append(
-						group.getDefaultFriendlyURL(
-							layoutSet.isPrivateLayout()));
-				}
+				prefix.append(group.getFriendlyURL());
 
 				StringMaker redirect = new StringMaker();
 

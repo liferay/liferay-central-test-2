@@ -3593,15 +3593,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		friendlyURL = friendlyURL.substring(1);
+		String layoutIdFriendlyURL = friendlyURL.substring(1);
 
-		if (Validator.isNumber(friendlyURL) &&
-			!friendlyURL.equals(String.valueOf(layoutId))) {
+		if (Validator.isNumber(layoutIdFriendlyURL) &&
+			!layoutIdFriendlyURL.equals(String.valueOf(layoutId))) {
 
 			LayoutFriendlyURLException lfurle = new LayoutFriendlyURLException(
 				LayoutFriendlyURLException.POSSIBLE_DUPLICATE);
 
-			lfurle.setKeywordConflict(friendlyURL);
+			lfurle.setKeywordConflict(layoutIdFriendlyURL);
 
 			throw lfurle;
 		}

@@ -55,6 +55,16 @@
 				(lower(Group_.description) LIKE ? OR ? IS NULL)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByNullFriendlyURL">
+		<![CDATA[
+			SELECT
+				{Group_.*}
+			FROM
+				Group_
+			WHERE
+				(friendlyURL = '' OR friendlyURL IS NULL)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.GroupFinder.findByC_N">
 		<![CDATA[
 			SELECT

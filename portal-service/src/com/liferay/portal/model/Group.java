@@ -79,12 +79,6 @@ public interface Group extends GroupModel {
 	public java.lang.String getPathFriendlyURL(boolean privateLayout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 
-	public java.lang.String getDefaultFriendlyURL(boolean privateLayout)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public java.lang.String getResolvedFriendlyURL();
-
 	public long getDefaultPrivatePlid();
 
 	public int getPrivateLayoutsPageCount();
