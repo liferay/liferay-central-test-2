@@ -162,8 +162,9 @@ code, pre {
 
 /* ---------- Staging area ---------- */
 
-body.staging {
+body.staging #wrapper {
 	border: 10px solid #c00;
+	padding: 0px 5px 5px;
 }
 
 /* ---------- Main content body ---------- */

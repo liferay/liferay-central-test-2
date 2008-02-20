@@ -68,7 +68,7 @@ th {
 caption {
 }
 
-p, fieldset, table, pre {
+p {
 }
 
 /* ---------- Links ---------- */
@@ -118,7 +118,7 @@ code, pre {
 
 /* ---------- Staging area ---------- */
 
-body.staging {
+body.staging #wrapper {
 }
 
 /* ---------- Main content body ---------- */
