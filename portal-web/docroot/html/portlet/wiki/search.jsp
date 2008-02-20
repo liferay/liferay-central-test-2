@@ -95,7 +95,18 @@ try {
 		long curNodeId = GetterUtil.getLong(doc.get("nodeId"));
 		String title = doc.get("title");
 
-		WikiNode curNode = WikiNodeLocalServiceUtil.getNode(curNodeId);
+		WikiNode curNode = null;
+
+		try {
+			curNode = WikiNodeLocalServiceUtil.getNode(curNodeId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Wiki search index is stale and contains node " + curNodeId);
+			}
+
+			continue;
+		}
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 

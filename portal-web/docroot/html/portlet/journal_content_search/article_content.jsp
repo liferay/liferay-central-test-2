@@ -52,7 +52,18 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 		for (int i = 0; i < hitLayoutIds.size(); i++) {
 			Long hitLayoutId = (Long)hitLayoutIds.get(i);
 
-			Layout hitLayout = LayoutLocalServiceUtil.getLayout(layout.getGroupId(), layout.isPrivateLayout(), hitLayoutId.longValue());
+			Layout hitLayout = null;
+
+			try {
+				hitLayout = LayoutLocalServiceUtil.getLayout(layout.getGroupId(), layout.isPrivateLayout(), hitLayoutId.longValue());
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn("Journal content search is stale and contains layout {" + layout.getGroupId() + ", " + layout.isPrivateLayout() + ", " + hitLayoutId.longValue() + "}");
+				}
+
+				continue;
+			}
 
 			String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 		%>
@@ -92,3 +103,7 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 		</span>
 	</c:otherwise>
 </c:choose>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.journal_content_search.article_content.jsp");
+%>

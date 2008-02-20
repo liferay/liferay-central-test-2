@@ -82,7 +82,18 @@ try {
 
 		long entryId = GetterUtil.getLong(doc.get("entryId"));
 
-		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+		BlogsEntry entry = null;
+
+		try {
+			entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Blogs search index is stale and contains entry " + entryId);
+			}
+
+			continue;
+		}
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 

@@ -110,7 +110,18 @@ try {
 
 		long entryId = GetterUtil.getLong(doc.get("entryId"));
 
-		BookmarksEntry entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
+		BookmarksEntry entry = null;
+
+		try {
+			entry = BookmarksEntryLocalServiceUtil.getEntry(entryId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Bookmarks search index is stale and contains entry " + entryId);
+			}
+
+			continue;
+		}
 
 		row.setObject(entry);
 

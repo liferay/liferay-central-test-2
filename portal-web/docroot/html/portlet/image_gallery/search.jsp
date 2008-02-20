@@ -110,7 +110,18 @@ try {
 
 		long imageId = GetterUtil.getLong(doc.get("imageId"));
 
-		IGImage image = IGImageLocalServiceUtil.getImage(imageId);
+		IGImage image = null;
+
+		try {
+			image = IGImageLocalServiceUtil.getImage(imageId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Image gallery search index is stale and contains image " + imageId);
+			}
+
+			continue;
+		}
 
 		row.setObject(image);
 

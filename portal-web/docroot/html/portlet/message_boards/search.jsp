@@ -125,9 +125,44 @@ try {
 		long curThreadId = GetterUtil.getLong(doc.get("threadId"));
 		long messageId = GetterUtil.getLong(doc.get("messageId"));
 
-		MBCategory category = MBCategoryLocalServiceUtil.getCategory(categoryId);
-		MBThread thread = MBThreadLocalServiceUtil.getThread(curThreadId);
-		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
+		MBCategory category = null;
+
+		try {
+			category = MBCategoryLocalServiceUtil.getCategory(categoryId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Message boards search index is stale and contains category " + categoryId);
+			}
+
+			continue;
+		}
+
+		MBThread thread = null;
+
+		try {
+			thread = MBThreadLocalServiceUtil.getThread(curThreadId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Message boards search index is stale and contains thread " + curThreadId);
+			}
+
+			continue;
+		}
+
+		MBMessage message = null;
+
+		try {
+			message = MBMessageLocalServiceUtil.getMessage(messageId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Message boards search index is stale and contains message " + messageId);
+			}
+
+			continue;
+		}
 
 		PortletURL rowURL = renderResponse.createRenderURL();
 

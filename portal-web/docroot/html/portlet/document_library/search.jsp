@@ -111,11 +111,33 @@ try {
 		long folderId = GetterUtil.getLong(doc.get("repositoryId"));
 		String fileName = doc.get("path");
 
-		DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, fileName);
+		DLFileEntry fileEntry = null;
+
+		try {
+			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, fileName);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Document library search index is stale and contains file entry {" + folderId + ", " + fileName + "}");
+			}
+
+			continue;
+		}
 
 		row.setObject(fileEntry);
 
-		DLFolder folder = DLFolderLocalServiceUtil.getFolder(folderId);
+		DLFolder folder = null;
+
+		try {
+			folder = DLFolderLocalServiceUtil.getFolder(folderId);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("Document library search index is stale and contains folder " + folderId);
+			}
+
+			continue;
+		}
 
 		PortletURL rowURL = renderResponse.createActionURL();
 
