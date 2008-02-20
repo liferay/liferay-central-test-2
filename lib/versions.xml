@@ -214,6 +214,9 @@
 				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
+		<comments>
+			This includes modifications to remove extraneous logging.
+		</comments>
 	</library>
 	<library>
 		<file-name>development/jargs.jar</file-name>
@@ -491,6 +494,9 @@
 				<license-name>GPL 2.0</license-name>
 			</license>
 		</licenses>
+		<comments>
+			See http://support.liferay.com/browse/LEP-5048.
+		</comments>
 	</library>
 	<library>
 		<file-name>development/resin-util.jar</file-name>
