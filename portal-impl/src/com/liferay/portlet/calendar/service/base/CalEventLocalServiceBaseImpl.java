@@ -125,34 +125,7 @@ public abstract class CalEventLocalServiceBaseImpl
 	}
 
 	public CalEvent updateCalEvent(CalEvent model) throws SystemException {
-		CalEvent calEvent = new CalEventImpl();
-
-		calEvent.setNew(false);
-
-		calEvent.setUuid(model.getUuid());
-		calEvent.setEventId(model.getEventId());
-		calEvent.setGroupId(model.getGroupId());
-		calEvent.setCompanyId(model.getCompanyId());
-		calEvent.setUserId(model.getUserId());
-		calEvent.setUserName(model.getUserName());
-		calEvent.setCreateDate(model.getCreateDate());
-		calEvent.setModifiedDate(model.getModifiedDate());
-		calEvent.setTitle(model.getTitle());
-		calEvent.setDescription(model.getDescription());
-		calEvent.setStartDate(model.getStartDate());
-		calEvent.setEndDate(model.getEndDate());
-		calEvent.setDurationHour(model.getDurationHour());
-		calEvent.setDurationMinute(model.getDurationMinute());
-		calEvent.setAllDay(model.getAllDay());
-		calEvent.setTimeZoneSensitive(model.getTimeZoneSensitive());
-		calEvent.setType(model.getType());
-		calEvent.setRepeating(model.getRepeating());
-		calEvent.setRecurrence(model.getRecurrence());
-		calEvent.setRemindBy(model.getRemindBy());
-		calEvent.setFirstReminder(model.getFirstReminder());
-		calEvent.setSecondReminder(model.getSecondReminder());
-
-		return calEventPersistence.update(calEvent);
+		return calEventPersistence.update(model, true);
 	}
 
 	public CalEventPersistence getCalEventPersistence() {

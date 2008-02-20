@@ -360,41 +360,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	}
 
 	public User updateUser(User model) throws SystemException {
-		User user = new UserImpl();
-
-		user.setNew(false);
-
-		user.setUuid(model.getUuid());
-		user.setUserId(model.getUserId());
-		user.setCompanyId(model.getCompanyId());
-		user.setCreateDate(model.getCreateDate());
-		user.setModifiedDate(model.getModifiedDate());
-		user.setDefaultUser(model.getDefaultUser());
-		user.setContactId(model.getContactId());
-		user.setPassword(model.getPassword());
-		user.setPasswordEncrypted(model.getPasswordEncrypted());
-		user.setPasswordReset(model.getPasswordReset());
-		user.setPasswordModifiedDate(model.getPasswordModifiedDate());
-		user.setGraceLoginCount(model.getGraceLoginCount());
-		user.setScreenName(model.getScreenName());
-		user.setEmailAddress(model.getEmailAddress());
-		user.setPortraitId(model.getPortraitId());
-		user.setLanguageId(model.getLanguageId());
-		user.setTimeZoneId(model.getTimeZoneId());
-		user.setGreeting(model.getGreeting());
-		user.setComments(model.getComments());
-		user.setLoginDate(model.getLoginDate());
-		user.setLoginIP(model.getLoginIP());
-		user.setLastLoginDate(model.getLastLoginDate());
-		user.setLastLoginIP(model.getLastLoginIP());
-		user.setLastFailedLoginDate(model.getLastFailedLoginDate());
-		user.setFailedLoginAttempts(model.getFailedLoginAttempts());
-		user.setLockout(model.getLockout());
-		user.setLockoutDate(model.getLockoutDate());
-		user.setAgreedToTermsOfUse(model.getAgreedToTermsOfUse());
-		user.setActive(model.getActive());
-
-		return userPersistence.update(user);
+		return userPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

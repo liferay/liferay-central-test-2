@@ -106,21 +106,7 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 
 	public DLFileVersion updateDLFileVersion(DLFileVersion model)
 		throws SystemException {
-		DLFileVersion dlFileVersion = new DLFileVersionImpl();
-
-		dlFileVersion.setNew(false);
-
-		dlFileVersion.setFileVersionId(model.getFileVersionId());
-		dlFileVersion.setCompanyId(model.getCompanyId());
-		dlFileVersion.setUserId(model.getUserId());
-		dlFileVersion.setUserName(model.getUserName());
-		dlFileVersion.setCreateDate(model.getCreateDate());
-		dlFileVersion.setFolderId(model.getFolderId());
-		dlFileVersion.setName(model.getName());
-		dlFileVersion.setVersion(model.getVersion());
-		dlFileVersion.setSize(model.getSize());
-
-		return dlFileVersionPersistence.update(dlFileVersion);
+		return dlFileVersionPersistence.update(model, true);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

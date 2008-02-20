@@ -310,25 +310,7 @@ public abstract class LayoutSetLocalServiceBaseImpl
 	}
 
 	public LayoutSet updateLayoutSet(LayoutSet model) throws SystemException {
-		LayoutSet layoutSet = new LayoutSetImpl();
-
-		layoutSet.setNew(false);
-
-		layoutSet.setLayoutSetId(model.getLayoutSetId());
-		layoutSet.setGroupId(model.getGroupId());
-		layoutSet.setCompanyId(model.getCompanyId());
-		layoutSet.setPrivateLayout(model.getPrivateLayout());
-		layoutSet.setLogo(model.getLogo());
-		layoutSet.setLogoId(model.getLogoId());
-		layoutSet.setThemeId(model.getThemeId());
-		layoutSet.setColorSchemeId(model.getColorSchemeId());
-		layoutSet.setWapThemeId(model.getWapThemeId());
-		layoutSet.setWapColorSchemeId(model.getWapColorSchemeId());
-		layoutSet.setCss(model.getCss());
-		layoutSet.setPageCount(model.getPageCount());
-		layoutSet.setVirtualHost(model.getVirtualHost());
-
-		return layoutSetPersistence.update(layoutSet);
+		return layoutSetPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

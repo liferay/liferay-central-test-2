@@ -87,17 +87,7 @@ public abstract class PollsVoteLocalServiceBaseImpl
 	}
 
 	public PollsVote updatePollsVote(PollsVote model) throws SystemException {
-		PollsVote pollsVote = new PollsVoteImpl();
-
-		pollsVote.setNew(false);
-
-		pollsVote.setVoteId(model.getVoteId());
-		pollsVote.setUserId(model.getUserId());
-		pollsVote.setQuestionId(model.getQuestionId());
-		pollsVote.setChoiceId(model.getChoiceId());
-		pollsVote.setVoteDate(model.getVoteDate());
-
-		return pollsVotePersistence.update(pollsVote);
+		return pollsVotePersistence.update(model, true);
 	}
 
 	public PollsChoiceLocalService getPollsChoiceLocalService() {

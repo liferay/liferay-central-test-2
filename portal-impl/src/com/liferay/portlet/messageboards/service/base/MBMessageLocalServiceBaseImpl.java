@@ -198,26 +198,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 	}
 
 	public MBMessage updateMBMessage(MBMessage model) throws SystemException {
-		MBMessage mbMessage = new MBMessageImpl();
-
-		mbMessage.setNew(false);
-
-		mbMessage.setUuid(model.getUuid());
-		mbMessage.setMessageId(model.getMessageId());
-		mbMessage.setCompanyId(model.getCompanyId());
-		mbMessage.setUserId(model.getUserId());
-		mbMessage.setUserName(model.getUserName());
-		mbMessage.setCreateDate(model.getCreateDate());
-		mbMessage.setModifiedDate(model.getModifiedDate());
-		mbMessage.setCategoryId(model.getCategoryId());
-		mbMessage.setThreadId(model.getThreadId());
-		mbMessage.setParentMessageId(model.getParentMessageId());
-		mbMessage.setSubject(model.getSubject());
-		mbMessage.setBody(model.getBody());
-		mbMessage.setAttachments(model.getAttachments());
-		mbMessage.setAnonymous(model.getAnonymous());
-
-		return mbMessagePersistence.update(mbMessage);
+		return mbMessagePersistence.update(model, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

@@ -138,28 +138,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 
 	public SCProductEntry updateSCProductEntry(SCProductEntry model)
 		throws SystemException {
-		SCProductEntry scProductEntry = new SCProductEntryImpl();
-
-		scProductEntry.setNew(false);
-
-		scProductEntry.setProductEntryId(model.getProductEntryId());
-		scProductEntry.setGroupId(model.getGroupId());
-		scProductEntry.setCompanyId(model.getCompanyId());
-		scProductEntry.setUserId(model.getUserId());
-		scProductEntry.setUserName(model.getUserName());
-		scProductEntry.setCreateDate(model.getCreateDate());
-		scProductEntry.setModifiedDate(model.getModifiedDate());
-		scProductEntry.setName(model.getName());
-		scProductEntry.setType(model.getType());
-		scProductEntry.setTags(model.getTags());
-		scProductEntry.setShortDescription(model.getShortDescription());
-		scProductEntry.setLongDescription(model.getLongDescription());
-		scProductEntry.setPageURL(model.getPageURL());
-		scProductEntry.setAuthor(model.getAuthor());
-		scProductEntry.setRepoGroupId(model.getRepoGroupId());
-		scProductEntry.setRepoArtifactId(model.getRepoArtifactId());
-
-		return scProductEntryPersistence.update(scProductEntry);
+		return scProductEntryPersistence.update(model, true);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

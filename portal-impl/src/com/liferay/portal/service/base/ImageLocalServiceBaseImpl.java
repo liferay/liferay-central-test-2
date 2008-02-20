@@ -300,19 +300,7 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	}
 
 	public Image updateImage(Image model) throws SystemException {
-		Image image = new ImageImpl();
-
-		image.setNew(false);
-
-		image.setImageId(model.getImageId());
-		image.setModifiedDate(model.getModifiedDate());
-		image.setText(model.getText());
-		image.setType(model.getType());
-		image.setHeight(model.getHeight());
-		image.setWidth(model.getWidth());
-		image.setSize(model.getSize());
-
-		return imagePersistence.update(image);
+		return imagePersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

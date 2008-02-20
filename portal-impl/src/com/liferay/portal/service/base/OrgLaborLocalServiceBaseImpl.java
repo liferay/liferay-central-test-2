@@ -314,29 +314,7 @@ public abstract class OrgLaborLocalServiceBaseImpl
 	}
 
 	public OrgLabor updateOrgLabor(OrgLabor model) throws SystemException {
-		OrgLabor orgLabor = new OrgLaborImpl();
-
-		orgLabor.setNew(false);
-
-		orgLabor.setOrgLaborId(model.getOrgLaborId());
-		orgLabor.setOrganizationId(model.getOrganizationId());
-		orgLabor.setTypeId(model.getTypeId());
-		orgLabor.setSunOpen(model.getSunOpen());
-		orgLabor.setSunClose(model.getSunClose());
-		orgLabor.setMonOpen(model.getMonOpen());
-		orgLabor.setMonClose(model.getMonClose());
-		orgLabor.setTueOpen(model.getTueOpen());
-		orgLabor.setTueClose(model.getTueClose());
-		orgLabor.setWedOpen(model.getWedOpen());
-		orgLabor.setWedClose(model.getWedClose());
-		orgLabor.setThuOpen(model.getThuOpen());
-		orgLabor.setThuClose(model.getThuClose());
-		orgLabor.setFriOpen(model.getFriOpen());
-		orgLabor.setFriClose(model.getFriClose());
-		orgLabor.setSatOpen(model.getSatOpen());
-		orgLabor.setSatClose(model.getSatClose());
-
-		return orgLaborPersistence.update(orgLabor);
+		return orgLaborPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

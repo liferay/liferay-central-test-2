@@ -310,21 +310,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 
 	public Subscription updateSubscription(Subscription model)
 		throws SystemException {
-		Subscription subscription = new SubscriptionImpl();
-
-		subscription.setNew(false);
-
-		subscription.setSubscriptionId(model.getSubscriptionId());
-		subscription.setCompanyId(model.getCompanyId());
-		subscription.setUserId(model.getUserId());
-		subscription.setUserName(model.getUserName());
-		subscription.setCreateDate(model.getCreateDate());
-		subscription.setModifiedDate(model.getModifiedDate());
-		subscription.setClassNameId(model.getClassNameId());
-		subscription.setClassPK(model.getClassPK());
-		subscription.setFrequency(model.getFrequency());
-
-		return subscriptionPersistence.update(subscription);
+		return subscriptionPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

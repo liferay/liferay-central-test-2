@@ -111,19 +111,7 @@ public abstract class TagsEntryLocalServiceBaseImpl
 	}
 
 	public TagsEntry updateTagsEntry(TagsEntry model) throws SystemException {
-		TagsEntry tagsEntry = new TagsEntryImpl();
-
-		tagsEntry.setNew(false);
-
-		tagsEntry.setEntryId(model.getEntryId());
-		tagsEntry.setCompanyId(model.getCompanyId());
-		tagsEntry.setUserId(model.getUserId());
-		tagsEntry.setUserName(model.getUserName());
-		tagsEntry.setCreateDate(model.getCreateDate());
-		tagsEntry.setModifiedDate(model.getModifiedDate());
-		tagsEntry.setName(model.getName());
-
-		return tagsEntryPersistence.update(tagsEntry);
+		return tagsEntryPersistence.update(model, true);
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {

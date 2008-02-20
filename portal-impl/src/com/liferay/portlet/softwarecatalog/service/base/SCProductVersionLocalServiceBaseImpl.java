@@ -114,24 +114,7 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 
 	public SCProductVersion updateSCProductVersion(SCProductVersion model)
 		throws SystemException {
-		SCProductVersion scProductVersion = new SCProductVersionImpl();
-
-		scProductVersion.setNew(false);
-
-		scProductVersion.setProductVersionId(model.getProductVersionId());
-		scProductVersion.setCompanyId(model.getCompanyId());
-		scProductVersion.setUserId(model.getUserId());
-		scProductVersion.setUserName(model.getUserName());
-		scProductVersion.setCreateDate(model.getCreateDate());
-		scProductVersion.setModifiedDate(model.getModifiedDate());
-		scProductVersion.setProductEntryId(model.getProductEntryId());
-		scProductVersion.setVersion(model.getVersion());
-		scProductVersion.setChangeLog(model.getChangeLog());
-		scProductVersion.setDownloadPageURL(model.getDownloadPageURL());
-		scProductVersion.setDirectDownloadURL(model.getDirectDownloadURL());
-		scProductVersion.setRepoStoreArtifact(model.getRepoStoreArtifact());
-
-		return scProductVersionPersistence.update(scProductVersion);
+		return scProductVersionPersistence.update(model, true);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

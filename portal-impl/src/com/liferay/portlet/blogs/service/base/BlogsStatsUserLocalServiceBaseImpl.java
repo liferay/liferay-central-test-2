@@ -99,21 +99,7 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 
 	public BlogsStatsUser updateBlogsStatsUser(BlogsStatsUser model)
 		throws SystemException {
-		BlogsStatsUser blogsStatsUser = new BlogsStatsUserImpl();
-
-		blogsStatsUser.setNew(false);
-
-		blogsStatsUser.setStatsUserId(model.getStatsUserId());
-		blogsStatsUser.setGroupId(model.getGroupId());
-		blogsStatsUser.setCompanyId(model.getCompanyId());
-		blogsStatsUser.setUserId(model.getUserId());
-		blogsStatsUser.setEntryCount(model.getEntryCount());
-		blogsStatsUser.setLastPostDate(model.getLastPostDate());
-		blogsStatsUser.setRatingsTotalEntries(model.getRatingsTotalEntries());
-		blogsStatsUser.setRatingsTotalScore(model.getRatingsTotalScore());
-		blogsStatsUser.setRatingsAverageScore(model.getRatingsAverageScore());
-
-		return blogsStatsUserPersistence.update(blogsStatsUser);
+		return blogsStatsUserPersistence.update(model, true);
 	}
 
 	public BlogsEntryLocalService getBlogsEntryLocalService() {

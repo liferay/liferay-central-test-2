@@ -310,23 +310,7 @@ public abstract class EmailAddressLocalServiceBaseImpl
 
 	public EmailAddress updateEmailAddress(EmailAddress model)
 		throws SystemException {
-		EmailAddress emailAddress = new EmailAddressImpl();
-
-		emailAddress.setNew(false);
-
-		emailAddress.setEmailAddressId(model.getEmailAddressId());
-		emailAddress.setCompanyId(model.getCompanyId());
-		emailAddress.setUserId(model.getUserId());
-		emailAddress.setUserName(model.getUserName());
-		emailAddress.setCreateDate(model.getCreateDate());
-		emailAddress.setModifiedDate(model.getModifiedDate());
-		emailAddress.setClassNameId(model.getClassNameId());
-		emailAddress.setClassPK(model.getClassPK());
-		emailAddress.setAddress(model.getAddress());
-		emailAddress.setTypeId(model.getTypeId());
-		emailAddress.setPrimary(model.getPrimary());
-
-		return emailAddressPersistence.update(emailAddress);
+		return emailAddressPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -302,17 +302,7 @@ public abstract class UserGroupLocalServiceBaseImpl
 	}
 
 	public UserGroup updateUserGroup(UserGroup model) throws SystemException {
-		UserGroup userGroup = new UserGroupImpl();
-
-		userGroup.setNew(false);
-
-		userGroup.setUserGroupId(model.getUserGroupId());
-		userGroup.setCompanyId(model.getCompanyId());
-		userGroup.setParentUserGroupId(model.getParentUserGroupId());
-		userGroup.setName(model.getName());
-		userGroup.setDescription(model.getDescription());
-
-		return userGroupPersistence.update(userGroup);
+		return userGroupPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

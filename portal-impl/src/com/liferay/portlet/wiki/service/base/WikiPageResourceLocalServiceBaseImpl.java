@@ -89,15 +89,7 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 
 	public WikiPageResource updateWikiPageResource(WikiPageResource model)
 		throws SystemException {
-		WikiPageResource wikiPageResource = new WikiPageResourceImpl();
-
-		wikiPageResource.setNew(false);
-
-		wikiPageResource.setResourcePrimKey(model.getResourcePrimKey());
-		wikiPageResource.setNodeId(model.getNodeId());
-		wikiPageResource.setTitle(model.getTitle());
-
-		return wikiPageResourcePersistence.update(wikiPageResource);
+		return wikiPageResourcePersistence.update(model, true);
 	}
 
 	public WikiNodeLocalService getWikiNodeLocalService() {

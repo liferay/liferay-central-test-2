@@ -305,16 +305,7 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 
 	public UserTrackerPath updateUserTrackerPath(UserTrackerPath model)
 		throws SystemException {
-		UserTrackerPath userTrackerPath = new UserTrackerPathImpl();
-
-		userTrackerPath.setNew(false);
-
-		userTrackerPath.setUserTrackerPathId(model.getUserTrackerPathId());
-		userTrackerPath.setUserTrackerId(model.getUserTrackerId());
-		userTrackerPath.setPath(model.getPath());
-		userTrackerPath.setPathDate(model.getPathDate());
-
-		return userTrackerPathPersistence.update(userTrackerPath);
+		return userTrackerPathPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

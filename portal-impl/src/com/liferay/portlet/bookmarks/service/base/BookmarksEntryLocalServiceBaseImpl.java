@@ -116,24 +116,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 
 	public BookmarksEntry updateBookmarksEntry(BookmarksEntry model)
 		throws SystemException {
-		BookmarksEntry bookmarksEntry = new BookmarksEntryImpl();
-
-		bookmarksEntry.setNew(false);
-
-		bookmarksEntry.setUuid(model.getUuid());
-		bookmarksEntry.setEntryId(model.getEntryId());
-		bookmarksEntry.setCompanyId(model.getCompanyId());
-		bookmarksEntry.setUserId(model.getUserId());
-		bookmarksEntry.setCreateDate(model.getCreateDate());
-		bookmarksEntry.setModifiedDate(model.getModifiedDate());
-		bookmarksEntry.setFolderId(model.getFolderId());
-		bookmarksEntry.setName(model.getName());
-		bookmarksEntry.setUrl(model.getUrl());
-		bookmarksEntry.setComments(model.getComments());
-		bookmarksEntry.setVisits(model.getVisits());
-		bookmarksEntry.setPriority(model.getPriority());
-
-		return bookmarksEntryPersistence.update(bookmarksEntry);
+		return bookmarksEntryPersistence.update(model, true);
 	}
 
 	public BookmarksEntryPersistence getBookmarksEntryPersistence() {

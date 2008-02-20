@@ -114,22 +114,7 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 
 	public BookmarksFolder updateBookmarksFolder(BookmarksFolder model)
 		throws SystemException {
-		BookmarksFolder bookmarksFolder = new BookmarksFolderImpl();
-
-		bookmarksFolder.setNew(false);
-
-		bookmarksFolder.setUuid(model.getUuid());
-		bookmarksFolder.setFolderId(model.getFolderId());
-		bookmarksFolder.setGroupId(model.getGroupId());
-		bookmarksFolder.setCompanyId(model.getCompanyId());
-		bookmarksFolder.setUserId(model.getUserId());
-		bookmarksFolder.setCreateDate(model.getCreateDate());
-		bookmarksFolder.setModifiedDate(model.getModifiedDate());
-		bookmarksFolder.setParentFolderId(model.getParentFolderId());
-		bookmarksFolder.setName(model.getName());
-		bookmarksFolder.setDescription(model.getDescription());
-
-		return bookmarksFolderPersistence.update(bookmarksFolder);
+		return bookmarksFolderPersistence.update(model, true);
 	}
 
 	public BookmarksEntryLocalService getBookmarksEntryLocalService() {

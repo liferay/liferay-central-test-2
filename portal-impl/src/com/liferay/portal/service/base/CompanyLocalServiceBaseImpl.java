@@ -304,19 +304,7 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 	}
 
 	public Company updateCompany(Company model) throws SystemException {
-		Company company = new CompanyImpl();
-
-		company.setNew(false);
-
-		company.setCompanyId(model.getCompanyId());
-		company.setAccountId(model.getAccountId());
-		company.setWebId(model.getWebId());
-		company.setKey(model.getKey());
-		company.setVirtualHost(model.getVirtualHost());
-		company.setMx(model.getMx());
-		company.setLogoId(model.getLogoId());
-
-		return companyPersistence.update(company);
+		return companyPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

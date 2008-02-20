@@ -165,29 +165,7 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 
 	public DLFileEntry updateDLFileEntry(DLFileEntry model)
 		throws SystemException {
-		DLFileEntry dlFileEntry = new DLFileEntryImpl();
-
-		dlFileEntry.setNew(false);
-
-		dlFileEntry.setUuid(model.getUuid());
-		dlFileEntry.setFileEntryId(model.getFileEntryId());
-		dlFileEntry.setCompanyId(model.getCompanyId());
-		dlFileEntry.setUserId(model.getUserId());
-		dlFileEntry.setUserName(model.getUserName());
-		dlFileEntry.setVersionUserId(model.getVersionUserId());
-		dlFileEntry.setVersionUserName(model.getVersionUserName());
-		dlFileEntry.setCreateDate(model.getCreateDate());
-		dlFileEntry.setModifiedDate(model.getModifiedDate());
-		dlFileEntry.setFolderId(model.getFolderId());
-		dlFileEntry.setName(model.getName());
-		dlFileEntry.setTitle(model.getTitle());
-		dlFileEntry.setDescription(model.getDescription());
-		dlFileEntry.setVersion(model.getVersion());
-		dlFileEntry.setSize(model.getSize());
-		dlFileEntry.setReadCount(model.getReadCount());
-		dlFileEntry.setExtraSettings(model.getExtraSettings());
-
-		return dlFileEntryPersistence.update(dlFileEntry);
+		return dlFileEntryPersistence.update(model, true);
 	}
 
 	public DLFileEntryPersistence getDLFileEntryPersistence() {

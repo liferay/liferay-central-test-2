@@ -313,24 +313,7 @@ public abstract class ActivityTrackerLocalServiceBaseImpl
 
 	public ActivityTracker updateActivityTracker(ActivityTracker model)
 		throws SystemException {
-		ActivityTracker activityTracker = new ActivityTrackerImpl();
-
-		activityTracker.setNew(false);
-
-		activityTracker.setActivityTrackerId(model.getActivityTrackerId());
-		activityTracker.setGroupId(model.getGroupId());
-		activityTracker.setCompanyId(model.getCompanyId());
-		activityTracker.setUserId(model.getUserId());
-		activityTracker.setUserName(model.getUserName());
-		activityTracker.setCreateDate(model.getCreateDate());
-		activityTracker.setClassNameId(model.getClassNameId());
-		activityTracker.setClassPK(model.getClassPK());
-		activityTracker.setActivity(model.getActivity());
-		activityTracker.setExtraData(model.getExtraData());
-		activityTracker.setReceiverUserId(model.getReceiverUserId());
-		activityTracker.setReceiverUserName(model.getReceiverUserName());
-
-		return activityTrackerPersistence.update(activityTracker);
+		return activityTrackerPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

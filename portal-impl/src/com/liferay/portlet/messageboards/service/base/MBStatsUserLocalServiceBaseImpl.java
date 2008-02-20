@@ -115,17 +115,7 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 
 	public MBStatsUser updateMBStatsUser(MBStatsUser model)
 		throws SystemException {
-		MBStatsUser mbStatsUser = new MBStatsUserImpl();
-
-		mbStatsUser.setNew(false);
-
-		mbStatsUser.setStatsUserId(model.getStatsUserId());
-		mbStatsUser.setGroupId(model.getGroupId());
-		mbStatsUser.setUserId(model.getUserId());
-		mbStatsUser.setMessageCount(model.getMessageCount());
-		mbStatsUser.setLastPostDate(model.getLastPostDate());
-
-		return mbStatsUserPersistence.update(mbStatsUser);
+		return mbStatsUserPersistence.update(model, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

@@ -307,18 +307,7 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 
 	public PortletPreferences updatePortletPreferences(PortletPreferences model)
 		throws SystemException {
-		PortletPreferences portletPreferences = new PortletPreferencesImpl();
-
-		portletPreferences.setNew(false);
-
-		portletPreferences.setPortletPreferencesId(model.getPortletPreferencesId());
-		portletPreferences.setOwnerId(model.getOwnerId());
-		portletPreferences.setOwnerType(model.getOwnerType());
-		portletPreferences.setPlid(model.getPlid());
-		portletPreferences.setPortletId(model.getPortletId());
-		portletPreferences.setPreferences(model.getPreferences());
-
-		return portletPreferencesPersistence.update(portletPreferences);
+		return portletPreferencesPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

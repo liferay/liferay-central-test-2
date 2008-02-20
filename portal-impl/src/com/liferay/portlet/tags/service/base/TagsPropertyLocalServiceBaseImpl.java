@@ -115,21 +115,7 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 
 	public TagsProperty updateTagsProperty(TagsProperty model)
 		throws SystemException {
-		TagsProperty tagsProperty = new TagsPropertyImpl();
-
-		tagsProperty.setNew(false);
-
-		tagsProperty.setPropertyId(model.getPropertyId());
-		tagsProperty.setCompanyId(model.getCompanyId());
-		tagsProperty.setUserId(model.getUserId());
-		tagsProperty.setUserName(model.getUserName());
-		tagsProperty.setCreateDate(model.getCreateDate());
-		tagsProperty.setModifiedDate(model.getModifiedDate());
-		tagsProperty.setEntryId(model.getEntryId());
-		tagsProperty.setKey(model.getKey());
-		tagsProperty.setValue(model.getValue());
-
-		return tagsPropertyPersistence.update(tagsProperty);
+		return tagsPropertyPersistence.update(model, true);
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {

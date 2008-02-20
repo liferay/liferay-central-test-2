@@ -119,22 +119,7 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
 
 	public ShoppingOrderItem updateShoppingOrderItem(ShoppingOrderItem model)
 		throws SystemException {
-		ShoppingOrderItem shoppingOrderItem = new ShoppingOrderItemImpl();
-
-		shoppingOrderItem.setNew(false);
-
-		shoppingOrderItem.setOrderItemId(model.getOrderItemId());
-		shoppingOrderItem.setOrderId(model.getOrderId());
-		shoppingOrderItem.setItemId(model.getItemId());
-		shoppingOrderItem.setSku(model.getSku());
-		shoppingOrderItem.setName(model.getName());
-		shoppingOrderItem.setDescription(model.getDescription());
-		shoppingOrderItem.setProperties(model.getProperties());
-		shoppingOrderItem.setPrice(model.getPrice());
-		shoppingOrderItem.setQuantity(model.getQuantity());
-		shoppingOrderItem.setShippedDate(model.getShippedDate());
-
-		return shoppingOrderItemPersistence.update(shoppingOrderItem);
+		return shoppingOrderItemPersistence.update(model, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

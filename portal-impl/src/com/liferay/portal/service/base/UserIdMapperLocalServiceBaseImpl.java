@@ -306,17 +306,7 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 
 	public UserIdMapper updateUserIdMapper(UserIdMapper model)
 		throws SystemException {
-		UserIdMapper userIdMapper = new UserIdMapperImpl();
-
-		userIdMapper.setNew(false);
-
-		userIdMapper.setUserIdMapperId(model.getUserIdMapperId());
-		userIdMapper.setUserId(model.getUserId());
-		userIdMapper.setType(model.getType());
-		userIdMapper.setDescription(model.getDescription());
-		userIdMapper.setExternalUserId(model.getExternalUserId());
-
-		return userIdMapperPersistence.update(userIdMapper);
+		return userIdMapperPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

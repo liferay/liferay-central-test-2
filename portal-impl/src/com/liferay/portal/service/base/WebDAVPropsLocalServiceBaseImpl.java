@@ -308,19 +308,7 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 
 	public WebDAVProps updateWebDAVProps(WebDAVProps model)
 		throws SystemException {
-		WebDAVProps webDAVProps = new WebDAVPropsImpl();
-
-		webDAVProps.setNew(false);
-
-		webDAVProps.setWebDavPropsId(model.getWebDavPropsId());
-		webDAVProps.setCompanyId(model.getCompanyId());
-		webDAVProps.setCreateDate(model.getCreateDate());
-		webDAVProps.setModifiedDate(model.getModifiedDate());
-		webDAVProps.setClassNameId(model.getClassNameId());
-		webDAVProps.setClassPK(model.getClassPK());
-		webDAVProps.setProps(model.getProps());
-
-		return webDAVPropsPersistence.update(webDAVProps);
+		return webDAVPropsPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

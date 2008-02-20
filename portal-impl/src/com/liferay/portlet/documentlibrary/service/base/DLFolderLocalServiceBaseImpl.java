@@ -143,24 +143,7 @@ public abstract class DLFolderLocalServiceBaseImpl
 	}
 
 	public DLFolder updateDLFolder(DLFolder model) throws SystemException {
-		DLFolder dlFolder = new DLFolderImpl();
-
-		dlFolder.setNew(false);
-
-		dlFolder.setUuid(model.getUuid());
-		dlFolder.setFolderId(model.getFolderId());
-		dlFolder.setGroupId(model.getGroupId());
-		dlFolder.setCompanyId(model.getCompanyId());
-		dlFolder.setUserId(model.getUserId());
-		dlFolder.setUserName(model.getUserName());
-		dlFolder.setCreateDate(model.getCreateDate());
-		dlFolder.setModifiedDate(model.getModifiedDate());
-		dlFolder.setParentFolderId(model.getParentFolderId());
-		dlFolder.setName(model.getName());
-		dlFolder.setDescription(model.getDescription());
-		dlFolder.setLastPostDate(model.getLastPostDate());
-
-		return dlFolderPersistence.update(dlFolder);
+		return dlFolderPersistence.update(model, true);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

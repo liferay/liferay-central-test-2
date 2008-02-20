@@ -308,28 +308,7 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	}
 
 	public Account updateAccount(Account model) throws SystemException {
-		Account account = new AccountImpl();
-
-		account.setNew(false);
-
-		account.setAccountId(model.getAccountId());
-		account.setCompanyId(model.getCompanyId());
-		account.setUserId(model.getUserId());
-		account.setUserName(model.getUserName());
-		account.setCreateDate(model.getCreateDate());
-		account.setModifiedDate(model.getModifiedDate());
-		account.setParentAccountId(model.getParentAccountId());
-		account.setName(model.getName());
-		account.setLegalName(model.getLegalName());
-		account.setLegalId(model.getLegalId());
-		account.setLegalType(model.getLegalType());
-		account.setSicCode(model.getSicCode());
-		account.setTickerSymbol(model.getTickerSymbol());
-		account.setIndustry(model.getIndustry());
-		account.setType(model.getType());
-		account.setSize(model.getSize());
-
-		return accountPersistence.update(account);
+		return accountPersistence.update(model, true);
 	}
 
 	public AccountPersistence getAccountPersistence() {

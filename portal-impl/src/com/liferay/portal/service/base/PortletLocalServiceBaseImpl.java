@@ -302,17 +302,7 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 	}
 
 	public Portlet updatePortlet(Portlet model) throws SystemException {
-		Portlet portlet = new PortletImpl();
-
-		portlet.setNew(false);
-
-		portlet.setId(model.getId());
-		portlet.setCompanyId(model.getCompanyId());
-		portlet.setPortletId(model.getPortletId());
-		portlet.setRoles(model.getRoles());
-		portlet.setActive(model.getActive());
-
-		return portletPersistence.update(portlet);
+		return portletPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

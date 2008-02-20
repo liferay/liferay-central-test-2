@@ -126,22 +126,7 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 
 	public DLFileShortcut updateDLFileShortcut(DLFileShortcut model)
 		throws SystemException {
-		DLFileShortcut dlFileShortcut = new DLFileShortcutImpl();
-
-		dlFileShortcut.setNew(false);
-
-		dlFileShortcut.setUuid(model.getUuid());
-		dlFileShortcut.setFileShortcutId(model.getFileShortcutId());
-		dlFileShortcut.setCompanyId(model.getCompanyId());
-		dlFileShortcut.setUserId(model.getUserId());
-		dlFileShortcut.setUserName(model.getUserName());
-		dlFileShortcut.setCreateDate(model.getCreateDate());
-		dlFileShortcut.setModifiedDate(model.getModifiedDate());
-		dlFileShortcut.setFolderId(model.getFolderId());
-		dlFileShortcut.setToFolderId(model.getToFolderId());
-		dlFileShortcut.setToName(model.getToName());
-
-		return dlFileShortcutPersistence.update(dlFileShortcut);
+		return dlFileShortcutPersistence.update(model, true);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

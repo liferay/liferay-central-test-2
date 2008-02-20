@@ -300,18 +300,7 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 	}
 
 	public Release updateRelease(Release model) throws SystemException {
-		Release release = new ReleaseImpl();
-
-		release.setNew(false);
-
-		release.setReleaseId(model.getReleaseId());
-		release.setCreateDate(model.getCreateDate());
-		release.setModifiedDate(model.getModifiedDate());
-		release.setBuildNumber(model.getBuildNumber());
-		release.setBuildDate(model.getBuildDate());
-		release.setVerified(model.getVerified());
-
-		return releasePersistence.update(release);
+		return releasePersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

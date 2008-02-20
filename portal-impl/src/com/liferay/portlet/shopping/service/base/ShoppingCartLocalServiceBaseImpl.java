@@ -133,23 +133,7 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 
 	public ShoppingCart updateShoppingCart(ShoppingCart model)
 		throws SystemException {
-		ShoppingCart shoppingCart = new ShoppingCartImpl();
-
-		shoppingCart.setNew(false);
-
-		shoppingCart.setCartId(model.getCartId());
-		shoppingCart.setGroupId(model.getGroupId());
-		shoppingCart.setCompanyId(model.getCompanyId());
-		shoppingCart.setUserId(model.getUserId());
-		shoppingCart.setUserName(model.getUserName());
-		shoppingCart.setCreateDate(model.getCreateDate());
-		shoppingCart.setModifiedDate(model.getModifiedDate());
-		shoppingCart.setItemIds(model.getItemIds());
-		shoppingCart.setCouponCodes(model.getCouponCodes());
-		shoppingCart.setAltShipping(model.getAltShipping());
-		shoppingCart.setInsure(model.getInsure());
-
-		return shoppingCartPersistence.update(shoppingCart);
+		return shoppingCartPersistence.update(model, true);
 	}
 
 	public ShoppingCartPersistence getShoppingCartPersistence() {

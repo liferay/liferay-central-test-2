@@ -309,22 +309,7 @@ public abstract class OrganizationLocalServiceBaseImpl
 
 	public Organization updateOrganization(Organization model)
 		throws SystemException {
-		Organization organization = new OrganizationImpl();
-
-		organization.setNew(false);
-
-		organization.setOrganizationId(model.getOrganizationId());
-		organization.setCompanyId(model.getCompanyId());
-		organization.setParentOrganizationId(model.getParentOrganizationId());
-		organization.setName(model.getName());
-		organization.setLocation(model.getLocation());
-		organization.setRecursable(model.getRecursable());
-		organization.setRegionId(model.getRegionId());
-		organization.setCountryId(model.getCountryId());
-		organization.setStatusId(model.getStatusId());
-		organization.setComments(model.getComments());
-
-		return organizationPersistence.update(organization);
+		return organizationPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

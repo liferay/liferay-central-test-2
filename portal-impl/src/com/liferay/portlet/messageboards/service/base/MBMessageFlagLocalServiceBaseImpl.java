@@ -122,16 +122,7 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 
 	public MBMessageFlag updateMBMessageFlag(MBMessageFlag model)
 		throws SystemException {
-		MBMessageFlag mbMessageFlag = new MBMessageFlagImpl();
-
-		mbMessageFlag.setNew(false);
-
-		mbMessageFlag.setMessageFlagId(model.getMessageFlagId());
-		mbMessageFlag.setUserId(model.getUserId());
-		mbMessageFlag.setMessageId(model.getMessageId());
-		mbMessageFlag.setFlag(model.getFlag());
-
-		return mbMessageFlagPersistence.update(mbMessageFlag);
+		return mbMessageFlagPersistence.update(model, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

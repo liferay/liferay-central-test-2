@@ -341,34 +341,7 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 	}
 
 	public Layout updateLayout(Layout model) throws SystemException {
-		Layout layout = new LayoutImpl();
-
-		layout.setNew(false);
-
-		layout.setPlid(model.getPlid());
-		layout.setGroupId(model.getGroupId());
-		layout.setCompanyId(model.getCompanyId());
-		layout.setPrivateLayout(model.getPrivateLayout());
-		layout.setLayoutId(model.getLayoutId());
-		layout.setParentLayoutId(model.getParentLayoutId());
-		layout.setName(model.getName());
-		layout.setTitle(model.getTitle());
-		layout.setDescription(model.getDescription());
-		layout.setType(model.getType());
-		layout.setTypeSettings(model.getTypeSettings());
-		layout.setHidden(model.getHidden());
-		layout.setFriendlyURL(model.getFriendlyURL());
-		layout.setIconImage(model.getIconImage());
-		layout.setIconImageId(model.getIconImageId());
-		layout.setThemeId(model.getThemeId());
-		layout.setColorSchemeId(model.getColorSchemeId());
-		layout.setWapThemeId(model.getWapThemeId());
-		layout.setWapColorSchemeId(model.getWapColorSchemeId());
-		layout.setCss(model.getCss());
-		layout.setPriority(model.getPriority());
-		layout.setDlFolderId(model.getDlFolderId());
-
-		return layoutPersistence.update(layout);
+		return layoutPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

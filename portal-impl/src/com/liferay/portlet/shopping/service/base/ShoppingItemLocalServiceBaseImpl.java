@@ -161,45 +161,7 @@ public abstract class ShoppingItemLocalServiceBaseImpl
 
 	public ShoppingItem updateShoppingItem(ShoppingItem model)
 		throws SystemException {
-		ShoppingItem shoppingItem = new ShoppingItemImpl();
-
-		shoppingItem.setNew(false);
-
-		shoppingItem.setItemId(model.getItemId());
-		shoppingItem.setCompanyId(model.getCompanyId());
-		shoppingItem.setUserId(model.getUserId());
-		shoppingItem.setUserName(model.getUserName());
-		shoppingItem.setCreateDate(model.getCreateDate());
-		shoppingItem.setModifiedDate(model.getModifiedDate());
-		shoppingItem.setCategoryId(model.getCategoryId());
-		shoppingItem.setSku(model.getSku());
-		shoppingItem.setName(model.getName());
-		shoppingItem.setDescription(model.getDescription());
-		shoppingItem.setProperties(model.getProperties());
-		shoppingItem.setFields(model.getFields());
-		shoppingItem.setFieldsQuantities(model.getFieldsQuantities());
-		shoppingItem.setMinQuantity(model.getMinQuantity());
-		shoppingItem.setMaxQuantity(model.getMaxQuantity());
-		shoppingItem.setPrice(model.getPrice());
-		shoppingItem.setDiscount(model.getDiscount());
-		shoppingItem.setTaxable(model.getTaxable());
-		shoppingItem.setShipping(model.getShipping());
-		shoppingItem.setUseShippingFormula(model.getUseShippingFormula());
-		shoppingItem.setRequiresShipping(model.getRequiresShipping());
-		shoppingItem.setStockQuantity(model.getStockQuantity());
-		shoppingItem.setFeatured(model.getFeatured());
-		shoppingItem.setSale(model.getSale());
-		shoppingItem.setSmallImage(model.getSmallImage());
-		shoppingItem.setSmallImageId(model.getSmallImageId());
-		shoppingItem.setSmallImageURL(model.getSmallImageURL());
-		shoppingItem.setMediumImage(model.getMediumImage());
-		shoppingItem.setMediumImageId(model.getMediumImageId());
-		shoppingItem.setMediumImageURL(model.getMediumImageURL());
-		shoppingItem.setLargeImage(model.getLargeImage());
-		shoppingItem.setLargeImageId(model.getLargeImageId());
-		shoppingItem.setLargeImageURL(model.getLargeImageURL());
-
-		return shoppingItemPersistence.update(shoppingItem);
+		return shoppingItemPersistence.update(model, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

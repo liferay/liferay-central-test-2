@@ -305,16 +305,7 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 
 	public PasswordPolicyRel updatePasswordPolicyRel(PasswordPolicyRel model)
 		throws SystemException {
-		PasswordPolicyRel passwordPolicyRel = new PasswordPolicyRelImpl();
-
-		passwordPolicyRel.setNew(false);
-
-		passwordPolicyRel.setPasswordPolicyRelId(model.getPasswordPolicyRelId());
-		passwordPolicyRel.setPasswordPolicyId(model.getPasswordPolicyId());
-		passwordPolicyRel.setClassNameId(model.getClassNameId());
-		passwordPolicyRel.setClassPK(model.getClassPK());
-
-		return passwordPolicyRelPersistence.update(passwordPolicyRel);
+		return passwordPolicyRelPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

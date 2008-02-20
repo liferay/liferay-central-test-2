@@ -119,22 +119,7 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 
 	public ShoppingItemPrice updateShoppingItemPrice(ShoppingItemPrice model)
 		throws SystemException {
-		ShoppingItemPrice shoppingItemPrice = new ShoppingItemPriceImpl();
-
-		shoppingItemPrice.setNew(false);
-
-		shoppingItemPrice.setItemPriceId(model.getItemPriceId());
-		shoppingItemPrice.setItemId(model.getItemId());
-		shoppingItemPrice.setMinQuantity(model.getMinQuantity());
-		shoppingItemPrice.setMaxQuantity(model.getMaxQuantity());
-		shoppingItemPrice.setPrice(model.getPrice());
-		shoppingItemPrice.setDiscount(model.getDiscount());
-		shoppingItemPrice.setTaxable(model.getTaxable());
-		shoppingItemPrice.setShipping(model.getShipping());
-		shoppingItemPrice.setUseShippingFormula(model.getUseShippingFormula());
-		shoppingItemPrice.setStatus(model.getStatus());
-
-		return shoppingItemPricePersistence.update(shoppingItemPrice);
+		return shoppingItemPricePersistence.update(model, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

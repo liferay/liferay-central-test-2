@@ -107,21 +107,7 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 
 	public RatingsEntry updateRatingsEntry(RatingsEntry model)
 		throws SystemException {
-		RatingsEntry ratingsEntry = new RatingsEntryImpl();
-
-		ratingsEntry.setNew(false);
-
-		ratingsEntry.setEntryId(model.getEntryId());
-		ratingsEntry.setCompanyId(model.getCompanyId());
-		ratingsEntry.setUserId(model.getUserId());
-		ratingsEntry.setUserName(model.getUserName());
-		ratingsEntry.setCreateDate(model.getCreateDate());
-		ratingsEntry.setModifiedDate(model.getModifiedDate());
-		ratingsEntry.setClassNameId(model.getClassNameId());
-		ratingsEntry.setClassPK(model.getClassPK());
-		ratingsEntry.setScore(model.getScore());
-
-		return ratingsEntryPersistence.update(ratingsEntry);
+		return ratingsEntryPersistence.update(model, true);
 	}
 
 	public RatingsEntryPersistence getRatingsEntryPersistence() {

@@ -121,23 +121,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	}
 
 	public WikiNode updateWikiNode(WikiNode model) throws SystemException {
-		WikiNode wikiNode = new WikiNodeImpl();
-
-		wikiNode.setNew(false);
-
-		wikiNode.setUuid(model.getUuid());
-		wikiNode.setNodeId(model.getNodeId());
-		wikiNode.setGroupId(model.getGroupId());
-		wikiNode.setCompanyId(model.getCompanyId());
-		wikiNode.setUserId(model.getUserId());
-		wikiNode.setUserName(model.getUserName());
-		wikiNode.setCreateDate(model.getCreateDate());
-		wikiNode.setModifiedDate(model.getModifiedDate());
-		wikiNode.setName(model.getName());
-		wikiNode.setDescription(model.getDescription());
-		wikiNode.setLastPostDate(model.getLastPostDate());
-
-		return wikiNodePersistence.update(wikiNode);
+		return wikiNodePersistence.update(model, true);
 	}
 
 	public WikiNodePersistence getWikiNodePersistence() {

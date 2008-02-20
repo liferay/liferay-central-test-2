@@ -315,30 +315,7 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 	}
 
 	public Address updateAddress(Address model) throws SystemException {
-		Address address = new AddressImpl();
-
-		address.setNew(false);
-
-		address.setAddressId(model.getAddressId());
-		address.setCompanyId(model.getCompanyId());
-		address.setUserId(model.getUserId());
-		address.setUserName(model.getUserName());
-		address.setCreateDate(model.getCreateDate());
-		address.setModifiedDate(model.getModifiedDate());
-		address.setClassNameId(model.getClassNameId());
-		address.setClassPK(model.getClassPK());
-		address.setStreet1(model.getStreet1());
-		address.setStreet2(model.getStreet2());
-		address.setStreet3(model.getStreet3());
-		address.setCity(model.getCity());
-		address.setZip(model.getZip());
-		address.setRegionId(model.getRegionId());
-		address.setCountryId(model.getCountryId());
-		address.setTypeId(model.getTypeId());
-		address.setMailing(model.getMailing());
-		address.setPrimary(model.getPrimary());
-
-		return addressPersistence.update(address);
+		return addressPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

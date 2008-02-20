@@ -115,25 +115,7 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	}
 
 	public IGImage updateIGImage(IGImage model) throws SystemException {
-		IGImage igImage = new IGImageImpl();
-
-		igImage.setNew(false);
-
-		igImage.setUuid(model.getUuid());
-		igImage.setImageId(model.getImageId());
-		igImage.setCompanyId(model.getCompanyId());
-		igImage.setUserId(model.getUserId());
-		igImage.setCreateDate(model.getCreateDate());
-		igImage.setModifiedDate(model.getModifiedDate());
-		igImage.setFolderId(model.getFolderId());
-		igImage.setName(model.getName());
-		igImage.setDescription(model.getDescription());
-		igImage.setSmallImageId(model.getSmallImageId());
-		igImage.setLargeImageId(model.getLargeImageId());
-		igImage.setCustom1ImageId(model.getCustom1ImageId());
-		igImage.setCustom2ImageId(model.getCustom2ImageId());
-
-		return igImagePersistence.update(igImage);
+		return igImagePersistence.update(model, true);
 	}
 
 	public IGFolderLocalService getIGFolderLocalService() {

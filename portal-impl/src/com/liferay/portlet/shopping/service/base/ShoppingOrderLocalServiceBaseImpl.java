@@ -188,63 +188,7 @@ public abstract class ShoppingOrderLocalServiceBaseImpl
 
 	public ShoppingOrder updateShoppingOrder(ShoppingOrder model)
 		throws SystemException {
-		ShoppingOrder shoppingOrder = new ShoppingOrderImpl();
-
-		shoppingOrder.setNew(false);
-
-		shoppingOrder.setOrderId(model.getOrderId());
-		shoppingOrder.setGroupId(model.getGroupId());
-		shoppingOrder.setCompanyId(model.getCompanyId());
-		shoppingOrder.setUserId(model.getUserId());
-		shoppingOrder.setUserName(model.getUserName());
-		shoppingOrder.setCreateDate(model.getCreateDate());
-		shoppingOrder.setModifiedDate(model.getModifiedDate());
-		shoppingOrder.setNumber(model.getNumber());
-		shoppingOrder.setTax(model.getTax());
-		shoppingOrder.setShipping(model.getShipping());
-		shoppingOrder.setAltShipping(model.getAltShipping());
-		shoppingOrder.setRequiresShipping(model.getRequiresShipping());
-		shoppingOrder.setInsure(model.getInsure());
-		shoppingOrder.setInsurance(model.getInsurance());
-		shoppingOrder.setCouponCodes(model.getCouponCodes());
-		shoppingOrder.setCouponDiscount(model.getCouponDiscount());
-		shoppingOrder.setBillingFirstName(model.getBillingFirstName());
-		shoppingOrder.setBillingLastName(model.getBillingLastName());
-		shoppingOrder.setBillingEmailAddress(model.getBillingEmailAddress());
-		shoppingOrder.setBillingCompany(model.getBillingCompany());
-		shoppingOrder.setBillingStreet(model.getBillingStreet());
-		shoppingOrder.setBillingCity(model.getBillingCity());
-		shoppingOrder.setBillingState(model.getBillingState());
-		shoppingOrder.setBillingZip(model.getBillingZip());
-		shoppingOrder.setBillingCountry(model.getBillingCountry());
-		shoppingOrder.setBillingPhone(model.getBillingPhone());
-		shoppingOrder.setShipToBilling(model.getShipToBilling());
-		shoppingOrder.setShippingFirstName(model.getShippingFirstName());
-		shoppingOrder.setShippingLastName(model.getShippingLastName());
-		shoppingOrder.setShippingEmailAddress(model.getShippingEmailAddress());
-		shoppingOrder.setShippingCompany(model.getShippingCompany());
-		shoppingOrder.setShippingStreet(model.getShippingStreet());
-		shoppingOrder.setShippingCity(model.getShippingCity());
-		shoppingOrder.setShippingState(model.getShippingState());
-		shoppingOrder.setShippingZip(model.getShippingZip());
-		shoppingOrder.setShippingCountry(model.getShippingCountry());
-		shoppingOrder.setShippingPhone(model.getShippingPhone());
-		shoppingOrder.setCcName(model.getCcName());
-		shoppingOrder.setCcType(model.getCcType());
-		shoppingOrder.setCcNumber(model.getCcNumber());
-		shoppingOrder.setCcExpMonth(model.getCcExpMonth());
-		shoppingOrder.setCcExpYear(model.getCcExpYear());
-		shoppingOrder.setCcVerNumber(model.getCcVerNumber());
-		shoppingOrder.setComments(model.getComments());
-		shoppingOrder.setPpTxnId(model.getPpTxnId());
-		shoppingOrder.setPpPaymentStatus(model.getPpPaymentStatus());
-		shoppingOrder.setPpPaymentGross(model.getPpPaymentGross());
-		shoppingOrder.setPpReceiverEmail(model.getPpReceiverEmail());
-		shoppingOrder.setPpPayerEmail(model.getPpPayerEmail());
-		shoppingOrder.setSendOrderEmail(model.getSendOrderEmail());
-		shoppingOrder.setSendShippingEmail(model.getSendShippingEmail());
-
-		return shoppingOrderPersistence.update(shoppingOrder);
+		return shoppingOrderPersistence.update(model, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

@@ -300,15 +300,7 @@ public abstract class ResourceLocalServiceBaseImpl
 	}
 
 	public Resource updateResource(Resource model) throws SystemException {
-		Resource resource = new ResourceImpl();
-
-		resource.setNew(false);
-
-		resource.setResourceId(model.getResourceId());
-		resource.setCodeId(model.getCodeId());
-		resource.setPrimKey(model.getPrimKey());
-
-		return resourcePersistence.update(resource);
+		return resourcePersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

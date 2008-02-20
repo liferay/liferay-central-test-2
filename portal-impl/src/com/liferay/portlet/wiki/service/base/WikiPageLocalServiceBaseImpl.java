@@ -158,27 +158,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	}
 
 	public WikiPage updateWikiPage(WikiPage model) throws SystemException {
-		WikiPage wikiPage = new WikiPageImpl();
-
-		wikiPage.setNew(false);
-
-		wikiPage.setUuid(model.getUuid());
-		wikiPage.setPageId(model.getPageId());
-		wikiPage.setResourcePrimKey(model.getResourcePrimKey());
-		wikiPage.setCompanyId(model.getCompanyId());
-		wikiPage.setUserId(model.getUserId());
-		wikiPage.setUserName(model.getUserName());
-		wikiPage.setCreateDate(model.getCreateDate());
-		wikiPage.setNodeId(model.getNodeId());
-		wikiPage.setTitle(model.getTitle());
-		wikiPage.setVersion(model.getVersion());
-		wikiPage.setContent(model.getContent());
-		wikiPage.setFormat(model.getFormat());
-		wikiPage.setHead(model.getHead());
-		wikiPage.setParentTitle(model.getParentTitle());
-		wikiPage.setRedirectTitle(model.getRedirectTitle());
-
-		return wikiPagePersistence.update(wikiPage);
+		return wikiPagePersistence.update(model, true);
 	}
 
 	public WikiNodeLocalService getWikiNodeLocalService() {

@@ -157,24 +157,7 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 
 	public BlogsEntry updateBlogsEntry(BlogsEntry model)
 		throws SystemException {
-		BlogsEntry blogsEntry = new BlogsEntryImpl();
-
-		blogsEntry.setNew(false);
-
-		blogsEntry.setUuid(model.getUuid());
-		blogsEntry.setEntryId(model.getEntryId());
-		blogsEntry.setGroupId(model.getGroupId());
-		blogsEntry.setCompanyId(model.getCompanyId());
-		blogsEntry.setUserId(model.getUserId());
-		blogsEntry.setUserName(model.getUserName());
-		blogsEntry.setCreateDate(model.getCreateDate());
-		blogsEntry.setModifiedDate(model.getModifiedDate());
-		blogsEntry.setTitle(model.getTitle());
-		blogsEntry.setUrlTitle(model.getUrlTitle());
-		blogsEntry.setContent(model.getContent());
-		blogsEntry.setDisplayDate(model.getDisplayDate());
-
-		return blogsEntryPersistence.update(blogsEntry);
+		return blogsEntryPersistence.update(model, true);
 	}
 
 	public BlogsEntryPersistence getBlogsEntryPersistence() {

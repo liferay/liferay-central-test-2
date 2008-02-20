@@ -299,14 +299,7 @@ public abstract class ClassNameLocalServiceBaseImpl
 	}
 
 	public ClassName updateClassName(ClassName model) throws SystemException {
-		ClassName className = new ClassNameImpl();
-
-		className.setNew(false);
-
-		className.setClassNameId(model.getClassNameId());
-		className.setValue(model.getValue());
-
-		return classNamePersistence.update(className);
+		return classNamePersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -115,18 +115,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 
 	public DLFileRank updateDLFileRank(DLFileRank model)
 		throws SystemException {
-		DLFileRank dlFileRank = new DLFileRankImpl();
-
-		dlFileRank.setNew(false);
-
-		dlFileRank.setFileRankId(model.getFileRankId());
-		dlFileRank.setCompanyId(model.getCompanyId());
-		dlFileRank.setUserId(model.getUserId());
-		dlFileRank.setCreateDate(model.getCreateDate());
-		dlFileRank.setFolderId(model.getFolderId());
-		dlFileRank.setName(model.getName());
-
-		return dlFileRankPersistence.update(dlFileRank);
+		return dlFileRankPersistence.update(model, true);
 	}
 
 	public DLFileEntryLocalService getDLFileEntryLocalService() {

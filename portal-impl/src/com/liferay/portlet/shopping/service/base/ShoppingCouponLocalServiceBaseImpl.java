@@ -138,30 +138,7 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 
 	public ShoppingCoupon updateShoppingCoupon(ShoppingCoupon model)
 		throws SystemException {
-		ShoppingCoupon shoppingCoupon = new ShoppingCouponImpl();
-
-		shoppingCoupon.setNew(false);
-
-		shoppingCoupon.setCouponId(model.getCouponId());
-		shoppingCoupon.setGroupId(model.getGroupId());
-		shoppingCoupon.setCompanyId(model.getCompanyId());
-		shoppingCoupon.setUserId(model.getUserId());
-		shoppingCoupon.setUserName(model.getUserName());
-		shoppingCoupon.setCreateDate(model.getCreateDate());
-		shoppingCoupon.setModifiedDate(model.getModifiedDate());
-		shoppingCoupon.setCode(model.getCode());
-		shoppingCoupon.setName(model.getName());
-		shoppingCoupon.setDescription(model.getDescription());
-		shoppingCoupon.setStartDate(model.getStartDate());
-		shoppingCoupon.setEndDate(model.getEndDate());
-		shoppingCoupon.setActive(model.getActive());
-		shoppingCoupon.setLimitCategories(model.getLimitCategories());
-		shoppingCoupon.setLimitSkus(model.getLimitSkus());
-		shoppingCoupon.setMinOrder(model.getMinOrder());
-		shoppingCoupon.setDiscount(model.getDiscount());
-		shoppingCoupon.setDiscountType(model.getDiscountType());
-
-		return shoppingCouponPersistence.update(shoppingCoupon);
+		return shoppingCouponPersistence.update(model, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

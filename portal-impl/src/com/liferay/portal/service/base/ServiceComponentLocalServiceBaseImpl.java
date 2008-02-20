@@ -306,17 +306,7 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 
 	public ServiceComponent updateServiceComponent(ServiceComponent model)
 		throws SystemException {
-		ServiceComponent serviceComponent = new ServiceComponentImpl();
-
-		serviceComponent.setNew(false);
-
-		serviceComponent.setServiceComponentId(model.getServiceComponentId());
-		serviceComponent.setBuildNamespace(model.getBuildNamespace());
-		serviceComponent.setBuildNumber(model.getBuildNumber());
-		serviceComponent.setBuildDate(model.getBuildDate());
-		serviceComponent.setData(model.getData());
-
-		return serviceComponentPersistence.update(serviceComponent);
+		return serviceComponentPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

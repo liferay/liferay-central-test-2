@@ -98,19 +98,7 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 
 	public SCProductScreenshot updateSCProductScreenshot(
 		SCProductScreenshot model) throws SystemException {
-		SCProductScreenshot scProductScreenshot = new SCProductScreenshotImpl();
-
-		scProductScreenshot.setNew(false);
-
-		scProductScreenshot.setProductScreenshotId(model.getProductScreenshotId());
-		scProductScreenshot.setCompanyId(model.getCompanyId());
-		scProductScreenshot.setGroupId(model.getGroupId());
-		scProductScreenshot.setProductEntryId(model.getProductEntryId());
-		scProductScreenshot.setThumbnailId(model.getThumbnailId());
-		scProductScreenshot.setFullImageId(model.getFullImageId());
-		scProductScreenshot.setPriority(model.getPriority());
-
-		return scProductScreenshotPersistence.update(scProductScreenshot);
+		return scProductScreenshotPersistence.update(model, true);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

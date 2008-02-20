@@ -121,23 +121,7 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 
 	public SCFrameworkVersion updateSCFrameworkVersion(SCFrameworkVersion model)
 		throws SystemException {
-		SCFrameworkVersion scFrameworkVersion = new SCFrameworkVersionImpl();
-
-		scFrameworkVersion.setNew(false);
-
-		scFrameworkVersion.setFrameworkVersionId(model.getFrameworkVersionId());
-		scFrameworkVersion.setGroupId(model.getGroupId());
-		scFrameworkVersion.setCompanyId(model.getCompanyId());
-		scFrameworkVersion.setUserId(model.getUserId());
-		scFrameworkVersion.setUserName(model.getUserName());
-		scFrameworkVersion.setCreateDate(model.getCreateDate());
-		scFrameworkVersion.setModifiedDate(model.getModifiedDate());
-		scFrameworkVersion.setName(model.getName());
-		scFrameworkVersion.setUrl(model.getUrl());
-		scFrameworkVersion.setActive(model.getActive());
-		scFrameworkVersion.setPriority(model.getPriority());
-
-		return scFrameworkVersionPersistence.update(scFrameworkVersion);
+		return scFrameworkVersionPersistence.update(model, true);
 	}
 
 	public SCLicenseLocalService getSCLicenseLocalService() {

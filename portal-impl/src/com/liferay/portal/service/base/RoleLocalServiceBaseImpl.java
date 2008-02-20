@@ -302,19 +302,7 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	}
 
 	public Role updateRole(Role model) throws SystemException {
-		Role role = new RoleImpl();
-
-		role.setNew(false);
-
-		role.setRoleId(model.getRoleId());
-		role.setCompanyId(model.getCompanyId());
-		role.setClassNameId(model.getClassNameId());
-		role.setClassPK(model.getClassPK());
-		role.setName(model.getName());
-		role.setDescription(model.getDescription());
-		role.setType(model.getType());
-
-		return rolePersistence.update(role);
+		return rolePersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

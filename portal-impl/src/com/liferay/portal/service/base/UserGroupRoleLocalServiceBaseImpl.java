@@ -297,15 +297,7 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 
 	public UserGroupRole updateUserGroupRole(UserGroupRole model)
 		throws SystemException {
-		UserGroupRole userGroupRole = new UserGroupRoleImpl();
-
-		userGroupRole.setNew(false);
-
-		userGroupRole.setUserId(model.getUserId());
-		userGroupRole.setGroupId(model.getGroupId());
-		userGroupRole.setRoleId(model.getRoleId());
-
-		return userGroupRolePersistence.update(userGroupRole);
+		return userGroupRolePersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

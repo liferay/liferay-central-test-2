@@ -198,41 +198,7 @@ public abstract class JournalArticleLocalServiceBaseImpl
 
 	public JournalArticle updateJournalArticle(JournalArticle model)
 		throws SystemException {
-		JournalArticle journalArticle = new JournalArticleImpl();
-
-		journalArticle.setNew(false);
-
-		journalArticle.setUuid(model.getUuid());
-		journalArticle.setId(model.getId());
-		journalArticle.setResourcePrimKey(model.getResourcePrimKey());
-		journalArticle.setGroupId(model.getGroupId());
-		journalArticle.setCompanyId(model.getCompanyId());
-		journalArticle.setUserId(model.getUserId());
-		journalArticle.setUserName(model.getUserName());
-		journalArticle.setCreateDate(model.getCreateDate());
-		journalArticle.setModifiedDate(model.getModifiedDate());
-		journalArticle.setArticleId(model.getArticleId());
-		journalArticle.setVersion(model.getVersion());
-		journalArticle.setTitle(model.getTitle());
-		journalArticle.setDescription(model.getDescription());
-		journalArticle.setContent(model.getContent());
-		journalArticle.setType(model.getType());
-		journalArticle.setStructureId(model.getStructureId());
-		journalArticle.setTemplateId(model.getTemplateId());
-		journalArticle.setDisplayDate(model.getDisplayDate());
-		journalArticle.setApproved(model.getApproved());
-		journalArticle.setApprovedByUserId(model.getApprovedByUserId());
-		journalArticle.setApprovedByUserName(model.getApprovedByUserName());
-		journalArticle.setApprovedDate(model.getApprovedDate());
-		journalArticle.setExpired(model.getExpired());
-		journalArticle.setExpirationDate(model.getExpirationDate());
-		journalArticle.setReviewDate(model.getReviewDate());
-		journalArticle.setIndexable(model.getIndexable());
-		journalArticle.setSmallImage(model.getSmallImage());
-		journalArticle.setSmallImageId(model.getSmallImageId());
-		journalArticle.setSmallImageURL(model.getSmallImageURL());
-
-		return journalArticlePersistence.update(journalArticle);
+		return journalArticlePersistence.update(model, true);
 	}
 
 	public JournalArticlePersistence getJournalArticlePersistence() {

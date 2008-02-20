@@ -149,35 +149,7 @@ public abstract class JournalFeedLocalServiceBaseImpl
 
 	public JournalFeed updateJournalFeed(JournalFeed model)
 		throws SystemException {
-		JournalFeed journalFeed = new JournalFeedImpl();
-
-		journalFeed.setNew(false);
-
-		journalFeed.setUuid(model.getUuid());
-		journalFeed.setId(model.getId());
-		journalFeed.setGroupId(model.getGroupId());
-		journalFeed.setCompanyId(model.getCompanyId());
-		journalFeed.setUserId(model.getUserId());
-		journalFeed.setUserName(model.getUserName());
-		journalFeed.setCreateDate(model.getCreateDate());
-		journalFeed.setModifiedDate(model.getModifiedDate());
-		journalFeed.setFeedId(model.getFeedId());
-		journalFeed.setName(model.getName());
-		journalFeed.setDescription(model.getDescription());
-		journalFeed.setType(model.getType());
-		journalFeed.setStructureId(model.getStructureId());
-		journalFeed.setTemplateId(model.getTemplateId());
-		journalFeed.setRendererTemplateId(model.getRendererTemplateId());
-		journalFeed.setDelta(model.getDelta());
-		journalFeed.setOrderByCol(model.getOrderByCol());
-		journalFeed.setOrderByType(model.getOrderByType());
-		journalFeed.setTargetLayoutFriendlyUrl(model.getTargetLayoutFriendlyUrl());
-		journalFeed.setTargetPortletId(model.getTargetPortletId());
-		journalFeed.setContentField(model.getContentField());
-		journalFeed.setFeedType(model.getFeedType());
-		journalFeed.setFeedVersion(model.getFeedVersion());
-
-		return journalFeedPersistence.update(journalFeed);
+		return journalFeedPersistence.update(model, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

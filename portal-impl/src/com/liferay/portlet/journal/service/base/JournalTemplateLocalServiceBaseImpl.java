@@ -148,30 +148,7 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 
 	public JournalTemplate updateJournalTemplate(JournalTemplate model)
 		throws SystemException {
-		JournalTemplate journalTemplate = new JournalTemplateImpl();
-
-		journalTemplate.setNew(false);
-
-		journalTemplate.setUuid(model.getUuid());
-		journalTemplate.setId(model.getId());
-		journalTemplate.setGroupId(model.getGroupId());
-		journalTemplate.setCompanyId(model.getCompanyId());
-		journalTemplate.setUserId(model.getUserId());
-		journalTemplate.setUserName(model.getUserName());
-		journalTemplate.setCreateDate(model.getCreateDate());
-		journalTemplate.setModifiedDate(model.getModifiedDate());
-		journalTemplate.setTemplateId(model.getTemplateId());
-		journalTemplate.setStructureId(model.getStructureId());
-		journalTemplate.setName(model.getName());
-		journalTemplate.setDescription(model.getDescription());
-		journalTemplate.setXsl(model.getXsl());
-		journalTemplate.setLangType(model.getLangType());
-		journalTemplate.setCacheable(model.getCacheable());
-		journalTemplate.setSmallImage(model.getSmallImage());
-		journalTemplate.setSmallImageId(model.getSmallImageId());
-		journalTemplate.setSmallImageURL(model.getSmallImageURL());
-
-		return journalTemplatePersistence.update(journalTemplate);
+		return journalTemplatePersistence.update(model, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

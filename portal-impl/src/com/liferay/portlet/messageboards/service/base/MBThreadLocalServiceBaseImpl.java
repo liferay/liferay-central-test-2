@@ -149,20 +149,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	}
 
 	public MBThread updateMBThread(MBThread model) throws SystemException {
-		MBThread mbThread = new MBThreadImpl();
-
-		mbThread.setNew(false);
-
-		mbThread.setThreadId(model.getThreadId());
-		mbThread.setCategoryId(model.getCategoryId());
-		mbThread.setRootMessageId(model.getRootMessageId());
-		mbThread.setMessageCount(model.getMessageCount());
-		mbThread.setViewCount(model.getViewCount());
-		mbThread.setLastPostByUserId(model.getLastPostByUserId());
-		mbThread.setLastPostDate(model.getLastPostDate());
-		mbThread.setPriority(model.getPriority());
-
-		return mbThreadPersistence.update(mbThread);
+		return mbThreadPersistence.update(model, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

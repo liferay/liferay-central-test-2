@@ -112,24 +112,7 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 
 	public PollsQuestion updatePollsQuestion(PollsQuestion model)
 		throws SystemException {
-		PollsQuestion pollsQuestion = new PollsQuestionImpl();
-
-		pollsQuestion.setNew(false);
-
-		pollsQuestion.setUuid(model.getUuid());
-		pollsQuestion.setQuestionId(model.getQuestionId());
-		pollsQuestion.setGroupId(model.getGroupId());
-		pollsQuestion.setCompanyId(model.getCompanyId());
-		pollsQuestion.setUserId(model.getUserId());
-		pollsQuestion.setUserName(model.getUserName());
-		pollsQuestion.setCreateDate(model.getCreateDate());
-		pollsQuestion.setModifiedDate(model.getModifiedDate());
-		pollsQuestion.setTitle(model.getTitle());
-		pollsQuestion.setDescription(model.getDescription());
-		pollsQuestion.setExpirationDate(model.getExpirationDate());
-		pollsQuestion.setLastVoteDate(model.getLastVoteDate());
-
-		return pollsQuestionPersistence.update(pollsQuestion);
+		return pollsQuestionPersistence.update(model, true);
 	}
 
 	public PollsChoiceLocalService getPollsChoiceLocalService() {

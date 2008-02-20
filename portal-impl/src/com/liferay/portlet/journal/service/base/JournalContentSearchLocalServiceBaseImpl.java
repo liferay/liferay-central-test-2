@@ -141,19 +141,7 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 
 	public JournalContentSearch updateJournalContentSearch(
 		JournalContentSearch model) throws SystemException {
-		JournalContentSearch journalContentSearch = new JournalContentSearchImpl();
-
-		journalContentSearch.setNew(false);
-
-		journalContentSearch.setContentSearchId(model.getContentSearchId());
-		journalContentSearch.setGroupId(model.getGroupId());
-		journalContentSearch.setCompanyId(model.getCompanyId());
-		journalContentSearch.setPrivateLayout(model.getPrivateLayout());
-		journalContentSearch.setLayoutId(model.getLayoutId());
-		journalContentSearch.setPortletId(model.getPortletId());
-		journalContentSearch.setArticleId(model.getArticleId());
-
-		return journalContentSearchPersistence.update(journalContentSearch);
+		return journalContentSearchPersistence.update(model, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

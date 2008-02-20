@@ -305,18 +305,7 @@ public abstract class PluginSettingLocalServiceBaseImpl
 
 	public PluginSetting updatePluginSetting(PluginSetting model)
 		throws SystemException {
-		PluginSetting pluginSetting = new PluginSettingImpl();
-
-		pluginSetting.setNew(false);
-
-		pluginSetting.setPluginSettingId(model.getPluginSettingId());
-		pluginSetting.setCompanyId(model.getCompanyId());
-		pluginSetting.setPluginId(model.getPluginId());
-		pluginSetting.setPluginType(model.getPluginType());
-		pluginSetting.setRoles(model.getRoles());
-		pluginSetting.setActive(model.getActive());
-
-		return pluginSettingPersistence.update(pluginSetting);
+		return pluginSettingPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

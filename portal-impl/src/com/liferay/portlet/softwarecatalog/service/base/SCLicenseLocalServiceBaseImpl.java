@@ -98,18 +98,7 @@ public abstract class SCLicenseLocalServiceBaseImpl
 	}
 
 	public SCLicense updateSCLicense(SCLicense model) throws SystemException {
-		SCLicense scLicense = new SCLicenseImpl();
-
-		scLicense.setNew(false);
-
-		scLicense.setLicenseId(model.getLicenseId());
-		scLicense.setName(model.getName());
-		scLicense.setUrl(model.getUrl());
-		scLicense.setOpenSource(model.getOpenSource());
-		scLicense.setActive(model.getActive());
-		scLicense.setRecommended(model.getRecommended());
-
-		return scLicensePersistence.update(scLicense);
+		return scLicensePersistence.update(model, true);
 	}
 
 	public SCLicensePersistence getSCLicensePersistence() {

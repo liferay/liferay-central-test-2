@@ -147,24 +147,7 @@ public abstract class MBCategoryLocalServiceBaseImpl
 
 	public MBCategory updateMBCategory(MBCategory model)
 		throws SystemException {
-		MBCategory mbCategory = new MBCategoryImpl();
-
-		mbCategory.setNew(false);
-
-		mbCategory.setUuid(model.getUuid());
-		mbCategory.setCategoryId(model.getCategoryId());
-		mbCategory.setGroupId(model.getGroupId());
-		mbCategory.setCompanyId(model.getCompanyId());
-		mbCategory.setUserId(model.getUserId());
-		mbCategory.setUserName(model.getUserName());
-		mbCategory.setCreateDate(model.getCreateDate());
-		mbCategory.setModifiedDate(model.getModifiedDate());
-		mbCategory.setParentCategoryId(model.getParentCategoryId());
-		mbCategory.setName(model.getName());
-		mbCategory.setDescription(model.getDescription());
-		mbCategory.setLastPostDate(model.getLastPostDate());
-
-		return mbCategoryPersistence.update(mbCategory);
+		return mbCategoryPersistence.update(model, true);
 	}
 
 	public MBBanLocalService getMBBanLocalService() {

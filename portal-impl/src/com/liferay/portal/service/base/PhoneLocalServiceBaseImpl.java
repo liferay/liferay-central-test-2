@@ -308,24 +308,7 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	}
 
 	public Phone updatePhone(Phone model) throws SystemException {
-		Phone phone = new PhoneImpl();
-
-		phone.setNew(false);
-
-		phone.setPhoneId(model.getPhoneId());
-		phone.setCompanyId(model.getCompanyId());
-		phone.setUserId(model.getUserId());
-		phone.setUserName(model.getUserName());
-		phone.setCreateDate(model.getCreateDate());
-		phone.setModifiedDate(model.getModifiedDate());
-		phone.setClassNameId(model.getClassNameId());
-		phone.setClassPK(model.getClassPK());
-		phone.setNumber(model.getNumber());
-		phone.setExtension(model.getExtension());
-		phone.setTypeId(model.getTypeId());
-		phone.setPrimary(model.getPrimary());
-
-		return phonePersistence.update(phone);
+		return phonePersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

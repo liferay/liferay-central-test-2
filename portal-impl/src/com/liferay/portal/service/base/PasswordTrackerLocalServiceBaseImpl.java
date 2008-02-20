@@ -305,16 +305,7 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 
 	public PasswordTracker updatePasswordTracker(PasswordTracker model)
 		throws SystemException {
-		PasswordTracker passwordTracker = new PasswordTrackerImpl();
-
-		passwordTracker.setNew(false);
-
-		passwordTracker.setPasswordTrackerId(model.getPasswordTrackerId());
-		passwordTracker.setUserId(model.getUserId());
-		passwordTracker.setCreateDate(model.getCreateDate());
-		passwordTracker.setPassword(model.getPassword());
-
-		return passwordTrackerPersistence.update(passwordTracker);
+		return passwordTrackerPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

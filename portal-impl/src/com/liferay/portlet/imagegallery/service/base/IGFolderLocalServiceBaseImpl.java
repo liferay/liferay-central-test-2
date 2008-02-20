@@ -120,22 +120,7 @@ public abstract class IGFolderLocalServiceBaseImpl
 	}
 
 	public IGFolder updateIGFolder(IGFolder model) throws SystemException {
-		IGFolder igFolder = new IGFolderImpl();
-
-		igFolder.setNew(false);
-
-		igFolder.setUuid(model.getUuid());
-		igFolder.setFolderId(model.getFolderId());
-		igFolder.setGroupId(model.getGroupId());
-		igFolder.setCompanyId(model.getCompanyId());
-		igFolder.setUserId(model.getUserId());
-		igFolder.setCreateDate(model.getCreateDate());
-		igFolder.setModifiedDate(model.getModifiedDate());
-		igFolder.setParentFolderId(model.getParentFolderId());
-		igFolder.setName(model.getName());
-		igFolder.setDescription(model.getDescription());
-
-		return igFolderPersistence.update(igFolder);
+		return igFolderPersistence.update(model, true);
 	}
 
 	public IGFolderPersistence getIGFolderPersistence() {

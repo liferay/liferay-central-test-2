@@ -84,18 +84,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 
 	public RatingsStats updateRatingsStats(RatingsStats model)
 		throws SystemException {
-		RatingsStats ratingsStats = new RatingsStatsImpl();
-
-		ratingsStats.setNew(false);
-
-		ratingsStats.setStatsId(model.getStatsId());
-		ratingsStats.setClassNameId(model.getClassNameId());
-		ratingsStats.setClassPK(model.getClassPK());
-		ratingsStats.setTotalEntries(model.getTotalEntries());
-		ratingsStats.setTotalScore(model.getTotalScore());
-		ratingsStats.setAverageScore(model.getAverageScore());
-
-		return ratingsStatsPersistence.update(ratingsStats);
+		return ratingsStatsPersistence.update(model, true);
 	}
 
 	public RatingsEntryLocalService getRatingsEntryLocalService() {

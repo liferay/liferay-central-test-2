@@ -142,24 +142,7 @@ public abstract class JournalStructureLocalServiceBaseImpl
 
 	public JournalStructure updateJournalStructure(JournalStructure model)
 		throws SystemException {
-		JournalStructure journalStructure = new JournalStructureImpl();
-
-		journalStructure.setNew(false);
-
-		journalStructure.setUuid(model.getUuid());
-		journalStructure.setId(model.getId());
-		journalStructure.setGroupId(model.getGroupId());
-		journalStructure.setCompanyId(model.getCompanyId());
-		journalStructure.setUserId(model.getUserId());
-		journalStructure.setUserName(model.getUserName());
-		journalStructure.setCreateDate(model.getCreateDate());
-		journalStructure.setModifiedDate(model.getModifiedDate());
-		journalStructure.setStructureId(model.getStructureId());
-		journalStructure.setName(model.getName());
-		journalStructure.setDescription(model.getDescription());
-		journalStructure.setXsd(model.getXsd());
-
-		return journalStructurePersistence.update(journalStructure);
+		return journalStructurePersistence.update(model, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

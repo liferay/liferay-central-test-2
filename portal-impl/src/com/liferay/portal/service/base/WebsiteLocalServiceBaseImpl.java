@@ -308,23 +308,7 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	}
 
 	public Website updateWebsite(Website model) throws SystemException {
-		Website website = new WebsiteImpl();
-
-		website.setNew(false);
-
-		website.setWebsiteId(model.getWebsiteId());
-		website.setCompanyId(model.getCompanyId());
-		website.setUserId(model.getUserId());
-		website.setUserName(model.getUserName());
-		website.setCreateDate(model.getCreateDate());
-		website.setModifiedDate(model.getModifiedDate());
-		website.setClassNameId(model.getClassNameId());
-		website.setClassPK(model.getClassPK());
-		website.setUrl(model.getUrl());
-		website.setTypeId(model.getTypeId());
-		website.setPrimary(model.getPrimary());
-
-		return websitePersistence.update(website);
+		return websitePersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

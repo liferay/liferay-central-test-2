@@ -302,16 +302,7 @@ public abstract class PermissionLocalServiceBaseImpl
 
 	public Permission updatePermission(Permission model)
 		throws SystemException {
-		Permission permission = new PermissionImpl();
-
-		permission.setNew(false);
-
-		permission.setPermissionId(model.getPermissionId());
-		permission.setCompanyId(model.getCompanyId());
-		permission.setActionId(model.getActionId());
-		permission.setResourceId(model.getResourceId());
-
-		return permissionPersistence.update(permission);
+		return permissionPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -442,25 +442,7 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	}
 
 	public Group updateGroup(Group model) throws SystemException {
-		Group group = new GroupImpl();
-
-		group.setNew(false);
-
-		group.setGroupId(model.getGroupId());
-		group.setCompanyId(model.getCompanyId());
-		group.setCreatorUserId(model.getCreatorUserId());
-		group.setClassNameId(model.getClassNameId());
-		group.setClassPK(model.getClassPK());
-		group.setParentGroupId(model.getParentGroupId());
-		group.setLiveGroupId(model.getLiveGroupId());
-		group.setName(model.getName());
-		group.setDescription(model.getDescription());
-		group.setType(model.getType());
-		group.setTypeSettings(model.getTypeSettings());
-		group.setFriendlyURL(model.getFriendlyURL());
-		group.setActive(model.getActive());
-
-		return groupPersistence.update(group);
+		return groupPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

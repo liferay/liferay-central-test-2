@@ -319,39 +319,7 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	}
 
 	public Contact updateContact(Contact model) throws SystemException {
-		Contact contact = new ContactImpl();
-
-		contact.setNew(false);
-
-		contact.setContactId(model.getContactId());
-		contact.setCompanyId(model.getCompanyId());
-		contact.setUserId(model.getUserId());
-		contact.setUserName(model.getUserName());
-		contact.setCreateDate(model.getCreateDate());
-		contact.setModifiedDate(model.getModifiedDate());
-		contact.setAccountId(model.getAccountId());
-		contact.setParentContactId(model.getParentContactId());
-		contact.setFirstName(model.getFirstName());
-		contact.setMiddleName(model.getMiddleName());
-		contact.setLastName(model.getLastName());
-		contact.setPrefixId(model.getPrefixId());
-		contact.setSuffixId(model.getSuffixId());
-		contact.setMale(model.getMale());
-		contact.setBirthday(model.getBirthday());
-		contact.setSmsSn(model.getSmsSn());
-		contact.setAimSn(model.getAimSn());
-		contact.setIcqSn(model.getIcqSn());
-		contact.setJabberSn(model.getJabberSn());
-		contact.setMsnSn(model.getMsnSn());
-		contact.setSkypeSn(model.getSkypeSn());
-		contact.setYmSn(model.getYmSn());
-		contact.setEmployeeStatusId(model.getEmployeeStatusId());
-		contact.setEmployeeNumber(model.getEmployeeNumber());
-		contact.setJobTitle(model.getJobTitle());
-		contact.setJobClass(model.getJobClass());
-		contact.setHoursOfOperation(model.getHoursOfOperation());
-
-		return contactPersistence.update(contact);
+		return contactPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

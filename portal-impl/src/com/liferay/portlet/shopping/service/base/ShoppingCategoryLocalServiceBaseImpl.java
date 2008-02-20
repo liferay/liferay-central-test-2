@@ -138,22 +138,7 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 
 	public ShoppingCategory updateShoppingCategory(ShoppingCategory model)
 		throws SystemException {
-		ShoppingCategory shoppingCategory = new ShoppingCategoryImpl();
-
-		shoppingCategory.setNew(false);
-
-		shoppingCategory.setCategoryId(model.getCategoryId());
-		shoppingCategory.setGroupId(model.getGroupId());
-		shoppingCategory.setCompanyId(model.getCompanyId());
-		shoppingCategory.setUserId(model.getUserId());
-		shoppingCategory.setUserName(model.getUserName());
-		shoppingCategory.setCreateDate(model.getCreateDate());
-		shoppingCategory.setModifiedDate(model.getModifiedDate());
-		shoppingCategory.setParentCategoryId(model.getParentCategoryId());
-		shoppingCategory.setName(model.getName());
-		shoppingCategory.setDescription(model.getDescription());
-
-		return shoppingCategoryPersistence.update(shoppingCategory);
+		return shoppingCategoryPersistence.update(model, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

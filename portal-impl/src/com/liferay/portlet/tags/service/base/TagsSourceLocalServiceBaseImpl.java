@@ -96,16 +96,7 @@ public abstract class TagsSourceLocalServiceBaseImpl
 
 	public TagsSource updateTagsSource(TagsSource model)
 		throws SystemException {
-		TagsSource tagsSource = new TagsSourceImpl();
-
-		tagsSource.setNew(false);
-
-		tagsSource.setSourceId(model.getSourceId());
-		tagsSource.setParentSourceId(model.getParentSourceId());
-		tagsSource.setName(model.getName());
-		tagsSource.setAcronym(model.getAcronym());
-
-		return tagsSourcePersistence.update(tagsSource);
+		return tagsSourcePersistence.update(model, true);
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {

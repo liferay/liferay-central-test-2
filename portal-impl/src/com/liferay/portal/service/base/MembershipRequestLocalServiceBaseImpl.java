@@ -312,22 +312,7 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 
 	public MembershipRequest updateMembershipRequest(MembershipRequest model)
 		throws SystemException {
-		MembershipRequest membershipRequest = new MembershipRequestImpl();
-
-		membershipRequest.setNew(false);
-
-		membershipRequest.setMembershipRequestId(model.getMembershipRequestId());
-		membershipRequest.setCompanyId(model.getCompanyId());
-		membershipRequest.setUserId(model.getUserId());
-		membershipRequest.setCreateDate(model.getCreateDate());
-		membershipRequest.setGroupId(model.getGroupId());
-		membershipRequest.setComments(model.getComments());
-		membershipRequest.setReplyComments(model.getReplyComments());
-		membershipRequest.setReplyDate(model.getReplyDate());
-		membershipRequest.setReplierUserId(model.getReplierUserId());
-		membershipRequest.setStatusId(model.getStatusId());
-
-		return membershipRequestPersistence.update(membershipRequest);
+		return membershipRequestPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -114,17 +114,7 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 
 	public ShoppingItemField updateShoppingItemField(ShoppingItemField model)
 		throws SystemException {
-		ShoppingItemField shoppingItemField = new ShoppingItemFieldImpl();
-
-		shoppingItemField.setNew(false);
-
-		shoppingItemField.setItemFieldId(model.getItemFieldId());
-		shoppingItemField.setItemId(model.getItemId());
-		shoppingItemField.setName(model.getName());
-		shoppingItemField.setValues(model.getValues());
-		shoppingItemField.setDescription(model.getDescription());
-
-		return shoppingItemFieldPersistence.update(shoppingItemField);
+		return shoppingItemFieldPersistence.update(model, true);
 	}
 
 	public ShoppingCartLocalService getShoppingCartLocalService() {

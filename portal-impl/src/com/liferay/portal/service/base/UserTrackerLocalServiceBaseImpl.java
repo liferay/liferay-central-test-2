@@ -309,20 +309,7 @@ public abstract class UserTrackerLocalServiceBaseImpl
 
 	public UserTracker updateUserTracker(UserTracker model)
 		throws SystemException {
-		UserTracker userTracker = new UserTrackerImpl();
-
-		userTracker.setNew(false);
-
-		userTracker.setUserTrackerId(model.getUserTrackerId());
-		userTracker.setCompanyId(model.getCompanyId());
-		userTracker.setUserId(model.getUserId());
-		userTracker.setModifiedDate(model.getModifiedDate());
-		userTracker.setSessionId(model.getSessionId());
-		userTracker.setRemoteAddr(model.getRemoteAddr());
-		userTracker.setRemoteHost(model.getRemoteHost());
-		userTracker.setUserAgent(model.getUserAgent());
-
-		return userTrackerPersistence.update(userTracker);
+		return userTrackerPersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

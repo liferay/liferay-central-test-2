@@ -305,16 +305,7 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 
 	public ResourceCode updateResourceCode(ResourceCode model)
 		throws SystemException {
-		ResourceCode resourceCode = new ResourceCodeImpl();
-
-		resourceCode.setNew(false);
-
-		resourceCode.setCodeId(model.getCodeId());
-		resourceCode.setCompanyId(model.getCompanyId());
-		resourceCode.setName(model.getName());
-		resourceCode.setScope(model.getScope());
-
-		return resourceCodePersistence.update(resourceCode);
+		return resourceCodePersistence.update(model, true);
 	}
 
 	public AccountLocalService getAccountLocalService() {

@@ -121,20 +121,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	}
 
 	public MBBan updateMBBan(MBBan model) throws SystemException {
-		MBBan mbBan = new MBBanImpl();
-
-		mbBan.setNew(false);
-
-		mbBan.setBanId(model.getBanId());
-		mbBan.setGroupId(model.getGroupId());
-		mbBan.setCompanyId(model.getCompanyId());
-		mbBan.setUserId(model.getUserId());
-		mbBan.setUserName(model.getUserName());
-		mbBan.setCreateDate(model.getCreateDate());
-		mbBan.setModifiedDate(model.getModifiedDate());
-		mbBan.setBanUserId(model.getBanUserId());
-
-		return mbBanPersistence.update(mbBan);
+		return mbBanPersistence.update(model, true);
 	}
 
 	public MBBanPersistence getMBBanPersistence() {

@@ -119,19 +119,7 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 
 	public JournalArticleImage updateJournalArticleImage(
 		JournalArticleImage model) throws SystemException {
-		JournalArticleImage journalArticleImage = new JournalArticleImageImpl();
-
-		journalArticleImage.setNew(false);
-
-		journalArticleImage.setArticleImageId(model.getArticleImageId());
-		journalArticleImage.setGroupId(model.getGroupId());
-		journalArticleImage.setArticleId(model.getArticleId());
-		journalArticleImage.setVersion(model.getVersion());
-		journalArticleImage.setElName(model.getElName());
-		journalArticleImage.setLanguageId(model.getLanguageId());
-		journalArticleImage.setTempImage(model.getTempImage());
-
-		return journalArticleImagePersistence.update(journalArticleImage);
+		return journalArticleImagePersistence.update(model, true);
 	}
 
 	public JournalArticleLocalService getJournalArticleLocalService() {

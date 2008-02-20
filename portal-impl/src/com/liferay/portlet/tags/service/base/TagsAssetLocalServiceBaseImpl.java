@@ -196,34 +196,7 @@ public abstract class TagsAssetLocalServiceBaseImpl
 	}
 
 	public TagsAsset updateTagsAsset(TagsAsset model) throws SystemException {
-		TagsAsset tagsAsset = new TagsAssetImpl();
-
-		tagsAsset.setNew(false);
-
-		tagsAsset.setAssetId(model.getAssetId());
-		tagsAsset.setGroupId(model.getGroupId());
-		tagsAsset.setCompanyId(model.getCompanyId());
-		tagsAsset.setUserId(model.getUserId());
-		tagsAsset.setUserName(model.getUserName());
-		tagsAsset.setCreateDate(model.getCreateDate());
-		tagsAsset.setModifiedDate(model.getModifiedDate());
-		tagsAsset.setClassNameId(model.getClassNameId());
-		tagsAsset.setClassPK(model.getClassPK());
-		tagsAsset.setStartDate(model.getStartDate());
-		tagsAsset.setEndDate(model.getEndDate());
-		tagsAsset.setPublishDate(model.getPublishDate());
-		tagsAsset.setExpirationDate(model.getExpirationDate());
-		tagsAsset.setMimeType(model.getMimeType());
-		tagsAsset.setTitle(model.getTitle());
-		tagsAsset.setDescription(model.getDescription());
-		tagsAsset.setSummary(model.getSummary());
-		tagsAsset.setUrl(model.getUrl());
-		tagsAsset.setHeight(model.getHeight());
-		tagsAsset.setWidth(model.getWidth());
-		tagsAsset.setPriority(model.getPriority());
-		tagsAsset.setViewCount(model.getViewCount());
-
-		return tagsAssetPersistence.update(tagsAsset);
+		return tagsAssetPersistence.update(model, true);
 	}
 
 	public TagsAssetPersistence getTagsAssetPersistence() {
