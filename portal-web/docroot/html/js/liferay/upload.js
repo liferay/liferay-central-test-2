@@ -25,6 +25,8 @@ Liferay.Upload = new Class({
 		instance._classicUploaderParam = 'uploader=classic';
 		instance._newUploaderParam = 'uploader=new';
 
+		instance._flashVersion = deconcept.SWFObjectUtil.getPlayerVersion().major;
+
 		// Check for an override via the query string
 
 		var loc = location.href;
@@ -32,11 +34,7 @@ Liferay.Upload = new Class({
 		if (loc.indexOf(instance._classicUploaderParam) > -1 && instance._fallbackContainer.length) {
 			instance._fallbackContainer.show();
 
-			if (!instance._fallbackIframe) {
-				instance._fallbackIframe = instance._fallbackContainer.find('iframe[@id$=-iframe]');
-
-				instance._fallbackIframe.height(300);
-			}
+			instance._setupIframe();
 
 			return;
 		}
@@ -57,6 +55,15 @@ Liferay.Upload = new Class({
 		if (instance._fallbackContainer.length) {
 			instance._useFallbackText = Liferay.Language.get('use-the-classic-uploader');
 			instance._useNewUploaderText = Liferay.Language.get('use-the-new-uploader');
+		}
+		
+		if (instance._flashVersion < 9 && instance._fallbackContainer.length) {
+			instance._fallbackContainer.show();
+
+			instance._setupIframe();
+
+
+			return;
 		}
 
 		instance._setupCallbacks();
@@ -336,11 +343,7 @@ Liferay.Upload = new Class({
 						fallback.text(instance._useNewUploaderText);
 						fallback.removeClass(newUploaderClass).addClass(fallbackClass);
 
-						if (!instance._fallbackIframe) {
-							instance._fallbackIframe = instance._fallbackContainer.find('iframe[@id$=-iframe]');
-
-							instance._fallbackIframe.height(300);
-						}
+						instance._setupIframe();
 
 						var classicUploaderUrl = '';
 
@@ -362,7 +365,16 @@ Liferay.Upload = new Class({
 			);
 		}
 	},
+	
+	_setupIframe: function() {
+		var instance = this;
 
+		if (!instance._fallbackIframe) {
+			instance._fallbackIframe = instance._fallbackContainer.find('iframe[@id$=-iframe]');
+
+			instance._fallbackIframe.height(300);
+		}
+	},
 
 	_setupUploader: function() {
 		var instance = this;
