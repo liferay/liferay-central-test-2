@@ -106,7 +106,7 @@ public class CookieKeys {
 	}
 
 	public static String getCookie(HttpServletRequest req, String name) {
-		String value = CookieUtil.get(req.getCookies(), name);
+		String value = CookieUtil.get(req, name);
 
 		if ((value != null) && isEncodedCookie(name)) {
 			try {

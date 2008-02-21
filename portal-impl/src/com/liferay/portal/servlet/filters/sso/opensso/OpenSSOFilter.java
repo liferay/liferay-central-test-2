@@ -115,7 +115,7 @@ public class OpenSSOFilter extends BaseFilter {
 	protected boolean isAuthenticated(
 		HttpServletRequest req, String cookieName) {
 
-		String cookieValue = CookieUtil.get(req.getCookies(), cookieName);
+		String cookieValue = CookieUtil.get(req, cookieName);
 
 		if (Validator.isNotNull(cookieValue)) {
 			HttpSession ses = req.getSession();

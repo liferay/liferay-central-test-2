@@ -23,10 +23,9 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * <a href="CookieUtil.java.html"><b><i>View Source</i></b></a>
@@ -36,94 +35,24 @@ import javax.servlet.http.Cookie;
  */
 public class CookieUtil {
 
-	public static String get(Cookie[] cookies, String name) {
+	public static String get(HttpServletRequest req, String name) {
+		Cookie[] cookies = req.getCookies();
+
 		if (cookies == null) {
 			return null;
 		}
 
 		for (int i = 0; i < cookies.length; i++) {
-			String cookieName = GetterUtil.getString(cookies[i].getName());
+			Cookie cookie = cookies[i];
+
+			String cookieName = GetterUtil.getString(cookie.getName());
 
 			if (cookieName.equalsIgnoreCase(name)) {
-				return cookies[i].getValue();
+				return cookie.getValue();
 			}
 		}
 
 		return null;
 	}
-
-	public static String get(String cookie, String tag) {
-		if (cookie == null) {
-			return StringPool.BLANK;
-		}
-
-		tag = tag + StringPool.EQUAL;
-
-		if (cookie.startsWith(tag)) {
-			int y = cookie.indexOf(StringPool.SEMICOLON);
-
-			return cookie.substring(tag.length(), y);
-		}
-
-		tag = StringPool.SEMICOLON + tag;
-
-		int x = cookie.indexOf(tag);
-
-		if (x != -1) {
-			int y = cookie.indexOf(StringPool.SEMICOLON, x + 1);
-
-			return cookie.substring(x + tag.length(), y);
-		}
-
-		return StringPool.BLANK;
-	}
-
-	public static String set(String cookie, String tag, String sub) {
-		if (cookie == null) {
-			return StringPool.BLANK;
-		}
-
-		tag = tag + StringPool.EQUAL;
-
-		if (cookie.startsWith(tag)) {
-			int y = cookie.indexOf(StringPool.SEMICOLON);
-
-			StringMaker sm = new StringMaker();
-
-			sm.append(tag);
-			sm.append(sub);
-			sm.append(StringPool.SEMICOLON);
-			sm.append(cookie.substring(y + 1, cookie.length()));
-
-			return sm.toString();
-		}
-
-		tag = StringPool.SEMICOLON + tag;
-
-		int x = cookie.indexOf(tag);
-
-		if (x != -1) {
-			int y = cookie.indexOf(StringPool.SEMICOLON, x + 1);
-
-			StringMaker sm = new StringMaker();
-
-			sm.append(cookie.substring(0, x + tag.length()));
-			sm.append(sub);
-			sm.append(cookie.substring(y, cookie.length()));
-
-			return sm.toString();
-		}
-
-		StringMaker sm = new StringMaker();
-
-		sm.append(cookie);
-		sm.append(tag.substring(1, tag.length()));
-		sm.append(sub);
-		sm.append(StringPool.SEMICOLON);
-
-		return sm.toString();
-	}
-
-	private static final String _JSESSIONID = "jsessionid";
 
 }
