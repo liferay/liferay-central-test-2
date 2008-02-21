@@ -29,6 +29,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="CookieUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -38,12 +42,25 @@ import javax.servlet.http.HttpServletRequest;
 public class CookieUtil {
 
 	public static String get(Cookie[] cookies, String name) {
-		if ((cookies != null) && (cookies.length > 0)) {
-			for (int i = 0; i < cookies.length; i++) {
-				String cookieName = GetterUtil.getString(cookies[i].getName());
+		if (cookies == null) {
+			return null;
+		}
 
-				if (cookieName.equalsIgnoreCase(name)) {
-					return cookies[i].getValue();
+		for (int i = 0; i < cookies.length; i++) {
+			String cookieName = GetterUtil.getString(cookies[i].getName());
+
+			if (cookieName.equalsIgnoreCase(name)) {
+				String value = cookies[i].getValue();
+
+				try {
+					return new String(Hex.decodeHex(value.toCharArray()));
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(e.getMessage());
+					}
+
+					return value;
 				}
 			}
 		}
@@ -77,17 +94,24 @@ public class CookieUtil {
 		return StringPool.BLANK;
 	}
 
-	public static boolean hasSessionIdCookie(HttpServletRequest req) {
-		Cookie[] cookies = req.getCookies();
-
-		String jsessionid = get(cookies, _JSESSIONID);
-
-		if (jsessionid != null) {
-			return true;
-		}
-		else {
+	public static boolean has(Cookie[] cookies, String name) {
+		if (cookies == null) {
 			return false;
 		}
+
+		for (int i = 0; i < cookies.length; i++) {
+			String cookieName = GetterUtil.getString(cookies[i].getName());
+
+			if (cookieName.equalsIgnoreCase(name)) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean hasSessionIdCookie(HttpServletRequest req) {
+		return has(req.getCookies(), _JSESSIONID);
 	}
 
 	public static String set(String cookie, String tag, String sub) {
@@ -137,5 +161,7 @@ public class CookieUtil {
 	}
 
 	private static final String _JSESSIONID = "jsessionid";
+
+	private static Log _log = LogFactory.getLog(CookieUtil.class);
 
 }

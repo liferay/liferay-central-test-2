@@ -31,6 +31,10 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.commons.codec.binary.Hex;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="CookieKeys.java.html"><b><i>View Source</i></b></a>
  *
@@ -56,9 +60,25 @@ public class CookieKeys {
 
 	public static final int MAX_AGE = 31536000;
 
+	public static final int VERSION = 0;
+
 	public static void addCookie(HttpServletResponse res, Cookie cookie) {
 		if (PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES) {
 			if (!PropsValues.TCK_URL) {
+
+				// LEP-5175
+
+				String oldValue = cookie.getValue();
+				String newValue = new String(
+					Hex.encodeHex(oldValue.getBytes()));
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Original value " + oldValue);
+					_log.debug("Hex encoded value " + newValue);
+				}
+
+				cookie.setValue(newValue);
+				cookie.setVersion(VERSION);
 
 				// Setting a cookie will cause the TCK to lose its ability
 				// to track sessions
@@ -69,11 +89,10 @@ public class CookieKeys {
 	}
 
 	public static void addSupportCookie(HttpServletResponse res) {
-		Cookie cookieSupportCookie =
-			new Cookie(CookieKeys.COOKIE_SUPPORT, "true");
+		Cookie cookieSupportCookie = new Cookie(COOKIE_SUPPORT, "true");
 
-		cookieSupportCookie.setPath("/");
-		cookieSupportCookie.setMaxAge(CookieKeys.MAX_AGE);
+		cookieSupportCookie.setPath(StringPool.SLASH);
+		cookieSupportCookie.setMaxAge(MAX_AGE);
 
 		addCookie(res, cookieSupportCookie);
 	}
@@ -132,12 +151,14 @@ public class CookieKeys {
 			PropsValues.SESSION_TEST_COOKIE_SUPPORT) {
 
 			String cookieSupport = CookieUtil.get(
-				req.getCookies(), CookieKeys.COOKIE_SUPPORT);
+				req.getCookies(), COOKIE_SUPPORT);
 
 			if (Validator.isNull(cookieSupport)) {
 				throw new CookieNotSupportedException();
 			}
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(CookieKeys.class);
 
 }
