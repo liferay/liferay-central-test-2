@@ -27,11 +27,6 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
-
-import org.apache.commons.codec.binary.Hex;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="CookieUtil.java.html"><b><i>View Source</i></b></a>
@@ -50,18 +45,7 @@ public class CookieUtil {
 			String cookieName = GetterUtil.getString(cookies[i].getName());
 
 			if (cookieName.equalsIgnoreCase(name)) {
-				String value = cookies[i].getValue();
-
-				try {
-					return new String(Hex.decodeHex(value.toCharArray()));
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(e.getMessage());
-					}
-
-					return value;
-				}
+				return cookies[i].getValue();
 			}
 		}
 
@@ -92,26 +76,6 @@ public class CookieUtil {
 		}
 
 		return StringPool.BLANK;
-	}
-
-	public static boolean has(Cookie[] cookies, String name) {
-		if (cookies == null) {
-			return false;
-		}
-
-		for (int i = 0; i < cookies.length; i++) {
-			String cookieName = GetterUtil.getString(cookies[i].getName());
-
-			if (cookieName.equalsIgnoreCase(name)) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	public static boolean hasSessionIdCookie(HttpServletRequest req) {
-		return has(req.getCookies(), _JSESSIONID);
 	}
 
 	public static String set(String cookie, String tag, String sub) {
@@ -161,7 +125,5 @@ public class CookieUtil {
 	}
 
 	private static final String _JSESSIONID = "jsessionid";
-
-	private static Log _log = LogFactory.getLog(CookieUtil.class);
 
 }

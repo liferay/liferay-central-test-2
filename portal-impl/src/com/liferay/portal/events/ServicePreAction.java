@@ -82,7 +82,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.CookieUtil;
 import com.liferay.util.ListUtil;
 import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -805,8 +804,8 @@ public class ServicePreAction extends Action {
 
 				// User previously set their preferred language
 
-				String languageId = CookieUtil.get(
-					req.getCookies(), CookieKeys.GUEST_LANGUAGE_ID);
+				String languageId = CookieKeys.getCookie(
+					req, CookieKeys.GUEST_LANGUAGE_ID);
 
 				if (Validator.isNotNull(languageId)) {
 					locale = LocaleUtil.fromLanguageId(languageId);
@@ -1168,7 +1167,7 @@ public class ServicePreAction extends Action {
 
 		String urlHome = PortalUtil.getPortalURL(req) + contextPath;
 
-		if (!CookieUtil.hasSessionIdCookie(req)) {
+		if (!CookieKeys.hasSessionId(req)) {
 			urlHome = PortalUtil.getURLWithSessionId(urlHome, ses.getId());
 		}
 

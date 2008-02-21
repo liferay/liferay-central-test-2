@@ -524,10 +524,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.util.CookieUtil">
-		<priority value="INFO" />
-	</category>
-
 	<category name="com.liferay.util.JNDIUtil">
 		<priority value="ERROR" />
 	</category>

@@ -35,7 +35,6 @@ import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
-import com.liferay.util.CookieUtil;
 import com.liferay.util.Time;
 
 import java.text.MessageFormat;
@@ -374,8 +373,8 @@ public class LanguageImpl implements Language {
 			(Locale)req.getSession().getAttribute(Globals.LOCALE_KEY);
 
 		if (locale == null) {
-			languageId = CookieUtil.get(
-				req.getCookies(), CookieKeys.GUEST_LANGUAGE_ID);
+			languageId = CookieKeys.getCookie(
+				req, CookieKeys.GUEST_LANGUAGE_ID);
 
 			if (Validator.isNotNull(languageId)) {
 				locale = LocaleUtil.fromLanguageId(languageId);

@@ -52,6 +52,8 @@ public class CookieKeys {
 
 	public static final String ID = "ID";
 
+	public static final String JSESSIONID = "jsessionid";
+
 	public static final String LOGIN = "LOGIN";
 
 	public static final String PASSWORD = "PASSWORD";
@@ -68,16 +70,22 @@ public class CookieKeys {
 
 				// LEP-5175
 
-				String oldValue = cookie.getValue();
-				String newValue = new String(
-					Hex.encodeHex(oldValue.getBytes()));
+				String name = cookie.getName();
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Original value " + oldValue);
-					_log.debug("Hex encoded value " + newValue);
+				String originalValue = cookie.getValue();
+				String encodedValue = originalValue;
+
+				if (isEncodedCookie(name)) {
+					encodedValue = new String(Hex.encodeHex(originalValue.getBytes()));
+
+					if (_log.isDebugEnabled()) {
+						_log.debug("Add encoded cookie " + name);
+						_log.debug("Original value " + originalValue);
+						_log.debug("Hex encoded value " + encodedValue);
+					}
 				}
 
-				cookie.setValue(newValue);
+				cookie.setValue(encodedValue);
 				cookie.setVersion(VERSION);
 
 				// Setting a cookie will cause the TCK to lose its ability
@@ -95,6 +103,35 @@ public class CookieKeys {
 		cookieSupportCookie.setMaxAge(MAX_AGE);
 
 		addCookie(res, cookieSupportCookie);
+	}
+
+	public static String getCookie(HttpServletRequest req, String name) {
+		String value = CookieUtil.get(req.getCookies(), name);
+
+		if ((value != null) && isEncodedCookie(name)) {
+			try {
+				String encodedValue = value;
+				String originalValue = new String(
+					Hex.decodeHex(encodedValue.toCharArray()));
+
+				if (_log.isDebugEnabled()) {
+					_log.debug("Get encoded cookie " + name);
+					_log.debug("Hex encoded value " + encodedValue);
+					_log.debug("Original value " + originalValue);
+				}
+
+				return originalValue;
+			}
+			catch (Exception e) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
+				}
+
+				return value;
+			}
+		}
+
+		return value;
 	}
 
 	public static String getDomain(HttpServletRequest req) {
@@ -144,14 +181,35 @@ public class CookieKeys {
 		return domain;
 	}
 
+	public static boolean hasSessionId(HttpServletRequest req) {
+		String jsessionid = getCookie(req, JSESSIONID);
+
+		if (jsessionid != null) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isEncodedCookie(String name) {
+		if (name.equals(ID) || name.equals(LOGIN) || name.equals(PASSWORD) ||
+			name.equals(SCREEN_NAME)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static void validateSupportCookie(HttpServletRequest req)
 		throws CookieNotSupportedException {
 
 		if (PropsValues.SESSION_ENABLE_PERSISTENT_COOKIES &&
 			PropsValues.SESSION_TEST_COOKIE_SUPPORT) {
 
-			String cookieSupport = CookieUtil.get(
-				req.getCookies(), COOKIE_SUPPORT);
+			String cookieSupport = getCookie(req, COOKIE_SUPPORT);
 
 			if (Validator.isNull(cookieSupport)) {
 				throw new CookieNotSupportedException();

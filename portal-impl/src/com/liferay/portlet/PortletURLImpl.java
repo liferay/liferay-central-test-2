@@ -38,11 +38,11 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.CookieUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Http;
@@ -692,7 +692,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 			result = result.substring(0, result.length() - 1);
 		}
 
-		if (!CookieUtil.hasSessionIdCookie(_req)) {
+		if (!CookieKeys.hasSessionId(_req)) {
 			result = PortalUtil.getURLWithSessionId(
 				result, _req.getSession().getId());
 		}

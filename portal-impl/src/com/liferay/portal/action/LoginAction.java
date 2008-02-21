@@ -55,7 +55,6 @@ import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.CookieUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -97,7 +96,7 @@ public class LoginAction extends Action {
 
 		if ((login == null) || (login.equals(StringPool.NULL))) {
 			login = GetterUtil.getString(
-				CookieUtil.get(req.getCookies(), CookieKeys.LOGIN));
+				CookieKeys.getCookie(req, CookieKeys.LOGIN));
 
 			if (Validator.isNull(login) &&
 				company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA)) {

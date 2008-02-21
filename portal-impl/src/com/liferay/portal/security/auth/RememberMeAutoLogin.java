@@ -29,7 +29,6 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.CookieUtil;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
@@ -52,9 +51,9 @@ public class RememberMeAutoLogin implements AutoLogin {
 		try {
 			String[] credentials = null;
 
-			String autoUserId = CookieUtil.get(req.getCookies(), CookieKeys.ID);
-			String autoPassword =
-				CookieUtil.get(req.getCookies(), CookieKeys.PASSWORD);
+			String autoUserId = CookieKeys.getCookie(req, CookieKeys.ID);
+			String autoPassword = CookieKeys.getCookie(
+				req, CookieKeys.PASSWORD);
 
 			if (Validator.isNotNull(autoUserId) &&
 				Validator.isNotNull(autoPassword)) {

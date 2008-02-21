@@ -27,8 +27,8 @@
 <c:if test="<%= themeDisplay.isSignedIn() && !PropsValues.SESSION_DISABLED %>">
 
 	<%
-	String autoUserId = CookieUtil.get(request.getCookies(), CookieKeys.ID);
-	String autoPassword = CookieUtil.get(request.getCookies(), CookieKeys.PASSWORD);
+	String autoUserId = CookieKeys.getCookie(request, CookieKeys.ID);
+	String autoPassword = CookieKeys.getCookie(request, CookieKeys.PASSWORD);
 	%>
 
 	<c:if test="<%= Validator.isNull(autoUserId) || Validator.isNull(autoPassword) %>">

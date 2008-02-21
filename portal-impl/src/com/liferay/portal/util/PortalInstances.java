@@ -36,7 +36,6 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
-import com.liferay.util.CookieUtil;
 import com.liferay.util.Http;
 import com.liferay.util.SetUtil;
 
@@ -160,7 +159,7 @@ public class PortalInstances {
 
 		if (companyId <= 0) {
 			companyId = GetterUtil.getLong(
-				CookieUtil.get(req.getCookies(), CookieKeys.COMPANY_ID));
+				CookieKeys.getCookie(req, CookieKeys.COMPANY_ID));
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Company id from cookie " + companyId);

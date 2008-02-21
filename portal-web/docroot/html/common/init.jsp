@@ -164,7 +164,6 @@
 <%@ page import="com.liferay.util.BeanParamUtil" %>
 <%@ page import="com.liferay.util.BeanUtil" %>
 <%@ page import="com.liferay.util.CollectionFactory" %>
-<%@ page import="com.liferay.util.CookieUtil" %>
 <%@ page import="com.liferay.util.CreditCard" %>
 <%@ page import="com.liferay.util.FileUtil" %>
 <%@ page import="com.liferay.util.Html" %>

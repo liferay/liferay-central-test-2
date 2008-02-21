@@ -46,6 +46,7 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.LayoutClone;
 import com.liferay.portal.util.LayoutCloneFactory;
 import com.liferay.portal.util.PortalUtil;
@@ -53,7 +54,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.CookieUtil;
 import com.liferay.util.Http;
 import com.liferay.util.LocalizationUtil;
 
@@ -679,7 +679,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		String url = PortalUtil.getLayoutURL(this, themeDisplay);
 
-		if (!CookieUtil.hasSessionIdCookie(req)) {
+		if (!CookieKeys.hasSessionId(req)) {
 			url = PortalUtil.getURLWithSessionId(url, req.getSession().getId());
 		}
 
