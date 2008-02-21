@@ -219,7 +219,9 @@ public class EditMessageAction extends PortletAction {
 		MBMessage message = null;
 
 		if (messageId <= 0) {
-			CaptchaUtil.check(req);
+			if (false) {
+				CaptchaUtil.check(req);
+			}
 
 			if (threadId <= 0) {
 

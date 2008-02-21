@@ -166,11 +166,11 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 <br />
 
 <c:if test="<%= category == null %>">
-	<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
+	<%--<portlet:actionURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="captchaURL">
 		<portlet:param name="struts_action" value="/message_boards/captcha" />
 	</portlet:actionURL>
 
-	<liferay-ui:captcha url="<%= captchaURL %>" />
+	<liferay-ui:captcha url="<%= captchaURL %>" />--%>
 </c:if>
 
 <input type="submit" value="<liferay-ui:message key="save" />" />

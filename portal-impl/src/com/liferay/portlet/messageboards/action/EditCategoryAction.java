@@ -156,7 +156,9 @@ public class EditCategoryAction extends PortletAction {
 			"guestPermissions");
 
 		if (categoryId <= 0) {
-			CaptchaUtil.check(req);
+			if (false) {
+				CaptchaUtil.check(req);
+			}
 
 			// Add category
 
