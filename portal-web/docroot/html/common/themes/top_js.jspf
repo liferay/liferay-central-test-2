@@ -197,13 +197,15 @@
 			function(portletId, jQueryObj) {
 				Liferay.Util.addInputType(portletId, jQueryObj);
 
-				new Liferay.Menu(
-					{
-						button: '.lfr-actions',
-						context: jQueryObj[0],
-						trigger: '.lfr-trigger'
-					}
-				);
+				if (Liferay.Menu) {
+					new Liferay.Menu(
+						{
+							button: '.lfr-actions',
+							context: jQueryObj[0],
+							trigger: '.lfr-trigger'
+						}
+					);
+				}
 			}
 		);
 
@@ -278,32 +280,36 @@
 		<c:if test="<%= (layout != null) && (!group.hasStagingGroup() || group.isStagingGroup()) && LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE) %>">
 			jQuery(document).ready(
 				function() {
-					if (themeDisplay.isFreeformLayout()) {
+					if (Liferay.Freeform && themeDisplay.isFreeformLayout()) {
 						Liferay.Freeform({
 							columnSelector: "div[@id^=layout-column_]",
 							boxSelector: ".portlet-boundary"
 						});
 					}
 
-					Liferay.Columns({
-						columnSelector: "div.lfr-portlet-column",
-						grid: '#layout-grid',
-						handleSelector: ".portlet-title:first, .portlet-title-default:first",
-						boxSelector: ".portlet-boundary" ,
-						positionClass: "drop-position",
-						areaClass: "drop-area",
-						onComplete: function(d) {
-							Liferay.Portlet.move(d);
-						}
-					});
+					if (Liferay.Columns) {
+						Liferay.Columns({
+							columnSelector: "div.lfr-portlet-column",
+							grid: '#layout-grid',
+							handleSelector: ".portlet-title:first, .portlet-title-default:first",
+							boxSelector: ".portlet-boundary",
+							positionClass: "drop-position",
+							areaClass: "drop-area",
+							onComplete: function(d) {
+								Liferay.Portlet.move(d);
+							}
+						});
+					}
 
-					new Liferay.Navigation(
-						{
-							layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
-							navBlock: '#navigation',
-							hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, portletGroupId.longValue(), ActionKeys.MANAGE_LAYOUTS) %>
-						}
-					);
+					if (Liferay.Navigation) {
+						new Liferay.Navigation(
+							{
+								layoutIds: [<%= ListUtil.toString(layouts, "layoutId") %>],
+								navBlock: '#navigation',
+								hasPermission: <%= GroupPermissionUtil.contains(permissionChecker, portletGroupId.longValue(), ActionKeys.MANAGE_LAYOUTS) %>
+							}
+						);
+					}
 
 					<%--/*jQuery(".journal-content-eip-text").leditable(
 						"<%= themeDisplay.getPathMain() %>/journal_content/update_article_field",
@@ -349,15 +355,22 @@
 
 		jQuery(document).ready(
 			function() {
-				new Liferay.Menu(
-					{
-						trigger: '.lfr-trigger',
-						button: '.lfr-actions'
-					}
-				);
+				if (Liferay.Menu) {
+					new Liferay.Menu(
+						{
+							trigger: '.lfr-trigger',
+							button: '.lfr-actions'
+						}
+					);
+				}
 
-				Liferay.Dock.init();
-				Liferay.Notice.prototype.setClosing();
+				if (Liferay.Dock) {
+					Liferay.Dock.init();
+				}
+				
+				if (Liferay.Notice) {
+					Liferay.Notice.prototype.setClosing();
+				}
 			}
 		);
 	//]]>
