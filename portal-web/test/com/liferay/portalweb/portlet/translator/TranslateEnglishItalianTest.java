@@ -33,6 +33,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class TranslateEnglishItalianTest extends BaseTestCase {
 	public void testTranslateEnglishItalian() throws Exception {
 		selenium.select("_26_id", "label=English to Italian");
+		selenium.type("_26_text",
+			"My name is Liferay Translator, fluent in over 6 million forms of communication.");
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(

@@ -33,9 +33,11 @@ import com.liferay.portalweb.portal.BaseTestCase;
 public class TranslateEnglishPortugueseTest extends BaseTestCase {
 	public void testTranslateEnglishPortuguese() throws Exception {
 		selenium.select("_26_id", "label=English to Portuguese");
+		selenium.type("_26_text",
+			"My name is Liferay Translator, fluent in over 6 million forms of communication.");
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent(
-				"Meu nome \u00e9 JR Skywalker, fluent dentro sobre 6 milh\u00e3o formul\u00e1rios de uma comunica\u00e7\u00e3o. "));
+				"Meu nome \u00e9 tradutor de Liferay, fluent dentro sobre 6 milh\u00e3o formul\u00e1rios de uma comunica\u00e7\u00e3o."));
 	}
 }
