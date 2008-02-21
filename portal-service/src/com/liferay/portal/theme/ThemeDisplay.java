@@ -338,6 +338,22 @@ public class ThemeDisplay implements Serializable {
 		_themeCssFastLoad = themeCssFastLoad;
 	}
 
+	public boolean isThemeJsBarebone() {
+		return _themeJsBarebone;
+	}
+
+	public void setThemeJsBarebone(boolean themeJsBarebone) {
+		_themeJsBarebone = themeJsBarebone;
+	}
+
+	public boolean isThemeJsFastLoad() {
+		return _themeJsFastLoad;
+	}
+
+	public void setThemeJsFastLoad(boolean themeJsFastLoad) {
+		_themeJsFastLoad = themeJsFastLoad;
+	}
+
 	public boolean isFreeformLayout() {
 		return _freeformLayout;
 	}
@@ -819,6 +835,8 @@ public class ThemeDisplay implements Serializable {
 		_theme = null;
 		_colorScheme = null;
 		_themeCssFastLoad = false;
+		_themeJsBarebone = false;
+		_themeJsFastLoad = false;
 		_freeformLayout = false;
 		_serverName = StringPool.BLANK;
 		_serverPort = 0;
@@ -902,6 +920,8 @@ public class ThemeDisplay implements Serializable {
 	private Theme _theme;
 	private ColorScheme _colorScheme;
 	private boolean _themeCssFastLoad;
+	private boolean _themeJsBarebone;
+	private boolean _themeJsFastLoad;
 	private boolean _freeformLayout;
 	private String _serverName;
 	private int _serverPort;

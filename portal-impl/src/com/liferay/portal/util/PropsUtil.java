@@ -179,7 +179,11 @@ public class PropsUtil {
 
 	// JavaScript
 
-	public static final String JAVASCRIPT_FILES = "javascript.files";
+	public static final String JAVASCRIPT_BAREBONE_FILES = "javascript.barebone.files";
+
+	public static final String JAVASCRIPT_EVERYTHING_FILES = "javascript.everything.files";
+
+	public static final String JAVASCRIPT_BAREBONE_ENABLED = "javascript.barebone.enabled";
 
 	public static final String JAVASCRIPT_FAST_LOAD = "javascript.fast.load";
 

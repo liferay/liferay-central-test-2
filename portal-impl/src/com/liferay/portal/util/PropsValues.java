@@ -289,6 +289,16 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JABBER_XMPP_SERVER_ENABLED));
 
+	public static final boolean JAVASCRIPT_BAREBONE_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.JAVASCRIPT_BAREBONE_ENABLED));
+
+	public static final String[] JAVASCRIPT_BAREBONE_FILES =
+		PropsUtil.getArray(PropsUtil.JAVASCRIPT_BAREBONE_FILES);
+
+	public static final String[] JAVASCRIPT_EVERYTHING_FILES =
+		PropsUtil.getArray(PropsUtil.JAVASCRIPT_EVERYTHING_FILES);
+
 	public static final boolean JAVASCRIPT_FAST_LOAD = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.JAVASCRIPT_FAST_LOAD));
 

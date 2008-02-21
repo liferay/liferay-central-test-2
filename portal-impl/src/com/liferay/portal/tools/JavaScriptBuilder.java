@@ -35,19 +35,21 @@ import com.liferay.util.FileUtil;
 public class JavaScriptBuilder {
 
 	public static void main(String[] args) {
-		if (args.length == 2) {
-			new JavaScriptBuilder(args[0], args[1]);
+		if (args.length == 3) {
+			new JavaScriptBuilder(args[0], args[1], args[2]);
 		}
 		else {
 			throw new IllegalArgumentException();
 		}
 	}
 
-	public JavaScriptBuilder(String jsDir, String mergedFile) {
+	public JavaScriptBuilder(
+		String jsProperty, String jsDir, String mergedFile) {
+
 		try {
 			StringMaker sm = new StringMaker();
 
-			String[] files = PropsUtil.getArray(PropsUtil.JAVASCRIPT_FILES);
+			String[] files = PropsUtil.getArray(jsProperty);
 
 			for (int i = 0; i < files.length; i++) {
 				String content = FileUtil.read(jsDir + files[i]);

@@ -1073,6 +1073,20 @@ public class ServicePreAction extends Action {
 		req.setAttribute(WebKeys.THEME, theme);
 		req.setAttribute(WebKeys.COLOR_SCHEME, colorScheme);
 
+		boolean themeCssFastLoad = ParamUtil.getBoolean(
+			req, "css_fast_load", PropsValues.THEME_CSS_FAST_LOAD);
+
+		boolean themeJsBarebone = PropsValues.JAVASCRIPT_BAREBONE_ENABLED;
+
+		if (themeJsBarebone) {
+			if (signedIn) {
+				themeJsBarebone = false;
+			}
+		}
+
+		boolean themeJsFastLoad = ParamUtil.getBoolean(
+			req, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD);
+
 		// Theme display
 
 		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
@@ -1104,7 +1118,9 @@ public class ServicePreAction extends Action {
 		themeDisplay.setLanguageId(LocaleUtil.toLanguageId(locale));
 		themeDisplay.setTimeZone(timeZone);
 		themeDisplay.setLookAndFeel(contextPath, theme, colorScheme);
-		themeDisplay.setThemeCssFastLoad(PropsValues.THEME_CSS_FAST_LOAD);
+		themeDisplay.setThemeCssFastLoad(themeCssFastLoad);
+		themeDisplay.setThemeJsBarebone(themeJsBarebone);
+		themeDisplay.setThemeJsFastLoad(themeJsFastLoad);
 		themeDisplay.setServerName(req.getServerName());
 		themeDisplay.setServerPort(req.getServerPort());
 		themeDisplay.setSecure(req.isSecure());
