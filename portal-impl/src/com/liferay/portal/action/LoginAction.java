@@ -262,11 +262,11 @@ public class LoginAction extends Action {
 				// lasts as long as the browser. This allows an external servlet
 				// wrapped in AutoLoginFilter to work throughout the client
 				// connection. The cookies ARE removed on an actual logout, so
-				// there is no security issue. See LEP-4678.
+				// there is no security issue. See LEP-4678 and LEP-5177.
 
 				companyIdCookie.setMaxAge(-1);
-				idCookie.setMaxAge(-1);
-				passwordCookie.setMaxAge(-1);
+				idCookie.setMaxAge(0);
+				passwordCookie.setMaxAge(0);
 			}
 
 			Cookie loginCookie = new Cookie(CookieKeys.LOGIN, login);
