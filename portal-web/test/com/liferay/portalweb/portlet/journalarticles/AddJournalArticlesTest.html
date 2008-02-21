@@ -1,0 +1,74 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddJournalArticlesTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddJournalArticlesTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>//img[@title='Configuration']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_86_groupId</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_groupId</td>
+	<td>label=Guest</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_type</td>
+	<td>label=Blogs</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_pageURL</td>
+	<td>label=Normal</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_86_pageDelta</td>
+	<td>label=10</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=RSS-Blogs-MattAsay_Bossie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=RSS-Blogs-MattAsay_Bossie</td>
+	<td></td>
+</tr>
+<tr>
+	<td>verifyTextPresent</td>
+	<td>Infoworld's BOSSIE awards demonstrate open source's progress</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

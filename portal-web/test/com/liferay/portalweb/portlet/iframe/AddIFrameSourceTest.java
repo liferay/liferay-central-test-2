@@ -20,22 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.journalarticles;
+package com.liferay.portalweb.portlet.iframe;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="JournalArticlesTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddIFrameSourceTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalArticlesTests extends BaseTests {
+public class AddIFrameSourceTest extends BaseTestCase {
+	public void testAddIFrameSource() throws Exception {
+		selenium.click("//img[@title='Configuration']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_86_src", "www.liferay.com");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 
-	public JournalArticlesTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddJournalArticlesTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Liferay")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }
