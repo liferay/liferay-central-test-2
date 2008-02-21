@@ -367,7 +367,7 @@
 				if (Liferay.Dock) {
 					Liferay.Dock.init();
 				}
-				
+
 				if (Liferay.Notice) {
 					Liferay.Notice.prototype.setClosing();
 				}
