@@ -22,31 +22,28 @@
 
 package com.liferay.portalweb.portlet.messageboards;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="MessageBoardsTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddSecondSubcategoryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class MessageBoardsTests extends BaseTests {
-
-	public MessageBoardsTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddCategoryTest.class);
-		addTestSuite(AddSubcategoryTest.class);
-		addTestSuite(AddMessageTest.class);
-		addTestSuite(AddReplyMessageTest.class);
-		addTestSuite(SearchTest.class);
-		addTestSuite(AddSecondSubcategoryTest.class);
-		addTestSuite(AddIncorrectEntryTest.class);
-		addTestSuite(AddDeletableMessageTest.class);
-		addTestSuite(RecentPostsTest.class);
-		addTestSuite(MoveThreadTest.class);
-		addTestSuite(SplitThreadTest.class);
-		addTestSuite(DeleteMessageTest.class);
+public class AddSecondSubcategoryTest extends BaseTestCase {
+	public void testAddSecondSubcategory() throws Exception {
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//b");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Add Subcategory']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_19_name", "S\u00e9cond T\u00e9st Subcat\u00e9gory");
+		selenium.type("_19_description",
+			"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent(
+				"S\u00e9cond T\u00e9st Subcat\u00e9gory"));
 	}
-
 }
