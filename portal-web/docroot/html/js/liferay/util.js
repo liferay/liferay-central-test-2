@@ -237,7 +237,15 @@ Liferay.Util = {
 			}
 		};
 
-		containers.hover(over,out);
+		containers.hoverIntent(
+			{
+				interval: 0,
+				out: out,
+				over: over,
+				sensitivity: 2,
+				timeout: 300
+			}
+		);
 	},
 
 	disableEsc: function() {
