@@ -57,6 +57,8 @@ public class RememberMeAutoLogin implements AutoLogin {
 			String rememberMe = CookieKeys.getCookie(
 				req, CookieKeys.REMEMBER_ME);
 
+			// LEP-5188
+
 			if (!PortalUtil.getPathContext().equals(req.getContextPath())) {
 				rememberMe = Boolean.TRUE.toString();
 			}
