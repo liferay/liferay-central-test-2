@@ -898,7 +898,7 @@ String[] availableLocales = null;
 				hasSavePermission = JournalArticlePermission.contains(permissionChecker, groupId, articleId, ActionKeys.UPDATE);
 			}
 			else {
-				hasSavePermission = PortletPermissionUtil.contains(permissionChecker, plid, PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE);
+				hasSavePermission = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE);
 			}
 			%>
 
