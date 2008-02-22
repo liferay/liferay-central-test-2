@@ -66,7 +66,7 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 			_totalRead += bytesRead;
 		}
 		else {
-			_totalRead = _totalSize;
+			return bytesRead;
 		}
 
 		int percent = (_totalRead * 100) / _totalSize;
