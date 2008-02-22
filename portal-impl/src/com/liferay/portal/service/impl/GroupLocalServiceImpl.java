@@ -628,6 +628,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected String getFriendlyURL(String friendlyURL) {
+		friendlyURL = GetterUtil.getString(friendlyURL);
+
 		return Normalizer.normalizeToAscii(friendlyURL.trim().toLowerCase());
 	}
 

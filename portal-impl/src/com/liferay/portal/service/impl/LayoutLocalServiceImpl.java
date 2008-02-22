@@ -2654,6 +2654,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected String getFriendlyURL(String friendlyURL) {
+		friendlyURL = GetterUtil.getString(friendlyURL);
+
 		return Normalizer.normalizeToAscii(friendlyURL.trim().toLowerCase());
 	}
 
