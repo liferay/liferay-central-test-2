@@ -41,17 +41,17 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="DefaultLandingPageAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="DefaultLogoutPageAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Michael Young
+ * @author Jerry Niu
  *
  */
-public class DefaultLandingPageAction extends Action {
+public class DefaultLogoutPageAction extends Action {
 
 	public void run(HttpServletRequest req, HttpServletResponse res)
 		throws ActionException {
 
-		String path = PropsValues.DEFAULT_LANDING_PAGE_PATH;
+		String path = PropsValues.DEFAULT_LOGOUT_PAGE_PATH;
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -68,8 +68,8 @@ public class DefaultLandingPageAction extends Action {
 		}
 
 		// The commented code shows how you can programmaticaly set the user's
-		// landing page. You can modify this class to utilize a custom algorithm
-		// for forwarding a user to his landing page. See the references to this
+		// logout page. You can modify this class to utilize a custom algorithm
+		// for forwarding a user to his logout page. See the references to this
 		// class in portal.properties.
 
 		/*Map params = new HashMap();
@@ -81,6 +81,6 @@ public class DefaultLandingPageAction extends Action {
 		ses.setAttribute(WebKeys.LAST_PATH, lastPath);*/
 	}
 
-	private static Log _log = LogFactory.getLog(DefaultLandingPageAction.class);
+	private static Log _log = LogFactory.getLog(DefaultLogoutPageAction.class);
 
 }

@@ -188,6 +188,9 @@ public class PropsValues {
 	public static final String DEFAULT_LANDING_PAGE_PATH =
 		PropsUtil.get(PropsUtil.DEFAULT_LANDING_PAGE_PATH);
 
+	public static final String DEFAULT_LOGOUT_PAGE_PATH =
+		PropsUtil.get(PropsUtil.DEFAULT_LOGOUT_PAGE_PATH);
+
 	public static final String DEFAULT_REGULAR_COLOR_SCHEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_REGULAR_COLOR_SCHEME_ID);
 
