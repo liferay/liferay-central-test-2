@@ -244,6 +244,15 @@ public class LoginAction extends Action {
 
 			passwordCookie.setPath(StringPool.SLASH);
 
+			Cookie rememberMeCookie = new Cookie(
+				CookieKeys.REMEMBER_ME, Boolean.TRUE.toString());
+
+			if (Validator.isNotNull(domain)) {
+				rememberMeCookie.setDomain(domain);
+			}
+
+			rememberMeCookie.setPath(StringPool.SLASH);
+
 			int loginMaxAge = PropsValues.COMPANY_SECURITY_AUTO_LOGIN_MAX_AGE;
 
 			if (PropsValues.SESSION_DISABLED) {
@@ -254,6 +263,7 @@ public class LoginAction extends Action {
 				companyIdCookie.setMaxAge(loginMaxAge);
 				idCookie.setMaxAge(loginMaxAge);
 				passwordCookie.setMaxAge(loginMaxAge);
+				rememberMeCookie.setMaxAge(loginMaxAge);
 			}
 			else {
 
@@ -264,8 +274,9 @@ public class LoginAction extends Action {
 				// there is no security issue. See LEP-4678 and LEP-5177.
 
 				companyIdCookie.setMaxAge(-1);
-				idCookie.setMaxAge(0);
-				passwordCookie.setMaxAge(0);
+				idCookie.setMaxAge(-1);
+				passwordCookie.setMaxAge(-1);
+				rememberMeCookie.setMaxAge(0);
 			}
 
 			Cookie loginCookie = new Cookie(CookieKeys.LOGIN, login);

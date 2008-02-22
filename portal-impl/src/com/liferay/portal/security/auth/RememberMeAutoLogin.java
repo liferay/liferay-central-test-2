@@ -54,9 +54,16 @@ public class RememberMeAutoLogin implements AutoLogin {
 			String autoUserId = CookieKeys.getCookie(req, CookieKeys.ID);
 			String autoPassword = CookieKeys.getCookie(
 				req, CookieKeys.PASSWORD);
+			String rememberMe = CookieKeys.getCookie(
+				req, CookieKeys.REMEMBER_ME);
+
+			if (!PortalUtil.getPathContext().equals(req.getContextPath())) {
+				rememberMe = Boolean.TRUE.toString();
+			}
 
 			if (Validator.isNotNull(autoUserId) &&
-				Validator.isNotNull(autoPassword)) {
+				Validator.isNotNull(autoPassword) &&
+				Validator.isNotNull(rememberMe)) {
 
 				Company company = PortalUtil.getCompany(req);
 

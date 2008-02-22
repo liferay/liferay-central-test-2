@@ -27,11 +27,10 @@
 <c:if test="<%= themeDisplay.isSignedIn() && !PropsValues.SESSION_DISABLED %>">
 
 	<%
-	String autoUserId = CookieKeys.getCookie(request, CookieKeys.ID);
-	String autoPassword = CookieKeys.getCookie(request, CookieKeys.PASSWORD);
+	String autoRememberMe = CookieKeys.getCookie(request, CookieKeys.REMEMBER_ME);
 	%>
 
-	<c:if test="<%= Validator.isNull(autoUserId) || Validator.isNull(autoPassword) %>">
+	<c:if test="<%= Validator.isNull(autoRememberMe) %>">
 		<script type="text/javascript">
 
 			<%
