@@ -74,7 +74,7 @@ public class DefaultLandingPageAction extends Action {
 
 		/*Map params = new HashMap();
 
-		params.put("p_l_id", new String[] {"PRI.1.1"});
+		params.put("p_l_id", new String[] {"1806"});
 
 		LastPath lastPath = new LastPath("/c", "/portal/layout", params);
 
