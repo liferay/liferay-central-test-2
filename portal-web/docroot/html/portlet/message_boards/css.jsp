@@ -110,6 +110,10 @@ td.user-info {
 	padding: 15px;
 }
 
+.ie .portlet-message-boards .message-container .thread-body table {
+	table-layout: auto;
+}
+
 .portlet-message-boards .user-info {
 	border: 1px solid #f00;
 	padding: 5px;
