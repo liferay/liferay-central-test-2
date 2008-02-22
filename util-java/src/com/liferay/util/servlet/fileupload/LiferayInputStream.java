@@ -23,6 +23,8 @@
 package com.liferay.util.servlet.fileupload;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ByteArrayInputStreamWrapper;
 import com.liferay.util.servlet.ServletInputStreamWrapper;
 
@@ -45,6 +47,10 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class LiferayInputStream extends ServletInputStreamWrapper {
+
+	public static final int THRESHOLD_SIZE = GetterUtil.getInteger(
+		SystemProperties.get(
+			LiferayInputStream.class.getName() + ".threshold.size"));
 
 	public LiferayInputStream(HttpServletRequest req) throws IOException {
 		super(req.getInputStream());
@@ -69,7 +75,9 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 			_log.debug(bytesRead + "/" + _totalRead + "=" + percent);
 		}
 
-		_cachedBytes.write(b, off, bytesRead);
+		if (_totalSize < THRESHOLD_SIZE) {
+			_cachedBytes.write(b, off, bytesRead);
+		}
 
 		Integer curPercent = (Integer)_ses.getAttribute(
 			LiferayFileUpload.PERCENT);
@@ -82,8 +90,13 @@ public class LiferayInputStream extends ServletInputStreamWrapper {
 	}
 
 	public ServletInputStream getCachedInputStream() throws IOException {
-		return new ByteArrayInputStreamWrapper(
-			new ByteArrayInputStream(_cachedBytes.toByteArray()));
+		if (_totalSize < THRESHOLD_SIZE) {
+			return this;
+		}
+		else {
+			return new ByteArrayInputStreamWrapper(
+				new ByteArrayInputStream(_cachedBytes.toByteArray()));
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(LiferayInputStream.class);
