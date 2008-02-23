@@ -678,15 +678,20 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		String groupIdFriendlyURL = friendlyURL.substring(1);
 
-		if (Validator.isNumber(groupIdFriendlyURL) &&
-			!groupIdFriendlyURL.equals(String.valueOf(groupId))) {
+		if (Validator.isNumber(groupIdFriendlyURL)) {
+			if (((classPK > 0) &&
+				 (!groupIdFriendlyURL.equals(String.valueOf(classPK)))) ||
+				((classPK == 0) &&
+				 (!groupIdFriendlyURL.equals(String.valueOf(groupId))))) {
 
-			GroupFriendlyURLException gfurle = new GroupFriendlyURLException(
-				GroupFriendlyURLException.POSSIBLE_DUPLICATE);
+				GroupFriendlyURLException gfurle =
+					new GroupFriendlyURLException(
+						GroupFriendlyURLException.POSSIBLE_DUPLICATE);
 
-			gfurle.setKeywordConflict(groupIdFriendlyURL);
+				gfurle.setKeywordConflict(groupIdFriendlyURL);
 
-			throw gfurle;
+				throw gfurle;
+			}
 		}
 
 		String screenName = friendlyURL.substring(1);

@@ -64,6 +64,9 @@ public class VerifyGroup extends VerifyProcess {
 
 				friendlyURL = StringPool.SLASH + user.getScreenName();
 			}
+			else if (group.getClassPK() > 0) {
+				friendlyURL = StringPool.SLASH + group.getClassPK();
+			}
 
 			GroupLocalServiceUtil.updateFriendlyURL(
 				group.getGroupId(), friendlyURL);
