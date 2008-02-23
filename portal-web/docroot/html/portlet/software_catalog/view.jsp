@@ -258,7 +258,7 @@ portletURL.setParameter("tabs1", tabs1);
 			<input type="submit" value="<liferay-ui:message key="search-products" />" />
 
 			<c:if test="<%= showAddProductEntryButton %>">
-				<input type="button" value="<liferay-ui:message key="add-product" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="add-product" />" onClick="<portlet:namespace />addProduct();" />
 			</c:if>
 		</div>
 
@@ -604,8 +604,19 @@ portletURL.setParameter("tabs1", tabs1);
 
 </form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+<script type="text/javascript">
+	function <portlet:namespace />addProduct() {
+		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/software_catalog/edit_product_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
+
+		if (document.<portlet:namespace />fm.<portlet:namespace />keywords) {
+			url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm.<portlet:namespace />keywords.value;
+		}
+
+		document.<portlet:namespace />fm.method = 'post';
+		submitForm(document.<portlet:namespace />fm, url);
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />keywords);
-	</script>
-</c:if>
+	</c:if>
+</script>

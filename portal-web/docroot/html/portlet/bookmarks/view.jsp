@@ -182,7 +182,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 
 				<c:if test="<%= showAddFolderButton %>">
-					<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+					<input type="button" value="<liferay-ui:message key='<%= (folder == null) ? "add-folder" : "add-subfolder" %>' />" onClick="<portlet:namespace />addFolder();" />
 				</c:if>
 			</div>
 
@@ -199,11 +199,21 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		</form>
 
-		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-			<script type="text/javascript">
+		<script type="text/javascript">
+			function <portlet:namespace />addFolder() {
+				var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_folder" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentFolderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';
+
+				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
+					url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm1.<portlet:namespace />keywords.value;
+				}
+
+				submitForm(document.hrefFm, url);
+			}
+
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-			</script>
-		</c:if>
+			</c:if>
+		</script>
 
 		<c:if test="<%= folder != null %>">
 			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
@@ -338,7 +348,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					</c:if>
 
 					<c:if test="<%= showAddEntryButton %>">
-						<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';" />
+						<input type="button" value="<liferay-ui:message key="add-entry" />" onClick="<portlet:namespace />addEntry();" />
 					</c:if>
 				</div>
 
@@ -351,12 +361,22 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			</form>
 
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-				<script type="text/javascript">
+			<script type="text/javascript">
+				function <portlet:namespace />addEntry() {
+					var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/bookmarks/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>';
+
+					if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
+						url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm2.<portlet:namespace />keywords.value;
+					}
+
+					submitForm(document.hrefFm, url);
+				}
+
+				<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-				</script>
-			</c:if>
+				</c:if>
+			</script>
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my-entries") || tabs1.equals("recent-entries") %>'>

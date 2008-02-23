@@ -66,13 +66,27 @@ StructureDisplayTerms displayTerms = (StructureDisplayTerms)searchContainer.getD
 	<input type="submit" value="<liferay-ui:message key="search-structures" />" />
 
 	<c:if test="<%= PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_STRUCTURE) %>">
-		<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+		<input type="button" value="<liferay-ui:message key="add-structure" />" onClick="<portlet:namespace />addStructure();" />
 	</c:if>
 </div>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+<script type="text/javascript">
+	function <portlet:namespace />addStructure() {
+		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_structure" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';
+
+		if (toggle_id_journal_structure_searchcurClickValue == 'basic') {
+			url += '&<portlet:namespace /><%= displayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;
+
+			submitForm(document.hrefFm, url);
+		}
+		else {
+			document.<portlet:namespace />fm.method = 'post';
+			submitForm(document.<portlet:namespace />fm, url);
+		}
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.STRUCTURE_ID %>);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
-	</script>
-</c:if>
+	</c:if>
+</script>

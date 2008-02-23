@@ -44,12 +44,18 @@ RoleDisplayTerms displayTerms = (RoleDisplayTerms)searchContainer.getDisplayTerm
 	<input type="submit" value="<liferay-ui:message key="search-roles" />" />
 
 	<c:if test='<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) && (Validator.isNull(strutsAction) || strutsAction.equals("/enterprise_admin/view")) && PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ROLE) %>'>
-		<input type="button" value="<liferay-ui:message key="add-role" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:renderURL>&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />rolesRedirect.value);" />
+		<input type="button" value="<liferay-ui:message key="add-role" />" onClick="<portlet:namespace />addRole();" />
 	</c:if>
 </div>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
+<script type="text/javascript">
+	function <portlet:namespace />addRole() {
+		document.<portlet:namespace />fm.method = 'post';
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />rolesRedirect.value;
+		submitForm(document.<portlet:namespace />fm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role" /></portlet:renderURL>');
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-	</script>
-</c:if>
+	</c:if>
+</script>

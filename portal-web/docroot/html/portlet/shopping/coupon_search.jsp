@@ -81,5 +81,16 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 
 	<input type="submit" value="<liferay-ui:message key="search-coupons" />" />
 
-	<input type="button" value="<liferay-ui:message key="add-coupon" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_coupon" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+	<input type="button" value="<liferay-ui:message key="add-coupon" />" onClick="<portlet:namespace />addCoupon();" />
 </div>
+
+<script type="text/javascript">
+	function <portlet:namespace />addCoupon() {
+		document.<portlet:namespace />fm.method = 'post';
+		submitForm(document.<portlet:namespace />fm, '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_coupon" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>');
+	}
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.CODE %>);
+	</c:if>
+</script>

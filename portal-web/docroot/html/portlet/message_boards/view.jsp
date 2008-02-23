@@ -196,7 +196,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				</c:if>
 
 				<c:if test="<%= showAddCategoryButton %>">
-					<input type="button" value="<liferay-ui:message key='<%= (category == null) ? "add-category" : "add-subcategory" %>' />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
+					<input type="button" value="<liferay-ui:message key='<%= (category == null) ? "add-category" : "add-subcategory" %>' />" onClick="<portlet:namespace />addCategory();" />
 				</c:if>
 			</div>
 
@@ -213,11 +213,21 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 		</form>
 
-		<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-			<script type="text/javascript">
+		<script type="text/javascript">
+			function <portlet:namespace />addCategory() {
+				var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_category" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="parentCategoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
+
+				if (document.<portlet:namespace />fm1.<portlet:namespace />keywords) {
+					url += '&<portlet:namespace />name=' + document.<portlet:namespace />fm1.<portlet:namespace />keywords.value;
+				}
+
+				submitForm(document.hrefFm, url);
+			}
+
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-			</script>
-		</c:if>
+			</c:if>
+		</script>
 
 		<c:if test="<%= category != null %>">
 			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
@@ -360,7 +370,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					</c:if>
 
 					<c:if test="<%= showAddMessageButton %>">
-						<input type="button" value="<liferay-ui:message key="post-new-thread" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';" />
+						<input type="button" value="<liferay-ui:message key="post-new-thread" />" onClick="<portlet:namespace />addMessage();" />
 					</c:if>
 				</div>
 
@@ -373,12 +383,22 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			</form>
 
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-				<script type="text/javascript">
+			<script type="text/javascript">
+				function <portlet:namespace />addMessage() {
+					var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/edit_message" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="categoryId" value="<%= String.valueOf(categoryId) %>" /></portlet:renderURL>';
+
+					if (document.<portlet:namespace />fm2.<portlet:namespace />keywords) {
+						url += '&<portlet:namespace />subject=' + document.<portlet:namespace />fm2.<portlet:namespace />keywords.value;
+					}
+
+					submitForm(document.hrefFm, url);
+				}
+
+				<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
-				</script>
-			</c:if>
+				</c:if>
+			</script>
 		</c:if>
 	</c:when>
 	<c:when test='<%= tabs1.equals("my_posts") || tabs1.equals("my_subscriptions") || tabs1.equals("recent_posts") %>'>

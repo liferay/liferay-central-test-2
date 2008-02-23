@@ -111,7 +111,7 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 
 	<c:if test="<%= showButtons %>">
 		<c:if test="<%= PortalPermissionUtil.contains(permissionChecker, ActionKeys.ADD_ORGANIZATION) %>">
-			<input type="button" value="<liferay-ui:message key="add-organization" />" onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value='/enterprise_admin/edit_organization' /></portlet:renderURL>&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value);" />
+			<input type="button" value="<liferay-ui:message key="add-organization" />" onClick="<portlet:namespace />addOrganization();" />
 		</c:if>
 	</c:if>
 </div>
@@ -136,21 +136,30 @@ if (displayTerms.getParentOrganizationId() > 0) {
 	<liferay-ui:message key="filter-by-organization" />: <%= organization.getName() %><br />
 </c:if>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
-	</script>
-</c:if>
-
 <script type="text/javascript">
+	function <portlet:namespace />addOrganization() {
+		var url = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:renderURL>';
+
+		if (toggle_id_enterprise_admin_organization_searchcurClickValue == 'basic') {
+			url += '&<portlet:namespace />redirect=' + encodeURIComponent(document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value);
+			url += '&<portlet:namespace /><%= displayTerms.NAME %>=' + document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>.value;
+
+			submitForm(document.hrefFm, url);
+		}
+		else {
+			document.<portlet:namespace />fm.method = 'post';
+			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value;
+			submitForm(document.<portlet:namespace />fm, url);
+		}
+	}
+
 	new Liferay.DynamicSelect(
 		[
 			{
-				select: "<portlet:namespace /><%= displayTerms.COUNTRY_ID %>",
-				selectId: "countryId",
-				selectDesc: "name",
-				selectVal: "<%= displayTerms.getCountryId() %>",
+				select: '<portlet:namespace /><%= displayTerms.COUNTRY_ID %>',
+				selectId: 'countryId',
+				selectDesc: 'name',
+				selectVal: '<%= displayTerms.getCountryId() %>',
 				selectData: function(callback) {
 					Liferay.Service.Portal.Country.getCountries(
 						{
@@ -161,10 +170,10 @@ if (displayTerms.getParentOrganizationId() > 0) {
 				}
 			},
 			{
-				select: "<portlet:namespace /><%= displayTerms.REGION_ID %>",
-				selectId: "regionId",
-				selectDesc: "name",
-				selectVal: "<%= displayTerms.getRegionId() %>",
+				select: '<portlet:namespace /><%= displayTerms.REGION_ID %>',
+				selectId: 'regionId',
+				selectDesc: 'name',
+				selectVal: '<%= displayTerms.getRegionId() %>',
 				selectData: function(callback, selectKey) {
 					Liferay.Service.Portal.Region.getRegions(
 						{
@@ -177,4 +186,9 @@ if (displayTerms.getParentOrganizationId() > 0) {
 			}
 		]
 	);
+
+	<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.NAME %>);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace /><%= displayTerms.KEYWORDS %>);
+	</c:if>
 </script>

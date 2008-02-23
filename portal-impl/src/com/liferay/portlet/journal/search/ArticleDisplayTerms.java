@@ -45,7 +45,7 @@ public class ArticleDisplayTerms extends DisplayTerms {
 
 	public static final String VERSION = "version";
 
-	public static final String TITLE = "name";
+	public static final String TITLE = "title";
 
 	public static final String DESCRIPTION = "description";
 
