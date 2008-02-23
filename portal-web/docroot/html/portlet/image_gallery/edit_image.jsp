@@ -109,6 +109,40 @@ if (image != null) {
 			/>
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="webdav-url" />
+		</td>
+		<td>
+
+			<%
+			StringBuffer sb = new StringBuffer();
+
+			IGFolder curFolder = IGFolderLocalServiceUtil.getFolder(folderId);
+
+			while (true) {
+				sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
+				sb.insert(0, StringPool.SLASH);
+
+				if (curFolder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+					break;
+				}
+				else {
+					curFolder = IGFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+				}
+			}
+
+			sb.append(StringPool.SLASH);
+			sb.append(HttpUtil.encodeURL(image.getNameWithExtension(), true));
+
+			Group group = layout.getGroup();
+			%>
+
+			<liferay-ui:input-resource
+				url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
+			/>
+		</td>
+	</tr>
 	</table>
 
 	<br />

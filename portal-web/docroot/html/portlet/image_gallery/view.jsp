@@ -193,7 +193,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
-		<c:if test="<%= (folder != null) && (showAddFolderButton || (results.size() > 0)) %>">
+		<c:if test="<%= showAddFolderButton || (results.size() > 0) %>">
 			<br />
 		</c:if>
 
@@ -205,7 +205,45 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</script>
 		</c:if>
 
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="webdav-url" />
+			</td>
+			<td>
+
+				<%
+				StringBuffer sb = new StringBuffer();
+
+				if (folder != null) {
+					IGFolder curFolder = folder;
+
+					while (true) {
+						sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
+						sb.insert(0, StringPool.SLASH);
+
+						if (curFolder.getParentFolderId() == IGFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+							break;
+						}
+						else {
+							curFolder = IGFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+						}
+					}
+				}
+
+				Group group = layout.getGroup();
+				%>
+
+				<liferay-ui:input-resource
+					url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
+				/>
+			</td>
+		</tr>
+		</table>
+
 		<c:if test="<%= folder != null %>">
+			<br />
+
 			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
 			<liferay-portlet:renderURLParams varImpl="searchURL" />
 			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
