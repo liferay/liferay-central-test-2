@@ -36,6 +36,7 @@ public class VerifyProcessSuite extends VerifyProcess {
 	public void verify() throws VerifyException {
 		_log.info("Verifying");
 
+		verify(new VerifyProperties());
 		verify(new VerifyLucene());
 		verify(new VerifyCounter());
 		verify(new VerifyOracle());
