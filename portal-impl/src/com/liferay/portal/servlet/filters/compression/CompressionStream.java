@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.compression;
+package com.liferay.portal.servlet.filters.compression;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 

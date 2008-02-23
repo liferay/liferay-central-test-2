@@ -24,22 +24,6 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.filters">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.filters.compression">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.filters.doubleclick">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.filters.strip">
-		<priority value="ERROR" />
-	</category>
-
 	<category name="com.liferay.jdbc">
 		<priority value="ERROR" />
 	</category>
@@ -280,6 +264,14 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.filters.compression">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.servlet.filters.doubleclick">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.filters.layoutcache">
 		<priority value="ERROR" />
 	</category>
@@ -289,6 +281,10 @@
 	</category>
 
 	<category name="com.liferay.portal.servlet.filters.sessionid.SessionIdServletRequest">
+		<priority value="ERROR" />
+	</category>
+
+	<category name="com.liferay.portal.servlet.filters.strip">
 		<priority value="ERROR" />
 	</category>
 

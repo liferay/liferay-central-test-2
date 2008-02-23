@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.doubleclick;
+package com.liferay.portal.servlet.filters.doubleclick;
 
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;

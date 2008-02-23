@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.secure;
+package com.liferay.portal.servlet.filters.secure;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;

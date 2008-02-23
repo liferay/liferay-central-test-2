@@ -20,9 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.strip;
-
-import com.liferay.portal.kernel.util.ByteArrayMaker;
+package com.liferay.portal.servlet.filters.compression;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -33,15 +31,18 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * <a href="StripResponse.java.html"><b><i>View Source</i></b></a>
+ * <a href="CompressionResponse.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Jayson Falkner
  * @author Brian Wing Shun Chan
  *
  */
-public class StripResponse extends HttpServletResponseWrapper {
+public class CompressionResponse extends HttpServletResponseWrapper {
 
-	public StripResponse(HttpServletResponse res) {
+	public CompressionResponse(HttpServletResponse res) {
 		super(res);
+
+		_res = res;
 	}
 
 	public void finishResponse() {
@@ -88,43 +89,17 @@ public class StripResponse extends HttpServletResponseWrapper {
 
 		_writer = new PrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
-			_stream, StripFilter.ENCODING));
+			_stream, CompressionFilter.ENCODING));
 
 		return _writer;
 	}
 
-	public boolean isCommitted() {
-		if (_stream != null) {
-			return true;
-		}
-		else {
-			return super.isCommitted();
-		}
-	}
-
-	public String getContentType() {
-		return _contentType;
-	}
-
-	public void setContentType(String contentType) {
-		_contentType = contentType;
-
-		super.setContentType(contentType);
-	}
-
-	public byte[] getData() {
-		finishResponse();
-
-		return _bam.toByteArray();
-	}
-
 	private ServletOutputStream _createOutputStream() throws IOException {
-		return new StripStream(_bam);
+		return new CompressionStream(_res);
 	}
 
-	private ByteArrayMaker _bam = new ByteArrayMaker();
+	private HttpServletResponse _res = null;
 	private ServletOutputStream _stream = null;
 	private PrintWriter _writer = null;
-	private String _contentType;
 
 }

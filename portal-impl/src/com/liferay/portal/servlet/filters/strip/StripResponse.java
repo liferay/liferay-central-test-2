@@ -20,7 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.compression;
+package com.liferay.portal.servlet.filters.strip;
+
+import com.liferay.portal.kernel.util.ByteArrayMaker;
 
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -31,18 +33,15 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
 /**
- * <a href="CompressionResponse.java.html"><b><i>View Source</i></b></a>
+ * <a href="StripResponse.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jayson Falkner
  * @author Brian Wing Shun Chan
  *
  */
-public class CompressionResponse extends HttpServletResponseWrapper {
+public class StripResponse extends HttpServletResponseWrapper {
 
-	public CompressionResponse(HttpServletResponse res) {
+	public StripResponse(HttpServletResponse res) {
 		super(res);
-
-		_res = res;
 	}
 
 	public void finishResponse() {
@@ -89,17 +88,43 @@ public class CompressionResponse extends HttpServletResponseWrapper {
 
 		_writer = new PrintWriter(new OutputStreamWriter(
 			//_stream, _res.getCharacterEncoding()));
-			_stream, CompressionFilter.ENCODING));
+			_stream, StripFilter.ENCODING));
 
 		return _writer;
 	}
 
-	private ServletOutputStream _createOutputStream() throws IOException {
-		return new CompressionStream(_res);
+	public boolean isCommitted() {
+		if (_stream != null) {
+			return true;
+		}
+		else {
+			return super.isCommitted();
+		}
 	}
 
-	private HttpServletResponse _res = null;
+	public String getContentType() {
+		return _contentType;
+	}
+
+	public void setContentType(String contentType) {
+		_contentType = contentType;
+
+		super.setContentType(contentType);
+	}
+
+	public byte[] getData() {
+		finishResponse();
+
+		return _bam.toByteArray();
+	}
+
+	private ServletOutputStream _createOutputStream() throws IOException {
+		return new StripStream(_bam);
+	}
+
+	private ByteArrayMaker _bam = new ByteArrayMaker();
 	private ServletOutputStream _stream = null;
 	private PrintWriter _writer = null;
+	private String _contentType;
 
 }

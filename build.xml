@@ -38,8 +38,6 @@
 		<ant dir="util-java" target="clean" inheritAll="false" />
 		<ant dir="util-taglib" target="clean" inheritAll="false" />
 
-		<ant dir="filters" target="clean" inheritAll="false" />
-
 		<ant dir="counter-impl" target="clean" inheritAll="false" />
 		<ant dir="documentlibrary-impl" target="clean" inheritAll="false" />
 		<ant dir="lock-impl" target="clean" inheritAll="false" />
@@ -233,8 +231,6 @@
 
 		<ant dir="portal-impl" target="compile-common" inheritAll="false" />
 
-		<ant dir="filters" target="compile" inheritAll="false" />
-
 		<ant dir="counter-impl" target="compile" inheritAll="false" />
 		<ant dir="documentlibrary-impl" target="compile" inheritAll="false" />
 		<ant dir="lock-impl" target="compile" inheritAll="false" />
@@ -253,8 +249,6 @@
 		<ant dir="util-bridges" target="jar" inheritAll="false" />
 		<ant dir="util-java" target="jar" inheritAll="false" />
 		<ant dir="util-taglib" target="jar" inheritAll="false" />
-
-		<ant dir="filters" target="jar" inheritAll="false" />
 
 		<ant dir="counter-impl" target="jar" inheritAll="false" />
 		<ant dir="documentlibrary-impl" target="jar" inheritAll="false" />
@@ -278,8 +272,6 @@
 		<ant dir="util-java" target="java2html" inheritAll="false" />
 		<ant dir="util-taglib" target="java2html" inheritAll="false" />
 
-		<ant dir="filters" target="java2html" inheritAll="false" />
-
 		<ant dir="counter-impl" target="java2html" inheritAll="false" />
 		<ant dir="documentlibrary-impl" target="java2html" inheritAll="false" />
 		<ant dir="lock-impl" target="java2html" inheritAll="false" />
@@ -296,8 +288,6 @@
 		<ant dir="util-bridges" target="javadoc" inheritAll="false" />
 		<ant dir="util-java" target="javadoc" inheritAll="false" />
 		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
-
-		<ant dir="filters" target="javadoc" inheritAll="false" />
 
 		<ant dir="counter-impl" target="javadoc" inheritAll="false" />
 		<ant dir="documentlibrary-impl" target="javadoc" inheritAll="false" />
@@ -324,8 +314,6 @@
 		<ant dir="util-bridges" target="deploy" inheritAll="false" />
 		<ant dir="util-java" target="deploy" inheritAll="false" />
 		<ant dir="util-taglib" target="deploy" inheritAll="false" />
-
-		<ant dir="filters" target="deploy" inheritAll="false" />
 
 		<ant dir="counter-impl" target="deploy" inheritAll="false" />
 		<ant dir="documentlibrary-impl" target="deploy" inheritAll="false" />
@@ -1189,11 +1177,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<delete file="${lp.ext.dir}/lib/global/portal-shared.jar" failonerror="false" />
 
 		<copy todir="${lp.ext.dir}/lib/portal" preservelastmodified="true">
-			<fileset dir="filters/compression" includes="compression-filter.jar" />
-			<fileset dir="filters/doubleclick" includes="doubleclick-filter.jar" />
-			<fileset dir="filters/header" includes="header-filter.jar" />
-			<fileset dir="filters/secure" includes="secure-filter.jar" />
-			<fileset dir="filters/strip" includes="strip-filter.jar" />
 			<fileset dir="util-bridges" includes="util-bridges.jar" />
 			<fileset dir="util-java" includes="util-java.jar" />
 			<fileset dir="util-taglib" includes="util-taglib.jar" />

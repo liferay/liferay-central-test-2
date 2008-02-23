@@ -102,7 +102,7 @@ public class ThemeDeployer extends BaseDeployer {
 		sm.append("<init-param>");
 		sm.append("<param-name>filter-class</param-name>");
 		sm.append("<param-value>");
-		sm.append("com.liferay.filters.header.HeaderFilter");
+		sm.append("com.liferay.portal.servlet.filters.header.HeaderFilter");
 		sm.append("</param-value>");
 		sm.append("</init-param>");
 		sm.append("<init-param>");
@@ -150,7 +150,8 @@ public class ThemeDeployer extends BaseDeployer {
 		sm.append("<init-param>");
 		sm.append("<param-name>filter-class</param-name>");
 		sm.append("<param-value>");
-		sm.append("com.liferay.filters.compression.CompressionFilter");
+		sm.append(
+			"com.liferay.portal.servlet.filters.compression.CompressionFilter");
 		sm.append("</param-value>");
 		sm.append("</init-param>");
 		sm.append("</filter>");

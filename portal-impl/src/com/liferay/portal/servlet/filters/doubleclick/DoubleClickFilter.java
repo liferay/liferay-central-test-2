@@ -20,12 +20,14 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.doubleclick;
+package com.liferay.portal.servlet.filters.doubleclick;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 
@@ -46,16 +48,16 @@ import org.apache.commons.lang.time.StopWatch;
  *
  * @author Olaf Fricke
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class DoubleClickFilter extends BaseFilter {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		SystemProperties.get(DoubleClickFilter.class.getName()), true);
+		PropsUtil.get(DoubleClickFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), "UTF-8");
+		SystemProperties.get("file.encoding"), StringPool.UTF8);
 
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)

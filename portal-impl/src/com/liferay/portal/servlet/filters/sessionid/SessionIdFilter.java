@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.SystemProperties;
+import com.liferay.portal.util.PropsUtil;
 
 import java.io.IOException;
 
@@ -45,13 +45,13 @@ import javax.servlet.http.HttpServletResponse;
  * </p>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class SessionIdFilter extends BaseFilter {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		SystemProperties.get(SessionIdFilter.class.getName()), true);
+		PropsUtil.get(SessionIdFilter.class.getName()), true);
 
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)

@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.strip;
+package com.liferay.portal.servlet.filters.strip;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -28,6 +28,8 @@ import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -45,16 +47,16 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="StripFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Aug?
  *
  */
 public class StripFilter extends BaseFilter {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		SystemProperties.get(StripFilter.class.getName()), true);
+		PropsUtil.get(StripFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), "UTF-8");
+		SystemProperties.get("file.encoding"), StringPool.UTF8);
 
 	public void doFilter(
 			ServletRequest req, ServletResponse res, FilterChain chain)

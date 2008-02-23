@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.compression;
+package com.liferay.portal.servlet.filters.compression;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 
@@ -46,16 +48,16 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="CompressionFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class CompressionFilter extends BaseFilter {
 
 	static boolean useFilter = GetterUtil.getBoolean(
-		SystemProperties.get(CompressionFilter.class.getName()), true);
+		PropsUtil.get(CompressionFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), "UTF-8");
+		SystemProperties.get("file.encoding"), StringPool.UTF8);
 
 	static {
 

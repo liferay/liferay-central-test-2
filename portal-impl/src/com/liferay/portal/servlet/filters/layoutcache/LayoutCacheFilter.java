@@ -48,6 +48,7 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Http;
@@ -74,16 +75,16 @@ import javax.servlet.http.HttpSession;
  *
  * @author Alexander Chow
  * @author Javier de Ros
- * @author Raymond Augé
+ * @author Raymond Aug?
  *
  */
 public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		SystemProperties.get(LayoutCacheFilter.class.getName()), true);
+		PropsUtil.get(LayoutCacheFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), "UTF-8");
+		SystemProperties.get("file.encoding"), StringPool.UTF8);
 
 	public void portalInit() {
 		_pattern = GetterUtil.getInteger(

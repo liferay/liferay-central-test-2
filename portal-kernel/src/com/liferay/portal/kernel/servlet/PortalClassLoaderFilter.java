@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
 
@@ -50,6 +51,12 @@ public class PortalClassLoaderFilter implements Filter, PortalInitable {
 			ClassLoader classLoader = PortalClassLoaderUtil.getClassLoader();
 
 			String filterClass = _config.getInitParameter("filter-class");
+
+			if (filterClass.startsWith("com.liferay.filters.")) {
+				filterClass = StringUtil.replace(
+					filterClass, "com.liferay.filters.",
+					"com.liferay.portal.servlet.filters.");
+			}
 
 			_filter = (Filter)classLoader.loadClass(filterClass).newInstance();
 

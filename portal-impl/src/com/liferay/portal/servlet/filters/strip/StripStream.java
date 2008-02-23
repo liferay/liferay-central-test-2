@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.strip;
+package com.liferay.portal.servlet.filters.strip;
 
 import java.io.DataOutputStream;
 import java.io.IOException;

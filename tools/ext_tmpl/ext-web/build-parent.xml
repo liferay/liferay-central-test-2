@@ -161,12 +161,6 @@
 
 		<antcall target="compile-common-lib" />
 
-		<unjar src="${project.dir}/lib/portal/compression-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/doubleclick-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/header-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/secure-filter.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lib/portal/strip-filter.jar" dest="${classpath.jsp}" />
-
 		<unjar src="${project.dir}/lib/development/saxpath.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/axis.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/lib/portal/casclient.jar" dest="${classpath.jsp}" />

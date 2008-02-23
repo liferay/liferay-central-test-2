@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.filters.header;
+package com.liferay.portal.servlet.filters.header;
 
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;

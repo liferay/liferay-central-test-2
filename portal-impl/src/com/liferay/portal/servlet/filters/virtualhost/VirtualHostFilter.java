@@ -38,6 +38,7 @@ import com.liferay.portal.servlet.AbsoluteRedirectsResponse;
 import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.SystemProperties;
 
@@ -67,16 +68,16 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Aug?
  *
  */
 public class VirtualHostFilter extends BaseFilter {
 
 	public static final boolean USE_FILTER = GetterUtil.getBoolean(
-		SystemProperties.get(VirtualHostFilter.class.getName()), true);
+		PropsUtil.get(VirtualHostFilter.class.getName()), true);
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), "UTF-8");
+		SystemProperties.get("file.encoding"), StringPool.UTF8);
 
 	public void init(FilterConfig config) throws ServletException {
 		super.init(config);
