@@ -456,6 +456,48 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED));
 
+	public static final String MESSAGE_BOARDS_EMAIL_FROM_ADDRESS =
+		PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS);
+
+	public static final String MESSAGE_BOARDS_EMAIL_FROM_NAME =
+		PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EMAIL_FROM_NAME);
+
+	public static final boolean MESSAGE_BOARDS_EMAIL_HTML_FORMAT =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EMAIL_HTML_FORMAT));
+
+	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY =
+		PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY);
+
+	public static final boolean
+		MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED));
+
+	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SIGNATURE =
+		PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SIGNATURE);
+
+	public static final String
+		MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT_PREFIX =
+			PropsUtil.get(PropsUtil.
+				MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT_PREFIX);
+
+	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY =
+		PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY);
+
+	public static final boolean
+		MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED =
+			GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
+				MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED));
+
+	public static final String MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SIGNATURE =
+		PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SIGNATURE);
+
+	public static final String
+		MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX =
+			PropsUtil.get(PropsUtil.
+				MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX);
+
 	public static final int MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));

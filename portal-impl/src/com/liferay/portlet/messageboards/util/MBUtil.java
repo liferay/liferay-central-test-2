@@ -42,7 +42,6 @@ import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -214,15 +213,13 @@ public class MBUtil {
 	}
 
 	public static String getEmailFromAddress(PortletPreferences prefs) {
-		String emailFromAddress = PropsUtil.get(
-			PropsUtil.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS);
+		String emailFromAddress = PropsValues.MESSAGE_BOARDS_EMAIL_FROM_ADDRESS;
 
 		return prefs.getValue("email-from-address", emailFromAddress);
 	}
 
 	public static String getEmailFromName(PortletPreferences prefs) {
-		String emailFromName = PropsUtil.get(
-			PropsUtil.MESSAGE_BOARDS_EMAIL_FROM_NAME);
+		String emailFromName = PropsValues.MESSAGE_BOARDS_EMAIL_FROM_NAME;
 
 		return prefs.getValue("email-from-name", emailFromName);
 	}
@@ -235,8 +232,7 @@ public class MBUtil {
 			return GetterUtil.getBoolean(emailHtmlFormat);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_HTML_FORMAT));
+			return PropsValues.MESSAGE_BOARDS_EMAIL_HTML_FORMAT;
 		}
 	}
 
@@ -250,8 +246,7 @@ public class MBUtil {
 			return GetterUtil.getBoolean(emailMessageAddedEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED));
+			return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_ENABLED;
 		}
 	}
 
@@ -265,8 +260,8 @@ public class MBUtil {
 			return emailMessageAddedBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY));
+			return ContentUtil.get(
+				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_BODY);
 		}
 	}
 
@@ -280,8 +275,8 @@ public class MBUtil {
 			return emailMessageAddedSignature;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SIGNATURE));
+			return ContentUtil.get(
+				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SIGNATURE);
 		}
 	}
 
@@ -296,8 +291,8 @@ public class MBUtil {
 			return emailMessageAddedSubjectPrefix;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT_PREFIX));
+			return ContentUtil.get(
+				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_ADDED_SUBJECT_PREFIX);
 		}
 	}
 
@@ -311,8 +306,7 @@ public class MBUtil {
 			return GetterUtil.getBoolean(emailMessageUpdatedEnabled);
 		}
 		else {
-			return GetterUtil.getBoolean(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED));
+			return PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_ENABLED;
 		}
 	}
 
@@ -326,8 +320,8 @@ public class MBUtil {
 			return emailMessageUpdatedBody;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY));
+			return ContentUtil.get(
+				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_BODY);
 		}
 	}
 
@@ -342,8 +336,8 @@ public class MBUtil {
 			return emailMessageUpdatedSignature;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SIGNATURE));
+			return ContentUtil.get(
+				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SIGNATURE);
 		}
 	}
 
@@ -358,8 +352,8 @@ public class MBUtil {
 			return emailMessageUpdatedSubject;
 		}
 		else {
-			return ContentUtil.get(PropsUtil.get(
-				PropsUtil.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX));
+			return ContentUtil.get(
+				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX);
 		}
 	}
 
