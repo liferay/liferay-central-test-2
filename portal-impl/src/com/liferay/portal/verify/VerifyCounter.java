@@ -20,56 +20,65 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.events;
+package com.liferay.portal.verify;
 
 import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.kernel.events.ActionException;
-import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.service.PermissionLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
- * <a href="FixCounterAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyCounter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Brian Wing Shun Chan
  *
  */
-public class FixCounterAction extends SimpleAction {
+public class VerifyCounter extends VerifyProcess {
 
-	public void run(String[] ids) throws ActionException {
+	public void verify() throws VerifyException {
+		_log.info("Verifying");
+
 		try {
-
-			// Fix Resource
-
-			long latestResourceId =
-				ResourceLocalServiceUtil.getLatestResourceId();
-
-			long counterResourceId = CounterLocalServiceUtil.increment(
-				Resource.class.getName());
-
-			if (latestResourceId > counterResourceId - 1) {
-				CounterLocalServiceUtil.reset(
-					Resource.class.getName(), latestResourceId);
-			}
-
-			// Fix Permission
-
-			long latestPermissionId =
-				PermissionLocalServiceUtil.getLatestPermissionId();
-
-			long counterPermissionId = CounterLocalServiceUtil.increment(
-				Permission.class.getName());
-
-			if (latestPermissionId > counterPermissionId - 1) {
-				CounterLocalServiceUtil.reset(
-					Permission.class.getName(), latestPermissionId);
-			}
+			verifyCounter();
 		}
 		catch (Exception e) {
-			throw new ActionException(e);
+			throw new VerifyException(e);
 		}
 	}
+
+	protected void verifyCounter() throws Exception {
+
+		// Resource
+
+		long latestResourceId = ResourceLocalServiceUtil.getLatestResourceId();
+
+		long counterResourceId = CounterLocalServiceUtil.increment(
+			Resource.class.getName());
+
+		if (latestResourceId > counterResourceId - 1) {
+			CounterLocalServiceUtil.reset(
+				Resource.class.getName(), latestResourceId);
+		}
+
+		// Permission
+
+		long latestPermissionId =
+			PermissionLocalServiceUtil.getLatestPermissionId();
+
+		long counterPermissionId = CounterLocalServiceUtil.increment(
+			Permission.class.getName());
+
+		if (latestPermissionId > counterPermissionId - 1) {
+			CounterLocalServiceUtil.reset(
+				Permission.class.getName(), latestPermissionId);
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(VerifyCounter.class);
 
 }

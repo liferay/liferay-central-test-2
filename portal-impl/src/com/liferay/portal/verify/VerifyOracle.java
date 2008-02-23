@@ -20,12 +20,8 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.events;
+package com.liferay.portal.verify;
 
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.events.ActionException;
-import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.action.ExportAction;
@@ -42,26 +38,28 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="FixOracleAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyOracle.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class FixOracleAction extends SimpleAction {
+public class VerifyOracle extends VerifyProcess {
 
 	public static final int NUM_OF_ARTICLES = GetterUtil.getInteger(
-		PropsUtil.get(FixOracleAction.class.getName()), 5);
+		PropsUtil.get(VerifyOracle.class.getName()), 5);
 
-	public void run(String[] ids) throws ActionException {
+	public void verify() throws VerifyException {
+		_log.info("Verifying");
+
 		try {
-			_fixNewLine();
+			verifyOracle();
 		}
 		catch (Exception e) {
-			throw new ActionException(e);
+			throw new VerifyException(e);
 		}
 	}
 
-	private void _fixNewLine() throws PortalException, SystemException {
+	protected void verifyOracle() throws Exception {
 
 		// This is a workaround for a limitation in Oracle sqlldr's inability
 		// insert new line characters for long varchar columns. See
@@ -71,7 +69,7 @@ public class FixOracleAction extends SimpleAction {
 
 		boolean checkNewLine = false;
 
-		List articles = null;
+		List<JournalArticle> articles = null;
 
 		if (NUM_OF_ARTICLES <= 0) {
 			checkNewLine = true;
@@ -85,7 +83,7 @@ public class FixOracleAction extends SimpleAction {
 		}
 
 		for (int i = 0; i < articles.size(); i++) {
-			JournalArticle article = (JournalArticle)articles.get(i);
+			JournalArticle article = articles.get(i);
 
 			String content = article.getContent();
 
@@ -94,7 +92,7 @@ public class FixOracleAction extends SimpleAction {
 					ExportAction.DEFAULT_GROUP_ID);
 
 				for (int j = 0; j < articles.size(); j++) {
-					article = (JournalArticle)articles.get(j);
+					article = articles.get(j);
 
 					JournalArticleLocalServiceUtil.checkNewLine(
 						article.getGroupId(), article.getArticleId(),
@@ -122,11 +120,12 @@ public class FixOracleAction extends SimpleAction {
 			}
 		}
 
-		List structures = JournalStructureLocalServiceUtil.getStructures(
-			ExportAction.DEFAULT_GROUP_ID, 0, 1);
+		List<JournalStructure> structures =
+			JournalStructureLocalServiceUtil.getStructures(
+				ExportAction.DEFAULT_GROUP_ID, 0, 1);
 
 		if (structures.size() == 1) {
-			JournalStructure structure = (JournalStructure)structures.get(0);
+			JournalStructure structure = structures.get(0);
 
 			String xsd = structure.getXsd();
 
@@ -135,7 +134,7 @@ public class FixOracleAction extends SimpleAction {
 					ExportAction.DEFAULT_GROUP_ID);
 
 				for (int i = 0; i < structures.size(); i++) {
-					structure = (JournalStructure)structures.get(i);
+					structure = structures.get(i);
 
 					JournalStructureLocalServiceUtil.checkNewLine(
 						structure.getGroupId(), structure.getStructureId());
@@ -143,11 +142,12 @@ public class FixOracleAction extends SimpleAction {
 			}
 		}
 
-		List templates = JournalTemplateLocalServiceUtil.getTemplates(
-			ExportAction.DEFAULT_GROUP_ID, 0, 1);
+		List<JournalTemplate> templates =
+			JournalTemplateLocalServiceUtil.getTemplates(
+				ExportAction.DEFAULT_GROUP_ID, 0, 1);
 
 		if (templates.size() == 1) {
-			JournalTemplate template = (JournalTemplate)templates.get(0);
+			JournalTemplate template = templates.get(0);
 
 			String xsl = template.getXsl();
 
@@ -156,7 +156,7 @@ public class FixOracleAction extends SimpleAction {
 					ExportAction.DEFAULT_GROUP_ID);
 
 				for (int i = 0; i < templates.size(); i++) {
-					template = (JournalTemplate)templates.get(i);
+					template = templates.get(i);
 
 					JournalTemplateLocalServiceUtil.checkNewLine(
 						template.getGroupId(), template.getTemplateId());
@@ -165,6 +165,6 @@ public class FixOracleAction extends SimpleAction {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(FixOracleAction.class);
+	private static Log _log = LogFactory.getLog(VerifyOracle.class);
 
 }

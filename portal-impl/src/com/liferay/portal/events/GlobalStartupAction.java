@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -183,20 +182,6 @@ public class GlobalStartupAction extends SimpleAction {
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
 			POPServerUtil.start();
 		}
-
-		// Other required events
-
-		runEvent(FixOracleAction.class.getName(), ids);
-		runEvent(FixCounterAction.class.getName(), ids);
-		//runEvent(FixJournalAction.class.getName(), ids);
-	}
-
-	protected void runEvent(String className, String[] ids)
-		throws ActionException {
-
-		SimpleAction action = (SimpleAction)InstancePool.get(className);
-
-		action.run(ids);
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

@@ -37,6 +37,8 @@ public class VerifyProcessSuite extends VerifyProcess {
 		_log.info("Verifying");
 
 		verify(new VerifyLucene());
+		verify(new VerifyCounter());
+		verify(new VerifyOracle());
 		verify(new VerifyBlogs());
 		verify(new VerifyBookmarks());
 		verify(new VerifyDocumentLibrary());
