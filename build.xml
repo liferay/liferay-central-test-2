@@ -1665,24 +1665,22 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<param name="deployer.app.server.type" value="tomcat" />
 		</antcall>
 
-		<antcall target="zip-executable">
+		<!--<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-tomcat-5.5" />
 			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
-		</antcall>
+		</antcall>-->
 
-		<delete file="dist/liferay-portal-tomcat-5.5-jdk5-${lp.version.file.name}.zip" failonerror="false" />
-
-		<zip destfile="dist/liferay-portal-tomcat-5.5-jdk5-${lp.version.file.name}.zip">
+		<zip destfile="dist/liferay-portal-tomcat-5.5-${lp.version.file.name}.zip">
 			<zipfileset
 				dir="${app.server.tomcat.dir}"
-				excludes="**/*.sh,bin/jmx.jar"
-				prefix="liferay-portal-tomcat-5.5-jdk5-${lp.version.file.name}"
+				excludes="**/*.sh,bin/jmx.jar,common/endorsed/xercesImpl.jar,common/endorsed/xml-apis.jar"
+				prefix="liferay-portal-tomcat-5.5-${lp.version.file.name}"
 			/>
 			<zipfileset
 				dir="${app.server.tomcat.dir}"
 				filemode="744"
 				includes="**/*.sh"
-				prefix="liferay-portal-tomcat-5.5-jdk5-${lp.version.file.name}"
+				prefix="liferay-portal-tomcat-5.5-${lp.version.file.name}"
 			/>
 		</zip>
 	</target>
@@ -1713,11 +1711,14 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<antcall target="zip-portal-war" />
 
+		<antcall target="build-dist-geronimo-tomcat" />
+		<antcall target="build-dist-glassfish" />
 		<antcall target="build-dist-jboss-jetty" />
 		<antcall target="build-dist-jboss-tomcat" />
 		<antcall target="build-dist-jetty" />
 		<antcall target="build-dist-jonas-jetty" />
 		<antcall target="build-dist-jonas-tomcat" />
+		<antcall target="build-dist-pramati" />
 		<antcall target="build-dist-resin" />
 		<antcall target="build-dist-tomcat" />
 
@@ -1725,11 +1726,13 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<antcall target="zip-api" />
 		<antcall target="zip-ext" />
+		<antcall target="zip-geronimo-tomcat" />
 		<antcall target="zip-jboss" />
 		<antcall target="zip-jetty" />
 		<antcall target="zip-jonas" />
 		<antcall target="zip-portal-client" />
 		<antcall target="zip-portal-dependencies" />
+		<antcall target="zip-pramati" />
 		<antcall target="zip-resin" />
 		<antcall target="zip-sql" />
 		<antcall target="zip-src" />
@@ -1759,14 +1762,5 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
 
 		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" todir="dist" />
-	</target>
-
-	<target name="dist-jdk5">
-		<antcall target="build-dist-geronimo-tomcat" />
-		<antcall target="build-dist-glassfish" />
-		<antcall target="build-dist-pramati" />
-
-		<antcall target="zip-geronimo-tomcat" />
-		<antcall target="zip-pramati" />
 	</target>
 </project>
