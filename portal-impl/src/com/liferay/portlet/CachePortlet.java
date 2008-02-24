@@ -172,6 +172,48 @@ public class CachePortlet implements Portlet {
 		_portletId = _portletConfig.getPortletId();
 	}
 
+	public void destroy() {
+		if (_destroyable) {
+			ClassLoader contextClassLoader =
+				Thread.currentThread().getContextClassLoader();
+
+			ClassLoader portletClassLoader = _getPortletClassLoader();
+
+			try {
+				if (portletClassLoader != null) {
+					Thread.currentThread().setContextClassLoader(
+						portletClassLoader);
+				}
+
+				_portlet.destroy();
+			}
+			finally {
+				if (portletClassLoader != null) {
+					Thread.currentThread().setContextClassLoader(
+						contextClassLoader);
+				}
+			}
+		}
+
+		_destroyable = false;
+	}
+
+	public PortletConfigImpl getPortletConfig() {
+		return _portletConfig;
+	}
+
+	public PortletContextImpl getPortletContext() {
+		return _portletCtx;
+	}
+
+	public Portlet getPortletInstance() {
+		return _portlet;
+	}
+
+	public Integer getExpCache() {
+		return _expCache;
+	}
+
 	public void init(PortletConfig portletConfig) throws PortletException {
 		_portletConfig = (PortletConfigImpl)portletConfig;
 
@@ -198,6 +240,22 @@ public class CachePortlet implements Portlet {
 		}
 
 		_destroyable = true;
+	}
+
+	public boolean isDestroyable() {
+		return _destroyable;
+	}
+
+	public boolean isFacesPortlet() {
+		return _facesPortlet;
+	}
+
+	public boolean isStrutsBridgePortlet() {
+		return _strutsBridgePortlet;
+	}
+
+	public boolean isStrutsPortlet() {
+		return _strutsPortlet;
 	}
 
 	public void processAction(ActionRequest req, ActionResponse res)
@@ -300,64 +358,6 @@ public class CachePortlet implements Portlet {
 				"render for " + _portletId + " takes " + stopWatch.getTime() +
 					" ms");
 		}
-	}
-
-	public void destroy() {
-		if (_destroyable) {
-			ClassLoader contextClassLoader =
-				Thread.currentThread().getContextClassLoader();
-
-			ClassLoader portletClassLoader = _getPortletClassLoader();
-
-			try {
-				if (portletClassLoader != null) {
-					Thread.currentThread().setContextClassLoader(
-						portletClassLoader);
-				}
-
-				_portlet.destroy();
-			}
-			finally {
-				if (portletClassLoader != null) {
-					Thread.currentThread().setContextClassLoader(
-						contextClassLoader);
-				}
-			}
-		}
-
-		_destroyable = false;
-	}
-
-	public Portlet getPortletInstance() {
-		return _portlet;
-	}
-
-	public PortletConfigImpl getPortletConfig() {
-		return _portletConfig;
-	}
-
-	public PortletContextImpl getPortletContext() {
-		return _portletCtx;
-	}
-
-	public Integer getExpCache() {
-		return _expCache;
-	}
-
-	public boolean isDestroyable() {
-		return _destroyable;
-	}
-
-	public boolean isFacesPortlet() {
-		return _facesPortlet;
-	}
-
-	public boolean isStrutsPortlet() {
-		return _strutsPortlet;
-	}
-
-	public boolean isStrutsBridgePortlet() {
-		return _strutsBridgePortlet;
 	}
 
 	private ClassLoader _getPortletClassLoader() {

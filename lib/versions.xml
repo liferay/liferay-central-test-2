@@ -654,12 +654,12 @@
 	</library>
 	<library>
 		<file-name>global/portlet.jar</file-name>
-		<version>1.0</version>
-		<project-name>JSR-168 Portlet 1.0 Specification</project-name>
-		<project-url>TODO: http://jcp.org/en/jsr/detail?id=168</project-url>
+		<version>2.0</version>
+		<project-name>JSR 286 Portlet 2.0 Specification</project-name>
+		<project-url>http://jcp.org/en/jsr/detail?id=286</project-url>
 		<licenses>
 			<license>
-				<license-name>Sun/IBM Java Portlet Specification 1.0 License</license-name>
+				<license-name>IBM Java Portlet Specification 2.0 License</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -1267,7 +1267,7 @@
 	<library>
 		<file-name>portal/j2ee-management.jar</file-name>
 		<version>1.0</version>
-		<project-name>JSR-77 J2EE Management Specification 1.0</project-name>
+		<project-name>JSR 77 J2EE Management Specification 1.0</project-name>
 		<project-url>http://java.sun.com/j2ee/tools/management</project-url>
 		<licenses>
 			<license>
@@ -1420,7 +1420,7 @@
 	<library>
 		<file-name>portal/jcr.jar</file-name>
 		<version></version>
-		<project-name>JSR-170 Content Repository for Java Technology</project-name>
+		<project-name>JSR 170 Content Repository for Java Technology</project-name>
 		<project-url>http://jcp.org/en/jsr/detail?id=170</project-url>
 		<licenses>
 			<license>

@@ -54,60 +54,6 @@ import javax.servlet.ServletException;
  */
 public class StrutsPortlet extends LiferayPortlet {
 
-	public void init(PortletConfig config) throws PortletException {
-		super.init(config);
-
-		aboutAction = getInitParameter("about-action");
-		configAction = getInitParameter("config-action");
-		editAction = getInitParameter("edit-action");
-		editDefaultsAction = getInitParameter("edit-defaults-action");
-		editGuestAction = getInitParameter("edit-guest-action");
-		helpAction = getInitParameter("help-action");
-		previewAction = getInitParameter("preview-action");
-		printAction = getInitParameter("print-action");
-		viewAction = getInitParameter("view-action");
-
-		copyRequestParameters = GetterUtil.getBoolean(
-			getInitParameter("copy-request-parameters"), true);
-
-		_portletConfig = (PortletConfigImpl)config;
-	}
-
-	public void processAction(ActionRequest req, ActionResponse res)
-		throws IOException, PortletException {
-
-		String path = req.getParameter("struts_action");
-
-		if (Validator.isNotNull(path)) {
-
-			// Call processAction of com.liferay.portal.struts.PortletAction
-
-			PermissionCheckerImpl permissionChecker = (PermissionCheckerImpl)
-				PermissionThreadLocal.getPermissionChecker();
-
-			try {
-				permissionChecker.setValues(req);
-
-				// Process action
-
-				PortletRequestProcessor processor =
-					_getPortletRequestProcessor(req);
-
-				processor.process(req, res, path);
-			}
-			catch (ServletException se) {
-				throw new PortletException(se);
-			}
-			finally {
-				permissionChecker.resetValues();
-			}
-		}
-
-		if (copyRequestParameters) {
-			PortalUtil.copyRequestParameters(req, res);
-		}
-	}
-
 	public void doAbout(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
@@ -193,6 +139,60 @@ public class StrutsPortlet extends LiferayPortlet {
 		req.setAttribute(WebKeys.PORTLET_STRUTS_ACTION, viewAction);
 
 		include(req, res);
+	}
+
+	public void init(PortletConfig config) throws PortletException {
+		super.init(config);
+
+		aboutAction = getInitParameter("about-action");
+		configAction = getInitParameter("config-action");
+		editAction = getInitParameter("edit-action");
+		editDefaultsAction = getInitParameter("edit-defaults-action");
+		editGuestAction = getInitParameter("edit-guest-action");
+		helpAction = getInitParameter("help-action");
+		previewAction = getInitParameter("preview-action");
+		printAction = getInitParameter("print-action");
+		viewAction = getInitParameter("view-action");
+
+		copyRequestParameters = GetterUtil.getBoolean(
+			getInitParameter("copy-request-parameters"), true);
+
+		_portletConfig = (PortletConfigImpl)config;
+	}
+
+	public void processAction(ActionRequest req, ActionResponse res)
+		throws IOException, PortletException {
+
+		String path = req.getParameter("struts_action");
+
+		if (Validator.isNotNull(path)) {
+
+			// Call processAction of com.liferay.portal.struts.PortletAction
+
+			PermissionCheckerImpl permissionChecker = (PermissionCheckerImpl)
+				PermissionThreadLocal.getPermissionChecker();
+
+			try {
+				permissionChecker.setValues(req);
+
+				// Process action
+
+				PortletRequestProcessor processor =
+					_getPortletRequestProcessor(req);
+
+				processor.process(req, res, path);
+			}
+			catch (ServletException se) {
+				throw new PortletException(se);
+			}
+			finally {
+				permissionChecker.resetValues();
+			}
+		}
+
+		if (copyRequestParameters) {
+			PortalUtil.copyRequestParameters(req, res);
+		}
 	}
 
 	protected void include(RenderRequest req, RenderResponse res)

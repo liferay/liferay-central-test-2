@@ -292,6 +292,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"http://java.sun.com/xml/ns/portlet/portlet-app_2_0.xsd",
+			"portlet-app_2_0.xsd"
+		),
+
+		new KeyValuePair(
 			"http://www.w3.org/2001/xml.xsd",
 			"xml.xsd"
 		)
