@@ -40,7 +40,6 @@ import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
@@ -80,9 +79,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class PortletURLImpl implements LiferayPortletURL, Serializable {
-
-	public static final boolean APPEND_PARAMETERS = GetterUtil.getBoolean(
-		PropsUtil.get(PropsUtil.PORTLET_URL_APPEND_PARAMETERS));
 
 	public PortletURLImpl(
 		ActionRequestImpl req, String portletId, long plid, boolean action) {
@@ -295,7 +291,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 	}
 
 	public void setParameter(String name, String value) {
-		setParameter(name, value, APPEND_PARAMETERS);
+		setParameter(name, value, PropsValues.PORTLET_URL_APPEND_PARAMETERS);
 	}
 
 	public void setParameter(String name, String value, boolean append) {
@@ -307,7 +303,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 	}
 
 	public void setParameter(String name, String[] values) {
-		setParameter(name, values, APPEND_PARAMETERS);
+		setParameter(name, values, PropsValues.PORTLET_URL_APPEND_PARAMETERS);
 	}
 
 	public void setParameter(String name, String[] values, boolean append) {
