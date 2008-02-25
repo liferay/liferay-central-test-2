@@ -59,7 +59,7 @@ public class MailConsumer implements MessageListener {
 
 			QueueSession session = con.createQueueSession(
 				false, Session.AUTO_ACKNOWLEDGE);
-			Queue queue = (Queue)MailQueueUtil.getQueue();
+			Queue queue = MailQueueUtil.getQueue();
 
 			QueueReceiver subscriber = session.createReceiver(queue);
 

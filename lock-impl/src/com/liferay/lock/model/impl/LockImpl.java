@@ -85,12 +85,10 @@ public class LockImpl implements Lock {
 		return _date;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
+	public int compareTo(Lock lock) {
+		if (lock == null) {
 			return -1;
 		}
-
-		Lock lock = (Lock)obj;
 
 		int value = 0;
 		value = getClassName().compareTo(lock.getClassName());
@@ -115,12 +113,10 @@ public class LockImpl implements Lock {
 		return 0;
 	}
 
-	public boolean equals(Object obj) {
-		if (obj == null) {
+	public boolean equals(Lock lock) {
+		if (lock == null) {
 			return false;
 		}
-
-		Lock lock = (Lock)obj;
 
 		if (getClassName().equals(lock.getClassName()) &&
 			getPrimaryKey().equals(lock.getPrimaryKey())) {

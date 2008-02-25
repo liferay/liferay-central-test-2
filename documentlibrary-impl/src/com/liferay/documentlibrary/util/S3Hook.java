@@ -222,7 +222,7 @@ public class S3Hook extends BaseHook {
 				list.add(key.substring(x, y));
 			}
 
-			return (String[])list.toArray(new String[0]);
+			return list.toArray(new String[list.size()]);
 		}
 		catch (S3ServiceException s3se) {
 			throw new SystemException(s3se);

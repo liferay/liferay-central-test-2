@@ -32,11 +32,11 @@ import java.util.Date;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Lock extends Comparable, Serializable {
+public interface Lock extends Comparable<Lock>, Serializable {
 
 	public String getClassName();
 
-	public Comparable getPrimaryKey();
+	public Comparable<?> getPrimaryKey();
 
 	public long getCompanyId();
 
@@ -50,8 +50,8 @@ public interface Lock extends Comparable, Serializable {
 
 	public Date getDate();
 
-	public int compareTo(Object obj);
+	public int compareTo(Lock lock);
 
-	public boolean equals(Object obj);
+	public boolean equals(Lock lock);
 
 }

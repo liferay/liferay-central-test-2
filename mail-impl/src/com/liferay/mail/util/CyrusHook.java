@@ -86,9 +86,9 @@ public class CyrusHook implements Hook {
 						sm.append(":0\n");
 						sm.append("!");
 
-						for (int i = 0; i < emailAddresses.size(); i++) {
-							String emailAddress = (String)emailAddresses.get(i);
-							sm.append(" ").append(emailAddress);
+						for (String emailAddress : emailAddresses) {
+							sm.append(" ");
+							sm.append(emailAddress);
 						}
 					}
 

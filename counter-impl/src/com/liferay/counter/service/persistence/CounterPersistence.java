@@ -227,7 +227,7 @@ public class CounterPersistence extends BasePersistence {
 	protected synchronized CounterRegister getCounterRegister(String name)
 		throws SystemException {
 
-		CounterRegister register = (CounterRegister)_registerLookup.get(name);
+		CounterRegister register = _registerLookup.get(name);
 
 		if (register == null) {
 			register = createCounterRegister(name);

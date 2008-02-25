@@ -68,9 +68,7 @@ public class TestPropsUtil {
 
 			System.out.println("-- listing properties --");
 
-			for (int i = 0; i < keys.size(); i++) {
-				String key = (String)keys.get(i);
-
+			for (String key : keys) {
 				System.out.println(key + "=" + _props.getProperty(key));
 			}
 

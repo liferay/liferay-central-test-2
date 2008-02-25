@@ -51,7 +51,7 @@ public class BasePersistenceTestCase extends TestCase {
 	}
 
 	protected double nextDouble() throws Exception {
-		return (double)CounterLocalServiceUtil.increment();
+		return CounterLocalServiceUtil.increment();
 	}
 
 	protected int nextInt() throws Exception {
