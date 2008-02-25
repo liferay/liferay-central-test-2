@@ -253,15 +253,17 @@ public class EditArticleAction extends PortletAction {
 		}
 	}
 
-	protected Map getImages(UploadPortletRequest uploadReq) throws Exception {
-		Map images = new HashMap();
+	protected Map<String, byte[]> getImages(UploadPortletRequest uploadReq)
+		throws Exception {
+
+		Map<String, byte[]> images = new HashMap<String, byte[]>();
 
 		String imagePrefix = "structure_image_";
 
-		Enumeration enu = uploadReq.getParameterNames();
+		Enumeration<String> enu = uploadReq.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (name.startsWith(imagePrefix)) {
 				File file = uploadReq.getFile(name);
@@ -411,7 +413,7 @@ public class EditArticleAction extends PortletAction {
 		String smallImageURL = ParamUtil.getString(uploadReq, "smallImageURL");
 		File smallFile = uploadReq.getFile("smallFile");
 
-		Map images = getImages(uploadReq);
+		Map<String, byte[]> images = getImages(uploadReq);
 
 		String articleURL = ParamUtil.getString(uploadReq, "articleURL");
 
