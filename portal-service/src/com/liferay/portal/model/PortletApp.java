@@ -20,42 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.model;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.io.Serializable;
 
-import javax.portlet.PortletURLGenerationListener;
-import javax.portlet.filter.PortletFilter;
+import java.util.List;
 
 /**
- * <a href="PortletContextBag.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletApp.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextBag {
+public interface PortletApp extends Serializable {
 
-	public PortletContextBag(String servletContextName) {
-		_servletContextName = servletContextName;
-	}
+	public String getServletContextName();
 
-	public String getServletContextName() {
-		return _servletContextName;
-	}
+	public List<String> getServletURLPatterns();
 
-	public Map<String, PortletFilter> getPortletFilters() {
-		return _portletFilters;
-	}
+	public List<PortletFilter> getPortletFilters();
 
-	public Map<String, PortletURLGenerationListener> getPortletURLListeners() {
-		return _urlListeners;
-	}
+	public List<PortletURLListener> getPortletURLListeners();
 
-	private String _servletContextName;
-	private Map<String, PortletFilter> _portletFilters =
-		new HashMap<String, PortletFilter>();
-	private Map<String, PortletURLGenerationListener> _urlListeners =
-		new HashMap<String, PortletURLGenerationListener>();
+	public boolean isWARFile();
 
 }

@@ -32,6 +32,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -48,14 +50,17 @@ import java.util.Collection;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 
 import javax.portlet.CacheControl;
+import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
+import javax.portlet.PortletURLGenerationListener;
 import javax.portlet.ResourceURL;
 import javax.portlet.WindowStateException;
 
@@ -231,7 +236,32 @@ public class RenderResponseImpl implements LiferayRenderResponse {
 			}
 		}
 
-		return new PortletURLImpl(_req, portletName, plid, action);
+		PortletApp portletApp = portlet.getPortletApp();
+
+		List<PortletURLListener> portletURLListeners =
+			portletApp.getPortletURLListeners();
+
+		PortletURL portletURL = new PortletURLImpl(
+			_req, portletName, plid, action);
+
+		for (PortletURLListener portletURLListener : portletURLListeners) {
+			try {
+				PortletURLGenerationListener portletURLGenerationListener =
+					PortletURLListenerFactory.create(portletURLListener);
+
+				if (action) {
+					portletURLGenerationListener.filterActionURL(portletURL);
+				}
+				else {
+					portletURLGenerationListener.filterRenderURL(portletURL);
+				}
+			}
+			catch (PortletException pe) {
+				_log.error(pe, pe);
+			}
+		}
+
+		return portletURL;
 	}
 
 	public PortletURL createRenderURL() {

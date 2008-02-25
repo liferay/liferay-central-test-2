@@ -20,42 +20,62 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.model.impl;
 
-import java.util.HashMap;
-import java.util.Map;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PortletFilter;
+import com.liferay.portal.model.PortletURLListener;
 
-import javax.portlet.PortletURLGenerationListener;
-import javax.portlet.filter.PortletFilter;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="PortletContextBag.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletAppImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextBag {
+public class PortletAppImpl implements PortletApp {
 
-	public PortletContextBag(String servletContextName) {
+	public PortletAppImpl(String servletContextName) {
 		_servletContextName = servletContextName;
+
+		if (Validator.isNotNull(_servletContextName)) {
+			_warFile = true;
+		}
+		else {
+			_warFile = false;
+		}
 	}
 
 	public String getServletContextName() {
 		return _servletContextName;
 	}
 
-	public Map<String, PortletFilter> getPortletFilters() {
+	public List<String> getServletURLPatterns() {
+		return _servletURLPatterns;
+	}
+
+	public List<PortletFilter> getPortletFilters() {
 		return _portletFilters;
 	}
 
-	public Map<String, PortletURLGenerationListener> getPortletURLListeners() {
-		return _urlListeners;
+	public List<PortletURLListener> getPortletURLListeners() {
+		return _portletURLListeners;
 	}
 
-	private String _servletContextName;
-	private Map<String, PortletFilter> _portletFilters =
-		new HashMap<String, PortletFilter>();
-	private Map<String, PortletURLGenerationListener> _urlListeners =
-		new HashMap<String, PortletURLGenerationListener>();
+	public boolean isWARFile() {
+		return _warFile;
+	}
+
+	private String _servletContextName = StringPool.BLANK;
+	private List<String> _servletURLPatterns = new ArrayList<String>();
+	private List<PortletFilter> _portletFilters =
+		new ArrayList<PortletFilter>();
+	private List<PortletURLListener> _portletURLListeners =
+		new ArrayList<PortletURLListener>();
+	private boolean _warFile;
 
 }

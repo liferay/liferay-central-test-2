@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 
 import java.io.InputStream;
 
@@ -192,7 +193,9 @@ public class PortletContextImpl implements PortletContext {
 	}
 
 	public boolean isWARFile() {
-		return _portlet.isWARFile();
+		PortletApp portletApp = _portlet.getPortletApp();
+
+		return portletApp.isWARFile();
 	}
 
 	public void log(String msg) {

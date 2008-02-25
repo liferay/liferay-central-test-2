@@ -51,8 +51,8 @@ public interface PortletFilter extends Serializable {
 
 	public void setInitParams(Map<String, String> initParams);
 
-	public String getServletContextName();
+	public PortletApp getPortletApp();
 
-	public void setServletContextName(String servletContextName);
+	public void setPortletApp(PortletApp portletApp);
 
 }

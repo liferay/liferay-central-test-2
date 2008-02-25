@@ -37,8 +37,13 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 </liferay-util:include>
 
 <c:if test="<%= (selPortlet != null) && Validator.isNotNull(path) %>">
+
+	<%
+	PortletApp selPortletApp = selPortlet.getPortletApp();
+	%>
+
 	<c:choose>
-		<c:when test="<%= selPortlet.isWARFile() %>">
+		<c:when test="<%= selPortletApp.isWARFile() %>">
 
 			<%
 			PortletConfig selPortletConfig = PortletConfigFactory.create(selPortlet, application);

@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -327,7 +328,9 @@ public class PortletPreferencesFactoryImpl
 	}
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
-		if (portlet.isWARFile()) {
+		PortletApp portletApp = portlet.getPortletApp();
+
+		if (portletApp.isWARFile()) {
 			PortletBag portletBag = PortletBagPool.get(
 				portlet.getRootPortletId());
 

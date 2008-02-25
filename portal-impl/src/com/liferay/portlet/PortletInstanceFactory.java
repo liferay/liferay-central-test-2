@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 
@@ -96,7 +97,9 @@ public class PortletInstanceFactory {
 				PortletConfig portletConfig =
 					PortletConfigFactory.create(portlet, ctx);
 
-				if (portlet.isWARFile()) {
+				PortletApp portletApp = portlet.getPortletApp();
+
+				if (portletApp.isWARFile()) {
 					PortletBag portletBag = PortletBagPool.get(
 						portlet.getRootPortletId());
 
@@ -122,7 +125,6 @@ public class PortletInstanceFactory {
 					PortletConfigFactory.create(portlet, ctx);
 
 				PortletContext portletCtx = portletConfig.getPortletContext();
-				Integer expCache = rootInvokerPortletInstance.getExpCache();
 				boolean facesPortlet =
 					rootInvokerPortletInstance.isFacesPortlet();
 				boolean strutsPortlet =
@@ -173,7 +175,9 @@ public class PortletInstanceFactory {
 
 		_pool.remove(portlet.getRootPortletId());
 
-		if (portlet.isWARFile()) {
+		PortletApp portletApp = portlet.getPortletApp();
+
+		if (portletApp.isWARFile()) {
 			PortletBag portletBag = PortletBagPool.get(
 				portlet.getRootPortletId());
 

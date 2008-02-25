@@ -501,7 +501,7 @@ public class InvokerPortlet implements Portlet {
 			PortletFilter portletFilter = PortletFilterFactory.create(
 				portletFilterModel, _portletCtx);
 
-			Set lifecycles = portletFilterModel.getLifecycles();
+			Set<String> lifecycles = portletFilterModel.getLifecycles();
 
 			if (lifecycles.contains(PortletRequest.ACTION_PHASE)) {
 				_actionFilters.add((ActionFilter)portletFilter);

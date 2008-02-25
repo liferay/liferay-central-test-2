@@ -76,7 +76,9 @@ while (itr.hasNext()) {
 			portlets.add(portlet);
 		}
 
-		if (portlet.isWARFile() && Validator.isNull(externalPortletCategory)) {
+		PortletApp portletApp = portlet.getPortletApp();
+
+		if (portletApp.isWARFile() && Validator.isNull(externalPortletCategory)) {
 			PortletConfig ptltConfig = PortletConfigFactory.create(portlet, application);
 
 			ResourceBundle resourceBundle = ptltConfig.getResourceBundle(locale);

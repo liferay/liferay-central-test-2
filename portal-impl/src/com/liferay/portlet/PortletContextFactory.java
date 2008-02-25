@@ -23,11 +23,12 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.velocity.VelocityContextPool;
-import com.liferay.util.CollectionFactory;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletContext;
 
@@ -50,23 +51,26 @@ public class PortletContextFactory {
 	}
 
 	private PortletContextFactory() {
-		_pool = CollectionFactory.getSyncHashMap();
+		_pool = new ConcurrentHashMap<String, Map<String, PortletContext>>();
 	}
 
 	private PortletContext _create(Portlet portlet, ServletContext ctx) {
-		Map portletContexts = (Map)_pool.get(portlet.getRootPortletId());
+		Map<String, PortletContext> portletContexts = _pool.get(
+			portlet.getRootPortletId());
 
 		if (portletContexts == null) {
-			portletContexts = CollectionFactory.getSyncHashMap();
+			portletContexts = new ConcurrentHashMap<String, PortletContext>();
 
 			_pool.put(portlet.getRootPortletId(), portletContexts);
 		}
 
 		PortletContext portletContext =
-			(PortletContext)portletContexts.get(portlet.getPortletId());
+			portletContexts.get(portlet.getPortletId());
 
 		if (portletContext == null) {
-			if (portlet.isWARFile()) {
+			PortletApp portletApp = portlet.getPortletApp();
+
+			if (portletApp.isWARFile()) {
 				PortletBag portletBag = PortletBagPool.get(
 					portlet.getRootPortletId());
 
@@ -92,18 +96,20 @@ public class PortletContextFactory {
 	}
 
 	private void _destroy(Portlet portlet) {
-		Map portletContexts = (Map)_pool.remove(portlet.getRootPortletId());
+		Map<String, PortletContext> portletContexts = _pool.remove(
+			portlet.getRootPortletId());
 
 		if (portletContexts == null) {
 			return;
 		}
 
-		Iterator itr = portletContexts.entrySet().iterator();
+		Iterator<Map.Entry<String, PortletContext>> itr =
+			portletContexts.entrySet().iterator();
 
 		if (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, PortletContext> entry = itr.next();
 
-			PortletContext portletContext = (PortletContext)entry.getValue();
+			PortletContext portletContext = entry.getValue();
 
 			VelocityContextPool.remove(portletContext.getPortletContextName());
 		}
@@ -112,6 +118,6 @@ public class PortletContextFactory {
 	private static PortletContextFactory _instance =
 		new PortletContextFactory();
 
-	private Map _pool;
+	private Map<String, Map<String, PortletContext>> _pool;
 
 }

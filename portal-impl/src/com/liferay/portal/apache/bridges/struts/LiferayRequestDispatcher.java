@@ -24,13 +24,14 @@ package com.liferay.portal.apache.bridges.struts;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portlet.PortletServletRequest;
 import com.liferay.portlet.PortletServletResponse;
 import com.liferay.portlet.RenderRequestImpl;
 
 import java.io.IOException;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.PortletResponse;
@@ -102,14 +103,14 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				queryString = _path.substring(pos + 1, _path.length());
 			}
 
-			List servletURLPatterns =
-				renderReq.getPortlet().getServletURLPatterns();
+			Portlet portlet = renderReq.getPortlet();
 
-			Iterator itr = servletURLPatterns.iterator();
+			PortletApp portletApp = portlet.getPortletApp();
 
-			while (itr.hasNext()) {
-				String urlPattern = (String)itr.next();
+			List<String> servletURLPatterns =
+				portletApp.getServletURLPatterns();
 
+			for (String urlPattern : servletURLPatterns) {
 				if (urlPattern.endsWith("/*")) {
 					pos = urlPattern.indexOf("/*");
 

@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -114,7 +115,11 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 
 		if (ServerDetector.isWebSphere()) {
-			if (_renderReq.getPortlet().isWARFile()) {
+			Portlet portlet = _renderReq.getPortlet();
+
+			PortletApp portletApp = portlet.getPortletApp();
+
+			if (portletApp.isWARFile()) {
 				if (name.equals(
 						JavaConstants.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
 
@@ -200,7 +205,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _renderReq.getLocale();
 	}
 
-	public Enumeration getLocales() {
+	public Enumeration<Locale> getLocales() {
 		return _renderReq.getLocales();
 	}
 

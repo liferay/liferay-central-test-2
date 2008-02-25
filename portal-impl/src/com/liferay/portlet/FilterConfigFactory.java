@@ -22,6 +22,8 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.model.PortletApp;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -57,13 +59,15 @@ public class FilterConfigFactory {
 		com.liferay.portal.model.PortletFilter portletFilter,
 		PortletContext ctx) {
 
+		PortletApp portletApp = portletFilter.getPortletApp();
+
 		Map<String, FilterConfig> filterConfigs =
-			_pool.get(portletFilter.getServletContextName());
+			_pool.get(portletApp.getServletContextName());
 
 		if (filterConfigs == null) {
 			filterConfigs = new ConcurrentHashMap<String, FilterConfig>();
 
-			_pool.put(portletFilter.getServletContextName(), filterConfigs);
+			_pool.put(portletApp.getServletContextName(), filterConfigs);
 		}
 
 		FilterConfig filterConfig = filterConfigs.get(
@@ -83,7 +87,9 @@ public class FilterConfigFactory {
 	private void _destroy(
 		com.liferay.portal.model.PortletFilter portletFilter) {
 
-		_pool.remove(portletFilter.getServletContextName());
+		PortletApp portletApp = portletFilter.getPortletApp();
+
+		_pool.remove(portletApp.getServletContextName());
 	}
 
 	private static FilterConfigFactory _instance = new FilterConfigFactory();

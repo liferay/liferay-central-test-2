@@ -22,9 +22,12 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.model.PortletApp;
+
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import javax.portlet.PortletContext;
 import javax.portlet.PortletException;
 import javax.portlet.UnavailableException;
 import javax.portlet.filter.FilterConfig;
@@ -40,7 +43,7 @@ public class PortletFilterFactory {
 
 	public static PortletFilter create(
 			com.liferay.portal.model.PortletFilter portletFilterModel,
-			PortletContextImpl ctx)
+			PortletContext ctx)
 		throws PortletException {
 
 		return _instance._create(portletFilterModel, ctx);
@@ -53,27 +56,38 @@ public class PortletFilterFactory {
 	}
 
 	private PortletFilterFactory() {
-		_pool = new ConcurrentHashMap<String, PortletFilter>();
+		_pool = new ConcurrentHashMap<String, Map<String, PortletFilter>>();
 	}
 
-	private javax.portlet.filter.PortletFilter _create(
+	private PortletFilter _create(
 			com.liferay.portal.model.PortletFilter portletFilterModel,
-			PortletContextImpl ctx)
+			PortletContext ctx)
 		throws PortletException {
 
-		PortletFilter portletFilter = _pool.get(
+		PortletApp portletApp = portletFilterModel.getPortletApp();
+
+		Map<String, PortletFilter> portletFilters = _pool.get(
+			portletApp.getServletContextName());
+
+		if (portletFilters == null) {
+			portletFilters = new ConcurrentHashMap<String, PortletFilter>();
+
+			_pool.put(portletApp.getServletContextName(), portletFilters);
+		}
+
+		PortletFilter portletFilter = portletFilters.get(
 			portletFilterModel.getFilterName());
 
 		if (portletFilter == null) {
 			FilterConfig filterConfig =
 				FilterConfigFactory.create(portletFilterModel, ctx);
 
-			if (ctx.isWARFile()) {
+			if (portletApp.isWARFile()) {
 				PortletContextBag portletContextBag = PortletContextBagPool.get(
-					ctx.getPortletContextName());
+					portletApp.getServletContextName());
 
 				portletFilter = portletContextBag.getPortletFilters().get(
-					filterConfig.getFilterName());
+					portletFilterModel.getFilterName());
 
 				portletFilter = _init(
 					portletFilterModel, filterConfig, portletFilter);
@@ -82,7 +96,8 @@ public class PortletFilterFactory {
 				portletFilter = _init(portletFilterModel, filterConfig);
 			}
 
-			_pool.put(portletFilterModel.getFilterName(), portletFilter);
+			portletFilters.put(
+				portletFilterModel.getFilterName(), portletFilter);
 		}
 
 		return portletFilter;
@@ -91,7 +106,16 @@ public class PortletFilterFactory {
 	private void _destroy(
 		com.liferay.portal.model.PortletFilter portletFilterModel) {
 
-		PortletFilter portletFilter = _pool.get(
+		PortletApp portletApp = portletFilterModel.getPortletApp();
+
+		Map<String, PortletFilter> portletFilters = _pool.get(
+			portletApp.getServletContextName());
+
+		if (portletFilters == null) {
+			return;
+		}
+
+		PortletFilter portletFilter = portletFilters.get(
 			portletFilterModel.getFilterName());
 
 		if (portletFilter == null) {
@@ -100,7 +124,7 @@ public class PortletFilterFactory {
 
 		portletFilter.destroy();
 
-		_pool.remove(portletFilterModel.getFilterName());
+		portletFilters.remove(portletFilterModel.getFilterName());
 	}
 
 	private PortletFilter _init(
@@ -118,9 +142,8 @@ public class PortletFilterFactory {
 
 		try {
 			if (portletFilter == null) {
-				portletFilter = (javax.portlet.filter.PortletFilter)
-					Class.forName(
-						portletFilterModel.getFilterClass()).newInstance();
+				portletFilter = (PortletFilter)Class.forName(
+					portletFilterModel.getFilterClass()).newInstance();
 			}
 
 			portletFilter.init(filterConfig);
@@ -138,8 +161,8 @@ public class PortletFilterFactory {
 		return portletFilter;
 	}
 
-	private static PortletFilterFactory _instance =new PortletFilterFactory();
+	private static PortletFilterFactory _instance = new PortletFilterFactory();
 
-	private Map<String, PortletFilter> _pool;
+	private Map<String, Map<String, PortletFilter>> _pool;
 
 }

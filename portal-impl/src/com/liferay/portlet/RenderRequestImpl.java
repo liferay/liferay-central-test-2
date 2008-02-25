@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -149,7 +150,9 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 						cuaInstances.get(attrCustomClass);
 
 					if (cua == null) {
-						if (_portlet.isWARFile()) {
+						PortletApp portletApp = _portlet.getPortletApp();
+
+						if (portletApp.isWARFile()) {
 							PortletBag portletBag = PortletBagPool.get(
 								_portlet.getRootPortletId());
 
@@ -505,7 +508,9 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 
 		boolean portalSessionShared = false;
 
-		if (portlet.isWARFile() && !portlet.isPrivateSessionAttributes()) {
+		PortletApp portletApp = portlet.getPortletApp();
+
+		if (portletApp.isWARFile() && !portlet.isPrivateSessionAttributes()) {
 			portalSessionShared = true;
 		}
 

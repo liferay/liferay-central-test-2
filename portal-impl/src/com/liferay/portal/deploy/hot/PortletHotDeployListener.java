@@ -46,8 +46,10 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletFilter;
+import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -64,11 +66,11 @@ import com.liferay.portlet.PortletBagPool;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletContextBag;
 import com.liferay.portlet.PortletContextBagPool;
-import com.liferay.portlet.PortletContextImpl;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletResourceBundles;
+import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Http;
 
@@ -84,6 +86,8 @@ import java.util.ResourceBundle;
 import java.util.Set;
 
 import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
+import javax.portlet.PortletURLGenerationListener;
 import javax.portlet.PreferencesValidator;
 
 import javax.servlet.ServletContext;
@@ -155,10 +159,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			boolean strutsBridges = false;
 
-			Iterator<Portlet> portletsItr = portlets.iterator();
-
-			while (portletsItr.hasNext()) {
-				Portlet portlet = portletsItr.next();
+			for (int i = 0; i < portlets.size(); i++) {
+				Portlet portlet = portlets.get(i);
 
 				Class<?> portletClass = portletClassLoader.loadClass(
 					portlet.getPortletClass());
@@ -347,48 +349,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 				PortletBagPool.put(portlet.getPortletId(), portletBag);
 
-				PortletConfig portletConfig = PortletConfigFactory.create(
-					portlet, ctx);
-
-				PortletContextImpl portletCtxImpl =
-					(PortletContextImpl)portletConfig.getPortletContext();
-
-				PortletContextBag portletContextBag = new PortletContextBag(
-					servletContextName);
-
-				PortletContextBagPool.put(
-					servletContextName, portletContextBag);
-
-				Map<String, javax.portlet.filter.PortletFilter>
-					portletFilterInstances =
-						portletContextBag.getPortletFilters();
-
-				Map<String, PortletFilter> portletFilters =
-					portlet.getPortletFilters();
-
-				Iterator<Map.Entry<String, PortletFilter>> portletFiltersItr =
-					portletFilters.entrySet().iterator();
-
-				while (portletFiltersItr.hasNext()) {
-					Map.Entry<String, PortletFilter> entry =
-						portletFiltersItr.next();
-
-					String filterName = entry.getKey();
-					PortletFilter portletFilter = entry.getValue();
-
-					if (portletFilterInstances.containsKey(filterName)) {
-						continue;
-					}
-
-					javax.portlet.filter.PortletFilter portletFilterInstance =
-						(javax.portlet.filter.PortletFilter)
-							portletClassLoader.loadClass(
-								portletFilter.getFilterClass()).newInstance();
-
-					portletFilterInstances.put(
-						filterName, portletFilterInstance);
-
-					PortletFilterFactory.create(portletFilter, portletCtxImpl);
+				if (i == 0) {
+					initPortletApp(portlet, ctx, portletClassLoader);
 				}
 
 				try {
@@ -560,6 +522,54 @@ public class PortletHotDeployListener implements HotDeployListener {
 		catch (Exception e) {
 			throw new HotDeployException(
 				"Error unregistering portlets for " + servletContextName, e);
+		}
+	}
+
+	protected void initPortletApp(
+			Portlet portlet, ServletContext ctx, ClassLoader portletClassLoader)
+		throws Exception {
+
+		String servletContextName = ctx.getServletContextName();
+
+		PortletConfig portletConfig = PortletConfigFactory.create(
+			portlet, ctx);
+
+		PortletContext portletCtx = portletConfig.getPortletContext();
+
+		PortletContextBag portletContextBag = new PortletContextBag(
+			servletContextName);
+
+		PortletContextBagPool.put(servletContextName, portletContextBag);
+
+		PortletApp portletApp = portlet.getPortletApp();
+
+		List<PortletFilter> portletFilters = portletApp.getPortletFilters();
+
+		for (PortletFilter portletFilter : portletFilters) {
+			javax.portlet.filter.PortletFilter portletFilterInstance =
+				(javax.portlet.filter.PortletFilter)
+					portletClassLoader.loadClass(
+						portletFilter.getFilterClass()).newInstance();
+
+			portletContextBag.getPortletFilters().put(
+				portletFilter.getFilterName(), portletFilterInstance);
+
+			PortletFilterFactory.create(portletFilter, portletCtx);
+		}
+
+		List<PortletURLListener> portletURLListeners =
+			portletApp.getPortletURLListeners();
+
+		for (PortletURLListener portletURLListener : portletURLListeners) {
+			PortletURLGenerationListener portletURLListenerInstance =
+				(PortletURLGenerationListener)portletClassLoader.loadClass(
+					portletURLListener.getListenerClass()).newInstance();
+
+			portletContextBag.getPortletURLListeners().put(
+				portletURLListener.getListenerClass(),
+				portletURLListenerInstance);
+
+			PortletURLListenerFactory.create(portletURLListener);
 		}
 	}
 

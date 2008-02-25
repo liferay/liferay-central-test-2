@@ -31,12 +31,16 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
+import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.PortletAppImpl;
 import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -83,6 +87,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		portletsPool.remove(portlet.getRootPortletId());
+
+		PortletApp portletApp = portlet.getPortletApp();
+
+		_portletAppsPool.remove(portletApp.getServletContextName());
 
 		_clearCaches();
 	}
@@ -439,6 +447,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return friendlyURLMappers;
 	}
 
+	private PortletApp _getPortletApp(String servletContextName) {
+		PortletApp portletApp = _portletAppsPool.get(servletContextName);
+
+		if (portletApp == null) {
+			portletApp = new PortletAppImpl(servletContextName);
+
+			_portletAppsPool.put(servletContextName, portletApp);
+		}
+
+		return portletApp;
+	}
+
 	private String _getPortletId(String securityPath) throws SystemException {
 		if (_portletIdsByStrutsPath.size() == 0) {
 			Iterator<Portlet> itr = _getPortletsPool().values().iterator();
@@ -462,7 +482,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portletId;
 	}
 
-	private List _getPortletsByPortletName(
+	private List<Portlet> _getPortletsByPortletName(
 		String portletName, String servletContextName,
 		Map<String, Portlet> portletsPool) {
 
@@ -475,7 +495,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			String portletId = portletName;
 
-			if (servletContextName != null) {
+			if (Validator.isNotNull(servletContextName)) {
 				portletId =
 					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
@@ -509,7 +529,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portlets;
 	}
 
-	private List _getPortletsByServletContextName(
+	private List<Portlet> _getPortletsByServletContextName(
 		String servletContextName, Map<String, Portlet> portletsPool) {
 
 		List<Portlet> portlets = new ArrayList<Portlet>();
@@ -523,7 +543,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			String portletId = entry.getKey();
 			Portlet portlet = entry.getValue();
 
-			if (servletContextName != null) {
+			if (Validator.isNotNull(servletContextName)) {
 				if (portletId.endsWith(
 						PortletImpl.WAR_SEPARATOR + servletContextName)) {
 
@@ -606,7 +626,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		throws DocumentException, IOException {
 
 		return _readPortletXML(
-			null, xml, portletsPool, servletURLPatterns, pluginPackage);
+			StringPool.BLANK, xml, portletsPool, servletURLPatterns,
+			pluginPackage);
 	}
 
 	private Set<String> _readPortletXML(
@@ -624,6 +645,10 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		Document doc = PortalUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
+
+		PortletApp portletApp = _getPortletApp(servletContextName);
+
+		portletApp.getServletURLPatterns().addAll(servletURLPatterns);
 
 		Set<String> userAttributes = new HashSet<String>();
 
@@ -644,7 +669,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			String portletId = portlet.elementText("portlet-name");
 
-			if (servletContextName != null) {
+			if (Validator.isNotNull(servletContextName)) {
 				portletId =
 					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
@@ -666,14 +691,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			portletModel.setPluginPackage(pluginPackage);
-
-			if (servletContextName != null) {
-				portletModel.setServletContextName(servletContextName);
-			}
-
-			if (servletURLPatterns != null) {
-				portletModel.setServletURLPatterns(servletURLPatterns);
-			}
+			portletModel.setPortletApp(portletApp);
 
 			portletModel.setDisplayName(GetterUtil.getString(
 				portlet.elementText("display-name"),
@@ -787,7 +805,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletModel.setDefaultPreferences(defaultPreferences);
 			portletModel.setPreferencesValidator(prefsValidator);
 
-			if (!portletModel.isWARFile() &&
+			if (!portletApp.isWARFile() &&
 				Validator.isNotNull(prefsValidator) &&
 				PropsValues.PREFERENCE_VALIDATE_ON_STARTUP) {
 
@@ -821,8 +839,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletModel.getUserAttributes().addAll(userAttributes);
 		}
 
-		Map<String, PortletFilter> portletFilters =
-			new HashMap<String, PortletFilter>();
+		List<PortletFilter> portletFilters = portletApp.getPortletFilters();
 
 		itr1 = root.elements("filter").iterator();
 
@@ -855,10 +872,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			PortletFilter portletFilter = new PortletFilterImpl(
-				filterName, filterClass, lifecycles, initParams,
-				servletContextName);
+				filterName, filterClass, lifecycles, initParams, portletApp);
 
-			portletFilters.put(filterName, portletFilter);
+			portletFilters.add(portletFilter);
 		}
 
 		itr1 = root.elements("filter-mapping").iterator();
@@ -869,7 +885,18 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			String filterName = filterMapping.elementText("filter-name");
 			String portletName = filterMapping.elementText("portlet-name");
 
-			PortletFilter portletFilter = portletFilters.get(filterName);
+			PortletFilter portletFilter = null;
+
+			for (int i = 0; i < portletFilters.size(); i++) {
+				portletFilter = portletFilters.get(i);
+
+				if (portletFilter.getFilterName().equals(filterName)) {
+					break;
+				}
+				else {
+					portletFilter = null;
+				}
+			}
 
 			if (portletFilter == null) {
 				_log.error(
@@ -891,6 +918,22 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			for (Portlet portletModel : portletModels) {
 				portletModel.getPortletFilters().put(filterName, portletFilter);
 			}
+		}
+
+		List<PortletURLListener> urlListeners =
+			portletApp.getPortletURLListeners();
+
+		itr1 = root.elements("listener").iterator();
+
+		while (itr1.hasNext()) {
+			Element listener = itr1.next();
+
+			String listenerClass = listener.elementText("listener-class");
+
+			PortletURLListener portletURLListener = new PortletURLListenerImpl(
+				listenerClass, portletApp);
+
+			urlListeners.add(portletURLListener);
 		}
 
 		return portletIds;
@@ -920,7 +963,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				String portletId = portlet.attributeValue("id");
 
-				if (servletContextName != null) {
+				if (Validator.isNotNull(servletContextName)) {
 					portletId =
 						portletId + PortletImpl.WAR_SEPARATOR +
 							servletContextName;
@@ -975,17 +1018,19 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			String portletId = portlet.getPortletId();
 
-			if ((servletContextName != null) && (portlet.isWARFile()) &&
-				(portletId.endsWith(
+			PortletApp portletApp = portlet.getPortletApp();
+
+			if (portletApp.isWARFile() &&
+				portletId.endsWith(
 					PortletImpl.WAR_SEPARATOR +
 						PortalUtil.getJsSafePortletId(servletContextName)) &&
-				(!portletIds.contains(portletId)))) {
+				!portletIds.contains(portletId)) {
 
 				undefinedPortletIds.add(portletId);
 			}
-			else if ((servletContextName == null) && (!portlet.isWARFile()) &&
+			else if (!portletApp.isWARFile() &&
 					 (portletId.indexOf(PortletImpl.WAR_SEPARATOR) == -1) &&
-					 (!portletIds.contains(portletId))) {
+					 !portletIds.contains(portletId)) {
 
 				undefinedPortletIds.add(portletId);
 			}
@@ -1068,7 +1113,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			String portletId = portlet.elementText("portlet-name");
 
-			if (servletContextName != null) {
+			if (Validator.isNotNull(servletContextName)) {
 				portletId =
 					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
 			}
@@ -1369,6 +1414,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	private static Log _log = LogFactory.getLog(PortletLocalServiceImpl.class);
 
+	private static Map<String, PortletApp> _portletAppsPool =
+		new ConcurrentHashMap<String, PortletApp>();
 	private static Map<String, Portlet> _portletsPool =
 		new ConcurrentHashMap<String, Portlet>();
 	private static Map<Long, Map<String, Portlet>> _companyPortletsPool =

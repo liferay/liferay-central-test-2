@@ -23,60 +23,27 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.PortletApp;
-import com.liferay.portal.model.PortletFilter;
-
-import java.util.Map;
-import java.util.Set;
+import com.liferay.portal.model.PortletURLListener;
 
 /**
- * <a href="PortletFilterImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletURLListenerImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletFilterImpl implements PortletFilter {
+public class PortletURLListenerImpl implements PortletURLListener {
 
-	public PortletFilterImpl(
-		String filterName, String filterClass, Set<String> lifecycles,
-		Map<String, String> initParams, PortletApp portletApp) {
-
-		_filterName = filterName;
-		_filterClass = filterClass;
-		_lifecycles = lifecycles;
-		_initParams = initParams;
+	public PortletURLListenerImpl(String listenerClass, PortletApp portletApp) {
+		_listenerClass = listenerClass;
 		_portletApp = portletApp;
 	}
 
-	public String getFilterName() {
-		return _filterName;
+	public String getListenerClass() {
+		return _listenerClass;
 	}
 
-	public void setFilterName(String filterName) {
-		_filterName = filterName;
-	}
-
-	public String getFilterClass() {
-		return _filterClass;
-	}
-
-	public void setFilterClass(String filterClass) {
-		_filterClass = filterClass;
-	}
-
-	public Set<String> getLifecycles() {
-		return _lifecycles;
-	}
-
-	public void setLifecycles(Set<String> lifecycles) {
-		_lifecycles = lifecycles;
-	}
-
-	public Map<String, String> getInitParams() {
-		return _initParams;
-	}
-
-	public void setInitParams(Map<String, String> initParams) {
-		_initParams = initParams;
+	public void setListenerClass(String listenerClass) {
+		_listenerClass = listenerClass;
 	}
 
 	public PortletApp getPortletApp() {
@@ -87,10 +54,7 @@ public class PortletFilterImpl implements PortletFilter {
 		_portletApp = portletApp;
 	}
 
-	private String _filterName;
-	private String _filterClass;
-	private Set<String> _lifecycles;
-	private Map<String, String> _initParams;
+	private String _listenerClass;
 	private PortletApp _portletApp;
 
 }

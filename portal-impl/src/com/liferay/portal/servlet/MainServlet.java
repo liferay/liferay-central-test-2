@@ -44,6 +44,9 @@ import com.liferay.portal.lastmodified.LastModifiedAction;
 import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PortletFilter;
+import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
 import com.liferay.portal.pop.POPServerUtil;
@@ -66,16 +69,23 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityContextPool;
+import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactory;
-import com.liferay.util.CollectionFactory;
+import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.util.Http;
 import com.liferay.util.servlet.EncryptedServletRequest;
 
 import java.io.IOException;
 
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
+
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletContext;
+import javax.portlet.PortletException;
 
 import javax.servlet.ServletContext;
 import javax.servlet.ServletException;
@@ -174,7 +184,7 @@ public class MainServlet extends ActionServlet {
 			_log.debug("Initialize portlets");
 		}
 
-		List portlets = null;
+		List<Portlet> portlets = null;
 
 		try {
 			String[] xmls = new String[] {
@@ -193,10 +203,12 @@ public class MainServlet extends ActionServlet {
 
 			portlets = PortletLocalServiceUtil.getPortlets();
 
-			Iterator itr = portlets.iterator();
+			for (int i = 0; i < portlets.size(); i++) {
+				Portlet portlet = portlets.get(i);
 
-			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
+				if (i == 0) {
+					initPortletApp(portlet, ctx);
+				}
 
 				PortletInstanceFactory.create(portlet, ctx);
 			}
@@ -255,10 +267,10 @@ public class MainServlet extends ActionServlet {
 			if (GetterUtil.getBoolean(PropsUtil.get(
 					PropsUtil.SCHEDULER_ENABLED))) {
 
-				Iterator itr = portlets.iterator();
+				Iterator<Portlet> itr = portlets.iterator();
 
 				while (itr.hasNext()) {
-					Portlet portlet = (Portlet)itr.next();
+					Portlet portlet = itr.next();
 
 					String className = portlet.getSchedulerClass();
 
@@ -284,10 +296,10 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			Iterator itr = portlets.iterator();
+			Iterator<Portlet> itr = portlets.iterator();
 
 			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
+				Portlet portlet = itr.next();
 
 				ActivityTrackerInterpreter activityTrackerInterpreter =
 					portlet.getActivityTrackerInterpreterInstance();
@@ -316,10 +328,10 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			Iterator itr = portlets.iterator();
+			Iterator<Portlet> itr = portlets.iterator();
 
 			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
+				Portlet portlet = itr.next();
 
 				MessageListener popMessageListener =
 					portlet.getPopMessageListenerInstance();
@@ -355,7 +367,7 @@ public class MainServlet extends ActionServlet {
 		}
 
 		if (_lastModifiedPaths == null) {
-			_lastModifiedPaths = CollectionFactory.getHashSet();
+			_lastModifiedPaths = new HashSet<String>();
 
 			String[] pathsArray = PropsUtil.getArray(
 				PropsUtil.LAST_MODIFIED_PATHS);
@@ -656,10 +668,11 @@ public class MainServlet extends ActionServlet {
 
 	public void destroy() {
 		try {
-			Iterator itr = PortletLocalServiceUtil.getPortlets().iterator();
+			Iterator<Portlet> itr =
+				PortletLocalServiceUtil.getPortlets().iterator();
 
 			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
+				Portlet portlet = itr.next();
 
 				PortletInstanceFactory.destroy(portlet);
 			}
@@ -721,11 +734,35 @@ public class MainServlet extends ActionServlet {
 		}
 	}
 
+	protected void initPortletApp(Portlet portlet, ServletContext ctx)
+		throws PortletException {
+
+		PortletApp portletApp = portlet.getPortletApp();
+
+		List<PortletFilter> portletFilters = portletApp.getPortletFilters();
+
+		for (PortletFilter portletFilter : portletFilters) {
+			PortletConfig portletConfig = PortletConfigFactory.create(
+				portlet, ctx);
+
+			PortletContext portletCtx = portletConfig.getPortletContext();
+
+			PortletFilterFactory.create(portletFilter, portletCtx);
+		}
+
+		List<PortletURLListener> portletURLListeners =
+			portletApp.getPortletURLListeners();
+
+		for (PortletURLListener portletURLListener : portletURLListeners) {
+			PortletURLListenerFactory.create(portletURLListener);
+		}
+	}
+
 	private static final String _LIFERAY_PORTAL_REQUEST_HEADER =
 		"Liferay-Portal";
 
 	private static Log _log = LogFactory.getLog(MainServlet.class);
 
-	private Set _lastModifiedPaths;
+	private Set<String> _lastModifiedPaths;
 
 }

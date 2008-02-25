@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.struts.StrutsURLEncoder;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -195,8 +196,12 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					httpReq = dynamicReq;
 				}
 
+				Portlet portlet = reqImpl.getPortlet();
+
+				PortletApp portletApp = portlet.getPortletApp();
+
 				List<String> servletURLPatterns =
-					reqImpl.getPortlet().getServletURLPatterns();
+					portletApp.getServletURLPatterns();
 
 				for (String urlPattern : servletURLPatterns) {
 					if (urlPattern.endsWith("/*")) {

@@ -387,17 +387,11 @@ public interface Portlet extends PortletModel {
 	public void setFilters(
 		java.util.Map<String, com.liferay.portal.model.PortletFilter> portletFilters);
 
-	public java.lang.String getServletContextName();
-
-	public void setServletContextName(java.lang.String servletContextName);
-
-	public boolean getWARFile();
-
-	public boolean isWARFile();
-
-	public void setWARFile(boolean warFile);
-
 	public java.lang.String getContextPath();
+
+	public com.liferay.portal.model.PortletApp getPortletApp();
+
+	public void setPortletApp(com.liferay.portal.model.PortletApp portletApp);
 
 	public com.liferay.portal.model.Portlet getClonedInstance(
 		java.lang.String portletId);
@@ -417,10 +411,6 @@ public interface Portlet extends PortletModel {
 	public boolean getStaticEnd();
 
 	public boolean isStaticEnd();
-
-	public java.util.List<String> getServletURLPatterns();
-
-	public void setServletURLPatterns(java.util.List<String> servletURLPatterns);
 
 	public java.lang.Object clone();
 

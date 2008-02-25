@@ -56,6 +56,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
@@ -1139,7 +1140,9 @@ public class PortalUtil {
 	public static PreferencesValidator getPreferencesValidator(
 		Portlet portlet) {
 
-		if (portlet.isWARFile()) {
+		PortletApp portletApp = portlet.getPortletApp();
+
+		if (portletApp.isWARFile()) {
 			PortletBag portletBag = PortletBagPool.get(
 				portlet.getRootPortletId());
 

@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.User;
@@ -211,8 +212,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Map<String, Set<String>> portletModes, Set<String> supportedLocales,
 		String resourceBundle, PortletInfo portletInfo,
 		Set<String> userAttributes, Map<String, String> customUserAttributes,
-		Map<String, PortletFilter> portletFilters, String servletContextName,
-		List<String> servletURLPatterns) {
+		Map<String, PortletFilter> portletFilters, PortletApp portletApp) {
 
 		setPortletId(portletId);
 		_pluginPackage = pluginPackage;
@@ -279,8 +279,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_userAttributes = userAttributes;
 		_customUserAttributes = customUserAttributes;
 		_portletFilters = portletFilters;
-		setServletContextName(servletContextName);
-		_servletURLPatterns = servletURLPatterns;
+		_portletApp = portletApp;
 
 		if (_instanceable) {
 			_clonedInstances = new Hashtable<String, Portlet>();
@@ -333,7 +332,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Sets the plugin package to which this portlet belongs to.
+	 * Sets the plugin package this portlet belongs to.
 	 *
 	 * @param		pluginPackage the plugin package
 	 */
@@ -392,7 +391,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @param		virtualPath the virtual path of the portlet
 	 */
 	public void setVirtualPath(String virtualPath) {
-		if (_warFile && Validator.isNull(virtualPath)) {
+		if (_portletApp.isWARFile() && Validator.isNull(virtualPath)) {
 			virtualPath = PropsValues.PORTLET_VIRTUAL_PATH;
 		}
 
@@ -479,7 +478,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public ConfigurationAction getConfigurationActionInstance() {
 		if (Validator.isNotNull(getConfigurationActionClass())) {
-			if (isWARFile()) {
+			if (_portletApp.isWARFile()) {
 				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 				return portletBag.getConfigurationActionInstance();
@@ -594,7 +593,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public FriendlyURLMapper getFriendlyURLMapperInstance() {
 		if (Validator.isNotNull(getFriendlyURLMapperClass())) {
-			if (isWARFile()) {
+			if (_portletApp.isWARFile()) {
 				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 				return portletBag.getFriendlyURLMapperInstance();
@@ -634,7 +633,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public URLEncoder getURLEncoderInstance() {
 		if (Validator.isNotNull(getURLEncoderClass())) {
-			if (isWARFile()) {
+			if (_portletApp.isWARFile()) {
 				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 				return portletBag.getURLEncoderInstance();
@@ -673,7 +672,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public PortletDataHandler getPortletDataHandlerInstance() {
 		if (Validator.isNotNull(getPortletDataHandlerClass())) {
-			if (isWARFile()) {
+			if (_portletApp.isWARFile()) {
 				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 				return portletBag.getPortletDataHandlerInstance();
@@ -753,7 +752,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public ActivityTrackerInterpreter getActivityTrackerInterpreterInstance() {
 		if (Validator.isNotNull(getActivityTrackerInterpreterClass())) {
-			if (isWARFile()) {
+			if (_portletApp.isWARFile()) {
 				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 				return portletBag.getActivityTrackerInterpreterInstance();
@@ -793,7 +792,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public MessageListener getPopMessageListenerInstance() {
 		if (Validator.isNotNull(getPopMessageListenerClass())) {
-			if (isWARFile()) {
+			if (_portletApp.isWARFile()) {
 				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
 				return portletBag.getPopMessageListenerInstance();
@@ -2091,59 +2090,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the servlet context name of the portlet.
-	 *
-	 * @return		the servlet context name of the portlet
-	 */
-	public String getServletContextName() {
-		return _servletContextName;
-	}
-
-	/**
-	 * Sets the servlet context name of the portlet.
-	 *
-	 * @param		servletContextName the servlet context name of the portlet
-	 */
-	public void setServletContextName(String servletContextName) {
-		_servletContextName = servletContextName;
-
-		if (Validator.isNotNull(_servletContextName)) {
-			_warFile = true;
-		}
-		else {
-			_warFile = false;
-		}
-	}
-
-	/**
-	 * Returns true if the portlet is found in a WAR file.
-	 *
-	 * @return		true if the portlet is found in a WAR file
-	 */
-	public boolean getWARFile() {
-		return _warFile;
-	}
-
-	/**
-	 * Returns true if the portlet is found in a WAR file.
-	 *
-	 * @return		true if the portlet is found in a WAR file
-	 */
-	public boolean isWARFile() {
-		return _warFile;
-	}
-
-	/**
-	 * Sets to true if the portlet is found in a WAR file.
-	 *
-	 * @param		warFile boolean value for whether the portlet is found in a
-	 *				WAR file
-	 */
-	public void setWARFile(boolean warFile) {
-		_warFile = warFile;
-	}
-
-	/**
 	 * Gets the servlet context path of the portlet.
 	 *
 	 * @return		the servlet context path of the portlet
@@ -2155,17 +2101,35 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			return virtualPath;
 		}
 
-		if (isWARFile()) {
+		if (_portletApp.isWARFile()) {
 			StringMaker sm = new StringMaker();
 
 			sm.append(StringPool.SLASH);
-			sm.append(getServletContextName());
+			sm.append(_portletApp.getServletContextName());
 
 			return sm.toString();
 		}
 		else {
 			return PortalUtil.getPathContext();
 		}
+	}
+
+	/**
+	 * Get the application this portlet belongs to.
+	 *
+	 * @return		the application this portlet belongs to
+	 */
+	public PortletApp getPortletApp() {
+		return _portletApp;
+	}
+
+	/**
+	 * Sets the application this portlet belongs to.
+	 *
+	 * @param		portletApp the application this portlet belongs to
+	 */
+	public void setPortletApp(PortletApp portletApp) {
+		_portletApp = portletApp;
 	}
 
 	/**
@@ -2288,25 +2252,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * The servlet url patterns that are part of this application.
-	 *
-	 * @return		The servlet url patterns that are part of this application
-	 */
-	public List<String> getServletURLPatterns() {
-		return _servletURLPatterns;
-	}
-
-	/**
-	 * The servlet url patterns that are part of this application.
-	 *
-	 * @param		servletURLPatterns servlet url patterns that are part of
-	 *				this application
-	 */
-	public void setServletURLPatterns(List<String> servletURLPatterns) {
-		_servletURLPatterns = servletURLPatterns;
-	}
-
-	/**
 	 * Creates and returns a copy of this object.
 	 *
 	 * @return		a copy of this object
@@ -2339,7 +2284,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getUserAttributes(), getCustomUserAttributes(), getPortletFilters(),
-			getServletContextName(), getServletURLPatterns());
+			getPortletApp());
 	}
 
 	/**
@@ -2375,7 +2320,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private static Log _log = LogFactory.getLog(PortletImpl.class);
 
 	/**
-	 * Package to which this plugin belongs to.
+	 * Package this plugin belongs to.
 	 */
 	private PluginPackage _pluginPackage;
 
@@ -2704,14 +2649,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private Map<String, PortletFilter> _portletFilters;
 
 	/**
-	 * The servlet context name of the portlet.
+	 * The application this portlet belongs to.
 	 */
-	private String _servletContextName;
-
-	/**
-	 * True if the portlet is found in a WAR file.
-	 */
-	private boolean _warFile;
+	private PortletApp _portletApp;
 
 	/**
 	 * The cloned instances of the portlet.
@@ -2728,10 +2668,5 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * portlets.
 	 */
 	private boolean _staticPortletStart;
-
-	/**
-	 * The servlet url patterns that are part of this application.
-	 */
-	private List<String> _servletURLPatterns;
 
 }
