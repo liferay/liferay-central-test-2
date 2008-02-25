@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet;
+package com.liferay.portlet;
 
 import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
@@ -43,14 +43,14 @@ import javax.portlet.PreferencesValidator;
 import javax.servlet.ServletContext;
 
 /**
- * <a href="PortletContextWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletBag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextWrapper {
+public class PortletBag {
 
-	public PortletContextWrapper(
+	public PortletBag(
 		String portletName, ServletContext	servletContext,
 		Portlet portletInstance,
 		ConfigurationAction configurationActionInstance,

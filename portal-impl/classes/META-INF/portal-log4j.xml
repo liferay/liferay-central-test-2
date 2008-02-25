@@ -420,7 +420,7 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portlet.CachePortlet">
+	<category name="com.liferay.portlet.InvokerPortlet">
 		<priority value="ERROR" />
 	</category>
 

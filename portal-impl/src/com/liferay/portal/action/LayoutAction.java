@@ -48,7 +48,7 @@ import com.liferay.portlet.ActionRequestFactory;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseFactory;
 import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.portlet.CachePortlet;
+import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -336,10 +336,11 @@ public class LayoutAction extends Action {
 
 		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
 
-		CachePortlet cachePortlet = PortletInstanceFactory.create(portlet, ctx);
+		InvokerPortlet invokerPortlet = PortletInstanceFactory.create(
+			portlet, ctx);
 
 		if (user != null) {
-			CachePortlet.clearResponse(
+			InvokerPortlet.clearResponse(
 				ses, layout.getPrimaryKey(), portletId,
 				LanguageUtil.getLanguageId(req));
 		}
@@ -375,8 +376,8 @@ public class LayoutAction extends Action {
 					(contentType.startsWith(
 						ContentTypes.MULTIPART_FORM_DATA))) {
 
-					if (!cachePortlet.getPortletConfig().isWARFile() ||
-						cachePortlet.isStrutsPortlet()) {
+					if (!invokerPortlet.getPortletConfig().isWARFile() ||
+						invokerPortlet.isStrutsPortlet()) {
 
 						uploadReq = new UploadServletRequest(req);
 
@@ -386,7 +387,7 @@ public class LayoutAction extends Action {
 
 				ActionRequestImpl actionRequestImpl =
 					ActionRequestFactory.create(
-						req, portlet, cachePortlet, portletCtx, windowState,
+						req, portlet, invokerPortlet, portletCtx, windowState,
 						portletMode, portletPreferences, layout.getPlid());
 
 				ActionResponseImpl actionResponseImpl =
@@ -397,7 +398,7 @@ public class LayoutAction extends Action {
 				actionRequestImpl.defineObjects(
 					portletConfig, actionResponseImpl);
 
-				cachePortlet.processAction(
+				invokerPortlet.processAction(
 					actionRequestImpl, actionResponseImpl);
 
 				RenderParametersPool.put(

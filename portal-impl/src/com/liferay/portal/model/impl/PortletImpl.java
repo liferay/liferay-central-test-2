@@ -38,14 +38,15 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.servlet.PortletContextPool;
-import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.PortletBag;
+import com.liferay.portlet.PortletBagPool;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -173,6 +174,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_supportedLocales = new HashSet<String>();
 		_userAttributes = new LinkedHashSet<String>();
 		_customUserAttributes = new LinkedHashMap<String, String>();
+		_portletFilters = new LinkedHashMap<String, PortletFilter>();
 	}
 
 	/**
@@ -209,7 +211,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Map<String, Set<String>> portletModes, Set<String> supportedLocales,
 		String resourceBundle, PortletInfo portletInfo,
 		Set<String> userAttributes, Map<String, String> customUserAttributes,
-		String servletContextName, List<String> servletURLPatterns) {
+		Map<String, PortletFilter> portletFilters, String servletContextName,
+		List<String> servletURLPatterns) {
 
 		setPortletId(portletId);
 		_pluginPackage = pluginPackage;
@@ -275,6 +278,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_portletInfo = portletInfo;
 		_userAttributes = userAttributes;
 		_customUserAttributes = customUserAttributes;
+		_portletFilters = portletFilters;
 		setServletContextName(servletContextName);
 		_servletURLPatterns = servletURLPatterns;
 
@@ -476,10 +480,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public ConfigurationAction getConfigurationActionInstance() {
 		if (Validator.isNotNull(getConfigurationActionClass())) {
 			if (isWARFile()) {
-				PortletContextWrapper pcw =
-					PortletContextPool.get(getRootPortletId());
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-				return pcw.getConfigurationActionInstance();
+				return portletBag.getConfigurationActionInstance();
 			}
 			else {
 				return (ConfigurationAction)InstancePool.get(
@@ -592,10 +595,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public FriendlyURLMapper getFriendlyURLMapperInstance() {
 		if (Validator.isNotNull(getFriendlyURLMapperClass())) {
 			if (isWARFile()) {
-				PortletContextWrapper pcw =
-					PortletContextPool.get(getRootPortletId());
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-				return pcw.getFriendlyURLMapperInstance();
+				return portletBag.getFriendlyURLMapperInstance();
 			}
 			else {
 				return (FriendlyURLMapper)InstancePool.get(
@@ -633,10 +635,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public URLEncoder getURLEncoderInstance() {
 		if (Validator.isNotNull(getURLEncoderClass())) {
 			if (isWARFile()) {
-				PortletContextWrapper pcw =
-					PortletContextPool.get(getRootPortletId());
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-				return pcw.getURLEncoderInstance();
+				return portletBag.getURLEncoderInstance();
 			}
 			else {
 				return (URLEncoder)InstancePool.get(getURLEncoderClass());
@@ -673,10 +674,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public PortletDataHandler getPortletDataHandlerInstance() {
 		if (Validator.isNotNull(getPortletDataHandlerClass())) {
 			if (isWARFile()) {
-				PortletContextWrapper pcw =
-					PortletContextPool.get(getRootPortletId());
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-				return pcw.getPortletDataHandlerInstance();
+				return portletBag.getPortletDataHandlerInstance();
 			}
 			else {
 				return (PortletDataHandler)InstancePool.get(
@@ -754,10 +754,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public ActivityTrackerInterpreter getActivityTrackerInterpreterInstance() {
 		if (Validator.isNotNull(getActivityTrackerInterpreterClass())) {
 			if (isWARFile()) {
-				PortletContextWrapper pcw =
-					PortletContextPool.get(getRootPortletId());
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-				return pcw.getActivityTrackerInterpreterInstance();
+				return portletBag.getActivityTrackerInterpreterInstance();
 			}
 			else {
 				return (ActivityTrackerInterpreter)InstancePool.get(
@@ -795,10 +794,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public MessageListener getPopMessageListenerInstance() {
 		if (Validator.isNotNull(getPopMessageListenerClass())) {
 			if (isWARFile()) {
-				PortletContextWrapper pcw =
-					PortletContextPool.get(getRootPortletId());
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
 
-				return pcw.getPopMessageListenerInstance();
+				return portletBag.getPopMessageListenerInstance();
 			}
 			else {
 				return (MessageListener)InstancePool.get(
@@ -2075,6 +2073,24 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Gets the filters of the portlet.
+	 *
+	 * @return		filters of the portlet
+	 */
+	public Map<String, PortletFilter> getPortletFilters() {
+		return _portletFilters;
+	}
+
+	/**
+	 * Sets the filters of the portlet.
+	 *
+	 * @param		portletFilters the filters of the portlet
+	 */
+	public void setFilters(Map<String, PortletFilter> portletFilters) {
+		_portletFilters = portletFilters;
+	}
+
+	/**
 	 * Gets the servlet context name of the portlet.
 	 *
 	 * @return		the servlet context name of the portlet
@@ -2322,7 +2338,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getRoleMappers(), isSystem(), isActive(), isInclude(),
 			getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
-			getUserAttributes(), getCustomUserAttributes(),
+			getUserAttributes(), getCustomUserAttributes(), getPortletFilters(),
 			getServletContextName(), getServletURLPatterns());
 	}
 
@@ -2681,6 +2697,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The custom user attributes of the portlet.
 	 */
 	private Map<String, String> _customUserAttributes;
+
+	/**
+	 * The filters of the portlet.
+	 */
+	private Map<String, PortletFilter> _portletFilters;
 
 	/**
 	 * The servlet context name of the portlet.

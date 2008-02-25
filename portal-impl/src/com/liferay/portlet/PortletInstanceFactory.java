@@ -25,12 +25,10 @@ package com.liferay.portlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.servlet.PortletContextPool;
-import com.liferay.portal.servlet.PortletContextWrapper;
-import com.liferay.util.CollectionFactory;
 
 import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -47,7 +45,7 @@ import javax.servlet.ServletContext;
  */
 public class PortletInstanceFactory {
 
-	public static CachePortlet create(Portlet portlet, ServletContext ctx)
+	public static InvokerPortlet create(Portlet portlet, ServletContext ctx)
 		throws PortletException {
 
 		return _instance._create(portlet, ctx);
@@ -58,10 +56,10 @@ public class PortletInstanceFactory {
 	}
 
 	private PortletInstanceFactory() {
-		_pool = CollectionFactory.getSyncHashMap();
+		_pool = new ConcurrentHashMap<String, Map<String, InvokerPortlet>>();
 	}
 
-	private CachePortlet _create(Portlet portlet, ServletContext ctx)
+	private InvokerPortlet _create(Portlet portlet, ServletContext ctx)
 		throws PortletException {
 
 		boolean instanceable = false;
@@ -72,98 +70,102 @@ public class PortletInstanceFactory {
 			instanceable = true;
 		}
 
-		Map portletInstances = (Map)_pool.get(portlet.getRootPortletId());
+		Map<String, InvokerPortlet> portletInstances = _pool.get(
+			portlet.getRootPortletId());
 
 		if (portletInstances == null) {
-			portletInstances = CollectionFactory.getSyncHashMap();
+			portletInstances = new ConcurrentHashMap<String, InvokerPortlet>();
 
 			_pool.put(portlet.getRootPortletId(), portletInstances);
 		}
 
-		CachePortlet instanceCachePortletInstance = null;
+		InvokerPortlet instanceInvokerPortletInstance = null;
 
 		if (instanceable) {
-			instanceCachePortletInstance = (CachePortlet)portletInstances.get(
+			instanceInvokerPortletInstance = portletInstances.get(
 				portlet.getPortletId());
 		}
 
-		CachePortlet rootCachePortletInstance = null;
+		InvokerPortlet rootInvokerPortletInstance = null;
 
-		if (instanceCachePortletInstance == null) {
-			rootCachePortletInstance = (CachePortlet)portletInstances.get(
+		if (instanceInvokerPortletInstance == null) {
+			rootInvokerPortletInstance = portletInstances.get(
 				portlet.getRootPortletId());
 
-			if (rootCachePortletInstance == null) {
+			if (rootInvokerPortletInstance == null) {
 				PortletConfig portletConfig =
 					PortletConfigFactory.create(portlet, ctx);
 
 				if (portlet.isWARFile()) {
-					PortletContextWrapper pcw =
-						PortletContextPool.get(portlet.getRootPortletId());
+					PortletBag portletBag = PortletBagPool.get(
+						portlet.getRootPortletId());
 
-					rootCachePortletInstance = _init(
-						portlet, portletConfig, pcw.getPortletInstance());
+					rootInvokerPortletInstance = _init(
+						portlet, portletConfig,
+						portletBag.getPortletInstance());
 				}
 				else {
-					rootCachePortletInstance = _init(portlet, portletConfig);
+					rootInvokerPortletInstance = _init(portlet, portletConfig);
 				}
 
 				portletInstances.put(
-					portlet.getRootPortletId(), rootCachePortletInstance);
+					portlet.getRootPortletId(), rootInvokerPortletInstance);
 			}
 		}
 
 		if (instanceable) {
-			if (instanceCachePortletInstance == null) {
+			if (instanceInvokerPortletInstance == null) {
 				javax.portlet.Portlet portletInstance =
-					rootCachePortletInstance.getPortletInstance();
+					rootInvokerPortletInstance.getPortletInstance();
 
 				PortletConfig portletConfig =
 					PortletConfigFactory.create(portlet, ctx);
 
 				PortletContext portletCtx = portletConfig.getPortletContext();
-				Integer expCache = rootCachePortletInstance.getExpCache();
+				Integer expCache = rootInvokerPortletInstance.getExpCache();
 				boolean facesPortlet =
-					rootCachePortletInstance.isFacesPortlet();
+					rootInvokerPortletInstance.isFacesPortlet();
 				boolean strutsPortlet =
-					rootCachePortletInstance.isStrutsPortlet();
+					rootInvokerPortletInstance.isStrutsPortlet();
 				boolean strutsBridgePortlet =
-					rootCachePortletInstance.isStrutsBridgePortlet();
+					rootInvokerPortletInstance.isStrutsBridgePortlet();
 
-				instanceCachePortletInstance = new CachePortlet(
-					portletInstance, portletConfig, portletCtx, expCache,
+				instanceInvokerPortletInstance = new InvokerPortlet(
+					portlet, portletInstance, portletConfig, portletCtx,
 					facesPortlet, strutsPortlet, strutsBridgePortlet);
 
 				portletInstances.put(
-					portlet.getPortletId(), instanceCachePortletInstance);
+					portlet.getPortletId(), instanceInvokerPortletInstance);
 			}
 		}
 		else {
-			if (rootCachePortletInstance != null) {
-				instanceCachePortletInstance = rootCachePortletInstance;
+			if (rootInvokerPortletInstance != null) {
+				instanceInvokerPortletInstance = rootInvokerPortletInstance;
 			}
 		}
 
-		return instanceCachePortletInstance;
+		return instanceInvokerPortletInstance;
 	}
 
 	private void _destroy(Portlet portlet) {
-		Map portletInstances = (Map)_pool.get(portlet.getRootPortletId());
+		Map<String, InvokerPortlet> portletInstances = _pool.get(
+			portlet.getRootPortletId());
 
 		if (portletInstances == null) {
 			return;
 		}
 
-		Iterator itr = portletInstances.entrySet().iterator();
+		Iterator<Map.Entry<String, InvokerPortlet>> itr =
+			portletInstances.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, InvokerPortlet> entry = itr.next();
 
-			String portletId = (String)entry.getKey();
-			CachePortlet cachePortletInstance = (CachePortlet)entry.getValue();
+			String portletId = entry.getKey();
+			InvokerPortlet invokerPortletInstance = entry.getValue();
 
 			if (PortletImpl.getInstanceId(portletId) == null) {
-				cachePortletInstance.destroy();
+				invokerPortletInstance.destroy();
 
 				break;
 			}
@@ -172,11 +174,10 @@ public class PortletInstanceFactory {
 		_pool.remove(portlet.getRootPortletId());
 
 		if (portlet.isWARFile()) {
-			PortletContextWrapper pcw =
-				(PortletContextWrapper)PortletContextPool.get(
-					portlet.getRootPortletId());
+			PortletBag portletBag = PortletBagPool.get(
+				portlet.getRootPortletId());
 
-			pcw.removePortletInstance();
+			portletBag.removePortletInstance();
 		}
 
 		PortletConfigFactory.destroy(portlet);
@@ -185,18 +186,18 @@ public class PortletInstanceFactory {
 		PortletLocalServiceUtil.destroyPortlet(portlet);
 	}
 
-	private CachePortlet _init(Portlet portlet, PortletConfig portletConfig)
+	private InvokerPortlet _init(Portlet portlet, PortletConfig portletConfig)
 		throws PortletException {
 
 		return _init(portlet, portletConfig, null);
 	}
 
-	private CachePortlet _init(
+	private InvokerPortlet _init(
 			Portlet portlet, PortletConfig portletConfig,
 			javax.portlet.Portlet portletInstance)
 		throws PortletException {
 
-		CachePortlet cachePortlet = null;
+		InvokerPortlet invokerPortlet = null;
 
 		try {
 			if (portletInstance == null) {
@@ -204,11 +205,10 @@ public class PortletInstanceFactory {
 					Class.forName(portlet.getPortletClass()).newInstance();
 			}
 
-			cachePortlet = new CachePortlet(
-				portletInstance, portletConfig.getPortletContext(),
-				portlet.getExpCache());
+			invokerPortlet = new InvokerPortlet(
+				portlet, portletInstance, portletConfig.getPortletContext());
 
-			cachePortlet.init(portletConfig);
+			invokerPortlet.init(portletConfig);
 		}
 		catch (ClassNotFoundException cnofe) {
 			throw new UnavailableException(cnofe.getMessage());
@@ -220,12 +220,12 @@ public class PortletInstanceFactory {
 			throw new UnavailableException(iae.getMessage());
 		}
 
-		return cachePortlet;
+		return invokerPortlet;
 	}
 
 	private static PortletInstanceFactory _instance =
 		new PortletInstanceFactory();
 
-	private Map _pool;
+	private Map<String, Map<String, InvokerPortlet>> _pool;
 
 }

@@ -47,20 +47,22 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class RenderRequestFactory {
 
 	public static RenderRequestImpl create(
-			HttpServletRequest req, Portlet portlet, CachePortlet cachePortlet,
-			PortletContext portletCtx, WindowState windowState,
-			PortletMode portletMode, PortletPreferences prefs)
+			HttpServletRequest req, Portlet portlet,
+			InvokerPortlet invokerPortlet, PortletContext portletCtx,
+			WindowState windowState, PortletMode portletMode,
+			PortletPreferences prefs)
 		throws Exception {
 
 		return create(
-			req, portlet, cachePortlet, portletCtx, windowState, portletMode,
+			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
 			prefs, 0);
 	}
 
 	public static RenderRequestImpl create(
-			HttpServletRequest req, Portlet portlet, CachePortlet cachePortlet,
-			PortletContext portletCtx, WindowState windowState,
-			PortletMode portletMode, PortletPreferences prefs, long plid)
+			HttpServletRequest req, Portlet portlet,
+			InvokerPortlet invokerPortlet, PortletContext portletCtx,
+			WindowState windowState, PortletMode portletMode,
+			PortletPreferences prefs, long plid)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -82,7 +84,7 @@ public class RenderRequestFactory {
 		}
 
 		renderRequestImpl.init(
-			req, portlet, cachePortlet, portletCtx, windowState, portletMode,
+			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
 			prefs, plid);
 
 		return renderRequestImpl;

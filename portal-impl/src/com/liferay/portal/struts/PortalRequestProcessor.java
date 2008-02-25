@@ -50,8 +50,12 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.service.persistence.UserTrackerPathUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.*;
-import com.liferay.portlet.CachePortlet;
+import com.liferay.portal.util.LiveUsers;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -473,7 +477,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Authenticated users must have at least one personalized page
 
 		if (user != null) {
-			List layouts = themeDisplay.getLayouts();
+			List<Layout> layouts = themeDisplay.getLayouts();
 
 			if ((layouts == null) || (layouts.size() == 0)) {
 				SessionErrors.add(
@@ -777,7 +781,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		ServletContext ctx =
 			(ServletContext)req.getAttribute(WebKeys.CTX);
 
-		CachePortlet cachePortlet = PortletInstanceFactory.create(portlet, ctx);
+		InvokerPortlet invokerPortlet = PortletInstanceFactory.create(
+			portlet, ctx);
 
 		PortletPreferencesIds portletPreferencesIds =
 			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
@@ -792,7 +797,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			portletConfig.getPortletContext();
 
 		RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(
-			req, portlet, cachePortlet, portletCtx, WindowState.MAXIMIZED,
+			req, portlet, invokerPortlet, portletCtx, WindowState.MAXIMIZED,
 			PortletMode.VIEW, portletPreferences);
 
 		RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(

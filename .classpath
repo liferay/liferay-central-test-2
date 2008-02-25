@@ -172,6 +172,7 @@
 	<classpathentry kind="lib" path="lib/portal/portals-bridges.jar"/>
 	<classpathentry kind="lib" path="lib/portal/portletbridge-core.jar"/>
 	<classpathentry kind="lib" path="lib/portal/portletbridge-portlet.jar"/>
+	<classpathentry kind="lib" path="lib/portal/portlet-container.jar"/>
 	<classpathentry kind="lib" path="lib/portal/quartz.jar"/>
 	<classpathentry kind="lib" path="lib/portal/retroweaver.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ridl.jar"/>

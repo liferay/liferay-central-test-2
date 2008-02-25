@@ -34,7 +34,7 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.CachePortlet;
+import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.util.Locale;
@@ -145,7 +145,7 @@ public class UpdateLookAndFeelAction extends JSONAction {
 
 		portletSetup.store();
 
-		CachePortlet.clearResponse(
+		InvokerPortlet.clearResponse(
 			ses, layout.getPrimaryKey(), portletId,
 			LanguageUtil.getLanguageId(req));
 

@@ -38,8 +38,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
-import com.liferay.portal.servlet.PortletContextPool;
-import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.servlet.DynamicServletRequest;
@@ -152,13 +150,11 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 
 					if (cua == null) {
 						if (_portlet.isWARFile()) {
-							PortletContextWrapper pcw = PortletContextPool.get(
+							PortletBag portletBag = PortletBagPool.get(
 								_portlet.getRootPortletId());
 
-							cua =
-								(CustomUserAttributes)
-									pcw.getCustomUserAttributes().get(
-										attrCustomClass);
+							cua = (CustomUserAttributes)portletBag.
+								getCustomUserAttributes().get(attrCustomClass);
 
 							cua = (CustomUserAttributes)cua.clone();
 						}
@@ -496,7 +492,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 	}
 
 	protected void init(
-		HttpServletRequest req, Portlet portlet, CachePortlet cachePortlet,
+		HttpServletRequest req, Portlet portlet, InvokerPortlet invokerPortlet,
 		PortletContext portletCtx, WindowState windowState,
 		PortletMode portletMode, PortletPreferences prefs, long plid) {
 
@@ -582,7 +578,7 @@ public class RenderRequestImpl implements LiferayRenderRequest {
 			String param = enu.nextElement();
 
 			if (param.startsWith(portletNamespace) &&
-				!cachePortlet.isFacesPortlet()) {
+				!invokerPortlet.isFacesPortlet()) {
 
 				String newParam =
 					param.substring(portletNamespace.length(), param.length());

@@ -36,9 +36,14 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.Time;
 
+import com.sun.portal.portletcontainer.appengine.filter.FilterChainImpl;
+
 import java.io.IOException;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -51,6 +56,12 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.filter.ActionFilter;
+import javax.portlet.filter.EventFilter;
+import javax.portlet.filter.FilterChain;
+import javax.portlet.filter.PortletFilter;
+import javax.portlet.filter.RenderFilter;
+import javax.portlet.filter.ResourceFilter;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -63,13 +74,13 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="CachePortlet.java.html"><b><i>View Source</i></b></a>
+ * <a href="InvokerPortlet.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Brian Myunghun Kim
  *
  */
-public class CachePortlet implements Portlet {
+public class InvokerPortlet implements Portlet {
 
 	public static void clearResponse(
 		HttpSession ses, long plid, String portletId, String languageId) {
@@ -117,12 +128,14 @@ public class CachePortlet implements Portlet {
 		return getResponses(((PortletSessionImpl)ses).getHttpSession());
 	}
 
-	public CachePortlet(
-		Portlet portlet, PortletContext portletCtx, Integer expCache) {
+	public InvokerPortlet(
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletContext portletCtx)
+		throws PortletException {
 
+		_portletModel = portletModel;
 		_portlet = portlet;
 		_portletCtx = (PortletContextImpl)portletCtx;
-		_expCache = expCache;
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -143,21 +156,27 @@ public class CachePortlet implements Portlet {
 		_strutsBridgePortlet = ClassUtil.isSubclass(
 			portlet.getClass(),
 			"org.apache.portals.bridges.struts.StrutsPortlet");
+		_expCache = portletModel.getExpCache();
+		setPortletFilters();
 	}
 
-	public CachePortlet(
-		Portlet portlet, PortletConfig portletConfig, PortletContext portletCtx,
-		Integer expCache, boolean facesPortlet, boolean strutsPortlet,
-		boolean strutsBridgePortlet) {
+	public InvokerPortlet(
+			com.liferay.portal.model.Portlet portletModel, Portlet portlet,
+			PortletConfig portletConfig, PortletContext portletCtx,
+			boolean facesPortlet, boolean strutsPortlet,
+			boolean strutsBridgePortlet)
+		throws PortletException {
 
 		// From constructor
 
+		_portletModel = portletModel;
 		_portlet = portlet;
 		_portletCtx = (PortletContextImpl)portletCtx;
-		_expCache = expCache;
 		_facesPortlet = facesPortlet;
 		_strutsPortlet = strutsPortlet;
 		_strutsBridgePortlet = strutsBridgePortlet;
+		_expCache = portletModel.getExpCache();
+		setPortletFilters();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -177,7 +196,7 @@ public class CachePortlet implements Portlet {
 			ClassLoader contextClassLoader =
 				Thread.currentThread().getContextClassLoader();
 
-			ClassLoader portletClassLoader = _getPortletClassLoader();
+			ClassLoader portletClassLoader = getPortletClassLoader();
 
 			try {
 				if (portletClassLoader != null) {
@@ -222,7 +241,7 @@ public class CachePortlet implements Portlet {
 		ClassLoader contextClassLoader =
 			Thread.currentThread().getContextClassLoader();
 
-		ClassLoader portletClassLoader = _getPortletClassLoader();
+		ClassLoader portletClassLoader = getPortletClassLoader();
 
 		try {
 			if (portletClassLoader != null) {
@@ -270,7 +289,7 @@ public class CachePortlet implements Portlet {
 		}
 
 		try {
-			_invoke(req, res, true);
+			invoke(req, res, true);
 		}
 		catch (PortletException pe) {
 			req.setAttribute(_portletId + PortletException.class.getName(), pe);
@@ -306,7 +325,7 @@ public class CachePortlet implements Portlet {
 		if ((remoteUser == null) || (_expCache == null) ||
 			(_expCache.intValue() == 0)) {
 
-			_invoke(req, res, false);
+			invoke(req, res, false);
 		}
 		else {
 			RenderResponseImpl resImpl = (RenderResponseImpl)res;
@@ -325,13 +344,13 @@ public class CachePortlet implements Portlet {
 			String sesResponseId = encodeResponseKey(
 				layout.getPlid(), _portletId, LanguageUtil.getLanguageId(req));
 
-			CachePortletResponse response =
-				(CachePortletResponse)sesResponses.get(sesResponseId);
+			InvokerPortletResponse response =
+				(InvokerPortletResponse)sesResponses.get(sesResponseId);
 
 			if (response == null) {
-				_invoke(req, res, false);
+				invoke(req, res, false);
 
-				response = new CachePortletResponse(
+				response = new InvokerPortletResponse(
 					resImpl.getTitle(),
 					stringServletRes.getString(),
 					now + Time.SECOND * _expCache.intValue());
@@ -341,7 +360,7 @@ public class CachePortlet implements Portlet {
 			else if ((response.getTime() < now) &&
 					 (_expCache.intValue() > 0)) {
 
-				_invoke(req, res, false);
+				invoke(req, res, false);
 
 				response.setTitle(resImpl.getTitle());
 				response.setContent(stringServletRes.getString());
@@ -360,14 +379,16 @@ public class CachePortlet implements Portlet {
 		}
 	}
 
-	private ClassLoader _getPortletClassLoader() {
+	protected ClassLoader getPortletClassLoader() {
 		return (ClassLoader)_portletCtx.getAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER);
 	}
 
-	private void _invoke(
+	protected void invoke(
 			PortletRequest req, PortletResponse res, boolean action)
 		throws IOException, PortletException {
+
+		FilterChain filterChain = null;
 
 		Map properties = null;
 
@@ -393,6 +414,8 @@ public class CachePortlet implements Portlet {
 
 				httpReq = actionReqImpl.getHttpServletRequest();
 				httpRes = actionResImpl.getHttpServletResponse();
+
+				filterChain = new FilterChainImpl(_portlet, _actionFilters);
 			}
 			else {
 				renderReqImpl = (RenderRequestImpl)req;
@@ -400,9 +423,13 @@ public class CachePortlet implements Portlet {
 
 				httpReq = renderReqImpl.getHttpServletRequest();
 				httpRes = renderResImpl.getHttpServletResponse();
+
+				filterChain = new FilterChainImpl(_portlet, _renderFilters);
 			}
 
 			httpReq.setAttribute(JavaConstants.JAVAX_PORTLET_PORTLET, _portlet);
+			httpReq.setAttribute(
+				PortletServlet.PORTLET_SERVLET_FILTER_CHAIN, filterChain);
 
 			try {
 				rd.include(httpReq, httpRes);
@@ -429,7 +456,9 @@ public class CachePortlet implements Portlet {
 				ActionRequestImpl actionReqImpl = (ActionRequestImpl)req;
 				ActionResponseImpl actionResImpl = (ActionResponseImpl)res;
 
-				_portlet.processAction(actionReqImpl, actionResImpl);
+				filterChain = new FilterChainImpl(_portlet, _actionFilters);
+
+				filterChain.doFilter(actionReqImpl, actionResImpl);
 
 				properties = actionResImpl.getProperties();
 			}
@@ -437,7 +466,9 @@ public class CachePortlet implements Portlet {
 				RenderRequestImpl renderReqImpl = (RenderRequestImpl)req;
 				RenderResponseImpl renderResImpl = (RenderResponseImpl)res;
 
-				_portlet.render(renderReqImpl, renderResImpl);
+				filterChain = new FilterChainImpl(_portlet, _renderFilters);
+
+				filterChain.doFilter(renderReqImpl, renderResImpl);
 
 				properties = renderResImpl.getProperties();
 			}
@@ -457,8 +488,39 @@ public class CachePortlet implements Portlet {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(CachePortlet.class);
+	protected void setPortletFilters() throws PortletException {
+		Map<String, com.liferay.portal.model.PortletFilter> portletFilters =
+			_portletModel.getPortletFilters();
 
+		for (Map.Entry<String, com.liferay.portal.model.PortletFilter> entry :
+				portletFilters.entrySet()) {
+
+			com.liferay.portal.model.PortletFilter portletFilterModel =
+				entry.getValue();
+
+			PortletFilter portletFilter = PortletFilterFactory.create(
+				portletFilterModel, _portletCtx);
+
+			Set lifecycles = portletFilterModel.getLifecycles();
+
+			if (lifecycles.contains(PortletRequest.ACTION_PHASE)) {
+				_actionFilters.add((ActionFilter)portletFilter);
+			}
+			else if (lifecycles.contains(PortletRequest.EVENT_PHASE)) {
+				_eventFilters.add((EventFilter)portletFilter);
+			}
+			else if (lifecycles.contains(PortletRequest.RENDER_PHASE)) {
+				_renderFilters.add((RenderFilter)portletFilter);
+			}
+			else if (lifecycles.contains(PortletRequest.RESOURCE_PHASE)) {
+				_resourceFilters.add((ResourceFilter)portletFilter);
+			}
+		}
+	}
+
+	private static Log _log = LogFactory.getLog(InvokerPortlet.class);
+
+	private com.liferay.portal.model.Portlet _portletModel;
 	private String _portletId;
 	private Portlet _portlet;
 	private PortletConfigImpl _portletConfig;
@@ -468,5 +530,10 @@ public class CachePortlet implements Portlet {
 	private boolean _facesPortlet;
 	private boolean _strutsPortlet;
 	private boolean _strutsBridgePortlet;
+	private List<ActionFilter> _actionFilters = new ArrayList<ActionFilter>();
+	private List<EventFilter> _eventFilters = new ArrayList<EventFilter>();
+	private List<RenderFilter> _renderFilters = new ArrayList<RenderFilter>();
+	private List<ResourceFilter> _resourceFilters =
+		new ArrayList<ResourceFilter>();
 
 }

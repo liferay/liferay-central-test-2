@@ -382,6 +382,11 @@ public interface Portlet extends PortletModel {
 	public void setCustomUserAttributes(
 		java.util.Map<String, String> customUserAttributes);
 
+	public java.util.Map<String, com.liferay.portal.model.PortletFilter> getPortletFilters();
+
+	public void setFilters(
+		java.util.Map<String, com.liferay.portal.model.PortletFilter> portletFilters);
+
 	public java.lang.String getServletContextName();
 
 	public void setServletContextName(java.lang.String servletContextName);

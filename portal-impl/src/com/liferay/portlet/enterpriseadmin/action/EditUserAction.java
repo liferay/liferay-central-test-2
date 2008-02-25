@@ -49,7 +49,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.CachePortlet;
+import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.admin.util.AdminUtil;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -333,7 +333,7 @@ public class EditUserAction extends PortletAction {
 
 				PortletSession ses = req.getPortletSession();
 
-				CachePortlet.clearResponses(ses);
+				InvokerPortlet.clearResponses(ses);
 
 				// Password
 

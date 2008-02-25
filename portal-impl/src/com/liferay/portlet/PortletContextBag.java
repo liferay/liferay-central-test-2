@@ -20,50 +20,35 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.servlet;
+package com.liferay.portlet;
 
-import com.liferay.util.CollectionFactory;
-
+import java.util.HashMap;
 import java.util.Map;
 
+import javax.portlet.filter.PortletFilter;
+
 /**
- * <a href="PortletContextPool.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortletContextBag.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletContextPool {
+public class PortletContextBag {
 
-	public static PortletContextWrapper get(String portletId) {
-		return _instance._get(portletId);
+	public PortletContextBag(String servletContextName) {
+		_servletContextName = servletContextName;
 	}
 
-	public static void put(String portletId, PortletContextWrapper pcw) {
-		_instance._put(portletId, pcw);
+	public String getServletContextName() {
+		return _servletContextName;
 	}
 
-	public static PortletContextWrapper remove(String portletId) {
-		return _instance._remove(portletId);
+	public Map<String, PortletFilter> getPortletFilters() {
+		return _portletFilters;
 	}
 
-	private PortletContextPool() {
-		_portletContextPool = CollectionFactory.getSyncHashMap();
-	}
-
-	private PortletContextWrapper _get(String portletId) {
-		return (PortletContextWrapper)_portletContextPool.get(portletId);
-	}
-
-	private void _put(String portletId, PortletContextWrapper pcw) {
-		_portletContextPool.put(portletId, pcw);
-	}
-
-	private PortletContextWrapper _remove(String portletId) {
-		return (PortletContextWrapper)_portletContextPool.remove(portletId);
-	}
-
-	private static PortletContextPool _instance = new PortletContextPool();
-
-	private Map _portletContextPool;
+	private String _servletContextName;
+	private Map<String, PortletFilter> _portletFilters =
+		new HashMap<String, PortletFilter>();
 
 }

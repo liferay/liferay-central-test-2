@@ -45,9 +45,10 @@ import org.apache.commons.pool.impl.StackObjectPool;
 public class ActionRequestFactory {
 
 	public static ActionRequestImpl create(
-			HttpServletRequest req, Portlet portlet, CachePortlet cachePortlet,
-			PortletContext portletCtx, WindowState windowState,
-			PortletMode portletMode, PortletPreferences prefs, long plid)
+			HttpServletRequest req, Portlet portlet,
+			InvokerPortlet invokerPortlet, PortletContext portletCtx,
+			WindowState windowState, PortletMode portletMode,
+			PortletPreferences prefs, long plid)
 		throws Exception {
 
 		ActionRequestImpl actionRequestImpl = null;
@@ -61,7 +62,7 @@ public class ActionRequestFactory {
 		}
 
 		actionRequestImpl.init(
-			req, portlet, cachePortlet, portletCtx, windowState, portletMode,
+			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
 			prefs, plid);
 
 		return actionRequestImpl;

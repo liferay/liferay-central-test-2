@@ -47,19 +47,25 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
-import com.liferay.portal.servlet.PortletContextPool;
-import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.ActivityTrackerInterpreterUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.PortletBag;
+import com.liferay.portlet.PortletBagPool;
+import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletContextBag;
+import com.liferay.portlet.PortletContextBagPool;
+import com.liferay.portlet.PortletContextImpl;
+import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletResourceBundles;
@@ -77,6 +83,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 
+import javax.portlet.PortletConfig;
 import javax.portlet.PreferencesValidator;
 
 import javax.servlet.ServletContext;
@@ -148,10 +155,10 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			boolean strutsBridges = false;
 
-			Iterator<Portlet> itr1 = portlets.iterator();
+			Iterator<Portlet> portletsItr = portlets.iterator();
 
-			while (itr1.hasNext()) {
-				Portlet portlet = itr1.next();
+			while (portletsItr.hasNext()) {
+				Portlet portlet = portletsItr.next();
 
 				Class<?> portletClass = portletClassLoader.loadClass(
 					portlet.getPortletClass());
@@ -285,11 +292,11 @@ public class PortletHotDeployListener implements HotDeployListener {
 				if (Validator.isNotNull(portlet.getResourceBundle())) {
 					resourceBundles = CollectionFactory.getHashMap();
 
-					Iterator<String> itr2 =
+					Iterator<String> supportLocalesItr =
 						portlet.getSupportedLocales().iterator();
 
-					while (itr2.hasNext()) {
-						String supportedLocale = itr2.next();
+					while (supportLocalesItr.hasNext()) {
+						String supportedLocale = supportLocalesItr.next();
 
 						Locale locale = LocaleUtil.fromLanguageId(
 							supportedLocale);
@@ -313,11 +320,12 @@ public class PortletHotDeployListener implements HotDeployListener {
 				Map<String, Object> customUserAttributes =
 					new HashMap<String, Object>();
 
-				Iterator<Map.Entry<String, String>> itr2 =
+				Iterator<Map.Entry<String, String>> customUserAttributesItr =
 					portlet.getCustomUserAttributes().entrySet().iterator();
 
-				while (itr2.hasNext()) {
-					Map.Entry<String, String> entry = itr2.next();
+				while (customUserAttributesItr.hasNext()) {
+					Map.Entry<String, String> entry =
+						customUserAttributesItr.next();
 
 					String attrCustomClass = entry.getValue();
 
@@ -327,7 +335,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 							attrCustomClass).newInstance());
 				}
 
-				PortletContextWrapper pcw = new PortletContextWrapper(
+				PortletBag portletBag = new PortletBag(
 					portlet.getPortletId(), ctx, portletInstance,
 					configurationActionInstance, indexerInstance,
 					schedulerInstance, friendlyURLMapperInstance,
@@ -337,15 +345,57 @@ public class PortletHotDeployListener implements HotDeployListener {
 					popMessageListenerInstance, prefsValidatorInstance,
 					resourceBundles, customUserAttributes);
 
-				PortletContextPool.put(portlet.getPortletId(), pcw);
+				PortletBagPool.put(portlet.getPortletId(), portletBag);
+
+				PortletConfig portletConfig = PortletConfigFactory.create(
+					portlet, ctx);
+
+				PortletContextImpl portletCtxImpl =
+					(PortletContextImpl)portletConfig.getPortletContext();
+
+				PortletContextBag portletContextBag = new PortletContextBag(
+					servletContextName);
+
+				PortletContextBagPool.put(
+					servletContextName, portletContextBag);
+
+				Map<String, javax.portlet.filter.PortletFilter>
+					portletFilterInstances =
+						portletContextBag.getPortletFilters();
+
+				Map<String, PortletFilter> portletFilters =
+					portlet.getPortletFilters();
+
+				Iterator<Map.Entry<String, PortletFilter>> portletFiltersItr =
+					portletFilters.entrySet().iterator();
+
+				while (portletFiltersItr.hasNext()) {
+					Map.Entry<String, PortletFilter> entry =
+						portletFiltersItr.next();
+
+					String filterName = entry.getKey();
+					PortletFilter portletFilter = entry.getValue();
+
+					if (portletFilterInstances.containsKey(filterName)) {
+						continue;
+					}
+
+					javax.portlet.filter.PortletFilter portletFilterInstance =
+						(javax.portlet.filter.PortletFilter)
+							portletClassLoader.loadClass(
+								portletFilter.getFilterClass()).newInstance();
+
+					portletFilterInstances.put(
+						filterName, portletFilterInstance);
+
+					PortletFilterFactory.create(portletFilter, portletCtxImpl);
+				}
 
 				try {
 					PortletInstanceFactory.create(portlet, ctx);
 				}
 				catch (Exception e1) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(e1.getMessage());
-					}
+					_log.error(e1, e1);
 				}
 			}
 

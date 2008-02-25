@@ -28,11 +28,14 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
@@ -49,6 +52,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -458,6 +462,84 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portletId;
 	}
 
+	private List _getPortletsByPortletName(
+		String portletName, String servletContextName,
+		Map<String, Portlet> portletsPool) {
+
+		List<Portlet> portlets = null;
+
+		int pos = portletName.indexOf(StringPool.STAR);
+
+		if (pos == -1) {
+			portlets = new ArrayList<Portlet>();
+
+			String portletId = portletName;
+
+			if (servletContextName != null) {
+				portletId =
+					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
+			}
+
+			portletId = PortalUtil.getJsSafePortletId(portletId);
+
+			Portlet portlet = portletsPool.get(portletId);
+
+			if (portlet != null) {
+				portlets.add(portlet);
+			}
+
+			return portlets;
+		}
+
+		String portletNamePrefix = portletName.substring(0, pos);
+
+		portlets = _getPortletsByServletContextName(
+			servletContextName, portletsPool);
+
+		Iterator<Portlet> itr = portlets.iterator();
+
+		while (itr.hasNext()) {
+			Portlet portlet = itr.next();
+
+			if (!portlet.getPortletId().startsWith(portletNamePrefix)) {
+				itr.remove();
+			}
+		}
+
+		return portlets;
+	}
+
+	private List _getPortletsByServletContextName(
+		String servletContextName, Map<String, Portlet> portletsPool) {
+
+		List<Portlet> portlets = new ArrayList<Portlet>();
+
+		Iterator<Map.Entry<String, Portlet>> itr =
+			portletsPool.entrySet().iterator();
+
+		while (itr.hasNext()) {
+			Map.Entry<String, Portlet> entry = itr.next();
+
+			String portletId = entry.getKey();
+			Portlet portlet = entry.getValue();
+
+			if (servletContextName != null) {
+				if (portletId.endsWith(
+						PortletImpl.WAR_SEPARATOR + servletContextName)) {
+
+					portlets.add(portlet);
+				}
+			}
+			else {
+				if (portletId.indexOf(PortletImpl.WAR_SEPARATOR) == -1) {
+					portlets.add(portlet);
+				}
+			}
+		}
+
+		return portlets;
+	}
+
 	private Map<String, Portlet> _getPortletsPool() {
 		return _portletsPool;
 	}
@@ -737,6 +819,78 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 
 			portletModel.getUserAttributes().addAll(userAttributes);
+		}
+
+		Map<String, PortletFilter> portletFilters =
+			new HashMap<String, PortletFilter>();
+
+		itr1 = root.elements("filter").iterator();
+
+		while (itr1.hasNext()) {
+			Element filter = itr1.next();
+
+			String filterName = filter.elementText("filter-name");
+			String filterClass = filter.elementText("filter-class");
+
+			Set<String> lifecycles = new LinkedHashSet<String>();
+
+			Iterator<Element> itr2 = filter.elements("lifecycle").iterator();
+
+			while (itr2.hasNext()) {
+				Element lifecycle = itr2.next();
+
+				lifecycles.add(lifecycle.getText());
+			}
+
+			Map<String, String> initParams = new HashMap<String, String>();
+
+			itr2 = filter.elements("init-param").iterator();
+
+			while (itr2.hasNext()) {
+				Element initParam = itr2.next();
+
+				initParams.put(
+					initParam.elementText("name"),
+					initParam.elementText("value"));
+			}
+
+			PortletFilter portletFilter = new PortletFilterImpl(
+				filterName, filterClass, lifecycles, initParams,
+				servletContextName);
+
+			portletFilters.put(filterName, portletFilter);
+		}
+
+		itr1 = root.elements("filter-mapping").iterator();
+
+		while (itr1.hasNext()) {
+			Element filterMapping = itr1.next();
+
+			String filterName = filterMapping.elementText("filter-name");
+			String portletName = filterMapping.elementText("portlet-name");
+
+			PortletFilter portletFilter = portletFilters.get(filterName);
+
+			if (portletFilter == null) {
+				_log.error(
+					"Filter mapping references unnknown filter name " +
+						filterName);
+
+				continue;
+			}
+
+			List<Portlet> portletModels = _getPortletsByPortletName(
+				portletName, servletContextName, portletsPool);
+
+			if (portletModels.size() == 0) {
+				_log.error(
+					"Filter mapping with filter name " + filterName +
+						" references unnknown portlet name " + portletName);
+			}
+
+			for (Portlet portletModel : portletModels) {
+				portletModel.getPortletFilters().put(filterName, portletFilter);
+			}
 		}
 
 		return portletIds;

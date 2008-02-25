@@ -191,6 +191,10 @@ public class PortletContextImpl implements PortletContext {
 		return _ctx;
 	}
 
+	public boolean isWARFile() {
+		return _portlet.isWARFile();
+	}
+
 	public void log(String msg) {
 		if (_log.isInfoEnabled()) {
 			_log.info(msg);
@@ -227,6 +231,6 @@ public class PortletContextImpl implements PortletContext {
 
 	private Portlet _portlet;
 	private ServletContext _ctx;
-	private String _ctxName = null;
+	private String _ctxName;
 
 }

@@ -23,9 +23,9 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
-import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -49,20 +49,21 @@ public class PortletConfigFactory {
 	}
 
 	private PortletConfigFactory() {
-		_pool = CollectionFactory.getSyncHashMap();
+		_pool = new ConcurrentHashMap<String, Map<String, PortletConfig>>();
 	}
 
 	private PortletConfig _create(Portlet portlet, ServletContext ctx) {
-		Map portletConfigs = (Map)_pool.get(portlet.getRootPortletId());
+		Map<String, PortletConfig> portletConfigs =
+			_pool.get(portlet.getRootPortletId());
 
 		if (portletConfigs == null) {
-			portletConfigs = CollectionFactory.getSyncHashMap();
+			portletConfigs = new ConcurrentHashMap<String, PortletConfig>();
 
 			_pool.put(portlet.getRootPortletId(), portletConfigs);
 		}
 
-		PortletConfig portletConfig =
-			(PortletConfig)portletConfigs.get(portlet.getPortletId());
+		PortletConfig portletConfig = portletConfigs.get(
+			portlet.getPortletId());
 
 		if (portletConfig == null) {
 			PortletContext portletCtx =
@@ -84,6 +85,6 @@ public class PortletConfigFactory {
 
 	private static PortletConfigFactory _instance = new PortletConfigFactory();
 
-	private Map _pool;
+	private Map<String, Map<String, PortletConfig>> _pool;
 
 }

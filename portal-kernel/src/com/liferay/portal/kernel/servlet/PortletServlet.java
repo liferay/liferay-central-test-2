@@ -37,6 +37,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.filter.FilterChain;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -57,6 +58,9 @@ public class PortletServlet extends HttpServlet {
 	public static final String PORTLET_SERVLET_CONFIG =
 		"com.liferay.portal.kernel.servlet.PortletServletConfig";
 
+	public static final String PORTLET_SERVLET_FILTER_CHAIN =
+		"com.liferay.portal.kernel.servlet.PortletServletFilterChain";
+
 	public static final String PORTLET_SERVLET_REQUEST =
 		"com.liferay.portal.kernel.servlet.PortletServletRequest";
 
@@ -74,6 +78,9 @@ public class PortletServlet extends HttpServlet {
 
 		Portlet portlet = (Portlet)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_PORTLET);
+
+		FilterChain filterChain = (FilterChain)req.getAttribute(
+			PORTLET_SERVLET_FILTER_CHAIN);
 
 		LiferayPortletSession portletSes =
 			(LiferayPortletSession)portletReq.getPortletSession();
@@ -93,13 +100,13 @@ public class PortletServlet extends HttpServlet {
 				ActionRequest actionReq = (ActionRequest)portletReq;
 				ActionResponse actionRes = (ActionResponse)portletRes;
 
-				portlet.processAction(actionReq, actionRes);
+				filterChain.doFilter(actionReq, actionRes);
 			}
 			else {
 				RenderRequest renderReq = (RenderRequest)portletReq;
 				RenderResponse renderRes = (RenderResponse)portletRes;
 
-				portlet.render(renderReq, renderRes);
+				filterChain.doFilter(renderReq, renderRes);
 			}
 		}
 		catch (PortletException pe) {

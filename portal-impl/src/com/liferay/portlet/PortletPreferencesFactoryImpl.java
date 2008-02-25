@@ -42,8 +42,6 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
-import com.liferay.portal.servlet.PortletContextPool;
-import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -330,10 +328,10 @@ public class PortletPreferencesFactoryImpl
 
 	public PreferencesValidator getPreferencesValidator(Portlet portlet) {
 		if (portlet.isWARFile()) {
-			PortletContextWrapper pcw =
-				PortletContextPool.get(portlet.getRootPortletId());
+			PortletBag portletBag = PortletBagPool.get(
+				portlet.getRootPortletId());
 
-			return pcw.getPreferencesValidatorInstance();
+			return portletBag.getPreferencesValidatorInstance();
 		}
 		else {
 			PreferencesValidator prefsValidator = null;

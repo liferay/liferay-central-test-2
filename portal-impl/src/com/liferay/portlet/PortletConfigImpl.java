@@ -26,8 +26,6 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.impl.PortletImpl;
-import com.liferay.portal.servlet.PortletContextPool;
-import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 
@@ -175,10 +173,9 @@ public class PortletConfigImpl implements PortletConfig {
 						_portletName, companyId, locale);
 				}
 				else {
-					PortletContextWrapper pcw =
-						PortletContextPool.get(_rootPortletId);
+					PortletBag portletBag = PortletBagPool.get(_rootPortletId);
 
-					bundle = pcw.getResourceBundle(locale);
+					bundle = portletBag.getResourceBundle(locale);
 				}
 
 				bundle = new PortletResourceBundle(bundle, _portletInfo);

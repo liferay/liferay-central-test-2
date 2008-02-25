@@ -108,10 +108,10 @@ boolean modeHelp = layoutTypePortlet.hasModeHelpPortletId(portletId);
 boolean modePreview = layoutTypePortlet.hasModePreviewPortletId(portletId);
 boolean modePrint = layoutTypePortlet.hasModePrintPortletId(portletId);
 
-CachePortlet cachePortlet = null;
+InvokerPortlet invokerPortlet = null;
 
 try {
-	cachePortlet = PortletInstanceFactory.create(portlet, application);
+	invokerPortlet = PortletInstanceFactory.create(portlet, application);
 }
 /*catch (UnavailableException ue) {
 	ue.printStackTrace();
@@ -173,7 +173,7 @@ else if (modePrint) {
 
 HttpServletRequest originalReq = PortalUtil.getOriginalServletRequest(request);
 
-RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalReq, portlet, cachePortlet, portletCtx, windowState, portletMode, portletPreferences, plid.longValue());
+RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalReq, portlet, invokerPortlet, portletCtx, windowState, portletMode, portletPreferences, plid.longValue());
 
 if (Validator.isNotNull(queryString)) {
 	DynamicServletRequest dynamicReq = (DynamicServletRequest)renderRequestImpl.getHttpServletRequest();
@@ -607,7 +607,7 @@ if (urlBack != null) {
 
 // Make sure the Tiles context is reset for the next portlet
 
-if ((cachePortlet != null) && cachePortlet.isStrutsPortlet()) {
+if ((invokerPortlet != null) && invokerPortlet.isStrutsPortlet()) {
 	request.removeAttribute(ComponentConstants.COMPONENT_CONTEXT);
 }
 
@@ -617,7 +617,7 @@ boolean portletException = false;
 
 if (portlet.isActive() && access && supportsMimeType) {
 	try {
-		cachePortlet.render(renderRequestImpl, renderResponseImpl);
+		invokerPortlet.render(renderRequestImpl, renderResponseImpl);
 
 		if (themeDisplay.isStateExclusive()) {
 			renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringServletRes);
@@ -684,7 +684,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 			useDefaultTemplate = useDefaultTemplateObj.booleanValue();
 		}
 
-		if ((cachePortlet != null) && cachePortlet.isStrutsPortlet()) {
+		if ((invokerPortlet != null) && invokerPortlet.isStrutsPortlet()) {
 			if (!access || portletException) {
 				PortletRequestProcessor portletReqProcessor = (PortletRequestProcessor)portletCtx.getAttribute(WebKeys.PORTLET_STRUTS_PROCESSOR);
 

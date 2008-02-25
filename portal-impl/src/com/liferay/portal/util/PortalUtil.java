@@ -71,12 +71,12 @@ import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
-import com.liferay.portal.servlet.PortletContextPool;
-import com.liferay.portal.servlet.PortletContextWrapper;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.portlet.CachePortlet;
+import com.liferay.portlet.InvokerPortlet;
+import com.liferay.portlet.PortletBag;
+import com.liferay.portlet.PortletBagPool;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
@@ -1140,10 +1140,10 @@ public class PortalUtil {
 		Portlet portlet) {
 
 		if (portlet.isWARFile()) {
-			PortletContextWrapper pcw =
-				PortletContextPool.get(portlet.getRootPortletId());
+			PortletBag portletBag = PortletBagPool.get(
+				portlet.getRootPortletId());
 
-			return pcw.getPreferencesValidatorInstance();
+			return portletBag.getPreferencesValidatorInstance();
 		}
 		else {
 			PreferencesValidator prefsValidator = null;
@@ -2034,7 +2034,7 @@ public class PortalUtil {
 					// Clear cache and render parameters for the previous
 					// portlet that had a maximum window state
 
-					CachePortlet.clearResponse(
+					InvokerPortlet.clearResponse(
 						req.getSession(), layout.getPlid(), curMaxPortletId,
 						LanguageUtil.getLanguageId(req));
 

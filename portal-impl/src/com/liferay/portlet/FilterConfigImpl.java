@@ -22,48 +22,51 @@
 
 package com.liferay.portlet;
 
-import java.io.Serializable;
+import java.util.Collections;
+import java.util.Enumeration;
+import java.util.Map;
+
+import javax.portlet.PortletContext;
+import javax.portlet.filter.FilterConfig;
 
 /**
- * <a href="CachePortletResponse.java.html"><b><i>View Source</i></b></a>
+ * <a href="FilterConfigImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CachePortletResponse implements Serializable {
+public class FilterConfigImpl implements FilterConfig {
 
-	public CachePortletResponse(String title, String content, long time) {
-		_title = title;
-		_content = content;
-		_time = time;
+	public FilterConfigImpl(
+		String filterName, PortletContext ctx, Map<String, String> params) {
+
+		_filterName = filterName;
+		_ctx = ctx;
+		_params = params;
 	}
 
-	public String getTitle() {
-		return _title;
+	public String getFilterName() {
+		return _filterName;
 	}
 
-	public void setTitle(String title) {
-		_title = title;
+	public String getInitParameter(String name) {
+		if (name == null) {
+			throw new IllegalArgumentException();
+		}
+
+		return _params.get(name);
 	}
 
-	public String getContent() {
-		return _content;
+	public Enumeration<String> getInitParameterNames() {
+		return Collections.enumeration(_params.keySet());
 	}
 
-	public void setContent(String content) {
-		_content = content;
+	public PortletContext getPortletContext() {
+		return _ctx;
 	}
 
-	public long getTime() {
-		return _time;
-	}
-
-	public void setTime(long time) {
-		_time = time;
-	}
-
-	private String _title;
-	private String _content;
-	private long _time;
+	private String _filterName;
+	private PortletContext _ctx;
+	private Map<String, String> _params;
 
 }
