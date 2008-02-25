@@ -133,7 +133,7 @@ public class StrutsURLEncoder implements URLEncoder {
 			catch (PortletModeException pme) {
 			}
 
-			_portletURL.setParameters(new HashMap());
+			_portletURL.setParameters(new HashMap<String, String[]>());
 			_portletURL.setAction(false);
 
 			// Separate the Struts action from the query string

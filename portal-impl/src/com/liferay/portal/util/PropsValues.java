@@ -629,6 +629,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.PORTLET_URL_ANCHOR_ENABLE));
 
+	public static final boolean PORTLET_URL_APPEND_PARAMETERS =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.PORTLET_URL_APPEND_PARAMETERS));
+
 	public static final String PORTLET_VIRTUAL_PATH =
 		PropsUtil.get(PropsUtil.PORTLET_VIRTUAL_PATH);
 
