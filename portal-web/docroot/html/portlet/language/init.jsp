@@ -35,8 +35,8 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-int displayStyle = GetterUtil.getInteger(prefs.getValue("display-style", StringPool.BLANK));
-
 String allLanguageIds = StringUtil.merge(PropsValues.LOCALES);
+
 String[] languageIds = StringUtil.split(prefs.getValue("language-ids", allLanguageIds));
+int displayStyle = GetterUtil.getInteger(prefs.getValue("display-style", StringPool.BLANK));
 %>

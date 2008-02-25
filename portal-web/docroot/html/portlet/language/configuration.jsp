@@ -30,19 +30,6 @@
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="display-style" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />displayStyle">
-			<option <%= (displayStyle == LanguageTag.LIST_ICON) ? "selected" : "" %> value="<%= LanguageTag.LIST_ICON %>"><liferay-ui:message key="icon" /></option>
-			<option <%= (displayStyle == LanguageTag.LIST_LONG_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_LONG_TEXT %>"><liferay-ui:message key="long-text" /></option>
-			<option <%= (displayStyle == LanguageTag.LIST_SHORT_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_SHORT_TEXT %>"><liferay-ui:message key="short-text" /></option>
-			<option <%= (displayStyle == LanguageTag.SELECT_BOX) ? "selected" : "" %> value="<%= LanguageTag.SELECT_BOX %>"><liferay-ui:message key="select-box" /></option>
-		</select>
-	</td>
-</tr>
-<tr>
-	<td>
 		<liferay-ui:message key="languages" />
 	</td>
 	<td>
@@ -90,6 +77,24 @@
 			leftList="<%= leftList %>"
 			rightList="<%= rightList %>"
 		/>
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="display-style" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />displayStyle">
+			<option <%= (displayStyle == LanguageTag.LIST_ICON) ? "selected" : "" %> value="<%= LanguageTag.LIST_ICON %>"><liferay-ui:message key="icon" /></option>
+			<option <%= (displayStyle == LanguageTag.LIST_LONG_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_LONG_TEXT %>"><liferay-ui:message key="long-text" /></option>
+			<option <%= (displayStyle == LanguageTag.LIST_SHORT_TEXT) ? "selected" : "" %> value="<%= LanguageTag.LIST_SHORT_TEXT %>"><liferay-ui:message key="short-text" /></option>
+			<option <%= (displayStyle == LanguageTag.SELECT_BOX) ? "selected" : "" %> value="<%= LanguageTag.SELECT_BOX %>"><liferay-ui:message key="select-box" /></option>
+		</select>
 	</td>
 </tr>
 </table>

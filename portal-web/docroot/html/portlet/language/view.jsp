@@ -24,4 +24,4 @@
 
 <%@ include file="/html/portlet/language/init.jsp" %>
 
-<liferay-ui:language displayStyle="<%= displayStyle %>" languageIds="<%= languageIds %>"/>
+<liferay-ui:language languageIds="<%= languageIds %>" displayStyle="<%= displayStyle %>" />
