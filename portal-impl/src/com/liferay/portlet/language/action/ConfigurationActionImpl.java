@@ -54,6 +54,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 
 		String displayStyle = ParamUtil.getString(req, "displayStyle");
+		String languageIds = ParamUtil.getString(req, "languageIds");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
@@ -61,6 +62,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
 
 		prefs.setValue("display-style", displayStyle);
+		prefs.setValue("language-ids", languageIds);
 
 		prefs.store();
 

@@ -41,10 +41,61 @@
 		</select>
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="languages" />
+	</td>
+	<td>
+		<input name="<portlet:namespace />languageIds" type="hidden" value="" />
+
+		<%
+		Set availableLanguageIds = SetUtil.fromArray(StringUtil.split(allLanguageIds));
+
+		// Left list
+
+		List leftList = new ArrayList();
+
+		for (int i = 0; i < languageIds.length; i++) {
+			String languageId = languageIds[i];
+
+			leftList.add(new KeyValuePair(languageId, LocaleUtil.fromLanguageId(languageId).getDisplayName()));
+		}
+
+		// Right list
+
+		List rightList = new ArrayList();
+
+		Arrays.sort(languageIds);
+
+		Iterator itr = availableLanguageIds.iterator();
+
+		while (itr.hasNext()) {
+			String languageId = (String)itr.next();
+
+			if (Arrays.binarySearch(languageIds, languageId) < 0) {
+				rightList.add(new KeyValuePair(languageId, LocaleUtil.fromLanguageId(languageId).getDisplayName()));
+			}
+		}
+
+		Collections.sort(rightList, new KeyValuePairComparator(false, true));
+		%>
+
+		<liferay-ui:input-move-boxes
+			formName="fm"
+			leftTitle="current"
+			rightTitle="available"
+			leftBoxName="currentLanguageIds"
+			rightBoxName="availableLanguageIds"
+			leftReorder="true"
+			leftList="<%= leftList %>"
+			rightList="<%= rightList %>"
+		/>
+	</td>
+</tr>
 </table>
 
 <br />
 
-<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
+<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />languageIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentLanguageIds); submitForm(document.<portlet:namespace />fm);" />
 
 </form>
