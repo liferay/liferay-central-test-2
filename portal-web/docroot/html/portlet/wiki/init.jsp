@@ -51,7 +51,7 @@
 <%@ page import="com.liferay.portlet.wiki.service.permission.WikiPagePermission" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiCacheUtil" %>
 <%@ page import="com.liferay.portlet.wiki.util.WikiUtil" %>
-<%@ page import="com.liferay.portlet.wiki.util.comparator.VersionComparator" %>
+<%@ page import="com.liferay.portlet.wiki.util.comparator.PageVersionComparator" %>
 <%@ page import="com.liferay.util.RSSUtil" %>
 
 <%

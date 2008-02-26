@@ -26,22 +26,22 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portlet.wiki.model.WikiPage;
 
 /**
- * <a href="VersionComparator.java.html"><b><i>View Source</i></b></a>
+ * <a href="PageVersionComparator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Bruno Farache
  *
  */
-public class VersionComparator extends OrderByComparator {
+public class PageVersionComparator extends OrderByComparator {
 
 	public static String ORDER_BY_ASC = "version ASC";
 
 	public static String ORDER_BY_DESC = "version DESC";
 
-	public VersionComparator() {
+	public PageVersionComparator() {
 		this(false);
 	}
 
-	public VersionComparator(boolean asc) {
+	public PageVersionComparator(boolean asc) {
 		_asc = asc;
 	}
 
@@ -50,14 +50,14 @@ public class VersionComparator extends OrderByComparator {
 		WikiPage page2 = (WikiPage)obj2;
 
 		int value = 0;
-		
+
 		if (page1.getVersion() < page2.getVersion()) {
 			value = -1;
 		}
 		else if (page1.getVersion() > page2.getVersion()) {
 			value = 1;
 		}
-		
+
 		if (_asc) {
 			return value;
 		}
