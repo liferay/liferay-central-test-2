@@ -252,7 +252,7 @@ int count = 0;
 
 					frontPageURL.setParameter("title", WikiPageImpl.FRONT_PAGE);
 
-					PortletURL deletePageURL = PortletURLUtil.clone(editPageURL, true, renderResponse);
+					PortletURL deletePageURL = PortletURLUtil.clone(editPageURL, PortletRequest.ACTION_PHASE, renderResponse);
 					deletePageURL.setParameter("redirect", frontPageURL.toString());
 
 					deletePageURL.setParameter(Constants.CMD, Constants.DELETE);

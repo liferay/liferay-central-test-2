@@ -43,8 +43,9 @@ import com.liferay.util.Http;
 import java.io.IOException;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletURL;
@@ -273,17 +274,22 @@ public class WikiUtil {
 
 		String content = engine.convert(page, editPageURL);
 
-		content = _replaceLinks(
-			page.getTitle(), content, liferayViewPageURL, liferayEditPageURL);
+		liferayEditPageURL.setParameter("title", "__REPLACEMENT__", false);
 
-		Iterator itr = engine.getOutgoingLinks(page).keySet().iterator();
+		String editPageURLString = editPageURL.toString();
 
-		while (itr.hasNext()) {
-			String title = (String)itr.next();
+		editPageURLString = StringUtil.replace(
+			editPageURLString, "__REPLACEMENT__", "$1");
 
-			content = _replaceLinks(
-				title, content, liferayViewPageURL, liferayEditPageURL);
-		}
+		Matcher m = _editPageURLPattern.matcher(content);
+
+		content = m.replaceAll(editPageURLString);
+
+		liferayViewPageURL.setParameter("title", "$1", false);
+
+		m = _viewPageURLPattern.matcher(content);
+
+		content = m.replaceAll(liferayViewPageURL.toString());
 
 		content = _replaceAttachments(
 			content, page.getTitle(), attachmentURLPrefix);
@@ -425,6 +431,11 @@ public class WikiUtil {
 	}
 
 	private static final Map _EMPTY_MAP = new HashMap();
+
+	private static final Pattern _editPageURLPattern = Pattern.compile(
+		"\\[\\$BEGIN_PAGE_TITLE_EDIT\\$\\](.*)\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
+	private static final Pattern _viewPageURLPattern = Pattern.compile(
+		"\\[\\$BEGIN_PAGE_TITLE\\$\\](.*)\\[\\$END_PAGE_TITLE\\$\\]");
 
 	private static WikiUtil _instance = new WikiUtil();
 
