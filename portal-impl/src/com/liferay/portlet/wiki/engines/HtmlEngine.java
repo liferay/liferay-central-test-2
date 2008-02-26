@@ -24,7 +24,7 @@ package com.liferay.portlet.wiki.engines;
 
 import com.liferay.portlet.wiki.model.WikiPage;
 
-import java.util.HashMap;
+import java.util.Collections;
 import java.util.Map;
 
 import javax.portlet.PortletURL;
@@ -41,8 +41,8 @@ public class HtmlEngine implements WikiEngine {
 		return page.getContent();
 	}
 
-	public Map getOutgoingLinks(WikiPage page) {
-		return _EMPTY_MAP;
+	public Map<String, Boolean> getOutgoingLinks(WikiPage page) {
+		return Collections.emptyMap();
 	}
 
 	public boolean isLinkedTo(WikiPage page, String targetTitle) {
@@ -58,7 +58,5 @@ public class HtmlEngine implements WikiEngine {
 	public boolean validate(long nodeId, String newContent) {
 		return true;
 	}
-
-	private static final Map _EMPTY_MAP = new HashMap();
 
 }

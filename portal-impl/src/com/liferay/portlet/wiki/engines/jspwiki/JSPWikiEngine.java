@@ -39,7 +39,6 @@ import java.io.InputStream;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.Properties;
 
@@ -67,23 +66,21 @@ public class JSPWikiEngine implements WikiEngine {
 		}
 	}
 
-	public Map getOutgoingLinks(WikiPage page) throws PageContentException {
+	public Map<String, Boolean> getOutgoingLinks(WikiPage page)
+		throws PageContentException {
+
 		try {
 			LiferayJSPWikiEngine engine = getEngine(page.getNodeId());
 
 			com.ecyrd.jspwiki.WikiPage jspWikiPage =
 				LiferayPageProvider.toJSPWikiPage(page, engine);
 
-			Collection titles = engine.scanWikiLinks(
+			Collection<String> titles = engine.scanWikiLinks(
 				jspWikiPage, page.getContent());
 
-			Map links = new HashMap();
+			Map<String, Boolean> links = new HashMap<String, Boolean>();
 
-			Iterator itr = titles.iterator();
-
-			while (itr.hasNext()) {
-				String title = (String)itr.next();
-
+			for (String title : titles) {
 				if (title.startsWith("[[")) {
 					title = title.substring(2);
 				}
@@ -98,7 +95,7 @@ public class JSPWikiEngine implements WikiEngine {
 					title = title.substring(title.length() - 1, title.length());
 				}
 
-				Boolean existsObj = (Boolean)links.get(title);
+				Boolean existsObj = links.get(title);
 
 				if (existsObj == null) {
 					if (WikiPageLocalServiceUtil.getPagesCount(
@@ -127,9 +124,9 @@ public class JSPWikiEngine implements WikiEngine {
 	public boolean isLinkedTo(WikiPage page, String targetTitle)
 		throws PageContentException {
 
-		Map links = getOutgoingLinks(page);
+		Map<String, Boolean> links = getOutgoingLinks(page);
 
-		Object link = links.get(targetTitle);
+		Boolean link = links.get(targetTitle);
 
 		if (link != null) {
 			return true;
@@ -170,15 +167,12 @@ public class JSPWikiEngine implements WikiEngine {
 	protected LiferayJSPWikiEngine getEngine(long nodeId)
 		throws WikiException {
 
-		Long nodeIdObj = new Long(nodeId);
-
-		LiferayJSPWikiEngine engine =
-			(LiferayJSPWikiEngine)_engines.get(nodeIdObj);
+		LiferayJSPWikiEngine engine = _engines.get(nodeId);
 
 		if (engine == null) {
 			Properties nodeProps = new Properties(_props);
 
-			nodeProps.setProperty("nodeId", nodeIdObj.toString());
+			nodeProps.setProperty("nodeId", String.valueOf(nodeId));
 
 			String appName = nodeProps.getProperty("jspwiki.applicationName");
 
@@ -187,7 +181,7 @@ public class JSPWikiEngine implements WikiEngine {
 
 			engine = new LiferayJSPWikiEngine(nodeProps);
 
-			_engines.put(nodeIdObj, engine);
+			_engines.put(nodeId, engine);
 		}
 
 		return engine;
@@ -209,6 +203,7 @@ public class JSPWikiEngine implements WikiEngine {
 	private static Log _log = LogFactory.getLog(JSPWikiEngine.class);
 
 	private Properties _props;
-	private Map _engines = new HashMap();
+	private Map<Long, LiferayJSPWikiEngine> _engines =
+		new HashMap<Long, LiferayJSPWikiEngine>();
 
 }

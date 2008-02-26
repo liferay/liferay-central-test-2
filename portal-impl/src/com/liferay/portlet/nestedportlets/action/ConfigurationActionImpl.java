@@ -101,13 +101,13 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 	}
 
 	protected List getColumnNames(String content, String portletId) {
-		Matcher m = _searchColumnsPattern.matcher(content);
+		Matcher matcher = _searchColumnsPattern.matcher(content);
 
 		Set columnIds = new HashSet();
 
-		while (m.find()) {
-			if (Validator.isNotNull(m.group(1))) {
-				columnIds.add(m.group(1));
+		while (matcher.find()) {
+			if (Validator.isNotNull(matcher.group(1))) {
+				columnIds.add(matcher.group(1));
 			}
 		}
 

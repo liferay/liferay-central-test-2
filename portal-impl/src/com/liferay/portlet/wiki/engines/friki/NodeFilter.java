@@ -40,8 +40,9 @@ import org.stringtree.factory.TractFetcher;
 public class NodeFilter extends ClassicToHTMLFilter {
 
 	public NodeFilter(
-		Fetcher context, TractFetcher pages, Map remoteNames, String spec,
-		NodeRepository nodeRepository, PortletURL portletURL, long nodeId) {
+		Fetcher context, TractFetcher pages, Map<String, String> remoteNames,
+		String spec, NodeRepository nodeRepository, PortletURL portletURL,
+		long nodeId) {
 
 		super(context, pages, remoteNames, spec);
 
@@ -50,7 +51,7 @@ public class NodeFilter extends ClassicToHTMLFilter {
 		_nodeId = nodeId;
 	}
 
-	public Map getTitles() {
+	public Map<String, Boolean> getTitles() {
 		return _nodeRepository.getTitles();
 	}
 

@@ -42,6 +42,7 @@ import com.liferay.util.Http;
 
 import java.io.IOException;
 
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
@@ -218,7 +219,7 @@ public class WikiUtil {
 		return _instance._getHelpURL(format);
 	}
 
-	public static Map getLinks(WikiPage page)
+	public static Map<String, Boolean> getLinks(WikiPage page)
 		throws PageContentException, WikiFormatException {
 
 		return _instance._getLinks(page);
@@ -281,15 +282,15 @@ public class WikiUtil {
 		editPageURLString = StringUtil.replace(
 			editPageURLString, "__REPLACEMENT__", "$1");
 
-		Matcher m = _editPageURLPattern.matcher(content);
+		Matcher matcher = _EDIT_PAGE_URL_PATTERN.matcher(content);
 
-		content = m.replaceAll(editPageURLString);
+		content = matcher.replaceAll(editPageURLString);
 
 		liferayViewPageURL.setParameter("title", "$1", false);
 
-		m = _viewPageURLPattern.matcher(content);
+		matcher = _VIEW_PAGE_URL_PATTERN.matcher(content);
 
-		content = m.replaceAll(liferayViewPageURL.toString());
+		content = matcher.replaceAll(liferayViewPageURL.toString());
 
 		content = _replaceAttachments(
 			content, page.getTitle(), attachmentURLPrefix);
@@ -303,7 +304,7 @@ public class WikiUtil {
 	}
 
 	private WikiEngine _getEngine(String format) throws WikiFormatException {
-		WikiEngine engine = (WikiEngine)_engines.get(format);
+		WikiEngine engine = _engines.get(format);
 
 		if (engine == null) {
 			try {
@@ -354,14 +355,14 @@ public class WikiUtil {
 			PropsUtil.WIKI_FORMATS_HELP_URL, Filter.by(format));
 	}
 
-	private Map _getLinks(WikiPage page)
+	private Map<String, Boolean> _getLinks(WikiPage page)
 		throws PageContentException, WikiFormatException{
 
 		try {
 			return _getEngine(page.getFormat()).getOutgoingLinks(page);
 		}
 		catch (WikiFormatException wfe) {
-			return _EMPTY_MAP;
+			return Collections.emptyMap();
 		}
 	}
 
@@ -403,42 +404,21 @@ public class WikiUtil {
 		return content;
 	}
 
-	private String _replaceLinks(
-		String title, String content, LiferayPortletURL viewPageURL,
-		LiferayPortletURL editPageURL) {
-
-		viewPageURL.setParameter("title", title, false);
-
-		content = StringUtil.replace(
-			content,
-			"[$BEGIN_PAGE_TITLE$]" + title + "[$END_PAGE_TITLE$]",
-			viewPageURL.toString());
-
-		editPageURL.setParameter("title", title, false);
-
-		content = StringUtil.replace(
-			content,
-			"[$BEGIN_PAGE_TITLE_EDIT$]" + title + "[$END_PAGE_TITLE_EDIT$]",
-			editPageURL.toString());
-
-		return content;
-	}
-
 	private boolean _validate(long nodeId, String content, String format)
 		throws WikiFormatException {
 
 		return _getEngine(format).validate(nodeId, content);
 	}
 
-	private static final Map _EMPTY_MAP = new HashMap();
-
-	private static final Pattern _editPageURLPattern = Pattern.compile(
+	private static final Pattern _EDIT_PAGE_URL_PATTERN = Pattern.compile(
 		"\\[\\$BEGIN_PAGE_TITLE_EDIT\\$\\](.*)\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
-	private static final Pattern _viewPageURLPattern = Pattern.compile(
+
+	private static final Pattern _VIEW_PAGE_URL_PATTERN = Pattern.compile(
 		"\\[\\$BEGIN_PAGE_TITLE\\$\\](.*)\\[\\$END_PAGE_TITLE\\$\\]");
 
 	private static WikiUtil _instance = new WikiUtil();
 
-	private Map _engines = new HashMap();
+	private Map<String, WikiEngine> _engines =
+		new HashMap<String, WikiEngine>();
 
 }

@@ -45,10 +45,10 @@ public class NodeRepository extends BasicDriver {
 
 	public NodeRepository(long nodeId) {
 		_nodeId = nodeId;
-		_names = new HashMap();
+		_names = new HashMap<String, Boolean>();
 	}
 
-	public Iterator allPageNames() {
+	public Iterator<String> allPageNames() {
 		return _names.keySet().iterator();
 	}
 
@@ -60,7 +60,7 @@ public class NodeRepository extends BasicDriver {
 		boolean exists = false;
 
 		try {
-			Boolean existsObj = (Boolean)_names.get(name);
+			Boolean existsObj = _names.get(name);
 
 			if (existsObj == null) {
 				if (WikiPageLocalServiceUtil.getPagesCount(
@@ -88,7 +88,7 @@ public class NodeRepository extends BasicDriver {
 		return null;
 	}
 
-	public Map getTitles() {
+	public Map<String, Boolean> getTitles() {
 		return _names;
 	}
 
@@ -98,6 +98,6 @@ public class NodeRepository extends BasicDriver {
 	private static Log _log = LogFactory.getLog(NodeRepository.class);
 
 	private long _nodeId;
-	private Map _names;
+	private Map<String, Boolean> _names;
 
 }

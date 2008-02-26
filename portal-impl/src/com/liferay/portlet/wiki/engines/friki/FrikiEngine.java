@@ -64,7 +64,9 @@ public class FrikiEngine implements WikiEngine {
 		}
 	}
 
-	public Map getOutgoingLinks(WikiPage page) throws PageContentException {
+	public Map<String, Boolean> getOutgoingLinks(WikiPage page)
+		throws PageContentException {
+
 		NodeFilter filter = getFilter(page.getNodeId());
 
 		try {
@@ -117,8 +119,8 @@ public class FrikiEngine implements WikiEngine {
 		}
 	}
 
-	protected Map buildRemoteNamesMap(String names) {
-		Map remoteNames = new HashMap();
+	protected Map<String, String> buildRemoteNamesMap(String names) {
+		Map<String, String> remoteNames = new HashMap<String, String>();
 
 		StringTokenizer st = new StringTokenizer(names, "\n");
 
@@ -169,6 +171,6 @@ public class FrikiEngine implements WikiEngine {
 	}
 
 	private String _mainConfiguration;
-	private Map _remoteNames;
+	private Map<String, String> _remoteNames;
 
 }

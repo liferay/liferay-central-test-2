@@ -109,8 +109,8 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return page;
 	}
 
-	public List getParentPages() {
-		List parentPages = new ArrayList();
+	public List<WikiPage> getParentPages() {
+		List<WikiPage> parentPages = new ArrayList<WikiPage>();
 
 		WikiPage parentPage = getParentPage();
 
@@ -122,15 +122,15 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 		return parentPages;
 	}
 
-	public List getChildPages() {
-		List pages = null;
+	public List<WikiPage> getChildPages() {
+		List<WikiPage> pages = null;
 
 		try {
 			pages = WikiPageLocalServiceUtil.getChildren(
 				getNodeId(), true, getTitle());
 		}
 		catch (Exception e) {
-			pages = new ArrayList();
+			pages = new ArrayList<WikiPage>();
 
 			_log.error(e);
 		}
