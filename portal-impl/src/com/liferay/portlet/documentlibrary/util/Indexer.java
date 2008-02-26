@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowStateException;
 
@@ -47,13 +48,13 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
 
+		liferayPortletURL.setLifecycle(PortletRequest.ACTION_PHASE);
+
 		try {
 			liferayPortletURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 		}
 		catch (WindowStateException wse) {
 		}
-
-		liferayPortletURL.setAction(true);
 
 		// Title
 

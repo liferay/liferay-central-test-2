@@ -71,6 +71,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -101,8 +102,8 @@ public class LayoutAction extends Action {
 			HttpServletResponse res)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
@@ -138,96 +139,9 @@ public class LayoutAction extends Action {
 		}
 
 		long plid = ParamUtil.getLong(req, "p_l_id");
-		boolean resetLayout = ParamUtil.getBoolean(
-			req, "p_l_reset", PropsValues.LAYOUT_DEFAULT_P_L_RESET);
-		String action = ParamUtil.getString(req, "p_p_action");
 
 		if (plid > 0) {
-			try {
-				if (resetLayout) {
-					RenderParametersPool.clear(req, plid);
-				}
-
-				if (action.equals("1")) {
-					Portlet portlet = processActionRequest(req, res);
-
-					if (portlet != null) {
-						ActionResponseImpl actionResponseImpl =
-							(ActionResponseImpl)req.getAttribute(
-								JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-						String redirectLocation =
-							actionResponseImpl.getRedirectLocation();
-
-						if (Validator.isNotNull(redirectLocation)) {
-							res.sendRedirect(redirectLocation);
-
-							return null;
-						}
-
-						if (portlet.isActionURLRedirect()) {
-							redirectActionURL(
-								req, res, actionResponseImpl, portlet);
-						}
-					}
-				}
-				else if (action.equals("0")) {
-					processRenderRequest(req, res);
-				}
-
-				if (layout != null) {
-
-					// Include layout content before the page loads because
-					// portlets on the page can set the page title and page
-					// subtitle
-
-					includeLayoutContent(req, res, themeDisplay, layout);
-
-					if (themeDisplay.isStateExclusive()) {
-						serverExclusiveResource(req, res, themeDisplay);
-
-						return null;
-					}
-				}
-
-				return mapping.findForward("portal.layout");
-			}
-			catch (Exception e) {
-				req.setAttribute(PageContext.EXCEPTION, e);
-
-				return mapping.findForward(ActionConstants.COMMON_ERROR);
-			}
-			finally {
-				try {
-					if (action.equals("1")) {
-						ActionRequestImpl actionRequestImpl =
-							(ActionRequestImpl)req.getAttribute(
-								JavaConstants.JAVAX_PORTLET_REQUEST);
-
-						ActionRequestFactory.recycle(actionRequestImpl);
-					}
-				}
-				catch (Exception e) {
-					_log.error(e);
-				}
-
-				req.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
-
-				try {
-					if (action.equals("1")) {
-						ActionResponseImpl actionResponseImpl =
-							(ActionResponseImpl)req.getAttribute(
-								JavaConstants.JAVAX_PORTLET_RESPONSE);
-
-						ActionResponseFactory.recycle(actionResponseImpl);
-					}
-				}
-				catch (Exception e) {
-					_log.error(e);
-				}
-
-				req.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
-			}
+			return processLayout(mapping, req, res, plid);
 		}
 		else {
 			try {
@@ -309,15 +223,110 @@ public class LayoutAction extends Action {
 		req.setAttribute(WebKeys.LAYOUT_CONTENT, stringServletRes.getString());
 	}
 
-	protected Portlet processActionRequest(
-			HttpServletRequest req, HttpServletResponse res)
+	protected ActionForward processLayout(
+			ActionMapping mapping, HttpServletRequest req,
+			HttpServletResponse res, long plid)
 		throws Exception {
 
-		return processPortletRequest(req, res, true);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		boolean resetLayout = ParamUtil.getBoolean(
+			req, "p_l_reset", PropsValues.LAYOUT_DEFAULT_P_L_RESET);
+		String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
+
+		try {
+			if (resetLayout) {
+				RenderParametersPool.clear(req, plid);
+			}
+
+			if (lifecycle.equals("1")) {
+				Portlet portlet = processPortletRequest(
+					req, res, PortletRequest.ACTION_PHASE);
+
+				if (portlet != null) {
+					ActionResponseImpl actionResponseImpl =
+						(ActionResponseImpl)req.getAttribute(
+							JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+					String redirectLocation =
+						actionResponseImpl.getRedirectLocation();
+
+					if (Validator.isNotNull(redirectLocation)) {
+						res.sendRedirect(redirectLocation);
+
+						return null;
+					}
+
+					if (portlet.isActionURLRedirect()) {
+						redirectActionURL(
+							req, res, actionResponseImpl, portlet);
+					}
+				}
+			}
+			else if (lifecycle.equals("0")) {
+				processPortletRequest(req, res, PortletRequest.RENDER_PHASE);
+			}
+
+			if (layout != null) {
+
+				// Include layout content before the page loads because
+				// portlets on the page can set the page title and page
+				// subtitle
+
+				includeLayoutContent(req, res, themeDisplay, layout);
+
+				if (themeDisplay.isStateExclusive()) {
+					serverExclusiveResource(req, res, themeDisplay);
+
+					return null;
+				}
+			}
+
+			return mapping.findForward("portal.layout");
+		}
+		catch (Exception e) {
+			req.setAttribute(PageContext.EXCEPTION, e);
+
+			return mapping.findForward(ActionConstants.COMMON_ERROR);
+		}
+		finally {
+			try {
+				if (lifecycle.equals("1")) {
+					ActionRequestImpl actionRequestImpl =
+						(ActionRequestImpl)req.getAttribute(
+							JavaConstants.JAVAX_PORTLET_REQUEST);
+
+					ActionRequestFactory.recycle(actionRequestImpl);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+
+			req.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
+
+			try {
+				if (lifecycle.equals("1")) {
+					ActionResponseImpl actionResponseImpl =
+						(ActionResponseImpl)req.getAttribute(
+							JavaConstants.JAVAX_PORTLET_RESPONSE);
+
+					ActionResponseFactory.recycle(actionResponseImpl);
+				}
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+
+			req.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
+		}
 	}
 
 	protected Portlet processPortletRequest(
-			HttpServletRequest req, HttpServletResponse res, boolean action)
+			HttpServletRequest req, HttpServletResponse res, String lifecycle)
 		throws Exception {
 
 		HttpSession ses = req.getSession();
@@ -362,7 +371,7 @@ public class LayoutAction extends Action {
 		PortletMode portletMode = new PortletMode(
 			ParamUtil.getString(req, "p_p_mode"));
 
-		if (action) {
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 			String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
 
 			if (_log.isDebugEnabled()) {
@@ -422,13 +431,6 @@ public class LayoutAction extends Action {
 		return portlet;
 	}
 
-	protected Portlet processRenderRequest(
-			HttpServletRequest req, HttpServletResponse res)
-		throws Exception {
-
-		return processPortletRequest(req, res, false);
-	}
-
 	protected void redirectActionURL(
 			HttpServletRequest req, HttpServletResponse res,
 			ActionResponseImpl actionResponseImpl, Portlet portlet)
@@ -442,7 +444,7 @@ public class LayoutAction extends Action {
 
 		PortletURL portletURL = new PortletURLImpl(
 			actionRequestImpl, actionRequestImpl.getPortletName(),
-			layout.getLayoutId(), false);
+			layout.getLayoutId(), PortletRequest.RENDER_PHASE);
 
 		Map<String, String[]> renderParameters =
 			actionResponseImpl.getRenderParameterMap();

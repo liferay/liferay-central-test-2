@@ -22,18 +22,62 @@
 
 package com.liferay.portlet;
 
+import java.util.Locale;
+
+import javax.portlet.ResourceResponse;
+
+import javax.servlet.http.HttpServletResponse;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
- * <a href="PortletURLImplWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceResponseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletURLImplWrapper extends PortletURLImpl {
+public class ResourceResponseImpl
+	extends MimeResponseImpl implements ResourceResponse {
 
-	public PortletURLImplWrapper(PortletResponseImpl res, String lifecycle) {
-		super(
-			res.getPortletRequest(), res.getPortletName(), res.getPlid(),
-			lifecycle);
+	public void setCharacterEncoding(String charset) {
+		_res.setCharacterEncoding(charset);
 	}
+
+	public void setLocale(Locale locale) {
+		_res.setLocale(locale);
+	}
+
+	public void setContentLength(int length) {
+		_res.setContentLength(length);
+	}
+	protected ResourceResponseImpl() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Creating new instance " + hashCode());
+		}
+	}
+
+	protected void init(
+		PortletRequestImpl req, HttpServletResponse res, String portletName,
+		long companyId, long plid) {
+
+		super.init(req, res, portletName, companyId, plid);
+
+		_res = res;
+	}
+
+	protected void recycle() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Recycling instance " + hashCode());
+		}
+
+		super.recycle();
+
+		_res = null;
+	}
+
+	private static Log _log = LogFactory.getLog(ResourceResponseImpl.class);
+
+	private HttpServletResponse _res;
 
 }

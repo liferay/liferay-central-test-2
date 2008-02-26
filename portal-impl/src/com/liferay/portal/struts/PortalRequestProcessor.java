@@ -64,13 +64,13 @@ import com.liferay.portlet.RenderRequestFactory;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseFactory;
 import com.liferay.portlet.RenderResponseImpl;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.io.IOException;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map.Entry;
@@ -81,6 +81,7 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 import javax.servlet.ServletContext;
@@ -109,7 +110,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// auth.forward.last.path.
 
-		_lastPaths = CollectionFactory.getHashSet();
+		_lastPaths = new HashSet<String>();
 
 		_lastPaths.add(_PATH_PORTAL_LAYOUT);
 
@@ -117,7 +118,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// auth.public.path.
 
-		_publicPaths = CollectionFactory.getHashSet();
+		_publicPaths = new HashSet<String>();
 
 		_publicPaths.add(_PATH_C);
 		_publicPaths.add(_PATH_PORTAL_CSS);
@@ -134,7 +135,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		_addPaths(_publicPaths, PropsUtil.AUTH_PUBLIC_PATHS);
 
-		_trackerIgnorePaths = CollectionFactory.getHashSet();
+		_trackerIgnorePaths = new HashSet<String>();
 
 		_addPaths(_trackerIgnorePaths, PropsUtil.SESSION_TRACKER_IGNORE_PATHS);
 	}
@@ -274,26 +275,20 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 
 		PortletURLImpl portletURL = new PortletURLImpl(
-			req, portletId, plid, false);
+			req, portletId, plid, PortletRequest.RENDER_PHASE);
 
-		Iterator itr = req.getParameterMap().entrySet().iterator();
+		Iterator<Map.Entry<String, String[]>> itr =
+			req.getParameterMap().entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Entry entry = (Entry)itr.next();
+			Entry<String, String[]> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 
 			if (key.startsWith(namespace)) {
 				key = key.substring(namespace.length());
 
-				Object value = entry.getValue();
-
-				if (value instanceof String[]) {
-					portletURL.setParameter(key, (String[])entry.getValue());
-				}
-				else {
-					portletURL.setParameter(key, (String)entry.getValue());
-				}
+				portletURL.setParameter(key, entry.getValue());
 			}
 		}
 
@@ -548,7 +543,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 						companyId, strutsPath);
 				}
 
-				if (portlet != null && portlet.isActive()) {
+				if ((portlet != null) && portlet.isActive()) {
 					defineObjects(req, res, portlet);
 				}
 			}
@@ -719,7 +714,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 			return sm.toString();
 		}
 
-		Map parameterMap = lastPath.getParameterMap();
+		Map<String, String[]> parameterMap = lastPath.getParameterMap();
 
 		// Only test for existing mappings for last paths that were set when the
 		// user accessed a layout directly instead of through its friendly URL
@@ -830,7 +825,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		}
 	}
 
-	private void _addPaths(Set paths, String propsKey) {
+	private void _addPaths(Set<String> paths, String propsKey) {
 		String[] pathsArray = PropsUtil.getArray(propsKey);
 
 		for (int i = 0; i < pathsArray.length; i++) {
@@ -890,8 +885,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 	private static Log _log = LogFactory.getLog(PortalRequestProcessor.class);
 
-	private Set _lastPaths;
-	private Set _publicPaths;
-	private Set _trackerIgnorePaths;
+	private Set<String> _lastPaths;
+	private Set<String> _publicPaths;
+	private Set<String> _trackerIgnorePaths;
 
 }

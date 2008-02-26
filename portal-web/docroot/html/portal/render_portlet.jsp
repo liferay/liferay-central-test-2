@@ -382,7 +382,7 @@ portletDisplay.setURLClose(urlClose.toString());
 
 // URL configuration
 
-PortletURLImpl urlConfiguration = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid.longValue(), false);
+PortletURLImpl urlConfiguration = new PortletURLImpl(request, PortletKeys.PORTLET_CONFIGURATION, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 urlConfiguration.setWindowState(WindowState.MAXIMIZED);
 
@@ -402,7 +402,7 @@ portletDisplay.setURLConfiguration("javascript: self.location = '" + HttpUtil.en
 
 // URL edit
 
-PortletURLImpl urlEdit = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+PortletURLImpl urlEdit = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModeEdit()) {
 	urlEdit.setWindowState(WindowState.NORMAL);
@@ -423,7 +423,7 @@ portletDisplay.setURLEdit(urlEdit.toString());
 
 // URL edit defaults
 
-PortletURLImpl urlEditDefaults = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+PortletURLImpl urlEditDefaults = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModeEditDefaults()) {
 	urlEditDefaults.setWindowState(WindowState.NORMAL);
@@ -444,7 +444,7 @@ portletDisplay.setURLEditDefaults(urlEditDefaults.toString());
 
 // URL edit guest
 
-PortletURLImpl urlEditGuest = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+PortletURLImpl urlEditGuest = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModeEditGuest()) {
 	urlEditGuest.setWindowState(WindowState.NORMAL);
@@ -465,7 +465,7 @@ portletDisplay.setURLEditGuest(urlEditGuest.toString());
 
 // URL help
 
-PortletURLImpl urlHelp = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+PortletURLImpl urlHelp = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModeHelp()) {
 	urlHelp.setWindowState(WindowState.NORMAL);
@@ -486,9 +486,13 @@ portletDisplay.setURLHelp(urlHelp.toString());
 
 // URL max
 
-boolean action = !portletDisplay.isRestoreCurrentView();
+String lifecycle = PortletRequest.RENDER_PHASE;
 
-PortletURLImpl urlMax = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), action);
+if (!portletDisplay.isRestoreCurrentView()) {
+	lifecycle = PortletRequest.ACTION_PHASE;
+}
+
+PortletURLImpl urlMax = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), lifecycle);
 
 if (portletDisplay.isStateMax()) {
 	urlMax.setWindowState(WindowState.NORMAL);
@@ -497,7 +501,7 @@ else {
 	urlMax.setWindowState(WindowState.MAXIMIZED);
 }
 
-if (!action) {
+if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 	String portletNamespace = portletDisplay.getNamespace();
 
 	Map renderParameters = RenderParametersPool.get(request, plid.longValue(), portletDisplay.getId());
@@ -535,7 +539,7 @@ portletDisplay.setURLPortletCss(urlPortletCss.toString());
 
 // URL print
 
-PortletURLImpl urlPrint = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), false);
+PortletURLImpl urlPrint = new PortletURLImpl(request, portletDisplay.getId(), plid.longValue(), PortletRequest.RENDER_PHASE);
 
 if (portletDisplay.isModePrint()) {
 	urlPrint.setWindowState(WindowState.NORMAL);

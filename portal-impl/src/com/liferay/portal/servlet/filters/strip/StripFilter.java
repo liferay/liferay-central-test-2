@@ -24,6 +24,7 @@ package com.liferay.portal.servlet.filters.strip;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -35,6 +36,8 @@ import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
+
+import javax.portlet.PortletRequest;
 
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
@@ -289,10 +292,11 @@ public class StripFilter extends BaseFilter {
 			// performance because the user will not start downloading the
 			// content until the entire content is compressed.
 
-			boolean action = ParamUtil.getBoolean(req, "p_p_action");
-			String windowState = ParamUtil.getString(req, "p_p_state");
+			String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
 
-			if (action && windowState.equals("exclusive")) {
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE) &&
+				LiferayWindowState.isExclusive(req)) {
+
 				return false;
 			}
 			else {

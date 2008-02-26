@@ -148,8 +148,8 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 	public void populateParams(String friendlyURLPath, Map params) {
 		params.put("p_p_id", _PORTLET_ID);
 
-		if (!params.containsKey("p_p_action")) {
-			params.put("p_p_action", "0");
+		if (!params.containsKey("p_p_lifecycle")) {
+			params.put("p_p_lifecycle", "0");
 		}
 
 		params.put("p_p_state", WindowState.MAXIMIZED.toString());

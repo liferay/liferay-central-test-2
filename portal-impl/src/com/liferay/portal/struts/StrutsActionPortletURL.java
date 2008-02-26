@@ -24,11 +24,9 @@ package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImplWrapper;
-import com.liferay.portlet.RenderResponseImpl;
 
-import java.util.Iterator;
 import java.util.Map;
 
 /**
@@ -39,16 +37,8 @@ import java.util.Map;
  */
 public class StrutsActionPortletURL extends PortletURLImplWrapper {
 
-	public StrutsActionPortletURL(ActionResponseImpl res, boolean action) {
-		super(res, action);
-
-		_portlet = res.getPortlet();
-		_strutsPath =
-			StringPool.SLASH + _portlet.getStrutsPath() + StringPool.SLASH;
-	}
-
-	public StrutsActionPortletURL(RenderResponseImpl res, boolean action) {
-		super(res, action);
+	public StrutsActionPortletURL(PortletResponseImpl res, String lifecycle) {
+		super(res, lifecycle);
 
 		_portlet = res.getPortlet();
 		_strutsPath =
@@ -67,14 +57,10 @@ public class StrutsActionPortletURL extends PortletURLImplWrapper {
 		super.setParameter(name, value);
 	}
 
-	public void setParameters(Map params) {
-		Iterator itr = params.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String name = (String)entry.getKey();
-			String[] values = (String[])entry.getValue();
+	public void setParameters(Map<String, String[]> params) {
+		for (Map.Entry<String, String[]> entry : params.entrySet()) {
+			String name = entry.getKey();
+			String[] values = entry.getValue();
 
 			if (name.equals("struts_action")) {
 				for (int i = 0; i < values.length; i++) {

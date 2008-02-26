@@ -40,6 +40,7 @@ public class GenericServletResponse extends HttpServletResponseWrapper {
 
 	public GenericServletResponse(HttpServletResponse res) {
 		super(res);
+
 		_bam = new ByteArrayMaker();
 	}
 
@@ -53,6 +54,7 @@ public class GenericServletResponse extends HttpServletResponseWrapper {
 
 	public void setContentLength(int length) {
 		super.setContentLength(length);
+
 		_contentLength = length;
 	}
 
@@ -62,6 +64,7 @@ public class GenericServletResponse extends HttpServletResponseWrapper {
 
 	public void setContentType(String type) {
 		super.setContentType(type);
+
 		_contentType = type;
 	}
 

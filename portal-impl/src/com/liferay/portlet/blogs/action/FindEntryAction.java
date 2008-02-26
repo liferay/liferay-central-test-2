@@ -39,6 +39,7 @@ import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import java.util.List;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -78,7 +79,7 @@ public class FindEntryAction extends Action {
 			String urlTitle = getUrlTitle(entryId);
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.BLOGS, plid, false);
+				req, PortletKeys.BLOGS, plid, PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);
@@ -136,9 +137,7 @@ public class FindEntryAction extends Action {
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout);
 
-		for (int i = 0; i < layouts.size(); i++) {
-			Layout layout = (Layout)layouts.get(i);
-
+		for (Layout layout : layouts) {
 			if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
 				continue;
 			}

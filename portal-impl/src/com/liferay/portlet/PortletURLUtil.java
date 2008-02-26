@@ -28,6 +28,7 @@ import java.util.Enumeration;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
@@ -44,10 +45,10 @@ public class PortletURLUtil {
 	public static PortletURL getCurrent(RenderRequest req, RenderResponse res) {
 		PortletURL portletURL = res.createRenderURL();
 
-		Enumeration enu = req.getParameterNames();
+		Enumeration<String> enu = req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String param = (String)enu.nextElement();
+			String param = enu.nextElement();
 			String[] values = req.getParameterValues(param);
 
 			boolean addParam = true;
@@ -75,29 +76,29 @@ public class PortletURLUtil {
 
 		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
 
-		return clone(liferayPortletURL, liferayPortletURL.isAction(), res);
+		return clone(liferayPortletURL, liferayPortletURL.getLifecycle(), res);
 	}
 
 	public static PortletURL clone(
-			PortletURL portletURL, boolean action, RenderResponse res)
+			PortletURL portletURL, String lifecycle, RenderResponse res)
 		throws PortletException {
 
 		LiferayPortletURL liferayPortletURL = (LiferayPortletURL)portletURL;
 
-		return clone(liferayPortletURL, action, res);
+		return clone(liferayPortletURL, lifecycle, res);
 	}
 
 	public static PortletURL clone(
-			LiferayPortletURL liferayPortletURL, boolean action,
+			LiferayPortletURL liferayPortletURL, String lifecycle,
 			RenderResponse res)
 		throws PortletException {
 
 		LiferayPortletURL newURLImpl = null;
 
-		if (action) {
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 			newURLImpl = (LiferayPortletURL)res.createActionURL();
 		}
-		else {
+		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 			newURLImpl = (LiferayPortletURL)res.createRenderURL();
 		}
 

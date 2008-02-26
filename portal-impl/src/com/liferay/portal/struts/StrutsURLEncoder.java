@@ -34,6 +34,7 @@ import java.util.HashMap;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
+import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
@@ -79,7 +80,13 @@ public class StrutsURLEncoder implements URLEncoder {
 					}
 				}
 				else if (param.equals("actionURL")) {
-					portletURL.setAction(GetterUtil.getBoolean(value));
+					String lifecycle = PortletRequest.RENDER_PHASE;
+
+					if (GetterUtil.getBoolean(value)) {
+						lifecycle = PortletRequest.ACTION_PHASE;
+					}
+
+					portletURL.setLifecycle(lifecycle);
 				}
 				else {
 					portletURL.setParameter(
@@ -121,11 +128,8 @@ public class StrutsURLEncoder implements URLEncoder {
 
 			// Reset portlet URL settings so it can be reused
 
-			try {
-				_portletURL.setWindowState(_windowState);
-			}
-			catch (WindowStateException wse) {
-			}
+			_portletURL.setLifecycle(PortletRequest.RENDER_PHASE);
+			_portletURL.setParameters(new HashMap<String, String[]>());
 
 			try {
 				_portletURL.setPortletMode(_portletMode);
@@ -133,8 +137,11 @@ public class StrutsURLEncoder implements URLEncoder {
 			catch (PortletModeException pme) {
 			}
 
-			_portletURL.setParameters(new HashMap<String, String[]>());
-			_portletURL.setAction(false);
+			try {
+				_portletURL.setWindowState(_windowState);
+			}
+			catch (WindowStateException wse) {
+			}
 
 			// Separate the Struts action from the query string
 

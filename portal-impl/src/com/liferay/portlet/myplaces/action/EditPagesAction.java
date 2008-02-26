@@ -39,6 +39,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -65,11 +66,11 @@ public class EditPagesAction extends PortletAction {
 
 		Layout layout = null;
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
 
 		if (layouts.size() > 0) {
-			layout = (Layout)layouts.get(0);
+			layout = layouts.get(0);
 		}
 		else {
 			long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
@@ -95,7 +96,8 @@ public class EditPagesAction extends PortletAction {
 			HttpServletRequest httReq = PortalUtil.getHttpServletRequest(req);
 
 			PortletURL portletURL = new PortletURLImpl(
-				httReq, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), false);
+				httReq, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(),
+				PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.MAXIMIZED);
 			portletURL.setPortletMode(PortletMode.VIEW);

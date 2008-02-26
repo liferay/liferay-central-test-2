@@ -57,6 +57,7 @@ import com.liferay.util.HttpUtil;
 import java.util.Map;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 import javax.servlet.RequestDispatcher;
@@ -125,12 +126,13 @@ public class VelocityTaglib {
 			long doAsUserId, Boolean portletConfiguration, String queryString)
 		throws Exception {
 
-		Map params = HttpUtil.parameterMapFromString(queryString);
+		Map<String, String[]> params = HttpUtil.parameterMapFromString(
+			queryString);
 
 		return ActionURLTag.doTag(
-			true, windowState, portletMode, null, null, secure, portletName,
-			anchor, encrypt, doAsUserId, portletConfiguration, params, false,
-			_pageContext);
+			PortletRequest.ACTION_PHASE, windowState, portletMode, null, null,
+			secure, portletName, anchor, encrypt, doAsUserId,
+			portletConfiguration, params, false, _pageContext);
 	}
 
 	public String doAsURL(long doAsUserId) throws Exception {
@@ -492,12 +494,13 @@ public class VelocityTaglib {
 			long doAsUserId, Boolean portletConfiguration, String queryString)
 		throws Exception {
 
-		Map params = HttpUtil.parameterMapFromString(queryString);
+		Map<String, String[]> params = HttpUtil.parameterMapFromString(
+			queryString);
 
 		return ActionURLTag.doTag(
-			false, windowState, portletMode, null, null, secure, portletName,
-			anchor, encrypt, doAsUserId, portletConfiguration, params, false,
-			_pageContext);
+			PortletRequest.RENDER_PHASE, windowState, portletMode, null, null,
+			secure, portletName, anchor, encrypt, doAsUserId,
+			portletConfiguration, params, false, _pageContext);
 	}
 
 	public String runtime(String portletName)

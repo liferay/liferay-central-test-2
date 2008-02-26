@@ -28,6 +28,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -57,7 +58,8 @@ public class FindRecentPostsAction extends Action {
 			long plid = ParamUtil.getLong(req, "p_l_id");
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.MESSAGE_BOARDS, plid, false);
+				req, PortletKeys.MESSAGE_BOARDS, plid,
+				PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);

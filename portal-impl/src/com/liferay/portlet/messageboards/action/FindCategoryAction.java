@@ -28,6 +28,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -58,7 +59,8 @@ public class FindCategoryAction extends Action {
 			long categoryId = ParamUtil.getLong(req, "categoryId");
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.MESSAGE_BOARDS, plid, false);
+				req, PortletKeys.MESSAGE_BOARDS, plid,
+				PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);

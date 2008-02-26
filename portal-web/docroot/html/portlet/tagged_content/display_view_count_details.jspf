@@ -59,7 +59,7 @@ else if (className.equals(IGImage.class.getName())) {
 
 	summary = image.getDescription();
 
-	PortletURL imageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid.longValue(), false);
+	PortletURL imageURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 	imageURL.setWindowState(WindowState.MAXIMIZED);
 

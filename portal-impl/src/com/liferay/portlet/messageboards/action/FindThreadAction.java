@@ -31,6 +31,7 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.service.MBThreadLocalServiceUtil;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -65,7 +66,8 @@ public class FindThreadAction extends Action {
 			MBThread thread = MBThreadLocalServiceUtil.getThread(threadId);
 
 			PortletURL portletURL = new PortletURLImpl(
-				req, PortletKeys.MESSAGE_BOARDS, plid, false);
+				req, PortletKeys.MESSAGE_BOARDS, plid,
+				PortletRequest.RENDER_PHASE);
 
 			portletURL.setWindowState(WindowState.NORMAL);
 			portletURL.setPortletMode(PortletMode.VIEW);

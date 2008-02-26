@@ -34,6 +34,7 @@ import com.liferay.portal.util.PortletKeys;
 import java.util.Map;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 
 /**
  * <a href="JournalFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
@@ -59,7 +60,7 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 		if ((strutsAction.equals("/journal/rss")) &&
 			(portletURL.getWindowState() == LiferayWindowState.EXCLUSIVE) &&
-			(!portletURL.isAction())) {
+			(portletURL.getLifecycle().equals(PortletRequest.RENDER_PHASE))) {
 
 			String groupId = portletURL.getParameter("groupId");
 			String feedId = portletURL.getParameter("feedId");
@@ -80,12 +81,14 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return friendlyURLPath;
 	}
 
-	public void populateParams(String friendlyURLPath, Map params) {
+	public void populateParams(
+		String friendlyURLPath, Map<String, String> params) {
+
 		String[] parts = StringUtil.split(friendlyURLPath, StringPool.SLASH);
 
 		if ((parts.length >= 4) && parts[2].equals("rss")) {
 			params.put("p_p_id", _PORTLET_ID);
-			params.put("p_p_action", "0");
+			params.put("p_p_lifecycle", "0");
 			params.put("p_p_state", LiferayWindowState.EXCLUSIVE.toString());
 			params.put("p_p_mode", PortletMode.VIEW.toString());
 

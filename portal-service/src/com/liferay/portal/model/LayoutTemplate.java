@@ -35,7 +35,8 @@ import javax.servlet.ServletContext;
  * @author Brian Wing Shun Chan
  *
  */
-public interface LayoutTemplate extends Comparable, Plugin, Serializable {
+public interface LayoutTemplate
+	extends Comparable<LayoutTemplate>, Plugin, Serializable {
 
 	public String getLayoutTemplateId();
 
@@ -77,9 +78,9 @@ public interface LayoutTemplate extends Comparable, Plugin, Serializable {
 
 	public String getUncachedWapContent() throws IOException;
 
-	public List getColumns();
+	public List<String> getColumns();
 
-	public void setColumns(List columns);
+	public void setColumns(List<String> columns);
 
 	public void setServletContext(ServletContext ctx);
 

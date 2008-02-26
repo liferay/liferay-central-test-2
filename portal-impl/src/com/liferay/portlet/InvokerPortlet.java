@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.tools.PortletDeployer;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.Time;
 
 import com.sun.portal.portletcontainer.appengine.filter.FilterChainImpl;
@@ -41,6 +40,7 @@ import com.sun.portal.portletcontainer.appengine.filter.FilterChainImpl;
 import java.io.IOException;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -56,6 +56,8 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import javax.portlet.filter.ActionFilter;
 import javax.portlet.filter.EventFilter;
 import javax.portlet.filter.FilterChain;
@@ -112,11 +114,15 @@ public class InvokerPortlet implements Portlet {
 		return sm.toString();
 	}
 
-	public static Map getResponses(HttpSession ses) {
-		Map responses = (Map)ses.getAttribute(WebKeys.CACHE_PORTLET_RESPONSES);
+	public static Map<String, InvokerPortletResponse> getResponses(
+		HttpSession ses) {
+
+		Map<String, InvokerPortletResponse> responses =
+			(Map<String, InvokerPortletResponse>)ses.getAttribute(
+				WebKeys.CACHE_PORTLET_RESPONSES);
 
 		if (responses == null) {
-			responses = CollectionFactory.getHashMap();
+			responses = new HashMap<String, InvokerPortletResponse>();
 
 			ses.setAttribute(WebKeys.CACHE_PORTLET_RESPONSES, responses);
 		}
@@ -124,7 +130,9 @@ public class InvokerPortlet implements Portlet {
 		return responses;
 	}
 
-	public static Map getResponses(PortletSession ses) {
+	public static Map<String, InvokerPortletResponse> getResponses(
+		PortletSession ses) {
+
 		return getResponses(((PortletSessionImpl)ses).getHttpSession());
 	}
 
@@ -289,7 +297,7 @@ public class InvokerPortlet implements Portlet {
 		}
 
 		try {
-			invoke(req, res, true);
+			invoke(req, res, PortletRequest.ACTION_PHASE);
 		}
 		catch (PortletException pe) {
 			req.setAttribute(_portletId + PortletException.class.getName(), pe);
@@ -325,7 +333,7 @@ public class InvokerPortlet implements Portlet {
 		if ((remoteUser == null) || (_expCache == null) ||
 			(_expCache.intValue() == 0)) {
 
-			invoke(req, res, false);
+			invoke(req, res, PortletRequest.RENDER_PHASE);
 		}
 		else {
 			RenderResponseImpl resImpl = (RenderResponseImpl)res;
@@ -339,16 +347,15 @@ public class InvokerPortlet implements Portlet {
 
 			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-			Map sesResponses = getResponses(ses);
+			Map<String, InvokerPortletResponse> sesResponses = getResponses(ses);
 
 			String sesResponseId = encodeResponseKey(
 				layout.getPlid(), _portletId, LanguageUtil.getLanguageId(req));
 
-			InvokerPortletResponse response =
-				(InvokerPortletResponse)sesResponses.get(sesResponseId);
+			InvokerPortletResponse response = sesResponses.get(sesResponseId);
 
 			if (response == null) {
-				invoke(req, res, false);
+				invoke(req, res, PortletRequest.RENDER_PHASE);
 
 				response = new InvokerPortletResponse(
 					resImpl.getTitle(),
@@ -360,7 +367,7 @@ public class InvokerPortlet implements Portlet {
 			else if ((response.getTime() < now) &&
 					 (_expCache.intValue() > 0)) {
 
-				invoke(req, res, false);
+				invoke(req, res, PortletRequest.RENDER_PHASE);
 
 				response.setTitle(resImpl.getTitle());
 				response.setContent(stringServletRes.getString());
@@ -379,18 +386,43 @@ public class InvokerPortlet implements Portlet {
 		}
 	}
 
+	public void serveResource(ResourceRequest req, ResourceResponse res)
+		throws IOException, PortletException {
+
+		StopWatch stopWatch = null;
+
+		if (_log.isDebugEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
+		try {
+			invoke(req, res, PortletRequest.RESOURCE_PHASE);
+		}
+		catch (PortletException pe) {
+			req.setAttribute(_portletId + PortletException.class.getName(), pe);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"serveResource for " + _portletId + " takes " +
+					stopWatch.getTime() + " ms");
+		}
+	}
+
 	protected ClassLoader getPortletClassLoader() {
 		return (ClassLoader)_portletCtx.getAttribute(
 			PortletServlet.PORTLET_CLASS_LOADER);
 	}
 
 	protected void invoke(
-			PortletRequest req, PortletResponse res, boolean action)
+			PortletRequest req, PortletResponse res, String lifecycle)
 		throws IOException, PortletException {
 
 		FilterChain filterChain = null;
 
-		Map properties = null;
+		Map<String, String[]> properties = null;
 
 		if (_portletConfig.isWARFile()) {
 			String path =
@@ -408,7 +440,10 @@ public class InvokerPortlet implements Portlet {
 			RenderRequestImpl renderReqImpl = null;
 			RenderResponseImpl renderResImpl = null;
 
-			if (action) {
+			ResourceRequestImpl resourceReqImpl = null;
+			ResourceResponseImpl resourceResImpl = null;
+
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 				actionReqImpl = (ActionRequestImpl)req;
 				actionResImpl = (ActionResponseImpl)res;
 
@@ -417,7 +452,7 @@ public class InvokerPortlet implements Portlet {
 
 				filterChain = new FilterChainImpl(_portlet, _actionFilters);
 			}
-			else {
+			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 				renderReqImpl = (RenderRequestImpl)req;
 				renderResImpl = (RenderResponseImpl)res;
 
@@ -425,6 +460,15 @@ public class InvokerPortlet implements Portlet {
 				httpRes = renderResImpl.getHttpServletResponse();
 
 				filterChain = new FilterChainImpl(_portlet, _renderFilters);
+			}
+			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				resourceReqImpl = (ResourceRequestImpl)req;
+				resourceResImpl = (ResourceResponseImpl)res;
+
+				httpReq = resourceReqImpl.getHttpServletRequest();
+				httpRes = resourceResImpl.getHttpServletResponse();
+
+				filterChain = new FilterChainImpl(_portlet, _resourceFilters);
 			}
 
 			httpReq.setAttribute(JavaConstants.JAVAX_PORTLET_PORTLET, _portlet);
@@ -444,15 +488,15 @@ public class InvokerPortlet implements Portlet {
 				throw new PortletException(cause);
 			}
 
-			if (action) {
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 				properties = actionResImpl.getProperties();
 			}
-			else {
+			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 				properties = renderResImpl.getProperties();
 			}
 		}
 		else {
-			if (action) {
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 				ActionRequestImpl actionReqImpl = (ActionRequestImpl)req;
 				ActionResponseImpl actionResImpl = (ActionResponseImpl)res;
 
@@ -462,7 +506,7 @@ public class InvokerPortlet implements Portlet {
 
 				properties = actionResImpl.getProperties();
 			}
-			else {
+			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 				RenderRequestImpl renderReqImpl = (RenderRequestImpl)req;
 				RenderResponseImpl renderResImpl = (RenderResponseImpl)res;
 
@@ -472,11 +516,22 @@ public class InvokerPortlet implements Portlet {
 
 				properties = renderResImpl.getProperties();
 			}
+			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				ResourceRequestImpl resourceReqImpl = (ResourceRequestImpl)req;
+				ResourceResponseImpl resourceResImpl =
+					(ResourceResponseImpl)res;
+
+				filterChain = new FilterChainImpl(_portlet, _resourceFilters);
+
+				filterChain.doFilter(resourceReqImpl, resourceResImpl);
+
+				properties = resourceResImpl.getProperties();
+			}
 		}
 
 		if ((properties != null) && (properties.size() > 0)) {
 			if (_expCache != null) {
-				String[] expCache = (String[])properties.get(
+				String[] expCache = properties.get(
 					RenderResponse.EXPIRATION_CACHE);
 
 				if ((expCache != null) && (expCache.length > 0) &&

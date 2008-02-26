@@ -98,6 +98,7 @@ import java.util.Properties;
 import java.util.TimeZone;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -1151,7 +1152,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setShowStagingIcon(false);
 
 		PortletURL createAccountURL = new PortletURLImpl(
-			req, PortletKeys.MY_ACCOUNT, plid, true);
+			req, PortletKeys.MY_ACCOUNT, plid, PortletRequest.ACTION_PHASE);
 
 		createAccountURL.setWindowState(WindowState.MAXIMIZED);
 		createAccountURL.setPortletMode(PortletMode.VIEW);
@@ -1213,7 +1214,8 @@ public class ServicePreAction extends Action {
 				themeDisplay.setShowPageSettingsIcon(true);
 
 				PortletURL pageSettingsURL = new PortletURLImpl(
-					req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
+					req, PortletKeys.LAYOUT_MANAGEMENT, plid,
+					PortletRequest.RENDER_PHASE);
 
 				pageSettingsURL.setWindowState(WindowState.MAXIMIZED);
 				pageSettingsURL.setPortletMode(PortletMode.VIEW);
@@ -1236,7 +1238,8 @@ public class ServicePreAction extends Action {
 				themeDisplay.setURLPageSettings(pageSettingsURL);
 
 				PortletURL publishToLiveURL = new PortletURLImpl(
-					req, PortletKeys.LAYOUT_MANAGEMENT, plid, false);
+					req, PortletKeys.LAYOUT_MANAGEMENT, plid,
+					PortletRequest.RENDER_PHASE);
 
 				publishToLiveURL.setWindowState(LiferayWindowState.EXCLUSIVE);
 				publishToLiveURL.setPortletMode(PortletMode.VIEW);
@@ -1281,7 +1284,7 @@ public class ServicePreAction extends Action {
 				req, myAccountNamespace + "backURL", currentURL);
 
 			PortletURL myAccountURL = new PortletURLImpl(
-				req, PortletKeys.MY_ACCOUNT, plid, false);
+				req, PortletKeys.MY_ACCOUNT, plid, PortletRequest.RENDER_PHASE);
 
 			myAccountURL.setWindowState(WindowState.MAXIMIZED);
 			myAccountURL.setPortletMode(PortletMode.VIEW);
@@ -1306,7 +1309,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
 		PortletURL updateManagerURL = new PortletURLImpl(
-			req, PortletKeys.UPDATE_MANAGER, plid, false);
+			req, PortletKeys.UPDATE_MANAGER, plid, PortletRequest.RENDER_PHASE);
 
 		updateManagerURL.setWindowState(WindowState.MAXIMIZED);
 		updateManagerURL.setPortletMode(PortletMode.VIEW);

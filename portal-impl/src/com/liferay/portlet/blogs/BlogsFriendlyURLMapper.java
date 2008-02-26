@@ -88,7 +88,7 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String friendlyURLPath, Map<String, String> params) {
 
 		params.put("p_p_id", _PORTLET_ID);
-		params.put("p_p_action", "0");
+		params.put("p_p_lifecycle", "0");
 		params.put("p_p_state", WindowState.NORMAL.toString());
 		params.put("p_p_mode", PortletMode.VIEW.toString());
 
@@ -104,7 +104,7 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String type = friendlyURLPath.substring(x + 1, y);
 
 		if (type.equals("rss")) {
-			params.put("p_p_action", "1");
+			params.put("p_p_lifecycle", "1");
 			params.put("p_p_state", LiferayWindowState.EXCLUSIVE.toString());
 
 			addParam(params, "struts_action", "/blogs/rss");

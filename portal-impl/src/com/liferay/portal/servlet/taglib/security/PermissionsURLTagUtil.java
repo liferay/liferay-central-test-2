@@ -32,6 +32,7 @@ import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -71,7 +72,7 @@ public class PermissionsURLTagUtil extends TagSupport {
 
 			PortletURL portletURL = new PortletURLImpl(
 				req, PortletKeys.PORTLET_CONFIGURATION, layout.getPlid(),
-				false);
+				PortletRequest.RENDER_PHASE);
 
 			if (themeDisplay.isStatePopUp()) {
 				portletURL.setWindowState(LiferayWindowState.POP_UP);

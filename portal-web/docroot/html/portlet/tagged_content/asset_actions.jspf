@@ -36,7 +36,7 @@ if (className.equals(BlogsEntry.class.getName())) {
 
 	editIconMsg = "edit-blog";
 
-	editPortletURL = new PortletURLImpl(request, PortletKeys.BLOGS, plid.longValue(), false);
+	editPortletURL = new PortletURLImpl(request, PortletKeys.BLOGS, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 	editPortletURL.setParameter("struts_action", "/blogs/edit_entry");
 	editPortletURL.setParameter("entryId", String.valueOf(entry.getEntryId()));
@@ -48,7 +48,7 @@ else if (className.equals(BookmarksEntry.class.getName())) {
 
 	editIconMsg = "edit-bookmark";
 
-	editPortletURL = new PortletURLImpl(request, PortletKeys.BOOKMARKS, plid.longValue(), false);
+	editPortletURL = new PortletURLImpl(request, PortletKeys.BOOKMARKS, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 	editPortletURL.setParameter("struts_action", "/bookmarks/edit_entry");
 	editPortletURL.setParameter("folderId", String.valueOf(entry.getFolderId()));
@@ -61,7 +61,7 @@ else if (className.equals(DLFileEntry.class.getName())) {
 
 	editIconMsg = "edit-document";
 
-	editPortletURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, plid.longValue(), false);
+	editPortletURL = new PortletURLImpl(request, PortletKeys.DOCUMENT_LIBRARY, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 	editPortletURL.setParameter("struts_action", "/document_library/edit_file_entry");
 	editPortletURL.setParameter("folderId", String.valueOf(fileEntry.getFolderId()));
@@ -74,7 +74,7 @@ else if (className.equals(IGImage.class.getName())) {
 
 	editIconMsg = "edit-image";
 
-	editPortletURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid.longValue(), false);
+	editPortletURL = new PortletURLImpl(request, PortletKeys.IMAGE_GALLERY, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 	editPortletURL.setParameter("struts_action", "/image_gallery/edit_image");
 	editPortletURL.setParameter("folderId", String.valueOf(image.getFolderId()));
@@ -92,7 +92,7 @@ else if (className.equals(JournalArticle.class.getName())) {
 
 		editIconMsg = "edit-article";
 
-		editPortletURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid.longValue(), false);
+		editPortletURL = new PortletURLImpl(request, PortletKeys.JOURNAL, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 		editPortletURL.setParameter("struts_action", "/journal/edit_article");
 		editPortletURL.setParameter("groupId", String.valueOf(articleDisplay.getGroupId()));
@@ -111,7 +111,7 @@ else if (className.equals(WikiPage.class.getName())) {
 
 	editIconMsg = "edit-page";
 
-	editPortletURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), false);
+	editPortletURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 	editPortletURL.setParameter("struts_action", "/wiki/edit_page");
 	editPortletURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));

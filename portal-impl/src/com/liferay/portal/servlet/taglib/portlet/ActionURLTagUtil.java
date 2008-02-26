@@ -34,6 +34,7 @@ import com.liferay.util.MapUtil;
 import java.util.Map;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,10 +53,11 @@ import org.apache.commons.logging.LogFactory;
 public class ActionURLTagUtil {
 
 	public static String doEndTag(
-			boolean action, String windowState, String portletMode, String var,
-			String varImpl, Boolean secure, String portletName, Boolean anchor,
-			Boolean encrypt, long doAsUserId, Boolean portletConfiguration,
-			Map params, boolean writeOutput, PageContext pageContext)
+			String lifecycle, String windowState, String portletMode,
+			String var, String varImpl, Boolean secure, String portletName,
+			Boolean anchor, Boolean encrypt, long doAsUserId,
+			Boolean portletConfiguration, Map<String, String[]> params,
+			boolean writeOutput, PageContext pageContext)
 		throws JspException {
 
 		try {
@@ -84,11 +86,11 @@ public class ActionURLTagUtil {
 
 			LiferayPortletURL portletURL = null;
 
-			if (action) {
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 				portletURL = (LiferayPortletURL)renderResponse.createActionURL(
 					portletName);
 			}
-			else {
+			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 				portletURL = (LiferayPortletURL)renderResponse.createRenderURL(
 					portletName);
 			}

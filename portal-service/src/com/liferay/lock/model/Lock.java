@@ -50,8 +50,4 @@ public interface Lock extends Comparable<Lock>, Serializable {
 
 	public Date getDate();
 
-	public int compareTo(Lock lock);
-
-	public boolean equals(Lock lock);
-
 }

@@ -27,6 +27,7 @@ import java.io.Serializable;
 import java.util.Set;
 
 import javax.portlet.PortletURL;
+import javax.portlet.ResourceURL;
 
 /**
  * <a href="LiferayPortletURL.java.html"><b><i>View Source</i></b></a>
@@ -34,15 +35,16 @@ import javax.portlet.PortletURL;
  * @author Brian Wing Shun Chan
  *
  */
-public interface LiferayPortletURL extends PortletURL, Serializable {
+public interface LiferayPortletURL
+	extends PortletURL, ResourceURL, Serializable {
 
 	public void addParameterIncludedInPath(String name);
+
+	public String getLifecycle();
 
 	public String getParameter(String name);
 
 	public String getPortletId();
-
-	public boolean isAction();
 
 	public boolean isAnchor();
 
@@ -52,7 +54,7 @@ public interface LiferayPortletURL extends PortletURL, Serializable {
 
 	public boolean isSecure();
 
-	public void setAction(boolean action);
+	public void setLifecycle(String lifecycle);
 
 	public void setParameter(String name, String value, boolean append);
 

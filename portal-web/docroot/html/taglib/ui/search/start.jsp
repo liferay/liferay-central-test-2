@@ -30,7 +30,7 @@ String unicodeDefaultKeywords = UnicodeFormatter.toString(defaultKeywords);
 
 String keywords = ParamUtil.getString(request, namespace + "keywords", defaultKeywords);
 
-PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SEARCH, plid.longValue(), false);
+PortletURL portletURL = new PortletURLImpl(request, PortletKeys.SEARCH, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
 portletURL.setPortletMode(PortletMode.VIEW);

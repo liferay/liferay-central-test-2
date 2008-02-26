@@ -22,18 +22,61 @@
 
 package com.liferay.portlet;
 
+import java.util.Enumeration;
+import java.util.Map;
+
+import javax.portlet.ResourceRequest;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
- * <a href="PortletURLImplWrapper.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceRequestImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletURLImplWrapper extends PortletURLImpl {
+public class ResourceRequestImpl
+	extends ClientDataRequestImpl implements ResourceRequest {
 
-	public PortletURLImplWrapper(PortletResponseImpl res, String lifecycle) {
-		super(
-			res.getPortletRequest(), res.getPortletName(), res.getPlid(),
-			lifecycle);
+	public String getCacheability() {
+		return null;
 	}
+
+	public String getETag() {
+		return null;
+	}
+
+	public Map<String, String[]> getPrivateRenderParameterMap() {
+		return null;
+	}
+
+	public String getResourceID() {
+		return null;
+	}
+
+	public String getResponseContentType() {
+		return null;
+	}
+
+	public Enumeration<String> getResponseContentTypes() {
+		return null;
+	}
+
+	protected ResourceRequestImpl() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Creating new instance " + hashCode());
+		}
+	}
+
+	protected void recycle() {
+		if (_log.isDebugEnabled()) {
+			_log.debug("Recycling instance " + hashCode());
+		}
+
+		super.recycle();
+	}
+
+	private static Log _log = LogFactory.getLog(ResourceRequestImpl.class);
 
 }

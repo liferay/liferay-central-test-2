@@ -107,7 +107,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public void populateParams(String friendlyURLPath, Map params) {
 		params.put("p_p_id", _PORTLET_ID);
-		params.put("p_p_action", "0");
+		params.put("p_p_lifecycle", "0");
 		params.put("p_p_state", WindowState.MAXIMIZED.toString());
 		params.put("p_p_mode", PortletMode.VIEW.toString());
 

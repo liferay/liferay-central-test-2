@@ -22,6 +22,8 @@
 
 package com.liferay.taglib.portlet;
 
+import javax.portlet.PortletRequest;
+
 /**
  * <a href="RenderURLTag.java.html"><b><i>View Source</i></b></a>
  *
@@ -30,10 +32,8 @@ package com.liferay.taglib.portlet;
  */
 public class RenderURLTag extends ActionURLTag {
 
-	public boolean isAction() {
-		return _ACTION;
+	public String getLifecycle() {
+		return PortletRequest.RENDER_PHASE;
 	}
-
-	private static final boolean _ACTION = false;
 
 }

@@ -49,6 +49,7 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.WindowState;
@@ -220,7 +221,7 @@ public class EditPageAction extends PortletAction {
 
 		PortletURLImpl portletURL = new PortletURLImpl(
 			(ActionRequestImpl)req, config.getPortletName(),
-			themeDisplay.getPlid(), false);
+			themeDisplay.getPlid(), PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
 

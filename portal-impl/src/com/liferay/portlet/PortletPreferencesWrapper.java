@@ -31,6 +31,7 @@ import java.util.Enumeration;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
 
@@ -43,16 +44,18 @@ import javax.portlet.ValidatorException;
 public class PortletPreferencesWrapper
 	implements PortletPreferences, Serializable {
 
-	public PortletPreferencesWrapper(PortletPreferences prefs, boolean action) {
+	public PortletPreferencesWrapper(
+		PortletPreferences prefs, String lifecycle) {
+
 		_prefs = prefs;
-		_action = action;
+		_lifecycle = lifecycle;
 	}
 
-	public Map getMap() {
+	public Map<String, String[]> getMap() {
 		return _prefs.getMap();
 	}
 
-	public Enumeration getNames() {
+	public Enumeration<String> getNames() {
 		return _prefs.getNames();
 	}
 
@@ -87,7 +90,7 @@ public class PortletPreferencesWrapper
 
 			// Be strict to pass the TCK
 
-			if (_action) {
+			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 				_prefs.store();
 			}
 			else {
@@ -107,7 +110,7 @@ public class PortletPreferencesWrapper
 		return (PortletPreferencesImpl)_prefs;
 	}
 
-	private PortletPreferences _prefs = null;
-	private boolean _action;
+	private PortletPreferences _prefs;
+	private String _lifecycle;
 
 }

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.layoutconfiguration.util.xml;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderResponse;
 
 /**
@@ -50,10 +51,10 @@ public class RenderURLLogic extends ActionURLLogic {
 		return CLOSE_1_TAG;
 	}
 
-	public boolean isAction() {
-		return _action;
+	public String getLifecycle() {
+		return _lifecycle;
 	}
 
-	private boolean _action = false;
+	private String _lifecycle = PortletRequest.RENDER_PHASE;
 
 }

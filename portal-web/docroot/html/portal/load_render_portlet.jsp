@@ -58,7 +58,7 @@ String currentURL = PortalUtil.getCurrentURL(request);
 		url.append(plid.longValue());
 		url.append("&p_p_id=");
 		url.append(portlet.getPortletId());
-		url.append("&p_p_action=0&p_p_state=normal&p_p_mode=view&p_p_col_id=");
+		url.append("&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=");
 		url.append(columnId);
 		url.append("&p_p_col_pos=");
 		url.append(columnPos);

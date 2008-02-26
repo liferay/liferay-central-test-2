@@ -120,7 +120,7 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 			params.put("p_p_state", WindowState.NORMAL.toString());
 		}
 
-		params.put("p_p_action", "0");
+		params.put("p_p_lifecycle", "0");
 		params.put("p_p_mode", PortletMode.VIEW.toString());
 
 		String groupId = friendlyURLPath.substring(x + 1, y);

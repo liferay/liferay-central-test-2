@@ -41,6 +41,7 @@ import java.util.Date;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
+import javax.portlet.PortletRequest;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
@@ -295,7 +296,8 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 			}
 		}
 
-		PortletURL portletURL = new PortletURLImpl(req, portletId, plid, false);
+		PortletURL portletURL = new PortletURLImpl(
+			req, portletId, plid, PortletRequest.RENDER_PHASE);
 
 		portletURL.setWindowState(WindowState.MAXIMIZED);
 		portletURL.setPortletMode(PortletMode.VIEW);

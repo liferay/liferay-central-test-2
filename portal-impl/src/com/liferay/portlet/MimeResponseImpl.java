@@ -1,0 +1,180 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet;
+
+import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.util.Validator;
+
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
+
+import java.util.Enumeration;
+import java.util.Locale;
+
+import javax.portlet.CacheControl;
+import javax.portlet.MimeResponse;
+
+import javax.servlet.http.HttpServletResponse;
+
+/**
+ * <a href="MimeResponseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public abstract class MimeResponseImpl
+	extends PortletResponseImpl implements MimeResponse {
+
+	public void flushBuffer() throws IOException {
+		_res.flushBuffer();
+	}
+
+	public int getBufferSize() {
+		return _res.getBufferSize();
+	}
+
+	public CacheControl getCacheControl() {
+		return null;
+	}
+
+	public String getCharacterEncoding() {
+		return _res.getCharacterEncoding();
+	}
+
+	public String getContentType() {
+		return _contentType;
+	}
+
+	public Locale getLocale() {
+		return _req.getLocale();
+	}
+
+	public OutputStream getPortletOutputStream() throws IOException {
+		if (_calledGetWriter) {
+			throw new IllegalStateException();
+		}
+
+		if (_contentType == null) {
+			throw new IllegalStateException();
+		}
+
+		_calledGetPortletOutputStream = true;
+
+		return _res.getOutputStream();
+	}
+
+	public PrintWriter getWriter() throws IOException {
+		if (_calledGetPortletOutputStream) {
+			throw new IllegalStateException();
+		}
+
+		if (_contentType == null) {
+			throw new IllegalStateException();
+		}
+
+		_calledGetWriter = true;
+
+		return _res.getWriter();
+	}
+
+	public boolean isCalledGetPortletOutputStream() {
+		return _calledGetPortletOutputStream;
+	}
+
+	public boolean isCalledGetWriter() {
+		return _calledGetWriter;
+	}
+
+	public boolean isCommitted() {
+		return false;
+	}
+
+	public void reset() {
+	}
+
+	public void resetBuffer() {
+		_res.resetBuffer();
+	}
+
+	public void setBufferSize(int size) {
+		_res.setBufferSize(size);
+	}
+
+	public void setContentType(String contentType) {
+		if (Validator.isNull(contentType)) {
+			throw new IllegalArgumentException();
+		}
+
+		Enumeration<String> enu = _req.getResponseContentTypes();
+
+		boolean valid = false;
+
+		while (enu.hasMoreElements()) {
+			String resContentType = enu.nextElement();
+
+			if (contentType.startsWith(resContentType)) {
+				valid = true;
+
+				break;
+			}
+		}
+
+		if (_req.getWindowState().equals(LiferayWindowState.EXCLUSIVE)) {
+			valid = true;
+		}
+
+		if (!valid) {
+			throw new IllegalArgumentException();
+		}
+
+		_contentType = contentType;
+	}
+
+	protected void init(
+		PortletRequestImpl req, HttpServletResponse res, String portletName,
+		long companyId, long plid) {
+
+		super.init(req, res, portletName, companyId, plid);
+
+		_req = req;
+		_res = res;
+	}
+
+	protected void recycle() {
+		super.recycle();
+
+		_req = null;
+		_res = null;
+		_contentType = null;
+		_calledGetPortletOutputStream = false;
+		_calledGetWriter = false;
+	}
+
+	private PortletRequestImpl _req;
+	private HttpServletResponse _res;
+	private String _contentType;
+	private boolean _calledGetPortletOutputStream;
+ 	private boolean _calledGetWriter;
+
+}

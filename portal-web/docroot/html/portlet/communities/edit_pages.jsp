@@ -206,7 +206,7 @@ if (portletName.equals(PortletKeys.LAYOUT_MANAGEMENT) || portletName.equals(Port
 
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 
-PortletURL viewPagesURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
+PortletURL viewPagesURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), PortletRequest.ACTION_PHASE);
 
 viewPagesURL.setWindowState(WindowState.NORMAL);
 viewPagesURL.setPortletMode(PortletMode.VIEW);

@@ -22,17 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.util.JavaConstants;
-
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-
 import javax.portlet.ActionRequest;
-import javax.portlet.ActionResponse;
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -44,59 +34,7 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ActionRequestImpl
-	extends RenderRequestImpl implements ActionRequest {
-
-	public void defineObjects(PortletConfig portletConfig, ActionResponse res) {
-		setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
-		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
-		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
-	}
-
-	public String getCharacterEncoding() {
-		return getHttpServletRequest().getCharacterEncoding();
-	}
-
-	public int getContentLength() {
-		return getHttpServletRequest().getContentLength();
-	}
-
-	public String getContentType() {
-		return getHttpServletRequest().getContentType();
-	}
-
-	public String getMethod() {
-		return getHttpServletRequest().getMethod();
-	}
-
-	public InputStream getPortletInputStream() throws IOException {
-		return getHttpServletRequest().getInputStream();
-	}
-
-	public PortletPreferences getPreferences() {
-		return new PortletPreferencesWrapper(getPreferencesImpl(), true);
-	}
-
-	public BufferedReader getReader()
-		throws IOException, UnsupportedEncodingException {
-
-		_calledGetReader = true;
-
-		return getHttpServletRequest().getReader();
-	}
-
-	public boolean isAction() {
-		return _ACTION;
-	}
-
-	public void setCharacterEncoding(String enc)
-		throws UnsupportedEncodingException {
-
-		if (_calledGetReader) {
-			throw new IllegalStateException();
-		}
-
-		getHttpServletRequest().setCharacterEncoding(enc);
-	}
+	extends ClientDataRequestImpl implements ActionRequest {
 
 	protected ActionRequestImpl() {
 		if (_log.isDebugEnabled()) {
@@ -110,14 +48,8 @@ public class ActionRequestImpl
 		}
 
 		super.recycle();
-
-		_calledGetReader = false;
 	}
 
-	private static final boolean _ACTION = true;
-
 	private static Log _log = LogFactory.getLog(ActionRequestImpl.class);
-
-	private boolean _calledGetReader;
 
 }

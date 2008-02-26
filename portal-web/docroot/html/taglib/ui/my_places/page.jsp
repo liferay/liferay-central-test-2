@@ -34,7 +34,7 @@ List myPlaces = user.getMyPlaces();
 	<ul class="taglib-my-places">
 
 		<%
-		PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
+		PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), PortletRequest.ACTION_PHASE);
 
 		portletURL.setWindowState(WindowState.NORMAL);
 		portletURL.setPortletMode(PortletMode.VIEW);
@@ -61,7 +61,7 @@ List myPlaces = user.getMyPlaces();
 				organization = OrganizationLocalServiceUtil.getOrganization(myPlace.getClassPK());
 
 				if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.MANAGE_LAYOUTS)) {
-					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
+					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), PortletRequest.ACTION_PHASE);
 
 					addPageURL.setWindowState(WindowState.NORMAL);
 					addPageURL.setPortletMode(PortletMode.VIEW);
@@ -80,7 +80,7 @@ List myPlaces = user.getMyPlaces();
 			}
 			else if (regularCommunity) {
 				if (GroupPermissionUtil.contains(permissionChecker, myPlace.getGroupId(), ActionKeys.MANAGE_LAYOUTS)) {
-					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), true);
+					PortletURL addPageURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), PortletRequest.ACTION_PHASE);
 
 					addPageURL.setWindowState(WindowState.NORMAL);
 					addPageURL.setPortletMode(PortletMode.VIEW);
@@ -98,7 +98,7 @@ List myPlaces = user.getMyPlaces();
 				}
 			}
 			else if (userCommunity) {
-				PortletURL publicAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid.longValue(), false);
+				PortletURL publicAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 				publicAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				publicAddPageURL.setPortletMode(PortletMode.VIEW);
@@ -112,7 +112,7 @@ List myPlaces = user.getMyPlaces();
 
 				long privateAddPagePlid = myPlace.getDefaultPrivatePlid();
 
-				PortletURL privateAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid.longValue(), false);
+				PortletURL privateAddPageURL = new PortletURLImpl(request, PortletKeys.MY_ACCOUNT, plid.longValue(), PortletRequest.RENDER_PHASE);
 
 				privateAddPageURL.setWindowState(WindowState.MAXIMIZED);
 				privateAddPageURL.setPortletMode(PortletMode.VIEW);

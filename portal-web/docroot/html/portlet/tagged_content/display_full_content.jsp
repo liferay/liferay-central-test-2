@@ -271,13 +271,13 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 			WikiPage wikiPage = WikiPageLocalServiceUtil.getPage(pageResource.getNodeId(), pageResource.getTitle());
 
 			try {
-				PortletURL viewPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
+				PortletURL viewPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), PortletRequest.ACTION_PHASE);
 
 				viewPageURL.setPortletMode(PortletMode.VIEW);
 
 				viewPageURL.setParameter("struts_action", "/wiki/view");
 
-				PortletURL editPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), true);
+				PortletURL editPageURL = new PortletURLImpl(request, PortletKeys.WIKI, plid.longValue(), PortletRequest.ACTION_PHASE);
 
 				editPageURL.setPortletMode(PortletMode.VIEW);
 

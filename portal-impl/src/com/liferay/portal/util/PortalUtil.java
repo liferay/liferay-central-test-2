@@ -181,9 +181,9 @@ public class PortalUtil {
 
 		// Clear the render parameters if they were set during processAction
 
-		boolean action = ParamUtil.getBoolean(req, "p_p_action");
+		String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
 
-		if (action) {
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 			((RenderRequestImpl)req).getRenderParameters().clear();
 		}
 	}
@@ -197,7 +197,7 @@ public class PortalUtil {
 			Map<String, String[]> renderParameters =
 				resImpl.getRenderParameterMap();
 
-			res.setRenderParameter("p_p_action", "1");
+			res.setRenderParameter("p_p_lifecycle", "1");
 
 			Enumeration<String> enu = req.getParameterNames();
 
@@ -990,10 +990,12 @@ public class PortalUtil {
 					actualParams = new HashMap<String, String>();
 				}
 
-				/*Object action = actualParams.get("p_p_action");
+				/*Object lifecycle = actualParams.get("p_p_lifecycle");
 
-				if ((action == null) || (((String[])action).length == 0)) {
-					actualParams.put("p_p_action", "0");
+				if ((lifecycle == null) ||
+					(((String[])lifecycle).length == 0)) {
+
+					actualParams.put("p_p_lifecycle", "0");
 				}
 
 				Object state = actualParams.get("p_p_state");
@@ -1540,7 +1542,8 @@ public class PortalUtil {
 				Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
 				PortletURL portletURL = new PortletURLImpl(
-					req, PortletKeys.DIRECTORY, layout.getPlid(), false);
+					req, PortletKeys.DIRECTORY, layout.getPlid(),
+					PortletRequest.RENDER_PHASE);
 
 				portletURL.setWindowState(WindowState.MAXIMIZED);
 				portletURL.setPortletMode(PortletMode.VIEW);
@@ -2392,7 +2395,7 @@ public class PortalUtil {
 		_reservedParams.add("p_l_id");
 		_reservedParams.add("p_l_reset");
 		_reservedParams.add("p_p_id");
-		_reservedParams.add("p_p_action");
+		_reservedParams.add("p_p_lifecycle");
 		_reservedParams.add("p_p_state");
 		_reservedParams.add("p_p_mode");
 		_reservedParams.add("p_p_width");

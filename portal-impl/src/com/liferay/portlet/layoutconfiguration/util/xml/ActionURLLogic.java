@@ -29,6 +29,7 @@ import com.liferay.portlet.RenderResponseImpl;
 
 import java.io.StringReader;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.RenderResponse;
 
 import org.dom4j.Document;
@@ -68,8 +69,8 @@ public class ActionURLLogic extends RuntimeLogic {
 
 		Element root = doc.getRootElement();
 
-		LiferayPortletURL portletURL =
-			(LiferayPortletURL)_res.createPortletURL(isAction());
+		LiferayPortletURL portletURL = _res.createPortletURLImpl(
+			getLifecycle());
 
 		String portletId = root.attributeValue("portlet-name");
 
@@ -93,11 +94,11 @@ public class ActionURLLogic extends RuntimeLogic {
 		sm.append(portletURL.toString());
 	}
 
-	public boolean isAction() {
-		return _action;
+	public String getLifecycle() {
+		return _lifecycle;
 	}
 
 	private RenderResponseImpl _res;
-	private boolean _action = false;
+	private String _lifecycle = PortletRequest.ACTION_PHASE;
 
 }

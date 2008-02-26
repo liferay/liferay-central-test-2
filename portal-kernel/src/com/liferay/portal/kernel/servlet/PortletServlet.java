@@ -31,12 +31,13 @@ import java.io.IOException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
-import javax.portlet.Portlet;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 import javax.portlet.filter.FilterChain;
 
 import javax.servlet.ServletException;
@@ -76,9 +77,6 @@ public class PortletServlet extends HttpServlet {
 		PortletResponse portletRes = (PortletResponse)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		Portlet portlet = (Portlet)req.getAttribute(
-			JavaConstants.JAVAX_PORTLET_PORTLET);
-
 		FilterChain filterChain = (FilterChain)req.getAttribute(
 			PORTLET_SERVLET_FILTER_CHAIN);
 
@@ -102,11 +100,17 @@ public class PortletServlet extends HttpServlet {
 
 				filterChain.doFilter(actionReq, actionRes);
 			}
-			else {
+			else if (portletReq instanceof RenderRequest) {
 				RenderRequest renderReq = (RenderRequest)portletReq;
 				RenderResponse renderRes = (RenderResponse)portletRes;
 
 				filterChain.doFilter(renderReq, renderRes);
+			}
+			else if (portletReq instanceof ResourceRequest) {
+				ResourceRequest resourceReq = (ResourceRequest)portletReq;
+				ResourceResponse resourceRes = (ResourceResponse)portletRes;
+
+				filterChain.doFilter(resourceReq, resourceRes);
 			}
 		}
 		catch (PortletException pe) {

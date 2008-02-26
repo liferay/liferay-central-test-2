@@ -81,31 +81,23 @@ import org.apache.commons.logging.LogFactory;
 public class PortletURLImpl implements LiferayPortletURL, Serializable {
 
 	public PortletURLImpl(
-		ActionRequestImpl req, String portletId, long plid, boolean action) {
+		PortletRequestImpl req, String portletId, long plid, String lifecycle) {
 
-		this(req.getHttpServletRequest(), portletId, plid, action);
-
-		_portletReq = req;
-	}
-
-	public PortletURLImpl(
-		RenderRequestImpl req, String portletId, long plid, boolean action) {
-
-		this(req.getHttpServletRequest(), portletId, plid, action);
+		this(req.getHttpServletRequest(), portletId, plid, lifecycle);
 
 		_portletReq = req;
 	}
 
 	public PortletURLImpl(
-		HttpServletRequest req, String portletId, long plid, boolean action) {
+		HttpServletRequest req, String portletId, long plid, String lifecycle) {
 
 		_req = req;
 		_portletId = portletId;
 		_plid = plid;
-		_secure = req.isSecure();
-		_action = action;
-		_params = new LinkedHashMap<String, String[]>();
+		_lifecycle = lifecycle;
 		_parametersIncludedInPath = new LinkedHashSet<String>();
+		_params = new LinkedHashMap<String, String[]>();
+		_secure = req.isSecure();
 	}
 
 	public void addParameterIncludedInPath(String name) {
@@ -116,6 +108,10 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		if (key == null) {
 			throw new IllegalArgumentException();
 		}
+	}
+
+	public String getCacheability() {
+		return _cacheability;
 	}
 
 	public HttpServletRequest getHttpServletRequest() {
@@ -149,6 +145,10 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 
 	public String getLayoutFriendlyURL() {
 		return _layoutFriendlyURL;
+	}
+
+	public String getLifecycle() {
+		return _lifecycle;
 	}
 
 	public String getParameter(String name) {
@@ -221,12 +221,12 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		return _portletReq;
 	}
 
-	public WindowState getWindowState() {
-		return _windowState;
+	public String getResourceID() {
+		return _resourceID;
 	}
 
-	public boolean isAction() {
-		return _action;
+	public WindowState getWindowState() {
+		return _windowState;
 	}
 
 	public boolean isAnchor() {
@@ -258,16 +258,16 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		_params.remove(name);
 	}
 
-	public void setAction(boolean action) {
-		_action = action;
+	public void setAnchor(boolean anchor) {
+		_anchor = anchor;
 
 		// Clear cache
 
 		_toString = null;
 	}
 
-	public void setAnchor(boolean anchor) {
-		_anchor = anchor;
+	public void setCacheability(String cacheability) {
+		_cacheability = cacheability;
 
 		// Clear cache
 
@@ -284,6 +284,14 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 
 	public void setEncrypt(boolean encrypt) {
 		_encrypt = encrypt;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
+	public void setLifecycle(String lifecycle) {
+		_lifecycle = lifecycle;
 
 		// Clear cache
 
@@ -405,6 +413,10 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 		}
 	}
 
+	public void setResourceID(String resourceID) {
+		_resourceID = resourceID;
+	}
+
 	public void setSecure(boolean secure) throws PortletSecurityException {
 		_secure = secure;
 
@@ -522,8 +534,8 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 			if (Validator.isNotNull(friendlyURLPath)) {
 				sm.append(friendlyURLPath);
 
-				if (!isAction()) {
-					addParameterIncludedInPath("p_p_action");
+				if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+					addParameterIncludedInPath("p_p_lifecycle");
 				}
 
 				//if ((_windowState != null) &&
@@ -553,14 +565,14 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 			sm.append(StringPool.AMPERSAND);
 		}
 
-		if (!isParameterIncludedInPath("p_p_action")) {
-			sm.append("p_p_action");
+		if (!isParameterIncludedInPath("p_p_lifecycle")) {
+			sm.append("p_p_lifecycle");
 			sm.append(StringPool.EQUAL);
 
-			if (_action) {
+			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 				sm.append(processValue(key, "1"));
 			}
-			else {
+			else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 				sm.append(processValue(key, "0"));
 			}
 
@@ -730,15 +742,17 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 	private long _plid;
 	private Layout _layout;
 	private String _layoutFriendlyURL;
-	private boolean _action;
-	private WindowState _windowState;
-	private PortletMode _portletMode;
-	private Map<String, String[]> _params;
-	private Set<String> _parametersIncludedInPath;
-	private boolean _secure;
+	private String _lifecycle;
 	private boolean _anchor = true;
-	private boolean _encrypt = false;
+	private String _cacheability;
 	private long _doAsUserId;
+	private boolean _encrypt;
+	private Set<String> _parametersIncludedInPath;
+	private Map<String, String[]> _params;
+	private PortletMode _portletMode;
+	private String _resourceID;
+	private boolean _secure;
+	private WindowState _windowState;
 	private String _toString;
 
 }

@@ -67,6 +67,7 @@ import java.util.Properties;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
@@ -229,8 +230,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return layoutId;
 	}
 
-	public List getAncestors() throws SystemException, PortalException {
-		List layouts = new ArrayList();
+	public List<Layout> getAncestors() throws SystemException, PortalException {
+		List<Layout> layouts = new ArrayList<Layout>();
 
 		Layout layout = this;
 
@@ -297,18 +298,18 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 	}
 
-	public List getChildren() throws PortalException, SystemException {
+	public List<Layout> getChildren() throws PortalException, SystemException {
 		return LayoutLocalServiceUtil.getLayouts(
 			getGroupId(), isPrivateLayout(), getLayoutId());
 	}
 
-	public List getAllChildren() throws PortalException, SystemException {
-		List layouts = new ArrayList();
+	public List<Layout> getAllChildren() throws PortalException, SystemException {
+		List<Layout> layouts = new ArrayList<Layout>();
 
-		Iterator itr = getChildren().iterator();
+		Iterator<Layout> itr = getChildren().iterator();
 
 		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
+			Layout layout = itr.next();
 
 			layouts.add(layout);
 			layouts.addAll(layout.getChildren());
@@ -317,15 +318,15 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return layouts;
 	}
 
-	public List getChildren(PermissionChecker permissionChecker)
+	public List<Layout> getChildren(PermissionChecker permissionChecker)
 		throws PortalException, SystemException {
 
-		List layouts = getChildren();
+		List<Layout> layouts = getChildren();
 
-		Iterator itr = layouts.iterator();
+		Iterator<Layout> itr = layouts.iterator();
 
 		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
+			Layout layout = itr.next();
 
 			if (layout.isHidden() ||
 				!LayoutPermissionUtil.contains(
@@ -602,7 +603,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 				String stateMin = props.getProperty(
 					LayoutTypePortletImpl.STATE_MIN);
 
-				Layout layout = (Layout)((LayoutImpl)this).clone();
+				Layout layout = (Layout)this.clone();
 
 				layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
 
@@ -650,7 +651,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 					StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
 				PortletURLImpl portletURLImpl = new PortletURLImpl(
-					req, portletId, getPlid(), true);
+					req, portletId, getPlid(), PortletRequest.ACTION_PHASE);
 
 				try {
 					portletURLImpl.setWindowState(WindowState.NORMAL);

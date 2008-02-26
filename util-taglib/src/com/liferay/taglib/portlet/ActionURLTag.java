@@ -33,6 +33,8 @@ import com.liferay.taglib.util.ParamAncestorTagImpl;
 
 import java.util.Map;
 
+import javax.portlet.PortletRequest;
+
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.PageContext;
 
@@ -48,11 +50,11 @@ import org.apache.commons.logging.LogFactory;
 public class ActionURLTag extends ParamAncestorTagImpl {
 
 	public static String doTag(
-			boolean action, String windowState, String portletMode, String var,
-			String varImpl, Boolean secure, String portletName, Boolean anchor,
-			Boolean encrypt, long doAsUserId, Boolean portletConfiguration,
-			Map<String, String[]> params, boolean writeOutput,
-			PageContext pageContext)
+			String lifecycle, String windowState, String portletMode,
+			String var, String varImpl, Boolean secure, String portletName,
+			Boolean anchor, Boolean encrypt, long doAsUserId,
+			Boolean portletConfiguration, Map<String, String[]> params,
+			boolean writeOutput, PageContext pageContext)
 		throws Exception {
 
 		Object returnObj = null;
@@ -128,12 +130,11 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					new BooleanWrapper(action), windowStateWrapper,
-					portletModeWrapper, varWrapper, varImplWrapper,
-					secureWrapper, portletNameWrapper, anchorWrapper,
-					encryptWrapper, new LongWrapper(doAsUserId),
-					portletConfigurationWrapper, paramsWrapper,
-					new BooleanWrapper(writeOutput), pageContext
+					lifecycle, windowStateWrapper, portletModeWrapper,
+					varWrapper, varImplWrapper, secureWrapper,
+					portletNameWrapper, anchorWrapper, encryptWrapper,
+					new LongWrapper(doAsUserId), portletConfigurationWrapper,
+					paramsWrapper, new BooleanWrapper(writeOutput), pageContext
 				});
 
 			returnObj = MethodInvoker.invoke(methodWrapper);
@@ -158,8 +159,8 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 	public int doEndTag() throws JspException {
 		try {
 			doTag(
-				isAction(), _windowState, _portletMode, _var, _varImpl, _secure,
-				_portletName, _anchor, _encrypt, _doAsUserId,
+				getLifecycle(), _windowState, _portletMode, _var, _varImpl,
+				_secure, _portletName, _anchor, _encrypt, _doAsUserId,
 				_portletConfiguration, getParams(), true, pageContext);
 		}
 		catch (Exception e) {
@@ -177,8 +178,8 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 		return EVAL_PAGE;
 	}
 
-	public boolean isAction() {
-		return _ACTION;
+	public String getLifecycle() {
+		return PortletRequest.ACTION_PHASE;
 	}
 
 	public void setWindowState(String windowState) {
@@ -225,8 +226,6 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 		"com.liferay.portal.servlet.taglib.portlet.ActionURLTagUtil";
 
 	private static final String _TAG_DO_END_METHOD = "doEndTag";
-
-	private static final boolean _ACTION = true;
 
 	private static Log _log = LogFactory.getLog(ActionURLTag.class);
 

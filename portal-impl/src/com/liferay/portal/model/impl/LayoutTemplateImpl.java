@@ -211,11 +211,11 @@ public class LayoutTemplateImpl
 		return wapContent;
 	}
 
-	public List getColumns() {
+	public List<String> getColumns() {
 		return _columns;
 	}
 
-	public void setColumns(List columns) {
+	public void setColumns(List<String> columns) {
 		_columns = columns;
 	}
 
@@ -255,27 +255,16 @@ public class LayoutTemplateImpl
 		}
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
+	public int compareTo(LayoutTemplate layoutTemplate) {
+		if (layoutTemplate == null) {
 			return -1;
 		}
-
-		LayoutTemplate layoutTemplate = (LayoutTemplate) obj;
 
 		return getName().compareTo(layoutTemplate.getName());
 	}
 
-	public boolean equals(Object obj) {
-		if (obj == null) {
-			return false;
-		}
-
-		LayoutTemplate layoutTemplate = null;
-
-		try {
-			layoutTemplate = (LayoutTemplate)obj;
-		}
-		catch (ClassCastException cce) {
+	public boolean equals(LayoutTemplate layoutTemplate) {
+		if (layoutTemplate == null) {
 			return false;
 		}
 
@@ -301,7 +290,7 @@ public class LayoutTemplateImpl
 	private boolean _setContent;
 	private String _wapContent;
 	private boolean _setWapContent;
-	private List _columns = new ArrayList();
+	private List<String> _columns = new ArrayList<String>();
 	private transient ServletContext _ctx;
 	private String _servletContextName;
 	private boolean _warFile;

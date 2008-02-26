@@ -160,7 +160,7 @@
 
 	#set ($community_name = $page.getGroup().getDescriptiveName())
 
-	#set ($my_places_portlet_url = $portletURLFactory.create($request, "49", $page.getPlid(), true))
+	#set ($my_places_portlet_url = $portletURLFactory.create($request, "49", $page.getPlid(), "ACTION_PHASE"))
 
 	$my_places_portlet_url.setWindowState("normal")
 	$my_places_portlet_url.setPortletMode("view")
