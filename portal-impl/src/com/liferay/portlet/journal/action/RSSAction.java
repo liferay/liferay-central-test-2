@@ -52,10 +52,12 @@ import com.liferay.util.RSSUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndContentImpl;
+import com.sun.syndication.feed.synd.SyndEnclosure;
 import com.sun.syndication.feed.synd.SyndEntry;
 import com.sun.syndication.feed.synd.SyndEntryImpl;
 import com.sun.syndication.feed.synd.SyndFeed;
 import com.sun.syndication.feed.synd.SyndFeedImpl;
+import com.sun.syndication.feed.synd.SyndLink;
 import com.sun.syndication.io.FeedException;
 
 import java.io.IOException;
@@ -125,20 +127,20 @@ public class RSSAction extends PortletAction {
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(feed.getDescription());
 
-		List entries = new ArrayList();
+		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 
 		syndFeed.setEntries(entries);
 
-		List articles = JournalRSSUtil.getArticles(feed);
+		List<JournalArticle> articles = JournalRSSUtil.getArticles(feed);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Syndicating " + articles.size() + " articles");
 		}
 
-		Iterator itr = articles.iterator();
+		Iterator<JournalArticle> itr = articles.iterator();
 
 		while (itr.hasNext()) {
-			JournalArticle article = (JournalArticle)itr.next();
+			JournalArticle article = itr.next();
 
 			String author = PortalUtil.getUserName(
 				article.getUserId(), article.getUserName());
@@ -192,12 +194,13 @@ public class RSSAction extends PortletAction {
 
 		StringMaker sm = new StringMaker();
 
-		List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(
-			layout.getGroupId(), layout.isPrivateLayout(),
-			article.getArticleId());
+		List<Long> hitLayoutIds =
+			JournalContentSearchLocalServiceUtil.getLayoutIds(
+				layout.getGroupId(), layout.isPrivateLayout(),
+				article.getArticleId());
 
 		if (hitLayoutIds.size() > 0) {
-			Long hitLayoutId = (Long)hitLayoutIds.get(0);
+			Long hitLayoutId = hitLayoutIds.get(0);
 
 			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),
@@ -306,13 +309,13 @@ public class RSSAction extends PortletAction {
 			XPath xpathSelector = DocumentHelper.createXPath(
 				"//dynamic-element[@name='" + contentField + "']");
 
-			List results = xpathSelector.selectNodes(doc);
+			List<Element> results = xpathSelector.selectNodes(doc);
 
 			if (results.size() == 0) {
 				return content;
 			}
 
-			Element el = (Element)results.get(0);
+			Element el = results.get(0);
 
 			String elType = el.attributeValue("type");
 
@@ -361,9 +364,9 @@ public class RSSAction extends PortletAction {
 			}
 		);
 
-		List links = JournalRSSUtil.getDLLinks(
+		List<SyndLink> links = JournalRSSUtil.getDLLinks(
 			themeDisplay.getURLPortal(), url);
-		List enclosures = JournalRSSUtil.getDLEnclosures(
+		List<SyndEnclosure> enclosures = JournalRSSUtil.getDLEnclosures(
 			themeDisplay.getURLPortal(), url);
 
 		syndEntry.setLinks(links);

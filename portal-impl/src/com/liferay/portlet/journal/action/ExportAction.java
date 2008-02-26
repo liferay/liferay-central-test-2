@@ -77,7 +77,6 @@ import com.liferay.util.servlet.ServletResponseUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
@@ -130,7 +129,8 @@ public class ExportAction extends Action {
 
 				ZipWriter zipWriter = new ZipWriter();
 
-				List journalContentSearches = new ArrayList();
+				List<JournalContentSearch> journalContentSearches =
+					new ArrayList<JournalContentSearch>();
 
 				insertDataImage(groupId, zipWriter);
 				insertDataCMSLayout(groupId, zipWriter, journalContentSearches);
@@ -263,18 +263,18 @@ public class ExportAction extends Action {
 	}
 
 	protected void insertDataCMSContent(
-			long groupId, ZipWriter zipWriter, List journalContentSearches)
+			long groupId, ZipWriter zipWriter,
+			List<JournalContentSearch> journalContentSearches)
 		throws Exception {
 
 		StringMaker sm = new StringMaker();
 
-		List igImages = new ArrayList();
+		List<IGImage> igImages = new ArrayList<IGImage>();
 
-		Iterator itr = IGFolderLocalServiceUtil.getFolders(groupId).iterator();
+		List<IGFolder> igFolders = IGFolderLocalServiceUtil.getFolders(
+			groupId);
 
-		while (itr.hasNext()) {
-			IGFolder folder = (IGFolder)itr.next();
-
+		for (IGFolder folder : igFolders) {
 			sm.append("insert into IGFolder (");
 			sm.append("folderId, groupId, companyId, userId, createDate, ");
 			sm.append("modifiedDate, parentFolderId, name");
@@ -299,11 +299,7 @@ public class ExportAction extends Action {
 
 		Collections.sort(igImages);
 
-		itr = igImages.iterator();
-
-		while (itr.hasNext()) {
-			IGImage image = (IGImage)itr.next();
-
+		for (IGImage image : igImages) {
 			sm.append("insert into IGImage (");
 			sm.append("imageId, companyId, userId, createDate, modifiedDate, ");
 			sm.append("folderId, description, smallImageId, largeImageId");
@@ -324,11 +320,10 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
-		itr = JournalArticleLocalServiceUtil.getArticles(groupId).iterator();
+		List<JournalArticle> articles =
+			JournalArticleLocalServiceUtil.getArticles(groupId);
 
-		while (itr.hasNext()) {
-			JournalArticle article = (JournalArticle)itr.next();
-
+		for (JournalArticle article : articles) {
 			if (article.isApproved() &&
 				JournalArticleLocalServiceUtil.isLatestVersion(
 					article.getGroupId(), article.getArticleId(),
@@ -378,12 +373,10 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
-		itr = JournalArticleImageLocalServiceUtil.getArticleImages(
-			groupId).iterator();
+		List<JournalArticleImage> articleImages =
+			JournalArticleImageLocalServiceUtil.getArticleImages(groupId);
 
-		while (itr.hasNext()) {
-			JournalArticleImage articleImage = (JournalArticleImage)itr.next();
-
+		for (JournalArticleImage articleImage : articleImages) {
 			sm.append("insert into JournalArticleImage (");
 			sm.append("articleImageId, groupId, articleId, version, elName, ");
 			sm.append("languageId, tempImage");
@@ -401,13 +394,10 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
-		itr = JournalArticleResourceLocalServiceUtil.getArticleResources(
-			groupId).iterator();
-
-		while (itr.hasNext()) {
-			JournalArticleResource articleResource =
-				(JournalArticleResource)itr.next();
-
+		List<JournalArticleResource> articleResources =
+			JournalArticleResourceLocalServiceUtil.getArticleResources(groupId);
+		
+		for (JournalArticleResource articleResource : articleResources) {
 			sm.append("insert into JournalArticleResource (");
 			sm.append("resourcePrimKey, groupId, articleId");
 			sm.append(") values (");
@@ -420,12 +410,7 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
-		itr = journalContentSearches.iterator();
-
-		while (itr.hasNext()) {
-			JournalContentSearch contentSearch =
-				(JournalContentSearch)itr.next();
-
+		for (JournalContentSearch contentSearch : journalContentSearches) {
 			sm.append("insert into JournalContentSearch (");
 			sm.append("contentSearchId, groupId, companyId, privateLayout, ");
 			sm.append("layoutId, portletId, articleId");
@@ -443,12 +428,10 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
-		itr = JournalStructureLocalServiceUtil.getStructures(
-			groupId).iterator();
+		List<JournalStructure> structures =
+			JournalStructureLocalServiceUtil.getStructures(groupId);
 
-		while (itr.hasNext()) {
-			JournalStructure structure = (JournalStructure)itr.next();
-
+		for (JournalStructure structure : structures) {
 			sm.append("insert into JournalStructure (");
 			sm.append("id_, groupId, companyId, userId, userName, ");
 			sm.append("createDate, modifiedDate, structureId, name, ");
@@ -473,11 +456,10 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
-		itr = JournalTemplateLocalServiceUtil.getTemplates(groupId).iterator();
+		List<JournalTemplate> templates =
+			JournalTemplateLocalServiceUtil.getTemplates(groupId);
 
-		while (itr.hasNext()) {
-			JournalTemplate template = (JournalTemplate)itr.next();
-
+		for (JournalTemplate template : templates) {
 			sm.append("insert into JournalTemplate (");
 			sm.append("id_, groupId, companyId, userId, userName, ");
 			sm.append("createDate, modifiedDate, templateId, structureId, ");
@@ -512,12 +494,14 @@ public class ExportAction extends Action {
 	}
 
 	protected void insertDataCMSLayout(
-			long groupId, ZipWriter zipWriter, List journalContentSearches)
+			long groupId, ZipWriter zipWriter,
+			List<JournalContentSearch> journalContentSearches)
 		throws Exception {
 
 		StringMaker sm = new StringMaker();
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(groupId, false);
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, false);
 
 		sm.append("update LayoutSet ");
 		sm.append("set themeId = 'liferayjedi_WAR_liferayjeditheme', ");
@@ -529,19 +513,11 @@ public class ExportAction extends Action {
 
 		Collections.sort(layouts, new LayoutComparator(true));
 
-		Iterator itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
-
+		for (Layout layout : layouts) {
 			getNewPrimaryKey(layout.getPlid());
 		}
 
-		itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
-
+		for (Layout layout : layouts) {
 			Properties props = layout.getTypeSettingsProperties();
 
 			long linkToPlid = GetterUtil.getLong(
@@ -586,20 +562,16 @@ public class ExportAction extends Action {
 
 		sm.append("\n");
 
-		itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
-
+		for (Layout layout : layouts) {
 			LayoutTypePortlet layoutType =
 				(LayoutTypePortlet)layout.getLayoutType();
 
-			List portletIds = layoutType.getPortletIds();
+			List<String> portletIds = layoutType.getPortletIds();
 
 			Collections.sort(portletIds);
 
 			for (int i = 0; i < portletIds.size(); i++) {
-				String portletId = (String)portletIds.get(i);
+				String portletId = portletIds.get(i);
 
 				try {
 					PortletPreferences portletPreferences =
@@ -693,11 +665,9 @@ public class ExportAction extends Action {
 		StringMaker sm1 = new StringMaker();
 		StringMaker sm2 = new StringMaker();
 
-		Iterator itr = ImageLocalServiceUtil.getImagesBySize(70000).iterator();
+		List<Image> images = ImageLocalServiceUtil.getImagesBySize(70000);
 
-		while (itr.hasNext()) {
-			Image image = (Image)itr.next();
-
+		for (Image image : images) {
 			long imageId = image.getImageId();
 
 			try {
