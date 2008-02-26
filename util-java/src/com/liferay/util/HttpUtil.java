@@ -54,12 +54,22 @@ public class HttpUtil {
 	public static final String ENCODING = "UTF-8";
 
 	public static String addParameter(String url, String name, String value) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(url);
+
 		if (url.indexOf(StringPool.QUESTION) == -1) {
-			return url + StringPool.QUESTION + name + StringPool.EQUAL + value;
+			sm.append(StringPool.QUESTION);
 		}
 		else {
-			return url + StringPool.AMPERSAND + name + StringPool.EQUAL + value;
+			sm.append(StringPool.AMPERSAND);
 		}
+
+		sm.append(name);
+		sm.append(StringPool.EQUAL);
+		sm.append(value);
+
+		return sm.toString();
 	}
 
 	public static String decodeURL(String url) {

@@ -1237,9 +1237,8 @@ public class ServicePreAction extends Action {
 			themeDisplay.setShowPageSettingsIcon(false);
 		}
 
-		themeDisplay.setURLSignIn(mainPath + "/portal/login");
-
 		themeDisplay.setURLPortal(themeDisplay.getURLHome());
+		themeDisplay.setURLSignIn(mainPath + "/portal/login");
 		themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
 		PortletURL updateManagerURL = new PortletURLImpl(

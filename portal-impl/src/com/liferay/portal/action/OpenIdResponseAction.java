@@ -144,12 +144,12 @@ public class OpenIdResponseAction extends Action {
 			birthdayDay, birthdayYear, jobTitle, organizationIds, sendEmail);
 	}
 
-	protected String getFirstValue(List values) {
+	protected String getFirstValue(List<String> values) {
 		if ((values == null) || (values.size() < 1)) {
 			return null;
 		}
 
-		return (String)values.get(0);
+		return values.get(0);
 	}
 
 	protected User readResponse(

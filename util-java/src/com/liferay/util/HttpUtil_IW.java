@@ -33,6 +33,11 @@ public class HttpUtil_IW {
 		return _instance;
 	}
 
+	public java.lang.String addParameter(java.lang.String url,
+		java.lang.String name, java.lang.String value) {
+		return HttpUtil.addParameter(url, name, value);
+	}
+
 	public java.lang.String decodeURL(java.lang.String url) {
 		return HttpUtil.decodeURL(url);
 	}

@@ -46,16 +46,16 @@
 			secure = true;
 		}
 
+		String redirect = ParamUtil.getString(renderRequest, "redirect");
 		String login = LoginAction.getLogin(request, "login", company);
 		String password = StringPool.BLANK;
 		boolean rememberMe = ParamUtil.getBoolean(request, "rememberMe");
-		String redirect = ParamUtil.getString(renderRequest, "redirect");
 		%>
 
 		<form action="<portlet:actionURL secure="<%= secure %>"><portlet:param name="struts_action" value="/login/view" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.UPDATE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 		<input name="save_last_path" type="hidden" value="0" />
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= Html.escape(redirect) %>" />
 		<input name="<portlet:namespace />rememberMe" type="hidden" value="<%= rememberMe %>" />
-		<input name="<portlet:namespace/>redirect" type="hidden" value="<%= Html.escape(redirect) %>" />
 
 		<liferay-ui:error exception="<%= AuthException.class %>" message="authentication-failed" />
 		<liferay-ui:error exception="<%= CookieNotSupportedException.class %>" message="authentication-failed-please-enable-browser-cookies" />

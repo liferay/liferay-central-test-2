@@ -70,6 +70,12 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_REDIRECT));
 
+	public static final String AUTH_LOGIN_PORTLET_NAME =
+		PropsUtil.get(PropsUtil.AUTH_LOGIN_PORTLET_NAME);
+
+	public static final String AUTH_LOGIN_URL =
+		PropsUtil.get(PropsUtil.AUTH_LOGIN_URL);
+
 	public static final boolean AUTH_PIPELINE_ENABLE_LIFERAY_CHECK =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK));

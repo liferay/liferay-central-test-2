@@ -42,7 +42,6 @@ import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestFactory;
@@ -117,29 +116,22 @@ public class LayoutAction extends Action {
 				(Layout)req.getAttribute(WebKeys.REQUESTED_LAYOUT);
 
 			if (requestedLayout != null) {
-				String originalURL = PortalUtil.getLayoutURL(
+				String redirectParam = "redirect";
+				
+				if (Validator.isNotNull(PropsValues.AUTH_LOGIN_PORTLET_NAME) &&
+					Validator.isNotNull(PropsValues.AUTH_LOGIN_URL)) {
+
+					redirectParam =
+						PortalUtil.getPortletNamespace(
+							PropsValues.AUTH_LOGIN_PORTLET_NAME) +
+						redirectParam;
+				}
+
+				String url = PortalUtil.getLayoutURL(
 					requestedLayout, themeDisplay);
 
 				String redirect = HttpUtil.addParameter(
-						themeDisplay.getURLSignIn(), "redirect", originalURL);
-
-				String loginPortletName =
-					PropsUtil.get(PropsUtil.AUTH_LOGIN_PORTLET_NAME);
-
-				String loginURL =
-					PropsUtil.get(PropsUtil.AUTH_LOGIN_URL);
-
-				if (Validator.isNotNull(loginPortletName) &&
-						Validator.isNotNull(loginURL)) {
-
-					String redirectParam =
-						PortalUtil.getPortletNamespace(loginPortletName) +
-						"redirect";
-
-					redirect = HttpUtil.addParameter(
-						themeDisplay.getURLSignIn(), redirectParam,
-						originalURL);
-				}
+					themeDisplay.getURLSignIn(), redirectParam, url);
 
 				if (_log.isDebugEnabled()) {
 					_log.debug("Redirect requested layout to " + redirect);

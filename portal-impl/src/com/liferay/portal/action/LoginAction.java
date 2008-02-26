@@ -53,7 +53,6 @@ import com.liferay.portal.struts.LastPath;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
@@ -431,17 +430,14 @@ public class LoginAction extends Action {
 			}
 		}
 		else {
-			String loginURL = PropsUtil.get(PropsUtil.AUTH_LOGIN_URL);
-
-			if (Validator.isNotNull(loginURL)) {
-				res.sendRedirect(loginURL);
+			if (Validator.isNotNull(PropsValues.AUTH_LOGIN_URL)) {
+				res.sendRedirect(PropsValues.AUTH_LOGIN_URL);
 
 				return null;
 			}
 			else {
 				return mapping.findForward("portal.login");
 			}
-
 		}
 	}
 
