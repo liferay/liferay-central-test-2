@@ -140,7 +140,14 @@ public class ViewAction extends PortletAction {
 			res.sendRedirect(themeDisplay.getPathMain() + "/portal/protected");
 		}
 		else {
-			res.sendRedirect(themeDisplay.getPathMain());
+			String redirect = ParamUtil.getString(req, "redirect");
+
+			if (Validator.isNotNull(redirect)) {
+				res.sendRedirect(redirect);
+			}
+			else {
+				res.sendRedirect(themeDisplay.getPathMain());
+			}
 		}
 	}
 

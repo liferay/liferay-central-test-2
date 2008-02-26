@@ -207,7 +207,7 @@ public class PortletAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)httpReq.getAttribute(WebKeys.THEME_DISPLAY);
 
-			res.sendRedirect(themeDisplay.getPathMain() + "/portal/login");
+			res.sendRedirect(themeDisplay.getURLSignIn());
 
 			return true;
 		}

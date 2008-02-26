@@ -50,6 +50,7 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.HttpUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -178,17 +179,20 @@ public class AddUserAction extends PortletAction {
 
 		// Send redirect
 
-		String redirect = themeDisplay.getPathMain() + "/portal/login?login=";
+		String login = null;
 
 		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
-			redirect += user.getUserId();
+			login = String.valueOf(user.getUserId());
 		}
 		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN)) {
-			redirect += user.getScreenName();
+			login = user.getScreenName();
 		}
 		else {
-			redirect += user.getEmailAddress();
+			login = user.getEmailAddress();
 		}
+
+		String redirect = HttpUtil.addParameter(
+			themeDisplay.getURLSignIn(), "login", login);
 
 		res.sendRedirect(redirect);
 	}

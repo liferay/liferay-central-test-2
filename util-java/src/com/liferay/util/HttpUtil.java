@@ -53,6 +53,15 @@ public class HttpUtil {
 
 	public static final String ENCODING = "UTF-8";
 
+	public static String addParameter(String url, String name, String value) {
+		if (url.indexOf(StringPool.QUESTION) == -1) {
+			return url + StringPool.QUESTION + name + StringPool.EQUAL + value;
+		}
+		else {
+			return url + StringPool.AMPERSAND + name + StringPool.EQUAL + value;
+		}
+	}
+
 	public static String decodeURL(String url) {
 		return decodeURL(url, false);
 	}

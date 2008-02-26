@@ -109,8 +109,7 @@ public class OpenIdResponseAction extends Action {
 		}
 
 		String loginURL =
-			PortalUtil.getPortalURL(req) + themeDisplay.getPathMain() +
-				"/portal/login";
+			PortalUtil.getPortalURL(req) + themeDisplay.getURLSignIn();
 
 		res.sendRedirect(loginURL);
 
