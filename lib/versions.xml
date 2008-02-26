@@ -1317,6 +1317,30 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/jackrabbit-spi.jar</file-name>
+		<version>1.4.0</version>
+		<project-name>Jackrabbit</project-name>
+		<project-url>http://jackrabbit.apache.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/jackrabbit-spi-commons.jar</file-name>
+		<version>1.4.0</version>
+		<project-name>Jackrabbit</project-name>
+		<project-url>http://jackrabbit.apache.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+				<copyright-notice>Copyright (c) 2007 The Apache Software Foundation</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jackrabbit-text-extractors.jar</file-name>
 		<version>1.4.0</version>
 		<project-name>Jackrabbit</project-name>
