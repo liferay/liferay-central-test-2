@@ -58,6 +58,10 @@ import com.liferay.portlet.RenderRequestFactory;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseFactory;
 import com.liferay.portlet.RenderResponseImpl;
+import com.liferay.portlet.ResourceRequestFactory;
+import com.liferay.portlet.ResourceRequestImpl;
+import com.liferay.portlet.ResourceResponseFactory;
+import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -73,6 +77,7 @@ import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.WindowState;
 
@@ -276,6 +281,8 @@ public class LayoutAction extends Action {
 					if (portlet.isActionURLRedirect()) {
 						redirectActionURL(
 							req, res, actionResponseImpl, portlet);
+
+						return null;
 					}
 				}
 			}
@@ -283,22 +290,29 @@ public class LayoutAction extends Action {
 				processPortletRequest(req, res, PortletRequest.RENDER_PHASE);
 			}
 
-			if (layout != null) {
+			if (themeDisplay.isLifecycleResource()) {
+				processPortletRequest(req, res, PortletRequest.RESOURCE_PHASE);
 
-				// Include layout content before the page loads because
-				// portlets on the page can set the page title and page
-				// subtitle
-
-				includeLayoutContent(req, res, themeDisplay, layout);
-
-				if (themeDisplay.isStateExclusive()) {
-					serveExclusiveResource(req, res, themeDisplay);
-
-					return null;
-				}
+				return null;
 			}
+			else {
+				if (layout != null) {
 
-			return mapping.findForward("portal.layout");
+					// Include layout content before the page loads because
+					// portlets on the page can set the page title and page
+					// subtitle
+
+					includeLayoutContent(req, res, themeDisplay, layout);
+
+					if (themeDisplay.isStateExclusive()) {
+						serveExclusiveResource(req, res, themeDisplay);
+
+						return null;
+					}
+				}
+
+				return mapping.findForward("portal.layout");
+			}
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
@@ -306,13 +320,29 @@ public class LayoutAction extends Action {
 			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
 		finally {
-			try {
-				if (themeDisplay.isLifecycleAction()) {
-					ActionRequestImpl actionRequestImpl =
-						(ActionRequestImpl)req.getAttribute(
-							JavaConstants.JAVAX_PORTLET_REQUEST);
+			PortletRequest portletReq = (PortletRequest)req.getAttribute(
+				JavaConstants.JAVAX_PORTLET_REQUEST);
 
-					ActionRequestFactory.recycle(actionRequestImpl);
+			try {
+				if (portletReq != null) {
+					if (themeDisplay.isLifecycleAction()) {
+						ActionRequestImpl actionRequestImpl =
+							(ActionRequestImpl)portletReq;
+
+						ActionRequestFactory.recycle(actionRequestImpl);
+					}
+					else if (themeDisplay.isLifecycleRender()) {
+						RenderRequestImpl renderRequestImpl =
+							(RenderRequestImpl)portletReq;
+
+						RenderRequestFactory.recycle(renderRequestImpl);
+					}
+					else if (themeDisplay.isLifecycleResource()) {
+						ResourceRequestImpl resourceRequestImpl =
+							(ResourceRequestImpl)portletReq;
+
+						ResourceRequestFactory.recycle(resourceRequestImpl);
+					}
 				}
 			}
 			catch (Exception e) {
@@ -321,13 +351,29 @@ public class LayoutAction extends Action {
 
 			req.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
 
-			try {
-				if (themeDisplay.isLifecycleAction()) {
-					ActionResponseImpl actionResponseImpl =
-						(ActionResponseImpl)req.getAttribute(
-							JavaConstants.JAVAX_PORTLET_RESPONSE);
+			PortletResponse portletRes = (PortletResponse)req.getAttribute(
+				JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-					ActionResponseFactory.recycle(actionResponseImpl);
+			try {
+				if (portletRes != null) {
+					if (themeDisplay.isLifecycleAction()) {
+						ActionResponseImpl actionResponseImpl =
+							(ActionResponseImpl)portletRes;
+
+						ActionResponseFactory.recycle(actionResponseImpl);
+					}
+					else if (themeDisplay.isLifecycleRender()) {
+						RenderResponseImpl renderResponseImpl =
+							(RenderResponseImpl)portletRes;
+
+						RenderResponseFactory.recycle(renderResponseImpl);
+					}
+					else if (themeDisplay.isLifecycleResource()) {
+						ResourceResponseImpl resourceResponseImpl =
+							(ResourceResponseImpl)portletRes;
+
+						ResourceResponseFactory.recycle(resourceResponseImpl);
+					}
 				}
 			}
 			catch (Exception e) {
@@ -433,12 +479,31 @@ public class LayoutAction extends Action {
 				}
 			}
 		}
-		else {
+		else if (lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+				 lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
 			PortalUtil.updateWindowState(
 				portletId, user, layout, windowState, req);
 
 			PortalUtil.updatePortletMode(
 				portletId, user, layout, portletMode, req);
+		}
+
+		if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			ResourceRequestImpl resourceRequestImpl =
+				ResourceRequestFactory.create(
+					req, portlet, invokerPortlet, portletCtx, windowState,
+					portletMode, portletPreferences, layout.getPlid());
+
+			ResourceResponseImpl resourceResponseImpl =
+				ResourceResponseFactory.create(
+					resourceRequestImpl, res, portletId, companyId);
+
+			resourceRequestImpl.defineObjects(
+				portletConfig, resourceResponseImpl);
+
+			invokerPortlet.serveResource(
+				resourceRequestImpl, resourceResponseImpl);
 		}
 
 		return portlet;

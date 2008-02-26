@@ -83,17 +83,39 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 	}
 
 	public void forward(PortletRequest req, PortletResponse res)
-		throws IllegalStateException, IOException {
+		throws IllegalStateException, IOException, PortletException {
+
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+
+		if (httpRes.isCommitted()) {
+			throw new IllegalStateException("Response is already committed");
+		}
+
+		dispatch(req, res, false, false);
 	}
 
 	public void include(PortletRequest req, PortletResponse res)
 		throws IOException, PortletException {
 
-		include(req, res, false);
+		dispatch(req, res, false, true);
 	}
 
 	public void include(
 			PortletRequest req, PortletResponse res, boolean strutsURLEncoder)
+		throws IOException, PortletException {
+
+		dispatch(req, res, strutsURLEncoder, true);
+	}
+
+	public void include(RenderRequest req, RenderResponse res)
+		throws IOException, PortletException {
+
+		dispatch(req, res, false, true);
+	}
+
+	protected void dispatch(
+			PortletRequest req, PortletResponse res, boolean strutsURLEncoder,
+			boolean include)
 		throws IOException, PortletException {
 
 		try {
@@ -249,19 +271,18 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 				resImpl.setURLEncoder(strutsURLEncoderObj);
 			}
 
-			_rd.include(portletServletReq, portletServletRes);
+			if (include) {
+				_rd.include(portletServletReq, portletServletRes);
+			}
+			else {
+				_rd.forward(portletServletReq, portletServletRes);
+			}
 		}
 		catch (ServletException se) {
 			_log.error(se, se);
 
 			throw new PortletException(se);
 		}
-	}
-
-	public void include(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
-
-		include(req, res, false);
 	}
 
 	private static Log _log =

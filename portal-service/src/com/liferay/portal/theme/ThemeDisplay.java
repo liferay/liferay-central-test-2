@@ -386,6 +386,14 @@ public class ThemeDisplay implements Serializable {
 		_secure = secure;
 	}
 
+	public String getLifecycle() {
+		return _lifecycle;
+	}
+
+	public void setLifecycle(String lifecycle) {
+		_lifecycle = lifecycle;
+	}
+
 	public boolean isLifecycleAction() {
 		return _lifecycleAction;
 	}
@@ -865,6 +873,7 @@ public class ThemeDisplay implements Serializable {
 		_serverName = StringPool.BLANK;
 		_serverPort = 0;
 		_secure = false;
+		_lifecycle = StringPool.BLANK;
 		_lifecycleAction = false;
 		_lifecycleRender = false;
 		_lifecycleResource = false;
@@ -953,6 +962,7 @@ public class ThemeDisplay implements Serializable {
 	private String _serverName;
 	private int _serverPort;
 	private boolean _secure;
+	private String _lifecycle;
 	private boolean _lifecycleAction;
 	private boolean _lifecycleRender;
 	private boolean _lifecycleResource;

@@ -79,6 +79,7 @@ import com.liferay.portlet.PortletBagPool;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
+import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
@@ -491,13 +492,8 @@ public class PortalUtil {
 	}
 
 	public static HttpServletRequest getHttpServletRequest(PortletRequest req) {
-		if (req instanceof ActionRequestImpl) {
-			ActionRequestImpl reqImpl = (ActionRequestImpl)req;
-
-			return reqImpl.getHttpServletRequest();
-		}
-		else if (req instanceof RenderRequestImpl) {
-			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
+		if (req instanceof PortletRequestImpl) {
+			PortletRequestImpl reqImpl = (PortletRequestImpl)req;
 
 			return reqImpl.getHttpServletRequest();
 		}

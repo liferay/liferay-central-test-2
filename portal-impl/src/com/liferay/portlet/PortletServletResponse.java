@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import java.util.Locale;
 
 import javax.portlet.ActionResponse;
+import javax.portlet.MimeResponse;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderResponse;
 
@@ -103,7 +104,7 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			return false;
 		}
 		else {
-			RenderResponse res = (RenderResponse)_portletResponse;
+			MimeResponse res = (MimeResponse)_portletResponse;
 
 			return res.isCommitted();
 		}

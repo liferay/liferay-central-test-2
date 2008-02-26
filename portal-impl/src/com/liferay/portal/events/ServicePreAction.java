@@ -1054,6 +1054,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setServerName(req.getServerName());
 		themeDisplay.setServerPort(req.getServerPort());
 		themeDisplay.setSecure(req.isSecure());
+		themeDisplay.setLifecycle(lifecycle);
 		themeDisplay.setLifecycleAction(lifecycle.equals("1"));
 		themeDisplay.setLifecycleRender(lifecycle.equals("0"));
 		themeDisplay.setLifecycleResource(lifecycle.equals("2"));
