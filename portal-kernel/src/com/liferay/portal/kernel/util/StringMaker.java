@@ -71,7 +71,7 @@ public class StringMaker {
 	}
 
 	public StringMaker() {
-		_sb = new StringBuffer(defaultInitSize);
+		_sb = new StringBuilder(defaultInitSize);
 
 		if (collect) {
 			_getInfo(new Throwable());
@@ -79,7 +79,7 @@ public class StringMaker {
 	}
 
 	public StringMaker(int capacity) throws NegativeArraySizeException {
-		_sb = new StringBuffer(capacity);
+		_sb = new StringBuilder(capacity);
 
 		if (collect) {
 			_getInfo(new Throwable());
@@ -91,7 +91,7 @@ public class StringMaker {
 			throw new NullPointerException();
 		}
 
-		_sb = new StringBuffer(s.length() + defaultInitSize);
+		_sb = new StringBuilder(s.length() + defaultInitSize);
 
 		if (collect) {
 			_getInfo(new Throwable());
@@ -100,9 +100,9 @@ public class StringMaker {
 		_sb.append(s);
 	}
 
-	public StringMaker(StringBuffer sb) throws NullPointerException {
+	public StringMaker(StringBuilder sb) throws NullPointerException {
 		if (sb == null) {
-			_sb = new StringBuffer(defaultInitSize);
+			_sb = new StringBuilder(defaultInitSize);
 		}
 		else {
 			_sb = sb;
@@ -125,7 +125,7 @@ public class StringMaker {
 		return this;
 	}
 
-	public StringMaker append(StringBuffer sb) {
+	public StringMaker append(StringBuilder sb) {
 		sb.append(sb);
 
 		return this;
@@ -207,7 +207,7 @@ public class StringMaker {
 		_sb.getChars(srcBegin, srcEnd, dst, dstBegin);
 	}
 
-	public StringBuffer getStringBuffer() {
+	public StringBuilder getStringBuilder() {
 		return _sb;
 	}
 
@@ -341,7 +341,7 @@ public class StringMaker {
 		}
 	}
 
-	private StringBuffer _sb;
+	private StringBuilder _sb;
 	private int _initSize;
 	private String _caller;
 
