@@ -45,10 +45,11 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public int getNumOfColumns();
 
-	public List getAllPortlets(String columnId) throws SystemException;
+	public List<Portlet> getAllPortlets(String columnId) throws SystemException;
 
-	public List addStaticPortlets(
-			List portlets, List startPortlets, List endPortlets)
+	public List<Portlet> addStaticPortlets(
+			List<Portlet> portlets, List<Portlet> startPortlets,
+			List<Portlet> endPortlets)
 		throws SystemException;
 
 	public String addPortletId(long userId, String portletId);
@@ -70,9 +71,9 @@ public interface LayoutTypePortlet extends LayoutType {
 		long userId, String[] portletIds, String columnId,
 		boolean checkPermission);
 
-	public List getPortlets() throws SystemException;
+	public List<Portlet> getPortlets() throws SystemException;
 
-	public List getPortletIds();
+	public List<String> getPortletIds();
 
 	public boolean hasPortletId(String portletId);
 
@@ -86,9 +87,10 @@ public interface LayoutTypePortlet extends LayoutType {
 	public void setPortletIds(String columnId, String portletIds);
 
 	public void reorganizeNestedColumns(
-		String portletId, List newColumns, List oldColumns);
+		String portletId, List<String> newColumns, List<String> oldColumns);
 
-	public void reorganizePortlets(List newColumns, List oldColumns);
+	public void reorganizePortlets(
+		List<String> newColumns, List<String> oldColumns);
 
 	public String getStateMax();
 
@@ -103,12 +105,6 @@ public interface LayoutTypePortlet extends LayoutType {
 	public boolean hasStateMaxPortletId(String portletId);
 
 	public void removeStateMaxPortletId(String portletId);
-
-	public String getStateMaxPrevious();
-
-	public void setStateMaxPrevious(String stateMaxPrevious);
-
-	public void removeStateMaxPrevious();
 
 	public String getStateMin();
 

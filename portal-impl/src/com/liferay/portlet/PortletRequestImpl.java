@@ -29,7 +29,6 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
@@ -39,7 +38,9 @@ import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.servlet.SharedSessionUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
@@ -250,6 +251,10 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 	public Enumeration<Locale> getLocales() {
 		return _req.getLocales();
+	}
+
+	public String getMethod() {
+		return _req.getMethod();
 	}
 
 	public String getParameter(String name) {
@@ -531,18 +536,18 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		boolean portletFocus = false;
 
 		if (_portletName.equals(req.getParameter("p_p_id"))) {
+			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+				WebKeys.THEME_DISPLAY);
 
 			// Request was targeted to this portlet
 
-			String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
-
-			if (lifecycle.equals("0")) {
+			if (themeDisplay.isLifecycleRender()) {
 
 				// Request was triggered by a render URL
 
 			   portletFocus = true;
 			}
-			else if (lifecycle.equals("1") &&
+			else if (themeDisplay.isLifecycleAction() &&
 					 getLifecycle().equals(PortletRequest.ACTION_PHASE)) {
 
 				// Request was triggered by an action URL and is being processed

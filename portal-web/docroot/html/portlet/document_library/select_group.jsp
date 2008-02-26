@@ -31,8 +31,6 @@
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(LiferayWindowState.POP_UP);
-
 portletURL.setParameter("struts_action", "/document_library/select_group");
 
 GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);

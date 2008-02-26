@@ -225,6 +225,11 @@ public class InvokerPortlet implements Portlet {
 		_destroyable = false;
 	}
 
+	public ClassLoader getPortletClassLoader() {
+		return (ClassLoader)_portletCtx.getAttribute(
+			PortletServlet.PORTLET_CLASS_LOADER);
+	}
+
 	public PortletConfigImpl getPortletConfig() {
 		return _portletConfig;
 	}
@@ -411,9 +416,34 @@ public class InvokerPortlet implements Portlet {
 		}
 	}
 
-	protected ClassLoader getPortletClassLoader() {
-		return (ClassLoader)_portletCtx.getAttribute(
-			PortletServlet.PORTLET_CLASS_LOADER);
+	public void setPortletFilters() throws PortletException {
+		Map<String, com.liferay.portal.model.PortletFilter> portletFilters =
+			_portletModel.getPortletFilters();
+
+		for (Map.Entry<String, com.liferay.portal.model.PortletFilter> entry :
+				portletFilters.entrySet()) {
+
+			com.liferay.portal.model.PortletFilter portletFilterModel =
+				entry.getValue();
+
+			PortletFilter portletFilter = PortletFilterFactory.create(
+				portletFilterModel, _portletCtx);
+
+			Set<String> lifecycles = portletFilterModel.getLifecycles();
+
+			if (lifecycles.contains(PortletRequest.ACTION_PHASE)) {
+				_actionFilters.add((ActionFilter)portletFilter);
+			}
+			else if (lifecycles.contains(PortletRequest.EVENT_PHASE)) {
+				_eventFilters.add((EventFilter)portletFilter);
+			}
+			else if (lifecycles.contains(PortletRequest.RENDER_PHASE)) {
+				_renderFilters.add((RenderFilter)portletFilter);
+			}
+			else if (lifecycles.contains(PortletRequest.RESOURCE_PHASE)) {
+				_resourceFilters.add((ResourceFilter)portletFilter);
+			}
+		}
 	}
 
 	protected void invoke(
@@ -539,36 +569,6 @@ public class InvokerPortlet implements Portlet {
 
 					_expCache = new Integer(GetterUtil.getInteger(expCache[0]));
 				}
-			}
-		}
-	}
-
-	protected void setPortletFilters() throws PortletException {
-		Map<String, com.liferay.portal.model.PortletFilter> portletFilters =
-			_portletModel.getPortletFilters();
-
-		for (Map.Entry<String, com.liferay.portal.model.PortletFilter> entry :
-				portletFilters.entrySet()) {
-
-			com.liferay.portal.model.PortletFilter portletFilterModel =
-				entry.getValue();
-
-			PortletFilter portletFilter = PortletFilterFactory.create(
-				portletFilterModel, _portletCtx);
-
-			Set<String> lifecycles = portletFilterModel.getLifecycles();
-
-			if (lifecycles.contains(PortletRequest.ACTION_PHASE)) {
-				_actionFilters.add((ActionFilter)portletFilter);
-			}
-			else if (lifecycles.contains(PortletRequest.EVENT_PHASE)) {
-				_eventFilters.add((EventFilter)portletFilter);
-			}
-			else if (lifecycles.contains(PortletRequest.RENDER_PHASE)) {
-				_renderFilters.add((RenderFilter)portletFilter);
-			}
-			else if (lifecycles.contains(PortletRequest.RESOURCE_PHASE)) {
-				_resourceFilters.add((ResourceFilter)portletFilter);
 			}
 		}
 	}

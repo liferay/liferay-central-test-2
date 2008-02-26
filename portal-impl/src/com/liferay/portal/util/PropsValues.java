@@ -373,14 +373,6 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_PARALLEL_RENDER_ENABLE));
 
-	public static final boolean LAYOUT_REMEMBER_REQUEST_WINDOW_STATE_MAXIMIZED =
-		GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
-			LAYOUT_REMEMBER_REQUEST_WINDOW_STATE_MAXIMIZED));
-
-	public static final boolean LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED =
-		GetterUtil.getBoolean(PropsUtil.get(PropsUtil.
-			LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED));
-
 	public static final boolean LAYOUT_SHOW_HTTP_STATUS = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LAYOUT_SHOW_HTTP_STATUS));
 

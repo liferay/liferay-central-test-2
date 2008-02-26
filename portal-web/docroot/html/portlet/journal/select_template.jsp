@@ -31,8 +31,6 @@
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(LiferayWindowState.POP_UP);
-
 portletURL.setParameter("struts_action", "/journal/select_template");
 
 TemplateSearch searchContainer = new TemplateSearch(renderRequest, portletURL);

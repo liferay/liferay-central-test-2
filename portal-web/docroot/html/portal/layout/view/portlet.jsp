@@ -24,22 +24,10 @@
 
 <%@ include file="/html/portal/init.jsp" %>
 
-<c:if test="<%= PropsValues.TAGS_COMPILER_ENABLED %>">
-	<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
-</c:if>
-
 <%
-boolean layoutMaximized = layoutTypePortlet.hasStateMax();
+if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
+	String ppid = ParamUtil.getString(request, "p_p_id");
 
-if (!layoutMaximized) {
-	String content = LayoutTemplateLocalUtil.getContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
-%>
-
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
-
-<%
-}
-else {
 	String content = null;
 
 	if (themeDisplay.isStateExclusive()) {
@@ -49,16 +37,30 @@ else {
 		content = LayoutTemplateLocalUtil.getContent("pop_up", true, theme.getThemeId());
 	}
 	else {
+		ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
+
 		content = LayoutTemplateLocalUtil.getContent("max", true, theme.getThemeId());
 	}
 %>
 
-	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, StringUtil.split(layoutTypePortlet.getStateMax())[0], content) %>
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, content) %>
+
+<%
+}
+else {
+	String content = LayoutTemplateLocalUtil.getContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
+%>
+
+	<c:if test="<%= PropsValues.TAGS_COMPILER_ENABLED %>">
+		<liferay-portlet:runtime portletName="<%= PortletKeys.TAGS_COMPILER %>" />
+	</c:if>
+
+	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
+
+	<c:if test="<%= PropsValues.PORTLET_CSS_ENABLED && themeDisplay.isSignedIn() %>">
+		<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
+	</c:if>
 
 <%
 }
 %>
-
-<c:if test="<%= PropsValues.PORTLET_CSS_ENABLED && themeDisplay.isSignedIn() && !layoutMaximized %>">
-	<liferay-portlet:runtime portletName="<%= PortletKeys.PORTLET_CSS %>" />
-</c:if>

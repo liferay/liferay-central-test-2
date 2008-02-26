@@ -63,6 +63,7 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSecurityException;
+import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
@@ -575,6 +576,9 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 			else if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 				sm.append(processValue(key, "0"));
 			}
+			else if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				sm.append(processValue(key, "2"));
+			}
 
 			sm.append(StringPool.AMPERSAND);
 		}
@@ -593,6 +597,15 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 				sm.append("p_p_mode");
 				sm.append(StringPool.EQUAL);
 				sm.append(processValue(key, _portletMode.toString()));
+				sm.append(StringPool.AMPERSAND);
+			}
+		}
+
+		if (!isParameterIncludedInPath("p_p_resource_id")) {
+			if (_resourceID != null) {
+				sm.append("p_p_resource_id");
+				sm.append(StringPool.EQUAL);
+				sm.append(processValue(key, _resourceID));
 				sm.append(StringPool.AMPERSAND);
 			}
 		}
@@ -744,7 +757,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 	private String _layoutFriendlyURL;
 	private String _lifecycle;
 	private boolean _anchor = true;
-	private String _cacheability;
+	private String _cacheability = ResourceURL.PAGE;
 	private long _doAsUserId;
 	private boolean _encrypt;
 	private Set<String> _parametersIncludedInPath;

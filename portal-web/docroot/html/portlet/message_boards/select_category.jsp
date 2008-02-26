@@ -43,8 +43,6 @@ long categoryId = BeanParamUtil.getLong(category, request, "categoryId", MBCateg
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(LiferayWindowState.POP_UP);
-
 portletURL.setParameter("struts_action", "/message_boards/select_category");
 portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
@@ -76,8 +74,6 @@ for (int i = 0; i < results.size(); i++) {
 	ResultRow row = new ResultRow(curCategory, curCategory.getCategoryId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/message_boards/select_category");
 	rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));

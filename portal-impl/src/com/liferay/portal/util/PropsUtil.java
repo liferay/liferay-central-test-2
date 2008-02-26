@@ -621,10 +621,6 @@ public class PropsUtil {
 
 	public static final String LAYOUT_TABS_PER_ROW = "layout.tabs.per.row";
 
-	public static final String LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED = "layout.remember.session.window.state.maximized";
-
-	public static final String LAYOUT_REMEMBER_REQUEST_WINDOW_STATE_MAXIMIZED = "layout.remember.request.window.state.maximized";
-
 	public static final String LAYOUT_GUEST_SHOW_MAX_ICON = "layout.guest.show.max.icon";
 
 	public static final String LAYOUT_GUEST_SHOW_MIN_ICON = "layout.guest.show.min.icon";

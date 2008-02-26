@@ -128,13 +128,6 @@ List layoutList = layoutView.getList();
 
 PortletURL portletURL = renderResponse.createActionURL();
 
-if (themeDisplay.isStatePopUp()) {
-	portletURL.setWindowState(LiferayWindowState.POP_UP);
-}
-else {
-	portletURL.setWindowState(WindowState.MAXIMIZED);
-}
-
 portletURL.setParameter("struts_action", "/communities/edit_pages");
 portletURL.setParameter("groupId", String.valueOf(liveGroupId));
 portletURL.setParameter("private", String.valueOf(privateLayout));

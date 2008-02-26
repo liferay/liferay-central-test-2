@@ -147,15 +147,15 @@ public class StrutsUtil {
 		}
 	}
 
-	public static Map removeStrutsAttributes(
+	public static Map<String, Object> removeStrutsAttributes(
 		PortletContext portletContext, PortletRequest req) {
 
-		Map strutsAttributes = new HashMap();
+		Map<String, Object> strutsAttributes = new HashMap<String, Object>();
 
-		Enumeration enu = req.getAttributeNames();
+		Enumeration<String> enu = req.getAttributeNames();
 
 		while (enu.hasMoreElements()) {
-			String attributeName = (String)enu.nextElement();
+			String attributeName = enu.nextElement();
 
 			if (attributeName.startsWith(STRUTS_PACKAGE)) {
 				strutsAttributes.put(
@@ -163,10 +163,10 @@ public class StrutsUtil {
 			}
 		}
 
-		Iterator itr = strutsAttributes.keySet().iterator();
+		Iterator<String> itr = strutsAttributes.keySet().iterator();
 
 		while (itr.hasNext()) {
-			String attributeName = (String)itr.next();
+			String attributeName = itr.next();
 
 			req.setAttribute(attributeName, null);
 		}
@@ -179,14 +179,10 @@ public class StrutsUtil {
 	}
 
 	public static void setStrutsAttributes(
-		PortletRequest req, Map strutsAttributes) {
+		PortletRequest req, Map<String, Object> strutsAttributes) {
 
-		Iterator itr = strutsAttributes.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String key = (String)entry.getKey();
+		for (Map.Entry<String, Object> entry : strutsAttributes.entrySet()) {
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			req.setAttribute(key, value);

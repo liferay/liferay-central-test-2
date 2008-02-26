@@ -71,8 +71,6 @@ public class LayoutTypePortletImpl
 
 	public static final String STATE_MAX = "state-max";
 
-	public static final String STATE_MAX_PREVIOUS = "state-max-previous";
-
 	public static final String STATE_MIN = "state-min";
 
 	public static final String MODE_ABOUT = "mode-about";
@@ -111,7 +109,7 @@ public class LayoutTypePortletImpl
 			layoutTemplate = new LayoutTemplateImpl(
 				StringPool.BLANK, StringPool.BLANK);
 
-			List columns = new ArrayList();
+			List<String> columns = new ArrayList<String>();
 
 			for (int i = 1; i <= 10; i++) {
 				columns.add("column-" + i);
@@ -185,8 +183,8 @@ public class LayoutTypePortletImpl
 			LayoutTemplateLocalUtil.getLayoutTemplate(
 				newLayoutTemplateId, false, themeId);
 
-		List oldColumns = oldLayoutTemplate.getColumns();
-		List newColumns = newLayoutTemplate.getColumns();
+		List<String> oldColumns = oldLayoutTemplate.getColumns();
+		List<String> newColumns = newLayoutTemplate.getColumns();
 
 		reorganizePortlets(newColumns, oldColumns);
 	}
@@ -195,13 +193,15 @@ public class LayoutTypePortletImpl
 		return getLayoutTemplate().getColumns().size();
 	}
 
-	public List getAllPortlets(String columnId) throws SystemException {
+	public List<Portlet> getAllPortlets(String columnId)
+		throws SystemException {
+
 		String columnValue =
 			getTypeSettingsProperties().getProperty(columnId);
 
 		String[] portletIds = StringUtil.split(columnValue);
 
-		List portlets = new ArrayList(portletIds.length);
+		List<Portlet> portlets = new ArrayList<Portlet>(portletIds.length);
 
 		for (int i = 0; i < portletIds.length; i++) {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
@@ -212,28 +212,29 @@ public class LayoutTypePortletImpl
 			}
 		}
 
-		List startPortlets = getStaticPortlets(
+		List<Portlet> startPortlets = getStaticPortlets(
 			PropsUtil.LAYOUT_STATIC_PORTLETS_START + columnId);
 
-		List endPortlets = getStaticPortlets(
+		List<Portlet> endPortlets = getStaticPortlets(
 			PropsUtil.LAYOUT_STATIC_PORTLETS_END + columnId);
 
 		return addStaticPortlets(portlets, startPortlets, endPortlets);
 	}
 
-	public List addStaticPortlets(
-			List portlets, List startPortlets, List endPortlets)
+	public List<Portlet> addStaticPortlets(
+			List<Portlet> portlets, List<Portlet> startPortlets,
+			List<Portlet> endPortlets)
 		throws SystemException {
 
 		// Return the original array of portlets if no static portlets are
 		// specified
 
 		if (startPortlets == null) {
-			startPortlets = new ArrayList();
+			startPortlets = new ArrayList<Portlet>();
 		}
 
 		if (endPortlets == null) {
-			endPortlets = new ArrayList();
+			endPortlets = new ArrayList<Portlet>();
 		}
 
 		if ((startPortlets.isEmpty()) && (endPortlets.isEmpty())) {
@@ -242,7 +243,7 @@ public class LayoutTypePortletImpl
 
 		// New array of portlets that contain the static portlets
 
-		List list = new ArrayList(
+		List<Portlet> list = new ArrayList<Portlet>(
 			portlets.size() + startPortlets.size() + endPortlets.size());
 
 		if (startPortlets != null) {
@@ -250,7 +251,7 @@ public class LayoutTypePortletImpl
 		}
 
 		for (int i = 0; i < portlets.size(); i++) {
-			Portlet portlet = (Portlet)portlets.get(i);
+			Portlet portlet = portlets.get(i);
 
 			// Add the portlet if and only if it is not also a static portlet
 
@@ -330,10 +331,10 @@ public class LayoutTypePortletImpl
 			if (columnId == null) {
 				LayoutTemplate layoutTemplate = getLayoutTemplate();
 
-				List columns = layoutTemplate.getColumns();
+				List<String> columns = layoutTemplate.getColumns();
 
 				if (columns.size() > 0) {
-					columnId = (String)columns.get(0);
+					columnId = columns.get(0);
 				}
 			}
 
@@ -348,7 +349,7 @@ public class LayoutTypePortletImpl
 				}
 
 				if (columnPos >= 0) {
-					List portletIds =
+					List<String> portletIds =
 						ListUtil.fromArray(StringUtil.split(columnValue));
 
 					if (columnPos <= portletIds.size()) {
@@ -369,7 +370,7 @@ public class LayoutTypePortletImpl
 
 			try {
 				PortletLayoutListener portletLayoutListener =
-					(PortletLayoutListener)portlet.getPortletLayoutListener();
+					portlet.getPortletLayoutListener();
 
 				if (_enablePortletLayoutListener &&
 					(portletLayoutListener != null)) {
@@ -410,13 +411,13 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	public List getPortlets() throws SystemException {
-		List portletIds = getPortletIds();
+	public List<Portlet> getPortlets() throws SystemException {
+		List<String> portletIds = getPortletIds();
 
-		List portlets = new ArrayList(portletIds.size());
+		List<Portlet> portlets = new ArrayList<Portlet>(portletIds.size());
 
 		for (int i = 0; i < portletIds.size(); i++) {
-			String portletId = (String)portletIds.get(i);
+			String portletId = portletIds.get(i);
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				getLayout().getCompanyId(), portletId);
@@ -429,13 +430,13 @@ public class LayoutTypePortletImpl
 		return portlets;
 	}
 
-	public List getPortletIds() {
-		List portletIds = new ArrayList();
+	public List<String> getPortletIds() {
+		List<String> portletIds = new ArrayList<String>();
 
-		List columns = getColumns();
+		List<String> columns = getColumns();
 
 		for (int i = 0; i < columns.size(); i++) {
-			String columnId = (String)columns.get(i);
+			String columnId = columns.get(i);
 
 			String columnValue =
 				getTypeSettingsProperties().getProperty(columnId);
@@ -449,10 +450,10 @@ public class LayoutTypePortletImpl
 	}
 
 	public boolean hasPortletId(String portletId) {
-		List columns = getColumns();
+		List<String> columns = getColumns();
 
 		for (int i = 0; i < columns.size(); i++) {
-			String columnId = (String)columns.get(i);
+			String columnId = columns.get(i);
 
 			if (hasNonstaticPortletId(columnId, portletId)) {
 				return true;
@@ -487,7 +488,7 @@ public class LayoutTypePortletImpl
 
 			if (portlet != null) {
 				PortletLayoutListener portletLayoutListener =
-					(PortletLayoutListener)portlet.getPortletLayoutListener();
+					portlet.getPortletLayoutListener();
 
 				if (portletLayoutListener != null) {
 					portletLayoutListener.onMoveInLayout(
@@ -505,10 +506,10 @@ public class LayoutTypePortletImpl
 	}
 
 	public void removePortletId(String portletId, boolean cleanUp) {
-		List columns = getColumns();
+		List<String> columns = getColumns();
 
 		for (int i = 0; i < columns.size(); i++) {
-			String columnId = (String)columns.get(i);
+			String columnId = columns.get(i);
 
 			String columnValue =
 				getTypeSettingsProperties().getProperty(columnId);
@@ -536,7 +537,7 @@ public class LayoutTypePortletImpl
 	}
 
 	public void reorganizeNestedColumns(
-		String portletId, List newColumns, List oldColumns) {
+		String portletId, List<String> newColumns, List<String> oldColumns) {
 
 		String nestedColumnIds = getTypeSettingsProperties().getProperty(
 			NESTED_COLUMN_IDS);
@@ -552,16 +553,17 @@ public class LayoutTypePortletImpl
 		reorganizePortlets(newColumns, oldColumns);
 	}
 
-	public void reorganizePortlets(List newColumns, List oldColumns) {
-		String lastNewColumnId =
-			(String)newColumns.get(newColumns.size() - 1);
+	public void reorganizePortlets(
+		List<String> newColumns, List<String> oldColumns) {
+
+		String lastNewColumnId = newColumns.get(newColumns.size() - 1);
 		String lastNewColumnValue =
 			getTypeSettingsProperties().getProperty(lastNewColumnId);
 
-		Iterator itr = oldColumns.iterator();
+		Iterator<String> itr = oldColumns.iterator();
 
 		while (itr.hasNext()) {
-			String oldColumnId = (String)itr.next();
+			String oldColumnId = itr.next();
 
 			if (!newColumns.contains(oldColumnId)) {
 				String oldColumnValue =
@@ -629,21 +631,6 @@ public class LayoutTypePortletImpl
 
 	public void removeStateMaxPortletId(String portletId) {
 		setStateMax(StringUtil.remove(getStateMax(), portletId));
-	}
-
-	// Maximized state previous
-
-	public String getStateMaxPrevious() {
-		return getTypeSettingsProperties().getProperty(STATE_MAX_PREVIOUS);
-	}
-
-	public void setStateMaxPrevious(String stateMaxPrevious) {
-		getTypeSettingsProperties().setProperty(
-			STATE_MAX_PREVIOUS, stateMaxPrevious);
-	}
-
-	public void removeStateMaxPrevious() {
-		getTypeSettingsProperties().remove(STATE_MAX_PREVIOUS);
 	}
 
 	// Minimized state
@@ -942,7 +929,7 @@ public class LayoutTypePortletImpl
 	public void removeNestedColumns(String portletId) {
 		Properties props = getTypeSettingsProperties();
 
-		Iterator itr = props.keySet().iterator();
+		Iterator<Object> itr = props.keySet().iterator();
 
 		Properties newProps = new Properties();
 
@@ -978,10 +965,10 @@ public class LayoutTypePortletImpl
 		}
 	}
 
-	protected List getColumns() {
+	protected List<String> getColumns() {
 		LayoutTemplate layoutTemplate = getLayoutTemplate();
 
-		List columns = new ArrayList();
+		List<String> columns = new ArrayList<String>();
 
 		columns.addAll(layoutTemplate.getColumns());
 		columns.addAll(getNestedColumns());
@@ -989,7 +976,7 @@ public class LayoutTypePortletImpl
 		return columns;
 	}
 
-	protected List getNestedColumns() {
+	protected List<String> getNestedColumns() {
 		String nestedColumnIds = getTypeSettingsProperties().getProperty(
 			NESTED_COLUMN_IDS);
 
@@ -1023,10 +1010,12 @@ public class LayoutTypePortletImpl
 			position, Filter.by(selector1, selector2));
 	}
 
-	protected List getStaticPortlets(String position) throws SystemException {
+	protected List<Portlet> getStaticPortlets(String position)
+		throws SystemException {
+
 		String[] portletIds = getStaticPortletIds(position);
 
-		List portlets = new ArrayList();
+		List<Portlet> portlets = new ArrayList<Portlet>();
 
 		for (int i = 0; i < portletIds.length; i++) {
 			String portletId = portletIds[i];
@@ -1069,10 +1058,10 @@ public class LayoutTypePortletImpl
 	protected boolean hasNonstaticPortletId(String portletId) {
 		LayoutTemplate layoutTemplate = getLayoutTemplate();
 
-		List columns = layoutTemplate.getColumns();
+		List<String> columns = layoutTemplate.getColumns();
 
 		for (int i = 0; i < columns.size(); i++) {
-			String columnId = (String)columns.get(i);
+			String columnId = columns.get(i);
 
 			if (hasNonstaticPortletId(columnId, portletId)) {
 				return true;
@@ -1141,7 +1130,7 @@ public class LayoutTypePortletImpl
 		if (portlet.getRootPortletId().equals(PortletKeys.NESTED_PORTLETS)) {
 			Properties props = getTypeSettingsProperties();
 
-			Iterator itr = props.keySet().iterator();
+			Iterator<Object> itr = props.keySet().iterator();
 
 			while (itr.hasNext()) {
 				String key = (String)itr.next();
@@ -1176,13 +1165,12 @@ public class LayoutTypePortletImpl
 
 	protected void deletePortletSetup(String portletId) {
 		try {
-			List list =
+			List<PortletPreferences> list =
 				PortletPreferencesLocalServiceUtil.getPortletPreferences(
 					getLayout().getPlid(), portletId);
 
 			for (int i = 0; i < list.size(); i++) {
-				PortletPreferences portletPreferences =
-					(PortletPreferences)list.get(i);
+				PortletPreferences portletPreferences = list.get(i);
 
 				PortletPreferencesLocalServiceUtil.deletePortletPreferences(
 					portletPreferences.getPortletPreferencesId());

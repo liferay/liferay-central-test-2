@@ -60,7 +60,7 @@ public abstract class BaseFilter implements Filter {
 	}
 
 	protected void doFilter(
-			Class filterClass, ServletRequest req, ServletResponse res,
+			Class<?> filterClass, ServletRequest req, ServletResponse res,
 			FilterChain chain)
 		throws IOException, ServletException {
 

@@ -45,8 +45,6 @@ long groupId = BeanParamUtil.getLong(folder, request, "groupId");
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(LiferayWindowState.POP_UP);
-
 portletURL.setParameter("struts_action", "/document_library/select_file_entry");
 portletURL.setParameter("groupId", String.valueOf(groupId));
 
@@ -76,8 +74,6 @@ for (int i = 0; i < results.size(); i++) {
 	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/document_library/select_file_entry");
 	rowURL.setParameter("groupId", String.valueOf(groupId));

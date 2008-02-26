@@ -33,8 +33,6 @@ long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderImpl.
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(LiferayWindowState.POP_UP);
-
 portletURL.setParameter("struts_action", "/journal/select_document_library");
 portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("groupId", String.valueOf(groupId));
@@ -82,8 +80,6 @@ for (int i = 0; i < results.size(); i++) {
 	ResultRow row = new ResultRow(curFolder, curFolder.getFolderId(), i);
 
 	PortletURL rowURL = renderResponse.createRenderURL();
-
-	rowURL.setWindowState(LiferayWindowState.POP_UP);
 
 	rowURL.setParameter("struts_action", "/journal/select_document_library");
 	rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));

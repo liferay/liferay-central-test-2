@@ -24,19 +24,12 @@ package com.liferay.portal.events;
 
 import com.liferay.portal.kernel.events.Action;
 import com.liferay.portal.kernel.events.ActionException;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.ReverseAjax;
-import com.liferay.portal.service.GroupLocalServiceUtil;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.LiveUsers;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.messaging.util.MessagingUtil;
-
-import java.util.Iterator;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -74,40 +67,6 @@ public class LoginPostAction extends Action {
 			MessagingUtil.createXMPPConnection(ses, userId);
 
 			LiveUsers.signIn(req);
-
-			if (!PropsValues.LAYOUT_REMEMBER_SESSION_WINDOW_STATE_MAXIMIZED) {
-				Group group = GroupLocalServiceUtil.getUserGroup(
-					companyId, userId);
-
-				Iterator itr = LayoutLocalServiceUtil.getLayouts(
-					group.getGroupId(), true).iterator();
-
-				while (itr.hasNext()) {
-					Layout layout = (Layout)itr.next();
-
-					LayoutTypePortlet layoutType =
-						(LayoutTypePortlet)layout.getLayoutType();
-
-					if (layoutType.hasStateMax()) {
-
-						// Set the window state to normal for the maximized
-						// portlet
-
-						layoutType.resetStates();
-
-						// Set the portlet mode to view because other modes may
-						// require a maximized window state
-
-						layoutType.resetModes();
-
-						LayoutLocalServiceUtil.updateLayout(
-							layout.getGroupId(), layout.isPrivateLayout(),
-							layout.getLayoutId(), layout.getTypeSettings());
-					}
-				}
-			}
-
-			// Reset the locale
 
 			ses.removeAttribute(Globals.LOCALE_KEY);
 		}

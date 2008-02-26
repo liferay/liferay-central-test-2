@@ -200,7 +200,7 @@ public class StrutsPortlet extends LiferayPortlet {
 
 		// Call render of com.liferay.portal.struts.PortletAction
 
-		Map strutsAttributes = null;
+		Map<String, Object> strutsAttributes = null;
 
 		if (_portletConfig.isWARFile()) {
 

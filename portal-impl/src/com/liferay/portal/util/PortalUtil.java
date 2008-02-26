@@ -31,7 +31,6 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletMode;
-import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -75,7 +74,6 @@ import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseImpl;
-import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletBag;
 import com.liferay.portlet.PortletBagPool;
 import com.liferay.portlet.PortletConfigFactory;
@@ -181,9 +179,10 @@ public class PortalUtil {
 
 		// Clear the render parameters if they were set during processAction
 
-		String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
-		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+		if (themeDisplay.isLifecycleAction()) {
 			((RenderRequestImpl)req).getRenderParameters().clear();
 		}
 	}
@@ -2029,57 +2028,12 @@ public class PortalUtil {
 		else {
 			boolean updateLayout = false;
 
-			if ((windowState.equals(WindowState.MAXIMIZED)) ||
-				(windowState.equals(LiferayWindowState.EXCLUSIVE)) ||
-				(windowState.equals(LiferayWindowState.POP_UP))) {
+			if (windowState.equals(WindowState.MAXIMIZED) &&
+				!layoutType.hasStateMaxPortletId(portletId)) {
 
-				if (layoutType.hasStateMax()) {
-					String curMaxPortletId =
-						StringUtil.split(layoutType.getStateMax())[0];
+				layoutType.addStateMaxPortletId(portletId);
 
-					// Clear cache and render parameters for the previous
-					// portlet that had a maximum window state
-
-					InvokerPortlet.clearResponse(
-						req.getSession(), layout.getPlid(), curMaxPortletId,
-						LanguageUtil.getLanguageId(req));
-
-					/*RenderParametersPool.clear(
-						req, layout.getPlid(), curMaxPortletId);*/
-
-					if ((windowState.equals(LiferayWindowState.EXCLUSIVE)) ||
-						(windowState.equals(LiferayWindowState.POP_UP))) {
-
-						String stateMaxPrevious =
-							layoutType.getStateMaxPrevious();
-
-						if (stateMaxPrevious == null) {
-							layoutType.setStateMaxPrevious(curMaxPortletId);
-
-							updateLayout = true;
-						}
-					}
-				}
-				else {
-					if ((windowState.equals(LiferayWindowState.EXCLUSIVE)) ||
-						(windowState.equals(LiferayWindowState.POP_UP))) {
-
-						String stateMaxPrevious =
-							layoutType.getStateMaxPrevious();
-
-						if (stateMaxPrevious == null) {
-							layoutType.setStateMaxPrevious(StringPool.BLANK);
-
-							updateLayout = true;
-						}
-					}
-				}
-
-				if (!layoutType.hasStateMaxPortletId(portletId)) {
-					layoutType.addStateMaxPortletId(portletId);
-
-					updateLayout = true;
-				}
+				updateLayout = false;
 			}
 			else if (windowState.equals(WindowState.MINIMIZED) &&
 					 !layoutType.hasStateMinPortletId(portletId)) {
@@ -2398,6 +2352,7 @@ public class PortalUtil {
 		_reservedParams.add("p_p_lifecycle");
 		_reservedParams.add("p_p_state");
 		_reservedParams.add("p_p_mode");
+		_reservedParams.add("p_p_resource_id");
 		_reservedParams.add("p_p_width");
 		_reservedParams.add("p_p_col_id");
 		_reservedParams.add("p_p_col_pos");

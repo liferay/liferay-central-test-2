@@ -188,75 +188,6 @@ public class ServicePreAction extends Action {
 		}
 	}
 
-	protected void fixState(HttpServletRequest req, ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		String requestURI = GetterUtil.getString(req.getRequestURI());
-
-		if (!requestURI.endsWith("/portal/layout")) {
-			return;
-		}
-
-		Layout layout = themeDisplay.getLayout();
-
-		if ((layout == null) ||
-			(!layout.getType().equals(LayoutImpl.TYPE_PORTLET))) {
-
-			return;
-		}
-
-		LayoutTypePortlet layoutTypePortlet =
-			themeDisplay.getLayoutTypePortlet();
-
-		// Fix pop up state
-
-		String stateMaxPrevious = layoutTypePortlet.getStateMaxPrevious();
-
-		if ((stateMaxPrevious != null) && !themeDisplay.isStatePopUp()) {
-			layoutTypePortlet.removeStateMaxPrevious();
-
-			if (stateMaxPrevious.equals(StringPool.BLANK)) {
-				layoutTypePortlet.setStateMax(StringPool.BLANK);
-			}
-			else {
-				layoutTypePortlet.setStateMax(stateMaxPrevious);
-			}
-		}
-
-		// Fix maximized state
-
-		if (layoutTypePortlet.hasStateMax()) {
-			String portletId =
-				StringUtil.split(layoutTypePortlet.getStateMax())[0];
-
-			boolean removeStateMax = false;
-
-			if (!PropsValues.LAYOUT_REMEMBER_REQUEST_WINDOW_STATE_MAXIMIZED &&
-				Validator.isNotNull(portletId)) {
-
-				removeStateMax = true;
-			}
-
-			// If a user accesses a maximized portlet that is not a part of the
-			// layout, the maximized portlet should be removed the next time the
-			// layout is accessed.
-
-			if (!layoutTypePortlet.hasPortletId(portletId)) {
-				removeStateMax = true;
-			}
-
-			if (removeStateMax) {
-				String ppState = ParamUtil.getString(req, "p_p_state");
-
-				if (Validator.isNull(ppState) ||
-					ppState.equals(WindowState.NORMAL.toString())) {
-
-					layoutTypePortlet.removeStateMaxPortletId(portletId);
-				}
-			}
-		}
-	}
-
 	protected Object[] getDefaultLayout(
 			HttpServletRequest req, User user, boolean signedIn)
 		throws PortalException, SystemException {
@@ -991,8 +922,6 @@ public class ServicePreAction extends Action {
 
 					String stateMax = props.getProperty(
 						LayoutTypePortletImpl.STATE_MAX);
-					String stateMaxPrevious = props.getProperty(
-						LayoutTypePortletImpl.STATE_MAX_PREVIOUS);
 					String stateMin = props.getProperty(
 						LayoutTypePortletImpl.STATE_MIN);
 					String modeAbout = props.getProperty(
@@ -1013,7 +942,6 @@ public class ServicePreAction extends Action {
 						LayoutTypePortletImpl.MODE_PRINT);
 
 					layoutTypePortlet.setStateMax(stateMax);
-					layoutTypePortlet.setStateMaxPrevious(stateMaxPrevious);
 					layoutTypePortlet.setStateMin(stateMin);
 					layoutTypePortlet.setModeAbout(modeAbout);
 					layoutTypePortlet.setModeConfig(modeConfig);
@@ -1087,6 +1015,8 @@ public class ServicePreAction extends Action {
 		boolean themeJsFastLoad = ParamUtil.getBoolean(
 			req, "js_fast_load", PropsValues.JAVASCRIPT_FAST_LOAD);
 
+		String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
+
 		// Theme display
 
 		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
@@ -1124,6 +1054,9 @@ public class ServicePreAction extends Action {
 		themeDisplay.setServerName(req.getServerName());
 		themeDisplay.setServerPort(req.getServerPort());
 		themeDisplay.setSecure(req.isSecure());
+		themeDisplay.setLifecycleAction(lifecycle.equals("1"));
+		themeDisplay.setLifecycleRender(lifecycle.equals("0"));
+		themeDisplay.setLifecycleResource(lifecycle.equals("2"));
 		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));
 		themeDisplay.setStateMaximized(LiferayWindowState.isMaximized(req));
 		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
@@ -1336,10 +1269,6 @@ public class ServicePreAction extends Action {
 
 		req.setAttribute(
 			WebKeys.PORTLET_PARALLEL_RENDER, parallelRenderEnableObj);
-
-		// Fix state
-
-		fixState(req, themeDisplay);
 	}
 
 	protected File privateLARFile;

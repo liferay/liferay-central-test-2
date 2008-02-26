@@ -257,14 +257,13 @@ public class LayoutAction extends Action {
 
 		boolean resetLayout = ParamUtil.getBoolean(
 			req, "p_l_reset", PropsValues.LAYOUT_DEFAULT_P_L_RESET);
-		String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
 
 		try {
 			if (resetLayout) {
 				RenderParametersPool.clear(req, plid);
 			}
 
-			if (lifecycle.equals("1")) {
+			if (themeDisplay.isLifecycleAction()) {
 				Portlet portlet = processPortletRequest(
 					req, res, PortletRequest.ACTION_PHASE);
 
@@ -288,7 +287,7 @@ public class LayoutAction extends Action {
 					}
 				}
 			}
-			else if (lifecycle.equals("0")) {
+			else if (themeDisplay.isLifecycleRender()) {
 				processPortletRequest(req, res, PortletRequest.RENDER_PHASE);
 			}
 
@@ -301,7 +300,7 @@ public class LayoutAction extends Action {
 				includeLayoutContent(req, res, themeDisplay, layout);
 
 				if (themeDisplay.isStateExclusive()) {
-					serverExclusiveResource(req, res, themeDisplay);
+					serveExclusiveResource(req, res, themeDisplay);
 
 					return null;
 				}
@@ -316,7 +315,7 @@ public class LayoutAction extends Action {
 		}
 		finally {
 			try {
-				if (lifecycle.equals("1")) {
+				if (themeDisplay.isLifecycleAction()) {
 					ActionRequestImpl actionRequestImpl =
 						(ActionRequestImpl)req.getAttribute(
 							JavaConstants.JAVAX_PORTLET_REQUEST);
@@ -331,7 +330,7 @@ public class LayoutAction extends Action {
 			req.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
 
 			try {
-				if (lifecycle.equals("1")) {
+				if (themeDisplay.isLifecycleAction()) {
 					ActionResponseImpl actionResponseImpl =
 						(ActionResponseImpl)req.getAttribute(
 							JavaConstants.JAVAX_PORTLET_RESPONSE);
@@ -481,7 +480,7 @@ public class LayoutAction extends Action {
 		res.sendRedirect(portletURL.toString());
 	}
 
-	protected void serverExclusiveResource(
+	protected void serveExclusiveResource(
 			HttpServletRequest req, HttpServletResponse res,
 			ThemeDisplay themeDisplay)
 		throws Exception {

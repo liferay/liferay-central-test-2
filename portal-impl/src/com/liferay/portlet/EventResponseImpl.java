@@ -22,25 +22,25 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.kernel.portlet.LiferayRenderRequest;
+import javax.portlet.EventRequest;
+import javax.portlet.EventResponse;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="RenderRequestImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="EventResponseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RenderRequestImpl
-	extends PortletRequestImpl implements LiferayRenderRequest {
+public class EventResponseImpl
+	extends StateAwareResponseImpl implements EventResponse {
 
-	public String getETag() {
-		return null;
+	public void setRenderParameters(EventRequest req) {
 	}
 
-	protected RenderRequestImpl() {
+	protected EventResponseImpl() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Creating new instance " + hashCode());
 		}
@@ -54,6 +54,6 @@ public class RenderRequestImpl
 		super.recycle();
 	}
 
-	private static Log _log = LogFactory.getLog(RenderRequestImpl.class);
+	private static Log _log = LogFactory.getLog(EventResponseImpl.class);
 
 }

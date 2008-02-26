@@ -41,8 +41,6 @@
 <%
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(LiferayWindowState.POP_UP);
-
 portletURL.setParameter("struts_action", "/enterprise_admin/select_organization");
 
 OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);

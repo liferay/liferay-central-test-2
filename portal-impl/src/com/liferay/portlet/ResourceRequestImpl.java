@@ -22,10 +22,18 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.model.Portlet;
+
 import java.util.Enumeration;
 import java.util.Map;
 
+import javax.portlet.PortletContext;
+import javax.portlet.PortletMode;
+import javax.portlet.PortletPreferences;
 import javax.portlet.ResourceRequest;
+import javax.portlet.WindowState;
+
+import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -52,7 +60,7 @@ public class ResourceRequestImpl
 	}
 
 	public String getResourceID() {
-		return null;
+		return _resourceID;
 	}
 
 	public String getResponseContentType() {
@@ -69,14 +77,30 @@ public class ResourceRequestImpl
 		}
 	}
 
+	protected void init(
+		HttpServletRequest req, Portlet portlet, InvokerPortlet invokerPortlet,
+		PortletContext portletCtx, WindowState windowState,
+		PortletMode portletMode, PortletPreferences prefs, long plid) {
+
+		_resourceID = req.getParameter("p_p_resource_id");
+
+		super.init(
+			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
+			prefs, plid);
+	}
+
 	protected void recycle() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Recycling instance " + hashCode());
 		}
 
 		super.recycle();
+
+		_resourceID = null;
 	}
 
 	private static Log _log = LogFactory.getLog(ResourceRequestImpl.class);
+
+	private String _resourceID;
 
 }

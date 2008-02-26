@@ -37,8 +37,6 @@ import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
-import javax.portlet.PortletRequest;
-
 import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
@@ -282,7 +280,7 @@ public class StripFilter extends BaseFilter {
 	}
 
 	protected boolean isStrip(HttpServletRequest req) {
-		if (!ParamUtil.get(req, _STRIP, true)) {
+		if (!ParamUtil.getBoolean(req, _STRIP, true)) {
 			return false;
 		}
 		else {
@@ -294,7 +292,7 @@ public class StripFilter extends BaseFilter {
 
 			String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
 
-			if (lifecycle.equals(PortletRequest.ACTION_PHASE) &&
+			if (lifecycle.equals("1") &&
 				LiferayWindowState.isExclusive(req)) {
 
 				return false;

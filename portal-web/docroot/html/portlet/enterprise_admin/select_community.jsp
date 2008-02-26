@@ -51,8 +51,6 @@ String target = ParamUtil.getString(request, "target");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
-portletURL.setWindowState(LiferayWindowState.POP_UP);
-
 portletURL.setParameter("struts_action", "/enterprise_admin/select_community");
 
 GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
