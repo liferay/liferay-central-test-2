@@ -47,7 +47,7 @@ public class CacheRegistry {
 
 	public static void clear() {
 		for (int i = 0; i < _registry.size(); i++) {
-			CacheRegistryItem item = (CacheRegistryItem)_registry.get(i);
+			CacheRegistryItem item = _registry.get(i);
 
 			item.invalidate();
 		}

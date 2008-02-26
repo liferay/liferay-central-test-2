@@ -60,13 +60,13 @@ import org.apache.commons.logging.LogFactory;
 public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public PortletServletRequest(
-		HttpServletRequest req, RenderRequestImpl renderReq, String pathInfo,
+		HttpServletRequest req, PortletRequestImpl portletReq, String pathInfo,
 		String queryString, String requestURI, String servletPath) {
 
 		super(req);
 
 		_req = req;
-		_renderReq = renderReq;
+		_portletReq = portletReq;
 		_pathInfo = GetterUtil.getString(pathInfo);
 		_queryString = GetterUtil.getString(queryString);
 		_requestURI = GetterUtil.getString(requestURI);
@@ -75,7 +75,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		long userId = PortalUtil.getUserId(req);
 		String remoteUser = req.getRemoteUser();
 
-		Portlet portlet = renderReq.getPortlet();
+		Portlet portlet = portletReq.getPortlet();
 
 		String userPrincipalStrategy = portlet.getUserPrincipalStrategy();
 
@@ -115,7 +115,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 
 		if (ServerDetector.isWebSphere()) {
-			Portlet portlet = _renderReq.getPortlet();
+			Portlet portlet = _portletReq.getPortlet();
 
 			PortletApp portletApp = portlet.getPortletApp();
 
@@ -123,7 +123,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				if (name.equals(
 						JavaConstants.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
 
-					retVal = _renderReq.getContextPath();
+					retVal = _portletReq.getContextPath();
 				}
 				else if (name.equals(
 							JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
@@ -189,7 +189,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getContextPath() {
-		return _renderReq.getContextPath();
+		return _portletReq.getContextPath();
 	}
 
 	public ServletInputStream getInputStream() throws IOException {
@@ -202,11 +202,11 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public Locale getLocale() {
-		return _renderReq.getLocale();
+		return _portletReq.getLocale();
 	}
 
 	public Enumeration<Locale> getLocales() {
-		return _renderReq.getLocales();
+		return _portletReq.getLocales();
 	}
 
 	public String getPathInfo() {
@@ -296,7 +296,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private static Log _log = LogFactory.getLog(PortletServletRequest.class);
 
 	private HttpServletRequest _req;
-	private RenderRequestImpl _renderReq;
+	private PortletRequestImpl _portletReq;
 	private String _pathInfo;
 	private String _queryString;
 	private String _requestURI;

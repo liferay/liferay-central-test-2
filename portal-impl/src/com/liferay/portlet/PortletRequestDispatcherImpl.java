@@ -88,21 +88,18 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 	public void include(PortletRequest req, PortletResponse res)
 		throws IOException, PortletException {
-	}
-
-	public void include(RenderRequest req, RenderResponse res)
-		throws IOException, PortletException {
 
 		include(req, res, false);
 	}
 
 	public void include(
-			RenderRequest req, RenderResponse res, boolean strutsURLEncoder)
+			PortletRequest req, PortletResponse res, boolean strutsURLEncoder)
 		throws IOException, PortletException {
 
 		try {
-			RenderRequestImpl reqImpl = (RenderRequestImpl)req;
-			RenderResponseImpl resImpl = PortalUtil.getRenderResponseImpl(res);
+			PortletRequestImpl reqImpl = (PortletRequestImpl)req;
+			PortletResponseImpl resImpl = PortalUtil.getPortletResponseImpl(
+				res);
 
 			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 			HttpServletResponse httpRes =
@@ -243,11 +240,13 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 				ThemeDisplay themeDisplay =
 					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-				resImpl.setURLEncoder(new StrutsURLEncoder(
+				URLEncoder strutsURLEncoderObj = new StrutsURLEncoder(
 					portletServletReq.getContextPath(),
 					themeDisplay.getPathMain(),
 					(String)_portletCtxImpl.getAttribute(Globals.SERVLET_KEY),
-					(com.liferay.portlet.PortletURLImpl)res.createRenderURL()));
+					resImpl.createRenderURL());
+
+				resImpl.setURLEncoder(strutsURLEncoderObj);
 			}
 
 			_rd.include(portletServletReq, portletServletRes);
@@ -257,6 +256,12 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 			throw new PortletException(se);
 		}
+	}
+
+	public void include(RenderRequest req, RenderResponse res)
+		throws IOException, PortletException {
+
+		include(req, res, false);
 	}
 
 	private static Log _log =

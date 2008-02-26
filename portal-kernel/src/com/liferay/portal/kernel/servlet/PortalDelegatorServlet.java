@@ -82,7 +82,7 @@ public class PortalDelegatorServlet extends HttpServlet {
 			throw new ServletException("Path " + uri + " is invalid");
 		}
 
-		HttpServlet delegate = (HttpServlet)_delegates.get(paths[1]);
+		HttpServlet delegate = _delegates.get(paths[1]);
 
 		if (delegate == null) {
 			throw new ServletException(
@@ -105,6 +105,7 @@ public class PortalDelegatorServlet extends HttpServlet {
 		}
 	}
 
-	private static Map _delegates = new HashMap();
+	private static Map<String, HttpServlet> _delegates =
+		new HashMap<String, HttpServlet>();
 
 }

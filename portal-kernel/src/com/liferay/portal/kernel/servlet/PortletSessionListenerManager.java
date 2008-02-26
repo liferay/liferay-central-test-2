@@ -56,10 +56,10 @@ public class PortletSessionListenerManager implements HttpSessionListener {
 			Thread.currentThread().getContextClassLoader();
 
 		try {
-			Iterator itr = _listeners.iterator();
+			Iterator<HttpSessionListener> itr = _listeners.iterator();
 
 			while (itr.hasNext()) {
-				HttpSessionListener listener = (HttpSessionListener)itr.next();
+				HttpSessionListener listener = itr.next();
 
 				ClassLoader listenerClassLoader =
 					listener.getClass().getClassLoader();
@@ -76,15 +76,16 @@ public class PortletSessionListenerManager implements HttpSessionListener {
 	}
 
 	public void sessionDestroyed(HttpSessionEvent event) {
-		Iterator itr = _listeners.iterator();
+		Iterator<HttpSessionListener> itr = _listeners.iterator();
 
 		while (itr.hasNext()) {
-			HttpSessionListener listener = (HttpSessionListener)itr.next();
+			HttpSessionListener listener = itr.next();
 
 			listener.sessionDestroyed(event);
 		}
 	}
 
-	private static List _listeners = new ArrayList();
+	private static List<HttpSessionListener> _listeners =
+		new ArrayList<HttpSessionListener>();
 
 }

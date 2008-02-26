@@ -67,17 +67,17 @@ public class PortletSessionTracker
 	}
 
 	private PortletSessionTracker() {
-		_sessions = new HashMap();
+		_sessions = new HashMap<String, Set<HttpSession>>();
 	}
 
 	private void _add(HttpSession session) {
 		String sessionId = session.getId();
 
 		synchronized (_sessions) {
-			Set portletSessions = (Set)_sessions.get(sessionId);
+			Set<HttpSession> portletSessions = _sessions.get(sessionId);
 
 			if (portletSessions == null) {
-				portletSessions = new HashSet();
+				portletSessions = new HashSet<HttpSession>();
 
 				_sessions.put(sessionId, portletSessions);
 			}
@@ -88,13 +88,13 @@ public class PortletSessionTracker
 
 	private void _invalidate(String sessionId) {
 		synchronized (_sessions) {
-			Set portletSessions = (Set)_sessions.get(sessionId);
+			Set<HttpSession> portletSessions = _sessions.get(sessionId);
 
 			if (portletSessions != null) {
-				Iterator itr = portletSessions.iterator();
+				Iterator<HttpSession> itr = portletSessions.iterator();
 
 				while (itr.hasNext()) {
-					HttpSession session = (HttpSession)itr.next();
+					HttpSession session = itr.next();
 
 					try {
 						session.invalidate();
@@ -111,6 +111,6 @@ public class PortletSessionTracker
 	private static PortletSessionTracker _instance =
 		new PortletSessionTracker();
 
-	private transient Map _sessions;
+	private transient Map<String, Set<HttpSession>> _sessions;
 
 }

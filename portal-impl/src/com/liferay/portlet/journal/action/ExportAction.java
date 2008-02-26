@@ -396,7 +396,7 @@ public class ExportAction extends Action {
 
 		List<JournalArticleResource> articleResources =
 			JournalArticleResourceLocalServiceUtil.getArticleResources(groupId);
-		
+
 		for (JournalArticleResource articleResource : articleResources) {
 			sm.append("insert into JournalArticleResource (");
 			sm.append("resourcePrimKey, groupId, articleId");

@@ -368,10 +368,9 @@ public class PortalUtil_IW {
 		return PortalUtil.getPortletNamespace(portletId);
 	}
 
-	public java.lang.String getPortletXmlFileName()
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		return PortalUtil.getPortletXmlFileName();
+	public com.liferay.portlet.PortletResponseImpl getPortletResponseImpl(
+		javax.portlet.PortletResponse res) {
+		return PortalUtil.getPortletResponseImpl(res);
 	}
 
 	public java.lang.String getPortletTitle(java.lang.String portletId,
@@ -390,6 +389,12 @@ public class PortalUtil_IW {
 		return PortalUtil.getPortletTitle(portlet, ctx, locale);
 	}
 
+	public java.lang.String getPortletXmlFileName()
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		return PortalUtil.getPortletXmlFileName();
+	}
+
 	public javax.portlet.PortletPreferences getPreferences(
 		javax.servlet.http.HttpServletRequest req) {
 		return PortalUtil.getPreferences(req);
@@ -398,11 +403,6 @@ public class PortalUtil_IW {
 	public javax.portlet.PreferencesValidator getPreferencesValidator(
 		com.liferay.portal.model.Portlet portlet) {
 		return PortalUtil.getPreferencesValidator(portlet);
-	}
-
-	public com.liferay.portlet.RenderResponseImpl getRenderResponseImpl(
-		javax.portlet.RenderResponse res) {
-		return PortalUtil.getRenderResponseImpl(res);
 	}
 
 	public com.liferay.portal.model.User getSelectedUser(

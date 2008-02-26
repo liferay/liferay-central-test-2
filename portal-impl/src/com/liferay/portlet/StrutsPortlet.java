@@ -43,6 +43,8 @@ import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import javax.servlet.ServletException;
 
@@ -175,8 +177,6 @@ public class StrutsPortlet extends LiferayPortlet {
 			try {
 				permissionChecker.setValues(req);
 
-				// Process action
-
 				PortletRequestProcessor processor =
 					_getPortletRequestProcessor(req);
 
@@ -195,6 +195,33 @@ public class StrutsPortlet extends LiferayPortlet {
 		}
 	}
 
+	public void serveResource(ResourceRequest req, ResourceResponse res)
+		throws IOException, PortletException {
+
+		// Call serveResource of com.liferay.portal.struts.PortletAction
+
+		PermissionCheckerImpl permissionChecker =
+			(PermissionCheckerImpl)PermissionThreadLocal.getPermissionChecker();
+
+		try {
+			permissionChecker.setValues(req);
+
+			PortletRequestProcessor processor =
+				_getPortletRequestProcessor(req);
+
+			processor.process(req, res);
+		}
+		catch (IOException ioe) {
+			throw ioe;
+		}
+		catch (ServletException se) {
+			throw new PortletException(se);
+		}
+		finally {
+			permissionChecker.resetValues();
+		}
+	}
+
 	protected void include(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
@@ -203,14 +230,9 @@ public class StrutsPortlet extends LiferayPortlet {
 		Map<String, Object> strutsAttributes = null;
 
 		if (_portletConfig.isWARFile()) {
-
-			// Remove any Struts request attributes
-
 			strutsAttributes =
 				StrutsUtil.removeStrutsAttributes(getPortletContext(), req);
 		}
-
-		// Process render
 
 		PermissionCheckerImpl permissionChecker =
 			(PermissionCheckerImpl)PermissionThreadLocal.getPermissionChecker();
@@ -233,9 +255,6 @@ public class StrutsPortlet extends LiferayPortlet {
 			permissionChecker.resetValues();
 
 			if (_portletConfig.isWARFile()) {
-
-				// Set the Struts request attributes
-
 				StrutsUtil.setStrutsAttributes(req, strutsAttributes);
 			}
 		}

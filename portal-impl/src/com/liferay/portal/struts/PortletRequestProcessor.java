@@ -51,6 +51,8 @@ import javax.portlet.ActionResponse;
 import javax.portlet.PortletException;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -84,9 +86,9 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		try {
 			String className = PropsValues.STRUTS_PORTLET_REQUEST_PROCESSOR;
 
-			Class clazz = Class.forName(className);
+			Class<?> clazz = Class.forName(className);
 
-			Constructor constructor = clazz.getConstructor(
+			Constructor<?> constructor = clazz.getConstructor(
 				new Class[] {
 					ActionServlet.class, ModuleConfig.class
 				}
@@ -112,15 +114,6 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 		throws ServletException {
 
 		init(servlet, config);
-	}
-
-	public void process(RenderRequest req, RenderResponse res)
-		throws IOException, ServletException {
-
-		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
-		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
-
-		process(httpReq, httpRes);
 	}
 
 	public void process(ActionRequest req, ActionResponse res, String path)
@@ -203,8 +196,7 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				String forwardPath = actionForward.getPath();
 
 				if (forwardPath.startsWith("/")) {
-					LiferayPortletURL forwardURL =
-						(LiferayPortletURL)resImpl.createRenderURL();
+					LiferayPortletURL forwardURL = resImpl.createRenderURL();
 
 					forwardURL.setParameter("struts_action", forwardPath);
 
@@ -216,6 +208,24 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				res.sendRedirect(forwardPath);
 			}
 		}
+	}
+
+	public void process(RenderRequest req, RenderResponse res)
+		throws IOException, ServletException {
+
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+
+		process(httpReq, httpRes);
+	}
+
+	public void process(ResourceRequest req, ResourceResponse res)
+		throws IOException, ServletException {
+
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+
+		process(httpReq, httpRes);
 	}
 
 	protected ActionForm processActionForm(

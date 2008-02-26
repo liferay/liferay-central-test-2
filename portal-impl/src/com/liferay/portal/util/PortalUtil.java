@@ -79,6 +79,7 @@ import com.liferay.portlet.PortletBagPool;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
+import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
@@ -129,7 +130,6 @@ import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
 import javax.portlet.PreferencesValidator;
 import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
 import javax.portlet.ValidatorException;
 import javax.portlet.WindowState;
 import javax.portlet.filter.PortletRequestWrapper;
@@ -531,16 +531,10 @@ public class PortalUtil {
 
 			return getHttpServletResponse(resWrapper.getResponse());
 		}
-		else if (res instanceof RenderResponse) {
-			RenderResponseImpl resImpl = getRenderResponseImpl(
-				(RenderResponse)res);
+		else {
+			PortletResponseImpl resImpl = getPortletResponseImpl(res);
 
 			return resImpl.getHttpServletResponse();
-		}
-		else {
-			throw new RuntimeException(
-				"Unable to get the HTTP servlet resuest from " +
-					res.getClass().getName());
 		}
 	}
 
@@ -1073,18 +1067,34 @@ public class PortalUtil {
 		return sm.toString();
 	}
 
-	public static String getPortletXmlFileName()
-		throws PortalException, SystemException {
+	public static PortletResponseImpl getPortletResponseImpl(
+		PortletResponse res) {
 
-		if (PrefsPropsUtil.getBoolean(
-				PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
-				PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
+		PortletResponseImpl resImpl = null;
 
-			return PORTLET_XML_FILE_NAME_CUSTOM;
+		if (res instanceof PortletResponseImpl) {
+			resImpl = (PortletResponseImpl)res;
 		}
 		else {
-			return PORTLET_XML_FILE_NAME_STANDARD;
+
+			// LEP-4033
+
+			try {
+				Method method = MethodCache.get(
+					res.getClass().getName(), "getResponse");
+
+				Object obj = method.invoke(res, (Object[])null);
+
+				resImpl = getPortletResponseImpl((PortletResponse)obj);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(
+					"Unable to get the HTTP servlet resuest from " +
+						res.getClass().getName());
+			}
 		}
+
+		return resImpl;
 	}
 
 	public static String getPortletTitle(
@@ -1120,6 +1130,20 @@ public class PortalUtil {
 		ResourceBundle resourceBundle = portletConfig.getResourceBundle(locale);
 
 		return resourceBundle.getString(JavaConstants.JAVAX_PORTLET_TITLE);
+	}
+
+	public static String getPortletXmlFileName()
+		throws PortalException, SystemException {
+
+		if (PrefsPropsUtil.getBoolean(
+				PropsUtil.AUTO_DEPLOY_CUSTOM_PORTLET_XML,
+				PropsValues.AUTO_DEPLOY_CUSTOM_PORTLET_XML)) {
+
+			return PORTLET_XML_FILE_NAME_CUSTOM;
+		}
+		else {
+			return PORTLET_XML_FILE_NAME_STANDARD;
+		}
 	}
 
 	public static PortletPreferences getPreferences(HttpServletRequest req) {
@@ -1160,32 +1184,6 @@ public class PortalUtil {
 
 			return prefsValidator;
 		}
-	}
-
-	public static RenderResponseImpl getRenderResponseImpl(RenderResponse res) {
-		RenderResponseImpl resImpl = null;
-
-		if (res instanceof RenderResponseImpl) {
-			resImpl = (RenderResponseImpl)res;
-		}
-		else {
-
-			// LEP-4033
-
-			try {
-				Method method = MethodCache.get(
-					res.getClass().getName(), "getResponse");
-
-				Object obj = method.invoke(res, (Object[])null);
-
-				resImpl = getRenderResponseImpl((RenderResponse)obj);
-			}
-			catch (Exception e) {
-				throw new RuntimeException(e);
-			}
-		}
-
-		return resImpl;
 	}
 
 	public static User getSelectedUser(HttpServletRequest req)

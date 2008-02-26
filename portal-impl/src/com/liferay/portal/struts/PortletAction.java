@@ -41,6 +41,8 @@ import javax.portlet.PortletConfig;
 import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+import javax.portlet.ResourceRequest;
+import javax.portlet.ResourceResponse;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -123,6 +125,18 @@ public class PortletAction extends Action {
 	public ActionForward render(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			RenderRequest req, RenderResponse res)
+		throws Exception {
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Forward to " + getForward(req));
+		}
+
+		return mapping.findForward(getForward(req));
+	}
+
+	public ActionForward serveResource(
+			ActionMapping mapping, ActionForm form, PortletConfig config,
+			ResourceRequest req, ResourceResponse res)
 		throws Exception {
 
 		if (_log.isDebugEnabled()) {

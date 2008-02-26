@@ -43,7 +43,7 @@ public class PortalLoginModule implements LoginModule {
 
 	public PortalLoginModule() {
 		try {
-			Class classObj = Class.forName(
+			Class<?> classObj = Class.forName(
 				_CLASS_NAME, true, PortalClassLoaderUtil.getClassLoader());
 
 			_loginModule = (LoginModule)classObj.newInstance();

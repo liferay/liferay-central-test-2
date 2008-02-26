@@ -61,13 +61,13 @@ public class PortalGroup
 		boolean isMember = _members.containsKey(member);
 
 		if (!isMember) {
-			Iterator itr = _members.values().iterator();
+			Iterator<Principal> itr = _members.values().iterator();
 
 			while (!isMember && itr.hasNext()) {
-				Object obj = itr.next();
+				Principal principal = itr.next();
 
-				if (obj instanceof Group) {
-					Group group = (Group)obj;
+				if (principal instanceof Group) {
+					Group group = (Group)principal;
 
 					isMember = group.isMember(member);
 				}
@@ -77,14 +77,14 @@ public class PortalGroup
 		return isMember;
 	}
 
-	public Enumeration members() {
+	public Enumeration<Principal> members() {
 		return Collections.enumeration(_members.values());
 	}
 
 	public boolean removeMember(Principal user) {
-		Object obj = _members.remove(user);
+		Principal principal = _members.remove(user);
 
-		if (obj != null) {
+		if (principal != null) {
 			return true;
 		}
 		else {
@@ -92,6 +92,7 @@ public class PortalGroup
 		}
 	}
 
-	private Map _members = new HashMap();
+	private Map<Principal, Principal> _members =
+		new HashMap<Principal, Principal>();
 
 }

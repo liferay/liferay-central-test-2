@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -46,7 +47,6 @@ import javax.portlet.PortletModeException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
-import javax.portlet.PortletURL;
 import javax.portlet.PortletURLGenerationListener;
 import javax.portlet.ResourceURL;
 import javax.portlet.WindowStateException;
@@ -87,12 +87,12 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		}
 	}
 
-	public PortletURL createActionURL() {
+	public LiferayPortletURL createActionURL() {
 		return createActionURL(_portletName);
 	}
 
-	public PortletURL createActionURL(String portletName) {
-		PortletURL portletURL = createPortletURLImpl(
+	public LiferayPortletURL createActionURL(String portletName) {
+		LiferayPortletURL portletURL = createPortletURLImpl(
 			portletName, PortletRequest.ACTION_PHASE);
 
 		try {
@@ -205,12 +205,12 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		return portletURLImpl;
 	}
 
-	public PortletURL createRenderURL() {
+	public LiferayPortletURL createRenderURL() {
 		return createRenderURL(_portletName);
 	}
 
-	public PortletURL createRenderURL(String portletName) {
-		PortletURL portletURL = createPortletURLImpl(
+	public LiferayPortletURL createRenderURL(String portletName) {
+		LiferayPortletURL portletURL = createPortletURLImpl(
 			portletName, PortletRequest.RENDER_PHASE);
 
 		try {
