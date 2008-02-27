@@ -82,7 +82,7 @@
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
 		</init-param>
 		<init-param>
-			<param-name>basic_authentication</param-name>
+			<param-name>basic_auth</param-name>
 			<param-value>true</param-value>
 		</init-param>
 		<init-param>
@@ -98,7 +98,7 @@
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
 		</init-param>
 		<init-param>
-			<param-name>basic_authentication</param-name>
+			<param-name>basic_auth</param-name>
 			<param-value>true</param-value>
 		</init-param>
 		<init-param>
@@ -114,7 +114,7 @@
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
 		</init-param>
 		<init-param>
-			<param-name>basic_authentication</param-name>
+			<param-name>basic_auth</param-name>
 			<param-value>true</param-value>
 		</init-param>
 		<init-param>
@@ -130,7 +130,7 @@
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
 		</init-param>
 		<init-param>
-			<param-name>basic_authentication</param-name>
+			<param-name>basic_auth</param-name>
 			<param-value>true</param-value>
 		</init-param>
 		<init-param>
@@ -146,7 +146,7 @@
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
 		</init-param>
 		<init-param>
-			<param-name>basic_authentication</param-name>
+			<param-name>basic_auth</param-name>
 			<param-value>true</param-value>
 		</init-param>
 		<init-param>

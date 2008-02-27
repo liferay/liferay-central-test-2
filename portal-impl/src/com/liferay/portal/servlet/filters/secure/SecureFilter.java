@@ -68,8 +68,8 @@ public class SecureFilter extends BaseFilter {
 	public void init(FilterConfig config) throws ServletException {
 		super.init(config);
 
-		_basicAuthenticationEnabled = GetterUtil.getBoolean(
-			config.getInitParameter("basic_authentication"));
+		_basicAuthEnabled = GetterUtil.getBoolean(
+			config.getInitParameter("basic_auth"));
 
 		String propertyPrefix =
 			config.getInitParameter("portal_property_prefix");
@@ -169,8 +169,8 @@ public class SecureFilter extends BaseFilter {
 			boolean userAuthenticated = GetterUtil.getBoolean(
 				(String)ses.getAttribute(_USER_AUTHENTICATED));
 
-			if (_basicAuthenticationEnabled &&
-				!PropsValues.PORTAL_JAAS_ENABLE && !userAuthenticated) {
+			if (_basicAuthEnabled && !PropsValues.PORTAL_JAAS_ENABLE &&
+				!userAuthenticated) {
 
 				long userId = 0;
 
@@ -263,7 +263,7 @@ public class SecureFilter extends BaseFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(SecureFilter.class);
 
-	private boolean _basicAuthenticationEnabled;
+	private boolean _basicAuthEnabled;
 	private Set<String> _hostsAllowed = new HashSet<String>();
 	private boolean _httpsRequired;
 
