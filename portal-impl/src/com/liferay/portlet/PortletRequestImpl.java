@@ -603,30 +603,10 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 				String shortName = name.substring(
 					portletNamespace.length(), name.length());
-				String[] values = null;
 
-				if (portletFocus) {
-					values = req.getParameterValues(name);
-
-					if (themeDisplay.isLifecycleRender()) {
-						newRenderParameters.put(name, values);
-					}
-					else if (themeDisplay.isLifecycleResource()) {
-						String[] oldValues = oldRenderParameters.get(name);
-
-						if (oldValues != null) {
-							if (values == null) {
-								values = oldValues;
-							}
-							else {
-								values = ArrayUtil.append(values, oldValues);
-							}
-						}
-					}
-				}
-				else {
-					values = oldRenderParameters.get(name);
-				}
+				String[] values = getParameterValues(
+					req, themeDisplay, portletFocus, oldRenderParameters,
+					newRenderParameters, name);
 
 				dynamicReq.setParameterValues(shortName, values);
 			}
@@ -639,28 +619,9 @@ public abstract class PortletRequestImpl implements PortletRequest {
 				if (!PortalUtil.isReservedParameter(name) &&
 					Validator.isNotNull(name)) {
 
-					String[] values = null;
-
-					if (portletFocus) {
-						if (themeDisplay.isLifecycleRender()) {
-							newRenderParameters.put(name, values);
-						}
-						else if (themeDisplay.isLifecycleResource()) {
-							String[] oldValues = oldRenderParameters.get(name);
-
-							if (oldValues != null) {
-								if (values == null) {
-									values = oldValues;
-								}
-								else {
-									values = ArrayUtil.append(values, oldValues);
-								}
-							}
-						}
-					}
-					else {
-						values = oldRenderParameters.get(name);
-					}
+					String[] values = getParameterValues(
+						req, themeDisplay, portletFocus, oldRenderParameters,
+						newRenderParameters, name);
 
 					dynamicReq.setParameterValues(name, values);
 				}
@@ -713,6 +674,39 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 		_locale = (Locale)_req.getSession().getAttribute(Globals.LOCALE_KEY);
 		_plid = plid;
+	}
+
+	protected String[] getParameterValues(
+		HttpServletRequest req, ThemeDisplay themeDisplay, boolean portletFocus,
+		Map<String, String[]> oldRenderParameters,
+		Map<String, String[]> newRenderParameters, String name) {
+
+		String[] values = null;
+
+		if (portletFocus) {
+			values = req.getParameterValues(name);
+
+			if (themeDisplay.isLifecycleRender()) {
+				newRenderParameters.put(name, values);
+			}
+			else if (themeDisplay.isLifecycleResource()) {
+				String[] oldValues = oldRenderParameters.get(name);
+
+				if (oldValues != null) {
+					if (values == null) {
+						values = oldValues;
+					}
+					else {
+						values = ArrayUtil.append(values, oldValues);
+					}
+				}
+			}
+		}
+		else {
+			values = oldRenderParameters.get(name);
+		}
+
+		return values;
 	}
 
 	protected void recycle() {
