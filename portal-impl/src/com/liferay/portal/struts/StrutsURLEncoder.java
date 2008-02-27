@@ -71,7 +71,7 @@ public class StrutsURLEncoder implements URLEncoder {
 							WindowStateFactory.getWindowState(value));
 					}
 					catch (WindowStateException wse) {
-						wse.printStackTrace();
+						_log.error(wse.getMessage());
 					}
 				}
 				else if (param.equals("portletMode")) {
@@ -80,7 +80,7 @@ public class StrutsURLEncoder implements URLEncoder {
 							PortletModeFactory.getPortletMode(value));
 					}
 					catch (PortletModeException pme) {
-						pme.printStackTrace();
+						_log.error(pme.getMessage());
 					}
 				}
 				else if (param.equals("actionURL")) {
@@ -136,15 +136,15 @@ public class StrutsURLEncoder implements URLEncoder {
 			_portletURL.setParameters(new HashMap<String, String[]>());
 
 			try {
-				_portletURL.setPortletMode(_portletMode);
-			}
-			catch (PortletModeException pme) {
-			}
-
-			try {
 				_portletURL.setWindowState(_windowState);
 			}
 			catch (WindowStateException wse) {
+			}
+
+			try {
+				_portletURL.setPortletMode(_portletMode);
+			}
+			catch (PortletModeException pme) {
 			}
 
 			// Separate the Struts action from the query string

@@ -39,9 +39,9 @@ import org.apache.portals.bridges.struts.StrutsPortletURL;
 public class LiferayStrutsPortletURLImpl extends PortletURLImplWrapper {
 
 	public LiferayStrutsPortletURLImpl(
-		PortletResponseImpl res, String lifecycle) {
+		PortletResponseImpl res, long plid, String lifecycle) {
 
-		super(res, lifecycle);
+		super(res, plid, lifecycle);
 	}
 
 	public void setParameter(String name, String value) {

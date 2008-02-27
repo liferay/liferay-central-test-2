@@ -37,8 +37,10 @@ import java.util.Map;
  */
 public class StrutsActionPortletURL extends PortletURLImplWrapper {
 
-	public StrutsActionPortletURL(PortletResponseImpl res, String lifecycle) {
-		super(res, lifecycle);
+	public StrutsActionPortletURL(
+		PortletResponseImpl res, long plid, String lifecycle) {
+
+		super(res, plid, lifecycle);
 
 		_portlet = res.getPortlet();
 		_strutsPath =

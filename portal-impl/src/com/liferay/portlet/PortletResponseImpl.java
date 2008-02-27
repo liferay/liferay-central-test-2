@@ -106,33 +106,6 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	public PortletURLImpl createPortletURLImpl(
 		String portletName, String lifecycle) {
 
-		// Wrap portlet URL with a custom wrapper if and only if a custom
-		// wrapper for the portlet has been defined
-
-		Portlet portlet = getPortlet();
-
-		String portletURLClass = portlet.getPortletURLClass();
-
-		if (portlet.getPortletId().equals(portletName) &&
-			Validator.isNotNull(portletURLClass)) {
-
-			try {
-				Class<?> portletURLClassObj = Class.forName(portletURLClass);
-
-				Constructor<?> constructor = portletURLClassObj.getConstructor(
-					new Class[] {
-						com.liferay.portlet.PortletResponseImpl.class,
-						String.class
-					});
-
-				return (PortletURLImpl)constructor.newInstance(
-					new Object[] {this, lifecycle});
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
 		long plid = _plid;
 
 		try {
@@ -160,13 +133,41 @@ public abstract class PortletResponseImpl implements PortletResponse {
 			}
 		}
 
+		PortletURLImpl portletURLImpl = null;
+
+		Portlet portlet = getPortlet();
+
+		String portletURLClass = portlet.getPortletURLClass();
+
+		if (portlet.getPortletId().equals(portletName) &&
+			Validator.isNotNull(portletURLClass)) {
+
+			try {
+				Class<?> portletURLClassObj = Class.forName(portletURLClass);
+
+				Constructor<?> constructor = portletURLClassObj.getConstructor(
+					new Class[] {
+						com.liferay.portlet.PortletResponseImpl.class,
+						long.class, String.class
+					});
+
+				portletURLImpl = (PortletURLImpl)constructor.newInstance(
+					new Object[] {this, plid, lifecycle});
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		if (portletURLImpl == null) {
+			portletURLImpl = new PortletURLImpl(
+				_req, portletName, plid, lifecycle);
+		}
+
 		PortletApp portletApp = portlet.getPortletApp();
 
 		List<PortletURLListener> portletURLListeners =
 			portletApp.getPortletURLListeners();
-
-		PortletURLImpl portletURLImpl = new PortletURLImpl(
-			_req, portletName, plid, lifecycle);
 
 		for (PortletURLListener portletURLListener : portletURLListeners) {
 			try {
@@ -195,12 +196,14 @@ public abstract class PortletResponseImpl implements PortletResponse {
 			portletURLImpl.setWindowState(_req.getWindowState());
 		}
 		catch (WindowStateException wse) {
+			_log.error(wse.getMessage());
 		}
 
 		try {
 			portletURLImpl.setPortletMode(_req.getPortletMode());
 		}
 		catch (PortletModeException pme) {
+			_log.error(pme.getMessage());
 		}
 
 		return portletURLImpl;
