@@ -49,30 +49,29 @@ public class ActionResponseFactory {
 			PortletMode portletMode)
 		throws Exception {
 
-		ActionResponseImpl actionResponseImpl = null;
+		ActionResponseImpl actionResImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			actionResponseImpl =
-				(ActionResponseImpl)_instance._pool.borrowObject();
+			actionResImpl = (ActionResponseImpl)_instance._pool.borrowObject();
 		}
 		else {
-			actionResponseImpl = new ActionResponseImpl();
+			actionResImpl = new ActionResponseImpl();
 		}
 
-		actionResponseImpl.init(
+		actionResImpl.init(
 			req, res, portletName, user, layout, windowState, portletMode);
 
-		return actionResponseImpl;
+		return actionResImpl;
 	}
 
-	public static void recycle(ActionResponseImpl actionResponseImpl)
+	public static void recycle(ActionResponseImpl actionResImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(actionResponseImpl);
+			_instance._pool.returnObject(actionResImpl);
 		}
-		else if (actionResponseImpl != null) {
-			actionResponseImpl.recycle();
+		else if (actionResImpl != null) {
+			actionResImpl.recycle();
 		}
 	}
 
@@ -92,9 +91,9 @@ public class ActionResponseFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			ActionResponseImpl actionResponseImpl = (ActionResponseImpl)obj;
+			ActionResponseImpl actionResImpl = (ActionResponseImpl)obj;
 
-			actionResponseImpl.recycle();
+			actionResImpl.recycle();
 		}
 
 	}

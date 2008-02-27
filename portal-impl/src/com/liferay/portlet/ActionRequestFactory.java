@@ -51,31 +51,30 @@ public class ActionRequestFactory {
 			PortletPreferences prefs, long plid)
 		throws Exception {
 
-		ActionRequestImpl actionRequestImpl = null;
+		ActionRequestImpl actionReqImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			actionRequestImpl =
-				(ActionRequestImpl)_instance._pool.borrowObject();
+			actionReqImpl = (ActionRequestImpl)_instance._pool.borrowObject();
 		}
 		else {
-			actionRequestImpl = new ActionRequestImpl();
+			actionReqImpl = new ActionRequestImpl();
 		}
 
-		actionRequestImpl.init(
+		actionReqImpl.init(
 			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
 			prefs, plid);
 
-		return actionRequestImpl;
+		return actionReqImpl;
 	}
 
-	public static void recycle(ActionRequestImpl actionRequestImpl)
+	public static void recycle(ActionRequestImpl actionReqImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			_instance._pool.returnObject(actionRequestImpl);
+			_instance._pool.returnObject(actionReqImpl);
 		}
-		else if (actionRequestImpl != null) {
-			actionRequestImpl.recycle();
+		else if (actionReqImpl != null) {
+			actionReqImpl.recycle();
 		}
 	}
 
@@ -94,9 +93,9 @@ public class ActionRequestFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			ActionRequestImpl actionRequestImpl = (ActionRequestImpl)obj;
+			ActionRequestImpl actionReqImpl = (ActionRequestImpl)obj;
 
-			actionRequestImpl.recycle();
+			actionReqImpl.recycle();
 		}
 
 	}

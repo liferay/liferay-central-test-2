@@ -791,14 +791,14 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		PortletContext portletCtx =
 			portletConfig.getPortletContext();
 
-		RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(
+		RenderRequestImpl renderReqImpl = RenderRequestFactory.create(
 			req, portlet, invokerPortlet, portletCtx, WindowState.MAXIMIZED,
 			PortletMode.VIEW, portletPreferences);
 
-		RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(
-			renderRequestImpl, res, portletId, portlet.getCompanyId());
+		RenderResponseImpl renderResImpl = RenderResponseFactory.create(
+			renderReqImpl, res, portletId, portlet.getCompanyId());
 
-		renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
+		renderReqImpl.defineObjects(portletConfig, renderResImpl);
 
 		req.setAttribute(WebKeys.PORTLET_STRUTS_EXECUTE, Boolean.TRUE);
 	}
@@ -808,20 +808,18 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 		// Clean up portlet objects that may have been created by defineObjects
 		// for portlets that are called directly from a Struts path
 
-		RenderRequestImpl renderRequestImpl =
-			(RenderRequestImpl)req.getAttribute(
-				JavaConstants.JAVAX_PORTLET_REQUEST);
+		RenderRequestImpl renderReqImpl = (RenderRequestImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		if (renderRequestImpl != null) {
-			RenderRequestFactory.recycle(renderRequestImpl);
+		if (renderReqImpl != null) {
+			RenderRequestFactory.recycle(renderReqImpl);
 		}
 
-		RenderResponseImpl renderResponseImpl =
-			(RenderResponseImpl)req.getAttribute(
-				JavaConstants.JAVAX_PORTLET_RESPONSE);
+		RenderResponseImpl renderResImpl = (RenderResponseImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		if (renderResponseImpl != null) {
-			RenderResponseFactory.recycle(renderResponseImpl);
+		if (renderResImpl != null) {
+			RenderResponseFactory.recycle(renderResImpl);
 		}
 	}
 

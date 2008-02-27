@@ -2347,6 +2347,7 @@ public class PortalUtil {
 		_reservedParams.add("p_p_state");
 		_reservedParams.add("p_p_mode");
 		_reservedParams.add("p_p_resource_id");
+		_reservedParams.add("p_p_cacheability");
 		_reservedParams.add("p_p_width");
 		_reservedParams.add("p_p_col_id");
 		_reservedParams.add("p_p_col_pos");

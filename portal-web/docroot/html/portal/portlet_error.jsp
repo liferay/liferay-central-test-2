@@ -27,9 +27,9 @@
 <portlet:defineObjects />
 
 <%
-RenderResponseImpl renderResponseImpl = (RenderResponseImpl)renderResponse;
+RenderResponseImpl renderResImpl = (RenderResponseImpl)renderResponse;
 
-String portletTitle = renderResponseImpl.getTitle();
+String portletTitle = renderResImpl.getTitle();
 
 if (portletTitle == null) {
 	portletTitle = LanguageUtil.get(pageContext, "portlet");

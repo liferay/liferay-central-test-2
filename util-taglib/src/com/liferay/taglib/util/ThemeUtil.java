@@ -175,11 +175,11 @@ public class ThemeUtil {
 
 		// liferay:include tag library
 
-		StringServletResponse stringServletResponse = new StringServletResponse(
+		StringServletResponse stringServletRes = new StringServletResponse(
 			(HttpServletResponse)pageContext.getResponse());
 
 		VelocityTaglib velocityTaglib = new VelocityTaglib(
-			ctx, req, stringServletResponse, pageContext);
+			ctx, req, stringServletRes, pageContext);
 
 		req.setAttribute(WebKeys.VELOCITY_TAGLIB, velocityTaglib);
 

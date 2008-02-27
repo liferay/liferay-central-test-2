@@ -61,22 +61,22 @@ public class ResourceResponseFactory {
 			}
 		}
 
-		ResourceResponseImpl resourceResponseImpl = null;
+		ResourceResponseImpl resourceResImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			resourceResponseImpl =
+			resourceResImpl =
 				(ResourceResponseImpl)_instance._pool.borrowObject();
 		}
 		else {
-			resourceResponseImpl = new ResourceResponseImpl();
+			resourceResImpl = new ResourceResponseImpl();
 		}
 
-		resourceResponseImpl.init(req, res, portletName, companyId, plid);
+		resourceResImpl.init(req, res, portletName, companyId, plid);
 
-		return resourceResponseImpl;
+		return resourceResImpl;
 	}
 
-	public static void recycle(ResourceResponseImpl resourceResponseImpl)
+	public static void recycle(ResourceResponseImpl resourceResImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -86,10 +86,10 @@ public class ResourceResponseFactory {
 						_instance._pool.getNumActive());
 			}
 
-			_instance._pool.returnObject(resourceResponseImpl);
+			_instance._pool.returnObject(resourceResImpl);
 		}
-		else if (resourceResponseImpl != null) {
-			resourceResponseImpl.recycle();
+		else if (resourceResImpl != null) {
+			resourceResImpl.recycle();
 		}
 	}
 
@@ -111,10 +111,9 @@ public class ResourceResponseFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			ResourceResponseImpl resourceResponseImpl =
-				(ResourceResponseImpl)obj;
+			ResourceResponseImpl resourceResImpl = (ResourceResponseImpl)obj;
 
-			resourceResponseImpl.recycle();
+			resourceResImpl.recycle();
 		}
 
 	}

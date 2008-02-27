@@ -66,6 +66,7 @@ import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSecurityException;
 import javax.portlet.PortletURL;
+import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
@@ -272,6 +273,37 @@ public class PortletURLImpl
 	}
 
 	public void setCacheability(String cacheability) {
+		if (cacheability == null) {
+			throw new IllegalArgumentException();
+		}
+
+		if (!cacheability.equals(FULL) && !cacheability.equals(PORTLET) &&
+			!cacheability.equals(PAGE)) {
+
+			throw new IllegalArgumentException();
+		}
+
+		if (_portletReq instanceof ResourceRequest) {
+			ResourceRequest resourceReq = (ResourceRequest)_portletReq;
+
+			String parentCacheability = resourceReq.getCacheability();
+
+			if (parentCacheability.equals(FULL)) {
+				if (!cacheability.equals(FULL)) {
+					throw new IllegalStateException(
+						"Unable to set a weaker cacheability " + cacheability);
+				}
+			}
+			else if (parentCacheability.equals(PORTLET)) {
+				if (!cacheability.equals(FULL) &&
+					!cacheability.equals(PORTLET)) {
+
+					throw new IllegalStateException(
+						"Unable to set a weaker cacheability " + cacheability);
+				}
+			}
+		}
+
 		_cacheability = cacheability;
 
 		// Clear cache
@@ -610,6 +642,15 @@ public class PortletURLImpl
 				sm.append("p_p_resource_id");
 				sm.append(StringPool.EQUAL);
 				sm.append(processValue(key, _resourceID));
+				sm.append(StringPool.AMPERSAND);
+			}
+		}
+
+		if (!isParameterIncludedInPath("p_p_cacheability")) {
+			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				sm.append("p_p_cacheability");
+				sm.append(StringPool.EQUAL);
+				sm.append(processValue(key, _cacheability));
 				sm.append(StringPool.AMPERSAND);
 			}
 		}

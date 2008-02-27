@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import java.util.Locale;
 
+import javax.portlet.PortletRequest;
 import javax.portlet.ResourceResponse;
 
 import javax.servlet.http.HttpServletResponse;
@@ -39,6 +40,21 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ResourceResponseImpl
 	extends MimeResponseImpl implements ResourceResponse {
+
+	public PortletURLImpl createPortletURLImpl(
+		String portletName, String lifecycle) {
+
+		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+			throw new IllegalStateException(
+				"Unable to create an action URL from a resource response");
+		}
+		else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+			throw new IllegalStateException(
+				"Unable to create a render URL from a resource response");
+		}
+
+		return super.createPortletURLImpl(portletName, lifecycle);
+	}
 
 	public void setCharacterEncoding(String charset) {
 		_res.setCharacterEncoding(charset);

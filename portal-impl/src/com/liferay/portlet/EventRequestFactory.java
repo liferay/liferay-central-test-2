@@ -73,23 +73,23 @@ public class EventRequestFactory {
 			}
 		}
 
-		EventRequestImpl eventRequestImpl = null;
+		EventRequestImpl eventReqImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			eventRequestImpl = (EventRequestImpl)_instance._pool.borrowObject();
+			eventReqImpl = (EventRequestImpl)_instance._pool.borrowObject();
 		}
 		else {
-			eventRequestImpl = new EventRequestImpl();
+			eventReqImpl = new EventRequestImpl();
 		}
 
-		eventRequestImpl.init(
+		eventReqImpl.init(
 			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
 			prefs, plid);
 
-		return eventRequestImpl;
+		return eventReqImpl;
 	}
 
-	public static void recycle(EventRequestImpl eventRequestImpl)
+	public static void recycle(EventRequestImpl eventReqImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -99,10 +99,10 @@ public class EventRequestFactory {
 						_instance._pool.getNumActive());
 			}
 
-			_instance._pool.returnObject(eventRequestImpl);
+			_instance._pool.returnObject(eventReqImpl);
 		}
-		else if (eventRequestImpl != null) {
-			eventRequestImpl.recycle();
+		else if (eventReqImpl != null) {
+			eventReqImpl.recycle();
 		}
 	}
 
@@ -124,9 +124,9 @@ public class EventRequestFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			EventRequestImpl eventRequestImpl = (EventRequestImpl)obj;
+			EventRequestImpl eventReqImpl = (EventRequestImpl)obj;
 
-			eventRequestImpl.recycle();
+			eventReqImpl.recycle();
 		}
 
 	}

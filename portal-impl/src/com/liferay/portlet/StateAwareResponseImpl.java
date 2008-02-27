@@ -236,10 +236,6 @@ public abstract class StateAwareResponseImpl
 	}
 
 	protected void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
 		super.recycle();
 
 		_req = null;

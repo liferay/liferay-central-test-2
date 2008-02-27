@@ -173,10 +173,10 @@ else if (modePrint) {
 
 HttpServletRequest originalReq = PortalUtil.getOriginalServletRequest(request);
 
-RenderRequestImpl renderRequestImpl = RenderRequestFactory.create(originalReq, portlet, invokerPortlet, portletCtx, windowState, portletMode, portletPreferences, plid.longValue());
+RenderRequestImpl renderReqImpl = RenderRequestFactory.create(originalReq, portlet, invokerPortlet, portletCtx, windowState, portletMode, portletPreferences, plid.longValue());
 
 if (Validator.isNotNull(queryString)) {
-	DynamicServletRequest dynamicReq = (DynamicServletRequest)renderRequestImpl.getHttpServletRequest();
+	DynamicServletRequest dynamicReq = (DynamicServletRequest)renderReqImpl.getHttpServletRequest();
 
 	String[] params = StringUtil.split(queryString, StringPool.AMPERSAND);
 
@@ -194,11 +194,11 @@ if (Validator.isNotNull(queryString)) {
 
 StringServletResponse stringServletRes = new StringServletResponse(response);
 
-RenderResponseImpl renderResponseImpl = RenderResponseFactory.create(renderRequestImpl, stringServletRes, portletId, company.getCompanyId(), plid.longValue());
+RenderResponseImpl renderResImpl = RenderResponseFactory.create(renderReqImpl, stringServletRes, portletId, company.getCompanyId(), plid.longValue());
 
-renderRequestImpl.defineObjects(portletConfig, renderResponseImpl);
+renderReqImpl.defineObjects(portletConfig, renderResImpl);
 
-String responseContentType = renderRequestImpl.getResponseContentType();
+String responseContentType = renderReqImpl.getResponseContentType();
 
 String currentURL = PortalUtil.getCurrentURL(request);
 
@@ -591,13 +591,13 @@ else if (portletDisplay.isStateMax()) {
 
 		urlBack = urlMax.toString() + "#p_" + portletResource;*/
 
-		//urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
+		//urlBack = ParamUtil.getString(renderReqImpl, "returnToFullPageURL");
 	//}
 	//else {
 	//	urlBack = urlMax.toString();
 	//}
 
-	urlBack = ParamUtil.getString(renderRequestImpl, "returnToFullPageURL");
+	urlBack = ParamUtil.getString(renderReqImpl, "returnToFullPageURL");
 
 	if (Validator.isNull(urlBack)) {
 		urlBack = urlMax.toString();
@@ -621,10 +621,10 @@ boolean portletException = false;
 
 if (portlet.isActive() && access && supportsMimeType) {
 	try {
-		invokerPortlet.render(renderRequestImpl, renderResponseImpl);
+		invokerPortlet.render(renderReqImpl, renderResImpl);
 
 		if (themeDisplay.isStateExclusive()) {
-			renderRequestImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringServletRes);
+			renderReqImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringServletRes);
 		}
 	}
 	catch (UnavailableException ue) {
@@ -667,7 +667,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	}
 	%>
 
-	<div id="p_p_id<%= renderResponseImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
+	<div id="p_p_id<%= renderResImpl.getNamespace() %>" class="portlet-boundary portlet-boundary<%= PortalUtil.getPortletNamespace(portlet.getRootPortletId()) %> <%= portlet.getCssClassWrapper() %>" <%= freeformStyles %>>
 		<a name="p_<%= portletId %>"></a>
 </c:if>
 
@@ -682,7 +682,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 
 		<%
 		boolean useDefaultTemplate = portlet.isUseDefaultTemplate();
-		Boolean useDefaultTemplateObj = renderResponseImpl.getUseDefaultTemplate();
+		Boolean useDefaultTemplateObj = renderResImpl.getUseDefaultTemplate();
 
 		if (useDefaultTemplateObj != null) {
 			useDefaultTemplate = useDefaultTemplateObj.booleanValue();
@@ -739,7 +739,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 			}
 			else {
 				if (useDefaultTemplate) {
-					renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+					renderReqImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
 		%>
 
 					<tiles:insert template='<%= StrutsUtil.TEXT_HTML_DIR + "/common/themes/portlet.jsp" %>' flush="false">
@@ -754,7 +754,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 			}
 		}
 		else {
-			renderRequestImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
+			renderReqImpl.setAttribute(WebKeys.PORTLET_CONTENT, stringServletRes.getString());
 
 			String portletContent = StringPool.BLANK;
 
@@ -770,7 +770,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 					</tiles:insert>
 				</c:when>
 				<c:otherwise>
-					<%= renderRequestImpl.getAttribute(WebKeys.PORTLET_CONTENT) %>
+					<%= renderReqImpl.getAttribute(WebKeys.PORTLET_CONTENT) %>
 				</c:otherwise>
 			</c:choose>
 
@@ -805,11 +805,11 @@ else {
 <c:if test="<%= !themeDisplay.isStateExclusive() %>">
 	<script type="text/javascript">
 		<c:if test="<%= !runtimePortlet %>">
-			document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
-			document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").columnPos = <%= columnPos %>;
+			document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
+			document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").columnPos = <%= columnPos %>;
 
 			<c:if test='<%= !staticVar.equals("no") %>'>
-				document.getElementById("p_p_id<%= renderResponseImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
+				document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").isStatic = "<%= staticVar %>";
 			</c:if>
 
 			if (!Liferay.Portlet.isAjax("<%= portletDisplay.getId() %>")) {
@@ -839,16 +839,16 @@ if (showPortletCssIcon) {
 	themeDisplay.setIncludePortletCssJs(true);
 }
 
-SessionMessages.clear(renderRequestImpl);
-SessionErrors.clear(renderRequestImpl);
+SessionMessages.clear(renderReqImpl);
+SessionErrors.clear(renderReqImpl);
 
 if (themeDisplay.isStateExclusive()) {
-	request.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, renderRequestImpl);
-	request.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, renderResponseImpl);
+	request.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, renderReqImpl);
+	request.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, renderResImpl);
 }
 else {
-	RenderRequestFactory.recycle(renderRequestImpl);
-	RenderResponseFactory.recycle(renderResponseImpl);
+	RenderRequestFactory.recycle(renderReqImpl);
+	RenderResponseFactory.recycle(renderResImpl);
 }
 %>
 

@@ -211,12 +211,11 @@ public class RuntimePortletUtil {
 
 		// liferay:include tag library
 
-		StringServletResponse stringServletResponse =
-			new StringServletResponse(res);
+		StringServletResponse stringServletRes = new StringServletResponse(res);
 
 		MethodWrapper methodWrapper = new MethodWrapper(
 			"com.liferay.taglib.util.VelocityTaglib", "init",
-			new Object[] {ctx, req, stringServletResponse, pageContext});
+			new Object[] {ctx, req, stringServletRes, pageContext});
 
 		Object velocityTaglib = MethodInvoker.invoke(methodWrapper);
 

@@ -61,22 +61,21 @@ public class RenderResponseFactory {
 			}
 		}
 
-		RenderResponseImpl renderResponseImpl = null;
+		RenderResponseImpl renderResImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			renderResponseImpl =
-				(RenderResponseImpl)_instance._pool.borrowObject();
+			renderResImpl = (RenderResponseImpl)_instance._pool.borrowObject();
 		}
 		else {
-			renderResponseImpl = new RenderResponseImpl();
+			renderResImpl = new RenderResponseImpl();
 		}
 
-		renderResponseImpl.init(req, res, portletName, companyId, plid);
+		renderResImpl.init(req, res, portletName, companyId, plid);
 
-		return renderResponseImpl;
+		return renderResImpl;
 	}
 
-	public static void recycle(RenderResponseImpl renderResponseImpl)
+	public static void recycle(RenderResponseImpl renderResImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
@@ -86,10 +85,10 @@ public class RenderResponseFactory {
 						_instance._pool.getNumActive());
 			}
 
-			_instance._pool.returnObject(renderResponseImpl);
+			_instance._pool.returnObject(renderResImpl);
 		}
-		else if (renderResponseImpl != null) {
-			renderResponseImpl.recycle();
+		else if (renderResImpl != null) {
+			renderResImpl.recycle();
 		}
 	}
 
@@ -111,9 +110,9 @@ public class RenderResponseFactory {
 		}
 
 		public void passivateObject(Object obj) {
-			RenderResponseImpl renderResponseImpl = (RenderResponseImpl)obj;
+			RenderResponseImpl renderResImpl = (RenderResponseImpl)obj;
 
-			renderResponseImpl.recycle();
+			renderResImpl.recycle();
 		}
 
 	}

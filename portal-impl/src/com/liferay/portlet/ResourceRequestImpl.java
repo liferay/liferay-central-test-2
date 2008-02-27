@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Portlet;
 
 import java.util.Map;
@@ -47,7 +48,7 @@ public class ResourceRequestImpl
 	extends ClientDataRequestImpl implements ResourceRequest {
 
 	public String getCacheability() {
-		return null;
+		return _cacheablity;
 	}
 
 	public String getETag() {
@@ -73,11 +74,12 @@ public class ResourceRequestImpl
 		PortletContext portletCtx, WindowState windowState,
 		PortletMode portletMode, PortletPreferences prefs, long plid) {
 
-		_resourceID = req.getParameter("p_p_resource_id");
-
 		super.init(
 			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
 			prefs, plid);
+
+		_cacheablity = ParamUtil.getString(req, "p_p_cacheability");
+		_resourceID = req.getParameter("p_p_resource_id");
 	}
 
 	protected void recycle() {
@@ -87,11 +89,13 @@ public class ResourceRequestImpl
 
 		super.recycle();
 
+		_cacheablity = null;
 		_resourceID = null;
 	}
 
 	private static Log _log = LogFactory.getLog(ResourceRequestImpl.class);
 
+	private String _cacheablity;
 	private String _resourceID;
 
 }
