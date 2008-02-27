@@ -57,7 +57,7 @@ public interface Layout extends LayoutModel {
 
 	public long getAncestorLayoutId();
 
-	public java.util.List getAncestors()
+	public java.util.List<com.liferay.portal.model.Layout> getAncestors()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -71,15 +71,15 @@ public interface Layout extends LayoutModel {
 
 	public boolean isRootLayout();
 
-	public java.util.List getChildren()
+	public java.util.List<com.liferay.portal.model.Layout> getChildren()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getAllChildren()
+	public java.util.List<com.liferay.portal.model.Layout> getAllChildren()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getChildren(
+	public java.util.List<com.liferay.portal.model.Layout> getChildren(
 		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
