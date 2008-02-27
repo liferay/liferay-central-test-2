@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!--
+ * FCKeditor - The text editor for Internet - http://www.fckeditor.net
+ * Copyright (C) 2003-2007 Frederico Caldeira Knabben
+ *
+ * == BEGIN LICENSE ==
+ *
+ * Licensed under the terms of any of the following licenses at your
+ * choice:
+ *
+ *  - GNU General Public License Version 2 or later (the "GPL")
+ *    http://www.gnu.org/licenses/gpl.html
+ *
+ *  - GNU Lesser General Public License Version 2.1 or later (the "LGPL")
+ *    http://www.gnu.org/licenses/lgpl.html
+ *
+ *  - Mozilla Public License Version 1.1 or later (the "MPL")
+ *    http://www.mozilla.org/MPL/MPL-1.1.html
+ *
+ * == END LICENSE ==
+ *
+ * This is the sample style definitions file. It makes the styles combo
+ * completely customizable.
+ *
+ * See FCKConfig.StylesXmlPath in the configuration file.
+-->
+<Styles>
+
+	<Style name="Normal" element="p" />
+	<Style name="Heading 1" element="h1" />
+	<Style name="Heading 2" element="h2" />
+	<Style name="Heading 3" element="h3" />
+	<Style name="Heading 4" element="h4" />
+	<Style name="Preformatted Text" element="pre" />
+	<Style name="Cited Work" element="cite" />
+	<Style name="Computer Code" element="code" />
+
+	<Style name="Info Message" element="div">
+		<Attribute name="class" value="portlet-msg-info" />
+	</Style>
+
+	<Style name="Alert Message" element="div">
+		<Attribute name="class" value="portlet-msg-alert" />
+	</Style>
+
+	<Style name="Error Message" element="div">
+		<Attribute name="class" value="portlet-msg-error" />
+	</Style>
+
+	<!-- Object Styles -->
+
+	<!--
+	<Style name="Image on Left" element="img">
+		<Attribute name="style" value="padding: 5px; margin-right: 5px" />
+		<Attribute name="border" value="2" />
+		<Attribute name="align" value="left" />
+	</Style>
+	<Style name="Image on Right" element="img">
+		<Attribute name="style" value="padding: 5px; margin-left: 5px" />
+		<Attribute name="border" value="2" />
+		<Attribute name="align" value="right" />
+	</Style>
+	-->
+</Styles>
