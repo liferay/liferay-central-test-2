@@ -12,6 +12,11 @@
 	text-align: left;
 }
 
+.portlet.html-editor {
+	background: #fff;
+	padding: 5px;
+}
+
 .portlet-topper {
 	background-position: right top;
 	margin-right: -10px;

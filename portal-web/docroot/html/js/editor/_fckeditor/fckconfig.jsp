@@ -77,7 +77,7 @@ FCKConfig.ToolbarSets["edit-in-place"] = [
 	['OrderedList','UnorderedList','-','Outdent','Indent'],['Source','RemoveFormat'],
 ] ;
 
-FCKConfig.BodyClass='wysiwyg-editor <%= cssClasses %>';
+FCKConfig.BodyClass='html-editor <%= cssClasses %>';
 FCKConfig.CustomStyles = {};
 FCKConfig.StylesXmlPath = FCKConfig.EditorPath + 'fckstyles.xml' ;
 FCKConfig.EditorAreaCSS = '<%= cssPath %>/main.css';
