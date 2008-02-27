@@ -175,7 +175,7 @@ public class SecureFilter extends BaseFilter {
 				long userId = 0;
 
 				try {
-					userId = getUserId(httpReq);
+					userId = getBasicAuthUserId(httpReq);
 				}
 				catch (Exception e) {
 					_log.error(e);
@@ -200,7 +200,7 @@ public class SecureFilter extends BaseFilter {
 		}
 	}
 
-	protected long getUserId(HttpServletRequest req) throws Exception {
+	protected long getBasicAuthUserId(HttpServletRequest req) throws Exception {
 		long userId = 0;
 
 		String authorization = req.getHeader(HttpHeaders.AUTHORIZATION);
