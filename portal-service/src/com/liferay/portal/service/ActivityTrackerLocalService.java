@@ -376,4 +376,15 @@ public interface ActivityTrackerLocalService {
 
 	public int getUserActivityTrackersCount(long userId)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ActivityTracker> getObjectActivityTrackers(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.ActivityTracker> getObjectActivityTrackers(
+		java.lang.String className, long classPK, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getObjectActivityTrackersCount(java.lang.String className,
+		long classPK) throws com.liferay.portal.SystemException;
 }

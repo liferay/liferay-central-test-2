@@ -142,6 +142,34 @@ public class ActivityTrackerLocalServiceImpl
 		return activityTrackerFinder.countByU_R(userId, userId);
 	}
 
+	public List<ActivityTracker> getObjectActivityTrackers(
+			String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return activityTrackerPersistence.findByC_C(
+			classNameId, classPK);
+	}
+
+	public List<ActivityTracker> getObjectActivityTrackers(
+			String className, long classPK, int begin, int end)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return activityTrackerPersistence.findByC_C(
+			classNameId, classPK, begin, end);
+	}
+
+	public int getObjectActivityTrackersCount(String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return activityTrackerPersistence.countByC_C(classNameId, classPK);
+	}
+
 	private static Log _log =
 		LogFactory.getLog(ActivityTrackerLocalServiceImpl.class);
 

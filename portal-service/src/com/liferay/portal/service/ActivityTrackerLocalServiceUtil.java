@@ -875,4 +875,31 @@ public class ActivityTrackerLocalServiceUtil {
 
 		return activityTrackerLocalService.getUserActivityTrackersCount(userId);
 	}
+
+	public static java.util.List<com.liferay.portal.model.ActivityTracker> getObjectActivityTrackers(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		return activityTrackerLocalService.getObjectActivityTrackers(className,
+			classPK);
+	}
+
+	public static java.util.List<com.liferay.portal.model.ActivityTracker> getObjectActivityTrackers(
+		java.lang.String className, long classPK, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		return activityTrackerLocalService.getObjectActivityTrackers(className,
+			classPK, begin, end);
+	}
+
+	public static int getObjectActivityTrackersCount(
+		java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		return activityTrackerLocalService.getObjectActivityTrackersCount(className,
+			classPK);
+	}
 }
