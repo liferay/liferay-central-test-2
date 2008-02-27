@@ -307,7 +307,7 @@ public class LayoutAction extends Action {
 					includeLayoutContent(req, res, themeDisplay, layout);
 
 					if (themeDisplay.isStateExclusive()) {
-						serveExclusiveResource(req, res, themeDisplay);
+						renderExclusive(req, res, themeDisplay);
 
 						return null;
 					}
@@ -554,7 +554,7 @@ public class LayoutAction extends Action {
 		res.sendRedirect(portletURL.toString());
 	}
 
-	protected void serveExclusiveResource(
+	protected void renderExclusive(
 			HttpServletRequest req, HttpServletResponse res,
 			ThemeDisplay themeDisplay)
 		throws Exception {
