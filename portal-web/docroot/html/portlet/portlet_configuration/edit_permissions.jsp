@@ -164,7 +164,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	function <portlet:namespace />saveUserGroupPermissions(userGroupIdsPos, userGroupIdsPosValue) {
 
 		<%
-		PortletURL saveUserGroupPermissionsRedirectURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+		PortletURL saveUserGroupPermissionsRedirectURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 		new UserGroupSearch(renderRequest, saveUserGroupPermissionsRedirectURL);
 		%>
@@ -187,7 +187,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	function <portlet:namespace />saveUserPermissions(userIdsPos, userIdsPosValue) {
 
 		<%
-		PortletURL saveUserPermissionsRedirectURL = PortletURLUtil.clone(portletURL, false, renderResponse);
+		PortletURL saveUserPermissionsRedirectURL = PortletURLUtil.clone(portletURL, renderResponse);
 
 		new UserSearch(renderRequest, saveUserPermissionsRedirectURL);
 		%>
