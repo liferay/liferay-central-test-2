@@ -81,13 +81,13 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin {
 
 			// Get the Authorization header, if one was supplied
 
-			String authHeader = req.getHeader("Authorization");
+			String authorization = req.getHeader("Authorization");
 
-			if (authHeader == null) {
+			if (authorization == null) {
 				return credentials;
 			}
 
-			StringTokenizer st = new StringTokenizer(authHeader);
+			StringTokenizer st = new StringTokenizer(authorization);
 
 			if (!st.hasMoreTokens()) {
 				return credentials;
@@ -97,43 +97,45 @@ public class BasicAuthHeaderAutoLogin implements AutoLogin {
 
 			// We only handle HTTP Basic authentication
 
-			if (basic.equalsIgnoreCase("Basic")) {
-				String encodedCredentials = st.nextToken();
+			if (!basic.equalsIgnoreCase(HttpServletRequest.BASIC_AUTH)) {
+				return credentials;
+			}
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Encoded credentials are " + encodedCredentials);
-				}
+			String encodedCredentials = st.nextToken();
 
-				String decodedCredentials = new String(
-					Base64.decode(encodedCredentials));
+			if (_log.isDebugEnabled()) {
+				_log.debug("Encoded credentials are " + encodedCredentials);
+			}
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Decoded credentials are " + decodedCredentials);
-				}
+			String decodedCredentials = new String(
+				Base64.decode(encodedCredentials));
 
-				int p = decodedCredentials.indexOf(StringPool.COLON);
+			if (_log.isDebugEnabled()) {
+				_log.debug("Decoded credentials are " + decodedCredentials);
+			}
 
-				if (p == -1) {
-					return credentials;
-				}
+			int pos = decodedCredentials.indexOf(StringPool.COLON);
 
-				long userId = GetterUtil.getLong(
-					decodedCredentials.substring(0, p));
-				String password = decodedCredentials.substring(p + 1);
+			if (pos == -1) {
+				return credentials;
+			}
 
-				try {
-					UserLocalServiceUtil.getUserById(userId);
+			long userId = GetterUtil.getLong(
+				decodedCredentials.substring(0, pos));
+			String password = decodedCredentials.substring(pos + 1);
 
-					credentials = new String[3];
+			try {
+				UserLocalServiceUtil.getUserById(userId);
 
-					credentials[0] = String.valueOf(userId);
-					credentials[1] = password;
-					credentials[2] = Boolean.TRUE.toString();
-				}
-				catch (NoSuchUserException nsue) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(userId + " is not a valid user id");
-					}
+				credentials = new String[3];
+
+				credentials[0] = String.valueOf(userId);
+				credentials[1] = password;
+				credentials[2] = Boolean.TRUE.toString();
+			}
+			catch (NoSuchUserException nsue) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(userId + " is not a valid user id");
 				}
 			}
 

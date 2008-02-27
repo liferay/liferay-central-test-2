@@ -159,36 +159,36 @@
 		<url-pattern>/axis/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure AxisServlet Filter</filter-name>
-		<url-pattern>/secure/axis/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
 		<filter-name>JSONServlet Filter</filter-name>
 		<url-pattern>/json/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
-		<filter-name>Secure JSONServlet Filter</filter-name>
-		<url-pattern>/secure/json/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>LiferayServlet Filter</filter-name>
 		<url-pattern>/liferay/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure LiferayServlet Filter</filter-name>
-		<url-pattern>/secure/liferay/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
 		<filter-name>SpringServlet Filter</filter-name>
 		<url-pattern>/spring/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure SpringServlet Filter</filter-name>
-		<url-pattern>/secure/spring/*</url-pattern>
-	</filter-mapping>
-	<filter-mapping>
 		<filter-name>WebDAVServlet Filter</filter-name>
 		<url-pattern>/webdav/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Secure AxisServlet Filter</filter-name>
+		<url-pattern>/secure/axis/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Secure JSONServlet Filter</filter-name>
+		<url-pattern>/secure/json/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Secure LiferayServlet Filter</filter-name>
+		<url-pattern>/secure/liferay/*</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>Secure SpringServlet Filter</filter-name>
+		<url-pattern>/secure/spring/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Secure WebDAVServlet Filter</filter-name>

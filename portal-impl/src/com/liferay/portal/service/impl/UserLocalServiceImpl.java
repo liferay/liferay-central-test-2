@@ -435,9 +435,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			long companyId, String authType, String login, String password)
 		throws PortalException, SystemException {
 
-		User user = null;
-
 		try {
+			User user = null;
+
 			if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
 				user = getUserByEmailAddress(companyId, login);
 			}
@@ -445,7 +445,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				user = getUserByScreenName(companyId, login);
 			}
 			else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
-				user = getUserById(companyId, Long.parseLong(login));
+				user = getUserById(companyId, GetterUtil.getLong(login));
 			}
 
 			String userPassword = user.getPassword();
@@ -466,7 +466,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		catch (NoSuchUserException nsue) {
 		}
 
-		return -1;
+		return 0;
 	}
 
 	public boolean authenticateForJAAS(long userId, String encPwd)
