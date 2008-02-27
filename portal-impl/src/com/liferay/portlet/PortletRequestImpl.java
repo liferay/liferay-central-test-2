@@ -46,6 +46,8 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
+import com.sun.ccpp.ProfileFactoryImpl;
+
 import java.security.Principal;
 
 import java.util.ArrayList;
@@ -59,6 +61,10 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.Set;
 
+import javax.ccpp.Profile;
+import javax.ccpp.ProfileFactory;
+import javax.ccpp.ValidationMode;
+
 import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -67,7 +73,6 @@ import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletSession;
-import javax.portlet.RenderRequest;
 import javax.portlet.WindowState;
 
 import javax.servlet.http.Cookie;
@@ -101,98 +106,14 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			throw new IllegalArgumentException();
 		}
 
-		if (name.equals(RenderRequest.USER_INFO)) {
-			if (getRemoteUser() != null) {
-				LinkedHashMap<String, String> userInfo =
-					new LinkedHashMap<String, String>();
+		if (name.equals(PortletRequest.CCPP_PROFILE)) {
+			return getCCPPProfile();
+		}
+		else if (name.equals(PortletRequest.USER_INFO)) {
+			Object value = getUserInfo();
 
-				// Liferay user attributes
-
-				try {
-					User user = PortalUtil.getUser(_req);
-
-					UserAttributes userAttributes = new UserAttributes(user);
-
-					// Mandatory user attributes
-
-					userInfo.put(
-						UserAttributes.LIFERAY_COMPANY_ID,
-						userAttributes.getValue(
-							UserAttributes.LIFERAY_COMPANY_ID));
-
-					userInfo.put(
-						UserAttributes.LIFERAY_USER_ID,
-						userAttributes.getValue(
-							UserAttributes.LIFERAY_USER_ID));
-
-					// Portlet user attributes
-
-					for (String attrName : _portlet.getUserAttributes()) {
-						String attrValue = userAttributes.getValue(attrName);
-
-						if (attrValue != null) {
-							userInfo.put(attrName, attrValue);
-						}
-					}
-				}
-				catch (Exception e) {
-					e.printStackTrace();
-				}
-
-				Map<String, String> unmodifiableUserInfo =
-					Collections.unmodifiableMap(
-						(Map<String, String>)userInfo.clone());
-
-				// Custom user attributes
-
-				Map<String, CustomUserAttributes> cuaInstances =
-					new HashMap<String, CustomUserAttributes>();
-
-				for (Map.Entry<String, String> entry :
-						_portlet.getCustomUserAttributes().entrySet()) {
-
-					String attrName = entry.getKey();
-					String attrCustomClass = entry.getValue();
-
-					CustomUserAttributes cua =
-						cuaInstances.get(attrCustomClass);
-
-					if (cua == null) {
-						PortletApp portletApp = _portlet.getPortletApp();
-
-						if (portletApp.isWARFile()) {
-							PortletBag portletBag = PortletBagPool.get(
-								_portlet.getRootPortletId());
-
-							cua = (CustomUserAttributes)portletBag.
-								getCustomUserAttributes().get(attrCustomClass);
-
-							cua = (CustomUserAttributes)cua.clone();
-						}
-						else {
-							try {
-								cua = (CustomUserAttributes)Class.forName(
-									attrCustomClass).newInstance();
-							}
-							catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-
-						cuaInstances.put(attrCustomClass, cua);
-					}
-
-					if (cua != null) {
-						String attrValue = cua.getValue(
-							attrName, unmodifiableUserInfo);
-
-						if (attrValue != null) {
-							userInfo.put(attrName, attrValue);
-						}
-					}
-				}
-
-				return userInfo;
+			if (value != null) {
+				return value;
 			}
 		}
 
@@ -217,6 +138,23 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 	public String getAuthType() {
 		return _req.getAuthType();
+	}
+
+	public Profile getCCPPProfile() {
+		if (_profile == null) {
+			ProfileFactory profileFactory = ProfileFactory.getInstance();
+
+			if (profileFactory == null) {
+				profileFactory = ProfileFactoryImpl.getInstance();
+
+				ProfileFactory.setInstance(profileFactory);
+			}
+
+			_profile = profileFactory.newProfile(
+				_req, ValidationMode.VALIDATIONMODE_NONE);
+		}
+
+		return _profile;
 	}
 
 	public String getContextPath() {
@@ -410,6 +348,98 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 	public int getServerPort() {
 		return _req.getServerPort();
+	}
+
+	public Object getUserInfo() {
+		if (getRemoteUser() == null) {
+			return null;
+		}
+
+		LinkedHashMap<String, String> userInfo =
+			new LinkedHashMap<String, String>();
+
+		// Liferay user attributes
+
+		try {
+			User user = PortalUtil.getUser(_req);
+
+			UserAttributes userAttributes = new UserAttributes(user);
+
+			// Mandatory user attributes
+
+			userInfo.put(
+				UserAttributes.LIFERAY_COMPANY_ID,
+				userAttributes.getValue(UserAttributes.LIFERAY_COMPANY_ID));
+
+			userInfo.put(
+				UserAttributes.LIFERAY_USER_ID,
+				userAttributes.getValue(UserAttributes.LIFERAY_USER_ID));
+
+			// Portlet user attributes
+
+			for (String attrName : _portlet.getUserAttributes()) {
+				String attrValue = userAttributes.getValue(attrName);
+
+				if (attrValue != null) {
+					userInfo.put(attrName, attrValue);
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		Map<String, String> unmodifiableUserInfo =
+			Collections.unmodifiableMap((Map<String, String>)userInfo.clone());
+
+		// Custom user attributes
+
+		Map<String, CustomUserAttributes> cuaInstances =
+			new HashMap<String, CustomUserAttributes>();
+
+		for (Map.Entry<String, String> entry :
+				_portlet.getCustomUserAttributes().entrySet()) {
+
+			String attrName = entry.getKey();
+			String attrCustomClass = entry.getValue();
+
+			CustomUserAttributes cua = cuaInstances.get(attrCustomClass);
+
+			if (cua == null) {
+				PortletApp portletApp = _portlet.getPortletApp();
+
+				if (portletApp.isWARFile()) {
+					PortletBag portletBag = PortletBagPool.get(
+						_portlet.getRootPortletId());
+
+					cua = (CustomUserAttributes)portletBag.
+						getCustomUserAttributes().get(attrCustomClass);
+
+					cua = (CustomUserAttributes)cua.clone();
+				}
+				else {
+					try {
+						cua = (CustomUserAttributes)Class.forName(
+							attrCustomClass).newInstance();
+					}
+					catch (Exception e) {
+						_log.error(e, e);
+					}
+				}
+
+				cuaInstances.put(attrCustomClass, cua);
+			}
+
+			if (cua != null) {
+				String attrValue = cua.getValue(attrName, unmodifiableUserInfo);
+
+				if (attrValue != null) {
+					userInfo.put(attrName, attrValue);
+				}
+			}
+		}
+
+		return userInfo;
 	}
 
 	public Principal getUserPrincipal() {
@@ -741,6 +771,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		_portalSessionId = null;
 		_remoteUser = null;
 		_userPrincipal = null;
+		_profile = null;
 		_locale = null;
 		_plid = 0;
 	}
@@ -762,6 +793,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	private String _remoteUser;
 	private long _remoteUserId;
 	private Principal _userPrincipal;
+	private Profile _profile;
 	private Locale _locale;
 	private long _plid;
 

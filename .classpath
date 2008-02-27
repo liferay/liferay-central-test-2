@@ -83,6 +83,8 @@
 	<classpathentry kind="lib" path="lib/portal/bsf.jar"/>
 	<classpathentry kind="lib" path="lib/portal/burlap.jar"/>
 	<classpathentry kind="lib" path="lib/portal/casclient.jar"/>
+	<classpathentry kind="lib" path="lib/portal/ccpp.jar"/>
+	<classpathentry kind="lib" path="lib/portal/ccpp-ri.jar"/>
 	<classpathentry kind="lib" path="lib/portal/cglib.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-codec.jar"/>
@@ -139,6 +141,7 @@
 	<classpathentry kind="lib" path="lib/portal/jcommon.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jcr.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jdom.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jena.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jets3t.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jfreechart.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jgroups.jar"/>
@@ -176,7 +179,7 @@
 	<classpathentry kind="lib" path="lib/portal/portletbridge-portlet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/portlet-container.jar"/>
 	<classpathentry kind="lib" path="lib/portal/quartz.jar"/>
-	<classpathentry kind="lib" path="lib/portal/retroweaver.jar"/>
+	<classpathentry kind="lib" path="lib/portal/rdffilter.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ridl.jar"/>
 	<classpathentry kind="lib" path="lib/portal/rome.jar"/>
 	<classpathentry kind="lib" path="lib/portal/saaj.jar"/>
