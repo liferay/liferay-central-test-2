@@ -22,73 +22,80 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/activities/init.jsp" %>
+<%@ include file="/html/taglib/init.jsp" %>
+
+<%@ page import="com.liferay.portal.util.ActivityTrackerInterpreterUtil" %>
 
 <%
 String className = (String)request.getAttribute("liferay-ui:activities:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:activities:classPK"));
 
 List<ActivityTracker> activityTrackers = ActivityTrackerLocalServiceUtil.getObjectActivityTrackers(className, classPK);
+
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
 <a class="<%= namespace %>handle" href="javascript: void(0);"><liferay-ui:message key="show-activities" /> &raquo;</a>
 
 <div class="<%= namespace %>activities" style="display: none;">
-	<br/>
+	<br />
 
 	<table class="taglib-search-iterator">
-		<tr class="portlet-section-header">
-			<th class="col-1" width="80%">
-				<liferay-ui:message key="activity" />
-			</th>
-			<th class="col-2" width="20%">
-				<liferay-ui:message key="date" />
-			</th>
-		</tr>
-		<c:choose>
-			<c:when test="<%= activityTrackers.size() > 0 %>">
-				<%
-				int i = 0;
-				for (ActivityTracker activityTracker : activityTrackers) {
-					ActivityFeedEntry activityFeedEntry = ActivityTrackerInterpreterUtil.interpret(activityTracker, themeDisplay);
+	<tr class="portlet-section-header">
+		<th class="col-1" width="80%">
+			<liferay-ui:message key="activity" />
+		</th>
+		<th class="col-2" width="20%">
+			<liferay-ui:message key="date" />
+		</th>
+	</tr>
 
-					if (activityFeedEntry != null) {
+	<c:choose>
+		<c:when test="<%= activityTrackers.size() > 0 %>">
 
+			<%
+			for (int i = 0; i < activityTrackers.size(); i++) {
+				ActivityTracker activityTracker = activityTrackers.get(i);
+
+				ActivityFeedEntry activityFeedEntry = ActivityTrackerInterpreterUtil.interpret(activityTracker, themeDisplay);
+
+				if (activityFeedEntry != null) {
 					String cssClass = "portlet-section-body";
 
-					if (i%2 == 0) {
+					if (i % 2 == 0) {
 						cssClass = "portlet-section-alternate";
 					}
-				%>
+			%>
 
-						<tr class="<%= cssClass %>">
-							<td>
-								<%= activityFeedEntry.getTitle() %>
-							</td>
-							<td>
-								<%= dateFormatDateTime.format(activityTracker.getCreateDate()) %>
-							</td>
-						</tr>
-						<tr class="<%= cssClass %>">
-							<td colspan="2">
-								<%= activityFeedEntry.getBody() %>
-							</td>
-						</tr>
+					<tr class="<%= cssClass %>">
+						<td>
+							<%= activityFeedEntry.getTitle() %>
+						</td>
+						<td>
+							<%= dateFormatDateTime.format(activityTracker.getCreateDate()) %>
+						</td>
+					</tr>
+					<tr class="<%= cssClass %>">
+						<td colspan="2">
+							<%= activityFeedEntry.getBody() %>
+						</td>
+					</tr>
 
-				<%
-					}
-					i++;
+			<%
 				}
-				%>
-			</c:when>
-			<c:otherwise>
-				<tr class="portlet-section-body">
-					<td colspan="2">
-						<liferay-ui:message key="no-activities-were-found" />
-					</td>
-				</tr>
-			</c:otherwise>
-		</c:choose>
+			}
+			%>
+
+		</c:when>
+		<c:otherwise>
+			<tr class="portlet-section-body">
+				<td colspan="2">
+					<liferay-ui:message key="no-activities-were-found" />
+				</td>
+			</tr>
+		</c:otherwise>
+	</c:choose>
+
 	</table>
 </div>
 
@@ -99,11 +106,13 @@ List<ActivityTracker> activityTrackers = ActivityTrackerLocalServiceUtil.getObje
 				if (this.toggled) {
 					jQuery(".<%= namespace %>activities").hide();
 					jQuery(".<%= namespace %>handle").html('<%= UnicodeLanguageUtil.get(pageContext, "show-activities") + UnicodeFormatter.toString(" &raquo;") %>');
+
 					this.toggled = false;
 				}
 				else {
 					jQuery(".<%= namespace %>activities").show();
 					jQuery(".<%= namespace %>handle").html('<%= UnicodeFormatter.toString("&laquo; ") + UnicodeLanguageUtil.get(pageContext, "hide-activities") %>');
+
 					this.toggled = true;
 				}
 			}

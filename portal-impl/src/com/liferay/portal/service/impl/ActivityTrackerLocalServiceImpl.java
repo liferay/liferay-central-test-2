@@ -129,27 +129,13 @@ public class ActivityTrackerLocalServiceImpl
 		return activityTrackerPersistence.countByGroupId(groupId);
 	}
 
-	public List<ActivityTracker> getUserActivityTrackers(
-			long userId, int begin, int end)
-		throws SystemException {
-
-		return activityTrackerFinder.findByU_R(userId, userId, begin, end);
-	}
-
-	public int getUserActivityTrackersCount(long userId)
-		throws SystemException {
-
-		return activityTrackerFinder.countByU_R(userId, userId);
-	}
-
 	public List<ActivityTracker> getObjectActivityTrackers(
 			String className, long classPK)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return activityTrackerPersistence.findByC_C(
-			classNameId, classPK);
+		return activityTrackerPersistence.findByC_C(classNameId, classPK);
 	}
 
 	public List<ActivityTracker> getObjectActivityTrackers(
@@ -168,6 +154,19 @@ public class ActivityTrackerLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return activityTrackerPersistence.countByC_C(classNameId, classPK);
+	}
+
+	public List<ActivityTracker> getUserActivityTrackers(
+			long userId, int begin, int end)
+		throws SystemException {
+
+		return activityTrackerFinder.findByU_R(userId, userId, begin, end);
+	}
+
+	public int getUserActivityTrackersCount(long userId)
+		throws SystemException {
+
+		return activityTrackerFinder.countByU_R(userId, userId);
 	}
 
 	private static Log _log =

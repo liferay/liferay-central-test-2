@@ -22,7 +22,6 @@
 
 package com.liferay.taglib.ui;
 
-import com.liferay.portal.model.Layout;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.ServletRequest;
@@ -30,7 +29,7 @@ import javax.servlet.ServletRequest;
 /**
  * <a href="ActivitiesTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class ActivitiesTag extends IncludeTag {
