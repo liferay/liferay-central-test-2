@@ -34,6 +34,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import javax.portlet.PortletMode;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -98,6 +99,10 @@ public class RenderResponseImpl
 		else {
 			setIntHeader(name, value);
 		}
+	}
+
+	public String getLifecycle() {
+		return PortletRequest.RENDER_PHASE;
 	}
 
 	public String getResourceName() {

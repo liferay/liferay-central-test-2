@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import java.io.IOException;
 
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -37,6 +38,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ActionResponseImpl
 	extends StateAwareResponseImpl implements ActionResponse {
+
+	public String getLifecycle() {
+		return PortletRequest.ACTION_PHASE;
+	}
 
 	public void sendRedirect(String location) throws IOException {
 		if ((location == null) ||

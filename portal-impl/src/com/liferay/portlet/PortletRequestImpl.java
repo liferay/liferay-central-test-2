@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
@@ -92,6 +93,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		setAttribute(JavaConstants.JAVAX_PORTLET_CONFIG, portletConfig);
 		setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, this);
 		setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, res);
+		setAttribute(PortletRequest.LIFECYCLE_PHASE, getLifecycle());
 	}
 
 	public Object getAttribute(String name) {
@@ -234,9 +236,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		return _req;
 	}
 
-	public String getLifecycle() {
-		return PortletRequest.RENDER_PHASE;
-	}
+	public abstract String getLifecycle();
 
 	public Locale getLocale() {
 		Locale locale = _locale;
@@ -269,7 +269,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	}
 
 	public Map<String, String[]> getParameterMap() {
-		return _req.getParameterMap();
+		return Collections.unmodifiableMap(_req.getParameterMap());
 	}
 
 	public Enumeration<String> getParameterNames() {
@@ -326,6 +326,10 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			_ses = new PortletSessionImpl(
 				_req, _portletName, _portletCtx, _portalSessionId, _plid);
 		}*/
+
+		if (!create && _invalidSession) {
+			return null;
+		}
 
 		return _ses;
 	}
@@ -413,11 +417,21 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	}
 
 	public String getWindowID() {
-		return null;
+		StringMaker sm = new StringMaker();
+
+		sm.append(_portletName);
+		sm.append(PortletSessionImpl.LAYOUT_SEPARATOR);
+		sm.append(_plid);
+
+		return sm.toString();
 	}
 
 	public WindowState getWindowState() {
 		return _windowState;
+	}
+
+	public void invalidateSession() {
+		_invalidSession = true;
 	}
 
 	public boolean isPortletModeAllowed(PortletMode portletMode) {
@@ -744,6 +758,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	private PortletPreferences _prefs;
 	private PortletSessionImpl _ses;
 	private String _portalSessionId;
+	private boolean _invalidSession;
 	private String _remoteUser;
 	private long _remoteUserId;
 	private Principal _userPrincipal;

@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletSession;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.ArrayList;
@@ -47,21 +48,31 @@ import javax.servlet.http.HttpSession;
  */
 public class PortletSessionImpl implements LiferayPortletSession {
 
-	public static final String getPortletScope(String portletName, long plid) {
-		String portletScope =
-			_PORTLET_SCOPE_NAMESPACE + portletName + _LAYOUT_SEPARATOR +
-				plid;
+	public static final String PORTLET_SCOPE_NAMESPACE = "javax.portlet.p.";
 
-		return portletScope;
+ 	public static final String LAYOUT_SEPARATOR = "_LAYOUT_";
+
+	public static final String getPortletScope(String portletName, long plid) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(PORTLET_SCOPE_NAMESPACE);
+		sm.append(portletName);
+		sm.append(LAYOUT_SEPARATOR);
+		sm.append(plid);
+
+		return sm.toString();
 	}
 
 	public static final String getPortletScopeName(
 		String portletName, long plid, String name) {
 
-		String portletScopeName =
-			getPortletScope(portletName, plid) + StringPool.QUESTION + name;
+		StringMaker sm = new StringMaker();
 
-		return portletScopeName;
+		sm.append(getPortletScope(portletName, plid));
+		sm.append(StringPool.QUESTION);
+		sm.append(name);
+
+		return sm.toString();
 	}
 
 	public PortletSessionImpl(
@@ -302,10 +313,6 @@ public class PortletSessionImpl implements LiferayPortletSession {
 	private String _getPortletScopeName(String name) {
 		return getPortletScopeName(_portletName, _plid, name);
 	}
-
- 	private static final String _PORTLET_SCOPE_NAMESPACE = "javax.portlet.p.";
-
- 	private static final String _LAYOUT_SEPARATOR = "_LAYOUT_";
 
 	private HttpServletRequest _req;
 	private HttpSession _ses;

@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import javax.portlet.Event;
 import javax.portlet.EventRequest;
+import javax.portlet.PortletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -39,6 +40,10 @@ public class EventRequestImpl
 
 	public Event getEvent() {
 		return null;
+	}
+
+	public String getLifecycle() {
+		return PortletRequest.EVENT_PHASE;
 	}
 
 	protected EventRequestImpl() {

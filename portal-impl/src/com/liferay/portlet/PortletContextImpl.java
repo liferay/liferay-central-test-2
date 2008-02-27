@@ -226,7 +226,7 @@ public class PortletContextImpl implements PortletContext {
 		_ctx.setAttribute(name, obj);
 	}
 
-	private static int _MAJOR_VERSION = 1;
+	private static int _MAJOR_VERSION = 2;
 
 	private static int _MINOR_VERSION = 0;
 

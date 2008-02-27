@@ -253,6 +253,8 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		return _res;
 	}
 
+	public abstract String getLifecycle();
+
 	public String getNamespace() {
 		if (_namespace == null) {
 			_namespace = PortalUtil.getPortletNamespace(_portletName);

@@ -23,6 +23,7 @@
 package com.liferay.portlet;
 
 import javax.portlet.ActionRequest;
+import javax.portlet.PortletRequest;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -35,6 +36,10 @@ import org.apache.commons.logging.LogFactory;
  */
 public class ActionRequestImpl
 	extends ClientDataRequestImpl implements ActionRequest {
+
+	public String getLifecycle() {
+		return PortletRequest.ACTION_PHASE;
+	}
 
 	protected ActionRequestImpl() {
 		if (_log.isDebugEnabled()) {

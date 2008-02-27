@@ -30,6 +30,7 @@ import java.util.Map;
 import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
 import javax.portlet.ResourceRequest;
 import javax.portlet.WindowState;
 
@@ -53,6 +54,10 @@ public class ResourceRequestImpl
 
 	public String getETag() {
 		return null;
+	}
+
+	public String getLifecycle() {
+		return PortletRequest.RESOURCE_PHASE;
 	}
 
 	public Map<String, String[]> getPrivateRenderParameterMap() {

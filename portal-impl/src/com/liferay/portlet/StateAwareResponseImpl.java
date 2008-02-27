@@ -41,9 +41,6 @@ import javax.servlet.http.HttpServletResponse;
 
 import javax.xml.namespace.QName;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="StateAwareResponseImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -248,8 +245,6 @@ public abstract class StateAwareResponseImpl
 		_redirectLocation = null;
 		_calledSetRenderParameter = false;
 	}
-
-	private static Log _log = LogFactory.getLog(StateAwareResponseImpl.class);
 
 	private PortletRequestImpl _req;
 	private String _portletName;

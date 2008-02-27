@@ -28,7 +28,6 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 
 import javax.portlet.ClientDataRequest;
-import javax.portlet.PortletRequest;
 
 /**
  * <a href="ClientDataRequestImpl.java.html"><b><i>View Source</i></b></a>
@@ -49,10 +48,6 @@ public abstract class ClientDataRequestImpl
 
 	public String getContentType() {
 		return getHttpServletRequest().getContentType();
-	}
-
-	public String getLifecycle() {
-		return PortletRequest.ACTION_PHASE;
 	}
 
 	public String getMethod() {

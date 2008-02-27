@@ -56,6 +56,14 @@ public class ResourceResponseImpl
 		return super.createPortletURLImpl(portletName, lifecycle);
 	}
 
+	public int getBufferSize() {
+		return 0;
+	}
+
+	public String getLifecycle() {
+		return PortletRequest.RESOURCE_PHASE;
+	}
+
 	public void setCharacterEncoding(String charset) {
 		_res.setCharacterEncoding(charset);
 	}
@@ -67,6 +75,7 @@ public class ResourceResponseImpl
 	public void setContentLength(int length) {
 		_res.setContentLength(length);
 	}
+
 	protected ResourceResponseImpl() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Creating new instance " + hashCode());

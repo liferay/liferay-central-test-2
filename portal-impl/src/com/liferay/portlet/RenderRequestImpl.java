@@ -24,6 +24,8 @@ package com.liferay.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayRenderRequest;
 
+import javax.portlet.PortletRequest;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
@@ -38,6 +40,10 @@ public class RenderRequestImpl
 
 	public String getETag() {
 		return null;
+	}
+
+	public String getLifecycle() {
+		return PortletRequest.RENDER_PHASE;
 	}
 
 	protected RenderRequestImpl() {

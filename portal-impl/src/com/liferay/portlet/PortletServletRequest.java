@@ -46,6 +46,7 @@ import java.util.Locale;
 import javax.servlet.ServletInputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -166,10 +167,6 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
-	public void setCharacterEncoding(String encoding)
-		throws UnsupportedEncodingException {
-	}
-
 	public int getContentLength() {
 		if (_isUploadRequest()) {
 			return super.getContentLength();
@@ -250,12 +247,16 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return null;
 	}
 
+	public String getRemoteUser() {
+		return _remoteUser;
+	}
+
 	public String getServletPath() {
 		return _servletPath;
 	}
 
-	public String getRemoteUser() {
-		return _remoteUser;
+	public HttpSession getSession() {
+		return new PortletServletSession(_req.getSession(), _portletReq);
 	}
 
 	public Principal getUserPrincipal() {
@@ -281,6 +282,10 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		}
 	}
 
+	public void setCharacterEncoding(String encoding)
+		throws UnsupportedEncodingException {
+	}
+
 	private boolean _isUploadRequest() {
 		if (!_uploadRequestInvoked) {
 			_uploadRequestInvoked = true;
@@ -299,10 +304,10 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private PortletRequestImpl _portletReq;
 	private String _pathInfo;
 	private String _queryString;
-	private String _requestURI;
-	private String _servletPath;
 	private String _remoteUser;
 	private long _remoteUserId;
+	private String _requestURI;
+	private String _servletPath;
 	private Principal _userPrincipal;
 	private boolean _uploadRequest;
 	private boolean _uploadRequestInvoked;
