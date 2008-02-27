@@ -34,6 +34,8 @@ public interface HttpHeaders {
 
 	public static final String ACCEPT_ENCODING = "Accept-Encoding";
 
+	public static final String AUTHORIZATION = "Authorization";
+
 	public static final String CACHE_CONTROL = "Cache-Control";
 
 	public static final String CONNECTION = "Connection";
@@ -57,5 +59,7 @@ public interface HttpHeaders {
 	public static final String PUBLIC = "public";
 
 	public static final String USER_AGENT = "User-Agent";
+
+	public static final String WWW_AUTHENTICATE = "WWW-Authenticate";
 
 }

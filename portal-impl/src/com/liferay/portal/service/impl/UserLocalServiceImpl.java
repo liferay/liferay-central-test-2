@@ -431,6 +431,44 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			CompanyImpl.AUTH_TYPE_ID, headerMap, parameterMap);
 	}
 
+	public long authenticateForBasic(
+			long companyId, String authType, String login, String password)
+		throws PortalException, SystemException {
+
+		User user = null;
+
+		try {
+			if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+				user = getUserByEmailAddress(companyId, login);
+			}
+			else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+				user = getUserByScreenName(companyId, login);
+			}
+			else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+				user = getUserById(companyId, Long.parseLong(login));
+			}
+
+			String userPassword = user.getPassword();
+
+			if (user.isPasswordEncrypted()) {
+				String encPassword = PwdEncryptor.encrypt(password);
+
+				if (userPassword.equals(encPassword)) {
+					return user.getUserId();
+				}
+			}
+			else {
+				if (userPassword.equals(password)) {
+					return user.getUserId();
+				}
+			}
+		}
+		catch (NoSuchUserException nsue) {
+		}
+
+		return -1;
+	}
+
 	public boolean authenticateForJAAS(long userId, String encPwd)
 		throws PortalException, SystemException {
 

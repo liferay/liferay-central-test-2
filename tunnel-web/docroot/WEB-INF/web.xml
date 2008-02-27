@@ -15,11 +15,75 @@
 		<param-value>com.liferay.portal.spring.context.PortalWebApplicationContext</param-value>
 	</context-param>
 	<filter>
+		<filter-name>AxisServlet Filter</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<init-param>
+			<param-name>filter-class</param-name>
+			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>portal_property_prefix</param-name>
+			<param-value>axis.servlet.</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>JSONServlet Filter</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<init-param>
+			<param-name>filter-class</param-name>
+			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>portal_property_prefix</param-name>
+			<param-value>json.servlet.</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>LiferayServlet Filter</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<init-param>
+			<param-name>filter-class</param-name>
+			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>portal_property_prefix</param-name>
+			<param-value>tunnel.servlet.</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>SpringServlet Filter</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<init-param>
+			<param-name>filter-class</param-name>
+			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>portal_property_prefix</param-name>
+			<param-value>spring.remoting.servlet.</param-value>
+		</init-param>
+	</filter>
+	<filter>
+		<filter-name>WebDAVServlet Filter</filter-name>
+		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
+		<init-param>
+			<param-name>filter-class</param-name>
+			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>portal_property_prefix</param-name>
+			<param-value>webdav.servlet.</param-value>
+		</init-param>
+	</filter>
+	<filter>
 		<filter-name>Secure AxisServlet Filter</filter-name>
 		<filter-class>com.liferay.portal.kernel.servlet.PortalClassLoaderFilter</filter-class>
 		<init-param>
 			<param-name>filter-class</param-name>
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>basic_authentication</param-name>
+			<param-value>true</param-value>
 		</init-param>
 		<init-param>
 			<param-name>portal_property_prefix</param-name>
@@ -34,6 +98,10 @@
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
 		</init-param>
 		<init-param>
+			<param-name>basic_authentication</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
 			<param-name>portal_property_prefix</param-name>
 			<param-value>json.servlet.</param-value>
 		</init-param>
@@ -44,6 +112,10 @@
 		<init-param>
 			<param-name>filter-class</param-name>
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
+		</init-param>
+		<init-param>
+			<param-name>basic_authentication</param-name>
+			<param-value>true</param-value>
 		</init-param>
 		<init-param>
 			<param-name>portal_property_prefix</param-name>
@@ -58,6 +130,10 @@
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
 		</init-param>
 		<init-param>
+			<param-name>basic_authentication</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
 			<param-name>portal_property_prefix</param-name>
 			<param-value>spring.remoting.servlet.</param-value>
 		</init-param>
@@ -70,12 +146,16 @@
 			<param-value>com.liferay.portal.servlet.filters.secure.SecureFilter</param-value>
 		</init-param>
 		<init-param>
+			<param-name>basic_authentication</param-name>
+			<param-value>true</param-value>
+		</init-param>
+		<init-param>
 			<param-name>portal_property_prefix</param-name>
 			<param-value>webdav.servlet.</param-value>
 		</init-param>
 	</filter>
 	<filter-mapping>
-		<filter-name>Secure AxisServlet Filter</filter-name>
+		<filter-name>AxisServlet Filter</filter-name>
 		<url-pattern>/axis/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
@@ -83,7 +163,7 @@
 		<url-pattern>/secure/axis/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure JSONServlet Filter</filter-name>
+		<filter-name>JSONServlet Filter</filter-name>
 		<url-pattern>/json/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
@@ -91,7 +171,7 @@
 		<url-pattern>/secure/json/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure LiferayServlet Filter</filter-name>
+		<filter-name>LiferayServlet Filter</filter-name>
 		<url-pattern>/liferay/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
@@ -99,7 +179,7 @@
 		<url-pattern>/secure/liferay/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure SpringServlet Filter</filter-name>
+		<filter-name>SpringServlet Filter</filter-name>
 		<url-pattern>/spring/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
@@ -107,7 +187,7 @@
 		<url-pattern>/secure/spring/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
-		<filter-name>Secure WebDAVServlet Filter</filter-name>
+		<filter-name>WebDAVServlet Filter</filter-name>
 		<url-pattern>/webdav/*</url-pattern>
 	</filter-mapping>
 	<filter-mapping>
@@ -204,39 +284,4 @@
 	<session-config>
 		<session-timeout>1</session-timeout>
 	</session-config>
-	<security-constraint>
-		<web-resource-collection>
-			<web-resource-name>/secure/axis/*</web-resource-name>
-			<url-pattern>/secure/axis/*</url-pattern>
-		</web-resource-collection>
-		<web-resource-collection>
-			<web-resource-name>/secure/json/*</web-resource-name>
-			<url-pattern>/secure/json/*</url-pattern>
-		</web-resource-collection>
-		<web-resource-collection>
-			<web-resource-name>/secure/liferay/*</web-resource-name>
-			<url-pattern>/secure/liferay/*</url-pattern>
-		</web-resource-collection>
-		<web-resource-collection>
-			<web-resource-name>/secure/spring/*</web-resource-name>
-			<url-pattern>/secure/spring/*</url-pattern>
-		</web-resource-collection>
-		<web-resource-collection>
-			<web-resource-name>/secure/webdav/*</web-resource-name>
-			<url-pattern>/secure/webdav/*</url-pattern>
-		</web-resource-collection>
-		<auth-constraint>
-			<role-name>users</role-name>
-		</auth-constraint>
-		<user-data-constraint>
-			<transport-guarantee>NONE</transport-guarantee>
-		</user-data-constraint>
-	</security-constraint>
-	<login-config>
-		<auth-method>BASIC</auth-method>
-		<realm-name>PortalRealm</realm-name>
-	</login-config>
-	<security-role>
-		<role-name>users</role-name>
-	</security-role>
 </web-app>

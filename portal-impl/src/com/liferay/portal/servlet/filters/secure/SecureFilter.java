@@ -25,12 +25,21 @@ package com.liferay.portal.servlet.filters.secure;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
+import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
+import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Http;
 
 import java.io.IOException;
@@ -45,18 +54,23 @@ import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * <a href="SecureFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Alexander Chow
  *
  */
 public class SecureFilter extends BaseFilter {
 
 	public void init(FilterConfig config) throws ServletException {
 		super.init(config);
+
+		_basicAuthenticationEnabled = GetterUtil.getBoolean(
+			config.getInitParameter("basic_authentication"));
 
 		String propertyPrefix =
 			config.getInitParameter("portal_property_prefix");
@@ -147,7 +161,83 @@ public class SecureFilter extends BaseFilter {
 				_log.debug("Not securing " + completeURL);
 			}
 
-			doFilter(SecureFilter.class, req, res, chain);
+			// This basic authentication should only be run if specified by
+			// web.xml and JAAS is disabled. Make sure to run this once per
+			// session.
+
+			HttpSession ses = httpReq.getSession();
+
+			boolean userAuthenticated =
+				GetterUtil.getBoolean(
+					(String)ses.getAttribute(WebKeys.USER_AUTHENTICATED));
+
+			if (_basicAuthenticationEnabled && !userAuthenticated &&
+				!PropsValues.PORTAL_JAAS_ENABLE) {
+
+				long userId = -1;
+
+				try {
+					String authorization =
+						httpReq.getHeader(HttpHeaders.AUTHORIZATION);
+
+					if (Validator.isNotNull(authorization)) {
+						String[] authPair = authorization.split("\\s+");
+
+						String reqAuthType = authPair[0];
+						String credentials =
+							new String(Base64.decode(authPair[1]));
+
+						if (reqAuthType.equalsIgnoreCase(
+								HttpServletRequest.BASIC_AUTH)) {
+
+							String[] loginPassword =
+								StringUtil.split(credentials, StringPool.COLON);
+							String login = loginPassword[0].trim();
+							String password = loginPassword[1].trim();
+
+							long companyId =
+								PortalInstances.getCompanyId(httpReq);
+							Company company =
+								CompanyLocalServiceUtil.getCompanyById(
+									companyId);
+							String authType = company.getAuthType();
+
+							userId = UserLocalServiceUtil.authenticateForBasic(
+								companyId, authType, login, password);
+
+							if (userId > 0) {
+								ses.setAttribute(
+									WebKeys.USER_AUTHENTICATED,
+									StringPool.TRUE);
+
+								req = new ProtectedServletRequest(
+									httpReq, String.valueOf(userId));
+							}
+							else {
+								if (_log.isDebugEnabled()) {
+									_log.debug(
+										"Authentication failed for login " +
+											login);
+								}
+							}
+						}
+					}
+				}
+				catch (Exception e) {
+					_log.error(e);
+				}
+
+				if (userId <= 0) {
+					httpRes.setHeader(
+						HttpHeaders.WWW_AUTHENTICATE, _PORTAL_REALM);
+			    	httpRes.setStatus(
+			    		HttpServletResponse.SC_UNAUTHORIZED);
+
+			    	return;
+				}
+			}
+
+		    doFilter(SecureFilter.class, req, res, chain);
 		}
 	}
 
@@ -172,9 +262,11 @@ public class SecureFilter extends BaseFilter {
 	}
 
 	private static final String _SERVER_IP = "SERVER_IP";
+	private static final String _PORTAL_REALM = "Basic realm=\"PortalRealm\"";
 
 	private static Log _log = LogFactoryUtil.getLog(SecureFilter.class);
 
+	private boolean _basicAuthenticationEnabled;
 	private Set<String> _hostsAllowed = new HashSet<String>();
 	private boolean _httpsRequired;
 

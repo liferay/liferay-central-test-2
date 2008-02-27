@@ -442,6 +442,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public long authenticateForBasic(long companyId, java.lang.String authType,
+		java.lang.String login, java.lang.String password)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public boolean authenticateForJAAS(long userId, java.lang.String encPwd)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

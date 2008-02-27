@@ -1020,6 +1020,17 @@ public class UserLocalServiceUtil {
 			password, headerMap, parameterMap);
 	}
 
+	public static long authenticateForBasic(long companyId,
+		java.lang.String authType, java.lang.String login,
+		java.lang.String password)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.authenticateForBasic(companyId, authType,
+			login, password);
+	}
+
 	public static boolean authenticateForJAAS(long userId,
 		java.lang.String encPwd)
 		throws com.liferay.portal.PortalException,
