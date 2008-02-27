@@ -26,6 +26,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
+import com.liferay.portal.kernel.portlet.PortletModeFactory;
+import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -63,6 +65,7 @@ import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSecurityException;
+import javax.portlet.PortletURL;
 import javax.portlet.ResourceURL;
 import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
@@ -79,7 +82,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Jorge Ferrer
  *
  */
-public class PortletURLImpl implements LiferayPortletURL, Serializable {
+public class PortletURLImpl
+	implements LiferayPortletURL, PortletURL, ResourceURL, Serializable {
 
 	public PortletURLImpl(
 		PortletRequestImpl req, String portletId, long plid, String lifecycle) {
@@ -386,7 +390,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 	}
 
 	public void setPortletMode(String portletMode) throws PortletModeException {
-		setPortletMode(new PortletMode(portletMode));
+		setPortletMode(PortletModeFactory.getPortletMode(portletMode));
 	}
 
 	public void setPortletMode(PortletMode portletMode)
@@ -427,7 +431,7 @@ public class PortletURLImpl implements LiferayPortletURL, Serializable {
 	}
 
 	public void setWindowState(String windowState) throws WindowStateException {
-		setWindowState(new WindowState(windowState));
+		setWindowState(WindowStateFactory.getWindowState(windowState));
 	}
 
 	public void setWindowState(WindowState windowState)

@@ -35,6 +35,7 @@
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerControl" %>
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerKeys" %>
 <%@ page import="com.liferay.portal.kernel.lar.UserIdStrategy" %>
+<%@ page import="com.liferay.portal.kernel.portlet.PortletModeFactory" %>
 <%@ page import="com.liferay.portal.kernel.servlet.PortletServlet" %>
 <%@ page import="com.liferay.portal.security.permission.ResourceActionsUtil" %>
 <%@ page import="com.liferay.portal.security.permission.comparator.ActionComparator" %>

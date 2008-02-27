@@ -24,7 +24,6 @@ package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
 
-import java.util.Enumeration;
 import java.util.Map;
 
 import javax.portlet.PortletContext;
@@ -61,14 +60,6 @@ public class ResourceRequestImpl
 
 	public String getResourceID() {
 		return _resourceID;
-	}
-
-	public String getResponseContentType() {
-		return null;
-	}
-
-	public Enumeration<String> getResponseContentTypes() {
-		return null;
 	}
 
 	protected ResourceRequestImpl() {

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
@@ -85,7 +86,7 @@ public class RenderPortletAction extends Action {
 			res.setHeader("Ajax-ID", ajaxId);
 		}
 
-		WindowState windowState = new WindowState(
+		WindowState windowState = WindowStateFactory.getWindowState(
 			ParamUtil.getString(req, "p_p_state"));
 
 		PortalUtil.updateWindowState(

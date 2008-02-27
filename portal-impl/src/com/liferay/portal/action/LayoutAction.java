@@ -23,6 +23,8 @@
 package com.liferay.portal.action;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.portlet.PortletModeFactory;
+import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
@@ -250,13 +252,13 @@ public class LayoutAction extends Action {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
-		Layout layout = themeDisplay.getLayout();
-
-		boolean resetLayout = ParamUtil.getBoolean(
-			req, "p_l_reset", PropsValues.LAYOUT_DEFAULT_P_L_RESET);
-
 		try {
-			if (resetLayout) {
+			Layout layout = themeDisplay.getLayout();
+
+			boolean resetLayout = ParamUtil.getBoolean(
+				req, "p_l_reset", PropsValues.LAYOUT_DEFAULT_P_L_RESET);
+
+			if (!PropsValues.TCK_URL && resetLayout) {
 				RenderParametersPool.clear(req, plid);
 			}
 
@@ -424,10 +426,10 @@ public class LayoutAction extends Action {
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
 		PortletContext portletCtx = portletConfig.getPortletContext();
 
-		WindowState windowState = new WindowState(
+		WindowState windowState = WindowStateFactory.getWindowState(
 			ParamUtil.getString(req, "p_p_state"));
 
-		PortletMode portletMode = new PortletMode(
+		PortletMode portletMode = PortletModeFactory.getPortletMode(
 			ParamUtil.getString(req, "p_p_mode"));
 
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {

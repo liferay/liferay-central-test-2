@@ -23,6 +23,8 @@
 package com.liferay.portal.servlet.taglib.portlet;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.portlet.PortletModeFactory;
+import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -33,9 +35,7 @@ import com.liferay.util.MapUtil;
 
 import java.util.Map;
 
-import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
-import javax.portlet.WindowState;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -87,20 +87,20 @@ public class ActionURLTagUtil {
 			LiferayPortletURL portletURL = null;
 
 			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				portletURL = (LiferayPortletURL)renderResponse.createActionURL(
-					portletName);
+				portletURL = renderResponse.createActionURL(portletName);
 			}
 			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				portletURL = (LiferayPortletURL)renderResponse.createRenderURL(
-					portletName);
+				portletURL = renderResponse.createRenderURL(portletName);
 			}
 
 			if (Validator.isNotNull(windowState)) {
-				portletURL.setWindowState(new WindowState(windowState));
+				portletURL.setWindowState(
+					WindowStateFactory.getWindowState(windowState));
 			}
 
 			if (Validator.isNotNull(portletMode)) {
-				portletURL.setPortletMode(new PortletMode(portletMode));
+				portletURL.setPortletMode(
+					PortletModeFactory.getPortletMode(portletMode));
 			}
 
 			if (secure != null) {

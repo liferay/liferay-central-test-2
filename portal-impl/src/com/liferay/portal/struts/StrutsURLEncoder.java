@@ -23,6 +23,8 @@
 package com.liferay.portal.struts;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.portlet.PortletModeFactory;
+import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -65,7 +67,8 @@ public class StrutsURLEncoder implements URLEncoder {
 
 				if (param.equals("windowState")) {
 					try {
-						portletURL.setWindowState(new WindowState(value));
+						portletURL.setWindowState(
+							WindowStateFactory.getWindowState(value));
 					}
 					catch (WindowStateException wse) {
 						wse.printStackTrace();
@@ -73,7 +76,8 @@ public class StrutsURLEncoder implements URLEncoder {
 				}
 				else if (param.equals("portletMode")) {
 					try {
-						portletURL.setPortletMode(new PortletMode(value));
+						portletURL.setPortletMode(
+							PortletModeFactory.getPortletMode(value));
 					}
 					catch (PortletModeException pme) {
 						pme.printStackTrace();

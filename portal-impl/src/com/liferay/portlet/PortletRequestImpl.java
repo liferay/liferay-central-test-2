@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -50,10 +51,12 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortalContext;
 import javax.portlet.PortletConfig;
@@ -501,6 +504,9 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		PortletContext portletCtx, WindowState windowState,
 		PortletMode portletMode, PortletPreferences prefs, long plid) {
 
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
 		_portletName = portlet.getPortletId();
 
 		String portletNamespace = PortalUtil.getPortletNamespace(_portletName);
@@ -531,19 +537,16 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 		Enumeration<String> enu = null;
 
-		Map<String, String[]> renderParameters = null;
-
 		boolean portletFocus = false;
 
 		if (_portletName.equals(req.getParameter("p_p_id"))) {
-			ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
-				WebKeys.THEME_DISPLAY);
 
 			// Request was targeted to this portlet
 
-			if (themeDisplay.isLifecycleRender()) {
+			if (themeDisplay.isLifecycleRender() ||
+				themeDisplay.isLifecycleResource()) {
 
-				// Request was triggered by a render URL
+				// Request was triggered by a render or resource URL
 
 			   portletFocus = true;
 			}
@@ -557,51 +560,75 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			}
 		}
 
+		Map<String, String[]> oldRenderParameters = RenderParametersPool.get(
+			req, plid, _portletName);
+
+		Map<String, String[]> newRenderParameters = null;
+
 		if (portletFocus) {
-			renderParameters = new HashMap<String, String[]>();
+			newRenderParameters = new HashMap<String, String[]>();
 
 			if (getLifecycle().equals(PortletRequest.RENDER_PHASE) &&
 				!LiferayWindowState.isExclusive(req) &&
 				!LiferayWindowState.isPopUp(req)) {
 
 				RenderParametersPool.put(
-					req, plid, _portletName, renderParameters);
+					req, plid, _portletName, newRenderParameters);
 			}
 
-			enu = req.getParameterNames();
+			if (themeDisplay.isLifecycleResource()) {
+				Set<String> oldNames = oldRenderParameters.keySet();
+				Set<String> newNames = req.getParameterMap().keySet();
+
+				Set<String> allNames = new HashSet<String>();
+
+				allNames.addAll(oldNames);
+				allNames.addAll(newNames);
+
+				enu = Collections.enumeration(newNames);
+			}
+			else {
+				enu = req.getParameterNames();
+			}
 		}
 		else {
-			renderParameters = RenderParametersPool.get(
-				req, plid, _portletName);
-
-			if (!_portletName.equals(req.getParameter("p_p_id"))) {
-				putNamespaceParams(
-					req, portletNamespace, plid, renderParameters);
-			}
-
-			enu = Collections.enumeration(renderParameters.keySet());
+			enu = Collections.enumeration(oldRenderParameters.keySet());
 		}
 
 		while (enu.hasMoreElements()) {
-			String param = enu.nextElement();
+			String name = enu.nextElement();
 
-			if (param.startsWith(portletNamespace) &&
+			if (name.startsWith(portletNamespace) &&
 				!invokerPortlet.isFacesPortlet()) {
 
-				String newParam =
-					param.substring(portletNamespace.length(), param.length());
+				String shortName = name.substring(
+					portletNamespace.length(), name.length());
 				String[] values = null;
 
 				if (portletFocus) {
-					values = req.getParameterValues(param);
+					values = req.getParameterValues(name);
 
-					renderParameters.put(param, values);
+					if (themeDisplay.isLifecycleRender()) {
+						newRenderParameters.put(name, values);
+					}
+					else if (themeDisplay.isLifecycleResource()) {
+						String[] oldValues = oldRenderParameters.get(name);
+
+						if (oldValues != null) {
+							if (values == null) {
+								values = oldValues;
+							}
+							else {
+								values = ArrayUtil.append(values, oldValues);
+							}
+						}
+					}
 				}
 				else {
-					values = renderParameters.get(param);
+					values = oldRenderParameters.get(name);
 				}
 
-				dynamicReq.setParameterValues(newParam, values);
+				dynamicReq.setParameterValues(shortName, values);
 			}
 			else {
 
@@ -609,21 +636,33 @@ public abstract class PortletRequestImpl implements PortletRequest {
 				// Jetty has a bug that adds an additional null parameter
 				// the enumeration of parameter names.
 
-				if (!PortalUtil.isReservedParameter(param) &&
-					Validator.isNotNull(param)) {
+				if (!PortalUtil.isReservedParameter(name) &&
+					Validator.isNotNull(name)) {
 
 					String[] values = null;
 
 					if (portletFocus) {
-						values = req.getParameterValues(param);
+						if (themeDisplay.isLifecycleRender()) {
+							newRenderParameters.put(name, values);
+						}
+						else if (themeDisplay.isLifecycleResource()) {
+							String[] oldValues = oldRenderParameters.get(name);
 
-						renderParameters.put(param, values);
+							if (oldValues != null) {
+								if (values == null) {
+									values = oldValues;
+								}
+								else {
+									values = ArrayUtil.append(values, oldValues);
+								}
+							}
+						}
 					}
 					else {
-						values = renderParameters.get(param);
+						values = oldRenderParameters.get(name);
 					}
 
-					dynamicReq.setParameterValues(param, values);
+					dynamicReq.setParameterValues(name, values);
 				}
 			}
 		}
@@ -674,27 +713,6 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 		_locale = (Locale)_req.getSession().getAttribute(Globals.LOCALE_KEY);
 		_plid = plid;
-	}
-
-	protected void putNamespaceParams(
-		HttpServletRequest req, String prefix, long plid,
-		Map<String, String[]> renderParameters) {
-
-		// Adds params that are prefixed with given prefix to parameters pool.
-		// Functionality added by Sergey Ponomarev to allow passing parameters
-		// to multiple portlets in one portlet URL.
-
-		Enumeration<String> names = req.getParameterNames();
-
-		while (names.hasMoreElements()) {
-			String key = names.nextElement();
-
-			if (key.startsWith(prefix)) {
-				renderParameters.put(key, req.getParameterValues(key));
-			}
-		}
-
-		RenderParametersPool.put(req, plid, _portletName, renderParameters);
 	}
 
 	protected void recycle() {

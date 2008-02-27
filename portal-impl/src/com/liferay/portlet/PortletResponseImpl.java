@@ -92,22 +92,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	}
 
 	public LiferayPortletURL createActionURL(String portletName) {
-		LiferayPortletURL portletURL = createPortletURLImpl(
-			portletName, PortletRequest.ACTION_PHASE);
-
-		try {
-			portletURL.setPortletMode(_req.getPortletMode());
-		}
-		catch (PortletModeException pme) {
-		}
-
-		try {
-			portletURL.setWindowState(_req.getWindowState());
-		}
-		catch (WindowStateException wse) {
-		}
-
-		return portletURL;
+		return createPortletURLImpl(portletName, PortletRequest.ACTION_PHASE);
 	}
 
 	public Element createElement(String tagName) throws DOMException {
@@ -196,10 +181,26 @@ public abstract class PortletResponseImpl implements PortletResponse {
 					portletURLGenerationListener.filterRenderURL(
 						portletURLImpl);
 				}
+				else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+					portletURLGenerationListener.filterResourceURL(
+						portletURLImpl);
+				}
 			}
 			catch (PortletException pe) {
 				_log.error(pe, pe);
 			}
+		}
+
+		try {
+			portletURLImpl.setWindowState(_req.getWindowState());
+		}
+		catch (WindowStateException wse) {
+		}
+
+		try {
+			portletURLImpl.setPortletMode(_req.getPortletMode());
+		}
+		catch (PortletModeException pme) {
 		}
 
 		return portletURLImpl;
@@ -210,22 +211,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 	}
 
 	public LiferayPortletURL createRenderURL(String portletName) {
-		LiferayPortletURL portletURL = createPortletURLImpl(
-			portletName, PortletRequest.RENDER_PHASE);
-
-		try {
-			portletURL.setPortletMode(_req.getPortletMode());
-		}
-		catch (PortletModeException pme) {
-		}
-
-		try {
-			portletURL.setWindowState(_req.getWindowState());
-		}
-		catch (WindowStateException wse) {
-		}
-
-		return portletURL;
+		return createPortletURLImpl(portletName, PortletRequest.RENDER_PHASE);
 	}
 
 	public ResourceURL createResourceURL() {
