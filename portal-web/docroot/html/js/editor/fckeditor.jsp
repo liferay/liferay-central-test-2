@@ -33,8 +33,8 @@ String doAsUserId = ParamUtil.getString(request, "doAsUserId");
 String initMethod = ParamUtil.getString(request, "initMethod", DEFAULT_INIT_METHOD);
 String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 String toolbarSet = ParamUtil.getString(request, "toolbarSet", "liferay");
-String cssPath = ParamUtil.getString(request, "cssPath", "/html/themes/_styled/css");
-String cssClasses = ParamUtil.getString(request, "cssClasses", "portlet");
+String cssPath = ParamUtil.getString(request, "cssPath");
+String cssClasses = ParamUtil.getString(request, "cssClasses");
 
 // To upgrade FCKEditor, download the latest version and unzip it to fckeditor.
 // Add custom configuration to fckeditor/fckconfig.jsp. Copy
@@ -76,7 +76,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses", "portlet");
 
 				var fckEditor = new FCKeditor("FCKeditor1");
 
-				fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&cssPath=<%= cssPath %>&cssClasses=<%= cssClasses %>";
+				fckEditor.Config["CustomConfigurationsPath"] = "<%= request.getContextPath() %>/html/js/editor/fckeditor/fckconfig.jsp?p_l_id=<%= plid %>&p_main_path=<%= HttpUtil.encodeURL(mainPath) %>&doAsUserId=<%= HttpUtil.encodeURL(doAsUserId) %>&cssPath=<%= HttpUtil.encodeURL(cssPath) %>&cssClasses=<%= HttpUtil.encodeURL(cssClasses) %>";
 
 				fckEditor.BasePath = "fckeditor/";
 				fckEditor.Width = "100%";

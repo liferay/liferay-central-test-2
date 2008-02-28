@@ -43,14 +43,6 @@ String initMethod = (String)request.getAttribute("liferay-ui:input-editor:initMe
 String onChangeMethod = (String)request.getAttribute("liferay-ui:input-editor:onChangeMethod");
 String height = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:height"), "400");
 String width = GetterUtil.getString((String)request.getAttribute("liferay-ui:input-editor:width"), "640");
-String cssPath = themeDisplay.getPathThemeCss();
-String cssClasses = "portlet ";
-
-Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
-
-if (portlet != null) {
-	cssClasses += portlet.getCssClassWrapper();
-}
 
 StringMaker sm = new StringMaker();
 
@@ -72,12 +64,6 @@ sm.append(HttpUtil.encodeURL(doAsUserId));
 sm.append("&editorImpl=");
 sm.append(editorImpl);
 
-sm.append("&cssPath=");
-sm.append(cssPath);
-
-sm.append("&cssClasses=");
-sm.append(cssClasses);
-
 if (Validator.isNotNull(toolbarSet)) {
 	sm.append("&toolbarSet=");
 	sm.append(toolbarSet);
@@ -92,6 +78,20 @@ if (Validator.isNotNull(onChangeMethod)) {
 	sm.append("&onChangeMethod=");
 	sm.append(onChangeMethod);
 }
+
+sm.append("&cssPath=");
+sm.append(HttpUtil.encodeURL(themeDisplay.getPathThemeCss()));
+
+String cssClasses = "portlet ";
+
+Portlet portlet = (Portlet)request.getAttribute(WebKeys.RENDER_PORTLET);
+
+if (portlet != null) {
+	cssClasses += portlet.getCssClassWrapper();
+}
+
+sm.append("&cssClasses=");
+sm.append(HttpUtil.encodeURL(cssClasses));
 
 String editorURL = sm.toString();
 %>

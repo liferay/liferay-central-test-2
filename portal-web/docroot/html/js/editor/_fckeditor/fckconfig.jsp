@@ -30,10 +30,10 @@
 long plid = ParamUtil.getLong(request, "p_l_id");
 String mainPath = ParamUtil.getString(request, "p_main_path");
 String doAsUserId = ParamUtil.getString(request, "doAsUserId");
+String cssPath = ParamUtil.getString(request, "cssPath");
+String cssClasses = ParamUtil.getString(request, "cssClasses");
 
 String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId));
-String cssPath = ParamUtil.getString(request, "cssPath", "/html/themes/_styled/css");
-String cssClasses = ParamUtil.getString(request, "cssClasses", "portlet");
 %>
 
 FCKConfig.IncludeLatinEntities	= false ;
@@ -77,10 +77,10 @@ FCKConfig.ToolbarSets["edit-in-place"] = [
 	['OrderedList','UnorderedList','-','Outdent','Indent'],['Source','RemoveFormat'],
 ] ;
 
-FCKConfig.BodyClass='html-editor <%= cssClasses %>';
+FCKConfig.BodyClass = 'html-editor <%= cssClasses %>' ;
 FCKConfig.CustomStyles = {};
 FCKConfig.StylesXmlPath = FCKConfig.EditorPath + 'fckstyles.xml' ;
-FCKConfig.EditorAreaCSS = '<%= cssPath %>/main.css';
+FCKConfig.EditorAreaCSS = '<%= cssPath %>/main.css' ;
 
 FCKConfig.LinkBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>";
 FCKConfig.ImageBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Type=Image&Connector=<%= connectorURL %>";
