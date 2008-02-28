@@ -260,7 +260,7 @@ public class LayoutAction extends Action {
 	}
 
 	protected void processEvent(
-			InvokerPortlet invokerPortlet, PortletRequestImpl portletReqImpl,
+			PortletRequestImpl portletReqImpl,
 			StateAwareResponseImpl stateAwareResImpl, Portlet portlet,
 			List<Portlet> portlets, Event event)
 		throws Exception {
@@ -271,6 +271,9 @@ public class LayoutAction extends Action {
 		String portletId = portlet.getPortletId();
 
 		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+
+		InvokerPortlet invokerPortlet = PortletInstanceFactory.create(
+			portlet, ctx);
 
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
 		PortletContext portletCtx = portletConfig.getPortletContext();
@@ -320,7 +323,7 @@ public class LayoutAction extends Action {
 				eventResImpl.setPortletMode(portletMode);
 			}
 
-			processEvents(invokerPortlet, eventReqImpl, eventResImpl, portlets);
+			processEvents(eventReqImpl, eventResImpl, portlets);
 		}
 		finally {
 			EventRequestFactory.recycle(eventReqImpl);
@@ -329,7 +332,7 @@ public class LayoutAction extends Action {
 	}
 
 	protected void processEvents(
-			InvokerPortlet invokerPortlet, PortletRequestImpl portletReqImpl,
+			PortletRequestImpl portletReqImpl,
 			StateAwareResponseImpl stateAwareResImpl, List<Portlet> portlets)
 		throws Exception {
 
@@ -348,8 +351,8 @@ public class LayoutAction extends Action {
 
 				if (processingQName != null) {
 					processEvent(
-						invokerPortlet, portletReqImpl, stateAwareResImpl,
-						portlet, portlets, event);
+						portletReqImpl, stateAwareResImpl, portlet, portlets,
+						event);
 				}
 			}
 		}
@@ -591,9 +594,7 @@ public class LayoutAction extends Action {
 						List<Portlet> portlets =
 							layoutTypePortlet.getPortlets();
 
-						processEvents(
-							invokerPortlet, actionReqImpl, actionResImpl,
-							portlets);
+						processEvents(actionReqImpl, actionResImpl, portlets);
 
 						actionReqImpl.defineObjects(
 							portletConfig, actionResImpl);
