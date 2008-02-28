@@ -1156,6 +1156,25 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletApp.addPublicRenderParameter(publicRenderParameter);
 		}
 
+		itr1 = root.elements("container-runtime-option").iterator();
+
+		while (itr1.hasNext()) {
+			Element containerRuntimeOption = itr1.next();
+
+			String name = containerRuntimeOption.elementText("name");
+
+			List<String> values = new ArrayList<String>();
+
+			for (Element value :
+					(List<Element>)containerRuntimeOption.elements("value")) {
+
+				values.add(value.getTextTrim());
+			}
+
+			portletApp.getContainerRuntimeOptions().put(
+				name, values.toArray(new String[values.size()]));
+		}
+
 		itr1 = root.elements("portlet").iterator();
 
 		while (itr1.hasNext()) {

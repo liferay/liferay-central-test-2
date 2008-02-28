@@ -125,6 +125,10 @@ public class PortletAppImpl implements PortletApp {
 		return _portletURLListeners;
 	}
 
+	public Map<String, String[]> getContainerRuntimeOptions() {
+		return _containerRuntimeOptions;
+	}
+
 	public boolean isWARFile() {
 		return _warFile;
 	}
@@ -151,6 +155,8 @@ public class PortletAppImpl implements PortletApp {
 	private Map<String, PortletURLListener>
 		_portletURLListenersByListenerClass =
 			new HashMap<String, PortletURLListener>();
+	private Map<String, String[]> _containerRuntimeOptions =
+		new HashMap<String, String[]>();
 	private boolean _warFile;
 
 }

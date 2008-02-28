@@ -2441,4 +2441,8 @@
 	<user-attribute>
 		<name>user.business-info.online.uri</name>
 	</user-attribute>
+	<container-runtime-option>
+		<name>javax.portlet.escapeXml</name>
+		<value>false</value>
+	</container-runtime-option>
 </portlet-app>

@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -50,6 +51,7 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
+import com.liferay.util.MapUtil;
 
 import com.sun.portal.portletcontainer.common.URLHelper;
 
@@ -110,6 +112,16 @@ public class PortletURLImpl
 		_parametersIncludedInPath = new LinkedHashSet<String>();
 		_params = new LinkedHashMap<String, String[]>();
 		_secure = req.isSecure();
+
+		Portlet portlet = getPortlet();
+
+		if (portlet != null) {
+			PortletApp portletApp = portlet.getPortletApp();
+
+			_escapeXml = MapUtil.getBoolean(
+				portletApp.getContainerRuntimeOptions(),
+				PortletConfigImpl.RUNTIME_OPTION_ESCAPE_XML, _ESCAPE_XML);
+		}
 	}
 
 	public void addParameterIncludedInPath(String name) {

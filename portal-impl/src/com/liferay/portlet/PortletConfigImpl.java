@@ -57,6 +57,9 @@ import javax.xml.namespace.QName;
  */
 public class PortletConfigImpl implements PortletConfig {
 
+	public static final String RUNTIME_OPTION_ESCAPE_XML =
+		"javax.portlet.escapeXml";
+
 	public PortletConfigImpl(Portlet portlet, PortletContext portletCtx) {
 		_portletApp = portlet.getPortletApp();
 		_portlet = portlet;
@@ -73,7 +76,7 @@ public class PortletConfigImpl implements PortletConfig {
 	}
 
 	public Map<String, String[]> getContainerRuntimeOptions() {
-		return null;
+		return _portletApp.getContainerRuntimeOptions();
 	}
 
 	public String getDefaultNamespace() {

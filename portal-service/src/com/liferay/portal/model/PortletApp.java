@@ -66,6 +66,8 @@ public interface PortletApp extends Serializable {
 
 	public Set<PortletURLListener> getPortletURLListeners();
 
+	public Map<String, String[]> getContainerRuntimeOptions();
+
 	public boolean isWARFile();
 
 }
