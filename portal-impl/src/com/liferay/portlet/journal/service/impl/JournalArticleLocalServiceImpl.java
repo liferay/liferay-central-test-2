@@ -442,24 +442,21 @@ public class JournalArticleLocalServiceImpl
 		article.setApprovedByUserId(user.getUserId());
 		article.setApprovedByUserName(user.getFullName());
 		article.setApprovedDate(now);
-
-		if (article.isExpired()) {
-			article.setExpired(false);
-			article.setExpirationDate(null);
-		}
+		article.setExpired(false);
+		article.setExpirationDate(null);
 
 		journalArticlePersistence.update(article);
-		
-		// Un-approve all other versions.
 
-		List<JournalArticle> articles =
-			journalArticlePersistence.findByG_A_A(groupId, articleId, true);
+		// Unapprove and expire all other versions
+
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A_A(
+			groupId, articleId, true);
 
 		for (JournalArticle curArticle : articles) {
 			if (curArticle.getVersion() != article.getVersion()) {
 				curArticle.setApproved(false);
 				curArticle.setExpired(true);
-				curArticle.setExpirationDate(new Date());
+				curArticle.setExpirationDate(now);
 
 				journalArticlePersistence.update(curArticle);
 			}
@@ -1647,7 +1644,7 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article);
 
-		// Un-approve all other versions.
+		// Unapprove and expire all other versions
 
 		if (incrementVersion && approved) {
 			List<JournalArticle> articles =
@@ -1657,7 +1654,7 @@ public class JournalArticleLocalServiceImpl
 				if (curArticle.getVersion() != article.getVersion()) {
 					curArticle.setApproved(false);
 					curArticle.setExpired(true);
-					curArticle.setExpirationDate(new Date());
+					curArticle.setExpirationDate(now);
 
 					journalArticlePersistence.update(curArticle);
 				}
