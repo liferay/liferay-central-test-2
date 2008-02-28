@@ -196,7 +196,8 @@ public class PortletRequestProcessor extends TilesRequestProcessor {
 				String forwardPath = actionForward.getPath();
 
 				if (forwardPath.startsWith("/")) {
-					LiferayPortletURL forwardURL = resImpl.createRenderURL();
+					LiferayPortletURL forwardURL =
+						(LiferayPortletURL)resImpl.createRenderURL();
 
 					forwardURL.setParameter("struts_action", forwardPath);
 

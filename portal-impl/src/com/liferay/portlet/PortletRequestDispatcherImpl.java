@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -266,7 +267,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 					portletServletReq.getContextPath(),
 					themeDisplay.getPathMain(),
 					(String)_portletCtxImpl.getAttribute(Globals.SERVLET_KEY),
-					resImpl.createRenderURL());
+					(LiferayPortletURL)resImpl.createRenderURL());
 
 				resImpl.setURLEncoder(strutsURLEncoderObj);
 			}

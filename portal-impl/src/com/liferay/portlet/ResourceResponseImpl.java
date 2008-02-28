@@ -25,7 +25,9 @@ package com.liferay.portlet;
 import java.util.Locale;
 
 import javax.portlet.PortletRequest;
+import javax.portlet.PortletURL;
 import javax.portlet.ResourceResponse;
+import javax.portlet.ResourceURL;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -41,6 +43,10 @@ import org.apache.commons.logging.LogFactory;
 public class ResourceResponseImpl
 	extends MimeResponseImpl implements ResourceResponse {
 
+	public PortletURL createActionURL() {
+		return super.createActionURL();
+	}
+
 	public PortletURLImpl createPortletURLImpl(
 		String portletName, String lifecycle) {
 
@@ -54,6 +60,14 @@ public class ResourceResponseImpl
 		}
 
 		return super.createPortletURLImpl(portletName, lifecycle);
+	}
+
+	public PortletURL createRenderURL() {
+		return super.createRenderURL();
+	}
+
+	public ResourceURL createResourceURL() {
+		return super.createResourceURL();
 	}
 
 	public int getBufferSize() {

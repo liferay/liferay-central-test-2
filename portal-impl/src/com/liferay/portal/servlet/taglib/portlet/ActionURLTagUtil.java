@@ -30,12 +30,10 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletConfigImpl;
-import com.liferay.portlet.RenderResponseImpl;
+import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.util.MapUtil;
 
 import java.util.Map;
-
-import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -74,11 +72,11 @@ public class ActionURLTagUtil {
 				portletName = portletConfig.getPortletId();
 			}
 
-			RenderResponseImpl renderResponse =
-				(RenderResponseImpl)req.getAttribute(
+			PortletResponseImpl portletRes =
+				(PortletResponseImpl)req.getAttribute(
 					JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-			if (renderResponse == null) {
+			if (portletRes == null) {
 				_log.error(
 					"Render response is null because this tag is not being " +
 						"called within the context of a portlet");
@@ -86,14 +84,8 @@ public class ActionURLTagUtil {
 				return StringPool.BLANK;
 			}
 
-			LiferayPortletURL portletURL = null;
-
-			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
-				portletURL = renderResponse.createActionURL(portletName);
-			}
-			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
-				portletURL = renderResponse.createRenderURL(portletName);
-			}
+			LiferayPortletURL portletURL = portletRes.createPortletURLImpl(
+				portletName, lifecycle);
 
 			if (Validator.isNotNull(windowState)) {
 				portletURL.setWindowState(

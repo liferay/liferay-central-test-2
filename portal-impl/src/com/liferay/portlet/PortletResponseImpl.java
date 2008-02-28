@@ -47,6 +47,7 @@ import javax.portlet.PortletModeException;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
+import javax.portlet.PortletURL;
 import javax.portlet.PortletURLGenerationListener;
 import javax.portlet.ResourceURL;
 import javax.portlet.WindowStateException;
@@ -87,7 +88,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		}
 	}
 
-	public LiferayPortletURL createActionURL() {
+	public PortletURL createActionURL() {
 		return createActionURL(_portletName);
 	}
 
@@ -209,7 +210,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		return portletURLImpl;
 	}
 
-	public LiferayPortletURL createRenderURL() {
+	public PortletURL createRenderURL() {
 		return createRenderURL(_portletName);
 	}
 
@@ -221,7 +222,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 		return createResourceURL(_portletName);
 	}
 
-	public ResourceURL createResourceURL(String portletName) {
+	public LiferayPortletURL createResourceURL(String portletName) {
 		return createPortletURLImpl(portletName, PortletRequest.RESOURCE_PHASE);
 	}
 

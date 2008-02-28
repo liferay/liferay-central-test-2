@@ -55,7 +55,7 @@ public abstract class MimeResponseImpl
 	}
 
 	public CacheControl getCacheControl() {
-		return null;
+		return new CacheControlImpl(null, 0, false, false);
 	}
 
 	public String getCharacterEncoding() {
