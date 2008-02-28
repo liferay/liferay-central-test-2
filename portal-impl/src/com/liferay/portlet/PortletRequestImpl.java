@@ -51,6 +51,7 @@ import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
 import com.sun.ccpp.ProfileFactoryImpl;
+import com.sun.ccpp.ProfileImpl;
 
 import java.security.Principal;
 
@@ -158,6 +159,10 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 			_profile = profileFactory.newProfile(
 				_req, ValidationMode.VALIDATIONMODE_NONE);
+
+			if (_profile == null) {
+				_profile = _EMPTY_PROFILE;
+			}
 		}
 
 		return _profile;
@@ -878,4 +883,6 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	private Locale _locale;
 	private long _plid;
 
+	private static final Profile _EMPTY_PROFILE = new EmptyProfile();
+	
 }
