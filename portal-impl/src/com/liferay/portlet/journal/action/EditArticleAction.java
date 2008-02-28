@@ -452,8 +452,8 @@ public class EditArticleAction extends PortletAction {
 				guestPermissions);
 
 			AssetPublisherUtil.addAndStoreSelection(
-				req, JournalArticle.class.getName(), article.getPrimaryKey(),
-				-1);
+				req, JournalArticle.class.getName(),
+				article.getResourcePrimKey(), -1);
 		}
 		else {
 
