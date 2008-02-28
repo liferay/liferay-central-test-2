@@ -54,10 +54,10 @@ public class ActionURLTagUtil {
 			String lifecycle, String windowState, String portletMode,
 			String var, String varImpl, Boolean secure,
 			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
-			String portletName, Boolean anchor, Boolean encrypt,
-			long doAsUserId, Boolean portletConfiguration,
-			Map<String, String[]> params, boolean writeOutput,
-			PageContext pageContext)
+			String resourceID, String cacheability, String portletName,
+			Boolean anchor, Boolean encrypt, long doAsUserId,
+			Boolean portletConfiguration, Map<String, String[]> params,
+			boolean writeOutput, PageContext pageContext)
 		throws JspException {
 
 		try {
@@ -104,8 +104,21 @@ public class ActionURLTagUtil {
 				portletURL.setSecure(req.isSecure());
 			}
 
+			if (copyCurrentRenderParameters != null) {
+				portletURL.setCopyCurrentRenderParameters(
+					copyCurrentRenderParameters.booleanValue());
+			}
+
 			if (escapeXml != null) {
 				portletURL.setEscapeXml(escapeXml.booleanValue());
+			}
+
+			if (resourceID != null) {
+				portletURL.setResourceID(resourceID);
+			}
+
+			if (cacheability != null) {
+				portletURL.setCacheability(cacheability);
 			}
 
 			if (anchor != null) {

@@ -61,6 +61,7 @@ import java.io.Writer;
 
 import java.security.Key;
 
+import java.util.Enumeration;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -257,6 +258,10 @@ public class PortletURLImpl
 		return _anchor;
 	}
 
+	public boolean isCopyCurrentRenderParameters() {
+		return _copyCurrentRenderParameters;
+	}
+
 	public boolean isEncrypt() {
 		return _encrypt;
 	}
@@ -331,6 +336,12 @@ public class PortletURLImpl
 		// Clear cache
 
 		_toString = null;
+	}
+
+	public void setCopyCurrentRenderParameters(
+		boolean copyCurrentRenderParameters) {
+
+		_copyCurrentRenderParameters = copyCurrentRenderParameters;
 	}
 
 	public void setDoAsUserId(long doAsUserId) {
@@ -744,6 +755,26 @@ public class PortletURLImpl
 			}
 		}
 
+		if (_copyCurrentRenderParameters) {
+			Enumeration<String> enu = _req.getParameterNames();
+
+			while (enu.hasMoreElements()) {
+				String name = enu.nextElement();
+				
+				String[] oldValues = _req.getParameterValues(name);
+				String[] newValues = _params.get(name);
+
+				if (newValues == null) {
+					_params.put(name, oldValues);
+				}
+				else {
+					newValues = ArrayUtil.append(newValues, oldValues);
+
+					_params.put(name, oldValues);
+				}
+			}
+		}
+
 		Iterator<Map.Entry<String, String[]>> itr =
 			_params.entrySet().iterator();
 
@@ -760,14 +791,16 @@ public class PortletURLImpl
 				if (publicRenderParameter != null) {
 					QName qName = publicRenderParameter.getQName();
 
-					String[] oldValues = _req.getParameterValues(name);
-
-					if (oldValues != null) {
-						if (values == null) {
-							values = oldValues;
-						}
-						else {
-							values = ArrayUtil.append(values, oldValues);
+					if (!_copyCurrentRenderParameters) {
+						String[] oldValues = _req.getParameterValues(name);
+	
+						if (oldValues != null) {
+							if (values == null) {
+								values = oldValues;
+							}
+							else {
+								values = ArrayUtil.append(values, oldValues);
+							}
 						}
 					}
 
@@ -870,6 +903,7 @@ public class PortletURLImpl
 	private String _lifecycle;
 	private boolean _anchor = true;
 	private String _cacheability = ResourceURL.PAGE;
+	private boolean _copyCurrentRenderParameters;
 	private long _doAsUserId;
 	private boolean _encrypt;
 	private boolean _escapeXml = _ESCAPE_XML;

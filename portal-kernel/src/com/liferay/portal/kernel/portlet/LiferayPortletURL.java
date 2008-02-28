@@ -48,6 +48,8 @@ public interface LiferayPortletURL
 
 	public boolean isAnchor();
 
+	public boolean isCopyCurrentRenderParameters();
+
 	public boolean isEncrypt();
 
 	public boolean isEscapeXml();
@@ -65,6 +67,9 @@ public interface LiferayPortletURL
 	public Set<String> getParametersIncludedInPath();
 
 	public void setAnchor(boolean anchor);
+
+	public void setCopyCurrentRenderParameters(
+		boolean copyCurrentRenderParameters);
 
 	public void setDoAsUserId(long doAsUserId);
 

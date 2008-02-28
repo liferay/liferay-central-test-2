@@ -133,15 +133,17 @@ public class VelocityTaglib {
 
 		String var = null;
 		String varImpl = null;
+		String resourceID = null;
+		String cacheability = null;
 		Map<String, String[]> params = HttpUtil.parameterMapFromString(
 			queryString);
 		boolean writeOutput = false;
 
 		return ActionURLTag.doTag(
 			PortletRequest.ACTION_PHASE, windowState, portletMode, var, varImpl,
-			secure, copyCurrentRenderParameters, escapeXml, name, portletName,
-			anchor, encrypt, doAsUserId, portletConfiguration, params,
-			writeOutput, _pageContext);
+			secure, copyCurrentRenderParameters, escapeXml, name, resourceID,
+			cacheability, portletName, anchor, encrypt, doAsUserId,
+			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
 	public String doAsURL(long doAsUserId) throws Exception {
@@ -510,15 +512,17 @@ public class VelocityTaglib {
 		String var = null;
 		String varImpl = null;
 		String name = null;
+		String resourceID = null;
+		String cacheability = null;
 		Map<String, String[]> params = HttpUtil.parameterMapFromString(
 			queryString);
 		boolean writeOutput = false;
 
 		return ActionURLTag.doTag(
 			PortletRequest.RENDER_PHASE, windowState, portletMode, var, varImpl,
-			secure, copyCurrentRenderParameters, escapeXml, name, portletName,
-			anchor, encrypt, doAsUserId, portletConfiguration, params,
-			writeOutput, _pageContext);
+			secure, copyCurrentRenderParameters, escapeXml, name, resourceID,
+			cacheability, portletName, anchor, encrypt, doAsUserId,
+			portletConfiguration, params, writeOutput, _pageContext);
 	}
 
 	public String runtime(String portletName)
