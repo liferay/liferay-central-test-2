@@ -61,8 +61,8 @@ public class PortletBag {
 		PortletLayoutListener portletLayoutListenerInstance,
 		ActivityTrackerInterpreter activityTrackerInterpreterInstance,
 		MessageListener popMessageListenerInstance,
-		PreferencesValidator prefsValidatorInstance, Map resourceBundles,
-		Map customUserAttributes) {
+		PreferencesValidator prefsValidatorInstance,
+		Map<String, ResourceBundle> resourceBundles) {
 
 		_portletName = portletName;
 		_servletContext = servletContext;
@@ -79,7 +79,6 @@ public class PortletBag {
 		_popMessageListenerInstance = popMessageListenerInstance;
 		_prefsValidatorInstance = prefsValidatorInstance;
 		_resourceBundles = resourceBundles;
-		_customUserAttributes = customUserAttributes;
 	}
 
 	public String getPortletName() {
@@ -139,24 +138,19 @@ public class PortletBag {
 	}
 
 	public ResourceBundle getResourceBundle(Locale locale) {
-		ResourceBundle resourceBundle = (ResourceBundle)_resourceBundles.get(
+		ResourceBundle resourceBundle = _resourceBundles.get(
 			LocaleUtil.toLanguageId(locale));
 
 		if (resourceBundle == null) {
-			resourceBundle = (ResourceBundle)_resourceBundles.get(
-				locale.getLanguage());
+			resourceBundle = _resourceBundles.get(locale.getLanguage());
 
 			if (resourceBundle == null) {
-				resourceBundle = (ResourceBundle)_resourceBundles.get(
+				resourceBundle = _resourceBundles.get(
 					LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 			}
 		}
 
 		return resourceBundle;
-	}
-
-	public Map getCustomUserAttributes() {
-		return _customUserAttributes;
 	}
 
 	private String _portletName;
@@ -172,7 +166,6 @@ public class PortletBag {
 	private ActivityTrackerInterpreter _activityTrackerInterpreterInstance;
 	private MessageListener _popMessageListenerInstance;
 	private PreferencesValidator _prefsValidatorInstance;
-	private Map _resourceBundles;
-	private Map _customUserAttributes;
+	private Map<String, ResourceBundle> _resourceBundles;
 
 }

@@ -32,7 +32,7 @@ import com.liferay.portlet.RenderRequestImpl;
 
 import java.io.IOException;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.portlet.PortletResponse;
 
@@ -107,8 +107,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 
 			PortletApp portletApp = portlet.getPortletApp();
 
-			List<String> servletURLPatterns =
-				portletApp.getServletURLPatterns();
+			Set<String> servletURLPatterns = portletApp.getServletURLPatterns();
 
 			for (String urlPattern : servletURLPatterns) {
 				if (urlPattern.endsWith("/*")) {

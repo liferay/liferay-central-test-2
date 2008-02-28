@@ -58,6 +58,7 @@ public class WindowStateFactory {
 
 		return windowState;
 	}
+
 	private static final String _NORMAL = WindowState.NORMAL.toString();
 
 	private static final String _MAXIMIZED = WindowState.MAXIMIZED.toString();

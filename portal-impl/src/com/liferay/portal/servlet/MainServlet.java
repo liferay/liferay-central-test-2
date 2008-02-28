@@ -739,7 +739,7 @@ public class MainServlet extends ActionServlet {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
-		List<PortletFilter> portletFilters = portletApp.getPortletFilters();
+		Set<PortletFilter> portletFilters = portletApp.getPortletFilters();
 
 		for (PortletFilter portletFilter : portletFilters) {
 			PortletConfig portletConfig = PortletConfigFactory.create(
@@ -750,7 +750,7 @@ public class MainServlet extends ActionServlet {
 			PortletFilterFactory.create(portletFilter, portletCtx);
 		}
 
-		List<PortletURLListener> portletURLListeners =
+		Set<PortletURLListener> portletURLListeners =
 			portletApp.getPortletURLListeners();
 
 		for (PortletURLListener portletURLListener : portletURLListeners) {

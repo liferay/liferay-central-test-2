@@ -62,6 +62,7 @@ public class PortletModeFactory {
 
 		return portletMode;
 	}
+
 	private static final String _EDIT = PortletMode.EDIT.toString();
 
 	private static final String _HELP = PortletMode.HELP.toString();

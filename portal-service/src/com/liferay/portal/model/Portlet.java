@@ -373,19 +373,18 @@ public interface Portlet extends PortletModel {
 
 	public void setPortletInfo(com.liferay.portal.model.PortletInfo portletInfo);
 
-	public java.util.Set<String> getUserAttributes();
-
-	public void setUserAttributes(java.util.Set<String> userAttributes);
-
-	public java.util.Map<String, String> getCustomUserAttributes();
-
-	public void setCustomUserAttributes(
-		java.util.Map<String, String> customUserAttributes);
-
 	public java.util.Map<String, com.liferay.portal.model.PortletFilter> getPortletFilters();
 
 	public void setFilters(
 		java.util.Map<String, com.liferay.portal.model.PortletFilter> portletFilters);
+
+	public java.util.Map<String, com.liferay.portal.model.PublicRenderParameter> getPublicRenderParameters();
+
+	public void setPublicRenderParameters(
+		java.util.Map<String, com.liferay.portal.model.PublicRenderParameter> publicRenderParameters);
+
+	public java.lang.String getPublicRenderParameterIdentifier(
+		java.lang.String uri, java.lang.String localPart);
 
 	public java.lang.String getContextPath();
 

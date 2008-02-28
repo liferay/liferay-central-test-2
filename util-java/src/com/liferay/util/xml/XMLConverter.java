@@ -54,4 +54,14 @@ public class XMLConverter {
 		return w3cDoc.getDocumentElement();
 	}
 
+	public static javax.xml.namespace.QName toJavaxQName(
+		org.dom4j.QName dom4jQName) {
+
+		javax.xml.namespace.QName javaxQName = new javax.xml.namespace.QName(
+			dom4jQName.getNamespaceURI(), dom4jQName.getName(),
+			dom4jQName.getNamespacePrefix());
+
+		return javaxQName;
+	}
+
 }

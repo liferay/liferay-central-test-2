@@ -38,8 +38,8 @@ import com.liferay.util.servlet.DynamicServletRequest;
 import java.io.IOException;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
@@ -219,7 +219,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 				PortletApp portletApp = portlet.getPortletApp();
 
-				List<String> servletURLPatterns =
+				Set<String> servletURLPatterns =
 					portletApp.getServletURLPatterns();
 
 				for (String urlPattern : servletURLPatterns) {

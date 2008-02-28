@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -42,6 +44,7 @@ import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.servlet.SharedSessionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
@@ -77,6 +80,8 @@ import javax.portlet.WindowState;
 
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
+
+import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -282,7 +287,19 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	}
 
 	public Map<String, String[]> getPrivateParameterMap() {
-		return _req.getParameterMap();
+		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
+
+		Enumeration<String> enu = getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			if (!_portlet.getPublicRenderParameters().containsKey(name)) {
+				parameterMap.put(name, getParameterValues(name));
+			}
+		}
+
+		return parameterMap;
 	}
 
 	public Enumeration<String> getProperties(String name) {
@@ -306,7 +323,19 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	}
 
 	public Map<String, String[]> getPublicParameterMap() {
-		return _req.getParameterMap();
+		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
+
+		Enumeration<String> enu = getParameterNames();
+
+		while (enu.hasMoreElements()) {
+			String name = enu.nextElement();
+
+			if (_portlet.getPublicRenderParameters().containsKey(name)) {
+				parameterMap.put(name, getParameterValues(name));
+			}
+		}
+
+		return parameterMap;
 	}
 
 	public String getRemoteUser() {
@@ -358,6 +387,8 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		LinkedHashMap<String, String> userInfo =
 			new LinkedHashMap<String, String>();
 
+		PortletApp portletApp = _portlet.getPortletApp();
+
 		// Liferay user attributes
 
 		try {
@@ -377,7 +408,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 			// Portlet user attributes
 
-			for (String attrName : _portlet.getUserAttributes()) {
+			for (String attrName : portletApp.getUserAttributes()) {
 				String attrValue = userAttributes.getValue(attrName);
 
 				if (attrValue != null) {
@@ -398,7 +429,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			new HashMap<String, CustomUserAttributes>();
 
 		for (Map.Entry<String, String> entry :
-				_portlet.getCustomUserAttributes().entrySet()) {
+				portletApp.getCustomUserAttributes().entrySet()) {
 
 			String attrName = entry.getKey();
 			String attrCustomClass = entry.getValue();
@@ -406,14 +437,13 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			CustomUserAttributes cua = cuaInstances.get(attrCustomClass);
 
 			if (cua == null) {
-				PortletApp portletApp = _portlet.getPortletApp();
-
 				if (portletApp.isWARFile()) {
-					PortletBag portletBag = PortletBagPool.get(
-						_portlet.getRootPortletId());
+					PortletContextBag portletContextBag =
+						PortletContextBagPool.get(
+							portletApp.getServletContextName());
 
-					cua = (CustomUserAttributes)portletBag.
-						getCustomUserAttributes().get(attrCustomClass);
+					cua = portletContextBag.getCustomUserAttributes().get(
+						attrCustomClass);
 
 					cua = (CustomUserAttributes)cua.clone();
 				}
@@ -551,6 +581,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
 			WebKeys.THEME_DISPLAY);
 
+		_portlet = portlet;
 		_portletName = portlet.getPortletId();
 
 		String portletNamespace = PortalUtil.getPortletNamespace(_portletName);
@@ -583,7 +614,9 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 		boolean portletFocus = false;
 
-		if (_portletName.equals(req.getParameter("p_p_id"))) {
+		String ppid = ParamUtil.getString(req, "p_p_id");
+
+		if (_portletName.equals(ppid)) {
 
 			// Request was targeted to this portlet
 
@@ -636,6 +669,10 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			}
 		}
 		else {
+			if (!_portletName.equals(ppid)) {
+				putPublicRenderParameters(req, plid, oldRenderParameters);
+			}
+
 			enu = Collections.enumeration(oldRenderParameters.keySet());
 		}
 
@@ -648,11 +685,11 @@ public abstract class PortletRequestImpl implements PortletRequest {
 				String shortName = name.substring(
 					portletNamespace.length(), name.length());
 
-				String[] values = getParameterValues(
+				ObjectValuePair<String, String[]> ovp = getParameterValues(
 					req, themeDisplay, portletFocus, oldRenderParameters,
 					newRenderParameters, name);
 
-				dynamicReq.setParameterValues(shortName, values);
+				dynamicReq.setParameterValues(shortName, ovp.getValue());
 			}
 			else {
 
@@ -663,11 +700,11 @@ public abstract class PortletRequestImpl implements PortletRequest {
 				if (!PortalUtil.isReservedParameter(name) &&
 					Validator.isNotNull(name)) {
 
-					String[] values = getParameterValues(
+					ObjectValuePair<String, String[]> ovp = getParameterValues(
 						req, themeDisplay, portletFocus, oldRenderParameters,
 						newRenderParameters, name);
 
-					dynamicReq.setParameterValues(name, values);
+					dynamicReq.setParameterValues(ovp.getKey(), ovp.getValue());
 				}
 			}
 		}
@@ -720,7 +757,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		_plid = plid;
 	}
 
-	protected String[] getParameterValues(
+	protected ObjectValuePair<String, String[]> getParameterValues(
 		HttpServletRequest req, ThemeDisplay themeDisplay, boolean portletFocus,
 		Map<String, String[]> oldRenderParameters,
 		Map<String, String[]> newRenderParameters, String name) {
@@ -729,6 +766,17 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 		if (portletFocus) {
 			values = req.getParameterValues(name);
+
+			QName qName = QNameUtil.getQName(name);
+
+			if (qName != null) {
+				String identifier = _portlet.getPublicRenderParameterIdentifier(
+					qName.getNamespaceURI(), qName.getLocalPart());
+
+				if (identifier != null) {
+					name = identifier;
+				}
+			}
 
 			if (themeDisplay.isLifecycleRender()) {
 				newRenderParameters.put(name, values);
@@ -750,7 +798,31 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			values = oldRenderParameters.get(name);
 		}
 
-		return values;
+		return new ObjectValuePair<String, String[]>(name, values);
+	}
+
+	protected void putPublicRenderParameters(
+		HttpServletRequest req, long plid,
+		Map<String, String[]> renderParameters) {
+
+		Enumeration<String> names = req.getParameterNames();
+
+		while (names.hasMoreElements()) {
+			String name = names.nextElement();
+
+			QName qName = QNameUtil.getQName(name);
+
+			if (qName == null) {
+				continue;
+			}
+
+			String identifier = _portlet.getPublicRenderParameterIdentifier(
+				qName.getNamespaceURI(), qName.getLocalPart());
+
+			if (identifier != null) {
+				renderParameters.put(identifier, req.getParameterValues(name));
+			}
+		}
 	}
 
 	protected void recycle() {

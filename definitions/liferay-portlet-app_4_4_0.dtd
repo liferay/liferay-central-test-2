@@ -522,7 +522,7 @@ The custom-user-attribute contains a list of names that are retrieved using a
 custom class that extends com.liferay.portlet.CustomUserAttributes.
 
 Download the sample hot deployable portlet WAR named test.war. Look for the
-class com.liferay.portlet.teststruts.TestStrutsUserAttributes to see how it
+class com.sample.strutsliferay.portlet.SampleUserAttributes to see how it
 associates the custom user attribute "user.name.test" with the value
 "Test Name". This class could be modified to read custom user attributes from
 another datasource that may be a database, a LDAP server, or a web service.

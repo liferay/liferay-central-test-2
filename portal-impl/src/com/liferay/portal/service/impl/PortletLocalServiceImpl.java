@@ -36,11 +36,13 @@ import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PortletURLListener;
+import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.PortletAppImpl;
 import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.PortletURLListenerImpl;
+import com.liferay.portal.model.impl.PublicRenderParameterImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -65,12 +67,15 @@ import java.util.concurrent.ConcurrentHashMap;
 import javax.portlet.PortletMode;
 import javax.portlet.PreferencesValidator;
 
+import javax.xml.namespace.QName;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
+import org.dom4j.Namespace;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
@@ -620,325 +625,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		return portletsPool;
 	}
 
-	private Set<String> _readPortletXML(
-			String xml, Map<String, Portlet> portletsPool,
-			List<String> servletURLPatterns, PluginPackage pluginPackage)
-		throws DocumentException, IOException {
-
-		return _readPortletXML(
-			StringPool.BLANK, xml, portletsPool, servletURLPatterns,
-			pluginPackage);
-	}
-
-	private Set<String> _readPortletXML(
-			String servletContextName, String xml,
-			Map<String, Portlet> portletsPool, List<String> servletURLPatterns,
-			PluginPackage pluginPackage)
-		throws DocumentException, IOException {
-
-		Set<String> portletIds = new HashSet<String>();
-
-		if (xml == null) {
-			return portletIds;
-		}
-
-		Document doc = PortalUtil.readDocumentFromXML(xml);
-
-		Element root = doc.getRootElement();
-
-		PortletApp portletApp = _getPortletApp(servletContextName);
-
-		portletApp.getServletURLPatterns().addAll(servletURLPatterns);
-
-		Set<String> userAttributes = new HashSet<String>();
-
-		Iterator<Element> itr1 = root.elements("user-attribute").iterator();
-
-		while (itr1.hasNext()) {
-			Element userAttribute = itr1.next();
-
-			String name = userAttribute.elementText("name");
-
-			userAttributes.add(name);
-		}
-
-		itr1 = root.elements("portlet").iterator();
-
-		while (itr1.hasNext()) {
-			Element portlet = itr1.next();
-
-			String portletId = portlet.elementText("portlet-name");
-
-			if (Validator.isNotNull(servletContextName)) {
-				portletId =
-					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
-			}
-
-			portletId = PortalUtil.getJsSafePortletId(portletId);
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Reading portlet " + portletId);
-			}
-
-			portletIds.add(portletId);
-
-			Portlet portletModel = portletsPool.get(portletId);
-
-			if (portletModel == null) {
-				portletModel = new PortletImpl(CompanyImpl.SYSTEM, portletId);
-
-				portletsPool.put(portletId, portletModel);
-			}
-
-			portletModel.setPluginPackage(pluginPackage);
-			portletModel.setPortletApp(portletApp);
-
-			portletModel.setDisplayName(GetterUtil.getString(
-				portlet.elementText("display-name"),
-				portletModel.getDisplayName()));
-			portletModel.setPortletClass(GetterUtil.getString(
-				portlet.elementText("portlet-class")));
-
-			Iterator<Element> itr2 = portlet.elements("init-param").iterator();
-
-			while (itr2.hasNext()) {
-				Element initParam = itr2.next();
-
-				portletModel.getInitParams().put(
-					initParam.elementText("name"),
-					initParam.elementText("value"));
-			}
-
-			Element expirationCache = portlet.element("expiration-cache");
-
-			if (expirationCache != null) {
-				portletModel.setExpCache(new Integer(GetterUtil.getInteger(
-					expirationCache.getText())));
-			}
-
-			itr2 = portlet.elements("supports").iterator();
-
-			while (itr2.hasNext()) {
-				Element supports = itr2.next();
-
-				String mimeType = supports.elementText("mime-type");
-
-				Set<String> mimeTypeModes =
-					portletModel.getPortletModes().get(mimeType);
-
-				if (mimeTypeModes == null) {
-					mimeTypeModes = new HashSet<String>();
-
-					portletModel.getPortletModes().put(mimeType, mimeTypeModes);
-				}
-
-				mimeTypeModes.add(PortletMode.VIEW.toString().toLowerCase());
-
-				Iterator<Element> itr3 = supports.elements(
-					"portlet-mode").iterator();
-
-				while (itr3.hasNext()) {
-					Element portletMode = itr3.next();
-
-					mimeTypeModes.add(portletMode.getTextTrim().toLowerCase());
-				}
-			}
-
-			Set<String> supportedLocales = portletModel.getSupportedLocales();
-
-			supportedLocales.add(
-				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
-
-			itr2 = portlet.elements("supported-locale").iterator();
-
-			while (itr2.hasNext()) {
-				Element supportedLocaleEl = itr2.next();
-
-				String supportedLocale = supportedLocaleEl.getText();
-
-				supportedLocales.add(supportedLocale);
-			}
-
-			portletModel.setResourceBundle(
-				portlet.elementText("resource-bundle"));
-
-			Element portletInfo = portlet.element("portlet-info");
-
-			String portletInfoTitle = null;
-			String portletInfoShortTitle = null;
-			String portletInfoKeyWords = null;
-
-			if (portletInfo != null) {
-				portletInfoTitle = portletInfo.elementText("title");
-				portletInfoShortTitle = portletInfo.elementText("short-title");
-				portletInfoKeyWords = portletInfo.elementText("keywords");
-			}
-
-			portletModel.setPortletInfo(new PortletInfo(
-				portletInfoTitle, portletInfoShortTitle, portletInfoKeyWords));
-
-			Element portletPreferences = portlet.element("portlet-preferences");
-
-			String defaultPreferences = null;
-			String prefsValidator = null;
-
-			if (portletPreferences != null) {
-				Element prefsValidatorEl =
-					portletPreferences.element("preferences-validator");
-
-				if (prefsValidatorEl != null) {
-					prefsValidator = prefsValidatorEl.getText();
-
-					portletPreferences.remove(prefsValidatorEl);
-				}
-
-				StringWriter sw = new StringWriter();
-
-				XMLWriter writer = new XMLWriter(
-					sw, OutputFormat.createCompactFormat());
-
-				writer.write(portletPreferences);
-
-				defaultPreferences = sw.toString();
-			}
-
-			portletModel.setDefaultPreferences(defaultPreferences);
-			portletModel.setPreferencesValidator(prefsValidator);
-
-			if (!portletApp.isWARFile() &&
-				Validator.isNotNull(prefsValidator) &&
-				PropsValues.PREFERENCE_VALIDATE_ON_STARTUP) {
-
-				try {
-					PreferencesValidator prefsValidatorObj =
-						PortalUtil.getPreferencesValidator(portletModel);
-
-					prefsValidatorObj.validate(
-						PortletPreferencesSerializer.fromDefaultXML(
-							defaultPreferences));
-				}
-				catch (Exception e) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(
-							"Portlet with the name " + portletId +
-								" does not have valid default preferences");
-					}
-				}
-			}
-
-			Set<String> unlikedRoles = portletModel.getUnlinkedRoles();
-
-			itr2 = portlet.elements("security-role-ref").iterator();
-
-			while (itr2.hasNext()) {
-				Element role = itr2.next();
-
-				unlikedRoles.add(role.elementText("role-name"));
-			}
-
-			portletModel.getUserAttributes().addAll(userAttributes);
-		}
-
-		List<PortletFilter> portletFilters = portletApp.getPortletFilters();
-
-		itr1 = root.elements("filter").iterator();
-
-		while (itr1.hasNext()) {
-			Element filter = itr1.next();
-
-			String filterName = filter.elementText("filter-name");
-			String filterClass = filter.elementText("filter-class");
-
-			Set<String> lifecycles = new LinkedHashSet<String>();
-
-			Iterator<Element> itr2 = filter.elements("lifecycle").iterator();
-
-			while (itr2.hasNext()) {
-				Element lifecycle = itr2.next();
-
-				lifecycles.add(lifecycle.getText());
-			}
-
-			Map<String, String> initParams = new HashMap<String, String>();
-
-			itr2 = filter.elements("init-param").iterator();
-
-			while (itr2.hasNext()) {
-				Element initParam = itr2.next();
-
-				initParams.put(
-					initParam.elementText("name"),
-					initParam.elementText("value"));
-			}
-
-			PortletFilter portletFilter = new PortletFilterImpl(
-				filterName, filterClass, lifecycles, initParams, portletApp);
-
-			portletFilters.add(portletFilter);
-		}
-
-		itr1 = root.elements("filter-mapping").iterator();
-
-		while (itr1.hasNext()) {
-			Element filterMapping = itr1.next();
-
-			String filterName = filterMapping.elementText("filter-name");
-			String portletName = filterMapping.elementText("portlet-name");
-
-			PortletFilter portletFilter = null;
-
-			for (int i = 0; i < portletFilters.size(); i++) {
-				portletFilter = portletFilters.get(i);
-
-				if (portletFilter.getFilterName().equals(filterName)) {
-					break;
-				}
-				else {
-					portletFilter = null;
-				}
-			}
-
-			if (portletFilter == null) {
-				_log.error(
-					"Filter mapping references unnknown filter name " +
-						filterName);
-
-				continue;
-			}
-
-			List<Portlet> portletModels = _getPortletsByPortletName(
-				portletName, servletContextName, portletsPool);
-
-			if (portletModels.size() == 0) {
-				_log.error(
-					"Filter mapping with filter name " + filterName +
-						" references unnknown portlet name " + portletName);
-			}
-
-			for (Portlet portletModel : portletModels) {
-				portletModel.getPortletFilters().put(filterName, portletFilter);
-			}
-		}
-
-		List<PortletURLListener> urlListeners =
-			portletApp.getPortletURLListeners();
-
-		itr1 = root.elements("listener").iterator();
-
-		while (itr1.hasNext()) {
-			Element listener = itr1.next();
-
-			String listenerClass = listener.elementText("listener-class");
-
-			PortletURLListener portletURLListener = new PortletURLListenerImpl(
-				listenerClass, portletApp);
-
-			urlListeners.add(portletURLListener);
-		}
-
-		return portletIds;
-	}
-
 	private void _readLiferayDisplay(
 		String servletContextName, Element el, PortletCategory portletCategory,
 		Set<String> portletIds) {
@@ -1052,7 +738,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			String xml, Map<String, Portlet> portletsPool)
 		throws DocumentException, IOException {
 
-		return _readLiferayPortletXML(null, xml, portletsPool);
+		return _readLiferayPortletXML(StringPool.BLANK, xml, portletsPool);
 	}
 
 	private Set<String> _readLiferayPortletXML(
@@ -1070,6 +756,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Element root = doc.getRootElement();
 
+		PortletApp portletApp = _getPortletApp(servletContextName);
+
 		Map<String, String> roleMappers = new HashMap<String, String>();
 
 		Iterator<Element> itr1 = root.elements("role-mapper").iterator();
@@ -1084,7 +772,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		Map<String, String> customUserAttributes =
-			new HashMap<String, String>();
+			portletApp.getCustomUserAttributes();
 
 		itr1 = root.elements("custom-user-attribute").iterator();
 
@@ -1376,13 +1064,409 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				portletModel.getRoleMappers().putAll(roleMappers);
 				portletModel.linkRoles();
-
-				portletModel.getCustomUserAttributes().putAll(
-					customUserAttributes);
 			}
 		}
 
 		return liferayPortletIds;
+	}
+
+	private Set<String> _readPortletXML(
+			String xml, Map<String, Portlet> portletsPool,
+			List<String> servletURLPatterns, PluginPackage pluginPackage)
+		throws DocumentException, IOException {
+
+		return _readPortletXML(
+			StringPool.BLANK, xml, portletsPool, servletURLPatterns,
+			pluginPackage);
+	}
+
+	private Set<String> _readPortletXML(
+			String servletContextName, String xml,
+			Map<String, Portlet> portletsPool, List<String> servletURLPatterns,
+			PluginPackage pluginPackage)
+		throws DocumentException, IOException {
+
+		Set<String> portletIds = new HashSet<String>();
+
+		if (xml == null) {
+			return portletIds;
+		}
+
+		Document doc = PortalUtil.readDocumentFromXML(xml);
+
+		Element root = doc.getRootElement();
+
+		PortletApp portletApp = _getPortletApp(servletContextName);
+
+		portletApp.getServletURLPatterns().addAll(servletURLPatterns);
+
+		Set<String> userAttributes = portletApp.getUserAttributes();
+
+		Iterator<Element> itr1 = root.elements("user-attribute").iterator();
+
+		while (itr1.hasNext()) {
+			Element userAttribute = itr1.next();
+
+			String name = userAttribute.elementText("name");
+
+			userAttributes.add(name);
+		}
+
+		Set<PublicRenderParameter> publicRenderParameters =
+			portletApp.getPublicRenderParameters();
+
+		itr1 = root.elements("public-render-parameter").iterator();
+
+		while (itr1.hasNext()) {
+			Element publicRenderParameterEl = itr1.next();
+
+			String identifier = publicRenderParameterEl.elementText(
+				"identifier");
+			Element qNameEl = publicRenderParameterEl.element("qname");
+
+			List<Namespace> namespaces = qNameEl.declaredNamespaces();
+
+			if (namespaces.size() == 0) {
+				_log.error(
+					"qname for identifier " + identifier +
+						" does not have a namespace");
+
+				continue;
+			}
+
+			Namespace namespace = namespaces.get(0);
+
+			String uri = namespace.getURI();
+			String prefix = namespace.getPrefix();
+
+			String localPart = qNameEl.getText();
+
+			if (localPart.startsWith(prefix + StringPool.COLON)) {
+				localPart = localPart.substring(prefix.length() + 1);
+			}
+			else {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"qname " + localPart + " is not correctly namespaced");
+				}
+			}
+
+			QName qName = new QName(uri, localPart, prefix);
+
+			PublicRenderParameter publicRenderParameter =
+				new PublicRenderParameterImpl(
+					identifier, qName, portletApp);
+
+			publicRenderParameters.add(publicRenderParameter);
+		}
+
+		itr1 = root.elements("portlet").iterator();
+
+		while (itr1.hasNext()) {
+			Element portlet = itr1.next();
+
+			String portletId = portlet.elementText("portlet-name");
+
+			if (Validator.isNotNull(servletContextName)) {
+				portletId =
+					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
+			}
+
+			portletId = PortalUtil.getJsSafePortletId(portletId);
+
+			if (_log.isDebugEnabled()) {
+				_log.debug("Reading portlet " + portletId);
+			}
+
+			portletIds.add(portletId);
+
+			Portlet portletModel = portletsPool.get(portletId);
+
+			if (portletModel == null) {
+				portletModel = new PortletImpl(CompanyImpl.SYSTEM, portletId);
+
+				portletsPool.put(portletId, portletModel);
+			}
+
+			portletModel.setPluginPackage(pluginPackage);
+			portletModel.setPortletApp(portletApp);
+
+			portletModel.setDisplayName(GetterUtil.getString(
+				portlet.elementText("display-name"),
+				portletModel.getDisplayName()));
+			portletModel.setPortletClass(GetterUtil.getString(
+				portlet.elementText("portlet-class")));
+
+			Iterator<Element> itr2 = portlet.elements("init-param").iterator();
+
+			while (itr2.hasNext()) {
+				Element initParam = itr2.next();
+
+				portletModel.getInitParams().put(
+					initParam.elementText("name"),
+					initParam.elementText("value"));
+			}
+
+			Element expirationCache = portlet.element("expiration-cache");
+
+			if (expirationCache != null) {
+				portletModel.setExpCache(new Integer(GetterUtil.getInteger(
+					expirationCache.getText())));
+			}
+
+			itr2 = portlet.elements("supports").iterator();
+
+			while (itr2.hasNext()) {
+				Element supports = itr2.next();
+
+				String mimeType = supports.elementText("mime-type");
+
+				Set<String> mimeTypeModes =
+					portletModel.getPortletModes().get(mimeType);
+
+				if (mimeTypeModes == null) {
+					mimeTypeModes = new HashSet<String>();
+
+					portletModel.getPortletModes().put(mimeType, mimeTypeModes);
+				}
+
+				mimeTypeModes.add(PortletMode.VIEW.toString().toLowerCase());
+
+				Iterator<Element> itr3 = supports.elements(
+					"portlet-mode").iterator();
+
+				while (itr3.hasNext()) {
+					Element portletMode = itr3.next();
+
+					mimeTypeModes.add(portletMode.getTextTrim().toLowerCase());
+				}
+			}
+
+			Set<String> supportedLocales = portletModel.getSupportedLocales();
+
+			supportedLocales.add(
+				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
+
+			itr2 = portlet.elements("supported-locale").iterator();
+
+			while (itr2.hasNext()) {
+				Element supportedLocaleEl = itr2.next();
+
+				String supportedLocale = supportedLocaleEl.getText();
+
+				supportedLocales.add(supportedLocale);
+			}
+
+			portletModel.setResourceBundle(
+				portlet.elementText("resource-bundle"));
+
+			Element portletInfo = portlet.element("portlet-info");
+
+			String portletInfoTitle = null;
+			String portletInfoShortTitle = null;
+			String portletInfoKeyWords = null;
+
+			if (portletInfo != null) {
+				portletInfoTitle = portletInfo.elementText("title");
+				portletInfoShortTitle = portletInfo.elementText("short-title");
+				portletInfoKeyWords = portletInfo.elementText("keywords");
+			}
+
+			portletModel.setPortletInfo(new PortletInfo(
+				portletInfoTitle, portletInfoShortTitle, portletInfoKeyWords));
+
+			Element portletPreferences = portlet.element("portlet-preferences");
+
+			String defaultPreferences = null;
+			String prefsValidator = null;
+
+			if (portletPreferences != null) {
+				Element prefsValidatorEl =
+					portletPreferences.element("preferences-validator");
+
+				if (prefsValidatorEl != null) {
+					prefsValidator = prefsValidatorEl.getText();
+
+					portletPreferences.remove(prefsValidatorEl);
+				}
+
+				StringWriter sw = new StringWriter();
+
+				XMLWriter writer = new XMLWriter(
+					sw, OutputFormat.createCompactFormat());
+
+				writer.write(portletPreferences);
+
+				defaultPreferences = sw.toString();
+			}
+
+			portletModel.setDefaultPreferences(defaultPreferences);
+			portletModel.setPreferencesValidator(prefsValidator);
+
+			if (!portletApp.isWARFile() &&
+				Validator.isNotNull(prefsValidator) &&
+				PropsValues.PREFERENCE_VALIDATE_ON_STARTUP) {
+
+				try {
+					PreferencesValidator prefsValidatorObj =
+						PortalUtil.getPreferencesValidator(portletModel);
+
+					prefsValidatorObj.validate(
+						PortletPreferencesSerializer.fromDefaultXML(
+							defaultPreferences));
+				}
+				catch (Exception e) {
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Portlet with the name " + portletId +
+								" does not have valid default preferences");
+					}
+				}
+			}
+
+			Set<String> unlikedRoles = portletModel.getUnlinkedRoles();
+
+			itr2 = portlet.elements("security-role-ref").iterator();
+
+			while (itr2.hasNext()) {
+				Element role = itr2.next();
+
+				unlikedRoles.add(role.elementText("role-name"));
+			}
+
+			itr2 = portlet.elements(
+				"supported-public-render-parameter").iterator();
+
+			while (itr2.hasNext()) {
+				Element supportedPublicRenderParameter = itr2.next();
+
+				String identifier =
+					supportedPublicRenderParameter.getTextTrim();
+
+				PublicRenderParameter publicRenderParameter = null;
+
+				for (PublicRenderParameter curPublicRenderParameter :
+						publicRenderParameters) {
+
+					if (curPublicRenderParameter.getIdentifier().equals(
+							identifier)) {
+
+						publicRenderParameter = curPublicRenderParameter;
+
+						break;
+					}
+				}
+
+				if (publicRenderParameter == null) {
+					_log.error(
+						"Supported public render parameter references " +
+							"unnknown identifier " + identifier);
+
+					continue;
+				}
+
+				portletModel.getPublicRenderParameters().put(
+					identifier, publicRenderParameter);
+			}
+
+			//Map publicRenderParameters = portletModel.getPublicRenderParameters();
+		}
+
+		Set<PortletFilter> portletFilters = portletApp.getPortletFilters();
+
+		itr1 = root.elements("filter").iterator();
+
+		while (itr1.hasNext()) {
+			Element filter = itr1.next();
+
+			String filterName = filter.elementText("filter-name");
+			String filterClass = filter.elementText("filter-class");
+
+			Set<String> lifecycles = new LinkedHashSet<String>();
+
+			Iterator<Element> itr2 = filter.elements("lifecycle").iterator();
+
+			while (itr2.hasNext()) {
+				Element lifecycle = itr2.next();
+
+				lifecycles.add(lifecycle.getText());
+			}
+
+			Map<String, String> initParams = new HashMap<String, String>();
+
+			itr2 = filter.elements("init-param").iterator();
+
+			while (itr2.hasNext()) {
+				Element initParam = itr2.next();
+
+				initParams.put(
+					initParam.elementText("name"),
+					initParam.elementText("value"));
+			}
+
+			PortletFilter portletFilter = new PortletFilterImpl(
+				filterName, filterClass, lifecycles, initParams, portletApp);
+
+			portletFilters.add(portletFilter);
+		}
+
+		itr1 = root.elements("filter-mapping").iterator();
+
+		while (itr1.hasNext()) {
+			Element filterMapping = itr1.next();
+
+			String filterName = filterMapping.elementText("filter-name");
+			String portletName = filterMapping.elementText("portlet-name");
+
+			PortletFilter portletFilter = null;
+
+			for (PortletFilter curPortletFilter : portletFilters) {
+				if (curPortletFilter.getFilterName().equals(filterName)) {
+					portletFilter = curPortletFilter;
+
+					break;
+				}
+			}
+
+			if (portletFilter == null) {
+				_log.error(
+					"Filter mapping references unnknown filter name " +
+						filterName);
+
+				continue;
+			}
+
+			List<Portlet> portletModels = _getPortletsByPortletName(
+				portletName, servletContextName, portletsPool);
+
+			if (portletModels.size() == 0) {
+				_log.error(
+					"Filter mapping with filter name " + filterName +
+						" references unnknown portlet name " + portletName);
+			}
+
+			for (Portlet portletModel : portletModels) {
+				portletModel.getPortletFilters().put(filterName, portletFilter);
+			}
+		}
+
+		Set<PortletURLListener> urlListeners =
+			portletApp.getPortletURLListeners();
+
+		itr1 = root.elements("listener").iterator();
+
+		while (itr1.hasNext()) {
+			Element listener = itr1.next();
+
+			String listenerClass = listener.elementText("listener-class");
+
+			PortletURLListener portletURLListener = new PortletURLListenerImpl(
+				listenerClass, portletApp);
+
+			urlListeners.add(portletURLListener);
+		}
+
+		return portletIds;
 	}
 
 	private List<String> _readWebXML(String xml)

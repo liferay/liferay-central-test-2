@@ -36,6 +36,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.theme.PortletDisplay;
@@ -43,6 +44,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
@@ -72,6 +74,8 @@ import javax.portlet.WindowState;
 import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletRequest;
+
+import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -513,6 +517,8 @@ public class PortletURLImpl
 
 		PortletDisplay portletDisplay = themeDisplay.getPortletDisplay();
 
+		Portlet portlet = getPortlet();
+
 		String portalURL = PortalUtil.getPortalURL(_req, _secure);
 
 		try {
@@ -715,12 +721,37 @@ public class PortletURLImpl
 			String name = entry.getKey();
 			String[] values = entry.getValue();
 
+			if (portlet != null) {
+				PublicRenderParameter publicRenderParameter =
+					portlet.getPublicRenderParameters().get(name);
+
+				if (publicRenderParameter != null) {
+					QName qName = publicRenderParameter.getQName();
+
+					String[] oldValues = _req.getParameterValues(name);
+
+					if (oldValues != null) {
+						if (values == null) {
+							values = oldValues;
+						}
+						else {
+							values = ArrayUtil.append(values, oldValues);
+						}
+					}
+
+					name = QNameUtil.getPublicRenderParameterName(qName);
+				}
+			}
+
 			for (int i = 0; i < values.length; i++) {
 				if (isParameterIncludedInPath(name)) {
 					continue;
 				}
 
-				if (!PortalUtil.isReservedParameter(name)) {
+				if (!PortalUtil.isReservedParameter(name) &&
+					!name.startsWith(
+						QNameUtil.PUBLIC_RENDER_PARAMETER_NAMESPACE)) {
+
 					sm.append(getNamespace());
 				}
 

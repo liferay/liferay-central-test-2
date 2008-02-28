@@ -41,6 +41,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
+import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -56,13 +57,14 @@ import java.util.HashSet;
 import java.util.Hashtable;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
 
 import javax.portlet.PortletMode;
+
+import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -173,9 +175,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_initParams = new HashMap<String, String>();
 		_portletModes = new HashMap<String, Set<String>>();
 		_supportedLocales = new HashSet<String>();
-		_userAttributes = new LinkedHashSet<String>();
-		_customUserAttributes = new LinkedHashMap<String, String>();
 		_portletFilters = new LinkedHashMap<String, PortletFilter>();
+		_publicRenderParameters =
+			new LinkedHashMap<String, PublicRenderParameter>();
 	}
 
 	/**
@@ -211,8 +213,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Map<String, String> initParams, Integer expCache,
 		Map<String, Set<String>> portletModes, Set<String> supportedLocales,
 		String resourceBundle, PortletInfo portletInfo,
-		Set<String> userAttributes, Map<String, String> customUserAttributes,
-		Map<String, PortletFilter> portletFilters, PortletApp portletApp) {
+		Map<String, PortletFilter> portletFilters,
+		Map<String, PublicRenderParameter> publicRenderParameters,
+		PortletApp portletApp) {
 
 		setPortletId(portletId);
 		_pluginPackage = pluginPackage;
@@ -276,9 +279,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_supportedLocales = supportedLocales;
 		_resourceBundle = resourceBundle;
 		_portletInfo = portletInfo;
-		_userAttributes = userAttributes;
-		_customUserAttributes = customUserAttributes;
 		_portletFilters = portletFilters;
+		_publicRenderParameters = publicRenderParameters;
 		_portletApp = portletApp;
 
 		if (_instanceable) {
@@ -2033,45 +2035,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the user attributes of the portlet.
-	 *
-	 * @return		user attributes of the portlet
-	 */
-	public Set<String> getUserAttributes() {
-		return _userAttributes;
-	}
-
-	/**
-	 * Sets the user attributes of the portlet.
-	 *
-	 * @param		userAttributes the user attributes of the portlet
-	 */
-	public void setUserAttributes(Set<String> userAttributes) {
-		_userAttributes = userAttributes;
-	}
-
-	/**
-	 * Gets the custom user attributes of the portlet.
-	 *
-	 * @return		custom user attributes of the portlet
-	 */
-	public Map<String, String> getCustomUserAttributes() {
-		return _customUserAttributes;
-	}
-
-	/**
-	 * Sets the custom user attributes of the portlet.
-	 *
-	 * @param		customUserAttributes the custom user attributes of the
-	 *				portlet
-	 */
-	public void setCustomUserAttributes(
-		Map<String, String> customUserAttributes) {
-
-		_customUserAttributes = customUserAttributes;
-	}
-
-	/**
 	 * Gets the filters of the portlet.
 	 *
 	 * @return		filters of the portlet
@@ -2087,6 +2050,54 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setFilters(Map<String, PortletFilter> portletFilters) {
 		_portletFilters = portletFilters;
+	}
+
+	/**
+	 * Gets the supported public render parameters of the portlet.
+	 *
+	 * @return		supported public render parameters of the portlet
+	 */
+	public Map<String, PublicRenderParameter> getPublicRenderParameters() {
+		return _publicRenderParameters;
+	}
+
+	/**
+	 * Sets the supported public render parameters of the portlet.
+	 *
+	 * @param		publicRenderParameters the supported public render
+	 *				parameters of the portlet
+	 */
+	public void setPublicRenderParameters(
+		Map<String, PublicRenderParameter> publicRenderParameters) {
+
+		_publicRenderParameters = publicRenderParameters;
+	}
+
+	/**
+	 * Gets the identifier of the supported public render parameter from a
+	 * namespace URI and local part.
+	 *
+	 * @return		the identifier of the supported public render parameter from
+	 *				a namespace URI and local part
+	 */
+	public String getPublicRenderParameterIdentifier(
+		String uri, String localPart) {
+
+		for (Map.Entry<String, PublicRenderParameter> entry :
+			_publicRenderParameters.entrySet()) {
+
+			PublicRenderParameter publicRenderParameter = entry.getValue();
+
+			QName qName = publicRenderParameter.getQName();
+
+			if (qName.getNamespaceURI().equals(uri) &&
+				qName.getLocalPart().equals(localPart)) {
+
+				return publicRenderParameter.getIdentifier();
+			}
+		}
+
+		return null;
 	}
 
 	/**
@@ -2283,8 +2294,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getRoleMappers(), isSystem(), isActive(), isInclude(),
 			getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
-			getUserAttributes(), getCustomUserAttributes(), getPortletFilters(),
-			getPortletApp());
+			getPortletFilters(), getPublicRenderParameters(), getPortletApp());
 	}
 
 	/**
@@ -2634,19 +2644,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private PortletInfo _portletInfo;
 
 	/**
-	 * The user attributes of the portlet.
-	 */
-	private Set<String> _userAttributes;
-
-	/**
-	 * The custom user attributes of the portlet.
-	 */
-	private Map<String, String> _customUserAttributes;
-
-	/**
 	 * The filters of the portlet.
 	 */
 	private Map<String, PortletFilter> _portletFilters;
+
+	/**
+	 * The supported public render parameters of the portlet.
+	 */
+	private Map<String, PublicRenderParameter> _publicRenderParameters;
 
 	/**
 	 * The application this portlet belongs to.

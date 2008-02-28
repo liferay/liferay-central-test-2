@@ -39,8 +39,8 @@ import com.liferay.portal.util.WebKeys;
 import java.lang.reflect.Constructor;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletException;
 import javax.portlet.PortletModeException;
@@ -166,7 +166,7 @@ public abstract class PortletResponseImpl implements PortletResponse {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
-		List<PortletURLListener> portletURLListeners =
+		Set<PortletURLListener> portletURLListeners =
 			portletApp.getPortletURLListeners();
 
 		for (PortletURLListener portletURLListener : portletURLListeners) {

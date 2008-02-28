@@ -24,7 +24,8 @@ package com.liferay.portal.model;
 
 import java.io.Serializable;
 
-import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <a href="PortletApp.java.html"><b><i>View Source</i></b></a>
@@ -36,11 +37,17 @@ public interface PortletApp extends Serializable {
 
 	public String getServletContextName();
 
-	public List<String> getServletURLPatterns();
+	public Set<String> getServletURLPatterns();
 
-	public List<PortletFilter> getPortletFilters();
+	public Set<String> getUserAttributes();
 
-	public List<PortletURLListener> getPortletURLListeners();
+	public Map<String, String> getCustomUserAttributes();
+
+	public Set<PortletFilter> getPortletFilters();
+
+	public Set<PublicRenderParameter> getPublicRenderParameters();
+
+	public Set<PortletURLListener> getPortletURLListeners();
 
 	public boolean isWARFile();
 

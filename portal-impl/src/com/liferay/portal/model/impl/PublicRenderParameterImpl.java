@@ -20,48 +20,55 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.portal.model.impl;
 
-import javax.portlet.EventRequest;
-import javax.portlet.EventResponse;
-import javax.portlet.PortletRequest;
+import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PublicRenderParameter;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.xml.namespace.QName;
 
 /**
- * <a href="EventResponseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="PublicRenderParameterImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EventResponseImpl
-	extends StateAwareResponseImpl implements EventResponse {
+public class PublicRenderParameterImpl implements PublicRenderParameter {
 
-	public String getLifecycle() {
-		return PortletRequest.EVENT_PHASE;
+	public PublicRenderParameterImpl(
+		String identifier, QName qName, PortletApp portletApp) {
+
+		_identifier = identifier;
+		_qName = qName;
+		_portletApp = portletApp;
 	}
 
-	public void setRenderParameters(EventRequest req) {
-		RenderParametersPool.put(
-			getHttpServletRequest(), getPlid(), getPortletName(),
-			req.getParameterMap());
+	public String getIdentifier() {
+		return _identifier;
 	}
 
-	protected EventResponseImpl() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Creating new instance " + hashCode());
-		}
+	public void setIdentifier(String identifier) {
+		_identifier = identifier;
 	}
 
-	protected void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
-		super.recycle();
+	public QName getQName() {
+		return _qName;
 	}
 
-	private static Log _log = LogFactory.getLog(EventResponseImpl.class);
+	public void setQName(QName qName) {
+		_qName = qName;
+	}
+
+	public PortletApp getPortletApp() {
+		return _portletApp;
+	}
+
+	public void setPortletApp(PortletApp portletApp) {
+		_portletApp = portletApp;
+	}
+
+	private String _identifier;
+	private QName _qName;
+	private PortletApp _portletApp;
 
 }

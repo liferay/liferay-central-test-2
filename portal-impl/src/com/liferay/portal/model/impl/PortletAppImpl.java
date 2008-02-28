@@ -27,9 +27,12 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
+import com.liferay.portal.model.PublicRenderParameter;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * <a href="PortletAppImpl.java.html"><b><i>View Source</i></b></a>
@@ -54,15 +57,27 @@ public class PortletAppImpl implements PortletApp {
 		return _servletContextName;
 	}
 
-	public List<String> getServletURLPatterns() {
+	public Set<String> getServletURLPatterns() {
 		return _servletURLPatterns;
 	}
 
-	public List<PortletFilter> getPortletFilters() {
+	public Set<String> getUserAttributes() {
+		return _userAttributes;
+	}
+
+	public Map<String, String> getCustomUserAttributes() {
+		return _customUserAttributes;
+	}
+
+	public Set<PortletFilter> getPortletFilters() {
 		return _portletFilters;
 	}
 
-	public List<PortletURLListener> getPortletURLListeners() {
+	public Set<PublicRenderParameter> getPublicRenderParameters() {
+		return _publicRenderParameters;
+	}
+
+	public Set<PortletURLListener> getPortletURLListeners() {
 		return _portletURLListeners;
 	}
 
@@ -71,11 +86,16 @@ public class PortletAppImpl implements PortletApp {
 	}
 
 	private String _servletContextName = StringPool.BLANK;
-	private List<String> _servletURLPatterns = new ArrayList<String>();
-	private List<PortletFilter> _portletFilters =
-		new ArrayList<PortletFilter>();
-	private List<PortletURLListener> _portletURLListeners =
-		new ArrayList<PortletURLListener>();
+	private Set<String> _servletURLPatterns = new LinkedHashSet<String>();
+	private Set<String> _userAttributes = new LinkedHashSet<String>();
+	private Map<String, String> _customUserAttributes =
+		new LinkedHashMap<String, String>();
+	private Set<PortletFilter> _portletFilters =
+		new LinkedHashSet<PortletFilter>();
+	private Set<PublicRenderParameter> _publicRenderParameters =
+		new LinkedHashSet<PublicRenderParameter>();
+	private Set<PortletURLListener> _portletURLListeners =
+		new LinkedHashSet<PortletURLListener>();
 	private boolean _warFile;
 
 }

@@ -61,6 +61,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.CustomUserAttributes;
 import com.liferay.portlet.PortletBag;
 import com.liferay.portlet.PortletBagPool;
 import com.liferay.portlet.PortletConfigFactory;
@@ -162,8 +163,17 @@ public class PortletHotDeployListener implements HotDeployListener {
 			for (int i = 0; i < portlets.size(); i++) {
 				Portlet portlet = portlets.get(i);
 
-				Class<?> portletClass = portletClassLoader.loadClass(
-					portlet.getPortletClass());
+				Class<?> portletClass = null;
+
+				try {
+					portletClass = portletClassLoader.loadClass(
+						portlet.getPortletClass());
+				}
+				catch (Exception e1) {
+					_log.error(e1, e1);
+
+					continue;
+				}
 
 				javax.portlet.Portlet portletInstance =
 					(javax.portlet.Portlet)portletClass.newInstance();
@@ -319,24 +329,6 @@ public class PortletHotDeployListener implements HotDeployListener {
 					}
 				}
 
-				Map<String, Object> customUserAttributes =
-					new HashMap<String, Object>();
-
-				Iterator<Map.Entry<String, String>> customUserAttributesItr =
-					portlet.getCustomUserAttributes().entrySet().iterator();
-
-				while (customUserAttributesItr.hasNext()) {
-					Map.Entry<String, String> entry =
-						customUserAttributesItr.next();
-
-					String attrCustomClass = entry.getValue();
-
-					customUserAttributes.put(
-						attrCustomClass,
-						portletClassLoader.loadClass(
-							attrCustomClass).newInstance());
-				}
-
 				PortletBag portletBag = new PortletBag(
 					portlet.getPortletId(), ctx, portletInstance,
 					configurationActionInstance, indexerInstance,
@@ -345,7 +337,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 					portletLayoutListenerInstance,
 					activityTrackerInterpreterInstance,
 					popMessageListenerInstance, prefsValidatorInstance,
-					resourceBundles, customUserAttributes);
+					resourceBundles);
 
 				PortletBagPool.put(portlet.getPortletId(), portletBag);
 
@@ -543,7 +535,23 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
-		List<PortletFilter> portletFilters = portletApp.getPortletFilters();
+		Map<String, String> customUserAttributes =
+			portletApp.getCustomUserAttributes();
+
+		for (Map.Entry<String, String> entry :
+				customUserAttributes.entrySet()) {
+
+			String attrCustomClass = entry.getValue();
+
+			CustomUserAttributes customUserAttributesInstance =
+				(CustomUserAttributes)portletClassLoader.loadClass(
+					attrCustomClass).newInstance();
+
+			portletContextBag.getCustomUserAttributes().put(
+				attrCustomClass, customUserAttributesInstance);
+		}
+
+		Set<PortletFilter> portletFilters = portletApp.getPortletFilters();
 
 		for (PortletFilter portletFilter : portletFilters) {
 			javax.portlet.filter.PortletFilter portletFilterInstance =
@@ -557,7 +565,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 			PortletFilterFactory.create(portletFilter, portletCtx);
 		}
 
-		List<PortletURLListener> portletURLListeners =
+		Set<PortletURLListener> portletURLListeners =
 			portletApp.getPortletURLListeners();
 
 		for (PortletURLListener portletURLListener : portletURLListeners) {
