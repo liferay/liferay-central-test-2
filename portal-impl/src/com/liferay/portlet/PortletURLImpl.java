@@ -760,17 +760,19 @@ public class PortletURLImpl
 
 			while (enu.hasMoreElements()) {
 				String name = enu.nextElement();
-				
+
 				String[] oldValues = _req.getParameterValues(name);
 				String[] newValues = _params.get(name);
 
 				if (newValues == null) {
 					_params.put(name, oldValues);
 				}
+				else if (isBlankValue(newValues)) {
+				}
 				else {
 					newValues = ArrayUtil.append(newValues, oldValues);
 
-					_params.put(name, oldValues);
+					_params.put(name, newValues);
 				}
 			}
 		}
@@ -793,7 +795,7 @@ public class PortletURLImpl
 
 					if (!_copyCurrentRenderParameters) {
 						String[] oldValues = _req.getParameterValues(name);
-	
+
 						if (oldValues != null) {
 							if (values == null) {
 								values = oldValues;
@@ -806,6 +808,10 @@ public class PortletURLImpl
 
 					name = QNameUtil.getPublicRenderParameterName(qName);
 				}
+			}
+
+			if (isBlankValue(values)) {
+				continue;
 			}
 
 			for (int i = 0; i < values.length; i++) {
@@ -864,6 +870,17 @@ public class PortletURLImpl
 		}
 
 		return result;
+	}
+
+	protected boolean isBlankValue(String[] value) {
+		if ((value != null) && (value.length == 1) &&
+			(value[0].equals(StringPool.BLANK))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	protected String processValue(Key key, int value) {

@@ -207,6 +207,10 @@ public abstract class PortletResponseImpl implements PortletResponse {
 			_log.error(pme.getMessage());
 		}
 
+		if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+			portletURLImpl.setCopyCurrentRenderParameters(true);
+		}
+
 		return portletURLImpl;
 	}
 

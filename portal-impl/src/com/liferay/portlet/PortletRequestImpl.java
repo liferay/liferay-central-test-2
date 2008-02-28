@@ -26,7 +26,6 @@ import com.liferay.portal.ccpp.EmptyProfile;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
-import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
@@ -59,12 +58,10 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Set;
 
 import javax.ccpp.Profile;
 import javax.ccpp.ProfileFactory;
@@ -663,20 +660,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 					req, plid, _portletName, newRenderParameters);
 			}
 
-			if (themeDisplay.isLifecycleResource()) {
-				Set<String> oldNames = oldRenderParameters.keySet();
-				Set<String> newNames = req.getParameterMap().keySet();
-
-				Set<String> allNames = new HashSet<String>();
-
-				allNames.addAll(oldNames);
-				allNames.addAll(newNames);
-
-				enu = Collections.enumeration(newNames);
-			}
-			else {
-				enu = req.getParameterNames();
-			}
+			enu = req.getParameterNames();
 		}
 		else {
 			if (!_portletName.equals(ppid)) {
@@ -791,18 +775,6 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 			if (themeDisplay.isLifecycleRender()) {
 				newRenderParameters.put(name, values);
-			}
-			else if (themeDisplay.isLifecycleResource()) {
-				String[] oldValues = oldRenderParameters.get(name);
-
-				if (oldValues != null) {
-					if (values == null) {
-						values = oldValues;
-					}
-					else {
-						values = ArrayUtil.append(values, oldValues);
-					}
-				}
 			}
 		}
 		else {
