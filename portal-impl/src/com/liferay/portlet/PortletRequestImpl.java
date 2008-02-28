@@ -37,6 +37,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -294,7 +295,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
-			if (!_portlet.getPublicRenderParameters().containsKey(name)) {
+			if (_portlet.getPublicRenderParameter(name) == null) {
 				parameterMap.put(name, getParameterValues(name));
 			}
 		}
@@ -330,7 +331,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		while (enu.hasMoreElements()) {
 			String name = enu.nextElement();
 
-			if (_portlet.getPublicRenderParameters().containsKey(name)) {
+			if (_portlet.getPublicRenderParameter(name) != null) {
 				parameterMap.put(name, getParameterValues(name));
 			}
 		}
@@ -770,11 +771,12 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			QName qName = QNameUtil.getQName(name);
 
 			if (qName != null) {
-				String identifier = _portlet.getPublicRenderParameterIdentifier(
-					qName.getNamespaceURI(), qName.getLocalPart());
+				PublicRenderParameter publicRenderParameter =
+					_portlet.getPublicRenderParameter(
+						qName.getNamespaceURI(), qName.getLocalPart());
 
-				if (identifier != null) {
-					name = identifier;
+				if (publicRenderParameter != null) {
+					name = publicRenderParameter.getIdentifier();
 				}
 			}
 
@@ -816,11 +818,14 @@ public abstract class PortletRequestImpl implements PortletRequest {
 				continue;
 			}
 
-			String identifier = _portlet.getPublicRenderParameterIdentifier(
-				qName.getNamespaceURI(), qName.getLocalPart());
+			PublicRenderParameter publicRenderParameter =
+				_portlet.getPublicRenderParameter(
+					qName.getNamespaceURI(), qName.getLocalPart());
 
-			if (identifier != null) {
-				renderParameters.put(identifier, req.getParameterValues(name));
+			if (publicRenderParameter != null) {
+				renderParameters.put(
+					publicRenderParameter.getIdentifier(),
+					req.getParameterValues(name));
 			}
 		}
 	}

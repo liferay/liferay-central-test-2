@@ -45,15 +45,15 @@ public class StrutsResourceBundle extends ResourceBundle {
 		return new StrutsResourceBundle(portletName, companyId, locale);
 	}
 
-	public StrutsResourceBundle(String portletName, long companyId,
-								Locale locale) {
+	public StrutsResourceBundle(
+		String portletName, long companyId, Locale locale) {
 
 		_portletName = portletName;
 		_companyId = companyId;
 		_locale = locale;
 	}
 
-	public Enumeration getKeys() {
+	public Enumeration<String> getKeys() {
 		return null;
 	}
 

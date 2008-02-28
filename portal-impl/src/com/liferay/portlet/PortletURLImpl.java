@@ -723,7 +723,7 @@ public class PortletURLImpl
 
 			if (portlet != null) {
 				PublicRenderParameter publicRenderParameter =
-					portlet.getPublicRenderParameters().get(name);
+					portlet.getPublicRenderParameter(name);
 
 				if (publicRenderParameter != null) {
 					QName qName = publicRenderParameter.getQName();

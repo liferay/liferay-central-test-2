@@ -23,17 +23,22 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletInfo;
+import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 
 import java.io.ByteArrayInputStream;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.PropertyResourceBundle;
@@ -52,27 +57,18 @@ import javax.xml.namespace.QName;
  */
 public class PortletConfigImpl implements PortletConfig {
 
-	public PortletConfigImpl(
-		String portletName, PortletContext portletCtx,
-		Map<String, String> params, String resourceBundle,
-		PortletInfo portletInfo) {
-
-		_rootPortletId = PortletImpl.getRootPortletId(portletName);
-		_portletId = portletName;
-		_portletName = _rootPortletId;
+	public PortletConfigImpl(Portlet portlet, PortletContext portletCtx) {
+		_portletApp = portlet.getPortletApp();
+		_portlet = portlet;
+		_portletName = portlet.getRootPortletId();
 
 		int pos = _portletName.indexOf(PortletImpl.WAR_SEPARATOR);
 
 		if (pos != -1) {
 			_portletName = _portletName.substring(0, pos);
-
-			_warFile = true;
 		}
 
 		_portletCtx = portletCtx;
-		_params = params;
-		_resourceBundle = resourceBundle;
-		_portletInfo = portletInfo;
 		_bundlePool = new HashMap<String, ResourceBundle>();
 	}
 
@@ -81,7 +77,7 @@ public class PortletConfigImpl implements PortletConfig {
 	}
 
 	public String getDefaultNamespace() {
-		return PortalUtil.getPortletNamespace(_rootPortletId);
+		return _portletApp.getDefaultNamespace();
 	}
 
 	public String getInitParameter(String name) {
@@ -89,11 +85,11 @@ public class PortletConfigImpl implements PortletConfig {
 			throw new IllegalArgumentException();
 		}
 
-		return _params.get(name);
+		return _portlet.getInitParams().get(name);
 	}
 
 	public Enumeration<String> getInitParameterNames() {
-		return Collections.enumeration(_params.keySet());
+		return Collections.enumeration(_portlet.getInitParams().keySet());
 	}
 
 	public PortletContext getPortletContext() {
@@ -101,7 +97,7 @@ public class PortletConfigImpl implements PortletConfig {
 	}
 
 	public String getPortletId() {
-		return _portletId;
+		return _portlet.getPortletId();
 	}
 
 	public String getPortletName() {
@@ -109,20 +105,31 @@ public class PortletConfigImpl implements PortletConfig {
 	}
 
 	public Enumeration<QName> getProcessingEventQNames() {
-		return null;
+		return Collections.enumeration(_portlet.getProcessingEvents());
 	}
 
 	public Enumeration<String> getPublicRenderParameterNames() {
-		return null;
+		List<String> publicRenderParameterNames = new ArrayList<String>();
+
+		for (PublicRenderParameter publicRenderParameter :
+				_portlet.getPublicRenderParameters()) {
+
+			publicRenderParameterNames.add(
+				publicRenderParameter.getIdentifier());
+		}
+
+		return Collections.enumeration(publicRenderParameterNames);
 	}
 
 	public Enumeration<QName> getPublishingEventQNames() {
-		return null;
+		return Collections.enumeration(_portlet.getPublishingEvents());
 	}
 
 	public ResourceBundle getResourceBundle(Locale locale) {
-		if (_resourceBundle == null) {
-			String poolId = _portletId;
+		String resourceBundleClassName = _portlet.getResourceBundle();
+
+		if (resourceBundleClassName == null) {
+			String poolId = _portlet.getPortletId();
 
 			ResourceBundle bundle = _bundlePool.get(poolId);
 
@@ -130,19 +137,21 @@ public class PortletConfigImpl implements PortletConfig {
 				StringMaker sm = new StringMaker();
 
 				try {
+					PortletInfo portletInfo = _portlet.getPortletInfo();
+
 					sm.append(JavaConstants.JAVAX_PORTLET_TITLE);
 					sm.append("=");
-					sm.append(_portletInfo.getTitle());
+					sm.append(portletInfo.getTitle());
 					sm.append("\n");
 
 					sm.append(JavaConstants.JAVAX_PORTLET_SHORT_TITLE);
 					sm.append("=");
-					sm.append(_portletInfo.getShortTitle());
+					sm.append(portletInfo.getShortTitle());
 					sm.append("\n");
 
 					sm.append(JavaConstants.JAVAX_PORTLET_KEYWORDS);
 					sm.append("=");
-					sm.append(_portletInfo.getKeywords());
+					sm.append(portletInfo.getKeywords());
 					sm.append("\n");
 
 					bundle = new PropertyResourceBundle(
@@ -158,13 +167,13 @@ public class PortletConfigImpl implements PortletConfig {
 			return bundle;
 		}
 		else {
-			String poolId = _portletId + "." + locale.toString();
+			String poolId = _portlet.getPortletId() + "." + locale.toString();
 
 			ResourceBundle bundle = _bundlePool.get(poolId);
 
 			if (bundle == null) {
-				if (!_warFile &&
-					_resourceBundle.equals(
+				if (!_portletApp.isWARFile() &&
+					resourceBundleClassName.equals(
 						StrutsResourceBundle.class.getName())) {
 
 					long companyId = PortalInstances.getDefaultCompanyId();
@@ -173,12 +182,14 @@ public class PortletConfigImpl implements PortletConfig {
 						_portletName, companyId, locale);
 				}
 				else {
-					PortletBag portletBag = PortletBagPool.get(_rootPortletId);
+					PortletBag portletBag = PortletBagPool.get(
+						_portlet.getRootPortletId());
 
 					bundle = portletBag.getResourceBundle(locale);
 				}
 
-				bundle = new PortletResourceBundle(bundle, _portletInfo);
+				bundle = new PortletResourceBundle(
+					bundle, _portlet.getPortletInfo());
 
 				_bundlePool.put(poolId, bundle);
 			}
@@ -188,21 +199,23 @@ public class PortletConfigImpl implements PortletConfig {
 	}
 
 	public Enumeration<Locale> getSupportedLocales() {
-		return null;
+		List<Locale> supportedLocales = new ArrayList<Locale>();
+
+		for (String languageId : _portlet.getSupportedLocales()) {
+			supportedLocales.add(LocaleUtil.fromLanguageId(languageId));
+		}
+
+		return Collections.enumeration(supportedLocales);
 	}
 
 	public boolean isWARFile() {
-		return _warFile;
+		return _portletApp.isWARFile();
 	}
 
-	private String _rootPortletId;
-	private String _portletId;
+	private PortletApp _portletApp;
+	private Portlet _portlet;
 	private String _portletName;
-	private boolean _warFile;
 	private PortletContext _portletCtx;
-	private Map<String, String> _params;
-	private String _resourceBundle;
-	private PortletInfo _portletInfo;
 	private Map<String, ResourceBundle> _bundlePool;
 
 }

@@ -378,13 +378,33 @@ public interface Portlet extends PortletModel {
 	public void setFilters(
 		java.util.Map<String, com.liferay.portal.model.PortletFilter> portletFilters);
 
-	public java.util.Map<String, com.liferay.portal.model.PublicRenderParameter> getPublicRenderParameters();
+	public void addPublishingEvent(javax.xml.namespace.QName publishingEvent);
+
+	public java.util.Set<javax.xml.namespace.QName> getPublishingEvents();
+
+	public void setPublishingEvents(
+		java.util.Set<javax.xml.namespace.QName> publishingEvents);
+
+	public void addProcessingEvent(javax.xml.namespace.QName processingEvent);
+
+	public java.util.Set<javax.xml.namespace.QName> getProcessingEvents();
+
+	public void setProcessingEvents(
+		java.util.Set<javax.xml.namespace.QName> processingEvents);
+
+	public void addPublicRenderParameter(
+		com.liferay.portal.model.PublicRenderParameter publicRenderParameter);
+
+	public com.liferay.portal.model.PublicRenderParameter getPublicRenderParameter(
+		java.lang.String identifier);
+
+	public com.liferay.portal.model.PublicRenderParameter getPublicRenderParameter(
+		java.lang.String uri, java.lang.String localPart);
+
+	public java.util.Set<com.liferay.portal.model.PublicRenderParameter> getPublicRenderParameters();
 
 	public void setPublicRenderParameters(
-		java.util.Map<String, com.liferay.portal.model.PublicRenderParameter> publicRenderParameters);
-
-	public java.lang.String getPublicRenderParameterIdentifier(
-		java.lang.String uri, java.lang.String localPart);
+		java.util.Set<com.liferay.portal.model.PublicRenderParameter> publicRenderParameters);
 
 	public java.lang.String getContextPath();
 

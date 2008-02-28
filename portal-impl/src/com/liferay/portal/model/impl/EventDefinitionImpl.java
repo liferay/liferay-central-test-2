@@ -20,52 +20,55 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.model.impl;
 
-import java.io.Serializable;
+import com.liferay.portal.model.EventDefinition;
+import com.liferay.portal.model.PortletApp;
 
-import java.util.Map;
-import java.util.Set;
+import javax.xml.namespace.QName;
 
 /**
- * <a href="PortletApp.java.html"><b><i>View Source</i></b></a>
+ * <a href="EventDefinitionImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface PortletApp extends Serializable {
+public class EventDefinitionImpl implements EventDefinition {
 
-	public String getServletContextName();
+	public EventDefinitionImpl(
+		QName qName, String valueType, PortletApp portletApp) {
 
-	public Set<String> getServletURLPatterns();
+		_qName = qName;
+		_valueType = valueType;
+		_portletApp = portletApp;
+	}
 
-	public Set<String> getUserAttributes();
+	public QName getQName() {
+		return _qName;
+	}
 
-	public Map<String, String> getCustomUserAttributes();
+	public void setQName(QName qName) {
+		_qName = qName;
+	}
 
-	public void addPortletFilter(PortletFilter portletFilter);
+	public String getValueType() {
+		return _valueType;
+	}
 
-	public PortletFilter getPortletFilter(String filterName);
+	public void setValueType(String valueType) {
+		_valueType = valueType;
+	}
 
-	public Set<PortletFilter> getPortletFilters();
+	public PortletApp getPortletApp() {
+		return _portletApp;
+	}
 
-	public String getDefaultNamespace();
+	public void setPortletApp(PortletApp portletApp) {
+		_portletApp = portletApp;
+	}
 
-	public void setDefaultNamespace(String defaultNamespace);
-
-	public void addEventDefinition(EventDefinition eventDefinition);
-
-	public void addPublicRenderParameter(
-		PublicRenderParameter publicRenderParameter);
-
-	public PublicRenderParameter getPublicRenderParameter(String identifier);
-
-	public void addPortletURLListener(PortletURLListener portletURLListener);
-
-	public PortletURLListener getPortletURLListener(String listenerClass);
-
-	public Set<PortletURLListener> getPortletURLListeners();
-
-	public boolean isWARFile();
+	private QName _qName;
+	private String _valueType;
+	private PortletApp _portletApp;
 
 }

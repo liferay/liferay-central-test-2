@@ -69,9 +69,7 @@ public class PortletConfigFactory {
 			PortletContext portletCtx =
 				PortletContextFactory.create(portlet, ctx);
 
-			portletConfig = new PortletConfigImpl(
-				portlet.getPortletId(), portletCtx, portlet.getInitParams(),
-				portlet.getResourceBundle(), portlet.getPortletInfo());
+			portletConfig = new PortletConfigImpl(portlet, portletCtx);
 
 			portletConfigs.put(portlet.getPortletId(), portletConfig);
 		}

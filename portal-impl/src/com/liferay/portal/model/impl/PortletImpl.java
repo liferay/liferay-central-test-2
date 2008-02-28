@@ -47,6 +47,7 @@ import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.QNameUtil;
 import com.liferay.portlet.PortletBag;
 import com.liferay.portlet.PortletBagPool;
 
@@ -176,8 +177,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_portletModes = new HashMap<String, Set<String>>();
 		_supportedLocales = new HashSet<String>();
 		_portletFilters = new LinkedHashMap<String, PortletFilter>();
-		_publicRenderParameters =
-			new LinkedHashMap<String, PublicRenderParameter>();
+		_processingEvents = new HashSet<QName>();
+		_publishingEvents = new HashSet<QName>();
+		_publicRenderParameters = new HashSet<PublicRenderParameter>();
 	}
 
 	/**
@@ -213,8 +215,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		Map<String, String> initParams, Integer expCache,
 		Map<String, Set<String>> portletModes, Set<String> supportedLocales,
 		String resourceBundle, PortletInfo portletInfo,
-		Map<String, PortletFilter> portletFilters,
-		Map<String, PublicRenderParameter> publicRenderParameters,
+		Map<String, PortletFilter> portletFilters, Set<QName> processingEvents,
+		Set<QName> publishingEvents,
+		Set<PublicRenderParameter> publicRenderParameters,
 		PortletApp portletApp) {
 
 		setPortletId(portletId);
@@ -280,7 +283,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_resourceBundle = resourceBundle;
 		_portletInfo = portletInfo;
 		_portletFilters = portletFilters;
-		_publicRenderParameters = publicRenderParameters;
+		_processingEvents = processingEvents;
+		_publishingEvents = publishingEvents;
+		setPublicRenderParameters(publicRenderParameters);
 		_portletApp = portletApp;
 
 		if (_instanceable) {
@@ -2053,11 +2058,106 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
+	 * Adds a supported processing event.
+	 *
+	 * @param		publicRenderParameter a supported processing event
+	 */
+	public void addProcessingEvent(QName processingEvent) {
+		_processingEvents.add(processingEvent);
+	}
+
+	/**
+	 * Gets the supported processing events of the portlet.
+	 *
+	 * @return		supported processing events of the portlet
+	 */
+	public Set<QName> getProcessingEvents() {
+		return _processingEvents;
+	}
+
+	/**
+	 * Sets the supported processing events of the portlet.
+	 *
+	 * @param		processingEvents the supported processing events of the
+	 *				portlet
+	 */
+	public void setProcessingEvents(Set<QName> processingEvents) {
+		_processingEvents = processingEvents;
+	}
+
+	/**
+	 * Adds a supported publishing event.
+	 *
+	 * @param		publicRenderParameter a supported publishing event
+	 */
+	public void addPublishingEvent(QName publishingEvent) {
+		_publishingEvents.add(publishingEvent);
+	}
+
+	/**
+	 * Gets the supported publishing events of the portlet.
+	 *
+	 * @return		supported publishing events of the portlet
+	 */
+	public Set<QName> getPublishingEvents() {
+		return _publishingEvents;
+	}
+
+	/**
+	 * Sets the supported publishing events of the portlet.
+	 *
+	 * @param		publishingEvents the supported publishing events of the
+	 *				portlet
+	 */
+	public void setPublishingEvents(Set<QName> publishingEvents) {
+		_publishingEvents = publishingEvents;
+	}
+
+	/**
+	 * Adds a supported public render parameter.
+	 *
+	 * @param		publicRenderParameter a supported public render parameter
+	 */
+	public void addPublicRenderParameter(
+		PublicRenderParameter publicRenderParameter) {
+
+		_publicRenderParameters.add(publicRenderParameter);
+		_publicRenderParametersByIdentifier.put(
+			publicRenderParameter.getIdentifier(), publicRenderParameter);
+		_publicRenderParametersByQName.put(
+			QNameUtil.getKey(publicRenderParameter.getQName()),
+			publicRenderParameter);
+	}
+
+	/**
+	 * Gets the supported public render parameter from an identifier.
+	 *
+	 * @return		the supported public render parameter from an identifier
+	 */
+	public PublicRenderParameter getPublicRenderParameter(String identifier) {
+		return _publicRenderParametersByIdentifier.get(identifier);
+	}
+
+	/**
+	 * Gets the supported public render parameter from a namespace URI and a
+	 * local part.
+	 *
+	 * @return		the supported public render parameter from a namespace URI
+	 *				and a local part
+	 */
+	public PublicRenderParameter getPublicRenderParameter(
+		String uri, String localPart) {
+
+		return _publicRenderParametersByQName.get(
+			QNameUtil.getKey(uri, localPart));
+	}
+
+	/**
 	 * Gets the supported public render parameters of the portlet.
 	 *
-	 * @return		supported public render parameters of the portlet
+	 * @return		the supported public render parameters of the portlet
 	 */
-	public Map<String, PublicRenderParameter> getPublicRenderParameters() {
+	public Set<PublicRenderParameter> getPublicRenderParameters() {
 		return _publicRenderParameters;
 	}
 
@@ -2068,36 +2168,13 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				parameters of the portlet
 	 */
 	public void setPublicRenderParameters(
-		Map<String, PublicRenderParameter> publicRenderParameters) {
+		Set<PublicRenderParameter> publicRenderParameters) {
 
-		_publicRenderParameters = publicRenderParameters;
-	}
+		for (PublicRenderParameter publicRenderParameter :
+				publicRenderParameters) {
 
-	/**
-	 * Gets the identifier of the supported public render parameter from a
-	 * namespace URI and local part.
-	 *
-	 * @return		the identifier of the supported public render parameter from
-	 *				a namespace URI and local part
-	 */
-	public String getPublicRenderParameterIdentifier(
-		String uri, String localPart) {
-
-		for (Map.Entry<String, PublicRenderParameter> entry :
-			_publicRenderParameters.entrySet()) {
-
-			PublicRenderParameter publicRenderParameter = entry.getValue();
-
-			QName qName = publicRenderParameter.getQName();
-
-			if (qName.getNamespaceURI().equals(uri) &&
-				qName.getLocalPart().equals(localPart)) {
-
-				return publicRenderParameter.getIdentifier();
-			}
+			addPublicRenderParameter(publicRenderParameter);
 		}
-
-		return null;
 	}
 
 	/**
@@ -2294,7 +2371,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getRoleMappers(), isSystem(), isActive(), isInclude(),
 			getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
-			getPortletFilters(), getPublicRenderParameters(), getPortletApp());
+			getPortletFilters(), getProcessingEvents(), getPublishingEvents(),
+			getPublicRenderParameters(), getPortletApp());
 	}
 
 	/**
@@ -2649,9 +2727,36 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private Map<String, PortletFilter> _portletFilters;
 
 	/**
+	 * The supported processing events of the portlet.
+	 */
+	private Set<QName> _processingEvents;
+
+	/**
+	 * The supported publishing events of the portlet.
+	 */
+	private Set<QName> _publishingEvents;
+
+	/**
 	 * The supported public render parameters of the portlet.
 	 */
-	private Map<String, PublicRenderParameter> _publicRenderParameters;
+	private Set<PublicRenderParameter> _publicRenderParameters =
+		new HashSet<PublicRenderParameter>();
+
+	/**
+	 * Map of the supported public render parameters of the portlet keyed by the
+	 * identifier.
+	 */
+	private Map<String, PublicRenderParameter>
+		_publicRenderParametersByIdentifier =
+			new HashMap<String, PublicRenderParameter>();
+
+	/**
+	 * Map of the supported public render parameters of the portlet keyed by the
+	 * QName.
+	 */
+	private Map<String, PublicRenderParameter>
+		_publicRenderParametersByQName =
+			new HashMap<String, PublicRenderParameter>();
 
 	/**
 	 * The application this portlet belongs to.

@@ -25,10 +25,17 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.namespace.QName;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.dom4j.Element;
+import org.dom4j.Namespace;
 
 /**
  * <a href="QNameUtil.java.html"><b><i>View Source</i></b></a>
@@ -40,12 +47,67 @@ public class QNameUtil {
 
 	public static final String PUBLIC_RENDER_PARAMETER_NAMESPACE = "p_r_p_";
 
+	public static String getKey(QName qName) {
+		return getKey(qName.getNamespaceURI(), qName.getLocalPart());
+	}
+
+	public static String getKey(String uri, String localPart) {
+		StringMaker sm = new StringMaker();
+
+		sm.append(uri);
+		sm.append(_KEY_SEPARATOR);
+		sm.append(localPart);
+
+		return sm.toString();
+	}
+
 	public static String getPublicRenderParameterName(QName qName) {
 		return _instance._getPublicRenderParameterName(qName);
 	}
 
 	public static QName getQName(String publicRenderParameterName) {
 		return _instance._getQName(publicRenderParameterName);
+	}
+
+	public static QName getQName(
+		Element qNameEl, Element nameEl, String defaultNamespace) {
+
+		if ((qNameEl == null) && (nameEl == null)) {
+			_log.error("both qname and name elements are null");
+
+			return null;
+		}
+
+		if (qNameEl == null) {
+			return new QName(defaultNamespace, nameEl.getTextTrim());
+		}
+
+		String localPart = qNameEl.getText();
+
+		List<Namespace> namespaces = qNameEl.declaredNamespaces();
+
+		if (namespaces.size() == 0) {
+			_log.error("qname " + localPart + " does not have a namespace");
+
+			return null;
+		}
+
+		Namespace namespace = namespaces.get(0);
+
+		String uri = namespace.getURI();
+		String prefix = namespace.getPrefix();
+
+		if (localPart.startsWith(prefix + StringPool.COLON)) {
+			localPart = localPart.substring(prefix.length() + 1);
+		}
+		else {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"qname " + localPart + " is not correctly namespaced");
+			}
+		}
+
+		return new QName(uri, localPart, prefix);
 	}
 
 	private QNameUtil() {
@@ -78,6 +140,10 @@ public class QNameUtil {
 
 		return _qNames.get(publicRenderParameterName);
 	}
+
+	private static final String _KEY_SEPARATOR = "_KEY_";
+
+	private static Log _log = LogFactory.getLog(QNameUtil.class);
 
 	private static QNameUtil _instance = new QNameUtil();
 

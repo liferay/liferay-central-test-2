@@ -27,9 +27,9 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletCategory;
@@ -38,6 +38,7 @@ import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.impl.EventDefinitionImpl;
 import com.liferay.portal.model.impl.PortletAppImpl;
 import com.liferay.portal.model.impl.PortletFilterImpl;
 import com.liferay.portal.model.impl.PortletImpl;
@@ -48,6 +49,7 @@ import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.QNameUtil;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.util.ListUtil;
 
@@ -75,7 +77,6 @@ import org.apache.commons.logging.LogFactory;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-import org.dom4j.Namespace;
 import org.dom4j.io.OutputFormat;
 import org.dom4j.io.XMLWriter;
 
@@ -1112,8 +1113,29 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			userAttributes.add(name);
 		}
 
-		Set<PublicRenderParameter> publicRenderParameters =
-			portletApp.getPublicRenderParameters();
+		String defaultNamespace = root.elementText("default-namespace");
+
+		if (Validator.isNotNull(defaultNamespace)) {
+			portletApp.setDefaultNamespace(defaultNamespace);
+		}
+
+		itr1 = root.elements("event-definition").iterator();
+
+		while (itr1.hasNext()) {
+			Element eventDefinitionEl = itr1.next();
+
+			Element qNameEl = eventDefinitionEl.element("qname");
+			Element nameEl = eventDefinitionEl.element("name");
+			String valueType = eventDefinitionEl.elementText("value-type");
+
+			QName qName = QNameUtil.getQName(
+				qNameEl, nameEl, portletApp.getDefaultNamespace());
+
+			EventDefinition eventDefinition = new EventDefinitionImpl(
+				qName, valueType, portletApp);
+
+			portletApp.addEventDefinition(eventDefinition);
+		}
 
 		itr1 = root.elements("public-render-parameter").iterator();
 
@@ -1123,41 +1145,15 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			String identifier = publicRenderParameterEl.elementText(
 				"identifier");
 			Element qNameEl = publicRenderParameterEl.element("qname");
+			Element nameEl = publicRenderParameterEl.element("name");
 
-			List<Namespace> namespaces = qNameEl.declaredNamespaces();
-
-			if (namespaces.size() == 0) {
-				_log.error(
-					"qname for identifier " + identifier +
-						" does not have a namespace");
-
-				continue;
-			}
-
-			Namespace namespace = namespaces.get(0);
-
-			String uri = namespace.getURI();
-			String prefix = namespace.getPrefix();
-
-			String localPart = qNameEl.getText();
-
-			if (localPart.startsWith(prefix + StringPool.COLON)) {
-				localPart = localPart.substring(prefix.length() + 1);
-			}
-			else {
-				if (_log.isWarnEnabled()) {
-					_log.warn(
-						"qname " + localPart + " is not correctly namespaced");
-				}
-			}
-
-			QName qName = new QName(uri, localPart, prefix);
+			QName qName = QNameUtil.getQName(
+				qNameEl, nameEl, portletApp.getDefaultNamespace());
 
 			PublicRenderParameter publicRenderParameter =
-				new PublicRenderParameterImpl(
-					identifier, qName, portletApp);
+				new PublicRenderParameterImpl(identifier, qName, portletApp);
 
-			publicRenderParameters.add(publicRenderParameter);
+			portletApp.addPublicRenderParameter(publicRenderParameter);
 		}
 
 		itr1 = root.elements("portlet").iterator();
@@ -1244,8 +1240,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			Set<String> supportedLocales = portletModel.getSupportedLocales();
 
-			supportedLocales.add(
-				LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
+			//supportedLocales.add(
+			//	LocaleUtil.toLanguageId(LocaleUtil.getDefault()));
 
 			itr2 = portlet.elements("supported-locale").iterator();
 
@@ -1334,6 +1330,34 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				unlikedRoles.add(role.elementText("role-name"));
 			}
 
+			itr2 = portlet.elements("supported-processing-event").iterator();
+
+			while (itr2.hasNext()) {
+				Element supportedProcessingEvent = itr2.next();
+
+				Element qNameEl = supportedProcessingEvent.element("qname");
+				Element nameEl = supportedProcessingEvent.element("name");
+
+				QName qName = QNameUtil.getQName(
+					qNameEl, nameEl, portletApp.getDefaultNamespace());
+
+				portletModel.addProcessingEvent(qName);
+			}
+
+			itr2 = portlet.elements("supported-publishing-event").iterator();
+
+			while (itr2.hasNext()) {
+				Element supportedPublishingEvent = itr2.next();
+
+				Element qNameEl = supportedPublishingEvent.element("qname");
+				Element nameEl = supportedPublishingEvent.element("name");
+
+				QName qName = QNameUtil.getQName(
+					qNameEl, nameEl, portletApp.getDefaultNamespace());
+
+				portletModel.addPublishingEvent(qName);
+			}
+
 			itr2 = portlet.elements(
 				"supported-public-render-parameter").iterator();
 
@@ -1343,19 +1367,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				String identifier =
 					supportedPublicRenderParameter.getTextTrim();
 
-				PublicRenderParameter publicRenderParameter = null;
-
-				for (PublicRenderParameter curPublicRenderParameter :
-						publicRenderParameters) {
-
-					if (curPublicRenderParameter.getIdentifier().equals(
-							identifier)) {
-
-						publicRenderParameter = curPublicRenderParameter;
-
-						break;
-					}
-				}
+				PublicRenderParameter publicRenderParameter =
+					portletApp.getPublicRenderParameter(identifier);
 
 				if (publicRenderParameter == null) {
 					_log.error(
@@ -1365,14 +1378,9 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 					continue;
 				}
 
-				portletModel.getPublicRenderParameters().put(
-					identifier, publicRenderParameter);
+				portletModel.addPublicRenderParameter(publicRenderParameter);
 			}
-
-			//Map publicRenderParameters = portletModel.getPublicRenderParameters();
 		}
-
-		Set<PortletFilter> portletFilters = portletApp.getPortletFilters();
 
 		itr1 = root.elements("filter").iterator();
 
@@ -1407,7 +1415,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			PortletFilter portletFilter = new PortletFilterImpl(
 				filterName, filterClass, lifecycles, initParams, portletApp);
 
-			portletFilters.add(portletFilter);
+			portletApp.addPortletFilter(portletFilter);
 		}
 
 		itr1 = root.elements("filter-mapping").iterator();
@@ -1418,15 +1426,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			String filterName = filterMapping.elementText("filter-name");
 			String portletName = filterMapping.elementText("portlet-name");
 
-			PortletFilter portletFilter = null;
-
-			for (PortletFilter curPortletFilter : portletFilters) {
-				if (curPortletFilter.getFilterName().equals(filterName)) {
-					portletFilter = curPortletFilter;
-
-					break;
-				}
-			}
+			PortletFilter portletFilter = portletApp.getPortletFilter(
+				filterName);
 
 			if (portletFilter == null) {
 				_log.error(
@@ -1450,9 +1451,6 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 		}
 
-		Set<PortletURLListener> urlListeners =
-			portletApp.getPortletURLListeners();
-
 		itr1 = root.elements("listener").iterator();
 
 		while (itr1.hasNext()) {
@@ -1463,7 +1461,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			PortletURLListener portletURLListener = new PortletURLListenerImpl(
 				listenerClass, portletApp);
 
-			urlListeners.add(portletURLListener);
+			portletApp.addPortletURLListener(portletURLListener);
 		}
 
 		return portletIds;

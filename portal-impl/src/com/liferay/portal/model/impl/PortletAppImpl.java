@@ -24,15 +24,19 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.PublicRenderParameter;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.Map;
 import java.util.Set;
+
+import javax.xml.XMLConstants;
 
 /**
  * <a href="PortletAppImpl.java.html"><b><i>View Source</i></b></a>
@@ -69,12 +73,52 @@ public class PortletAppImpl implements PortletApp {
 		return _customUserAttributes;
 	}
 
+	public void addPortletFilter(PortletFilter portletFilter) {
+		_portletFilters.add(portletFilter);
+		_portletFiltersByFilterName.put(
+			portletFilter.getFilterName(), portletFilter);
+	}
+
+	public PortletFilter getPortletFilter(String filterName) {
+		return _portletFiltersByFilterName.get(filterName);
+	}
+
 	public Set<PortletFilter> getPortletFilters() {
 		return _portletFilters;
 	}
 
-	public Set<PublicRenderParameter> getPublicRenderParameters() {
-		return _publicRenderParameters;
+	public String getDefaultNamespace() {
+		return _defaultNamespace;
+	}
+
+	public void setDefaultNamespace(String defaultNamespace) {
+		_defaultNamespace = defaultNamespace;
+	}
+
+	public void addEventDefinition(EventDefinition eventDefinition) {
+		_eventDefinitions.add(eventDefinition);
+	}
+
+	public void addPublicRenderParameter(
+		PublicRenderParameter publicRenderParameter) {
+
+		_publicRenderParameters.add(publicRenderParameter);
+		_publicRenderParametersByIdentifier.put(
+			publicRenderParameter.getIdentifier(), publicRenderParameter);
+	}
+
+	public PublicRenderParameter getPublicRenderParameter(String identifier) {
+		return _publicRenderParametersByIdentifier.get(identifier);
+	}
+
+	public void addPortletURLListener(PortletURLListener portletURLListener) {
+		_portletURLListeners.add(portletURLListener);
+		_portletURLListenersByListenerClass.put(
+			portletURLListener.getListenerClass(), portletURLListener);
+	}
+
+	public PortletURLListener getPortletURLListener(String listenerClass) {
+		return _portletURLListenersByListenerClass.get(listenerClass);
 	}
 
 	public Set<PortletURLListener> getPortletURLListeners() {
@@ -92,10 +136,21 @@ public class PortletAppImpl implements PortletApp {
 		new LinkedHashMap<String, String>();
 	private Set<PortletFilter> _portletFilters =
 		new LinkedHashSet<PortletFilter>();
+	private Map<String, PortletFilter> _portletFiltersByFilterName =
+		new HashMap<String, PortletFilter>();
+	private String _defaultNamespace = XMLConstants.NULL_NS_URI;
+	private Set<EventDefinition> _eventDefinitions =
+		new LinkedHashSet<EventDefinition>();
 	private Set<PublicRenderParameter> _publicRenderParameters =
 		new LinkedHashSet<PublicRenderParameter>();
+	private Map<String, PublicRenderParameter>
+		_publicRenderParametersByIdentifier =
+			new HashMap<String, PublicRenderParameter>();
 	private Set<PortletURLListener> _portletURLListeners =
 		new LinkedHashSet<PortletURLListener>();
+	private Map<String, PortletURLListener>
+		_portletURLListenersByListenerClass =
+			new HashMap<String, PortletURLListener>();
 	private boolean _warFile;
 
 }

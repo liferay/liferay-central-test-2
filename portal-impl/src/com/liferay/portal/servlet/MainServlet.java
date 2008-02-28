@@ -739,14 +739,14 @@ public class MainServlet extends ActionServlet {
 
 		PortletApp portletApp = portlet.getPortletApp();
 
+		PortletConfig portletConfig = PortletConfigFactory.create(
+			portlet, ctx);
+
+		PortletContext portletCtx = portletConfig.getPortletContext();
+
 		Set<PortletFilter> portletFilters = portletApp.getPortletFilters();
 
 		for (PortletFilter portletFilter : portletFilters) {
-			PortletConfig portletConfig = PortletConfigFactory.create(
-				portlet, ctx);
-
-			PortletContext portletCtx = portletConfig.getPortletContext();
-
 			PortletFilterFactory.create(portletFilter, portletCtx);
 		}
 
