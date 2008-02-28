@@ -20,25 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.admin;
+package com.liferay.portalweb.portlet.bookmarks;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="BrowseServerTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="MoveEntryTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BrowseServerTest extends BaseTestCase {
-	public void testBrowseServer() throws Exception {
+public class MoveEntryTest extends BaseTestCase {
+	public void testMoveEntry() throws Exception {
+		selenium.click("link=Edit");
+		selenium.waitForPageToLoad("30000");
+
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=More")) {
+				if (selenium.isElementPresent("//input[@value='Select']")) {
 					break;
 				}
 			}
@@ -48,7 +51,10 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=More");
+		selenium.click("//input[@value='Select']");
+		selenium.waitForPopUp("folder", "30000");
+		selenium.selectWindow("folder");
+		selenium.click("//div[@id=\"p_p_id_28_\"]/div/form/div[1]/a[1]");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -57,7 +63,7 @@ public class BrowseServerTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Actions")) {
+				if (selenium.isElementPresent("//input[@value='Choose']")) {
 					break;
 				}
 			}
@@ -67,10 +73,8 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//input[@value='Execute']");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Log Levels");
-		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Choose']");
+		selenium.selectWindow("null");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -78,7 +82,7 @@ public class BrowseServerTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Update Categories")) {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
 					break;
 				}
 			}
@@ -88,7 +92,7 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=System Properties");
+		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -97,7 +101,8 @@ public class BrowseServerTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("document._9_fm.elements[8]")) {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
 					break;
 				}
 			}
@@ -107,15 +112,7 @@ public class BrowseServerTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.select("document._9_fm.elements[7]", "label=7");
-		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("user.timezone"));
-		selenium.click("link=Portal Properties");
-		selenium.waitForPageToLoad("30000");
-		selenium.select("document._9_fm.elements[7]", "label=26");
-		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("shutdown.programmatically.exit"));
-		selenium.click("link=Shutdown");
+		selenium.click("link=Test Folder");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -124,45 +121,7 @@ public class BrowseServerTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//input[@value='Shutdown']")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=OpenOffice");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("_9_enabledCheckbox")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("link=Return to Full Page");
-		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Instances")) {
+				if (selenium.isElementPresent("link=exact:http://www.digg.com")) {
 					break;
 				}
 			}
