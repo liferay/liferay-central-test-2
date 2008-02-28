@@ -443,7 +443,27 @@ public class JournalArticleLocalServiceImpl
 		article.setApprovedByUserName(user.getFullName());
 		article.setApprovedDate(now);
 
+		if (article.isExpired()) {
+			article.setExpired(false);
+			article.setExpirationDate(null);
+		}
+
 		journalArticlePersistence.update(article);
+		
+		// Un-approve all other versions.
+
+		List<JournalArticle> articles =
+			journalArticlePersistence.findByG_A_A(groupId, articleId, true);
+
+		for (JournalArticle curArticle : articles) {
+			if (curArticle.getVersion() != article.getVersion()) {
+				curArticle.setApproved(false);
+				curArticle.setExpired(true);
+				curArticle.setExpirationDate(new Date());
+
+				journalArticlePersistence.update(curArticle);
+			}
+		}
 
 		// Email
 
@@ -1626,6 +1646,23 @@ public class JournalArticleLocalServiceImpl
 		article.setSmallImageURL(smallImageURL);
 
 		journalArticlePersistence.update(article);
+
+		// Un-approve all other versions.
+
+		if (incrementVersion && approved) {
+			List<JournalArticle> articles =
+				journalArticlePersistence.findByG_A_A(groupId, articleId, true);
+
+			for (JournalArticle curArticle : articles) {
+				if (curArticle.getVersion() != article.getVersion()) {
+					curArticle.setApproved(false);
+					curArticle.setExpired(true);
+					curArticle.setExpirationDate(new Date());
+
+					journalArticlePersistence.update(curArticle);
+				}
+			}
+		}
 
 		// Small image
 
