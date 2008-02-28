@@ -20,53 +20,42 @@
  * SOFTWARE.
  */
 
-package com.liferay.taglib.ui;
+package com.liferay.taglib.util;
 
-import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.diff.DiffResult;
-
-import java.util.List;
-
-import javax.servlet.ServletRequest;
+import javax.servlet.jsp.JspException;
+import javax.servlet.jsp.tagext.TagSupport;
 
 /**
- * <a href="DiffTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="PropertyTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Bruno Farache
+ * @author Brian Wing Shun Chan
  *
  */
-public class DiffTag extends IncludeTag {
+public class PropertyTag extends TagSupport {
 
-	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
+	public int doStartTag() throws JspException {
+		PropertyAncestorTag propertyAncestor =
+			(PropertyAncestorTag)findAncestorWithClass(
+				this, PropertyAncestorTag.class);
 
-		req.setAttribute("liferay-ui:diff:sourceName", _sourceName);
-		req.setAttribute("liferay-ui:diff:targetName", _targetName);
-		req.setAttribute("liferay-ui:diff:diffResults", _diffResults);
+		if (propertyAncestor == null) {
+			throw new JspException();
+		}
 
-		return EVAL_BODY_BUFFERED;
+		propertyAncestor.addProperty(_name, _value);
+
+		return EVAL_BODY_INCLUDE;
 	}
 
-	public void setSourceName(String sourceName) {
-		_sourceName = sourceName;
+	public void setName(String name) {
+		_name = name;
 	}
 
-	public void setTargetName(String targetName) {
-		_targetName = targetName;
+	public void setValue(String value) {
+		_value = value;
 	}
 
-	public void setDiffResults(List<DiffResult>[] diffResults) {
-		_diffResults = diffResults;
-	}
-
-	protected String getDefaultPage() {
-		return _PAGE;
-	}
-
-	private static final String _PAGE = "/html/taglib/ui/diff/page.jsp";
-
-	private String _sourceName;
-	private String _targetName;
-	private List<DiffResult>[] _diffResults;
+	private String _name;
+	private String _value;
 
 }

@@ -51,6 +51,8 @@ import com.liferay.util.EncryptorException;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
 
+import com.sun.portal.portletcontainer.common.URLHelper;
+
 import java.io.IOException;
 import java.io.Serializable;
 import java.io.Writer;
@@ -247,6 +249,10 @@ public class PortletURLImpl
 		return _encrypt;
 	}
 
+	public boolean isEscapeXml() {
+		return _escapeXml;
+	}
+
 	public boolean isParameterIncludedInPath(String name) {
 		if (_parametersIncludedInPath.contains(name)) {
 			return true;
@@ -325,6 +331,14 @@ public class PortletURLImpl
 
 	public void setEncrypt(boolean encrypt) {
 		_encrypt = encrypt;
+
+		// Clear cache
+
+		_toString = null;
+	}
+
+	public void setEscapeXml(boolean escapeXml) {
+		_escapeXml = escapeXml;
 
 		// Clear cache
 
@@ -502,10 +516,16 @@ public class PortletURLImpl
 	}
 
 	public void write(Writer writer) throws IOException {
-		write(writer, _ESCAPE_XML);
+		write(writer, _escapeXml);
 	}
 
-	public void write(Writer writer, boolean escapeXML) throws IOException {
+	public void write(Writer writer, boolean escapeXml) throws IOException {
+		String toString = toString();
+
+		if (escapeXml && !_escapeXml) {
+			toString = URLHelper.escapeURL(toString);
+		}
+
 		writer.write(toString());
 	}
 
@@ -794,6 +814,10 @@ public class PortletURLImpl
 				result, _req.getSession().getId());
 		}
 
+		if (_escapeXml) {
+			result = URLHelper.escapeURL(result);
+		}
+
 		return result;
 	}
 
@@ -836,6 +860,7 @@ public class PortletURLImpl
 	private String _cacheability = ResourceURL.PAGE;
 	private long _doAsUserId;
 	private boolean _encrypt;
+	private boolean _escapeXml = _ESCAPE_XML;
 	private Set<String> _parametersIncludedInPath;
 	private Map<String, String[]> _params;
 	private PortletMode _portletMode;

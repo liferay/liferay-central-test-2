@@ -50,6 +50,8 @@ public interface LiferayPortletURL
 
 	public boolean isEncrypt();
 
+	public boolean isEscapeXml();
+
 	public boolean isParameterIncludedInPath(String name);
 
 	public boolean isSecure();
@@ -67,6 +69,8 @@ public interface LiferayPortletURL
 	public void setDoAsUserId(long doAsUserId);
 
 	public void setEncrypt(boolean encrypt);
+
+	public void setEscapeXml(boolean escapeXml);
 
 	public void setPortletId(String portletId);
 

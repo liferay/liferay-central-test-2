@@ -41,7 +41,7 @@ import javax.servlet.jsp.JspException;
  * @author Brian Wing Shun Chan
  *
  */
-public class IncludeTag extends ParamAncestorTagImpl {
+public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doEndTag() throws JspException {
 		HttpServletRequest req = null;

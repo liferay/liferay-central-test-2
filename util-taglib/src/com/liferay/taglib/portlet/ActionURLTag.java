@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.NullWrapper;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.taglib.util.ParamAncestorTagImpl;
+import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import java.util.Map;
 
@@ -47,14 +47,16 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class ActionURLTag extends ParamAncestorTagImpl {
+public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 
 	public static String doTag(
 			String lifecycle, String windowState, String portletMode,
-			String var, String varImpl, Boolean secure, String portletName,
-			Boolean anchor, Boolean encrypt, long doAsUserId,
-			Boolean portletConfiguration, Map<String, String[]> params,
-			boolean writeOutput, PageContext pageContext)
+			String var, String varImpl, Boolean secure,
+			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
+			String portletName, Boolean anchor, Boolean encrypt,
+			long doAsUserId, Boolean portletConfiguration,
+			Map<String, String[]> params, boolean writeOutput,
+			PageContext pageContext)
 		throws Exception {
 
 		Object returnObj = null;
@@ -96,6 +98,26 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 				secureWrapper = new NullWrapper(Boolean.class.getName());
 			}
 
+			Object copyCurrentRenderParametersWrapper =
+				copyCurrentRenderParameters;
+
+			if (copyCurrentRenderParametersWrapper == null) {
+				copyCurrentRenderParametersWrapper = new NullWrapper(
+					Boolean.class.getName());
+			}
+
+			Object escapeXmlWrapper = escapeXml;
+
+			if (escapeXmlWrapper == null) {
+				escapeXmlWrapper = new NullWrapper(Boolean.class.getName());
+			}
+
+			Object nameWrapper = name;
+
+			if (nameWrapper == null) {
+				nameWrapper = new NullWrapper(String.class.getName());
+			}
+
 			Object portletNameWrapper = portletName;
 
 			if (portletNameWrapper == null) {
@@ -132,9 +154,11 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 				new Object[] {
 					lifecycle, windowStateWrapper, portletModeWrapper,
 					varWrapper, varImplWrapper, secureWrapper,
-					portletNameWrapper, anchorWrapper, encryptWrapper,
-					new LongWrapper(doAsUserId), portletConfigurationWrapper,
-					paramsWrapper, new BooleanWrapper(writeOutput), pageContext
+					copyCurrentRenderParametersWrapper, escapeXmlWrapper,
+					nameWrapper, portletNameWrapper, anchorWrapper,
+					encryptWrapper, new LongWrapper(doAsUserId),
+					portletConfigurationWrapper, paramsWrapper,
+					new BooleanWrapper(writeOutput), pageContext
 				});
 
 			returnObj = MethodInvoker.invoke(methodWrapper);
@@ -160,7 +184,8 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 		try {
 			doTag(
 				getLifecycle(), _windowState, _portletMode, _var, _varImpl,
-				_secure, _portletName, _anchor, _encrypt, _doAsUserId,
+				_secure, _copyCurrentRenderParameters, _escapeXml, _name,
+				_portletName, _anchor, _encrypt, _doAsUserId,
 				_portletConfiguration, getParams(), true, pageContext);
 		}
 		catch (Exception e) {
@@ -202,6 +227,21 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 		_secure = Boolean.valueOf(secure);
 	}
 
+	public void setCopyCurrentRenderParameters(
+		boolean copyCurrentRenderParameters) {
+
+		_copyCurrentRenderParameters = Boolean.valueOf(
+			copyCurrentRenderParameters);
+	}
+
+	public void setEscapeXml(boolean escapeXml) {
+		_escapeXml = Boolean.valueOf(escapeXml);
+	}
+
+	public void setName(String name) {
+		_name = name;
+	}
+
 	public void setPortletName(String portletName) {
 		_portletName = portletName;
 	}
@@ -234,6 +274,9 @@ public class ActionURLTag extends ParamAncestorTagImpl {
 	private String _var;
 	private String _varImpl;
 	private Boolean _secure;
+	private Boolean _copyCurrentRenderParameters;
+	private Boolean _escapeXml;
+	private String  _name;
 	private String _portletName;
 	private Boolean _anchor;
 	private Boolean _encrypt;

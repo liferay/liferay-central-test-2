@@ -110,6 +110,23 @@ public class PortletPreferencesWrapper
 		return (PortletPreferencesImpl)_prefs;
 	}
 
+	public boolean equals(Object obj) {
+		PortletPreferencesWrapper portletPreferences = (PortletPreferencesWrapper)obj;
+
+		if (this == portletPreferences) {
+			return true;
+		}
+
+		if (getPreferencesImpl().equals(
+				portletPreferences.getPreferencesImpl())) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	private PortletPreferences _prefs;
 	private String _lifecycle;
 

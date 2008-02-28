@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.taglib.util.ParamAncestorTagImpl;
+import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 import com.liferay.taglib.util.ThemeUtil;
 
 import javax.servlet.RequestDispatcher;
@@ -40,7 +40,7 @@ import javax.servlet.jsp.JspException;
  * @author Brian Wing Shun Chan
  *
  */
-public class BoxTag extends ParamAncestorTagImpl {
+public class BoxTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doStartTag() {
 		return EVAL_BODY_BUFFERED;

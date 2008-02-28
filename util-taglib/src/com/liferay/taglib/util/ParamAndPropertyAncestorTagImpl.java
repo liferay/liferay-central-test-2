@@ -40,20 +40,21 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.jsp.tagext.BodyTagSupport;
 
 /**
- * <a href="ParamAncestorTagImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ParamAndPropertyAncestorTagImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ParamAncestorTagImpl
-	extends BodyTagSupport implements ParamAncestorTag {
+public class ParamAndPropertyAncestorTagImpl
+	extends BodyTagSupport implements ParamAncestorTag, PropertyAncestorTag {
 
 	public void addParam(String name, String value) {
 		if (_params == null) {
-			_params = new LinkedHashMap();
+			_params = new LinkedHashMap<String, String[]>();
 		}
 
-		String[] values = (String[])_params.get(name);
+		String[] values = _params.get(name);
 
 		if (values == null) {
 			values = new String[] {value};
@@ -71,14 +72,47 @@ public class ParamAncestorTagImpl
 		_params.put(name, values);
 	}
 
+	public void addProperty(String name, String value) {
+		if (_properties == null) {
+			_properties = new LinkedHashMap<String, String[]>();
+		}
+
+		String[] values = _properties.get(name);
+
+		if (values == null) {
+			values = new String[] {value};
+		}
+		else {
+			String[] newValues = new String[values.length + 1];
+
+			System.arraycopy(values, 0, newValues, 0, values.length);
+
+			newValues[newValues.length - 1] = value;
+
+			values = newValues;
+		}
+
+		_properties.put(name, values);
+	}
+
 	public void clearParams() {
 		if (_params != null) {
 			_params.clear();
 		}
 	}
 
-	public Map getParams() {
+	public void clearProperties() {
+		if (_properties != null) {
+			_properties.clear();
+		}
+	}
+
+	public Map<String, String[]> getParams() {
 		return _params;
+	}
+
+	public Map<String, String[]> getProperties() {
+		return _properties;
 	}
 
 	public ServletContext getServletContext() {
@@ -114,6 +148,7 @@ public class ParamAncestorTagImpl
 		pageContext.getOut().print(res.getString());
 	}
 
-	private Map _params;
+	private Map<String, String[]> _params;
+	private Map<String, String[]> _properties;
 
 }

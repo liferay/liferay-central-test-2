@@ -20,53 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.taglib.ui;
-
-import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.diff.DiffResult;
-
-import java.util.List;
-
-import javax.servlet.ServletRequest;
+package com.liferay.taglib.portlet;
 
 /**
- * <a href="DiffTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceURLTei.java.html"><b><i>View Source</i></b></a>
  *
- * @author Bruno Farache
+ * @author Brian Wing Shun Chan
  *
  */
-public class DiffTag extends IncludeTag {
-
-	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
-
-		req.setAttribute("liferay-ui:diff:sourceName", _sourceName);
-		req.setAttribute("liferay-ui:diff:targetName", _targetName);
-		req.setAttribute("liferay-ui:diff:diffResults", _diffResults);
-
-		return EVAL_BODY_BUFFERED;
-	}
-
-	public void setSourceName(String sourceName) {
-		_sourceName = sourceName;
-	}
-
-	public void setTargetName(String targetName) {
-		_targetName = targetName;
-	}
-
-	public void setDiffResults(List<DiffResult>[] diffResults) {
-		_diffResults = diffResults;
-	}
-
-	protected String getDefaultPage() {
-		return _PAGE;
-	}
-
-	private static final String _PAGE = "/html/taglib/ui/diff/page.jsp";
-
-	private String _sourceName;
-	private String _targetName;
-	private List<DiffResult>[] _diffResults;
-
+public class ResourceURLTei extends ActionURLTei {
 }

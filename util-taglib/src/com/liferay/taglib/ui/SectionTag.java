@@ -25,7 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.taglib.util.ParamAncestorTagImpl;
+import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 
 import javax.portlet.RenderResponse;
 
@@ -38,7 +38,7 @@ import javax.servlet.jsp.JspException;
  * @author Brian Wing Shun Chan
  *
  */
-public class SectionTag extends ParamAncestorTagImpl {
+public class SectionTag extends ParamAndPropertyAncestorTagImpl {
 
 	public int doStartTag() throws JspException {
 		_tabsTag = (TabsTag)findAncestorWithClass(this, TabsTag.class);

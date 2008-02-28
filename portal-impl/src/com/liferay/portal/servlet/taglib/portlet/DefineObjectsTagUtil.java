@@ -25,8 +25,10 @@ package com.liferay.portal.servlet.taglib.portlet;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portlet.PortletConfigImpl;
 
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+import javax.portlet.PortletPreferences;
+import javax.portlet.PortletRequest;
+import javax.portlet.PortletResponse;
+import javax.portlet.PortletSession;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.PageContext;
@@ -42,6 +44,9 @@ public class DefineObjectsTagUtil {
 	public static void doStartTag(PageContext pageContext) {
 		ServletRequest req = pageContext.getRequest();
 
+		String lifecycle = (String)req.getAttribute(
+			PortletRequest.LIFECYCLE_PHASE);
+
 		PortletConfigImpl portletConfig = (PortletConfigImpl)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_CONFIG);
 
@@ -51,22 +56,61 @@ public class DefineObjectsTagUtil {
 				"portletName", portletConfig.getPortletName());
 		}
 
-		RenderRequest renderRequest = (RenderRequest)req.getAttribute(
+		PortletRequest portletRequest = (PortletRequest)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		if (renderRequest != null) {
-			pageContext.setAttribute("renderRequest", renderRequest);
+		if (portletRequest != null) {
+			String portletRequestAttrName = null;
+
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+				portletRequestAttrName = "actionRequest";
+			}
+			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+				portletRequestAttrName = "eventRequest";
+			}
+			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+				portletRequestAttrName = "renderRequest";
+			}
+			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				portletRequestAttrName = "resourceRequest";
+			}
+
+			pageContext.setAttribute(portletRequestAttrName, portletRequest);
+
+			PortletPreferences portletPreferences =
+				portletRequest.getPreferences();
+
+			pageContext.setAttribute("portletPreferences", portletPreferences);
 			pageContext.setAttribute(
-				"portletPreferences", renderRequest.getPreferences());
+				"portletPreferencesValues", portletPreferences.getMap());
+
+			PortletSession portletSession = portletRequest.getPortletSession();
+
+			pageContext.setAttribute("portletSession", portletSession);
 			pageContext.setAttribute(
-				"portletSession", renderRequest.getPortletSession());
+				"portletSessionScope", portletSession.getAttributeMap());
 		}
 
-		RenderResponse renderResponse = (RenderResponse)req.getAttribute(
+		PortletResponse portletResponse = (PortletResponse)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
-		if (renderResponse != null) {
-			pageContext.setAttribute("renderResponse", renderResponse);
+		if (portletResponse != null) {
+			String portletResponseAttrName = null;
+
+			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+				portletResponseAttrName = "actionResponse";
+			}
+			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+				portletResponseAttrName = "eventResponse";
+			}
+			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
+				portletResponseAttrName = "renderResponse";
+			}
+			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				portletResponseAttrName = "resourceResponse";
+			}
+
+			pageContext.setAttribute(portletResponseAttrName, portletResponse);
 		}
 	}
 

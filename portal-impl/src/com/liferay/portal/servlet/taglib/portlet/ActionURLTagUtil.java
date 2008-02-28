@@ -54,10 +54,12 @@ public class ActionURLTagUtil {
 
 	public static String doEndTag(
 			String lifecycle, String windowState, String portletMode,
-			String var, String varImpl, Boolean secure, String portletName,
-			Boolean anchor, Boolean encrypt, long doAsUserId,
-			Boolean portletConfiguration, Map<String, String[]> params,
-			boolean writeOutput, PageContext pageContext)
+			String var, String varImpl, Boolean secure,
+			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
+			String portletName, Boolean anchor, Boolean encrypt,
+			long doAsUserId, Boolean portletConfiguration,
+			Map<String, String[]> params, boolean writeOutput,
+			PageContext pageContext)
 		throws JspException {
 
 		try {
@@ -108,6 +110,10 @@ public class ActionURLTagUtil {
 			}
 			else {
 				portletURL.setSecure(req.isSecure());
+			}
+
+			if (escapeXml != null) {
+				portletURL.setEscapeXml(escapeXml.booleanValue());
 			}
 
 			if (anchor != null) {

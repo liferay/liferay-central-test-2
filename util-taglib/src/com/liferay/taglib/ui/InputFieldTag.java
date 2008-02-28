@@ -53,7 +53,7 @@ public class InputFieldTag extends IncludeTag {
 		_formName = formName;
 	}
 
-	public void setModel(Class model) {
+	public void setModel(Class<?> model) {
 		_model = model;
 	}
 
@@ -84,7 +84,7 @@ public class InputFieldTag extends IncludeTag {
 	private static final String _PAGE = "/html/taglib/ui/input_field/page.jsp";
 
 	private String _formName = "fm";
-	private Class _model;
+	private Class<?> _model;
 	private Object _bean;
 	private String _field;
 	private String _fieldParam;

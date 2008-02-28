@@ -20,53 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.taglib.ui;
+package com.liferay.portal.ccpp;
 
-import com.liferay.taglib.util.IncludeTag;
-import com.liferay.util.diff.DiffResult;
+import java.util.Set;
 
-import java.util.List;
-
-import javax.servlet.ServletRequest;
+import javax.ccpp.Attribute;
+import javax.ccpp.Component;
+import javax.ccpp.Profile;
+import javax.ccpp.ProfileDescription;
 
 /**
- * <a href="DiffTag.java.html"><b><i>View Source</i></b></a>
+ * <a href="EmptyProfile.java.html"><b><i>View Source</i></b></a>
  *
- * @author Bruno Farache
- *
+ * @author Jorge Ferrer
  */
-public class DiffTag extends IncludeTag {
+public class EmptyProfile implements Profile {
 
-	public int doStartTag() {
-		ServletRequest req = pageContext.getRequest();
-
-		req.setAttribute("liferay-ui:diff:sourceName", _sourceName);
-		req.setAttribute("liferay-ui:diff:targetName", _targetName);
-		req.setAttribute("liferay-ui:diff:diffResults", _diffResults);
-
-		return EVAL_BODY_BUFFERED;
+	public Attribute getAttribute(String name) {
+		return null;
 	}
 
-	public void setSourceName(String sourceName) {
-		_sourceName = sourceName;
+	public Set getAttributes() {
+		return null;
 	}
 
-	public void setTargetName(String targetName) {
-		_targetName = targetName;
+	public Component getComponent(String localtype) {
+		return null;
 	}
 
-	public void setDiffResults(List<DiffResult>[] diffResults) {
-		_diffResults = diffResults;
+	public Set getComponents() {
+		return null;
 	}
 
-	protected String getDefaultPage() {
-		return _PAGE;
+	public ProfileDescription getDescription() {
+		return null;
 	}
-
-	private static final String _PAGE = "/html/taglib/ui/diff/page.jsp";
-
-	private String _sourceName;
-	private String _targetName;
-	private List<DiffResult>[] _diffResults;
 
 }

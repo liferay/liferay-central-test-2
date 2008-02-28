@@ -28,7 +28,7 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.PortletDisplay;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.taglib.util.ParamAncestorTagImpl;
+import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
 import com.liferay.taglib.util.ThemeUtil;
 
 import javax.servlet.RequestDispatcher;
@@ -43,7 +43,7 @@ import javax.servlet.jsp.PageContext;
  * @author Brian Wing Shun Chan
  *
  */
-public class WrapPortletTag extends ParamAncestorTagImpl {
+public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 
 	public static String doTag(
 			String wrapPage, String portletPage, ServletContext ctx,

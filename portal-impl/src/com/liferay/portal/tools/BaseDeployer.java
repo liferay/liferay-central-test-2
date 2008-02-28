@@ -728,7 +728,8 @@ public class BaseDeployer {
 
 		if (Validator.isNotNull(portletTaglibDTD)) {
 			sm.append("<taglib>");
-			sm.append("<taglib-uri>http://java.sun.com/portlet</taglib-uri>");
+			sm.append(
+				"<taglib-uri>http://java.sun.com/portlet_2_0</taglib-uri>");
 			sm.append("<taglib-location>");
 			sm.append("/WEB-INF/tld/liferay-portlet.tld");
 			sm.append("</taglib-location>");

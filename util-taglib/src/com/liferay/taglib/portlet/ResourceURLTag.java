@@ -20,37 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.taglib.portlet;
 
-import javax.ccpp.Profile;
-import javax.ccpp.Attribute;
-import javax.ccpp.Component;
-import javax.ccpp.ProfileDescription;
-import java.util.Set;
+import javax.portlet.PortletRequest;
 
 /**
- * <a href="EmptyProfile.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceURLTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Jorge Ferrer
+ * @author Brian Wing Shun Chan
+ *
  */
-public class EmptyProfile implements Profile {
-	public Attribute getAttribute(String name) {
-		return null;
+public class ResourceURLTag extends ActionURLTag {
+
+	public String getLifecycle() {
+		return PortletRequest.RESOURCE_PHASE;
 	}
 
-	public Set getAttributes() {
-		return null;
-	}
-
-	public Component getComponent(String localtype) {
-		return null;
-	}
-
-	public Set getComponents() {
-		return null;
-	}
-
-	public ProfileDescription getDescription() {
-		return null;
-	}
 }

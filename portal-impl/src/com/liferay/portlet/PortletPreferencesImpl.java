@@ -37,7 +37,6 @@ import java.io.Serializable;
 import java.util.Collections;
 import java.util.Enumeration;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.portlet.PortletPreferences;
@@ -58,12 +57,12 @@ public class PortletPreferencesImpl
 	implements Cloneable, PortletPreferences, Serializable {
 
 	public PortletPreferencesImpl() {
-		this(0, 0, 0, 0, null, new HashMap());
+		this(0, 0, 0, 0, null, new HashMap<String, Preference>());
 	}
 
-	public PortletPreferencesImpl(long companyId, long ownerId, int ownerType,
-								  long plid, String portletId,
-								  Map preferences) {
+	public PortletPreferencesImpl(
+		long companyId, long ownerId, int ownerType, long plid,
+		String portletId, Map<String, Preference> preferences) {
 
 		_companyId = companyId;
 		_ownerId = ownerId;
@@ -73,16 +72,12 @@ public class PortletPreferencesImpl
 		_preferences = preferences;
 	}
 
-	public Map getMap() {
-		Map map = new HashMap();
+	public Map<String, String[]> getMap() {
+		Map<String, String[]> map = new HashMap<String, String[]>();
 
-		Iterator itr = _preferences.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String key = (String)entry.getKey();
-			Preference preference = (Preference)entry.getValue();
+		for (Map.Entry<String, Preference> entry : _preferences.entrySet()) {
+			String key = entry.getKey();
+			Preference preference = entry.getValue();
 
 			map.put(key, _getActualValues(preference.getValues()));
 		}
@@ -90,7 +85,7 @@ public class PortletPreferencesImpl
 		return Collections.unmodifiableMap(map);
 	}
 
-	public Enumeration getNames() {
+	public Enumeration<String> getNames() {
 		return Collections.enumeration(_preferences.keySet());
 	}
 
@@ -99,7 +94,7 @@ public class PortletPreferencesImpl
 			throw new IllegalArgumentException();
 		}
 
-		Preference preference = (Preference)_preferences.get(key);
+		Preference preference = _preferences.get(key);
 
 		String[] values = null;
 
@@ -122,7 +117,7 @@ public class PortletPreferencesImpl
 
 		value = _getXmlSafeValue(value);
 
-		Preference preference = (Preference)_preferences.get(key);
+		Preference preference = _preferences.get(key);
 
 		if (preference == null) {
 			preference = new Preference(key, value);
@@ -143,7 +138,7 @@ public class PortletPreferencesImpl
 			throw new IllegalArgumentException();
 		}
 
-		Preference preference = (Preference)_preferences.get(key);
+		Preference preference = _preferences.get(key);
 
 		String[] values = null;
 		if (preference != null) {
@@ -167,7 +162,7 @@ public class PortletPreferencesImpl
 
 		values = _getXmlSafeValues(values);
 
-		Preference preference = (Preference)_preferences.get(key);
+		Preference preference = _preferences.get(key);
 
 		if (preference == null) {
 			preference = new Preference(key, values);
@@ -188,7 +183,7 @@ public class PortletPreferencesImpl
 			throw new IllegalArgumentException();
 		}
 
-		Preference preference = (Preference)_preferences.get(key);
+		Preference preference = _preferences.get(key);
 
 		if (preference != null && preference.isReadOnly()) {
 			return true;
@@ -267,22 +262,40 @@ public class PortletPreferencesImpl
 	}
 
 	public Object clone() {
-		Map preferencesClone = new HashMap();
+		Map<String, Preference> preferencesClone =
+			new HashMap<String, Preference>();
 
-		Iterator itr = _preferences.entrySet().iterator();
+		for (Map.Entry<String, Preference> entry : _preferences.entrySet()) {
+			String key = entry.getKey();
+			Preference preference = entry.getValue();
 
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String key = (String)entry.getKey();
-			Preference preference = (Preference)entry.getValue();
-
-			preferencesClone.put(key, preference.clone());
+			preferencesClone.put(key, (Preference)preference.clone());
 		}
 
 		return new PortletPreferencesImpl(
 			_companyId, _ownerId, _ownerType, _plid, _portletId,
 			preferencesClone);
+	}
+
+	public boolean equals(Object obj) {
+		PortletPreferencesImpl portletPreferences = (PortletPreferencesImpl)obj;
+
+		if (this == portletPreferences) {
+			return true;
+		}
+
+		if ((getCompanyId() == portletPreferences.getCompanyId()) &&
+			(getOwnerId() == portletPreferences.getOwnerId()) &&
+			(getOwnerType() == portletPreferences.getOwnerType()) &&
+			(getPlid() == portletPreferences.getPlid()) &&
+			(getPortletId().equals(portletPreferences.getPortletId())) &&
+			(getMap().equals(portletPreferences.getMap()))) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	protected long getCompanyId() {
@@ -305,7 +318,7 @@ public class PortletPreferencesImpl
 		return _portletId;
 	}
 
-	protected Map getPreferences() {
+	protected Map<String, Preference> getPreferences() {
 		return _preferences;
 	}
 
@@ -376,7 +389,7 @@ public class PortletPreferencesImpl
 	private int _ownerType;
 	private long _plid;
 	private String _portletId;
-	private Map _preferences;
+	private Map<String, Preference> _preferences;
 	private PortletPreferences _defaultPreferences;
 
 }

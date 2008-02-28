@@ -134,7 +134,7 @@ public class ErrorTag extends TagSupport {
 		_endPage = endPage;
 	}
 
-	public void setException(Class exception) {
+	public void setException(Class<?> exception) {
 		_exception = exception;
 
 		if (_exception != null) {
@@ -164,7 +164,7 @@ public class ErrorTag extends TagSupport {
 
 	private String _startPage;
 	private String _endPage;
-	private Class _exception;
+	private Class<?> _exception;
 	private String _key;
 	private String _message;
 	private boolean _translateMessage = true;

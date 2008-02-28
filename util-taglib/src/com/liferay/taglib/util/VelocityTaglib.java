@@ -110,29 +110,38 @@ public class VelocityTaglib {
 		throws Exception {
 
 		Boolean secure = null;
+		Boolean copyCurrentRenderParameters = null;
+		Boolean escapeXml = null;
+		String name = null;
 		Boolean anchor = null;
 		Boolean encrypt = null;
 		long doAsUserId = 0;
 		Boolean portletConfiguration = null;
 
 		return actionURL(
-			windowState, portletMode, secure, portletName, anchor, encrypt,
-			doAsUserId, portletConfiguration, queryString);
+			windowState, portletMode, secure, copyCurrentRenderParameters,
+			escapeXml, name, portletName, anchor, encrypt, doAsUserId,
+			portletConfiguration, queryString);
 	}
 
 	public String actionURL(
 			String windowState, String portletMode, Boolean secure,
+			Boolean copyCurrentRenderParameters, Boolean escapeXml, String name,
 			String portletName, Boolean anchor, Boolean encrypt,
 			long doAsUserId, Boolean portletConfiguration, String queryString)
 		throws Exception {
 
+		String var = null;
+		String varImpl = null;
 		Map<String, String[]> params = HttpUtil.parameterMapFromString(
 			queryString);
+		boolean writeOutput = false;
 
 		return ActionURLTag.doTag(
-			PortletRequest.ACTION_PHASE, windowState, portletMode, null, null,
-			secure, portletName, anchor, encrypt, doAsUserId,
-			portletConfiguration, params, false, _pageContext);
+			PortletRequest.ACTION_PHASE, windowState, portletMode, var, varImpl,
+			secure, copyCurrentRenderParameters, escapeXml, name, portletName,
+			anchor, encrypt, doAsUserId, portletConfiguration, params,
+			writeOutput, _pageContext);
 	}
 
 	public String doAsURL(long doAsUserId) throws Exception {
@@ -478,29 +487,38 @@ public class VelocityTaglib {
 		throws Exception {
 
 		Boolean secure = null;
+		Boolean copyCurrentRenderParameters = null;
+		Boolean escapeXml = null;
 		Boolean anchor = null;
 		Boolean encrypt = null;
 		long doAsUserId = 0;
 		Boolean portletConfiguration = null;
 
 		return renderURL(
-			windowState, portletMode, secure, portletName, anchor, encrypt,
-			doAsUserId, portletConfiguration, queryString);
+			windowState, portletMode, secure, copyCurrentRenderParameters,
+			escapeXml, portletName, anchor, encrypt, doAsUserId,
+			portletConfiguration, queryString);
 	}
 
 	public String renderURL(
 			String windowState, String portletMode, Boolean secure,
+			Boolean copyCurrentRenderParameters, Boolean escapeXml,
 			String portletName, Boolean anchor, Boolean encrypt,
 			long doAsUserId, Boolean portletConfiguration, String queryString)
 		throws Exception {
 
+		String var = null;
+		String varImpl = null;
+		String name = null;
 		Map<String, String[]> params = HttpUtil.parameterMapFromString(
 			queryString);
+		boolean writeOutput = false;
 
 		return ActionURLTag.doTag(
-			PortletRequest.RENDER_PHASE, windowState, portletMode, null, null,
-			secure, portletName, anchor, encrypt, doAsUserId,
-			portletConfiguration, params, false, _pageContext);
+			PortletRequest.RENDER_PHASE, windowState, portletMode, var, varImpl,
+			secure, copyCurrentRenderParameters, escapeXml, name, portletName,
+			anchor, encrypt, doAsUserId, portletConfiguration, params,
+			writeOutput, _pageContext);
 	}
 
 	public String runtime(String portletName)

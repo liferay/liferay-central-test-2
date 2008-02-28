@@ -22,6 +22,7 @@
 
 package com.liferay.portlet;
 
+import com.liferay.portal.ccpp.EmptyProfile;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
@@ -51,7 +52,6 @@ import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SharedSessionServletRequest;
 
 import com.sun.ccpp.ProfileFactoryImpl;
-import com.sun.ccpp.ProfileImpl;
 
 import java.security.Principal;
 
@@ -884,5 +884,5 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	private long _plid;
 
 	private static final Profile _EMPTY_PROFILE = new EmptyProfile();
-	
+
 }
