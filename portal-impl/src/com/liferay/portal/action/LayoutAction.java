@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
@@ -50,10 +51,15 @@ import com.liferay.portlet.ActionRequestFactory;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.ActionResponseFactory;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.EventRequestFactory;
+import com.liferay.portlet.EventRequestImpl;
+import com.liferay.portlet.EventResponseFactory;
+import com.liferay.portlet.EventResponseImpl;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderParametersPool;
 import com.liferay.portlet.RenderRequestFactory;
@@ -64,23 +70,30 @@ import com.liferay.portlet.ResourceRequestFactory;
 import com.liferay.portlet.ResourceRequestImpl;
 import com.liferay.portlet.ResourceResponseFactory;
 import com.liferay.portlet.ResourceResponseImpl;
+import com.liferay.portlet.StateAwareResponseImpl;
 import com.liferay.util.Http;
 import com.liferay.util.HttpUtil;
+import com.liferay.util.MapUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.UploadServletRequest;
 
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.portlet.Event;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
+import javax.portlet.PortletException;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletPreferences;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.PortletURL;
+import javax.portlet.UnavailableException;
 import javax.portlet.WindowState;
 
 import javax.servlet.RequestDispatcher;
@@ -89,6 +102,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.servlet.jsp.PageContext;
+
+import javax.xml.namespace.QName;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -244,6 +259,102 @@ public class LayoutAction extends Action {
 		req.setAttribute(WebKeys.LAYOUT_CONTENT, stringServletRes.getString());
 	}
 
+	protected void processEvent(
+			InvokerPortlet invokerPortlet, PortletRequestImpl portletReqImpl,
+			StateAwareResponseImpl stateAwareResImpl, Portlet portlet,
+			List<Portlet> portlets, Event event)
+		throws Exception {
+
+		HttpServletRequest req = portletReqImpl.getHttpServletRequest();
+		HttpServletResponse res = stateAwareResImpl.getHttpServletResponse();
+
+		String portletId = portlet.getPortletId();
+
+		ServletContext ctx = (ServletContext)req.getAttribute(WebKeys.CTX);
+
+		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
+		PortletContext portletCtx = portletConfig.getPortletContext();
+
+		WindowState windowState = portletReqImpl.getWindowState();
+		PortletMode portletMode = portletReqImpl.getPortletMode();
+
+		User user = stateAwareResImpl.getUser();
+		Layout layout = stateAwareResImpl.getLayout();
+
+		PortletPreferences portletPreferences =
+			portletReqImpl.getPreferencesImpl();
+
+		EventRequestImpl eventReqImpl = EventRequestFactory.create(
+			req, portlet, invokerPortlet, portletCtx, windowState,
+			portletMode, portletPreferences, layout.getPlid());
+
+		eventReqImpl.setEvent(event);
+
+		EventResponseImpl eventResImpl = EventResponseFactory.create(
+			eventReqImpl, res, portletId, user, layout, windowState,
+			portletMode);
+
+		eventReqImpl.defineObjects(portletConfig, eventResImpl);
+
+		try {
+			try {
+				invokerPortlet.processEvent(eventReqImpl, eventResImpl);
+
+				if (eventResImpl.isCalledSetRenderParameter()) {
+					Map<String, String[]> renderParameterMap =
+						new HashMap<String, String[]>();
+
+					MapUtil.copy(
+						eventResImpl.getRenderParameterMap(),
+						renderParameterMap);
+
+					RenderParametersPool.put(
+						req, layout.getPlid(), portletId, renderParameterMap);
+				}
+			}
+			catch (UnavailableException ue) {
+				throw ue;
+			}
+			catch (PortletException pe) {
+				eventResImpl.setWindowState(windowState);
+				eventResImpl.setPortletMode(portletMode);
+			}
+
+			processEvents(invokerPortlet, eventReqImpl, eventResImpl, portlets);
+		}
+		finally {
+			EventRequestFactory.recycle(eventReqImpl);
+			EventResponseFactory.recycle(eventResImpl);
+		}
+	}
+
+	protected void processEvents(
+			InvokerPortlet invokerPortlet, PortletRequestImpl portletReqImpl,
+			StateAwareResponseImpl stateAwareResImpl, List<Portlet> portlets)
+		throws Exception {
+
+		List<Event> events = stateAwareResImpl.getEvents();
+
+		if (events.size() == 0) {
+			return;
+		}
+
+		for (Event event : events) {
+			QName qName = event.getQName();
+
+			for (Portlet portlet : portlets) {
+				QName processingQName = portlet.getProcessingEvent(
+					qName.getNamespaceURI(), qName.getLocalPart());
+
+				if (processingQName != null) {
+					processEvent(
+						invokerPortlet, portletReqImpl, stateAwareResImpl,
+						portlet, portlets, event);
+				}
+			}
+		}
+	}
+
 	protected ActionForward processLayout(
 			ActionMapping mapping, HttpServletRequest req,
 			HttpServletResponse res, long plid)
@@ -395,6 +506,7 @@ public class LayoutAction extends Action {
 		long companyId = PortalUtil.getCompanyId(req);
 		User user = PortalUtil.getUser(req);
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
+
 		String portletId = ParamUtil.getString(req, "p_p_id");
 
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
@@ -415,14 +527,6 @@ public class LayoutAction extends Action {
 				LanguageUtil.getLanguageId(req));
 		}
 
-		PortletPreferencesIds portletPreferencesIds =
-			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
-				req, portletId);
-
-		PortletPreferences portletPreferences =
-			PortletPreferencesLocalServiceUtil.getPreferences(
-				portletPreferencesIds);
-
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
 		PortletContext portletCtx = portletConfig.getPortletContext();
 
@@ -431,6 +535,14 @@ public class LayoutAction extends Action {
 
 		PortletMode portletMode = PortletModeFactory.getPortletMode(
 			ParamUtil.getString(req, "p_p_mode"));
+
+		PortletPreferencesIds portletPreferencesIds =
+			PortletPreferencesFactoryUtil.getPortletPreferencesIds(
+				req, portletId);
+
+		PortletPreferences portletPreferences =
+			PortletPreferencesLocalServiceUtil.getPreferences(
+				portletPreferencesIds);
 
 		if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 			String contentType = req.getHeader(HttpHeaders.CONTENT_TYPE);
@@ -455,15 +567,13 @@ public class LayoutAction extends Action {
 					}
 				}
 
-				ActionRequestImpl actionReqImpl =
-					ActionRequestFactory.create(
-						req, portlet, invokerPortlet, portletCtx, windowState,
-						portletMode, portletPreferences, layout.getPlid());
+				ActionRequestImpl actionReqImpl = ActionRequestFactory.create(
+					req, portlet, invokerPortlet, portletCtx, windowState,
+					portletMode, portletPreferences, layout.getPlid());
 
-				ActionResponseImpl actionResImpl =
-					ActionResponseFactory.create(
-						actionReqImpl, res, portletId, user, layout,
-						windowState, portletMode);
+				ActionResponseImpl actionResImpl = ActionResponseFactory.create(
+					actionReqImpl, res, portletId, user, layout, windowState,
+					portletMode);
 
 				actionReqImpl.defineObjects(portletConfig, actionResImpl);
 
@@ -472,6 +582,23 @@ public class LayoutAction extends Action {
 				RenderParametersPool.put(
 					req, layout.getPlid(), portletId,
 					actionResImpl.getRenderParameterMap());
+
+				if (actionResImpl.getEvents().size() > 0) {
+					if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+						LayoutTypePortlet layoutTypePortlet =
+							(LayoutTypePortlet)layout.getLayoutType();
+
+						List<Portlet> portlets =
+							layoutTypePortlet.getPortlets();
+
+						processEvents(
+							invokerPortlet, actionReqImpl, actionResImpl,
+							portlets);
+
+						actionReqImpl.defineObjects(
+							portletConfig, actionResImpl);
+					}
+				}
 			}
 			finally {
 				if (uploadReq != null) {

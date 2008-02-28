@@ -375,8 +375,18 @@ public interface Portlet extends PortletModel {
 
 	public java.util.Map<String, com.liferay.portal.model.PortletFilter> getPortletFilters();
 
-	public void setFilters(
+	public void setPortletFilters(
 		java.util.Map<String, com.liferay.portal.model.PortletFilter> portletFilters);
+
+	public void addProcessingEvent(javax.xml.namespace.QName processingEvent);
+
+	public javax.xml.namespace.QName getProcessingEvent(java.lang.String uri,
+		java.lang.String localPart);
+
+	public java.util.Set<javax.xml.namespace.QName> getProcessingEvents();
+
+	public void setProcessingEvents(
+		java.util.Set<javax.xml.namespace.QName> processingEvents);
 
 	public void addPublishingEvent(javax.xml.namespace.QName publishingEvent);
 
@@ -384,13 +394,6 @@ public interface Portlet extends PortletModel {
 
 	public void setPublishingEvents(
 		java.util.Set<javax.xml.namespace.QName> publishingEvents);
-
-	public void addProcessingEvent(javax.xml.namespace.QName processingEvent);
-
-	public java.util.Set<javax.xml.namespace.QName> getProcessingEvents();
-
-	public void setProcessingEvents(
-		java.util.Set<javax.xml.namespace.QName> processingEvents);
 
 	public void addPublicRenderParameter(
 		com.liferay.portal.model.PublicRenderParameter publicRenderParameter);

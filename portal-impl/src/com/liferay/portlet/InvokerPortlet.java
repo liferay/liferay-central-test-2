@@ -47,6 +47,9 @@ import java.util.Set;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.EventPortlet;
+import javax.portlet.EventRequest;
+import javax.portlet.EventResponse;
 import javax.portlet.Portlet;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletContext;
@@ -58,6 +61,7 @@ import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 import javax.portlet.ResourceRequest;
 import javax.portlet.ResourceResponse;
+import javax.portlet.ResourceServingPortlet;
 import javax.portlet.filter.ActionFilter;
 import javax.portlet.filter.EventFilter;
 import javax.portlet.filter.FilterChain;
@@ -82,7 +86,8 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Myunghun Kim
  *
  */
-public class InvokerPortlet implements Portlet {
+public class InvokerPortlet
+	implements EventPortlet, Portlet, ResourceServingPortlet {
 
 	public static void clearResponse(
 		HttpSession ses, long plid, String portletId, String languageId) {
@@ -315,6 +320,26 @@ public class InvokerPortlet implements Portlet {
 		}
 	}
 
+	public void processEvent(EventRequest req, EventResponse res)
+		throws IOException, PortletException {
+
+		StopWatch stopWatch = null;
+
+		if (_log.isDebugEnabled()) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
+
+		invoke(req, res, PortletRequest.EVENT_PHASE);
+
+		if (_log.isDebugEnabled()) {
+			_log.debug(
+				"processEvent for " + _portletId + " takes " +
+					stopWatch.getTime() + " ms");
+		}
+	}
+
 	public void render(RenderRequest req, RenderResponse res)
 		throws IOException, PortletException {
 
@@ -434,13 +459,16 @@ public class InvokerPortlet implements Portlet {
 			if (lifecycles.contains(PortletRequest.ACTION_PHASE)) {
 				_actionFilters.add((ActionFilter)portletFilter);
 			}
-			else if (lifecycles.contains(PortletRequest.EVENT_PHASE)) {
+
+			if (lifecycles.contains(PortletRequest.EVENT_PHASE)) {
 				_eventFilters.add((EventFilter)portletFilter);
 			}
-			else if (lifecycles.contains(PortletRequest.RENDER_PHASE)) {
+
+			if (lifecycles.contains(PortletRequest.RENDER_PHASE)) {
 				_renderFilters.add((RenderFilter)portletFilter);
 			}
-			else if (lifecycles.contains(PortletRequest.RESOURCE_PHASE)) {
+
+			if (lifecycles.contains(PortletRequest.RESOURCE_PHASE)) {
 				_resourceFilters.add((ResourceFilter)portletFilter);
 			}
 		}
@@ -467,6 +495,9 @@ public class InvokerPortlet implements Portlet {
 			ActionRequestImpl actionReqImpl = null;
 			ActionResponseImpl actionResImpl = null;
 
+			EventRequestImpl eventReqImpl = null;
+			EventResponseImpl eventResImpl = null;
+
 			RenderRequestImpl renderReqImpl = null;
 			RenderResponseImpl renderResImpl = null;
 
@@ -481,6 +512,15 @@ public class InvokerPortlet implements Portlet {
 				httpRes = actionResImpl.getHttpServletResponse();
 
 				filterChain = new FilterChainImpl(_portlet, _actionFilters);
+			}
+			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+				eventReqImpl = (EventRequestImpl)req;
+				eventResImpl = (EventResponseImpl)res;
+
+				httpReq = eventReqImpl.getHttpServletRequest();
+				httpRes = eventResImpl.getHttpServletResponse();
+
+				filterChain = new FilterChainImpl(_portlet, _eventFilters);
 			}
 			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 				renderReqImpl = (RenderRequestImpl)req;
@@ -521,8 +561,14 @@ public class InvokerPortlet implements Portlet {
 			if (lifecycle.equals(PortletRequest.ACTION_PHASE)) {
 				properties = actionResImpl.getProperties();
 			}
+			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+				properties = eventResImpl.getProperties();
+			}
 			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 				properties = renderResImpl.getProperties();
+			}
+			else if (lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				properties = resourceResImpl.getProperties();
 			}
 		}
 		else {
@@ -535,6 +581,16 @@ public class InvokerPortlet implements Portlet {
 				filterChain.doFilter(actionReqImpl, actionResImpl);
 
 				properties = actionResImpl.getProperties();
+			}
+			else if (lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+				EventRequestImpl eventReqImpl = (EventRequestImpl)req;
+				EventResponseImpl eventResImpl = (EventResponseImpl)res;
+
+				filterChain = new FilterChainImpl(_portlet, _eventFilters);
+
+				filterChain.doFilter(eventReqImpl, eventResImpl);
+
+				properties = eventResImpl.getProperties();
 			}
 			else if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 				RenderRequestImpl renderReqImpl = (RenderRequestImpl)req;

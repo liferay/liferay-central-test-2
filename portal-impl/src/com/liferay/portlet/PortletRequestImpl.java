@@ -236,6 +236,10 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		return _portlet;
 	}
 
+	public PortletContext getPortletContext() {
+		return _portletCtx;
+	}
+
 	public PortletMode getPortletMode() {
 		return _portletMode;
 	}

@@ -22,99 +22,78 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsValues;
 
-import javax.portlet.PortletContext;
 import javax.portlet.PortletMode;
-import javax.portlet.PortletPreferences;
 import javax.portlet.WindowState;
 
-import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.commons.pool.BasePoolableObjectFactory;
 import org.apache.commons.pool.ObjectPool;
 import org.apache.commons.pool.impl.StackObjectPool;
 
 /**
- * <a href="EventRequestFactory.java.html"><b><i>View Source</i></b></a>
+ * <a href="EventResponseFactory.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EventRequestFactory {
+public class EventResponseFactory {
 
-	public static EventRequestImpl create(
-			HttpServletRequest req, Portlet portlet,
-			InvokerPortlet invokerPortlet, PortletContext portletCtx,
-			WindowState windowState, PortletMode portletMode,
-			PortletPreferences prefs, long plid)
+	public static EventResponseImpl create(
+			EventRequestImpl req, HttpServletResponse res, String portletName,
+			User user, Layout layout, WindowState windowState,
+			PortletMode portletMode)
 		throws Exception {
 
-		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Borrowing:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-		}
-
-		EventRequestImpl eventReqImpl = null;
+		EventResponseImpl eventResImpl = null;
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			eventReqImpl = (EventRequestImpl)_instance._pool.borrowObject();
+			eventResImpl = (EventResponseImpl)_instance._pool.borrowObject();
 		}
 		else {
-			eventReqImpl = new EventRequestImpl();
+			eventResImpl = new EventResponseImpl();
 		}
 
-		eventReqImpl.init(
-			req, portlet, invokerPortlet, portletCtx, windowState, portletMode,
-			prefs, plid);
+		eventResImpl.init(
+			req, res, portletName, user, layout, windowState, portletMode);
 
-		return eventReqImpl;
+		return eventResImpl;
 	}
 
-	public static void recycle(EventRequestImpl eventReqImpl)
+	public static void recycle(EventResponseImpl eventResImpl)
 		throws Exception {
 
 		if (PropsValues.COMMONS_POOL_ENABLED) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Recycling:\t" + _instance._pool.getNumIdle() + "\t" +
-						_instance._pool.getNumActive());
-			}
-
-			_instance._pool.returnObject(eventReqImpl);
+			_instance._pool.returnObject(eventResImpl);
 		}
-		else if (eventReqImpl != null) {
-			eventReqImpl.recycle();
+		else if (eventResImpl != null) {
+			eventResImpl.recycle();
 		}
 	}
 
-	private EventRequestFactory() {
+	private EventResponseFactory() {
 		_pool = new StackObjectPool(new Factory());
 	}
 
-	private static Log _log =
-		LogFactory.getLog(EventRequestFactory.class);
-
-	private static EventRequestFactory _instance = new EventRequestFactory();
+	private static EventResponseFactory _instance =
+		new EventResponseFactory();
 
 	private ObjectPool _pool;
 
 	private class Factory extends BasePoolableObjectFactory {
 
 		public Object makeObject() {
-			return new EventRequestImpl();
+			return new EventResponseImpl();
 		}
 
 		public void passivateObject(Object obj) {
-			EventRequestImpl eventReqImpl = (EventRequestImpl)obj;
+			EventResponseImpl eventResImpl = (EventResponseImpl)obj;
 
-			eventReqImpl.recycle();
+			eventResImpl.recycle();
 		}
 
 	}

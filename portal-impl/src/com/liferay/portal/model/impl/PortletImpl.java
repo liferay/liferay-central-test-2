@@ -283,8 +283,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_resourceBundle = resourceBundle;
 		_portletInfo = portletInfo;
 		_portletFilters = portletFilters;
-		_processingEvents = processingEvents;
-		_publishingEvents = publishingEvents;
+		setProcessingEvents(processingEvents);
+		setPublishingEvents(publishingEvents);
 		setPublicRenderParameters(publicRenderParameters);
 		_portletApp = portletApp;
 
@@ -2053,7 +2053,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *
 	 * @param		portletFilters the filters of the portlet
 	 */
-	public void setFilters(Map<String, PortletFilter> portletFilters) {
+	public void setPortletFilters(Map<String, PortletFilter> portletFilters) {
 		_portletFilters = portletFilters;
 	}
 
@@ -2064,6 +2064,20 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void addProcessingEvent(QName processingEvent) {
 		_processingEvents.add(processingEvent);
+		_processingEventsByQName.put(
+			QNameUtil.getKey(processingEvent), processingEvent);
+	}
+
+	/**
+	 * Gets the supported processing event from a namespace URI and a local
+	 * part.
+	 *
+	 * @return		the supported processing event from a namespace URI and a
+	 *				local part
+	 */
+	public QName getProcessingEvent(String uri, String localPart) {
+		return _processingEventsByQName.get(
+			QNameUtil.getKey(uri, localPart));
 	}
 
 	/**
@@ -2082,7 +2096,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				portlet
 	 */
 	public void setProcessingEvents(Set<QName> processingEvents) {
-		_processingEvents = processingEvents;
+		for (QName processingEvent : processingEvents) {
+			addProcessingEvent(processingEvent);
+		}
 	}
 
 	/**
@@ -2110,7 +2126,9 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 *				portlet
 	 */
 	public void setPublishingEvents(Set<QName> publishingEvents) {
-		_publishingEvents = publishingEvents;
+		for (QName publishingEvent : publishingEvents) {
+			addPublishingEvent(publishingEvent);
+		}
 	}
 
 	/**
@@ -2729,12 +2747,18 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	/**
 	 * The supported processing events of the portlet.
 	 */
-	private Set<QName> _processingEvents;
+	private Set<QName> _processingEvents = new HashSet<QName>();
+
+	/**
+	 * Map of the supported processing events of the portlet keyed by the QName.
+	 */
+	private Map<String, QName> _processingEventsByQName =
+		new HashMap<String, QName>();
 
 	/**
 	 * The supported publishing events of the portlet.
 	 */
-	private Set<QName> _publishingEvents;
+	private Set<QName> _publishingEvents = new HashSet<QName>();
 
 	/**
 	 * The supported public render parameters of the portlet.

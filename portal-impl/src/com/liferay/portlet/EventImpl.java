@@ -22,43 +22,40 @@
 
 package com.liferay.portlet;
 
-import javax.portlet.EventRequest;
-import javax.portlet.EventResponse;
-import javax.portlet.PortletRequest;
+import java.io.Serializable;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.portlet.Event;
+
+import javax.xml.namespace.QName;
 
 /**
- * <a href="EventResponseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="EventImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EventResponseImpl
-	extends StateAwareResponseImpl implements EventResponse {
+public class EventImpl implements Event {
 
-	public String getLifecycle() {
-		return PortletRequest.EVENT_PHASE;
+	public EventImpl(String name, QName qName, Serializable value) {
+		_name = name;
+		_qName = qName;
+		_value = value;
 	}
 
-	public void setRenderParameters(EventRequest req) {
+	public String getName() {
+		return _name;
 	}
 
-	protected EventResponseImpl() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Creating new instance " + hashCode());
-		}
+	public QName getQName() {
+		return _qName;
 	}
 
-	protected void recycle() {
-		if (_log.isDebugEnabled()) {
-			_log.debug("Recycling instance " + hashCode());
-		}
-
-		super.recycle();
+	public Serializable getValue() {
+		return _value;
 	}
 
-	private static Log _log = LogFactory.getLog(EventResponseImpl.class);
+	private String _name;
+	private QName _qName;
+	private Serializable _value;
 
 }

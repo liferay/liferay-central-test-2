@@ -23,14 +23,18 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.Serializable;
 
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
+import javax.portlet.Event;
 import javax.portlet.PortletMode;
 import javax.portlet.PortletModeException;
 import javax.portlet.StateAwareResponse;
@@ -39,6 +43,7 @@ import javax.portlet.WindowStateException;
 
 import javax.servlet.http.HttpServletResponse;
 
+import javax.xml.XMLConstants;
 import javax.xml.namespace.QName;
 
 /**
@@ -50,6 +55,25 @@ import javax.xml.namespace.QName;
 public abstract class StateAwareResponseImpl
 	extends PortletResponseImpl implements StateAwareResponse {
 
+	public String getDefaultNamespace() {
+		Portlet portlet = getPortlet();
+
+		if (portlet != null) {
+			return portlet.getPortletApp().getDefaultNamespace();
+		}
+		else {
+			return XMLConstants.NULL_NS_URI;
+		}
+	}
+
+	public List<Event> getEvents() {
+		return _events;
+	}
+
+	public Layout getLayout() {
+		return _layout;
+	}
+
 	public PortletMode getPortletMode() {
 		return _portletMode;
 	}
@@ -60,6 +84,10 @@ public abstract class StateAwareResponseImpl
 
 	public Map<String, String[]> getRenderParameterMap() {
 		return _params;
+	}
+
+	public User getUser() {
+		return _user;
 	}
 
 	public WindowState getWindowState() {
@@ -80,12 +108,16 @@ public abstract class StateAwareResponseImpl
 		if (name == null) {
 			throw new IllegalArgumentException();
 		}
+
+		_events.add(new EventImpl(name.getLocalPart(), name, value));
 	}
 
 	public void setEvent(String name, Serializable value) {
 		if (name == null) {
 			throw new IllegalArgumentException();
 		}
+
+		setEvent(new QName(getDefaultNamespace(), name), value);
 	}
 
 	public void setPortletMode(PortletMode portletMode)
@@ -242,6 +274,7 @@ public abstract class StateAwareResponseImpl
 		_windowState = null;
 		_portletMode = null;
 		_params.clear();
+		_events.clear();
 		_redirectLocation = null;
 		_calledSetRenderParameter = false;
 	}
@@ -254,6 +287,7 @@ public abstract class StateAwareResponseImpl
 	private PortletMode _portletMode;
 	private Map<String, String[]> _params =
 		new LinkedHashMap<String, String[]>();
+	private List<Event> _events = new ArrayList<Event>();
 	private String _redirectLocation;
 	private boolean _calledSetRenderParameter;
 

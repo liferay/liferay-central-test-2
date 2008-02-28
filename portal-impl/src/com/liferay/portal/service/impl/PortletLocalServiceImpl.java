@@ -1424,30 +1424,39 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Element filterMapping = itr1.next();
 
 			String filterName = filterMapping.elementText("filter-name");
-			String portletName = filterMapping.elementText("portlet-name");
 
-			PortletFilter portletFilter = portletApp.getPortletFilter(
-				filterName);
+			Iterator<Element> itr2 = filterMapping.elements(
+				"portlet-name").iterator();
 
-			if (portletFilter == null) {
-				_log.error(
-					"Filter mapping references unnknown filter name " +
-						filterName);
+			while (itr2.hasNext()) {
+				Element portletNameEl = itr2.next();
 
-				continue;
-			}
+				String portletName = portletNameEl.getTextTrim();
 
-			List<Portlet> portletModels = _getPortletsByPortletName(
-				portletName, servletContextName, portletsPool);
+				PortletFilter portletFilter = portletApp.getPortletFilter(
+					filterName);
 
-			if (portletModels.size() == 0) {
-				_log.error(
-					"Filter mapping with filter name " + filterName +
-						" references unnknown portlet name " + portletName);
-			}
+				if (portletFilter == null) {
+					_log.error(
+						"Filter mapping references unnknown filter name " +
+							filterName);
 
-			for (Portlet portletModel : portletModels) {
-				portletModel.getPortletFilters().put(filterName, portletFilter);
+					continue;
+				}
+
+				List<Portlet> portletModels = _getPortletsByPortletName(
+					portletName, servletContextName, portletsPool);
+
+				if (portletModels.size() == 0) {
+					_log.error(
+						"Filter mapping with filter name " + filterName +
+							" references unnknown portlet name " + portletName);
+				}
+
+				for (Portlet portletModel : portletModels) {
+					portletModel.getPortletFilters().put(
+						filterName, portletFilter);
+				}
 			}
 		}
 

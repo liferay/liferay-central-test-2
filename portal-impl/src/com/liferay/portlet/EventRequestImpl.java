@@ -39,7 +39,11 @@ public class EventRequestImpl
 	extends PortletRequestImpl implements EventRequest {
 
 	public Event getEvent() {
-		return null;
+		return _event;
+	}
+
+	public void setEvent(Event event) {
+		_event = event;
 	}
 
 	public String getLifecycle() {
@@ -58,8 +62,12 @@ public class EventRequestImpl
 		}
 
 		super.recycle();
+
+		_event = null;
 	}
 
 	private static Log _log = LogFactory.getLog(EventRequestImpl.class);
+
+	private Event _event;
 
 }

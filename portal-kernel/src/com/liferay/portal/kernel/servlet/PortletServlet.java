@@ -31,6 +31,8 @@ import java.io.IOException;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.EventRequest;
+import javax.portlet.EventResponse;
 import javax.portlet.PortletException;
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
@@ -99,6 +101,12 @@ public class PortletServlet extends HttpServlet {
 				ActionResponse actionRes = (ActionResponse)portletRes;
 
 				filterChain.doFilter(actionReq, actionRes);
+			}
+			else if (portletReq instanceof EventRequest) {
+				EventRequest eventReq = (EventRequest)portletReq;
+				EventResponse eventRes = (EventResponse)portletRes;
+
+				filterChain.doFilter(eventReq, eventRes);
 			}
 			else if (portletReq instanceof RenderRequest) {
 				RenderRequest renderReq = (RenderRequest)portletReq;
