@@ -445,21 +445,6 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article);
 
-		// Un-approve all other versions.
-
-		List<JournalArticle> articles =
-			journalArticlePersistence.findByG_A_A(groupId, articleId, true);
-
-		for (JournalArticle curArticle : articles) {
-			if (curArticle.getVersion() != article.getVersion()) {
-				curArticle.setApproved(false);
-				curArticle.setExpired(true);
-				curArticle.setExpirationDate(new Date());
-
-				journalArticlePersistence.update(curArticle);
-			}
-		}
-
 		// Email
 
 		sendEmail(article, articleURL, prefs, "granted");
@@ -483,12 +468,6 @@ public class JournalArticleLocalServiceImpl
 		catch (IOException ioe) {
 			_log.error("Indexing " + article.getId(), ioe);
 		}
-
-		// Clear journal content cache
-
-		JournalContentUtil.clearCache(
-			article.getGroupId(), article.getArticleId(),
-			article.getTemplateId());
 
 		return article;
 	}
@@ -717,12 +696,6 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		// Clear journal content cache
-
-		JournalContentUtil.clearCache(
-			article.getGroupId(), article.getArticleId(),
-			article.getTemplateId());
-
 		// Article
 
 		journalArticlePersistence.remove(article.getPrimaryKey());
@@ -783,12 +756,6 @@ public class JournalArticleLocalServiceImpl
 		catch (IOException ioe) {
 			_log.error("Removing index " + article.getId(), ioe);
 		}
-
-		// Clear journal content cache
-
-		JournalContentUtil.clearCache(
-			article.getGroupId(), article.getArticleId(),
-			article.getTemplateId());
 	}
 
 	public JournalArticle getArticle(long id)
@@ -1380,12 +1347,6 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article);
 
-		// Clear journal content cache
-
-		JournalContentUtil.clearCache(
-			article.getGroupId(), article.getArticleId(),
-			article.getTemplateId());
-
 		return article;
 	}
 
@@ -1666,23 +1627,6 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article);
 
-		// Un-approve all other versions.
-
-		if (incrementVersion && approved) {
-			List<JournalArticle> articles =
-				journalArticlePersistence.findByG_A_A(groupId, articleId, true);
-
-			for (JournalArticle curArticle : articles) {
-				if (curArticle.getVersion() != article.getVersion()) {
-					curArticle.setApproved(false);
-					curArticle.setExpired(true);
-					curArticle.setExpirationDate(new Date());
-
-					journalArticlePersistence.update(curArticle);
-				}
-			}
-		}
-
 		// Small image
 
 		saveImages(
@@ -1720,12 +1664,6 @@ public class JournalArticleLocalServiceImpl
 			_log.error("Indexing " + article.getPrimaryKey(), ioe);
 		}
 
-		// Clear journal content cache
-
-		JournalContentUtil.clearCache(
-			article.getGroupId(), article.getArticleId(),
-			article.getTemplateId());
-
 		return article;
 	}
 
@@ -1739,12 +1677,6 @@ public class JournalArticleLocalServiceImpl
 		article.setContent(content);
 
 		journalArticlePersistence.update(article);
-
-		// Clear journal content cache
-
-		JournalContentUtil.clearCache(
-			article.getGroupId(), article.getArticleId(),
-			article.getTemplateId());
 
 		return article;
 	}
