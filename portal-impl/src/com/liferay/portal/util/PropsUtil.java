@@ -1221,6 +1221,12 @@ public class PropsUtil {
 
 	public static final String TAGS_ASSET_VALIDATOR = "tags.asset.validator";
 
+	// Tasks Portlet
+
+	public static final String TASKS_APPROVAL_ROLE_NAMES = "tasks.approval.role.names";
+
+	public static final String TASKS_NUMBER_OF_APPROVAL_STAGES = "tasks.number.of.approval.stages";
+
 	// Translator Portlet
 
 	public static final String TRANSLATOR_DEFAULT_LANGUAGES = "translator.default.languages";

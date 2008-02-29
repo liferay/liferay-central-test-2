@@ -827,6 +827,32 @@ public class LayoutLocalServiceUtil {
 		layoutLocalService.setJournalContentSearchPersistence(journalContentSearchPersistence);
 	}
 
+	public static com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence getTasksProposalPersistence() {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getTasksProposalPersistence();
+	}
+
+	public static void setTasksProposalPersistence(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence) {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		layoutLocalService.setTasksProposalPersistence(tasksProposalPersistence);
+	}
+
+	public static com.liferay.portlet.tasks.service.persistence.TasksProposalFinder getTasksProposalFinder() {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getTasksProposalFinder();
+	}
+
+	public static void setTasksProposalFinder(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalFinder tasksProposalFinder) {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		layoutLocalService.setTasksProposalFinder(tasksProposalFinder);
+	}
+
 	public static com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence() {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
 

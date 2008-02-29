@@ -284,6 +284,14 @@ import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
+import com.liferay.portlet.tasks.service.TasksProposalLocalService;
+import com.liferay.portlet.tasks.service.TasksProposalLocalServiceFactory;
+import com.liferay.portlet.tasks.service.TasksProposalService;
+import com.liferay.portlet.tasks.service.TasksProposalServiceFactory;
+import com.liferay.portlet.tasks.service.persistence.TasksProposalFinder;
+import com.liferay.portlet.tasks.service.persistence.TasksProposalFinderUtil;
+import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
+import com.liferay.portlet.tasks.service.persistence.TasksProposalUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -1337,6 +1345,41 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 		this.journalContentSearchPersistence = journalContentSearchPersistence;
 	}
 
+	public TasksProposalLocalService getTasksProposalLocalService() {
+		return tasksProposalLocalService;
+	}
+
+	public void setTasksProposalLocalService(
+		TasksProposalLocalService tasksProposalLocalService) {
+		this.tasksProposalLocalService = tasksProposalLocalService;
+	}
+
+	public TasksProposalService getTasksProposalService() {
+		return tasksProposalService;
+	}
+
+	public void setTasksProposalService(
+		TasksProposalService tasksProposalService) {
+		this.tasksProposalService = tasksProposalService;
+	}
+
+	public TasksProposalPersistence getTasksProposalPersistence() {
+		return tasksProposalPersistence;
+	}
+
+	public void setTasksProposalPersistence(
+		TasksProposalPersistence tasksProposalPersistence) {
+		this.tasksProposalPersistence = tasksProposalPersistence;
+	}
+
+	public TasksProposalFinder getTasksProposalFinder() {
+		return tasksProposalFinder;
+	}
+
+	public void setTasksProposalFinder(TasksProposalFinder tasksProposalFinder) {
+		this.tasksProposalFinder = tasksProposalFinder;
+	}
+
 	public MBMessageLocalService getMBMessageLocalService() {
 		return mbMessageLocalService;
 	}
@@ -1882,6 +1925,22 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 			journalContentSearchPersistence = JournalContentSearchUtil.getPersistence();
 		}
 
+		if (tasksProposalLocalService == null) {
+			tasksProposalLocalService = TasksProposalLocalServiceFactory.getImpl();
+		}
+
+		if (tasksProposalService == null) {
+			tasksProposalService = TasksProposalServiceFactory.getImpl();
+		}
+
+		if (tasksProposalPersistence == null) {
+			tasksProposalPersistence = TasksProposalUtil.getPersistence();
+		}
+
+		if (tasksProposalFinder == null) {
+			tasksProposalFinder = TasksProposalFinderUtil.getFinder();
+		}
+
 		if (mbMessageLocalService == null) {
 			mbMessageLocalService = MBMessageLocalServiceFactory.getImpl();
 		}
@@ -2030,6 +2089,10 @@ public abstract class LayoutServiceBaseImpl extends PrincipalBean
 	protected DLFolderPersistence dlFolderPersistence;
 	protected JournalContentSearchLocalService journalContentSearchLocalService;
 	protected JournalContentSearchPersistence journalContentSearchPersistence;
+	protected TasksProposalLocalService tasksProposalLocalService;
+	protected TasksProposalService tasksProposalService;
+	protected TasksProposalPersistence tasksProposalPersistence;
+	protected TasksProposalFinder tasksProposalFinder;
 	protected MBMessageLocalService mbMessageLocalService;
 	protected MBMessageService mbMessageService;
 	protected MBMessagePersistence mbMessagePersistence;

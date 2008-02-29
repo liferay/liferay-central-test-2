@@ -243,6 +243,7 @@
 
 <%@ page import="org.apache.struts.Globals" %>
 
+<%@ page import="org.json.JSONArray"%>
 <%@ page import="org.json.JSONObject" %>
 
 <liferay-theme:defineObjects />

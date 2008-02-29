@@ -353,6 +353,16 @@ public interface LayoutLocalService {
 	public void setJournalContentSearchPersistence(
 		com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence);
 
+	public com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence getTasksProposalPersistence();
+
+	public void setTasksProposalPersistence(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence);
+
+	public com.liferay.portlet.tasks.service.persistence.TasksProposalFinder getTasksProposalFinder();
+
+	public void setTasksProposalFinder(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalFinder tasksProposalFinder);
+
 	public com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence();
 
 	public void setMBMessagePersistence(

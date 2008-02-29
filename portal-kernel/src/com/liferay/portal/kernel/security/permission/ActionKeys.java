@@ -107,7 +107,11 @@ public class ActionKeys {
 
 	public static final String APPROVE_ARTICLE = "APPROVE_ARTICLE";
 
+	public static final String APPROVE_PROPOSAL = "APPROVE_PROPOSAL";
+
 	public static final String ASSIGN_MEMBERS = "ASSIGN_MEMBERS";
+
+	public static final String ASSIGN_REVIEWER = "ASSIGN_REVIEWER";
 
 	public static final String BAN_USER = "BAN_USER";
 
@@ -157,6 +161,8 @@ public class ActionKeys {
 	public static final String PREFERENCES = "PREFERENCES";
 
 	public static final String PRINT = "PRINT";
+
+	public static final String PUBLISH_STAGING = "PUBLISH_STAGING";
 
 	public static final String REPLY_TO_MESSAGE = "REPLY_TO_MESSAGE";
 

@@ -28,6 +28,7 @@
 String tabs4 = (String)request.getAttribute("edit_pages.jsp-tab4");
 
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
+long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 
 String rootNodeName = (String)request.getAttribute("edit_pages.jsp-rootNodeName");
@@ -41,7 +42,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 List portletsList = new ArrayList();
 Set portletIdsSet = new HashSet();
 
-Iterator itr1 = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout).iterator();
+Iterator itr1 = LayoutLocalServiceUtil.getLayouts(liveGroupId, privateLayout).iterator();
 
 while (itr1.hasNext()) {
 	Layout curLayout = (Layout)itr1.next();

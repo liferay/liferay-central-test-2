@@ -307,6 +307,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String TARGET_NAME = "TARGET_NAME";
 
+	public static final String TASKS_PROPOSAL = "TASKS_PROPOSAL";
+
 	public static final String TASK_LIST = "TASK_LIST";
 
 	public static final String THEME = "THEME";

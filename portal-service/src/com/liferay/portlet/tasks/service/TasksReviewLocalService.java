@@ -1,0 +1,262 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.tasks.service;
+
+
+/**
+ * <a href="TasksReviewLocalService.java.html"><b><i>View Source</i></b></a>
+ *
+ * <p>
+ * ServiceBuilder generated this class. Modifications in this class will be
+ * overwritten the next time is generated.
+ * </p>
+ *
+ * <p>
+ * This interface defines the service. The default implementation is
+ * <code>com.liferay.portlet.tasks.service.impl.TasksReviewLocalServiceImpl</code>.
+ * Modify methods in that class and rerun ServiceBuilder to populate this class
+ * and all other generated classes.
+ * </p>
+ *
+ * <p>
+ * This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.
+ * </p>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ * @see com.liferay.portlet.tasks.service.TasksReviewLocalServiceFactory
+ * @see com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil
+ *
+ */
+public interface TasksReviewLocalService {
+	public com.liferay.portlet.tasks.model.TasksReview addTasksReview(
+		com.liferay.portlet.tasks.model.TasksReview tasksReview)
+		throws com.liferay.portal.SystemException;
+
+	public void deleteTasksReview(long reviewId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteTasksReview(
+		com.liferay.portlet.tasks.model.TasksReview tasksReview)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tasks.model.TasksReview updateTasksReview(
+		com.liferay.portlet.tasks.model.TasksReview tasksReview)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence getTasksProposalPersistence();
+
+	public void setTasksProposalPersistence(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence);
+
+	public com.liferay.portlet.tasks.service.persistence.TasksProposalFinder getTasksProposalFinder();
+
+	public void setTasksProposalFinder(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalFinder tasksProposalFinder);
+
+	public com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence getTasksReviewPersistence();
+
+	public void setTasksReviewPersistence(
+		com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence tasksReviewPersistence);
+
+	public com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence();
+
+	public void setActivityTrackerPersistence(
+		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence);
+
+	public com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder();
+
+	public void setActivityTrackerFinder(
+		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder);
+
+	public com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence();
+
+	public void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence);
+
+	public com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence();
+
+	public void setPortletPreferencesPersistence(
+		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence);
+
+	public com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder();
+
+	public void setPortletPreferencesFinder(
+		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder);
+
+	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
+
+	public void setResourcePersistence(
+		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
+
+	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
+
+	public void setResourceFinder(
+		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
+	public void afterPropertiesSet();
+
+	public com.liferay.portlet.tasks.model.TasksReview addReview(long userId,
+		long groupId, long assigningUserId, java.lang.String assigningUserName,
+		long proposalId, int stage, boolean addCommunityPermissions,
+		boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.tasks.model.TasksReview addReview(long userId,
+		long groupId, long assigningUserId, java.lang.String assigningUserName,
+		long proposalId, int stage, java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.tasks.model.TasksReview addReview(long userId,
+		long groupId, long assigningUserId, java.lang.String assigningUserName,
+		long proposalId, int stage, java.lang.Boolean addCommunityPermissions,
+		java.lang.Boolean addGuestPermissions,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void addReviewResources(long proposalId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void addReviewResources(
+		com.liferay.portlet.tasks.model.TasksReview review,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void addReviewResources(long proposalId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void addReviewResources(
+		com.liferay.portlet.tasks.model.TasksReview review,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.tasks.model.TasksReview rejectReview(
+		long userId, long proposalId, int stage, boolean rejected)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteReview(long reviewId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteReviews(long proposalId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.tasks.model.TasksReview getReview(long reviewId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.tasks.model.TasksReview getReview(
+		long proposalId, long userId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List getReviews(long proposalId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List getReviews(long proposalId, int stage)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List getReviews(long proposalId, int stage,
+		boolean completed)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List getReviews(long proposalId, int stage, int begin,
+		int end)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List getReviews(long proposalId, int stage,
+		boolean completed, boolean rejected)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List getReviews(long proposalId, int stage,
+		boolean completed, int begin, int end)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List getReviews(long proposalId, int stage,
+		boolean completed, boolean rejected, int begin, int end)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public int getReviewsCount(long proposalId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public int getReviewsCount(long proposalId, int stage)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public int getReviewsCount(long proposalId, int stage, boolean completed)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public int getReviewsCount(long proposalId, int stage, boolean completed,
+		boolean rejected)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void updateReviewers(long userId, long groupId, long proposalId,
+		int stage, long[] reviewerIds, long[] removeReviewerIds)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+}

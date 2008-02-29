@@ -1200,6 +1200,38 @@ create table TagsSource (
 	acronym VARCHAR(75) null
 );
 
+create table TasksProposal (
+	proposalId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	name STRING null,
+	description STRING null,
+	publishDate DATE null,
+	dueDate DATE null
+);
+
+create table TasksReview (
+	reviewId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	assigningUserId LONG,
+	assigningUserName VARCHAR(75) null,
+	proposalId LONG,
+	stage INTEGER,
+	completed BOOLEAN,
+	rejected BOOLEAN
+);
+
 create table User_ (
 	uuid_ VARCHAR(75) null,
 	userId LONG not null primary key,

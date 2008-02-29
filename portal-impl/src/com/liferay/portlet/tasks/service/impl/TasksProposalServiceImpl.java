@@ -1,0 +1,129 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.tasks.service.impl;
+
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portlet.tasks.model.TasksProposal;
+import com.liferay.portlet.tasks.service.base.TasksProposalServiceBaseImpl;
+import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
+
+/**
+ * <a href="TasksProposalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
+
+	public TasksProposal addProposal(
+			long groupId, String name, String description, long classNameId,
+			long classPK, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException{
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		return tasksProposalLocalService.addProposal(
+			getUserId(), groupId, name, description, classNameId, classPK,
+			addCommunityPermissions, addGuestPermissions);
+	}
+
+	public TasksProposal addProposal(
+			long groupId, String name, String description, long classNameId,
+			long classPK, long reviewerId, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
+		throws PortalException, SystemException{
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		return tasksProposalLocalService.addProposal(
+			getUserId(), groupId, name, description, classNameId, classPK,
+			reviewerId, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public TasksProposal addProposal(
+			long groupId, String name, String description, long classNameId,
+			long classPK,
+			String[] communityPermissions, String[] guestPermissions)
+		throws PortalException, SystemException{
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		return tasksProposalLocalService.addProposal(
+			getUserId(), groupId, name, description, classNameId, classPK,
+			communityPermissions, guestPermissions);
+	}
+
+	public TasksProposal addProposal(
+			long groupId, String name, String description, long classNameId,
+			long classPK, long reviewerId, String[] communityPermissions,
+			String[] guestPermissions)
+		throws PortalException, SystemException{
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		return tasksProposalLocalService.addProposal(
+			getUserId(), groupId, name, description, classNameId, classPK,
+			reviewerId, communityPermissions, guestPermissions);
+	}
+
+	public void deleteProposal(long groupId, long proposalId)
+		throws PortalException, SystemException{
+
+		if (!GroupPermissionUtil.contains(
+				getPermissionChecker(), groupId, ActionKeys.MANAGE_STAGING) &&
+			!GroupPermissionUtil.contains(
+				getPermissionChecker(), groupId, ActionKeys.PUBLISH_STAGING) &&
+			!GroupPermissionUtil.contains(
+				getPermissionChecker(), groupId, ActionKeys.ASSIGN_REVIEWER) &&
+			!TasksProposalPermission.contains(
+				getPermissionChecker(), proposalId, ActionKeys.DELETE)) {
+
+			throw new PrincipalException();
+		}
+
+		tasksProposalLocalService.deleteProposal(proposalId);
+	}
+
+	public TasksProposal updateProposal(
+			long groupId, long proposalId, String description, int dueDateMonth,
+			int dueDateDay, int dueDateYear, int dueDateHour, int dueDateMinute)
+		throws PortalException, SystemException{
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+
+		return tasksProposalLocalService.updateProposal(
+			getUserId(), proposalId, description, dueDateMonth, dueDateDay,
+			dueDateYear, dueDateHour, dueDateMinute);
+	}
+
+}

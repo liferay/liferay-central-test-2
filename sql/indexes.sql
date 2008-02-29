@@ -338,6 +338,20 @@ create index IX_EB974D08 on TagsProperty (companyId, key_);
 create index IX_5200A629 on TagsProperty (entryId);
 create index IX_F505253D on TagsProperty (entryId, key_);
 
+create index IX_181A4A1B on TasksProposal (classNameId, classPK);
+create index IX_23614C22 on TasksProposal (companyId);
+create index IX_FB9AAEC8 on TasksProposal (companyId, groupId);
+create index IX_4440BF02 on TasksProposal (companyId, groupId, userId);
+
+create index IX_4D0C7F8D on TasksReview (proposalId);
+create index IX_C51F6D8E on TasksReview (proposalId, completed);
+create index IX_5D945C00 on TasksReview (proposalId, completed, rejected);
+create index IX_70AFEA01 on TasksReview (proposalId, stage);
+create index IX_1894B29A on TasksReview (proposalId, stage, completed);
+create index IX_41AFC20C on TasksReview (proposalId, stage, completed, rejected);
+create index IX_478BFAC7 on TasksReview (proposalId, userId);
+create index IX_36F512E6 on TasksReview (userId);
+
 create index IX_524FEFCE on UserGroup (companyId);
 create index IX_23EAD0D on UserGroup (companyId, name);
 create index IX_69771487 on UserGroup (companyId, parentUserGroupId);

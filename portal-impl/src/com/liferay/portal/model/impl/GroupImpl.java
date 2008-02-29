@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.model.Group;
@@ -59,6 +60,8 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	public static final long DEFAULT_LIVE_GROUP_ID = 0;
 
 	public static final String GUEST = GroupNames.GUEST;
+
+	public static final String MANAGED_STAGING = "managed.staging";
 
 	public static final String[] SYSTEM_GROUPS = GroupNames.SYSTEM_GROUPS;
 

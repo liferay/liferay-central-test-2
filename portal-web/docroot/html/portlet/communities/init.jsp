@@ -77,6 +77,16 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
+<%@ page import="com.liferay.portlet.tasks.NoSuchProposalException"%>
+<%@ page import="com.liferay.portlet.tasks.NoSuchReviewException"%>
+<%@ page import="com.liferay.portlet.tasks.model.TasksProposal"%>
+<%@ page import="com.liferay.portlet.tasks.model.TasksReview"%>
+<%@ page import="com.liferay.portlet.tasks.model.impl.TasksProposalImpl"%>
+<%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil"%>
+<%@ page import="com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil"%>
+<%@ page import="com.liferay.portlet.tasks.service.permission.TasksProposalPermission"%>
+<%@ page import="com.liferay.portlet.tasks.service.permission.TasksReviewPermission"%>
+<%@ page import="com.liferay.portlet.tasks.util.TasksUtil"%>
 
 <%@ page import="org.dom4j.Document" %>
 <%@ page import="org.dom4j.Element" %>

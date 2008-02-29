@@ -29,9 +29,12 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
+import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
@@ -45,14 +48,13 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
  * <a href="CommunitiesUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class CommunitiesUtil {
@@ -107,6 +109,16 @@ public class CommunitiesUtil {
 			groupId = layout.getGroupId();
 			privateLayout = layout.isPrivateLayout();
 			layoutId = layout.getLayoutId();
+		}
+
+		Group group = layout.getGroup();
+
+		if (group.isStagingGroup() &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_STAGING) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) {
+			throw new PrincipalException();
 		}
 
 		if (LayoutPermissionUtil.contains(

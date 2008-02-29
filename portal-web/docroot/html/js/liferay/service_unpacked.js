@@ -2451,6 +2451,67 @@ Liferay.Service.Tags.TagsProperty = {
 	}
 };
 
+Liferay.Service.Tasks = {
+	servicePackage: "com.liferay.portlet.tasks.service.http."
+};
+
+Liferay.Service.Tasks.TasksProposal = {
+	serviceClassName: Liferay.Service.Tasks.servicePackage + "TasksProposal" + Liferay.Service.classNameSuffix,
+
+	addProposal: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addProposal";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteProposal: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteProposal";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateProposal: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateProposal";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
+Liferay.Service.Tasks.TasksReview = {
+	serviceClassName: Liferay.Service.Tasks.servicePackage + "TasksReview" + Liferay.Service.classNameSuffix,
+
+	addReview: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addReview";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	rejectReview: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "rejectReview";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteReview: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteReview";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateReviewers: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateReviewers";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Wiki = {
 	servicePackage: "com.liferay.portlet.wiki.service.http."
 };

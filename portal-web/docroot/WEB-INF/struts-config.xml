@@ -247,6 +247,15 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
+		<action path="/communities/edit_proposal" type="com.liferay.portlet.tasks.action.EditProposalAction">
+			<forward name="portlet.tasks.edit_proposal" path="portlet.tasks.edit_proposal" />
+			<forward name="portlet.tasks.error" path="portlet.tasks.error" />
+		</action>
+
+		<action path="/communities/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
+		</action>
+
 		<action path="/communities/edit_user_roles" type="com.liferay.portlet.communities.action.EditUserRolesAction">
 			<forward name="portlet.communities.edit_user_roles" path="portlet.communities.edit_user_roles" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
@@ -706,6 +715,15 @@
 		<action path="/layout_management/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
+		</action>
+
+		<action path="/layout_management/edit_proposal" type="com.liferay.portlet.tasks.action.EditProposalAction">
+			<forward name="portlet.tasks.edit_proposal" path="portlet.tasks.edit_proposal" />
+			<forward name="portlet.tasks.error" path="portlet.tasks.error" />
+		</action>
+
+		<action path="/layout_management/edit_proposal_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
+			<forward name="portlet.message_boards.error" path="portlet.communities.error" />
 		</action>
 
 		<action path="/layout_management/export_pages" type="com.liferay.portlet.communities.action.ExportPagesAction">

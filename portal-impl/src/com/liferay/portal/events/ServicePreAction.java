@@ -1208,7 +1208,17 @@ public class ServicePreAction extends Action {
 			// LEP-4987
 
 			if (group.hasStagingGroup() || group.isStagingGroup()) {
-				themeDisplay.setShowStagingIcon(hasManageLayoutsPermission);
+				boolean hasApproveProposalPermission =
+					GroupPermissionUtil.contains(
+						permissionChecker, portletGroupId,
+						ActionKeys.APPROVE_PROPOSAL);
+
+				if (hasManageLayoutsPermission) {
+					themeDisplay.setShowStagingIcon(true);
+				}
+				else if (hasApproveProposalPermission) {
+					themeDisplay.setShowStagingIcon(true);
+				}
 			}
 
 			String myAccountNamespace = PortalUtil.getPortletNamespace(
