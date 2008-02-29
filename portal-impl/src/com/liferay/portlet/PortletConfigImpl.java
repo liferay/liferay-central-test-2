@@ -49,6 +49,9 @@ import javax.portlet.PortletContext;
 
 import javax.xml.namespace.QName;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="PortletConfigImpl.java.html"><b><i>View Source</i></b></a>
  *
@@ -161,7 +164,7 @@ public class PortletConfigImpl implements PortletConfig {
 						new ByteArrayInputStream(sm.toString().getBytes()));
 				}
 				catch (Exception e) {
-					e.printStackTrace();
+					_log.error(e, e);
 				}
 
 				_bundlePool.put(poolId, bundle);
@@ -214,6 +217,8 @@ public class PortletConfigImpl implements PortletConfig {
 	public boolean isWARFile() {
 		return _portletApp.isWARFile();
 	}
+
+	private static Log _log = LogFactory.getLog(PortletConfigImpl.class);
 
 	private PortletApp _portletApp;
 	private Portlet _portlet;

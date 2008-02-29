@@ -38,14 +38,14 @@ import java.util.ResourceBundle;
  */
 public class PortletResourceBundle extends ResourceBundle {
 
-	public PortletResourceBundle(ResourceBundle parentBundle,
-								 PortletInfo portletInfo) {
+	public PortletResourceBundle(
+		ResourceBundle parentBundle, PortletInfo portletInfo) {
 
 		_parentBundle = parentBundle;
 		_portletInfo = portletInfo;
 	}
 
-	public Enumeration getKeys() {
+	public Enumeration<String> getKeys() {
 		return _parentBundle.getKeys();
 	}
 

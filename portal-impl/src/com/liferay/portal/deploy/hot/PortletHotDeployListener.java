@@ -304,6 +304,10 @@ public class PortletHotDeployListener implements HotDeployListener {
 				if (Validator.isNotNull(portlet.getResourceBundle())) {
 					resourceBundles = CollectionFactory.getHashMap();
 
+					initResourceBundle(
+						resourceBundles, portlet, portletClassLoader,
+						LocaleUtil.getDefault());
+
 					Iterator<String> supportLocalesItr =
 						portlet.getSupportedLocales().iterator();
 
@@ -313,19 +317,9 @@ public class PortletHotDeployListener implements HotDeployListener {
 						Locale locale = LocaleUtil.fromLanguageId(
 							supportedLocale);
 
-						try {
-							ResourceBundle resourceBundle =
-								ResourceBundle.getBundle(
-									portlet.getResourceBundle(), locale,
-									portletClassLoader);
-
-							resourceBundles.put(
-								LocaleUtil.toLanguageId(locale),
-								resourceBundle);
-						}
-						catch (MissingResourceException mre) {
-							_log.warn(mre.getMessage());
-						}
+						initResourceBundle(
+							resourceBundles, portlet, portletClassLoader,
+							locale);
 					}
 				}
 
@@ -578,6 +572,22 @@ public class PortletHotDeployListener implements HotDeployListener {
 				portletURLListenerInstance);
 
 			PortletURLListenerFactory.create(portletURLListener);
+		}
+	}
+
+	protected void initResourceBundle(
+			Map<String, ResourceBundle> resourceBundles, Portlet portlet,
+			ClassLoader portletClassLoader, Locale locale) {
+
+		try {
+			ResourceBundle resourceBundle = ResourceBundle.getBundle(
+				portlet.getResourceBundle(), locale, portletClassLoader);
+
+			resourceBundles.put(
+				LocaleUtil.toLanguageId(locale), resourceBundle);
+		}
+		catch (MissingResourceException mre) {
+			_log.warn(mre.getMessage());
 		}
 	}
 
