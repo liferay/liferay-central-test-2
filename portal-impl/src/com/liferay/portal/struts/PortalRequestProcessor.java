@@ -788,8 +788,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				portletPreferencesIds);
 
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);
-		PortletContext portletCtx =
-			portletConfig.getPortletContext();
+		PortletContext portletCtx = portletConfig.getPortletContext();
 
 		RenderRequestImpl renderReqImpl = RenderRequestFactory.create(
 			req, portlet, invokerPortlet, portletCtx, WindowState.MAXIMIZED,

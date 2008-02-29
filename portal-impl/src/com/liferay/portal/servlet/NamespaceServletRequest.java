@@ -24,14 +24,16 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.DynamicServletRequest;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -48,26 +50,28 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class NamespaceServletRequest extends DynamicServletRequest {
 
-	static Set reservedAttrs = CollectionFactory.getHashSet();
+	static Set<String> reservedAttrs = new HashSet<String>();
 
 	static {
 		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_CONFIG);
 		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_PORTLET);
 		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_REQUEST);
 		reservedAttrs.add(JavaConstants.JAVAX_PORTLET_RESPONSE);
+		reservedAttrs.add(PortletRequest.LIFECYCLE_PHASE);
 	}
 
 	public static final String[] CUSTOM_RESERVED_ATTRS = PropsUtil.getArray(
 		PropsUtil.REQUEST_SHARED_ATTRIBUTES);
 
-	public NamespaceServletRequest(HttpServletRequest req, String attrNamespace,
-								   String paramNamespace) {
+	public NamespaceServletRequest(
+		HttpServletRequest req, String attrNamespace, String paramNamespace) {
 
 		this(req, attrNamespace, paramNamespace, true);
 	}
 
-	public NamespaceServletRequest(HttpServletRequest req, String attrNamespace,
-								   String paramNamespace, boolean inherit) {
+	public NamespaceServletRequest(
+		HttpServletRequest req, String attrNamespace, String paramNamespace,
+		boolean inherit) {
 
 		super(req, inherit);
 
@@ -85,13 +89,13 @@ public class NamespaceServletRequest extends DynamicServletRequest {
 		return value;
 	}
 
-	public Enumeration getAttributeNames() {
-		List names = new ArrayList();
+	public Enumeration<String> getAttributeNames() {
+		List<String> names = new ArrayList<String>();
 
-		Enumeration enu = super.getAttributeNames();
+		Enumeration<String> enu = super.getAttributeNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (name.startsWith(_attrNamespace)) {
 				names.add(

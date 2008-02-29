@@ -815,6 +815,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		_req.removeAttribute(JavaConstants.JAVAX_PORTLET_CONFIG);
 		_req.removeAttribute(JavaConstants.JAVAX_PORTLET_REQUEST);
 		_req.removeAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE);
+		_req.removeAttribute(PortletRequest.LIFECYCLE_PHASE);
 
 		_req = null;
 		_wapTheme = false;
