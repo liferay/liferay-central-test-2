@@ -35,9 +35,8 @@ List<ActivityTracker> activityTrackers = ActivityTrackerLocalServiceUtil.getObje
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
-<a class="<%= namespace %>handle" href="javascript: void(0);"><liferay-ui:message key="show-activities" /> &raquo;</a>
+<liferay-ui:toggle-area showKey="show-activities" hideKey="hide-activities">
 
-<div class="<%= namespace %>activities" style="display: none;">
 	<br />
 
 	<table class="taglib-search-iterator">
@@ -97,25 +96,4 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 	</c:choose>
 
 	</table>
-</div>
-
-<script type="text/javascript">
-	jQuery(function(){
-		jQuery(".<%= namespace %>handle").click(
-			function() {
-				if (this.toggled) {
-					jQuery(".<%= namespace %>activities").hide();
-					jQuery(".<%= namespace %>handle").html('<%= UnicodeLanguageUtil.get(pageContext, "show-activities") + UnicodeFormatter.toString(" &raquo;") %>');
-
-					this.toggled = false;
-				}
-				else {
-					jQuery(".<%= namespace %>activities").show();
-					jQuery(".<%= namespace %>handle").html('<%= UnicodeFormatter.toString("&laquo; ") + UnicodeLanguageUtil.get(pageContext, "hide-activities") %>');
-
-					this.toggled = true;
-				}
-			}
-		);
-	});
-</script>
+</liferay-ui:toggle-area>
