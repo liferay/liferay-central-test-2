@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletServletRequest;
 import com.liferay.portlet.PortletServletResponse;
 import com.liferay.portlet.RenderRequestImpl;
@@ -33,8 +34,6 @@ import com.liferay.portlet.RenderRequestImpl;
 import java.io.IOException;
 
 import java.util.Set;
-
-import javax.portlet.PortletResponse;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -90,7 +89,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		RenderRequestImpl renderReq = (RenderRequestImpl)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
-		PortletResponse portletRes = (PortletResponse)req.getAttribute(
+		PortletResponseImpl portletRes = (PortletResponseImpl)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_RESPONSE);
 
 		if (_path != null) {

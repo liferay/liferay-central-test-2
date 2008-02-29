@@ -171,7 +171,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	}
 
 	public Cookie[] getCookies() {
-		return null;
+		return _req.getCookies();
 	}
 
 	public String getETag() {
