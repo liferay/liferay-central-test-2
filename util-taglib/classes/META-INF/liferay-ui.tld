@@ -1720,6 +1720,41 @@
 		</attribute>
 	</tag>
 	<tag>
+		<name>toggle-area</name>
+		<tag-class>com.liferay.taglib.ui.ToggleAreaTag</tag-class>
+		<body-content>JSP</body-content>
+		<attribute>
+			<name>startPage</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>endPage</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>showKey</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>hideKey</name>
+			<required>true</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>shown</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+		<attribute>
+			<name>name</name>
+			<required>false</required>
+			<rtexprvalue>true</rtexprvalue>
+		</attribute>
+	</tag>
+	<tag>
 		<name>toggle-value</name>
 		<tag-class>com.liferay.taglib.ui.ToggleValueTag</tag-class>
 		<body-content>JSP</body-content>
