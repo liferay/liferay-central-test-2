@@ -87,8 +87,13 @@ public class DefineObjectsTagUtil {
 			PortletSession portletSession = portletRequest.getPortletSession();
 
 			pageContext.setAttribute("portletSession", portletSession);
-			pageContext.setAttribute(
-				"portletSessionScope", portletSession.getAttributeMap());
+
+			try {
+				pageContext.setAttribute(
+					"portletSessionScope", portletSession.getAttributeMap());
+			}
+			catch (IllegalStateException ise) {
+			}
 		}
 
 		PortletResponse portletResponse = (PortletResponse)req.getAttribute(
