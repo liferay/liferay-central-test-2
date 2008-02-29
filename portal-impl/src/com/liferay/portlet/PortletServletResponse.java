@@ -25,13 +25,16 @@ package com.liferay.portlet;
 import com.liferay.util.servlet.NullServletOutputStream;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import java.util.Locale;
 
+import javax.portlet.ActionResponse;
 import javax.portlet.MimeResponse;
 import javax.portlet.PortletRequest;
 
 import javax.servlet.ServletOutputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletResponseWrapper;
 
@@ -44,99 +47,263 @@ import javax.servlet.http.HttpServletResponseWrapper;
 public class PortletServletResponse extends HttpServletResponseWrapper {
 
 	public PortletServletResponse(
-		HttpServletResponse res, PortletResponseImpl portletRes) {
+		HttpServletResponse res, PortletResponseImpl portletRes,
+		boolean include) {
 
 		super(res);
 
 		_res = res;
 		_portletRes = portletRes;
+		_include = include;
 		_lifecycle = _portletRes.getLifecycle();
 	}
 
-	public int getBufferSize() {
-		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.EVENT_PHASE)) {
-
-			return 0;
-		}
-		else {
-			return _res.getBufferSize();
+	public void addCookie(Cookie cookie) {
+		if (!_include) {
+			_portletRes.addProperty(cookie);
 		}
 	}
 
-	public String getCharacterEncoding() {
-		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+	public void addDateHeader(String name, long date) {
+		addHeader(name, String.valueOf(date));
+	}
 
-			return null;
-		}
-		else {
-			return _res.getCharacterEncoding();
+	public void addHeader(String name, String value) {
+		if (!_include) {
+			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+				_portletRes.addProperty("header." + name, value);
+			}
 		}
 	}
 
-	public String getContentType() {
-		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.EVENT_PHASE)) {
-
-			return null;
-		}
-		else {
-			return ((MimeResponse)_portletRes).getContentType();
-		}
+	public void addIntHeader(String name, int value) {
+		addHeader(name, String.valueOf(value));
 	}
 
-	public String encodeRedirectUrl(String url) {
-		return encodeRedirectURL(url);
+	public boolean containsHeader(String name) {
+		return false;
 	}
 
 	public String encodeRedirectURL(String url) {
 		return null;
 	}
 
-	public String encodeUrl(String path) {
-		return encodeURL(path);
+	public String encodeRedirectUrl(String url) {
+		return null;
 	}
 
-	public String encodeURL(String path) {
-		return _res.encodeURL(path);
+	public String encodeURL(String url) {
+		return _portletRes.encodeURL(url);
+	}
+
+	public String encodeUrl(String url) {
+		return _portletRes.encodeURL(url);
+	}
+
+	public void flushBuffer() throws IOException {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+			_res.flushBuffer();
+		}
+	}
+
+	public int getBufferSize() {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+			return _res.getBufferSize();
+		}
+		else {
+			return 0;
+		}
+	}
+
+	public String getCharacterEncoding() {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+			return _res.getCharacterEncoding();
+		}
+		else {
+			return null;
+		}
+	}
+
+	public String getContentType() {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+			return ((MimeResponse)_portletRes).getContentType();
+		}
+		else {
+			return null;
+		}
 	}
 
 	public Locale getLocale() {
-		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return null;
+			return _res.getLocale();
 		}
 		else {
-			return _res.getLocale();
+			return null;
 		}
 	}
 
 	public ServletOutputStream getOutputStream() throws IOException {
-		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return new NullServletOutputStream();
+			return _res.getOutputStream();
 		}
 		else {
-			return super.getOutputStream();
+			return new NullServletOutputStream();
+		}
+	}
+
+	public PrintWriter getWriter() throws IOException {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+			return _res.getWriter();
+		}
+		else {
+			return new PrintWriter(new NullServletOutputStream());
 		}
 	}
 
 	public boolean isCommitted() {
-		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.EVENT_PHASE)) {
+		if (!_include) {
+			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return true;
+				return _res.isCommitted();
+			}
+			else {
+				return false;
+			}
 		}
 		else {
-			return _res.isCommitted();
+			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+				return _res.isCommitted();
+			}
+			else {
+				return true;
+			}
 		}
+	}
+
+	public void reset() {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+			_res.reset();
+		}
+	}
+
+	public void resetBuffer() {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+			_res.resetBuffer();
+		}
+	}
+
+	public void sendError(int sc) throws IOException {
+	}
+
+	public void sendError(int sc, String msg) throws IOException {
+	}
+
+	public void sendRedirect(String location) throws IOException {
+		if (!_include) {
+			if (_lifecycle.equals(PortletRequest.ACTION_PHASE)) {
+				((ActionResponse)_portletRes).sendRedirect(location);
+			}
+		}
+	}
+
+	public void setBufferSize(int size) {
+		if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+			_res.setBufferSize(size);
+		}
+	}
+
+	public void setCharacterEncoding(String encoding) {
+		if (!_include) {
+			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				_res.setCharacterEncoding(encoding);
+			}
+		}
+	}
+
+	public void setContentLength(int length) {
+		if (!_include) {
+			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				_res.setContentLength(length);
+			}
+		}
+	}
+
+	public void setContentType(String contentType) {
+		if (!_include) {
+			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+				((MimeResponse)_portletRes).setContentType(contentType);
+			}
+		}
+	}
+
+	public void setDateHeader(String name, long date) {
+		setHeader(name, String.valueOf(date));
+	}
+
+	public void setHeader(String name, String value) {
+		if (!_include) {
+			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
+				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+
+				_portletRes.setProperty("header." + name, value);
+			}
+		}
+	}
+
+	public void setIntHeader(String name, int value) {
+		setHeader(name, String.valueOf(value));
+	}
+
+	public void setLocale(Locale locale) {
+		if (!_include) {
+			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				_res.setLocale(locale);
+			}
+		}
+	}
+
+	public void setStatus(int sc) {
+		if (!_include) {
+			if (_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
+				_portletRes.setProperty("status.", String.valueOf("sc"));
+			}
+		}
+	}
+
+	public void setStatus(int sc, String msg) {
+		setStatus(sc);
 	}
 
 	private HttpServletResponse _res;
 	private PortletResponseImpl _portletRes;
+	private boolean _include;
 	private String _lifecycle;
 
 }

@@ -69,15 +69,18 @@ import org.apache.struts.Globals;
 public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 	public PortletRequestDispatcherImpl(
-		RequestDispatcher rd, PortletContextImpl portletCtxImpl) {
+		RequestDispatcher rd, boolean named,
+		PortletContextImpl portletCtxImpl) {
 
-		this(rd, portletCtxImpl, null);
+		this(rd, named, portletCtxImpl, null);
 	}
 
 	public PortletRequestDispatcherImpl(
-		RequestDispatcher rd, PortletContextImpl portletCtxImpl, String path) {
+		RequestDispatcher rd, boolean named, PortletContextImpl portletCtxImpl,
+		String path) {
 
 		_rd = rd;
+		_named = named;
 		_portlet = portletCtxImpl.getPortlet();
 		_portletCtxImpl = portletCtxImpl;
 		_path = path;
@@ -118,6 +121,16 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 			PortletRequest req, PortletResponse res, boolean strutsURLEncoder,
 			boolean include)
 		throws IOException, PortletException {
+
+		if (!include) {
+			if (res instanceof MimeResponseImpl) {
+				MimeResponseImpl mimeResImpl = (MimeResponseImpl)res;
+
+				if (mimeResImpl.isCalledFlushBuffer()) {
+					throw new IllegalStateException();
+				}
+			}
+		}
 
 		try {
 			PortletRequestImpl reqImpl = (PortletRequestImpl)req;
@@ -249,10 +262,10 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 			PortletServletRequest portletServletReq = new PortletServletRequest(
 				httpReq, reqImpl, pathInfo, queryString, requestURI,
-				servletPath);
+				servletPath, _named, include);
 
 			PortletServletResponse portletServletRes =
-				new PortletServletResponse(httpRes, resImpl);
+				new PortletServletResponse(httpRes, resImpl, include);
 
 			URLEncoder urlEncoder = _portlet.getURLEncoderInstance();
 
@@ -290,6 +303,7 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 		LogFactory.getLog(PortletRequestDispatcherImpl.class);
 
 	private RequestDispatcher _rd;
+	private boolean _named;
 	private Portlet _portlet;
 	private PortletContextImpl _portletCtxImpl;
 	private String _path;

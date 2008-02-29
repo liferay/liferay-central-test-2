@@ -111,7 +111,7 @@ public class PortletContextImpl implements PortletContext {
 		}
 
 		if (rd != null) {
-			return new PortletRequestDispatcherImpl(rd, this);
+			return new PortletRequestDispatcherImpl(rd, true, this);
 		}
 		else {
 			return null;
@@ -161,7 +161,7 @@ public class PortletContextImpl implements PortletContext {
 		}
 
 		if (rd != null) {
-			return new PortletRequestDispatcherImpl(rd, this, path);
+			return new PortletRequestDispatcherImpl(rd, false, this, path);
 		}
 		else {
 			return null;

@@ -134,10 +134,10 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 
 		PortletServletRequest portletServletReq = new PortletServletRequest(
 			(HttpServletRequest)req, renderReq, pathInfo, queryString,
-			requestURI, servletPath);
+			requestURI, servletPath, false, include);
 
-		PortletServletResponse portletServletRes =
-			new PortletServletResponse((HttpServletResponse)res, portletRes);
+		PortletServletResponse portletServletRes = new PortletServletResponse(
+			(HttpServletResponse)res, portletRes, include);
 
 		if (include) {
 			_rd.include(portletServletReq, portletServletRes);

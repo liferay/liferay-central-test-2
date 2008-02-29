@@ -25,8 +25,6 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
-import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.PortletImpl;
@@ -41,10 +39,13 @@ import java.security.Principal;
 
 import java.util.Enumeration;
 import java.util.Locale;
+import java.util.Map;
 
 import javax.portlet.PortletRequest;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletInputStream;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
@@ -63,7 +64,8 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public PortletServletRequest(
 		HttpServletRequest req, PortletRequestImpl portletReq, String pathInfo,
-		String queryString, String requestURI, String servletPath) {
+		String queryString, String requestURI, String servletPath,
+		boolean named, boolean include) {
 
 		super(req);
 
@@ -74,6 +76,8 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		_queryString = GetterUtil.getString(queryString);
 		_requestURI = GetterUtil.getString(requestURI);
 		_servletPath = GetterUtil.getString(servletPath);
+		_named = named;
+		_include = include;
 
 		long userId = PortalUtil.getUserId(req);
 		String remoteUser = req.getRemoteUser();
@@ -111,55 +115,71 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public Object getAttribute(String name) {
-		Object value = super.getAttribute(name);
-
-		if (name == null) {
-			return value;
+		if (_include || (name == null)) {
+			return _req.getAttribute(name);
 		}
 
-		if (!ServerDetector.isWebSphere()) {
-			return value;
+		if (name.equals(JavaConstants.JAVAX_SERVLET_FORWARD_CONTEXT_PATH)) {
+			if (_named) {
+				return null;
+			}
+			else {
+				return _portletReq.getContextPath();
+			}
 		}
 
-		if (name.equals(JavaConstants.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH)) {
-			value = _portletReq.getContextPath();
-		}
-		else if (name.equals(
-					JavaConstants.JAVAX_SERVLET_INCLUDE_PATH_INFO)) {
-
-			value = _pathInfo;
-		}
-		else if (name.equals(
-					JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING)) {
-
-			value = _queryString;
-		}
-		else if (name.equals(
-					JavaConstants.JAVAX_SERVLET_INCLUDE_REQUEST_URI)) {
-
-			value = _requestURI;
-		}
-		else if (name.equals(
-					JavaConstants.JAVAX_SERVLET_INCLUDE_SERVLET_PATH)) {
-
-			value = _servletPath;
+		if (name.equals(JavaConstants.JAVAX_SERVLET_FORWARD_PATH_INFO)) {
+			if (_named) {
+				return null;
+			}
+			else {
+				return _pathInfo;
+			}
 		}
 
-		if ((name.startsWith(JavaConstants.JAVAX_SERVLET_INCLUDE)) &&
-			(value == null)) {
-
-			value = StringPool.BLANK;
+		if (name.equals(JavaConstants.JAVAX_SERVLET_FORWARD_QUERY_STRING)) {
+			if (_named) {
+				return null;
+			}
+			else {
+				return _queryString;
+			}
 		}
 
-		return value;
+		if (name.equals(JavaConstants.JAVAX_SERVLET_FORWARD_REQUEST_URI)) {
+			if (_named) {
+				return null;
+			}
+			else {
+				return _requestURI;
+			}
+		}
+
+		if (name.equals(JavaConstants.JAVAX_SERVLET_FORWARD_SERVLET_PATH)) {
+			if (_named) {
+				return null;
+			}
+			else {
+				return _servletPath;
+			}
+		}
+
+		return _req.getAttribute(name);
+	}
+
+	public Enumeration<String> getAttributeNames() {
+		return _req.getAttributeNames();
+	}
+
+	public String getAuthType() {
+		return _req.getAuthType();
 	}
 
 	public String getCharacterEncoding() {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.RESOURCE_PHASE) ||
-			_isUploadRequest()) {
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return super.getCharacterEncoding();
+			return _req.getCharacterEncoding();
 		}
 		else {
 			return null;
@@ -168,10 +188,9 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public int getContentLength() {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.RESOURCE_PHASE) ||
-			_isUploadRequest()) {
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return super.getContentLength();
+			return _req.getContentLength();
 		}
 		else {
 			return 0;
@@ -180,10 +199,9 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public String getContentType() {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.RESOURCE_PHASE) ||
-			_isUploadRequest()) {
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return super.getContentType();
+			return _req.getContentType();
 		}
 		else {
 			return null;
@@ -194,23 +212,42 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _portletReq.getContextPath();
 	}
 
+	public Cookie[] getCookies() {
+		return _req.getCookies();
+	}
+
+	public long getDateHeader(String name) {
+		return GetterUtil.getLong(getHeader(name));
+	}
+
+	public String getHeader(String name) {
+		return _portletReq.getProperty("header." + name);
+	}
+
+	public Enumeration<String> getHeaderNames() {
+		return _portletReq.getProperties("header.");
+	}
+
+	public Enumeration<String> getHeaders(String name) {
+		return _portletReq.getProperties("header." + name);
+	}
+
 	public ServletInputStream getInputStream() throws IOException {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.RESOURCE_PHASE) ||
-			_isUploadRequest()) {
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return super.getInputStream();
+			return _req.getInputStream();
 		}
 		else {
 			return null;
 		}
 	}
 
-	public String getLocalAddr() {
-		return null;
+	public int getIntHeader(String name) {
+		return GetterUtil.getInteger(getHeader(name));
 	}
 
-	public String getLocalName() {
+	public String getLocalAddr() {
 		return null;
 	}
 
@@ -219,7 +256,11 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public Enumeration<Locale> getLocales() {
-		return _portletReq.getLocales();
+		return _req.getLocales();
+	}
+
+	public String getLocalName() {
+		return null;
 	}
 
 	public int getLocalPort() {
@@ -231,12 +272,32 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 			return "GET";
 		}
 		else {
-			return super.getMethod();
+			return _req.getMethod();
 		}
+	}
+
+	public String getParameter(String name) {
+		return _req.getParameter(name);
+	}
+
+	public Map<String, String[]> getParameterMap() {
+		return _req.getParameterMap();
+	}
+
+	public Enumeration<String> getParameterNames() {
+		return _req.getParameterNames();
+	}
+
+	public String[] getParameterValues(String name) {
+		return _req.getParameterValues(name);
 	}
 
 	public String getPathInfo() {
 		return _pathInfo;
+	}
+
+	public String getPathTranslated() {
+		return _req.getPathTranslated();
 	}
 
 	public String getProtocol() {
@@ -249,10 +310,9 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public BufferedReader getReader() throws IOException {
 		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
-			_lifecycle.equals(PortletRequest.RESOURCE_PHASE) ||
-			_isUploadRequest()) {
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			return super.getReader();
+			return _req.getReader();
 		}
 		else {
 			return null;
@@ -261,6 +321,14 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 
 	public String getRealPath(String path) {
 		return null;
+	}
+
+	public RequestDispatcher getRequestDispatcher(String path) {
+		return _req.getRequestDispatcher(path);
+	}
+
+	public String getRequestedSessionId() {
+		return _req.getRequestedSessionId();
 	}
 
 	public String getRemoteAddr() {
@@ -287,6 +355,18 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return _remoteUser;
 	}
 
+	public String getScheme() {
+		return _req.getScheme();
+	}
+
+	public String getServerName() {
+		return _req.getServerName();
+	}
+
+	public int getServerPort() {
+		return _req.getServerPort();
+	}
+
 	public String getServletPath() {
 		return _servletPath;
 	}
@@ -295,8 +375,35 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		return new PortletServletSession(_req.getSession(), _portletReq);
 	}
 
+	public HttpSession getSession(boolean create) {
+		return new PortletServletSession(_req.getSession(create), _portletReq);
+	}
+
 	public Principal getUserPrincipal() {
 		return _userPrincipal;
+	}
+
+	public boolean isRequestedSessionIdFromCookie() {
+		return _req.isRequestedSessionIdFromCookie();
+	}
+
+	public boolean isRequestedSessionIdFromURL() {
+		return _req.isRequestedSessionIdFromURL();
+	}
+
+	/**
+	 * @deprecated
+	 */
+	public boolean isRequestedSessionIdFromUrl() {
+		return _req.isRequestedSessionIdFromUrl();
+	}
+
+	public boolean isRequestedSessionIdValid() {
+		return _req.isRequestedSessionIdValid();
+	}
+
+	public boolean isSecure() {
+		return _req.isSecure();
 	}
 
 	public boolean isUserInRole(String role) {
@@ -314,24 +421,26 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 				_log.error(e);
 			}
 
-			return super.isUserInRole(role);
+			return _req.isUserInRole(role);
 		}
+	}
+
+	public void removeAttribute(String name) {
+		_req.removeAttribute(name);
+	}
+
+	public void setAttribute(String name, Object obj) {
+		_req.setAttribute(name, obj);
 	}
 
 	public void setCharacterEncoding(String encoding)
 		throws UnsupportedEncodingException {
-	}
 
-	private boolean _isUploadRequest() {
-		if (!_uploadRequestInvoked) {
-			_uploadRequestInvoked = true;
+		if (_lifecycle.equals(PortletRequest.ACTION_PHASE) ||
+			_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-			if (PortalUtil.getUploadServletRequest(this) != null) {
-				_uploadRequest = true;
-			}
+			_req.setCharacterEncoding(encoding);
 		}
-
-		return _uploadRequest;
 	}
 
 	private static Log _log = LogFactory.getLog(PortletServletRequest.class);
@@ -346,7 +455,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	private String _requestURI;
 	private String _servletPath;
 	private Principal _userPrincipal;
-	private boolean _uploadRequest;
-	private boolean _uploadRequestInvoked;
+	private boolean _named;
+	private boolean _include;
 
 }

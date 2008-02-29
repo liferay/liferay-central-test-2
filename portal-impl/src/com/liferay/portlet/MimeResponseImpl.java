@@ -46,8 +46,14 @@ import javax.servlet.http.HttpServletResponse;
 public abstract class MimeResponseImpl
 	extends PortletResponseImpl implements MimeResponse {
 
+	public boolean isCalledFlushBuffer() {
+		return _calledFlushBuffer;
+	}
+
 	public void flushBuffer() throws IOException {
 		_res.flushBuffer();
+
+		_calledFlushBuffer = true;
 	}
 
 	public int getBufferSize() {
@@ -169,6 +175,7 @@ public abstract class MimeResponseImpl
 		_contentType = null;
 		_calledGetPortletOutputStream = false;
 		_calledGetWriter = false;
+		_calledFlushBuffer = true;
 	}
 
 	private PortletRequestImpl _req;
@@ -176,5 +183,6 @@ public abstract class MimeResponseImpl
 	private String _contentType;
 	private boolean _calledGetPortletOutputStream;
  	private boolean _calledGetWriter;
+ 	private boolean _calledFlushBuffer;
 
 }

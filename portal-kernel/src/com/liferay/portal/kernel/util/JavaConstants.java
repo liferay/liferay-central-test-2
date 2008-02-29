@@ -47,8 +47,20 @@ public interface JavaConstants {
 
 	public static final String JAVAX_PORTLET_TITLE = "javax.portlet.title";
 
+	public static final String JAVAX_SERVLET_FORWARD_CONTEXT_PATH =
+		"javax.servlet.forward.context_path";
+
+	public static final String JAVAX_SERVLET_FORWARD_PATH_INFO =
+		"javax.servlet.forward.path_info";
+
+	public static final String JAVAX_SERVLET_FORWARD_QUERY_STRING =
+		"javax.servlet.forward.query_string";
+
 	public static final String JAVAX_SERVLET_FORWARD_REQUEST_URI =
 		"javax.servlet.forward.request_uri";
+
+	public static final String JAVAX_SERVLET_FORWARD_SERVLET_PATH =
+		"javax.servlet.forward.servlet_path";
 
 	public static final String JAVAX_SERVLET_INCLUDE = "javax.servlet.include.";
 
