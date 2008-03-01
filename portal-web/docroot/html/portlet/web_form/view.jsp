@@ -53,10 +53,7 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 	boolean fieldOptional = PrefsParamUtil.getBoolean(prefs, request, "fieldOptional" + i, false);
 	String fieldValue = ParamUtil.getString(request, fieldName);
 
-	while ((i == 1) || (fieldLabel.trim().length() > 0)) {
-		if (Validator.isNull(fieldLabel)) {
-		   continue;
-		}
+	while ((i == 1) || (Validator.isNotNull(fieldLabel))) {
 
 		String fieldType = prefs.getValue("fieldType" + i, "text");
 		String fieldOptions = prefs.getValue("fieldOptions" + i, "unknown");
