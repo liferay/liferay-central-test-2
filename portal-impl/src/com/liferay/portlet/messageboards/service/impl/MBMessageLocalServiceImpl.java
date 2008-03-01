@@ -1475,7 +1475,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			String subject = message.getSubject();
 
 			if (subject.indexOf(subjectPrefix) == -1) {
-				subject = subjectPrefix + subject;
+				subject = subjectPrefix.trim() + " " + subject.trim();
 			}
 
 			String inReplyTo = null;
