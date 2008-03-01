@@ -1329,7 +1329,7 @@ public class PluginPackageUtil {
 				setUpdateAvailable();
 			}
 			catch (Exception e) {
-				_log.error(e, e);
+				_log.warn(e.getMessage());
 			}
 		}
 
