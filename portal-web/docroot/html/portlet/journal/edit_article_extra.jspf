@@ -22,6 +22,15 @@
  */
 %>
 
+<div align="right">
+	<liferay-ui:toggle
+				id="<%= renderResponse.getNamespace() + "journal-edit-article-extra" %>"
+				defaultOn="<%= true %>"
+			/>
+</div>
+
+<div id="<portlet:namespace/>journal-edit-article-extra"  style="display: <liferay-ui:toggle-value id="<%= renderResponse.getNamespace() + "journal-edit-article-extra"%>" />">
+
 <table class="journal-edit-article-extra">
 <tr class="portlet-section-header">
 	<td>
@@ -263,3 +272,5 @@
 	</td>
 </tr>
 </table>
+
+</div>
