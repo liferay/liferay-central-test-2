@@ -29,12 +29,18 @@ WikiPage wikiPage = (WikiPage)request.getAttribute("edit_page.jsp-wikiPage");
 String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImpl.DEFAULT_FORMAT);
 %>
 
+<div align="right">
+	<liferay-ui:toggle
+				id="<%= renderResponse.getNamespace() + "syntax-help" %>"
+				defaultOn="<%= true %>"
+			/>
+</div>
 <table class="lfr-table" width="100%">
 <tr>
 	<td width="70%" valign="top">
 		<liferay-ui:input-field model="<%= WikiPage.class %>" bean="<%= wikiPage %>" field="content" />
 	</td>
-	<td class="syntax-help" valign="top">
+	<td id="<portlet:namespace/>syntax-help" class="syntax-help" valign="top" style="display: <liferay-ui:toggle-value id="<%= renderResponse.getNamespace() + "syntax-help"%>" />">
 		<h3>
 			<liferay-ui:message key="syntax-help" />
 		</h3>
