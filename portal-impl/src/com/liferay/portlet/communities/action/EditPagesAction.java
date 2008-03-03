@@ -76,7 +76,6 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.communities.form.PageForm;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
@@ -136,13 +135,11 @@ public class EditPagesAction extends PortletAction {
 			return;
 		}
 
-		PageForm pageForm = (PageForm)form;
-
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateLayout(pageForm, req, res);
+				updateLayout(req, res);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				CommunitiesUtil.deleteLayout(req, res);
@@ -489,6 +486,26 @@ public class EditPagesAction extends PortletAction {
 		return parameterMap;
 	}
 
+	protected Properties getTypeSettingsProperties(ActionRequest req) {
+		Properties typeSettingsProperties = new Properties();
+
+		String prefix = "TypeSettingsProperties(";
+
+		for (String paramName: req.getParameterMap().keySet()) {
+			
+			if (paramName.startsWith(prefix)) {
+
+				String key = paramName.substring(
+					prefix.length(), paramName.length() - 1);
+
+				typeSettingsProperties.setProperty(
+					key, req.getParameter(paramName));
+			}
+		}
+
+		return typeSettingsProperties;
+	}
+
 	protected void publishLayout(
 			long plid, long liveGroupId, boolean includeChildren)
 		throws Exception {
@@ -658,8 +675,7 @@ public class EditPagesAction extends PortletAction {
 			groupId, privateLayout, parentLayoutId, layoutIds);
 	}
 
-	protected void updateLayout(
-			PageForm pageForm, ActionRequest req, ActionResponse res)
+	protected void updateLayout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
 		UploadPortletRequest uploadReq =
@@ -751,6 +767,8 @@ public class EditPagesAction extends PortletAction {
 				localeNamesMap, localeTitlesMap, description, type, hidden,
 				friendlyURL, Boolean.valueOf(iconImage), iconBytes);
 
+			Properties formProperties = getTypeSettingsProperties(req);
+
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 				if ((copyLayoutId > 0) &&
 					(copyLayoutId != layout.getLayoutId())) {
@@ -773,40 +791,15 @@ public class EditPagesAction extends PortletAction {
 					}
 				}
 				else {
-					Properties formProperties =
-						pageForm.getTypeSettingsProperties();
 
 					Properties layoutProperties =
 						layout.getTypeSettingsProperties();
 
-					layoutProperties.setProperty(
-						"meta-robots",
-						formProperties.getProperty("meta-robots"));
-					layoutProperties.setProperty(
-						"meta-description",
-						formProperties.getProperty("meta-description"));
-					layoutProperties.setProperty(
-						"meta-keywords",
-						formProperties.getProperty("meta-keywords"));
-
-					layoutProperties.setProperty(
-						"javascript-1",
-						formProperties.getProperty("javascript-1"));
-					layoutProperties.setProperty(
-						"javascript-2",
-						formProperties.getProperty("javascript-2"));
-					layoutProperties.setProperty(
-						"javascript-3",
-						formProperties.getProperty("javascript-3"));
-					layoutProperties.setProperty(
-						"sitemap-include",
-						formProperties.getProperty("sitemap-include"));
-					layoutProperties.setProperty(
-						"sitemap-priority",
-						formProperties.getProperty("sitemap-priority"));
-					layoutProperties.setProperty(
-						"sitemap-changefreq",
-						formProperties.getProperty("sitemap-changefreq"));
+					for (Object property: formProperties.keySet()) {
+						layoutProperties.setProperty(
+							(String)property,
+							formProperties.getProperty((String)property));
+					}
 
 					LayoutServiceUtil.updateLayout(
 						groupId, privateLayout, layoutId,
@@ -814,8 +807,7 @@ public class EditPagesAction extends PortletAction {
 				}
 			}
 			else {
-				layout.setTypeSettingsProperties(
-					pageForm.getTypeSettingsProperties());
+				layout.setTypeSettingsProperties(formProperties);
 
 				LayoutServiceUtil.updateLayout(
 					groupId, privateLayout, layoutId, layout.getTypeSettings());

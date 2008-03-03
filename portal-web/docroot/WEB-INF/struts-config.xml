@@ -6,7 +6,6 @@
 	<!-- Forms Beans -->
 
 	<form-beans>
-		<form-bean name="communitiesPageForm" type="com.liferay.portlet.communities.form.PageForm" />
 		<form-bean name="documentLibraryFileEntryForm" type="com.liferay.portlet.documentlibrary.form.FileEntryForm" />
 		<form-bean name="mapsMapsForm" type="com.liferay.portlet.maps.form.MapsForm" />
 	</form-beans>
@@ -242,7 +241,7 @@
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
 
-		<action path="/communities/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
+		<action path="/communities/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
@@ -434,7 +433,7 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/enterprise_admin/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
+		<action path="/enterprise_admin/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
@@ -712,7 +711,7 @@
 
 		<!-- Layout Management -->
 
-		<action path="/layout_management/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
+		<action path="/layout_management/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
@@ -849,7 +848,7 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/my_account/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
+		<action path="/my_account/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
@@ -968,7 +967,7 @@
 			<forward name="portlet.enterprise_admin.error" path="portlet.enterprise_admin.error" />
 		</action>
 
-		<action path="/organization_admin/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction" name="communitiesPageForm">
+		<action path="/organization_admin/edit_pages" type="com.liferay.portlet.communities.action.EditPagesAction">
 			<forward name="portlet.communities.edit_pages" path="portlet.communities.edit_pages" />
 			<forward name="portlet.communities.error" path="portlet.communities.error" />
 		</action>
