@@ -18712,18 +18712,7 @@ Liferay.Dock = {
 			);
 
 			var dockOver = function(event) {
-				jQuery(document).one(
-					'click',
-					function(internalEvent) {
-						var currentEl = jQuery(internalEvent.target);
-						var dockParent = currentEl.parents('.lfr-dock');
-
-						if ((dockParent.length == 0) && !currentEl.is('.lfr-dock')) {
-							instance._toggle('hide');
-						}
-					}
-				);
-
+				instance._setCloser();
 				instance._toggle('show');
 			};
 
@@ -18771,6 +18760,27 @@ Liferay.Dock = {
 		}
 	},
 
+	_setCloser: function() {
+		var instance = this;
+
+		if (!instance._hovered) {
+			jQuery(document).one(
+				'click',
+				function(event) {
+					var currentEl = jQuery(event.target);
+					var dockParent = currentEl.parents('.lfr-dock');
+
+					if ((dockParent.length == 0) && !currentEl.is('.lfr-dock')) {
+						instance._toggle('hide');
+						instance._hovered = false;
+					}
+				}
+			);
+
+			instance._hovered = true;
+		}
+	},
+
 	_toggle: function(state) {
 		var instance = this;
 
@@ -18789,7 +18799,9 @@ Liferay.Dock = {
 			dockList.toggle();
 			dock.toggleClass('expanded');
 		}
-	}
+	},
+
+	_hovered: false
 };
 Liferay.DynamicSelect = new Class({
 

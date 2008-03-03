@@ -96,7 +96,7 @@ Liferay.Dock = {
 			dockList.addClass('expanded');
 		}
 	},
-	
+
 	_setCloser: function() {
 		var instance = this;
 
@@ -106,6 +106,7 @@ Liferay.Dock = {
 				function(event) {
 					var currentEl = jQuery(event.target);
 					var dockParent = currentEl.parents('.lfr-dock');
+
 					if ((dockParent.length == 0) && !currentEl.is('.lfr-dock')) {
 						instance._toggle('hide');
 						instance._hovered = false;
@@ -136,6 +137,6 @@ Liferay.Dock = {
 			dock.toggleClass('expanded');
 		}
 	},
-	
+
 	_hovered: false
 };
