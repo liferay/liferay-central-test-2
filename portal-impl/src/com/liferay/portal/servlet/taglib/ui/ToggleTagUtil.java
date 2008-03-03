@@ -47,48 +47,56 @@ import org.apache.commons.logging.LogFactory;
 public class ToggleTagUtil {
 
 	public static void doEndTag(
-			String page, String id, String onImage, String offImage,
-			boolean defaultOn, String stateVar, ServletContext ctx,
-			HttpServletRequest req, HttpServletResponse res)
+			String page, String id, String showImage, String hideImage,
+			String showMessage, String hideMessage, boolean defaultShowContent,
+			String stateVar, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res)
 		throws JspException {
 
 		try {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			if (Validator.isNull(onImage)) {
-				onImage =
+			if (Validator.isNull(showImage) && Validator.isNull(showMessage)) {
+				showImage =
 					themeDisplay.getPathThemeImages() + "/arrows/01_down.png";
 			}
 
-			if (Validator.isNull(offImage)) {
-				offImage =
+			if (Validator.isNull(hideImage) && Validator.isNull(hideImage)) {
+				hideImage =
 					themeDisplay.getPathThemeImages() + "/arrows/01_right.png";
 			}
 
-			String defaultStateValue = defaultOn ? StringPool.BLANK : "none";
-			String defaultImage = defaultOn ? onImage : offImage;
+			String defaultStateValue =
+				defaultShowContent ? StringPool.BLANK : "none";
+			String defaultImage = defaultShowContent ? hideImage : showImage;
+			String defaultMessage =
+				defaultShowContent ? hideMessage : showMessage;
 
 			String clickValue = SessionClicks.get(req, id, null);
 
-			if (defaultOn) {
+			if (defaultShowContent) {
 				if ((clickValue != null) && (clickValue.equals("none"))) {
 					defaultStateValue = "none";
-					defaultImage = offImage;
+					defaultImage = showImage;
+					defaultMessage = showMessage;
 				}
 				else {
 					defaultStateValue = "";
-					defaultImage = onImage;
+					defaultImage = hideImage;
+					defaultMessage = hideMessage;
 				}
 			}
 			else {
 				if ((clickValue == null) || (clickValue.equals("none"))) {
 					defaultStateValue = "none";
-					defaultImage = offImage;
+					defaultImage = showImage;
+					defaultMessage = showMessage;
 				}
 				else {
 					defaultStateValue = "";
-					defaultImage = onImage;
+					defaultImage = hideImage;
+					defaultMessage = hideMessage;
 				}
 			}
 
@@ -97,12 +105,16 @@ public class ToggleTagUtil {
 			}
 
 			req.setAttribute("liferay-ui:toggle:id", id);
-			req.setAttribute("liferay-ui:toggle:onImage", onImage);
-			req.setAttribute("liferay-ui:toggle:offImage", offImage);
+			req.setAttribute("liferay-ui:toggle:showImage", showImage);
+			req.setAttribute("liferay-ui:toggle:hideImage", hideImage);
+			req.setAttribute("liferay-ui:toggle:showMessage", showMessage);
+			req.setAttribute("liferay-ui:toggle:hideMessage", hideMessage);
 			req.setAttribute("liferay-ui:toggle:stateVar", stateVar);
 			req.setAttribute(
 				"liferay-ui:toggle:defaultStateValue", defaultStateValue);
 			req.setAttribute("liferay-ui:toggle:defaultImage", defaultImage);
+			req.setAttribute(
+				"liferay-ui:toggle:defaultMessage", defaultMessage);
 
 			RequestDispatcher rd = ctx.getRequestDispatcher(page);
 

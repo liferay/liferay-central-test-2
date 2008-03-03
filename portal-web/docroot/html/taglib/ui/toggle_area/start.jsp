@@ -24,16 +24,16 @@
 
 <%@ include file="/html/taglib/ui/toggle_area/init.jsp" %>
 
-<%
-String handleText = LanguageUtil.get(pageContext, showKey) + " &raquo;";
+<div align="<%= align %>">
+	<liferay-ui:toggle
+		id="<%= id %>"
+		showImage="<%= showImage %>"
+		hideImage="<%= hideImage %>"
+		showMessage="<%= showMessage %>"
+		hideMessage="<%= hideMessage %>"
+		defaultShowContent="<%= defaultShowContent %>"
+		stateVar="<%= stateVar %>"
+	/>
+</div>
 
-if (shown) {
-	handleText = "&laquo; " + LanguageUtil.get(pageContext, hideKey);
-}
-%>
-
-<div class="lfr-toggle-area">
-
-<a class="<%= name %>handle toggle-handle" href="javascript: void(0);"><%= handleText %></a>
-
-<div class="<%= name %>content toggle-content" <%= ( shown ? "" : "style=\"display: none;\"" ) %>>
+<div id="<%= id %>" style="display: <liferay-ui:toggle-value id="<%= id %>" />">

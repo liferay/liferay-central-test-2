@@ -236,25 +236,22 @@ else {
 	<div class="message-scroll" id="<portlet:namespace />message_0"></div>
 
 	<c:if test='<%= threadView.equals("combination") && (messages.size() > 1) %>'>
-		<liferay-ui:toggle
-			id="toggle_id_message_boards_view_message_thread"
-			defaultOn="<%= true %>"
-		/>
+		<liferay-ui:toggle-area id="toggle_id_message_boards_view_message_thread">
+			<table class="toggle_id_message_boards_view_message_thread">
 
-		<table class="toggle_id_message_boards_view_message_thread" id="toggle_id_message_boards_view_message_thread" style="display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />;" width="100%">
+			<%
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, treeWalker.getRoot());
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(false));
+			request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
+			%>
 
-		<%
-		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER, treeWalker);
-		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_SEL_MESSAGE, message);
-		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CUR_MESSAGE, treeWalker.getRoot());
-		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_CATEGORY, category);
-		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_LAST_NODE, Boolean.valueOf(false));
-		request.setAttribute(WebKeys.MESSAGE_BOARDS_TREE_WALKER_DEPTH, new Integer(0));
-		%>
+			<liferay-util:include page="/html/portlet/message_boards/view_thread_shortcut.jsp" />
 
-		<liferay-util:include page="/html/portlet/message_boards/view_thread_shortcut.jsp" />
-
-		</table>
+			</table>
+		</liferay-ui:toggle-area>
 	</c:if>
 
 	<c:choose>

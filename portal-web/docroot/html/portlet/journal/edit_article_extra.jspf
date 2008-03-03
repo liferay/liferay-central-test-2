@@ -22,14 +22,12 @@
  */
 %>
 
-<div align="right">
-	<liferay-ui:toggle
-		id="toggle_id_journal_edit_article_extra"
-		defaultOn="<%= true %>"
-	/>
-</div>
-
-<div id="toggle_id_journal_edit_article_extra" style="display: <liferay-ui:toggle-value id="toggle_id_journal_edit_article_extra" />">
+<liferay-ui:toggle-area
+	id="toggle_id_journal_edit_article_extra"
+	showMessage='<%= LanguageUtil.get(pageContext, "advanced") + " &raquo;" %>'
+	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "basic") %>'
+	align="right"
+>
 	<table class="journal-edit-article-extra">
 	<tr class="portlet-section-header">
 		<td>
@@ -271,4 +269,4 @@
 		</td>
 	</tr>
 	</table>
-</div>
+</liferay-ui:toggle-area>

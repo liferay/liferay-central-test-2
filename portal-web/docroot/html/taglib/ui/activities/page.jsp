@@ -35,10 +35,12 @@ List<ActivityTracker> activityTrackers = ActivityTrackerLocalServiceUtil.getObje
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
-<liferay-ui:toggle-area showKey="show-activities" hideKey="hide-activities">
-
-	<br />
-
+<liferay-ui:toggle-area
+	id="toggle_id_journal_edit_article_extra"
+	showMessage='<%= LanguageUtil.get(pageContext, "show-activities") + " &raquo;" %>'
+	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-activities") %>'
+	align="right"
+>
 	<table class="taglib-search-iterator">
 	<tr class="portlet-section-header">
 		<th class="col-1" width="80%">

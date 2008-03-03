@@ -26,11 +26,14 @@
 
 <%
 String id = (String)request.getAttribute("liferay-ui:toggle:id");
-String onImage = (String)request.getAttribute("liferay-ui:toggle:onImage");
-String offImage = (String)request.getAttribute("liferay-ui:toggle:offImage");
+String showImage = (String)request.getAttribute("liferay-ui:toggle:showImage");
+String hideImage = (String)request.getAttribute("liferay-ui:toggle:hideImage");
+String showMessage = (String)request.getAttribute("liferay-ui:toggle:showMessage");
+String hideMessage = (String)request.getAttribute("liferay-ui:toggle:hideMessage");
 String stateVar = (String)request.getAttribute("liferay-ui:toggle:stateVar");
 String defaultStateValue = (String)request.getAttribute("liferay-ui:toggle:defaultStateValue");
 String defaultImage = (String)request.getAttribute("liferay-ui:toggle:defaultImage");
+String defaultMessage = (String)request.getAttribute("liferay-ui:toggle:defaultMessage");
 %>
 
 <script type="text/javascript">
@@ -42,18 +45,36 @@ String defaultImage = (String)request.getAttribute("liferay-ui:toggle:defaultIma
 		}
 
 		if (state == "") {
-			document.getElementById("<%= id %>").style.display = "none";
-			document.getElementById("<%= id %>_image").src = "<%= offImage %>";
 			<%= stateVar %> = "none";
+
+			document.getElementById("<%= id %>").style.display = "none";
+
+			<c:choose>
+				<c:when test="<%= Validator.isNotNull(showMessage) %>">
+					document.getElementById("<%= id %>_message").innerHTML = "<%= showMessage %>";
+				</c:when>
+				<c:otherwise>
+					document.getElementById("<%= id %>_image").src = "<%= showImage %>";
+				</c:otherwise>
+			</c:choose>
 
 			if ((saveState == null) || saveState) {
 				loadPage(mainPath + "/portal/session_click", "<%= id %>=none");
 			}
 		}
 		else {
-			document.getElementById("<%= id %>").style.display = "";
-			document.getElementById("<%= id %>_image").src = "<%= onImage %>";
 			<%= stateVar %> = "";
+
+			document.getElementById("<%= id %>").style.display = "";
+
+			<c:choose>
+				<c:when test="<%= Validator.isNotNull(showMessage) %>">
+					document.getElementById("<%= id %>_message").innerHTML = "<%= hideMessage %>";
+				</c:when>
+				<c:otherwise>
+					document.getElementById("<%= id %>_image").src = "<%= hideImage %>";
+				</c:otherwise>
+			</c:choose>
 
 			if ((saveState == null) || saveState) {
 				loadPage(mainPath + "/portal/session_click", "<%= id %>=");
@@ -62,4 +83,11 @@ String defaultImage = (String)request.getAttribute("liferay-ui:toggle:defaultIma
 	}
 </script>
 
-<img hspace="0" id="<%= id %>_image" vspace="0" src="<%= defaultImage %>" onClick="<%= stateVar %>Toggle();" />
+<c:choose>
+	<c:when test="<%= Validator.isNotNull(showMessage) %>">
+		<a href="javascript: <%= stateVar %>Toggle();" id="<%= id %>_message"><%= defaultMessage %></a>
+	</c:when>
+	<c:otherwise>
+		<img hspace="0" id="<%= id %>_image" vspace="0" src="<%= defaultImage %>" onClick="<%= stateVar %>Toggle();" />
+	</c:otherwise>
+</c:choose>

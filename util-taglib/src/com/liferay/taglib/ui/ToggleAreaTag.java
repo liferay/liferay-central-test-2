@@ -24,7 +24,6 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.taglib.util.ParamAndPropertyAncestorTagImpl;
-import com.liferay.util.PwdGenerator;
 
 import javax.servlet.ServletRequest;
 import javax.servlet.jsp.JspException;
@@ -32,7 +31,7 @@ import javax.servlet.jsp.JspException;
 /**
  * <a href="ToggleAreaTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Aug?
  *
  */
 public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
@@ -41,19 +40,18 @@ public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
 		try {
 			ServletRequest req = getServletRequest();
 
-			req.setAttribute("liferay-ui:toggle-area:showKey", _showKey);
-			req.setAttribute("liferay-ui:toggle-area:hideKey", _hideKey);
+			req.setAttribute("liferay-ui:toggle-area:id", _id);
+			req.setAttribute("liferay-ui:toggle-area:showImage", _showImage);
+			req.setAttribute("liferay-ui:toggle-area:hideImage", _hideImage);
 			req.setAttribute(
-					"liferay-ui:toggle-area:shown", String.valueOf(_shown));
-
-			if (_name == null) {
-				req.setAttribute(
-					"liferay-ui:toggle-area:name", PwdGenerator.getPassword());
-			}
-			else {
-				req.setAttribute(
-					"liferay-ui:toggle-area:name", _name);
-			}
+				"liferay-ui:toggle-area:showMessage", _showMessage);
+			req.setAttribute(
+				"liferay-ui:toggle-area:hideMessage", _hideMessage);
+			req.setAttribute(
+				"liferay-ui:toggle-area:defaultShowContent",
+				String.valueOf(_defaultShowContent));
+			req.setAttribute("liferay-ui:toggle-area:stateVar", _stateVar);
+			req.setAttribute("liferay-ui:toggle-area:align", _align);
 
 			include(getStartPage());
 
@@ -76,10 +74,12 @@ public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
 		finally {
 			_startPage = null;
 			_endPage = null;
-			_showKey = null;
-			_hideKey = null;
-			_shown = false;
-			_name = null;
+			_id = null;
+			_showMessage = null;
+			_hideMessage = null;
+			_defaultShowContent = true;
+			_stateVar = null;
+			_align = "left";
 		}
 	}
 
@@ -109,31 +109,53 @@ public class ToggleAreaTag extends ParamAndPropertyAncestorTagImpl {
 		_endPage = endPage;
 	}
 
-	public void setShowKey(String showKey) {
-		_showKey = showKey;
+	public void setId(String id) {
+		_id = id;
 	}
 
-	public void setHideKey(String hideKey) {
-		_hideKey = hideKey;
+	public void setShowImage(String showImage) {
+		_showImage = showImage;
 	}
 
-	public void setShown(boolean shown) {
-		_shown = shown;
+	public void setHideImage(String hideImage) {
+		_hideImage = hideImage;
 	}
 
-	public void setName(String name) {
-		_name = name;
+	public void setShowMessage(String showMessage) {
+		_showMessage = showMessage;
 	}
 
-	private static final String _START_PAGE = "/html/taglib/ui/toggle_area/start.jsp";
+	public void setHideMessage(String hideMessage) {
+		_hideMessage = hideMessage;
+	}
 
-	private static final String _END_PAGE = "/html/taglib/ui/toggle_area/end.jsp";
+	public void setDefaultShowContent(boolean defaultShowContent) {
+		_defaultShowContent = defaultShowContent;
+	}
+
+	public void setStateVar(String stateVar) {
+		_stateVar = stateVar;
+	}
+
+	public void setAlign(String align) {
+		_align = align;
+	}
+
+	private static final String _START_PAGE =
+		"/html/taglib/ui/toggle_area/start.jsp";
+
+	private static final String _END_PAGE =
+		"/html/taglib/ui/toggle_area/end.jsp";
 
 	private String _startPage;
 	private String _endPage;
-	private String _showKey;
-	private String _hideKey;
-	private boolean _shown = false;
-	private String _name;
+	private String _id;
+	private String _showImage;
+	private String _hideImage;
+	private String _showMessage;
+	private String _hideMessage;
+	private boolean _defaultShowContent = true;
+	private String _stateVar;
+	private String _align = "left";
 
 }

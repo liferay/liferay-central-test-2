@@ -32,7 +32,8 @@ String format = BeanParamUtil.getString(wikiPage, request, "format", WikiPageImp
 <div align="right">
 	<liferay-ui:toggle
 		id="toggle_id_wiki_edit_wiki_syntax_help"
-		defaultOn="<%= true %>"
+		showMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "show-syntax-help") %>'
+		hideMessage='<%= LanguageUtil.get(pageContext, "hide-syntax-help") + " &raquo;" %>'
 	/>
 </div>
 

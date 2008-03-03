@@ -22,25 +22,4 @@
  */
 %>
 
-<%@ include file="/html/taglib/ui/toggle_area/init.jsp" %>
-
 </div>
-
-</div>
-
-<script type="text/javascript">
-	jQuery(function(){
-		jQuery('.<%= name %>handle').click(
-			function() {
-				if (jQuery('.<%= name %>content').is(':visible')) {
-					jQuery('.<%= name %>content').hide();
-					jQuery('.<%= name %>handle').html('<%= UnicodeLanguageUtil.get(pageContext, showKey) + UnicodeFormatter.toString(" &raquo;") %>');
-				}
-				else {
-					jQuery(".<%= name %>content").show();
-					jQuery(".<%= name %>handle").html('<%= UnicodeFormatter.toString("&laquo; ") + UnicodeLanguageUtil.get(pageContext, hideKey) %>');
-				}
-			}
-		);
-	});
-</script>

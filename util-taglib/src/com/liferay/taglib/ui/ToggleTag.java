@@ -47,18 +47,21 @@ import org.apache.commons.logging.LogFactory;
 public class ToggleTag extends IncludeTag {
 
 	public static void doTag(
-			String id, String onImage, String offImage, boolean defaultOn,
-			String stateVar, ServletContext ctx, HttpServletRequest req,
-			HttpServletResponse res)
+			String id, String showImage, String hideImage, String showMessage,
+			String hideMessage, boolean defaultShowContent, String stateVar,
+			ServletContext ctx, HttpServletRequest req, HttpServletResponse res)
 		throws Exception {
 
-		doTag(_PAGE, id, onImage, offImage, defaultOn, stateVar, ctx, req, res);
+		doTag(
+			_PAGE, id, showImage, hideImage, showMessage, hideMessage,
+			defaultShowContent, stateVar, ctx, req, res);
 	}
 
 	public static void doTag(
-			String page, String id, String onImage, String offImage,
-			boolean defaultOn, String stateVar, ServletContext ctx,
-			HttpServletRequest req, HttpServletResponse res)
+			String page, String id, String showImage, String hideImage,
+			String showMessage, String hideMessage, boolean defaultShowContent,
+			String stateVar, ServletContext ctx, HttpServletRequest req,
+			HttpServletResponse res)
 		throws Exception {
 
 		ClassLoader contextClassLoader =
@@ -80,16 +83,28 @@ public class ToggleTag extends IncludeTag {
 				idWrapper = new NullWrapper(String.class.getName());
 			}
 
-			Object onImageWrapper = onImage;
+			Object showImageWrapper = showImage;
 
-			if (onImageWrapper == null) {
-				onImageWrapper = new NullWrapper(String.class.getName());
+			if (showImageWrapper == null) {
+				showImageWrapper = new NullWrapper(String.class.getName());
 			}
 
-			Object offImageWrapper = offImage;
+			Object hideImageWrapper = hideImage;
 
-			if (offImageWrapper == null) {
-				offImageWrapper = new NullWrapper(String.class.getName());
+			if (hideImageWrapper == null) {
+				hideImageWrapper = new NullWrapper(String.class.getName());
+			}
+
+			Object showMessageWrapper = showMessage;
+
+			if (showMessageWrapper == null) {
+				showMessageWrapper = new NullWrapper(String.class.getName());
+			}
+
+			Object hideMessageWrapper = hideMessage;
+
+			if (hideMessageWrapper == null) {
+				hideMessageWrapper = new NullWrapper(String.class.getName());
 			}
 
 			Object stateVarWrapper = stateVar;
@@ -101,9 +116,10 @@ public class ToggleTag extends IncludeTag {
 			MethodWrapper methodWrapper = new MethodWrapper(
 				_TAG_CLASS, _TAG_DO_END_METHOD,
 				new Object[] {
-					pageWrapper, idWrapper, onImageWrapper, offImageWrapper,
-					new BooleanWrapper(defaultOn), stateVarWrapper, ctx, req,
-					res
+					pageWrapper, idWrapper, showImageWrapper, hideImageWrapper,
+					showMessageWrapper, hideMessageWrapper,
+					new BooleanWrapper(defaultShowContent), stateVarWrapper,
+					ctx, req, res
 				});
 
 			MethodInvoker.invoke(methodWrapper);
@@ -125,7 +141,8 @@ public class ToggleTag extends IncludeTag {
 			StringServletResponse res = getServletResponse();
 
 			doTag(
-				_id, _onImage, _offImage, _defaultOn, _stateVar, ctx, req, res);
+				_id, _showImage, _hideImage, _showMessage, _hideMessage,
+				_defaultShowContent, _stateVar, ctx, req, res);
 
 			pageContext.getOut().print(res.getString());
 
@@ -140,16 +157,24 @@ public class ToggleTag extends IncludeTag {
 		_id = id;
 	}
 
-	public void setOnImage(String onImage) {
-		_onImage = onImage;
+	public void setShowImage(String showImage) {
+		_showImage = showImage;
 	}
 
-	public void setOffImage(String offImage) {
-		_offImage = offImage;
+	public void setHideImage(String hideImage) {
+		_hideImage = hideImage;
 	}
 
-	public void setDefaultOn(boolean defaultOn) {
-		_defaultOn = defaultOn;
+	public void setShowMessage(String showMessage) {
+		_showMessage = showMessage;
+	}
+
+	public void setHideMessage(String hideMessage) {
+		_hideMessage = hideMessage;
+	}
+
+	public void setDefaultShowContent(boolean defaultShowContent) {
+		_defaultShowContent = defaultShowContent;
 	}
 
 	public void setStateVar(String stateVar) {
@@ -170,9 +195,11 @@ public class ToggleTag extends IncludeTag {
 	private static Log _log = LogFactory.getLog(ToggleTag.class);
 
 	private String _id;
-	private String _onImage;
-	private String _offImage;
-	private boolean _defaultOn;
+	private String _showImage;
+	private String _hideImage;
+	private String _showMessage;
+	private String _hideMessage;
+	private boolean _defaultShowContent = true;
 	private String _stateVar;
 
 }

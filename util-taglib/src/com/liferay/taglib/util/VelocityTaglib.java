@@ -587,13 +587,15 @@ public class VelocityTaglib {
 	}
 
 	public String toggle(
-			String id, String onImage, String offImage, boolean defaultOn)
+			String id, String showImage, String hideImage, String showMessage,
+			String hideMessage, boolean defaultShowContent)
 		throws Exception {
 
 		_res.recycle();
 
 		ToggleTag.doTag(
-			id, onImage, offImage, defaultOn, null, _ctx, _req, _res);
+			id, showImage, hideImage, showMessage, hideMessage,
+			defaultShowContent, null, _ctx, _req, _res);
 
 		return _res.getString();
 	}
