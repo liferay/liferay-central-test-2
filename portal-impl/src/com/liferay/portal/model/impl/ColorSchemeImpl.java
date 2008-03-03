@@ -199,6 +199,22 @@ public class ColorSchemeImpl implements ColorScheme {
 		return _colorSchemeImagesPath;
 	}
 
+    public String getColorSchemeThumbnailPath() {
+        if (_cssClass != null && _colorSchemeImagesPath != null) {
+            int ndxSpace = _cssClass.indexOf(" ");
+            if (ndxSpace > 0) {
+                // There is a space in the css class, indicating a possible sub-classed color scheme...
+                if (_colorSchemeImagesPath.endsWith(_cssClass.substring(0, ndxSpace))) {
+                    // There is a definite sub-classed color scheme...
+                    String subclassPath = _cssClass.replace(' ', '/');
+                    return _colorSchemeImagesPath + subclassPath.substring(ndxSpace);
+                }
+            }
+        }
+        
+        return _colorSchemeImagesPath;
+    }
+    
 	public void setColorSchemeImagesPath(String colorSchemeImagesPath) {
 		_colorSchemeImagesPath = colorSchemeImagesPath;
 	}
@@ -423,5 +439,4 @@ public class ColorSchemeImpl implements ColorScheme {
 		"${images-path}/color_schemes/${css-class}";
 	private boolean _defaultCs;
 	private Properties _settingsProperties = new NullSafeProperties();
-
 }
