@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.util.PropsValues;
@@ -199,22 +200,30 @@ public class ColorSchemeImpl implements ColorScheme {
 		return _colorSchemeImagesPath;
 	}
 
-    public String getColorSchemeThumbnailPath() {
-        if (_cssClass != null && _colorSchemeImagesPath != null) {
-            int ndxSpace = _cssClass.indexOf(" ");
-            if (ndxSpace > 0) {
-                // There is a space in the css class, indicating a possible sub-classed color scheme...
-                if (_colorSchemeImagesPath.endsWith(_cssClass.substring(0, ndxSpace))) {
-                    // There is a definite sub-classed color scheme...
-                    String subclassPath = _cssClass.replace(' ', '/');
-                    return _colorSchemeImagesPath + subclassPath.substring(ndxSpace);
-                }
-            }
-        }
-        
-        return _colorSchemeImagesPath;
-    }
-    
+	public String getColorSchemeThumbnailPath() {
+
+		// LEP-5270
+
+		if (Validator.isNotNull(_cssClass) &&
+			Validator.isNotNull(_colorSchemeImagesPath)) {
+
+			int pos = _cssClass.indexOf(StringPool.SPACE);
+
+			if (pos > 0) {
+				if (_colorSchemeImagesPath.endsWith(
+						_cssClass.substring(0, pos))) {
+
+					String subclassPath = StringUtil.replace(
+						_cssClass, StringPool.SPACE, StringPool.SLASH);
+
+					return _colorSchemeImagesPath + subclassPath.substring(pos);
+				}
+			}
+		}
+
+		return _colorSchemeImagesPath;
+	}
+
 	public void setColorSchemeImagesPath(String colorSchemeImagesPath) {
 		_colorSchemeImagesPath = colorSchemeImagesPath;
 	}
@@ -439,4 +448,5 @@ public class ColorSchemeImpl implements ColorScheme {
 		"${images-path}/color_schemes/${css-class}";
 	private boolean _defaultCs;
 	private Properties _settingsProperties = new NullSafeProperties();
+
 }
