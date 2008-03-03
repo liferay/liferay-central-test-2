@@ -1328,7 +1328,9 @@ public class PluginPackageUtil {
 				setUpdateAvailable();
 			}
 			catch (Exception e) {
-				_log.warn(e.getMessage());
+				if (_log.isWarnEnabled()) {
+					_log.warn(e.getMessage());
+				}
 			}
 		}
 
