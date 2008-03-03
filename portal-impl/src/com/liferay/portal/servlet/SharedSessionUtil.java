@@ -40,14 +40,14 @@ import org.apache.commons.logging.LogFactory;
 public class SharedSessionUtil {
 
 	public static Map<String, Object> getSharedSessionAttributes(
-		final HttpServletRequest req) {
+		HttpServletRequest req) {
 
-		final HttpSession ses = req.getSession();
+		HttpSession ses = req.getSession();
 
-		final SharedSessionAttributeCache cache =
+		SharedSessionAttributeCache cache =
 			SharedSessionAttributeCache.getInstance(ses);
 
-		final Map<String, Object> values = cache.getValues();
+		Map<String, Object> values = cache.getValues();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Shared session attributes " + values);

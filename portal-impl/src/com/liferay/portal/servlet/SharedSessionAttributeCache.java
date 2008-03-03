@@ -22,11 +22,11 @@
 
 package com.liferay.portal.servlet;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 import java.io.Serializable;
+
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+
 import javax.servlet.http.HttpSession;
 
 /**
@@ -37,7 +37,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SharedSessionAttributeCache implements Serializable {
 
-	public static SharedSessionAttributeCache getInstance(final HttpSession ses) {
+	public static SharedSessionAttributeCache getInstance(HttpSession ses) {
 		synchronized (ses) {
 			SharedSessionAttributeCache cache =
 				(SharedSessionAttributeCache)ses.getAttribute(_SESSION_KEY);
@@ -52,27 +52,19 @@ public class SharedSessionAttributeCache implements Serializable {
 		}
 	}
 
-	public boolean contains(final String name) {
+	public boolean contains(String name) {
 		return _attributes.containsKey(name);
 	}
 
 	public Map<String, Object> getValues() {
-		final Map<String, Object> values = new HashMap<String, Object>();
-
-		final Set<Map.Entry<String, Object>> entries = _attributes.entrySet();
-
-		for (Map.Entry<String, Object> entry : entries) {
-			values.put(entry.getKey(), entry.getValue());
-		}
-
-		return values;
+		return _attributes;
 	}
 
-	public void removeAttribute(final String key) {
+	public void removeAttribute(String key) {
 		_attributes.remove(key);
 	}
 
-	public void setAttribute(final String key, final Object value) {
+	public void setAttribute(String key, Object value) {
 		_attributes.put(key, value);
 	}
 
@@ -83,6 +75,6 @@ public class SharedSessionAttributeCache implements Serializable {
 	private static final String _SESSION_KEY =
 		SharedSessionAttributeCache.class.getName();
 
-	private final transient Map<String, Object> _attributes;
+	private Map<String, Object> _attributes;
 
 }
