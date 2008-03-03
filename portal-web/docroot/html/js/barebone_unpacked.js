@@ -5897,11 +5897,6 @@ Liferay.Dock = {
 			dockList.hide();
 			dockList.wrap('<div class="lfr-dock-list-container"></div>');
 
-			var dockData = {
-				dock: dock,
-				dockList: dockList
-			};
-
 			dock.css(
 				{
 					cursor: 'pointer',
@@ -5911,8 +5906,6 @@ Liferay.Dock = {
 			);
 
 			var dockOver = function(event) {
-				event.data = dockData;
-
 				jQuery(document).one(
 					'click',
 					function(internalEvent) {
@@ -5920,18 +5913,16 @@ Liferay.Dock = {
 						var dockParent = currentEl.parents('.lfr-dock');
 
 						if ((dockParent.length == 0) && !currentEl.is('.lfr-dock')) {
-							instance._toggle(event, 'hide');
+							instance._toggle('hide');
 						}
 					}
 				);
 
-				instance._toggle(event, 'show');
+				instance._toggle('show');
 			};
 
 			var dockOut = function(event) {
-				event.data = dockData;
-
-				instance._toggle(event, 'hide');
+				instance._toggle('hide');
 			};
 
 			dock.hoverIntent(
@@ -5974,11 +5965,11 @@ Liferay.Dock = {
 		}
 	},
 
-	_toggle: function(event, state) {
-		var params = event.data;
+	_toggle: function(state) {
+		var instance = this;
 
-		var dock = params.dock;
-		var dockList = params.dockList;
+		var dock = instance._dock;
+		var dockList = instance._dockList;
 
 		if (state == 'hide') {
 			dockList.hide();
