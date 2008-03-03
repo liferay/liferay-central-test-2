@@ -22,13 +22,13 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.util.PropsUtil;
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.Map;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SharedSessionUtil.java.html"><b><i>View Source</i></b></a>
@@ -39,47 +39,21 @@ import java.util.Map;
  */
 public class SharedSessionUtil {
 
-	public static final String[] SHARED_SESSION_ATTRIBUTES =
-		PropsUtil.getArray(PropsUtil.SESSION_SHARED_ATTRIBUTES);
-
 	public static Map<String, Object> getSharedSessionAttributes(
-		final HttpServletRequest req) {
+		HttpServletRequest req) {
 
-		//final Map<String, Object> map = new ConcurrentHashMap<String, Object>();
+		HttpSession ses = req.getSession();
 
-		final HttpSession ses = req.getSession();
-        final SharedSessionAttributeCache cache =
-                SharedSessionAttributeCache.getInstance(ses);
-        final Map<String, Object> values = cache.getValues();
-        if (_log.isDebugEnabled()) {
-            _log.debug("Shared Values: " + values);
-        }
-        return values;
+		SharedSessionAttributeCache cache =
+			SharedSessionAttributeCache.getInstance(ses);
 
-/*
-        Enumeration<String> enu = ses.getAttributeNames();
+		Map<String, Object> values = cache.getValues();
 
-		while (enu.hasMoreElements()) {
-			String attrName = enu.nextElement();
-
-			Object attrValue = ses.getAttribute(attrName);
-
-			if (attrValue != null) {
-				for (int i = 0; i < SHARED_SESSION_ATTRIBUTES.length; i++) {
-					if (attrName.startsWith(SHARED_SESSION_ATTRIBUTES[i])) {
-						map.put(attrName, attrValue);
-
-						if (_log.isDebugEnabled()) {
-							_log.debug("Sharing " + attrName);
-						}
-
-						break;
-					}
-				}
-			}
+		if (_log.isDebugEnabled()) {
+			_log.debug("Shared session attributes " + values);
 		}
-		return map;
-*/
+
+		return values;
 	}
 
 	private static Log _log = LogFactory.getLog(SharedSessionUtil.class);

@@ -693,6 +693,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_TRACKER_PERSISTENCE_ENABLED));
 
+	public static final String[] SHARED_SESSION_ATTRIBUTES =
+        PropsUtil.getArray(PropsUtil.SESSION_SHARED_ATTRIBUTES);
+
 	public static final String STRUTS_PORTLET_REQUEST_PROCESSOR = PropsUtil.get(
 		PropsUtil.STRUTS_PORTLET_REQUEST_PROCESSOR);
 

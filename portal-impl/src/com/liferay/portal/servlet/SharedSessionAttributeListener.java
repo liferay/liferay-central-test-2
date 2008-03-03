@@ -1,60 +1,82 @@
-/*
- * Copyright (c) 2008, Your Corporation. All Rights Reserved.
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
  */
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 
+import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
-import javax.servlet.http.HttpSession;
 
 /**
- * <a href="SharedSessionAttributeListener.java.html"><b><i>View
- * Source</i></b></a>
+ * <a href="SharedSessionAttributeListener.java.html"><b><i>View Source</i></b>
+ * </a>
  *
- * Listener used help manage shared session attributes into a cache.  This
+ * Listener used to help manage shared session attributes into a cache. This
  * cache is more thread safe than the HttpSession and leads to fewer problems
  * with shared session attributes being modified out of sequence.
  *
  * @author Michael C. Han
- * @version $Revision$
+ *
  */
 public class SharedSessionAttributeListener
-        implements HttpSessionAttributeListener {
+	implements HttpSessionAttributeListener {
 
-    public static final String[] SHARED_SESSION_ATTRIBUTES =
-        PropsUtil.getArray(PropsUtil.SESSION_SHARED_ATTRIBUTES);
+	public void attributeAdded(HttpSessionBindingEvent event) {
+		HttpSession ses = event.getSession();
 
-    public void attributeAdded(final HttpSessionBindingEvent event) {
-        final HttpSession session = event.getSession();
-        final SharedSessionAttributeCache cache =
-                SharedSessionAttributeCache.getInstance(session);
-        final String attrName = event.getName();
-        for (int i = 0; i < _LENGTH; i++) {
-            if (attrName.startsWith(SHARED_SESSION_ATTRIBUTES[i])) {
-                cache.setSessionAttribute(event.getName(), event.getValue());
-                return;
-            }
-        }
-    }
+		SharedSessionAttributeCache cache =
+			SharedSessionAttributeCache.getInstance(ses);
 
-    public void attributeRemoved(final HttpSessionBindingEvent event) {
-        final HttpSession session = event.getSession();
-        final SharedSessionAttributeCache cache =
-                SharedSessionAttributeCache.getInstance(session);
-        cache.removeSessionAttribute(event.getName());
-    }
+		String name = event.getName();
 
-    public void attributeReplaced(final HttpSessionBindingEvent event) {
-        final HttpSession session = event.getSession();
-        final SharedSessionAttributeCache cache =
-                SharedSessionAttributeCache.getInstance(session);
-        if (cache.contains(event.getName())) {
-            cache.setSessionAttribute(event.getName(), event.getValue());
-        }
-    }
+		for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
+			if (name.startsWith(sharedName)) {
+				cache.setAttribute(name, event.getValue());
 
-    private static final int _LENGTH = SHARED_SESSION_ATTRIBUTES.length;
+				return;
+			}
+		}
+	}
+
+	public void attributeRemoved(HttpSessionBindingEvent event) {
+		HttpSession ses = event.getSession();
+
+		SharedSessionAttributeCache cache =
+			SharedSessionAttributeCache.getInstance(ses);
+
+		cache.removeAttribute(event.getName());
+	}
+
+	public void attributeReplaced(HttpSessionBindingEvent event) {
+		HttpSession ses = event.getSession();
+
+		SharedSessionAttributeCache cache =
+			SharedSessionAttributeCache.getInstance(ses);
+
+		if (cache.contains(event.getName())) {
+			cache.setAttribute(event.getName(), event.getValue());
+		}
+	}
+
 }
