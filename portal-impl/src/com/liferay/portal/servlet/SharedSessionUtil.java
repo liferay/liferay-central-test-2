@@ -23,16 +23,12 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.util.PropsUtil;
-
-import java.util.Enumeration;
-import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import java.util.Map;
 
 /**
  * <a href="SharedSessionUtil.java.html"><b><i>View Source</i></b></a>
@@ -47,13 +43,21 @@ public class SharedSessionUtil {
 		PropsUtil.getArray(PropsUtil.SESSION_SHARED_ATTRIBUTES);
 
 	public static Map<String, Object> getSharedSessionAttributes(
-		HttpServletRequest req) {
+		final HttpServletRequest req) {
 
-		Map<String, Object> map = new ConcurrentHashMap<String, Object>();
+		//final Map<String, Object> map = new ConcurrentHashMap<String, Object>();
 
-		HttpSession ses = req.getSession();
+		final HttpSession ses = req.getSession();
+        final SharedSessionAttributeCache cache =
+                SharedSessionAttributeCache.getInstance(ses);
+        final Map<String, Object> values = cache.getValues();
+        if (_log.isDebugEnabled()) {
+            _log.debug("Shared Values: " + values);
+        }
+        return values;
 
-		Enumeration<String> enu = ses.getAttributeNames();
+/*
+        Enumeration<String> enu = ses.getAttributeNames();
 
 		while (enu.hasMoreElements()) {
 			String attrName = enu.nextElement();
@@ -74,8 +78,8 @@ public class SharedSessionUtil {
 				}
 			}
 		}
-
 		return map;
+*/
 	}
 
 	private static Log _log = LogFactory.getLog(SharedSessionUtil.class);
