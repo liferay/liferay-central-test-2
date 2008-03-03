@@ -27,56 +27,92 @@ import com.liferay.portal.util.PropsValues;
 import javax.servlet.http.HttpSession;
 import javax.servlet.http.HttpSessionAttributeListener;
 import javax.servlet.http.HttpSessionBindingEvent;
+import javax.servlet.http.HttpSessionListener;
+import javax.servlet.http.HttpSessionEvent;
+import java.util.Hashtable;
+import java.util.Map;
 
 /**
  * <a href="SharedSessionAttributeListener.java.html"><b><i>View Source</i></b>
  * </a>
- *
+ * <p/>
  * Listener used to help manage shared session attributes into a cache. This
  * cache is more thread safe than the HttpSession and leads to fewer problems
  * with shared session attributes being modified out of sequence.
  *
  * @author Michael C. Han
- *
  */
 public class SharedSessionAttributeListener
-	implements HttpSessionAttributeListener {
+        implements HttpSessionAttributeListener, HttpSessionListener {
 
-	public void attributeAdded(HttpSessionBindingEvent event) {
-		HttpSession ses = event.getSession();
+    public void attributeAdded(final HttpSessionBindingEvent event) {
+        final HttpSession ses = event.getSession();
 
-		SharedSessionAttributeCache cache =
-			SharedSessionAttributeCache.getInstance(ses);
+        //determine if session has been expired...
+        if (!_sessionIds.containsKey(ses.getId())) {
+            return;
+        }
 
-		String name = event.getName();
+        final SharedSessionAttributeCache cache =
+                SharedSessionAttributeCache.getInstance(ses);
 
-		for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
-			if (name.startsWith(sharedName)) {
-				cache.setAttribute(name, event.getValue());
+        final String name = event.getName();
 
-				return;
-			}
-		}
-	}
+        for (String sharedName : PropsValues.SHARED_SESSION_ATTRIBUTES) {
+            if (name.startsWith(sharedName)) {
+                cache.setAttribute(name, event.getValue());
 
-	public void attributeRemoved(HttpSessionBindingEvent event) {
-		HttpSession ses = event.getSession();
+                return;
+            }
+        }
+    }
 
-		SharedSessionAttributeCache cache =
-			SharedSessionAttributeCache.getInstance(ses);
+    public void attributeRemoved(final HttpSessionBindingEvent event) {
 
-		cache.removeAttribute(event.getName());
-	}
+        final HttpSession ses = event.getSession();
 
-	public void attributeReplaced(HttpSessionBindingEvent event) {
-		HttpSession ses = event.getSession();
+        //determine if session has been expired...
+        if (!_sessionIds.containsKey(ses.getId())) {
+            return;
+        }
 
-		SharedSessionAttributeCache cache =
-			SharedSessionAttributeCache.getInstance(ses);
+        final SharedSessionAttributeCache cache =
+                SharedSessionAttributeCache.getInstance(ses);
 
-		if (cache.contains(event.getName())) {
-			cache.setAttribute(event.getName(), event.getValue());
-		}
-	}
+        cache.removeAttribute(event.getName());
+    }
 
+    public void attributeReplaced(final HttpSessionBindingEvent event) {
+        final HttpSession ses = event.getSession();
+
+        //determine if session has been expired...
+        if (!_sessionIds.containsKey(ses.getId())) {
+            return;
+        }
+        
+        final SharedSessionAttributeCache cache =
+                SharedSessionAttributeCache.getInstance(ses);
+
+        if (cache.contains(event.getName())) {
+            cache.setAttribute(event.getName(), event.getValue());
+        }
+    }
+
+    public void sessionCreated(final HttpSessionEvent event) {
+        final HttpSession ses = event.getSession();
+
+        SharedSessionAttributeCache.getInstance(ses);
+
+        _sessionIds.put(ses.getId(), ses.getId());
+
+    }
+
+    public void sessionDestroyed(final HttpSessionEvent event) {
+        final HttpSession ses = event.getSession();
+
+        _sessionIds.remove(ses.getId());
+    }
+
+    private final Map<String, String> _sessionIds =
+            new Hashtable<String, String>();
 }

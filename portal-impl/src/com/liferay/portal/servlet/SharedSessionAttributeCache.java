@@ -37,7 +37,7 @@ import javax.servlet.http.HttpSession;
  */
 public class SharedSessionAttributeCache implements Serializable {
 
-	public static SharedSessionAttributeCache getInstance(HttpSession ses) {
+	public static SharedSessionAttributeCache getInstance(final HttpSession ses) {
 		synchronized (ses) {
 			SharedSessionAttributeCache cache =
 				(SharedSessionAttributeCache)ses.getAttribute(_SESSION_KEY);
@@ -52,14 +52,14 @@ public class SharedSessionAttributeCache implements Serializable {
 		}
 	}
 
-	public boolean contains(String name) {
+	public boolean contains(final String name) {
 		return _attributes.containsKey(name);
 	}
 
 	public Map<String, Object> getValues() {
-		Map<String, Object> values = new HashMap<String, Object>();
+		final Map<String, Object> values = new HashMap<String, Object>();
 
-		Set<Map.Entry<String, Object>> entries = _attributes.entrySet();
+		final Set<Map.Entry<String, Object>> entries = _attributes.entrySet();
 
 		for (Map.Entry<String, Object> entry : entries) {
 			values.put(entry.getKey(), entry.getValue());
@@ -68,11 +68,11 @@ public class SharedSessionAttributeCache implements Serializable {
 		return values;
 	}
 
-	public void removeAttribute(String key) {
+	public void removeAttribute(final String key) {
 		_attributes.remove(key);
 	}
 
-	public void setAttribute(String key, Object value) {
+	public void setAttribute(final String key, final Object value) {
 		_attributes.put(key, value);
 	}
 
@@ -83,6 +83,6 @@ public class SharedSessionAttributeCache implements Serializable {
 	private static final String _SESSION_KEY =
 		SharedSessionAttributeCache.class.getName();
 
-	private transient Map<String, Object> _attributes;
+	private final transient Map<String, Object> _attributes;
 
 }
