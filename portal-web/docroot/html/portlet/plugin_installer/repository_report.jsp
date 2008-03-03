@@ -37,7 +37,7 @@
 	while (itr.hasNext()) {
 		String repositoryURL = (String)itr.next();
 
-		Object status = repositoryReport.getState(repositoryURL);
+		String status = repositoryReport.getState(repositoryURL);
 	%>
 
 		<tr>
@@ -46,7 +46,7 @@
 			</td>
 			<td>
 				<c:choose>
-					<c:when test="<%= status == RepositoryReport.SUCCESS %>">
+					<c:when test="<%= status.equals(RepositoryReport.SUCCESS) %>">
 						<span class="portlet-msg-success">
 						<liferay-ui:message key="ok" />
 						</span>

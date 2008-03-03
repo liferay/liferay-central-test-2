@@ -32,7 +32,6 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -70,65 +69,60 @@ public class LocalPluginPackageRepository {
 	}
 
 	public PluginPackage getInstallingPluginPackage(String context) {
-		return (PluginPackage)_pendingPackages.get(context);
+		return _pendingPackages.get(context);
 	}
 
 	public PluginPackage getLatestPluginPackage(
 		String groupId, String artifactId) {
 
-		PluginPackage result = null;
+		PluginPackage latestPluginPackage = null;
 
-		Iterator itr = _pluginPackages.values().iterator();
+		for (PluginPackage pluginPackage : _pluginPackages.values()) {
+			if ((pluginPackage.getGroupId().equals(groupId)) &&
+				(pluginPackage.getArtifactId().equals(artifactId)) &&
+				((latestPluginPackage == null) ||
+					pluginPackage.isLaterVersionThan(latestPluginPackage))) {
 
-		while (itr.hasNext()) {
-			PluginPackage pluginPackage = (PluginPackage)itr.next();
-
-			if (pluginPackage.getGroupId().equals(groupId) &&
-				pluginPackage.getArtifactId().equals(artifactId) &&
-				((result == null) ||
-					pluginPackage.isLaterVersionThan(result))) {
-
-				result = pluginPackage;
+				latestPluginPackage = pluginPackage;
 			}
 		}
 
-		return result;
+		return latestPluginPackage;
 	}
 
 	public PluginPackage getPluginPackage(String context) {
-		return (PluginPackage)_pluginPackages.get(context);
+		return _pluginPackages.get(context);
 	}
 
-	public List getPluginPackages() {
-		return new ArrayList(_pluginPackages.values());
+	public List<PluginPackage> getPluginPackages() {
+		return new ArrayList<PluginPackage>(_pluginPackages.values());
 	}
 
-	public List getPluginPackages(String groupId, String artifactId) {
-		List result = new ArrayList();
+	public List<PluginPackage> getPluginPackages(
+		String groupId, String artifactId) {
 
-		Iterator itr = _pluginPackages.values().iterator();
+		List<PluginPackage> pluginPackages = new ArrayList<PluginPackage>();
 
-		while (itr.hasNext()) {
-			PluginPackage pluginPackage = (PluginPackage)itr.next();
-
+		for (PluginPackage pluginPackage : _pluginPackages.values()) {
 			if (pluginPackage.getGroupId().equals(groupId) &&
 				pluginPackage.getArtifactId().equals(artifactId)) {
 
-				result.add(pluginPackage);
+				pluginPackages.add(pluginPackage);
 			}
 		}
 
-		return result;
+		return pluginPackages;
 	}
 
-	public List getSortedPluginPackages() {
-		List list = new ArrayList();
+	public List<PluginPackage> getSortedPluginPackages() {
+		List<PluginPackage> pluginPackages = new ArrayList<PluginPackage>();
 
-		list.addAll(_pluginPackages.values());
+		pluginPackages.addAll(_pluginPackages.values());
 
-		Collections.sort(list, new PluginPackageNameAndContextComparator());
+		Collections.sort(
+			pluginPackages, new PluginPackageNameAndContextComparator());
 
-		return list;
+		return pluginPackages;
 	}
 
 	public void removePluginPackage(PluginPackage pluginPackage) {
@@ -149,8 +143,8 @@ public class LocalPluginPackageRepository {
 
 	public void registerPluginPackageInstallation(PluginPackage pluginPackage) {
 		if (pluginPackage.getContext() != null) {
-			PluginPackage previousPluginPackage =
-				(PluginPackage)_pluginPackages.get(pluginPackage.getContext());
+			PluginPackage previousPluginPackage = _pluginPackages.get(
+				pluginPackage.getContext());
 
 			if (previousPluginPackage == null) {
 				addPluginPackage(pluginPackage);
@@ -192,7 +186,9 @@ public class LocalPluginPackageRepository {
 	private static Log _log =
 		LogFactory.getLog(LocalPluginPackageRepository.class);
 
-	private Map _pluginPackages = new HashMap();
-	private Map _pendingPackages = new HashMap();
+	private Map<String, PluginPackage> _pluginPackages =
+		new HashMap<String, PluginPackage>();
+	private Map<String, PluginPackage> _pendingPackages =
+		new HashMap<String, PluginPackage>();
 
 }

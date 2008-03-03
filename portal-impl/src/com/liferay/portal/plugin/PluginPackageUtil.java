@@ -107,17 +107,17 @@ public class PluginPackageUtil {
 		_instance._endPluginPackageInstallation(preliminaryContext);
 	}
 
-	public static List getAllAvailablePluginPackages()
+	public static List<PluginPackage> getAllAvailablePluginPackages()
 		throws PluginPackageException {
 
 		return _instance._getAllAvailablePluginPackages();
 	}
 
-	public static Collection getAvailableTags() {
+	public static Collection<String> getAvailableTags() {
 		return _instance._getAvailableTags();
 	}
 
-	public static List getInstalledPluginPackages() {
+	public static List<PluginPackage> getInstalledPluginPackages() {
 		return _instance._getInstalledPluginPackages();
 	}
 
@@ -166,7 +166,7 @@ public class PluginPackageUtil {
 		return _instance._getSupportedTypes();
 	}
 
-	public static boolean isCurrentVersionSupported(List versions) {
+	public static boolean isCurrentVersionSupported(List<String> versions) {
 		return _instance._isCurrentVersionSupported(versions);
 	}
 
@@ -256,8 +256,8 @@ public class PluginPackageUtil {
 
 	private PluginPackageUtil() {
 		_installedPluginPackages = new LocalPluginPackageRepository();
-		_repositoryCache = new HashMap();
-		_availableTagsCache = new TreeSet();
+		_repositoryCache = new HashMap<String, RemotePluginPackageRepository>();
+		_availableTagsCache = new TreeSet<String>();
 	}
 
 	private void _checkRepositories(String repositoryURL)
@@ -282,28 +282,26 @@ public class PluginPackageUtil {
 			preliminaryContext);
 	}
 
-	private PluginPackage _findLatestVersion(List pluginPackages) {
-		PluginPackage pluginPackage = null;
+	private PluginPackage _findLatestVersion(
+		List<PluginPackage> pluginPackages) {
 
-		Iterator itr = pluginPackages.iterator();
+		PluginPackage latestPluginPackage = null;
 
-		while (itr.hasNext()) {
-			PluginPackage curPluginPackage = (PluginPackage)itr.next();
+		for (PluginPackage pluginPackage : pluginPackages) {
+			if ((latestPluginPackage == null) ||
+				(pluginPackage.isLaterVersionThan(latestPluginPackage))) {
 
-			if ((pluginPackage == null) ||
-				(curPluginPackage.isLaterVersionThan(pluginPackage))) {
-
-				pluginPackage = curPluginPackage;
+				latestPluginPackage = pluginPackage;
 			}
 		}
 
-		return pluginPackage;
+		return latestPluginPackage;
 	}
 
-	private List _getAllAvailablePluginPackages()
+	private List<PluginPackage> _getAllAvailablePluginPackages()
 		throws PluginPackageException {
 
-		List plugins = new ArrayList();
+		List<PluginPackage> pluginPackages = new ArrayList<PluginPackage>();
 
 		String[] repositoryURLs = _getRepositoryURLs();
 
@@ -312,7 +310,7 @@ public class PluginPackageUtil {
 				RemotePluginPackageRepository repository =
 					_getRepository(repositoryURLs[i]);
 
-				plugins.addAll(repository.getPluginPackages());
+				pluginPackages.addAll(repository.getPluginPackages());
 			}
 			catch(PluginPackageException ppe) {
 				String message = ppe.getMessage();
@@ -328,13 +326,14 @@ public class PluginPackageUtil {
 			}
 		}
 
-		return plugins;
+		return pluginPackages;
 	}
 
-	private List _getAvailablePluginPackages(String groupId, String artifactId)
+	private List<PluginPackage> _getAvailablePluginPackages(
+			String groupId, String artifactId)
 		throws PluginPackageException {
 
-		List pluginPackages = new ArrayList();
+		List<PluginPackage> pluginPackages = new ArrayList<PluginPackage>();
 
 		String[] repositoryURLs = _getRepositoryURLs();
 
@@ -342,7 +341,7 @@ public class PluginPackageUtil {
 			RemotePluginPackageRepository repository =
 				_getRepository(repositoryURLs[i]);
 
-			List curPluginPackages =
+			List<PluginPackage> curPluginPackages =
 				repository.findPluginsByGroupIdAndArtifactId(
 					groupId, artifactId);
 
@@ -354,11 +353,11 @@ public class PluginPackageUtil {
 		return pluginPackages;
 	}
 
-	private Collection _getAvailableTags() {
+	private Collection<String> _getAvailableTags() {
 		return _availableTagsCache;
 	}
 
-	private List _getInstalledPluginPackages() {
+	private List<PluginPackage> _getInstalledPluginPackages() {
 		return _installedPluginPackages.getSortedPluginPackages();
 	}
 
@@ -366,7 +365,8 @@ public class PluginPackageUtil {
 			String groupId, String artifactId)
 		throws SystemException {
 
-		List pluginPackages = _getAvailablePluginPackages(groupId, artifactId);
+		List<PluginPackage> pluginPackages = _getAvailablePluginPackages(
+			groupId, artifactId);
 
 		return _findLatestVersion(pluginPackages);
 	}
@@ -418,8 +418,8 @@ public class PluginPackageUtil {
 			String repositoryURL)
 		throws PluginPackageException {
 
-		RemotePluginPackageRepository repository =
-			(RemotePluginPackageRepository)_repositoryCache.get(repositoryURL);
+		RemotePluginPackageRepository repository = _repositoryCache.get(
+			repositoryURL);
 
 		if (repository != null) {
 			return repository;
@@ -505,12 +505,11 @@ public class PluginPackageUtil {
 		}
 	}
 
-	private boolean _isCurrentVersionSupported(List versions) {
+	private boolean _isCurrentVersionSupported(List<String> versions) {
 		Version currentVersion = Version.getInstance(ReleaseInfo.getVersion());
 
-		for (int i = 0; i < versions.size(); i++) {
-			Version supportedVersion = Version.getInstance(
-				(String)versions.get(i));
+		for (String version : versions) {
+			Version supportedVersion = Version.getInstance(version);
 
 			if (supportedVersion.includes(currentVersion)) {
 				return true;
@@ -718,7 +717,7 @@ public class PluginPackageUtil {
 			String xml, String repositoryURL)
 		throws DocumentException, IOException {
 
-		List supportedPluginTypes = Arrays.asList(getSupportedTypes());
+		List<String> supportedPluginTypes = Arrays.asList(getSupportedTypes());
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
@@ -741,10 +740,10 @@ public class PluginPackageUtil {
 
 		pluginPackageRepository.setSettings(settings);
 
-		Iterator itr1 = root.elements("plugin-package").iterator();
+		Iterator<Element> itr1 = root.elements("plugin-package").iterator();
 
 		while (itr1.hasNext()) {
-			Element pluginPackageEl = (Element)itr1.next();
+			Element pluginPackageEl = itr1.next();
 
 			PluginPackage pluginPackage = _readPluginPackageXml(
 				pluginPackageEl);
@@ -755,12 +754,12 @@ public class PluginPackageUtil {
 				continue;
 			}
 
-			Iterator itr2 = pluginPackage.getTypes().iterator();
+			Iterator<String> itr2 = pluginPackage.getTypes().iterator();
 
 			boolean containsSupportedTypes = false;
 
 			while (itr2.hasNext()) {
-				String type = (String)itr2.next();
+				String type = itr2.next();
 
 				if (supportedPluginTypes.contains(type)) {
 					containsSupportedTypes = true;
@@ -805,47 +804,47 @@ public class PluginPackageUtil {
 		return GetterUtil.getString(text);
 	}
 
-	private List _readLicenseList(Element parent, String childTagName) {
-		List result = new ArrayList();
+	private List<License> _readLicenseList(Element parentEL, String name) {
+		List<License> licenses = new ArrayList<License>();
 
-		Iterator itr = parent.elements(childTagName).iterator();
+		Iterator<Element> itr = parentEL.elements(name).iterator();
 
 		while (itr.hasNext()) {
-			Element tagEl = (Element)itr.next();
+			Element licenseEl = itr.next();
 
 			License license = new License();
 
-			license.setName(tagEl.getText());
+			license.setName(licenseEl.getText());
 
-			Attribute osiApproved = tagEl.attribute("osi-approved");
+			Attribute osiApproved = licenseEl.attribute("osi-approved");
 
 			if (osiApproved != null) {
 				license.setOsiApproved(
 					GetterUtil.getBoolean(osiApproved.getText()));
 			}
 
-			Attribute url = tagEl.attribute("url");
+			Attribute url = licenseEl.attribute("url");
 
 			if (url != null) {
 				license.setUrl(url.getText());
 			}
 
-			result.add(license);
+			licenses.add(license);
 		}
 
-		return result;
+		return licenses;
 	}
 
-	private List _readList(Element parent, String childTagName) {
-		List result = new ArrayList();
+	private List<String> _readList(Element parentEl, String name) {
+		List<String> result = new ArrayList<String>();
 
-		if (parent != null) {
-			Iterator itr = parent.elements(childTagName).iterator();
+		if (parentEl != null) {
+			Iterator<Element> itr = parentEl.elements(name).iterator();
 
 			while (itr.hasNext()) {
-				Element element = (Element)itr.next();
+				Element el = itr.next();
 
-				String text = element.getText().trim().toLowerCase();
+				String text = el.getText().trim().toLowerCase();
 
 				result.add(text);
 			}
@@ -889,11 +888,11 @@ public class PluginPackageUtil {
 
 		String author = GetterUtil.getString(props.getProperty("author"));
 
-		List types = new ArrayList();
+		List<String> types = new ArrayList<String>();
 
 		types.add(pluginType);
 
-		List licenses = new ArrayList();
+		List<License> licenses = new ArrayList<License>();
 
 		String[] licensesArray = StringUtil.split(
 			props.getProperty("licenses"));
@@ -907,25 +906,25 @@ public class PluginPackageUtil {
 			licenses.add(license);
 		}
 
-		List liferayVersions = new ArrayList();
+		List<String> liferayVersions = new ArrayList<String>();
 
 		String[] liferayVersionsArray = StringUtil.split(
 			props.getProperty("liferay-versions"));
 
-		for (int i = 0; i < liferayVersionsArray.length; i++) {
-			liferayVersions.add(liferayVersionsArray[i].trim());
+		for (String liferayVersion : liferayVersionsArray) {
+			liferayVersions.add(liferayVersion.trim());
 		}
 
 		if (liferayVersions.size() == 0) {
 			liferayVersions.add(ReleaseInfo.getVersion() + "+");
 		}
 
-		List tags = new ArrayList();
+		List<String> tags = new ArrayList<String>();
 
 		String[] tagsArray = StringUtil.split(props.getProperty("tags"));
 
-		for (int i = 0; i < tagsArray.length; i++) {
-			tags.add(tagsArray[i].trim());
+		for (String tag : tagsArray) {
+			tags.add(tag.trim());
 		}
 
 		String shortDescription = GetterUtil.getString(
@@ -979,10 +978,11 @@ public class PluginPackageUtil {
 		PluginPackage pluginPackage = new PluginPackageImpl(
 			GetterUtil.getString(pluginPackageEl.elementText("module-id")));
 
-		List liferayVersions = _readList(
+		List<String> liferayVersions = _readList(
 			pluginPackageEl.element("liferay-versions"), "liferay-version");
 
-		List types = _readList(pluginPackageEl.element("types"), "type");
+		List<String> types = _readList(
+			pluginPackageEl.element("types"), "type");
 
 		pluginPackage.setName(_readText(name));
 		pluginPackage.setRecommendedDeploymentContext(
@@ -1018,34 +1018,32 @@ public class PluginPackageUtil {
 		return pluginPackage;
 	}
 
-	private Properties _readProperties(Element parent, String childTagName) {
+	private Properties _readProperties(Element parentEl, String name) {
 		Properties result = new Properties();
 
-		if (parent != null) {
-			Iterator itr = parent.elements(childTagName).iterator();
+		if (parentEl != null) {
+			Iterator<Element> itr = parentEl.elements(name).iterator();
 
 			while (itr.hasNext()) {
-				Element tagEl = (Element)itr.next();
+				Element el = itr.next();
 
 				result.setProperty(
-					tagEl.attribute("name").getValue(),
-					tagEl.attribute("value").getValue());
+					el.attribute("name").getValue(),
+					el.attribute("value").getValue());
 			}
 		}
 
 		return result;
 	}
 
-	private List _readScreenshots(Element parent) {
-		List result = new ArrayList();
+	private List<Screenshot> _readScreenshots(Element parentEl) {
+		List<Screenshot> screenshots = new ArrayList<Screenshot>();
 
-		if (parent != null) {
-			List screenshots = parent.elements("screenshot");
-
-			Iterator itr = screenshots.iterator();
+		if (parentEl != null) {
+			Iterator<Element> itr = parentEl.elements("screenshot").iterator();
 
 			while (itr.hasNext()) {
-				Element screenshotEl = (Element)itr.next();
+				Element screenshotEl = itr.next();
 
 				Screenshot screenshot = new Screenshot();
 
@@ -1054,11 +1052,11 @@ public class PluginPackageUtil {
 				screenshot.setLargeImageURL(
 					screenshotEl.element("large-image-url").getText());
 
-				result.add(screenshot);
+				screenshots.add(screenshot);
 			}
 		}
 
-		return result;
+		return screenshots;
 	}
 
 	private String _readText(String text) {
@@ -1081,10 +1079,8 @@ public class PluginPackageUtil {
 
 			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
 
-			Iterator itr = _getAllAvailablePluginPackages().iterator();
-
-			while (itr.hasNext()) {
-				PluginPackage pluginPackage = (PluginPackage)itr.next();
+			for (PluginPackage pluginPackage :
+					_getAllAvailablePluginPackages()) {
 
 				String[] statusAndInstalledVersion =
 					_getStatusAndInstalledVersion(pluginPackage);
@@ -1133,7 +1129,7 @@ public class PluginPackageUtil {
 			_log.info("Reloading repositories");
 		}
 
-		RepositoryReport report = new RepositoryReport();
+		RepositoryReport repositoryReport = new RepositoryReport();
 
 		String[] repositoryURLs = _getRepositoryURLs();
 
@@ -1143,10 +1139,10 @@ public class PluginPackageUtil {
 			try {
 				_loadRepository(repositoryURL);
 
-				report.addSuccess(repositoryURL);
+				repositoryReport.addSuccess(repositoryURL);
 			}
 			catch(PluginPackageException pe) {
-				report.addError(repositoryURL, pe);
+				repositoryReport.addError(repositoryURL, pe);
 
 				_log.error(
 					"Unable to load repository " + repositoryURL + " " +
@@ -1157,7 +1153,7 @@ public class PluginPackageUtil {
 
 		_reIndex();
 
-		return report;
+		return repositoryReport;
 	}
 
 	private void _registerInstalledPluginPackage(
@@ -1280,14 +1276,10 @@ public class PluginPackageUtil {
 		_installedPluginPackages.removePluginPackage(pluginPackage);
 
 		try {
-			List pluginPackages = _getAvailablePluginPackages(
+			List<PluginPackage> pluginPackages = _getAvailablePluginPackages(
 				pluginPackage.getGroupId(), pluginPackage.getArtifactId());
 
-			Iterator itr = pluginPackages.iterator();
-
-			while (itr.hasNext()) {
-				PluginPackage availablePackage = (PluginPackage)itr.next();
-
+			for (PluginPackage availablePackage : pluginPackages) {
 				_indexPluginPackage(availablePackage);
 			}
 		}
@@ -1295,8 +1287,7 @@ public class PluginPackageUtil {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Unable to reindex unistalled package " +
-						pluginPackage.getContext(),
-					ppe);
+						pluginPackage.getContext() + ": " + ppe.getMessage());
 			}
 		}
 	}
@@ -1315,8 +1306,8 @@ public class PluginPackageUtil {
 	private static PluginPackageUtil _instance = new PluginPackageUtil();
 
 	private LocalPluginPackageRepository _installedPluginPackages;
-	private Map _repositoryCache;
-	private Set _availableTagsCache;
+	private Map<String, RemotePluginPackageRepository> _repositoryCache;
+	private Set<String> _availableTagsCache;
 	private Date _lastUpdateDate;
 	private Boolean _updateAvailable;
 	private boolean _settingUpdateAvailable;
@@ -1345,11 +1336,8 @@ public class PluginPackageUtil {
 				stopWatch.start();
 			}
 
-			Iterator itr =
-				_installedPluginPackages.getPluginPackages().iterator();
-
-			while (itr.hasNext()) {
-				PluginPackage pluginPackage = (PluginPackage)itr.next();
+			for (PluginPackage pluginPackage :
+					_installedPluginPackages.getPluginPackages()) {
 
 				PluginPackage availablePluginPackage = null;
 

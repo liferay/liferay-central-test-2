@@ -64,21 +64,21 @@ public class RepositoryReport {
 		_reportMap.put(repositoryURL, sm.toString());
 	}
 
-	public Set getRepositoryURLs() {
+	public Set<String> getRepositoryURLs() {
 		return _reportMap.keySet();
 	}
 
-	public Object getState(String repositoryURL) {
+	public String getState(String repositoryURL) {
 		return _reportMap.get(repositoryURL);
 	}
 
 	public String toString() {
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = getRepositoryURLs().iterator();
+		Iterator<String> itr = getRepositoryURLs().iterator();
 
 		while (itr.hasNext()) {
-			String repositoryURL = (String)itr.next();
+			String repositoryURL = itr.next();
 
 			sm.append(repositoryURL);
 			sm.append(": ");
@@ -88,6 +88,6 @@ public class RepositoryReport {
 		return sm.toString();
 	}
 
-	private Map _reportMap = new TreeMap();
+	private Map<String, String> _reportMap = new TreeMap<String, String>();
 
 }

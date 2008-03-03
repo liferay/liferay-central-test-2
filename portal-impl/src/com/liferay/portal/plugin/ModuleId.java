@@ -23,11 +23,11 @@
 package com.liferay.portal.plugin;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.Version;
 
 import java.util.Map;
 import java.util.StringTokenizer;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="ModuleId.java.html"><b><i>View Source</i></b></a>
@@ -38,7 +38,7 @@ import java.util.StringTokenizer;
 public class ModuleId {
 
 	public static ModuleId getInstance(String moduleId) {
-		ModuleId moduleIdObj = (ModuleId)_moduleIds.get(moduleId);
+		ModuleId moduleIdObj = _moduleIds.get(moduleId);
 
 		if (moduleIdObj == null) {
 			moduleIdObj =  new ModuleId(moduleId);
@@ -141,7 +141,8 @@ public class ModuleId {
 		_type = st.nextToken();
 	}
 
-	private static Map _moduleIds = CollectionFactory.getSyncHashMap();
+	private static Map<String, ModuleId> _moduleIds =
+		new ConcurrentHashMap<String, ModuleId>();
 
 	private String _artifactId;
 	private String _groupId;
