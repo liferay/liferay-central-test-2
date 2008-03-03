@@ -84,7 +84,6 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
@@ -132,7 +131,7 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Aug�
+ * @author Raymond Aug?
  * @author Jorge Ferrer
  * @author Bruno Farache
  *

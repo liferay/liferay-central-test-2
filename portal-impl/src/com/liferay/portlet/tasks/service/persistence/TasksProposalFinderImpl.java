@@ -29,8 +29,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
-import com.liferay.portlet.journal.model.impl.JournalFeedImpl;
-import com.liferay.portlet.journal.service.persistence.JournalFeedFinder;
 import com.liferay.portlet.tasks.model.impl.TasksProposalImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -45,7 +43,7 @@ import org.hibernate.Session;
 /**
  * <a href="TasksProposalFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class TasksProposalFinderImpl implements TasksProposalFinder {

@@ -238,7 +238,7 @@ else {
 	<c:if test='<%= threadView.equals("combination") && (messages.size() > 1) %>'>
 		<liferay-ui:toggle
 			id="toggle_id_message_boards_view_message_thread"
-			defaultOn="true"
+			defaultOn="<%= true %>"
 		/>
 
 		<table class="toggle_id_message_boards_view_message_thread" id="toggle_id_message_boards_view_message_thread" style="display: <liferay-ui:toggle-value id="toggle_id_message_boards_view_message_thread" />;" width="100%">

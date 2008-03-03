@@ -37,7 +37,7 @@ import org.apache.commons.logging.LogFactory;
 /**
  * <a href="TasksUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class TasksUtil {

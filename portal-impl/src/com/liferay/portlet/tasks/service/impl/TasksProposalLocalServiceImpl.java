@@ -32,13 +32,10 @@ import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.ProposalDueDateException;
 import com.liferay.portlet.tasks.TasksActivityKeys;
 import com.liferay.portlet.tasks.model.TasksProposal;
-import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.base.TasksProposalLocalServiceBaseImpl;
 
 import java.util.Date;
 import java.util.List;
-
-import org.json.JSONObject;
 
 /**
  * <a href="TasksProposalLocalServiceImpl.java.html"><b><i>View Source</i></b></a>

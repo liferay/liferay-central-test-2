@@ -44,7 +44,7 @@ import org.json.JSONObject;
  * <a href="TasksActivityTrackerInterpreter.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  *
  */
 public class TasksActivityTrackerInterpreter implements

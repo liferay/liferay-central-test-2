@@ -89,7 +89,7 @@ public class TasksProposalImpl extends TasksProposalModelImpl
 				break;
 			}
 		}
-		while(currentStage <= numberOfApprovalStages);
+		while (currentStage <= numberOfApprovalStages);
 
 		return currentStage;
 	}
@@ -127,7 +127,7 @@ public class TasksProposalImpl extends TasksProposalModelImpl
 				break;
 			}
 		}
-		while(currentStage <= numberOfApprovalStages);
+		while (currentStage <= numberOfApprovalStages);
 
 		return statusKey;
 	}
