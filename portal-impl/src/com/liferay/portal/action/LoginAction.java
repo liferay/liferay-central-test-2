@@ -302,9 +302,9 @@ public class LoginAction extends Action {
 			CookieKeys.addCookie(res, companyIdCookie);
 			CookieKeys.addCookie(res, idCookie);
 			CookieKeys.addCookie(res, passwordCookie);
+			CookieKeys.addCookie(res, rememberMeCookie);
 			CookieKeys.addCookie(res, loginCookie);
 			CookieKeys.addCookie(res, screenNameCookie);
-			CookieKeys.addCookie(res, rememberMeCookie);
 		}
 		else {
 			throw new AuthException();
