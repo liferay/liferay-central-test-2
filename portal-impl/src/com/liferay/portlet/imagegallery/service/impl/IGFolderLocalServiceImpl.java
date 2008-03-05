@@ -35,7 +35,6 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
-import com.liferay.portlet.imagegallery.NoSuchFolderException;
 import com.liferay.portlet.imagegallery.model.IGFolder;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGFolderImpl;
@@ -447,7 +446,8 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
-		validate(folder.getGroupId(), parentFolderId, name);
+		validate(
+			folder.getGroupId(), folder.getFolderId(), parentFolderId, name);
 
 		folder.setModifiedDate(new Date());
 		folder.setParentFolderId(parentFolderId);
@@ -549,18 +549,26 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	protected void validate(long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
+		long folderId = 0;
+
+		validate(groupId, folderId, parentFolderId, name);
+	}
+
+	protected void validate(
+			long groupId, long folderId, long parentFolderId, String name)
+		throws PortalException, SystemException {
+
 		if ((Validator.isNull(name)) || (name.indexOf("\\\\") != -1) ||
 			(name.indexOf("//") != -1)) {
 
 			throw new FolderNameException();
 		}
 
-		try {
-			igFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
+		IGFolder folder = igFolderPersistence.fetchByG_P_N(
+			groupId, parentFolderId, name);
 
+		if (folder != null && folder.getFolderId() != folderId) {
 			throw new DuplicateFolderNameException();
-		}
-		catch (NoSuchFolderException nsfe) {
 		}
 
 		if (name.indexOf(StringPool.PERIOD) != -1) {
