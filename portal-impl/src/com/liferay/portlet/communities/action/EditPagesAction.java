@@ -492,7 +492,7 @@ public class EditPagesAction extends PortletAction {
 		String prefix = "TypeSettingsProperties(";
 
 		for (String paramName: req.getParameterMap().keySet()) {
-			
+
 			if (paramName.startsWith(prefix)) {
 
 				String key = paramName.substring(

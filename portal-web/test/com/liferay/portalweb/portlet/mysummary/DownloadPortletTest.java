@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.samplesignin;
+package com.liferay.portalweb.portlet.mysummary;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
@@ -70,7 +70,7 @@ public class DownloadPortletTest extends BaseTestCase {
 
 		selenium.click("link=Plugins");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_111_keywords", "sample sign in");
+		selenium.type("_111_keywords", "my summary");
 		selenium.click("//input[@value='Search Plugins']");
 		selenium.waitForPageToLoad("30000");
 
@@ -80,7 +80,7 @@ public class DownloadPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Sample Sign In 4.4.0.1")) {
+				if (selenium.isElementPresent("link=My Summary 4.4.0.1")) {
 					break;
 				}
 			}
@@ -90,11 +90,11 @@ public class DownloadPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sample Sign In 4.4.0.1");
+		selenium.click("link=My Summary 4.4.0.1");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Install']");
 		selenium.waitForPageToLoad("30000");
-		Thread.sleep(20000);
+		Thread.sleep(15000);
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

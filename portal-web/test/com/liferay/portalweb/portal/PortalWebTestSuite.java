@@ -58,6 +58,7 @@ import com.liferay.portalweb.portlet.language.LanguageTests;
 import com.liferay.portalweb.portlet.loancalculator.LoanCalculatorTests;
 import com.liferay.portalweb.portlet.mail.MailTests;
 import com.liferay.portalweb.portlet.messageboards.MessageBoardsTests;
+import com.liferay.portalweb.portlet.mysummary.MySummaryTests;
 import com.liferay.portalweb.portlet.navigation.NavigationTests;
 import com.liferay.portalweb.portlet.nestedportlets.NestedPortletsTests;
 import com.liferay.portalweb.portlet.networkutilities.NetworkUtilitiesTests;
@@ -142,6 +143,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(LoanCalculatorTests.class);
 		addTestSuite(MailTests.class);
 		addTestSuite(MessageBoardsTests.class);
+		addTestSuite(MySummaryTests.class);
 		addTestSuite(NavigationTests.class);
 		addTestSuite(NestedPortletsTests.class);
 		addTestSuite(NetworkUtilitiesTests.class);
