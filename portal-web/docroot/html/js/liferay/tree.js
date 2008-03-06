@@ -123,7 +123,7 @@ Liferay.Tree = new Class({
 						instance.treeHTML += instance._checkedPage;
 					}
 					else {
-						instance.treeHTML += _checkBoxPage;
+						instance.treeHTML += instance._checkBoxPage;
 					}
 				}
 
