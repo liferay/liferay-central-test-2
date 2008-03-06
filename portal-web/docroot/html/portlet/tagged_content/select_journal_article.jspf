@@ -36,7 +36,7 @@ portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", JournalArticle.class.getName());
 %>
 
-<liferay-ui:tabs names="articles" backURL="<%= configurationRenderURL.toString() %>" />
+<liferay-ui:tabs names="articles" url="<%= portletURL.toString() %>" backURL="<%= configurationRenderURL.toString() %>" />
 
 <%
 ArticleSearch searchContainer = new ArticleSearch(renderRequest, portletURL);
@@ -87,13 +87,13 @@ for (int i = 0; i < results.size(); i++) {
 
 	row.addText(article.getArticleId(), rowHREF);
 
-	// Version
-
-	row.addText(String.valueOf(article.getVersion()), rowHREF);
-
 	// Title
 
 	row.addText(article.getTitle(), rowHREF);
+
+	// Version
+
+	row.addText(String.valueOf(article.getVersion()), rowHREF);
 
 	// Modified date
 

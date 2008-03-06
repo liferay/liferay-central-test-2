@@ -60,7 +60,7 @@ portletURL.setParameter("assetParentId", String.valueOf(folderId));
 <input name="<portlet:namespace />breadcrumbsFolderId" type="hidden" value="<%= String.valueOf(folderId) %>" />
 <input name="<portlet:namespace />folderIds" type="hidden" value="<%= StringUtil.merge(folderIdLists) %>" />
 
-<liferay-ui:tabs names="folders" backURL="<%= configurationRenderURL.toString() %>" />
+<liferay-ui:tabs names="folders" url="<%= portletURL.toString() %>" backURL="<%= configurationRenderURL.toString() %>" />
 
 <c:if test="<%= folder != null %>">
 	<div class="breadcrumbs">

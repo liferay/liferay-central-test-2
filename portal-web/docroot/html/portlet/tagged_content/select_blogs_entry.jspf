@@ -38,7 +38,7 @@ portletURL.setParameter("portletResource", portletResource);
 portletURL.setParameter("typeSelection", BlogsEntry.class.getName());
 %>
 
-<liferay-ui:tabs names="entries" backURL="<%= configurationRenderURL.toString() %>" />
+<liferay-ui:tabs names="entries" url="<%= portletURL.toString() %>" backURL="<%= configurationRenderURL.toString() %>" />
 
 <div>
 	<label for="<portlet:namespace />keywords"><liferay-ui:message key="search" /></label>

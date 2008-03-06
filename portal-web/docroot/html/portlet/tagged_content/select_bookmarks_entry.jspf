@@ -46,7 +46,7 @@ portletURL.setParameter("typeSelection", BookmarksEntry.class.getName());
 portletURL.setParameter("assetParentId", String.valueOf(folderId));
 %>
 
-<liferay-ui:tabs names="folders" backURL="<%= configurationRenderURL.toString() %>" />
+<liferay-ui:tabs names="folders" url="<%= portletURL.toString() %>" backURL="<%= configurationRenderURL.toString() %>" />
 
 <c:if test="<%= folder != null %>">
 	<div class="breadcrumbs">
