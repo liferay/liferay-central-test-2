@@ -90,6 +90,7 @@ import com.liferay.portalweb.portlet.translator.TranslatorTests;
 import com.liferay.portalweb.portlet.unitconverter.UnitConverterTests;
 import com.liferay.portalweb.portlet.updatemanager.UpdateManagerTests;
 import com.liferay.portalweb.portlet.weather.WeatherTests;
+import com.liferay.portalweb.portlet.webcam.WebcamTests;
 import com.liferay.portalweb.portlet.webform.WebFormTests;
 import com.liferay.portalweb.portlet.webproxy.WebProxyTests;
 import com.liferay.portalweb.portlet.wiki.WikiTests;
@@ -176,6 +177,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(UnitConverterTests.class);
 		addTestSuite(UpdateManagerTests.class);
 		addTestSuite(WeatherTests.class);
+		addTestSuite(WebcamTests.class);
 		addTestSuite(WebFormTests.class);
 		addTestSuite(WebProxyTests.class);
 		addTestSuite(WikiTests.class);
