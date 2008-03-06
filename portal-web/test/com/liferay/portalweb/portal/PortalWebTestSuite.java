@@ -44,6 +44,7 @@ import com.liferay.portalweb.portlet.documentlibrarydisplay.DocumentLibraryDispl
 import com.liferay.portalweb.portlet.enterpriseadmin.EnterpriseAdminTests;
 import com.liferay.portalweb.portlet.flash.FlashTests;
 import com.liferay.portalweb.portlet.globalprayerdigest.GlobalPrayerDigestTests;
+import com.liferay.portalweb.portlet.googlesearch.GoogleSearchTests;
 import com.liferay.portalweb.portlet.gospelforasia.GospelForAsiaTests;
 import com.liferay.portalweb.portlet.hellovelocity.HelloVelocityTests;
 import com.liferay.portalweb.portlet.helloworld.HelloWorldTests;
@@ -130,6 +131,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(FlashTests.class);
 		addTestSuite(GlobalPrayerDigestTests.class);
 		addTestSuite(GospelForAsiaTests.class);
+		addTestSuite(GoogleSearchTests.class);
 		addTestSuite(HelloVelocityTests.class);
 		addTestSuite(HelloWorldTests.class);
 		addTestSuite(IFrameTests.class);
