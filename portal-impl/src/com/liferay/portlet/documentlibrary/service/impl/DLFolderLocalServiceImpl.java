@@ -400,7 +400,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		parentFolderId = getParentFolderId(folder, parentFolderId);
 
 		validate(
-			folder.getGroupId(), folder.getFolderId(), parentFolderId, name);
+			folder.getFolderId(), folder.getGroupId(), parentFolderId, name);
 
 		folder.setModifiedDate(new Date());
 		folder.setParentFolderId(parentFolderId);
@@ -490,11 +490,11 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		long folderId = 0;
 
-		validate(groupId, folderId, parentFolderId, name);
+		validate(folderId, groupId, parentFolderId, name);
 	}
 
 	protected void validate(
-			long groupId, long folderId, long parentFolderId, String name)
+			long folderId, long groupId, long parentFolderId, String name)
 		throws PortalException, SystemException {
 
 		if ((Validator.isNull(name)) || (name.indexOf("\\\\") != -1) ||
@@ -514,7 +514,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		DLFolder folder = dlFolderPersistence.fetchByG_P_N(
 			groupId, parentFolderId, name);
 
-		if (folder != null && folder.getFolderId() != folderId) {
+		if ((folder != null) && (folder.getFolderId() != folderId)) {
 			throw new DuplicateFolderNameException();
 		}
 	}
