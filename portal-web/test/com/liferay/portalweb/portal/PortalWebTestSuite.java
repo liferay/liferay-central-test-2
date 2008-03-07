@@ -77,6 +77,7 @@ import com.liferay.portalweb.portlet.recentbloggers.RecentBloggersTests;
 import com.liferay.portalweb.portlet.recentdocuments.RecentDocumentsTests;
 import com.liferay.portalweb.portlet.reverendfun.ReverendFunTests;
 import com.liferay.portalweb.portlet.rss.RSSTests;
+import com.liferay.portalweb.portlet.samplehibernate.SampleHibernateTests;
 import com.liferay.portalweb.portlet.samplesignin.SampleSignInTests;
 import com.liferay.portalweb.portlet.search.SearchTests;
 import com.liferay.portalweb.portlet.shopping.ShoppingTests;
@@ -165,6 +166,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(ReverendFunTests.class);
 		addTestSuite(RSSTests.class);
 		addTestSuite(SampleSignInTests.class);
+		addTestSuite(SampleHibernateTests.class);
 		addTestSuite(SearchTests.class);
 		addTestSuite(ShoppingTests.class);
 		addTestSuite(SiteMapTests.class);
