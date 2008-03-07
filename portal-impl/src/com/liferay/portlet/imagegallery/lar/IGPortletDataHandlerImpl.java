@@ -56,6 +56,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.regex.Pattern;
 
 import javax.portlet.PortletPreferences;
 
@@ -299,10 +300,14 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 					folder.getUuid(), context.getGroupId());
 
 				if (existingFolder == null) {
+					String name = validateFolderName(
+						context.getCompanyId(), context.getGroupId(),
+						parentFolderId, folder.getName(), 2);
+
 					existingFolder = IGFolderLocalServiceUtil.addFolder(
 						folder.getUuid(), userId, plid, parentFolderId,
-						folder.getName(), folder.getDescription(),
-						addCommunityPermissions, addGuestPermissions);
+						name, folder.getDescription(), addCommunityPermissions,
+						addGuestPermissions);
 				}
 				else {
 					existingFolder = IGFolderLocalServiceUtil.updateFolder(
@@ -311,10 +316,13 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 			else {
+				String name = validateFolderName(
+					context.getCompanyId(), context.getGroupId(),
+					parentFolderId, folder.getName(), 2);
+
 				existingFolder = IGFolderLocalServiceUtil.addFolder(
-					userId, plid, parentFolderId, folder.getName(),
-					folder.getDescription(), addCommunityPermissions,
-					addGuestPermissions);
+					userId, plid, parentFolderId, name, folder.getDescription(),
+					addCommunityPermissions, addGuestPermissions);
 			}
 
 			folderPKs.put(folder.getFolderId(), existingFolder.getFolderId());
@@ -401,6 +409,31 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 				"Could not find the parent folder for IG image " +
 					igImage.getImageId());
 		}
+	}
+
+	protected String validateFolderName(
+			long companyId, long groupId, long parentFolderId, String name,
+			int i)
+		throws SystemException {
+
+		IGFolder folder = IGFolderUtil.fetchByG_P_N(
+			groupId, parentFolderId, name);
+
+		if (folder == null) {
+			return name;
+		}
+
+		if (Pattern.matches(".* \\(\\d+\\)", name)) {
+			int pos = name.lastIndexOf(" (");
+
+			name = name.substring(0, pos);
+		}
+
+		name =  name + StringPool.SPACE + StringPool.OPEN_PARENTHESIS + i +
+			StringPool.CLOSE_PARENTHESIS;
+
+		return validateFolderName(
+			companyId, groupId, parentFolderId, name, ++i);
 	}
 
 	private static final String _NAMESPACE = "image_gallery";
