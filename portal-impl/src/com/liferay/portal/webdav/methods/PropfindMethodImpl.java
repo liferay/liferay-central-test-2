@@ -101,6 +101,20 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 			String xml = new String(FileUtil.getBytes(req.getInputStream()));
 
 			if (Validator.isNull(xml)) {
+
+				// Windows XP does not generate an xml request so the PROPFIND
+				// must be generated manually
+
+				props.add(new Tuple("displayname", WebDAVUtil.DAV_URI));
+				props.add(new Tuple("resourcetype", WebDAVUtil.DAV_URI));
+				props.add(new Tuple("getcontenttype", WebDAVUtil.DAV_URI));
+				props.add(new Tuple("getcontentlength", WebDAVUtil.DAV_URI));
+				props.add(new Tuple("getlastmodified", WebDAVUtil.DAV_URI));
+				props.add(new Tuple("lockdiscovery", WebDAVUtil.DAV_URI));
+				props.add(new Tuple("checked-in", WebDAVUtil.DAV_URI));
+				props.add(new Tuple("checked-out", WebDAVUtil.DAV_URI));
+				props.add(new Tuple("version-name", WebDAVUtil.DAV_URI));
+
 				return props;
 			}
 
