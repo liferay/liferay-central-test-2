@@ -121,13 +121,14 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			// Image
 
 			String extension = FileUtil.getExtension(file.getName());
-			String nameWithExtension = name;
 
 			if (Validator.isNotNull(name) &&
 				StringUtil.endsWith(name, extension)) {
 
 				name = FileUtil.stripExtension(name);
 			}
+
+			String nameWithExtension = name + StringPool.PERIOD + extension;
 
 			byte[] bytes = FileUtil.getBytes(file);
 
