@@ -59,7 +59,7 @@ import javax.servlet.http.HttpSession;
  * <a href="SecureFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Alexander Chow
  *
  */
@@ -162,37 +162,40 @@ public class SecureFilter extends BaseFilter {
 
 			// This basic authentication should only be run if specified by
 			// web.xml and JAAS is disabled. Make sure to run this once per
-			// session.
+			// session, but wrap request when necessary.
 
 			HttpSession ses = httpReq.getSession();
 
-			boolean userAuthenticated = GetterUtil.getBoolean(
-				(String)ses.getAttribute(_USER_AUTHENTICATED));
+			long userId = GetterUtil.getLong(
+				(String)ses.getAttribute(_AUTHENTICATED_USER));
 
-			if (_basicAuthEnabled && !PropsValues.PORTAL_JAAS_ENABLE &&
-				!userAuthenticated) {
-
-				long userId = 0;
-
-				try {
-					userId = getBasicAuthUserId(httpReq);
-				}
-				catch (Exception e) {
-					_log.error(e);
-				}
-
+			if (_basicAuthEnabled && !PropsValues.PORTAL_JAAS_ENABLE) {
 				if (userId > 0) {
 					req = new ProtectedServletRequest(
 						httpReq, String.valueOf(userId));
-
-					ses.setAttribute(_USER_AUTHENTICATED, StringPool.TRUE);
 				}
 				else {
-					httpRes.setHeader(
-						HttpHeaders.WWW_AUTHENTICATE, _PORTAL_REALM);
-			    	httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+					try {
+						userId = getBasicAuthUserId(httpReq);
+					}
+					catch (Exception e) {
+						_log.error(e);
+					}
 
-			    	return;
+					if (userId > 0) {
+						String userIdStr = String.valueOf(userId);
+
+						req = new ProtectedServletRequest(httpReq, userIdStr);
+
+						ses.setAttribute(_AUTHENTICATED_USER, userIdStr);
+					}
+					else {
+						httpRes.setHeader(
+							HttpHeaders.WWW_AUTHENTICATE, _PORTAL_REALM);
+				    	httpRes.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+
+				    	return;
+					}
 				}
 			}
 
@@ -258,8 +261,8 @@ public class SecureFilter extends BaseFilter {
 
 	private static final String _PORTAL_REALM = "Basic realm=\"PortalRealm\"";
 
-	private static final String _USER_AUTHENTICATED =
-		SecureFilter.class + "_USER_AUTHENTICATED";
+	private static final String _AUTHENTICATED_USER =
+		SecureFilter.class + "_AUTHENTICATED_USER";
 
 	private static Log _log = LogFactoryUtil.getLog(SecureFilter.class);
 
