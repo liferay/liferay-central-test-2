@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.PortalClassInvoker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
@@ -43,8 +42,6 @@ import com.liferay.portal.util.ShutdownUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Time;
 import com.liferay.util.servlet.SessionErrors;
-
-import java.lang.reflect.Method;
 
 import java.util.Enumeration;
 import java.util.Iterator;
@@ -154,38 +151,6 @@ public class EditServerAction extends PortletAction {
 		Runtime.getRuntime().gc();
 	}
 
-	protected void jvm4ThreadDump(StringBuffer sb, ThreadGroup group) {
-		Thread[] threads = new Thread[group.activeCount()];
-
-		group.enumerate(threads, false);
-
-		for (int i = 0; i < threads.length && threads[i] != null; i++) {
-			Thread thread = threads[i];
-
-			sb.append(StringPool.QUOTE);
-			sb.append(thread.getName());
-			sb.append(StringPool.QUOTE);
-
-			if (thread.getThreadGroup() != null) {
-				sb.append(StringPool.SPACE);
-				sb.append(StringPool.OPEN_PARENTHESIS);
-				sb.append(thread.getThreadGroup().getName());
-				sb.append(StringPool.CLOSE_PARENTHESIS);
-			}
-
-			sb.append(", priority=" + thread.getPriority());
-			sb.append("\n");
-		}
-
-		ThreadGroup[] groups = new ThreadGroup[group.activeGroupCount()];
-
-		group.enumerate(groups, false);
-
-		for (int i = 0; i < groups.length && groups[i] != null; i++) {
-			jvm4ThreadDump(sb, groups[i]);
-		}
-	}
-
 	protected void reIndex() throws Exception {
 		long[] companyIds = PortalInstances.getCompanyIds();
 
@@ -222,61 +187,49 @@ public class EditServerAction extends PortletAction {
 
 		StringBuffer sb = null;
 
-		try {
-			sb = new StringBuffer("Full thread dump " + jvm + "\n\n");
+		sb = new StringBuffer("Full thread dump " + jvm + "\n\n");
 
-			Map<Thread, StackTraceElement[]> stackTraces =
-				(Map<Thread, StackTraceElement[]>)PortalClassInvoker.invoke(
-					Thread.class.getName(), "getAllStackTraces", false);
+		Map<Thread, StackTraceElement[]> stackTraces =
+			Thread.getAllStackTraces();
 
-			Object[] nullArgs = new Object[] {};
+		Iterator<Thread> itr = stackTraces.keySet().iterator();
 
-			Method getId = Thread.class.getMethod("getId");
-			Method getState = Thread.class.getMethod("getState");
+		while (itr.hasNext()) {
+			Thread thread = itr.next();
 
-			Iterator<Thread> itr = stackTraces.keySet().iterator();
+			StackTraceElement[] elements = stackTraces.get(thread);
 
-			while (itr.hasNext()) {
-				Thread thread = itr.next();
+			sb.append(StringPool.QUOTE);
+			sb.append(thread.getName());
+			sb.append(StringPool.QUOTE);
 
-				StackTraceElement[] elements = stackTraces.get(thread);
-
-				sb.append(StringPool.QUOTE);
-				sb.append(thread.getName());
-				sb.append(StringPool.QUOTE);
-
-				if (thread.getThreadGroup() != null) {
-					sb.append(StringPool.SPACE);
-					sb.append(StringPool.OPEN_PARENTHESIS);
-					sb.append(thread.getThreadGroup().getName());
-					sb.append(StringPool.CLOSE_PARENTHESIS);
-				}
-
-				sb.append(", priority=" + thread.getPriority());
-				sb.append(", id=" + getId.invoke(thread, nullArgs));
-				sb.append(", state=" + getState.invoke(thread, nullArgs));
-				sb.append("\n");
-
-				for (int i = 0; i < elements.length; i++) {
-					sb.append("\t" + elements[i] + "\n");
-				}
-
-				sb.append("\n");
-			}
-		}
-		catch (Exception e) {
-			ThreadGroup root = Thread.currentThread().getThreadGroup();
-
-			while (root.getParent() != null) {
-		    	root = root.getParent();
+			if (thread.getThreadGroup() != null) {
+				sb.append(StringPool.SPACE);
+				sb.append(StringPool.OPEN_PARENTHESIS);
+				sb.append(thread.getThreadGroup().getName());
+				sb.append(StringPool.CLOSE_PARENTHESIS);
 			}
 
-			sb = new StringBuffer("Summarized thread dump " + jvm + "\n\n");
+			sb.append(", priority=" + thread.getPriority());
+			sb.append(", id=" + thread.getId());
+			sb.append(", state=" + thread.getState());
+			sb.append("\n");
 
-			jvm4ThreadDump(sb, root);
+			for (int i = 0; i < elements.length; i++) {
+				sb.append("\t" + elements[i] + "\n");
+			}
+
+			sb.append("\n");
 		}
 
-		_log.info(sb.toString());
+		if (_log.isInfoEnabled()) {
+			_log.info(sb.toString());
+		}
+		else {
+			_log.error(
+				"Thread dumps require the log level to be at least INFO for "
+					+ this.getClass().getName());
+		}
 	}
 
 	protected void updateLogLevels(ActionRequest req) throws Exception {
