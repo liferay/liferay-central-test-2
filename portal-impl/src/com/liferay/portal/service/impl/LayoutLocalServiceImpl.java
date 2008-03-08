@@ -922,16 +922,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		// User ID strategy
-
-		UserIdStrategy strategy = null;
-
-		if (UserIdStrategy.ALWAYS_CURRENT_USER_ID.equals(userIdStrategy)) {
-			strategy = new AlwaysCurrentUserIdStrategy(user);
-		}
-		else if (UserIdStrategy.CURRENT_USER_ID.equals(userIdStrategy)) {
-			strategy = new CurrentUserIdStrategy(user);
-		}
+		UserIdStrategy strategy = getUserIdStrategy(userIdStrategy, user);
 
 		ZipReader zipReader = new ZipReader(is);
 
@@ -1236,16 +1227,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		// User ID strategy
-
-		UserIdStrategy strategy = null;
-
-		if (UserIdStrategy.ALWAYS_CURRENT_USER_ID.equals(userIdStrategy)) {
-			strategy = new AlwaysCurrentUserIdStrategy(user);
-		}
-		else if (UserIdStrategy.CURRENT_USER_ID.equals(userIdStrategy)) {
-			strategy = new CurrentUserIdStrategy(user);
-		}
+		UserIdStrategy strategy = getUserIdStrategy(userIdStrategy, user);
 
 		ZipReader zipReader = new ZipReader(is);
 
@@ -2728,6 +2710,16 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		return parentLayoutId;
+	}
+
+	protected UserIdStrategy getUserIdStrategy(
+			String userIdStrategy, User user) {
+
+		if (UserIdStrategy.ALWAYS_CURRENT_USER_ID.equals(userIdStrategy)) {
+			return new AlwaysCurrentUserIdStrategy(user);
+		}
+
+		return new CurrentUserIdStrategy(user);		
 	}
 
 	protected boolean hasRole(List roles, String roleName) {
