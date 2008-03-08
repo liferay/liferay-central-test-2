@@ -44,7 +44,6 @@ import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
 
 import com.thoughtworks.xstream.XStream;
 
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -257,7 +256,8 @@ public class JournalContentPortletDataHandlerImpl
 
 			Document tempDoc = DocumentHelper.createDocument();
 
-			Map<String, String> structureIds = new HashMap<String, String>();
+			Map<String, String> structureIds = context.getNewPrimaryKeysMap(
+				JournalStructure.class);
 
 			if (el != null) {
 				tempDoc.content().add(el.createCopy());
@@ -271,7 +271,8 @@ public class JournalContentPortletDataHandlerImpl
 
 			el = root.element(JournalTemplateImpl.class.getName());
 
-			Map<String, String> templateIds = new HashMap<String, String>();
+			Map<String, String> templateIds = context.getNewPrimaryKeysMap(
+				JournalTemplate.class);
 
 			if (el != null) {
 				tempDoc = DocumentHelper.createDocument();

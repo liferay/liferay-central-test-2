@@ -41,6 +41,7 @@ import com.liferay.portlet.messageboards.model.MBBan;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBMessageFlag;
+import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceUtil;
@@ -53,7 +54,6 @@ import com.liferay.portlet.messageboards.service.persistence.MBMessageFinderUtil
 import com.liferay.portlet.messageboards.service.persistence.MBMessageFlagUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBMessageUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
@@ -316,7 +316,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map categoryPKs = CollectionFactory.getHashMap();
+			Map categoryPKs = context.getNewPrimaryKeysMap(MBCategory.class);
 
 			List categories = (List)xStream.fromXML(tempDoc.asXML());
 
@@ -336,8 +336,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map threadPKs = CollectionFactory.getHashMap();
-			Map messagePKs = CollectionFactory.getHashMap();
+			Map threadPKs = context.getNewPrimaryKeysMap(MBThread.class);
+			Map messagePKs = context.getNewPrimaryKeysMap(MBMessage.class);
 
 			List messages = (List)xStream.fromXML(tempDoc.asXML());
 

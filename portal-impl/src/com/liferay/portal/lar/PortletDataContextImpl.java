@@ -59,6 +59,7 @@ import java.util.Set;
  *
  * @author Brian Wing Shun Chan
  * @author Raymond Augé
+ * @author Bruno Farache
  *
  */
 public class PortletDataContextImpl implements PortletDataContext {
@@ -140,6 +141,18 @@ public class PortletDataContextImpl implements PortletDataContext {
 
 	public boolean hasPrimaryKey(Class classObj, Object primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
+	}
+
+	public Map getNewPrimaryKeysMap(Class classObj) {
+		Map value = _newPrimaryKeysMaps.get(classObj.getName());
+
+		if (value == null) {
+			value = CollectionFactory.getHashMap();
+
+			_newPrimaryKeysMaps.put(classObj.getName(), value);
+		}
+
+		return value;
 	}
 
 	public Map getComments() {
@@ -372,6 +385,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	private Map _ratingsEntriesMap = new HashMap();
 	private Map _tagsEntriesMap = new HashMap();
 	private Set _primaryKeys;
+	private Map<String, Map> _newPrimaryKeysMaps = new HashMap();
 	private String _dataStrategy;
 	private UserIdStrategy _userIdStrategy;
 	private ZipReader _zipReader;

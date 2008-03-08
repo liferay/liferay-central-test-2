@@ -52,7 +52,6 @@ import com.thoughtworks.xstream.XStream;
 import java.io.File;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -227,7 +226,8 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map<Long, Long> folderPKs = new HashMap<Long, Long>();
+			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
+				IGFolder.class);
 
 			List<IGFolder> folders = (List<IGFolder>)xStream.fromXML(
 				tempDoc.asXML());

@@ -289,7 +289,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map<String, String> structureIds = new HashMap<String, String>();
+			Map<String, String> structureIds = context.getNewPrimaryKeysMap(
+				JournalStructure.class);
 
 			List<JournalStructure> structures =
 				(List<JournalStructure>)xStream.fromXML(tempDoc.asXML());
@@ -306,7 +307,8 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map<String, String> templateIds = new HashMap<String, String>();
+			Map<String, String> templateIds = context.getNewPrimaryKeysMap(
+				JournalTemplate.class);
 
 			List<JournalTemplate> templates =
 				(List<JournalTemplate>)xStream.fromXML(tempDoc.asXML());

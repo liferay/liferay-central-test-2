@@ -46,7 +46,6 @@ import com.liferay.util.MapUtil;
 import com.thoughtworks.xstream.XStream;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -241,7 +240,8 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map<Long, Long> nodePKs = new HashMap<Long, Long>();
+			Map<Long, Long> nodePKs = context.getNewPrimaryKeysMap(
+				WikiNode.class);
 
 			List<WikiNode> nodes = (List<WikiNode>)xStream.fromXML(
 				tempDoc.asXML());

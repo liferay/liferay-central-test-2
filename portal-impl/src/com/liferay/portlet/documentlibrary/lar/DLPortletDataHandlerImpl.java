@@ -49,7 +49,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
 
@@ -312,7 +311,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map folderPKs = CollectionFactory.getHashMap();
+			Map folderPKs = context.getNewPrimaryKeysMap(DLFolder.class);
 
 			List folders = (List)xStream.fromXML(tempDoc.asXML());
 
@@ -332,7 +331,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map entryNames = CollectionFactory.getHashMap();
+			Map entryNames = context.getNewPrimaryKeysMap(DLFileEntry.class);
 
 			List entries = (List)xStream.fromXML(tempDoc.asXML());
 

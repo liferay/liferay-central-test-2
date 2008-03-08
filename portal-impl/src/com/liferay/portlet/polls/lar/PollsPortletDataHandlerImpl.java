@@ -45,7 +45,6 @@ import com.liferay.portlet.polls.service.persistence.PollsChoiceFinderUtil;
 import com.liferay.portlet.polls.service.persistence.PollsChoiceUtil;
 import com.liferay.portlet.polls.service.persistence.PollsQuestionUtil;
 import com.liferay.portlet.polls.service.persistence.PollsVoteUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
@@ -241,7 +240,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map questionPKs = CollectionFactory.getHashMap();
+			Map questionPKs = context.getNewPrimaryKeysMap(PollsQuestion.class);
 
 			List questions = (List)xStream.fromXML(tempDoc.asXML());
 
@@ -261,7 +260,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map choicePKs = CollectionFactory.getHashMap();
+			Map choicePKs = context.getNewPrimaryKeysMap(PollsChoice.class);
 
 			List choices = (List)xStream.fromXML(tempDoc.asXML());
 

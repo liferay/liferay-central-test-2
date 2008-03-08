@@ -65,6 +65,8 @@ public interface PortletDataContext extends Serializable {
 
 	public boolean hasPrimaryKey(Class<?> classObj, Object primaryKey);
 
+	public Map getNewPrimaryKeysMap(Class<?> classObj);
+
 	public Map getComments();
 
 	public void addComments(Class<?> classObj, Object primaryKey)

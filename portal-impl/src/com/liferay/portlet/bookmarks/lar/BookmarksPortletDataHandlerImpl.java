@@ -44,7 +44,6 @@ import com.liferay.util.MapUtil;
 import com.thoughtworks.xstream.XStream;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -210,7 +209,8 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map<Long, Long> folderPKs = new HashMap<Long, Long>();
+			Map<Long, Long> folderPKs = context.getNewPrimaryKeysMap(
+				BookmarksFolder.class);
 
 			List<BookmarksFolder> folders =
 				(List<BookmarksFolder>)xStream.fromXML(tempDoc.asXML());
