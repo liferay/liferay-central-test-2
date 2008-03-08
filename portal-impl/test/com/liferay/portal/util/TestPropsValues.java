@@ -38,4 +38,7 @@ public class TestPropsValues {
 	public static final long LAYOUT_PLID = GetterUtil.getLong(
 		TestPropsUtil.get("layout.plid"));
 
+	public static final long USER_ID = GetterUtil.getLong(
+		TestPropsUtil.get("service.user.id"));
+
 }

@@ -1027,7 +1027,7 @@ public class DLFileEntryLocalServiceImpl
 			String titleWithException = title;
 
 			if (Validator.isNotNull(extension)) {
-				title += extension;
+				titleWithException += StringPool.PERIOD + extension;
 			}
 
 			dlFolderLocalService.getFolder(
@@ -1075,7 +1075,7 @@ public class DLFileEntryLocalServiceImpl
 			String titleWithException = title;
 
 			if (Validator.isNotNull(extension)) {
-				title += extension;
+				titleWithException += StringPool.PERIOD + extension;
 			}
 
 			dlFolderLocalService.getFolder(

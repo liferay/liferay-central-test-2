@@ -24,7 +24,6 @@ package com.liferay.portal.service;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
@@ -32,7 +31,6 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.TestPropsUtil;
 import com.liferay.portal.util.TestPropsValues;
 
 import junit.framework.TestCase;
@@ -50,13 +48,9 @@ public class BaseServiceTestCase extends TestCase {
 
 		PortalInstances.addCompanyId(TestPropsValues.COMPANY_ID);
 
-		String remoteUser = TestPropsUtil.get("service.user.id");
+		PrincipalThreadLocal.setName(String.valueOf(TestPropsValues.USER_ID));
 
-		PrincipalThreadLocal.setName(remoteUser);
-
-		long userId = GetterUtil.getLong(remoteUser);
-
-		User user = UserLocalServiceUtil.getUserById(userId);
+		User user = UserLocalServiceUtil.getUserById(TestPropsValues.USER_ID);
 
 		_permissionChecker = PermissionCheckerFactory.create(user, true);
 
