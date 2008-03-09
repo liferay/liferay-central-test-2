@@ -352,7 +352,9 @@ public class GetterUtil {
 			for (int i = 0; i < charArray.length; i++) {
 				if ((Character.isDigit(charArray[i])) ||
 					(charArray[i] == '-' && i == 0) ||
-					(charArray[i] == '.')) {
+					(charArray[i] == '.') ||
+					(charArray[i] == 'E') ||
+					(charArray[i] == 'e')) {
 
 					sm.append(charArray[i]);
 				}
