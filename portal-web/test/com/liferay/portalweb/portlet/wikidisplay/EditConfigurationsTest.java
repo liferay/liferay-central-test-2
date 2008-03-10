@@ -22,20 +22,23 @@
 
 package com.liferay.portalweb.portlet.wikidisplay;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="WikiDisplayTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditConfigurationsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiDisplayTests extends BaseTests {
-
-	public WikiDisplayTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(EditConfigurationsTest.class);
+public class EditConfigurationsTest extends BaseTestCase {
+	public void testEditConfigurations() throws Exception {
+		selenium.click("//img[@title='Configuration']");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("_86_nodeId", "label=Main");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("Test Wiki Article"));
 	}
-
 }
