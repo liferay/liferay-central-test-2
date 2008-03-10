@@ -1,3 +1,6 @@
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -141,23 +144,42 @@
 		/>
 	</c:if>
 
-	<c:if test="<%= enableComments %>">
-		<div class="comments">
-
+	<div class="stats">
+		<span class="view-count">
 			<%
-			long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
-
-			int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+			TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
 			%>
 
-			<c:choose>
-				<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-					<%= messagesCount %> <liferay-ui:message key="comments" />
-				</c:when>
-				<c:otherwise>
-					<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
-				</c:otherwise>
-			</c:choose>
-		</div>
-	</c:if>
+			<c:if test='<%= strutsAction.equals("/blogs/view_entry") %>'>
+				<c:choose>
+					<c:when test="<%= asset.getViewCount() == 1 %>">
+						<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
+					</c:when>
+					<c:when test="<%= asset.getViewCount() > 1 %>">
+						<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
+					</c:when>
+				</c:choose>
+			</c:if>
+		</span>
+
+		<c:if test="<%= enableComments %>">
+			<span class="comments">
+
+				<%
+				long classNameId = PortalUtil.getClassNameId(BlogsEntry.class.getName());
+
+				int messagesCount = MBMessageLocalServiceUtil.getDiscussionMessagesCount(classNameId, entry.getEntryId());
+				%>
+
+				<c:choose>
+					<c:when test='<%= strutsAction.equals("/blogs/view_entry") %>'>
+						<%= messagesCount %> <liferay-ui:message key="comments" />
+					</c:when>
+					<c:otherwise>
+						<a href="<%= viewEntryURL %>#<portlet:namespace />messageScroll0"><%= messagesCount %> <liferay-ui:message key="comments" /></a>
+					</c:otherwise>
+				</c:choose>
+			</span>
+		</c:if>
+	</div>
 </c:if>

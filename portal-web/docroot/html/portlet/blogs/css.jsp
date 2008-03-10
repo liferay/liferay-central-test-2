@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-blogs .comments {
+.portlet-blogs .stats {
 	margin-top: 1.5em;
 }
 

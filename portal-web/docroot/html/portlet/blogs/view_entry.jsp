@@ -70,3 +70,8 @@ pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 		redirect="<%= currentURL %>"
 	/>
 </c:if>
+
+<script type="text/javascript">
+	Liferay.Service.Tags.TagsAsset.incrementViewCounter({className:'<%= BlogsEntry.class.getName() %>', classPK: '<%= entryId %>'});
+</script>
+
