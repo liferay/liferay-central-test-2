@@ -185,18 +185,12 @@ public class EditServerAction extends PortletAction {
 			System.getProperty("java.vm.name") + " " +
 				System.getProperty("java.vm.version");
 
-		StringBuffer sb = null;
-
-		sb = new StringBuffer("Full thread dump " + jvm + "\n\n");
+		StringBuffer sb = new StringBuffer("Full thread dump " + jvm + "\n\n");
 
 		Map<Thread, StackTraceElement[]> stackTraces =
 			Thread.getAllStackTraces();
 
-		Iterator<Thread> itr = stackTraces.keySet().iterator();
-
-		while (itr.hasNext()) {
-			Thread thread = itr.next();
-
+		for (Thread thread : stackTraces.keySet()) {
 			StackTraceElement[] elements = stackTraces.get(thread);
 
 			sb.append(StringPool.QUOTE);
@@ -227,8 +221,8 @@ public class EditServerAction extends PortletAction {
 		}
 		else {
 			_log.error(
-				"Thread dumps require the log level to be at least INFO for "
-					+ this.getClass().getName());
+				"Thread dumps require the log level to be at least INFO for " +
+					getClass().getName());
 		}
 	}
 
