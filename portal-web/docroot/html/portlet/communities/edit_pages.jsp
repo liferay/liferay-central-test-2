@@ -511,7 +511,11 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	String tabs2Names = "public-pages,private-pages";
 
 	if (workflowEnabled) {
-		tabs2Names += ",workflow,proposals";
+		if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
+			tabs2Names += ",workflow";
+		}
+
+		tabs2Names += ",proposals";
 	}
 	%>
 

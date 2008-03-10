@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
@@ -178,8 +179,13 @@ public class EditProposalAction extends EditPagesAction {
 	protected void publishProposal(ActionRequest req) throws Exception {
 		long proposalId = ParamUtil.getLong(req, "proposalId");
 
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		Group liveGroup =
+			group.hasStagingGroup() ? group : group.getLiveGroup();
+		Group stagingGroup = liveGroup.getStagingGroup();
 
 		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
 			proposalId);
@@ -193,8 +199,8 @@ public class EditProposalAction extends EditPagesAction {
 		Map parameterMap = getStagingParameters();
 
 		publishLayouts(
-			layoutIdMap, stagingGroupId, liveGroupId, layout.isPrivateLayout(),
-			parameterMap);
+			layoutIdMap, stagingGroup.getGroupId(), liveGroup.getGroupId(),
+			layout.isPrivateLayout(), parameterMap);
 
 		TasksProposalServiceUtil.deleteProposal(proposal.getProposalId());
 	}

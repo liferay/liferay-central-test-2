@@ -35,7 +35,7 @@ import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
 /**
  * <a href="TasksProposalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Brian Wing Shun Chan
  *
  */
@@ -99,12 +99,24 @@ public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
 			int dueDateDay, int dueDateYear, int dueDateHour, int dueDateMinute)
 		throws PortalException, SystemException{
 
+		PermissionChecker permissionChecker = getPermissionChecker();
+
 		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
 			proposalId);
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), proposal.getGroupId(),
-			ActionKeys.MANAGE_LAYOUTS);
+		long groupId = proposal.getGroupId();
+
+		if (!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.MANAGE_STAGING) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) &&
+			!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) &&
+			!TasksProposalPermission.contains(
+				permissionChecker, proposalId, ActionKeys.UPDATE)) {
+
+			throw new PrincipalException();
+		}
 
 		return tasksProposalLocalService.updateProposal(
 			getUserId(), proposalId, description, dueDateMonth, dueDateDay,

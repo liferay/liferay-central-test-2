@@ -55,6 +55,17 @@ try {
 catch (NoSuchReviewException nsre) {
 }
 
+boolean hasUpdateProposal = false;
+
+if (GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) ||
+	GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) ||
+	GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) ||
+	TasksProposalPermission.contains(permissionChecker, proposalId, ActionKeys.UPDATE)) {
+
+	hasUpdateProposal = true;
+}
+
+
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -133,6 +144,25 @@ for (int i = 2; i <= workflowStages; i++) {
 <table class="lfr-table">
 <tr>
 	<td>
+		<liferay-ui:message key="user" />
+	</td>
+	<td>
+		<%
+		User user2 = null;
+		String userName = proposal.getUserName();
+
+		try {
+			user2 = UserLocalServiceUtil.getUserById(proposal.getUserId());
+			userName = user2.getFullName();
+		}
+		catch (NoSuchUserException nsue) {
+		}
+		%>
+		<%= userName %>
+ 	</td>
+</tr>
+<tr>
+	<td>
 		<liferay-ui:message key="name" />
 	</td>
 	<td>
@@ -165,7 +195,14 @@ for (int i = 2; i <= workflowStages; i++) {
 		<liferay-ui:message key="description" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="description" />
+		<c:choose>
+			<c:when test="<%= hasUpdateProposal %>">
+				<liferay-ui:input-field model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="description" />
+			</c:when>
+			<c:otherwise>
+				<%= proposal.getDescription() %>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 <tr>
@@ -178,7 +215,14 @@ for (int i = 2; i <= workflowStages; i++) {
 		<liferay-ui:message key="due-date" />
 	</td>
 	<td>
-		<liferay-ui:input-field formName="fm1" model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="dueDate" defaultValue="<%= dueDate %>" />
+		<c:choose>
+			<c:when test="<%= hasUpdateProposal %>">
+				<liferay-ui:input-field formName="fm1" model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="dueDate" defaultValue="<%= dueDate %>" />
+			</c:when>
+			<c:otherwise>
+				<%= dateFormatDateTime.format(dueDate.getTime()) %>
+			</c:otherwise>
+		</c:choose>
 	</td>
 </tr>
 </table>
@@ -284,7 +328,14 @@ for (int i = 2; i <= workflowStages; i++) {
 
 <br />
 
-<c:if test="<%= TasksProposalPermission.contains(permissionChecker, proposalId, ActionKeys.UPDATE) %>">
+<liferay-ui:activities
+	className="<%= TasksProposal.class.getName() %>"
+	classPK="<%= proposalId %>"
+/>
+
+<br />
+
+<c:if test="<%= hasUpdateProposal %>">
 	<input type="submit" value="<liferay-ui:message key="save" />" />
 </c:if>
 
@@ -296,28 +347,33 @@ String previewURL = PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay
 
 <input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= previewURL %>');" />
 
-<c:if test="<%= review != null %>">
-	<c:if test="<%= (review.getStage() == workflowStages) && (GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) %>">
-		<input type="button" value="<liferay-ui:message key="publish" />" onClick="<portlet:namespace />publishProposal();" />
-	</c:if>
+<c:choose>
+	<c:when test="<%= review != null %>">
+		<c:if test="<%= (review.getStage() == workflowStages) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) %>">
+			<input type="button" value="<liferay-ui:message key="publish" />" onClick="<portlet:namespace />publishProposal();" />
+		</c:if>
 
-	<c:choose>
-		<c:when test="<%= review.isCompleted() %>">
-			<c:if test="<%= review.isRejected() %>">
+		<c:choose>
+			<c:when test="<%= review.isCompleted() %>">
+				<c:if test="<%= review.isRejected() %>">
+					<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveProposal();" />
+				</c:if>
+
+				<c:if test="<%= !review.isRejected() %>">
+					<input type="button" value="<liferay-ui:message key="reject" />" onClick="<portlet:namespace />rejectProposal();" />
+				</c:if>
+			</c:when>
+			<c:otherwise>
 				<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveProposal();" />
-			</c:if>
 
-			<c:if test="<%= !review.isRejected() %>">
 				<input type="button" value="<liferay-ui:message key="reject" />" onClick="<portlet:namespace />rejectProposal();" />
-			</c:if>
-		</c:when>
-		<c:otherwise>
-			<input type="button" value="<liferay-ui:message key="approve" />" onClick="<portlet:namespace />approveProposal();" />
-
-			<input type="button" value="<liferay-ui:message key="reject" />" onClick="<portlet:namespace />rejectProposal();" />
-		</c:otherwise>
-	</c:choose>
-</c:if>
+			</c:otherwise>
+		</c:choose>
+	</c:when>
+	<c:when test="<%= review == null && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
+		<input type="button" value="<liferay-ui:message key="publish" />" onClick="<portlet:namespace />publishProposal();" />
+	</c:when>
+</c:choose>
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
 

@@ -45,7 +45,7 @@ if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.ASSI
 	total = TasksProposalLocalServiceUtil.getProposalsCount(liveGroupId);
 	results = TasksProposalLocalServiceUtil.getProposals(liveGroupId, searchContainer.getStart(), searchContainer.getEnd());
 }
-else if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.ASSIGN_REVIEWER)) {
+else if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.APPROVE_PROPOSAL)) {
 	total = TasksProposalLocalServiceUtil.getReviewProposalsCount(liveGroupId, user.getUserId());
 	results = TasksProposalLocalServiceUtil.getReviewProposals(liveGroupId, user.getUserId(), searchContainer.getStart(), searchContainer.getEnd());
 }

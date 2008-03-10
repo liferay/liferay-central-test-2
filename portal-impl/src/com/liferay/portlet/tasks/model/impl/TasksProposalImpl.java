@@ -56,7 +56,7 @@ public class TasksProposalImpl
 
 		int stages = group.getWorkflowStages();
 
-		for (stage = 1; stage <= stages; stage++) {
+		for (; stage <= stages; stage++) {
 			status = getStatus(stage);
 
 			if (status.equals(_STATUS_APPROVED)) {
@@ -69,7 +69,11 @@ public class TasksProposalImpl
 			else if ((status.equals(_STATUS_UNASSIGNED)) &&
 					 (stage > 1)) {
 			}
-			else if (stage == 1) {
+			else if (stage == 0) {
+				break;
+			}
+
+			if (stage == stages) {
 				break;
 			}
 		}
