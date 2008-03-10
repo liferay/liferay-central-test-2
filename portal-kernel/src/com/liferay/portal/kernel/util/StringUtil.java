@@ -335,6 +335,50 @@ public class StringUtil {
 		return sm.toString();
 	}
 
+	public static String merge(double[] array) {
+		return merge(array, StringPool.COMMA);
+	}
+
+	public static String merge(double[] array, String delimiter) {
+		if (array == null) {
+			return null;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < array.length; i++) {
+			sm.append(String.valueOf(array[i]).trim());
+
+			if ((i + 1) != array.length) {
+				sm.append(delimiter);
+			}
+		}
+
+		return sm.toString();
+	}
+
+	public static String merge(float[] array) {
+		return merge(array, StringPool.COMMA);
+	}
+
+	public static String merge(float[] array, String delimiter) {
+		if (array == null) {
+			return null;
+		}
+
+		StringMaker sm = new StringMaker();
+
+		for (int i = 0; i < array.length; i++) {
+			sm.append(String.valueOf(array[i]).trim());
+
+			if ((i + 1) != array.length) {
+				sm.append(delimiter);
+			}
+		}
+
+		return sm.toString();
+	}
+
 	public static String merge(int[] array) {
 		return merge(array, StringPool.COMMA);
 	}
