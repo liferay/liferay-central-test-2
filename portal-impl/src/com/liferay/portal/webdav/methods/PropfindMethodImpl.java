@@ -103,7 +103,7 @@ public class PropfindMethodImpl extends BasePropMethodImpl implements Method {
 			if (Validator.isNull(xml)) {
 
 				// Windows XP does not generate an xml request so the PROPFIND
-				// must be generated manually
+				// must be generated manually. See LEP-4920.
 
 				props.add(new Tuple("displayname", WebDAVUtil.DAV_URI));
 				props.add(new Tuple("resourcetype", WebDAVUtil.DAV_URI));
