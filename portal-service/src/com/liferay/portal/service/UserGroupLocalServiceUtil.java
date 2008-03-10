@@ -659,6 +659,19 @@ public class UserGroupLocalServiceUtil {
 		userGroupLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		return userGroupLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
+
+		userGroupLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		UserGroupLocalService userGroupLocalService = UserGroupLocalServiceFactory.getService();
 

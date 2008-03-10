@@ -704,6 +704,17 @@ Liferay.Service.Portal.Portlet = {
 	}
 };
 
+Liferay.Service.Portal.PortletPreferences = {
+	serviceClassName: Liferay.Service.Portal.servicePackage + "PortletPreferences" + Liferay.Service.classNameSuffix,
+
+	deleteSavedPreferences: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteSavedPreferences";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Portal.Region = {
 	serviceClassName: Liferay.Service.Portal.servicePackage + "Region" + Liferay.Service.classNameSuffix,
 

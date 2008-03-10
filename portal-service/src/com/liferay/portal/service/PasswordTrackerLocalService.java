@@ -289,6 +289,11 @@ public interface PasswordTrackerLocalService {
 	public void setServiceComponentPersistence(
 		com.liferay.portal.service.persistence.ServiceComponentPersistence serviceComponentPersistence);
 
+	public com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence();
+
+	public void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence);
+
 	public com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence();
 
 	public void setSubscriptionPersistence(

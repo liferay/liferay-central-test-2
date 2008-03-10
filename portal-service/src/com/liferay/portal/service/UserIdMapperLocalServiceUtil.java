@@ -660,6 +660,19 @@ public class UserIdMapperLocalServiceUtil {
 		userIdMapperLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		return userIdMapperLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
+
+		userIdMapperLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 

@@ -661,6 +661,19 @@ public class UserGroupRoleLocalServiceUtil {
 		userGroupRoleLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		return userGroupRoleLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
+
+		userGroupRoleLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 

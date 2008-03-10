@@ -659,6 +659,19 @@ public class ResourceLocalServiceUtil {
 		resourceLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		return resourceLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
+
+		resourceLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 

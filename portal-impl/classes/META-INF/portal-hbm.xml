@@ -460,6 +460,21 @@
 		<property name="buildDate" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="data" column="data_" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
+	<class name="com.liferay.portal.model.impl.PortletItemImpl" table="PortletItem">
+		<cache usage="read-write" />
+		<id name="portletItemId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="portletId" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
 	<class name="com.liferay.portal.model.impl.SubscriptionImpl" table="Subscription">
 		<cache usage="read-write" />
 		<id name="subscriptionId" type="long">

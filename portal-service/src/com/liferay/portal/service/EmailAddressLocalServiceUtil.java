@@ -660,6 +660,19 @@ public class EmailAddressLocalServiceUtil {
 		emailAddressLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		return emailAddressLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
+
+		emailAddressLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 

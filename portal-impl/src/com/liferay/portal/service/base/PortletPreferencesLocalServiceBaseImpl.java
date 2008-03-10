@@ -109,6 +109,8 @@ import com.liferay.portal.service.PluginSettingService;
 import com.liferay.portal.service.PluginSettingServiceFactory;
 import com.liferay.portal.service.PortalService;
 import com.liferay.portal.service.PortalServiceFactory;
+import com.liferay.portal.service.PortletItemLocalService;
+import com.liferay.portal.service.PortletItemLocalServiceFactory;
 import com.liferay.portal.service.PortletLocalService;
 import com.liferay.portal.service.PortletLocalServiceFactory;
 import com.liferay.portal.service.PortletPreferencesLocalService;
@@ -220,6 +222,8 @@ import com.liferay.portal.service.persistence.PhonePersistence;
 import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.PluginSettingPersistence;
 import com.liferay.portal.service.persistence.PluginSettingUtil;
+import com.liferay.portal.service.persistence.PortletItemPersistence;
+import com.liferay.portal.service.persistence.PortletItemUtil;
 import com.liferay.portal.service.persistence.PortletPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesFinderUtil;
@@ -1088,6 +1092,24 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		this.serviceComponentPersistence = serviceComponentPersistence;
 	}
 
+	public PortletItemLocalService getPortletItemLocalService() {
+		return portletItemLocalService;
+	}
+
+	public void setPortletItemLocalService(
+		PortletItemLocalService portletItemLocalService) {
+		this.portletItemLocalService = portletItemLocalService;
+	}
+
+	public PortletItemPersistence getPortletItemPersistence() {
+		return portletItemPersistence;
+	}
+
+	public void setPortletItemPersistence(
+		PortletItemPersistence portletItemPersistence) {
+		this.portletItemPersistence = portletItemPersistence;
+	}
+
 	public SubscriptionLocalService getSubscriptionLocalService() {
 		return subscriptionLocalService;
 	}
@@ -1680,6 +1702,14 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 			serviceComponentPersistence = ServiceComponentUtil.getPersistence();
 		}
 
+		if (portletItemLocalService == null) {
+			portletItemLocalService = PortletItemLocalServiceFactory.getImpl();
+		}
+
+		if (portletItemPersistence == null) {
+			portletItemPersistence = PortletItemUtil.getPersistence();
+		}
+
 		if (subscriptionLocalService == null) {
 			subscriptionLocalService = SubscriptionLocalServiceFactory.getImpl();
 		}
@@ -1877,6 +1907,8 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 	protected RoleFinder roleFinder;
 	protected ServiceComponentLocalService serviceComponentLocalService;
 	protected ServiceComponentPersistence serviceComponentPersistence;
+	protected PortletItemLocalService portletItemLocalService;
+	protected PortletItemPersistence portletItemPersistence;
 	protected SubscriptionLocalService subscriptionLocalService;
 	protected SubscriptionPersistence subscriptionPersistence;
 	protected UserLocalService userLocalService;

@@ -101,10 +101,14 @@ import com.liferay.portal.service.PluginSettingService;
 import com.liferay.portal.service.PluginSettingServiceFactory;
 import com.liferay.portal.service.PortalService;
 import com.liferay.portal.service.PortalServiceFactory;
+import com.liferay.portal.service.PortletItemLocalService;
+import com.liferay.portal.service.PortletItemLocalServiceFactory;
 import com.liferay.portal.service.PortletLocalService;
 import com.liferay.portal.service.PortletLocalServiceFactory;
 import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
+import com.liferay.portal.service.PortletPreferencesService;
+import com.liferay.portal.service.PortletPreferencesServiceFactory;
 import com.liferay.portal.service.PortletService;
 import com.liferay.portal.service.PortletServiceFactory;
 import com.liferay.portal.service.RegionService;
@@ -213,6 +217,8 @@ import com.liferay.portal.service.persistence.PhonePersistence;
 import com.liferay.portal.service.persistence.PhoneUtil;
 import com.liferay.portal.service.persistence.PluginSettingPersistence;
 import com.liferay.portal.service.persistence.PluginSettingUtil;
+import com.liferay.portal.service.persistence.PortletItemPersistence;
+import com.liferay.portal.service.persistence.PortletItemUtil;
 import com.liferay.portal.service.persistence.PortletPersistence;
 import com.liferay.portal.service.persistence.PortletPreferencesFinder;
 import com.liferay.portal.service.persistence.PortletPreferencesFinderUtil;
@@ -921,6 +927,15 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 		this.portletPreferencesLocalService = portletPreferencesLocalService;
 	}
 
+	public PortletPreferencesService getPortletPreferencesService() {
+		return portletPreferencesService;
+	}
+
+	public void setPortletPreferencesService(
+		PortletPreferencesService portletPreferencesService) {
+		this.portletPreferencesService = portletPreferencesService;
+	}
+
 	public PortletPreferencesPersistence getPortletPreferencesPersistence() {
 		return portletPreferencesPersistence;
 	}
@@ -1070,6 +1085,24 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	public void setServiceComponentPersistence(
 		ServiceComponentPersistence serviceComponentPersistence) {
 		this.serviceComponentPersistence = serviceComponentPersistence;
+	}
+
+	public PortletItemLocalService getPortletItemLocalService() {
+		return portletItemLocalService;
+	}
+
+	public void setPortletItemLocalService(
+		PortletItemLocalService portletItemLocalService) {
+		this.portletItemLocalService = portletItemLocalService;
+	}
+
+	public PortletItemPersistence getPortletItemPersistence() {
+		return portletItemPersistence;
+	}
+
+	public void setPortletItemPersistence(
+		PortletItemPersistence portletItemPersistence) {
+		this.portletItemPersistence = portletItemPersistence;
 	}
 
 	public SubscriptionLocalService getSubscriptionLocalService() {
@@ -1572,6 +1605,10 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
 		}
 
+		if (portletPreferencesService == null) {
+			portletPreferencesService = PortletPreferencesServiceFactory.getImpl();
+		}
+
 		if (portletPreferencesPersistence == null) {
 			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
 		}
@@ -1642,6 +1679,14 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 
 		if (serviceComponentPersistence == null) {
 			serviceComponentPersistence = ServiceComponentUtil.getPersistence();
+		}
+
+		if (portletItemLocalService == null) {
+			portletItemLocalService = PortletItemLocalServiceFactory.getImpl();
+		}
+
+		if (portletItemPersistence == null) {
+			portletItemPersistence = PortletItemUtil.getPersistence();
 		}
 
 		if (subscriptionLocalService == null) {
@@ -1814,6 +1859,7 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	protected PortletService portletService;
 	protected PortletPersistence portletPersistence;
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	protected PortletPreferencesService portletPreferencesService;
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
 	protected PortletPreferencesFinder portletPreferencesFinder;
 	protected RegionService regionService;
@@ -1832,6 +1878,8 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	protected RoleFinder roleFinder;
 	protected ServiceComponentLocalService serviceComponentLocalService;
 	protected ServiceComponentPersistence serviceComponentPersistence;
+	protected PortletItemLocalService portletItemLocalService;
+	protected PortletItemPersistence portletItemPersistence;
 	protected SubscriptionLocalService subscriptionLocalService;
 	protected SubscriptionPersistence subscriptionPersistence;
 	protected UserLocalService userLocalService;

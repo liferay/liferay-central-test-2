@@ -106,6 +106,8 @@ public class PortletKeys {
 
 	public static final int PREFS_OWNER_TYPE_USER = 4;
 
+	public static final int PREFS_OWNER_TYPE_SAVED = 5;
+
 	public static final long PREFS_PLID_SHARED = 0;
 
 	public static final String SEARCH = "3";

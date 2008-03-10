@@ -793,6 +793,19 @@ create table Portlet (
 	active_ BOOLEAN
 );
 
+create table PortletItem (
+	portletItemId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	groupId LONG,
+	portletId VARCHAR(75) null,
+	classNameId LONG,
+	name VARCHAR(75) null
+);
+
 create table PortletPreferences (
 	portletPreferencesId LONG not null primary key,
 	ownerId LONG,

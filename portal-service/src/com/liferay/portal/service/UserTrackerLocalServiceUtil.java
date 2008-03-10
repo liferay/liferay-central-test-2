@@ -659,6 +659,19 @@ public class UserTrackerLocalServiceUtil {
 		userTrackerLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		return userTrackerLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
+
+		userTrackerLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 

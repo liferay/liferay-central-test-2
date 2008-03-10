@@ -659,6 +659,19 @@ public class OrgLaborLocalServiceUtil {
 		orgLaborLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		return orgLaborLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
+
+		orgLaborLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 

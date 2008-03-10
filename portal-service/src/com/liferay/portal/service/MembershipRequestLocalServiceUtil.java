@@ -660,6 +660,19 @@ public class MembershipRequestLocalServiceUtil {
 		membershipRequestLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
+
+		return membershipRequestLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
+
+		membershipRequestLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 

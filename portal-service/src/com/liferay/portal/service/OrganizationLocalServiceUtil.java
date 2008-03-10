@@ -660,6 +660,19 @@ public class OrganizationLocalServiceUtil {
 		organizationLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		organizationLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 

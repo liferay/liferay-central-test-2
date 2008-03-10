@@ -660,6 +660,19 @@ public class PluginSettingLocalServiceUtil {
 		pluginSettingLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		pluginSettingLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 

@@ -658,6 +658,19 @@ public class ContactLocalServiceUtil {
 		contactLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		return contactLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
+
+		contactLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		ContactLocalService contactLocalService = ContactLocalServiceFactory.getService();
 

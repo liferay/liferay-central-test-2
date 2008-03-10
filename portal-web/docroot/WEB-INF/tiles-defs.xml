@@ -886,6 +886,10 @@
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_permissions.jsp" />
 	</definition>
 
+	<definition name="portlet.portlet_configuration.edit_saved_setups" extends="portlet.portlet_configuration">
+		<put name="portlet_content" value="/portlet/portlet_configuration/edit_saved_setups.jsp" />
+	</definition>
+
 	<definition name="portlet.portlet_configuration.edit_supported_clients" extends="portlet.portlet_configuration">
 		<put name="portlet_content" value="/portlet/portlet_configuration/edit_supported_clients.jsp" />
 	</definition>

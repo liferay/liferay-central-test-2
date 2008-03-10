@@ -658,6 +658,19 @@ public class ReleaseLocalServiceUtil {
 		releaseLocalService.setServiceComponentPersistence(serviceComponentPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.PortletItemPersistence getPortletItemPersistence() {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		return releaseLocalService.getPortletItemPersistence();
+	}
+
+	public static void setPortletItemPersistence(
+		com.liferay.portal.service.persistence.PortletItemPersistence portletItemPersistence) {
+		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
+
+		releaseLocalService.setPortletItemPersistence(portletItemPersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence() {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
