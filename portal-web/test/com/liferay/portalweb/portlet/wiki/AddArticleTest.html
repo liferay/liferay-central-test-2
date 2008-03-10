@@ -10,13 +10,18 @@
 </thead><tbody>
 <tr>
 	<td>clickAndWait</td>
-	<td>link=[Edit]</td>
+	<td>link=This page is empty. Edit it to add some text.</td>
 	<td></td>
 </tr>
 <tr>
-	<td>typeKeys</td>
+	<td>waitForElementPresent</td>
 	<td>_36_content</td>
-	<td>=This is a test Wiki article=</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_36_content</td>
+	<td>==Test Wiki Article==<br /><br />//this is italics//<br /><br />**bold**<br /><br />[[http://www.liferay.com|Link to website]]<br /><br />*this is a list item<br />**this is a sub list item</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -25,7 +30,7 @@
 </tr>
 <tr>
 	<td>verifyTextPresent</td>
-	<td>This is a test Wiki article</td>
+	<td>Test Wiki Article</td>
 	<td></td>
 </tr>
 

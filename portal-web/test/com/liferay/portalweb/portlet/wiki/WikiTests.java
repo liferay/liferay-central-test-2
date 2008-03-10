@@ -34,10 +34,11 @@ public class WikiTests extends BaseTests {
 
 	public WikiTests() {
 		addTestSuite(AddPageTest.class);
-//		addTestSuite(AddPortletTest.class);
-//		addTestSuite(AddArticleTest.class);
-//		addTestSuite(AddCommentTest.class);
-//		addTestSuite(SearchTest.class);
+		addTestSuite(AddPortletTest.class);
+		addTestSuite(AddArticleTest.class);
+		addTestSuite(AddChildTest.class);
+		addTestSuite(AddCommentTest.class);
+		addTestSuite(SearchTest.class);
 	}
 
 }

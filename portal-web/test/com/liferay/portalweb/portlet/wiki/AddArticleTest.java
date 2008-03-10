@@ -32,11 +32,29 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddArticleTest extends BaseTestCase {
 	public void testAddArticle() throws Exception {
-		selenium.click("link=[Edit]");
+		selenium.click("link=This page is empty. Edit it to add some text.");
 		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("_36_content", "=This is a test Wiki article=");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_36_content")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_36_content",
+			"==Test Wiki Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a test Wiki article"));
+		verifyTrue(selenium.isTextPresent("Test Wiki Article"));
 	}
 }

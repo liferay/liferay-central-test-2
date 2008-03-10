@@ -25,34 +25,20 @@ package com.liferay.portalweb.portlet.wiki;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddPortletTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddChildTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddPortletTest extends BaseTestCase {
-	public void testAddPortlet() throws Exception {
-		selenium.click("link=Add Application");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("//div[@id=\"Wiki-Wiki\"]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.mouseDown("//div[@id=\"Wiki-Wiki\"]/p/a");
-		Thread.sleep(5000);
-		verifyTrue(selenium.isTextPresent(
-				"This page is empty. Edit it to add some text."));
+public class AddChildTest extends BaseTestCase {
+	public void testAddChild() throws Exception {
+		selenium.click("link=Add Child Page");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_36_title", "Test");
+		selenium.type("_36_content",
+			"==Test Child Article==\n\n//this is italics//\n\n**bold**\n\n[[http://www.liferay.com|Link to website]]\n\n*this is a list item\n**this is a sub list item");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("Children"));
 	}
 }
