@@ -115,7 +115,7 @@ public class TasksActivityTrackerInterpreter
 		StringMaker sm = new StringMaker();
 
 		sm.append("<b>");
-		sm.append(proposal.getName(themeDisplay.getLocale()));
+		sm.append(proposal.getName());
 		sm.append("</b> (");
 		sm.append(
 			themeDisplay.translate(
