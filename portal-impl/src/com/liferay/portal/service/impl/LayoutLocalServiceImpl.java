@@ -131,7 +131,7 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Augé
+ * @author Raymond Aug?
  * @author Jorge Ferrer
  * @author Bruno Farache
  *
@@ -2719,7 +2719,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return new AlwaysCurrentUserIdStrategy(user);
 		}
 
-		return new CurrentUserIdStrategy(user);		
+		return new CurrentUserIdStrategy(user);
 	}
 
 	protected boolean hasRole(List roles, String roleName) {
