@@ -44,7 +44,6 @@ import com.liferay.util.Time;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
