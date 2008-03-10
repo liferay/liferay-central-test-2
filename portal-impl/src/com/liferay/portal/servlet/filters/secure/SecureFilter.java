@@ -162,7 +162,7 @@ public class SecureFilter extends BaseFilter {
 
 			// This basic authentication should only be run if specified by
 			// web.xml and JAAS is disabled. Make sure to run this once per
-			// session, but wrap request when necessary.
+			// session and wrap the request if necessary.
 
 			HttpSession ses = httpReq.getSession();
 
@@ -183,11 +183,12 @@ public class SecureFilter extends BaseFilter {
 					}
 
 					if (userId > 0) {
-						String userIdStr = String.valueOf(userId);
+						String userIdString = String.valueOf(userId);
 
-						req = new ProtectedServletRequest(httpReq, userIdStr);
+						req = new ProtectedServletRequest(
+							httpReq, userIdString);
 
-						ses.setAttribute(_AUTHENTICATED_USER, userIdStr);
+						ses.setAttribute(_AUTHENTICATED_USER, userIdString);
 					}
 					else {
 						httpRes.setHeader(
