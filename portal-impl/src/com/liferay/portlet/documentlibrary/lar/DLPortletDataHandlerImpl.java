@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -390,6 +391,38 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	protected String getFolderName(
+			long companyId, long groupId, long parentFolderId, String name,
+			int count)
+		throws SystemException {
+
+		DLFolder folder = DLFolderUtil.fetchByG_P_N(
+			groupId, parentFolderId, name);
+
+		if (folder == null) {
+			return name;
+		}
+
+		if (Pattern.matches(".* \\(\\d+\\)", name)) {
+			int pos = name.lastIndexOf(" (");
+
+			name = name.substring(0, pos);
+		}
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(name);
+		sm.append(StringPool.SPACE);
+		sm.append(StringPool.OPEN_PARENTHESIS);
+		sm.append(count);
+		sm.append(StringPool.CLOSE_PARENTHESIS);
+
+		name = sm.toString();
+
+		return getFolderName(
+			companyId, groupId, parentFolderId, name, ++count);
+	}
+
 	protected void importEntry(
 			PortletDataContext context, Map folderPKs, Map entryNames,
 			DLFileEntry entry)
@@ -493,7 +526,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 					folder.getUuid(), context.getGroupId());
 
 				if (existingFolder == null) {
-					String name = validateFolderName(
+					String name = getFolderName(
 						context.getCompanyId(), context.getGroupId(),
 						parentFolderId, folder.getName(), 2);
 
@@ -509,7 +542,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				}
 			}
 			else {
-				String name = validateFolderName(
+				String name = getFolderName(
 					context.getCompanyId(), context.getGroupId(),
 					parentFolderId, folder.getName(), 2);
 
@@ -605,31 +638,6 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 				"Could not find the folder for shortcut " +
 					shortcut.getFileShortcutId());
 		}
-	}
-
-	protected String validateFolderName(
-			long companyId, long groupId, long parentFolderId, String name,
-			int i)
-		throws SystemException {
-
-		DLFolder folder = DLFolderUtil.fetchByG_P_N(
-			groupId, parentFolderId, name);
-
-		if (folder == null) {
-			return name;
-		}
-
-		if (Pattern.matches(".* \\(\\d+\\)", name)) {
-			int pos = name.lastIndexOf(" (");
-
-			name = name.substring(0, pos);
-		}
-
-		name =  name + StringPool.SPACE + StringPool.OPEN_PARENTHESIS + i +
-			StringPool.CLOSE_PARENTHESIS;
-
-		return validateFolderName(
-			companyId, groupId, parentFolderId, name, ++i);
 	}
 
 	private static final String _NAMESPACE = "document_library";
