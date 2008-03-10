@@ -144,15 +144,15 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public Map getNewPrimaryKeysMap(Class classObj) {
-		Map value = _newPrimaryKeysMaps.get(classObj.getName());
+		Map map = _newPrimaryKeysMaps.get(classObj.getName());
 
-		if (value == null) {
-			value = CollectionFactory.getHashMap();
+		if (map == null) {
+			map = new HashMap();
 
-			_newPrimaryKeysMaps.put(classObj.getName(), value);
+			_newPrimaryKeysMaps.put(classObj.getName(), map);
 		}
 
-		return value;
+		return map;
 	}
 
 	public Map getComments() {
