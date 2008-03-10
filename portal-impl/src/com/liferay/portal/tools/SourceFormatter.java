@@ -294,6 +294,9 @@ public class SourceFormatter {
 
 			newContent = stripImports(newContent, packagePath, className);
 
+			newContent = StringUtil.replace(
+				newContent, "@author Raymond Aug?", "@author Raymond Augé");
+
 			if (newContent.indexOf(";\n/**") != -1) {
 				newContent = StringUtil.replace(
 					newContent,
@@ -412,6 +415,11 @@ public class SourceFormatter {
 
 			String content = FileUtil.read(file, true);
 			String newContent = _formatJSPContent(files[i], content);
+
+			newContent = StringUtil.replace(
+				newContent,
+				new String[] {"<br/>", "\"/>"},
+				new String[] {"<br />", "\" />"});
 
 			if (files[i].endsWith(".jsp")) {
 				if (newContent.indexOf(copyright) == -1) {

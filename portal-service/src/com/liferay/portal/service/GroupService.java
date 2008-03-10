@@ -108,6 +108,11 @@ public interface GroupService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portal.model.Group updateFriendlyURL(long groupId,
+		java.lang.String friendlyURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active)
@@ -116,6 +121,12 @@ public interface GroupService {
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String typeSettings)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Group updateWorkflow(long groupId,
+		boolean workflowEnabled, int workflowStages,
+		java.lang.String workflowRoleNames)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

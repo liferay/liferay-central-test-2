@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs2 = ParamUtil.getString(request, "tabs2", "public");
+String tabs2 = ParamUtil.getString(request, "tabs2", "public-pages");
 
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
@@ -90,7 +90,7 @@ for (int i = 0; i < selectedPlids.length; i++) {
 	}
 }
 
-boolean privateLayout = tabs2.equals("private");
+boolean privateLayout = tabs2.equals("private-pages");
 
 if (privateLayout) {
 	pagesCount = selGroup.getPrivateLayoutsPageCount();

@@ -12,11 +12,6 @@
 		<hint name="display-width">500</hint>
 		<hint name="max-length">4000</hint>
 	</hint-collection>
-	<hint-collection name="TEXTSNIPPET">
-		<hint name="display-height">40</hint>
-		<hint name="display-width">500</hint>
-		<hint name="max-length">4000</hint>
-	</hint-collection>
 	<hint-collection name="SEARCHABLE-DATE">
 		<hint name="month-nullable">true</hint>
 		<hint name="day-nullable">true</hint>
@@ -1441,6 +1436,21 @@
 		<field name="name" type="String" />
 		<field name="acronym" type="String" />
 	</model>
+	<model name="com.liferay.portlet.tasks.model.TasksReview">
+		<field name="reviewId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="proposalId" type="long" />
+		<field name="assignedByUserId" type="long" />
+		<field name="assignedByUserName" type="String" />
+		<field name="stage" type="int" />
+		<field name="completed" type="boolean" />
+		<field name="rejected" type="boolean" />
+	</model>
 	<model name="com.liferay.portlet.tasks.model.TasksProposal">
 		<field name="proposalId" type="long" />
 		<field name="groupId" type="long" />
@@ -1451,30 +1461,12 @@
 		<field name="modifiedDate" type="Date" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
-		<field name="name" type="String">
-			<hint-collection name="TEXTAREA" />
-			<hint name="auto-escape">false</hint>
-		</field>
+		<field name="name" type="String" />
 		<field name="description" type="String">
-			<hint-collection name="TEXTSNIPPET" />
+			<hint-collection name="TEXTAREA" />
 		</field>
 		<field name="publishDate" type="Date" />
 		<field name="dueDate" type="Date" />
-	</model>
-	<model name="com.liferay.portlet.tasks.model.TasksReview">
-		<field name="reviewId" type="long" />
-		<field name="groupId" type="long" />
-		<field name="companyId" type="long" />
-		<field name="userId" type="long" />
-		<field name="userName" type="String" />
-		<field name="createDate" type="Date" />
-		<field name="modifiedDate" type="Date" />
-		<field name="assigningUserId" type="long" />
-		<field name="assigningUserName" type="String" />
-		<field name="proposalId" type="long" />
-		<field name="stage" type="int" />
-		<field name="completed" type="boolean" />
-		<field name="rejected" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.wiki.model.WikiNode">
 		<field name="uuid" type="String" />

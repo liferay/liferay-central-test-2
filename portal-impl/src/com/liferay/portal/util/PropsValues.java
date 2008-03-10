@@ -705,6 +705,12 @@ public class PropsValues {
 	public static final boolean TAGS_COMPILER_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.TAGS_COMPILER_ENABLED));
 
+	public static final String TASKS_DEFAULT_ROLE_NAMES = PropsUtil.get(
+		PropsUtil.TASKS_DEFAULT_ROLE_NAMES);
+
+	public static final int TASKS_DEFAULT_STAGES = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.TASKS_DEFAULT_STAGES));
+
 	public static final boolean TCK_URL = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.TCK_URL));
 

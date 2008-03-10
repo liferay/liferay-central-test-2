@@ -49,20 +49,7 @@ package com.liferay.portlet.tasks.model;
  *
  */
 public interface TasksProposal extends TasksProposalModel {
-	public int getCurrentStage();
-
-	public java.lang.String getCurrentStatus();
-
-	public java.lang.String getCurrentStatus(int stage);
-
-	public java.lang.String getName(java.util.Locale locale);
-
-	public java.lang.String getName(java.lang.String localeLanguageId);
-
-	public java.lang.String getName(java.util.Locale locale, boolean useDefault);
-
-	public java.lang.String getName(java.lang.String localeLanguageId,
-		boolean useDefault);
-
-	public void setName(java.lang.String name, java.util.Locale locale);
+	public java.lang.String getStatus(java.util.Locale locale)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 }

@@ -35,7 +35,7 @@
 <%@ page import="com.sun.syndication.feed.synd.SyndContent" %>
 <%@ page import="com.sun.syndication.feed.synd.SyndEntry" %>
 <%@ page import="com.sun.syndication.feed.synd.SyndFeed" %>
-<%@ page import="com.sun.syndication.feed.synd.SyndImage"%>
+<%@ page import="com.sun.syndication.feed.synd.SyndImage" %>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();

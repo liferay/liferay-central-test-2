@@ -84,13 +84,13 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			
 
-			{ "assigningUserId", new Integer(Types.BIGINT) },
-			
-
-			{ "assigningUserName", new Integer(Types.VARCHAR) },
-			
-
 			{ "proposalId", new Integer(Types.BIGINT) },
+			
+
+			{ "assignedByUserId", new Integer(Types.BIGINT) },
+			
+
+			{ "assignedByUserName", new Integer(Types.VARCHAR) },
 			
 
 			{ "stage", new Integer(Types.INTEGER) },
@@ -101,7 +101,7 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 
 			{ "rejected", new Integer(Types.BOOLEAN) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TasksReview (reviewId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,assigningUserId LONG,assigningUserName VARCHAR(75) null,proposalId LONG,stage INTEGER,completed BOOLEAN,rejected BOOLEAN)";
+	public static final String TABLE_SQL_CREATE = "create table TasksReview (reviewId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,proposalId LONG,assignedByUserId LONG,assignedByUserName VARCHAR(75) null,stage INTEGER,completed BOOLEAN,rejected BOOLEAN)";
 	public static final String TABLE_SQL_DROP = "drop table TasksReview";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tasks.model.TasksReview"),
@@ -203,29 +203,6 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getAssigningUserId() {
-		return _assigningUserId;
-	}
-
-	public void setAssigningUserId(long assigningUserId) {
-		if (assigningUserId != _assigningUserId) {
-			_assigningUserId = assigningUserId;
-		}
-	}
-
-	public String getAssigningUserName() {
-		return GetterUtil.getString(_assigningUserName);
-	}
-
-	public void setAssigningUserName(String assigningUserName) {
-		if (((assigningUserName == null) && (_assigningUserName != null)) ||
-				((assigningUserName != null) && (_assigningUserName == null)) ||
-				((assigningUserName != null) && (_assigningUserName != null) &&
-				!assigningUserName.equals(_assigningUserName))) {
-			_assigningUserName = assigningUserName;
-		}
-	}
-
 	public long getProposalId() {
 		return _proposalId;
 	}
@@ -233,6 +210,29 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 	public void setProposalId(long proposalId) {
 		if (proposalId != _proposalId) {
 			_proposalId = proposalId;
+		}
+	}
+
+	public long getAssignedByUserId() {
+		return _assignedByUserId;
+	}
+
+	public void setAssignedByUserId(long assignedByUserId) {
+		if (assignedByUserId != _assignedByUserId) {
+			_assignedByUserId = assignedByUserId;
+		}
+	}
+
+	public String getAssignedByUserName() {
+		return GetterUtil.getString(_assignedByUserName);
+	}
+
+	public void setAssignedByUserName(String assignedByUserName) {
+		if (((assignedByUserName == null) && (_assignedByUserName != null)) ||
+				((assignedByUserName != null) && (_assignedByUserName == null)) ||
+				((assignedByUserName != null) && (_assignedByUserName != null) &&
+				!assignedByUserName.equals(_assignedByUserName))) {
+			_assignedByUserName = assignedByUserName;
 		}
 	}
 
@@ -290,9 +290,9 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 			model.setUserName(Html.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setAssigningUserId(getAssigningUserId());
-			model.setAssigningUserName(Html.escape(getAssigningUserName()));
 			model.setProposalId(getProposalId());
+			model.setAssignedByUserId(getAssignedByUserId());
+			model.setAssignedByUserName(Html.escape(getAssignedByUserName()));
 			model.setStage(getStage());
 			model.setCompleted(getCompleted());
 			model.setRejected(getRejected());
@@ -315,9 +315,9 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setAssigningUserId(getAssigningUserId());
-		clone.setAssigningUserName(getAssigningUserName());
 		clone.setProposalId(getProposalId());
+		clone.setAssignedByUserId(getAssignedByUserId());
+		clone.setAssignedByUserName(getAssignedByUserName());
 		clone.setStage(getStage());
 		clone.setCompleted(getCompleted());
 		clone.setRejected(getRejected());
@@ -378,9 +378,9 @@ public class TasksReviewModelImpl extends BaseModelImpl {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _assigningUserId;
-	private String _assigningUserName;
 	private long _proposalId;
+	private long _assignedByUserId;
+	private String _assignedByUserName;
 	private int _stage;
 	private boolean _completed;
 	private boolean _rejected;

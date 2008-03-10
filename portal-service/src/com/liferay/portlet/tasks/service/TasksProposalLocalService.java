@@ -74,6 +74,11 @@ public interface TasksProposalLocalService {
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.SystemException;
 
+	public com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence getTasksReviewPersistence();
+
+	public void setTasksReviewPersistence(
+		com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence tasksReviewPersistence);
+
 	public com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence getTasksProposalPersistence();
 
 	public void setTasksProposalPersistence(
@@ -84,11 +89,6 @@ public interface TasksProposalLocalService {
 	public void setTasksProposalFinder(
 		com.liferay.portlet.tasks.service.persistence.TasksProposalFinder tasksProposalFinder);
 
-	public com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence getTasksReviewPersistence();
-
-	public void setTasksReviewPersistence(
-		com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence tasksReviewPersistence);
-
 	public com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence();
 
 	public void setActivityTrackerPersistence(
@@ -98,21 +98,6 @@ public interface TasksProposalLocalService {
 
 	public void setActivityTrackerFinder(
 		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder);
-
-	public com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence();
-
-	public void setCompanyPersistence(
-		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence);
-
-	public com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence();
-
-	public void setPortletPreferencesPersistence(
-		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence);
-
-	public com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder();
-
-	public void setPortletPreferencesFinder(
-		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder);
 
 	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
 
@@ -147,40 +132,23 @@ public interface TasksProposalLocalService {
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
+		long userId, long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		long stageOneReviewerId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
+		long userId, long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		long stageOneReviewerId, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		java.lang.Long stageOneReviewerId,
+		long userId, long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -229,7 +197,7 @@ public interface TasksProposalLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public void deleteProposals(long companyId, long groupId)
+	public void deleteProposals(long groupId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -248,45 +216,25 @@ public interface TasksProposalLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getProposals()
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getProposals(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getProposals(long companyId, long groupId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public int getProposalsCount(long companyId, long groupId)
+	public int getProposalsCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getReviewersProposals(long companyId, long groupId,
-		long reviewingUserId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getReviewProposals(
+		long groupId, long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public int getReviewersProposalsCount(long companyId, long groupId,
-		long reviewingUserId) throws com.liferay.portal.SystemException;
-
-	public java.util.List getUsersProposals(long companyId, long groupId,
-		long userId, int begin, int end)
+	public int getReviewProposalsCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public int getUsersProposalsCount(long companyId, long groupId, long userId)
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getUserProposals(
+		long groupId, long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, long groupId,
-		java.lang.String keywords, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List search(long companyId, long groupId,
-		java.lang.String name, java.lang.String userName, boolean andOperator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public int searchCount(long companyId, long groupId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException;
-
-	public int searchCount(long companyId, long groupId, java.lang.String name,
-		java.lang.String userName, boolean andOperator)
+	public int getUserProposalsCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal updateProposal(

@@ -228,9 +228,23 @@ Liferay.Service.Portal.Group = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	updateFriendlyURL: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateFriendlyURL";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateGroup: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateGroup";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateWorkflow: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateWorkflow";
 
 		return Liferay.Service.ajax(params, callback);
 	}
@@ -2455,6 +2469,31 @@ Liferay.Service.Tasks = {
 	servicePackage: "com.liferay.portlet.tasks.service.http."
 };
 
+Liferay.Service.Tasks.TasksReview = {
+	serviceClassName: Liferay.Service.Tasks.servicePackage + "TasksReview" + Liferay.Service.classNameSuffix,
+
+	approveReview: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "approveReview";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	rejectReview: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "rejectReview";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateReviews: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateReviews";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Tasks.TasksProposal = {
 	serviceClassName: Liferay.Service.Tasks.servicePackage + "TasksProposal" + Liferay.Service.classNameSuffix,
 
@@ -2475,38 +2514,6 @@ Liferay.Service.Tasks.TasksProposal = {
 	updateProposal: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateProposal";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Tasks.TasksReview = {
-	serviceClassName: Liferay.Service.Tasks.servicePackage + "TasksReview" + Liferay.Service.classNameSuffix,
-
-	addReview: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addReview";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	rejectReview: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "rejectReview";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteReview: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteReview";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateReviewers: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateReviewers";
 
 		return Liferay.Service.ajax(params, callback);
 	}

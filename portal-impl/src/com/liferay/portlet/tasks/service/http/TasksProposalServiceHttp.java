@@ -75,94 +75,36 @@ import com.liferay.portlet.tasks.service.TasksProposalServiceUtil;
  */
 public class TasksProposalServiceHttp {
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj2 = description;
-
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new LongWrapper(classNameId);
-
-			Object paramObj4 = new LongWrapper(classPK);
-
-			Object paramObj5 = new BooleanWrapper(addCommunityPermissions);
-
-			Object paramObj6 = new BooleanWrapper(addGuestPermissions);
-
-			MethodWrapper methodWrapper = new MethodWrapper(TasksProposalServiceUtil.class.getName(),
-					"addProposal",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tasks.model.TasksProposal)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		long reviewerId, boolean addCommunityPermissions,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
+		long classPK, java.lang.String name, java.lang.String description,
+		long reviewUserId, boolean addCommunityPermissions,
 		boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = className;
 
-			if (name == null) {
+			if (className == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = description;
+			Object paramObj2 = new LongWrapper(classPK);
 
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new LongWrapper(classNameId);
+			Object paramObj4 = description;
 
-			Object paramObj4 = new LongWrapper(classPK);
+			if (description == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
 
-			Object paramObj5 = new LongWrapper(reviewerId);
+			Object paramObj5 = new LongWrapper(reviewUserId);
 
 			Object paramObj6 = new BooleanWrapper(addCommunityPermissions);
 
@@ -202,103 +144,36 @@ public class TasksProposalServiceHttp {
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		java.lang.String[] communityPermissions,
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
+		long classPK, java.lang.String name, java.lang.String description,
+		long reviewUserId, java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = name;
+			Object paramObj1 = className;
 
-			if (name == null) {
+			if (className == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = description;
+			Object paramObj2 = new LongWrapper(classPK);
 
-			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj3 = new LongWrapper(classNameId);
-
-			Object paramObj4 = new LongWrapper(classPK);
-
-			Object paramObj5 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj6 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj6 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TasksProposalServiceUtil.class.getName(),
-					"addProposal",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tasks.model.TasksProposal)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		HttpPrincipal httpPrincipal, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		long reviewerId, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = name;
+			Object paramObj3 = name;
 
 			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = description;
+			Object paramObj4 = description;
 
 			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new LongWrapper(classNameId);
-
-			Object paramObj4 = new LongWrapper(classPK);
-
-			Object paramObj5 = new LongWrapper(reviewerId);
+			Object paramObj5 = new LongWrapper(reviewUserId);
 
 			Object paramObj6 = communityPermissions;
 
@@ -346,16 +221,14 @@ public class TasksProposalServiceHttp {
 	}
 
 	public static void deleteProposal(HttpPrincipal httpPrincipal,
-		long groupId, long proposalId)
+		long proposalId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(proposalId);
+			Object paramObj0 = new LongWrapper(proposalId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(TasksProposalServiceUtil.class.getName(),
-					"deleteProposal", new Object[] { paramObj0, paramObj1 });
+					"deleteProposal", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -380,37 +253,35 @@ public class TasksProposalServiceHttp {
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal updateProposal(
-		HttpPrincipal httpPrincipal, long groupId, long proposalId,
+		HttpPrincipal httpPrincipal, long proposalId,
 		java.lang.String description, int dueDateMonth, int dueDateDay,
 		int dueDateYear, int dueDateHour, int dueDateMinute)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = new LongWrapper(proposalId);
 
-			Object paramObj1 = new LongWrapper(proposalId);
-
-			Object paramObj2 = description;
+			Object paramObj1 = description;
 
 			if (description == null) {
-				paramObj2 = new NullWrapper("java.lang.String");
+				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = new IntegerWrapper(dueDateMonth);
+			Object paramObj2 = new IntegerWrapper(dueDateMonth);
 
-			Object paramObj4 = new IntegerWrapper(dueDateDay);
+			Object paramObj3 = new IntegerWrapper(dueDateDay);
 
-			Object paramObj5 = new IntegerWrapper(dueDateYear);
+			Object paramObj4 = new IntegerWrapper(dueDateYear);
 
-			Object paramObj6 = new IntegerWrapper(dueDateHour);
+			Object paramObj5 = new IntegerWrapper(dueDateHour);
 
-			Object paramObj7 = new IntegerWrapper(dueDateMinute);
+			Object paramObj6 = new IntegerWrapper(dueDateMinute);
 
 			MethodWrapper methodWrapper = new MethodWrapper(TasksProposalServiceUtil.class.getName(),
 					"updateProposal",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;

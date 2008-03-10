@@ -44,7 +44,7 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
@@ -78,8 +78,6 @@ import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
-import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
-import com.liferay.portlet.tasks.util.TasksUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadException;
@@ -156,26 +154,23 @@ public class EditPagesAction extends PortletAction {
 			else if (cmd.equals("look_and_feel")) {
 				updateLookAndFeel(req);
 			}
-			else if (cmd.equals("update_managed_staging_state")) {
-				updateManagedStagingState(req);
-			}
 			else if (cmd.equals("merge_pages")) {
 				updateMergePages(req);
 			}
 			else if (cmd.equals("monitoring")) {
 				updateMonitoring(req);
 			}
-			else if (cmd.equals("update_number_of_approval_stages")) {
-				updateNumberOfApprovalStages(req);
-			}
 			else if (cmd.equals("publish_to_live")) {
 				publishToLive(req);
 			}
-			else if (cmd.equals("update_staging_state")) {
-				updateStagingState(req);
+			else if (cmd.equals("staging")) {
+				updateStaging(req);
 			}
 			else if (cmd.equals("virtual_host")) {
 				updateVirtualHost(req);
+			}
+			else if (cmd.equals("workflow")) {
+				updateWorkflow(req);
 			}
 
 			String redirect = ParamUtil.getString(req, "pagesRedirect");
@@ -252,8 +247,8 @@ public class EditPagesAction extends PortletAction {
 
 		// LEP-850
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
@@ -262,25 +257,26 @@ public class EditPagesAction extends PortletAction {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		if (group.isCommunity() &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, group.getGroupId(),
-				ActionKeys.MANAGE_LAYOUTS) &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, group.getGroupId(),
-				ActionKeys.APPROVE_PROPOSAL)) {
+		if (group.isCommunity()) {
+			if (!GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.APPROVE_PROPOSAL) &&
+				!GroupPermissionUtil.contains(
+					permissionChecker, group.getGroupId(),
+					ActionKeys.MANAGE_LAYOUTS)) {
 
-			throw new PrincipalException();
+				throw new PrincipalException();
+			}
 		}
 		else if (group.isOrganization()) {
 			long organizationId = group.getClassPK();
 
 			if (!OrganizationPermissionUtil.contains(
 					permissionChecker, organizationId,
-					ActionKeys.MANAGE_LAYOUTS) &&
+					ActionKeys.APPROVE_PROPOSAL) &&
 				!OrganizationPermissionUtil.contains(
 					permissionChecker, organizationId,
-					ActionKeys.APPROVE_PROPOSAL)) {
+					ActionKeys.MANAGE_LAYOUTS)) {
 
 				throw new PrincipalException();
 			}
@@ -311,7 +307,7 @@ public class EditPagesAction extends PortletAction {
 
 		boolean privateLayout = true;
 
-		if (tabs2.equals("public")) {
+		if (tabs2.equals("public-pages")) {
 			privateLayout = false;
 		}
 
@@ -492,9 +488,7 @@ public class EditPagesAction extends PortletAction {
 		String prefix = "TypeSettingsProperties(";
 
 		for (String paramName: req.getParameterMap().keySet()) {
-
 			if (paramName.startsWith(prefix)) {
-
 				String key = paramName.substring(
 					prefix.length(), paramName.length() - 1);
 
@@ -627,7 +621,7 @@ public class EditPagesAction extends PortletAction {
 
 		boolean privateLayout = true;
 
-		if (tabs2.equals("public")) {
+		if (tabs2.equals("public-pages")) {
 			privateLayout = false;
 		}
 
@@ -678,8 +672,8 @@ public class EditPagesAction extends PortletAction {
 	protected void updateLayout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
@@ -767,7 +761,8 @@ public class EditPagesAction extends PortletAction {
 				localeNamesMap, localeTitlesMap, description, type, hidden,
 				friendlyURL, Boolean.valueOf(iconImage), iconBytes);
 
-			Properties formProperties = getTypeSettingsProperties(req);
+			Properties formTypeSettingsProperties = getTypeSettingsProperties(
+				req);
 
 			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
 				if ((copyLayoutId > 0) &&
@@ -791,14 +786,12 @@ public class EditPagesAction extends PortletAction {
 					}
 				}
 				else {
-
-					Properties layoutProperties =
+					Properties layoutTypeSettingsProperties =
 						layout.getTypeSettingsProperties();
 
-					for (Object property: formProperties.keySet()) {
-						layoutProperties.setProperty(
-							(String)property,
-							formProperties.getProperty((String)property));
+					for (Object property: formTypeSettingsProperties.keySet()) {
+						layoutTypeSettingsProperties.put(
+							property, formTypeSettingsProperties.get(property));
 					}
 
 					LayoutServiceUtil.updateLayout(
@@ -807,7 +800,7 @@ public class EditPagesAction extends PortletAction {
 				}
 			}
 			else {
-				layout.setTypeSettingsProperties(formProperties);
+				layout.setTypeSettingsProperties(formTypeSettingsProperties);
 
 				LayoutServiceUtil.updateLayout(
 					groupId, privateLayout, layoutId, layout.getTypeSettings());
@@ -826,11 +819,12 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void updateLogo(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
+			req);
 
 		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		boolean logo = ParamUtil.getBoolean(req, "logo");
 
@@ -850,16 +844,34 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void updateLookAndFeel(ActionRequest req) throws Exception {
-		long companyId = PortalUtil.getCompanyId(req);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
+
+		long companyId = themeDisplay.getCompanyId();
 
 		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 		long layoutId = ParamUtil.getLong(req, "layoutId");
 		String themeId = ParamUtil.getString(req, "themeId");
 		String colorSchemeId = ParamUtil.getString(req, "colorSchemeId");
 		String css = ParamUtil.getString(req, "css");
 		boolean wapTheme = ParamUtil.getBoolean(req, "wapTheme");
+
+		updateLookAndFeel(
+			companyId, liveGroupId, privateLayout, layoutId, themeId,
+			colorSchemeId, css, wapTheme);
+
+		updateLookAndFeel(
+			companyId, stagingGroupId, privateLayout, layoutId, themeId,
+			colorSchemeId, css, wapTheme);
+	}
+
+	protected void updateLookAndFeel(
+			long companyId, long groupId, boolean privateLayout, long layoutId,
+			String themeId, String colorSchemeId, String css, boolean wapTheme)
+		throws Exception {
 
 		if (Validator.isNotNull(themeId) && Validator.isNull(colorSchemeId)) {
 			ColorScheme colorScheme = ThemeLocalUtil.getColorScheme(
@@ -869,147 +881,64 @@ public class EditPagesAction extends PortletAction {
 		}
 
 		if (layoutId <= 0) {
-
-			// Update layout set
-
 			LayoutSetServiceUtil.updateLookAndFeel(
-				liveGroupId, privateLayout, themeId, colorSchemeId, css,
-				wapTheme);
-
-			if (stagingGroupId > 0) {
-				LayoutSetServiceUtil.updateLookAndFeel(
-					stagingGroupId, privateLayout, themeId, colorSchemeId, css,
-					wapTheme);
-			}
+				groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);
 		}
 		else {
-
-			// Update layout
-
 			LayoutServiceUtil.updateLookAndFeel(
-				liveGroupId, privateLayout, layoutId, themeId, colorSchemeId,
-				css, wapTheme);
+				groupId, privateLayout, layoutId, themeId, colorSchemeId, css,
+				wapTheme);
 		}
-	}
-
-	protected void updateManagedStagingState(ActionRequest req)
-		throws Exception {
-
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
-		boolean activateManagedStaging = ParamUtil.getBoolean(
-			req, "activateManagedStaging");
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		if (!GroupPermissionUtil.contains(
-				permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
-
-			throw new PrincipalException();
-		}
-
-		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
-
-		Properties props = liveGroup.getTypeSettingsProperties();
-
-		props.setProperty(
-			GroupImpl.MANAGED_STAGING, String.valueOf(activateManagedStaging));
-
-		GroupServiceUtil.updateGroup(
-			liveGroup.getGroupId(), liveGroup.getTypeSettings());
 	}
 
 	protected void updateMergePages(ActionRequest req) throws Exception {
 		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
 
-		Group group = GroupLocalServiceUtil.getGroup(liveGroupId);
-
 		boolean mergeGuestPublicPages = ParamUtil.getBoolean(
 			req, "mergeGuestPublicPages");
+
+		updateMergePages(liveGroupId, mergeGuestPublicPages);
+
+		updateMergePages(stagingGroupId, mergeGuestPublicPages);
+	}
+
+	protected void updateMergePages(long groupId, boolean mergeGuestPublicPages)
+		throws Exception {
+
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		Properties props = group.getTypeSettingsProperties();
 
 		props.setProperty(
 			"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
 
-		GroupServiceUtil.updateGroup(liveGroupId, group.getTypeSettings());
-
-		if (stagingGroupId > 0) {
-			group = GroupLocalServiceUtil.getGroup(stagingGroupId);
-
-			props = group.getTypeSettingsProperties();
-
-			props.setProperty(
-				"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
-
-			GroupServiceUtil.updateGroup(
-				stagingGroupId, group.getTypeSettings());
-		}
+		GroupServiceUtil.updateGroup(groupId, group.getTypeSettings());
 	}
 
 	protected void updateMonitoring(ActionRequest req) throws Exception {
 		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 
-		Group group = GroupLocalServiceUtil.getGroup(liveGroupId);
-
 		String googleAnalyticsId = ParamUtil.getString(
 			req, "googleAnalyticsId");
 
-		Properties props = group.getTypeSettingsProperties();
+		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
+
+		Properties props = liveGroup.getTypeSettingsProperties();
 
 		props.setProperty("googleAnalyticsId", googleAnalyticsId);
 
-		GroupServiceUtil.updateGroup(liveGroupId, group.getTypeSettings());
+		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
 	}
 
-	protected void updateNumberOfApprovalStages(ActionRequest req)
-		throws Exception {
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		int numberOfApprovalStages =
-			ParamUtil.getInteger(req, "numberOfApprovalStages");
-
-		PortletPreferences prefs =
-			TasksUtil.getPreferences(themeDisplay.getCompanyId(), liveGroupId);
-
-		List<String> roleNames = new ArrayList<String>();
-
-		for (int i = 0; i < numberOfApprovalStages; i++) {
-			String roleName = ParamUtil.getString(req, "approvalRoleName_" + i);
-
-			roleNames.add(roleName);
-		}
-
-		String[] roleNamesArr = roleNames.toArray(new String[roleNames.size()]);
-
-		prefs.setValue(
-			"number-of-approval-stages",
-			String.valueOf(numberOfApprovalStages));
-		prefs.setValues(
-			"approval-role-names", roleNamesArr);
-
-		prefs.store();
-	}
-
-	protected void updateStagingState(ActionRequest req) throws Exception {
-		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
-		boolean activateStaging = ParamUtil.getBoolean(req, "activateStaging");
-		boolean activateManagedStaging = ParamUtil.getBoolean(
-				req, "activateManagedStaging");
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+	protected void updateStaging(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
+
+		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 
 		if (!GroupPermissionUtil.contains(
 				permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
@@ -1017,73 +946,77 @@ public class EditPagesAction extends PortletAction {
 			throw new PrincipalException();
 		}
 
-		if ((stagingGroupId > 0) && !activateStaging) {
+		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
+
+		boolean stagingEnabled = ParamUtil.getBoolean(req, "stagingEnabled");
+		boolean workflowEnabled = ParamUtil.getBoolean(req, "workflowEnabled");
+
+		if ((stagingGroupId > 0) && !stagingEnabled) {
 			GroupServiceUtil.deleteGroup(stagingGroupId);
 
-			if (activateManagedStaging) {
-				Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
-
-				Properties props = liveGroup.getTypeSettingsProperties();
-
-				props.setProperty(
-					GroupImpl.MANAGED_STAGING, StringPool.BLANK);
-
-				GroupServiceUtil.updateGroup(
-					liveGroup.getGroupId(), liveGroup.getTypeSettings());
-
-				TasksProposalLocalServiceUtil.deleteProposals(
-					themeDisplay.getCompanyId(), liveGroup.getGroupId());
-			}
+			GroupServiceUtil.updateWorkflow(liveGroupId, false, 0, null);
 		}
-		else if ((stagingGroupId == 0) && activateStaging) {
-			Group group = GroupServiceUtil.getGroup(liveGroupId);
+		else if ((stagingGroupId == 0) && stagingEnabled) {
+			Group liveGroup = GroupServiceUtil.getGroup(liveGroupId);
 
 			Group stagingGroup = GroupServiceUtil.addGroup(
-				group.getGroupId(), group.getName() + " (Staging)",
-				group.getDescription(), GroupImpl.TYPE_COMMUNITY_PRIVATE, null,
-				group.isActive());
+				liveGroup.getGroupId(), liveGroup.getName() + " (Staging)",
+				liveGroup.getDescription(), GroupImpl.TYPE_COMMUNITY_PRIVATE,
+				null, liveGroup.isActive());
 
-			if (group.hasPrivateLayouts()) {
+			if (liveGroup.hasPrivateLayouts()) {
 				copyLayouts(
-					group.getGroupId(), stagingGroup.getGroupId(), true);
+					liveGroup.getGroupId(), stagingGroup.getGroupId(), true);
 			}
 
-			if (group.hasPublicLayouts()) {
+			if (liveGroup.hasPublicLayouts()) {
 				copyLayouts(
-					group.getGroupId(), stagingGroup.getGroupId(), false);
+					liveGroup.getGroupId(), stagingGroup.getGroupId(), false);
 			}
 		}
 	}
 
 	protected void updateVirtualHost(ActionRequest req) throws Exception {
-
-		// Public virtual host
-
 		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 
 		String publicVirtualHost = ParamUtil.getString(
 			req, "publicVirtualHost");
+		String privateVirtualHost = ParamUtil.getString(
+			req, "privateVirtualHost");
+		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
 
 		LayoutSetServiceUtil.updateVirtualHost(
 			liveGroupId, false, publicVirtualHost);
 
-		// Private virtual host
-
-		String privateVirtualHost = ParamUtil.getString(
-			req, "privateVirtualHost");
-
 		LayoutSetServiceUtil.updateVirtualHost(
 			liveGroupId, true, privateVirtualHost);
 
-		// Friendly URL
+		GroupServiceUtil.updateFriendlyURL(liveGroupId, friendlyURL);
+	}
 
-		String friendlyURL = ParamUtil.getString(req, "friendlyURL");
+	protected void updateWorkflow(ActionRequest req) throws Exception {
+		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 
-		Group group = GroupLocalServiceUtil.getGroup(liveGroupId);
+		boolean workflowEnabled = ParamUtil.getBoolean(req, "workflowEnabled");
+		int workflowStages = ParamUtil.getInteger(req, "workflowStages");
 
-		GroupServiceUtil.updateGroup(
-			liveGroupId, group.getName(), group.getDescription(), group.getType(),
-			friendlyURL, group.isActive());
+		StringMaker sm = new StringMaker();
+
+		for (int i = 1; i <= workflowStages; i++) {
+			String workflowRoleName = ParamUtil.getString(
+				req, "workflowRoleName_" + i);
+
+			sm.append(workflowRoleName);
+
+			if ((i + 1) <= workflowStages) {
+				sm.append(",");
+			}
+		}
+
+		String workflowRoleNames = sm.toString();
+
+		GroupServiceUtil.updateWorkflow(
+			liveGroupId, workflowEnabled, workflowStages, workflowRoleNames);
 	}
 
 	private static Log _log = LogFactory.getLog(EditPagesAction.class);

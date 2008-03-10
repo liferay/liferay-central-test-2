@@ -25,6 +25,7 @@ package com.liferay.portlet.tasks.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portlet.tasks.model.TasksProposal;
@@ -34,42 +35,29 @@ import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
 /**
  * <a href="TasksProposalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
  *
  */
 public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
 
 	public TasksProposal addProposal(
-			long groupId, String name, String description, long classNameId,
-			long classPK, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+			long groupId, String className, long classPK, String name,
+			String description, long reviewUserId,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException{
 
 		GroupPermissionUtil.check(
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return tasksProposalLocalService.addProposal(
-			getUserId(), groupId, name, description, classNameId, classPK,
-			addCommunityPermissions, addGuestPermissions);
+			getUserId(), groupId, className, classPK, name, description,
+			reviewUserId, addCommunityPermissions, addGuestPermissions);
 	}
 
 	public TasksProposal addProposal(
-			long groupId, String name, String description, long classNameId,
-			long classPK, long reviewerId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
-		throws PortalException, SystemException{
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
-
-		return tasksProposalLocalService.addProposal(
-			getUserId(), groupId, name, description, classNameId, classPK,
-			reviewerId, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public TasksProposal addProposal(
-			long groupId, String name, String description, long classNameId,
-			long classPK,
+			long groupId, String className, long classPK, String name,
+			String description, long reviewUserId,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException{
 
@@ -77,35 +65,28 @@ public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		return tasksProposalLocalService.addProposal(
-			getUserId(), groupId, name, description, classNameId, classPK,
-			communityPermissions, guestPermissions);
+			getUserId(), groupId, className, classPK, name, description,
+			reviewUserId, communityPermissions, guestPermissions);
 	}
 
-	public TasksProposal addProposal(
-			long groupId, String name, String description, long classNameId,
-			long classPK, long reviewerId, String[] communityPermissions,
-			String[] guestPermissions)
+	public void deleteProposal(long proposalId)
 		throws PortalException, SystemException{
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+		PermissionChecker permissionChecker = getPermissionChecker();
 
-		return tasksProposalLocalService.addProposal(
-			getUserId(), groupId, name, description, classNameId, classPK,
-			reviewerId, communityPermissions, guestPermissions);
-	}
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
 
-	public void deleteProposal(long groupId, long proposalId)
-		throws PortalException, SystemException{
+		long groupId = proposal.getGroupId();
 
 		if (!GroupPermissionUtil.contains(
-				getPermissionChecker(), groupId, ActionKeys.MANAGE_STAGING) &&
+				permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) &&
 			!GroupPermissionUtil.contains(
-				getPermissionChecker(), groupId, ActionKeys.PUBLISH_STAGING) &&
+				permissionChecker, groupId, ActionKeys.MANAGE_STAGING) &&
 			!GroupPermissionUtil.contains(
-				getPermissionChecker(), groupId, ActionKeys.ASSIGN_REVIEWER) &&
+				permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) &&
 			!TasksProposalPermission.contains(
-				getPermissionChecker(), proposalId, ActionKeys.DELETE)) {
+				permissionChecker, proposalId, ActionKeys.DELETE)) {
 
 			throw new PrincipalException();
 		}
@@ -114,12 +95,16 @@ public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
 	}
 
 	public TasksProposal updateProposal(
-			long groupId, long proposalId, String description, int dueDateMonth,
+			long proposalId, String description, int dueDateMonth,
 			int dueDateDay, int dueDateYear, int dueDateHour, int dueDateMinute)
 		throws PortalException, SystemException{
 
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
+
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
+			getPermissionChecker(), proposal.getGroupId(),
+			ActionKeys.MANAGE_LAYOUTS);
 
 		return tasksProposalLocalService.updateProposal(
 			getUserId(), proposalId, description, dueDateMonth, dueDateDay,

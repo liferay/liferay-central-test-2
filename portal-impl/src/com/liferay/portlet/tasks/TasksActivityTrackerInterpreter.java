@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.tasks;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ActivityFeedEntry;
@@ -47,15 +46,15 @@ import org.json.JSONObject;
  * @author Raymond Augé
  *
  */
-public class TasksActivityTrackerInterpreter implements
-		ActivityTrackerInterpreter {
+public class TasksActivityTrackerInterpreter
+	implements ActivityTrackerInterpreter {
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
 	}
 
-	public ActivityFeedEntry interpret(ActivityTracker activityTracker,
-			ThemeDisplay themeDisplay) {
+	public ActivityFeedEntry interpret(
+		ActivityTracker activityTracker, ThemeDisplay themeDisplay) {
 
 		try {
 			return doInterpret(activityTracker, themeDisplay);
@@ -94,80 +93,63 @@ public class TasksActivityTrackerInterpreter implements
 		String title = StringPool.BLANK;
 
 		if (activity.equals(TasksActivityKeys.ASSIGN)) {
-			title = LanguageUtil.format(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
+			title = themeDisplay.translate(
 				"activity-tasks-x-assigned-proposal-to-x-for-review",
 				new Object[] {creatorUserName, receiverUserName});
 		}
 		else if (activity.equals(TasksActivityKeys.PROPOSE)) {
-			title = LanguageUtil.format(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-				"activity-tasks-x-created-proposal",
-				new Object[] {creatorUserName});
+			title = themeDisplay.translate(
+				"activity-tasks-x-created-proposal", creatorUserName);
 		}
 		else if (activity.equals(TasksActivityKeys.REVIEW)) {
-			title = LanguageUtil.format(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
+			title = themeDisplay.translate(
 				"activity-tasks-x-reviewed-proposal-from-x",
 				new Object[] {creatorUserName, receiverUserName});
 		}
 
 		// Body
 
-		TasksProposal proposal =
-			TasksProposalLocalServiceUtil.getProposal(
-				activityTracker.getClassPK());
-
-		String classNameKey =
-			"model.resource." +
-				PortalUtil.getClassName(proposal.getClassNameId());
+		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
+			activityTracker.getClassPK());
 
 		StringMaker sm = new StringMaker();
 
 		sm.append("<b>");
 		sm.append(proposal.getName(themeDisplay.getLocale()));
 		sm.append("</b> (");
-		sm.append(LanguageUtil.get(
-			themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-			classNameKey));
-		sm.append(")<br/>");
-		sm.append(LanguageUtil.get(
-			themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-			"description"));
+		sm.append(
+			themeDisplay.translate(
+				"model.resource." +
+					PortalUtil.getClassName(proposal.getClassNameId())));
+		sm.append(")<br />");
+		sm.append(themeDisplay.translate("description"));
 		sm.append(": ");
 		sm.append(proposal.getDescription());
 
 		if (!activity.equals(TasksActivityKeys.PROPOSE)) {
-			JSONObject extraData = new JSONObject(activityTracker.getExtraData());
+			JSONObject extraData = new JSONObject(
+				activityTracker.getExtraData());
 
 			int stage = extraData.getInt("stage");
 			boolean completed = extraData.getBoolean("completed");
 			boolean rejected = extraData.getBoolean("rejected");
 
-			sm.append("<br/>");
-			sm.append(LanguageUtil.get(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale(), "stage"));
+			sm.append("<br />");
+			sm.append(themeDisplay.translate("stage"));
 			sm.append(": ");
 			sm.append(stage);
-			sm.append("<br/>");
-			sm.append(LanguageUtil.get(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale(), "status"));
+			sm.append("<br />");
+			sm.append(themeDisplay.translate("status"));
 			sm.append(": ");
 
 			if (completed && rejected) {
-				sm.append(LanguageUtil.get(
-					themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-					"rejected"));
+				sm.append(themeDisplay.translate("rejected"));
 			}
 			else if (completed && !rejected) {
-				sm.append(LanguageUtil.get(
-					themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-					"approved"));
+				sm.append(themeDisplay.translate("approved"));
 			}
 			else {
-				sm.append(LanguageUtil.get(
-					themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-					"awaiting-approval"));
+				sm.append(themeDisplay.translate("awaiting-approval"));
 			}
 		}
 

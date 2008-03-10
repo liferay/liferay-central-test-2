@@ -26,76 +26,59 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
+import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.base.TasksReviewServiceBaseImpl;
 
 /**
  * <a href="TasksReviewServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
  *
  */
 public class TasksReviewServiceImpl extends TasksReviewServiceBaseImpl {
 
-	public TasksReview addReview(
-			long userId, long groupId, long assigningUserId,
-			String assigningUserName, long proposalId, int stage,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+	public TasksReview approveReview(long proposalId, int stage)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.ASSIGN_REVIEWER);
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
 
-		return tasksReviewLocalService.addReview(
-			userId, groupId, assigningUserId, assigningUserName, proposalId,
-			stage, addCommunityPermissions, addGuestPermissions);
+		GroupPermissionUtil.check(
+			getPermissionChecker(), proposal.getGroupId(),
+			ActionKeys.APPROVE_PROPOSAL);
+
+		return tasksReviewLocalService.approveReview(
+			getUserId(), proposalId, stage);
 	}
 
-	public TasksReview addReview(
-			long userId, long groupId, long assigningUserId,
-			String assigningUserName, long proposalId, int stage,
-			String[] communityPermissions, String[] guestPermissions)
+	public TasksReview rejectReview(long proposalId, int stage)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.ASSIGN_REVIEWER);
-
-		return tasksReviewLocalService.addReview(
-			userId, groupId, assigningUserId, assigningUserName, proposalId,
-			stage, communityPermissions, guestPermissions);
-	}
-
-	public TasksReview rejectReview(
-			long groupId, long proposalId, int stage, boolean rejected)
-		throws PortalException, SystemException {
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.APPROVE_PROPOSAL);
+			getPermissionChecker(), proposal.getGroupId(),
+			ActionKeys.APPROVE_PROPOSAL);
 
 		return tasksReviewLocalService.rejectReview(
-			getUserId(), proposalId, stage, rejected);
+			getUserId(), proposalId, stage);
 	}
 
-	public void deleteReview(long groupId, long reviewId)
+	public void updateReviews(long proposalId, long[][] userIdsPerStage)
 		throws PortalException, SystemException {
 
-		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.ASSIGN_REVIEWER);
-
-		tasksReviewLocalService.deleteReview(reviewId);
-	}
-
-	public void updateReviewers(
-			long groupId, long proposalId, int stage, long[] reviewerIds,
-			long[] removeReviewerIds)
-		throws PortalException, SystemException {
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.ASSIGN_REVIEWER);
+			getPermissionChecker(), proposal.getGroupId(),
+			ActionKeys.ASSIGN_REVIEWER);
 
-		tasksReviewLocalService.updateReviewers(
-			getUserId(), groupId, proposalId, stage, reviewerIds,
-			removeReviewerIds);
+		tasksReviewLocalService.updateReviews(
+			proposalId, getUserId(), userIdsPerStage);
 	}
 
 }

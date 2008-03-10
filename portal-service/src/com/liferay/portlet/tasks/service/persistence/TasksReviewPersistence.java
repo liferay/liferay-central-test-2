@@ -59,6 +59,34 @@ public interface TasksReviewPersistence {
 	public com.liferay.portlet.tasks.model.TasksReview fetchByPrimaryKey(
 		long reviewId) throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
+		long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
+		long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
+		long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tasks.model.TasksReview findByUserId_First(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tasks.NoSuchReviewException;
+
+	public com.liferay.portlet.tasks.model.TasksReview findByUserId_Last(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tasks.NoSuchReviewException;
+
+	public com.liferay.portlet.tasks.model.TasksReview[] findByUserId_PrevAndNext(
+		long reviewId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tasks.NoSuchReviewException;
+
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
 		long proposalId) throws com.liferay.portal.SystemException;
 
@@ -87,67 +115,13 @@ public interface TasksReviewPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_C(
-		long proposalId, boolean completed)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_C(
-		long proposalId, boolean completed, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_C(
-		long proposalId, boolean completed, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tasks.model.TasksReview findByP_C_First(
-		long proposalId, boolean completed,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public com.liferay.portlet.tasks.model.TasksReview findByU_P(long userId,
+		long proposalId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	public com.liferay.portlet.tasks.model.TasksReview findByP_C_Last(
-		long proposalId, boolean completed,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public com.liferay.portlet.tasks.model.TasksReview[] findByP_C_PrevAndNext(
-		long reviewId, long proposalId, boolean completed,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_C_R(
-		long proposalId, boolean completed, boolean rejected)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_C_R(
-		long proposalId, boolean completed, boolean rejected, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_C_R(
-		long proposalId, boolean completed, boolean rejected, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tasks.model.TasksReview findByP_C_R_First(
-		long proposalId, boolean completed, boolean rejected,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public com.liferay.portlet.tasks.model.TasksReview findByP_C_R_Last(
-		long proposalId, boolean completed, boolean rejected,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public com.liferay.portlet.tasks.model.TasksReview[] findByP_C_R_PrevAndNext(
-		long reviewId, long proposalId, boolean completed, boolean rejected,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
+	public com.liferay.portlet.tasks.model.TasksReview fetchByU_P(long userId,
+		long proposalId) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
 		long proposalId, int stage) throws com.liferay.portal.SystemException;
@@ -241,42 +215,6 @@ public interface TasksReviewPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchReviewException;
 
-	public com.liferay.portlet.tasks.model.TasksReview findByP_U(
-		long proposalId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public com.liferay.portlet.tasks.model.TasksReview fetchByP_U(
-		long proposalId, long userId) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
-		long userId) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
-		long userId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
-		long userId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tasks.model.TasksReview findByUserId_First(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public com.liferay.portlet.tasks.model.TasksReview findByUserId_Last(
-		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public com.liferay.portlet.tasks.model.TasksReview[] findByUserId_PrevAndNext(
-		long reviewId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
-
 	public java.util.List<com.liferay.portlet.tasks.model.TasksReview> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -295,14 +233,15 @@ public interface TasksReviewPersistence {
 		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByUserId(long userId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByProposalId(long proposalId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByP_C(long proposalId, boolean completed)
-		throws com.liferay.portal.SystemException;
-
-	public void removeByP_C_R(long proposalId, boolean completed,
-		boolean rejected) throws com.liferay.portal.SystemException;
+	public void removeByU_P(long userId, long proposalId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tasks.NoSuchReviewException;
 
 	public void removeByP_S(long proposalId, int stage)
 		throws com.liferay.portal.SystemException;
@@ -313,22 +252,15 @@ public interface TasksReviewPersistence {
 	public void removeByP_S_C_R(long proposalId, int stage, boolean completed,
 		boolean rejected) throws com.liferay.portal.SystemException;
 
-	public void removeByP_U(long proposalId, long userId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchReviewException;
-
-	public void removeByUserId(long userId)
-		throws com.liferay.portal.SystemException;
-
 	public void removeAll() throws com.liferay.portal.SystemException;
+
+	public int countByUserId(long userId)
+		throws com.liferay.portal.SystemException;
 
 	public int countByProposalId(long proposalId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByP_C(long proposalId, boolean completed)
-		throws com.liferay.portal.SystemException;
-
-	public int countByP_C_R(long proposalId, boolean completed, boolean rejected)
+	public int countByU_P(long userId, long proposalId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByP_S(long proposalId, int stage)
@@ -339,12 +271,6 @@ public interface TasksReviewPersistence {
 
 	public int countByP_S_C_R(long proposalId, int stage, boolean completed,
 		boolean rejected) throws com.liferay.portal.SystemException;
-
-	public int countByP_U(long proposalId, long userId)
-		throws com.liferay.portal.SystemException;
-
-	public int countByUserId(long userId)
-		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 }

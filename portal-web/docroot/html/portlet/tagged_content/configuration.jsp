@@ -122,7 +122,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<%@ include file="/html/portlet/tagged_content/add_asset.jspf" %>
 
 						<select name="<portlet:namespace/>assetType" onchange="<portlet:namespace />selectionForType(this.options[this.selectedIndex].value);">
-							<option value=""><liferay-ui:message key="select-existing"/>...</option>
+							<option value=""><liferay-ui:message key="select-existing" />...</option>
 
 							<%
 							for (int i = 0; i < TagsUtil.ASSET_TYPE_CLASS_NAMES.length; i++) {
@@ -265,7 +265,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 						<liferay-ui:message key="asset-type" />
 
 						<select name="<portlet:namespace/>classNameId">
-							<option value=""><liferay-ui:message key="all"/></option>
+							<option value=""><liferay-ui:message key="all" /></option>
 
 							<%
 							TagsAssetType[] assetTypes = TagsAssetServiceUtil.getAssetTypes(themeDisplay.getLocale().toString());

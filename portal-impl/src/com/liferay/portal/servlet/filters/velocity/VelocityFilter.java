@@ -70,7 +70,7 @@ import org.apache.velocity.app.Velocity;
  * <a href="VelocityFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug?
+ * @author Raymond Augé
  *
  */
 public class VelocityFilter extends BaseFilter {

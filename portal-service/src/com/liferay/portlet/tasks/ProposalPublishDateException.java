@@ -25,7 +25,8 @@ package com.liferay.portlet.tasks;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="ProposalPublishDateException.java.html"><b><i>View Source</i></b></a>
+ * <a href="ProposalPublishDateException.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *

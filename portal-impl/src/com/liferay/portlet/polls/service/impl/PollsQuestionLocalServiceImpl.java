@@ -128,7 +128,6 @@ public class PollsQuestionLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		long groupId = PortalUtil.getPortletGroupId(plid);
-		Date now = new Date();
 
 		Date expirationDate = null;
 
@@ -138,6 +137,8 @@ public class PollsQuestionLocalServiceImpl
 				expirationDateHour, expirationDateMinute, user.getTimeZone(),
 				new QuestionExpirationDateException());
 		}
+
+		Date now = new Date();
 
 		validate(title, description, choices);
 

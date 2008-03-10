@@ -109,15 +109,15 @@
 			<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT) %>">
 				<%= StringUtil.shorten(Html.stripHtml(entry.getContent()), pageAbstractLength) %>
 
-				<br/>
+				<br />
 
-				 <a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more"/> &raquo;</a>
+				 <a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
 			</c:when>
 			<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_FULL_CONTENT) %>">
 				<%= entry.getContent() %>
 			</c:when>
 			<c:when test="<%= pageDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE) %>">
-				<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more"/> &raquo;</a>
+				<a href="<%= viewEntryURL %>"><liferay-ui:message key="read-more" /> &raquo;</a>
 			</c:when>
 		</c:choose>
 	</div>

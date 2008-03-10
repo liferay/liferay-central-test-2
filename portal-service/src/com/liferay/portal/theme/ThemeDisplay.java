@@ -22,6 +22,7 @@
 
 package com.liferay.portal.theme;
 
+import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
@@ -268,6 +269,20 @@ public class ThemeDisplay implements Serializable {
 
 	public void setLanguageId(String languageId) {
 		_languageId = languageId;
+	}
+
+	public String translate(String key) {
+		return LanguageUtil.get(getCompanyId(), getLocale(), key);
+	}
+
+	public String translate(String pattern, Object argument) {
+		return LanguageUtil.format(
+			getCompanyId(), getLocale(), pattern, argument);
+	}
+
+	public String translate(String pattern, Object[] arguments) {
+		return LanguageUtil.format(
+			getCompanyId(), getLocale(), pattern, arguments);
 	}
 
 	public TimeZone getTimeZone() {

@@ -2814,7 +2814,7 @@ public class ServiceBuilder {
 				_createSQLTables(sqlFile, createTableSQL, entity, true);
 
 				File updateSQLFile = new File(
-					_sqlDir + "/update-4.3.6-4.4.0.sql");
+					_sqlDir + "/update-4.4.0-5.0.0.sql");
 
 				if (updateSQLFile.exists()) {
 					_createSQLTables(

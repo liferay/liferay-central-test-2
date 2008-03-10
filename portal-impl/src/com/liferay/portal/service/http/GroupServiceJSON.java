@@ -177,6 +177,16 @@ public class GroupServiceJSON {
 		GroupServiceUtil.unsetRoleGroups(roleId, groupIds);
 	}
 
+	public static JSONObject updateFriendlyURL(long groupId,
+		java.lang.String friendlyURL)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateFriendlyURL(groupId,
+				friendlyURL);
+
+		return GroupJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONObject updateGroup(long groupId, java.lang.String name,
 		java.lang.String description, int type, java.lang.String friendlyURL,
 		boolean active)
@@ -194,6 +204,17 @@ public class GroupServiceJSON {
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateGroup(groupId,
 				typeSettings);
+
+		return GroupJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject updateWorkflow(long groupId,
+		boolean workflowEnabled, int workflowStages,
+		java.lang.String workflowRoleNames)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		com.liferay.portal.model.Group returnValue = GroupServiceUtil.updateWorkflow(groupId,
+				workflowEnabled, workflowStages, workflowRoleNames);
 
 		return GroupJSONSerializer.toJSONObject(returnValue);
 	}

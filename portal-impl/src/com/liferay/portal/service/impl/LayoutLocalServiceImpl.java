@@ -131,7 +131,7 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Aug?
+ * @author Raymond Augé
  * @author Jorge Ferrer
  * @author Bruno Farache
  *
@@ -275,14 +275,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			PortletKeys.PREFS_OWNER_ID_DEFAULT,
 			PortletKeys.PREFS_OWNER_TYPE_LAYOUT, layout.getPlid());
 
-		// Ratings
-
-		ratingsStatsLocalService.deleteStats(
-			Layout.class.getName(), layout.getPlid());
-
 		// Tasks
 
 		tasksProposalLocalService.deleteProposal(
+			Layout.class.getName(), layout.getPlid());
+
+		// Ratings
+
+		ratingsStatsLocalService.deleteStats(
 			Layout.class.getName(), layout.getPlid());
 
 		// Message boards

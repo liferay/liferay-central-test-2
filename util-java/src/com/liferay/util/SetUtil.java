@@ -41,9 +41,23 @@ import java.util.Set;
  */
 public class SetUtil {
 
+	public static Set<Long> fromArray(long[] array) {
+		if ((array == null) || (array.length == 0)) {
+			return new HashSet();
+		}
+
+		Set<Long> set = new HashSet<Long>(array.length);
+
+		for (int i = 0; i < array.length; i++) {
+			set.add(array[i]);
+		}
+
+		return set;
+	}
+
 	public static Set fromArray(Object[] array) {
 		if ((array == null) || (array.length == 0)) {
-			return CollectionFactory.getHashSet();
+			return new HashSet();
 		}
 
 		Set set = new HashSet(array.length);

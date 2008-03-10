@@ -71,53 +71,27 @@ import org.json.JSONObject;
  *
  */
 public class TasksReviewServiceJSON {
-	public static JSONObject addReview(long userId, long groupId,
-		long assigningUserId, java.lang.String assigningUserName,
-		long proposalId, int stage, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static JSONObject approveReview(long proposalId, int stage)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		com.liferay.portlet.tasks.model.TasksReview returnValue = TasksReviewServiceUtil.addReview(userId,
-				groupId, assigningUserId, assigningUserName, proposalId, stage,
-				addCommunityPermissions, addGuestPermissions);
+		com.liferay.portlet.tasks.model.TasksReview returnValue = TasksReviewServiceUtil.approveReview(proposalId,
+				stage);
 
 		return TasksReviewJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addReview(long userId, long groupId,
-		long assigningUserId, java.lang.String assigningUserName,
-		long proposalId, int stage, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+	public static JSONObject rejectReview(long proposalId, int stage)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		com.liferay.portlet.tasks.model.TasksReview returnValue = TasksReviewServiceUtil.addReview(userId,
-				groupId, assigningUserId, assigningUserName, proposalId, stage,
-				communityPermissions, guestPermissions);
+		com.liferay.portlet.tasks.model.TasksReview returnValue = TasksReviewServiceUtil.rejectReview(proposalId,
+				stage);
 
 		return TasksReviewJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject rejectReview(long groupId, long proposalId,
-		int stage, boolean rejected)
+	public static void updateReviews(long proposalId, long[][] userIdsPerStage)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		com.liferay.portlet.tasks.model.TasksReview returnValue = TasksReviewServiceUtil.rejectReview(groupId,
-				proposalId, stage, rejected);
-
-		return TasksReviewJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static void deleteReview(long groupId, long reviewId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		TasksReviewServiceUtil.deleteReview(groupId, reviewId);
-	}
-
-	public static void updateReviewers(long groupId, long proposalId,
-		int stage, long[] reviewerIds, long[] removeReviewerIds)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		TasksReviewServiceUtil.updateReviewers(groupId, proposalId, stage,
-			reviewerIds, removeReviewerIds);
+		TasksReviewServiceUtil.updateReviews(proposalId, userIdsPerStage);
 	}
 }

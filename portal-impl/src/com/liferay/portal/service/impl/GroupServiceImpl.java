@@ -159,6 +159,15 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 		groupLocalService.unsetRoleGroups(roleId, groupIds);
 	}
 
+	public Group updateFriendlyURL(long groupId, String friendlyURL)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.UPDATE);
+
+		return groupLocalService.updateFriendlyURL(groupId, friendlyURL);
+	}
+
 	public Group updateGroup(
 			long groupId, String name, String description, int type,
 			String friendlyURL, boolean active)
@@ -178,6 +187,18 @@ public class GroupServiceImpl extends GroupServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.UPDATE);
 
 		return groupLocalService.updateGroup(groupId, typeSettings);
+	}
+
+	public Group updateWorkflow(
+			long groupId, boolean workflowEnabled, int workflowStages,
+			String workflowRoleNames)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_STAGING);
+
+		return groupLocalService.updateWorkflow(
+			groupId, workflowEnabled, workflowStages, workflowRoleNames);
 	}
 
 }

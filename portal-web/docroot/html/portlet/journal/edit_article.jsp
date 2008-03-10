@@ -740,7 +740,7 @@ String[] availableLocales = null;
 				if (contentDoc != null) {
 				%>
 
-					<input name="<portlet:namespace />available_locales" type="hidden" value="<%= defaultLanguageId %>"/>
+					<input name="<portlet:namespace />available_locales" type="hidden" value="<%= defaultLanguageId %>" />
 
 				<%
 					boolean languageFound = false;
@@ -777,7 +777,7 @@ String[] availableLocales = null;
 					if (!languageFound && !languageId.equals(defaultLanguageId)) {
 				%>
 
-						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>"/>
+						<input name="<portlet:namespace />available_locales" type="hidden" value="<%= languageId %>" />
 
 						<script type="text/javascript">
 							document.<portlet:namespace />fm1.<portlet:namespace />removeArticleLocaleButton.disabled = true;

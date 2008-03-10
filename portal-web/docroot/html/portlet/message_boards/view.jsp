@@ -775,19 +775,19 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			ResultRow row = new ResultRow(ban, ban.getBanId(), i);
 
-			// Banned User
+			// Banned user
 
 			row.addText(PortalUtil.getUserName(ban.getBanUserId(), StringPool.BLANK));
 
-			// Banned By
+			// Banned by
 
 			row.addText(PortalUtil.getUserName(ban.getUserId(), StringPool.BLANK));
 
-			// Ban Date
+			// Ban date
 
 			row.addText(dateFormatDateTime.format(ban.getCreateDate()));
 
-			// Unban Date
+			// Unban date
 
 			if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL > 0) {
 				row.addText(dateFormatDateTime.format(MBUtil.getUnbanDate(ban, PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL)));

@@ -246,13 +246,13 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<TasksProposal> findByCompanyId(long companyId)
+	public List<TasksProposal> findByGroupId(long groupId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
 		String finderClassName = TasksProposal.class.getName();
-		String finderMethodName = "findByCompanyId";
+		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		Object result = null;
 
@@ -272,7 +272,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
 
-				query.append("companyId = ?");
+				query.append("groupId = ?");
 
 				query.append(" ");
 
@@ -285,7 +285,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				int queryPos = 0;
 
-				q.setLong(queryPos++, companyId);
+				q.setLong(queryPos++, groupId);
 
 				List<TasksProposal> list = q.list();
 
@@ -307,16 +307,16 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<TasksProposal> findByCompanyId(long companyId, int begin,
-		int end) throws SystemException {
-		return findByCompanyId(companyId, begin, end, null);
+	public List<TasksProposal> findByGroupId(long groupId, int begin, int end)
+		throws SystemException {
+		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List<TasksProposal> findByCompanyId(long companyId, int begin,
-		int end, OrderByComparator obc) throws SystemException {
+	public List<TasksProposal> findByGroupId(long groupId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
 		String finderClassName = TasksProposal.class.getName();
-		String finderMethodName = "findByCompanyId";
+		String finderMethodName = "findByGroupId";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
 				
@@ -324,7 +324,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(companyId),
+				new Long(groupId),
 				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
@@ -347,7 +347,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
 
-				query.append("companyId = ?");
+				query.append("groupId = ?");
 
 				query.append(" ");
 
@@ -367,7 +367,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				int queryPos = 0;
 
-				q.setLong(queryPos++, companyId);
+				q.setLong(queryPos++, groupId);
 
 				List<TasksProposal> list = (List<TasksProposal>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -390,16 +390,16 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public TasksProposal findByCompanyId_First(long companyId,
-		OrderByComparator obc) throws NoSuchProposalException, SystemException {
-		List<TasksProposal> list = findByCompanyId(companyId, 0, 1, obc);
+	public TasksProposal findByGroupId_First(long groupId, OrderByComparator obc)
+		throws NoSuchProposalException, SystemException {
+		List<TasksProposal> list = findByGroupId(groupId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 
 			msg.append("No TasksProposal exists with the key {");
 
-			msg.append("companyId=" + companyId);
+			msg.append("groupId=" + groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -410,19 +410,18 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public TasksProposal findByCompanyId_Last(long companyId,
-		OrderByComparator obc) throws NoSuchProposalException, SystemException {
-		int count = countByCompanyId(companyId);
+	public TasksProposal findByGroupId_Last(long groupId, OrderByComparator obc)
+		throws NoSuchProposalException, SystemException {
+		int count = countByGroupId(groupId);
 
-		List<TasksProposal> list = findByCompanyId(companyId, count - 1, count,
-				obc);
+		List<TasksProposal> list = findByGroupId(groupId, count - 1, count, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 
 			msg.append("No TasksProposal exists with the key {");
 
-			msg.append("companyId=" + companyId);
+			msg.append("groupId=" + groupId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -433,12 +432,12 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public TasksProposal[] findByCompanyId_PrevAndNext(long proposalId,
-		long companyId, OrderByComparator obc)
+	public TasksProposal[] findByGroupId_PrevAndNext(long proposalId,
+		long groupId, OrderByComparator obc)
 		throws NoSuchProposalException, SystemException {
 		TasksProposal tasksProposal = findByPrimaryKey(proposalId);
 
-		int count = countByCompanyId(companyId);
+		int count = countByGroupId(groupId);
 
 		Session session = null;
 
@@ -450,7 +449,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 			query.append(
 				"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
 
-			query.append("companyId = ?");
+			query.append("groupId = ?");
 
 			query.append(" ");
 
@@ -470,7 +469,278 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 
-			q.setLong(queryPos++, companyId);
+			q.setLong(queryPos++, groupId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					tasksProposal);
+
+			TasksProposal[] array = new TasksProposalImpl[3];
+
+			array[0] = (TasksProposal)objArray[0];
+			array[1] = (TasksProposal)objArray[1];
+			array[2] = (TasksProposal)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<TasksProposal> findByG_U(long groupId, long userId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
+		String finderClassName = TasksProposal.class.getName();
+		String finderMethodName = "findByG_U";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("userId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("dueDate ASC, ");
+				query.append("createDate ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setLong(queryPos++, userId);
+
+				List<TasksProposal> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<TasksProposal>)result;
+		}
+	}
+
+	public List<TasksProposal> findByG_U(long groupId, long userId, int begin,
+		int end) throws SystemException {
+		return findByG_U(groupId, userId, begin, end, null);
+	}
+
+	public List<TasksProposal> findByG_U(long groupId, long userId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
+		String finderClassName = TasksProposal.class.getName();
+		String finderMethodName = "findByG_U";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("userId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("dueDate ASC, ");
+					query.append("createDate ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setLong(queryPos++, userId);
+
+				List<TasksProposal> list = (List<TasksProposal>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<TasksProposal>)result;
+		}
+	}
+
+	public TasksProposal findByG_U_First(long groupId, long userId,
+		OrderByComparator obc) throws NoSuchProposalException, SystemException {
+		List<TasksProposal> list = findByG_U(groupId, userId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No TasksProposal exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchProposalException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public TasksProposal findByG_U_Last(long groupId, long userId,
+		OrderByComparator obc) throws NoSuchProposalException, SystemException {
+		int count = countByG_U(groupId, userId);
+
+		List<TasksProposal> list = findByG_U(groupId, userId, count - 1, count,
+				obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No TasksProposal exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("userId=" + userId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchProposalException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public TasksProposal[] findByG_U_PrevAndNext(long proposalId, long groupId,
+		long userId, OrderByComparator obc)
+		throws NoSuchProposalException, SystemException {
+		TasksProposal tasksProposal = findByPrimaryKey(proposalId);
+
+		int count = countByG_U(groupId, userId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("userId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("dueDate ASC, ");
+				query.append("createDate ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, groupId);
+
+			q.setLong(queryPos++, userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tasksProposal);
@@ -600,580 +870,6 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<TasksProposal> findByC_G(long companyId, long groupId)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksProposal.class.getName();
-		String finderMethodName = "findByC_G";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(groupId)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
-
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("groupId = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("dueDate ASC, ");
-				query.append("createDate ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, companyId);
-
-				q.setLong(queryPos++, groupId);
-
-				List<TasksProposal> list = q.list();
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TasksProposal>)result;
-		}
-	}
-
-	public List<TasksProposal> findByC_G(long companyId, long groupId,
-		int begin, int end) throws SystemException {
-		return findByC_G(companyId, groupId, begin, end, null);
-	}
-
-	public List<TasksProposal> findByC_G(long companyId, long groupId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksProposal.class.getName();
-		String finderMethodName = "findByC_G";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(groupId),
-				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
-
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("groupId = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("dueDate ASC, ");
-					query.append("createDate ASC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, companyId);
-
-				q.setLong(queryPos++, groupId);
-
-				List<TasksProposal> list = (List<TasksProposal>)QueryUtil.list(q,
-						getDialect(), begin, end);
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TasksProposal>)result;
-		}
-	}
-
-	public TasksProposal findByC_G_First(long companyId, long groupId,
-		OrderByComparator obc) throws NoSuchProposalException, SystemException {
-		List<TasksProposal> list = findByC_G(companyId, groupId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksProposal exists with the key {");
-
-			msg.append("companyId=" + companyId);
-
-			msg.append(", ");
-			msg.append("groupId=" + groupId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchProposalException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksProposal findByC_G_Last(long companyId, long groupId,
-		OrderByComparator obc) throws NoSuchProposalException, SystemException {
-		int count = countByC_G(companyId, groupId);
-
-		List<TasksProposal> list = findByC_G(companyId, groupId, count - 1,
-				count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksProposal exists with the key {");
-
-			msg.append("companyId=" + companyId);
-
-			msg.append(", ");
-			msg.append("groupId=" + groupId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchProposalException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksProposal[] findByC_G_PrevAndNext(long proposalId,
-		long companyId, long groupId, OrderByComparator obc)
-		throws NoSuchProposalException, SystemException {
-		TasksProposal tasksProposal = findByPrimaryKey(proposalId);
-
-		int count = countByC_G(companyId, groupId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-
-			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
-
-			query.append("companyId = ?");
-
-			query.append(" AND ");
-
-			query.append("groupId = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("dueDate ASC, ");
-				query.append("createDate ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			int queryPos = 0;
-
-			q.setLong(queryPos++, companyId);
-
-			q.setLong(queryPos++, groupId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksProposal);
-
-			TasksProposal[] array = new TasksProposalImpl[3];
-
-			array[0] = (TasksProposal)objArray[0];
-			array[1] = (TasksProposal)objArray[1];
-			array[2] = (TasksProposal)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<TasksProposal> findByC_G_U(long companyId, long groupId,
-		long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksProposal.class.getName();
-		String finderMethodName = "findByC_G_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(groupId), new Long(userId)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
-
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("userId = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("dueDate ASC, ");
-				query.append("createDate ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, companyId);
-
-				q.setLong(queryPos++, groupId);
-
-				q.setLong(queryPos++, userId);
-
-				List<TasksProposal> list = q.list();
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TasksProposal>)result;
-		}
-	}
-
-	public List<TasksProposal> findByC_G_U(long companyId, long groupId,
-		long userId, int begin, int end) throws SystemException {
-		return findByC_G_U(companyId, groupId, userId, begin, end, null);
-	}
-
-	public List<TasksProposal> findByC_G_U(long companyId, long groupId,
-		long userId, int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksProposal.class.getName();
-		String finderMethodName = "findByC_G_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(groupId), new Long(userId),
-				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
-
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("userId = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("dueDate ASC, ");
-					query.append("createDate ASC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, companyId);
-
-				q.setLong(queryPos++, groupId);
-
-				q.setLong(queryPos++, userId);
-
-				List<TasksProposal> list = (List<TasksProposal>)QueryUtil.list(q,
-						getDialect(), begin, end);
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TasksProposal>)result;
-		}
-	}
-
-	public TasksProposal findByC_G_U_First(long companyId, long groupId,
-		long userId, OrderByComparator obc)
-		throws NoSuchProposalException, SystemException {
-		List<TasksProposal> list = findByC_G_U(companyId, groupId, userId, 0,
-				1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksProposal exists with the key {");
-
-			msg.append("companyId=" + companyId);
-
-			msg.append(", ");
-			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("userId=" + userId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchProposalException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksProposal findByC_G_U_Last(long companyId, long groupId,
-		long userId, OrderByComparator obc)
-		throws NoSuchProposalException, SystemException {
-		int count = countByC_G_U(companyId, groupId, userId);
-
-		List<TasksProposal> list = findByC_G_U(companyId, groupId, userId,
-				count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksProposal exists with the key {");
-
-			msg.append("companyId=" + companyId);
-
-			msg.append(", ");
-			msg.append("groupId=" + groupId);
-
-			msg.append(", ");
-			msg.append("userId=" + userId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchProposalException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksProposal[] findByC_G_U_PrevAndNext(long proposalId,
-		long companyId, long groupId, long userId, OrderByComparator obc)
-		throws NoSuchProposalException, SystemException {
-		TasksProposal tasksProposal = findByPrimaryKey(proposalId);
-
-		int count = countByC_G_U(companyId, groupId, userId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-
-			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
-
-			query.append("companyId = ?");
-
-			query.append(" AND ");
-
-			query.append("groupId = ?");
-
-			query.append(" AND ");
-
-			query.append("userId = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("dueDate ASC, ");
-				query.append("createDate ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			int queryPos = 0;
-
-			q.setLong(queryPos++, companyId);
-
-			q.setLong(queryPos++, groupId);
-
-			q.setLong(queryPos++, userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksProposal);
-
-			TasksProposal[] array = new TasksProposalImpl[3];
-
-			array[0] = (TasksProposal)objArray[0];
-			array[1] = (TasksProposal)objArray[1];
-			array[2] = (TasksProposal)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<TasksProposal> findWithDynamicQuery(
 		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
@@ -1294,8 +990,15 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByCompanyId(long companyId) throws SystemException {
-		for (TasksProposal tasksProposal : findByCompanyId(companyId)) {
+	public void removeByGroupId(long groupId) throws SystemException {
+		for (TasksProposal tasksProposal : findByGroupId(groupId)) {
+			remove(tasksProposal);
+		}
+	}
+
+	public void removeByG_U(long groupId, long userId)
+		throws SystemException {
+		for (TasksProposal tasksProposal : findByG_U(groupId, userId)) {
 			remove(tasksProposal);
 		}
 	}
@@ -1307,33 +1010,18 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		remove(tasksProposal);
 	}
 
-	public void removeByC_G(long companyId, long groupId)
-		throws SystemException {
-		for (TasksProposal tasksProposal : findByC_G(companyId, groupId)) {
-			remove(tasksProposal);
-		}
-	}
-
-	public void removeByC_G_U(long companyId, long groupId, long userId)
-		throws SystemException {
-		for (TasksProposal tasksProposal : findByC_G_U(companyId, groupId,
-				userId)) {
-			remove(tasksProposal);
-		}
-	}
-
 	public void removeAll() throws SystemException {
 		for (TasksProposal tasksProposal : findAll()) {
 			remove(tasksProposal);
 		}
 	}
 
-	public int countByCompanyId(long companyId) throws SystemException {
+	public int countByGroupId(long groupId) throws SystemException {
 		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
 		String finderClassName = TasksProposal.class.getName();
-		String finderMethodName = "countByCompanyId";
+		String finderMethodName = "countByGroupId";
 		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(companyId) };
+		Object[] finderArgs = new Object[] { new Long(groupId) };
 
 		Object result = null;
 
@@ -1354,7 +1042,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
 
-				query.append("companyId = ?");
+				query.append("groupId = ?");
 
 				query.append(" ");
 
@@ -1362,7 +1050,81 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				int queryPos = 0;
 
-				q.setLong(queryPos++, companyId);
+				q.setLong(queryPos++, groupId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByG_U(long groupId, long userId) throws SystemException {
+		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
+		String finderClassName = TasksProposal.class.getName();
+		String finderMethodName = "countByG_U";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(groupId), new Long(userId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("userId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setLong(queryPos++, userId);
 
 				Long count = null;
 
@@ -1440,166 +1202,6 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 				q.setLong(queryPos++, classNameId);
 
 				q.setLong(queryPos++, classPK);
-
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
-		}
-	}
-
-	public int countByC_G(long companyId, long groupId)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksProposal.class.getName();
-		String finderMethodName = "countByC_G";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(groupId)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
-
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("groupId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, companyId);
-
-				q.setLong(queryPos++, groupId);
-
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
-		}
-	}
-
-	public int countByC_G_U(long companyId, long groupId, long userId)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksProposal.class.getName();
-		String finderMethodName = "countByC_G_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName(), Long.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(companyId), new Long(groupId), new Long(userId)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksProposal WHERE ");
-
-				query.append("companyId = ?");
-
-				query.append(" AND ");
-
-				query.append("groupId = ?");
-
-				query.append(" AND ");
-
-				query.append("userId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, companyId);
-
-				q.setLong(queryPos++, groupId);
-
-				q.setLong(queryPos++, userId);
 
 				Long count = null;
 

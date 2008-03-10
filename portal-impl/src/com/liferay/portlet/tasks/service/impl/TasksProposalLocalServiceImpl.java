@@ -24,9 +24,9 @@ package com.liferay.portlet.tasks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.ProposalDueDateException;
@@ -38,8 +38,10 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="TasksProposalLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="TasksProposalLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
  *
  */
@@ -47,56 +49,31 @@ public class TasksProposalLocalServiceImpl
 	extends TasksProposalLocalServiceBaseImpl {
 
 	public TasksProposal addProposal(
-			long userId, long groupId, String name, String description,
-			long classNameId, long classPK,
+			long userId, long groupId, String className, long classPK,
+			String name, String description, long reviewUserId,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addProposal(
-			userId, groupId, name, description, classNameId, classPK, null,
-			Boolean.valueOf(addCommunityPermissions),
+			userId, groupId, className, classPK, name, description,
+			reviewUserId, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
 	public TasksProposal addProposal(
-			long userId, long groupId, String name, String description,
-			long classNameId, long classPK, long stageOneReviewerId,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addProposal(
-			userId, groupId, name, description, classNameId, classPK,
-			new Long(stageOneReviewerId),
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
-	}
-
-	public TasksProposal addProposal(
-			long userId, long groupId, String name, String description,
-			long classNameId, long classPK,
+			long userId, long groupId, String className, long classPK,
+			String name, String description, long reviewUserId,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addProposal(
-			userId, groupId, name, description, classNameId, classPK, null,
-			null, null, communityPermissions, guestPermissions);
+			userId, groupId, className, classPK, name, description,
+			reviewUserId, null, null, communityPermissions, guestPermissions);
 	}
 
 	public TasksProposal addProposal(
-			long userId, long groupId, String name, String description,
-			long classNameId, long classPK, long stageOneReviewerId,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addProposal(
-			userId, groupId, name, description, classNameId, classPK,
-			new Long(stageOneReviewerId), null, null, communityPermissions,
-			guestPermissions);
-	}
-
-	public TasksProposal addProposal(
-			long userId, long groupId, String name, String description,
-			long classNameId, long classPK, Long stageOneReviewerId,
+			long userId, long groupId, String className, long classPK,
+			String name, String description, long reviewUserId,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -104,11 +81,12 @@ public class TasksProposalLocalServiceImpl
 		// Proposal
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		long classNameId = PortalUtil.getClassNameId(className);
 		Date now = new Date();
 
-		long id = counterLocalService.increment();
+		long proposalId = counterLocalService.increment();
 
-		TasksProposal proposal = tasksProposalPersistence.create(id);
+		TasksProposal proposal = tasksProposalPersistence.create(proposalId);
 
 		proposal.setGroupId(groupId);
 		proposal.setCompanyId(user.getCompanyId());
@@ -137,15 +115,15 @@ public class TasksProposalLocalServiceImpl
 				proposal, communityPermissions, guestPermissions);
 		}
 
-		// TasksReview
+		// Review
 
-		if (stageOneReviewerId != null && stageOneReviewerId.longValue() > 0) {
-			tasksReviewLocalService.addReview(
-				stageOneReviewerId.longValue(), groupId, user.getUserId(),
-				user.getFullName(), proposal.getProposalId(), 1, true, true);
-		}
+		long assignedByUserId = userId;
+		int stage = 1;
 
-		// ActivityTracker
+		tasksReviewLocalService.addReview(
+			reviewUserId, proposal.getProposalId(), assignedByUserId, stage);
+
+		// Activity trackers
 
 		activityTrackerLocalService.addActivityTracker(
 			user.getUserId(), groupId, TasksProposal.class.getName(),
@@ -160,8 +138,8 @@ public class TasksProposalLocalServiceImpl
 			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
-		TasksProposal proposal =
-			tasksProposalPersistence.findByPrimaryKey(proposalId);
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
 
 		addProposalResources(
 			proposal, addCommunityPermissions, addGuestPermissions);
@@ -184,11 +162,10 @@ public class TasksProposalLocalServiceImpl
 			String[] guestPermissions)
 		throws PortalException, SystemException {
 
-		TasksProposal proposal =
-			tasksProposalPersistence.findByPrimaryKey(proposalId);
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
 
-		addProposalResources(
-			proposal, communityPermissions, guestPermissions);
+		addProposalResources(proposal, communityPermissions, guestPermissions);
 	}
 
 	public void addProposalResources(
@@ -225,8 +202,8 @@ public class TasksProposalLocalServiceImpl
 	public void deleteProposal(long proposalId)
 		throws PortalException, SystemException {
 
-		TasksProposal proposal =
-			tasksProposalPersistence.findByPrimaryKey(proposalId);
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
 
 		deleteProposal(proposal);
 	}
@@ -234,33 +211,39 @@ public class TasksProposalLocalServiceImpl
 	public void deleteProposal(TasksProposal proposal)
 		throws PortalException, SystemException {
 
+		// Reviews
+
+		tasksReviewLocalService.deleteReviews(proposal.getProposalId());
+
 		// Message boards
 
 		mbMessageLocalService.deleteDiscussionMessages(
 			TasksProposal.class.getName(), proposal.getProposalId());
 
-		// Activity Trackers
+		// Activity trackers
 
 		activityTrackerLocalService.deleteActivityTrackers(
 			TasksProposal.class.getName(), proposal.getProposalId());
 
-		// Reviews
+		// Resources
 
-		tasksReviewLocalService.deleteReviews(proposal.getProposalId());
+		resourceLocalService.deleteResource(
+			proposal.getCompanyId(), TasksProposal.class.getName(),
+			ResourceImpl.SCOPE_INDIVIDUAL, proposal.getProposalId());
 
 		// Proposal
 
-		tasksProposalPersistence.remove(proposal.getProposalId());
+		tasksProposalPersistence.remove(proposal);
 	}
 
-	public void deleteProposals(long companyId, long groupId)
+	public void deleteProposals(long groupId)
 		throws PortalException, SystemException {
 
-		List proposals =
-			tasksProposalPersistence.findByC_G(companyId, groupId);
+		List<TasksProposal> proposals = tasksProposalPersistence.findByGroupId(
+			groupId);
 
-		for (int i = 0; i < proposals.size(); i++) {
-			deleteTasksProposal((TasksProposal)proposals.get(i));
+		for (TasksProposal proposal : proposals) {
+			deleteTasksProposal(proposal);
 		}
 	}
 
@@ -284,85 +267,40 @@ public class TasksProposalLocalServiceImpl
 		return tasksProposalPersistence.findByC_C(classNameId, classPK);
 	}
 
-	public List getProposals() throws SystemException {
-		return tasksProposalPersistence.findAll();
-	}
-
-	public List getProposals(long companyId, long groupId, int begin, int end)
+	public List<TasksProposal> getProposals(long groupId, int begin, int end)
 		throws SystemException {
 
-		return tasksProposalPersistence.findByC_G(companyId, groupId, begin, end);
+		return tasksProposalPersistence.findByGroupId(groupId, begin, end);
 	}
 
-	public int getProposalsCount(long companyId, long groupId)
-		throws SystemException {
-
-		return tasksProposalPersistence.countByC_G(companyId, groupId);
+	public int getProposalsCount(long groupId) throws SystemException {
+		return tasksProposalPersistence.countByGroupId(groupId);
 	}
 
-	public List getReviewersProposals(
-			long companyId, long groupId, long reviewingUserId, int begin,
-			int end, OrderByComparator obc)
+	public List<TasksProposal> getReviewProposals(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
-		return tasksProposalFinder.findByC_G_R(
-			companyId, groupId, reviewingUserId, begin, end, obc);
+		return tasksProposalFinder.findByG_U(groupId, userId, begin, end);
 	}
 
-	public int getReviewersProposalsCount(
-			long companyId, long groupId, long reviewingUserId)
+	public int getReviewProposalsCount(long groupId, long userId)
 		throws SystemException {
 
-		return tasksProposalFinder.countByC_G_R(
-			companyId, groupId, reviewingUserId);
+		return tasksProposalFinder.countByG_U(groupId, userId);
 	}
 
-	public List getUsersProposals(
-			long companyId, long groupId, long userId, int begin, int end)
+	public List<TasksProposal> getUserProposals(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
-		return tasksProposalPersistence.findByC_G_U(
-			companyId, groupId, userId, begin, end);
+		return tasksProposalPersistence.findByG_U(groupId, userId, begin, end);
 	}
 
-	public int getUsersProposalsCount(long companyId, long groupId, long userId)
+	public int getUserProposalsCount(long groupId, long userId)
 		throws SystemException {
 
-		return tasksProposalPersistence.countByC_G_U(companyId, groupId, userId);
-	}
-
-	public List search(
-			long companyId, long groupId, String keywords, int begin, int end,
-			OrderByComparator obc)
-		throws SystemException {
-
-		return tasksProposalFinder.findByKeywords(
-			companyId, groupId, keywords, begin, end, obc);
-	}
-
-	public List search(
-			long companyId, long groupId, String name, String userName,
-			boolean andOperator, int begin, int end, OrderByComparator obc)
-		throws SystemException {
-
-		return tasksProposalFinder.findByC_G_N_U(
-			companyId, groupId, name, userName, andOperator, begin, end, obc);
-	}
-
-	public int searchCount(long companyId, long groupId, String keywords)
-		throws SystemException {
-
-		return tasksProposalFinder.countByKeywords(
-			companyId, groupId, keywords);
-	}
-
-	public int searchCount(
-			long companyId, long groupId, String name, String userName,
-			boolean andOperator)
-		throws SystemException {
-
-		return tasksProposalFinder.countByC_G_N_U(
-			companyId, groupId, name, userName, andOperator);
+		return tasksProposalPersistence.countByG_U(groupId, userId);
 	}
 
 	public TasksProposal updateProposal(
@@ -370,16 +308,14 @@ public class TasksProposalLocalServiceImpl
 			int dueDateDay, int dueDateYear, int dueDateHour, int dueDateMinute)
 		throws PortalException, SystemException {
 
-		// Proposal
-
 		User user = userPersistence.findByPrimaryKey(userId);
 
 		Date dueDate = PortalUtil.getDate(
 			dueDateMonth, dueDateDay, dueDateYear, dueDateHour, dueDateMinute,
 			user.getTimeZone(), new ProposalDueDateException());
 
-		TasksProposal proposal =
-			tasksProposalPersistence.findByPrimaryKey(proposalId);
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
 
 		proposal.setModifiedDate(new Date());
 		proposal.setDescription(description);

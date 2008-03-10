@@ -27,17 +27,8 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
-import com.liferay.mail.service.MailService;
-import com.liferay.mail.service.MailServiceFactory;
-
 import com.liferay.portal.service.ActivityTrackerLocalService;
 import com.liferay.portal.service.ActivityTrackerLocalServiceFactory;
-import com.liferay.portal.service.CompanyLocalService;
-import com.liferay.portal.service.CompanyLocalServiceFactory;
-import com.liferay.portal.service.CompanyService;
-import com.liferay.portal.service.CompanyServiceFactory;
-import com.liferay.portal.service.PortletPreferencesLocalService;
-import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -51,12 +42,6 @@ import com.liferay.portal.service.persistence.ActivityTrackerFinder;
 import com.liferay.portal.service.persistence.ActivityTrackerFinderUtil;
 import com.liferay.portal.service.persistence.ActivityTrackerPersistence;
 import com.liferay.portal.service.persistence.ActivityTrackerUtil;
-import com.liferay.portal.service.persistence.CompanyPersistence;
-import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesFinder;
-import com.liferay.portal.service.persistence.PortletPreferencesFinderUtil;
-import com.liferay.portal.service.persistence.PortletPreferencesPersistence;
-import com.liferay.portal.service.persistence.PortletPreferencesUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -98,32 +83,6 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 	implements TasksProposalService, InitializingBean {
-	public TasksProposalLocalService getTasksProposalLocalService() {
-		return tasksProposalLocalService;
-	}
-
-	public void setTasksProposalLocalService(
-		TasksProposalLocalService tasksProposalLocalService) {
-		this.tasksProposalLocalService = tasksProposalLocalService;
-	}
-
-	public TasksProposalPersistence getTasksProposalPersistence() {
-		return tasksProposalPersistence;
-	}
-
-	public void setTasksProposalPersistence(
-		TasksProposalPersistence tasksProposalPersistence) {
-		this.tasksProposalPersistence = tasksProposalPersistence;
-	}
-
-	public TasksProposalFinder getTasksProposalFinder() {
-		return tasksProposalFinder;
-	}
-
-	public void setTasksProposalFinder(TasksProposalFinder tasksProposalFinder) {
-		this.tasksProposalFinder = tasksProposalFinder;
-	}
-
 	public TasksReviewLocalService getTasksReviewLocalService() {
 		return tasksReviewLocalService;
 	}
@@ -150,6 +109,32 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 		this.tasksReviewPersistence = tasksReviewPersistence;
 	}
 
+	public TasksProposalLocalService getTasksProposalLocalService() {
+		return tasksProposalLocalService;
+	}
+
+	public void setTasksProposalLocalService(
+		TasksProposalLocalService tasksProposalLocalService) {
+		this.tasksProposalLocalService = tasksProposalLocalService;
+	}
+
+	public TasksProposalPersistence getTasksProposalPersistence() {
+		return tasksProposalPersistence;
+	}
+
+	public void setTasksProposalPersistence(
+		TasksProposalPersistence tasksProposalPersistence) {
+		this.tasksProposalPersistence = tasksProposalPersistence;
+	}
+
+	public TasksProposalFinder getTasksProposalFinder() {
+		return tasksProposalFinder;
+	}
+
+	public void setTasksProposalFinder(TasksProposalFinder tasksProposalFinder) {
+		this.tasksProposalFinder = tasksProposalFinder;
+	}
+
 	public CounterLocalService getCounterLocalService() {
 		return counterLocalService;
 	}
@@ -164,14 +149,6 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 
 	public void setCounterService(CounterService counterService) {
 		this.counterService = counterService;
-	}
-
-	public MailService getMailService() {
-		return mailService;
-	}
-
-	public void setMailService(MailService mailService) {
-		this.mailService = mailService;
 	}
 
 	public ActivityTrackerLocalService getActivityTrackerLocalService() {
@@ -199,57 +176,6 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 	public void setActivityTrackerFinder(
 		ActivityTrackerFinder activityTrackerFinder) {
 		this.activityTrackerFinder = activityTrackerFinder;
-	}
-
-	public CompanyLocalService getCompanyLocalService() {
-		return companyLocalService;
-	}
-
-	public void setCompanyLocalService(CompanyLocalService companyLocalService) {
-		this.companyLocalService = companyLocalService;
-	}
-
-	public CompanyService getCompanyService() {
-		return companyService;
-	}
-
-	public void setCompanyService(CompanyService companyService) {
-		this.companyService = companyService;
-	}
-
-	public CompanyPersistence getCompanyPersistence() {
-		return companyPersistence;
-	}
-
-	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
-		this.companyPersistence = companyPersistence;
-	}
-
-	public PortletPreferencesLocalService getPortletPreferencesLocalService() {
-		return portletPreferencesLocalService;
-	}
-
-	public void setPortletPreferencesLocalService(
-		PortletPreferencesLocalService portletPreferencesLocalService) {
-		this.portletPreferencesLocalService = portletPreferencesLocalService;
-	}
-
-	public PortletPreferencesPersistence getPortletPreferencesPersistence() {
-		return portletPreferencesPersistence;
-	}
-
-	public void setPortletPreferencesPersistence(
-		PortletPreferencesPersistence portletPreferencesPersistence) {
-		this.portletPreferencesPersistence = portletPreferencesPersistence;
-	}
-
-	public PortletPreferencesFinder getPortletPreferencesFinder() {
-		return portletPreferencesFinder;
-	}
-
-	public void setPortletPreferencesFinder(
-		PortletPreferencesFinder portletPreferencesFinder) {
-		this.portletPreferencesFinder = portletPreferencesFinder;
 	}
 
 	public ResourceLocalService getResourceLocalService() {
@@ -352,18 +278,6 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 	}
 
 	public void afterPropertiesSet() {
-		if (tasksProposalLocalService == null) {
-			tasksProposalLocalService = TasksProposalLocalServiceFactory.getImpl();
-		}
-
-		if (tasksProposalPersistence == null) {
-			tasksProposalPersistence = TasksProposalUtil.getPersistence();
-		}
-
-		if (tasksProposalFinder == null) {
-			tasksProposalFinder = TasksProposalFinderUtil.getFinder();
-		}
-
 		if (tasksReviewLocalService == null) {
 			tasksReviewLocalService = TasksReviewLocalServiceFactory.getImpl();
 		}
@@ -376,16 +290,24 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 			tasksReviewPersistence = TasksReviewUtil.getPersistence();
 		}
 
+		if (tasksProposalLocalService == null) {
+			tasksProposalLocalService = TasksProposalLocalServiceFactory.getImpl();
+		}
+
+		if (tasksProposalPersistence == null) {
+			tasksProposalPersistence = TasksProposalUtil.getPersistence();
+		}
+
+		if (tasksProposalFinder == null) {
+			tasksProposalFinder = TasksProposalFinderUtil.getFinder();
+		}
+
 		if (counterLocalService == null) {
 			counterLocalService = CounterLocalServiceFactory.getImpl();
 		}
 
 		if (counterService == null) {
 			counterService = CounterServiceFactory.getImpl();
-		}
-
-		if (mailService == null) {
-			mailService = MailServiceFactory.getImpl();
 		}
 
 		if (activityTrackerLocalService == null) {
@@ -398,30 +320,6 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 
 		if (activityTrackerFinder == null) {
 			activityTrackerFinder = ActivityTrackerFinderUtil.getFinder();
-		}
-
-		if (companyLocalService == null) {
-			companyLocalService = CompanyLocalServiceFactory.getImpl();
-		}
-
-		if (companyService == null) {
-			companyService = CompanyServiceFactory.getImpl();
-		}
-
-		if (companyPersistence == null) {
-			companyPersistence = CompanyUtil.getPersistence();
-		}
-
-		if (portletPreferencesLocalService == null) {
-			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
-		}
-
-		if (portletPreferencesPersistence == null) {
-			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
-		}
-
-		if (portletPreferencesFinder == null) {
-			portletPreferencesFinder = PortletPreferencesFinderUtil.getFinder();
 		}
 
 		if (resourceLocalService == null) {
@@ -473,24 +371,17 @@ public abstract class TasksProposalServiceBaseImpl extends PrincipalBean
 		}
 	}
 
-	protected TasksProposalLocalService tasksProposalLocalService;
-	protected TasksProposalPersistence tasksProposalPersistence;
-	protected TasksProposalFinder tasksProposalFinder;
 	protected TasksReviewLocalService tasksReviewLocalService;
 	protected TasksReviewService tasksReviewService;
 	protected TasksReviewPersistence tasksReviewPersistence;
+	protected TasksProposalLocalService tasksProposalLocalService;
+	protected TasksProposalPersistence tasksProposalPersistence;
+	protected TasksProposalFinder tasksProposalFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
-	protected MailService mailService;
 	protected ActivityTrackerLocalService activityTrackerLocalService;
 	protected ActivityTrackerPersistence activityTrackerPersistence;
 	protected ActivityTrackerFinder activityTrackerFinder;
-	protected CompanyLocalService companyLocalService;
-	protected CompanyService companyService;
-	protected CompanyPersistence companyPersistence;
-	protected PortletPreferencesLocalService portletPreferencesLocalService;
-	protected PortletPreferencesPersistence portletPreferencesPersistence;
-	protected PortletPreferencesFinder portletPreferencesFinder;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;

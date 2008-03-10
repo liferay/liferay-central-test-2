@@ -25,94 +25,62 @@ package com.liferay.portlet.tasks.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
-import com.liferay.portlet.tasks.NoSuchReviewException;
+import com.liferay.portlet.tasks.DuplicateReviewUserIdException;
 import com.liferay.portlet.tasks.TasksActivityKeys;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.base.TasksReviewLocalServiceBaseImpl;
+import com.liferay.util.SetUtil;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.json.JSONObject;
 
 /**
  * <a href="TasksReviewLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
+ * @author Raymond Aug?
  * @author Brian Wing Shun Chan
  *
  */
 public class TasksReviewLocalServiceImpl extends TasksReviewLocalServiceBaseImpl {
 
 	public TasksReview addReview(
-			long userId, long groupId, long assigningUserId,
-			String assigningUserName, long proposalId, int stage,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
-		throws PortalException, SystemException {
-
-		return addReview(
-			userId, groupId, assigningUserId, assigningUserName, proposalId,
-			stage, new Boolean(addCommunityPermissions),
-			new Boolean(addGuestPermissions), null, null);
-	}
-
-	public TasksReview addReview(
-			long userId, long groupId, long assigningUserId,
-			String assigningUserName, long proposalId, int stage,
-			String[] communityPermissions, String[] guestPermissions)
-		throws PortalException, SystemException {
-
-		return addReview(
-			userId, groupId, assigningUserId, assigningUserName, proposalId,
-			stage, null, null, communityPermissions, guestPermissions);
-	}
-
-	public TasksReview addReview(
-			long userId, long groupId, long assigningUserId,
-			String assigningUserName, long proposalId, int stage,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			long userId, long proposalId, long assignedByUserId, int stage)
 		throws PortalException, SystemException {
 
 		// Review
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		TasksProposal proposal = tasksProposalPersistence.findByPrimaryKey(
+			proposalId);
+		User assignedByUser = userPersistence.findByPrimaryKey(
+			assignedByUserId);
 		Date now = new Date();
 
-		long id = counterLocalService.increment();
+		long reviewId = counterLocalService.increment();
 
-		TasksReview review = tasksReviewPersistence.create(id);
+		TasksReview review = tasksReviewPersistence.create(reviewId);
 
-		review.setGroupId(groupId);
+		review.setGroupId(proposal.getGroupId());
 		review.setCompanyId(user.getCompanyId());
 		review.setUserId(user.getUserId());
 		review.setUserName(user.getFullName());
 		review.setCreateDate(now);
 		review.setModifiedDate(now);
-		review.setAssigningUserId(assigningUserId);
-		review.setAssigningUserName(assigningUserName);
 		review.setProposalId(proposalId);
+		review.setAssignedByUserId(assignedByUserId);
+		review.setAssignedByUserName(assignedByUser.getFullName());
 		review.setStage(stage);
 		review.setCompleted(false);
 		review.setRejected(false);
 
 		tasksReviewPersistence.update(review);
 
-		// Resources
-
-		if ((addCommunityPermissions != null) &&
-			(addGuestPermissions != null)) {
-
-			addReviewResources(
-				review, addCommunityPermissions.booleanValue(),
-				addGuestPermissions.booleanValue());
-		}
-		else {
-			addReviewResources(
-				review, communityPermissions, guestPermissions);
-		}
-
-		// ActivityTracker
+		// Activity trackers
 
 		JSONObject extraData = new JSONObject();
 
@@ -121,77 +89,132 @@ public class TasksReviewLocalServiceImpl extends TasksReviewLocalServiceBaseImpl
 		extraData.put("rejected", review.getRejected());
 
 		activityTrackerLocalService.addActivityTracker(
-			assigningUserId, groupId, TasksProposal.class.getName(),
-			review.getProposalId(), TasksActivityKeys.ASSIGN,
-			extraData.toString(), user.getUserId());
+			assignedByUserId, proposal.getGroupId(),
+			TasksProposal.class.getName(), review.getProposalId(),
+			TasksActivityKeys.ASSIGN, extraData.toString(), user.getUserId());
 
 		return review;
 	}
 
-	public void addReviewResources(
-			long proposalId, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+	public TasksReview approveReview(
+			long userId, long proposalId, int stage)
 		throws PortalException, SystemException {
 
-		TasksReview review =
-			tasksReviewPersistence.findByPrimaryKey(proposalId);
-
-		addReviewResources(
-			review, addCommunityPermissions, addGuestPermissions);
+		return updateReview(userId, proposalId, stage, false);
 	}
 
-	public void addReviewResources(
-			TasksReview review, boolean addCommunityPermissions,
-			boolean addGuestPermissions)
+	public void deleteReview(long reviewId)
 		throws PortalException, SystemException {
 
-		resourceLocalService.addResources(
-			review.getCompanyId(), review.getGroupId(),
-			review.getUserId(), TasksProposal.class.getName(),
-			review.getProposalId(), false, addCommunityPermissions,
-			addGuestPermissions);
+		TasksReview review = tasksReviewPersistence.findByPrimaryKey(
+			reviewId);
+
+		deleteReview(review);
 	}
 
-	public void addReviewResources(
-			long proposalId, String[] communityPermissions,
-			String[] guestPermissions)
+	public void deleteReview(TasksReview review)
 		throws PortalException, SystemException {
 
-		TasksReview review =
-			tasksReviewPersistence.findByPrimaryKey(proposalId);
-
-		addReviewResources(
-				review, communityPermissions, guestPermissions);
+		tasksReviewPersistence.remove(review);
 	}
 
-	public void addReviewResources(
-			TasksReview review, String[] communityPermissions,
-			String[] guestPermissions)
+	public void deleteReviews(long proposalId)
 		throws PortalException, SystemException {
 
-		resourceLocalService.addModelResources(
-			review.getCompanyId(), review.getGroupId(),
-			review.getUserId(), TasksReview.class.getName(),
-			review.getProposalId(), communityPermissions, guestPermissions);
+		List<TasksReview> reviews = tasksReviewPersistence.findByProposalId(
+			proposalId);
+
+		for (TasksReview review : reviews) {
+			deleteReview(review);
+		}
+	}
+
+	public TasksReview getReview(long reviewId)
+		throws PortalException, SystemException {
+
+		return tasksReviewPersistence.findByPrimaryKey(reviewId);
+	}
+
+	public TasksReview getReview(long userId, long proposalId)
+		throws PortalException, SystemException {
+
+		return tasksReviewPersistence.findByU_P(userId, proposalId);
+	}
+
+	public List<TasksReview> getReviews(long proposalId)
+		throws SystemException {
+
+		return tasksReviewPersistence.findByProposalId(proposalId);
+	}
+
+	public List<TasksReview> getReviews(long proposalId, int stage)
+		throws SystemException {
+
+		return tasksReviewPersistence.findByP_S(proposalId, stage);
+	}
+
+	public List<TasksReview> getReviews(
+			long proposalId, int stage, boolean completed)
+		throws SystemException {
+
+		return tasksReviewPersistence.findByP_S_C(proposalId, stage, completed);
+	}
+
+	public List<TasksReview> getReviews(
+			long proposalId, int stage, boolean completed, boolean rejected)
+		throws PortalException, SystemException {
+
+		return tasksReviewPersistence.findByP_S_C_R(
+			proposalId, stage, completed, rejected);
 	}
 
 	public TasksReview rejectReview(
+			long userId, long proposalId, int stage)
+		throws PortalException, SystemException {
+
+		return updateReview(userId, proposalId, stage, true);
+	}
+
+	public void updateReviews(
+			long proposalId, long assignedByUserId, long[][] userIdsPerStage)
+		throws PortalException, SystemException {
+
+		Set<Long> assignedUserIds = new HashSet<Long>();
+
+		for (int i = 0; i < userIdsPerStage.length; i++) {
+			long[] userIds = userIdsPerStage[i];
+
+			for (long userId : userIds) {
+				if (assignedUserIds.contains(userId)) {
+					throw new DuplicateReviewUserIdException();
+				}
+				else {
+					assignedUserIds.add(userId);
+				}
+			}
+		}
+
+		for (int i = 0; i < userIdsPerStage.length; i++) {
+			Set<Long> userIds = SetUtil.fromArray(userIdsPerStage[i]);
+
+			updateReviews(proposalId, assignedByUserId, i + 2, userIds);
+		}
+	}
+
+	protected TasksReview updateReview(
 			long userId, long proposalId, int stage, boolean rejected)
 		throws PortalException, SystemException {
 
-		User user = userPersistence.findByPrimaryKey(userId);
-		Date now = new Date();
+		TasksReview review = tasksReviewPersistence.findByU_P(
+			userId, proposalId);
 
-		TasksReview review =
-			tasksReviewPersistence.findByP_U(proposalId, userId);
-
-		review.setModifiedDate(now);
+		review.setModifiedDate(new Date());
 		review.setCompleted(true);
 		review.setRejected(rejected);
 
-		tasksReviewPersistence.update(review, true);
+		tasksReviewPersistence.update(review);
 
-		// ActivityTracker
+		// Activity trackers
 
 		JSONObject extraData = new JSONObject();
 
@@ -203,145 +226,33 @@ public class TasksReviewLocalServiceImpl extends TasksReviewLocalServiceBaseImpl
 			review.getUserId(), review.getGroupId(),
 			TasksProposal.class.getName(), review.getProposalId(),
 			TasksActivityKeys.REVIEW, extraData.toString(),
-			review.getAssigningUserId());
+			review.getAssignedByUserId());
 
 		return review;
 	}
 
-	public void deleteReview(long reviewId)
+	protected void updateReviews(
+			long proposalId, long assignedByUserId, int stage,
+			Set<Long> userIds)
 		throws PortalException, SystemException {
 
-		tasksReviewPersistence.remove(reviewId);
-	}
+		Set<Long> reviewUserIds = new HashSet<Long>();
 
-	public void deleteReviews(long proposalId)
-		throws PortalException, SystemException {
+		List<TasksReview> reviews = tasksReviewPersistence.findByP_S(
+			proposalId, stage);
 
-		List reviews = tasksReviewPersistence.findByProposalId(proposalId);
-
-		for (int i = 0; i < reviews.size(); i++) {
-			TasksReview review = (TasksReview)reviews.get(i);
-
-			tasksReviewPersistence.remove(review.getReviewId());
-		}
-	}
-
-	public TasksReview getReview(long reviewId)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.findByPrimaryKey(reviewId);
-	}
-
-	public TasksReview getReview(long proposalId, long userId)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.findByP_U(proposalId, userId);
-	}
-
-	public List getReviews(long proposalId)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.findByProposalId(proposalId);
-	}
-
-	public List getReviews(long proposalId, int stage)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.findByP_S(proposalId, stage);
-	}
-
-	public List getReviews(long proposalId, int stage, boolean completed)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.findByP_S_C(proposalId, stage, completed);
-	}
-
-	public List getReviews(long proposalId, int stage, int begin, int end)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.findByP_S(proposalId, stage, begin, end);
-	}
-
-	public List getReviews(
-			long proposalId, int stage, boolean completed, boolean rejected)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.findByP_S_C_R(
-			proposalId, stage, completed, rejected);
-	}
-
-	public List getReviews(
-			long proposalId, int stage, boolean completed, int begin, int end)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.findByP_S_C(
-			proposalId, stage, completed, begin, end);
-	}
-
-	public List getReviews(
-			long proposalId, int stage, boolean completed, boolean rejected,
-			int begin, int end)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.findByP_S_C_R(
-			proposalId, stage, completed, rejected, begin, end);
-	}
-
-	public int getReviewsCount(long proposalId)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.countByProposalId(proposalId);
-	}
-
-	public int getReviewsCount(long proposalId, int stage)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.countByP_S(proposalId, stage);
-	}
-
-	public int getReviewsCount(long proposalId, int stage, boolean completed)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.countByP_S_C(
-			proposalId, stage, completed);
-	}
-
-	public int getReviewsCount(
-			long proposalId, int stage, boolean completed, boolean rejected)
-		throws PortalException, SystemException {
-
-		return tasksReviewPersistence.countByP_S_C_R(
-			proposalId, stage, completed, rejected);
-	}
-
-	public void updateReviewers(
-			long userId, long groupId, long proposalId, int stage,
-			long[] reviewerIds, long[] removeReviewerIds)
-		throws PortalException, SystemException {
-
-		User assigningUser = userLocalService.getUserById(userId);
-
-		for (int i = 0; i < removeReviewerIds.length; i++) {
-			try {
-				tasksReviewPersistence.removeByP_U(
-					proposalId, removeReviewerIds[i]);
+		for (TasksReview review : reviews) {
+			if (!userIds.contains(review.getUserId())) {
+				deleteReview(review);
 			}
-			catch (NoSuchReviewException nsre) {
+			else {
+				reviewUserIds.add(review.getUserId());
 			}
 		}
 
-		for (int i = 0; i < reviewerIds.length; i++) {
-			try {
-				tasksReviewPersistence.findByP_U(proposalId, reviewerIds[i]);
-			}
-			catch (Exception e) {
-				User assignedUser =
-					userLocalService.getUserById(reviewerIds[i]);
-
-				addReview(
-					assignedUser.getUserId(), groupId,
-					assigningUser.getUserId(), assigningUser.getFullName(),
-					proposalId, stage, true, true);
+		for (long userId : userIds) {
+			if (!reviewUserIds.contains(userId)) {
+				addReview(userId, proposalId, assignedByUserId, stage);
 			}
 		}
 	}

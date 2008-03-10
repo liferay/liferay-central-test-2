@@ -165,6 +165,15 @@ public class GroupServiceUtil {
 		groupService.unsetRoleGroups(roleId, groupIds);
 	}
 
+	public static com.liferay.portal.model.Group updateFriendlyURL(
+		long groupId, java.lang.String friendlyURL)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		GroupService groupService = GroupServiceFactory.getService();
+
+		return groupService.updateFriendlyURL(groupId, friendlyURL);
+	}
+
 	public static com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String name, java.lang.String description, int type,
 		java.lang.String friendlyURL, boolean active)
@@ -183,5 +192,16 @@ public class GroupServiceUtil {
 		GroupService groupService = GroupServiceFactory.getService();
 
 		return groupService.updateGroup(groupId, typeSettings);
+	}
+
+	public static com.liferay.portal.model.Group updateWorkflow(long groupId,
+		boolean workflowEnabled, int workflowStages,
+		java.lang.String workflowRoleNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		GroupService groupService = GroupServiceFactory.getService();
+
+		return groupService.updateWorkflow(groupId, workflowEnabled,
+			workflowStages, workflowRoleNames);
 	}
 }

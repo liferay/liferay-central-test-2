@@ -1401,6 +1401,24 @@
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="acronym" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
+	<class name="com.liferay.portlet.tasks.model.impl.TasksReviewImpl" table="TasksReview">
+		<cache usage="read-write" />
+		<id name="reviewId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="proposalId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="assignedByUserId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="assignedByUserName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="stage" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="completed" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="rejected" type="com.liferay.util.dao.hibernate.BooleanType" />
+	</class>
 	<class name="com.liferay.portlet.tasks.model.impl.TasksProposalImpl" table="TasksProposal">
 		<cache usage="read-write" />
 		<id name="proposalId" type="long">
@@ -1418,24 +1436,6 @@
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="publishDate" />
 		<property name="dueDate" />
-	</class>
-	<class name="com.liferay.portlet.tasks.model.impl.TasksReviewImpl" table="TasksReview">
-		<cache usage="read-write" />
-		<id name="reviewId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="createDate" />
-		<property name="modifiedDate" />
-		<property name="assigningUserId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="assigningUserName" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="proposalId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="stage" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="completed" type="com.liferay.util.dao.hibernate.BooleanType" />
-		<property name="rejected" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
 	<class name="com.liferay.portlet.wiki.model.impl.WikiNodeImpl" table="WikiNode">
 		<cache usage="read-write" />

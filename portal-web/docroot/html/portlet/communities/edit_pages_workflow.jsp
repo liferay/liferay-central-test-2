@@ -1,0 +1,99 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%@ include file="/html/portlet/communities/init.jsp" %>
+
+<%
+Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
+
+boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflowEnabled")).booleanValue();
+int workflowStages = ((Integer)request.getAttribute("edit_pages.jsp-workflowStages")).intValue();
+String[] workflowRoleNames = (String[])request.getAttribute("edit_pages.jsp-workflowRoleNames");
+%>
+
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="number-of-stages" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />workflowStages" onChange="<portlet:namespace />changeWorkflowStages();">
+
+			<%
+			for (int i = 2; i <= 5; i++) {
+			%>
+
+				<option <%= (i == workflowStages) ? "selected" : "" %>><%= i %></option>
+
+			<%
+			}
+			%>
+
+		</select>
+	</td>
+</tr>
+</table>
+
+<br />
+
+<table class="lfr-table">
+
+<%
+int roleType = liveGroup.isCommunity() ? RoleImpl.TYPE_COMMUNITY : RoleImpl.TYPE_ORGANIZATION;
+
+List<Role> workflowRoles = RoleLocalServiceUtil.search(company.getCompanyId(), null, null, new Integer(roleType), QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+for (int i = 1; i <= workflowStages; i++) {
+%>
+
+	<tr>
+		<td>
+			<%= LanguageUtil.format(pageContext, "stage-x-role", String.valueOf(i)) %>
+		</td>
+		<td>
+			<select name="<portlet:namespace />workflowRoleName_<%= i %>">
+
+				<%
+				for (Role workflowRole : workflowRoles) {
+				%>
+
+					<option <%= (((i - 1) < workflowRoleNames.length) && workflowRoleNames[i - 1].equals(workflowRole.getName())) ? "selected" : "" %> value="<%= workflowRole.getName() %>"><%= workflowRole.getName() %></option>
+
+				<%
+				}
+				%>
+
+			</select>
+		</td>
+	</tr>
+
+<%
+}
+%>
+
+</table>
+
+<br />
+
+<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveWorkflowStages();" />

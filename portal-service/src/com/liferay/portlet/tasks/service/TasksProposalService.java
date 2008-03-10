@@ -50,43 +50,27 @@ package com.liferay.portlet.tasks.service;
  */
 public interface TasksProposalService {
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK, long reviewerId,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK, long reviewerId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteProposal(long groupId, long proposalId)
+	public void deleteProposal(long proposalId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal updateProposal(
-		long groupId, long proposalId, java.lang.String description,
-		int dueDateMonth, int dueDateDay, int dueDateYear, int dueDateHour,
-		int dueDateMinute)
+		long proposalId, java.lang.String description, int dueDateMonth,
+		int dueDateDay, int dueDateYear, int dueDateHour, int dueDateMinute)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

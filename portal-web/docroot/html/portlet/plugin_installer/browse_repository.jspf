@@ -240,7 +240,7 @@ try {
 
 					sm.append("<img align=\"left\" src=\"");
 					sm.append(screenshot.getThumbnailURL());
-					sm.append("\" style=\"margin-right: 10px\"/>");
+					sm.append("\" style=\"margin-right: 10px\" />");
 				}
 			}
 		}

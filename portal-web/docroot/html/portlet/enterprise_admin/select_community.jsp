@@ -34,7 +34,7 @@
 
 		var selectedCommunities = document.getElementById('<portlet:namespace />selectedCommunitiesDiv')
 
-		selectedCommunities.innerHTML = '<bean:message key="selected"/>: <b>' + <portlet:namespace />selectedCommunities.join(', ') + '</b><br/><br/>';
+		selectedCommunities.innerHTML = '<bean:message key="selected" />: <b>' + <portlet:namespace />selectedCommunities.join(', ') + '</b><br /><br />';
 	}
 </script>
 
@@ -136,10 +136,6 @@ for (int i = 0; i < results.size(); i++) {
 %>
 
 <liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-
-<br/>
-
-<input onclick="window.close();" type="button" value="<liferay-ui:message key="close"/>" />
 
 </form>
 

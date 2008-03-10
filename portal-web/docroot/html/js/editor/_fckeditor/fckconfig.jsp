@@ -23,7 +23,7 @@
 %>
 
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.util.PropsUtil"%>
+<%@ page import="com.liferay.portal.util.PropsUtil" %>
 <%@ page import="com.liferay.util.HttpUtil" %>
 
 <%

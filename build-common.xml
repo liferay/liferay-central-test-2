@@ -195,7 +195,6 @@ ECJ was automatically installed. Please rerun your task.
 				</junit>
 			</then>
 			<else>
-
 				<fileset dir="test-classes" id="test.suite.classes">
 					<include name="**/*TestSuite.class" />
 				</fileset>
@@ -229,7 +228,6 @@ ECJ was automatically installed. Please rerun your task.
 						</junit>
 					</else>
 				</if>
-
 			</else>
 		</if>
 	</target>

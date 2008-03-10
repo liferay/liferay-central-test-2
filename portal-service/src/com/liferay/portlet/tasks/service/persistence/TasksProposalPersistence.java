@@ -59,30 +59,60 @@ public interface TasksProposalPersistence {
 	public com.liferay.portlet.tasks.model.TasksProposal fetchByPrimaryKey(
 		long proposalId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByCompanyId(
-		long companyId) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByCompanyId(
-		long companyId, int begin, int end)
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByCompanyId(
-		long companyId, int begin, int end,
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tasks.model.TasksProposal findByCompanyId_First(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public com.liferay.portlet.tasks.model.TasksProposal findByGroupId_First(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
-	public com.liferay.portlet.tasks.model.TasksProposal findByCompanyId_Last(
-		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public com.liferay.portlet.tasks.model.TasksProposal findByGroupId_Last(
+		long groupId, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
-	public com.liferay.portlet.tasks.model.TasksProposal[] findByCompanyId_PrevAndNext(
-		long proposalId, long companyId,
+	public com.liferay.portlet.tasks.model.TasksProposal[] findByGroupId_PrevAndNext(
+		long proposalId, long groupId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tasks.NoSuchProposalException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
+		long groupId, long userId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
+		long groupId, long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.tasks.model.TasksProposal findByG_U_First(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tasks.NoSuchProposalException;
+
+	public com.liferay.portlet.tasks.model.TasksProposal findByG_U_Last(
+		long groupId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.tasks.NoSuchProposalException;
+
+	public com.liferay.portlet.tasks.model.TasksProposal[] findByG_U_PrevAndNext(
+		long proposalId, long groupId, long userId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
@@ -95,67 +125,6 @@ public interface TasksProposalPersistence {
 	public com.liferay.portlet.tasks.model.TasksProposal fetchByC_C(
 		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByC_G(
-		long companyId, long groupId) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByC_G(
-		long companyId, long groupId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByC_G(
-		long companyId, long groupId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal findByC_G_First(
-		long companyId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchProposalException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal findByC_G_Last(
-		long companyId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchProposalException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal[] findByC_G_PrevAndNext(
-		long proposalId, long companyId, long groupId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchProposalException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByC_G_U(
-		long companyId, long groupId, long userId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByC_G_U(
-		long companyId, long groupId, long userId, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByC_G_U(
-		long companyId, long groupId, long userId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal findByC_G_U_First(
-		long companyId, long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchProposalException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal findByC_G_U_Last(
-		long companyId, long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchProposalException;
-
-	public com.liferay.portlet.tasks.model.TasksProposal[] findByC_G_U_PrevAndNext(
-		long proposalId, long companyId, long groupId, long userId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.tasks.NoSuchProposalException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
@@ -175,31 +144,25 @@ public interface TasksProposalPersistence {
 		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByCompanyId(long companyId)
+	public void removeByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
-	public void removeByC_G(long companyId, long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public void removeByC_G_U(long companyId, long groupId, long userId)
-		throws com.liferay.portal.SystemException;
-
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public int countByCompanyId(long companyId)
+	public int countByGroupId(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByC_C(long classNameId, long classPK)
-		throws com.liferay.portal.SystemException;
-
-	public int countByC_G(long companyId, long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public int countByC_G_U(long companyId, long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

@@ -48,7 +48,7 @@ PortletURL[] urls = getAddURLs(renderRequest, entries, assetTypes);
 	</script>
 
 	<select name="<portlet:namespace/>assetURL" onchange="<portlet:namespace/>addNewAsset();">
-		<option value=""><liferay-ui:message key="add-new"/>...</option>
+		<option value=""><liferay-ui:message key="add-new" />...</option>
 
 		<%
 		Iterator itr = assetTypes.iterator();

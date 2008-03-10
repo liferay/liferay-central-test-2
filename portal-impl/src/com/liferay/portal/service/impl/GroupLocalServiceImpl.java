@@ -53,6 +53,7 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
 import com.liferay.util.Normalizer;
 
@@ -60,6 +61,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Properties;
 
 /**
  * <a href="GroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -326,11 +328,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			resourceLocalService.deleteResource(resource);
 		}
 
-		long organizationClassNameId = PortalUtil.getClassNameId(
-			Organization.class.getName());
-
-		if (((group.getClassNameId() <= 0) && (group.getClassPK() <= 0)) ||
-			(group.getClassNameId() == organizationClassNameId)) {
+		if (!group.isStagingGroup() &&
+			(group.isCommunity() || group.isOrganization())) {
 
 			resourceLocalService.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
@@ -584,6 +583,41 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setTypeSettings(typeSettings);
 
 		groupPersistence.update(group);
+
+		return group;
+	}
+
+	public Group updateWorkflow(
+			long groupId, boolean workflowEnabled, int workflowStages,
+			String workflowRoleNames)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		Properties props = group.getTypeSettingsProperties();
+
+		props.setProperty("workflowEnabled", String.valueOf(workflowEnabled));
+
+		if (workflowEnabled) {
+			if (workflowStages < PropsValues.TASKS_DEFAULT_STAGES) {
+				workflowStages = PropsValues.TASKS_DEFAULT_STAGES;
+			}
+
+			if (Validator.isNull(workflowRoleNames)) {
+				workflowRoleNames = PropsValues.TASKS_DEFAULT_ROLE_NAMES;
+			}
+
+			props.setProperty("workflowStages", String.valueOf(workflowStages));
+			props.setProperty("workflowRoleNames", workflowRoleNames);
+		}
+
+		group.setTypeSettings(group.getTypeSettings());
+
+		groupPersistence.update(group);
+
+		if (!workflowEnabled) {
+			tasksProposalLocalService.deleteProposals(groupId);
+		}
 
 		return group;
 	}

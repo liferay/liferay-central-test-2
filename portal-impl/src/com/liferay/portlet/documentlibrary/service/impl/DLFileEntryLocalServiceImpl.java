@@ -479,16 +479,16 @@ public class DLFileEntryLocalServiceImpl
 		mbMessageLocalService.deleteDiscussionMessages(
 			DLFileEntry.class.getName(), fileEntry.getFileEntryId());
 
+		// WebDAVProps
+
+		webDAVPropsLocalService.deleteWebDAVProps(
+			DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
+
 		// Resources
 
 		resourceLocalService.deleteResource(
 			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, fileEntry.getFileEntryId());
-
-		// WebDAVProps
-
-		webDAVPropsLocalService.deleteWebDAVProps(
-			DLFileEntry.class.getName(), fileEntry.getPrimaryKey());
 
 		// File entry
 

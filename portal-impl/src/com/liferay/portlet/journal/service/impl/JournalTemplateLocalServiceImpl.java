@@ -317,16 +317,16 @@ public class JournalTemplateLocalServiceImpl
 
 		ImageLocalUtil.deleteImage(template.getSmallImageId());
 
+		// WebDAVProps
+
+		webDAVPropsLocalService.deleteWebDAVProps(
+			JournalTemplate.class.getName(), template.getPrimaryKey());
+
 		// Resources
 
 		resourceLocalService.deleteResource(
 			template.getCompanyId(), JournalTemplate.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, template.getId());
-
-		// WebDAVProps
-
-		webDAVPropsLocalService.deleteWebDAVProps(
-			JournalTemplate.class.getName(), template.getPrimaryKey());
 
 		// Template
 

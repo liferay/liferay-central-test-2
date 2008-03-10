@@ -24,38 +24,28 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.tasks.NoSuchProposalException"%>
-<%@ page import="com.liferay.portlet.tasks.model.TasksProposal"%>
-<%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.tasks.util.TasksUtil"%>
+<%@ page import="com.liferay.portlet.tasks.NoSuchProposalException" %>
+<%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
+<%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
 
 <c:if test="<%= themeDisplay.isShowStagingIcon() %>">
 
 	<%
 	Group group = layout.getGroup();
 
+	Group liveGroup = null;
 	Group stagingGroup = null;
 
-	Group liveGroup = null;
-
 	if (group.isStagingGroup()) {
-		stagingGroup = group;
 		liveGroup = group.getLiveGroup();
+		stagingGroup = group;
 	}
 	else {
-		stagingGroup = group.getStagingGroup();
 		liveGroup = group;
+		stagingGroup = group.getStagingGroup();
 	}
 
-	Layout stagedLayout = LayoutLocalServiceUtil.getLayout(stagingGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
-
-	String friendlyURL = null;
-
-	boolean hasManageLayoutsPermission = GroupPermissionUtil.contains(permissionChecker, liveGroup.getGroupId(), ActionKeys.MANAGE_LAYOUTS);
-
-	Properties groupTypeSettings = liveGroup.getTypeSettingsProperties();
-
-	boolean managedStaging = PropertiesParamUtil.getBoolean(groupTypeSettings, request, GroupImpl.MANAGED_STAGING);
+	boolean workflowEnabled = liveGroup.isWorkflowEnabled();
 	%>
 
 	<ul>
@@ -63,7 +53,7 @@
 			<c:when test="<%= group.isStagingGroup() %>">
 
 				<%
-				boolean layoutProposed = false;
+				String friendlyURL = null;
 
 				try {
 					Layout liveLayout = LayoutLocalServiceUtil.getLayout(liveGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
@@ -71,20 +61,6 @@
 					friendlyURL = PortalUtil.getLayoutFriendlyURL(liveLayout, themeDisplay);
 				}
 				catch (Exception e) {
-				}
-
-				if (managedStaging) {
-					TasksProposal proposal = null;
-
-					try {
-						proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), layout.getPlid());
-					}
-					catch (NoSuchProposalException nspe) {
-					}
-
-					if (proposal != null) {
-						layoutProposed = true;
-					}
 				}
 				%>
 
@@ -94,66 +70,79 @@
 					</li>
 				</c:if>
 
-				<c:if test="<%= hasManageLayoutsPermission %>">
+				<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroup.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
+
+					<%
+					TasksProposal proposal = null;
+
+					if (workflowEnabled) {
+						try {
+							proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), layout.getPlid());
+						}
+						catch (NoSuchProposalException nspe) {
+						}
+					}
+					%>
+
 					<c:choose>
-						<c:when test="<%= managedStaging %>">
-							<c:if test="<%= !layoutProposed %>">
+						<c:when test="<%= workflowEnabled %>">
+							<c:if test="<%= proposal == null %>">
+
 								<%
 								PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
 
 								proposePublicationURL.setWindowState(WindowState.MAXIMIZED);
 								proposePublicationURL.setPortletMode(PortletMode.VIEW);
+
 								proposePublicationURL.setParameter("struts_action", "/layout_management/edit_proposal");
-								proposePublicationURL.setParameter("redirect", currentURL);
 								proposePublicationURL.setParameter(Constants.CMD, Constants.ADD);
+								proposePublicationURL.setParameter("redirect", currentURL);
 								proposePublicationURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
-								proposePublicationURL.setParameter("liveGroupId", String.valueOf(liveGroup.getGroupId()));
 								proposePublicationURL.setParameter("selPlid", String.valueOf(layout.getPlid()));
 
-								String[] approvalRoleNames = TasksUtil.getApprovalRoleNames(company.getCompanyId(), liveGroup.getGroupId());
+								String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
 
 								JSONArray jsonReviewers = new JSONArray();
 
-								Role reviewerRole = RoleLocalServiceUtil.getRole(company.getCompanyId(), approvalRoleNames[0]);
+								Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
 
 								LinkedHashMap userParams = new LinkedHashMap();
+
 								userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
-								userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(reviewerRole.getRoleId())});
+								userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
+
 								List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 
-								for (User reviewerUser : reviewers) {
-									JSONObject jsonReviewer = new JSONObject();
-									jsonReviewer.put("userId", reviewerUser.getUserId());
-									jsonReviewer.put("fullName", reviewerUser.getFullName());
+								if (reviewers.size() == 0) {
+									if (liveGroup.isCommunity()) {
+										role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+									}
+									else {
+										role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleImpl.ORGANIZATION_OWNER);
+									}
 
-									jsonReviewers.put(jsonReviewer);
+									userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
+
+									reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 								}
 
-								if (jsonReviewers.length() <= 0) {
-									Role ownerRole = RoleLocalServiceUtil.getRole(company.getCompanyId(), "Community Owner");
+								for (User reviewer : reviewers) {
+									JSONObject jsonReviewer = new JSONObject();
 
-									userParams = new LinkedHashMap();
-									userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
-									userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(ownerRole.getRoleId())});
-									reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+									jsonReviewer.put("userId", reviewer.getUserId());
+									jsonReviewer.put("fullName", reviewer.getFullName());
 
-									for (User reviewerUser : reviewers) {
-										JSONObject jsonReviewer = new JSONObject();
-										jsonReviewer.put("userId", reviewerUser.getUserId());
-										jsonReviewer.put("fullName", reviewerUser.getFullName());
-
-										jsonReviewers.put(jsonReviewer);
-									}
+									jsonReviewers.put(jsonReviewer);
 								}
 								%>
 
 								<li class="page-settings">
-									<a href="javascript: Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '_<%= PortletKeys.LAYOUT_MANAGEMENT %>_', reviewers: <%= jsonReviewers.toString().replace('"','\'') %>, title: '<%= LanguageUtil.get(pageContext, "proposal-description") %>'});"><liferay-ui:message key="propose-publication" /></a>
+									<a href="javascript: Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});"><liferay-ui:message key="propose-publication" /></a>
 								</li>
 							</c:if>
 						</c:when>
 						<c:when test="<%= themeDisplay.getURLPublishToLive() != null %>">
-							<li class="page-settings <%= (!managedStaging ? "group-end" : "") %>">
+							<li class="page-settings">
 								<a href="javascript: Liferay.LayoutExporter.publishToLive({url: '<%= themeDisplay.getURLPublishToLive().toString() %>', messageId: 'publish-to-live'});"><liferay-ui:message key="publish-to-live" /></a>
 							</li>
 						</c:when>
@@ -163,7 +152,11 @@
 			<c:otherwise>
 
 				<%
+				String friendlyURL = null;
+
 				try {
+					Layout stagedLayout = LayoutLocalServiceUtil.getLayout(stagingGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
+
 					friendlyURL = PortalUtil.getLayoutFriendlyURL(stagedLayout, themeDisplay);
 				}
 				catch (Exception e) {
@@ -171,116 +164,32 @@
 				%>
 
 				<c:if test="<%= Validator.isNotNull(friendlyURL) %>">
-					<li class="page-settings <%= (!managedStaging ? "group-end" : "") %>">
+					<li class="page-settings">
 						<a href="<%= friendlyURL %>"><liferay-ui:message key="view-staged-page" /></a>
 					</li>
 				</c:if>
 			</c:otherwise>
 		</c:choose>
 
-		<c:if test="<%= managedStaging %>">
-			<li class="page-settings group-end">
+		<c:if test="<%= workflowEnabled %>">
+			<li class="page-settings">
+
 				<%
-				PortletURL proposalsURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, stagedLayout.getPlid(), PortletRequest.RENDER_PHASE);
+				Layout stagedLayout = LayoutLocalServiceUtil.getLayout(stagingGroup.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId());
 
-				proposalsURL.setWindowState(WindowState.MAXIMIZED);
-				proposalsURL.setPortletMode(PortletMode.VIEW);
-				proposalsURL.setParameter("struts_action", "/layout_management/edit_pages");
-				proposalsURL.setParameter("redirect", currentURL);
-				proposalsURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
-				proposalsURL.setParameter("tabs2", "proposals");
+				PortletURL viewProposalsURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, stagedLayout.getPlid(), PortletRequest.RENDER_PHASE);
+
+				viewProposalsURL.setWindowState(WindowState.MAXIMIZED);
+				viewProposalsURL.setPortletMode(PortletMode.VIEW);
+
+				viewProposalsURL.setParameter("struts_action", "/layout_management/edit_pages");
+				viewProposalsURL.setParameter("tabs2", "proposals");
+				viewProposalsURL.setParameter("redirect", currentURL);
+				viewProposalsURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
 				%>
-				<a href="<%= proposalsURL.toString() %>"><liferay-ui:message key="proposals" /></a>
+
+				<a href="<%= viewProposalsURL.toString() %>"><liferay-ui:message key="view-proposals" /></a>
 			</li>
-		</c:if>
-
-		<%
-		PortletURL portletURL = new PortletURLImpl(request, PortletKeys.MY_PLACES, plid.longValue(), PortletRequest.ACTION_PHASE);
-
-		portletURL.setWindowState(WindowState.NORMAL);
-		portletURL.setPortletMode(PortletMode.VIEW);
-
-		portletURL.setParameter("struts_action", "/my_places/view");
-
-		boolean organizationCommunity = stagingGroup.isOrganization();
-		boolean regularCommunity = stagingGroup.isCommunity();
-		int publicLayoutsPageCount = stagingGroup.getPublicLayoutsPageCount();
-		int privateLayoutsPageCount = stagingGroup.getPrivateLayoutsPageCount();
-
-		Organization organization = null;
-
-		boolean showPublicPlace = true;
-
-		if (publicLayoutsPageCount == 0) {
-			if (organizationCommunity) {
-				showPublicPlace = PropsValues.MY_PLACES_SHOW_ORGANIZATION_PUBLIC_SITES_WITH_NO_LAYOUTS;
-			}
-			else if (regularCommunity) {
-				showPublicPlace = PropsValues.MY_PLACES_SHOW_COMMUNITY_PUBLIC_SITES_WITH_NO_LAYOUTS;
-			}
-		}
-
-		boolean showPrivatePlace = true;
-
-		if (privateLayoutsPageCount == 0) {
-			if (organizationCommunity) {
-				showPrivatePlace = PropsValues.MY_PLACES_SHOW_ORGANIZATION_PRIVATE_SITES_WITH_NO_LAYOUTS;
-			}
-			else if (regularCommunity) {
-				showPrivatePlace = PropsValues.MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS;
-			}
-		}
-		%>
-
-		<c:if test="<%= showPublicPlace || showPrivatePlace %>">
-
-			<%
-			boolean selectedCommunity = false;
-
- 				if (layout != null) {
-  				if (layout.getGroupId() == stagingGroup.getGroupId()) {
-					selectedCommunity = true;
-				}
-  			}
-			%>
-
-			<%
-			portletURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
-			portletURL.setParameter("privateLayout", Boolean.FALSE.toString());
-
-			boolean selectedPlace = false;
-
-			if (layout != null) {
-				selectedPlace = !layout.isPrivateLayout() && (layout.getGroupId() == stagingGroup.getGroupId());
-			}
-			%>
-
-			<c:if test="<%= showPublicPlace %>">
-				<li class="public <%= selectedPlace ? "current" : "" %>">
-					<a href="<%= publicLayoutsPageCount > 0 ? "javascript: submitForm(document.hrefFm, '" + portletURL.toString() + "');" : "javascript: ;" %>"
-
-					><liferay-ui:message key="public-pages" /> <span class="page-count">(<%= publicLayoutsPageCount %>)</span></a>
-				</li>
-			</c:if>
-
-			<%
-			portletURL.setParameter("groupId", String.valueOf(stagingGroup.getGroupId()));
-			portletURL.setParameter("privateLayout", Boolean.TRUE.toString());
-
-			selectedPlace = false;
-
-			if (layout != null) {
-				selectedPlace = layout.isPrivateLayout() && (layout.getGroupId() == stagingGroup.getGroupId());
-			}
-			%>
-
-			<c:if test="<%= showPrivatePlace %>">
-				<li class="private <%= selectedPlace ? "current" : "" %>">
-					<a href="<%= privateLayoutsPageCount > 0 ? "javascript: submitForm(document.hrefFm, '" + portletURL.toString() + "');" : "javascript: ;" %>"
-
-					><liferay-ui:message key="private-pages" /> <span class="page-count">(<%= privateLayoutsPageCount %>)</span></a>
-				</li>
-			</c:if>
 		</c:if>
 	</ul>
 </c:if>

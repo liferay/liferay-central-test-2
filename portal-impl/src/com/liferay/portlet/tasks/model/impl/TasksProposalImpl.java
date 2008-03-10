@@ -22,14 +22,15 @@
 
 package com.liferay.portlet.tasks.model.impl;
 
-import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil;
-import com.liferay.portlet.tasks.util.TasksUtil;
-import com.liferay.util.LocalizationUtil;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
@@ -39,178 +40,81 @@ import java.util.Locale;
  * @author Brian Wing Shun Chan
  *
  */
-public class TasksProposalImpl extends TasksProposalModelImpl
-	implements TasksProposal {
-
-	public static final String STAGE_REVIEW_APPROVED =
-		"stage-x-review-approved";
-
-	public static final String STAGE_REVIEW_REJECTED =
-		"stage-x-review-rejected";
-
-	public static final String STAGE_REVIEW_PENDING = "stage-x-pending-review";
-
-	public static final String STAGE_REVIEW_UNASSIGNED =
-		"stage-x-review-unassigned";
+public class TasksProposalImpl
+	extends TasksProposalModelImpl implements TasksProposal {
 
 	public TasksProposalImpl() {
 	}
 
-	public int getCurrentStage() {
-		int numberOfApprovalStages =
-			TasksUtil.getNumberOfApprovalStages(getGroupId(), getCompanyId());
+	public String getStatus(Locale locale)
+		throws PortalException, SystemException {
 
-		int currentStage = 1;
+		String status = null;
+		int stage = 1;
 
-		String statusKey = null;
+		Group group = GroupLocalServiceUtil.getGroup(getGroupId());
 
-		do {
-			statusKey = getCurrentStatus(currentStage);
+		int stages = group.getWorkflowStages();
 
-			if (statusKey.equals(STAGE_REVIEW_REJECTED)) {
+		for (stage = 1; stage <= stages; stage++) {
+			status = getStatus(stage);
+
+			if (status.equals(_STATUS_APPROVED)) {
+			}
+			else if (status.equals(_STATUS_PENDING) ||
+					 status.equals(_STATUS_REJECTED)) {
+
 				break;
 			}
-			else if (statusKey.equals(STAGE_REVIEW_PENDING)) {
-				break;
+			else if ((status.equals(_STATUS_UNASSIGNED)) &&
+					 (stage > 1)) {
 			}
-			else if (statusKey.equals(STAGE_REVIEW_APPROVED)) {
-				if (numberOfApprovalStages > currentStage) {
-					currentStage++;
-				}
-				else {
-					break;
-				}
-			}
-			else if (statusKey.equals(STAGE_REVIEW_UNASSIGNED) &&
-					currentStage > 1) {
-				currentStage++;
-			}
-			else if (currentStage == 1) {
+			else if (stage == 1) {
 				break;
 			}
 		}
-		while (currentStage <= numberOfApprovalStages);
 
-		return currentStage;
+		return LanguageUtil.format(
+			getCompanyId(), locale, status, String.valueOf(stage));
 	}
 
-	public String getCurrentStatus() {
-		int numberOfApprovalStages =
-			TasksUtil.getNumberOfApprovalStages(getGroupId(), getCompanyId());
+	protected String getStatus(int stage)
+		throws PortalException, SystemException {
 
-		int currentStage = 1;
-
-		String statusKey = null;
-
-		do {
-			statusKey = getCurrentStatus(currentStage);
-
-			if (statusKey.equals(STAGE_REVIEW_REJECTED)) {
-				break;
-			}
-			else if (statusKey.equals(STAGE_REVIEW_PENDING)) {
-				break;
-			}
-			else if (statusKey.equals(STAGE_REVIEW_APPROVED)) {
-				if (numberOfApprovalStages > currentStage) {
-					currentStage++;
-				}
-				else {
-					break;
-				}
-			}
-			else if (statusKey.equals(STAGE_REVIEW_UNASSIGNED) &&
-					currentStage > 1) {
-				currentStage++;
-			}
-			else if (currentStage == 1) {
-				break;
-			}
-		}
-		while (currentStage <= numberOfApprovalStages);
-
-		return statusKey;
-	}
-
-	public String getCurrentStatus(int stage) {
-		if (stage <= 0) {
-			throw new IllegalArgumentException(
-				"Illegal value " + stage + " set for approval stage.");
-		}
-
-		List<TasksReview> reviews = new ArrayList<TasksReview>();
-
-		try {
-			reviews =
-				TasksReviewLocalServiceUtil.getReviews(getProposalId(), stage);
-		}
-		catch (Exception e) {
-		}
+		List<TasksReview> reviews = TasksReviewLocalServiceUtil.getReviews(
+			getProposalId(), stage);
 
 		if (reviews.size() <= 0) {
-			return STAGE_REVIEW_UNASSIGNED;
+			return _STATUS_UNASSIGNED;
 		}
 
-		List<TasksReview> completedReviews = new ArrayList<TasksReview>();
-
-		try {
-			completedReviews =
-				TasksReviewLocalServiceUtil.getReviews(
-					getProposalId(), stage, true);
-		}
-		catch (Exception e) {
-		}
+		List<TasksReview> completedReviews =
+			TasksReviewLocalServiceUtil.getReviews(
+				getProposalId(), stage, true);
 
 		if (completedReviews.size() < reviews.size()) {
-			return STAGE_REVIEW_PENDING;
+			return _STATUS_PENDING;
 		}
 
 		List<TasksReview> completedRejectedReviews =
-			new ArrayList<TasksReview>();
-
-		try {
-			completedRejectedReviews =
-				TasksReviewLocalServiceUtil.getReviews(
-					getProposalId(), stage, true, true);
-		}
-		catch (Exception e) {
-		}
+			TasksReviewLocalServiceUtil.getReviews(
+				getProposalId(), stage, true, true);
 
 		if (completedRejectedReviews.size() > 0) {
-			return STAGE_REVIEW_REJECTED;
+			return _STATUS_REJECTED;
 		}
 		else {
-			return STAGE_REVIEW_APPROVED;
+			return _STATUS_APPROVED;
 		}
 	}
 
-	public String getName(Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
+	private static final String _STATUS_APPROVED = "stage-x-review-approved";
 
-		return getName(localeLanguageId);
-	}
+	private static final String _STATUS_PENDING = "stage-x-pending-review";
 
-	public String getName(String localeLanguageId) {
-		return LocalizationUtil.getLocalization(getName(), localeLanguageId);
-	}
+	private static final String _STATUS_REJECTED = "stage-x-review-rejected";
 
-	public String getName(Locale locale, boolean useDefault) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		return getName(localeLanguageId, useDefault);
-	}
-
-	public String getName(String localeLanguageId, boolean useDefault) {
-		return LocalizationUtil.getLocalization(
-			getName(), localeLanguageId, useDefault);
-	}
-
-	public void setName(String name, Locale locale) {
-		String localeLanguageId = LocaleUtil.toLanguageId(locale);
-
-		setName(
-			LocalizationUtil.updateLocalization(
-				getName(), "name", name, localeLanguageId));
-	}
+	private static final String _STATUS_UNASSIGNED =
+		"stage-x-review-unassigned";
 
 }

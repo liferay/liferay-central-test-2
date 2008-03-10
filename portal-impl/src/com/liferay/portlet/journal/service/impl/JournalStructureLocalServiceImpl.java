@@ -280,16 +280,16 @@ public class JournalStructureLocalServiceImpl
 			throw new RequiredStructureException();
 		}
 
+		// WebDAVProps
+
+		webDAVPropsLocalService.deleteWebDAVProps(
+			JournalStructure.class.getName(), structure.getPrimaryKey());
+
 		// Resources
 
 		resourceLocalService.deleteResource(
 			structure.getCompanyId(), JournalStructure.class.getName(),
 			ResourceImpl.SCOPE_INDIVIDUAL, structure.getId());
-
-		// WebDAVProps
-
-		webDAVPropsLocalService.deleteWebDAVProps(
-			JournalStructure.class.getName(), structure.getPrimaryKey());
 
 		// Structure
 

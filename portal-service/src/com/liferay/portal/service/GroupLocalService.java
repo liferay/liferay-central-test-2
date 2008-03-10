@@ -483,6 +483,16 @@ public interface GroupLocalService {
 	public void setSCProductEntryPersistence(
 		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence);
 
+	public com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence getTasksProposalPersistence();
+
+	public void setTasksProposalPersistence(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence);
+
+	public com.liferay.portlet.tasks.service.persistence.TasksProposalFinder getTasksProposalFinder();
+
+	public void setTasksProposalFinder(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalFinder tasksProposalFinder);
+
 	public com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence();
 
 	public void setWikiNodePersistence(
@@ -620,6 +630,12 @@ public interface GroupLocalService {
 
 	public com.liferay.portal.model.Group updateGroup(long groupId,
 		java.lang.String typeSettings)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.Group updateWorkflow(long groupId,
+		boolean workflowEnabled, int workflowStages,
+		java.lang.String workflowRoleNames)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

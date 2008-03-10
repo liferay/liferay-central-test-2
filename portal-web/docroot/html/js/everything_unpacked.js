@@ -19407,20 +19407,21 @@ Liferay.LayoutExporter = {
 
 		var contents =
 			"<div>" +
-				"<form name='" + namespace + "fm10' action='" + url + "' method='post'>" +
-					"<textarea name='" + namespace + "description' style='width: 284px; height: 100px'></textarea><br/><br/>";
+				"<form action='" + url + "' method='post'>" +
+					"<textarea name='" + namespace + "description' style='height: 100px; width: 284px;'></textarea><br /><br />";
 
 		if (reviewers.length > 0) {
-			contents += Liferay.Language.get('reviewer') + " <select name='" + namespace + "reviewerId' />";
+			contents += Liferay.Language.get('reviewer') + " <select name='" + namespace + "reviewUserId'>";
 
 			for (var i = 0; i < reviewers.length; i++) {
 				contents += "<option value='" + reviewers[i].userId + "'>" + reviewers[i].fullName + "</option>";
 			}
 
-			contents += "</select><br/><br/>";
+			contents += "</select><br /><br />";
 		}
 
-		contents += "<input type='submit' value='" + Liferay.Language.get('proceed') + "' />" +
+		contents +=
+					"<input type='submit' value='" + Liferay.Language.get('proceed') + "' />" +
 					"<input type='button' value='" + Liferay.Language.get('cancel') + "' onClick='Liferay.Popup.close(this);' />" +
 				"</form>" +
 			"</div>";

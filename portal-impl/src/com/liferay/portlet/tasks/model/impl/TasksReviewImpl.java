@@ -30,7 +30,10 @@ import com.liferay.portlet.tasks.model.TasksReview;
  * @author Brian Wing Shun Chan
  *
  */
-public class TasksReviewImpl extends TasksReviewModelImpl implements TasksReview {
+public class TasksReviewImpl
+	extends TasksReviewModelImpl implements TasksReview {
+
 	public TasksReviewImpl() {
 	}
+
 }

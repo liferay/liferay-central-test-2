@@ -72,8 +72,6 @@ public class PortletKeys {
 
 	public static final String MAIL = "1";
 
-	public static final String MANAGED_TASKS = "120";
-
 	public static final String MESSAGE_BOARDS = "19";
 
 	public static final String MY_ACCOUNT = "2";

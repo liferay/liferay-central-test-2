@@ -79,17 +79,17 @@ public interface TasksReviewModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public long getAssigningUserId();
-
-	public void setAssigningUserId(long assigningUserId);
-
-	public String getAssigningUserName();
-
-	public void setAssigningUserName(String assigningUserName);
-
 	public long getProposalId();
 
 	public void setProposalId(long proposalId);
+
+	public long getAssignedByUserId();
+
+	public void setAssignedByUserId(long assignedByUserId);
+
+	public String getAssignedByUserName();
+
+	public void setAssignedByUserName(String assignedByUserName);
 
 	public int getStage();
 

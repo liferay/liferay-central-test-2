@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.model.Group;
@@ -37,6 +38,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.GroupNames;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.io.IOException;
 
@@ -59,8 +61,6 @@ public class GroupImpl extends GroupModelImpl implements Group {
 	public static final long DEFAULT_LIVE_GROUP_ID = 0;
 
 	public static final String GUEST = GroupNames.GUEST;
-
-	public static final String MANAGED_STAGING = "managed.staging";
 
 	public static final String[] SYSTEM_GROUPS = GroupNames.SYSTEM_GROUPS;
 
@@ -273,6 +273,12 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		super.setTypeSettings(PropertiesUtil.toString(_typeSettingsProperties));
 	}
 
+	public String getTypeSettingsProperty(String key) {
+		Properties typeSettingsProperties = getTypeSettingsProperties();
+
+		return typeSettingsProperties.getProperty(key);
+	}
+
 	public String getPathFriendlyURL(
 		boolean privateLayout, ThemeDisplay themeDisplay) {
 
@@ -341,6 +347,23 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		else {
 			return false;
 		}
+	}
+
+	public boolean isWorkflowEnabled() {
+		return GetterUtil.getBoolean(
+			getTypeSettingsProperty("workflowEnabled"));
+	}
+
+	public int getWorkflowStages() {
+		return GetterUtil.getInteger(
+			getTypeSettingsProperty("workflowStages"),
+			PropsValues.TASKS_DEFAULT_STAGES);
+	}
+
+	public String getWorkflowRoleNames() {
+		return GetterUtil.getString(
+			getTypeSettingsProperty("workflowRoleNames"),
+			PropsValues.TASKS_DEFAULT_ROLE_NAMES);
 	}
 
 	protected long getDefaultPlid(boolean privateLayout) {

@@ -245,6 +245,246 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List<TasksReview> findByUserId(long userId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
+		String finderClassName = TasksReview.class.getName();
+		String finderMethodName = "findByUserId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(userId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("createDate ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, userId);
+
+				List<TasksReview> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<TasksReview>)result;
+		}
+	}
+
+	public List<TasksReview> findByUserId(long userId, int begin, int end)
+		throws SystemException {
+		return findByUserId(userId, begin, end, null);
+	}
+
+	public List<TasksReview> findByUserId(long userId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
+		String finderClassName = TasksReview.class.getName();
+		String finderMethodName = "findByUserId";
+		String[] finderParams = new String[] {
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(userId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("createDate ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, userId);
+
+				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<TasksReview>)result;
+		}
+	}
+
+	public TasksReview findByUserId_First(long userId, OrderByComparator obc)
+		throws NoSuchReviewException, SystemException {
+		List<TasksReview> list = findByUserId(userId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No TasksReview exists with the key {");
+
+			msg.append("userId=" + userId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchReviewException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public TasksReview findByUserId_Last(long userId, OrderByComparator obc)
+		throws NoSuchReviewException, SystemException {
+		int count = countByUserId(userId);
+
+		List<TasksReview> list = findByUserId(userId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No TasksReview exists with the key {");
+
+			msg.append("userId=" + userId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchReviewException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public TasksReview[] findByUserId_PrevAndNext(long reviewId, long userId,
+		OrderByComparator obc) throws NoSuchReviewException, SystemException {
+		TasksReview tasksReview = findByPrimaryKey(reviewId);
+
+		int count = countByUserId(userId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+
+			query.append("userId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("createDate ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, userId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					tasksReview);
+
+			TasksReview[] array = new TasksReviewImpl[3];
+
+			array[0] = (TasksReview)objArray[0];
+			array[1] = (TasksReview)objArray[1];
+			array[2] = (TasksReview)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<TasksReview> findByProposalId(long proposalId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
@@ -487,16 +727,42 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<TasksReview> findByP_C(long proposalId, boolean completed)
+	public TasksReview findByU_P(long userId, long proposalId)
+		throws NoSuchReviewException, SystemException {
+		TasksReview tasksReview = fetchByU_P(userId, proposalId);
+
+		if (tasksReview == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No TasksReview exists with the key {");
+
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("proposalId=" + proposalId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchReviewException(msg.toString());
+		}
+
+		return tasksReview;
+	}
+
+	public TasksReview fetchByU_P(long userId, long proposalId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
 		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_C";
+		String finderMethodName = "fetchByU_P";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
+				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(proposalId), Boolean.valueOf(completed)
+				new Long(userId), new Long(proposalId)
 			};
 
 		Object result = null;
@@ -517,11 +783,11 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
 
-				query.append("proposalId = ?");
+				query.append("userId = ?");
 
 				query.append(" AND ");
 
-				query.append("completed = ?");
+				query.append("proposalId = ?");
 
 				query.append(" ");
 
@@ -533,9 +799,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				int queryPos = 0;
 
-				q.setLong(queryPos++, proposalId);
+				q.setLong(queryPos++, userId);
 
-				q.setBoolean(queryPos++, completed);
+				q.setLong(queryPos++, proposalId);
 
 				List<TasksReview> list = q.list();
 
@@ -543,95 +809,12 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 					finderClassName, finderMethodName, finderParams,
 					finderArgs, list);
 
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TasksReview>)result;
-		}
-	}
-
-	public List<TasksReview> findByP_C(long proposalId, boolean completed,
-		int begin, int end) throws SystemException {
-		return findByP_C(proposalId, completed, begin, end, null);
-	}
-
-	public List<TasksReview> findByP_C(long proposalId, boolean completed,
-		int begin, int end, OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_C";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), Boolean.valueOf(completed),
-				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("completed = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
+				if (list.size() == 0) {
+					return null;
 				}
-
 				else {
-					query.append("ORDER BY ");
-
-					query.append("createDate ASC");
+					return list.get(0);
 				}
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, proposalId);
-
-				q.setBoolean(queryPos++, completed);
-
-				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
-						getDialect(), begin, end);
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
 			}
 			catch (Exception e) {
 				throw HibernateUtil.processException(e);
@@ -641,421 +824,14 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 			}
 		}
 		else {
-			return (List<TasksReview>)result;
-		}
-	}
+			List<TasksReview> list = (List<TasksReview>)result;
 
-	public TasksReview findByP_C_First(long proposalId, boolean completed,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
-		List<TasksReview> list = findByP_C(proposalId, completed, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksReview exists with the key {");
-
-			msg.append("proposalId=" + proposalId);
-
-			msg.append(", ");
-			msg.append("completed=" + completed);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchReviewException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksReview findByP_C_Last(long proposalId, boolean completed,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
-		int count = countByP_C(proposalId, completed);
-
-		List<TasksReview> list = findByP_C(proposalId, completed, count - 1,
-				count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksReview exists with the key {");
-
-			msg.append("proposalId=" + proposalId);
-
-			msg.append(", ");
-			msg.append("completed=" + completed);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchReviewException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksReview[] findByP_C_PrevAndNext(long reviewId, long proposalId,
-		boolean completed, OrderByComparator obc)
-		throws NoSuchReviewException, SystemException {
-		TasksReview tasksReview = findByPrimaryKey(reviewId);
-
-		int count = countByP_C(proposalId, completed);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-
-			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-			query.append("proposalId = ?");
-
-			query.append(" AND ");
-
-			query.append("completed = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
+			if (list.size() == 0) {
+				return null;
 			}
-
 			else {
-				query.append("ORDER BY ");
-
-				query.append("createDate ASC");
+				return list.get(0);
 			}
-
-			Query q = session.createQuery(query.toString());
-
-			int queryPos = 0;
-
-			q.setLong(queryPos++, proposalId);
-
-			q.setBoolean(queryPos++, completed);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksReview);
-
-			TasksReview[] array = new TasksReviewImpl[3];
-
-			array[0] = (TasksReview)objArray[0];
-			array[1] = (TasksReview)objArray[1];
-			array[2] = (TasksReview)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<TasksReview> findByP_C_R(long proposalId, boolean completed,
-		boolean rejected) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_C_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				Boolean.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), Boolean.valueOf(completed),
-				Boolean.valueOf(rejected)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("completed = ?");
-
-				query.append(" AND ");
-
-				query.append("rejected = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("createDate ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, proposalId);
-
-				q.setBoolean(queryPos++, completed);
-
-				q.setBoolean(queryPos++, rejected);
-
-				List<TasksReview> list = q.list();
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TasksReview>)result;
-		}
-	}
-
-	public List<TasksReview> findByP_C_R(long proposalId, boolean completed,
-		boolean rejected, int begin, int end) throws SystemException {
-		return findByP_C_R(proposalId, completed, rejected, begin, end, null);
-	}
-
-	public List<TasksReview> findByP_C_R(long proposalId, boolean completed,
-		boolean rejected, int begin, int end, OrderByComparator obc)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByP_C_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				Boolean.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), Boolean.valueOf(completed),
-				Boolean.valueOf(rejected),
-				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("completed = ?");
-
-				query.append(" AND ");
-
-				query.append("rejected = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("createDate ASC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, proposalId);
-
-				q.setBoolean(queryPos++, completed);
-
-				q.setBoolean(queryPos++, rejected);
-
-				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
-						getDialect(), begin, end);
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TasksReview>)result;
-		}
-	}
-
-	public TasksReview findByP_C_R_First(long proposalId, boolean completed,
-		boolean rejected, OrderByComparator obc)
-		throws NoSuchReviewException, SystemException {
-		List<TasksReview> list = findByP_C_R(proposalId, completed, rejected,
-				0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksReview exists with the key {");
-
-			msg.append("proposalId=" + proposalId);
-
-			msg.append(", ");
-			msg.append("completed=" + completed);
-
-			msg.append(", ");
-			msg.append("rejected=" + rejected);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchReviewException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksReview findByP_C_R_Last(long proposalId, boolean completed,
-		boolean rejected, OrderByComparator obc)
-		throws NoSuchReviewException, SystemException {
-		int count = countByP_C_R(proposalId, completed, rejected);
-
-		List<TasksReview> list = findByP_C_R(proposalId, completed, rejected,
-				count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksReview exists with the key {");
-
-			msg.append("proposalId=" + proposalId);
-
-			msg.append(", ");
-			msg.append("completed=" + completed);
-
-			msg.append(", ");
-			msg.append("rejected=" + rejected);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchReviewException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksReview[] findByP_C_R_PrevAndNext(long reviewId,
-		long proposalId, boolean completed, boolean rejected,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
-		TasksReview tasksReview = findByPrimaryKey(reviewId);
-
-		int count = countByP_C_R(proposalId, completed, rejected);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-
-			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-			query.append("proposalId = ?");
-
-			query.append(" AND ");
-
-			query.append("completed = ?");
-
-			query.append(" AND ");
-
-			query.append("rejected = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("createDate ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			int queryPos = 0;
-
-			q.setLong(queryPos++, proposalId);
-
-			q.setBoolean(queryPos++, completed);
-
-			q.setBoolean(queryPos++, rejected);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksReview);
-
-			TasksReview[] array = new TasksReviewImpl[3];
-
-			array[0] = (TasksReview)objArray[0];
-			array[1] = (TasksReview)objArray[1];
-			array[2] = (TasksReview)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
 		}
 	}
 
@@ -1959,354 +1735,6 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public TasksReview findByP_U(long proposalId, long userId)
-		throws NoSuchReviewException, SystemException {
-		TasksReview tasksReview = fetchByP_U(proposalId, userId);
-
-		if (tasksReview == null) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksReview exists with the key {");
-
-			msg.append("proposalId=" + proposalId);
-
-			msg.append(", ");
-			msg.append("userId=" + userId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			if (_log.isWarnEnabled()) {
-				_log.warn(msg.toString());
-			}
-
-			throw new NoSuchReviewException(msg.toString());
-		}
-
-		return tasksReview;
-	}
-
-	public TasksReview fetchByP_U(long proposalId, long userId)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "fetchByP_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Long(userId)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("userId = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("createDate ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, proposalId);
-
-				q.setLong(queryPos++, userId);
-
-				List<TasksReview> list = q.list();
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				if (list.size() == 0) {
-					return null;
-				}
-				else {
-					return list.get(0);
-				}
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			List<TasksReview> list = (List<TasksReview>)result;
-
-			if (list.size() == 0) {
-				return null;
-			}
-			else {
-				return list.get(0);
-			}
-		}
-	}
-
-	public List<TasksReview> findByUserId(long userId)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(userId) };
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-				query.append("userId = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("createDate ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, userId);
-
-				List<TasksReview> list = q.list();
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TasksReview>)result;
-		}
-	}
-
-	public List<TasksReview> findByUserId(long userId, int begin, int end)
-		throws SystemException {
-		return findByUserId(userId, begin, end, null);
-	}
-
-	public List<TasksReview> findByUserId(long userId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "findByUserId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(userId),
-				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-				query.append("userId = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("createDate ASC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, userId);
-
-				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
-						getDialect(), begin, end);
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<TasksReview>)result;
-		}
-	}
-
-	public TasksReview findByUserId_First(long userId, OrderByComparator obc)
-		throws NoSuchReviewException, SystemException {
-		List<TasksReview> list = findByUserId(userId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksReview exists with the key {");
-
-			msg.append("userId=" + userId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchReviewException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksReview findByUserId_Last(long userId, OrderByComparator obc)
-		throws NoSuchReviewException, SystemException {
-		int count = countByUserId(userId);
-
-		List<TasksReview> list = findByUserId(userId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No TasksReview exists with the key {");
-
-			msg.append("userId=" + userId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchReviewException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public TasksReview[] findByUserId_PrevAndNext(long reviewId, long userId,
-		OrderByComparator obc) throws NoSuchReviewException, SystemException {
-		TasksReview tasksReview = findByPrimaryKey(reviewId);
-
-		int count = countByUserId(userId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-
-			query.append(
-				"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-			query.append("userId = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("createDate ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			int queryPos = 0;
-
-			q.setLong(queryPos++, userId);
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
-					tasksReview);
-
-			TasksReview[] array = new TasksReviewImpl[3];
-
-			array[0] = (TasksReview)objArray[0];
-			array[1] = (TasksReview)objArray[1];
-			array[2] = (TasksReview)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
 	public List<TasksReview> findWithDynamicQuery(
 		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
@@ -2426,25 +1854,23 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByUserId(long userId) throws SystemException {
+		for (TasksReview tasksReview : findByUserId(userId)) {
+			remove(tasksReview);
+		}
+	}
+
 	public void removeByProposalId(long proposalId) throws SystemException {
 		for (TasksReview tasksReview : findByProposalId(proposalId)) {
 			remove(tasksReview);
 		}
 	}
 
-	public void removeByP_C(long proposalId, boolean completed)
-		throws SystemException {
-		for (TasksReview tasksReview : findByP_C(proposalId, completed)) {
-			remove(tasksReview);
-		}
-	}
+	public void removeByU_P(long userId, long proposalId)
+		throws NoSuchReviewException, SystemException {
+		TasksReview tasksReview = findByU_P(userId, proposalId);
 
-	public void removeByP_C_R(long proposalId, boolean completed,
-		boolean rejected) throws SystemException {
-		for (TasksReview tasksReview : findByP_C_R(proposalId, completed,
-				rejected)) {
-			remove(tasksReview);
-		}
+		remove(tasksReview);
 	}
 
 	public void removeByP_S(long proposalId, int stage)
@@ -2469,22 +1895,75 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByP_U(long proposalId, long userId)
-		throws NoSuchReviewException, SystemException {
-		TasksReview tasksReview = findByP_U(proposalId, userId);
-
-		remove(tasksReview);
-	}
-
-	public void removeByUserId(long userId) throws SystemException {
-		for (TasksReview tasksReview : findByUserId(userId)) {
+	public void removeAll() throws SystemException {
+		for (TasksReview tasksReview : findAll()) {
 			remove(tasksReview);
 		}
 	}
 
-	public void removeAll() throws SystemException {
-		for (TasksReview tasksReview : findAll()) {
-			remove(tasksReview);
+	public int countByUserId(long userId) throws SystemException {
+		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
+		String finderClassName = TasksReview.class.getName();
+		String finderMethodName = "countByUserId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(userId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, userId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 
@@ -2554,16 +2033,16 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByP_C(long proposalId, boolean completed)
+	public int countByU_P(long userId, long proposalId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
 		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByP_C";
+		String finderMethodName = "countByU_P";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName()
+				Long.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(proposalId), Boolean.valueOf(completed)
+				new Long(userId), new Long(proposalId)
 			};
 
 		Object result = null;
@@ -2585,11 +2064,11 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
 
-				query.append("proposalId = ?");
+				query.append("userId = ?");
 
 				query.append(" AND ");
 
-				query.append("completed = ?");
+				query.append("proposalId = ?");
 
 				query.append(" ");
 
@@ -2597,94 +2076,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				int queryPos = 0;
 
-				q.setLong(queryPos++, proposalId);
-
-				q.setBoolean(queryPos++, completed);
-
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
-		}
-	}
-
-	public int countByP_C_R(long proposalId, boolean completed, boolean rejected)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByP_C_R";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Boolean.class.getName(),
-				Boolean.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), Boolean.valueOf(completed),
-				Boolean.valueOf(rejected)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("completed = ?");
-
-				query.append(" AND ");
-
-				query.append("rejected = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
+				q.setLong(queryPos++, userId);
 
 				q.setLong(queryPos++, proposalId);
-
-				q.setBoolean(queryPos++, completed);
-
-				q.setBoolean(queryPos++, rejected);
 
 				Long count = null;
 
@@ -2937,149 +2331,6 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 				q.setBoolean(queryPos++, completed);
 
 				q.setBoolean(queryPos++, rejected);
-
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
-		}
-	}
-
-	public int countByP_U(long proposalId, long userId)
-		throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByP_U";
-		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(proposalId), new Long(userId)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-				query.append("proposalId = ?");
-
-				query.append(" AND ");
-
-				query.append("userId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, proposalId);
-
-				q.setLong(queryPos++, userId);
-
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
-		}
-	}
-
-	public int countByUserId(long userId) throws SystemException {
-		boolean finderClassNameCacheEnabled = TasksReviewModelImpl.CACHE_ENABLED;
-		String finderClassName = TasksReview.class.getName();
-		String finderMethodName = "countByUserId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(userId) };
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.tasks.model.TasksReview WHERE ");
-
-				query.append("userId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, userId);
 
 				Long count = null;
 

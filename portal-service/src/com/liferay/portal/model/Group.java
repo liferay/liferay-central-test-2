@@ -76,6 +76,8 @@ public interface Group extends GroupModel {
 	public void setTypeSettingsProperties(
 		java.util.Properties typeSettingsProperties);
 
+	public java.lang.String getTypeSettingsProperty(java.lang.String key);
+
 	public java.lang.String getPathFriendlyURL(boolean privateLayout,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 
@@ -90,4 +92,10 @@ public interface Group extends GroupModel {
 	public int getPublicLayoutsPageCount();
 
 	public boolean hasPublicLayouts();
+
+	public boolean isWorkflowEnabled();
+
+	public int getWorkflowStages();
+
+	public java.lang.String getWorkflowRoleNames();
 }

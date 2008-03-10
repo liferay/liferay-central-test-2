@@ -33,8 +33,8 @@
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 
 <%@ page import="java.awt.BasicStroke" %>
-<%@ page import="java.awt.Color"%>
-<%@ page import="java.awt.Font"%>
+<%@ page import="java.awt.Color" %>
+<%@ page import="java.awt.Font" %>
 
 <%@ page import="org.apache.log4j.Level" %>
 <%@ page import="org.apache.log4j.Logger" %>

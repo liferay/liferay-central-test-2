@@ -101,6 +101,19 @@ public class TasksProposalLocalServiceUtil {
 		return tasksProposalLocalService.updateTasksProposal(tasksProposal);
 	}
 
+	public static com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence getTasksReviewPersistence() {
+		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
+
+		return tasksProposalLocalService.getTasksReviewPersistence();
+	}
+
+	public static void setTasksReviewPersistence(
+		com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence tasksReviewPersistence) {
+		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
+
+		tasksProposalLocalService.setTasksReviewPersistence(tasksReviewPersistence);
+	}
+
 	public static com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence getTasksProposalPersistence() {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
@@ -127,19 +140,6 @@ public class TasksProposalLocalServiceUtil {
 		tasksProposalLocalService.setTasksProposalFinder(tasksProposalFinder);
 	}
 
-	public static com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence getTasksReviewPersistence() {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.getTasksReviewPersistence();
-	}
-
-	public static void setTasksReviewPersistence(
-		com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence tasksReviewPersistence) {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		tasksProposalLocalService.setTasksReviewPersistence(tasksReviewPersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
@@ -164,45 +164,6 @@ public class TasksProposalLocalServiceUtil {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
 		tasksProposalLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
-	public static com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence() {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.getCompanyPersistence();
-	}
-
-	public static void setCompanyPersistence(
-		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence) {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		tasksProposalLocalService.setCompanyPersistence(companyPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence() {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.getPortletPreferencesPersistence();
-	}
-
-	public static void setPortletPreferencesPersistence(
-		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence) {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		tasksProposalLocalService.setPortletPreferencesPersistence(portletPreferencesPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder() {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.getPortletPreferencesFinder();
-	}
-
-	public static void setPortletPreferencesFinder(
-		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder) {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		tasksProposalLocalService.setPortletPreferencesFinder(portletPreferencesFinder);
 	}
 
 	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
@@ -290,64 +251,35 @@ public class TasksProposalLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
+		long userId, long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.addProposal(userId, groupId, name,
-			description, classNameId, classPK, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		long stageOneReviewerId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.addProposal(userId, groupId, name,
-			description, classNameId, classPK, stageOneReviewerId,
+		return tasksProposalLocalService.addProposal(userId, groupId,
+			className, classPK, name, description, reviewUserId,
 			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
+		long userId, long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.addProposal(userId, groupId, name,
-			description, classNameId, classPK, communityPermissions,
-			guestPermissions);
-	}
-
-	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		long stageOneReviewerId, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.addProposal(userId, groupId, name,
-			description, classNameId, classPK, stageOneReviewerId,
+		return tasksProposalLocalService.addProposal(userId, groupId,
+			className, classPK, name, description, reviewUserId,
 			communityPermissions, guestPermissions);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long userId, long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		java.lang.Long stageOneReviewerId,
+		long userId, long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -356,8 +288,8 @@ public class TasksProposalLocalServiceUtil {
 			com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.addProposal(userId, groupId, name,
-			description, classNameId, classPK, stageOneReviewerId,
+		return tasksProposalLocalService.addProposal(userId, groupId,
+			className, classPK, name, description, reviewUserId,
 			addCommunityPermissions, addGuestPermissions, communityPermissions,
 			guestPermissions);
 	}
@@ -439,12 +371,12 @@ public class TasksProposalLocalServiceUtil {
 		tasksProposalLocalService.deleteProposal(proposal);
 	}
 
-	public static void deleteProposals(long companyId, long groupId)
+	public static void deleteProposals(long groupId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		tasksProposalLocalService.deleteProposals(companyId, groupId);
+		tasksProposalLocalService.deleteProposals(groupId);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal getProposal(
@@ -474,98 +406,51 @@ public class TasksProposalLocalServiceUtil {
 		return tasksProposalLocalService.getProposal(classNameId, classPK);
 	}
 
-	public static java.util.List getProposals()
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getProposals(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.getProposals();
+		return tasksProposalLocalService.getProposals(groupId, begin, end);
 	}
 
-	public static java.util.List getProposals(long companyId, long groupId,
-		int begin, int end) throws com.liferay.portal.SystemException {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.getProposals(companyId, groupId,
-			begin, end);
-	}
-
-	public static int getProposalsCount(long companyId, long groupId)
+	public static int getProposalsCount(long groupId)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.getProposalsCount(companyId, groupId);
+		return tasksProposalLocalService.getProposalsCount(groupId);
 	}
 
-	public static java.util.List getReviewersProposals(long companyId,
-		long groupId, long reviewingUserId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.getReviewersProposals(companyId,
-			groupId, reviewingUserId, begin, end, obc);
-	}
-
-	public static int getReviewersProposalsCount(long companyId, long groupId,
-		long reviewingUserId) throws com.liferay.portal.SystemException {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.getReviewersProposalsCount(companyId,
-			groupId, reviewingUserId);
-	}
-
-	public static java.util.List getUsersProposals(long companyId,
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getReviewProposals(
 		long groupId, long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.getUsersProposals(companyId, groupId,
-			userId, begin, end);
+		return tasksProposalLocalService.getReviewProposals(groupId, userId,
+			begin, end);
 	}
 
-	public static int getUsersProposalsCount(long companyId, long groupId,
-		long userId) throws com.liferay.portal.SystemException {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.getUsersProposalsCount(companyId,
-			groupId, userId);
-	}
-
-	public static java.util.List search(long companyId, long groupId,
-		java.lang.String keywords, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static int getReviewProposalsCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.search(companyId, groupId, keywords,
-			begin, end, obc);
+		return tasksProposalLocalService.getReviewProposalsCount(groupId, userId);
 	}
 
-	public static java.util.List search(long companyId, long groupId,
-		java.lang.String name, java.lang.String userName, boolean andOperator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> getUserProposals(
+		long groupId, long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.search(companyId, groupId, name,
-			userName, andOperator, begin, end, obc);
+		return tasksProposalLocalService.getUserProposals(groupId, userId,
+			begin, end);
 	}
 
-	public static int searchCount(long companyId, long groupId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException {
-		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
-
-		return tasksProposalLocalService.searchCount(companyId, groupId,
-			keywords);
-	}
-
-	public static int searchCount(long companyId, long groupId,
-		java.lang.String name, java.lang.String userName, boolean andOperator)
+	public static int getUserProposalsCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException {
 		TasksProposalLocalService tasksProposalLocalService = TasksProposalLocalServiceFactory.getService();
 
-		return tasksProposalLocalService.searchCount(companyId, groupId, name,
-			userName, andOperator);
+		return tasksProposalLocalService.getUserProposalsCount(groupId, userId);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal updateProposal(

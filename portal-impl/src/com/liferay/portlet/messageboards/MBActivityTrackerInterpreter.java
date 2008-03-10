@@ -22,7 +22,6 @@
 
 package com.liferay.portlet.messageboards;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -96,14 +95,11 @@ public class MBActivityTrackerInterpreter
 		String title = StringPool.BLANK;
 
 		if (activity.equals(MBActivityKeys.ADD)) {
-			title = LanguageUtil.format(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
-				"activity-message-boards-add",
-				new Object[] {creatorUserName});
+			title = themeDisplay.translate(
+				"activity-message-boards-add", creatorUserName);
 		}
 		else if (activity.equals(MBActivityKeys.REPLY)) {
-			title = LanguageUtil.format(
-				themeDisplay.getCompanyId(), themeDisplay.getLocale(),
+			title = themeDisplay.translate(
 				"activity-message-boards-reply",
 				new Object[] {creatorUserName, receiverUserName});
 		}

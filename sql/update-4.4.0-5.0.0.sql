@@ -16,7 +16,7 @@ create table TasksProposal (
 	modifiedDate DATE null,
 	classNameId LONG,
 	classPK LONG,
-	name STRING null,
+	name VARCHAR(75) null,
 	description STRING null,
 	publishDate DATE null,
 	dueDate DATE null
@@ -30,9 +30,9 @@ create table TasksReview (
 	userName VARCHAR(75) null,
 	createDate DATE null,
 	modifiedDate DATE null,
-	assigningUserId LONG,
-	assigningUserName VARCHAR(75) null,
 	proposalId LONG,
+	assignedByUserId LONG,
+	assignedByUserName VARCHAR(75) null,
 	stage INTEGER,
 	completed BOOLEAN,
 	rejected BOOLEAN

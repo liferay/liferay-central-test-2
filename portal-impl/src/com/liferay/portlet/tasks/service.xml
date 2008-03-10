@@ -3,6 +3,73 @@
 
 <service-builder package-path="com.liferay.portlet.tasks">
 	<namespace>Tasks</namespace>
+	<entity name="TasksReview" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="reviewId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+		<column name="userName" type="String" />
+		<column name="createDate" type="Date" />
+		<column name="modifiedDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="proposalId" type="long" />
+		<column name="assignedByUserId" type="long" />
+		<column name="assignedByUserName" type="String" />
+		<column name="stage" type="int" />
+		<column name="completed" type="boolean" />
+		<column name="rejected" type="boolean" />
+
+		<!-- Order -->
+
+		<order by="asc">
+			<order-column name="createDate" />
+		</order>
+
+		<!-- Finder methods -->
+
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="ProposalId" return-type="Collection">
+			<finder-column name="proposalId" />
+		</finder>
+		<finder name="U_P" return-type="TasksReview">
+			<finder-column name="userId" />
+			<finder-column name="proposalId" />
+		</finder>
+		<finder name="P_S" return-type="Collection">
+			<finder-column name="proposalId" />
+			<finder-column name="stage" />
+		</finder>
+		<finder name="P_S_C" return-type="Collection">
+			<finder-column name="proposalId" />
+			<finder-column name="stage" />
+			<finder-column name="completed" />
+		</finder>
+		<finder name="P_S_C_R" return-type="Collection">
+			<finder-column name="proposalId" />
+			<finder-column name="stage" />
+			<finder-column name="completed" />
+			<finder-column name="rejected" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="ActivityTracker" />
+		<reference package-path="com.liferay.portal" entity="User" />
+	</entity>
 	<entity name="TasksProposal" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -39,115 +106,28 @@
 
 		<!-- Finder methods -->
 
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
+		<finder name="GroupId" return-type="Collection">
+			<finder-column name="groupId" />
+		</finder>
+		<finder name="G_U" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="userId" />
 		</finder>
 		<finder name="C_C" return-type="TasksProposal">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
 		</finder>
-		<finder name="C_G" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="C_G_U" return-type="Collection">
-			<finder-column name="companyId" />
-			<finder-column name="groupId" />
-			<finder-column name="userId" />
-		</finder>
 
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portal" entity="ActivityTracker" />
-		<reference package-path="com.liferay.portal" entity="Company" />
-		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.messageboards" entity="MBMessage" />
 	</entity>
-	<entity name="TasksReview" local-service="true" remote-service="true">
-
-		<!-- PK fields -->
-
-		<column name="reviewId" type="long" primary="true" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-		<column name="modifiedDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="assigningUserId" type="long" />
-		<column name="assigningUserName" type="String" />
-		<column name="proposalId" type="long" />
-		<column name="stage" type="int" />
-		<column name="completed" type="boolean" />
-		<column name="rejected" type="boolean" />
-
-		<!-- Order -->
-
-		<order by="asc">
-			<order-column name="createDate" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="ProposalId" return-type="Collection">
-			<finder-column name="proposalId" />
-		</finder>
-		<finder name="P_C" return-type="Collection">
-			<finder-column name="proposalId" />
-			<finder-column name="completed" />
-		</finder>
-		<finder name="P_C_R" return-type="Collection">
-			<finder-column name="proposalId" />
-			<finder-column name="completed" />
-			<finder-column name="rejected" />
-		</finder>
-		<finder name="P_S" return-type="Collection">
-			<finder-column name="proposalId" />
-			<finder-column name="stage" />
-		</finder>
-		<finder name="P_S_C" return-type="Collection">
-			<finder-column name="proposalId" />
-			<finder-column name="stage" />
-			<finder-column name="completed" />
-		</finder>
-		<finder name="P_S_C_R" return-type="Collection">
-			<finder-column name="proposalId" />
-			<finder-column name="stage" />
-			<finder-column name="completed" />
-			<finder-column name="rejected" />
-		</finder>
-		<finder name="P_U" return-type="TasksReview">
-			<finder-column name="proposalId" />
-			<finder-column name="userId" />
-		</finder>
-		<finder name="UserId" return-type="Collection">
-			<finder-column name="userId" />
-		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-		<reference package-path="com.liferay.mail" entity="Mail" />
-		<reference package-path="com.liferay.portal" entity="ActivityTracker" />
-		<reference package-path="com.liferay.portal" entity="Company" />
-		<reference package-path="com.liferay.portal" entity="PortletPreferences" />
-		<reference package-path="com.liferay.portal" entity="Resource" />
-		<reference package-path="com.liferay.portal" entity="User" />
-	</entity>
 	<exceptions>
+		<exception>DuplicateReviewUserId</exception>
 		<exception>ProposalDueDate</exception>
 		<exception>ProposalPublishDate</exception>
 	</exceptions>

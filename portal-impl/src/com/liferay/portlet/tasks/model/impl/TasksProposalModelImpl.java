@@ -101,7 +101,7 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 
 			{ "dueDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TasksProposal (proposalId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name STRING null,description STRING null,publishDate DATE null,dueDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table TasksProposal (proposalId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,publishDate DATE null,dueDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table TasksProposal";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tasks.model.TasksProposal"),
@@ -292,7 +292,7 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
-			model.setName(getName());
+			model.setName(Html.escape(getName()));
 			model.setDescription(Html.escape(getDescription()));
 			model.setPublishDate(getPublishDate());
 			model.setDueDate(getDueDate());

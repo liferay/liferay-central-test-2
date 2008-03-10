@@ -51,58 +51,29 @@ package com.liferay.portlet.tasks.service;
  *
  */
 public class TasksReviewServiceUtil {
-	public static com.liferay.portlet.tasks.model.TasksReview addReview(
-		long userId, long groupId, long assigningUserId,
-		java.lang.String assigningUserName, long proposalId, int stage,
-		boolean addCommunityPermissions, boolean addGuestPermissions)
+	public static com.liferay.portlet.tasks.model.TasksReview approveReview(
+		long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TasksReviewService tasksReviewService = TasksReviewServiceFactory.getService();
 
-		return tasksReviewService.addReview(userId, groupId, assigningUserId,
-			assigningUserName, proposalId, stage, addCommunityPermissions,
-			addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.tasks.model.TasksReview addReview(
-		long userId, long groupId, long assigningUserId,
-		java.lang.String assigningUserName, long proposalId, int stage,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksReviewService tasksReviewService = TasksReviewServiceFactory.getService();
-
-		return tasksReviewService.addReview(userId, groupId, assigningUserId,
-			assigningUserName, proposalId, stage, communityPermissions,
-			guestPermissions);
+		return tasksReviewService.approveReview(proposalId, stage);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview rejectReview(
-		long groupId, long proposalId, int stage, boolean rejected)
+		long proposalId, int stage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TasksReviewService tasksReviewService = TasksReviewServiceFactory.getService();
 
-		return tasksReviewService.rejectReview(groupId, proposalId, stage,
-			rejected);
+		return tasksReviewService.rejectReview(proposalId, stage);
 	}
 
-	public static void deleteReview(long groupId, long reviewId)
+	public static void updateReviews(long proposalId, long[][] userIdsPerStage)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TasksReviewService tasksReviewService = TasksReviewServiceFactory.getService();
 
-		tasksReviewService.deleteReview(groupId, reviewId);
-	}
-
-	public static void updateReviewers(long groupId, long proposalId,
-		int stage, long[] reviewerIds, long[] removeReviewerIds)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksReviewService tasksReviewService = TasksReviewServiceFactory.getService();
-
-		tasksReviewService.updateReviewers(groupId, proposalId, stage,
-			reviewerIds, removeReviewerIds);
+		tasksReviewService.updateReviews(proposalId, userIdsPerStage);
 	}
 }

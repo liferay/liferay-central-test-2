@@ -1,4 +1,5 @@
-<%/**
+<%
+/**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -18,9 +19,10 @@
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- */%>
+ */
+%>
 
-<%@ include file="/html/portlet/tasks/init.jsp" %>
+<%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
@@ -29,12 +31,12 @@ TasksProposal proposal = (TasksProposal)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, proposal.getGroupId(), ActionKeys.MANAGE_LAYOUTS) || GroupPermissionUtil.contains(permissionChecker, proposal.getGroupId(), ActionKeys.APPROVE_PROPOSAL) %>">
+	<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, proposal.getGroupId(), ActionKeys.APPROVE_PROPOSAL) || GroupPermissionUtil.contains(permissionChecker, proposal.getGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/communities/edit_proposal" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="proposalId" value="<%= String.valueOf(proposal.getProposalId()) %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(proposal.getGroupId()) %>" />
+			<portlet:param name="proposalId" value="<%= String.valueOf(proposal.getProposalId()) %>" />
 		</portlet:renderURL>
 
 		<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -45,8 +47,8 @@ TasksProposal proposal = (TasksProposal)row.getObject();
 			<portlet:param name="struts_action" value="/communities/edit_proposal" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
-			<portlet:param name="proposalId" value="<%= String.valueOf(proposal.getProposalId()) %>" />
 			<portlet:param name="groupId" value="<%= String.valueOf(proposal.getGroupId()) %>" />
+			<portlet:param name="proposalId" value="<%= String.valueOf(proposal.getProposalId()) %>" />
 		</portlet:actionURL>
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />

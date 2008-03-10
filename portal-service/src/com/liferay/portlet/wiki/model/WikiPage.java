@@ -58,9 +58,9 @@ public interface WikiPage extends WikiPageModel {
 
 	public com.liferay.portlet.wiki.model.WikiPage getParentPage();
 
-	public java.util.List getParentPages();
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getParentPages();
 
-	public java.util.List getChildPages();
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getChildPages();
 
 	public com.liferay.portlet.wiki.model.WikiPage getRedirectPage();
 

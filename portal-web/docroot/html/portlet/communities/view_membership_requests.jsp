@@ -48,8 +48,7 @@ Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
 <liferay-ui:message key="edit-requests-for-community" />: <%= group.getName() %>
 
-<br/>
-<br/>
+<br /><br />
 
 <liferay-ui:tabs
 	names="pending,approved,denied"

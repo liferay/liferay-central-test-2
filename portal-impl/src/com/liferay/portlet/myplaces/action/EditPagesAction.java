@@ -87,10 +87,10 @@ public class EditPagesAction extends PortletAction {
 		}
 
 		if (layout != null) {
-			String tabs2 = "public";
+			String tabs2 = "public-pages";
 
 			if (privateLayout) {
-				tabs2 = "private";
+				tabs2 = "private-pages";
 			}
 
 			HttpServletRequest httReq = PortalUtil.getHttpServletRequest(req);

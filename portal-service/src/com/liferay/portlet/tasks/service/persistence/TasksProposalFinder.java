@@ -29,38 +29,9 @@ package com.liferay.portlet.tasks.service.persistence;
  *
  */
 public interface TasksProposalFinder {
-	public int countByKeywords(long companyId, long groupId,
-		java.lang.String keywords) throws com.liferay.portal.SystemException;
-
-	public int countByC_G_N_U(long companyId, long groupId,
-		java.lang.String name, java.lang.String userName, boolean andOperator)
+	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByC_G_N_U(long companyId, long groupId,
-		java.lang.String[] names, java.lang.String[] userNames,
-		boolean andOperator) throws com.liferay.portal.SystemException;
-
-	public int countByC_G_R(long companyId, long groupId, long reviewingUserId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByKeywords(long companyId, long groupId,
-		java.lang.String keywords, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_G_N_U(long companyId, long groupId,
-		java.lang.String name, java.lang.String userName, boolean andOperator,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_G_N_U(long companyId, long groupId,
-		java.lang.String[] names, java.lang.String[] userNames,
-		boolean andOperator, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_G_R(long companyId, long groupId,
-		long reviewingUserId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
+	public java.util.List findByG_U(long groupId, long userId, int begin,
+		int end) throws com.liferay.portal.SystemException;
 }

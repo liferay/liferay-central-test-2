@@ -33,7 +33,7 @@
 
 	<br /><br />
 
-	<input id="<portlet:namespace />keywordsInput" type="text" size="40"/>
+	<input id="<portlet:namespace />keywordsInput" type="text" size="40" />
 
 	<span id="<portlet:namespace />searchPropertiesSpan" style="padding-left: 10px;"></span>
 

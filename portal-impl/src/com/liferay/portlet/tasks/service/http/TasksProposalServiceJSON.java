@@ -71,70 +71,46 @@ import org.json.JSONObject;
  *
  */
 public class TasksProposalServiceJSON {
-	public static JSONObject addProposal(long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
+	public static JSONObject addProposal(long groupId,
+		java.lang.String className, long classPK, java.lang.String name,
+		java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
-				name, description, classNameId, classPK,
+				className, classPK, name, description, reviewUserId,
 				addCommunityPermissions, addGuestPermissions);
 
 		return TasksProposalJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addProposal(long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		long reviewerId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
-				name, description, classNameId, classPK, reviewerId,
-				addCommunityPermissions, addGuestPermissions);
-
-		return TasksProposalJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addProposal(long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
+	public static JSONObject addProposal(long groupId,
+		java.lang.String className, long classPK, java.lang.String name,
+		java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
-				name, description, classNameId, classPK, communityPermissions,
-				guestPermissions);
-
-		return TasksProposalJSONSerializer.toJSONObject(returnValue);
-	}
-
-	public static JSONObject addProposal(long groupId, java.lang.String name,
-		java.lang.String description, long classNameId, long classPK,
-		long reviewerId, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
-				name, description, classNameId, classPK, reviewerId,
+				className, classPK, name, description, reviewUserId,
 				communityPermissions, guestPermissions);
 
 		return TasksProposalJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static void deleteProposal(long groupId, long proposalId)
+	public static void deleteProposal(long proposalId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		TasksProposalServiceUtil.deleteProposal(groupId, proposalId);
+		TasksProposalServiceUtil.deleteProposal(proposalId);
 	}
 
-	public static JSONObject updateProposal(long groupId, long proposalId,
+	public static JSONObject updateProposal(long proposalId,
 		java.lang.String description, int dueDateMonth, int dueDateDay,
 		int dueDateYear, int dueDateHour, int dueDateMinute)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.updateProposal(groupId,
-				proposalId, description, dueDateMonth, dueDateDay, dueDateYear,
+		com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.updateProposal(proposalId,
+				description, dueDateMonth, dueDateDay, dueDateYear,
 				dueDateHour, dueDateMinute);
 
 		return TasksProposalJSONSerializer.toJSONObject(returnValue);

@@ -49,31 +49,17 @@ package com.liferay.portlet.tasks.service;
  *
  */
 public interface TasksReviewService {
-	public com.liferay.portlet.tasks.model.TasksReview addReview(long userId,
-		long groupId, long assigningUserId, java.lang.String assigningUserName,
-		long proposalId, int stage, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.tasks.model.TasksReview addReview(long userId,
-		long groupId, long assigningUserId, java.lang.String assigningUserName,
-		long proposalId, int stage, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
+	public com.liferay.portlet.tasks.model.TasksReview approveReview(
+		long proposalId, int stage)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tasks.model.TasksReview rejectReview(
-		long groupId, long proposalId, int stage, boolean rejected)
+		long proposalId, int stage)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public void deleteReview(long groupId, long reviewId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void updateReviewers(long groupId, long proposalId, int stage,
-		long[] reviewerIds, long[] removeReviewerIds)
+	public void updateReviews(long proposalId, long[][] userIdsPerStage)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

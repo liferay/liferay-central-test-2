@@ -52,75 +52,48 @@ package com.liferay.portlet.tasks.service;
  */
 public class TasksProposalServiceUtil {
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
-
-		return tasksProposalService.addProposal(groupId, name, description,
-			classNameId, classPK, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK, long reviewerId,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
 
-		return tasksProposalService.addProposal(groupId, name, description,
-			classNameId, classPK, reviewerId, addCommunityPermissions,
+		return tasksProposalService.addProposal(groupId, className, classPK,
+			name, description, reviewUserId, addCommunityPermissions,
 			addGuestPermissions);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
 
-		return tasksProposalService.addProposal(groupId, name, description,
-			classNameId, classPK, communityPermissions, guestPermissions);
-	}
-
-	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK, long reviewerId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException, java.rmi.RemoteException {
-		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
-
-		return tasksProposalService.addProposal(groupId, name, description,
-			classNameId, classPK, reviewerId, communityPermissions,
+		return tasksProposalService.addProposal(groupId, className, classPK,
+			name, description, reviewUserId, communityPermissions,
 			guestPermissions);
 	}
 
-	public static void deleteProposal(long groupId, long proposalId)
+	public static void deleteProposal(long proposalId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
 
-		tasksProposalService.deleteProposal(groupId, proposalId);
+		tasksProposalService.deleteProposal(proposalId);
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposal updateProposal(
-		long groupId, long proposalId, java.lang.String description,
-		int dueDateMonth, int dueDateDay, int dueDateYear, int dueDateHour,
-		int dueDateMinute)
+		long proposalId, java.lang.String description, int dueDateMonth,
+		int dueDateDay, int dueDateYear, int dueDateHour, int dueDateMinute)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TasksProposalService tasksProposalService = TasksProposalServiceFactory.getService();
 
-		return tasksProposalService.updateProposal(groupId, proposalId,
-			description, dueDateMonth, dueDateDay, dueDateYear, dueDateHour,
-			dueDateMinute);
+		return tasksProposalService.updateProposal(proposalId, description,
+			dueDateMonth, dueDateDay, dueDateYear, dueDateHour, dueDateMinute);
 	}
 }

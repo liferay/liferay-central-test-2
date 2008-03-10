@@ -55,7 +55,7 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * <a href="CommunitiesUtil.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Aug?
+ * @author Raymond Augé
  *
  */
 public class CommunitiesUtil {
@@ -119,6 +119,7 @@ public class CommunitiesUtil {
 				permissionChecker, groupId, ActionKeys.MANAGE_STAGING) &&
 			!GroupPermissionUtil.contains(
 				permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) {
+
 			throw new PrincipalException();
 		}
 

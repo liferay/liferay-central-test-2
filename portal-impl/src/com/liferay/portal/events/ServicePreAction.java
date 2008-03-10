@@ -1158,10 +1158,10 @@ public class ServicePreAction extends Action {
 					"struts_action", "/layout_management/edit_pages");
 
 				if (layout.isPrivateLayout()) {
-					pageSettingsURL.setParameter("tabs2", "private");
+					pageSettingsURL.setParameter("tabs2", "private-pages");
 				}
 				else {
-					pageSettingsURL.setParameter("tabs2", "public");
+					pageSettingsURL.setParameter("tabs2", "public-pages");
 				}
 
 				pageSettingsURL.setParameter("redirect", currentURL);
@@ -1184,10 +1184,10 @@ public class ServicePreAction extends Action {
 				publishToLiveURL.setParameter("popupId", "publish-to-live");
 
 				if (layout.isPrivateLayout()) {
-					publishToLiveURL.setParameter("tabs2", "private");
+					publishToLiveURL.setParameter("tabs2", "private-pages");
 				}
 				else {
-					publishToLiveURL.setParameter("tabs2", "public");
+					publishToLiveURL.setParameter("tabs2", "public-pages");
 				}
 
 				publishToLiveURL.setParameter("pagesRedirect", currentURL);

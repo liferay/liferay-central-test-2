@@ -81,8 +81,8 @@ if (organizationId > 0) {
 	</td>
 	<td>
 		<select name="<portlet:namespace />displayStyle">
-			<option <%= (displayStyle.equals("user-name-and-image")) ? "selected" : "" %> value="user-name-and-image"><liferay-ui:message key="user-name-and-image"/></option>
-			<option <%= (displayStyle.equals("user-name")) ? "selected" : "" %> value="user-name"><liferay-ui:message key="user-name"/></option>
+			<option <%= (displayStyle.equals("user-name-and-image")) ? "selected" : "" %> value="user-name-and-image"><liferay-ui:message key="user-name-and-image" /></option>
+			<option <%= (displayStyle.equals("user-name")) ? "selected" : "" %> value="user-name"><liferay-ui:message key="user-name" /></option>
 		</select>
 	</td>
 </tr>

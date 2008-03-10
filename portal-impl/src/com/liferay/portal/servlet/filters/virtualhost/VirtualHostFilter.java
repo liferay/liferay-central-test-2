@@ -68,7 +68,7 @@ import javax.servlet.http.HttpSession;
  *
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
- * @author Raymond Aug?
+ * @author Raymond Augé
  *
  */
 public class VirtualHostFilter extends BaseFilter {

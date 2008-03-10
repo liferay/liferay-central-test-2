@@ -82,11 +82,11 @@ if (organizationId > 0) {
 	</td>
 	<td>
 		<select name="<portlet:namespace />displayStyle">
-			<option <%= (displayStyle.equals("body-and-image")) ? "selected" : "" %> value="body-and-image"><liferay-ui:message key="body-and-image"/></option>
-			<option <%= (displayStyle.equals("body")) ? "selected" : "" %> value="body"><liferay-ui:message key="body"/></option>
-			<option <%= (displayStyle.equals("abstract")) ? "selected" : "" %> value="abstract"><liferay-ui:message key="abstract"/></option>
-			<option <%= (displayStyle.equals("abstract-and-image")) ? "selected" : "" %> value="abstract-and-image"><liferay-ui:message key="abstract-and-image"/></option>
-			<option <%= (displayStyle.equals("title")) ? "selected" : "" %> value="title"><liferay-ui:message key="title"/></option>
+			<option <%= (displayStyle.equals("body-and-image")) ? "selected" : "" %> value="body-and-image"><liferay-ui:message key="body-and-image" /></option>
+			<option <%= (displayStyle.equals("body")) ? "selected" : "" %> value="body"><liferay-ui:message key="body" /></option>
+			<option <%= (displayStyle.equals("abstract")) ? "selected" : "" %> value="abstract"><liferay-ui:message key="abstract" /></option>
+			<option <%= (displayStyle.equals("abstract-and-image")) ? "selected" : "" %> value="abstract-and-image"><liferay-ui:message key="abstract-and-image" /></option>
+			<option <%= (displayStyle.equals("title")) ? "selected" : "" %> value="title"><liferay-ui:message key="title" /></option>
 		</select>
 	</td>
 </tr>

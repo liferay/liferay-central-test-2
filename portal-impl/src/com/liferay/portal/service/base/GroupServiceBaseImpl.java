@@ -388,6 +388,14 @@ import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersio
 import com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionUtil;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence;
 import com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryUtil;
+import com.liferay.portlet.tasks.service.TasksProposalLocalService;
+import com.liferay.portlet.tasks.service.TasksProposalLocalServiceFactory;
+import com.liferay.portlet.tasks.service.TasksProposalService;
+import com.liferay.portlet.tasks.service.TasksProposalServiceFactory;
+import com.liferay.portlet.tasks.service.persistence.TasksProposalFinder;
+import com.liferay.portlet.tasks.service.persistence.TasksProposalFinderUtil;
+import com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence;
+import com.liferay.portlet.tasks.service.persistence.TasksProposalUtil;
 import com.liferay.portlet.wiki.service.WikiNodeLocalService;
 import com.liferay.portlet.wiki.service.WikiNodeLocalServiceFactory;
 import com.liferay.portlet.wiki.service.WikiNodeService;
@@ -1956,6 +1964,41 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 		this.scProductEntryPersistence = scProductEntryPersistence;
 	}
 
+	public TasksProposalLocalService getTasksProposalLocalService() {
+		return tasksProposalLocalService;
+	}
+
+	public void setTasksProposalLocalService(
+		TasksProposalLocalService tasksProposalLocalService) {
+		this.tasksProposalLocalService = tasksProposalLocalService;
+	}
+
+	public TasksProposalService getTasksProposalService() {
+		return tasksProposalService;
+	}
+
+	public void setTasksProposalService(
+		TasksProposalService tasksProposalService) {
+		this.tasksProposalService = tasksProposalService;
+	}
+
+	public TasksProposalPersistence getTasksProposalPersistence() {
+		return tasksProposalPersistence;
+	}
+
+	public void setTasksProposalPersistence(
+		TasksProposalPersistence tasksProposalPersistence) {
+		this.tasksProposalPersistence = tasksProposalPersistence;
+	}
+
+	public TasksProposalFinder getTasksProposalFinder() {
+		return tasksProposalFinder;
+	}
+
+	public void setTasksProposalFinder(TasksProposalFinder tasksProposalFinder) {
+		this.tasksProposalFinder = tasksProposalFinder;
+	}
+
 	public WikiNodeLocalService getWikiNodeLocalService() {
 		return wikiNodeLocalService;
 	}
@@ -2706,6 +2749,22 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 			scProductEntryPersistence = SCProductEntryUtil.getPersistence();
 		}
 
+		if (tasksProposalLocalService == null) {
+			tasksProposalLocalService = TasksProposalLocalServiceFactory.getImpl();
+		}
+
+		if (tasksProposalService == null) {
+			tasksProposalService = TasksProposalServiceFactory.getImpl();
+		}
+
+		if (tasksProposalPersistence == null) {
+			tasksProposalPersistence = TasksProposalUtil.getPersistence();
+		}
+
+		if (tasksProposalFinder == null) {
+			tasksProposalFinder = TasksProposalFinderUtil.getFinder();
+		}
+
 		if (wikiNodeLocalService == null) {
 			wikiNodeLocalService = WikiNodeLocalServiceFactory.getImpl();
 		}
@@ -2900,6 +2959,10 @@ public abstract class GroupServiceBaseImpl extends PrincipalBean
 	protected SCProductEntryLocalService scProductEntryLocalService;
 	protected SCProductEntryService scProductEntryService;
 	protected SCProductEntryPersistence scProductEntryPersistence;
+	protected TasksProposalLocalService tasksProposalLocalService;
+	protected TasksProposalService tasksProposalService;
+	protected TasksProposalPersistence tasksProposalPersistence;
+	protected TasksProposalFinder tasksProposalFinder;
 	protected WikiNodeLocalService wikiNodeLocalService;
 	protected WikiNodeService wikiNodeService;
 	protected WikiNodePersistence wikiNodePersistence;

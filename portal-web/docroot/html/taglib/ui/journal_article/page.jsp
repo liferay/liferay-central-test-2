@@ -24,10 +24,10 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay"%>
-<%@ page import="com.liferay.portlet.journal.model.JournalArticleResource"%>
-<%@ page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil"%>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleDisplay" %>
+<%@ page import="com.liferay.portlet.journal.model.JournalArticleResource" %>
+<%@ page import="com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.journalcontent.util.JournalContentUtil" %>
 
 <%
 long articleResourcePrimKey = GetterUtil.getLong((String)request.getAttribute("liferay-ui:journal-article:articleResourcePrimKey"));

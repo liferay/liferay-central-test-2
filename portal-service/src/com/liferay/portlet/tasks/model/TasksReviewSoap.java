@@ -57,9 +57,9 @@ public class TasksReviewSoap implements Serializable {
 		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setModifiedDate(model.getModifiedDate());
-		soapModel.setAssigningUserId(model.getAssigningUserId());
-		soapModel.setAssigningUserName(model.getAssigningUserName());
 		soapModel.setProposalId(model.getProposalId());
+		soapModel.setAssignedByUserId(model.getAssignedByUserId());
+		soapModel.setAssignedByUserName(model.getAssignedByUserName());
 		soapModel.setStage(model.getStage());
 		soapModel.setCompleted(model.getCompleted());
 		soapModel.setRejected(model.getRejected());
@@ -146,28 +146,28 @@ public class TasksReviewSoap implements Serializable {
 		_modifiedDate = modifiedDate;
 	}
 
-	public long getAssigningUserId() {
-		return _assigningUserId;
-	}
-
-	public void setAssigningUserId(long assigningUserId) {
-		_assigningUserId = assigningUserId;
-	}
-
-	public String getAssigningUserName() {
-		return _assigningUserName;
-	}
-
-	public void setAssigningUserName(String assigningUserName) {
-		_assigningUserName = assigningUserName;
-	}
-
 	public long getProposalId() {
 		return _proposalId;
 	}
 
 	public void setProposalId(long proposalId) {
 		_proposalId = proposalId;
+	}
+
+	public long getAssignedByUserId() {
+		return _assignedByUserId;
+	}
+
+	public void setAssignedByUserId(long assignedByUserId) {
+		_assignedByUserId = assignedByUserId;
+	}
+
+	public String getAssignedByUserName() {
+		return _assignedByUserName;
+	}
+
+	public void setAssignedByUserName(String assignedByUserName) {
+		_assignedByUserName = assignedByUserName;
 	}
 
 	public int getStage() {
@@ -209,9 +209,9 @@ public class TasksReviewSoap implements Serializable {
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _assigningUserId;
-	private String _assigningUserName;
 	private long _proposalId;
+	private long _assignedByUserId;
+	private String _assignedByUserName;
 	private int _stage;
 	private boolean _completed;
 	private boolean _rejected;

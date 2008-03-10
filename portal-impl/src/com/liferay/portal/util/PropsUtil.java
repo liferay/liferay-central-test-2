@@ -1223,9 +1223,9 @@ public class PropsUtil {
 
 	// Tasks Portlet
 
-	public static final String TASKS_APPROVAL_ROLE_NAMES = "tasks.approval.role.names";
+	public static final String TASKS_DEFAULT_STAGES = "tasks.default.stages";
 
-	public static final String TASKS_NUMBER_OF_APPROVAL_STAGES = "tasks.number.of.approval.stages";
+	public static final String TASKS_DEFAULT_ROLE_NAMES = "tasks.default.role.names";
 
 	// Translator Portlet
 

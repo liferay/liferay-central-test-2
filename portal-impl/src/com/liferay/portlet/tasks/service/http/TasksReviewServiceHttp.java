@@ -24,7 +24,6 @@ package com.liferay.portlet.tasks.service.http;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.BooleanWrapper;
 import com.liferay.portal.kernel.util.IntegerWrapper;
 import com.liferay.portal.kernel.util.LongWrapper;
 import com.liferay.portal.kernel.util.MethodWrapper;
@@ -74,109 +73,17 @@ import com.liferay.portlet.tasks.service.TasksReviewServiceUtil;
  *
  */
 public class TasksReviewServiceHttp {
-	public static com.liferay.portlet.tasks.model.TasksReview addReview(
-		HttpPrincipal httpPrincipal, long userId, long groupId,
-		long assigningUserId, java.lang.String assigningUserName,
-		long proposalId, int stage, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+	public static com.liferay.portlet.tasks.model.TasksReview approveReview(
+		HttpPrincipal httpPrincipal, long proposalId, int stage)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(userId);
+			Object paramObj0 = new LongWrapper(proposalId);
 
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = new LongWrapper(assigningUserId);
-
-			Object paramObj3 = assigningUserName;
-
-			if (assigningUserName == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = new LongWrapper(proposalId);
-
-			Object paramObj5 = new IntegerWrapper(stage);
-
-			Object paramObj6 = new BooleanWrapper(addCommunityPermissions);
-
-			Object paramObj7 = new BooleanWrapper(addGuestPermissions);
+			Object paramObj1 = new IntegerWrapper(stage);
 
 			MethodWrapper methodWrapper = new MethodWrapper(TasksReviewServiceUtil.class.getName(),
-					"addReview",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.tasks.model.TasksReview)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static com.liferay.portlet.tasks.model.TasksReview addReview(
-		HttpPrincipal httpPrincipal, long userId, long groupId,
-		long assigningUserId, java.lang.String assigningUserName,
-		long proposalId, int stage, java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		try {
-			Object paramObj0 = new LongWrapper(userId);
-
-			Object paramObj1 = new LongWrapper(groupId);
-
-			Object paramObj2 = new LongWrapper(assigningUserId);
-
-			Object paramObj3 = assigningUserName;
-
-			if (assigningUserName == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj4 = new LongWrapper(proposalId);
-
-			Object paramObj5 = new IntegerWrapper(stage);
-
-			Object paramObj6 = communityPermissions;
-
-			if (communityPermissions == null) {
-				paramObj6 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			Object paramObj7 = guestPermissions;
-
-			if (guestPermissions == null) {
-				paramObj7 = new NullWrapper("[Ljava.lang.String;");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(TasksReviewServiceUtil.class.getName(),
-					"addReview",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
-					});
+					"approveReview", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
@@ -205,22 +112,16 @@ public class TasksReviewServiceHttp {
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksReview rejectReview(
-		HttpPrincipal httpPrincipal, long groupId, long proposalId, int stage,
-		boolean rejected)
+		HttpPrincipal httpPrincipal, long proposalId, int stage)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = new LongWrapper(proposalId);
 
-			Object paramObj1 = new LongWrapper(proposalId);
-
-			Object paramObj2 = new IntegerWrapper(stage);
-
-			Object paramObj3 = new BooleanWrapper(rejected);
+			Object paramObj1 = new IntegerWrapper(stage);
 
 			MethodWrapper methodWrapper = new MethodWrapper(TasksReviewServiceUtil.class.getName(),
-					"rejectReview",
-					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+					"rejectReview", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
@@ -248,69 +149,21 @@ public class TasksReviewServiceHttp {
 		}
 	}
 
-	public static void deleteReview(HttpPrincipal httpPrincipal, long groupId,
-		long reviewId)
+	public static void updateReviews(HttpPrincipal httpPrincipal,
+		long proposalId, long[][] userIdsPerStage)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(groupId);
+			Object paramObj0 = new LongWrapper(proposalId);
 
-			Object paramObj1 = new LongWrapper(reviewId);
+			Object paramObj1 = userIdsPerStage;
 
-			MethodWrapper methodWrapper = new MethodWrapper(TasksReviewServiceUtil.class.getName(),
-					"deleteReview", new Object[] { paramObj0, paramObj1 });
-
-			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static void updateReviewers(HttpPrincipal httpPrincipal,
-		long groupId, long proposalId, int stage, long[] reviewerIds,
-		long[] removeReviewerIds)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		try {
-			Object paramObj0 = new LongWrapper(groupId);
-
-			Object paramObj1 = new LongWrapper(proposalId);
-
-			Object paramObj2 = new IntegerWrapper(stage);
-
-			Object paramObj3 = reviewerIds;
-
-			if (reviewerIds == null) {
-				paramObj3 = new NullWrapper("[J");
-			}
-
-			Object paramObj4 = removeReviewerIds;
-
-			if (removeReviewerIds == null) {
-				paramObj4 = new NullWrapper("[J");
+			if (userIdsPerStage == null) {
+				paramObj1 = new NullWrapper("[[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(TasksReviewServiceUtil.class.getName(),
-					"updateReviewers",
-					new Object[] {
-						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
-					});
+					"updateReviews", new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);

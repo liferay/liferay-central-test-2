@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,13 +19,34 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/tasks/init.jsp" %>
+package com.liferay.portlet.tasks;
 
-<liferay-ui:tabs names="error" backURL="javascript: history.go(-1);" />
+import com.liferay.portal.PortalException;
 
-<liferay-ui:error exception="<%= NoSuchProposalException.class %>" message="the-proposal-could-not-be-found" />
-<liferay-ui:error exception="<%= NoSuchReviewException.class %>" message="the-review-could-not-be-found" />
-<liferay-ui:error exception="<%= NoSuchRoleException.class %>" message="the-role-could-not-be-found" />
-<liferay-ui:error exception="<%= PrincipalException.class %>" message="you-do-not-have-the-required-permissions" />
+/**
+ * <a href="DuplicateReviewUserIdException.java.html"><b><i>View Source</i></b>
+ * </a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class DuplicateReviewUserIdException extends PortalException {
+
+	public DuplicateReviewUserIdException() {
+		super();
+	}
+
+	public DuplicateReviewUserIdException(String msg) {
+		super(msg);
+	}
+
+	public DuplicateReviewUserIdException(String msg, Throwable cause) {
+		super(msg, cause);
+	}
+
+	public DuplicateReviewUserIdException(Throwable cause) {
+		super(cause);
+	}
+
+}

@@ -82,31 +82,13 @@ import java.rmi.RemoteException;
  */
 public class TasksProposalServiceSoap {
 	public static com.liferay.portlet.tasks.model.TasksProposalSoap addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
-					name, description, classNameId, classPK,
-					addCommunityPermissions, addGuestPermissions);
-
-			return com.liferay.portlet.tasks.model.TasksProposalSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.tasks.model.TasksProposalSoap addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK, long reviewerId,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
-					name, description, classNameId, classPK, reviewerId,
+					className, classPK, name, description, reviewUserId,
 					addCommunityPermissions, addGuestPermissions);
 
 			return com.liferay.portlet.tasks.model.TasksProposalSoap.toSoapModel(returnValue);
@@ -119,13 +101,13 @@ public class TasksProposalServiceSoap {
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposalSoap addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK,
+		long groupId, java.lang.String className, long classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
 			com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
-					name, description, classNameId, classPK,
+					className, classPK, name, description, reviewUserId,
 					communityPermissions, guestPermissions);
 
 			return com.liferay.portlet.tasks.model.TasksProposalSoap.toSoapModel(returnValue);
@@ -137,29 +119,10 @@ public class TasksProposalServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.tasks.model.TasksProposalSoap addProposal(
-		long groupId, java.lang.String name, java.lang.String description,
-		long classNameId, long classPK, long reviewerId,
-		java.lang.String[] communityPermissions,
-		java.lang.String[] guestPermissions) throws RemoteException {
-		try {
-			com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.addProposal(groupId,
-					name, description, classNameId, classPK, reviewerId,
-					communityPermissions, guestPermissions);
-
-			return com.liferay.portlet.tasks.model.TasksProposalSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static void deleteProposal(long groupId, long proposalId)
+	public static void deleteProposal(long proposalId)
 		throws RemoteException {
 		try {
-			TasksProposalServiceUtil.deleteProposal(groupId, proposalId);
+			TasksProposalServiceUtil.deleteProposal(proposalId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -169,13 +132,13 @@ public class TasksProposalServiceSoap {
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposalSoap updateProposal(
-		long groupId, long proposalId, java.lang.String description,
-		int dueDateMonth, int dueDateDay, int dueDateYear, int dueDateHour,
-		int dueDateMinute) throws RemoteException {
+		long proposalId, java.lang.String description, int dueDateMonth,
+		int dueDateDay, int dueDateYear, int dueDateHour, int dueDateMinute)
+		throws RemoteException {
 		try {
-			com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.updateProposal(groupId,
-					proposalId, description, dueDateMonth, dueDateDay,
-					dueDateYear, dueDateHour, dueDateMinute);
+			com.liferay.portlet.tasks.model.TasksProposal returnValue = TasksProposalServiceUtil.updateProposal(proposalId,
+					description, dueDateMonth, dueDateDay, dueDateYear,
+					dueDateHour, dueDateMinute);
 
 			return com.liferay.portlet.tasks.model.TasksProposalSoap.toSoapModel(returnValue);
 		}

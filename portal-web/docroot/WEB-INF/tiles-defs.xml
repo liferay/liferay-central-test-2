@@ -244,6 +244,10 @@
 		<put name="portlet_content" value="/portlet/communities/edit_pages.jsp" />
 	</definition>
 
+	<definition name="portlet.communities.edit_proposal" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/edit_proposal.jsp" />
+	</definition>
+
 	<definition name="portlet.communities.edit_user_roles" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/edit_user_roles.jsp" />
 	</definition>
@@ -1091,18 +1095,6 @@
 
 	<definition name="portlet.tags_admin.view" extends="portlet.tags_admin">
 		<put name="portlet_content" value="/portlet/tags_admin/view.jsp" />
-	</definition>
-
-	<!-- Tasks -->
-
-	<definition name="portlet.tasks" extends="portlet" />
-
-	<definition name="portlet.tasks.edit_proposal" extends="portlet.tasks">
-		<put name="portlet_content" value="/portlet/tasks/edit_proposal.jsp" />
-	</definition>
-
-	<definition name="portlet.tasks.error" extends="portlet.tasks">
-		<put name="portlet_content" value="/portlet/tasks/error.jsp" />
 	</definition>
 
 	<!-- Update Manager -->

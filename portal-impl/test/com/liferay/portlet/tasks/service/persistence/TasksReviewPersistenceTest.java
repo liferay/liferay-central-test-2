@@ -76,9 +76,9 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 		newTasksReview.setUserName(randomString());
 		newTasksReview.setCreateDate(nextDate());
 		newTasksReview.setModifiedDate(nextDate());
-		newTasksReview.setAssigningUserId(nextLong());
-		newTasksReview.setAssigningUserName(randomString());
 		newTasksReview.setProposalId(nextLong());
+		newTasksReview.setAssignedByUserId(nextLong());
+		newTasksReview.setAssignedByUserName(randomString());
 		newTasksReview.setStage(nextInt());
 		newTasksReview.setCompleted(randomBoolean());
 		newTasksReview.setRejected(randomBoolean());
@@ -100,12 +100,12 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 			newTasksReview.getCreateDate());
 		assertEquals(existingTasksReview.getModifiedDate(),
 			newTasksReview.getModifiedDate());
-		assertEquals(existingTasksReview.getAssigningUserId(),
-			newTasksReview.getAssigningUserId());
-		assertEquals(existingTasksReview.getAssigningUserName(),
-			newTasksReview.getAssigningUserName());
 		assertEquals(existingTasksReview.getProposalId(),
 			newTasksReview.getProposalId());
+		assertEquals(existingTasksReview.getAssignedByUserId(),
+			newTasksReview.getAssignedByUserId());
+		assertEquals(existingTasksReview.getAssignedByUserName(),
+			newTasksReview.getAssignedByUserName());
 		assertEquals(existingTasksReview.getStage(), newTasksReview.getStage());
 		assertEquals(existingTasksReview.getCompleted(),
 			newTasksReview.getCompleted());
@@ -160,9 +160,9 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 		tasksReview.setUserName(randomString());
 		tasksReview.setCreateDate(nextDate());
 		tasksReview.setModifiedDate(nextDate());
-		tasksReview.setAssigningUserId(nextLong());
-		tasksReview.setAssigningUserName(randomString());
 		tasksReview.setProposalId(nextLong());
+		tasksReview.setAssignedByUserId(nextLong());
+		tasksReview.setAssignedByUserName(randomString());
 		tasksReview.setStage(nextInt());
 		tasksReview.setCompleted(randomBoolean());
 		tasksReview.setRejected(randomBoolean());

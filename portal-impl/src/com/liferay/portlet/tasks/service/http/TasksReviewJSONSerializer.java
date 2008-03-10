@@ -61,9 +61,10 @@ public class TasksReviewJSONSerializer {
 		JSONUtil.put(jsonObj, "userName", model.getUserName());
 		JSONUtil.put(jsonObj, "createDate", model.getCreateDate());
 		JSONUtil.put(jsonObj, "modifiedDate", model.getModifiedDate());
-		JSONUtil.put(jsonObj, "assigningUserId", model.getAssigningUserId());
-		JSONUtil.put(jsonObj, "assigningUserName", model.getAssigningUserName());
 		JSONUtil.put(jsonObj, "proposalId", model.getProposalId());
+		JSONUtil.put(jsonObj, "assignedByUserId", model.getAssignedByUserId());
+		JSONUtil.put(jsonObj, "assignedByUserName",
+			model.getAssignedByUserName());
 		JSONUtil.put(jsonObj, "stage", model.getStage());
 		JSONUtil.put(jsonObj, "completed", model.getCompleted());
 		JSONUtil.put(jsonObj, "rejected", model.getRejected());

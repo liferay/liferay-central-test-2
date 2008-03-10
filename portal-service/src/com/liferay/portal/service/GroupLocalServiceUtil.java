@@ -1165,6 +1165,32 @@ public class GroupLocalServiceUtil {
 		groupLocalService.setSCProductEntryPersistence(scProductEntryPersistence);
 	}
 
+	public static com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence getTasksProposalPersistence() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getTasksProposalPersistence();
+	}
+
+	public static void setTasksProposalPersistence(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setTasksProposalPersistence(tasksProposalPersistence);
+	}
+
+	public static com.liferay.portlet.tasks.service.persistence.TasksProposalFinder getTasksProposalFinder() {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.getTasksProposalFinder();
+	}
+
+	public static void setTasksProposalFinder(
+		com.liferay.portlet.tasks.service.persistence.TasksProposalFinder tasksProposalFinder) {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		groupLocalService.setTasksProposalFinder(tasksProposalFinder);
+	}
+
 	public static com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence() {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
@@ -1434,5 +1460,16 @@ public class GroupLocalServiceUtil {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 
 		return groupLocalService.updateGroup(groupId, typeSettings);
+	}
+
+	public static com.liferay.portal.model.Group updateWorkflow(long groupId,
+		boolean workflowEnabled, int workflowStages,
+		java.lang.String workflowRoleNames)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
+
+		return groupLocalService.updateWorkflow(groupId, workflowEnabled,
+			workflowStages, workflowRoleNames);
 	}
 }

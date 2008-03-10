@@ -38,7 +38,7 @@
 <%@ page import="com.liferay.portal.NoSuchGroupException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutException" %>
 <%@ page import="com.liferay.portal.NoSuchLayoutSetException" %>
-<%@ page import="com.liferay.portal.NoSuchPortletException"%>
+<%@ page import="com.liferay.portal.NoSuchPortletException" %>
 <%@ page import="com.liferay.portal.NoSuchRegionException" %>
 <%@ page import="com.liferay.portal.NoSuchRoleException" %>
 <%@ page import="com.liferay.portal.RequiredGroupException" %>
@@ -61,7 +61,7 @@
 <%@ page import="com.liferay.portal.security.permission.comparator.ModelResourceComparator" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
 <%@ page import="com.liferay.portlet.communities.action.ActionUtil" %>
-<%@ page import="com.liferay.portlet.communities.search.ExportPageChecker"%>
+<%@ page import="com.liferay.portlet.communities.search.ExportPageChecker" %>
 <%@ page import="com.liferay.portlet.communities.search.UserGroupRoleRoleChecker" %>
 <%@ page import="com.liferay.portlet.communities.search.UserGroupRoleUserChecker" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.GroupSearch" %>
@@ -77,16 +77,15 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
-<%@ page import="com.liferay.portlet.tasks.NoSuchProposalException"%>
-<%@ page import="com.liferay.portlet.tasks.NoSuchReviewException"%>
-<%@ page import="com.liferay.portlet.tasks.model.TasksProposal"%>
-<%@ page import="com.liferay.portlet.tasks.model.TasksReview"%>
-<%@ page import="com.liferay.portlet.tasks.model.impl.TasksProposalImpl"%>
-<%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.tasks.service.permission.TasksProposalPermission"%>
-<%@ page import="com.liferay.portlet.tasks.service.permission.TasksReviewPermission"%>
-<%@ page import="com.liferay.portlet.tasks.util.TasksUtil"%>
+<%@ page import="com.liferay.portlet.tasks.DuplicateReviewUserIdException" %>
+<%@ page import="com.liferay.portlet.tasks.NoSuchProposalException" %>
+<%@ page import="com.liferay.portlet.tasks.NoSuchReviewException" %>
+<%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
+<%@ page import="com.liferay.portlet.tasks.model.TasksReview" %>
+<%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tasks.service.TasksReviewLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.tasks.service.permission.TasksProposalPermission" %>
+<%@ page import="com.liferay.portlet.tasks.util.comparator.ReviewUserNameComparator" %>
 
 <%@ page import="org.dom4j.Document" %>
 <%@ page import="org.dom4j.Element" %>
@@ -94,4 +93,5 @@
 
 <%
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
+DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
