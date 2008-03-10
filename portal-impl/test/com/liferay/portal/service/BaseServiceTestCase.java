@@ -33,6 +33,8 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.TestPropsValues;
 
+import java.net.URL;
+
 import junit.framework.TestCase;
 
 /**
@@ -42,6 +44,10 @@ import junit.framework.TestCase;
  *
  */
 public class BaseServiceTestCase extends TestCase {
+
+	protected URL getClassResource(String name) {
+		return getClass().getClassLoader().getResource(name);
+	}
 
 	protected void setUp() throws Exception {
 		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());

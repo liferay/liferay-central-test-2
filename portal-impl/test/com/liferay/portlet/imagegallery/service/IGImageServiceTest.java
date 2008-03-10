@@ -41,17 +41,45 @@ import java.io.File;
  */
 public class IGImageServiceTest extends BaseServiceTestCase {
 
+	public void testDuplicateName() throws Exception {
+		String name = "liferay.png";
+		String description = StringPool.BLANK;
+		File image = new File(getClassResource(
+			"com/liferay/portlet/imagegallery/dependencies/" + name).getPath());
+		String contentType = "png";
+		String[] tagsEntries = null;
+
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		IGImageServiceUtil.addImage(
+			_folder.getFolderId(), name, description, image, contentType,
+			tagsEntries, addCommunityPermissions, addGuestPermissions);
+
+		try {
+			IGImageServiceUtil.addImage(
+				_folder.getFolderId(), name, description, image,
+				contentType, tagsEntries, addCommunityPermissions,
+				addGuestPermissions);
+
+			fail("Able to add two images of the name " + name);
+		}
+		catch (DuplicateImageNameException dine) {
+		}
+	}
+
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		String name = "This is a test folder";
-		String description = StringPool.BLANK;
+		String name = "Test Folder";
+		String description = "This is a test folder.";
+
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
 		try {
-			long groupId =
-				PortalUtil.getPortletGroupId(TestPropsValues.LAYOUT_PLID);
+			long groupId = PortalUtil.getPortletGroupId(
+				TestPropsValues.LAYOUT_PLID);
 
 			_folder = IGFolderServiceUtil.getFolder(
 				groupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, name);
@@ -66,34 +94,6 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 		_folder = IGFolderServiceUtil.addFolder(
 			TestPropsValues.LAYOUT_PLID, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID,
 			name, description, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void testDuplicateImage() throws Exception {
-		String imagename = "liferay.png";
-		String description = StringPool.BLANK;
-		String contentType = "png";
-		String[] tagsEntries = null;
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
-
-		ClassLoader classLoader = ClassLoader.getSystemClassLoader();
-
-		File image = new File(classLoader.getResource(imagename).getPath());
-
-		IGImageServiceUtil.addImage(
-			_folder.getFolderId(), imagename, description, image, contentType,
-			tagsEntries, addCommunityPermissions, addGuestPermissions);
-
-		try {
-			IGImageServiceUtil.addImage(
-				_folder.getFolderId(), imagename, description, image,
-				contentType, tagsEntries, addCommunityPermissions,
-				addGuestPermissions);
-
-			fail("Able to add two images of the name " + imagename);
-		}
-		catch (DuplicateImageNameException dine) {
-		}
 	}
 
 	protected void tearDown() throws Exception {

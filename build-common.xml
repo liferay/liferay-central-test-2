@@ -168,7 +168,7 @@ ECJ was automatically installed. Please rerun your task.
 		<mkdir dir="test-results" />
 
 		<copy todir="test-classes">
-			<fileset dir="test" includes="**/*.properties,**/*.xml,**/*.png" />
+			<fileset dir="test" includes="**/*.png,**/*.properties,**/*.xml" />
 		</copy>
 
 		<javac destdir="test-classes" srcdir="test">

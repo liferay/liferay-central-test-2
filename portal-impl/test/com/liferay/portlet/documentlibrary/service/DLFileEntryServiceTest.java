@@ -39,17 +39,48 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
  */
 public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
+	public void testDuplicateName() throws Exception {
+		String fileName = "helloworld.txt";
+		String description = StringPool.BLANK;
+		String[] tagsEntries = null;
+		String extraSettings = StringPool.BLANK;
+
+		String content = "Hello World!";
+
+		byte[] byteArray = content.getBytes();
+
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		DLFileEntryServiceUtil.addFileEntry(
+			_folder.getFolderId(), fileName, fileName, description,
+			tagsEntries, extraSettings, byteArray, addCommunityPermissions,
+			addGuestPermissions);
+
+		try {
+			DLFileEntryServiceUtil.addFileEntry(
+				_folder.getFolderId(), fileName, fileName, description,
+				tagsEntries, extraSettings, byteArray, addCommunityPermissions,
+				addGuestPermissions);
+
+			fail("Able to add two files of the name " + fileName);
+		}
+		catch (DuplicateFileException dfe) {
+		}
+	}
+
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		String name = "This is a test folder";
-		String description = StringPool.BLANK;
+		String name = "Test Folder";
+		String description = "This is a test folder.";
+
 		boolean addCommunityPermissions = true;
 		boolean addGuestPermissions = true;
 
 		try {
-			long groupId =
-				PortalUtil.getPortletGroupId(TestPropsValues.LAYOUT_PLID);
+			long groupId = PortalUtil.getPortletGroupId(
+				TestPropsValues.LAYOUT_PLID);
 
 			DLFolderServiceUtil.deleteFolder(
 				groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID, name);
@@ -60,34 +91,6 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		_folder = DLFolderServiceUtil.addFolder(
 			TestPropsValues.LAYOUT_PLID, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID,
 			name, description, addCommunityPermissions, addGuestPermissions);
-	}
-
-	public void testDuplicateFilename() throws Exception {
-		String description = StringPool.BLANK;
-		String[] tagsEntries = null;
-		boolean addCommunityPermissions = true;
-		boolean addGuestPermissions = true;
-		String filename = "helloworld.txt";
-		String extraSettings = StringPool.BLANK;
-
-		String mockTextFile = "Hello World text file";
-		byte[] byteArray = mockTextFile.getBytes();
-
-		DLFileEntryServiceUtil.addFileEntry(
-			_folder.getFolderId(), filename, filename, description,
-			tagsEntries, extraSettings, byteArray, addCommunityPermissions,
-			addGuestPermissions);
-
-		try {
-			DLFileEntryServiceUtil.addFileEntry(
-				_folder.getFolderId(), filename, filename, description,
-				tagsEntries, extraSettings, byteArray, addCommunityPermissions,
-				addGuestPermissions);
-
-			fail("Able to add two files of the name " + filename);
-		}
-		catch (DuplicateFileException dfe) {
-		}
 	}
 
 	protected void tearDown() throws Exception {
