@@ -450,17 +450,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			String userPassword = user.getPassword();
 
-			if (user.isPasswordEncrypted()) {
-				String encPassword = PwdEncryptor.encrypt(password);
-
-				if (userPassword.equals(encPassword)) {
-					return user.getUserId();
-				}
+			if (!user.isPasswordEncrypted()) {
+				userPassword = PwdEncryptor.encrypt(userPassword);
 			}
-			else {
-				if (userPassword.equals(password)) {
-					return user.getUserId();
-				}
+
+			String encPassword = PwdEncryptor.encrypt(password);
+
+			if (userPassword.equals(password) ||
+					userPassword.equals(encPassword)) {
+
+				return user.getUserId();
 			}
 		}
 		catch (NoSuchUserException nsue) {

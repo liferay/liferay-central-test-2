@@ -29,9 +29,13 @@ import java.io.ObjectOutputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ObjectValuePair;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.security.auth.HttpPrincipal;
 import com.liferay.portal.security.auth.PrincipalException;
 
@@ -119,11 +123,13 @@ public class TunnelUtil {
 			(httpPrincipal.getPassword() != null)) {
 
 			String userNameAndPassword =
-				httpPrincipal.getUserId() + ":" + httpPrincipal.getPassword();
+				httpPrincipal.getUserId() + "@uid:" +
+					httpPrincipal.getPassword();
 
 			urlc.setRequestProperty(
-				"Authorization",
-				"Basic " + Base64.encode(userNameAndPassword.getBytes()));
+				HttpHeaders.AUTHORIZATION,
+				HttpServletRequest.BASIC_AUTH + StringPool.SPACE +
+					Base64.encode(userNameAndPassword.getBytes()));
 		}
 
 		return urlc;

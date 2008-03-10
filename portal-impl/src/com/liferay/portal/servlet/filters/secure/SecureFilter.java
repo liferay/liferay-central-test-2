@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -207,24 +208,25 @@ public class SecureFilter extends BaseFilter {
 	protected long getBasicAuthUserId(HttpServletRequest req) throws Exception {
 		long userId = 0;
 
-		String authorization = req.getHeader(HttpHeaders.AUTHORIZATION);
+		String authHeader = req.getHeader(HttpHeaders.AUTHORIZATION);
 
-		if (Validator.isNull(authorization)) {
+		if (Validator.isNull(authHeader)) {
 			return userId;
 		}
 
-		String[] authorizationArray = authorization.split("\\s+");
+		String[] authorizationArray = authHeader.split("\\s+");
 
-		String authType = authorizationArray[0];
+		String authorization = authorizationArray[0];
 		String credentials = new String(Base64.decode(authorizationArray[1]));
 
-		if (!authType.equalsIgnoreCase(HttpServletRequest.BASIC_AUTH)) {
+		if (!authorization.equalsIgnoreCase(HttpServletRequest.BASIC_AUTH)) {
 			return userId;
 		}
 
 		long companyId = PortalInstances.getCompanyId(req);
 
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
+		String authType = company.getAuthType();
 
 		String[] loginAndPassword = StringUtil.split(
 			credentials, StringPool.COLON);
@@ -232,8 +234,21 @@ public class SecureFilter extends BaseFilter {
 		String login = loginAndPassword[0].trim();
 		String password = loginAndPassword[1].trim();
 
+		if (login.endsWith("@uid")) {
+			int index = login.indexOf("@uid");
+			login = login.substring(0, index);
+
+			authType = CompanyImpl.AUTH_TYPE_ID;
+		}
+		else if (login.endsWith("@sn")) {
+			int index = login.indexOf("@sn");
+			login = login.substring(0, index);
+
+			authType = CompanyImpl.AUTH_TYPE_SN;
+		}
+
 		userId = UserLocalServiceUtil.authenticateForBasic(
-			companyId, company.getAuthType(), login, password);
+			companyId, authType, login, password);
 
 		return userId;
 	}
