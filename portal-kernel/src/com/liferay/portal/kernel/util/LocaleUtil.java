@@ -49,6 +49,10 @@ public class LocaleUtil {
 		return _instance._getDefault();
 	}
 
+	public static LocaleUtil getInstance() {
+		return _instance;
+	}
+
 	public static void setDefault(
 		String userLanguage, String userCountry, String userVariant) {
 
