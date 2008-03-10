@@ -267,6 +267,10 @@ public class IGPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return false;
+	}
+
 	protected String getFolderName(
 			long companyId, long groupId, long parentFolderId, String name,
 			int count)

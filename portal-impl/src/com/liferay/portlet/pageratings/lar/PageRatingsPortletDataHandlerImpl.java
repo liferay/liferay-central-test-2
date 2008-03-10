@@ -101,6 +101,10 @@ public class PageRatingsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return false;
+	}
+
 	private static final String _NAMESPACE = "page_ratings";
 
 	private static final PortletDataHandlerBoolean _ratings =

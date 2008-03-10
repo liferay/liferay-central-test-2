@@ -33,5 +33,5 @@ import com.liferay.portal.model.PortletItem;
 public class PortletItemImpl extends PortletItemModelImpl implements PortletItem {
 	public PortletItemImpl() {
 	}
-	
+
 }

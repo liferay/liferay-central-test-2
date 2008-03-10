@@ -58,7 +58,7 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="EditProposalAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class EditProposalAction extends EditPagesAction {
@@ -190,8 +190,11 @@ public class EditProposalAction extends EditPagesAction {
 
 		layoutIdMap.put(layout.getPlid(), Boolean.FALSE);
 
+		Map parameterMap = getStagingParameters();
+
 		publishLayouts(
-			layoutIdMap, stagingGroupId, liveGroupId, layout.isPrivateLayout());
+			layoutIdMap, stagingGroupId, liveGroupId, layout.isPrivateLayout(),
+			parameterMap);
 
 		TasksProposalServiceUtil.deleteProposal(proposal.getProposalId());
 	}

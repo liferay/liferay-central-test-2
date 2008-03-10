@@ -319,10 +319,12 @@ public class EditPagesAction extends PortletAction {
 
 		String scope = ParamUtil.getString(req, "scope");
 
+		Map parameterMap = getStagingParameters();
+
 		if (scope.equals("all-pages")) {
 			copyLayouts(
 				stagingGroup.getLiveGroupId(), stagingGroup.getGroupId(),
-				privateLayout);
+				privateLayout, parameterMap);
 		}
 		else if (scope.equals("selected-pages")) {
 			Map layoutIdMap = new LinkedHashMap();
@@ -340,15 +342,13 @@ public class EditPagesAction extends PortletAction {
 
 			publishLayouts(
 				layoutIdMap, stagingGroup.getLiveGroupId(),
-				stagingGroup.getGroupId(), privateLayout);
+				stagingGroup.getGroupId(), privateLayout, parameterMap);
 		}
 	}
 
 	protected void copyLayouts(
-			long sourceGroupId, long targetGroupId, boolean privateLayout)
+		long sourceGroupId, long targetGroupId, boolean privateLayout, Map parameterMap)
 		throws Exception {
-
-		Map parameterMap = getStagingParameters();
 
 		byte[] data = LayoutServiceUtil.exportLayouts(
 			sourceGroupId, privateLayout, parameterMap);
@@ -448,6 +448,29 @@ public class EditPagesAction extends PortletAction {
 		return missingParents;
 	}
 
+	protected Map getPublishToLiveParameters(ActionRequest req) {
+		Map parameterMap = new HashMap(req.getParameterMap());
+
+		parameterMap.put(
+			PortletDataHandlerKeys.THEME, Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+			Boolean.TRUE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
+			Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA_ALL, Boolean.FALSE.toString());
+		parameterMap.put(
+			PortletDataHandlerKeys.DATA_STRATEGY,
+			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_ID_STRATEGY,
+			UserIdStrategy.CURRENT_USER_ID);
+
+		return parameterMap;
+	}
+
 	protected Map getStagingParameters() {
 		Map parameterMap = new HashMap();
 
@@ -544,10 +567,8 @@ public class EditPagesAction extends PortletAction {
 
 	protected void publishLayouts(
 			Map layoutIdMap, long stagingGroupId, long liveGroupId,
-			boolean privateLayout)
+			boolean privateLayout, Map parameterMap)
 		throws Exception {
-
-		Map parameterMap = getStagingParameters();
 
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
@@ -633,10 +654,12 @@ public class EditPagesAction extends PortletAction {
 
 		String scope = ParamUtil.getString(req, "scope");
 
+		Map parameterMap = getPublishToLiveParameters(req);
+
 		if (scope.equals("all-pages")) {
 			copyLayouts(
 				stagingGroup.getGroupId(), stagingGroup.getLiveGroupId(),
-				privateLayout);
+				privateLayout, parameterMap);
 		}
 		else if (scope.equals("selected-pages")) {
 			Map layoutIdMap = new LinkedHashMap();
@@ -654,7 +677,7 @@ public class EditPagesAction extends PortletAction {
 
 			publishLayouts(
 				layoutIdMap, stagingGroup.getGroupId(),
-				stagingGroup.getLiveGroupId(), privateLayout);
+				stagingGroup.getLiveGroupId(), privateLayout, parameterMap);
 		}
 	}
 
@@ -965,13 +988,19 @@ public class EditPagesAction extends PortletAction {
 				null, liveGroup.isActive());
 
 			if (liveGroup.hasPrivateLayouts()) {
+				Map parameterMap = getStagingParameters();
+
 				copyLayouts(
-					liveGroup.getGroupId(), stagingGroup.getGroupId(), true);
+					liveGroup.getGroupId(), stagingGroup.getGroupId(), true,
+					parameterMap);
 			}
 
 			if (liveGroup.hasPublicLayouts()) {
+				Map parameterMap = getStagingParameters();
+
 				copyLayouts(
-					liveGroup.getGroupId(), stagingGroup.getGroupId(), false);
+					liveGroup.getGroupId(), stagingGroup.getGroupId(), false,
+					parameterMap);
 			}
 		}
 	}

@@ -102,7 +102,14 @@ Liferay.LayoutExporter = {
 			}
 		);
 
-		AjaxUtil.update(url, exportLayoutsPopup);
+		jQuery.ajax(
+			{
+				url: url,
+				success: function(response) {
+					jQuery(exportLayoutsPopup).html(response);
+				}
+			}
+		);
 	},
 
 	selected: function(options) {

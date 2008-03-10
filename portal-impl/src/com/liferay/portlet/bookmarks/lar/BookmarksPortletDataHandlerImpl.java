@@ -249,6 +249,10 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return false;
+	}
+
 	protected void importEntry(
 			PortletDataContext context, Map<Long, Long> folderPKs,
 			BookmarksEntry entry)

@@ -101,6 +101,10 @@ public class PageCommentsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return false;
+	}
+
 	private static final String _NAMESPACE = "page_comments";
 
 	private static final PortletDataHandlerBoolean _comments =

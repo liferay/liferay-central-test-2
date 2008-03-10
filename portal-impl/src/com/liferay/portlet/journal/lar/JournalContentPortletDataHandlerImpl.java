@@ -311,6 +311,10 @@ public class JournalContentPortletDataHandlerImpl
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return true;
+	}
+
 	private static final String _NAMESPACE = "journal_content";
 
 	private static final PortletDataHandlerBoolean _selectedArticles =

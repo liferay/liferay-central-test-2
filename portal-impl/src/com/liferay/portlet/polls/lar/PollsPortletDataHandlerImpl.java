@@ -299,6 +299,10 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return false;
+	}
+
 	protected void importChoice(
 			PortletDataContext context, Map questionPKs, Map choicePKs,
 			PollsChoice choice)

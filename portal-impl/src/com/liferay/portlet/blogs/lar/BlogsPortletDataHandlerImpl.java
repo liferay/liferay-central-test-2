@@ -195,6 +195,10 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return false;
+	}
+
 	protected void importEntry(PortletDataContext context, BlogsEntry entry)
 		throws Exception {
 

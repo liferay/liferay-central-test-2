@@ -176,6 +176,10 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return false;
+	}
+
 	protected void importEvent(PortletDataContext context, CalEvent event)
 		throws Exception {
 

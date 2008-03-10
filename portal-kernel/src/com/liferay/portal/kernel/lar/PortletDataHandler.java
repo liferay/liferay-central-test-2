@@ -36,7 +36,7 @@ import javax.portlet.PortletPreferences;
  * section of the <b>liferay-portlet.xml</b> file.
  * </p>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Joel Kozikowski
  * @author Bruno Farache
  *
@@ -118,5 +118,16 @@ public interface PortletDataHandler {
 			PortletDataContext context, String portletId,
 			PortletPreferences prefs, String data)
 		throws PortletDataException;
+
+	/**
+	 * Returns whether the data exported by this handler should be included
+	 * by default when publishing to live. This should only be true for data
+	 * that is meant to be managed in an staging environment such as CMS
+	 * contents, but not for data meant to be input by users such as wiki pages
+	 * or message board entries.
+	 *
+	 * @return		true to publish to live by default, false otherwise
+	 */
+	public boolean isPublishToLiveByDefault();
 
 }

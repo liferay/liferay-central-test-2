@@ -216,7 +216,7 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		return new PortletDataHandlerControl[] {
-			_nodesAndPages, _comments, _tags
+			_nodesAndPages, _attachments, _comments, _tags
 		};
 	}
 
@@ -278,6 +278,10 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public boolean isPublishToLiveByDefault() {
+		return false;
 	}
 
 	protected void importNode(

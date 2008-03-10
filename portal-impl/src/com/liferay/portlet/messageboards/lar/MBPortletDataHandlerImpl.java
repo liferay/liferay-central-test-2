@@ -397,6 +397,10 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return false;
+	}
+
 	protected void importBan(PortletDataContext context, MBBan ban)
 		throws Exception {
 

@@ -96,7 +96,7 @@ import org.dom4j.Element;
  * portlet in the layout set.
  * </p>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
@@ -337,6 +337,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		catch (Exception e) {
 			throw new PortletDataException(e);
 		}
+	}
+
+	public boolean isPublishToLiveByDefault() {
+		return true;
 	}
 
 	protected static void exportArticle(
