@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.util.DateUtil_IW;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.GetterUtil_IW;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil_IW;
 import com.liferay.portal.kernel.util.Randomizer_IW;
 import com.liferay.portal.kernel.util.StaticFieldGetter;
@@ -152,6 +153,10 @@ public class VelocityVariables {
 		// List tool
 
 		vc.put("listTool", new ListTool());
+
+		// Locale util
+
+		vc.put("localeUtil", LocaleUtil.getInstance());
 
 		// Math tool
 
