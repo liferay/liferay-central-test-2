@@ -922,7 +922,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		UserIdStrategy strategy = getUserIdStrategy(userIdStrategy, user);
+		UserIdStrategy strategy = getUserIdStrategy(user, userIdStrategy);
 
 		ZipReader zipReader = new ZipReader(is);
 
@@ -1227,7 +1227,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		UserIdStrategy strategy = getUserIdStrategy(userIdStrategy, user);
+		UserIdStrategy strategy = getUserIdStrategy(user, userIdStrategy);
 
 		ZipReader zipReader = new ZipReader(is);
 
@@ -2713,7 +2713,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected UserIdStrategy getUserIdStrategy(
-			String userIdStrategy, User user) {
+		User user, String userIdStrategy) {
 
 		if (UserIdStrategy.ALWAYS_CURRENT_USER_ID.equals(userIdStrategy)) {
 			return new AlwaysCurrentUserIdStrategy(user);
