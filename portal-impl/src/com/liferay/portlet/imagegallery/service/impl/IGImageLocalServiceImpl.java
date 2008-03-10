@@ -129,7 +129,6 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			}
 
 			String nameWithExtension = name + StringPool.PERIOD + extension;
-
 			byte[] bytes = FileUtil.getBytes(file);
 
 			validate(folderId, nameWithExtension, file, bytes);
