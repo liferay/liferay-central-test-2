@@ -28,6 +28,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.service.WikiNodeServiceUtil;
@@ -82,7 +83,9 @@ public class EditNodeAction extends PortletAction {
 
 				setForward(req, "portlet.wiki.error");
 			}
-			else if (e instanceof NodeNameException) {
+			else if (e instanceof NodeNameException ||
+					 e instanceof DuplicateNodeNameException) {
+
 				SessionErrors.add(req, e.getClass().getName());
 			}
 			else {

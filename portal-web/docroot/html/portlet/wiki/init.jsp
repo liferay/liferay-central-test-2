@@ -31,6 +31,7 @@
 <%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.wiki.DuplicateNodeNameException" %>
 <%@ page import="com.liferay.portlet.wiki.DuplicatePageException" %>
 <%@ page import="com.liferay.portlet.wiki.NodeNameException" %>
 <%@ page import="com.liferay.portlet.wiki.NoSuchNodeException" %>

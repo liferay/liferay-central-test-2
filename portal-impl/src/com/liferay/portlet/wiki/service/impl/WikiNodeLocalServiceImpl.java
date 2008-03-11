@@ -33,7 +33,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
-import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NodeNameException;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
@@ -413,7 +412,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		WikiNode node = wikiNodePersistence.findByPrimaryKey(nodeId);
 
-		validate(node.getGroupId(), name);
+		validate(nodeId, node.getGroupId(), name);
 
 		node.setModifiedDate(new Date());
 		node.setName(name);
@@ -427,16 +426,20 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	protected void validate(long groupId, String name)
 		throws PortalException, SystemException {
 
+		validate(0, groupId, name);
+	}
+	
+	protected void validate(long nodeId, long groupId, String name)
+		throws PortalException, SystemException {
+
 		if (!Validator.isName(name)) {
 			throw new NodeNameException();
 		}
 
-		try {
-			wikiNodePersistence.findByG_N(groupId, name);
+		WikiNode node = wikiNodePersistence.fetchByG_N(groupId, name);
 
+		if ((node != null) && (node.getNodeId() != nodeId)) {
 			throw new DuplicateNodeNameException();
-		}
-		catch (NoSuchNodeException nsne) {
 		}
 	}
 

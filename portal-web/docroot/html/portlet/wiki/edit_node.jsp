@@ -50,6 +50,7 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 />
 
 <liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
+<liferay-ui:error exception="<%= DuplicateNodeNameException.class %>" message="please-enter-a-unique-node-name" />
 
 <table class="lfr-table">
 <tr>
