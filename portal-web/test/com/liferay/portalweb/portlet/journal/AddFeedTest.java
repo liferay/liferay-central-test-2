@@ -22,23 +22,30 @@
 
 package com.liferay.portalweb.portlet.journal;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="JournalTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddFeedTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalTests extends BaseTests {
-
-	public JournalTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddStructuresTest.class);
-		addTestSuite(AddFeedTest.class);
-		addTestSuite(SearchTest.class);
+public class AddFeedTest extends BaseTestCase {
+	public void testAddFeed() throws Exception {
+		selenium.click("link=Feeds");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Add Feed']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_15_newFeedId", "selenium-test-feed");
+		selenium.type("_15_name", "Test Feed");
+		selenium.type("_15_description", "This is a Test Feed");
+		selenium.type("_15_targetPortletId", "Test-Portal-ID");
+		selenium.type("_15_targetLayoutFriendlyUrl", "Test-URL");
+		selenium.select("_15_type", "label=Test");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		verifyTrue(selenium.isTextPresent("SELENIUM-TEST-FEED"));
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
