@@ -901,8 +901,7 @@ public class RoleLocalServiceUtil {
 	}
 
 	public static java.util.List getRoles(long companyId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 
 		return roleLocalService.getRoles(companyId);

@@ -248,9 +248,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return roleFinder.findByC_N(companyId, name);
 	}
 
-	public List getRoles(long companyId)
-		throws PortalException, SystemException {
-
+	public List getRoles(long companyId) throws SystemException {
 		return rolePersistence.findByCompanyId(companyId);
 	}
 
