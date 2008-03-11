@@ -95,7 +95,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 	temperatureArray[1] = new Option("1", "Celcius");
 	temperatureArray[2] = new Option("2", "Fahrenheit");
 	temperatureArray[3] = new Option("3", "Rankine");
-	temperatureArray[4] = new Option("4", "R?aumure");
+	temperatureArray[4] = new Option("4", "Réaumure");
 </script>
 
 <form action="<liferay-portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>"><portlet:param name="struts_action" value="/unit_converter/view" /></liferay-portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="AjaxUtil.submit(this, {update: this.parentNode}); return false;">
@@ -165,7 +165,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 				<option <%= (fromId == 1) ? "selected" : "" %> value="1">Celcius</option>
 				<option <%= (fromId == 2) ? "selected" : "" %> value="2">Fahrenheit</option>
 				<option <%= (fromId == 3) ? "selected" : "" %> value="3">Rankine</option>
-				<option <%= (fromId == 4) ? "selected" : "" %> value="4">R?aumure</option>
+				<option <%= (fromId == 4) ? "selected" : "" %> value="4">Réaumure</option>
 			</c:if>
 		</select>
 	</td>
@@ -234,7 +234,7 @@ Conversion conversion = ConverterUtil.getConversion(type, fromId, toId, fromValu
 				<option <%= (toId == 1) ? "selected" : "" %> value="1">Celcius</option>
 				<option <%= (toId == 2) ? "selected" : "" %> value="2">Fahrenheit</option>
 				<option <%= (toId == 3) ? "selected" : "" %> value="3">Rankine</option>
-				<option <%= (toId == 4) ? "selected" : "" %> value="4">R?aumure</option>
+				<option <%= (toId == 4) ? "selected" : "" %> value="4">Réaumure</option>
 			</c:if>
 		</select>
 	</td>
