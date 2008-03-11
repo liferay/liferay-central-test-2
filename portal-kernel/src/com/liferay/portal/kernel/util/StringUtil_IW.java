@@ -113,6 +113,22 @@ public class StringUtil_IW {
 		return StringUtil.merge(array, delimiter);
 	}
 
+	public java.lang.String merge(double[] array) {
+		return StringUtil.merge(array);
+	}
+
+	public java.lang.String merge(double[] array, java.lang.String delimiter) {
+		return StringUtil.merge(array, delimiter);
+	}
+
+	public java.lang.String merge(float[] array) {
+		return StringUtil.merge(array);
+	}
+
+	public java.lang.String merge(float[] array, java.lang.String delimiter) {
+		return StringUtil.merge(array, delimiter);
+	}
+
 	public java.lang.String merge(int[] array) {
 		return StringUtil.merge(array);
 	}
