@@ -342,10 +342,6 @@ public class SourceFormatter {
 				System.out.println("}: " + files[i]);
 			}
 
-			/*if (FileUtil.isAscii(file)) {
-				System.out.println("ASCII: " + files[i]);
-			}*/
-
 			if ((newContent != null) && !content.equals(newContent)) {
 				FileUtil.write(file, newContent);
 

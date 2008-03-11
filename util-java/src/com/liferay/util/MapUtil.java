@@ -34,7 +34,7 @@ import java.util.Map;
  * <a href="MapUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class MapUtil {

@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="ViewCounterTransformerListener.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class ViewCounterTransformerListener extends TransformerListener {

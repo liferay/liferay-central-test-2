@@ -25,7 +25,7 @@ package com.liferay.portlet.tasks;
 /**
  * <a href="TasksActivityKeys.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class TasksActivityKeys {

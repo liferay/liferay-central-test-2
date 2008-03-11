@@ -48,7 +48,7 @@ import javax.servlet.http.HttpServletResponse;
  * <a href="CompressionFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class CompressionFilter extends BaseFilter {

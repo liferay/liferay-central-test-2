@@ -43,7 +43,7 @@ import org.apache.struts.action.ActionMapping;
  * <a href="GetLatestArticleContentAction.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Brian Wing Shun Chan
  *
  */

@@ -34,7 +34,7 @@ import com.liferay.portlet.journal.service.permission.JournalFeedPermission;
 /**
  * <a href="JournalFeedServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class JournalFeedServiceImpl extends JournalFeedServiceBaseImpl {

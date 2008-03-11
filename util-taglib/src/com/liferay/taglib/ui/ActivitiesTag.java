@@ -29,7 +29,7 @@ import javax.servlet.ServletRequest;
 /**
  * <a href="ActivitiesTag.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class ActivitiesTag extends IncludeTag {

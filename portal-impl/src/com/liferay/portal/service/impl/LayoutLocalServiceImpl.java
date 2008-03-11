@@ -131,7 +131,7 @@ import org.dom4j.io.SAXReader;
  * @author Brian Wing Shun Chan
  * @author Joel Kozikowski
  * @author Charles May
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Jorge Ferrer
  * @author Bruno Farache
  *

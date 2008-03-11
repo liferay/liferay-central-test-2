@@ -94,7 +94,7 @@ public class ConverterUtil {
 			return 1.8 * fromValue;				// Rankine
 		}
 		else if (toId == 4) {
-			return .8 * (fromValue - 273.15);	// Réaumure
+			return .8 * (fromValue - 273.15);	// Rï¿½aumure
 		}
 		else {
 			return 0;
@@ -115,7 +115,7 @@ public class ConverterUtil {
 			return .5555555555 * fromValue;
 		}
 		else if (fromId == 4) {
-			return (1.25 * fromValue) + 273.15;	// Réaumure
+			return (1.25 * fromValue) + 273.15;	// Rï¿½aumure
 		}
 		else {
 			return 0;

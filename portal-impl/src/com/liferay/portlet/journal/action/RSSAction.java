@@ -85,7 +85,7 @@ import org.dom4j.XPath;
 /**
  * <a href="RSSAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  *
  */
 public class RSSAction extends PortletAction {

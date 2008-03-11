@@ -42,7 +42,7 @@ import org.json.JSONObject;
 /**
  * <a href="TasksReviewLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Brian Wing Shun Chan
  *
  */
