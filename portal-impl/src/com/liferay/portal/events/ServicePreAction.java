@@ -63,6 +63,7 @@ import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
@@ -337,6 +338,14 @@ public class ServicePreAction extends Action {
 		LayoutLocalServiceUtil.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
+
+		if (Validator.isNotNull(_DEFAULT_USER_THEME_ID)) {
+			LayoutSet layoutSet = layout.getLayoutSet();
+
+			layoutSet.setThemeId(_DEFAULT_USER_THEME_ID);
+
+			LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
+		}
 	}
 
 	protected Object[] getViewableLayouts(
@@ -1283,6 +1292,9 @@ public class ServicePreAction extends Action {
 
 	protected File privateLARFile;
 	protected File publicLARFile;
+
+	private static final String _DEFAULT_USER_THEME_ID =
+		PropsValues.DEFAULT_USER_THEME_ID;
 
 	private static final String _PATH_PORTAL_LAYOUT = "/portal/layout";
 

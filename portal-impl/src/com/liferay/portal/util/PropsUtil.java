@@ -456,7 +456,7 @@ public class PropsUtil {
 	public static final String AUTH_FORWARD_BY_REDIRECT = "auth.forward.by.redirect";
 
 	public static final String AUTH_FORWARD_LAST_PATHS = "auth.forward.last.paths";
-	
+
 	public static final String AUTH_LOGIN_URL = "auth.login.url";
 
 	public static final String AUTH_LOGIN_PORTLET_NAME = "auth.login.portlet.name";
@@ -566,6 +566,8 @@ public class PropsUtil {
 	public static final String DEFAULT_USER_PRIVATE_LAYOUT_LAR = "default.user.private.layout.lar";
 
 	public static final String DEFAULT_USER_PUBLIC_LAYOUT_LAR = "default.user.public.layout.lar";
+
+	public static final String DEFAULT_USER_THEME_ID = "default.user.theme.id";
 
 	// Default Admin
 
