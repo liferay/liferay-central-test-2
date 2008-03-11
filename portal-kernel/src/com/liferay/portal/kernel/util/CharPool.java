@@ -58,6 +58,8 @@ public class CharPool {
 
 	public static final char LESS_THAN = '<';
 
+	public static final char LOWER_CASE_E = 'e';
+
 	public static final char MINUS = '-';
 
 	public static final char NEW_LINE = '\n';
@@ -95,5 +97,7 @@ public class CharPool {
 	public static final char TILDE = '~';
 
 	public static final char UNDERLINE = '_';
+
+	public static final char UPPER_CASE_E = 'E';
 
 }

@@ -333,7 +333,8 @@ public class GetterUtil {
 	public static String get(String value, String defaultValue) {
 		if (value != null) {
 			value = value.trim();
-			value = StringUtil.replace(value, "\r\n", "\n");
+			value = StringUtil.replace(
+				value, StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE);
 
 			return value;
 		}
@@ -351,10 +352,10 @@ public class GetterUtil {
 
 			for (int i = 0; i < charArray.length; i++) {
 				if ((Character.isDigit(charArray[i])) ||
-					(charArray[i] == '-' && i == 0) ||
-					(charArray[i] == '.') ||
-					(charArray[i] == 'E') ||
-					(charArray[i] == 'e')) {
+					((charArray[i] == CharPool.DASH) && (i == 0)) ||
+					(charArray[i] == CharPool.PERIOD) ||
+					(charArray[i] == CharPool.UPPER_CASE_E) ||
+					(charArray[i] == CharPool.LOWER_CASE_E)) {
 
 					sm.append(charArray[i]);
 				}
