@@ -86,6 +86,7 @@
 	<classpathentry kind="lib" path="lib/portal/ccpp.jar"/>
 	<classpathentry kind="lib" path="lib/portal/ccpp-ri.jar"/>
 	<classpathentry kind="lib" path="lib/portal/cglib.jar"/>
+	<classpathentry kind="lib" path="lib/portal/chardet.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-beanutils.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-codec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/commons-collections.jar"/>

@@ -82,6 +82,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/chardet.jar</file-name>
+		<version>1.0</version>
+		<project-name>Mozilla Charset Detectors</project-name>
+		<project-url>http://jchardet.sourceforge.net</project-url>
+		<licenses>
+			<license>
+				<license-name>MPL 1.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/derby.jar</file-name>
 		<version>10.2.2.0</version>
 		<project-name>Derby</project-name>

@@ -164,6 +164,9 @@ ECJ was automatically installed. Please rerun your task.
 	</target>
 
 	<target name="test">
+		<delete dir="test-classes" />
+		<delete dir="test-results" />
+
 		<mkdir dir="test-classes" />
 		<mkdir dir="test-results" />
 

@@ -188,7 +188,7 @@ public class ViewAction extends PortletAction {
 		String s = sm.substring(0, sm.length() - 1) + "\n";
 
 		try {
-			FileUtil.append(fileName, s);
+			FileUtil.write(fileName, s, false, true);
 
 			return true;
 		}

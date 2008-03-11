@@ -36,9 +36,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.FileReader;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.OutputStreamWriter;
 import java.io.Reader;
 
 import java.nio.channels.FileChannel;
@@ -51,6 +51,9 @@ import java.util.Properties;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.mozilla.intl.chardet.nsDetector;
+import org.mozilla.intl.chardet.nsPSMDetector;
+
 /**
  * <a href="FileUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -62,28 +65,6 @@ public class FileUtil {
 
 	public static final String ENCODING = GetterUtil.getString(
 		SystemProperties.get("file.encoding"), "UTF-8");
-
-	public static void append(String fileName, String s) throws IOException {
-		append(new File(fileName), s);
-	}
-
-	public static void append(String pathName, String fileName, String s)
-		throws IOException {
-
-		append(new File(pathName, fileName), s);
-	}
-
-	public static void append(File file, String s) throws IOException {
-		if (file.getParent() != null) {
-			mkdirs(file.getParent());
-		}
-
-		BufferedWriter bw = new BufferedWriter(new FileWriter(file, true));
-
-		bw.write(s);
-
-		bw.close();
-	}
 
 	public static void copyDirectory(
 		String sourceDirName, String destinationDirName) {
@@ -350,6 +331,33 @@ public class FileUtil {
 		return shortFileName;
 	}
 
+	public static boolean isAscii(File file) throws IOException {
+		boolean ascii = true;
+
+		nsDetector detector = new nsDetector(nsPSMDetector.ALL);
+
+		BufferedInputStream bis = new BufferedInputStream(
+			new FileInputStream(file));
+
+		byte[] buffer = new byte[1024];
+
+		int len = 0;
+
+		while ((len = bis.read(buffer, 0, buffer.length)) != -1) {
+			if (ascii) {
+				ascii = detector.isAscii(buffer, len);
+
+				if (!ascii) {
+					break;
+				}
+			}
+		}
+
+		detector.DataEnd();
+
+		return ascii;
+	}
+
 	public static String[] listDirs(String fileName) throws IOException {
 		return listDirs(new File(fileName));
 	}
@@ -420,11 +428,7 @@ public class FileUtil {
 		return read(file, false);
 	}
 
-	public static String read(File file, boolean raw) throws IOException {
-		return read(file, ENCODING, raw);
-	}
-
-	public static String read(File file, String encoding, boolean raw)
+	public static String read(File file, boolean raw)
 		throws IOException {
 
 		FileInputStream fis = new FileInputStream(file);
@@ -435,7 +439,7 @@ public class FileUtil {
 
 		fis.close();
 
-		String s = new String(bytes, encoding);
+		String s = new String(bytes, ENCODING);
 
 		if (raw) {
 			return s;
@@ -550,6 +554,13 @@ public class FileUtil {
 		write(new File(fileName), s, lazy);
 	}
 
+	public static void write(
+			String fileName, String s, boolean lazy, boolean append)
+		throws IOException {
+
+		write(new File(fileName), s, lazy, append);
+	}
+
 	public static void write(String pathName, String fileName, String s)
 		throws IOException {
 
@@ -561,6 +572,14 @@ public class FileUtil {
 		throws IOException {
 
 		write(new File(pathName, fileName), s, lazy);
+	}
+
+	public static void write(
+			String pathName, String fileName, String s, boolean lazy,
+			boolean append)
+		throws IOException {
+
+		write(new File(pathName, fileName), s, lazy, append);
 	}
 
 	public static void write(File file, String s) throws IOException {
@@ -588,7 +607,8 @@ public class FileUtil {
 			}
 		}
 
-		BufferedWriter bw = new BufferedWriter(new FileWriter(file, append));
+		BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(
+			new FileOutputStream(file, append), ENCODING));
 
 		bw.write(s);
 

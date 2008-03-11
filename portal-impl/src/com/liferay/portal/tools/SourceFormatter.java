@@ -295,7 +295,7 @@ public class SourceFormatter {
 			newContent = stripImports(newContent, packagePath, className);
 
 			newContent = StringUtil.replace(
-				newContent, "@author Raymond Aug?", "@author Raymond Augé");
+				newContent, "@author Raymond Aug?", "@author Raymond AugÃ©");
 
 			if (newContent.indexOf(";\n/**") != -1) {
 				newContent = StringUtil.replace(
@@ -341,6 +341,10 @@ public class SourceFormatter {
 
 				System.out.println("}: " + files[i]);
 			}
+
+			/*if (FileUtil.isAscii(file)) {
+				System.out.println("ASCII: " + files[i]);
+			}*/
 
 			if ((newContent != null) && !content.equals(newContent)) {
 				FileUtil.write(file, newContent);

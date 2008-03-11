@@ -158,8 +158,7 @@ public class SeleneseToJavaBuilder {
 
 		sm.append("public void " + testMethodName + "() throws Exception {");
 
-		String xml = FileUtil.read(
-			new File(basedir + "/" + file), StringPool.UTF8, false);
+		String xml = FileUtil.read(basedir + "/" + file);
 
 		if ((xml.indexOf("<title>" + testName + "</title>") == -1) ||
 			(xml.indexOf("colspan=\"3\">" + testName + "</td>") == -1)) {
