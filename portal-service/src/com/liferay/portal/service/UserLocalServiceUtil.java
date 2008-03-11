@@ -1045,12 +1045,12 @@ public class UserLocalServiceUtil {
 	}
 
 	public static boolean authenticateForJAAS(long userId,
-		java.lang.String encPwd)
+		java.lang.String encPassword)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.authenticateForJAAS(userId, encPwd);
+		return userLocalService.authenticateForJAAS(userId, encPassword);
 	}
 
 	public static void checkLockout(com.liferay.portal.model.User user)

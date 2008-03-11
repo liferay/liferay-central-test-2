@@ -457,7 +457,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String encPassword = PwdEncryptor.encrypt(password);
 
 			if (userPassword.equals(password) ||
-					userPassword.equals(encPassword)) {
+				userPassword.equals(encPassword)) {
 
 				return user.getUserId();
 			}
@@ -468,7 +468,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return 0;
 	}
 
-	public boolean authenticateForJAAS(long userId, String encPwd)
+	public boolean authenticateForJAAS(long userId, String encPassword)
 		throws PortalException, SystemException {
 
 		try {
@@ -484,28 +484,28 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String password = user.getPassword();
 
 			if (user.isPasswordEncrypted()) {
-				if (password.equals(encPwd)) {
+				if (password.equals(encPassword)) {
 					return true;
 				}
 
 				if (!PropsValues.PORTAL_JAAS_STRICT_PASSWORD) {
-					encPwd = PwdEncryptor.encrypt(encPwd, password);
+					encPassword = PwdEncryptor.encrypt(encPassword, password);
 
-					if (password.equals(encPwd)) {
+					if (password.equals(encPassword)) {
 						return true;
 					}
 				}
 			}
 			else {
 				if (!PropsValues.PORTAL_JAAS_STRICT_PASSWORD) {
-					if (password.equals(encPwd)) {
+					if (password.equals(encPassword)) {
 						return true;
 					}
 				}
 
 				password = PwdEncryptor.encrypt(password);
 
-				if (password.equals(encPwd)) {
+				if (password.equals(encPassword)) {
 					return true;
 				}
 			}
@@ -700,9 +700,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			throw new SystemException(ee);
 		}
 
-		String encPwd = PwdEncryptor.encrypt(password);
+		String encPassword = PwdEncryptor.encrypt(password);
 
-		if (user.getPassword().equals(encPwd)) {
+		if (user.getPassword().equals(encPassword)) {
 			if (isPasswordExpired(user)) {
 				user.setPasswordReset(true);
 
@@ -1875,10 +1875,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (authResult == Authenticator.SUCCESS) {
 			if (PropsValues.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK) {
-				String encPwd = PwdEncryptor.encrypt(
+				String encPassword = PwdEncryptor.encrypt(
 					password, user.getPassword());
 
-				if (user.getPassword().equals(encPwd)) {
+				if (user.getPassword().equals(encPassword)) {
 					authResult = Authenticator.SUCCESS;
 				}
 				else if (GetterUtil.getBoolean(PropsUtil.get(
@@ -1893,10 +1893,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 						String shardKey =
 							PropsUtil.get(PropsUtil.AUTH_MAC_SHARED_KEY);
 
-						encPwd = Base64.encode(
+						encPassword = Base64.encode(
 							digester.digest(shardKey.getBytes("UTF8")));
 
-						if (password.equals(encPwd)) {
+						if (password.equals(encPassword)) {
 							authResult = Authenticator.SUCCESS;
 						}
 						else {

@@ -116,7 +116,7 @@ public class AutoLoginFilter extends BaseFilter {
 		if ((credentials != null) && (credentials.length == 3)) {
 			String jUsername = credentials[0];
 			String jPassword = credentials[1];
-			boolean encPwd = GetterUtil.getBoolean(credentials[2]);
+			boolean encPassword = GetterUtil.getBoolean(credentials[2]);
 
 			if (Validator.isNotNull(jUsername) &&
 				Validator.isNotNull(jPassword)) {
@@ -145,7 +145,7 @@ public class AutoLoginFilter extends BaseFilter {
 				// will not allow you to connect to external
 				// resources that require it (mail server)
 
-				if (encPwd) {
+				if (encPassword) {
 					ses.setAttribute("j_password", jPassword);
 				}
 				else {

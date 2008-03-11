@@ -112,7 +112,7 @@ public class PasswordTrackerLocalServiceImpl
 		return true;
 	}
 
-	public void trackPassword(long userId, String encPwd)
+	public void trackPassword(long userId, String encPassword)
 		throws PortalException, SystemException {
 
 		long passwordTrackerId = counterLocalService.increment();
@@ -122,7 +122,7 @@ public class PasswordTrackerLocalServiceImpl
 
 		passwordTracker.setUserId(userId);
 		passwordTracker.setCreateDate(new Date());
-		passwordTracker.setPassword(encPwd);
+		passwordTracker.setPassword(encPassword);
 
 		passwordTrackerPersistence.update(passwordTracker);
 	}

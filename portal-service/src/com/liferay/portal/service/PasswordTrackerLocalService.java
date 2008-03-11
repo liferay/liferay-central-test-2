@@ -363,7 +363,7 @@ public interface PasswordTrackerLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public void trackPassword(long userId, java.lang.String encPwd)
+	public void trackPassword(long userId, java.lang.String encPassword)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

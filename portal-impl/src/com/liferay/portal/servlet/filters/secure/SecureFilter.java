@@ -208,13 +208,13 @@ public class SecureFilter extends BaseFilter {
 	protected long getBasicAuthUserId(HttpServletRequest req) throws Exception {
 		long userId = 0;
 
-		String authHeader = req.getHeader(HttpHeaders.AUTHORIZATION);
+		String authorizationHeader = req.getHeader(HttpHeaders.AUTHORIZATION);
 
-		if (Validator.isNull(authHeader)) {
+		if (Validator.isNull(authorizationHeader)) {
 			return userId;
 		}
 
-		String[] authorizationArray = authHeader.split("\\s+");
+		String[] authorizationArray = authorizationHeader.split("\\s+");
 
 		String authorization = authorizationArray[0];
 		String credentials = new String(Base64.decode(authorizationArray[1]));
@@ -226,6 +226,7 @@ public class SecureFilter extends BaseFilter {
 		long companyId = PortalInstances.getCompanyId(req);
 
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
+
 		String authType = company.getAuthType();
 
 		String[] loginAndPassword = StringUtil.split(
@@ -235,16 +236,18 @@ public class SecureFilter extends BaseFilter {
 		String password = loginAndPassword[1].trim();
 
 		if (login.endsWith("@uid")) {
-			int index = login.indexOf("@uid");
-			login = login.substring(0, index);
-
 			authType = CompanyImpl.AUTH_TYPE_ID;
+
+			int pos = login.indexOf("@uid");
+
+			login = login.substring(0, pos);
 		}
 		else if (login.endsWith("@sn")) {
-			int index = login.indexOf("@sn");
-			login = login.substring(0, index);
-
 			authType = CompanyImpl.AUTH_TYPE_SN;
+
+			int pos = login.indexOf("@sn");
+
+			login = login.substring(0, pos);
 		}
 
 		userId = UserLocalServiceUtil.authenticateForBasic(

@@ -452,7 +452,7 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public boolean authenticateForJAAS(long userId, java.lang.String encPwd)
+	public boolean authenticateForJAAS(long userId, java.lang.String encPassword)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

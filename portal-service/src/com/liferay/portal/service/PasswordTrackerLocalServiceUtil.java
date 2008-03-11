@@ -849,11 +849,11 @@ public class PasswordTrackerLocalServiceUtil {
 			newClearTextPwd);
 	}
 
-	public static void trackPassword(long userId, java.lang.String encPwd)
+	public static void trackPassword(long userId, java.lang.String encPassword)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PasswordTrackerLocalService passwordTrackerLocalService = PasswordTrackerLocalServiceFactory.getService();
 
-		passwordTrackerLocalService.trackPassword(userId, encPwd);
+		passwordTrackerLocalService.trackPassword(userId, encPassword);
 	}
 }
