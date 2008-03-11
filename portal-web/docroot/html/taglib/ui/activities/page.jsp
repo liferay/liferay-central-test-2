@@ -36,11 +36,13 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 %>
 
 <liferay-ui:toggle-area
-	id="toggle_id_journal_edit_article_extra"
+	id='<%= "toggle_id_taglib_ui_activities_" + className + "_" + classPK %>'
 	showMessage='<%= LanguageUtil.get(pageContext, "show-activities") + " &raquo;" %>'
 	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-activities") %>'
-	align="right"
+	defaultShowContent="<%= false %>"
 >
+	<br />
+
 	<table class="taglib-search-iterator">
 	<tr class="portlet-section-header">
 		<th class="col-1" width="80%">

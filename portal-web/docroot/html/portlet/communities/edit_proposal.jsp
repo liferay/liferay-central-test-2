@@ -55,17 +55,6 @@ try {
 catch (NoSuchReviewException nsre) {
 }
 
-boolean hasUpdateProposal = false;
-
-if (GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) ||
-	GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) ||
-	GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) ||
-	TasksProposalPermission.contains(permissionChecker, proposalId, ActionKeys.UPDATE)) {
-
-	hasUpdateProposal = true;
-}
-
-
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setWindowState(WindowState.MAXIMIZED);
@@ -147,18 +136,7 @@ for (int i = 2; i <= workflowStages; i++) {
 		<liferay-ui:message key="user" />
 	</td>
 	<td>
-		<%
-		User user2 = null;
-		String userName = proposal.getUserName();
-
-		try {
-			user2 = UserLocalServiceUtil.getUserById(proposal.getUserId());
-			userName = user2.getFullName();
-		}
-		catch (NoSuchUserException nsue) {
-		}
-		%>
-		<%= userName %>
+		<%= PortalUtil.getUserName(proposal.getUserId(), proposal.getUserName()) %>
  	</td>
 </tr>
 <tr>
@@ -195,14 +173,7 @@ for (int i = 2; i <= workflowStages; i++) {
 		<liferay-ui:message key="description" />
 	</td>
 	<td>
-		<c:choose>
-			<c:when test="<%= hasUpdateProposal %>">
-				<liferay-ui:input-field model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="description" />
-			</c:when>
-			<c:otherwise>
-				<%= proposal.getDescription() %>
-			</c:otherwise>
-		</c:choose>
+		<liferay-ui:input-field model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="description" />
 	</td>
 </tr>
 <tr>
@@ -215,14 +186,7 @@ for (int i = 2; i <= workflowStages; i++) {
 		<liferay-ui:message key="due-date" />
 	</td>
 	<td>
-		<c:choose>
-			<c:when test="<%= hasUpdateProposal %>">
-				<liferay-ui:input-field formName="fm1" model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="dueDate" defaultValue="<%= dueDate %>" />
-			</c:when>
-			<c:otherwise>
-				<%= dateFormatDateTime.format(dueDate.getTime()) %>
-			</c:otherwise>
-		</c:choose>
+		<liferay-ui:input-field formName="fm1" model="<%= TasksProposal.class %>" bean="<%= proposal %>" field="dueDate" defaultValue="<%= dueDate %>" />
 	</td>
 </tr>
 </table>
@@ -335,7 +299,7 @@ for (int i = 2; i <= workflowStages; i++) {
 
 <br />
 
-<c:if test="<%= hasUpdateProposal %>">
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) || TasksProposalPermission.contains(permissionChecker, proposalId, ActionKeys.UPDATE) %>">
 	<input type="submit" value="<liferay-ui:message key="save" />" />
 </c:if>
 
@@ -370,7 +334,7 @@ String previewURL = PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay
 			</c:otherwise>
 		</c:choose>
 	</c:when>
-	<c:when test="<%= review == null && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
+	<c:when test="<%= (review == null) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
 		<input type="button" value="<liferay-ui:message key="publish" />" onClick="<portlet:namespace />publishProposal();" />
 	</c:when>
 </c:choose>

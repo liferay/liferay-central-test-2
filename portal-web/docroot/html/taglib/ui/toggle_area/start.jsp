@@ -36,4 +36,20 @@
 	/>
 </div>
 
-<div id="<%= id %>" style="display: <liferay-ui:toggle-value id="<%= id %>" />">
+<%
+String clickValue = SessionClicks.get(request, id, null);
+
+if (clickValue == null) {
+	if (defaultShowContent) {
+		clickValue = "block";
+	}
+	else {
+		clickValue = "none";
+	}
+}
+else if (clickValue.equals(StringPool.BLANK)) {
+	clickValue = "block";
+}
+%>
+
+<div id="<%= id %>" style="display: <%= clickValue %>;">

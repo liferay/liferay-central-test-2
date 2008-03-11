@@ -107,11 +107,11 @@ public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
 		long groupId = proposal.getGroupId();
 
 		if (!GroupPermissionUtil.contains(
+				permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) &&
+			!GroupPermissionUtil.contains(
 				permissionChecker, groupId, ActionKeys.MANAGE_STAGING) &&
 			!GroupPermissionUtil.contains(
 				permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) &&
-			!GroupPermissionUtil.contains(
-				permissionChecker, groupId, ActionKeys.ASSIGN_REVIEWER) &&
 			!TasksProposalPermission.contains(
 				permissionChecker, proposalId, ActionKeys.UPDATE)) {
 

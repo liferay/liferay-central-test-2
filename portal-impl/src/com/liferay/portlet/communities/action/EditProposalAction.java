@@ -182,8 +182,7 @@ public class EditProposalAction extends EditPagesAction {
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-		Group liveGroup =
-			group.hasStagingGroup() ? group : group.getLiveGroup();
+		Group liveGroup = group;
 		Group stagingGroup = liveGroup.getStagingGroup();
 
 		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
