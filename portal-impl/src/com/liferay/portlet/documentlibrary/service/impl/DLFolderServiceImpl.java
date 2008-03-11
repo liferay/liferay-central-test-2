@@ -198,7 +198,7 @@ public class DLFolderServiceImpl extends DLFolderServiceBaseImpl {
 			srcFolder.getFolderId());
 
 		for (DLFileEntry srcFileEntry : srcFileEntries) {
-			String name = srcFileEntry.getTitleWithExtension();
+			String name = srcFileEntry.getName();
 			String title = srcFileEntry.getTitleWithExtension();
 			String description = srcFileEntry.getDescription();
 			String[] tagsEntries = null;
