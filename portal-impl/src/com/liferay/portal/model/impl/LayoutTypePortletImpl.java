@@ -43,6 +43,7 @@ import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.ListUtil;
 import com.liferay.util.PwdGenerator;
 
@@ -125,17 +126,8 @@ public class LayoutTypePortletImpl
 		String layoutTemplateId =
 			getTypeSettingsProperties().getProperty(LAYOUT_TEMPLATE_ID);
 
-		if (Validator.isNull(layoutTemplateId)) {
-			layoutTemplateId = "2_columns_ii";
-
-			getTypeSettingsProperties().setProperty(
-				LAYOUT_TEMPLATE_ID, layoutTemplateId);
-
-			_log.warn(
-				"Layout template id for layout " + getLayout().getPrimaryKey() +
-					" is null, setting it to 2_columns_ii");
-		}
-
+		if( layoutTemplateId == null ) layoutTemplateId = StringPool.BLANK;
+		
 		return layoutTemplateId;
 	}
 
@@ -155,12 +147,12 @@ public class LayoutTypePortletImpl
 
 		String oldLayoutTemplateId = getLayoutTemplateId();
 
+		if (Validator.isNull(oldLayoutTemplateId)) {
+			oldLayoutTemplateId = PropsValues.DEFAULT_USER_LAYOUT_TEMPLATE_ID;
+		}
+
 		getTypeSettingsProperties().setProperty(
 			LAYOUT_TEMPLATE_ID, newLayoutTemplateId);
-
-		if (Validator.isNull(oldLayoutTemplateId)) {
-			return;
-		}
 
 		String themeId = null;
 
