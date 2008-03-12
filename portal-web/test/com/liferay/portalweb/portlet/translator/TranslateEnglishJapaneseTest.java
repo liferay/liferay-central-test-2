@@ -37,7 +37,22 @@ public class TranslateEnglishJapaneseTest extends BaseTestCase {
 			"My name is JR Skywalker, fluent in over 6 million forms of communication.");
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"\u79c1\u306e\u540d\u524d\u306f\u30b3\u30df\u30e5\u30cb\u30b1\u30fc\u30b7\u30e7\u30f3\u306e6,000,000 \u306e\u5f62\u614b\u306b\u6d41\u66a2\u306aJR Skywalker \u3067\u3042\u308b\u3002"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"\u79c1\u306e\u540d\u524d\u306f\u30b3\u30df\u30e5\u30cb\u30b1\u30fc\u30b7\u30e7\u30f3\u306e6,000,000 \u306e\u5f62\u614b\u306b\u6d41\u66a2\u306aJR Skywalker \u3067\u3042\u308b\u3002")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

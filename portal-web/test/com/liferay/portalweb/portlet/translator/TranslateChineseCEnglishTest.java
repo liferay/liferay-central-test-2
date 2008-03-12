@@ -37,7 +37,22 @@ public class TranslateChineseCEnglishTest extends BaseTestCase {
 			"\u6211\u7684\u540d\u5b57\u662fMike Vader \u8bd1\u8005, \u6d41\u5229\u5b8c\u5168\u6210\u529f6 \u901a\u4fe1\u7684\u767e\u4e07\u4e2a\u5f62\u5f0f\u3002");
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"My name is Mike the Vader translator, fluent completely successful 6 correspondences million forms."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"My name is Mike the Vader translator, fluent completely successful 6 correspondences million forms.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

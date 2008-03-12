@@ -37,7 +37,22 @@ public class TranslateFrenchEnglishTest extends BaseTestCase {
 			"Mon nom est traducteur de Liferay, fluent dans plus de 6 millions de formes de communication.");
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"My name is a translator of Liferay, flowing in more than 6 million forms of communication."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"My name is a translator of Liferay, flowing in more than 6 million forms of communication.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

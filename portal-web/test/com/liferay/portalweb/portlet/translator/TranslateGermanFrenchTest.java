@@ -35,7 +35,22 @@ public class TranslateGermanFrenchTest extends BaseTestCase {
 		selenium.select("_26_id", "label=German to French");
 		selenium.click("//input[@value='Translate']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"Mon nom est un traducteur coulant des Liferay, sous plus de 6 millions de formes de communication."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Mon nom est un traducteur coulant des Liferay, sous plus de 6 millions de formes de communication.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
