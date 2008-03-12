@@ -57,7 +57,7 @@ public class BrowseServerTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Actions")) {
+				if (selenium.isElementPresent("//input[@value='Execute']")) {
 					break;
 				}
 			}
