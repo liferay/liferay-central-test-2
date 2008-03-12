@@ -70,9 +70,25 @@ public class VerifyFunctionalityTest extends BaseTestCase {
 
 		selenium.click("link=PHP Info");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("PHP Variables"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("PHP Variables")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(
-			"//a[@href='http://localhost:8080/user/joebloggs/3?p_p_id=SamplePHP_WAR_samplephpportlet&p_p_lifecycle=0&p_p_state=normal&p_p_mode=view&p_p_col_id=column-1&p_p_col_count=1&_SamplePHP_WAR_samplephpportlet_phpURI=index.php%3Ffoo%3Dbar']");
+			"//div[@id=\"portlet-wrapper-SamplePHP_WAR_samplephpportlet\"]//div[2]/div/div/div[2]/a[1]");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -41,7 +41,7 @@ public class AddPortletTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[@id=\"Collaboration-RecentBloggers\"]")) {
+							"//div[@id=\"CMS-RecentDocuments\"]")) {
 					break;
 				}
 			}
@@ -51,8 +51,8 @@ public class AddPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.mouseDown("//div[@id=\"Collaboration-RecentBloggers\"]/p/a");
-		selenium.mouseUp("//div[@id=\"Collaboration-RecentBloggers\"]/p/a");
+		selenium.mouseDown("//div[@id=\"CMS-RecentDocuments\"]/p/a");
+		selenium.mouseUp("//div[@id=\"CMS-RecentDocuments\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
