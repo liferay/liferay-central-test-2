@@ -139,13 +139,14 @@ public class ActionKeys {
 
 	public static final String MANAGE = "MANAGE";
 
+	public static final String MANAGE_ARCHIVED_SETUPS =
+		"MANAGE_ARCHIVED_SETUPS";
+
 	public static final String MANAGE_COUPONS = "MANAGE_COUPONS";
 
 	public static final String MANAGE_LAYOUTS = "MANAGE_LAYOUTS";
 
 	public static final String MANAGE_ORDERS = "MANAGE_ORDERS";
-
-	public static final String MANAGE_SAVED_SETUPS = "MANAGE_SAVED_SETUPS";
 
 	public static final String MANAGE_STAGING = "MANAGE_STAGING";
 

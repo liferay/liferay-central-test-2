@@ -63,6 +63,9 @@ public class PortletItemModelImpl extends BaseModelImpl {
 			{ "portletItemId", new Integer(Types.BIGINT) },
 			
 
+			{ "groupId", new Integer(Types.BIGINT) },
+			
+
 			{ "companyId", new Integer(Types.BIGINT) },
 			
 
@@ -78,18 +81,15 @@ public class PortletItemModelImpl extends BaseModelImpl {
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
 			
 
-			{ "groupId", new Integer(Types.BIGINT) },
+			{ "name", new Integer(Types.VARCHAR) },
 			
 
 			{ "portletId", new Integer(Types.VARCHAR) },
 			
 
-			{ "classNameId", new Integer(Types.BIGINT) },
-			
-
-			{ "name", new Integer(Types.VARCHAR) }
+			{ "classNameId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table PortletItem (portletItemId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,groupId LONG,portletId VARCHAR(75) null,classNameId LONG,name VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table PortletItem (portletItemId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,name VARCHAR(75) null,portletId VARCHAR(75) null,classNameId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table PortletItem";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PortletItem"),
@@ -119,6 +119,16 @@ public class PortletItemModelImpl extends BaseModelImpl {
 	public void setPortletItemId(long portletItemId) {
 		if (portletItemId != _portletItemId) {
 			_portletItemId = portletItemId;
+		}
+	}
+
+	public long getGroupId() {
+		return _groupId;
+	}
+
+	public void setGroupId(long groupId) {
+		if (groupId != _groupId) {
+			_groupId = groupId;
 		}
 	}
 
@@ -181,13 +191,15 @@ public class PortletItemModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getGroupId() {
-		return _groupId;
+	public String getName() {
+		return GetterUtil.getString(_name);
 	}
 
-	public void setGroupId(long groupId) {
-		if (groupId != _groupId) {
-			_groupId = groupId;
+	public void setName(String name) {
+		if (((name == null) && (_name != null)) ||
+				((name != null) && (_name == null)) ||
+				((name != null) && (_name != null) && !name.equals(_name))) {
+			_name = name;
 		}
 	}
 
@@ -214,18 +226,6 @@ public class PortletItemModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getName() {
-		return GetterUtil.getString(_name);
-	}
-
-	public void setName(String name) {
-		if (((name == null) && (_name != null)) ||
-				((name != null) && (_name == null)) ||
-				((name != null) && (_name != null) && !name.equals(_name))) {
-			_name = name;
-		}
-	}
-
 	public PortletItem toEscapedModel() {
 		if (isEscapedModel()) {
 			return (PortletItem)this;
@@ -236,15 +236,15 @@ public class PortletItemModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setPortletItemId(getPortletItemId());
+			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setUserName(Html.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setGroupId(getGroupId());
+			model.setName(Html.escape(getName()));
 			model.setPortletId(Html.escape(getPortletId()));
 			model.setClassNameId(getClassNameId());
-			model.setName(Html.escape(getName()));
 
 			model = (PortletItem)Proxy.newProxyInstance(PortletItem.class.getClassLoader(),
 					new Class[] { PortletItem.class },
@@ -258,15 +258,15 @@ public class PortletItemModelImpl extends BaseModelImpl {
 		PortletItemImpl clone = new PortletItemImpl();
 
 		clone.setPortletItemId(getPortletItemId());
+		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setModifiedDate(getModifiedDate());
-		clone.setGroupId(getGroupId());
+		clone.setName(getName());
 		clone.setPortletId(getPortletId());
 		clone.setClassNameId(getClassNameId());
-		clone.setName(getName());
 
 		return clone;
 	}
@@ -320,13 +320,13 @@ public class PortletItemModelImpl extends BaseModelImpl {
 	}
 
 	private long _portletItemId;
+	private long _groupId;
 	private long _companyId;
 	private long _userId;
 	private String _userName;
 	private Date _createDate;
 	private Date _modifiedDate;
-	private long _groupId;
+	private String _name;
 	private String _portletId;
 	private long _classNameId;
-	private String _name;
 }

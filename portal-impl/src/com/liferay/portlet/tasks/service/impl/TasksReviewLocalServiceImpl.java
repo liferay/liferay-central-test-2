@@ -46,7 +46,8 @@ import org.json.JSONObject;
  * @author Brian Wing Shun Chan
  *
  */
-public class TasksReviewLocalServiceImpl extends TasksReviewLocalServiceBaseImpl {
+public class TasksReviewLocalServiceImpl
+	extends TasksReviewLocalServiceBaseImpl {
 
 	public TasksReview addReview(
 			long userId, long proposalId, long assignedByUserId, int stage)

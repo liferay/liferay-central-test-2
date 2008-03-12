@@ -79,8 +79,8 @@
 			<action-key>ASSIGN_MEMBERS</action-key>
 			<action-key>ASSIGN_REVIEWER</action-key>
 			<action-key>DELETE</action-key>
+			<action-key>MANAGE_ARCHIVED_SETUPS</action-key>
 			<action-key>MANAGE_LAYOUTS</action-key>
-			<action-key>MANAGE_SAVED_SETUPS</action-key>
 			<action-key>MANAGE_STAGING</action-key>
 			<action-key>PERMISSIONS</action-key>
 			<action-key>PUBLISH_STAGING</action-key>

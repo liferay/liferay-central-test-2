@@ -26,7 +26,6 @@ import com.liferay.portal.NoSuchPortletItemException;
 import com.liferay.portal.PortletItemNameException;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -48,12 +47,12 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditSavedSetupsAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditArchivedSetupsAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
  *
  */
-public class EditSavedSetupsAction extends EditConfigurationAction {
+public class EditArchivedSetupsAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
@@ -75,17 +74,17 @@ public class EditSavedSetupsAction extends EditConfigurationAction {
 
 		try {
 			if (cmd.equals(Constants.SAVE)) {
-				save(req, portlet);
+				updateSetup(req, portlet);
 
 				sendRedirect(req, res);
 			}
 			else if (cmd.equals(Constants.RESTORE)) {
-				restore(req, portlet);
+				restoreSetup(req, portlet);
 
 				sendRedirect(req, res);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
-				delete(req);
+				deleteSetup(req);
 
 				sendRedirect(req, res);
 			}
@@ -97,10 +96,9 @@ public class EditSavedSetupsAction extends EditConfigurationAction {
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(
-					req, "portlet.portlet_configuration.edit_saved_setups");
+					req, "portlet.portlet_configuration.edit_archived_setups");
 			}
 			else if (e instanceof PrincipalException) {
-
 				SessionErrors.add(req, e.getClass().getName());
 
 				setForward(req, "portlet.portlet_configuration.error");
@@ -130,19 +128,16 @@ public class EditSavedSetupsAction extends EditConfigurationAction {
 		res.setTitle(getTitle(portlet, req));
 
 		return mapping.findForward(getForward(
-			req, "portlet.portlet_configuration.edit_saved_setups"));
+			req, "portlet.portlet_configuration.edit_archived_setups"));
 	}
 
-	private void delete(ActionRequest req)
-		throws Exception {
-
+	private void deleteSetup(ActionRequest req) throws Exception {
 		long portletItemId = ParamUtil.getLong(req, "portletItemId");
 
-		PortletPreferencesServiceUtil.deleteSavedPreferences(portletItemId);
+		PortletPreferencesServiceUtil.deleteArchivedPreferences(portletItemId);
 	}
 
-	private void restore(
-		ActionRequest req, Portlet portlet)
+	private void restoreSetup(ActionRequest req, Portlet portlet)
 		throws Exception {
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
@@ -153,11 +148,11 @@ public class EditSavedSetupsAction extends EditConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portlet.getPortletId());
 
-		PortletPreferencesServiceUtil.restoreSavedPreferences(
-			layout.getGroupId(), portlet.getRootPortletId(), name, setup);
+		PortletPreferencesServiceUtil.restoreArchivedPreferences(
+			layout.getGroupId(), name, portlet.getPortletId(), setup);
 	}
 
-	protected void save(ActionRequest req, Portlet portlet)
+	protected void updateSetup(ActionRequest req, Portlet portlet)
 		throws Exception {
 
 		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
@@ -165,17 +160,13 @@ public class EditSavedSetupsAction extends EditConfigurationAction {
 
 		String name = ParamUtil.getString(req, "name");
 
-		if (Validator.isNull(name)) {
-			throw new PortletItemNameException();
-		}
-
 		PortletPreferences setup =
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				req, portlet.getPortletId());
 
-		PortletPreferencesServiceUtil.savePreferences(
+		PortletPreferencesServiceUtil.updateArchivePreferences(
 			themeDisplay.getUserId(), themeDisplay.getLayout().getGroupId(),
-		    portlet.getRootPortletId(), name, setup);
+			name, portlet.getPortletId(), setup);
 	}
 
 }

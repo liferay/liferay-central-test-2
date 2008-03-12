@@ -52,7 +52,9 @@ public class QueryUtil {
 		return list(query, dialect, begin, end).iterator();
 	}
 
-	public static List<?> list(Query query, Dialect dialect, int begin, int end) {
+	public static List<?> list(
+		Query query, Dialect dialect, int begin, int end) {
+
 		if ((begin == ALL_POS) && (end == ALL_POS)) {
 			return query.list();
 		}

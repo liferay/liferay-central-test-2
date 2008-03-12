@@ -80,10 +80,10 @@ import java.rmi.RemoteException;
  *
  */
 public class PortletPreferencesServiceSoap {
-	public static void deleteSavedPreferences(long portletPreferencesId)
+	public static void deleteArchivedPreferences(long portletItemId)
 		throws RemoteException {
 		try {
-			PortletPreferencesServiceUtil.deleteSavedPreferences(portletPreferencesId);
+			PortletPreferencesServiceUtil.deleteArchivedPreferences(portletItemId);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

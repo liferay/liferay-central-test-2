@@ -1280,9 +1280,14 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<entity name="PortletItem" local-service="true" remote-service="false">
+
 		<!-- PK fields -->
 
 		<column name="portletItemId" type="long" primary="true" />
+
+		<!-- Group instance -->
+
+		<column name="groupId" type="long" />
 
 		<!-- Audit fields -->
 
@@ -1294,10 +1299,9 @@
 
 		<!-- Other fields -->
 
-		<column name="groupId" type="long" />
+		<column name="name" type="String" />
 		<column name="portletId" type="String" />
 		<column name="classNameId" type="long" />
-		<column name="name" type="String" />
 
 		<!-- Finder methods -->
 
@@ -1306,12 +1310,11 @@
 			<finder-column name="portletId" />
 			<finder-column name="classNameId" />
 		</finder>
-
-		<finder name="G_P_C_N" return-type="PortletItem">
+		<finder name="G_N_P_C" return-type="PortletItem">
 			<finder-column name="groupId" />
+			<finder-column name="name" case-sensitive="false" />
 			<finder-column name="portletId" />
 			<finder-column name="classNameId" />
-			<finder-column name="name" />
 		</finder>
 
 		<!-- References -->

@@ -69,15 +69,15 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 
 		PortletItem newPortletItem = _persistence.create(pk);
 
+		newPortletItem.setGroupId(nextLong());
 		newPortletItem.setCompanyId(nextLong());
 		newPortletItem.setUserId(nextLong());
 		newPortletItem.setUserName(randomString());
 		newPortletItem.setCreateDate(nextDate());
 		newPortletItem.setModifiedDate(nextDate());
-		newPortletItem.setGroupId(nextLong());
+		newPortletItem.setName(randomString());
 		newPortletItem.setPortletId(randomString());
 		newPortletItem.setClassNameId(nextLong());
-		newPortletItem.setName(randomString());
 
 		_persistence.update(newPortletItem);
 
@@ -85,6 +85,8 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingPortletItem.getPortletItemId(),
 			newPortletItem.getPortletItemId());
+		assertEquals(existingPortletItem.getGroupId(),
+			newPortletItem.getGroupId());
 		assertEquals(existingPortletItem.getCompanyId(),
 			newPortletItem.getCompanyId());
 		assertEquals(existingPortletItem.getUserId(), newPortletItem.getUserId());
@@ -94,13 +96,11 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 			newPortletItem.getCreateDate());
 		assertEquals(existingPortletItem.getModifiedDate(),
 			newPortletItem.getModifiedDate());
-		assertEquals(existingPortletItem.getGroupId(),
-			newPortletItem.getGroupId());
+		assertEquals(existingPortletItem.getName(), newPortletItem.getName());
 		assertEquals(existingPortletItem.getPortletId(),
 			newPortletItem.getPortletId());
 		assertEquals(existingPortletItem.getClassNameId(),
 			newPortletItem.getClassNameId());
-		assertEquals(existingPortletItem.getName(), newPortletItem.getName());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -144,15 +144,15 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 
 		PortletItem portletItem = _persistence.create(pk);
 
+		portletItem.setGroupId(nextLong());
 		portletItem.setCompanyId(nextLong());
 		portletItem.setUserId(nextLong());
 		portletItem.setUserName(randomString());
 		portletItem.setCreateDate(nextDate());
 		portletItem.setModifiedDate(nextDate());
-		portletItem.setGroupId(nextLong());
+		portletItem.setName(randomString());
 		portletItem.setPortletId(randomString());
 		portletItem.setClassNameId(nextLong());
-		portletItem.setName(randomString());
 
 		_persistence.update(portletItem);
 

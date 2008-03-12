@@ -51,33 +51,33 @@ package com.liferay.portal.service;
  *
  */
 public class PortletPreferencesServiceUtil {
-	public static void deleteSavedPreferences(long portletPreferencesId)
+	public static void deleteArchivedPreferences(long portletItemId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PortletPreferencesService portletPreferencesService = PortletPreferencesServiceFactory.getService();
 
-		portletPreferencesService.deleteSavedPreferences(portletPreferencesId);
+		portletPreferencesService.deleteArchivedPreferences(portletItemId);
 	}
 
-	public static void restoreSavedPreferences(long groupId,
-		java.lang.String portletId, java.lang.String name,
-		javax.portlet.PortletPreferences setup)
+	public static void restoreArchivedPreferences(long groupId,
+		java.lang.String name, java.lang.String portletId,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PortletPreferencesService portletPreferencesService = PortletPreferencesServiceFactory.getService();
 
-		portletPreferencesService.restoreSavedPreferences(groupId, portletId,
-			name, setup);
+		portletPreferencesService.restoreArchivedPreferences(groupId, name,
+			portletId, prefs);
 	}
 
-	public static void savePreferences(long userId, long groupId,
-		java.lang.String portletId, java.lang.String name,
-		javax.portlet.PortletPreferences setup)
+	public static void updateArchivePreferences(long userId, long groupId,
+		java.lang.String name, java.lang.String portletId,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		PortletPreferencesService portletPreferencesService = PortletPreferencesServiceFactory.getService();
 
-		portletPreferencesService.savePreferences(userId, groupId, portletId,
-			name, setup);
+		portletPreferencesService.updateArchivePreferences(userId, groupId,
+			name, portletId, prefs);
 	}
 }

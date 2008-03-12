@@ -90,13 +90,13 @@ public interface PortletItemPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletItemException;
 
-	public com.liferay.portal.model.PortletItem findByG_P_C_N(long groupId,
-		java.lang.String portletId, long classNameId, java.lang.String name)
+	public com.liferay.portal.model.PortletItem findByG_N_P_C(long groupId,
+		java.lang.String name, java.lang.String portletId, long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletItemException;
 
-	public com.liferay.portal.model.PortletItem fetchByG_P_C_N(long groupId,
-		java.lang.String portletId, long classNameId, java.lang.String name)
+	public com.liferay.portal.model.PortletItem fetchByG_N_P_C(long groupId,
+		java.lang.String name, java.lang.String portletId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> findWithDynamicQuery(
@@ -120,8 +120,8 @@ public interface PortletItemPersistence {
 	public void removeByG_P_C(long groupId, java.lang.String portletId,
 		long classNameId) throws com.liferay.portal.SystemException;
 
-	public void removeByG_P_C_N(long groupId, java.lang.String portletId,
-		long classNameId, java.lang.String name)
+	public void removeByG_N_P_C(long groupId, java.lang.String name,
+		java.lang.String portletId, long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletItemException;
 
@@ -130,8 +130,8 @@ public interface PortletItemPersistence {
 	public int countByG_P_C(long groupId, java.lang.String portletId,
 		long classNameId) throws com.liferay.portal.SystemException;
 
-	public int countByG_P_C_N(long groupId, java.lang.String portletId,
-		long classNameId, java.lang.String name)
+	public int countByG_N_P_C(long groupId, java.lang.String name,
+		java.lang.String portletId, long classNameId)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

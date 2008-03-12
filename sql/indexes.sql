@@ -248,6 +248,7 @@ create index IX_1BBFD4D3 on PollsVote (questionId, userId);
 create index IX_80CC9508 on Portlet (companyId);
 create index IX_12B5E51D on Portlet (companyId, portletId);
 
+create index IX_D699243F on PortletItem (groupId, name, portletId, classNameId);
 create index IX_2C61314E on PortletItem (groupId, portletId);
 create index IX_E922D6C0 on PortletItem (groupId, portletId, classNameId);
 create index IX_8E71167F on PortletItem (groupId, portletId, classNameId, name);

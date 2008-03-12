@@ -36,9 +36,9 @@ String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 	<liferay-util:param name="tabs1" value="setup" />
 </liferay-util:include>
 
-<liferay-util:include page="/html/portlet/portlet_configuration/tabs2.jsp">
-	<liferay-util:param name="tabs2" value="current" />
-</liferay-util:include>
+<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, layout.getGroupId(), ActionKeys.MANAGE_ARCHIVED_SETUPS) %>">
+	<liferay-util:include page="/html/portlet/portlet_configuration/tabs2.jsp" />
+</c:if>
 
 <c:if test="<%= (selPortlet != null) && Validator.isNotNull(path) %>">
 

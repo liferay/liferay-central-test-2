@@ -1202,7 +1202,8 @@ public class JournalArticleLocalServiceImpl
 		return article.getVersion();
 	}
 
-	public List<JournalArticle> getStructureArticles(long groupId, String structureId)
+	public List<JournalArticle> getStructureArticles(
+			long groupId, String structureId)
 		throws SystemException {
 
 		return journalArticlePersistence.findByG_S(groupId, structureId);
@@ -1223,7 +1224,8 @@ public class JournalArticleLocalServiceImpl
 		return journalArticlePersistence.countByG_S(groupId, structureId);
 	}
 
-	public List<JournalArticle> getTemplateArticles(long groupId, String templateId)
+	public List<JournalArticle> getTemplateArticles(
+			long groupId, String templateId)
 		throws SystemException {
 
 		return journalArticlePersistence.findByG_T(groupId, templateId);

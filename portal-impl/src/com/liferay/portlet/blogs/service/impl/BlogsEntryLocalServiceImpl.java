@@ -359,7 +359,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		return blogsEntryFinder.findByNoAssets();
 	}
 
-	public List<BlogsEntry> getOrganizationEntries(long organizationId, int begin, int end)
+	public List<BlogsEntry> getOrganizationEntries(
+			long organizationId, int begin, int end)
 		throws SystemException {
 
 		return blogsEntryFinder.findByOrganizationId(

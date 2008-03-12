@@ -113,7 +113,7 @@ public class SeleneseToJavaBuilder {
 		}
 
 		return StringUtil.replace(
-			sm.toString(), _FIX_PARAM_OLDSUB, _FIX_PARAM_NEWSUB);
+			sm.toString(), _FIX_PARAM_OLD_SUBS, _FIX_PARAM_NEW_SUBS);
 	}
 
 	protected String[] getParams(String step) throws Exception {
@@ -328,7 +328,12 @@ public class SeleneseToJavaBuilder {
 		ServiceBuilder.writeFile(new File(testFileName), content);
 	}
 
-	private static final String [] _FIX_PARAM_OLDSUB = new String[] {"\\\\n", "<br />"};
-	private static final String [] _FIX_PARAM_NEWSUB = new String[] {"\\n", "\\n"};
+	private static final String[] _FIX_PARAM_OLD_SUBS = new String[] {
+		"\\\\n", "<br />"
+	};
+
+	private static final String[] _FIX_PARAM_NEW_SUBS = new String[] {
+		"\\n", "\\n"
+	};
 
 }

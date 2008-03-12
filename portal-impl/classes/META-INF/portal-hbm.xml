@@ -465,15 +465,15 @@
 		<id name="portletItemId" type="long">
 			<generator class="assigned" />
 		</id>
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="modifiedDate" />
-		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="portletId" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portal.model.impl.SubscriptionImpl" table="Subscription">
 		<cache usage="read-write" />

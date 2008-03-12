@@ -45,25 +45,21 @@ configurationURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 configurationURL.setParameter("portletResource", portletResource);
 configurationURL.setParameter("previewWidth", previewWidth);
 
-// Saved setups
+// Archived setups
 
-PortletURL savedSetupsURL = renderResponse.createRenderURL();
+PortletURL archivedSetupsURL = renderResponse.createRenderURL();
 
-savedSetupsURL.setWindowState(WindowState.MAXIMIZED);
+archivedSetupsURL.setWindowState(WindowState.MAXIMIZED);
 
-savedSetupsURL.setParameter("struts_action", "/portlet_configuration/edit_saved_setups");
-savedSetupsURL.setParameter("redirect", redirect);
-savedSetupsURL.setParameter("returnToFullPageURL", returnToFullPageURL);
-savedSetupsURL.setParameter("portletResource", portletResource);
-
-int pos = 0;
-
-String tabsNames = "current,saved";
-
-request.setAttribute("liferay-ui:tabs:url" + pos++, configurationURL.toString());
-request.setAttribute("liferay-ui:tabs:url" + pos++, savedSetupsURL.toString());
+archivedSetupsURL.setParameter("struts_action", "/portlet_configuration/edit_archived_setups");
+archivedSetupsURL.setParameter("redirect", redirect);
+archivedSetupsURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+archivedSetupsURL.setParameter("portletResource", portletResource);
 %>
 
-<c:if test="<%= (GroupPermissionUtil.contains(permissionChecker, layout.getGroupId(), ActionKeys.MANAGE_SAVED_SETUPS)) %>">
-	<liferay-ui:tabs names="<%= tabsNames %>" param="tabs2" />
-</c:if>
+<liferay-ui:tabs
+	names="current,archived"
+	param="tabs2"
+	url0="<%= configurationURL.toString() %>"
+	url1="<%= archivedSetupsURL.toString() %>"
+/>

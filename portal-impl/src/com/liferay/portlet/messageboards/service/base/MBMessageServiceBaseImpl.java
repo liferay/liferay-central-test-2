@@ -47,6 +47,8 @@ import com.liferay.portal.service.GroupService;
 import com.liferay.portal.service.GroupServiceFactory;
 import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
+import com.liferay.portal.service.PortletPreferencesService;
+import com.liferay.portal.service.PortletPreferencesServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -461,6 +463,15 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 		this.portletPreferencesLocalService = portletPreferencesLocalService;
 	}
 
+	public PortletPreferencesService getPortletPreferencesService() {
+		return portletPreferencesService;
+	}
+
+	public void setPortletPreferencesService(
+		PortletPreferencesService portletPreferencesService) {
+		this.portletPreferencesService = portletPreferencesService;
+	}
+
 	public PortletPreferencesPersistence getPortletPreferencesPersistence() {
 		return portletPreferencesPersistence;
 	}
@@ -809,6 +820,10 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
 		}
 
+		if (portletPreferencesService == null) {
+			portletPreferencesService = PortletPreferencesServiceFactory.getImpl();
+		}
+
 		if (portletPreferencesPersistence == null) {
 			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
 		}
@@ -942,6 +957,7 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 	protected GroupPersistence groupPersistence;
 	protected GroupFinder groupFinder;
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	protected PortletPreferencesService portletPreferencesService;
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
 	protected PortletPreferencesFinder portletPreferencesFinder;
 	protected ResourceLocalService resourceLocalService;

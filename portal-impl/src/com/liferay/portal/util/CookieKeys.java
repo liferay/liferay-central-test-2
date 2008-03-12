@@ -78,7 +78,8 @@ public class CookieKeys {
 				String encodedValue = originalValue;
 
 				if (isEncodedCookie(name)) {
-					encodedValue = new String(Hex.encodeHex(originalValue.getBytes()));
+					encodedValue = new String(
+						Hex.encodeHex(originalValue.getBytes()));
 
 					if (_log.isDebugEnabled()) {
 						_log.debug("Add encoded cookie " + name);

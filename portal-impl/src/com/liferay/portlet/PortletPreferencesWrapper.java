@@ -111,7 +111,8 @@ public class PortletPreferencesWrapper
 	}
 
 	public boolean equals(Object obj) {
-		PortletPreferencesWrapper portletPreferences = (PortletPreferencesWrapper)obj;
+		PortletPreferencesWrapper portletPreferences =
+			(PortletPreferencesWrapper)obj;
 
 		if (this == portletPreferences) {
 			return true;

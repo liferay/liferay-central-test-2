@@ -888,21 +888,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessageFinder.findByGroupId(groupId, begin, end);
 	}
 
-	public List getGroupMessages(
+	public List<MBMessage> getGroupMessages(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return mbMessageFinder.findByGroupId(groupId, begin, end, obc);
 	}
 
-	public List getGroupMessages(long groupId, long userId, int begin, int end)
+	public List<MBMessage> getGroupMessages(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		return mbMessageFinder.findByG_U(groupId, userId, begin, end);
 	}
 
-	public List getGroupMessages(
-			long groupId, long userId, int begin, int end, OrderByComparator obc)
+	public List<MBMessage> getGroupMessages(
+			long groupId, long userId, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return mbMessageFinder.findByG_U(groupId, userId, begin, end, obc);
@@ -924,7 +926,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessagePersistence.findByPrimaryKey(messageId);
 	}
 
-	public List getMessages(String className, long classPK)
+	public List<MBMessage> getMessages(String className, long classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -995,18 +997,22 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			previousThread, nextThread, firstThread, lastThread);
 	}
 
-	public List getNoAssetMessages() throws SystemException {
+	public List<MBMessage> getNoAssetMessages() throws SystemException {
 		return mbMessageFinder.findByNoAssets();
 	}
 
-	public List getThreadMessages(long threadId) throws SystemException {
+	public List<MBMessage> getThreadMessages(long threadId)
+		throws SystemException {
+
 		return getThreadMessages(threadId, new MessageThreadComparator());
 	}
 
-	public List getThreadMessages(long threadId, Comparator comparator)
+	public List<MBMessage> getThreadMessages(
+			long threadId, Comparator comparator)
 		throws SystemException {
 
-		List messages = mbMessagePersistence.findByThreadId(threadId);
+		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
+			threadId);
 
 		Collections.sort(messages, comparator);
 

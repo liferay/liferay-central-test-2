@@ -367,8 +367,7 @@ public class ThemeLocalUtil {
 
 			colorSchemeContextReplace.addValue("color-scheme-id", id);
 
-			ColorScheme colorSchemeModel =
-				(ColorScheme)colorSchemes.get(id);
+			ColorScheme colorSchemeModel = colorSchemes.get(id);
 
 			if (colorSchemeModel == null) {
 				colorSchemeModel = new ColorSchemeImpl(id);
@@ -613,7 +612,8 @@ public class ThemeLocalUtil {
 			Element settingsEl = theme.element("settings");
 
 			if (settingsEl != null) {
-				Iterator<Element> itr2 = settingsEl.elements("setting").iterator();
+				Iterator<Element> itr2 = settingsEl.elements(
+					"setting").iterator();
 
 				while (itr2.hasNext()) {
 					Element settingEl = itr2.next();

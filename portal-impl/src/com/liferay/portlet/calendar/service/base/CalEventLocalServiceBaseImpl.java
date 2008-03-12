@@ -39,6 +39,8 @@ import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.CompanyServiceFactory;
 import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
+import com.liferay.portal.service.PortletPreferencesService;
+import com.liferay.portal.service.PortletPreferencesServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -188,6 +190,15 @@ public abstract class CalEventLocalServiceBaseImpl
 		this.portletPreferencesLocalService = portletPreferencesLocalService;
 	}
 
+	public PortletPreferencesService getPortletPreferencesService() {
+		return portletPreferencesService;
+	}
+
+	public void setPortletPreferencesService(
+		PortletPreferencesService portletPreferencesService) {
+		this.portletPreferencesService = portletPreferencesService;
+	}
+
 	public PortletPreferencesPersistence getPortletPreferencesPersistence() {
 		return portletPreferencesPersistence;
 	}
@@ -308,6 +319,10 @@ public abstract class CalEventLocalServiceBaseImpl
 			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
 		}
 
+		if (portletPreferencesService == null) {
+			portletPreferencesService = PortletPreferencesServiceFactory.getImpl();
+		}
+
 		if (portletPreferencesPersistence == null) {
 			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
 		}
@@ -358,6 +373,7 @@ public abstract class CalEventLocalServiceBaseImpl
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	protected PortletPreferencesService portletPreferencesService;
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
 	protected PortletPreferencesFinder portletPreferencesFinder;
 	protected ResourceLocalService resourceLocalService;

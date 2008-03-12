@@ -25,10 +25,8 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletPreferences;
-import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.service.base.PortletPreferencesServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -40,6 +38,9 @@ import java.util.Iterator;
 import javax.portlet.ReadOnlyException;
 import javax.portlet.ValidatorException;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="PortletPreferencesServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
@@ -50,68 +51,72 @@ import javax.portlet.ValidatorException;
 public class PortletPreferencesServiceImpl
 	extends PortletPreferencesServiceBaseImpl {
 
-	public void deleteSavedPreferences(long portletItemId)
+	public void deleteArchivedPreferences(long portletItemId)
 		throws PortalException, SystemException {
+
+		PortletItem portletItem = portletItemLocalService.getPortletItem(
+			portletItemId);
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), portletItem.getGroupId(),
+			ActionKeys.MANAGE_ARCHIVED_SETUPS);
 
 		long ownerId = portletItemId;
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_SAVED;
 		long plid = 0;
-
-		PortletItem portletItem =
-			portletItemLocalService.getPortletItem(portletItemId);
-
-		GroupPermissionUtil.check(
-			getPermissionChecker(), portletItem.getGroupId(),
-			ActionKeys.MANAGE_SAVED_SETUPS);
+		String portletId = portletItem.getPortletId();
 
 		portletPreferencesLocalService.deletePortletPreferences(
-			ownerId, ownerType, plid, portletItem.getPortletId());
+			ownerId, ownerType, plid, portletId);
 
 		portletItemLocalService.deletePortletItem(portletItemId);
 	}
 
-	public void restoreSavedPreferences(
-			long groupId, String portletId, String name,
-			javax.portlet.PortletPreferences setup)
-		throws PortalException, SystemException {
-
-		PortletItem portletItem = portletItemLocalService.getPortletItem(
-			groupId, portletId, PortletPreferences.class.getName(), name);
-
-		long ownerId = portletItem.getPortletItemId();
-		int ownerType = PortletKeys.PREFS_OWNER_TYPE_SAVED;
-		long plid = 0;
-
-		javax.portlet.PortletPreferences savedSetup =
-			PortletPreferencesLocalServiceUtil.getPreferences(
-				portletItem.getCompanyId(), ownerId, ownerType, plid,
-				portletItem.getPortletId(), StringPool.BLANK);
-
-		copyPreferences(savedSetup, setup);
-	}
-
-	public void savePreferences(
-			long userId, long groupId, String portletId, String name,
-			javax.portlet.PortletPreferences setup)
+	public void restoreArchivedPreferences(
+			long groupId, String name, String portletId,
+			javax.portlet.PortletPreferences prefs)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
-			getPermissionChecker(), groupId, ActionKeys.MANAGE_SAVED_SETUPS);
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_ARCHIVED_SETUPS);
 
-		PortletItem portletItem = portletItemLocalService.updatePortletItem(
-			userId, groupId, portletId, PortletPreferences.class.getName(),
-			name);
+		PortletItem portletItem = portletItemLocalService.getPortletItem(
+			groupId, name, portletId, PortletPreferences.class.getName());
 
 		long ownerId = portletItem.getPortletItemId();
 		int ownerType = PortletKeys.PREFS_OWNER_TYPE_SAVED;
 		long plid = 0;
 
-		javax.portlet.PortletPreferences savedSetup =
-			PortletPreferencesLocalServiceUtil.getPreferences(
-			portletItem.getCompanyId(), ownerId, ownerType, plid,
-			portletId, StringPool.BLANK);
+		javax.portlet.PortletPreferences archivedPrefs =
+			portletPreferencesLocalService.getPreferences(
+				portletItem.getCompanyId(), ownerId, ownerType, plid,
+				portletId);
 
-		copyPreferences(setup, savedSetup);
+		copyPreferences(archivedPrefs, prefs);
+	}
+
+	public void updateArchivePreferences(
+			long userId, long groupId, String name, String portletId,
+			javax.portlet.PortletPreferences prefs)
+		throws PortalException, SystemException {
+
+		GroupPermissionUtil.check(
+			getPermissionChecker(), groupId, ActionKeys.MANAGE_ARCHIVED_SETUPS);
+
+		PortletItem portletItem = portletItemLocalService.updatePortletItem(
+			userId, groupId, name, portletId,
+			PortletPreferences.class.getName());
+
+		long ownerId = portletItem.getPortletItemId();
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_SAVED;
+		long plid = 0;
+
+		javax.portlet.PortletPreferences archivedPrefs =
+			portletPreferencesLocalService.getPreferences(
+				portletItem.getCompanyId(), ownerId, ownerType, plid,
+				portletId);
+
+		copyPreferences(prefs, archivedPrefs);
 	}
 
 	protected void copyPreferences(
@@ -120,22 +125,19 @@ public class PortletPreferencesServiceImpl
 		throws SystemException {
 
 		try {
-			// Clear previous setup
-
-			Iterator itr = targetPreferences.getMap().keySet().iterator();
+			Iterator<String> itr =
+				targetPreferences.getMap().keySet().iterator();
 
 			while (itr.hasNext()) {
-				String key = (String) itr.next();
+				String key = itr.next();
 
 				targetPreferences.reset(key);
 			}
 
-			// Copy current setup
-
 			itr = sourcePreferences.getMap().keySet().iterator();
 
 			while (itr.hasNext()) {
-				String key = (String) itr.next();
+				String key = itr.next();
 
 				targetPreferences.setValues(
 					key, sourcePreferences.getValues(key, null));
@@ -143,14 +145,17 @@ public class PortletPreferencesServiceImpl
 
 			targetPreferences.store();
 		}
+		catch (IOException ioe) {
+			_log.error(ioe);
+		}
 		catch (ReadOnlyException roe) {
 		}
 		catch (ValidatorException ve) {
 			throw new SystemException(ve);
 		}
-		catch (IOException e) {
-			e.printStackTrace();
-		}
 	}
+
+	private static Log _log =
+		LogFactory.getLog(PortletPreferencesServiceImpl.class);
 
 }

@@ -105,7 +105,7 @@ public class MethodInvoker {
 		try {
 			MethodKey methodKey = new MethodKey(
 				methodWrapper.getClassName(), methodWrapper.getMethodName(),
-				(Class[])parameterTypes.toArray(new Class[0]));
+				parameterTypes.toArray(new Class[0]));
 
 			method = MethodCache.get(methodKey);
 		}
@@ -120,7 +120,8 @@ public class MethodInvoker {
 			}
 
 			for (int i = 0; i < methods.length; i++) {
-				Class<?>[] methodParameterTypes = methods[i].getParameterTypes();
+				Class<?>[] methodParameterTypes =
+					methods[i].getParameterTypes();
 
 				if (methods[i].getName().equals(methodName) &&
 					methodParameterTypes.length == parameterTypes.size()) {

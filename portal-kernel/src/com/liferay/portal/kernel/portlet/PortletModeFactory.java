@@ -79,7 +79,8 @@ public class PortletModeFactory {
 	private static final String _EDIT_GUEST =
 		LiferayPortletMode.EDIT_GUEST.toString();
 
-	private static final String _PREVIEW = LiferayPortletMode.PREVIEW.toString();
+	private static final String _PREVIEW =
+		LiferayPortletMode.PREVIEW.toString();
 
 	private static final String _PRINT = LiferayPortletMode.PRINT.toString();
 

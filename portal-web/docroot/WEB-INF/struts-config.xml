@@ -1076,8 +1076,8 @@
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 
-		<action path="/portlet_configuration/edit_saved_setups" type="com.liferay.portlet.portletconfiguration.action.EditSavedSetupsAction">
-			<forward name="portlet.portlet_configuration.edit_saved_setups" path="portlet.portlet_configuration.edit_saved_setups" />
+		<action path="/portlet_configuration/edit_archived_setups" type="com.liferay.portlet.portletconfiguration.action.EditArchivedSetupsAction">
+			<forward name="portlet.portlet_configuration.edit_archived_setups" path="portlet.portlet_configuration.edit_archived_setups" />
 			<forward name="portlet.portlet_configuration.error" path="portlet.portlet_configuration.error" />
 		</action>
 

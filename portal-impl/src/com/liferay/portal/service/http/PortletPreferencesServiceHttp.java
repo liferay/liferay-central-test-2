@@ -70,15 +70,15 @@ import com.liferay.portal.service.PortletPreferencesServiceUtil;
  *
  */
 public class PortletPreferencesServiceHttp {
-	public static void deleteSavedPreferences(HttpPrincipal httpPrincipal,
-		long portletPreferencesId)
+	public static void deleteArchivedPreferences(HttpPrincipal httpPrincipal,
+		long portletItemId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(portletPreferencesId);
+			Object paramObj0 = new LongWrapper(portletItemId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(PortletPreferencesServiceUtil.class.getName(),
-					"deleteSavedPreferences", new Object[] { paramObj0 });
+					"deleteArchivedPreferences", new Object[] { paramObj0 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -102,34 +102,34 @@ public class PortletPreferencesServiceHttp {
 		}
 	}
 
-	public static void restoreSavedPreferences(HttpPrincipal httpPrincipal,
-		long groupId, java.lang.String portletId, java.lang.String name,
-		javax.portlet.PortletPreferences setup)
+	public static void restoreArchivedPreferences(HttpPrincipal httpPrincipal,
+		long groupId, java.lang.String name, java.lang.String portletId,
+		javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = portletId;
+			Object paramObj1 = name;
 
-			if (portletId == null) {
+			if (name == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = name;
+			Object paramObj2 = portletId;
 
-			if (name == null) {
+			if (portletId == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = setup;
+			Object paramObj3 = prefs;
 
-			if (setup == null) {
+			if (prefs == null) {
 				paramObj3 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PortletPreferencesServiceUtil.class.getName(),
-					"restoreSavedPreferences",
+					"restoreArchivedPreferences",
 					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
 
 			try {
@@ -154,9 +154,9 @@ public class PortletPreferencesServiceHttp {
 		}
 	}
 
-	public static void savePreferences(HttpPrincipal httpPrincipal,
-		long userId, long groupId, java.lang.String portletId,
-		java.lang.String name, javax.portlet.PortletPreferences setup)
+	public static void updateArchivePreferences(HttpPrincipal httpPrincipal,
+		long userId, long groupId, java.lang.String name,
+		java.lang.String portletId, javax.portlet.PortletPreferences prefs)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -164,26 +164,26 @@ public class PortletPreferencesServiceHttp {
 
 			Object paramObj1 = new LongWrapper(groupId);
 
-			Object paramObj2 = portletId;
+			Object paramObj2 = name;
 
-			if (portletId == null) {
+			if (name == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj3 = name;
+			Object paramObj3 = portletId;
 
-			if (name == null) {
+			if (portletId == null) {
 				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = setup;
+			Object paramObj4 = prefs;
 
-			if (setup == null) {
+			if (prefs == null) {
 				paramObj4 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PortletPreferencesServiceUtil.class.getName(),
-					"savePreferences",
+					"updateArchivePreferences",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
 					});

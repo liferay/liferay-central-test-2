@@ -352,8 +352,8 @@ public interface PortletItemLocalService {
 	public void afterPropertiesSet();
 
 	public com.liferay.portal.model.PortletItem addPortletItem(long userId,
-		long groupId, java.lang.String portletId, java.lang.String className,
-		java.lang.String name)
+		long groupId, java.lang.String name, java.lang.String portletId,
+		java.lang.String className)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -363,8 +363,8 @@ public interface PortletItemLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PortletItem getPortletItem(long groupId,
-		java.lang.String portletId, java.lang.String className,
-		java.lang.String name)
+		java.lang.String name, java.lang.String portletId,
+		java.lang.String className)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -374,8 +374,8 @@ public interface PortletItemLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.PortletItem updatePortletItem(long userId,
-		long groupId, java.lang.String portletId, java.lang.String className,
-		java.lang.String name)
+		long groupId, java.lang.String name, java.lang.String portletId,
+		java.lang.String className)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

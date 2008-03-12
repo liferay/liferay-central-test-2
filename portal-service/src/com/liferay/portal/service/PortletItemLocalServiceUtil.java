@@ -822,14 +822,14 @@ public class PortletItemLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.PortletItem addPortletItem(
-		long userId, long groupId, java.lang.String portletId,
-		java.lang.String className, java.lang.String name)
+		long userId, long groupId, java.lang.String name,
+		java.lang.String portletId, java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
 
-		return portletItemLocalService.addPortletItem(userId, groupId,
-			portletId, className, name);
+		return portletItemLocalService.addPortletItem(userId, groupId, name,
+			portletId, className);
 	}
 
 	public static com.liferay.portal.model.PortletItem getPortletItem(
@@ -842,14 +842,14 @@ public class PortletItemLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.PortletItem getPortletItem(
-		long groupId, java.lang.String portletId, java.lang.String className,
-		java.lang.String name)
+		long groupId, java.lang.String name, java.lang.String portletId,
+		java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
 
-		return portletItemLocalService.getPortletItem(groupId, portletId,
-			className, name);
+		return portletItemLocalService.getPortletItem(groupId, name, portletId,
+			className);
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
@@ -863,13 +863,13 @@ public class PortletItemLocalServiceUtil {
 	}
 
 	public static com.liferay.portal.model.PortletItem updatePortletItem(
-		long userId, long groupId, java.lang.String portletId,
-		java.lang.String className, java.lang.String name)
+		long userId, long groupId, java.lang.String name,
+		java.lang.String portletId, java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
 
-		return portletItemLocalService.updatePortletItem(userId, groupId,
-			portletId, className, name);
+		return portletItemLocalService.updatePortletItem(userId, groupId, name,
+			portletId, className);
 	}
 }

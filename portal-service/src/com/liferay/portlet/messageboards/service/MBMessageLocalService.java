@@ -409,15 +409,18 @@ public interface MBMessageLocalService {
 	public java.util.List getGroupMessages(long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupMessages(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupMessages(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupMessages(long groupId, long userId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getGroupMessages(
+		long groupId, long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getGroupMessagesCount(long groupId)
@@ -431,7 +434,8 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getMessages(java.lang.String className, long classPK)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getMessages(
+		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -445,14 +449,14 @@ public interface MBMessageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getNoAssetMessages()
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getNoAssetMessages()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getThreadMessages(long threadId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
+		long threadId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getThreadMessages(long threadId,
-		java.util.Comparator comparator)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getThreadMessages(
+		long threadId, java.util.Comparator comparator)
 		throws com.liferay.portal.SystemException;
 
 	public int getThreadMessagesCount(long threadId)

@@ -377,7 +377,8 @@ public class InvokerPortlet
 
 			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 
-			Map<String, InvokerPortletResponse> sesResponses = getResponses(ses);
+			Map<String, InvokerPortletResponse> sesResponses =
+				getResponses(ses);
 
 			String sesResponseId = encodeResponseKey(
 				layout.getPlid(), _portletId, LanguageUtil.getLanguageId(req));

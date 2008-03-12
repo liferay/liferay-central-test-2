@@ -550,11 +550,11 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public PortletItem findByG_P_C_N(long groupId, String portletId,
-		long classNameId, String name)
+	public PortletItem findByG_N_P_C(long groupId, String name,
+		String portletId, long classNameId)
 		throws NoSuchPortletItemException, SystemException {
-		PortletItem portletItem = fetchByG_P_C_N(groupId, portletId,
-				classNameId, name);
+		PortletItem portletItem = fetchByG_N_P_C(groupId, name, portletId,
+				classNameId);
 
 		if (portletItem == null) {
 			StringMaker msg = new StringMaker();
@@ -564,13 +564,13 @@ public class PortletItemPersistenceImpl extends BasePersistence
 			msg.append("groupId=" + groupId);
 
 			msg.append(", ");
+			msg.append("name=" + name);
+
+			msg.append(", ");
 			msg.append("portletId=" + portletId);
 
 			msg.append(", ");
 			msg.append("classNameId=" + classNameId);
-
-			msg.append(", ");
-			msg.append("name=" + name);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -584,21 +584,21 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		return portletItem;
 	}
 
-	public PortletItem fetchByG_P_C_N(long groupId, String portletId,
-		long classNameId, String name) throws SystemException {
+	public PortletItem fetchByG_N_P_C(long groupId, String name,
+		String portletId, long classNameId) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletItemModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletItem.class.getName();
-		String finderMethodName = "fetchByG_P_C_N";
+		String finderMethodName = "fetchByG_N_P_C";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
-				Long.class.getName(), String.class.getName()
+				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				portletId, new Long(classNameId),
+				name,
 				
-				name
+				portletId, new Long(classNameId)
 			};
 
 		Object result = null;
@@ -622,6 +622,15 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("lower(name) = ?");
+				}
+
+				query.append(" AND ");
+
 				if (portletId == null) {
 					query.append("portletId IS NULL");
 				}
@@ -633,15 +642,6 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				query.append("classNameId = ?");
 
-				query.append(" AND ");
-
-				if (name == null) {
-					query.append("name IS NULL");
-				}
-				else {
-					query.append("name = ?");
-				}
-
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
@@ -650,15 +650,15 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
 				if (portletId != null) {
 					q.setString(queryPos++, portletId);
 				}
 
 				q.setLong(queryPos++, classNameId);
-
-				if (name != null) {
-					q.setString(queryPos++, name);
-				}
 
 				List<PortletItem> list = q.list();
 
@@ -812,11 +812,10 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByG_P_C_N(long groupId, String portletId,
-		long classNameId, String name)
-		throws NoSuchPortletItemException, SystemException {
-		PortletItem portletItem = findByG_P_C_N(groupId, portletId,
-				classNameId, name);
+	public void removeByG_N_P_C(long groupId, String name, String portletId,
+		long classNameId) throws NoSuchPortletItemException, SystemException {
+		PortletItem portletItem = findByG_N_P_C(groupId, name, portletId,
+				classNameId);
 
 		remove(portletItem);
 	}
@@ -919,21 +918,21 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByG_P_C_N(long groupId, String portletId, long classNameId,
-		String name) throws SystemException {
+	public int countByG_N_P_C(long groupId, String name, String portletId,
+		long classNameId) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletItemModelImpl.CACHE_ENABLED;
 		String finderClassName = PortletItem.class.getName();
-		String finderMethodName = "countByG_P_C_N";
+		String finderMethodName = "countByG_N_P_C";
 		String[] finderParams = new String[] {
 				Long.class.getName(), String.class.getName(),
-				Long.class.getName(), String.class.getName()
+				String.class.getName(), Long.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(groupId),
 				
-				portletId, new Long(classNameId),
+				name,
 				
-				name
+				portletId, new Long(classNameId)
 			};
 
 		Object result = null;
@@ -958,6 +957,15 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
+				if (name == null) {
+					query.append("name IS NULL");
+				}
+				else {
+					query.append("lower(name) = ?");
+				}
+
+				query.append(" AND ");
+
 				if (portletId == null) {
 					query.append("portletId IS NULL");
 				}
@@ -969,15 +977,6 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				query.append("classNameId = ?");
 
-				query.append(" AND ");
-
-				if (name == null) {
-					query.append("name IS NULL");
-				}
-				else {
-					query.append("name = ?");
-				}
-
 				query.append(" ");
 
 				Query q = session.createQuery(query.toString());
@@ -986,15 +985,15 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, groupId);
 
+				if (name != null) {
+					q.setString(queryPos++, name);
+				}
+
 				if (portletId != null) {
 					q.setString(queryPos++, portletId);
 				}
 
 				q.setLong(queryPos++, classNameId);
-
-				if (name != null) {
-					q.setString(queryPos++, name);
-				}
 
 				Long count = null;
 

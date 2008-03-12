@@ -53,6 +53,10 @@ public interface PortletItemModel extends BaseModel {
 
 	public void setPortletItemId(long portletItemId);
 
+	public long getGroupId();
+
+	public void setGroupId(long groupId);
+
 	public long getCompanyId();
 
 	public void setCompanyId(long companyId);
@@ -73,9 +77,9 @@ public interface PortletItemModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
-	public long getGroupId();
+	public String getName();
 
-	public void setGroupId(long groupId);
+	public void setName(String name);
 
 	public String getPortletId();
 
@@ -84,10 +88,6 @@ public interface PortletItemModel extends BaseModel {
 	public long getClassNameId();
 
 	public void setClassNameId(long classNameId);
-
-	public String getName();
-
-	public void setName(String name);
 
 	public PortletItem toEscapedModel();
 }

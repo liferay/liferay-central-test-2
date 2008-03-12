@@ -126,20 +126,20 @@ public class PortletItemUtil {
 			classNameId, obc);
 	}
 
-	public static com.liferay.portal.model.PortletItem findByG_P_C_N(
-		long groupId, java.lang.String portletId, long classNameId,
-		java.lang.String name)
+	public static com.liferay.portal.model.PortletItem findByG_N_P_C(
+		long groupId, java.lang.String name, java.lang.String portletId,
+		long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletItemException {
 		return getPersistence()
-				   .findByG_P_C_N(groupId, portletId, classNameId, name);
+				   .findByG_N_P_C(groupId, name, portletId, classNameId);
 	}
 
-	public static com.liferay.portal.model.PortletItem fetchByG_P_C_N(
-		long groupId, java.lang.String portletId, long classNameId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static com.liferay.portal.model.PortletItem fetchByG_N_P_C(
+		long groupId, java.lang.String name, java.lang.String portletId,
+		long classNameId) throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .fetchByG_P_C_N(groupId, portletId, classNameId, name);
+				   .fetchByG_N_P_C(groupId, name, portletId, classNameId);
 	}
 
 	public static java.util.List findWithDynamicQuery(
@@ -176,11 +176,11 @@ public class PortletItemUtil {
 		getPersistence().removeByG_P_C(groupId, portletId, classNameId);
 	}
 
-	public static void removeByG_P_C_N(long groupId,
-		java.lang.String portletId, long classNameId, java.lang.String name)
+	public static void removeByG_N_P_C(long groupId, java.lang.String name,
+		java.lang.String portletId, long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPortletItemException {
-		getPersistence().removeByG_P_C_N(groupId, portletId, classNameId, name);
+		getPersistence().removeByG_N_P_C(groupId, name, portletId, classNameId);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -192,11 +192,11 @@ public class PortletItemUtil {
 		return getPersistence().countByG_P_C(groupId, portletId, classNameId);
 	}
 
-	public static int countByG_P_C_N(long groupId, java.lang.String portletId,
-		long classNameId, java.lang.String name)
+	public static int countByG_N_P_C(long groupId, java.lang.String name,
+		java.lang.String portletId, long classNameId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
-				   .countByG_P_C_N(groupId, portletId, classNameId, name);
+				   .countByG_N_P_C(groupId, name, portletId, classNameId);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

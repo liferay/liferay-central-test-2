@@ -40,6 +40,8 @@ import com.liferay.portal.service.LayoutService;
 import com.liferay.portal.service.LayoutServiceFactory;
 import com.liferay.portal.service.PortletPreferencesLocalService;
 import com.liferay.portal.service.PortletPreferencesLocalServiceFactory;
+import com.liferay.portal.service.PortletPreferencesService;
+import com.liferay.portal.service.PortletPreferencesServiceFactory;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupFinderUtil;
 import com.liferay.portal.service.persistence.GroupPersistence;
@@ -423,6 +425,15 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		this.portletPreferencesLocalService = portletPreferencesLocalService;
 	}
 
+	public PortletPreferencesService getPortletPreferencesService() {
+		return portletPreferencesService;
+	}
+
+	public void setPortletPreferencesService(
+		PortletPreferencesService portletPreferencesService) {
+		this.portletPreferencesService = portletPreferencesService;
+	}
+
 	public PortletPreferencesPersistence getPortletPreferencesPersistence() {
 		return portletPreferencesPersistence;
 	}
@@ -570,6 +581,10 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 			portletPreferencesLocalService = PortletPreferencesLocalServiceFactory.getImpl();
 		}
 
+		if (portletPreferencesService == null) {
+			portletPreferencesService = PortletPreferencesServiceFactory.getImpl();
+		}
+
 		if (portletPreferencesPersistence == null) {
 			portletPreferencesPersistence = PortletPreferencesUtil.getPersistence();
 		}
@@ -611,6 +626,7 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 	protected LayoutPersistence layoutPersistence;
 	protected LayoutFinder layoutFinder;
 	protected PortletPreferencesLocalService portletPreferencesLocalService;
+	protected PortletPreferencesService portletPreferencesService;
 	protected PortletPreferencesPersistence portletPreferencesPersistence;
 	protected PortletPreferencesFinder portletPreferencesFinder;
 }
