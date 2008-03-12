@@ -317,9 +317,9 @@ public class EditPagesAction extends PortletAction {
 					stagingGroup.getLiveGroupId());
 		}
 
-		String scope = ParamUtil.getString(req, "scope");
-
 		Map parameterMap = getStagingParameters();
+
+		String scope = ParamUtil.getString(req, "scope");
 
 		if (scope.equals("all-pages")) {
 			copyLayouts(
@@ -347,7 +347,8 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void copyLayouts(
-		long sourceGroupId, long targetGroupId, boolean privateLayout, Map parameterMap)
+			long sourceGroupId, long targetGroupId, boolean privateLayout,
+			Map parameterMap)
 		throws Exception {
 
 		byte[] data = LayoutServiceUtil.exportLayouts(
@@ -452,6 +453,8 @@ public class EditPagesAction extends PortletAction {
 		Map parameterMap = new HashMap(req.getParameterMap());
 
 		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA_ALL, Boolean.FALSE.toString());
+		parameterMap.put(
 			PortletDataHandlerKeys.THEME, Boolean.FALSE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
@@ -459,8 +462,6 @@ public class EditPagesAction extends PortletAction {
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
 			Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_ALL, Boolean.FALSE.toString());
 		parameterMap.put(
 			PortletDataHandlerKeys.DATA_STRATEGY,
 			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);

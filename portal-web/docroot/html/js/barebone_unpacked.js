@@ -2710,7 +2710,7 @@ jQuery.cookie = function(name, value, options) {
 	};
 })(jQuery);
 /**
- * jQBrowser? v1.0.1 - Extend jQuery's browser detection capabilities and implement CSS browser selectors
+ * jQBrowser� v1.0.1 - Extend jQuery's browser detection capabilities and implement CSS browser selectors
  *   * http://www.alterform.com/resources/jqbrowser-2
  *
  * Built on the shoulders of (and stolen from :) ) giants:
@@ -2729,7 +2729,7 @@ var jQBrowser2 = function() {
 	var add_selectors = true;
     /**
      * The following functions and attributes form the internal methods and
-     * state of the jQBrowser? plugin.  See the relevant function definition
+     * state of the jQBrowser� plugin.  See the relevant function definition
      * later in the source for further information.
      *
      * Private.browser
@@ -2965,7 +2965,7 @@ var jQBrowser2 = function() {
     };
 	/**
      * The following functions and attributes form the Public interface of the
-     * jQBrowser? plugin, accessed externally through the $.browser object.
+     * jQBrowser� plugin, accessed externally through the $.browser object.
      * See the relevant function definition later in the source for further
      * information.
      *

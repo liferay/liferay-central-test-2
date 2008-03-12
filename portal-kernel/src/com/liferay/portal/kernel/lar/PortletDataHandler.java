@@ -123,10 +123,10 @@ public interface PortletDataHandler {
 	 * Returns whether the data exported by this handler should be included
 	 * by default when publishing to live. This should only be true for data
 	 * that is meant to be managed in an staging environment such as CMS
-	 * contents, but not for data meant to be input by users such as wiki pages
-	 * or message board entries.
+	 * content, but not for data meant to be input by users such as wiki pages
+	 * or message board posts.
 	 *
-	 * @return		true to publish to live by default, false otherwise
+	 * @return		true to publish to live by default
 	 */
 	public boolean isPublishToLiveByDefault();
 
