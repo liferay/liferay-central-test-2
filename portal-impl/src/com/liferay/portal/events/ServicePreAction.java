@@ -339,11 +339,39 @@ public class ServicePreAction extends Action {
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
 
-		if (Validator.isNotNull(_DEFAULT_USER_THEME_ID)) {
-			LayoutSet layoutSet = layout.getLayoutSet();
+		boolean updateLayoutSet = false;
 
-			layoutSet.setThemeId(_DEFAULT_USER_THEME_ID);
+		LayoutSet layoutSet = layout.getLayoutSet();
 
+		if (Validator.isNotNull(PropsValues.DEFAULT_USER_REGULAR_THEME_ID)) {
+			layoutSet.setThemeId(PropsValues.DEFAULT_USER_REGULAR_THEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_USER_REGULAR_COLOR_SCHEME_ID)) {
+
+			layoutSet.setColorSchemeId(
+				PropsValues.DEFAULT_USER_REGULAR_COLOR_SCHEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(PropsValues.DEFAULT_WAP_THEME_ID)) {
+			layoutSet.setWapThemeId(PropsValues.DEFAULT_WAP_THEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(PropsValues.DEFAULT_WAP_COLOR_SCHEME_ID)) {
+			layoutSet.setWapColorSchemeId(
+				PropsValues.DEFAULT_WAP_COLOR_SCHEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (updateLayoutSet) {
 			LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
 		}
 	}
@@ -1292,9 +1320,6 @@ public class ServicePreAction extends Action {
 
 	protected File privateLARFile;
 	protected File publicLARFile;
-
-	private static final String _DEFAULT_USER_THEME_ID =
-		PropsValues.DEFAULT_USER_THEME_ID;
 
 	private static final String _PATH_PORTAL_LAYOUT = "/portal/layout";
 

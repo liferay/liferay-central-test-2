@@ -267,10 +267,6 @@ public class PropsUtil {
 
 	public static final String LOOK_AND_FEEL_MODIFIABLE = "look.and.feel.modifiable";
 
-	public static final String DEFAULT_THEME_ID = "default.theme.id";
-
-	public static final String DEFAULT_COLOR_SCHEME_ID = "default.color.scheme.id";
-
 	public static final String DEFAULT_REGULAR_THEME_ID = "default.regular.theme.id";
 
 	public static final String DEFAULT_REGULAR_COLOR_SCHEME_ID = "default.regular.color.scheme.id";
@@ -567,7 +563,13 @@ public class PropsUtil {
 
 	public static final String DEFAULT_USER_PUBLIC_LAYOUT_LAR = "default.user.public.layout.lar";
 
-	public static final String DEFAULT_USER_THEME_ID = "default.user.theme.id";
+	public static final String DEFAULT_USER_REGULAR_THEME_ID = "default.user.regular.theme.id";
+
+	public static final String DEFAULT_USER_REGULAR_COLOR_SCHEME_ID = "default.user.regular.color.scheme.id";
+
+	public static final String DEFAULT_USER_WAP_THEME_ID = "default.user.wap.theme.id";
+
+	public static final String DEFAULT_USER_WAP_COLOR_SCHEME_ID = "default.user.wap.color.scheme.id";
 
 	// Default Admin
 

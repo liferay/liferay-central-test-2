@@ -215,8 +215,17 @@ public class PropsValues {
 	public static final String DEFAULT_USER_PUBLIC_LAYOUT_LAR =
 		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_LAR);
 
-	public static final String DEFAULT_USER_THEME_ID =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_THEME_ID);
+	public static final String DEFAULT_USER_REGULAR_COLOR_SCHEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_REGULAR_COLOR_SCHEME_ID);
+
+	public static final String DEFAULT_USER_REGULAR_THEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_REGULAR_THEME_ID);
+
+	public static final String DEFAULT_USER_WAP_COLOR_SCHEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_WAP_COLOR_SCHEME_ID);
+
+	public static final String DEFAULT_USER_WAP_THEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_WAP_THEME_ID);
 
 	public static final String DEFAULT_WAP_COLOR_SCHEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_WAP_COLOR_SCHEME_ID);
