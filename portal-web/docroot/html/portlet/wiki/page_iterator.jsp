@@ -116,6 +116,7 @@ List headerNames = new ArrayList();
 
 headerNames.add("page");
 headerNames.add("revision");
+headerNames.add("user");
 headerNames.add("date");
 
 if (type.equals("history")) {
@@ -231,6 +232,15 @@ for (int i = 0; i < results.size(); i++) {
 
 	if (!curWikiPage.isNew()) {
 		row.addText(String.valueOf(curWikiPage.getVersion()), rowURL);
+	}
+	else {
+		row.addText(StringPool.BLANK);
+	}
+
+	// User
+
+	if (!curWikiPage.isNew()) {
+		row.addText(curWikiPage.getUserName(), rowURL);
 	}
 	else {
 		row.addText(StringPool.BLANK);
