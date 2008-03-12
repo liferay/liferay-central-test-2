@@ -153,7 +153,7 @@ public class DLWebDAVStorageImpl extends BaseWebDAVStorageImpl {
 
 			long groupId = WebDAVUtil.getGroupId(destination);
 			long userId = webDavReq.getUserId();
-			String name = StringPool.BLANK;
+			String name = WebDAVUtil.getResourceName(destinationArray);
 			String title = WebDAVUtil.getResourceName(destinationArray);
 			String description = fileEntry.getDescription();
 			String[] tagsEntries = null;
