@@ -41,4 +41,7 @@ public class TestPropsValues {
 	public static final long USER_ID = GetterUtil.getLong(
 		TestPropsUtil.get("service.user.id"));
 
+	public static final boolean TEST_PERSISTENCE_ENABLED =
+		GetterUtil.getBoolean(TestPropsUtil.get("test.persistence.enabled"));
+
 }

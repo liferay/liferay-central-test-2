@@ -22,6 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
+import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistenceTest;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistenceTest;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceTest;
@@ -84,109 +85,111 @@ import junit.framework.TestSuite;
 public class PersistenceTestSuite extends TestSuite {
 
 	public PersistenceTestSuite() {
-		addTestSuite(AccountPersistenceTest.class);
-		addTestSuite(ActivityTrackerPersistenceTest.class);
-		addTestSuite(AddressPersistenceTest.class);
-		addTestSuite(ClassNamePersistenceTest.class);
-		addTestSuite(CompanyPersistenceTest.class);
-		addTestSuite(ContactPersistenceTest.class);
-		addTestSuite(CountryPersistenceTest.class);
-		addTestSuite(EmailAddressPersistenceTest.class);
-		addTestSuite(GroupPersistenceTest.class);
-		addTestSuite(ImagePersistenceTest.class);
-		addTestSuite(LayoutPersistenceTest.class);
-		addTestSuite(LayoutSetPersistenceTest.class);
-		addTestSuite(ListTypePersistenceTest.class);
-		addTestSuite(MembershipRequestPersistenceTest.class);
-		addTestSuite(OrganizationPersistenceTest.class);
-		addTestSuite(OrgGroupPermissionPersistenceTest.class);
-		addTestSuite(OrgGroupRolePersistenceTest.class);
-		addTestSuite(OrgLaborPersistenceTest.class);
-		addTestSuite(PasswordPolicyPersistenceTest.class);
-		addTestSuite(PasswordPolicyRelPersistenceTest.class);
-		addTestSuite(PasswordTrackerPersistenceTest.class);
-		addTestSuite(PermissionPersistenceTest.class);
-		addTestSuite(PhonePersistenceTest.class);
-		addTestSuite(PluginSettingPersistenceTest.class);
-		addTestSuite(PortletPersistenceTest.class);
-		addTestSuite(PortletPreferencesPersistenceTest.class);
-		addTestSuite(RegionPersistenceTest.class);
-		addTestSuite(ReleasePersistenceTest.class);
-		addTestSuite(ResourceCodePersistenceTest.class);
-		addTestSuite(ResourcePersistenceTest.class);
-		addTestSuite(RolePersistenceTest.class);
-		addTestSuite(ServiceComponentPersistenceTest.class);
-		addTestSuite(SubscriptionPersistenceTest.class);
-		addTestSuite(UserGroupPersistenceTest.class);
-		addTestSuite(UserGroupRolePersistenceTest.class);
-		addTestSuite(UserIdMapperPersistenceTest.class);
-		addTestSuite(UserPersistenceTest.class);
-		addTestSuite(UserTrackerPathPersistenceTest.class);
-		addTestSuite(UserTrackerPersistenceTest.class);
-		addTestSuite(WebsitePersistenceTest.class);
+		if (TestPropsValues.TEST_PERSISTENCE_ENABLED) {
+			addTestSuite(AccountPersistenceTest.class);
+			addTestSuite(ActivityTrackerPersistenceTest.class);
+			addTestSuite(AddressPersistenceTest.class);
+			addTestSuite(ClassNamePersistenceTest.class);
+			addTestSuite(CompanyPersistenceTest.class);
+			addTestSuite(ContactPersistenceTest.class);
+			addTestSuite(CountryPersistenceTest.class);
+			addTestSuite(EmailAddressPersistenceTest.class);
+			addTestSuite(GroupPersistenceTest.class);
+			addTestSuite(ImagePersistenceTest.class);
+			addTestSuite(LayoutPersistenceTest.class);
+			addTestSuite(LayoutSetPersistenceTest.class);
+			addTestSuite(ListTypePersistenceTest.class);
+			addTestSuite(MembershipRequestPersistenceTest.class);
+			addTestSuite(OrganizationPersistenceTest.class);
+			addTestSuite(OrgGroupPermissionPersistenceTest.class);
+			addTestSuite(OrgGroupRolePersistenceTest.class);
+			addTestSuite(OrgLaborPersistenceTest.class);
+			addTestSuite(PasswordPolicyPersistenceTest.class);
+			addTestSuite(PasswordPolicyRelPersistenceTest.class);
+			addTestSuite(PasswordTrackerPersistenceTest.class);
+			addTestSuite(PermissionPersistenceTest.class);
+			addTestSuite(PhonePersistenceTest.class);
+			addTestSuite(PluginSettingPersistenceTest.class);
+			addTestSuite(PortletPersistenceTest.class);
+			addTestSuite(PortletPreferencesPersistenceTest.class);
+			addTestSuite(RegionPersistenceTest.class);
+			addTestSuite(ReleasePersistenceTest.class);
+			addTestSuite(ResourceCodePersistenceTest.class);
+			addTestSuite(ResourcePersistenceTest.class);
+			addTestSuite(RolePersistenceTest.class);
+			addTestSuite(ServiceComponentPersistenceTest.class);
+			addTestSuite(SubscriptionPersistenceTest.class);
+			addTestSuite(UserGroupPersistenceTest.class);
+			addTestSuite(UserGroupRolePersistenceTest.class);
+			addTestSuite(UserIdMapperPersistenceTest.class);
+			addTestSuite(UserPersistenceTest.class);
+			addTestSuite(UserTrackerPathPersistenceTest.class);
+			addTestSuite(UserTrackerPersistenceTest.class);
+			addTestSuite(WebsitePersistenceTest.class);
 
-		addTestSuite(BlogsEntryPersistenceTest.class);
-		addTestSuite(BlogsStatsUserPersistenceTest.class);
+			addTestSuite(BlogsEntryPersistenceTest.class);
+			addTestSuite(BlogsStatsUserPersistenceTest.class);
 
-		addTestSuite(BookmarksEntryPersistenceTest.class);
-		addTestSuite(BookmarksFolderPersistenceTest.class);
+			addTestSuite(BookmarksEntryPersistenceTest.class);
+			addTestSuite(BookmarksFolderPersistenceTest.class);
 
-		addTestSuite(CalEventPersistenceTest.class);
+			addTestSuite(CalEventPersistenceTest.class);
 
-		addTestSuite(DLFileEntryPersistenceTest.class);
-		addTestSuite(DLFileRankPersistenceTest.class);
-		addTestSuite(DLFileShortcutPersistenceTest.class);
-		addTestSuite(DLFileVersionPersistenceTest.class);
-		addTestSuite(DLFolderPersistenceTest.class);
+			addTestSuite(DLFileEntryPersistenceTest.class);
+			addTestSuite(DLFileRankPersistenceTest.class);
+			addTestSuite(DLFileShortcutPersistenceTest.class);
+			addTestSuite(DLFileVersionPersistenceTest.class);
+			addTestSuite(DLFolderPersistenceTest.class);
 
-		addTestSuite(IGFolderPersistenceTest.class);
-		addTestSuite(IGImagePersistenceTest.class);
+			addTestSuite(IGFolderPersistenceTest.class);
+			addTestSuite(IGImagePersistenceTest.class);
 
-		addTestSuite(JournalArticleImagePersistenceTest.class);
-		addTestSuite(JournalArticlePersistenceTest.class);
-		addTestSuite(JournalArticleResourcePersistenceTest.class);
-		addTestSuite(JournalContentSearchPersistenceTest.class);
-		addTestSuite(JournalStructurePersistenceTest.class);
-		addTestSuite(JournalTemplatePersistenceTest.class);
+			addTestSuite(JournalArticleImagePersistenceTest.class);
+			addTestSuite(JournalArticlePersistenceTest.class);
+			addTestSuite(JournalArticleResourcePersistenceTest.class);
+			addTestSuite(JournalContentSearchPersistenceTest.class);
+			addTestSuite(JournalStructurePersistenceTest.class);
+			addTestSuite(JournalTemplatePersistenceTest.class);
 
-		addTestSuite(MBBanPersistenceTest.class);
-		addTestSuite(MBCategoryPersistenceTest.class);
-		addTestSuite(MBDiscussionPersistenceTest.class);
-		addTestSuite(MBMessageFlagPersistenceTest.class);
-		addTestSuite(MBMessagePersistenceTest.class);
-		addTestSuite(MBStatsUserPersistenceTest.class);
-		addTestSuite(MBThreadPersistenceTest.class);
+			addTestSuite(MBBanPersistenceTest.class);
+			addTestSuite(MBCategoryPersistenceTest.class);
+			addTestSuite(MBDiscussionPersistenceTest.class);
+			addTestSuite(MBMessageFlagPersistenceTest.class);
+			addTestSuite(MBMessagePersistenceTest.class);
+			addTestSuite(MBStatsUserPersistenceTest.class);
+			addTestSuite(MBThreadPersistenceTest.class);
 
-		addTestSuite(PollsChoicePersistenceTest.class);
-		addTestSuite(PollsQuestionPersistenceTest.class);
-		addTestSuite(PollsVotePersistenceTest.class);
+			addTestSuite(PollsChoicePersistenceTest.class);
+			addTestSuite(PollsQuestionPersistenceTest.class);
+			addTestSuite(PollsVotePersistenceTest.class);
 
-		addTestSuite(RatingsEntryPersistenceTest.class);
-		addTestSuite(RatingsStatsPersistenceTest.class);
+			addTestSuite(RatingsEntryPersistenceTest.class);
+			addTestSuite(RatingsStatsPersistenceTest.class);
 
-		addTestSuite(ShoppingCartPersistenceTest.class);
-		addTestSuite(ShoppingCategoryPersistenceTest.class);
-		addTestSuite(ShoppingCouponPersistenceTest.class);
-		addTestSuite(ShoppingItemFieldPersistenceTest.class);
-		addTestSuite(ShoppingItemPersistenceTest.class);
-		addTestSuite(ShoppingItemPricePersistenceTest.class);
-		addTestSuite(ShoppingOrderItemPersistenceTest.class);
-		addTestSuite(ShoppingOrderPersistenceTest.class);
+			addTestSuite(ShoppingCartPersistenceTest.class);
+			addTestSuite(ShoppingCategoryPersistenceTest.class);
+			addTestSuite(ShoppingCouponPersistenceTest.class);
+			addTestSuite(ShoppingItemFieldPersistenceTest.class);
+			addTestSuite(ShoppingItemPersistenceTest.class);
+			addTestSuite(ShoppingItemPricePersistenceTest.class);
+			addTestSuite(ShoppingOrderItemPersistenceTest.class);
+			addTestSuite(ShoppingOrderPersistenceTest.class);
 
-		addTestSuite(SCFrameworkVersionPersistenceTest.class);
-		addTestSuite(SCLicensePersistenceTest.class);
-		addTestSuite(SCProductEntryPersistenceTest.class);
-		addTestSuite(SCProductScreenshotPersistenceTest.class);
-		addTestSuite(SCProductVersionPersistenceTest.class);
+			addTestSuite(SCFrameworkVersionPersistenceTest.class);
+			addTestSuite(SCLicensePersistenceTest.class);
+			addTestSuite(SCProductEntryPersistenceTest.class);
+			addTestSuite(SCProductScreenshotPersistenceTest.class);
+			addTestSuite(SCProductVersionPersistenceTest.class);
 
-		addTestSuite(TagsAssetPersistenceTest.class);
-		addTestSuite(TagsEntryPersistenceTest.class);
-		addTestSuite(TagsPropertyPersistenceTest.class);
-		addTestSuite(TagsSourcePersistenceTest.class);
+			addTestSuite(TagsAssetPersistenceTest.class);
+			addTestSuite(TagsEntryPersistenceTest.class);
+			addTestSuite(TagsPropertyPersistenceTest.class);
+			addTestSuite(TagsSourcePersistenceTest.class);
 
-		addTestSuite(WikiNodePersistenceTest.class);
-		addTestSuite(WikiPagePersistenceTest.class);
-		addTestSuite(WikiPageResourcePersistenceTest.class);
+			addTestSuite(WikiNodePersistenceTest.class);
+			addTestSuite(WikiPagePersistenceTest.class);
+			addTestSuite(WikiPageResourcePersistenceTest.class);
+		}
 	}
 
 	public void test() {

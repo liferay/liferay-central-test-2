@@ -26,6 +26,7 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceTest;
 import com.liferay.portlet.imagegallery.service.IGImageServiceTest;
+import com.liferay.portlet.messageboards.service.MBMessageServiceTest;
 
 import junit.framework.TestSuite;
 
@@ -42,6 +43,7 @@ public class ServiceTestSuite extends TestSuite {
 		addTestSuite(BookmarksEntryServiceTest.class);
 		addTestSuite(DLFileEntryServiceTest.class);
 		addTestSuite(IGImageServiceTest.class);
+		addTestSuite(MBMessageServiceTest.class);
 	}
 
 	public void test() {
