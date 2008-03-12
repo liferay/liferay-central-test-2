@@ -119,7 +119,7 @@ public class PluginPackageHotDeployListener implements HotDeployListener {
 					attributes.getValue("Bundle-Version"), Version.UNKNOWN);
 			}
 
-			if ((version == Version.UNKNOWN) && _log.isWarnEnabled()) {
+			if (version.equals(Version.UNKNOWN) && _log.isWarnEnabled()) {
 				_log.warn(
 					"Plugin package on context " + servletContextName +
 						" cannot be tracked because this WAR does not " +
