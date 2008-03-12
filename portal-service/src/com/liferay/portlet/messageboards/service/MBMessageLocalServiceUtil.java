@@ -961,7 +961,8 @@ public class MBMessageLocalServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long userId, long messageId, java.lang.String subject,
-		java.lang.String body, java.util.List files, double priority,
+		java.lang.String body, java.util.List files,
+		java.util.List existingFiles, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -969,7 +970,8 @@ public class MBMessageLocalServiceUtil {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		return mbMessageLocalService.updateMessage(userId, messageId, subject,
-			body, files, priority, tagsEntries, prefs, themeDisplay);
+			body, files, existingFiles, priority, tagsEntries, prefs,
+			themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(

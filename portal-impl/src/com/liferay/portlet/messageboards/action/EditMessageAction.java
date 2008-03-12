@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -243,12 +244,21 @@ public class EditMessageAction extends PortletAction {
 			}
 		}
 		else {
+			List existingFiles = new ArrayList();
+
+			for (int i = 1; i <= 5; i++) {
+				String path = ParamUtil.getString(req, "existingPath" + i);
+
+				if (Validator.isNotNull(path)) {
+					existingFiles.add(path);
+				}
+			}
 
 			// Update message
 
 			message = MBMessageServiceUtil.updateMessage(
-				messageId, subject, body, files, priority, tagsEntries, prefs,
-				themeDisplay);
+				messageId, subject, body, files, existingFiles, priority,
+				tagsEntries, prefs, themeDisplay);
 		}
 
 		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();

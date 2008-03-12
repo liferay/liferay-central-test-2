@@ -63,6 +63,11 @@ String body = BeanParamUtil.getString(message, request, "body");
 boolean attachments = BeanParamUtil.getBoolean(message, request, "attachments");
 boolean preview = ParamUtil.getBoolean(request, "preview");
 boolean quote = ParamUtil.getBoolean(request, "quote");
+
+String[] existingAttachments = new String[] {};
+if (message != null && message.isAttachments()) {
+	existingAttachments = DLServiceUtil.getFileNames(message.getCompanyId(), CompanyImpl.SYSTEM, message.getAttachmentsDir());
+}
 %>
 
 <script type="text/javascript">
@@ -209,23 +214,56 @@ if (message != null) {
 		</td>
 	</tr>
 
-	<%
-	for (int i = 1; i <= 5; i++) {
-	%>
+	<tr>
+		<td>
+			<liferay-ui:message key="attachments" />
+		</td>
+		<td>
+			<table class="lfr-table">
 
-		<tr>
-			<td>
-				<liferay-ui:message key="file" /> <%= i %>
-			</td>
-			<td>
-				<input name="<portlet:namespace />msgFile<%= i %>" size="70" type="file" />
-			</td>
-		</tr>
+			<%
+			for (int i = 0; i < existingAttachments.length; i++) {
+				String existingPath = existingAttachments[i];
+				String existingName = StringUtil.extractLast(existingPath, StringPool.SLASH);
+			%>
 
-	<%
-	}
-	%>
+				<tr>
+					<td>
+						<span id="<portlet:namespace />existingFile<%= (i + 1) %>">
+							<input name="<portlet:namespace />existingPath<%= (i + 1) %>" type="hidden" value="<%= existingPath %>" />
+							<%= existingName %>
+						</span>
+						<input id="<portlet:namespace />msgFile<%= (i + 1) %>" name="<portlet:namespace />msgFile<%= (i + 1) %>" size="70" type="file" style="display: none;" />
+					</td>
+					<td>
+						<img id="<portlet:namespace />removeExisting<%= (i + 1) %>" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" />
+					</td>
+				</tr>
 
+			<%
+			}
+			%>
+
+			<%
+			for (int i = existingAttachments.length + 1; i <= 5; i++) {
+			%>
+
+				<tr>
+					<td>
+						<input name="<portlet:namespace />msgFile<%= i %>" size="70" type="file" />
+					</td>
+					<td>
+						<br />
+					</td>
+				</tr>
+
+			<%
+			}
+			%>
+
+			</table>
+		</td>
+	</tr>
 </c:if>
 
 <c:if test="<%= (message == null) && themeDisplay.isSignedIn() && allowAnonymousPosting %>">
@@ -391,7 +429,25 @@ if (message != null) {
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
+	jQuery(document).ready(function() {
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);
+
+		<%
+		for (int i = 1; i <= existingAttachments.length; i++) {
+		%>
+			jQuery("#<portlet:namespace />removeExisting" + <%= i %>).click(function () {
+				var button = jQuery(this);
+				var span = jQuery("#<portlet:namespace />existingFile" + <%= i %>);
+				var file = jQuery("#<portlet:namespace />msgFile" + <%= i %>);
+
+				span.remove();
+				file.show();
+				button.remove();
+			});
+		<%
+		}
+		%>
+	});
 	</script>
 </c:if>
 

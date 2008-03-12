@@ -1574,7 +1574,8 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		HttpPrincipal httpPrincipal, long messageId, java.lang.String subject,
-		java.lang.String body, java.util.List files, double priority,
+		java.lang.String body, java.util.List files,
+		java.util.List existingFiles, double priority,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -1599,19 +1600,25 @@ public class MBMessageServiceHttp {
 				paramObj3 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj4 = new DoubleWrapper(priority);
+			Object paramObj4 = existingFiles;
 
-			Object paramObj5 = tagsEntries;
+			if (existingFiles == null) {
+				paramObj4 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj5 = new DoubleWrapper(priority);
+
+			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"updateMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;
@@ -1642,7 +1649,8 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		HttpPrincipal httpPrincipal, long messageId, java.lang.String subject,
-		java.lang.String body, java.util.List files, double priority,
+		java.lang.String body, java.util.List files,
+		java.util.List existingFiles, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
@@ -1668,24 +1676,30 @@ public class MBMessageServiceHttp {
 				paramObj3 = new NullWrapper("java.util.List");
 			}
 
-			Object paramObj4 = new DoubleWrapper(priority);
+			Object paramObj4 = existingFiles;
 
-			Object paramObj5 = tagsEntries;
+			if (existingFiles == null) {
+				paramObj4 = new NullWrapper("java.util.List");
+			}
+
+			Object paramObj5 = new DoubleWrapper(priority);
+
+			Object paramObj6 = tagsEntries;
 
 			if (tagsEntries == null) {
-				paramObj5 = new NullWrapper("[Ljava.lang.String;");
+				paramObj6 = new NullWrapper("[Ljava.lang.String;");
 			}
 
-			Object paramObj6 = prefs;
+			Object paramObj7 = prefs;
 
 			if (prefs == null) {
-				paramObj6 = new NullWrapper("javax.portlet.PortletPreferences");
+				paramObj7 = new NullWrapper("javax.portlet.PortletPreferences");
 			}
 
-			Object paramObj7 = themeDisplay;
+			Object paramObj8 = themeDisplay;
 
 			if (themeDisplay == null) {
-				paramObj7 = new NullWrapper(
+				paramObj8 = new NullWrapper(
 						"com.liferay.portal.theme.ThemeDisplay");
 			}
 
@@ -1693,7 +1707,7 @@ public class MBMessageServiceHttp {
 					"updateMessage",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6, paramObj7, paramObj8
 					});
 
 			Object returnObj = null;

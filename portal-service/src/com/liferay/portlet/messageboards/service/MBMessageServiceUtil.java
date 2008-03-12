@@ -327,25 +327,26 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, double priority, java.lang.String[] tagsEntries)
+		java.util.List files, java.util.List existingFiles, double priority,
+		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.updateMessage(messageId, subject, body, files,
-			priority, tagsEntries);
+			existingFiles, priority, tagsEntries);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, double priority, java.lang.String[] tagsEntries,
-		javax.portlet.PortletPreferences prefs,
+		java.util.List files, java.util.List existingFiles, double priority,
+		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.updateMessage(messageId, subject, body, files,
-			priority, tagsEntries, prefs, themeDisplay);
+			existingFiles, priority, tagsEntries, prefs, themeDisplay);
 	}
 }

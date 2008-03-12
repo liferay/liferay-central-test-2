@@ -517,6 +517,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			message.getParentMessageId());
 
 		List files = new ArrayList();
+		List existingFiles = new ArrayList();
 
 		if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
 			message.isAttachments()) {
@@ -567,8 +568,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					MBMessageLocalServiceUtil.updateMessage(
 						userId, existingMessage.getMessageId(),
 						message.getSubject(), message.getBody(), files,
-						message.getPriority(), tagsEntries, prefs,
-						themeDisplay);
+						existingFiles, message.getPriority(), tagsEntries,
+						prefs, themeDisplay);
 				}
 				catch (NoSuchMessageException nsme) {
 					existingMessage = MBMessageLocalServiceUtil.addMessage(

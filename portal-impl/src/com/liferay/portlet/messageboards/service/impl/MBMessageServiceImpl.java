@@ -592,7 +592,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage updateMessage(
 			long messageId, String subject, String body, List files,
-			double priority, String[] tagsEntries)
+			List existingFiles, double priority, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -618,14 +618,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.updateMessage(
-			getUserId(), messageId, subject, body, files, priority, tagsEntries,
-			null, null);
+			getUserId(), messageId, subject, body, files, existingFiles,
+			priority, tagsEntries, null, null);
 	}
 
 	public MBMessage updateMessage(
 			long messageId, String subject, String body, List files,
-			double priority, String[] tagsEntries, PortletPreferences prefs,
-			ThemeDisplay themeDisplay)
+			List existingFiles, double priority, String[] tagsEntries,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -651,8 +651,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		return mbMessageLocalService.updateMessage(
-			getUserId(), messageId, subject, body, files, priority, tagsEntries,
-			prefs, themeDisplay);
+			getUserId(), messageId, subject, body, files, existingFiles,
+			priority, tagsEntries, prefs, themeDisplay);
 	}
 
 	protected void checkReplyToPermission(long categoryId, long parentMessageId)

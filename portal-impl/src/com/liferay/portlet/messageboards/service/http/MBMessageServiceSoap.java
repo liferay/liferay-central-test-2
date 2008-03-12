@@ -373,11 +373,11 @@ public class MBMessageServiceSoap {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, double priority, java.lang.String[] tagsEntries)
-		throws RemoteException {
+		java.util.List files, java.util.List existingFiles, double priority,
+		java.lang.String[] tagsEntries) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,
-					subject, body, files, priority, tagsEntries);
+					subject, body, files, existingFiles, priority, tagsEntries);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModel(returnValue);
 		}

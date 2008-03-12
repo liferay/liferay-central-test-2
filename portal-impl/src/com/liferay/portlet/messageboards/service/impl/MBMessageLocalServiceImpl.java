@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
+import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.DuplicateFileException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.PortalException;
@@ -1056,14 +1057,15 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		ThemeDisplay themeDisplay = null;
 
 		return updateMessage(
-			userId, messageId, subject, body, files, priority, tagsEntries,
-			prefs, themeDisplay);
+			userId, messageId, subject, body, files, files, priority,
+			tagsEntries, prefs, themeDisplay);
 	}
 
 	public MBMessage updateMessage(
 			long userId, long messageId, String subject, String body,
-			List files, double priority, String[] tagsEntries,
-			PortletPreferences prefs, ThemeDisplay themeDisplay)
+			List files, List existingFiles, double priority,
+			String[] tagsEntries, PortletPreferences prefs,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Message
@@ -1079,22 +1081,29 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Attachments
 
-		if (files.size() > 0) {
-			long companyId = message.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM_STRING;
-			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			long repositoryId = CompanyImpl.SYSTEM;
-			String dirName = message.getAttachmentsDir();
+		long companyId = message.getCompanyId();
+		String portletId = CompanyImpl.SYSTEM_STRING;
+		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		long repositoryId = CompanyImpl.SYSTEM;
+		String dirName = message.getAttachmentsDir();
 
+		if (!files.isEmpty() || !existingFiles.isEmpty()) {
 			try {
 				try {
-					dlService.deleteDirectory(
-						companyId, portletId, repositoryId, dirName);
+					dlService.addDirectory(companyId, repositoryId, dirName);
 				}
-				catch (NoSuchDirectoryException nsde) {
+				catch (DuplicateDirectoryException dde) {
 				}
 
-				dlService.addDirectory(companyId, repositoryId, dirName);
+				String[] fileNames =
+					dlService.getFileNames(companyId, repositoryId, dirName);
+
+				for (String fileName: fileNames) {
+					if (!existingFiles.contains(fileName)) {
+						dlService.deleteFile(
+							companyId, portletId, repositoryId, fileName);
+					}
+				}
 
 				for (int i = 0; i < files.size(); i++) {
 					ObjectValuePair ovp = (ObjectValuePair)files.get(i);
@@ -1116,13 +1125,24 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				throw new SystemException(re);
 			}
 		}
+		else {
+			try {
+				dlService.deleteDirectory(
+					companyId, portletId, repositoryId, dirName);
+			}
+			catch (NoSuchDirectoryException nsde) {
+			}
+			catch (RemoteException re) {
+				throw new SystemException(re);
+			}
+		}
 
 		// Message
 
 		message.setModifiedDate(now);
 		message.setSubject(subject);
 		message.setBody(body);
-		message.setAttachments((files.size() > 0 ? true : false));
+		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
 
 		mbMessagePersistence.update(message);
 
