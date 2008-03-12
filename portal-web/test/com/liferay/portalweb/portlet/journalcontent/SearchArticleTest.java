@@ -25,13 +25,13 @@ package com.liferay.portalweb.portlet.journalcontent;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddJournalArticleTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddJournalArticleTest extends BaseTestCase {
-	public void testAddJournalArticle() throws Exception {
+public class SearchArticleTest extends BaseTestCase {
+	public void testSearchArticle() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -50,7 +50,7 @@ public class AddJournalArticleTest extends BaseTestCase {
 
 		selenium.click("//img[@title='Configuration']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("toggle_id_journal_article_searchkeywords", "Test");
+		selenium.type("toggle_id_journal_article_searchkeywords", "test");
 		selenium.click("//input[@value='Search Articles']");
 		selenium.waitForPageToLoad("30000");
 
@@ -60,7 +60,7 @@ public class AddJournalArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Journal Article")) {
+				if (selenium.isElementPresent("link=Test Journal Article 2")) {
 					break;
 				}
 			}
@@ -70,14 +70,10 @@ public class AddJournalArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Journal Article");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("_86_enableRatingsCheckbox");
-		selenium.click("_86_enableCommentsCheckbox");
-		selenium.click("link=Test Journal Article");
+		selenium.click("link=Test Journal Article 2");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a test Journal Article!"));
+		verifyTrue(selenium.isTextPresent("This is a second journal article!"));
 	}
 }
