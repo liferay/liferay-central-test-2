@@ -22,37 +22,33 @@
 
 package com.liferay.util;
 
-import com.sun.imageio.plugins.gif.GIFImageReader;
-import com.sun.imageio.plugins.jpeg.JPEGImageReader;
-import com.sun.imageio.plugins.png.PNGImageReader;
-import com.sun.media.jai.codec.ImageCodec;
-import com.sun.media.jai.codec.ImageDecoder;
-
-import java.awt.geom.AffineTransform;
-import java.awt.image.AffineTransformOp;
+import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
 import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
-
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-
 import java.util.Iterator;
 
 import javax.imageio.ImageIO;
 import javax.imageio.ImageReader;
 import javax.imageio.stream.FileCacheImageInputStream;
-
 import javax.media.jai.RenderedImageAdapter;
 
 import net.jmge.gif.Gif89Encoder;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import com.sun.imageio.plugins.gif.GIFImageReader;
+import com.sun.imageio.plugins.jpeg.JPEGImageReader;
+import com.sun.imageio.plugins.png.PNGImageReader;
+import com.sun.media.jai.codec.ImageCodec;
+import com.sun.media.jai.codec.ImageDecoder;
 
 /**
  * <a href="ImageUtil.java.html"><b><i>View Source</i></b></a>
@@ -242,17 +238,6 @@ public class ImageUtil {
 	}
 
 	public static RenderedImage scale(
-		RenderedImage renderedImage, double factor) {
-
-		AffineTransformOp op = new AffineTransformOp(
-			AffineTransform.getScaleInstance(factor, factor), null);
-
-		BufferedImage bufferedImage = getBufferedImage(renderedImage);
-
-		return op.filter(bufferedImage, null);
-	}
-
-	public static RenderedImage scale(
 		RenderedImage renderedImage, int maxHeight, int maxWidth) {
 
 		int imageHeight = renderedImage.getHeight();
@@ -270,19 +255,24 @@ public class ImageUtil {
 			return renderedImage;
 		}
 
-		double factor = 0.1;
+		double factor = Math.min(
+				(double)maxHeight / imageHeight,
+				(double)maxWidth / imageWidth );
 
-		int heightDelta = imageHeight - maxHeight;
-		int widthDelta = imageWidth - maxWidth;
+		int thumbHeight = (int)(factor*imageHeight);
+		int thumbWidth = (int)(factor*imageWidth);
 
-		if (heightDelta > widthDelta) {
-			factor = (double)maxHeight / imageHeight;
-		}
-		else {
-			factor = (double)maxWidth / imageWidth;
-		}
+		BufferedImage bufferedImage = getBufferedImage(renderedImage);
 
-		return scale(renderedImage, factor);
+		Image thumb = bufferedImage.getScaledInstance(
+				thumbWidth, thumbHeight, Image.SCALE_SMOOTH);
+
+		BufferedImage scaledImage = new BufferedImage(
+				thumbWidth, thumbHeight, BufferedImage.TYPE_INT_RGB);
+
+		scaledImage.getGraphics().drawImage( thumb, 0, 0, null);
+
+		return scaledImage;
 	}
 
 	private static RenderedImage _getRenderedImage(String name, byte[] bytes) {
