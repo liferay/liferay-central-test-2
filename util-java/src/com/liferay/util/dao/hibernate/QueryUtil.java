@@ -45,6 +45,7 @@ import org.hibernate.dialect.Dialect;
 public class QueryUtil {
 
 	public static final int ALL_POS = -1;
+	public static final String TRUE = " 1 = 1 ";
 
 	public static Iterator<?> iterate(
 		Query query, Dialect dialect, int begin, int end) {

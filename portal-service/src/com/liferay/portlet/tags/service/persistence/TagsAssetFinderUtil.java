@@ -38,6 +38,15 @@ public class TagsAssetFinderUtil {
 			notEntryIds, excludeZeroViewCount, publishDate, expirationDate);
 	}
 
+	public static int countAssets(long groupId, long[] classNameIds,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate)
+		throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .countAssets(groupId, classNameIds, excludeZeroViewCount,
+			publishDate, expirationDate);
+	}
+
 	public static int countByOrEntryIds(long groupId, long[] classNameIds,
 		long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate)
@@ -45,6 +54,18 @@ public class TagsAssetFinderUtil {
 		return getFinder()
 				   .countByOrEntryIds(groupId, classNameIds, entryIds,
 			notEntryIds, excludeZeroViewCount, publishDate, expirationDate);
+	}
+
+	public static java.util.List findAssets(long groupId, long[] classNameIds,
+		java.lang.String orderByCol1, java.lang.String orderByCol2,
+		java.lang.String orderByType1, java.lang.String orderByType2,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .findAssets(groupId, classNameIds, orderByCol1, orderByCol2,
+			orderByType1, orderByType2, excludeZeroViewCount, publishDate,
+			expirationDate, begin, end);
 	}
 
 	public static java.util.List findByAndEntryIds(long groupId,

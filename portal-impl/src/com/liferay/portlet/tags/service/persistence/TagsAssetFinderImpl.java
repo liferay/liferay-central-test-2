@@ -83,10 +83,6 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			Date expirationDate)
 		throws SystemException {
 
-		if (entryIds.length == 0) {
-			return 0;
-		}
-
 		Session session = null;
 
 		try {
@@ -95,28 +91,36 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			StringMaker sm = new StringMaker();
 
 			sm.append("SELECT COUNT(DISTINCT assetId) AS COUNT_VALUE ");
-			sm.append("FROM TagsAsset WHERE TagsAsset.assetId IN (");
+			sm.append("FROM TagsAsset WHERE");
 
-			for (int i = 0; i < entryIds.length; i++) {
-				sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+			if (entryIds.length > 0) {
 
-				if ((i + 1) < entryIds.length) {
-					sm.append(" AND TagsAsset.assetId IN (");
+				sm.append(" TagsAsset.assetId IN (");
+
+				for (int i = 0; i < entryIds.length; i++) {
+					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+
+					if ((i + 1) < entryIds.length) {
+						sm.append(" AND TagsAsset.assetId IN (");
+					}
 				}
-			}
 
-			for (int i = 0; i < entryIds.length; i++) {
-				if ((i + 1) < entryIds.length) {
-					sm.append(StringPool.CLOSE_PARENTHESIS);
+				for (int i = 0; i < entryIds.length; i++) {
+					if ((i + 1) < entryIds.length) {
+						sm.append(StringPool.CLOSE_PARENTHESIS);
+					}
 				}
+
+				if (excludeZeroViewCount) {
+					sm.append(" AND (TagsAsset.viewCount > 0)");
+				}
+
+				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
-
-			if (excludeZeroViewCount) {
-				sm.append(" AND (TagsAsset.viewCount > 0)");
+			else {
+				sm.append(QueryUtil.TRUE);
 			}
-
-			sm.append(StringPool.CLOSE_PARENTHESIS);
-
+			
 			if (notEntryIds.length > 0) {
 				sm.append(" AND (");
 
@@ -181,15 +185,77 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		}
 	}
 
+	public int countAssets(
+			long groupId, long[] classNameIds, boolean excludeZeroViewCount,
+			Date publishDate, Date expirationDate)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			StringMaker sm = new StringMaker();
+
+			sm.append("SELECT COUNT(assetId) AS COUNT_VALUE ");
+			sm.append("FROM TagsAsset WHERE");
+			sm.append(QueryUtil.TRUE);
+
+			if (excludeZeroViewCount) {
+				sm.append(" AND (TagsAsset.viewCount > 0)");
+			}
+
+			sm.append("[$DATES$]");
+
+			if (groupId > 0) {
+				sm.append(" AND (TagsAsset.groupId = ?)");
+			}
+
+			sm.append(getClassNameIds(classNameIds));
+
+			String sql = sm.toString();
+
+			sql = getDates(sql, publishDate, expirationDate);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			setDates(qPos, publishDate, expirationDate);
+
+			if (groupId > 0) {
+				setGroupId(qPos, groupId);
+			}
+
+			setClassNamedIds(qPos, classNameIds);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
 	public int countByOrEntryIds(
 			long groupId, long[] classNameIds, long[] entryIds,
 			long[] notEntryIds, boolean excludeZeroViewCount, Date publishDate,
 			Date expirationDate)
 		throws SystemException {
-
-		if (entryIds.length == 0) {
-			return 0;
-		}
 
 		Session session = null;
 
@@ -274,6 +340,84 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		}
 	}
 
+	public List findAssets(
+			long groupId, long[] classNameIds, String orderByCol1,
+			String orderByCol2, String orderByType1, String orderByType2,
+			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
+			int begin, int end)
+		throws SystemException {
+
+		orderByCol1 = checkOrderByCol(orderByCol1);
+		orderByCol2 = checkOrderByCol(orderByCol2);
+		orderByType1 = checkOrderByType(orderByType1);
+		orderByType2 = checkOrderByType(orderByType2);
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			StringMaker sm = new StringMaker();
+
+			sm.append("SELECT {TagsAsset.*} ");
+			sm.append("FROM TagsAsset WHERE");
+			sm.append(QueryUtil.TRUE);
+
+			if (excludeZeroViewCount) {
+				sm.append(" AND (TagsAsset.viewCount > 0)");
+			}
+
+			sm.append("[$DATES$]");
+
+			if (groupId > 0) {
+				sm.append(" AND (TagsAsset.groupId = ?)");
+			}
+
+			sm.append(getClassNameIds(classNameIds));
+
+			sm.append(" ORDER BY TagsAsset.");
+			sm.append(orderByCol1);
+			sm.append(StringPool.SPACE);
+			sm.append(orderByType1);
+
+			if (Validator.isNotNull(orderByCol2) &&
+				!orderByCol1.equals(orderByCol2)) {
+
+				sm.append(", TagsAsset.");
+				sm.append(orderByCol2);
+				sm.append(StringPool.SPACE);
+				sm.append(orderByType2);
+			}
+
+			String sql = sm.toString();
+
+			sql = getDates(sql, publishDate, expirationDate);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("TagsAsset", TagsAssetImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			setDates(qPos, publishDate, expirationDate);
+
+			if (groupId > 0) {
+				setGroupId(qPos, groupId);
+			}
+
+			setClassNamedIds(qPos, classNameIds);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+
+	}
+
 	public List findByAndEntryIds(
 			long groupId, long[] classNameIds, long[] entryIds,
 			long[] notEntryIds, String orderByCol1, String orderByCol2,
@@ -281,10 +425,6 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
 			int begin, int end)
 		throws SystemException {
-
-		if (entryIds.length == 0) {
-			return new ArrayList();
-		}
 
 		orderByCol1 = checkOrderByCol(orderByCol1);
 		orderByCol2 = checkOrderByCol(orderByCol2);
@@ -299,28 +439,35 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			StringMaker sm = new StringMaker();
 
 			sm.append("SELECT DISTINCT {TagsAsset.*} ");
-			sm.append("FROM TagsAsset WHERE TagsAsset.assetId IN (");
+			sm.append("FROM TagsAsset WHERE");
 
-			for (int i = 0; i < entryIds.length; i++) {
-				sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+			if (entryIds.length > 0) {
+				sm.append("TagsAsset.assetId IN (");
 
-				if ((i + 1) < entryIds.length) {
-					sm.append(" AND TagsAsset.assetId IN (");
+				for (int i = 0; i < entryIds.length; i++) {
+					sm.append(CustomSQLUtil.get(FIND_BY_AND_ENTRY_IDS));
+
+					if ((i + 1) < entryIds.length) {
+						sm.append(" AND TagsAsset.assetId IN (");
+					}
 				}
-			}
 
-			for (int i = 0; i < entryIds.length; i++) {
-				if ((i + 1) < entryIds.length) {
-					sm.append(StringPool.CLOSE_PARENTHESIS);
+				for (int i = 0; i < entryIds.length; i++) {
+					if ((i + 1) < entryIds.length) {
+						sm.append(StringPool.CLOSE_PARENTHESIS);
+					}
 				}
+
+				if (excludeZeroViewCount) {
+					sm.append(" AND (TagsAsset.viewCount > 0)");
+				}
+
+				sm.append(StringPool.CLOSE_PARENTHESIS);
 			}
-
-			if (excludeZeroViewCount) {
-				sm.append(" AND (TagsAsset.viewCount > 0)");
+			else {
+				sm.append(QueryUtil.TRUE);
 			}
-
-			sm.append(StringPool.CLOSE_PARENTHESIS);
-
+			
 			if (notEntryIds.length > 0) {
 				sm.append(" AND (");
 
@@ -407,10 +554,6 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
 			int begin, int end)
 		throws SystemException {
-
-		if (entryIds.length == 0) {
-			return new ArrayList();
-		}
 
 		orderByCol1 = checkOrderByCol(orderByCol1);
 		orderByCol2 = checkOrderByCol(orderByCol2);
@@ -642,6 +785,10 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			if ((i + 1) != entryIds.length) {
 				sm.append("OR ");
 			}
+		}
+
+		if (sm.length() == 0) {
+			sm.append(QueryUtil.TRUE);
 		}
 
 		return sm.toString();
