@@ -1,0 +1,182 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%
+List portletsList = new ArrayList();
+Set portletIdsSet = new HashSet();
+
+Iterator itr1 = LayoutLocalServiceUtil.getLayouts(selGroup.getGroupId(), privateLayout).iterator();
+
+while (itr1.hasNext()) {
+	Layout curLayout = (Layout)itr1.next();
+
+	if (curLayout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+		LayoutTypePortlet curLayoutTypePortlet = (LayoutTypePortlet)curLayout.getLayoutType();
+
+		Iterator itr2 = curLayoutTypePortlet.getPortletIds().iterator();
+
+		while (itr2.hasNext()) {
+			Portlet curPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), (String)itr2.next());
+
+			if (curPortlet != null) {
+				PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
+
+				if ((portletDataHandler != null) && !portletIdsSet.contains(curPortlet.getRootPortletId())) {
+					portletIdsSet.add(curPortlet.getRootPortletId());
+
+					portletsList.add(curPortlet);
+				}
+			}
+		}
+	}
+}
+
+Collections.sort(portletsList, new PortletTitleComparator(application, locale));
+%>
+
+<script type="text/javascript">
+	function <portlet:namespace />toggleChildren(checkbox, parentDivId) {
+		if (checkbox.checked) {
+			jQuery('#' + parentDivId).find("input").not(".disabled").removeAttr('disabled');
+		}
+		else {
+			jQuery('#' + parentDivId).find("input").attr("disabled", "disabled");
+		}
+	}
+</script>
+
+<ul class="gamma lfr-component">
+	<li class="tree-item">
+		<input checked disabled="disabled" type="checkbox" />
+
+		<label><liferay-ui:message key="pages" /></label>
+	</li>
+
+	<li class="tree-item">
+		<input checked disabled="disabled" type="checkbox" />
+
+		<label><liferay-ui:message key="portlets" /></label>
+
+		<ul>
+			<li class="tree-item">
+				<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_SETUP %>" defaultValue="<%= true %>" />
+
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP%>Checkbox"><liferay-ui:message key="setup" /></label>
+			</li>
+			<li class="tree-item">
+				<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>" defaultValue="<%= false %>" />
+
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>Checkbox"><liferay-ui:message key="user-preferences" /></label>
+			</li>
+			<li id="<portlet:namespace />deleteDataOption" class="tree-item" style="display: none;">
+				<input id="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>" type="checkbox" />
+
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.DELETE_PORTLET_DATA %>"><liferay-ui:message key="delete-portlet-data-before-importing" /></label> <liferay-ui:icon-help message="delete-portlet-data-help" />
+			</li>
+			<li class="tree-item">
+				<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT %>" type="hidden" value="false" />
+
+				<input  checked="checked" id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />portletDataList');" type="checkbox" />
+
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA %>Checkbox"><liferay-ui:message key="data" /></label>
+
+				<div id="<portlet:namespace />portletDataList">
+					<ul>
+
+						<%
+						itr1 = portletsList.iterator();
+
+						while (itr1.hasNext()) {
+							Portlet curPortlet = (Portlet)itr1.next();
+
+							PortletDataHandler portletDataHandler = curPortlet.getPortletDataHandlerInstance();
+
+							PortletConfig curPortletConfig = PortletConfigFactory.create(curPortlet, application);
+
+							ResourceBundle resourceBundle = curPortletConfig.getResourceBundle(locale);
+
+							try {
+								PortletDataHandlerControl[] controls = portletDataHandler.getImportControls();
+
+								if (controls != null) {
+									String checked = StringPool.BLANK;
+
+									if (portletDataHandler.isPublishToLiveByDefault()) {
+										checked = "checked";
+									}
+						%>
+
+									<li class="tree-item">
+										<input <%= checked %> id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() %>"  onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() + "Controls" %>');" type="checkbox" />
+
+										<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA  + "_" + curPortlet.getPortletId() %>"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %></label>
+
+										<ul id="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_DATA + "_" + curPortlet.getPortletId() + "Controls" %>">
+											<%= _renderControls(renderResponse.getNamespace(), resourceBundle, controls) %>
+										</ul>
+									</li>
+
+						<%
+								}
+							}
+							catch (PortletDataException pde) {
+							%>
+
+								<li class="tree-item">
+									<span class="portlet-msg-error"><%= PortalUtil.getPortletTitle(curPortlet, application, locale) %>: <%= LanguageUtil.get(pageContext, "error-initializing-import-controls") %></span>
+								</li>
+
+						<%
+							}
+						}
+						%>
+
+					</ul>
+				</div>
+			</li>
+		</ul>
+	</li>
+
+	<li class="tree-item">
+		<input id="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>" onchange="<portlet:namespace/>toggleChildren(this, '<portlet:namespace />permissionsUl');" type="checkbox" />
+
+		<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PERMISSIONS %>"><liferay-ui:message key="permissions" /></label> <liferay-ui:icon-help message="export-import-permissions-help" />
+
+		<ul id="<portlet:namespace />permissionsUl">
+			<li class="tree-item">
+				<input checked class="disabled" disabled="disabled" type="checkbox" />
+
+				<label><liferay-ui:message key="permissions-assigned-to-organizations-user-groups-roles-and-communities" /></label>
+			</li>
+			<li class="tree-item">
+				<input disabled="disabled" id="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" name="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>" type="checkbox" />
+
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.USER_PERMISSIONS %>"><liferay-ui:message key="permissions-assigned-to-users" /></label> <liferay-ui:icon-help message="export-import-permissions-assigned-to-users-help" />
+			</li>
+		</ul>
+	</li>
+
+</ul>
+
+<%@include file="/html/portlet/communities/render_controls.jspf"%>

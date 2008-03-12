@@ -168,94 +168,17 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= pagesRedirect %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
-<fieldset>
-	<legend><liferay-ui:message key="scope" /></legend>
-
-	<c:choose>
-		<c:when test="<%= !publish %>">
-			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
-
-			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label><br />
-
-			<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
-
-			<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
-		</c:when>
-		<c:otherwise>
-			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
-
-			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label>
-
-			<c:if test="<%= results.size() > 0 %>">
-				<br />
-
-				<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
-
-				<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
-			</c:if>
-		</c:otherwise>
-	</c:choose>
-</fieldset>
-
-<div id="<portlet:namespace />pane" style="border: 1px solid #CCC; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto;">
-	<c:choose>
-		<c:when test="<%= !publish %>">
-			<div id="<portlet:namespace />select-tree-output" style="margin: 4px;"></div>
-
-			<liferay-util:include page="/html/portlet/communities/tree_js.jsp" />
-
-			<script type="text/javascript">
-				jQuery(
-					function() {
-						new Liferay.Tree(
-							{
-								className: "gamma",
-								icons: <portlet:namespace />layoutIcons,
-								nodes: <portlet:namespace />layoutArray,
-								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeKey) %>',
-								outputId: '#<%= renderResponse.getNamespace() %>select-tree-output',
-								selectable: true,
-								selectedNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeKey + "Selected") %>',
-								treeId: '<%= treeKey %>'
-							}
-						);
-					}
-				);
-			</script>
-		</c:when>
-		<c:otherwise>
-
-			<%
-			int total = results.size();
-
-			List headerNames = new ArrayList();
-
-			headerNames.add("pages");
-			headerNames.add("type");
-
-			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, null);
-
-			searchContainer.setTotal(total);
-			searchContainer.setResults(results);
-			searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, RowChecker.FORM_NAME, RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
-
-			List resultRows = searchContainer.getResultRows();
-
-			for (int i = 0; i < results.size(); i++) {
-				Layout curLayout = (Layout)results.get(i);
-
-				ResultRow row = new ResultRow(curLayout, curLayout.getPrimaryKey(), i);
-
-				row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
-
-				resultRows.add(row);
-			}
-			%>
-
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
-		</c:otherwise>
-	</c:choose>
-</div>
+<liferay-ui:tabs
+	names="pages,options"
+	refresh="<%= false %>"
+>
+	<liferay-ui:section>
+		<%@ include file="/html/portlet/communities/export_pages_select_pages.jspf" %>
+	</liferay-ui:section>
+	<liferay-ui:section>
+		<%@ include file="/html/portlet/communities/export_pages_options.jspf" %>
+	</liferay-ui:section>
+</liferay-ui:tabs>
 
 <br />
 

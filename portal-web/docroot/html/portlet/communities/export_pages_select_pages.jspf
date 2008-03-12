@@ -1,0 +1,112 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<fieldset>
+	<legend><liferay-ui:message key="scope" /></legend>
+
+	<c:choose>
+		<c:when test="<%= !publish %>">
+			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
+
+			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label><br />
+
+			<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
+
+			<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
+		</c:when>
+		<c:otherwise>
+			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
+
+			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label>
+
+			<c:if test="<%= results.size() > 0 %>">
+				<br />
+
+				<input <%= (results.size() > 0) ? "checked" : "" %> id="<portlet:namespace />scope_selected_pages" name="<portlet:namespace />scope" type="radio" value="selected-pages" onClick="Liferay.LayoutExporter.selected({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
+
+				<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
+			</c:if>
+		</c:otherwise>
+	</c:choose>
+</fieldset>
+
+<div id="<portlet:namespace />pane" style="border: 1px solid #CCC; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto;">
+	<c:choose>
+		<c:when test="<%= !publish %>">
+			<div id="<portlet:namespace />select-tree-output" style="margin: 4px;"></div>
+
+			<liferay-util:include page="/html/portlet/communities/tree_js.jsp" />
+
+			<script type="text/javascript">
+				jQuery(
+					function() {
+						new Liferay.Tree(
+							{
+								className: "gamma",
+								icons: <portlet:namespace />layoutIcons,
+								nodes: <portlet:namespace />layoutArray,
+								openNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeKey) %>',
+								outputId: '#<%= renderResponse.getNamespace() %>select-tree-output',
+								selectable: true,
+								selectedNodes: '<%= SessionTreeJSClicks.getOpenNodes(request, treeKey + "Selected") %>',
+								treeId: '<%= treeKey %>'
+							}
+						);
+					}
+				);
+			</script>
+		</c:when>
+		<c:otherwise>
+
+			<%
+			int total = results.size();
+
+			List headerNames = new ArrayList();
+
+			headerNames.add("pages");
+			headerNames.add("type");
+
+			SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, total, portletURL, headerNames, null);
+
+			searchContainer.setTotal(total);
+			searchContainer.setResults(results);
+			searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "fm2", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
+
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				Layout curLayout = (Layout)results.get(i);
+
+				ResultRow row = new ResultRow(curLayout, curLayout.getPrimaryKey(), i);
+
+				row.addJSP("left", "top", 2, "/html/portlet/communities/export_page_options.jsp");
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+		</c:otherwise>
+	</c:choose>
+</div>
