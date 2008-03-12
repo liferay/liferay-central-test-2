@@ -149,7 +149,7 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 				req, portlet.getPortletId());
 
 		PortletPreferencesServiceUtil.restoreArchivedPreferences(
-			layout.getGroupId(), name, portlet.getPortletId(), setup);
+			layout.getGroupId(), name, portlet.getRootPortletId(), setup);
 	}
 
 	protected void updateSetup(ActionRequest req, Portlet portlet)
@@ -166,7 +166,7 @@ public class EditArchivedSetupsAction extends EditConfigurationAction {
 
 		PortletPreferencesServiceUtil.updateArchivePreferences(
 			themeDisplay.getUserId(), themeDisplay.getLayout().getGroupId(),
-			name, portlet.getPortletId(), setup);
+			name, portlet.getRootPortletId(), setup);
 	}
 
 }
