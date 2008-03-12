@@ -2078,6 +2078,7 @@ please-enter-a-unique-group-id-and-artifact-id-combination=Incorpore por favor u
 please-enter-a-unique-id=Por favor, introduzca un identificador que no esté siendo usado.
 please-enter-a-unique-image-name=Incorpore por favor un nombre único de la imagen.
 please-enter-a-unique-name=Por favor, introduzca un nombre único.
+please-enter-a-unique-node-name=Incorpore por favor un nombre único del nodo.
 please-enter-a-unique-project-code=Por favor, introduzca un código de proyecto único.
 please-enter-a-unique-virtual-host=Por favor, introduzca un nombre de servidor virtual único.
 please-enter-a-valid-actual-end-date=Por favor, introduzca una fecha de fin válida.

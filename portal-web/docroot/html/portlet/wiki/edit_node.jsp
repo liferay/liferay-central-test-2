@@ -49,8 +49,8 @@ long nodeId = BeanParamUtil.getLong(node, request, "nodeId");
 	backURL="<%= redirect %>"
 />
 
-<liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
 <liferay-ui:error exception="<%= DuplicateNodeNameException.class %>" message="please-enter-a-unique-node-name" />
+<liferay-ui:error exception="<%= NodeNameException.class %>" message="please-enter-a-valid-name" />
 
 <table class="lfr-table">
 <tr>

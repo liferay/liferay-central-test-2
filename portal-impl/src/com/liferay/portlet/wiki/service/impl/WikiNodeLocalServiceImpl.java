@@ -428,7 +428,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		validate(0, groupId, name);
 	}
-	
+
 	protected void validate(long nodeId, long groupId, String name)
 		throws PortalException, SystemException {
 

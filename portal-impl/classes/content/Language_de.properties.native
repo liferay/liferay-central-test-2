@@ -2078,6 +2078,7 @@ please-enter-a-unique-group-id-and-artifact-id-combination=_ bitte eingeben ein 
 please-enter-a-unique-id=Bitte geben Sie eine eindeutige ID ein.
 please-enter-a-unique-image-name=Tragen Sie bitte einen einzigartigen Bildnamen ein.
 please-enter-a-unique-name=Bitte geben Sie einen eindeutigen Namen ein.
+please-enter-a-unique-node-name=Tragen Sie bitte einen einzigartigen Nullpunktnamen ein.
 please-enter-a-unique-project-code=Bitte geben Sie einen eindeutigen Projekt Code ein.
 please-enter-a-unique-virtual-host=Tragen Sie bitte einen eindeutigen virtuellen Host ein.
 please-enter-a-valid-actual-end-date=Bitte geben Sie einen gültiges aktuelles Enddatum ein.

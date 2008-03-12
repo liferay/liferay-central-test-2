@@ -83,8 +83,8 @@ public class EditNodeAction extends PortletAction {
 
 				setForward(req, "portlet.wiki.error");
 			}
-			else if (e instanceof NodeNameException ||
-					 e instanceof DuplicateNodeNameException) {
+			else if (e instanceof DuplicateNodeNameException ||
+					 e instanceof NodeNameException) {
 
 				SessionErrors.add(req, e.getClass().getName());
 			}
