@@ -139,7 +139,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 		<liferay-ui:message key="file" />
 	</td>
 	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
+		<input class="lfr-input-text" id="<portlet:namespace />file" name="<portlet:namespace />file" type="file" />
 	</td>
 </tr>
 <tr>
@@ -220,5 +220,22 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 
 	jQuery(document).ready(function() {
 		parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
+
+		jQuery("#<portlet:namespace />file").change(function () {
+			var value = jQuery(this).val();
+
+			if (value != null && value != "") {
+				var ext = value.substring(value.lastIndexOf("."));
+				ext = ext.toLowerCase();
+
+				var validArray = new Array('<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, "', '") %>');
+
+				if (jQuery.inArray(ext, validArray) == -1) {
+					alert('<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" />\n\n<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>');
+
+					jQuery(this).val("");
+				}
+			}
+		}).change();
 	});
 </script>

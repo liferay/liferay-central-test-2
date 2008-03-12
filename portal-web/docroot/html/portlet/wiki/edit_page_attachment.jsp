@@ -69,19 +69,19 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />file1"><liferay-ui:message key="file" /> 1</label>
 
-			<input name="<portlet:namespace />file1" type="file" />
+			<input id="<portlet:namespace />file1" name="<portlet:namespace />file1" type="file" />
 		</div>
 
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />file2"><liferay-ui:message key="file" /> 2</label>
 
-			<input name="<portlet:namespace />file2" type="file" />
+			<input id="<portlet:namespace />file2" name="<portlet:namespace />file2" type="file" />
 		</div>
 
 		<div class="ctrl-holder">
 			<label for="<portlet:namespace />file3"><liferay-ui:message key="file" /> 3</label>
 
-			<input name="<portlet:namespace />file3" type="file" />
+			<input id="<portlet:namespace />file3" name="<portlet:namespace />file3" type="file" />
 		</div>
 	</fieldset>
 
@@ -95,3 +95,26 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 </div>
 
 </form>
+
+<script type="text/javascript">
+	jQuery(document).ready(function() {
+		for (var i = 1; i < 4; i++) {
+			jQuery("#<portlet:namespace />file" + i).change(function () {
+				var value = jQuery(this).val();
+
+				if (value != null && value != "") {
+					var ext = value.substring(value.lastIndexOf("."));
+					ext = ext.toLowerCase();
+
+					var validArray = new Array("<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, "\", \"") %>");
+
+					if (jQuery.inArray(ext, validArray) == -1) {
+						alert('<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" />\n\n<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>');
+
+						jQuery(this).val("");
+					}
+				}
+			}).change();
+		}
+	});
+</script>

@@ -166,7 +166,7 @@ String fileMaxSize = String.valueOf(PropsValues.DL_FILE_MAX_SIZE / 1024);
 		<liferay-ui:message key="file" />
 	</td>
 	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />file" type="file" />
+		<input class="lfr-input-text" id="<portlet:namespace />file" name="<portlet:namespace />file" type="file" />
 	</td>
 </tr>
 <tr>
@@ -270,9 +270,24 @@ if (fileEntry == null) {
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
 
-	jQuery(document).ready(
-		function() {
-			parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
-		}
-	);
+	jQuery(document).ready(function() {
+		parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
+
+		jQuery("#<portlet:namespace />file").change(function () {
+			var value = jQuery(this).val();
+
+			if (value != null && value != "") {
+				var ext = value.substring(value.lastIndexOf("."));
+				ext = ext.toLowerCase();
+
+				var validArray = new Array("<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, "\", \"") %>");
+
+				if (jQuery.inArray(ext, validArray) == -1) {
+					alert('<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" />\n\n<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>');
+
+					jQuery(this).val("");
+				}
+			}
+		}).change();
+	});
 </script>
