@@ -22,20 +22,53 @@
 
 package com.liferay.portalweb.portlet.journalcontentsearch;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="JournalContentSearchTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="SearchPortletTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalContentSearchTests extends BaseTests {
+public class SearchPortletTest extends BaseTestCase {
+	public void testSearchPortlet() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public JournalContentSearchTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(SearchPortletTest.class);
+			try {
+				if (selenium.isElementPresent("_77_keywords")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_77_keywords", "test");
+		selenium.click("//input[@type='image']");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Test Journal Article 2")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
