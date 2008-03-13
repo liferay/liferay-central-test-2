@@ -39,6 +39,7 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
+import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
 import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 
@@ -115,7 +116,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		Iterator<BlogsEntry> itr = blogsEntryLocalService.getCompanyEntries(
-			companyId, 0, _MAX_END).iterator();
+			companyId, 0, _MAX_END, new EntryDisplayDateComparator(false))
+				.iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {
 			BlogsEntry entry = itr.next();
