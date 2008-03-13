@@ -82,7 +82,7 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 			<li class="tree-item">
 				<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_SETUP %>" defaultValue="<%= true %>" />
 
-				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP%>Checkbox"><liferay-ui:message key="setup" /></label>
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>Checkbox"><liferay-ui:message key="setup" /></label>
 			</li>
 			<li class="tree-item">
 				<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>" defaultValue="<%= false %>" />
@@ -179,4 +179,4 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 
 </ul>
 
-<%@include file="/html/portlet/communities/render_controls.jspf"%>
+<%@ include file="/html/portlet/communities/render_controls.jspf" %>
