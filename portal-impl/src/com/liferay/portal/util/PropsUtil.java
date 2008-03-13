@@ -867,9 +867,9 @@ public class PropsUtil {
 
 	public static final String WEBDAV_IGNORE = "webdav.ignore";
 
-	public static final String WEBDAV_STORAGE_TOKEN = "webdav.storage.token.";
+	public static final String WEBDAV_STORAGE_TOKENS = "webdav.storage.tokens";
 
-	public static final String WEBDAV_STORAGE_CLASS = "webdav.storage.class.";
+	public static final String WEBDAV_STORAGE_CLASS = "webdav.storage.class";
 
 	// Admin Portlet
 

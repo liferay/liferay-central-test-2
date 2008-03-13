@@ -396,41 +396,43 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 		</script>
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="webdav-url" />
-			</td>
-			<td>
+		<c:if test='<%= WebDAVUtil.isEnabled("com.liferay.portlet.documentlibrary.webdav.DLWebDAVStorageImpl") %>'>
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="webdav-url" />
+				</td>
+				<td>
 
-				<%
-				StringBuffer sb = new StringBuffer();
+					<%
+					StringBuffer sb = new StringBuffer();
 
-				if (folder != null) {
-					DLFolder curFolder = folder;
+					if (folder != null) {
+						DLFolder curFolder = folder;
 
-					while (true) {
-						sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
-						sb.insert(0, StringPool.SLASH);
+						while (true) {
+							sb.insert(0, HttpUtil.encodeURL(curFolder.getName(), true));
+							sb.insert(0, StringPool.SLASH);
 
-						if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
-							break;
-						}
-						else {
-							curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+							if (curFolder.getParentFolderId() == DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
+								break;
+							}
+							else {
+								curFolder = DLFolderLocalServiceUtil.getFolder(curFolder.getParentFolderId());
+							}
 						}
 					}
-				}
 
-				Group group = layout.getGroup();
-				%>
+					Group group = layout.getGroup();
+					%>
 
-				<liferay-ui:input-resource
-					url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
-				/>
-			</td>
-		</tr>
-		</table>
+					<liferay-ui:input-resource
+						url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
+					/>
+				</td>
+			</tr>
+			</table>
+		</c:if>
 
 		<c:if test="<%= folder != null %>">
 			<br />

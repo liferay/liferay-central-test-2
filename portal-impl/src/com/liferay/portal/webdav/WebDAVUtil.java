@@ -22,6 +22,8 @@
 
 package com.liferay.portal.webdav;
 
+import com.germinus.easyconf.Filter;
+
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -215,6 +217,10 @@ public class WebDAVUtil {
 		}
 	}
 
+	public static boolean isEnabled(String storageClassName) {
+		return _instance._isEnabled(storageClassName);
+	}
+
 	public static boolean isOverwrite(HttpServletRequest req) {
 		String value = GetterUtil.getString(req.getHeader("Overwrite"));
 
@@ -229,12 +235,14 @@ public class WebDAVUtil {
 	private WebDAVUtil() {
 		_storageMap = new HashMap<String, String>();
 
-		for (int i = 1; true; i++) {
-			String className = PropsUtil.get(
-				PropsUtil.WEBDAV_STORAGE_CLASS + i);
-			String token = PropsUtil.get(PropsUtil.WEBDAV_STORAGE_TOKEN + i);
+		String[] tokens = PropsUtil.getArray(PropsUtil.WEBDAV_STORAGE_TOKENS);
 
-			if (Validator.isNull(className) || Validator.isNull(token)) {
+		for (String token: tokens) {
+			String className =
+				PropsUtil.getComponentProperties().getString(
+					PropsUtil.WEBDAV_STORAGE_CLASS, Filter.by(token));
+
+			if (Validator.isNull(className)) {
 				break;
 			}
 
@@ -260,6 +268,10 @@ public class WebDAVUtil {
 
 	private Collection<String> _getStorageTokens() {
 		return _storageMap.values();
+	}
+
+	private boolean _isEnabled(String storageClassName) {
+		return _storageMap.containsKey(storageClassName);
 	}
 
 	private static Log _log = LogFactory.getLog(WebDAVUtil.class);

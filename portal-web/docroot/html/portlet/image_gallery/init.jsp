@@ -26,6 +26,7 @@
 
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portal.webdav.WebDAVUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.DuplicateFolderNameException" %>
 <%@ page import="com.liferay.portlet.imagegallery.DuplicateImageNameException" %>
 <%@ page import="com.liferay.portlet.imagegallery.FolderNameException" %>
