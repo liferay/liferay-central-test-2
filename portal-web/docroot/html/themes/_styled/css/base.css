@@ -50,6 +50,10 @@ body.portal-popup {
 	padding: 10px;
 }
 
+body.portal-iframe {
+	padding: 0;
+}
+
 table {
 	clear: both;
 }

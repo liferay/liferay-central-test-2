@@ -372,7 +372,9 @@ Liferay.Upload = new Class({
 		if (!instance._fallbackIframe) {
 			instance._fallbackIframe = instance._fallbackContainer.find('iframe[@id$=-iframe]');
 
-			instance._fallbackIframe.height(300);
+			var frameHeight = jQuery('#content-wrapper', instance._fallbackIframe[0].contentWindow).height() || 250;
+
+			instance._fallbackIframe.height(frameHeight + 150);
 		}
 	},
 
