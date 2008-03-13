@@ -75,10 +75,10 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 	}
 
 	function <portlet:namespace />publishToLive() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-to-live-and-update-the-existing-live-portlet-data") %>')) {
-		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "publish_to_live";
+		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-to-live-and-update-the-existing-portlet-data") %>')) {
+			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "publish_to_live";
 
-		submitForm(document.<portlet:namespace />fm);
+			submitForm(document.<portlet:namespace />fm);
 		}
 	}
 
