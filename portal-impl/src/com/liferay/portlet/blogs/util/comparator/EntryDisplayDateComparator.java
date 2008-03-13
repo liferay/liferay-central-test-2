@@ -39,6 +39,10 @@ public class EntryDisplayDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "displayDate DESC";
 
+	public EntryDisplayDateComparator() {
+		this(false);
+	}
+
 	public EntryDisplayDateComparator(boolean asc) {
 		_asc = asc;
 	}

@@ -116,7 +116,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 		List<BlogsEntry> entries = new ArrayList<BlogsEntry>();
 
 		Iterator<BlogsEntry> itr = blogsEntryLocalService.getCompanyEntries(
-			companyId, 0, _MAX_END, new EntryDisplayDateComparator(false))
+			companyId, 0, _MAX_END, new EntryDisplayDateComparator())
 				.iterator();
 
 		while (itr.hasNext() && (entries.size() < max)) {

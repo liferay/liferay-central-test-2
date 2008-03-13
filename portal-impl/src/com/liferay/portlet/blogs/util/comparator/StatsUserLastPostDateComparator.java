@@ -39,6 +39,10 @@ public class StatsUserLastPostDateComparator extends OrderByComparator {
 
 	public static String ORDER_BY_DESC = "lastPostDate DESC";
 
+	public StatsUserLastPostDateComparator() {
+		this(false);
+	}
+
 	public StatsUserLastPostDateComparator(boolean asc) {
 		_asc = asc;
 	}
