@@ -39,7 +39,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
  */
 public class DLFileEntryServiceTest extends BaseServiceTestCase {
 
-	public void testDuplicateName() throws Exception {
+	public void testAddFileEntryWithDuplicateName() throws Exception {
 		String fileName = "helloworld.txt";
 		String description = StringPool.BLANK;
 		String[] tagsEntries = null;
@@ -72,6 +72,9 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
+		long groupId = PortalUtil.getPortletGroupId(
+			TestPropsValues.LAYOUT_PLID);
+
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
@@ -79,9 +82,6 @@ public class DLFileEntryServiceTest extends BaseServiceTestCase {
 		boolean addGuestPermissions = true;
 
 		try {
-			long groupId = PortalUtil.getPortletGroupId(
-				TestPropsValues.LAYOUT_PLID);
-
 			DLFolderServiceUtil.deleteFolder(
 				groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID, name);
 		}

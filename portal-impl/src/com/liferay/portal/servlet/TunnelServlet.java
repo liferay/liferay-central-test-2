@@ -81,9 +81,7 @@ public class TunnelServlet extends HttpServlet {
 				CompanyThreadLocal.setCompanyId(companyId);
 
 				if (httpPrincipal.getUserId() > 0) {
-					String name = String.valueOf(httpPrincipal.getUserId());
-
-					PrincipalThreadLocal.setName(name);
+					PrincipalThreadLocal.setName(httpPrincipal.getUserId());
 
 					User user = UserLocalServiceUtil.getUserById(
 						httpPrincipal.getUserId());

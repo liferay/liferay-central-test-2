@@ -74,6 +74,18 @@ import org.json.JSONObject;
 public class MBCategoryServiceJSON {
 	public static JSONObject addCategory(long plid, long parentCategoryId,
 		java.lang.String name, java.lang.String description,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.messageboards.model.MBCategory returnValue = MBCategoryServiceUtil.addCategory(plid,
+				parentCategoryId, name, description, addCommunityPermissions,
+				addGuestPermissions);
+
+		return MBCategoryJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject addCategory(long plid, long parentCategoryId,
+		java.lang.String name, java.lang.String description,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,

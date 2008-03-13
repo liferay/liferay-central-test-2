@@ -19,19 +19,20 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
+
 package com.liferay.portlet.messageboards.service;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.security.permission.DoAsUserThread;
 import com.liferay.portal.service.BaseServiceTestCase;
-import com.liferay.portal.spring.util.SpringUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
-import org.springframework.context.ApplicationContext;
+import javax.portlet.PortletPreferences;
 
 /**
  * <a href="MBMessageServiceTest.java.html"><b><i>View Source</i></b></a>
@@ -41,85 +42,52 @@ import org.springframework.context.ApplicationContext;
  */
 public class MBMessageServiceTest extends BaseServiceTestCase {
 
-	public void testConcurrentWrites() throws Exception {
-		int numOfThreads = 50;
-		long categoryId = _category.getCategoryId();
+	public void testAddMessagesConcurrently() throws Exception {
+		int threadCount = 50;
 
-		MBMessageWorkerThread[] threads =
-			new MBMessageWorkerThread[numOfThreads];
+		DoAsUserThread[] threads = new DoAsUserThread[threadCount];
 
 		for (int i = 0; i < threads.length; i++) {
-			String subject = "MBMessage Thread " + (i + 1);
+			String subject = "Test Message " + i;
 
-			threads[i] = new MBMessageWorkerThread(categoryId, subject);
+			threads[i] = new AddMessageThread(subject);
 		}
 
-		for (int i = 0; i < threads.length; i++) {
-			threads[i].start();
+		for (DoAsUserThread thread : threads) {
+			thread.start();
 		}
 
-		for (int i = 0; i < threads.length; i++) {
-			try {
-				threads[i].join();
-			} catch (InterruptedException ie) {
-			}
+		for (DoAsUserThread thread : threads) {
+			thread.join();
 		}
 
 		int successCount = 0;
 
-		for (int i = 0; i < threads.length; i++) {
-			if (threads[i].getSuccess()) {
+		for (DoAsUserThread thread : threads) {
+			if (thread.isSuccess()) {
 				successCount++;
 			}
 		}
 
 		assertTrue(
-			"Only " + successCount + " out of " + numOfThreads +
-				" threads added messages successfully.",
-			successCount == numOfThreads);
+			"Only " + successCount + " out of " + threadCount +
+				" threads added messages successfully",
+			successCount == threadCount);
 	}
 
 	protected void setUp() throws Exception {
 		super.setUp();
 
-		// Make sure to fully load all the beans in spring
-
-		ApplicationContext context = SpringUtil.getContext();
-
-		String[] beanDefinitionNames = context.getBeanDefinitionNames();
-
-		for (String beanDefinitionName: beanDefinitionNames) {
-			BeanLocatorUtil.locate(beanDefinitionName, false);
-		}
-
-		// Clean out any pre-existing test category
-
 		String name = "Test Category";
 		String description = "This is a test category.";
 
-		long groupId = PortalUtil.getPortletGroupId(
-			TestPropsValues.LAYOUT_PLID);
-
-		int count = MBCategoryServiceUtil.getCategoriesCount(
-			groupId, MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
-
-		List<MBCategory> list = MBCategoryServiceUtil.getCategories(
-			groupId, MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID, 0, count);
-
-		for (MBCategory category: list) {
-			if (category.getName().equals(name)) {
-				MBCategoryServiceUtil.deleteCategory(category.getCategoryId());
-
-				break;
-			}
-		}
-
-		// Add a new test category
+		boolean addCommunityPermissions = true;
+		boolean addGuestPermissions = true;
 
 		_category = MBCategoryServiceUtil.addCategory(
 			TestPropsValues.LAYOUT_PLID,
 			MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID, name, description,
-			null, null);
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	protected void tearDown() throws Exception {
@@ -131,4 +99,40 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 	}
 
 	private MBCategory _category;
+
+	private class AddMessageThread extends DoAsUserThread {
+
+		public AddMessageThread(String subject) {
+			super(TestPropsValues.USER_ID);
+
+			_subject = subject;
+		}
+
+		public boolean isSuccess() {
+			return true;
+		}
+
+		protected void doRun() throws Exception {
+			String body = "This is a test message.";
+			List files = new ArrayList();
+			boolean anonymous = false;
+			double priority = 0.0;
+			String[] tagsEntries = null;
+			PortletPreferences prefs = null;
+
+			boolean addCommunityPermissions = true;
+			boolean addGuestPermissions = true;
+
+			ThemeDisplay themeDisplay = null;
+
+			MBMessageServiceUtil.addMessage(
+				_category.getCategoryId(), _subject, body, files, anonymous,
+				priority, tagsEntries, prefs, addCommunityPermissions,
+				addGuestPermissions, themeDisplay);
+		}
+
+		private String _subject;
+
+	}
+
 }

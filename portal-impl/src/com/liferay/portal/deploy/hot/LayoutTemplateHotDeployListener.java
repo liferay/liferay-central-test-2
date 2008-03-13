@@ -130,8 +130,8 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 						LayoutTemplateLocalUtil.uninstallLayoutTemplate(
 							layoutTemplateId, standard.booleanValue());
 					}
-					catch (Exception e1) {
-						_log.error(e1.getMessage());
+					catch (Exception e) {
+						_log.error(e.getMessage());
 					}
 				}
 
@@ -144,11 +144,11 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 				}
 			}
 		}
-		catch (Exception e2) {
+		catch (Exception e) {
 			throw new HotDeployException(
 				"Error unregistering layout templates for " +
 					servletContextName,
-				e2);
+				e);
 		}
 	}
 

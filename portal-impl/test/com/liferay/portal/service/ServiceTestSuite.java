@@ -22,6 +22,8 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.TestPropsUtil;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceTest;
@@ -39,6 +41,12 @@ import junit.framework.TestSuite;
 public class ServiceTestSuite extends TestSuite {
 
 	public ServiceTestSuite() {
+		if (!GetterUtil.getBoolean(TestPropsUtil.get(
+				ServiceTestSuite.class.getName() + ".enabled"))) {
+
+			return;
+		}
+
 		addTestSuite(BookmarksFolderServiceTest.class);
 		addTestSuite(BookmarksEntryServiceTest.class);
 		addTestSuite(DLFileEntryServiceTest.class);

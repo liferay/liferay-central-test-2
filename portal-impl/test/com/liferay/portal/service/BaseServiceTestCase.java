@@ -30,12 +30,15 @@ import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.TestPropsValues;
 
 import java.net.URL;
 
 import junit.framework.TestCase;
+
+import org.springframework.context.ApplicationContext;
 
 /**
  * <a href="BaseServiceTestCase.java.html"><b><i>View Source</i></b></a>
@@ -52,9 +55,17 @@ public class BaseServiceTestCase extends TestCase {
 	protected void setUp() throws Exception {
 		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
+		ApplicationContext context = SpringUtil.getContext();
+
+		String[] beanDefinitionNames = context.getBeanDefinitionNames();
+
+		for (String beanDefinitionName: beanDefinitionNames) {
+			BeanLocatorUtil.locate(beanDefinitionName, false);
+		}
+
 		PortalInstances.addCompanyId(TestPropsValues.COMPANY_ID);
 
-		PrincipalThreadLocal.setName(String.valueOf(TestPropsValues.USER_ID));
+		PrincipalThreadLocal.setName(TestPropsValues.USER_ID);
 
 		User user = UserLocalServiceUtil.getUserById(TestPropsValues.USER_ID);
 

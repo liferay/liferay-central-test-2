@@ -41,7 +41,7 @@ import java.io.File;
  */
 public class IGImageServiceTest extends BaseServiceTestCase {
 
-	public void testDuplicateName() throws Exception {
+	public void testImageWithDuplicateName() throws Exception {
 		String name = "liferay.png";
 		String description = StringPool.BLANK;
 		File image = new File(getClassResource(
@@ -71,6 +71,9 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 
+		long groupId = PortalUtil.getPortletGroupId(
+			TestPropsValues.LAYOUT_PLID);
+
 		String name = "Test Folder";
 		String description = "This is a test folder.";
 
@@ -78,9 +81,6 @@ public class IGImageServiceTest extends BaseServiceTestCase {
 		boolean addGuestPermissions = true;
 
 		try {
-			long groupId = PortalUtil.getPortletGroupId(
-				TestPropsValues.LAYOUT_PLID);
-
 			_folder = IGFolderServiceUtil.getFolder(
 				groupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID, name);
 
