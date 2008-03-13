@@ -215,7 +215,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			</c:if>
 		</script>
 
-		<c:if test='<%= WebDAVUtil.isEnabled("com.liferay.portlet.imagegallery.webdav.IGWebDAVStorageImpl") %>'>
+		<c:if test="<%= WebDAVUtil.isEnabled(IGWebDAVStorageImpl.class.getName()) %>">
 			<table class="lfr-table">
 			<tr>
 				<td>

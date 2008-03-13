@@ -90,6 +90,7 @@
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalStructurePermission" %>
 <%@ page import="com.liferay.portlet.journal.service.permission.JournalTemplatePermission" %>
 <%@ page import="com.liferay.portlet.journal.util.JournalUtil" %>
+<%@ page import="com.liferay.portlet.journal.webdav.JournalWebDAVStorageImpl" %>
 
 <%@ page import="com.liferay.util.RSSUtil" %>
 

@@ -232,7 +232,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		</td>
 	</tr>
 
-	<c:if test='<%= WebDAVUtil.isEnabled("com.liferay.portlet.journal.webdav.JournalWebDAVStorageImpl") %>'>
+	<c:if test="<%= WebDAVUtil.isEnabled(JournalWebDAVStorageImpl.class.getName()) %>">
 		<tr>
 			<td>
 				<liferay-ui:message key="webdav-url" />

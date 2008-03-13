@@ -110,7 +110,7 @@ if (image != null) {
 		</td>
 	</tr>
 
-	<c:if test='<%= WebDAVUtil.isEnabled("com.liferay.portlet.imagegallery.webdav.IGWebDAVStorageImpl") %>'>
+	<c:if test="<%= WebDAVUtil.isEnabled(IGWebDAVStorageImpl.class.getName()) %>">
 		<tr>
 			<td>
 				<liferay-ui:message key="webdav-url" />

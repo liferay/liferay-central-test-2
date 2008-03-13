@@ -242,11 +242,9 @@ public class WebDAVUtil {
 				PropsUtil.getComponentProperties().getString(
 					PropsUtil.WEBDAV_STORAGE_CLASS, Filter.by(token));
 
-			if (Validator.isNull(className)) {
-				break;
+			if (Validator.isNotNull(className)) {
+				_storageMap.put(className, token);
 			}
-
-			_storageMap.put(className, token);
 		}
 	}
 
