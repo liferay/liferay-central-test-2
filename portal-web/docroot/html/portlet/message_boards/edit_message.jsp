@@ -64,8 +64,9 @@ boolean attachments = BeanParamUtil.getBoolean(message, request, "attachments");
 boolean preview = ParamUtil.getBoolean(request, "preview");
 boolean quote = ParamUtil.getBoolean(request, "quote");
 
-String[] existingAttachments = new String[] {};
-if (message != null && message.isAttachments()) {
+String[] existingAttachments = new String[0];
+
+if ((message != null) && message.isAttachments()) {
 	existingAttachments = DLServiceUtil.getFileNames(message.getCompanyId(), CompanyImpl.SYSTEM, message.getAttachmentsDir());
 }
 %>
@@ -224,19 +225,22 @@ if (message != null) {
 			<%
 			for (int i = 0; i < existingAttachments.length; i++) {
 				String existingPath = existingAttachments[i];
+
 				String existingName = StringUtil.extractLast(existingPath, StringPool.SLASH);
 			%>
 
 				<tr>
 					<td>
-						<span id="<portlet:namespace />existingFile<%= (i + 1) %>">
-							<input name="<portlet:namespace />existingPath<%= (i + 1) %>" type="hidden" value="<%= existingPath %>" />
+						<span id="<portlet:namespace />existingFile<%= i + 1 %>">
+							<input name="<portlet:namespace />existingPath<%= i + 1 %>" type="hidden" value="<%= existingPath %>" />
+
 							<%= existingName %>
 						</span>
-						<input id="<portlet:namespace />msgFile<%= (i + 1) %>" name="<portlet:namespace />msgFile<%= (i + 1) %>" size="70" type="file" style="display: none;" />
+
+						<input id="<portlet:namespace />msgFile<%= i + 1 %>" name="<portlet:namespace />msgFile<%= i + 1 %>" size="70" style="display: none;" type="file" />
 					</td>
 					<td>
-						<img id="<portlet:namespace />removeExisting<%= (i + 1) %>" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" />
+						<img id="<portlet:namespace />removeExisting<%= i + 1 %>" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_x.png" />
 					</td>
 				</tr>
 
@@ -252,9 +256,7 @@ if (message != null) {
 					<td>
 						<input name="<portlet:namespace />msgFile<%= i %>" size="70" type="file" />
 					</td>
-					<td>
-						<br />
-					</td>
+					<td></td>
 				</tr>
 
 			<%
@@ -429,29 +431,35 @@ if (message != null) {
 
 </form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
-	<script type="text/javascript">
-	jQuery(document).ready(function() {
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);
+<script type="text/javascript">
+	jQuery(document).ready(
+		function() {
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+				Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />subject);
+			</c:if>
 
-		<%
-		for (int i = 1; i <= existingAttachments.length; i++) {
-		%>
-			jQuery("#<portlet:namespace />removeExisting" + <%= i %>).click(function () {
-				var button = jQuery(this);
-				var span = jQuery("#<portlet:namespace />existingFile" + <%= i %>);
-				var file = jQuery("#<portlet:namespace />msgFile" + <%= i %>);
+			<%
+			for (int i = 1; i <= existingAttachments.length; i++) {
+			%>
 
-				span.remove();
-				file.show();
-				button.remove();
-			});
-		<%
+				jQuery("#<portlet:namespace />removeExisting" + <%= i %>).click(
+					function () {
+						var button = jQuery(this);
+						var span = jQuery("#<portlet:namespace />existingFile" + <%= i %>);
+						var file = jQuery("#<portlet:namespace />msgFile" + <%= i %>);
+
+						button.remove();
+						span.remove();
+						file.show();
+					}
+				);
+
+			<%
+			}
+			%>
 		}
-		%>
-	});
-	</script>
-</c:if>
+	);
+</script>
 
 <%!
 private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.portlet.message_boards.edit_message.jsp");

@@ -1087,16 +1087,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		long repositoryId = CompanyImpl.SYSTEM;
 		String dirName = message.getAttachmentsDir();
 
-		if (!files.isEmpty() || !existingFiles.isEmpty()) {
-			try {
+		try {
+			if (!files.isEmpty() || !existingFiles.isEmpty()) {
 				try {
 					dlService.addDirectory(companyId, repositoryId, dirName);
 				}
 				catch (DuplicateDirectoryException dde) {
 				}
 
-				String[] fileNames =
-					dlService.getFileNames(companyId, repositoryId, dirName);
+				String[] fileNames = dlService.getFileNames(
+					companyId, repositoryId, dirName);
 
 				for (String fileName: fileNames) {
 					if (!existingFiles.contains(fileName)) {
@@ -1121,20 +1121,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					}
 				}
 			}
-			catch (RemoteException re) {
-				throw new SystemException(re);
+			else {
+				try {
+					dlService.deleteDirectory(
+						companyId, portletId, repositoryId, dirName);
+				}
+				catch (NoSuchDirectoryException nsde) {
+				}
 			}
 		}
-		else {
-			try {
-				dlService.deleteDirectory(
-					companyId, portletId, repositoryId, dirName);
-			}
-			catch (NoSuchDirectoryException nsde) {
-			}
-			catch (RemoteException re) {
-				throw new SystemException(re);
-			}
+		catch (RemoteException re) {
+			throw new SystemException(re);
 		}
 
 		// Message
