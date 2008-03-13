@@ -107,6 +107,8 @@ Liferay.LayoutExporter = {
 				url: url,
 				success: function(response) {
 					jQuery(exportLayoutsPopup).html(response);
+
+					Liferay.Util.evalScripts(exportLayoutsPopup);
 				}
 			}
 		);
