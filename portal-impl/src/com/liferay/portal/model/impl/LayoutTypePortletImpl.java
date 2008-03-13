@@ -126,8 +126,10 @@ public class LayoutTypePortletImpl
 		String layoutTemplateId =
 			getTypeSettingsProperties().getProperty(LAYOUT_TEMPLATE_ID);
 
-		if( layoutTemplateId == null ) layoutTemplateId = StringPool.BLANK;
-		
+		if (Validator.isNull(layoutTemplateId)) {
+			layoutTemplateId = StringPool.BLANK;
+		}
+
 		return layoutTemplateId;
 	}
 
