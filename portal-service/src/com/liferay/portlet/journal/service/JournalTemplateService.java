@@ -74,6 +74,11 @@ public interface JournalTemplateService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
+		long groupId, java.lang.String structureId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		long groupId, java.lang.String templateId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,

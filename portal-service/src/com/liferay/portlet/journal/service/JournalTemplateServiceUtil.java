@@ -94,6 +94,15 @@ public class JournalTemplateServiceUtil {
 		journalTemplateService.deleteTemplate(groupId, templateId);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
+		long groupId, java.lang.String structureId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		JournalTemplateService journalTemplateService = JournalTemplateServiceFactory.getService();
+
+		return journalTemplateService.getStructureTemplates(groupId, structureId);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		long groupId, java.lang.String templateId)
 		throws com.liferay.portal.PortalException,

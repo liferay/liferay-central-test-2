@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.service.http;
 
 import com.liferay.portlet.journal.service.JournalTemplateServiceUtil;
 
+import org.json.JSONArray;
 import org.json.JSONObject;
 
 /**
@@ -75,6 +76,17 @@ public class JournalTemplateServiceJSON {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		JournalTemplateServiceUtil.deleteTemplate(groupId, templateId);
+	}
+
+	public static JSONArray getStructureTemplates(long groupId,
+		java.lang.String structureId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.List<com.liferay.portlet.journal.model.JournalTemplate> returnValue =
+			JournalTemplateServiceUtil.getStructureTemplates(groupId,
+				structureId);
+
+		return JournalTemplateJSONSerializer.toJSONArray(returnValue);
 	}
 
 	public static JSONObject getTemplate(long groupId,

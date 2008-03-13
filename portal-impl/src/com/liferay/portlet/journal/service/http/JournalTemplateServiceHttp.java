@@ -335,6 +335,49 @@ public class JournalTemplateServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> getStructureTemplates(
+		HttpPrincipal httpPrincipal, long groupId, java.lang.String structureId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(groupId);
+
+			Object paramObj1 = structureId;
+
+			if (structureId == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(JournalTemplateServiceUtil.class.getName(),
+					"getStructureTemplates",
+					new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.journal.model.JournalTemplate>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portlet.journal.model.JournalTemplate getTemplate(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String templateId)
 		throws com.liferay.portal.SystemException,
