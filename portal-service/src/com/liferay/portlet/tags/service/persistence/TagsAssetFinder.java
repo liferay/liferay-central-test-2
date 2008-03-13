@@ -29,14 +29,14 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public interface TagsAssetFinder {
-	public int countByAndEntryIds(long groupId, long[] classNameIds,
-		long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate)
-		throws com.liferay.portal.SystemException;
-
 	public int countAssets(long groupId, long[] classNameIds,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate)
+		throws com.liferay.portal.SystemException;
+
+	public int countByAndEntryIds(long groupId, long[] classNameIds,
+		long[] entryIds, long[] notEntryIds, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
 	public int countByOrEntryIds(long groupId, long[] classNameIds,
