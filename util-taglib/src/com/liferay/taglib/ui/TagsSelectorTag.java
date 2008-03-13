@@ -37,6 +37,10 @@ public class TagsSelectorTag extends IncludeTag {
 	public int doStartTag() {
 		ServletRequest req = pageContext.getRequest();
 
+		req.setAttribute(
+			"liferay-ui:tags_selector:formName", String.valueOf(_formName));
+		req.setAttribute(
+			"liferay-ui:tags_selector:fieldNames", String.valueOf(_fieldNames));
 		req.setAttribute("liferay-ui:tags_selector:className", _className);
 		req.setAttribute(
 			"liferay-ui:tags_selector:classPK", String.valueOf(_classPK));
@@ -46,6 +50,14 @@ public class TagsSelectorTag extends IncludeTag {
 			"liferay-ui:tags_selector:focus", String.valueOf(_focus));
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public void setFormName(String formName) {
+		_formName = formName;
+	}
+
+	public void setFieldNames(String fieldNames) {
+		_fieldNames = fieldNames;
 	}
 
 	public void setClassName(String className) {
@@ -75,6 +87,8 @@ public class TagsSelectorTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/tags_selector/page.jsp";
 
+	private String _formName;
+	private String _fieldNames;
 	private String _className;
 	private long _classPK;
 	private String _hiddenInput;

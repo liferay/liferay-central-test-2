@@ -358,6 +358,8 @@ if (message != null) {
 		%>
 
 		<liferay-ui:tags-selector
+			formName='<%= renderResponse.getNamespace() + "fm" %>'
+			fieldNames='<%= renderResponse.getNamespace() + "subject,textArea,badName" %>'
 			className="<%= MBMessage.class.getName() %>"
 			classPK="<%= classPK %>"
 			hiddenInput="tagsEntries"

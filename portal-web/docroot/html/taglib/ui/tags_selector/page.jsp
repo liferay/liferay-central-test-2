@@ -31,11 +31,15 @@ themeDisplay.setIncludeServiceJs(true);
 
 String randomNamespace = PwdGenerator.getPassword(PwdGenerator.KEY3, 4) + StringPool.UNDERLINE;
 
+String formName = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:formName"));
+String fieldNames = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:fieldNames"));
 String className = (String)request.getAttribute("liferay-ui:tags_selector:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:tags_selector:classPK"));
 String hiddenInput = (String)request.getAttribute("liferay-ui:tags_selector:hiddenInput");
 String curTags = GetterUtil.getString((String)request.getAttribute("liferay-ui:tags_selector:curTags"));
 boolean focus = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:tags_selector:focus"));
+
+boolean suggestible = Validator.isNotNull(formName) && Validator.isNotNull(fieldNames);
 
 if (Validator.isNotNull(className) && (classPK > 0)) {
 	List entries = TagsEntryLocalServiceUtil.getEntries(className, classPK);
@@ -69,6 +73,10 @@ if (curTagsParam != null) {
 		<liferay-ui:message key="or" />
 
 		<input id="<%= randomNamespace %>selectTag" type="button" value="<liferay-ui:message key="select-tags" />" />
+
+		<c:if test="<%= suggestible %>">
+			<input id="<%= randomNamespace %>suggestions" type="button" value="<liferay-ui:message key="suggestions" />" />
+		</c:if>
 	</td>
 </tr>
 </table>
@@ -81,13 +89,13 @@ if (curTagsParam != null) {
 			<%= randomNamespace %> = new Liferay.TagsSelector(
 				{
 					instanceVar: "<%= randomNamespace %>",
+					formName: "<%= formName %>",
+					fieldNames: "<%= fieldNames %>",
 					hiddenInput: "<%= namespace + hiddenInput %>",
 					textInput: "<%= randomNamespace %>tags",
 					summarySpan: "<%= randomNamespace %>tagsSummary",
 					curTags: "<%= curTags %>",
-					focus: <%= focus %>,
-                    addTagButton: "<%= randomNamespace %>addTag",
-					selectTagButton: '<%= randomNamespace %>selectTag'
+					focus: <%= focus %>
                 }
 			);
 

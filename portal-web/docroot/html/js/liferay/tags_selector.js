@@ -2,6 +2,8 @@ Liferay.TagsSelector = new Class({
 
 	/*
 	params.instanceVar: the instance variable for this class
+	params.formName: name of the form that you want to suggest tags from
+	params.fieldNames: comma delimited list of fields you want to suggest tags from
 	params.hiddenInput: the hidden input used to pass in the current tags
 	params.textInput: the text input for users to add tags
 	params.summarySpan: the summary span tos how the current tags
@@ -57,6 +59,7 @@ Liferay.TagsSelector = new Class({
 		instance._popupVisible = false;
 
 		instance._setupSelectTags();
+		instance._setupSuggestions();
 
 		var addTagButton = jQuery('#' + params.addTagButton);
 
@@ -172,6 +175,21 @@ Liferay.TagsSelector = new Class({
 		);
 	},
 
+	_setupSuggestions: function() {
+		var instance = this;
+
+		var params = instance.params;
+		var ns = params.instanceVar;
+
+		var input = jQuery('#' + ns + 'suggestions');
+
+		input.click(
+			function() {
+				instance._showSuggestionsPopup();
+			}
+		);
+	},
+
 	_showSelectPopup: function() {
 		var instance = this;
 
@@ -222,6 +240,108 @@ Liferay.TagsSelector = new Class({
 				);
 
 				container.append(label);
+			}
+		);
+
+		var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + ns + 'saveButton" type="submit" value="' + Liferay.Language.get('save') + '" />');
+
+		saveBtn.click(
+			function() {
+				instance._curTags = [];
+
+				container.find('input:checked').each(
+					function(){
+						instance._curTags.push(this.value);
+					}
+				);
+
+				instance._update();
+				Liferay.Popup.close(instance.selectTagPopup);
+				instance._popupVisible = false;
+			}
+		);
+
+		mainContainer.append(container).append(saveBtn);
+
+		var popup = Liferay.Popup(
+			{
+				modal: false,
+				height: 300,
+				width: 400,
+				message: mainContainer[0],
+				onClose: function() {
+					instance._popupVisible = false;
+				}
+			}
+		);
+
+		instance.selectTagPopup = popup;
+		instance._popupVisible = true;
+
+		if (Liferay.Browser.is_ie) {
+			jQuery('.lfr-label-text', popup).click(
+				function() {
+					var input = jQuery(this.previousSibling);
+					var checkedState = !input.is(':checked');
+					input.attr('checked', checkedState);
+				}
+			);
+		}
+	},
+
+	_showSuggestionsPopup: function() {
+		var instance = this;
+
+		var params = instance.params;
+		var ns = params.instanceVar;
+		var formName = params.formName;
+		var fieldNames = params.fieldNames;
+		var mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
+		var container = jQuery('<div class="lfr-tag-container"></div>');
+
+		var form = jQuery('form[@name=' + formName + ']');
+
+		var fields = form.find('[@name=' + fieldNames.split(',').join('],[@name=') + ']');
+
+		var context = '';
+
+		fields.each(
+			function() {
+				context += this.value + ' ';
+			}
+		)
+
+		var url =  "http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction?appid=YahooDemo&output=json&context=" + escape(context);
+
+		var label = '';
+
+		jQuery.ajax(
+			{
+				url: themeDisplay.getPathMain() + "/portal/rest_proxy",
+				data: {
+					url: url
+				},
+				dataType: "json",
+				success: function(obj) {
+					label += '<fieldset><legend>' + Liferay.Language.get('suggestions') + '</legend>';
+
+					jQuery.each(
+						obj.ResultSet.Result,
+						function(i, tag) {
+							var checked = (instance._curTags.indexOf(tag) > -1) ? ' checked="checked"' : '';
+
+							label +=
+								'<label title="' + tag + '">' +
+									'<input' + checked + ' type="checkbox" name="' + ns + 'input' + i + '" id="' + ns + 'input' + i + '" value="' + tag + '" />' +
+									'<a class="lfr-label-text" href="javascript: ;">' + tag + '</a>' +
+								'</label>';
+						}
+					)
+
+					label += '</fieldset>';
+
+					container.append(label);
+				}
 			}
 		);
 
