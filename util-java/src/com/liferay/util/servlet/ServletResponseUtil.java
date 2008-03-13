@@ -25,6 +25,7 @@ package com.liferay.util.servlet;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.util.FileUtil;
@@ -131,7 +132,7 @@ public class ServletResponseUtil {
 	public static void write(HttpServletResponse res, String s)
 		throws IOException {
 
-		write(res, s.getBytes("UTF-8"));
+		write(res, s.getBytes(StringPool.UTF8));
 	}
 
 	public static void write(HttpServletResponse res, byte[] byteArray)
