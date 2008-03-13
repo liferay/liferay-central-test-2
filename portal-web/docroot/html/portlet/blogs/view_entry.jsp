@@ -36,6 +36,8 @@ BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
 pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
+
+TagsAssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry.getEntryId());
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/blogs/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveEntry(); return false;">
@@ -70,7 +72,3 @@ pageDisplayStyle = RSSUtil.DISPLAY_STYLE_FULL_CONTENT;
 		redirect="<%= currentURL %>"
 	/>
 </c:if>
-
-<script type="text/javascript">
-	Liferay.Service.Tags.TagsAsset.incrementViewCounter({className:'<%= BlogsEntry.class.getName() %>', classPK: '<%= entryId %>'});
-</script>

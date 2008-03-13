@@ -374,7 +374,6 @@
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
 		<header-portlet-css>/html/portlet/blogs/css.jsp</header-portlet-css>
-		<header-portal-javascript>/html/js/liferay/service_packed.js</header-portal-javascript>
 		<css-class-wrapper>portlet-blogs</css-class-wrapper>
 		<add-default-resource>true</add-default-resource>
 	</portlet>

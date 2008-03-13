@@ -1,6 +1,3 @@
-<%@ page import="com.liferay.portlet.tags.service.TagsAssetServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.tags.model.TagsAsset" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -146,20 +143,19 @@
 
 	<div class="stats">
 		<span class="view-count">
+
 			<%
 			TagsAsset asset = TagsAssetLocalServiceUtil.getAsset(BlogsEntry.class.getName(), entry.getEntryId());
 			%>
 
-			<c:if test='<%= strutsAction.equals("/blogs/view_entry") %>'>
-				<c:choose>
-					<c:when test="<%= asset.getViewCount() == 1 %>">
-						<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
-					</c:when>
-					<c:when test="<%= asset.getViewCount() > 1 %>">
-						<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
-					</c:when>
-				</c:choose>
-			</c:if>
+			<c:choose>
+				<c:when test="<%= asset.getViewCount() == 1 %>">
+					<%= asset.getViewCount() %> <liferay-ui:message key="view" />,
+				</c:when>
+				<c:when test="<%= asset.getViewCount() > 1 %>">
+					<%= asset.getViewCount() %> <liferay-ui:message key="views" />,
+				</c:when>
+			</c:choose>
 		</span>
 
 		<c:if test="<%= enableComments %>">

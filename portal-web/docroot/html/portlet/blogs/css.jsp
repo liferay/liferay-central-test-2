@@ -24,8 +24,7 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.portlet-blogs .stats {
-	margin-top: 1.5em;
+.portlet-blogs .comments {
 }
 
 .portlet-blogs .edit-actions {
@@ -47,6 +46,10 @@
 	font-weight: bold;
 }
 
+.portlet-blogs .stats {
+	margin-top: 1.5em;
+}
+
 .portlet-blogs .subscribe {
 	margin-bottom: 1.5em;
 }
@@ -57,4 +60,7 @@
 
 .portlet-blogs .taglib-social-bookmarks {
 	margin-top: 1.5em;
+}
+
+.portlet-blogs .view-count {
 }
