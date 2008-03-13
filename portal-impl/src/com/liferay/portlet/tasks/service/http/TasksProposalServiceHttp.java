@@ -76,9 +76,9 @@ import com.liferay.portlet.tasks.service.TasksProposalServiceUtil;
 public class TasksProposalServiceHttp {
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
-		long classPK, java.lang.String name, java.lang.String description,
-		long reviewUserId, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.lang.String classPK, java.lang.String name,
+		java.lang.String description, long reviewUserId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -90,7 +90,11 @@ public class TasksProposalServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new LongWrapper(classPK);
+			Object paramObj2 = classPK;
+
+			if (classPK == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
 
 			Object paramObj3 = name;
 
@@ -145,8 +149,9 @@ public class TasksProposalServiceHttp {
 
 	public static com.liferay.portlet.tasks.model.TasksProposal addProposal(
 		HttpPrincipal httpPrincipal, long groupId, java.lang.String className,
-		long classPK, java.lang.String name, java.lang.String description,
-		long reviewUserId, java.lang.String[] communityPermissions,
+		java.lang.String classPK, java.lang.String name,
+		java.lang.String description, long reviewUserId,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -159,7 +164,11 @@ public class TasksProposalServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = new LongWrapper(classPK);
+			Object paramObj2 = classPK;
+
+			if (classPK == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
 
 			Object paramObj3 = name;
 

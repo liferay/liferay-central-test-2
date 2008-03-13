@@ -192,6 +192,19 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 						errorMesageKey = "this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first";
 					}
 				}
+
+				boolean workflowEnabled = liveGroup.isWorkflowEnabled();
+
+				TasksProposal proposal = null;
+
+				if (workflowEnabled) {
+					try {
+						proposal = TasksProposalLocalServiceUtil.getProposal(Portlet.class.getName(), layout.getPlid() + PortletImpl.LAYOUT_SEPARATOR + selPortlet.getPortletId());
+					}
+					catch (NoSuchProposalException nspe) {
+					}
+				}
+
 				%>
 
 				<c:choose>
@@ -204,7 +217,66 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 
 						<br />
 
-						<input type="button" value="<liferay-ui:message key="publish-to-live" />"  onClick="<portlet:namespace />publishToLive();" />
+						<c:choose>
+							<c:when test="<%= workflowEnabled %>">
+								<c:if test="<%= proposal == null %>">
+
+									<%
+									PortletURL proposePublicationURL = new PortletURLImpl(request, PortletKeys.LAYOUT_MANAGEMENT, layout.getPlid(), PortletRequest.ACTION_PHASE);
+
+									proposePublicationURL.setWindowState(WindowState.MAXIMIZED);
+									proposePublicationURL.setPortletMode(PortletMode.VIEW);
+
+									proposePublicationURL.setParameter("struts_action", "/layout_management/edit_proposal");
+									proposePublicationURL.setParameter(Constants.CMD, Constants.ADD);
+									proposePublicationURL.setParameter("redirect", currentURL);
+									proposePublicationURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
+									proposePublicationURL.setParameter("className", Portlet.class.getName());
+									proposePublicationURL.setParameter("classPK", layout.getPlid() + PortletImpl.LAYOUT_SEPARATOR + selPortlet.getPortletId());
+
+									String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
+
+									JSONArray jsonReviewers = new JSONArray();
+
+									Role role = RoleLocalServiceUtil.getRole(company.getCompanyId(), workflowRoleNames[0]);
+
+									LinkedHashMap userParams = new LinkedHashMap();
+
+									userParams.put("usersGroups", new Long(liveGroup.getGroupId()));
+									userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
+
+									List<User> reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+
+									if (reviewers.size() == 0) {
+										if (liveGroup.isCommunity()) {
+											role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
+										}
+										else {
+											role = RoleLocalServiceUtil.getRole(company.getCompanyId(), RoleImpl.ORGANIZATION_OWNER);
+										}
+
+										userParams.put("userGroupRole", new Long[] {new Long(liveGroup.getGroupId()), new Long(role.getRoleId())});
+
+										reviewers = UserLocalServiceUtil.search(company.getCompanyId(), null, null, userParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+									}
+
+									for (User reviewer : reviewers) {
+										JSONObject jsonReviewer = new JSONObject();
+
+										jsonReviewer.put("userId", reviewer.getUserId());
+										jsonReviewer.put("fullName", reviewer.getFullName());
+
+										jsonReviewers.put(jsonReviewer);
+									}
+									%>
+
+									<input type="button" value="<liferay-ui:message key="propose-publication" />"  onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
+								</c:if>
+							</c:when>
+							<c:when test="<%= themeDisplay.getURLPublishToLive() != null %>">
+								<input type="button" value="<liferay-ui:message key="publish-to-live" />"  onClick="<portlet:namespace />publishToLive();" />
+							</c:when>
+						</c:choose>
 
 						<input type="button" value="<liferay-ui:message key="copy-from-live" />"  onClick="<portlet:namespace />copyFromLive();" />
 					</c:when>

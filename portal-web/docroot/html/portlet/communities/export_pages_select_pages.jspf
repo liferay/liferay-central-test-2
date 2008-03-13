@@ -22,7 +22,7 @@
  */
 %>
 
-<fieldset>
+<fieldset <%= proposal != null ? "style=\"display: none;\"" : "" %>>
 	<legend><liferay-ui:message key="scope" /></legend>
 
 	<c:choose>

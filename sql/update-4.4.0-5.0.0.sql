@@ -15,7 +15,7 @@ create table TasksProposal (
 	createDate DATE null,
 	modifiedDate DATE null,
 	classNameId LONG,
-	classPK LONG,
+	classPK VARCHAR(75) null,
 	name VARCHAR(75) null,
 	description STRING null,
 	publishDate DATE null,

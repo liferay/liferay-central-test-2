@@ -49,7 +49,7 @@ public class TasksProposalLocalServiceImpl
 	extends TasksProposalLocalServiceBaseImpl {
 
 	public TasksProposal addProposal(
-			long userId, long groupId, String className, long classPK,
+			long userId, long groupId, String className, String classPK,
 			String name, String description, long reviewUserId,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -61,7 +61,7 @@ public class TasksProposalLocalServiceImpl
 	}
 
 	public TasksProposal addProposal(
-			long userId, long groupId, String className, long classPK,
+			long userId, long groupId, String className, String classPK,
 			String name, String description, long reviewUserId,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -72,7 +72,7 @@ public class TasksProposalLocalServiceImpl
 	}
 
 	public TasksProposal addProposal(
-			long userId, long groupId, String className, long classPK,
+			long userId, long groupId, String className, String classPK,
 			String name, String description, long reviewUserId,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
@@ -179,7 +179,7 @@ public class TasksProposalLocalServiceImpl
 			proposal.getProposalId(), communityPermissions, guestPermissions);
 	}
 
-	public void deleteProposal(String className, long classPK)
+	public void deleteProposal(String className, String classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -187,7 +187,7 @@ public class TasksProposalLocalServiceImpl
 		deleteProposal(classNameId, classPK);
 	}
 
-	public void deleteProposal(long classNameId, long classPK)
+	public void deleteProposal(long classNameId, String classPK)
 		throws PortalException, SystemException {
 
 		try {
@@ -253,7 +253,7 @@ public class TasksProposalLocalServiceImpl
 		return tasksProposalPersistence.findByPrimaryKey(proposalId);
 	}
 
-	public TasksProposal getProposal(String className, long classPK)
+	public TasksProposal getProposal(String className, String classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -261,7 +261,7 @@ public class TasksProposalLocalServiceImpl
 		return getProposal(classNameId, classPK);
 	}
 
-	public TasksProposal getProposal(long classNameId, long classPK)
+	public TasksProposal getProposal(long classNameId, String classPK)
 		throws PortalException, SystemException {
 
 		return tasksProposalPersistence.findByC_C(classNameId, classPK);

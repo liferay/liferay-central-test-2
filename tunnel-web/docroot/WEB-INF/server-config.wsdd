@@ -3016,7 +3016,7 @@
 		<operation xmlns:operNS="urn:http.service.tasks.portlet.liferay.com" xmlns:rtns="http://model.tasks.portlet.liferay.com" name="addProposal" qname="operNS:addProposal" returnQName="addProposalReturn" returnType="rtns:TasksProposalSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="reviewUserId" type="tns:long"></parameter>
@@ -3026,7 +3026,7 @@
 		<operation xmlns:operNS="urn:http.service.tasks.portlet.liferay.com" xmlns:rtns="http://model.tasks.portlet.liferay.com" name="addProposal" qname="operNS:addProposal" returnQName="addProposalReturn" returnType="rtns:TasksProposalSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="reviewUserId" type="tns:long"></parameter>

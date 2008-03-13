@@ -1446,7 +1446,7 @@
 		<property name="createDate" />
 		<property name="modifiedDate" />
 		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="description" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="publishDate" />

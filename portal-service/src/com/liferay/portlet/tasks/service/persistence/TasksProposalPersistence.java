@@ -118,12 +118,12 @@ public interface TasksProposalPersistence {
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal findByC_C(
-		long classNameId, long classPK)
+		long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal fetchByC_C(
-		long classNameId, long classPK)
+		long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findWithDynamicQuery(
@@ -150,7 +150,7 @@ public interface TasksProposalPersistence {
 	public void removeByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByC_C(long classNameId, long classPK)
+	public void removeByC_C(long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tasks.NoSuchProposalException;
 
@@ -162,7 +162,7 @@ public interface TasksProposalPersistence {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByC_C(long classNameId, long classPK)
+	public int countByC_C(long classNameId, java.lang.String classPK)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

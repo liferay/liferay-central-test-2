@@ -77,7 +77,7 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 		newTasksProposal.setCreateDate(nextDate());
 		newTasksProposal.setModifiedDate(nextDate());
 		newTasksProposal.setClassNameId(nextLong());
-		newTasksProposal.setClassPK(nextLong());
+		newTasksProposal.setClassPK(randomString());
 		newTasksProposal.setName(randomString());
 		newTasksProposal.setDescription(randomString());
 		newTasksProposal.setPublishDate(nextDate());
@@ -162,7 +162,7 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 		tasksProposal.setCreateDate(nextDate());
 		tasksProposal.setModifiedDate(nextDate());
 		tasksProposal.setClassNameId(nextLong());
-		tasksProposal.setClassPK(nextLong());
+		tasksProposal.setClassPK(randomString());
 		tasksProposal.setName(randomString());
 		tasksProposal.setDescription(randomString());
 		tasksProposal.setPublishDate(nextDate());

@@ -77,7 +77,7 @@
 
 					if (workflowEnabled) {
 						try {
-							proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), layout.getPlid());
+							proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), String.valueOf(layout.getPlid()));
 						}
 						catch (NoSuchProposalException nspe) {
 						}
@@ -98,7 +98,8 @@
 								proposePublicationURL.setParameter(Constants.CMD, Constants.ADD);
 								proposePublicationURL.setParameter("redirect", currentURL);
 								proposePublicationURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
-								proposePublicationURL.setParameter("selPlid", String.valueOf(layout.getPlid()));
+								proposePublicationURL.setParameter("className", Layout.class.getName());
+								proposePublicationURL.setParameter("classPK", String.valueOf(layout.getPlid()));
 
 								String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
 

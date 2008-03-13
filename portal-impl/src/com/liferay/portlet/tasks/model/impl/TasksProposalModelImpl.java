@@ -87,7 +87,7 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 			{ "classNameId", new Integer(Types.BIGINT) },
 			
 
-			{ "classPK", new Integer(Types.BIGINT) },
+			{ "classPK", new Integer(Types.VARCHAR) },
 			
 
 			{ "name", new Integer(Types.VARCHAR) },
@@ -101,7 +101,7 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 
 			{ "dueDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table TasksProposal (proposalId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK LONG,name VARCHAR(75) null,description STRING null,publishDate DATE null,dueDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table TasksProposal (proposalId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,classNameId LONG,classPK VARCHAR(75) null,name VARCHAR(75) null,description STRING null,publishDate DATE null,dueDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table TasksProposal";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tasks.model.TasksProposal"),
@@ -213,12 +213,15 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getClassPK() {
-		return _classPK;
+	public String getClassPK() {
+		return GetterUtil.getString(_classPK);
 	}
 
-	public void setClassPK(long classPK) {
-		if (classPK != _classPK) {
+	public void setClassPK(String classPK) {
+		if (((classPK == null) && (_classPK != null)) ||
+				((classPK != null) && (_classPK == null)) ||
+				((classPK != null) && (_classPK != null) &&
+				!classPK.equals(_classPK))) {
 			_classPK = classPK;
 		}
 	}
@@ -291,7 +294,7 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
-			model.setClassPK(getClassPK());
+			model.setClassPK(Html.escape(getClassPK()));
 			model.setName(Html.escape(getName()));
 			model.setDescription(Html.escape(getDescription()));
 			model.setPublishDate(getPublishDate());
@@ -386,7 +389,7 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
-	private long _classPK;
+	private String _classPK;
 	private String _name;
 	private String _description;
 	private Date _publishDate;

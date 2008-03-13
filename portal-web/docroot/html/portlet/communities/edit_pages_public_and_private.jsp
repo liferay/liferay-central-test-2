@@ -37,7 +37,8 @@
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 							<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
-							<portlet:param name="selPlid" value="<%= String.valueOf(selPlid) %>" />
+							<portlet:param name="className" value="<%= Layout.class.getName() %>" />
+							<portlet:param name="classPK" value="<%= String.valueOf(selPlid) %>" />
 						</portlet:actionURL>
 
 						<%

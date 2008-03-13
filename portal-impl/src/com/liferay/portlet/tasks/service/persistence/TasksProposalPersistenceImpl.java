@@ -761,7 +761,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public TasksProposal findByC_C(long classNameId, long classPK)
+	public TasksProposal findByC_C(long classNameId, String classPK)
 		throws NoSuchProposalException, SystemException {
 		TasksProposal tasksProposal = fetchByC_C(classNameId, classPK);
 
@@ -787,17 +787,15 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		return tasksProposal;
 	}
 
-	public TasksProposal fetchByC_C(long classNameId, long classPK)
+	public TasksProposal fetchByC_C(long classNameId, String classPK)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
 		String finderClassName = TasksProposal.class.getName();
 		String finderMethodName = "fetchByC_C";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(), String.class.getName()
 			};
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { new Long(classNameId), classPK };
 
 		Object result = null;
 
@@ -821,7 +819,12 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				if (classPK == null) {
+					query.append("classPK IS NULL");
+				}
+				else {
+					query.append("classPK = ?");
+				}
 
 				query.append(" ");
 
@@ -836,7 +839,9 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				q.setLong(queryPos++, classPK);
+				if (classPK != null) {
+					q.setString(queryPos++, classPK);
+				}
 
 				List<TasksProposal> list = q.list();
 
@@ -1003,7 +1008,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByC_C(long classNameId, long classPK)
+	public void removeByC_C(long classNameId, String classPK)
 		throws NoSuchProposalException, SystemException {
 		TasksProposal tasksProposal = findByC_C(classNameId, classPK);
 
@@ -1156,17 +1161,15 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByC_C(long classNameId, long classPK)
+	public int countByC_C(long classNameId, String classPK)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = TasksProposalModelImpl.CACHE_ENABLED;
 		String finderClassName = TasksProposal.class.getName();
 		String finderMethodName = "countByC_C";
 		String[] finderParams = new String[] {
-				Long.class.getName(), Long.class.getName()
+				Long.class.getName(), String.class.getName()
 			};
-		Object[] finderArgs = new Object[] {
-				new Long(classNameId), new Long(classPK)
-			};
+		Object[] finderArgs = new Object[] { new Long(classNameId), classPK };
 
 		Object result = null;
 
@@ -1191,7 +1194,12 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("classPK = ?");
+				if (classPK == null) {
+					query.append("classPK IS NULL");
+				}
+				else {
+					query.append("classPK = ?");
+				}
 
 				query.append(" ");
 
@@ -1201,7 +1209,9 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, classNameId);
 
-				q.setLong(queryPos++, classPK);
+				if (classPK != null) {
+					q.setString(queryPos++, classPK);
+				}
 
 				Long count = null;
 

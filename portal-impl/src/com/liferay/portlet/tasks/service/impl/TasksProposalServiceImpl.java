@@ -42,7 +42,7 @@ import com.liferay.portlet.tasks.service.permission.TasksProposalPermission;
 public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
 
 	public TasksProposal addProposal(
-			long groupId, String className, long classPK, String name,
+			long groupId, String className, String classPK, String name,
 			String description, long reviewUserId,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException{
@@ -56,7 +56,7 @@ public class TasksProposalServiceImpl extends TasksProposalServiceBaseImpl {
 	}
 
 	public TasksProposal addProposal(
-			long groupId, String className, long classPK, String name,
+			long groupId, String className, String classPK, String name,
 			String description, long reviewUserId,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException{

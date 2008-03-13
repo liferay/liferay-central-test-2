@@ -50,14 +50,14 @@ package com.liferay.portlet.tasks.service;
  */
 public interface TasksProposalService {
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String className, long classPK,
+		long groupId, java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
-		long groupId, java.lang.String className, long classPK,
+		long groupId, java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)

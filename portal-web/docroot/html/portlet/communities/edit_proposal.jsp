@@ -28,7 +28,11 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 Group group = (Group)request.getAttribute(WebKeys.GROUP);
 
+Group stagingGroup = group.getStagingGroup();
+
 long groupId = group.getGroupId();
+
+long stagingGroupId = stagingGroup.getGroupId();
 
 int workflowStages = group.getWorkflowStages();
 String[] workflowRoleNames = StringUtil.split(group.getWorkflowRoleNames());
@@ -38,6 +42,8 @@ TasksProposal proposal = (TasksProposal)request.getAttribute(WebKeys.TASKS_PROPO
 long proposalId = proposal.getProposalId();
 
 String className = PortalUtil.getClassName(proposal.getClassNameId());
+
+String classPK = proposal.getClassPK();
 
 Calendar dueDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
@@ -69,13 +75,6 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	function <portlet:namespace />approveProposal() {
 		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-approve-this-proposal") %>')) {
 			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.APPROVE %>";
-			submitForm(document.<portlet:namespace />fm1);
-		}
-	}
-
-	function <portlet:namespace />publishProposal() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-publish-this-proposal") %>')) {
-			document.<portlet:namespace />fm1.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.PUBLISH %>";
 			submitForm(document.<portlet:namespace />fm1);
 		}
 	}
@@ -153,6 +152,14 @@ for (int i = 2; i <= workflowStages; i++) {
 	</td>
 	<td>
 		<%= LanguageUtil.get(pageContext, "model.resource." + className) %>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="id" />
+	</td>
+	<td>
+		<%= classPK %>
 	</td>
 </tr>
 <tr>
@@ -304,7 +311,36 @@ for (int i = 2; i <= workflowStages; i++) {
 </c:if>
 
 <%
-Layout proposedLayout = LayoutLocalServiceUtil.getLayout(proposal.getClassPK());
+PortletURL publishURL = renderResponse.createRenderURL();
+
+publishURL.setWindowState(LiferayWindowState.EXCLUSIVE);
+publishURL.setPortletMode(PortletMode.VIEW);
+publishURL.setParameter("popupId", "publish-to-live");
+
+publishURL.setParameter("pagesRedirect", redirect);
+publishURL.setParameter("groupId", String.valueOf(stagingGroupId));
+publishURL.setParameter("proposalId", String.valueOf(proposal.getProposalId()));
+
+long proposedLayoutPlid = 0;
+
+Layout proposedLayout = null;
+
+if (proposal.getClassNameId() == PortalUtil.getClassNameId(Layout.class.getName())) {
+	publishURL.setParameter("struts_action", "/communities/export_pages");
+
+	proposedLayoutPlid = GetterUtil.getLong(proposal.getClassPK());
+
+	proposedLayout = LayoutLocalServiceUtil.getLayout(proposedLayoutPlid);
+
+	publishURL.setParameter("selPlid", String.valueOf(proposedLayoutPlid));
+}
+else if (proposal.getClassNameId() == PortalUtil.getClassNameId(Portlet.class.getName())) {
+	publishURL.setParameter("struts_action", "/communities/publish_portlet");
+
+	proposedLayoutPlid = GetterUtil.getLong(classPK.substring(0, classPK.indexOf(PortletImpl.LAYOUT_SEPARATOR)));
+
+	proposedLayout = LayoutLocalServiceUtil.getLayout(proposedLayoutPlid);
+}
 
 String previewURL = PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay);
 %>
@@ -313,8 +349,8 @@ String previewURL = PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay
 
 <c:choose>
 	<c:when test="<%= review != null %>">
-		<c:if test="<%= (review.getStage() == workflowStages) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING) %>">
-			<input type="button" value="<liferay-ui:message key="publish" />" onClick="<portlet:namespace />publishProposal();" />
+		<c:if test="<%= ((review.getStage() == workflowStages) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.PUBLISH_STAGING)) || GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
+			<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishURL.toString() %>', messageId: 'publish-to-live'});" />
 		</c:if>
 
 		<c:choose>
@@ -335,7 +371,7 @@ String previewURL = PortalUtil.getLayoutFriendlyURL(proposedLayout, themeDisplay
 		</c:choose>
 	</c:when>
 	<c:when test="<%= (review == null) && GroupPermissionUtil.contains(permissionChecker, groupId, ActionKeys.MANAGE_STAGING) %>">
-		<input type="button" value="<liferay-ui:message key="publish" />" onClick="<portlet:namespace />publishProposal();" />
+		<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= publishURL.toString() %>', messageId: 'publish-to-live'});" />
 	</c:when>
 </c:choose>
 
@@ -420,7 +456,7 @@ for (int i = 0; i < results.size(); i++) {
 
 <liferay-ui:discussion
 	formAction="<%= discussionURL %>"
-	formName="fm2"
+	formName="fm3"
 	className="<%= TasksProposal.class.getName() %>"
 	classPK="<%= proposal.getProposalId() %>"
 	userId="<%= proposal.getUserId() %>"

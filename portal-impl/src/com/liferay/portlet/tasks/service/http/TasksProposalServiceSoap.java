@@ -82,7 +82,7 @@ import java.rmi.RemoteException;
  */
 public class TasksProposalServiceSoap {
 	public static com.liferay.portlet.tasks.model.TasksProposalSoap addProposal(
-		long groupId, java.lang.String className, long classPK,
+		long groupId, java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
@@ -101,7 +101,7 @@ public class TasksProposalServiceSoap {
 	}
 
 	public static com.liferay.portlet.tasks.model.TasksProposalSoap addProposal(
-		long groupId, java.lang.String className, long classPK,
+		long groupId, java.lang.String className, java.lang.String classPK,
 		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {

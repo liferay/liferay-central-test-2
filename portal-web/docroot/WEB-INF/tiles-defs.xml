@@ -264,6 +264,10 @@
 		<put name="portlet_content" value="/portlet/communities/post_membership_request.jsp" />
 	</definition>
 
+	<definition name="portlet.communities.publish_portlet" extends="portlet.communities">
+		<put name="portlet_content" value="/portlet/communities/publish_portlet.jsp" />
+	</definition>
+
 	<definition name="portlet.communities.reply_membership_request" extends="portlet.communities">
 		<put name="portlet_content" value="/portlet/communities/reply_membership_request.jsp" />
 	</definition>

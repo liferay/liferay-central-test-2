@@ -154,11 +154,11 @@ public class TasksProposalSoap implements Serializable {
 		_classNameId = classNameId;
 	}
 
-	public long getClassPK() {
+	public String getClassPK() {
 		return _classPK;
 	}
 
-	public void setClassPK(long classPK) {
+	public void setClassPK(String classPK) {
 		_classPK = classPK;
 	}
 
@@ -202,7 +202,7 @@ public class TasksProposalSoap implements Serializable {
 	private Date _createDate;
 	private Date _modifiedDate;
 	private long _classNameId;
-	private long _classPK;
+	private String _classPK;
 	private String _name;
 	private String _description;
 	private Date _publishDate;

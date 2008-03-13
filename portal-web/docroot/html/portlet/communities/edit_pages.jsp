@@ -195,7 +195,7 @@ TasksProposal proposal = null;
 if (selLayout != null) {
 	if (liveGroup.isWorkflowEnabled()) {
 		try {
-			proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), selPlid);
+			proposal = TasksProposalLocalServiceUtil.getProposal(Layout.class.getName(), String.valueOf(selPlid));
 		}
 		catch (NoSuchProposalException nspe) {
 		}

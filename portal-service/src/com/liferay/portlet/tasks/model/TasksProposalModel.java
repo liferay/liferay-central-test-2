@@ -83,9 +83,9 @@ public interface TasksProposalModel extends BaseModel {
 
 	public void setClassNameId(long classNameId);
 
-	public long getClassPK();
+	public String getClassPK();
 
-	public void setClassPK(long classPK);
+	public void setClassPK(String classPK);
 
 	public String getName();
 

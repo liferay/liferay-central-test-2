@@ -31,6 +31,7 @@ List headerNames = new ArrayList();
 
 headerNames.add("name");
 headerNames.add("type");
+headerNames.add("id");
 headerNames.add("user");
 headerNames.add("due-date");
 headerNames.add("status");
@@ -80,6 +81,7 @@ for (int i = 0; i < results.size(); i++) {
 	StringMaker sm = new StringMaker();
 
 	sm.append(proposal.getName());
+
 	sm.append("<br />");
 	sm.append(proposal.getDescription());
 
@@ -90,6 +92,10 @@ for (int i = 0; i < results.size(); i++) {
 	String className = PortalUtil.getClassName(proposal.getClassNameId());
 
 	row.addText(LanguageUtil.get(pageContext, "model.resource." + className), rowURL);
+
+	// ID
+
+	row.addText(proposal.getClassPK(), rowURL);
 
 	// User
 

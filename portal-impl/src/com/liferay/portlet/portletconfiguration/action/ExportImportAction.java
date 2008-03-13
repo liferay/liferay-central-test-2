@@ -37,6 +37,7 @@ import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.ActionResponseImpl;
+import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -90,7 +91,7 @@ public class ExportImportAction extends EditConfigurationAction {
 
 		try {
 			if (cmd.equals("copy_from_live")) {
-				copyFromLive(req, portlet);
+				StagingUtil.copyFromLive(req, portlet);
 
 				sendRedirect(req, res);
 			}
@@ -103,7 +104,7 @@ public class ExportImportAction extends EditConfigurationAction {
 				sendRedirect(req, res);
 			}
 			else if (cmd.equals("publish_to_live")) {
-				publishToLive(req, portlet);
+				StagingUtil.publishToLive(req, portlet);
 
 				sendRedirect(req, res);
 			}
@@ -144,40 +145,6 @@ public class ExportImportAction extends EditConfigurationAction {
 			req, "portlet.portlet_configuration.export_import"));
 	}
 
-	protected void copyFromLive(ActionRequest req, Portlet portlet)
-		throws Exception {
-
-		long plid = ParamUtil.getLong(req, "plid");
-
-		Layout targetLayout = LayoutLocalServiceUtil.getLayout(plid);
-
-		Group stagingGroup = targetLayout.getGroup();
-		Group liveGroup = stagingGroup.getLiveGroup();
-
-		Layout sourceLayout = LayoutLocalServiceUtil.getLayout(
-			liveGroup.getGroupId(), targetLayout.isPrivateLayout(),
-			targetLayout.getLayoutId());
-
-		copyPortletInfo(
-			sourceLayout.getPlid(), targetLayout.getPlid(),
-			portlet.getPortletId(), req.getParameterMap());
-	}
-
-	protected void copyPortletInfo(
-			long sourcePlid, long targetPlid, String portletId, Map parameters)
-		throws Exception {
-
-		Map parameterMap = getStagingParameters(parameters);
-
-		byte[] data = LayoutLocalServiceUtil.exportPortletInfo(
-			sourcePlid, portletId, parameterMap);
-
-		ByteArrayInputStream bais = new ByteArrayInputStream(data);
-
-		LayoutServiceUtil.importPortletInfo(
-			targetPlid, portletId, parameterMap, bais);
-	}
-
 	private void exportData(
 			ActionRequest req, ActionResponse res, Portlet portlet)
 		throws Exception {
@@ -201,28 +168,6 @@ public class ExportImportAction extends EditConfigurationAction {
 		}
 	}
 
-	protected static Map getStagingParameters(Map parameters) {
-		Map parameterMap = new HashMap();
-
-		parameterMap.putAll(parameters);
-
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_ALL, Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.THEME, Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.DATA_STRATEGY,
-			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
-		parameterMap.put(
-			PortletDataHandlerKeys.USER_ID_STRATEGY,
-			UserIdStrategy.CURRENT_USER_ID);
-
-		return parameterMap;
-	}
-
 	private void importData(ActionRequest req, Portlet portlet)
 		throws Exception {
 
@@ -243,25 +188,6 @@ public class ExportImportAction extends EditConfigurationAction {
 
 			SessionErrors.add(req, LayoutImportException.class.getName());
 		}
-	}
-
-	protected void publishToLive(ActionRequest req, Portlet portlet)
-		throws Exception {
-
-		long plid = ParamUtil.getLong(req, "plid");
-
-		Layout sourceLayout = LayoutLocalServiceUtil.getLayout(plid);
-
-		Group stagingGroup = sourceLayout.getGroup();
-		Group liveGroup = stagingGroup.getLiveGroup();
-
-		Layout targetLayout = LayoutLocalServiceUtil.getLayout(
-			liveGroup.getGroupId(), sourceLayout.isPrivateLayout(),
-			sourceLayout.getLayoutId());
-
-		copyPortletInfo(
-			sourceLayout.getPlid(), targetLayout.getPlid(),
-			portlet.getPortletId(), req.getParameterMap());
 	}
 
 	private static Log _log = LogFactory.getLog(ExportImportAction.class);

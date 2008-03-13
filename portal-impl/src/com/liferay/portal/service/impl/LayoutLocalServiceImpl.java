@@ -278,7 +278,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Tasks
 
 		tasksProposalLocalService.deleteProposal(
-			Layout.class.getName(), layout.getPlid());
+			Layout.class.getName(), String.valueOf(layout.getPlid()));
 
 		// Ratings
 

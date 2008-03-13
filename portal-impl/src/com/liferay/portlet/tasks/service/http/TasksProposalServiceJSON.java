@@ -72,8 +72,8 @@ import org.json.JSONObject;
  */
 public class TasksProposalServiceJSON {
 	public static JSONObject addProposal(long groupId,
-		java.lang.String className, long classPK, java.lang.String name,
-		java.lang.String description, long reviewUserId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -85,8 +85,8 @@ public class TasksProposalServiceJSON {
 	}
 
 	public static JSONObject addProposal(long groupId,
-		java.lang.String className, long classPK, java.lang.String name,
-		java.lang.String description, long reviewUserId,
+		java.lang.String className, java.lang.String classPK,
+		java.lang.String name, java.lang.String description, long reviewUserId,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,

@@ -22,16 +22,26 @@
 
 package com.liferay.portlet.communities.action;
 
+import com.liferay.portal.kernel.portlet.LiferayRenderRequest;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.portlet.tasks.DuplicateReviewUserIdException;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.ProposalDueDateException;
@@ -94,7 +104,14 @@ public class EditProposalAction extends EditPagesAction {
 				rejectReview(req);
 			}
 
-			sendRedirect(req, res);
+			String redirect = ParamUtil.getString(req, "redirect");
+			String pagesRedirect = ParamUtil.getString(req, "pagesRedirect");
+
+			if (Validator.isNotNull(pagesRedirect)) {
+				redirect = pagesRedirect;
+			}
+
+			sendRedirect(req, res, redirect);
 		}
 		catch (Exception e) {
 			if (e instanceof NoSuchProposalException ||
@@ -188,17 +205,24 @@ public class EditProposalAction extends EditPagesAction {
 		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
 			proposalId);
 
-		Layout layout = LayoutLocalServiceUtil.getLayout(proposal.getClassPK());
+		if (proposal.getClassNameId() ==
+				PortalUtil.getClassNameId(Layout.class.getName())) {
 
-		Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
+			StagingUtil.publishToLive(req);
+		}
+		else if (proposal.getClassNameId() ==
+			PortalUtil.getClassNameId(Portlet.class.getName())) {
+			String classPK = proposal.getClassPK();
 
-		layoutIdMap.put(layout.getPlid(), Boolean.FALSE);
+			String portletId = classPK.substring(
+				classPK.indexOf(PortletImpl.LAYOUT_SEPARATOR) +
+					PortletImpl.LAYOUT_SEPARATOR.length());
 
-		Map parameterMap = getStagingParameters();
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(
+				proposal.getCompanyId(), portletId);
 
-		publishLayouts(
-			layoutIdMap, stagingGroup.getGroupId(), liveGroup.getGroupId(),
-			layout.isPrivateLayout(), parameterMap);
+			StagingUtil.publishToLive(req, portlet);
+		}
 
 		TasksProposalServiceUtil.deleteProposal(proposal.getProposalId());
 	}
@@ -214,22 +238,44 @@ public class EditProposalAction extends EditPagesAction {
 	protected void updateProposal(ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
 		long proposalId = ParamUtil.getLong(req, "proposalId");
 
 		String description = ParamUtil.getString(req, "description");
 
 		if (proposalId <= 0) {
 			long groupId = ParamUtil.getLong(req, "groupId");
-			long selPlid = ParamUtil.getLong(req, "selPlid");
-			Layout layout = LayoutLocalServiceUtil.getLayout(selPlid);
+
 			long reviewUserId = ParamUtil.getLong(req, "reviewUserId");
+
+			String className = ParamUtil.getString(req, "className");
+			String classPK = ParamUtil.getString(req, "classPK");
+
+			String name = StringPool.BLANK;
+
+			if (className.equals(Layout.class.getName())) {
+				layout = LayoutLocalServiceUtil.getLayout(
+					GetterUtil.getLong(classPK));
+
+				name = layout.getName(LocaleUtil.getDefault());
+			}
+			else if (className.equals(Portlet.class.getName())) {
+				String portletId = classPK.substring(classPK.indexOf(PortletImpl.LAYOUT_SEPARATOR) + PortletImpl.LAYOUT_SEPARATOR.length());
+
+				name = PortalUtil.getPortletTitle(
+					portletId, themeDisplay.getCompanyId(),
+					LocaleUtil.getDefault().toString());
+			}
 
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
 
 			TasksProposalServiceUtil.addProposal(
-				groupId, Layout.class.getName(), layout.getPlid(),
-				layout.getName(LocaleUtil.getDefault()), description,
+				groupId, className, classPK, name, description,
 				reviewUserId, addCommunityPermissions, addGuestPermissions);
 		}
 		else {
