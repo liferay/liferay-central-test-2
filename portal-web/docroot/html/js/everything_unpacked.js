@@ -21468,7 +21468,7 @@ Liferay.Upload = new Class({
 			instance._useFallbackText = Liferay.Language.get('use-the-classic-uploader');
 			instance._useNewUploaderText = Liferay.Language.get('use-the-new-uploader');
 		}
-		
+
 		if (instance._flashVersion < 9 && instance._fallbackContainer.length) {
 			instance._fallbackContainer.show();
 
@@ -21777,7 +21777,7 @@ Liferay.Upload = new Class({
 			);
 		}
 	},
-	
+
 	_setupIframe: function() {
 		var instance = this;
 
