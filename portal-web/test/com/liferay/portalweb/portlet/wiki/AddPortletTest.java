@@ -51,8 +51,22 @@ public class AddPortletTest extends BaseTestCase {
 		}
 
 		selenium.mouseDown("//div[@id=\"Wiki-Wiki\"]/p/a");
-		Thread.sleep(5000);
-		verifyTrue(selenium.isTextPresent(
-				"This page is empty. Edit it to add some text."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"This page is empty. Edit it to add some text.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
