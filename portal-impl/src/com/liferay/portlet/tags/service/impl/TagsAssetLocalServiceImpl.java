@@ -166,12 +166,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			int begin, int end)
 		throws SystemException {
 
-		if ((entryIds.length == 0) && (notEntryIds.length == 0)) {
-			return tagsAssetFinder.findAssets(
-				groupId, classNameIds, null, null, null, null,
-				excludeZeroViewCount, publishDate, expirationDate, begin, end);
-		}
-		else if (andOperator) {
+		if (andOperator) {
 			return tagsAssetFinder.findByAndEntryIds(
 				groupId, classNameIds, entryIds, notEntryIds, null, null, null,
 				null, excludeZeroViewCount, publishDate, expirationDate, begin,
@@ -205,13 +200,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			int begin, int end)
 		throws SystemException {
 
-		if ((entryIds.length == 0) && (notEntryIds.length == 0)) {
-			return tagsAssetFinder.findAssets(
-				groupId, classNameIds, orderByCol1, orderByCol2, orderByType1,
-				orderByType2, excludeZeroViewCount, publishDate, expirationDate,
-				begin, end);
-		}
-		else if (andOperator) {
+		if (andOperator) {
 			return tagsAssetFinder.findByAndEntryIds(
 				groupId, classNameIds, entryIds, notEntryIds, orderByCol1,
 				orderByCol2, orderByType1, orderByType2, excludeZeroViewCount,
@@ -261,12 +250,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate)
 		throws SystemException {
 
-		if ((entryIds.length == 0) && (notEntryIds.length == 0)) {
-			return tagsAssetFinder.countAssets(
-				groupId, classNameIds, excludeZeroViewCount, publishDate,
-				expirationDate);
-		}
-		else if (andOperator) {
+		if (andOperator) {
 			return tagsAssetFinder.countByAndEntryIds(
 				groupId, classNameIds, entryIds, notEntryIds,
 				excludeZeroViewCount, publishDate, expirationDate);
