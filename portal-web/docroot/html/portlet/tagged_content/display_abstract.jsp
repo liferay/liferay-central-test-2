@@ -167,6 +167,7 @@ else if (className.equals(WikiPage.class.getName())) {
 	pageURL.setPortletMode(PortletMode.VIEW);
 
 	pageURL.setParameter("struts_action", "/wiki/view");
+	pageURL.setParameter("nodeId", String.valueOf(wikiPage.getNodeId()));
 	pageURL.setParameter("title", wikiPage.getTitle());
 
 	viewURL = pageURL.toString();

@@ -129,4 +129,7 @@ public class ViewPageAction extends PortletAction {
 		req.setAttribute(WebKeys.WIKI_NODE, node);
 	}
 
+	protected boolean isCheckMethodOnProcessAction() {
+		return false;
+	}
 }
