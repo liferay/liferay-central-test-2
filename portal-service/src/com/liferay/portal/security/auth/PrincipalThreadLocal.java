@@ -43,6 +43,10 @@ public class PrincipalThreadLocal {
 		return name;
 	}
 
+	public static void setName(long name) {
+		setName(String.valueOf(name));
+	}
+
 	public static void setName(String name) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("setName " + name);

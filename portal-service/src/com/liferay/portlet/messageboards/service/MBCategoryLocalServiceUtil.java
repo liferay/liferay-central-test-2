@@ -465,6 +465,13 @@ public class MBCategoryLocalServiceUtil {
 	}
 
 	public static java.util.List getCategories(long groupId,
+		long parentCategoryId) throws com.liferay.portal.SystemException {
+		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
+
+		return mbCategoryLocalService.getCategories(groupId, parentCategoryId);
+	}
+
+	public static java.util.List getCategories(long groupId,
 		long parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();

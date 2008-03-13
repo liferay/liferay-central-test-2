@@ -233,5 +233,7 @@ ECJ was automatically installed. Please rerun your task.
 				</if>
 			</else>
 		</if>
+
+		<delete dir="activemq-data" />
 	</target>
 </project>

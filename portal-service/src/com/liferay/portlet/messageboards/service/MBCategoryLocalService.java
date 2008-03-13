@@ -234,6 +234,9 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List getCategories(long groupId, long parentCategoryId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List getCategories(long groupId, long parentCategoryId,
 		int begin, int end) throws com.liferay.portal.SystemException;
 
