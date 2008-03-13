@@ -1728,6 +1728,13 @@ Liferay.Service.Journal.JournalTemplate = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getStructureTemplates: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getStructureTemplates";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getTemplate: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getTemplate";

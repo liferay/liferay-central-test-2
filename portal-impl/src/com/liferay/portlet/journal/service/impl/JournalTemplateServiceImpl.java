@@ -29,9 +29,14 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.service.base.JournalTemplateServiceBaseImpl;
+import com.liferay.portlet.journal.service.permission.JournalStructurePermission;
 import com.liferay.portlet.journal.service.permission.JournalTemplatePermission;
 
 import java.io.File;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * <a href="JournalTemplateServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -85,6 +90,36 @@ public class JournalTemplateServiceImpl extends JournalTemplateServiceBaseImpl {
 			getPermissionChecker(), groupId, templateId, ActionKeys.DELETE);
 
 		journalTemplateLocalService.deleteTemplate(groupId, templateId);
+	}
+
+	public List<JournalTemplate> getStructureTemplates(
+			long groupId, String structureId)
+		throws PortalException, SystemException {
+
+		if (!JournalStructurePermission.contains(
+				getPermissionChecker(), groupId, structureId,
+				ActionKeys.VIEW)) {
+
+			return new ArrayList<JournalTemplate>();
+		}
+
+		List<JournalTemplate> list =
+			journalTemplateLocalService.getStructureTemplates(
+				groupId, structureId);
+
+		Iterator<JournalTemplate> itr = list.iterator();
+
+		while (itr.hasNext()) {
+			JournalTemplate template = itr.next();
+
+			if (!JournalTemplatePermission.contains(
+					getPermissionChecker(), template, ActionKeys.VIEW)) {
+
+				itr.remove();
+			}
+		}
+
+		return list;
 	}
 
 	public JournalTemplate getTemplate(long groupId, String templateId)
