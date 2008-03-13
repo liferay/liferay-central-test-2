@@ -218,24 +218,27 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />file);
 	</c:if>
 
-	jQuery(document).ready(function() {
-		parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
+	jQuery(document).ready(
+		function() {
+			parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
 
-		jQuery("#<portlet:namespace />file").change(function () {
-			var value = jQuery(this).val();
+			jQuery("#<portlet:namespace />file").change(
+				function() {
+					var value = jQuery(this).val();
 
-			if (value != null && value != "") {
-				var ext = value.substring(value.lastIndexOf("."));
-				ext = ext.toLowerCase();
+					if ((value != null) && (value != "")) {
+						var extension = value.substring(value.lastIndexOf(".")).toLowerCase();
 
-				var validArray = new Array('<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, "', '") %>');
+						var validExtensions = new Array('<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, "', '") %>');
 
-				if (jQuery.inArray(ext, validArray) == -1) {
-					alert('<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" />\n\n<%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>');
+						if (jQuery.inArray(extension, validExtensions) == -1) {
+							alert('<liferay-ui:message key="image-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.IG_IMAGE_EXTENSIONS, ", ") %>');
 
-					jQuery(this).val("");
+							jQuery(this).val("");
+						}
+					}
 				}
-			}
-		}).change();
-	});
+			).change();
+		}
+	);
 </script>

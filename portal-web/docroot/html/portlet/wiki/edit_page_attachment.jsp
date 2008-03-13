@@ -97,24 +97,27 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 </form>
 
 <script type="text/javascript">
-	jQuery(document).ready(function() {
-		for (var i = 1; i < 4; i++) {
-			jQuery("#<portlet:namespace />file" + i).change(function () {
-				var value = jQuery(this).val();
+	jQuery(document).ready(
+		function() {
+			for (var i = 1; i < 4; i++) {
+				jQuery("#<portlet:namespace />file" + i).change(
+					function() {
+						var value = jQuery(this).val();
 
-				if (value != null && value != "") {
-					var ext = value.substring(value.lastIndexOf("."));
-					ext = ext.toLowerCase();
+						if ((value != null) && (value != "")) {
+							var extension = value.substring(value.lastIndexOf(".")).toLowerCase();
 
-					var validArray = new Array("<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, "\", \"") %>");
+							var validExtensions = new Array("<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, "\", \"") %>");
 
-					if (jQuery.inArray(ext, validArray) == -1) {
-						alert('<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" />\n\n<%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>');
+							if (jQuery.inArray(extension, validExtensions) == -1) {
+								alert('<liferay-ui:message key="document-names-must-end-with-one-of-the-following-extensions" /> <%= StringUtil.merge(PropsValues.DL_FILE_EXTENSIONS, ", ") %>');
 
-						jQuery(this).val("");
+								jQuery(this).val("");
+							}
+						}
 					}
-				}
-			}).change();
+				).change();
+			}
 		}
-	});
+	);
 </script>
