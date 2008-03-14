@@ -34,7 +34,13 @@ import com.liferay.portal.kernel.log.LogUtil;
  */
 public class JavaProps {
 
+	public static final double JAVA_CLASS_VERSION_JDK_4 = 48.0;
+
 	public static final double JAVA_CLASS_VERSION_JDK_5 = 49.0;
+
+	public static final double JAVA_CLASS_VERSION_JDK_6 = 50.0;
+
+	public static final double JAVA_CLASS_VERSION_JDK_7 = 51.0;
 
 	public static String getJavaClassPath() {
 		return _instance._javaClassPath;
@@ -60,9 +66,42 @@ public class JavaProps {
 		return _instance._javaVmVersion;
 	}
 
+	public static boolean isJDK4() {
+		if (JavaProps.getJavaClassVersion() >=
+				JavaProps.JAVA_CLASS_VERSION_JDK_4) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static boolean isJDK5() {
 		if (JavaProps.getJavaClassVersion() >=
 				JavaProps.JAVA_CLASS_VERSION_JDK_5) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isJDK6() {
+		if (JavaProps.getJavaClassVersion() >=
+				JavaProps.JAVA_CLASS_VERSION_JDK_6) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isJDK7() {
+		if (JavaProps.getJavaClassVersion() >=
+				JavaProps.JAVA_CLASS_VERSION_JDK_7) {
 
 			return true;
 		}
