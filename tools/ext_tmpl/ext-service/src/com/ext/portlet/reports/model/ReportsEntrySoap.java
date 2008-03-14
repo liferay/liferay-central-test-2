@@ -51,16 +51,16 @@ public class ReportsEntrySoap implements Serializable {
         return soapModel;
     }
 
-    public static ReportsEntrySoap[] toSoapModels(List models) {
-        List soapModels = new ArrayList(models.size());
+    public static ReportsEntrySoap[] toSoapModels(List<ReportsEntry> models) {
+        List<ReportsEntrySoap> soapModels = new ArrayList<ReportsEntrySoap>(models.size());
 
         for (int i = 0; i < models.size(); i++) {
-            ReportsEntry model = (ReportsEntry) models.get(i);
+            ReportsEntry model = models.get(i);
 
             soapModels.add(toSoapModel(model));
         }
 
-        return (ReportsEntrySoap[]) soapModels.toArray(new ReportsEntrySoap[0]);
+        return soapModels.toArray(new ReportsEntrySoap[soapModels.size()]);
     }
 
     public String getPrimaryKey() {

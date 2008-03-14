@@ -228,8 +228,8 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
 
         int value = 0;
 
-        value = getName().toLowerCase().compareTo(reportsEntry.getName()
-                                                              .toLowerCase());
+        value = getName().toLowerCase()
+                    .compareTo(reportsEntry.getName().toLowerCase());
 
         if (value != 0) {
             return value;
