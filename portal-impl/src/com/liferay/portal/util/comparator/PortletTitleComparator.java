@@ -49,11 +49,10 @@ public class PortletTitleComparator implements Comparator, Serializable {
 		Portlet portlet1 = (Portlet)obj1;
 		Portlet portlet2 = (Portlet)obj2;
 
-		String portletTitle1 =
-			PortalUtil.getPortletTitle(portlet1, _ctx, _locale);
-
-		String portletTitle2 =
-			PortalUtil.getPortletTitle(portlet2, _ctx, _locale);
+		String portletTitle1 = PortalUtil.getPortletTitle(
+			portlet1, _ctx, _locale);
+		String portletTitle2 = PortalUtil.getPortletTitle(
+			portlet2, _ctx, _locale);
 
 		return portletTitle1.compareTo(portletTitle2);
 	}

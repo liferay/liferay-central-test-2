@@ -24,15 +24,10 @@ package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.NoSuchLayoutException;
-import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
-import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.model.Group;
-import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
@@ -43,11 +38,7 @@ import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 import com.liferay.util.servlet.UploadPortletRequest;
 
-import java.io.ByteArrayInputStream;
 import java.io.File;
-
-import java.util.HashMap;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -145,7 +136,7 @@ public class ExportImportAction extends EditConfigurationAction {
 			req, "portlet.portlet_configuration.export_import"));
 	}
 
-	private void exportData(
+	protected void exportData(
 			ActionRequest req, ActionResponse res, Portlet portlet)
 		throws Exception {
 
@@ -168,7 +159,7 @@ public class ExportImportAction extends EditConfigurationAction {
 		}
 	}
 
-	private void importData(ActionRequest req, Portlet portlet)
+	protected void importData(ActionRequest req, Portlet portlet)
 		throws Exception {
 
 		try {

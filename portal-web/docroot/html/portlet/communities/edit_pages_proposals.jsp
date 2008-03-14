@@ -81,7 +81,6 @@ for (int i = 0; i < results.size(); i++) {
 	StringMaker sm = new StringMaker();
 
 	sm.append(proposal.getName());
-
 	sm.append("<br />");
 	sm.append(proposal.getDescription());
 

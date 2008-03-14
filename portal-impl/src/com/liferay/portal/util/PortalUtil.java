@@ -1098,6 +1098,12 @@ public class PortalUtil {
 
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
+		return getPortletTitle(portletId, companyId, locale);
+	}
+
+	public static String getPortletTitle(
+		String portletId, long companyId, Locale locale) {
+
 		StringMaker sm = new StringMaker();
 
 		sm.append(JavaConstants.JAVAX_PORTLET_TITLE);

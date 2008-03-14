@@ -27,14 +27,6 @@
 <%
 String tabs2 = ParamUtil.getString(request, "tabs2", "public-pages");
 
-long proposalId = ParamUtil.getLong(request, "proposalId", 0);
-
-TasksProposal proposal = null;
-
-if (proposalId > 0) {
-	proposal = TasksProposalLocalServiceUtil.getProposal(proposalId);
-}
-
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
 boolean publish = ParamUtil.getBoolean(request, "publish");
@@ -78,17 +70,6 @@ if (selGroup.isStagingGroup()) {
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
-boolean privateLayout = tabs2.equals("private-pages");
-
-if (proposal != null && proposal.getClassNameId() == PortalUtil.getClassNameId(Layout.class.getName())) {
-	selPlid = GetterUtil.getLong(proposal.getClassPK());
-
-	Layout selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
-
-	privateLayout = selLayout.isPrivateLayout();
-	tabs2 = privateLayout ? "private-pages" : "public-pages";
-}
-
 long[] selectedPlids = new long[0];
 
 if (selPlid > 0) {
@@ -108,6 +89,8 @@ for (int i = 0; i < selectedPlids.length; i++) {
 	catch (NoSuchLayoutException nsle) {
 	}
 }
+
+boolean privateLayout = tabs2.equals("private-pages");
 
 if (privateLayout) {
 	pagesCount = selGroup.getPrivateLayoutsPageCount();
@@ -145,19 +128,20 @@ List layoutList = layoutView.getList();
 
 PortletURL portletURL = renderResponse.createActionURL();
 
-if (proposal != null) {
+long proposalId = ParamUtil.getLong(request, "proposalId");
+
+if (proposalId > 0) {
 	portletURL.setParameter("struts_action", "/communities/edit_proposal");
 	portletURL.setParameter(Constants.CMD, Constants.PUBLISH);
-	portletURL.setParameter("proposalId", String.valueOf(proposalId));
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
+	portletURL.setParameter("proposalId", String.valueOf(proposalId));
 }
 else {
 	portletURL.setParameter("struts_action", "/communities/edit_pages");
 	portletURL.setParameter(Constants.CMD, selGroup.isStagingGroup() ? "publish_to_live" : "copy_from_live");
-	portletURL.setParameter("private", String.valueOf(privateLayout));
 	portletURL.setParameter("groupId", String.valueOf(liveGroupId));
+	portletURL.setParameter("private", String.valueOf(privateLayout));
 }
-
 
 request.setAttribute("edit_pages.jsp-selPlid", new Long(selPlid));
 
@@ -189,7 +173,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	}
 </style>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm2">
+<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />exportPagesFm">
 <input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= pagesRedirect %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
@@ -219,14 +203,14 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 	<c:when test="<%= !publish %>">
 		<input <%= (results.size() == 0)? "style=\"display: none;\"" :"" %> id="selectBtn" type="button" value="<liferay-ui:message key="select" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=true');" />
 
-		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />fm2); }' />
+		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
 	</c:when>
 	<c:otherwise>
 		<c:if test="<%= selPlid <= LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
 			<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
 		</c:if>
 
-		<input id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />fm2); }' />
+		<input id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
 	</c:otherwise>
 </c:choose>
 

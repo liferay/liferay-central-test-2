@@ -67,7 +67,7 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 </script>
 
 <ul class="gamma lfr-component">
-	<li class="tree-item" <%= proposal != null ? "style=\"display: none;\"" : "" %>>
+	<li class="tree-item" <%= (proposalId > 0) ? "style=\"display: none;\"" : "" %>>
 		<input checked disabled="disabled" type="checkbox" />
 
 		<label><liferay-ui:message key="pages" /></label>

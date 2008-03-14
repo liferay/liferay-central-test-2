@@ -34,6 +34,8 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletResource);
 
+String selPortletPrimaryKey = PortletPermissionUtil.getPrimaryKey(layout.getPlid(), selPortlet.getPortletId());
+
 String path = (String)request.getAttribute(WebKeys.CONFIGURATION_ACTION_PATH);
 
 PortletURL portletURL = renderResponse.createRenderURL();
@@ -145,7 +147,7 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 
 				<br />
 
-				<input type="button" value='<liferay-ui:message key="export" />'  onClick="<portlet:namespace />exportData();" />
+				<input type="button" value='<liferay-ui:message key="export" />' onClick="<portlet:namespace />exportData();" />
 			</c:when>
 			<c:when test='<%= tabs2.equals("import") %>'>
 				<liferay-ui:message key="import-a-lar-file-to-overwrite-the-selected-data" />
@@ -199,12 +201,11 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 
 				if (workflowEnabled) {
 					try {
-						proposal = TasksProposalLocalServiceUtil.getProposal(Portlet.class.getName(), layout.getPlid() + PortletImpl.LAYOUT_SEPARATOR + selPortlet.getPortletId());
+						proposal = TasksProposalLocalServiceUtil.getProposal(Portlet.class.getName(), selPortletPrimaryKey);
 					}
 					catch (NoSuchProposalException nspe) {
 					}
 				}
-
 				%>
 
 				<c:choose>
@@ -232,7 +233,7 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 									proposePublicationURL.setParameter("redirect", currentURL);
 									proposePublicationURL.setParameter("groupId", String.valueOf(liveGroup.getGroupId()));
 									proposePublicationURL.setParameter("className", Portlet.class.getName());
-									proposePublicationURL.setParameter("classPK", layout.getPlid() + PortletImpl.LAYOUT_SEPARATOR + selPortlet.getPortletId());
+									proposePublicationURL.setParameter("classPK", selPortletPrimaryKey);
 
 									String[] workflowRoleNames = StringUtil.split(liveGroup.getWorkflowRoleNames());
 
@@ -270,15 +271,15 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 									}
 									%>
 
-									<input type="button" value="<liferay-ui:message key="propose-publication" />"  onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
+									<input type="button" value="<liferay-ui:message key="propose-publication" />" onClick="Liferay.LayoutExporter.proposeLayout({url: '<%= proposePublicationURL.toString() %>', namespace: '<%= PortalUtil.getPortletNamespace(PortletKeys.LAYOUT_MANAGEMENT) %>', reviewers: <%= StringUtil.replace(jsonReviewers.toString(), '"', '\'') %>, title: '<liferay-ui:message key="proposal-description" />'});" />
 								</c:if>
 							</c:when>
 							<c:when test="<%= themeDisplay.getURLPublishToLive() != null %>">
-								<input type="button" value="<liferay-ui:message key="publish-to-live" />"  onClick="<portlet:namespace />publishToLive();" />
+								<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="<portlet:namespace />publishToLive();" />
 							</c:when>
 						</c:choose>
 
-						<input type="button" value="<liferay-ui:message key="copy-from-live" />"  onClick="<portlet:namespace />copyFromLive();" />
+						<input type="button" value="<liferay-ui:message key="copy-from-live" />" onClick="<portlet:namespace />copyFromLive();" />
 					</c:when>
 					<c:otherwise>
 						<liferay-ui:message key="<%= errorMesageKey %>" />

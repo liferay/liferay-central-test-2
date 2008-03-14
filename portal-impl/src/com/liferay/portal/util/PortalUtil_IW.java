@@ -379,6 +379,11 @@ public class PortalUtil_IW {
 	}
 
 	public java.lang.String getPortletTitle(java.lang.String portletId,
+		long companyId, java.util.Locale locale) {
+		return PortalUtil.getPortletTitle(portletId, companyId, locale);
+	}
+
+	public java.lang.String getPortletTitle(java.lang.String portletId,
 		com.liferay.portal.model.User user) {
 		return PortalUtil.getPortletTitle(portletId, user);
 	}

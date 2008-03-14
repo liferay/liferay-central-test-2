@@ -413,10 +413,6 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 <input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>' />
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" value="" />
 
-<c:if test="<%= workflowEnabled %>">
-	<input name="<portlet:namespace />workflowEnabled" type="hidden" value="true" />
-</c:if>
-
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 	<c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) %>">
 		<div>

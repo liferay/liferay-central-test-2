@@ -2018,7 +2018,7 @@
 	<service name="Portlet_Journal_JournalTemplateService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.journal.portlet.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="JournalTemplateServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="http://model.journal.portlet.liferay.com"/>
+		<parameter name="schemaUnqualified" value="urn:http.service.journal.portlet.liferay.com,http://model.journal.portlet.liferay.com"/>
 		<parameter name="wsdlServicePort" value="Portlet_Journal_JournalTemplateService"/>
 		<parameter name="className" value="com.liferay.portlet.journal.service.http.JournalTemplateServiceSoap"/>
 		<parameter name="wsdlPortType" value="JournalTemplateServiceSoap"/>
@@ -2031,7 +2031,12 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="templateId" type="tns:string"></parameter>
 		</operation>
-		<parameter name="allowedMethods" value="deleteTemplate getTemplate"/>
+		<operation xmlns:operNS="urn:http.service.journal.portlet.liferay.com" xmlns:rtns="urn:http.service.journal.portlet.liferay.com" xmlns:tns2="http://model.journal.portlet.liferay.com" name="getStructureTemplates" qname="operNS:getStructureTemplates" returnQName="getStructureTemplatesReturn" returnType="rtns:ArrayOf_tns2_JournalTemplateSoap" returnItemType="tns2:JournalTemplateSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="groupId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="structureId" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="deleteTemplate getTemplate getStructureTemplates"/>
+		<arrayMapping xmlns:ns="urn:http.service.journal.portlet.liferay.com" xmlns:cmp-ns="http://model.journal.portlet.liferay.com" qname="ns:ArrayOf_tns2_JournalTemplateSoap" type="java:com.liferay.portlet.journal.model.JournalTemplateSoap[]" innerType="cmp-ns:JournalTemplateSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<typeMapping xmlns:ns="http://model.journal.portlet.liferay.com" qname="ns:JournalTemplateSoap" type="java:com.liferay.portlet.journal.model.JournalTemplateSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
 	</service>
 	<service name="Portlet_MB_MBBanService" provider="java:RPC" style="rpc" use="encoded">
@@ -2063,6 +2068,14 @@
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="getCategory" qname="operNS:getCategory" returnQName="getCategoryReturn" returnType="rtns:MBCategorySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="categoryId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addCategory" qname="operNS:addCategory" returnQName="addCategoryReturn" returnType="rtns:MBCategorySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="parentCategoryId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.messageboards.portlet.liferay.com" xmlns:rtns="http://model.messageboards.portlet.liferay.com" name="addCategory" qname="operNS:addCategory" returnQName="addCategoryReturn" returnType="rtns:MBCategorySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="plid" type="tns:long"></parameter>
@@ -2119,6 +2132,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="subject" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="body" type="tns:string"></parameter>
 			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="files" type="tns:ArrayOf_xsd_anyType"></parameter>
+			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="existingFiles" type="tns:ArrayOf_xsd_anyType"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="priority" type="tns:double"></parameter>
 			<parameter xmlns:tns="urn:http.service.messageboards.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>

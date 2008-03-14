@@ -22,10 +22,8 @@
 
 package com.liferay.portlet.communities.action;
 
-import com.liferay.portal.kernel.portlet.LiferayRenderRequest;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -51,9 +49,6 @@ import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 import com.liferay.portlet.tasks.service.TasksProposalServiceUtil;
 import com.liferay.portlet.tasks.service.TasksReviewServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
-
-import java.util.LinkedHashMap;
-import java.util.Map;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -104,11 +99,10 @@ public class EditProposalAction extends EditPagesAction {
 				rejectReview(req);
 			}
 
-			String redirect = ParamUtil.getString(req, "redirect");
-			String pagesRedirect = ParamUtil.getString(req, "pagesRedirect");
+			String redirect = ParamUtil.getString(req, "pagesRedirect");
 
-			if (Validator.isNotNull(pagesRedirect)) {
-				redirect = pagesRedirect;
+			if (Validator.isNull(redirect)) {
+				redirect = ParamUtil.getString(req, "redirect");
 			}
 
 			sendRedirect(req, res, redirect);
@@ -205,13 +199,12 @@ public class EditProposalAction extends EditPagesAction {
 		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
 			proposalId);
 
-		if (proposal.getClassNameId() ==
-				PortalUtil.getClassNameId(Layout.class.getName())) {
+		String className = PortalUtil.getClassName(proposal.getClassNameId());
 
+		if (className.equals(Layout.class.getName())) {
 			StagingUtil.publishToLive(req);
 		}
-		else if (proposal.getClassNameId() ==
-			PortalUtil.getClassNameId(Portlet.class.getName())) {
+		else if (className.equals(Portlet.class.getName())) {
 			String classPK = proposal.getClassPK();
 
 			String portletId = classPK.substring(
@@ -238,10 +231,8 @@ public class EditProposalAction extends EditPagesAction {
 	protected void updateProposal(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		Layout layout = themeDisplay.getLayout();
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long proposalId = ParamUtil.getLong(req, "proposalId");
 
@@ -258,25 +249,28 @@ public class EditProposalAction extends EditPagesAction {
 			String name = StringPool.BLANK;
 
 			if (className.equals(Layout.class.getName())) {
-				layout = LayoutLocalServiceUtil.getLayout(
-					GetterUtil.getLong(classPK));
+				long plid = GetterUtil.getLong(classPK);
 
-				name = layout.getName(LocaleUtil.getDefault());
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+				name = layout.getName(themeDisplay.getLocale());
 			}
 			else if (className.equals(Portlet.class.getName())) {
-				String portletId = classPK.substring(classPK.indexOf(PortletImpl.LAYOUT_SEPARATOR) + PortletImpl.LAYOUT_SEPARATOR.length());
+				String portletId = classPK.substring(
+					classPK.indexOf(PortletImpl.LAYOUT_SEPARATOR) +
+						PortletImpl.LAYOUT_SEPARATOR.length());
 
 				name = PortalUtil.getPortletTitle(
 					portletId, themeDisplay.getCompanyId(),
-					LocaleUtil.getDefault().toString());
+					themeDisplay.getLocale());
 			}
 
 			boolean addCommunityPermissions = true;
 			boolean addGuestPermissions = true;
 
 			TasksProposalServiceUtil.addProposal(
-				groupId, className, classPK, name, description,
-				reviewUserId, addCommunityPermissions, addGuestPermissions);
+				groupId, className, classPK, name, description, reviewUserId,
+				addCommunityPermissions, addGuestPermissions);
 		}
 		else {
 			int dueDateMonth = ParamUtil.getInteger(req, "dueDateMonth");

@@ -22,7 +22,7 @@
  */
 %>
 
-<fieldset <%= proposal != null ? "style=\"display: none;\"" : "" %>>
+<fieldset <%= (proposalId > 0) ? "style=\"display: none;\"" : "" %>>
 	<legend><liferay-ui:message key="scope" /></legend>
 
 	<c:choose>
@@ -91,7 +91,7 @@
 
 			searchContainer.setTotal(total);
 			searchContainer.setResults(results);
-			searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "fm2", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
+			searchContainer.setRowChecker(new ExportPageChecker(renderResponse, "left", "top", RowChecker.COLSPAN, "exportPagesFm", RowChecker.ALL_ROW_IDS, RowChecker.ROW_IDS));
 
 			List resultRows = searchContainer.getResultRows();
 

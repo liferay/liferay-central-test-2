@@ -104,9 +104,9 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 
 			if (Validator.isNull(curURL)) {
 				if (values.length == 1) {
-					if (Validator.isNotNull(backURL)) {
+					/*if (Validator.isNotNull(backURL)) {
 						curURL = backURL;
-					}
+					}*/
 				}
 				else {
 					if (refresh) {
