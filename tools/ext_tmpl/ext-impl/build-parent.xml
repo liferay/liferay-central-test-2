@@ -151,9 +151,9 @@ ${exception.message}
 		>
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<jvmarg value="-Dservice.input.file=${service.file}" />
-			<jvmarg value="-Dservice.hbm.file=classes/META-INF/ext-hbm.xml" />
-			<jvmarg value="-Dservice.model.hints.file=classes/META-INF/ext-model-hints.xml" />
-			<jvmarg value="-Dservice.spring.file=classes/META-INF/ext-spring.xml" />
+			<jvmarg value="-Dservice.hbm.file=src/META-INF/ext-hbm.xml" />
+			<jvmarg value="-Dservice.model.hints.file=src/META-INF/ext-model-hints.xml" />
+			<jvmarg value="-Dservice.spring.file=src/META-INF/ext-spring.xml" />
 			<jvmarg value="-Dservice.api.dir=${project.dir}/ext-service/src" />
 			<jvmarg value="-Dservice.impl.dir=src" />
 			<jvmarg value="-Dservice.json.file=${project.dir}/ext-web/docroot/html/js/liferay/ext_service_unpacked.js" />
@@ -172,6 +172,16 @@ ${exception.message}
 		<delete file="ServiceBuilder.temp" />
 
 		<ant dir="../ext-service" target="compile" inheritAll="false" />
+	</target>
+
+	<target name="build-service-portlet-reports">
+		<antcall target="build-service">
+			<param name="service.file" value="src/com/ext/portlet/reports/service.xml" />
+		</antcall>
+	</target>
+
+	<target name="build-services">
+		<antcall target="build-service-portlet-reports" />
 	</target>
 
 	<target name="build-wsdd" depends="compile">

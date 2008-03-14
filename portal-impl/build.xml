@@ -152,7 +152,7 @@ ${exception.message}
 		</copy>
 
 		<copy todir="${dependencies.classes.dir}">
-			<fileset dir="src" includes="**/dependencies/**,**/service.xml" />
+			<fileset dir="src" excludes="**/*.java" />
 		</copy>
 	</target>
 

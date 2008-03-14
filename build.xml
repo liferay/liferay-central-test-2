@@ -1229,10 +1229,9 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="sync-ext">
-		<copy todir="tools/ext_tmpl/ext-impl" overwrite="yes">
+		<copy todir="tools/ext_tmpl/ext-impl/src" overwrite="yes">
 			<fileset
-				dir="${lp.ext.dir}/ext-impl"
-				includes="**/*.java,**/*.wsdd,**/*.xml,**/*.81"
+				dir="${lp.ext.dir}/ext-impl/src"
 			/>
 		</copy>
 
