@@ -54,6 +54,8 @@ public class UniqueList extends ArrayList {
 	}
 
 	public boolean addAll(Collection c) {
+		c = new ArrayList(c);
+
 		Iterator itr = c.iterator();
 
 		while (itr.hasNext()) {
@@ -68,6 +70,8 @@ public class UniqueList extends ArrayList {
 	}
 
 	public boolean addAll(int index, Collection c) {
+		c = new ArrayList(c);
+
 		Iterator itr = c.iterator();
 
 		while (itr.hasNext()) {
