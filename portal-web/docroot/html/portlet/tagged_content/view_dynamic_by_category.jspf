@@ -28,119 +28,120 @@ long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(
 
 Date now = new Date();
 
-int total = TagsAssetLocalServiceUtil.getAssetsCount(portletGroupId.longValue(), classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+Map<String, List<TagsAsset>> assetsByCategory = new TreeMap<String, List<TagsAsset>>();
 
-searchContainer.setTotal(total);
+List<TagsAsset> assets = TagsAssetLocalServiceUtil.getAssets(portletGroupId.longValue(), classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
 
-List results = TagsAssetLocalServiceUtil.getAssets(portletGroupId.longValue(), classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), total);
+for (TagsAsset asset : assets) {
+	List<TagsEntry> assetEntries = TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId());
 
-Map map = new TreeMap();
+	for (TagsEntry assetEntry : assetEntries) {
+		TagsProperty assetEntryCategory = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "category");
 
-for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
-	TagsAsset asset = (TagsAsset) results.get(assetIndex);
-	List tags = TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId());	
+		if (assetEntryCategory.getValue().equals(category)) {
+			String tagLabel = null;
 
-	for (int tagsIndex = 0; tagsIndex < tags.size(); tagsIndex++) {
-		TagsEntry tag = (TagsEntry) tags.get(tagsIndex);
-		long tagEntryId = tag.getEntryId();
+			try {
+				TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "description");
 
-		try {
-			TagsProperty tagCategory = TagsPropertyLocalServiceUtil.getProperty(tagEntryId, "category");
-
-			if (category.equals(tagCategory.getValue())) {
-				String tagKey = tag.getName();
-
-				try {
-					TagsProperty description = TagsPropertyLocalServiceUtil.getProperty(tagEntryId, "description");
-					tagKey = description.getValue();
-				}
-				catch (NoSuchPropertyException nspee) {
-				}
-
-				List assetList = (ArrayList) map.get(tagKey);
-
-				if (assetList == null) {
-					assetList = new ArrayList();
-				}
-				assetList.add(asset);
-
-				if (!map.containsKey(tagKey)) {
-					map.put(tagKey, assetList);
-				}
+				tagLabel = property.getValue();
 			}
-		}
-		catch (NoSuchPropertyException nspee) {
+			catch (NoSuchPropertyException nspee) {
+				tagLabel = StringUtil.upperCaseFirstLetter(assetEntry.getName());
+			}
+
+			List assetsList = assetsByCategory.get(tagLabel);
+
+			if (assetsList == null) {
+				assetsList = new ArrayList();
+
+				assetsByCategory.put(tagLabel, assetsList);
+			}
+
+			assetsList.add(asset);
 		}
 	}
 }
-Iterator keys = map.keySet().iterator();
 
-while(keys.hasNext()) {
-	String currentKey = (String) keys.next();
-	%><%= currentKey %><%
-	results = (List) map.get(currentKey);
-	searchContainer.setResults(results);
+Iterator<Map.Entry<String, List<TagsAsset>>> itr = assetsByCategory.entrySet().iterator();
+
+while (itr.hasNext()) {
+	Map.Entry<String, List<TagsAsset>> entry = itr.next();
+
+	String tagLabel = entry.getKey();
+	List<TagsAsset> results = entry.getValue();
 
 	request.setAttribute("view.jsp-results", results);
-
-	for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
-		TagsAsset asset = (TagsAsset)results.get(assetIndex);
-
-		String className = PortalUtil.getClassName(asset.getClassNameId());
-		long classPK = asset.getClassPK();
-
-		String title = asset.getTitle();
-		String summary = StringPool.BLANK;
-		String viewURL = StringPool.BLANK;
-		String viewURLMessage = StringPool.BLANK;
-		String editURL = StringPool.BLANK;
-
-		boolean show = true;
-
-		request.setAttribute("view.jsp-assetIndex", new Integer(assetIndex));
-
-		request.setAttribute("view.jsp-asset", asset);
-
-		request.setAttribute("view.jsp-title", title);
-		request.setAttribute("view.jsp-summary", summary);
-		request.setAttribute("view.jsp-viewURL", viewURL);
-		request.setAttribute("view.jsp-viewURLMessage", viewURLMessage);
-
-		request.setAttribute("view.jsp-className", className);
-		request.setAttribute("view.jsp-classPK", new Long(classPK));
-
-		request.setAttribute("view.jsp-show", new Boolean(show));
-
-		try {
 %>
 
-		<c:choose>
-			<c:when test='<%= displayStyle.equals("full-content") %>'>
-				<div>
-					<liferay-util:include page="/html/portlet/tagged_content/display_full_content.jsp" />
-				</div>
-			</c:when>
-			<c:when test='<%= displayStyle.equals("abstracts") %>'>
-				<div>
-					<liferay-util:include page="/html/portlet/tagged_content/display_abstract.jsp" />
-				</div>
-			</c:when>
-			<c:when test='<%= displayStyle.equals("title-list") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_title_list.jsp" />
-			</c:when>
-			<c:when test='<%= displayStyle.equals("table") %>'>
-				<liferay-util:include page="/html/portlet/tagged_content/display_table.jsp" />
-			</c:when>
-			<c:otherwise>
-				<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
-			</c:otherwise>
-		</c:choose>
+	<h2 class="journal-content-tag-label"><%= tagLabel %></h2>
+
+	<div class="journal-content-tag-entries">
+
+		<%
+		for (int assetIndex = 0; assetIndex < results.size(); assetIndex++) {
+			TagsAsset asset = results.get(assetIndex);
+
+			String className = PortalUtil.getClassName(asset.getClassNameId());
+			long classPK = asset.getClassPK();
+
+			String title = asset.getTitle();
+			String summary = StringPool.BLANK;
+			String viewURL = StringPool.BLANK;
+			String viewURLMessage = StringPool.BLANK;
+			String editURL = StringPool.BLANK;
+
+			boolean show = true;
+
+			request.setAttribute("view.jsp-assetIndex", new Integer(assetIndex));
+
+			request.setAttribute("view.jsp-asset", asset);
+
+			request.setAttribute("view.jsp-title", title);
+			request.setAttribute("view.jsp-summary", summary);
+			request.setAttribute("view.jsp-viewURL", viewURL);
+			request.setAttribute("view.jsp-viewURLMessage", viewURLMessage);
+
+			request.setAttribute("view.jsp-className", className);
+			request.setAttribute("view.jsp-classPK", new Long(classPK));
+
+			request.setAttribute("view.jsp-show", new Boolean(show));
+
+			try {
+		%>
+
+				<c:choose>
+					<c:when test='<%= displayStyle.equals("full-content") %>'>
+						<div>
+							<liferay-util:include page="/html/portlet/tagged_content/display_full_content.jsp" />
+						</div>
+					</c:when>
+					<c:when test='<%= displayStyle.equals("abstracts") %>'>
+						<div>
+							<liferay-util:include page="/html/portlet/tagged_content/display_abstract.jsp" />
+						</div>
+					</c:when>
+					<c:when test='<%= displayStyle.equals("title-list") %>'>
+						<liferay-util:include page="/html/portlet/tagged_content/display_title_list.jsp" />
+					</c:when>
+					<c:when test='<%= displayStyle.equals("table") %>'>
+						<liferay-util:include page="/html/portlet/tagged_content/display_table.jsp" />
+					</c:when>
+					<c:otherwise>
+						<%= LanguageUtil.format(pageContext, "x-is-not-a-display-type", displayStyle) %>
+					</c:otherwise>
+				</c:choose>
+
+		<%
+			}
+			catch (Exception e) {
+				_log.error(e.getMessage());
+			}
+		}
+		%>
+
+	</div>
 
 <%
-		}
-		catch (Exception e) {
-			_log.error(e.getMessage());
-		}
-	}
 }
 %>
