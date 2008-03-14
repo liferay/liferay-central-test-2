@@ -61,7 +61,7 @@ Liferay.TagsSelector = new Class({
 		instance._setupSelectTags();
 		instance._setupSuggestions();
 
-		var addTagButton = jQuery('#' + params.addTagButton);
+		var addTagButton = jQuery('#' + params.instanceVar + 'addTag');
 
 		addTagButton.click(
 			function() {
@@ -294,22 +294,15 @@ Liferay.TagsSelector = new Class({
 
 		var params = instance.params;
 		var ns = params.instanceVar;
-		var formName = params.formName;
-		var fieldNames = params.fieldNames;
+		var contentCallback = params.contentCallback;
 		var mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
 		var container = jQuery('<div class="lfr-tag-container"></div>');
 
-		var form = jQuery('form[@name=' + formName + ']');
-
-		var fields = form.find('[@name=' + fieldNames.split(',').join('],[@name=') + ']');
-
 		var context = '';
 
-		fields.each(
-			function() {
-				context += this.value + ' ';
-			}
-		)
+		if(contentCallback) {
+			context += eval(contentCallback);
+		}
 
 		var url =  "http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction?appid=YahooDemo&output=json&context=" + escape(context);
 

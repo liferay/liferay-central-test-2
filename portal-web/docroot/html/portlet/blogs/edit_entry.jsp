@@ -49,6 +49,16 @@ if (entry != null) {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 
+	function <portlet:namespace />getContentForSuggestions() {
+		var content = '';
+
+		content += document.<portlet:namespace />fm.<portlet:namespace/>title.value;
+		content += ' ';
+		content += window.<portlet:namespace />editor.getHTML();
+
+		return content;
+	}
+
 	function <portlet:namespace />saveEntry() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
 		document.<portlet:namespace />fm.<portlet:namespace />content.value = window.<portlet:namespace />editor.getHTML();
@@ -126,6 +136,7 @@ if (entry != null) {
 			className="<%= BlogsEntry.class.getName() %>"
 			classPK="<%= classPK %>"
 			hiddenInput="tagsEntries"
+			contentCallback="<%= renderResponse.getNamespace() + "getContentForSuggestions()" %>"
 		/>
 	</td>
 </tr>

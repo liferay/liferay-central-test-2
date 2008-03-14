@@ -86,6 +86,15 @@ if ((message != null) && message.isAttachments()) {
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
 		nameEl.innerHTML = categoryName + "&nbsp;";
 	}
+
+	function <portlet:namespace />getContentForSuggestions() {
+		var content = '';
+
+		content += document.<portlet:namespace />fm.<portlet:namespace />subject.value + ' ';
+		content += <portlet:namespace />getHTML();
+
+		return content;
+	}
 </script>
 
 <c:if test="<%= preview %>">
@@ -360,11 +369,10 @@ if (message != null) {
 		%>
 
 		<liferay-ui:tags-selector
-			formName='<%= renderResponse.getNamespace() + "fm" %>'
-			fieldNames='<%= renderResponse.getNamespace() + "subject,textArea,badName" %>'
 			className="<%= MBMessage.class.getName() %>"
 			classPK="<%= classPK %>"
 			hiddenInput="tagsEntries"
+			contentCallback="<%= renderResponse.getNamespace() + "getContentForSuggestions()"%>"
 		/>
 	</td>
 </tr>
