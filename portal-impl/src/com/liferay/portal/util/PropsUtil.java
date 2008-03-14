@@ -971,17 +971,11 @@ public class PropsUtil {
 
 	public static final String IG_IMAGE_EXTENSIONS = "ig.image.extensions";
 
-	public static final String IG_IMAGE_THUMBNAIL_MAX_HEIGHT = "ig.image.thumbnail.max.height";
+	public static final String IG_IMAGE_THUMBNAIL_MAX_DIMENSION = "ig.image.thumbnail.max.dimension";
 
-	public static final String IG_IMAGE_THUMBNAIL_MAX_WIDTH = "ig.image.thumbnail.max.width";
+	public static final String IG_IMAGE_CUSTOM_1_MAX_DIMENSION = "ig.image.custom1.max.dimension";
 
-	public static final String IG_IMAGE_CUSTOM_1_MAX_HEIGHT = "ig.image.custom1.max.height";
-
-	public static final String IG_IMAGE_CUSTOM_1_MAX_WIDTH = "ig.image.custom1.max.width";
-
-	public static final String IG_IMAGE_CUSTOM_2_MAX_HEIGHT = "ig.image.custom2.max.height";
-
-	public static final String IG_IMAGE_CUSTOM_2_MAX_WIDTH = "ig.image.custom2.max.width";
+	public static final String IG_IMAGE_CUSTOM_2_MAX_DIMENSION = "ig.image.custom2.max.dimension";
 
 	// Invitation Portlet
 

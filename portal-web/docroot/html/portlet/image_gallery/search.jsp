@@ -75,38 +75,24 @@ portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
 portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
 portletURL.setParameter("keywords", keywords);
 
-List headerNames = new ArrayList();
-
-headerNames.add("#");
-headerNames.add("folder");
-headerNames.add("image");
-headerNames.add("score");
-headerNames.add(StringPool.BLANK);
-
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + Html.escape(keywords) + "</b>"));
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + Html.escape(keywords) + "</b>"));
 
 Hits hits = null;
 
 try {
 	hits = IGFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords);
 
-	Hits results = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
+	Hits resultHits = hits.subset(searchContainer.getStart(), searchContainer.getEnd());
 	int total = hits.getLength();
 
 	searchContainer.setTotal(total);
 
-	List resultRows = searchContainer.getResultRows();
+	List results = new ArrayList(resultHits.getLength());
 
-	for (int i = 0; i < results.getLength(); i++) {
-		Document doc = results.doc(i);
+	List scores = new ArrayList(resultHits.getLength());
 
-		ResultRow row = new ResultRow(doc, i, i);
-
-		// Position
-
-		row.addText(searchContainer.getStart() + i + 1 + StringPool.PERIOD);
-
-		// Folder and image
+	for (int i = 0; i < resultHits.getLength(); i++) {
+		Document doc = resultHits.doc(i);
 
 		long imageId = GetterUtil.getLong(doc.get("imageId"));
 
@@ -114,56 +100,26 @@ try {
 
 		try {
 			image = IGImageLocalServiceUtil.getImage(imageId);
+
+			results.add(image);
+
+			scores.add(new Double(resultHits.score(i)));
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("Image gallery search index is stale and contains image " + imageId);
 			}
-
-			continue;
 		}
-
-		row.setObject(image);
-
-		IGFolder folder = image.getFolder();
-
-		StringMaker sm = new StringMaker();
-
-		sm.append(themeDisplay.getPathImage());
-		sm.append("/image_gallery?img_id=");
-		sm.append(image.getLargeImageId());
-		sm.append("&t=");
-		sm.append(ImageServletTokenUtil.getToken(image.getLargeImageId()));
-
-		String rowHREF = sm.toString();
-
-		TextSearchEntry rowTextEntry = new TextSearchEntry(SearchEntry.DEFAULT_ALIGN, SearchEntry.DEFAULT_VALIGN, folder.getName(), rowHREF, "_blank", image.getDescription());
-
-		row.addText(rowTextEntry);
-
-		row.addJSP("/html/portlet/image_gallery/image_thumbnail.jsp");
-
-		// Score
-
-		row.addScore(results.score(i));
-
-		// Action
-
-		row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/image_gallery/image_action.jsp");
-
-		// Add result row
-
-		resultRows.add(row);
 	}
 %>
 
 	<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= Html.escape(keywords) %>" />
 
-	<input type="submit" value="<liferay-ui:message key="search-file-entries" />" />
+	<input type="submit" value="<liferay-ui:message key="search-images" />" />
 
 	<br /><br />
 
-	<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+	<%@ include file="/html/portlet/image_gallery/view_grid.jsp" %>
 
 <%
 }

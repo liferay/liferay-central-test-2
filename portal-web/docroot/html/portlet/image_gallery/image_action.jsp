@@ -22,14 +22,6 @@
  */
 %>
 
-<%@ include file="/html/portlet/image_gallery/init.jsp" %>
-
-<%
-ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
-
-IGImage image = (IGImage)row.getObject();
-%>
-
 <liferay-ui:icon-menu>
 	<c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">

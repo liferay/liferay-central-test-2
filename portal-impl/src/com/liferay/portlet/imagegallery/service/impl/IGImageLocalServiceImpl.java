@@ -158,15 +158,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setSmallImageId(counterLocalService.increment());
 			image.setLargeImageId(counterLocalService.increment());
 
-			if ((PropsValues.IG_IMAGE_CUSTOM_1_MAX_HEIGHT > 0) &&
-				(PropsValues.IG_IMAGE_CUSTOM_1_MAX_WIDTH > 0)) {
-
+			if (PropsValues.IG_IMAGE_CUSTOM_1_MAX_DIMENSION > 0) {
 				image.setCustom1ImageId(counterLocalService.increment());
 			}
 
-			if ((PropsValues.IG_IMAGE_CUSTOM_2_MAX_HEIGHT > 0) &&
-				(PropsValues.IG_IMAGE_CUSTOM_2_MAX_WIDTH > 0)) {
-
+			if (PropsValues.IG_IMAGE_CUSTOM_2_MAX_DIMENSION > 0) {
 				image.setCustom2ImageId(counterLocalService.increment());
 			}
 
@@ -558,21 +554,18 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			saveScaledImage(
 				renderedImage, smallImageId, contentType,
-				PropsValues.IG_IMAGE_THUMBNAIL_MAX_HEIGHT,
-				PropsValues.IG_IMAGE_THUMBNAIL_MAX_WIDTH);
+				PropsValues.IG_IMAGE_THUMBNAIL_MAX_DIMENSION);
 
 			if (custom1ImageId > 0) {
 				saveScaledImage(
 					renderedImage, custom1ImageId, contentType,
-					PropsValues.IG_IMAGE_CUSTOM_1_MAX_HEIGHT,
-					PropsValues.IG_IMAGE_CUSTOM_1_MAX_WIDTH);
+					PropsValues.IG_IMAGE_CUSTOM_1_MAX_DIMENSION);
 			}
 
 			if (custom2ImageId > 0) {
 				saveScaledImage(
 					renderedImage, custom2ImageId, contentType,
-					PropsValues.IG_IMAGE_CUSTOM_2_MAX_HEIGHT,
-					PropsValues.IG_IMAGE_CUSTOM_2_MAX_WIDTH);
+					PropsValues.IG_IMAGE_CUSTOM_2_MAX_DIMENSION);
 			}
 		}
 		catch (IOException ioe) {
@@ -582,10 +575,11 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 	protected void saveScaledImage(
 			RenderedImage renderedImage, long imageId, String contentType,
-			int height, int width)
+			int dimension)
 		throws IOException, SystemException {
 
-		RenderedImage thumbnail = ImageUtil.scale(renderedImage, height, width);
+		RenderedImage thumbnail =
+			ImageUtil.scale(renderedImage, dimension, dimension);
 
 		ByteArrayMaker bam = new ByteArrayMaker();
 

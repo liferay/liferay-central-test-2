@@ -7,6 +7,10 @@
 		close: function(link) {
 			var instance = this;
 
+			if (instance.options.onBeforeClose) {
+				instance.options.onBeforeClose();
+			}
+
 			jQuery(link).parents(".popup:first").remove();
 
 			var jModal = jQuery("#alert-messages .modal:last");
@@ -48,8 +52,11 @@
 			 * modal (boolean) - show shaded background
 			 * message (string|object) - default HTML/object to display
 			 * noCenter (boolean) - prevent re-centering
+			 * noDraggable (boolean) - prevent draggable
+			 * noTitleBar (boolean) - hide title bar
 			 * height (int) - starting height of message box
 			 * width (int) - starting width of message box
+			 * onBeforeClose (function) - executes before closing
 			 * onClose (function) - executes after closing
 			 */
 
@@ -65,6 +72,8 @@
 			var msgHeight = options.height;
 			var msgWidth = options.width;
 			var noCenter = options.noCenter;
+			var noDraggable = options.noDraggable || false;
+			var noTitleBar = options.noTitleBar || false;
 			var title = options.title;
 			var onClose = options.onClose;
 
@@ -75,14 +84,16 @@
 				jAlertMsgs = jQuery("#alert-messages");
 			}
 
-
 			jAlertMsgs.append(
 				"<div class='popup " + (modal ? "modal" : "") + "' style='position:absolute; top:0; left:0;'>" +
 					"<div class='popup-inner'>" +
-						"<div class='popup-header'>" +
-							"<span class='popup-title'>" + (title || "&nbsp;") + "</span>" +
-							"<img class='popup-close' src='" + themeDisplay.getPathThemeImages() + "/portlet/close.png'/>" +
-						"</div>" +
+						(noTitleBar ?
+							"<img class='popup-close' src='" + themeDisplay.getPathThemeImages() + "/portlet/close.png'/>" :
+							("<div class='popup-header'>" +
+								"<span class='popup-title'>" + (title || "&nbsp;") + "</span>" +
+								"<img class='popup-close' src='" + themeDisplay.getPathThemeImages() + "/portlet/close.png'/>" +
+							"</div>")
+						) +
 						"<div class='popup-message'></div>" +
 					"</div>" +
 				"</div>");
@@ -92,6 +103,20 @@
 
 			if (myMessageId) {
 				jMessage.attr("id", myMessageId);
+			}
+
+			if (noTitleBar) {
+				var closeButton = jPopup.find(".popup-close");
+				closeButton.hide();
+
+				jPopup.find(".popup-inner").hover(
+					function() {
+						closeButton.fadeIn("normal");
+					},
+					function() {
+						closeButton.fadeOut("normal");
+					}
+				);
 			}
 
 			jPopup.find(".popup-close").click(function() {
@@ -150,25 +175,27 @@
 			$.Popup.resize();
 			jBg.fadeTo("normal", 0.5);
 
-			if (false) {
-
-				// jQuery Draggable is slow
-
-				jPopup.Draggable(
-					{
-						handle: jPopup.find(".popup-header")[0],
-						zIndex: Liferay.zIndex.ALERT + 1
-					}
-				);
-			}
-			else {
-				jPopup.lDrag(
-					{
-						handle: jPopup.find(".popup-header")[0],
-						threshold: 2,
-						dragClass: "drag-indicator"
-					}
-				);
+			if (!noDraggable) {
+				if (false) {
+	
+					// jQuery Draggable is slow
+	
+					jPopup.Draggable(
+						{
+							handle: jPopup.find(".popup-header")[0],
+							zIndex: Liferay.zIndex.ALERT + 1
+						}
+					);
+				}
+				else {
+					jPopup.lDrag(
+						{
+							handle: jPopup.find(".popup-header")[0],
+							threshold: 2,
+							dragClass: "drag-indicator"
+						}
+					);
+				}
 			}
 
 			if (noCenter) {

@@ -276,21 +276,13 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.HOT_UNDEPLOY_ON_REDEPLOY));
 
-	public static final int IG_IMAGE_CUSTOM_1_MAX_HEIGHT =
+	public static final int IG_IMAGE_CUSTOM_1_MAX_DIMENSION =
 		GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_1_MAX_HEIGHT));
+			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_1_MAX_DIMENSION));
 
-	public static final int IG_IMAGE_CUSTOM_1_MAX_WIDTH =
+	public static final int IG_IMAGE_CUSTOM_2_MAX_DIMENSION =
 		GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_1_MAX_WIDTH));
-
-	public static final int IG_IMAGE_CUSTOM_2_MAX_HEIGHT =
-		GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_2_MAX_HEIGHT));
-
-	public static final int IG_IMAGE_CUSTOM_2_MAX_WIDTH =
-		GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_2_MAX_WIDTH));
+			PropsUtil.get(PropsUtil.IG_IMAGE_CUSTOM_2_MAX_DIMENSION));
 
 	public static final String[] IG_IMAGE_EXTENSIONS =
 		PropsUtil.getArray(PropsUtil.IG_IMAGE_EXTENSIONS);
@@ -298,13 +290,9 @@ public class PropsValues {
 	public static final int IG_IMAGE_MAX_SIZE = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.IG_IMAGE_MAX_SIZE));
 
-	public static final int IG_IMAGE_THUMBNAIL_MAX_HEIGHT =
+	public static final int IG_IMAGE_THUMBNAIL_MAX_DIMENSION =
 		GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_HEIGHT));
-
-	public static final int IG_IMAGE_THUMBNAIL_MAX_WIDTH =
-		GetterUtil.getInteger(
-			PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_WIDTH));
+			PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_DIMENSION));
 
 	public static final boolean JABBER_XMPP_SERVER_ENABLED =
 		GetterUtil.getBoolean(

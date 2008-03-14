@@ -37,6 +37,9 @@ portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/image_gallery/view");
 portletURL.setParameter("folderId", String.valueOf(folderId));
+portletURL.setParameter("tabs1", tabs1);
+
+List scores = null;
 %>
 
 <liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" varImpl="searchURL"><portlet:param name="struts_action" value="/image_gallery/search" /></liferay-portlet:renderURL>
@@ -256,6 +259,13 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		<c:if test="<%= folder != null %>">
 			<br />
 
+			<script type="text/javascript">
+				function <portlet:namespace />viewSlideShow() {
+					var slideShowWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view_slide_show" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no');
+					slideShowWindow.focus();
+				}
+			</script>
+
 			<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
 			<liferay-portlet:renderURLParams varImpl="searchURL" />
 			<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
@@ -265,16 +275,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			<liferay-ui:tabs names="images" />
 
 			<%
-			headerNames.clear();
-
-			headerNames.add("name");
-			headerNames.add("thumbnail");
-			headerNames.add("height");
-			headerNames.add("width");
-			headerNames.add("size");
-			headerNames.add(StringPool.BLANK);
-
-			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+			searchContainer = new SearchContainer(renderRequest, null, null, "cur2", SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
 			total = IGImageLocalServiceUtil.getImagesCount(folder.getFolderId());
 
@@ -283,38 +284,6 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			results = IGImageLocalServiceUtil.getImages(folder.getFolderId(), searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setResults(results);
-
-			resultRows = searchContainer.getResultRows();
-
-			for (int i = 0; i < results.size(); i++) {
-				IGImage image = (IGImage)results.get(i);
-
-				Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
-
-				ResultRow row = new ResultRow(image, image.getImageId(), i);
-
-				// Name
-
-				row.addText(image.getNameWithExtension());
-
-				// Thumbnail
-
-				row.addJSP("/html/portlet/image_gallery/image_thumbnail.jsp");
-
-				// Statistics
-
-				row.addText(String.valueOf(largeImage.getHeight()));
-				row.addText(String.valueOf(largeImage.getWidth()));
-				row.addText(TextFormatter.formatKB(largeImage.getSize(), locale) + "k");
-
-				// Action
-
-				row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/image_gallery/image_action.jsp");
-
-				// Add result row
-
-				resultRows.add(row);
-			}
 
 			boolean showAddImageButton = IGFolderPermission.contains(permissionChecker, folder, ActionKeys.ADD_IMAGE);
 			%>
@@ -334,7 +303,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					</c:if>
 
 					<c:if test="<%= results.size() > 0 %>">
-						<input type="button" value="<liferay-ui:message key="view-slide-show" />" onClick="var slideShowWindow = window.open('<portlet:renderURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/view_slide_show" /><portlet:param name="folderId" value="<%= String.valueOf(folderId) %>" /></portlet:renderURL>', 'slideShow', 'directories=no,location=no,menubar=no,resizable=yes,scrollbars=no,status=no,toolbar=no'); void(''); slideShowWindow.focus();" />
+						<input type="button" value="<liferay-ui:message key="view-slide-show" />" onClick="<portlet:namespace />viewSlideShow();" />
 					</c:if>
 				</div>
 
@@ -343,7 +312,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				</c:if>
 			</c:if>
 
-			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+			<%@ include file="/html/portlet/image_gallery/view_grid.jsp" %>
 
 			</form>
 
@@ -364,16 +333,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			groupImagesUserId = user.getUserId();
 		}
 
-		List headerNames = new ArrayList();
-
-		headerNames.add("name");
-		headerNames.add("thumbnail");
-		headerNames.add("height");
-		headerNames.add("width");
-		headerNames.add("size");
-		headerNames.add(StringPool.BLANK);
-
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, null);
 
 		int total = IGImageLocalServiceUtil.getGroupImagesCount(portletGroupId.longValue(), groupImagesUserId);
 
@@ -382,40 +342,12 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		List results = IGImageLocalServiceUtil.getGroupImages(portletGroupId.longValue(), groupImagesUserId, searchContainer.getStart(), searchContainer.getEnd());
 
 		searchContainer.setResults(results);
-
-		List resultRows = searchContainer.getResultRows();
-
-		for (int i = 0; i < results.size(); i++) {
-			IGImage image = (IGImage)results.get(i);
-
-			Image largeImage = ImageLocalServiceUtil.getImage(image.getLargeImageId());
-
-			ResultRow row = new ResultRow(image, image.getImageId(), i);
-
-			// Name
-
-			row.addText(image.getNameWithExtension());
-
-			// Thumbnail
-
-			row.addJSP("/html/portlet/image_gallery/image_thumbnail.jsp");
-
-			// Statistics
-
-			row.addText(String.valueOf(largeImage.getHeight()));
-			row.addText(String.valueOf(largeImage.getWidth()));
-			row.addText(TextFormatter.formatKB(largeImage.getSize(), locale) + "k");
-
-			// Action
-
-			row.addJSP("right", SearchEntry.DEFAULT_VALIGN, "/html/portlet/image_gallery/image_action.jsp");
-
-			// Add result row
-
-			resultRows.add(row);
-		}
 		%>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		<form method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+
+		<%@ include file="/html/portlet/image_gallery/view_grid.jsp" %>
+
+		</form>
 	</c:when>
 </c:choose>
