@@ -247,7 +247,12 @@ GroupSearch searchContainer = new GroupSearch(renderRequest, portletURL);
 
 		// Type
 
-		row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowURL);
+		if ((publicLayoutsPageCount > 0) || (privateLayoutsPageCount > 0)) {
+			row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()), rowURL);
+		}
+		else {
+			row.addText(LanguageUtil.get(pageContext, group.getTypeLabel()));
+		}
 
 		// Members
 
