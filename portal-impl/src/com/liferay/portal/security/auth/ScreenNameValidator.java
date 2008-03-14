@@ -22,6 +22,7 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 /**
@@ -34,12 +35,11 @@ public class ScreenNameValidator {
 
 	public boolean validate(long companyId, String screenName) {
 		if (Validator.isNull(screenName) ||
-			//Validator.isNumber(screenName) ||
 			Validator.isEmailAddress(screenName) ||
 			(screenName.equalsIgnoreCase("cyrus")) ||
 			(screenName.equalsIgnoreCase("postfix")) ||
-			(screenName.indexOf("_") != -1) ||
-			(screenName.indexOf("/") != -1)) {
+			(screenName.indexOf(StringPool.UNDERLINE) != -1) ||
+			(screenName.indexOf(StringPool.SLASH) != -1)) {
 
 			return false;
 		}

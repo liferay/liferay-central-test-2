@@ -224,7 +224,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					PropsValues.USERS_SCREEN_NAME_GENERATOR);
 
 			try {
-				screenName = screenNameGenerator.generate(companyId, userId);
+				screenName = screenNameGenerator.generate(
+					companyId, userId, emailAddress);
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -2237,12 +2238,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (!screenNameValidator.validate(companyId, screenName)) {
 				throw new UserScreenNameException();
 			}
-		}
-
-		if (Validator.isNumber(screenName) &&
-			!screenName.equals(String.valueOf(userId))) {
-
-			throw new UserScreenNameException();
 		}
 
 		String[] anonymousNames = PrincipalBean.ANONYMOUS_NAMES;

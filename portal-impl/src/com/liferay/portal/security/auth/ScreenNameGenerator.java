@@ -22,16 +22,53 @@
 
 package com.liferay.portal.security.auth;
 
+import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.service.UserLocalServiceUtil;
+
 /**
  * <a href="ScreenNameGenerator.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class ScreenNameGenerator {
 
-	public String generate(long companyId, long userId) throws Exception {
-		return String.valueOf(userId);
+	public String generate(long companyId, long userId, String emailAddress)
+		throws Exception {
+
+		String screenName =
+			StringUtil.extractFirst(emailAddress, StringPool.AT).toLowerCase();
+
+		screenName.replace(StringPool.UNDERLINE, StringPool.PERIOD);
+		screenName.replace(StringPool.SLASH, StringPool.PERIOD);
+
+		if (screenName.equals("cyrus") || screenName.equals("postfix")) {
+			screenName += StringPool.PERIOD + userId;
+		}
+
+		try {
+			UserLocalServiceUtil.getUserByScreenName(companyId, screenName);
+
+			for (int i = 1; ; i++) {
+				String temp = screenName + StringPool.PERIOD + i;
+
+				try {
+					UserLocalServiceUtil.getUserByScreenName(companyId, temp);
+				}
+				catch (NoSuchUserException nsue) {
+					screenName = temp;
+
+					break;
+				}
+			}
+		}
+		catch (NoSuchUserException nsue) {
+		}
+
+		return screenName;
 	}
 
 }
