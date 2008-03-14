@@ -132,4 +132,5 @@ public class ViewPageAction extends PortletAction {
 	protected boolean isCheckMethodOnProcessAction() {
 		return false;
 	}
+
 }
