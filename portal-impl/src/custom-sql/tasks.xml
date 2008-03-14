@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.countByG_U">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				TasksProposal
+			INNER JOIN
+				TasksReview ON
+					(TasksReview.proposalId = TasksProposal.proposalId)
+			WHERE
+				(TasksProposal.groupId = ?) AND
+				(TasksReview.userId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tasks.service.persistence.TasksProposalFinder.findByG_U">
+		<![CDATA[
+			SELECT
+				{TasksProposal.*}
+			FROM
+				TasksProposal
+			INNER JOIN
+				TasksReview ON
+					(TasksReview.proposalId = TasksProposal.proposalId)
+			WHERE
+				(TasksProposal.groupId = ?) AND
+				(TasksReview.userId = ?)
+			ORDER BY
+				TasksProposal.dueDate ASC,
+				TasksProposal.createDate ASC
+		]]>
+	</sql>
+</custom-sql>
