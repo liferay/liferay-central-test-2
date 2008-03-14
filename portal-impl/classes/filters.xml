@@ -1,7 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-
-<pagefilters>
-	<filter>
-		<class>org.wikiwizard.jspwiki.filters.CreoleFilter</class>
-	</filter>
-</pagefilters>

@@ -4,11 +4,8 @@
 	<import file="build-common.xml" />
 
 	<target name="clean">
+		<delete dir="docroot/WEB-INF/classes" />
 		<delete file="${war.file}.war" failonerror="false" />
-
-		<delete includeemptydirs="true" failonerror="false">
-			<fileset dir="docroot/WEB-INF/classes" excludes="${classes.dir.excludes}" />
-		</delete>
 	</target>
 
 	<target name="compile">

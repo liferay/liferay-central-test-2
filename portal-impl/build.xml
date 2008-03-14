@@ -8,7 +8,7 @@
 	<property name="service.file" value="service.xml" />
 
 	<target name="clean">
-		<delete dir="classes/com" />
+		<delete dir="classes" />
 
 		<antcall target="build-common-java.clean" />
 	</target>
@@ -521,9 +521,9 @@ ${exception.message}
 
 			<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<jvmarg value="-Dservice.input.file=${service.file}" />
-			<jvmarg value="-Dservice.hbm.file=classes/META-INF/portal-hbm.xml" />
-			<jvmarg value="-Dservice.model.hints.file=classes/META-INF/portal-model-hints.xml" />
-			<jvmarg value="-Dservice.spring.file=classes/META-INF/portal-spring.xml" />
+			<jvmarg value="-Dservice.hbm.file=src/META-INF/portal-hbm.xml" />
+			<jvmarg value="-Dservice.model.hints.file=src/META-INF/portal-model-hints.xml" />
+			<jvmarg value="-Dservice.spring.file=src/META-INF/portal-spring.xml" />
 			<jvmarg value="-Dservice.api.dir=${project.dir}/portal-service/src" />
 			<jvmarg value="-Dservice.impl.dir=src" />
 			<jvmarg value="-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />
