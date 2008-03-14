@@ -179,14 +179,17 @@ if (organizations != null) {
 			</tr>
 		</c:if>
 
-		<tr>
-			<td>
-				<liferay-ui:message key="screen-name" />
-			</td>
-			<td>
-				<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
-			</td>
-		</tr>
+		<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE || user2 != null %>">
+			<tr>
+				<td>
+					<liferay-ui:message key="screen-name" />
+				</td>
+				<td>
+					<liferay-ui:input-field model="<%= User.class %>" bean="<%= user2 %>" field="screenName" />
+				</td>
+			</tr>
+		</c:if>
+
 		<tr>
 			<td>
 				<liferay-ui:message key="email-address" />
