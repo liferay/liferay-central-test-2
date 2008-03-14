@@ -25,6 +25,7 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
+import java.lang.reflect.Array;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
@@ -35,6 +36,7 @@ import java.util.List;
  * <a href="MethodInvoker.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Harry Mark
  *
  */
 public class MethodInvoker {
@@ -84,8 +86,26 @@ public class MethodInvoker {
 			else if (args[i] instanceof NullWrapper) {
 				NullWrapper nullWrapper = (NullWrapper)args[i];
 
-				parameterTypes.add(
-					contextClassLoader.loadClass(nullWrapper.getClassName()));
+				String wrappedClassName = nullWrapper.getClassName();
+
+				if (wrappedClassName.startsWith(StringPool.OPEN_BRACKET) &&
+					wrappedClassName.endsWith(StringPool.SEMICOLON)) {
+
+					wrappedClassName = wrappedClassName.substring(
+						2, wrappedClassName.length() - 1);
+
+					Class wrappedClass = contextClassLoader.loadClass(
+						wrappedClassName);
+
+					parameterTypes.add(
+						Array.newInstance(wrappedClass, 0).getClass());
+				}
+				else {
+					Class wrappedClass = contextClassLoader.loadClass(
+						wrappedClassName);
+
+					parameterTypes.add(wrappedClass);
+				}
 
 				args[i] = null;
 			}
