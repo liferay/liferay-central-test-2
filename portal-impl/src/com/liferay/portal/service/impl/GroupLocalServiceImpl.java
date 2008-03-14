@@ -528,6 +528,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
+		if (group.isUser()) {
+			return group;
+		}
+
 		validateFriendlyURL(
 			group.getGroupId(), group.getCompanyId(), group.getClassNameId(),
 			group.getClassPK(), friendlyURL);
