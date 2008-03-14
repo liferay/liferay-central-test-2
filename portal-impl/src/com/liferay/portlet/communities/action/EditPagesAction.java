@@ -571,9 +571,11 @@ public class EditPagesAction extends PortletAction {
 			companyId, liveGroupId, privateLayout, layoutId, themeId,
 			colorSchemeId, css, wapTheme);
 
-		updateLookAndFeel(
-			companyId, stagingGroupId, privateLayout, layoutId, themeId,
-			colorSchemeId, css, wapTheme);
+		if (stagingGroupId > 0) {
+			updateLookAndFeel(
+				companyId, stagingGroupId, privateLayout, layoutId, themeId,
+				colorSchemeId, css, wapTheme);
+		}
 	}
 
 	protected void updateLookAndFeel(
@@ -601,27 +603,18 @@ public class EditPagesAction extends PortletAction {
 
 	protected void updateMergePages(ActionRequest req) throws Exception {
 		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
-		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
 
 		boolean mergeGuestPublicPages = ParamUtil.getBoolean(
 			req, "mergeGuestPublicPages");
 
-		updateMergePages(liveGroupId, mergeGuestPublicPages);
+		Group liveGroup = GroupLocalServiceUtil.getGroup(liveGroupId);
 
-		updateMergePages(stagingGroupId, mergeGuestPublicPages);
-	}
-
-	protected void updateMergePages(long groupId, boolean mergeGuestPublicPages)
-		throws Exception {
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		Properties props = group.getTypeSettingsProperties();
+		Properties props = liveGroup.getTypeSettingsProperties();
 
 		props.setProperty(
 			"mergeGuestPublicPages", String.valueOf(mergeGuestPublicPages));
 
-		GroupServiceUtil.updateGroup(groupId, group.getTypeSettings());
+		GroupServiceUtil.updateGroup(liveGroupId, liveGroup.getTypeSettings());
 	}
 
 	protected void updateMonitoring(ActionRequest req) throws Exception {
