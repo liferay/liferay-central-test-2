@@ -22,9 +22,6 @@
 
 package com.liferay.util;
 
-import com.sun.imageio.plugins.gif.GIFImageReader;
-import com.sun.imageio.plugins.jpeg.JPEGImageReader;
-import com.sun.imageio.plugins.png.PNGImageReader;
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;
 
@@ -142,7 +139,7 @@ public class ImageUtil {
 
 	public static ImageBag read(byte[] bytes) throws IOException {
 		RenderedImage renderedImage = null;
-		String type = TYPE_NOT_AVAILABLE;
+		String type = null;
 
 		InputStream is = null;
 		FileCacheImageInputStream fcis = null;
@@ -153,23 +150,19 @@ public class ImageUtil {
 
 			Iterator itr = ImageIO.getImageReaders(fcis);
 
-			while (itr.hasNext()) {
+			if (itr.hasNext()) {
 				ImageReader reader = (ImageReader)itr.next();
 
-				if (reader instanceof GIFImageReader) {
-					type = TYPE_GIF;
-				}
-				else if (reader instanceof JPEGImageReader) {
-					type = TYPE_JPEG;
-				}
-				else if (reader instanceof PNGImageReader) {
-					type = TYPE_PNG;
-				}
+				String[] suffixes = reader.getOriginatingProvider().getFileSuffixes();
 
-				reader.dispose();
+				if (suffixes != null) {
+                    type = suffixes[0];
+                }
+
+                reader.dispose();
 			}
 
-			if (!type.equals(TYPE_NOT_AVAILABLE)) {
+			if (type != null) {
 				renderedImage = ImageIO.read(fcis);
 			}
 
@@ -235,6 +228,10 @@ public class ImageUtil {
 					}
 				}
 			}
+		}
+
+		if (type == null) {
+			type = TYPE_NOT_AVAILABLE;
 		}
 
 		return new ImageBag(renderedImage, type);
