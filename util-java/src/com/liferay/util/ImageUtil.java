@@ -22,12 +22,16 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.JavaProps;
+
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;
 
+import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBuffer;
+import java.awt.image.IndexColorModel;
 import java.awt.image.RenderedImage;
 import java.awt.image.SampleModel;
 
@@ -70,13 +74,38 @@ public class ImageUtil {
 
 	public static final String TYPE_NOT_AVAILABLE = "na";
 
+	public static BufferedImage convertImageType(
+		BufferedImage sourceImage, int type) {
+
+	    BufferedImage targetImage = new BufferedImage(
+	    	sourceImage.getWidth(), sourceImage.getHeight(), type);
+
+	    Graphics2D graphics = targetImage.createGraphics();
+
+	    graphics.drawRenderedImage(sourceImage, null);
+	    graphics.dispose();
+
+	    return targetImage;
+	}
+
 	public static void encodeGIF(RenderedImage renderedImage, OutputStream out)
 		throws IOException {
 
-		Gif89Encoder encoder = new Gif89Encoder(
-			getBufferedImage(renderedImage));
+		if (JavaProps.isJDK6()) {
+			ImageIO.write(renderedImage, "GIF", out);
+		}
+		else {
+			BufferedImage bufferedImage = getBufferedImage(renderedImage);
 
-		encoder.encode(out);
+			if (!(bufferedImage.getColorModel() instanceof IndexColorModel)) {
+				bufferedImage = convertImageType(
+					bufferedImage, BufferedImage.TYPE_BYTE_INDEXED);
+			}
+
+			Gif89Encoder encoder = new Gif89Encoder(bufferedImage);
+
+			encoder.encode(out);
+		}
 	}
 
 	public static void encodeWBMP(RenderedImage renderedImage, OutputStream out)
