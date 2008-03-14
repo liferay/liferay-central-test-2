@@ -24,6 +24,10 @@
 
 				<mkdir dir="${compile.file.dest}" />
 
+				<copy todir="${compile.file.dest}">
+					<fileset dir="docroot/WEB-INF/src" excludes="**/*.java" />
+				</copy>
+
 				<javac
 					classpathref="web.classpath"
 					compiler="${javac.compiler}"
