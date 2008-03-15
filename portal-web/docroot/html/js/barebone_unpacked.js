@@ -6047,9 +6047,9 @@ jQuery.fn.xySize = function() {
 
 			if (!noDraggable) {
 				if (false) {
-	
+
 					// jQuery Draggable is slow
-	
+
 					jPopup.Draggable(
 						{
 							handle: jPopup.find(".popup-header")[0],

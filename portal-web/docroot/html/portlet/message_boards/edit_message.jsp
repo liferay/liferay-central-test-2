@@ -372,7 +372,7 @@ if (message != null) {
 			className="<%= MBMessage.class.getName() %>"
 			classPK="<%= classPK %>"
 			hiddenInput="tagsEntries"
-			contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent()" %>'
+			contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent" %>'
 		/>
 	</td>
 </tr>

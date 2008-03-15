@@ -93,7 +93,9 @@ if (curTagsParam != null) {
 					summarySpan: "<%= randomNamespace %>tagsSummary",
 					curTags: "<%= curTags %>",
 					focus: <%= focus %>,
-					contentCallback: "<%= contentCallback %>"
+					contentCallback: function() {
+						return <%= contentCallback %>();
+					}
                 }
 			);
 

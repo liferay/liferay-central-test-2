@@ -17085,9 +17085,9 @@ jQuery.fn.xySize = function() {
 
 			if (!noDraggable) {
 				if (false) {
-	
+
 					// jQuery Draggable is slow
-	
+
 					jPopup.Draggable(
 						{
 							handle: jPopup.find(".popup-header")[0],
@@ -21300,8 +21300,8 @@ Liferay.TagsSelector = new Class({
 
 		var context = '';
 
-		if (contentCallback) {
-			context += eval(contentCallback);
+		if (params.contentCallback) {
+			context = params.contentCallback();
 		}
 
 		var url =  "http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction?appid=YahooDemo&output=json&context=" + escape(context);
