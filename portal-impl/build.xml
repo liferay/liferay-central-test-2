@@ -26,10 +26,6 @@
 					<param name="dependencies.classes.dir" value="${app.server.classes.portal.dir}" />
 				</antcall>
 
-				<copy todir="${app.server.classes.portal.dir}">
-					<fileset dir="classes" />
-				</copy>
-
 				<antcall target="compile-common" />
 				<antcall target="compile-fast" />
 			</then>
