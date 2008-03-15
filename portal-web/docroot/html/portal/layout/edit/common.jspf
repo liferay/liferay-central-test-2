@@ -38,25 +38,121 @@
 <tr>
 	<td colspan="2">
 		<div id="<portlet:namespace />metaTags" style="display: none;">
-			<br />
+		<table class="lfr-table">
+			<tr>
+				<td></td>
+				<td>
+					<liferay-ui:message key="default-language" />: <%= defaultLocale.getDisplayName(defaultLocale) %>
+				</td>
+				<td>
+					<liferay-ui:message key="localized-language" />:
 
-			<liferay-ui:message key="meta-robots" /><br />
+					<select id="<portlet:namespace />metaLanguageId" onChange="<portlet:namespace />updateMetaLanguage();">
+						<option value="" />
 
-			<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-robots)" /></textarea>
+						<%
+						for (int i = 0; i < locales.length; i++) {
+							if (locales[i].equals(defaultLocale)) {
+								continue;
+							}
 
-			<br /><br />
+							String optionStyle = StringPool.BLANK;
 
-			<liferay-ui:message key="meta-description" /><br />
+							if (Validator.isNotNull(selLayout.getTypeSettingsProperties().getProperty("meta-robots_" + LocaleUtil.toLanguageId(locales[i]))) ||
+								Validator.isNotNull(selLayout.getTypeSettingsProperties().getProperty("meta-keywords_" + LocaleUtil.toLanguageId(locales[i]))) ||
+								Validator.isNotNull(selLayout.getTypeSettingsProperties().getProperty("meta-description_" + LocaleUtil.toLanguageId(locales[i])))) {
+								optionStyle = "style=\"font-weight: bold\"";
+							}
+						%>
 
-			<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-description)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-description)" /></textarea>
+							<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>" <%= optionStyle %>><%= locales[i].getDisplayName(locales[i]) %></option>
 
-			<br /><br />
+						<%
+						}
+						%>
 
-			<liferay-ui:message key="meta-keywords" /><br />
+					</select>
+				</td>
+			</tr>
+			<tr>
+				<td>
+		    	    <liferay-ui:message key="robots" />
+				</td>
+				<td>
+					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-robots_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= "typeSettingsProperties(meta-robots_" + defaultLanguageId + ")" %>" /></textarea>
+				</td>
+				<td>
+					<%
+					for (int i = 0; i < locales.length; i++) {
+						if (locales[i].equals(defaultLocale)) {
+							continue;
+						}
 
-			<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-keywords)" wrap="soft" style="width: 400px;"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(meta-keywords)" /></textarea>
+						String curValue = GetterUtil.get(selLayout.getTypeSettingsProperties().getProperty("meta-robots_" + LocaleUtil.toLanguageId(locales[i])), StringPool.BLANK);
+					%>
 
-			<br /><br />
+						<input class="lfr-textarea" id="<portlet:namespace />meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties(meta-robots_<%= LocaleUtil.toLanguageId(locales[i]) %>)" type="hidden" value="<%= curValue %>">
+
+					<%
+					}
+					%>
+
+					<textarea class="lfr-textarea" id="<portlet:namespace />meta-robots_temp" name="TypeSettingsProperties(meta-robots_temp)" onChange="<portlet:namespace />onRobotsChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="description" />
+				</td>
+				<td>
+					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-description_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= "typeSettingsProperties(meta-description_" + defaultLanguageId + ")" %>" /></textarea>
+				</td>
+				<td>
+					<%
+					for (int i = 0; i < locales.length; i++) {
+						if (locales[i].equals(defaultLocale)) {
+							continue;
+						}
+
+						String curValue = GetterUtil.get(selLayout.getTypeSettingsProperties().getProperty("meta-description_" + LocaleUtil.toLanguageId(locales[i])), StringPool.BLANK);
+					%>
+
+						<input class="lfr-textarea" id="<portlet:namespace />meta-description_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties(meta-description_<%= LocaleUtil.toLanguageId(locales[i]) %>)" type="hidden" value="<%= curValue %>">
+
+					<%
+					}
+					%>
+
+					<textarea class="lfr-textarea" id="<portlet:namespace />meta-description_temp" name="TypeSettingsProperties(meta-description_temp)" onChange="<portlet:namespace />onDescriptionChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<liferay-ui:message key="keywords" />
+				</td>
+				<td>
+					<textarea class="lfr-textarea" name="TypeSettingsProperties(meta-keywords_<%= defaultLanguageId %>)" wrap="soft" style="width: 300px;"><bean:write name="SEL_LAYOUT" property="<%= "typeSettingsProperties(meta-keywords_" + defaultLanguageId + ")" %>" /></textarea>
+				</td>
+				<td>
+					<%
+					for (int i = 0; i < locales.length; i++) {
+						if (locales[i].equals(defaultLocale)) {
+							continue;
+						}
+
+						String curValue = GetterUtil.get(selLayout.getTypeSettingsProperties().getProperty("meta-keywords_" + LocaleUtil.toLanguageId(locales[i])), StringPool.BLANK);
+					%>
+
+						<input class="lfr-textarea" id="<portlet:namespace />meta-keywords_<%= LocaleUtil.toLanguageId(locales[i]) %>" name="TypeSettingsProperties(meta-keywords_<%= LocaleUtil.toLanguageId(locales[i]) %>)" type="hidden" value="<%= curValue %>">
+
+					<%
+					}
+					%>
+
+					<textarea class="lfr-textarea" id="<portlet:namespace />meta-keywords_temp" name="TypeSettingsProperties(meta-keywords_temp)" onChange="<portlet:namespace />onKeywordsChanged();" style="width: 300px; <%= currentLocale.equals(defaultLocale) ? "display: none" : "" %>" wrap="soft"></textarea>
+				</td>
+			</tr>
+		</table>
 		</div>
 	</td>
 </tr>
@@ -158,3 +254,137 @@
 </c:if>
 
 </table>
+
+<script type="text/javascript">
+	var robotsChanged = false;
+	var keywordsChanged = false;
+	var descriptionChanged = false;
+	var lastMetaLanguageId = "<%= currentLanguageId %>";
+
+	function <portlet:namespace />onRobotsChanged() {
+		robotsChanged = true;
+	}
+
+	function <portlet:namespace />onKeywordsChanged() {
+		keywordsChanged = true;
+	}
+
+	function <portlet:namespace />onDescriptionChanged() {
+		descriptionChanged = true;
+	}
+
+	function <portlet:namespace />updateMetaLanguage() {
+		if (lastMetaLanguageId != "<%= defaultLanguageId %>") {
+			if (robotsChanged) {
+				var robotsValue = jQuery("#<portlet:namespace />meta-robots_temp").attr("value");
+
+				if (robotsValue == null) {
+					robotsValue = "";
+				}
+
+				jQuery("#<portlet:namespace />meta-robots_" + lastMetaLanguageId).attr("value", robotsValue);
+
+				robotsChanged = false;
+			}
+
+			if (keywordsChanged) {
+				var keywordsValue = jQuery("#<portlet:namespace />meta-keywords_temp").attr("value");
+
+				if (keywordsValue == null) {
+					keywordsValue = "";
+				}
+
+				jQuery("#<portlet:namespace />meta-keywords_" + lastMetaLanguageId).attr("value", keywordsValue);
+
+				keywordsChanged = false;
+			}
+
+			if (descriptionChanged) {
+				var descriptionValue = jQuery("#<portlet:namespace />meta-description_temp").attr("value");
+
+				if (descriptionValue == null) {
+					descriptionValue = "";
+				}
+
+				jQuery("#<portlet:namespace />meta-description_" + lastMetaLanguageId).attr("value", descriptionValue);
+
+				descriptionChanged = false;
+			}
+		}
+
+		var selLanguageId = "";
+
+		for (var i = 0; i < document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.length; i++) {
+			if (document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.options[i].selected) {
+				selLanguageId = document.<portlet:namespace />fm.<portlet:namespace />metaLanguageId.options[i].value;
+
+				break;
+			}
+		}
+
+		if (selLanguageId != "") {
+			<portlet:namespace />updateMetaLanguageTemps(selLanguageId);
+
+			jQuery("#<portlet:namespace />meta-robots_temp").show();
+			jQuery("#<portlet:namespace />meta-keywords_temp").show();
+			jQuery("#<portlet:namespace />meta-description_temp").show();
+		}
+		else {
+			jQuery("#<portlet:namespace />meta-robots_temp").hide();
+			jQuery("#<portlet:namespace />meta-keywords_temp").hide();
+			jQuery("#<portlet:namespace />meta-description_temp").hide();
+		}
+
+		lastMetaLanguageId = selLanguageId;
+
+		return null;
+	}
+
+	function <portlet:namespace />updateMetaLanguageTemps(lang) {
+		if (lang != "<%= defaultLanguageId %>") {
+			var robotsValue = jQuery("#<portlet:namespace />meta-robots_" + lang).attr("value");
+			var keywordsValue = jQuery("#<portlet:namespace />meta-keywords_" + lang).attr("value");
+			var descriptionValue = jQuery("#<portlet:namespace />meta-description_" + lang).attr("value");
+			var defaultRobotsValue = jQuery("#<portlet:namespace />meta-robots_<%= defaultLanguageId %>").attr("value");
+			var defaultKeywordsValue = jQuery("#<portlet:namespace />meta-keywords_<%= defaultLanguageId %>").attr("value");
+			var defaultDescriptionValue = jQuery("#<portlet:namespace />meta-description_<%= defaultLanguageId %>").attr("value");
+
+			if (defaultRobotsValue == null) {
+				defaultRobotsValue = "";
+			}
+
+			if (defaultKeywordsValue == null) {
+				defaultKeywordsValue = "";
+			}
+
+			if (defaultDescriptionValue == null) {
+				defaultDescriptionValue = "";
+			}
+
+			if ((robotsValue == null) || (robotsValue == "")) {
+				jQuery("#<portlet:namespace />meta-robots_temp").attr("value", defaultRobotsValue);
+			}
+			else {
+				jQuery("#<portlet:namespace />meta-robots_temp").attr("value", robotsValue);
+			}
+
+			if ((keywordsValue == null) || (keywordsValue == "")) {
+				jQuery("#<portlet:namespace />meta-keywords_temp").attr("value", defaultKeywordsValue);
+			}
+			else {
+				jQuery("#<portlet:namespace />meta-keywords_temp").attr("value", keywordsValue);
+			}
+
+			if ((descriptionValue == null) || (descriptionValue == "")) {
+				jQuery("#<portlet:namespace />meta-description_temp").attr("value", defaultDescriptionValue);
+			}
+			else {
+				jQuery("#<portlet:namespace />meta-description_temp").attr("value", descriptionValue);
+			}
+		}
+	}
+
+	<portlet:namespace />updateMetaLanguageTemps(lastMetaLanguageId);
+</script>
+
+	

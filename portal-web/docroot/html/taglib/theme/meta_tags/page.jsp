@@ -24,29 +24,55 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
+<%
+String currentLanguageId = LanguageUtil.getLanguageId(request);
+Locale defaultLocale = LocaleUtil.getDefault();
+String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+String w3cCurrentLanguageId = StringUtil.replace(currentLanguageId, StringPool.UNDERLINE, StringPool.MINUS);
+String w3cDefaultLanguageId = StringUtil.replace(defaultLanguageId, StringPool.UNDERLINE, StringPool.MINUS);
+%>
 <c:if test="<%= layout != null %>">
 
 	<%
-	String metaRobots = layout.getTypeSettingsProperties().getProperty("meta-robots");
+	String metaRobots = layout.getTypeSettingsProperties().getProperty("meta-robots_" + currentLanguageId);
+	String metaRobotsLanguageId = w3cCurrentLanguageId;
+
+	if (Validator.isNull(metaRobots)) {
+		metaRobots = layout.getTypeSettingsProperties().getProperty("meta-robots_" + defaultLanguageId);
+		metaRobotsLanguageId = w3cDefaultLanguageId;
+	}
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaRobots) %>">
-		<meta name="robots" content="<%= metaRobots %>" />
+		<meta name="robots" content="<%= metaRobots %>" lang="<%= metaRobotsLanguageId %>"/>
 	</c:if>
 
 	<%
-	String metaDescription = layout.getTypeSettingsProperties().getProperty("meta-description");
+	String metaDescription = layout.getTypeSettingsProperties().getProperty("meta-description_" + currentLanguageId);
+		String metaDescriptionLanguageId = w3cCurrentLanguageId;
+
+	if (Validator.isNull(metaDescription)) {
+		metaDescription = layout.getTypeSettingsProperties().getProperty("meta-description_" + defaultLanguageId);
+		metaDescriptionLanguageId = w3cDefaultLanguageId;
+	}
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaDescription) %>">
-		<meta name="description" content="<%= metaDescription %>" />
+		<meta name="description" content="<%= metaDescription %>" lang="<%= metaDescriptionLanguageId %>"/>
 	</c:if>
 
 	<%
-	String metaKeywords = layout.getTypeSettingsProperties().getProperty("meta-keywords");
+	String metaKeywords = layout.getTypeSettingsProperties().getProperty("meta-keywords_" + currentLanguageId);
+		String metaKeywordsLanguageId = w3cCurrentLanguageId;
+
+	if (Validator.isNull(metaKeywords)) {
+		metaDescription = layout.getTypeSettingsProperties().getProperty("meta-keywords_" + defaultLanguageId);
+		metaKeywordsLanguageId = w3cDefaultLanguageId;
+	}
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaKeywords) %>">
-		<meta name="keywords" content="<%= metaKeywords %>" />
+		<meta name="keywords" content="<%= metaKeywords %>" lang="<%= metaKeywordsLanguageId %>"/>
 	</c:if>
 </c:if>
