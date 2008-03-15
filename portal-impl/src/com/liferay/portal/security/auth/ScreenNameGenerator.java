@@ -39,33 +39,39 @@ public class ScreenNameGenerator {
 	public String generate(long companyId, long userId, String emailAddress)
 		throws Exception {
 
-		String screenName =
-			StringUtil.extractFirst(emailAddress, StringPool.AT).toLowerCase();
+		String screenName = StringUtil.extractFirst(
+			emailAddress, StringPool.AT).toLowerCase();
 
-		screenName.replace(StringPool.UNDERLINE, StringPool.PERIOD);
-		screenName.replace(StringPool.SLASH, StringPool.PERIOD);
+		screenName = StringUtil.replace(
+			screenName,
+			new String[] {StringPool.SLASH, StringPool.UNDERLINE},
+			new String[] {StringPool.PERIOD, StringPool.PERIOD});
 
-		if (screenName.equals("cyrus") || screenName.equals("postfix")) {
+		if (screenName.equals(ScreenNameValidator.CYRUS) ||
+			screenName.equals(ScreenNameValidator.POSTFIX)) {
+
 			screenName += StringPool.PERIOD + userId;
 		}
 
 		try {
 			UserLocalServiceUtil.getUserByScreenName(companyId, screenName);
-
-			for (int i = 1; ; i++) {
-				String temp = screenName + StringPool.PERIOD + i;
-
-				try {
-					UserLocalServiceUtil.getUserByScreenName(companyId, temp);
-				}
-				catch (NoSuchUserException nsue) {
-					screenName = temp;
-
-					break;
-				}
-			}
 		}
 		catch (NoSuchUserException nsue) {
+			return screenName;
+		}
+
+		for (int i = 1;; i++) {
+			String tempScreenName = screenName + StringPool.PERIOD + i;
+
+			try {
+				UserLocalServiceUtil.getUserByScreenName(
+					companyId, tempScreenName);
+			}
+			catch (NoSuchUserException nsue) {
+				screenName = tempScreenName;
+
+				break;
+			}
 		}
 
 		return screenName;

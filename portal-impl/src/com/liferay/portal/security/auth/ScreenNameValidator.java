@@ -33,13 +33,18 @@ import com.liferay.portal.kernel.util.Validator;
  */
 public class ScreenNameValidator {
 
+	public static final String CYRUS = "cyrus";
+
+	public static final String POSTFIX = "postfix";
+
 	public boolean validate(long companyId, String screenName) {
 		if (Validator.isNull(screenName) ||
+			//Validator.isNumber(screenName) ||
 			Validator.isEmailAddress(screenName) ||
-			(screenName.equalsIgnoreCase("cyrus")) ||
-			(screenName.equalsIgnoreCase("postfix")) ||
-			(screenName.indexOf(StringPool.UNDERLINE) != -1) ||
-			(screenName.indexOf(StringPool.SLASH) != -1)) {
+			(screenName.equalsIgnoreCase(CYRUS)) ||
+			(screenName.equalsIgnoreCase(POSTFIX)) ||
+			(screenName.indexOf(StringPool.SLASH) != -1) ||
+			(screenName.indexOf(StringPool.UNDERLINE) != -1)) {
 
 			return false;
 		}
