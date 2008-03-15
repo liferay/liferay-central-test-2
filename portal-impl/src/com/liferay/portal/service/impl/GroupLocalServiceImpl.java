@@ -529,7 +529,13 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
 		if (group.isUser()) {
-			return group;
+			User user = userPersistence.findByPrimaryKey(group.getClassPK());
+
+			friendlyURL = StringPool.SLASH + user.getScreenName();
+
+			if (group.getFriendlyURL().equals(friendlyURL)) {
+				return group;
+			}
 		}
 
 		validateFriendlyURL(
