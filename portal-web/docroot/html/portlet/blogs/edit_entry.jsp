@@ -45,18 +45,17 @@ if (entry != null) {
 %>
 
 <script type="text/javascript">
-	function initEditor() {
-		return "<%= UnicodeFormatter.toString(content) %>";
-	}
-
-	function <portlet:namespace />getContentForSuggestions() {
+	function <portlet:namespace />getSuggestionsContent() {
 		var content = '';
 
-		content += document.<portlet:namespace />fm.<portlet:namespace/>title.value;
-		content += ' ';
+		content += document.<portlet:namespace />fm.<portlet:namespace/>title.value + ' ';
 		content += window.<portlet:namespace />editor.getHTML();
 
 		return content;
+	}
+
+	function initEditor() {
+		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 
 	function <portlet:namespace />saveEntry() {
@@ -136,7 +135,7 @@ if (entry != null) {
 			className="<%= BlogsEntry.class.getName() %>"
 			classPK="<%= classPK %>"
 			hiddenInput="tagsEntries"
-			contentCallback="<%= renderResponse.getNamespace() + "getContentForSuggestions()" %>"
+			contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent()" %>'
 		/>
 	</td>
 </tr>

@@ -72,6 +72,15 @@ if ((message != null) && message.isAttachments()) {
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />getSuggestionsContent() {
+		var content = '';
+
+		content += document.<portlet:namespace />fm.<portlet:namespace />subject.value + ' ';
+		content += <portlet:namespace />getHTML();
+
+		return content;
+	}
+
 	function <portlet:namespace />saveMessage() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= message == null ? Constants.ADD : Constants.UPDATE %>";
 		document.<portlet:namespace />fm.<portlet:namespace />body.value = <portlet:namespace />getHTML();
@@ -85,15 +94,6 @@ if ((message != null) && message.isAttachments()) {
 
 		nameEl.href = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/message_boards/view" /></portlet:renderURL>&<portlet:namespace />categoryId=" + categoryId;
 		nameEl.innerHTML = categoryName + "&nbsp;";
-	}
-
-	function <portlet:namespace />getContentForSuggestions() {
-		var content = '';
-
-		content += document.<portlet:namespace />fm.<portlet:namespace />subject.value + ' ';
-		content += <portlet:namespace />getHTML();
-
-		return content;
 	}
 </script>
 
@@ -372,7 +372,7 @@ if (message != null) {
 			className="<%= MBMessage.class.getName() %>"
 			classPK="<%= classPK %>"
 			hiddenInput="tagsEntries"
-			contentCallback="<%= renderResponse.getNamespace() + "getContentForSuggestions()"%>"
+			contentCallback='<%= renderResponse.getNamespace() + "getSuggestionsContent()" %>'
 		/>
 	</td>
 </tr>

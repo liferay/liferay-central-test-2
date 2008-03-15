@@ -45,8 +45,8 @@ public class TagsSelectorTag extends IncludeTag {
 		req.setAttribute(
 			"liferay-ui:tags_selector:focus", String.valueOf(_focus));
 		req.setAttribute(
-				"liferay-ui:tags_selector:contentCallback", 
-				String.valueOf(_contentCallback));
+			"liferay-ui:tags_selector:contentCallback",
+			String.valueOf(_contentCallback));
 
 		return EVAL_BODY_BUFFERED;
 	}

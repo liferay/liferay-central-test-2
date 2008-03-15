@@ -2,13 +2,12 @@ Liferay.TagsSelector = new Class({
 
 	/*
 	params.instanceVar: the instance variable for this class
-	params.formName: name of the form that you want to suggest tags from
-	params.fieldNames: comma delimited list of fields you want to suggest tags from
 	params.hiddenInput: the hidden input used to pass in the current tags
 	params.textInput: the text input for users to add tags
 	params.summarySpan: the summary span tos how the current tags
 	params.curTags: comma delimited string of current tags
 	params.focus: true if the text input should be focused
+	params.contentCallback: the callback method to get content used to get suggestible tags
 	*/
 	initialize: function(params) {
 		var instance = this;
@@ -300,7 +299,7 @@ Liferay.TagsSelector = new Class({
 
 		var context = '';
 
-		if(contentCallback) {
+		if (contentCallback) {
 			context += eval(contentCallback);
 		}
 

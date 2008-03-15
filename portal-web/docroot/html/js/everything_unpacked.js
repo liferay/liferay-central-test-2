@@ -21003,13 +21003,12 @@ Liferay.TagsSelector = new Class({
 
 	/*
 	params.instanceVar: the instance variable for this class
-	params.formName: name of the form that you want to suggest tags from
-	params.fieldNames: comma delimited list of fields you want to suggest tags from
 	params.hiddenInput: the hidden input used to pass in the current tags
 	params.textInput: the text input for users to add tags
 	params.summarySpan: the summary span tos how the current tags
 	params.curTags: comma delimited string of current tags
 	params.focus: true if the text input should be focused
+	params.contentCallback: the callback method to get content used to get suggestible tags
 	*/
 	initialize: function(params) {
 		var instance = this;
@@ -21062,7 +21061,7 @@ Liferay.TagsSelector = new Class({
 		instance._setupSelectTags();
 		instance._setupSuggestions();
 
-		var addTagButton = jQuery('#' + params.addTagButton);
+		var addTagButton = jQuery('#' + params.instanceVar + 'addTag');
 
 		addTagButton.click(
 			function() {
@@ -21295,22 +21294,15 @@ Liferay.TagsSelector = new Class({
 
 		var params = instance.params;
 		var ns = params.instanceVar;
-		var formName = params.formName;
-		var fieldNames = params.fieldNames;
+		var contentCallback = params.contentCallback;
 		var mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
 		var container = jQuery('<div class="lfr-tag-container"></div>');
 
-		var form = jQuery('form[@name=' + formName + ']');
-
-		var fields = form.find('[@name=' + fieldNames.split(',').join('],[@name=') + ']');
-
 		var context = '';
 
-		fields.each(
-			function() {
-				context += this.value + ' ';
-			}
-		)
+		if (contentCallback) {
+			context += eval(contentCallback);
+		}
 
 		var url =  "http://search.yahooapis.com/ContentAnalysisService/V1/termExtraction?appid=YahooDemo&output=json&context=" + escape(context);
 
