@@ -422,7 +422,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return super.getTypeSettings();
 		}
 		else {
-			return PropertiesUtil.toString(_typeSettingsProperties);
+			return PropertiesUtil.toString(_typeSettingsProperties, true);
 		}
 	}
 
@@ -451,7 +451,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public void setTypeSettingsProperties(Properties typeSettingsProperties) {
 		_typeSettingsProperties = typeSettingsProperties;
 
-		super.setTypeSettings(PropertiesUtil.toString(_typeSettingsProperties));
+		super.setTypeSettings(
+			PropertiesUtil.toString(_typeSettingsProperties, true));
 	}
 
 	public LayoutSet getLayoutSet() {

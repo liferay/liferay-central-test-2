@@ -36,6 +36,22 @@ public class NullSafeProperties extends Properties {
 		super();
 	}
 
+	public synchronized Object get(Object key) {
+		Object value = super.get(key);
+
+		if (value != null && value instanceof String) {
+			value = PropertiesUtil.unprotectNewlines((String)value);
+		}
+
+		return value;
+	}
+
+	public String getProperty(String key) {
+		String value = super.getProperty(key);
+
+		return PropertiesUtil.unprotectNewlines(value);
+	}
+
 	public Object put(Object key, Object value) {
 		if (key == null) {
 			return null;
@@ -45,9 +61,19 @@ public class NullSafeProperties extends Properties {
 				return super.remove(key);
 			}
 			else {
+				if (value instanceof String) {
+					value = PropertiesUtil.protectNewlines((String)value);
+				}
+
 				return super.put(key, value);
 			}
 		}
+	}
+
+	public synchronized Object setProperty(String key, String value) {
+		value = PropertiesUtil.protectNewlines(value);
+
+		return super.setProperty(key, value);
 	}
 
 	public Object remove(Object key) {

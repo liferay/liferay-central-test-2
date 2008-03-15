@@ -179,6 +179,51 @@ public class PropertiesUtil {
 		return sm.toString();
 	}
 
+	public static String toString(Properties p, boolean protect) {
+		StringMaker sm = new StringMaker();
+
+		Enumeration enu = p.propertyNames();
+
+		while (enu.hasMoreElements()) {
+			String key = (String)enu.nextElement();
+
+			sm.append(key);
+			sm.append(StringPool.EQUAL);
+			if (protect) {
+				sm.append(protectNewlines(p.getProperty(key)));
+			}
+			else {
+				sm.append(p.getProperty(key));
+			}
+			sm.append("\n");
+		}
+
+		return sm.toString();
+	}
+
+	public static String protectNewlines(String value) {
+		if (value != null) {
+			value = StringUtil.replace(
+				(String)value, StringPool.RETURN_NEW_LINE,
+				_LIFERAY_NEW_LINE);
+			value = StringUtil.replace(
+				(String)value, StringPool.NEW_LINE, _LIFERAY_NEW_LINE);
+			value = StringUtil.replace(
+				(String)value, StringPool.RETURN, _LIFERAY_NEW_LINE);
+		}
+
+		return value;
+	}
+
+	public static String unprotectNewlines(String value) {
+		if (value != null) {
+			value = StringUtil.replace(
+				value, _LIFERAY_NEW_LINE, StringPool.NEW_LINE);
+		}
+
+		return value;
+	}
+
 	public static void trimKeys(Properties p) {
 		Enumeration enu = p.propertyNames();
 
@@ -194,5 +239,7 @@ public class PropertiesUtil {
 			}
 		}
 	}
+
+	private static final String _LIFERAY_NEW_LINE = "_LIFERAY_NEW_LINE_";
 
 }

@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -349,7 +350,7 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected Properties getTypeSettingsProperties(ActionRequest req) {
-		Properties typeSettingsProperties = new Properties();
+		Properties typeSettingsProperties = new NullSafeProperties();
 
 		String prefix = "TypeSettingsProperties(";
 
