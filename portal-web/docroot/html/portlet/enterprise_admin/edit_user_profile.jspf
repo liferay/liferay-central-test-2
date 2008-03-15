@@ -179,7 +179,7 @@ if (organizations != null) {
 			</tr>
 		</c:if>
 
-		<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE || user2 != null %>">
+		<c:if test="<%= !PropsValues.USERS_SCREEN_NAME_ALWAYS_AUTOGENERATE || (user2 != null) %>">
 			<tr>
 				<td>
 					<liferay-ui:message key="screen-name" />
