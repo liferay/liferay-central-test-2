@@ -34,7 +34,11 @@ public class PortletKeys {
 
 	public static final String ADMIN = "9";
 
+	public static final String ALERTS = "83";
+
 	public static final String ALFRESCO_CONTENT = "91";
+
+	public static final String ANNOUNCEMENTS = "84";
 
 	public static final String BOOKMARKS = "28";
 

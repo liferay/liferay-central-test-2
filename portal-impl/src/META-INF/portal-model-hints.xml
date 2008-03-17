@@ -600,6 +600,36 @@
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
+	<model name="com.liferay.portlet.announcements.model.Announcement">
+		<field name="uuid" type="String" />
+		<field name="announcementId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="userName" type="String" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="title" type="String" />
+		<field name="content" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="url" type="String">
+			<hint-collection name="URL" />
+		</field>
+		<field name="type" type="String" />
+		<field name="displayDate" type="Date" />
+		<field name="expirationDate" type="Date" />
+		<field name="priority" type="int" />
+		<field name="alert" type="boolean" />
+	</model>
+	<model name="com.liferay.portlet.announcements.model.AnnouncementFlag">
+		<field name="announcementFlagId" type="long" />
+		<field name="userId" type="long" />
+		<field name="announcementId" type="long" />
+		<field name="flag" type="int" />
+		<field name="flagDate" type="Date" />
+	</model>
 	<model name="com.liferay.portlet.blogs.model.BlogsEntry">
 		<field name="uuid" type="String" />
 		<field name="entryId" type="long" />

@@ -601,6 +601,38 @@
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
+	<class name="com.liferay.portlet.announcements.model.impl.AnnouncementImpl" table="Announcement">
+		<cache usage="read-write" />
+		<id name="announcementId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="content" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="url" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="displayDate" />
+		<property name="expirationDate" />
+		<property name="priority" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="alert" type="com.liferay.util.dao.hibernate.BooleanType" />
+	</class>
+	<class name="com.liferay.portlet.announcements.model.impl.AnnouncementFlagImpl" table="AnnouncementFlag">
+		<cache usage="read-write" />
+		<id name="announcementFlagId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="announcementId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="flag" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="flagDate" />
+	</class>
 	<class name="com.liferay.portlet.blogs.model.impl.BlogsEntryImpl" table="BlogsEntry">
 		<cache usage="read-write" />
 		<id name="entryId" type="long">

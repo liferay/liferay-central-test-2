@@ -135,15 +135,30 @@
 
 		<action path="/admin/view" forward="portlet.admin.view" />
 
+		<!-- Alerts -->
+
+		<action path="/alerts/edit_announcement" type="com.liferay.portlet.announcements.action.EditAnnouncementAction">
+			<forward name="portlet.announcements.edit_announcement" path="portlet.announcements.edit_announcement" />
+			<forward name="portlet.announcements.error" path="portlet.announcements.error" />
+		</action>
+
+		<action path="/alerts/view" type="com.liferay.portlet.alerts.action.ViewAction">
+			<forward name="portlet.announcements.view" path="portlet.announcements.view" />
+		</action>
+
+
 		<!-- Amazon Rankings -->
 
 		<action path="/amazon_rankings/view" forward="portlet.amazon_rankings.view" />
 
 		<!-- Announcements -->
 
-		<action path="/announcements/view" type="com.liferay.portlet.announcements.action.ViewAction">
-			<forward name="portlet.announcements.view" path="portlet.announcements.view" />
+		<action path="/announcements/edit_announcement" type="com.liferay.portlet.announcements.action.EditAnnouncementAction">
+			<forward name="portlet.announcements.edit_announcement" path="portlet.announcements.edit_announcement" />
+			<forward name="portlet.announcements.error" path="portlet.announcements.error" />
 		</action>
+
+		<action path="/announcements/view" forward="portlet.announcements.view" />
 
 		<!-- Blogs -->
 

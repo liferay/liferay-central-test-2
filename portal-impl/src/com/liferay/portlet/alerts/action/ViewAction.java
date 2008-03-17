@@ -20,16 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.announcements.action;
+package com.liferay.portlet.alerts.action;
 
-import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.announcements.AnnouncementsContentException;
-import com.liferay.util.LocalizationUtil;
+import com.liferay.portal.util.WebKeys;
 
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -40,33 +36,19 @@ import org.apache.struts.action.ActionMapping;
 /**
  * <a href="ViewAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Thiago Moreira
+ * @author Raymond Augé
  *
  */
 public class ViewAction extends PortletAction {
 
-	public ActionForward render(
-			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
-		throws Exception {
+	public ActionForward render(ActionMapping mapping, ActionForm form,
+			PortletConfig config, RenderRequest req, RenderResponse res)
+			throws Exception {
 
-		try {
-			PortletPreferences prefs = req.getPreferences();
+		req.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
 
-			String languageId = LanguageUtil.getLanguageId(req);
-
-			String content = LocalizationUtil.getPrefsValue(
-				prefs, "content", languageId);
-
-			if (Validator.isNull(content)) {
-				throw new AnnouncementsContentException();
-			}
-
-			return mapping.findForward("portlet.announcements.view");
-		}
-		catch (AnnouncementsContentException ace) {
-			return mapping.findForward("/portal/portlet_not_setup");
-		}
+		return mapping.findForward("portlet.announcements.view");
 	}
 
 }

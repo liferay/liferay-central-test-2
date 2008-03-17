@@ -1583,23 +1583,17 @@
 	</portlet>
 	<portlet>
 		<portlet-name>83</portlet-name>
-		<display-name>Company Announcements</display-name>
+		<display-name>Alerts</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
-			<value>/announcements/view</value>
+			<value>/alerts/view</value>
 		</init-param>
 		<expiration-cache>0</expiration-cache>
 		<supports>
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>content</name>
-				<value></value>
-			</preference>
-		</portlet-preferences>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -1609,7 +1603,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>84</portlet-name>
-		<display-name>Community Announcements</display-name>
+		<display-name>Announcements</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<init-param>
 			<name>view-action</name>
@@ -1620,12 +1614,6 @@
 			<mime-type>text/html</mime-type>
 		</supports>
 		<resource-bundle>com.liferay.portlet.StrutsResourceBundle</resource-bundle>
-		<portlet-preferences>
-			<preference>
-				<name>content</name>
-				<value></value>
-			</preference>
-		</portlet-preferences>
 		<security-role-ref>
 			<role-name>power-user</role-name>
 		</security-role-ref>
@@ -2229,7 +2217,7 @@
 		</security-role-ref>
 	</portlet>
 	<portlet>
-		<portlet-name>122</portlet-name>
+		<portlet-name>120</portlet-name>
 		<display-name>Tasks</display-name>
 		<portlet-class>com.liferay.portlet.StrutsPortlet</portlet-class>
 		<expiration-cache>0</expiration-cache>

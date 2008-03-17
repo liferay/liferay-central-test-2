@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementFinder.countByC_C_F">
+		<![CDATA[
+			SELECT DISTINCT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Announcement
+			LEFT JOIN
+				AnnouncementFlag ON
+					(AnnouncementFlag.announcementId = Announcement.announcementId)
+			WHERE
+				([$CLASS_PKS$]) AND
+				(Announcement.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
+				(Announcement.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
+				(Announcement.alert = ?) AND
+				(AnnouncementFlag.flag = ?) AND
+				(AnnouncementFlag.userId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementFinder.findByC_C_F">
+		<![CDATA[
+			SELECT DISTINCT
+				{Announcement.*}
+			FROM
+				Announcement
+			LEFT JOIN
+				AnnouncementFlag ON
+					(AnnouncementFlag.announcementId = Announcement.announcementId)
+			WHERE
+				([$CLASS_PKS$]) AND
+				(Announcement.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
+				(Announcement.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
+				(Announcement.alert = ?) AND
+				(AnnouncementFlag.flag = ?) AND
+				(AnnouncementFlag.userId = ?)
+			ORDER BY
+				Announcement.priority DESC,
+				Announcement.modifiedDate DESC
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementFinder.countByC_C_F.noJoin">
+		<![CDATA[
+			SELECT DISTINCT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				Announcement
+			WHERE
+				([$CLASS_PKS$]) AND
+				(Announcement.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
+				(Announcement.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
+				(Announcement.alert = ?) AND
+				(Announcement.announcementId NOT IN
+					(
+						SELECT DISTINCT
+							AnnouncementFlag.announcementId
+						FROM
+							AnnouncementFlag
+						WHERE
+							(AnnouncementFlag.announcementId = Announcement.announcementId) AND
+							(AnnouncementFlag.flag = ?) AND
+							(AnnouncementFlag.userId = ?)
+					)
+				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementFinder.findByC_C_F.noJoin">
+		<![CDATA[
+			SELECT DISTINCT
+				{Announcement.*}
+			FROM
+				Announcement
+			WHERE
+				([$CLASS_PKS$]) AND
+				(Announcement.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
+				(Announcement.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
+				(Announcement.alert = ?) AND
+				(Announcement.announcementId NOT IN
+					(
+						SELECT DISTINCT
+							AnnouncementFlag.announcementId
+						FROM
+							AnnouncementFlag
+						WHERE
+							(AnnouncementFlag.announcementId = Announcement.announcementId) AND
+							(AnnouncementFlag.flag = ?) AND
+							(AnnouncementFlag.userId = ?)
+					)
+				)
+			ORDER BY
+				Announcement.priority DESC,
+				Announcement.modifiedDate DESC
+		]]>
+	</sql>
+</custom-sql>

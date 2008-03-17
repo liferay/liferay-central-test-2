@@ -1184,6 +1184,60 @@ Liferay.Service.Portal.Website = {
 	}
 };
 
+Liferay.Service.Announcements = {
+	servicePackage: "com.liferay.portlet.announcements.service.http."
+};
+
+Liferay.Service.Announcements.Announcement = {
+	serviceClassName: Liferay.Service.Announcements.servicePackage + "Announcement" + Liferay.Service.classNameSuffix,
+
+	addAnnouncement: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addAnnouncement";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteAnnouncement: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteAnnouncement";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateAnnouncement: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateAnnouncement";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
+Liferay.Service.Announcements.AnnouncementFlag = {
+	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementFlag" + Liferay.Service.classNameSuffix,
+
+	addAnnouncementFlag: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addAnnouncementFlag";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getAnnouncementFlag: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getAnnouncementFlag";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteAnnouncementFlag: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteAnnouncementFlag";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Blogs = {
 	servicePackage: "com.liferay.portlet.blogs.service.http."
 };

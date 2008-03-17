@@ -53,6 +53,34 @@ create table Address (
 	primary_ BOOLEAN
 );
 
+create table Announcement (
+	uuid_ VARCHAR(75) null,
+	announcementId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	title VARCHAR(75) null,
+	content STRING null,
+	url STRING null,
+	type_ VARCHAR(75) null,
+	displayDate DATE null,
+	expirationDate DATE null,
+	priority INTEGER,
+	alert BOOLEAN
+);
+
+create table AnnouncementFlag (
+	announcementFlagId LONG not null primary key,
+	userId LONG,
+	announcementId LONG,
+	flag INTEGER,
+	flagDate DATE null
+);
+
 create table BlogsCategory (
 	categoryId LONG not null primary key,
 	companyId LONG,

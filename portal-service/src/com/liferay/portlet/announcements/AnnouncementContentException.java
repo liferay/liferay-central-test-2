@@ -25,27 +25,26 @@ package com.liferay.portlet.announcements;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="AnnouncementsContentException.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="AnnouncementContentException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AnnouncementsContentException extends PortalException {
+public class AnnouncementContentException extends PortalException {
 
-	public AnnouncementsContentException() {
+	public AnnouncementContentException() {
 		super();
 	}
 
-	public AnnouncementsContentException(String msg) {
+	public AnnouncementContentException(String msg) {
 		super(msg);
 	}
 
-	public AnnouncementsContentException(String msg, Throwable cause) {
+	public AnnouncementContentException(String msg, Throwable cause) {
 		super(msg, cause);
 	}
 
-	public AnnouncementsContentException(Throwable cause) {
+	public AnnouncementContentException(Throwable cause) {
 		super(cause);
 	}
 
