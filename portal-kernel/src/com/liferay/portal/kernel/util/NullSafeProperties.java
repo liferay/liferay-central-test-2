@@ -29,65 +29,8 @@ import java.util.Properties;
  *
  * @author Brian Wing Shun Chan
  *
+ * @deprecated This class has been renamed to <code>SafeProperties</code>.
+ *
  */
 public class NullSafeProperties extends Properties {
-
-	public NullSafeProperties() {
-		super();
-	}
-
-	public synchronized Object get(Object key) {
-		Object value = super.get(key);
-
-		value = _decodeNewlines((String)value);
-
-		return value;
-	}
-
-	public Object put(Object key, Object value) {
-		if (key == null) {
-			return null;
-		}
-		else {
-			if (value == null) {
-				return super.remove(key);
-			}
-			else {
-				value = _encodeNewlines((String)value);
-
-				return super.put(key, value);
-			}
-		}
-	}
-
-	public Object remove(Object key) {
-		if (key == null) {
-			return null;
-		}
-		else {
-			return super.remove(key);
-		}
-	}
-
-	private static String _decodeNewlines(String value) {
-		return StringUtil.replace(
-			value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
-	}
-
-	private static String _encodeNewlines(String value) {
-		return StringUtil.replace(
-			value,
-			new String[] {
-				StringPool.NEW_LINE, StringPool.RETURN,
-				StringPool.RETURN_NEW_LINE
-			},
-			new String[] {
-				_SAFE_NEWLINE_CHARACTER, _SAFE_NEWLINE_CHARACTER,
-				_SAFE_NEWLINE_CHARACTER
-			});
-	}
-
-	private static final String _SAFE_NEWLINE_CHARACTER =
-		"_SAFE_NEWLINE_CHARACTER_";
-
 }

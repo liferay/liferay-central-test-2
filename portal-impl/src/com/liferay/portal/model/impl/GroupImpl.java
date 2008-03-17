@@ -23,8 +23,8 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutSet;
@@ -253,7 +253,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 	public Properties getTypeSettingsProperties() {
 		if (_typeSettingsProperties == null) {
-			_typeSettingsProperties = new NullSafeProperties();
+			_typeSettingsProperties = new SafeProperties();
 
 			try {
 				PropertiesUtil.load(

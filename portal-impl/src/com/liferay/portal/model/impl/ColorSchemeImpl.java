@@ -22,8 +22,8 @@
 
 package com.liferay.portal.model.impl;
 
-import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -447,6 +447,6 @@ public class ColorSchemeImpl implements ColorScheme {
 	private String _colorSchemeImagesPath =
 		"${images-path}/color_schemes/${css-class}";
 	private boolean _defaultCs;
-	private Properties _settingsProperties = new NullSafeProperties();
+	private Properties _settingsProperties = new SafeProperties();
 
 }

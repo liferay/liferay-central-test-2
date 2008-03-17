@@ -24,8 +24,8 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PortalUtil;
@@ -127,7 +127,7 @@ public class DLFileEntryImpl
 
 	public Properties getExtraSettingsProperties() {
 		if (_extraSettingsProperties == null) {
-			_extraSettingsProperties = new NullSafeProperties();
+			_extraSettingsProperties = new SafeProperties();
 
 			try {
 				PropertiesUtil.load(

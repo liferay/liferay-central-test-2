@@ -38,9 +38,9 @@ import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -953,7 +953,7 @@ public class ServicePreAction extends Action {
 				String typeSettings = layoutClone.get(req, plid);
 
 				if (typeSettings != null) {
-					Properties props = new NullSafeProperties();
+					Properties props = new SafeProperties();
 
 					PropertiesUtil.load(props, typeSettings);
 

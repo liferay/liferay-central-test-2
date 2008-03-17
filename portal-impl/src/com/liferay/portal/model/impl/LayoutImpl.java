@@ -28,8 +28,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -434,7 +434,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 	public Properties getTypeSettingsProperties() {
 		if (_typeSettingsProperties == null) {
-			_typeSettingsProperties = new NullSafeProperties();
+			_typeSettingsProperties = new SafeProperties();
 
 			try {
 				PropertiesUtil.load(
@@ -594,7 +594,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			String typeSettings = layoutClone.get(req, getPlid());
 
 			if (typeSettings != null) {
-				Properties props = new NullSafeProperties();
+				Properties props = new SafeProperties();
 
 				PropertiesUtil.load(props, typeSettings);
 

@@ -20,46 +20,74 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.documentlibrary.form;
-
-import com.liferay.portal.kernel.util.SafeProperties;
+package com.liferay.portal.kernel.util;
 
 import java.util.Properties;
 
-import org.apache.struts.action.ActionForm;
-
 /**
- * <a href="FileEntryForm.java.html"><b><i>View Source</i></b></a>
+ * <a href="SafeProperties.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class FileEntryForm extends ActionForm {
+public class SafeProperties extends Properties {
 
-	public FileEntryForm() {
+	public SafeProperties() {
+		super();
 	}
 
-	public Object getExtraSettingsProperties(String key) {
-		if (!_extraSettingsProperties.isEmpty()) {
-			return _extraSettingsProperties.get(key);
-		}
-		else {
+	public synchronized Object get(Object key) {
+		Object value = super.get(key);
+
+		value = _decodeNewlines((String)value);
+
+		return value;
+	}
+
+	public Object put(Object key, Object value) {
+		if (key == null) {
 			return null;
 		}
+		else {
+			if (value == null) {
+				return super.remove(key);
+			}
+			else {
+				value = _encodeNewlines((String)value);
+
+				return super.put(key, value);
+			}
+		}
 	}
 
-	public Properties getExtraSettingsProperties() {
-		return _extraSettingsProperties;
+	public Object remove(Object key) {
+		if (key == null) {
+			return null;
+		}
+		else {
+			return super.remove(key);
+		}
 	}
 
-	public void setExtraSettingsProperties(Properties extraSettingsProperties) {
-		_extraSettingsProperties = extraSettingsProperties;
+	private static String _decodeNewlines(String value) {
+		return StringUtil.replace(
+			value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
 	}
 
-	public void setExtraSettingsProperties(String key, Object value) {
-		_extraSettingsProperties.put(key, value);
+	private static String _encodeNewlines(String value) {
+		return StringUtil.replace(
+			value,
+			new String[] {
+				StringPool.NEW_LINE, StringPool.RETURN,
+				StringPool.RETURN_NEW_LINE
+			},
+			new String[] {
+				_SAFE_NEWLINE_CHARACTER, _SAFE_NEWLINE_CHARACTER,
+				_SAFE_NEWLINE_CHARACTER
+			});
 	}
 
-	private Properties _extraSettingsProperties = new SafeProperties();
+	private static final String _SAFE_NEWLINE_CHARACTER =
+		"_SAFE_NEWLINE_CHARACTER_";
 
 }

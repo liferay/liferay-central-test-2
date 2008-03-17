@@ -23,8 +23,8 @@
 package com.liferay.portal.upgrade.v4_4_0;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.NullSafeProperties;
 import com.liferay.portal.kernel.util.PropertiesUtil;
+import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -97,7 +97,7 @@ public class UpgradeLayout extends UpgradeProcess {
 	}
 
 	protected String upgradeTypeSettings(String typeSettings) throws Exception {
-		Properties props = new NullSafeProperties();
+		Properties props = new SafeProperties();
 
 		PropertiesUtil.load(props, typeSettings);
 
