@@ -126,7 +126,7 @@
 
 			<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
 				<div id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
-					<%@ include file="/html/portlet/image_gallery/image_action.jsp" %>
+					<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
 				</div>
 			</div>
 		</div>
