@@ -2676,7 +2676,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the CSS class that will be injected in the DIV that wraps
 	 * this portlet.
 	 */
-	private String _cssClassWrapper;
+	private String _cssClassWrapper = StringPool.BLANK;
 
 	/**
 	 * True if default resources for the portlet are added to a page.
