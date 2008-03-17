@@ -29,18 +29,27 @@ String backURL = ParamUtil.getString(request, "backURL");
 %>
 
 <c:if test="<%= user.isLayoutsRequired() %>">
-	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="portletURL">
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="publicPagesURL">
 		<portlet:param name="struts_action" value="/my_account/edit_pages" />
-		<portlet:param name="tabs2" value='<%= layout.isPrivateLayout() ? "private-pages" : "public-pages" %>' />
+		<portlet:param name="tabs1" value='public-pages' />
+		<portlet:param name="backURL" value="<%= backURL %>" />
+		<portlet:param name="groupId" value="<%= String.valueOf(user.getGroup().getGroupId()) %>" />
+	</portlet:renderURL>
+
+	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="privatePagesURL">
+		<portlet:param name="struts_action" value="/my_account/edit_pages" />
+		<portlet:param name="tabs1" value='private-pages' />
 		<portlet:param name="backURL" value="<%= backURL %>" />
 		<portlet:param name="groupId" value="<%= String.valueOf(user.getGroup().getGroupId()) %>" />
 	</portlet:renderURL>
 
 	<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 		<liferay-ui:tabs
-			names="profile,pages"
+			names="profile,public-pages,private-pages"
+			param="tabs1"
 			url0="<%= themeDisplay.getURLMyAccount().toString() %>"
-			url1="<%= portletURL %>"
+			url1="<%= publicPagesURL %>"
+			url2="<%= privatePagesURL %>"
 		/>
 	</c:if>
 </c:if>

@@ -71,6 +71,10 @@ while (itr1.hasNext()) {
 Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 
 String tabs4Names = "export,import";
+
+if (!StringUtil.contains(tabs4Names, tabs4)) {
+	tabs4 = "export";
+}
 %>
 
 <liferay-ui:tabs

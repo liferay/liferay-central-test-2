@@ -386,5 +386,3 @@
 
 	<portlet:namespace />updateMetaLanguageTemps(lastMetaLanguageId);
 </script>
-
-	

@@ -45,7 +45,7 @@ String w3cDefaultLanguageId = StringUtil.replace(defaultLanguageId, StringPool.U
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaRobots) %>">
-		<meta name="robots" content="<%= metaRobots %>" lang="<%= metaRobotsLanguageId %>"/>
+		<meta name="robots" content="<%= metaRobots %>" lang="<%= metaRobotsLanguageId %>" />
 	</c:if>
 
 	<%
@@ -59,7 +59,7 @@ String w3cDefaultLanguageId = StringUtil.replace(defaultLanguageId, StringPool.U
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaDescription) %>">
-		<meta name="description" content="<%= metaDescription %>" lang="<%= metaDescriptionLanguageId %>"/>
+		<meta name="description" content="<%= metaDescription %>" lang="<%= metaDescriptionLanguageId %>" />
 	</c:if>
 
 	<%
@@ -73,6 +73,6 @@ String w3cDefaultLanguageId = StringUtil.replace(defaultLanguageId, StringPool.U
 	%>
 
 	<c:if test="<%= Validator.isNotNull(metaKeywords) %>">
-		<meta name="keywords" content="<%= metaKeywords %>" lang="<%= metaKeywordsLanguageId %>"/>
+		<meta name="keywords" content="<%= metaKeywords %>" lang="<%= metaKeywordsLanguageId %>" />
 	</c:if>
 </c:if>

@@ -25,10 +25,10 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs1 = ParamUtil.getString(request, "tabs1");
-String tabs2 = ParamUtil.getString(request, "tabs2", "public-pages");
-String tabs3 = ParamUtil.getString(request, "tabs3", "page");
-String tabs4 = ParamUtil.getString(request, "tabs4");
+String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
+String tabs2 = ParamUtil.getString(request, "tabs2", StringPool.BLANK);
+String tabs3 = ParamUtil.getString(request, "tabs3", StringPool.BLANK);
+String tabs4 = ParamUtil.getString(request, "tabs4", StringPool.BLANK);
 
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
@@ -58,22 +58,9 @@ else {
 	}
 }
 
-if (Validator.isNull(tabs1)) {
-	if (stagingGroup != null) {
-		tabs1 = "staging";
-	}
-	else {
-		tabs1 = "live";
-	}
-}
-
-if ((tabs2.equals("workflow") || tabs2.equals("proposals")) && !liveGroup.isWorkflowEnabled()) {
-	tabs2 = "public-pages";
-}
-
 Group group = null;
 
-if (tabs1.equals("staging")) {
+if (stagingGroup != null) {
 	group = stagingGroup;
 }
 else {
@@ -97,7 +84,7 @@ if (stagingGroup != null) {
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PLID);
 long layoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
 
-boolean privateLayout = tabs2.equals("private-pages");
+boolean privateLayout = tabs1.equals("private-pages");
 
 if (privateLayout) {
 	if (group != null) {
@@ -131,34 +118,14 @@ catch (NoSuchLayoutException nsle) {
 
 if (selLayout != null) {
 	layoutId = selLayout.getLayoutId();
-
-	if (!PortalUtil.isLayoutParentable(selLayout) && tabs3.equals("children")) {
-		tabs3 = "page";
-	}
-	else if (tabs3.equals("logo") || tabs3.equals("export-import") || (tabs3.equals("virtual-host")) || (tabs3.equals("sitemap")) || (tabs3.equals("monitoring"))) {
-		tabs3 = "page";
-	}
 }
 
-if (selLayout == null) {
-	if (tabs3.equals("page")) {
-		tabs3 = "children";
-	}
-	else if (tabs3.equals("sitemap") && privateLayout) {
-		tabs3 = "children";
-	}
+if (Validator.isNull(tabs2) && (!tabs1.equals("settings"))) {
+	tabs2 = "pages";
 }
-
-if (Validator.isNull(tabs4)) {
-	if (tabs3.equals("children")) {
-		tabs4 = "new-page";
-	}
-	else if (tabs3.equals("look-and-feel")) {
-		tabs4 = "regular-browsers";
-	}
-	else if (tabs3.equals("export-import")) {
-		tabs4 = "export";
-	}
+	
+if ((selLayout == null) && ((tabs2.equals("pages")))) {
+	tabs3 = "children";
 }
 
 long parentLayoutId = BeanParamUtil.getLong(selLayout, request, "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
@@ -230,9 +197,11 @@ viewPagesURL.setParameter("struts_action", "/my_places/view");
 viewPagesURL.setParameter("groupId", String.valueOf(groupId));
 viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
+request.setAttribute("edit_pages.jsp-tab2", tabs2);
 request.setAttribute("edit_pages.jsp-tab4", tabs4);
 
 request.setAttribute("edit_pages.jsp-liveGroup", liveGroup);
+request.setAttribute("edit_pages.jsp-stagingGroup", stagingGroup);
 request.setAttribute("edit_pages.jsp-group", group);
 request.setAttribute("edit_pages.jsp-groupId", new Long(groupId));
 request.setAttribute("edit_pages.jsp-liveGroupId", new Long(liveGroupId));
@@ -292,13 +261,13 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		document.<portlet:namespace />fm.encoding = "multipart/form-data";
 
 		<c:choose>
-			<c:when test='<%= tabs3.equals("monitoring") %>'>
+			<c:when test='<%= tabs2.equals("monitoring") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "monitoring";
 			</c:when>
-			<c:when test='<%= tabs3.equals("virtual-host") %>'>
+			<c:when test='<%= tabs2.equals("virtual-host") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "virtual_host";
 			</c:when>
-			<c:when test='<%= tabs4.equals("merge-pages") %>'>
+			<c:when test='<%= tabs2.equals("merge-pages") %>'>
 				document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "merge_pages";
 			</c:when>
 			<c:otherwise>
@@ -331,8 +300,9 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, sectionParam, sectionName) {
+	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, wapTheme, sectionParam, sectionName) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
+		document.<portlet:namespace />fm.<portlet:namespace />wapTheme.value = wapTheme;
 
 		var themeRadio = document.<portlet:namespace />fm.<portlet:namespace />themeId;
 
@@ -411,7 +381,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 <input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>" />
 <input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>" />
 <input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>" />
-<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>' />
+<input name="<portlet:namespace />wapTheme" type="hidden" value="" />
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" value="" />
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
@@ -440,20 +410,17 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 	<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
 		<liferay-util:include page="/html/portlet/my_account/tabs1.jsp">
-			<liferay-util:param name="tabs1" value="pages" />
+			<liferay-util:param name="tabs1" value="<%= tabs1 %>" />
 		</liferay-util:include>
 	</c:if>
 
 	<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
 
 		<%
-		String tabs1Names = "live";
+		String tabs1Names = "public-pages,private-pages";
 
-		if ((stagingGroup == null) && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
-			tabs1Names = "live,staging";
-		}
-		else if (stagingGroup != null) {
-			tabs1Names = "staging";
+		if ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE))) {
+			tabs1Names += ",settings";
 		}
 		%>
 
@@ -467,82 +434,64 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	</c:if>
 </c:if>
 
-<c:if test='<%= tabs1.equals("staging") && GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>'>
-	<c:choose>
-		<c:when test="<%= layout.getGroup().isStagingGroup() && layout.getGroup().getLiveGroupId() == liveGroupId %>">
-		</c:when>
-		<c:otherwise>
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:message key="activate-staging" />
-				</td>
-				<td>
-					<input <%= (stagingGroup != null) ? "checked" : "" %> name="<portlet:namespace />stagingEnabled" type="checkbox" onClick="<portlet:namespace />updateStaging();">
-				</td>
-			</tr>
-
-			<c:if test="<%= stagingGroup != null %>">
-				<tr>
-					<td>
-						<liferay-ui:message key="activate-workflow" />
-					</td>
-					<td>
-						<input <%= workflowEnabled ? "checked" : "" %> name="<portlet:namespace />workflowEnabled" type="checkbox" onClick="<portlet:namespace />updateWorkflow();">
-					</td>
-				</tr>
-			</c:if>
-
-			</table>
-
-			<c:if test="<%= stagingGroup != null %>">
-				<br />
-			</c:if>
-		</c:otherwise>
-	</c:choose>
-</c:if>
-
 <c:if test="<%= (group != null) %>">
-
-	<%
-	String tabs2Names = "public-pages,private-pages";
-
-	if (workflowEnabled) {
-		if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) {
-			tabs2Names += ",workflow";
-		}
-
-		tabs2Names += ",proposals";
-	}
-	%>
-
 	<c:choose>
-		<c:when test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && liveGroup.isUser() %>">
-			<liferay-ui:tabs
-				names="<%= tabs2Names %>"
-				param="tabs2"
-				url="<%= portletURL.toString() %>"
-				backURL="<%= redirect %>"
-			/>
-		</c:when>
+		<c:when test='<%= tabs1.equals("settings") %>'>
+			<liferay-util:include page="/html/portlet/communities/edit_pages_settings.jsp" />
+ 		</c:when>
 		<c:otherwise>
-			<liferay-ui:tabs
-				names="<%= tabs2Names %>"
-				param="tabs2"
-				url="<%= portletURL.toString() %>"
-			/>
-		</c:otherwise>
-	</c:choose>
+			<%
+			String tabs2Names = "pages";
 
-	<c:choose>
-		<c:when test='<%= tabs2.equals("workflow") %>'>
-			<liferay-util:include page="/html/portlet/communities/edit_pages_workflow.jsp" />
-		</c:when>
-		<c:when test='<%= tabs2.equals("proposals") %>'>
-			<liferay-util:include page="/html/portlet/communities/edit_pages_proposals.jsp" />
-		</c:when>
-		<c:otherwise>
-			<%@ include file="/html/portlet/communities/edit_pages_public_and_private.jsp" %>
+			if (permissionChecker.isOmniadmin() || PropsValues.LOOK_AND_FEEL_MODIFIABLE) {
+				tabs2Names += ",look-and-feel";
+			}
+
+			if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
+				tabs2Names += ",export-import";
+			}
+
+			if (workflowEnabled) {
+				tabs2Names += ",proposals";
+			}
+
+			if (!StringUtil.contains(tabs2Names, tabs2)) {
+			    tabs2 = "pages";
+			}
+			%>
+
+			<c:choose>
+				<c:when test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && liveGroup.isUser() %>">
+					<liferay-ui:tabs
+						names="<%= tabs2Names %>"
+						param="tabs2"
+						url="<%= portletURL.toString() %>"
+						backURL="<%= redirect %>"
+					/>
+				</c:when>
+				<c:otherwise>
+					<liferay-ui:tabs
+						names="<%= tabs2Names %>"
+						param="tabs2"
+						url="<%= portletURL.toString() %>"
+					/>
+				</c:otherwise>
+			</c:choose>
+
+			<c:choose>
+				<c:when test='<%= tabs2.equals("pages") %>'>
+					<%@ include file="/html/portlet/communities/edit_pages_public_and_private.jsp" %>
+				</c:when>
+				<c:when test='<%= tabs2.equals("look-and-feel") %>'>
+					<liferay-util:include page="/html/portlet/communities/edit_pages_look_and_feel.jsp" />
+				</c:when>
+				<c:when test='<%= tabs2.equals("export-import") %>'>
+					<liferay-util:include page="/html/portlet/communities/edit_pages_export_import.jsp" />
+				</c:when>
+				<c:when test='<%= tabs2.equals("proposals") %>'>
+					<liferay-util:include page="/html/portlet/communities/edit_pages_proposals.jsp" />
+				</c:when>
+			</c:choose>
 		</c:otherwise>
 	</c:choose>
 </c:if>

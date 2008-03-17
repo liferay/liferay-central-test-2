@@ -51,10 +51,8 @@ if ((selLayoutChildren != null) && (selLayoutChildren.size() > 0)) {
 	tabs4Names += ",display-order";
 }
 
-Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupImpl.GUEST);
-
-if ((selLayout == null) && !privateLayout && (liveGroup.getGroupId() != guestGroup.getGroupId())) {
-	tabs4Names += ",merge-pages";
+if (!StringUtil.contains(tabs4Names, tabs4)) {
+	tabs4 = "new-page";
 }
 %>
 

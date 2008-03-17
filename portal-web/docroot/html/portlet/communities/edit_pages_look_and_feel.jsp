@@ -25,6 +25,7 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
+String tabs2 = (String)request.getAttribute("edit_pages.jsp-tab2");
 String tabs4 = (String)request.getAttribute("edit_pages.jsp-tab4");
 
 long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
@@ -33,7 +34,17 @@ long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue(
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
 
+String wapTheme = tabs4.equals("regular-browsers") ? "false" : "true";
+
+if (tabs2.equals("look-and-feel")) {
+	selLayout = null;
+}
+
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
+
+if ((tabs4 == null) || (!tabs4.equals("regular-browsers") && !tabs4.equals("mobile-devices"))) {
+	tabs4 = "regular-browsers";
+}
 %>
 
 <liferay-ui:tabs
@@ -65,10 +76,10 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			<table class="lfr-table">
 			<tr>
 				<td>
-					<%= LanguageUtil.get(pageContext, "inherit-look-and-feel-from-the-" + (privateLayout ? "public" : "private") + "-root-node") %>
+					<%= LanguageUtil.get(pageContext, "use-the-general-look-and-feel-for-the-" + (privateLayout ? "public" : "private") + "-pages") %>
 				</td>
 				<td>
-					<select name="<portlet:namespace />hidden" onChange="if (this.value == 1) { <portlet:namespace />updateLookAndFeel('', ''); } else { <portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorScheme.getColorSchemeId() %>'); }">
+					<select name="<portlet:namespace />hidden" onChange="if (this.value == 1) { <portlet:namespace />updateLookAndFeel('', '', '<%= wapTheme %>'); } else { <portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorScheme.getColorSchemeId() %>', '<%= wapTheme %>'); }">
 						<option <%= (selLayout.isInheritLookAndFeel()) ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
 						<option <%= (!selLayout.isInheritLookAndFeel()) ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 					</select>
@@ -95,7 +106,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 					<table border="0" cellpadding="0" cellspacing="0">
 					<tr>
 						<td align="center">
-							<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '', '<%= sectionParam %>', '<%= sectionName %>');"><br />
+							<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '', '<%= wapTheme %>', '<%= sectionParam %>', '<%= sectionName %>');"><br />
 
 							<img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0" />
 						</td>
@@ -121,7 +132,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 							<table border="0" cellpadding="0" cellspacing="0">
 							<tr>
 								<td align="center">
-									<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>', '<%= sectionParam %>', '<%= sectionName %>')"><br />
+									<%= tableIteratorObj.getName() %> <input <%= selColorScheme.getColorSchemeId().equals(tableIteratorObj.getColorSchemeId()) ? "checked" : "" %> name="<portlet:namespace />colorSchemeId" type="radio" value="<%= tableIteratorObj.getColorSchemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= tableIteratorObj.getColorSchemeId() %>', '<%= wapTheme %>', '<%= sectionParam %>', '<%= sectionName %>')"><br />
 
 									<img border="0" hspace="0" src="<%= selTheme.getContextPath() %><%= tableIteratorObj.getColorSchemeThumbnailPath() %>/thumbnail.png" vspace="0" />
 								</td>
@@ -163,7 +174,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 
 				<br /><br />
 
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorSchemeId %>', '<%= sectionParam %>', '<%= sectionName %>');" />
+				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorSchemeId %>', '<%= wapTheme %>', '<%= sectionParam %>', '<%= sectionName %>');" />
 			</liferay-ui:section>
 		</liferay-ui:tabs>
 	</c:when>
@@ -192,7 +203,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 					<%= LanguageUtil.get(pageContext, "inherit-look-and-feel-from-the-" + (privateLayout ? "public" : "private") + "-root-node") %>
 				</td>
 				<td>
-					<select name="<portlet:namespace />hidden" onChange="if (this.value == 1) { <portlet:namespace />updateLookAndFeel('', ''); } else { <portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorScheme.getColorSchemeId() %>'); }">
+					<select name="<portlet:namespace />hidden" onChange="if (this.value == 1) { <portlet:namespace />updateLookAndFeel('', '', '<%= wapTheme %>'); } else { <portlet:namespace />updateLookAndFeel('<%= selTheme.getThemeId() %>', '<%= selColorScheme.getColorSchemeId() %>', '<%= wapTheme %>'); }">
 						<option <%= (selLayout.isInheritWapLookAndFeel()) ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
 						<option <%= (!selLayout.isInheritWapLookAndFeel()) ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
 					</select>
@@ -218,7 +229,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			<table border="0" cellpadding="0" cellspacing="0">
 			<tr>
 				<td align="center">
-					<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '');"><br />
+					<%= tableIteratorObj.getName() %> <input <%= selTheme.getThemeId().equals(tableIteratorObj.getThemeId()) ? "checked" : "" %> name="<portlet:namespace />themeId" type="radio" value="<%= tableIteratorObj.getThemeId() %>" onClick="<portlet:namespace />updateLookAndFeel('<%= tableIteratorObj.getThemeId() %>', '', '<%= wapTheme %>', '<%= wapTheme %>');"><br />
 
 					<img border="0" hspace="0" src="<%= tableIteratorObj.getContextPath() %><%= tableIteratorObj.getImagesPath() %>/thumbnail.png" vspace="0" />
 				</td>
