@@ -39,17 +39,9 @@ public class NullSafeProperties extends Properties {
 	public synchronized Object get(Object key) {
 		Object value = super.get(key);
 
-		if (value != null && value instanceof String) {
-			value = PropertiesUtil.unprotectNewlines((String)value);
-		}
+		value = _decodeNewlines((String)value);
 
 		return value;
-	}
-
-	public String getProperty(String key) {
-		String value = super.getProperty(key);
-
-		return PropertiesUtil.unprotectNewlines(value);
 	}
 
 	public Object put(Object key, Object value) {
@@ -61,19 +53,11 @@ public class NullSafeProperties extends Properties {
 				return super.remove(key);
 			}
 			else {
-				if (value instanceof String) {
-					value = PropertiesUtil.protectNewlines((String)value);
-				}
+				value = _encodeNewlines((String)value);
 
 				return super.put(key, value);
 			}
 		}
-	}
-
-	public synchronized Object setProperty(String key, String value) {
-		value = PropertiesUtil.protectNewlines(value);
-
-		return super.setProperty(key, value);
 	}
 
 	public Object remove(Object key) {
@@ -84,5 +68,26 @@ public class NullSafeProperties extends Properties {
 			return super.remove(key);
 		}
 	}
+
+	private static String _decodeNewlines(String value) {
+		return StringUtil.replace(
+			value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
+	}
+
+	private static String _encodeNewlines(String value) {
+		return StringUtil.replace(
+			value,
+			new String[] {
+				StringPool.NEW_LINE, StringPool.RETURN,
+				StringPool.RETURN_NEW_LINE
+			},
+			new String[] {
+				_SAFE_NEWLINE_CHARACTER, _SAFE_NEWLINE_CHARACTER,
+				_SAFE_NEWLINE_CHARACTER
+			});
+	}
+
+	private static final String _SAFE_NEWLINE_CHARACTER =
+		"_SAFE_NEWLINE_CHARACTER_";
 
 }
