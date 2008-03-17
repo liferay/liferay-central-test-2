@@ -22,6 +22,7 @@
  */
 %>
 
+<%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
 <%@ page import="com.liferay.util.HttpUtil" %>
@@ -34,6 +35,8 @@ String cssPath = ParamUtil.getString(request, "cssPath");
 String cssClasses = ParamUtil.getString(request, "cssClasses");
 
 String connectorURL = HttpUtil.encodeURL(mainPath + "/portal/fckeditor?p_l_id=" + plid + "&doAsUserId=" + HttpUtil.encodeURL(doAsUserId));
+
+response.setContentType(ContentTypes.TEXT_JAVASCRIPT);
 %>
 
 FCKConfig.IncludeLatinEntities	= false ;
