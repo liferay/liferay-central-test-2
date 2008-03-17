@@ -762,6 +762,29 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return LayoutImpl.DEFAULT_PLID;
 	}
 
+	public long getDefaultPlid(
+			long groupId, boolean privateLayout, String portletId)
+		throws SystemException {
+
+		if (groupId > 0) {
+			List<Layout> layouts = layoutPersistence.findByG_P(
+				groupId, privateLayout);
+
+			for (Layout layout : layouts) {
+				if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+					LayoutTypePortlet layoutTypePortlet =
+						(LayoutTypePortlet)layout.getLayoutType();
+
+					if (layoutTypePortlet.hasPortletId(portletId)) {
+						return layout.getPlid();
+					}
+				}
+			}
+		}
+
+		return LayoutImpl.DEFAULT_PLID;
+	}
+
 	public Layout getDLFolderLayout(long dlFolderId)
 		throws PortalException, SystemException {
 

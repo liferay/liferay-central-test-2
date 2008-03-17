@@ -282,10 +282,12 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		throws PortalException, PortletModeException, SystemException,
 			   WindowStateException {
 
-		long plid = LayoutLocalServiceUtil.getDefaultPlid(groupId, true);
+		long plid = LayoutLocalServiceUtil.getDefaultPlid(
+			groupId, false, portletId);
 
 		if (plid == 0) {
-			plid = LayoutLocalServiceUtil.getDefaultPlid(groupId, false);
+			plid = LayoutLocalServiceUtil.getDefaultPlid(
+				groupId, true, portletId);
 		}
 
 		if (plid == 0) {

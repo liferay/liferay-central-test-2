@@ -1036,6 +1036,14 @@ public class LayoutLocalServiceUtil {
 		return layoutLocalService.getDefaultPlid(groupId, privateLayout);
 	}
 
+	public static long getDefaultPlid(long groupId, boolean privateLayout,
+		java.lang.String portletId) throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getDefaultPlid(groupId, privateLayout,
+			portletId);
+	}
+
 	public static com.liferay.portal.model.Layout getDLFolderLayout(
 		long dlFolderId)
 		throws com.liferay.portal.PortalException,

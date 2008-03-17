@@ -175,7 +175,7 @@ for (int i = 0; i < portlets.size(); i++) {
 			}
 
 			sm.append(">");
-			sm.append("<span style=\"font-size: x-small; font-style: italic;\">");
+			sm.append("<span style=\"font-style: italic;\">");
 			sm.append(entryTitle);
 			sm.append("</span><br />");
 			sm.append(summary);
