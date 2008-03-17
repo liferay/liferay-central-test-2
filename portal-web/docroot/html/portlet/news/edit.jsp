@@ -86,7 +86,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 					<tr>
 						<td align="right" valign="top">
-							<b><a href="<portlet:actionURL><portlet:param name="struts_action" value="/news/edit" /><portlet:param name="page" value="categories" /><portlet:param name="categoryName" value="<%= categoryName %>" /></portlet:actionURL>">
+							<b><a href="<portlet:renderURL><portlet:param name="struts_action" value="/news/edit" /><portlet:param name="page" value="categories" /><portlet:param name="categoryName" value="<%= categoryName %>" /></portlet:renderURL>">
 							<%= categoryName %>
 							</a></b>
 						</td>
@@ -148,7 +148,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listChecked(document.<portlet:namespace />fm); submitForm(document.<portlet:namespace />fm);" />
 
-				<input type="button" value="<liferay-ui:message key="back" />" onClick="self.location = '<portlet:actionURL><portlet:param name="struts_action" value="/news/edit" /></portlet:actionURL>';" />
+				<input type="button" value="<liferay-ui:message key="back" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/news/edit" /></portlet:renderURL>';" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>

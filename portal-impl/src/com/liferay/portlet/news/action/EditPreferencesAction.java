@@ -72,7 +72,7 @@ public class EditPreferencesAction extends PortletAction {
 		String tabs1 = ParamUtil.getString(req, "tabs1");
 
 		if (tabs1.equals("news-selections")) {
-			String categoryName = req.getParameter("category_name");
+			String categoryName = req.getParameter("categoryName");
 			String list = req.getParameter("feeds");
 
 			Set selFeeds = NewsUtil.getSelFeeds(prefs);
