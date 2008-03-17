@@ -101,7 +101,7 @@ public class HttpUtil {
 		return encodeURL(url, false);
 	}
 
-	public static String encodeURL(String url, boolean escapeSpace) {
+	public static String encodeURL(String url, boolean escapeSpaces) {
 		if (url == null) {
 			return null;
 		}
@@ -109,7 +109,7 @@ public class HttpUtil {
 		try {
 			url = URLEncoder.encode(url, ENCODING);
 
-			if (escapeSpace) {
+			if (escapeSpaces) {
 				url = StringUtil.replace(url, StringPool.PLUS, "%20");
 			}
 

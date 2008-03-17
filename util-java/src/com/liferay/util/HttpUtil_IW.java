@@ -51,8 +51,8 @@ public class HttpUtil_IW {
 		return HttpUtil.encodeURL(url);
 	}
 
-	public java.lang.String encodeURL(java.lang.String url, boolean escapeSpace) {
-		return HttpUtil.encodeURL(url, escapeSpace);
+	public java.lang.String encodeURL(java.lang.String url, boolean escapeSpaces) {
+		return HttpUtil.encodeURL(url, escapeSpaces);
 	}
 
 	public java.lang.String getQueryString(java.lang.String url) {
