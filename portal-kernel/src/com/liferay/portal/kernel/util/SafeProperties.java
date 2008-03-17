@@ -44,7 +44,21 @@ public class SafeProperties extends Properties {
 		return value;
 	}
 
-	public Object put(Object key, Object value) {
+	public synchronized String getProperty(String key) {
+		return getProperty(key, false);
+	}
+
+	public synchronized String getProperty(String key, boolean encodeNewlines) {
+		String value = super.getProperty(key);
+
+		if (!encodeNewlines) {
+			value = _decodeNewlines(value);
+		}
+
+		return value;
+	}
+
+	public synchronized Object put(Object key, Object value) {
 		if (key == null) {
 			return null;
 		}
@@ -78,8 +92,8 @@ public class SafeProperties extends Properties {
 		return StringUtil.replace(
 			value,
 			new String[] {
-				StringPool.NEW_LINE, StringPool.RETURN,
-				StringPool.RETURN_NEW_LINE
+				StringPool.RETURN_NEW_LINE, StringPool.NEW_LINE,
+				StringPool.RETURN
 			},
 			new String[] {
 				_SAFE_NEWLINE_CHARACTER, _SAFE_NEWLINE_CHARACTER,
