@@ -22,16 +22,7 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
-
-<%
-List list = (List)request.getAttribute("liferay-ui:table-iterator:list");
-int listPos = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:table-iterator:listPos"));
-int rowLength = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:table-iterator:rowLength"));
-String rowPadding = (String)request.getAttribute("liferay-ui:table-iterator:rowPadding");
-String rowValign = (String)request.getAttribute("liferay-ui:table-iterator:rowValign");
-String rowBreak = (String)request.getAttribute("liferay-ui:table-iterator:rowBreak");
-%>
+<%@ include file="/html/taglib/ui/table_iterator/init.jsp" %>
 
 </td>
 

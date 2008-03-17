@@ -22,12 +22,7 @@
  */
 %>
 
-<%@ include file="/html/taglib/init.jsp" %>
-
-<%
-String rowValign = (String)request.getAttribute("liferay-ui:table-iterator:rowValign");
-String width = (String)request.getAttribute("liferay-ui:table-iterator:width");
-%>
+<%@ include file="/html/taglib/ui/table_iterator/init.jsp" %>
 
 <table border="0" cellpadding="0" cellspacing="0"
 
