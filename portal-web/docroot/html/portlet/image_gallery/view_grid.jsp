@@ -77,6 +77,8 @@
 				jQuery("#<portlet:namespace />buttonsContainer_" + id).append(buttons);
 			}
 		});
+		
+		jQuery(popup).addClass('image-popup');
 
 		var buttons = jQuery("#" + buttonsId);
 
@@ -125,7 +127,7 @@
 			</div>
 
 			<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
-				<div id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
+				<div class="buttons-container float-container" id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
 					<%@ include file="/html/portlet/image_gallery/image_action.jspf" %>
 				</div>
 			</div>
