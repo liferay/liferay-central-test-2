@@ -56,6 +56,8 @@ public class ThemeDisplay implements Serializable {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Creating new instance " + hashCode());
 		}
+
+		_portletDisplay.setThemeDisplay(this);
 	}
 
 	public Company getCompany() {
@@ -847,9 +849,9 @@ public class ThemeDisplay implements Serializable {
 		return _portletDisplay;
 	}
 
-	public void setPortletDisplay(PortletDisplay portletDisplay) {
+	/*public void setPortletDisplay(PortletDisplay portletDisplay) {
 		_portletDisplay = portletDisplay;
-	}
+	}*/
 
 	public void recycle() {
 		if (_log.isDebugEnabled()) {

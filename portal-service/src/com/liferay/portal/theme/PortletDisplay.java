@@ -25,6 +25,7 @@ package com.liferay.portal.theme;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
@@ -40,6 +41,14 @@ public class PortletDisplay implements Serializable {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Creating new instance " + hashCode());
 		}
+	}
+
+	public ThemeDisplay getThemeDisplay() {
+		return _themeDisplay;
+	}
+
+	public void setThemeDisplay(ThemeDisplay themeDisplay) {
+		_themeDisplay = themeDisplay;
 	}
 
 	public String getId() {
@@ -96,6 +105,12 @@ public class PortletDisplay implements Serializable {
 
 	public void setTitle(String title) {
 		_title = title;
+
+		// LEP-5317
+
+		if (Validator.isNull(_id)) {
+			setId(_themeDisplay.getTilesTitle());
+		}
 	}
 
 	public boolean isAccess() {
@@ -525,6 +540,7 @@ public class PortletDisplay implements Serializable {
 	}
 
 	public void copyFrom(PortletDisplay master) {
+		_themeDisplay = master.getThemeDisplay();
 		_id = master.getId();
 		_rootPortletId = master.getRootPortletId();
 		_instanceId = master.getInstanceId();
@@ -579,6 +595,7 @@ public class PortletDisplay implements Serializable {
 	}
 
 	public void copyTo(PortletDisplay slave) {
+		slave.setThemeDisplay(_themeDisplay);
 		slave.setId(_id);
 		slave.setRootPortletId(_rootPortletId);
 		slave.setInstanceId(_instanceId);
@@ -634,6 +651,7 @@ public class PortletDisplay implements Serializable {
 
 	private static Log _log = LogFactoryUtil.getLog(PortletDisplay.class);
 
+	private ThemeDisplay _themeDisplay;
 	private String _id = StringPool.BLANK;
 	private String _rootPortletId = StringPool.BLANK;
 	private String _instanceId = StringPool.BLANK;
