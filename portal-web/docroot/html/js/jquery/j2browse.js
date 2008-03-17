@@ -67,7 +67,8 @@ var jQBrowser2 = function() {
 
         // Initially set to false, if detected one of the following operating
         // systems will be updated.
-           'iphone': false, 
+           'iphone': false,
+             'ipod': false,
 			'linux': false,
               'mac': false,
               'win': false
@@ -229,7 +230,11 @@ var jQBrowser2 = function() {
                 },
 				{ // iPhone <http://www.apple.com/iphone>
 						  'name': 'iPhone',
-						    'OS': /iPhone/.test(pl) 
+						    'OS': /iPhone/.test(pl)
+				},
+				{ // iPod <http://www.apple.com/ipodtouch>
+						  'name': 'iPod',
+						    'OS': /iPod/.test(pl)
 				}
            ];
        i < data.length;
@@ -306,7 +311,8 @@ var jQBrowser2 = function() {
 
         // A boolean value indicating whether or not the given OS was
         // detected.
-		   'iphone': Private.iphone, 
+		   'iphone': Private.iphone,
+		     'ipod': Private.ipod,
             'linux': Private.linux,
               'mac': Private.mac,
               'win': Private.win
@@ -332,6 +338,6 @@ var jQBrowser2 = function() {
 																: jQuery.browser.aol // AOL
 																 	? 'aol ' + bn + bv
 																	: '',
-		os=jQuery.browser.linux?'linux':jQuery.browser.iphone?'iphone':jQuery.browser.mac?'mac':jQuery.browser.win?'win':'';
+		os=jQuery.browser.linux?'linux':jQuery.browser.iphone?'iphone':jQuery.browser.ipod?'ipod':jQuery.browser.mac?'mac':jQuery.browser.win?'win':'';
 		jQuery('html').addClass(b).addClass(os).addClass('js');
 }();
