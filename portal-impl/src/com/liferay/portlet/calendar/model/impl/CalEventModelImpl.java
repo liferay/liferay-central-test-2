@@ -438,7 +438,7 @@ public class CalEventModelImpl extends BaseModelImpl {
 			model.setTimeZoneSensitive(getTimeZoneSensitive());
 			model.setType(Html.escape(getType()));
 			model.setRepeating(getRepeating());
-			model.setRecurrence(Html.escape(getRecurrence()));
+			model.setRecurrence(getRecurrence());
 			model.setRemindBy(Html.escape(getRemindBy()));
 			model.setFirstReminder(getFirstReminder());
 			model.setSecondReminder(getSecondReminder());
