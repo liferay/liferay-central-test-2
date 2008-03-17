@@ -314,6 +314,9 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 						Html.stripHtml(page.getContent()), _RSS_ABSTRACT_LENGTH,
 						StringPool.BLANK);
 				}
+				else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {
+					value = StringPool.BLANK;
+				}
 				else {
 					value = page.getContent();
 				}

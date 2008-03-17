@@ -302,6 +302,9 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 					Html.stripHtml(entry.getContent()), _RSS_ABSTRACT_LENGTH,
 					StringPool.BLANK);
 			}
+			else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {
+				value = StringPool.BLANK;
+			}
 			else {
 				value = entry.getContent();
 			}

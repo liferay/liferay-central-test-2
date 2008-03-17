@@ -715,6 +715,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 					Html.stripHtml(message.getBody()), _RSS_ABSTRACT_LENGTH,
 					StringPool.BLANK);
 			}
+			else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {
+				value = StringPool.BLANK;
+			}
 			else {
 				value = message.getBody();
 			}
