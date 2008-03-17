@@ -237,6 +237,7 @@ action.GUEST_PREFERENCES=손님 특혜
 action.HELP=도움
 action.IMPERSONATE=구체화되는
 action.MANAGE=처리하십시요
+action.MANAGE_ARCHIVED_SETUPS=보관한 체제를 처리하십시요
 action.MANAGE_COUPONS=쿠폰을 처리하십시요
 action.MANAGE_LAYOUTS=페이지를 처리하십시요
 action.MANAGE_ORDERS=순서를 처리하십시요

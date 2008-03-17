@@ -237,6 +237,7 @@ action.GUEST_PREFERENCES=ゲストの好み
 action.HELP=助け
 action.IMPERSONATE=人格化された
 action.MANAGE=管理しなさい
+action.MANAGE_ARCHIVED_SETUPS=アーカイブされた組み立てを管理しなさい
 action.MANAGE_COUPONS=クーポンを経営しなさい
 action.MANAGE_LAYOUTS=ページを経営しなさい
 action.MANAGE_ORDERS=順序を管理しなさい

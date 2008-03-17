@@ -237,6 +237,7 @@ action.GUEST_PREFERENCES=Προτιμήσεις φιλοξενουμένων
 action.HELP=Βοήθεια
 action.IMPERSONATE=Impersonate
 action.MANAGE=Διαχειριστείτε
+action.MANAGE_ARCHIVED_SETUPS=Διαχειριστείτε τις αρχειοθετημένες οργανώσεις
 action.MANAGE_COUPONS=Διαχειριστείτε τα δελτία
 action.MANAGE_LAYOUTS=Διαχειριστείτε τις σελίδες
 action.MANAGE_ORDERS=Διαχειριστείτε τις διαταγές

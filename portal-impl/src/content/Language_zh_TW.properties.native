@@ -237,6 +237,7 @@ action.GUEST_PREFERENCES=客人特選
 action.HELP=幫助
 action.IMPERSONATE=假充
 action.MANAGE=處理
+action.MANAGE_ARCHIVED_SETUPS=處理被歸檔的設定
 action.MANAGE_COUPONS=處理優惠券
 action.MANAGE_LAYOUTS=處理頁
 action.MANAGE_ORDERS=處理命令
