@@ -36,8 +36,8 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/image_gallery/view");
-portletURL.setParameter("folderId", String.valueOf(folderId));
 portletURL.setParameter("tabs1", tabs1);
+portletURL.setParameter("folderId", String.valueOf(folderId));
 
 List scores = null;
 %>
@@ -344,7 +344,7 @@ List scores = null;
 		searchContainer.setResults(results);
 		%>
 
-		<form method="get" name="<portlet:namespace />fm2" onSubmit="submitForm(this); return false;">
+		<form name="<portlet:namespace />fm2">
 
 		<%@ include file="/html/portlet/image_gallery/view_grid.jsp" %>
 

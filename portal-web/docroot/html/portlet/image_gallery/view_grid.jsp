@@ -23,72 +23,74 @@
 %>
 
 <script type="text/javascript">
-	var maxThumbnailDimension = <%= String.valueOf(PropsValues.IG_IMAGE_THUMBNAIL_MAX_DIMENSION) %>;
+	var maxDimension = <%= PropsValues.IG_IMAGE_THUMBNAIL_MAX_DIMENSION %>;
 
-	function <portlet:namespace />popUp(id, name, w, h) {
+	function <portlet:namespace />viewImage(id, name, width, height) {
 		var page = Viewport.page();
 		var frame = Viewport.frame();
 
-		var maxW = Math.max(Math.min(page.x, frame.x) - 150, maxThumbnailDimension);
-		var maxH = Math.max(Math.min(page.y, frame.y) - 150, maxThumbnailDimension);
+		var maxWidth = Math.max(Math.min(page.x, frame.x) - 150, maxDimension);
+		var maxHeight = Math.max(Math.min(page.y, frame.y) - 150, maxDimension);
 
-		var imgW = w;
-		var imgH = h;
+		var imgWidth = width;
+		var imgHeight = height;
 
-		if (imgW > maxW || imgH > maxH) {
-			if (imgW > maxW) {
-				var x = maxW / imgW;
-				imgW = maxW;
-				imgH = x * imgH;
+		if (imgWidth > maxWidth || imgHeight > maxHeight) {
+			if (imgWidth > maxWidth) {
+				var x = maxWidth / imgWidth;
+
+				imgWidth = maxWidth;
+				imgHeight = x * imgHeight;
 			}
 
-			if (imgH > maxH) {
-				var y = maxH / imgH;
-				imgH = maxH;
-				imgW = y * imgW;
+			if (imgHeight > maxHeight) {
+				var y = maxHeight / imgHeight;
+
+				imgHeight = maxHeight;
+				imgWidth = y * imgWidth;
 			}
 		}
 
-		var winW = imgW + 36;
+		var winWidth = imgWidth + 36;
 
-		if (winW < maxThumbnailDimension) {
-			winW = maxThumbnailDimension;
+		if (winWidth < maxDimension) {
+			winWidth = maxDimension;
 		}
 
 		var html =
-			"<div style='text-align: center; margin-top: 16px;'><img src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "' style='height: " + imgH + "px; width" + imgW + "px;' /></div>" +
+			"<div style='margin-top: 16px; text-align: center;'><img src='<%= themeDisplay.getPathImage() %>/image_gallery?img_id=" + id + "' style='height: " + imgHeight + "px; width" + imgWidth + "px;' /></div>" +
 			"<div style='text-align: center;'>" + name + "</div>";
 
-		var msgId = "<portlet:namespace />popup_" + id;
+		var messageId = "<portlet:namespace />popup_" + id;
 		var buttonsId = "<portlet:namespace />buttons_" + id;
 
 		var popup = Liferay.Popup({
-			width: winW,
+			width: winWidth,
 			modal: true,
 			noDraggable: true,
 			noTitleBar: true,
 			message: html,
-			messageId: msgId,
+			messageId: messageId,
 			onBeforeClose: function() {
 				var buttons = jQuery("#<portlet:namespace />buttons_" + id);
-				jQuery("#<portlet:namespace />buttons_container_" + id).append(buttons);
+
+				jQuery("#<portlet:namespace />buttonsContainer_" + id).append(buttons);
 			}
 		});
 
 		var buttons = jQuery("#" + buttonsId);
-		jQuery("#" + msgId).append(buttons);
+
+		jQuery("#" + messageId).append(buttons);
 	}
 </script>
 
-<div class="taglib-search-iterator-page-iterator-top">
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-</div>
+<c:if test="<%= results.size() > 0 %>">
+	<div class="taglib-search-iterator-page-iterator-top">
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+	</div>
+</c:if>
 
 <div>
-
-	<div style="clear: both;">
-		&nbsp;
-	</div>
 
 	<%
 	for (int i = 0; i < results.size(); i++) {
@@ -101,9 +103,9 @@
 		int sideMargin = (PropsValues.IG_IMAGE_THUMBNAIL_MAX_DIMENSION - smallImage.getWidth() + 20) / 2;
 	%>
 
-		<div style="float: left; margin: <%= String.valueOf(topMargin) %>px <%= String.valueOf(sideMargin) %>px 0px <%= String.valueOf(sideMargin) %>px;">
-			<div onClick="<portlet:namespace />popUp(<%= String.valueOf(largeImage.getImageId()) %>, '<%= image.getName() %>', <%= String.valueOf(largeImage.getWidth()) %>, <%= String.valueOf(largeImage.getHeight()) %>)">
-				<img src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= String.valueOf(smallImage.getImageId()) %>" style="height: <%= String.valueOf(smallImage.getHeight()) %>; width: <%= String.valueOf(smallImage.getWidth()) %>;" />
+		<div style="float: left; margin: <%= topMargin %>px <%= sideMargin %>px 0px <%= sideMargin %>px;">
+			<div onClick="<portlet:namespace />viewImage(<%= largeImage.getImageId() %>, '<%= image.getName() %>', <%= largeImage.getWidth() %>, <%= largeImage.getHeight() %>)">
+				<img src="<%= themeDisplay.getPathImage() %>/image_gallery?img_id=<%= smallImage.getImageId() %>" style="height: <%= smallImage.getHeight() %>; width: <%= smallImage.getWidth() %>;" />
 			</div>
 
 			<div style="text-align: center;">
@@ -122,8 +124,8 @@
 				</c:if>
 			</div>
 
-			<div id="<portlet:namespace />buttons_container_<%= String.valueOf(largeImage.getImageId()) %>" style="display: none;">
-				<div id="<portlet:namespace />buttons_<%= String.valueOf(largeImage.getImageId()) %>">
+			<div id="<portlet:namespace />buttonsContainer_<%= largeImage.getImageId() %>" style="display: none;">
+				<div id="<portlet:namespace />buttons_<%= largeImage.getImageId() %>">
 					<%@ include file="/html/portlet/image_gallery/image_action.jsp" %>
 				</div>
 			</div>
@@ -133,12 +135,10 @@
 	}
 	%>
 
-	<div style="clear: both;">
-		&nbsp;
+</div>
+
+<c:if test="<%= results.size() > 0 %>">
+	<div class="taglib-search-iterator-page-iterator-bottom">
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
 	</div>
-
-</div>
-
-<div class="taglib-search-iterator-page-iterator-bottom">
-	<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
-</div>
+</c:if>

@@ -55,6 +55,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/wiki/search");
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("nodeId", String.valueOf(nodeId));
 portletURL.setParameter("keywords", keywords);
 

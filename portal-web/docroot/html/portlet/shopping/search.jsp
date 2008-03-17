@@ -70,6 +70,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/shopping/search");
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
 portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));
 portletURL.setParameter("searchCategoryIds", String.valueOf(searchCategoryIds));

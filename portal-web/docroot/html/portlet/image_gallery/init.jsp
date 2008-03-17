@@ -42,7 +42,4 @@
 <%@ page import="com.liferay.portlet.imagegallery.service.permission.IGFolderPermission" %>
 <%@ page import="com.liferay.portlet.imagegallery.service.permission.IGImagePermission" %>
 <%@ page import="com.liferay.portlet.imagegallery.util.IGUtil" %>
-<%@ page import="java.math.BigDecimal" %>
-<%@ page import="org.apache.commons.math.util.MathUtils" %>
-<%@ page import="com.liferay.portlet.imagegallery.util.IGUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.webdav.IGWebDAVStorageImpl" %>

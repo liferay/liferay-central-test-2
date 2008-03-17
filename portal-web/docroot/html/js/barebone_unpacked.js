@@ -5977,6 +5977,7 @@ jQuery.fn.xySize = function() {
 
 			if (noTitleBar) {
 				var closeButton = jPopup.find(".popup-close");
+
 				closeButton.hide();
 
 				jPopup.find(".popup-inner").hover(

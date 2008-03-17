@@ -197,6 +197,8 @@
 <%@ page import="java.io.ByteArrayInputStream" %>
 <%@ page import="java.io.StringReader" %>
 
+<%@ page import="java.math.BigDecimal" %>
+
 <%@ page import="java.text.DateFormat" %>
 <%@ page import="java.text.DecimalFormat" %>
 <%@ page import="java.text.MessageFormat" %>
@@ -241,6 +243,7 @@
 <%@ page import="javax.portlet.ValidatorException" %>
 <%@ page import="javax.portlet.WindowState" %>
 
+<%@ page import="org.apache.commons.math.util.MathUtils" %>
 <%@ page import="org.apache.struts.Globals" %>
 
 <%@ page import="org.json.JSONArray" %>

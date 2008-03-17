@@ -70,6 +70,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/image_gallery/search");
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
 portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
 portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));
@@ -88,7 +89,6 @@ try {
 	searchContainer.setTotal(total);
 
 	List results = new ArrayList(resultHits.getLength());
-
 	List scores = new ArrayList(resultHits.getLength());
 
 	for (int i = 0; i < resultHits.getLength(); i++) {
@@ -96,13 +96,10 @@ try {
 
 		long imageId = GetterUtil.getLong(doc.get("imageId"));
 
-		IGImage image = null;
-
 		try {
-			image = IGImageLocalServiceUtil.getImage(imageId);
+			IGImage image = IGImageLocalServiceUtil.getImage(imageId);
 
 			results.add(image);
-
 			scores.add(new Double(resultHits.score(i)));
 		}
 		catch (Exception e) {

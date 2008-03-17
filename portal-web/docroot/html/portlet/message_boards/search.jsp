@@ -74,6 +74,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/message_boards/search");
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("breadcrumbsCategoryId", String.valueOf(breadcrumbsCategoryId));
 portletURL.setParameter("breadcrumbsMessageId", String.valueOf(breadcrumbsMessageId));
 portletURL.setParameter("searchCategoryId", String.valueOf(searchCategoryId));

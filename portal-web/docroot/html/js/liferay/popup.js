@@ -107,6 +107,7 @@
 
 			if (noTitleBar) {
 				var closeButton = jPopup.find(".popup-close");
+
 				closeButton.hide();
 
 				jPopup.find(".popup-inner").hover(
@@ -177,9 +178,9 @@
 
 			if (!noDraggable) {
 				if (false) {
-	
+
 					// jQuery Draggable is slow
-	
+
 					jPopup.Draggable(
 						{
 							handle: jPopup.find(".popup-header")[0],

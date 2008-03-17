@@ -22,7 +22,7 @@
  */
 %>
 
-<liferay-ui:icon-menu>
+<liferay-ui:icon-list>
 	<c:if test="<%= IGImagePermission.contains(permissionChecker, image, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 			<portlet:param name="struts_action" value="/image_gallery/edit_image" />
@@ -54,4 +54,4 @@
 
 		<liferay-ui:icon-delete url="<%= deleteURL %>" />
 	</c:if>
-</liferay-ui:icon-menu>
+</liferay-ui:icon-list>

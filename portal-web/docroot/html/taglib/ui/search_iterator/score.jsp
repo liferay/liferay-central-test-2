@@ -26,10 +26,6 @@
 
 <%@ page import="com.liferay.portal.kernel.dao.search.ScoreSearchEntry" %>
 
-<%@ page import="java.math.BigDecimal" %>
-
-<%@ page import="org.apache.commons.math.util.MathUtils" %>
-
 <%
 ScoreSearchEntry entry = (ScoreSearchEntry)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY);
 

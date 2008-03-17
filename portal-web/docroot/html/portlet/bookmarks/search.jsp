@@ -70,6 +70,7 @@ PortletURL portletURL = renderResponse.createRenderURL();
 portletURL.setWindowState(WindowState.MAXIMIZED);
 
 portletURL.setParameter("struts_action", "/bookmarks/search");
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("breadcrumbsFolderId", String.valueOf(breadcrumbsFolderId));
 portletURL.setParameter("searchFolderId", String.valueOf(searchFolderId));
 portletURL.setParameter("searchFolderIds", String.valueOf(searchFolderIds));

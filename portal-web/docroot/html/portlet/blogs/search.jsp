@@ -47,6 +47,7 @@ String keywords = ParamUtil.getString(request, "keywords");
 PortletURL portletURL = renderResponse.createRenderURL();
 
 portletURL.setParameter("struts_action", "/blogs/search");
+portletURL.setParameter("redirect", redirect);
 portletURL.setParameter("keywords", keywords);
 
 List headerNames = new ArrayList();

@@ -578,8 +578,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			int dimension)
 		throws IOException, SystemException {
 
-		RenderedImage thumbnail =
-			ImageUtil.scale(renderedImage, dimension, dimension);
+		RenderedImage thumbnail = ImageUtil.scale(
+			renderedImage, dimension, dimension);
 
 		ByteArrayMaker bam = new ByteArrayMaker();
 
