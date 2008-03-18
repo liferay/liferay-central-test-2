@@ -41,6 +41,7 @@ import com.liferay.util.FileUtil;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.io.File;
+import java.io.IOException;
 import java.io.InputStream;
 
 import org.apache.lucene.index.Term;
@@ -222,8 +223,18 @@ public class DLLocalServiceImpl implements DLLocalService {
 
 		validate(fileName);
 
-		if (is == null) {
-			throw new FileSizeException(fileName);
+		// LEP-4851
+
+		try {
+			if ((PropsValues.DL_FILE_MAX_SIZE > 0) &&
+				((is == null) ||
+				 (is.available() > PropsValues.DL_FILE_MAX_SIZE))) {
+
+				throw new FileSizeException(fileName);
+			}
+		}
+		catch (IOException ioe) {
+			throw new FileSizeException(ioe.getMessage());
 		}
 	}
 
