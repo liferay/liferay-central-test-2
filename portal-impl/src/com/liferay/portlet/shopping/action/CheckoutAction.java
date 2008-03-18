@@ -142,16 +142,6 @@ public class CheckoutAction extends CartAction {
 		}
 	}
 
-	protected void getLatestOrder(ActionRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(
-			themeDisplay.getUserId(), themeDisplay.getPortletGroupId());
-
-		req.setAttribute(WebKeys.SHOPPING_ORDER, order);
-	}
-
 	protected void forwardCheckout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
@@ -185,6 +175,20 @@ public class CheckoutAction extends CartAction {
 
 			res.sendRedirect(returnURL);
 		}
+	}
+
+	protected void getLatestOrder(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		ShoppingOrder order = ShoppingOrderLocalServiceUtil.getLatestOrder(
+			themeDisplay.getUserId(), themeDisplay.getPortletGroupId());
+
+		req.setAttribute(WebKeys.SHOPPING_ORDER, order);
+	}
+
+	protected boolean isCheckMethodOnProcessAction() {
+		return _CHECK_METHOD_ON_PROCESS_ACTION;
 	}
 
 	protected void saveLatestOrder(ActionRequest req) throws Exception {
@@ -259,5 +263,7 @@ public class CheckoutAction extends CartAction {
 
 		req.setAttribute(WebKeys.SHOPPING_ORDER, order);
 	}
+
+	private static final boolean _CHECK_METHOD_ON_PROCESS_ACTION = false;
 
 }
