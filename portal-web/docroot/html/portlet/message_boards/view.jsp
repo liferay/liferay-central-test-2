@@ -126,6 +126,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				List subcategories = MBCategoryLocalServiceUtil.getCategories(portletGroupId.longValue(), curCategory.getCategoryId(), 0, 5);
 
 				if (subcategories.size() > 0) {
+					int subcategoriesCount = MBCategoryLocalServiceUtil.getCategoriesCount(portletGroupId.longValue(), curCategory.getCategoryId());
+
 					sm.append("<br /><u>");
 					sm.append(LanguageUtil.get(pageContext, "subcategories"));
 					sm.append("</u>: ");
@@ -144,6 +146,17 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 						if ((j + 1) < subcategories.size()) {
 							sm.append(", ");
 						}
+					}
+
+					if (subcategoriesCount > subcategories.size()) {
+						rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));
+
+						sm.append(", <a href=\"");
+						sm.append(rowURL);
+						sm.append("\">");
+						sm.append(LanguageUtil.get(pageContext, "more"));
+						sm.append(" &raquo;");
+						sm.append("</a>");
 					}
 
 					rowURL.setParameter("categoryId", String.valueOf(curCategory.getCategoryId()));

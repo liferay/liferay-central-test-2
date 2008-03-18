@@ -118,6 +118,8 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			List subfolders = BookmarksFolderLocalServiceUtil.getFolders(portletGroupId.longValue(), curFolder.getFolderId(), 0, 5);
 
 			if (subfolders.size() > 0) {
+				int subfoldersCount = BookmarksFolderLocalServiceUtil.getFoldersCount(portletGroupId.longValue(), curFolder.getFolderId());
+
 				sm.append("<br /><u>");
 				sm.append(LanguageUtil.get(pageContext, "subfolders"));
 				sm.append("</u>: ");
@@ -138,6 +140,17 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					if ((j + 1) < subfolders.size()) {
 						sm.append(", ");
 					}
+				}
+
+				if (subfoldersCount > subfolders.size()) {
+					rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
+
+					sm.append(", <a href=\"");
+					sm.append(rowURL);
+					sm.append("\">");
+					sm.append(LanguageUtil.get(pageContext, "more"));
+					sm.append(" &raquo;");
+					sm.append("</a>");
 				}
 
 				rowURL.setParameter("folderId", String.valueOf(curFolder.getFolderId()));
