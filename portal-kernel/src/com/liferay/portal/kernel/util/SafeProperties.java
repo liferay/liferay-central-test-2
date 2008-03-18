@@ -39,23 +39,17 @@ public class SafeProperties extends Properties {
 	public synchronized Object get(Object key) {
 		Object value = super.get(key);
 
-		value = _decodeNewlines((String)value);
+		value = _decode((String)value);
 
 		return value;
 	}
 
-	public synchronized String getProperty(String key) {
-		return getProperty(key, false);
+	public String getEncodedProperty(String key) {
+		return super.getProperty(key);
 	}
 
-	public synchronized String getProperty(String key, boolean encodeNewlines) {
-		String value = super.getProperty(key);
-
-		if (!encodeNewlines) {
-			value = _decodeNewlines(value);
-		}
-
-		return value;
+	public String getProperty(String key) {
+		return (String)get(key);
 	}
 
 	public synchronized Object put(Object key, Object value) {
@@ -67,14 +61,14 @@ public class SafeProperties extends Properties {
 				return super.remove(key);
 			}
 			else {
-				value = _encodeNewlines((String)value);
+				value = _encode((String)value);
 
 				return super.put(key, value);
 			}
 		}
 	}
 
-	public Object remove(Object key) {
+	public synchronized Object remove(Object key) {
 		if (key == null) {
 			return null;
 		}
@@ -83,12 +77,12 @@ public class SafeProperties extends Properties {
 		}
 	}
 
-	private static String _decodeNewlines(String value) {
+	private static String _decode(String value) {
 		return StringUtil.replace(
 			value, _SAFE_NEWLINE_CHARACTER, StringPool.NEW_LINE);
 	}
 
-	private static String _encodeNewlines(String value) {
+	private static String _encode(String value) {
 		return StringUtil.replace(
 			value,
 			new String[] {

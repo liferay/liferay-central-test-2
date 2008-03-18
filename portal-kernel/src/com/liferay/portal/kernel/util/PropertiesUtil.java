@@ -163,10 +163,12 @@ public class PropertiesUtil {
 	}
 
 	public static String toString(Properties p) {
-		return toString(p, false);
-	}
+		SafeProperties safeProperties = null;
 
-	public static String toString(Properties p, boolean encodeNewlines) {
+		if (p instanceof SafeProperties) {
+			safeProperties = (SafeProperties)p;
+		}
+
 		StringMaker sm = new StringMaker();
 
 		Enumeration enu = p.propertyNames();
@@ -176,14 +178,15 @@ public class PropertiesUtil {
 
 			sm.append(key);
 			sm.append(StringPool.EQUAL);
-			if (encodeNewlines && p instanceof SafeProperties) {
-				SafeProperties sp = (SafeProperties)p;
-				sm.append(sp.getProperty(key, true));
+
+			if (safeProperties != null) {
+				sm.append(safeProperties.getEncodedProperty(key));
 			}
 			else {
 				sm.append(p.getProperty(key));
 			}
-			sm.append("\n");
+
+			sm.append(StringPool.NEW_LINE);
 		}
 
 		return sm.toString();
