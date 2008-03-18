@@ -294,6 +294,9 @@ public class PropsValues {
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.IG_IMAGE_THUMBNAIL_MAX_DIMENSION));
 
+	public static final String IMAGE_PROCESSOR_READER =
+		PropsUtil.get(PropsUtil.IMAGE_PROCESSOR_READER);
+
 	public static final boolean JABBER_XMPP_SERVER_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JABBER_XMPP_SERVER_ENABLED));

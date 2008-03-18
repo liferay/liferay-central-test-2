@@ -25,6 +25,7 @@ package com.liferay.portal.image;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.util.JavaProps;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
 
 import com.sun.media.jai.codec.ImageCodec;
@@ -41,14 +42,11 @@ import java.awt.image.SampleModel;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 
-import java.util.Iterator;
+import java.util.Enumeration;
 
 import javax.imageio.ImageIO;
-import javax.imageio.ImageReader;
-import javax.imageio.stream.FileCacheImageInputStream;
 
 import javax.media.jai.RenderedImageAdapter;
 
@@ -64,6 +62,12 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ImageProcessorImpl implements ImageProcessor {
+
+	public ImageProcessorImpl() {
+		if (PropsValues.IMAGE_PROCESSOR_READER.equals("imageio")) {
+			_readWithImageIO = true;
+		}
+	}
 
 	public BufferedImage convertImageType(BufferedImage sourceImage, int type) {
 	    BufferedImage targetImage = new BufferedImage(
@@ -156,101 +160,41 @@ public class ImageProcessorImpl implements ImageProcessor {
 	}
 
 	public ImageBag read(byte[] bytes) throws IOException {
-		RenderedImage renderedImage = null;
+		if (_readWithImageIO) {
+		}
+		else {
+		}
+
 		String type = null;
 
-		InputStream is = null;
-		FileCacheImageInputStream fcis = null;
+		Enumeration enu = ImageCodec.getCodecs();
 
-		try {
-			is = new ByteArrayInputStream(bytes);
-			fcis = new FileCacheImageInputStream(is, null);
+		while (enu.hasMoreElements()) {
+			ImageCodec codec = (ImageCodec)enu.nextElement();
 
-			Iterator itr = ImageIO.getImageReaders(fcis);
+			if (codec.isFormatRecognized(bytes)) {
+				type = codec.getFormatName();
 
-			if (itr.hasNext()) {
-				ImageReader reader = (ImageReader)itr.next();
-
-				String[] suffixes =
-					reader.getOriginatingProvider().getFileSuffixes();
-
-				if (suffixes != null) {
-                    type = suffixes[0];
-                }
-
-                reader.dispose();
-			}
-
-			if (type != null) {
-				renderedImage = ImageIO.read(fcis);
-			}
-
-			if (renderedImage == null) {
-				renderedImage = _getRenderedImage("BMP", bytes);
-
-				if (renderedImage != null) {
-					type = TYPE_BMP;
-				}
-			}
-
-			if (renderedImage == null) {
-				renderedImage = _getRenderedImage("TIFF", bytes);
-
-				if (renderedImage != null) {
-					type = TYPE_TIFF;
-				}
-			}
-
-			if (renderedImage == null) {
-				renderedImage = _getRenderedImage("GIF", bytes);
-
-				if (renderedImage != null) {
-					type = TYPE_GIF;
-				}
-			}
-
-			if (renderedImage == null) {
-				renderedImage = _getRenderedImage("JPEG", bytes);
-
-				if (renderedImage != null) {
-					type = TYPE_JPEG;
-				}
-			}
-
-			if (renderedImage == null) {
-				renderedImage = _getRenderedImage("PNG", bytes);
-
-				if (renderedImage != null) {
-					type = TYPE_PNG;
-				}
-			}
-		}
-		finally {
-			if (is != null) {
-				try {
-					is.close();
-				}
-				catch (IOException ioe) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(ioe);
-					}
-				}
-			}
-
-			if (fcis != null) {
-				try {
-					fcis.close();
-				}
-				catch (IOException ioe) {
-					if (_log.isDebugEnabled()) {
-						_log.debug(ioe);
-					}
-				}
+				break;
 			}
 		}
 
 		if (type == null) {
-			type = TYPE_NOT_AVAILABLE;
+			return new ImageBag(null, TYPE_NOT_AVAILABLE);
+		}
+
+		RenderedImage renderedImage = null;
+
+		ImageDecoder decoder = ImageCodec.createImageDecoder(
+			type, new ByteArrayInputStream(bytes), null);
+
+		try {
+			renderedImage = decoder.decodeAsRenderedImage();
+		}
+		catch (IOException ioe) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(type + ": " + ioe.getMessage());
+			}
 		}
 
 		return new ImageBag(renderedImage, type);
@@ -293,40 +237,6 @@ public class ImageProcessorImpl implements ImageProcessor {
 		return scaledBufferedImage;
 	}
 
-	private RenderedImage _getRenderedImage(String name, byte[] bytes) {
-		RenderedImage renderedImage = null;
-
-		InputStream is = null;
-
-		try {
-			is = new ByteArrayInputStream(bytes);
-
-			ImageDecoder decoder = ImageCodec.createImageDecoder(
-				name, is, null);
-
-			renderedImage = decoder.decodeAsRenderedImage();
-		}
-		catch (Exception e) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(name + ": " + e.getMessage());
-			}
-		}
-		finally {
-			if (is != null) {
-				try {
-					is.close();
-				}
-				catch (IOException ioe) {
-					if (_log.isWarnEnabled()) {
-						_log.warn(ioe);
-					}
-				}
-			}
-		}
-
-		return renderedImage;
-	}
-
 	private byte[] _toMultiByte(int intValue) {
 		int numBits = 32;
 		int mask = 0x80000000;
@@ -353,5 +263,7 @@ public class ImageProcessorImpl implements ImageProcessor {
 	}
 
 	private static Log _log = LogFactory.getLog(ImageProcessorImpl.class);
+
+	private boolean _readWithImageIO;
 
 }
