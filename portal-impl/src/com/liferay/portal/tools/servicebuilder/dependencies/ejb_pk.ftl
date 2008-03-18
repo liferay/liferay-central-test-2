@@ -101,9 +101,11 @@ public class ${entity.PKClassName} implements Comparable<${entity.PKClassName}>,
 		}
 
 		${entity.PKClassName} pk = null;
+
 		try {
 			pk = (${entity.PKClassName})obj;
-		}catch (ClassCastException cce) {
+		}
+		catch (ClassCastException cce) {
 			return false;
 		}
 
