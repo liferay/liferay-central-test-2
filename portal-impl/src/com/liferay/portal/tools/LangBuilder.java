@@ -25,6 +25,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.portlet.translator.model.Translation;
 import com.liferay.portlet.translator.util.TranslationWebCacheItem;
 import com.liferay.util.FileUtil;
@@ -48,6 +49,10 @@ import java.util.TreeSet;
  *
  */
 public class LangBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 2) {
