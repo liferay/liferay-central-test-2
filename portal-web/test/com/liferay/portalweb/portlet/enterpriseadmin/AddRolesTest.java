@@ -44,8 +44,24 @@ public class AddRolesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("Link=Define Permissions");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"1 Selenium Message Boards Role and Calendar Role"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"1 Selenium Message Boards Role and Calendar Role")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("//input[@value='Add Portlet Permissions']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Calendar");

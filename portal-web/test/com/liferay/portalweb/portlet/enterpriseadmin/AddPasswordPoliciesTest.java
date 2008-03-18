@@ -51,7 +51,23 @@ public class AddPasswordPoliciesTest extends BaseTestCase {
 		selenium.typeKeys("_79_name", "test");
 		selenium.click("//input[@value='Search Password Policies']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a test password policy!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("This is a test password policy!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}

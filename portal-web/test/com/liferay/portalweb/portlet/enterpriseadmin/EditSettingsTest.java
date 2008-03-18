@@ -45,7 +45,23 @@ public class EditSettingsTest extends BaseTestCase {
 		selenium.click("_79_primaryCheckbox");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("admin@liferay.com"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("admin@liferay.com")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}

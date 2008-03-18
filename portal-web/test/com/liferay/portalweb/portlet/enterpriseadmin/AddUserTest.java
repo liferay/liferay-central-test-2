@@ -90,7 +90,37 @@ public class AddUserTest extends BaseTestCase {
 			"selenium");
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("selen01"));
-		verifyTrue(selenium.isTextPresent("selen02"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("selen01")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("selen02")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
