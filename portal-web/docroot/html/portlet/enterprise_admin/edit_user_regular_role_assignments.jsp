@@ -61,6 +61,10 @@ portletURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 <input name="<portlet:namespace />addRoleIds" type="hidden" value="" />
 <input name="<portlet:namespace />removeRoleIds" type="hidden" value="" />
 
+<liferay-ui:message key="edit-roles-for-user" /> <%= user2.getFullName() %>
+
+<br /><br />
+
 <liferay-ui:tabs
 	names="assign-regular-roles"
 	backURL="<%= redirect %>"
