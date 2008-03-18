@@ -93,8 +93,6 @@ if (curTagsParam != null) {
 					summarySpan: "<%= randomNamespace %>tagsSummary",
 					curTags: "<%= curTags %>",
 					focus: <%= focus %>,
-                    addTagButton: "<%= randomNamespace %>addTag",
-					selectTagButton: '<%= randomNamespace %>selectTag',
 					contentCallback: function() {
 						return <%= contentCallback %>();
 					}

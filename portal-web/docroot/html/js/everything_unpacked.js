@@ -21152,6 +21152,7 @@ Liferay.TagsSelector = new Class({
 
 		instance._update();
 	},
+
 	_createPopup: function() {
 		var instance = this;
 
@@ -21169,7 +21170,7 @@ Liferay.TagsSelector = new Class({
 					function(){
 						var currentIndex = instance._curTags.indexOf(this.value);
 						if (this.checked) {
-							if (currentIndex == -1) {							
+							if (currentIndex == -1) {
 								instance._curTags.push(this.value);
 							}
 						}
@@ -21215,6 +21216,7 @@ Liferay.TagsSelector = new Class({
 			);
 		}
 	},
+
 	_getTags: function(data) {
 		var beginning = data.start || 0;
 		var end = data.end || 20;
@@ -21269,6 +21271,7 @@ Liferay.TagsSelector = new Class({
 		var ns = instance._ns;
 		var mainContainer = instance._mainContainer;
 		var container = instance._container;
+
 		mainContainer.empty();
 		container.empty();
 
@@ -21325,9 +21328,9 @@ Liferay.TagsSelector = new Class({
 
 		var params = instance.params;
 		var ns = instance._ns;
-		var contentCallback = params.contentCallback;
 		var mainContainer = instance._mainContainer;
 		var container = instance._container;
+
 		mainContainer.empty();
 		container.empty();
 
