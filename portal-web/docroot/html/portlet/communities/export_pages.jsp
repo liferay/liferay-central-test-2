@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/communities/init.jsp" %>
 
 <%
-String tabs2 = ParamUtil.getString(request, "tabs2", "public-pages");
+String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
 
 String pagesRedirect = ParamUtil.getString(request, "pagesRedirect");
 
@@ -90,7 +90,7 @@ for (int i = 0; i < selectedPlids.length; i++) {
 	}
 }
 
-boolean privateLayout = tabs2.equals("private-pages");
+boolean privateLayout = tabs1.equals("private-pages");
 
 if (privateLayout) {
 	pagesCount = selGroup.getPrivateLayoutsPageCount();
@@ -174,7 +174,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 </style>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />exportPagesFm">
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
 <input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= pagesRedirect %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
@@ -194,7 +194,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 
 <portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="selectURL">
 	<portlet:param name="struts_action" value="/communities/export_pages" />
-	<portlet:param name="tabs2" value="<%= tabs2 %>" />
+	<portlet:param name="tabs1" value="<%= tabs1 %>" />
 	<portlet:param name="pagesRedirect" value="<%= pagesRedirect %>" />
 	<portlet:param name="groupId" value="<%= String.valueOf(selGroupId) %>" />
 </portlet:renderURL>

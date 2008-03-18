@@ -195,22 +195,70 @@ public class StagingUtil {
 	public static Map getStagingParameters(ActionRequest req) {
 		Map parameterMap = new LinkedHashMap(req.getParameterMap());
 
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_ALL, Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.THEME, Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			Boolean.TRUE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
-			Boolean.FALSE.toString());
-		parameterMap.put(
-			PortletDataHandlerKeys.DATA_STRATEGY,
-			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
-		parameterMap.put(
-			PortletDataHandlerKeys.USER_ID_STRATEGY,
-			UserIdStrategy.CURRENT_USER_ID);
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.PORTLET_DATA)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.PORTLET_DATA,
+				Boolean.FALSE.toString());
+		}
+
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.PORTLET_DATA_ALL)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.PORTLET_DATA_ALL,
+				Boolean.FALSE.toString());
+		}
+
+		if (!parameterMap.containsKey(PortletDataHandlerKeys.PORTLET_SETUP)) {
+			parameterMap.put(
+				PortletDataHandlerKeys.PORTLET_SETUP,
+				Boolean.TRUE.toString());
+		}
+
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.PORTLET_USER_PREFERENCES)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
+				Boolean.TRUE.toString());
+		}
+
+		if (!parameterMap.containsKey(PortletDataHandlerKeys.THEME)) {
+			parameterMap.put(
+				PortletDataHandlerKeys.THEME, Boolean.FALSE.toString());
+		}
+
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+				Boolean.TRUE.toString());
+		}
+
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.DELETE_PORTLET_DATA)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.DELETE_PORTLET_DATA,
+				Boolean.FALSE.toString());
+		}
+
+		if (!parameterMap.containsKey(PortletDataHandlerKeys.DATA_STRATEGY)) {
+			parameterMap.put(
+				PortletDataHandlerKeys.DATA_STRATEGY,
+				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
+		}
+
+		if (!parameterMap.containsKey(
+				PortletDataHandlerKeys.USER_ID_STRATEGY)) {
+
+			parameterMap.put(
+				PortletDataHandlerKeys.USER_ID_STRATEGY,
+				UserIdStrategy.CURRENT_USER_ID);
+		}
 
 		return parameterMap;
 	}

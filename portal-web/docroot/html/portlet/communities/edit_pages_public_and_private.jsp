@@ -37,7 +37,6 @@
 						<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="proposalURL">
 							<portlet:param name="struts_action" value="/communities/edit_proposal" />
 							<portlet:param name="tabs1" value="<%= tabs1 %>" />
-							<portlet:param name="tabs2" value="<%= tabs2 %>" />
 							<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.ADD %>" />
 							<portlet:param name="redirect" value="<%= currentURL %>" />
 							<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
@@ -88,7 +87,6 @@
 					<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="exportLayoutsURL">
 						<portlet:param name="struts_action" value="/communities/export_pages" />
 						<portlet:param name="tabs1" value="<%= tabs1 %>" />
-						<portlet:param name="tabs2" value="<%= tabs2 %>" />
 						<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
 					</portlet:renderURL>
@@ -101,7 +99,6 @@
 		<portlet:renderURL windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>" var="importLayoutsURL">
 			<portlet:param name="struts_action" value="/communities/export_pages" />
 			<portlet:param name="tabs1" value="<%= tabs1 %>" />
-			<portlet:param name="tabs2" value="<%= tabs2 %>" />
 			<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 			<portlet:param name="groupId" value="<%= String.valueOf(liveGroupId) %>" />
 		</portlet:renderURL>
