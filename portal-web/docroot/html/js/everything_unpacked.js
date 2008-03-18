@@ -11993,7 +11993,8 @@ var jQBrowser2 = function() {
 
         // Initially set to false, if detected one of the following operating
         // systems will be updated.
-           'iphone': false, 
+           'iphone': false,
+             'ipod': false,
 			'linux': false,
               'mac': false,
               'win': false
@@ -12155,7 +12156,11 @@ var jQBrowser2 = function() {
                 },
 				{ // iPhone <http://www.apple.com/iphone>
 						  'name': 'iPhone',
-						    'OS': /iPhone/.test(pl) 
+						    'OS': /iPhone/.test(pl)
+				},
+				{ // iPod <http://www.apple.com/ipodtouch>
+						  'name': 'iPod',
+						    'OS': /iPod/.test(pl)
 				}
            ];
        i < data.length;
@@ -12232,7 +12237,8 @@ var jQBrowser2 = function() {
 
         // A boolean value indicating whether or not the given OS was
         // detected.
-		   'iphone': Private.iphone, 
+		   'iphone': Private.iphone,
+		     'ipod': Private.ipod,
             'linux': Private.linux,
               'mac': Private.mac,
               'win': Private.win
@@ -12258,7 +12264,7 @@ var jQBrowser2 = function() {
 																: jQuery.browser.aol // AOL
 																 	? 'aol ' + bn + bv
 																	: '',
-		os=jQuery.browser.linux?'linux':jQuery.browser.iphone?'iphone':jQuery.browser.mac?'mac':jQuery.browser.win?'win':'';
+		os=jQuery.browser.linux?'linux':jQuery.browser.iphone?'iphone':jQuery.browser.ipod?'ipod':jQuery.browser.mac?'mac':jQuery.browser.win?'win':'';
 		jQuery('html').addClass(b).addClass(os).addClass('js');
 }();
 
@@ -21017,6 +21023,9 @@ Liferay.TagsSelector = new Class({
 		instance._curTags = [];
 
 		instance.params = params;
+		instance._ns = instance.params.instanceVar || '';
+		instance._mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
+		instance._container = jQuery('<div class="lfr-tag-container"></div>');
 
 		var hiddenInput = jQuery('#' + params.hiddenInput);
 
@@ -21075,7 +21084,7 @@ Liferay.TagsSelector = new Class({
 							n = jQuery.trim(n);
 
 							if (curTags.indexOf(n) == -1) {
-								if (n != "") {
+								if (n != '') {
 									curTags.push(n);
 
 									if (instance._popupVisible) {
@@ -21133,7 +21142,7 @@ Liferay.TagsSelector = new Class({
 		var params = instance.params;
 		var curTags = instance._curTags;
 
-		jQuery('#' + params.instanceVar + 'CurTags' + id).remove();
+		jQuery('#' + instance._ns + 'CurTags' + id).remove();
 
 		var value = curTags.splice(id, 1);
 
@@ -21143,7 +21152,69 @@ Liferay.TagsSelector = new Class({
 
 		instance._update();
 	},
+	_createPopup: function() {
+		var instance = this;
 
+		var ns = instance._ns;
+		var container = instance._container;
+		var mainContainer = instance._mainContainer;
+
+		var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + ns + 'saveButton" type="submit" value="' + Liferay.Language.get('save') + '" />');
+
+		saveBtn.click(
+			function() {
+				instance._curTags = instance._curTags.length ? instance._curTags : [];
+
+				container.find('input[@type=checkbox]').each(
+					function(){
+						var currentIndex = instance._curTags.indexOf(this.value);
+						if (this.checked) {
+							if (currentIndex == -1) {							
+								instance._curTags.push(this.value);
+							}
+						}
+						else {
+							if (currentIndex > -1) {
+								instance._curTags.splice(currentIndex, 1);
+							}
+						}
+					}
+				);
+
+				instance._update();
+				Liferay.Popup.close(instance.selectTagPopup);
+			}
+		);
+
+		mainContainer.append(container).append(saveBtn);
+
+		if (!instance.selectTagPopup) {
+			var popup = Liferay.Popup(
+				{
+					modal: false,
+					height: 300,
+					width: 400,
+					message: mainContainer[0],
+					onClose: function() {
+						instance._popupVisible = false;
+						instance.selectTagPopup = null;
+					}
+				}
+			);
+			instance.selectTagPopup = popup;
+		}
+		instance._popupVisible = true;
+
+		if (Liferay.Browser.is_ie) {
+			jQuery('.lfr-label-text', popup).click(
+				function() {
+					var input = jQuery(this.previousSibling);
+					var checkedState = !input.is(':checked');
+					input.attr('checked', checkedState);
+				}
+			);
+		}
+	},
 	_getTags: function(data) {
 		var beginning = data.start || 0;
 		var end = data.end || 20;
@@ -21165,7 +21236,7 @@ Liferay.TagsSelector = new Class({
 		var instance = this;
 
 		var params = instance.params;
-		var ns = params.instanceVar;
+		var ns = instance._ns;
 
 		var input = jQuery('#' + ns + 'selectTag');
 
@@ -21180,7 +21251,7 @@ Liferay.TagsSelector = new Class({
 		var instance = this;
 
 		var params = instance.params;
-		var ns = params.instanceVar;
+		var ns = instance._ns;
 
 		var input = jQuery('#' + ns + 'suggestions');
 
@@ -21195,9 +21266,11 @@ Liferay.TagsSelector = new Class({
 		var instance = this;
 
 		var params = instance.params;
-		var ns = params.instanceVar;
-		var mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
-		var container = jQuery('<div class="lfr-tag-container"></div>');
+		var ns = instance._ns;
+		var mainContainer = instance._mainContainer;
+		var container = instance._container;
+		mainContainer.empty();
+		container.empty();
 
 		var categories = Liferay.Service.Tags.TagsProperty.getPropertyValues(
 			{
@@ -21244,60 +21317,19 @@ Liferay.TagsSelector = new Class({
 			}
 		);
 
-		var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + ns + 'saveButton" type="submit" value="' + Liferay.Language.get('save') + '" />');
-
-		saveBtn.click(
-			function() {
-				instance._curTags = [];
-
-				container.find('input:checked').each(
-					function(){
-						instance._curTags.push(this.value);
-					}
-				);
-
-				instance._update();
-				Liferay.Popup.close(instance.selectTagPopup);
-				instance._popupVisible = false;
-			}
-		);
-
-		mainContainer.append(container).append(saveBtn);
-
-		var popup = Liferay.Popup(
-			{
-				modal: false,
-				height: 300,
-				width: 400,
-				message: mainContainer[0],
-				onClose: function() {
-					instance._popupVisible = false;
-				}
-			}
-		);
-
-		instance.selectTagPopup = popup;
-		instance._popupVisible = true;
-
-		if (Liferay.Browser.is_ie) {
-			jQuery('.lfr-label-text', popup).click(
-				function() {
-					var input = jQuery(this.previousSibling);
-					var checkedState = !input.is(':checked');
-					input.attr('checked', checkedState);
-				}
-			);
-		}
+		instance._createPopup();
 	},
 
 	_showSuggestionsPopup: function() {
 		var instance = this;
 
 		var params = instance.params;
-		var ns = params.instanceVar;
+		var ns = instance._ns;
 		var contentCallback = params.contentCallback;
-		var mainContainer = jQuery('<div class="lfr-tag-select-container"></div>');
-		var container = jQuery('<div class="lfr-tag-container"></div>');
+		var mainContainer = instance._mainContainer;
+		var container = instance._container;
+		mainContainer.empty();
+		container.empty();
 
 		var context = '';
 
@@ -21339,50 +21371,7 @@ Liferay.TagsSelector = new Class({
 			}
 		);
 
-		var saveBtn = jQuery('<input class="submit lfr-save-button" id="' + ns + 'saveButton" type="submit" value="' + Liferay.Language.get('save') + '" />');
-
-		saveBtn.click(
-			function() {
-				instance._curTags = [];
-
-				container.find('input:checked').each(
-					function(){
-						instance._curTags.push(this.value);
-					}
-				);
-
-				instance._update();
-				Liferay.Popup.close(instance.selectTagPopup);
-				instance._popupVisible = false;
-			}
-		);
-
-		mainContainer.append(container).append(saveBtn);
-
-		var popup = Liferay.Popup(
-			{
-				modal: false,
-				height: 300,
-				width: 400,
-				message: mainContainer[0],
-				onClose: function() {
-					instance._popupVisible = false;
-				}
-			}
-		);
-
-		instance.selectTagPopup = popup;
-		instance._popupVisible = true;
-
-		if (Liferay.Browser.is_ie) {
-			jQuery('.lfr-label-text', popup).click(
-				function() {
-					var input = jQuery(this.previousSibling);
-					var checkedState = !input.is(':checked');
-					input.attr('checked', checkedState);
-				}
-			);
-		}
+		instance._createPopup();
 	},
 
 	_update: function() {
@@ -21413,9 +21402,9 @@ Liferay.TagsSelector = new Class({
 
 		jQuery(curTags).each(
 			function(i, curTag) {
-				html += '<span id="' + params.instanceVar + 'CurTags' + i + '">';
+				html += '<span id="' + instance._ns + 'CurTags' + i + '">';
 				html += curTag + ' ';
-				html += '[<a href="javascript: ' + params.instanceVar + '.deleteTag(' + i + ');">x</a>]';
+				html += '[<a href="javascript: ' + instance._ns + '.deleteTag(' + i + ');">x</a>]';
 
 				if ((i + 1) < curTags.length) {
 					html += ', ';
