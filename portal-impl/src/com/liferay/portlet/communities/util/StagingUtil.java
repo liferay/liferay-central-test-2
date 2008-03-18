@@ -66,7 +66,7 @@ import org.apache.commons.logging.LogFactory;
 public class StagingUtil {
 
 	public static void copyFromLive(ActionRequest req) throws Exception {
-		String tabs2 = ParamUtil.getString(req, "tabs2");
+		String tabs1 = ParamUtil.getString(req, "tabs1");
 
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
 
@@ -74,7 +74,7 @@ public class StagingUtil {
 
 		boolean privateLayout = true;
 
-		if (tabs2.equals("public-pages")) {
+		if (tabs1.equals("public-pages")) {
 			privateLayout = false;
 		}
 
@@ -360,7 +360,7 @@ public class StagingUtil {
 	}
 
 	public static void publishToLive(ActionRequest req) throws Exception {
-		String tabs2 = ParamUtil.getString(req, "tabs2");
+		String tabs1 = ParamUtil.getString(req, "tabs1");
 
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");
 
@@ -368,7 +368,7 @@ public class StagingUtil {
 
 		boolean privateLayout = true;
 
-		if (tabs2.equals("public-pages")) {
+		if (tabs1.equals("public-pages")) {
 			privateLayout = false;
 		}
 

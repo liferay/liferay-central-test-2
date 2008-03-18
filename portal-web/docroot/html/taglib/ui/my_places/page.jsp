@@ -104,7 +104,7 @@ List myPlaces = user.getMyPlaces();
 				publicAddPageURL.setPortletMode(PortletMode.VIEW);
 
 				publicAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
-				publicAddPageURL.setParameter("tabs2", "public-pages");
+				publicAddPageURL.setParameter("tabs1", "public-pages");
 				publicAddPageURL.setParameter("redirect", currentURL);
 				publicAddPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 
@@ -118,7 +118,7 @@ List myPlaces = user.getMyPlaces();
 				privateAddPageURL.setPortletMode(PortletMode.VIEW);
 
 				privateAddPageURL.setParameter("struts_action", "/my_account/edit_pages");
-				privateAddPageURL.setParameter("tabs2", "private-pages");
+				privateAddPageURL.setParameter("tabs1", "private-pages");
 				privateAddPageURL.setParameter("redirect", currentURL);
 				privateAddPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 

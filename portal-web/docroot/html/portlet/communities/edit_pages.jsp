@@ -26,9 +26,9 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "public-pages");
-String tabs2 = ParamUtil.getString(request, "tabs2", StringPool.BLANK);
-String tabs3 = ParamUtil.getString(request, "tabs3", StringPool.BLANK);
-String tabs4 = ParamUtil.getString(request, "tabs4", StringPool.BLANK);
+String tabs2 = ParamUtil.getString(request, "tabs2");
+String tabs3 = ParamUtil.getString(request, "tabs3");
+String tabs4 = ParamUtil.getString(request, "tabs4");
 
 String redirect = ParamUtil.getString(request, "redirect");
 String backURL = ParamUtil.getString(request, "backURL", redirect);
