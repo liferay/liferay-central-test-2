@@ -20,50 +20,51 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
+package com.liferay.portal.kernel.image;
 
-import com.liferay.portal.kernel.image.ImageProcessor;
-import com.liferay.portal.kernel.util.Base64;
-import com.liferay.portal.model.Image;
+import java.awt.image.BufferedImage;
+import java.awt.image.RenderedImage;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
 
 /**
- * <a href="ImageImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImageProcessor.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ImageImpl extends ImageModelImpl implements Image {
+public interface ImageProcessor {
 
-	public static final String TYPE_BMP = ImageProcessor.TYPE_BMP;
+	public static final String TYPE_BMP = "bmp";
 
-	public static final String TYPE_GIF = ImageProcessor.TYPE_GIF;
+	public static final String TYPE_GIF = "gif";
 
-	public static final String TYPE_JPEG = ImageProcessor.TYPE_JPEG;
+	public static final String TYPE_JPEG = "jpg";
 
-	public static final String TYPE_PNG = ImageProcessor.TYPE_PNG;
+	public static final String TYPE_PNG = "png";
 
-	public static final String TYPE_TIFF = ImageProcessor.TYPE_TIFF;
+	public static final String TYPE_TIFF = "tiff";
 
-	public static final String TYPE_NOT_AVAILABLE =
-		ImageProcessor.TYPE_NOT_AVAILABLE;
+	public static final String TYPE_NOT_AVAILABLE = "na";
 
-	public ImageImpl() {
-	}
+	public BufferedImage convertImageType(
+		BufferedImage sourceImage, int type);
 
-	public byte[] getTextObj() {
-		if (_textObj == null) {
-			_textObj = (byte[])Base64.stringToObject(getText());
-		}
+	public void encodeGIF(RenderedImage renderedImage, OutputStream out)
+		throws IOException;
 
-		return _textObj;
-	}
+	public void encodeWBMP(RenderedImage renderedImage, OutputStream out)
+		throws InterruptedException, IOException;
 
-	public void setTextObj(byte[] textObj) {
-		_textObj = textObj;
+	public BufferedImage getBufferedImage(RenderedImage renderedImage);
 
-		super.setText(Base64.objectToString(textObj));
-	}
+	public ImageBag read(File file) throws IOException;
 
-	private byte[] _textObj;
+	public ImageBag read(byte[] bytes) throws IOException;
+
+	public RenderedImage scale(
+		RenderedImage renderedImage, int maxHeight, int maxWidth);
 
 }

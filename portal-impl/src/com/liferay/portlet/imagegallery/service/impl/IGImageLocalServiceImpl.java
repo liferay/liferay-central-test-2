@@ -24,6 +24,8 @@ package com.liferay.portlet.imagegallery.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.image.ImageProcessor;
+import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -45,7 +47,6 @@ import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.service.base.IGImageLocalServiceBaseImpl;
 import com.liferay.portlet.imagegallery.util.Indexer;
 import com.liferay.util.FileUtil;
-import com.liferay.util.ImageUtil;
 
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageEncoder;
@@ -135,7 +136,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 			User user = userPersistence.findByPrimaryKey(userId);
 			IGFolder folder = igFolderPersistence.findByPrimaryKey(folderId);
-			RenderedImage renderedImage = ImageUtil.read(
+			RenderedImage renderedImage = ImageProcessorUtil.read(
 				file).getRenderedImage();
 			Date now = new Date();
 
@@ -446,7 +447,8 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			byte[] bytes = null;
 
 			if ((file != null) && file.exists()) {
-				renderedImage = ImageUtil.read(file).getRenderedImage();
+				renderedImage = ImageProcessorUtil.read(
+					file).getRenderedImage();
 				bytes = FileUtil.getBytes(file);
 
 				validate(bytes);
@@ -578,7 +580,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			int dimension)
 		throws IOException, SystemException {
 
-		RenderedImage thumbnail = ImageUtil.scale(
+		RenderedImage thumbnail = ImageProcessorUtil.scale(
 			renderedImage, dimension, dimension);
 
 		ByteArrayMaker bam = new ByteArrayMaker();
@@ -590,7 +592,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			encoder.encode(thumbnail);
 		}
 		else if (contentType.indexOf("gif") != -1) {
-			ImageUtil.encodeGIF(thumbnail, bam);
+			ImageProcessorUtil.encodeGIF(thumbnail, bam);
 		}
 		else if (contentType.indexOf("jpg") != -1 ||
 				 contentType.indexOf("jpeg") != -1) {
@@ -664,10 +666,10 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 		List<IGImage> images = igImagePersistence.findByF_N(folderId, name);
 
 		if (imageType.equals("jpeg")) {
-			imageType = ImageUtil.TYPE_JPEG;
+			imageType = ImageProcessor.TYPE_JPEG;
 		}
 		else if (imageType.equals("tif")) {
-			imageType = ImageUtil.TYPE_TIFF;
+			imageType = ImageProcessor.TYPE_TIFF;
 		}
 
 		for (IGImage image : images) {

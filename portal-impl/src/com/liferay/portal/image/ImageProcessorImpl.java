@@ -20,9 +20,12 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.image;
 
+import com.liferay.portal.kernel.image.ImageBag;
+import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.util.JavaProps;
+import com.liferay.util.FileUtil;
 
 import com.sun.media.jai.codec.ImageCodec;
 import com.sun.media.jai.codec.ImageDecoder;
@@ -55,28 +58,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="ImageUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ImageProcessorImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ImageUtil {
+public class ImageProcessorImpl implements ImageProcessor {
 
-	public static final String TYPE_BMP = "bmp";
-
-	public static final String TYPE_GIF = "gif";
-
-	public static final String TYPE_JPEG = "jpg";
-
-	public static final String TYPE_PNG = "png";
-
-	public static final String TYPE_TIFF = "tiff";
-
-	public static final String TYPE_NOT_AVAILABLE = "na";
-
-	public static BufferedImage convertImageType(
-		BufferedImage sourceImage, int type) {
-
+	public BufferedImage convertImageType(BufferedImage sourceImage, int type) {
 	    BufferedImage targetImage = new BufferedImage(
 	    	sourceImage.getWidth(), sourceImage.getHeight(), type);
 
@@ -88,7 +77,7 @@ public class ImageUtil {
 	    return targetImage;
 	}
 
-	public static void encodeGIF(RenderedImage renderedImage, OutputStream out)
+	public void encodeGIF(RenderedImage renderedImage, OutputStream out)
 		throws IOException {
 
 		if (JavaProps.isJDK6()) {
@@ -108,7 +97,7 @@ public class ImageUtil {
 		}
 	}
 
-	public static void encodeWBMP(RenderedImage renderedImage, OutputStream out)
+	public void encodeWBMP(RenderedImage renderedImage, OutputStream out)
 		throws InterruptedException, IOException {
 
 		BufferedImage bufferedImage = getBufferedImage(renderedImage);
@@ -150,7 +139,7 @@ public class ImageUtil {
 		}
 	}
 
-	public static BufferedImage getBufferedImage(RenderedImage renderedImage) {
+	public BufferedImage getBufferedImage(RenderedImage renderedImage) {
 		if (renderedImage instanceof BufferedImage) {
 			return (BufferedImage)renderedImage;
 		}
@@ -162,11 +151,11 @@ public class ImageUtil {
 		}
 	}
 
-	public static ImageBag read(File file) throws IOException {
+	public ImageBag read(File file) throws IOException {
 		return read(FileUtil.getBytes(file));
 	}
 
-	public static ImageBag read(byte[] bytes) throws IOException {
+	public ImageBag read(byte[] bytes) throws IOException {
 		RenderedImage renderedImage = null;
 		String type = null;
 
@@ -267,7 +256,7 @@ public class ImageUtil {
 		return new ImageBag(renderedImage, type);
 	}
 
-	public static RenderedImage scale(
+	public RenderedImage scale(
 		RenderedImage renderedImage, int maxHeight, int maxWidth) {
 
 		int imageHeight = renderedImage.getHeight();
@@ -304,7 +293,7 @@ public class ImageUtil {
 		return scaledBufferedImage;
 	}
 
-	private static RenderedImage _getRenderedImage(String name, byte[] bytes) {
+	private RenderedImage _getRenderedImage(String name, byte[] bytes) {
 		RenderedImage renderedImage = null;
 
 		InputStream is = null;
@@ -338,7 +327,7 @@ public class ImageUtil {
 		return renderedImage;
 	}
 
-	private static byte[] _toMultiByte(int intValue) {
+	private byte[] _toMultiByte(int intValue) {
 		int numBits = 32;
 		int mask = 0x80000000;
 
@@ -363,6 +352,6 @@ public class ImageUtil {
 		return multiBytes;
 	}
 
-	private static Log _log = LogFactory.getLog(ImageUtil.class);
+	private static Log _log = LogFactory.getLog(ImageProcessorImpl.class);
 
 }

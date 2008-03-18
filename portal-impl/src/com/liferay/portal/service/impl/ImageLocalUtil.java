@@ -24,14 +24,14 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.image.ImageBag;
+import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.impl.ImageImpl;
 import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.ImageBag;
-import com.liferay.util.ImageUtil;
 
 import java.awt.image.RenderedImage;
 
@@ -265,7 +265,7 @@ public class ImageLocalUtil {
 				bytes = FileUtil.getBytes(is);
 			}
 
-			ImageBag imageBag = ImageUtil.read(bytes);
+			ImageBag imageBag = ImageProcessorUtil.read(bytes);
 
 			RenderedImage renderedImage = imageBag.getRenderedImage();
 			String type = imageBag.getType();

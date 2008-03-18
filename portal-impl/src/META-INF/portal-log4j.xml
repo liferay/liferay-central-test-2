@@ -112,6 +112,10 @@
 		<priority value="INFO" />
 	</category>
 
+	<category name="com.liferay.portal.image.ImageProcessorImpl">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.kernel.bean.BeanLocatorUtil">
 		<priority value="ERROR" />
 	</category>
@@ -521,10 +525,6 @@
 	</category>
 
 	<category name="com.liferay.util.JNDIUtil">
-		<priority value="ERROR" />
-	</category>
-
-	<category name="com.liferay.util.ImageUtil">
 		<priority value="ERROR" />
 	</category>
 
