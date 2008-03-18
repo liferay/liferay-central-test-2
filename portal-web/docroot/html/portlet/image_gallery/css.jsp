@@ -29,6 +29,6 @@
 }
 
 .image-popup .taglib-icon-list li {
-	margin-right: 0;
 	margin-left: 1em;
+	margin-right: 0;
 }

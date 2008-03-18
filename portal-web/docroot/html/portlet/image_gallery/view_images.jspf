@@ -77,7 +77,7 @@
 				jQuery("#<portlet:namespace />buttonsContainer_" + id).append(buttons);
 			}
 		});
-		
+
 		jQuery(popup).addClass('image-popup');
 
 		var buttons = jQuery("#" + buttonsId);

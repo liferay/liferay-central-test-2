@@ -116,7 +116,7 @@ try {
 
 	<br /><br />
 
-	<%@ include file="/html/portlet/image_gallery/view_grid.jsp" %>
+	<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
 
 <%
 }

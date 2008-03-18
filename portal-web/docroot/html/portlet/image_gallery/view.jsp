@@ -312,7 +312,7 @@ List scores = null;
 				</c:if>
 			</c:if>
 
-			<%@ include file="/html/portlet/image_gallery/view_grid.jsp" %>
+			<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
 
 			</form>
 
@@ -346,7 +346,7 @@ List scores = null;
 
 		<form name="<portlet:namespace />fm2">
 
-		<%@ include file="/html/portlet/image_gallery/view_grid.jsp" %>
+		<%@ include file="/html/portlet/image_gallery/view_images.jspf" %>
 
 		</form>
 	</c:when>
