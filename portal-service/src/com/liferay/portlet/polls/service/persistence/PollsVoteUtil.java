@@ -75,18 +75,20 @@ public class PollsVoteUtil {
 		return getPersistence().fetchByPrimaryKey(voteId);
 	}
 
-	public static java.util.List findByQuestionId(long questionId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
+		long questionId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByQuestionId(questionId);
 	}
 
-	public static java.util.List findByQuestionId(long questionId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
+		long questionId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByQuestionId(questionId, begin, end);
 	}
 
-	public static java.util.List findByQuestionId(long questionId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByQuestionId(
+		long questionId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByQuestionId(questionId, begin, end, obc);
 	}
@@ -114,18 +116,20 @@ public class PollsVoteUtil {
 				   .findByQuestionId_PrevAndNext(voteId, questionId, obc);
 	}
 
-	public static java.util.List findByChoiceId(long choiceId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
+		long choiceId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByChoiceId(choiceId);
 	}
 
-	public static java.util.List findByChoiceId(long choiceId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
+		long choiceId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByChoiceId(choiceId, begin, end);
 	}
 
-	public static java.util.List findByChoiceId(long choiceId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findByChoiceId(
+		long choiceId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByChoiceId(choiceId, begin, end, obc);
 	}
@@ -164,31 +168,31 @@ public class PollsVoteUtil {
 		return getPersistence().fetchByQ_U(questionId, userId);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.polls.model.PollsVote> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

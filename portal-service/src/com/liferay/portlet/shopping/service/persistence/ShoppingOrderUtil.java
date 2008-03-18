@@ -77,18 +77,20 @@ public class ShoppingOrderUtil {
 		return getPersistence().fetchByPrimaryKey(orderId);
 	}
 
-	public static java.util.List findByGroupId(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByGroupId(
+		long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
@@ -127,22 +129,22 @@ public class ShoppingOrderUtil {
 		return getPersistence().fetchByNumber(number);
 	}
 
-	public static java.util.List findByG_U_PPPS(long groupId, long userId,
-		java.lang.String ppPaymentStatus)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_U_PPPS(groupId, userId, ppPaymentStatus);
 	}
 
-	public static java.util.List findByG_U_PPPS(long groupId, long userId,
-		java.lang.String ppPaymentStatus, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_U_PPPS(groupId, userId, ppPaymentStatus, begin, end);
 	}
 
-	public static java.util.List findByG_U_PPPS(long groupId, long userId,
-		java.lang.String ppPaymentStatus, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_U_PPPS(
+		long groupId, long userId, java.lang.String ppPaymentStatus, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_U_PPPS(groupId, userId, ppPaymentStatus, begin,
@@ -178,31 +180,31 @@ public class ShoppingOrderUtil {
 			ppPaymentStatus, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

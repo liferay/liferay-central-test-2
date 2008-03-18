@@ -33,7 +33,8 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  *
  */
-public class UserGroupRolePK implements Comparable, Serializable {
+public class UserGroupRolePK implements Comparable<UserGroupRolePK>,
+	Serializable {
 	public long userId;
 	public long groupId;
 	public long roleId;
@@ -71,12 +72,10 @@ public class UserGroupRolePK implements Comparable, Serializable {
 		this.roleId = roleId;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
+	public int compareTo(UserGroupRolePK pk) {
+		if (pk == null) {
 			return -1;
 		}
-
-		UserGroupRolePK pk = (UserGroupRolePK)obj;
 
 		int value = 0;
 

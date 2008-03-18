@@ -77,17 +77,19 @@ public class ShoppingItemPriceUtil {
 		return getPersistence().fetchByPrimaryKey(itemPriceId);
 	}
 
-	public static java.util.List findByItemId(long itemId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findByItemId(
+		long itemId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByItemId(itemId);
 	}
 
-	public static java.util.List findByItemId(long itemId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findByItemId(
+		long itemId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByItemId(itemId, begin, end);
 	}
 
-	public static java.util.List findByItemId(long itemId, int begin, int end,
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findByItemId(
+		long itemId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByItemId(itemId, begin, end, obc);
@@ -116,31 +118,31 @@ public class ShoppingItemPriceUtil {
 				   .findByItemId_PrevAndNext(itemPriceId, itemId, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

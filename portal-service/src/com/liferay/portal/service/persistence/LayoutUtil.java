@@ -74,18 +74,20 @@ public class LayoutUtil {
 		return getPersistence().fetchByPrimaryKey(plid);
 	}
 
-	public static java.util.List findByGroupId(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Layout> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.Layout> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Layout> findByGroupId(
+		long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
@@ -112,18 +114,20 @@ public class LayoutUtil {
 		return getPersistence().findByGroupId_PrevAndNext(plid, groupId, obc);
 	}
 
-	public static java.util.List findByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Layout> findByCompanyId(
+		long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
@@ -174,18 +178,21 @@ public class LayoutUtil {
 		return getPersistence().fetchByIconImageId(iconImageId);
 	}
 
-	public static java.util.List findByG_P(long groupId, boolean privateLayout)
+	public static java.util.List<com.liferay.portal.model.Layout> findByG_P(
+		long groupId, boolean privateLayout)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_P(groupId, privateLayout);
 	}
 
-	public static java.util.List findByG_P(long groupId, boolean privateLayout,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Layout> findByG_P(
+		long groupId, boolean privateLayout, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_P(groupId, privateLayout, begin, end);
 	}
 
-	public static java.util.List findByG_P(long groupId, boolean privateLayout,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Layout> findByG_P(
+		long groupId, boolean privateLayout, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_P(groupId, privateLayout, begin, end, obc);
@@ -229,24 +236,24 @@ public class LayoutUtil {
 		return getPersistence().fetchByG_P_L(groupId, privateLayout, layoutId);
 	}
 
-	public static java.util.List findByG_P_P(long groupId,
-		boolean privateLayout, long parentLayoutId)
+	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
+		long groupId, boolean privateLayout, long parentLayoutId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_P_P(groupId, privateLayout, parentLayoutId);
 	}
 
-	public static java.util.List findByG_P_P(long groupId,
-		boolean privateLayout, long parentLayoutId, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
+		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_P_P(groupId, privateLayout, parentLayoutId, begin,
 			end);
 	}
 
-	public static java.util.List findByG_P_P(long groupId,
-		boolean privateLayout, long parentLayoutId, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_P(
+		long groupId, boolean privateLayout, long parentLayoutId, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_P_P(groupId, privateLayout, parentLayoutId, begin,
@@ -295,31 +302,31 @@ public class LayoutUtil {
 		return getPersistence().fetchByG_P_F(groupId, privateLayout, friendlyURL);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Layout> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Layout> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.Layout> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Layout> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Layout> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

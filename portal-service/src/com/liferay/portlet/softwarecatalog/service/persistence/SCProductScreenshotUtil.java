@@ -77,18 +77,20 @@ public class SCProductScreenshotUtil {
 		return getPersistence().fetchByPrimaryKey(productScreenshotId);
 	}
 
-	public static java.util.List findByProductEntryId(long productEntryId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findByProductEntryId(
+		long productEntryId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByProductEntryId(productEntryId);
 	}
 
-	public static java.util.List findByProductEntryId(long productEntryId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findByProductEntryId(
+		long productEntryId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByProductEntryId(productEntryId, begin, end);
 	}
 
-	public static java.util.List findByProductEntryId(long productEntryId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findByProductEntryId(
+		long productEntryId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByProductEntryId(productEntryId, begin, end, obc);
@@ -157,31 +159,31 @@ public class SCProductScreenshotUtil {
 		return getPersistence().fetchByP_P(productEntryId, priority);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

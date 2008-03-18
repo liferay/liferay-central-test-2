@@ -75,18 +75,20 @@ public class PermissionUtil {
 		return getPersistence().fetchByPrimaryKey(permissionId);
 	}
 
-	public static java.util.List findByResourceId(long resourceId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Permission> findByResourceId(
+		long resourceId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByResourceId(resourceId);
 	}
 
-	public static java.util.List findByResourceId(long resourceId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Permission> findByResourceId(
+		long resourceId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByResourceId(resourceId, begin, end);
 	}
 
-	public static java.util.List findByResourceId(long resourceId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Permission> findByResourceId(
+		long resourceId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByResourceId(resourceId, begin, end, obc);
 	}
@@ -127,31 +129,31 @@ public class PermissionUtil {
 		return getPersistence().fetchByA_R(actionId, resourceId);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Permission> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Permission> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.Permission> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Permission> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Permission> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -185,19 +187,22 @@ public class PermissionUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.List getGroups(long pk)
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException {
 		return getPersistence().getGroups(pk);
 	}
 
-	public static java.util.List getGroups(long pk, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException {
 		return getPersistence().getGroups(pk, begin, end);
 	}
 
-	public static java.util.List getGroups(long pk, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException {
@@ -295,19 +300,22 @@ public class PermissionUtil {
 		getPersistence().setGroups(pk, groups);
 	}
 
-	public static java.util.List getRoles(long pk)
+	public static java.util.List<com.liferay.portal.model.Role> getRoles(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException {
 		return getPersistence().getRoles(pk);
 	}
 
-	public static java.util.List getRoles(long pk, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.Role> getRoles(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException {
 		return getPersistence().getRoles(pk, begin, end);
 	}
 
-	public static java.util.List getRoles(long pk, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.Role> getRoles(
+		long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException {
@@ -405,19 +413,22 @@ public class PermissionUtil {
 		getPersistence().setRoles(pk, roles);
 	}
 
-	public static java.util.List getUsers(long pk)
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException {
 		return getPersistence().getUsers(pk);
 	}
 
-	public static java.util.List getUsers(long pk, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException {
 		return getPersistence().getUsers(pk, begin, end);
 	}
 
-	public static java.util.List getUsers(long pk, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException {

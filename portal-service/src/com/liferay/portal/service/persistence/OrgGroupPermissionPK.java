@@ -33,7 +33,8 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  *
  */
-public class OrgGroupPermissionPK implements Comparable, Serializable {
+public class OrgGroupPermissionPK implements Comparable<OrgGroupPermissionPK>,
+	Serializable {
 	public long organizationId;
 	public long groupId;
 	public long permissionId;
@@ -72,12 +73,10 @@ public class OrgGroupPermissionPK implements Comparable, Serializable {
 		this.permissionId = permissionId;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
+	public int compareTo(OrgGroupPermissionPK pk) {
+		if (pk == null) {
 			return -1;
 		}
-
-		OrgGroupPermissionPK pk = (OrgGroupPermissionPK)obj;
 
 		int value = 0;
 

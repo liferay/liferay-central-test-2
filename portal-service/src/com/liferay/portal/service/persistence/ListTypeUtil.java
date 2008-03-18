@@ -75,18 +75,20 @@ public class ListTypeUtil {
 		return getPersistence().fetchByPrimaryKey(listTypeId);
 	}
 
-	public static java.util.List findByType(java.lang.String type)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.ListType> findByType(
+		java.lang.String type) throws com.liferay.portal.SystemException {
 		return getPersistence().findByType(type);
 	}
 
-	public static java.util.List findByType(java.lang.String type, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.ListType> findByType(
+		java.lang.String type, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByType(type, begin, end);
 	}
 
-	public static java.util.List findByType(java.lang.String type, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.ListType> findByType(
+		java.lang.String type, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByType(type, begin, end, obc);
 	}
@@ -115,31 +117,31 @@ public class ListTypeUtil {
 		return getPersistence().findByType_PrevAndNext(listTypeId, type, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.ListType> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.ListType> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.ListType> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.ListType> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.ListType> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

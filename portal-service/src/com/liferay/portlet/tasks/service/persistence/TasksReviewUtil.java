@@ -77,17 +77,19 @@ public class TasksReviewUtil {
 		return getPersistence().fetchByPrimaryKey(reviewId);
 	}
 
-	public static java.util.List findByUserId(long userId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
+		long userId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end,
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
@@ -115,18 +117,20 @@ public class TasksReviewUtil {
 		return getPersistence().findByUserId_PrevAndNext(reviewId, userId, obc);
 	}
 
-	public static java.util.List findByProposalId(long proposalId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
+		long proposalId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByProposalId(proposalId);
 	}
 
-	public static java.util.List findByProposalId(long proposalId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
+		long proposalId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByProposalId(proposalId, begin, end);
 	}
 
-	public static java.util.List findByProposalId(long proposalId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByProposalId(
+		long proposalId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByProposalId(proposalId, begin, end, obc);
 	}
@@ -166,18 +170,20 @@ public class TasksReviewUtil {
 		return getPersistence().fetchByU_P(userId, proposalId);
 	}
 
-	public static java.util.List findByP_S(long proposalId, int stage)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
+		long proposalId, int stage) throws com.liferay.portal.SystemException {
 		return getPersistence().findByP_S(proposalId, stage);
 	}
 
-	public static java.util.List findByP_S(long proposalId, int stage,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
+		long proposalId, int stage, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByP_S(proposalId, stage, begin, end);
 	}
 
-	public static java.util.List findByP_S(long proposalId, int stage,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S(
+		long proposalId, int stage, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByP_S(proposalId, stage, begin, end, obc);
 	}
@@ -207,20 +213,21 @@ public class TasksReviewUtil {
 				   .findByP_S_PrevAndNext(reviewId, proposalId, stage, obc);
 	}
 
-	public static java.util.List findByP_S_C(long proposalId, int stage,
-		boolean completed) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
+		long proposalId, int stage, boolean completed)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByP_S_C(proposalId, stage, completed);
 	}
 
-	public static java.util.List findByP_S_C(long proposalId, int stage,
-		boolean completed, int begin, int end)
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
+		long proposalId, int stage, boolean completed, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByP_S_C(proposalId, stage, completed, begin, end);
 	}
 
-	public static java.util.List findByP_S_C(long proposalId, int stage,
-		boolean completed, int begin, int end,
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C(
+		long proposalId, int stage, boolean completed, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
@@ -255,24 +262,24 @@ public class TasksReviewUtil {
 			completed, obc);
 	}
 
-	public static java.util.List findByP_S_C_R(long proposalId, int stage,
-		boolean completed, boolean rejected)
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
+		long proposalId, int stage, boolean completed, boolean rejected)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByP_S_C_R(proposalId, stage, completed, rejected);
 	}
 
-	public static java.util.List findByP_S_C_R(long proposalId, int stage,
-		boolean completed, boolean rejected, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
+		long proposalId, int stage, boolean completed, boolean rejected,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByP_S_C_R(proposalId, stage, completed, rejected,
 			begin, end);
 	}
 
-	public static java.util.List findByP_S_C_R(long proposalId, int stage,
-		boolean completed, boolean rejected, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findByP_S_C_R(
+		long proposalId, int stage, boolean completed, boolean rejected,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByP_S_C_R(proposalId, stage, completed, rejected,
@@ -309,31 +316,31 @@ public class TasksReviewUtil {
 			completed, rejected, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksReview> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

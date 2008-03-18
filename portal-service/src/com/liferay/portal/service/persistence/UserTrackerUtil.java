@@ -77,18 +77,20 @@ public class UserTrackerUtil {
 		return getPersistence().fetchByPrimaryKey(userTrackerId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.UserTracker> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.UserTracker> findByCompanyId(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.UserTracker> findByCompanyId(
+		long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
@@ -116,17 +118,19 @@ public class UserTrackerUtil {
 				   .findByCompanyId_PrevAndNext(userTrackerId, companyId, obc);
 	}
 
-	public static java.util.List findByUserId(long userId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.UserTracker> findByUserId(
+		long userId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.UserTracker> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.UserTracker> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
@@ -155,18 +159,20 @@ public class UserTrackerUtil {
 				   .findByUserId_PrevAndNext(userTrackerId, userId, obc);
 	}
 
-	public static java.util.List findBySessionId(java.lang.String sessionId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.UserTracker> findBySessionId(
+		java.lang.String sessionId) throws com.liferay.portal.SystemException {
 		return getPersistence().findBySessionId(sessionId);
 	}
 
-	public static java.util.List findBySessionId(java.lang.String sessionId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.UserTracker> findBySessionId(
+		java.lang.String sessionId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findBySessionId(sessionId, begin, end);
 	}
 
-	public static java.util.List findBySessionId(java.lang.String sessionId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.UserTracker> findBySessionId(
+		java.lang.String sessionId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findBySessionId(sessionId, begin, end, obc);
 	}
@@ -196,31 +202,31 @@ public class UserTrackerUtil {
 				   .findBySessionId_PrevAndNext(userTrackerId, sessionId, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.UserTracker> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.UserTracker> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.UserTracker> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.UserTracker> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.UserTracker> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

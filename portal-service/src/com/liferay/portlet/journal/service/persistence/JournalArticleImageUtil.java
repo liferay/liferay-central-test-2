@@ -77,18 +77,20 @@ public class JournalArticleImageUtil {
 		return getPersistence().fetchByPrimaryKey(articleImageId);
 	}
 
-	public static java.util.List findByGroupId(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByGroupId(
+		long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
@@ -116,18 +118,20 @@ public class JournalArticleImageUtil {
 				   .findByGroupId_PrevAndNext(articleImageId, groupId, obc);
 	}
 
-	public static java.util.List findByTempImage(boolean tempImage)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByTempImage(
+		boolean tempImage) throws com.liferay.portal.SystemException {
 		return getPersistence().findByTempImage(tempImage);
 	}
 
-	public static java.util.List findByTempImage(boolean tempImage, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByTempImage(
+		boolean tempImage, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByTempImage(tempImage, begin, end);
 	}
 
-	public static java.util.List findByTempImage(boolean tempImage, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByTempImage(
+		boolean tempImage, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByTempImage(tempImage, begin, end, obc);
 	}
@@ -155,22 +159,22 @@ public class JournalArticleImageUtil {
 				   .findByTempImage_PrevAndNext(articleImageId, tempImage, obc);
 	}
 
-	public static java.util.List findByG_A_V(long groupId,
-		java.lang.String articleId, double version)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByG_A_V(
+		long groupId, java.lang.String articleId, double version)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_A_V(groupId, articleId, version);
 	}
 
-	public static java.util.List findByG_A_V(long groupId,
-		java.lang.String articleId, double version, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByG_A_V(
+		long groupId, java.lang.String articleId, double version, int begin,
+		int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_A_V(groupId, articleId, version, begin, end);
 	}
 
-	public static java.util.List findByG_A_V(long groupId,
-		java.lang.String articleId, double version, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findByG_A_V(
+		long groupId, java.lang.String articleId, double version, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByG_A_V(groupId, articleId, version, begin, end, obc);
@@ -223,31 +227,31 @@ public class JournalArticleImageUtil {
 			languageId);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticleImage> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

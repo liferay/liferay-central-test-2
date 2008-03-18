@@ -77,17 +77,19 @@ public class SubscriptionUtil {
 		return getPersistence().fetchByPrimaryKey(subscriptionId);
 	}
 
-	public static java.util.List findByUserId(long userId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Subscription> findByUserId(
+		long userId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.Subscription> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.Subscription> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
@@ -116,20 +118,21 @@ public class SubscriptionUtil {
 				   .findByUserId_PrevAndNext(subscriptionId, userId, obc);
 	}
 
-	public static java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Subscription> findByC_C_C(
+		long companyId, long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C_C(companyId, classNameId, classPK);
 	}
 
-	public static java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.Subscription> findByC_C_C(
+		long companyId, long classNameId, long classPK, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C(companyId, classNameId, classPK, begin, end);
 	}
 
-	public static java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.Subscription> findByC_C_C(
+		long companyId, long classNameId, long classPK, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
@@ -179,31 +182,31 @@ public class SubscriptionUtil {
 				   .fetchByC_U_C_C(companyId, userId, classNameId, classPK);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Subscription> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Subscription> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.Subscription> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Subscription> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Subscription> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

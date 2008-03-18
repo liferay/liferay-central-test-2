@@ -77,18 +77,20 @@ public class BookmarksEntryUtil {
 		return getPersistence().fetchByPrimaryKey(entryId);
 	}
 
-	public static java.util.List findByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
-	public static java.util.List findByUuid(java.lang.String uuid, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByUuid(
+		java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid, begin, end);
 	}
 
-	public static java.util.List findByUuid(java.lang.String uuid, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByUuid(
+		java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid, begin, end, obc);
 	}
@@ -117,18 +119,20 @@ public class BookmarksEntryUtil {
 		return getPersistence().findByUuid_PrevAndNext(entryId, uuid, obc);
 	}
 
-	public static java.util.List findByFolderId(long folderId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
+		long folderId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId);
 	}
 
-	public static java.util.List findByFolderId(long folderId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
+		long folderId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end);
 	}
 
-	public static java.util.List findByFolderId(long folderId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findByFolderId(
+		long folderId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end, obc);
 	}
@@ -156,31 +160,31 @@ public class BookmarksEntryUtil {
 				   .findByFolderId_PrevAndNext(entryId, folderId, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.bookmarks.model.BookmarksEntry> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

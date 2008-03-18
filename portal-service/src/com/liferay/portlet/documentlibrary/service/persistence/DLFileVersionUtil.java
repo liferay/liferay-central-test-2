@@ -77,19 +77,20 @@ public class DLFileVersionUtil {
 		return getPersistence().fetchByPrimaryKey(fileVersionId);
 	}
 
-	public static java.util.List findByF_N(long folderId, java.lang.String name)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByF_N(
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name);
 	}
 
-	public static java.util.List findByF_N(long folderId,
-		java.lang.String name, int begin, int end)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByF_N(
+		long folderId, java.lang.String name, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name, begin, end);
 	}
 
-	public static java.util.List findByF_N(long folderId,
-		java.lang.String name, int begin, int end,
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findByF_N(
+		long folderId, java.lang.String name, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name, begin, end, obc);
@@ -133,31 +134,31 @@ public class DLFileVersionUtil {
 		return getPersistence().fetchByF_N_V(folderId, name, version);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

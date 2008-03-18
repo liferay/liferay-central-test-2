@@ -74,17 +74,18 @@ public class ImageUtil {
 		return getPersistence().fetchByPrimaryKey(imageId);
 	}
 
-	public static java.util.List findBySize(int size)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Image> findBySize(
+		int size) throws com.liferay.portal.SystemException {
 		return getPersistence().findBySize(size);
 	}
 
-	public static java.util.List findBySize(int size, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Image> findBySize(
+		int size, int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findBySize(size, begin, end);
 	}
 
-	public static java.util.List findBySize(int size, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.Image> findBySize(
+		int size, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findBySize(size, begin, end, obc);
@@ -112,31 +113,31 @@ public class ImageUtil {
 		return getPersistence().findBySize_PrevAndNext(imageId, size, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Image> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Image> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.Image> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Image> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Image> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

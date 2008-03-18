@@ -77,18 +77,20 @@ public class SCProductEntryUtil {
 		return getPersistence().fetchByPrimaryKey(productEntryId);
 	}
 
-	public static java.util.List findByGroupId(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByGroupId(
+		long groupId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByGroupId(
+		long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByGroupId(groupId, begin, end, obc);
 	}
@@ -116,18 +118,20 @@ public class SCProductEntryUtil {
 				   .findByGroupId_PrevAndNext(productEntryId, groupId, obc);
 	}
 
-	public static java.util.List findByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByCompanyId(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByCompanyId(
+		long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
@@ -155,18 +159,20 @@ public class SCProductEntryUtil {
 				   .findByCompanyId_PrevAndNext(productEntryId, companyId, obc);
 	}
 
-	public static java.util.List findByG_U(long groupId, long userId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByG_U(
+		long groupId, long userId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_U(groupId, userId);
 	}
 
-	public static java.util.List findByG_U(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByG_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_U(groupId, userId, begin, end);
 	}
 
-	public static java.util.List findByG_U(long groupId, long userId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findByG_U(
+		long groupId, long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByG_U(groupId, userId, begin, end, obc);
 	}
@@ -209,31 +215,31 @@ public class SCProductEntryUtil {
 		return getPersistence().fetchByRG_RA(repoGroupId, repoArtifactId);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -289,19 +295,22 @@ public class SCProductEntryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.List getSCLicenses(long pk)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException {
 		return getPersistence().getSCLicenses(pk);
 	}
 
-	public static java.util.List getSCLicenses(long pk, int begin, int end)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException {
 		return getPersistence().getSCLicenses(pk, begin, end);
 	}
 
-	public static java.util.List getSCLicenses(long pk, int begin, int end,
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getSCLicenses(
+		long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException {

@@ -77,17 +77,19 @@ public class DLFileRankUtil {
 		return getPersistence().fetchByPrimaryKey(fileRankId);
 	}
 
-	public static java.util.List findByUserId(long userId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByUserId(
+		long userId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end,
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
@@ -115,19 +117,20 @@ public class DLFileRankUtil {
 		return getPersistence().findByUserId_PrevAndNext(fileRankId, userId, obc);
 	}
 
-	public static java.util.List findByF_N(long folderId, java.lang.String name)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByF_N(
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name);
 	}
 
-	public static java.util.List findByF_N(long folderId,
-		java.lang.String name, int begin, int end)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByF_N(
+		long folderId, java.lang.String name, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name, begin, end);
 	}
 
-	public static java.util.List findByF_N(long folderId,
-		java.lang.String name, int begin, int end,
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findByF_N(
+		long folderId, java.lang.String name, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_N(folderId, name, begin, end, obc);
@@ -171,31 +174,31 @@ public class DLFileRankUtil {
 		return getPersistence().fetchByC_U_F_N(companyId, userId, folderId, name);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

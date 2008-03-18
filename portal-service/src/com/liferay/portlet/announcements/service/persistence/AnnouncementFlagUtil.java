@@ -77,18 +77,20 @@ public class AnnouncementFlagUtil {
 		return getPersistence().fetchByPrimaryKey(announcementFlagId);
 	}
 
-	public static java.util.List findByAnnouncementId(long announcementId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findByAnnouncementId(
+		long announcementId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByAnnouncementId(announcementId);
 	}
 
-	public static java.util.List findByAnnouncementId(long announcementId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findByAnnouncementId(
+		long announcementId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByAnnouncementId(announcementId, begin, end);
 	}
 
-	public static java.util.List findByAnnouncementId(long announcementId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findByAnnouncementId(
+		long announcementId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByAnnouncementId(announcementId, begin, end, obc);
@@ -133,31 +135,31 @@ public class AnnouncementFlagUtil {
 		return getPersistence().fetchByU_A_F(userId, announcementId, flag);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

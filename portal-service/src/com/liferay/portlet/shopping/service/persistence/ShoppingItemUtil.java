@@ -77,18 +77,20 @@ public class ShoppingItemUtil {
 		return getPersistence().fetchByPrimaryKey(itemId);
 	}
 
-	public static java.util.List findByCategoryId(long categoryId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByCategoryId(
+		long categoryId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCategoryId(categoryId);
 	}
 
-	public static java.util.List findByCategoryId(long categoryId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByCategoryId(
+		long categoryId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCategoryId(categoryId, begin, end);
 	}
 
-	public static java.util.List findByCategoryId(long categoryId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByCategoryId(
+		long categoryId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCategoryId(categoryId, begin, end, obc);
 	}
@@ -165,31 +167,31 @@ public class ShoppingItemUtil {
 		return getPersistence().fetchByC_S(companyId, sku);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -256,21 +258,23 @@ public class ShoppingItemUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.List getShoppingItemPrices(long pk)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().getShoppingItemPrices(pk);
 	}
 
-	public static java.util.List getShoppingItemPrices(long pk, int begin,
-		int end)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().getShoppingItemPrices(pk, begin, end);
 	}
 
-	public static java.util.List getShoppingItemPrices(long pk, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getShoppingItemPrices(
+		long pk, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.shopping.NoSuchItemException {
 		return getPersistence().getShoppingItemPrices(pk, begin, end, obc);

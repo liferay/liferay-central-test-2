@@ -77,18 +77,20 @@ public class SCLicenseUtil {
 		return getPersistence().fetchByPrimaryKey(licenseId);
 	}
 
-	public static java.util.List findByActive(boolean active)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findByActive(
+		boolean active) throws com.liferay.portal.SystemException {
 		return getPersistence().findByActive(active);
 	}
 
-	public static java.util.List findByActive(boolean active, int begin, int end)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findByActive(
+		boolean active, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByActive(active, begin, end);
 	}
 
-	public static java.util.List findByActive(boolean active, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findByActive(
+		boolean active, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByActive(active, begin, end, obc);
 	}
@@ -115,18 +117,21 @@ public class SCLicenseUtil {
 		return getPersistence().findByActive_PrevAndNext(licenseId, active, obc);
 	}
 
-	public static java.util.List findByA_R(boolean active, boolean recommended)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findByA_R(
+		boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByA_R(active, recommended);
 	}
 
-	public static java.util.List findByA_R(boolean active, boolean recommended,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findByA_R(
+		boolean active, boolean recommended, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByA_R(active, recommended, begin, end);
 	}
 
-	public static java.util.List findByA_R(boolean active, boolean recommended,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findByA_R(
+		boolean active, boolean recommended, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByA_R(active, recommended, begin, end, obc);
 	}
@@ -156,31 +161,31 @@ public class SCLicenseUtil {
 				   .findByA_R_PrevAndNext(licenseId, active, recommended, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -213,20 +218,23 @@ public class SCLicenseUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.List getSCProductEntries(long pk)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
 		return getPersistence().getSCProductEntries(pk);
 	}
 
-	public static java.util.List getSCProductEntries(long pk, int begin, int end)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
 		return getPersistence().getSCProductEntries(pk, begin, end);
 	}
 
-	public static java.util.List getSCProductEntries(long pk, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getSCProductEntries(
+		long pk, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
 		return getPersistence().getSCProductEntries(pk, begin, end, obc);

@@ -74,18 +74,20 @@ public class RoleUtil {
 		return getPersistence().fetchByPrimaryKey(roleId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Role> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Role> findByCompanyId(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Role> findByCompanyId(
+		long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
@@ -138,31 +140,31 @@ public class RoleUtil {
 		return getPersistence().fetchByC_C_C(companyId, classNameId, classPK);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Role> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Role> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.Role> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Role> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Role> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -208,19 +210,22 @@ public class RoleUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.List getGroups(long pk)
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {
 		return getPersistence().getGroups(pk);
 	}
 
-	public static java.util.List getGroups(long pk, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {
 		return getPersistence().getGroups(pk, begin, end);
 	}
 
-	public static java.util.List getGroups(long pk, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.Group> getGroups(
+		long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {
@@ -318,19 +323,22 @@ public class RoleUtil {
 		getPersistence().setGroups(pk, groups);
 	}
 
-	public static java.util.List getPermissions(long pk)
+	public static java.util.List<com.liferay.portal.model.Permission> getPermissions(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {
 		return getPersistence().getPermissions(pk);
 	}
 
-	public static java.util.List getPermissions(long pk, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.Permission> getPermissions(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {
 		return getPersistence().getPermissions(pk, begin, end);
 	}
 
-	public static java.util.List getPermissions(long pk, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.Permission> getPermissions(
+		long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {
@@ -430,19 +438,22 @@ public class RoleUtil {
 		getPersistence().setPermissions(pk, permissions);
 	}
 
-	public static java.util.List getUsers(long pk)
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {
 		return getPersistence().getUsers(pk);
 	}
 
-	public static java.util.List getUsers(long pk, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {
 		return getPersistence().getUsers(pk, begin, end);
 	}
 
-	public static java.util.List getUsers(long pk, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.User> getUsers(
+		long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException {

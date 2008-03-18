@@ -77,18 +77,20 @@ public class DLFileEntryUtil {
 		return getPersistence().fetchByPrimaryKey(fileEntryId);
 	}
 
-	public static java.util.List findByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
-	public static java.util.List findByUuid(java.lang.String uuid, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByUuid(
+		java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid, begin, end);
 	}
 
-	public static java.util.List findByUuid(java.lang.String uuid, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByUuid(
+		java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid, begin, end, obc);
 	}
@@ -117,18 +119,20 @@ public class DLFileEntryUtil {
 		return getPersistence().findByUuid_PrevAndNext(fileEntryId, uuid, obc);
 	}
 
-	public static java.util.List findByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByCompanyId(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByCompanyId(
+		long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
@@ -156,18 +160,20 @@ public class DLFileEntryUtil {
 				   .findByCompanyId_PrevAndNext(fileEntryId, companyId, obc);
 	}
 
-	public static java.util.List findByFolderId(long folderId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByFolderId(
+		long folderId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId);
 	}
 
-	public static java.util.List findByFolderId(long folderId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByFolderId(
+		long folderId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end);
 	}
 
-	public static java.util.List findByFolderId(long folderId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByFolderId(
+		long folderId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByFolderId(folderId, begin, end, obc);
 	}
@@ -208,19 +214,20 @@ public class DLFileEntryUtil {
 		return getPersistence().fetchByF_N(folderId, name);
 	}
 
-	public static java.util.List findByF_T(long folderId, java.lang.String title)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByF_T(
+		long folderId, java.lang.String title)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_T(folderId, title);
 	}
 
-	public static java.util.List findByF_T(long folderId,
-		java.lang.String title, int begin, int end)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByF_T(
+		long folderId, java.lang.String title, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_T(folderId, title, begin, end);
 	}
 
-	public static java.util.List findByF_T(long folderId,
-		java.lang.String title, int begin, int end,
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByF_T(
+		long folderId, java.lang.String title, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByF_T(folderId, title, begin, end, obc);
@@ -251,31 +258,31 @@ public class DLFileEntryUtil {
 				   .findByF_T_PrevAndNext(fileEntryId, folderId, title, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

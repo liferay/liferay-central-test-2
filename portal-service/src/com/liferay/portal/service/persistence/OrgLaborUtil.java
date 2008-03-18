@@ -75,18 +75,20 @@ public class OrgLaborUtil {
 		return getPersistence().fetchByPrimaryKey(orgLaborId);
 	}
 
-	public static java.util.List findByOrganizationId(long organizationId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.OrgLabor> findByOrganizationId(
+		long organizationId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByOrganizationId(organizationId);
 	}
 
-	public static java.util.List findByOrganizationId(long organizationId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.OrgLabor> findByOrganizationId(
+		long organizationId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOrganizationId(organizationId, begin, end);
 	}
 
-	public static java.util.List findByOrganizationId(long organizationId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.OrgLabor> findByOrganizationId(
+		long organizationId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByOrganizationId(organizationId, begin, end, obc);
@@ -118,31 +120,31 @@ public class OrgLaborUtil {
 			organizationId, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.OrgLabor> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.OrgLabor> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.OrgLabor> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.OrgLabor> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.OrgLabor> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

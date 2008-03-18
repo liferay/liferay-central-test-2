@@ -77,18 +77,20 @@ public class AnnouncementUtil {
 		return getPersistence().fetchByPrimaryKey(announcementId);
 	}
 
-	public static java.util.List findByUuid(java.lang.String uuid)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid);
 	}
 
-	public static java.util.List findByUuid(java.lang.String uuid, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByUuid(
+		java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid, begin, end);
 	}
 
-	public static java.util.List findByUuid(java.lang.String uuid, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByUuid(
+		java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUuid(uuid, begin, end, obc);
 	}
@@ -117,18 +119,21 @@ public class AnnouncementUtil {
 		return getPersistence().findByUuid_PrevAndNext(announcementId, uuid, obc);
 	}
 
-	public static java.util.List findByC_C(long classNameId, long classPK)
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByC_C(
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C(classNameId, classPK);
 	}
 
-	public static java.util.List findByC_C(long classNameId, long classPK,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByC_C(
+		long classNameId, long classPK, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C(classNameId, classPK, begin, end);
 	}
 
-	public static java.util.List findByC_C(long classNameId, long classPK,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByC_C(
+		long classNameId, long classPK, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C(classNameId, classPK, begin, end, obc);
 	}
@@ -159,20 +164,21 @@ public class AnnouncementUtil {
 			obc);
 	}
 
-	public static java.util.List findByC_C_A(long classNameId, long classPK,
-		boolean alert) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByC_C_A(
+		long classNameId, long classPK, boolean alert)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C_A(classNameId, classPK, alert);
 	}
 
-	public static java.util.List findByC_C_A(long classNameId, long classPK,
-		boolean alert, int begin, int end)
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByC_C_A(
+		long classNameId, long classPK, boolean alert, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_A(classNameId, classPK, alert, begin, end);
 	}
 
-	public static java.util.List findByC_C_A(long classNameId, long classPK,
-		boolean alert, int begin, int end,
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByC_C_A(
+		long classNameId, long classPK, boolean alert, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
@@ -207,17 +213,19 @@ public class AnnouncementUtil {
 			classPK, alert, obc);
 	}
 
-	public static java.util.List findByUserId(long userId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByUserId(
+		long userId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end,
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
@@ -246,31 +254,31 @@ public class AnnouncementUtil {
 				   .findByUserId_PrevAndNext(announcementId, userId, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.announcements.model.Announcement> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

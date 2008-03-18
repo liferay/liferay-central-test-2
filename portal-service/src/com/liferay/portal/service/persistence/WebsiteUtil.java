@@ -75,18 +75,20 @@ public class WebsiteUtil {
 		return getPersistence().fetchByPrimaryKey(websiteId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Website> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Website> findByCompanyId(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Website> findByCompanyId(
+		long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
@@ -114,17 +116,19 @@ public class WebsiteUtil {
 				   .findByCompanyId_PrevAndNext(websiteId, companyId, obc);
 	}
 
-	public static java.util.List findByUserId(long userId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Website> findByUserId(
+		long userId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.Website> findByUserId(
+		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end);
 	}
 
-	public static java.util.List findByUserId(long userId, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.Website> findByUserId(
+		long userId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByUserId(userId, begin, end, obc);
@@ -152,18 +156,21 @@ public class WebsiteUtil {
 		return getPersistence().findByUserId_PrevAndNext(websiteId, userId, obc);
 	}
 
-	public static java.util.List findByC_C(long companyId, long classNameId)
+	public static java.util.List<com.liferay.portal.model.Website> findByC_C(
+		long companyId, long classNameId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C(companyId, classNameId);
 	}
 
-	public static java.util.List findByC_C(long companyId, long classNameId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Website> findByC_C(
+		long companyId, long classNameId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C(companyId, classNameId, begin, end);
 	}
 
-	public static java.util.List findByC_C(long companyId, long classNameId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Website> findByC_C(
+		long companyId, long classNameId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C(companyId, classNameId, begin, end, obc);
@@ -194,20 +201,21 @@ public class WebsiteUtil {
 				   .findByC_C_PrevAndNext(websiteId, companyId, classNameId, obc);
 	}
 
-	public static java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Website> findByC_C_C(
+		long companyId, long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_C_C(companyId, classNameId, classPK);
 	}
 
-	public static java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.Website> findByC_C_C(
+		long companyId, long classNameId, long classPK, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C(companyId, classNameId, classPK, begin, end);
 	}
 
-	public static java.util.List findByC_C_C(long companyId, long classNameId,
-		long classPK, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.Website> findByC_C_C(
+		long companyId, long classNameId, long classPK, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
@@ -242,24 +250,24 @@ public class WebsiteUtil {
 			classPK, obc);
 	}
 
-	public static java.util.List findByC_C_C_P(long companyId,
-		long classNameId, long classPK, boolean primary)
+	public static java.util.List<com.liferay.portal.model.Website> findByC_C_C_P(
+		long companyId, long classNameId, long classPK, boolean primary)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C_P(companyId, classNameId, classPK, primary);
 	}
 
-	public static java.util.List findByC_C_C_P(long companyId,
-		long classNameId, long classPK, boolean primary, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Website> findByC_C_C_P(
+		long companyId, long classNameId, long classPK, boolean primary,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C_P(companyId, classNameId, classPK, primary,
 			begin, end);
 	}
 
-	public static java.util.List findByC_C_C_P(long companyId,
-		long classNameId, long classPK, boolean primary, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Website> findByC_C_C_P(
+		long companyId, long classNameId, long classPK, boolean primary,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByC_C_C_P(companyId, classNameId, classPK, primary,
@@ -296,31 +304,31 @@ public class WebsiteUtil {
 			classNameId, classPK, primary, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Website> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.Website> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.Website> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Website> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Website> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

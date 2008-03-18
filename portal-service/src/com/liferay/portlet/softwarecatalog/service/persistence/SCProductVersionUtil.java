@@ -77,18 +77,20 @@ public class SCProductVersionUtil {
 		return getPersistence().fetchByPrimaryKey(productVersionId);
 	}
 
-	public static java.util.List findByProductEntryId(long productEntryId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findByProductEntryId(
+		long productEntryId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByProductEntryId(productEntryId);
 	}
 
-	public static java.util.List findByProductEntryId(long productEntryId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findByProductEntryId(
+		long productEntryId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByProductEntryId(productEntryId, begin, end);
 	}
 
-	public static java.util.List findByProductEntryId(long productEntryId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findByProductEntryId(
+		long productEntryId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findByProductEntryId(productEntryId, begin, end, obc);
@@ -133,31 +135,31 @@ public class SCProductVersionUtil {
 		return getPersistence().fetchByDirectDownloadURL(directDownloadURL);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -193,21 +195,23 @@ public class SCProductVersionUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.List getSCFrameworkVersions(long pk)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getSCFrameworkVersions(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException {
 		return getPersistence().getSCFrameworkVersions(pk);
 	}
 
-	public static java.util.List getSCFrameworkVersions(long pk, int begin,
-		int end)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getSCFrameworkVersions(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException {
 		return getPersistence().getSCFrameworkVersions(pk, begin, end);
 	}
 
-	public static java.util.List getSCFrameworkVersions(long pk, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getSCFrameworkVersions(
+		long pk, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException {
 		return getPersistence().getSCFrameworkVersions(pk, begin, end, obc);

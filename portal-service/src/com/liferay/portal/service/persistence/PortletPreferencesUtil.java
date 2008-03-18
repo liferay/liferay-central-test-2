@@ -77,17 +77,19 @@ public class PortletPreferencesUtil {
 		return getPersistence().fetchByPrimaryKey(portletPreferencesId);
 	}
 
-	public static java.util.List findByPlid(long plid)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByPlid(
+		long plid) throws com.liferay.portal.SystemException {
 		return getPersistence().findByPlid(plid);
 	}
 
-	public static java.util.List findByPlid(long plid, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByPlid(
+		long plid, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByPlid(plid, begin, end);
 	}
 
-	public static java.util.List findByPlid(long plid, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByPlid(
+		long plid, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByPlid(plid, begin, end, obc);
@@ -116,19 +118,20 @@ public class PortletPreferencesUtil {
 				   .findByPlid_PrevAndNext(portletPreferencesId, plid, obc);
 	}
 
-	public static java.util.List findByP_P(long plid, java.lang.String portletId)
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByP_P(
+		long plid, java.lang.String portletId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByP_P(plid, portletId);
 	}
 
-	public static java.util.List findByP_P(long plid,
-		java.lang.String portletId, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByP_P(
+		long plid, java.lang.String portletId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByP_P(plid, portletId, begin, end);
 	}
 
-	public static java.util.List findByP_P(long plid,
-		java.lang.String portletId, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByP_P(
+		long plid, java.lang.String portletId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByP_P(plid, portletId, begin, end, obc);
@@ -160,19 +163,20 @@ public class PortletPreferencesUtil {
 			portletId, obc);
 	}
 
-	public static java.util.List findByO_O_P(long ownerId, int ownerType,
-		long plid) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByO_O_P(
+		long ownerId, int ownerType, long plid)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByO_O_P(ownerId, ownerType, plid);
 	}
 
-	public static java.util.List findByO_O_P(long ownerId, int ownerType,
-		long plid, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByO_O_P(
+		long ownerId, int ownerType, long plid, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByO_O_P(ownerId, ownerType, plid, begin, end);
 	}
 
-	public static java.util.List findByO_O_P(long ownerId, int ownerType,
-		long plid, int begin, int end,
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findByO_O_P(
+		long ownerId, int ownerType, long plid, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence()
@@ -220,31 +224,31 @@ public class PortletPreferencesUtil {
 				   .fetchByO_O_P_P(ownerId, ownerType, plid, portletId);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.PortletPreferences> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

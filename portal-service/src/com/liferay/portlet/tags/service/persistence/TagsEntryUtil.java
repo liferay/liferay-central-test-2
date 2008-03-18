@@ -88,31 +88,31 @@ public class TagsEntryUtil {
 		return getPersistence().fetchByC_N(companyId, name);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
@@ -136,19 +136,22 @@ public class TagsEntryUtil {
 		return getPersistence().countAll();
 	}
 
-	public static java.util.List getTagsAssets(long pk)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
+		long pk)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		return getPersistence().getTagsAssets(pk);
 	}
 
-	public static java.util.List getTagsAssets(long pk, int begin, int end)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
+		long pk, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchEntryException {
 		return getPersistence().getTagsAssets(pk, begin, end);
 	}
 
-	public static java.util.List getTagsAssets(long pk, int begin, int end,
+	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTagsAssets(
+		long pk, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.tags.NoSuchEntryException {

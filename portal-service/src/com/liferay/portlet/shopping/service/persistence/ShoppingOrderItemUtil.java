@@ -77,18 +77,20 @@ public class ShoppingOrderItemUtil {
 		return getPersistence().fetchByPrimaryKey(orderItemId);
 	}
 
-	public static java.util.List findByOrderId(long orderId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findByOrderId(
+		long orderId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByOrderId(orderId);
 	}
 
-	public static java.util.List findByOrderId(long orderId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findByOrderId(
+		long orderId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOrderId(orderId, begin, end);
 	}
 
-	public static java.util.List findByOrderId(long orderId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findByOrderId(
+		long orderId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByOrderId(orderId, begin, end, obc);
 	}
@@ -116,31 +118,31 @@ public class ShoppingOrderItemUtil {
 				   .findByOrderId_PrevAndNext(orderItemId, orderId, obc);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}

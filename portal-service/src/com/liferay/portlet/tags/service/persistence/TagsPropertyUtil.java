@@ -77,18 +77,20 @@ public class TagsPropertyUtil {
 		return getPersistence().fetchByPrimaryKey(propertyId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByCompanyId(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end);
 	}
 
-	public static java.util.List findByCompanyId(long companyId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByCompanyId(
+		long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByCompanyId(companyId, begin, end, obc);
 	}
@@ -116,18 +118,20 @@ public class TagsPropertyUtil {
 				   .findByCompanyId_PrevAndNext(propertyId, companyId, obc);
 	}
 
-	public static java.util.List findByEntryId(long entryId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByEntryId(
+		long entryId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByEntryId(entryId);
 	}
 
-	public static java.util.List findByEntryId(long entryId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByEntryId(
+		long entryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByEntryId(entryId, begin, end);
 	}
 
-	public static java.util.List findByEntryId(long entryId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByEntryId(
+		long entryId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByEntryId(entryId, begin, end, obc);
 	}
@@ -155,19 +159,20 @@ public class TagsPropertyUtil {
 				   .findByEntryId_PrevAndNext(propertyId, entryId, obc);
 	}
 
-	public static java.util.List findByC_K(long companyId, java.lang.String key)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_K(companyId, key);
 	}
 
-	public static java.util.List findByC_K(long companyId,
-		java.lang.String key, int begin, int end)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_K(companyId, key, begin, end);
 	}
 
-	public static java.util.List findByC_K(long companyId,
-		java.lang.String key, int begin, int end,
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findByC_K(companyId, key, begin, end, obc);
@@ -211,31 +216,31 @@ public class TagsPropertyUtil {
 		return getPersistence().fetchByE_K(entryId, key);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findWithDynamicQuery(queryInitializer);
 	}
 
-	public static java.util.List findWithDynamicQuery(
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
 		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence()
 				   .findWithDynamicQuery(queryInitializer, begin, end);
 	}
 
-	public static java.util.List findAll()
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findAll()
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll();
 	}
 
-	public static java.util.List findAll(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end);
 	}
 
-	public static java.util.List findAll(int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().findAll(begin, end, obc);
 	}
