@@ -182,7 +182,8 @@ public class ImageUtil {
 			if (itr.hasNext()) {
 				ImageReader reader = (ImageReader)itr.next();
 
-				String[] suffixes = reader.getOriginatingProvider().getFileSuffixes();
+				String[] suffixes =
+					reader.getOriginatingProvider().getFileSuffixes();
 
 				if (suffixes != null) {
                     type = suffixes[0];
