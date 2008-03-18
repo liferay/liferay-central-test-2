@@ -244,6 +244,259 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List<PortletItem> findByG_C(long groupId, long classNameId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletItemModelImpl.CACHE_ENABLED;
+		String finderClassName = PortletItem.class.getName();
+		String finderMethodName = "findByG_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(classNameId)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("classNameId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setLong(queryPos++, classNameId);
+
+				List<PortletItem> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<PortletItem>)result;
+		}
+	}
+
+	public List<PortletItem> findByG_C(long groupId, long classNameId,
+		int begin, int end) throws SystemException {
+		return findByG_C(groupId, classNameId, begin, end, null);
+	}
+
+	public List<PortletItem> findByG_C(long groupId, long classNameId,
+		int begin, int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletItemModelImpl.CACHE_ENABLED;
+		String finderClassName = PortletItem.class.getName();
+		String finderMethodName = "findByG_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(classNameId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("classNameId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setLong(queryPos++, classNameId);
+
+				List<PortletItem> list = (List<PortletItem>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<PortletItem>)result;
+		}
+	}
+
+	public PortletItem findByG_C_First(long groupId, long classNameId,
+		OrderByComparator obc)
+		throws NoSuchPortletItemException, SystemException {
+		List<PortletItem> list = findByG_C(groupId, classNameId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No PortletItem exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("classNameId=" + classNameId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPortletItemException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public PortletItem findByG_C_Last(long groupId, long classNameId,
+		OrderByComparator obc)
+		throws NoSuchPortletItemException, SystemException {
+		int count = countByG_C(groupId, classNameId);
+
+		List<PortletItem> list = findByG_C(groupId, classNameId, count - 1,
+				count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No PortletItem exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("classNameId=" + classNameId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPortletItemException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public PortletItem[] findByG_C_PrevAndNext(long portletItemId,
+		long groupId, long classNameId, OrderByComparator obc)
+		throws NoSuchPortletItemException, SystemException {
+		PortletItem portletItem = findByPrimaryKey(portletItemId);
+
+		int count = countByG_C(groupId, classNameId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("classNameId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, groupId);
+
+			q.setLong(queryPos++, classNameId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					portletItem);
+
+			PortletItem[] array = new PortletItemImpl[3];
+
+			array[0] = (PortletItem)objArray[0];
+			array[1] = (PortletItem)objArray[1];
+			array[2] = (PortletItem)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<PortletItem> findByG_P_C(long groupId, String portletId,
 		long classNameId) throws SystemException {
 		boolean finderClassNameCacheEnabled = PortletItemModelImpl.CACHE_ENABLED;
@@ -804,6 +1057,13 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByG_C(long groupId, long classNameId)
+		throws SystemException {
+		for (PortletItem portletItem : findByG_C(groupId, classNameId)) {
+			remove(portletItem);
+		}
+	}
+
 	public void removeByG_P_C(long groupId, String portletId, long classNameId)
 		throws SystemException {
 		for (PortletItem portletItem : findByG_P_C(groupId, portletId,
@@ -823,6 +1083,82 @@ public class PortletItemPersistenceImpl extends BasePersistence
 	public void removeAll() throws SystemException {
 		for (PortletItem portletItem : findAll()) {
 			remove(portletItem);
+		}
+	}
+
+	public int countByG_C(long groupId, long classNameId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = PortletItemModelImpl.CACHE_ENABLED;
+		String finderClassName = PortletItem.class.getName();
+		String finderMethodName = "countByG_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), new Long(classNameId)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.PortletItem WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("classNameId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setLong(queryPos++, classNameId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
 		}
 	}
 

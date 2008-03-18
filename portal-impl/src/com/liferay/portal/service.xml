@@ -1305,6 +1305,10 @@
 
 		<!-- Finder methods -->
 
+		<finder name="G_C" return-type="Collection">
+			<finder-column name="groupId" />
+			<finder-column name="classNameId" />
+		</finder>
 		<finder name="G_P_C" return-type="Collection">
 			<finder-column name="groupId" />
 			<finder-column name="portletId" />

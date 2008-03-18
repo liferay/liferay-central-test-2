@@ -57,6 +57,7 @@ import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
@@ -372,6 +373,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.USER_PERMISSIONS);
 		boolean exportPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean exportPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
 		boolean exportPortletUserPreferences = MapUtil.getBoolean(
@@ -384,6 +387,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			_log.debug("Export user permissions " + exportUserPermissions);
 			_log.debug("Export portlet data " + exportPortletData);
 			_log.debug("Export portlet setup " + exportPortletSetup);
+			_log.debug(
+				"Export portlet archived setups " +
+					exportPortletArchivedSetups);
 			_log.debug(
 				"Export portlet user preferences " +
 					exportPortletUserPreferences);
@@ -546,6 +552,23 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		}
 
+		// Archived setups
+
+		if (exportPortletArchivedSetups) {
+			List<PortletItem> portletItems =
+				portletItemLocalService.getPortletItems(
+					groupId, PortletPreferences.class.getName());
+
+			for (PortletItem portletItem: portletItems) {
+				long ownerId = portletItem.getPortletItemId();
+				int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
+
+				exportPortletPreferences(
+					ownerId, ownerType, false, null, portletItem.getPortletId(),
+					root);
+			}
+		}
+
 		Element rolesEl = root.addElement("roles");
 
 		// Layout roles
@@ -614,6 +637,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		boolean exportPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
+		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean exportPortletUserPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 
@@ -704,6 +729,24 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			exportPortletPreferences(
 				layout.getCompanyId(), PortletKeys.PREFS_OWNER_TYPE_COMPANY,
 				false, layout, portletId, root);
+		}
+
+		if (exportPortletArchivedSetups) {
+			String rootPortletId = PortletImpl.getRootPortletId(portletId);
+
+			List<PortletItem> portletItems =
+				portletItemLocalService.getPortletItems(
+					layout.getGroupId(), rootPortletId,
+					PortletPreferences.class.getName());
+
+			for (PortletItem portletItem: portletItems) {
+				long ownerId = portletItem.getPortletItemId();
+				int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
+
+				exportPortletPreferences(
+					ownerId, ownerType, false, null, portletItem.getPortletId(),
+					root);
+			}
 		}
 
 		if (exportPortletUserPreferences) {
@@ -909,6 +952,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
 		boolean importPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
+		boolean importPortletArchivedSetups = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean importPortletUserPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		boolean importTheme = MapUtil.getBoolean(
@@ -922,6 +967,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			_log.debug("Import user permissions " + importUserPermissions);
 			_log.debug("Import portlet data " + importPortletData);
 			_log.debug("Import portlet setup " + importPortletSetup);
+			_log.debug(
+				"Import portlet archived setups " +
+					importPortletArchivedSetups);
 			_log.debug(
 				"Import portlet user preferences " +
 					importPortletUserPreferences);
@@ -1158,8 +1206,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			// Portlet preferences
 
 			importPortletPreferences(
-				layoutSet.getCompanyId(), layout.getPlid(), layoutEl,
-				importPortletSetup, importPortletUserPreferences);
+				context, layoutSet.getCompanyId(), layout.getGroupId(),
+				layout.getPlid(), layoutEl, importPortletSetup,
+				importPortletArchivedSetups, importPortletUserPreferences);
 
 			// Portlet data
 
@@ -1175,6 +1224,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					permissionsEl, importUserPermissions);
 			}
 		}
+
+		// Archived Setups
+
+		importPortletPreferences(
+			context, layoutSet.getCompanyId(), groupId, 0, root,
+			importPortletSetup, importPortletArchivedSetups,
+			importPortletUserPreferences);
 
 		Element rolesEl = (Element)root.element("roles");
 
@@ -1229,6 +1285,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.DELETE_PORTLET_DATA);
 		boolean importPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
+		boolean importPortletArchivedSetups = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean importPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
 		boolean importUserPreferences = MapUtil.getBoolean(
@@ -1322,7 +1380,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Portlet preferences
 
 		importPortletPreferences(
-			layout.getCompanyId(), plid, root, importPortletSetup,
+			context, layout.getCompanyId(), layout.getGroupId(), plid, root,
+			importPortletSetup, importPortletArchivedSetups,
 			importUserPreferences);
 
 		// Portlet data
@@ -2244,6 +2303,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				el.addAttribute("portlet-id", portletId);
 				el.addElement("preferences").addCDATA(
 					portletPreferences.getPreferences());
+
+				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
+					PortletItem portletItem =
+						portletItemLocalService.getPortletItem(ownerId);
+
+					User user = userLocalService.getUserById(
+						portletItem.getUserId());
+
+					el.addAttribute(
+						"archive-user-uuid", user.getUuid());
+					el.addAttribute(
+						"archive-name", portletItem.getName());
+				}
 			}
 		}
 	}
@@ -2255,10 +2327,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		PortletPreferences portletPreferences = null;
 
-		long plid = layout.getPlid();
+		long plid = PortletKeys.PREFS_OWNER_ID_DEFAULT;
+
+		if (layout != null) {
+			plid = layout.getPlid();
+		}
 
 		if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_COMPANY) ||
-			(ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP)) {
+			(ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) ||
+			(ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED)) {
 
 			plid = PortletKeys.PREFS_OWNER_ID_DEFAULT;
 		}
@@ -2268,8 +2345,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				portletPreferencesLocalService.getPortletPreferences(
 					ownerId, ownerType, plid, portletId);
 
-			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet)layout.getLayoutType();
+			LayoutTypePortlet layoutTypePortlet = null;
+
+			if (layout != null) {
+				layoutTypePortlet = (LayoutTypePortlet)layout.getLayoutType();
+			}
 
 			if ((layoutTypePortlet == null) ||
 				(layoutTypePortlet.hasPortletId(portletId))) {
@@ -2281,6 +2361,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				el.addAttribute("default-user", String.valueOf(defaultUser));
 				el.addAttribute("plid", String.valueOf(plid));
 				el.addAttribute("portlet-id", portletId);
+
+				if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
+					PortletItem portletItem =
+						portletItemLocalService.getPortletItem(ownerId);
+
+					User user = userLocalService.getUserById(
+						portletItem.getUserId());
+
+					el.addAttribute(
+						"archive-user-uuid", user.getUuid());
+					el.addAttribute(
+						"archive-name", portletItem.getName());
+				}
+
 				el.addElement("preferences").addCDATA(
 					portletPreferences.getPreferences());
 			}
@@ -3084,8 +3178,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void importPortletPreferences(
-			long companyId, long plid, Element parentEl,
-			boolean importPortletSetup, boolean importUserPreferences)
+			PortletDataContext context, long companyId, long groupId, long plid,
+			Element parentEl, boolean importPortletSetup,
+			boolean importPortletArchivedSetups, boolean importUserPreferences)
 		throws PortalException, SystemException {
 
 		long defaultUserId = userLocalService.getDefaultUserId(companyId);
@@ -3103,8 +3198,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				continue;
 			}
 
-			if ((ownerType != PortletKeys.PREFS_OWNER_TYPE_USER) &&
+			if (((ownerType == PortletKeys.PREFS_OWNER_TYPE_GROUP) ||
+				 (ownerType == PortletKeys.PREFS_OWNER_TYPE_LAYOUT)) &&
 				!importPortletSetup) {
+
+				continue;
+			}
+
+			if ((ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) &&
+				!importPortletArchivedSetups) {
 
 				continue;
 			}
@@ -3124,6 +3226,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				el.attributeValue("default-user"));
 			String portletId = el.attributeValue("portlet-id");
 			String preferences = el.elementText("preferences");
+
+			if (ownerType == PortletKeys.PREFS_OWNER_TYPE_ARCHIVED) {
+				String userUuid = el.attributeValue("archive-user-uuid");
+				String name = el.attributeValue("archive-name");
+
+				long userId = context.getUserId(userUuid);
+				
+				PortletItem portletItem =
+					portletItemLocalService.updatePortletItem(
+						userId, groupId, name, portletId,
+						PortletPreferences.class.getName());
+
+				plid = 0;
+				ownerId = portletItem.getPortletItemId();
+			}
 
 			if (defaultUser) {
 				ownerId = defaultUserId;

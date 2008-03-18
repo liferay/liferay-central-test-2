@@ -29,6 +29,13 @@
 
 			<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_SETUP %>Checkbox"><liferay-ui:message key="setup" /></label>
 		</li>
+		<c:if test='<%= tabs2.equals("import") || tabs2.equals("staging") || PortletItemLocalServiceUtil.getPortletItems(layout.getGroupId(), selPortlet.getRootPortletId(), com.liferay.portal.model.PortletPreferences.class.getName()).size() > 0 %>'>
+			<li class="tree-item">
+				<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS %>" defaultValue="<%= true %>" />
+
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS%>Checkbox"><liferay-ui:message key="archived-setups" /></label>
+			</li>
+		</c:if>
 	</c:if>
 
 	<c:if test="<%= supportsLAR %>">

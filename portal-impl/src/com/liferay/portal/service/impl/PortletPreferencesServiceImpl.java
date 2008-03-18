@@ -62,7 +62,7 @@ public class PortletPreferencesServiceImpl
 			ActionKeys.MANAGE_ARCHIVED_SETUPS);
 
 		long ownerId = portletItemId;
-		int ownerType = PortletKeys.PREFS_OWNER_TYPE_SAVED;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
 		long plid = 0;
 		String portletId = portletItem.getPortletId();
 
@@ -84,7 +84,7 @@ public class PortletPreferencesServiceImpl
 			groupId, name, portletId, PortletPreferences.class.getName());
 
 		long ownerId = portletItem.getPortletItemId();
-		int ownerType = PortletKeys.PREFS_OWNER_TYPE_SAVED;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
 		long plid = 0;
 
 		javax.portlet.PortletPreferences archivedPrefs =
@@ -108,7 +108,7 @@ public class PortletPreferencesServiceImpl
 			PortletPreferences.class.getName());
 
 		long ownerId = portletItem.getPortletItemId();
-		int ownerType = PortletKeys.PREFS_OWNER_TYPE_SAVED;
+		int ownerType = PortletKeys.PREFS_OWNER_TYPE_ARCHIVED;
 		long plid = 0;
 
 		javax.portlet.PortletPreferences archivedPrefs =

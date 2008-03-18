@@ -102,6 +102,15 @@ public class PortletItemLocalServiceImpl
 			groupId, portletId, classNameId);
 	}
 
+	public List<PortletItem> getPortletItems(
+			long groupId, String className)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return portletItemPersistence.findByG_C(groupId, classNameId);
+	}
+
 	public PortletItem updatePortletItem(
 			long userId, long groupId, String name, String portletId,
 			String className)
