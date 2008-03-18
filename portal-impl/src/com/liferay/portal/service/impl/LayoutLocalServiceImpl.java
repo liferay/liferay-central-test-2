@@ -83,6 +83,7 @@ import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
+import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.util.CollectionFactory;
@@ -1567,13 +1568,18 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				DLFolder folder = dlFolderLocalService.getFolder(
 					layout.getDlFolderId());
 
-				dlFolderLocalService.updateFolder(
-					folder.getFolderId(), folder.getParentFolderId(),
-					layout.getName(LocaleUtil.getDefault()),
-					folder.getDescription());
+				if (!layout.getName(LocaleUtil.getDefault()).equals(folder.getName())) {
+					dlFolderLocalService.updateFolder(
+						folder.getFolderId(), folder.getParentFolderId(),
+						layout.getName(LocaleUtil.getDefault()),
+						folder.getDescription());
+				}
 			}
 		}
 		catch (NoSuchFolderException nsfe) {
+		}
+		catch (DuplicateFolderNameException dfne) {
+			_log.debug(dfne);
 		}
 
 		return layout;
