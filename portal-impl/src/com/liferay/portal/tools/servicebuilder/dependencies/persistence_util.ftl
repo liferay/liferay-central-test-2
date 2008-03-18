@@ -6,7 +6,7 @@ public class ${entity.name}Util {
 
 	<#list methods as method>
 		<#if !method.isConstructor() && method.isPublic()>
-			public static ${method.returns.value}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
+			public static ${method.returns.value}${method.returnsGenericsName}${serviceBuilder.getDimensions("${method.returns.dimensions}")} ${method.name} (
 
 			<#list method.parameters as parameter>
 				${parameter.type.value}${serviceBuilder.getDimensions("${parameter.type.dimensions}")} ${parameter.name}

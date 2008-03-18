@@ -6,7 +6,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import java.io.Serializable;
 import java.util.Date;
 
-public class ${entity.PKClassName} implements Comparable, Serializable {
+public class ${entity.PKClassName} implements Comparable<${entity.PKClassName}>, Serializable {
 
 	<#list entity.PKList as column>
 		public ${column.type} ${column.name};
@@ -49,12 +49,10 @@ public class ${entity.PKClassName} implements Comparable, Serializable {
 		</#if>
 	</#list>
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
+	public int compareTo(${entity.PKClassName} pk) { 
+		if (pk == null) {
 			return -1;
 		}
-
-		${entity.PKClassName} pk = (${entity.PKClassName})obj;
 
 		int value = 0;
 
