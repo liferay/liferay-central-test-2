@@ -22,7 +22,7 @@
 
 package com.liferay.portal.search;
 
-import com.liferay.util.HttpUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 
 import java.text.SimpleDateFormat;
 

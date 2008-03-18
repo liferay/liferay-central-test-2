@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -149,7 +148,7 @@ public class PermissionModelImpl extends BaseModelImpl {
 
 			model.setPermissionId(getPermissionId());
 			model.setCompanyId(getCompanyId());
-			model.setActionId(Html.escape(getActionId()));
+			model.setActionId(HtmlUtil.escape(getActionId()));
 			model.setResourceId(getResourceId());
 
 			model = (Permission)Proxy.newProxyInstance(Permission.class.getClassLoader(),

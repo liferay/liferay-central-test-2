@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -165,8 +164,8 @@ public class PortletModelImpl extends BaseModelImpl {
 
 			model.setId(getId());
 			model.setCompanyId(getCompanyId());
-			model.setPortletId(Html.escape(getPortletId()));
-			model.setRoles(Html.escape(getRoles()));
+			model.setPortletId(HtmlUtil.escape(getPortletId()));
+			model.setRoles(HtmlUtil.escape(getRoles()));
 			model.setActive(getActive());
 
 			model = (Portlet)Proxy.newProxyInstance(Portlet.class.getClassLoader(),

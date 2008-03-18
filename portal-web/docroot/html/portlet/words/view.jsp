@@ -36,7 +36,7 @@ String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 
 <liferay-ui:error exception="<%= ScramblerException.class %>" message="please-enter-a-word-that-is-at-least-3-characters-long" />
 
-<input name="<portlet:namespace />word" type="text" value="<%= Html.escape(word) %>" />
+<input name="<portlet:namespace />word" type="text" value="<%= HtmlUtil.escape(word) %>" />
 
 <select name="<portlet:namespace />scramble">
 	<option <%= scramble ? "selected" : "" %> value="1"><liferay-ui:message key="scramble" /></option>
@@ -52,7 +52,7 @@ String[] words = (String[])request.getAttribute(WebKeys.WORDS_LIST);
 	for (int i = 0; i < words.length; i++) {
 	%>
 
-		<%= Html.escape(words[i]) %><br />
+		<%= HtmlUtil.escape(words[i]) %><br />
 
 	<%
 	}

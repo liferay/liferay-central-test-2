@@ -23,12 +23,11 @@
 package com.liferay.portlet.weather.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.weather.model.Weather;
-import com.liferay.util.Html;
-import com.liferay.util.Http;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 /**
@@ -47,7 +46,7 @@ public class WeatherWebCacheItem implements WebCacheItem {
 		Weather weather = null;
 
 		try {
-			String text = Html.stripComments(Http.URLtoString(
+			String text = HtmlUtil.stripComments(HttpUtil.URLtoString(
 				"http://weather.yahoo.com/search/weather2?p=" +
 					HttpUtil.encodeURL(_zip)));
 

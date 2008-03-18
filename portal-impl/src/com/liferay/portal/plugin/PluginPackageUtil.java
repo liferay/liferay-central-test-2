@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.plugin.RemotePluginPackageRepository;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -37,12 +39,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.Html;
-import com.liferay.util.Http;
 import com.liferay.util.License;
 import com.liferay.util.Screenshot;
 import com.liferay.util.Time;
@@ -627,9 +628,12 @@ public class PluginPackageUtil {
 		String pluginsXmlURL = sm.toString();
 
 		try {
-			HostConfiguration hostConfig = Http.getHostConfig(pluginsXmlURL);
+			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
 
-			HttpClient client = Http.getClient(hostConfig);
+			HostConfiguration hostConfig = httpImpl.getHostConfig(
+				pluginsXmlURL);
+
+			HttpClient client = httpImpl.getClient(hostConfig);
 
 			GetMethod getFileMethod = new GetMethod(pluginsXmlURL);
 
@@ -1060,7 +1064,7 @@ public class PluginPackageUtil {
 	}
 
 	private String _readText(String text) {
-		return Html.stripHtml(GetterUtil.getString(text));
+		return HtmlUtil.stripHtml(GetterUtil.getString(text));
 	}
 
 	private void _refreshUpdatesAvailableCache() {

@@ -25,6 +25,7 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -52,7 +53,6 @@ import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemPriceImpl;
 import com.liferay.portlet.shopping.service.base.ShoppingItemLocalServiceBaseImpl;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Http;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
 
@@ -131,7 +131,7 @@ public class ShoppingItemLocalServiceImpl
 					PwdGenerator.getPassword(
 						PwdGenerator.KEY1 + PwdGenerator.KEY2, 12) + ".jpg");
 
-				byte[] smallBytes = Http.URLtoByteArray(
+				byte[] smallBytes = HttpUtil.URLtoByteArray(
 					amazonRankings.getSmallImageURL());
 
 				if (smallBytes.length < 1024) {
@@ -152,7 +152,7 @@ public class ShoppingItemLocalServiceImpl
 					PwdGenerator.getPassword(
 						PwdGenerator.KEY1 + PwdGenerator.KEY2, 12) + ".jpg");
 
-				byte[] mediumBytes = Http.URLtoByteArray(
+				byte[] mediumBytes = HttpUtil.URLtoByteArray(
 					amazonRankings.getMediumImageURL());
 
 				if (mediumBytes.length < 1024) {
@@ -173,7 +173,7 @@ public class ShoppingItemLocalServiceImpl
 					PwdGenerator.getPassword(
 						PwdGenerator.KEY1 + PwdGenerator.KEY2, 12) + ".jpg");
 
-				byte[] largeBytes = Http.URLtoByteArray(
+				byte[] largeBytes = HttpUtil.URLtoByteArray(
 					amazonRankings.getLargeImageURL());
 
 				if (largeBytes.length < 1024) {

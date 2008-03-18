@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -42,7 +43,6 @@ import com.liferay.portlet.wiki.service.permission.WikiNodePermission;
 import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
-import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 import com.liferay.util.diff.DiffUtil;
 
@@ -311,8 +311,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 				if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
 					value = StringUtil.shorten(
-						Html.stripHtml(page.getContent()), _RSS_ABSTRACT_LENGTH,
-						StringPool.BLANK);
+						HtmlUtil.stripHtml(page.getContent()),
+						_RSS_ABSTRACT_LENGTH, StringPool.BLANK);
 				}
 				else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {
 					value = StringPool.BLANK;
@@ -352,8 +352,8 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		String sourceContent = WikiUtil.processContent(latestPage.getContent());
 		String targetContent = WikiUtil.processContent(page.getContent());
 
-		sourceContent = Html.escape(sourceContent);
-		targetContent = Html.escape(targetContent);
+		sourceContent = HtmlUtil.escape(sourceContent);
+		targetContent = HtmlUtil.escape(targetContent);
 
 		List[] diffResults = DiffUtil.diff(
 			new StringReader(sourceContent), new StringReader(targetContent));

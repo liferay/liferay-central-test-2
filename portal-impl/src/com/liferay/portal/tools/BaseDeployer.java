@@ -26,6 +26,7 @@ import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -38,7 +39,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Http;
 import com.liferay.util.License;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.Time;
@@ -676,7 +676,7 @@ public class BaseDeployer {
 					_log.info("Downloading library from " + url);
 				}
 
-				byte[] bytes = Http.URLtoByteArray(url);
+				byte[] bytes = HttpUtil.URLtoByteArray(url);
 
 				FileUtil.write(file, bytes);
 			}

@@ -25,6 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -36,7 +37,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
-import com.liferay.util.Http;
 import com.liferay.util.ListUtil;
 
 import java.io.IOException;
@@ -399,7 +399,7 @@ public class LayoutTemplateLocalUtil {
 			String content = null;
 
 			try {
-				content = Http.URLtoString(ctx.getResource(
+				content = HttpUtil.URLtoString(ctx.getResource(
 					layoutTemplateModel.getTemplatePath()));
 			}
 			catch (Exception e) {
@@ -428,7 +428,7 @@ public class LayoutTemplateLocalUtil {
 				String wapContent = null;
 
 				try {
-					wapContent = Http.URLtoString(ctx.getResource(
+					wapContent = HttpUtil.URLtoString(ctx.getResource(
 						layoutTemplateModel.getWapTemplatePath()));
 				}
 				catch (Exception e) {

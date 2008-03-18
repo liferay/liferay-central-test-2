@@ -25,10 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -253,12 +252,12 @@ public class WebsiteModelImpl extends BaseModelImpl {
 			model.setWebsiteId(getWebsiteId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
-			model.setUrl(Html.escape(getUrl()));
+			model.setUrl(HtmlUtil.escape(getUrl()));
 			model.setTypeId(getTypeId());
 			model.setPrimary(getPrimary());
 

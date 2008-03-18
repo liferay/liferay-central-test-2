@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -191,8 +190,8 @@ public class ImageModelImpl extends BaseModelImpl {
 
 			model.setImageId(getImageId());
 			model.setModifiedDate(getModifiedDate());
-			model.setText(Html.escape(getText()));
-			model.setType(Html.escape(getType()));
+			model.setText(HtmlUtil.escape(getText()));
+			model.setType(HtmlUtil.escape(getType()));
 			model.setHeight(getHeight());
 			model.setWidth(getWidth());
 			model.setSize(getSize());

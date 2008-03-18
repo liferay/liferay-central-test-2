@@ -24,12 +24,11 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingCategory;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -241,12 +240,12 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setParentCategoryId(getParentCategoryId());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 
 			model = (ShoppingCategory)Proxy.newProxyInstance(ShoppingCategory.class.getClassLoader(),
 					new Class[] { ShoppingCategory.class },

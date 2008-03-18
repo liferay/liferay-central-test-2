@@ -23,10 +23,10 @@
 package com.liferay.portlet.reverendfun.util;
 
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringComparator;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
-import com.liferay.util.Http;
 import com.liferay.util.Time;
 
 import java.text.DateFormat;
@@ -65,7 +65,7 @@ public class ReverendFunWebCacheItem implements WebCacheItem {
 			String url = "http://www.reverendfun.com/artchives/?search=";
 
 			while (cal.before(now)) {
-				String text = Http.URLtoString(
+				String text = HttpUtil.URLtoString(
 					url + dateFormatYM.format(cal.getTime()));
 
 				int x = text.indexOf("date=");

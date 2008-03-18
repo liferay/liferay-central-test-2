@@ -22,7 +22,7 @@
 
 package com.liferay.jbi.mule.util;
 
-import com.liferay.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 
 import java.util.Map;
 
@@ -42,7 +42,7 @@ public class URLTransformComponent
 		String xml = "<result />";
 
 		try {
-			xml = Http.URLtoString(url, null, parameters, true);
+			xml = HttpUtil.URLtoString(url, null, parameters, true);
 		}
 		catch (Exception e) {
 		}

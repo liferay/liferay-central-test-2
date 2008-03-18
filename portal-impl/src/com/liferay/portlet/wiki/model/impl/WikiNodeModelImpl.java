@@ -24,12 +24,11 @@ package com.liferay.portlet.wiki.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.wiki.model.WikiNode;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -253,16 +252,16 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setNodeId(getNodeId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setLastPostDate(getLastPostDate());
 
 			model = (WikiNode)Proxy.newProxyInstance(WikiNode.class.getClassLoader(),

@@ -25,12 +25,11 @@ package com.liferay.portlet.blogs.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.blogs.model.BlogsEntry;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -270,17 +269,17 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setEntryId(getEntryId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setTitle(Html.escape(getTitle()));
-			model.setUrlTitle(Html.escape(getUrlTitle()));
-			model.setContent(Html.escape(getContent()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
+			model.setUrlTitle(HtmlUtil.escape(getUrlTitle()));
+			model.setContent(HtmlUtil.escape(getContent()));
 			model.setDisplayDate(getDisplayDate());
 
 			model = (BlogsEntry)Proxy.newProxyInstance(BlogsEntry.class.getClassLoader(),

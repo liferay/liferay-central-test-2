@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -289,11 +288,11 @@ public class GroupModelImpl extends BaseModelImpl {
 			model.setClassPK(getClassPK());
 			model.setParentGroupId(getParentGroupId());
 			model.setLiveGroupId(getLiveGroupId());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setType(getType());
-			model.setTypeSettings(Html.escape(getTypeSettings()));
-			model.setFriendlyURL(Html.escape(getFriendlyURL()));
+			model.setTypeSettings(HtmlUtil.escape(getTypeSettings()));
+			model.setFriendlyURL(HtmlUtil.escape(getFriendlyURL()));
 			model.setActive(getActive());
 
 			model = (Group)Proxy.newProxyInstance(Group.class.getClassLoader(),

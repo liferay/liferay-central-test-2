@@ -23,11 +23,11 @@
 package com.liferay.portlet.mail.model;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.Html;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -72,7 +72,7 @@ public class MailContent {
 			String body = GetterUtil.getString(_plainBody);
 
 			if (Validator.isNotNull(body)) {
-				body = Html.escape(body);
+				body = HtmlUtil.escape(body);
 				body = StringUtil.replace(body, "\t", "    ");
 				body = StringUtil.replace(body, "  ", " &nbsp;");
 				body = StringUtil.replace(body, "\n", "<BR />");

@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -53,7 +54,6 @@ import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator
 import com.liferay.portlet.journal.util.comparator.ArticleReviewDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleTitleComparator;
 import com.liferay.util.FiniteUniqueStack;
-import com.liferay.util.Http;
 import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -667,7 +667,7 @@ public class JournalUtil {
 		tokens.put("main_path", themeDisplay.getPathMain());
 		tokens.put("portal_ctx", themeDisplay.getPathContext());
 		tokens.put(
-			"portal_url", Http.removeProtocol(themeDisplay.getURLPortal()));
+			"portal_url", HttpUtil.removeProtocol(themeDisplay.getURLPortal()));
 		tokens.put("root_path", themeDisplay.getPathContext());
 		tokens.put("theme_image_path", themeDisplay.getPathThemeImages());
 

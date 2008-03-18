@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Country;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -194,11 +193,11 @@ public class CountryModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setCountryId(getCountryId());
-			model.setName(Html.escape(getName()));
-			model.setA2(Html.escape(getA2()));
-			model.setA3(Html.escape(getA3()));
-			model.setNumber(Html.escape(getNumber()));
-			model.setIdd(Html.escape(getIdd()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setA2(HtmlUtil.escape(getA2()));
+			model.setA3(HtmlUtil.escape(getA3()));
+			model.setNumber(HtmlUtil.escape(getNumber()));
+			model.setIdd(HtmlUtil.escape(getIdd()));
 			model.setActive(getActive());
 
 			model = (Country)Proxy.newProxyInstance(Country.class.getClassLoader(),

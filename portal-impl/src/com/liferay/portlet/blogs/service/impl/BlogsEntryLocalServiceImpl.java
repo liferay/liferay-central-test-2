@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
@@ -45,8 +46,6 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.blogs.util.Indexer;
-import com.liferay.util.Http;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.Normalizer;
 import com.liferay.util.lucene.HitsImpl;
 
@@ -658,7 +657,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		}
 
 		try {
-			String response = Http.URLtoString(sm.toString());
+			String response = HttpUtil.URLtoString(sm.toString());
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Google ping response: " + response);

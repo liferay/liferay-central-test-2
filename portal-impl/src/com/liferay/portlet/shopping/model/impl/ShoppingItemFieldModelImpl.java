@@ -24,12 +24,11 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingItemField;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -166,9 +165,9 @@ public class ShoppingItemFieldModelImpl extends BaseModelImpl {
 
 			model.setItemFieldId(getItemFieldId());
 			model.setItemId(getItemId());
-			model.setName(Html.escape(getName()));
-			model.setValues(Html.escape(getValues()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setValues(HtmlUtil.escape(getValues()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 
 			model = (ShoppingItemField)Proxy.newProxyInstance(ShoppingItemField.class.getClassLoader(),
 					new Class[] { ShoppingItemField.class },

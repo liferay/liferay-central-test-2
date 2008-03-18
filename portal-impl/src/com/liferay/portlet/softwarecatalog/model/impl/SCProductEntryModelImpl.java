@@ -25,12 +25,11 @@ package com.liferay.portlet.softwarecatalog.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductEntry;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -340,18 +339,18 @@ public class SCProductEntryModelImpl extends BaseModelImpl {
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setName(Html.escape(getName()));
-			model.setType(Html.escape(getType()));
-			model.setTags(Html.escape(getTags()));
-			model.setShortDescription(Html.escape(getShortDescription()));
-			model.setLongDescription(Html.escape(getLongDescription()));
-			model.setPageURL(Html.escape(getPageURL()));
-			model.setAuthor(Html.escape(getAuthor()));
-			model.setRepoGroupId(Html.escape(getRepoGroupId()));
-			model.setRepoArtifactId(Html.escape(getRepoArtifactId()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setType(HtmlUtil.escape(getType()));
+			model.setTags(HtmlUtil.escape(getTags()));
+			model.setShortDescription(HtmlUtil.escape(getShortDescription()));
+			model.setLongDescription(HtmlUtil.escape(getLongDescription()));
+			model.setPageURL(HtmlUtil.escape(getPageURL()));
+			model.setAuthor(HtmlUtil.escape(getAuthor()));
+			model.setRepoGroupId(HtmlUtil.escape(getRepoGroupId()));
+			model.setRepoArtifactId(HtmlUtil.escape(getRepoArtifactId()));
 
 			model = (SCProductEntry)Proxy.newProxyInstance(SCProductEntry.class.getClassLoader(),
 					new Class[] { SCProductEntry.class },

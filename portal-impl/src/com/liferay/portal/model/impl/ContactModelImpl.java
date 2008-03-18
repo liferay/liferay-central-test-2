@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -501,30 +500,30 @@ public class ContactModelImpl extends BaseModelImpl {
 			model.setContactId(getContactId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setAccountId(getAccountId());
 			model.setParentContactId(getParentContactId());
-			model.setFirstName(Html.escape(getFirstName()));
-			model.setMiddleName(Html.escape(getMiddleName()));
-			model.setLastName(Html.escape(getLastName()));
+			model.setFirstName(HtmlUtil.escape(getFirstName()));
+			model.setMiddleName(HtmlUtil.escape(getMiddleName()));
+			model.setLastName(HtmlUtil.escape(getLastName()));
 			model.setPrefixId(getPrefixId());
 			model.setSuffixId(getSuffixId());
 			model.setMale(getMale());
 			model.setBirthday(getBirthday());
-			model.setSmsSn(Html.escape(getSmsSn()));
-			model.setAimSn(Html.escape(getAimSn()));
-			model.setIcqSn(Html.escape(getIcqSn()));
-			model.setJabberSn(Html.escape(getJabberSn()));
-			model.setMsnSn(Html.escape(getMsnSn()));
-			model.setSkypeSn(Html.escape(getSkypeSn()));
-			model.setYmSn(Html.escape(getYmSn()));
-			model.setEmployeeStatusId(Html.escape(getEmployeeStatusId()));
-			model.setEmployeeNumber(Html.escape(getEmployeeNumber()));
-			model.setJobTitle(Html.escape(getJobTitle()));
-			model.setJobClass(Html.escape(getJobClass()));
-			model.setHoursOfOperation(Html.escape(getHoursOfOperation()));
+			model.setSmsSn(HtmlUtil.escape(getSmsSn()));
+			model.setAimSn(HtmlUtil.escape(getAimSn()));
+			model.setIcqSn(HtmlUtil.escape(getIcqSn()));
+			model.setJabberSn(HtmlUtil.escape(getJabberSn()));
+			model.setMsnSn(HtmlUtil.escape(getMsnSn()));
+			model.setSkypeSn(HtmlUtil.escape(getSkypeSn()));
+			model.setYmSn(HtmlUtil.escape(getYmSn()));
+			model.setEmployeeStatusId(HtmlUtil.escape(getEmployeeStatusId()));
+			model.setEmployeeNumber(HtmlUtil.escape(getEmployeeNumber()));
+			model.setJobTitle(HtmlUtil.escape(getJobTitle()));
+			model.setJobClass(HtmlUtil.escape(getJobClass()));
+			model.setHoursOfOperation(HtmlUtil.escape(getHoursOfOperation()));
 
 			model = (Contact)Proxy.newProxyInstance(Contact.class.getClassLoader(),
 					new Class[] { Contact.class },

@@ -25,10 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Phone;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -270,13 +269,13 @@ public class PhoneModelImpl extends BaseModelImpl {
 			model.setPhoneId(getPhoneId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
-			model.setNumber(Html.escape(getNumber()));
-			model.setExtension(Html.escape(getExtension()));
+			model.setNumber(HtmlUtil.escape(getNumber()));
+			model.setExtension(HtmlUtil.escape(getExtension()));
 			model.setTypeId(getTypeId());
 			model.setPrimary(getPrimary());
 

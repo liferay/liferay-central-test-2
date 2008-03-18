@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -422,20 +421,20 @@ public class LayoutModelImpl extends BaseModelImpl {
 			model.setPrivateLayout(getPrivateLayout());
 			model.setLayoutId(getLayoutId());
 			model.setParentLayoutId(getParentLayoutId());
-			model.setName(Html.escape(getName()));
-			model.setTitle(Html.escape(getTitle()));
-			model.setDescription(Html.escape(getDescription()));
-			model.setType(Html.escape(getType()));
-			model.setTypeSettings(Html.escape(getTypeSettings()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setType(HtmlUtil.escape(getType()));
+			model.setTypeSettings(HtmlUtil.escape(getTypeSettings()));
 			model.setHidden(getHidden());
-			model.setFriendlyURL(Html.escape(getFriendlyURL()));
+			model.setFriendlyURL(HtmlUtil.escape(getFriendlyURL()));
 			model.setIconImage(getIconImage());
 			model.setIconImageId(getIconImageId());
-			model.setThemeId(Html.escape(getThemeId()));
-			model.setColorSchemeId(Html.escape(getColorSchemeId()));
-			model.setWapThemeId(Html.escape(getWapThemeId()));
-			model.setWapColorSchemeId(Html.escape(getWapColorSchemeId()));
-			model.setCss(Html.escape(getCss()));
+			model.setThemeId(HtmlUtil.escape(getThemeId()));
+			model.setColorSchemeId(HtmlUtil.escape(getColorSchemeId()));
+			model.setWapThemeId(HtmlUtil.escape(getWapThemeId()));
+			model.setWapColorSchemeId(HtmlUtil.escape(getWapColorSchemeId()));
+			model.setCss(HtmlUtil.escape(getCss()));
 			model.setPriority(getPriority());
 			model.setDlFolderId(getDlFolderId());
 

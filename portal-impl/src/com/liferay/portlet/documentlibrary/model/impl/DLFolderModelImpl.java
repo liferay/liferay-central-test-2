@@ -24,12 +24,11 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFolder;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -266,17 +265,17 @@ public class DLFolderModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setFolderId(getFolderId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setParentFolderId(getParentFolderId());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setLastPostDate(getLastPostDate());
 
 			model = (DLFolder)Proxy.newProxyInstance(DLFolder.class.getClassLoader(),

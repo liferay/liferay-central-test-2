@@ -22,13 +22,12 @@
 
 package com.liferay.portlet.translator.util;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.translator.model.Translation;
-import com.liferay.util.Http;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 import java.net.URL;
@@ -56,7 +55,7 @@ public class TranslationWebCacheItem implements WebCacheItem {
 			url.append("&urltext=").append(HttpUtil.encodeURL(_fromText));
 			url.append("&lp=").append(_translationId);
 
-			String text = Http.URLtoString(new URL(url.toString()));
+			String text = HttpUtil.URLtoString(new URL(url.toString()));
 
 			int begin = text.indexOf("<div style=padding:10px;>") + 25;
 			int end = text.indexOf("</div>", begin);

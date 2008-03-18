@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -31,7 +32,6 @@ import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.util.Html;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -112,7 +112,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		content = StringUtil.replace(content, "&lt;", "<");
 		content = StringUtil.replace(content, "&gt;", ">");
 
-		content = Html.extractText(content);
+		content = HtmlUtil.extractText(content);
 
 		Document doc = new Document();
 

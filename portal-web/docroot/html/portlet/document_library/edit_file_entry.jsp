@@ -193,7 +193,7 @@ portletURL.setParameter("name", name);
 		</td>
 		<td>
 			<a href="<%= themeDisplay.getPathMain() %>/document_library/get_file?p_l_id=<%= themeDisplay.getPlid() %>&folderId=<%= folderId %>&name=<%= HttpUtil.encodeURL(name) %>">
-			<%= Html.escape(fileEntry.getTitleWithExtension()) %>
+			<%= HtmlUtil.escape(fileEntry.getTitleWithExtension()) %>
 			</a>
 		</td>
 	</tr>

@@ -23,9 +23,9 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Html;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.xml.XMLMerger;
 import com.liferay.util.xml.descriptor.WebXML23Descriptor;
@@ -59,7 +59,7 @@ public class WebXMLBuilder {
 	public static String organizeWebXML(String webXML)
 		throws DocumentException, IOException {
 
-		webXML = Html.stripComments(webXML);
+		webXML = HtmlUtil.stripComments(webXML);
 
 		double version = 2.3;
 

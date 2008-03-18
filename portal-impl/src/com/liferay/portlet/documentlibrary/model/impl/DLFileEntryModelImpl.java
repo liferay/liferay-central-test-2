@@ -24,12 +24,11 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -336,23 +335,23 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setFileEntryId(getFileEntryId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setVersionUserId(getVersionUserId());
-			model.setVersionUserName(Html.escape(getVersionUserName()));
+			model.setVersionUserName(HtmlUtil.escape(getVersionUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setFolderId(getFolderId());
-			model.setName(Html.escape(getName()));
-			model.setTitle(Html.escape(getTitle()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setVersion(getVersion());
 			model.setSize(getSize());
 			model.setReadCount(getReadCount());
-			model.setExtraSettings(Html.escape(getExtraSettings()));
+			model.setExtraSettings(HtmlUtil.escape(getExtraSettings()));
 
 			model = (DLFileEntry)Proxy.newProxyInstance(DLFileEntry.class.getClassLoader(),
 					new Class[] { DLFileEntry.class },

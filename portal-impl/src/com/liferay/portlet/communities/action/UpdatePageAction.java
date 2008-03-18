@@ -28,6 +28,7 @@ import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -44,7 +45,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.communities.util.CommunitiesUtil;
-import com.liferay.util.Http;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -152,7 +152,7 @@ public class UpdatePageAction extends JSONAction {
 		String layoutURL = PortalUtil.getLayoutURL(layout, themeDisplay);
 
 		if (Validator.isNotNull(doAsUserId)) {
-			layoutURL = Http.addParameter(
+			layoutURL = HttpUtil.addParameter(
 				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
 		}
 

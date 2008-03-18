@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -289,13 +288,13 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 			model.setPrivateLayout(getPrivateLayout());
 			model.setLogo(getLogo());
 			model.setLogoId(getLogoId());
-			model.setThemeId(Html.escape(getThemeId()));
-			model.setColorSchemeId(Html.escape(getColorSchemeId()));
-			model.setWapThemeId(Html.escape(getWapThemeId()));
-			model.setWapColorSchemeId(Html.escape(getWapColorSchemeId()));
-			model.setCss(Html.escape(getCss()));
+			model.setThemeId(HtmlUtil.escape(getThemeId()));
+			model.setColorSchemeId(HtmlUtil.escape(getColorSchemeId()));
+			model.setWapThemeId(HtmlUtil.escape(getWapThemeId()));
+			model.setWapColorSchemeId(HtmlUtil.escape(getWapColorSchemeId()));
+			model.setCss(HtmlUtil.escape(getCss()));
 			model.setPageCount(getPageCount());
-			model.setVirtualHost(Html.escape(getVirtualHost()));
+			model.setVirtualHost(HtmlUtil.escape(getVirtualHost()));
 
 			model = (LayoutSet)Proxy.newProxyInstance(LayoutSet.class.getClassLoader(),
 					new Class[] { LayoutSet.class },

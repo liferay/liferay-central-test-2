@@ -30,7 +30,7 @@
 		<span class="notice-message"><%= LanguageUtil.format(pageContext, "the-portal-will-shutdown-for-maintenance-in-x-minutes", String.valueOf(ShutdownUtil.getInProcess() / Time.MINUTE), false) %></span>
 
 		<c:if test="<%= Validator.isNotNull(ShutdownUtil.getMessage()) %>">
-			<span class="custom-shutdown-message"><%= Html.escape(ShutdownUtil.getMessage()) %></span>
+			<span class="custom-shutdown-message"><%= HtmlUtil.escape(ShutdownUtil.getMessage()) %></span>
 		</c:if>
 	</div>
 </c:if>

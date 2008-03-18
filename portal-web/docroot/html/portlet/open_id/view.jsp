@@ -59,7 +59,7 @@
 						<liferay-ui:message key="open-id" />
 					</td>
 					<td>
-						<input class="openid_login" name="<portlet:namespace />openId" style="width: 120px;" type="text" value="<%= Html.escape(openId) %>" />
+						<input class="openid_login" name="<portlet:namespace />openId" style="width: 120px;" type="text" value="<%= HtmlUtil.escape(openId) %>" />
 					</td>
 				</tr>
 

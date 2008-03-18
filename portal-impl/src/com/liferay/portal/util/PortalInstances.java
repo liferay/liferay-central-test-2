@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.LayoutSet;
@@ -36,7 +37,6 @@ import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.struts.MultiMessageResources;
 import com.liferay.portlet.journal.service.JournalContentSearchLocalServiceUtil;
-import com.liferay.util.Http;
 import com.liferay.util.SetUtil;
 
 import java.util.ArrayList;
@@ -290,7 +290,7 @@ public class PortalInstances {
 		}
 
 		try {
-			String xml = Http.URLtoString(ctx.getResource(
+			String xml = HttpUtil.URLtoString(ctx.getResource(
 				"/WEB-INF/liferay-display.xml"));
 
 			PortletCategory portletCategory =

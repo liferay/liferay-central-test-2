@@ -22,12 +22,12 @@
 
 package com.liferay.portlet.todayinchristianhistory.util;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.todayinchristianhistory.model.Event;
-import com.liferay.util.Html;
-import com.liferay.util.Http;
 import com.liferay.util.Time;
 
 import java.util.ArrayList;
@@ -45,7 +45,7 @@ public class EventsWebCacheItem implements WebCacheItem {
 		List events = new ArrayList();
 
 		try {
-			String text = Http.URLtoString(
+			String text = HttpUtil.URLtoString(
 				"http://www.studylight.org/his/tich");
 
 			int x = text.indexOf("<table cellpadding=3 cellspacing=3>");
@@ -53,7 +53,7 @@ public class EventsWebCacheItem implements WebCacheItem {
 
 			int y = text.indexOf("<tr><td align=center", x);
 
-			text = Html.stripComments(text.substring(x, y)).trim();
+			text = HtmlUtil.stripComments(text.substring(x, y)).trim();
 
 			String[] array = StringUtil.split(text, "<tr>");
 
@@ -64,7 +64,7 @@ public class EventsWebCacheItem implements WebCacheItem {
 				if (x != -1 && y != -1) {
 					String year = array[i].substring(x + 3, y).trim();
 
-					String description = Html.stripHtml(
+					String description = HtmlUtil.stripHtml(
 						array[i].substring(y, array[i].length())).trim();
 
 					if (description.startsWith("-  ")) {

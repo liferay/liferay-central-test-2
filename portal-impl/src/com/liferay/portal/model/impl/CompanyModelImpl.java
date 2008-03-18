@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -190,10 +189,10 @@ public class CompanyModelImpl extends BaseModelImpl {
 
 			model.setCompanyId(getCompanyId());
 			model.setAccountId(getAccountId());
-			model.setWebId(Html.escape(getWebId()));
-			model.setKey(Html.escape(getKey()));
-			model.setVirtualHost(Html.escape(getVirtualHost()));
-			model.setMx(Html.escape(getMx()));
+			model.setWebId(HtmlUtil.escape(getWebId()));
+			model.setKey(HtmlUtil.escape(getKey()));
+			model.setVirtualHost(HtmlUtil.escape(getVirtualHost()));
+			model.setMx(HtmlUtil.escape(getMx()));
 			model.setLogoId(getLogoId());
 
 			model = (Company)Proxy.newProxyInstance(Company.class.getClassLoader(),

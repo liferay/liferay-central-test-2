@@ -24,12 +24,11 @@ package com.liferay.portlet.tags.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.model.TagsSource;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -150,8 +149,8 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 
 			model.setSourceId(getSourceId());
 			model.setParentSourceId(getParentSourceId());
-			model.setName(Html.escape(getName()));
-			model.setAcronym(Html.escape(getAcronym()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setAcronym(HtmlUtil.escape(getAcronym()));
 
 			model = (TagsSource)Proxy.newProxyInstance(TagsSource.class.getClassLoader(),
 					new Class[] { TagsSource.class },

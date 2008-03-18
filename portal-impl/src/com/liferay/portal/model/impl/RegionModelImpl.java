@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Region;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -165,8 +164,8 @@ public class RegionModelImpl extends BaseModelImpl {
 
 			model.setRegionId(getRegionId());
 			model.setCountryId(getCountryId());
-			model.setRegionCode(Html.escape(getRegionCode()));
-			model.setName(Html.escape(getName()));
+			model.setRegionCode(HtmlUtil.escape(getRegionCode()));
+			model.setName(HtmlUtil.escape(getName()));
 			model.setActive(getActive());
 
 			model = (Region)Proxy.newProxyInstance(Region.class.getClassLoader(),

@@ -24,12 +24,11 @@ package com.liferay.portlet.wiki.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.wiki.model.WikiPage;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -312,21 +311,21 @@ public class WikiPageModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setPageId(getPageId());
 			model.setResourcePrimKey(getResourcePrimKey());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setNodeId(getNodeId());
-			model.setTitle(Html.escape(getTitle()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
 			model.setVersion(getVersion());
-			model.setContent(Html.escape(getContent()));
-			model.setFormat(Html.escape(getFormat()));
+			model.setContent(HtmlUtil.escape(getContent()));
+			model.setFormat(HtmlUtil.escape(getFormat()));
 			model.setHead(getHead());
-			model.setParentTitle(Html.escape(getParentTitle()));
-			model.setRedirectTitle(Html.escape(getRedirectTitle()));
+			model.setParentTitle(HtmlUtil.escape(getParentTitle()));
+			model.setRedirectTitle(HtmlUtil.escape(getRedirectTitle()));
 
 			model = (WikiPage)Proxy.newProxyInstance(WikiPage.class.getClassLoader(),
 					new Class[] { WikiPage.class },

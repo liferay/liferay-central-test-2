@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.news.util;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portlet.news.model.Feed;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.Http;
 import com.liferay.util.Time;
 
 import java.io.BufferedReader;
@@ -61,7 +61,7 @@ public class CategoryWebCacheItem implements WebCacheItem {
 			String xml = null;
 
 			try {
-				xml = Http.URLtoString(url);
+				xml = HttpUtil.URLtoString(url);
 			}
 			catch (IOException ioe) {
 				xml = ContentUtil.get(

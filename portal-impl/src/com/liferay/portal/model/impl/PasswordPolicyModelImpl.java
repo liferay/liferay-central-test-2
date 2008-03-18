@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -482,12 +481,12 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 			model.setPasswordPolicyId(getPasswordPolicyId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setDefaultPolicy(getDefaultPolicy());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setChangeable(getChangeable());
 			model.setChangeRequired(getChangeRequired());
 			model.setMinAge(getMinAge());

@@ -10,7 +10,7 @@ import ${propsUtilPackage}.PropsUtil;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.Html;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import java.io.Serializable;
 import java.lang.reflect.Proxy;
 import java.sql.Types;
@@ -209,7 +209,7 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 					</#if>
 
 					<#if autoEscape && (column.type == "String")>
-						Html.escape(
+						HtmlUtil.escape(
 					</#if>
 
 					get${column.methodName}()

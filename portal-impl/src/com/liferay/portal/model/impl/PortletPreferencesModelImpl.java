@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -177,8 +176,8 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 			model.setOwnerId(getOwnerId());
 			model.setOwnerType(getOwnerType());
 			model.setPlid(getPlid());
-			model.setPortletId(Html.escape(getPortletId()));
-			model.setPreferences(Html.escape(getPreferences()));
+			model.setPortletId(HtmlUtil.escape(getPortletId()));
+			model.setPreferences(HtmlUtil.escape(getPreferences()));
 
 			model = (PortletPreferences)Proxy.newProxyInstance(PortletPreferences.class.getClassLoader(),
 					new Class[] { PortletPreferences.class },

@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -64,7 +65,6 @@ import com.liferay.portlet.RenderRequestFactory;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseFactory;
 import com.liferay.portlet.RenderResponseImpl;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import java.io.IOException;

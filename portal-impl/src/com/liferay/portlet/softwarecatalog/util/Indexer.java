@@ -24,12 +24,12 @@ package com.liferay.portlet.softwarecatalog.util;
 
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.softwarecatalog.service.SCProductEntryLocalServiceUtil;
-import com.liferay.util.Html;
 
 import java.io.IOException;
 
@@ -96,8 +96,8 @@ public class Indexer
 		String type, String shortDescription, String longDescription,
 		String pageURL, String repoGroupId, String repoArtifactId) {
 
-		shortDescription = Html.extractText(shortDescription);
-		longDescription = Html.extractText(longDescription);
+		shortDescription = HtmlUtil.extractText(shortDescription);
+		longDescription = HtmlUtil.extractText(longDescription);
 
 		String content =
 			userId + " " + userName + " " + type + " " + shortDescription +

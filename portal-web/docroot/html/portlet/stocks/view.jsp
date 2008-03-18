@@ -197,7 +197,7 @@
 				<table border="0" cellpadding="0" cellspacing="0" width="579">
 				<tr>
 					<td align="center">
-						<img src="<%= Http.getProtocol(request) %>://chart.bigcharts.com/bc3/quickchart/chart.asp?symb=<%= symbol %>&freq=<%= freq %>&time=<%= time %>" />
+						<img src="<%= HttpUtil.getProtocol(request) %>://chart.bigcharts.com/bc3/quickchart/chart.asp?symb=<%= symbol %>&freq=<%= freq %>&time=<%= time %>" />
 					</td>
 				</tr>
 				</table>

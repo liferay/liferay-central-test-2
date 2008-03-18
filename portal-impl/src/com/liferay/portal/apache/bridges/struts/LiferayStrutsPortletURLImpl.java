@@ -22,9 +22,9 @@
 
 package com.liferay.portal.apache.bridges.struts;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletURLImplWrapper;
-import com.liferay.util.HttpUtil;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

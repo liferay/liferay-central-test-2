@@ -25,12 +25,11 @@ package com.liferay.portlet.documentlibrary.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileRank;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -182,7 +181,7 @@ public class DLFileRankModelImpl extends BaseModelImpl {
 			model.setUserId(getUserId());
 			model.setCreateDate(getCreateDate());
 			model.setFolderId(getFolderId());
-			model.setName(Html.escape(getName()));
+			model.setName(HtmlUtil.escape(getName()));
 
 			model = (DLFileRank)Proxy.newProxyInstance(DLFileRank.class.getClassLoader(),
 					new Class[] { DLFileRank.class },

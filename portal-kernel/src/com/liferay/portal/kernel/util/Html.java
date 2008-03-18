@@ -20,54 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.kernel.util;
 
 /**
- * <a href="Html_IW.java.html"><b><i>View Source</i></b></a>
+ * <a href="Html.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Clarence Shen
+ * @author Harry Mark
  *
  */
-public class Html_IW {
-	public static Html_IW getInstance() {
-		return _instance;
-	}
+public interface Html {
 
-	public java.lang.String escape(java.lang.String text) {
-		return Html.escape(text);
-	}
+	public String escape(String text);
 
-	public java.lang.String fromInputSafe(java.lang.String text) {
-		return Html.fromInputSafe(text);
-	}
+	public String extractText(String html);
 
-	public java.lang.String replaceMsWordCharacters(java.lang.String text) {
-		return Html.replaceMsWordCharacters(text);
-	}
+	public String fromInputSafe(String text);
 
-	public java.lang.String stripBetween(java.lang.String text,
-		java.lang.String tag) {
-		return Html.stripBetween(text, tag);
-	}
+	public String replaceMsWordCharacters(String text);
 
-	public java.lang.String stripComments(java.lang.String text) {
-		return Html.stripComments(text);
-	}
+	public String stripBetween(String text, String tag);
 
-	public java.lang.String stripHtml(java.lang.String text) {
-		return Html.stripHtml(text);
-	}
+	public String stripComments(String text);
 
-	public java.lang.String toInputSafe(java.lang.String text) {
-		return Html.toInputSafe(text);
-	}
+	public String stripHtml(String text);
 
-	public java.lang.String unescape(java.lang.String text) {
-		return Html.unescape(text);
-	}
+	public String toInputSafe(String text);
 
-	private Html_IW() {
-	}
+	public String unescape(String text);
 
-	private static Html_IW _instance = new Html_IW();
 }

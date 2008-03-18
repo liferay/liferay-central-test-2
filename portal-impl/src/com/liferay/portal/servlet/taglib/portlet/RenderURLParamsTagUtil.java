@@ -22,11 +22,11 @@
 
 package com.liferay.portal.servlet.taglib.portlet;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.HttpUtil;
 
 import java.util.StringTokenizer;
 

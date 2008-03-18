@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
@@ -38,7 +39,6 @@ import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journal.util.comparator.ArticleModifiedDateComparator;
-import com.liferay.util.HttpUtil;
 
 import com.sun.syndication.feed.synd.SyndEnclosure;
 import com.sun.syndication.feed.synd.SyndEnclosureImpl;

@@ -23,10 +23,10 @@
 package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.Html;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.RenderRequest;
@@ -155,7 +155,7 @@ public class ErrorTag extends TagSupport {
 	}
 
 	public void setRowBreak(String rowBreak) {
-		_rowBreak = Html.unescape(rowBreak);
+		_rowBreak = HtmlUtil.unescape(rowBreak);
 	}
 
 	private static final String _START_PAGE = "/html/taglib/ui/error/start.jsp";

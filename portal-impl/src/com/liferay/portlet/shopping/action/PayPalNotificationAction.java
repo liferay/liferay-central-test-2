@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.shopping.action;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portlet.shopping.NoSuchOrderException;
 import com.liferay.portlet.shopping.service.ShoppingOrderLocalServiceUtil;
-import com.liferay.util.HttpUtil;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;

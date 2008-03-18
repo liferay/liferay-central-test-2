@@ -22,11 +22,11 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.Http;
 
 import java.io.IOException;
 
@@ -155,7 +155,8 @@ public class LayoutTemplateImpl
 					getTemplatePath());
 		}
 
-		String content = Http.URLtoString(_ctx.getResource(getTemplatePath()));
+		String content = HttpUtil.URLtoString(
+			_ctx.getResource(getTemplatePath()));
 
 		setContent(content);
 
@@ -197,7 +198,7 @@ public class LayoutTemplateImpl
 		String wapContent = null;
 
 		try {
-			wapContent = Http.URLtoString(
+			wapContent = HttpUtil.URLtoString(
 				_ctx.getResource(getWapTemplatePath()));
 		}
 		catch (Exception e) {

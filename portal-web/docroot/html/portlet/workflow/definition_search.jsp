@@ -44,7 +44,7 @@ DefinitionDisplayTerms displayTerms = (DefinitionDisplayTerms)searchContainer.ge
 		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= displayTerms.getDefinitionIdString() %>" />
 	</td>--%>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getName()) %>" />
+		<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
 	</td>
 </tr>
 </table>

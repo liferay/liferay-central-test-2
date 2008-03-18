@@ -23,7 +23,7 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 
 import java.io.StringReader;
 
@@ -66,7 +66,7 @@ public class URIResolver implements javax.xml.transform.URIResolver {
 					groupId, templateId, _tokens, _languageId);
 			}
 			else {
-				content = Http.URLtoString(href);
+				content = HttpUtil.URLtoString(href);
 			}
 
 			return new StreamSource(new StringReader(content));

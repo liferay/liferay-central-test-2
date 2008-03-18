@@ -23,9 +23,9 @@
 package com.liferay.portlet.messageboards.pop;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.Html;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -67,7 +67,7 @@ public class MBMailMessage {
 			return GetterUtil.getString(_plainBody);
 		}
 		else if (Validator.isNotNull(_htmlBody)) {
-			return Html.stripHtml(_htmlBody);
+			return HtmlUtil.stripHtml(_htmlBody);
 		}
 		else {
 			return "-";

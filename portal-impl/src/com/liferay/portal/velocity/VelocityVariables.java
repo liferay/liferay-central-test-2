@@ -31,6 +31,8 @@ import com.liferay.portal.kernel.util.ArrayUtil_IW;
 import com.liferay.portal.kernel.util.DateUtil_IW;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.GetterUtil_IW;
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil_IW;
@@ -65,8 +67,6 @@ import com.liferay.portal.util.SessionClicks_IW;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactory;
-import com.liferay.util.Html_IW;
-import com.liferay.util.HttpUtil_IW;
 
 import java.util.Iterator;
 import java.util.List;
@@ -131,11 +131,11 @@ public class VelocityVariables {
 
 		// Html util
 
-		vc.put("htmlUtil", Html_IW.getInstance());
+		vc.put("htmlUtil", HtmlUtil.getHtml());
 
 		// Http util
 
-		vc.put("httpUtil", HttpUtil_IW.getInstance());
+		vc.put("httpUtil", HttpUtil.getHttp());
 
 		// ImageServletToken
 

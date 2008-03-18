@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -133,8 +132,8 @@ public class ListTypeModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setListTypeId(getListTypeId());
-			model.setName(Html.escape(getName()));
-			model.setType(Html.escape(getType()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setType(HtmlUtil.escape(getType()));
 
 			model = (ListType)Proxy.newProxyInstance(ListType.class.getClassLoader(),
 					new Class[] { ListType.class },

@@ -25,12 +25,11 @@ package com.liferay.portlet.shopping.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -367,20 +366,20 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setCode(Html.escape(getCode()));
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setCode(HtmlUtil.escape(getCode()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setStartDate(getStartDate());
 			model.setEndDate(getEndDate());
 			model.setActive(getActive());
-			model.setLimitCategories(Html.escape(getLimitCategories()));
-			model.setLimitSkus(Html.escape(getLimitSkus()));
+			model.setLimitCategories(HtmlUtil.escape(getLimitCategories()));
+			model.setLimitSkus(HtmlUtil.escape(getLimitSkus()));
 			model.setMinOrder(getMinOrder());
 			model.setDiscount(getDiscount());
-			model.setDiscountType(Html.escape(getDiscountType()));
+			model.setDiscountType(HtmlUtil.escape(getDiscountType()));
 
 			model = (ShoppingCoupon)Proxy.newProxyInstance(ShoppingCoupon.class.getClassLoader(),
 					new Class[] { ShoppingCoupon.class },

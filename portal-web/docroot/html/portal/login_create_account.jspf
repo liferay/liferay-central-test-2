@@ -103,7 +103,7 @@
 	<form action="<%= themeDisplay.getPathMain() %>/portal/login" class="uni-form" method="post" name="fm1">
 	<input name="<%= Constants.CMD %>" type="hidden" value="already-registered" />
 	<input name="<%= sectionParam %>" type="hidden" value="already-registered" />
-	<input name="redirect" type="hidden" value="<%= Html.escape(redirect) %>" />
+	<input name="redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
 	<%
 	String login = LoginAction.getLogin(request, "login", company);
@@ -126,7 +126,7 @@
 		<div class="ctrl-holder">
 			<label for="login"><liferay-ui:message key="login" /></label>
 
-			<input class="lfr-input-text" id="login" name="login" type="text" value="<%= Html.escape(login) %>" />
+			<input class="lfr-input-text" id="login" name="login" type="text" value="<%= HtmlUtil.escape(login) %>" />
 		</div>
 
 		<div class="ctrl-holder">
@@ -166,7 +166,7 @@
 			<div class="ctrl-holder">
 				<label for="openId"><liferay-ui:message key="open-id" /></label>
 
-				<input class="openid_login" id="openId" name="openId" style="width: 150px;" type="text" value="<%= Html.escape(openId) %>" />
+				<input class="openid_login" id="openId" name="openId" style="width: 150px;" type="text" value="<%= HtmlUtil.escape(openId) %>" />
 			</div>
 
 			<div class="button-holder">

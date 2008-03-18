@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -237,13 +236,13 @@ public class OrganizationModelImpl extends BaseModelImpl {
 			model.setOrganizationId(getOrganizationId());
 			model.setCompanyId(getCompanyId());
 			model.setParentOrganizationId(getParentOrganizationId());
-			model.setName(Html.escape(getName()));
+			model.setName(HtmlUtil.escape(getName()));
 			model.setLocation(getLocation());
 			model.setRecursable(getRecursable());
 			model.setRegionId(getRegionId());
 			model.setCountryId(getCountryId());
 			model.setStatusId(getStatusId());
-			model.setComments(Html.escape(getComments()));
+			model.setComments(HtmlUtil.escape(getComments()));
 
 			model = (Organization)Proxy.newProxyInstance(Organization.class.getClassLoader(),
 					new Class[] { Organization.class },

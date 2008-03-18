@@ -23,7 +23,7 @@
 package com.liferay.portlet.xslcontent.util;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
-import com.liferay.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 
 import java.io.IOException;
 import java.io.StringReader;
@@ -53,8 +53,8 @@ public class XSLContentUtil {
 	public static String transform(URL xmlURL, URL xslURL)
 		throws IOException, TransformerException {
 
-		String xml = Http.URLtoString(xmlURL);
-		String xsl = Http.URLtoString(xslURL);
+		String xml = HttpUtil.URLtoString(xmlURL);
+		String xsl = HttpUtil.URLtoString(xslURL);
 
 		StreamSource xmlSource = new StreamSource(new StringReader(xml));
 		StreamSource xslSource = new StreamSource(new StringReader(xsl));

@@ -24,12 +24,11 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalContentSearch;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -197,8 +196,8 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 			model.setCompanyId(getCompanyId());
 			model.setPrivateLayout(getPrivateLayout());
 			model.setLayoutId(getLayoutId());
-			model.setPortletId(Html.escape(getPortletId()));
-			model.setArticleId(Html.escape(getArticleId()));
+			model.setPortletId(HtmlUtil.escape(getPortletId()));
+			model.setArticleId(HtmlUtil.escape(getArticleId()));
 
 			model = (JournalContentSearch)Proxy.newProxyInstance(JournalContentSearch.class.getClassLoader(),
 					new Class[] { JournalContentSearch.class },

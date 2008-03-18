@@ -492,7 +492,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 					fileShortcut = fileShortcut.toEscapedModel();
 
-					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), Html.unescape(fileShortcut.getToName()));
+					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 
 					fileEntry = fileEntry.toEscapedModel();
 
@@ -504,7 +504,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 				String rowHREF = null;
 
 				if (fileShortcut == null) {
-					rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(Html.unescape(fileEntry.getName()));
+					rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getName()));
 				}
 				else {
 					rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&fileShortcutId=" + fileShortcut.getFileShortcutId();
@@ -603,7 +603,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 			ResultRow row = new ResultRow(fileEntry, fileEntry.getFileEntryId(), i);
 
-			String rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(Html.unescape(fileEntry.getName()));
+			String rowHREF = themeDisplay.getPathMain() + "/document_library/get_file?p_l_id=" + themeDisplay.getPlid() + "&folderId=" + fileEntry.getFolderId() + "&name=" + HttpUtil.encodeURL(HtmlUtil.unescape(fileEntry.getName()));
 		%>
 
 			<%@ include file="/html/portlet/document_library/file_entry_columns.jspf" %>

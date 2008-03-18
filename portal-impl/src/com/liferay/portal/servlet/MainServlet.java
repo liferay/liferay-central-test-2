@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.servlet.PortletSessionTracker;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalInitableUtil;
@@ -73,7 +74,6 @@ import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletURLListenerFactory;
-import com.liferay.util.Http;
 import com.liferay.util.servlet.EncryptedServletRequest;
 
 import java.io.IOException;
@@ -188,15 +188,15 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			String[] xmls = new String[] {
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM)),
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/portlet-ext.xml")),
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/liferay-portlet.xml")),
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/liferay-portlet-ext.xml")),
-				Http.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
+				HttpUtil.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
 			};
 
 			PortletLocalServiceUtil.initEAR(xmls, pluginPackage);
@@ -225,9 +225,9 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			String[] xmls = new String[] {
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/liferay-layout-templates.xml")),
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/liferay-layout-templates-ext.xml"))
 			};
 
@@ -245,9 +245,9 @@ public class MainServlet extends ActionServlet {
 
 		try {
 			String[] xmls = new String[] {
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/liferay-look-and-feel.xml")),
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/liferay-look-and-feel-ext.xml"))
 			};
 
@@ -352,7 +352,8 @@ public class MainServlet extends ActionServlet {
 		}
 
 		try {
-			String xml = Http.URLtoString(ctx.getResource("/WEB-INF/web.xml"));
+			String xml = HttpUtil.URLtoString(
+				ctx.getResource("/WEB-INF/web.xml"));
 
 			checkWebSettings(xml);
 		}

@@ -23,6 +23,7 @@
 package com.liferay.portal.verify;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
@@ -33,7 +34,6 @@ import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
-import com.liferay.util.Html;
 import com.liferay.util.dao.DataAccess;
 
 import java.sql.Connection;
@@ -140,7 +140,7 @@ public class VerifyJournal extends VerifyProcess {
 
 			String content = GetterUtil.getString(article.getContent());
 
-			String newContent = Html.replaceMsWordCharacters(content);
+			String newContent = HtmlUtil.replaceMsWordCharacters(content);
 
 			/*if (Validator.isNotNull(structureId)) {
 				JournalStructure structure =

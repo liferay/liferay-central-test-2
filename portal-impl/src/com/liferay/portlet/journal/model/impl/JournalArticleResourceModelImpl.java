@@ -24,12 +24,11 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalArticleResource;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -135,7 +134,7 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 
 			model.setResourcePrimKey(getResourcePrimKey());
 			model.setGroupId(getGroupId());
-			model.setArticleId(Html.escape(getArticleId()));
+			model.setArticleId(HtmlUtil.escape(getArticleId()));
 
 			model = (JournalArticleResource)Proxy.newProxyInstance(JournalArticleResource.class.getClassLoader(),
 					new Class[] { JournalArticleResource.class },

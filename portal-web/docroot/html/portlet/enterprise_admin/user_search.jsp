@@ -50,13 +50,13 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	</tr>
 	<tr>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getFirstName()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getFirstName()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getMiddleName()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.MIDDLE_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getMiddleName()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getLastName()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getLastName()) %>" />
 		</td>
 	</tr>
 	<tr>
@@ -80,10 +80,10 @@ UserDisplayTerms displayTerms = (UserDisplayTerms)searchContainer.getDisplayTerm
 	</tr>
 	<tr>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getScreenName()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.SCREEN_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getScreenName()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= Html.escape(displayTerms.getEmailAddress()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getEmailAddress()) %>" />
 		</td>
 
 		<c:choose>

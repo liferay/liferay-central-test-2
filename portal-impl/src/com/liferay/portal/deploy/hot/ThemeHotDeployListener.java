@@ -25,13 +25,13 @@ package com.liferay.portal.deploy.hot;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portal.velocity.VelocityContextPool;
-import com.liferay.util.Http;
 
 import java.util.HashMap;
 import java.util.List;
@@ -65,7 +65,7 @@ public class ThemeHotDeployListener implements HotDeployListener {
 			}
 
 			String[] xmls = new String[] {
-				Http.URLtoString(
+				HttpUtil.URLtoString(
 					ctx.getResource("/WEB-INF/liferay-look-and-feel.xml"))
 			};
 

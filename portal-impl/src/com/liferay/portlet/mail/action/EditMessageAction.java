@@ -23,6 +23,7 @@
 package com.liferay.portlet.mail.action;
 
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -43,7 +44,6 @@ import com.liferay.portlet.mail.util.MailUtil;
 import com.liferay.portlet.mail.util.multiaccount.MailAccount;
 import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Html;
 import com.liferay.util.mail.InternetAddressUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -179,7 +179,7 @@ public class EditMessageAction extends PortletAction {
 				}
 
 				String[] recipients = new String[] {
-					Html.escape(to), Html.escape(cc), StringPool.BLANK
+					HtmlUtil.escape(to), HtmlUtil.escape(cc), StringPool.BLANK
 				};
 
 				req.setAttribute(WebKeys.MAIL_MESSAGE_ORIGINAL_ID,
@@ -205,11 +205,11 @@ public class EditMessageAction extends PortletAction {
 
 			MailMessage mailMessage = MailUtil.getMessage(httpReq, messageId);
 
-			String to = Html.escape(
+			String to = HtmlUtil.escape(
 				InternetAddressUtil.toString(mailMessage.getTo()));
-			String cc = Html.escape(
+			String cc = HtmlUtil.escape(
 				InternetAddressUtil.toString(mailMessage.getCc()));
-			String bcc = Html.escape(
+			String bcc = HtmlUtil.escape(
 				InternetAddressUtil.toString(mailMessage.getBcc()));
 
 			String[] recipients = new String[] {to, cc, bcc};

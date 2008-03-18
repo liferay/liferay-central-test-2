@@ -25,12 +25,11 @@ package com.liferay.portlet.announcements.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.announcements.model.Announcement;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -343,19 +342,19 @@ public class AnnouncementModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setAnnouncementId(getAnnouncementId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
-			model.setTitle(Html.escape(getTitle()));
-			model.setContent(Html.escape(getContent()));
-			model.setUrl(Html.escape(getUrl()));
-			model.setType(Html.escape(getType()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
+			model.setContent(HtmlUtil.escape(getContent()));
+			model.setUrl(HtmlUtil.escape(getUrl()));
+			model.setType(HtmlUtil.escape(getType()));
 			model.setDisplayDate(getDisplayDate());
 			model.setExpirationDate(getExpirationDate());
 			model.setPriority(getPriority());

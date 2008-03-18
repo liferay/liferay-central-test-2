@@ -33,7 +33,7 @@ GroupDisplayTerms displayTerms = (GroupDisplayTerms)searchContainer.getDisplayTe
 <div>
 	<label for="<portlet:namespace /><%= displayTerms.NAME %>"><liferay-ui:message key="search" /></label>
 
-	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= Html.escape(displayTerms.getName()) %>" />
+	<input id="<portlet:namespace /><%= displayTerms.NAME %>" name="<portlet:namespace /><%= displayTerms.NAME %>" size="30" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
 </div>
 
 <br />

@@ -76,7 +76,7 @@ for (int i = 0; i < elPathNames.length; i++) {
 				elContent = GetterUtil.getString(tempEl.elementText("dynamic-content"));
 
 				if (!elType.equals("text_area")) {
-					elContent = Html.toInputSafe(elContent);
+					elContent = HtmlUtil.toInputSafe(elContent);
 				}
 
 				Element dynConEl = tempEl.element("dynamic-content");

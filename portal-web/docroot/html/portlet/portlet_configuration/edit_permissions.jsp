@@ -613,7 +613,7 @@ else {
 				Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationIdsArray[organizationIdsPos]);
 				%>
 
-				<liferay-ui:tabs names="<%= Html.escape(organization.getName()) %>" />
+				<liferay-ui:tabs names="<%= HtmlUtil.escape(organization.getName()) %>" />
 
 				<%
 				//boolean organizationIntersection = false;

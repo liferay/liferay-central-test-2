@@ -25,6 +25,7 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -50,7 +51,6 @@ import com.liferay.portlet.messageboards.model.MBStatsUser;
 import com.liferay.portlet.messageboards.model.impl.MBCategoryImpl;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.util.Http;
 import com.liferay.util.LocalizationUtil;
 
 import java.io.IOException;

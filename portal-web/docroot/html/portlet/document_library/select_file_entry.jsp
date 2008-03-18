@@ -185,7 +185,7 @@ for (int i = 0; i < results.size(); i++) {
 
 		// Locked
 
-		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), Html.unescape(fileEntry.getName())));
+		boolean isLocked = LockServiceUtil.isLocked(DLFileEntry.class.getName(), DLUtil.getLockId(fileEntry.getFolderId(), HtmlUtil.unescape(fileEntry.getName())));
 
 		row.addText(LanguageUtil.get(pageContext, isLocked ? "yes" : "no"), rowHREF);
 

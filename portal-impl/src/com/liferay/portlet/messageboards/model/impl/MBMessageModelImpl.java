@@ -25,12 +25,11 @@ package com.liferay.portlet.messageboards.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.messageboards.model.MBMessage;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -298,18 +297,18 @@ public class MBMessageModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setMessageId(getMessageId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setCategoryId(getCategoryId());
 			model.setThreadId(getThreadId());
 			model.setParentMessageId(getParentMessageId());
-			model.setSubject(Html.escape(getSubject()));
-			model.setBody(Html.escape(getBody()));
+			model.setSubject(HtmlUtil.escape(getSubject()));
+			model.setBody(HtmlUtil.escape(getBody()));
 			model.setAttachments(getAttachments());
 			model.setAnonymous(getAnonymous());
 

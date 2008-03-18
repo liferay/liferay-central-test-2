@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
@@ -43,7 +44,6 @@ import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission
 import com.liferay.portlet.messageboards.service.permission.MBDiscussionPermission;
 import com.liferay.portlet.messageboards.service.permission.MBMessagePermission;
 import com.liferay.portlet.messageboards.util.comparator.MessageCreateDateComparator;
-import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
@@ -712,7 +712,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 			if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
 				value = StringUtil.shorten(
-					Html.stripHtml(message.getBody()), _RSS_ABSTRACT_LENGTH,
+					HtmlUtil.stripHtml(message.getBody()), _RSS_ABSTRACT_LENGTH,
 					StringPool.BLANK);
 			}
 			else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {

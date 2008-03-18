@@ -84,7 +84,7 @@ headerNames.add("min-qty");
 headerNames.add("price");
 headerNames.add(StringPool.BLANK);
 
-SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + Html.escape(keywords) + "</b>"));
+SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 int total = ShoppingItemLocalServiceUtil.searchCount(portletGroupId.longValue(), categoryIdsArray, keywords);
 
@@ -190,7 +190,7 @@ for (int i = 0; i < results.size(); i++) {
 }
 %>
 
-<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= Html.escape(keywords) %>" />
+<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" />
 
 <input type="submit" value="<liferay-ui:message key="search-items" />" />
 

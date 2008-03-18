@@ -29,13 +29,13 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.OpenSearch;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.Http;
 
 import java.util.Date;
 
@@ -68,11 +68,12 @@ public abstract class BaseOpenSearchImpl implements OpenSearch {
 		throws SearchException {
 
 		String keywords = GetterUtil.getString(
-			Http.getParameter(url, "keywords", false));
+			HttpUtil.getParameter(url, "keywords", false));
 		int startPage = GetterUtil.getInteger(
-			Http.getParameter(url, "p", false), 1);
+			HttpUtil.getParameter(url, "p", false), 1);
 		int itemsPerPage = GetterUtil.getInteger(
-			Http.getParameter(url, "c", false), SearchContainer.DEFAULT_DELTA);
+			HttpUtil.getParameter(url, "c", false),
+			SearchContainer.DEFAULT_DELTA);
 
 		return search(req, keywords, startPage, itemsPerPage);
 	}

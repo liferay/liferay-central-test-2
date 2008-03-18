@@ -24,12 +24,11 @@ package com.liferay.portlet.polls.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.polls.model.PollsChoice;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -161,11 +160,11 @@ public class PollsChoiceModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setChoiceId(getChoiceId());
 			model.setQuestionId(getQuestionId());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 
 			model = (PollsChoice)Proxy.newProxyInstance(PollsChoice.class.getClassLoader(),
 					new Class[] { PollsChoice.class },

@@ -24,9 +24,9 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.Http;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;

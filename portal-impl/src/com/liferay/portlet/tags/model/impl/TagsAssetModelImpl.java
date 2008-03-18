@@ -24,12 +24,11 @@ package com.liferay.portlet.tags.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.model.TagsAsset;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -420,7 +419,7 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
@@ -429,11 +428,11 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 			model.setEndDate(getEndDate());
 			model.setPublishDate(getPublishDate());
 			model.setExpirationDate(getExpirationDate());
-			model.setMimeType(Html.escape(getMimeType()));
-			model.setTitle(Html.escape(getTitle()));
-			model.setDescription(Html.escape(getDescription()));
-			model.setSummary(Html.escape(getSummary()));
-			model.setUrl(Html.escape(getUrl()));
+			model.setMimeType(HtmlUtil.escape(getMimeType()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setSummary(HtmlUtil.escape(getSummary()));
+			model.setUrl(HtmlUtil.escape(getUrl()));
 			model.setHeight(getHeight());
 			model.setWidth(getWidth());
 			model.setPriority(getPriority());

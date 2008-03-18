@@ -22,9 +22,9 @@
 
 package com.liferay.portal.action;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.Http;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import javax.servlet.http.HttpServletRequest;
@@ -52,7 +52,7 @@ public class RESTProxyAction extends Action {
 		String url = ParamUtil.getString(req, "url");
 
 		if (Validator.isNotNull(url)) {
-			String content = Http.URLtoString(url, true);
+			String content = HttpUtil.URLtoString(url, true);
 
 			ServletResponseUtil.write(res, content);
 		}

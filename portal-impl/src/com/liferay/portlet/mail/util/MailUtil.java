@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -54,7 +55,6 @@ import com.liferay.portlet.mail.search.MailDisplayTerms;
 import com.liferay.portlet.mail.util.multiaccount.MailAccount;
 import com.liferay.portlet.mail.util.multiaccount.MailAccounts;
 import com.liferay.portlet.mail.util.multiaccount.MailCache;
-import com.liferay.util.Http;
 import com.liferay.util.mail.JavaMailUtil;
 import com.liferay.util.mail.MailEngine;
 import com.liferay.util.mail.MailServerException;
@@ -1583,8 +1583,9 @@ public class MailUtil {
 
 				String attachmentPath = body.substring(x, y);
 
-				String fileName = Http.getParameter(attachmentPath, "fileName");
-				String contentPath = Http.getParameter(
+				String fileName = HttpUtil.getParameter(
+					attachmentPath, "fileName");
+				String contentPath = HttpUtil.getParameter(
 					attachmentPath, "contentPath");
 
 				String contentId = prefix + count;

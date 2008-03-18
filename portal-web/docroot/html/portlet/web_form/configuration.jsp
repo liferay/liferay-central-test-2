@@ -50,7 +50,7 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />title"><liferay-ui:message key="title" /></label>
 
-		<input class="lfr-input-text" id="<portlet:namespace />title" name="<portlet:namespace />title" type="text" value="<%= Html.toInputSafe(title) %>" />
+		<input class="lfr-input-text" id="<portlet:namespace />title" name="<portlet:namespace />title" type="text" value="<%= HtmlUtil.toInputSafe(title) %>" />
 	</div>
 
 	<div class="ctrl-holder">
@@ -66,7 +66,7 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 	<div class="ctrl-holder">
 		<label for="<portlet:namespace />successURL"><liferay-ui:message key="redirect-url-on-success" /></label>
 
-		<input class="lfr-input-text" id="<portlet:namespace />successURL" name="<portlet:namespace />successURL" type="text" value="<%= Html.toInputSafe(successURL) %>" />
+		<input class="lfr-input-text" id="<portlet:namespace />successURL" name="<portlet:namespace />successURL" type="text" value="<%= HtmlUtil.toInputSafe(successURL) %>" />
 	</div>
 </fieldset>
 

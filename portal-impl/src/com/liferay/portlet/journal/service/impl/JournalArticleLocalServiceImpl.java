@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -74,7 +75,6 @@ import com.liferay.portlet.journal.util.JournalUtil;
 import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Html;
 import com.liferay.util.LocalizationUtil;
 import com.liferay.util.MathUtil;
 import com.liferay.util.lucene.HitsImpl;
@@ -1867,7 +1867,7 @@ public class JournalArticleLocalServiceImpl
 			}
 		}
 
-		content = Html.replaceMsWordCharacters(content);
+		content = HtmlUtil.replaceMsWordCharacters(content);
 
 		return content;
 	}

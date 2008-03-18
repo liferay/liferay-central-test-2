@@ -25,12 +25,11 @@ package com.liferay.portlet.polls.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.polls.model.PollsQuestion;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -270,16 +269,16 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setQuestionId(getQuestionId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
-			model.setTitle(Html.escape(getTitle()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setExpirationDate(getExpirationDate());
 			model.setLastVoteDate(getLastVoteDate());
 

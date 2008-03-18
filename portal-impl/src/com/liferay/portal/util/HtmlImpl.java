@@ -20,25 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.util;
+package com.liferay.portal.util;
 
 import au.id.jericho.lib.html.Source;
 
+import com.liferay.portal.kernel.util.Html;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 /**
- * <a href="Html.java.html"><b><i>View Source</i></b></a>
+ * <a href="HtmlImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Clarence Shen
  * @author Harry Mark
  *
  */
-public class Html {
+public class HtmlImpl implements Html {
 
-	public static String escape(String text) {
+	public String escape(String text) {
 		if (text == null) {
 			return null;
 		}
@@ -123,29 +124,29 @@ public class Html {
 		return sm.toString();
 	}
 
-	public static String extractText(String html) {
+	public String extractText(String html) {
 		Source source = new Source(html);
 
 		return source.getTextExtractor().toString();
 	}
 
-	public static String fromInputSafe(String text) {
+	public String fromInputSafe(String text) {
 		return StringUtil.replace(text, "&amp;", "&");
 	}
 
-	public static String replaceMsWordCharacters(String text) {
+	public String replaceMsWordCharacters(String text) {
 		return StringUtil.replace(text, _MS_WORD_UNICODE, _MS_WORD_HTML);
 	}
 
-	public static String stripBetween(String text, String tag) {
+	public String stripBetween(String text, String tag) {
 		return StringUtil.stripBetween(text, "<" + tag, "</" + tag + ">");
 	}
 
-	public static String stripComments(String text) {
+	public String stripComments(String text) {
 		return StringUtil.stripBetween(text, "<!--", "-->");
 	}
 
-	public static String stripHtml(String text) {
+	public String stripHtml(String text) {
 		if (text == null) {
 			return null;
 		}
@@ -163,7 +164,7 @@ public class Html {
 
 			// Look for text enclosed by <script></script>
 
-			boolean scriptFound = _isScriptTag(text, y + 1);
+			boolean scriptFound = isScriptTag(text, y + 1);
 
 			if (scriptFound) {
 				int pos = y + _TAG_SCRIPT.length;
@@ -185,7 +186,7 @@ public class Html {
 							pos = text.indexOf("</", pos);
 
 							if (pos >= 0) {
-								if (_isScriptTag(text, pos + 2)) {
+								if (isScriptTag(text, pos + 2)) {
 									y = pos;
 
 									break;
@@ -230,14 +231,14 @@ public class Html {
 		return sm.toString();
 	}
 
-	public static String toInputSafe(String text) {
+	public String toInputSafe(String text) {
 		return StringUtil.replace(
 			text,
 			new String[] {"&", "\""},
 			new String[] {"&amp;", "&quot;"});
 	}
 
-	public static String unescape(String text) {
+	public String unescape(String text) {
 		if (text == null) {
 			return null;
 		}
@@ -260,11 +261,10 @@ public class Html {
 		return text;
 	}
 
-	private static boolean _isScriptTag(String text, int start) {
-		char item;
-		int pos = start;
-
+	protected boolean isScriptTag(String text, int pos) {
 		if (pos + _TAG_SCRIPT.length + 1 <= text.length()) {
+			char item;
+
 			for (int i = 0; i < _TAG_SCRIPT.length; i++) {
 				item = text.charAt(pos++);
 

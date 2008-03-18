@@ -50,7 +50,7 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.NUMBER %>" size="20" type="text" value="<%= Html.escape(displayTerms.getNumber()) %>" />
+		<input name="<portlet:namespace /><%= displayTerms.NUMBER %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getNumber()) %>" />
 	</td>
 	<td>
 		<select name="<%= displayTerms.STATUS %>">
@@ -69,13 +69,13 @@ OrderDisplayTerms displayTerms = (OrderDisplayTerms)searchContainer.getDisplayTe
 		</select>
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getFirstName()) %>" />
+		<input name="<portlet:namespace /><%= displayTerms.FIRST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getFirstName()) %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getLastName()) %>" />
+		<input name="<portlet:namespace /><%= displayTerms.LAST_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getLastName()) %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= Html.escape(displayTerms.getEmailAddress()) %>" />
+		<input name="<portlet:namespace /><%= displayTerms.EMAIL_ADDRESS %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getEmailAddress()) %>" />
 	</td>
 </tr>
 </table>

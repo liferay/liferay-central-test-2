@@ -24,12 +24,11 @@ package com.liferay.portlet.imagegallery.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.imagegallery.model.IGImage;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -273,15 +272,15 @@ public class IGImageModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setImageId(getImageId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setFolderId(getFolderId());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setSmallImageId(getSmallImageId());
 			model.setLargeImageId(getLargeImageId());
 			model.setCustom1ImageId(getCustom1ImageId());

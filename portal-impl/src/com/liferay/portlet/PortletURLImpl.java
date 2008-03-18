@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.portlet.PortletModeFactory;
 import com.liferay.portal.kernel.portlet.WindowStateFactory;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -49,8 +51,6 @@ import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
-import com.liferay.util.Http;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.MapUtil;
 
 import com.sun.portal.portletcontainer.common.URLHelper;

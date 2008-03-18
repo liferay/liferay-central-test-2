@@ -53,16 +53,16 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	</tr>
 	<tr>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getName()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.STREET %>" size="20" type="text" value="<%= Html.escape(displayTerms.getStreet()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.STREET %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getStreet()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.CITY %>" size="20" type="text" value="<%= Html.escape(displayTerms.getCity()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.CITY %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getCity()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.ZIP %>" size="20" type="text" value="<%= Html.escape(displayTerms.getZip()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.ZIP %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getZip()) %>" />
 		</td>
 	</tr>
 	<tr>

@@ -22,6 +22,7 @@
 
 package com.liferay.portal.servlet.taglib.security;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
@@ -29,7 +30,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.Encryptor;
-import com.liferay.util.Http;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
@@ -69,7 +69,8 @@ public class DoAsURLTagUtil extends TagSupport {
 			String encDoAsUserId = Encryptor.encrypt(
 				company.getKeyObj(), String.valueOf(doAsUserId));
 
-			doAsURL = Http.addParameter(doAsURL, "doAsUserId", encDoAsUserId);
+			doAsURL = HttpUtil.addParameter(
+				doAsURL, "doAsUserId", encDoAsUserId);
 
 			if (Validator.isNotNull(var)) {
 				pageContext.setAttribute(var, doAsURL);

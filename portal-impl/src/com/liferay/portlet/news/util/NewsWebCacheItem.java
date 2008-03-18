@@ -22,11 +22,11 @@
 
 package com.liferay.portlet.news.util;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.news.model.Article;
 import com.liferay.portlet.news.model.News;
-import com.liferay.util.Http;
 import com.liferay.util.Time;
 
 import java.io.ByteArrayInputStream;
@@ -56,7 +56,7 @@ public class NewsWebCacheItem implements WebCacheItem {
 
 			String categoryName = text.substring(0, pos);
 			String feedURL = text.substring(pos + 1, text.length());
-			String xml = Http.URLtoString(
+			String xml = HttpUtil.URLtoString(
 				"http://p.moreover.com/cgi-local/page?" + feedURL + "&o=xml");
 
 			ByteArrayInputStream bais =

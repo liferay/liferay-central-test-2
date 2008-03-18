@@ -23,10 +23,10 @@
 package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.util.Html;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -108,14 +108,14 @@ public class BBCodeUtil {
 
 			emoticon[0] =
 				"<img src='@theme_images_path@/emoticons/" + image + "' />";
-			emoticon[1] = Html.escape(code);
+			emoticon[1] = HtmlUtil.escape(code);
 		}
 	}
 
 	public static final String[][] EMOTICONS = emoticons;
 
 	public static String getHTML(String bbcode) {
-		String html = Html.escape(bbcode);
+		String html = HtmlUtil.escape(bbcode);
 
 		html = StringUtil.replace(html, _BBCODE_TAGS, _HTML_TAGS);
 

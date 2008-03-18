@@ -23,11 +23,11 @@
 package com.liferay.portlet.currencyconverter.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.currencyconverter.model.Currency;
-import com.liferay.util.Http;
 import com.liferay.util.Time;
 
 import java.util.StringTokenizer;
@@ -68,7 +68,7 @@ public class CurrencyWebCacheItem implements WebCacheItem {
 				throw new WebCacheException(symbol);
 			}
 
-			String text = Http.URLtoString(
+			String text = HttpUtil.URLtoString(
 				"http://finance.yahoo.com/d/quotes.csv?s=" +
 					symbol + "=X&f=sl1d1t1c1ohgv&e=.csv");
 

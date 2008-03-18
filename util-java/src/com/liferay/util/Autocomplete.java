@@ -22,6 +22,7 @@
 
 package com.liferay.util;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
@@ -141,7 +142,7 @@ public class Autocomplete {
 		String[][] pairArray = new String[array.length][2];
 
 		for (int i = 0; i < array.length; i++) {
-			pairArray[i][0] = Html.escape(array[i]);
+			pairArray[i][0] = HtmlUtil.escape(array[i]);
 			pairArray[i][1] = array[i];
 		}
 

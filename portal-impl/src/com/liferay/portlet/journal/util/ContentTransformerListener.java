@@ -23,12 +23,12 @@
 package com.liferay.portlet.journal.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.util.Html;
 
 import java.util.List;
 import java.util.Map;
@@ -108,8 +108,8 @@ public class ContentTransformerListener extends TransformerListener {
 			if (dynamicContent != null) {
 				String text = dynamicContent.getText();
 
-				text = Html.stripComments(text);
-				text = Html.stripHtml(text);
+				text = HtmlUtil.stripComments(text);
+				text = HtmlUtil.stripHtml(text);
 				text = text.trim();
 
 				// [@articleId;elementName@]

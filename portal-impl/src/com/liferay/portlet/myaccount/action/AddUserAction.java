@@ -39,6 +39,7 @@ import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
@@ -50,7 +51,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 

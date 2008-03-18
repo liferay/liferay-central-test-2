@@ -22,7 +22,7 @@
 
 package com.liferay.jbi.servicemix.util;
 
-import com.liferay.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 
 import java.io.IOException;
 
@@ -71,7 +71,7 @@ public class URLTransformComponent extends TransformComponentSupport {
 		}
 
 		try {
-			return Http.URLtoString(_url, null, parts, true);
+			return HttpUtil.URLtoString(_url, null, parts, true);
 		}
 		catch (IOException ioe) {
 			throw new MessagingException(ioe.getMessage());

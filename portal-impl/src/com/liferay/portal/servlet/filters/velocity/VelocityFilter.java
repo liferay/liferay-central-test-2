@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -41,7 +42,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portal.velocity.VelocityVariables;
-import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
@@ -105,7 +105,7 @@ public class VelocityFilter extends BaseFilter {
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		String completeURL = Http.getCompleteURL(httpReq);
+		String completeURL = HttpUtil.getCompleteURL(httpReq);
 
 		if (USE_FILTER && isMatchingURL(completeURL)) {
 			if (_log.isDebugEnabled()) {

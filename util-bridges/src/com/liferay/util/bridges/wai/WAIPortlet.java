@@ -24,10 +24,10 @@ package com.liferay.util.bridges.wai;
 
 import com.liferay.portal.kernel.servlet.PortletServlet;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.HttpUtil;
 
 import java.io.IOException;
 

@@ -25,13 +25,13 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.OldServiceComponentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
-import com.liferay.util.Http;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
@@ -119,17 +119,17 @@ public class ServiceComponentLocalServiceImpl
 
 			Element data = doc.addElement("data");
 
-			String tablesSQL = Http.URLtoString(ctx.getResource(
+			String tablesSQL = HttpUtil.URLtoString(ctx.getResource(
 				"/WEB-INF/sql/tables.sql"));
 
 			data.addElement("tables-sql").addCDATA(tablesSQL);
 
-			String sequencesSQL = Http.URLtoString(ctx.getResource(
+			String sequencesSQL = HttpUtil.URLtoString(ctx.getResource(
 				"/WEB-INF/sql/sequences.sql"));
 
 			data.addElement("sequences-sql").addCDATA(sequencesSQL);
 
-			String indexesSQL = Http.URLtoString(ctx.getResource(
+			String indexesSQL = HttpUtil.URLtoString(ctx.getResource(
 				"/WEB-INF/sql/indexes.sql"));
 
 			data.addElement("indexes-sql").addCDATA(indexesSQL);

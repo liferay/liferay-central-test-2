@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -42,13 +43,13 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.BaseDeployer;
+import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Http;
 import com.liferay.util.servlet.ProgressInputStream;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -337,9 +338,11 @@ public class InstallPluginAction extends PortletAction {
 			req, "deploymentContext");
 
 		try {
-			HostConfiguration hostConfig = Http.getHostConfig(url);
+			HttpImpl httpImpl = (HttpImpl)HttpUtil.getHttp();
 
-			HttpClient client = Http.getClient(hostConfig);
+			HostConfiguration hostConfig = httpImpl.getHostConfig(url);
+
+			HttpClient client = httpImpl.getClient(hostConfig);
 
 			getMethod = new GetMethod(url);
 

@@ -23,6 +23,7 @@
 package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -32,7 +33,6 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.io.BufferedReader;

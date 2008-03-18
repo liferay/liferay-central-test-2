@@ -23,6 +23,7 @@
 package com.liferay.portlet.documentlibrary.action;
 
 import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -38,7 +39,6 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Html;
 import com.liferay.util.diff.DiffUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -120,8 +120,8 @@ public class CompareVersionsAction extends PortletAction {
 		if (extension.equals("htm") || extension.equals("html") ||
 			extension.equals("xml")) {
 
-			String escapedSource = Html.escape(StringUtil.read(sourceIs));
-			String escapedTarget = Html.escape(StringUtil.read(targetIs));
+			String escapedSource = HtmlUtil.escape(StringUtil.read(sourceIs));
+			String escapedTarget = HtmlUtil.escape(StringUtil.read(targetIs));
 
 			sourceIs = new ByteArrayInputStream(
 				escapedSource.getBytes(StringPool.UTF8));

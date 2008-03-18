@@ -24,10 +24,10 @@ package com.liferay.portlet.webproxy.action;
 
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.util.Http;
 import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
@@ -62,7 +62,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			!StringUtil.startsWith(initUrl, "https://") &&
 			!StringUtil.startsWith(initUrl, "mhtml://")) {
 
-			initUrl = Http.getProtocol(req) + "://" + initUrl;
+			initUrl = HttpUtil.getProtocol(req) + "://" + initUrl;
 		}
 
 		String scope = ParamUtil.getString(req, "scope");

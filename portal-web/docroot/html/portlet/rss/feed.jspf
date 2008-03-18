@@ -31,7 +31,7 @@ try {
 	feed = (SyndFeed)ovp.getValue();
 
 	if (Validator.isNull(title)) {
-		title = Html.escape(feed.getTitle());
+		title = HtmlUtil.escape(feed.getTitle());
 	}
 }
 catch (Exception e) {
@@ -62,7 +62,7 @@ catch (Exception e) {
 
 			<c:if test="<%= Validator.isNotNull(description) && showFeedDescription %>">
 				<div class="feed-description">
-					<%= Html.escape(description) %>
+					<%= HtmlUtil.escape(description) %>
 				</div>
 			</c:if>
 

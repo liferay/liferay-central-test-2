@@ -24,12 +24,11 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingOrderItem;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -241,11 +240,11 @@ public class ShoppingOrderItemModelImpl extends BaseModelImpl {
 
 			model.setOrderItemId(getOrderItemId());
 			model.setOrderId(getOrderId());
-			model.setItemId(Html.escape(getItemId()));
-			model.setSku(Html.escape(getSku()));
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
-			model.setProperties(Html.escape(getProperties()));
+			model.setItemId(HtmlUtil.escape(getItemId()));
+			model.setSku(HtmlUtil.escape(getSku()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setProperties(HtmlUtil.escape(getProperties()));
 			model.setPrice(getPrice());
 			model.setQuantity(getQuantity());
 			model.setShippedDate(getShippedDate());

@@ -23,6 +23,7 @@
 package com.liferay.taglib.util;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.taglib.portlet.ActionURLTag;
 import com.liferay.taglib.portletext.IconBackTag;
@@ -52,7 +53,6 @@ import com.liferay.taglib.ui.PngImageTag;
 import com.liferay.taglib.ui.SearchTag;
 import com.liferay.taglib.ui.StagingTag;
 import com.liferay.taglib.ui.ToggleTag;
-import com.liferay.util.HttpUtil;
 
 import java.util.Map;
 

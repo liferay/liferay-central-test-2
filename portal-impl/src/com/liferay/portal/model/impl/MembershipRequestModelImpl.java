@@ -25,10 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.MembershipRequest;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -239,8 +238,8 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 			model.setUserId(getUserId());
 			model.setCreateDate(getCreateDate());
 			model.setGroupId(getGroupId());
-			model.setComments(Html.escape(getComments()));
-			model.setReplyComments(Html.escape(getReplyComments()));
+			model.setComments(HtmlUtil.escape(getComments()));
+			model.setReplyComments(HtmlUtil.escape(getReplyComments()));
 			model.setReplyDate(getReplyDate());
 			model.setReplierUserId(getReplierUserId());
 			model.setStatusId(getStatusId());

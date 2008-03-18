@@ -22,13 +22,12 @@
 
 package com.liferay.portlet.randombibleverse.util;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portlet.randombibleverse.model.Verse;
-import com.liferay.util.Html;
-import com.liferay.util.Http;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.Time;
 
 /**
@@ -52,7 +51,7 @@ public class VerseWebCacheItem implements WebCacheItem {
 				"http://www.biblegateway.com/passage/?search=" +
 					HttpUtil.encodeURL(_location) + "&version=" + _versionId;
 
-			String text = Http.URLtoString(url);
+			String text = HttpUtil.URLtoString(url);
 
 			int x = text.indexOf("result-text-style-normal");
 			x = text.indexOf(">", x);
@@ -69,23 +68,23 @@ public class VerseWebCacheItem implements WebCacheItem {
 
 			// Strip everything between <span> and </span>
 
-			text = Html.stripBetween(text, "span");
+			text = HtmlUtil.stripBetween(text, "span");
 
 			// Strip everything between <sup> and </sup>
 
-			text = Html.stripBetween(text, "sup");
+			text = HtmlUtil.stripBetween(text, "sup");
 
 			// Strip everything between <h4> and </h4>
 
-			text = Html.stripBetween(text, "h4");
+			text = HtmlUtil.stripBetween(text, "h4");
 
 			// Strip everything between <h5> and </h5>
 
-			text = Html.stripBetween(text, "h5");
+			text = HtmlUtil.stripBetween(text, "h5");
 
 			// Strip HTML
 
-			text = Html.stripHtml(text).trim();
+			text = HtmlUtil.stripHtml(text).trim();
 
 			// Strip &nbsp;
 

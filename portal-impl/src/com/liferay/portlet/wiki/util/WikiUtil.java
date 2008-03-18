@@ -26,6 +26,7 @@ import com.germinus.easyconf.Filter;
 
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -38,7 +39,6 @@ import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.WikiFormatException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.util.Http;
 
 import java.io.IOException;
 
@@ -386,7 +386,8 @@ public class WikiUtil {
 			propertyName, Filter.by(format));
 
 		if (Validator.isNotNull(configurationFile)) {
-			return Http.URLtoString(classLoader.getResource(configurationFile));
+			return HttpUtil.URLtoString(
+				classLoader.getResource(configurationFile));
 		}
 		else {
 			return StringPool.BLANK;

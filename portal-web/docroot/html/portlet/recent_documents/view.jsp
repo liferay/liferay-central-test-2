@@ -50,7 +50,7 @@ List fileRanks = DLFileRankLocalServiceUtil.getFileRanks(portletGroupId.longValu
 
 				rowURL.setParameter("struts_action", "/recent_documents/get_file");
 				rowURL.setParameter("folderId", String.valueOf(fileRank.getFolderId()));
-				rowURL.setParameter("name", Html.unescape(fileRank.getName()));
+				rowURL.setParameter("name", HtmlUtil.unescape(fileRank.getName()));
 		%>
 
 				<tr>

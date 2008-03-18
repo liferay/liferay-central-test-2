@@ -44,7 +44,7 @@ CouponDisplayTerms displayTerms = (CouponDisplayTerms)searchContainer.getDisplay
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.CODE %>" size="20" type="text" value="<%= Html.escape(displayTerms.getCode()) %>" />
+		<input name="<portlet:namespace /><%= displayTerms.CODE %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getCode()) %>" />
 	</td>
 	<td>
 		<select name="<%= displayTerms.DISCOUNT_TYPE %>">

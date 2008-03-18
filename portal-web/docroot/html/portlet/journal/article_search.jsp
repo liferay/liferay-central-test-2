@@ -51,16 +51,16 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	</tr>
 	<tr>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= Html.escape(displayTerms.getArticleId()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.ARTICLE_ID %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getArticleId()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.VERSION %>" size="20" type="text" value="<%= Html.escape(displayTerms.getVersionString()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.VERSION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getVersionString()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.TITLE %>" size="20" type="text" value="<%= Html.escape(displayTerms.getTitle()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.TITLE %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getTitle()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDescription()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
 		</td>
 	</tr>
 	<tr>
@@ -83,7 +83,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 	</tr>
 	<tr>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.CONTENT %>" size="20" type="text" value="<%= Html.escape(displayTerms.getContent()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.CONTENT %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getContent()) %>" />
 		</td>
 		<td>
 			<select name="<portlet:namespace /><%= displayTerms.TYPE %>">

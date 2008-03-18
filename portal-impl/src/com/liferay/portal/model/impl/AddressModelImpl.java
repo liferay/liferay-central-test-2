@@ -25,10 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -359,16 +358,16 @@ public class AddressModelImpl extends BaseModelImpl {
 			model.setAddressId(getAddressId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
-			model.setStreet1(Html.escape(getStreet1()));
-			model.setStreet2(Html.escape(getStreet2()));
-			model.setStreet3(Html.escape(getStreet3()));
-			model.setCity(Html.escape(getCity()));
-			model.setZip(Html.escape(getZip()));
+			model.setStreet1(HtmlUtil.escape(getStreet1()));
+			model.setStreet2(HtmlUtil.escape(getStreet2()));
+			model.setStreet3(HtmlUtil.escape(getStreet3()));
+			model.setCity(HtmlUtil.escape(getCity()));
+			model.setZip(HtmlUtil.escape(getZip()));
 			model.setRegionId(getRegionId());
 			model.setCountryId(getCountryId());
 			model.setTypeId(getTypeId());

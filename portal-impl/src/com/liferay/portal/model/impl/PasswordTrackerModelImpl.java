@@ -25,10 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PasswordTracker;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -153,7 +152,7 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 			model.setPasswordTrackerId(getPasswordTrackerId());
 			model.setUserId(getUserId());
 			model.setCreateDate(getCreateDate());
-			model.setPassword(Html.escape(getPassword()));
+			model.setPassword(HtmlUtil.escape(getPassword()));
 
 			model = (PasswordTracker)Proxy.newProxyInstance(PasswordTracker.class.getClassLoader(),
 					new Class[] { PasswordTracker.class },

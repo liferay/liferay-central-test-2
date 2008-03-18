@@ -50,10 +50,10 @@ InstanceDisplayTerms displayTerms = (InstanceDisplayTerms)searchContainer.getDis
 </tr>
 <tr>
 	<%--<td>
-		<input name="<portlet:namespace /><%= displayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= Html.escape(displayTerms.getInstanceIdString()) %>" />
+		<input name="<portlet:namespace /><%= displayTerms.INSTANCE_ID %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getInstanceIdString()) %>" />
 	</td>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDefinitionIdString()) %>" />
+		<input name="<portlet:namespace /><%= displayTerms.DEFINITION_ID %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getDefinitionIdString()) %>" />
 	</td>--%>
 
 	<c:if test='<%= !viewType.equals("user") %>'>

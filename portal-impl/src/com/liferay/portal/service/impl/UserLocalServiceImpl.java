@@ -51,6 +51,7 @@ import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.kernel.util.OrderByComparator;
@@ -86,7 +87,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
-import com.liferay.util.Html;
 import com.liferay.util.Normalizer;
 
 import java.io.IOException;
@@ -1203,7 +1203,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					remoteHost,
 					toAddress,
 					toName,
-					Html.escape(userAgent),
+					HtmlUtil.escape(userAgent),
 					String.valueOf(user.getUserId()),
 					newPassword
 				});
@@ -1230,7 +1230,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					remoteHost,
 					toAddress,
 					toName,
-					Html.escape(userAgent),
+					HtmlUtil.escape(userAgent),
 					String.valueOf(user.getUserId()),
 					newPassword
 				});

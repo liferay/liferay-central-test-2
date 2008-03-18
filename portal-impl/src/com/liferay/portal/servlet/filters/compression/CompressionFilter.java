@@ -27,12 +27,12 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 
 import java.io.IOException;
@@ -93,7 +93,7 @@ public class CompressionFilter extends BaseFilter {
 		HttpServletRequest httpReq = (HttpServletRequest)req;
 		HttpServletResponse httpRes = (HttpServletResponse)res;
 
-		String completeURL = Http.getCompleteURL(httpReq);
+		String completeURL = HttpUtil.getCompleteURL(httpReq);
 
 		if (useFilter && isCompress(httpReq) && !isInclude(httpReq) &&
 			BrowserSniffer.acceptsGzip(httpReq) &&

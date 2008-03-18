@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -160,10 +159,10 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 			model.setEscapedModel(true);
 
 			model.setServiceComponentId(getServiceComponentId());
-			model.setBuildNamespace(Html.escape(getBuildNamespace()));
+			model.setBuildNamespace(HtmlUtil.escape(getBuildNamespace()));
 			model.setBuildNumber(getBuildNumber());
 			model.setBuildDate(getBuildDate());
-			model.setData(Html.escape(getData()));
+			model.setData(HtmlUtil.escape(getData()));
 
 			model = (ServiceComponent)Proxy.newProxyInstance(ServiceComponent.class.getClassLoader(),
 					new Class[] { ServiceComponent.class },

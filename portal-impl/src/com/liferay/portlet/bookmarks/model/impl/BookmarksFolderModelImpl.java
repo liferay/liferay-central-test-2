@@ -24,12 +24,11 @@ package com.liferay.portlet.bookmarks.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -234,7 +233,7 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setFolderId(getFolderId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
@@ -242,8 +241,8 @@ public class BookmarksFolderModelImpl extends BaseModelImpl {
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setParentFolderId(getParentFolderId());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 
 			model = (BookmarksFolder)Proxy.newProxyInstance(BookmarksFolder.class.getClassLoader(),
 					new Class[] { BookmarksFolder.class },

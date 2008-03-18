@@ -25,12 +25,12 @@ package com.liferay.portlet.messageboards.util;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.messageboards.service.MBCategoryLocalServiceUtil;
-import com.liferay.util.Html;
 
 import java.io.IOException;
 
@@ -141,7 +141,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		long threadId, long messageId, String title, String content,
 		String[] tagsEntries) {
 
-		content = Html.extractText(content);
+		content = HtmlUtil.extractText(content);
 
 		Document doc = new Document();
 

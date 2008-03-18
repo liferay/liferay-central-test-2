@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -193,8 +192,8 @@ public class RoleModelImpl extends BaseModelImpl {
 			model.setCompanyId(getCompanyId());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
 			model.setType(getType());
 
 			model = (Role)Proxy.newProxyInstance(Role.class.getClassLoader(),

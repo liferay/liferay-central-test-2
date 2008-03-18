@@ -227,7 +227,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			}
 
 			if (autoEscape) {
-				value = Html.escape(value);
+				value = HtmlUtil.escape(value);
 			}
 
 			String displayHeight = ModelHintsDefaults.TEXT_DISPLAY_HEIGHT;

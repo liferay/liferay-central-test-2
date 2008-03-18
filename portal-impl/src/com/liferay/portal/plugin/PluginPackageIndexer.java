@@ -25,13 +25,13 @@ package com.liferay.portal.plugin;
 import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.search.SearchException;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.impl.CompanyImpl;
-import com.liferay.util.Html;
 import com.liferay.util.License;
 
 import java.io.IOException;
@@ -98,8 +98,8 @@ public class PluginPackageIndexer implements Indexer {
 
 		ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
 
-		shortDescription = Html.extractText(shortDescription);
-		longDescription = Html.extractText(longDescription);
+		shortDescription = HtmlUtil.extractText(shortDescription);
+		longDescription = HtmlUtil.extractText(longDescription);
 
 		String content =
 			name + " " + author + " " + shortDescription + " " +

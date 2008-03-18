@@ -25,12 +25,11 @@ package com.liferay.portlet.softwarecatalog.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductVersion;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -279,14 +278,14 @@ public class SCProductVersionModelImpl extends BaseModelImpl {
 			model.setProductVersionId(getProductVersionId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setProductEntryId(getProductEntryId());
-			model.setVersion(Html.escape(getVersion()));
-			model.setChangeLog(Html.escape(getChangeLog()));
-			model.setDownloadPageURL(Html.escape(getDownloadPageURL()));
-			model.setDirectDownloadURL(Html.escape(getDirectDownloadURL()));
+			model.setVersion(HtmlUtil.escape(getVersion()));
+			model.setChangeLog(HtmlUtil.escape(getChangeLog()));
+			model.setDownloadPageURL(HtmlUtil.escape(getDownloadPageURL()));
+			model.setDirectDownloadURL(HtmlUtil.escape(getDirectDownloadURL()));
 			model.setRepoStoreArtifact(getRepoStoreArtifact());
 
 			model = (SCProductVersion)Proxy.newProxyInstance(SCProductVersion.class.getClassLoader(),

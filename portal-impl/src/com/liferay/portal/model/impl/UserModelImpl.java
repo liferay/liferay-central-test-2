@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -554,29 +553,29 @@ public class UserModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setUserId(getUserId());
 			model.setCompanyId(getCompanyId());
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setDefaultUser(getDefaultUser());
 			model.setContactId(getContactId());
-			model.setPassword(Html.escape(getPassword()));
+			model.setPassword(HtmlUtil.escape(getPassword()));
 			model.setPasswordEncrypted(getPasswordEncrypted());
 			model.setPasswordReset(getPasswordReset());
 			model.setPasswordModifiedDate(getPasswordModifiedDate());
 			model.setGraceLoginCount(getGraceLoginCount());
-			model.setScreenName(Html.escape(getScreenName()));
-			model.setEmailAddress(Html.escape(getEmailAddress()));
+			model.setScreenName(HtmlUtil.escape(getScreenName()));
+			model.setEmailAddress(HtmlUtil.escape(getEmailAddress()));
 			model.setPortraitId(getPortraitId());
-			model.setLanguageId(Html.escape(getLanguageId()));
-			model.setTimeZoneId(Html.escape(getTimeZoneId()));
-			model.setGreeting(Html.escape(getGreeting()));
-			model.setComments(Html.escape(getComments()));
+			model.setLanguageId(HtmlUtil.escape(getLanguageId()));
+			model.setTimeZoneId(HtmlUtil.escape(getTimeZoneId()));
+			model.setGreeting(HtmlUtil.escape(getGreeting()));
+			model.setComments(HtmlUtil.escape(getComments()));
 			model.setLoginDate(getLoginDate());
-			model.setLoginIP(Html.escape(getLoginIP()));
+			model.setLoginIP(HtmlUtil.escape(getLoginIP()));
 			model.setLastLoginDate(getLastLoginDate());
-			model.setLastLoginIP(Html.escape(getLastLoginIP()));
+			model.setLastLoginIP(HtmlUtil.escape(getLastLoginIP()));
 			model.setLastFailedLoginDate(getLastFailedLoginDate());
 			model.setFailedLoginAttempts(getFailedLoginAttempts());
 			model.setLockout(getLockout());

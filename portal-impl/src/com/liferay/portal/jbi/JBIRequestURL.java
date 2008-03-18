@@ -22,10 +22,10 @@
 
 package com.liferay.portal.jbi;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
-import com.liferay.util.Http;
 
 import java.io.IOException;
 
@@ -106,7 +106,7 @@ public abstract class JBIRequestURL {
 	}
 
 	public String getContent() throws IOException {
-		return Http.URLtoString(getURL(), null, _params, true);
+		return HttpUtil.URLtoString(getURL(), null, _params, true);
 	}
 
 	protected abstract String getURL();

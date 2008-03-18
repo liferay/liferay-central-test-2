@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -214,10 +213,10 @@ public class UserTrackerModelImpl extends BaseModelImpl {
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setModifiedDate(getModifiedDate());
-			model.setSessionId(Html.escape(getSessionId()));
-			model.setRemoteAddr(Html.escape(getRemoteAddr()));
-			model.setRemoteHost(Html.escape(getRemoteHost()));
-			model.setUserAgent(Html.escape(getUserAgent()));
+			model.setSessionId(HtmlUtil.escape(getSessionId()));
+			model.setRemoteAddr(HtmlUtil.escape(getRemoteAddr()));
+			model.setRemoteHost(HtmlUtil.escape(getRemoteHost()));
+			model.setUserAgent(HtmlUtil.escape(getUserAgent()));
 
 			model = (UserTracker)Proxy.newProxyInstance(UserTracker.class.getClassLoader(),
 					new Class[] { UserTracker.class },

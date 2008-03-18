@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PortalInitable;
@@ -51,7 +52,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.Http;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.servlet.filters.CacheResponse;
 import com.liferay.util.servlet.filters.CacheResponseData;
@@ -209,7 +209,7 @@ public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 
 		// Url
 
-		sm.append(Http.getProtocol(req));
+		sm.append(HttpUtil.getProtocol(req));
 		sm.append("://");
 		sm.append(req.getServletPath());
 		sm.append(req.getPathInfo());

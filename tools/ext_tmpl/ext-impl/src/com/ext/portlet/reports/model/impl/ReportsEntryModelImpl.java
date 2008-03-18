@@ -4,10 +4,9 @@ import com.ext.portlet.reports.model.ReportsEntry;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -189,13 +188,13 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
 
             model.setEscapedModel(true);
 
-            model.setEntryId(Html.escape(getEntryId()));
-            model.setCompanyId(Html.escape(getCompanyId()));
-            model.setUserId(Html.escape(getUserId()));
-            model.setUserName(Html.escape(getUserName()));
+            model.setEntryId(HtmlUtil.escape(getEntryId()));
+            model.setCompanyId(HtmlUtil.escape(getCompanyId()));
+            model.setUserId(HtmlUtil.escape(getUserId()));
+            model.setUserName(HtmlUtil.escape(getUserName()));
             model.setCreateDate(getCreateDate());
             model.setModifiedDate(getModifiedDate());
-            model.setName(Html.escape(getName()));
+            model.setName(HtmlUtil.escape(getName()));
 
             model = (ReportsEntry) Proxy.newProxyInstance(ReportsEntry.class.getClassLoader(),
                     new Class[] { ReportsEntry.class },

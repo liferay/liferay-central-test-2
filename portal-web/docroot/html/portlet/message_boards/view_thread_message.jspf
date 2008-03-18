@@ -109,7 +109,7 @@
 		<td valign="top">
 			<div class="thread-top float-container">
 				<div class="subject">
-					<b><%= Html.escape(message.getSubject()) %></b><br />
+					<b><%= HtmlUtil.escape(message.getSubject()) %></b><br />
 
 					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
 
@@ -301,7 +301,7 @@
 						url = "http://www.liferay.com/web/guest/devzone/forums/message_boards/message/" + messageId;
 					}
 					else {
-						String topicId = Http.getParameter(url, "showtopic", false);
+						String topicId = HttpUtil.getParameter(url, "showtopic", false);
 
 						if (Validator.isNotNull(topicId)) {
 							url = "http://www.liferay.com/web/guest/devzone/forums/message_boards/topic/" + topicId;
@@ -410,7 +410,7 @@
 						<li>
 							<liferay-security:permissionsURL
 								modelResource="<%= MBMessage.class.getName() %>"
-								modelResourceDescription="<%= Html.escape(message.getSubject()) %>"
+								modelResourceDescription="<%= HtmlUtil.escape(message.getSubject()) %>"
 								resourcePrimKey="<%= String.valueOf(message.getMessageId()) %>"
 								var="permissionsURL"
 							/>

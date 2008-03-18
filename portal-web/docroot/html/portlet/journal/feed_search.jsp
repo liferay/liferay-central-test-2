@@ -48,13 +48,13 @@ FeedDisplayTerms displayTerms = (FeedDisplayTerms)searchContainer.getDisplayTerm
 	</tr>
 	<tr>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.FEED_ID %>" size="20" type="text" value="<%= Html.escape(displayTerms.getFeedId()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.FEED_ID %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getFeedId()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getName()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getName()) %>" />
 		</td>
 		<td>
-			<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= Html.escape(displayTerms.getDescription()) %>" />
+			<input name="<portlet:namespace /><%= displayTerms.DESCRIPTION %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getDescription()) %>" />
 		</td>
 	</tr>
 	</table>

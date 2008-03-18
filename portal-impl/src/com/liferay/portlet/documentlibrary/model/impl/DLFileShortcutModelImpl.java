@@ -24,12 +24,11 @@ package com.liferay.portlet.documentlibrary.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -235,16 +234,16 @@ public class DLFileShortcutModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setFileShortcutId(getFileShortcutId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setFolderId(getFolderId());
 			model.setToFolderId(getToFolderId());
-			model.setToName(Html.escape(getToName()));
+			model.setToName(HtmlUtil.escape(getToName()));
 
 			model = (DLFileShortcut)Proxy.newProxyInstance(DLFileShortcut.class.getClassLoader(),
 					new Class[] { DLFileShortcut.class },

@@ -36,6 +36,7 @@ import com.liferay.portal.UserPasswordException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.util.Constants;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -51,7 +52,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.admin.util.AdminUtil;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;

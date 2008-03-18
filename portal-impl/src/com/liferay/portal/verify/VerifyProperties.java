@@ -148,6 +148,38 @@ public class VerifyProperties extends VerifyProcess {
 		new String[] {
 			"com.liferay.filters.strip.StripFilter",
 			"com.liferay.portal.servlet.filters.strip.StripFilter"
+		},
+		new String[] {
+			"com.liferay.util.Http.max.connections.per.host",
+			"com.liferay.portal.util.HttpImpl.max.connections.per.host"
+		},
+		new String[] {
+			"com.liferay.util.Http.max.total.connections",
+			"com.liferay.portal.util.HttpImpl.max.total.connections"
+		},
+		new String[] {
+			"com.liferay.util.Http.proxy.auth.type",
+			"com.liferay.portal.util.HttpImpl.proxy.auth.type"
+		},
+		new String[] {
+			"com.liferay.util.Http.proxy.ntlm.domain",
+			"com.liferay.portal.util.HttpImpl.proxy.ntlm.domain"
+		},
+		new String[] {
+			"com.liferay.util.Http.proxy.ntlm.host",
+			"com.liferay.portal.util.HttpImpl.proxy.ntlm.host"
+		},
+		new String[] {
+			"com.liferay.util.Http.proxy.password",
+			"com.liferay.portal.util.HttpImpl.proxy.password"
+		},
+		new String[] {
+			"com.liferay.util.Http.proxy.username",
+			"com.liferay.portal.util.HttpImpl.proxy.username"
+		},
+		new String[] {
+			"com.liferay.util.Http.timeout",
+			"com.liferay.portal.util.HttpImpl.timeout"
 		}
 	};
 
@@ -155,6 +187,8 @@ public class VerifyProperties extends VerifyProcess {
 	};
 
 	private static final String[] _OBSOLETE_SYSTEM_KEYS = new String[] {
+		"com.liferay.util.Http.proxy.host",
+		"com.liferay.util.Http.proxy.port",
 		"com.liferay.util.XSSUtil.regexp.pattern"
 	};
 

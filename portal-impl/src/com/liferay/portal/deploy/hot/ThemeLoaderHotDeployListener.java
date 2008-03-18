@@ -25,9 +25,9 @@ package com.liferay.portal.deploy.hot;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.velocity.VelocityContextPool;
-import com.liferay.util.Http;
 
 import javax.servlet.ServletContext;
 
@@ -56,7 +56,7 @@ public class ThemeLoaderHotDeployListener implements HotDeployListener {
 			}
 
 			String[] xmls = new String[] {
-				Http.URLtoString(
+				HttpUtil.URLtoString(
 					ctx.getResource("/WEB-INF/liferay-theme-loader.xml"))
 			};
 

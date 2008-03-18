@@ -25,9 +25,9 @@ package com.liferay.portlet.wiki.engines.jspwiki;
 import com.ecyrd.jspwiki.WikiContext;
 import com.ecyrd.jspwiki.url.URLConstructor;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.HttpUtil;
 
 import java.io.IOException;
 

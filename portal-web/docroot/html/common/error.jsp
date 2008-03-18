@@ -71,7 +71,7 @@ String message = exception.getMessage();
 		<c:if test="<%= message != null %>">
 			<br />
 
-			<%= Html.escape(message) %>
+			<%= HtmlUtil.escape(message) %>
 		</c:if>
 
 	</td>

@@ -42,7 +42,7 @@ else {
 
 <form action="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /></portlet:renderURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
-<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= Html.escape(keywords) %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
+<input name="<portlet:namespace />keywords" size="30" type="text" value="<%= HtmlUtil.escape(keywords) %>" onBlur="if (this.value == '') { this.value = '<%= unicodeDefaultKeywords %>'; }" onFocus="if (this.value == '<%= unicodeDefaultKeywords %>') { this.value = ''; }" />
 
 <input align="absmiddle" border="0" src="<%= themeDisplay.getPathThemeImages() %>/common/search.png" title="<liferay-ui:message key="search" />" type="image" />
 
@@ -111,7 +111,7 @@ for (int i = 0; i < portlets.size(); i++) {
 	headerNames.add("summary");
 	//headerNames.add("score");
 
-	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + Html.escape(keywords) + "</b>"));
+	SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM + i, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-results-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
 	if (i > 0) {
 		searchContainer.setDelta(5);
@@ -156,8 +156,8 @@ for (int i = 0; i < portlets.size(); i++) {
 			String summary = el.elementText("summary");
 
 			if (portlet.getPortletId().equals(PortletKeys.DOCUMENT_LIBRARY)) {
-				long folderId = GetterUtil.getLong(Http.getParameter(entryHref, "_20_folderId", false));
-				String name = GetterUtil.getString(Http.getParameter(entryHref, "_20_name", false));
+				long folderId = GetterUtil.getLong(HttpUtil.getParameter(entryHref, "_20_folderId", false));
+				String name = GetterUtil.getString(HttpUtil.getParameter(entryHref, "_20_name", false));
 
 				DLFileEntry fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(folderId, name);
 
@@ -231,7 +231,7 @@ for (int i = 0; i < portlets.size(); i++) {
 		</c:when>
 		<c:otherwise>
 			<div style="padding-top: 5px;">
-				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= Html.escape(keywords) %>" /></portlet:renderURL>"><liferay-ui:message key="more" /> &raquo;</a>
+				<a href="<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/search/search" /><portlet:param name="primarySearch" value="<%= portlet.getOpenSearchClass() %>" /><portlet:param name="keywords" value="<%= HtmlUtil.escape(keywords) %>" /></portlet:renderURL>"><liferay-ui:message key="more" /> &raquo;</a>
 			</div>
 		</c:otherwise>
 	</c:choose>

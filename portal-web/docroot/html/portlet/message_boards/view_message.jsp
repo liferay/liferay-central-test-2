@@ -218,7 +218,7 @@ else {
 </div>
 
 <div class="portlet-section-header title">
-	<%= Html.escape(message.getSubject()) %>
+	<%= HtmlUtil.escape(message.getSubject()) %>
 </div>
 
 <div>

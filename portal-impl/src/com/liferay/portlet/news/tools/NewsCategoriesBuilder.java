@@ -22,9 +22,9 @@
 
 package com.liferay.portlet.news.tools;
 
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Http;
 
 import java.io.File;
 
@@ -46,7 +46,7 @@ public class NewsCategoriesBuilder {
 
 	public NewsCategoriesBuilder() {
 		try {
-			String newCategories = Http.URLtoString(
+			String newCategories = HttpUtil.URLtoString(
 				"http://w.moreover.com/categories/category_list.tsv2");
 
 			newCategories =

@@ -27,6 +27,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
@@ -54,7 +55,6 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
-import com.liferay.util.Http;
 import com.liferay.util.LocalizationUtil;
 
 import java.io.IOException;
@@ -689,12 +689,12 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		}
 
 		if (PropsValues.LAYOUT_DEFAULT_P_L_RESET && !resetRenderParameters) {
-			url = Http.addParameter(url, "p_l_reset", 0);
+			url = HttpUtil.addParameter(url, "p_l_reset", 0);
 		}
 		else if (!PropsValues.LAYOUT_DEFAULT_P_L_RESET &&
 				 resetRenderParameters) {
 
-			url = Http.addParameter(url, "p_l_reset", 1);
+			url = HttpUtil.addParameter(url, "p_l_reset", 1);
 		}
 
 		return url;

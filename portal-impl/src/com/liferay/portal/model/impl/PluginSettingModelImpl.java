@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -181,9 +180,9 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 
 			model.setPluginSettingId(getPluginSettingId());
 			model.setCompanyId(getCompanyId());
-			model.setPluginId(Html.escape(getPluginId()));
-			model.setPluginType(Html.escape(getPluginType()));
-			model.setRoles(Html.escape(getRoles()));
+			model.setPluginId(HtmlUtil.escape(getPluginId()));
+			model.setPluginType(HtmlUtil.escape(getPluginType()));
+			model.setRoles(HtmlUtil.escape(getRoles()));
 			model.setActive(getActive());
 
 			model = (PluginSetting)Proxy.newProxyInstance(PluginSetting.class.getClassLoader(),

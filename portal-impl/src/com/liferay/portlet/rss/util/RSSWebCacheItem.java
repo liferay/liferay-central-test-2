@@ -49,17 +49,18 @@ public class RSSWebCacheItem implements WebCacheItem {
 
 		try {
 
-			// com.liferay.util.Http will break the connection if it spends
-			// more than 5 seconds looking up a location. However, German
-			// umlauts do not get encoded correctly. This may be a bug with
-			// commons-httpclient or with how FeedParser uses java.io.Reader.
+			// com.liferay.portal.kernel.util.HttpUtil will break the connection
+			// if it spends more than 5 seconds looking up a location. However,
+			// German umlauts do not get encoded correctly. This may be a bug
+			// with commons-httpclient or with how FeedParser uses
+			// java.io.Reader.
 
 			// Use http://xml.newsisfree.com/feeds/29/629.xml and
 			// http://test.domosoft.com/up/RSS to test if German umlauts show
 			// up correctly.
 
 			/*Reader reader = new StringReader(
-				new String(Http.URLtoByteArray(_url)));
+				new String(HttpUtil.URLtoByteArray(_url)));
 
 			channel = FeedParser.parse(builder, reader);*/
 

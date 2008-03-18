@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ResourceCode;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -145,7 +144,7 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 
 			model.setCodeId(getCodeId());
 			model.setCompanyId(getCompanyId());
-			model.setName(Html.escape(getName()));
+			model.setName(HtmlUtil.escape(getName()));
 			model.setScope(getScope());
 
 			model = (ResourceCode)Proxy.newProxyInstance(ResourceCode.class.getClassLoader(),

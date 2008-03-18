@@ -24,9 +24,9 @@ package com.liferay.taglib.ui;
 
 import com.liferay.portal.kernel.servlet.PortalIncludeUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.Html;
 
 import java.util.List;
 
@@ -188,7 +188,7 @@ public class TableIteratorTag extends TagSupport {
 	}
 
 	public void setRowBreak(String rowBreak) {
-		_rowBreak = Html.unescape(rowBreak);
+		_rowBreak = HtmlUtil.unescape(rowBreak);
 	}
 
 	public void setWidth(String width) {

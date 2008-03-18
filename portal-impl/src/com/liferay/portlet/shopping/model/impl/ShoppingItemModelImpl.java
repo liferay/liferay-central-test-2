@@ -24,12 +24,11 @@ package com.liferay.portlet.shopping.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingItem;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -592,16 +591,16 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 			model.setItemId(getItemId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setCategoryId(getCategoryId());
-			model.setSku(Html.escape(getSku()));
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
-			model.setProperties(Html.escape(getProperties()));
+			model.setSku(HtmlUtil.escape(getSku()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setProperties(HtmlUtil.escape(getProperties()));
 			model.setFields(getFields());
-			model.setFieldsQuantities(Html.escape(getFieldsQuantities()));
+			model.setFieldsQuantities(HtmlUtil.escape(getFieldsQuantities()));
 			model.setMinQuantity(getMinQuantity());
 			model.setMaxQuantity(getMaxQuantity());
 			model.setPrice(getPrice());
@@ -615,13 +614,13 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 			model.setSale(getSale());
 			model.setSmallImage(getSmallImage());
 			model.setSmallImageId(getSmallImageId());
-			model.setSmallImageURL(Html.escape(getSmallImageURL()));
+			model.setSmallImageURL(HtmlUtil.escape(getSmallImageURL()));
 			model.setMediumImage(getMediumImage());
 			model.setMediumImageId(getMediumImageId());
-			model.setMediumImageURL(Html.escape(getMediumImageURL()));
+			model.setMediumImageURL(HtmlUtil.escape(getMediumImageURL()));
 			model.setLargeImage(getLargeImage());
 			model.setLargeImageId(getLargeImageId());
-			model.setLargeImageURL(Html.escape(getLargeImageURL()));
+			model.setLargeImageURL(HtmlUtil.escape(getLargeImageURL()));
 
 			model = (ShoppingItem)Proxy.newProxyInstance(ShoppingItem.class.getClassLoader(),
 					new Class[] { ShoppingItem.class },

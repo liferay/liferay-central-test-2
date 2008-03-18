@@ -24,12 +24,11 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalFeed;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -441,29 +440,29 @@ public class JournalFeedModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setId(getId());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setFeedId(getFeedId());
-			model.setName(Html.escape(getName()));
-			model.setDescription(Html.escape(getDescription()));
-			model.setType(Html.escape(getType()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setType(HtmlUtil.escape(getType()));
 			model.setStructureId(getStructureId());
 			model.setTemplateId(getTemplateId());
-			model.setRendererTemplateId(Html.escape(getRendererTemplateId()));
+			model.setRendererTemplateId(HtmlUtil.escape(getRendererTemplateId()));
 			model.setDelta(getDelta());
-			model.setOrderByCol(Html.escape(getOrderByCol()));
-			model.setOrderByType(Html.escape(getOrderByType()));
-			model.setTargetLayoutFriendlyUrl(Html.escape(
+			model.setOrderByCol(HtmlUtil.escape(getOrderByCol()));
+			model.setOrderByType(HtmlUtil.escape(getOrderByType()));
+			model.setTargetLayoutFriendlyUrl(HtmlUtil.escape(
 					getTargetLayoutFriendlyUrl()));
-			model.setTargetPortletId(Html.escape(getTargetPortletId()));
-			model.setContentField(Html.escape(getContentField()));
-			model.setFeedType(Html.escape(getFeedType()));
+			model.setTargetPortletId(HtmlUtil.escape(getTargetPortletId()));
+			model.setContentField(HtmlUtil.escape(getContentField()));
+			model.setFeedType(HtmlUtil.escape(getFeedType()));
 			model.setFeedVersion(getFeedVersion());
 
 			model = (JournalFeed)Proxy.newProxyInstance(JournalFeed.class.getClassLoader(),

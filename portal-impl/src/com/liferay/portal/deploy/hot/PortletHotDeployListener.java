@@ -39,6 +39,7 @@ import com.liferay.portal.kernel.servlet.ServletContextProvider;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.ClassUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -73,7 +74,6 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.util.CollectionFactory;
-import com.liferay.util.Http;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -129,13 +129,13 @@ public class PortletHotDeployListener implements HotDeployListener {
 			// Initialize portlets
 
 			String[] xmls = new String[] {
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)),
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM)),
-				Http.URLtoString(ctx.getResource(
+				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/liferay-portlet.xml")),
-				Http.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
+				HttpUtil.URLtoString(ctx.getResource("/WEB-INF/web.xml"))
 			};
 
 			if (xmls[0] == null) {
@@ -362,7 +362,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			// Portlet display
 
-			String xml = Http.URLtoString(ctx.getResource(
+			String xml = HttpUtil.URLtoString(ctx.getResource(
 				"/WEB-INF/liferay-display.xml"));
 
 			PortletCategory newPortletCategory =

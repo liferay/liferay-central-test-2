@@ -24,6 +24,7 @@ package com.liferay.portal.editor.fckeditor.receiver.impl;
 
 import com.liferay.portal.editor.fckeditor.command.CommandArgument;
 import com.liferay.portal.editor.fckeditor.exception.FCKException;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
@@ -35,7 +36,6 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.DLFolderServiceUtil;
-import com.liferay.util.HttpUtil;
 
 import java.io.File;
 

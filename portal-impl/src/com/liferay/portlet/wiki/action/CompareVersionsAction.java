@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.wiki.action;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.struts.PortletAction;
@@ -30,7 +31,6 @@ import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
-import com.liferay.util.Html;
 import com.liferay.util.diff.DiffUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -101,12 +101,12 @@ public class CompareVersionsAction extends PortletAction {
 		targetContent = WikiUtil.processContent(targetContent);
 
 		if (type.equals("escape")) {
-			sourceContent = Html.escape(sourceContent);
-			targetContent = Html.escape(targetContent);
+			sourceContent = HtmlUtil.escape(sourceContent);
+			targetContent = HtmlUtil.escape(targetContent);
 		}
 		else if (type.equals("strip")) {
-			sourceContent = Html.stripHtml(sourceContent);
-			targetContent = Html.stripHtml(targetContent);
+			sourceContent = HtmlUtil.stripHtml(sourceContent);
+			targetContent = HtmlUtil.stripHtml(targetContent);
 		}
 
 		List[] diffResults = DiffUtil.diff(

@@ -51,7 +51,7 @@ String message = ParamUtil.getString(request, "message");
 		<liferay-ui:message key="subject" />
 	</td>
 	<td>
-		<input class="lfr-input-text" name="<portlet:namespace />subject" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= Html.escape(subject) %>" />
+		<input class="lfr-input-text" name="<portlet:namespace />subject" type="text" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" value="<%= HtmlUtil.escape(subject) %>" />
 	</td>
 </tr>
 <tr>
@@ -59,7 +59,7 @@ String message = ParamUtil.getString(request, "message");
 		<liferay-ui:message key="message" />
 	</td>
 	<td>
-		<textarea class="lfr-textarea" name="<portlet:namespace />message" wrap="soft" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;"><%= Html.escape(message) %></textarea><br />
+		<textarea class="lfr-textarea" name="<portlet:namespace />message" wrap="soft" onChange="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;" onKeyUp="document.<portlet:namespace />fm.<portlet:namespace />length.value = document.<portlet:namespace />fm.<portlet:namespace />subject.value.length + document.<portlet:namespace />fm.<portlet:namespace />message.value.length;"><%= HtmlUtil.escape(message) %></textarea><br />
 	</td>
 </tr>
 <tr>

@@ -24,12 +24,11 @@ package com.liferay.portlet.tags.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.model.TagsProperty;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -226,12 +225,12 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 			model.setPropertyId(getPropertyId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setEntryId(getEntryId());
-			model.setKey(Html.escape(getKey()));
-			model.setValue(Html.escape(getValue()));
+			model.setKey(HtmlUtil.escape(getKey()));
+			model.setValue(HtmlUtil.escape(getValue()));
 
 			model = (TagsProperty)Proxy.newProxyInstance(TagsProperty.class.getClassLoader(),
 					new Class[] { TagsProperty.class },

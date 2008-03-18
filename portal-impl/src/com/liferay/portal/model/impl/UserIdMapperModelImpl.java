@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.UserIdMapper;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -164,9 +163,9 @@ public class UserIdMapperModelImpl extends BaseModelImpl {
 
 			model.setUserIdMapperId(getUserIdMapperId());
 			model.setUserId(getUserId());
-			model.setType(Html.escape(getType()));
-			model.setDescription(Html.escape(getDescription()));
-			model.setExternalUserId(Html.escape(getExternalUserId()));
+			model.setType(HtmlUtil.escape(getType()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setExternalUserId(HtmlUtil.escape(getExternalUserId()));
 
 			model = (UserIdMapper)Proxy.newProxyInstance(UserIdMapper.class.getClassLoader(),
 					new Class[] { UserIdMapper.class },

@@ -35,12 +35,12 @@ if (translation == null) {
 <form accept-charset="UTF-8" action="<portlet:actionURL />" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 
 <c:if test="<%= Validator.isNotNull(translation.getToText()) %>">
-	<%= Html.escape(translation.getToText()) %>
+	<%= HtmlUtil.escape(translation.getToText()) %>
 
 	<br /><br />
 </c:if>
 
-<textarea class="lfr-textarea" name="<portlet:namespace />text" wrap="soft"><%= Html.escape(translation.getFromText()) %></textarea>
+<textarea class="lfr-textarea" name="<portlet:namespace />text" wrap="soft"><%= HtmlUtil.escape(translation.getFromText()) %></textarea>
 
 <br /><br />
 

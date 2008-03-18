@@ -24,12 +24,11 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalArticle;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -532,27 +531,27 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setUuid(Html.escape(getUuid()));
+			model.setUuid(HtmlUtil.escape(getUuid()));
 			model.setId(getId());
 			model.setResourcePrimKey(getResourcePrimKey());
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setArticleId(getArticleId());
 			model.setVersion(getVersion());
-			model.setTitle(Html.escape(getTitle()));
-			model.setDescription(Html.escape(getDescription()));
-			model.setContent(Html.escape(getContent()));
-			model.setType(Html.escape(getType()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
+			model.setDescription(HtmlUtil.escape(getDescription()));
+			model.setContent(HtmlUtil.escape(getContent()));
+			model.setType(HtmlUtil.escape(getType()));
 			model.setStructureId(getStructureId());
 			model.setTemplateId(getTemplateId());
 			model.setDisplayDate(getDisplayDate());
 			model.setApproved(getApproved());
 			model.setApprovedByUserId(getApprovedByUserId());
-			model.setApprovedByUserName(Html.escape(getApprovedByUserName()));
+			model.setApprovedByUserName(HtmlUtil.escape(getApprovedByUserName()));
 			model.setApprovedDate(getApprovedDate());
 			model.setExpired(getExpired());
 			model.setExpirationDate(getExpirationDate());
@@ -560,7 +559,7 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 			model.setIndexable(getIndexable());
 			model.setSmallImage(getSmallImage());
 			model.setSmallImageId(getSmallImageId());
-			model.setSmallImageURL(Html.escape(getSmallImageURL()));
+			model.setSmallImageURL(HtmlUtil.escape(getSmallImageURL()));
 
 			model = (JournalArticle)Proxy.newProxyInstance(JournalArticle.class.getClassLoader(),
 					new Class[] { JournalArticle.class },

@@ -25,10 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ActivityTracker;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -267,14 +266,14 @@ public class ActivityTrackerModelImpl extends BaseModelImpl {
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
-			model.setActivity(Html.escape(getActivity()));
-			model.setExtraData(Html.escape(getExtraData()));
+			model.setActivity(HtmlUtil.escape(getActivity()));
+			model.setExtraData(HtmlUtil.escape(getExtraData()));
 			model.setReceiverUserId(getReceiverUserId());
-			model.setReceiverUserName(Html.escape(getReceiverUserName()));
+			model.setReceiverUserName(HtmlUtil.escape(getReceiverUserName()));
 
 			model = (ActivityTracker)Proxy.newProxyInstance(ActivityTracker.class.getClassLoader(),
 					new Class[] { ActivityTracker.class },

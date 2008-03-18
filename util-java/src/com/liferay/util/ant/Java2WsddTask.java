@@ -22,9 +22,9 @@
 
 package com.liferay.util.ant;
 
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.FileUtil;
-import com.liferay.util.Html;
 import com.liferay.util.Time;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -137,7 +137,7 @@ public class Java2WsddTask {
 	}
 
 	private static String _format(String content) throws IOException {
-		content = Html.stripComments(content);
+		content = HtmlUtil.stripComments(content);
 
 		try {
 			content = XMLFormatter.toString(content);

@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -335,19 +334,19 @@ public class AccountModelImpl extends BaseModelImpl {
 			model.setAccountId(getAccountId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(Html.escape(getUserName()));
+			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setModifiedDate(getModifiedDate());
 			model.setParentAccountId(getParentAccountId());
-			model.setName(Html.escape(getName()));
-			model.setLegalName(Html.escape(getLegalName()));
-			model.setLegalId(Html.escape(getLegalId()));
-			model.setLegalType(Html.escape(getLegalType()));
-			model.setSicCode(Html.escape(getSicCode()));
-			model.setTickerSymbol(Html.escape(getTickerSymbol()));
-			model.setIndustry(Html.escape(getIndustry()));
-			model.setType(Html.escape(getType()));
-			model.setSize(Html.escape(getSize()));
+			model.setName(HtmlUtil.escape(getName()));
+			model.setLegalName(HtmlUtil.escape(getLegalName()));
+			model.setLegalId(HtmlUtil.escape(getLegalId()));
+			model.setLegalType(HtmlUtil.escape(getLegalType()));
+			model.setSicCode(HtmlUtil.escape(getSicCode()));
+			model.setTickerSymbol(HtmlUtil.escape(getTickerSymbol()));
+			model.setIndustry(HtmlUtil.escape(getIndustry()));
+			model.setType(HtmlUtil.escape(getType()));
+			model.setSize(HtmlUtil.escape(getSize()));
 
 			model = (Account)Proxy.newProxyInstance(Account.class.getClassLoader(),
 					new Class[] { Account.class },

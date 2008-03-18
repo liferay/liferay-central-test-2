@@ -24,12 +24,11 @@ package com.liferay.portlet.journal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalArticleImage;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -197,10 +196,10 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 
 			model.setArticleImageId(getArticleImageId());
 			model.setGroupId(getGroupId());
-			model.setArticleId(Html.escape(getArticleId()));
+			model.setArticleId(HtmlUtil.escape(getArticleId()));
 			model.setVersion(getVersion());
-			model.setElName(Html.escape(getElName()));
-			model.setLanguageId(Html.escape(getLanguageId()));
+			model.setElName(HtmlUtil.escape(getElName()));
+			model.setLanguageId(HtmlUtil.escape(getLanguageId()));
 			model.setTempImage(getTempImage());
 
 			model = (JournalArticleImage)Proxy.newProxyInstance(JournalArticleImage.class.getClassLoader(),

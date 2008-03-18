@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
@@ -57,7 +58,6 @@ import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemPriceComparator;
 import com.liferay.portlet.shopping.util.comparator.ItemSKUComparator;
 import com.liferay.portlet.shopping.util.comparator.OrderDateComparator;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.MathUtil;
 
 import java.text.NumberFormat;

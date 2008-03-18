@@ -48,7 +48,7 @@ TaskDisplayTerms displayTerms = (TaskDisplayTerms)searchContainer.getDisplayTerm
 </tr>
 <tr>
 	<td>
-		<input name="<portlet:namespace /><%= displayTerms.TASK_NAME %>" size="20" type="text" value="<%= Html.escape(displayTerms.getTaskName()) %>" />
+		<input name="<portlet:namespace /><%= displayTerms.TASK_NAME %>" size="20" type="text" value="<%= HtmlUtil.escape(displayTerms.getTaskName()) %>" />
 	</td>
 
 	<c:if test='<%= !viewType.equals("user") %>'>

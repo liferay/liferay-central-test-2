@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.Base64;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -40,7 +42,6 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.Http;
 
 import java.io.IOException;
 
@@ -130,7 +131,7 @@ public class SecureFilter extends BaseFilter {
 			}
 		}
 
-		String completeURL = Http.getCompleteURL(httpReq);
+		String completeURL = HttpUtil.getCompleteURL(httpReq);
 
 		if (_httpsRequired && !httpReq.isSecure()) {
 			if (_log.isDebugEnabled()) {

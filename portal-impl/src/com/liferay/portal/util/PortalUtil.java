@@ -38,6 +38,8 @@ import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
@@ -87,8 +89,6 @@ import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.UserAttributes;
 import com.liferay.util.BeanUtil;
 import com.liferay.util.Encryptor;
-import com.liferay.util.Http;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.JS;
 import com.liferay.util.servlet.DynamicServletRequest;
 import com.liferay.util.servlet.SessionErrors;
@@ -372,7 +372,7 @@ public class PortalUtil {
 
 			if (Validator.isNull(currentURL)) {
 				if (true) {
-					currentURL = Http.getCompleteURL(req);
+					currentURL = HttpUtil.getCompleteURL(req);
 				}
 				else {
 
@@ -572,7 +572,7 @@ public class PortalUtil {
 				if (doAsUser &&
 					Validator.isNotNull(themeDisplay.getDoAsUserId())) {
 
-					layoutFriendlyURL = Http.addParameter(
+					layoutFriendlyURL = HttpUtil.addParameter(
 						layoutFriendlyURL, "doAsUserId",
 						themeDisplay.getDoAsUserId());
 				}
@@ -584,7 +584,7 @@ public class PortalUtil {
 		String layoutURL = getLayoutActualURL(layout);
 
 		if (doAsUser && Validator.isNotNull(themeDisplay.getDoAsUserId())) {
-			layoutURL = Http.addParameter(
+			layoutURL = HttpUtil.addParameter(
 				layoutURL, "doAsUserId", themeDisplay.getDoAsUserId());
 		}
 

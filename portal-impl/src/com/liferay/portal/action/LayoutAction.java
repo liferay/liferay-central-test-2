@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -71,8 +72,6 @@ import com.liferay.portlet.ResourceRequestImpl;
 import com.liferay.portlet.ResourceResponseFactory;
 import com.liferay.portlet.ResourceResponseImpl;
 import com.liferay.portlet.StateAwareResponseImpl;
-import com.liferay.util.Http;
-import com.liferay.util.HttpUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 import com.liferay.util.servlet.UploadServletRequest;
@@ -214,7 +213,7 @@ public class LayoutAction extends Action {
 				themeDisplay.getPathMain() + "/portal/layout?p_l_id=" + plid;
 
 			if (Validator.isNotNull(themeDisplay.getDoAsUserId())) {
-				forwardURL = Http.addParameter(
+				forwardURL = HttpUtil.addParameter(
 					forwardURL, "doAsUserId", themeDisplay.getDoAsUserId());
 			}
 		}

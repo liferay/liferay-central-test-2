@@ -79,7 +79,7 @@ if (treeWalker.isOdd()) {
 			<b>
 		</c:if>
 
-		<%= Html.escape(message.getSubject()) %>
+		<%= HtmlUtil.escape(message.getSubject()) %>
 
 		<c:if test="<%= !readFlag %>">
 			</b>

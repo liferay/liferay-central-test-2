@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
@@ -40,7 +41,6 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.base.BlogsEntryServiceBaseImpl;
 import com.liferay.portlet.blogs.service.permission.BlogsEntryPermission;
 import com.liferay.portlet.blogs.util.comparator.EntryDisplayDateComparator;
-import com.liferay.util.Html;
 import com.liferay.util.RSSUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
@@ -299,8 +299,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 			if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) {
 				value = StringUtil.shorten(
-					Html.stripHtml(entry.getContent()), _RSS_ABSTRACT_LENGTH,
-					StringPool.BLANK);
+					HtmlUtil.stripHtml(entry.getContent()),
+					_RSS_ABSTRACT_LENGTH, StringPool.BLANK);
 			}
 			else if (displayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) {
 				value = StringPool.BLANK;

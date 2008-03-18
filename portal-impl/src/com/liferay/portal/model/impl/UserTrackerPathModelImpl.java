@@ -24,10 +24,9 @@ package com.liferay.portal.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.UserTrackerPath;
 import com.liferay.portal.util.PropsUtil;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -150,7 +149,7 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 
 			model.setUserTrackerPathId(getUserTrackerPathId());
 			model.setUserTrackerId(getUserTrackerId());
-			model.setPath(Html.escape(getPath()));
+			model.setPath(HtmlUtil.escape(getPath()));
 			model.setPathDate(getPathDate());
 
 			model = (UserTrackerPath)Proxy.newProxyInstance(UserTrackerPath.class.getClassLoader(),

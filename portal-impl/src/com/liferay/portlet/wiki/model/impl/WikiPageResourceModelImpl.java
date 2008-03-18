@@ -24,12 +24,11 @@ package com.liferay.portlet.wiki.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
-
-import com.liferay.util.Html;
 
 import java.io.Serializable;
 
@@ -134,7 +133,7 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 
 			model.setResourcePrimKey(getResourcePrimKey());
 			model.setNodeId(getNodeId());
-			model.setTitle(Html.escape(getTitle()));
+			model.setTitle(HtmlUtil.escape(getTitle()));
 
 			model = (WikiPageResource)Proxy.newProxyInstance(WikiPageResource.class.getClassLoader(),
 					new Class[] { WikiPageResource.class },
