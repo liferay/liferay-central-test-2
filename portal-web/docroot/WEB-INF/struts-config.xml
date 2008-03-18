@@ -137,8 +137,8 @@
 
 		<!-- Alerts -->
 
-		<action path="/alerts/edit_announcement" type="com.liferay.portlet.announcements.action.EditAnnouncementAction">
-			<forward name="portlet.announcements.edit_announcement" path="portlet.announcements.edit_announcement" />
+		<action path="/alerts/edit_entry" type="com.liferay.portlet.announcements.action.EditEntryAction">
+			<forward name="portlet.announcements.edit_entry" path="portlet.announcements.edit_entry" />
 			<forward name="portlet.announcements.error" path="portlet.announcements.error" />
 		</action>
 
@@ -153,8 +153,8 @@
 
 		<!-- Announcements -->
 
-		<action path="/announcements/edit_announcement" type="com.liferay.portlet.announcements.action.EditAnnouncementAction">
-			<forward name="portlet.announcements.edit_announcement" path="portlet.announcements.edit_announcement" />
+		<action path="/announcements/edit_entry" type="com.liferay.portlet.announcements.action.EditEntryAction">
+			<forward name="portlet.announcements.edit_entry" path="portlet.announcements.edit_entry" />
 			<forward name="portlet.announcements.error" path="portlet.announcements.error" />
 		</action>
 

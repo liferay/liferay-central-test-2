@@ -40,7 +40,7 @@ public class AnnouncementFlagLocalServiceImpl extends
 		AnnouncementFlagLocalServiceBaseImpl {
 
 	public AnnouncementFlag addAnnouncementFlag(
-			long userId, long announcementId, int flag)
+			long userId, long entryId, int flag)
 		throws PortalException, SystemException {
 
 		long announcementFlagId = counterLocalService.increment();
@@ -49,7 +49,7 @@ public class AnnouncementFlagLocalServiceImpl extends
 			announcementFlagPersistence.create(announcementFlagId);
 
 		announcementFlag.setUserId(userId);
-		announcementFlag.setAnnouncementId(announcementId);
+		announcementFlag.setEntryId(entryId);
 		announcementFlag.setFlag(flag);
 		announcementFlag.setFlagDate(new Date());
 
@@ -59,11 +59,11 @@ public class AnnouncementFlagLocalServiceImpl extends
 	}
 
 	public AnnouncementFlag getAnnouncementFlag(
-			long userId, long announcementId, int flag)
+			long userId, long entryId, int flag)
 		throws PortalException, SystemException {
 
-		return announcementFlagPersistence.fetchByU_A_F(
-			userId, announcementId, flag);
+		return announcementFlagPersistence.findByU_E_F(
+			userId, entryId, flag);
 	}
 
 	public void deleteAnnouncementFlag(long announcementFlagId)
@@ -72,10 +72,10 @@ public class AnnouncementFlagLocalServiceImpl extends
 		announcementFlagPersistence.remove(announcementFlagId);
 	}
 
-	public void deleteAnnouncementFlags(long announcementId)
+	public void deleteAnnouncementFlags(long entryId)
 		throws PortalException, SystemException {
 
-		announcementFlagPersistence.removeByAnnouncementId(announcementId);
+		announcementFlagPersistence.removeByEntryId(entryId);
 	}
 
 }

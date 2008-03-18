@@ -59,12 +59,12 @@ public class AnnouncementFlagLocalServiceUtil {
 		return announcementFlagLocalService.addAnnouncementFlag(announcementFlag);
 	}
 
-	public static void deleteAnnouncementFlag(long announcementFlagId)
+	public static void deleteAnnouncementFlag(long flagId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		AnnouncementFlagLocalService announcementFlagLocalService = AnnouncementFlagLocalServiceFactory.getService();
 
-		announcementFlagLocalService.deleteAnnouncementFlag(announcementFlagId);
+		announcementFlagLocalService.deleteAnnouncementFlag(flagId);
 	}
 
 	public static void deleteAnnouncementFlag(
@@ -101,30 +101,30 @@ public class AnnouncementFlagLocalServiceUtil {
 		return announcementFlagLocalService.updateAnnouncementFlag(announcementFlag);
 	}
 
-	public static com.liferay.portlet.announcements.service.persistence.AnnouncementPersistence getAnnouncementPersistence() {
+	public static com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistence getAnnouncementEntryPersistence() {
 		AnnouncementFlagLocalService announcementFlagLocalService = AnnouncementFlagLocalServiceFactory.getService();
 
-		return announcementFlagLocalService.getAnnouncementPersistence();
+		return announcementFlagLocalService.getAnnouncementEntryPersistence();
 	}
 
-	public static void setAnnouncementPersistence(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementPersistence announcementPersistence) {
+	public static void setAnnouncementEntryPersistence(
+		com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistence announcementEntryPersistence) {
 		AnnouncementFlagLocalService announcementFlagLocalService = AnnouncementFlagLocalServiceFactory.getService();
 
-		announcementFlagLocalService.setAnnouncementPersistence(announcementPersistence);
+		announcementFlagLocalService.setAnnouncementEntryPersistence(announcementEntryPersistence);
 	}
 
-	public static com.liferay.portlet.announcements.service.persistence.AnnouncementFinder getAnnouncementFinder() {
+	public static com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder getAnnouncementEntryFinder() {
 		AnnouncementFlagLocalService announcementFlagLocalService = AnnouncementFlagLocalServiceFactory.getService();
 
-		return announcementFlagLocalService.getAnnouncementFinder();
+		return announcementFlagLocalService.getAnnouncementEntryFinder();
 	}
 
-	public static void setAnnouncementFinder(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementFinder announcementFinder) {
+	public static void setAnnouncementEntryFinder(
+		com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder announcementEntryFinder) {
 		AnnouncementFlagLocalService announcementFlagLocalService = AnnouncementFlagLocalServiceFactory.getService();
 
-		announcementFlagLocalService.setAnnouncementFinder(announcementFinder);
+		announcementFlagLocalService.setAnnouncementEntryFinder(announcementEntryFinder);
 	}
 
 	public static com.liferay.portlet.announcements.service.persistence.AnnouncementFlagPersistence getAnnouncementFlagPersistence() {
@@ -147,30 +147,30 @@ public class AnnouncementFlagLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementFlag addAnnouncementFlag(
-		long userId, long announcementId, int flag)
+		long userId, long entryId, int flag)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		AnnouncementFlagLocalService announcementFlagLocalService = AnnouncementFlagLocalServiceFactory.getService();
 
 		return announcementFlagLocalService.addAnnouncementFlag(userId,
-			announcementId, flag);
+			entryId, flag);
 	}
 
 	public static com.liferay.portlet.announcements.model.AnnouncementFlag getAnnouncementFlag(
-		long userId, long announcementId, int flag)
+		long userId, long entryId, int flag)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		AnnouncementFlagLocalService announcementFlagLocalService = AnnouncementFlagLocalServiceFactory.getService();
 
 		return announcementFlagLocalService.getAnnouncementFlag(userId,
-			announcementId, flag);
+			entryId, flag);
 	}
 
-	public static void deleteAnnouncementFlags(long announcementId)
+	public static void deleteAnnouncementFlags(long entryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		AnnouncementFlagLocalService announcementFlagLocalService = AnnouncementFlagLocalServiceFactory.getService();
 
-		announcementFlagLocalService.deleteAnnouncementFlags(announcementId);
+		announcementFlagLocalService.deleteAnnouncementFlags(entryId);
 	}
 }

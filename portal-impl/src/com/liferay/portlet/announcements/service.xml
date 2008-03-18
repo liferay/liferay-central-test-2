@@ -3,11 +3,11 @@
 
 <service-builder package-path="com.liferay.portlet.announcements">
 	<namespace>Announcements</namespace>
-	<entity name="Announcement" uuid="true" local-service="true" remote-service="true">
+	<entity name="AnnouncementEntry" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
-		<column name="announcementId" type="long" primary="true" />
+		<column name="entryId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -62,7 +62,7 @@
 
 		<!-- PK fields -->
 
-		<column name="announcementFlagId" type="long" primary="true" />
+		<column name="flagId" type="long" primary="true" />
 
 		<!-- Audit fields -->
 
@@ -70,7 +70,7 @@
 
 		<!-- Other fields -->
 
-		<column name="announcementId" type="long" />
+		<column name="entryId" type="long" />
 		<column name="flag" type="int" />
 		<column name="flagDate" type="Date" />
 
@@ -83,12 +83,12 @@
 
 		<!-- Finder methods -->
 
-		<finder name="AnnouncementId" return-type="Collection">
-			<finder-column name="announcementId" />
+		<finder name="EntryId" return-type="Collection">
+			<finder-column name="entryId" />
 		</finder>
-		<finder name="U_A_F" return-type="AnnouncementFlag">
+		<finder name="U_E_F" return-type="AnnouncementFlag">
 			<finder-column name="userId" />
-			<finder-column name="announcementId" />
+			<finder-column name="entryId" />
 			<finder-column name="flag" />
 		</finder>
 
@@ -97,9 +97,9 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<exceptions>
-		<exception>AnnouncementContent</exception>
-		<exception>AnnouncementDisplayDate</exception>
-		<exception>AnnouncementExpirationDate</exception>
-		<exception>AnnouncementTitle</exception>
+		<exception>AnnouncementEntryContent</exception>
+		<exception>AnnouncementEntryDisplayDate</exception>
+		<exception>AnnouncementEntryExpirationDate</exception>
+		<exception>AnnouncementEntryTitle</exception>
 	</exceptions>
 </service-builder>

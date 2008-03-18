@@ -53,9 +53,9 @@ create table Address (
 	primary_ BOOLEAN
 );
 
-create table Announcement (
+create table AnnouncementEntry (
 	uuid_ VARCHAR(75) null,
-	announcementId LONG not null primary key,
+	entryId LONG not null primary key,
 	companyId LONG,
 	userId LONG,
 	userName VARCHAR(75) null,
@@ -74,9 +74,9 @@ create table Announcement (
 );
 
 create table AnnouncementFlag (
-	announcementFlagId LONG not null primary key,
+	flagId LONG not null primary key,
 	userId LONG,
-	announcementId LONG,
+	entryId LONG,
 	flag INTEGER,
 	flagDate DATE null
 );

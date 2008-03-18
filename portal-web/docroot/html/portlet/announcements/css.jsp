@@ -30,33 +30,25 @@
 .lfr-alerts {
 }
 
-.lfr-announcements .announcement {
+.lfr-announcements .entry {
 	margin: 4px 0px;
 }
 
-.lfr-alerts .announcement {
+.lfr-alerts .entry {
 	margin: 8px 0px;
 	border: 6px solid #c00;
 	padding: 6px;
 }
 
-.lfr-announcements .announcement-scope {
+.lfr-announcements .entry-scope {
 	display: block;
 }
 
-.lfr-alerts .announcement-scope {
+.lfr-alerts .entry-scope {
 	display: block;
 }
 
-.lfr-announcements .read-false .announcement-title {
-	display: block;
-	font-size: 1.6em;
-	font-weight: bold;
-	color: #000;
-	margin: 0px 0px 4px 0px;
-}
-
-.lfr-alerts .read-false .announcement-title {
+.lfr-announcements .read-false .entry-title {
 	display: block;
 	font-size: 1.6em;
 	font-weight: bold;
@@ -64,7 +56,15 @@
 	margin: 0px 0px 4px 0px;
 }
 
-.lfr-announcements .read-true .announcement-title {
+.lfr-alerts .read-false .entry-title {
+	display: block;
+	font-size: 1.6em;
+	font-weight: bold;
+	color: #000;
+	margin: 0px 0px 4px 0px;
+}
+
+.lfr-announcements .read-true .entry-title {
 	display: block;
 	font-size: 1.5em;
 	font-weight: bold;
@@ -72,7 +72,7 @@
 	margin: 0px 0px 4px 0px;
 }
 
-.lfr-alerts .read-true .announcement-title {
+.lfr-alerts .read-true .entry-title {
 	display: block;
 	font-size: 1.5em;
 	font-weight: bold;
@@ -80,38 +80,38 @@
 	margin: 0px 0px 4px 0px;
 }
 
-.lfr-announcements .read-false .announcement-title .announcement-url {
+.lfr-announcements .read-false .entry-title .entry-url {
 	color: #000;
 }
 
-.lfr-alerts .read-false .announcement-title .announcement-url {
+.lfr-alerts .read-false .entry-title .entry-url {
 	color: #000;
 }
 
-.lfr-announcements .read-true .announcement-title .announcement-url {
+.lfr-announcements .read-true .entry-title .entry-url {
 	color: #CCC;
 }
 
-.lfr-alerts .read-true .announcement-title .announcement-url {
+.lfr-alerts .read-true .entry-title .entry-url {
 	color: #CCC;
 }
 
-.lfr-announcements .announcement-content {
+.lfr-announcements .entry-content {
 	display: block;
 	padding: 2px 2px 2px 30px;
 }
 
-.lfr-alerts .announcement-content {
+.lfr-alerts .entry-content {
 	display: block;
 	padding: 2px 2px 2px 30px;
 }
 
-.lfr-announcements .announcement-scope {
+.lfr-announcements .entry-scope {
 	display: block;
 	color: #CCC;
 }
 
-.lfr-alerts .announcement-scope {
+.lfr-alerts .entry-scope {
 	display: block;
 	color: #CCC;
 }
@@ -124,26 +124,26 @@
 	float: right;
 }
 
-.lfr-announcements .announcement-type-general {
+.lfr-announcements .entry-type-general {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-alerts .announcement-type-general {
+.lfr-alerts .entry-type-general {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-announcements .announcement-type-news {
+.lfr-announcements .entry-type-news {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-alerts .announcement-type-news {
+.lfr-alerts .entry-type-news {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-announcements .announcement-type-test {
+.lfr-announcements .entry-type-test {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-alerts .announcement-type-test {
+.lfr-alerts .entry-type-test {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }

@@ -50,9 +50,9 @@ public class AnnouncementFlagSoap implements Serializable {
 	public static AnnouncementFlagSoap toSoapModel(AnnouncementFlag model) {
 		AnnouncementFlagSoap soapModel = new AnnouncementFlagSoap();
 
-		soapModel.setAnnouncementFlagId(model.getAnnouncementFlagId());
+		soapModel.setFlagId(model.getFlagId());
 		soapModel.setUserId(model.getUserId());
-		soapModel.setAnnouncementId(model.getAnnouncementId());
+		soapModel.setEntryId(model.getEntryId());
 		soapModel.setFlag(model.getFlag());
 		soapModel.setFlagDate(model.getFlagDate());
 
@@ -76,19 +76,19 @@ public class AnnouncementFlagSoap implements Serializable {
 	}
 
 	public long getPrimaryKey() {
-		return _announcementFlagId;
+		return _flagId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setAnnouncementFlagId(pk);
+		setFlagId(pk);
 	}
 
-	public long getAnnouncementFlagId() {
-		return _announcementFlagId;
+	public long getFlagId() {
+		return _flagId;
 	}
 
-	public void setAnnouncementFlagId(long announcementFlagId) {
-		_announcementFlagId = announcementFlagId;
+	public void setFlagId(long flagId) {
+		_flagId = flagId;
 	}
 
 	public long getUserId() {
@@ -99,12 +99,12 @@ public class AnnouncementFlagSoap implements Serializable {
 		_userId = userId;
 	}
 
-	public long getAnnouncementId() {
-		return _announcementId;
+	public long getEntryId() {
+		return _entryId;
 	}
 
-	public void setAnnouncementId(long announcementId) {
-		_announcementId = announcementId;
+	public void setEntryId(long entryId) {
+		_entryId = entryId;
 	}
 
 	public int getFlag() {
@@ -123,9 +123,9 @@ public class AnnouncementFlagSoap implements Serializable {
 		_flagDate = flagDate;
 	}
 
-	private long _announcementFlagId;
+	private long _flagId;
 	private long _userId;
-	private long _announcementId;
+	private long _entryId;
 	private int _flag;
 	private Date _flagDate;
 }

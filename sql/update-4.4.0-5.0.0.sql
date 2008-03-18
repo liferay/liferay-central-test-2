@@ -1,3 +1,31 @@
+create table AnnouncementEntry (
+	uuid_ VARCHAR(75) null,
+	entryId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	title VARCHAR(75) null,
+	content STRING null,
+	url STRING null,
+	type_ VARCHAR(75) null,
+	displayDate DATE null,
+	expirationDate DATE null,
+	priority INTEGER,
+	alert BOOLEAN
+);
+
+create table AnnouncementFlag (
+	flagId LONG not null primary key,
+	userId LONG,
+	entryId LONG,
+	flag INTEGER,
+	flagDate DATE null
+);
+
 alter table IGImage add name VARCHAR(75) null;
 alter table IGImage add custom1ImageId LONG null;
 alter table IGImage add custom2ImageId LONG null;

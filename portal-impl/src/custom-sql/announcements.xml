@@ -1,96 +1,96 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementFinder.countByC_C_F">
+	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder.countByC_C_F">
 		<![CDATA[
 			SELECT DISTINCT
 				COUNT(*) AS COUNT_VALUE
 			FROM
-				Announcement
+				AnnouncementEntry
 			LEFT JOIN
 				AnnouncementFlag ON
-					(AnnouncementFlag.announcementId = Announcement.announcementId)
+					(AnnouncementFlag.entryId = AnnouncementEntry.entryId)
 			WHERE
 				([$CLASS_PKS$]) AND
-				(Announcement.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
-				(Announcement.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
-				(Announcement.alert = ?) AND
+				(AnnouncementEntry.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
+				(AnnouncementEntry.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
+				(AnnouncementEntry.alert = ?) AND
 				(AnnouncementFlag.flag = ?) AND
 				(AnnouncementFlag.userId = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementFinder.findByC_C_F">
+	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder.findByC_C_F">
 		<![CDATA[
 			SELECT DISTINCT
-				{Announcement.*}
+				{AnnouncementEntry.*}
 			FROM
-				Announcement
+				AnnouncementEntry
 			LEFT JOIN
 				AnnouncementFlag ON
-					(AnnouncementFlag.announcementId = Announcement.announcementId)
+					(AnnouncementFlag.entryId = AnnouncementEntry.entryId)
 			WHERE
 				([$CLASS_PKS$]) AND
-				(Announcement.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
-				(Announcement.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
-				(Announcement.alert = ?) AND
+				(AnnouncementEntry.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
+				(AnnouncementEntry.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
+				(AnnouncementEntry.alert = ?) AND
 				(AnnouncementFlag.flag = ?) AND
 				(AnnouncementFlag.userId = ?)
 			ORDER BY
-				Announcement.priority DESC,
-				Announcement.modifiedDate DESC
+				AnnouncementEntry.priority DESC,
+				AnnouncementEntry.modifiedDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementFinder.countByC_C_F.noJoin">
+	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder.countByC_C_F.noJoin">
 		<![CDATA[
 			SELECT DISTINCT
 				COUNT(*) AS COUNT_VALUE
 			FROM
-				Announcement
+				AnnouncementEntry
 			WHERE
 				([$CLASS_PKS$]) AND
-				(Announcement.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
-				(Announcement.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
-				(Announcement.alert = ?) AND
-				(Announcement.announcementId NOT IN
+				(AnnouncementEntry.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
+				(AnnouncementEntry.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
+				(AnnouncementEntry.alert = ?) AND
+				(AnnouncementEntry.entryId NOT IN
 					(
 						SELECT DISTINCT
-							AnnouncementFlag.announcementId
+							AnnouncementFlag.entryId
 						FROM
 							AnnouncementFlag
 						WHERE
-							(AnnouncementFlag.announcementId = Announcement.announcementId) AND
+							(AnnouncementFlag.entryId = AnnouncementEntry.entryId) AND
 							(AnnouncementFlag.flag = ?) AND
 							(AnnouncementFlag.userId = ?)
 					)
 				)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementFinder.findByC_C_F.noJoin">
+	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder.findByC_C_F.noJoin">
 		<![CDATA[
 			SELECT DISTINCT
-				{Announcement.*}
+				{AnnouncementEntry.*}
 			FROM
-				Announcement
+				AnnouncementEntry
 			WHERE
 				([$CLASS_PKS$]) AND
-				(Announcement.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
-				(Announcement.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
-				(Announcement.alert = ?) AND
-				(Announcement.announcementId NOT IN
+				(AnnouncementEntry.displayDate <= ? [$AND_OR_NULL_CHECK$]) AND
+				(AnnouncementEntry.expirationDate >= ? [$AND_OR_NULL_CHECK$]) AND
+				(AnnouncementEntry.alert = ?) AND
+				(AnnouncementEntry.entryId NOT IN
 					(
 						SELECT DISTINCT
-							AnnouncementFlag.announcementId
+							AnnouncementFlag.entryId
 						FROM
 							AnnouncementFlag
 						WHERE
-							(AnnouncementFlag.announcementId = Announcement.announcementId) AND
+							(AnnouncementFlag.entryId = AnnouncementEntry.entryId) AND
 							(AnnouncementFlag.flag = ?) AND
 							(AnnouncementFlag.userId = ?)
 					)
 				)
 			ORDER BY
-				Announcement.priority DESC,
-				Announcement.modifiedDate DESC
+				AnnouncementEntry.priority DESC,
+				AnnouncementEntry.modifiedDate DESC
 		]]>
 	</sql>
 </custom-sql>

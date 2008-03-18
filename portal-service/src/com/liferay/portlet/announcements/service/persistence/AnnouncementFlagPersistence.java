@@ -30,10 +30,10 @@ package com.liferay.portlet.announcements.service.persistence;
  */
 public interface AnnouncementFlagPersistence {
 	public com.liferay.portlet.announcements.model.AnnouncementFlag create(
-		long announcementFlagId);
+		long flagId);
 
 	public com.liferay.portlet.announcements.model.AnnouncementFlag remove(
-		long announcementFlagId)
+		long flagId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.announcements.NoSuchAnnouncementFlagException;
 
@@ -54,50 +54,48 @@ public interface AnnouncementFlagPersistence {
 		boolean merge) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.announcements.model.AnnouncementFlag findByPrimaryKey(
-		long announcementFlagId)
+		long flagId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.announcements.NoSuchAnnouncementFlagException;
 
 	public com.liferay.portlet.announcements.model.AnnouncementFlag fetchByPrimaryKey(
-		long announcementFlagId) throws com.liferay.portal.SystemException;
+		long flagId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findByAnnouncementId(
-		long announcementId) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findByEntryId(
+		long entryId) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findByAnnouncementId(
-		long announcementId, int begin, int end)
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findByEntryId(
+		long entryId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findByAnnouncementId(
-		long announcementId, int begin, int end,
+	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findByEntryId(
+		long entryId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.announcements.model.AnnouncementFlag findByAnnouncementId_First(
-		long announcementId,
+	public com.liferay.portlet.announcements.model.AnnouncementFlag findByEntryId_First(
+		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.announcements.NoSuchAnnouncementFlagException;
+
+	public com.liferay.portlet.announcements.model.AnnouncementFlag findByEntryId_Last(
+		long entryId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.announcements.NoSuchAnnouncementFlagException;
+
+	public com.liferay.portlet.announcements.model.AnnouncementFlag[] findByEntryId_PrevAndNext(
+		long flagId, long entryId,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.announcements.NoSuchAnnouncementFlagException;
 
-	public com.liferay.portlet.announcements.model.AnnouncementFlag findByAnnouncementId_Last(
-		long announcementId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public com.liferay.portlet.announcements.model.AnnouncementFlag findByU_E_F(
+		long userId, long entryId, int flag)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.announcements.NoSuchAnnouncementFlagException;
 
-	public com.liferay.portlet.announcements.model.AnnouncementFlag[] findByAnnouncementId_PrevAndNext(
-		long announcementFlagId, long announcementId,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.announcements.NoSuchAnnouncementFlagException;
-
-	public com.liferay.portlet.announcements.model.AnnouncementFlag findByU_A_F(
-		long userId, long announcementId, int flag)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portlet.announcements.NoSuchAnnouncementFlagException;
-
-	public com.liferay.portlet.announcements.model.AnnouncementFlag fetchByU_A_F(
-		long userId, long announcementId, int flag)
+	public com.liferay.portlet.announcements.model.AnnouncementFlag fetchByU_E_F(
+		long userId, long entryId, int flag)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementFlag> findWithDynamicQuery(
@@ -118,19 +116,19 @@ public interface AnnouncementFlagPersistence {
 		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByAnnouncementId(long announcementId)
+	public void removeByEntryId(long entryId)
 		throws com.liferay.portal.SystemException;
 
-	public void removeByU_A_F(long userId, long announcementId, int flag)
+	public void removeByU_E_F(long userId, long entryId, int flag)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.announcements.NoSuchAnnouncementFlagException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
-	public int countByAnnouncementId(long announcementId)
+	public int countByEntryId(long entryId)
 		throws com.liferay.portal.SystemException;
 
-	public int countByU_A_F(long userId, long announcementId, int flag)
+	public int countByU_E_F(long userId, long entryId, int flag)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

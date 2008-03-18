@@ -54,10 +54,9 @@ public class AnnouncementFlagJSONSerializer {
 	public static JSONObject toJSONObject(AnnouncementFlag model) {
 		JSONObject jsonObj = new JSONObject();
 
-		JSONUtil.put(jsonObj, "announcementFlagId",
-			model.getAnnouncementFlagId());
+		JSONUtil.put(jsonObj, "flagId", model.getFlagId());
 		JSONUtil.put(jsonObj, "userId", model.getUserId());
-		JSONUtil.put(jsonObj, "announcementId", model.getAnnouncementId());
+		JSONUtil.put(jsonObj, "entryId", model.getEntryId());
 		JSONUtil.put(jsonObj, "flag", model.getFlag());
 		JSONUtil.put(jsonObj, "flagDate", model.getFlagDate());
 

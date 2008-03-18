@@ -4,6 +4,7 @@
 	<portlet-resource>
 		<portlet-name>83</portlet-name>
 		<supports>
+			<action-key>ADD_ENTRY</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
@@ -14,6 +15,7 @@
 			<action-key>VIEW</action-key>
 		</guest-defaults>
 		<guest-unsupported>
+			<action-key>ADD_ENTRY</action-key>
 			<action-key>CONFIGURATION</action-key>
 		</guest-unsupported>
 		<layout-manager>
@@ -23,6 +25,7 @@
 	<portlet-resource>
 		<portlet-name>84</portlet-name>
 		<supports>
+			<action-key>ADD_ENTRY</action-key>
 			<action-key>CONFIGURATION</action-key>
 			<action-key>VIEW</action-key>
 		</supports>
@@ -33,11 +36,15 @@
 			<action-key>VIEW</action-key>
 		</guest-defaults>
 		<guest-unsupported>
+			<action-key>ADD_ENTRY</action-key>
 			<action-key>CONFIGURATION</action-key>
 		</guest-unsupported>
+		<layout-manager>
+			<action-key>VIEW</action-key>
+		</layout-manager>
 	</portlet-resource>
 	<model-resource>
-		<model-name>com.liferay.portlet.announcements.model.Announcement</model-name>
+		<model-name>com.liferay.portlet.announcements.model.AnnouncementEntry</model-name>
 		<portlet-ref>
 			<portlet-name>83</portlet-name>
 			<portlet-name>84</portlet-name>

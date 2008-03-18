@@ -1188,26 +1188,26 @@ Liferay.Service.Announcements = {
 	servicePackage: "com.liferay.portlet.announcements.service.http."
 };
 
-Liferay.Service.Announcements.Announcement = {
-	serviceClassName: Liferay.Service.Announcements.servicePackage + "Announcement" + Liferay.Service.classNameSuffix,
+Liferay.Service.Announcements.AnnouncementEntry = {
+	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementEntry" + Liferay.Service.classNameSuffix,
 
-	addAnnouncement: function(params, callback) {
+	addEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addAnnouncement";
+		params.serviceMethodName = "addEntry";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	deleteAnnouncement: function(params, callback) {
+	deleteEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteAnnouncement";
+		params.serviceMethodName = "deleteEntry";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	updateAnnouncement: function(params, callback) {
+	updateEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateAnnouncement";
+		params.serviceMethodName = "updateEntry";
 
 		return Liferay.Service.ajax(params, callback);
 	}

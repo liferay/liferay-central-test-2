@@ -32,17 +32,17 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.announcements.model.AnnouncementFlag;
+import com.liferay.portlet.announcements.service.AnnouncementEntryLocalService;
+import com.liferay.portlet.announcements.service.AnnouncementEntryLocalServiceFactory;
+import com.liferay.portlet.announcements.service.AnnouncementEntryService;
+import com.liferay.portlet.announcements.service.AnnouncementEntryServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementFlagLocalService;
-import com.liferay.portlet.announcements.service.AnnouncementLocalService;
-import com.liferay.portlet.announcements.service.AnnouncementLocalServiceFactory;
-import com.liferay.portlet.announcements.service.AnnouncementService;
-import com.liferay.portlet.announcements.service.AnnouncementServiceFactory;
-import com.liferay.portlet.announcements.service.persistence.AnnouncementFinder;
-import com.liferay.portlet.announcements.service.persistence.AnnouncementFinderUtil;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinderUtil;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistence;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementEntryUtil;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementFlagPersistence;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementFlagUtil;
-import com.liferay.portlet.announcements.service.persistence.AnnouncementPersistence;
-import com.liferay.portlet.announcements.service.persistence.AnnouncementUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -63,9 +63,9 @@ public abstract class AnnouncementFlagLocalServiceBaseImpl
 		return announcementFlagPersistence.update(announcementFlag);
 	}
 
-	public void deleteAnnouncementFlag(long announcementFlagId)
+	public void deleteAnnouncementFlag(long flagId)
 		throws PortalException, SystemException {
-		announcementFlagPersistence.remove(announcementFlagId);
+		announcementFlagPersistence.remove(flagId);
 	}
 
 	public void deleteAnnouncementFlag(AnnouncementFlag announcementFlag)
@@ -92,38 +92,40 @@ public abstract class AnnouncementFlagLocalServiceBaseImpl
 		return announcementFlagPersistence.update(announcementFlag, true);
 	}
 
-	public AnnouncementLocalService getAnnouncementLocalService() {
-		return announcementLocalService;
+	public AnnouncementEntryLocalService getAnnouncementEntryLocalService() {
+		return announcementEntryLocalService;
 	}
 
-	public void setAnnouncementLocalService(
-		AnnouncementLocalService announcementLocalService) {
-		this.announcementLocalService = announcementLocalService;
+	public void setAnnouncementEntryLocalService(
+		AnnouncementEntryLocalService announcementEntryLocalService) {
+		this.announcementEntryLocalService = announcementEntryLocalService;
 	}
 
-	public AnnouncementService getAnnouncementService() {
-		return announcementService;
+	public AnnouncementEntryService getAnnouncementEntryService() {
+		return announcementEntryService;
 	}
 
-	public void setAnnouncementService(AnnouncementService announcementService) {
-		this.announcementService = announcementService;
+	public void setAnnouncementEntryService(
+		AnnouncementEntryService announcementEntryService) {
+		this.announcementEntryService = announcementEntryService;
 	}
 
-	public AnnouncementPersistence getAnnouncementPersistence() {
-		return announcementPersistence;
+	public AnnouncementEntryPersistence getAnnouncementEntryPersistence() {
+		return announcementEntryPersistence;
 	}
 
-	public void setAnnouncementPersistence(
-		AnnouncementPersistence announcementPersistence) {
-		this.announcementPersistence = announcementPersistence;
+	public void setAnnouncementEntryPersistence(
+		AnnouncementEntryPersistence announcementEntryPersistence) {
+		this.announcementEntryPersistence = announcementEntryPersistence;
 	}
 
-	public AnnouncementFinder getAnnouncementFinder() {
-		return announcementFinder;
+	public AnnouncementEntryFinder getAnnouncementEntryFinder() {
+		return announcementEntryFinder;
 	}
 
-	public void setAnnouncementFinder(AnnouncementFinder announcementFinder) {
-		this.announcementFinder = announcementFinder;
+	public void setAnnouncementEntryFinder(
+		AnnouncementEntryFinder announcementEntryFinder) {
+		this.announcementEntryFinder = announcementEntryFinder;
 	}
 
 	public AnnouncementFlagPersistence getAnnouncementFlagPersistence() {
@@ -152,20 +154,20 @@ public abstract class AnnouncementFlagLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
-		if (announcementLocalService == null) {
-			announcementLocalService = AnnouncementLocalServiceFactory.getImpl();
+		if (announcementEntryLocalService == null) {
+			announcementEntryLocalService = AnnouncementEntryLocalServiceFactory.getImpl();
 		}
 
-		if (announcementService == null) {
-			announcementService = AnnouncementServiceFactory.getImpl();
+		if (announcementEntryService == null) {
+			announcementEntryService = AnnouncementEntryServiceFactory.getImpl();
 		}
 
-		if (announcementPersistence == null) {
-			announcementPersistence = AnnouncementUtil.getPersistence();
+		if (announcementEntryPersistence == null) {
+			announcementEntryPersistence = AnnouncementEntryUtil.getPersistence();
 		}
 
-		if (announcementFinder == null) {
-			announcementFinder = AnnouncementFinderUtil.getFinder();
+		if (announcementEntryFinder == null) {
+			announcementEntryFinder = AnnouncementEntryFinderUtil.getFinder();
 		}
 
 		if (announcementFlagPersistence == null) {
@@ -181,10 +183,10 @@ public abstract class AnnouncementFlagLocalServiceBaseImpl
 		}
 	}
 
-	protected AnnouncementLocalService announcementLocalService;
-	protected AnnouncementService announcementService;
-	protected AnnouncementPersistence announcementPersistence;
-	protected AnnouncementFinder announcementFinder;
+	protected AnnouncementEntryLocalService announcementEntryLocalService;
+	protected AnnouncementEntryService announcementEntryService;
+	protected AnnouncementEntryPersistence announcementEntryPersistence;
+	protected AnnouncementEntryFinder announcementEntryFinder;
 	protected AnnouncementFlagPersistence announcementFlagPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;

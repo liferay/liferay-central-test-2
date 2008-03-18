@@ -28,18 +28,18 @@
 <%@ page import="com.liferay.portal.service.permission.RolePermissionUtil"%>
 <%@ page import="com.liferay.portal.service.permission.UserGroupPermissionUtil"%>
 <%@ page import="com.liferay.portal.service.persistence.ClassNameUtil"%>
-<%@ page import="com.liferay.portlet.announcements.AnnouncementContentException" %>
-<%@ page import="com.liferay.portlet.announcements.AnnouncementDisplayDateException" %>
-<%@ page import="com.liferay.portlet.announcements.AnnouncementExpirationDateException" %>
-<%@ page import="com.liferay.portlet.announcements.AnnouncementTitleException" %>
+<%@ page import="com.liferay.portlet.announcements.AnnouncementEntryContentException" %>
+<%@ page import="com.liferay.portlet.announcements.AnnouncementEntryDisplayDateException" %>
+<%@ page import="com.liferay.portlet.announcements.AnnouncementEntryExpirationDateException" %>
+<%@ page import="com.liferay.portlet.announcements.AnnouncementEntryTitleException" %>
 <%@ page import="com.liferay.portlet.announcements.NoSuchAnnouncementFlagException"%>
+<%@ page import="com.liferay.portlet.announcements.model.AnnouncementEntry"%>
 <%@ page import="com.liferay.portlet.announcements.model.AnnouncementFlag"%>
-<%@ page import="com.liferay.portlet.announcements.model.Announcement"%>
+<%@ page import="com.liferay.portlet.announcements.model.impl.AnnouncementEntryImpl"%>
 <%@ page import="com.liferay.portlet.announcements.model.impl.AnnouncementFlagImpl"%>
-<%@ page import="com.liferay.portlet.announcements.model.impl.AnnouncementImpl"%>
+<%@ page import="com.liferay.portlet.announcements.service.AnnouncementEntryLocalServiceUtil"%>
 <%@ page import="com.liferay.portlet.announcements.service.AnnouncementFlagLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.announcements.service.AnnouncementLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.announcements.service.permission.AnnouncementPermission"%>
+<%@ page import="com.liferay.portlet.announcements.service.permission.AnnouncementEntryPermission"%>
 <%@ page import="com.liferay.portlet.announcements.util.AnnouncementsUtil"%>
 
 

@@ -905,7 +905,7 @@ public class PropsUtil {
 
 	// Alerts/Announcement Portlets
 
-	public static final String ANNOUNCEMENT_TYPES = "announcement.types";
+	public static final String ANNOUNCEMENT_ENTRY_TYPES = "announcement.entry.types";
 
 	// Blogs Portlet
 

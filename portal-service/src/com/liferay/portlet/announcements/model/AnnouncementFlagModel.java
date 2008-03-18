@@ -51,17 +51,17 @@ public interface AnnouncementFlagModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
-	public long getAnnouncementFlagId();
+	public long getFlagId();
 
-	public void setAnnouncementFlagId(long announcementFlagId);
+	public void setFlagId(long flagId);
 
 	public long getUserId();
 
 	public void setUserId(long userId);
 
-	public long getAnnouncementId();
+	public long getEntryId();
 
-	public void setAnnouncementId(long announcementId);
+	public void setEntryId(long entryId);
 
 	public int getFlag();
 

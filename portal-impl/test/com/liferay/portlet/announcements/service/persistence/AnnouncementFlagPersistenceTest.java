@@ -71,7 +71,7 @@ public class AnnouncementFlagPersistenceTest extends BasePersistenceTestCase {
 		AnnouncementFlag newAnnouncementFlag = _persistence.create(pk);
 
 		newAnnouncementFlag.setUserId(nextLong());
-		newAnnouncementFlag.setAnnouncementId(nextLong());
+		newAnnouncementFlag.setEntryId(nextLong());
 		newAnnouncementFlag.setFlag(nextInt());
 		newAnnouncementFlag.setFlagDate(nextDate());
 
@@ -79,12 +79,12 @@ public class AnnouncementFlagPersistenceTest extends BasePersistenceTestCase {
 
 		AnnouncementFlag existingAnnouncementFlag = _persistence.findByPrimaryKey(newAnnouncementFlag.getPrimaryKey());
 
-		assertEquals(existingAnnouncementFlag.getAnnouncementFlagId(),
-			newAnnouncementFlag.getAnnouncementFlagId());
+		assertEquals(existingAnnouncementFlag.getFlagId(),
+			newAnnouncementFlag.getFlagId());
 		assertEquals(existingAnnouncementFlag.getUserId(),
 			newAnnouncementFlag.getUserId());
-		assertEquals(existingAnnouncementFlag.getAnnouncementId(),
-			newAnnouncementFlag.getAnnouncementId());
+		assertEquals(existingAnnouncementFlag.getEntryId(),
+			newAnnouncementFlag.getEntryId());
 		assertEquals(existingAnnouncementFlag.getFlag(),
 			newAnnouncementFlag.getFlag());
 		assertEquals(existingAnnouncementFlag.getFlagDate(),
@@ -133,7 +133,7 @@ public class AnnouncementFlagPersistenceTest extends BasePersistenceTestCase {
 		AnnouncementFlag announcementFlag = _persistence.create(pk);
 
 		announcementFlag.setUserId(nextLong());
-		announcementFlag.setAnnouncementId(nextLong());
+		announcementFlag.setEntryId(nextLong());
 		announcementFlag.setFlag(nextInt());
 		announcementFlag.setFlagDate(nextDate());
 

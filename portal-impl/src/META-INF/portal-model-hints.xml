@@ -600,9 +600,9 @@
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
-	<model name="com.liferay.portlet.announcements.model.Announcement">
+	<model name="com.liferay.portlet.announcements.model.AnnouncementEntry">
 		<field name="uuid" type="String" />
-		<field name="announcementId" type="long" />
+		<field name="entryId" type="long" />
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="userName" type="String" />
@@ -624,9 +624,9 @@
 		<field name="alert" type="boolean" />
 	</model>
 	<model name="com.liferay.portlet.announcements.model.AnnouncementFlag">
-		<field name="announcementFlagId" type="long" />
+		<field name="flagId" type="long" />
 		<field name="userId" type="long" />
-		<field name="announcementId" type="long" />
+		<field name="entryId" type="long" />
 		<field name="flag" type="int" />
 		<field name="flagDate" type="Date" />
 	</model>

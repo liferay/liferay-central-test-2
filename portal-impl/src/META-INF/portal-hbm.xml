@@ -601,9 +601,9 @@
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portlet.announcements.model.impl.AnnouncementImpl" table="Announcement">
+	<class name="com.liferay.portlet.announcements.model.impl.AnnouncementEntryImpl" table="AnnouncementEntry">
 		<cache usage="read-write" />
-		<id name="announcementId" type="long">
+		<id name="entryId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
@@ -625,11 +625,11 @@
 	</class>
 	<class name="com.liferay.portlet.announcements.model.impl.AnnouncementFlagImpl" table="AnnouncementFlag">
 		<cache usage="read-write" />
-		<id name="announcementFlagId" type="long">
+		<id name="flagId" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="announcementId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="entryId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="flag" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="flagDate" />
 	</class>

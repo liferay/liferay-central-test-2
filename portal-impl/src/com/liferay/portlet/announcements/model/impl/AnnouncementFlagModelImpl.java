@@ -61,13 +61,13 @@ import java.util.Date;
 public class AnnouncementFlagModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "AnnouncementFlag";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "announcementFlagId", new Integer(Types.BIGINT) },
+			{ "flagId", new Integer(Types.BIGINT) },
 			
 
 			{ "userId", new Integer(Types.BIGINT) },
 			
 
-			{ "announcementId", new Integer(Types.BIGINT) },
+			{ "entryId", new Integer(Types.BIGINT) },
 			
 
 			{ "flag", new Integer(Types.INTEGER) },
@@ -75,7 +75,7 @@ public class AnnouncementFlagModelImpl extends BaseModelImpl {
 
 			{ "flagDate", new Integer(Types.TIMESTAMP) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table AnnouncementFlag (announcementFlagId LONG not null primary key,userId LONG,announcementId LONG,flag INTEGER,flagDate DATE null)";
+	public static final String TABLE_SQL_CREATE = "create table AnnouncementFlag (flagId LONG not null primary key,userId LONG,entryId LONG,flag INTEGER,flagDate DATE null)";
 	public static final String TABLE_SQL_DROP = "drop table AnnouncementFlag";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.announcements.model.AnnouncementFlag"),
@@ -87,24 +87,24 @@ public class AnnouncementFlagModelImpl extends BaseModelImpl {
 	}
 
 	public long getPrimaryKey() {
-		return _announcementFlagId;
+		return _flagId;
 	}
 
 	public void setPrimaryKey(long pk) {
-		setAnnouncementFlagId(pk);
+		setFlagId(pk);
 	}
 
 	public Serializable getPrimaryKeyObj() {
-		return new Long(_announcementFlagId);
+		return new Long(_flagId);
 	}
 
-	public long getAnnouncementFlagId() {
-		return _announcementFlagId;
+	public long getFlagId() {
+		return _flagId;
 	}
 
-	public void setAnnouncementFlagId(long announcementFlagId) {
-		if (announcementFlagId != _announcementFlagId) {
-			_announcementFlagId = announcementFlagId;
+	public void setFlagId(long flagId) {
+		if (flagId != _flagId) {
+			_flagId = flagId;
 		}
 	}
 
@@ -118,13 +118,13 @@ public class AnnouncementFlagModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public long getAnnouncementId() {
-		return _announcementId;
+	public long getEntryId() {
+		return _entryId;
 	}
 
-	public void setAnnouncementId(long announcementId) {
-		if (announcementId != _announcementId) {
-			_announcementId = announcementId;
+	public void setEntryId(long entryId) {
+		if (entryId != _entryId) {
+			_entryId = entryId;
 		}
 	}
 
@@ -160,9 +160,9 @@ public class AnnouncementFlagModelImpl extends BaseModelImpl {
 
 			model.setEscapedModel(true);
 
-			model.setAnnouncementFlagId(getAnnouncementFlagId());
+			model.setFlagId(getFlagId());
 			model.setUserId(getUserId());
-			model.setAnnouncementId(getAnnouncementId());
+			model.setEntryId(getEntryId());
 			model.setFlag(getFlag());
 			model.setFlagDate(getFlagDate());
 
@@ -177,9 +177,9 @@ public class AnnouncementFlagModelImpl extends BaseModelImpl {
 	public Object clone() {
 		AnnouncementFlagImpl clone = new AnnouncementFlagImpl();
 
-		clone.setAnnouncementFlagId(getAnnouncementFlagId());
+		clone.setFlagId(getFlagId());
 		clone.setUserId(getUserId());
-		clone.setAnnouncementId(getAnnouncementId());
+		clone.setEntryId(getEntryId());
 		clone.setFlag(getFlag());
 		clone.setFlagDate(getFlagDate());
 
@@ -246,9 +246,9 @@ public class AnnouncementFlagModelImpl extends BaseModelImpl {
 		return (int)getPrimaryKey();
 	}
 
-	private long _announcementFlagId;
+	private long _flagId;
 	private long _userId;
-	private long _announcementId;
+	private long _entryId;
 	private int _flag;
 	private Date _flagDate;
 }

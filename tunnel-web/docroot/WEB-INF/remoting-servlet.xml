@@ -338,17 +338,17 @@
 		<property name="service" ref="com.liferay.portal.service.WebsiteService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portal.service.WebsiteService" />
 	</bean>
-	<bean name="/com_liferay_portlet_announcements_service_spring_AnnouncementService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
-		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portlet.announcements.service.AnnouncementService" />
+	<bean name="/com_liferay_portlet_announcements_service_spring_AnnouncementEntryService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementEntryService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.announcements.service.AnnouncementEntryService" />
 	</bean>
-	<bean name="/com_liferay_portlet_announcements_service_spring_AnnouncementService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
-		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portlet.announcements.service.AnnouncementService" />
+	<bean name="/com_liferay_portlet_announcements_service_spring_AnnouncementEntryService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementEntryService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.announcements.service.AnnouncementEntryService" />
 	</bean>
-	<bean name="/com_liferay_portlet_announcements_service_spring_AnnouncementService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
-		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementService.transaction" />
-		<property name="serviceInterface" value="com.liferay.portlet.announcements.service.AnnouncementService" />
+	<bean name="/com_liferay_portlet_announcements_service_spring_AnnouncementEntryService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementEntryService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portlet.announcements.service.AnnouncementEntryService" />
 	</bean>
 	<bean name="/com_liferay_portlet_announcements_service_spring_AnnouncementFlagService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portlet.announcements.service.AnnouncementFlagService.transaction" />

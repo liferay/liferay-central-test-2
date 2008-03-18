@@ -61,16 +61,16 @@ import java.util.List;
  */
 public class AnnouncementFlagPersistenceImpl extends BasePersistence
 	implements AnnouncementFlagPersistence {
-	public AnnouncementFlag create(long announcementFlagId) {
+	public AnnouncementFlag create(long flagId) {
 		AnnouncementFlag announcementFlag = new AnnouncementFlagImpl();
 
 		announcementFlag.setNew(true);
-		announcementFlag.setPrimaryKey(announcementFlagId);
+		announcementFlag.setPrimaryKey(flagId);
 
 		return announcementFlag;
 	}
 
-	public AnnouncementFlag remove(long announcementFlagId)
+	public AnnouncementFlag remove(long flagId)
 		throws NoSuchAnnouncementFlagException, SystemException {
 		Session session = null;
 
@@ -78,18 +78,18 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			AnnouncementFlag announcementFlag = (AnnouncementFlag)session.get(AnnouncementFlagImpl.class,
-					new Long(announcementFlagId));
+					new Long(flagId));
 
 			if (announcementFlag == null) {
 				if (_log.isWarnEnabled()) {
 					_log.warn(
 						"No AnnouncementFlag exists with the primary key " +
-						announcementFlagId);
+						flagId);
 				}
 
 				throw new NoSuchAnnouncementFlagException(
 					"No AnnouncementFlag exists with the primary key " +
-					announcementFlagId);
+					flagId);
 			}
 
 			return remove(announcementFlag);
@@ -212,25 +212,24 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public AnnouncementFlag findByPrimaryKey(long announcementFlagId)
+	public AnnouncementFlag findByPrimaryKey(long flagId)
 		throws NoSuchAnnouncementFlagException, SystemException {
-		AnnouncementFlag announcementFlag = fetchByPrimaryKey(announcementFlagId);
+		AnnouncementFlag announcementFlag = fetchByPrimaryKey(flagId);
 
 		if (announcementFlag == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn("No AnnouncementFlag exists with the primary key " +
-					announcementFlagId);
+					flagId);
 			}
 
 			throw new NoSuchAnnouncementFlagException(
-				"No AnnouncementFlag exists with the primary key " +
-				announcementFlagId);
+				"No AnnouncementFlag exists with the primary key " + flagId);
 		}
 
 		return announcementFlag;
 	}
 
-	public AnnouncementFlag fetchByPrimaryKey(long announcementFlagId)
+	public AnnouncementFlag fetchByPrimaryKey(long flagId)
 		throws SystemException {
 		Session session = null;
 
@@ -238,7 +237,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 			session = openSession();
 
 			return (AnnouncementFlag)session.get(AnnouncementFlagImpl.class,
-				new Long(announcementFlagId));
+				new Long(flagId));
 		}
 		catch (Exception e) {
 			throw HibernateUtil.processException(e);
@@ -248,13 +247,13 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<AnnouncementFlag> findByAnnouncementId(long announcementId)
+	public List<AnnouncementFlag> findByEntryId(long entryId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementFlag.class.getName();
-		String finderMethodName = "findByAnnouncementId";
+		String finderMethodName = "findByEntryId";
 		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(announcementId) };
+		Object[] finderArgs = new Object[] { new Long(entryId) };
 
 		Object result = null;
 
@@ -274,7 +273,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.announcements.model.AnnouncementFlag WHERE ");
 
-				query.append("announcementId = ?");
+				query.append("entryId = ?");
 
 				query.append(" ");
 
@@ -287,7 +286,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 
 				int queryPos = 0;
 
-				q.setLong(queryPos++, announcementId);
+				q.setLong(queryPos++, entryId);
 
 				List<AnnouncementFlag> list = q.list();
 
@@ -309,16 +308,16 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public List<AnnouncementFlag> findByAnnouncementId(long announcementId,
-		int begin, int end) throws SystemException {
-		return findByAnnouncementId(announcementId, begin, end, null);
+	public List<AnnouncementFlag> findByEntryId(long entryId, int begin, int end)
+		throws SystemException {
+		return findByEntryId(entryId, begin, end, null);
 	}
 
-	public List<AnnouncementFlag> findByAnnouncementId(long announcementId,
-		int begin, int end, OrderByComparator obc) throws SystemException {
+	public List<AnnouncementFlag> findByEntryId(long entryId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementFlag.class.getName();
-		String finderMethodName = "findByAnnouncementId";
+		String finderMethodName = "findByEntryId";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
 				
@@ -326,7 +325,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(announcementId),
+				new Long(entryId),
 				
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
@@ -349,7 +348,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.announcements.model.AnnouncementFlag WHERE ");
 
-				query.append("announcementId = ?");
+				query.append("entryId = ?");
 
 				query.append(" ");
 
@@ -369,7 +368,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 
 				int queryPos = 0;
 
-				q.setLong(queryPos++, announcementId);
+				q.setLong(queryPos++, entryId);
 
 				List<AnnouncementFlag> list = (List<AnnouncementFlag>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -392,18 +391,17 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public AnnouncementFlag findByAnnouncementId_First(long announcementId,
+	public AnnouncementFlag findByEntryId_First(long entryId,
 		OrderByComparator obc)
 		throws NoSuchAnnouncementFlagException, SystemException {
-		List<AnnouncementFlag> list = findByAnnouncementId(announcementId, 0,
-				1, obc);
+		List<AnnouncementFlag> list = findByEntryId(entryId, 0, 1, obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 
 			msg.append("No AnnouncementFlag exists with the key {");
 
-			msg.append("announcementId=" + announcementId);
+			msg.append("entryId=" + entryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -414,20 +412,20 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public AnnouncementFlag findByAnnouncementId_Last(long announcementId,
+	public AnnouncementFlag findByEntryId_Last(long entryId,
 		OrderByComparator obc)
 		throws NoSuchAnnouncementFlagException, SystemException {
-		int count = countByAnnouncementId(announcementId);
+		int count = countByEntryId(entryId);
 
-		List<AnnouncementFlag> list = findByAnnouncementId(announcementId,
-				count - 1, count, obc);
+		List<AnnouncementFlag> list = findByEntryId(entryId, count - 1, count,
+				obc);
 
 		if (list.size() == 0) {
 			StringMaker msg = new StringMaker();
 
 			msg.append("No AnnouncementFlag exists with the key {");
 
-			msg.append("announcementId=" + announcementId);
+			msg.append("entryId=" + entryId);
 
 			msg.append(StringPool.CLOSE_CURLY_BRACE);
 
@@ -438,12 +436,12 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public AnnouncementFlag[] findByAnnouncementId_PrevAndNext(
-		long announcementFlagId, long announcementId, OrderByComparator obc)
+	public AnnouncementFlag[] findByEntryId_PrevAndNext(long flagId,
+		long entryId, OrderByComparator obc)
 		throws NoSuchAnnouncementFlagException, SystemException {
-		AnnouncementFlag announcementFlag = findByPrimaryKey(announcementFlagId);
+		AnnouncementFlag announcementFlag = findByPrimaryKey(flagId);
 
-		int count = countByAnnouncementId(announcementId);
+		int count = countByEntryId(entryId);
 
 		Session session = null;
 
@@ -455,7 +453,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 			query.append(
 				"FROM com.liferay.portlet.announcements.model.AnnouncementFlag WHERE ");
 
-			query.append("announcementId = ?");
+			query.append("entryId = ?");
 
 			query.append(" ");
 
@@ -475,7 +473,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 
 			int queryPos = 0;
 
-			q.setLong(queryPos++, announcementId);
+			q.setLong(queryPos++, entryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					announcementFlag);
@@ -496,10 +494,9 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public AnnouncementFlag findByU_A_F(long userId, long announcementId,
-		int flag) throws NoSuchAnnouncementFlagException, SystemException {
-		AnnouncementFlag announcementFlag = fetchByU_A_F(userId,
-				announcementId, flag);
+	public AnnouncementFlag findByU_E_F(long userId, long entryId, int flag)
+		throws NoSuchAnnouncementFlagException, SystemException {
+		AnnouncementFlag announcementFlag = fetchByU_E_F(userId, entryId, flag);
 
 		if (announcementFlag == null) {
 			StringMaker msg = new StringMaker();
@@ -509,7 +506,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 			msg.append("userId=" + userId);
 
 			msg.append(", ");
-			msg.append("announcementId=" + announcementId);
+			msg.append("entryId=" + entryId);
 
 			msg.append(", ");
 			msg.append("flag=" + flag);
@@ -526,17 +523,17 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		return announcementFlag;
 	}
 
-	public AnnouncementFlag fetchByU_A_F(long userId, long announcementId,
-		int flag) throws SystemException {
+	public AnnouncementFlag fetchByU_E_F(long userId, long entryId, int flag)
+		throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementFlag.class.getName();
-		String finderMethodName = "fetchByU_A_F";
+		String finderMethodName = "fetchByU_E_F";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Long.class.getName(),
 				Integer.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(announcementId), new Integer(flag)
+				new Long(userId), new Long(entryId), new Integer(flag)
 			};
 
 		Object result = null;
@@ -561,7 +558,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("announcementId = ?");
+				query.append("entryId = ?");
 
 				query.append(" AND ");
 
@@ -580,7 +577,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				q.setLong(queryPos++, announcementId);
+				q.setLong(queryPos++, entryId);
 
 				q.setInteger(queryPos++, flag);
 
@@ -736,18 +733,15 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByAnnouncementId(long announcementId)
-		throws SystemException {
-		for (AnnouncementFlag announcementFlag : findByAnnouncementId(
-				announcementId)) {
+	public void removeByEntryId(long entryId) throws SystemException {
+		for (AnnouncementFlag announcementFlag : findByEntryId(entryId)) {
 			remove(announcementFlag);
 		}
 	}
 
-	public void removeByU_A_F(long userId, long announcementId, int flag)
+	public void removeByU_E_F(long userId, long entryId, int flag)
 		throws NoSuchAnnouncementFlagException, SystemException {
-		AnnouncementFlag announcementFlag = findByU_A_F(userId, announcementId,
-				flag);
+		AnnouncementFlag announcementFlag = findByU_E_F(userId, entryId, flag);
 
 		remove(announcementFlag);
 	}
@@ -758,13 +752,12 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByAnnouncementId(long announcementId)
-		throws SystemException {
+	public int countByEntryId(long entryId) throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementFlag.class.getName();
-		String finderMethodName = "countByAnnouncementId";
+		String finderMethodName = "countByEntryId";
 		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(announcementId) };
+		Object[] finderArgs = new Object[] { new Long(entryId) };
 
 		Object result = null;
 
@@ -785,7 +778,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.announcements.model.AnnouncementFlag WHERE ");
 
-				query.append("announcementId = ?");
+				query.append("entryId = ?");
 
 				query.append(" ");
 
@@ -793,7 +786,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 
 				int queryPos = 0;
 
-				q.setLong(queryPos++, announcementId);
+				q.setLong(queryPos++, entryId);
 
 				Long count = null;
 
@@ -825,17 +818,17 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
-	public int countByU_A_F(long userId, long announcementId, int flag)
+	public int countByU_E_F(long userId, long entryId, int flag)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = AnnouncementFlagModelImpl.CACHE_ENABLED;
 		String finderClassName = AnnouncementFlag.class.getName();
-		String finderMethodName = "countByU_A_F";
+		String finderMethodName = "countByU_E_F";
 		String[] finderParams = new String[] {
 				Long.class.getName(), Long.class.getName(),
 				Integer.class.getName()
 			};
 		Object[] finderArgs = new Object[] {
-				new Long(userId), new Long(announcementId), new Integer(flag)
+				new Long(userId), new Long(entryId), new Integer(flag)
 			};
 
 		Object result = null;
@@ -861,7 +854,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("announcementId = ?");
+				query.append("entryId = ?");
 
 				query.append(" AND ");
 
@@ -875,7 +868,7 @@ public class AnnouncementFlagPersistenceImpl extends BasePersistence
 
 				q.setLong(queryPos++, userId);
 
-				q.setLong(queryPos++, announcementId);
+				q.setLong(queryPos++, entryId);
 
 				q.setInteger(queryPos++, flag);
 

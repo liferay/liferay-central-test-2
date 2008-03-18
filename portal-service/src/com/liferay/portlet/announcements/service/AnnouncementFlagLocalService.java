@@ -53,7 +53,7 @@ public interface AnnouncementFlagLocalService {
 		com.liferay.portlet.announcements.model.AnnouncementFlag announcementFlag)
 		throws com.liferay.portal.SystemException;
 
-	public void deleteAnnouncementFlag(long announcementFlagId)
+	public void deleteAnnouncementFlag(long flagId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -74,15 +74,15 @@ public interface AnnouncementFlagLocalService {
 		com.liferay.portlet.announcements.model.AnnouncementFlag announcementFlag)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.announcements.service.persistence.AnnouncementPersistence getAnnouncementPersistence();
+	public com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistence getAnnouncementEntryPersistence();
 
-	public void setAnnouncementPersistence(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementPersistence announcementPersistence);
+	public void setAnnouncementEntryPersistence(
+		com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistence announcementEntryPersistence);
 
-	public com.liferay.portlet.announcements.service.persistence.AnnouncementFinder getAnnouncementFinder();
+	public com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder getAnnouncementEntryFinder();
 
-	public void setAnnouncementFinder(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementFinder announcementFinder);
+	public void setAnnouncementEntryFinder(
+		com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder announcementEntryFinder);
 
 	public com.liferay.portlet.announcements.service.persistence.AnnouncementFlagPersistence getAnnouncementFlagPersistence();
 
@@ -92,16 +92,16 @@ public interface AnnouncementFlagLocalService {
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.announcements.model.AnnouncementFlag addAnnouncementFlag(
-		long userId, long announcementId, int flag)
+		long userId, long entryId, int flag)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.announcements.model.AnnouncementFlag getAnnouncementFlag(
-		long userId, long announcementId, int flag)
+		long userId, long entryId, int flag)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public void deleteAnnouncementFlags(long announcementId)
+	public void deleteAnnouncementFlags(long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }
