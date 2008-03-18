@@ -179,7 +179,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		catch (FCKException fcke) {
 			Throwable cause = fcke.getCause();
 
-			returnValue = "205";
+			returnValue = "203";
 
 			if (cause != null) {
 				String causeString = GetterUtil.getString(cause.toString());
@@ -187,16 +187,23 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 				if ((causeString.indexOf("NoSuchFolderException") != -1) ||
 					(causeString.indexOf("NoSuchGroupException") != -1)) {
 
-					returnValue = "203";
+					returnValue = "204";
 				}
 				else if (causeString.indexOf("ImageNameException") != -1) {
-					returnValue = "204";
+					returnValue = "205";
+				}
+				else if (causeString.indexOf("FileNameException") != -1) {
+					returnValue = "206";
+				}
+				else if (causeString.indexOf("PrincipalException") != -1) {
+					returnValue = "207";
+				}
+				else {
+					throw fcke;
 				}
 			}
 
 			_writeUploadResponse(returnValue, res);
-
-			throw fcke;
 		}
 
 		_writeUploadResponse(returnValue, res);

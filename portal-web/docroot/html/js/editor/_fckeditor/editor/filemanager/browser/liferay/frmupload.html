@@ -86,7 +86,19 @@ function OnUploadCompleted( errorNumber, data )
 		// Liferay
 
 		case 203 :
-			alert( 'You cannot upload into the root folder' ) ;
+			alert( 'An unexpected error occurred.' ) ;
+			break ;
+		case 204 :
+			alert( 'You cannot upload into the root folder.' ) ;
+			break ;
+		case 205:
+			alert( 'Please enter a valid image name.' );
+			break ;
+		case 206:
+			alert( 'Please enter a valid file name.' );
+			break ;
+		case 207:
+			alert( 'You do not have the permission to upload to this folder.' );
 			break ;
 
 		default :
