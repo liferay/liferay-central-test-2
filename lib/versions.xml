@@ -1523,7 +1523,7 @@
 	</library>
 	<library>
 		<file-name>portal/jets3t.jar</file-name>
-		<version>0.5.0</version>
+		<version>0.6.0</version>
 		<project-name>JetS3t</project-name>
 		<project-url>https://jets3t.dev.java.net</project-url>
 		<licenses>
