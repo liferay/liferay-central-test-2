@@ -66,9 +66,9 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 
 						if (Validator.isNotNull(selLayout.getName(locales[i], false)) ||
 							Validator.isNotNull(selLayout.getTitle(locales[i], false))) {
+
 							optionStyle = "style=\"font-weight: bold\"";
 						}
-
 					%>
 
 						<option <%= (currentLanguageId.equals(LocaleUtil.toLanguageId(locales[i]))) ? "selected" : "" %> <%= optionStyle %> value="<%= LocaleUtil.toLanguageId(locales[i]) %>"><%= locales[i].getDisplayName(locales[i]) %></option>
@@ -78,6 +78,11 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 					%>
 
 				</select>
+			</td>
+		</tr>
+		<tr>
+			<td colspan="3">
+				<br />
 			</td>
 		</tr>
 		<tr>

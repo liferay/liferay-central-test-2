@@ -123,7 +123,7 @@ if (selLayout != null) {
 if (Validator.isNull(tabs2) && (!tabs1.equals("settings"))) {
 	tabs2 = "pages";
 }
-	
+
 if ((selLayout == null) && ((tabs2.equals("pages")))) {
 	tabs3 = "children";
 }
