@@ -1511,6 +1511,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/jericho-html.jar</file-name>
+		<version>2.5</version>
+		<project-name>Jericho HTML Parser</project-name>
+		<project-url>http://jerichohtml.sourceforge.net</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL 2.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/jets3t.jar</file-name>
 		<version>0.5.0</version>
 		<project-name>JetS3t</project-name>

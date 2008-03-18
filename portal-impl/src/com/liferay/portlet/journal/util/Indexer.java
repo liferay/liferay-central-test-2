@@ -112,7 +112,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		content = StringUtil.replace(content, "&lt;", "<");
 		content = StringUtil.replace(content, "&gt;", ">");
 
-		content = Html.stripHtml(content);
+		content = Html.extractText(content);
 
 		Document doc = new Document();
 

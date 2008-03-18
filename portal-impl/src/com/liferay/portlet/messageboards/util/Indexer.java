@@ -141,7 +141,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		long threadId, long messageId, String title, String content,
 		String[] tagsEntries) {
 
-		content = Html.stripHtml(content);
+		content = Html.extractText(content);
 
 		Document doc = new Document();
 

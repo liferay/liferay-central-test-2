@@ -22,6 +22,8 @@
 
 package com.liferay.util;
 
+import au.id.jericho.lib.html.Source;
+
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -119,6 +121,12 @@ public class Html {
 		}
 
 		return sm.toString();
+	}
+
+	public static String extractText(String html) {
+		Source source = new Source(html);
+
+		return source.getTextExtractor().toString();
 	}
 
 	public static String fromInputSafe(String text) {

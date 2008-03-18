@@ -132,6 +132,7 @@
 	<classpathentry kind="lib" path="lib/portal/jcr.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jdom.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jena.jar"/>
+	<classpathentry kind="lib" path="lib/portal/jericho-html.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jets3t.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jfreechart.jar"/>
 	<classpathentry kind="lib" path="lib/portal/jgroups.jar"/>

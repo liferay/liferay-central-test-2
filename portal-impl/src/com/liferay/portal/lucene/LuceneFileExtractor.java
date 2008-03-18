@@ -39,7 +39,6 @@ import java.io.InputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.jackrabbit.extractor.HTMLTextExtractor;
 import org.apache.jackrabbit.extractor.MsExcelTextExtractor;
 import org.apache.jackrabbit.extractor.MsPowerPointTextExtractor;
 import org.apache.jackrabbit.extractor.MsWordTextExtractor;
@@ -76,7 +75,7 @@ public class LuceneFileExtractor {
 				contentType = "application/vnd.ms-word";
 			}
 			else if (fileExt.equals(".htm") || fileExt.equals(".html")) {
-				extractor = new HTMLTextExtractor();
+				extractor = new JerichoHTMLTextExtractor();
 
 				contentType = "text/html";
 			}

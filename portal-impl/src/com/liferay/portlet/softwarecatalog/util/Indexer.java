@@ -96,8 +96,8 @@ public class Indexer
 		String type, String shortDescription, String longDescription,
 		String pageURL, String repoGroupId, String repoArtifactId) {
 
-		shortDescription = Html.stripHtml(shortDescription);
-		longDescription = Html.stripHtml(longDescription);
+		shortDescription = Html.extractText(shortDescription);
+		longDescription = Html.extractText(longDescription);
 
 		String content =
 			userId + " " + userName + " " + type + " " + shortDescription +

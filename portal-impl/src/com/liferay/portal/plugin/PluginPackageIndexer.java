@@ -98,8 +98,8 @@ public class PluginPackageIndexer implements Indexer {
 
 		ModuleId moduleIdObj = ModuleId.getInstance(moduleId);
 
-		shortDescription = Html.stripHtml(shortDescription);
-		longDescription = Html.stripHtml(longDescription);
+		shortDescription = Html.extractText(shortDescription);
+		longDescription = Html.extractText(longDescription);
 
 		String content =
 			name + " " + author + " " + shortDescription + " " +
