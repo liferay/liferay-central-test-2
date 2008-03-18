@@ -189,13 +189,6 @@ public class EditProposalAction extends EditPagesAction {
 	protected void publishProposal(ActionRequest req) throws Exception {
 		long proposalId = ParamUtil.getLong(req, "proposalId");
 
-		long groupId = ParamUtil.getLong(req, "groupId");
-
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-		Group liveGroup = group;
-		Group stagingGroup = liveGroup.getStagingGroup();
-
 		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
 			proposalId);
 
