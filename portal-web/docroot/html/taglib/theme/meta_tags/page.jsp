@@ -24,17 +24,16 @@
 
 <%@ include file="/html/taglib/init.jsp" %>
 
-<%
-String currentLanguageId = LanguageUtil.getLanguageId(request);
-Locale defaultLocale = LocaleUtil.getDefault();
-String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
-
-String w3cCurrentLanguageId = StringUtil.replace(currentLanguageId, StringPool.UNDERLINE, StringPool.MINUS);
-String w3cDefaultLanguageId = StringUtil.replace(defaultLanguageId, StringPool.UNDERLINE, StringPool.MINUS);
-%>
 <c:if test="<%= layout != null %>">
 
 	<%
+	String currentLanguageId = LanguageUtil.getLanguageId(request);
+	Locale defaultLocale = LocaleUtil.getDefault();
+	String defaultLanguageId = LocaleUtil.toLanguageId(defaultLocale);
+
+	String w3cCurrentLanguageId = StringUtil.replace(currentLanguageId, StringPool.UNDERLINE, StringPool.MINUS);
+	String w3cDefaultLanguageId = StringUtil.replace(defaultLanguageId, StringPool.UNDERLINE, StringPool.MINUS);
+
 	String metaRobots = layout.getTypeSettingsProperties().getProperty("meta-robots_" + currentLanguageId);
 	String metaRobotsLanguageId = w3cCurrentLanguageId;
 
@@ -50,7 +49,7 @@ String w3cDefaultLanguageId = StringUtil.replace(defaultLanguageId, StringPool.U
 
 	<%
 	String metaDescription = layout.getTypeSettingsProperties().getProperty("meta-description_" + currentLanguageId);
-		String metaDescriptionLanguageId = w3cCurrentLanguageId;
+	String metaDescriptionLanguageId = w3cCurrentLanguageId;
 
 	if (Validator.isNull(metaDescription)) {
 		metaDescription = layout.getTypeSettingsProperties().getProperty("meta-description_" + defaultLanguageId);
@@ -64,7 +63,7 @@ String w3cDefaultLanguageId = StringUtil.replace(defaultLanguageId, StringPool.U
 
 	<%
 	String metaKeywords = layout.getTypeSettingsProperties().getProperty("meta-keywords_" + currentLanguageId);
-		String metaKeywordsLanguageId = w3cCurrentLanguageId;
+	String metaKeywordsLanguageId = w3cCurrentLanguageId;
 
 	if (Validator.isNull(metaKeywords)) {
 		metaDescription = layout.getTypeSettingsProperties().getProperty("meta-keywords_" + defaultLanguageId);

@@ -442,6 +442,11 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			</td>
 		</tr>
 		<tr>
+			<td colspan="2">
+				<br />
+			</td>
+		</tr>
+		<tr>
 			<td>
 				<table class="lfr-table">
 				<tr>
