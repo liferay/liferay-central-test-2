@@ -82,8 +82,8 @@ import com.liferay.portal.util.comparator.LayoutPriorityComparator;
 import com.liferay.portal.velocity.VelocityContextPool;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
-import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
+import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.util.CollectionFactory;
@@ -1568,18 +1568,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				DLFolder folder = dlFolderLocalService.getFolder(
 					layout.getDlFolderId());
 
-				if (!layout.getName(LocaleUtil.getDefault()).equals(folder.getName())) {
+				String name = layout.getName(LocaleUtil.getDefault());
+
+				if (!name.equals(folder.getName())) {
 					dlFolderLocalService.updateFolder(
-						folder.getFolderId(), folder.getParentFolderId(),
-						layout.getName(LocaleUtil.getDefault()),
+						folder.getFolderId(), folder.getParentFolderId(), name,
 						folder.getDescription());
 				}
 			}
 		}
-		catch (NoSuchFolderException nsfe) {
-		}
 		catch (DuplicateFolderNameException dfne) {
-			_log.debug(dfne);
+			if (_log.isDebugEnabled()) {
+				_log.debug(dfne);
+			}
+		}
+		catch (NoSuchFolderException nsfe) {
 		}
 
 		return layout;
@@ -3238,7 +3241,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				String name = el.attributeValue("archive-name");
 
 				long userId = context.getUserId(userUuid);
-				
+
 				PortletItem portletItem =
 					portletItemLocalService.updatePortletItem(
 						userId, groupId, name, portletId,
