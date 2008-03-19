@@ -163,13 +163,7 @@ ECJ was automatically installed. Please rerun your task.
 		<echo message="${current.time}" />
 	</target>
 
-	<target name="test">
-		<delete dir="test-classes" />
-		<delete dir="test-results" />
-
-		<mkdir dir="test-classes" />
-		<mkdir dir="test-results" />
-
+	<target name="compile-test" depends="compile">
 		<copy todir="test-classes">
 			<fileset dir="test" includes="**/*.png,**/*.properties,**/*.xml" />
 		</copy>
@@ -184,22 +178,21 @@ ECJ was automatically installed. Please rerun your task.
 			srcdir="test"
 		/>
 
+	</target>
+
+	<target name="test" depends="compile-test">
+		<delete dir="test-classes" />
+		<mkdir dir="test-classes" />
+
+		<delete dir="test-results" />
+		<mkdir dir="test-results" />
+
 		<path id="test.classpath">
 			<pathelement path="${classpath}" />
 			<fileset dir="${project.dir}/lib/development" includes="*.jar" />
 			<fileset dir="${project.dir}/lib/global" includes="*.jar" />
 			<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="xalan.jar,xercesImpl.jar" />
 		</path>
-
-		<fileset dir="test-classes" id="test.suite.classes">
-			<include name="**/*TestSuite.class" />
-		</fileset>
-
-		<pathconvert
-			property="test.suite.classes.available"
-			refid="test.suite.classes"
-			setonempty="false"
-		/>
 
 		<if>
 			<equals arg1="${test.suite.classes.available}" arg2="$${test.suite.classes.available}" />
@@ -227,4 +220,26 @@ ECJ was automatically installed. Please rerun your task.
 
 		<delete dir="activemq-data" />
 	</target>
+
+	<target name="test-class" depends="compile-test" if="class">
+		<mkdir dir="test-classes" />
+		<mkdir dir="test-results" />
+
+		<path id="test.classpath">
+			<pathelement path="${classpath}" />
+			<fileset dir="${project.dir}/lib/development" includes="*.jar" />
+			<fileset dir="${project.dir}/lib/global" includes="*.jar" />
+			<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="xalan.jar,xercesImpl.jar" />
+		</path>
+
+		<junit fork="on" haltonfailure="no" printsummary="on">
+			<classpath refid="test.classpath" />
+			<formatter type="brief" usefile="false" />
+			<formatter type="xml" />
+			<batchtest todir="test-results">
+				<fileset dir="test-classes" includes="**/${class}.class" />
+			</batchtest>
+		</junit>
+	</target>
+
 </project>
