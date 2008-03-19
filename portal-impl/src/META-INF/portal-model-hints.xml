@@ -611,8 +611,12 @@
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
 		<field name="title" type="String" />
-		<field name="content" type="String" />
-		<field name="url" type="String" />
+		<field name="content" type="String">
+			<hint-collection name="TEXTAREA" />
+		</field>
+		<field name="url" type="String">
+			<hint-collection name="URL" />
+		</field>
 		<field name="type" type="String" />
 		<field name="displayDate" type="Date" />
 		<field name="expirationDate" type="Date" />
