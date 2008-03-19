@@ -180,6 +180,10 @@ public class ImageProcessorImpl implements ImageProcessor {
 			}
 		}
 
+		if (type.equals("jpeg")) {
+			type = ImageProcessor.TYPE_JPEG;
+		}
+
 		return new ImageBag(renderedImage, type);
 	}
 
