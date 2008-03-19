@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/announcements/init.jsp" %>
 
 <%
-AnnouncementEntry entry = (AnnouncementEntry)request.getAttribute(WebKeys.ANNOUNCEMENTS_ENTRY);
+AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(WebKeys.ANNOUNCEMENTS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
@@ -33,7 +33,7 @@ long classNameId = BeanParamUtil.getLong(entry, request, "classNameId");
 
 long classPK = BeanParamUtil.getLong(entry, request, "classPK");
 
-String type = BeanParamUtil.getString(entry, request, "type", AnnouncementEntryImpl.TYPES[0]);
+String type = BeanParamUtil.getString(entry, request, "type", AnnouncementsEntryImpl.TYPES[0]);
 
 int priority = BeanParamUtil.getInteger(entry, request, "priority", 1);
 
@@ -87,10 +87,10 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
 <input name="<portlet:namespace />alert" type="hidden" value="<%= alerts %>" />
 
-<liferay-ui:error exception="<%= AnnouncementEntryContentException.class %>" message="please-enter-valid-content" />
-<liferay-ui:error exception="<%= AnnouncementEntryDisplayDateException.class %>" message="please-enter-valid-display-date" />
-<liferay-ui:error exception="<%= AnnouncementEntryExpirationDateException.class %>" message="please-enter-valid-expiration-date" />
-<liferay-ui:error exception="<%= AnnouncementEntryTitleException.class %>" message="please-enter-valid-title" />
+<liferay-ui:error exception="<%= EntryContentException.class %>" message="please-enter-valid-content" />
+<liferay-ui:error exception="<%= EntryDisplayDateException.class %>" message="please-enter-valid-display-date" />
+<liferay-ui:error exception="<%= EntryExpirationDateException.class %>" message="please-enter-valid-expiration-date" />
+<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-valid-title" />
 
 <table class="lfr-table">
 <tr>
@@ -98,7 +98,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 		<liferay-ui:message key="title" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= AnnouncementEntry.class %>" bean="<%= entry %>" field="title" />
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="title" />
 	</td>
 </tr>
 <tr>
@@ -106,7 +106,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 		<liferay-ui:message key="url" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= AnnouncementEntry.class %>" bean="<%= entry %>" field="url" />
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="url" />
 	</td>
 </tr>
 <tr>
@@ -119,7 +119,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 		<liferay-ui:message key="content" />
 	</td>
 	<td>
-		<liferay-ui:input-field model="<%= AnnouncementEntry.class %>" bean="<%= entry %>" field="content" />
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="content" />
 	</td>
 </tr>
 <tr>
@@ -138,6 +138,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 					<c:when test="<%= entry.getClassNameId() == 0 %>">
 						<liferay-ui:message key="general" />
 					</c:when>
+<%--
 					<c:when test="<%= entry.getClassNameId() == userClassNameId %>">
 						<%
 						User user2 = UserLocalServiceUtil.getUserById(entry.getClassPK());
@@ -168,6 +169,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 						%>
 						<liferay-ui:message key="organization" /> &raquo; <%= org.getName() %>
 					</c:when>
+--%>
 				</c:choose>
 			</c:when>
 			<c:otherwise>
@@ -176,6 +178,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 						<option value="0,0" ><liferay-ui:message key="general" /></option>
 					</c:if>
 
+<%--
 					<optgroup label='<liferay-ui:message key="roles" />'>
 						<%
 						List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
@@ -231,6 +234,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 						}
 						%>
 					</optgroup>
+--%>
 				</select>
 			</c:otherwise>
 		</c:choose>
@@ -261,10 +265,10 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 	<td>
 		<select name="<portlet:namespace />type">
 			<%
-				for (int i = 0; i < AnnouncementEntryImpl.TYPES.length; i++) {
+				for (int i = 0; i < AnnouncementsEntryImpl.TYPES.length; i++) {
 			%>
 
-			<option <%= type.equals(AnnouncementEntryImpl.TYPES[i]) ? "selected" : "" %> value="<%= AnnouncementEntryImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, AnnouncementEntryImpl.TYPES[i]) %></option>
+			<option <%= type.equals(AnnouncementsEntryImpl.TYPES[i]) ? "selected" : "" %> value="<%= AnnouncementsEntryImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, AnnouncementsEntryImpl.TYPES[i]) %></option>
 
 			<%
 				}

@@ -33,11 +33,11 @@ if (portletName.equals(PortletKeys.ALERTS)) {
 
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
-AnnouncementEntry entry = (AnnouncementEntry)row.getObject();
+AnnouncementsEntry entry = (AnnouncementsEntry)row.getObject();
 %>
 
 <liferay-ui:icon-menu>
-	<c:if test="<%= AnnouncementEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
+	<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
 			<portlet:param name="struts_action" value="<%= strutsAction %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -47,7 +47,7 @@ AnnouncementEntry entry = (AnnouncementEntry)row.getObject();
 		<liferay-ui:icon image="edit" url="<%= editEntryURL %>" label="<%= true %>" />
 	</c:if>
 
-	<c:if test="<%= AnnouncementEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
+	<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 		<portlet:actionURL var="deleteEntryURL">
 			<portlet:param name="struts_action" value="<%= strutsAction %>" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />

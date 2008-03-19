@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/announcements/init.jsp" %>
 
-<%--
+<%
 String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
 String distributionScope = ParamUtil.getString(request, "distributionScope");
@@ -66,13 +66,13 @@ portletURL.setParameter("tabs1", tabs1);
 
 <script type="text/javascript">
 	function <portlet:namespace />hideEntry(entryId) {
-		Liferay.Service.Announcements.AnnouncementFlag.addAnnouncementFlag({userId: <%= userId %>, entryId : entryId, flag: 2});
+		Liferay.Service.Announcements.AnnouncementsFlag.addAnnouncementsFlag({userId: <%= userId %>, entryId : entryId, flag: 2});
 
 		jQuery('#<portlet:namespace/>' + entryId).hide("slow");
 	}
 
 	function <portlet:namespace />markEntryAsRead(entryId) {
-		Liferay.Service.Announcements.AnnouncementFlag.addAnnouncementFlag({userId: <%= userId %>, entryId : entryId, flag: 1});
+		Liferay.Service.Announcements.AnnouncementsFlag.addAnnouncementsFlag({userId: <%= userId %>, entryId : entryId, flag: 1});
 	}
 
 	function <portlet:namespace />selectDistributionScope(scope) {
@@ -93,32 +93,32 @@ portletURL.setParameter("tabs1", tabs1);
 	<c:when test='<%= tabs1.equals("entries") || tabs1.equals("old-entries") %>'>
 		<div class="<%= (alerts ? "lfr-alerts" : "lfr-announcements") %>">
 			<%
-				LinkedHashMap<Long,Long[]> scopes = AnnouncementsUtil.getAnnouncementScopes(userId);
+				LinkedHashMap<Long,long[]> scopes = AnnouncementsUtil.getAnnouncementScopes(userId);
 
-				int flag = AnnouncementFlagImpl.NOT_HIDDEN;
+				int flag = AnnouncementsFlagImpl.NOT_HIDDEN;
 
 				if (readHidden) {
-					flag = AnnouncementFlagImpl.HIDDEN;
+					flag = AnnouncementsFlagImpl.HIDDEN;
 				}
 
 				SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, "no-entries-were-found");
 
-				int total = AnnouncementEntryLocalServiceUtil.getEntriesCount(userId, scopes, flag, alerts);
+				int total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(userId, scopes, alerts, flag);
 
-				List<AnnouncementEntry> results = AnnouncementEntryLocalServiceUtil.getEntries(userId, scopes, flag, alerts, searchContainer.getStart(), searchContainer.getEnd());
+				List<AnnouncementsEntry> results = AnnouncementsEntryLocalServiceUtil.getEntries(userId, scopes, alerts, flag, searchContainer.getStart(), searchContainer.getEnd());
 
 				searchContainer.setTotal(total);
 
 				searchContainer.setResults(results);
 
-				for(AnnouncementEntry entry : results) {
-					AnnouncementFlag readFlag = null;
+				for(AnnouncementsEntry entry : results) {
+					AnnouncementsFlag readFlag = null;
 					String isRead = Boolean.FALSE.toString();
 
 					try {
-						readFlag = AnnouncementFlagLocalServiceUtil.getAnnouncementFlag(userId, entry.getEntryId(), AnnouncementFlagImpl.READ);
+						readFlag = AnnouncementsFlagLocalServiceUtil.getFlag(userId, entry.getEntryId(), AnnouncementsFlagImpl.READ);
 					}
-					catch (NoSuchAnnouncementFlagException nsafe) {
+					catch (NoSuchFlagException nsafe) {
 					}
 
 					if (readFlag != null) {
@@ -130,7 +130,7 @@ portletURL.setParameter("tabs1", tabs1);
 					<div class="edit-actions">
 						<table class="lfr-table">
 						<tr>
-							<c:if test="<%= AnnouncementEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
+							<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 								<td>
 									<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
 										<portlet:param name="struts_action" value="<%= strutsAction %>" />
@@ -141,7 +141,7 @@ portletURL.setParameter("tabs1", tabs1);
 									<liferay-ui:icon image="edit" url="<%= editEntryURL %>" label="<%= true %>" />
 								</td>
 							</c:if>
-							<c:if test="<%= AnnouncementEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
+							<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 								<td>
 									<portlet:actionURL var="deleteEntryURL">
 										<portlet:param name="struts_action" value="<%= strutsAction %>" />
@@ -181,6 +181,7 @@ portletURL.setParameter("tabs1", tabs1);
 								<liferay-ui:message key="general" />
 							</span>
 						</c:when>
+<%--
 						<c:when test="<%= entry.getClassNameId() == userClassNameId %>">
 							<span class="entry-scope personal">
 								<liferay-ui:message key="personal" />
@@ -218,6 +219,7 @@ portletURL.setParameter("tabs1", tabs1);
 								<liferay-ui:message key="organization" />: <%= org.getName() %>
 							</span>
 						</c:when>
+--%>
 					</c:choose>
 
 					<c:if test="<%= !user.isDefaultUser() %>">
@@ -276,6 +278,7 @@ portletURL.setParameter("tabs1", tabs1);
 				<option value="0,0" <%= (classPK == 0 ? "selected" : "") %>><liferay-ui:message key="general" /></option>
 			</c:if>
 
+<%--
 			<optgroup label='<liferay-ui:message key="roles" />'>
 				<%
 				List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
@@ -331,6 +334,8 @@ portletURL.setParameter("tabs1", tabs1);
 				}
 				%>
 			</optgroup>
+--%>
+
 		</select>
 
 		<br /><br />
@@ -347,6 +352,8 @@ portletURL.setParameter("tabs1", tabs1);
 				<c:when test="<%= classNameId == 0 %>">
 					<liferay-ui:message key="general" />
 				</c:when>
+
+<%--
 				<c:when test="<%= classNameId == userClassNameId %>">
 					<%
 					User user2 = UserLocalServiceUtil.getUserById(classPK);
@@ -377,6 +384,8 @@ portletURL.setParameter("tabs1", tabs1);
 					%>
 					<liferay-ui:message key="organization" /> &raquo; <%= org.getName() %>
 				</c:when>
+--%>
+
 			</c:choose>
 
 			<br /><br />
@@ -397,9 +406,9 @@ portletURL.setParameter("tabs1", tabs1);
 
 			List resultRows = searchContainer.getResultRows();
 
-			int total = AnnouncementEntryLocalServiceUtil.getEntriesCount(classNameId, classPK, alerts);
+			int total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(classNameId, classPK, alerts);
 
-			List<AnnouncementEntry> results = AnnouncementEntryLocalServiceUtil.getEntries(classNameId, classPK, alerts, searchContainer.getStart(), searchContainer.getEnd());
+			List<AnnouncementsEntry> results = AnnouncementsEntryLocalServiceUtil.getEntries(classNameId, classPK, alerts, searchContainer.getStart(), searchContainer.getEnd());
 
 			searchContainer.setTotal(total);
 
@@ -407,7 +416,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 			int i = 0;
 
-			for(AnnouncementEntry entry : results) {
+			for(AnnouncementsEntry entry : results) {
 				entry = entry.toEscapedModel();
 
 				ResultRow row = new ResultRow(entry, entry.getEntryId(), ++i);
@@ -454,4 +463,4 @@ portletURL.setParameter("tabs1", tabs1);
 		</c:if>
 		</form>
 	</c:when>
-</c:choose>--%>
+</c:choose>
