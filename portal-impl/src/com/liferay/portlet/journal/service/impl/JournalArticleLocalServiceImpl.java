@@ -311,8 +311,8 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = journalArticlePersistence.create(id);
 
 		content = format(
-			groupId, articleId, article.getVersion(), false, content,
-			structureId, images);
+			groupId, articleId, JournalArticleImpl.DEFAULT_VERSION, false,
+			content, structureId, images);
 
 		article.setUuid(uuid);
 		article.setResourcePrimKey(resourcePrimKey);
@@ -1936,7 +1936,7 @@ public class JournalArticleLocalServiceImpl
 
 			long oldImageId = 0;
 
-			if (oldVersion >= 1) {
+			if ((oldVersion >= 1) && incrementVersion) {
 				oldImageId =
 					journalArticleImageLocalService.getArticleImageId(
 						groupId, articleId, oldVersion, elName, elLanguage);
