@@ -1477,6 +1477,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
+		friendlyURL = getFriendlyURL(layout.getLayoutId(), friendlyURL);
+
 		validateFriendlyURL(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			friendlyURL);

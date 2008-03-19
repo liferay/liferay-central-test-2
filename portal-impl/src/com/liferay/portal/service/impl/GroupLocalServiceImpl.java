@@ -538,6 +538,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
+		friendlyURL = getFriendlyURL(groupId, group.getClassPK(), friendlyURL);
+
 		validateFriendlyURL(
 			group.getGroupId(), group.getCompanyId(), group.getClassNameId(),
 			group.getClassPK(), friendlyURL);
