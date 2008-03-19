@@ -47,135 +47,138 @@ import java.util.List;
  */
 public class AnnouncementsUtil {
 
-	public static LinkedHashMap<Long,Long[]> getAnnouncementScopes(
-			long userId)
+	public static LinkedHashMap<Long, long[]> getAnnouncementScopes(long userId)
 		throws PortalException, SystemException {
 
-		LinkedHashMap<Long,Long[]> scopes =
-			new LinkedHashMap<Long,Long[]>();
+		LinkedHashMap<Long, long[]> scopes = new LinkedHashMap<Long, long[]>();
 
 		// General announcements
 
-		scopes.put(new Long(0), new Long[] {new Long(0)});
+		scopes.put(new Long(0), new long[] {0});
 
-		// User's personal announcements
+		// Personal announcements
 
-		scopes.put(
-			_userClassNameId, new Long[] {new Long(userId)});
+		scopes.put(_USER_CLASS_NAME_ID, new long[] {userId});
 
-		// User's UserGroup announcements
+		// Community announcements
 
-		List<UserGroup> usersUserGroups =
-			UserGroupLocalServiceUtil.getUserUserGroups(userId);
+		List<Group> groupsList = new ArrayList<Group>();
 
-		Long[] usersUserGroupsIds = getUserGroupIds(usersUserGroups);
+		List<Group> groups = GroupLocalServiceUtil.getUserGroups(userId);
 
-		if (usersUserGroupsIds.length > 0) {
-			scopes.put(_userGroupClassNameId, usersUserGroupsIds);
+		if (groups.size() > 0) {
+			scopes.put(_GROUP_CLASS_NAME_ID, _getGroupIds(groups));
+
+			groupsList.addAll(groups);
 		}
 
-		// User's Community announcements
+		// Organization announcements
 
-		List<Group> usersGroups = GroupLocalServiceUtil.getUserGroups(userId);
-
-		List<Group> groupList = new ArrayList<Group>();
-
-		Long[] usersGroupsIds = getGroupIds(usersGroups);
-
-		if (usersGroupsIds.length > 0) {
-			scopes.put(_communityClassNameId, usersGroupsIds);
-			groupList.addAll(usersGroups);
-		}
-
-		// User's Organizations announcements
-
-		List<Organization> usersOrgs =
+		List<Organization> organizations =
 			OrganizationLocalServiceUtil.getUserOrganizations(userId);
 
-		Long[] usersOrganizationsIds = getOrganizationIds(usersOrgs);
-
-		if (usersOrganizationsIds.length > 0) {
+		if (organizations.size() > 0) {
 			scopes.put(
-				_organizationClassNameId, usersOrganizationsIds);
+				_ORGANIZATION_CLASS_NAME_ID,
+				_getOrganizationIds(organizations));
 
-			for (Organization org : usersOrgs) {
-				groupList.add(org.getGroup());
+			for (Organization organization : organizations) {
+				groupsList.add(organization.getGroup());
 			}
 		}
 
-		// User's Role announcements
+		// Role announcements
 
-		if (groupList.size() > 0) {
-			List<Role> usersRoles =
-				RoleLocalServiceUtil.getUserRelatedRoles(userId, groupList);
+		if (groupsList.size() > 0) {
+			List<Role> roles = RoleLocalServiceUtil.getUserRelatedRoles(
+				userId, groupsList);
 
-			for (Group group : groupList) {
-				usersRoles.addAll(RoleLocalServiceUtil.getUserGroupRoles(
-					userId, group.getGroupId()));
+			for (Group group : groupsList) {
+				roles.addAll(
+					RoleLocalServiceUtil.getUserGroupRoles(
+						userId, group.getGroupId()));
 			}
 
-			Long[] usersRolesIds = getRoleIds(usersRoles);
-
-			if (usersRolesIds.length > 0) {
-				scopes.put(_roleClassNameId, usersRolesIds);
+			if (roles.size() > 0) {
+				scopes.put(_ROLE_CLASS_NAME_ID, _getRoleIds(roles));
 			}
+		}
+
+		// User group announcements
+
+		List<UserGroup> userGroups =
+			UserGroupLocalServiceUtil.getUserUserGroups(userId);
+
+		if (userGroups.size() > 0) {
+			scopes.put(_USER_GROUP_CLASS_NAME_ID, _getUserGroupIds(userGroups));
 		}
 
 		return scopes;
 	}
 
-	protected static Long[] getRoleIds(List<Role> usersRoles) {
-		Long[] ids = new Long[usersRoles.size()];
+	private static long[] _getGroupIds(List<Group> groups) {
+		long[] groupIds = new long[groups.size()];
 
 		int i = 0;
 
-		for (Role role : usersRoles) {
-			ids[i++] = new Long(role.getRoleId());
+		for (Group group : groups) {
+			groupIds[i++] = group.getGroupId();
 		}
 
-		return ids;
+		return groupIds;
 	}
 
-	protected static Long[] getUserGroupIds(List<UserGroup> usersUserGroups) {
-		Long[] ids = new Long[usersUserGroups.size()];
+	private static long[] _getOrganizationIds(
+		List<Organization> organizations) {
+
+		long[] organizationIds = new long[organizations.size()];
 
 		int i = 0;
 
-		for (UserGroup userGroup : usersUserGroups) {
-			ids[i++] = new Long(userGroup.getUserGroupId());
+		for (Organization organization : organizations) {
+			organizationIds[i++] = organization.getOrganizationId();
 		}
 
-		return ids;
+		return organizationIds;
 	}
 
-	protected static Long[] getGroupIds(List<Group> usersGroups) {
-		Long[] ids = new Long[usersGroups.size()];
+	private static long[] _getRoleIds(List<Role> roles) {
+		long[] roleIds = new long[roles.size()];
 
 		int i = 0;
 
-		for (Group group : usersGroups) {
-			ids[i++] = new Long(group.getGroupId());
+		for (Role role : roles) {
+			roleIds[i++] = role.getRoleId();
 		}
 
-		return ids;
+		return roleIds;
 	}
 
-	protected static Long[] getOrganizationIds(List<Organization> usersOrgs) {
-		Long[] ids = new Long[usersOrgs.size()];
+	private static long[] _getUserGroupIds(List<UserGroup> userGroups) {
+		long[] userGroupIds = new long[userGroups.size()];
 
 		int i = 0;
 
-		for (Organization org : usersOrgs) {
-			ids[i++] = new Long(org.getOrganizationId());
+		for (UserGroup userGroup : userGroups) {
+			userGroupIds[i++] = userGroup.getUserGroupId();
 		}
 
-		return ids;
+		return userGroupIds;
 	}
 
-	private static long _userClassNameId = PortalUtil.getClassNameId(User.class.getName());
-	private static long _roleClassNameId = PortalUtil.getClassNameId(Role.class.getName());
-	private static long _userGroupClassNameId = PortalUtil.getClassNameId(UserGroup.class.getName());
-	private static long _organizationClassNameId = PortalUtil.getClassNameId(Organization.class.getName());
-	private static long _communityClassNameId = PortalUtil.getClassNameId(Group.class.getName());
+	private static long _GROUP_CLASS_NAME_ID = PortalUtil.getClassNameId(
+		Group.class.getName());
+
+	private static long _ORGANIZATION_CLASS_NAME_ID = PortalUtil.getClassNameId(
+		Organization.class.getName());
+
+	private static long _ROLE_CLASS_NAME_ID = PortalUtil.getClassNameId(
+		Role.class.getName());
+
+	private static long _USER_CLASS_NAME_ID = PortalUtil.getClassNameId(
+		User.class.getName());
+
+	private static long _USER_GROUP_CLASS_NAME_ID = PortalUtil.getClassNameId(
+		UserGroup.class.getName());
 
 }

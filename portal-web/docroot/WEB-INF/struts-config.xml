@@ -142,10 +142,9 @@
 			<forward name="portlet.announcements.error" path="portlet.announcements.error" />
 		</action>
 
-		<action path="/alerts/view" type="com.liferay.portlet.alerts.action.ViewAction">
+		<action path="/alerts/view" type="com.liferay.portlet.alerts.announcements.ViewAction">
 			<forward name="portlet.announcements.view" path="portlet.announcements.view" />
 		</action>
-
 
 		<!-- Amazon Rankings -->
 

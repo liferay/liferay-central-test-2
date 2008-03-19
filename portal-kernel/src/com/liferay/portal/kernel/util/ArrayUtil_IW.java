@@ -185,28 +185,52 @@ public class ArrayUtil_IW {
 		return ArrayUtil.removeByPrefix(array, prefix);
 	}
 
-	public java.lang.Boolean[] toObjectArray(boolean[] array) {
-		return ArrayUtil.toObjectArray(array);
+	public java.lang.Boolean[] toArray(boolean[] array) {
+		return ArrayUtil.toArray(array);
 	}
 
-	public java.lang.Double[] toObjectArray(double[] array) {
-		return ArrayUtil.toObjectArray(array);
+	public java.lang.Double[] toArray(double[] array) {
+		return ArrayUtil.toArray(array);
 	}
 
-	public java.lang.Float[] toObjectArray(float[] array) {
-		return ArrayUtil.toObjectArray(array);
+	public java.lang.Float[] toArray(float[] array) {
+		return ArrayUtil.toArray(array);
 	}
 
-	public java.lang.Integer[] toObjectArray(int[] array) {
-		return ArrayUtil.toObjectArray(array);
+	public java.lang.Integer[] toArray(int[] array) {
+		return ArrayUtil.toArray(array);
 	}
 
-	public java.lang.Long[] toObjectArray(long[] array) {
-		return ArrayUtil.toObjectArray(array);
+	public java.lang.Long[] toArray(long[] array) {
+		return ArrayUtil.toArray(array);
 	}
 
-	public java.lang.Short[] toObjectArray(short[] array) {
-		return ArrayUtil.toObjectArray(array);
+	public java.lang.Short[] toArray(short[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public boolean[] toArray(java.lang.Boolean[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public double[] toArray(java.lang.Double[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public float[] toArray(java.lang.Float[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public int[] toArray(java.lang.Integer[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public long[] toArray(java.lang.Long[] array) {
+		return ArrayUtil.toArray(array);
+	}
+
+	public short[] toArray(java.lang.Short[] array) {
+		return ArrayUtil.toArray(array);
 	}
 
 	private ArrayUtil_IW() {

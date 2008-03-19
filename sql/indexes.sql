@@ -11,13 +11,13 @@ create index IX_923BD178 on Address (companyId, classNameId, classPK, mailing);
 create index IX_9226DBB4 on Address (companyId, classNameId, classPK, primary_);
 create index IX_5BC8B0D4 on Address (userId);
 
-create index IX_77068BE6 on AnnouncementEntry (classNameId, classPK);
-create index IX_DF3F9E66 on AnnouncementEntry (classNameId, classPK, alert);
-create index IX_2AB2138B on AnnouncementEntry (userId);
-create index IX_DBB24043 on AnnouncementEntry (uuid_);
+create index IX_A6EF0B81 on AnnouncementsEntry (classNameId, classPK);
+create index IX_14F06A6B on AnnouncementsEntry (classNameId, classPK, alert);
+create index IX_D49C2E66 on AnnouncementsEntry (userId);
+create index IX_1AFBDE08 on AnnouncementsEntry (uuid_);
 
-create index IX_5FDDD0C4 on AnnouncementFlag (entryId);
-create index IX_758AE3AA on AnnouncementFlag (userId, entryId, flag);
+create index IX_9C7EB9F on AnnouncementsFlag (entryId);
+create index IX_4539A99C on AnnouncementsFlag (userId, entryId, value);
 
 create index IX_72EF6041 on BlogsEntry (companyId);
 create index IX_8CACE77B on BlogsEntry (companyId, userId);

@@ -929,7 +929,9 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 		return join;
 	}
 
-	protected void setJoin(QueryPos qPos, LinkedHashMap<String, Object> params) {
+	protected void setJoin(
+		QueryPos qPos, LinkedHashMap<String, Object> params) {
+
 		if (params != null) {
 			Iterator<Map.Entry<String, Object>> itr =
 				params.entrySet().iterator();

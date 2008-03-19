@@ -31,8 +31,6 @@ package com.liferay.portal.kernel.security.permission;
  */
 public class ActionKeys {
 
-	public static final String ADD_ANNOUNCEMENT = "ADD_ANNOUNCEMENT";
-
 	public static final String ADD_ARTICLE = "ADD_ARTICLE";
 
 	public static final String ADD_ATTACHMENT = "ADD_ATTACHMENT";

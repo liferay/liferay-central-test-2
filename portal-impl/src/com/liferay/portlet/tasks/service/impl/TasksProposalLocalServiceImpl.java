@@ -41,7 +41,7 @@ import java.util.List;
  * <a href="TasksProposalLocalServiceImpl.java.html"><b><i>View Source</i></b>
  * </a>
  *
- * @author Raymond Aug�
+ * @author Raymond Augé
  * @author Brian Wing Shun Chan
  *
  */

@@ -765,6 +765,7 @@
 		<portlet-name>83</portlet-name>
 		<icon>/html/portlet/announcements/icon.png</icon>
 		<struts-path>alerts</struts-path>
+		<preferences-company-wide>false</preferences-company-wide>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<instanceable>false</instanceable>
@@ -1136,7 +1137,7 @@
 		<system>true</system>
 	</portlet>
 	<portlet>
-		<portlet-name>122</portlet-name>
+		<portlet-name>120</portlet-name>
 		<struts-path>tasks</struts-path>
 		<activity-tracker-interpreter-class>com.liferay.portlet.tasks.TasksActivityTrackerInterpreter</activity-tracker-interpreter-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>

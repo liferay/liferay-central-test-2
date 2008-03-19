@@ -82,8 +82,6 @@ public class ShoppingCouponLocalServiceImpl
 			code = getCode();
 		}
 
-		Date now = new Date();
-
 		Date startDate = PortalUtil.getDate(
 			startDateMonth, startDateDay, startDateYear, startDateHour,
 			startDateMinute, user.getTimeZone(),
@@ -101,6 +99,8 @@ public class ShoppingCouponLocalServiceImpl
 		if ((endDate != null) && (startDate.after(endDate))) {
 			throw new CouponDateException();
 		}
+
+		Date now = new Date();
 
 		validate(
 			user.getCompanyId(), groupId, code, autoCode, name, description,

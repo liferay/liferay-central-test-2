@@ -24,59 +24,93 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.lfr-announcements {
-}
-
 .lfr-alerts {
 }
 
-.lfr-announcements .entry {
-	margin: 4px 0px;
-}
-
 .lfr-alerts .entry {
-	margin: 8px 0px;
 	border: 6px solid #c00;
+	margin: 8px 0px;
 	padding: 6px;
-}
-
-.lfr-announcements .entry-scope {
-	display: block;
 }
 
 .lfr-alerts .entry-scope {
 	display: block;
 }
 
-.lfr-announcements .read-false .entry-title {
-	display: block;
-	font-size: 1.6em;
-	font-weight: bold;
-	color: #000;
-	margin: 0px 0px 4px 0px;
-}
-
 .lfr-alerts .read-false .entry-title {
+	color: #000;
 	display: block;
 	font-size: 1.6em;
 	font-weight: bold;
-	color: #000;
-	margin: 0px 0px 4px 0px;
-}
-
-.lfr-announcements .read-true .entry-title {
-	display: block;
-	font-size: 1.5em;
-	font-weight: bold;
-	color: #CCC;
 	margin: 0px 0px 4px 0px;
 }
 
 .lfr-alerts .read-true .entry-title {
+	color: #CCC;
 	display: block;
 	font-size: 1.5em;
 	font-weight: bold;
+	margin: 0px 0px 4px 0px;
+}
+
+.lfr-alerts .read-false .entry-title .entry-url {
+	color: #000;
+}
+
+.lfr-alerts .read-true .entry-title .entry-url {
 	color: #CCC;
+}
+
+.lfr-alerts .entry-content {
+	display: block;
+	padding: 2px 2px 2px 30px;
+}
+
+.lfr-alerts .entry-scope {
+	color: #CCC;
+	display: block;
+}
+
+.lfr-alerts .edit-actions {
+	float: right;
+}
+
+.lfr-alerts .entry-type-general {
+	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+}
+
+.lfr-alerts .entry-type-news {
+	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+}
+
+.lfr-alerts .entry-type-test {
+	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+}
+
+.lfr-announcements {
+}
+
+.lfr-announcements .entry {
+	margin: 4px 0px;
+}
+
+.lfr-announcements .entry-scope {
+	display: block;
+}
+
+.lfr-announcements .read-false .entry-title {
+	color: #000;
+	display: block;
+	font-size: 1.6em;
+	font-weight: bold;
+	margin: 0px 0px 4px 0px;
+}
+
+.lfr-announcements .read-true .entry-title {
+	color: #CCC;
+	display: block;
+	font-size: 1.5em;
+	font-weight: bold;
 	margin: 0px 0px 4px 0px;
 }
 
@@ -84,15 +118,7 @@
 	color: #000;
 }
 
-.lfr-alerts .read-false .entry-title .entry-url {
-	color: #000;
-}
-
 .lfr-announcements .read-true .entry-title .entry-url {
-	color: #CCC;
-}
-
-.lfr-alerts .read-true .entry-title .entry-url {
 	color: #CCC;
 }
 
@@ -101,26 +127,12 @@
 	padding: 2px 2px 2px 30px;
 }
 
-.lfr-alerts .entry-content {
-	display: block;
-	padding: 2px 2px 2px 30px;
-}
-
 .lfr-announcements .entry-scope {
-	display: block;
 	color: #CCC;
-}
-
-.lfr-alerts .entry-scope {
 	display: block;
-	color: #CCC;
 }
 
 .lfr-announcements .edit-actions {
-	float: right;
-}
-
-.lfr-alerts .edit-actions {
 	float: right;
 }
 
@@ -128,22 +140,10 @@
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-alerts .entry-type-general {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
-}
-
 .lfr-announcements .entry-type-news {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-alerts .entry-type-news {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
-}
-
 .lfr-announcements .entry-type-test {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
-}
-
-.lfr-alerts .entry-type-test {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }

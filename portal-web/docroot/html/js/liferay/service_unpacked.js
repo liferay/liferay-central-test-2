@@ -1188,8 +1188,8 @@ Liferay.Service.Announcements = {
 	servicePackage: "com.liferay.portlet.announcements.service.http."
 };
 
-Liferay.Service.Announcements.AnnouncementEntry = {
-	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementEntry" + Liferay.Service.classNameSuffix,
+Liferay.Service.Announcements.AnnouncementsEntry = {
+	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementsEntry" + Liferay.Service.classNameSuffix,
 
 	addEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
@@ -1208,31 +1208,6 @@ Liferay.Service.Announcements.AnnouncementEntry = {
 	updateEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateEntry";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Announcements.AnnouncementFlag = {
-	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementFlag" + Liferay.Service.classNameSuffix,
-
-	addAnnouncementFlag: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addAnnouncementFlag";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getAnnouncementFlag: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getAnnouncementFlag";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteAnnouncementFlag: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteAnnouncementFlag";
 
 		return Liferay.Service.ajax(params, callback);
 	}

@@ -1,4 +1,4 @@
-create table AnnouncementEntry (
+create table AnnouncementsEntry (
 	uuid_ VARCHAR(75) null,
 	entryId LONG not null primary key,
 	companyId LONG,
@@ -9,8 +9,8 @@ create table AnnouncementEntry (
 	classNameId LONG,
 	classPK LONG,
 	title VARCHAR(75) null,
-	content STRING null,
-	url STRING null,
+	content VARCHAR(75) null,
+	url VARCHAR(75) null,
 	type_ VARCHAR(75) null,
 	displayDate DATE null,
 	expirationDate DATE null,
@@ -18,12 +18,12 @@ create table AnnouncementEntry (
 	alert BOOLEAN
 );
 
-create table AnnouncementFlag (
+create table AnnouncementsFlag (
 	flagId LONG not null primary key,
 	userId LONG,
+	createDate DATE null,
 	entryId LONG,
-	flag INTEGER,
-	flagDate DATE null
+	value INTEGER
 );
 
 alter table IGImage add name VARCHAR(75) null;

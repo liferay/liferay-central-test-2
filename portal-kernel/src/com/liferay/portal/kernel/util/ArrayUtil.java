@@ -401,64 +401,124 @@ public class ArrayUtil {
 		return (String[])list.toArray(new String[list.size()]);
 	}
 
-	public static Boolean[] toObjectArray(boolean[] array) {
-		Boolean[] objArray = new Boolean[array.length];
+	public static Boolean[] toArray(boolean[] array) {
+		Boolean[] newArray = new Boolean[array.length];
 
 		for (int i = 0; i < array.length; i++) {
-			objArray[i] = Boolean.valueOf(array[i]);
+			newArray[i] = Boolean.valueOf(array[i]);
 		}
 
-		return objArray;
+		return newArray;
 	}
 
-	public static Double[] toObjectArray(double[] array) {
-		Double[] objArray = new Double[array.length];
+	public static Double[] toArray(double[] array) {
+		Double[] newArray = new Double[array.length];
 
 		for (int i = 0; i < array.length; i++) {
-			objArray[i] = new Double(array[i]);
+			newArray[i] = new Double(array[i]);
 		}
 
-		return objArray;
+		return newArray;
 	}
 
-	public static Float[] toObjectArray(float[] array) {
-		Float[] objArray = new Float[array.length];
+	public static Float[] toArray(float[] array) {
+		Float[] newArray = new Float[array.length];
 
 		for (int i = 0; i < array.length; i++) {
-			objArray[i] = new Float(array[i]);
+			newArray[i] = new Float(array[i]);
 		}
 
-		return objArray;
+		return newArray;
 	}
 
-	public static Integer[] toObjectArray(int[] array) {
-		Integer[] objArray = new Integer[array.length];
+	public static Integer[] toArray(int[] array) {
+		Integer[] newArray = new Integer[array.length];
 
 		for (int i = 0; i < array.length; i++) {
-			objArray[i] = new Integer(array[i]);
+			newArray[i] = new Integer(array[i]);
 		}
 
-		return objArray;
+		return newArray;
 	}
 
-	public static Long[] toObjectArray(long[] array) {
-		Long[] objArray = new Long[array.length];
+	public static Long[] toArray(long[] array) {
+		Long[] newArray = new Long[array.length];
 
 		for (int i = 0; i < array.length; i++) {
-			objArray[i] = new Long(array[i]);
+			newArray[i] = new Long(array[i]);
 		}
 
-		return objArray;
+		return newArray;
 	}
 
-	public static Short[] toObjectArray(short[] array) {
-		Short[] objArray = new Short[array.length];
+	public static Short[] toArray(short[] array) {
+		Short[] newArray = new Short[array.length];
 
 		for (int i = 0; i < array.length; i++) {
-			objArray[i] = new Short(array[i]);
+			newArray[i] = new Short(array[i]);
 		}
 
-		return objArray;
+		return newArray;
+	}
+
+	public static boolean[] toArray(Boolean[] array) {
+		boolean[] newArray = new boolean[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i].booleanValue();
+		}
+
+		return newArray;
+	}
+
+	public static double[] toArray(Double[] array) {
+		double[] newArray = new double[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i].doubleValue();
+		}
+
+		return newArray;
+	}
+
+	public static float[] toArray(Float[] array) {
+		float[] newArray = new float[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i].floatValue();
+		}
+
+		return newArray;
+	}
+
+	public static int[] toArray(Integer[] array) {
+		int[] newArray = new int[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i].intValue();
+		}
+
+		return newArray;
+	}
+
+	public static long[] toArray(Long[] array) {
+		long[] newArray = new long[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i].longValue();
+		}
+
+		return newArray;
+	}
+
+	public static short[] toArray(Short[] array) {
+		short[] newArray = new short[array.length];
+
+		for (int i = 0; i < array.length; i++) {
+			newArray[i] = array[i].shortValue();
+		}
+
+		return newArray;
 	}
 
 }

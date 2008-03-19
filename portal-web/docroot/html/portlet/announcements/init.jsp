@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil"%>
+<%--<%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil"%>
 <%@ page import="com.liferay.portal.service.permission.RolePermissionUtil"%>
 <%@ page import="com.liferay.portal.service.permission.UserGroupPermissionUtil"%>
 <%@ page import="com.liferay.portal.service.persistence.ClassNameUtil"%>
@@ -40,8 +40,7 @@
 <%@ page import="com.liferay.portlet.announcements.service.AnnouncementEntryLocalServiceUtil"%>
 <%@ page import="com.liferay.portlet.announcements.service.AnnouncementFlagLocalServiceUtil"%>
 <%@ page import="com.liferay.portlet.announcements.service.permission.AnnouncementEntryPermission"%>
-<%@ page import="com.liferay.portlet.announcements.util.AnnouncementsUtil"%>
-
+<%@ page import="com.liferay.portlet.announcements.util.AnnouncementsUtil"%>--%>
 
 <%
 PortletPreferences prefs = renderRequest.getPreferences();
@@ -53,10 +52,4 @@ if (Validator.isNotNull(portletResource)) {
 }
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
-
-long userClassNameId = PortalUtil.getClassNameId(User.class.getName());
-long roleClassNameId = PortalUtil.getClassNameId(Role.class.getName());
-long userGroupClassNameId = PortalUtil.getClassNameId(UserGroup.class.getName());
-long organizationClassNameId = PortalUtil.getClassNameId(Organization.class.getName());
-long communityClassNameId = PortalUtil.getClassNameId(Group.class.getName());
 %>

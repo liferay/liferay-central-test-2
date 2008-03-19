@@ -120,7 +120,7 @@
 		<put name="portlet_content" value="/portlet/amazon_rankings/view.jsp" />
 	</definition>
 
-	<!-- Alerts/Announcements -->
+	<!-- Announcements -->
 
 	<definition name="portlet.announcements" extends="portlet" />
 

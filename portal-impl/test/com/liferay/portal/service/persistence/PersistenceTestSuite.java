@@ -24,6 +24,8 @@ package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.util.TestPropsUtil;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistenceTest;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistenceTest;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistenceTest;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistenceTest;
 import com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistenceTest;
@@ -135,6 +137,9 @@ public class PersistenceTestSuite extends TestSuite {
 		addTestSuite(UserTrackerPathPersistenceTest.class);
 		addTestSuite(UserTrackerPersistenceTest.class);
 		addTestSuite(WebsitePersistenceTest.class);
+
+		addTestSuite(AnnouncementsEntryPersistenceTest.class);
+		addTestSuite(AnnouncementsFlagPersistenceTest.class);
 
 		addTestSuite(BlogsEntryPersistenceTest.class);
 		addTestSuite(BlogsStatsUserPersistenceTest.class);

@@ -25,7 +25,7 @@ package com.liferay.portlet.announcements;
 import com.liferay.portal.PortalException;
 
 /**
- * <a href="NoSuchFlagException.java.html"><b><i>View Source</i></b></a>
+ * <a href="NoSuchEntryException.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *

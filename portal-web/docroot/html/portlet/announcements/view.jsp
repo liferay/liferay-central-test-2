@@ -1,4 +1,5 @@
-<%/**
+<%
+/**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
  * Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -11,18 +12,19 @@
  * The above copyright notice and this permission notice shall be included in
  * all copies or substantial portions of the Software.
  *
- * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY ND, EXPRESS OR
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
  * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
  * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
  * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
  * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
- */%>
+ */
+%>
 
 <%@ include file="/html/portlet/announcements/init.jsp" %>
 
-<%
+<%--
 String tabs1 = ParamUtil.getString(request, "tabs1", "entries");
 
 String distributionScope = ParamUtil.getString(request, "distributionScope");
@@ -176,12 +178,12 @@ portletURL.setParameter("tabs1", tabs1);
 					<c:choose>
 						<c:when test="<%= entry.getClassNameId() == 0 %>">
 							<span class="entry-scope general">
-								<liferay-ui:message key="general"/>
+								<liferay-ui:message key="general" />
 							</span>
 						</c:when>
 						<c:when test="<%= entry.getClassNameId() == userClassNameId %>">
 							<span class="entry-scope personal">
-								<liferay-ui:message key="personal"/>
+								<liferay-ui:message key="personal" />
 							</span>
 						</c:when>
 						<c:when test="<%= entry.getClassNameId() == roleClassNameId %>">
@@ -189,7 +191,7 @@ portletURL.setParameter("tabs1", tabs1);
 								<%
 								Role role = RoleLocalServiceUtil.getRole(entry.getClassPK());
 								%>
-								<liferay-ui:message key="role"/>: <%= role.getName() %>
+								<liferay-ui:message key="role" />: <%= role.getName() %>
 							</span>
 						</c:when>
 						<c:when test="<%= entry.getClassNameId() == userGroupClassNameId %>">
@@ -197,7 +199,7 @@ portletURL.setParameter("tabs1", tabs1);
 								<%
 								UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(entry.getClassPK());
 								%>
-								<liferay-ui:message key="user-group"/>: <%= userGroup.getName() %>
+								<liferay-ui:message key="user-group" />: <%= userGroup.getName() %>
 							</span>
 						</c:when>
 						<c:when test="<%= entry.getClassNameId() == communityClassNameId %>">
@@ -205,7 +207,7 @@ portletURL.setParameter("tabs1", tabs1);
 								<%
 								Group group2 = GroupLocalServiceUtil.getGroup(entry.getClassPK());
 								%>
-								<liferay-ui:message key="community"/>: <%= group2.getName() %>
+								<liferay-ui:message key="community" />: <%= group2.getName() %>
 							</span>
 						</c:when>
 						<c:when test="<%= entry.getClassNameId() == organizationClassNameId %>">
@@ -213,7 +215,7 @@ portletURL.setParameter("tabs1", tabs1);
 								<%
 								Organization org = OrganizationLocalServiceUtil.getOrganization(entry.getClassPK());
 								%>
-								<liferay-ui:message key="organization"/>: <%= org.getName() %>
+								<liferay-ui:message key="organization" />: <%= org.getName() %>
 							</span>
 						</c:when>
 					</c:choose>
@@ -271,10 +273,10 @@ portletURL.setParameter("tabs1", tabs1);
 			<option value=""></option>
 
 			<c:if test="<%= permissionChecker.isOmniadmin() %>">
-				<option value="0,0" <%= (classPK == 0 ? "selected" : "") %>><liferay-ui:message key="general"/></option>
+				<option value="0,0" <%= (classPK == 0 ? "selected" : "") %>><liferay-ui:message key="general" /></option>
 			</c:if>
 
-			<optgroup label='<liferay-ui:message key="roles"/>'>
+			<optgroup label='<liferay-ui:message key="roles" />'>
 				<%
 				List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
 
@@ -288,7 +290,7 @@ portletURL.setParameter("tabs1", tabs1);
 				%>
 			</optgroup>
 
-			<optgroup label='<liferay-ui:message key="user-groups"/>'>
+			<optgroup label='<liferay-ui:message key="user-groups" />'>
 				<%
 				List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
 
@@ -302,7 +304,7 @@ portletURL.setParameter("tabs1", tabs1);
 				%>
 			</optgroup>
 
-			<optgroup label='<liferay-ui:message key="communities"/>'>
+			<optgroup label='<liferay-ui:message key="communities" />'>
 				<%
 				List<Group> groups = GroupLocalServiceUtil.getUserGroups(userId);
 
@@ -316,7 +318,7 @@ portletURL.setParameter("tabs1", tabs1);
 				%>
 			</optgroup>
 
-			<optgroup label='<liferay-ui:message key="organizations"/>'>
+			<optgroup label='<liferay-ui:message key="organizations" />'>
 				<%
 				List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(userId);
 
@@ -333,7 +335,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br /><br />
 
-		<input type="button" value='<liferay-ui:message key="add-entry"/>' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="<%= strutsAction %>" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>'" />
+		<input type="button" value='<liferay-ui:message key="add-entry" />' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="<%= strutsAction %>" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>'" />
 
 		<c:if test="<%= Validator.isNotNull(distributionScope) %>">
 
@@ -343,37 +345,37 @@ portletURL.setParameter("tabs1", tabs1);
 
 			<c:choose>
 				<c:when test="<%= classNameId == 0 %>">
-					<liferay-ui:message key="general"/>
+					<liferay-ui:message key="general" />
 				</c:when>
 				<c:when test="<%= classNameId == userClassNameId %>">
 					<%
 					User user2 = UserLocalServiceUtil.getUserById(classPK);
 					%>
-					<liferay-ui:message key="personal"/> &raquo; <%= user2.getFullName() %>
+					<liferay-ui:message key="personal" /> &raquo; <%= user2.getFullName() %>
 				</c:when>
 				<c:when test="<%= classNameId == roleClassNameId %>">
 					<%
 					Role role = RoleLocalServiceUtil.getRole(classPK);
 					%>
-					<liferay-ui:message key="role"/> &raquo; <%= role.getName() %>
+					<liferay-ui:message key="role" /> &raquo; <%= role.getName() %>
 				</c:when>
 				<c:when test="<%= classNameId == userGroupClassNameId %>">
 					<%
 					UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(classPK);
 					%>
-					<liferay-ui:message key="user-group"/> &raquo;	<%= userGroup.getName() %>
+					<liferay-ui:message key="user-group" /> &raquo;	<%= userGroup.getName() %>
 				</c:when>
 				<c:when test="<%= classNameId == communityClassNameId %>">
 					<%
 					Group group2 = GroupLocalServiceUtil.getGroup(classPK);
 					%>
-					<liferay-ui:message key="community"/> &raquo; <%= group2.getName() %>
+					<liferay-ui:message key="community" /> &raquo; <%= group2.getName() %>
 				</c:when>
 				<c:when test="<%= classNameId == organizationClassNameId %>">
 					<%
 					Organization org = OrganizationLocalServiceUtil.getOrganization(classPK);
 					%>
-					<liferay-ui:message key="organization"/> &raquo; <%= org.getName() %>
+					<liferay-ui:message key="organization" /> &raquo; <%= org.getName() %>
 				</c:when>
 			</c:choose>
 
@@ -452,4 +454,4 @@ portletURL.setParameter("tabs1", tabs1);
 		</c:if>
 		</form>
 	</c:when>
-</c:choose>
+</c:choose>--%>

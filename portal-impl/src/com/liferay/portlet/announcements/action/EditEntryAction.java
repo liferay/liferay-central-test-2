@@ -30,21 +30,17 @@ import com.liferay.portal.kernel.util.WebKeys;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortletKeys;
-import com.liferay.portlet.PortletPreferencesFactoryUtil;
-import com.liferay.portlet.announcements.AnnouncementEntryContentException;
-import com.liferay.portlet.announcements.AnnouncementEntryDisplayDateException;
-import com.liferay.portlet.announcements.AnnouncementEntryExpirationDateException;
-import com.liferay.portlet.announcements.AnnouncementEntryTitleException;
-import com.liferay.portlet.announcements.NoSuchAnnouncementEntryException;
+import com.liferay.portlet.announcements.EntryContentException;
+import com.liferay.portlet.announcements.EntryDisplayDateException;
+import com.liferay.portlet.announcements.EntryExpirationDateException;
+import com.liferay.portlet.announcements.EntryTitleException;
 import com.liferay.portlet.announcements.NoSuchEntryException;
-import com.liferay.portlet.announcements.service.AnnouncementEntryServiceUtil;
+import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -53,7 +49,7 @@ import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="EditAnnouncementAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="EditEntryAction.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
@@ -67,13 +63,9 @@ public class EditEntryAction extends PortletAction {
 
 		String cmd = ParamUtil.getString(req, Constants.CMD);
 
-		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, PortletKeys.ANNOUNCEMENTS);
-
 		try {
 			if (cmd.equals(Constants.ADD) || cmd.equals(Constants.UPDATE)) {
-				updateEntry(req, prefs);
+				updateEntry(req);
 			}
 			else if (cmd.equals(Constants.DELETE)) {
 				deleteEntry(req);
@@ -84,10 +76,10 @@ public class EditEntryAction extends PortletAction {
 			res.sendRedirect(redirect);
 		}
 		catch (Exception e) {
-			if (e instanceof AnnouncementEntryContentException ||
-				e instanceof AnnouncementEntryDisplayDateException ||
-				e instanceof AnnouncementEntryExpirationDateException ||
-				e instanceof AnnouncementEntryTitleException ||
+			if (e instanceof EntryContentException ||
+				e instanceof EntryDisplayDateException ||
+				e instanceof EntryExpirationDateException ||
+				e instanceof EntryTitleException ||
 				e instanceof NoSuchEntryException ||
 				e instanceof PrincipalException) {
 
@@ -127,20 +119,17 @@ public class EditEntryAction extends PortletAction {
 	protected void deleteEntry(ActionRequest req) throws Exception {
 		long entryId = ParamUtil.getLong(req, "entryId");
 
-		AnnouncementEntryServiceUtil.deleteEntry(entryId);
+		AnnouncementsEntryServiceUtil.deleteEntry(entryId);
 	}
 
-	protected void updateEntry(
-			ActionRequest req, PortletPreferences prefs)
-		throws Exception {
-
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay) req.getAttribute(WebKeys.THEME_DISPLAY);
+	protected void updateEntry(ActionRequest req) throws Exception {
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		long entryId = ParamUtil.getLong(req, "entryId");
 
-		String[] distributionScopeParts =
-			StringUtil.split(ParamUtil.getString(req, "distributionScope"));
+		String[] distributionScopeParts = StringUtil.split(
+			ParamUtil.getString(req, "distributionScope"));
 
 		long classNameId = 0;
 		long classPK = 0;
@@ -153,12 +142,10 @@ public class EditEntryAction extends PortletAction {
 			}
 		}
 
-		String type = ParamUtil.getString(req, "type");
 		String title = ParamUtil.getString(req, "title");
 		String content = ParamUtil.getString(req, "content");
 		String url = ParamUtil.getString(req, "url");
-		int priority = ParamUtil.getInteger(req, "priority");
-		boolean alert = ParamUtil.getBoolean(req, "alert");
+		String type = ParamUtil.getString(req, "type");
 
 		int displayMonth = ParamUtil.getInteger(req, "displayMonth");
 		int displayDay = ParamUtil.getInteger(req, "displayDay");
@@ -168,17 +155,24 @@ public class EditEntryAction extends PortletAction {
 		int expirationDay = ParamUtil.getInteger(req, "expirationDay");
 		int expirationYear = ParamUtil.getInteger(req, "expirationYear");
 
-		String cmd = ParamUtil.getString(req, Constants.CMD);
+		int priority = ParamUtil.getInteger(req, "priority");
+		boolean alert = ParamUtil.getBoolean(req, "alert");
 
-		if (cmd.equals(Constants.ADD)) {
-			AnnouncementEntryServiceUtil.addEntry(
-				themeDisplay.getUserId(), themeDisplay.getPlid(), classNameId,
-				classPK, title, content, url, type, displayMonth, displayDay,
-				displayYear, expirationMonth, expirationDay, expirationYear,
-				priority, alert);
+		if (entryId <= 0) {
+
+			// Add entry
+
+			AnnouncementsEntryServiceUtil.addEntry(
+				themeDisplay.getPlid(), classNameId, classPK, title, content,
+				url, type, displayMonth, displayDay, displayYear,
+				expirationMonth, expirationDay, expirationYear, priority,
+				alert);
 		}
 		else {
-			AnnouncementEntryServiceUtil.updateEntry(
+
+			// Update entry
+
+			AnnouncementsEntryServiceUtil.updateEntry(
 				entryId, title, content, url, type, displayMonth, displayDay,
 				displayYear, expirationMonth, expirationDay, expirationYear,
 				priority);

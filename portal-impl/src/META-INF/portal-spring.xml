@@ -2925,13 +2925,13 @@
 			<ref bean="com.liferay.portal.service.persistence.WebsitePersistence.impl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementEntryLocalService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementEntryLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementsEntryLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.announcements.service.AnnouncementEntryLocalService.impl" />
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.impl" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -2945,18 +2945,18 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementEntryLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementEntryLocalServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.announcements.service.AnnouncementEntryLocalService.transaction" />
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementEntryService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementEntryServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementsEntryServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.announcements.service.AnnouncementEntryService.impl" />
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryService.impl" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -2970,12 +2970,12 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementEntryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementEntryServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.announcements.service.AnnouncementEntryService.transaction" />
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsEntryService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistenceImpl" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -2983,12 +2983,12 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistence.impl" />
+			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -2999,24 +2999,24 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryUtil" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryPersistence.impl" />
+			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence.impl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinderImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinderUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinderUtil" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderUtil" lazy-init="true">
 		<property name="finder">
-			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementEntryFinder.impl" />
+			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.impl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementFlagLocalService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementFlagLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementFlagLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementsFlagLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.announcements.service.AnnouncementFlagLocalService.impl" />
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.impl" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -3030,37 +3030,12 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementFlagLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementFlagLocalServiceFactory" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory" lazy-init="true">
 		<property name="service">
-			<ref bean="com.liferay.portlet.announcements.service.AnnouncementFlagLocalService.transaction" />
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.transaction" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementFlagService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementFlagServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementFlagService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portlet.announcements.service.AnnouncementFlagService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.announcements.service.AnnouncementFlagServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementFlagServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portlet.announcements.service.AnnouncementFlagService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementFlagPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementFlagPersistenceImpl" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />
 		</property>
@@ -3068,12 +3043,12 @@
 			<ref bean="liferaySessionFactory" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementFlagPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
 			<ref bean="liferayTransactionManager" />
 		</property>
 		<property name="target">
-			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementFlagPersistence.impl" />
+			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" />
 		</property>
 		<property name="transactionAttributes">
 			<props>
@@ -3084,9 +3059,9 @@
 			</props>
 		</property>
 	</bean>
-	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementFlagUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementFlagUtil" lazy-init="true">
+	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUtil" lazy-init="true">
 		<property name="persistence">
-			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementFlagPersistence.impl" />
+			<ref bean="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.blogs.service.BlogsEntryLocalService.impl" class="com.liferay.portlet.blogs.service.impl.BlogsEntryLocalServiceImpl" lazy-init="true" />

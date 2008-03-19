@@ -1,0 +1,197 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.announcements.service.persistence;
+
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import com.liferay.portlet.announcements.NoSuchEntryException;
+import com.liferay.portlet.announcements.model.AnnouncementsEntry;
+
+/**
+ * <a href="AnnouncementsEntryPersistenceTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (AnnouncementsEntryPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+	}
+
+	public void testCreate() throws Exception {
+		long pk = nextLong();
+
+		AnnouncementsEntry announcementsEntry = _persistence.create(pk);
+
+		assertNotNull(announcementsEntry);
+
+		assertEquals(announcementsEntry.getPrimaryKey(), pk);
+	}
+
+	public void testRemove() throws Exception {
+		AnnouncementsEntry newAnnouncementsEntry = addAnnouncementsEntry();
+
+		_persistence.remove(newAnnouncementsEntry);
+
+		AnnouncementsEntry existingAnnouncementsEntry = _persistence.fetchByPrimaryKey(newAnnouncementsEntry.getPrimaryKey());
+
+		assertNull(existingAnnouncementsEntry);
+	}
+
+	public void testUpdateNew() throws Exception {
+		addAnnouncementsEntry();
+	}
+
+	public void testUpdateExisting() throws Exception {
+		long pk = nextLong();
+
+		AnnouncementsEntry newAnnouncementsEntry = _persistence.create(pk);
+
+		newAnnouncementsEntry.setUuid(randomString());
+		newAnnouncementsEntry.setCompanyId(nextLong());
+		newAnnouncementsEntry.setUserId(nextLong());
+		newAnnouncementsEntry.setUserName(randomString());
+		newAnnouncementsEntry.setCreateDate(nextDate());
+		newAnnouncementsEntry.setModifiedDate(nextDate());
+		newAnnouncementsEntry.setClassNameId(nextLong());
+		newAnnouncementsEntry.setClassPK(nextLong());
+		newAnnouncementsEntry.setTitle(randomString());
+		newAnnouncementsEntry.setContent(randomString());
+		newAnnouncementsEntry.setUrl(randomString());
+		newAnnouncementsEntry.setType(randomString());
+		newAnnouncementsEntry.setDisplayDate(nextDate());
+		newAnnouncementsEntry.setExpirationDate(nextDate());
+		newAnnouncementsEntry.setPriority(nextInt());
+		newAnnouncementsEntry.setAlert(randomBoolean());
+
+		_persistence.update(newAnnouncementsEntry);
+
+		AnnouncementsEntry existingAnnouncementsEntry = _persistence.findByPrimaryKey(newAnnouncementsEntry.getPrimaryKey());
+
+		assertEquals(existingAnnouncementsEntry.getUuid(),
+			newAnnouncementsEntry.getUuid());
+		assertEquals(existingAnnouncementsEntry.getEntryId(),
+			newAnnouncementsEntry.getEntryId());
+		assertEquals(existingAnnouncementsEntry.getCompanyId(),
+			newAnnouncementsEntry.getCompanyId());
+		assertEquals(existingAnnouncementsEntry.getUserId(),
+			newAnnouncementsEntry.getUserId());
+		assertEquals(existingAnnouncementsEntry.getUserName(),
+			newAnnouncementsEntry.getUserName());
+		assertEquals(existingAnnouncementsEntry.getCreateDate(),
+			newAnnouncementsEntry.getCreateDate());
+		assertEquals(existingAnnouncementsEntry.getModifiedDate(),
+			newAnnouncementsEntry.getModifiedDate());
+		assertEquals(existingAnnouncementsEntry.getClassNameId(),
+			newAnnouncementsEntry.getClassNameId());
+		assertEquals(existingAnnouncementsEntry.getClassPK(),
+			newAnnouncementsEntry.getClassPK());
+		assertEquals(existingAnnouncementsEntry.getTitle(),
+			newAnnouncementsEntry.getTitle());
+		assertEquals(existingAnnouncementsEntry.getContent(),
+			newAnnouncementsEntry.getContent());
+		assertEquals(existingAnnouncementsEntry.getUrl(),
+			newAnnouncementsEntry.getUrl());
+		assertEquals(existingAnnouncementsEntry.getType(),
+			newAnnouncementsEntry.getType());
+		assertEquals(existingAnnouncementsEntry.getDisplayDate(),
+			newAnnouncementsEntry.getDisplayDate());
+		assertEquals(existingAnnouncementsEntry.getExpirationDate(),
+			newAnnouncementsEntry.getExpirationDate());
+		assertEquals(existingAnnouncementsEntry.getPriority(),
+			newAnnouncementsEntry.getPriority());
+		assertEquals(existingAnnouncementsEntry.getAlert(),
+			newAnnouncementsEntry.getAlert());
+	}
+
+	public void testFindByPrimaryKeyExisting() throws Exception {
+		AnnouncementsEntry newAnnouncementsEntry = addAnnouncementsEntry();
+
+		AnnouncementsEntry existingAnnouncementsEntry = _persistence.findByPrimaryKey(newAnnouncementsEntry.getPrimaryKey());
+
+		assertEquals(existingAnnouncementsEntry, newAnnouncementsEntry);
+	}
+
+	public void testFindByPrimaryKeyMissing() throws Exception {
+		long pk = nextLong();
+
+		try {
+			_persistence.findByPrimaryKey(pk);
+
+			fail("Missing entity did not throw NoSuchEntryException");
+		}
+		catch (NoSuchEntryException nsee) {
+		}
+	}
+
+	public void testFetchByPrimaryKeyExisting() throws Exception {
+		AnnouncementsEntry newAnnouncementsEntry = addAnnouncementsEntry();
+
+		AnnouncementsEntry existingAnnouncementsEntry = _persistence.fetchByPrimaryKey(newAnnouncementsEntry.getPrimaryKey());
+
+		assertEquals(existingAnnouncementsEntry, newAnnouncementsEntry);
+	}
+
+	public void testFetchByPrimaryKeyMissing() throws Exception {
+		long pk = nextLong();
+
+		AnnouncementsEntry missingAnnouncementsEntry = _persistence.fetchByPrimaryKey(pk);
+
+		assertNull(missingAnnouncementsEntry);
+	}
+
+	protected AnnouncementsEntry addAnnouncementsEntry()
+		throws Exception {
+		long pk = nextLong();
+
+		AnnouncementsEntry announcementsEntry = _persistence.create(pk);
+
+		announcementsEntry.setUuid(randomString());
+		announcementsEntry.setCompanyId(nextLong());
+		announcementsEntry.setUserId(nextLong());
+		announcementsEntry.setUserName(randomString());
+		announcementsEntry.setCreateDate(nextDate());
+		announcementsEntry.setModifiedDate(nextDate());
+		announcementsEntry.setClassNameId(nextLong());
+		announcementsEntry.setClassPK(nextLong());
+		announcementsEntry.setTitle(randomString());
+		announcementsEntry.setContent(randomString());
+		announcementsEntry.setUrl(randomString());
+		announcementsEntry.setType(randomString());
+		announcementsEntry.setDisplayDate(nextDate());
+		announcementsEntry.setExpirationDate(nextDate());
+		announcementsEntry.setPriority(nextInt());
+		announcementsEntry.setAlert(randomBoolean());
+
+		_persistence.update(announcementsEntry);
+
+		return announcementsEntry;
+	}
+
+	private static final String _TX_IMPL = AnnouncementsEntryPersistence.class.getName() +
+		".transaction";
+	private AnnouncementsEntryPersistence _persistence;
+}

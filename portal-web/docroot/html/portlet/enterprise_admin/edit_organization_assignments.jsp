@@ -98,7 +98,7 @@ else {
 	/*if (portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) {
 		long[] organizationIds = user.getOrganizationIds();
 
-		userParams.put("usersOrgs", ArrayUtil.toObjectArray(organizationIds));
+		userParams.put("usersOrgs", ArrayUtil.toArray(organizationIds));
 	}*/
 }
 %>

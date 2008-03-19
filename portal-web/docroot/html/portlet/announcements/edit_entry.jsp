@@ -25,7 +25,7 @@
 <%@ include file="/html/portlet/announcements/init.jsp" %>
 
 <%
-AnnouncementEntry entry = (AnnouncementEntry)request.getAttribute(WebKeys.ANNOUNCEMENT_ENTRY);
+AnnouncementEntry entry = (AnnouncementEntry)request.getAttribute(WebKeys.ANNOUNCEMENTS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
@@ -95,7 +95,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="title"/>
+		<liferay-ui:message key="title" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= AnnouncementEntry.class %>" bean="<%= entry %>" field="title" />
@@ -103,7 +103,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="url"/>
+		<liferay-ui:message key="url" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= AnnouncementEntry.class %>" bean="<%= entry %>" field="url" />
@@ -111,12 +111,12 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 </tr>
 <tr>
 	<td colspan="2">
-		<br/>
+		<br />
 	</td>
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="content"/>
+		<liferay-ui:message key="content" />
 	</td>
 	<td>
 		<liferay-ui:input-field model="<%= AnnouncementEntry.class %>" bean="<%= entry %>" field="content" />
@@ -124,59 +124,59 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 </tr>
 <tr>
 	<td colspan="2">
-		<br/>
+		<br />
 	</td>
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="distribution-scope"/>
+		<liferay-ui:message key="distribution-scope" />
 	</td>
 	<td>
 		<c:choose>
 			<c:when test="<%= entry != null %>">
 				<c:choose>
 					<c:when test="<%= entry.getClassNameId() == 0 %>">
-						<liferay-ui:message key="general"/>
+						<liferay-ui:message key="general" />
 					</c:when>
 					<c:when test="<%= entry.getClassNameId() == userClassNameId %>">
 						<%
 						User user2 = UserLocalServiceUtil.getUserById(entry.getClassPK());
 						%>
-						<liferay-ui:message key="personal"/> &raquo; <%= user2.getFullName() %>
+						<liferay-ui:message key="personal" /> &raquo; <%= user2.getFullName() %>
 					</c:when>
 					<c:when test="<%= entry.getClassNameId() == roleClassNameId %>">
 						<%
 						Role role = RoleLocalServiceUtil.getRole(entry.getClassPK());
 						%>
-						<liferay-ui:message key="role"/> &raquo; <%= role.getName() %>
+						<liferay-ui:message key="role" /> &raquo; <%= role.getName() %>
 					</c:when>
 					<c:when test="<%= entry.getClassNameId() == userGroupClassNameId %>">
 						<%
 						UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(entry.getClassPK());
 						%>
-						<liferay-ui:message key="user-group"/> &raquo;	<%= userGroup.getName() %>
+						<liferay-ui:message key="user-group" /> &raquo;	<%= userGroup.getName() %>
 					</c:when>
 					<c:when test="<%= entry.getClassNameId() == communityClassNameId %>">
 						<%
 						Group group2 = GroupLocalServiceUtil.getGroup(entry.getClassPK());
 						%>
-						<liferay-ui:message key="community"/> &raquo; <%= group2.getName() %>
+						<liferay-ui:message key="community" /> &raquo; <%= group2.getName() %>
 					</c:when>
 					<c:when test="<%= entry.getClassNameId() == organizationClassNameId %>">
 						<%
 						Organization org = OrganizationLocalServiceUtil.getOrganization(entry.getClassPK());
 						%>
-						<liferay-ui:message key="organization"/> &raquo; <%= org.getName() %>
+						<liferay-ui:message key="organization" /> &raquo; <%= org.getName() %>
 					</c:when>
 				</c:choose>
 			</c:when>
 			<c:otherwise>
 				<select name="<portlet:namespace />distributionScope">
 					<c:if test="<%= permissionChecker.isOmniadmin() %>">
-						<option value="0,0" ><liferay-ui:message key="general"/></option>
+						<option value="0,0" ><liferay-ui:message key="general" /></option>
 					</c:if>
 
-					<optgroup label='<liferay-ui:message key="roles"/>'>
+					<optgroup label='<liferay-ui:message key="roles" />'>
 						<%
 						List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
 
@@ -190,7 +190,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 						%>
 					</optgroup>
 
-					<optgroup label='<liferay-ui:message key="user-groups"/>'>
+					<optgroup label='<liferay-ui:message key="user-groups" />'>
 						<%
 						List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
 
@@ -204,7 +204,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 						%>
 					</optgroup>
 
-					<optgroup label='<liferay-ui:message key="communities"/>'>
+					<optgroup label='<liferay-ui:message key="communities" />'>
 						<%
 						List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
 
@@ -218,7 +218,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 						%>
 					</optgroup>
 
-					<optgroup label='<liferay-ui:message key="organizations"/>'>
+					<optgroup label='<liferay-ui:message key="organizations" />'>
 						<%
 						List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
 
@@ -238,25 +238,25 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 </tr>
 <tr>
 	<td colspan="2">
-		<br/>
+		<br />
 	</td>
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="priority"/>
+		<liferay-ui:message key="priority" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />priority">
-			<option value="0" <%= (priority == 0 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="low"/></option>
-			<option value="1" <%= (priority == 1 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="medium"/></option>
-			<option value="2" <%= (priority == 2 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="high"/></option>
-			<option value="3" <%= (priority == 3 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="highest"/></option>
+			<option value="0" <%= (priority == 0 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="low" /></option>
+			<option value="1" <%= (priority == 1 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="medium" /></option>
+			<option value="2" <%= (priority == 2 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="high" /></option>
+			<option value="3" <%= (priority == 3 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="highest" /></option>
 		</select>
 	</td>
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="type"/>
+		<liferay-ui:message key="type" />
 	</td>
 	<td>
 		<select name="<portlet:namespace />type">
@@ -275,7 +275,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="display-date"/>
+		<liferay-ui:message key="display-date" />
 	</td>
 	<td>
 		<liferay-ui:input-date
@@ -293,7 +293,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="expiration-date"/>
+		<liferay-ui:message key="expiration-date" />
 	</td>
 	<td>
 		<liferay-ui:input-date
@@ -324,4 +324,3 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />content);
 	</script>
 </c:if>
-

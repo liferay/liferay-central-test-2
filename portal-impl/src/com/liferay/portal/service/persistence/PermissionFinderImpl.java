@@ -604,7 +604,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 			String.class.getName(), "[L" + Long.class.getName()
 		};
 		Object finderArgs[] = new Object[] {
-			actionId, StringUtil.merge(ArrayUtil.toObjectArray(resourceIds))
+			actionId, StringUtil.merge(ArrayUtil.toArray(resourceIds))
 		};
 
 		Object result = FinderCache.getResult(

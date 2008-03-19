@@ -25,11 +25,12 @@ package com.liferay.portlet.announcements.action;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.announcements.model.AnnouncementEntry;
-import com.liferay.portlet.announcements.service.AnnouncementEntryLocalServiceUtil;
+import com.liferay.portlet.announcements.model.AnnouncementsEntry;
+import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.RenderRequest;
+
 import javax.servlet.http.HttpServletRequest;
 
 /**
@@ -40,34 +41,28 @@ import javax.servlet.http.HttpServletRequest;
  */
 public class ActionUtil {
 
-	public static void getEntry(ActionRequest req)
-		throws Exception {
-
+	public static void getEntry(ActionRequest req) throws Exception {
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getEntry(httpReq);
 	}
 
-	public static void getEntry(RenderRequest req)
-		throws Exception {
-
+	public static void getEntry(RenderRequest req) throws Exception {
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		getEntry(httpReq);
 	}
 
-	public static void getEntry(HttpServletRequest req)
-		throws Exception {
-
+	public static void getEntry(HttpServletRequest req) throws Exception {
 		long entryId = ParamUtil.getLong(req, "entryId");
 
-		AnnouncementEntry entry = null;
+		AnnouncementsEntry entry = null;
 
 		if (entryId > 0) {
-			entry = AnnouncementEntryLocalServiceUtil.getEntry(entryId);
+			entry = AnnouncementsEntryLocalServiceUtil.getEntry(entryId);
 		}
 
-		req.setAttribute(WebKeys.ANNOUNCEMENT_ENTRY, entry);
+		req.setAttribute(WebKeys.ANNOUNCEMENTS_ENTRY, entry);
 	}
 
 }

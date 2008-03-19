@@ -330,7 +330,7 @@
 	</portlet>
 	<portlet>
 		<portlet-name>83</portlet-name>
-		<struts-path>announcements</struts-path>
+		<struts-path>alerts</struts-path>
 		<include>true</include>
 	</portlet>
 	<portlet>
@@ -476,6 +476,11 @@
 	<portlet>
 		<portlet-name>119</portlet-name>
 		<struts-path>tags</struts-path>
+		<include>true</include>
+	</portlet>
+	<portlet>
+		<portlet-name>120</portlet-name>
+		<struts-path>tasks</struts-path>
 		<include>true</include>
 	</portlet>
 	-->

@@ -260,7 +260,6 @@ public class JournalArticleLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		articleId = articleId.trim().toUpperCase();
-		Date now = new Date();
 
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear,
@@ -292,6 +291,8 @@ public class JournalArticleLocalServiceImpl
 		}
 		catch (IOException ioe) {
 		}
+
+		Date now = new Date();
 
 		validate(
 			groupId, articleId, autoArticleId, title, content, type,
@@ -1543,7 +1544,6 @@ public class JournalArticleLocalServiceImpl
 
 		User user = userPersistence.findByPrimaryKey(userId);
 		articleId = articleId.trim().toUpperCase();
-		Date now = new Date();
 
 		Date displayDate = PortalUtil.getDate(
 			displayDateMonth, displayDateDay, displayDateYear,
@@ -1575,6 +1575,8 @@ public class JournalArticleLocalServiceImpl
 		}
 		catch (IOException ioe) {
 		}
+
+		Date now = new Date();
 
 		validate(
 			groupId, title, content, type, structureId, templateId, smallImage,

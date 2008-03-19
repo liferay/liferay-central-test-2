@@ -3,7 +3,7 @@
 
 <service-builder package-path="com.liferay.portlet.announcements">
 	<namespace>Announcements</namespace>
-	<entity name="AnnouncementEntry" uuid="true" local-service="true" remote-service="true">
+	<entity name="AnnouncementsEntry" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 
@@ -39,6 +39,9 @@
 
 		<!-- Finder methods -->
 
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
 		<finder name="C_C" return-type="Collection">
 			<finder-column name="classNameId" />
 			<finder-column name="classPK" />
@@ -48,9 +51,6 @@
 			<finder-column name="classPK" />
 			<finder-column name="alert" />
 		</finder>
-		<finder name="UserId" return-type="Collection">
-			<finder-column name="userId" />
-		</finder>
 
 		<!-- References -->
 
@@ -58,7 +58,7 @@
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
-	<entity name="AnnouncementFlag" local-service="true" remote-service="true">
+	<entity name="AnnouncementsFlag" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 
@@ -67,18 +67,18 @@
 		<!-- Audit fields -->
 
 		<column name="userId" type="long" />
+		<column name="createDate" type="Date" />
 
 		<!-- Other fields -->
 
 		<column name="entryId" type="long" />
-		<column name="flag" type="int" />
-		<column name="flagDate" type="Date" />
+		<column name="value" type="int" />
 
 		<!-- Order -->
 
 		<order by="asc">
 			<order-column name="userId" />
-			<order-column name="flagDate" />
+			<order-column name="createDate" />
 		</order>
 
 		<!-- Finder methods -->
@@ -86,10 +86,10 @@
 		<finder name="EntryId" return-type="Collection">
 			<finder-column name="entryId" />
 		</finder>
-		<finder name="U_E_F" return-type="AnnouncementFlag">
+		<finder name="U_E_V" return-type="AnnouncementFlag">
 			<finder-column name="userId" />
 			<finder-column name="entryId" />
-			<finder-column name="flag" />
+			<finder-column name="value" />
 		</finder>
 
 		<!-- References -->
@@ -97,9 +97,9 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
 	<exceptions>
-		<exception>AnnouncementEntryContent</exception>
-		<exception>AnnouncementEntryDisplayDate</exception>
-		<exception>AnnouncementEntryExpirationDate</exception>
-		<exception>AnnouncementEntryTitle</exception>
+		<exception>EntryContent</exception>
+		<exception>EntryDisplayDate</exception>
+		<exception>EntryExpirationDate</exception>
+		<exception>EntryTitle</exception>
 	</exceptions>
 </service-builder>

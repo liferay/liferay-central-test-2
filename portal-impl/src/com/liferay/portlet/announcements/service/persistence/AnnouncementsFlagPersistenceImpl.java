@@ -1,0 +1,976 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.announcements.service.persistence;
+
+import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.dao.DynamicQuery;
+import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.OrderByComparator;
+import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ModelListener;
+import com.liferay.portal.service.persistence.BasePersistence;
+import com.liferay.portal.spring.hibernate.FinderCache;
+import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portal.util.PropsUtil;
+
+import com.liferay.portlet.announcements.NoSuchFlagException;
+import com.liferay.portlet.announcements.model.AnnouncementsFlag;
+import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl;
+import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl;
+
+import com.liferay.util.dao.hibernate.QueryUtil;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+
+import java.util.Collections;
+import java.util.Iterator;
+import java.util.List;
+
+/**
+ * <a href="AnnouncementsFlagPersistenceImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class AnnouncementsFlagPersistenceImpl extends BasePersistence
+	implements AnnouncementsFlagPersistence {
+	public AnnouncementsFlag create(long flagId) {
+		AnnouncementsFlag announcementsFlag = new AnnouncementsFlagImpl();
+
+		announcementsFlag.setNew(true);
+		announcementsFlag.setPrimaryKey(flagId);
+
+		return announcementsFlag;
+	}
+
+	public AnnouncementsFlag remove(long flagId)
+		throws NoSuchFlagException, SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			AnnouncementsFlag announcementsFlag = (AnnouncementsFlag)session.get(AnnouncementsFlagImpl.class,
+					new Long(flagId));
+
+			if (announcementsFlag == null) {
+				if (_log.isWarnEnabled()) {
+					_log.warn(
+						"No AnnouncementsFlag exists with the primary key " +
+						flagId);
+				}
+
+				throw new NoSuchFlagException(
+					"No AnnouncementsFlag exists with the primary key " +
+					flagId);
+			}
+
+			return remove(announcementsFlag);
+		}
+		catch (NoSuchFlagException nsee) {
+			throw nsee;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public AnnouncementsFlag remove(AnnouncementsFlag announcementsFlag)
+		throws SystemException {
+		ModelListener listener = _getListener();
+
+		if (listener != null) {
+			listener.onBeforeRemove(announcementsFlag);
+		}
+
+		announcementsFlag = removeImpl(announcementsFlag);
+
+		if (listener != null) {
+			listener.onAfterRemove(announcementsFlag);
+		}
+
+		return announcementsFlag;
+	}
+
+	protected AnnouncementsFlag removeImpl(AnnouncementsFlag announcementsFlag)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			session.delete(announcementsFlag);
+
+			session.flush();
+
+			return announcementsFlag;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+
+			FinderCache.clearCache(AnnouncementsFlag.class.getName());
+		}
+	}
+
+	public AnnouncementsFlag update(AnnouncementsFlag announcementsFlag)
+		throws SystemException {
+		return update(announcementsFlag, false);
+	}
+
+	public AnnouncementsFlag update(AnnouncementsFlag announcementsFlag,
+		boolean merge) throws SystemException {
+		ModelListener listener = _getListener();
+
+		boolean isNew = announcementsFlag.isNew();
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onBeforeCreate(announcementsFlag);
+			}
+			else {
+				listener.onBeforeUpdate(announcementsFlag);
+			}
+		}
+
+		announcementsFlag = updateImpl(announcementsFlag, merge);
+
+		if (listener != null) {
+			if (isNew) {
+				listener.onAfterCreate(announcementsFlag);
+			}
+			else {
+				listener.onAfterUpdate(announcementsFlag);
+			}
+		}
+
+		return announcementsFlag;
+	}
+
+	public AnnouncementsFlag updateImpl(
+		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag,
+		boolean merge) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			if (merge) {
+				session.merge(announcementsFlag);
+			}
+			else {
+				if (announcementsFlag.isNew()) {
+					session.save(announcementsFlag);
+				}
+			}
+
+			session.flush();
+
+			announcementsFlag.setNew(false);
+
+			return announcementsFlag;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+
+			FinderCache.clearCache(AnnouncementsFlag.class.getName());
+		}
+	}
+
+	public AnnouncementsFlag findByPrimaryKey(long flagId)
+		throws NoSuchFlagException, SystemException {
+		AnnouncementsFlag announcementsFlag = fetchByPrimaryKey(flagId);
+
+		if (announcementsFlag == null) {
+			if (_log.isWarnEnabled()) {
+				_log.warn("No AnnouncementsFlag exists with the primary key " +
+					flagId);
+			}
+
+			throw new NoSuchFlagException(
+				"No AnnouncementsFlag exists with the primary key " + flagId);
+		}
+
+		return announcementsFlag;
+	}
+
+	public AnnouncementsFlag fetchByPrimaryKey(long flagId)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			return (AnnouncementsFlag)session.get(AnnouncementsFlagImpl.class,
+				new Long(flagId));
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<AnnouncementsFlag> findByEntryId(long entryId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
+		String finderClassName = AnnouncementsFlag.class.getName();
+		String finderMethodName = "findByEntryId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(entryId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
+
+				query.append("entryId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("userId ASC, ");
+				query.append("createDate ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, entryId);
+
+				List<AnnouncementsFlag> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<AnnouncementsFlag>)result;
+		}
+	}
+
+	public List<AnnouncementsFlag> findByEntryId(long entryId, int begin,
+		int end) throws SystemException {
+		return findByEntryId(entryId, begin, end, null);
+	}
+
+	public List<AnnouncementsFlag> findByEntryId(long entryId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
+		String finderClassName = AnnouncementsFlag.class.getName();
+		String finderMethodName = "findByEntryId";
+		String[] finderParams = new String[] {
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(entryId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
+
+				query.append("entryId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("userId ASC, ");
+					query.append("createDate ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, entryId);
+
+				List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<AnnouncementsFlag>)result;
+		}
+	}
+
+	public AnnouncementsFlag findByEntryId_First(long entryId,
+		OrderByComparator obc) throws NoSuchFlagException, SystemException {
+		List<AnnouncementsFlag> list = findByEntryId(entryId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No AnnouncementsFlag exists with the key {");
+
+			msg.append("entryId=" + entryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFlagException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public AnnouncementsFlag findByEntryId_Last(long entryId,
+		OrderByComparator obc) throws NoSuchFlagException, SystemException {
+		int count = countByEntryId(entryId);
+
+		List<AnnouncementsFlag> list = findByEntryId(entryId, count - 1, count,
+				obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No AnnouncementsFlag exists with the key {");
+
+			msg.append("entryId=" + entryId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchFlagException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public AnnouncementsFlag[] findByEntryId_PrevAndNext(long flagId,
+		long entryId, OrderByComparator obc)
+		throws NoSuchFlagException, SystemException {
+		AnnouncementsFlag announcementsFlag = findByPrimaryKey(flagId);
+
+		int count = countByEntryId(entryId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
+
+			query.append("entryId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("userId ASC, ");
+				query.append("createDate ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, entryId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					announcementsFlag);
+
+			AnnouncementsFlag[] array = new AnnouncementsFlagImpl[3];
+
+			array[0] = (AnnouncementsFlag)objArray[0];
+			array[1] = (AnnouncementsFlag)objArray[1];
+			array[2] = (AnnouncementsFlag)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public AnnouncementsFlag findByU_E_V(long userId, long entryId, int value)
+		throws NoSuchFlagException, SystemException {
+		AnnouncementsFlag announcementsFlag = fetchByU_E_V(userId, entryId,
+				value);
+
+		if (announcementsFlag == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No AnnouncementsFlag exists with the key {");
+
+			msg.append("userId=" + userId);
+
+			msg.append(", ");
+			msg.append("entryId=" + entryId);
+
+			msg.append(", ");
+			msg.append("value=" + value);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchFlagException(msg.toString());
+		}
+
+		return announcementsFlag;
+	}
+
+	public AnnouncementsFlag fetchByU_E_V(long userId, long entryId, int value)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
+		String finderClassName = AnnouncementsFlag.class.getName();
+		String finderMethodName = "fetchByU_E_V";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(userId), new Long(entryId), new Integer(value)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("entryId = ?");
+
+				query.append(" AND ");
+
+				query.append("value = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("userId ASC, ");
+				query.append("createDate ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, userId);
+
+				q.setLong(queryPos++, entryId);
+
+				q.setInteger(queryPos++, value);
+
+				List<AnnouncementsFlag> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
+	public List<AnnouncementsFlag> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer) throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+
+			return query.list();
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<AnnouncementsFlag> findWithDynamicQuery(
+		DynamicQueryInitializer queryInitializer, int begin, int end)
+		throws SystemException {
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			DynamicQuery query = queryInitializer.initialize(session);
+
+			query.setLimit(begin, end);
+
+			return query.list();
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
+	public List<AnnouncementsFlag> findAll() throws SystemException {
+		return findAll(QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
+	}
+
+	public List<AnnouncementsFlag> findAll(int begin, int end)
+		throws SystemException {
+		return findAll(begin, end, null);
+	}
+
+	public List<AnnouncementsFlag> findAll(int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
+		String finderClassName = AnnouncementsFlag.class.getName();
+		String finderMethodName = "findAll";
+		String[] finderParams = new String[] {
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("userId ASC, ");
+					query.append("createDate ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				if (obc == null) {
+					Collections.sort(list);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<AnnouncementsFlag>)result;
+		}
+	}
+
+	public void removeByEntryId(long entryId) throws SystemException {
+		for (AnnouncementsFlag announcementsFlag : findByEntryId(entryId)) {
+			remove(announcementsFlag);
+		}
+	}
+
+	public void removeByU_E_V(long userId, long entryId, int value)
+		throws NoSuchFlagException, SystemException {
+		AnnouncementsFlag announcementsFlag = findByU_E_V(userId, entryId, value);
+
+		remove(announcementsFlag);
+	}
+
+	public void removeAll() throws SystemException {
+		for (AnnouncementsFlag announcementsFlag : findAll()) {
+			remove(announcementsFlag);
+		}
+	}
+
+	public int countByEntryId(long entryId) throws SystemException {
+		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
+		String finderClassName = AnnouncementsFlag.class.getName();
+		String finderMethodName = "countByEntryId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(entryId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
+
+				query.append("entryId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, entryId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByU_E_V(long userId, long entryId, int value)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
+		String finderClassName = AnnouncementsFlag.class.getName();
+		String finderMethodName = "countByU_E_V";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName(),
+				Integer.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(userId), new Long(entryId), new Integer(value)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.announcements.model.AnnouncementsFlag WHERE ");
+
+				query.append("userId = ?");
+
+				query.append(" AND ");
+
+				query.append("entryId = ?");
+
+				query.append(" AND ");
+
+				query.append("value = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, userId);
+
+				q.setLong(queryPos++, entryId);
+
+				q.setInteger(queryPos++, value);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countAll() throws SystemException {
+		boolean finderClassNameCacheEnabled = AnnouncementsFlagModelImpl.CACHE_ENABLED;
+		String finderClassName = AnnouncementsFlag.class.getName();
+		String finderMethodName = "countAll";
+		String[] finderParams = new String[] {  };
+		Object[] finderArgs = new Object[] {  };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				Query q = session.createQuery(
+						"SELECT COUNT(*) FROM com.liferay.portlet.announcements.model.AnnouncementsFlag");
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	protected void initDao() {
+	}
+
+	private static ModelListener _getListener() {
+		if (Validator.isNotNull(_LISTENER)) {
+			try {
+				return (ModelListener)Class.forName(_LISTENER).newInstance();
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
+		return null;
+	}
+
+	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
+				"value.object.listener.com.liferay.portlet.announcements.model.AnnouncementsFlag"));
+	private static Log _log = LogFactory.getLog(AnnouncementsFlagPersistenceImpl.class);
+}

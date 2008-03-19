@@ -901,9 +901,9 @@ public class PropsUtil {
 
 	public static final String ADMIN_EMAIL_PASSWORD_SENT_BODY = "admin.email.password.sent.body";
 
-	// Alerts/Announcement Portlets
+	// Announcements Portlet
 
-	public static final String ANNOUNCEMENT_ENTRY_TYPES = "announcement.entry.types";
+	public static final String ANNOUNCEMENTS_ENTRY_TYPES = "announcements.entry.types";
 
 	// Blogs Portlet
 

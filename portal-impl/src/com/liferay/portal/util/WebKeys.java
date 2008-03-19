@@ -37,7 +37,7 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ADDRESS_BOOK_RECIPIENTS = "ADDRESS_BOOK_RECIPIENTS";
 
-	public static final String ANNOUNCEMENT_ENTRY = "ANNOUNCEMENT_ENTRY";
+	public static final String ANNOUNCEMENTS_ENTRY = "ANNOUNCEMENTS_ENTRY";
 
 	public static final String ASSOCIATE_KEY = LiferayConfigureListener.ASSOCIATE_KEY;
 
