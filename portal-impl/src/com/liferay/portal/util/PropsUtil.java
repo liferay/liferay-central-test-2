@@ -661,8 +661,6 @@ public class PropsUtil {
 
 	// Images
 
-	public static final String IMAGE_PROCESSOR_READER = "image.processor.reader";
-
 	public static final String IMAGE_DEFAULT_SPACER = "image.default.spacer";
 
 	public static final String IMAGE_DEFAULT_COMPANY_LOGO = "image.default.company.logo";

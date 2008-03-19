@@ -25,7 +25,6 @@ package com.liferay.portal.image;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.util.JavaProps;
-import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
 
 import com.sun.media.jai.codec.ImageCodec;
@@ -62,12 +61,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ImageProcessorImpl implements ImageProcessor {
-
-	public ImageProcessorImpl() {
-		if (PropsValues.IMAGE_PROCESSOR_READER.equals("imageio")) {
-			_readWithImageIO = true;
-		}
-	}
 
 	public BufferedImage convertImageType(BufferedImage sourceImage, int type) {
 	    BufferedImage targetImage = new BufferedImage(
@@ -160,12 +153,8 @@ public class ImageProcessorImpl implements ImageProcessor {
 	}
 
 	public ImageBag read(byte[] bytes) throws IOException {
-		if (_readWithImageIO) {
-		}
-		else {
-		}
-
-		String type = null;
+		RenderedImage renderedImage = null;
+		String type = TYPE_NOT_AVAILABLE;
 
 		Enumeration enu = ImageCodec.getCodecs();
 
@@ -175,25 +164,19 @@ public class ImageProcessorImpl implements ImageProcessor {
 			if (codec.isFormatRecognized(bytes)) {
 				type = codec.getFormatName();
 
+				ImageDecoder decoder = ImageCodec.createImageDecoder(
+					type, new ByteArrayInputStream(bytes), null);
+
+				try {
+					renderedImage = decoder.decodeAsRenderedImage();
+				}
+				catch (IOException ioe) {
+					if (_log.isDebugEnabled()) {
+						_log.debug(type + ": " + ioe.getMessage());
+					}
+				}
+
 				break;
-			}
-		}
-
-		if (type == null) {
-			return new ImageBag(null, TYPE_NOT_AVAILABLE);
-		}
-
-		RenderedImage renderedImage = null;
-
-		ImageDecoder decoder = ImageCodec.createImageDecoder(
-			type, new ByteArrayInputStream(bytes), null);
-
-		try {
-			renderedImage = decoder.decodeAsRenderedImage();
-		}
-		catch (IOException ioe) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(type + ": " + ioe.getMessage());
 			}
 		}
 
@@ -263,7 +246,5 @@ public class ImageProcessorImpl implements ImageProcessor {
 	}
 
 	private static Log _log = LogFactory.getLog(ImageProcessorImpl.class);
-
-	private boolean _readWithImageIO;
 
 }
