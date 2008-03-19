@@ -374,10 +374,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			parameterMap, PortletDataHandlerKeys.USER_PERMISSIONS);
 		boolean exportPortletData = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_DATA);
-		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
-			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean exportPortletSetup = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_SETUP);
+		boolean exportPortletArchivedSetups = MapUtil.getBoolean(
+			parameterMap, PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS);
 		boolean exportPortletUserPreferences = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.PORTLET_USER_PREFERENCES);
 		boolean exportTheme = MapUtil.getBoolean(
@@ -1226,7 +1226,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		// Archived Setups
+		// Archived setups
 
 		importPortletPreferences(
 			context, layoutSet.getCompanyId(), groupId, 0, root,
@@ -2320,10 +2320,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					User user = userLocalService.getUserById(
 						portletItem.getUserId());
 
-					el.addAttribute(
-						"archive-user-uuid", user.getUuid());
-					el.addAttribute(
-						"archive-name", portletItem.getName());
+					el.addAttribute("archive-user-uuid", user.getUuid());
+					el.addAttribute("archive-name", portletItem.getName());
 				}
 			}
 		}
@@ -2378,10 +2376,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					User user = userLocalService.getUserById(
 						portletItem.getUserId());
 
-					el.addAttribute(
-						"archive-user-uuid", user.getUuid());
-					el.addAttribute(
-						"archive-name", portletItem.getName());
+					el.addAttribute("archive-user-uuid", user.getUuid());
+					el.addAttribute("archive-name", portletItem.getName());
 				}
 
 				el.addElement("preferences").addCDATA(

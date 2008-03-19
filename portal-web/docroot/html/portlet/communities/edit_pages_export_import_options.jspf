@@ -100,7 +100,7 @@
 			<li class="tree-item">
 				<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS %>" defaultValue="<%= true %>" />
 
-				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS%>Checkbox"><liferay-ui:message key="archived-setups" /></label>
+				<label for="<portlet:namespace /><%= PortletDataHandlerKeys.PORTLET_ARCHIVED_SETUPS %>Checkbox"><liferay-ui:message key="archived-setups" /></label>
 			</li>
 			<li class="tree-item">
 				<liferay-ui:input-checkbox param="<%= PortletDataHandlerKeys.PORTLET_USER_PREFERENCES %>" defaultValue="<%= false %>" />

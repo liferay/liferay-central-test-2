@@ -853,22 +853,20 @@ public class PortletItemLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
+		long groupId, java.lang.String className)
+		throws com.liferay.portal.SystemException {
+		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
+
+		return portletItemLocalService.getPortletItems(groupId, className);
+	}
+
+	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
 		long groupId, java.lang.String portletId, java.lang.String className)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
+		throws com.liferay.portal.SystemException {
 		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
 
 		return portletItemLocalService.getPortletItems(groupId, portletId,
 			className);
-	}
-
-	public static java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
-		long groupId, java.lang.String className)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getPortletItems(groupId, className);
 	}
 
 	public static com.liferay.portal.model.PortletItem updatePortletItem(

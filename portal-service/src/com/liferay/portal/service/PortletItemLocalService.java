@@ -369,14 +369,12 @@ public interface PortletItemLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
-		long groupId, java.lang.String portletId, java.lang.String className)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		long groupId, java.lang.String className)
+		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.PortletItem> getPortletItems(
-		long groupId, java.lang.String className)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
+		long groupId, java.lang.String portletId, java.lang.String className)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.PortletItem updatePortletItem(long userId,
 		long groupId, java.lang.String name, java.lang.String portletId,

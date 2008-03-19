@@ -92,23 +92,22 @@ public class PortletItemLocalServiceImpl
 			groupId, name, portletId, classNameId);
 	}
 
+	public List<PortletItem> getPortletItems(long groupId, String className)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return portletItemPersistence.findByG_C(groupId, classNameId);
+	}
+
 	public List<PortletItem> getPortletItems(
 			long groupId, String portletId, String className)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return portletItemPersistence.findByG_P_C(
 			groupId, portletId, classNameId);
-	}
-
-	public List<PortletItem> getPortletItems(
-			long groupId, String className)
-		throws PortalException, SystemException {
-
-		long classNameId = PortalUtil.getClassNameId(className);
-
-		return portletItemPersistence.findByG_C(groupId, classNameId);
 	}
 
 	public PortletItem updatePortletItem(
