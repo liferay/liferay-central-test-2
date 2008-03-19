@@ -128,6 +128,12 @@ if ((selLayout == null) && ((tabs2.equals("pages")))) {
 	tabs3 = "children";
 }
 
+if (tabs2.equals("look-and-feel") || tabs3.equals("look-and-feel")) {
+	if (!tabs4.equals("regular-browsers") && !tabs4.equals("mobile-devices")) {
+		tabs4 = "regular-browsers";
+	}
+}
+
 long parentLayoutId = BeanParamUtil.getLong(selLayout, request, "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 Organization organization = null;
@@ -197,7 +203,6 @@ viewPagesURL.setParameter("struts_action", "/my_places/view");
 viewPagesURL.setParameter("groupId", String.valueOf(groupId));
 viewPagesURL.setParameter("privateLayout", String.valueOf(privateLayout));
 
-request.setAttribute("edit_pages.jsp-tab2", tabs2);
 request.setAttribute("edit_pages.jsp-tab4", tabs4);
 
 request.setAttribute("edit_pages.jsp-liveGroup", liveGroup);
@@ -300,9 +305,8 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		submitForm(document.<portlet:namespace />fm);
 	}
 
-	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, wapTheme, sectionParam, sectionName) {
+	function <portlet:namespace />updateLookAndFeel(themeId, colorSchemeId, sectionParam, sectionName) {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "look_and_feel";
-		document.<portlet:namespace />fm.<portlet:namespace />wapTheme.value = wapTheme;
 
 		var themeRadio = document.<portlet:namespace />fm.<portlet:namespace />themeId;
 
@@ -381,7 +385,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 <input name="<portlet:namespace />privateLayout" type="hidden" value="<%= privateLayout %>" />
 <input name="<portlet:namespace />layoutId" type="hidden" value="<%= layoutId %>" />
 <input name="<portlet:namespace />selPlid" type="hidden" value="<%= selPlid %>" />
-<input name="<portlet:namespace />wapTheme" type="hidden" value="" />
+<input name="<portlet:namespace />wapTheme" type="hidden" value='<%= tabs4.equals("regular-browsers") ? "false" : "true" %>' />
 <input name="<portlet:namespace /><%= PortletDataHandlerKeys.SELECTED_LAYOUTS %>" type="hidden" value="" />
 
 <c:if test="<%= portletName.equals(PortletKeys.COMMUNITIES) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.MY_ACCOUNT) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
@@ -434,66 +438,65 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 	</c:if>
 </c:if>
 
-<c:if test="<%= (group != null) %>">
-	<c:choose>
-		<c:when test='<%= tabs1.equals("settings") %>'>
-			<liferay-util:include page="/html/portlet/communities/edit_pages_settings.jsp" />
- 		</c:when>
-		<c:otherwise>
-			<%
-			String tabs2Names = "pages";
+<c:choose>
+	<c:when test='<%= tabs1.equals("settings") %>'>
+		<liferay-util:include page="/html/portlet/communities/edit_pages_settings.jsp" />
+	</c:when>
+	<c:otherwise>
 
-			if (permissionChecker.isOmniadmin() || PropsValues.LOOK_AND_FEEL_MODIFIABLE) {
-				tabs2Names += ",look-and-feel";
-			}
+		<%
+		String tabs2Names = "pages";
 
-			if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
-				tabs2Names += ",export-import";
-			}
+		if (permissionChecker.isOmniadmin() || PropsValues.LOOK_AND_FEEL_MODIFIABLE) {
+			tabs2Names += ",look-and-feel";
+		}
 
-			if (workflowEnabled) {
-				tabs2Names += ",proposals";
-			}
+		if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_LAYOUTS)) {
+			tabs2Names += ",export-import";
+		}
 
-			if (!StringUtil.contains(tabs2Names, tabs2)) {
-			    tabs2 = "pages";
-			}
-			%>
+		if (workflowEnabled) {
+			tabs2Names += ",proposals";
+		}
 
-			<c:choose>
-				<c:when test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && liveGroup.isUser() %>">
-					<liferay-ui:tabs
-						names="<%= tabs2Names %>"
-						param="tabs2"
-						url="<%= portletURL.toString() %>"
-						backURL="<%= redirect %>"
-					/>
-				</c:when>
-				<c:otherwise>
-					<liferay-ui:tabs
-						names="<%= tabs2Names %>"
-						param="tabs2"
-						url="<%= portletURL.toString() %>"
-					/>
-				</c:otherwise>
-			</c:choose>
+		if (!StringUtil.contains(tabs2Names, tabs2)) {
+			tabs2 = "pages";
+		}
+		%>
 
-			<c:choose>
-				<c:when test='<%= tabs2.equals("pages") %>'>
-					<%@ include file="/html/portlet/communities/edit_pages_public_and_private.jsp" %>
-				</c:when>
-				<c:when test='<%= tabs2.equals("look-and-feel") %>'>
-					<liferay-util:include page="/html/portlet/communities/edit_pages_look_and_feel.jsp" />
-				</c:when>
-				<c:when test='<%= tabs2.equals("export-import") %>'>
-					<liferay-util:include page="/html/portlet/communities/edit_pages_export_import.jsp" />
-				</c:when>
-				<c:when test='<%= tabs2.equals("proposals") %>'>
-					<liferay-util:include page="/html/portlet/communities/edit_pages_proposals.jsp" />
-				</c:when>
-			</c:choose>
-		</c:otherwise>
-	</c:choose>
-</c:if>
+		<c:choose>
+			<c:when test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && liveGroup.isUser() %>">
+				<liferay-ui:tabs
+					names="<%= tabs2Names %>"
+					param="tabs2"
+					url="<%= portletURL.toString() %>"
+					backURL="<%= redirect %>"
+				/>
+			</c:when>
+			<c:otherwise>
+				<liferay-ui:tabs
+					names="<%= tabs2Names %>"
+					param="tabs2"
+					url="<%= portletURL.toString() %>"
+				/>
+			</c:otherwise>
+		</c:choose>
+
+		<c:choose>
+			<c:when test='<%= tabs2.equals("pages") %>'>
+				<%@ include file="/html/portlet/communities/edit_pages_public_and_private.jsp" %>
+			</c:when>
+			<c:when test='<%= tabs2.equals("look-and-feel") %>'>
+				<liferay-util:include page="/html/portlet/communities/edit_pages_look_and_feel.jsp" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("export-import") %>'>
+				<liferay-util:include page="/html/portlet/communities/edit_pages_export_import.jsp" />
+			</c:when>
+			<c:when test='<%= tabs2.equals("proposals") %>'>
+				<liferay-util:include page="/html/portlet/communities/edit_pages_proposals.jsp" />
+			</c:when>
+		</c:choose>
+	</c:otherwise>
+</c:choose>
 
 </form>

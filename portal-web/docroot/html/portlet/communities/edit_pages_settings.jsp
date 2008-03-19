@@ -26,21 +26,20 @@
 
 <%
 String tabs1 = ParamUtil.getString(request, "tabs1", "settings");
-String tabs2 = ParamUtil.getString(request, "tabs2", StringPool.BLANK);
-String tabs3 = ParamUtil.getString(request, "tabs3", StringPool.BLANK);
+String tabs2 = ParamUtil.getString(request, "tabs2");
+String tabs3 = ParamUtil.getString(request, "tabs3");
 
-long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
 Group liveGroup = (Group)request.getAttribute("edit_pages.jsp-liveGroup");
-long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
 Group stagingGroup = (Group)request.getAttribute("edit_pages.jsp-stagingGroup");
 Group group = (Group)request.getAttribute("edit_pages.jsp-group");
+long groupId = ((Long)request.getAttribute("edit_pages.jsp-groupId")).longValue();
+long liveGroupId = ((Long)request.getAttribute("edit_pages.jsp-liveGroupId")).longValue();
 long selPlid = ((Long)request.getAttribute("edit_pages.jsp-selPlid")).longValue();
 boolean privateLayout = ((Boolean)request.getAttribute("edit_pages.jsp-privateLayout")).booleanValue();
 Properties groupTypeSettings = (Properties)request.getAttribute("edit_pages.jsp-groupTypeSettings");
 Layout selLayout = (Layout)request.getAttribute("edit_pages.jsp-selLayout");
-boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflowEnabled")).booleanValue();
 
-Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupImpl.GUEST);
+boolean workflowEnabled = ((Boolean)request.getAttribute("edit_pages.jsp-workflowEnabled")).booleanValue();
 
 PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portletURL");
 
@@ -51,7 +50,7 @@ if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANA
 }
 
 if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)) {
-	if (tabs2Names.length() > 0) {
+	if (Validator.isNotNull(tabs2Names)) {
 		tabs2Names += StringPool.COMMA;
 	}
 
@@ -60,6 +59,8 @@ if (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDA
 	if (company.isCommunityLogo()) {
 		tabs2Names += ",logo";
 	}
+
+	Group guestGroup = GroupLocalServiceUtil.getGroup(company.getCompanyId(), GroupImpl.GUEST);
 
 	if (liveGroup.getGroupId() != guestGroup.getGroupId()) {
 		tabs2Names += ",merge-pages";
@@ -128,59 +129,7 @@ if (!StringUtil.contains(tabs2Names, tabs2)) {
 
 <c:choose>
 	<c:when test='<%= tabs2.equals("staging") %>'>
-		<c:if test="<%= GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING) %>">
-			<%
-			String tabs3Names = "general";
-
-			if (workflowEnabled) {
-				tabs3Names += ",workflow";
-			}
-
-			if (!StringUtil.contains(tabs3Names, tabs3)) {
-				tabs3 = "general"   ;
-			}
-			%>
-
-			<liferay-ui:tabs
-				names="<%= tabs3Names %>"
-				param="tabs3"
-				url="<%= portletURL.toString() %>"
-			/>
-
-			<c:choose>
-				<c:when test='<%= tabs3.equals("workflow") %>'>
-					<liferay-util:include page="/html/portlet/communities/edit_pages_workflow.jsp" />
-				</c:when>
-				<c:otherwise>
-					<table class="lfr-table">
-					<tr>
-						<td>
-							<liferay-ui:message key="activate-staging" />
-						</td>
-						<td>
-							<input <%= (stagingGroup != null) ? "checked" : "" %> name="<portlet:namespace />stagingEnabled" type="checkbox" onClick="<portlet:namespace />updateStaging();">
-						</td>
-					</tr>
-
-					<c:if test="<%= stagingGroup != null %>">
-						<tr>
-							<td>
-								<liferay-ui:message key="activate-workflow" />
-							</td>
-							<td>
-								<input <%= workflowEnabled ? "checked" : "" %> name="<portlet:namespace />workflowEnabled" type="checkbox" onClick="<portlet:namespace />updateWorkflow();">
-							</td>
-						</tr>
-					</c:if>
-
-					</table>
-
-					<c:if test="<%= stagingGroup != null %>">
-						<br />
-					</c:if>
-				</c:otherwise>
-			</c:choose>
-		</c:if>
+		<liferay-util:include page="/html/portlet/communities/edit_pages_staging.jsp" />
 	</c:when>
 	<c:when test='<%= tabs2.equals("virtual-host") %>'>
 		<liferay-ui:message key="enter-the-public-and-private-virtual-host-that-will-map-to-the-public-and-private-friendly-url" />

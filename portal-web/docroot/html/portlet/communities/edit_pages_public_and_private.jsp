@@ -23,7 +23,7 @@
 %>
 
 <c:choose>
-	<c:when test='<%= stagingGroup != null %>'>
+	<c:when test="<%= stagingGroup != null %>">
 		<div class="portlet-msg-alert">
 			<liferay-ui:message key="the-staging-environment-is-activated-changes-have-to-be-published-to-make-them-available-to-end-users" />
 		</div>
