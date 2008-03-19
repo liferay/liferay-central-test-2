@@ -66,14 +66,10 @@ portletURL.setParameter("p_u_i_d", String.valueOf(user2.getUserId()));
 <br /><br />
 
 <liferay-ui:tabs
-	names="assign-regular-roles"
-	backURL="<%= redirect %>"
-/>
-
-<liferay-ui:tabs
 	names="current,available"
 	param="tabs2"
 	url="<%= portletURL.toString() %>"
+	backURL="<%= redirect %>"
 />
 
 <%
