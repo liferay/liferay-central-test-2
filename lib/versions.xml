@@ -1722,6 +1722,18 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/mirage.jar</file-name>
+		<version>0.1-SNAPSHOT-trunk-r227</version>
+		<project-name>Mirage - A JSR-170 based CMS</project-name>
+		<project-url>https://mirage.dev.java.net/</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL</license-name>
+			</license>
+			<copyright-notice>Copyright 2006 Sun Microsystems Inc. All Rights Reserved</copyright-notice>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/msnm.jar</file-name>
 		<version>1.2.2</version>
 		<project-name>JMSN - Open source MSN messenger clone</project-name>
