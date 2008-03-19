@@ -19497,7 +19497,9 @@ Liferay.LayoutExporter = {
 				success: function(response) {
 					jQuery(exportLayoutsPopup).html(response);
 
-					Liferay.Util.evalScripts(exportLayoutsPopup);
+					if (Liferay.Browser.is_ie) {
+						Liferay.Util.evalScripts(exportLayoutsPopup);
+					}
 				}
 			}
 		);
