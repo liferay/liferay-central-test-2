@@ -465,6 +465,8 @@ public class PortalUtil {
 	}
 
 	public static String getHost(HttpServletRequest req) {
+		req = getOriginalServletRequest(req);
+
 		String host = req.getHeader("Host");
 
 		if (host != null) {
