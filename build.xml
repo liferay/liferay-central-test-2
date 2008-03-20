@@ -1516,7 +1516,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<delete file="dist/liferay-portal-pramati-${lp.version.file.name}.jar" failonerror="false" />
 
-		<copy file="installer/pramati/installer-config.xml.template" tofile="installer/pramati/installer-config.xml" overwrite="yes">
+		<copy file="tools/installer/pramati/installer-config.xml.template" tofile="tools/installer/pramati/installer-config.xml" overwrite="yes">
 			<filterset>
 				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
 			</filterset>
@@ -1531,7 +1531,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			</path>
 		</pathconvert>
 
-		<copy file="installer/pramati/installer-build.properties.template" tofile="installer/pramati/installer-build.properties" overwrite="yes">
+		<copy file="tools/installer/pramati/installer-build.properties.template" tofile="tools/installer/pramati/installer-build.properties" overwrite="yes">
 			<filterset>
 				<filter token="app.server.pramati.dir" value="${app.server.pramati.dir}" />
 				<filter token="java.home" value="${java.home.path.unix}" />
@@ -1542,15 +1542,15 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<installer
 			antInstallLib="${ant.installer.dir}/lib"
 			antLib="${env.ANT_HOME}/lib"
-			buildFile="installer/pramati/installer-build.xml"
+			buildFile="tools/installer/pramati/installer-build.xml"
 			compress="true"
 			extractType="SelfExtractor"
 			failOnError="true"
 			file="dist/liferay-portal-pramati-${lp.version.file.name}.jar"
-			installConfig="installer/pramati/installer-config.xml"
+			installConfig="tools/installer/pramati/installer-config.xml"
 			validateConfig="true"
 		>
-			<fileset dir="installer/pramati" includes="installer-build.properties" />
+			<fileset dir="tools/installer/pramati" includes="installer-build.properties" />
 			<fileset dir="dist" includes="liferay-portal-pramati-${lp.version.file.name}.zip" />
 		</installer>
 
@@ -1559,7 +1559,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			update="yes"
 		>
 			<fileset
-				dir="installer/pramati"
+				dir="tools/installer/pramati"
 				includes="resources/extract-image.png"
 			/>
 		</jar>
