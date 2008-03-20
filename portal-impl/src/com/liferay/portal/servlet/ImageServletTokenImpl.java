@@ -22,7 +22,6 @@
 
 package com.liferay.portal.servlet;
 
-import com.liferay.portal.cms.servlet.CMSServletUtil;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.servlet.ImageServletToken;
@@ -59,10 +58,6 @@ public class ImageServletTokenImpl implements ImageServletToken {
 		String key = _encodeKey(imageId);
 
 		_cache.remove(key);
-
-		// CMS
-
-		CMSServletUtil.clearCache();
 
 		// Journal content
 

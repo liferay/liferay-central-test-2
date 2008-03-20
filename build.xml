@@ -38,10 +38,6 @@
 		<ant dir="util-java" target="clean" inheritAll="false" />
 		<ant dir="util-taglib" target="clean" inheritAll="false" />
 
-		<ant dir="counter-impl" target="clean" inheritAll="false" />
-		<ant dir="documentlibrary-impl" target="clean" inheritAll="false" />
-		<ant dir="lock-impl" target="clean" inheritAll="false" />
-		<ant dir="mail-impl" target="clean" inheritAll="false" />
 		<ant dir="portal-impl" target="clean" inheritAll="false" />
 
 		<ant dir="portal-web" target="clean" inheritAll="false" />
@@ -229,12 +225,6 @@
 		<ant dir="util-java" target="compile" inheritAll="false" />
 		<ant dir="util-bridges" target="compile" inheritAll="false" />
 
-		<ant dir="portal-impl" target="compile-common" inheritAll="false" />
-
-		<ant dir="counter-impl" target="compile" inheritAll="false" />
-		<ant dir="documentlibrary-impl" target="compile" inheritAll="false" />
-		<ant dir="lock-impl" target="compile" inheritAll="false" />
-		<ant dir="mail-impl" target="compile" inheritAll="false" />
 		<ant dir="portal-impl" target="compile" inheritAll="false" />
 	</target>
 
@@ -250,10 +240,6 @@
 		<ant dir="util-java" target="jar" inheritAll="false" />
 		<ant dir="util-taglib" target="jar" inheritAll="false" />
 
-		<ant dir="counter-impl" target="jar" inheritAll="false" />
-		<ant dir="documentlibrary-impl" target="jar" inheritAll="false" />
-		<ant dir="lock-impl" target="jar" inheritAll="false" />
-		<ant dir="mail-impl" target="jar" inheritAll="false" />
 		<ant dir="portal-impl" target="jar" inheritAll="false" />
 
 		<ant dir="portal-web" target="war" inheritAll="false" />
@@ -272,10 +258,6 @@
 		<ant dir="util-java" target="java2html" inheritAll="false" />
 		<ant dir="util-taglib" target="java2html" inheritAll="false" />
 
-		<ant dir="counter-impl" target="java2html" inheritAll="false" />
-		<ant dir="documentlibrary-impl" target="java2html" inheritAll="false" />
-		<ant dir="lock-impl" target="java2html" inheritAll="false" />
-		<ant dir="mail-impl" target="java2html" inheritAll="false" />
 		<ant dir="portal-impl" target="java2html" inheritAll="false" />
 
 		<ant dir="portal-client" target="java2html" inheritAll="false" />
@@ -289,10 +271,6 @@
 		<ant dir="util-java" target="javadoc" inheritAll="false" />
 		<ant dir="util-taglib" target="javadoc" inheritAll="false" />
 
-		<ant dir="counter-impl" target="javadoc" inheritAll="false" />
-		<ant dir="documentlibrary-impl" target="javadoc" inheritAll="false" />
-		<ant dir="lock-impl" target="javadoc" inheritAll="false" />
-		<ant dir="mail-impl" target="javadoc" inheritAll="false" />
 		<ant dir="portal-impl" target="javadoc" inheritAll="false" />
 	</target>
 
@@ -315,10 +293,6 @@
 		<ant dir="util-java" target="deploy" inheritAll="false" />
 		<ant dir="util-taglib" target="deploy" inheritAll="false" />
 
-		<ant dir="counter-impl" target="deploy" inheritAll="false" />
-		<ant dir="documentlibrary-impl" target="deploy" inheritAll="false" />
-		<ant dir="lock-impl" target="deploy" inheritAll="false" />
-		<ant dir="mail-impl" target="deploy" inheritAll="false" />
 		<ant dir="portal-impl" target="deploy" inheritAll="false" />
 
 		<ant dir="portal-web" target="deploy" inheritAll="false" />
@@ -1183,10 +1157,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		</copy>
 
 		<copy todir="${lp.ext.dir}/modules" preservelastmodified="true">
-			<fileset dir="counter-impl" includes="counter-impl.jar" />
-			<fileset dir="documentlibrary-impl" includes="documentlibrary-impl.jar" />
-			<fileset dir="lock-impl" includes="lock-impl.jar" />
-			<fileset dir="mail-impl" includes="mail-impl.jar" />
 			<fileset dir="portal-impl" includes="portal-impl.jar" />
 			<fileset dir="portal-web" includes="portal-web.war" />
 			<fileset dir="tunnel-web" includes="tunnel-web.war" />

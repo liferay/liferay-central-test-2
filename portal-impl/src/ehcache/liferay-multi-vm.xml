@@ -27,13 +27,6 @@
 		overflowToDisk="true"
 	/>
 	<cache
-		name="com.liferay.portal.cms.servlet.CMSServletUtil"
-		maxElementsInMemory="10000"
-		eternal="false"
-        timeToIdleSeconds="600"
-		overflowToDisk="true"
-	/>
-	<cache
 		name="com.liferay.portal.spring.hibernate.FinderCache"
 		maxElementsInMemory="10000"
 		eternal="false"

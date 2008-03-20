@@ -18,10 +18,6 @@
 			<fileset dir="${project.dir}/ext-impl/classes" />
 		</copy>
 
-		<unjar src="${project.dir}/modules/counter-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/modules/documentlibrary-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/modules/lock-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/modules/mail-impl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/modules/portal-impl.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/lib/global/portal-kernel.jar" dest="${classpath.jsp}" />

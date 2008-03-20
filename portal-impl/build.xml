@@ -26,15 +26,12 @@
 					<param name="dependencies.classes.dir" value="${app.server.classes.portal.dir}" />
 				</antcall>
 
-				<antcall target="compile-common" />
 				<antcall target="compile-fast" />
 			</then>
 			<else>
 				<antcall target="compile-dependencies">
 					<param name="dependencies.classes.dir" value="classes" />
 				</antcall>
-
-				<antcall target="compile-common" />
 
 				<trycatch property="exception.message">
 					<try>
@@ -75,34 +72,6 @@ ${exception.message}
 		</if>
 
 		<antcall target="print-current-time" />
-	</target>
-
-	<target name="compile-common">
-		<if>
-			<and>
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<antelope:endswith string="${app.server.portal.dir}" with="/portal-web/docroot" />
-			</and>
-			<then>
-				<property name="classes.dir" value="${app.server.classes.portal.dir}" />
-			</then>
-			<else>
-				<property name="classes.dir" value="classes" />
-			</else>
-		</if>
-
-		<mkdir dir="${classes.dir}" />
-
-		<javac
-			classpathref="project.classpath"
-			compiler="${javac.compiler}"
-			debug="${javac.debug}"
-			deprecation="${javac.deprecation}"
-			destdir="${classes.dir}"
-			includes="**/portal/jcr/*.java,**/portal/lucene/*.java,**/portal/service/persistence/BasePersistence.java,**/portal/spring/util/SpringUtil.java,**/portal/util/PropsUtil.java,**/portal/util/PropsValues.java"
-			nowarn="${javac.nowarn}"
-			srcdir="src"
-		/>
 	</target>
 
 	<target name="compile-dependencies">

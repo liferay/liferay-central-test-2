@@ -51,10 +51,6 @@
 	<target name="compile-common-lib">
 		<delete dir="${classpath.jsp}" />
 
-		<unjar src="${project.dir}/counter-impl/counter-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/documentlibrary-impl/documentlibrary-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/lock-impl/lock-impl.jar" dest="${classpath.jsp}" />
-		<unjar src="${project.dir}/mail-impl/mail-impl.jar" dest="${classpath.jsp}" />
 		<unjar src="${project.dir}/portal-impl/portal-impl.jar" dest="${classpath.jsp}" />
 
 		<unjar src="${project.dir}/portal-kernel/portal-kernel.jar" dest="${classpath.jsp}" />

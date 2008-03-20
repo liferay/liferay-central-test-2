@@ -163,7 +163,7 @@ ECJ was automatically installed. Please rerun your task.
 		<echo message="${current.time}" />
 	</target>
 
-	<target name="compile-test" depends="compile">
+	<target name="compile-test">
 		<copy todir="test-classes">
 			<fileset dir="test" includes="**/*.png,**/*.properties,**/*.xml" />
 		</copy>

@@ -23,7 +23,6 @@
 package com.liferay.portlet.journal.model;
 
 import com.liferay.portal.ModelListenerException;
-import com.liferay.portal.cms.servlet.CMSServletUtil;
 import com.liferay.portal.model.BaseModel;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
@@ -59,10 +58,6 @@ public class JournalArticleListener implements ModelListener {
 	}
 
 	protected void clearCache(BaseModel model) {
-
-		// CMS
-
-		CMSServletUtil.clearCache();
 
 		// Journal content
 

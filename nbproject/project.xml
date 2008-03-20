@@ -16,30 +16,6 @@
                     <encoding>UTF-8</encoding>
                 </source-folder>
                 <source-folder>
-                    <label>counter-impl\src</label>
-                    <type>java</type>
-                    <location>counter-impl/src</location>
-                    <encoding>UTF-8</encoding>
-                </source-folder>
-                <source-folder>
-                    <label>documentlibrary-impl\src</label>
-                    <type>java</type>
-                    <location>documentlibrary-impl/src</location>
-                    <encoding>UTF-8</encoding>
-                </source-folder>
-                <source-folder>
-                    <label>lock-impl\src</label>
-                    <type>java</type>
-                    <location>lock-impl/src</location>
-                    <encoding>UTF-8</encoding>
-                </source-folder>
-                <source-folder>
-                    <label>mail-impl\src</label>
-                    <type>java</type>
-                    <location>mail-impl/src</location>
-                    <encoding>UTF-8</encoding>
-                </source-folder>
-                <source-folder>
                     <label>portal-impl\src</label>
                     <type>java</type>
                     <location>portal-impl/src</location>
@@ -121,22 +97,6 @@
             <view>
                 <items>
                     <source-folder style="packages">
-                        <label>counter-impl\src</label>
-                        <location>counter-impl/src</location>
-                    </source-folder>
-                    <source-folder style="packages">
-                        <label>documentlibrary-impl\src</label>
-                        <location>documentlibrary-impl/src</location>
-                    </source-folder>
-                    <source-folder style="packages">
-                        <label>lock-impl\src</label>
-                        <location>lock-impl/src</location>
-                    </source-folder>
-                    <source-folder style="packages">
-                        <label>mail-impl\src</label>
-                        <location>mail-impl/src</location>
-                    </source-folder>
-                    <source-folder style="packages">
                         <label>portal-impl\src</label>
                         <location>portal-impl/src</location>
                     </source-folder>
@@ -192,10 +152,6 @@
         </general-data>
         <java-data xmlns="http://www.netbeans.org/ns/freeform-project-java/2">
             <compilation-unit>
-                <package-root>counter-impl/src</package-root>
-                <package-root>documentlibrary-impl/src</package-root>
-                <package-root>lock-impl/src</package-root>
-                <package-root>mail-impl/src</package-root>
                 <package-root>portal-impl/src</package-root>
                 <package-root>portal-impl/test</package-root>
                 <package-root>portal-kernel/src</package-root>
