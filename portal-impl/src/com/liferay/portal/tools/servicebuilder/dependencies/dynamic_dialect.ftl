@@ -4,6 +4,7 @@
 package ${springHibernatePackage};
 
 import com.liferay.util.dao.DataAccess;
+import com.liferay.util.dao.hibernate.DB2Dialect;
 
 import java.sql.CallableStatement;
 import java.sql.Connection;
@@ -73,6 +74,9 @@ public class DynamicDialect extends Dialect {
 
 			if (dbName.equals("ASE") && (dbMajorVersion == 15)) {
 				_dialect = new SybaseDialect();
+			}
+			else if (dbName.startsWith("DB2") && (dbMajorVersion == 9)){
+				_dialect = new DB2Dialect();
 			}
 			else {
 				_dialect = DialectFactory.determineDialect(
