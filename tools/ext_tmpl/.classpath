@@ -202,10 +202,6 @@
 	<classpathentry kind="lib" path="lib/portal/xmlsec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xpp3.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xstream.jar"/>
-	<classpathentry kind="lib" path="modules/counter-impl.jar"/>
-	<classpathentry kind="lib" path="modules/documentlibrary-impl.jar"/>
-	<classpathentry kind="lib" path="modules/lock-impl.jar"/>
-	<classpathentry kind="lib" path="modules/mail-impl.jar"/>
 	<classpathentry kind="lib" path="modules/portal-impl.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="output" path="output"/>
