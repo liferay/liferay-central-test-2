@@ -177,7 +177,6 @@ ECJ was automatically installed. Please rerun your task.
 			nowarn="${javac.nowarn}"
 			srcdir="test"
 		/>
-
 	</target>
 
 	<target name="test" depends="compile-test">
@@ -241,5 +240,4 @@ ECJ was automatically installed. Please rerun your task.
 			</batchtest>
 		</junit>
 	</target>
-
 </project>
