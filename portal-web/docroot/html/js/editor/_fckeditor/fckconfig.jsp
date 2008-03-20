@@ -23,9 +23,9 @@
 %>
 
 <%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
+<%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
-<%@ page import="com.liferay.util.HttpUtil" %>
 
 <%
 long plid = ParamUtil.getLong(request, "p_l_id");
