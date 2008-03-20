@@ -1078,8 +1078,7 @@ public class PortalUtil {
 			// LEP-4033
 
 			try {
-				Method method = MethodCache.get(
-					res.getClass().getName(), "getResponse");
+				Method method = res.getClass().getMethod("getResponse");
 
 				Object obj = method.invoke(res, (Object[])null);
 
