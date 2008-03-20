@@ -1722,15 +1722,14 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/mirage.jar</file-name>
-		<version>0.1-SNAPSHOT-trunk-r227</version>
-		<project-name>Mirage - A JSR-170 based CMS</project-name>
-		<project-url>https://mirage.dev.java.net/</project-url>
+		<file-name>portal/mirage-api.jar</file-name>
+		<version>0.1 Snapshot (trunk r227)</version>
+		<project-name>Mirage</project-name>
+		<project-url>https://mirage.dev.java.net</project-url>
 		<licenses>
 			<license>
-				<license-name>CDDL</license-name>
+				<license-name>CDDL 1.0</license-name>
 			</license>
-			<copyright-notice>Copyright 2006 Sun Microsystems Inc. All Rights Reserved</copyright-notice>
 		</licenses>
 	</library>
 	<library>

@@ -34,6 +34,7 @@ import com.sun.portal.cms.mirage.service.custom.CategoryService;
  * <a href="CategoryServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class CategoryServiceImpl implements CategoryService {
 

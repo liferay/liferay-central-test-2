@@ -34,12 +34,14 @@ import javax.jcr.Node;
  * <a href="VersioningServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class VersioningServiceImpl implements VersioningService {
+
 	public void checkoutNode(Node node, User user) throws CMSException {
 	}
 
-	public void checkinNode(Node node, User user, Object o)
+	public void checkinNode(Node node, User user, Object obj)
 		throws CMSException {
 	}
 
@@ -50,7 +52,8 @@ public class VersioningServiceImpl implements VersioningService {
 	public void uncheckoutNode(Node node, User user) throws CMSException {
 	}
 
-	public void updateNode(Node node, User user, Object o) throws CMSException {
+	public void updateNode(Node node, User user, Object obj)
+		throws CMSException {
 	}
 
 }

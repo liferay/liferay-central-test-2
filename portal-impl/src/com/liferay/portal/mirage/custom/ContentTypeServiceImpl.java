@@ -37,6 +37,7 @@ import java.util.List;
  * <a href="ContentTypeServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class ContentTypeServiceImpl implements ContentTypeService {
 

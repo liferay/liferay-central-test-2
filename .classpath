@@ -162,6 +162,7 @@
 	<classpathentry kind="lib" path="lib/portal/log4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene.jar"/>
 	<classpathentry kind="lib" path="lib/portal/lucene-highlighter.jar"/>
+	<classpathentry kind="lib" path="lib/portal/mirage-api.jar"/>
 	<classpathentry kind="lib" path="lib/portal/msnm.jar"/>
 	<classpathentry kind="lib" path="lib/portal/mx4j.jar"/>
 	<classpathentry kind="lib" path="lib/portal/nekohtml.jar"/>
@@ -209,7 +210,5 @@
 	<classpathentry kind="lib" path="lib/portal/xmlsec.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xpp3.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xstream.jar"/>
-	<classpathentry kind="lib" path="lib/portal/mirage-api.jar"/>
-	<classpathentry kind="lib" path="lib/development/jtds.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
