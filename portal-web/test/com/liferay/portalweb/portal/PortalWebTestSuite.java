@@ -113,7 +113,6 @@ import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 public class PortalWebTestSuite extends BaseTests {
 
 	public PortalWebTestSuite() {
-
 		addTestSuite(LoginTest.class);
 		addTestSuite(AdminTests.class);
 		addTestSuite(AmazonRankingsTests.class);
@@ -195,7 +194,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(WikiTests.class);
 		addTestSuite(WikiDisplayTests.class);
 		addTestSuite(WordsTests.class);
-//		addTestSuite(WSRPProxyTests.class);
+		//addTestSuite(WSRPProxyTests.class);
 		addTestSuite(XSLContentTests.class);
 	}
 
