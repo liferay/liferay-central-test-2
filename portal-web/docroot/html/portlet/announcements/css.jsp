@@ -40,9 +40,7 @@
 .lfr-alerts .read-false .entry-title {
 	color: #000;
 	display: block;
-	font-size: 1.6em;
-	font-weight: bold;
-	margin: 0px 0px 4px 0px;
+	margin-bottom: 4px;
 }
 
 .lfr-alerts .read-true .entry-title {
@@ -91,44 +89,39 @@
 }
 
 .lfr-announcements .entry {
-	margin: 4px 0px;
+	border-bottom: 1px solid #ccc;
+	margin: 4px 0px 1.2em;
+	padding-bottom: 0.5em;
+}
+
+.lfr-announcements .entry.last {
+	border: none;
 }
 
 .lfr-announcements .entry-scope {
 	display: block;
 }
 
-.lfr-announcements .read-false .entry-title {
-	color: #000;
+.lfr-announcements .entry-title {
 	display: block;
-	font-size: 1.6em;
-	font-weight: bold;
-	margin: 0px 0px 4px 0px;
+	margin-bottom: 0.8em;
+}
+
+.lfr-announcements .read-false .entry-title {
 }
 
 .lfr-announcements .read-true .entry-title {
-	color: #CCC;
-	display: block;
-	font-size: 1.5em;
-	font-weight: bold;
-	margin: 0px 0px 4px 0px;
-}
-
-.lfr-announcements .read-false .entry-title .entry-url {
-	color: #000;
-}
-
-.lfr-announcements .read-true .entry-title .entry-url {
-	color: #CCC;
+	opacity: 0.5;
 }
 
 .lfr-announcements .entry-content {
 	display: block;
+	margin-bottom: 0.5em;
 	padding: 2px 2px 2px 30px;
 }
 
 .lfr-announcements .entry-scope {
-	color: #CCC;
+	color: #555;
 	display: block;
 }
 
@@ -136,14 +129,18 @@
 	float: right;
 }
 
+.lfr-announcements .delete-entry {
+	padding-right: 2em;
+}
+
 .lfr-announcements .entry-type-general {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+	background: #fff url('<%= themeImagesPath %>/common/all_pages.png') 4px 4px no-repeat;
 }
 
 .lfr-announcements .entry-type-news {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+	background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
 }
 
 .lfr-announcements .entry-type-test {
-	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
+	background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
 }

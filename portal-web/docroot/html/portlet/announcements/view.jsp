@@ -111,9 +111,14 @@ portletURL.setParameter("tabs1", tabs1);
 
 				searchContainer.setResults(results);
 
+				int i = 1;
+				int resultsSize = results.size();
+				
+
 				for(AnnouncementsEntry entry : results) {
 					AnnouncementsFlag readFlag = null;
 					String isRead = Boolean.FALSE.toString();
+					String className = "";
 
 					try {
 						readFlag = AnnouncementsFlagLocalServiceUtil.getFlag(userId, entry.getEntryId(), AnnouncementsFlagImpl.READ);
@@ -124,14 +129,23 @@ portletURL.setParameter("tabs1", tabs1);
 					if (readFlag != null) {
 						isRead = Boolean.TRUE.toString();
 					}
+
+					if (i == 1) {
+						className = "first";
+					}
+					else if (i == resultsSize) {
+						className = "last";
+					}
+
+					i++;
 			%>
-				<div class="entry read-<%= isRead %>" id="<portlet:namespace/><%= entry.getEntryId() %>">
+				<div class="entry read-<%= isRead %> <%= className %>" id="<portlet:namespace/><%= entry.getEntryId() %>">
 
 					<div class="edit-actions">
 						<table class="lfr-table">
 						<tr>
 							<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
-								<td>
+								<td class="edit-entry">
 									<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
 										<portlet:param name="struts_action" value="<%= strutsAction %>" />
 										<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -142,7 +156,7 @@ portletURL.setParameter("tabs1", tabs1);
 								</td>
 							</c:if>
 							<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
-								<td>
+								<td class="delete-entry">
 									<portlet:actionURL var="deleteEntryURL">
 										<portlet:param name="struts_action" value="<%= strutsAction %>" />
 										<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
@@ -153,7 +167,7 @@ portletURL.setParameter("tabs1", tabs1);
 									<liferay-ui:icon-delete url="<%= deleteEntryURL %>" label="<%= true %>" />
 								</td>
 							</c:if>
-							<td>
+							<td class="hide-entry">
 								<c:if test="<%= !readHidden && !user.isDefaultUser() %>">
 									<liferay-ui:icon image="close" message="hide" url='<%= "javascript: " + renderResponse.getNamespace() + "hideEntry(" + entry.getEntryId() + ");" %>' />
 								</c:if>
@@ -162,7 +176,7 @@ portletURL.setParameter("tabs1", tabs1);
 						</table>
 					</div>
 
-					<span class="entry-title">
+					<h3 class="entry-title">
 						<c:choose>
 							<c:when test="<%= Validator.isNotNull(entry.getUrl()) %>">
 								<a class="entry-url" href="<%= entry.getUrl() %>"><%= entry.getTitle() %></a>
@@ -171,9 +185,9 @@ portletURL.setParameter("tabs1", tabs1);
 								<%= entry.getTitle() %>
 							</c:when>
 						</c:choose>
-					</span>
+					</h3>
 
-					<span class="entry-content entry-type-<%= entry.getType() %>"><%= entry.getContent() %></span>
+					<p class="entry-content entry-type-<%= entry.getType() %>"><%= entry.getContent() %></p>
 
 					<c:choose>
 						<c:when test="<%= entry.getClassNameId() == 0 %>">
