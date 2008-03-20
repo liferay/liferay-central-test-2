@@ -164,6 +164,9 @@ ECJ was automatically installed. Please rerun your task.
 	</target>
 
 	<target name="compile-test">
+		<mkdir dir="test-classes" />
+		<mkdir dir="test-results" />
+
 		<copy todir="test-classes">
 			<fileset dir="test" includes="**/*.png,**/*.properties,**/*.xml" />
 		</copy>
@@ -179,12 +182,11 @@ ECJ was automatically installed. Please rerun your task.
 		/>
 	</target>
 
-	<target name="test" depends="compile-test">
+	<target name="test">
 		<delete dir="test-classes" />
-		<mkdir dir="test-classes" />
-
 		<delete dir="test-results" />
-		<mkdir dir="test-results" />
+
+		<antcall target="compile-test" />
 
 		<path id="test.classpath">
 			<pathelement path="${classpath}" />
@@ -221,9 +223,6 @@ ECJ was automatically installed. Please rerun your task.
 	</target>
 
 	<target name="test-class" depends="compile-test" if="class">
-		<mkdir dir="test-classes" />
-		<mkdir dir="test-results" />
-
 		<path id="test.classpath">
 			<pathelement path="${classpath}" />
 			<fileset dir="${project.dir}/lib/development" includes="*.jar" />
