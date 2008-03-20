@@ -20,62 +20,70 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.struts;
+package com.liferay.portlet.enterpriseadmin.action;
 
-import com.liferay.portal.kernel.servlet.HttpHeaders;
-import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.struts.AJAXAction;
 import com.liferay.portal.util.PortalUtil;
 
-import java.io.PrintWriter;
+import java.util.LinkedHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.struts.action.Action;
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
- * <a href="AJAXAction.java.html"><b><i>View Source</i></b></a>
+ * <a href="GetUsersCountAction.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Gavin Wan
  *
  */
-public abstract class AJAXAction extends Action {
+public class GetUsersCountAction extends AJAXAction {
 
-	public ActionForward execute(
+	public String getText(
 			ActionMapping mapping, ActionForm form, HttpServletRequest req,
 			HttpServletResponse res)
 		throws Exception {
 
-		String text = null;
+		long companyId = PortalUtil.getCompanyId(req);
 
-		try {
-			text = getText(mapping, form, req, res);
+		String className = ParamUtil.getString(req, "className");
+		long[] ids = StringUtil.split(ParamUtil.getString(req, "ids"), 0L);
+		boolean active = ParamUtil.getBoolean(req, "active");
+
+		int count = 0;
+
+		if (className.equals(Organization.class.getName())) {
+			count = getOrganizationUsersCount(companyId, ids, active);
 		}
-		catch (Exception e) {
-			PortalUtil.sendError(
-				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
-
-			return null;
+		else if (className.equals(UserGroup.class.getName())) {
 		}
 
-		res.setContentType(ContentTypes.TEXT_PLAIN_UTF8);
-		res.setHeader(HttpHeaders.CACHE_CONTROL, "no-cache");
-
-		PrintWriter pw = res.getWriter();
-
-		pw.write(text);
-
-		pw.close();
-
-		return null;
+		return String.valueOf(count);
 	}
 
-	public abstract String getText(
-			ActionMapping mapping, ActionForm form, HttpServletRequest req,
-			HttpServletResponse res)
-		throws Exception;
+	protected int getOrganizationUsersCount(
+			long companyId, long[] organizationIds, boolean active)
+		throws Exception {
+
+		int count = 0;
+
+		for (long organizationId : organizationIds) {
+			LinkedHashMap userParams = new LinkedHashMap();
+
+			userParams.put("usersOrgs", new Long(organizationId));
+
+			count+= UserLocalServiceUtil.searchCount(
+				companyId, null, active, userParams);
+		}
+
+		return count;
+	}
 
 }

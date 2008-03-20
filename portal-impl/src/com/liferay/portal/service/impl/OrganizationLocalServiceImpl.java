@@ -173,8 +173,8 @@ public class OrganizationLocalServiceImpl
 	public void deleteOrganization(Organization organization)
 		throws PortalException, SystemException {
 
-		if ((organizationPersistence.containsUsers(
-				organization.getOrganizationId())) ||
+		if ((userLocalService.getOrganizationUsersCount(
+				organization.getOrganizationId(), true) > 0) ||
 			(organizationPersistence.countByC_P(
 				organization.getCompanyId(),
 				organization.getOrganizationId()) > 0)) {

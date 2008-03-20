@@ -138,6 +138,6 @@ long organizationGroupId = organization.getGroup().getGroupId();
 			<portlet:param name="deleteOrganizationIds" value="<%= String.valueOf(organizationId) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteOrganizationURL %>" />
+		<liferay-ui:icon image="delete" url='<%= "javascript: " + renderResponse.getNamespace() + "deleteOrganization('" + organizationId + "');" %>' />
 	</c:if>
 </liferay-ui:icon-menu>

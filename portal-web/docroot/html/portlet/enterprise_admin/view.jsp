@@ -46,14 +46,56 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 %>
 
 <script type="text/javascript">
+	function <portlet:namespace />deleteOrganization(organizationId) {
+		var className = '<%= Organization.class.getName() %>';
+		var ids = organizationId;
+
+		<portlet:namespace />getUsersCount(
+			className, ids, false,
+			function(count) {
+				count = parseInt(count);
+
+				if (count > 0) {
+					<portlet:namespace />getUsersCount(
+						className, ids, true,
+						function(count) {
+							count = parseInt(count);
+
+							if (count > 0) {
+								if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
+									<portlet:namespace />doDeleteOrganization(organizationId);
+								}
+							}
+							else {
+								var message = null;
+
+								if (organizationId && (organizationId.split(",").length > 1)) {
+									message = '<%= UnicodeLanguageUtil.get(pageContext, "one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users") %>';
+								}
+								else {
+									message = '<%= UnicodeLanguageUtil.get(pageContext, "the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organization-by-automatically-unassociating-the-deactivated-users") %>';
+								}
+
+								if (confirm(message)) {
+									<portlet:namespace />doDeleteOrganization(organizationId);
+								}
+							}
+						}
+					);
+				}
+				else {
+					if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
+						<portlet:namespace />doDeleteOrganization(organizationId);
+					}
+				}
+			}
+		);
+	}
+
 	function <portlet:namespace />deleteOrganizations() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-organizations") %>')) {
-			document.<portlet:namespace />fm.method = "post";
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value;
-			document.<portlet:namespace />fm.<portlet:namespace />deleteOrganizationIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>");
-		}
+		var ids = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+
+		<portlet:namespace />deleteOrganization(ids);
 	}
 
 	function <portlet:namespace />deleteUserGroups() {
@@ -87,6 +129,28 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 			document.<portlet:namespace />fm.<portlet:namespace />deleteUserIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user" /></portlet:actionURL>");
 		}
+	}
+
+	function <portlet:namespace />doDeleteOrganization(organizationId) {
+		document.<portlet:namespace />fm.method = "post";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value;
+		document.<portlet:namespace />fm.<portlet:namespace />deleteOrganizationIds.value = organizationId;
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />getUsersCount(className, ids, active, callback) {
+		jQuery.ajax(
+			{
+				url: '<%= themeDisplay.getPathMain() %>/enterprise_admin/get_users_count',
+				data: {
+					className: className,
+					ids: ids,
+					active: active
+				},
+				success: callback
+			}
+		);
 	}
 
 	function <portlet:namespace />saveCompany() {

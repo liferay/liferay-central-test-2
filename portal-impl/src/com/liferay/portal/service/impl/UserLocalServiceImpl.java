@@ -856,10 +856,45 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return groupPersistence.getUsers(groupId);
 	}
 
+	public int getGroupUsersCount(long groupId) throws SystemException {
+		return groupPersistence.getUsersSize(groupId);
+	}
+
+	public int getGroupUsersCount(long groupId, boolean active)
+		throws PortalException, SystemException {
+
+		Group group = groupPersistence.findByPrimaryKey(groupId);
+
+		LinkedHashMap params = new LinkedHashMap();
+
+		params.put("usersGroups", new Long(groupId));
+
+		return searchCount(group.getCompanyId(), null, active, params);
+	}
+
 	public List<User> getOrganizationUsers(long organizationId)
 		throws PortalException, SystemException {
 
 		return organizationPersistence.getUsers(organizationId);
+	}
+
+	public int getOrganizationUsersCount(long organizationId)
+		throws SystemException {
+
+		return organizationPersistence.getUsersSize(organizationId);
+	}
+
+	public int getOrganizationUsersCount(long organizationId, boolean active)
+		throws PortalException, SystemException {
+
+		Organization organization = organizationPersistence.findByPrimaryKey(
+			organizationId);
+
+		LinkedHashMap params = new LinkedHashMap();
+
+		params.put("usersOrgs", new Long(organizationId));
+
+		return searchCount(organization.getCompanyId(), null, active, params);
 	}
 
 	public List<User> getPermissionUsers(
@@ -913,10 +948,44 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return rolePersistence.getUsers(roleId);
 	}
 
+	public int getRoleUsersCount(long roleId) throws SystemException {
+		return rolePersistence.getUsersSize(roleId);
+	}
+
+	public int getRoleUsersCount(long roleId, boolean active)
+		throws PortalException, SystemException {
+
+		Role role = rolePersistence.findByPrimaryKey(
+			roleId);
+
+		LinkedHashMap params = new LinkedHashMap();
+
+		params.put("usersRoles", new Long(roleId));
+
+		return searchCount(role.getCompanyId(), null, active, params);
+	}
+
 	public List<User> getUserGroupUsers(long userGroupId)
 		throws PortalException, SystemException {
 
 		return userGroupPersistence.getUsers(userGroupId);
+	}
+
+	public int getUserGroupUsersCount(long userGroupId) throws SystemException {
+		return userGroupPersistence.getUsersSize(userGroupId);
+	}
+
+	public int getUserGroupUsersCount(long userGroupId, boolean active)
+		throws PortalException, SystemException {
+
+		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
+			userGroupId);
+
+		LinkedHashMap params = new LinkedHashMap();
+
+		params.put("usersUserGroups", new Long(userGroupId));
+
+		return searchCount(userGroup.getCompanyId(), null, active, params);
 	}
 
 	public User getUserByContactId(long contactId)

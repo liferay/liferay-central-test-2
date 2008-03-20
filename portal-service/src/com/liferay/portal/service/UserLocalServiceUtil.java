@@ -1178,6 +1178,21 @@ public class UserLocalServiceUtil {
 		return userLocalService.getGroupUsers(groupId);
 	}
 
+	public static int getGroupUsersCount(long groupId)
+		throws com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getGroupUsersCount(groupId);
+	}
+
+	public static int getGroupUsersCount(long groupId, boolean active)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getGroupUsersCount(groupId, active);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
 		long organizationId)
 		throws com.liferay.portal.PortalException,
@@ -1185,6 +1200,22 @@ public class UserLocalServiceUtil {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.getOrganizationUsers(organizationId);
+	}
+
+	public static int getOrganizationUsersCount(long organizationId)
+		throws com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getOrganizationUsersCount(organizationId);
+	}
+
+	public static int getOrganizationUsersCount(long organizationId,
+		boolean active)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getOrganizationUsersCount(organizationId, active);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getPermissionUsers(
@@ -1225,6 +1256,21 @@ public class UserLocalServiceUtil {
 		return userLocalService.getRoleUsers(roleId);
 	}
 
+	public static int getRoleUsersCount(long roleId)
+		throws com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getRoleUsersCount(roleId);
+	}
+
+	public static int getRoleUsersCount(long roleId, boolean active)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getRoleUsersCount(roleId, active);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> getUserGroupUsers(
 		long userGroupId)
 		throws com.liferay.portal.PortalException,
@@ -1232,6 +1278,21 @@ public class UserLocalServiceUtil {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.getUserGroupUsers(userGroupId);
+	}
+
+	public static int getUserGroupUsersCount(long userGroupId)
+		throws com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUserGroupUsersCount(userGroupId);
+	}
+
+	public static int getUserGroupUsersCount(long userGroupId, boolean active)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getUserGroupUsersCount(userGroupId, active);
 	}
 
 	public static com.liferay.portal.model.User getUserByContactId(

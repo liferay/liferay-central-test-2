@@ -520,8 +520,22 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public int getGroupUsersCount(long groupId)
+		throws com.liferay.portal.SystemException;
+
+	public int getGroupUsersCount(long groupId, boolean active)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
 		long organizationId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public int getOrganizationUsersCount(long organizationId)
+		throws com.liferay.portal.SystemException;
+
+	public int getOrganizationUsersCount(long organizationId, boolean active)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -547,8 +561,22 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public int getRoleUsersCount(long roleId)
+		throws com.liferay.portal.SystemException;
+
+	public int getRoleUsersCount(long roleId, boolean active)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List<com.liferay.portal.model.User> getUserGroupUsers(
 		long userGroupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public int getUserGroupUsersCount(long userGroupId)
+		throws com.liferay.portal.SystemException;
+
+	public int getUserGroupUsersCount(long userGroupId, boolean active)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
