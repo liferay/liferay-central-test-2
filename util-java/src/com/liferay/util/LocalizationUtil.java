@@ -27,18 +27,25 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.kernel.util.Tuple;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.xml.XMLFormatter;
 
 import java.io.StringReader;
+import java.io.StringWriter;
 
-import java.util.Iterator;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.portlet.PortletPreferences;
 
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLOutputFactory;
+import javax.xml.stream.XMLStreamConstants;
+import javax.xml.stream.XMLStreamException;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.stream.XMLStreamWriter;
+
+import org.apache.commons.collections.map.ReferenceMap;
 
 /**
  * <a href="LocalizationUtil.java.html"><b><i>View Source</i></b></a>
@@ -49,47 +56,17 @@ import org.dom4j.io.SAXReader;
 public class LocalizationUtil {
 
 	public static String[] getAvailableLocales(String xml) {
-		String[] availableLocales = new String[0];
+		String attributeValue =
+			_getRootAttribute(xml, _AVAILABLE_LOCALES, StringPool.BLANK);
 
-		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
-
-			Element root = doc.getRootElement();
-
-			availableLocales = StringUtil.split(
-				root.attributeValue("available-locales"));
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-
-		return availableLocales;
+		return StringUtil.split(attributeValue);
 	}
 
 	public static String getDefaultLocale(String xml) {
 		String defaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
 
-		try {
-			SAXReader reader = new SAXReader();
-
-			Document doc = reader.read(new StringReader(xml));
-
-			Element root = doc.getRootElement();
-
-			return root.attributeValue("default-locale", defaultLanguageId);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-
-		return defaultLanguageId;
+		return _getRootAttribute(xml, _DEFAULT_LOCALE, defaultLanguageId);
 	}
 
 	public static String getLocalization(
@@ -101,34 +78,79 @@ public class LocalizationUtil {
 	public static String getLocalization(
 		String xml, String requestedLanguageId, boolean useDefault) {
 
+		String value = _getCachedValue(xml, requestedLanguageId, useDefault);
+
+		if (value != null) {
+			return value;
+		}
+		else {
+			value = StringPool.BLANK;
+		}
+
 		String defaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
 
-		String value = StringPool.BLANK;
-
 		String defaultValue = StringPool.BLANK;
 
+		XMLStreamReader reader = null;
+
 		try {
-			SAXReader reader = new SAXReader();
+			XMLInputFactory factory = XMLInputFactory.newInstance();
 
-			Document doc = reader.read(new StringReader(xml));
+			reader = factory.createXMLStreamReader(new StringReader(xml));
 
-			Element root = doc.getRootElement();
+			// Step over root node
 
-			Iterator itr = root.elements().iterator();
+			if (reader.hasNext()) {
+				reader.nextTag();
+			}
 
-			while (itr.hasNext()) {
-				Element el = (Element)itr.next();
+			// Find specified language and/or default language
 
-				String languageId =
-					el.attributeValue("language-id", defaultLanguageId);
+			while (reader.hasNext()) {
+				int event = reader.next();
 
-				if (languageId.equals(defaultLanguageId)) {
-					defaultValue = el.getText();
+				if (event == XMLStreamConstants.START_ELEMENT) {
+					String languageId =
+						reader.getAttributeValue(null, _LANGUAGE_ID);
+
+					if (Validator.isNull(languageId)) {
+						languageId = defaultLanguageId;
+					}
+
+					if (languageId.equals(defaultLanguageId) ||
+						languageId.equals(requestedLanguageId)) {
+
+						while (reader.hasNext()) {
+							event = reader.next();
+
+							if (event == XMLStreamConstants.CHARACTERS ||
+								event == XMLStreamConstants.CDATA) {
+
+								String text = reader.getText();
+
+								if (languageId.equals(defaultLanguageId)) {
+									defaultValue = text;
+								}
+
+								if (languageId.equals(requestedLanguageId)) {
+									value = text;
+								}
+
+								break;
+							}
+							else if (event == XMLStreamConstants.END_ELEMENT) {
+								break;
+							}
+						}
+
+						if (Validator.isNotNull(value)) {
+							break;
+						}
+					}
 				}
-
-				if (languageId.equals(requestedLanguageId)) {
-					value = el.getText();
+				else if (event == XMLStreamConstants.END_DOCUMENT){
+					break;
 				}
 			}
 
@@ -141,6 +163,8 @@ public class LocalizationUtil {
 				_log.warn(e);
 			}
 		}
+
+		_setCachedValue(xml, requestedLanguageId, useDefault, value);
 
 		return value;
 	}
@@ -190,52 +214,93 @@ public class LocalizationUtil {
 	public static String removeLocalization(
 		String xml, String key, String requestedLanguageId) {
 
-		if (Validator.isNull(xml) || (xml.indexOf("<root") == -1)) {
-			xml = "<root />";
-		}
+		return removeLocalization(xml, key, requestedLanguageId, false);
+	}
 
-		String defaultLanguageId =
+	public static String removeLocalization(
+			String xml, String key, String requestedLanguageId, boolean cdata) {
+
+		_removeCachedValue(xml);
+
+		xml = _sanitizeXML(xml);
+
+		String systemDefaultLanguageId =
 			LocaleUtil.toLanguageId(LocaleUtil.getDefault());
 
+		XMLStreamReader reader = null;
+		XMLStreamWriter writer = null;
+
 		try {
-			SAXReader reader = new SAXReader();
+			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
-			Document doc = reader.read(new StringReader(xml));
+			reader = inputFactory.createXMLStreamReader(new StringReader(xml));
 
-			Element root = doc.getRootElement();
+			String availableLocales = StringPool.BLANK;
+			String defaultLanguageId = StringPool.BLANK;
 
-			String availableLocales = root.attributeValue("available-locales");
+			// Read root node
 
-			defaultLanguageId =
-				root.attributeValue("default-locale", defaultLanguageId);
+			if (reader.hasNext()) {
+				reader.nextTag();
+
+				availableLocales =
+					reader.getAttributeValue(null, _AVAILABLE_LOCALES);
+				defaultLanguageId =
+					reader.getAttributeValue(null, _DEFAULT_LOCALE);
+
+				if (Validator.isNull(defaultLanguageId)) {
+					defaultLanguageId = systemDefaultLanguageId;
+				}
+			}
 
 			if (availableLocales.indexOf(requestedLanguageId) != -1) {
-				Iterator itr = root.elements().iterator();
-
-				while (itr.hasNext()) {
-					Element el = (Element) itr.next();
-
-					String languageId =
-						el.attributeValue("language-id", defaultLanguageId);
-
-					if (languageId.equals(requestedLanguageId)) {
-						root.remove(el);
-
-						break;
-					}
-				}
-
 				availableLocales = StringUtil.remove(
 					availableLocales, requestedLanguageId, StringPool.COMMA);
 
-				root.addAttribute("available-locales", availableLocales);
-			}
+				StringWriter sw = new StringWriter(xml.length());
 
-			xml = XMLFormatter.toString(doc, "  ");
+				XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+
+				writer = outputFactory.createXMLStreamWriter(sw);
+
+				writer.writeStartDocument();
+				writer.writeStartElement(_ROOT);
+				writer.writeAttribute(_AVAILABLE_LOCALES, availableLocales);
+				writer.writeAttribute(_DEFAULT_LOCALE, defaultLanguageId);
+
+				_copyNonExempt(
+					reader, writer, requestedLanguageId, defaultLanguageId,
+					cdata);
+
+				writer.writeEndElement();
+				writer.writeEndDocument();
+
+				writer.close();
+				writer = null;
+
+				xml = sw.toString();
+			}
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e);
+			}
+		}
+		finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				}
+				catch (Exception e) {
+				}
+			}
+
+			if (writer != null) {
+				try {
+					writer.close();
+				}
+				catch (Exception e) {
+				}
 			}
 		}
 
@@ -290,83 +355,187 @@ public class LocalizationUtil {
 		String xml, String key, String value, String requestedLanguageId,
 		String defaultLanguageId, boolean cdata) {
 
-		if (Validator.isNull(xml) || (xml.indexOf("<root") == -1)) {
-			xml = "<root />";
-		}
+		_removeCachedValue(xml);
 
-		String updatedXml = xml;
+		xml = _sanitizeXML(xml);
+
+		XMLStreamReader reader = null;
+		XMLStreamWriter writer = null;
 
 		try {
-			SAXReader reader = new SAXReader();
+			XMLInputFactory inputFactory = XMLInputFactory.newInstance();
 
-			Document doc = reader.read(new StringReader(xml));
+			reader = inputFactory.createXMLStreamReader(new StringReader(xml));
 
-			Element root = doc.getRootElement();
+			String availableLocales = StringPool.BLANK;
 
-			String availableLocales = root.attributeValue("available-locales");
+			// Read root node
 
-			Element localeEl = null;
+			if (reader.hasNext()) {
+				reader.nextTag();
 
-			Iterator itr = root.elements().iterator();
+				availableLocales =
+					reader.getAttributeValue(null, _AVAILABLE_LOCALES);
 
-			while (itr.hasNext()) {
-				Element el = (Element) itr.next();
-
-				String languageId =
-					el.attributeValue("language-id", defaultLanguageId);
-
-				if (languageId.equals(requestedLanguageId)) {
-					localeEl = el;
-
-					break;
-				}
-			}
-
-			if (localeEl != null) {
-				localeEl.addAttribute("language-id", requestedLanguageId);
-
-				if (cdata) {
-					localeEl.clearContent();
-					localeEl.addCDATA(value);
-				}
-				else {
-					localeEl.setText(value);
-				}
-			}
-			else {
-				localeEl = root.addElement(key);
-
-				localeEl.addAttribute("language-id", requestedLanguageId);
-
-				if (cdata) {
-					localeEl.addCDATA(value);
-				}
-				else {
-					localeEl.setText(value);
-				}
-
-				if (availableLocales == null) {
+				if (Validator.isNull(availableLocales)) {
 					availableLocales = defaultLanguageId;
 				}
 
-				if (!requestedLanguageId.equals(defaultLanguageId)) {
+				if (availableLocales.indexOf(requestedLanguageId) == -1) {
 					availableLocales += StringPool.COMMA + requestedLanguageId;
 				}
-
-				root.addAttribute("available-locales", availableLocales);
 			}
 
-			root.addAttribute("default-locale", defaultLanguageId);
+			StringWriter sw = new StringWriter(xml.length());
 
-			updatedXml = XMLFormatter.toString(doc, "  ");
+			XMLOutputFactory outputFactory = XMLOutputFactory.newInstance();
+
+			writer = outputFactory.createXMLStreamWriter(sw);
+
+			writer.writeStartDocument();
+			writer.writeStartElement(_ROOT);
+			writer.writeAttribute(_AVAILABLE_LOCALES, availableLocales);
+			writer.writeAttribute(_DEFAULT_LOCALE, defaultLanguageId);
+
+			_copyNonExempt(
+				reader, writer, requestedLanguageId, defaultLanguageId,
+				cdata);
+
+			if (cdata) {
+				writer.writeStartElement(key);
+				writer.writeAttribute(_LANGUAGE_ID, requestedLanguageId);
+				writer.writeCData(value);
+				writer.writeEndElement();
+			}
+			else {
+				writer.writeStartElement(key);
+				writer.writeAttribute(_LANGUAGE_ID, requestedLanguageId);
+				writer.writeCharacters(value);
+				writer.writeEndElement();
+			}
+
+			writer.writeEndElement();
+			writer.writeEndDocument();
+
+			writer.close();
+			writer = null;
+
+			xml = sw.toString();
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e);
 			}
 		}
+		finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				}
+				catch (Exception e) {
+				}
+			}
 
-		return updatedXml;
+			if (writer != null) {
+				try {
+					writer.close();
+				}
+				catch (Exception e) {
+				}
+			}
+		}
+
+		return xml;
+	}
+
+	private static void _removeCachedValue(String xml) {
+		_cache.remove(xml);
+	}
+
+	private static void _setCachedValue(
+		String xml, String requestedLanguageId, boolean useDefault,
+		String value) {
+
+		if (!_EMPTY_ROOT_NODE.equals(xml)) {
+			Map valueMap = (Map)_cache.get(xml);
+
+			if (valueMap == null) {
+				valueMap = new HashMap<Tuple,String>();
+			}
+
+			Tuple subkey = new Tuple(useDefault, requestedLanguageId);
+
+			valueMap.put(subkey, value);
+
+			_cache.put(xml, valueMap);
+		}
+	}
+
+	private static String _getCachedValue(
+		String xml, String requestedLanguageId, boolean useDefault) {
+
+		String value = null;
+
+		Map<Tuple,String> valueMap = (Map)_cache.get(xml);
+
+		if (valueMap != null) {
+			Tuple subkey = new Tuple(useDefault, requestedLanguageId);
+
+			value = valueMap.get(subkey);
+		}
+
+		return value;
+	}
+
+	private static void _copyNonExempt(
+			XMLStreamReader reader, XMLStreamWriter writer,
+			String exemptLanguageId, String defaultLanguageId, boolean cdata)
+		throws XMLStreamException {
+
+		while (reader.hasNext()) {
+			int event = reader.next();
+
+			if (event == XMLStreamConstants.START_ELEMENT) {
+				String languageId =
+					reader.getAttributeValue(null, _LANGUAGE_ID);
+
+				if (Validator.isNull(languageId)) {
+					languageId = defaultLanguageId;
+				}
+
+				if (!languageId.equals(exemptLanguageId)) {
+					writer.writeStartElement(reader.getLocalName());
+					writer.writeAttribute(_LANGUAGE_ID, languageId);
+
+					while (reader.hasNext()) {
+						event = reader.next();
+
+						if (event == XMLStreamConstants.CHARACTERS ||
+							event == XMLStreamConstants.CDATA) {
+
+							String text = reader.getText();
+
+							if (cdata) {
+								writer.writeCData(text);
+							}
+							else {
+								writer.writeCharacters(reader.getText());
+							}
+
+							break;
+						}
+						else if (event == XMLStreamConstants.END_ELEMENT) {
+							break;
+						}
+					}
+
+					writer.writeEndElement();
+				}
+			}
+			else if (event == XMLStreamConstants.END_DOCUMENT) {
+				break;
+			}
+		}
 	}
 
 	private static String _getPrefsKey(String key, String languageId) {
@@ -374,11 +543,84 @@ public class LocalizationUtil {
 			LocaleUtil.getDefault());
 
 		if (!languageId.equals(defaultLanguageId)) {
-			key += "_" + languageId;
+			key += StringPool.UNDERLINE + languageId;
 		}
 
 		return key;
 	}
+
+	private static String _getRootAttribute(
+		String xml, String name, String defaultValue) {
+
+		String value = null;
+
+		XMLStreamReader reader = null;
+
+		try {
+			XMLInputFactory factory = XMLInputFactory.newInstance();
+
+			reader = factory.createXMLStreamReader(new StringReader(xml));
+
+			// Read root node
+
+			if (reader.hasNext()) {
+				reader.nextTag();
+
+				value = reader.getAttributeValue(null, name);
+			}
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+		finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				}
+				catch (Exception e) {
+				}
+			}
+		}
+
+		if (Validator.isNull(value)) {
+			value = defaultValue;
+		}
+
+		return value;
+	}
+
+	private static String _sanitizeXML(String xml) {
+		if (Validator.isNull(xml) || (xml.indexOf("<root") == -1)) {
+			xml = _EMPTY_ROOT_NODE;
+		}
+		return xml;
+	}
+
+	// Caching is done at this level rather than an the value object level since
+	// persistence objects get flushed from cache fairly quickly.  Though
+	// lookups performed on a key based on an XML file is slower than lookups
+	// done at the value object level in general, the value object will get
+	// flushed at a rate which works against the performance gain.
+	//
+	// Use of unsynchronized cache is to allow for optimized performance.  The
+	// same value should always be rendered for a given key.  In the worst case
+	// scenario, you have multiple threads writing the same key and value into
+	// the map at the same time.
+	//
+	// In addition, this is a soft hash map to prevent memory leaks within the
+	// system, but enable the cache to be maintained longer than a weak hash map
+	// would allow.
+
+	private static Map _cache =
+		new ReferenceMap(ReferenceMap.SOFT, ReferenceMap.HARD);
+
+	private static final String _AVAILABLE_LOCALES = "available-locales";
+	private static final String _DEFAULT_LOCALE = "default-locale";
+	private static final String _LANGUAGE_ID = "language-id";
+	private static final String _ROOT = "root";
+	private static final String _EMPTY_ROOT_NODE = "<root />";
 
 	private static Log _log = LogFactoryUtil.getLog(LocalizationUtil.class);
 

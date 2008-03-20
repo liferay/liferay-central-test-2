@@ -2084,6 +2084,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/stax.jar</file-name>
+		<version>1.0.1</version>
+		<project-name>JSR 173 Streaming API for XML</project-name>
+		<project-url>http://jcp.org/en/jsr/detail?id=173</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/struts.jar</file-name>
 		<version>1.2.9</version>
 		<project-name>Struts</project-name>
@@ -2170,6 +2181,17 @@
 			<license>
 				<license-name>Apache License 2.0</license-name>
 				<copyright-notice>Copyright (c) 2000-2007 The Apache Software Foundation</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/woodstox.jar</file-name>
+		<version>3.2.4</version>
+		<project-name>Woodstox</project-name>
+		<project-url>http://woodstox.codehaus.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>

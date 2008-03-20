@@ -348,7 +348,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public String getName(String localeLanguageId) {
-		return LocalizationUtil.getLocalization(getName(), localeLanguageId);
+		return LocalizationUtil.getLocalization(
+			getName(), localeLanguageId);
 	}
 
 	public String getName(Locale locale, boolean useDefault) {
@@ -365,9 +366,16 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public void setName(String name, Locale locale) {
 		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
-		setName(
-			LocalizationUtil.updateLocalization(
-				getName(), "name", name, localeLanguageId));
+		if (Validator.isNotNull(name)) {
+			setName(
+				LocalizationUtil.updateLocalization(
+					getName(), "name", name, localeLanguageId));
+		}
+		else {
+			setName(
+				LocalizationUtil.removeLocalization(
+					getName(), "name", localeLanguageId));
+		}
 	}
 
 	public String getTitle(Locale locale) {
@@ -377,7 +385,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public String getTitle(String localeLanguageId) {
-		return LocalizationUtil.getLocalization(getTitle(), localeLanguageId);
+		return LocalizationUtil.getLocalization(
+			getTitle(), localeLanguageId);
 	}
 
 	public String getTitle(Locale locale, boolean useDefault) {
@@ -410,9 +419,16 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	public void setTitle(String title, Locale locale) {
 		String localeLanguageId = LocaleUtil.toLanguageId(locale);
 
-		setTitle(
-			LocalizationUtil.updateLocalization(
-				getTitle(), "title", title, localeLanguageId));
+		if (Validator.isNotNull(title)) {
+			setTitle(
+				LocalizationUtil.updateLocalization(
+					getTitle(), "title", title, localeLanguageId));
+		}
+		else {
+			setTitle(
+				LocalizationUtil.removeLocalization(
+					getTitle(), "title", localeLanguageId));
+		}
 	}
 
 	public LayoutType getLayoutType() {
@@ -702,8 +718,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return url;
 	}
 
-	private static Log _log = LogFactory.getLog(LayoutImpl.class);
-
 	private Properties _typeSettingsProperties = null;
+
+	private static Log _log = LogFactory.getLog(LayoutImpl.class);
 
 }

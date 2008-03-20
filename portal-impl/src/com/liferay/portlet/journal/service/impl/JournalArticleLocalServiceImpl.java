@@ -1360,7 +1360,7 @@ public class JournalArticleLocalServiceImpl
 		}
 		else {
 			content = LocalizationUtil.removeLocalization(
-				content, "static-content", languageId);
+				content, "static-content", languageId, true);
 		}
 
 		article.setContent(content);
