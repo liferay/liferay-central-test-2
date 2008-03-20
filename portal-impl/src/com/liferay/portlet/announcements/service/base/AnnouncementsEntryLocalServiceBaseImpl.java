@@ -51,6 +51,8 @@ import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory;
+import com.liferay.portlet.announcements.service.AnnouncementsFlagService;
+import com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderUtil;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence;
@@ -131,6 +133,15 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	public void setAnnouncementsFlagLocalService(
 		AnnouncementsFlagLocalService announcementsFlagLocalService) {
 		this.announcementsFlagLocalService = announcementsFlagLocalService;
+	}
+
+	public AnnouncementsFlagService getAnnouncementsFlagService() {
+		return announcementsFlagService;
+	}
+
+	public void setAnnouncementsFlagService(
+		AnnouncementsFlagService announcementsFlagService) {
+		this.announcementsFlagService = announcementsFlagService;
 	}
 
 	public AnnouncementsFlagPersistence getAnnouncementsFlagPersistence() {
@@ -236,6 +247,10 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 			announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getImpl();
 		}
 
+		if (announcementsFlagService == null) {
+			announcementsFlagService = AnnouncementsFlagServiceFactory.getImpl();
+		}
+
 		if (announcementsFlagPersistence == null) {
 			announcementsFlagPersistence = AnnouncementsFlagUtil.getPersistence();
 		}
@@ -284,6 +299,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 	protected AnnouncementsEntryPersistence announcementsEntryPersistence;
 	protected AnnouncementsEntryFinder announcementsEntryFinder;
 	protected AnnouncementsFlagLocalService announcementsFlagLocalService;
+	protected AnnouncementsFlagService announcementsFlagService;
 	protected AnnouncementsFlagPersistence announcementsFlagPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;

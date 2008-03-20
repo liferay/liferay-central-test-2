@@ -58,7 +58,7 @@
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
-	<entity name="AnnouncementsFlag" local-service="true" remote-service="false">
+	<entity name="AnnouncementsFlag" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
 

@@ -113,7 +113,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				int i = 1;
 				int resultsSize = results.size();
-				
+
 
 				for(AnnouncementsEntry entry : results) {
 					AnnouncementsFlag readFlag = null;

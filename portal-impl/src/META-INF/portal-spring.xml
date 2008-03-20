@@ -3035,6 +3035,31 @@
 			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService.transaction" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.impl" class="com.liferay.portlet.announcements.service.impl.AnnouncementsFlagServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" class="com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.announcements.service.AnnouncementsFlagService.transaction" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence.impl" class="com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistenceImpl" lazy-init="true">
 		<property name="dataSource">
 			<ref bean="liferayDataSource" />

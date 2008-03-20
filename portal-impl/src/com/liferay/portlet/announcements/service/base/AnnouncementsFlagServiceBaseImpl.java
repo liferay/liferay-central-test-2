@@ -27,31 +27,15 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
-import com.liferay.portal.service.ResourceLocalService;
-import com.liferay.portal.service.ResourceLocalServiceFactory;
-import com.liferay.portal.service.ResourceService;
-import com.liferay.portal.service.ResourceServiceFactory;
-import com.liferay.portal.service.UserLocalService;
-import com.liferay.portal.service.UserLocalServiceFactory;
-import com.liferay.portal.service.UserService;
-import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.persistence.ResourceFinder;
-import com.liferay.portal.service.persistence.ResourceFinderUtil;
-import com.liferay.portal.service.persistence.ResourcePersistence;
-import com.liferay.portal.service.persistence.ResourceUtil;
-import com.liferay.portal.service.persistence.UserFinder;
-import com.liferay.portal.service.persistence.UserFinderUtil;
-import com.liferay.portal.service.persistence.UserPersistence;
-import com.liferay.portal.service.persistence.UserUtil;
 
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryService;
+import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagService;
-import com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderUtil;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence;
@@ -62,13 +46,13 @@ import com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagUt
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * <a href="AnnouncementsEntryServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="AnnouncementsFlagServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
-	implements AnnouncementsEntryService, InitializingBean {
+public abstract class AnnouncementsFlagServiceBaseImpl extends PrincipalBean
+	implements AnnouncementsFlagService, InitializingBean {
 	public AnnouncementsEntryLocalService getAnnouncementsEntryLocalService() {
 		return announcementsEntryLocalService;
 	}
@@ -76,6 +60,15 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 	public void setAnnouncementsEntryLocalService(
 		AnnouncementsEntryLocalService announcementsEntryLocalService) {
 		this.announcementsEntryLocalService = announcementsEntryLocalService;
+	}
+
+	public AnnouncementsEntryService getAnnouncementsEntryService() {
+		return announcementsEntryService;
+	}
+
+	public void setAnnouncementsEntryService(
+		AnnouncementsEntryService announcementsEntryService) {
+		this.announcementsEntryService = announcementsEntryService;
 	}
 
 	public AnnouncementsEntryPersistence getAnnouncementsEntryPersistence() {
@@ -105,15 +98,6 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		this.announcementsFlagLocalService = announcementsFlagLocalService;
 	}
 
-	public AnnouncementsFlagService getAnnouncementsFlagService() {
-		return announcementsFlagService;
-	}
-
-	public void setAnnouncementsFlagService(
-		AnnouncementsFlagService announcementsFlagService) {
-		this.announcementsFlagService = announcementsFlagService;
-	}
-
 	public AnnouncementsFlagPersistence getAnnouncementsFlagPersistence() {
 		return announcementsFlagPersistence;
 	}
@@ -139,74 +123,13 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
-	public ResourceLocalService getResourceLocalService() {
-		return resourceLocalService;
-	}
-
-	public void setResourceLocalService(
-		ResourceLocalService resourceLocalService) {
-		this.resourceLocalService = resourceLocalService;
-	}
-
-	public ResourceService getResourceService() {
-		return resourceService;
-	}
-
-	public void setResourceService(ResourceService resourceService) {
-		this.resourceService = resourceService;
-	}
-
-	public ResourcePersistence getResourcePersistence() {
-		return resourcePersistence;
-	}
-
-	public void setResourcePersistence(ResourcePersistence resourcePersistence) {
-		this.resourcePersistence = resourcePersistence;
-	}
-
-	public ResourceFinder getResourceFinder() {
-		return resourceFinder;
-	}
-
-	public void setResourceFinder(ResourceFinder resourceFinder) {
-		this.resourceFinder = resourceFinder;
-	}
-
-	public UserLocalService getUserLocalService() {
-		return userLocalService;
-	}
-
-	public void setUserLocalService(UserLocalService userLocalService) {
-		this.userLocalService = userLocalService;
-	}
-
-	public UserService getUserService() {
-		return userService;
-	}
-
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-
-	public UserPersistence getUserPersistence() {
-		return userPersistence;
-	}
-
-	public void setUserPersistence(UserPersistence userPersistence) {
-		this.userPersistence = userPersistence;
-	}
-
-	public UserFinder getUserFinder() {
-		return userFinder;
-	}
-
-	public void setUserFinder(UserFinder userFinder) {
-		this.userFinder = userFinder;
-	}
-
 	public void afterPropertiesSet() {
 		if (announcementsEntryLocalService == null) {
 			announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getImpl();
+		}
+
+		if (announcementsEntryService == null) {
+			announcementsEntryService = AnnouncementsEntryServiceFactory.getImpl();
 		}
 
 		if (announcementsEntryPersistence == null) {
@@ -221,10 +144,6 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 			announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getImpl();
 		}
 
-		if (announcementsFlagService == null) {
-			announcementsFlagService = AnnouncementsFlagServiceFactory.getImpl();
-		}
-
 		if (announcementsFlagPersistence == null) {
 			announcementsFlagPersistence = AnnouncementsFlagUtil.getPersistence();
 		}
@@ -236,54 +155,14 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		if (counterService == null) {
 			counterService = CounterServiceFactory.getImpl();
 		}
-
-		if (resourceLocalService == null) {
-			resourceLocalService = ResourceLocalServiceFactory.getImpl();
-		}
-
-		if (resourceService == null) {
-			resourceService = ResourceServiceFactory.getImpl();
-		}
-
-		if (resourcePersistence == null) {
-			resourcePersistence = ResourceUtil.getPersistence();
-		}
-
-		if (resourceFinder == null) {
-			resourceFinder = ResourceFinderUtil.getFinder();
-		}
-
-		if (userLocalService == null) {
-			userLocalService = UserLocalServiceFactory.getImpl();
-		}
-
-		if (userService == null) {
-			userService = UserServiceFactory.getImpl();
-		}
-
-		if (userPersistence == null) {
-			userPersistence = UserUtil.getPersistence();
-		}
-
-		if (userFinder == null) {
-			userFinder = UserFinderUtil.getFinder();
-		}
 	}
 
 	protected AnnouncementsEntryLocalService announcementsEntryLocalService;
+	protected AnnouncementsEntryService announcementsEntryService;
 	protected AnnouncementsEntryPersistence announcementsEntryPersistence;
 	protected AnnouncementsEntryFinder announcementsEntryFinder;
 	protected AnnouncementsFlagLocalService announcementsFlagLocalService;
-	protected AnnouncementsFlagService announcementsFlagService;
 	protected AnnouncementsFlagPersistence announcementsFlagPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
-	protected ResourceLocalService resourceLocalService;
-	protected ResourceService resourceService;
-	protected ResourcePersistence resourcePersistence;
-	protected ResourceFinder resourceFinder;
-	protected UserLocalService userLocalService;
-	protected UserService userService;
-	protected UserPersistence userPersistence;
-	protected UserFinder userFinder;
 }

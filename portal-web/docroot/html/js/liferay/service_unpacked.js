@@ -1213,6 +1213,31 @@ Liferay.Service.Announcements.AnnouncementsEntry = {
 	}
 };
 
+Liferay.Service.Announcements.AnnouncementsFlag = {
+	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementsFlag" + Liferay.Service.classNameSuffix,
+
+	addFlag: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addFlag";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getFlag: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getFlag";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteFlag: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteFlag";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Blogs = {
 	servicePackage: "com.liferay.portlet.blogs.service.http."
 };
