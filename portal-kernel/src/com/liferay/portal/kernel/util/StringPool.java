@@ -38,6 +38,8 @@ public class StringPool {
 
 	public static final String BACK_SLASH = "\\";
 
+	public static final String BETWEEN = "BETWEEN";
+
 	public static final String BLANK = "";
 
 	public static final String CDATA_OPEN = "<![CDATA[";
@@ -54,6 +56,8 @@ public class StringPool {
 
 	public static final String COMMA = ",";
 
+	public static final String COMMA_AND_SPACE = ", ";
+
 	public static final String DASH = "-";
 
 	public static final String DOUBLE_SLASH = "//";
@@ -62,13 +66,21 @@ public class StringPool {
 
 	public static final String GREATER_THAN = ">";
 
+	public static final String GREATER_THAN_OR_EQUAL = ">=";
+
 	public static final String FALSE = "false";
 
 	public static final String FORWARD_SLASH = "/";
 
 	public static final String FOUR_SPACES = "    ";
 
+	public static final String IS_NOT_NULL = "IS NOT NULL";
+
+	public static final String IS_NULL = "IS NULL";
+
 	public static final String LESS_THAN = "<";
+
+	public static final String LESS_THAN_OR_EQUAL = "<=";
 
 	public static final String LIKE = "LIKE";
 
@@ -79,6 +91,8 @@ public class StringPool {
 	public static final String NEW_LINE = "\n";
 
 	public static final String NOT_EQUAL = "!=";
+
+	public static final String NOT_LIKE = "NOT LIKE";
 
 	public static final String NULL = "null";
 
