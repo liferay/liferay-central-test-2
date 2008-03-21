@@ -54,9 +54,55 @@ public class AddCommunitiesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Current");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("Test DLC 1"));
-		verifyTrue(selenium.isTextPresent("Test DLC 10"));
-		verifyTrue(selenium.isTextPresent("Test DLC 2"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Test DLC 1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Test DLC 10")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Test DLC 2")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Organizations");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Available");
@@ -66,7 +112,23 @@ public class AddCommunitiesTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Current");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("Liferay Los Angeles"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Liferay Los Angeles")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}
