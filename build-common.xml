@@ -34,6 +34,13 @@
 		<path refid="lib.classpath" />
 	</path>
 
+	<path id="test.classpath">
+		<pathelement path="${classpath}" />
+		<fileset dir="${project.dir}/lib/development" includes="*.jar" />
+		<fileset dir="${project.dir}/lib/global" includes="*.jar" />
+		<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="xalan.jar,xercesImpl.jar" />
+	</path>
+
 	<path id="web.classpath">
 		<pathelement location="${project.dir}/portal-kernel/classes" />
 		<pathelement location="${project.dir}/portal-service/classes" />
@@ -188,12 +195,15 @@ ECJ was automatically installed. Please rerun your task.
 
 		<antcall target="compile-test" />
 
-		<path id="test.classpath">
-			<pathelement path="${classpath}" />
-			<fileset dir="${project.dir}/lib/development" includes="*.jar" />
-			<fileset dir="${project.dir}/lib/global" includes="*.jar" />
-			<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="xalan.jar,xercesImpl.jar" />
-		</path>
+		<fileset dir="test-classes" id="test.suite.classes">
+			<include name="**/*TestSuite.class" />
+		</fileset>
+
+		<pathconvert
+			property="test.suite.classes.available"
+			refid="test.suite.classes"
+			setonempty="false"
+		/>
 
 		<if>
 			<equals arg1="${test.suite.classes.available}" arg2="$${test.suite.classes.available}" />
@@ -223,13 +233,6 @@ ECJ was automatically installed. Please rerun your task.
 	</target>
 
 	<target name="test-class" depends="compile-test" if="class">
-		<path id="test.classpath">
-			<pathelement path="${classpath}" />
-			<fileset dir="${project.dir}/lib/development" includes="*.jar" />
-			<fileset dir="${project.dir}/lib/global" includes="*.jar" />
-			<fileset dir="${project.dir}/lib/portal" includes="*.jar" excludes="xalan.jar,xercesImpl.jar" />
-		</path>
-
 		<junit fork="on" haltonfailure="no" printsummary="on">
 			<classpath refid="test.classpath" />
 			<formatter type="brief" usefile="false" />
