@@ -44,7 +44,23 @@ public class AddFeedTest extends BaseTestCase {
 		selenium.select("_15_type", "label=Test");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("SELENIUM-TEST-FEED"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("SELENIUM-TEST-FEED")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}

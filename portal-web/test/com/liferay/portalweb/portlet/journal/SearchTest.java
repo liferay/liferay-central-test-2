@@ -35,7 +35,26 @@ public class SearchTest extends BaseTestCase {
 		selenium.type("toggle_id_journal_article_searchkeywords", "test");
 		selenium.click("//input[@value='Search Articles']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("Test Journal Article"));
+		selenium.type("password", "test");
+		selenium.click("//input[@value='Sign In']");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Test Journal Article")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 	}
