@@ -70,9 +70,9 @@ public interface OrgLaborService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portal.model.OrgLabor updateOrgLabor(long orgLaborId,
-		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
-		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
-		int friOpen, int friClose, int satOpen, int satClose)
+		int typeId, int sunOpen, int sunClose, int monOpen, int monClose,
+		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
+		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

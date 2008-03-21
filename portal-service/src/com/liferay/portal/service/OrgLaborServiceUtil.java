@@ -91,15 +91,16 @@ public class OrgLaborServiceUtil {
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
-		long orgLaborId, int sunOpen, int sunClose, int monOpen, int monClose,
-		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
-		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
+		long orgLaborId, int typeId, int sunOpen, int sunClose, int monOpen,
+		int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
+		int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
+		int satClose)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		OrgLaborService orgLaborService = OrgLaborServiceFactory.getService();
 
-		return orgLaborService.updateOrgLabor(orgLaborId, sunOpen, sunClose,
-			monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose, thuOpen,
-			thuClose, friOpen, friClose, satOpen, satClose);
+		return orgLaborService.updateOrgLabor(orgLaborId, typeId, sunOpen,
+			sunClose, monOpen, monClose, tueOpen, tueClose, wedOpen, wedClose,
+			thuOpen, thuClose, friOpen, friClose, satOpen, satClose);
 	}
 }

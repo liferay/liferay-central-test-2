@@ -155,9 +155,9 @@ public class EditOrgLaborAction extends PortletAction {
 			// Update organization labor
 
 			OrgLaborServiceUtil.updateOrgLabor(
-				orgLaborId, sunOpen, sunClose, monOpen, monClose, tueOpen,
-				tueClose, wedOpen, wedClose, thuOpen, thuClose, friOpen,
-				friClose, satOpen, satClose);
+				orgLaborId, typeId, sunOpen, sunClose, monOpen, monClose,
+				tueOpen, tueClose, wedOpen, wedClose, thuOpen, thuClose,
+				friOpen, friClose, satOpen, satClose);
 		}
 	}
 

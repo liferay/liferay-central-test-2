@@ -83,7 +83,7 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 	}
 
 	public OrgLabor updateOrgLabor(
-			long orgLaborId, int sunOpen, int sunClose, int monOpen,
+			long orgLaborId, int typeId, int sunOpen, int sunClose, int monOpen,
 			int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
 			int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
 			int satClose)
@@ -94,9 +94,9 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 		checkPermission(orgLabor.getOrganizationId(), ActionKeys.UPDATE);
 
 		return orgLaborLocalService.updateOrgLabor(
-			orgLaborId, sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose,
-			wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose, satOpen,
-			satClose);
+			orgLaborId, typeId ,sunOpen, sunClose, monOpen, monClose, tueOpen,
+			tueClose, wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose,
+			satOpen, satClose);
 	}
 
 	protected void checkPermission(long organizationId, String actionId)

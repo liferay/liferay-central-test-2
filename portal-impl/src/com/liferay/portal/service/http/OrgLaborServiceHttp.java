@@ -250,7 +250,7 @@ public class OrgLaborServiceHttp {
 	}
 
 	public static com.liferay.portal.model.OrgLabor updateOrgLabor(
-		HttpPrincipal httpPrincipal, long orgLaborId, int sunOpen,
+		HttpPrincipal httpPrincipal, long orgLaborId, int typeId, int sunOpen,
 		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
 		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
 		int friClose, int satOpen, int satClose)
@@ -259,33 +259,35 @@ public class OrgLaborServiceHttp {
 		try {
 			Object paramObj0 = new LongWrapper(orgLaborId);
 
-			Object paramObj1 = new IntegerWrapper(sunOpen);
+			Object paramObj1 = new IntegerWrapper(typeId);
 
-			Object paramObj2 = new IntegerWrapper(sunClose);
+			Object paramObj2 = new IntegerWrapper(sunOpen);
 
-			Object paramObj3 = new IntegerWrapper(monOpen);
+			Object paramObj3 = new IntegerWrapper(sunClose);
 
-			Object paramObj4 = new IntegerWrapper(monClose);
+			Object paramObj4 = new IntegerWrapper(monOpen);
 
-			Object paramObj5 = new IntegerWrapper(tueOpen);
+			Object paramObj5 = new IntegerWrapper(monClose);
 
-			Object paramObj6 = new IntegerWrapper(tueClose);
+			Object paramObj6 = new IntegerWrapper(tueOpen);
 
-			Object paramObj7 = new IntegerWrapper(wedOpen);
+			Object paramObj7 = new IntegerWrapper(tueClose);
 
-			Object paramObj8 = new IntegerWrapper(wedClose);
+			Object paramObj8 = new IntegerWrapper(wedOpen);
 
-			Object paramObj9 = new IntegerWrapper(thuOpen);
+			Object paramObj9 = new IntegerWrapper(wedClose);
 
-			Object paramObj10 = new IntegerWrapper(thuClose);
+			Object paramObj10 = new IntegerWrapper(thuOpen);
 
-			Object paramObj11 = new IntegerWrapper(friOpen);
+			Object paramObj11 = new IntegerWrapper(thuClose);
 
-			Object paramObj12 = new IntegerWrapper(friClose);
+			Object paramObj12 = new IntegerWrapper(friOpen);
 
-			Object paramObj13 = new IntegerWrapper(satOpen);
+			Object paramObj13 = new IntegerWrapper(friClose);
 
-			Object paramObj14 = new IntegerWrapper(satClose);
+			Object paramObj14 = new IntegerWrapper(satOpen);
+
+			Object paramObj15 = new IntegerWrapper(satClose);
 
 			MethodWrapper methodWrapper = new MethodWrapper(OrgLaborServiceUtil.class.getName(),
 					"updateOrgLabor",
@@ -293,7 +295,7 @@ public class OrgLaborServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14
+						paramObj14, paramObj15
 					});
 
 			Object returnObj = null;

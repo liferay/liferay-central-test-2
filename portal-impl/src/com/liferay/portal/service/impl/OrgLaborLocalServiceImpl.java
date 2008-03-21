@@ -94,14 +94,17 @@ public class OrgLaborLocalServiceImpl extends OrgLaborLocalServiceBaseImpl {
 	}
 
 	public OrgLabor updateOrgLabor(
-			long orgLaborId, int sunOpen, int sunClose, int monOpen,
+			long orgLaborId, int typeId, int sunOpen, int sunClose, int monOpen,
 			int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
 			int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
 			int satClose)
 		throws PortalException, SystemException {
 
+		validate(typeId);
+
 		OrgLabor orgLabor = orgLaborPersistence.findByPrimaryKey(orgLaborId);
 
+		orgLabor.setTypeId(typeId);
 		orgLabor.setSunOpen(sunOpen);
 		orgLabor.setSunClose(sunClose);
 		orgLabor.setMonOpen(monOpen);

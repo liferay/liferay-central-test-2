@@ -108,16 +108,16 @@ public class OrgLaborServiceJSON {
 		return OrgLaborJSONSerializer.toJSONArray(returnValue);
 	}
 
-	public static JSONObject updateOrgLabor(long orgLaborId, int sunOpen,
-		int sunClose, int monOpen, int monClose, int tueOpen, int tueClose,
-		int wedOpen, int wedClose, int thuOpen, int thuClose, int friOpen,
-		int friClose, int satOpen, int satClose)
+	public static JSONObject updateOrgLabor(long orgLaborId, int typeId,
+		int sunOpen, int sunClose, int monOpen, int monClose, int tueOpen,
+		int tueClose, int wedOpen, int wedClose, int thuOpen, int thuClose,
+		int friOpen, int friClose, int satOpen, int satClose)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.updateOrgLabor(orgLaborId,
-				sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose,
-				wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose,
-				satOpen, satClose);
+				typeId, sunOpen, sunClose, monOpen, monClose, tueOpen,
+				tueClose, wedOpen, wedClose, thuOpen, thuClose, friOpen,
+				friClose, satOpen, satClose);
 
 		return OrgLaborJSONSerializer.toJSONObject(returnValue);
 	}

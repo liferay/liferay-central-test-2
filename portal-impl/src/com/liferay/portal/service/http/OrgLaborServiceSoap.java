@@ -141,15 +141,15 @@ public class OrgLaborServiceSoap {
 	}
 
 	public static com.liferay.portal.model.OrgLaborSoap updateOrgLabor(
-		long orgLaborId, int sunOpen, int sunClose, int monOpen, int monClose,
-		int tueOpen, int tueClose, int wedOpen, int wedClose, int thuOpen,
-		int thuClose, int friOpen, int friClose, int satOpen, int satClose)
-		throws RemoteException {
+		long orgLaborId, int typeId, int sunOpen, int sunClose, int monOpen,
+		int monClose, int tueOpen, int tueClose, int wedOpen, int wedClose,
+		int thuOpen, int thuClose, int friOpen, int friClose, int satOpen,
+		int satClose) throws RemoteException {
 		try {
 			com.liferay.portal.model.OrgLabor returnValue = OrgLaborServiceUtil.updateOrgLabor(orgLaborId,
-					sunOpen, sunClose, monOpen, monClose, tueOpen, tueClose,
-					wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose,
-					satOpen, satClose);
+					typeId, sunOpen, sunClose, monOpen, monClose, tueOpen,
+					tueClose, wedOpen, wedClose, thuOpen, thuClose, friOpen,
+					friClose, satOpen, satClose);
 
 			return com.liferay.portal.model.OrgLaborSoap.toSoapModel(returnValue);
 		}
