@@ -36,6 +36,21 @@ public class AddCommentTest extends BaseTestCase {
 		selenium.typeKeys("_36_postReplyBody0", "This is a test Post Reply");
 		selenium.click("_36_postReplyButton0");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("This is a test Post Reply"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("This is a test Post Reply")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
