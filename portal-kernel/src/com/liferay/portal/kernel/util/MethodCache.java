@@ -38,7 +38,7 @@ public class MethodCache {
 	public static Method get(String className, String methodName)
 		throws ClassNotFoundException, NoSuchMethodException {
 
-		return get(className, methodName, new Class[] {});
+		return get(className, methodName, new Class[0]);
 	}
 
 	public static Method get(
