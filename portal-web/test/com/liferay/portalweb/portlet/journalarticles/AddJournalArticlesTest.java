@@ -94,7 +94,22 @@ public class AddJournalArticlesTest extends BaseTestCase {
 
 		selenium.click("link=RSS-Blogs-MattAsay_Bossie");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"Infoworld's BOSSIE awards demonstrate open source's progress"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Infoworld's BOSSIE awards demonstrate open source's progress")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
