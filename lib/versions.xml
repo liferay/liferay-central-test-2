@@ -2185,17 +2185,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>portal/woodstox.jar</file-name>
-		<version>3.2.4</version>
-		<project-name>Woodstox</project-name>
-		<project-url>http://woodstox.codehaus.org</project-url>
-		<licenses>
-			<license>
-				<license-name>Apache License 2.0</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>portal/wsdl4j.jar</file-name>
 		<version>1.5.1</version>
 		<project-name>WSDL4J</project-name>
@@ -2204,6 +2193,17 @@
 			<license>
 				<license-name>Common Public License 1.0</license-name>
 				<copyright-notice>Copyright (c) IBM Corp 2001, 2005</copyright-notice>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/wstx.jar</file-name>
+		<version>3.2.4</version>
+		<project-name>Woodstox</project-name>
+		<project-url>http://woodstox.codehaus.org</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
 			</license>
 		</licenses>
 	</library>

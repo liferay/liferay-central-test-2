@@ -184,6 +184,7 @@
 	<classpathentry kind="lib" path="lib/portal/spring.jar"/>
 	<classpathentry kind="lib" path="lib/portal/spring-test.jar"/>
 	<classpathentry kind="lib" path="lib/portal/spring-webmvc.jar"/>
+	<classpathentry kind="lib" path="lib/portal/stax.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts.jar"/>
 	<classpathentry kind="lib" path="lib/portal/struts-el.jar"/>
 	<classpathentry kind="lib" path="lib/portal/textmining.jar"/>
@@ -195,6 +196,7 @@
 	<classpathentry kind="lib" path="lib/portal/velocity.jar"/>
 	<classpathentry kind="lib" path="lib/portal/velocity-tools.jar"/>
 	<classpathentry kind="lib" path="lib/portal/wsdl4j.jar"/>
+	<classpathentry kind="lib" path="lib/portal/wstx.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xalan.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xbean-spring.jar"/>
 	<classpathentry kind="lib" path="lib/portal/xercesImpl.jar"/>

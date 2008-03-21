@@ -50,14 +50,39 @@ import org.apache.commons.collections.map.ReferenceMap;
 /**
  * <a href="LocalizationUtil.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * This class is used to localize values stored in XML and is often used to add
+ * localization behavior to value objects.
+ * </p>
+ *
+ * <p>
+ * Caching of the localized values is done in this class rather than in the
+ * value object since value objects get flushed from cache fairly quickly.
+ * Though lookups performed on a key based on an XML file is slower than lookups
+ * done at the value object level in general, the value object will get flushed
+ * at a rate which works against the performance gain.
+ * </p>
+ *
+ * <p>
+ * Use of an unsynchronized cache allows for optimized performance. The same
+ * value should always be rendered for a given key. In the worst case scenario,
+ * you have multiple threads writing the same key and value into the map at the
+ * same time.
+ * </p>
+ *
+ * <p>
+ * In addition, the cache is a soft hash map which prevents memory leaks within
+ * the system while enabling the cache to live longer than in a weak hash map.
+ * </p>
+ *
  * @author Alexander Chow
  *
  */
 public class LocalizationUtil {
 
 	public static String[] getAvailableLocales(String xml) {
-		String attributeValue =
-			_getRootAttribute(xml, _AVAILABLE_LOCALES, StringPool.BLANK);
+		String attributeValue = _getRootAttribute(
+			xml, _AVAILABLE_LOCALES, StringPool.BLANK);
 
 		return StringUtil.split(attributeValue);
 	}
@@ -99,7 +124,7 @@ public class LocalizationUtil {
 
 			reader = factory.createXMLStreamReader(new StringReader(xml));
 
-			// Step over root node
+			// Skip root node
 
 			if (reader.hasNext()) {
 				reader.nextTag();
@@ -111,8 +136,8 @@ public class LocalizationUtil {
 				int event = reader.next();
 
 				if (event == XMLStreamConstants.START_ELEMENT) {
-					String languageId =
-						reader.getAttributeValue(null, _LANGUAGE_ID);
+					String languageId = reader.getAttributeValue(
+						null, _LANGUAGE_ID);
 
 					if (Validator.isNull(languageId)) {
 						languageId = defaultLanguageId;
@@ -161,6 +186,15 @@ public class LocalizationUtil {
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(e);
+			}
+		}
+		finally {
+			if (reader != null) {
+				try {
+					reader.close();
+				}
+				catch (Exception e) {
+				}
 			}
 		}
 
@@ -218,14 +252,14 @@ public class LocalizationUtil {
 	}
 
 	public static String removeLocalization(
-			String xml, String key, String requestedLanguageId, boolean cdata) {
+		String xml, String key, String requestedLanguageId, boolean cdata) {
 
 		_removeCachedValue(xml);
 
 		xml = _sanitizeXML(xml);
 
-		String systemDefaultLanguageId =
-			LocaleUtil.toLanguageId(LocaleUtil.getDefault());
+		String systemDefaultLanguageId = LocaleUtil.toLanguageId(
+			LocaleUtil.getDefault());
 
 		XMLStreamReader reader = null;
 		XMLStreamWriter writer = null;
@@ -243,10 +277,10 @@ public class LocalizationUtil {
 			if (reader.hasNext()) {
 				reader.nextTag();
 
-				availableLocales =
-					reader.getAttributeValue(null, _AVAILABLE_LOCALES);
-				defaultLanguageId =
-					reader.getAttributeValue(null, _DEFAULT_LOCALE);
+				availableLocales = reader.getAttributeValue(
+					null, _AVAILABLE_LOCALES);
+				defaultLanguageId = reader.getAttributeValue(
+					null, _DEFAULT_LOCALE);
 
 				if (Validator.isNull(defaultLanguageId)) {
 					defaultLanguageId = systemDefaultLanguageId;
@@ -374,8 +408,8 @@ public class LocalizationUtil {
 			if (reader.hasNext()) {
 				reader.nextTag();
 
-				availableLocales =
-					reader.getAttributeValue(null, _AVAILABLE_LOCALES);
+				availableLocales = reader.getAttributeValue(
+					null, _AVAILABLE_LOCALES);
 
 				if (Validator.isNull(availableLocales)) {
 					availableLocales = defaultLanguageId;
@@ -448,45 +482,6 @@ public class LocalizationUtil {
 		return xml;
 	}
 
-	private static void _removeCachedValue(String xml) {
-		_cache.remove(xml);
-	}
-
-	private static void _setCachedValue(
-		String xml, String requestedLanguageId, boolean useDefault,
-		String value) {
-
-		if (!_EMPTY_ROOT_NODE.equals(xml)) {
-			Map valueMap = (Map)_cache.get(xml);
-
-			if (valueMap == null) {
-				valueMap = new HashMap<Tuple,String>();
-			}
-
-			Tuple subkey = new Tuple(useDefault, requestedLanguageId);
-
-			valueMap.put(subkey, value);
-
-			_cache.put(xml, valueMap);
-		}
-	}
-
-	private static String _getCachedValue(
-		String xml, String requestedLanguageId, boolean useDefault) {
-
-		String value = null;
-
-		Map<Tuple,String> valueMap = (Map)_cache.get(xml);
-
-		if (valueMap != null) {
-			Tuple subkey = new Tuple(useDefault, requestedLanguageId);
-
-			value = valueMap.get(subkey);
-		}
-
-		return value;
-	}
-
 	private static void _copyNonExempt(
 			XMLStreamReader reader, XMLStreamWriter writer,
 			String exemptLanguageId, String defaultLanguageId, boolean cdata)
@@ -496,8 +491,8 @@ public class LocalizationUtil {
 			int event = reader.next();
 
 			if (event == XMLStreamConstants.START_ELEMENT) {
-				String languageId =
-					reader.getAttributeValue(null, _LANGUAGE_ID);
+				String languageId = reader.getAttributeValue(
+					null, _LANGUAGE_ID);
 
 				if (Validator.isNull(languageId)) {
 					languageId = defaultLanguageId;
@@ -538,6 +533,22 @@ public class LocalizationUtil {
 		}
 	}
 
+	private static String _getCachedValue(
+		String xml, String requestedLanguageId, boolean useDefault) {
+
+		String value = null;
+
+		Map<Tuple, String> valueMap = _cache.get(xml);
+
+		if (valueMap != null) {
+			Tuple subkey = new Tuple(useDefault, requestedLanguageId);
+
+			value = valueMap.get(subkey);
+		}
+
+		return value;
+	}
+
 	private static String _getPrefsKey(String key, String languageId) {
 		String defaultLanguageId = LocaleUtil.toLanguageId(
 			LocaleUtil.getDefault());
@@ -560,8 +571,6 @@ public class LocalizationUtil {
 			XMLInputFactory factory = XMLInputFactory.newInstance();
 
 			reader = factory.createXMLStreamReader(new StringReader(xml));
-
-			// Read root node
 
 			if (reader.hasNext()) {
 				reader.nextTag();
@@ -591,37 +600,50 @@ public class LocalizationUtil {
 		return value;
 	}
 
+	private static void _removeCachedValue(String xml) {
+		_cache.remove(xml);
+	}
+
 	private static String _sanitizeXML(String xml) {
 		if (Validator.isNull(xml) || (xml.indexOf("<root") == -1)) {
 			xml = _EMPTY_ROOT_NODE;
 		}
+
 		return xml;
 	}
 
-	// Caching is done at this level rather than an the value object level since
-	// persistence objects get flushed from cache fairly quickly.  Though
-	// lookups performed on a key based on an XML file is slower than lookups
-	// done at the value object level in general, the value object will get
-	// flushed at a rate which works against the performance gain.
-	//
-	// Use of unsynchronized cache is to allow for optimized performance.  The
-	// same value should always be rendered for a given key.  In the worst case
-	// scenario, you have multiple threads writing the same key and value into
-	// the map at the same time.
-	//
-	// In addition, this is a soft hash map to prevent memory leaks within the
-	// system, but enable the cache to be maintained longer than a weak hash map
-	// would allow.
+	private static void _setCachedValue(
+		String xml, String requestedLanguageId, boolean useDefault,
+		String value) {
 
-	private static Map _cache =
-		new ReferenceMap(ReferenceMap.SOFT, ReferenceMap.HARD);
+		if (!_EMPTY_ROOT_NODE.equals(xml)) {
+			Map<Tuple, String> valueMap = _cache.get(xml);
+
+			if (valueMap == null) {
+				valueMap = new HashMap<Tuple, String>();
+			}
+
+			Tuple subkey = new Tuple(useDefault, requestedLanguageId);
+
+			valueMap.put(subkey, value);
+
+			_cache.put(xml, valueMap);
+		}
+	}
 
 	private static final String _AVAILABLE_LOCALES = "available-locales";
+
 	private static final String _DEFAULT_LOCALE = "default-locale";
+
 	private static final String _LANGUAGE_ID = "language-id";
+
 	private static final String _ROOT = "root";
+
 	private static final String _EMPTY_ROOT_NODE = "<root />";
 
 	private static Log _log = LogFactoryUtil.getLog(LocalizationUtil.class);
+
+	private static Map<String, Map<Tuple, String>> _cache = new ReferenceMap(
+		ReferenceMap.SOFT, ReferenceMap.HARD);
 
 }

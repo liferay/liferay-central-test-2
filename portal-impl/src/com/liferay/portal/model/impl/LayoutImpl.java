@@ -348,8 +348,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public String getName(String localeLanguageId) {
-		return LocalizationUtil.getLocalization(
-			getName(), localeLanguageId);
+		return LocalizationUtil.getLocalization(getName(), localeLanguageId);
 	}
 
 	public String getName(Locale locale, boolean useDefault) {
@@ -385,8 +384,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public String getTitle(String localeLanguageId) {
-		return LocalizationUtil.getLocalization(
-			getTitle(), localeLanguageId);
+		return LocalizationUtil.getLocalization(getTitle(), localeLanguageId);
 	}
 
 	public String getTitle(Locale locale, boolean useDefault) {
@@ -718,8 +716,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return url;
 	}
 
-	private Properties _typeSettingsProperties = null;
-
 	private static Log _log = LogFactory.getLog(LayoutImpl.class);
+
+	private Properties _typeSettingsProperties = null;
 
 }
