@@ -60,19 +60,9 @@ import org.apache.commons.collections.map.ReferenceMap;
  * value object since value objects get flushed from cache fairly quickly.
  * Though lookups performed on a key based on an XML file is slower than lookups
  * done at the value object level in general, the value object will get flushed
- * at a rate which works against the performance gain.
- * </p>
- *
- * <p>
- * Use of an unsynchronized cache allows for optimized performance. The same
- * value should always be rendered for a given key. In the worst case scenario,
- * you have multiple threads writing the same key and value into the map at the
- * same time.
- * </p>
- *
- * <p>
- * In addition, the cache is a soft hash map which prevents memory leaks within
- * the system while enabling the cache to live longer than in a weak hash map.
+ * at a rate which works against the performance gain.  The cache is a soft hash
+ * map which prevents memory leaks within the system while enabling the cache to
+ * live longer than in a weak hash map.
  * </p>
  *
  * @author Alexander Chow
@@ -254,8 +244,6 @@ public class LocalizationUtil {
 	public static String removeLocalization(
 		String xml, String key, String requestedLanguageId, boolean cdata) {
 
-		_removeCachedValue(xml);
-
 		xml = _sanitizeXML(xml);
 
 		String systemDefaultLanguageId = LocaleUtil.toLanguageId(
@@ -389,8 +377,6 @@ public class LocalizationUtil {
 		String xml, String key, String value, String requestedLanguageId,
 		String defaultLanguageId, boolean cdata) {
 
-		_removeCachedValue(xml);
-
 		xml = _sanitizeXML(xml);
 
 		XMLStreamReader reader = null;
@@ -416,7 +402,9 @@ public class LocalizationUtil {
 				}
 
 				if (availableLocales.indexOf(requestedLanguageId) == -1) {
-					availableLocales += StringPool.COMMA + requestedLanguageId;
+					availableLocales = StringUtil.add(
+						availableLocales, requestedLanguageId,
+						StringPool.COMMA);
 				}
 			}
 
@@ -600,10 +588,6 @@ public class LocalizationUtil {
 		return value;
 	}
 
-	private static void _removeCachedValue(String xml) {
-		_cache.remove(xml);
-	}
-
 	private static String _sanitizeXML(String xml) {
 		if (Validator.isNull(xml) || (xml.indexOf("<root") == -1)) {
 			xml = _EMPTY_ROOT_NODE;
@@ -616,18 +600,20 @@ public class LocalizationUtil {
 		String xml, String requestedLanguageId, boolean useDefault,
 		String value) {
 
-		if (!_EMPTY_ROOT_NODE.equals(xml)) {
-			Map<Tuple, String> valueMap = _cache.get(xml);
+		if (Validator.isNotNull(xml) && !xml.equals(_EMPTY_ROOT_NODE)) {
+			synchronized (_cache) {
+				Map<Tuple, String> valueMap = _cache.get(xml);
 
-			if (valueMap == null) {
-				valueMap = new HashMap<Tuple, String>();
+				if (valueMap == null) {
+					valueMap = new HashMap<Tuple, String>();
+				}
+
+				Tuple subkey = new Tuple(useDefault, requestedLanguageId);
+
+				valueMap.put(subkey, value);
+
+				_cache.put(xml, valueMap);
 			}
-
-			Tuple subkey = new Tuple(useDefault, requestedLanguageId);
-
-			valueMap.put(subkey, value);
-
-			_cache.put(xml, valueMap);
 		}
 	}
 
