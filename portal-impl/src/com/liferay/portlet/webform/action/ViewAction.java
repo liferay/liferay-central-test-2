@@ -99,7 +99,7 @@ public class ViewAction extends PortletAction {
 			}
 		}
 
-		List fieldValues = new ArrayList();
+		List<String> fieldValues = new ArrayList<String>();
 
 		for (int i = 1; i <= _MAX_FIELDS; i++) {
 			fieldValues.add(req.getParameter("field" + i));
@@ -141,13 +141,16 @@ public class ViewAction extends PortletAction {
 		return mapping.findForward("portlet.web_form.view");
 	}
 
-	protected String getMailBody(List fieldValues, PortletPreferences prefs) {
+	protected String getMailBody(
+		List<String> fieldValues, PortletPreferences prefs) {
+
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = fieldValues.iterator();
+		Iterator<String> itr = fieldValues.iterator();
 
 		for (int i = 1; itr.hasNext(); i++) {
-			String fieldValue = (String)itr.next();
+			String fieldValue = itr.next();
+
 			String fieldLabel = prefs.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
@@ -163,7 +166,7 @@ public class ViewAction extends PortletAction {
 	}
 
 	protected boolean saveFile(
-		List fieldValues, PortletPreferences prefs, String fileName) {
+		List<String> fieldValues, PortletPreferences prefs, String fileName) {
 
 		// Save the file as a standard Excel CSV format. Use ; as a delimiter,
 		// quote each entry with double quotes, and escape double quotes in
@@ -171,10 +174,11 @@ public class ViewAction extends PortletAction {
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = fieldValues.iterator();
+		Iterator<String> itr = fieldValues.iterator();
 
 		for (int i = 1; itr.hasNext(); i++) {
-			String fieldValue = (String)itr.next();
+			String fieldValue = itr.next();
+
 			String fieldLabel = prefs.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 
@@ -199,7 +203,9 @@ public class ViewAction extends PortletAction {
 		}
 	}
 
-	protected boolean sendEmail(List fieldValues, PortletPreferences prefs) {
+	protected boolean sendEmail(
+		List<String> fieldValues, PortletPreferences prefs) {
+
 		try {
 			String subject = prefs.getValue("subject", StringPool.BLANK);
 			String emailAddress = prefs.getValue(
@@ -232,13 +238,16 @@ public class ViewAction extends PortletAction {
 		}
 	}
 
-	protected boolean validate(List fieldValues, PortletPreferences prefs) {
+	protected boolean validate(
+		List<String> fieldValues, PortletPreferences prefs) {
+
 		for (int i = 1; i < _MAX_FIELDS; i++) {
+			String fieldValue = fieldValues.get(i - 1);
+
 			String fieldLabel = prefs.getValue(
 				"fieldLabel" + i, StringPool.BLANK);
 			boolean fieldOptional = GetterUtil.getBoolean(
 				prefs.getValue("fieldOptional" + i, StringPool.BLANK));
-			String fieldValue = (String)fieldValues.get(i - 1);
 
 			if (!fieldOptional && Validator.isNotNull(fieldLabel) &&
 				Validator.isNull(fieldValue)) {

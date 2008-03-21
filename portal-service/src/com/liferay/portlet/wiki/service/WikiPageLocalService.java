@@ -183,7 +183,7 @@ public interface WikiPageLocalService {
 			com.liferay.portal.PortalException;
 
 	public void addPageAttachments(long nodeId, java.lang.String title,
-		java.util.List files)
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -228,23 +228,26 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getChildren(long nodeId, boolean head,
-		java.lang.String parentTitle)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getChildren(
+		long nodeId, boolean head, java.lang.String parentTitle)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getIncomingLinks(long nodeId, java.lang.String title)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getIncomingLinks(
+		long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getNoAssetPages()
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getNoAssetPages()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getOrphans(long nodeId)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getOrphans(
+		long nodeId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getOutgoingLinks(long nodeId, java.lang.String title)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getOutgoingLinks(
+		long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -266,21 +269,25 @@ public interface WikiPageLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getPages(long nodeId, int begin, int end)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long nodeId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getPages(long nodeId, java.lang.String title,
-		int begin, int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List getPages(long nodeId, java.lang.String title,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long nodeId, java.lang.String title, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getPages(long nodeId, boolean head, int begin, int end)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long nodeId, java.lang.String title, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getPages(long nodeId, java.lang.String title,
-		boolean head, int begin, int end)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long nodeId, boolean head, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		long nodeId, java.lang.String title, boolean head, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getPagesCount(long nodeId)
@@ -295,7 +302,8 @@ public interface WikiPageLocalService {
 	public int getPagesCount(long nodeId, java.lang.String title, boolean head)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getRecentChanges(long nodeId, int begin, int end)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getRecentChanges(
+		long nodeId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getRecentChangesCount(long nodeId)

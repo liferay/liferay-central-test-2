@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -380,8 +381,9 @@ public class WikiPortletDataHandlerImpl implements PortletDataHandler {
 			if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
 				page.isHead()) {
 
-				List files = context.getZipReader().getFolderEntries().get(
-					page.getAttachmentsDir() + "/");
+				List<ObjectValuePair<String, byte[]>> files =
+					context.getZipReader().getFolderEntries().get(
+						page.getAttachmentsDir() + "/");
 
 				if (files != null) {
 					WikiPageLocalServiceUtil.addPageAttachments(

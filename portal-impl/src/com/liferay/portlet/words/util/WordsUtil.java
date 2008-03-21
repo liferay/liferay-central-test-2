@@ -29,6 +29,7 @@ import com.liferay.portlet.words.ScramblerException;
 import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
 import com.liferay.util.jazzy.BasicSpellCheckListener;
+import com.liferay.util.jazzy.InvalidWord;
 
 import com.swabunga.spell.engine.SpellDictionaryHashMap;
 import com.swabunga.spell.event.DefaultWordFinder;
@@ -54,15 +55,15 @@ import org.apache.commons.logging.LogFactory;
  */
 public class WordsUtil {
 
-	public static List checkSpelling(String text) {
+	public static List<InvalidWord> checkSpelling(String text) {
 		return _instance._checkSpelling(text);
 	}
 
-	public static List getDictionaryList() {
+	public static List<String> getDictionaryList() {
 		return _instance._getDictionaryList();
 	}
 
-	public static Set getDictionarySet() {
+	public static Set<String> getDictionarySet() {
 		return _instance._getDictionarySet();
 	}
 
@@ -117,7 +118,7 @@ public class WordsUtil {
 		}
 	}
 
-	private List _checkSpelling(String text) {
+	private List<InvalidWord> _checkSpelling(String text) {
 		SpellChecker checker = new SpellChecker(_spellDictionary);
 
 		BasicSpellCheckListener listener = new BasicSpellCheckListener(text);
@@ -130,18 +131,18 @@ public class WordsUtil {
 		return listener.getInvalidWords();
 	}
 
-	private List _getDictionaryList() {
+	private List<String> _getDictionaryList() {
 		return _dictionaryList;
 	}
 
-	private Set _getDictionarySet() {
+	private Set<String> _getDictionarySet() {
 		return _dictionarySet;
 	}
 
 	private String _getRandomWord() {
 		int pos = Randomizer.getInstance().nextInt(_dictionaryList.size());
 
-		return (String)_dictionaryList.get(pos);
+		return _dictionaryList.get(pos);
 	}
 
 	private boolean _isDictionaryWord(String word) {
@@ -149,7 +150,7 @@ public class WordsUtil {
 	}
 
 	private String[] _unscramble(String word) throws ScramblerException {
-		List validWords = new ArrayList();
+		List<String> validWords = new ArrayList<String>();
 
 		String[] words = scramble(word);
 
@@ -159,15 +160,15 @@ public class WordsUtil {
 			}
 		}
 
-		return (String[])validWords.toArray(new String[0]);
+		return validWords.toArray(new String[validWords.size()]);
 	}
 
 	private static Log _log = LogFactory.getLog(WordsUtil.class);
 
 	private static WordsUtil _instance = new WordsUtil();
 
-	private List _dictionaryList;
-	private Set _dictionarySet;
+	private List<String> _dictionaryList;
+	private Set<String> _dictionarySet;
 	private SpellDictionaryHashMap _spellDictionary;
 
 }

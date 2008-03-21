@@ -31,6 +31,7 @@ import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
 import com.liferay.portlet.wiki.util.WikiUtil;
+import com.liferay.util.diff.DiffResult;
 import com.liferay.util.diff.DiffUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -109,7 +110,7 @@ public class CompareVersionsAction extends PortletAction {
 			targetContent = HtmlUtil.stripHtml(targetContent);
 		}
 
-		List[] diffResults = DiffUtil.diff(
+		List<DiffResult>[] diffResults = DiffUtil.diff(
 			new StringReader(sourceContent), new StringReader(targetContent));
 
 		req.setAttribute(

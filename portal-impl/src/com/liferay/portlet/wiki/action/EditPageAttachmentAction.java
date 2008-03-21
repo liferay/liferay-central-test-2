@@ -133,7 +133,8 @@ public class EditPageAttachmentAction extends PortletAction {
 		String title = ParamUtil.getString(req, "title");
 		int numOfFiles = ParamUtil.getInteger(req, "numOfFiles");
 
-		List files = new ArrayList();
+		List<ObjectValuePair<String, byte[]>> files =
+			new ArrayList<ObjectValuePair<String, byte[]>>();
 
 		if (numOfFiles == 0) {
 			File file = uploadReq.getFile("file");
@@ -143,7 +144,8 @@ public class EditPageAttachmentAction extends PortletAction {
 				byte[] bytes = FileUtil.getBytes(file);
 
 				if ((bytes != null) && (bytes.length > 0)) {
-					ObjectValuePair ovp = new ObjectValuePair(fileName, bytes);
+					ObjectValuePair<String, byte[]> ovp =
+						new ObjectValuePair<String, byte[]>(fileName, bytes);
 
 					files.add(ovp);
 				}
@@ -159,8 +161,9 @@ public class EditPageAttachmentAction extends PortletAction {
 					byte[] bytes = FileUtil.getBytes(file);
 
 					if ((bytes != null) && (bytes.length > 0)) {
-						ObjectValuePair ovp = new ObjectValuePair(
-							fileName, bytes);
+						ObjectValuePair<String, byte[]> ovp =
+							new ObjectValuePair<String, byte[]>(
+								fileName, bytes);
 
 						files.add(ovp);
 					}

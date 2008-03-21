@@ -234,10 +234,11 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 	public void deleteNodes(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = wikiNodePersistence.findByGroupId(groupId).iterator();
+		Iterator<WikiNode> itr = wikiNodePersistence.findByGroupId(
+			groupId).iterator();
 
 		while (itr.hasNext()) {
-			WikiNode node = (WikiNode)itr.next();
+			WikiNode node = itr.next();
 
 			deleteNode(node);
 		}
@@ -255,11 +256,11 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		return wikiNodePersistence.findByG_N(groupId, nodeName);
 	}
 
-	public List getNodes(long groupId) throws SystemException {
+	public List<WikiNode> getNodes(long groupId) throws SystemException {
 		return wikiNodePersistence.findByGroupId(groupId);
 	}
 
-	public List getNodes(long groupId, int begin, int end)
+	public List<WikiNode> getNodes(long groupId, int begin, int end)
 		throws SystemException {
 
 		return wikiNodePersistence.findByGroupId(groupId, begin, end);
@@ -281,19 +282,19 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr1 = wikiNodePersistence.findByCompanyId(
+			Iterator<WikiNode> nodesItr = wikiNodePersistence.findByCompanyId(
 				companyId).iterator();
 
-			while (itr1.hasNext()) {
-				WikiNode node = (WikiNode)itr1.next();
+			while (nodesItr.hasNext()) {
+				WikiNode node = nodesItr.next();
 
 				long nodeId = node.getNodeId();
 
-				Iterator itr2 = wikiPagePersistence.findByNodeId(
+				Iterator<WikiPage> pagesItr = wikiPagePersistence.findByNodeId(
 					nodeId).iterator();
 
-				while (itr2.hasNext()) {
-					WikiPage page = (WikiPage)itr2.next();
+				while (pagesItr.hasNext()) {
+					WikiPage page = pagesItr.next();
 
 					long groupId = node.getGroupId();
 					String title = page.getTitle();

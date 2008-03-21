@@ -385,14 +385,15 @@ public class WikiNodeLocalServiceUtil {
 		return wikiNodeLocalService.getNode(groupId, nodeName);
 	}
 
-	public static java.util.List getNodes(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
+		long groupId) throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 
 		return wikiNodeLocalService.getNodes(groupId);
 	}
 
-	public static java.util.List getNodes(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		WikiNodeLocalService wikiNodeLocalService = WikiNodeLocalServiceFactory.getService();
 

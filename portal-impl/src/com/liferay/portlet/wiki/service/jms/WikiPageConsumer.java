@@ -33,8 +33,8 @@ import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -68,7 +68,7 @@ public class WikiPageConsumer implements MessageListener {
 
 			QueueSession session = con.createQueueSession(
 				false, Session.AUTO_ACKNOWLEDGE);
-			Queue queue = (Queue)WikiPageQueueUtil.getQueue();
+			Queue queue = WikiPageQueueUtil.getQueue();
 
 			QueueReceiver subscriber = session.createReceiver(queue);
 
@@ -106,7 +106,7 @@ public class WikiPageConsumer implements MessageListener {
 		String replyToAddress = array[8];
 		String mailId = array[9];
 
-		Set sent = CollectionFactory.getHashSet();
+		Set<Long> sent = new HashSet<Long>();
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -117,8 +117,9 @@ public class WikiPageConsumer implements MessageListener {
 
 		// Pages
 
-		List subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
-			companyId, WikiPage.class.getName(), pageResourcePrimKey);
+		List<Subscription> subscriptions =
+			SubscriptionLocalServiceUtil.getSubscriptions(
+				companyId, WikiPage.class.getName(), pageResourcePrimKey);
 
 		_sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
@@ -140,14 +141,12 @@ public class WikiPageConsumer implements MessageListener {
 
 	private void _sendEmail(
 			long userId, String fromName, String fromAddress, String subject,
-			String body, List subscriptions, Set sent, String replyToAddress,
-			String mailId)
+			String body, List<Subscription> subscriptions, Set<Long> sent,
+			String replyToAddress, String mailId)
 		throws Exception {
 
-		for (int i = 0; i < subscriptions.size(); i++) {
-			Subscription subscription = (Subscription)subscriptions.get(i);
-
-			Long subscribedUserId = new Long(subscription.getUserId());
+		for (Subscription subscription : subscriptions) {
+			long subscribedUserId = subscription.getUserId();
 
 			if (sent.contains(subscribedUserId)) {
 				if (_log.isDebugEnabled()) {

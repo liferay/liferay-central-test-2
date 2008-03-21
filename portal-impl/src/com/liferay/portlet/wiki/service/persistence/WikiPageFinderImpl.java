@@ -101,10 +101,10 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			qPos.add(createDate);
 			qPos.add(true);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -121,7 +121,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 		}
 	}
 
-	public List findByCreateDate(
+	public List<WikiPage> findByCreateDate(
 			long nodeId, Date createDate, boolean before, int begin, int end)
 		throws SystemException {
 
@@ -129,7 +129,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			nodeId, new Timestamp(createDate.getTime()), before, begin, end);
 	}
 
-	public List findByCreateDate(
+	public List<WikiPage> findByCreateDate(
 			long nodeId, Timestamp createDate, boolean before, int begin,
 			int end)
 		throws SystemException {
@@ -160,7 +160,8 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			qPos.add(createDate);
 			qPos.add(true);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<WikiPage>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -170,7 +171,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 		}
 	}
 
-	public List findByNoAssets() throws SystemException {
+	public List<WikiPage> findByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
@@ -211,7 +212,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 			qPos.add(uuid);
 			qPos.add(groupId);
 
-			List list = q.list();
+			List<WikiPage> list = q.list();
 
 			if (list.size() == 0) {
 				StringMaker sm = new StringMaker();
@@ -225,7 +226,7 @@ public class WikiPageFinderImpl implements WikiPageFinder {
 				throw new NoSuchPageException(sm.toString());
 			}
 			else {
-				return (WikiPage)list.get(0);
+				return list.get(0);
 			}
 		}
 		catch (NoSuchPageException nspe) {

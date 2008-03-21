@@ -107,7 +107,9 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return friendlyURLPath;
 	}
 
-	public void populateParams(String friendlyURLPath, Map params) {
+	public void populateParams(
+		String friendlyURLPath, Map<String, String> params) {
+
 		params.put("p_p_id", _PORTLET_ID);
 		params.put("p_p_lifecycle", "0");
 		params.put("p_p_mode", PortletMode.VIEW.toString());

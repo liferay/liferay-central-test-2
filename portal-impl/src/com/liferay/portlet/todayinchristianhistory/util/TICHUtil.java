@@ -24,6 +24,7 @@ package com.liferay.portlet.todayinchristianhistory.util;
 
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
+import com.liferay.portlet.todayinchristianhistory.model.Event;
 
 import java.util.List;
 
@@ -35,10 +36,10 @@ import java.util.List;
  */
 public class TICHUtil {
 
-	public static List getEvents() {
+	public static List<Event> getEvents() {
 		WebCacheItem wci = new EventsWebCacheItem();
 
-		return (List)WebCachePoolUtil.get(TICHUtil.class.getName(), wci);
+		return (List<Event>)WebCachePoolUtil.get(TICHUtil.class.getName(), wci);
 	}
 
 }

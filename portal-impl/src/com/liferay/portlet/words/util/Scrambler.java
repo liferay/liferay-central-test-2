@@ -42,7 +42,7 @@ public class Scrambler {
 		}
 
 		_word = word;
-		_words = new TreeSet(new WordComparator());
+		_words = new TreeSet<String>(new WordComparator());
 	}
 
 	public String[] scramble() {
@@ -52,7 +52,7 @@ public class Scrambler {
 
 		_scramble(0, _word.length(), _word.toCharArray());
 
-		return (String[])_words.toArray(new String[0]);
+		return _words.toArray(new String[_words.size()]);
 	}
 
 	private void _rotate(char[] charArray, int start) {
@@ -82,6 +82,6 @@ public class Scrambler {
 	}
 
 	private String _word;
-	private Set _words;
+	private Set<String> _words;
 
 }

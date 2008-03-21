@@ -94,7 +94,7 @@ public class ViewPageAction extends PortletAction {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		List nodes = WikiNodeLocalServiceUtil.getNodes(
+		List<WikiNode> nodes = WikiNodeLocalServiceUtil.getNodes(
 			themeDisplay.getLayout().getGroupId());
 
 		if (nodes.size() == 0) {
@@ -108,9 +108,7 @@ public class ViewPageAction extends PortletAction {
 			PermissionChecker permissionChecker =
 				themeDisplay.getPermissionChecker();
 
-			for (int i = 0; i < nodes.size(); i++) {
-				WikiNode curNode = (WikiNode)nodes.get(i);
-
+			for (WikiNode curNode : nodes) {
 				if (WikiNodePermission.contains(
 						permissionChecker, curNode.getNodeId(),
 						ActionKeys.VIEW)) {

@@ -56,7 +56,7 @@ public interface WikiPageService {
 			com.liferay.portal.PortalException;
 
 	public void addPageAttachments(long nodeId, java.lang.String title,
-		java.util.List files)
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

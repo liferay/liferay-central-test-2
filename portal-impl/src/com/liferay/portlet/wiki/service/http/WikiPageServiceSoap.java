@@ -82,7 +82,8 @@ import java.rmi.RemoteException;
  */
 public class WikiPageServiceSoap {
 	public static void addPageAttachments(long nodeId, java.lang.String title,
-		java.util.List files) throws RemoteException {
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
+		throws RemoteException {
 		try {
 			WikiPageServiceUtil.addPageAttachments(nodeId, title, files);
 		}

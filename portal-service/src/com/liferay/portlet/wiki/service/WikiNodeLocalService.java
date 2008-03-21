@@ -203,10 +203,11 @@ public interface WikiNodeLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getNodes(long groupId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
+		long groupId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getNodes(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.wiki.model.WikiNode> getNodes(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getNodesCount(long groupId)

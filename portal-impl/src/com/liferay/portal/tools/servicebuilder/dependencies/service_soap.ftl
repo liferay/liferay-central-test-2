@@ -86,7 +86,7 @@ public class ${entity.name}ServiceSoap {
 			${method.name}(
 
 			<#list method.parameters as parameter>
-				<#assign parameterTypeName = parameter.type.value + serviceBuilder.getDimensions(parameter.type.dimensions)>
+				<#assign parameterTypeName = parameter.type.value + parameter.genericsName + serviceBuilder.getDimensions(parameter.type.dimensions)>
 
 				<#if parameterTypeName == "java.util.Locale">
 					<#assign parameterTypeName = "String">

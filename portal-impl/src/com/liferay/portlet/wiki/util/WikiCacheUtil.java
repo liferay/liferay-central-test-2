@@ -30,9 +30,10 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.wiki.model.WikiPageDisplay;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.PortletURL;
 
@@ -142,6 +143,7 @@ public class WikiCacheUtil {
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
-	private static Map _groups = CollectionFactory.getSyncHashMap();
+	private static Map<String, Set<String>> _groups =
+		new ConcurrentHashMap<String, Set<String>>();
 
 }

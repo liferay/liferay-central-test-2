@@ -49,11 +49,11 @@ import org.dom4j.io.SAXReader;
  */
 public class WCUtil {
 
-	public static List getLarger() {
+	public static List<WCEntry> getLarger() {
 		return _instance._getLarger();
 	}
 
-	public static List getShorter() {
+	public static List<WCEntry> getShorter() {
 		return _instance._getShorter();
 	}
 
@@ -87,22 +87,23 @@ public class WCUtil {
 			_log.error(de);
 		}
 
-		_shorter = new ArrayList();
+		_shorter = new ArrayList<WCEntry>();
 
 		Element root = doc.getRootElement();
 
-		Iterator itr1 = root.element("shorter").elements("entry").iterator();
+		Iterator<Element> itr1 = root.element("shorter").elements(
+			"entry").iterator();
 
 		while (itr1.hasNext()) {
-			Element entry = (Element)itr1.next();
+			Element entry = itr1.next();
 
-			List proofs = new ArrayList();
+			List<String[]> proofs = new ArrayList<String[]>();
 
-			Iterator itr2 = entry.element(
+			Iterator<Element> itr2 = entry.element(
 				"proofs").elements("scriptures").iterator();
 
 			while (itr2.hasNext()) {
-				Element scriptures = (Element)itr2.next();
+				Element scriptures = itr2.next();
 
 				proofs.add(StringUtil.split(
 					scriptures.getText(), StringPool.SEMICOLON));
@@ -112,25 +113,25 @@ public class WCUtil {
 				new WCEntry(
 					entry.elementText("question"),
 					entry.elementText("answer"),
-					(String[][])proofs.toArray(new String[0][0])));
+					proofs.toArray(new String[0][0])));
 		}
 
 		_shorter = Collections.unmodifiableList(_shorter);
 
-		_larger = new ArrayList();
+		_larger = new ArrayList<WCEntry>();
 
 		itr1 = root.element("larger").elements("entry").iterator();
 
 		while (itr1.hasNext()) {
-			Element entry = (Element)itr1.next();
+			Element entry = itr1.next();
 
-			List proofs = new ArrayList();
+			List<String[]> proofs = new ArrayList<String[]>();
 
-			Iterator itr2 = entry.element(
+			Iterator<Element> itr2 = entry.element(
 				"proofs").elements("scriptures").iterator();
 
 			while (itr2.hasNext()) {
-				Element scriptures = (Element)itr2.next();
+				Element scriptures = itr2.next();
 
 				proofs.add(StringUtil.split(
 					scriptures.getText(), StringPool.SEMICOLON));
@@ -140,17 +141,17 @@ public class WCUtil {
 				new WCEntry(
 					entry.elementText("question"),
 					entry.elementText("answer"),
-					(String[][])proofs.toArray(new String[0][0])));
+					proofs.toArray(new String[0][0])));
 		}
 
 		_larger = Collections.unmodifiableList(_larger);
 	}
 
-	private List _getLarger() {
+	private List<WCEntry> _getLarger() {
 		return _larger;
 	}
 
-	private List _getShorter() {
+	private List<WCEntry> _getShorter() {
 		return _shorter;
 	}
 
@@ -158,7 +159,7 @@ public class WCUtil {
 
 	private static WCUtil _instance = new WCUtil();
 
-	private List _larger;
-	private List _shorter;
+	private List<WCEntry> _larger;
+	private List<WCEntry> _shorter;
 
 }

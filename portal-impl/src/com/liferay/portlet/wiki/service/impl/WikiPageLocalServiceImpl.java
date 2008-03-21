@@ -192,7 +192,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return page;
 	}
 
-	public void addPageAttachments(long nodeId, String title, List files)
+	public void addPageAttachments(
+			long nodeId, String title,
+			List<ObjectValuePair<String, byte[]>> files)
 		throws PortalException, SystemException {
 
 		if (files.size() == 0) {
@@ -215,10 +217,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 
 			for (int i = 0; i < files.size(); i++) {
-				ObjectValuePair ovp = (ObjectValuePair)files.get(i);
+				ObjectValuePair<String, byte[]> ovp = files.get(i);
 
-				String fileName = (String)ovp.getKey();
-				byte[] byteArray = (byte[])ovp.getValue();
+				String fileName = ovp.getKey();
+				byte[] byteArray = ovp.getValue();
 
 				if (Validator.isNull(fileName)) {
 					continue;
@@ -287,10 +289,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public void deletePage(long nodeId, String title)
 		throws PortalException, SystemException {
 
-		List pages = wikiPagePersistence.findByN_T_H(nodeId, title, true, 0, 1);
+		List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
+			nodeId, title, true, 0, 1);
 
 		if (pages.size() > 0) {
-			WikiPage page = (WikiPage)pages.iterator().next();
+			WikiPage page = pages.iterator().next();
 
 			deletePage(page);
 		}
@@ -301,12 +304,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Children
 
-		List children = wikiPagePersistence.findByN_P(
+		List<WikiPage> children = wikiPagePersistence.findByN_P(
 			page.getNodeId(), page.getTitle());
 
-		for (int i = 0; i < children.size(); i++) {
-			WikiPage curPage = (WikiPage)children.get(i);
-
+		for (WikiPage curPage : children) {
 			deletePage(curPage);
 		}
 
@@ -402,44 +403,40 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public void deletePages(long nodeId)
 		throws PortalException, SystemException {
 
-		Iterator itr = wikiPagePersistence.findByN_H(nodeId, true).iterator();
+		Iterator<WikiPage> itr = wikiPagePersistence.findByN_H(
+			nodeId, true).iterator();
 
 		while (itr.hasNext()) {
-			WikiPage page = (WikiPage)itr.next();
+			WikiPage page = itr.next();
 
 			deletePage(page);
 		}
 	}
 
-	public List getChildren(long nodeId, boolean head, String parentTitle)
+	public List<WikiPage> getChildren(
+			long nodeId, boolean head, String parentTitle)
 		throws PortalException, SystemException {
 
 		return wikiPagePersistence.findByN_H_P(nodeId, head, parentTitle);
 	}
 
-	public List getIncomingLinks(long nodeId, String title)
+	public List<WikiPage> getIncomingLinks(long nodeId, String title)
 		throws PortalException, SystemException {
 
-		List links = new UniqueList();
+		List<WikiPage> links = new UniqueList();
 
-		List pages = wikiPagePersistence.findByN_H(nodeId, true);
+		List<WikiPage> pages = wikiPagePersistence.findByN_H(nodeId, true);
 
-		for (int i = 0; i < pages.size(); i++) {
-			WikiPage page = (WikiPage)pages.get(i);
-
+		for (WikiPage page : pages) {
 			if (WikiUtil.isLinkedTo(page, title)) {
 				links.add(page);
 			}
 		}
 
-		List referrals = wikiPagePersistence.findByN_R(nodeId, title);
+		List<WikiPage> referrals = wikiPagePersistence.findByN_R(nodeId, title);
 
-		for (int i = 0; i < referrals.size(); i++) {
-			WikiPage referral = (WikiPage)referrals.get(i);
-
-			for (int j = 0; j < pages.size(); j++) {
-				WikiPage page = (WikiPage)pages.get(j);
-
+		for (WikiPage referral : referrals) {
+			for (WikiPage page : pages) {
 				if (WikiUtil.isLinkedTo(page, referral.getTitle())) {
 					links.add(page);
 				}
@@ -451,32 +448,27 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return links;
 	}
 
-	public List getNoAssetPages() throws SystemException {
+	public List<WikiPage> getNoAssetPages() throws SystemException {
 		return wikiPageFinder.findByNoAssets();
 	}
 
-	public List getOrphans(long nodeId)
+	public List<WikiPage> getOrphans(long nodeId)
 		throws PortalException, SystemException {
 
-		List pageTitles = new ArrayList();
+		List<Map<String, Boolean>> pageTitles =
+			new ArrayList<Map<String, Boolean>>();
 
-		List pages = wikiPagePersistence.findByN_H(nodeId, true);
+		List<WikiPage> pages = wikiPagePersistence.findByN_H(nodeId, true);
 
-		for (int i = 0; i < pages.size(); i++) {
-			WikiPage page = (WikiPage)pages.get(i);
-
+		for (WikiPage page : pages) {
 			pageTitles.add(WikiUtil.getLinks(page));
 		}
 
-		Set notOrphans = new HashSet();
+		Set<WikiPage> notOrphans = new HashSet<WikiPage>();
 
-		for (int i = 0; i < pages.size(); i++) {
-			WikiPage page = (WikiPage)pages.get(i);
-
-			for (int j = 0; j < pageTitles.size(); j++) {
-				Map titles = (Map)pageTitles.get(j);
-
-				if (titles.get(page.getTitle()) != null) {
+		for (WikiPage page : pages) {
+			for (Map<String, Boolean> pageTitle : pageTitles) {
+				if (pageTitle.get(page.getTitle()) != null) {
 					notOrphans.add(page);
 
 					break;
@@ -484,11 +476,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			}
 		}
 
-		List orphans = new ArrayList();
+		List<WikiPage> orphans = new ArrayList<WikiPage>();
 
-		for (int i = 0; i < pages.size(); i++) {
-			WikiPage page = (WikiPage)pages.get(i);
-
+		for (WikiPage page : pages) {
 			if (!notOrphans.contains(page)) {
 				orphans.add(page);
 			}
@@ -499,21 +489,17 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return orphans;
 	}
 
-	public List getOutgoingLinks(long nodeId, String title)
+	public List<WikiPage> getOutgoingLinks(long nodeId, String title)
 		throws PortalException, SystemException {
 
 		WikiPage page = getPage(nodeId, title);
 
-		List pages = new UniqueList();
+		List<WikiPage> pages = new UniqueList();
 
-		Map links = WikiUtil.getLinks(page);
+		Map<String, Boolean> links = WikiUtil.getLinks(page);
 
-		Iterator itr = links.keySet().iterator();
-
-		while (itr.hasNext()) {
-			String curTitle = (String)itr.next();
-
-			Boolean exists = (Boolean)links.get(curTitle);
+		for (String curTitle : links.keySet()) {
+			Boolean exists = links.get(curTitle);
 
 			if (exists) {
 				pages.add(getPage(nodeId, curTitle));
@@ -535,10 +521,11 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public WikiPage getPage(long nodeId, String title)
 		throws PortalException, SystemException {
 
-		List pages = wikiPagePersistence.findByN_T_H(nodeId, title, true, 0, 1);
+		List<WikiPage> pages = wikiPagePersistence.findByN_T_H(
+			nodeId, title, true, 0, 1);
 
 		if (pages.size() > 0) {
-			return (WikiPage)pages.iterator().next();
+			return pages.get(0);
 		}
 		else {
 			throw new NoSuchPageException();
@@ -577,21 +564,22 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page.getRedirectTitle(), page.getAttachmentsFiles());
 	}
 
-	public List getPages(long nodeId, int begin, int end)
+	public List<WikiPage> getPages(long nodeId, int begin, int end)
 		throws SystemException {
 
 		return wikiPagePersistence.findByNodeId(
 			nodeId, begin, end, new PageCreateDateComparator(false));
 	}
 
-	public List getPages(long nodeId, String title, int begin, int end)
+	public List<WikiPage> getPages(
+			long nodeId, String title, int begin, int end)
 		throws SystemException {
 
 		return wikiPagePersistence.findByN_T(
 			nodeId, title, begin, end, new PageCreateDateComparator(false));
 	}
 
-	public List getPages(
+	public List<WikiPage> getPages(
 			long nodeId, String title, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -599,14 +587,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return wikiPagePersistence.findByN_T(nodeId, title, begin, end, obc);
 	}
 
-	public List getPages(long nodeId, boolean head, int begin, int end)
+	public List<WikiPage> getPages(
+			long nodeId, boolean head, int begin, int end)
 		throws SystemException {
 
 		return wikiPagePersistence.findByN_H(
 			nodeId, head, begin, end, new PageCreateDateComparator(false));
 	}
 
-	public List getPages(
+	public List<WikiPage> getPages(
 			long nodeId, String title, boolean head, int begin, int end)
 		throws SystemException {
 
@@ -637,7 +626,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		return wikiPagePersistence.countByN_T_H(nodeId, title, head);
 	}
 
-	public List getRecentChanges(long nodeId, int begin, int end)
+	public List<WikiPage> getRecentChanges(long nodeId, int begin, int end)
 		throws SystemException {
 
 		Calendar cal = CalendarFactoryUtil.getCalendar();
@@ -683,17 +672,14 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// All versions
 
-		List pageVersions = wikiPagePersistence.findByN_T(nodeId, title);
+		List<WikiPage> pageVersions = wikiPagePersistence.findByN_T(
+			nodeId, title);
 
 		if (pageVersions.size() == 0) {
 			return;
 		}
 
-		Iterator itr = pageVersions.iterator();
-
-		while (itr.hasNext()) {
-			WikiPage page = (WikiPage)itr.next();
-
+		for (WikiPage page : pageVersions) {
 			page.setTitle(newTitle);
 
 			wikiPagePersistence.update(page);
@@ -701,19 +687,15 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Children
 
-		List children = wikiPagePersistence.findByN_P(nodeId, title);
+		List<WikiPage> children = wikiPagePersistence.findByN_P(nodeId, title);
 
-		itr = children.iterator();
-
-		while (itr.hasNext()) {
-			WikiPage page = (WikiPage)itr.next();
-
+		for (WikiPage page : children) {
 			page.setParentTitle(newTitle);
 
 			wikiPagePersistence.update(page);
 		}
 
-		WikiPage page = (WikiPage)pageVersions.get(pageVersions.size() - 1);
+		WikiPage page = pageVersions.get(pageVersions.size() - 1);
 
 		// Page resource
 
@@ -742,13 +724,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Move redirects to point to the page with the new title
 
-		List redirectedPages = wikiPagePersistence.findByN_R(nodeId, title);
+		List<WikiPage> redirectedPages = wikiPagePersistence.findByN_R(
+			nodeId, title);
 
-		itr = redirectedPages.iterator();
-
-		while (itr.hasNext()) {
-			WikiPage redirectedPage = (WikiPage)itr.next();
-
+		for (WikiPage redirectedPage : redirectedPages) {
 			redirectedPage.setRedirectTitle(newTitle);
 
 			wikiPagePersistence.update(redirectedPage);
@@ -931,11 +910,10 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	protected void clearReferralsCache(WikiPage page)
 		throws PortalException, SystemException {
 
-		List links = getIncomingLinks(page.getNodeId(), page.getTitle());
+		List<WikiPage> links = getIncomingLinks(
+			page.getNodeId(), page.getTitle());
 
-		for (int i = 0; i < links.size(); i++) {
-			WikiPage curPage = (WikiPage)links.get(i);
-
+		for (WikiPage curPage : links) {
 			WikiCacheUtil.clearCache(curPage.getNodeId(), curPage.getTitle());
 		}
 	}

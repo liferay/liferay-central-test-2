@@ -105,7 +105,6 @@ public class RSSAction extends PortletAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		long plid = ParamUtil.getLong(req, "p_l_id");
 		long companyId = ParamUtil.getLong(req, "companyId");
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");

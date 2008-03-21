@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -44,6 +45,7 @@ import com.liferay.portlet.wiki.service.permission.WikiPagePermission;
 import com.liferay.portlet.wiki.util.WikiUtil;
 import com.liferay.portlet.wiki.util.comparator.PageCreateDateComparator;
 import com.liferay.util.RSSUtil;
+import com.liferay.util.diff.DiffResult;
 import com.liferay.util.diff.DiffUtil;
 
 import com.sun.syndication.feed.synd.SyndContent;
@@ -87,7 +89,9 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 			getUserId(), nodeId, title, prefs, themeDisplay);
 	}
 
-	public void addPageAttachments(long nodeId, String title, List files)
+	public void addPageAttachments(
+			long nodeId, String title,
+			List<ObjectValuePair<String, byte[]>> files)
 		throws PortalException, SystemException {
 
 		WikiNodePermission.check(
@@ -355,7 +359,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 		sourceContent = HtmlUtil.escape(sourceContent);
 		targetContent = HtmlUtil.escape(targetContent);
 
-		List[] diffResults = DiffUtil.diff(
+		List<DiffResult>[] diffResults = DiffUtil.diff(
 			new StringReader(sourceContent), new StringReader(targetContent));
 
 		String template = ContentUtil.get(

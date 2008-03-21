@@ -64,7 +64,7 @@ public class WebFormUtil {
 			return new String[0];
 		}
 
-		List nodeValues = new ArrayList();
+		List<String> nodeValues = new ArrayList<String>();
 
 		if (delimiter.equals("\n") || delimiter.equals("\r")) {
 			try {
@@ -94,7 +94,7 @@ public class WebFormUtil {
 			}
 		}
 
-		return (String[])nodeValues.toArray(new String[nodeValues.size()]);
+		return nodeValues.toArray(new String[nodeValues.size()]);
 	}
 
 }

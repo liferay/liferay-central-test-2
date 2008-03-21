@@ -133,7 +133,8 @@ public class WikiPageServiceHttp {
 	}
 
 	public static void addPageAttachments(HttpPrincipal httpPrincipal,
-		long nodeId, java.lang.String title, java.util.List files)
+		long nodeId, java.lang.String title,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {

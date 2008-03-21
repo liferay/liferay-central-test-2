@@ -41,21 +41,20 @@ import javax.portlet.ValidatorException;
 public class WeatherPreferencesValidator implements PreferencesValidator {
 
 	public void validate(PortletPreferences prefs) throws ValidatorException {
-		List badZips = new ArrayList();
+		List<String> badZips = new ArrayList<String>();
 
 		String[] zips = prefs.getValues("zips", new String[0]);
 
-		for (int i = 0; i < zips.length; i++) {
-			Weather weather = WeatherUtil.getWeather(zips[i]);
+		for (String zip : zips) {
+			Weather weather = WeatherUtil.getWeather(zip);
 
 			if (weather == null) {
-				badZips.add(zips[i]);
+				badZips.add(zip);
 			}
 		}
 
 		if (badZips.size() > 0) {
-			throw new ValidatorException(
-				"Failed to retrieve zips", badZips);
+			throw new ValidatorException("Failed to retrieve zips", badZips);
 		}
 	}
 

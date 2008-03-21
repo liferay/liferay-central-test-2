@@ -35,15 +35,15 @@ public interface WikiPageFinder {
 	public int countByCreateDate(long nodeId, java.sql.Timestamp createDate,
 		boolean before) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCreateDate(long nodeId,
-		java.util.Date createDate, boolean before, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByCreateDate(
+		long nodeId, java.util.Date createDate, boolean before, int begin,
+		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByCreateDate(long nodeId,
-		java.sql.Timestamp createDate, boolean before, int begin, int end)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByCreateDate(
+		long nodeId, java.sql.Timestamp createDate, boolean before, int begin,
+		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByNoAssets()
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByNoAssets()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.wiki.model.WikiPage findByUuid_G(
