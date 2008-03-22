@@ -72,8 +72,8 @@ public class LDAPAuth implements Authenticator {
 		"2.16.840.1.113730.3.4.5";
 
 	public int authenticateByEmailAddress(
-			long companyId, String emailAddress, String password, Map headerMap,
-			Map parameterMap)
+			long companyId, String emailAddress, String password,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		try {
@@ -88,8 +88,8 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	public int authenticateByScreenName(
-			long companyId, String screenName, String password, Map headerMap,
-			Map parameterMap)
+			long companyId, String screenName, String password,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		try {
@@ -104,8 +104,8 @@ public class LDAPAuth implements Authenticator {
 	}
 
 	public int authenticateByUserId(
-			long companyId, long userId, String password, Map headerMap,
-			Map parameterMap)
+			long companyId, long userId, String password,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		try {
@@ -163,14 +163,15 @@ public class LDAPAuth implements Authenticator {
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-			NamingEnumeration enu = ctx.search(baseDN, filter, cons);
+			NamingEnumeration<SearchResult> enu = ctx.search(
+				baseDN, filter, cons);
 
 			if (enu.hasMore()) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Search filter returned at least one result");
 				}
 
-				SearchResult result = (SearchResult)enu.next();
+				SearchResult result = enu.next();
 
 				String fullUserDN = PortalLDAPUtil.getNameInNamespace(
 					companyId, result);

@@ -29,7 +29,6 @@ import JOscarLib.Tool.OscarInterface;
 import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.portal.util.PropsUtil;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Observable;
 import java.util.Observer;
@@ -60,17 +59,13 @@ public class ICQConnector implements Observer {
 	public void update(Observable obs, Object obj) {
 		_connecting = false;
 
-		Iterator itr = _messages.iterator();
-
-		while (itr.hasNext()) {
-			KeyValuePair kvp = (KeyValuePair)itr.next();
-
+		for (KeyValuePair kvp : _messages) {
 			OscarInterface.sendMessage(_icq, kvp.getKey(), kvp.getValue());
 		}
 	}
 
 	private ICQConnector() {
-		_messages = new Vector();
+		_messages = new Vector<KeyValuePair>();
 	}
 
 	private void _connect() {
@@ -111,7 +106,7 @@ public class ICQConnector implements Observer {
 	private static ICQConnector _instance = new ICQConnector();
 
 	private OscarConnection _icq;
-	private List _messages;
+	private List<KeyValuePair> _messages;
 	private boolean _connecting;
 
 }

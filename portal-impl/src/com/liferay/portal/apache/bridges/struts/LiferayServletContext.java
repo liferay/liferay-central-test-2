@@ -53,7 +53,7 @@ public class LiferayServletContext implements ServletContext {
 		return _ctx.getAttribute(name);
 	}
 
-	public Enumeration getAttributeNames() {
+	public Enumeration<String> getAttributeNames() {
 		return _ctx.getAttributeNames();
 	}
 
@@ -72,7 +72,7 @@ public class LiferayServletContext implements ServletContext {
 		return _ctx.getInitParameter(name);
 	}
 
-	public Enumeration getInitParameterNames() {
+	public Enumeration<String> getInitParameterNames() {
 		return _ctx.getInitParameterNames();
 	}
 
@@ -120,7 +120,7 @@ public class LiferayServletContext implements ServletContext {
 		return _ctx.getResourceAsStream(path);
 	}
 
-	public Set getResourcePaths(String path) {
+	public Set<String> getResourcePaths(String path) {
 		return _ctx.getResourcePaths(path);
 	}
 
@@ -136,8 +136,8 @@ public class LiferayServletContext implements ServletContext {
 		return _ctx.getServletContextName();
 	}
 
-	public Enumeration getServletNames() {
-		return Collections.enumeration(new ArrayList());
+	public Enumeration<String> getServletNames() {
+		return Collections.enumeration(new ArrayList<String>());
 	}
 
 	public Enumeration getServlets() {

@@ -107,7 +107,7 @@ public interface User extends UserModel {
 
 	public long[] getOrganizationIds();
 
-	public java.util.List getOrganizations();
+	public java.util.List<com.liferay.portal.model.Organization> getOrganizations();
 
 	public boolean hasOrganization();
 
@@ -127,7 +127,7 @@ public interface User extends UserModel {
 
 	public boolean isLayoutsRequired();
 
-	public java.util.List getMyPlaces();
+	public java.util.List<com.liferay.portal.model.Group> getMyPlaces();
 
 	public boolean hasMyPlaces();
 

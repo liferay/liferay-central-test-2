@@ -25,8 +25,8 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.PluginSetting;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -50,17 +50,14 @@ public abstract class PluginBaseImpl implements Plugin {
 	}
 
 	public PluginSetting getDefaultPluginSetting(long companyId) {
-		Long companyIdObj = new Long(companyId);
-
-		PluginSetting setting = (PluginSetting)_defaultPluginSettings.get(
-			companyIdObj);
+		PluginSetting setting = _defaultPluginSettings.get(companyId);
 
 		if (setting == null) {
 			setting = new PluginSettingImpl(_defaultPluginSetting);
 
 			setting.setCompanyId(companyId);
 
-			_defaultPluginSettings.put(companyIdObj, setting);
+			_defaultPluginSettings.put(companyId, setting);
 		}
 
 		return setting;
@@ -72,6 +69,7 @@ public abstract class PluginBaseImpl implements Plugin {
 
 	private PluginPackage _pluginPackage;
 	private PluginSetting _defaultPluginSetting;
-	private Map _defaultPluginSettings = CollectionFactory.getHashMap();
+	private Map<Long, PluginSetting> _defaultPluginSettings =
+		new HashMap<Long, PluginSetting>();
 
 }

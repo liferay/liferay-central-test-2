@@ -52,8 +52,9 @@ public class ClearRenderParametersAction extends Action {
 
 		HttpSession ses = req.getSession();
 
-		Map renderParametersPool =
-			(Map)ses.getAttribute(WebKeys.PORTLET_RENDER_PARAMETERS);
+		Map<Long, Map<String, Map<String, String[]>>> renderParametersPool =
+			(Map<Long, Map<String, Map<String, String[]>>>)ses.getAttribute(
+				WebKeys.PORTLET_RENDER_PARAMETERS);
 
 		if (renderParametersPool != null) {
 			renderParametersPool.clear();

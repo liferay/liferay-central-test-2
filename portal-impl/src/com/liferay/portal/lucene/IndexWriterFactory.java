@@ -28,13 +28,12 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.SystemProperties;
 
 import java.io.File;
 import java.io.IOException;
 
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Semaphore;
@@ -78,16 +77,13 @@ public class IndexWriterFactory {
 		// Create semaphores for all companies
 
 		try {
-			List companies = CompanyLocalServiceUtil.getCompanies();
+			List<Company> companies = CompanyLocalServiceUtil.getCompanies();
 
-			for (int i = 0; i < companies.size(); i++) {
-				Company company = (Company)companies.get(i);
-
-				_lockLookup.put(
-					new Long(company.getCompanyId()), new Semaphore(1));
+			for (Company company : companies) {
+				_lockLookup.put(company.getCompanyId(), new Semaphore(1));
 			}
 
-			_lockLookup.put(new Long(CompanyImpl.SYSTEM), new Semaphore(1));
+			_lockLookup.put(CompanyImpl.SYSTEM, new Semaphore(1));
 		}
 		catch (SystemException se) {
 			_log.error(se);
@@ -101,7 +97,7 @@ public class IndexWriterFactory {
 			return;
 		}
 
-		Semaphore lock = (Semaphore)_lockLookup.get(new Long(companyId));
+		Semaphore lock = _lockLookup.get(companyId);
 
 		if (lock != null) {
 
@@ -168,8 +164,6 @@ public class IndexWriterFactory {
 			return getReadOnlyIndexWriter();
 		}
 
-		Long companyIdObj = new Long(companyId);
-
 		boolean hasError = false;
 		boolean newWriter = false;
 
@@ -184,8 +178,7 @@ public class IndexWriterFactory {
 			}
 
 			synchronized(this) {
-				IndexWriterData writerData =
-					(IndexWriterData)_writerLookup.get(companyIdObj);
+				IndexWriterData writerData = _writerLookup.get(companyId);
 
 				if (writerData == null) {
                     newWriter = true;
@@ -200,7 +193,7 @@ public class IndexWriterFactory {
 
                     writerData = new IndexWriterData(companyId, writer, 0);
 
-                    _writerLookup.put(companyIdObj, writerData);
+                    _writerLookup.put(companyId, writerData);
                 }
 
 				writerData.setCount(writerData.getCount() + 1);
@@ -231,7 +224,7 @@ public class IndexWriterFactory {
 			return;
 		}
 
-		Semaphore lock = (Semaphore)_lockLookup.get(new Long(companyId));
+		Semaphore lock = _lockLookup.get(companyId);
 
 		if (lock != null) {
 			lock.release();
@@ -243,8 +236,7 @@ public class IndexWriterFactory {
 			return;
 		}
 
-		IndexWriterData writerData =
-			(IndexWriterData)_writerLookup.get(new Long(companyId));
+		IndexWriterData writerData = _writerLookup.get(companyId);
 
 		if (writerData != null) {
 			decrement(writerData);
@@ -265,11 +257,7 @@ public class IndexWriterFactory {
 
 		synchronized(this) {
 			if (!_writerLookup.isEmpty()) {
-				Iterator itr = _writerLookup.values().iterator();
-
-				while (itr.hasNext()) {
-					IndexWriterData writerData = (IndexWriterData)itr.next();
-
+				for (IndexWriterData writerData : _writerLookup.values()) {
 					if (writerData.getWriter() == writer) {
 						writerFound = true;
 
@@ -304,7 +292,7 @@ public class IndexWriterFactory {
 			writerData.setCount(writerData.getCount() - 1);
 
 			if (writerData.getCount() == 0) {
-				_writerLookup.remove(new Long(writerData.getCompanyId()));
+				_writerLookup.remove(writerData.getCompanyId());
 
 				try {
 					IndexWriter writer = writerData.getWriter();
@@ -376,8 +364,9 @@ public class IndexWriterFactory {
 
 	private FSDirectory _readOnlyLuceneDir = null;
 	private IndexWriter _readOnlyIndexWriter = null;
-	private Map _lockLookup = CollectionFactory.getHashMap();
-	private Map _writerLookup = CollectionFactory.getHashMap();
+	private Map<Long, Semaphore> _lockLookup = new HashMap<Long, Semaphore>();
+	private Map<Long, IndexWriterData> _writerLookup =
+		new HashMap<Long, IndexWriterData>();
 	private int _needExclusiveLock = 0;
 	private int _optimizeCount = 0;
 

@@ -145,12 +145,10 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		DLFolder folder = _getFolder(
 			group.getGroupId(), arg.getCurrentFolder());
 
-		List files = DLFileEntryServiceUtil.getFileEntries(
+		List<DLFileEntry> fileEntries = DLFileEntryServiceUtil.getFileEntries(
 			folder.getFolderId());
 
-		for (int i = 0; i < files.size(); i++) {
-			DLFileEntry fileEntry = (DLFileEntry)files.get(i);
-
+		for (DLFileEntry fileEntry : fileEntries) {
 			Element fileEl = doc.createElement("File");
 
 			filesEl.appendChild(fileEl);
@@ -187,14 +185,12 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 		StringTokenizer st = new StringTokenizer(folderName, StringPool.SLASH);
 
 		while (st.hasMoreTokens()) {
-			String curFolderName = (String)st.nextToken();
+			String curFolderName = st.nextToken();
 
-			List folders = DLFolderLocalServiceUtil.getFolders(
+			List<DLFolder> folders = DLFolderLocalServiceUtil.getFolders(
 				groupId, folder.getFolderId());
 
-			for (int i = 0; i < folders.size(); i++) {
-				DLFolder curFolder = (DLFolder)folders.get(i);
-
+			for (DLFolder curFolder : folders) {
 				if (curFolder.getName().equals(curFolderName)) {
 					folder = curFolder;
 
@@ -222,17 +218,15 @@ public class DocumentCommandReceiver extends BaseCommandReceiver {
 			DLFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
 
-			List folders = DLFolderLocalServiceUtil.getFolders(
+			List<DLFolder> folders = DLFolderLocalServiceUtil.getFolders(
 				group.getGroupId(), folder.getFolderId());
 
-			for (int i = 0; i < folders.size(); i++) {
-				folder = (DLFolder) folders.get(i);
-
+			for (DLFolder curFolder : folders) {
 				Element folderEl = doc.createElement("Folder");
 
 				foldersEl.appendChild(folderEl);
 
-				folderEl.setAttribute("name", folder.getName());
+				folderEl.setAttribute("name", curFolder.getName());
 			}
 		}
 	}

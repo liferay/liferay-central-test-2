@@ -85,7 +85,7 @@ public class OpenSSOAutoLogin implements AutoLogin {
 				return credentials;
 			}
 
-			Map nameValues = new HashMap();
+			Map<String, String> nameValues = new HashMap<String, String>();
 
 			String serviceUrl = PrefsPropsUtil.getString(
 				companyId, PropsUtil.OPEN_SSO_SERVICE_URL);
@@ -141,10 +141,10 @@ public class OpenSSOAutoLogin implements AutoLogin {
 				}
 			}
 
-			String firstName = (String)nameValues.get("cn");
-			String lastName = (String)nameValues.get("sn");
-			String screenName = (String)nameValues.get("givenname");
-			String emailAddress = (String)nameValues.get("mail");
+			String firstName = nameValues.get("cn");
+			String lastName = nameValues.get("sn");
+			String screenName = nameValues.get("givenname");
+			String emailAddress = nameValues.get("mail");
 
 			User user = null;
 

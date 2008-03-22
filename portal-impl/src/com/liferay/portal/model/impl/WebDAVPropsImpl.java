@@ -65,17 +65,17 @@ public class WebDAVPropsImpl
 		}
 	}
 
-	public Set getPropsSet() throws Exception {
-		Set propsSet = new HashSet();
+	public Set<Tuple> getPropsSet() throws Exception {
+		Set<Tuple> propsSet = new HashSet<Tuple>();
 
 		Document doc = _getPropsDocument();
 
 		Element root = doc.getRootElement();
 
-		Iterator itr = root.elements().iterator();
+		Iterator<Element> itr = root.elements().iterator();
 
 		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+			Element el = itr.next();
 
 			String prefix = el.getNamespacePrefix();
 			String uri = el.getNamespaceURI();
@@ -202,10 +202,10 @@ public class WebDAVPropsImpl
 
 		Element root = doc.getRootElement();
 
-		Iterator itr = root.elements(qname).iterator();
+		Iterator<Element> itr = root.elements(qname).iterator();
 
 		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+			Element el = itr.next();
 
 			root.remove(el);
 		}

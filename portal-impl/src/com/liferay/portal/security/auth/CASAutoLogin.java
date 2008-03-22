@@ -41,6 +41,7 @@ import javax.naming.Binding;
 import javax.naming.NamingEnumeration;
 import javax.naming.directory.Attributes;
 import javax.naming.directory.SearchControls;
+import javax.naming.directory.SearchResult;
 import javax.naming.ldap.LdapContext;
 
 import javax.servlet.http.HttpServletRequest;
@@ -147,14 +148,15 @@ public class CASAutoLogin implements AutoLogin {
 			SearchControls cons = new SearchControls(
 				SearchControls.SUBTREE_SCOPE, 1, 0, null, false, false);
 
-			NamingEnumeration enu = ctx.search(baseDN, filter, cons);
+			NamingEnumeration<SearchResult> enu = ctx.search(
+				baseDN, filter, cons);
 
 			if (enu.hasMore()) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Search filter returned at least one result");
 				}
 
-				Binding binding = (Binding)enu.next();
+				Binding binding = enu.next();
 
 				Attributes attrs = ctx.getAttributes(binding.getName());
 

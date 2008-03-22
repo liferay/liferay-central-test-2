@@ -51,10 +51,11 @@ public class SessionClickAction extends Action {
 		throws Exception {
 
 		try {
-			Enumeration enu = req.getParameterNames();
+			Enumeration<String> enu = req.getParameterNames();
 
 			while (enu.hasMoreElements()) {
-				String name = (String)enu.nextElement();
+				String name = enu.nextElement();
+
 				String value = ParamUtil.getString(req, name);
 
 				SessionClicks.put(req, name, value);

@@ -57,7 +57,7 @@ public interface UserTracker extends UserTrackerModel {
 
 	public java.lang.String getEmailAddress();
 
-	public java.util.List getPaths();
+	public java.util.List<com.liferay.portal.model.UserTrackerPath> getPaths();
 
 	public void addPath(com.liferay.portal.model.UserTrackerPath path);
 

@@ -60,7 +60,7 @@ public class DefaultLandingPageAction extends Action {
 
 		if (Validator.isNotNull(path)) {
 			LastPath lastPath = new LastPath(
-				StringPool.BLANK, path, new HashMap());
+				StringPool.BLANK, path, new HashMap<String, String[]>());
 
 			HttpSession ses = req.getSession();
 
@@ -72,7 +72,7 @@ public class DefaultLandingPageAction extends Action {
 		// for forwarding a user to his landing page. See the references to this
 		// class in portal.properties.
 
-		/*Map params = new HashMap();
+		/*Map<String, String[]> params = new HashMap<String, String[]>();
 
 		params.put("p_l_id", new String[] {"1806"});
 

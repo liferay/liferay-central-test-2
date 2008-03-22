@@ -87,7 +87,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 			for (int i = 0; i < results.getLength(); i++) {
 				Document result = results.doc(i);
 
-				String portletId = (String)result.get(LuceneFields.PORTLET_ID);
+				String portletId = result.get(LuceneFields.PORTLET_ID);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);
@@ -96,7 +96,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				//	portletId, themeDisplay.getUser());
 
 				long groupId = GetterUtil.getLong(
-					(String)result.get(LuceneFields.GROUP_ID));
+					result.get(LuceneFields.GROUP_ID));
 
 				PortletURL portletURL = getPortletURL(req, portletId, groupId);
 
@@ -109,7 +109,7 @@ public abstract class HitsOpenSearchImpl extends BaseOpenSearchImpl {
 				String title = docSummary.getTitle();
 				String url = getURL(themeDisplay, groupId, result, portletURL);
 				Date modifedDate = DateTools.stringToDate(
-					(String)result.get(LuceneFields.MODIFIED));
+					result.get(LuceneFields.MODIFIED));
 				String content = docSummary.getContent();
 				double score = hits.score(i);
 

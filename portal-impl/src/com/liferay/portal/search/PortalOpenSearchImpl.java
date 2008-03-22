@@ -94,7 +94,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 			for (int i = 0; i < results.getLength(); i++) {
 				Document result = results.doc(i);
 
-				String portletId = (String)result.get(LuceneFields.PORTLET_ID);
+				String portletId = result.get(LuceneFields.PORTLET_ID);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);
@@ -107,7 +107,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 					portletId, themeDisplay.getUser());
 
 				long groupId = GetterUtil.getLong(
-					(String)result.get(LuceneFields.GROUP_ID));
+					result.get(LuceneFields.GROUP_ID));
 
 				String title = StringPool.BLANK;
 
@@ -116,7 +116,7 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 				String url = portletURL.toString();
 
 				Date modifedDate = DateTools.stringToDate(
-					(String)result.get(LuceneFields.MODIFIED));
+					result.get(LuceneFields.MODIFIED));
 
 				String content = StringPool.BLANK;
 
@@ -169,12 +169,12 @@ public class PortalOpenSearchImpl extends BaseOpenSearchImpl {
 		String articleId = result.get("articleId");
 		String version = result.get("version");
 
-		List hitLayoutIds =
+		List<Long> hitLayoutIds =
 			JournalContentSearchLocalServiceUtil.getLayoutIds(
 				layout.getGroupId(), layout.isPrivateLayout(), articleId);
 
 		if (hitLayoutIds.size() > 0) {
-			Long hitLayoutId = (Long)hitLayoutIds.get(0);
+			Long hitLayoutId = hitLayoutIds.get(0);
 
 			Layout hitLayout = LayoutLocalServiceUtil.getLayout(
 				layout.getGroupId(), layout.isPrivateLayout(),

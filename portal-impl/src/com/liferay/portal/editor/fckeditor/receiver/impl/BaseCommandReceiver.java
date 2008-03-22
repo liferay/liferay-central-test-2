@@ -42,7 +42,6 @@ import java.io.File;
 import java.io.PrintWriter;
 
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -138,7 +137,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 		ServletFileUpload upload = new ServletFileUpload(
 			new LiferayFileItemFactory(UploadServletRequest.DEFAULT_TEMP_DIR));
 
-		List items = null;
+		List<FileItem> items = null;
 
 		try {
 			items = upload.parseRequest(req);
@@ -147,13 +146,9 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			throw new FCKException(fue);
 		}
 
-		Map fields = new HashMap();
+		Map<String, Object> fields = new HashMap<String, Object>();
 
-		Iterator itr = items.iterator();
-
-		while (itr.hasNext()) {
-			FileItem item = (FileItem)itr.next();
-
+		for (FileItem item : items) {
 			if (item.isFormField()) {
 				fields.put(item.getFieldName(), item.getString());
 			}
@@ -224,23 +219,20 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			CommandArgument arg, Document doc, Element foldersEl)
 		throws Exception {
 
-		LinkedHashMap groupParams = new LinkedHashMap();
+		LinkedHashMap<String, Object> groupParams =
+			new LinkedHashMap<String, Object>();
 
 		groupParams.put("usersGroups", new Long(arg.getUserId()));
 
-		List groups = GroupLocalServiceUtil.search(
+		List<Group> groups = GroupLocalServiceUtil.search(
 			arg.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
 			QueryUtil.ALL_POS);
 
 		User user = UserLocalServiceUtil.getUserById(arg.getUserId());
 
-		List userOrgs = user.getOrganizations();
+		List<Organization> userOrgs = user.getOrganizations();
 
-		Iterator itr = userOrgs.iterator();
-
-		while (itr.hasNext()) {
-			Organization organization = (Organization)itr.next();
-
+		for (Organization organization : userOrgs) {
 			groups.add(0, organization.getGroup());
 		}
 
@@ -250,9 +242,7 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			groups.add(0, userGroup);
 		}
 
-		for (int i = 0; i < groups.size(); ++i) {
-			Group group = (Group)groups.get(i);
-
+		for (Group group : groups) {
 			Element folderEl = doc.createElement("Folder");
 
 			foldersEl.appendChild(folderEl);

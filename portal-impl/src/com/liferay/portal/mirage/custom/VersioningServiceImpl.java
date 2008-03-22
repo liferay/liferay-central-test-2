@@ -36,7 +36,8 @@ import javax.jcr.Node;
  * @author Jorge Ferrer
  *
  */
-public class VersioningServiceImpl implements VersioningService {
+public class VersioningServiceImpl<VersionableContent>
+	implements VersioningService<VersionableContent> {
 
 	public void checkoutNode(Node node, User user) throws CMSException {
 	}
@@ -45,7 +46,9 @@ public class VersioningServiceImpl implements VersioningService {
 		throws CMSException {
 	}
 
-	public Collection getAllVersions(Node node) throws CMSException {
+	public Collection<VersionableContent> getAllVersions(Node node)
+		throws CMSException {
+
 		return null;
 	}
 

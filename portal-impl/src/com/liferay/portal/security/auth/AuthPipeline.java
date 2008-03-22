@@ -39,7 +39,8 @@ public class AuthPipeline {
 
 	public static int authenticateByEmailAddress(
 			String[] classes, long companyId, String emailAddress,
-			String password, Map headerMap, Map parameterMap)
+			String password, Map<String, String[]> headerMap,
+			Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		return _authenticate(
@@ -49,7 +50,8 @@ public class AuthPipeline {
 
 	public static int authenticateByScreenName(
 			String[] classes, long companyId, String screenName,
-			String password, Map headerMap, Map parameterMap)
+			String password, Map<String, String[]> headerMap,
+			Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		return _authenticate(
@@ -59,7 +61,7 @@ public class AuthPipeline {
 
 	public static int authenticateByUserId(
 			String[] classes, long companyId, long userId, String password,
-			Map headerMap, Map parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		return _authenticate(
@@ -69,7 +71,7 @@ public class AuthPipeline {
 
 	public static void onFailureByEmailAddress(
 			String[] classes, long companyId, String emailAddress,
-			Map headerMap, Map parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		_onFailure(
@@ -79,7 +81,7 @@ public class AuthPipeline {
 
 	public static void onFailureByScreenName(
 			String[] classes, long companyId, String screenName,
-			Map headerMap, Map parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		_onFailure(
@@ -88,8 +90,8 @@ public class AuthPipeline {
 	}
 
 	public static void onFailureByUserId(
-			String[] classes, long companyId, long userId, Map headerMap,
-			Map parameterMap)
+			String[] classes, long companyId, long userId,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		_onFailure(
@@ -99,7 +101,7 @@ public class AuthPipeline {
 
 	public static void onMaxFailuresByEmailAddress(
 			String[] classes, long companyId, String emailAddress,
-			Map headerMap, Map parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		onFailureByEmailAddress(
@@ -108,7 +110,7 @@ public class AuthPipeline {
 
 	public static void onMaxFailuresByScreenName(
 			String[] classes, long companyId, String screenName,
-			Map headerMap, Map parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		onFailureByScreenName(
@@ -116,8 +118,8 @@ public class AuthPipeline {
 	}
 
 	public static void onMaxFailuresByUserId(
-			String[] classes, long companyId, long userId, Map headerMap,
-			Map parameterMap)
+			String[] classes, long companyId, long userId,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		onFailureByUserId(classes, companyId, userId, headerMap, parameterMap);
@@ -125,7 +127,8 @@ public class AuthPipeline {
 
 	private static int _authenticate(
 			String[] classes, long companyId, String login, String password,
-			String authType, Map headerMap, Map parameterMap)
+			String authType, Map<String, String[]> headerMap,
+			Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		if ((classes == null) || (classes.length == 0)) {
@@ -178,7 +181,7 @@ public class AuthPipeline {
 
 	private static void _onFailure(
 			String[] classes, long companyId, String login, String authType,
-			Map headerMap, Map parameterMap)
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException {
 
 		if ((classes == null) || (classes.length == 0)) {
@@ -189,8 +192,8 @@ public class AuthPipeline {
 			String className = classes[i];
 
 			if (Validator.isNotNull(className)) {
-				AuthFailure authFailure =
-					(AuthFailure)InstancePool.get(classes[i]);
+				AuthFailure authFailure = (AuthFailure)InstancePool.get(
+					classes[i]);
 
 				try {
 					if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {

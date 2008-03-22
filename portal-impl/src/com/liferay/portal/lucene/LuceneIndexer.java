@@ -33,7 +33,6 @@ import com.liferay.util.Time;
 import java.io.IOException;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -107,15 +106,12 @@ public class LuceneIndexer implements Runnable {
 		String[] indexIds = new String[] {String.valueOf(_companyId)};
 
 		try {
-			List portlets = PortletLocalServiceUtil.getPortlets(_companyId);
+			List<Portlet> portlets = PortletLocalServiceUtil.getPortlets(
+				_companyId);
 
 			Collections.sort(portlets, new PortletLuceneComparator());
 
-			Iterator itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = (Portlet)itr.next();
-
+			for (Portlet portlet : portlets) {
 				String className = portlet.getIndexerClass();
 
 				if (portlet.isActive() && className != null) {

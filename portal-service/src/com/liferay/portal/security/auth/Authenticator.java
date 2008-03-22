@@ -39,18 +39,18 @@ public interface Authenticator {
 	public static final int DNE = 0;
 
 	public int authenticateByEmailAddress(
-			long companyId, String emailAddress, String password, Map headerMap,
-			Map parameterMap)
+			long companyId, String emailAddress, String password,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException;
 
 	public int authenticateByScreenName(
-			long companyId, String screenName, String password, Map headerMap,
-			Map parameterMap)
+			long companyId, String screenName, String password,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException;
 
 	public int authenticateByUserId(
-			long companyId, long userId, String password, Map headerMap,
-			Map parameterMap)
+			long companyId, long userId, String password,
+			Map<String, String[]> headerMap, Map<String, String[]> parameterMap)
 		throws AuthException;
 
 }

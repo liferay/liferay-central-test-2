@@ -49,7 +49,9 @@ package com.liferay.portal.model;
  *
  */
 public interface OrgGroupRole extends OrgGroupRoleModel {
-	public boolean containsOrganization(java.util.List organizations);
+	public boolean containsOrganization(
+		java.util.List<com.liferay.portal.model.Organization> organizations);
 
-	public boolean containsGroup(java.util.List groups);
+	public boolean containsGroup(
+		java.util.List<com.liferay.portal.model.Group> groups);
 }

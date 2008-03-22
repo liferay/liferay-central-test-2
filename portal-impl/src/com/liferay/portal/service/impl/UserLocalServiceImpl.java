@@ -865,7 +865,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
-		LinkedHashMap params = new LinkedHashMap();
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
 
 		params.put("usersGroups", new Long(groupId));
 
@@ -890,7 +891,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Organization organization = organizationPersistence.findByPrimaryKey(
 			organizationId);
 
-		LinkedHashMap params = new LinkedHashMap();
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
 
 		params.put("usersOrgs", new Long(organizationId));
 
@@ -958,7 +960,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Role role = rolePersistence.findByPrimaryKey(
 			roleId);
 
-		LinkedHashMap params = new LinkedHashMap();
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
 
 		params.put("usersRoles", new Long(roleId));
 
@@ -981,7 +984,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
 			userGroupId);
 
-		LinkedHashMap params = new LinkedHashMap();
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
 
 		params.put("usersUserGroups", new Long(userGroupId));
 

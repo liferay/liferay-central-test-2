@@ -26,7 +26,6 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.OrgGroupRole;
 import com.liferay.portal.model.Organization;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -41,16 +40,12 @@ public class OrgGroupRoleImpl
 	public OrgGroupRoleImpl() {
 	}
 
-	public boolean containsOrganization(List organizations) {
+	public boolean containsOrganization(List<Organization> organizations) {
 		if (organizations == null) {
 			return false;
 		}
 		else {
-			Iterator itr = organizations.iterator();
-
-			while (itr.hasNext()) {
-				Organization organization = (Organization)itr.next();
-
+			for (Organization organization : organizations) {
 				if (organization.getOrganizationId() == getOrganizationId()) {
 					return true;
 				}
@@ -60,16 +55,12 @@ public class OrgGroupRoleImpl
 		return false;
 	}
 
-	public boolean containsGroup(List groups) {
+	public boolean containsGroup(List<Group> groups) {
 		if (groups == null) {
 			return false;
 		}
 		else {
-			Iterator itr = groups.iterator();
-
-			while (itr.hasNext()) {
-				Group group = (Group)itr.next();
-
+			for (Group group : groups) {
 				if (group.getGroupId() == getGroupId()) {
 					return true;
 				}

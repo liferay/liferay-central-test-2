@@ -27,13 +27,13 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portlet.tags.model.TagsAssetDisplay;
 import com.liferay.portlet.tags.model.TagsAssetType;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.JSONUtil;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -65,14 +65,14 @@ public class JSONServiceAction extends JSONAction {
 		String[] parameters = StringUtil.split(
 			ParamUtil.getString(req, "serviceParameters"));
 
-		Class classObj = Class.forName(className);
+		Class<?> classObj = Class.forName(className);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
 			classObj, methodName, parameters.length);
 
 		if (methodAndParameterTypes != null) {
 			Method method = (Method)methodAndParameterTypes[0];
-			Class[] parameterTypes = (Class[])methodAndParameterTypes[1];
+			Class<?>[] parameterTypes = (Class[])methodAndParameterTypes[1];
 			Object[] args = new Object[parameters.length];
 
 			for (int i = 0; i < parameters.length; i++) {
@@ -149,8 +149,8 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	protected Object getArgValue(
-			HttpServletRequest req, Class classObj, String methodName,
-			String parameter, Class parameterType)
+			HttpServletRequest req, Class<?> classObj, String methodName,
+			String parameter, Class<?> parameterType)
 		throws Exception {
 
 		String parameterTypeName = parameterType.getName();
@@ -200,21 +200,21 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	protected Object[] getMethodAndParameterTypes(
-			Class classObj, String methodName, int paramtersCount)
+			Class<?> classObj, String methodName, int paramtersCount)
 		throws Exception {
 
 		String key =
 			classObj.getName() + "_METHOD_NAME_" + methodName +
 				"_PARAMETERS_COUNT_" + paramtersCount;
 
-		Object[] methodAndParameterTypes = (Object[])_methodCache.get(key);
+		Object[] methodAndParameterTypes = _methodCache.get(key);
 
 		if (methodAndParameterTypes != null) {
 			return methodAndParameterTypes;
 		}
 
 		Method method = null;
-		Class[] parameterTypes = null;
+		Class<?>[] parameterTypes = null;
 
 		Method[] methods = classObj.getMethods();
 
@@ -222,7 +222,7 @@ public class JSONServiceAction extends JSONAction {
 			Method curMethod = methods[i];
 
 			if (curMethod.getName().equals(methodName)) {
-				Class[] curParameterTypes = curMethod.getParameterTypes();
+				Class<?>[] curParameterTypes = curMethod.getParameterTypes();
 
 				if (curParameterTypes.length == paramtersCount) {
 					if (method != null) {
@@ -364,6 +364,7 @@ public class JSONServiceAction extends JSONAction {
 
 	private static Log _log = LogFactory.getLog(JSONServiceAction.class);
 
-	private Map _methodCache = CollectionFactory.getHashMap();
+	private Map<String, Object[]> _methodCache =
+		new HashMap<String, Object[]>();
 
 }

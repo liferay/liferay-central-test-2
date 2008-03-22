@@ -197,7 +197,7 @@ public class ListTypeModelImpl extends BaseModelImpl {
 	}
 
 	public int hashCode() {
-		return (int)getPrimaryKey();
+		return getPrimaryKey();
 	}
 
 	private int _listTypeId;

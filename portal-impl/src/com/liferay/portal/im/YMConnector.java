@@ -59,7 +59,7 @@ public class YMConnector {
 
 	private void _connect() {
 		try {
-			_ym = (Object)Class.forName(_SESSION).newInstance();
+			_ym = Class.forName(_SESSION).newInstance();
 		}
 		catch (Exception e) {
 			_jYMSGLibraryFound = false;

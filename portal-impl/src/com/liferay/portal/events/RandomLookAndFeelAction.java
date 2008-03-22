@@ -92,17 +92,16 @@ public class RandomLookAndFeelAction extends Action {
 
 			boolean wapTheme = BrowserSniffer.is_wap_xhtml(req);
 
-			List themes = ThemeLocalUtil.getThemes(
+			List<Theme> themes = ThemeLocalUtil.getThemes(
 				themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId(),
 				themeDisplay.getUserId(), wapTheme);
 
 			if (themes.size() > 0) {
-				Theme theme = (Theme)themes.get(
-					randomizer.nextInt(themes.size()));
+				Theme theme = themes.get(randomizer.nextInt(themes.size()));
 
-				List colorSchemes = theme.getColorSchemes();
+				List<ColorScheme> colorSchemes = theme.getColorSchemes();
 
-				ColorScheme colorScheme = (ColorScheme)colorSchemes.get(
+				ColorScheme colorScheme = colorSchemes.get(
 					randomizer.nextInt(colorSchemes.size()));
 
 				LayoutServiceUtil.updateLookAndFeel(

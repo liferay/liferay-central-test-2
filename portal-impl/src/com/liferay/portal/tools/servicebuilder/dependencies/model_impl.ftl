@@ -347,7 +347,11 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 
 	public int hashCode() {
 		<#if entity.hasPrimitivePK()>
-			return (int)getPrimaryKey();
+			<#if entity.PKClassName == "int">
+				return getPrimaryKey();
+			<#else>
+				return (int)getPrimaryKey();
+			</#if>
 		<#else>
 			return getPrimaryKey().hashCode();
 		</#if>

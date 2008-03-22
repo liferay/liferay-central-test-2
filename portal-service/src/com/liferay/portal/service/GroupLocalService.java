@@ -545,7 +545,7 @@ public interface GroupLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getNullFriendlyURLGroups()
+	public java.util.List<com.liferay.portal.model.Group> getNullFriendlyURLGroups()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Group getOrganizationGroup(long companyId,

@@ -218,7 +218,7 @@ public class ModelHintsUtil {
 		itr1 = root.elements("model").iterator();
 
 		while (itr1.hasNext()) {
-			Element model = (Element)itr1.next();
+			Element model = itr1.next();
 
 			String name = model.attributeValue("name");
 

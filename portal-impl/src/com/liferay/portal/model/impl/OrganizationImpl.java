@@ -124,10 +124,10 @@ public class OrganizationImpl
 		Address address = null;
 
 		try {
-			List addresses = getAddresses();
+			List<Address> addresses = getAddresses();
 
 			if (addresses.size() > 0) {
-				address = (Address)addresses.get(0);
+				address = addresses.get(0);
 			}
 		}
 		catch (Exception e) {
@@ -141,7 +141,9 @@ public class OrganizationImpl
 		return address;
 	}
 
-	public List getAddresses() throws PortalException, SystemException {
+	public List<Address> getAddresses()
+		throws PortalException, SystemException {
+
 		return AddressLocalServiceUtil.getAddresses(
 			getCompanyId(), Organization.class.getName(), getOrganizationId());
 	}

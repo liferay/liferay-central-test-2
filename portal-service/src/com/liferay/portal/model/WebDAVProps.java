@@ -51,7 +51,8 @@ package com.liferay.portal.model;
 public interface WebDAVProps extends WebDAVPropsModel {
 	public java.lang.String getProps();
 
-	public java.util.Set getPropsSet() throws java.lang.Exception;
+	public java.util.Set<com.liferay.portal.kernel.util.Tuple> getPropsSet()
+		throws java.lang.Exception;
 
 	public java.lang.String getText(java.lang.String name,
 		java.lang.String prefix, java.lang.String uri)

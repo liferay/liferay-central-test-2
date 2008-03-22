@@ -28,8 +28,8 @@ import com.liferay.portal.kernel.events.SessionAction;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -92,7 +92,7 @@ public class EventsProcessor {
 	}
 
 	private EventsProcessor() {
-		_processPool = CollectionFactory.getHashSet();
+		_processPool = new HashSet<String>();
 	}
 
 	private void _process(
@@ -104,9 +104,7 @@ public class EventsProcessor {
 			return;
 		}
 
-		for (int i = 0; i < classes.length; i++) {
-			String className = classes[i];
-
+		for (String className : classes) {
 			if (Validator.isNotNull(className)) {
 				if (_log.isDebugEnabled()) {
 					_log.debug("Process event " + className);
@@ -123,7 +121,7 @@ public class EventsProcessor {
 					}
 				}
 
-				Object obj = InstancePool.get(classes[i]);
+				Object obj = InstancePool.get(className);
 
 				if (obj instanceof Action) {
 					Action a = (Action)obj;
@@ -158,6 +156,6 @@ public class EventsProcessor {
 
 	private static EventsProcessor _instance = new EventsProcessor();
 
-	private Set _processPool;
+	private Set<String> _processPool;
 
 }

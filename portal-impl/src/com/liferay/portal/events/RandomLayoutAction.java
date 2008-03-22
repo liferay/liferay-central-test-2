@@ -90,11 +90,11 @@ public class RandomLayoutAction extends Action {
 			Group generalGuestGroup = GroupLocalServiceUtil.getGroup(
 				themeDisplay.getCompanyId(), GroupImpl.GUEST);
 
-			List layouts = LayoutLocalServiceUtil.getLayouts(
+			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 				generalGuestGroup.getGroupId(), false);
 
 			if (layouts.size() > 0) {
-				Layout randomLayout = (Layout)layouts.get(
+				Layout randomLayout = layouts.get(
 					Randomizer.getInstance().nextInt(layouts.size()));
 
 				themeDisplay.setLayout(randomLayout);

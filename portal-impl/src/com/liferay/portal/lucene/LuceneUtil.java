@@ -32,7 +32,6 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.dao.DataAccess;
 import com.liferay.util.lucene.HitsImpl;
@@ -47,6 +46,7 @@ import java.sql.Statement;
 
 import java.util.Date;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
@@ -456,7 +456,7 @@ public class LuceneUtil {
 		String tableName = _getTableName(companyId);
 
 		try {
-			Directory directory = (Directory)_jdbcDirectories.remove(tableName);
+			Directory directory = _jdbcDirectories.remove(tableName);
 
 			if (directory != null) {
 				directory.close();
@@ -598,7 +598,7 @@ public class LuceneUtil {
 	private Directory _getLuceneDirRam(long companyId) {
 		String path = _getPath(companyId);
 
-		Directory directory = (Directory)_ramDirectories.get(path);
+		Directory directory = _ramDirectories.get(path);
 
 		if (directory == null) {
 			directory = new RAMDirectory();
@@ -645,7 +645,7 @@ public class LuceneUtil {
 
 				jdbcTemplate.executeUpdate(directory.getTable().sqlCreate());
 
-				Class lockClass = directory.getSettings().getLockClass();
+				Class<?> lockClass = directory.getSettings().getLockClass();
 
 				JdbcLock jdbcLock = null;
 
@@ -683,9 +683,11 @@ public class LuceneUtil {
 	private static LuceneUtil _instance = new LuceneUtil();
 
 	private IndexWriterFactory _sharedWriter = new IndexWriterFactory();
-	private Class _analyzerClass = WhitespaceAnalyzer.class;
+	private Class<?> _analyzerClass = WhitespaceAnalyzer.class;
 	private Dialect _dialect;
-	private Map _jdbcDirectories = CollectionFactory.getSyncHashMap();
-	private Map _ramDirectories = CollectionFactory.getSyncHashMap();
+	private Map<String, Directory> _jdbcDirectories =
+		new ConcurrentHashMap<String, Directory>();
+	private Map<String, Directory> _ramDirectories =
+		new ConcurrentHashMap<String, Directory>();
 
 }

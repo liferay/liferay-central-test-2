@@ -78,7 +78,7 @@ public class OpenIdRequestAction extends Action {
 
 		ConsumerManager manager = OpenIdUtil.getConsumerManager();
 
-		List discoveries = manager.discover(openId);
+		List<DiscoveryInformation> discoveries = manager.discover(openId);
 
 		DiscoveryInformation discovered = manager.associate(discoveries);
 

@@ -156,10 +156,10 @@ public class ImageProcessorImpl implements ImageProcessor {
 		RenderedImage renderedImage = null;
 		String type = TYPE_NOT_AVAILABLE;
 
-		Enumeration enu = ImageCodec.getCodecs();
+		Enumeration<ImageCodec> enu = ImageCodec.getCodecs();
 
 		while (enu.hasMoreElements()) {
-			ImageCodec codec = (ImageCodec)enu.nextElement();
+			ImageCodec codec = enu.nextElement();
 
 			if (codec.isFormatRecognized(bytes)) {
 				type = codec.getFormatName();

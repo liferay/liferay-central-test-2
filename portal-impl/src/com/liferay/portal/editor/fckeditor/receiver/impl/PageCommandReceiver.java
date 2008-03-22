@@ -87,15 +87,13 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			return layout;
 		}
 
-		List layoutChildren = layout.getChildren();
+		List<Layout> layoutChildren = layout.getChildren();
 
 		if (layoutChildren.size() == 0) {
 			return null;
 		}
 		else {
-			for (int i = 0; i < layoutChildren.size(); i++) {
-				Layout layoutChild = (Layout)layoutChildren.get(i);
-
+			for (Layout layoutChild : layoutChildren) {
 				Layout currentLayout = _getLayout(layoutName, layoutChild);
 
 				if (currentLayout != null) {
@@ -133,15 +131,13 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 
 		Group group = arg.getCurrentGroup();
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 		if (("/" + arg.getCurrentGroupName() + "/").equals(
 				arg.getCurrentFolder())) {
 
-			for (int i = 0; i < layouts.size(); i++) {
-				Layout layout = (Layout)layouts.get(i);
-
+			for (Layout layout : layouts) {
 				Element fileEl = doc.createElement("File");
 
 				filesEl.appendChild(fileEl);
@@ -160,7 +156,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			Layout layout = null;
 
 			for (int i = 0; i < layouts.size(); i++) {
-				layout = _getLayout(layoutName, (Layout)layouts.get(i));
+				layout = _getLayout(layoutName, layouts.get(i));
 
 				if (layout != null) {
 					break;
@@ -171,10 +167,10 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 				return;
 			}
 
-			List layoutChildren = layout.getChildren();
+			List<Layout> layoutChildren = layout.getChildren();
 
 			for (int i = 0; i < layoutChildren.size(); i++) {
-				layout = (Layout)layoutChildren.get(i);
+				layout = layoutChildren.get(i);
 
 				Element fileEl = doc.createElement("File");
 
@@ -203,15 +199,13 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		else {
 			Group group = arg.getCurrentGroup();
 
-			List layouts = LayoutLocalServiceUtil.getLayouts(
+			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 				group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (("/" + arg.getCurrentGroupName() + "/").equals(
 					arg.getCurrentFolder())) {
 
-				for (int i = 0; i < layouts.size(); i++) {
-					Layout layout = (Layout)layouts.get(i);
-
+				for (Layout layout : layouts) {
 					Element folderEl = doc.createElement("Folder");
 
 					foldersEl.appendChild(folderEl);
@@ -226,7 +220,7 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 				Layout layout = null;
 
 				for (int i = 0; i < layouts.size(); i++) {
-					layout = _getLayout(layoutName, (Layout)layouts.get(i));
+					layout = _getLayout(layoutName, layouts.get(i));
 
 					if (layout != null) {
 						break;
@@ -234,10 +228,10 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 				}
 
 				if (layout != null) {
-					List layoutChildren = layout.getChildren();
+					List<Layout> layoutChildren = layout.getChildren();
 
 					for (int i = 0; i < layoutChildren.size(); i++) {
-						layout = (Layout)layoutChildren.get(i);
+						layout = layoutChildren.get(i);
 
 						Element folderEl = doc.createElement("Folder");
 

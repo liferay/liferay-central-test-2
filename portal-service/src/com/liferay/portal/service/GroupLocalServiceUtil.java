@@ -1297,7 +1297,7 @@ public class GroupLocalServiceUtil {
 		return groupLocalService.getGroup(companyId, name);
 	}
 
-	public static java.util.List getNullFriendlyURLGroups()
+	public static java.util.List<com.liferay.portal.model.Group> getNullFriendlyURLGroups()
 		throws com.liferay.portal.SystemException {
 		GroupLocalService groupLocalService = GroupLocalServiceFactory.getService();
 

@@ -369,7 +369,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return groupFinder.findByC_N(companyId, name);
 	}
 
-	public List getNullFriendlyURLGroups() throws SystemException {
+	public List<Group> getNullFriendlyURLGroups() throws SystemException {
 		return groupFinder.findByNullFriendlyURL();
 	}
 

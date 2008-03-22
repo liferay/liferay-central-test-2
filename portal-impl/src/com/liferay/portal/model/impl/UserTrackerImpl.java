@@ -98,7 +98,7 @@ public class UserTrackerImpl
 		return _emailAddress;
 	}
 
-	public List getPaths() {
+	public List<UserTrackerPath> getPaths() {
 		return _paths;
 	}
 
@@ -140,6 +140,6 @@ public class UserTrackerImpl
 	private User _user;
 	private String _fullName;
 	private String _emailAddress;
-	private List _paths = new ArrayList();
+	private List<UserTrackerPath> _paths = new ArrayList<UserTrackerPath>();
 
 }

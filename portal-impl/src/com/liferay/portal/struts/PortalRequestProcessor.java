@@ -388,8 +388,8 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				// Was a last path set by another servlet that dispatched to
 				// the MainServlet? If so, use that last path instead.
 
-				LastPath lastPath =
-					(LastPath)req.getAttribute(WebKeys.LAST_PATH);
+				LastPath lastPath = (LastPath)req.getAttribute(
+					WebKeys.LAST_PATH);
 
 				if (lastPath == null) {
 					lastPath = new LastPath(

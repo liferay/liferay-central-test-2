@@ -123,8 +123,8 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 				while (itr.hasNext()) {
 					ObjectValuePair<String, Boolean> ovp = itr.next();
 
-					String layoutTemplateId = (String)ovp.getKey();
-					Boolean standard = (Boolean)ovp.getValue();
+					String layoutTemplateId = ovp.getKey();
+					Boolean standard = ovp.getValue();
 
 					try {
 						LayoutTemplateLocalUtil.uninstallLayoutTemplate(

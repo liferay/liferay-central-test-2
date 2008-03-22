@@ -73,6 +73,6 @@ public class ActivityTrackerInterpreterImpl
 	}
 
 	private ActivityTrackerInterpreter _activityTrackerInterpreter;
-	private Set _classNames = new HashSet();
+	private Set<String> _classNames = new HashSet<String>();
 
 }

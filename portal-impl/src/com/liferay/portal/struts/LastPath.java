@@ -41,10 +41,12 @@ public class LastPath implements Serializable {
 		this(contextPath, path, null);
 	}
 
-	public LastPath(String contextPath, String path, Map parameterMap) {
+	public LastPath(
+		String contextPath, String path, Map<String, String[]> parameterMap) {
+
 		_contextPath = contextPath;
 		_path = path;
-		_parameterMap = new LinkedHashMap(parameterMap);
+		_parameterMap = new LinkedHashMap<String, String[]>(parameterMap);
 	}
 
 	public String getContextPath() {
@@ -63,11 +65,11 @@ public class LastPath implements Serializable {
 		_path = path;
 	}
 
-	public Map getParameterMap() {
+	public Map<String, String[]> getParameterMap() {
 		return _parameterMap;
 	}
 
-	public void setParameterMap(Map parameterMap) {
+	public void setParameterMap(Map<String, String[]> parameterMap) {
 		_parameterMap = parameterMap;
 	}
 
@@ -85,6 +87,6 @@ public class LastPath implements Serializable {
 
 	private String _contextPath;
 	private String _path;
-	private Map _parameterMap;
+	private Map<String, String[]> _parameterMap;
 
 }

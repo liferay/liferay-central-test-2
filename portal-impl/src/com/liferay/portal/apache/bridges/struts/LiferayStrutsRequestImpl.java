@@ -27,11 +27,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.UploadServletRequest;
+import com.liferay.util.servlet.fileupload.LiferayFileItem;
 
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
@@ -78,23 +79,23 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		}
 	}
 
-	public Enumeration getAttributeNames() {
-		List attributeNames = new Vector();
+	public Enumeration<String> getAttributeNames() {
+		List<String> attributeNames = new Vector<String>();
 
-		Enumeration enu = super.getAttributeNames();
+		Enumeration<String> enu = super.getAttributeNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (!name.startsWith(StrutsUtil.STRUTS_PACKAGE)) {
 				attributeNames.add(name);
 			}
 		}
 
-		Iterator itr = _strutsAttributes.keySet().iterator();
+		Iterator<String> itr = _strutsAttributes.keySet().iterator();
 
 		while (itr.hasNext()) {
-			String name = (String)itr.next();
+			String name = itr.next();
 
 			attributeNames.add(name);
 		}
@@ -111,13 +112,13 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		}
 	}
 
-	public Map getParameterMap() {
-		Map params = CollectionFactory.getHashMap();
+	public Map<String, String[]> getParameterMap() {
+		Map<String, String[]> params = new HashMap<String, String[]>();
 
-		Enumeration enu = getParameterNames();
+		Enumeration<String> enu = getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			String[] values = super.getParameterValues(name);
 
@@ -127,13 +128,13 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		return params;
 	}
 
-	public Enumeration getParameterNames() {
-		List parameterNames = new Vector();
+	public Enumeration<String> getParameterNames() {
+		List<String> parameterNames = new Vector<String>();
 
-		Enumeration enu = super.getParameterNames();
+		Enumeration<String> enu = super.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (!_multipartParams.containsKey(name)) {
 				parameterNames.add(name);
@@ -155,11 +156,11 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 	protected LiferayStrutsRequestImpl(HttpServletRequest req) {
 		super(req);
 
-		_strutsAttributes =
-			(Map)req.getAttribute(WebKeys.STRUTS_BRIDGES_ATTRIBUTES);
+		_strutsAttributes = (Map<String, Object>)req.getAttribute(
+			WebKeys.STRUTS_BRIDGES_ATTRIBUTES);
 
 		if (_strutsAttributes == null) {
-			_strutsAttributes = CollectionFactory.getHashMap();
+			_strutsAttributes = new HashMap<String, Object>();
 
 			req.setAttribute(
 				WebKeys.STRUTS_BRIDGES_ATTRIBUTES, _strutsAttributes);
@@ -173,7 +174,8 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		}
 	}
 
-	private Map _strutsAttributes;
-	private Map _multipartParams = CollectionFactory.getHashMap();
+	private Map<String, Object> _strutsAttributes;
+	private Map<String, LiferayFileItem[]> _multipartParams =
+		new HashMap<String, LiferayFileItem[]>();
 
 }

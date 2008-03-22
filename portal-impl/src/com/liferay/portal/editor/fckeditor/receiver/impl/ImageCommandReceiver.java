@@ -146,11 +146,10 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		IGFolder folder = _getFolder(
 			group.getGroupId(), arg.getCurrentFolder());
 
-		List images = IGImageServiceUtil.getImages(folder.getFolderId());
+		List<IGImage> images = IGImageServiceUtil.getImages(
+			folder.getFolderId());
 
-		for (int i = 0; i < images.size(); i++) {
-			IGImage image = (IGImage)images.get(i);
-
+		for (IGImage image : images) {
 			long largeImageId = image.getLargeImageId();
 
 			Image portalImage = ImageLocalUtil.getImageOrDefault(largeImageId);
@@ -191,14 +190,12 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 		StringTokenizer st = new StringTokenizer(folderName, StringPool.SLASH);
 
 		while (st.hasMoreTokens()) {
-			String curFolderName = (String)st.nextToken();
+			String curFolderName = st.nextToken();
 
-			List folders = IGFolderLocalServiceUtil.getFolders(
+			List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(
 				groupId, folder.getFolderId());
 
-			for (int i = 0; i < folders.size(); i++) {
-				IGFolder curFolder = (IGFolder)folders.get(i);
-
+			for (IGFolder curFolder : folders) {
 				if (curFolder.getName().equals(curFolderName)) {
 					folder = curFolder;
 
@@ -226,17 +223,15 @@ public class ImageCommandReceiver extends BaseCommandReceiver {
 			IGFolder folder = _getFolder(
 				group.getGroupId(), arg.getCurrentFolder());
 
-			List folders = IGFolderLocalServiceUtil.getFolders(
+			List<IGFolder> folders = IGFolderLocalServiceUtil.getFolders(
 				group.getGroupId(), folder.getFolderId());
 
-			for (int i = 0; i < folders.size(); i++) {
-				folder = (IGFolder) folders.get(i);
-
+			for (IGFolder curFolder : folders) {
 				Element folderEl = doc.createElement("Folder");
 
 				foldersEl.appendChild(folderEl);
 
-				folderEl.setAttribute("name", folder.getName());
+				folderEl.setAttribute("name", curFolder.getName());
 			}
 		}
 	}

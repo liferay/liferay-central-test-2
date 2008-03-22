@@ -47,7 +47,6 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
@@ -250,15 +249,13 @@ public class UserImpl extends UserModelImpl implements User {
 	 */
 	public Organization getOrganization() {
 		try {
-			List organizations =
+			List<Organization> organizations =
 				OrganizationLocalServiceUtil.getUserOrganizations(getUserId());
 
 			Collections.sort(
 				organizations, new OrganizationNameComparator(true));
 
-			for (int i = 0; i < organizations.size(); i++) {
-				Organization organization = (Organization)organizations.get(i);
-
+			for (Organization organization : organizations) {
 				if (!organization.isLocation()) {
 					return organization;
 				}
@@ -275,14 +272,12 @@ public class UserImpl extends UserModelImpl implements User {
 	}
 
 	public long[] getOrganizationIds() {
-		List organizations = getOrganizations();
+		List<Organization> organizations = getOrganizations();
 
 		long[] organizationIds = new long[organizations.size()];
 
-		Iterator itr = organizations.iterator();
-
-		for (int i = 0; itr.hasNext(); i++) {
-			Organization organization = (Organization)itr.next();
+		for (int i = 0; i < organizations.size(); i++) {
+			Organization organization = organizations.get(i);
 
 			organizationIds[i] = organization.getOrganizationId();
 		}
@@ -290,7 +285,7 @@ public class UserImpl extends UserModelImpl implements User {
 		return organizationIds;
 	}
 
-	public List getOrganizations() {
+	public List<Organization> getOrganizations() {
 		try {
 			return OrganizationLocalServiceUtil.getUserOrganizations(
 				getUserId());
@@ -302,7 +297,7 @@ public class UserImpl extends UserModelImpl implements User {
 			}
 		}
 
-		return new ArrayList();
+		return new ArrayList<Organization>();
 	}
 
 	public boolean hasOrganization() {
@@ -319,12 +314,10 @@ public class UserImpl extends UserModelImpl implements User {
 	 */
 	public Organization getLocation() {
 		try {
-			List organizations =
+			List<Organization> organizations =
 				OrganizationLocalServiceUtil.getUserOrganizations(getUserId());
 
-			for (int i = 0; i < organizations.size(); i++) {
-				Organization organization = (Organization)organizations.get(i);
-
+			for (Organization organization : organizations) {
 				if (organization.isLocation()) {
 					return organization;
 				}
@@ -428,15 +421,16 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 	}
 
-	public List getMyPlaces() {
-		List myPlaces = new ArrayList();
+	public List<Group> getMyPlaces() {
+		List<Group> myPlaces = new ArrayList<Group>();
 
 		try {
 			if (isDefaultUser()) {
 				return myPlaces;
 			}
 
-			LinkedHashMap groupParams = new LinkedHashMap();
+			LinkedHashMap<String, Object> groupParams =
+				new LinkedHashMap<String, Object>();
 
 			groupParams.put("usersGroups", new Long(getUserId()));
 			//groupParams.put("pageCount", StringPool.BLANK);
@@ -445,13 +439,9 @@ public class UserImpl extends UserModelImpl implements User {
 				getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS,
 				QueryUtil.ALL_POS);
 
-			List userOrgs = getOrganizations();
+			List<Organization> userOrgs = getOrganizations();
 
-			Iterator itr = userOrgs.iterator();
-
-			while (itr.hasNext()) {
-				Organization organization = (Organization)itr.next();
-
+			for (Organization organization : userOrgs) {
 				myPlaces.add(0, organization.getGroup());
 			}
 
@@ -476,7 +466,8 @@ public class UserImpl extends UserModelImpl implements User {
 				return false;
 			}
 
-			LinkedHashMap groupParams = new LinkedHashMap();
+			LinkedHashMap<String, Object> groupParams =
+				new LinkedHashMap<String, Object>();
 
 			groupParams.put("usersGroups", new Long(getUserId()));
 			//groupParams.put("pageCount", StringPool.BLANK);
