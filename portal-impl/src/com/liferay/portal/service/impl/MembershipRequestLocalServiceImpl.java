@@ -45,7 +45,6 @@ import com.liferay.util.UniqueList;
 import java.io.IOException;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.mail.internet.InternetAddress;
@@ -105,7 +104,8 @@ public class MembershipRequestLocalServiceImpl
 		membershipRequestPersistence.removeByG_S(groupId, statusId);
 	}
 
-	public List search(long groupId, int status, int begin, int end)
+	public List<MembershipRequest> search(
+			long groupId, int status, int begin, int end)
 		throws SystemException {
 
 		return membershipRequestPersistence.findByG_S(
@@ -274,12 +274,12 @@ public class MembershipRequestLocalServiceImpl
 			MembershipRequest membershipRequest)
 		throws PortalException, SystemException {
 
-		List admins = new UniqueList();
+		List<UserGroupRole> admins = new UniqueList<UserGroupRole>();
 
 		Role communityAdminRole = roleLocalService.getRole(
 			membershipRequest.getCompanyId(), RoleImpl.COMMUNITY_ADMINISTRATOR);
 
-		List communityAdmins =
+		List<UserGroupRole> communityAdmins =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
 				membershipRequest.getGroupId(), communityAdminRole.getRoleId());
 
@@ -288,17 +288,13 @@ public class MembershipRequestLocalServiceImpl
 		Role communityOwnerRole = rolePersistence.findByC_N(
 			membershipRequest.getCompanyId(), RoleImpl.COMMUNITY_OWNER);
 
-		List communityOwners =
+		List<UserGroupRole> communityOwners =
 			userGroupRoleLocalService.getUserGroupRolesByGroupAndRole(
 				membershipRequest.getGroupId(), communityOwnerRole.getRoleId());
 
 		admins.addAll(communityOwners);
 
-		Iterator itr = admins.iterator();
-
-		while (itr.hasNext()) {
-			UserGroupRole userGroupRole = (UserGroupRole)itr.next();
-
+		for (UserGroupRole userGroupRole : admins) {
 			notify(
 				userGroupRole.getUserId(), membershipRequest,
 				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REQUEST_SUBJECT,

@@ -932,7 +932,7 @@ public class ResourceLocalServiceUtil {
 		return resourceLocalService.getResource(resourceId);
 	}
 
-	public static java.util.List getResources()
+	public static java.util.List<com.liferay.portal.model.Resource> getResources()
 		throws com.liferay.portal.SystemException {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 

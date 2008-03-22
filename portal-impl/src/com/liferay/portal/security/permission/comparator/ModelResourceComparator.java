@@ -35,17 +35,15 @@ import java.util.Locale;
  * @author Brian Wing Shun Chan
  *
  */
-public class ModelResourceComparator implements Comparator, Serializable {
+public class ModelResourceComparator
+	implements Comparator<String>, Serializable {
 
 	public ModelResourceComparator(long companyId, Locale locale) {
 		_companyId = companyId;
 		_locale = locale;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		String resource1 = (String)obj1;
-		String resource2 = (String)obj2;
-
+	public int compare(String resource1, String resource2) {
 		resource1 = ResourceActionsUtil.getModelResource(
 			_companyId, _locale, resource1);
 		resource2 = ResourceActionsUtil.getModelResource(

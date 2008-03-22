@@ -289,7 +289,7 @@ public class ServicePreAction extends Action {
 			long userId, long groupId, boolean privateLayout, File larFile)
 		throws PortalException, SystemException {
 
-		Map<String, String> parameterMap = new HashMap<String, String>();
+		Map parameterMap = new HashMap();
 
 		parameterMap.put(
 			PortletDataHandlerKeys.PERMISSIONS, Boolean.TRUE.toString());

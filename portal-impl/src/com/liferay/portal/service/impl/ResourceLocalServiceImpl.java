@@ -38,7 +38,6 @@ import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.base.ResourceLocalServiceBaseImpl;
 import com.liferay.portal.util.comparator.ResourceComparator;
 
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.lang.time.StopWatch;
@@ -105,8 +104,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			// Permissions
 
-			List permissionsList = permissionLocalService.addPermissions(
-				companyId, name, resource.getResourceId(), false);
+			List<Permission> permissionsList =
+				permissionLocalService.addPermissions(
+					companyId, name, resource.getResourceId(), false);
 
 			// User permissions
 
@@ -116,7 +116,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 			if ((userId > 0) && (userId != defaultUserId)) {
-				List userPermissionsList =
+				List<Permission> userPermissionsList =
 					permissionsListFilter.filterUserPermissions(
 						companyId, groupId, userId, name, primKey, false,
 						permissionsList);
@@ -133,7 +133,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 					communityPermissions = new String[0];
 				}
 
-				List communityPermissionsList =
+				List<Permission> communityPermissionsList =
 					permissionLocalService.getPermissions(
 						companyId, communityPermissions,
 						resource.getResourceId());
@@ -153,7 +153,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				guestPermissions = new String[0];
 			}
 
-			List guestPermissionsList =
+			List<Permission> guestPermissionsList =
 				permissionLocalService.getPermissions(
 					companyId, guestPermissions, resource.getResourceId());
 
@@ -254,8 +254,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 			// Permissions
 
-			List permissionsList = permissionLocalService.addPermissions(
-				companyId, name, resource.getResourceId(), portletActions);
+			List<Permission> permissionsList =
+				permissionLocalService.addPermissions(
+					companyId, name, resource.getResourceId(), portletActions);
 
 			logAddResources(name, primKey, stopWatch, 5);
 
@@ -267,7 +268,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
 			if ((userId > 0) && (userId != defaultUserId)) {
-				List userPermissionsList =
+				List<Permission> userPermissionsList =
 					permissionsListFilter.filterUserPermissions(
 						companyId, groupId, userId, name, primKey,
 						portletActions, permissionsList);
@@ -321,12 +322,10 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		// Permissions
 
-		Iterator itr = permissionPersistence.findByResourceId(
-			resource.getResourceId()).iterator();
+		List<Permission> permissions = permissionPersistence.findByResourceId(
+			resource.getResourceId());
 
-		while (itr.hasNext()) {
-			Permission permission = (Permission)itr.next();
-
+		for (Permission permission : permissions) {
 			orgGroupPermissionPersistence.removeByPermissionId(
 				permission.getPermissionId());
 		}
@@ -362,11 +361,9 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	public void deleteResources(String name)
 		throws PortalException, SystemException {
 
-		Iterator itr = resourceFinder.findByName(name).iterator();
+		List<Resource> resources = resourceFinder.findByName(name);
 
-		while (itr.hasNext()) {
-			Resource resource = (Resource)itr.next();
-
+		for (Resource resource : resources) {
 			deleteResource(resource);
 		}
 	}
@@ -374,13 +371,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 	public long getLatestResourceId()
 		throws PortalException, SystemException {
 
-		List list = resourcePersistence.findAll(0, 1, new ResourceComparator());
+		List<Resource> resources = resourcePersistence.findAll(
+			0, 1, new ResourceComparator());
 
-		if (list.size() == 0) {
+		if (resources.size() == 0) {
 			return 0;
 		}
 		else {
-			Resource resource = (Resource)list.get(0);
+			Resource resource = resources.get(0);
 
 			return resource.getResourceId();
 		}
@@ -392,7 +390,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		return resourcePersistence.findByPrimaryKey(resourceId);
 	}
 
-	public List getResources() throws SystemException {
+	public List<Resource> getResources() throws SystemException {
 		return resourcePersistence.findAll();
 	}
 
@@ -426,7 +424,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 1);
 
-		List actions = null;
+		List<String> actions = null;
 
 		if (portletActions) {
 			actions =
@@ -441,10 +439,11 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 2);
 
-		String[] actionIds = (String[])actions.toArray(new String[0]);
+		String[] actionIds = actions.toArray(new String[actions.size()]);
 
-		List communityPermissionsList = permissionLocalService.getPermissions(
-			group.getCompanyId(), actionIds, resourceId);
+		List<Permission> communityPermissionsList =
+			permissionLocalService.getPermissions(
+				group.getCompanyId(), actionIds, resourceId);
 
 		logAddCommunityPermissions(groupId, name, resourceId, stopWatch, 3);
 
@@ -470,7 +469,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 
 		long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
-		List actions = null;
+		List<String> actions = null;
 
 		if (portletActions) {
 			actions =
@@ -481,10 +480,11 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 				ResourceActionsUtil.getModelResourceGuestDefaultActions(name);
 		}
 
-		String[] actionIds = (String[])actions.toArray(new String[0]);
+		String[] actionIds = actions.toArray(new String[actions.size()]);
 
-		List guestPermissionsList = permissionLocalService.getPermissions(
-			companyId, actionIds, resource.getResourceId());
+		List<Permission> guestPermissionsList =
+			permissionLocalService.getPermissions(
+				companyId, actionIds, resource.getResourceId());
 
 		PermissionsListFilter permissionsListFilter =
 			PermissionsListFilterFactory.getInstance();
@@ -527,7 +527,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			long companyId, String name, boolean portletActions)
 		throws PortalException, SystemException {
 
-		List actions = null;
+		List<String> actions = null;
 
 		if (portletActions) {
 			actions =

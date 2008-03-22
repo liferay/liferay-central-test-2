@@ -54,7 +54,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 			boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
-		Map localeNamesMap = new HashMap();
+		Map<Locale, String> localeNamesMap = new HashMap<Locale, String>();
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
@@ -62,12 +62,14 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 		return addLayout(
 			groupId, privateLayout, parentLayoutId, localeNamesMap,
-			new HashMap(), description, type, hidden, friendlyURL);
+			new HashMap<Locale, String>(), description, type, hidden,
+			friendlyURL);
 	}
 
 	public Layout addLayout(
 			long groupId, boolean privateLayout, long parentLayoutId,
-			Map localeNamesMap, Map localeTitlesMap, String description,
+			Map<Locale, String> localeNamesMap,
+			Map<Locale, String> localeTitlesMap, String description,
 			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
@@ -119,7 +121,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public byte[] exportLayouts(
-			long groupId, boolean privateLayout, Map parameterMap)
+			long groupId, boolean privateLayout,
+			Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -131,7 +134,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds,
-			Map parameterMap)
+			Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -142,7 +145,7 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public byte[] exportPortletInfo(
-			long plid, String portletId, Map parameterMap)
+			long plid, String portletId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		Layout layout = layoutLocalService.getLayout(plid);
@@ -156,7 +159,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public void importLayouts(
-			long groupId, boolean privateLayout, Map parameterMap, File file)
+			long groupId, boolean privateLayout,
+			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -167,8 +171,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public void importLayouts(
-			long groupId, boolean privateLayout, Map parameterMap,
-			InputStream is)
+			long groupId, boolean privateLayout,
+			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
 		GroupPermissionUtil.check(
@@ -179,7 +183,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public void importPortletInfo(
-			long plid, String portletId, Map parameterMap, File file)
+			long plid, String portletId, Map<String, String[]> parameterMap,
+			File file)
 		throws PortalException, SystemException {
 
 		Layout layout = layoutLocalService.getLayout(plid);
@@ -193,7 +198,8 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 	}
 
 	public void importPortletInfo(
-			long plid, String portletId, Map parameterMap, InputStream is)
+			long plid, String portletId, Map<String, String[]> parameterMap,
+			InputStream is)
 		throws PortalException, SystemException {
 
 		Layout layout = layoutLocalService.getLayout(plid);
@@ -220,8 +226,9 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
-			String description, String type, boolean hidden, String friendlyURL)
+			long parentLayoutId, Map<Locale, String> localeNamesMap,
+			Map<Locale, String> localeTitlesMap, String description,
+			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		LayoutPermissionUtil.check(
@@ -235,9 +242,10 @@ public class LayoutServiceImpl extends LayoutServiceBaseImpl {
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
-			String description, String type, boolean hidden, String friendlyURL,
-			Boolean iconImage, byte[] iconBytes)
+			long parentLayoutId, Map<Locale, String> localeNamesMap,
+			Map<Locale, String> localeTitlesMap, String description,
+			String type, boolean hidden, String friendlyURL, Boolean iconImage,
+			byte[] iconBytes)
 		throws PortalException, SystemException {
 
 		LayoutPermissionUtil.check(

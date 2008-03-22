@@ -42,7 +42,6 @@ import com.liferay.util.UniqueList;
 import com.liferay.util.servlet.SessionMessages;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 import java.util.regex.Matcher;
@@ -100,10 +99,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		return "/html/portlet/nested_portlets/configuration.jsp";
 	}
 
-	protected List getColumnNames(String content, String portletId) {
+	protected List<String> getColumnNames(String content, String portletId) {
 		Matcher matcher = _searchColumnsPattern.matcher(content);
 
-		Set columnIds = new HashSet();
+		Set<String> columnIds = new HashSet<String>();
 
 		while (matcher.find()) {
 			if (Validator.isNotNull(matcher.group(1))) {
@@ -111,13 +110,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			}
 		}
 
-		List columnNames = new UniqueList();
+		List<String> columnNames = new UniqueList<String>();
 
-		Iterator itr = columnIds.iterator();
-
-		while (itr.hasNext()) {
-			String columnId = (String)itr.next();
-
+		for (String columnId : columnIds) {
 			if (columnId.indexOf(portletId) == -1) {
 				columnNames.add(portletId + StringPool.UNDERLINE + columnId);
 			}
@@ -143,14 +138,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			LayoutTemplateLocalUtil.getLayoutTemplate(
 				newLayoutTemplateId, false, theme.getThemeId());
 
-		List newColumns = getColumnNames(
+		List<String> newColumns = getColumnNames(
 			newLayoutTemplate.getContent(), portletResource);
 
 		LayoutTemplate oldLayoutTemplate =
 			LayoutTemplateLocalUtil.getLayoutTemplate(
 				oldLayoutTemplateId, false, theme.getThemeId());
 
-		List oldColumns = getColumnNames(
+		List<String> oldColumns = getColumnNames(
 			oldLayoutTemplate.getContent(), portletResource);
 
 		layoutTypePortlet.reorganizeNestedColumns(

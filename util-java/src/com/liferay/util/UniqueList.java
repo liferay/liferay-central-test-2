@@ -32,36 +32,36 @@ import java.util.Iterator;
  * @author Brian Wing Shun Chan
  *
  */
-public class UniqueList extends ArrayList {
+public class UniqueList<E> extends ArrayList<E> {
 
 	public UniqueList() {
 		super();
 	}
 
-	public boolean add(Object obj) {
-		if (!contains(obj)) {
-			return super.add(obj);
+	public boolean add(E e) {
+		if (!contains(e)) {
+			return super.add(e);
 		}
 		else {
 			return false;
 		}
 	}
 
-	public void add(int index, Object obj) {
-		if (!contains(obj)) {
-			super.add(index, obj);
+	public void add(int index, E e) {
+		if (!contains(e)) {
+			super.add(index, e);
 		}
 	}
 
-	public boolean addAll(Collection c) {
-		c = new ArrayList(c);
+	public boolean addAll(Collection<? extends E> c) {
+		c = new ArrayList<E>(c);
 
-		Iterator itr = c.iterator();
+		Iterator<? extends E> itr = c.iterator();
 
 		while (itr.hasNext()) {
-			Object obj = itr.next();
+			E e = itr.next();
 
-			if (contains(obj)) {
+			if (contains(e)) {
 				itr.remove();
 			}
 		}
@@ -69,15 +69,15 @@ public class UniqueList extends ArrayList {
 		return super.addAll(c);
 	}
 
-	public boolean addAll(int index, Collection c) {
-		c = new ArrayList(c);
+	public boolean addAll(int index, Collection<? extends E> c) {
+		c = new ArrayList<E>(c);
 
-		Iterator itr = c.iterator();
+		Iterator<? extends E> itr = c.iterator();
 
 		while (itr.hasNext()) {
-			Object obj = itr.next();
+			E e = itr.next();
 
-			if (contains(obj)) {
+			if (contains(e)) {
 				itr.remove();
 			}
 		}
@@ -85,12 +85,12 @@ public class UniqueList extends ArrayList {
 		return super.addAll(index, c);
 	}
 
-	public Object set(int index, Object obj) {
-		if (!contains(obj)) {
-			return super.set(index, obj);
+	public E set(int index, E e) {
+		if (!contains(e)) {
+			return super.set(index, e);
 		}
 		else {
-			return obj;
+			return e;
 		}
 	}
 

@@ -230,11 +230,11 @@ public class PortalLDAPUtil {
 
 		Attributes attrs = ctx.getAttributes(fullDistinguishedName);
 
-		NamingEnumeration enu = ctx.getAttributes(
+		NamingEnumeration<? extends Attribute> enu = ctx.getAttributes(
 			fullDistinguishedName, attrIds).getAll();
 
 		while (enu.hasMore()) {
-			attrs.put((Attribute)enu.next());
+			attrs.put(enu.next());
 		}
 
 		return attrs;

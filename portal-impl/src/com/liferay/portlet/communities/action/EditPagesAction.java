@@ -99,8 +99,6 @@ import javax.portlet.RenderResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
@@ -299,11 +297,9 @@ public class EditPagesAction extends PortletAction {
 		LayoutTypePortlet copyLayoutTypePortlet =
 			(LayoutTypePortlet)copyLayout.getLayoutType();
 
-		List copyPortletIds = copyLayoutTypePortlet.getPortletIds();
+		List<String> copyPortletIds = copyLayoutTypePortlet.getPortletIds();
 
-		for (int i = 0; i < copyPortletIds.size(); i++) {
-			String copyPortletId = (String)copyPortletIds.get(i);
-
+		for (String copyPortletId : copyPortletIds) {
 			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 			// Copy preference
@@ -405,18 +401,16 @@ public class EditPagesAction extends PortletAction {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
-		Map localeNamesMap = new HashMap();
-		Map localeTitlesMap = new HashMap();
+		Map<Locale, String> localeNamesMap = new HashMap<Locale, String>();
+		Map<Locale, String> localeTitlesMap = new HashMap<Locale, String>();
 
-		for (int i = 0; i < locales.length; i++) {
-			String languageId = LocaleUtil.toLanguageId(locales[i]);
+		for (Locale locale : locales) {
+			String languageId = LocaleUtil.toLanguageId(locale);
 
 			localeNamesMap.put(
-				locales[i],
-				ParamUtil.getString(uploadReq, "name_" + languageId));
+				locale, ParamUtil.getString(uploadReq, "name_" + languageId));
 			localeTitlesMap.put(
-				locales[i],
-				ParamUtil.getString(uploadReq, "title_" + languageId));
+				locale, ParamUtil.getString(uploadReq, "title_" + languageId));
 		}
 
 		if (cmd.equals(Constants.ADD)) {
@@ -515,7 +509,7 @@ public class EditPagesAction extends PortletAction {
 					groupId, privateLayout, layoutId, layout.getTypeSettings());
 			}
 
-			HttpServletResponse httpRes = (HttpServletResponse)
+			HttpServletResponse httpRes =
 				((ActionResponseImpl)res).getHttpServletResponse();
 
 			String[] eventClasses = StringUtil.split(
@@ -675,7 +669,5 @@ public class EditPagesAction extends PortletAction {
 		GroupServiceUtil.updateWorkflow(
 			liveGroupId, workflowEnabled, workflowStages, workflowRoleNames);
 	}
-
-	private static Log _log = LogFactory.getLog(EditPagesAction.class);
 
 }

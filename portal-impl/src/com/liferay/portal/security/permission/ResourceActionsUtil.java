@@ -41,13 +41,13 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletResourceBundles;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.UniqueList;
 
 import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -121,32 +121,26 @@ public class ResourceActionsUtil {
 		return value;
 	}
 
-	public static List getActions(List permissions) {
-		List actions = new UniqueList();
+	public static List<String> getActions(List<Permission> permissions) {
+		List<String> actions = new UniqueList<String>();
 
-		Iterator itr = permissions.iterator();
-
-		while (itr.hasNext()) {
-			Permission permission = (Permission)itr.next();
-
+		for (Permission permission : permissions) {
 			actions.add(permission.getActionId());
 		}
 
 		return actions;
 	}
 
-	public static List getActionsNames(PageContext pageContext, List actions) {
-		List uniqueList = new UniqueList();
+	public static List<String> getActionsNames(
+		PageContext pageContext, List<String> actions) {
 
-		Iterator itr = actions.iterator();
+		List<String> uniqueList = new UniqueList<String>();
 
-		while (itr.hasNext()) {
-			String action = (String)itr.next();
-
+		for (String action : actions) {
 			uniqueList.add(getAction(pageContext, action));
 		}
 
-		List list = new ArrayList();
+		List<String> list = new ArrayList<String>();
 
 		list.addAll(uniqueList);
 
@@ -155,7 +149,7 @@ public class ResourceActionsUtil {
 		return list;
 	}
 
-	public static List getModelPortletResources(String name) {
+	public static List<String> getModelPortletResources(String name) {
 		return _instance._getModelPortletResources(name);
 	}
 
@@ -195,61 +189,72 @@ public class ResourceActionsUtil {
 		return value;
 	}
 
-	public static List getModelResourceActions(String name) {
+	public static List<String> getModelResourceActions(String name) {
 		return _instance._getModelResourceActions(name);
 	}
 
-	public static List getModelResourceCommunityDefaultActions(String name) {
+	public static List<String> getModelResourceCommunityDefaultActions(
+		String name) {
+
 		return _instance._getModelResourceCommunityDefaultActions(name);
 	}
 
-	public static List getModelResourceGuestDefaultActions(String name) {
+	public static List<String> getModelResourceGuestDefaultActions(
+		String name) {
+
 		return _instance._getModelResourceGuestDefaultActions(name);
 	}
 
-	public static List getModelResourceGuestUnsupportedActions(String name) {
+	public static List<String> getModelResourceGuestUnsupportedActions(
+		String name) {
+
 		return _instance._getModelResourceGuestUnsupportedActions(name);
 	}
 
-	public static List getPortletModelResources(String portletName) {
+	public static List<String> getPortletModelResources(String portletName) {
 		return _instance._getPortletModelResources(portletName);
 	}
 
-	public static List getPortletResourceActions(long companyId, String name)
+	public static List<String> getPortletResourceActions(
+			long companyId, String name)
 		throws SystemException {
 
 		return _instance._getPortletResourceActions(companyId, name);
 	}
 
-	public static List getPortletResourceCommunityDefaultActions(String name)
+	public static List<String> getPortletResourceCommunityDefaultActions(
+			String name)
 		throws SystemException {
 
 		return _instance._getPortletResourceCommunityDefaultActions(name);
 	}
 
-	public static List getPortletResourceGuestDefaultActions(String name)
+	public static List<String> getPortletResourceGuestDefaultActions(
+			String name)
 		throws SystemException {
 
 		return _instance._getPortletResourceGuestDefaultActions(name);
 	}
 
-	public static List getPortletResourceGuestUnsupportedActions(String name)
+	public static List<String> getPortletResourceGuestUnsupportedActions(
+			String name)
 		throws SystemException {
 
 		return _instance._getPortletResourceGuestUnsupportedActions(name);
 	}
 
-	public static List getPortletResourceLayoutManagerActions(String name)
+	public static List<String> getPortletResourceLayoutManagerActions(
+			String name)
 		throws SystemException {
 
 		return _instance._getPortletResourceLayoutManagerActions(name);
 	}
 
-	public static List getResourceActions(
+	public static List<String> getResourceActions(
 			long companyId, String portletResource, String modelResource)
 		throws SystemException {
 
-		List actions = null;
+		List<String> actions = null;
 
 		if (Validator.isNull(modelResource)) {
 			actions = getPortletResourceActions(companyId, portletResource);
@@ -261,11 +266,11 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
-	public static List getResourceGuestUnsupportedActions(
+	public static List<String> getResourceGuestUnsupportedActions(
 			String portletResource, String modelResource)
 		throws SystemException {
 
-		List actions = null;
+		List<String> actions = null;
 
 		if (Validator.isNull(modelResource)) {
 			actions =
@@ -294,31 +299,36 @@ public class ResourceActionsUtil {
 	}
 
 	private ResourceActionsUtil() {
-		_organizationModelResources = CollectionFactory.getHashSet();
+		_organizationModelResources = new HashSet<String>();
 
 		for (int i = 0; i < ORGANIZATION_MODEL_RESOURCES.length; i++) {
 			_organizationModelResources.add(ORGANIZATION_MODEL_RESOURCES[i]);
 		}
 
-		_portalModelResources = CollectionFactory.getHashSet();
+		_portalModelResources = new HashSet<String>();
 
 		for (int i = 0; i < PORTAL_MODEL_RESOURCES.length; i++) {
 			_portalModelResources.add(PORTAL_MODEL_RESOURCES[i]);
 		}
 
-		_portletModelResources = CollectionFactory.getHashMap();
-		_portletResourceActions = CollectionFactory.getHashMap();
+		_portletModelResources = new HashMap<String, Set<String>>();
+		_portletResourceActions = new HashMap<String, List<String>>();
 		_portletResourceCommunityDefaultActions =
-			CollectionFactory.getHashMap();
-		_portletResourceGuestDefaultActions = CollectionFactory.getHashMap();
+			new HashMap<String, List<String>>();
+		_portletResourceGuestDefaultActions =
+			new HashMap<String, List<String>>();
 		_portletResourceGuestUnsupportedActions =
-			CollectionFactory.getHashMap();
-		_portletResourceLayoutManagerActions = CollectionFactory.getHashMap();
-		_modelPortletResources = CollectionFactory.getHashMap();
-		_modelResourceActions = CollectionFactory.getHashMap();
-		_modelResourceCommunityDefaultActions = CollectionFactory.getHashMap();
-		_modelResourceGuestDefaultActions = CollectionFactory.getHashMap();
-		_modelResourceGuestUnsupportedActions = CollectionFactory.getHashMap();
+			new HashMap<String, List<String>>();
+		_portletResourceLayoutManagerActions =
+			new HashMap<String, List<String>>();
+		_modelPortletResources = new HashMap<String, Set<String>>();
+		_modelResourceActions = new HashMap<String, List<String>>();
+		_modelResourceCommunityDefaultActions =
+			new HashMap<String, List<String>>();
+		_modelResourceGuestDefaultActions =
+			new HashMap<String, List<String>>();
+		_modelResourceGuestUnsupportedActions =
+			new HashMap<String, List<String>>();
 
 		try {
 			ClassLoader classLoader = getClass().getClassLoader();
@@ -336,14 +346,15 @@ public class ResourceActionsUtil {
 	}
 
 	private void _checkGuestUnsupportedActions(
-		List guestUnsupportedActions, List guestDefaultActions) {
+		List<String> guestUnsupportedActions,
+		List<String> guestDefaultActions) {
 
 		// Guest default actions cannot reference guest unsupported actions
 
-		Iterator itr = guestDefaultActions.iterator();
+		Iterator<String> itr = guestDefaultActions.iterator();
 
 		while (itr.hasNext()) {
-			String actionId = (String)itr.next();
+			String actionId = itr.next();
 
 			if (guestUnsupportedActions.contains(actionId)) {
 				itr.remove();
@@ -351,7 +362,7 @@ public class ResourceActionsUtil {
 		}
 	}
 
-	private void _checkPortletActions(List actions) {
+	private void _checkPortletActions(List<String> actions) {
 		if (!actions.contains("CONFIGURATION")) {
 			actions.add("CONFIGURATION");
 		}
@@ -361,19 +372,19 @@ public class ResourceActionsUtil {
 		}
 	}
 
-	private void _checkPortletCommunityDefaultActions(List actions) {
+	private void _checkPortletCommunityDefaultActions(List<String> actions) {
 		if (actions.size() == 0) {
 			actions.add("VIEW");
 		}
 	}
 
-	private void _checkPortletGuestDefaultActions(List actions) {
+	private void _checkPortletGuestDefaultActions(List<String> actions) {
 		if (actions.size() == 0) {
 			actions.add("VIEW");
 		}
 	}
 
-	private void _checkPortletLayoutManagerActions(List actions) {
+	private void _checkPortletLayoutManagerActions(List<String> actions) {
 		if (!actions.contains("CONFIGURATION")) {
 			actions.add("CONFIGURATION");
 		}
@@ -383,11 +394,13 @@ public class ResourceActionsUtil {
 		}
 	}
 
-	private List _getActions(Map map, String name) {
-		List actions = (List)map.get(name);
+	private List<String> _getActions(
+		Map<String, List<String>> map, String name) {
+
+		List<String> actions = map.get(name);
 
 		if (actions == null) {
-			actions = new UniqueList();
+			actions = new UniqueList<String>();
 
 			map.put(name, actions);
 		}
@@ -395,68 +408,67 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
-	private List _getModelPortletResources(String name) {
-		Set resources = (Set)_modelPortletResources.get(name);
+	private List<String> _getModelPortletResources(String name) {
+		Set<String> resources = _modelPortletResources.get(name);
 
 		if (resources == null) {
-			return new UniqueList();
+			return new UniqueList<String>();
 		}
 		else {
 			return Collections.list(Collections.enumeration(resources));
 		}
 	}
 
-	private List _getModelResourceActions(String name) {
+	private List<String> _getModelResourceActions(String name) {
 		return _getActions(_modelResourceActions, name);
 	}
 
-	private List _getModelResourceCommunityDefaultActions(String name) {
+	private List<String> _getModelResourceCommunityDefaultActions(
+		String name) {
+
 		return _getActions(_modelResourceCommunityDefaultActions, name);
 	}
 
-	private List _getModelResourceGuestDefaultActions(String name) {
+	private List<String> _getModelResourceGuestDefaultActions(String name) {
 		return _getActions(_modelResourceGuestDefaultActions, name);
 	}
 
-	private List _getModelResourceGuestUnsupportedActions(String name) {
+	private List<String> _getModelResourceGuestUnsupportedActions(String name) {
 		return _getActions(_modelResourceGuestUnsupportedActions, name);
 	}
 
-	private List _getPortletModelResources(String portletName) {
+	private List<String> _getPortletModelResources(String portletName) {
 		portletName = PortletImpl.getRootPortletId(portletName);
 
-		Set resources = (Set)_portletModelResources.get(portletName);
+		Set<String> resources = _portletModelResources.get(portletName);
 
 		if (resources == null) {
-			return new UniqueList();
+			return new UniqueList<String>();
 		}
 		else {
 			return Collections.list(Collections.enumeration(resources));
 		}
 	}
 
-	private List _getPortletResourceActions(long companyId, String name)
+	private List<String> _getPortletResourceActions(long companyId, String name)
 		throws SystemException {
 
 		name = PortletImpl.getRootPortletId(name);
 
-		List actions = _getActions(_portletResourceActions, name);
+		List<String> actions = _getActions(_portletResourceActions, name);
 
 		if (actions.size() == 0) {
 			synchronized (this) {
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					companyId, name);
 
-				Map portletModes = portlet.getPortletModes();
+				Map<String, Set<String>> portletModes =
+					portlet.getPortletModes();
 
-				Set mimeTypeModes = (Set)portletModes.get("text/html");
+				Set<String> mimeTypeModes = portletModes.get("text/html");
 
 				if (mimeTypeModes != null) {
-					Iterator itr = mimeTypeModes.iterator();
-
-					while (itr.hasNext()) {
-						String actionId = (String)itr.next();
-
+					for (String actionId : mimeTypeModes) {
 						if (actionId.equalsIgnoreCase("edit")) {
 							actions.add(ActionKeys.PREFERENCES);
 						}
@@ -471,11 +483,11 @@ public class ResourceActionsUtil {
 
 				_checkPortletActions(actions);
 
-				List communityDefaultActions =
-					(List)_portletResourceCommunityDefaultActions.get(name);
+				List<String> communityDefaultActions =
+					_portletResourceCommunityDefaultActions.get(name);
 
 				if (communityDefaultActions == null) {
-					communityDefaultActions = new UniqueList();
+					communityDefaultActions = new UniqueList<String>();
 
 					_portletResourceCommunityDefaultActions.put(
 						name, communityDefaultActions);
@@ -484,11 +496,11 @@ public class ResourceActionsUtil {
 						communityDefaultActions);
 				}
 
-				List guestDefaultActions =
-					(List)_portletResourceGuestDefaultActions.get(name);
+				List<String> guestDefaultActions =
+					_portletResourceGuestDefaultActions.get(name);
 
 				if (guestDefaultActions == null) {
-					guestDefaultActions = new UniqueList();
+					guestDefaultActions = new UniqueList<String>();
 
 					_portletResourceGuestDefaultActions.put(
 						name, guestDefaultActions);
@@ -496,11 +508,11 @@ public class ResourceActionsUtil {
 					_checkPortletGuestDefaultActions(guestDefaultActions);
 				}
 
-				List layoutManagerActions =
-					(List)_portletResourceLayoutManagerActions.get(name);
+				List<String> layoutManagerActions =
+					_portletResourceLayoutManagerActions.get(name);
 
 				if (layoutManagerActions == null) {
-					layoutManagerActions = new UniqueList();
+					layoutManagerActions = new UniqueList<String>();
 
 					_portletResourceLayoutManagerActions.put(
 						name, layoutManagerActions);
@@ -513,7 +525,7 @@ public class ResourceActionsUtil {
 		return actions;
 	}
 
-	private List _getPortletResourceCommunityDefaultActions(String name)
+	private List<String> _getPortletResourceCommunityDefaultActions(String name)
 		throws SystemException {
 
 		// This method should always be called only after
@@ -528,7 +540,7 @@ public class ResourceActionsUtil {
 		return _getActions(_portletResourceCommunityDefaultActions, name);
 	}
 
-	private List _getPortletResourceGuestDefaultActions(String name)
+	private List<String> _getPortletResourceGuestDefaultActions(String name)
 		throws SystemException {
 
 		name = PortletImpl.getRootPortletId(name);
@@ -536,7 +548,7 @@ public class ResourceActionsUtil {
 		return _getActions(_portletResourceGuestDefaultActions, name);
 	}
 
-	private List _getPortletResourceGuestUnsupportedActions(String name)
+	private List<String> _getPortletResourceGuestUnsupportedActions(String name)
 		throws SystemException {
 
 		name = PortletImpl.getRootPortletId(name);
@@ -544,12 +556,13 @@ public class ResourceActionsUtil {
 		return _getActions(_portletResourceGuestUnsupportedActions, name);
 	}
 
-	private List _getPortletResourceLayoutManagerActions(String name)
+	private List<String> _getPortletResourceLayoutManagerActions(String name)
 		throws SystemException {
 
 		name = PortletImpl.getRootPortletId(name);
 
-		List actions = _getActions(_portletResourceLayoutManagerActions, name);
+		List<String> actions = _getActions(
+			_portletResourceLayoutManagerActions, name);
 
 		// This check can never return an empty list. If the list is empty, it
 		// means that the portlet does not have an explicit resource-actions
@@ -609,10 +622,10 @@ public class ResourceActionsUtil {
 
 		Element root = doc.getRootElement();
 
-		Iterator itr1 = root.elements("resource").iterator();
+		Iterator<Element> itr1 = root.elements("resource").iterator();
 
 		while (itr1.hasNext()) {
-			Element resource = (Element)itr1.next();
+			Element resource = itr1.next();
 
 			String file = resource.attributeValue("file");
 
@@ -622,7 +635,7 @@ public class ResourceActionsUtil {
 		itr1 = root.elements("portlet-resource").iterator();
 
 		while (itr1.hasNext()) {
-			Element resource = (Element)itr1.next();
+			Element resource = itr1.next();
 
 			String name = resource.elementText("portlet-name");
 
@@ -634,14 +647,14 @@ public class ResourceActionsUtil {
 
 			// Actions
 
-			List actions = _getActions(_portletResourceActions, name);
+			List<String> actions = _getActions(_portletResourceActions, name);
 
 			Element supports = resource.element("supports");
 
-			Iterator itr2 = supports.elements("action-key").iterator();
+			Iterator<Element> itr2 = supports.elements("action-key").iterator();
 
 			while (itr2.hasNext()) {
-				Element actionKey = (Element)itr2.next();
+				Element actionKey = itr2.next();
 
 				String actionKeyText = actionKey.getText();
 
@@ -656,7 +669,7 @@ public class ResourceActionsUtil {
 
 			// Community default actions
 
-			List communityDefaultActions =
+			List<String> communityDefaultActions =
 				_getActions(_portletResourceCommunityDefaultActions, name);
 
 			Element communityDefaults = resource.element("community-defaults");
@@ -664,7 +677,7 @@ public class ResourceActionsUtil {
 			itr2 = communityDefaults.elements("action-key").iterator();
 
 			while (itr2.hasNext()) {
-				Element actionKey = (Element)itr2.next();
+				Element actionKey = itr2.next();
 
 				String actionKeyText = actionKey.getText();
 
@@ -675,7 +688,7 @@ public class ResourceActionsUtil {
 
 			// Guest default actions
 
-			List guestDefaultActions =
+			List<String> guestDefaultActions =
 				_getActions(_portletResourceGuestDefaultActions, name);
 
 			Element guestDefaults = resource.element("guest-defaults");
@@ -683,7 +696,7 @@ public class ResourceActionsUtil {
 			itr2 = guestDefaults.elements("action-key").iterator();
 
 			while (itr2.hasNext()) {
-				Element actionKey = (Element)itr2.next();
+				Element actionKey = itr2.next();
 
 				String actionKeyText = actionKey.getText();
 
@@ -694,7 +707,7 @@ public class ResourceActionsUtil {
 
 			// Guest unsupported actions
 
-			List guestUnsupportedActions =
+			List<String> guestUnsupportedActions =
 				_getActions(_portletResourceGuestUnsupportedActions, name);
 
 			Element guestUnsupported = resource.element("guest-unsupported");
@@ -702,7 +715,7 @@ public class ResourceActionsUtil {
 			itr2 = guestUnsupported.elements("action-key").iterator();
 
 			while (itr2.hasNext()) {
-				Element actionKey = (Element)itr2.next();
+				Element actionKey = itr2.next();
 
 				String actionKeyText = actionKey.getText();
 
@@ -716,7 +729,7 @@ public class ResourceActionsUtil {
 
 			// Layout manager actions
 
-			List layoutManagerActions = _getActions(
+			List<String> layoutManagerActions = _getActions(
 				_portletResourceLayoutManagerActions, name);
 
 			Element layoutManager = resource.element("layout-manager");
@@ -725,7 +738,7 @@ public class ResourceActionsUtil {
 				itr2 = layoutManager.elements("action-key").iterator();
 
 				while (itr2.hasNext()) {
-					Element actionKey = (Element)itr2.next();
+					Element actionKey = itr2.next();
 
 					String actionKeyText = actionKey.getText();
 
@@ -746,16 +759,17 @@ public class ResourceActionsUtil {
 		itr1 = root.elements("model-resource").iterator();
 
 		while (itr1.hasNext()) {
-			Element resource = (Element)itr1.next();
+			Element resource = itr1.next();
 
 			String name = resource.elementText("model-name");
 
 			Element portletRef = resource.element("portlet-ref");
 
-			Iterator itr2 = portletRef.elements("portlet-name").iterator();
+			Iterator<Element> itr2 = portletRef.elements(
+				"portlet-name").iterator();
 
 			while (itr2.hasNext()) {
-				Element portletName = (Element)itr2.next();
+				Element portletName = itr2.next();
 
 				String portletNameString = portletName.getText();
 
@@ -770,11 +784,11 @@ public class ResourceActionsUtil {
 
 				// Reference for a portlet to child models
 
-				Set modelResources = (Set)_portletModelResources.get(
+				Set<String> modelResources = _portletModelResources.get(
 					portletNameString);
 
 				if (modelResources == null) {
-					modelResources = new HashSet();
+					modelResources = new HashSet<String>();
 
 					_portletModelResources.put(
 						portletNameString, modelResources);
@@ -784,10 +798,10 @@ public class ResourceActionsUtil {
 
 				// Reference for a model to parent portlets
 
-				Set portletResources = (Set)_modelPortletResources.get(name);
+				Set<String> portletResources = _modelPortletResources.get(name);
 
 				if (portletResources == null) {
-					portletResources = new HashSet();
+					portletResources = new HashSet<String>();
 
 					_modelPortletResources.put(name, portletResources);
 				}
@@ -797,14 +811,14 @@ public class ResourceActionsUtil {
 
 			// Actions
 
-			List actions = _getActions(_modelResourceActions, name);
+			List<String> actions = _getActions(_modelResourceActions, name);
 
 			Element supports = resource.element("supports");
 
 			itr2 = supports.elements("action-key").iterator();
 
 			while (itr2.hasNext()) {
-				Element actionKey = (Element)itr2.next();
+				Element actionKey = itr2.next();
 
 				String actionKeyText = actionKey.getText();
 
@@ -815,7 +829,7 @@ public class ResourceActionsUtil {
 
 			// Community default actions
 
-			List communityDefaultActions =
+			List<String> communityDefaultActions =
 				_getActions(_modelResourceCommunityDefaultActions, name);
 
 			Element communityDefaults = resource.element("community-defaults");
@@ -823,7 +837,7 @@ public class ResourceActionsUtil {
 			itr2 = communityDefaults.elements("action-key").iterator();
 
 			while (itr2.hasNext()) {
-				Element actionKey = (Element)itr2.next();
+				Element actionKey = itr2.next();
 
 				String actionKeyText = actionKey.getText();
 
@@ -834,7 +848,7 @@ public class ResourceActionsUtil {
 
 			// Guest default actions
 
-			List guestDefaultActions =
+			List<String> guestDefaultActions =
 				_getActions(_modelResourceGuestDefaultActions, name);
 
 			Element guestDefaults = resource.element("guest-defaults");
@@ -842,7 +856,7 @@ public class ResourceActionsUtil {
 			itr2 = guestDefaults.elements("action-key").iterator();
 
 			while (itr2.hasNext()) {
-				Element actionKey = (Element)itr2.next();
+				Element actionKey = itr2.next();
 
 				String actionKeyText = actionKey.getText();
 
@@ -853,7 +867,7 @@ public class ResourceActionsUtil {
 
 			// Guest unsupported actions
 
-			List guestUnsupportedActions =
+			List<String> guestUnsupportedActions =
 				_getActions(_modelResourceGuestUnsupportedActions, name);
 
 			Element guestUnsupported = resource.element("guest-unsupported");
@@ -861,7 +875,7 @@ public class ResourceActionsUtil {
 			itr2 = guestUnsupported.elements("action-key").iterator();
 
 			while (itr2.hasNext()) {
-				Element actionKey = (Element)itr2.next();
+				Element actionKey = itr2.next();
 
 				String actionKeyText = actionKey.getText();
 
@@ -879,18 +893,18 @@ public class ResourceActionsUtil {
 
 	private static ResourceActionsUtil _instance = new ResourceActionsUtil();
 
-	private Set _organizationModelResources;
-	private Set _portalModelResources;
-	private Map _portletModelResources;
-	private Map _portletResourceActions;
-	private Map _portletResourceCommunityDefaultActions;
-	private Map _portletResourceGuestDefaultActions;
-	private Map _portletResourceGuestUnsupportedActions;
-	private Map _portletResourceLayoutManagerActions;
-	private Map _modelPortletResources;
-	private Map _modelResourceActions;
-	private Map _modelResourceCommunityDefaultActions;
-	private Map _modelResourceGuestDefaultActions;
-	private Map _modelResourceGuestUnsupportedActions;
+	private Set<String> _organizationModelResources;
+	private Set<String> _portalModelResources;
+	private Map<String, Set<String>> _portletModelResources;
+	private Map<String, List<String>> _portletResourceActions;
+	private Map<String, List<String>> _portletResourceCommunityDefaultActions;
+	private Map<String, List<String>> _portletResourceGuestDefaultActions;
+	private Map<String, List<String>> _portletResourceGuestUnsupportedActions;
+	private Map<String, List<String>> _portletResourceLayoutManagerActions;
+	private Map<String, Set<String>> _modelPortletResources;
+	private Map<String, List<String>> _modelResourceActions;
+	private Map<String, List<String>> _modelResourceCommunityDefaultActions;
+	private Map<String, List<String>> _modelResourceGuestDefaultActions;
+	private Map<String, List<String>> _modelResourceGuestUnsupportedActions;
 
 }

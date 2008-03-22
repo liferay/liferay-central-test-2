@@ -855,8 +855,9 @@ public class MembershipRequestLocalServiceUtil {
 		membershipRequestLocalService.deleteMembershipRequests(groupId, statusId);
 	}
 
-	public static java.util.List search(long groupId, int status, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.MembershipRequest> search(
+		long groupId, int status, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 
 		return membershipRequestLocalService.search(groupId, status, begin, end);

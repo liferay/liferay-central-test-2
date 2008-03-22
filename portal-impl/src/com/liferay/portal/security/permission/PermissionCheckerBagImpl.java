@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
@@ -49,8 +50,9 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	public PermissionCheckerBagImpl(
-		long userId, List userGroups, List userOrgs, List userOrgGroups,
-		List userUserGroupGroups, List groups, List roles) {
+		long userId, List<Group> userGroups, List<Organization> userOrgs,
+		List<Group> userOrgGroups, List<Group> userUserGroupGroups,
+		List<Group> groups, List<Role> roles) {
 
 		_userId = userId;
 		_userGroups = userGroups;
@@ -61,27 +63,27 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 		_roles = roles;
 	}
 
-	public List getUserGroups() {
+	public List<Group> getUserGroups() {
 		return _userGroups;
 	}
 
-	public List getUserOrgs() {
+	public List<Organization> getUserOrgs() {
 		return _userOrgs;
 	}
 
-	public List getUserOrgGroups() {
+	public List<Group> getUserOrgGroups() {
 		return _userOrgGroups;
 	}
 
-	public List getUserUserGroupGroups() {
+	public List<Group> getUserUserGroupGroups() {
 		return _userUserGroupGroups;
 	}
 
-	public List getGroups() {
+	public List<Group> getGroups() {
 		return _groups;
 	}
 
-	public List getRoles() {
+	public List<Role> getRoles() {
 		return _roles;
 	}
 
@@ -91,15 +93,13 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 		Group group = (Group)groupObj;
 
-		String key = String.valueOf(group.getGroupId());
-
-		Boolean value = (Boolean)_communityAdmins.get(key);
+		Boolean value = _communityAdmins.get(group.getGroupId());
 
 		if (value == null) {
 			value = Boolean.valueOf(
 				isCommunityAdminImpl(permissionChecker, group));
 
-			_communityAdmins.put(key, value);
+			_communityAdmins.put(group.getGroupId(), value);
 		}
 
 		return value.booleanValue();
@@ -111,15 +111,13 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 
 		Group group = (Group)groupObj;
 
-		String key = String.valueOf(group.getGroupId());
-
-		Boolean value = (Boolean)_communityOwners.get(key);
+		Boolean value = _communityOwners.get(group.getGroupId());
 
 		if (value == null) {
 			value = Boolean.valueOf(
 				isCommunityOwnerImpl(permissionChecker, group));
 
-			_communityOwners.put(key, value);
+			_communityOwners.put(group.getGroupId(), value);
 		}
 
 		return value.booleanValue();
@@ -224,13 +222,13 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	private long _userId;
-	private List _userGroups;
-	private List _userOrgs;
-	private List _userOrgGroups;
-	private List _userUserGroupGroups;
-	private List _groups;
-	private List _roles;
-	private Map _communityAdmins = new HashMap();
-	private Map _communityOwners = new HashMap();
+	private List<Group> _userGroups;
+	private List<Organization> _userOrgs;
+	private List<Group> _userOrgGroups;
+	private List<Group> _userUserGroupGroups;
+	private List<Group> _groups;
+	private List<Role> _roles;
+	private Map<Long, Boolean> _communityAdmins = new HashMap<Long, Boolean>();
+	private Map<Long, Boolean> _communityOwners = new HashMap<Long, Boolean>();
 
 }

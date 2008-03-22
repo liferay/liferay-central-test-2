@@ -31,7 +31,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
@@ -46,14 +48,12 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.admin.util.OmniadminUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.UniqueList;
 
 import java.io.Serializable;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -203,8 +203,8 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				// belongs to. This is so because an object cannot belong to
 				// more than one community.
 
-				List userGroups = new ArrayList();
-				//List userGroups = UserUtil.getGroups(userId);
+				List<Group> userGroups = new ArrayList<Group>();
+				//List<Group> userGroups = UserUtil.getGroups(userId);
 
 				if (groupId > 0) {
 					if (GroupLocalServiceUtil.hasUserGroup(
@@ -214,19 +214,19 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 					}
 				}
 
-				List userOrgs =	getUserOrgs(user.getUserId());
+				List<Organization> userOrgs = getUserOrgs(user.getUserId());
 
-				List userOrgGroups =
+				List<Group> userOrgGroups =
 					GroupLocalServiceUtil.getOrganizationsGroups(userOrgs);
 
-				List userUserGroups =
+				List<UserGroup> userUserGroups =
 					UserGroupLocalServiceUtil.getUserUserGroups(
 						user.getUserId());
 
-				List userUserGroupGroups =
+				List<Group> userUserGroupGroups =
 					GroupLocalServiceUtil.getUserGroupsGroups(userUserGroups);
 
-				List groups = new ArrayList(
+				List<Group> groups = new ArrayList<Group>(
 					userGroups.size() + userOrgGroups.size() +
 						userUserGroupGroups.size());
 
@@ -234,7 +234,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 				groups.addAll(userOrgGroups);
 				groups.addAll(userUserGroupGroups);
 
-				List roles = null;
+				List<Role> roles = null;
 
 				if ((USER_CHECK_ALGORITHM == 3) ||
 					(USER_CHECK_ALGORITHM == 4)) {
@@ -242,14 +242,14 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 					roles = RoleLocalServiceUtil.getUserRelatedRoles(
 						user.getUserId(), groups);
 
-					List userGroupRoles =
+					List<Role> userGroupRoles =
 						RoleLocalServiceUtil.getUserGroupRoles(
 							user.getUserId(), groupId);
 
 					roles.addAll(userGroupRoles);
 				}
 				else {
-					roles = new ArrayList();
+					roles = new ArrayList<Role>();
 				}
 
 				if (_log.isDebugEnabled()) {
@@ -348,7 +348,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	protected PermissionCheckerBag getBag(long groupId) {
-		return (PermissionCheckerBag)bags.get(new Long(groupId));
+		return bags.get(groupId);
 	}
 
 	protected long[] getResourceIds(
@@ -437,26 +437,23 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		return resourceIds;
 	}
 
-	protected List getUserOrgs(long userId) throws Exception {
-		List userOrgs = OrganizationLocalServiceUtil.getUserOrganizations(
-			userId);
+	protected List<Organization> getUserOrgs(long userId) throws Exception {
+		List<Organization> userOrgs =
+			OrganizationLocalServiceUtil.getUserOrganizations(userId);
 
 		if (userOrgs.size() == 0) {
 			return userOrgs;
 		}
 
-		List organizations = new UniqueList();
+		List<Organization> organizations = new UniqueList<Organization>();
 
-		Iterator itr = userOrgs.iterator();
-
-		while (itr.hasNext()){
-			Organization organization = (Organization)itr.next();
-
+		for (Organization organization : userOrgs) {
 			if (!organizations.contains(organization)) {
 				organizations.add(organization);
 
-				List ancestorOrganizations = OrganizationLocalServiceUtil.
-					getParentOrganizations(organization.getOrganizationId());
+				List<Organization> ancestorOrganizations =
+					OrganizationLocalServiceUtil.getParentOrganizations(
+						organization.getOrganizationId());
 
 				organizations.addAll(ancestorOrganizations);
 			}
@@ -473,7 +470,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 			// Check unsupported model actions
 
-			List actions = ResourceActionsUtil.
+			List<String> actions = ResourceActionsUtil.
 				getModelResourceGuestUnsupportedActions(name);
 
 			if (actions.contains(actionId)) {
@@ -484,7 +481,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 			// Check unsupported portlet actions
 
-			List actions = ResourceActionsUtil.
+			List<String> actions = ResourceActionsUtil.
 				getPortletResourceGuestUnsupportedActions(name);
 
 			if (actions.contains(actionId)) {
@@ -503,12 +500,13 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			Group guestGroup = GroupLocalServiceUtil.getGroup(
 				companyId, GroupImpl.GUEST);
 
-			List roles = RoleLocalServiceUtil.getGroupRoles(
+			List<Role> roles = RoleLocalServiceUtil.getGroupRoles(
 				guestGroup.getGroupId());
 
 			bag = new PermissionCheckerBagImpl(
-				defaultUserId, new ArrayList(), new ArrayList(),
-				new ArrayList(), new ArrayList(), new ArrayList(), roles);
+				defaultUserId, new ArrayList<Group>(),
+				new ArrayList<Organization>(), new ArrayList<Group>(),
+				new ArrayList<Group>(), new ArrayList<Group>(), roles);
 
 			putBag(GUEST_GROUP_BAG_ID, bag);
 		}
@@ -614,9 +612,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			return true;
 		}
 
-		String key = String.valueOf(companyId);
-
-		Boolean value = (Boolean)companyAdmins.get(key);
+		Boolean value = companyAdmins.get(companyId);
 
 		if (value == null) {
 			boolean hasAdminRole = RoleLocalServiceUtil.hasUserRole(
@@ -624,7 +620,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 			value = Boolean.valueOf(hasAdminRole);
 
-			companyAdmins.put(key, value);
+			companyAdmins.put(companyId, value);
 		}
 
 		return value.booleanValue();
@@ -703,7 +699,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	}
 
 	protected void putBag(long groupId, PermissionCheckerBag bag) {
-		bags.put(new Long(groupId), bag);
+		bags.put(groupId, bag);
 	}
 
 	protected static final int GUEST_GROUP_BAG_ID = -101;
@@ -715,8 +711,9 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 	protected boolean signedIn;
 	protected boolean checkGuest;
 	protected Boolean omniadmin;
-	protected Map companyAdmins = new HashMap();
-	protected Map bags = CollectionFactory.getHashMap();
+	protected Map<Long, Boolean> companyAdmins = new HashMap<Long, Boolean>();
+	protected Map<Long, PermissionCheckerBag> bags =
+		new HashMap<Long, PermissionCheckerBag>();
 
 	private static Log _log = LogFactory.getLog(PermissionCheckerImpl.class);
 

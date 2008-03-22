@@ -255,7 +255,8 @@ public class OrganizationLocalServiceImpl
 	public List<Organization> getManageableOrganizations(long userId)
 		throws PortalException, SystemException {
 
-		List<Organization> manageableOrganizations = new UniqueList();
+		List<Organization> manageableOrganizations =
+			new UniqueList<Organization>();
 
 		List<Organization> userOrganizations = userPersistence.getOrganizations(
 			userId);
@@ -567,9 +568,7 @@ public class OrganizationLocalServiceImpl
 			List<Organization> organizations)
 		throws SystemException {
 
-		for (int i = 0; i < organizations.size(); i++) {
-			Organization organization = (Organization)organizations.get(i);
-
+		for (Organization organization : organizations) {
 			if (!allSuborganizations.contains(organization)) {
 				allSuborganizations.add(organization);
 

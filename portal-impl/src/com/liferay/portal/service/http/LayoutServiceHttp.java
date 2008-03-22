@@ -153,9 +153,11 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout addLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		long parentLayoutId, java.util.Map localeNamesMap,
-		java.util.Map localeTitlesMap, java.lang.String description,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		long parentLayoutId,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.lang.String description, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -398,7 +400,8 @@ public class LayoutServiceHttp {
 	}
 
 	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
-		long groupId, boolean privateLayout, java.util.Map parameterMap)
+		long groupId, boolean privateLayout,
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -444,7 +447,7 @@ public class LayoutServiceHttp {
 
 	public static byte[] exportLayouts(HttpPrincipal httpPrincipal,
 		long groupId, boolean privateLayout, long[] layoutIds,
-		java.util.Map parameterMap)
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -495,7 +498,8 @@ public class LayoutServiceHttp {
 	}
 
 	public static byte[] exportPortletInfo(HttpPrincipal httpPrincipal,
-		long plid, java.lang.String portletId, java.util.Map parameterMap)
+		long plid, java.lang.String portletId,
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -544,7 +548,8 @@ public class LayoutServiceHttp {
 	}
 
 	public static void importLayouts(HttpPrincipal httpPrincipal, long groupId,
-		boolean privateLayout, java.util.Map parameterMap, java.io.File file)
+		boolean privateLayout, java.util.Map<String, String[]> parameterMap,
+		java.io.File file)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -591,7 +596,7 @@ public class LayoutServiceHttp {
 	}
 
 	public static void importLayouts(HttpPrincipal httpPrincipal, long groupId,
-		boolean privateLayout, java.util.Map parameterMap,
+		boolean privateLayout, java.util.Map<String, String[]> parameterMap,
 		java.io.InputStream is)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -639,8 +644,8 @@ public class LayoutServiceHttp {
 	}
 
 	public static void importPortletInfo(HttpPrincipal httpPrincipal,
-		long plid, java.lang.String portletId, java.util.Map parameterMap,
-		java.io.File file)
+		long plid, java.lang.String portletId,
+		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -691,8 +696,8 @@ public class LayoutServiceHttp {
 	}
 
 	public static void importPortletInfo(HttpPrincipal httpPrincipal,
-		long plid, java.lang.String portletId, java.util.Map parameterMap,
-		java.io.InputStream is)
+		long plid, java.lang.String portletId,
+		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -787,9 +792,11 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout updateLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		long layoutId, long parentLayoutId, java.util.Map localeNamesMap,
-		java.util.Map localeTitlesMap, java.lang.String description,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL)
+		long layoutId, long parentLayoutId,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.lang.String description, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -868,10 +875,12 @@ public class LayoutServiceHttp {
 
 	public static com.liferay.portal.model.Layout updateLayout(
 		HttpPrincipal httpPrincipal, long groupId, boolean privateLayout,
-		long layoutId, long parentLayoutId, java.util.Map localeNamesMap,
-		java.util.Map localeTitlesMap, java.lang.String description,
-		java.lang.String type, boolean hidden, java.lang.String friendlyURL,
-		java.lang.Boolean iconImage, byte[] iconBytes)
+		long layoutId, long parentLayoutId,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
+		java.lang.String description, java.lang.String type, boolean hidden,
+		java.lang.String friendlyURL, java.lang.Boolean iconImage,
+		byte[] iconBytes)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {

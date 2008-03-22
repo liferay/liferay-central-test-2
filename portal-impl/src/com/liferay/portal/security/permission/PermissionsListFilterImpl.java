@@ -23,6 +23,7 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.kernel.security.permission.PermissionsListFilter;
+import com.liferay.portal.model.Permission;
 
 import java.util.List;
 
@@ -34,23 +35,23 @@ import java.util.List;
  */
 public class PermissionsListFilterImpl implements PermissionsListFilter {
 
-	public List filterCommunityPermissions(
+	public List<Permission> filterCommunityPermissions(
 		long companyId, long groupId, long userId, String name, String primKey,
-		boolean portletActions, List permissions) {
+		boolean portletActions, List<Permission> permissions) {
 
 		return permissions;
 	}
 
-	public List filterGuestPermissions(
+	public List<Permission> filterGuestPermissions(
 		long companyId, long groupId, long userId, String name, String primKey,
-		boolean portletActions, List permissions) {
+		boolean portletActions, List<Permission> permissions) {
 
 		return permissions;
 	}
 
-	public List filterUserPermissions(
+	public List<Permission> filterUserPermissions(
 		long companyId, long groupId, long userId, String name, String primKey,
-		boolean portletActions, List permissions) {
+		boolean portletActions, List<Permission> permissions) {
 
 		return permissions;
 	}

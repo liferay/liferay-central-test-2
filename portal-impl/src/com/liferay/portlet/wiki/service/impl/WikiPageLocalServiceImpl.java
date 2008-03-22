@@ -423,7 +423,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	public List<WikiPage> getIncomingLinks(long nodeId, String title)
 		throws PortalException, SystemException {
 
-		List<WikiPage> links = new UniqueList();
+		List<WikiPage> links = new UniqueList<WikiPage>();
 
 		List<WikiPage> pages = wikiPagePersistence.findByN_H(nodeId, true);
 
@@ -494,7 +494,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		WikiPage page = getPage(nodeId, title);
 
-		List<WikiPage> pages = new UniqueList();
+		List<WikiPage> pages = new UniqueList<WikiPage>();
 
 		Map<String, Boolean> links = WikiUtil.getLinks(page);
 

@@ -65,7 +65,8 @@ public class LayoutServiceUtil {
 
 	public static com.liferay.portal.model.Layout addLayout(long groupId,
 		boolean privateLayout, long parentLayoutId,
-		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException,
@@ -115,7 +116,7 @@ public class LayoutServiceUtil {
 	}
 
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,
-		java.util.Map parameterMap)
+		java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
@@ -124,7 +125,7 @@ public class LayoutServiceUtil {
 	}
 
 	public static byte[] exportLayouts(long groupId, boolean privateLayout,
-		long[] layoutIds, java.util.Map parameterMap)
+		long[] layoutIds, java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
@@ -134,7 +135,7 @@ public class LayoutServiceUtil {
 	}
 
 	public static byte[] exportPortletInfo(long plid,
-		java.lang.String portletId, java.util.Map parameterMap)
+		java.lang.String portletId, java.util.Map<String, String[]> parameterMap)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
@@ -143,7 +144,7 @@ public class LayoutServiceUtil {
 	}
 
 	public static void importLayouts(long groupId, boolean privateLayout,
-		java.util.Map parameterMap, java.io.File file)
+		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
@@ -152,7 +153,7 @@ public class LayoutServiceUtil {
 	}
 
 	public static void importLayouts(long groupId, boolean privateLayout,
-		java.util.Map parameterMap, java.io.InputStream is)
+		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
@@ -161,7 +162,7 @@ public class LayoutServiceUtil {
 	}
 
 	public static void importPortletInfo(long plid, java.lang.String portletId,
-		java.util.Map parameterMap, java.io.File file)
+		java.util.Map<String, String[]> parameterMap, java.io.File file)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
@@ -170,7 +171,7 @@ public class LayoutServiceUtil {
 	}
 
 	public static void importPortletInfo(long plid, java.lang.String portletId,
-		java.util.Map parameterMap, java.io.InputStream is)
+		java.util.Map<String, String[]> parameterMap, java.io.InputStream is)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		LayoutService layoutService = LayoutServiceFactory.getService();
@@ -190,7 +191,8 @@ public class LayoutServiceUtil {
 
 	public static com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId,
-		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL)
 		throws com.liferay.portal.PortalException,
@@ -204,7 +206,8 @@ public class LayoutServiceUtil {
 
 	public static com.liferay.portal.model.Layout updateLayout(long groupId,
 		boolean privateLayout, long layoutId, long parentLayoutId,
-		java.util.Map localeNamesMap, java.util.Map localeTitlesMap,
+		java.util.Map<java.util.Locale, String> localeNamesMap,
+		java.util.Map<java.util.Locale, String> localeTitlesMap,
 		java.lang.String description, java.lang.String type, boolean hidden,
 		java.lang.String friendlyURL, java.lang.Boolean iconImage,
 		byte[] iconBytes)

@@ -56,6 +56,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletPreferences;
@@ -107,6 +108,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
@@ -146,7 +148,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
-		Map localeNamesMap = new HashMap();
+		Map<Locale, String> localeNamesMap = new HashMap<Locale, String>();
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
@@ -154,13 +156,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
-			new HashMap(), description, type, hidden, friendlyURL);
+			new HashMap<Locale, String>(), description, type, hidden,
+			friendlyURL);
 	}
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
-			String description, String type, boolean hidden, String friendlyURL)
+			long parentLayoutId, Map<Locale, String> localeNamesMap,
+			Map<Locale, String> localeTitlesMap, String description,
+			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		return addLayout(
@@ -175,7 +179,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String type, boolean hidden, String friendlyURL, long dlFolderId)
 		throws PortalException, SystemException {
 
-		Map localeNamesMap = new HashMap();
+		Map<Locale, String> localeNamesMap = new HashMap<Locale, String>();
 
 		Locale defaultLocale = LocaleUtil.getDefault();
 
@@ -183,14 +187,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		return addLayout(
 			userId, groupId, privateLayout, parentLayoutId, localeNamesMap,
-			new HashMap(), description, type, hidden, friendlyURL, dlFolderId);
+			new HashMap<Locale, String>(), description, type, hidden,
+			friendlyURL, dlFolderId);
 	}
 
 	public Layout addLayout(
 			long userId, long groupId, boolean privateLayout,
-			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
-			String description, String type, boolean hidden, String friendlyURL,
-			long dlFolderId)
+			long parentLayoutId, Map<Locale, String> localeNamesMap,
+			Map<Locale, String> localeTitlesMap, String description,
+			String type, boolean hidden, String friendlyURL, long dlFolderId)
 		throws PortalException, SystemException {
 
 		// Layout
@@ -261,13 +266,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Child layouts
 
-		List childLayouts = layoutPersistence.findByG_P_P(
+		List<Layout> childLayouts = layoutPersistence.findByG_P_P(
 			layout.getGroupId(), layout.isPrivateLayout(),
 			layout.getLayoutId());
 
-		for (int i = 0; i < childLayouts.size(); i++) {
-			Layout childLayout = (Layout)childLayouts.get(i);
-
+		for (Layout childLayout : childLayouts) {
 			deleteLayout(childLayout, updateLayoutSet);
 		}
 
@@ -306,12 +309,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		String primKey = layout.getPlid() + PortletImpl.LAYOUT_SEPARATOR + "%";
 
-		Iterator itr = resourceFinder.findByC_P(
-			layout.getCompanyId(), primKey).iterator();
+		List<Resource> resources = resourceFinder.findByC_P(
+			layout.getCompanyId(), primKey);
 
-		while (itr.hasNext()) {
-			Resource resource = (Resource)itr.next();
-
+		for (Resource resource : resources) {
 			resourceLocalService.deleteResource(resource);
 		}
 
@@ -336,14 +337,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Layouts
 
-		List layouts = layoutPersistence.findByG_P_P(
+		List<Layout> layouts = layoutPersistence.findByG_P_P(
 			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
-		Iterator itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
-
+		for (Layout layout : layouts) {
 			try {
 				deleteLayout(layout, false);
 			}
@@ -357,7 +354,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public byte[] exportLayouts(
-			long groupId, boolean privateLayout, Map parameterMap)
+			long groupId, boolean privateLayout,
+			Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		return exportLayouts(groupId, privateLayout, null, parameterMap);
@@ -365,7 +363,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public byte[] exportLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds,
-			Map parameterMap)
+			Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		boolean exportPermissions = MapUtil.getBoolean(
@@ -441,9 +439,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Layouts
 
-		Set portletIds = new LinkedHashSet();
+		Set<String> portletIds = new LinkedHashSet<String>();
 
-		List layouts = null;
+		List<Layout> layouts = null;
 
 		if ((layoutIds == null) || (layoutIds.length == 0)) {
 			layouts = getLayouts(groupId, privateLayout);
@@ -452,11 +450,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layouts = getLayouts(groupId, privateLayout, layoutIds);
 		}
 
-		Iterator itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
-
+		for (Layout layout : layouts) {
 			context.setPlid(layout.getPlid());
 
 			Element layoutEl = root.addElement("layout");
@@ -633,7 +627,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public byte[] exportPortletInfo(
-			long plid, String portletId, Map parameterMap)
+			long plid, String portletId, Map<String, String[]> parameterMap)
 		throws PortalException, SystemException {
 
 		boolean exportPortletSetup = MapUtil.getBoolean(
@@ -777,10 +771,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public long getDefaultPlid(long groupId) throws SystemException {
 		if (groupId > 0) {
-			List layouts = layoutPersistence.findByGroupId(groupId, 0, 1);
+			List<Layout> layouts = layoutPersistence.findByGroupId(
+				groupId, 0, 1);
 
 			if (layouts.size() > 0) {
-				Layout layout = (Layout)layouts.get(0);
+				Layout layout = layouts.get(0);
 
 				return layout.getPlid();
 			}
@@ -793,11 +788,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws SystemException {
 
 		if (groupId > 0) {
-			List layouts = layoutPersistence.findByG_P(
+			List<Layout> layouts = layoutPersistence.findByG_P(
 				groupId, privateLayout, 0, 1);
 
 			if (layouts.size() > 0) {
-				Layout layout = (Layout)layouts.get(0);
+				Layout layout = layouts.get(0);
 
 				return layout.getPlid();
 			}
@@ -867,13 +862,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return layoutPersistence.findByIconImageId(iconImageId);
 	}
 
-	public List getLayouts(long groupId, boolean privateLayout)
+	public List<Layout> getLayouts(long groupId, boolean privateLayout)
 		throws SystemException {
 
 		return layoutPersistence.findByG_P(groupId, privateLayout);
 	}
 
-	public List getLayouts(
+	public List<Layout> getLayouts(
 			long groupId, boolean privateLayout, long parentLayoutId)
 		throws SystemException {
 
@@ -881,7 +876,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, parentLayoutId);
 	}
 
-	public List getLayouts(
+	public List<Layout> getLayouts(
 			long groupId, boolean privateLayout, long parentLayoutId, int begin,
 			int end)
 		throws SystemException {
@@ -890,14 +885,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			groupId, privateLayout, parentLayoutId, begin, end);
 	}
 
-	public List getLayouts(
+	public List<Layout> getLayouts(
 			long groupId, boolean privateLayout, long[] layoutIds)
 		throws PortalException, SystemException {
 
-		List layouts = new ArrayList();
+		List<Layout> layouts = new ArrayList<Layout>();
 
-		for (int i = 0; i < layoutIds.length; i++) {
-			Layout layout = getLayout(groupId, privateLayout, layoutIds[i]);
+		for (long layoutId : layoutIds) {
+			Layout layout = getLayout(groupId, privateLayout, layoutId);
 
 			layouts.add(layout);
 		}
@@ -910,19 +905,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String prefsValue)
 		throws SystemException {
 
-		List list = layoutFinder.findByC_P_P(
+		List<LayoutReference> layoutReferences = layoutFinder.findByC_P_P(
 			companyId, portletId, prefsKey, prefsValue);
 
-		return (LayoutReference[])list.toArray(new LayoutReference[0]);
+		return layoutReferences.toArray(
+			new LayoutReference[layoutReferences.size()]);
 	}
 
-	public List getNullFriendlyURLLayouts() throws SystemException {
+	public List<Layout> getNullFriendlyURLLayouts() throws SystemException {
 		return layoutFinder.findByNullFriendlyURL();
 	}
 
 	public void importLayouts(
-			long userId, long groupId, boolean privateLayout, Map parameterMap,
-			File file)
+			long userId, long groupId, boolean privateLayout,
+			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
 		try {
@@ -936,8 +932,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public void importLayouts(
-			long userId, long groupId, boolean privateLayout, Map parameterMap,
-			InputStream is)
+			long userId, long groupId, boolean privateLayout,
+			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
@@ -1034,7 +1030,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Build compatibility
 
-		Element header = (Element)root.element("header");
+		Element header = root.element("header");
 
 		int buildNumber = ReleaseInfo.getBuildNumber();
 
@@ -1091,9 +1087,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Layouts
 
-		Set newLayoutIds = CollectionFactory.getHashSet();
+		Set<Long> newLayoutIds = new HashSet<Long>();
 
-		Iterator itr = root.elements("layout").iterator();
+		Iterator<Element> itr = root.elements("layout").iterator();
 
 		if (_log.isDebugEnabled()) {
 			if (itr.hasNext()) {
@@ -1102,7 +1098,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		while (itr.hasNext()) {
-			Element layoutEl = (Element)itr.next();
+			Element layoutEl = itr.next();
 
 			long layoutId = GetterUtil.getInteger(
 				layoutEl.attributeValue("layout-id"));
@@ -1181,7 +1177,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			context.setPlid(layout.getPlid());
 
-			newLayoutIds.add(new Long(layoutId));
+			newLayoutIds.add(layoutId);
 
 			Element permissionsEl = layoutEl.element("permissions");
 
@@ -1233,7 +1229,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			importPortletSetup, importPortletArchivedSetups,
 			importPortletUserPreferences);
 
-		Element rolesEl = (Element)root.element("roles");
+		Element rolesEl = root.element("roles");
 
 		// Layout roles
 
@@ -1263,8 +1259,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public void importPortletInfo(
-			long userId, long plid, String portletId, Map parameterMap,
-			File file)
+			long userId, long plid, String portletId,
+			Map<String, String[]> parameterMap, File file)
 		throws PortalException, SystemException {
 
 		try {
@@ -1278,8 +1274,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	public void importPortletInfo(
-			long userId, long plid, String portletId, Map parameterMap,
-			InputStream is)
+			long userId, long plid, String portletId,
+			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
 		boolean deletePortletData = MapUtil.getBoolean(
@@ -1341,7 +1337,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Build compatibility
 
-		Element header = (Element)root.element("header");
+		Element header = root.element("header");
 
 		int buildNumber = ReleaseInfo.getBuildNumber();
 
@@ -1430,39 +1426,31 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		Set layoutIdsSet = new LinkedHashSet();
+		Set<Long> layoutIdsSet = new LinkedHashSet<Long>();
 
 		for (int i = 0; i < layoutIds.length; i++) {
-			layoutIdsSet.add(new Long(layoutIds[i]));
+			layoutIdsSet.add(layoutIds[i]);
 		}
 
-		Set newLayoutIdsSet = CollectionFactory.getHashSet();
+		Set<Long> newLayoutIdsSet = new HashSet<Long>();
 
-		Iterator itr = layoutPersistence.findByG_P_P(
-			groupId, privateLayout, parentLayoutId).iterator();
+		List<Layout> layouts = layoutPersistence.findByG_P_P(
+			groupId, privateLayout, parentLayoutId);
 
-		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
-
-			Long layoutIdObj = new Long(layout.getLayoutId());
-
-			if (!layoutIdsSet.contains(layoutIdObj)) {
+		for (Layout layout : layouts) {
+			if (!layoutIdsSet.contains(layout.getLayoutId())) {
 				deleteLayout(layout, true);
 			}
 			else {
-				newLayoutIdsSet.add(layoutIdObj);
+				newLayoutIdsSet.add(layout.getLayoutId());
 			}
 		}
 
 		int priority = 0;
 
-		itr = layoutIdsSet.iterator();
-
-		while (itr.hasNext()) {
-			Long layoutIdObj = (Long)itr.next();
-
+		for (long layoutId : layoutIdsSet) {
 			Layout layout = layoutPersistence.findByG_P_L(
-				groupId, privateLayout, layoutIdObj.longValue());
+				groupId, privateLayout, layoutId);
 
 			layout.setPriority(priority++);
 
@@ -1492,8 +1480,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
-			String description, String type, boolean hidden, String friendlyURL)
+			long parentLayoutId, Map<Locale, String> localeNamesMap,
+			Map<Locale, String> localeTitlesMap, String description,
+			String type, boolean hidden, String friendlyURL)
 		throws PortalException, SystemException {
 
 		return updateLayout(
@@ -1504,9 +1493,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	public Layout updateLayout(
 			long groupId, boolean privateLayout, long layoutId,
-			long parentLayoutId, Map localeNamesMap, Map localeTitlesMap,
-			String description, String type, boolean hidden, String friendlyURL,
-			Boolean iconImage, byte[] iconBytes)
+			long parentLayoutId, Map<Locale, String> localeNamesMap,
+			Map<Locale, String> localeTitlesMap, String description,
+			String type, boolean hidden, String friendlyURL, Boolean iconImage,
+			byte[] iconBytes)
 		throws PortalException, SystemException {
 
 		// Layout
@@ -1773,18 +1763,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		priority = 0;
 
-		List layouts = layoutPersistence.findByG_P_P(
+		List<Layout> layouts = layoutPersistence.findByG_P_P(
 			layout.getGroupId(), layout.isPrivateLayout(),
 			layout.getParentLayoutId());
 
 		Collections.sort(
 			layouts, new LayoutPriorityComparator(layout, lessThan));
 
-		Iterator itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout curLayout = (Layout)itr.next();
-
+		for (Layout curLayout : layouts) {
 			curLayout.setPriority(priority++);
 
 			layoutPersistence.update(curLayout);
@@ -1798,7 +1784,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void deleteMissingLayouts(
-			long groupId, boolean privateLayout, Set newLayoutIds)
+			long groupId, boolean privateLayout, Set<Long> newLayoutIds)
 		throws PortalException, SystemException {
 
 		// Layouts
@@ -1809,14 +1795,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		List layouts = layoutPersistence.findByG_P(groupId, privateLayout);
+		List<Layout> layouts = layoutPersistence.findByG_P(
+			groupId, privateLayout);
 
-		Iterator itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = (Layout)itr.next();
-
-			if (!newLayoutIds.contains(new Long(layout.getLayoutId()))) {
+		for (Layout layout : layouts) {
+			if (!newLayoutIds.contains(layout.getLayoutId())) {
 				try {
 					deleteLayout(layout, false);
 				}
@@ -1834,10 +1817,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			PortletDataContext context, Layout layout, Element parentEl)
 		throws PortalException, SystemException {
 
-		Iterator itr = parentEl.elements("portlet-data").iterator();
+		Iterator<Element> itr = parentEl.elements("portlet-data").iterator();
 
 		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+			Element el = itr.next();
 
 			String portletId = el.attributeValue("portlet-id");
 
@@ -1953,14 +1936,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Element el = parentEl.addElement(elName);
 
-		List permissions = permissionLocalService.getGroupPermissions(
-			groupId, companyId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
-			resourcePrimKey);
+		List<Permission> permissions =
+			permissionLocalService.getGroupPermissions(
+				groupId, companyId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
+				resourcePrimKey);
 
-		List actions = ResourceActionsUtil.getActions(permissions);
+		List<String> actions = ResourceActionsUtil.getActions(permissions);
 
 		for (int i = 0; i < actions.size(); i++) {
-			String action = (String)actions.get(i);
+			String action = actions.get(i);
 
 			Element actionKeyEl = el.addElement("action-key");
 
@@ -1975,7 +1959,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String resourceName, String entityName, Element parentEl)
 		throws PortalException, SystemException {
 
-		List roles = layoutCache.getGroupRoles(groupId);
+		List<Role> roles = layoutCache.getGroupRoles(groupId);
 
 		Element groupEl = exportRoles(
 			companyId, resourceName, ResourceImpl.SCOPE_GROUP,
@@ -2226,15 +2210,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	protected void exportPortletPermissions(
 			LayoutCache layoutCache, long companyId, long groupId,
 			Group guestGroup, Layout layout,
-			LayoutTypePortlet layoutTypePortlet, Set portletIds,
+			LayoutTypePortlet layoutTypePortlet, Set<String> portletIds,
 			Element permissionsEl, boolean exportUserPermissions)
 		throws PortalException, SystemException {
 
-		Iterator itr = layoutTypePortlet.getPortletIds().iterator();
-
-		while (itr.hasNext()) {
-			String portletId = (String)itr.next();
-
+		for (String portletId : layoutTypePortlet.getPortletIds()) {
 			if (!portletIds.contains(portletId)) {
 				portletIds.add(portletId);
 			}
@@ -2392,14 +2372,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 	protected void exportPortletRoles(
 			LayoutCache layoutCache, long companyId, long groupId,
-			Set portletIds, Element rolesEl)
+			Set<String> portletIds, Element rolesEl)
 		throws PortalException, SystemException {
 
-		Iterator itr = portletIds.iterator();
-
-		while (itr.hasNext()) {
-			String portletId = (String)itr.next();
-
+		for (String portletId : portletIds) {
 			String resourceName = PortletImpl.getRootPortletId(portletId);
 
 			Element portletEl = rolesEl.addElement("portlet");
@@ -2434,7 +2410,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	protected Element exportRoles(
 			long companyId, String resourceName, int scope,
 			String resourcePrimKey, Element parentEl, String elName,
-			List roles)
+			List<Role> roles)
 		throws PortalException, SystemException {
 
 		Element el = parentEl.addElement(elName);
@@ -2454,10 +2430,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				roleEl.addAttribute("name", roleName);
 
-				List actions = (List)entry.getValue();
+				List<String> actions = (List)entry.getValue();
 
 				for (int i = 0; i < actions.size(); i++) {
-					String action = (String)actions.get(i);
+					String action = actions.get(i);
 
 					Element actionKeyEl = roleEl.addElement("action-key");
 
@@ -2638,25 +2614,22 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Element userPermissionsEl = DocumentHelper.createElement(
 			"user-permissions");
 
-		List users = layoutCache.getGroupUsers(groupId);
+		List<User> users = layoutCache.getGroupUsers(groupId);
 
-		for (int i = 0; i < users.size(); i++) {
-			User user = (User)users.get(i);
-
+		for (User user : users) {
 			String emailAddress = user.getEmailAddress();
 
 			Element userActionsEl =
 				DocumentHelper.createElement("user-actions");
 
-			List permissions = permissionLocalService.getUserPermissions(
-				user.getUserId(), companyId, resourceName,
-				ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
+			List<Permission> permissions =
+				permissionLocalService.getUserPermissions(
+					user.getUserId(), companyId, resourceName,
+					ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
 
-			List actions = ResourceActionsUtil.getActions(permissions);
+			List<String> actions = ResourceActionsUtil.getActions(permissions);
 
-			for (int j = 0; j < actions.size(); j++) {
-				String action = (String)actions.get(j);
-
+			for (String action : actions) {
 				Element actionKeyEl = userActionsEl.addElement("action-key");
 
 				actionKeyEl.addText(action);
@@ -2687,15 +2660,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Element userRolesEl = DocumentHelper.createElement("user-roles");
 
-		List users = layoutCache.getGroupUsers(groupId);
+		List<User> users = layoutCache.getGroupUsers(groupId);
 
-		for (int i = 0; i < users.size(); i++) {
-			User user = (User)users.get(i);
-
+		for (User user : users) {
 			long userId = user.getUserId();
 			String emailAddress = user.getEmailAddress();
 
-			List userRoles = layoutCache.getUserRoles(userId);
+			List<Role> userRoles = layoutCache.getUserRoles(userId);
 
 			Element userEl = exportRoles(
 				companyId, resourceName, ResourceImpl.SCOPE_GROUP,
@@ -2750,13 +2721,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 	}
 
-	protected List getActions(Element el) {
-		List actions = new ArrayList();
+	protected List<String> getActions(Element el) {
+		List<String> actions = new ArrayList<String>();
 
-		Iterator itr = el.elements("action-key").iterator();
+		Iterator<Element> itr = el.elements("action-key").iterator();
 
 		while (itr.hasNext()) {
-			Element actionEl = (Element)itr.next();
+			Element actionEl = itr.next();
 
 			actions.add(actionEl.getText());
 		}
@@ -3627,16 +3598,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void setLocalizedAttributes(
-		Layout layout, Map localeNamesMap, Map localeTitlesMap) {
+		Layout layout, Map<Locale, String> localeNamesMap,
+		Map<Locale, String> localeTitlesMap) {
 
 		Locale[] locales = LanguageUtil.getAvailableLocales();
 
-		for (int i = 0; i < locales.length; i++) {
-			String name = (String)localeNamesMap.get(locales[i]);
-			String title = (String)localeTitlesMap.get(locales[i]);
+		for (Locale locale : locales) {
+			String name = localeNamesMap.get(locale);
+			String title = localeTitlesMap.get(locale);
 
-			layout.setName(name, locales[i]);
-			layout.setTitle(title, locales[i]);
+			layout.setName(name, locale);
+			layout.setTitle(title, locale);
 		}
 	}
 
@@ -3649,14 +3621,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		boolean firstLayout = false;
 
 		if (parentLayoutId == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
-			List layouts = layoutPersistence.findByG_P_P(
+			List<Layout> layouts = layoutPersistence.findByG_P_P(
 				groupId, privateLayout, parentLayoutId, 0, 1);
 
 			if (layouts.size() == 0) {
 				firstLayout = true;
 			}
 			else {
-				long firstLayoutId = ((Layout)layouts.get(0)).getLayoutId();
+				long firstLayoutId = layouts.get(0).getLayoutId();
 
 				if (firstLayoutId == layoutId) {
 					firstLayout = true;
@@ -3721,13 +3693,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		LayoutImpl.validateFriendlyURLKeyword(friendlyURL);
 
-		List friendlyURLMappers = portletLocalService.getFriendlyURLMappers();
+		List<FriendlyURLMapper> friendlyURLMappers =
+			portletLocalService.getFriendlyURLMappers();
 
-		Iterator itr = friendlyURLMappers.iterator();
-
-		while (itr.hasNext()) {
-			FriendlyURLMapper friendlyURLMapper = (FriendlyURLMapper)itr.next();
-
+		for (FriendlyURLMapper friendlyURLMapper : friendlyURLMappers) {
 			if (friendlyURL.indexOf(friendlyURLMapper.getMapping()) != -1) {
 				LayoutFriendlyURLException lfurle =
 					new LayoutFriendlyURLException(
@@ -3791,17 +3760,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			if (layout.getParentLayoutId() ==
 					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
 
-				List layouts = layoutPersistence.findByG_P_P(
+				List<Layout> layouts = layoutPersistence.findByG_P_P(
 					groupId, privateLayout,
 					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 2);
 
 				// You can only reach this point if there are more than two
 				// layouts at the root level because of the descendant check
 
-				long firstLayoutId = ((Layout)layouts.get(0)).getLayoutId();
+				long firstLayoutId = layouts.get(0).getLayoutId();
 
 				if (firstLayoutId == layoutId) {
-					Layout secondLayout = (Layout)layouts.get(1);
+					Layout secondLayout = layouts.get(1);
 
 					try {
 						validateFirstLayout(

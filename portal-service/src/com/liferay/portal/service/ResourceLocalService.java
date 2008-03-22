@@ -409,7 +409,7 @@ public interface ResourceLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getResources()
+	public java.util.List<com.liferay.portal.model.Resource> getResources()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Resource getResource(long companyId,

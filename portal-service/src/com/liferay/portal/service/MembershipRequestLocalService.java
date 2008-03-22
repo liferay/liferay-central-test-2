@@ -367,7 +367,8 @@ public interface MembershipRequestLocalService {
 	public void deleteMembershipRequests(long groupId, int statusId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long groupId, int status, int begin, int end)
+	public java.util.List<com.liferay.portal.model.MembershipRequest> search(
+		long groupId, int status, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long groupId, int status)
