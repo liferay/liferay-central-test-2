@@ -35,24 +35,26 @@ import com.liferay.util.TextFormatter;
 public class EntityColumn implements Cloneable {
 
 	public EntityColumn(String name) {
-		this(name, null, null, false, null, null, null, true, true, null,
-			 null, null, true);
+		this(
+			name, null, null, false, null, null, null, true, true, null, null,
+			null, true);
 	}
 
-	public EntityColumn(String name, String dbName, String type,
-						boolean primary, String ejbName, String mappingKey,
-						String mappingTable, String idType, String idParam,
-						boolean convertNull) {
+	public EntityColumn(
+		String name, String dbName, String type, boolean primary,
+		String ejbName, String mappingKey, String mappingTable, String idType,
+		String idParam, boolean convertNull) {
 
-		this(name, dbName, type, primary, ejbName, mappingKey, mappingTable,
-			 true, true, null, idType, idParam, convertNull);
+		this(
+			name, dbName, type, primary, ejbName, mappingKey, mappingTable,
+			true, true, null, idType, idParam, convertNull);
 	}
 
-	public EntityColumn(String name, String dbName, String type,
-						boolean primary, String ejbName, String mappingKey,
-						String mappingTable, boolean caseSensitive,
-						boolean orderByAscending, String comparator,
-						String idType, String idParam, boolean convertNull) {
+	public EntityColumn(
+		String name, String dbName, String type, boolean primary,
+		String ejbName, String mappingKey, String mappingTable,
+		boolean caseSensitive, boolean orderByAscending, String comparator,
+		String idType, String idParam, boolean convertNull) {
 
 		_name = name;
 		_dbName = dbName;

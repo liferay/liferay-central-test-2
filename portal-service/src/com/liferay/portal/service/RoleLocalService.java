@@ -374,13 +374,14 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getGroupRoles(long groupId)
+	public java.util.List<com.liferay.portal.model.Role> getGroupRoles(
+		long groupId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.Map getResourceRoles(long companyId,
-		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException;
+	public java.util.Map<String, java.util.List<String>> getResourceRoles(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role getRole(long roleId)
 		throws com.liferay.portal.SystemException,
@@ -391,22 +392,24 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRoles(long companyId)
+	public java.util.List<com.liferay.portal.model.Role> getRoles(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Role> getUserGroupRoles(
+		long userId, long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
+		long userId, long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
+		long userId, long[] groupIds) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Role> getUserRelatedRoles(
+		long userId, java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getUserGroupRoles(long userId, long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getUserRelatedRoles(long userId, long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getUserRelatedRoles(long userId, long[] groupIds)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getUserRelatedRoles(long userId, java.util.List groups)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getUserRoles(long userId)
+	public java.util.List<com.liferay.portal.model.Role> getUserRoles(
+		long userId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -424,15 +427,16 @@ public interface RoleLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.Integer type, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Role> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.lang.Integer type, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.Integer type,
-		java.util.LinkedHashMap params, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portal.model.Role> search(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.lang.Integer type, java.util.LinkedHashMap<String, Object> params,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long companyId, java.lang.String name,
@@ -441,7 +445,7 @@ public interface RoleLocalService {
 
 	public int searchCount(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type,
-		java.util.LinkedHashMap params)
+		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
 	public void setUserRoles(long userId, long[] roleIds)

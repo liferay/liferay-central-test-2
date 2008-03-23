@@ -52,7 +52,7 @@ public class EncryptTagUtil {
 
 	public static void doStartTag(
 			String className, String style, String protocol,
-			Set unencryptedParamsSet, String url, String target,
+			Set<String> unencryptedParamsSet, String url, String target,
 			PageContext pageContext)
 		throws JspException {
 

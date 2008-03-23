@@ -137,11 +137,12 @@ public interface DLFileRankLocalService {
 	public void deleteFileRanks(long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFileRanks(long groupId, long userId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
+		long groupId, long userId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getFileRanks(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileRank> getFileRanks(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.documentlibrary.model.DLFileRank updateFileRank(
 		long groupId, long companyId, long userId, long folderId,

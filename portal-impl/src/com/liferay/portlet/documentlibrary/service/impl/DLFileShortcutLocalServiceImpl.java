@@ -35,7 +35,7 @@ import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
 import com.liferay.portlet.documentlibrary.service.base.DLFileShortcutLocalServiceBaseImpl;
 
 import java.util.Date;
-import java.util.Iterator;
+import java.util.List;
 
 /**
  * <a href="DLFileShortcutLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -209,12 +209,10 @@ public class DLFileShortcutLocalServiceImpl
 	public void deleteFileShortcuts(long toFolderId, String toName)
 		throws PortalException, SystemException {
 
-		Iterator itr = dlFileShortcutPersistence.findByTF_TN(
-			toFolderId, toName).iterator();
+		List<DLFileShortcut> fileShortcuts =
+			dlFileShortcutPersistence.findByTF_TN(toFolderId, toName);
 
-		while (itr.hasNext()) {
-			DLFileShortcut fileShortcut = (DLFileShortcut)itr.next();
-
+		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			deleteFileShortcut(fileShortcut);
 		}
 	}
@@ -261,12 +259,10 @@ public class DLFileShortcutLocalServiceImpl
 			String newToName)
 		throws PortalException, SystemException {
 
-		Iterator itr = dlFileShortcutPersistence.findByTF_TN(
-			oldToFolderId, oldToName).iterator();
+		List<DLFileShortcut> fileShortcuts =
+			dlFileShortcutPersistence.findByTF_TN(oldToFolderId, oldToName);
 
-		while (itr.hasNext()) {
-			DLFileShortcut fileShortcut = (DLFileShortcut)itr.next();
-
+		for (DLFileShortcut fileShortcut : fileShortcuts) {
 			fileShortcut.setToFolderId(newToFolderId);
 			fileShortcut.setToName(newToName);
 

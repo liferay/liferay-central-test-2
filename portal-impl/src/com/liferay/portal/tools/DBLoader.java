@@ -124,14 +124,14 @@ public class DBLoader {
 
 		PreparedStatement ps = con.prepareStatement(sql);
 
-		List values = zInsert.getValues();
+		List<ZConstant> values = zInsert.getValues();
 
 		for (int i = 0; i < values.size(); i++) {
-			ZConstant zConstant = (ZConstant)values.get(i);
+			ZConstant zConstant = values.get(i);
 
 			int pos = i + 1;
 
-			String value = (String)zConstant.getValue();
+			String value = zConstant.getValue();
 
 			if (value.equals("current timestamp")) {
 				ps.setTimestamp(

@@ -244,19 +244,21 @@ public interface DLFolderLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getFolders(long companyId)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long companyId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFolders(long groupId, long parentFolderId)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId, int begin, int end)
 		throws com.liferay.portal.SystemException;
-
-	public java.util.List getFolders(long groupId, long parentFolderId,
-		int begin, int end) throws com.liferay.portal.SystemException;
 
 	public int getFoldersCount(long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException;
 
-	public void getSubfolderIds(java.util.List folderIds, long groupId,
+	public void getSubfolderIds(java.util.List<Long> folderIds, long groupId,
 		long folderId) throws com.liferay.portal.SystemException;
 
 	public void reIndex(java.lang.String[] ids)

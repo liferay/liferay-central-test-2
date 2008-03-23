@@ -107,8 +107,9 @@ public class ListTypeServiceHttp {
 		}
 	}
 
-	public static java.util.List getListTypes(HttpPrincipal httpPrincipal,
-		java.lang.String type) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.ListType> getListTypes(
+		HttpPrincipal httpPrincipal, java.lang.String type)
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = type;
 
@@ -132,7 +133,7 @@ public class ListTypeServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portal.model.ListType>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

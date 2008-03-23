@@ -85,12 +85,12 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String> params) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
-		params.put("p_p_id", _PORTLET_ID);
-		params.put("p_p_lifecycle", "0");
-		params.put("p_p_state", WindowState.NORMAL.toString());
-		params.put("p_p_mode", PortletMode.VIEW.toString());
+		addParam(params, "p_p_id", _PORTLET_ID);
+		addParam(params, "p_p_lifecycle", "0");
+		addParam(params, "p_p_state", WindowState.NORMAL);
+		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf("/", 1);
 		int y = friendlyURLPath.length();
@@ -104,8 +104,8 @@ public class BlogsFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String type = friendlyURLPath.substring(x + 1, y);
 
 		if (type.equals("rss")) {
-			params.put("p_p_lifecycle", "1");
-			params.put("p_p_state", LiferayWindowState.EXCLUSIVE.toString());
+			addParam(params, "p_p_lifecycle", "1");
+			addParam(params, "p_p_state", LiferayWindowState.EXCLUSIVE);
 
 			addParam(params, "struts_action", "/blogs/rss");
 		}

@@ -486,7 +486,7 @@ public abstract class DBUtil {
 	}
 
 	protected String evaluateVM(String template) throws Exception {
-		Map variables = new HashMap();
+		Map<String, Object> variables = new HashMap<String, Object>();
 
 		variables.put("counter", new SimpleCounter());
 

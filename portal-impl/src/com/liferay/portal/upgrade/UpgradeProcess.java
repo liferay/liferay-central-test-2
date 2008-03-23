@@ -72,7 +72,7 @@ public abstract class UpgradeProcess {
 
 	public abstract void upgrade() throws UpgradeException;
 
-	public void upgrade(Class upgradeProcessClass)
+	public void upgrade(Class<?> upgradeProcessClass)
 		throws UpgradeException {
 
 		UpgradeProcess upgradeProcess = (UpgradeProcess)InstancePool.get(

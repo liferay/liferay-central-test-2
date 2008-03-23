@@ -63,7 +63,7 @@ public class WSDDMerger {
 
 		Element root = doc.getRootElement();
 
-		List sourceServices = root.elements("service");
+		List<Element> sourceServices = root.elements("service");
 
 		if (sourceServices.size() == 0) {
 			return;
@@ -79,12 +79,12 @@ public class WSDDMerger {
 
 		root = doc.getRootElement();
 
-		Map servicesMap = new TreeMap();
+		Map<String, Element> servicesMap = new TreeMap<String, Element>();
 
-		Iterator itr = root.elements("service").iterator();
+		Iterator<Element> itr = root.elements("service").iterator();
 
 		while (itr.hasNext()) {
-			Element service = (Element)itr.next();
+			Element service = itr.next();
 
 			String name = service.attributeValue("name");
 
@@ -96,7 +96,7 @@ public class WSDDMerger {
 		itr = sourceServices.iterator();
 
 		while (itr.hasNext()) {
-			Element service = (Element)itr.next();
+			Element service = itr.next();
 
 			String name = service.attributeValue("name");
 
@@ -105,12 +105,8 @@ public class WSDDMerger {
 			service.detach();
 		}
 
-		itr = servicesMap.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			Element service = (Element)entry.getValue();
+		for (Map.Entry<String, Element> entry : servicesMap.entrySet()) {
+			Element service = entry.getValue();
 
 			root.add(service);
 		}

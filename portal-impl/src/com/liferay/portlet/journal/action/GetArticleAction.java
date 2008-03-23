@@ -84,7 +84,8 @@ public class GetArticleAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
+			Map<String, String> tokens = JournalUtil.getTokens(
+				groupId, themeDisplay);
 
 			String xml = article.getContentByLocale(languageId);
 
@@ -138,7 +139,7 @@ public class GetArticleAction extends Action {
 					themeDisplay.getThemeId() + "&colorSchemeId=" +
 						themeDisplay.getColorSchemeId();
 
-		Map arguments = new LinkedHashMap();
+		Map<String, String> arguments = new LinkedHashMap<String, String>();
 
 		arguments.put("type", "text/css");
 		arguments.put("href", url);
@@ -197,7 +198,9 @@ public class GetArticleAction extends Action {
 		}
 	}
 
-	protected void addStyleSheet(Document doc, String url, Map arguments) {
+	protected void addStyleSheet(
+		Document doc, String url, Map<String, String> arguments) {
+
 		List content = doc.content();
 
 		ProcessingInstruction pi =

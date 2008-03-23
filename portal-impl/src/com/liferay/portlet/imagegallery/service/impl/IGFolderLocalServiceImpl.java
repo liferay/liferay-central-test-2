@@ -45,7 +45,6 @@ import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -219,12 +218,10 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		// Folders
 
-		Iterator<IGFolder> itr = igFolderPersistence.findByG_P(
-			folder.getGroupId(), folder.getFolderId()).iterator();
+		List<IGFolder> folders = igFolderPersistence.findByG_P(
+			folder.getGroupId(), folder.getFolderId());
 
-		while (itr.hasNext()) {
-			IGFolder curFolder = itr.next();
-
+		for (IGFolder curFolder : folders) {
 			deleteFolder(curFolder);
 		}
 
@@ -246,12 +243,10 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator<IGFolder> itr = igFolderPersistence.findByG_P(
-			groupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID).iterator();
+		List<IGFolder> folders = igFolderPersistence.findByG_P(
+			groupId, IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
-		while (itr.hasNext()) {
-			IGFolder folder = itr.next();
-
+		for (IGFolder folder : folders) {
 			deleteFolder(folder);
 		}
 	}
@@ -296,12 +291,10 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
-		Iterator<IGFolder> itr = igFolderPersistence.findByG_P(
-			groupId, folderId).iterator();
+		List<IGFolder> folders = igFolderPersistence.findByG_P(
+			groupId, folderId);
 
-		while (itr.hasNext()) {
-			IGFolder folder = (IGFolder)itr.next();
-
+		for (IGFolder folder : folders) {
 			folderIds.add(folder.getFolderId());
 
 			getSubfolderIds(
@@ -321,20 +314,16 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator<IGFolder> itr1 = igFolderPersistence.findByCompanyId(
-				companyId).iterator();
+			List<IGFolder> folders = igFolderPersistence.findByCompanyId(
+				companyId);
 
-			while (itr1.hasNext()) {
-				IGFolder folder = itr1.next();
-
+			for (IGFolder folder : folders) {
 				long folderId = folder.getFolderId();
 
-				Iterator<IGImage> itr2 = igImagePersistence.findByFolderId(
-					folderId).iterator();
+				List<IGImage> images = igImagePersistence.findByFolderId(
+					folderId);
 
-				while (itr2.hasNext()) {
-					IGImage image = itr2.next();
-
+				for (IGImage image : images) {
 					long groupId = folder.getGroupId();
 					long imageId = image.getImageId();
 					String name = image.getName();
@@ -520,24 +509,17 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 	protected void mergeFolders(IGFolder fromFolder, long toFolderId)
 		throws PortalException, SystemException {
 
-		Iterator<IGFolder> foldersItr = igFolderPersistence.findByG_P(
-			fromFolder.getGroupId(), fromFolder.getFolderId()).iterator();
+		List<IGFolder> folders = igFolderPersistence.findByG_P(
+			fromFolder.getGroupId(), fromFolder.getFolderId());
 
-		while (foldersItr.hasNext()) {
-			IGFolder folder = foldersItr.next();
-
+		for (IGFolder folder : folders) {
 			mergeFolders(folder, toFolderId);
 		}
 
-		Iterator<IGImage> imagesItr = igImagePersistence.findByFolderId(
-			fromFolder.getFolderId()).iterator();
+		List<IGImage> images = igImagePersistence.findByFolderId(
+			fromFolder.getFolderId());
 
-		while (imagesItr.hasNext()) {
-
-			// Image
-
-			IGImage image = imagesItr.next();
-
+		for (IGImage image : images) {
 			image.setFolderId(toFolderId);
 
 			igImagePersistence.update(image);

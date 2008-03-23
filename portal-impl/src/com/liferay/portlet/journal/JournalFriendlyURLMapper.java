@@ -82,15 +82,15 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String> params) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
 		String[] parts = StringUtil.split(friendlyURLPath, StringPool.SLASH);
 
 		if ((parts.length >= 4) && parts[2].equals("rss")) {
-			params.put("p_p_id", _PORTLET_ID);
-			params.put("p_p_lifecycle", "0");
-			params.put("p_p_state", LiferayWindowState.EXCLUSIVE.toString());
-			params.put("p_p_mode", PortletMode.VIEW.toString());
+			addParam(params, "p_p_id", _PORTLET_ID);
+			addParam(params, "p_p_lifecycle", "0");
+			addParam(params, "p_p_state", LiferayWindowState.EXCLUSIVE);
+			addParam(params, "p_p_mode", PortletMode.VIEW);
 
 			addParam(params, "struts_action", "/journal/rss");
 

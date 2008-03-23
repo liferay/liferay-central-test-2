@@ -71,10 +71,12 @@ public class TunnelServlet extends HttpServlet {
 			Object returnObj = null;
 
 			try {
-				ObjectValuePair ovp = (ObjectValuePair)ois.readObject();
+				ObjectValuePair<HttpPrincipal, MethodWrapper> ovp =
+					(ObjectValuePair<HttpPrincipal, MethodWrapper>)
+						ois.readObject();
 
-				HttpPrincipal httpPrincipal = (HttpPrincipal)ovp.getKey();
-				MethodWrapper methodWrapper = (MethodWrapper)ovp.getValue();
+				HttpPrincipal httpPrincipal = ovp.getKey();
+				MethodWrapper methodWrapper = ovp.getValue();
 
 				long companyId = PortalInstances.getCompanyId(req);
 

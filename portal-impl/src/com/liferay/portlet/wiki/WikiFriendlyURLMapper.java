@@ -108,11 +108,11 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String> params) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
-		params.put("p_p_id", _PORTLET_ID);
-		params.put("p_p_lifecycle", "0");
-		params.put("p_p_mode", PortletMode.VIEW.toString());
+		addParam(params, "p_p_id", _PORTLET_ID);
+		addParam(params, "p_p_lifecycle", "0");
+		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		addParam(params, "struts_action", "/wiki/view");
 
@@ -139,7 +139,7 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 				if (urlFragments.length >= 3) {
 					String windowState = urlFragments[2];
 
-					params.put("p_p_state", windowState);
+					addParam(params, "p_p_state", windowState);
 				}
 			}
 		}

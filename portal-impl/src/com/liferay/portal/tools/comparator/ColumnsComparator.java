@@ -31,14 +31,14 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class ColumnsComparator implements Comparator {
+public class ColumnsComparator implements Comparator<Object> {
 
 	public ColumnsComparator(String columnName) {
 		this(new String[] {columnName});
 	}
 
-	public ColumnsComparator(List columnNames) {
-		this((String[])columnNames.toArray(new String[0]));
+	public ColumnsComparator(List<String> columnNames) {
+		this(columnNames.toArray(new String[columnNames.size()]));
 	}
 
 	public ColumnsComparator(String[] columnNames) {

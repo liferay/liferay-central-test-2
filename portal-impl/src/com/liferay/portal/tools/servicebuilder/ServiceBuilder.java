@@ -231,8 +231,8 @@ public class ServiceBuilder {
 		}
 	}
 
-	public static Set getBadCmpFields() {
-		Set badCmpFields = new HashSet();
+	public static Set<String> getBadCmpFields() {
+		Set<String> badCmpFields = new HashSet<String>();
 
 		badCmpFields.add("access");
 		badCmpFields.add("active");
@@ -270,8 +270,8 @@ public class ServiceBuilder {
 		return badCmpFields;
 	}
 
-	public static Set getBadTableNames() {
-		Set badTableNames = new HashSet();
+	public static Set<String> getBadTableNames() {
+		Set<String> badTableNames = new HashSet<String>();
 
 		badTableNames.add("Account");
 		badTableNames.add("Action");
@@ -293,7 +293,8 @@ public class ServiceBuilder {
 		writeFile(file, content, null);
 	}
 
-	public static void writeFile(File file, String content, Map jalopySettings)
+	public static void writeFile(
+			File file, String content, Map<String, Object> jalopySettings)
 		throws IOException {
 
 		String packagePath = _getPackagePath(file);
@@ -331,7 +332,7 @@ public class ServiceBuilder {
 		}
 
 		if (jalopySettings == null) {
-			jalopySettings = new HashMap();
+			jalopySettings = new HashMap<String, Object>();
 		}
 
 		Environment env = Environment.getInstance();
@@ -588,14 +589,14 @@ public class ServiceBuilder {
 					"The namespace element must be a valid keyword");
 			}
 
-			_ejbList = new ArrayList();
+			_ejbList = new ArrayList<Entity>();
 
-			List entities = root.elements("entity");
+			List<Element> entities = root.elements("entity");
 
-			Iterator itr1 = entities.iterator();
+			Iterator<Element> itr1 = entities.iterator();
 
 			while (itr1.hasNext()) {
-				Element entityEl = (Element)itr1.next();
+				Element entityEl = itr1.next();
 
 				String ejbName = entityEl.attributeValue("name");
 
@@ -641,14 +642,14 @@ public class ServiceBuilder {
 				String txManager = entityEl.attributeValue(
 					"tx-manager");
 
-				Iterator itr2 = null;
+				List<EntityColumn> pkList = new ArrayList<EntityColumn>();
+				List<EntityColumn> regularColList =
+					new ArrayList<EntityColumn>();
+				List<EntityColumn> collectionList =
+					new ArrayList<EntityColumn>();
+				List<EntityColumn> columnList = new ArrayList<EntityColumn>();
 
-				List pkList = new ArrayList();
-				List regularColList = new ArrayList();
-				List collectionList = new ArrayList();
-				List columnList = new ArrayList();
-
-				List columns = entityEl.elements("column");
+				List<Element> columns = entityEl.elements("column");
 
 				if (uuid) {
 					Element column = DocumentHelper.createElement("column");
@@ -659,10 +660,10 @@ public class ServiceBuilder {
 					columns.add(0, column);
 				}
 
-				itr2 = columns.iterator();
+				Iterator<Element> itr2 = columns.iterator();
 
 				while (itr2.hasNext()) {
-					Element column = (Element)itr2.next();
+					Element column = itr2.next();
 
 					String columnName = column.attributeValue("name");
 
@@ -720,16 +721,17 @@ public class ServiceBuilder {
 						asc = false;
 					}
 
-					List orderColsList = new ArrayList();
+					List<EntityColumn> orderColsList =
+						new ArrayList<EntityColumn>();
 
 					order = new EntityOrder(asc, orderColsList);
 
-					List orderCols = orderEl.elements("order-column");
+					List<Element> orderCols = orderEl.elements("order-column");
 
-					Iterator itr3 = orderCols.iterator();
+					Iterator<Element> itr3 = orderCols.iterator();
 
 					while (itr3.hasNext()) {
-						Element orderColEl = (Element)itr3.next();
+						Element orderColEl = itr3.next();
 
 						String orderColName =
 							orderColEl.attributeValue("name");
@@ -761,9 +763,9 @@ public class ServiceBuilder {
 					}
 				}
 
-				List finderList = new ArrayList();
+				List<EntityFinder> finderList = new ArrayList<EntityFinder>();
 
-				List finders = entityEl.elements("finder");
+				List<Element> finders = entityEl.elements("finder");
 
 				if (uuid) {
 					Element finderEl = DocumentHelper.createElement("finder");
@@ -798,7 +800,7 @@ public class ServiceBuilder {
 				itr2 = finders.iterator();
 
 				while (itr2.hasNext()) {
-					Element finderEl = (Element)itr2.next();
+					Element finderEl = itr2.next();
 
 					String finderName = finderEl.attributeValue("name");
 					String finderReturn =
@@ -808,14 +810,15 @@ public class ServiceBuilder {
 					boolean finderDBIndex = GetterUtil.getBoolean(
 						finderEl.attributeValue("db-index"), true);
 
-					List finderColsList = new ArrayList();
+					List<EntityColumn> finderColsList =
+						new ArrayList<EntityColumn>();
 
-					List finderCols = finderEl.elements("finder-column");
+					List<Element> finderCols = finderEl.elements("finder-column");
 
-					Iterator itr3 = finderCols.iterator();
+					Iterator<Element> itr3 = finderCols.iterator();
 
 					while (itr3.hasNext()) {
-						Element finderColEl = (Element)itr3.next();
+						Element finderColEl = itr3.next();
 
 						String finderColName =
 							finderColEl.attributeValue("name");
@@ -856,15 +859,15 @@ public class ServiceBuilder {
 							finderWhere, finderDBIndex));
 				}
 
-				List referenceList = new ArrayList();
+				List<Entity> referenceList = new ArrayList<Entity>();
 
 				if (build) {
-					List references = entityEl.elements("reference");
+					List<Element> references = entityEl.elements("reference");
 
 					itr2 = references.iterator();
 
 					while (itr2.hasNext()) {
-						Element reference = (Element)itr2.next();
+						Element reference = itr2.next();
 
 						String refPackage =
 							reference.attributeValue("package-path");
@@ -875,12 +878,12 @@ public class ServiceBuilder {
 					}
 				}
 
-				List txRequiredList = new ArrayList();
+				List<String> txRequiredList = new ArrayList<String>();
 
 				itr2 = entityEl.elements("tx-required").iterator();
 
 				while (itr2.hasNext()) {
-					Element txRequiredEl = (Element)itr2.next();
+					Element txRequiredEl = itr2.next();
 
 					String txRequired = txRequiredEl.getText();
 
@@ -897,16 +900,16 @@ public class ServiceBuilder {
 						referenceList, txRequiredList));
 			}
 
-			List exceptionList = new ArrayList();
+			List<String> exceptionList = new ArrayList<String>();
 
 			if (root.element("exceptions") != null) {
-				List exceptions =
+				List<Element> exceptions =
 					root.element("exceptions").elements("exception");
 
 				itr1 = exceptions.iterator();
 
 				while (itr1.hasNext()) {
-					Element exception = (Element)itr1.next();
+					Element exception = itr1.next();
 
 					exceptionList.add(exception.getText());
 				}
@@ -914,7 +917,7 @@ public class ServiceBuilder {
 
 			if (build) {
 				for (int x = 0; x < _ejbList.size(); x++) {
-					Entity entity = (Entity)_ejbList.get(x);
+					Entity entity = _ejbList.get(x);
 
 					System.out.println("Building " + entity.getName());
 
@@ -1092,7 +1095,7 @@ public class ServiceBuilder {
 		if (pos == -1) {
 			pos = _ejbList.indexOf(new Entity(name));
 
-			return (Entity)_ejbList.get(pos);
+			return _ejbList.get(pos);
 		}
 		else {
 			String refPackage = name.substring(0, pos);
@@ -1231,11 +1234,10 @@ public class ServiceBuilder {
 			return "TIMESTAMP";
 		}
 		else if (type.equals("String")) {
-			Map hints = ModelHintsUtil.getHints(model, field);
+			Map<String, String> hints = ModelHintsUtil.getHints(model, field);
 
 			if (hints != null) {
-				int maxLength = GetterUtil.getInteger(
-					(String)hints.get("max-length"));
+				int maxLength = GetterUtil.getInteger(hints.get("max-length"));
 
 				if (maxLength == 2000000) {
 					return "CLOB";
@@ -1293,7 +1295,9 @@ public class ServiceBuilder {
 		}
 	}
 
-	public boolean isDuplicateMethod(JavaMethod method, Map tempMap) {
+	public boolean isDuplicateMethod(
+		JavaMethod method, Map<String, Object> tempMap) {
+
 		StringMaker sm = new StringMaker();
 
 		sm.append("isDuplicateMethod ");
@@ -1469,7 +1473,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createEJBPK(Entity entity) throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 
@@ -1486,23 +1490,21 @@ public class ServiceBuilder {
 		writeFile(ejbFile, content);
 	}
 
-	private void _createExceptions(List exceptions) throws Exception {
+	private void _createExceptions(List<String> exceptions) throws Exception {
 		for (int i = 0; i < _ejbList.size(); i++) {
-			Entity entity = (Entity) _ejbList.get(i);
+			Entity entity = _ejbList.get(i);
 
 			if (entity.hasColumns()) {
 				exceptions.add(getNoSuchEntityException(entity));
 			}
 		}
 
-		for (int i = 0; i < exceptions.size(); i++) {
-			String exception = (String) exceptions.get(i);
-
+		for (String exception : exceptions) {
 			File exceptionFile = new File(
 				_serviceOutputPath + "/" + exception + "Exception.java");
 
 			if (!exceptionFile.exists()) {
-				Map context = _getContext();
+				Map<String, Object> context = _getContext();
 
 				context.put("exception", exception);
 
@@ -1517,7 +1519,7 @@ public class ServiceBuilder {
 		JavaClass javaClass = _getJavaClass(
 			_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", javaClass.getMethods());
@@ -1531,7 +1533,7 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + ".java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -1539,7 +1541,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createExtendedModelImpl(Entity entity) throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 
@@ -1566,7 +1568,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"FinderImpl.java");
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", javaClass.getMethods());
@@ -1612,7 +1614,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"FinderImpl.java");
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", javaClass.getMethods());
@@ -1655,7 +1657,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createHBMXML() throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entities", _ejbList);
 
@@ -1757,7 +1759,7 @@ public class ServiceBuilder {
 		}
 
 		for (int i = 0; i < _ejbList.size(); i++) {
-			Entity entity = (Entity)_ejbList.get(i);
+			Entity entity = _ejbList.get(i);
 
 			if (entity.hasRemoteService()) {
 				JavaClass javaClass = _getJavaClass(
@@ -1766,7 +1768,7 @@ public class ServiceBuilder {
 
 				JavaMethod[] methods = javaClass.getMethods();
 
-				Set jsonMethods = new LinkedHashSet();
+				Set<String> jsonMethods = new LinkedHashSet<String>();
 
 				for (int j = 0; j < methods.length; j++) {
 					JavaMethod javaMethod = methods[j];
@@ -1779,7 +1781,7 @@ public class ServiceBuilder {
 				}
 
 				if (jsonMethods.size() > 0) {
-					Map context = _getContext();
+					Map<String, Object> context = _getContext();
 
 					context.put("entity", entity);
 					context.put("methods", jsonMethods);
@@ -1830,7 +1832,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createModel(Entity entity) throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 
@@ -1843,7 +1845,7 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + "Model.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -1851,7 +1853,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createModelHintsXML() throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entities", _ejbList);
 
@@ -1903,7 +1905,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createModelImpl(Entity entity) throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 
@@ -1916,7 +1918,7 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_outputPath + "/model/impl/" + entity.getName() + "ModelImpl.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -1924,7 +1926,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createModelSoap(Entity entity) throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 
@@ -1937,7 +1939,7 @@ public class ServiceBuilder {
 		File modelFile = new File(
 			_serviceOutputPath + "/model/" + entity.getName() + "Soap.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -1949,7 +1951,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"PersistenceImpl.java");
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", javaClass.getMethods());
@@ -1980,7 +1982,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createPersistenceImpl(Entity entity) throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 
@@ -1998,7 +2000,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createPersistenceTest(Entity entity) throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 
@@ -2020,7 +2022,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"PersistenceImpl.java");
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", javaClass.getMethods());
@@ -2099,7 +2101,7 @@ public class ServiceBuilder {
 				props.getProperty("build.number")) + 1;
 		}
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("buildNumber", new Long(buildNumber));
 		context.put("currentTimeMillis", new Long(System.currentTimeMillis()));
@@ -2135,10 +2137,11 @@ public class ServiceBuilder {
 		Document doc = PortalUtil.readDocumentFromFile(
 			new File(_springFileName), true);
 
-		Iterator itr = doc.getRootElement().elements("bean").iterator();
+		Iterator<Element> itr = doc.getRootElement().elements(
+			"bean").iterator();
 
 		while (itr.hasNext()) {
-			Element beanEl = (Element)itr.next();
+			Element beanEl = itr.next();
 
 			String beanId = beanEl.attributeValue("id");
 
@@ -2153,7 +2156,7 @@ public class ServiceBuilder {
 				serviceMapping = StringUtil.replace(
 					serviceMapping, ".", "_");
 
-				Map context = _getContext();
+				Map<String, Object> context = _getContext();
 
 				context.put("serviceName", serviceName);
 				context.put("serviceMapping", serviceMapping);
@@ -2225,7 +2228,7 @@ public class ServiceBuilder {
 			serviceComments = "This is a local service. Methods of this service will not have security checks based on the propagated JAAS credentials because this service can only be accessed from within the same VM.";
 		}
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", methods);
@@ -2242,7 +2245,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "Service.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -2252,7 +2255,7 @@ public class ServiceBuilder {
 	private void _createServiceBaseImpl(Entity entity, int sessionType)
 		throws Exception {
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("sessionTypeName",_getSessionTypeName(sessionType));
@@ -2275,7 +2278,7 @@ public class ServiceBuilder {
 	private void _createServiceFactory(Entity entity, int sessionType)
 		throws Exception {
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("sessionTypeName", _getSessionTypeName(sessionType));
@@ -2290,7 +2293,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceFactory.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -2302,7 +2305,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/impl/" + entity.getName() +
 				"ServiceImpl.java");
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", javaClass.getMethods());
@@ -2318,7 +2321,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceHttp.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -2328,7 +2331,7 @@ public class ServiceBuilder {
 	private void _createServiceImpl(Entity entity, int sessionType)
 		throws Exception {
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("sessionTypeName", _getSessionTypeName(sessionType));
@@ -2353,7 +2356,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/impl/" + entity.getName() +
 				"ServiceImpl.java");
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", javaClass.getMethods());
@@ -2368,7 +2371,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceJSON.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -2376,7 +2379,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createServiceJSONSerializer(Entity entity) throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 
@@ -2390,7 +2393,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"JSONSerializer.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -2402,7 +2405,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/impl/" + entity.getName() +
 				"ServiceImpl.java");
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", javaClass.getMethods());
@@ -2417,7 +2420,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/http/" + entity.getName() +
 				"ServiceSoap.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -2431,7 +2434,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/" + entity.getName() +
 				(sessionType != _REMOTE ? "Local" : "") + "Service.java");
 
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entity", entity);
 		context.put("methods", javaClass.getMethods());
@@ -2447,7 +2450,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceUtil.java");
 
-		Map jalopySettings = new HashMap();
+		Map<String, Object> jalopySettings = new HashMap<String, Object>();
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
@@ -2489,7 +2492,7 @@ public class ServiceBuilder {
 	}
 
 	private void _createSpringXML() throws Exception {
-		Map context = _getContext();
+		Map<String, Object> context = _getContext();
 
 		context.put("entities", _ejbList);
 
@@ -2557,7 +2560,7 @@ public class ServiceBuilder {
 			FileUtil.write(sqlFile, "");
 		}
 
-		Map indexSQLs = new TreeMap();
+		Map<String, String> indexSQLs = new TreeMap<String, String>();
 
 		BufferedReader br = new BufferedReader(new FileReader(sqlFile));
 
@@ -2587,7 +2590,7 @@ public class ServiceBuilder {
 			FileUtil.write(propsFile, "");
 		}
 
-		Map indexProps = new TreeMap();
+		Map<String, String> indexProps = new TreeMap<String, String>();
 
 		br = new BufferedReader(new FileReader(propsFile));
 
@@ -2610,22 +2613,22 @@ public class ServiceBuilder {
 		// indexes.sql
 
 		for (int i = 0; i < _ejbList.size(); i++) {
-			Entity entity = (Entity)_ejbList.get(i);
+			Entity entity = _ejbList.get(i);
 
-			List finderList = entity.getFinderList();
+			List<EntityFinder> finderList = entity.getFinderList();
 
 			for (int j = 0; j < finderList.size(); j++) {
-				EntityFinder finder = (EntityFinder)finderList.get(j);
+				EntityFinder finder = finderList.get(j);
 
 				if (finder.isDBIndex()) {
 					StringMaker sm = new StringMaker();
 
 					sm.append(entity.getTable() + " (");
 
-					List finderColsList = finder.getColumns();
+					List<EntityColumn> finderColsList = finder.getColumns();
 
 					for (int k = 0; k < finderColsList.size(); k++) {
-						EntityColumn col = (EntityColumn)finderColsList.get(k);
+						EntityColumn col = finderColsList.get(k);
 
 						sm.append(col.getDBName());
 
@@ -2661,12 +2664,12 @@ public class ServiceBuilder {
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = indexSQLs.values().iterator();
+		Iterator<String> itr = indexSQLs.values().iterator();
 
 		String prevEntityName = null;
 
 		while (itr.hasNext()) {
-			String indexSQL = (String)itr.next();
+			String indexSQL = itr.next();
 
 			String entityName = indexSQL.split(" ")[4];
 
@@ -2696,9 +2699,9 @@ public class ServiceBuilder {
 		prevEntityName = null;
 
 		while (itr.hasNext()) {
-			String finderName = (String)itr.next();
+			String finderName = itr.next();
 
-			String indexName = (String)indexProps.get(finderName);
+			String indexName = indexProps.get(finderName);
 
 			String entityName = finderName.split("\\.")[0];
 
@@ -2731,7 +2734,7 @@ public class ServiceBuilder {
 			FileUtil.write(sqlFile, "");
 		}
 
-		Set sequenceSQLs = new TreeSet();
+		Set<String> sequenceSQLs = new TreeSet<String>();
 
 		BufferedReader br = new BufferedReader(new FileReader(sqlFile));
 
@@ -2750,12 +2753,12 @@ public class ServiceBuilder {
 		br.close();
 
 		for (int i = 0; i < _ejbList.size(); i++) {
-			Entity entity = (Entity)_ejbList.get(i);
+			Entity entity = _ejbList.get(i);
 
-			List columnList = entity.getColumnList();
+			List<EntityColumn> columnList = entity.getColumnList();
 
 			for (int j = 0; j < columnList.size(); j++) {
-				EntityColumn column = (EntityColumn)columnList.get(j);
+				EntityColumn column = columnList.get(j);
 
 				if ("sequence".equals(column.getIdType())) {
 					StringMaker sm = new StringMaker();
@@ -2779,10 +2782,10 @@ public class ServiceBuilder {
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = sequenceSQLs.iterator();
+		Iterator<String> itr = sequenceSQLs.iterator();
 
 		while (itr.hasNext()) {
-			String sequenceSQL = (String)itr.next();
+			String sequenceSQL = itr.next();
 
 			sm.append(sequenceSQL);
 
@@ -2806,7 +2809,7 @@ public class ServiceBuilder {
 		}
 
 		for (int i = 0; i < _ejbList.size(); i++) {
-			Entity entity = (Entity)_ejbList.get(i);
+			Entity entity = _ejbList.get(i);
 
 			String createTableSQL = _getCreateTableSQL(entity);
 
@@ -2955,12 +2958,12 @@ public class ServiceBuilder {
 		return xml;
 	}
 
-	private Map _getContext() throws TemplateModelException {
+	private Map<String, Object> _getContext() throws TemplateModelException {
 		BeansWrapper wrapper = BeansWrapper.getDefaultInstance();
 
 		TemplateHashModel staticModels = wrapper.getStaticModels();
 
-		Map context = new HashMap();
+		Map<String, Object> context = new HashMap<String, Object>();
 
 		context.put("hbmFileName", _hbmFileName);
 		context.put("modelHintsFileName", _modelHintsFileName);
@@ -2991,7 +2994,7 @@ public class ServiceBuilder {
 			staticModels.get("com.liferay.portal.model.ModelHintsUtil"));
 		context.put("stringUtil", StringUtil_IW.getInstance());
 		context.put("system", staticModels.get("java.lang.System"));
-		context.put("tempMap", wrapper.wrap(new HashMap()));
+		context.put("tempMap", wrapper.wrap(new HashMap<String, Object>()));
 		context.put(
 			"validator",
 			staticModels.get("com.liferay.portal.kernel.util.Validator"));
@@ -3000,8 +3003,8 @@ public class ServiceBuilder {
 	}
 
 	private String _getCreateTableSQL(Entity entity) {
-		List pkList = entity.getPKList();
-		List regularColList = entity.getRegularColList();
+		List<EntityColumn> pkList = entity.getPKList();
+		List<EntityColumn> regularColList = entity.getRegularColList();
 
 		if (regularColList.size() == 0) {
 			return null;
@@ -3012,7 +3015,7 @@ public class ServiceBuilder {
 		sm.append(_CREATE_TABLE + entity.getTable() + " (\n");
 
 		for (int i = 0; i < regularColList.size(); i++) {
-			EntityColumn col = (EntityColumn)regularColList.get(i);
+			EntityColumn col = regularColList.get(i);
 
 			String colName = col.getName();
 			String colType = col.getType();
@@ -3039,14 +3042,14 @@ public class ServiceBuilder {
 				sm.append("LONG");
 			}
 			else if (colType.equals("String")) {
-				Map hints = ModelHintsUtil.getHints(
+				Map<String, String> hints = ModelHintsUtil.getHints(
 					_packagePath + ".model." + entity.getName(), colName);
 
 				int maxLength = 75;
 
 				if (hints != null) {
 					maxLength = GetterUtil.getInteger(
-						(String)hints.get("max-length"), maxLength);
+						hints.get("max-length"), maxLength);
 				}
 
 				if (maxLength < 4000) {
@@ -3096,7 +3099,7 @@ public class ServiceBuilder {
 			sm.append("\tprimary key (");
 
 			for (int j = 0; j < pkList.size(); j++) {
-				EntityColumn pk = (EntityColumn)pkList.get(j);
+				EntityColumn pk = pkList.get(j);
 
 				sm.append(pk.getDBName());
 
@@ -3172,8 +3175,9 @@ public class ServiceBuilder {
 		return false;
 	}
 
-	private List _mergeReferenceList(List referenceList) {
-		List list = new ArrayList(_ejbList.size() + referenceList.size());
+	private List<Entity> _mergeReferenceList(List<Entity> referenceList) {
+		List<Entity> list = new ArrayList<Entity>(
+			_ejbList.size() + referenceList.size());
 
 		list.addAll(_ejbList);
 		list.addAll(referenceList);
@@ -3185,7 +3189,9 @@ public class ServiceBuilder {
 		return _processTemplate(name, _getContext());
 	}
 
-	private String _processTemplate(String name, Map context) throws Exception {
+	private String _processTemplate(String name, Map<String, Object> context)
+		throws Exception {
+
 		return FreeMarkerUtil.process(name, context);
 	}
 
@@ -3241,8 +3247,8 @@ public class ServiceBuilder {
 		_TPL_ROOT + "spring_data_source_xml.ftl";
 	private String _tplSpringUtil = _TPL_ROOT + "spring_util.ftl";
 	private String _tplSpringXml = _TPL_ROOT + "spring_xml.ftl";
-	private Set _badTableNames;
-	private Set _badCmpFields;
+	private Set<String> _badTableNames;
+	private Set<String> _badCmpFields;
 	private String _hbmFileName;
 	private String _modelHintsFileName;
 	private String _springFileName;
@@ -3269,6 +3275,6 @@ public class ServiceBuilder {
 	private String _serviceOutputPath;
 	private String _testOutputPath;
 	private String _packagePath;
-	private List _ejbList;
+	private List<Entity> _ejbList;
 
 }

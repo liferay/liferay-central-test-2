@@ -247,19 +247,17 @@ public class ExportAction extends Action {
 	}
 
 	protected long getNewPrimaryKey(long pk) {
-		Long pkObj = new Long(pk);
+		Long newPk = _primaryKeys.get(pk);
 
-		Long newPkObj = (Long)_primaryKeys.get(pkObj);
-
-		if (newPkObj == null) {
-			newPkObj = new Long(_primaryKeyCount);
+		if (newPk == null) {
+			newPk = new Long(_primaryKeyCount);
 
 			_primaryKeyCount++;
 
-			_primaryKeys.put(pkObj, newPkObj);
+			_primaryKeys.put(pk, newPk);
 		}
 
-		return newPkObj.longValue();
+		return newPk.longValue();
 	}
 
 	protected void insertDataCMSContent(
@@ -778,7 +776,7 @@ public class ExportAction extends Action {
 	private static Log _log = LogFactory.getLog(ExportAction.class);
 
 	private MemoryValueMapper _valueMapper = new MemoryValueMapper();
-	private Map _primaryKeys = _valueMapper.getMap();
+	private Map<Long, Long> _primaryKeys = _valueMapper.getMap();
 	private int _primaryKeyCount;
 
 }

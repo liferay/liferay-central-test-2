@@ -22,6 +22,7 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.KeyValuePair;
 import com.liferay.taglib.util.IncludeTag;
 
 import java.util.List;
@@ -96,11 +97,11 @@ public class InputMoveBoxesTag extends IncludeTag {
 		_rightReorder = rightReorder;
 	}
 
-	public void setLeftList(List leftList) {
+	public void setLeftList(List<KeyValuePair> leftList) {
 		_leftList = leftList;
 	}
 
-	public void setRightList(List rightList) {
+	public void setRightList(List<KeyValuePair> rightList) {
 		_rightList = rightList;
 	}
 
@@ -120,7 +121,7 @@ public class InputMoveBoxesTag extends IncludeTag {
 	private String _rightOnChange;
 	private String _leftReorder;
 	private String _rightReorder;
-	private List _leftList;
-	private List _rightList;
+	private List<KeyValuePair> _leftList;
+	private List<KeyValuePair> _rightList;
 
 }

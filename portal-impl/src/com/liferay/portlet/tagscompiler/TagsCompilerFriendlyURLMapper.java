@@ -54,11 +54,13 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return null;
 	}
 
-	public void populateParams(String friendlyURLPath, Map params) {
-		params.put("p_p_id", _PORTLET_ID);
-		params.put("p_p_lifecycle", "0");
-		params.put("p_p_state", WindowState.NORMAL.toString());
-		params.put("p_p_mode", PortletMode.VIEW.toString());
+	public void populateParams(
+		String friendlyURLPath, Map<String, String[]> params) {
+
+		addParam(params, "p_p_id", _PORTLET_ID);
+		addParam(params, "p_p_lifecycle", "0");
+		addParam(params, "p_p_state", WindowState.NORMAL);
+		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 		int y = friendlyURLPath.length();

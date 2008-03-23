@@ -355,8 +355,9 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List addPermissions(long companyId, java.lang.String name,
-		long resourceId, boolean portletActions)
+	public java.util.List<com.liferay.portal.model.Permission> addPermissions(
+		long companyId, java.lang.String name, long resourceId,
+		boolean portletActions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -365,42 +366,45 @@ public interface PermissionLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getActions(java.util.List permissions)
+	public java.util.List<String> getActions(
+		java.util.List<com.liferay.portal.model.Permission> permissions)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getGroupPermissions(long groupId, long resourceId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getGroupPermissions(long groupId, long companyId,
-		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getOrgGroupPermissions(long organizationId,
+	public java.util.List<com.liferay.portal.model.Permission> getGroupPermissions(
 		long groupId, long resourceId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Permission> getGroupPermissions(
+		long groupId, long companyId, java.lang.String name, int scope,
+		java.lang.String primKey) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Permission> getOrgGroupPermissions(
+		long organizationId, long groupId, long resourceId)
 		throws com.liferay.portal.SystemException;
 
 	public long getLatestPermissionId()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getPermissions(long companyId,
-		java.lang.String[] actionIds, long resourceId)
+	public java.util.List<com.liferay.portal.model.Permission> getPermissions(
+		long companyId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRolePermissions(long roleId)
+	public java.util.List<com.liferay.portal.model.Permission> getRolePermissions(
+		long roleId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getRolePermissions(long roleId, long resourceId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Permission> getRolePermissions(
+		long roleId, long resourceId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getUserPermissions(long userId, long resourceId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Permission> getUserPermissions(
+		long userId, long resourceId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getUserPermissions(long userId, long companyId,
-		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Permission> getUserPermissions(
+		long userId, long companyId, java.lang.String name, int scope,
+		java.lang.String primKey) throws com.liferay.portal.SystemException;
 
 	public boolean hasGroupPermission(long groupId, java.lang.String actionId,
 		long resourceId)

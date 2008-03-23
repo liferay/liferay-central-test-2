@@ -188,10 +188,10 @@ public class SoftwareCatalogServlet extends HttpServlet {
 
 		String prefix = "setting_";
 
-		Enumeration enu = req.getParameterNames();
+		Enumeration<String> enu = req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (name.startsWith(prefix)) {
 				String settingName = name.substring(

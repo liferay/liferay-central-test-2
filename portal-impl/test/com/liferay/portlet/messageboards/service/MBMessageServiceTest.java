@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.service;
 
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.security.permission.DoAsUserThread;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -114,7 +115,8 @@ public class MBMessageServiceTest extends BaseServiceTestCase {
 
 		protected void doRun() throws Exception {
 			String body = "This is a test message.";
-			List files = new ArrayList();
+			List<ObjectValuePair<String, byte[]>> files =
+				new ArrayList<ObjectValuePair<String, byte[]>>();
 			boolean anonymous = false;
 			double priority = 0.0;
 			String[] tagsEntries = null;

@@ -188,7 +188,7 @@ public class PortletPermissionImpl implements PortletPermission {
 
 		portletId = PortletImpl.getRootPortletId(portletId);
 
-		List layoutManagerActions =
+		List<String> layoutManagerActions =
 			ResourceActionsUtil.getPortletResourceLayoutManagerActions(
 				portletId);
 

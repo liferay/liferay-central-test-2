@@ -27,11 +27,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 
 import java.io.File;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -89,8 +89,7 @@ public class ThemeLoader {
 			if (liferayLookAndFeelXML.exists()) {
 				String lastModifiedKey = liferayLookAndFeelXML.toString();
 
-				Long prevLastModified =
-					(Long)_lastModifiedMap.get(lastModifiedKey);
+				Long prevLastModified = _lastModifiedMap.get(lastModifiedKey);
 
 				long lastModified = liferayLookAndFeelXML.lastModified();
 
@@ -99,8 +98,7 @@ public class ThemeLoader {
 
 					registerTheme(liferayLookAndFeelXML);
 
-					_lastModifiedMap.put(
-						lastModifiedKey, new Long(lastModified));
+					_lastModifiedMap.put(lastModifiedKey, lastModified);
 				}
 				else {
 					if (_log.isDebugEnabled()) {
@@ -195,6 +193,6 @@ public class ThemeLoader {
 	private String _themesPath;
 	private File _fileStorage;
 	private boolean _loadFromServletContext = true;
-	private Map _lastModifiedMap = CollectionFactory.getHashMap();
+	private Map<String, Long> _lastModifiedMap = new HashMap<String, Long>();
 
 }

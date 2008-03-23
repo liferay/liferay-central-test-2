@@ -168,7 +168,7 @@ public class TableIteratorTag extends TagSupport {
 		_endPage = endPage;
 	}
 
-	public void setList(List list) {
+	public void setList(List<?> list) {
 		_list = list;
 	}
 
@@ -207,7 +207,7 @@ public class TableIteratorTag extends TagSupport {
 	private String _startPage;
 	private String _bodyPage;
 	private String _endPage;
-	private List _list;
+	private List<?> _list;
 	private int _listPos;
 	private int _rowLength;
 	private String _rowPadding = "0";

@@ -78,15 +78,13 @@ public class JSPCompiler {
 
 	private void _compile(File directory) throws Exception {
 		if (directory.exists() && directory.isDirectory()) {
-			List fileList = new ArrayList();
+			List<File> fileList = new ArrayList<File>();
 
 			File[] fileArray = FileUtil.sortFiles(directory.listFiles());
 
-			for (int i = 0; i < fileArray.length; i++) {
-				File file = fileArray[i];
-
+			for (File file : fileArray) {
 				if (file.isDirectory()) {
-					_compile(fileArray[i]);
+					_compile(file);
 				}
 				else if (file.getName().endsWith(".java")) {
 					fileList.add(file);
@@ -97,16 +95,16 @@ public class JSPCompiler {
 		}
 	}
 
-	private void _compile(String sourcePath, List files) throws Exception {
+	private void _compile(String sourcePath, List<File> files)
+		throws Exception {
+
 		if (files.size() == 0) {
 			return;
 		}
 
 		System.out.println(sourcePath);
 
-		for (int i = 0; i < files.size(); i++) {
-			File file = (File)files.get(i);
-
+		for (File file : files) {
 			String classDestination = _directory;
 
 			String cmd =

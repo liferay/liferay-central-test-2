@@ -42,7 +42,6 @@ import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -207,12 +206,10 @@ public class BookmarksFolderLocalServiceImpl
 
 		// Folders
 
-		Iterator<BookmarksFolder> itr = bookmarksFolderPersistence.findByG_P(
-			folder.getGroupId(), folder.getFolderId()).iterator();
+		List<BookmarksFolder> folders = bookmarksFolderPersistence.findByG_P(
+			folder.getGroupId(), folder.getFolderId());
 
-		while (itr.hasNext()) {
-			BookmarksFolder curFolder = itr.next();
-
+		for (BookmarksFolder curFolder : folders) {
 			deleteFolder(curFolder);
 		}
 
@@ -234,12 +231,10 @@ public class BookmarksFolderLocalServiceImpl
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator<BookmarksFolder> itr = bookmarksFolderPersistence.findByG_P(
-			groupId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID).iterator();
+		List<BookmarksFolder> folders = bookmarksFolderPersistence.findByG_P(
+			groupId, BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
-		while (itr.hasNext()) {
-			BookmarksFolder folder = itr.next();
-
+		for (BookmarksFolder folder : folders) {
 			deleteFolder(folder);
 		}
 	}
@@ -268,13 +263,11 @@ public class BookmarksFolderLocalServiceImpl
 			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
-		Iterator<BookmarksFolder> itr = bookmarksFolderPersistence.findByG_P(
-			groupId, folderId).iterator();
+		List<BookmarksFolder> folders = bookmarksFolderPersistence.findByG_P(
+			groupId, folderId);
 
-		while (itr.hasNext()) {
-			BookmarksFolder folder = itr.next();
-
-			folderIds.add(new Long(folder.getFolderId()));
+		for (BookmarksFolder folder : folders) {
+			folderIds.add(folder.getFolderId());
 
 			getSubfolderIds(
 				folderIds, folder.getGroupId(), folder.getFolderId());
@@ -293,22 +286,16 @@ public class BookmarksFolderLocalServiceImpl
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator<BookmarksFolder> itr1 =
-				bookmarksFolderPersistence.findByCompanyId(
-						companyId).iterator();
+			List<BookmarksFolder> folders =
+				bookmarksFolderPersistence.findByCompanyId(companyId);
 
-			while (itr1.hasNext()) {
-				BookmarksFolder folder = itr1.next();
-
+			for (BookmarksFolder folder : folders) {
 				long folderId = folder.getFolderId();
 
-				Iterator<BookmarksEntry> itr2 =
-					bookmarksEntryPersistence.findByFolderId(
-							folderId).iterator();
+				List<BookmarksEntry> entries =
+					bookmarksEntryPersistence.findByFolderId(folderId);
 
-				while (itr2.hasNext()) {
-					BookmarksEntry entry = itr2.next();
-
+				for (BookmarksEntry entry : entries) {
 					long groupId = folder.getGroupId();
 					long entryId = entry.getEntryId();
 					String title = entry.getName();
@@ -498,26 +485,17 @@ public class BookmarksFolderLocalServiceImpl
 	protected void mergeFolders(BookmarksFolder fromFolder, long toFolderId)
 		throws PortalException, SystemException {
 
-		Iterator<BookmarksFolder> foldersItr =
-			bookmarksFolderPersistence.findByG_P(
-				fromFolder.getGroupId(), fromFolder.getFolderId()).iterator();
+		List<BookmarksFolder> folders = bookmarksFolderPersistence.findByG_P(
+				fromFolder.getGroupId(), fromFolder.getFolderId());
 
-		while (foldersItr.hasNext()) {
-			BookmarksFolder folder = foldersItr.next();
-
+		for (BookmarksFolder folder : folders) {
 			mergeFolders(folder, toFolderId);
 		}
 
-		Iterator<BookmarksEntry> entriesItr =
-			bookmarksEntryPersistence.findByFolderId(
-					fromFolder.getFolderId()).iterator();
+		List<BookmarksEntry> entries = bookmarksEntryPersistence.findByFolderId(
+			fromFolder.getFolderId());
 
-		while (entriesItr.hasNext()) {
-
-			// Entry
-
-			BookmarksEntry entry = entriesItr.next();
-
+		for (BookmarksEntry entry : entries) {
 			entry.setFolderId(toFolderId);
 
 			bookmarksEntryPersistence.update(entry);

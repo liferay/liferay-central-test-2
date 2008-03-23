@@ -73,7 +73,9 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 	public static String FIND_BY_C_C =
 		MBMessageFinder.class.getName() + ".findByC_C";
 
-	public int countByCategoryIds(List categoryIds) throws SystemException {
+	public int countByCategoryIds(List<Long> categoryIds)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
@@ -91,15 +93,15 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < categoryIds.size(); i++) {
-				Long categoryId = (Long)categoryIds.get(i);
+				Long categoryId = categoryIds.get(i);
 
 				qPos.add(categoryId);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -132,10 +134,10 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 
 			qPos.add(groupId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -169,10 +171,10 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -189,13 +191,13 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<MBMessage> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
 		return findByGroupId(groupId, begin, end, null);
 	}
 
-	public List findByGroupId(
+	public List<MBMessage> findByGroupId(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -216,7 +218,8 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 
 			qPos.add(groupId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<MBMessage>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -226,7 +229,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		}
 	}
 
-	public List findByNoAssets() throws SystemException {
+	public List<MBMessage> findByNoAssets() throws SystemException {
 		Session session = null;
 
 		try {
@@ -267,7 +270,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			qPos.add(uuid);
 			qPos.add(groupId);
 
-			List list = q.list();
+			List<MBMessage> list = q.list();
 
 			if (list.size() == 0) {
 				StringMaker sm = new StringMaker();
@@ -281,7 +284,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 				throw new NoSuchMessageException(sm.toString());
 			}
 			else {
-				return (MBMessage)list.get(0);
+				return list.get(0);
 			}
 		}
 		catch (NoSuchMessageException nsme) {
@@ -295,13 +298,14 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		}
 	}
 
-	public List findByG_U(long groupId, long userId, int begin, int end)
+	public List<MBMessage> findByG_U(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		return findByG_U(groupId, userId, begin, end, null);
 	}
 
-	public List findByG_U(
+	public List<MBMessage> findByG_U(
 			long groupId, long userId, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -324,7 +328,8 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<MBMessage>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -334,7 +339,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		}
 	}
 
-	public List findByC_C(long classNameId, long classPK)
+	public List<MBMessage> findByC_C(long classNameId, long classPK)
 		throws SystemException {
 
 		Session session = null;
@@ -363,7 +368,7 @@ public class MBMessageFinderImpl implements MBMessageFinder {
 		}
 	}
 
-	protected String getCategoryIds(List categoryIds) {
+	protected String getCategoryIds(List<Long> categoryIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {

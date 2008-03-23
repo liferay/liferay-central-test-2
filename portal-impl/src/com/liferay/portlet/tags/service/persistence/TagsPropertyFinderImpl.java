@@ -112,7 +112,7 @@ public class TagsPropertyFinderImpl implements TagsPropertyFinder {
 			qPos.add(companyId);
 			qPos.add(key);
 
-			List list = new ArrayList();
+			List properties = new ArrayList();
 
 			Iterator itr = QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
@@ -125,10 +125,10 @@ public class TagsPropertyFinderImpl implements TagsPropertyFinder {
 				property.setKey(key);
 				property.setValue(value);
 
-				list.add(property);
+				properties.add(property);
 			}
 
-			return list;
+			return properties;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

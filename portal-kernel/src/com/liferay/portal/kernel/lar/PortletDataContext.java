@@ -97,7 +97,7 @@ public interface PortletDataContext extends Serializable {
 
 	public String[] getTagsEntries(String className, Object primaryKey);
 
-	public Map getTagsEntries();
+	public Map<String, String[]> getTagsEntries();
 
 	public void addTagsEntries(Class<?> classObj, Object classPK)
 		throws PortalException, SystemException;

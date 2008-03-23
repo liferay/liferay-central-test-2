@@ -57,22 +57,22 @@ public class InputPermissionsParamsTag extends TagSupport {
 
 			Group group = layout.getGroup();
 
-			List supportedActions =
+			List<String> supportedActions =
 				ResourceActionsUtil.getModelResourceActions(_modelName);
-			List communityDefaultActions =
+			List<String> communityDefaultActions =
 				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
 					_modelName);
-			List guestDefaultActions =
+			List<String> guestDefaultActions =
 				ResourceActionsUtil.getModelResourceGuestDefaultActions(
 					_modelName);
-			List guestUnsupportedActions =
+			List<String> guestUnsupportedActions =
 				ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
 					_modelName);
 
 			StringMaker sm = new StringMaker();
 
 			for (int i = 0; i < supportedActions.size(); i++) {
-				String action = (String)supportedActions.get(i);
+				String action = supportedActions.get(i);
 
 				boolean communityChecked = communityDefaultActions.contains(
 					action);

@@ -59,7 +59,8 @@ public class ListTypeServiceUtil {
 		return listTypeService.getListType(listTypeId);
 	}
 
-	public static java.util.List getListTypes(java.lang.String type)
+	public static java.util.List<com.liferay.portal.model.ListType> getListTypes(
+		java.lang.String type)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ListTypeService listTypeService = ListTypeServiceFactory.getService();
 

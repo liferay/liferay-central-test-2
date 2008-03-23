@@ -65,9 +65,9 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
@@ -79,8 +79,8 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -94,8 +94,9 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
@@ -109,8 +110,9 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -125,7 +127,8 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -139,7 +142,8 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -154,7 +158,8 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
@@ -171,7 +176,8 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		java.lang.String[] communityPermissions,
@@ -205,8 +211,8 @@ public class MBMessageServiceUtil {
 		mbMessageService.deleteMessage(messageId);
 	}
 
-	public static java.util.List getCategoryMessages(long categoryId,
-		int begin, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
+		long categoryId, int begin, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
@@ -327,7 +333,8 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, java.util.List existingFiles, double priority,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		java.util.List<String> existingFiles, double priority,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -339,7 +346,8 @@ public class MBMessageServiceUtil {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, java.util.List existingFiles, double priority,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		java.util.List<String> existingFiles, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,

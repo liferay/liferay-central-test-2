@@ -23,9 +23,8 @@
 package com.liferay.portal.theme;
 
 import com.liferay.portal.velocity.VelocityContextPool;
-import com.liferay.util.CollectionFactory;
 
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.ServletContext;
@@ -50,8 +49,7 @@ public class ThemeLoaderFactory {
 	}
 
 	public static boolean destroy(String servletContextName) {
-		ThemeLoader themeLoader =
-			(ThemeLoader)_themeLoaders.remove(servletContextName);
+		ThemeLoader themeLoader = _themeLoaders.remove(servletContextName);
 
 		if (themeLoader == null) {
 			return false;
@@ -68,33 +66,28 @@ public class ThemeLoaderFactory {
 	public static ThemeLoader getDefaultThemeLoader() {
 		ThemeLoader themeLoader = null;
 
-		Iterator itr = _themeLoaders.entrySet().iterator();
+		for (Map.Entry<String, ThemeLoader> entry : _themeLoaders.entrySet()) {
+			themeLoader = entry.getValue();
 
-		if (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			themeLoader = (ThemeLoader)entry.getValue();
+			break;
 		}
 
 		return themeLoader;
 	}
 
 	public static ThemeLoader getThemeLoader(String servletContextName) {
-		return (ThemeLoader)_themeLoaders.get(servletContextName);
+		return _themeLoaders.get(servletContextName);
 	}
 
 	public static void loadThemes() {
-		Iterator itr = _themeLoaders.entrySet().iterator();
-
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			ThemeLoader themeLoader = (ThemeLoader)entry.getValue();
+		for (Map.Entry<String, ThemeLoader> entry : _themeLoaders.entrySet()) {
+			ThemeLoader themeLoader = entry.getValue();
 
 			themeLoader.loadThemes();
 		}
 	}
 
-	private static Map _themeLoaders = CollectionFactory.getHashMap();
+	private static Map<String, ThemeLoader> _themeLoaders =
+		new HashMap<String, ThemeLoader>();
 
 }

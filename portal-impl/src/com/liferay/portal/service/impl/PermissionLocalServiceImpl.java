@@ -86,14 +86,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		return permission;
 	}
 
-	public List addPermissions(
+	public List<Permission> addPermissions(
 			long companyId, String name, long resourceId,
 			boolean portletActions)
 		throws PortalException, SystemException {
 
-		List permissions = new ArrayList();
+		List<Permission> permissions = new ArrayList<Permission>();
 
-		List actions = null;
+		List<String> actions = null;
 
 		if (portletActions) {
 			actions =
@@ -104,10 +104,10 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		}
 
 		for (int i = 0; i < actions.size(); i++) {
-			String actionId = (String)actions.get(i);
+			String actionId = actions.get(i);
 
-			Permission permission =
-				addPermission(companyId, actionId, resourceId);
+			Permission permission = addPermission(
+				companyId, actionId, resourceId);
 
 			permissions.add(permission);
 		}
@@ -121,7 +121,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		List permissions = permissionFinder.findByU_R(userId, resourceId);
+		List<Permission> permissions = permissionFinder.findByU_R(
+			userId, resourceId);
 
 		permissions = getPermissions(
 			user.getCompanyId(), actionIds, resourceId);
@@ -131,13 +132,15 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
-	public List getActions(List permissions) throws SystemException {
-		List actions = new ArrayList();
+	public List<String> getActions(List<Permission> permissions)
+		throws SystemException {
 
-		Iterator itr = permissions.iterator();
+		List<String> actions = new ArrayList<String>();
+
+		Iterator<Permission> itr = permissions.iterator();
 
 		while (itr.hasNext()) {
-			Permission permission = (Permission)itr.next();
+			Permission permission = itr.next();
 
 			actions.add(permission.getActionId());
 		}
@@ -145,13 +148,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		return actions;
 	}
 
-	public List getGroupPermissions(long groupId, long resourceId)
+	public List<Permission> getGroupPermissions(long groupId, long resourceId)
 		throws SystemException {
 
 		return permissionFinder.findByG_R(groupId, resourceId);
 	}
 
-	public List getGroupPermissions(
+	public List<Permission> getGroupPermissions(
 			long groupId, long companyId, String name, int scope,
 			String primKey)
 		throws SystemException {
@@ -160,7 +163,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			groupId, companyId, name, scope, primKey);
 	}
 
-	public List getOrgGroupPermissions(
+	public List<Permission> getOrgGroupPermissions(
 			long organizationId, long groupId, long resourceId)
 		throws SystemException {
 
@@ -171,28 +174,28 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	public long getLatestPermissionId()
 		throws PortalException, SystemException {
 
-		List list = permissionPersistence.findAll(
+		List<Permission> permissions = permissionPersistence.findAll(
 			0, 1, new PermissionComparator());
 
-		if (list.size() == 0) {
+		if (permissions.size() == 0) {
 			return 0;
 		}
 		else {
-			Permission permission = (Permission)list.get(0);
+			Permission permission = permissions.get(0);
 
 			return permission.getPermissionId();
 		}
 	}
 
-	public List getPermissions(
+	public List<Permission> getPermissions(
 			long companyId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
-		List permissions = new ArrayList();
+		List<Permission> permissions = new ArrayList<Permission>();
 
 		for (int i = 0; i < actionIds.length; i++) {
-			Permission permission =
-				addPermission(companyId, actionIds[i], resourceId);
+			Permission permission = addPermission(
+				companyId, actionIds[i], resourceId);
 
 			permissions.add(permission);
 		}
@@ -200,25 +203,25 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		return permissions;
 	}
 
-	public List getRolePermissions(long roleId)
+	public List<Permission> getRolePermissions(long roleId)
 		throws PortalException, SystemException {
 
 		return rolePersistence.getPermissions(roleId);
 	}
 
-	public List getRolePermissions(long roleId, long resourceId)
+	public List<Permission> getRolePermissions(long roleId, long resourceId)
 		throws SystemException {
 
 		return permissionFinder.findByR_R(roleId, resourceId);
 	}
 
-	public List getUserPermissions(long userId, long resourceId)
+	public List<Permission> getUserPermissions(long userId, long resourceId)
 		throws SystemException {
 
 		return permissionFinder.findByU_R(userId, resourceId);
 	}
 
-	public List getUserPermissions(
+	public List<Permission> getUserPermissions(
 			long userId, long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
@@ -255,12 +258,10 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
 			companyId, name, scope);
 
-		Iterator itr = resourcePersistence.findByCodeId(
-			resourceCode.getCodeId()).iterator();
+		List<Resource> resources = resourcePersistence.findByCodeId(
+			resourceCode.getCodeId());
 
-		while (itr.hasNext()) {
-			Resource resource = (Resource)itr.next();
-
+		for (Resource resource : resources) {
 			try {
 				Permission permission = permissionPersistence.findByA_R(
 					actionId, resource.getResourceId());
@@ -349,7 +350,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return false;
 		}
 
-		List permissions = permissionFinder.findByA_R(actionId, resourceIds);
+		List<Permission> permissions = permissionFinder.findByA_R(
+			actionId, resourceIds);
 
 		// Return false if there are no permissions
 
@@ -363,13 +365,13 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
-		//List userGroups = permissionCheckerBag.getUserGroups();
-		//List userOrgs = permissionCheckerBag.getUserOrgs();
-		//List userOrgGroups = permissionCheckerBag.getUserOrgGroups();
-		//List userUserGroupGroups =
+		//List<Group> userGroups = permissionCheckerBag.getUserGroups();
+		//List<Organization> userOrgs = permissionCheckerBag.getUserOrgs();
+		//List<Group> userOrgGroups = permissionCheckerBag.getUserOrgGroups();
+		//List<Group> userUserGroupGroups =
 		//	permissionCheckerBag.getUserUserGroupGroups();
-		List groups = permissionCheckerBag.getGroups();
-		List roles = permissionCheckerBag.getRoles();
+		List<Group> groups = permissionCheckerBag.getGroups();
+		List<Role> roles = permissionCheckerBag.getRoles();
 
 		logHasUserPermissions(userId, actionId, resourceId, stopWatch, block++);
 
@@ -413,16 +415,14 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
 
-		Iterator itr = permissionFinder.findByG_R(
-			groupId, resourceId).iterator();
+		List<Permission> permissions = permissionFinder.findByG_R(
+			groupId, resourceId);
 
-		while (itr.hasNext()) {
-			Permission permission = (Permission)itr.next();
-
+		for (Permission permission : permissions) {
 			groupPersistence.removePermission(groupId, permission);
 		}
 
-		List permissions = getPermissions(
+		permissions = getPermissions(
 			group.getCompanyId(), actionIds, resourceId);
 
 		groupPersistence.addPermissions(groupId, permissions);
@@ -470,24 +470,20 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		long orgGroupId = organization.getGroup().getGroupId();
 
-		Iterator itr = permissionPersistence.findByResourceId(
-			resourceId).iterator();
+		List<Permission> permissions = permissionPersistence.findByResourceId(
+			resourceId);
 
-		while (itr.hasNext()) {
-			Permission permission = (Permission)itr.next();
-
+		for (Permission permission : permissions) {
 			groupPersistence.removePermission(orgGroupId, permission);
 		}
 
-		itr = getPermissions(
-			organization.getCompanyId(), actionIds, resourceId).iterator();
+		permissions = getPermissions(
+			organization.getCompanyId(), actionIds, resourceId);
 
 		orgGroupPermissionFinder.removeByO_G_R(
 			organizationId, groupId, resourceId);
 
-		while (itr.hasNext()) {
-			Permission permission = (Permission)itr.next();
-
+		for (Permission permission : permissions) {
 			OrgGroupPermissionPK pk = new OrgGroupPermissionPK(
 				organizationId, groupId, permission.getPermissionId());
 
@@ -569,7 +565,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		Role role = rolePersistence.findByPrimaryKey(roleId);
 
-		List permissions = permissionFinder.findByR_R(roleId, resourceId);
+		List<Permission> permissions = permissionFinder.findByR_R(
+			roleId, resourceId);
 
 		rolePersistence.removePermissions(roleId, permissions);
 
@@ -587,7 +584,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 
 		User user = userPersistence.findByPrimaryKey(userId);
 
-		List permissions = permissionFinder.findByU_R(userId, resourceId);
+		List<Permission> permissions = permissionFinder.findByU_R(
+			userId, resourceId);
 
 		userPersistence.removePermissions(userId, permissions);
 
@@ -648,12 +646,10 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		ResourceCode resourceCode = resourceCodeLocalService.getResourceCode(
 			companyId, name, scope);
 
-		Iterator itr = resourcePersistence.findByCodeId(
-			resourceCode.getCodeId()).iterator();
+		List<Resource> resources = resourcePersistence.findByCodeId(
+			resourceCode.getCodeId());
 
-		while (itr.hasNext()) {
-			Resource resource = (Resource)itr.next();
-
+		for (Resource resource : resources) {
 			try {
 				Permission permission = permissionPersistence.findByA_R(
 					actionId, resource.getResourceId());
@@ -671,7 +667,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			long userId, String[] actionIds, long resourceId)
 		throws PortalException, SystemException {
 
-		List permissions = permissionFinder.findByU_A_R(
+		List<Permission> permissions = permissionFinder.findByU_A_R(
 			userId, actionIds, resourceId);
 
 		userPersistence.removePermissions(userId, permissions);
@@ -680,12 +676,11 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean checkOrgGroupPermission(
-			List organizations, List groups, List permissions)
+			List<Organization> organizations, List<Group> groups,
+			List<Permission> permissions)
 		throws PortalException, SystemException {
 
-		for (int i = 0; i < permissions.size(); i++) {
-			Permission permission = (Permission)permissions.get(i);
-
+		for (Permission permission : permissions) {
 			if (checkOrgGroupPermission(organizations, groups, permission)) {
 				return true;
 			}
@@ -695,7 +690,8 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean checkOrgGroupPermission(
-			List organizations, List groups, Permission permission)
+			List<Organization> organizations, List<Group> groups,
+			Permission permission)
 		throws PortalException, SystemException {
 
 		// Do not check for an OrgGroupPermission intersection unless there is
@@ -708,7 +704,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 		// Do not check unless the OrgGroupPermission intersection contains at
 		// least one permission
 
-		List orgGroupPermissions =
+		List<OrgGroupPermission> orgGroupPermissions =
 			orgGroupPermissionPersistence.findByPermissionId(
 				permission.getPermissionId());
 
@@ -716,12 +712,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			return false;
 		}
 
-		Iterator itr = orgGroupPermissions.iterator();
-
-		while (itr.hasNext()) {
-			OrgGroupPermission orgGroupPermission =
-				(OrgGroupPermission)itr.next();
-
+		for (OrgGroupPermission orgGroupPermission : orgGroupPermissions) {
 			if (orgGroupPermission.containsOrganization(organizations) &&
 				orgGroupPermission.containsGroup(groups)) {
 
@@ -738,8 +729,9 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean hasUserPermissions_1(
-			long userId, String actionId, long resourceId, List permissions,
-			List groups, long groupId, StopWatch stopWatch, int block)
+			long userId, String actionId, long resourceId,
+			List<Permission> permissions, List<Group> groups, long groupId,
+			StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
 		// Is the user connected to one of the permissions via group or
@@ -796,8 +788,9 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean hasUserPermissions_2(
-			long userId, String actionId, long resourceId, List permissions,
-			List groups, long groupId, StopWatch stopWatch, int block)
+			long userId, String actionId, long resourceId,
+			List<Permission> permissions, List<Group> groups, long groupId,
+			StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
 		// Call countByGroupsRoles, countByGroupsPermissions, countByUsersRoles,
@@ -815,8 +808,9 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean hasUserPermissions_3(
-			long userId, String actionId, long resourceId, List permissions,
-			List groups, List roles, StopWatch stopWatch, int block)
+			long userId, String actionId, long resourceId,
+			List<Permission> permissions, List<Group> groups, List<Role> roles,
+			StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
 		// Is the user associated with groups or organizations that are directly
@@ -857,8 +851,9 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 	}
 
 	protected boolean hasUserPermissions_4(
-			long userId, String actionId, long resourceId, List permissions,
-			List groups, List roles, StopWatch stopWatch, int block)
+			long userId, String actionId, long resourceId,
+			List<Permission> permissions, List<Group> groups, List<Role> roles,
+			StopWatch stopWatch, int block)
 		throws PortalException, SystemException {
 
 		// Call countByGroupsPermissions, countByRolesPermissions, and

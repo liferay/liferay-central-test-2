@@ -46,7 +46,7 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 		List<String> models = ModelHintsUtil.getModels();
 
 		for (int i = 0; i < models.size(); i++) {
-			String value = (String)models.get(i);
+			String value = models.get(i);
 
 			getClassName(value);
 		}

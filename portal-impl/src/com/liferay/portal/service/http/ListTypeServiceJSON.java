@@ -82,7 +82,7 @@ public class ListTypeServiceJSON {
 
 	public static JSONArray getListTypes(java.lang.String type)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List returnValue = ListTypeServiceUtil.getListTypes(type);
+		java.util.List<com.liferay.portal.model.ListType> returnValue = ListTypeServiceUtil.getListTypes(type);
 
 		return ListTypeJSONSerializer.toJSONArray(returnValue);
 	}

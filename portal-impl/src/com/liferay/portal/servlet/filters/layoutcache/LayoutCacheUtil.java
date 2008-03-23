@@ -27,10 +27,11 @@ import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.filters.CacheResponseData;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -113,6 +114,7 @@ public class LayoutCacheUtil {
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
-	private static Map _groups = CollectionFactory.getSyncHashMap();
+	private static Map<String, Set<String>> _groups =
+		new ConcurrentHashMap<String, Set<String>>();
 
 }

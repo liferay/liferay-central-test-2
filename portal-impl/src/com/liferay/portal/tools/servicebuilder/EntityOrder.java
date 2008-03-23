@@ -32,7 +32,7 @@ import java.util.List;
  */
 public class EntityOrder {
 
-	public EntityOrder(boolean asc, List columns) {
+	public EntityOrder(boolean asc, List<EntityColumn> columns) {
 		_asc = asc;
 		_columns = columns;
 	}
@@ -41,11 +41,11 @@ public class EntityOrder {
 		return _asc;
 	}
 
-	public List getColumns() {
+	public List<EntityColumn> getColumns() {
 		return _columns;
 	}
 
 	private boolean _asc;
-	private List _columns;
+	private List<EntityColumn> _columns;
 
 }

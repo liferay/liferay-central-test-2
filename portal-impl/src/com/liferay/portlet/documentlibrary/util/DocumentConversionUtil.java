@@ -151,7 +151,7 @@ public class DocumentConversionUtil {
 	}
 
 	private String[] _getConversions(String extension) {
-		String[] conversions = (String[])_conversionsMap.get(extension);
+		String[] conversions = _conversionsMap.get(extension);
 
 		if (conversions == null) {
 			conversions = _DEFAULT_CONVERSIONS;

@@ -94,7 +94,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 		PermissionFinder.class.getName() + ".findByU_C_N_S_P";
 
 	public boolean containsPermissions_2(
-			List permissions, long userId, List groups, long groupId)
+			List<Permission> permissions, long userId, List<Group> groups,
+			long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -204,10 +205,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -225,7 +226,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 	}
 
 	public boolean containsPermissions_4(
-			List permissions, long userId, List groups, List roles)
+			List<Permission> permissions, long userId, List<Group> groups,
+			List<Role> roles)
 		throws SystemException {
 
 		Session session = null;
@@ -308,10 +310,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if ((count != null) && (count.intValue() > 0)) {
 					return true;
@@ -328,7 +330,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public int countByGroupsPermissions(List permissions, List groups)
+	public int countByGroupsPermissions(
+			List<Permission> permissions, List<Group> groups)
 		throws SystemException {
 
 		Session session = null;
@@ -354,10 +357,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 			setPermissionIds(qPos, permissions);
 			setGroupIds(qPos, groups);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -374,7 +377,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public int countByGroupsRoles(List permissions, List groups)
+	public int countByGroupsRoles(
+			List<Permission> permissions, List<Group> groups)
 		throws SystemException {
 
 		Session session = null;
@@ -399,10 +403,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 			setPermissionIds(qPos, permissions);
 			setGroupIds(qPos, groups);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -419,7 +423,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public int countByRolesPermissions(List permissions, List roles)
+	public int countByRolesPermissions(
+			List<Permission> permissions, List<Role> roles)
 		throws SystemException {
 
 		Session session = null;
@@ -444,10 +449,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 			setPermissionIds(qPos, permissions);
 			setRoleIds(qPos, roles);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -464,7 +469,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public int countByUserGroupRole(List permissions, long userId, long groupId)
+	public int countByUserGroupRole(
+			List<Permission> permissions, long userId, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -488,10 +494,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -508,7 +514,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public int countByUsersPermissions(List permissions, long userId)
+	public int countByUsersPermissions(
+			List<Permission> permissions, long userId)
 		throws SystemException {
 
 		Session session = null;
@@ -531,10 +538,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -551,7 +558,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public int countByUsersRoles(List permissions, long userId)
+	public int countByUsersRoles(List<Permission> permissions, long userId)
 		throws SystemException {
 
 		Session session = null;
@@ -574,10 +581,10 @@ public class PermissionFinderImpl implements PermissionFinder {
 			setPermissionIds(qPos, permissions);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -594,7 +601,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public List findByA_R(String actionId, long[] resourceIds)
+	public List<Permission> findByA_R(String actionId, long[] resourceIds)
 		throws SystemException {
 
 		boolean finderClassNameCacheEnabled = PermissionModelImpl.CACHE_ENABLED;
@@ -630,13 +637,13 @@ public class PermissionFinderImpl implements PermissionFinder {
 				qPos.add(actionId);
 				setResourceIds(qPos, resourceIds);
 
-				List list = q.list();
+				List<Permission> permissions = q.list();
 
 				FinderCache.putResult(
 					finderClassNameCacheEnabled, finderClassName,
-					finderMethodName, finderParams, finderArgs, list);
+					finderMethodName, finderParams, finderArgs, permissions);
 
-				return list;
+				return permissions;
 			}
 			catch (Exception e) {
 				throw new SystemException(e);
@@ -646,11 +653,11 @@ public class PermissionFinderImpl implements PermissionFinder {
 			}
 		}
 		else {
-			return (List)result;
+			return (List<Permission>)result;
 		}
 	}
 
-	public List findByG_R(long groupId, long resourceId)
+	public List<Permission> findByG_R(long groupId, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -679,7 +686,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public List findByR_R(long roleId, long resourceId) throws SystemException {
+	public List<Permission> findByR_R(
+			long roleId, long resourceId) throws SystemException {
 		Session session = null;
 
 		try {
@@ -706,7 +714,9 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public List findByU_R(long userId, long resourceId) throws SystemException {
+	public List<Permission> findByU_R(long userId, long resourceId)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
@@ -733,7 +743,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public List findByO_G_R(long organizationId, long groupId, long resourceId)
+	public List<Permission> findByO_G_R(
+			long organizationId, long groupId, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -763,7 +774,8 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public List findByU_A_R(long userId, String[] actionIds, long resourceId)
+	public List<Permission> findByU_A_R(
+			long userId, String[] actionIds, long resourceId)
 		throws SystemException {
 
 		Session session = null;
@@ -795,7 +807,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public List findByG_C_N_S_P(
+	public List<Permission> findByG_C_N_S_P(
 			long groupId, long companyId, String name, int scope,
 			String primKey)
 		throws SystemException {
@@ -829,7 +841,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		}
 	}
 
-	public List findByU_C_N_S_P(
+	public List<Permission> findByU_C_N_S_P(
 			long userId, long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
@@ -876,7 +888,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		return sm.toString();
 	}
 
-	protected String getGroupIds(List groups, String table) {
+	protected String getGroupIds(List<Group> groups, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < groups.size(); i++) {
@@ -891,7 +903,9 @@ public class PermissionFinderImpl implements PermissionFinder {
 		return sm.toString();
 	}
 
-	protected String getPermissionIds(List permissions, String table) {
+	protected String getPermissionIds(
+		List<Permission> permissions, String table) {
+
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < permissions.size(); i++) {
@@ -920,7 +934,7 @@ public class PermissionFinderImpl implements PermissionFinder {
 		return sm.toString();
 	}
 
-	protected String getRoleIds(List roles, String table) {
+	protected String getRoleIds(List<Role> roles, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < roles.size(); i++) {
@@ -935,34 +949,28 @@ public class PermissionFinderImpl implements PermissionFinder {
 		return sm.toString();
 	}
 
-	protected void setGroupIds(QueryPos qPos, List groups) {
-		for (int i = 0; i < groups.size(); i++) {
-			Group group = (Group)groups.get(i);
-
+	protected void setGroupIds(QueryPos qPos, List<Group> groups) {
+		for (Group group : groups) {
 			qPos.add(group.getGroupId());
 		}
 	}
 
-	protected void setPermissionIds(QueryPos qPos, List permissions) {
-		for (int i = 0; i < permissions.size(); i++) {
-			Permission permission = (Permission)permissions.get(i);
+	protected void setPermissionIds(
+		QueryPos qPos, List<Permission> permissions) {
 
+		for (Permission permission : permissions) {
 			qPos.add(permission.getPermissionId());
 		}
 	}
 
 	protected void setResourceIds(QueryPos qPos, long[] resourceIds) {
-		for (int i = 0; i < resourceIds.length; i++) {
-			long resourceId = resourceIds[i];
-
+		for (long resourceId : resourceIds) {
 			qPos.add(resourceId);
 		}
 	}
 
-	protected void setRoleIds(QueryPos qPos, List roles) {
-		for (int i = 0; i < roles.size(); i++) {
-			Role role = (Role)roles.get(i);
-
+	protected void setRoleIds(QueryPos qPos, List<Role> roles) {
+		for (Role role : roles) {
 			qPos.add(role.getRoleId());
 		}
 	}

@@ -81,12 +81,12 @@ public class WSDDBuilder {
 
 			_packagePath = packagePath;
 
-			List entities = root.elements("entity");
+			List<Element> entities = root.elements("entity");
 
-			Iterator itr = entities.iterator();
+			Iterator<Element> itr = entities.iterator();
 
 			while (itr.hasNext()) {
-				Element entity = (Element)itr.next();
+				Element entity = itr.next();
 
 				String entityName = entity.attributeValue("name");
 

@@ -36,14 +36,16 @@ import java.util.List;
  */
 public class Entity {
 
-	public static EntityColumn getColumn(String name, List columnList) {
+	public static EntityColumn getColumn(
+		String name, List<EntityColumn> columnList) {
+
 		int pos = columnList.indexOf(new EntityColumn(name));
 
 		if (pos == -1) {
 			throw new RuntimeException("Column " + name + " not found");
 		}
 
-		return (EntityColumn)columnList.get(pos);
+		return columnList.get(pos);
 	}
 
 	public Entity(String name) {
@@ -56,10 +58,11 @@ public class Entity {
 		String packagePath, String portletName, String portletShortName,
 		String name, String table, boolean uuid, boolean localService,
 		boolean remoteService, String persistenceClass, String finderClass,
-		String dataSource, String sessionFactory, String txManager, List pkList,
-		List regularColList, List collectionList, List columnList,
-		EntityOrder order, List finderList, List referenceList,
-		List txRequiredList) {
+		String dataSource, String sessionFactory, String txManager,
+		List<EntityColumn> pkList, List<EntityColumn> regularColList,
+		List<EntityColumn> collectionList, List<EntityColumn> columnList,
+		EntityOrder order, List<EntityFinder> finderList,
+		List<Entity> referenceList, List<String> txRequiredList) {
 
 		_packagePath = packagePath;
 		_portletName = portletName;
@@ -173,7 +176,7 @@ public class Entity {
 			return _name + "PK";
 		}
 		else {
-			EntityColumn col = (EntityColumn)_pkList.get(0);
+			EntityColumn col = _pkList.get(0);
 
 			return col.getType();
 		}
@@ -184,7 +187,7 @@ public class Entity {
 			return getVarName() + "PK";
 		}
 		else {
-			EntityColumn col = (EntityColumn)_pkList.get(0);
+			EntityColumn col = _pkList.get(0);
 
 			return col.getName();
 		}
@@ -195,7 +198,7 @@ public class Entity {
 			return false;
 		}
 		else {
-			EntityColumn col = (EntityColumn)_pkList.get(0);
+			EntityColumn col = _pkList.get(0);
 
 			if (col.isPrimitiveType()) {
 				return true;
@@ -215,19 +218,19 @@ public class Entity {
 		}
 	}
 
-	public List getPKList() {
+	public List<EntityColumn> getPKList() {
 		return _pkList;
 	}
 
-	public List getRegularColList() {
+	public List<EntityColumn> getRegularColList() {
 		return _regularColList;
 	}
 
-	public List getCollectionList() {
+	public List<EntityColumn> getCollectionList() {
 		return _collectionList;
 	}
 
-	public List getColumnList() {
+	public List<EntityColumn> getColumnList() {
 		return _columnList;
 	}
 
@@ -253,15 +256,15 @@ public class Entity {
 		}
 	}
 
-	public List getFinderList() {
+	public List<EntityFinder> getFinderList() {
 		return _finderList;
 	}
 
-	public List getReferenceList() {
+	public List<Entity> getReferenceList() {
 		return _referenceList;
 	}
 
-	public List getTxRequiredList() {
+	public List<String> getTxRequiredList() {
 		return _txRequiredList;
 	}
 
@@ -271,7 +274,7 @@ public class Entity {
 
 	public EntityColumn getColumnByMappingTable(String mappingTable) {
 		for (int i = 0; i < _columnList.size(); i++) {
-			EntityColumn col = (EntityColumn)_columnList.get(i);
+			EntityColumn col = _columnList.get(i);
 
 			if (col.getMappingTable() != null &&
 				col.getMappingTable().equals(mappingTable)) {
@@ -309,13 +312,13 @@ public class Entity {
 	private String _dataSource;
 	private String _sessionFactory;
 	private String _txManager;
-	private List _pkList;
-	private List _regularColList;
-	private List _collectionList;
-	private List _columnList;
+	private List<EntityColumn> _pkList;
+	private List<EntityColumn> _regularColList;
+	private List<EntityColumn> _collectionList;
+	private List<EntityColumn> _columnList;
 	private EntityOrder _order;
-	private List _finderList;
-	private List _referenceList;
-	private List _txRequiredList;
+	private List<EntityFinder> _finderList;
+	private List<Entity> _referenceList;
+	private List<String> _txRequiredList;
 
 }

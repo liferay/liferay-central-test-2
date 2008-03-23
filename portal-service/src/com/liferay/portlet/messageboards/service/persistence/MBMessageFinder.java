@@ -29,7 +29,7 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public interface MBMessageFinder {
-	public int countByCategoryIds(java.util.List categoryIds)
+	public int countByCategoryIds(java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
@@ -38,14 +38,16 @@ public interface MBMessageFinder {
 	public int countByG_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByGroupId(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByNoAssets()
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByNoAssets()
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.messageboards.model.MBMessage findByUuid_G(
@@ -53,13 +55,16 @@ public interface MBMessageFinder {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.messageboards.NoSuchMessageException;
 
-	public java.util.List findByG_U(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByG_U(long groupId, long userId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
+		long groupId, long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_C(long classNameId, long classPK)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByG_U(
+		long groupId, long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.messageboards.model.MBMessage> findByC_C(
+		long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 }

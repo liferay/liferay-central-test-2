@@ -26,9 +26,10 @@ import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.cache.PortalCache;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.CollectionFactory;
+import com.liferay.portlet.PortletPreferencesImpl;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="PortletPreferencesLocalUtil.java.html"><b><i>View Source</i></b></a>
@@ -52,13 +53,16 @@ public class PortletPreferencesLocalUtil {
 		_cache.remove(key);
 	}
 
-	protected static Map getPreferencesPool(long ownerId, int ownerType) {
+	protected static Map<String, PortletPreferencesImpl> getPreferencesPool(
+			long ownerId, int ownerType) {
 		String key = _encodeKey(ownerId, ownerType);
 
-		Map prefsPool = (Map)MultiVMPoolUtil.get(_cache, key);
+		Map<String, PortletPreferencesImpl> prefsPool =
+			(Map<String, PortletPreferencesImpl>)MultiVMPoolUtil.get(
+				_cache, key);
 
 		if (prefsPool == null) {
-			prefsPool = CollectionFactory.getSyncHashMap();
+			prefsPool = new ConcurrentHashMap<String, PortletPreferencesImpl>();
 
 			MultiVMPoolUtil.put(_cache, key, prefsPool);
 		}

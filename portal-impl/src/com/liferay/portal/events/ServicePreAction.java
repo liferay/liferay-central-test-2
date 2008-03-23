@@ -289,19 +289,23 @@ public class ServicePreAction extends Action {
 			long userId, long groupId, boolean privateLayout, File larFile)
 		throws PortalException, SystemException {
 
-		Map parameterMap = new HashMap();
+		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
 
 		parameterMap.put(
-			PortletDataHandlerKeys.PERMISSIONS, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PERMISSIONS,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS, Boolean.FALSE.toString());
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_DATA,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
-			Boolean.TRUE.toString());
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_SETUP,
+			new String[] {Boolean.TRUE.toString()});
 
 		LayoutLocalServiceUtil.importLayouts(
 			userId, groupId, privateLayout, parameterMap, larFile);

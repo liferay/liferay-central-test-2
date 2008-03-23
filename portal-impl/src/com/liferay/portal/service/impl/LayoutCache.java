@@ -40,7 +40,6 @@ import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.HashMap;
@@ -62,15 +61,15 @@ public class LayoutCache  {
 
 		long entityGroupId = 0;
 
-		Long entityGroupIdObj = (Long)entityGroupIdMap.get(entityName);
+		Long entityGroupIdObj = entityGroupIdMap.get(entityName);
 
 		if (entityGroupIdObj == null) {
 			if (entityName.equals("user-group")) {
-				List userGroups = UserGroupLocalServiceUtil.search(
+				List<UserGroup> userGroups = UserGroupLocalServiceUtil.search(
 					companyId, name, null, null, 0, 1, null);
 
 				if (userGroups.size() > 0) {
-					UserGroup userGroup = (UserGroup)userGroups.get(0);
+					UserGroup userGroup = userGroups.get(0);
 
 					Group group = userGroup.getGroup();
 
@@ -80,7 +79,7 @@ public class LayoutCache  {
 			else if (entityName.equals("organization") ||
 					 entityName.equals("location")) {
 
-				List organizations = null;
+				List<Organization> organizations = null;
 
 				if (entityName.equals("organization")) {
 					organizations = OrganizationLocalServiceUtil.search(
@@ -96,8 +95,7 @@ public class LayoutCache  {
 				}
 
 				if (organizations.size() > 0) {
-					Organization organization =
-						(Organization)organizations.get(0);
+					Organization organization = organizations.get(0);
 
 					Group group = organization.getGroup();
 
@@ -105,7 +103,7 @@ public class LayoutCache  {
 				}
 			}
 
-			entityGroupIdMap.put(entityName, entityGroupIdObj);
+			entityGroupIdMap.put(entityName, entityGroupId);
 		}
 		else {
 			entityGroupId = entityGroupIdObj.longValue();
@@ -114,32 +112,31 @@ public class LayoutCache  {
 		return entityGroupId;
 	}
 
-	protected Map getEntityMap(long companyId, String entityName)
+	protected Map<String, Long> getEntityMap(long companyId, String entityName)
 		throws PortalException, SystemException {
 
-		Map entityMap = (Map)entityMapMap.get(entityName);
+		Map<String, Long> entityMap = entityMapMap.get(entityName);
 
 		if (entityMap == null) {
-			entityMap = new HashMap();
+			entityMap = new HashMap<String, Long>();
 
 			if (entityName.equals("user-group")) {
-				List userGroups = UserGroupLocalServiceUtil.search(
+				List<UserGroup> userGroups = UserGroupLocalServiceUtil.search(
 					companyId, null, null, null, QueryUtil.ALL_POS,
 					QueryUtil.ALL_POS, null);
 
 				for (int i = 0; i < userGroups.size(); i++) {
-					UserGroup userGroup = (UserGroup)userGroups.get(i);
+					UserGroup userGroup = userGroups.get(i);
 
 					Group group = userGroup.getGroup();
 
-					entityMap.put(
-						userGroup.getName(), new Long(group.getGroupId()));
+					entityMap.put(userGroup.getName(), group.getGroupId());
 				}
 			}
 			else if (entityName.equals("organization") ||
 					 entityName.equals("location")) {
 
-				List organizations = null;
+				List<Organization> organizations = null;
 
 				if (entityName.equals("organization")) {
 					organizations = OrganizationLocalServiceUtil.search(
@@ -155,13 +152,11 @@ public class LayoutCache  {
 				}
 
 				for (int i = 0; i < organizations.size(); i++) {
-					Organization organization =
-						(Organization)organizations.get(i);
+					Organization organization = organizations.get(i);
 
 					Group group = organization.getGroup();
 
-					entityMap.put(
-						organization.getName(), new Long(group.getGroupId()));
+					entityMap.put(organization.getName(), group.getGroupId());
 				}
 			}
 
@@ -171,31 +166,29 @@ public class LayoutCache  {
 		return entityMap;
 	}
 
-	protected List getGroupRoles(long groupId)
+	protected List<Role> getGroupRoles(long groupId)
 		throws PortalException, SystemException {
 
-		Long groupIdObj = new Long(groupId);
-
-		List roles = (List)groupRolesMap.get(groupIdObj);
+		List<Role> roles = groupRolesMap.get(groupId);
 
 		if (roles == null) {
 			roles = RoleLocalServiceUtil.getGroupRoles(groupId);
 
-			groupRolesMap.put(groupIdObj, roles);
+			groupRolesMap.put(groupId, roles);
 		}
 
 		return roles;
 	}
 
-	protected List getGroupUsers(long groupId)
+	protected List<User> getGroupUsers(long groupId)
 		throws PortalException, SystemException {
 
-		List users = (List)groupUsersMap.get(new Long(groupId));
+		List<User> users = groupUsersMap.get(groupId);
 
 		if (users == null) {
 			users = UserLocalServiceUtil.getGroupUsers(groupId);
 
-			groupUsersMap.put(new Long(groupId), users);
+			groupUsersMap.put(groupId, users);
 		}
 
 		return users;
@@ -216,7 +209,7 @@ public class LayoutCache  {
 
 		String key = sm.toString();
 
-		Resource resource = (Resource)resourcesMap.get(key);
+		Resource resource = resourcesMap.get(key);
 
 		if (resource == null) {
 			try {
@@ -241,7 +234,7 @@ public class LayoutCache  {
 	protected Role getRole(long companyId, String roleName)
 		throws PortalException, SystemException {
 
-		Role role = (Role)rolesMap.get(roleName);
+		Role role = rolesMap.get(roleName);
 
 		if (role == null) {
 			try {
@@ -259,10 +252,11 @@ public class LayoutCache  {
 	protected User getUser(long companyId, long groupId, String emailAddress)
 		throws PortalException, SystemException {
 
-		List users = (List)usersMap.get(emailAddress);
+		List<User> users = usersMap.get(emailAddress);
 
 		if (users == null) {
-			LinkedHashMap params = new LinkedHashMap();
+			LinkedHashMap<String, Object> params =
+				new LinkedHashMap<String, Object>();
 
 			params.put("usersGroups", new Long(groupId));
 
@@ -277,33 +271,37 @@ public class LayoutCache  {
 			return null;
 		}
 		else {
-			return (User)users.get(0);
+			return users.get(0);
 		}
 	}
 
-	protected List getUserRoles(long userId)
+	protected List<Role> getUserRoles(long userId)
 		throws PortalException, SystemException {
 
-		Long userIdObj = new Long(userId);
-
-		List userRoles = (List)userRolesMap.get(userIdObj);
+		List<Role> userRoles = userRolesMap.get(userId);
 
 		if (userRoles == null) {
 			userRoles = RoleLocalServiceUtil.getUserRoles(userId);
 
-			userRolesMap.put(userIdObj, userRoles);
+			userRolesMap.put(userId, userRoles);
 		}
 
 		return userRoles;
 	}
 
-	protected Map entityGroupIdMap = CollectionFactory.getHashMap();
-    protected Map entityMapMap = CollectionFactory.getHashMap();
-    protected Map groupRolesMap = CollectionFactory.getHashMap();
-    protected Map groupUsersMap = CollectionFactory.getHashMap();
-    protected Map resourcesMap = CollectionFactory.getHashMap();
-    protected Map rolesMap = CollectionFactory.getHashMap();
-    protected Map userRolesMap = CollectionFactory.getHashMap();
-    protected Map usersMap = CollectionFactory.getHashMap();
+	protected Map<String, Long> entityGroupIdMap = new HashMap<String, Long>();
+    protected Map<String, Map<String, Long>> entityMapMap =
+    	new HashMap<String, Map<String, Long>>();
+    protected Map<Long, List<Role>> groupRolesMap =
+    	new HashMap<Long, List<Role>>();
+    protected Map<Long, List<User>> groupUsersMap =
+    	new HashMap<Long, List<User>>();
+    protected Map<String, Resource> resourcesMap =
+    	new HashMap<String, Resource>();
+    protected Map<String, Role> rolesMap = new HashMap<String, Role>();
+    protected Map<Long, List<Role>> userRolesMap =
+    	new HashMap<Long, List<Role>>();
+    protected Map<String, List<User>> usersMap =
+    	new HashMap<String, List<User>>();
 
 }

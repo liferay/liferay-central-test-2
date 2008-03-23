@@ -87,7 +87,7 @@ public class IGImageFinderImpl implements IGImageFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				Long folderId = (Long)folderIds.get(i);
+				Long folderId = folderIds.get(i);
 
 				qPos.add(folderId);
 			}

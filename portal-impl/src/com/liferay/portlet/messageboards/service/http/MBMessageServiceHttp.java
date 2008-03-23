@@ -151,8 +151,9 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, java.lang.String[] tagsEntries,
+		java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -226,8 +227,9 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, java.lang.String[] tagsEntries,
+		java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
@@ -310,8 +312,9 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, java.lang.String[] tagsEntries,
+		java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -401,8 +404,9 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long categoryId, java.lang.String subject,
-		java.lang.String body, java.util.List files, boolean anonymous,
-		double priority, java.lang.String[] tagsEntries,
+		java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		javax.portlet.PortletPreferences prefs,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
@@ -502,9 +506,9 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -583,8 +587,8 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
@@ -673,8 +677,9 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
 		boolean addCommunityPermissions, boolean addGuestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
@@ -768,8 +773,9 @@ public class MBMessageServiceHttp {
 	public static com.liferay.portlet.messageboards.model.MBMessage addMessage(
 		HttpPrincipal httpPrincipal, long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		javax.portlet.PortletPreferences prefs,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
@@ -943,7 +949,7 @@ public class MBMessageServiceHttp {
 		}
 	}
 
-	public static java.util.List getCategoryMessages(
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBMessage> getCategoryMessages(
 		HttpPrincipal httpPrincipal, long categoryId, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -975,7 +981,7 @@ public class MBMessageServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.messageboards.model.MBMessage>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -1574,8 +1580,9 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		HttpPrincipal httpPrincipal, long messageId, java.lang.String subject,
-		java.lang.String body, java.util.List files,
-		java.util.List existingFiles, double priority,
+		java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		java.util.List<String> existingFiles, double priority,
 		java.lang.String[] tagsEntries)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -1649,8 +1656,9 @@ public class MBMessageServiceHttp {
 
 	public static com.liferay.portlet.messageboards.model.MBMessage updateMessage(
 		HttpPrincipal httpPrincipal, long messageId, java.lang.String subject,
-		java.lang.String body, java.util.List files,
-		java.util.List existingFiles, double priority,
+		java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		java.util.List<String> existingFiles, double priority,
 		java.lang.String[] tagsEntries, javax.portlet.PortletPreferences prefs,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,

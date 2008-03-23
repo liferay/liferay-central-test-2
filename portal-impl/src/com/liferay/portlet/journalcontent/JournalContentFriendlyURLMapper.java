@@ -91,7 +91,7 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	public void populateParams(
-		String friendlyURLPath, Map<String, String> params) {
+		String friendlyURLPath, Map<String, String[]> params) {
 
 		int w = friendlyURLPath.indexOf("/", 1);
 		int x = friendlyURLPath.indexOf("/", w + 1);
@@ -112,20 +112,22 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 
 			namespace = StringPool.UNDERLINE + portletId + StringPool.UNDERLINE;
 
-			params.put("p_p_id", portletId);
-			params.put("p_p_state", WindowState.MAXIMIZED.toString());
+			params.put("p_p_id", new String[] {portletId});
+			params.put(
+				"p_p_state", new String[] {WindowState.MAXIMIZED.toString()});
 		}
 		else {
-			params.put("p_p_id", portletId);
-			params.put("p_p_state", WindowState.NORMAL.toString());
+			params.put("p_p_id", new String[] {portletId});
+			params.put(
+				"p_p_state", new String[] {WindowState.NORMAL.toString()});
 		}
 
-		params.put("p_p_lifecycle", "0");
-		params.put("p_p_mode", PortletMode.VIEW.toString());
+		params.put("p_p_lifecycle", new String[] {"0"});
+		params.put("p_p_mode", new String[] {PortletMode.VIEW.toString()});
 
 		String groupId = friendlyURLPath.substring(x + 1, y);
 
-		params.put(namespace + "groupId", groupId);
+		params.put(namespace + "groupId", new String[] {groupId});
 
 		String articleId = null;
 
@@ -133,20 +135,22 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 			articleId =
 				friendlyURLPath.substring(y + 1, friendlyURLPath.length());
 
-			params.put(namespace + "articleId", articleId);
+			params.put(namespace + "articleId", new String[] {articleId});
 		}
 		else {
 			articleId = friendlyURLPath.substring(y + 1, z);
 
-			params.put(namespace + "articleId", articleId);
+			params.put(namespace + "articleId", new String[] {articleId});
 
 			String templateId =
 				friendlyURLPath.substring(z + 1, friendlyURLPath.length());
 
-			params.put(namespace + "templateId", templateId);
+			params.put(namespace + "templateId", new String[] {templateId});
 		}
 
-		params.put(namespace + "struts_action", "/journal_content/view");
+		params.put(
+			namespace + "struts_action",
+			new String[] {"/journal_content/view"});
 	}
 
 	private static final String _MAPPING = "journal_content";

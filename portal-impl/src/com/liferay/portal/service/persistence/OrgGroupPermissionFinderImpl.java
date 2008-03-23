@@ -68,11 +68,10 @@ public class OrgGroupPermissionFinderImpl implements OrgGroupPermissionFinder {
 			qPos.add(organizationId);
 			qPos.add(groupId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<OrgGroupPermission> itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				OrgGroupPermission orgGroupPermission =
-					(OrgGroupPermission)itr.next();
+				OrgGroupPermission orgGroupPermission = itr.next();
 
 				OrgGroupPermissionUtil.remove(
 					orgGroupPermission.getPrimaryKey());

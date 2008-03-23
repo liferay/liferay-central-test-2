@@ -29,9 +29,9 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  *
  */
 public interface DLFileEntryAndShortcutFinder {
-	public int countByFolderIds(java.util.List folderIds)
+	public int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByFolderIds(java.util.List folderIds, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List findByFolderIds(java.util.List<Long> folderIds,
+		int begin, int end) throws com.liferay.portal.SystemException;
 }

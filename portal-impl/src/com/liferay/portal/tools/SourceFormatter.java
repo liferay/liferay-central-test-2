@@ -78,7 +78,7 @@ public class SourceFormatter {
 			content.substring(0, x) + imports +
 				content.substring(y + 1, content.length());
 
-		Set classes = ClassUtil.getClasses(
+		Set<String> classes = ClassUtil.getClasses(
 			new StringReader(content), className);
 
 		classes.add("_getMarkup");
@@ -139,7 +139,7 @@ public class SourceFormatter {
 			return imports + "\n";
 		}
 
-		List importsList = new ArrayList();
+		List<String> importsList = new ArrayList<String>();
 
 		BufferedReader br = new BufferedReader(new StringReader(imports));
 
@@ -160,7 +160,7 @@ public class SourceFormatter {
 		String temp = null;
 
 		for (int i = 0; i < importsList.size(); i++) {
-			String s = (String)importsList.get(i);
+			String s = importsList.get(i);
 
 			int pos = s.indexOf(".");
 
@@ -188,7 +188,7 @@ public class SourceFormatter {
 	private static void _formatJava() throws IOException {
 		String basedir = "../";
 
-		List list = new ArrayList();
+		List<File> list = new ArrayList<File>();
 
 		DirectoryScanner ds = new DirectoryScanner();
 
@@ -246,7 +246,7 @@ public class SourceFormatter {
 
 		String copyright = FileUtil.read("../copyright.txt");
 
-		String[] files = (String[])list.toArray(new String[list.size()]);
+		String[] files = list.toArray(new String[list.size()]);
 
 		for (int i = 0; i < files.length; i++) {
 			File file = new File(basedir + files[i]);
@@ -394,7 +394,7 @@ public class SourceFormatter {
 	private static void _formatJSP() throws IOException {
 		String basedir = "../";
 
-		List list = new ArrayList();
+		List<File> list = new ArrayList<File>();
 
 		DirectoryScanner ds = new DirectoryScanner();
 
@@ -408,7 +408,7 @@ public class SourceFormatter {
 
 		String copyright = FileUtil.read("../copyright.txt");
 
-		String[] files = (String[])list.toArray(new String[list.size()]);
+		String[] files = list.toArray(new String[list.size()]);
 
 		for (int i = 0; i < files.length; i++) {
 			File file = new File(basedir + files[i]);

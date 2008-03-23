@@ -48,7 +48,6 @@ import com.liferay.portlet.documentlibrary.service.base.DLFolderLocalServiceBase
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -258,12 +257,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 
 		// Folders
 
-		Iterator itr = dlFolderPersistence.findByG_P(
-			folder.getGroupId(), folder.getFolderId()).iterator();
+		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+			folder.getGroupId(), folder.getFolderId());
 
-		while (itr.hasNext()) {
-			DLFolder curFolder = (DLFolder)itr.next();
-
+		for (DLFolder curFolder : folders) {
 			deleteFolder(curFolder);
 		}
 
@@ -290,12 +287,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 	public void deleteFolders(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = dlFolderPersistence.findByG_P(
-			groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID).iterator();
+		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+			groupId, DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
 
-		while (itr.hasNext()) {
-			DLFolder folder = (DLFolder)itr.next();
-
+		for (DLFolder folder : folders) {
 			deleteFolder(folder);
 		}
 	}
@@ -312,17 +307,17 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return dlFolderPersistence.findByG_P_N(groupId, parentFolderId, name);
 	}
 
-	public List getFolders(long companyId) throws SystemException {
+	public List<DLFolder> getFolders(long companyId) throws SystemException {
 		return dlFolderPersistence.findByCompanyId(companyId);
 	}
 
-	public List getFolders(long groupId, long parentFolderId)
+	public List<DLFolder> getFolders(long groupId, long parentFolderId)
 		throws SystemException {
 
 		return dlFolderPersistence.findByG_P(groupId, parentFolderId);
 	}
 
-	public List getFolders(
+	public List<DLFolder> getFolders(
 			long groupId, long parentFolderId, int begin, int end)
 		throws SystemException {
 
@@ -336,16 +331,15 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		return dlFolderPersistence.countByG_P(groupId, parentFolderId);
 	}
 
-	public void getSubfolderIds(List folderIds, long groupId, long folderId)
+	public void getSubfolderIds(
+			List<Long> folderIds, long groupId, long folderId)
 		throws SystemException {
 
-		Iterator itr = dlFolderPersistence.findByG_P(
-			groupId, folderId).iterator();
+		List<DLFolder> folders = dlFolderPersistence.findByG_P(
+			groupId, folderId);
 
-		while (itr.hasNext()) {
-			DLFolder folder = (DLFolder)itr.next();
-
-			folderIds.add(new Long(folder.getFolderId()));
+		for (DLFolder folder : folders) {
+			folderIds.add(folder.getFolderId());
 
 			getSubfolderIds(
 				folderIds, folder.getGroupId(), folder.getFolderId());
@@ -356,11 +350,9 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		long companyId = GetterUtil.getLong(ids[0]);
 
 		try {
-			List folders = getFolders(companyId);
+			List<DLFolder> folders = getFolders(companyId);
 
-			for (int i = 0; i < folders.size(); i++) {
-				DLFolder folder = (DLFolder)folders.get(i);
-
+			for (DLFolder folder : folders) {
 				String portletId = PortletKeys.DOCUMENT_LIBRARY;
 				long groupId = folder.getGroupId();
 				long folderId = folder.getFolderId();
@@ -472,12 +464,12 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 				return folder.getParentFolderId();
 			}
 
-			List subfolderIds = new ArrayList();
+			List<Long> subfolderIds = new ArrayList<Long>();
 
 			getSubfolderIds(
 				subfolderIds, folder.getGroupId(), folder.getFolderId());
 
-			if (subfolderIds.contains(new Long(parentFolderId))) {
+			if (subfolderIds.contains(parentFolderId)) {
 				return folder.getParentFolderId();
 			}
 

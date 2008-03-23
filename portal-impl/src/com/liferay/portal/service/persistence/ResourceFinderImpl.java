@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -48,7 +49,7 @@ public class ResourceFinderImpl implements ResourceFinder {
 	public static String FIND_BY_C_P =
 		ResourceFinder.class.getName() + ".findByC_P";
 
-	public List findByName(String name) throws SystemException {
+	public List<Resource> findByName(String name) throws SystemException {
 		Session session = null;
 
 		try {
@@ -74,7 +75,7 @@ public class ResourceFinderImpl implements ResourceFinder {
 		}
 	}
 
-	public List findByC_P(long companyId, String primKey)
+	public List<Resource> findByC_P(long companyId, String primKey)
 		throws SystemException {
 
 		Session session = null;

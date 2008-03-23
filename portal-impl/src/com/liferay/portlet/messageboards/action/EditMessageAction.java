@@ -187,7 +187,8 @@ public class EditMessageAction extends PortletAction {
 		String body = ParamUtil.getString(req, "body");
 		boolean attachments = ParamUtil.getBoolean(req, "attachments");
 
-		List files = new ArrayList();
+		List<ObjectValuePair<String, byte[]>> files =
+			new ArrayList<ObjectValuePair<String, byte[]>>();
 
 		if (attachments) {
 			UploadPortletRequest uploadReq =
@@ -199,7 +200,8 @@ public class EditMessageAction extends PortletAction {
 				byte[] bytes = FileUtil.getBytes(file);
 
 				if ((bytes != null) && (bytes.length > 0)) {
-					ObjectValuePair ovp = new ObjectValuePair(fileName, bytes);
+					ObjectValuePair<String, byte[]> ovp =
+						new ObjectValuePair<String, byte[]>(fileName, bytes);
 
 					files.add(ovp);
 				}
@@ -244,7 +246,7 @@ public class EditMessageAction extends PortletAction {
 			}
 		}
 		else {
-			List existingFiles = new ArrayList();
+			List<String> existingFiles = new ArrayList<String>();
 
 			for (int i = 1; i <= 5; i++) {
 				String path = ParamUtil.getString(req, "existingPath" + i);

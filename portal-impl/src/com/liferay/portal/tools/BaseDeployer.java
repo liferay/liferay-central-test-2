@@ -206,7 +206,7 @@ public class BaseDeployer {
 		throws Exception {
 
 		for (int i = 0; i < jars.size(); i++) {
-			String jarFullName = (String)jars.get(i);
+			String jarFullName = jars.get(i);
 			String jarName = jarFullName.substring(
 				jarFullName.lastIndexOf("/") + 1, jarFullName.length());
 

@@ -58,7 +58,7 @@ public class RemotingServlet extends DispatcherServlet {
 	public static final String CONTEXT_CONFIG_LOCATION =
 		"/WEB-INF/remoting-servlet.xml,/WEB-INF/remoting-servlet-ext.xml";
 
-	public Class getContextClass() {
+	public Class<?> getContextClass() {
 		try {
 			return Class.forName(CONTEXT_CLASS);
 		}

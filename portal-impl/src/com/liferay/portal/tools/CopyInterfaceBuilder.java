@@ -96,7 +96,7 @@ public class CopyInterfaceBuilder {
 
 		// Methods
 
-		Set imports = new TreeSet();
+		Set<String> imports = new TreeSet<String>();
 
 		for (int i = 0; i < methods.length; i++) {
 			JavaMethod javaMethod = methods[i];
@@ -128,7 +128,7 @@ public class CopyInterfaceBuilder {
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
-				Set newExceptions = new LinkedHashSet();
+				Set<String> newExceptions = new LinkedHashSet<String>();
 
 				for (int j = 0; j < thrownExceptions.length; j++) {
 					Type thrownException = thrownExceptions[j];
@@ -141,7 +141,7 @@ public class CopyInterfaceBuilder {
 				if (newExceptions.size() > 0) {
 					sm.append(" throws ");
 
-					Iterator itr = newExceptions.iterator();
+					Iterator<String> itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
 						sm.append(itr.next());
@@ -189,10 +189,10 @@ public class CopyInterfaceBuilder {
 
 		sm = new StringMaker();
 
-		Iterator itr = imports.iterator();
+		Iterator<String> itr = imports.iterator();
 
 		while (itr.hasNext()) {
-			String importClass = (String)itr.next();
+			String importClass = itr.next();
 
 			if (!importClass.equals("boolean") && !importClass.equals("double") && !importClass.equals("int") && !importClass.equals("long") && !importClass.equals("short") && !importClass.equals("void")) {
 				sm.append("import " + importClass + ";");

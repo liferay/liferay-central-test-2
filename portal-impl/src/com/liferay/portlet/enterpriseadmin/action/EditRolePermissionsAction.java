@@ -45,7 +45,6 @@ import com.liferay.util.servlet.SessionMessages;
 
 import java.util.Collections;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -155,7 +154,8 @@ public class EditRolePermissionsAction extends PortletAction {
 		String[] modelResources = StringUtil.split(
 			ParamUtil.getString(req, "modelResources"));
 
-		Map resourceActionsMap = new HashMap();
+		Map<String, List<String>> resourceActionsMap =
+			new HashMap<String, List<String>>();
 
 		if (Validator.isNotNull(portletResource)) {
 			resourceActionsMap.put(
@@ -171,12 +171,11 @@ public class EditRolePermissionsAction extends PortletAction {
 					themeDisplay.getCompanyId(), null, modelResources[i]));
 		}
 
-		Iterator itr = resourceActionsMap.keySet().iterator();
+		for (Map.Entry<String, List<String>> entry :
+				resourceActionsMap.entrySet()) {
 
-		while (itr.hasNext()) {
-			String selResource = (String)itr.next();
-
-			List actions = (List)resourceActionsMap.get(selResource);
+			String selResource = entry.getKey();
+			List<String> actions = entry.getValue();
 
 			Collections.sort(
 				actions,
@@ -185,9 +184,7 @@ public class EditRolePermissionsAction extends PortletAction {
 
 			Role role = RoleServiceUtil.getRole(roleId);
 
-			for (int i = 0; i < actions.size(); i++) {
-				String actionId = (String)actions.get(i);
-
+			for (String actionId : actions) {
 				int scope = ParamUtil.getInteger(
 					req, "scope" + selResource + actionId);
 

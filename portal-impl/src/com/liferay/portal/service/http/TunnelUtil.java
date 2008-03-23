@@ -55,7 +55,9 @@ public class TunnelUtil {
 
 		ObjectOutputStream oos = new ObjectOutputStream(urlc.getOutputStream());
 
-		oos.writeObject(new ObjectValuePair(httpPrincipal, methodWrapper));
+		oos.writeObject(
+			new ObjectValuePair<HttpPrincipal, MethodWrapper>(
+				httpPrincipal, methodWrapper));
 
 		oos.flush();
 		oos.close();

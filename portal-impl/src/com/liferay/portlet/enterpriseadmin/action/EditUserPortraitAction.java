@@ -121,7 +121,7 @@ public class EditUserPortraitAction extends PortletAction {
 
 		PortletFileUpload upload = new PortletFileUpload(factory);
 
-		List fileItems = upload.parseRequest(req);
+		List<DiskFileItem> fileItems = upload.parseRequest(req);
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -130,7 +130,7 @@ public class EditUserPortraitAction extends PortletAction {
 		}
 
 		for (int i = 0; i < fileItems.size(); i++) {
-			DiskFileItem fileItem = (DiskFileItem)fileItems.get(i);
+			DiskFileItem fileItem = fileItems.get(i);
 
 			if (_log.isInfoEnabled()) {
 				_log.info("Item " + i + " " + fileItem);

@@ -60,7 +60,6 @@ import java.rmi.RemoteException;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -346,12 +345,10 @@ public class DLFileEntryLocalServiceImpl
 
 		String extension = FileUtil.getExtension(name);
 
-		Iterator itr = dlFileEntryPersistence.findByF_T(
-			folderId, title).iterator();
+		List<DLFileEntry> fileEntries = dlFileEntryPersistence.findByF_T(
+			folderId, title);
 
-		while (itr.hasNext()) {
-			DLFileEntry fileEntry = (DLFileEntry)itr.next();
-
+		for (DLFileEntry fileEntry : fileEntries) {
 			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
 			if (PropsValues.WEBDAV_LITMUS && Validator.isNull(extension)) {
@@ -386,12 +383,10 @@ public class DLFileEntryLocalServiceImpl
 	public void deleteFileEntries(long folderId)
 		throws PortalException, SystemException {
 
-		Iterator itr = dlFileEntryPersistence.findByFolderId(
-			folderId).iterator();
+		List<DLFileEntry> fileEntries = dlFileEntryPersistence.findByFolderId(
+			folderId);
 
-		while (itr.hasNext()) {
-			DLFileEntry fileEntry = (DLFileEntry)itr.next();
-
+		for (DLFileEntry fileEntry : fileEntries) {
 			deleteFileEntry(fileEntry);
 		}
 	}
@@ -455,12 +450,10 @@ public class DLFileEntryLocalServiceImpl
 
 		// File versions
 
-		Iterator itr = dlFileVersionPersistence.findByF_N(
-			fileEntry.getFolderId(), fileEntry.getName()).iterator();
+		List<DLFileVersion> fileVersions = dlFileVersionPersistence.findByF_N(
+			fileEntry.getFolderId(), fileEntry.getName());
 
-		while (itr.hasNext()) {
-			DLFileVersion fileVersion = (DLFileVersion)itr.next();
-
+		for (DLFileVersion fileVersion : fileVersions) {
 			dlFileVersionPersistence.remove(fileVersion.getPrimaryKey());
 		}
 
@@ -495,13 +488,14 @@ public class DLFileEntryLocalServiceImpl
 		dlFileEntryPersistence.remove(fileEntry.getPrimaryKey());
 	}
 
-	public List getCompanyFileEntries(long companyId, int begin, int end)
+	public List<DLFileEntry> getCompanyFileEntries(
+			long companyId, int begin, int end)
 		throws SystemException {
 
 		return dlFileEntryPersistence.findByCompanyId(companyId, begin, end);
 	}
 
-	public List getCompanyFileEntries(
+	public List<DLFileEntry> getCompanyFileEntries(
 			long companyId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -550,35 +544,39 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	public List getFileEntries(long folderId) throws SystemException {
+	public List<DLFileEntry> getFileEntries(long folderId)
+		throws SystemException {
+
 		return dlFileEntryPersistence.findByFolderId(folderId);
 	}
 
-	public List getFileEntries(long folderId, int begin, int end)
+	public List<DLFileEntry> getFileEntries(long folderId, int begin, int end)
 		throws SystemException {
 
 		return dlFileEntryPersistence.findByFolderId(folderId, begin, end);
 	}
 
-	public List getFileEntries(
+	public List<DLFileEntry> getFileEntries(
 			long folderId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return dlFileEntryPersistence.findByFolderId(folderId, begin, end, obc);
 	}
 
-	public List getFileEntriesAndShortcuts(long folderId, int begin, int end)
+	public List<DLFileEntry> getFileEntriesAndShortcuts(
+			long folderId, int begin, int end)
 		throws SystemException {
 
-		List folderIds = new ArrayList();
+		List<Long> folderIds = new ArrayList<Long>();
 
-		folderIds.add(new Long(folderId));
+		folderIds.add(folderId);
 
 		return dlFileEntryAndShortcutFinder.findByFolderIds(
 			folderIds, begin, end);
 	}
 
-	public List getFileEntriesAndShortcuts(List folderIds, int begin, int end)
+	public List<DLFileEntry> getFileEntriesAndShortcuts(
+			List<Long> folderIds, int begin, int end)
 		throws SystemException {
 
 		return dlFileEntryAndShortcutFinder.findByFolderIds(
@@ -588,14 +586,14 @@ public class DLFileEntryLocalServiceImpl
 	public int getFileEntriesAndShortcutsCount(long folderId)
 		throws SystemException {
 
-		List folderIds = new ArrayList();
+		List<Long> folderIds = new ArrayList<Long>();
 
 		folderIds.add(new Long(folderId));
 
 		return dlFileEntryAndShortcutFinder.countByFolderIds(folderIds);
 	}
 
-	public int getFileEntriesAndShortcutsCount(List folderIds)
+	public int getFileEntriesAndShortcutsCount(List<Long> folderIds)
 		throws SystemException {
 
 		return dlFileEntryAndShortcutFinder.countByFolderIds(folderIds);
@@ -631,12 +629,10 @@ public class DLFileEntryLocalServiceImpl
 			titleWithExtension, titleWithExtension);
 		String extension = FileUtil.getExtension(titleWithExtension);
 
-		Iterator itr = dlFileEntryPersistence.findByF_T(
-			folderId, title).iterator();
+		List<DLFileEntry> fileEntries = dlFileEntryPersistence.findByF_T(
+			folderId, title);
 
-		while (itr.hasNext()) {
-			DLFileEntry fileEntry = (DLFileEntry)itr.next();
-
+		for (DLFileEntry fileEntry : fileEntries) {
 			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
 			if (PropsValues.WEBDAV_LITMUS && Validator.isNull(extension)) {
@@ -652,26 +648,27 @@ public class DLFileEntryLocalServiceImpl
 		throw new NoSuchFileEntryException();
 	}
 
-	public int getFoldersFileEntriesCount(List folderIds)
+	public int getFoldersFileEntriesCount(List<Long> folderIds)
 		throws SystemException {
 
 		return dlFileEntryFinder.countByFolderIds(folderIds);
 	}
 
-	public List getGroupFileEntries(long groupId, int begin, int end)
+	public List<DLFileEntry> getGroupFileEntries(
+			long groupId, int begin, int end)
 		throws SystemException {
 
 		return dlFileEntryFinder.findByGroupId(groupId, begin, end);
 	}
 
-	public List getGroupFileEntries(
+	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return dlFileEntryFinder.findByGroupId(groupId, begin, end, obc);
 	}
 
-	public List getGroupFileEntries(
+	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
@@ -683,7 +680,7 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	public List getGroupFileEntries(
+	public List<DLFileEntry> getGroupFileEntries(
 			long groupId, long userId, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -712,7 +709,7 @@ public class DLFileEntryLocalServiceImpl
 		}
 	}
 
-	public List getNoAssetFileEntries() throws SystemException {
+	public List<DLFileEntry> getNoAssetFileEntries() throws SystemException {
 		return dlFileEntryFinder.findByNoAssets();
 	}
 
@@ -848,12 +845,10 @@ public class DLFileEntryLocalServiceImpl
 
 			fileEntry = newFileEntry;
 
-			Iterator itr = dlFileVersionPersistence.findByF_N(
-				folderId, name).iterator();
+			List<DLFileVersion> fileVersions =
+				dlFileVersionPersistence.findByF_N(folderId, name);
 
-			while (itr.hasNext()) {
-				DLFileVersion fileVersion = (DLFileVersion)itr.next();
-
+			for (DLFileVersion fileVersion : fileVersions) {
 				long newFileVersionId = counterLocalService.increment();
 
 				DLFileVersion newFileVersion = dlFileVersionPersistence.create(
@@ -1038,12 +1033,10 @@ public class DLFileEntryLocalServiceImpl
 		catch (NoSuchFolderException nsfe) {
 		}
 
-		Iterator itr = dlFileEntryPersistence.findByF_T(
-			folderId, title).iterator();
+		List<DLFileEntry> fileEntries = dlFileEntryPersistence.findByF_T(
+			folderId, title);
 
-		while (itr.hasNext()) {
-			DLFileEntry fileEntry = (DLFileEntry)itr.next();
-
+		for (DLFileEntry fileEntry : fileEntries) {
 			if (!name.equals(fileEntry.getName())) {
 				String curExtension = FileUtil.getExtension(
 					fileEntry.getName());
@@ -1086,12 +1079,10 @@ public class DLFileEntryLocalServiceImpl
 		catch (NoSuchFolderException nsfe) {
 		}
 
-		Iterator itr = dlFileEntryPersistence.findByF_T(
-			folderId, title).iterator();
+		List<DLFileEntry> fileEntries = dlFileEntryPersistence.findByF_T(
+			folderId, title);
 
-		while (itr.hasNext()) {
-			DLFileEntry fileEntry = (DLFileEntry)itr.next();
-
+		for (DLFileEntry fileEntry : fileEntries) {
 			String curExtension = FileUtil.getExtension(fileEntry.getName());
 
 			if (PropsValues.WEBDAV_LITMUS && Validator.isNull(extension)) {

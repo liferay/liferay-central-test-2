@@ -38,7 +38,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -158,11 +157,11 @@ public class DB2Util extends DBUtil {
 	}
 
 	private void _reorgTables(String[] templates) throws SQLException {
-		Set tableNames = new HashSet();
+		Set<String> tableNames = new HashSet<String>();
 
-		for (int i = 0; i < templates.length; i++) {
-			if (templates[i].startsWith("alter table")) {
-				tableNames.add(templates[i].split(" ")[2]);
+		for (String template : templates) {
+			if (template.startsWith("alter table")) {
+				tableNames.add(template.split(" ")[2]);
 			}
 		}
 
@@ -176,11 +175,7 @@ public class DB2Util extends DBUtil {
 		try {
 			con = HibernateUtil.getConnection();
 
-			Iterator itr = tableNames.iterator();
-
-			while (itr.hasNext()) {
-				String tableName = (String)itr.next();
-
+			for (String tableName : tableNames) {
 				String sql = "call sysproc.admin_cmd(?)";
 
 				callStmt = con.prepareCall(sql);

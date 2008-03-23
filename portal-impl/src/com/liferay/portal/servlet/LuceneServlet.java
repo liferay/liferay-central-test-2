@@ -87,7 +87,9 @@ public class LuceneServlet extends HttpServlet {
 					indexer.reIndex();
 				}
 
-				_indexers.add(new ObjectValuePair(indexer, indexerThread));
+				_indexers.add(
+					new ObjectValuePair<LuceneIndexer, Thread>(
+						indexer, indexerThread));
 			}
 			else {
 				LuceneUtil.checkLuceneDir(companyId);
@@ -109,10 +111,10 @@ public class LuceneServlet extends HttpServlet {
 		// Wait for indexer to be gracefully interrupted
 
 		for (int i = 0; i < _indexers.size(); i++) {
-			ObjectValuePair ovp = (ObjectValuePair)_indexers.get(i);
+			ObjectValuePair<LuceneIndexer, Thread> ovp = _indexers.get(i);
 
-			LuceneIndexer indexer = (LuceneIndexer)ovp.getKey();
-			Thread indexerThread = (Thread)ovp.getValue();
+			LuceneIndexer indexer = ovp.getKey();
+			Thread indexerThread = ovp.getValue();
 
 			if ((indexer != null) && (!indexer.isFinished()) &&
 				(indexerThread != null)) {
@@ -145,6 +147,7 @@ public class LuceneServlet extends HttpServlet {
 
 	private static Log _log = LogFactory.getLog(LuceneServlet.class);
 
-	private List _indexers = new ArrayList();
+	private List<ObjectValuePair<LuceneIndexer, Thread>> _indexers =
+		new ArrayList<ObjectValuePair<LuceneIndexer, Thread>>();
 
 }

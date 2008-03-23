@@ -71,7 +71,7 @@ public class CalendarTag extends IncludeTag {
 		_headerFormat = headerFormat;
 	}
 
-	public void setData(Set data) {
+	public void setData(Set<Integer> data) {
 		_data = data;
 	}
 
@@ -86,6 +86,6 @@ public class CalendarTag extends IncludeTag {
 	private int _year;
 	private String _headerPattern;
 	private DateFormat _headerFormat;
-	private Set _data;
+	private Set<Integer> _data;
 
 }

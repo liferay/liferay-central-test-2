@@ -53,7 +53,7 @@ public class LayoutFinderImpl implements LayoutFinder {
 	public static String FIND_BY_C_P_P =
 		LayoutFinder.class.getName() + ".findByC_P_P";
 
-	public List findByNullFriendlyURL() throws SystemException {
+	public List<Layout> findByNullFriendlyURL() throws SystemException {
 		Session session = null;
 
 		try {
@@ -75,7 +75,7 @@ public class LayoutFinderImpl implements LayoutFinder {
 		}
 	}
 
-	public List findByC_P_P(
+	public List<LayoutReference> findByC_P_P(
 			long companyId, String portletId, String prefsKey,
 			String prefsValue)
 		throws SystemException {
@@ -103,12 +103,13 @@ public class LayoutFinderImpl implements LayoutFinder {
 			qPos.add(portletId + "_INSTANCE_%");
 			qPos.add(prefs);
 
-			List list = new ArrayList();
+			List<LayoutReference> layoutReferences =
+				new ArrayList<LayoutReference>();
 
-			Iterator itr = q.list().iterator();
+			Iterator<Object[]> itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				Object[] array = (Object[])itr.next();
+				Object[] array = itr.next();
 
 				Long layoutPlid = (Long)array[0];
 				String prefsPortletId = (String)array[1];
@@ -116,12 +117,12 @@ public class LayoutFinderImpl implements LayoutFinder {
 				Layout layout = LayoutUtil.findByPrimaryKey(
 					layoutPlid.longValue());
 
-				list.add(
+				layoutReferences.add(
 					new LayoutReference(
 						LayoutSoap.toSoapModel(layout), prefsPortletId));
 			}
 
-			return list;
+			return layoutReferences;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

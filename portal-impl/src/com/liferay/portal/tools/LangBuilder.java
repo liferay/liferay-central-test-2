@@ -206,7 +206,7 @@ public class LangBuilder {
 		BufferedReader br = new BufferedReader(new StringReader(content));
 		BufferedWriter bw = new BufferedWriter(new FileWriter(propsFile));
 
-		Set messages = new TreeSet();
+		Set<String> messages = new TreeSet<String>();
 
 		boolean begin = false;
 
@@ -247,10 +247,10 @@ public class LangBuilder {
 		return FileUtil.read(propsFile);
 	}
 
-	private void _sortAndWrite(BufferedWriter bw, Set messages)
+	private void _sortAndWrite(BufferedWriter bw, Set<String> messages)
 		throws IOException {
 
-		String[] messagesArray = (String[])messages.toArray(new String[0]);
+		String[] messagesArray = messages.toArray(new String[messages.size()]);
 
 		for (int i = 0; i < messagesArray.length; i++) {
 			bw.write(messagesArray[i]);

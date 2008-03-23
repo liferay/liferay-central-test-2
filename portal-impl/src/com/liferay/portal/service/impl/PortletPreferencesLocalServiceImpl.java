@@ -93,21 +93,27 @@ public class PortletPreferencesLocalServiceImpl
 			portlet.getDefaultPreferences());
 	}
 
-	public List getPortletPreferences() throws SystemException {
+	public List<PortletPreferences> getPortletPreferences()
+		throws SystemException {
+
 		return portletPreferencesPersistence.findAll();
 	}
 
-	public List getPortletPreferences(long plid) throws SystemException {
+	public List<PortletPreferences> getPortletPreferences(long plid)
+		throws SystemException {
+
 		return portletPreferencesPersistence.findByPlid(plid);
 	}
 
-	public List getPortletPreferences(long plid, String portletId)
+	public List<PortletPreferences> getPortletPreferences(
+			long plid, String portletId)
 		throws SystemException {
 
 		return portletPreferencesPersistence.findByP_P(plid, portletId);
 	}
 
-	public List getPortletPreferences(long ownerId, int ownerType, long plid)
+	public List<PortletPreferences> getPortletPreferences(
+			long ownerId, int ownerType, long plid)
 		throws PortalException, SystemException {
 
 		return portletPreferencesPersistence.findByO_O_P(
@@ -148,13 +154,13 @@ public class PortletPreferencesLocalServiceImpl
 			String portletId, String defaultPreferences)
 		throws PortalException, SystemException {
 
-		Map prefsPool = PortletPreferencesLocalUtil.getPreferencesPool(
-			ownerId, ownerType);
+		Map<String, PortletPreferencesImpl> prefsPool =
+			PortletPreferencesLocalUtil.getPreferencesPool(
+				ownerId, ownerType);
 
 		String key = encodeKey(plid, portletId);
 
-		PortletPreferencesImpl prefs =
-			(PortletPreferencesImpl)prefsPool.get(key);
+		PortletPreferencesImpl prefs = prefsPool.get(key);
 
 		if (prefs == null) {
 			PortletPreferences portletPreferences = null;

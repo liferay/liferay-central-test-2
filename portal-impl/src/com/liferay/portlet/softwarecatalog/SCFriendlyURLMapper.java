@@ -145,15 +145,17 @@ public class SCFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return friendlyURL;
 	}
 
-	public void populateParams(String friendlyURLPath, Map params) {
-		params.put("p_p_id", _PORTLET_ID);
+	public void populateParams(
+		String friendlyURLPath, Map<String, String[]> params) {
+
+		addParam(params, "p_p_id", _PORTLET_ID);
 
 		if (!params.containsKey("p_p_lifecycle")) {
-			params.put("p_p_lifecycle", "0");
+			addParam(params, "p_p_lifecycle", "0");
 		}
 
-		params.put("p_p_state", WindowState.MAXIMIZED.toString());
-		params.put("p_p_mode", PortletMode.VIEW.toString());
+		addParam(params, "p_p_state", WindowState.MAXIMIZED);
+		addParam(params, "p_p_mode", PortletMode.VIEW);
 
 		int x = friendlyURLPath.indexOf(StringPool.SLASH, 1);
 

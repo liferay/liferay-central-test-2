@@ -32,6 +32,7 @@ public interface ActivityTrackerFinder {
 	public int countByU_R(long userId, long receiverUserId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByU_R(long userId, long receiverUserId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.ActivityTracker> findByU_R(
+		long userId, long receiverUserId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

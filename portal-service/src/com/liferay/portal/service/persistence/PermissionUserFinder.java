@@ -47,15 +47,16 @@ public interface PermissionUserFinder {
 		java.lang.String emailAddress, boolean andOperator)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByPermissionAndRole(long companyId, long groupId,
-		java.lang.String name, java.lang.String primKey,
-		java.lang.String actionId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String emailAddress, boolean andOperator, int begin, int end)
+	public java.util.List<com.liferay.portal.model.User> findByPermissionAndRole(
+		long companyId, long groupId, java.lang.String name,
+		java.lang.String primKey, java.lang.String actionId,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String emailAddress,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserAndOrgGroupPermission(long companyId,
-		java.lang.String name, java.lang.String primKey,
+	public java.util.List<com.liferay.portal.model.User> findByUserAndOrgGroupPermission(
+		long companyId, java.lang.String name, java.lang.String primKey,
 		java.lang.String actionId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,
 		java.lang.String emailAddress, boolean andOperator, int begin, int end)

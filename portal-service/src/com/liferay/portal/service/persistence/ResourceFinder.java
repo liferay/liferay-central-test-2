@@ -29,9 +29,10 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface ResourceFinder {
-	public java.util.List findByName(java.lang.String name)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Resource> findByName(
+		java.lang.String name) throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_P(long companyId, java.lang.String primKey)
+	public java.util.List<com.liferay.portal.model.Resource> findByC_P(
+		long companyId, java.lang.String primKey)
 		throws com.liferay.portal.SystemException;
 }

@@ -162,6 +162,18 @@ public class PortalUtil {
 		}
 	}
 
+	public static boolean isReservedParameter(String name) throws Exception {
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_ISRESERVEDPARAMETER, name, false);
+
+		if (returnObj != null) {
+			return (Boolean)returnObj;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public static void setPageSubtitle(
 			String subtitle, HttpServletRequest req)
 		throws Exception {
@@ -193,6 +205,9 @@ public class PortalUtil {
 		"getPortletNamespace";
 
 	private static final String _METHOD_GETUSERPASSWORD = "getUserPassword";
+
+	private static final String _METHOD_ISRESERVEDPARAMETER =
+		"isReservedParameter";
 
 	private static final String _METHOD_SETPAGESUBTITLE = "setPageSubtitle";
 

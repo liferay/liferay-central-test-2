@@ -44,7 +44,6 @@ import com.liferay.portal.util.PropsValues;
 
 import java.io.File;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -88,14 +87,10 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		// Layouts
 
-		List layouts = layoutPersistence.findByG_P_P(
+		List<Layout> layouts = layoutPersistence.findByG_P_P(
 			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
-		Iterator itr = layouts.iterator();
-
-		while (itr.hasNext()) {
-			Layout layout = (Layout) itr.next();
-
+		for (Layout layout : layouts) {
 			try {
 				layoutLocalService.deleteLayout(layout, false);
 			}

@@ -79,7 +79,7 @@ public class EnterpriseAdminUtil {
 		Long[] organizationIds = new Long[organizations.size()];
 
 		for (int i = 0; i < organizations.size(); i++) {
-			Organization organization = (Organization)organizations.get(i);
+			Organization organization = organizations.get(i);
 
 			organizationIds[i] = new Long(organization.getOrganizationId());
 		}

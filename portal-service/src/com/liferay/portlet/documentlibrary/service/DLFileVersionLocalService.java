@@ -121,6 +121,7 @@ public interface DLFileVersionLocalService {
 
 	public void afterPropertiesSet();
 
-	public java.util.List getFileVersions(long folderId, java.lang.String name)
+	public java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
+		long folderId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
 }

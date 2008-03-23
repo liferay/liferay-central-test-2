@@ -831,8 +831,9 @@ public class PermissionLocalServiceUtil {
 			resourceId);
 	}
 
-	public static java.util.List addPermissions(long companyId,
-		java.lang.String name, long resourceId, boolean portletActions)
+	public static java.util.List<com.liferay.portal.model.Permission> addPermissions(
+		long companyId, java.lang.String name, long resourceId,
+		boolean portletActions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
@@ -850,22 +851,24 @@ public class PermissionLocalServiceUtil {
 		permissionLocalService.addUserPermissions(userId, actionIds, resourceId);
 	}
 
-	public static java.util.List getActions(java.util.List permissions)
+	public static java.util.List<String> getActions(
+		java.util.List<com.liferay.portal.model.Permission> permissions)
 		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
 		return permissionLocalService.getActions(permissions);
 	}
 
-	public static java.util.List getGroupPermissions(long groupId,
-		long resourceId) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Permission> getGroupPermissions(
+		long groupId, long resourceId)
+		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
 		return permissionLocalService.getGroupPermissions(groupId, resourceId);
 	}
 
-	public static java.util.List getGroupPermissions(long groupId,
-		long companyId, java.lang.String name, int scope,
+	public static java.util.List<com.liferay.portal.model.Permission> getGroupPermissions(
+		long groupId, long companyId, java.lang.String name, int scope,
 		java.lang.String primKey) throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
@@ -873,8 +876,8 @@ public class PermissionLocalServiceUtil {
 			name, scope, primKey);
 	}
 
-	public static java.util.List getOrgGroupPermissions(long organizationId,
-		long groupId, long resourceId)
+	public static java.util.List<com.liferay.portal.model.Permission> getOrgGroupPermissions(
+		long organizationId, long groupId, long resourceId)
 		throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
@@ -890,8 +893,8 @@ public class PermissionLocalServiceUtil {
 		return permissionLocalService.getLatestPermissionId();
 	}
 
-	public static java.util.List getPermissions(long companyId,
-		java.lang.String[] actionIds, long resourceId)
+	public static java.util.List<com.liferay.portal.model.Permission> getPermissions(
+		long companyId, java.lang.String[] actionIds, long resourceId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
@@ -900,7 +903,8 @@ public class PermissionLocalServiceUtil {
 			resourceId);
 	}
 
-	public static java.util.List getRolePermissions(long roleId)
+	public static java.util.List<com.liferay.portal.model.Permission> getRolePermissions(
+		long roleId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
@@ -908,22 +912,22 @@ public class PermissionLocalServiceUtil {
 		return permissionLocalService.getRolePermissions(roleId);
 	}
 
-	public static java.util.List getRolePermissions(long roleId, long resourceId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Permission> getRolePermissions(
+		long roleId, long resourceId) throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
 		return permissionLocalService.getRolePermissions(roleId, resourceId);
 	}
 
-	public static java.util.List getUserPermissions(long userId, long resourceId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Permission> getUserPermissions(
+		long userId, long resourceId) throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 
 		return permissionLocalService.getUserPermissions(userId, resourceId);
 	}
 
-	public static java.util.List getUserPermissions(long userId,
-		long companyId, java.lang.String name, int scope,
+	public static java.util.List<com.liferay.portal.model.Permission> getUserPermissions(
+		long userId, long companyId, java.lang.String name, int scope,
 		java.lang.String primKey) throws com.liferay.portal.SystemException {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 

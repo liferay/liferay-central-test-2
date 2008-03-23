@@ -156,10 +156,10 @@ public class RoleFinderImpl implements RoleFinder {
 
 				int count = 0;
 
-				Iterator itr = q.list().iterator();
+				Iterator<Long> itr = q.list().iterator();
 
 				while (itr.hasNext()) {
-					Long l = (Long)itr.next();
+					Long l = itr.next();
 
 					if (l != null) {
 						count += l.intValue();
@@ -187,7 +187,7 @@ public class RoleFinderImpl implements RoleFinder {
 
 	public int countByC_N_D_T(
 			long companyId, String name, String description, Integer type,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -224,10 +224,10 @@ public class RoleFinderImpl implements RoleFinder {
 				qPos.add(type);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -244,7 +244,7 @@ public class RoleFinderImpl implements RoleFinder {
 		}
 	}
 
-	public List findByUserGroupRole(long userId, long groupId)
+	public List<Role> findByUserGroupRole(long userId, long groupId)
 		throws SystemException {
 
 		Session session = null;
@@ -306,10 +306,10 @@ public class RoleFinderImpl implements RoleFinder {
 				qPos.add(companyId);
 				qPos.add(name);
 
-				Iterator itr = q.list().iterator();
+				Iterator<Role> itr = q.list().iterator();
 
 				if (itr.hasNext()) {
-					Role role = (Role)itr.next();
+					Role role = itr.next();
 
 					FinderCache.putResult(
 						finderClassNameCacheEnabled, finderClassName,
@@ -334,11 +334,15 @@ public class RoleFinderImpl implements RoleFinder {
 		}
 	}
 
-	public List findByU_G(long userId, long groupId) throws SystemException {
+	public List<Role> findByU_G(long userId, long groupId)
+		throws SystemException {
+
 		return findByU_G(userId, new long[] {groupId});
 	}
 
-	public List findByU_G(long userId, long[] groupIds) throws SystemException {
+	public List<Role> findByU_G(long userId, long[] groupIds)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
@@ -368,11 +372,13 @@ public class RoleFinderImpl implements RoleFinder {
 		}
 	}
 
-	public List findByU_G(long userId, List groups) throws SystemException {
+	public List<Role> findByU_G(long userId, List<Group> groups)
+		throws SystemException {
+
 		long[] groupIds = new long[groups.size()];
 
 		for (int i = 0; i < groups.size(); i++) {
-			Group group = (Group)groups.get(i);
+			Group group = groups.get(i);
 
 			groupIds[i] = group.getGroupId();
 		}
@@ -380,9 +386,10 @@ public class RoleFinderImpl implements RoleFinder {
 		return findByU_G(userId, groupIds);
 	}
 
-	public List findByC_N_D_T(
+	public List<Role> findByC_N_D_T(
 			long companyId, String name, String description, Integer type,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		name = StringUtil.lowerCase(name);
@@ -420,7 +427,8 @@ public class RoleFinderImpl implements RoleFinder {
 				qPos.add(type);
 			}
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<Role>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -430,7 +438,7 @@ public class RoleFinderImpl implements RoleFinder {
 		}
 	}
 
-	public Map findByC_N_S_P(
+	public Map<String, List<String>> findByC_N_S_P(
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
@@ -453,20 +461,21 @@ public class RoleFinderImpl implements RoleFinder {
 			qPos.add(scope);
 			qPos.add(primKey);
 
-			Map roleMap = new HashMap();
+			Map<String, List<String>> roleMap =
+				new HashMap<String, List<String>>();
 
-			Iterator itr = q.list().iterator();
+			Iterator<Object[]> itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				Object[] array = (Object[])itr.next();
+				Object[] array = itr.next();
 
 				String roleName = (String)array[0];
 				String actionId = (String)array[1];
 
-				List roleList = (List)roleMap.get(roleName);
+				List<String> roleList = roleMap.get(roleName);
 
 				if (roleList == null) {
-					roleList = new ArrayList();
+					roleList = new ArrayList<String>();
 				}
 
 				roleList.add(actionId);
@@ -505,19 +514,19 @@ public class RoleFinderImpl implements RoleFinder {
 		}
 	}
 
-	protected String getJoin(LinkedHashMap params) {
+	protected String getJoin(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -549,19 +558,19 @@ public class RoleFinderImpl implements RoleFinder {
 		return join;
 	}
 
-	protected String getWhere(LinkedHashMap params) {
+	protected String getWhere(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
 		}
 
 		StringMaker sm = new StringMaker();
 
-		Iterator itr = params.entrySet().iterator();
+		Iterator<Map.Entry<String, Object>> itr = params.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Object> entry = itr.next();
 
-			String key = (String)entry.getKey();
+			String key = entry.getKey();
 			Object value = entry.getValue();
 
 			if (Validator.isNotNull(value)) {
@@ -593,12 +602,15 @@ public class RoleFinderImpl implements RoleFinder {
 		return join;
 	}
 
-	protected void setJoin(QueryPos qPos, LinkedHashMap params) {
+	protected void setJoin(
+		QueryPos qPos, LinkedHashMap<String, Object> params) {
+
 		if (params != null) {
-			Iterator itr = params.entrySet().iterator();
+			Iterator<Map.Entry<String, Object>> itr =
+				params.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, Object> entry = itr.next();
 
 				Object value = entry.getValue();
 

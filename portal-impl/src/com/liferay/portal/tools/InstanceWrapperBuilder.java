@@ -83,10 +83,11 @@ public class InstanceWrapperBuilder {
 
 			Element root = doc.getRootElement();
 
-			Iterator itr = root.elements("instance-wrapper").iterator();
+			Iterator<Element> itr = root.elements(
+				"instance-wrapper").iterator();
 
 			while (itr.hasNext()) {
-				Element instanceWrapper = (Element)itr.next();
+				Element instanceWrapper = itr.next();
 
 				String parentDir = instanceWrapper.attributeValue("parent-dir");
 				String srcFile = instanceWrapper.attributeValue("src-file");
@@ -139,7 +140,7 @@ public class InstanceWrapperBuilder {
 				for (int j = 0; j < parameters.length; j++) {
 					JavaParameter javaParameter = parameters[j];
 
-					sm.append(javaParameter.getType().getValue() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
+					sm.append(javaParameter.getType().getValue() + javaParameter.getGenericsName() + _getDimensions(javaParameter.getType()) + " " + javaParameter.getName());
 
 					if ((j + 1) != parameters.length) {
 						sm.append(", ");
@@ -150,7 +151,7 @@ public class InstanceWrapperBuilder {
 
 				Type[] thrownExceptions = javaMethod.getExceptions();
 
-				Set newExceptions = new LinkedHashSet();
+				Set<String> newExceptions = new LinkedHashSet<String>();
 
 				for (int j = 0; j < thrownExceptions.length; j++) {
 					Type thrownException = thrownExceptions[j];
@@ -161,7 +162,7 @@ public class InstanceWrapperBuilder {
 				if (newExceptions.size() > 0) {
 					sm.append(" throws ");
 
-					Iterator itr = newExceptions.iterator();
+					Iterator<String> itr = newExceptions.iterator();
 
 					while (itr.hasNext()) {
 						sm.append(itr.next());

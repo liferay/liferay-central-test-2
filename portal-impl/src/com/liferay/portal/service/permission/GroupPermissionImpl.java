@@ -74,14 +74,11 @@ public class GroupPermissionImpl implements GroupPermission {
 
 				long userId = group.getClassPK();
 
-				List organizations =
+				List<Organization> organizations =
 					OrganizationLocalServiceUtil.getUserOrganizations(
 						userId);
 
-				for (int i = 0; i < organizations.size(); i++) {
-					Organization organization =
-						(Organization)organizations.get(i);
-
+				for (Organization organization : organizations) {
 					if (OrganizationPermissionUtil.contains(
 							permissionChecker, organization.getOrganizationId(),
 							ActionKeys.MANAGE_USERS)) {

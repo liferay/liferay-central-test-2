@@ -365,17 +365,18 @@ public interface PortletPreferencesLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getPortletPreferences()
+	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getPortletPreferences(long plid)
+	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
+		long plid) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
+		long plid, java.lang.String portletId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getPortletPreferences(long plid,
-		java.lang.String portletId) throws com.liferay.portal.SystemException;
-
-	public java.util.List getPortletPreferences(long ownerId, int ownerType,
-		long plid)
+	public java.util.List<com.liferay.portal.model.PortletPreferences> getPortletPreferences(
+		long ownerId, int ownerType, long plid)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

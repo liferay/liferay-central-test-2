@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.ActivityTracker;
 import com.liferay.portal.model.impl.ActivityTrackerImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -69,10 +70,10 @@ public class ActivityTrackerFinderImpl implements ActivityTrackerFinder {
 			qPos.add(userId);
 			qPos.add(receiverUserId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -89,7 +90,8 @@ public class ActivityTrackerFinderImpl implements ActivityTrackerFinder {
 		}
 	}
 
-	public List findByU_R(long userId, long receiverUserId, int begin, int end)
+	public List<ActivityTracker> findByU_R(
+			long userId, long receiverUserId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -108,7 +110,8 @@ public class ActivityTrackerFinderImpl implements ActivityTrackerFinder {
 			qPos.add(userId);
 			qPos.add(receiverUserId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<ActivityTracker>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

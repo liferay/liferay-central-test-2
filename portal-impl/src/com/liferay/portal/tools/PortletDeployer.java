@@ -70,8 +70,8 @@ public class PortletDeployer extends BaseDeployer {
 		"com.liferay.util.bridges.jsf.myfaces.MyFacesContextFactoryImpl";
 
 	public static void main(String[] args) {
-		List wars = new ArrayList();
-		List jars = new ArrayList();
+		List<String> wars = new ArrayList<String>();
+		List<String> jars = new ArrayList<String>();
 
 		for (int i = 0; i < args.length; i++) {
 			if (args[i].endsWith(".war")) {
@@ -88,7 +88,7 @@ public class PortletDeployer extends BaseDeployer {
 	protected PortletDeployer() {
 	}
 
-	protected PortletDeployer(List wars, List jars) {
+	protected PortletDeployer(List<String> wars, List<String> jars) {
 		super(wars, jars);
 	}
 
@@ -158,10 +158,10 @@ public class PortletDeployer extends BaseDeployer {
 
 		Element root = doc.getRootElement();
 
-		Iterator itr1 = root.elements("portlet").iterator();
+		Iterator<Element> itr1 = root.elements("portlet").iterator();
 
 		while (itr1.hasNext()) {
-			Element portlet = (Element)itr1.next();
+			Element portlet = itr1.next();
 
 			String portletName = PortalUtil.getJsSafePortletId(
 				portlet.elementText("portlet-name"));
@@ -204,17 +204,18 @@ public class PortletDeployer extends BaseDeployer {
 		itr1 = root.elements("servlet").iterator();
 
 		while (itr1.hasNext()) {
-			Element servlet = (Element)itr1.next();
+			Element servlet = itr1.next();
 
 			String icon = servlet.elementText("icon");
 			String servletName = servlet.elementText("servlet-name");
 			String displayName = servlet.elementText("display-name");
 			String description = servlet.elementText("description");
 			String servletClass = servlet.elementText("servlet-class");
-			List initParams = servlet.elements("init-param");
+			List<Element> initParams = servlet.elements("init-param");
 			String loadOnStartup = servlet.elementText("load-on-startup");
 			String runAs = servlet.elementText("run-as");
-			List securityRoleRefs = servlet.elements("security-role-ref");
+			List<Element> securityRoleRefs = servlet.elements(
+				"security-role-ref");
 
 			if ((servletClass != null) &&
 				(servletClass.equals(
@@ -246,10 +247,10 @@ public class PortletDeployer extends BaseDeployer {
 					sm.append("</description>");
 				}
 
-				Iterator itr2 = initParams.iterator();
+				Iterator<Element> itr2 = initParams.iterator();
 
 				while (itr2.hasNext()) {
-					Element initParam = (Element)itr2.next();
+					Element initParam = itr2.next();
 
 					String paramName = initParam.elementText("param-name");
 					String paramValue = initParam.elementText("param-value");
@@ -266,7 +267,7 @@ public class PortletDeployer extends BaseDeployer {
 				itr2 = initParams.iterator();
 
 				while (itr2.hasNext()) {
-					Element initParam = (Element)itr2.next();
+					Element initParam = itr2.next();
 
 					String paramName = initParam.elementText("param-name");
 					String paramValue = initParam.elementText("param-value");
@@ -311,7 +312,7 @@ public class PortletDeployer extends BaseDeployer {
 				itr2 = securityRoleRefs.iterator();
 
 				while (itr2.hasNext()) {
-					Element roleRef = (Element)itr2.next();
+					Element roleRef = itr2.next();
 
 					String roleDesc = roleRef.elementText("description");
 					String roleName = roleRef.elementText("role-name");
@@ -385,7 +386,7 @@ public class PortletDeployer extends BaseDeployer {
 		String liferayVersions = getPluginPackageLiferayVersionsXml(
 			pluginPackage.getLiferayVersions());
 
-		Map filterMap = new HashMap();
+		Map<String, String> filterMap = new HashMap<String, String>();
 
 		filterMap.put("module_group_id", moduleGroupId);
 		filterMap.put("module_artifact_id", moduleArtifactId);
@@ -423,12 +424,12 @@ public class PortletDeployer extends BaseDeployer {
 
 		Element root = doc.getRootElement();
 
-		List elements = root.elements("portlet");
+		List<Element> elements = root.elements("portlet");
 
-		Iterator itr = elements.iterator();
+		Iterator<Element> itr = elements.iterator();
 
 		while (itr.hasNext()) {
-			Element portlet = (Element)itr.next();
+			Element portlet = itr.next();
 
 			String portletClass = portlet.elementText("portlet-class");
 

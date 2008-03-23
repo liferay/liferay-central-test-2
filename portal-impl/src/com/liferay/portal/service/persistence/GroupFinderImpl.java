@@ -252,7 +252,7 @@ public class GroupFinderImpl implements GroupFinder {
 		}
 	}
 
-	public List findByNullFriendlyURL() throws SystemException {
+	public List<Group> findByNullFriendlyURL() throws SystemException {
 		Session session = null;
 
 		try {
@@ -504,7 +504,7 @@ public class GroupFinderImpl implements GroupFinder {
 					qPos.add(description);
 				}
 
-				List<Group> list = new ArrayList<Group>();
+				List<Group> groups = new ArrayList<Group>();
 
 				Iterator<String> itr = (Iterator<String>)QueryUtil.iterate(
 					q, HibernateUtil.getDialect(), begin, end);
@@ -514,14 +514,14 @@ public class GroupFinderImpl implements GroupFinder {
 
 					Group group = GroupUtil.findByPrimaryKey(groupId);
 
-					list.add(group);
+					groups.add(group);
 				}
 
 				FinderCache.putResult(
 					finderSQL, finderClassNamesCacheEnabled, finderClassNames,
-					finderMethodName, finderParams, finderArgs, list);
+					finderMethodName, finderParams, finderArgs, groups);
 
-				return list;
+				return groups;
 			}
 			catch (Exception e) {
 				throw new SystemException(e);

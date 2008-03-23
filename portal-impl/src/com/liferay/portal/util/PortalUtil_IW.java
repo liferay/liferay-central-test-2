@@ -50,7 +50,7 @@ public class PortalUtil_IW {
 		return PortalUtil.getClassName(classNameId);
 	}
 
-	public long getClassNameId(java.lang.Class classObj) {
+	public long getClassNameId(java.lang.Class<?> classObj) {
 		return PortalUtil.getClassNameId(classObj);
 	}
 
@@ -225,7 +225,7 @@ public class PortalUtil_IW {
 
 	public java.lang.String getLayoutActualURL(long groupId,
 		boolean privateLayout, java.lang.String mainPath,
-		java.lang.String friendlyURL, java.util.Map params)
+		java.lang.String friendlyURL, java.util.Map<String, String[]> params)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getLayoutActualURL(groupId, privateLayout, mainPath,
@@ -337,7 +337,8 @@ public class PortalUtil_IW {
 	}
 
 	public java.lang.Object[] getPortletFriendlyURLMapper(long groupId,
-		boolean privateLayout, java.lang.String url, java.util.Map params)
+		boolean privateLayout, java.lang.String url,
+		java.util.Map<String, String[]> params)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		return PortalUtil.getPortletFriendlyURLMapper(groupId, privateLayout,

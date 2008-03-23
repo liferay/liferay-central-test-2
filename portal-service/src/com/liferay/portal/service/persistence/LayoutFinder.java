@@ -29,10 +29,10 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface LayoutFinder {
-	public java.util.List findByNullFriendlyURL()
+	public java.util.List<com.liferay.portal.model.Layout> findByNullFriendlyURL()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_P_P(long companyId,
-		java.lang.String portletId, java.lang.String prefsKey,
+	public java.util.List<com.liferay.portal.model.LayoutReference> findByC_P_P(
+		long companyId, java.lang.String portletId, java.lang.String prefsKey,
 		java.lang.String prefsValue) throws com.liferay.portal.SystemException;
 }

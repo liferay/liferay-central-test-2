@@ -85,7 +85,7 @@ public class SocialBookmarkTagUtil {
 	private static String _getPostUrl(String type, String url, String title)
 		throws Exception {
 
-		Map vars = new FastHashMap();
+		Map<String, String> vars = new FastHashMap();
 
 		vars.put("liferay:social-bookmark:url", url);
 		vars.put("liferay:social-bookmark:title", HttpUtil.encodeURL(title));

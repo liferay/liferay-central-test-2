@@ -470,22 +470,24 @@ public class DLFolderLocalServiceUtil {
 		return dlFolderLocalService.getFolder(groupId, parentFolderId, name);
 	}
 
-	public static java.util.List getFolders(long companyId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long companyId) throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
 		return dlFolderLocalService.getFolders(companyId);
 	}
 
-	public static java.util.List getFolders(long groupId, long parentFolderId)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId)
 		throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
 		return dlFolderLocalService.getFolders(groupId, parentFolderId);
 	}
 
-	public static java.util.List getFolders(long groupId, long parentFolderId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFolder> getFolders(
+		long groupId, long parentFolderId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
 		return dlFolderLocalService.getFolders(groupId, parentFolderId, begin,
@@ -499,8 +501,8 @@ public class DLFolderLocalServiceUtil {
 		return dlFolderLocalService.getFoldersCount(groupId, parentFolderId);
 	}
 
-	public static void getSubfolderIds(java.util.List folderIds, long groupId,
-		long folderId) throws com.liferay.portal.SystemException {
+	public static void getSubfolderIds(java.util.List<Long> folderIds,
+		long groupId, long folderId) throws com.liferay.portal.SystemException {
 		DLFolderLocalService dlFolderLocalService = DLFolderLocalServiceFactory.getService();
 
 		dlFolderLocalService.getSubfolderIds(folderIds, groupId, folderId);

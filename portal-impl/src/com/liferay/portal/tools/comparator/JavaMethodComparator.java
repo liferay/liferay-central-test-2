@@ -32,12 +32,9 @@ import java.util.Comparator;
  * @author Brian Wing Shun Chan
  *
  */
-public class JavaMethodComparator implements Comparator {
+public class JavaMethodComparator implements Comparator<JavaMethod> {
 
-	public int compare(Object obj1, Object obj2) {
-		JavaMethod method1 = (JavaMethod)obj1;
-		JavaMethod method2 = (JavaMethod)obj2;
-
+	public int compare(JavaMethod method1, JavaMethod method2) {
 		return method1.getName().compareTo(method2.getName());
 	}
 

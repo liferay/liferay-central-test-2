@@ -72,15 +72,16 @@ public class WebXML23Converter {
 				return;
 			}
 
-			Iterator itr1 = root.elements("filter-mapping").iterator();
+			Iterator<Element> itr1 = root.elements("filter-mapping").iterator();
 
 			while (itr1.hasNext()) {
-				Element filterMapping = (Element)itr1.next();
+				Element filterMapping = itr1.next();
 
-				Iterator itr2 = filterMapping.elements("dispatcher").iterator();
+				Iterator<Element> itr2 = filterMapping.elements(
+					"dispatcher").iterator();
 
 				while (itr2.hasNext()) {
-					Element dispatcher = (Element)itr2.next();
+					Element dispatcher = itr2.next();
 
 					dispatcher.detach();
 				}

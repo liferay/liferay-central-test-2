@@ -84,7 +84,7 @@ public class StagingUtil {
 					stagingGroup.getLiveGroupId());
 		}
 
-		Map parameterMap = getStagingParameters();
+		Map<String, String[]> parameterMap = getStagingParameters();
 
 		String scope = ParamUtil.getString(req, "scope");
 
@@ -94,7 +94,7 @@ public class StagingUtil {
 				privateLayout, parameterMap);
 		}
 		else if (scope.equals("selected-pages")) {
-			Map layoutIdMap = new LinkedHashMap();
+			Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
 
 			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
 
@@ -134,7 +134,7 @@ public class StagingUtil {
 
 	public static void copyLayouts(
 			long sourceGroupId, long targetGroupId, boolean privateLayout,
-			Map parameterMap)
+			Map<String, String[]> parameterMap)
 		throws Exception {
 
 		byte[] data = LayoutServiceUtil.exportLayouts(
@@ -151,7 +151,7 @@ public class StagingUtil {
 			String portletId)
 		throws Exception {
 
-		Map parameterMap = getStagingParameters(req);
+		Map<String, String[]> parameterMap = getStagingParameters(req);
 
 		byte[] data = LayoutLocalServiceUtil.exportPortletInfo(
 			sourcePlid, portletId, parameterMap);
@@ -162,10 +162,11 @@ public class StagingUtil {
 			targetPlid, portletId, parameterMap, bais);
 	}
 
-	public static List getMissingParents(Layout layout, long liveGroupId)
+	public static List<Layout> getMissingParents(
+			Layout layout, long liveGroupId)
 		throws PortalException, SystemException {
 
-		List missingParents = new ArrayList();
+		List<Layout> missingParents = new ArrayList<Layout>();
 
 		long parentLayoutId = layout.getParentLayoutId();
 
@@ -192,15 +193,18 @@ public class StagingUtil {
 		return missingParents;
 	}
 
-	public static Map getStagingParameters(ActionRequest req) {
-		Map parameterMap = new LinkedHashMap(req.getParameterMap());
+	public static Map<String, String[]> getStagingParameters(
+		ActionRequest req) {
+
+		Map<String, String[]> parameterMap =
+			new LinkedHashMap<String, String[]>(req.getParameterMap());
 
 		if (!parameterMap.containsKey(
 				PortletDataHandlerKeys.PORTLET_DATA)) {
 
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_DATA,
-				Boolean.FALSE.toString());
+				new String[] {Boolean.FALSE.toString()});
 		}
 
 		if (!parameterMap.containsKey(
@@ -208,13 +212,13 @@ public class StagingUtil {
 
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_DATA_ALL,
-				Boolean.FALSE.toString());
+				new String[] {Boolean.FALSE.toString()});
 		}
 
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.PORTLET_SETUP)) {
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_SETUP,
-				Boolean.TRUE.toString());
+				new String[] {Boolean.TRUE.toString()});
 		}
 
 		if (!parameterMap.containsKey(
@@ -222,12 +226,13 @@ public class StagingUtil {
 
 			parameterMap.put(
 				PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
-				Boolean.TRUE.toString());
+				new String[] {Boolean.TRUE.toString()});
 		}
 
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.THEME)) {
 			parameterMap.put(
-				PortletDataHandlerKeys.THEME, Boolean.FALSE.toString());
+				PortletDataHandlerKeys.THEME,
+				new String[] {Boolean.FALSE.toString()});
 		}
 
 		if (!parameterMap.containsKey(
@@ -235,7 +240,7 @@ public class StagingUtil {
 
 			parameterMap.put(
 				PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-				Boolean.TRUE.toString());
+				new String[] {Boolean.TRUE.toString()});
 		}
 
 		if (!parameterMap.containsKey(
@@ -243,13 +248,13 @@ public class StagingUtil {
 
 			parameterMap.put(
 				PortletDataHandlerKeys.DELETE_PORTLET_DATA,
-				Boolean.FALSE.toString());
+				new String[] {Boolean.FALSE.toString()});
 		}
 
 		if (!parameterMap.containsKey(PortletDataHandlerKeys.DATA_STRATEGY)) {
 			parameterMap.put(
 				PortletDataHandlerKeys.DATA_STRATEGY,
-				PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
+				new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
 		}
 
 		if (!parameterMap.containsKey(
@@ -257,42 +262,49 @@ public class StagingUtil {
 
 			parameterMap.put(
 				PortletDataHandlerKeys.USER_ID_STRATEGY,
-				UserIdStrategy.CURRENT_USER_ID);
+				new String[] {UserIdStrategy.CURRENT_USER_ID});
 		}
 
 		return parameterMap;
 	}
 
-	public static Map getStagingParameters() {
-		Map parameterMap = new LinkedHashMap();
+	public static Map<String, String[]> getStagingParameters() {
+		Map<String, String[]> parameterMap =
+			new LinkedHashMap<String, String[]>();
 
 		parameterMap.put(
-			PortletDataHandlerKeys.PERMISSIONS, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PERMISSIONS,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS, Boolean.FALSE.toString());
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_DATA,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_ALL, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_DATA_ALL,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP, Boolean.TRUE.toString());
+			PortletDataHandlerKeys.PORTLET_SETUP,
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
-			Boolean.TRUE.toString());
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
-			PortletDataHandlerKeys.THEME, Boolean.FALSE.toString());
+			PortletDataHandlerKeys.THEME,
+			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			Boolean.TRUE.toString());
+			new String[] {Boolean.TRUE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
-			Boolean.FALSE.toString());
+			new String[] {Boolean.FALSE.toString()});
 		parameterMap.put(
 			PortletDataHandlerKeys.DATA_STRATEGY,
-			PortletDataHandlerKeys.DATA_STRATEGY_MIRROR);
+			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
 		parameterMap.put(
 			PortletDataHandlerKeys.USER_ID_STRATEGY,
-			UserIdStrategy.CURRENT_USER_ID);
+			new String[] {UserIdStrategy.CURRENT_USER_ID});
 
 		return parameterMap;
 	}
@@ -301,15 +313,15 @@ public class StagingUtil {
 			long plid, long liveGroupId, boolean includeChildren)
 		throws Exception {
 
-		Map parameterMap = getStagingParameters();
+		Map<String, String[]> parameterMap = getStagingParameters();
 
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			Boolean.FALSE.toString());
+			new String[] {Boolean.FALSE.toString()});
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		List layouts = new ArrayList();
+		List<Layout> layouts = new ArrayList<Layout>();
 
 		layouts.add(layout);
 
@@ -319,12 +331,12 @@ public class StagingUtil {
 			layouts.addAll(layout.getAllChildren());
 		}
 
-		Iterator itr = layouts.iterator();
+		Iterator<Layout> itr = layouts.iterator();
 
 		long[] layoutIds = new long[layouts.size()];
 
 		for (int i = 0; itr.hasNext(); i++) {
-			Layout curLayout = (Layout)itr.next();
+			Layout curLayout = itr.next();
 
 			layoutIds[i] = curLayout.getLayoutId();
 		}
@@ -340,24 +352,25 @@ public class StagingUtil {
 	}
 
 	public static void publishLayouts(
-			Map layoutIdMap, long stagingGroupId, long liveGroupId,
-			boolean privateLayout, Map parameterMap)
+			Map<Long, Boolean> layoutIdMap, long stagingGroupId,
+			long liveGroupId, boolean privateLayout,
+			Map<String, String[]> parameterMap)
 		throws Exception {
 
 		parameterMap.put(
 			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
-			Boolean.FALSE.toString());
+			new String[] {Boolean.FALSE.toString()});
 
-		List layouts = new ArrayList();
+		List<Layout> layouts = new ArrayList<Layout>();
 
-		Iterator itr1 = layoutIdMap.entrySet().iterator();
+		Iterator<Map.Entry<Long, Boolean>> itr1 =
+			layoutIdMap.entrySet().iterator();
 
 		while (itr1.hasNext()) {
-			Entry entry = (Entry)itr1.next();
+			Entry<Long, Boolean> entry = itr1.next();
 
-			long plid = ((Long)entry.getKey()).longValue();
-			boolean includeChildren =
-				((Boolean)entry.getValue()).booleanValue();
+			long plid = entry.getKey();
+			boolean includeChildren = entry.getValue();
 
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -365,10 +378,11 @@ public class StagingUtil {
 				layouts.add(layout);
 			}
 
-			Iterator itr2 = getMissingParents(layout, liveGroupId).iterator();
+			Iterator<Layout> itr2 = getMissingParents(
+				layout, liveGroupId).iterator();
 
 			while (itr2.hasNext()) {
-				Layout parentLayout = (Layout)itr2.next();
+				Layout parentLayout = itr2.next();
 
 				if (!layouts.contains(parentLayout)) {
 					layouts.add(parentLayout);
@@ -379,7 +393,7 @@ public class StagingUtil {
 				itr2 = layout.getAllChildren().iterator();
 
 				while (itr2.hasNext()) {
-					Layout childLayout = (Layout)itr2.next();
+					Layout childLayout = itr2.next();
 
 					if (!layouts.contains(childLayout)) {
 						layouts.add(childLayout);
@@ -388,12 +402,10 @@ public class StagingUtil {
 			}
 		}
 
-		itr1 = layouts.iterator();
-
 		long[] layoutIds = new long[layouts.size()];
 
-		for (int i = 0; itr1.hasNext(); i++) {
-			Layout curLayout = (Layout)itr1.next();
+		for (int i = 0; i < layouts.size(); i++) {
+			Layout curLayout = layouts.get(i);
 
 			layoutIds[i] = curLayout.getLayoutId();
 		}
@@ -428,7 +440,7 @@ public class StagingUtil {
 
 		String scope = ParamUtil.getString(req, "scope");
 
-		Map parameterMap = getStagingParameters(req);
+		Map<String, String[]> parameterMap = getStagingParameters(req);
 
 		if (scope.equals("all-pages")) {
 			copyLayouts(
@@ -436,7 +448,7 @@ public class StagingUtil {
 				privateLayout, parameterMap);
 		}
 		else if (scope.equals("selected-pages")) {
-			Map layoutIdMap = new LinkedHashMap();
+			Map<Long, Boolean> layoutIdMap = new LinkedHashMap<Long, Boolean>();
 
 			long[] rowIds = ParamUtil.getLongValues(req, "rowIds");
 
@@ -445,8 +457,7 @@ public class StagingUtil {
 				boolean includeChildren = ParamUtil.getBoolean(
 					req, "includeChildren_" + selPlid);
 
-				layoutIdMap.put(
-					new Long(selPlid), new Boolean(includeChildren));
+				layoutIdMap.put(selPlid, includeChildren);
 			}
 
 			publishLayouts(
@@ -507,7 +518,7 @@ public class StagingUtil {
 				null, liveGroup.isActive());
 
 			if (liveGroup.hasPrivateLayouts()) {
-				Map parameterMap = getStagingParameters();
+				Map<String, String[]> parameterMap = getStagingParameters();
 
 				copyLayouts(
 					liveGroup.getGroupId(), stagingGroup.getGroupId(), true,
@@ -515,7 +526,7 @@ public class StagingUtil {
 			}
 
 			if (liveGroup.hasPublicLayouts()) {
-				Map parameterMap = getStagingParameters();
+				Map<String, String[]> parameterMap = getStagingParameters();
 
 				copyLayouts(
 					liveGroup.getGroupId(), stagingGroup.getGroupId(), false,

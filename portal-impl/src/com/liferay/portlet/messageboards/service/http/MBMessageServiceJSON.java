@@ -73,7 +73,8 @@ import org.json.JSONObject;
  */
 public class MBMessageServiceJSON {
 	public static JSONObject addMessage(long categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
@@ -86,7 +87,8 @@ public class MBMessageServiceJSON {
 	}
 
 	public static JSONObject addMessage(long categoryId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
@@ -101,9 +103,9 @@ public class MBMessageServiceJSON {
 
 	public static JSONObject addMessage(long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
@@ -116,8 +118,8 @@ public class MBMessageServiceJSON {
 
 	public static JSONObject addMessage(long categoryId, long threadId,
 		long parentMessageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
@@ -147,8 +149,8 @@ public class MBMessageServiceJSON {
 		int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		java.util.List returnValue = MBMessageServiceUtil.getCategoryMessages(categoryId,
-				begin, end);
+		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> returnValue =
+			MBMessageServiceUtil.getCategoryMessages(categoryId, begin, end);
 
 		return MBMessageJSONSerializer.toJSONArray(returnValue);
 	}
@@ -260,8 +262,9 @@ public class MBMessageServiceJSON {
 	}
 
 	public static JSONObject updateMessage(long messageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
-		java.util.List existingFiles, double priority,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		java.util.List<String> existingFiles, double priority,
 		java.lang.String[] tagsEntries)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {

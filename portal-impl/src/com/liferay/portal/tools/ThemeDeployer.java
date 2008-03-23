@@ -45,8 +45,8 @@ import java.util.Properties;
 public class ThemeDeployer extends BaseDeployer {
 
 	public static void main(String[] args) {
-		List wars = new ArrayList();
-		List jars = new ArrayList();
+		List<String> wars = new ArrayList<String>();
+		List<String> jars = new ArrayList<String>();
 
 		for (int i = 0; i < args.length; i++) {
 			if (args[i].endsWith(".war")) {
@@ -63,7 +63,7 @@ public class ThemeDeployer extends BaseDeployer {
 	protected ThemeDeployer() {
 	}
 
-	protected ThemeDeployer(List wars, List jars) {
+	protected ThemeDeployer(List<String> wars, List<String> jars) {
 		super(wars, jars);
 	}
 
@@ -250,7 +250,7 @@ public class ThemeDeployer extends BaseDeployer {
 		String themeId = moduleArtifactId.substring(0, pos);
 		String themeName = pluginName;
 
-		Map filterMap = new HashMap();
+		Map<String, String> filterMap = new HashMap<String, String>();
 
 		filterMap.put("module_group_id", moduleGroupId);
 		filterMap.put("module_artifact_id", moduleArtifactId);

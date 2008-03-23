@@ -30,12 +30,12 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.servlet.filters.DynamicFilterConfig;
 
 import java.io.IOException;
 
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.Filter;
 import javax.servlet.FilterChain;
@@ -58,7 +58,7 @@ import javax.servlet.http.HttpSession;
 public class CASFilter extends BaseFilter {
 
 	public static void reload(long companyId) {
-		_casFilters.remove(new Long(companyId));
+		_casFilters.remove(companyId);
 	}
 
 	public void doFilter(
@@ -103,11 +103,8 @@ public class CASFilter extends BaseFilter {
 	}
 
 	protected Filter getCASFilter(long companyId) throws Exception {
-		Long companyIdObj = new Long(companyId);
-
 		edu.yale.its.tp.cas.client.filter.CASFilter casFilter =
-			(edu.yale.its.tp.cas.client.filter.CASFilter)_casFilters.get(
-				companyIdObj);
+			_casFilters.get(companyId);
 
 		if (casFilter == null) {
 			casFilter = new edu.yale.its.tp.cas.client.filter.CASFilter();
@@ -144,7 +141,7 @@ public class CASFilter extends BaseFilter {
 
 			casFilter.init(config);
 
-			_casFilters.put(companyIdObj, casFilter);
+			_casFilters.put(companyId, casFilter);
 		}
 
 		return casFilter;
@@ -152,7 +149,9 @@ public class CASFilter extends BaseFilter {
 
 	private static Log _log = LogFactoryUtil.getLog(CASFilter.class);
 
-	private static Map _casFilters = CollectionFactory.getSyncHashMap();
+	private static Map<Long, edu.yale.its.tp.cas.client.filter.CASFilter>
+		_casFilters = new ConcurrentHashMap
+			<Long, edu.yale.its.tp.cas.client.filter.CASFilter>();
 
 	private String _filterName;
 	private ServletContext _ctx;

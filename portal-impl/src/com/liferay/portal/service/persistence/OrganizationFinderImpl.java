@@ -417,7 +417,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			qPos.add(cities, 2);
 			qPos.add(zips, 2);
 
-			List<Organization> list = new ArrayList<Organization>();
+			List<Organization> organizations = new ArrayList<Organization>();
 
 			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
@@ -428,10 +428,10 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				Organization organization = OrganizationUtil.findByPrimaryKey(
 					organizationId.longValue());
 
-				list.add(organization);
+				organizations.add(organization);
 			}
 
-			return list;
+			return organizations;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -765,7 +765,7 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				qPos.add(zips, 2);
 			}
 
-			List<Organization> list = new ArrayList<Organization>();
+			List<Organization> organizations = new ArrayList<Organization>();
 
 			Iterator<Long> itr = (Iterator<Long>)QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
@@ -776,10 +776,10 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				Organization organization = OrganizationUtil.findByPrimaryKey(
 					organizationId.longValue());
 
-				list.add(organization);
+				organizations.add(organization);
 			}
 
-			return list;
+			return organizations;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

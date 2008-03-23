@@ -49,13 +49,14 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		dlFileRankPersistence.removeByF_N(folderId, name);
 	}
 
-	public List getFileRanks(long groupId, long userId)
+	public List<DLFileRank> getFileRanks(long groupId, long userId)
 		throws SystemException {
 
 		return dlFileRankFinder.findByG_U(groupId, userId);
 	}
 
-	public List getFileRanks(long groupId, long userId, int begin, int end)
+	public List<DLFileRank> getFileRanks(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		return dlFileRankFinder.findByG_U(groupId, userId, begin, end);
@@ -86,10 +87,10 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		dlFileRankPersistence.update(fileRank);
 
 		if (dlFileRankFinder.countByG_U(groupId, userId) > 5) {
-			List fileRanks = dlFileRankFinder.findByG_U(groupId, userId);
+			List<DLFileRank> fileRanks = dlFileRankFinder.findByG_U(
+				groupId, userId);
 
-			DLFileRank lastFileRank = (DLFileRank)fileRanks.get(
-				fileRanks.size() - 1);
+			DLFileRank lastFileRank = fileRanks.get(fileRanks.size() - 1);
 
 			dlFileRankPersistence.remove(lastFileRank.getPrimaryKey());
 		}

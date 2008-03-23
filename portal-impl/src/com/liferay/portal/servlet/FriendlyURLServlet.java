@@ -143,7 +143,8 @@ public class FriendlyURLServlet extends HttpServlet {
 	}
 
 	protected String getRedirect(
-			HttpServletRequest req, String path, String mainPath, Map params)
+			HttpServletRequest req, String path, String mainPath,
+			Map<String, String[]> params)
 		throws Exception {
 
 		if (Validator.isNull(path)) {

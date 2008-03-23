@@ -224,8 +224,9 @@ public class DLFileVersionLocalServiceUtil {
 		dlFileVersionLocalService.afterPropertiesSet();
 	}
 
-	public static java.util.List getFileVersions(long folderId,
-		java.lang.String name) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileVersion> getFileVersions(
+		long folderId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		DLFileVersionLocalService dlFileVersionLocalService = DLFileVersionLocalServiceFactory.getService();
 
 		return dlFileVersionLocalService.getFileVersions(folderId, name);

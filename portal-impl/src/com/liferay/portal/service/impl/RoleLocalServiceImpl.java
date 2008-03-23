@@ -225,13 +225,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return rolePersistence.findByC_C_C(companyId, classNameId, groupId);
 	}
 
-	public List getGroupRoles(long groupId)
+	public List<Role> getGroupRoles(long groupId)
 		throws PortalException, SystemException {
 
 		return groupPersistence.getRoles(groupId);
 	}
 
-	public Map getResourceRoles(
+	public Map<String, List<String>> getResourceRoles(
 			long companyId, String name, int scope, String primKey)
 		throws SystemException {
 
@@ -248,35 +248,35 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return roleFinder.findByC_N(companyId, name);
 	}
 
-	public List getRoles(long companyId) throws SystemException {
+	public List<Role> getRoles(long companyId) throws SystemException {
 		return rolePersistence.findByCompanyId(companyId);
 	}
 
-	public List getUserGroupRoles(long userId, long groupId)
+	public List<Role> getUserGroupRoles(long userId, long groupId)
 		throws SystemException {
 
 		return roleFinder.findByUserGroupRole(userId, groupId);
 	}
 
-	public List getUserRelatedRoles(long userId, long groupId)
+	public List<Role> getUserRelatedRoles(long userId, long groupId)
 		throws SystemException {
 
 		return roleFinder.findByU_G(userId, groupId);
 	}
 
-	public List getUserRelatedRoles(long userId, long[] groupIds)
+	public List<Role> getUserRelatedRoles(long userId, long[] groupIds)
 		throws SystemException {
 
 		return roleFinder.findByU_G(userId, groupIds);
 	}
 
-	public List getUserRelatedRoles(long userId, List groups)
+	public List<Role> getUserRelatedRoles(long userId, List<Group> groups)
 		throws SystemException {
 
 		return roleFinder.findByU_G(userId, groups);
 	}
 
-	public List getUserRoles(long userId)
+	public List<Role> getUserRoles(long userId)
 		throws PortalException, SystemException {
 
 		return userPersistence.getRoles(userId);
@@ -340,19 +340,20 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		return false;
 	}
 
-	public List search(
+	public List<Role> search(
 			long companyId, String name, String description, Integer type,
 			int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
 		return search(
-			companyId, name, description, type, new LinkedHashMap(), begin,
-			end, obc);
+			companyId, name, description, type,
+			new LinkedHashMap<String, Object>(), begin, end, obc);
 	}
 
-	public List search(
+	public List<Role> search(
 			long companyId, String name, String description, Integer type,
-			LinkedHashMap params, int begin, int end, OrderByComparator obc)
+			LinkedHashMap<String, Object> params, int begin, int end,
+			OrderByComparator obc)
 		throws SystemException {
 
 		return roleFinder.findByC_N_D_T(
@@ -364,12 +365,13 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		throws SystemException {
 
 		return searchCount(
-			companyId, name, description, type, new LinkedHashMap());
+			companyId, name, description, type,
+			new LinkedHashMap<String, Object>());
 	}
 
 	public int searchCount(
 			long companyId, String name, String description, Integer type,
-			LinkedHashMap params)
+			LinkedHashMap<String, Object> params)
 		throws SystemException {
 
 		return roleFinder.countByC_N_D_T(

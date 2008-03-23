@@ -57,7 +57,6 @@ import java.io.File;
 import java.io.IOException;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.imageio.ImageIO;
@@ -302,12 +301,9 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 	public void deleteImages(long folderId)
 		throws PortalException, SystemException {
 
-		Iterator<IGImage> itr = igImagePersistence.findByFolderId(
-			folderId).iterator();
+		List<IGImage> images = igImagePersistence.findByFolderId(folderId);
 
-		while (itr.hasNext()) {
-			IGImage image = (IGImage)itr.next();
-
+		for (IGImage image : images) {
 			deleteImage(image);
 		}
 	}

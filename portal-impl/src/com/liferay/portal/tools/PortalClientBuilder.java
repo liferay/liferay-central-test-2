@@ -59,10 +59,10 @@ public class PortalClientBuilder {
 
 			Element root = doc.getRootElement();
 
-			Iterator itr = root.elements("service").iterator();
+			Iterator<Element> itr = root.elements("service").iterator();
 
 			while (itr.hasNext()) {
-				Element service = (Element)itr.next();
+				Element service = itr.next();
 
 				String name = service.attributeValue("name");
 

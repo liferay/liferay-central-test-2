@@ -147,9 +147,7 @@ public class ViewAction extends PortletAction {
 				portalURL
 			});
 
-		for (int i = 0; i < validEmailAddresses.size(); i++) {
-			String emailAddress = (String)validEmailAddresses.get(i);
-
+		for (String emailAddress : validEmailAddresses) {
 			InternetAddress to = new InternetAddress(emailAddress);
 
 			MailMessage message = new MailMessage(

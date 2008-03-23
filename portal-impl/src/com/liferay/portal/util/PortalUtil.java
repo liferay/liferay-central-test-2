@@ -625,7 +625,7 @@ public class PortalUtil {
 
 	public static String getLayoutActualURL(
 			long groupId, boolean privateLayout, String mainPath,
-			String friendlyURL, Map<String, String> params)
+			String friendlyURL, Map<String, String[]> params)
 		throws PortalException, SystemException {
 
 		Layout layout = null;
@@ -944,7 +944,7 @@ public class PortalUtil {
 
 	public static Object[] getPortletFriendlyURLMapper(
 			long groupId, boolean privateLayout, String url,
-			Map<String, String> params)
+			Map<String, String[]> params)
 		throws PortalException, SystemException {
 
 		String friendlyURL = url;
@@ -971,13 +971,13 @@ public class PortalUtil {
 			if (pos != -1) {
 				friendlyURL = url.substring(0, pos);
 
-				Map<String, String> actualParams = null;
+				Map<String, String[]> actualParams = null;
 
 				if (params != null) {
-					actualParams = new HashMap<String, String>(params);
+					actualParams = new HashMap<String, String[]>(params);
 				}
 				else {
-					actualParams = new HashMap<String, String>();
+					actualParams = new HashMap<String, String[]>();
 				}
 
 				/*Object lifecycle = actualParams.get("p_p_lifecycle");

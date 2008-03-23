@@ -125,12 +125,12 @@ public class LayoutTemplateLocalUtil {
 
 		if (themeId != null) {
 			if (standard) {
-				layoutTemplate = (LayoutTemplate)_getThemesStandard(
-					themeId).get(layoutTemplateId);
+				layoutTemplate = _getThemesStandard(themeId).get(
+					layoutTemplateId);
 			}
 			else {
-				layoutTemplate = (LayoutTemplate)_getThemesCustom(
-					themeId).get(layoutTemplateId);
+				layoutTemplate = _getThemesCustom(themeId).get(
+					layoutTemplateId);
 			}
 
 			if (layoutTemplate != null) {
@@ -139,21 +139,17 @@ public class LayoutTemplateLocalUtil {
 		}
 
 		if (standard) {
-			layoutTemplate =
-				(LayoutTemplate)_warStandard.get(layoutTemplateId);
+			layoutTemplate = _warStandard.get(layoutTemplateId);
 
 			if (layoutTemplate == null) {
-				layoutTemplate =
-					(LayoutTemplate)_portalStandard.get(layoutTemplateId);
+				layoutTemplate = _portalStandard.get(layoutTemplateId);
 			}
 		}
 		else {
-			layoutTemplate =
-				(LayoutTemplate)_warCustom.get(layoutTemplateId);
+			layoutTemplate = _warCustom.get(layoutTemplateId);
 
 			if (layoutTemplate == null) {
-				layoutTemplate =
-					(LayoutTemplate)_portalCustom.get(layoutTemplateId);
+				layoutTemplate = _portalCustom.get(layoutTemplateId);
 			}
 		}
 
@@ -363,8 +359,8 @@ public class LayoutTemplateLocalUtil {
 				layoutTemplateIds.add(ovp);
 			}
 
-			LayoutTemplate layoutTemplateModel =
-				(LayoutTemplate)layoutTemplates.get(layoutTemplateId);
+			LayoutTemplate layoutTemplateModel = layoutTemplates.get(
+				layoutTemplateId);
 
 			if (layoutTemplateModel == null) {
 				layoutTemplateModel = new LayoutTemplateImpl(layoutTemplateId);

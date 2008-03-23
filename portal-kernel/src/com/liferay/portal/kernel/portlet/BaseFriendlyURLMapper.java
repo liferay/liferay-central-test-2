@@ -51,15 +51,54 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 	}
 
 	protected void addParam(
-		Map<String, String> params, String name, long value) {
+		Map<String, String[]> params, String name, boolean value) {
 
-		params.put(getNamespace() + name, String.valueOf(value));
+		addParam(params, name, String.valueOf(value));
 	}
 
 	protected void addParam(
-		Map<String, String> params, String name, String value) {
+		Map<String, String[]> params, String name, double value) {
 
-		params.put(getNamespace() + name, value);
+		addParam(params, name, String.valueOf(value));
+	}
+
+	protected void addParam(
+		Map<String, String[]> params, String name, int value) {
+
+		addParam(params, name, String.valueOf(value));
+	}
+
+	protected void addParam(
+		Map<String, String[]> params, String name, long value) {
+
+		addParam(params, name, String.valueOf(value));
+	}
+
+	protected void addParam(
+		Map<String, String[]> params, String name, short value) {
+
+		addParam(params, name, String.valueOf(value));
+	}
+
+	protected void addParam(
+		Map<String, String[]> params, String name, Object value) {
+
+		addParam(params, name, String.valueOf(value));
+	}
+
+	protected void addParam(
+		Map<String, String[]> params, String name, String value) {
+
+		try {
+			if (PortalUtil.isReservedParameter(name)) {
+				name = getNamespace() + name;
+			}
+
+			params.put(name, new String[] {value});
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
 	}
 
 	private static Log _log =

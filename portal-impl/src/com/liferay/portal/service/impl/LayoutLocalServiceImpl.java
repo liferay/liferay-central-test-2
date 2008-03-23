@@ -110,7 +110,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Locale;
@@ -1903,10 +1902,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			Map commentsMap = context.getComments();
 
-			Iterator itr = commentsMap.keySet().iterator();
+			Iterator<String> itr = commentsMap.keySet().iterator();
 
 			while (itr.hasNext()) {
-				String key = (String)itr.next();
+				String key = itr.next();
 
 				String[] comment = key.split(StringPool.POUND);
 
@@ -1978,16 +1977,17 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Element entityPermissionsEl = DocumentHelper.createElement(
 			entityName + "-permissions");
 
-		Map entityMap = layoutCache.getEntityMap(companyId, entityName);
+		Map<String, Long> entityMap = layoutCache.getEntityMap(
+			companyId, entityName);
 
-		Iterator itr = entityMap.entrySet().iterator();
+		Iterator<Map.Entry<String, Long>> itr = entityMap.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Long> entry = itr.next();
 
 			String name = entry.getKey().toString();
 
-			long entityGroupId = ((Long)entry.getValue()).longValue();
+			long entityGroupId = entry.getValue();
 
 			Element entityEl = exportGroupPermissions(
 				companyId, entityGroupId, resourceName, resourcePrimKey,
@@ -2014,18 +2014,19 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Element entityRolesEl = DocumentHelper.createElement(
 			entityName + "-roles");
 
-		Map entityMap = layoutCache.getEntityMap(companyId, entityName);
+		Map<String, Long> entityMap = layoutCache.getEntityMap(
+			companyId, entityName);
 
-		Iterator itr = entityMap.entrySet().iterator();
+		Iterator<Map.Entry<String, Long>> itr = entityMap.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Long> entry = itr.next();
 
 			String name = entry.getKey().toString();
 
-			long entityGroupId = ((Long)entry.getValue()).longValue();
+			long entityGroupId = entry.getValue();
 
-			List entityRoles = layoutCache.getGroupRoles(entityGroupId);
+			List<Role> entityRoles = layoutCache.getGroupRoles(entityGroupId);
 
 			Element entityEl = exportRoles(
 				companyId, resourceName, ResourceImpl.SCOPE_GROUP,
@@ -2113,12 +2114,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			LayoutTypePortlet layoutTypePortlet, Element parentEl)
 		throws PortalException, SystemException {
 
-		Iterator itr = portletPreferencesLocalService.getPortletPreferences(
-			layout.getPlid()).iterator();
+		Iterator<PortletPreferences> itr =
+			portletPreferencesLocalService.getPortletPreferences(
+				layout.getPlid()).iterator();
 
 		while (itr.hasNext()) {
-			PortletPreferences portletPreferences =
-				(PortletPreferences)itr.next();
+			PortletPreferences portletPreferences = itr.next();
 
 			javax.portlet.PortletPreferences jxPrefs =
 				portletPreferencesLocalService.getPreferences(
@@ -2273,12 +2274,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			LayoutTypePortlet layoutTypePortlet, Element parentEl)
 		throws PortalException, SystemException {
 
-		Iterator itr = portletPreferencesLocalService.getPortletPreferences(
-			ownerId, ownerType, plid).iterator();
+		Iterator<PortletPreferences> itr =
+			portletPreferencesLocalService.getPortletPreferences(
+				ownerId, ownerType, plid).iterator();
 
 		while (itr.hasNext()) {
-			PortletPreferences portletPreferences =
-				(PortletPreferences)itr.next();
+			PortletPreferences portletPreferences = itr.next();
 
 			String portletId = portletPreferences.getPortletId();
 
@@ -2415,13 +2416,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Element el = parentEl.addElement(elName);
 
-		Map resourceRoles = roleLocalService.getResourceRoles(
-			companyId, resourceName, scope, resourcePrimKey);
+		Map<String, List<String>> resourceRoles =
+			roleLocalService.getResourceRoles(
+				companyId, resourceName, scope, resourcePrimKey);
 
-		Iterator itr = resourceRoles.entrySet().iterator();
+		Iterator<Map.Entry<String, List<String>>> itr =
+			resourceRoles.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, List<String>> entry = itr.next();
 
 			String roleName = entry.getKey().toString();
 
@@ -2430,7 +2433,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				roleEl.addAttribute("name", roleName);
 
-				List<String> actions = (List)entry.getValue();
+				List<String> actions = entry.getValue();
 
 				for (int i = 0; i < actions.size(); i++) {
 					String action = actions.get(i);
@@ -2454,10 +2457,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			Map ratingsEntriesMap = context.getRatingsEntries();
 
-			Iterator itr = ratingsEntriesMap.keySet().iterator();
+			Iterator<String> itr = ratingsEntriesMap.keySet().iterator();
 
 			while (itr.hasNext()) {
-				String key = (String)itr.next();
+				String key = itr.next();
 
 				String[] ratingsEntry = key.split(StringPool.POUND);
 
@@ -2481,12 +2484,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void exportTags(PortletDataContext context, Element root) {
-		Map tagsEntries = context.getTagsEntries();
+		Map<String, String[]> tagsEntries = context.getTagsEntries();
 
-		Iterator itr = tagsEntries.keySet().iterator();
+		Iterator<String> itr = tagsEntries.keySet().iterator();
 
 		while (itr.hasNext()) {
-			String key = (String)itr.next();
+			String key = itr.next();
 
 			String[] tagsEntry = key.split(StringPool.POUND);
 
@@ -2495,8 +2498,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			el.addAttribute("class-name", tagsEntry[0]);
 			el.addAttribute("class-pk", tagsEntry[1]);
 			el.addAttribute(
-				"entries",
-				StringUtil.merge((String[])tagsEntries.get(key), ","));
+				"entries", StringUtil.merge(tagsEntries.get(key), ","));
 		}
 	}
 
@@ -2756,11 +2758,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		long layoutId = 0;
 
-		List layouts = layoutPersistence.findByG_P(groupId, privateLayout);
+		List<Layout> layouts = layoutPersistence.findByG_P(
+			groupId, privateLayout);
 
-		for (int i = 0; i < layouts.size(); i++) {
-			Layout curLayout = (Layout)layouts.get(i);
-
+		for (Layout curLayout : layouts) {
 			long curLayoutId = curLayout.getLayoutId();
 
 			if (curLayoutId > layoutId) {
@@ -2775,14 +2776,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long groupId, boolean privateLayout, long parentLayoutId)
 		throws SystemException {
 
-		List layouts = layoutPersistence.findByG_P_P(
+		List<Layout> layouts = layoutPersistence.findByG_P_P(
 			groupId, privateLayout, parentLayoutId);
 
 		if (layouts.size() == 0) {
 			return 0;
 		}
 
-		Layout layout = (Layout)layouts.get(layouts.size() - 1);
+		Layout layout = layouts.get(layouts.size() - 1);
 
 		return layout.getPriority() + 1;
 	}
@@ -2817,13 +2818,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		return new CurrentUserIdStrategy(user);
 	}
 
-	protected boolean hasRole(List roles, String roleName) {
+	protected boolean hasRole(List<Role> roles, String roleName) {
 		if ((roles == null) || (roles.size() == 0)) {
 			return false;
 		}
 
 		for (int i = 0; i < roles.size(); i++) {
-			Role role = (Role)roles.get(i);
+			Role role = roles.get(i);
 
 			if (role.getName().equals(roleName)) {
 				return true;
@@ -2845,14 +2846,14 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return;
 		}
 
-		List actions = getActions(actionEl);
+		List<String> actions = getActions(actionEl);
 
 		Resource resource = layoutCache.getResource(
 			companyId, groupId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
 			resourcePrimKey, portletActions);
 
 		permissionLocalService.setGroupPermissions(
-			groupId, (String[])actions.toArray(new String[0]),
+			groupId, actions.toArray(new String[actions.size()]),
 			resource.getResourceId());
 	}
 
@@ -2886,11 +2887,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return;
 		}
 
-		List actionsEls = entityPermissionsEl.elements(
+		List<Element> actionsEls = entityPermissionsEl.elements(
 			entityName + "-actions");
 
 		for (int i = 0; i < actionsEls.size(); i++) {
-			Element actionEl = (Element)actionsEls.get(i);
+			Element actionEl = actionsEls.get(i);
 
 			String name = actionEl.attributeValue("name");
 
@@ -2926,10 +2927,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return;
 		}
 
-		List entityEls = entityRolesEl.elements(entityName);
+		List<Element> entityEls = entityRolesEl.elements(entityName);
 
 		for (int i = 0; i < entityEls.size(); i++) {
-			Element entityEl = (Element)entityEls.get(i);
+			Element entityEl = entityEls.get(i);
 
 			String name = entityEl.attributeValue("name");
 
@@ -3017,10 +3018,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			PortletDataContext context, Layout layout, Element parentEl)
 		throws PortalException, SystemException {
 
-		Iterator itr = parentEl.elements("portlet-data").iterator();
+		Iterator<Element> itr = parentEl.elements("portlet-data").iterator();
 
 		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+			Element el = itr.next();
 
 			String portletId = el.attributeValue("portlet-id");
 
@@ -3101,10 +3102,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			boolean importUserPermissions)
 		throws PortalException, SystemException {
 
-		Iterator itr = permissionsEl.elements("portlet").iterator();
+		Iterator<Element> itr = permissionsEl.elements("portlet").iterator();
 
 		while (itr.hasNext()) {
-			Element portletEl = (Element)itr.next();
+			Element portletEl = itr.next();
 
 			String portletId = portletEl.attributeValue("portlet-id");
 
@@ -3163,10 +3164,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		long defaultUserId = userLocalService.getDefaultUserId(companyId);
 
-		Iterator itr = parentEl.elements("portlet-preferences").iterator();
+		Iterator<Element> itr = parentEl.elements(
+			"portlet-preferences").iterator();
 
 		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+			Element el = itr.next();
 
 			long ownerId = GetterUtil.getLong(el.attributeValue("owner-id"));
 			int ownerType = GetterUtil.getInteger(
@@ -3252,10 +3254,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Element rolesEl)
 		throws PortalException, SystemException {
 
-		Iterator itr = rolesEl.elements("portlet").iterator();
+		Iterator<Element> itr = rolesEl.elements("portlet").iterator();
 
 		while (itr.hasNext()) {
-			Element portletEl = (Element)itr.next();
+			Element portletEl = itr.next();
 
 			String portletId = portletEl.attributeValue("portlet-id");
 
@@ -3300,10 +3302,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			boolean communityRole)
 		throws PortalException, SystemException {
 
-		List roleEls = parentEl.elements("role");
+		List<Element> roleEls = parentEl.elements("role");
 
 		for (int i = 0; i < roleEls.size(); i++) {
-			Element roleEl = (Element)roleEls.get(i);
+			Element roleEl = roleEls.get(i);
 
 			String roleName = roleEl.attributeValue("name");
 
@@ -3314,11 +3316,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					"Ignoring permissions for role with name " + roleName);
 			}
 			else {
-				List actions = getActions(roleEl);
+				List<String> actions = getActions(roleEl);
 
 				permissionLocalService.setRolePermissions(
 					role.getRoleId(), companyId, resourceName, scope,
-					resourcePrimKey, (String[])actions.toArray(new String[0]));
+					resourcePrimKey,
+					actions.toArray(new String[actions.size()]));
 
 				if (communityRole) {
 					long[] groupIds = {GetterUtil.getLong(resourcePrimKey)};
@@ -3342,10 +3345,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		ZipReader zipReader = new ZipReader(new ByteArrayInputStream(themeZip));
 
-		Map entries = zipReader.getEntries();
+		Map<String, byte[]> entries = zipReader.getEntries();
 
 		String lookAndFeelXML = new String(
-			(byte[])entries.get("liferay-look-and-feel.xml"));
+			entries.get("liferay-look-and-feel.xml"));
 
 		String themeId = String.valueOf(layoutSet.getGroupId());
 
@@ -3376,13 +3379,13 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		FileUtil.deltree(themeLoader.getFileStorage() + "/" + themeId);
 
-		Iterator itr = entries.entrySet().iterator();
+		Iterator<Map.Entry<String, byte[]>> itr = entries.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, byte[]> entry = itr.next();
 
-			String key = (String)entry.getKey();
-			byte[] value = (byte[])entry.getValue();
+			String key = entry.getKey();
+			byte[] value = entry.getValue();
 
 			if (key.equals("liferay-look-and-feel.xml")) {
 				value = lookAndFeelXML.getBytes();
@@ -3420,10 +3423,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return;
 		}
 
-		List userActionsEls = userPermissionsEl.elements("user-actions");
+		List<Element> userActionsEls = userPermissionsEl.elements(
+			"user-actions");
 
 		for (int i = 0; i < userActionsEls.size(); i++) {
-			Element userActionsEl = (Element)userActionsEls.get(i);
+			Element userActionsEl = userActionsEls.get(i);
 
 			String emailAddress = userActionsEl.attributeValue("email-address");
 
@@ -3437,7 +3441,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				}
 			}
 			else {
-				List actions = getActions(userActionsEl);
+				List<String> actions = getActions(userActionsEl);
 
 				Resource resource = layoutCache.getResource(
 					companyId, groupId, resourceName,
@@ -3445,7 +3449,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					portletActions);
 
 				permissionLocalService.setUserPermissions(
-					user.getUserId(), (String[])actions.toArray(new String[0]),
+					user.getUserId(),
+					actions.toArray(new String[actions.size()]),
 					resource.getResourceId());
 			}
 		}
@@ -3462,14 +3467,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return;
 		}
 
-		LinkedHashMap params = new LinkedHashMap();
-
-		params.put("usersGroups", new Long(groupId));
-
-		List userEls = userRolesEl.elements("user");
+		List<Element> userEls = userRolesEl.elements("user");
 
 		for (int i = 0; i < userEls.size(); i++) {
-			Element userEl = (Element)userEls.get(i);
+			Element userEl = userEls.get(i);
 
 			String emailAddress = userEl.attributeValue("email-address");
 
@@ -3498,11 +3499,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return true;
 		}
 		else {
-			Iterator itr = layout.getChildren().iterator();
-
-			while (itr.hasNext()) {
-				Layout childLayout = (Layout)itr.next();
-
+			for (Layout childLayout : layout.getChildren()) {
 				if (isDescendant(childLayout, layoutId)) {
 					return true;
 				}
@@ -3518,10 +3515,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		try {
 			XStream xStream = new XStream();
 
-			Iterator itr = root.elements("comments").iterator();
+			Iterator<Element> itr = root.elements("comments").iterator();
 
 			while (itr.hasNext()) {
-				Element el = (Element)itr.next();
+				Element el = itr.next();
 
 				String className = GetterUtil.getString(
 					el.attributeValue("class-name"));
@@ -3551,10 +3548,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		try {
 			XStream xStream = new XStream();
 
-			Iterator itr = root.elements("ratings").iterator();
+			Iterator<Element> itr = root.elements("ratings").iterator();
 
 			while (itr.hasNext()) {
-				Element el = (Element)itr.next();
+				Element el = itr.next();
 
 				String className = GetterUtil.getString(
 					el.attributeValue("class-name"));
@@ -3582,10 +3579,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	protected void readTags(PortletDataContext context, Element root)
 		throws PortalException, SystemException {
 
-		Iterator itr = root.elements("tags").iterator();
+		Iterator<Element> itr = root.elements("tags").iterator();
 
 		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+			Element el = itr.next();
 
 			String className = GetterUtil.getString(
 				el.attributeValue("class-name"));

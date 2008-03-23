@@ -29,6 +29,6 @@ package com.liferay.portal.service.persistence;
  *
  */
 public interface PortletPreferencesFinder {
-	public java.util.List findByPortletId(java.lang.String portletId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.PortletPreferences> findByPortletId(
+		java.lang.String portletId) throws com.liferay.portal.SystemException;
 }

@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
@@ -86,8 +87,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			long categoryId, String subject, String body, List files,
-			boolean anonymous, double priority, String[] tagsEntries,
+			long categoryId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -114,8 +116,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			long categoryId, String subject, String body, List files,
-			boolean anonymous, double priority, String[] tagsEntries,
+			long categoryId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -142,10 +145,11 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			long categoryId, String subject, String body, List files,
-			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, boolean addCommunityPermissions,
-			boolean addGuestPermissions, ThemeDisplay themeDisplay)
+			long categoryId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -171,10 +175,11 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage addMessage(
-			long categoryId, String subject, String body, List files,
-			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, String[] communityPermissions,
-			String[] guestPermissions, ThemeDisplay themeDisplay)
+			long categoryId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
+			String[] communityPermissions, String[] guestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		MBCategoryPermission.check(
@@ -201,7 +206,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long categoryId, long threadId, long parentMessageId,
-			String subject, String body, List files, boolean anonymous,
+			String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, String[] tagsEntries,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
@@ -229,7 +235,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long categoryId, long threadId, long parentMessageId,
-			String subject, String body, List files, boolean anonymous,
+			String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, String[] tagsEntries,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -257,7 +264,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long categoryId, long threadId, long parentMessageId,
-			String subject, String body, List files, boolean anonymous,
+			String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, String[] tagsEntries, PortletPreferences prefs,
 			boolean addCommunityPermissions, boolean addGuestPermissions,
 			ThemeDisplay themeDisplay)
@@ -286,7 +294,8 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long categoryId, long threadId, long parentMessageId,
-			String subject, String body, List files, boolean anonymous,
+			String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, String[] tagsEntries, PortletPreferences prefs,
 			String[] communityPermissions, String[] guestPermissions,
 			ThemeDisplay themeDisplay)
@@ -333,16 +342,17 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		mbMessageLocalService.deleteMessage(messageId);
 	}
 
-	public List getCategoryMessages(long categoryId, int begin, int end)
+	public List<MBMessage> getCategoryMessages(
+			long categoryId, int begin, int end)
 		throws PortalException, SystemException {
 
-		List messages = new ArrayList();
+		List<MBMessage> messages = new ArrayList<MBMessage>();
 
-		Iterator itr = mbMessageLocalService.getCategoryMessages(
+		Iterator<MBMessage> itr = mbMessageLocalService.getCategoryMessages(
 			categoryId, begin, end).iterator();
 
 		while (itr.hasNext()) {
-			MBMessage message = (MBMessage)itr.next();
+			MBMessage message = itr.next();
 
 			if (MBMessagePermission.contains(
 					getPermissionChecker(), message, ActionKeys.VIEW)) {
@@ -371,16 +381,16 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		String name = category.getName();
 		String description = category.getDescription();
 
-		List messages = new ArrayList();
+		List<MBMessage> messages = new ArrayList<MBMessage>();
 
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, false);
 
-		Iterator itr = mbMessageLocalService.getCategoryMessages(
+		Iterator<MBMessage> itr = mbMessageLocalService.getCategoryMessages(
 			categoryId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = (MBMessage)itr.next();
+			MBMessage message = itr.next();
 
 			if (MBMessagePermission.contains(
 					getPermissionChecker(), message, ActionKeys.VIEW)) {
@@ -404,16 +414,16 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		String name = company.getName();
 		String description = company.getName();
 
-		List messages = new ArrayList();
+		List<MBMessage> messages = new ArrayList<MBMessage>();
 
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, false);
 
-		Iterator itr = mbMessageLocalService.getCompanyMessages(
+		Iterator<MBMessage> itr = mbMessageLocalService.getCompanyMessages(
 			companyId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = (MBMessage)itr.next();
+			MBMessage message = itr.next();
 
 			if (MBMessagePermission.contains(
 					getPermissionChecker(), message, ActionKeys.VIEW)) {
@@ -435,16 +445,16 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		String name = StringPool.BLANK;
 		String description = StringPool.BLANK;
 
-		List messages = new ArrayList();
+		List<MBMessage> messages = new ArrayList<MBMessage>();
 
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, true);
 
-		Iterator itr = mbMessageLocalService.getGroupMessages(
+		Iterator<MBMessage> itr = mbMessageLocalService.getGroupMessages(
 			groupId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = (MBMessage)itr.next();
+			MBMessage message = itr.next();
 
 			if (MBMessagePermission.contains(
 					getPermissionChecker(), message, ActionKeys.VIEW)) {
@@ -454,7 +464,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		if (messages.size() > 0) {
-			MBMessage message = (MBMessage)messages.get(messages.size() - 1);
+			MBMessage message = messages.get(messages.size() - 1);
 
 			name = message.getSubject();
 			description = message.getSubject();
@@ -473,16 +483,16 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		String name = StringPool.BLANK;
 		String description = StringPool.BLANK;
 
-		List messages = new ArrayList();
+		List<MBMessage> messages = new ArrayList<MBMessage>();
 
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, true);
 
-		Iterator itr = mbMessageLocalService.getGroupMessages(
+		Iterator<MBMessage> itr = mbMessageLocalService.getGroupMessages(
 			groupId, userId, 0, _MAX_END, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = (MBMessage)itr.next();
+			MBMessage message = itr.next();
 
 			if (MBMessagePermission.contains(
 					getPermissionChecker(), message, ActionKeys.VIEW)) {
@@ -492,7 +502,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		if (messages.size() > 0) {
-			MBMessage message = (MBMessage)messages.get(messages.size() - 1);
+			MBMessage message = messages.get(messages.size() - 1);
 
 			name = message.getSubject();
 			description = message.getSubject();
@@ -529,16 +539,16 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		String name = StringPool.BLANK;
 		String description = StringPool.BLANK;
 
-		List messages = new ArrayList();
+		List<MBMessage> messages = new ArrayList<MBMessage>();
 
 		MessageCreateDateComparator comparator =
 			new MessageCreateDateComparator(false, true);
 
-		Iterator itr = mbMessageLocalService.getThreadMessages(
+		Iterator<MBMessage> itr = mbMessageLocalService.getThreadMessages(
 			threadId, comparator).iterator();
 
 		while (itr.hasNext() && (messages.size() < max)) {
-			MBMessage message = (MBMessage)itr.next();
+			MBMessage message = itr.next();
 
 			if (MBMessagePermission.contains(
 					getPermissionChecker(), message, ActionKeys.VIEW)) {
@@ -548,7 +558,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		}
 
 		if (messages.size() > 0) {
-			MBMessage message = (MBMessage)messages.get(messages.size() - 1);
+			MBMessage message = messages.get(messages.size() - 1);
 
 			name = message.getSubject();
 			description = message.getSubject();
@@ -591,8 +601,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage updateMessage(
-			long messageId, String subject, String body, List files,
-			List existingFiles, double priority, String[] tagsEntries)
+			long messageId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files,
+			List<String> existingFiles, double priority, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		MBMessage message = mbMessageLocalService.getMessage(messageId);
@@ -623,8 +634,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	}
 
 	public MBMessage updateMessage(
-			long messageId, String subject, String body, List files,
-			List existingFiles, double priority, String[] tagsEntries,
+			long messageId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files,
+			List<String> existingFiles, double priority, String[] tagsEntries,
 			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
@@ -686,7 +698,7 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 	protected String exportToRSS(
 			String name, String description, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
-			List messages)
+			List<MBMessage> messages)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -696,14 +708,14 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(description);
 
-		List entries = new ArrayList();
+		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 
 		syndFeed.setEntries(entries);
 
-		Iterator itr = messages.iterator();
+		Iterator<MBMessage> itr = messages.iterator();
 
 		while (itr.hasNext()) {
-			MBMessage message = (MBMessage)itr.next();
+			MBMessage message = itr.next();
 
 			String author = PortalUtil.getUserName(
 				message.getUserId(), message.getUserName());

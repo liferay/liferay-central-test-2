@@ -54,7 +54,7 @@ public class DLFileEntryAndShortcutFinderImpl
 	public static String FIND_BY_FOLDER_IDS =
 		DLFileEntryAndShortcutFinder.class.getName() + ".findByFolderIds";
 
-	public int countByFolderIds(List folderIds) throws SystemException {
+	public int countByFolderIds(List<Long> folderIds) throws SystemException {
 		Session session = null;
 
 		try {
@@ -76,23 +76,23 @@ public class DLFileEntryAndShortcutFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				Long folderId = (Long)folderIds.get(i);
+				Long folderId = folderIds.get(i);
 
 				qPos.add(folderId);
 			}
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				Long folderId = (Long)folderIds.get(i);
+				Long folderId = folderIds.get(i);
 
 				qPos.add(folderId);
 			}
 
 			int count = 0;
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			while (itr.hasNext()) {
-				Long l = (Long)itr.next();
+				Long l = itr.next();
 
 				if (l != null) {
 					count += l.intValue();
@@ -109,7 +109,7 @@ public class DLFileEntryAndShortcutFinderImpl
 		}
 	}
 
-	public List findByFolderIds(List folderIds, int begin, int end)
+	public List findByFolderIds(List<Long> folderIds, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -136,18 +136,18 @@ public class DLFileEntryAndShortcutFinderImpl
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				Long folderId = (Long)folderIds.get(i);
+				Long folderId = folderIds.get(i);
 
 				qPos.add(folderId);
 			}
 
 			for (int i = 0; i < folderIds.size(); i++) {
-				Long folderId = (Long)folderIds.get(i);
+				Long folderId = folderIds.get(i);
 
 				qPos.add(folderId);
 			}
 
-			List list = new ArrayList();
+			List fileEntriesAndShortcuts = new ArrayList();
 
 			Iterator itr = QueryUtil.iterate(
 				q, HibernateUtil.getDialect(), begin, end);
@@ -169,10 +169,10 @@ public class DLFileEntryAndShortcutFinderImpl
 					obj = DLFileEntryUtil.findByF_N(folderId.longValue(), name);
 				}
 
-				list.add(obj);
+				fileEntriesAndShortcuts.add(obj);
 			}
 
-			return list;
+			return fileEntriesAndShortcuts;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -182,7 +182,7 @@ public class DLFileEntryAndShortcutFinderImpl
 		}
 	}
 
-	protected String getFolderIds(List folderIds, String table) {
+	protected String getFolderIds(List<Long> folderIds, String table) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < folderIds.size(); i++) {

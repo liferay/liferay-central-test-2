@@ -83,9 +83,10 @@ import java.rmi.RemoteException;
 public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		long categoryId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries, boolean addCommunityPermissions,
-		boolean addGuestPermissions) throws RemoteException {
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.addMessage(categoryId,
 					subject, body, files, anonymous, priority, tagsEntries,
@@ -102,8 +103,8 @@ public class MBMessageServiceSoap {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		long categoryId, java.lang.String subject, java.lang.String body,
-		java.util.List files, boolean anonymous, double priority,
-		java.lang.String[] tagsEntries,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
 		try {
@@ -122,7 +123,8 @@ public class MBMessageServiceSoap {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws RemoteException {
@@ -143,7 +145,8 @@ public class MBMessageServiceSoap {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap addMessage(
 		long categoryId, long threadId, long parentMessageId,
-		java.lang.String subject, java.lang.String body, java.util.List files,
+		java.lang.String subject, java.lang.String body,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
 		boolean anonymous, double priority, java.lang.String[] tagsEntries,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions) throws RemoteException {
@@ -190,8 +193,8 @@ public class MBMessageServiceSoap {
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap[] getCategoryMessages(
 		long categoryId, int begin, int end) throws RemoteException {
 		try {
-			java.util.List returnValue = MBMessageServiceUtil.getCategoryMessages(categoryId,
-					begin, end);
+			java.util.List<com.liferay.portlet.messageboards.model.MBMessage> returnValue =
+				MBMessageServiceUtil.getCategoryMessages(categoryId, begin, end);
 
 			return com.liferay.portlet.messageboards.model.MBMessageSoap.toSoapModels(returnValue);
 		}
@@ -373,7 +376,8 @@ public class MBMessageServiceSoap {
 
 	public static com.liferay.portlet.messageboards.model.MBMessageSoap updateMessage(
 		long messageId, java.lang.String subject, java.lang.String body,
-		java.util.List files, java.util.List existingFiles, double priority,
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files,
+		java.util.List<String> existingFiles, double priority,
 		java.lang.String[] tagsEntries) throws RemoteException {
 		try {
 			com.liferay.portlet.messageboards.model.MBMessage returnValue = MBMessageServiceUtil.updateMessage(messageId,

@@ -23,6 +23,7 @@
 package com.liferay.portal.service.persistence;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.impl.PortletPreferencesImpl;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
@@ -45,7 +46,9 @@ public class PortletPreferencesFinderImpl implements PortletPreferencesFinder {
 	public static String FIND_BY_PORTLETID =
 		PortletPreferencesFinder.class.getName() + ".findByPortletId";
 
-	public List findByPortletId(String portletId) throws SystemException {
+	public List<PortletPreferences> findByPortletId(String portletId)
+		throws SystemException {
+
 		Session session = null;
 
 		try {

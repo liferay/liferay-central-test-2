@@ -44,15 +44,15 @@ public class InputPermissionsTag extends IncludeTag {
 		req.setAttribute("liferay-ui:input-permissions:formName", _formName);
 
 		if (_modelName != null) {
-			List supportedActions =
+			List<String> supportedActions =
 				ResourceActionsUtil.getModelResourceActions(_modelName);
-			List communityDefaultActions =
+			List<String> communityDefaultActions =
 				ResourceActionsUtil.getModelResourceCommunityDefaultActions(
 					_modelName);
-			List guestDefaultActions =
+			List<String> guestDefaultActions =
 				ResourceActionsUtil.getModelResourceGuestDefaultActions(
 					_modelName);
-			List guestUnsupportedActions =
+			List<String> guestUnsupportedActions =
 				ResourceActionsUtil.getModelResourceGuestUnsupportedActions(
 					_modelName);
 

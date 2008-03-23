@@ -174,9 +174,9 @@ public class DefaultUpgradeTableImpl
 		// use TempUpgradeColumnImpl and need to ensure a column's temporary
 		// value is populated in the correct order.
 
-		columns = (Object[][])columns.clone();
+		columns = columns.clone();
 
-		List sortedColumnNames = new ArrayList();
+		List<String> sortedColumnNames = new ArrayList<String>();
 
 		getSortedColumnName(sortedColumnNames, upgradeColumn1);
 		getSortedColumnName(sortedColumnNames, upgradeColumn2);
@@ -273,7 +273,7 @@ public class DefaultUpgradeTableImpl
 	}
 
 	protected void getSortedColumnName(
-		List sortedColumnNames, UpgradeColumn upgradeColumn) {
+		List<String> sortedColumnNames, UpgradeColumn upgradeColumn) {
 
 		if (upgradeColumn == null) {
 			return;

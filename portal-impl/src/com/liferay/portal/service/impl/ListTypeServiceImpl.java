@@ -45,7 +45,7 @@ public class ListTypeServiceImpl extends ListTypeServiceBaseImpl {
 		return listTypePersistence.findByPrimaryKey(listTypeId);
 	}
 
-	public List getListTypes(String type) throws SystemException {
+	public List<ListType> getListTypes(String type) throws SystemException {
 		return listTypePersistence.findByType(type);
 	}
 

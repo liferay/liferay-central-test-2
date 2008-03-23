@@ -34,33 +34,34 @@ public interface RoleFinder {
 
 	public int countByC_N_D_T(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type,
-		java.util.LinkedHashMap params)
+		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByUserGroupRole(long userId, long groupId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portal.model.Role> findByUserGroupRole(
+		long userId, long groupId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portal.model.Role findByC_N(long companyId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException;
 
-	public java.util.List findByU_G(long userId, long groupId)
+	public java.util.List<com.liferay.portal.model.Role> findByU_G(
+		long userId, long groupId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Role> findByU_G(
+		long userId, long[] groupIds) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Role> findByU_G(
+		long userId, java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByU_G(long userId, long[] groupIds)
+	public java.util.List<com.liferay.portal.model.Role> findByC_N_D_T(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.lang.Integer type, java.util.LinkedHashMap<String, Object> params,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByU_G(long userId, java.util.List groups)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_N_D_T(long companyId, java.lang.String name,
-		java.lang.String description, java.lang.Integer type,
-		java.util.LinkedHashMap params, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.Map findByC_N_S_P(long companyId, java.lang.String name,
-		int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException;
+	public java.util.Map<String, java.util.List<String>> findByC_N_S_P(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey) throws com.liferay.portal.SystemException;
 }

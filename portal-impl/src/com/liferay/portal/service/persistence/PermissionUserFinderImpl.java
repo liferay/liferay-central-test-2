@@ -125,10 +125,10 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 			qPos.add(primKey);
 			qPos.add(actionId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -241,7 +241,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		}
 	}
 
-	public List findByPermissionAndRole(
+	public List<User> findByPermissionAndRole(
 			long companyId, long groupId, String name, String primKey,
 			String actionId, String firstName, String middleName,
 			String lastName, String emailAddress, boolean andOperator,
@@ -309,20 +309,18 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 				qPos.add(emailAddress);
 			}
 
-			List list = new ArrayList();
+			List<User> users = new ArrayList<User>();
 
-			Iterator itr = QueryUtil.iterate(
+			List<Long> userIds = (List<Long>)QueryUtil.list(
 				q, HibernateUtil.getDialect(), begin, end);
 
-			while (itr.hasNext()) {
-				Long userIdObj = (Long)itr.next();
+			for (long userId : userIds) {
+				User user = UserUtil.findByPrimaryKey(userId);
 
-				User user = UserUtil.findByPrimaryKey(userIdObj.longValue());
-
-				list.add(user);
+				users.add(user);
 			}
 
-			return list;
+			return users;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -332,7 +330,7 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		}
 	}
 
-	public List findByUserAndOrgGroupPermission(
+	public List<User> findByUserAndOrgGroupPermission(
 			long companyId, String name, String primKey, String actionId,
 			String firstName, String middleName, String lastName,
 			String emailAddress, boolean andOperator, int begin, int end)
@@ -383,20 +381,18 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 				qPos.add(emailAddress);
 			}
 
-			List list = new ArrayList();
+			List<User> users = new ArrayList<User>();
 
-			Iterator itr = QueryUtil.iterate(
+			List<Long> userIds = (List<Long>)QueryUtil.list(
 				q, HibernateUtil.getDialect(), begin, end);
 
-			while (itr.hasNext()) {
-				Long userIdObj = (Long)itr.next();
+			for (long userId : userIds) {
+				User user = UserUtil.findByPrimaryKey(userId);
 
-				User user = UserUtil.findByPrimaryKey(userIdObj.longValue());
-
-				list.add(user);
+				users.add(user);
 			}
 
-			return list;
+			return users;
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -446,10 +442,10 @@ public class PermissionUserFinderImpl implements PermissionUserFinder {
 		qPos.add(emailAddress);
 		qPos.add(emailAddress);
 
-		Iterator itr = q.list().iterator();
+		Iterator<Long> itr = q.list().iterator();
 
 		if (itr.hasNext()) {
-			Long count = (Long)itr.next();
+			Long count = itr.next();
 
 			if (count != null) {
 				return count.intValue();

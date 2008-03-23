@@ -154,7 +154,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			subject = "N/A";
 		}
 
-		List files = new ArrayList();
+		List<ObjectValuePair<String, byte[]>> files =
+			new ArrayList<ObjectValuePair<String, byte[]>>();
 		boolean anonymous = false;
 		double priority = 0.0;
 		String[] tagsEntries = null;
@@ -185,8 +186,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long userId, long categoryId, String subject, String body,
-			List files, boolean anonymous, double priority,
-			String[] tagsEntries, PortletPreferences prefs,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
 			boolean addCommunityPermissions, boolean addGuestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -199,8 +200,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long userId, long categoryId, String subject, String body,
-			List files, boolean anonymous, double priority,
-			String[] tagsEntries, PortletPreferences prefs,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
 			String[] communityPermissions, String[] guestPermissions,
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
@@ -213,8 +214,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long userId, long categoryId, String subject, String body,
-			List files, boolean anonymous, double priority,
-			String[] tagsEntries, PortletPreferences prefs,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions,
 			ThemeDisplay themeDisplay)
@@ -232,10 +233,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long userId, long categoryId, long threadId,
-			long parentMessageId, String subject, String body, List files,
-			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, boolean addCommunityPermissions,
-			boolean addGuestPermissions, ThemeDisplay themeDisplay)
+			long parentMessageId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addMessage(
@@ -247,7 +249,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			long userId, long categoryId, long threadId, long parentMessageId,
-			String subject, String body, List files, boolean anonymous,
+			String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
 			double priority, String[] tagsEntries, PortletPreferences prefs,
 			String[] communityPermissions, String[] guestPermissions,
 			ThemeDisplay themeDisplay)
@@ -261,10 +264,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			String uuid, long userId, long categoryId, long threadId,
-			long parentMessageId, String subject, String body, List files,
-			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, boolean addCommunityPermissions,
-			boolean addGuestPermissions, ThemeDisplay themeDisplay)
+			long parentMessageId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
+			boolean addCommunityPermissions, boolean addGuestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		return addMessage(
@@ -276,11 +280,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 	public MBMessage addMessage(
 			String uuid, long userId, long categoryId, long threadId,
-			long parentMessageId, String subject, String body, List files,
-			boolean anonymous, double priority, String[] tagsEntries,
-			PortletPreferences prefs, Boolean addCommunityPermissions,
-			Boolean addGuestPermissions, String[] communityPermissions,
-			String[] guestPermissions, ThemeDisplay themeDisplay)
+			long parentMessageId, String subject, String body,
+			List<ObjectValuePair<String, byte[]>> files, boolean anonymous,
+			double priority, String[] tagsEntries, PortletPreferences prefs,
+			Boolean addCommunityPermissions, Boolean addGuestPermissions,
+			String[] communityPermissions, String[] guestPermissions,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		StopWatch stopWatch = null;
@@ -401,10 +406,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				dlService.addDirectory(companyId, repositoryId, dirName);
 
 				for (int i = 0; i < files.size(); i++) {
-					ObjectValuePair ovp = (ObjectValuePair)files.get(i);
+					ObjectValuePair<String, byte[]> ovp = files.get(i);
 
-					String fileName = (String)ovp.getKey();
-					byte[] byteArray = (byte[])ovp.getValue();
+					String fileName = ovp.getKey();
+					byte[] byteArray = ovp.getValue();
 
 					try {
 						dlService.addFile(
@@ -605,12 +610,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
 				classNameId, classPK);
 
-			List messages = mbMessagePersistence.findByT_P(
+			List<MBMessage> messages = mbMessagePersistence.findByT_P(
 				discussion.getThreadId(),
 				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID, 0, 1);
 
 			if (messages.size() > 0) {
-				MBMessage message = (MBMessage)messages.get(0);
+				MBMessage message = messages.get(0);
 
 				mbThreadLocalService.deleteThread(message.getThreadId());
 			}
@@ -701,15 +706,16 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			// Message is a root message
 
 			if (thread.getRootMessageId() == message.getMessageId()) {
-				List childrenMessages = mbMessagePersistence.findByT_P(
-					message.getThreadId(), message.getMessageId());
+				List<MBMessage> childrenMessages =
+					mbMessagePersistence.findByT_P(
+						message.getThreadId(), message.getMessageId());
 
 				if (childrenMessages.size() > 1) {
 					throw new RequiredMessageException(
 						String.valueOf(message.getMessageId()));
 				}
 				else if (childrenMessages.size() == 1) {
-					MBMessage childMessage = (MBMessage)childrenMessages.get(0);
+					MBMessage childMessage = childrenMessages.get(0);
 
 					childMessage.setParentMessageId(
 						MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
@@ -725,16 +731,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			// Message is a child message
 
 			else {
-				List childrenMessages = mbMessagePersistence.findByT_P(
-					message.getThreadId(), message.getMessageId());
+				List<MBMessage> childrenMessages =
+					mbMessagePersistence.findByT_P(
+						message.getThreadId(), message.getMessageId());
 
 				// Message has children messages
 
 				if (childrenMessages.size() > 0) {
-					Iterator itr = childrenMessages.iterator();
+					Iterator<MBMessage> itr = childrenMessages.iterator();
 
 					while (itr.hasNext()) {
-						MBMessage childMessage = (MBMessage)itr.next();
+						MBMessage childMessage = itr.next();
 
 						childMessage.setParentMessageId(
 							message.getParentMessageId());
@@ -778,13 +785,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		mbMessagePersistence.remove(message.getPrimaryKey());
 	}
 
-	public List getCategoryMessages(long categoryId, int begin, int end)
+	public List<MBMessage> getCategoryMessages(
+			long categoryId, int begin, int end)
 		throws SystemException {
 
 		return mbMessagePersistence.findByCategoryId(categoryId, begin, end);
 	}
 
-	public List getCategoryMessages(
+	public List<MBMessage> getCategoryMessages(
 			long categoryId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -798,19 +806,20 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		return mbMessagePersistence.countByCategoryId(categoryId);
 	}
 
-	public int getCategoriesMessagesCount(List categoryIds)
+	public int getCategoriesMessagesCount(List<Long> categoryIds)
 		throws SystemException {
 
 		return mbMessageFinder.countByCategoryIds(categoryIds);
 	}
 
-	public List getCompanyMessages(long companyId, int begin, int end)
+	public List<MBMessage> getCompanyMessages(
+			long companyId, int begin, int end)
 		throws SystemException {
 
 		return mbMessagePersistence.findByCompanyId(companyId, begin, end);
 	}
 
-	public List getCompanyMessages(
+	public List<MBMessage> getCompanyMessages(
 			long companyId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -835,11 +844,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			MBDiscussion discussion = mbDiscussionPersistence.findByC_C(
 				classNameId, classPK);
 
-			List messages = mbMessagePersistence.findByT_P(
+			List<MBMessage> messages = mbMessagePersistence.findByT_P(
 				discussion.getThreadId(),
 				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
-			message = (MBMessage)messages.get(0);
+			message = messages.get(0);
 		}
 		catch (NoSuchDiscussionException nsde) {
 			String subject = String.valueOf(classPK);
@@ -883,7 +892,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		}
 	}
 
-	public List getGroupMessages(long groupId, int begin, int end)
+	public List<MBMessage> getGroupMessages(long groupId, int begin, int end)
 		throws SystemException {
 
 		return mbMessageFinder.findByGroupId(groupId, begin, end);
@@ -1009,7 +1018,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	public List<MBMessage> getThreadMessages(
-			long threadId, Comparator comparator)
+			long threadId, Comparator<MBMessage> comparator)
 		throws SystemException {
 
 		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
@@ -1050,22 +1059,24 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			subject = "N/A";
 		}
 
-		List files = new ArrayList();
+		List<ObjectValuePair<String, byte[]>> files =
+			new ArrayList<ObjectValuePair<String, byte[]>>();
+		List<String> existingFiles = new ArrayList<String>();
 		double priority = 0.0;
 		String[] tagsEntries = null;
 		PortletPreferences prefs = null;
 		ThemeDisplay themeDisplay = null;
 
 		return updateMessage(
-			userId, messageId, subject, body, files, files, priority,
+			userId, messageId, subject, body, files, existingFiles, priority,
 			tagsEntries, prefs, themeDisplay);
 	}
 
 	public MBMessage updateMessage(
 			long userId, long messageId, String subject, String body,
-			List files, List existingFiles, double priority,
-			String[] tagsEntries, PortletPreferences prefs,
-			ThemeDisplay themeDisplay)
+			List<ObjectValuePair<String, byte[]>> files,
+			List<String> existingFiles, double priority, String[] tagsEntries,
+			PortletPreferences prefs, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		// Message
@@ -1106,10 +1117,10 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				}
 
 				for (int i = 0; i < files.size(); i++) {
-					ObjectValuePair ovp = (ObjectValuePair)files.get(i);
+					ObjectValuePair<String, byte[]> ovp = files.get(i);
 
-					String fileName = (String)ovp.getKey();
-					byte[] byteArray = (byte[])ovp.getValue();
+					String fileName = ovp.getKey();
+					byte[] byteArray = ovp.getValue();
 
 					try {
 						dlService.addFile(
@@ -1317,9 +1328,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			User user = userPersistence.findByPrimaryKey(message.getUserId());
 
-			List categoryIds = new ArrayList();
+			List<Long> categoryIds = new ArrayList<Long>();
 
-			categoryIds.add(new Long(category.getCategoryId()));
+			categoryIds.add(category.getCategoryId());
 			categoryIds.addAll(category.getAncestorCategoryIds());
 
 			String messageURL = StringPool.BLANK;
