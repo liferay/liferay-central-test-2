@@ -34,6 +34,19 @@ update Group_ set type_ = 3 where type_ = 0;
 
 update Image set type_ = 'jpg' where type_ = 'jpeg';
 
+create table PortletItem (
+	portletItemId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	modifiedDate DATE null,
+	name VARCHAR(75) null,
+	portletId VARCHAR(75) null,
+	classNameId LONG
+);
+
 create table TasksProposal (
 	proposalId LONG not null primary key,
 	groupId LONG,
