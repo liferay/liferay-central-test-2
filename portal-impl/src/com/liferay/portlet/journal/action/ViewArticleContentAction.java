@@ -129,7 +129,8 @@ public class ViewArticleContentAction extends Action {
 					groupId, articleId, version, previewArticleId, root,
 					uploadReq);
 
-				Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
+				Map<String, String> tokens = JournalUtil.getTokens(
+					groupId, themeDisplay);
 
 				tokens.put("article_resource_pk", "-1");
 
@@ -203,10 +204,10 @@ public class ViewArticleContentAction extends Action {
 			String previewArticleId, Element root, UploadServletRequest req)
 		throws Exception {
 
-		Iterator itr = root.elements().iterator();
+		Iterator<Element> itr = root.elements().iterator();
 
 		while (itr.hasNext()) {
-			Element el = (Element)itr.next();
+			Element el = itr.next();
 
 			Element dynamicContent = el.element("dynamic-content");
 

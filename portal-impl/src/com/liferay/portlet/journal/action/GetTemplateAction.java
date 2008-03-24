@@ -67,7 +67,8 @@ public class GetTemplateAction extends Action {
 			ThemeDisplay themeDisplay =
 				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
+			Map<String, String> tokens = JournalUtil.getTokens(
+				groupId, themeDisplay);
 
 			tokens.put("template_id", templateId);
 

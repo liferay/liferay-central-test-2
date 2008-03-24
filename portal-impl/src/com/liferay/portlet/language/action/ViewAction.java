@@ -80,7 +80,7 @@ public class ViewAction extends PortletAction {
 
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
-		List availableLocales = ListUtil.fromArray(
+		List<Locale> availableLocales = ListUtil.fromArray(
 			LanguageUtil.getAvailableLocales());
 
 		if (availableLocales.contains(locale)) {

@@ -32,7 +32,6 @@ import com.liferay.portal.service.ImageLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
-import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.util.LocaleTransformerListener;
 import com.liferay.util.LocalizationUtil;
 
@@ -129,7 +128,6 @@ public class JournalArticleImpl
 		_smallImageType = smallImageType;
 	}
 
-	private JournalArticleResource _resource;
 	private String _userUuid;
 	private String _approvedByUserUuid;
 	private String _smallImageType;

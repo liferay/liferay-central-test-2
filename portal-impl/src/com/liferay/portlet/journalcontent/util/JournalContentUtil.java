@@ -31,9 +31,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.journal.model.JournalArticleDisplay;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
 
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
@@ -212,6 +213,7 @@ public class JournalContentUtil {
 
 	private static PortalCache _cache = MultiVMPoolUtil.getCache(CACHE_NAME);
 
-	private static Map _groups = CollectionFactory.getSyncHashMap();
+	private static Map<String, Set<String>> _groups =
+		new ConcurrentHashMap<String, Set<String>>();
 
 }

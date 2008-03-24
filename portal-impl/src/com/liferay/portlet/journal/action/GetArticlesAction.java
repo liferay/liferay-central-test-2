@@ -47,7 +47,6 @@ import java.io.StringReader;
 import java.text.DateFormat;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -82,7 +81,7 @@ public class GetArticlesAction extends Action {
 		throws Exception {
 
 		try {
-			List articles = getArticles(req);
+			List<JournalArticle> articles = getArticles(req);
 
 			String fileName = null;
 			byte[] byteArray = getContent(req, articles);
@@ -99,7 +98,9 @@ public class GetArticlesAction extends Action {
 		}
 	}
 
-	protected List getArticles(HttpServletRequest req) throws Exception {
+	protected List<JournalArticle> getArticles(HttpServletRequest req)
+		throws Exception {
+
 		long companyId = PortalUtil.getCompanyId(req);
 		long groupId = DAOParamUtil.getLong(req, "groupId");
 		String articleId = null;
@@ -168,7 +169,8 @@ public class GetArticlesAction extends Action {
 			approved, expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	protected byte[] getContent(HttpServletRequest req, List articles)
+	protected byte[] getContent(
+			HttpServletRequest req, List<JournalArticle> articles)
 		throws Exception {
 
 		long groupId = ParamUtil.getLong(req, "groupId");
@@ -178,7 +180,8 @@ public class GetArticlesAction extends Action {
 		ThemeDisplay themeDisplay =
 			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-		Map tokens = JournalUtil.getTokens(groupId, themeDisplay);
+		Map<String, String> tokens = JournalUtil.getTokens(
+			groupId, themeDisplay);
 
 		Document resultsDoc =
 			DocumentFactory.getInstance().createDocument("UTF-8");
@@ -187,11 +190,7 @@ public class GetArticlesAction extends Action {
 
 		SAXReader reader = new SAXReader();
 
-		Iterator itr = articles.iterator();
-
-		while (itr.hasNext()) {
-			JournalArticle article = (JournalArticle)itr.next();
-
+		for (JournalArticle article : articles) {
 			Element resultEl = resultSetEl.addElement("result");
 
 			Document articleDoc = reader.read(new StringReader(
