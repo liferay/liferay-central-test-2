@@ -317,6 +317,12 @@ public class UserServiceJSON {
 		UserServiceUtil.updatePortrait(userId, bytes);
 	}
 
+	public static void updateScreenName(long userId, java.lang.String screenName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		UserServiceUtil.updateScreenName(userId, screenName);
+	}
+
 	public static JSONObject updateUser(long userId,
 		java.lang.String oldPassword, boolean passwordReset,
 		java.lang.String screenName, java.lang.String emailAddress,

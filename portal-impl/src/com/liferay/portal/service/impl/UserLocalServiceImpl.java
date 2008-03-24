@@ -27,6 +27,7 @@ import com.liferay.portal.ContactFirstNameException;
 import com.liferay.portal.ContactLastNameException;
 import com.liferay.portal.DuplicateUserEmailAddressException;
 import com.liferay.portal.DuplicateUserScreenNameException;
+import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.ModelListenerException;
 import com.liferay.portal.NoSuchContactException;
 import com.liferay.portal.NoSuchGroupException;
@@ -68,6 +69,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
+import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
@@ -1682,6 +1684,31 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		ImageLocalUtil.updateImage(portraitId, bytes);
 	}
 
+	public void updateScreenName(long userId, String screenName)
+		throws PortalException, SystemException {
+
+		// User
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		screenName = getScreenName(screenName);
+
+		validateScreenName(user.getCompanyId(), userId, screenName);
+
+		user.setScreenName(screenName);
+
+		userPersistence.update(user);
+
+		// Group
+
+		Group group = groupLocalService.getUserGroup(
+			user.getCompanyId(), userId);
+
+		group.setFriendlyURL(StringPool.SLASH + screenName);
+
+		groupPersistence.update(group);
+	}
+
 	public User updateUser(
 			long userId, String oldPassword, boolean passwordReset,
 			String screenName, String emailAddress, String languageId,
@@ -2339,6 +2366,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (group != null) {
 			throw new DuplicateUserScreenNameException();
+		}
+
+		int exceptionType = LayoutImpl.validateFriendlyURL(friendlyURL);
+
+		if (exceptionType != -1) {
+			throw new UserScreenNameException(
+				new GroupFriendlyURLException(exceptionType));
 		}
 
 		String[] reservedScreenNames = PrefsPropsUtil.getStringArray(

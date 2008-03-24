@@ -1681,6 +1681,14 @@ public class UserLocalServiceUtil {
 		userLocalService.updatePortrait(userId, bytes);
 	}
 
+	public static void updateScreenName(long userId, java.lang.String screenName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		userLocalService.updateScreenName(userId, screenName);
+	}
+
 	public static com.liferay.portal.model.User updateUser(long userId,
 		java.lang.String oldPassword, boolean passwordReset,
 		java.lang.String screenName, java.lang.String emailAddress,

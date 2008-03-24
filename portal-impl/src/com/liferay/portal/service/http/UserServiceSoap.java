@@ -503,6 +503,18 @@ public class UserServiceSoap {
 		}
 	}
 
+	public static void updateScreenName(long userId, java.lang.String screenName)
+		throws RemoteException {
+		try {
+			UserServiceUtil.updateScreenName(userId, screenName);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portal.model.UserSoap updateUser(long userId,
 		java.lang.String oldPassword, boolean passwordReset,
 		java.lang.String screenName, java.lang.String emailAddress,

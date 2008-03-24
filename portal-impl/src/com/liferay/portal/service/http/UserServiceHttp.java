@@ -1360,6 +1360,44 @@ public class UserServiceHttp {
 		}
 	}
 
+	public static void updateScreenName(HttpPrincipal httpPrincipal,
+		long userId, java.lang.String screenName)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(userId);
+
+			Object paramObj1 = screenName;
+
+			if (screenName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
+					"updateScreenName", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static com.liferay.portal.model.User updateUser(
 		HttpPrincipal httpPrincipal, long userId, java.lang.String oldPassword,
 		boolean passwordReset, java.lang.String screenName,

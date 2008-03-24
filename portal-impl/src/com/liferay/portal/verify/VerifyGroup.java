@@ -22,6 +22,7 @@
 
 package com.liferay.portal.verify;
 
+import com.liferay.portal.GroupFriendlyURLException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -58,9 +59,10 @@ public class VerifyGroup extends VerifyProcess {
 		for (Group group : groups) {
 			String friendlyURL = StringPool.SLASH + group.getGroupId();
 
+			User user = null;
+
 			if (group.isUser()) {
-				User user = UserLocalServiceUtil.getUserById(
-					group.getClassPK());
+				user = UserLocalServiceUtil.getUserById(group.getClassPK());
 
 				friendlyURL = StringPool.SLASH + user.getScreenName();
 			}
@@ -68,8 +70,29 @@ public class VerifyGroup extends VerifyProcess {
 				friendlyURL = StringPool.SLASH + group.getClassPK();
 			}
 
-			GroupLocalServiceUtil.updateFriendlyURL(
-				group.getGroupId(), friendlyURL);
+			try {
+				GroupLocalServiceUtil.updateFriendlyURL(
+					group.getGroupId(), friendlyURL);
+			}
+			catch (GroupFriendlyURLException gfurle) {
+				if (user != null) {
+					long userId = user.getUserId();
+					String screenName = user.getScreenName();
+
+					_log.info(
+						"Updating user screen name " + screenName + " to " +
+							userId + " because it is generating an invalid " +
+								"friendly URL");
+
+					UserLocalServiceUtil.updateScreenName(
+						userId, String.valueOf(userId));
+				}
+				else {
+					_log.error("Invalid Friendly URL " + friendlyURL);
+
+					throw gfurle;
+				}
+			}
 		}
 	}
 

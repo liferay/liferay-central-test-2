@@ -326,6 +326,14 @@ public class UserServiceUtil {
 		userService.updatePortrait(userId, bytes);
 	}
 
+	public static void updateScreenName(long userId, java.lang.String screenName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		UserService userService = UserServiceFactory.getService();
+
+		userService.updateScreenName(userId, screenName);
+	}
+
 	public static com.liferay.portal.model.User updateUser(long userId,
 		java.lang.String oldPassword, boolean passwordReset,
 		java.lang.String screenName, java.lang.String emailAddress,

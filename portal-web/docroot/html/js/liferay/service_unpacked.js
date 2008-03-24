@@ -1066,6 +1066,13 @@ Liferay.Service.Portal.User = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	updateScreenName: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateScreenName";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	updateUser: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "updateUser";

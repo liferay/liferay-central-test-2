@@ -423,6 +423,14 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		userLocalService.updatePortrait(userId, bytes);
 	}
 
+	public void updateScreenName(long userId, String screenName)
+		throws PortalException, SystemException {
+
+		checkPermission(userId, ActionKeys.UPDATE);
+
+		userLocalService.updateScreenName(userId, screenName);
+	}
+
 	public User updateUser(
 			long userId, String oldPassword, boolean passwordReset,
 			String screenName, String emailAddress, String languageId,
