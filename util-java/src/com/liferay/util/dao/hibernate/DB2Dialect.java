@@ -46,10 +46,10 @@ public class DB2Dialect extends org.hibernate.dialect.DB2Dialect {
 		sm.append(") as cursor2) as cursor1 where rownumber_");
 
 		if (hasOffset) {
-			sm.append("between ? + 1 and ?");
+			sm.append(" between ? + 1 and ?");
 		}
 		else {
-			sm.append("<= ?");
+			sm.append(" <= ?");
 		}
 
 		return sm.toString();
