@@ -90,7 +90,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		Map<String, String[]> params, String name, String value) {
 
 		try {
-			if (PortalUtil.isReservedParameter(name)) {
+			if (!PortalUtil.isReservedParameter(name)) {
 				name = getNamespace() + name;
 			}
 
