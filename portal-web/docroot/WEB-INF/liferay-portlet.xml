@@ -765,6 +765,7 @@
 		<portlet-name>83</portlet-name>
 		<icon>/html/portlet/announcements/icon.png</icon>
 		<struts-path>alerts</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<preferences-company-wide>false</preferences-company-wide>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -779,6 +780,7 @@
 		<portlet-name>84</portlet-name>
 		<icon>/html/portlet/announcements/icon.png</icon>
 		<struts-path>announcements</struts-path>
+		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
