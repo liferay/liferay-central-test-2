@@ -51,7 +51,7 @@
 						<liferay-ui:message key="posts" />: <%= posts %><br />
 						<liferay-ui:message key="join-date" />: <%= dateFormatDate.format(userDisplay.getCreateDate()) %><br />
 
-						<hr />
+						<br />
 
 						<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="recentPostsURL">
 							<portlet:param name="struts_action" value="/message_boards/view" />
@@ -110,6 +110,13 @@
 			<div class="thread-top float-container">
 				<div class="subject">
 					<b><%= HtmlUtil.escape(message.getSubject()) %></b><br />
+
+					<div class="tags">
+						<liferay-ui:tags-summary
+							className="<%= MBMessage.class.getName() %>"
+							classPK="<%= message.getMessageId() %>"
+						/>
+					</div>
 
 					<%= dateFormatDateTime.format(message.getModifiedDate()) %>
 
