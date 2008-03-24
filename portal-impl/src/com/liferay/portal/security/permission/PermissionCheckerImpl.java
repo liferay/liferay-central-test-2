@@ -23,8 +23,6 @@
 package com.liferay.portal.security.permission;
 
 import com.liferay.portal.NoSuchResourceException;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-import com.liferay.portal.kernel.security.permission.PermissionCheckerBag;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;

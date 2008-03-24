@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.kernel.security.permission.PermissionsListFilter;
 import com.liferay.portal.model.Permission;
 
 import java.util.List;

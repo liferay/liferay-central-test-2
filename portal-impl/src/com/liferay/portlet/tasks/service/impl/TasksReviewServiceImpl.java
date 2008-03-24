@@ -24,7 +24,7 @@ package com.liferay.portlet.tasks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.TasksReview;

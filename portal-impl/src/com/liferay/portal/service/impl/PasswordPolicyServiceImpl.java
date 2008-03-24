@@ -24,8 +24,8 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.PasswordPolicyServiceBaseImpl;
 import com.liferay.portal.service.permission.PasswordPolicyPermissionUtil;
 import com.liferay.portal.service.permission.PortalPermissionUtil;

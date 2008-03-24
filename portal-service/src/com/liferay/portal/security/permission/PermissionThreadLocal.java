@@ -22,8 +22,6 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
-
 /**
  * <a href="PermissionThreadLocal.java.html"><b><i>View Source</i></b></a>
  *

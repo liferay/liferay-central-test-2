@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.security.permission;
+package com.liferay.portal.security.permission;
 
 /**
  * <a href="PermissionChecker.java.html"><b><i>View Source</i></b></a>

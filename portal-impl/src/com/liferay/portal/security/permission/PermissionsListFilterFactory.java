@@ -22,7 +22,6 @@
 
 package com.liferay.portal.security.permission;
 
-import com.liferay.portal.kernel.security.permission.PermissionsListFilter;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.util.PropsUtil;
 

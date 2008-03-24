@@ -80,7 +80,7 @@ public interface Layout extends LayoutModel {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.Layout> getChildren(
-		com.liferay.portal.kernel.security.permission.PermissionChecker permissionChecker)
+		com.liferay.portal.security.permission.PermissionChecker permissionChecker)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

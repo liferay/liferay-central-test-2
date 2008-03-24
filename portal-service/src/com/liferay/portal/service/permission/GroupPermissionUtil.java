@@ -25,7 +25,7 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
  * <a href="GroupPermissionUtil.java.html"><b><i>View Source</i></b></a>

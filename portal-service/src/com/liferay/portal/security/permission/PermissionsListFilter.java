@@ -20,7 +20,7 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.security.permission;
+package com.liferay.portal.security.permission;
 
 import com.liferay.portal.model.Permission;
 

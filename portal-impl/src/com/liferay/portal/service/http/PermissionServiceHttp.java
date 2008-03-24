@@ -209,7 +209,7 @@ public class PermissionServiceHttp {
 	public static boolean hasUserPermissions(HttpPrincipal httpPrincipal,
 		long userId, long groupId, java.lang.String actionId,
 		long[] resourceIds,
-		com.liferay.portal.kernel.security.permission.PermissionCheckerBag permissionCheckerBag)
+		com.liferay.portal.security.permission.PermissionCheckerBag permissionCheckerBag)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -233,7 +233,7 @@ public class PermissionServiceHttp {
 
 			if (permissionCheckerBag == null) {
 				paramObj4 = new NullWrapper(
-						"com.liferay.portal.kernel.security.permission.PermissionCheckerBag");
+						"com.liferay.portal.security.permission.PermissionCheckerBag");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(PermissionServiceUtil.class.getName(),

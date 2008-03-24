@@ -24,7 +24,7 @@ package com.liferay.portlet.softwarecatalog.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.security.permission.ActionKeys;
+import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.permission.PortalPermissionUtil;
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
 import com.liferay.portlet.softwarecatalog.service.base.SCLicenseServiceBaseImpl;

@@ -22,8 +22,8 @@
 
 package com.liferay.portal.service.permission;
 
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
  * <a href="UserPermission.java.html"><b><i>View Source</i></b></a>

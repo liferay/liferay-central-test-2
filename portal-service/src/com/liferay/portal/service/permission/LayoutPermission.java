@@ -24,8 +24,8 @@ package com.liferay.portal.service.permission;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.security.permission.PermissionChecker;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.security.permission.PermissionChecker;
 
 /**
  * <a href="LayoutPermission.java.html"><b><i>View Source</i></b></a>
