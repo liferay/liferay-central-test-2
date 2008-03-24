@@ -120,19 +120,19 @@ if (selLayout != null) {
 	layoutId = selLayout.getLayoutId();
 }
 
-if (Validator.isNull(tabs2) && (!tabs1.equals("settings"))) {
+if (Validator.isNull(tabs2) && !tabs1.equals("settings")) {
 	tabs2 = "pages";
 }
 
-if ((selLayout == null) && ((tabs2.equals("pages")))) {
+if (tabs1.endsWith("-pages") && !tabs2.equals("pages") && !tabs2.equals("look-and-feel") && !tabs2.equals("export-import")) {
+	tabs2 = "pages";
+}
+
+if ((selLayout == null) && tabs2.equals("pages")) {
 	tabs3 = "children";
 }
 
-if (tabs1.endsWith("-pages") && (!tabs2.equals("pages")) && (!tabs2.equals("look-and-feel")) && (!tabs2.equals("export-import"))) {
-	tabs2 = "pages";
-}
-
-if (tabs2.equals("pages") && (!tabs3.equals("children")) && (!tabs3.equals("look-and-feel"))) {
+if (tabs2.equals("pages") && !tabs3.equals("children") && !tabs3.equals("look-and-feel")) {
 	tabs3 = "page";
 }
 
