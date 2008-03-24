@@ -22,6 +22,10 @@
 
 package com.liferay.portal.security.permission;
 
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.Role;
+
 import java.io.Serializable;
 
 import java.util.List;
@@ -34,24 +38,24 @@ import java.util.List;
  */
 public interface PermissionCheckerBag extends Serializable {
 
-	public List getUserGroups();
+	public List<Group> getUserGroups();
 
-	public List getUserOrgs();
+	public List<Organization> getUserOrgs();
 
-	public List getUserOrgGroups();
+	public List<Group> getUserOrgGroups();
 
-	public List getUserUserGroupGroups();
+	public List<Group> getUserUserGroupGroups();
 
-	public List getGroups();
+	public List<Group> getGroups();
 
-	public List getRoles();
+	public List<Role> getRoles();
 
 	public boolean isCommunityAdmin(
-			PermissionChecker permissionChecker, Object group)
+			PermissionChecker permissionChecker, Group group)
 		throws Exception;
 
 	public boolean isCommunityOwner(
-			PermissionChecker permissionChecker, Object group)
+			PermissionChecker permissionChecker, Group group)
 		throws Exception;
 
 }

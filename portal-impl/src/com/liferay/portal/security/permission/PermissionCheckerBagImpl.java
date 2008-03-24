@@ -86,10 +86,8 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	public boolean isCommunityAdmin(
-			PermissionChecker permissionChecker, Object groupObj)
+			PermissionChecker permissionChecker, Group group)
 		throws Exception {
-
-		Group group = (Group)groupObj;
 
 		Boolean value = _communityAdmins.get(group.getGroupId());
 
@@ -104,10 +102,8 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 	}
 
 	public boolean isCommunityOwner(
-			PermissionChecker permissionChecker, Object groupObj)
+			PermissionChecker permissionChecker, Group group)
 		throws Exception {
-
-		Group group = (Group)groupObj;
 
 		Boolean value = _communityOwners.get(group.getGroupId());
 
