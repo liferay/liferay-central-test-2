@@ -244,16 +244,18 @@ public class StartupAction extends SimpleAction {
 			// Update release
 
 			ReleaseLocalServiceUtil.updateRelease(verified);
-
-			// Lucene
-
-			LuceneUtil.checkLuceneDir(CompanyImpl.SYSTEM);
 		}
 		catch (RuntimeException re) {
 			throw re;
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
+		}
+		finally {
+
+			// Lucene
+
+			LuceneUtil.checkLuceneDir(CompanyImpl.SYSTEM);
 		}
 	}
 
