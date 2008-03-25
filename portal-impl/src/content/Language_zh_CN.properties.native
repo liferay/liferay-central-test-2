@@ -1948,6 +1948,7 @@ on=在
 one-column=一个专栏
 one-of-your-fields-contain-invalid-characters=您的领域的当中一个包含无效字符。
 one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users=一个或更多组织同被撤销的用户联系在一起。您想要继续进行删除选择的组织由自动地unassociating 被撤销的用户吗?
+one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users=一个或更多用户群同被撤销的用户联系在一起。您想要继续进行删除选择的用户群由自动地unassociating 被撤销的用户吗?
 online-now=网上现在
 only-articles-associated-with-structure-x-are-shown=只有有相关於结构的文章 {0} 显示.
 only-articles-associated-with-template-x-are-shown=只有有相关於范本的文章 {0} 显示.
@@ -2965,6 +2966,7 @@ the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-p
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=选择的角色无法被删除因为这是一个必需的系统角色。
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=选择的结构无法被删除因为它是必需由一个或更多范本。
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=选择的范本无法被删除因为它是必需由一个或更多文章。
+the-selected-user-group-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-group-by-automatically-unassociating-the-deactivated-users=选择的用户群同被撤销的用户联系在一起。您想要继续进行删除选择的用户群由自动地unassociating 被撤销的用户吗?
 the-setup-could-not-be-found=设定不能被发现。
 the-signature-below-will-be-added-to-each-outgoing-message=签名资讯将新增於送出邮件最后。
 the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=sitemap 协议通知结构(sitemap 的) 查寻引擎网站。

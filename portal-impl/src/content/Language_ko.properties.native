@@ -1948,6 +1948,7 @@ on=에
 one-column=1개의 란
 one-of-your-fields-contain-invalid-characters=너의 분야의 한개은 부당한 특성을 포함한다.
 one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users=한개 이상 조직은 군대를 해산된 사용자에 회합된다. 너는 자동으로 군대를 해산하는가 사용자를unassociating서 선정하는가 조직을 삭제하는가에 진행하고는가 싶는가?
+one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users=한개 이상 사용자 그룹은 군대를 해산된 사용자에 회합된다. 너는 자동으로 군대를 해산하는가 사용자를unassociating서 선정하는가 사용자 그룹을 삭제하는가에 진행하고는가 싶는가?
 online-now=온라인 지금
 only-articles-associated-with-structure-x-are-shown=Only articles associated with structure {0} are shown.
 only-articles-associated-with-template-x-are-shown=Only articles associated with template {0} are shown.
@@ -2965,6 +2966,7 @@ the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-p
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=요구하기 체계 역할 이기 때문에 선정한 역할은 삭제될 수 없다
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=한개 이상 템플렛옆에 필수 이기 때문에 선정한 구조는 삭제될.
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=한개 이상 기사옆에 필수 이기 때문에 선정한 템플렛은 삭제될.
+the-selected-user-group-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-group-by-automatically-unassociating-the-deactivated-users=선정된 사용자 그룹은 군대를 해산된 사용자에 회합된다. 너는 자동으로 군대를 해산하는가 사용자를unassociating서 선정하는가 사용자 그룹을 삭제하는가에 진행하고는가 싶는가?
 the-setup-could-not-be-found=체제는 발견될 수 없었다.
 the-signature-below-will-be-added-to-each-outgoing-message=아래에의 서명은 각 outgoing 메시지에 추가될 것이다.
 the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=sitemap의정서는 웹사이트의 구조 (sitemap)의 수색 엔진을 통지한다.

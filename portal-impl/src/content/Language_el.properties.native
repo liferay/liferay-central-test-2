@@ -1948,6 +1948,7 @@ on=
 one-column=Μια στήλη
 one-of-your-fields-contain-invalid-characters=Ένας από τους τομείς σας περιέχει τους άκυρους χαρακτήρες.
 one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users=Μια ή περισσότερες οργανώσεις συνδέονται με τους απενεργοποιημένους χρήστες. Θέλετε να συνεχίσετε με τη διαγραφή των επιλεγμένων οργανώσεων με αυτόματα οι απενεργοποιημένοι χρήστες;
+one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users=Μια ή περισσότερες ομάδες χρηστών συνδέονται με τους απενεργοποιημένους χρήστες. Θέλετε να συνεχίσετε με τη διαγραφή των επιλεγμένων ομάδων χρηστών με αυτόματα οι απενεργοποιημένοι χρήστες;
 online-now=Θ*ον-ληνε τώρα
 only-articles-associated-with-structure-x-are-shown=Only articles associated with structure {0} are shown.
 only-articles-associated-with-template-x-are-shown=Only articles associated with template {0} are shown.
@@ -2965,6 +2966,7 @@ the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-p
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=Ο επιλεγμένος ρόλος δεν μπορεί να διαγραφεί διότι είναι ένας απαιτούμενος ρόλος του συστήματος.
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=Η επιλεγμένη δομή δεν μπορεί να διαγραφεί επειδή απαιτείται από ένα ή περισσότερα πρότυπα.
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=Το επιλεγμένο πρότυπο δεν μπορεί να διαγραφεί επειδή απαιτείται από ένα ή περισσότερα άρθρα.
+the-selected-user-group-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-group-by-automatically-unassociating-the-deactivated-users=Η επιλεγμένη ομάδα χρηστών συνδέεται με τους απενεργοποιημένους χρήστες. Θέλετε να συνεχίσετε με τη διαγραφή της επιλεγμένης ομάδας χρηστών με αυτόματα οι απενεργοποιημένοι χρήστες;
 the-setup-could-not-be-found=Η οργάνωση δεν θα μπορούσε να βρεθεί.
 the-signature-below-will-be-added-to-each-outgoing-message=Η παρακάτω υπογραφή θα προστεθεί σε κάθε εξερχόμενο μήνυμα.
 the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=Το πρωτόκολλο sitemap δηλώνει τις μηχανές αναζήτησης για τη δομή (sitemap) του ιστοχώρου.

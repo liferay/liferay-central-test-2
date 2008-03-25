@@ -1948,6 +1948,7 @@ on=在
 one-column=一個專欄
 one-of-your-fields-contain-invalid-characters=您的領域的當中一個包含無效字符。
 one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users=一個或更多組織同被撤銷的用戶聯繫在一起。您想要繼續進行刪除選擇的組織由自動地unassociating 被撤銷的用戶嗎?
+one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users=一個或更多用戶群同被撤銷的用戶聯繫在一起。您想要繼續進行刪除選擇的用戶群由自動地unassociating 被撤銷的用戶嗎?
 online-now=網上現在
 only-articles-associated-with-structure-x-are-shown=只有有相關於結構的文章 {0} 顯示.
 only-articles-associated-with-template-x-are-shown=只有有相關於範本的文章 {0} 顯示.
@@ -2965,6 +2966,7 @@ the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-p
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=選擇的角色無法被刪除因為這是一個必需的系統角色。
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=選擇的結構無法被刪除因為它是必需由一個或更多範本。
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=選擇的範本無法被刪除因為它是必需由一個或更多文章。
+the-selected-user-group-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-group-by-automatically-unassociating-the-deactivated-users=選擇的用戶群同被撤銷的用戶聯繫在一起。您想要繼續進行刪除選擇的用戶群由自動地unassociating 被撤銷的用戶嗎?
 the-setup-could-not-be-found=設定不能被發現。
 the-signature-below-will-be-added-to-each-outgoing-message=簽名資訊將新增於送出郵件最後。
 the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=sitemap 協議通知結構(sitemap 的) 查尋引擎網站。

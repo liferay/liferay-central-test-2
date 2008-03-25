@@ -83,14 +83,7 @@ UserGroup userGroup = (UserGroup)row.getObject();
 
 	<c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
 		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.DELETE) %>">
-			<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
-				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" />
-				<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-				<portlet:param name="redirect" value="<%= redirect %>" />
-				<portlet:param name="deleteUserGroupIds" value="<%= String.valueOf(userGroup.getUserGroupId()) %>" />
-			</portlet:actionURL>
-
-			<liferay-ui:icon-delete url="<%= deleteURL %>" />
+			<liferay-ui:icon image="delete" url='<%= "javascript: " + renderResponse.getNamespace() + "deleteUserGroup('" + userGroup.getUserGroupId() + "');" %>' />
 		</c:if>
 	</c:if>
 </liferay-ui:icon-menu>

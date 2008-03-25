@@ -131,13 +131,6 @@ long organizationGroupId = organization.getGroup().getGroupId();
 	</c:if>
 
 	<c:if test="<%= (portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN)) && OrganizationPermissionUtil.contains(permissionChecker, organizationId, ActionKeys.DELETE) %>">
-		<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteOrganizationURL">
-			<portlet:param name="struts_action" value="/enterprise_admin/edit_organization" />
-			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="deleteOrganizationIds" value="<%= String.valueOf(organizationId) %>" />
-		</portlet:actionURL>
-
 		<liferay-ui:icon image="delete" url='<%= "javascript: " + renderResponse.getNamespace() + "deleteOrganization('" + organizationId + "');" %>' />
 	</c:if>
 </liferay-ui:icon-menu>

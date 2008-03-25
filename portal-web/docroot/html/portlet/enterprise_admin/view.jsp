@@ -47,65 +47,31 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 
 <script type="text/javascript">
 	function <portlet:namespace />deleteOrganization(organizationId) {
-		var className = '<%= Organization.class.getName() %>';
-		var ids = organizationId;
-
-		<portlet:namespace />getUsersCount(
-			className, ids, false,
-			function(count) {
-				count = parseInt(count);
-
-				if (count > 0) {
-					<portlet:namespace />getUsersCount(
-						className, ids, true,
-						function(count) {
-							count = parseInt(count);
-
-							if (count > 0) {
-								if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
-									<portlet:namespace />doDeleteOrganization(organizationId);
-								}
-							}
-							else {
-								var message = null;
-
-								if (organizationId && (organizationId.split(",").length > 1)) {
-									message = '<%= UnicodeLanguageUtil.get(pageContext, "one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users") %>';
-								}
-								else {
-									message = '<%= UnicodeLanguageUtil.get(pageContext, "the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organization-by-automatically-unassociating-the-deactivated-users") %>';
-								}
-
-								if (confirm(message)) {
-									<portlet:namespace />doDeleteOrganization(organizationId);
-								}
-							}
-						}
-					);
-				}
-				else {
-					if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
-						<portlet:namespace />doDeleteOrganization(organizationId);
-					}
-				}
-			}
-		);
+		<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= Organization.class.getName() %>', organizationId);
 	}
 
 	function <portlet:namespace />deleteOrganizations() {
-		var ids = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+		var organizationIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
 
-		<portlet:namespace />deleteOrganization(ids);
+		if (!organizationIds) {
+			return;
+		}
+
+		<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= Organization.class.getName() %>', organizationIds);
+	}
+
+	function <portlet:namespace />deleteUserGroup(userGroupId) {
+		<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= UserGroup.class.getName() %>', userGroupId);
 	}
 
 	function <portlet:namespace />deleteUserGroups() {
-		if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-user-groups") %>')) {
-			document.<portlet:namespace />fm.method = "post";
-			document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-			document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />userGroupsRedirect.value;
-			document.<portlet:namespace />fm.<portlet:namespace />deleteUserGroupIds.value = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
-			submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /></portlet:actionURL>");
+		var userGroupIds = Liferay.Util.listCheckedExcept(document.<portlet:namespace />fm, "<portlet:namespace />allRowIds");
+
+		if (!userGroupIds) {
+			return;
 		}
+
+		<portlet:namespace />doDeleteOrganizationOrUserGroup('<%= UserGroup.class.getName() %>', userGroupIds);
 	}
 
 	function <portlet:namespace />deleteUsers(cmd) {
@@ -131,12 +97,85 @@ request.setAttribute("view.jsp-portletURLString", portletURLString);
 		}
 	}
 
-	function <portlet:namespace />doDeleteOrganization(organizationId) {
+	function <portlet:namespace />doDeleteOrganizationOrUserGroup(className, id) {
+		var ids = id;
+
+		<portlet:namespace />getUsersCount(
+			className, ids, false,
+			function(count) {
+				count = parseInt(count);
+
+				if (count > 0) {
+					<portlet:namespace />getUsersCount(
+						className, ids, true,
+						function(count) {
+							count = parseInt(count);
+
+							if (count > 0) {
+								if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
+									<portlet:namespace />doDeleteOrganizations(ids);
+								}
+							}
+							else {
+								var message = null;
+
+								if (id && (id.split(",").length > 1)) {
+									if (className == '<%= Organization.class.getName() %>') {
+										message = '<%= UnicodeLanguageUtil.get(pageContext, "one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users") %>';
+									}
+									else {
+										message = '<%= UnicodeLanguageUtil.get(pageContext, "one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users") %>';
+									}
+								}
+								else {
+									if (className == '<%= Organization.class.getName() %>') {
+										message = '<%= UnicodeLanguageUtil.get(pageContext, "the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organization-by-automatically-unassociating-the-deactivated-users") %>';
+									}
+									else {
+										message = '<%= UnicodeLanguageUtil.get(pageContext, "the-selected-user-group-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-group-by-automatically-unassociating-the-deactivated-users") %>';
+									}
+								}
+
+								if (confirm(message)) {
+									if (className == '<%= Organization.class.getName() %>') {
+										<portlet:namespace />doDeleteOrganizations(ids);
+									}
+									else {
+										<portlet:namespace />doDeleteUserGroups(ids);
+									}
+								}
+							}
+						}
+					);
+				}
+				else {
+					if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-this") %>')) {
+						if (className == '<%= Organization.class.getName() %>') {
+							<portlet:namespace />doDeleteOrganizations(ids);
+						}
+						else {
+							<portlet:namespace />doDeleteUserGroups(ids);
+						}
+					}
+				}
+			}
+		);
+	}
+
+	function <portlet:namespace />doDeleteOrganizations(organizationIds) {
 		document.<portlet:namespace />fm.method = "post";
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
 		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />organizationsRedirect.value;
-		document.<portlet:namespace />fm.<portlet:namespace />deleteOrganizationIds.value = organizationId;
+		document.<portlet:namespace />fm.<portlet:namespace />deleteOrganizationIds.value = organizationIds;
 		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_organization" /></portlet:actionURL>");
+	}
+
+	function <portlet:namespace />doDeleteUserGroups(userGroupIds) {
+		document.<portlet:namespace />fm.method = "post";
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = document.<portlet:namespace />fm.<portlet:namespace />userGroupsRedirect.value;
+		document.<portlet:namespace />fm.<portlet:namespace />deleteUserGroupIds.value = userGroupIds;
+		submitForm(document.<portlet:namespace />fm, "<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_user_group" /></portlet:actionURL>");
 	}
 
 	function <portlet:namespace />getUsersCount(className, ids, active, callback) {

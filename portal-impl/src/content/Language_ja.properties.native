@@ -1948,6 +1948,7 @@ on=
 one-column=1 つのコラム
 one-of-your-fields-contain-invalid-characters=あなたの分野の1 つは無効な特性を含んでいる。
 one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users=一つ以上の組織は非活動化させたユーザーと関連付けられる。自動的に非活動化させたユーザーをunassociating によって指定組織の削除と進みたいと思うか。
+one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users=一つ以上のユーザ・グループは非活動化させたユーザーと関連付けられる。自動的に非活動化させたユーザーをunassociating によって指定ユーザ・グループの削除と進みたいと思うか。
 online-now=オンライン今
 only-articles-associated-with-structure-x-are-shown=Only articles associated with structure {0} are shown.
 only-articles-associated-with-template-x-are-shown=Only articles associated with template {0} are shown.
@@ -2965,6 +2966,7 @@ the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-p
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=それが要求されたシステム役割であるので指定役割は削除される
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=指定構造は一つ以上の型板によって必須行うので削除されることができない。
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=指定型板は一つ以上の記事によって必須行うので削除されることができない。
+the-selected-user-group-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-group-by-automatically-unassociating-the-deactivated-users=指定ユーザ・グループは非活動化させたユーザーと関連付けられる。自動的に非活動化させたユーザーをunassociating によって指定ユーザ・グループの削除と進みたいと思うか。
 the-setup-could-not-be-found=組み立ては見つけることができなかった。
 the-signature-below-will-be-added-to-each-outgoing-message=下署名は各々の発信メッセージへ加えられる。
 the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=sitemap の議定書はウェブサイトの構造(sitemap) の調査エンジンを知らせる。

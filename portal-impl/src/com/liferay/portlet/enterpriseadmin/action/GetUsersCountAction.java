@@ -63,6 +63,7 @@ public class GetUsersCountAction extends AJAXAction {
 			count = getOrganizationUsersCount(companyId, ids, active);
 		}
 		else if (className.equals(UserGroup.class.getName())) {
+			count = getUserGroupUsersCount(companyId, ids, active);
 		}
 
 		return String.valueOf(count);
@@ -78,7 +79,26 @@ public class GetUsersCountAction extends AJAXAction {
 			LinkedHashMap<String, Object> userParams =
 				new LinkedHashMap<String, Object>();
 
-			userParams.put("usersOrgs", new Long(organizationId));
+			userParams.put("usersOrgs", organizationId);
+
+			count+= UserLocalServiceUtil.searchCount(
+				companyId, null, active, userParams);
+		}
+
+		return count;
+	}
+
+	protected int getUserGroupUsersCount(
+			long companyId, long[] userGroupIds, boolean active)
+		throws Exception {
+
+		int count = 0;
+
+		for (long userGroupId : userGroupIds) {
+			LinkedHashMap<String, Object> userParams =
+				new LinkedHashMap<String, Object>();
+
+			userParams.put("usersUserGroups", userGroupId);
 
 			count+= UserLocalServiceUtil.searchCount(
 				companyId, null, active, userParams);

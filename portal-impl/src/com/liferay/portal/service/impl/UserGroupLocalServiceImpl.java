@@ -106,9 +106,13 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
 			userGroupId);
 
-		if (userGroupPersistence.containsUsers(userGroup.getUserGroupId())) {
+		if (userLocalService.getUserGroupUsersCount(userGroupId, true) > 0) {
 			throw new RequiredUserGroupException();
 		}
+
+		// Users
+
+		clearUserUserGroups(userGroupId);
 
 		// Group
 

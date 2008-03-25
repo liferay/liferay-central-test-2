@@ -1948,6 +1948,7 @@ on=Sur
 one-column=Une Colonne
 one-of-your-fields-contain-invalid-characters=Un de vos champs contiennent les caractères inadmissibles.
 one-or-more-organizations-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-organizations-by-automatically-unassociating-the-deactivated-users=Un ou plusieurs organismes sont associés aux utilisateurs mis hors tension. Voulez-vous continuer de supprimer les organismes choisis par unassociating automatiquement les utilisateurs mis hors tension ?
+one-or-more-user-groups-are-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-groups-by-automatically-unassociating-the-deactivated-users=Un ou plusieurs groupes d'utilisateur sont associés aux utilisateurs mis hors tension. Voulez-vous continuer de supprimer les groupes d'utilisateur choisis par unassociating automatiquement les utilisateurs mis hors tension ?
 online-now=En ligne Maintenant
 only-articles-associated-with-structure-x-are-shown=Only articles associated with structure {0} are shown.
 only-articles-associated-with-template-x-are-shown=Only articles associated with template {0} are shown.
@@ -2965,6 +2966,7 @@ the-selected-organization-is-associated-with-deactivated-users.-do-you-want-to-p
 the-selected-role-cannot-be-deleted-because-it-is-a-required-system-role=Le rôle choisi ne peut pas être supprimé car c'est un rôle requis par le système.
 the-selected-structure-cannot-be-deleted-because-it-is-a-required-by-one-or-more-templates=La structure choisie ne peut pas être supprimée parce qu'elle est exigé par un ou plusieurs modèle de documents.
 the-selected-template-cannot-be-deleted-because-it-is-a-required-by-one-or-more-articles=Le modèle de document choisi ne peut pas être supprimé parce qu'il est exigé par un ou plusieurs articles.
+the-selected-user-group-is-associated-with-deactivated-users.-do-you-want-to-proceed-with-deleting-the-selected-user-group-by-automatically-unassociating-the-deactivated-users=Le groupe d'utilisateur choisi est associé aux utilisateurs mis hors tension. Voulez-vous continuer de supprimer le groupe d'utilisateur choisi par unassociating automatiquement les utilisateurs mis hors tension ?
 the-setup-could-not-be-found=L'installation n'a pas pu être trouvée.
 the-signature-below-will-be-added-to-each-outgoing-message=La signature ci-dessous sera ajoutée à chaque message envoyé.
 the-sitemap-protocol-notifies-search-engines-of-the-structure-of-the-website=Le protocole de sitemap informe des moteurs de recherche de la structure (sitemap) du site Web.
