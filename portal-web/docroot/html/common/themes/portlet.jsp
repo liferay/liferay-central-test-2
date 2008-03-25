@@ -49,7 +49,7 @@ if (tilesPortletDecorateBoolean) {
 
 boolean portletDecorate = GetterUtil.getBoolean(portletSetup.getValue("portlet-setup-show-borders", String.valueOf(portletDecorateDefault)));
 
-Boolean portletDecorateObj = (Boolean)request.getAttribute(WebKeys.PORTLET_DECORATE);
+Boolean portletDecorateObj = (Boolean)renderRequest.getAttribute(WebKeys.PORTLET_DECORATE);
 
 if (portletDecorateObj != null) {
 	portletDecorate = portletDecorateObj.booleanValue();
