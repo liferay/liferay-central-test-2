@@ -82,17 +82,6 @@
 		</licenses>
 	</library>
 	<library>
-		<file-name>development/chardet.jar</file-name>
-		<version>1.0</version>
-		<project-name>Mozilla Charset Detectors</project-name>
-		<project-url>http://jchardet.sourceforge.net</project-url>
-		<licenses>
-			<license>
-				<license-name>MPL 1.1</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
 		<file-name>development/derby.jar</file-name>
 		<version>10.2.2.0</version>
 		<project-name>Derby</project-name>
@@ -100,6 +89,28 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>development/dtddoc.jar</file-name>
+		<version>1.1.0</version>
+		<project-name>DTDDoc</project-name>
+		<project-url>http://dtddoc.sourceforge.net</project-url>
+		<licenses>
+			<license>
+				<license-name>MIT</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>development/dtdparser.jar</file-name>
+		<version>1.20</version>
+		<project-name>DTDParser</project-name>
+		<project-url>http://www.wutka.com/dtdparser.html</project-url>
+		<licenses>
+			<license>
+				<license-name>LGPL</license-name>
 			</license>
 		</licenses>
 	</library>
@@ -205,6 +216,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/jakarta-regexp.jar</file-name>
+		<version>1.2</version>
+		<project-name>Jakarta Regexp</project-name>
+		<project-url>http://jakarta.apache.org/regexp</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 1.1</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/jass.jar</file-name>
 		<version></version>
 		<project-name>Jass</project-name>
@@ -245,6 +267,17 @@
 		<version>2.0 UR1</version>
 		<project-name>Glassfish</project-name>
 		<project-url>https://glassfish.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>development/jhighlight.jar</file-name>
+		<version>1.0</version>
+		<project-name>JHighlight</project-name>
+		<project-url>https://jhighlight.dev.java.net/</project-url>
 		<licenses>
 			<license>
 				<license-name>CDDL 1.0</license-name>
@@ -854,6 +887,17 @@
 		<licenses>
 			<license>
 				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
+		<file-name>portal/chardet.jar</file-name>
+		<version>1.0</version>
+		<project-name>Mozilla Charset Detectors</project-name>
+		<project-url>http://jchardet.sourceforge.net</project-url>
+		<licenses>
+			<license>
+				<license-name>MPL 1.1</license-name>
 			</license>
 		</licenses>
 	</library>
