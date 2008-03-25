@@ -119,6 +119,26 @@ public interface SubscriptionLocalService {
 	public void setEmailAddressPersistence(
 		com.liferay.portal.service.persistence.EmailAddressPersistence emailAddressPersistence);
 
+	public com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence();
+
+	public void setExpandoColumnPersistence(
+		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence);
+
+	public com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence();
+
+	public void setExpandoTablePersistence(
+		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence);
+
+	public com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence();
+
+	public void setExpandoTableRowPersistence(
+		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence);
+
+	public com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence();
+
+	public void setExpandoValuePersistence(
+		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence);
+
 	public com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence();
 
 	public void setGroupPersistence(

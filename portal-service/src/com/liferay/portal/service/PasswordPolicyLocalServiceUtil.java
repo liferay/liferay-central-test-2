@@ -218,6 +218,58 @@ public class PasswordPolicyLocalServiceUtil {
 		passwordPolicyLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		return passwordPolicyLocalService.getExpandoColumnPersistence();
+	}
+
+	public static void setExpandoColumnPersistence(
+		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		passwordPolicyLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		return passwordPolicyLocalService.getExpandoTablePersistence();
+	}
+
+	public static void setExpandoTablePersistence(
+		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		passwordPolicyLocalService.setExpandoTablePersistence(expandoTablePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		return passwordPolicyLocalService.getExpandoTableRowPersistence();
+	}
+
+	public static void setExpandoTableRowPersistence(
+		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		passwordPolicyLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		return passwordPolicyLocalService.getExpandoValuePersistence();
+	}
+
+	public static void setExpandoValuePersistence(
+		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
+		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
+
+		passwordPolicyLocalService.setExpandoValuePersistence(expandoValuePersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		PasswordPolicyLocalService passwordPolicyLocalService = PasswordPolicyLocalServiceFactory.getService();
 

@@ -217,6 +217,58 @@ public class PermissionLocalServiceUtil {
 		permissionLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getExpandoColumnPersistence();
+	}
+
+	public static void setExpandoColumnPersistence(
+		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		permissionLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getExpandoTablePersistence();
+	}
+
+	public static void setExpandoTablePersistence(
+		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		permissionLocalService.setExpandoTablePersistence(expandoTablePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getExpandoTableRowPersistence();
+	}
+
+	public static void setExpandoTableRowPersistence(
+		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		permissionLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		return permissionLocalService.getExpandoValuePersistence();
+	}
+
+	public static void setExpandoValuePersistence(
+		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
+		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
+
+		permissionLocalService.setExpandoValuePersistence(expandoValuePersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		PermissionLocalService permissionLocalService = PermissionLocalServiceFactory.getService();
 

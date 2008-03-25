@@ -218,6 +218,58 @@ public class OrganizationLocalServiceUtil {
 		organizationLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getExpandoColumnPersistence();
+	}
+
+	public static void setExpandoColumnPersistence(
+		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		organizationLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getExpandoTablePersistence();
+	}
+
+	public static void setExpandoTablePersistence(
+		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		organizationLocalService.setExpandoTablePersistence(expandoTablePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getExpandoTableRowPersistence();
+	}
+
+	public static void setExpandoTableRowPersistence(
+		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		organizationLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		return organizationLocalService.getExpandoValuePersistence();
+	}
+
+	public static void setExpandoValuePersistence(
+		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
+		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
+
+		organizationLocalService.setExpandoValuePersistence(expandoValuePersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		OrganizationLocalService organizationLocalService = OrganizationLocalServiceFactory.getService();
 

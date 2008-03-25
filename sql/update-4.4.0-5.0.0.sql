@@ -26,6 +26,44 @@ create table AnnouncementsFlag (
 	value INTEGER
 );
 
+create table ExpandoColumn (
+	columnId LONG not null primary key,
+	classNameId LONG,
+	name VARCHAR(200) null,
+	type_ INTEGER,
+	settings_ STRING null
+);
+
+create table ExpandoTable (
+	tableId LONG not null primary key,
+	classNameId LONG,
+	name VARCHAR(200) null
+);
+
+create table ExpandoTables_ExpandoColumns (
+	tableId LONG not null,
+	columnId LONG not null,
+	primary key (tableId, columnId)
+);
+
+create table ExpandoTableRow (
+	rowId LONG not null primary key,
+	tableId LONG
+);
+
+create table ExpandoTableRows_ExpandoValues (
+	rowId LONG not null,
+	valueId LONG not null,
+	primary key (rowId, valueId)
+);
+
+create table ExpandoValue (
+	valueId LONG not null primary key,
+	columnId LONG,
+	classPK LONG,
+	value STRING null
+);
+
 alter table IGImage add name VARCHAR(75) null;
 alter table IGImage add custom1ImageId LONG null;
 alter table IGImage add custom2ImageId LONG null;

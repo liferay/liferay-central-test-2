@@ -326,6 +326,44 @@ create table EmailAddress (
 	primary_ BOOLEAN
 );
 
+create table ExpandoColumn (
+	columnId LONG not null primary key,
+	classNameId LONG,
+	name VARCHAR(200) null,
+	type_ INTEGER,
+	settings_ STRING null
+);
+
+create table ExpandoTable (
+	tableId LONG not null primary key,
+	classNameId LONG,
+	name VARCHAR(200) null
+);
+
+create table ExpandoTables_ExpandoColumns (
+	tableId LONG not null,
+	columnId LONG not null,
+	primary key (tableId, columnId)
+);
+
+create table ExpandoTableRow (
+	rowId LONG not null primary key,
+	tableId LONG
+);
+
+create table ExpandoTableRows_ExpandoValues (
+	rowId LONG not null,
+	valueId LONG not null,
+	primary key (rowId, valueId)
+);
+
+create table ExpandoValue (
+	valueId LONG not null primary key,
+	columnId LONG,
+	classPK LONG,
+	value STRING null
+);
+
 create table Group_ (
 	groupId LONG not null primary key,
 	companyId LONG,

@@ -218,6 +218,58 @@ public class ActivityTrackerLocalServiceUtil {
 		activityTrackerLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		return activityTrackerLocalService.getExpandoColumnPersistence();
+	}
+
+	public static void setExpandoColumnPersistence(
+		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		activityTrackerLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		return activityTrackerLocalService.getExpandoTablePersistence();
+	}
+
+	public static void setExpandoTablePersistence(
+		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		activityTrackerLocalService.setExpandoTablePersistence(expandoTablePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		return activityTrackerLocalService.getExpandoTableRowPersistence();
+	}
+
+	public static void setExpandoTableRowPersistence(
+		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		activityTrackerLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		return activityTrackerLocalService.getExpandoValuePersistence();
+	}
+
+	public static void setExpandoValuePersistence(
+		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
+		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
+
+		activityTrackerLocalService.setExpandoValuePersistence(expandoValuePersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		ActivityTrackerLocalService activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getService();
 

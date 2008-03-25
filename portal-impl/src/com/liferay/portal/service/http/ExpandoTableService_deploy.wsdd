@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<deployment xmlns="http://xml.apache.org/axis/wsdd/" xmlns:java="http://xml.apache.org/axis/wsdd/providers/java">
+	<service name="Portal_ExpandoTableService" provider="java:RPC" style="rpc" use="encoded">
+		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com"/>
+		<parameter name="wsdlServiceElement" value="ExpandoTableServiceSoapService"/>
+		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com"/>
+		<parameter name="wsdlServicePort" value="Portal_ExpandoTableService"/>
+		<parameter name="className" value="com.liferay.portal.service.http.ExpandoTableServiceSoap"/>
+		<parameter name="wsdlPortType" value="ExpandoTableServiceSoap"/>
+		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="setTable" qname="operNS:setTable" returnQName="setTableReturn" returnType="rtns:ExpandoTableSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="addTable" qname="operNS:addTable" returnQName="addTableReturn" returnType="rtns:ExpandoTableSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getTable" qname="operNS:getTable" returnQName="getTableReturn" returnType="rtns:ExpandoTableSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getTable" qname="operNS:getTable" returnQName="getTableReturn" returnType="rtns:ExpandoTableSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteTable" qname="operNS:deleteTable" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getTables" qname="operNS:getTables" returnQName="getTablesReturn" returnType="rtns:ArrayOf_tns2_ExpandoTableSoap" returnItemType="tns2:ExpandoTableSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="updateTableName" qname="operNS:updateTableName" returnQName="updateTableNameReturn" returnType="rtns:ExpandoTableSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<parameter name="allowedMethods" value="updateTableName getTables deleteTable getTable addTable setTable"/>
+		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:ExpandoTableSoap" type="java:com.liferay.portal.model.ExpandoTableSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
+		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_ExpandoTableSoap" type="java:com.liferay.portal.model.ExpandoTableSoap[]" innerType="cmp-ns:ExpandoTableSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
+	</service>
+</deployment>

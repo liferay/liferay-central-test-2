@@ -218,6 +218,58 @@ public class ServiceComponentLocalServiceUtil {
 		serviceComponentLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		return serviceComponentLocalService.getExpandoColumnPersistence();
+	}
+
+	public static void setExpandoColumnPersistence(
+		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		serviceComponentLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		return serviceComponentLocalService.getExpandoTablePersistence();
+	}
+
+	public static void setExpandoTablePersistence(
+		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		serviceComponentLocalService.setExpandoTablePersistence(expandoTablePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		return serviceComponentLocalService.getExpandoTableRowPersistence();
+	}
+
+	public static void setExpandoTableRowPersistence(
+		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		serviceComponentLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		return serviceComponentLocalService.getExpandoValuePersistence();
+	}
+
+	public static void setExpandoValuePersistence(
+		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
+		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
+
+		serviceComponentLocalService.setExpandoValuePersistence(expandoValuePersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		ServiceComponentLocalService serviceComponentLocalService = ServiceComponentLocalServiceFactory.getService();
 

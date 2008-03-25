@@ -218,6 +218,58 @@ public class ResourceCodeLocalServiceUtil {
 		resourceCodeLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.getExpandoColumnPersistence();
+	}
+
+	public static void setExpandoColumnPersistence(
+		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		resourceCodeLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.getExpandoTablePersistence();
+	}
+
+	public static void setExpandoTablePersistence(
+		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		resourceCodeLocalService.setExpandoTablePersistence(expandoTablePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.getExpandoTableRowPersistence();
+	}
+
+	public static void setExpandoTableRowPersistence(
+		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		resourceCodeLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		return resourceCodeLocalService.getExpandoValuePersistence();
+	}
+
+	public static void setExpandoValuePersistence(
+		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
+		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
+
+		resourceCodeLocalService.setExpandoValuePersistence(expandoValuePersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		ResourceCodeLocalService resourceCodeLocalService = ResourceCodeLocalServiceFactory.getService();
 

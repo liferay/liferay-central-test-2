@@ -125,6 +125,30 @@ public class VelocityVariables {
 
 		vc.put("escapeTool", new EscapeTool());
 
+		// ExpandoColumn service util
+
+		vc.put("expandoColumnUtil",
+			ServiceLocator.getInstance().findService(
+				"com.liferay.portal.service.ExpandoColumnService"));
+
+		// ExpandoTable service util
+
+		vc.put("expandoTableUtil",
+			ServiceLocator.getInstance().findService(
+				"com.liferay.portal.service.ExpandoTableService"));
+
+		// ExpandoTableRow service util
+
+		vc.put("expandoTableRowUtil",
+			ServiceLocator.getInstance().findService(
+				"com.liferay.portal.service.ExpandoTableRowService"));
+
+		// ExpandoValue service util
+
+		vc.put("expandoValueUtil",
+			ServiceLocator.getInstance().findService(
+				"com.liferay.portal.service.ExpandoValueService"));
+
 		// Getter util
 
 		vc.put("getterUtil", GetterUtil_IW.getInstance());

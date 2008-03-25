@@ -218,6 +218,58 @@ public class PluginSettingLocalServiceUtil {
 		pluginSettingLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
+	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getExpandoColumnPersistence();
+	}
+
+	public static void setExpandoColumnPersistence(
+		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		pluginSettingLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getExpandoTablePersistence();
+	}
+
+	public static void setExpandoTablePersistence(
+		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		pluginSettingLocalService.setExpandoTablePersistence(expandoTablePersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getExpandoTableRowPersistence();
+	}
+
+	public static void setExpandoTableRowPersistence(
+		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		pluginSettingLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
+	}
+
+	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		return pluginSettingLocalService.getExpandoValuePersistence();
+	}
+
+	public static void setExpandoValuePersistence(
+		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
+		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
+
+		pluginSettingLocalService.setExpandoValuePersistence(expandoValuePersistence);
+	}
+
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 

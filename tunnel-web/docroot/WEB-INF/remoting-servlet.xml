@@ -86,6 +86,54 @@
 		<property name="service" ref="com.liferay.portal.service.EmailAddressService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portal.service.EmailAddressService" />
 	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoColumnService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoColumnService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoColumnService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoColumnService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoColumnService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoColumnService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoColumnService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoColumnService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoColumnService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoTableService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoTableService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoTableService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoTableService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoTableService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoTableService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoTableService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoTableService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoTableService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoTableRowService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoTableRowService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoTableRowService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoTableRowService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoTableRowService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoTableRowService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoTableRowService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoTableRowService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoTableRowService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoValueService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoValueService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoValueService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoValueService-hessian" class="org.springframework.remoting.caucho.HessianServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoValueService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoValueService" />
+	</bean>
+	<bean name="/com_liferay_portal_service_spring_ExpandoValueService-http" class="org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter">
+		<property name="service" ref="com.liferay.portal.service.ExpandoValueService.transaction" />
+		<property name="serviceInterface" value="com.liferay.portal.service.ExpandoValueService" />
+	</bean>
 	<bean name="/com_liferay_portal_service_spring_GroupService-burlap" class="org.springframework.remoting.caucho.BurlapServiceExporter">
 		<property name="service" ref="com.liferay.portal.service.GroupService.transaction" />
 		<property name="serviceInterface" value="com.liferay.portal.service.GroupService" />
