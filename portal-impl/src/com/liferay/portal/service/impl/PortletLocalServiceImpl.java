@@ -240,6 +240,16 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 	}
 
 	public void initEAR(String[] xmls, PluginPackage pluginPackage) {
+
+		// Clear pools every time initEAR is called event it should only be
+		// called once. See LEP-5452.
+
+		_portletAppsPool.clear();
+		_portletsPool.clear();
+		_companyPortletsPool.clear();
+		_portletIdsByStrutsPath.clear();
+		_friendlyURLMapperPortlets.clear();
+
 		Map<String, Portlet> portletsPool = _getPortletsPool();
 
 		try {
