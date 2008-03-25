@@ -582,25 +582,23 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		JournalCreationStrategy creationStrategy =
 			JournalCreationStrategyFactory.getInstance();
 
-		long authorId = creationStrategy.getAuthorUserId(
-			context.getCompanyId(), context.getGroupId(), article);
+		long authorId = creationStrategy.getAuthorUserId(context, article);
 
 		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
 			userId = authorId;
 		}
 
 		String newContent = creationStrategy.getTransformedContent(
-			context.getCompanyId(), context.getGroupId(), article);
+			context, article);
 
 		if (newContent != JournalCreationStrategy.ARTICLE_CONTENT_UNCHANGED) {
 			article.setContent(newContent);
 		}
 
 		boolean addCommunityPermissions =
-			creationStrategy.addCommunityPermissions(
-				context.getCompanyId(), context.getGroupId(), article);
+			creationStrategy.addCommunityPermissions(context, article);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
-			context.getCompanyId(), context.getGroupId(), article);
+			context, article);
 
 		JournalArticle existingArticle = null;
 
@@ -662,7 +660,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		long strategyApprovalUserId = creationStrategy.getApprovalUserId(
-			context.getCompanyId(), context.getGroupId(), article);
+			context, article);
 
 		if ((strategyApprovalUserId !=
 				JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) ||
@@ -727,18 +725,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		JournalCreationStrategy creationStrategy =
 			JournalCreationStrategyFactory.getInstance();
 
-		long authorId = creationStrategy.getAuthorUserId(
-			context.getCompanyId(), context.getGroupId(), structure);
+		long authorId = creationStrategy.getAuthorUserId(context, structure);
 
 		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
 			userId = authorId;
 		}
 
 		boolean addCommunityPermissions =
-			creationStrategy.addCommunityPermissions(
-				context.getCompanyId(), context.getGroupId(), structure);
+			creationStrategy.addCommunityPermissions(context, structure);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
-			context.getCompanyId(), context.getGroupId(), structure);
+			context, structure);
 
 		JournalStructure existingStructure = null;
 
@@ -812,18 +808,16 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		JournalCreationStrategy creationStrategy =
 			JournalCreationStrategyFactory.getInstance();
 
-		long authorId = creationStrategy.getAuthorUserId(
-			context.getCompanyId(), context.getGroupId(), template);
+		long authorId = creationStrategy.getAuthorUserId(context, template);
 
 		if (authorId != JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY) {
 			userId = authorId;
 		}
 
 		boolean addCommunityPermissions =
-			creationStrategy.addCommunityPermissions(
-				context.getCompanyId(), context.getGroupId(), template);
+			creationStrategy.addCommunityPermissions(context, template);
 		boolean addGuestPermissions = creationStrategy.addGuestPermissions(
-			context.getCompanyId(), context.getGroupId(), template);
+			context, template);
 
 		File smallFile = null;
 

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.lar;
 
+import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 /**
@@ -43,36 +44,34 @@ import com.liferay.portlet.journal.model.JournalArticle;
  */
 public class JournalCreationStrategyImpl implements JournalCreationStrategy {
 
-	public long getAuthorUserId(
-			long companyId, long groupId, Object journalObj)
+	public long getAuthorUserId(PortletDataContext context, Object journalObj)
 		throws Exception {
 
 		return JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY;
 	}
 
-	public long getApprovalUserId(
-			long companyId, long groupId, Object journalObj)
+	public long getApprovalUserId(PortletDataContext context, Object journalObj)
 		throws Exception {
 
 		return JournalCreationStrategy.USE_DEFAULT_USER_ID_STRATEGY;
 	}
 
 	public String getTransformedContent(
-			long companyId, long groupId, JournalArticle newArticle)
+			PortletDataContext context, JournalArticle newArticle)
 		throws Exception {
 
 		return JournalCreationStrategy.ARTICLE_CONTENT_UNCHANGED;
 	}
 
 	public boolean addCommunityPermissions(
-			long companyId, long groupId, Object journalObj)
+			PortletDataContext context, Object journalObj)
 		throws Exception {
 
 		return true;
 	}
 
 	public boolean addGuestPermissions(
-			long companyId, long groupId, Object journalObj)
+			PortletDataContext context, Object journalObj)
 		throws Exception {
 
 		return true;

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.journal.lar;
 
+import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portlet.journal.model.JournalArticle;
 
 /**
@@ -57,14 +58,14 @@ public interface JournalCreationStrategy {
 	 * is returned, the default user id import strategy will determine the
 	 * author id.
 	 *
-	 * @param		companyId the company id of the layout
-	 * @param		groupId the group id of the layout
+	 * @param		context PortletDataContext instance used during the
+	 * 				import process
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		the author's user id or USE_DEFAULT_USER_ID_STRATEGY to use
 	 *				the default user id strategy
 	 */
-	public long getAuthorUserId(long companyId, long groupId, Object journalObj)
+	public long getAuthorUserId(PortletDataContext context, Object journalObj)
 		throws Exception;
 
 	/**
@@ -72,15 +73,14 @@ public interface JournalCreationStrategy {
 	 * zero is returned, the default user id import strategy will determine the
 	 * author id.
 	 *
-	 * @param		companyId the company id of the layout
-	 * @param		groupId the group id of the layout
+	 * @param		context PortletDataContext instance used during the
+	 * 				import process
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		the approver's user id or USE_DEFAULT_USER_ID_STRATEGY to
 	 *				use the default user id strategy
 	 */
-	public long getApprovalUserId(
-			long companyId, long groupId, Object journalObj)
+	public long getApprovalUserId(PortletDataContext context, Object journalObj)
 		throws Exception;
 
 	/**
@@ -90,45 +90,45 @@ public interface JournalCreationStrategy {
 	 * the text. Returns the new content to assign to the article. If null is
 	 * returned, the article content will be added unchanged.
 	 *
-	 * @param		companyId the company id of the layout
-	 * @param		groupId the group id of the layout
+	 * @param		context PortletDataContext instance used during the
+	 * 				import process
 	 * @param		newArticle the new article being created
 	 * @return		the transformed content to save in the database or
 	 *				ARTICLE_CONTENT_UNCHANGED if the content should be added
 	 *				unchanged
 	 */
 	public String getTransformedContent(
-			long companyId, long groupId, JournalArticle newArticle)
+			PortletDataContext context, JournalArticle newArticle)
 		throws Exception;
 
 	/**
 	 * Returns true if the default community permissions should be added when
 	 * the specified journalObj is created.
 	 *
-	 * @param		companyId the company id of the layout
-	 * @param		groupId the group id of the layout
+	 * @param		context PortletDataContext instance used during the
+	 * 				import process
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		true if default community permissions should be added to the
 	 *				specified journalObj
 	 */
 	public boolean addCommunityPermissions(
-			long companyId, long groupId, Object journalObj)
+			PortletDataContext context, Object journalObj)
 		throws Exception;
 
 	/**
 	 * Returns true if the default guest permissions should be added when the
 	 * specified journalObj is created.
 	 *
-	 * @param		companyId the company id of the layout
-	 * @param		groupId the group id of the layout
+	 * @param		context PortletDataContext instance used during the
+	 * 				import process
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		true if default guest permissions should be added to the
 	 *				specified journalObj
 	 */
 	public boolean addGuestPermissions(
-			long companyId, long groupId, Object journalObj)
+			PortletDataContext context, Object journalObj)
 		throws Exception;
 
 }
