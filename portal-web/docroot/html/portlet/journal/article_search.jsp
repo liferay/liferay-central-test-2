@@ -76,7 +76,7 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 					<liferay-ui:message key="status" />
 				</c:when>
 				<c:otherwise>
-					<liferay-ui:message key="community" />
+					<liferay-ui:message key="my-places" />
 				</c:otherwise>
 			</c:choose>
 		</td>
@@ -115,24 +115,25 @@ ArticleDisplayTerms displayTerms = (ArticleDisplayTerms)searchContainer.getDispl
 				<c:otherwise>
 
 					<%
-					LinkedHashMap groupParams = new LinkedHashMap();
-
-					groupParams.put("usersGroups", new Long(user.getUserId()));
-
-					List communities = GroupLocalServiceUtil.search(company.getCompanyId(), null, null, groupParams, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+					List<Group> myPlaces = user.getMyPlaces();
 					%>
 
 					<select name="<portlet:namespace /><%= displayTerms.GROUP_ID %>">
-						<c:if test="<%= layout.getGroup().isUser() %>">
-							<option <%= displayTerms.getGroupId() == layout.getGroupId() ? "selected" : "" %> value="<%= String.valueOf(layout.getGroupId()) %>"><liferay-ui:message key="my-community" /></option>
-						</c:if>
 
 						<%
-						for (int i = 0; i < communities.size(); i++) {
-							Group group = (Group)communities.get(i);
+						for (Group myPlace : myPlaces) {
 						%>
 
-							<option <%= displayTerms.getGroupId() == group.getGroupId() ? "selected" : "" %> value="<%= String.valueOf(group.getGroupId()) %>"><%= group.getName() %></option>
+							<option <%= displayTerms.getGroupId() == myPlace.getGroupId() ? "selected" : "" %> value="<%= myPlace.getGroupId() %>">
+								<c:choose>
+									<c:when test="<%= myPlace.isUser() %>">
+										<liferay-ui:message key="my-community" />
+									</c:when>
+									<c:otherwise>
+										<%= myPlace.getDescriptiveName() %>
+									</c:otherwise>
+								</c:choose>
+							</option>
 
 						<%
 						}

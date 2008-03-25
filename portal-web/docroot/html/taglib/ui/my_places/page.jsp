@@ -27,7 +27,7 @@
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
 
 <%
-List myPlaces = user.getMyPlaces();
+List<Group> myPlaces = user.getMyPlaces();
 %>
 
 <c:if test="<%= myPlaces.size() > 0 %>">
@@ -41,9 +41,7 @@ List myPlaces = user.getMyPlaces();
 
 		portletURL.setParameter("struts_action", "/my_places/view");
 
-		for (int i = 0; i < myPlaces.size(); i++) {
-			Group myPlace = (Group)myPlaces.get(i);
-
+		for (Group myPlace : myPlaces) {
 			myPlace = myPlace.toEscapedModel();
 
 			boolean organizationCommunity = myPlace.isOrganization();
