@@ -468,5 +468,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		</form>
 	</c:when>
 </c:choose>

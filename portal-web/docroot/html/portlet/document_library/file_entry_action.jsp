@@ -48,7 +48,7 @@ else {
 					<portlet:param name="struts_action" value="/document_library/view_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
-					<portlet:param name="name" value="<%= fileEntry.getName() %>" />
+					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
 				</portlet:renderURL>
 
 				<liferay-ui:icon image="view" url="<%= viewURL %>" />
@@ -59,7 +59,7 @@ else {
 					<portlet:param name="struts_action" value="/document_library/edit_file_entry" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
-					<portlet:param name="name" value="<%= fileEntry.getName() %>" />
+					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
 				</portlet:renderURL>
 
 				<liferay-ui:icon image="edit" url="<%= editURL %>" />
@@ -68,7 +68,7 @@ else {
 			<c:if test="<%= DLFileEntryPermission.contains(permissionChecker, fileEntry, ActionKeys.PERMISSIONS) %>">
 				<liferay-security:permissionsURL
 					modelResource="<%= DLFileEntry.class.getName() %>"
-					modelResourceDescription="<%= fileEntry.getName() %>"
+					modelResourceDescription="<%= HtmlUtil.unescape(fileEntry.getTitleWithExtension()) %>"
 					resourcePrimKey="<%= String.valueOf(fileEntry.getFileEntryId()) %>"
 					var="permissionsURL"
 				/>
@@ -82,13 +82,18 @@ else {
 					<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 					<portlet:param name="redirect" value="<%= currentURL %>" />
 					<portlet:param name="folderId" value="<%= String.valueOf(fileEntry.getFolderId()) %>" />
-					<portlet:param name="name" value="<%= fileEntry.getName() %>" />
+					<portlet:param name="name" value="<%= HtmlUtil.unescape(fileEntry.getName()) %>" />
 				</portlet:actionURL>
 
 				<liferay-ui:icon-delete url="<%= deleteURL %>" />
 			</c:if>
 		</c:when>
 		<c:otherwise>
+
+			<%
+			fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
+			%>
+
 			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.VIEW) %>">
 				<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="viewShortcutURL">
 					<portlet:param name="struts_action" value="/document_library/view_file_shortcut" />
@@ -112,7 +117,7 @@ else {
 			<c:if test="<%= DLFileShortcutPermission.contains(permissionChecker, fileShortcut, ActionKeys.PERMISSIONS) %>">
 				<liferay-security:permissionsURL
 					modelResource="<%= DLFileShortcut.class.getName() %>"
-					modelResourceDescription="<%= fileShortcut.getToName() %>"
+					modelResourceDescription="<%= fileEntry.getTitleWithExtension() %>"
 					resourcePrimKey="<%= String.valueOf(fileShortcut.getFileShortcutId()) %>"
 					var="shortcutPermissionsURL"
 				/>

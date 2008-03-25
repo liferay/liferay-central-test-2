@@ -485,12 +485,16 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 
 					fileEntry = fileEntry.toEscapedModel();
 
+					result = fileEntry;
+
 					primaryKey = fileEntry.getFileEntryId();
 				}
 				else {
 					fileShortcut = (DLFileShortcut)result;
 
 					fileShortcut = fileShortcut.toEscapedModel();
+
+					result = fileShortcut;
 
 					fileEntry = DLFileEntryLocalServiceUtil.getFileEntry(fileShortcut.getToFolderId(), HtmlUtil.unescape(fileShortcut.getToName()));
 
@@ -617,5 +621,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 		%>
 
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+		</form>
 	</c:when>
 </c:choose>
