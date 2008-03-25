@@ -854,6 +854,10 @@ Liferay.Util = {
 				boxObj.append('<option value="' + value[0] + '">' + value[1] + '</option>');
 			}
 		);
+
+		if (Liferay.Browser.is_ie) {
+			boxObj.css('width', 'auto');
+		}
 	},
 
 	sortByAscending: function(a, b) {
