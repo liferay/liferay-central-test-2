@@ -29,6 +29,26 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public class TagsEntryFinderUtil {
+	public static int countByC_C_G_N(long classNameId, long companyId,
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByC_C_G_N(classNameId, companyId, groupId, name);
+	}
+
+	public static java.util.List findByC_C_G_N(long classNameId,
+		long companyId, long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByC_C_G_N(classNameId, companyId, groupId, name);
+	}
+
+	public static java.util.List findByC_C_G_N(long classNameId,
+		long companyId, long groupId, java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .findByC_C_G_N(classNameId, companyId, groupId, name, begin,
+			end);
+	}
+
 	public static int countByC_N_P(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {

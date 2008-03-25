@@ -29,6 +29,17 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public interface TagsEntryFinder {
+	public int countByC_C_G_N(long classNameId, long companyId, long groupId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
+
+	public java.util.List findByC_C_G_N(long classNameId, long companyId,
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List findByC_C_G_N(long classNameId, long companyId,
+		long groupId, java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public int countByC_N_P(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;

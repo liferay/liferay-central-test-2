@@ -233,6 +233,53 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
+	public static java.util.List getEntries(HttpPrincipal httpPrincipal,
+		long classNameId, long companyId, long groupId, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
+
+			Object paramObj1 = new LongWrapper(companyId);
+
+			Object paramObj2 = new LongWrapper(groupId);
+
+			Object paramObj3 = name;
+
+			if (name == null) {
+				paramObj3 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
+					"getEntries",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List search(HttpPrincipal httpPrincipal,
 		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {

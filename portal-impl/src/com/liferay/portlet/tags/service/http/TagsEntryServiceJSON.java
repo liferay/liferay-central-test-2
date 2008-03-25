@@ -105,6 +105,16 @@ public class TagsEntryServiceJSON {
 		return TagsEntryJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getEntries(long classNameId, long companyId,
+		long groupId, java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.List returnValue = TagsEntryServiceUtil.getEntries(classNameId,
+				companyId, groupId, name);
+
+		return TagsEntryJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static JSONArray search(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {

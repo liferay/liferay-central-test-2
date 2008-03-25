@@ -136,6 +136,16 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 	}
 
+	public int countEntries(
+			long classNameId, long companyId, long groupId, String name)
+		throws PortalException, SystemException {
+
+		int tagsCount = tagsEntryFinder.countByC_C_G_N(
+			classNameId, companyId, groupId, name);
+
+		return tagsCount;
+	}
+
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -196,6 +206,14 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		else {
 			return tagsAssetPersistence.getTagsEntries(asset.getAssetId());
 		}
+	}
+
+	public List getEntries(
+		long classNameId, long companyId, long groupId, String name)
+		throws PortalException, SystemException {
+
+		return tagsEntryFinder.findByC_C_G_N(
+			classNameId, companyId, groupId, name);
 	}
 
 	public TagsEntry getEntry(long entryId)

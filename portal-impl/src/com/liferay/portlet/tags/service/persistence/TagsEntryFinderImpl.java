@@ -48,11 +48,102 @@ import org.hibernate.Session;
  */
 public class TagsEntryFinderImpl implements TagsEntryFinder {
 
+	public static String COUNT_BY_C_C_G_N =
+		TagsEntryFinder.class.getName() + ".countByC_C_G_N";
+
+	public static String FIND_BY_C_C_G_N =
+		TagsEntryFinder.class.getName() + ".findByC_C_G_N";
+
 	public static String COUNT_BY_C_N_P =
 		TagsEntryFinder.class.getName() + ".countByC_N_P";
 
 	public static String FIND_BY_C_N_P =
 		TagsEntryFinder.class.getName() + ".findByC_N_P";
+
+	public int countByC_C_G_N(
+		long classNameId, long companyId, long groupId, String name)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_C_C_G_N);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(classNameId);
+			qPos.add(companyId);
+			qPos.add(groupId);
+			qPos.add(name);
+			qPos.add(name);
+
+			Iterator itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = (Long)itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List findByC_C_G_N(
+		long classNameId, long companyId, long groupId, String name)
+		throws SystemException {
+
+		return findByC_C_G_N(classNameId, companyId, groupId, name,
+			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	}
+
+	public List findByC_C_G_N(
+		long classNameId, long companyId, long groupId, String name, int begin,
+		int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_C_C_G_N);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("TagsEntry", TagsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(classNameId);
+			qPos.add(companyId);
+			qPos.add(groupId);
+			qPos.add(name);
+			qPos.add(name);
+
+			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
 
 	public int countByC_N_P(long companyId, String name, String[] properties)
 		throws SystemException {

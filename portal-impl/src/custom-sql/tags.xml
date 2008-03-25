@@ -66,6 +66,54 @@
 				)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByC_C_G_N">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				TagsEntry
+			INNER JOIN
+				TagsAssets_TagsEntries ON
+					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId) AND
+					(TagsAssets_TagsEntries.assetId IN 
+						(SELECT 
+							assetId 
+						FROM 
+							TagsAsset 
+						WHERE 
+							(TagsAsset.classNameId = ?) AND
+							(TagsAsset.companyId = ?) AND
+							(TagsAsset.groupId = ?)
+					)
+			WHERE 
+				(TagsEntry.name LIKE ? OR ? IS NULL)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.findByC_C_G_N">
+		<![CDATA[
+			SELECT
+				{TagsEntry.*}
+			FROM
+				TagsEntry
+			INNER JOIN 
+				TagsAssets_TagsEntries ON
+					(TagsEntry.entryId = TagsAssets_TagsEntries.entryId) AND
+					(TagsAssets_TagsEntries.assetId IN 
+						(SELECT 
+							assetId 
+						FROM 
+							TagsAsset 
+						WHERE 
+							(TagsAsset.classNameId = ?) AND
+							(TagsAsset.companyId = ?) AND
+							(TagsAsset.groupId = ?))
+					)
+			WHERE 
+				(TagsEntry.name LIKE ? OR ? IS NULL)
+			ORDER BY
+				TagsEntry.name ASC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.tags.service.persistence.TagsEntryFinder.countByC_N_P">
 		<![CDATA[
 			SELECT

@@ -140,6 +140,11 @@ public interface TagsEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public int countEntries(long classNameId, long companyId, long groupId,
+		java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteEntry(long entryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -164,6 +169,11 @@ public interface TagsEntryLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List getEntries(long classNameId, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List getEntries(long classNameId, long companyId,
+		long groupId, java.lang.String name)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

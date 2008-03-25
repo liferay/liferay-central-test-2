@@ -86,6 +86,15 @@ public class TagsEntryServiceUtil {
 		return tagsEntryService.getEntries(className, classPK);
 	}
 
+	public static java.util.List getEntries(long classNameId, long companyId,
+		long groupId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		TagsEntryService tagsEntryService = TagsEntryServiceFactory.getService();
+
+		return tagsEntryService.getEntries(classNameId, companyId, groupId, name);
+	}
+
 	public static java.util.List search(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {

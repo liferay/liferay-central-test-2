@@ -62,6 +62,14 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		return tagsEntryLocalService.getEntries(className, classPK);
 	}
 
+	public List getEntries(
+		long classNameId, long companyId, long groupId, String name)
+		throws PortalException, SystemException {
+
+		return tagsEntryLocalService.getEntries(
+			classNameId, companyId, groupId, name);
+	}
+
 	public List search(long companyId, String name, String[] properties)
 		throws SystemException {
 
