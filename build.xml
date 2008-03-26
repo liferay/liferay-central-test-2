@@ -257,6 +257,7 @@
 			showHiddenTags="false"
 			sourceDir="definitions"
 		>
+			<include name="liferay-*5_0*.dtd" />
 			<include name="liferay-*4_4*.dtd" />
 			<include name="liferay-*4_3*.dtd" />
 			<exclude name="liferay-plugin-repository_4_3_0.dtd" />
