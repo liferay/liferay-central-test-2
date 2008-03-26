@@ -125,6 +125,10 @@ public class HtmlImpl implements Html {
 	}
 
 	public String extractText(String html) {
+		if (html == null) {
+			return null;
+		}
+
 		Source source = new Source(html);
 
 		return source.getTextExtractor().toString();
