@@ -63,21 +63,22 @@ public interface TagsEntryService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getEntries(java.lang.String className, long classPK)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
+		java.lang.String className, long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getEntries(long classNameId, long companyId,
-		long groupId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public java.util.List search(long companyId, java.lang.String name,
-		java.lang.String[] properties)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
+		long groupId, long companyId, long classNameId, java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
-	public java.util.List search(long companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
+		long companyId, java.lang.String name, java.lang.String[] properties)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portal.kernel.json.JSONArrayWrapper searchAutocomplete(

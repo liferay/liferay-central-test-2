@@ -125,8 +125,8 @@ public class TagsEntryServiceSoap {
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] getEntries(
 		java.lang.String className, long classPK) throws RemoteException {
 		try {
-			java.util.List returnValue = TagsEntryServiceUtil.getEntries(className,
-					classPK);
+			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
+				TagsEntryServiceUtil.getEntries(className, classPK);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
 		}
@@ -138,11 +138,12 @@ public class TagsEntryServiceSoap {
 	}
 
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] getEntries(
-		long classNameId, long companyId, long groupId, java.lang.String name)
+		long groupId, long companyId, long classNameId, java.lang.String name)
 		throws RemoteException {
 		try {
-			java.util.List returnValue = TagsEntryServiceUtil.getEntries(classNameId,
-					companyId, groupId, name);
+			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
+				TagsEntryServiceUtil.getEntries(groupId, companyId,
+					classNameId, name);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
 		}
@@ -157,8 +158,8 @@ public class TagsEntryServiceSoap {
 		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws RemoteException {
 		try {
-			java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
-					name, properties);
+			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
+				TagsEntryServiceUtil.search(companyId, name, properties);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
 		}
@@ -173,8 +174,9 @@ public class TagsEntryServiceSoap {
 		long companyId, java.lang.String name, java.lang.String[] properties,
 		int begin, int end) throws RemoteException {
 		try {
-			java.util.List returnValue = TagsEntryServiceUtil.search(companyId,
-					name, properties, begin, end);
+			java.util.List<com.liferay.portlet.tags.model.TagsEntry> returnValue =
+				TagsEntryServiceUtil.search(companyId, name, properties, begin,
+					end);
 
 			return com.liferay.portlet.tags.model.TagsEntrySoap.toSoapModels(returnValue);
 		}

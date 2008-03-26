@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.model.impl.TagsEntryImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -48,102 +49,17 @@ import org.hibernate.Session;
  */
 public class TagsEntryFinderImpl implements TagsEntryFinder {
 
-	public static String COUNT_BY_C_C_G_N =
-		TagsEntryFinder.class.getName() + ".countByC_C_G_N";
-
-	public static String FIND_BY_C_C_G_N =
-		TagsEntryFinder.class.getName() + ".findByC_C_G_N";
-
 	public static String COUNT_BY_C_N_P =
 		TagsEntryFinder.class.getName() + ".countByC_N_P";
+
+	public static String COUNT_BY_G_C_C_N =
+		TagsEntryFinder.class.getName() + ".countByG_C_C_N";
 
 	public static String FIND_BY_C_N_P =
 		TagsEntryFinder.class.getName() + ".findByC_N_P";
 
-	public int countByC_C_G_N(
-		long classNameId, long companyId, long groupId, String name)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_BY_C_C_G_N);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(classNameId);
-			qPos.add(companyId);
-			qPos.add(groupId);
-			qPos.add(name);
-			qPos.add(name);
-
-			Iterator itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
-	public List findByC_C_G_N(
-		long classNameId, long companyId, long groupId, String name)
-		throws SystemException {
-
-		return findByC_C_G_N(classNameId, companyId, groupId, name,
-			QueryUtil.ALL_POS, QueryUtil.ALL_POS);
-	}
-
-	public List findByC_C_G_N(
-		long classNameId, long companyId, long groupId, String name, int begin,
-		int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_BY_C_C_G_N);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("TagsEntry", TagsEntryImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(classNameId);
-			qPos.add(companyId);
-			qPos.add(groupId);
-			qPos.add(name);
-			qPos.add(name);
-
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
+	public static String FIND_BY_G_C_C_N =
+		TagsEntryFinder.class.getName() + ".findByG_C_C_N";
 
 	public int countByC_N_P(long companyId, String name, String[] properties)
 		throws SystemException {
@@ -168,10 +84,10 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 			qPos.add(name);
 			qPos.add(name);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -188,14 +104,58 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 		}
 	}
 
-	public List findByC_N_P(long companyId, String name, String[] properties)
+	public int countByG_C_C_N(
+			long groupId, long companyId, long classNameId, String name)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_G_C_C_N);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(companyId);
+			qPos.add(classNameId);
+			qPos.add(name);
+			qPos.add(name);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List<TagsEntry> findByC_N_P(
+			long companyId, String name, String[] properties)
 		throws SystemException {
 
 		return findByC_N_P(
 			companyId, name, properties, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 	}
 
-	public List findByC_N_P(
+	public List<TagsEntry> findByC_N_P(
 			long companyId, String name, String[] properties, int begin,
 			int end)
 		throws SystemException {
@@ -220,7 +180,52 @@ public class TagsEntryFinderImpl implements TagsEntryFinder {
 			qPos.add(name);
 			qPos.add(name);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<TagsEntry>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List<TagsEntry> findByG_C_C_N(
+			long groupId, long companyId, long classNameId, String name)
+		throws SystemException {
+
+		return findByG_C_C_N(
+			groupId, companyId, classNameId, name, QueryUtil.ALL_POS,
+			QueryUtil.ALL_POS);
+	}
+
+	public List<TagsEntry> findByG_C_C_N(
+			long groupId, long companyId, long classNameId, String name,
+			int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_G_C_C_N);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("TagsEntry", TagsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(groupId);
+			qPos.add(companyId);
+			qPos.add(classNameId);
+			qPos.add(name);
+			qPos.add(name);
+
+			return (List<TagsEntry>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

@@ -39,12 +39,11 @@ import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.service.base.TagsEntryLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsUtil;
 import com.liferay.util.Autocomplete;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -136,16 +135,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 	}
 
-	public int countEntries(
-			long classNameId, long companyId, long groupId, String name)
-		throws PortalException, SystemException {
-
-		int tagsCount = tagsEntryFinder.countByC_C_G_N(
-			classNameId, companyId, groupId, name);
-
-		return tagsCount;
-	}
-
 	public void deleteEntry(long entryId)
 		throws PortalException, SystemException {
 
@@ -167,7 +156,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	}
 
 	public boolean hasEntry(long companyId, String name)
-		throws PortalException, SystemException {
+		throws SystemException {
 
 		if (tagsEntryPersistence.fetchByC_N(companyId, name) == null) {
 			return false;
@@ -177,17 +166,17 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		}
 	}
 
-	public List getAssetEntries(long assetId)
+	public List<TagsEntry> getAssetEntries(long assetId)
 		throws PortalException, SystemException {
 
 		return tagsAssetPersistence.getTagsEntries(assetId);
 	}
 
-	public List getEntries() throws SystemException {
+	public List<TagsEntry> getEntries() throws SystemException {
 		return tagsEntryPersistence.findAll();
 	}
 
-	public List getEntries(String className, long classPK)
+	public List<TagsEntry> getEntries(String className, long classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -195,25 +184,42 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return getEntries(classNameId, classPK);
 	}
 
-	public List getEntries(long classNameId, long classPK)
+	public List<TagsEntry> getEntries(long classNameId, long classPK)
 		throws PortalException, SystemException {
 
 		TagsAsset asset = tagsAssetPersistence.fetchByC_C(classNameId, classPK);
 
 		if (asset == null) {
-			return new ArrayList();
+			return new ArrayList<TagsEntry>();
 		}
 		else {
 			return tagsAssetPersistence.getTagsEntries(asset.getAssetId());
 		}
 	}
 
-	public List getEntries(
-		long classNameId, long companyId, long groupId, String name)
-		throws PortalException, SystemException {
+	public List<TagsEntry> getEntries(
+			long groupId, long companyId, long classNameId, String name)
+		throws SystemException {
 
-		return tagsEntryFinder.findByC_C_G_N(
-			classNameId, companyId, groupId, name);
+		return tagsEntryFinder.findByG_C_C_N(
+			groupId, companyId, classNameId, name);
+	}
+
+	public List<TagsEntry> getEntries(
+			long groupId, long companyId, long classNameId, String name,
+			int begin, int end)
+		throws SystemException {
+
+		return tagsEntryFinder.findByG_C_C_N(
+			groupId, companyId, classNameId, name, begin, end);
+	}
+
+	public int getEntriesSize(
+			long groupId, long companyId, long classNameId, String name)
+		throws SystemException {
+
+		return tagsEntryFinder.countByG_C_C_N(
+			groupId, companyId, classNameId, name);
 	}
 
 	public TagsEntry getEntry(long entryId)
@@ -231,11 +237,9 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 	public long[] getEntryIds(long companyId, String[] names)
 		throws PortalException, SystemException {
 
-		List list = new ArrayList(names.length);
+		List<TagsEntry> list = new ArrayList<TagsEntry>(names.length);
 
-		for (int i = 0; i < names.length; i++) {
-			String name = names[i];
-
+		for (String name : names) {
 			TagsEntry entry = tagsEntryPersistence.fetchByC_N(companyId, name);
 
 			if (entry != null) {
@@ -246,7 +250,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		long[] entryIds = new long[list.size()];
 
 		for (int i = 0; i < list.size(); i++) {
-			TagsEntry entry = (TagsEntry)list.get(i);
+			TagsEntry entry = list.get(i);
 
 			entryIds[i] = entry.getEntryId();
 		}
@@ -270,13 +274,14 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return getEntryNames(getEntries(classNameId, classPK));
 	}
 
-	public List search(long companyId, String name, String[] properties)
+	public List<TagsEntry> search(
+			long companyId, String name, String[] properties)
 		throws SystemException {
 
 		return tagsEntryFinder.findByC_N_P(companyId, name, properties);
 	}
 
-	public List search(
+	public List<TagsEntry> search(
 			long companyId, String name, String[] properties, int begin,
 			int end)
 		throws SystemException {
@@ -332,17 +337,19 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 		TagsEntry entry = updateEntry(entryId, name);
 
-		List curProperties = tagsPropertyPersistence.findByEntryId(entryId);
-		Set keepProperties = CollectionFactory.getHashSet();
+		Set<Long> newProperties = new HashSet<Long>();
+
+		List<TagsProperty> oldProperties =
+			tagsPropertyPersistence.findByEntryId(entryId);
 
 		for (int i = 0; i < properties.length; i++) {
 			String[] property = StringUtil.split(
 				properties[i], StringPool.COLON);
 
-			Long propertyId = new Long(0);
+			long propertyId = 0;
 
 			if (property.length > 0) {
-				propertyId = new Long(GetterUtil.getLong(property[0]));
+				propertyId = GetterUtil.getLong(property[0]);
 			}
 
 			String key = StringPool.BLANK;
@@ -357,7 +364,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 				value = GetterUtil.getString(property[2]);
 			}
 
-			if (propertyId.longValue() == 0) {
+			if (propertyId == 0) {
 				if (Validator.isNotNull(key)) {
 					tagsPropertyLocalService.addProperty(
 						userId, entryId, key, value);
@@ -365,24 +372,19 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			}
 			else {
 				if (Validator.isNull(key)) {
-					tagsPropertyLocalService.deleteProperty(
-						propertyId.longValue());
+					tagsPropertyLocalService.deleteProperty(propertyId);
 				}
 				else {
 					tagsPropertyLocalService.updateProperty(
-						propertyId.longValue(), key, value);
+						propertyId, key, value);
 
-					keepProperties.add(new Long(propertyId.longValue()));
+					newProperties.add(propertyId);
 				}
 			}
 		}
 
-		Iterator itr = curProperties.iterator();
-
-		while (itr.hasNext()) {
-			TagsProperty property = (TagsProperty)itr.next();
-
-			if (!keepProperties.contains(new Long(property.getPropertyId()))) {
+		for (TagsProperty property : oldProperties) {
+			if (!newProperties.contains(property.getPropertyId())) {
 				tagsPropertyLocalService.deleteProperty(property);
 			}
 		}
@@ -390,7 +392,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return entry;
 	}
 
-	protected String[] getEntryNames(List entries) {
+	protected String[] getEntryNames(List <TagsEntry>entries) {
 		return StringUtil.split(ListUtil.toString(entries, "name"));
 	}
 

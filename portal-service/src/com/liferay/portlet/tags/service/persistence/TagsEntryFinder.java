@@ -29,26 +29,26 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public interface TagsEntryFinder {
-	public int countByC_C_G_N(long classNameId, long companyId, long groupId,
-		java.lang.String name) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_C_G_N(long classNameId, long companyId,
-		long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List findByC_C_G_N(long classNameId, long companyId,
-		long groupId, java.lang.String name, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
 	public int countByC_N_P(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_N_P(long companyId, java.lang.String name,
-		java.lang.String[] properties)
+	public int countByG_C_C_N(long groupId, long companyId, long classNameId,
+		java.lang.String name) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
+		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_N_P(long companyId, java.lang.String name,
-		java.lang.String[] properties, int begin, int end)
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByC_N_P(
+		long companyId, java.lang.String name, java.lang.String[] properties,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
+		long groupId, long companyId, long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> findByG_C_C_N(
+		long groupId, long companyId, long classNameId, java.lang.String name,
+		int begin, int end) throws com.liferay.portal.SystemException;
 }

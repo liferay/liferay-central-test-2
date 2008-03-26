@@ -191,8 +191,8 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List getEntries(HttpPrincipal httpPrincipal,
-		java.lang.String className, long classPK)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
+		HttpPrincipal httpPrincipal, java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -224,7 +224,7 @@ public class TagsEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.tags.model.TagsEntry>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -233,16 +233,16 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List getEntries(HttpPrincipal httpPrincipal,
-		long classNameId, long companyId, long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> getEntries(
+		HttpPrincipal httpPrincipal, long groupId, long companyId,
+		long classNameId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
 		try {
-			Object paramObj0 = new LongWrapper(classNameId);
+			Object paramObj0 = new LongWrapper(groupId);
 
 			Object paramObj1 = new LongWrapper(companyId);
 
-			Object paramObj2 = new LongWrapper(groupId);
+			Object paramObj2 = new LongWrapper(classNameId);
 
 			Object paramObj3 = name;
 
@@ -264,14 +264,10 @@ public class TagsEntryServiceHttp {
 					throw (com.liferay.portal.SystemException)e;
 				}
 
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.tags.model.TagsEntry>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -280,8 +276,9 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List search(HttpPrincipal httpPrincipal,
-		long companyId, java.lang.String name, java.lang.String[] properties)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
+		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -314,7 +311,7 @@ public class TagsEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.tags.model.TagsEntry>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -323,9 +320,10 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
-	public static java.util.List search(HttpPrincipal httpPrincipal,
-		long companyId, java.lang.String name, java.lang.String[] properties,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
+		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
+		java.lang.String[] properties, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
 
@@ -364,7 +362,7 @@ public class TagsEntryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.tags.model.TagsEntry>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

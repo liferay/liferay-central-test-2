@@ -29,30 +29,16 @@ package com.liferay.portlet.tags.service.persistence;
  *
  */
 public class TagsEntryFinderUtil {
-	public static int countByC_C_G_N(long classNameId, long companyId,
-		long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByC_C_G_N(classNameId, companyId, groupId, name);
-	}
-
-	public static java.util.List findByC_C_G_N(long classNameId,
-		long companyId, long groupId, java.lang.String name)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findByC_C_G_N(classNameId, companyId, groupId, name);
-	}
-
-	public static java.util.List findByC_C_G_N(long classNameId,
-		long companyId, long groupId, java.lang.String name, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder()
-				   .findByC_C_G_N(classNameId, companyId, groupId, name, begin,
-			end);
-	}
-
 	public static int countByC_N_P(long companyId, java.lang.String name,
 		java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByC_N_P(companyId, name, properties);
+	}
+
+	public static int countByG_C_C_N(long groupId, long companyId,
+		long classNameId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByG_C_C_N(groupId, companyId, classNameId, name);
 	}
 
 	public static java.util.List findByC_N_P(long companyId,
@@ -65,6 +51,20 @@ public class TagsEntryFinderUtil {
 		java.lang.String name, java.lang.String[] properties, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByC_N_P(companyId, name, properties, begin, end);
+	}
+
+	public static java.util.List findByG_C_C_N(long groupId, long companyId,
+		long classNameId, java.lang.String name)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByG_C_C_N(groupId, companyId, classNameId, name);
+	}
+
+	public static java.util.List findByG_C_C_N(long groupId, long companyId,
+		long classNameId, java.lang.String name, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .findByG_C_C_N(groupId, companyId, classNameId, name, begin,
+			end);
 	}
 
 	public static TagsEntryFinder getFinder() {

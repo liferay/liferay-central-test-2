@@ -56,27 +56,28 @@ public class TagsEntryServiceImpl extends TagsEntryServiceBaseImpl {
 		tagsEntryLocalService.deleteEntry(entryId);
 	}
 
-	public List getEntries(String className, long classPK)
+	public List<TagsEntry> getEntries(String className, long classPK)
 		throws PortalException, SystemException {
 
 		return tagsEntryLocalService.getEntries(className, classPK);
 	}
 
-	public List getEntries(
-		long classNameId, long companyId, long groupId, String name)
-		throws PortalException, SystemException {
+	public List<TagsEntry> getEntries(
+			long groupId, long companyId, long classNameId, String name)
+		throws SystemException {
 
 		return tagsEntryLocalService.getEntries(
-			classNameId, companyId, groupId, name);
+			groupId, companyId, classNameId, name);
 	}
 
-	public List search(long companyId, String name, String[] properties)
+	public List<TagsEntry> search(
+			long companyId, String name, String[] properties)
 		throws SystemException {
 
 		return tagsEntryLocalService.search(companyId, name, properties);
 	}
 
-	public List search(
+	public List<TagsEntry> search(
 		long companyId, String name, String[] properties, int begin, int end)
 		throws SystemException {
 
