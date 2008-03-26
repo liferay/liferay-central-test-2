@@ -155,6 +155,11 @@ public class EntityResolver implements org.xml.sax.EntityResolver {
 		),
 
 		new KeyValuePair(
+			"-//Liferay//DTD Plugin Repository .0//EN",
+			"liferay-plugin-repository_5_0_0.dtd"
+		),
+
+		new KeyValuePair(
 			"-//Liferay//DTD Portlet Application 3.5.0//EN",
 			"liferay-portlet-app_3_5_0.dtd"
 		),
