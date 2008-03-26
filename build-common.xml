@@ -171,6 +171,9 @@ ECJ was automatically installed. Please rerun your task.
 		<echo message="${current.time}" />
 	</target>
 
+	<target name="compile">
+	</target>
+
 	<target name="compile-test">
 		<mkdir dir="test-classes" />
 		<mkdir dir="test-results" />
@@ -194,6 +197,7 @@ ECJ was automatically installed. Please rerun your task.
 		<delete dir="test-classes" />
 		<delete dir="test-results" />
 
+		<antcall target="compile" />
 		<antcall target="compile-test" />
 
 		<fileset dir="test-classes" id="test.suite.classes">
@@ -233,7 +237,7 @@ ECJ was automatically installed. Please rerun your task.
 		<delete dir="activemq-data" />
 	</target>
 
-	<target name="test-class" depends="compile-test" if="class">
+	<target name="test-class" depends="compile,compile-test" if="class">
 		<junit fork="on" haltonfailure="no" printsummary="on">
 			<classpath refid="test.classpath" />
 			<formatter type="brief" usefile="false" />
