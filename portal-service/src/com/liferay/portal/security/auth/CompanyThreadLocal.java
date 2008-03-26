@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 public class CompanyThreadLocal {
 
 	public static long getCompanyId() {
-		Long companyIdObj = (Long)_threadLocal.get();
+		Long companyIdObj = _threadLocal.get();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("getCompanyId " + companyIdObj);
@@ -63,6 +63,6 @@ public class CompanyThreadLocal {
 
 	private static Log _log = LogFactoryUtil.getLog(CompanyThreadLocal.class);
 
-	private static ThreadLocal _threadLocal = new ThreadLocal();
+	private static ThreadLocal<Long> _threadLocal = new ThreadLocal<Long>();
 
 }

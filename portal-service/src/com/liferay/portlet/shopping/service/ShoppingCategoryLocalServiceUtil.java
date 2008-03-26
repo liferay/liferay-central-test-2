@@ -413,15 +413,15 @@ public class ShoppingCategoryLocalServiceUtil {
 		shoppingCategoryLocalService.deleteCategory(category);
 	}
 
-	public static java.util.List getCategories(long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
+		long groupId) throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
 		return shoppingCategoryLocalService.getCategories(groupId);
 	}
 
-	public static java.util.List getCategories(long groupId,
-		long parentCategoryId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
+		long groupId, long parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
 
@@ -455,7 +455,8 @@ public class ShoppingCategoryLocalServiceUtil {
 		return shoppingCategoryLocalService.getParentCategory(category);
 	}
 
-	public static java.util.List getParentCategories(long categoryId)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getParentCategories(
+		long categoryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();
@@ -463,7 +464,7 @@ public class ShoppingCategoryLocalServiceUtil {
 		return shoppingCategoryLocalService.getParentCategories(categoryId);
 	}
 
-	public static java.util.List getParentCategories(
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getParentCategories(
 		com.liferay.portlet.shopping.model.ShoppingCategory category)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -472,7 +473,7 @@ public class ShoppingCategoryLocalServiceUtil {
 		return shoppingCategoryLocalService.getParentCategories(category);
 	}
 
-	public static void getSubcategoryIds(java.util.List categoryIds,
+	public static void getSubcategoryIds(java.util.List<Long> categoryIds,
 		long groupId, long categoryId)
 		throws com.liferay.portal.SystemException {
 		ShoppingCategoryLocalService shoppingCategoryLocalService = ShoppingCategoryLocalServiceFactory.getService();

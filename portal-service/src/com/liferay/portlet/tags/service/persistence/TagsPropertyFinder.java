@@ -32,9 +32,11 @@ public interface TagsPropertyFinder {
 	public int countByC_K(long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_K(long companyId, java.lang.String key)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByC_K(long companyId, java.lang.String key,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

@@ -320,7 +320,8 @@ public class MBBanLocalServiceUtil {
 		mbBanLocalService.expireBans();
 	}
 
-	public static java.util.List getBans(long groupId, int start, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBBan> getBans(
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException {
 		MBBanLocalService mbBanLocalService = MBBanLocalServiceFactory.getService();
 

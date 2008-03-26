@@ -303,7 +303,8 @@ public class UserGroupUtil {
 		getPersistence().addUsers(pk, userPKs);
 	}
 
-	public static void addUsers(long pk, java.util.List users)
+	public static void addUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupException,
 			com.liferay.portal.NoSuchUserException {
@@ -337,7 +338,8 @@ public class UserGroupUtil {
 		getPersistence().removeUsers(pk, userPKs);
 	}
 
-	public static void removeUsers(long pk, java.util.List users)
+	public static void removeUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupException,
 			com.liferay.portal.NoSuchUserException {
@@ -351,7 +353,8 @@ public class UserGroupUtil {
 		getPersistence().setUsers(pk, userPKs);
 	}
 
-	public static void setUsers(long pk, java.util.List users)
+	public static void setUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserGroupException,
 			com.liferay.portal.NoSuchUserException {

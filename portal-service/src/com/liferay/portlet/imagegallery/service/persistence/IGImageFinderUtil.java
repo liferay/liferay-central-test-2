@@ -29,7 +29,7 @@ package com.liferay.portlet.imagegallery.service.persistence;
  *
  */
 public class IGImageFinderUtil {
-	public static int countByFolderIds(java.util.List folderIds)
+	public static int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByFolderIds(folderIds);
 	}
@@ -44,12 +44,13 @@ public class IGImageFinderUtil {
 		return getFinder().countByG_U(groupId, userId);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByNoAssets()
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByNoAssets()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNoAssets();
 	}
@@ -61,8 +62,9 @@ public class IGImageFinderUtil {
 		return getFinder().findByUuid_G(uuid, groupId);
 	}
 
-	public static java.util.List findByG_U(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.imagegallery.model.IGImage> findByG_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByG_U(groupId, userId, begin, end);
 	}
 

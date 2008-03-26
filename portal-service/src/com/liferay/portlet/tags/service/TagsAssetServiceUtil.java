@@ -103,8 +103,8 @@ public class TagsAssetServiceUtil {
 			languageId);
 	}
 
-	public static java.util.List getCompanyAssets(long companyId, int begin,
-		int end)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsAssetService tagsAssetService = TagsAssetServiceFactory.getService();
 

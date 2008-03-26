@@ -58,18 +58,18 @@ public class JournalTemplateFinderUtil {
 			structureId, structureIdComparator, names, descriptions, andOperator);
 	}
 
-	public static java.util.List findByKeywords(long companyId, long groupId,
-		java.lang.String keywords, java.lang.String structureId,
-		java.lang.String structureIdComparator, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByKeywords(
+		long companyId, long groupId, java.lang.String keywords,
+		java.lang.String structureId, java.lang.String structureIdComparator,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByKeywords(companyId, groupId, keywords, structureId,
 			structureIdComparator, begin, end, obc);
 	}
 
-	public static java.util.List findByC_G_T_S_N_D(long companyId,
-		long groupId, java.lang.String templateId,
+	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByC_G_T_S_N_D(
+		long companyId, long groupId, java.lang.String templateId,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String name, java.lang.String description,
 		boolean andOperator, int begin, int end,
@@ -81,8 +81,8 @@ public class JournalTemplateFinderUtil {
 			begin, end, obc);
 	}
 
-	public static java.util.List findByC_G_T_S_N_D(long companyId,
-		long groupId, java.lang.String[] templateIds,
+	public static java.util.List<com.liferay.portlet.journal.model.JournalTemplate> findByC_G_T_S_N_D(
+		long companyId, long groupId, java.lang.String[] templateIds,
 		java.lang.String structureId, java.lang.String structureIdComparator,
 		java.lang.String[] names, java.lang.String[] descriptions,
 		boolean andOperator, int begin, int end,

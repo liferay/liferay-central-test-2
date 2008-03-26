@@ -37,7 +37,7 @@ import java.util.Properties;
  * @author Brian Wing Shun Chan
  *
  */
-public interface Theme extends Comparable, Plugin, Serializable {
+public interface Theme extends Comparable<Theme>, Plugin, Serializable {
 
 	public String getThemeId();
 
@@ -101,9 +101,9 @@ public interface Theme extends Comparable, Plugin, Serializable {
 
 	public void setWapTheme(boolean wapTheme);
 
-	public List getColorSchemes();
+	public List<ColorScheme> getColorSchemes();
 
-	public Map getColorSchemesMap();
+	public Map<String, ColorScheme> getColorSchemesMap();
 
 	public boolean hasColorSchemes();
 

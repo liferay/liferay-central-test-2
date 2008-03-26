@@ -354,7 +354,8 @@ public class SCProductEntryUtil {
 		getPersistence().addSCLicenses(pk, scLicensePKs);
 	}
 
-	public static void addSCLicenses(long pk, java.util.List scLicenses)
+	public static void addSCLicenses(long pk,
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
@@ -389,7 +390,8 @@ public class SCProductEntryUtil {
 		getPersistence().removeSCLicenses(pk, scLicensePKs);
 	}
 
-	public static void removeSCLicenses(long pk, java.util.List scLicenses)
+	public static void removeSCLicenses(long pk,
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
@@ -403,7 +405,8 @@ public class SCProductEntryUtil {
 		getPersistence().setSCLicenses(pk, scLicensePKs);
 	}
 
-	public static void setSCLicenses(long pk, java.util.List scLicenses)
+	public static void setSCLicenses(long pk,
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> scLicenses)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {

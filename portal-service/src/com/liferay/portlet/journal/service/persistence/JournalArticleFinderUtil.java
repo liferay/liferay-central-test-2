@@ -90,7 +90,7 @@ public class JournalArticleFinderUtil {
 			expired, reviewDate, andOperator);
 	}
 
-	public static java.util.List findByExpirationDate(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByExpirationDate(
 		java.lang.Boolean expired, java.util.Date expirationDateLT,
 		java.util.Date expirationDateGT)
 		throws com.liferay.portal.SystemException {
@@ -99,13 +99,14 @@ public class JournalArticleFinderUtil {
 			expirationDateGT);
 	}
 
-	public static java.util.List findByKeywords(long companyId, long groupId,
-		java.lang.String keywords, java.lang.Double version,
-		java.lang.String type, java.lang.String structureId,
-		java.lang.String templateId, java.util.Date displayDateGT,
-		java.util.Date displayDateLT, java.lang.Boolean approved,
-		java.lang.Boolean expired, java.util.Date reviewDate, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByKeywords(
+		long companyId, long groupId, java.lang.String keywords,
+		java.lang.Double version, java.lang.String type,
+		java.lang.String structureId, java.lang.String templateId,
+		java.util.Date displayDateGT, java.util.Date displayDateLT,
+		java.lang.Boolean approved, java.lang.Boolean expired,
+		java.util.Date reviewDate, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByKeywords(companyId, groupId, keywords, version, type,
@@ -113,12 +114,13 @@ public class JournalArticleFinderUtil {
 			expired, reviewDate, begin, end, obc);
 	}
 
-	public static java.util.List findByReviewDate(java.util.Date reviewDateLT,
-		java.util.Date reviewDateGT) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByReviewDate(
+		java.util.Date reviewDateLT, java.util.Date reviewDateGT)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByReviewDate(reviewDateLT, reviewDateGT);
 	}
 
-	public static java.util.List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 		long companyId, long groupId, java.lang.String articleId,
 		java.lang.Double version, java.lang.String title,
 		java.lang.String description, java.lang.String content,
@@ -136,7 +138,7 @@ public class JournalArticleFinderUtil {
 			reviewDate, andOperator, begin, end, obc);
 	}
 
-	public static java.util.List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 		long companyId, long groupId, java.lang.String articleId,
 		java.lang.Double version, java.lang.String title,
 		java.lang.String description, java.lang.String content,
@@ -154,7 +156,7 @@ public class JournalArticleFinderUtil {
 			expired, reviewDate, andOperator, begin, end, obc);
 	}
 
-	public static java.util.List findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> findByC_G_A_V_T_D_C_T_S_T_D_A_E_R(
 		long companyId, long groupId, java.lang.String[] articleIds,
 		java.lang.Double version, java.lang.String[] titles,
 		java.lang.String[] descriptions, java.lang.String[] contents,

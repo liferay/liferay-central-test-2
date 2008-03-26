@@ -276,7 +276,8 @@ public class MBMessageFlagLocalServiceUtil {
 		mbMessageFlagLocalService.afterPropertiesSet();
 	}
 
-	public static void addReadFlags(long userId, java.util.List messages)
+	public static void addReadFlags(long userId,
+		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> messages)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		MBMessageFlagLocalService mbMessageFlagLocalService = MBMessageFlagLocalServiceFactory.getService();

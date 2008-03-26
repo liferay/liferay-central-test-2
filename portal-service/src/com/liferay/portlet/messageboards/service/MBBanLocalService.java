@@ -161,7 +161,8 @@ public interface MBBanLocalService {
 
 	public void expireBans() throws com.liferay.portal.SystemException;
 
-	public java.util.List getBans(long groupId, int start, int end)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBBan> getBans(
+		long groupId, int start, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getBansCount(long groupId)

@@ -282,15 +282,15 @@ public class TagsPropertyLocalServiceUtil {
 		tagsPropertyLocalService.deleteProperty(property);
 	}
 
-	public static java.util.List getProperties()
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties()
 		throws com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
 		return tagsPropertyLocalService.getProperties();
 	}
 
-	public static java.util.List getProperties(long entryId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
+		long entryId) throws com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
 		return tagsPropertyLocalService.getProperties(entryId);
@@ -321,8 +321,9 @@ public class TagsPropertyLocalServiceUtil {
 		return tagsPropertyLocalService.getPropertyKeys(companyId);
 	}
 
-	public static java.util.List getPropertyValues(long companyId,
-		java.lang.String key) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
+		long companyId, java.lang.String key)
+		throws com.liferay.portal.SystemException {
 		TagsPropertyLocalService tagsPropertyLocalService = TagsPropertyLocalServiceFactory.getService();
 
 		return tagsPropertyLocalService.getPropertyValues(companyId, key);

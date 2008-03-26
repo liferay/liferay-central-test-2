@@ -212,11 +212,12 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getCategories(long groupId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
+		long groupId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getCategories(long groupId, long parentCategoryId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getCategories(
+		long groupId, long parentCategoryId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public int getCategoriesCount(long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException;
@@ -231,17 +232,19 @@ public interface ShoppingCategoryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getParentCategories(long categoryId)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getParentCategories(
+		long categoryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getParentCategories(
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCategory> getParentCategories(
 		com.liferay.portlet.shopping.model.ShoppingCategory category)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public void getSubcategoryIds(java.util.List categoryIds, long groupId,
-		long categoryId) throws com.liferay.portal.SystemException;
+	public void getSubcategoryIds(java.util.List<Long> categoryIds,
+		long groupId, long categoryId)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingCategory updateCategory(
 		long categoryId, long parentCategoryId, java.lang.String name,

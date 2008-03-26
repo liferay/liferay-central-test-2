@@ -63,7 +63,7 @@ public class PortletCategory implements Serializable {
 	}
 
 	public PortletCategory getCategory(String name) {
-		return (PortletCategory)_categories.get(name);
+		return _categories.get(name);
 	}
 
 	public Set<String> getPortletIds() {

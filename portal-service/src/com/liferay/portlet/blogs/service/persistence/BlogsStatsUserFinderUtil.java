@@ -34,19 +34,21 @@ public class BlogsStatsUserFinderUtil {
 		return getFinder().countByOrganizationId(organizationId);
 	}
 
-	public static int countByOrganizationIds(java.util.List organizationIds)
+	public static int countByOrganizationIds(
+		java.util.List<Long> organizationIds)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByOrganizationIds(organizationIds);
 	}
 
-	public static java.util.List findByOrganizationId(long organizationId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationId(
+		long organizationId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByOrganizationId(organizationId, begin, end, obc);
 	}
 
-	public static java.util.List findByOrganizationIds(
-		java.util.List organizationIds, int begin, int end,
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsStatsUser> findByOrganizationIds(
+		java.util.List<Long> organizationIds, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()

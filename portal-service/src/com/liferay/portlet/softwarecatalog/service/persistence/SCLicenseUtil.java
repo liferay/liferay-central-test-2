@@ -278,7 +278,7 @@ public class SCLicenseUtil {
 	}
 
 	public static void addSCProductEntries(long pk,
-		java.util.List scProductEntries)
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
@@ -314,7 +314,7 @@ public class SCLicenseUtil {
 	}
 
 	public static void removeSCProductEntries(long pk,
-		java.util.List scProductEntries)
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {
@@ -329,7 +329,7 @@ public class SCLicenseUtil {
 	}
 
 	public static void setSCProductEntries(long pk,
-		java.util.List scProductEntries)
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> scProductEntries)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException {

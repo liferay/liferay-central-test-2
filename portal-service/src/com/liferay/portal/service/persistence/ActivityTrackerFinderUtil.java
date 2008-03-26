@@ -34,8 +34,9 @@ public class ActivityTrackerFinderUtil {
 		return getFinder().countByU_R(userId, receiverUserId);
 	}
 
-	public static java.util.List findByU_R(long userId, long receiverUserId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.ActivityTracker> findByU_R(
+		long userId, long receiverUserId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByU_R(userId, receiverUserId, begin, end);
 	}
 

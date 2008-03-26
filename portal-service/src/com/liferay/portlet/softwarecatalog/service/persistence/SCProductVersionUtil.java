@@ -257,7 +257,7 @@ public class SCProductVersionUtil {
 	}
 
 	public static void addSCFrameworkVersions(long pk,
-		java.util.List scFrameworkVersions)
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException {
@@ -295,7 +295,7 @@ public class SCProductVersionUtil {
 	}
 
 	public static void removeSCFrameworkVersions(long pk,
-		java.util.List scFrameworkVersions)
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException {
@@ -311,7 +311,7 @@ public class SCProductVersionUtil {
 	}
 
 	public static void setSCFrameworkVersions(long pk,
-		java.util.List scFrameworkVersions)
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> scFrameworkVersions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			com.liferay.portlet.softwarecatalog.NoSuchFrameworkVersionException {

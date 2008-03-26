@@ -77,15 +77,16 @@ public class TagsPropertyServiceUtil {
 		tagsPropertyService.deleteProperty(propertyId);
 	}
 
-	public static java.util.List getProperties(long entryId)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
+		long entryId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
 
 		return tagsPropertyService.getProperties(entryId);
 	}
 
-	public static java.util.List getPropertyValues(long companyId,
-		java.lang.String key)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
+		long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		TagsPropertyService tagsPropertyService = TagsPropertyServiceFactory.getService();
 

@@ -378,29 +378,32 @@ public class MBThreadLocalServiceUtil {
 		mbThreadLocalService.deleteThreads(categoryId);
 	}
 
-	public static int getCategoriesThreadsCount(java.util.List categoryIds)
+	public static int getCategoriesThreadsCount(
+		java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		return mbThreadLocalService.getCategoriesThreadsCount(categoryIds);
 	}
 
-	public static java.util.List getGroupThreads(long groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
+		long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		return mbThreadLocalService.getGroupThreads(groupId, begin, end);
 	}
 
-	public static java.util.List getGroupThreads(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		return mbThreadLocalService.getGroupThreads(groupId, userId, begin, end);
 	}
 
-	public static java.util.List getGroupThreads(long groupId, long userId,
-		boolean subscribed, int begin, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getGroupThreads(
+		long groupId, long userId, boolean subscribed, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
@@ -439,7 +442,8 @@ public class MBThreadLocalServiceUtil {
 		return mbThreadLocalService.getThread(threadId);
 	}
 
-	public static java.util.List getThreads(long categoryId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> getThreads(
+		long categoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 

@@ -264,7 +264,8 @@ public class GroupUtil {
 		getPersistence().addOrganizations(pk, organizationPKs);
 	}
 
-	public static void addOrganizations(long pk, java.util.List organizations)
+	public static void addOrganizations(long pk,
+		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException {
@@ -299,7 +300,8 @@ public class GroupUtil {
 		getPersistence().removeOrganizations(pk, organizationPKs);
 	}
 
-	public static void removeOrganizations(long pk, java.util.List organizations)
+	public static void removeOrganizations(long pk,
+		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException {
@@ -313,7 +315,8 @@ public class GroupUtil {
 		getPersistence().setOrganizations(pk, organizationPKs);
 	}
 
-	public static void setOrganizations(long pk, java.util.List organizations)
+	public static void setOrganizations(long pk,
+		java.util.List<com.liferay.portal.model.Organization> organizations)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException {
@@ -379,7 +382,8 @@ public class GroupUtil {
 		getPersistence().addPermissions(pk, permissionPKs);
 	}
 
-	public static void addPermissions(long pk, java.util.List permissions)
+	public static void addPermissions(long pk,
+		java.util.List<com.liferay.portal.model.Permission> permissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException {
@@ -414,7 +418,8 @@ public class GroupUtil {
 		getPersistence().removePermissions(pk, permissionPKs);
 	}
 
-	public static void removePermissions(long pk, java.util.List permissions)
+	public static void removePermissions(long pk,
+		java.util.List<com.liferay.portal.model.Permission> permissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException {
@@ -428,7 +433,8 @@ public class GroupUtil {
 		getPersistence().setPermissions(pk, permissionPKs);
 	}
 
-	public static void setPermissions(long pk, java.util.List permissions)
+	public static void setPermissions(long pk,
+		java.util.List<com.liferay.portal.model.Permission> permissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchPermissionException,
 			com.liferay.portal.NoSuchGroupException {
@@ -493,7 +499,8 @@ public class GroupUtil {
 		getPersistence().addRoles(pk, rolePKs);
 	}
 
-	public static void addRoles(long pk, java.util.List roles)
+	public static void addRoles(long pk,
+		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.NoSuchGroupException {
@@ -527,7 +534,8 @@ public class GroupUtil {
 		getPersistence().removeRoles(pk, rolePKs);
 	}
 
-	public static void removeRoles(long pk, java.util.List roles)
+	public static void removeRoles(long pk,
+		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.NoSuchGroupException {
@@ -541,7 +549,8 @@ public class GroupUtil {
 		getPersistence().setRoles(pk, rolePKs);
 	}
 
-	public static void setRoles(long pk, java.util.List roles)
+	public static void setRoles(long pk,
+		java.util.List<com.liferay.portal.model.Role> roles)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchRoleException,
 			com.liferay.portal.NoSuchGroupException {
@@ -607,7 +616,8 @@ public class GroupUtil {
 		getPersistence().addUserGroups(pk, userGroupPKs);
 	}
 
-	public static void addUserGroups(long pk, java.util.List userGroups)
+	public static void addUserGroups(long pk,
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchUserGroupException {
@@ -642,7 +652,8 @@ public class GroupUtil {
 		getPersistence().removeUserGroups(pk, userGroupPKs);
 	}
 
-	public static void removeUserGroups(long pk, java.util.List userGroups)
+	public static void removeUserGroups(long pk,
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchUserGroupException {
@@ -656,7 +667,8 @@ public class GroupUtil {
 		getPersistence().setUserGroups(pk, userGroupPKs);
 	}
 
-	public static void setUserGroups(long pk, java.util.List userGroups)
+	public static void setUserGroups(long pk,
+		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchUserGroupException {
@@ -721,7 +733,8 @@ public class GroupUtil {
 		getPersistence().addUsers(pk, userPKs);
 	}
 
-	public static void addUsers(long pk, java.util.List users)
+	public static void addUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchUserException {
@@ -755,7 +768,8 @@ public class GroupUtil {
 		getPersistence().removeUsers(pk, userPKs);
 	}
 
-	public static void removeUsers(long pk, java.util.List users)
+	public static void removeUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchUserException {
@@ -769,7 +783,8 @@ public class GroupUtil {
 		getPersistence().setUsers(pk, userPKs);
 	}
 
-	public static void setUsers(long pk, java.util.List users)
+	public static void setUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchUserException {

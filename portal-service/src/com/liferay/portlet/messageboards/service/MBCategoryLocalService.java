@@ -234,11 +234,13 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getCategories(long groupId, long parentCategoryId)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
+		long groupId, long parentCategoryId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getCategories(long groupId, long parentCategoryId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
+		long groupId, long parentCategoryId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public int getCategoriesCount(long groupId)
 		throws com.liferay.portal.SystemException;
@@ -251,11 +253,13 @@ public interface MBCategoryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public void getSubcategoryIds(java.util.List categoryIds, long groupId,
-		long categoryId) throws com.liferay.portal.SystemException;
+	public void getSubcategoryIds(java.util.List<Long> categoryIds,
+		long groupId, long categoryId)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List getSubscribedCategories(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getSubscribedCategories(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public int getSubscribedCategoriesCount(long groupId, long userId)
 		throws com.liferay.portal.SystemException;

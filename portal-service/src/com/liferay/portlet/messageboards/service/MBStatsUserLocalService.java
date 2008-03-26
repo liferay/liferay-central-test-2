@@ -142,7 +142,8 @@ public interface MBStatsUserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getStatsUsers(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsers(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getStatsUsersCount(long groupId)

@@ -272,7 +272,8 @@ public class MBStatsUserLocalServiceUtil {
 		return mbStatsUserLocalService.getStatsUser(groupId, userId);
 	}
 
-	public static java.util.List getStatsUsers(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBStatsUser> getStatsUsers(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		MBStatsUserLocalService mbStatsUserLocalService = MBStatsUserLocalServiceFactory.getService();
 

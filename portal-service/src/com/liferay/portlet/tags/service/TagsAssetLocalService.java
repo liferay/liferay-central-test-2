@@ -235,40 +235,43 @@ public interface TagsAssetLocalService {
 	public com.liferay.portlet.tags.model.TagsAssetType[] getAssetTypes(
 		java.lang.String languageId);
 
-	public java.util.List getAssets(long[] entryIds, long[] notEntryIds,
-		boolean andOperator, boolean excludeZeroViewCount, int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getAssets(long groupId, long[] classNameIds,
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		boolean excludeZeroViewCount, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getAssets(long[] entryIds, long[] notEntryIds,
-		boolean andOperator, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
+		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		boolean andOperator, boolean excludeZeroViewCount, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List getAssets(long groupId, long[] classNameIds,
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getAssets(long[] entryIds, long[] notEntryIds,
-		boolean andOperator, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
+		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		boolean andOperator, boolean excludeZeroViewCount,
 		java.util.Date publishDate, java.util.Date expirationDate, int begin,
 		int end) throws com.liferay.portal.SystemException;
 
-	public java.util.List getAssets(long groupId, long[] classNameIds,
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
 		long[] entryIds, long[] notEntryIds, boolean andOperator,
 		java.lang.String orderByCol1, java.lang.String orderByCol2,
 		java.lang.String orderByType1, java.lang.String orderByType2,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate, int begin, int end)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getAssets(
+		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		boolean andOperator, java.lang.String orderByCol1,
+		java.lang.String orderByCol2, java.lang.String orderByType1,
+		java.lang.String orderByType2, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate, int begin,
+		int end) throws com.liferay.portal.SystemException;
 
 	public int getAssetsCount(long[] entryIds, long[] notEntryIds,
 		boolean andOperator, boolean excludeZeroViewCount)
@@ -294,18 +297,19 @@ public interface TagsAssetLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getCompanyAssets(long companyId, int begin, int end)
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
+		long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int getCompanyAssetsCount(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getTopViewedAssets(java.lang.String className,
-		boolean asc, int begin, int end)
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTopViewedAssets(
+		java.lang.String className, boolean asc, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getTopViewedAssets(java.lang.String[] className,
-		boolean asc, int begin, int end)
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getTopViewedAssets(
+		java.lang.String[] className, boolean asc, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsAsset incrementViewCounter(

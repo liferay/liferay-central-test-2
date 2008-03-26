@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.log.LogFactoryUtil;
 public class PrincipalThreadLocal {
 
 	public static String getName() {
-		String name = (String)_threadLocal.get();
+		String name = _threadLocal.get();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("getName " + name);
@@ -57,6 +57,6 @@ public class PrincipalThreadLocal {
 
 	private static Log _log = LogFactoryUtil.getLog(PrincipalThreadLocal.class);
 
-	private static ThreadLocal _threadLocal = new ThreadLocal();
+	private static ThreadLocal<String> _threadLocal = new ThreadLocal<String>();
 
 }

@@ -246,7 +246,8 @@ public class ExpandoTableUtil {
 		getPersistence().addExpandoColumns(pk, expandoColumnPKs);
 	}
 
-	public static void addExpandoColumns(long pk, java.util.List expandoColumns)
+	public static void addExpandoColumns(long pk,
+		java.util.List<com.liferay.portal.model.ExpandoColumn> expandoColumns)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchExpandoColumnException,
 			com.liferay.portal.NoSuchExpandoTableException {
@@ -282,7 +283,7 @@ public class ExpandoTableUtil {
 	}
 
 	public static void removeExpandoColumns(long pk,
-		java.util.List expandoColumns)
+		java.util.List<com.liferay.portal.model.ExpandoColumn> expandoColumns)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchExpandoColumnException,
 			com.liferay.portal.NoSuchExpandoTableException {
@@ -296,7 +297,8 @@ public class ExpandoTableUtil {
 		getPersistence().setExpandoColumns(pk, expandoColumnPKs);
 	}
 
-	public static void setExpandoColumns(long pk, java.util.List expandoColumns)
+	public static void setExpandoColumns(long pk,
+		java.util.List<com.liferay.portal.model.ExpandoColumn> expandoColumns)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchExpandoColumnException,
 			com.liferay.portal.NoSuchExpandoTableException {

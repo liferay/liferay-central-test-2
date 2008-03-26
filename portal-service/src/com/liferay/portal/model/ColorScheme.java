@@ -32,7 +32,7 @@ import java.util.Properties;
  * @author Brian Wing Shun Chan
  *
  */
-public interface ColorScheme extends Comparable, Serializable {
+public interface ColorScheme extends Comparable<ColorScheme>, Serializable {
 
 	public String getColorSchemeId();
 

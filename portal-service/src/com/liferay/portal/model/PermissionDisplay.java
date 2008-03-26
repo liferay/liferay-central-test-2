@@ -31,7 +31,8 @@ import java.io.Serializable;
  * @author Jorge Ferrer
  *
  */
-public class PermissionDisplay implements Comparable, Serializable {
+public class PermissionDisplay
+	implements Comparable<PermissionDisplay>, Serializable {
 
 	public PermissionDisplay(
 		Permission permission, Resource resource, String portletName,
@@ -80,13 +81,7 @@ public class PermissionDisplay implements Comparable, Serializable {
 		return _actionLabel;
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		PermissionDisplay permissionDisplay = (PermissionDisplay)obj;
-
+	public int compareTo(PermissionDisplay permissionDisplay) {
 		int value = getPortletLabel().compareTo(
 			permissionDisplay.getPortletLabel());
 

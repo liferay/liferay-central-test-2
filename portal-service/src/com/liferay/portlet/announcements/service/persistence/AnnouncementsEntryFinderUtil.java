@@ -40,9 +40,9 @@ public class AnnouncementsEntryFinderUtil {
 	}
 
 	public static int countByScopes(long userId,
-		java.util.LinkedHashMap scopes, int displayMonth, int displayDay,
-		int displayYear, int expirationMonth, int expirationDay,
-		int expirationYear, boolean alert, int flagValue)
+		java.util.LinkedHashMap<Long, long[]> scopes, int displayMonth,
+		int displayDay, int displayYear, int expirationMonth,
+		int expirationDay, int expirationYear, boolean alert, int flagValue)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .countByScopes(userId, scopes, displayMonth, displayDay,
@@ -50,22 +50,22 @@ public class AnnouncementsEntryFinderUtil {
 			flagValue);
 	}
 
-	public static java.util.List findByScope(long userId, long classNameId,
-		long[] classPKs, int displayMonth, int displayDay, int displayYear,
-		int expirationMonth, int expirationDay, int expirationYear,
-		boolean alert, int flagValue, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByScope(
+		long userId, long classNameId, long[] classPKs, int displayMonth,
+		int displayDay, int displayYear, int expirationMonth,
+		int expirationDay, int expirationYear, boolean alert, int flagValue,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByScope(userId, classNameId, classPKs, displayMonth,
 			displayDay, displayYear, expirationMonth, expirationDay,
 			expirationYear, alert, flagValue, begin, end);
 	}
 
-	public static java.util.List findByScopes(long userId,
-		java.util.LinkedHashMap scopes, int displayMonth, int displayDay,
-		int displayYear, int expirationMonth, int expirationDay,
-		int expirationYear, boolean alert, int flagValue, int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> findByScopes(
+		long userId, java.util.LinkedHashMap<Long, long[]> scopes,
+		int displayMonth, int displayDay, int displayYear, int expirationMonth,
+		int expirationDay, int expirationYear, boolean alert, int flagValue,
+		int begin, int end) throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByScopes(userId, scopes, displayMonth, displayDay,
 			displayYear, expirationMonth, expirationDay, expirationYear, alert,

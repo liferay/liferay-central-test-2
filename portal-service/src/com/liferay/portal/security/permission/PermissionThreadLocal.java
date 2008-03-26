@@ -31,7 +31,7 @@ package com.liferay.portal.security.permission;
 public class PermissionThreadLocal {
 
 	public static PermissionChecker getPermissionChecker() {
-		return (PermissionChecker)_threadLocal.get();
+		return _threadLocal.get();
 	}
 
 	public static void setPermissionChecker(
@@ -40,6 +40,7 @@ public class PermissionThreadLocal {
 		_threadLocal.set(permissionChecker);
 	}
 
-	private static ThreadLocal _threadLocal = new ThreadLocal();
+	private static ThreadLocal<PermissionChecker> _threadLocal =
+		new ThreadLocal<PermissionChecker>();
 
 }

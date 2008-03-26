@@ -34,23 +34,25 @@ public class BlogsEntryFinderUtil {
 		return getFinder().countByOrganizationId(organizationId);
 	}
 
-	public static int countByOrganizationIds(java.util.List organizationIds)
+	public static int countByOrganizationIds(
+		java.util.List<Long> organizationIds)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByOrganizationIds(organizationIds);
 	}
 
-	public static java.util.List findByOrganizationId(long organizationId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationId(
+		long organizationId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByOrganizationId(organizationId, begin, end);
 	}
 
-	public static java.util.List findByOrganizationIds(
-		java.util.List organizationIds, int begin, int end)
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByOrganizationIds(
+		java.util.List<Long> organizationIds, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByOrganizationIds(organizationIds, begin, end);
 	}
 
-	public static java.util.List findByNoAssets()
+	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> findByNoAssets()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNoAssets();
 	}

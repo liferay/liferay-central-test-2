@@ -464,15 +464,16 @@ public class MBCategoryLocalServiceUtil {
 		mbCategoryLocalService.deleteCategory(category);
 	}
 
-	public static java.util.List getCategories(long groupId,
-		long parentCategoryId) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
+		long groupId, long parentCategoryId)
+		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
 		return mbCategoryLocalService.getCategories(groupId, parentCategoryId);
 	}
 
-	public static java.util.List getCategories(long groupId,
-		long parentCategoryId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
+		long groupId, long parentCategoryId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 
@@ -504,7 +505,7 @@ public class MBCategoryLocalServiceUtil {
 		return mbCategoryLocalService.getCategory(categoryId);
 	}
 
-	public static void getSubcategoryIds(java.util.List categoryIds,
+	public static void getSubcategoryIds(java.util.List<Long> categoryIds,
 		long groupId, long categoryId)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
@@ -513,8 +514,8 @@ public class MBCategoryLocalServiceUtil {
 			categoryId);
 	}
 
-	public static java.util.List getSubscribedCategories(long groupId,
-		long userId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getSubscribedCategories(
+		long groupId, long userId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		MBCategoryLocalService mbCategoryLocalService = MBCategoryLocalServiceFactory.getService();
 

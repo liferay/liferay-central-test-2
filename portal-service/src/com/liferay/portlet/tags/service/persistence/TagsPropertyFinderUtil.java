@@ -34,13 +34,14 @@ public class TagsPropertyFinderUtil {
 		return getFinder().countByC_K(companyId, key);
 	}
 
-	public static java.util.List findByC_K(long companyId, java.lang.String key)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByC_K(companyId, key);
 	}
 
-	public static java.util.List findByC_K(long companyId,
-		java.lang.String key, int begin, int end)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> findByC_K(
+		long companyId, java.lang.String key, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByC_K(companyId, key, begin, end);
 	}

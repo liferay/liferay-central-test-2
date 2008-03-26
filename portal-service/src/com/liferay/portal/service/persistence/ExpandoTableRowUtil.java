@@ -221,7 +221,8 @@ public class ExpandoTableRowUtil {
 		getPersistence().addExpandoValues(pk, expandoValuePKs);
 	}
 
-	public static void addExpandoValues(long pk, java.util.List expandoValues)
+	public static void addExpandoValues(long pk,
+		java.util.List<com.liferay.portal.model.ExpandoValue> expandoValues)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchExpandoValueException,
 			com.liferay.portal.NoSuchExpandoTableRowException {
@@ -256,7 +257,8 @@ public class ExpandoTableRowUtil {
 		getPersistence().removeExpandoValues(pk, expandoValuePKs);
 	}
 
-	public static void removeExpandoValues(long pk, java.util.List expandoValues)
+	public static void removeExpandoValues(long pk,
+		java.util.List<com.liferay.portal.model.ExpandoValue> expandoValues)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchExpandoValueException,
 			com.liferay.portal.NoSuchExpandoTableRowException {
@@ -270,7 +272,8 @@ public class ExpandoTableRowUtil {
 		getPersistence().setExpandoValues(pk, expandoValuePKs);
 	}
 
-	public static void setExpandoValues(long pk, java.util.List expandoValues)
+	public static void setExpandoValues(long pk,
+		java.util.List<com.liferay.portal.model.ExpandoValue> expandoValues)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchExpandoValueException,
 			com.liferay.portal.NoSuchExpandoTableRowException {

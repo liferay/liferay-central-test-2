@@ -357,7 +357,8 @@ public class OrganizationUtil {
 		getPersistence().addGroups(pk, groupPKs);
 	}
 
-	public static void addGroups(long pk, java.util.List groups)
+	public static void addGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException {
@@ -391,7 +392,8 @@ public class OrganizationUtil {
 		getPersistence().removeGroups(pk, groupPKs);
 	}
 
-	public static void removeGroups(long pk, java.util.List groups)
+	public static void removeGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException {
@@ -405,7 +407,8 @@ public class OrganizationUtil {
 		getPersistence().setGroups(pk, groupPKs);
 	}
 
-	public static void setGroups(long pk, java.util.List groups)
+	public static void setGroups(long pk,
+		java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchGroupException,
 			com.liferay.portal.NoSuchOrganizationException {
@@ -470,7 +473,8 @@ public class OrganizationUtil {
 		getPersistence().addUsers(pk, userPKs);
 	}
 
-	public static void addUsers(long pk, java.util.List users)
+	public static void addUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.NoSuchUserException {
@@ -504,7 +508,8 @@ public class OrganizationUtil {
 		getPersistence().removeUsers(pk, userPKs);
 	}
 
-	public static void removeUsers(long pk, java.util.List users)
+	public static void removeUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.NoSuchUserException {
@@ -518,7 +523,8 @@ public class OrganizationUtil {
 		getPersistence().setUsers(pk, userPKs);
 	}
 
-	public static void setUsers(long pk, java.util.List users)
+	public static void setUsers(long pk,
+		java.util.List<com.liferay.portal.model.User> users)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchOrganizationException,
 			com.liferay.portal.NoSuchUserException {

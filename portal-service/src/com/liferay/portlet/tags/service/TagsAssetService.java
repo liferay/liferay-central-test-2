@@ -76,7 +76,8 @@ public interface TagsAssetService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getCompanyAssets(long companyId, int begin, int end)
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
+		long companyId, int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public int getCompanyAssetsCount(long companyId)

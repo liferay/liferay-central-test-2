@@ -63,10 +63,12 @@ public interface TagsPropertyService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getProperties(long entryId)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
+		long entryId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
-	public java.util.List getPropertyValues(long companyId, java.lang.String key)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
+		long companyId, java.lang.String key)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty updateProperty(

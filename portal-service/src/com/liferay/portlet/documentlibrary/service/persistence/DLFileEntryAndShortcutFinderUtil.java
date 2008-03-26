@@ -29,13 +29,14 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  *
  */
 public class DLFileEntryAndShortcutFinderUtil {
-	public static int countByFolderIds(java.util.List folderIds)
+	public static int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByFolderIds(folderIds);
 	}
 
-	public static java.util.List findByFolderIds(java.util.List folderIds,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List findByFolderIds(
+		java.util.List<Long> folderIds, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByFolderIds(folderIds, begin, end);
 	}
 

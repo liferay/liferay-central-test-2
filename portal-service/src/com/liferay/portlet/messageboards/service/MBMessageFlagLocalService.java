@@ -141,7 +141,8 @@ public interface MBMessageFlagLocalService {
 
 	public void afterPropertiesSet();
 
-	public void addReadFlags(long userId, java.util.List messages)
+	public void addReadFlags(long userId,
+		java.util.List<com.liferay.portlet.messageboards.model.MBMessage> messages)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

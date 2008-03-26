@@ -29,15 +29,15 @@ package com.liferay.portlet.calendar.service.persistence;
  *
  */
 public class CalEventFinderUtil {
-	public static java.util.List findByG_SD(long groupId,
-		java.util.Date startDateGT, java.util.Date startDateLT,
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByG_SD(
+		long groupId, java.util.Date startDateGT, java.util.Date startDateLT,
 		boolean timeZoneSensitive) throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByG_SD(groupId, startDateGT, startDateLT,
 			timeZoneSensitive);
 	}
 
-	public static java.util.List findByRemindBy()
+	public static java.util.List<com.liferay.portlet.calendar.model.CalEvent> findByRemindBy()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByRemindBy();
 	}

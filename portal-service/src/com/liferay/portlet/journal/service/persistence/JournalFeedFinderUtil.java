@@ -52,17 +52,18 @@ public class JournalFeedFinderUtil {
 			descriptions, andOperator);
 	}
 
-	public static java.util.List findByKeywords(long companyId, long groupId,
-		java.lang.String keywords, int begin, int end,
-		com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> findByKeywords(
+		long companyId, long groupId, java.lang.String keywords, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByKeywords(companyId, groupId, keywords, begin, end, obc);
 	}
 
-	public static java.util.List findByC_G_F_N_D(long companyId, long groupId,
-		java.lang.String feedId, java.lang.String name,
-		java.lang.String description, boolean andOperator, int begin, int end,
+	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> findByC_G_F_N_D(
+		long companyId, long groupId, java.lang.String feedId,
+		java.lang.String name, java.lang.String description,
+		boolean andOperator, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
@@ -70,10 +71,11 @@ public class JournalFeedFinderUtil {
 			description, andOperator, begin, end, obc);
 	}
 
-	public static java.util.List findByC_G_F_N_D(long companyId, long groupId,
-		java.lang.String[] feedIds, java.lang.String[] names,
-		java.lang.String[] descriptions, boolean andOperator, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.journal.model.JournalFeed> findByC_G_F_N_D(
+		long companyId, long groupId, java.lang.String[] feedIds,
+		java.lang.String[] names, java.lang.String[] descriptions,
+		boolean andOperator, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByC_G_F_N_D(companyId, groupId, feedIds, names,

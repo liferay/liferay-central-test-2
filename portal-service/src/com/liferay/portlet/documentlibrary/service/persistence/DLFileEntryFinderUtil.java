@@ -29,7 +29,7 @@ package com.liferay.portlet.documentlibrary.service.persistence;
  *
  */
 public class DLFileEntryFinderUtil {
-	public static int countByFolderIds(java.util.List folderIds)
+	public static int countByFolderIds(java.util.List<Long> folderIds)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByFolderIds(folderIds);
 	}
@@ -44,29 +44,33 @@ public class DLFileEntryFinderUtil {
 		return getFinder().countByG_U(groupId, userId);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByGroupId(
+		long groupId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByGroupId(groupId, begin, end, obc);
 	}
 
-	public static java.util.List findByNoAssets()
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByNoAssets()
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByNoAssets();
 	}
 
-	public static java.util.List findByG_U(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByG_U(groupId, userId, begin, end);
 	}
 
-	public static java.util.List findByG_U(long groupId, long userId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portlet.documentlibrary.model.DLFileEntry> findByG_U(
+		long groupId, long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByG_U(groupId, userId, begin, end, obc);
 	}

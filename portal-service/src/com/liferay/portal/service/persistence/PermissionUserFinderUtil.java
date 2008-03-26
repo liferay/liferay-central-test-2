@@ -59,11 +59,12 @@ public class PermissionUserFinderUtil {
 			actionId, firstName, middleName, lastName, emailAddress, andOperator);
 	}
 
-	public static java.util.List findByPermissionAndRole(long companyId,
-		long groupId, java.lang.String name, java.lang.String primKey,
-		java.lang.String actionId, java.lang.String firstName,
-		java.lang.String middleName, java.lang.String lastName,
-		java.lang.String emailAddress, boolean andOperator, int begin, int end)
+	public static java.util.List<com.liferay.portal.model.User> findByPermissionAndRole(
+		long companyId, long groupId, java.lang.String name,
+		java.lang.String primKey, java.lang.String actionId,
+		java.lang.String firstName, java.lang.String middleName,
+		java.lang.String lastName, java.lang.String emailAddress,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByPermissionAndRole(companyId, groupId, name, primKey,
@@ -71,7 +72,7 @@ public class PermissionUserFinderUtil {
 			andOperator, begin, end);
 	}
 
-	public static java.util.List findByUserAndOrgGroupPermission(
+	public static java.util.List<com.liferay.portal.model.User> findByUserAndOrgGroupPermission(
 		long companyId, java.lang.String name, java.lang.String primKey,
 		java.lang.String actionId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,

@@ -36,14 +36,14 @@ public class RoleFinderUtil {
 
 	public static int countByC_N_D_T(long companyId, java.lang.String name,
 		java.lang.String description, java.lang.Integer type,
-		java.util.LinkedHashMap params)
+		java.util.LinkedHashMap<String, Object> params)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .countByC_N_D_T(companyId, name, description, type, params);
 	}
 
-	public static java.util.List findByUserGroupRole(long userId, long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Role> findByUserGroupRole(
+		long userId, long groupId) throws com.liferay.portal.SystemException {
 		return getFinder().findByUserGroupRole(userId, groupId);
 	}
 
@@ -54,34 +54,35 @@ public class RoleFinderUtil {
 		return getFinder().findByC_N(companyId, name);
 	}
 
-	public static java.util.List findByU_G(long userId, long groupId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Role> findByU_G(
+		long userId, long groupId) throws com.liferay.portal.SystemException {
 		return getFinder().findByU_G(userId, groupId);
 	}
 
-	public static java.util.List findByU_G(long userId, long[] groupIds)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Role> findByU_G(
+		long userId, long[] groupIds) throws com.liferay.portal.SystemException {
 		return getFinder().findByU_G(userId, groupIds);
 	}
 
-	public static java.util.List findByU_G(long userId, java.util.List groups)
+	public static java.util.List<com.liferay.portal.model.Role> findByU_G(
+		long userId, java.util.List<com.liferay.portal.model.Group> groups)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByU_G(userId, groups);
 	}
 
-	public static java.util.List findByC_N_D_T(long companyId,
-		java.lang.String name, java.lang.String description,
-		java.lang.Integer type, java.util.LinkedHashMap params, int begin,
-		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public static java.util.List<com.liferay.portal.model.Role> findByC_N_D_T(
+		long companyId, java.lang.String name, java.lang.String description,
+		java.lang.Integer type, java.util.LinkedHashMap<String, Object> params,
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
 				   .findByC_N_D_T(companyId, name, description, type, params,
 			begin, end, obc);
 	}
 
-	public static java.util.Map findByC_N_S_P(long companyId,
-		java.lang.String name, int scope, java.lang.String primKey)
-		throws com.liferay.portal.SystemException {
+	public static java.util.Map<String, java.util.List<String>> findByC_N_S_P(
+		long companyId, java.lang.String name, int scope,
+		java.lang.String primKey) throws com.liferay.portal.SystemException {
 		return getFinder().findByC_N_S_P(companyId, name, scope, primKey);
 	}
 

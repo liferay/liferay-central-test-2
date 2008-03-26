@@ -150,11 +150,11 @@ public interface TagsPropertyLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getProperties()
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getProperties(long entryId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
+		long entryId) throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty getProperty(
 		long propertyId)
@@ -169,7 +169,8 @@ public interface TagsPropertyLocalService {
 	public java.lang.String[] getPropertyKeys(long companyId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getPropertyValues(long companyId, java.lang.String key)
+	public java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
+		long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.tags.model.TagsProperty updateProperty(

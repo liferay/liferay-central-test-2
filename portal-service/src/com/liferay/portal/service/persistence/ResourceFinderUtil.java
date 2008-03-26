@@ -29,13 +29,14 @@ package com.liferay.portal.service.persistence;
  *
  */
 public class ResourceFinderUtil {
-	public static java.util.List findByName(java.lang.String name)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Resource> findByName(
+		java.lang.String name) throws com.liferay.portal.SystemException {
 		return getFinder().findByName(name);
 	}
 
-	public static java.util.List findByC_P(long companyId,
-		java.lang.String primKey) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portal.model.Resource> findByC_P(
+		long companyId, java.lang.String primKey)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByC_P(companyId, primKey);
 	}
 

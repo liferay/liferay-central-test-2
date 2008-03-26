@@ -44,32 +44,35 @@ public interface TagsAssetFinder {
 		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findAssets(long groupId, long[] classNameIds,
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> findAssets(
+		long groupId, long[] classNameIds, java.lang.String orderByCol1,
+		java.lang.String orderByCol2, java.lang.String orderByType1,
+		java.lang.String orderByType2, boolean excludeZeroViewCount,
+		java.util.Date publishDate, java.util.Date expirationDate, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> findByAndEntryIds(
+		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
 		java.lang.String orderByCol1, java.lang.String orderByCol2,
 		java.lang.String orderByType1, java.lang.String orderByType2,
 		boolean excludeZeroViewCount, java.util.Date publishDate,
 		java.util.Date expirationDate, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByAndEntryIds(long groupId, long[] classNameIds,
-		long[] entryIds, long[] notEntryIds, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int begin,
-		int end) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByOrEntryIds(long groupId, long[] classNameIds,
-		long[] entryIds, long[] notEntryIds, java.util.Date publishDate,
-		java.util.Date expirationDate)
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> findByOrEntryIds(
+		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		java.util.Date publishDate, java.util.Date expirationDate)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByOrEntryIds(long groupId, long[] classNameIds,
-		long[] entryIds, long[] notEntryIds, java.lang.String orderByCol1,
-		java.lang.String orderByCol2, java.lang.String orderByType1,
-		java.lang.String orderByType2, boolean excludeZeroViewCount,
-		java.util.Date publishDate, java.util.Date expirationDate, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> findByOrEntryIds(
+		long groupId, long[] classNameIds, long[] entryIds, long[] notEntryIds,
+		java.lang.String orderByCol1, java.lang.String orderByCol2,
+		java.lang.String orderByType1, java.lang.String orderByType2,
+		boolean excludeZeroViewCount, java.util.Date publishDate,
+		java.util.Date expirationDate, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByViewCount(long[] classNameId, boolean asc,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.tags.model.TagsAsset> findByViewCount(
+		long[] classNameId, boolean asc, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }
