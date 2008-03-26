@@ -124,7 +124,7 @@ if (Validator.isNull(tabs2) && !tabs1.equals("settings")) {
 	tabs2 = "pages";
 }
 
-if (tabs1.endsWith("-pages") && !tabs2.equals("pages") && !tabs2.equals("look-and-feel") && !tabs2.equals("export-import")) {
+if (tabs1.endsWith("-pages") && !tabs2.equals("pages") && !tabs2.equals("look-and-feel") && !tabs2.equals("export-import") && !tabs2.equals("proposals")) {
 	tabs2 = "pages";
 }
 
