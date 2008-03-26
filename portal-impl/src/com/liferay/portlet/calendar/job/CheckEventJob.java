@@ -62,6 +62,4 @@ public class CheckEventJob implements IntervalJob {
 
 	private static Log _log = LogFactory.getLog(CheckEventJob.class);
 
-	private long _interval;
-
 }
