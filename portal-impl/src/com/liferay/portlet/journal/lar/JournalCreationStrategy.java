@@ -58,8 +58,7 @@ public interface JournalCreationStrategy {
 	 * is returned, the default user id import strategy will determine the
 	 * author id.
 	 *
-	 * @param		context PortletDataContext instance used during the
-	 * 				import process
+	 * @param		context the context of the data import
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		the author's user id or USE_DEFAULT_USER_ID_STRATEGY to use
@@ -73,8 +72,7 @@ public interface JournalCreationStrategy {
 	 * zero is returned, the default user id import strategy will determine the
 	 * author id.
 	 *
-	 * @param		context PortletDataContext instance used during the
-	 * 				import process
+	 * @param		context the context of the data import
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		the approver's user id or USE_DEFAULT_USER_ID_STRATEGY to
@@ -90,8 +88,7 @@ public interface JournalCreationStrategy {
 	 * the text. Returns the new content to assign to the article. If null is
 	 * returned, the article content will be added unchanged.
 	 *
-	 * @param		context PortletDataContext instance used during the
-	 * 				import process
+	 * @param		context the context of the data import
 	 * @param		newArticle the new article being created
 	 * @return		the transformed content to save in the database or
 	 *				ARTICLE_CONTENT_UNCHANGED if the content should be added
@@ -105,8 +102,7 @@ public interface JournalCreationStrategy {
 	 * Returns true if the default community permissions should be added when
 	 * the specified journalObj is created.
 	 *
-	 * @param		context PortletDataContext instance used during the
-	 * 				import process
+	 * @param		context the context of the data import
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		true if default community permissions should be added to the
@@ -120,8 +116,7 @@ public interface JournalCreationStrategy {
 	 * Returns true if the default guest permissions should be added when the
 	 * specified journalObj is created.
 	 *
-	 * @param		context PortletDataContext instance used during the
-	 * 				import process
+	 * @param		context the context of the data import
 	 * @param		journalObj the new object must be an instance of
 	 *				JournalArticle, JournalStructure, or JournalTemplate
 	 * @return		true if default guest permissions should be added to the
