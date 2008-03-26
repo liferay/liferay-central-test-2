@@ -40,7 +40,6 @@ import java.io.IOException;
 
 import java.rmi.RemoteException;
 
-import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.PortletPreferences;
@@ -103,11 +102,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Messages
 
-		Iterator itr = mbMessagePersistence.findByThreadId(
-			thread.getThreadId()).iterator();
+		List<MBMessage> messages = mbMessagePersistence.findByThreadId(
+			thread.getThreadId());
 
-		while (itr.hasNext()) {
-			MBMessage message = (MBMessage)itr.next();
+		for (MBMessage message : messages) {
 
 			// Activity trackers
 
@@ -144,35 +142,34 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 	public void deleteThreads(long categoryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = mbThreadPersistence.findByCategoryId(
-			categoryId).iterator();
+		List<MBThread> threads = mbThreadPersistence.findByCategoryId(
+			categoryId);
 
-		while (itr.hasNext()) {
-			MBThread thread = (MBThread)itr.next();
-
+		for (MBThread thread : threads) {
 			deleteThread(thread);
 		}
 	}
 
-	public int getCategoriesThreadsCount(List categoryIds)
+	public int getCategoriesThreadsCount(List<Long> categoryIds)
 		throws SystemException {
 
 		return mbThreadFinder.countByCategoryIds(categoryIds);
 	}
 
-	public List getGroupThreads(long groupId, int begin, int end)
+	public List<MBThread> getGroupThreads(long groupId, int begin, int end)
 		throws SystemException {
 
 		return mbThreadFinder.findByGroupId(groupId, begin, end);
 	}
 
-	public List getGroupThreads(long groupId, long userId, int begin, int end)
+	public List<MBThread> getGroupThreads(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		return getGroupThreads(groupId, userId, false, begin, end);
 	}
 
-	public List getGroupThreads(
+	public List<MBThread> getGroupThreads(
 			long groupId, long userId, boolean subscribed, int begin, int end)
 		throws SystemException {
 
@@ -222,7 +219,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		return mbThreadPersistence.findByPrimaryKey(threadId);
 	}
 
-	public List getThreads(long categoryId, int begin, int end)
+	public List<MBThread> getThreads(long categoryId, int begin, int end)
 		throws SystemException {
 
 		return mbThreadPersistence.findByCategoryId(categoryId, begin, end);
@@ -265,12 +262,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Messages
 
-		Iterator itr = mbMessagePersistence.findByC_T(
-			oldCategoryId, thread.getThreadId()).iterator();
+		List<MBMessage> messages = mbMessagePersistence.findByC_T(
+			oldCategoryId, thread.getThreadId());
 
-		while (itr.hasNext()) {
-			MBMessage message = (MBMessage)itr.next();
-
+		for (MBMessage message : messages) {
 			message.setCategoryId(category.getCategoryId());
 
 			mbMessagePersistence.update(message);
@@ -338,14 +333,12 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Update children
 
-		Iterator itr = mbMessagePersistence.findByT_P(
-			oldThreadId, message.getMessageId()).iterator();
+		List<MBMessage> messages = mbMessagePersistence.findByT_P(
+			oldThreadId, message.getMessageId());
 
 		int messagesMoved = 1;
 
-		while (itr.hasNext()) {
-			MBMessage curMessage = (MBMessage)itr.next();
-
+		for (MBMessage curMessage : messages) {
 			curMessage.setCategoryId(message.getCategoryId());
 			curMessage.setThreadId(message.getThreadId());
 

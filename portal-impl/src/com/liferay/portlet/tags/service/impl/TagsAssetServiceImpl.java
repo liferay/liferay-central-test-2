@@ -46,7 +46,6 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -83,7 +82,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 
 		String name = group.getName();
 
-		List assets = tagsAssetLocalService.getAssets(
+		List<TagsAsset> assets = tagsAssetLocalService.getAssets(
 			groupId, classNameIds, entryIds, notEntryIds, andOperator,
 			orderByCol1, orderByCol2, orderByType1, orderByType2,
 			excludeZeroViewCount, publishDate, expirationDate, 0, max);
@@ -104,7 +103,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 			companyId, begin, end, languageId);
 	}
 
-	public List getCompanyAssets(long companyId, int begin, int end)
+	public List<TagsAsset> getCompanyAssets(long companyId, int begin, int end)
 		throws SystemException {
 
 		return tagsAssetLocalService.getCompanyAssets(companyId, begin, end);
@@ -123,7 +122,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 
 		String name = company.getName();
 
-		List assets = getCompanyAssets(companyId, 0, max);
+		List<TagsAsset> assets = getCompanyAssets(companyId, 0, max);
 
 		return exportToRSS(
 			name, null, type, version, displayStyle, feedURL, entryURL, assets);
@@ -168,7 +167,8 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 
 	protected String exportToRSS(
 			String name, String description, String type, double version,
-			String displayStyle, String feedURL, String entryURL, List assets)
+			String displayStyle, String feedURL, String entryURL,
+			List<TagsAsset> assets)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -178,15 +178,11 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(GetterUtil.getString(description, name));
 
-		List entries = new ArrayList();
+		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 
 		syndFeed.setEntries(entries);
 
-		Iterator itr = assets.iterator();
-
-		while (itr.hasNext()) {
-			TagsAsset asset = (TagsAsset)itr.next();
-
+		for (TagsAsset asset : assets) {
 			String author = PortalUtil.getUserName(
 				asset.getUserId(), asset.getUserName());
 

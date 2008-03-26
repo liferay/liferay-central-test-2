@@ -30,7 +30,6 @@ import com.liferay.portlet.messageboards.model.MBMessageFlag;
 import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageFlagLocalServiceBaseImpl;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -43,7 +42,7 @@ import java.util.List;
 public class MBMessageFlagLocalServiceImpl
 	extends MBMessageFlagLocalServiceBaseImpl {
 
-	public void addReadFlags(long userId, List messages)
+	public void addReadFlags(long userId, List<MBMessage> messages)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -52,11 +51,7 @@ public class MBMessageFlagLocalServiceImpl
 			return;
 		}
 
-		Iterator itr = messages.iterator();
-
-		while (itr.hasNext()) {
-			MBMessage message = (MBMessage)itr.next();
-
+		for (MBMessage message : messages) {
 			MBMessageFlag messageFlag = mbMessageFlagPersistence.fetchByU_M(
 				userId, message.getMessageId());
 

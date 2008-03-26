@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
@@ -139,8 +140,9 @@ public class MoveThreadAction extends PortletAction {
 
 			MBMessageServiceUtil.addMessage(
 				categoryId, threadId, thread.getRootMessageId(), subject, body,
-				new ArrayList(), false, MBThreadImpl.PRIORITY_NOT_GIVEN,
-			    null, prefs, true, true, themeDisplay);
+				new ArrayList<ObjectValuePair<String, byte[]>>(), false,
+				MBThreadImpl.PRIORITY_NOT_GIVEN, null, prefs, true, true,
+				themeDisplay);
 		}
 
 		PortletURL portletURL = ((ActionResponseImpl)res).createRenderURL();

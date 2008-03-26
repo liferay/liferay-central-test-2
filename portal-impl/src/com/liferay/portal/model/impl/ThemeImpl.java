@@ -296,13 +296,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 		}
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		Theme theme = (Theme)obj;
-
+	public int compareTo(Theme theme) {
 		return getName().compareTo(theme.getName());
 	}
 

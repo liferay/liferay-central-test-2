@@ -295,7 +295,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 			int end)
 		throws SystemException {
 
-		List list = tagsEntryFinder.findByC_N_P(
+		List<TagsEntry> list = tagsEntryFinder.findByC_N_P(
 			companyId, name, properties, begin, end);
 
 		return new JSONArrayWrapper(

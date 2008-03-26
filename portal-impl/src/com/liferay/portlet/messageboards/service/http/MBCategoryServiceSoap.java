@@ -147,8 +147,9 @@ public class MBCategoryServiceSoap {
 		long groupId, long parentCategoryId, int begin, int end)
 		throws RemoteException {
 		try {
-			java.util.List returnValue = MBCategoryServiceUtil.getCategories(groupId,
-					parentCategoryId, begin, end);
+			java.util.List<com.liferay.portlet.messageboards.model.MBCategory> returnValue =
+				MBCategoryServiceUtil.getCategories(groupId, parentCategoryId,
+					begin, end);
 
 			return com.liferay.portlet.messageboards.model.MBCategorySoap.toSoapModels(returnValue);
 		}

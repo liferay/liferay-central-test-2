@@ -24,7 +24,6 @@ package com.liferay.portal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.ExpandoTable;
 import com.liferay.portal.model.ExpandoTableRow;
 import com.liferay.portal.service.base.ExpandoTableRowLocalServiceBaseImpl;
 

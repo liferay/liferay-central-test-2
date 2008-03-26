@@ -34,8 +34,8 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -69,7 +69,7 @@ public class MBMessageConsumer implements MessageListener {
 
 			QueueSession session = con.createQueueSession(
 				false, Session.AUTO_ACKNOWLEDGE);
-			Queue queue = (Queue)MBMessageQueueUtil.getQueue();
+			Queue queue = MBMessageQueueUtil.getQueue();
 
 			QueueReceiver subscriber = session.createReceiver(queue);
 
@@ -109,7 +109,7 @@ public class MBMessageConsumer implements MessageListener {
 		String inReplyTo = array[10];
 		boolean htmlFormat = GetterUtil.getBoolean(array[11]);
 
-		Set sent = CollectionFactory.getHashSet();
+		Set<Long> sent = new HashSet<Long>();
 
 		if (_log.isInfoEnabled()) {
 			_log.info(
@@ -119,8 +119,10 @@ public class MBMessageConsumer implements MessageListener {
 
 		// Threads
 
-		List subscriptions = SubscriptionLocalServiceUtil.getSubscriptions(
-			companyId, MBThread.class.getName(), GetterUtil.getLong(threadId));
+		List<Subscription> subscriptions =
+			SubscriptionLocalServiceUtil.getSubscriptions(
+				companyId, MBThread.class.getName(),
+				GetterUtil.getLong(threadId));
 
 		_sendEmail(
 			userId, fromName, fromAddress, subject, body, subscriptions, sent,
@@ -145,14 +147,13 @@ public class MBMessageConsumer implements MessageListener {
 
 	private void _sendEmail(
 			long userId, String fromName, String fromAddress, String subject,
-			String body, List subscriptions, Set sent, String replyToAddress,
-			String mailId, String inReplyTo, boolean htmlFormat)
+			String body, List<Subscription> subscriptions, Set<Long> sent,
+			String replyToAddress, String mailId, String inReplyTo,
+			boolean htmlFormat)
 		throws Exception {
 
-		for (int i = 0; i < subscriptions.size(); i++) {
-			Subscription subscription = (Subscription)subscriptions.get(i);
-
-			Long subscribedUserId = new Long(subscription.getUserId());
+		for (Subscription subscription : subscriptions) {
+			long subscribedUserId = subscription.getUserId();
 
 			if (sent.contains(subscribedUserId)) {
 				if (_log.isDebugEnabled()) {

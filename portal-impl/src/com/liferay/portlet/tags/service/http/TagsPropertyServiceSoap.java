@@ -128,7 +128,8 @@ public class TagsPropertyServiceSoap {
 	public static com.liferay.portlet.tags.model.TagsPropertySoap[] getProperties(
 		long entryId) throws RemoteException {
 		try {
-			java.util.List returnValue = TagsPropertyServiceUtil.getProperties(entryId);
+			java.util.List<com.liferay.portlet.tags.model.TagsProperty> returnValue =
+				TagsPropertyServiceUtil.getProperties(entryId);
 
 			return com.liferay.portlet.tags.model.TagsPropertySoap.toSoapModels(returnValue);
 		}
@@ -142,8 +143,8 @@ public class TagsPropertyServiceSoap {
 	public static com.liferay.portlet.tags.model.TagsPropertySoap[] getPropertyValues(
 		long companyId, java.lang.String key) throws RemoteException {
 		try {
-			java.util.List returnValue = TagsPropertyServiceUtil.getPropertyValues(companyId,
-					key);
+			java.util.List<com.liferay.portlet.tags.model.TagsProperty> returnValue =
+				TagsPropertyServiceUtil.getPropertyValues(companyId, key);
 
 			return com.liferay.portlet.tags.model.TagsPropertySoap.toSoapModels(returnValue);
 		}

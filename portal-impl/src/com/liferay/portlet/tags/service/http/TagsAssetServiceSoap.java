@@ -164,8 +164,8 @@ public class TagsAssetServiceSoap {
 	public static com.liferay.portlet.tags.model.TagsAssetSoap[] getCompanyAssets(
 		long companyId, int begin, int end) throws RemoteException {
 		try {
-			java.util.List returnValue = TagsAssetServiceUtil.getCompanyAssets(companyId,
-					begin, end);
+			java.util.List<com.liferay.portlet.tags.model.TagsAsset> returnValue =
+				TagsAssetServiceUtil.getCompanyAssets(companyId, begin, end);
 
 			return com.liferay.portlet.tags.model.TagsAssetSoap.toSoapModels(returnValue);
 		}

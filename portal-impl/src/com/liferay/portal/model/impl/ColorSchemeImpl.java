@@ -405,13 +405,7 @@ public class ColorSchemeImpl implements ColorScheme {
 		return getSetting(PORTLET_SECTION_SELECTED_HOVER_BG);
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
-			return -1;
-		}
-
-		ColorScheme colorScheme = (ColorScheme) obj;
-
+	public int compareTo(ColorScheme colorScheme) {
 		return getName().compareTo(colorScheme.getName());
 	}
 

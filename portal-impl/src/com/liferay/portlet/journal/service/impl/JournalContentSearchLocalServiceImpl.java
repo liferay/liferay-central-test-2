@@ -165,7 +165,7 @@ public class JournalContentSearchLocalServiceImpl
 				groupId, privateLayout, articleId);
 
 		for (JournalContentSearch contentSearch : contentSearches) {
-			layoutIds.add(new Long(contentSearch.getLayoutId()));
+			layoutIds.add(contentSearch.getLayoutId());
 		}
 
 		return layoutIds;

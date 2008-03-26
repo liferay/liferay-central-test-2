@@ -37,7 +37,6 @@ import com.liferay.portlet.shopping.service.base.ShoppingCategoryLocalServiceBas
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -172,12 +171,10 @@ public class ShoppingCategoryLocalServiceImpl
 	public void deleteCategories(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = shoppingCategoryPersistence.findByGroupId(
-			groupId).iterator();
+		List<ShoppingCategory> categories =
+			shoppingCategoryPersistence.findByGroupId(groupId);
 
-		while (itr.hasNext()) {
-			ShoppingCategory category = (ShoppingCategory)itr.next();
-
+		for (ShoppingCategory category : categories) {
 			deleteCategory(category);
 		}
 	}
@@ -196,12 +193,11 @@ public class ShoppingCategoryLocalServiceImpl
 
 		// Categories
 
-		Iterator itr = shoppingCategoryPersistence.findByG_P(
-			category.getGroupId(), category.getCategoryId()).iterator();
+		List<ShoppingCategory> categories =
+			shoppingCategoryPersistence.findByG_P(
+				category.getGroupId(), category.getCategoryId());
 
-		while (itr.hasNext()) {
-			ShoppingCategory curCategory = (ShoppingCategory)itr.next();
-
+		for (ShoppingCategory curCategory : categories) {
 			deleteCategory(curCategory);
 		}
 
@@ -220,11 +216,13 @@ public class ShoppingCategoryLocalServiceImpl
 		shoppingCategoryPersistence.remove(category.getCategoryId());
 	}
 
-	public List getCategories(long groupId) throws SystemException {
+	public List<ShoppingCategory> getCategories(long groupId)
+		throws SystemException {
+
 		return shoppingCategoryPersistence.findByGroupId(groupId);
 	}
 
-	public List getCategories(
+	public List<ShoppingCategory> getCategories(
 			long groupId, long parentCategoryId, int begin, int end)
 		throws SystemException {
 
@@ -255,17 +253,18 @@ public class ShoppingCategoryLocalServiceImpl
 		return parentCategory;
 	}
 
-	public List getParentCategories(long categoryId)
+	public List<ShoppingCategory> getParentCategories(long categoryId)
 		throws PortalException, SystemException {
 
 		return getParentCategories(
 			shoppingCategoryPersistence.findByPrimaryKey(categoryId));
 	}
 
-	public List getParentCategories(ShoppingCategory category)
+	public List<ShoppingCategory> getParentCategories(ShoppingCategory category)
 		throws PortalException, SystemException {
 
-		List parentCategories = new ArrayList();
+		List<ShoppingCategory> parentCategories =
+			new ArrayList<ShoppingCategory>();
 
 		ShoppingCategory tempCategory = category;
 
@@ -288,16 +287,14 @@ public class ShoppingCategoryLocalServiceImpl
 	}
 
 	public void getSubcategoryIds(
-			List categoryIds, long groupId, long categoryId)
+			List<Long> categoryIds, long groupId, long categoryId)
 		throws SystemException {
 
-		Iterator itr = shoppingCategoryPersistence.findByG_P(
-			groupId, categoryId).iterator();
+		List<ShoppingCategory> categories =
+			shoppingCategoryPersistence.findByG_P(groupId, categoryId);
 
-		while (itr.hasNext()) {
-			ShoppingCategory category = (ShoppingCategory)itr.next();
-
-			categoryIds.add(new Long(category.getCategoryId()));
+		for (ShoppingCategory category : categories) {
+			categoryIds.add(category.getCategoryId());
 
 			getSubcategoryIds(
 				categoryIds, category.getGroupId(), category.getCategoryId());
@@ -381,13 +378,13 @@ public class ShoppingCategoryLocalServiceImpl
 				return category.getParentCategoryId();
 			}
 
-			List subcategoryIds = new ArrayList();
+			List<Long> subcategoryIds = new ArrayList<Long>();
 
 			getSubcategoryIds(
 				subcategoryIds, category.getGroupId(),
 				category.getCategoryId());
 
-			if (subcategoryIds.contains(new Long(parentCategoryId))) {
+			if (subcategoryIds.contains(parentCategoryId)) {
 				return category.getParentCategoryId();
 			}
 
@@ -399,23 +396,20 @@ public class ShoppingCategoryLocalServiceImpl
 			ShoppingCategory fromCategory, long toCategoryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = shoppingCategoryPersistence.findByG_P(
-			fromCategory.getGroupId(), fromCategory.getCategoryId()).iterator();
+		List<ShoppingCategory> categories =
+			shoppingCategoryPersistence.findByG_P(
+				fromCategory.getGroupId(), fromCategory.getCategoryId());
 
-		while (itr.hasNext()) {
-			ShoppingCategory category = (ShoppingCategory)itr.next();
-
+		for (ShoppingCategory category : categories) {
 			mergeCategories(category, toCategoryId);
 		}
 
-		itr = shoppingItemPersistence.findByCategoryId(
-			fromCategory.getCategoryId()).iterator();
+		List<ShoppingItem> items = shoppingItemPersistence.findByCategoryId(
+			fromCategory.getCategoryId());
 
-		while (itr.hasNext()) {
+		for (ShoppingItem item : items) {
 
 			// Item
-
-			ShoppingItem item = (ShoppingItem)itr.next();
 
 			item.setCategoryId(toCategoryId);
 

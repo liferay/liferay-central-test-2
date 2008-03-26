@@ -57,11 +57,13 @@ public class TagsPropertyServiceImpl extends TagsPropertyServiceBaseImpl {
 		tagsPropertyLocalService.deleteProperty(propertyId);
 	}
 
-	public List getProperties(long entryId) throws SystemException {
+	public List<TagsProperty> getProperties(long entryId)
+		throws SystemException {
+
 		return tagsPropertyLocalService.getProperties(entryId);
 	}
 
-	public List getPropertyValues(long companyId, String key)
+	public List<TagsProperty> getPropertyValues(long companyId, String key)
 		throws SystemException {
 
 		return tagsPropertyLocalService.getPropertyValues(companyId, key);

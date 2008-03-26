@@ -289,20 +289,19 @@ public class ShoppingCouponLocalServiceImpl
 
 		long[] categoryIds = StringUtil.split(limitCategories, 0L);
 
-		List invalidCategoryIds = new ArrayList();
+		List<Long> invalidCategoryIds = new ArrayList<Long>();
 
-		for (int i = 0; i < categoryIds.length; i++) {
+		for (long categoryId : categoryIds) {
 			try {
 				ShoppingCategory category =
-					shoppingCategoryPersistence.findByPrimaryKey(
-						categoryIds[i]);
+					shoppingCategoryPersistence.findByPrimaryKey(categoryId);
 
 				if (category.getGroupId() != groupId) {
-					invalidCategoryIds.add(new Long(categoryIds[i]));
+					invalidCategoryIds.add(categoryId);
 				}
 			}
 			catch (NoSuchCategoryException nsce) {
-				invalidCategoryIds.add(new Long(categoryIds[i]));
+				invalidCategoryIds.add(categoryId);
 			}
 		}
 

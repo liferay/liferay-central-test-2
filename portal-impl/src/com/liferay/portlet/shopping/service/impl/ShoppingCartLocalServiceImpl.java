@@ -120,7 +120,7 @@ public class ShoppingCartLocalServiceImpl
 			int altShipping, boolean insure)
 		throws PortalException, SystemException {
 
-		List badItemIds = new ArrayList();
+		List<Long> badItemIds = new ArrayList<Long>();
 
 		Map items = getItems(groupId, itemIds);
 
@@ -145,7 +145,7 @@ public class ShoppingCartLocalServiceImpl
 
 			if (minQtyMultiple) {
 				if ((count.intValue() % minQuantity) > 0) {
-					badItemIds.add(new Long(item.getItemId()));
+					badItemIds.add(item.getItemId());
 				}
 			}
 			else {

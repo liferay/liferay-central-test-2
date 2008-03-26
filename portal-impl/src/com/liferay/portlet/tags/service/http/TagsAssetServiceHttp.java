@@ -355,8 +355,8 @@ public class TagsAssetServiceHttp {
 		}
 	}
 
-	public static java.util.List getCompanyAssets(HttpPrincipal httpPrincipal,
-		long companyId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.tags.model.TagsAsset> getCompanyAssets(
+		HttpPrincipal httpPrincipal, long companyId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(companyId);
@@ -382,7 +382,7 @@ public class TagsAssetServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.tags.model.TagsAsset>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

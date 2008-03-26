@@ -69,7 +69,7 @@ public class MBStatsUserLocalServiceImpl
 		return statsUser;
 	}
 
-	public List getStatsUsers(long groupId, int begin, int end)
+	public List<MBStatsUser> getStatsUsers(long groupId, int begin, int end)
 		throws SystemException {
 
 		return mbStatsUserPersistence.findByG_M(groupId, 0, begin, end);

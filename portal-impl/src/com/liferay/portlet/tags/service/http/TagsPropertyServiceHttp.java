@@ -208,8 +208,9 @@ public class TagsPropertyServiceHttp {
 		}
 	}
 
-	public static java.util.List getProperties(HttpPrincipal httpPrincipal,
-		long entryId) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getProperties(
+		HttpPrincipal httpPrincipal, long entryId)
+		throws com.liferay.portal.SystemException {
 		try {
 			Object paramObj0 = new LongWrapper(entryId);
 
@@ -229,7 +230,7 @@ public class TagsPropertyServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.tags.model.TagsProperty>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -238,7 +239,7 @@ public class TagsPropertyServiceHttp {
 		}
 	}
 
-	public static java.util.List getPropertyValues(
+	public static java.util.List<com.liferay.portlet.tags.model.TagsProperty> getPropertyValues(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String key)
 		throws com.liferay.portal.SystemException {
 		try {
@@ -266,7 +267,7 @@ public class TagsPropertyServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.tags.model.TagsProperty>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

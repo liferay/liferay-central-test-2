@@ -33,7 +33,6 @@ import com.liferay.portlet.tags.service.base.TagsPropertyLocalServiceBaseImpl;
 import com.liferay.portlet.tags.util.TagsUtil;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -88,12 +87,10 @@ public class TagsPropertyLocalServiceImpl
 	public void deleteProperties(long entryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = tagsPropertyPersistence.findByEntryId(
-			entryId).iterator();
+		List<TagsProperty> properties = tagsPropertyPersistence.findByEntryId(
+			entryId);
 
-		while (itr.hasNext()) {
-			TagsProperty property = (TagsProperty)itr.next();
-
+		for (TagsProperty property : properties) {
 			deleteProperty(property);
 		}
 	}
@@ -113,11 +110,11 @@ public class TagsPropertyLocalServiceImpl
 		tagsPropertyPersistence.remove(property.getPropertyId());
 	}
 
-	public List getProperties() throws SystemException {
+	public List<TagsProperty> getProperties() throws SystemException {
 		return tagsPropertyPersistence.findAll();
 	}
 
-	public List getProperties(long entryId) throws SystemException {
+	public List<TagsProperty> getProperties(long entryId) throws SystemException {
 		return tagsPropertyPersistence.findByEntryId(entryId);
 	}
 
@@ -137,7 +134,7 @@ public class TagsPropertyLocalServiceImpl
 		return tagsPropertyKeyFinder.findByCompanyId(companyId);
 	}
 
-	public List getPropertyValues(long companyId, String key)
+	public List<TagsProperty> getPropertyValues(long companyId, String key)
 		throws SystemException {
 
 		return tagsPropertyFinder.findByC_K(companyId, key);

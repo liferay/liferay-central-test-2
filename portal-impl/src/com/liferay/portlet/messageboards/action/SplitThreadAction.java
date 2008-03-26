@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -161,8 +162,8 @@ public class SplitThreadAction extends PortletAction {
 
 			MBMessageServiceUtil.addMessage(
 				message.getCategoryId(), oldThreadId, oldParentMessageId,
-				subject, body, new ArrayList(), false,
-				MBThreadImpl.PRIORITY_NOT_GIVEN, null, prefs, true, true,
+				subject, body, new ArrayList<ObjectValuePair<String, byte[]>>(),
+				false, MBThreadImpl.PRIORITY_NOT_GIVEN, null, prefs, true, true,
 				themeDisplay);
 		}
 

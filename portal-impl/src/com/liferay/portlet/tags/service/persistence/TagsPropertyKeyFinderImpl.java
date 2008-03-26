@@ -65,10 +65,10 @@ public class TagsPropertyKeyFinderImpl implements TagsPropertyKeyFinder {
 
 			qPos.add(companyId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -107,10 +107,10 @@ public class TagsPropertyKeyFinderImpl implements TagsPropertyKeyFinder {
 
 			qPos.add(companyId);
 
-			List list = QueryUtil.list(
+			List<String> list = (List<String>)QueryUtil.list(
 				q, HibernateUtil.getDialect(), begin, end);
 
-			return (String[])list.toArray(new String[0]);
+			return list.toArray(new String[list.size()]);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

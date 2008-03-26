@@ -42,9 +42,9 @@ import org.apache.commons.logging.LogFactory;
  */
 public class BBCodeUtil {
 
-	static Map fontSizes = new HashMap();
+	static Map<Integer, String> fontSizes = new HashMap<Integer, String>();
 
-	static Map listStyles = new HashMap();
+	static Map<String, String> listStyles = new HashMap<String, String>();
 
 	static String[][] emoticons = {
 		{"angry.gif", ":angry:"},

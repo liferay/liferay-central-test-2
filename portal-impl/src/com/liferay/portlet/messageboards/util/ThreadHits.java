@@ -24,11 +24,12 @@ package com.liferay.portlet.messageboards.util;
 
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Hits;
-import com.liferay.util.CollectionFactory;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.util.Time;
 import com.liferay.util.lucene.HitsImpl;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -47,15 +48,15 @@ public class ThreadHits extends HitsImpl {
 	public void recordHits(Hits hits) throws Exception {
 		setSearcher(((HitsImpl)hits).getSearcher());
 
-		Set threadIds = CollectionFactory.getHashSet();
+		Set<Long> threadIds = new HashSet<Long>();
 
-		List docs = new ArrayList(hits.getLength());
-		List scores = new ArrayList(hits.getLength());
+		List<Document> docs = new ArrayList<Document>(hits.getLength());
+		List<Float> scores = new ArrayList<Float>(hits.getLength());
 
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
 
-			String threadId = doc.get("threadId");
+			Long threadId = GetterUtil.getLong(doc.get("threadId"));
 
 			if (!threadIds.contains(threadId)) {
 				threadIds.add(threadId);
@@ -66,8 +67,8 @@ public class ThreadHits extends HitsImpl {
 		}
 
 		setLength(docs.size());
-		setDocs((Document[])docs.toArray(new Document[0]));
-		setScores((Float[])scores.toArray(new Float[0]));
+		setDocs(docs.toArray(new Document[docs.size()]));
+		setScores(scores.toArray(new Float[scores.size()]));
 
 		setSearchTime(
 			(float)(System.currentTimeMillis() - getStart()) / Time.SECOND);

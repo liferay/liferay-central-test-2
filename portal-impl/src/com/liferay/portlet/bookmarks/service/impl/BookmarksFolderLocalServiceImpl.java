@@ -474,7 +474,7 @@ public class BookmarksFolderLocalServiceImpl
 			getSubfolderIds(
 				subfolderIds, folder.getGroupId(), folder.getFolderId());
 
-			if (subfolderIds.contains(new Long(parentFolderId))) {
+			if (subfolderIds.contains(parentFolderId)) {
 				return folder.getParentFolderId();
 			}
 

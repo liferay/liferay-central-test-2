@@ -73,7 +73,7 @@ import org.json.JSONObject;
  */
 public class WikiPageServiceJSON {
 	public static void addPageAttachments(long nodeId, java.lang.String title,
-		java.util.List files)
+		java.util.List<com.liferay.portal.kernel.util.ObjectValuePair<String, byte[]>> files)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		WikiPageServiceUtil.addPageAttachments(nodeId, title, files);

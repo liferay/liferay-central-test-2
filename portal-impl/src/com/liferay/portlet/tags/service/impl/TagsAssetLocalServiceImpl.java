@@ -127,7 +127,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return assetTypes;
 	}
 
-	public List getAssets(
+	public List<TagsAsset> getAssets(
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount, int begin, int end)
 		throws SystemException {
@@ -137,7 +137,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			excludeZeroViewCount, null, null, begin, end);
 	}
 
-	public List getAssets(
+	public List<TagsAsset> getAssets(
 			long groupId, long[] classNameIds, long[] entryIds,
 			long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount, int begin, int end)
@@ -148,7 +148,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			excludeZeroViewCount, null, null, begin, end);
 	}
 
-	public List getAssets(
+	public List<TagsAsset> getAssets(
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
 			int begin, int end)
@@ -159,7 +159,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			excludeZeroViewCount, null, null, begin, end);
 	}
 
-	public List getAssets(
+	public List<TagsAsset> getAssets(
 			long groupId, long[] classNameIds, long[] entryIds,
 			long[] notEntryIds, boolean andOperator,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
@@ -185,7 +185,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		}
 	}
 
-	public List getAssets(
+	public List<TagsAsset> getAssets(
 			long[] entryIds, long[] notEntryIds, boolean andOperator,
 			String orderByCol1, String orderByCol2, String orderByType1,
 			String orderByType2, boolean excludeZeroViewCount, Date publishDate,
@@ -197,7 +197,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			excludeZeroViewCount, publishDate, expirationDate, begin, end);
 	}
 
-	public List getAssets(
+	public List<TagsAsset> getAssets(
 			long groupId, long[] classNameIds, long[] entryIds,
 			long[] notEntryIds, boolean andOperator, String orderByCol1,
 			String orderByCol2, String orderByType1, String orderByType2,
@@ -286,7 +286,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			getCompanyAssets(companyId, begin, end), languageId);
 	}
 
-	public List getCompanyAssets(long companyId, int begin, int end)
+	public List<TagsAsset> getCompanyAssets(long companyId, int begin, int end)
 		throws SystemException {
 
 		return tagsAssetPersistence.findByCompanyId(companyId, begin, end);
@@ -296,14 +296,14 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		return tagsAssetPersistence.countByCompanyId(companyId);
 	}
 
-	public List getTopViewedAssets(
+	public List<TagsAsset> getTopViewedAssets(
 			String className, boolean asc, int begin, int end)
 		throws SystemException {
 
 		return getTopViewedAssets(new String[] {className}, asc, begin, end);
 	}
 
-	public List getTopViewedAssets(
+	public List<TagsAsset> getTopViewedAssets(
 			String[] className, boolean asc, int begin, int end)
 		throws SystemException {
 
@@ -404,17 +404,15 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			String languageId, int begin, int end)
 		throws PortalException, SystemException {
 
-		List assets = new ArrayList();
+		List<TagsAsset> assets = new ArrayList<TagsAsset>();
 
 		Hits hits = search(companyId, portletId, keywords);
 
 		hits = hits.subset(begin, end);
 
-		List hitsList = hits.toList();
+		List<Document> hitsList = hits.toList();
 
-		for (int i = 0; i < hitsList.size(); i++) {
-			Document doc = (Document)hitsList.get(i);
-
+		for (Document doc : hitsList) {
 			try {
 				TagsAsset asset = getAsset(doc);
 
@@ -533,7 +531,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 		// Entries
 
-		List entries = new ArrayList(entryNames.length);
+		List<TagsEntry> entries = new ArrayList<TagsEntry>(entryNames.length);
 
 		for (int i = 0; i < entryNames.length; i++) {
 			String name = entryNames[i].trim().toLowerCase();
@@ -710,21 +708,21 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 	}
 
 	protected TagsAssetDisplay[] getAssetDisplays(
-			List assets, String languageId)
+			List<TagsAsset> assets, String languageId)
 		throws PortalException, SystemException {
 
 		TagsAssetDisplay[] assetDisplays = new TagsAssetDisplay[assets.size()];
 
 		for (int i = 0; i < assets.size(); i++) {
-			TagsAsset asset = (TagsAsset)assets.get(i);
+			TagsAsset asset = assets.get(i);
 
 			String className = PortalUtil.getClassName(asset.getClassNameId());
 			String portletId = PortalUtil.getClassNamePortletId(className);
 			String portletTitle = PortalUtil.getPortletTitle(
 				portletId, asset.getCompanyId(), languageId);
 
-			List tagsEntriesList = tagsAssetPersistence.getTagsEntries(
-				asset.getAssetId());
+			List<TagsEntry> tagsEntriesList =
+				tagsAssetPersistence.getTagsEntries(asset.getAssetId());
 
 			String tagsEntries = ListUtil.toString(
 				tagsEntriesList, "name", ", ");

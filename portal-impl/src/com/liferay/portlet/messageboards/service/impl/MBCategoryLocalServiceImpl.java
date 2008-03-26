@@ -46,7 +46,6 @@ import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -202,12 +201,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	public void deleteCategories(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = mbCategoryPersistence.findByG_P(
-			groupId, MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID).iterator();
+		List<MBCategory> categories = mbCategoryPersistence.findByG_P(
+			groupId, MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
-		while (itr.hasNext()) {
-			MBCategory category = (MBCategory)itr.next();
-
+		for (MBCategory category : categories) {
 			deleteCategory(category);
 		}
 	}
@@ -226,12 +223,10 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		// Categories
 
-		Iterator itr = mbCategoryPersistence.findByG_P(
-			category.getGroupId(), category.getCategoryId()).iterator();
+		List<MBCategory> categories = mbCategoryPersistence.findByG_P(
+			category.getGroupId(), category.getCategoryId());
 
-		while (itr.hasNext()) {
-			MBCategory curCategory = (MBCategory)itr.next();
-
+		for (MBCategory curCategory : categories) {
 			deleteCategory(curCategory);
 		}
 
@@ -263,13 +258,13 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		mbCategoryPersistence.remove(category.getCategoryId());
 	}
 
-	public List getCategories(long groupId, long parentCategoryId)
+	public List<MBCategory> getCategories(long groupId, long parentCategoryId)
 		throws SystemException {
 
 		return mbCategoryPersistence.findByG_P(groupId, parentCategoryId);
 	}
 
-	public List getCategories(
+	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int begin, int end)
 		throws SystemException {
 
@@ -294,23 +289,21 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	}
 
 	public void getSubcategoryIds(
-			List categoryIds, long groupId, long categoryId)
+			List<Long> categoryIds, long groupId, long categoryId)
 		throws SystemException {
 
-		Iterator itr = mbCategoryPersistence.findByG_P(
-			groupId, categoryId).iterator();
+		List<MBCategory> categories = mbCategoryPersistence.findByG_P(
+			groupId, categoryId);
 
-		while (itr.hasNext()) {
-			MBCategory category = (MBCategory)itr.next();
-
-			categoryIds.add(new Long(category.getCategoryId()));
+		for (MBCategory category : categories) {
+			categoryIds.add(category.getCategoryId());
 
 			getSubcategoryIds(
 				categoryIds, category.getGroupId(), category.getCategoryId());
 		}
 	}
 
-	public List getSubscribedCategories(
+	public List<MBCategory> getSubscribedCategories(
 			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
@@ -355,20 +348,16 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr1 = mbCategoryPersistence.findByCompanyId(
-				companyId).iterator();
+			List<MBCategory> categories = mbCategoryPersistence.findByCompanyId(
+				companyId);
 
-			while (itr1.hasNext()) {
-				MBCategory category = (MBCategory)itr1.next();
-
+			for (MBCategory category : categories) {
 				long categoryId = category.getCategoryId();
 
-				Iterator itr2 = mbMessagePersistence.findByCategoryId(
-					categoryId).iterator();
+				List<MBMessage> messages =
+					mbMessagePersistence.findByCategoryId(categoryId);
 
-				while (itr2.hasNext()) {
-					MBMessage message = (MBMessage)itr2.next();
-
+				for (MBMessage message : messages) {
 					long groupId = category.getGroupId();
 					String userName = message.getUserName();
 					long threadId = message.getThreadId();
@@ -549,13 +538,13 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 				return category.getParentCategoryId();
 			}
 
-			List subcategoryIds = new ArrayList();
+			List<Long> subcategoryIds = new ArrayList<Long>();
 
 			getSubcategoryIds(
 				subcategoryIds, category.getGroupId(),
 				category.getCategoryId());
 
-			if (subcategoryIds.contains(new Long(parentCategoryId))) {
+			if (subcategoryIds.contains(parentCategoryId)) {
 				return category.getParentCategoryId();
 			}
 
@@ -566,36 +555,30 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 	protected void mergeCategories(MBCategory fromCategory, long toCategoryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = mbCategoryPersistence.findByG_P(
-			fromCategory.getGroupId(), fromCategory.getCategoryId()).iterator();
+		List<MBCategory> categories = mbCategoryPersistence.findByG_P(
+			fromCategory.getGroupId(), fromCategory.getCategoryId());
 
-		while (itr.hasNext()) {
-			MBCategory category = (MBCategory)itr.next();
-
+		for (MBCategory category : categories) {
 			mergeCategories(category, toCategoryId);
 		}
 
-		Iterator itr1 = mbThreadPersistence.findByCategoryId(
-			fromCategory.getCategoryId()).iterator();
+		List<MBThread> threads = mbThreadPersistence.findByCategoryId(
+			fromCategory.getCategoryId());
 
-		while (itr1.hasNext()) {
+		for (MBThread thread : threads) {
 
 			// Thread
-
-			MBThread thread = (MBThread)itr1.next();
 
 			thread.setCategoryId(toCategoryId);
 
 			mbThreadPersistence.update(thread);
 
-			Iterator itr2 = mbMessagePersistence.findByThreadId(
-				thread.getThreadId()).iterator();
+			List<MBMessage> messages = mbMessagePersistence.findByThreadId(
+				thread.getThreadId());
 
-			while (itr2.hasNext()) {
+			for (MBMessage message : messages) {
 
 				// Message
-
-				MBMessage message = (MBMessage)itr2.next();
 
 				message.setCategoryId(toCategoryId);
 

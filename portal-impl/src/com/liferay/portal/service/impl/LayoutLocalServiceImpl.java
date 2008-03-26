@@ -686,7 +686,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Data
 
-		PortletPreferences portletPreferences = (PortletPreferences)
+		PortletPreferences portletPreferences =
 			portletPreferencesLocalService.getPortletPreferences(plid).get(0);
 
 		javax.portlet.PortletPreferences jxPrefs =

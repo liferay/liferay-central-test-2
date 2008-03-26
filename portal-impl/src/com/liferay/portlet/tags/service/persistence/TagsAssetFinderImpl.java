@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.impl.TagsAssetImpl;
 import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -338,7 +339,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		}
 	}
 
-	public List findAssets(
+	public List<TagsAsset> findAssets(
 			long groupId, long[] classNameIds, String orderByCol1,
 			String orderByCol2, String orderByType1, String orderByType2,
 			boolean excludeZeroViewCount, Date publishDate, Date expirationDate,
@@ -405,7 +406,8 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			setClassNamedIds(qPos, classNameIds);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<TagsAsset>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -415,7 +417,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		}
 	}
 
-	public List findByAndEntryIds(
+	public List<TagsAsset> findByAndEntryIds(
 			long groupId, long[] classNameIds, long[] entryIds,
 			long[] notEntryIds, String orderByCol1, String orderByCol2,
 			String orderByType1, String orderByType2,
@@ -523,7 +525,8 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			setClassNamedIds(qPos, classNameIds);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<TagsAsset>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -533,7 +536,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		}
 	}
 
-	public List findByOrEntryIds(
+	public List<TagsAsset> findByOrEntryIds(
 			long groupId, long[] classNameIds, long[] entryIds,
 			long[] notEntryIds, Date publishDate, Date expirationDate )
 		throws SystemException {
@@ -544,7 +547,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 			QueryUtil.ALL_POS);
 	}
 
-	public List findByOrEntryIds(
+	public List<TagsAsset> findByOrEntryIds(
 			long groupId, long[] classNameIds, long[] entryIds,
 			long[] notEntryIds, String orderByCol1, String orderByCol2,
 			String orderByType1, String orderByType2,
@@ -638,7 +641,8 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 
 			setClassNamedIds(qPos, classNameIds);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<TagsAsset>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -648,7 +652,7 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 		}
 	}
 
-	public List findByViewCount(
+	public List<TagsAsset> findByViewCount(
 			long[] classNameId, boolean asc, int begin, int end)
 		throws SystemException {
 
@@ -695,7 +699,8 @@ public class TagsAssetFinderImpl implements TagsAssetFinder {
 				qPos.add(classNameId[i]);
 			}
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<TagsAsset>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

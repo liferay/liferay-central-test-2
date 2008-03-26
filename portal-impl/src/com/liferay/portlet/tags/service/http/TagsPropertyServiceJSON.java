@@ -100,7 +100,7 @@ public class TagsPropertyServiceJSON {
 
 	public static JSONArray getProperties(long entryId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List returnValue = TagsPropertyServiceUtil.getProperties(entryId);
+		java.util.List<com.liferay.portlet.tags.model.TagsProperty> returnValue = TagsPropertyServiceUtil.getProperties(entryId);
 
 		return TagsPropertyJSONSerializer.toJSONArray(returnValue);
 	}
@@ -108,7 +108,7 @@ public class TagsPropertyServiceJSON {
 	public static JSONArray getPropertyValues(long companyId,
 		java.lang.String key)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List returnValue = TagsPropertyServiceUtil.getPropertyValues(companyId,
+		java.util.List<com.liferay.portlet.tags.model.TagsProperty> returnValue = TagsPropertyServiceUtil.getPropertyValues(companyId,
 				key);
 
 		return TagsPropertyJSONSerializer.toJSONArray(returnValue);

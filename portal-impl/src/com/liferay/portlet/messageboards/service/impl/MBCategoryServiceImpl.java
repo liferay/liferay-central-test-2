@@ -29,7 +29,6 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.service.base.MBCategoryServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.permission.MBCategoryPermission;
 
-import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
@@ -87,22 +86,22 @@ public class MBCategoryServiceImpl extends MBCategoryServiceBaseImpl {
 		return mbCategoryLocalService.getCategory(categoryId);
 	}
 
-	public List getCategories(
+	public List<MBCategory> getCategories(
 			long groupId, long parentCategoryId, int begin, int end)
 		throws PortalException, SystemException {
 
-		List categories = new ArrayList();
+		List<MBCategory> categories = mbCategoryLocalService.getCategories(
+			groupId, parentCategoryId, begin, end);
 
-		Iterator itr = mbCategoryLocalService.getCategories(
-			groupId, parentCategoryId, begin, end).iterator();
+		Iterator<MBCategory> itr = categories.iterator();
 
 		while (itr.hasNext()) {
-			MBCategory category = (MBCategory)itr.next();
+			MBCategory category = itr.next();
 
-			if (MBCategoryPermission.contains(
+			if (!MBCategoryPermission.contains(
 					getPermissionChecker(), category, ActionKeys.VIEW)) {
 
-				categories.add(category);
+				itr.remove();
 			}
 		}
 

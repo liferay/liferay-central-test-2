@@ -124,7 +124,7 @@ public class TagsAssetServiceJSON {
 
 	public static JSONArray getCompanyAssets(long companyId, int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List returnValue = TagsAssetServiceUtil.getCompanyAssets(companyId,
+		java.util.List<com.liferay.portlet.tags.model.TagsAsset> returnValue = TagsAssetServiceUtil.getCompanyAssets(companyId,
 				begin, end);
 
 		return TagsAssetJSONSerializer.toJSONArray(returnValue);

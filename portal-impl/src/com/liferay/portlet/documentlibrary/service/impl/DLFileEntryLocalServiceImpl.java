@@ -588,7 +588,7 @@ public class DLFileEntryLocalServiceImpl
 
 		List<Long> folderIds = new ArrayList<Long>();
 
-		folderIds.add(new Long(folderId));
+		folderIds.add(folderId);
 
 		return dlFileEntryAndShortcutFinder.countByFolderIds(folderIds);
 	}

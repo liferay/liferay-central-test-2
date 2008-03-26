@@ -271,8 +271,9 @@ public class MBCategoryServiceHttp {
 		}
 	}
 
-	public static java.util.List getCategories(HttpPrincipal httpPrincipal,
-		long groupId, long parentCategoryId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getCategories(
+		HttpPrincipal httpPrincipal, long groupId, long parentCategoryId,
+		int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -305,7 +306,7 @@ public class MBCategoryServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.messageboards.model.MBCategory>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

@@ -111,11 +111,9 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		int expireInterval = GetterUtil.getInteger(PropsUtil.get(
 			PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));
 
-		List bans = mbBanPersistence.findAll();
+		List<MBBan> bans = mbBanPersistence.findAll();
 
-		for (int i = 0; i < bans.size(); i++) {
-			MBBan ban = (MBBan)bans.get(i);
-
+		for (MBBan ban : bans) {
 			long unbanDate = MBUtil.getUnbanDate(ban, expireInterval).getTime();
 
 			if (now >= unbanDate) {
@@ -130,7 +128,7 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 		}
 	}
 
-	public List getBans(long groupId, int start, int end)
+	public List<MBBan> getBans(long groupId, int start, int end)
 		throws SystemException {
 
 		return mbBanPersistence.findByGroupId(groupId, start, end);

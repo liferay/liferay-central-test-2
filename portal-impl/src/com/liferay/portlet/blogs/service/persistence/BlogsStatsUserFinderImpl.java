@@ -60,7 +60,7 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 
 		List<Long> organizationIds = new ArrayList<Long>();
 
-		organizationIds.add(new Long(organizationId));
+		organizationIds.add(organizationId);
 
 		return countByOrganizationIds(organizationIds);
 	}
@@ -117,7 +117,7 @@ public class BlogsStatsUserFinderImpl implements BlogsStatsUserFinder {
 
 		List<Long> organizationIds = new ArrayList<Long>();
 
-		organizationIds.add(new Long(organizationId));
+		organizationIds.add(organizationId);
 
 		return findByOrganizationIds(organizationIds, begin, end, obc);
 	}
