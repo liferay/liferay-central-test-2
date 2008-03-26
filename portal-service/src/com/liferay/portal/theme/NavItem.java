@@ -56,9 +56,7 @@ public class NavItem implements Serializable {
 
 		List<NavItem> navItems = new ArrayList<NavItem>(layouts.size());
 
-		for (int i = 0; i < layouts.size(); i++) {
-			Layout layout = (Layout)layouts.get(i);
-
+		for (Layout layout : layouts) {
 			navItems.add(fromLayout(vars, layout));
 		}
 
@@ -150,7 +148,7 @@ public class NavItem implements Serializable {
 	private static final String _VELOCITY_TAGLIB_LAYOUT_ICON_METHOD =
 		"layoutIcon";
 
-	private static final Class[] _VELOCITY_TAGLIB_LAYOUT_ICON_PARAMS =
+	private static final Class<?>[] _VELOCITY_TAGLIB_LAYOUT_ICON_PARAMS =
 		new Class[] {Layout.class};
 
 	private RequestVars _vars;
