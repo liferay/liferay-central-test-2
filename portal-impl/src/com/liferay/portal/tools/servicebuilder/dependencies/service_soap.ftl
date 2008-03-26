@@ -3,6 +3,7 @@ package ${packagePath}.service.http;
 import ${packagePath}.service.${entity.name}ServiceUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.util.ListUtil;
 import java.rmi.RemoteException;
 
 /**
@@ -90,6 +91,12 @@ public class ${entity.name}ServiceSoap {
 
 				<#if parameterTypeName == "java.util.Locale">
 					<#assign parameterTypeName = "String">
+				<#elseif parameterTypeName == "java.util.List<Long>">
+					<#assign parameterTypeName = "Long[]">
+				<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(parameter.genericsName)>
+					<#assign parameterEntity = serviceBuilder.getEntityByGenericsName(parameter.genericsName)>
+
+					<#assign parameterTypeName = parameterEntity.packagePath + ".model." + parameterEntity.name + "Soap[]">
 				</#if>
 
 				${parameterTypeName} ${parameter.name}
@@ -108,15 +115,23 @@ public class ${entity.name}ServiceSoap {
 					${entity.name}ServiceUtil.${method.name}(
 
 					<#list method.parameters as parameter>
-						<#assign parameterTypeName = parameter.type.value + serviceBuilder.getDimensions(parameter.type.dimensions)>
+						<#assign parameterTypeName = parameter.type.value + parameter.genericsName + serviceBuilder.getDimensions(parameter.type.dimensions)>
 
 						<#if parameterTypeName == "java.util.Locale">
 							new java.util.Locale(
+						<#elseif parameterTypeName == "java.util.List<Long>">
+							ListUtil.toList(
+						<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(parameter.genericsName)>
+							${parameterEntity.packagePath}.model.impl.${parameterEntity.name}ModelImpl.toModels(
 						</#if>
 
 						${parameter.name}
 
 						<#if parameterTypeName == "java.util.Locale">
+							)
+						<#elseif parameterTypeName == "java.util.List<Long>">
+							)
+						<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(parameter.genericsName)>
 							)
 						</#if>
 

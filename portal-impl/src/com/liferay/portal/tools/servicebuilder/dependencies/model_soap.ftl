@@ -42,9 +42,7 @@ public class ${entity.name}Soap implements Serializable {
 	public static ${entity.name}Soap[] toSoapModels(List<${entity.name}> models) {
 		List<${entity.name}Soap> soapModels = new ArrayList<${entity.name}Soap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			${entity.name} model = models.get(i);
-
+		for (${entity.name} model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
