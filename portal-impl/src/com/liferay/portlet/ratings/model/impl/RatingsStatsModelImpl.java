@@ -28,12 +28,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.ratings.model.RatingsStats;
+import com.liferay.portlet.ratings.model.RatingsStatsSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="RatingsStatsModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -80,6 +84,30 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.ratings.model.RatingsStats"),
 			true);
+
+	public static RatingsStats toModel(RatingsStatsSoap soapModel) {
+		RatingsStats model = new RatingsStatsImpl();
+
+		model.setStatsId(soapModel.getStatsId());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setTotalEntries(soapModel.getTotalEntries());
+		model.setTotalScore(soapModel.getTotalScore());
+		model.setAverageScore(soapModel.getAverageScore());
+
+		return model;
+	}
+
+	public static List<RatingsStats> toModels(RatingsStatsSoap[] soapModels) {
+		List<RatingsStats> models = new ArrayList<RatingsStats>(soapModels.length);
+
+		for (RatingsStatsSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.ratings.model.RatingsStats"));
 

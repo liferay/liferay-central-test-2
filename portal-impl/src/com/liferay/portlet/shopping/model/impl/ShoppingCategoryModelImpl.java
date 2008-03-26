@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingCategory;
+import com.liferay.portlet.shopping.model.ShoppingCategorySoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="ShoppingCategoryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -95,6 +98,35 @@ public class ShoppingCategoryModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingCategory"),
 			true);
+
+	public static ShoppingCategory toModel(ShoppingCategorySoap soapModel) {
+		ShoppingCategory model = new ShoppingCategoryImpl();
+
+		model.setCategoryId(soapModel.getCategoryId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setParentCategoryId(soapModel.getParentCategoryId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+
+		return model;
+	}
+
+	public static List<ShoppingCategory> toModels(
+		ShoppingCategorySoap[] soapModels) {
+		List<ShoppingCategory> models = new ArrayList<ShoppingCategory>(soapModels.length);
+
+		for (ShoppingCategorySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCategory"));
 

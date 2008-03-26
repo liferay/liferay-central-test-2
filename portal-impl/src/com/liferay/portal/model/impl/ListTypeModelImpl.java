@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ListType;
+import com.liferay.portal.model.ListTypeSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="ListTypeModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -70,6 +74,27 @@ public class ListTypeModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ListType"),
 			true);
+
+	public static ListType toModel(ListTypeSoap soapModel) {
+		ListType model = new ListTypeImpl();
+
+		model.setListTypeId(soapModel.getListTypeId());
+		model.setName(soapModel.getName());
+		model.setType(soapModel.getType());
+
+		return model;
+	}
+
+	public static List<ListType> toModels(ListTypeSoap[] soapModels) {
+		List<ListType> models = new ArrayList<ListType>(soapModels.length);
+
+		for (ListTypeSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ListType"));
 

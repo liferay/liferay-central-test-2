@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.OrgGroupPermission;
+import com.liferay.portal.model.OrgGroupPermissionSoap;
 import com.liferay.portal.service.persistence.OrgGroupPermissionPK;
 import com.liferay.portal.util.PropsUtil;
 
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="OrgGroupPermissionModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -70,6 +74,28 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.OrgGroupPermission"),
 			true);
+
+	public static OrgGroupPermission toModel(OrgGroupPermissionSoap soapModel) {
+		OrgGroupPermission model = new OrgGroupPermissionImpl();
+
+		model.setOrganizationId(soapModel.getOrganizationId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setPermissionId(soapModel.getPermissionId());
+
+		return model;
+	}
+
+	public static List<OrgGroupPermission> toModels(
+		OrgGroupPermissionSoap[] soapModels) {
+		List<OrgGroupPermission> models = new ArrayList<OrgGroupPermission>(soapModels.length);
+
+		for (OrgGroupPermissionSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgGroupPermission"));
 

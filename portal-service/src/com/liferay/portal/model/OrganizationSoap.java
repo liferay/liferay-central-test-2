@@ -66,9 +66,7 @@ public class OrganizationSoap implements Serializable {
 	public static OrganizationSoap[] toSoapModels(List<Organization> models) {
 		List<OrganizationSoap> soapModels = new ArrayList<OrganizationSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Organization model = models.get(i);
-
+		for (Organization model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

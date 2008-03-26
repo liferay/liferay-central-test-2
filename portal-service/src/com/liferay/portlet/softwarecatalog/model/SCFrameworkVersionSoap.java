@@ -69,9 +69,7 @@ public class SCFrameworkVersionSoap implements Serializable {
 		List<SCFrameworkVersion> models) {
 		List<SCFrameworkVersionSoap> soapModels = new ArrayList<SCFrameworkVersionSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			SCFrameworkVersion model = models.get(i);
-
+		for (SCFrameworkVersion model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

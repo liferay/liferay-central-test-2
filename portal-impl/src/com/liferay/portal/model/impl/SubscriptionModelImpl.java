@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Subscription;
+import com.liferay.portal.model.SubscriptionSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -34,7 +35,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="SubscriptionModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -90,6 +93,33 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Subscription"),
 			true);
+
+	public static Subscription toModel(SubscriptionSoap soapModel) {
+		Subscription model = new SubscriptionImpl();
+
+		model.setSubscriptionId(soapModel.getSubscriptionId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setFrequency(soapModel.getFrequency());
+
+		return model;
+	}
+
+	public static List<Subscription> toModels(SubscriptionSoap[] soapModels) {
+		List<Subscription> models = new ArrayList<Subscription>(soapModels.length);
+
+		for (SubscriptionSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Subscription"));
 

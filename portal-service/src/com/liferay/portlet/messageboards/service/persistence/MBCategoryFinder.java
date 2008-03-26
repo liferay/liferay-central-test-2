@@ -32,6 +32,7 @@ public interface MBCategoryFinder {
 	public int countByS_G_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByS_G_U(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> findByS_G_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

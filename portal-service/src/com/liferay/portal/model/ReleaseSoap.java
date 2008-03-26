@@ -63,9 +63,7 @@ public class ReleaseSoap implements Serializable {
 	public static ReleaseSoap[] toSoapModels(List<Release> models) {
 		List<ReleaseSoap> soapModels = new ArrayList<ReleaseSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Release model = models.get(i);
-
+		for (Release model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

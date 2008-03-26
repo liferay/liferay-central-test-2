@@ -70,9 +70,7 @@ public class ActivityTrackerSoap implements Serializable {
 		List<ActivityTracker> models) {
 		List<ActivityTrackerSoap> soapModels = new ArrayList<ActivityTrackerSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ActivityTracker model = models.get(i);
-
+		for (ActivityTracker model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

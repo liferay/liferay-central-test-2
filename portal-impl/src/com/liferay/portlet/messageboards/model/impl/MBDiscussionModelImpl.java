@@ -28,12 +28,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.messageboards.model.MBDiscussion;
+import com.liferay.portlet.messageboards.model.MBDiscussionSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="MBDiscussionModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -74,6 +78,28 @@ public class MBDiscussionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBDiscussion"),
 			true);
+
+	public static MBDiscussion toModel(MBDiscussionSoap soapModel) {
+		MBDiscussion model = new MBDiscussionImpl();
+
+		model.setDiscussionId(soapModel.getDiscussionId());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setThreadId(soapModel.getThreadId());
+
+		return model;
+	}
+
+	public static List<MBDiscussion> toModels(MBDiscussionSoap[] soapModels) {
+		List<MBDiscussion> models = new ArrayList<MBDiscussion>(soapModels.length);
+
+		for (MBDiscussionSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBDiscussion"));
 

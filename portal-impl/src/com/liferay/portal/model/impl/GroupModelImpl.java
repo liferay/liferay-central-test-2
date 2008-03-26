@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.GroupSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="GroupModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -100,6 +104,37 @@ public class GroupModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Group"),
 			true);
+
+	public static Group toModel(GroupSoap soapModel) {
+		Group model = new GroupImpl();
+
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setCreatorUserId(soapModel.getCreatorUserId());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setParentGroupId(soapModel.getParentGroupId());
+		model.setLiveGroupId(soapModel.getLiveGroupId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setType(soapModel.getType());
+		model.setTypeSettings(soapModel.getTypeSettings());
+		model.setFriendlyURL(soapModel.getFriendlyURL());
+		model.setActive(soapModel.getActive());
+
+		return model;
+	}
+
+	public static List<Group> toModels(GroupSoap[] soapModels) {
+		List<Group> models = new ArrayList<Group>(soapModels.length);
+
+		for (GroupSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_GROUPS_ORGS = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.Groups_Orgs"), true);
 	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(

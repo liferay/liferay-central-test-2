@@ -28,12 +28,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingItemPrice;
+import com.liferay.portlet.shopping.model.ShoppingItemPriceSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="ShoppingItemPriceModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -92,6 +96,35 @@ public class ShoppingItemPriceModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingItemPrice"),
 			true);
+
+	public static ShoppingItemPrice toModel(ShoppingItemPriceSoap soapModel) {
+		ShoppingItemPrice model = new ShoppingItemPriceImpl();
+
+		model.setItemPriceId(soapModel.getItemPriceId());
+		model.setItemId(soapModel.getItemId());
+		model.setMinQuantity(soapModel.getMinQuantity());
+		model.setMaxQuantity(soapModel.getMaxQuantity());
+		model.setPrice(soapModel.getPrice());
+		model.setDiscount(soapModel.getDiscount());
+		model.setTaxable(soapModel.getTaxable());
+		model.setShipping(soapModel.getShipping());
+		model.setUseShippingFormula(soapModel.getUseShippingFormula());
+		model.setStatus(soapModel.getStatus());
+
+		return model;
+	}
+
+	public static List<ShoppingItemPrice> toModels(
+		ShoppingItemPriceSoap[] soapModels) {
+		List<ShoppingItemPrice> models = new ArrayList<ShoppingItemPrice>(soapModels.length);
+
+		for (ShoppingItemPriceSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItemPrice"));
 

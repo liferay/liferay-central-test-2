@@ -30,6 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingOrder;
+import com.liferay.portlet.shopping.model.ShoppingOrderSoap;
 
 import java.io.Serializable;
 
@@ -37,7 +38,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="ShoppingOrderModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -219,6 +222,75 @@ public class ShoppingOrderModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingOrder"),
 			true);
+
+	public static ShoppingOrder toModel(ShoppingOrderSoap soapModel) {
+		ShoppingOrder model = new ShoppingOrderImpl();
+
+		model.setOrderId(soapModel.getOrderId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setNumber(soapModel.getNumber());
+		model.setTax(soapModel.getTax());
+		model.setShipping(soapModel.getShipping());
+		model.setAltShipping(soapModel.getAltShipping());
+		model.setRequiresShipping(soapModel.getRequiresShipping());
+		model.setInsure(soapModel.getInsure());
+		model.setInsurance(soapModel.getInsurance());
+		model.setCouponCodes(soapModel.getCouponCodes());
+		model.setCouponDiscount(soapModel.getCouponDiscount());
+		model.setBillingFirstName(soapModel.getBillingFirstName());
+		model.setBillingLastName(soapModel.getBillingLastName());
+		model.setBillingEmailAddress(soapModel.getBillingEmailAddress());
+		model.setBillingCompany(soapModel.getBillingCompany());
+		model.setBillingStreet(soapModel.getBillingStreet());
+		model.setBillingCity(soapModel.getBillingCity());
+		model.setBillingState(soapModel.getBillingState());
+		model.setBillingZip(soapModel.getBillingZip());
+		model.setBillingCountry(soapModel.getBillingCountry());
+		model.setBillingPhone(soapModel.getBillingPhone());
+		model.setShipToBilling(soapModel.getShipToBilling());
+		model.setShippingFirstName(soapModel.getShippingFirstName());
+		model.setShippingLastName(soapModel.getShippingLastName());
+		model.setShippingEmailAddress(soapModel.getShippingEmailAddress());
+		model.setShippingCompany(soapModel.getShippingCompany());
+		model.setShippingStreet(soapModel.getShippingStreet());
+		model.setShippingCity(soapModel.getShippingCity());
+		model.setShippingState(soapModel.getShippingState());
+		model.setShippingZip(soapModel.getShippingZip());
+		model.setShippingCountry(soapModel.getShippingCountry());
+		model.setShippingPhone(soapModel.getShippingPhone());
+		model.setCcName(soapModel.getCcName());
+		model.setCcType(soapModel.getCcType());
+		model.setCcNumber(soapModel.getCcNumber());
+		model.setCcExpMonth(soapModel.getCcExpMonth());
+		model.setCcExpYear(soapModel.getCcExpYear());
+		model.setCcVerNumber(soapModel.getCcVerNumber());
+		model.setComments(soapModel.getComments());
+		model.setPpTxnId(soapModel.getPpTxnId());
+		model.setPpPaymentStatus(soapModel.getPpPaymentStatus());
+		model.setPpPaymentGross(soapModel.getPpPaymentGross());
+		model.setPpReceiverEmail(soapModel.getPpReceiverEmail());
+		model.setPpPayerEmail(soapModel.getPpPayerEmail());
+		model.setSendOrderEmail(soapModel.getSendOrderEmail());
+		model.setSendShippingEmail(soapModel.getSendShippingEmail());
+
+		return model;
+	}
+
+	public static List<ShoppingOrder> toModels(ShoppingOrderSoap[] soapModels) {
+		List<ShoppingOrder> models = new ArrayList<ShoppingOrder>(soapModels.length);
+
+		for (ShoppingOrderSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingOrder"));
 

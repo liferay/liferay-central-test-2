@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.model.TagsProperty;
+import com.liferay.portlet.tags.model.TagsPropertySoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="TagsPropertyModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -92,6 +95,33 @@ public class TagsPropertyModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tags.model.TagsProperty"),
 			true);
+
+	public static TagsProperty toModel(TagsPropertySoap soapModel) {
+		TagsProperty model = new TagsPropertyImpl();
+
+		model.setPropertyId(soapModel.getPropertyId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setEntryId(soapModel.getEntryId());
+		model.setKey(soapModel.getKey());
+		model.setValue(soapModel.getValue());
+
+		return model;
+	}
+
+	public static List<TagsProperty> toModels(TagsPropertySoap[] soapModels) {
+		List<TagsProperty> models = new ArrayList<TagsProperty>(soapModels.length);
+
+		for (TagsPropertySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsProperty"));
 

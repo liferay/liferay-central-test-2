@@ -70,9 +70,7 @@ public class JournalStructureSoap implements Serializable {
 		List<JournalStructure> models) {
 		List<JournalStructureSoap> soapModels = new ArrayList<JournalStructureSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			JournalStructure model = models.get(i);
-
+		for (JournalStructure model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

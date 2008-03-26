@@ -75,9 +75,7 @@ public class AnnouncementsEntrySoap implements Serializable {
 		List<AnnouncementsEntry> models) {
 		List<AnnouncementsEntrySoap> soapModels = new ArrayList<AnnouncementsEntrySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			AnnouncementsEntry model = models.get(i);
-
+		for (AnnouncementsEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

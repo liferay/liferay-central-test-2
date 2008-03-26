@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Permission;
+import com.liferay.portal.model.PermissionSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="PermissionModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -73,6 +77,28 @@ public class PermissionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Permission"),
 			true);
+
+	public static Permission toModel(PermissionSoap soapModel) {
+		Permission model = new PermissionImpl();
+
+		model.setPermissionId(soapModel.getPermissionId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setActionId(soapModel.getActionId());
+		model.setResourceId(soapModel.getResourceId());
+
+		return model;
+	}
+
+	public static List<Permission> toModels(PermissionSoap[] soapModels) {
+		List<Permission> models = new ArrayList<Permission>(soapModels.length);
+
+		for (PermissionSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_GROUPS_PERMISSIONS = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_PERMISSIONS;
 	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = com.liferay.portal.model.impl.RoleModelImpl.CACHE_ENABLED_ROLES_PERMISSIONS;
 	public static final boolean CACHE_ENABLED_USERS_PERMISSIONS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_PERMISSIONS;

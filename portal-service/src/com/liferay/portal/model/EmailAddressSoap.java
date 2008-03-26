@@ -68,9 +68,7 @@ public class EmailAddressSoap implements Serializable {
 	public static EmailAddressSoap[] toSoapModels(List<EmailAddress> models) {
 		List<EmailAddressSoap> soapModels = new ArrayList<EmailAddressSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			EmailAddress model = models.get(i);
-
+		for (EmailAddress model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

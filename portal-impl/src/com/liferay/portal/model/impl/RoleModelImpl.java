@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Role;
+import com.liferay.portal.model.RoleSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="RoleModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -82,6 +86,31 @@ public class RoleModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Role"),
 			true);
+
+	public static Role toModel(RoleSoap soapModel) {
+		Role model = new RoleImpl();
+
+		model.setRoleId(soapModel.getRoleId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setType(soapModel.getType());
+
+		return model;
+	}
+
+	public static List<Role> toModels(RoleSoap[] soapModels) {
+		List<Role> models = new ArrayList<Role>(soapModels.length);
+
+		for (RoleSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_GROUPS_ROLES = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_ROLES;
 	public static final boolean CACHE_ENABLED_ROLES_PERMISSIONS = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.Roles_Permissions"), true);

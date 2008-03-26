@@ -67,9 +67,7 @@ public class DLFileShortcutSoap implements Serializable {
 	public static DLFileShortcutSoap[] toSoapModels(List<DLFileShortcut> models) {
 		List<DLFileShortcutSoap> soapModels = new ArrayList<DLFileShortcutSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			DLFileShortcut model = models.get(i);
-
+		for (DLFileShortcut model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

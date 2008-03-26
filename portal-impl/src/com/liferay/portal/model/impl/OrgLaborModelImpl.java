@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.OrgLabor;
+import com.liferay.portal.model.OrgLaborSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -32,6 +33,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="OrgLaborModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -111,6 +115,41 @@ public class OrgLaborModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.OrgLabor"),
 			true);
+
+	public static OrgLabor toModel(OrgLaborSoap soapModel) {
+		OrgLabor model = new OrgLaborImpl();
+
+		model.setOrgLaborId(soapModel.getOrgLaborId());
+		model.setOrganizationId(soapModel.getOrganizationId());
+		model.setTypeId(soapModel.getTypeId());
+		model.setSunOpen(soapModel.getSunOpen());
+		model.setSunClose(soapModel.getSunClose());
+		model.setMonOpen(soapModel.getMonOpen());
+		model.setMonClose(soapModel.getMonClose());
+		model.setTueOpen(soapModel.getTueOpen());
+		model.setTueClose(soapModel.getTueClose());
+		model.setWedOpen(soapModel.getWedOpen());
+		model.setWedClose(soapModel.getWedClose());
+		model.setThuOpen(soapModel.getThuOpen());
+		model.setThuClose(soapModel.getThuClose());
+		model.setFriOpen(soapModel.getFriOpen());
+		model.setFriClose(soapModel.getFriClose());
+		model.setSatOpen(soapModel.getSatOpen());
+		model.setSatClose(soapModel.getSatClose());
+
+		return model;
+	}
+
+	public static List<OrgLabor> toModels(OrgLaborSoap[] soapModels) {
+		List<OrgLabor> models = new ArrayList<OrgLabor>(soapModels.length);
+
+		for (OrgLaborSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.OrgLabor"));
 

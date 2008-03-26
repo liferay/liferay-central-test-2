@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.messageboards.model.MBBan;
+import com.liferay.portlet.messageboards.model.MBBanSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="MBBanModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -89,6 +92,32 @@ public class MBBanModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBBan"),
 			true);
+
+	public static MBBan toModel(MBBanSoap soapModel) {
+		MBBan model = new MBBanImpl();
+
+		model.setBanId(soapModel.getBanId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setBanUserId(soapModel.getBanUserId());
+
+		return model;
+	}
+
+	public static List<MBBan> toModels(MBBanSoap[] soapModels) {
+		List<MBBan> models = new ArrayList<MBBan>(soapModels.length);
+
+		for (MBBanSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBBan"));
 

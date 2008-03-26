@@ -61,9 +61,7 @@ public class ExpandoColumnSoap implements Serializable {
 	public static ExpandoColumnSoap[] toSoapModels(List<ExpandoColumn> models) {
 		List<ExpandoColumnSoap> soapModels = new ArrayList<ExpandoColumnSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ExpandoColumn model = models.get(i);
-
+		for (ExpandoColumn model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

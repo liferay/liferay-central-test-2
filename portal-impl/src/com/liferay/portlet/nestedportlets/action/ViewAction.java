@@ -35,7 +35,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -99,7 +98,7 @@ public class ViewAction extends PortletAction {
 
 		Matcher m = _searchColumnsAndIdsPattern.matcher(content);
 
-		Set columnIds = new HashSet();
+		Set<String> columnIds = new HashSet<String>();
 
 		while (m.find()) {
 			if (Validator.isNotNull(m.group(1))) {
@@ -111,11 +110,7 @@ public class ViewAction extends PortletAction {
 			}
 		}
 
-		Iterator itr = columnIds.iterator();
-
-		while (itr.hasNext()) {
-			String columnId = (String)itr.next();
-
+		for (String columnId : columnIds) {
 			if (columnId.indexOf(portlet.getPortletId()) == -1) {
 				content = content.replaceAll(
 					columnId, portlet.getPortletId() + "_" + columnId);

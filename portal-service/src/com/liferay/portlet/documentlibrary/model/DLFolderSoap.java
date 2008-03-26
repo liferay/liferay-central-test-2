@@ -69,9 +69,7 @@ public class DLFolderSoap implements Serializable {
 	public static DLFolderSoap[] toSoapModels(List<DLFolder> models) {
 		List<DLFolderSoap> soapModels = new ArrayList<DLFolderSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			DLFolder model = models.get(i);
-
+		for (DLFolder model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

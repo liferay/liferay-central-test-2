@@ -60,9 +60,7 @@ public class ResourceCodeSoap implements Serializable {
 	public static ResourceCodeSoap[] toSoapModels(List<ResourceCode> models) {
 		List<ResourceCodeSoap> soapModels = new ArrayList<ResourceCodeSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ResourceCode model = models.get(i);
-
+		for (ResourceCode model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

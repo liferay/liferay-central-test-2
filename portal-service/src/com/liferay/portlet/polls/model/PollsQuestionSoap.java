@@ -69,9 +69,7 @@ public class PollsQuestionSoap implements Serializable {
 	public static PollsQuestionSoap[] toSoapModels(List<PollsQuestion> models) {
 		List<PollsQuestionSoap> soapModels = new ArrayList<PollsQuestionSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			PollsQuestion model = models.get(i);
-
+		for (PollsQuestion model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

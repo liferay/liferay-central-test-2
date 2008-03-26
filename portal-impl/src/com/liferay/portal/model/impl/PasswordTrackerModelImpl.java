@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PasswordTracker;
+import com.liferay.portal.model.PasswordTrackerSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -35,7 +36,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="PasswordTrackerModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -76,6 +79,29 @@ public class PasswordTrackerModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PasswordTracker"),
 			true);
+
+	public static PasswordTracker toModel(PasswordTrackerSoap soapModel) {
+		PasswordTracker model = new PasswordTrackerImpl();
+
+		model.setPasswordTrackerId(soapModel.getPasswordTrackerId());
+		model.setUserId(soapModel.getUserId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setPassword(soapModel.getPassword());
+
+		return model;
+	}
+
+	public static List<PasswordTracker> toModels(
+		PasswordTrackerSoap[] soapModels) {
+		List<PasswordTracker> models = new ArrayList<PasswordTracker>(soapModels.length);
+
+		for (PasswordTrackerSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordTracker"));
 

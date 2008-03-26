@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntrySoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="DLFileEntryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -116,6 +119,41 @@ public class DLFileEntryModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileEntry"),
 			true);
+
+	public static DLFileEntry toModel(DLFileEntrySoap soapModel) {
+		DLFileEntry model = new DLFileEntryImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setFileEntryId(soapModel.getFileEntryId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setVersionUserId(soapModel.getVersionUserId());
+		model.setVersionUserName(soapModel.getVersionUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setFolderId(soapModel.getFolderId());
+		model.setName(soapModel.getName());
+		model.setTitle(soapModel.getTitle());
+		model.setDescription(soapModel.getDescription());
+		model.setVersion(soapModel.getVersion());
+		model.setSize(soapModel.getSize());
+		model.setReadCount(soapModel.getReadCount());
+		model.setExtraSettings(soapModel.getExtraSettings());
+
+		return model;
+	}
+
+	public static List<DLFileEntry> toModels(DLFileEntrySoap[] soapModels) {
+		List<DLFileEntry> models = new ArrayList<DLFileEntry>(soapModels.length);
+
+		for (DLFileEntrySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileEntry"));
 

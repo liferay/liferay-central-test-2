@@ -29,12 +29,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalArticleResource;
+import com.liferay.portlet.journal.model.JournalArticleResourceSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="JournalArticleResourceModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -72,6 +76,29 @@ public class JournalArticleResourceModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalArticleResource"),
 			true);
+
+	public static JournalArticleResource toModel(
+		JournalArticleResourceSoap soapModel) {
+		JournalArticleResource model = new JournalArticleResourceImpl();
+
+		model.setResourcePrimKey(soapModel.getResourcePrimKey());
+		model.setGroupId(soapModel.getGroupId());
+		model.setArticleId(soapModel.getArticleId());
+
+		return model;
+	}
+
+	public static List<JournalArticleResource> toModels(
+		JournalArticleResourceSoap[] soapModels) {
+		List<JournalArticleResource> models = new ArrayList<JournalArticleResource>(soapModels.length);
+
+		for (JournalArticleResourceSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleResource"));
 

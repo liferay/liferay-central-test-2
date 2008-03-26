@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.messageboards.model.MBCategory;
+import com.liferay.portlet.messageboards.model.MBCategorySoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="MBCategoryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -101,6 +104,36 @@ public class MBCategoryModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBCategory"),
 			true);
+
+	public static MBCategory toModel(MBCategorySoap soapModel) {
+		MBCategory model = new MBCategoryImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setCategoryId(soapModel.getCategoryId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setParentCategoryId(soapModel.getParentCategoryId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setLastPostDate(soapModel.getLastPostDate());
+
+		return model;
+	}
+
+	public static List<MBCategory> toModels(MBCategorySoap[] soapModels) {
+		List<MBCategory> models = new ArrayList<MBCategory>(soapModels.length);
+
+		for (MBCategorySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBCategory"));
 

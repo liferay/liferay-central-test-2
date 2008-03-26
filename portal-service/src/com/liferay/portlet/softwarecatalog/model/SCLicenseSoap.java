@@ -62,9 +62,7 @@ public class SCLicenseSoap implements Serializable {
 	public static SCLicenseSoap[] toSoapModels(List<SCLicense> models) {
 		List<SCLicenseSoap> soapModels = new ArrayList<SCLicenseSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			SCLicense model = models.get(i);
-
+		for (SCLicense model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

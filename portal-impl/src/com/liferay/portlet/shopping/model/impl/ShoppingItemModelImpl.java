@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.model.ShoppingItemSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="ShoppingItemModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -164,6 +167,57 @@ public class ShoppingItemModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingItem"),
 			true);
+
+	public static ShoppingItem toModel(ShoppingItemSoap soapModel) {
+		ShoppingItem model = new ShoppingItemImpl();
+
+		model.setItemId(soapModel.getItemId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setCategoryId(soapModel.getCategoryId());
+		model.setSku(soapModel.getSku());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setProperties(soapModel.getProperties());
+		model.setFields(soapModel.getFields());
+		model.setFieldsQuantities(soapModel.getFieldsQuantities());
+		model.setMinQuantity(soapModel.getMinQuantity());
+		model.setMaxQuantity(soapModel.getMaxQuantity());
+		model.setPrice(soapModel.getPrice());
+		model.setDiscount(soapModel.getDiscount());
+		model.setTaxable(soapModel.getTaxable());
+		model.setShipping(soapModel.getShipping());
+		model.setUseShippingFormula(soapModel.getUseShippingFormula());
+		model.setRequiresShipping(soapModel.getRequiresShipping());
+		model.setStockQuantity(soapModel.getStockQuantity());
+		model.setFeatured(soapModel.getFeatured());
+		model.setSale(soapModel.getSale());
+		model.setSmallImage(soapModel.getSmallImage());
+		model.setSmallImageId(soapModel.getSmallImageId());
+		model.setSmallImageURL(soapModel.getSmallImageURL());
+		model.setMediumImage(soapModel.getMediumImage());
+		model.setMediumImageId(soapModel.getMediumImageId());
+		model.setMediumImageURL(soapModel.getMediumImageURL());
+		model.setLargeImage(soapModel.getLargeImage());
+		model.setLargeImageId(soapModel.getLargeImageId());
+		model.setLargeImageURL(soapModel.getLargeImageURL());
+
+		return model;
+	}
+
+	public static List<ShoppingItem> toModels(ShoppingItemSoap[] soapModels) {
+		List<ShoppingItem> models = new ArrayList<ShoppingItem>(soapModels.length);
+
+		for (ShoppingItemSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingItem"));
 

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ContactSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -34,7 +35,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="ContactModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -144,6 +147,51 @@ public class ContactModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Contact"),
 			true);
+
+	public static Contact toModel(ContactSoap soapModel) {
+		Contact model = new ContactImpl();
+
+		model.setContactId(soapModel.getContactId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setAccountId(soapModel.getAccountId());
+		model.setParentContactId(soapModel.getParentContactId());
+		model.setFirstName(soapModel.getFirstName());
+		model.setMiddleName(soapModel.getMiddleName());
+		model.setLastName(soapModel.getLastName());
+		model.setPrefixId(soapModel.getPrefixId());
+		model.setSuffixId(soapModel.getSuffixId());
+		model.setMale(soapModel.getMale());
+		model.setBirthday(soapModel.getBirthday());
+		model.setSmsSn(soapModel.getSmsSn());
+		model.setAimSn(soapModel.getAimSn());
+		model.setIcqSn(soapModel.getIcqSn());
+		model.setJabberSn(soapModel.getJabberSn());
+		model.setMsnSn(soapModel.getMsnSn());
+		model.setSkypeSn(soapModel.getSkypeSn());
+		model.setYmSn(soapModel.getYmSn());
+		model.setEmployeeStatusId(soapModel.getEmployeeStatusId());
+		model.setEmployeeNumber(soapModel.getEmployeeNumber());
+		model.setJobTitle(soapModel.getJobTitle());
+		model.setJobClass(soapModel.getJobClass());
+		model.setHoursOfOperation(soapModel.getHoursOfOperation());
+
+		return model;
+	}
+
+	public static List<Contact> toModels(ContactSoap[] soapModels) {
+		List<Contact> models = new ArrayList<Contact>(soapModels.length);
+
+		for (ContactSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Contact"));
 

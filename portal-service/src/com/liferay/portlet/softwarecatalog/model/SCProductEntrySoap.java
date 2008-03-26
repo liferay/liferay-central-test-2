@@ -73,9 +73,7 @@ public class SCProductEntrySoap implements Serializable {
 	public static SCProductEntrySoap[] toSoapModels(List<SCProductEntry> models) {
 		List<SCProductEntrySoap> soapModels = new ArrayList<SCProductEntrySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			SCProductEntry model = models.get(i);
-
+		for (SCProductEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -521,4 +521,64 @@ public class ArrayUtil {
 		return newArray;
 	}
 
+	public static Boolean[] toArray(List<Boolean> list) {
+		Boolean[] array = new Boolean[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i);
+		}
+
+		return array;
+	}
+
+	public static Double[] toArray(List<Double> list) {
+		Double[] array = new Double[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i);
+		}
+
+		return array;
+	}
+
+	public static Float[] toArray(List<Float> list) {
+		Float[] array = new Float[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i);
+		}
+
+		return array;
+	}
+
+	public static Integer[] toArray(List<Integer> list) {
+		Integer[] array = new Integer[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i);
+		}
+
+		return array;
+	}
+
+	public static Long[] toArray(List<Long> list) {
+		Long[] array = new Long[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i);
+		}
+
+		return array;
+	}
+
+	public static Short[] toArray(List<Short> list) {
+		Short[] array = new Short[list.size()];
+
+		for (int i = 0; i < list.size(); i++) {
+			array[i] = list.get(i);
+		}
+
+		return array;
+	}
+
 }

@@ -61,9 +61,7 @@ public class UserGroupRoleSoap implements Serializable {
 	public static UserGroupRoleSoap[] toSoapModels(List<UserGroupRole> models) {
 		List<UserGroupRoleSoap> soapModels = new ArrayList<UserGroupRoleSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			UserGroupRole model = models.get(i);
-
+		for (UserGroupRole model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

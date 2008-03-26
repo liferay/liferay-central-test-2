@@ -30,6 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.model.BlogsEntrySoap;
 
 import java.io.Serializable;
 
@@ -37,7 +38,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="BlogsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -102,6 +105,36 @@ public class BlogsEntryModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.blogs.model.BlogsEntry"),
 			true);
+
+	public static BlogsEntry toModel(BlogsEntrySoap soapModel) {
+		BlogsEntry model = new BlogsEntryImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setEntryId(soapModel.getEntryId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setTitle(soapModel.getTitle());
+		model.setUrlTitle(soapModel.getUrlTitle());
+		model.setContent(soapModel.getContent());
+		model.setDisplayDate(soapModel.getDisplayDate());
+
+		return model;
+	}
+
+	public static List<BlogsEntry> toModels(BlogsEntrySoap[] soapModels) {
+		List<BlogsEntry> models = new ArrayList<BlogsEntry>(soapModels.length);
+
+		for (BlogsEntrySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.blogs.model.BlogsEntry"));
 

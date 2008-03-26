@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.ResourceCodeSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="ResourceCodeModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -73,6 +77,28 @@ public class ResourceCodeModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ResourceCode"),
 			true);
+
+	public static ResourceCode toModel(ResourceCodeSoap soapModel) {
+		ResourceCode model = new ResourceCodeImpl();
+
+		model.setCodeId(soapModel.getCodeId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setName(soapModel.getName());
+		model.setScope(soapModel.getScope());
+
+		return model;
+	}
+
+	public static List<ResourceCode> toModels(ResourceCodeSoap[] soapModels) {
+		List<ResourceCode> models = new ArrayList<ResourceCode>(soapModels.length);
+
+		for (ResourceCodeSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ResourceCode"));
 

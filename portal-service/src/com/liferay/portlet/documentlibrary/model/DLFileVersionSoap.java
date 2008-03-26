@@ -66,9 +66,7 @@ public class DLFileVersionSoap implements Serializable {
 	public static DLFileVersionSoap[] toSoapModels(List<DLFileVersion> models) {
 		List<DLFileVersionSoap> soapModels = new ArrayList<DLFileVersionSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			DLFileVersion model = models.get(i);
-
+		for (DLFileVersion model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -29,7 +29,7 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public class MBThreadFinderUtil {
-	public static int countByCategoryIds(java.util.List categoryIds)
+	public static int countByCategoryIds(java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByCategoryIds(categoryIds);
 	}
@@ -49,18 +49,21 @@ public class MBThreadFinderUtil {
 		return getFinder().countByS_G_U(groupId, userId);
 	}
 
-	public static java.util.List findByGroupId(long groupId, int begin, int end)
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		return getFinder().findByGroupId(groupId, begin, end);
 	}
 
-	public static java.util.List findByG_U(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByG_U(groupId, userId, begin, end);
 	}
 
-	public static java.util.List findByS_G_U(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByS_G_U(groupId, userId, begin, end);
 	}
 

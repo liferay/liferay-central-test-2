@@ -63,9 +63,7 @@ public class CountrySoap implements Serializable {
 	public static CountrySoap[] toSoapModels(List<Country> models) {
 		List<CountrySoap> soapModels = new ArrayList<CountrySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Country model = models.get(i);
-
+		for (Country model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

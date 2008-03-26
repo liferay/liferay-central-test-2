@@ -68,9 +68,7 @@ public class ShoppingCartSoap implements Serializable {
 	public static ShoppingCartSoap[] toSoapModels(List<ShoppingCart> models) {
 		List<ShoppingCartSoap> soapModels = new ArrayList<ShoppingCartSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ShoppingCart model = models.get(i);
-
+		for (ShoppingCart model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

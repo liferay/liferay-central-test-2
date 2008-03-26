@@ -29,12 +29,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalContentSearch;
+import com.liferay.portlet.journal.model.JournalContentSearchSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="JournalContentSearchModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -84,6 +88,33 @@ public class JournalContentSearchModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalContentSearch"),
 			true);
+
+	public static JournalContentSearch toModel(
+		JournalContentSearchSoap soapModel) {
+		JournalContentSearch model = new JournalContentSearchImpl();
+
+		model.setContentSearchId(soapModel.getContentSearchId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setPrivateLayout(soapModel.getPrivateLayout());
+		model.setLayoutId(soapModel.getLayoutId());
+		model.setPortletId(soapModel.getPortletId());
+		model.setArticleId(soapModel.getArticleId());
+
+		return model;
+	}
+
+	public static List<JournalContentSearch> toModels(
+		JournalContentSearchSoap[] soapModels) {
+		List<JournalContentSearch> models = new ArrayList<JournalContentSearch>(soapModels.length);
+
+		for (JournalContentSearchSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalContentSearch"));
 

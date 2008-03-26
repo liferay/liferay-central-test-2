@@ -60,9 +60,7 @@ public class MBDiscussionSoap implements Serializable {
 	public static MBDiscussionSoap[] toSoapModels(List<MBDiscussion> models) {
 		List<MBDiscussionSoap> soapModels = new ArrayList<MBDiscussionSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			MBDiscussion model = models.get(i);
-
+		for (MBDiscussion model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

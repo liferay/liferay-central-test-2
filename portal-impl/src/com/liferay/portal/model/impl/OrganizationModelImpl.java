@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.OrganizationSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="OrganizationModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -91,6 +95,34 @@ public class OrganizationModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Organization"),
 			true);
+
+	public static Organization toModel(OrganizationSoap soapModel) {
+		Organization model = new OrganizationImpl();
+
+		model.setOrganizationId(soapModel.getOrganizationId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setParentOrganizationId(soapModel.getParentOrganizationId());
+		model.setName(soapModel.getName());
+		model.setLocation(soapModel.getLocation());
+		model.setRecursable(soapModel.getRecursable());
+		model.setRegionId(soapModel.getRegionId());
+		model.setCountryId(soapModel.getCountryId());
+		model.setStatusId(soapModel.getStatusId());
+		model.setComments(soapModel.getComments());
+
+		return model;
+	}
+
+	public static List<Organization> toModels(OrganizationSoap[] soapModels) {
+		List<Organization> models = new ArrayList<Organization>(soapModels.length);
+
+		for (OrganizationSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_GROUPS_ORGS = com.liferay.portal.model.impl.GroupModelImpl.CACHE_ENABLED_GROUPS_ORGS;
 	public static final boolean CACHE_ENABLED_USERS_ORGS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_ORGS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(

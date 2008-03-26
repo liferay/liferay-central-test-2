@@ -68,9 +68,7 @@ public class WikiNodeSoap implements Serializable {
 	public static WikiNodeSoap[] toSoapModels(List<WikiNode> models) {
 		List<WikiNodeSoap> soapModels = new ArrayList<WikiNodeSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			WikiNode model = models.get(i);
-
+		for (WikiNode model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

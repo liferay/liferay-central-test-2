@@ -63,9 +63,7 @@ public class PortletPreferencesSoap implements Serializable {
 		List<PortletPreferences> models) {
 		List<PortletPreferencesSoap> soapModels = new ArrayList<PortletPreferencesSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			PortletPreferences model = models.get(i);
-
+		for (PortletPreferences model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

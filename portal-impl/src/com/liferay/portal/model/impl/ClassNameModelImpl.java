@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ClassName;
+import com.liferay.portal.model.ClassNameSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="ClassNameModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -67,6 +71,26 @@ public class ClassNameModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ClassName"),
 			true);
+
+	public static ClassName toModel(ClassNameSoap soapModel) {
+		ClassName model = new ClassNameImpl();
+
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setValue(soapModel.getValue());
+
+		return model;
+	}
+
+	public static List<ClassName> toModels(ClassNameSoap[] soapModels) {
+		List<ClassName> models = new ArrayList<ClassName>(soapModels.length);
+
+		for (ClassNameSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ClassName"));
 

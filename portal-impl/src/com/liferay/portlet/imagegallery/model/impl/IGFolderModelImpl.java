@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.imagegallery.model.IGFolder;
+import com.liferay.portlet.imagegallery.model.IGFolderSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="IGFolderModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -95,6 +98,34 @@ public class IGFolderModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.imagegallery.model.IGFolder"),
 			true);
+
+	public static IGFolder toModel(IGFolderSoap soapModel) {
+		IGFolder model = new IGFolderImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setFolderId(soapModel.getFolderId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setParentFolderId(soapModel.getParentFolderId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+
+		return model;
+	}
+
+	public static List<IGFolder> toModels(IGFolderSoap[] soapModels) {
+		List<IGFolder> models = new ArrayList<IGFolder>(soapModels.length);
+
+		for (IGFolderSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.imagegallery.model.IGFolder"));
 

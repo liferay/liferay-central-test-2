@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.model.PortletPreferencesSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="PortletPreferencesModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -79,6 +83,31 @@ public class PortletPreferencesModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PortletPreferences"),
 			true);
+
+	public static PortletPreferences toModel(PortletPreferencesSoap soapModel) {
+		PortletPreferences model = new PortletPreferencesImpl();
+
+		model.setPortletPreferencesId(soapModel.getPortletPreferencesId());
+		model.setOwnerId(soapModel.getOwnerId());
+		model.setOwnerType(soapModel.getOwnerType());
+		model.setPlid(soapModel.getPlid());
+		model.setPortletId(soapModel.getPortletId());
+		model.setPreferences(soapModel.getPreferences());
+
+		return model;
+	}
+
+	public static List<PortletPreferences> toModels(
+		PortletPreferencesSoap[] soapModels) {
+		List<PortletPreferences> models = new ArrayList<PortletPreferences>(soapModels.length);
+
+		for (PortletPreferencesSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PortletPreferences"));
 

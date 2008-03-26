@@ -79,9 +79,7 @@ public class TagsAssetSoap implements Serializable {
 	public static TagsAssetSoap[] toSoapModels(List<TagsAsset> models) {
 		List<TagsAssetSoap> soapModels = new ArrayList<TagsAssetSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			TagsAsset model = models.get(i);
-
+		for (TagsAsset model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

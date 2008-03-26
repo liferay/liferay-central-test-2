@@ -64,9 +64,7 @@ public class WebDAVPropsSoap implements Serializable {
 	public static WebDAVPropsSoap[] toSoapModels(List<WebDAVProps> models) {
 		List<WebDAVPropsSoap> soapModels = new ArrayList<WebDAVPropsSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			WebDAVProps model = models.get(i);
-
+		for (WebDAVProps model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -86,9 +86,7 @@ public class UserSoap implements Serializable {
 	public static UserSoap[] toSoapModels(List<User> models) {
 		List<UserSoap> soapModels = new ArrayList<UserSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			User model = models.get(i);
-
+		for (User model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

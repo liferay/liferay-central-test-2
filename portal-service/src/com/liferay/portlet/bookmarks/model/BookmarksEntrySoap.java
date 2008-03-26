@@ -69,9 +69,7 @@ public class BookmarksEntrySoap implements Serializable {
 	public static BookmarksEntrySoap[] toSoapModels(List<BookmarksEntry> models) {
 		List<BookmarksEntrySoap> soapModels = new ArrayList<BookmarksEntrySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			BookmarksEntry model = models.get(i);
-
+		for (BookmarksEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

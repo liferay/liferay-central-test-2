@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="PortletModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -76,6 +80,29 @@ public class PortletModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Portlet"),
 			true);
+
+	public static Portlet toModel(PortletSoap soapModel) {
+		Portlet model = new PortletImpl();
+
+		model.setId(soapModel.getId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setPortletId(soapModel.getPortletId());
+		model.setRoles(soapModel.getRoles());
+		model.setActive(soapModel.getActive());
+
+		return model;
+	}
+
+	public static List<Portlet> toModels(PortletSoap[] soapModels) {
+		List<Portlet> models = new ArrayList<Portlet>(soapModels.length);
+
+		for (PortletSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Portlet"));
 

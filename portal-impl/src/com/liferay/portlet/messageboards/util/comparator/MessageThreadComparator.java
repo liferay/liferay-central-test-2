@@ -35,12 +35,10 @@ import java.util.Comparator;
  * @author Brian Wing Shun Chan
  *
  */
-public class MessageThreadComparator implements Comparator, Serializable {
+public class MessageThreadComparator
+	implements Comparator<MBMessage>, Serializable {
 
-	public int compare(Object obj1, Object obj2) {
-		MBMessage msg1 = (MBMessage)obj1;
-		MBMessage msg2 = (MBMessage)obj2;
-
+	public int compare(MBMessage msg1, MBMessage msg2) {
 		Long parentMessageId1 = new Long(msg1.getParentMessageId());
 		Long parentMessageId2 = new Long(msg2.getParentMessageId());
 

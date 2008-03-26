@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.PasswordPolicyRel;
+import com.liferay.portal.model.PasswordPolicyRelSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -32,6 +33,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="PasswordPolicyRelModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -72,6 +76,29 @@ public class PasswordPolicyRelModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PasswordPolicyRel"),
 			true);
+
+	public static PasswordPolicyRel toModel(PasswordPolicyRelSoap soapModel) {
+		PasswordPolicyRel model = new PasswordPolicyRelImpl();
+
+		model.setPasswordPolicyRelId(soapModel.getPasswordPolicyRelId());
+		model.setPasswordPolicyId(soapModel.getPasswordPolicyId());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+
+		return model;
+	}
+
+	public static List<PasswordPolicyRel> toModels(
+		PasswordPolicyRelSoap[] soapModels) {
+		List<PasswordPolicyRel> models = new ArrayList<PasswordPolicyRel>(soapModels.length);
+
+		for (PasswordPolicyRelSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordPolicyRel"));
 

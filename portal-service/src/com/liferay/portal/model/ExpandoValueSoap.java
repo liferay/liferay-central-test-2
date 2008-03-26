@@ -60,9 +60,7 @@ public class ExpandoValueSoap implements Serializable {
 	public static ExpandoValueSoap[] toSoapModels(List<ExpandoValue> models) {
 		List<ExpandoValueSoap> soapModels = new ArrayList<ExpandoValueSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ExpandoValue model = models.get(i);
-
+		for (ExpandoValue model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -67,13 +67,13 @@ public class ViewAction extends PortletAction {
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
 
 		String redirect = themeDisplay.getPathMain();
 
 		if (layouts.size() > 0) {
-			Layout layout = (Layout)layouts.get(0);
+			Layout layout = layouts.get(0);
 
 			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 		}
@@ -105,13 +105,13 @@ public class ViewAction extends PortletAction {
 		long groupId = ParamUtil.getLong(req, "groupId");
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
-		List layouts = LayoutLocalServiceUtil.getLayouts(
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
 
 		String redirect = themeDisplay.getPathMain();
 
 		if (layouts.size() > 0) {
-			Layout layout = (Layout)layouts.get(0);
+			Layout layout = layouts.get(0);
 
 			redirect = PortalUtil.getLayoutURL(layout, themeDisplay);
 		}

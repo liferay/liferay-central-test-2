@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanySoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="CompanyModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -82,6 +86,31 @@ public class CompanyModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Company"),
 			true);
+
+	public static Company toModel(CompanySoap soapModel) {
+		Company model = new CompanyImpl();
+
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setAccountId(soapModel.getAccountId());
+		model.setWebId(soapModel.getWebId());
+		model.setKey(soapModel.getKey());
+		model.setVirtualHost(soapModel.getVirtualHost());
+		model.setMx(soapModel.getMx());
+		model.setLogoId(soapModel.getLogoId());
+
+		return model;
+	}
+
+	public static List<Company> toModels(CompanySoap[] soapModels) {
+		List<Company> models = new ArrayList<Company>(soapModels.length);
+
+		for (CompanySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Company"));
 

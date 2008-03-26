@@ -65,9 +65,7 @@ public class JournalContentSearchSoap implements Serializable {
 		List<JournalContentSearch> models) {
 		List<JournalContentSearchSoap> soapModels = new ArrayList<JournalContentSearchSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			JournalContentSearch model = models.get(i);
-
+		for (JournalContentSearch model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

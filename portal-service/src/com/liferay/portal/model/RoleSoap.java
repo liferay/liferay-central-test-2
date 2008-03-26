@@ -63,9 +63,7 @@ public class RoleSoap implements Serializable {
 	public static RoleSoap[] toSoapModels(List<Role> models) {
 		List<RoleSoap> soapModels = new ArrayList<RoleSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Role model = models.get(i);
-
+		for (Role model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

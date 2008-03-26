@@ -64,9 +64,7 @@ public class ImageSoap implements Serializable {
 	public static ImageSoap[] toSoapModels(List<Image> models) {
 		List<ImageSoap> soapModels = new ArrayList<ImageSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Image model = models.get(i);
-
+		for (Image model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.wiki.model.WikiPage;
+import com.liferay.portlet.wiki.model.WikiPageSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="WikiPageModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -110,6 +113,39 @@ public class WikiPageModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.wiki.model.WikiPage"),
 			true);
+
+	public static WikiPage toModel(WikiPageSoap soapModel) {
+		WikiPage model = new WikiPageImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setPageId(soapModel.getPageId());
+		model.setResourcePrimKey(soapModel.getResourcePrimKey());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setNodeId(soapModel.getNodeId());
+		model.setTitle(soapModel.getTitle());
+		model.setVersion(soapModel.getVersion());
+		model.setContent(soapModel.getContent());
+		model.setFormat(soapModel.getFormat());
+		model.setHead(soapModel.getHead());
+		model.setParentTitle(soapModel.getParentTitle());
+		model.setRedirectTitle(soapModel.getRedirectTitle());
+
+		return model;
+	}
+
+	public static List<WikiPage> toModels(WikiPageSoap[] soapModels) {
+		List<WikiPage> models = new ArrayList<WikiPage>(soapModels.length);
+
+		for (WikiPageSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPage"));
 

@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.MembershipRequest;
+import com.liferay.portal.model.MembershipRequestSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -35,7 +36,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="MembershipRequestModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -94,6 +97,35 @@ public class MembershipRequestModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.MembershipRequest"),
 			true);
+
+	public static MembershipRequest toModel(MembershipRequestSoap soapModel) {
+		MembershipRequest model = new MembershipRequestImpl();
+
+		model.setMembershipRequestId(soapModel.getMembershipRequestId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setGroupId(soapModel.getGroupId());
+		model.setComments(soapModel.getComments());
+		model.setReplyComments(soapModel.getReplyComments());
+		model.setReplyDate(soapModel.getReplyDate());
+		model.setReplierUserId(soapModel.getReplierUserId());
+		model.setStatusId(soapModel.getStatusId());
+
+		return model;
+	}
+
+	public static List<MembershipRequest> toModels(
+		MembershipRequestSoap[] soapModels) {
+		List<MembershipRequest> models = new ArrayList<MembershipRequest>(soapModels.length);
+
+		for (MembershipRequestSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.MembershipRequest"));
 

@@ -68,9 +68,7 @@ public class BookmarksFolderSoap implements Serializable {
 		List<BookmarksFolder> models) {
 		List<BookmarksFolderSoap> soapModels = new ArrayList<BookmarksFolderSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			BookmarksFolder model = models.get(i);
-
+		for (BookmarksFolder model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

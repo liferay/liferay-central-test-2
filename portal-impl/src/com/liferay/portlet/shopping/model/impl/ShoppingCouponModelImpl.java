@@ -30,6 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
+import com.liferay.portlet.shopping.model.ShoppingCouponSoap;
 
 import java.io.Serializable;
 
@@ -37,7 +38,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="ShoppingCouponModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -120,6 +123,42 @@ public class ShoppingCouponModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingCoupon"),
 			true);
+
+	public static ShoppingCoupon toModel(ShoppingCouponSoap soapModel) {
+		ShoppingCoupon model = new ShoppingCouponImpl();
+
+		model.setCouponId(soapModel.getCouponId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setCode(soapModel.getCode());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setStartDate(soapModel.getStartDate());
+		model.setEndDate(soapModel.getEndDate());
+		model.setActive(soapModel.getActive());
+		model.setLimitCategories(soapModel.getLimitCategories());
+		model.setLimitSkus(soapModel.getLimitSkus());
+		model.setMinOrder(soapModel.getMinOrder());
+		model.setDiscount(soapModel.getDiscount());
+		model.setDiscountType(soapModel.getDiscountType());
+
+		return model;
+	}
+
+	public static List<ShoppingCoupon> toModels(ShoppingCouponSoap[] soapModels) {
+		List<ShoppingCoupon> models = new ArrayList<ShoppingCoupon>(soapModels.length);
+
+		for (ShoppingCouponSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCoupon"));
 

@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalTemplate;
+import com.liferay.portlet.journal.model.JournalTemplateSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="JournalTemplateModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -119,6 +122,43 @@ public class JournalTemplateModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalTemplate"),
 			true);
+
+	public static JournalTemplate toModel(JournalTemplateSoap soapModel) {
+		JournalTemplate model = new JournalTemplateImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setId(soapModel.getId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setTemplateId(soapModel.getTemplateId());
+		model.setStructureId(soapModel.getStructureId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setXsl(soapModel.getXsl());
+		model.setLangType(soapModel.getLangType());
+		model.setCacheable(soapModel.getCacheable());
+		model.setSmallImage(soapModel.getSmallImage());
+		model.setSmallImageId(soapModel.getSmallImageId());
+		model.setSmallImageURL(soapModel.getSmallImageURL());
+
+		return model;
+	}
+
+	public static List<JournalTemplate> toModels(
+		JournalTemplateSoap[] soapModels) {
+		List<JournalTemplate> models = new ArrayList<JournalTemplate>(soapModels.length);
+
+		for (JournalTemplateSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalTemplate"));
 

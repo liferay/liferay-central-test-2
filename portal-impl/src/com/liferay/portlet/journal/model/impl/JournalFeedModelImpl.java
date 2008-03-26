@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalFeed;
+import com.liferay.portlet.journal.model.JournalFeedSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="JournalFeedModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -134,6 +137,47 @@ public class JournalFeedModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalFeed"),
 			true);
+
+	public static JournalFeed toModel(JournalFeedSoap soapModel) {
+		JournalFeed model = new JournalFeedImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setId(soapModel.getId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setFeedId(soapModel.getFeedId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setType(soapModel.getType());
+		model.setStructureId(soapModel.getStructureId());
+		model.setTemplateId(soapModel.getTemplateId());
+		model.setRendererTemplateId(soapModel.getRendererTemplateId());
+		model.setDelta(soapModel.getDelta());
+		model.setOrderByCol(soapModel.getOrderByCol());
+		model.setOrderByType(soapModel.getOrderByType());
+		model.setTargetLayoutFriendlyUrl(soapModel.getTargetLayoutFriendlyUrl());
+		model.setTargetPortletId(soapModel.getTargetPortletId());
+		model.setContentField(soapModel.getContentField());
+		model.setFeedType(soapModel.getFeedType());
+		model.setFeedVersion(soapModel.getFeedVersion());
+
+		return model;
+	}
+
+	public static List<JournalFeed> toModels(JournalFeedSoap[] soapModels) {
+		List<JournalFeed> models = new ArrayList<JournalFeed>(soapModels.length);
+
+		for (JournalFeedSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalFeed"));
 

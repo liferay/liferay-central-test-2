@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Country;
+import com.liferay.portal.model.CountrySoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="CountryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -82,6 +86,31 @@ public class CountryModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Country"),
 			true);
+
+	public static Country toModel(CountrySoap soapModel) {
+		Country model = new CountryImpl();
+
+		model.setCountryId(soapModel.getCountryId());
+		model.setName(soapModel.getName());
+		model.setA2(soapModel.getA2());
+		model.setA3(soapModel.getA3());
+		model.setNumber(soapModel.getNumber());
+		model.setIdd(soapModel.getIdd());
+		model.setActive(soapModel.getActive());
+
+		return model;
+	}
+
+	public static List<Country> toModels(CountrySoap[] soapModels) {
+		List<Country> models = new ArrayList<Country>(soapModels.length);
+
+		for (CountrySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Country"));
 

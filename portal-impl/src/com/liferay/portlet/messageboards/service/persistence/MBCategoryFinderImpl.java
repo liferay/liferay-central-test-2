@@ -70,10 +70,10 @@ public class MBCategoryFinderImpl implements MBCategoryFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -90,7 +90,8 @@ public class MBCategoryFinderImpl implements MBCategoryFinder {
 		}
 	}
 
-	public List findByS_G_U(long groupId, long userId, int begin, int end)
+	public List<MBCategory> findByS_G_U(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -110,7 +111,8 @@ public class MBCategoryFinderImpl implements MBCategoryFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<MBCategory>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

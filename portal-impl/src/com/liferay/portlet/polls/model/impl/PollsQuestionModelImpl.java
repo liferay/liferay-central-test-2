@@ -30,6 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.polls.model.PollsQuestion;
+import com.liferay.portlet.polls.model.PollsQuestionSoap;
 
 import java.io.Serializable;
 
@@ -37,7 +38,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="PollsQuestionModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -102,6 +105,36 @@ public class PollsQuestionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.polls.model.PollsQuestion"),
 			true);
+
+	public static PollsQuestion toModel(PollsQuestionSoap soapModel) {
+		PollsQuestion model = new PollsQuestionImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setQuestionId(soapModel.getQuestionId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setTitle(soapModel.getTitle());
+		model.setDescription(soapModel.getDescription());
+		model.setExpirationDate(soapModel.getExpirationDate());
+		model.setLastVoteDate(soapModel.getLastVoteDate());
+
+		return model;
+	}
+
+	public static List<PollsQuestion> toModels(PollsQuestionSoap[] soapModels) {
+		List<PollsQuestion> models = new ArrayList<PollsQuestion>(soapModels.length);
+
+		for (PollsQuestionSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.polls.model.PollsQuestion"));
 

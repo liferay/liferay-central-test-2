@@ -69,9 +69,7 @@ public class MBCategorySoap implements Serializable {
 	public static MBCategorySoap[] toSoapModels(List<MBCategory> models) {
 		List<MBCategorySoap> soapModels = new ArrayList<MBCategorySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			MBCategory model = models.get(i);
-
+		for (MBCategory model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

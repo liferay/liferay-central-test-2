@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -34,7 +35,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="UserModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -150,6 +153,53 @@ public class UserModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.User"),
 			true);
+
+	public static User toModel(UserSoap soapModel) {
+		User model = new UserImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setUserId(soapModel.getUserId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setDefaultUser(soapModel.getDefaultUser());
+		model.setContactId(soapModel.getContactId());
+		model.setPassword(soapModel.getPassword());
+		model.setPasswordEncrypted(soapModel.getPasswordEncrypted());
+		model.setPasswordReset(soapModel.getPasswordReset());
+		model.setPasswordModifiedDate(soapModel.getPasswordModifiedDate());
+		model.setGraceLoginCount(soapModel.getGraceLoginCount());
+		model.setScreenName(soapModel.getScreenName());
+		model.setEmailAddress(soapModel.getEmailAddress());
+		model.setPortraitId(soapModel.getPortraitId());
+		model.setLanguageId(soapModel.getLanguageId());
+		model.setTimeZoneId(soapModel.getTimeZoneId());
+		model.setGreeting(soapModel.getGreeting());
+		model.setComments(soapModel.getComments());
+		model.setLoginDate(soapModel.getLoginDate());
+		model.setLoginIP(soapModel.getLoginIP());
+		model.setLastLoginDate(soapModel.getLastLoginDate());
+		model.setLastLoginIP(soapModel.getLastLoginIP());
+		model.setLastFailedLoginDate(soapModel.getLastFailedLoginDate());
+		model.setFailedLoginAttempts(soapModel.getFailedLoginAttempts());
+		model.setLockout(soapModel.getLockout());
+		model.setLockoutDate(soapModel.getLockoutDate());
+		model.setAgreedToTermsOfUse(soapModel.getAgreedToTermsOfUse());
+		model.setActive(soapModel.getActive());
+
+		return model;
+	}
+
+	public static List<User> toModels(UserSoap[] soapModels) {
+		List<User> models = new ArrayList<User>(soapModels.length);
+
+		for (UserSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_USERS_GROUPS = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.Users_Groups"), true);
 	public static final boolean CACHE_ENABLED_USERS_ORGS = GetterUtil.getBoolean(PropsUtil.get(

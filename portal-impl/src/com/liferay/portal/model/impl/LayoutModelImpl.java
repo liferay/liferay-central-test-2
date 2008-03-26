@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="LayoutModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -127,6 +131,46 @@ public class LayoutModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Layout"),
 			true);
+
+	public static Layout toModel(LayoutSoap soapModel) {
+		Layout model = new LayoutImpl();
+
+		model.setPlid(soapModel.getPlid());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setPrivateLayout(soapModel.getPrivateLayout());
+		model.setLayoutId(soapModel.getLayoutId());
+		model.setParentLayoutId(soapModel.getParentLayoutId());
+		model.setName(soapModel.getName());
+		model.setTitle(soapModel.getTitle());
+		model.setDescription(soapModel.getDescription());
+		model.setType(soapModel.getType());
+		model.setTypeSettings(soapModel.getTypeSettings());
+		model.setHidden(soapModel.getHidden());
+		model.setFriendlyURL(soapModel.getFriendlyURL());
+		model.setIconImage(soapModel.getIconImage());
+		model.setIconImageId(soapModel.getIconImageId());
+		model.setThemeId(soapModel.getThemeId());
+		model.setColorSchemeId(soapModel.getColorSchemeId());
+		model.setWapThemeId(soapModel.getWapThemeId());
+		model.setWapColorSchemeId(soapModel.getWapColorSchemeId());
+		model.setCss(soapModel.getCss());
+		model.setPriority(soapModel.getPriority());
+		model.setDlFolderId(soapModel.getDlFolderId());
+
+		return model;
+	}
+
+	public static List<Layout> toModels(LayoutSoap[] soapModels) {
+		List<Layout> models = new ArrayList<Layout>(soapModels.length);
+
+		for (LayoutSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Layout"));
 

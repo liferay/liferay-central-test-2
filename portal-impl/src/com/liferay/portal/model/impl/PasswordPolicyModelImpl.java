@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.model.PasswordPolicySoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -34,7 +35,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="PasswordPolicyModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -141,6 +144,50 @@ public class PasswordPolicyModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PasswordPolicy"),
 			true);
+
+	public static PasswordPolicy toModel(PasswordPolicySoap soapModel) {
+		PasswordPolicy model = new PasswordPolicyImpl();
+
+		model.setPasswordPolicyId(soapModel.getPasswordPolicyId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setDefaultPolicy(soapModel.getDefaultPolicy());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setChangeable(soapModel.getChangeable());
+		model.setChangeRequired(soapModel.getChangeRequired());
+		model.setMinAge(soapModel.getMinAge());
+		model.setCheckSyntax(soapModel.getCheckSyntax());
+		model.setAllowDictionaryWords(soapModel.getAllowDictionaryWords());
+		model.setMinLength(soapModel.getMinLength());
+		model.setHistory(soapModel.getHistory());
+		model.setHistoryCount(soapModel.getHistoryCount());
+		model.setExpireable(soapModel.getExpireable());
+		model.setMaxAge(soapModel.getMaxAge());
+		model.setWarningTime(soapModel.getWarningTime());
+		model.setGraceLimit(soapModel.getGraceLimit());
+		model.setLockout(soapModel.getLockout());
+		model.setMaxFailure(soapModel.getMaxFailure());
+		model.setLockoutDuration(soapModel.getLockoutDuration());
+		model.setRequireUnlock(soapModel.getRequireUnlock());
+		model.setResetFailureCount(soapModel.getResetFailureCount());
+
+		return model;
+	}
+
+	public static List<PasswordPolicy> toModels(PasswordPolicySoap[] soapModels) {
+		List<PasswordPolicy> models = new ArrayList<PasswordPolicy>(soapModels.length);
+
+		for (PasswordPolicySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PasswordPolicy"));
 

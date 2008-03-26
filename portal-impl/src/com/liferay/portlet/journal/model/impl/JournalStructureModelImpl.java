@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalStructure;
+import com.liferay.portlet.journal.model.JournalStructureSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="JournalStructureModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -101,6 +104,37 @@ public class JournalStructureModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalStructure"),
 			true);
+
+	public static JournalStructure toModel(JournalStructureSoap soapModel) {
+		JournalStructure model = new JournalStructureImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setId(soapModel.getId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setStructureId(soapModel.getStructureId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setXsd(soapModel.getXsd());
+
+		return model;
+	}
+
+	public static List<JournalStructure> toModels(
+		JournalStructureSoap[] soapModels) {
+		List<JournalStructure> models = new ArrayList<JournalStructure>(soapModels.length);
+
+		for (JournalStructureSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalStructure"));
 

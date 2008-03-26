@@ -109,10 +109,12 @@ public class ExpandoColumnServiceSoap {
 	}
 
 	public static void addTableColumns(long tableId,
-		java.util.List<com.liferay.portal.model.ExpandoColumn> columns)
+		com.liferay.portal.model.ExpandoColumnSoap[] columns)
 		throws RemoteException {
 		try {
-			ExpandoColumnServiceUtil.addTableColumns(tableId, columns);
+			ExpandoColumnServiceUtil.addTableColumns(tableId,
+				com.liferay.portal.model.impl.ExpandoColumnModelImpl.toModels(
+					columns));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -157,10 +159,12 @@ public class ExpandoColumnServiceSoap {
 	}
 
 	public static void deleteTableColumns(long tableId,
-		java.util.List<com.liferay.portal.model.ExpandoColumn> columns)
+		com.liferay.portal.model.ExpandoColumnSoap[] columns)
 		throws RemoteException {
 		try {
-			ExpandoColumnServiceUtil.deleteTableColumns(tableId, columns);
+			ExpandoColumnServiceUtil.deleteTableColumns(tableId,
+				com.liferay.portal.model.impl.ExpandoColumnModelImpl.toModels(
+					columns));
 		}
 		catch (Exception e) {
 			_log.error(e, e);

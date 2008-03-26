@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.EmailAddress;
+import com.liferay.portal.model.EmailAddressSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -35,7 +36,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="EmailAddressModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -97,6 +100,35 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.EmailAddress"),
 			true);
+
+	public static EmailAddress toModel(EmailAddressSoap soapModel) {
+		EmailAddress model = new EmailAddressImpl();
+
+		model.setEmailAddressId(soapModel.getEmailAddressId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setAddress(soapModel.getAddress());
+		model.setTypeId(soapModel.getTypeId());
+		model.setPrimary(soapModel.getPrimary());
+
+		return model;
+	}
+
+	public static List<EmailAddress> toModels(EmailAddressSoap[] soapModels) {
+		List<EmailAddress> models = new ArrayList<EmailAddress>(soapModels.length);
+
+		for (EmailAddressSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.EmailAddress"));
 

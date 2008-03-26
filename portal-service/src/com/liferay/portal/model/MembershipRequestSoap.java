@@ -68,9 +68,7 @@ public class MembershipRequestSoap implements Serializable {
 		List<MembershipRequest> models) {
 		List<MembershipRequestSoap> soapModels = new ArrayList<MembershipRequestSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			MembershipRequest model = models.get(i);
-
+		for (MembershipRequest model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

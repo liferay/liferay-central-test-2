@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.shopping.model.ShoppingCart;
+import com.liferay.portlet.shopping.model.ShoppingCartSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="ShoppingCartModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -98,6 +101,35 @@ public class ShoppingCartModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.shopping.model.ShoppingCart"),
 			true);
+
+	public static ShoppingCart toModel(ShoppingCartSoap soapModel) {
+		ShoppingCart model = new ShoppingCartImpl();
+
+		model.setCartId(soapModel.getCartId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setItemIds(soapModel.getItemIds());
+		model.setCouponCodes(soapModel.getCouponCodes());
+		model.setAltShipping(soapModel.getAltShipping());
+		model.setInsure(soapModel.getInsure());
+
+		return model;
+	}
+
+	public static List<ShoppingCart> toModels(ShoppingCartSoap[] soapModels) {
+		List<ShoppingCart> models = new ArrayList<ShoppingCart>(soapModels.length);
+
+		for (ShoppingCartSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.shopping.model.ShoppingCart"));
 

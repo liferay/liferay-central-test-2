@@ -70,9 +70,7 @@ public class IGImageSoap implements Serializable {
 	public static IGImageSoap[] toSoapModels(List<IGImage> models) {
 		List<IGImageSoap> soapModels = new ArrayList<IGImageSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			IGImage model = models.get(i);
-
+		for (IGImage model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

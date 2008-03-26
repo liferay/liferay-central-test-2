@@ -73,9 +73,7 @@ public class AccountSoap implements Serializable {
 	public static AccountSoap[] toSoapModels(List<Account> models) {
 		List<AccountSoap> soapModels = new ArrayList<AccountSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Account model = models.get(i);
-
+		for (Account model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

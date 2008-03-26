@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.imagegallery.model.IGImageSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="IGImageModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -104,6 +107,37 @@ public class IGImageModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.imagegallery.model.IGImage"),
 			true);
+
+	public static IGImage toModel(IGImageSoap soapModel) {
+		IGImage model = new IGImageImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setImageId(soapModel.getImageId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setFolderId(soapModel.getFolderId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setSmallImageId(soapModel.getSmallImageId());
+		model.setLargeImageId(soapModel.getLargeImageId());
+		model.setCustom1ImageId(soapModel.getCustom1ImageId());
+		model.setCustom2ImageId(soapModel.getCustom2ImageId());
+
+		return model;
+	}
+
+	public static List<IGImage> toModels(IGImageSoap[] soapModels) {
+		List<IGImage> models = new ArrayList<IGImage>(soapModels.length);
+
+		for (IGImageSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.imagegallery.model.IGImage"));
 

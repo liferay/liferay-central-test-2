@@ -30,6 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tasks.model.TasksProposal;
+import com.liferay.portlet.tasks.model.TasksProposalSoap;
 
 import java.io.Serializable;
 
@@ -37,7 +38,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="TasksProposalModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -105,6 +108,37 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tasks.model.TasksProposal"),
 			true);
+
+	public static TasksProposal toModel(TasksProposalSoap soapModel) {
+		TasksProposal model = new TasksProposalImpl();
+
+		model.setProposalId(soapModel.getProposalId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setPublishDate(soapModel.getPublishDate());
+		model.setDueDate(soapModel.getDueDate());
+
+		return model;
+	}
+
+	public static List<TasksProposal> toModels(TasksProposalSoap[] soapModels) {
+		List<TasksProposal> models = new ArrayList<TasksProposal>(soapModels.length);
+
+		for (TasksProposalSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tasks.model.TasksProposal"));
 

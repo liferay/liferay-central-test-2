@@ -67,9 +67,7 @@ public class IGFolderSoap implements Serializable {
 	public static IGFolderSoap[] toSoapModels(List<IGFolder> models) {
 		List<IGFolderSoap> soapModels = new ArrayList<IGFolderSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			IGFolder model = models.get(i);
-
+		for (IGFolder model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

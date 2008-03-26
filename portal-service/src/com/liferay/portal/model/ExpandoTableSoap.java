@@ -59,9 +59,7 @@ public class ExpandoTableSoap implements Serializable {
 	public static ExpandoTableSoap[] toSoapModels(List<ExpandoTable> models) {
 		List<ExpandoTableSoap> soapModels = new ArrayList<ExpandoTableSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ExpandoTable model = models.get(i);
-
+		for (ExpandoTable model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

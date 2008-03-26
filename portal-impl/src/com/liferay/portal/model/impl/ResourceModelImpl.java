@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="ResourceModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -70,6 +74,27 @@ public class ResourceModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Resource"),
 			true);
+
+	public static Resource toModel(ResourceSoap soapModel) {
+		Resource model = new ResourceImpl();
+
+		model.setResourceId(soapModel.getResourceId());
+		model.setCodeId(soapModel.getCodeId());
+		model.setPrimKey(soapModel.getPrimKey());
+
+		return model;
+	}
+
+	public static List<Resource> toModels(ResourceSoap[] soapModels) {
+		List<Resource> models = new ArrayList<Resource>(soapModels.length);
+
+		for (ResourceSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Resource"));
 

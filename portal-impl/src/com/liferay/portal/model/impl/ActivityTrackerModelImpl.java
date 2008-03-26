@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ActivityTracker;
+import com.liferay.portal.model.ActivityTrackerSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -35,7 +36,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="ActivityTrackerModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -100,6 +103,37 @@ public class ActivityTrackerModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ActivityTracker"),
 			true);
+
+	public static ActivityTracker toModel(ActivityTrackerSoap soapModel) {
+		ActivityTracker model = new ActivityTrackerImpl();
+
+		model.setActivityTrackerId(soapModel.getActivityTrackerId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setActivity(soapModel.getActivity());
+		model.setExtraData(soapModel.getExtraData());
+		model.setReceiverUserId(soapModel.getReceiverUserId());
+		model.setReceiverUserName(soapModel.getReceiverUserName());
+
+		return model;
+	}
+
+	public static List<ActivityTracker> toModels(
+		ActivityTrackerSoap[] soapModels) {
+		List<ActivityTracker> models = new ArrayList<ActivityTracker>(soapModels.length);
+
+		for (ActivityTrackerSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ActivityTracker"));
 

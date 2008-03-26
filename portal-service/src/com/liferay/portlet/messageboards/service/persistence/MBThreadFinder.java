@@ -29,7 +29,7 @@ package com.liferay.portlet.messageboards.service.persistence;
  *
  */
 public interface MBThreadFinder {
-	public int countByCategoryIds(java.util.List categoryIds)
+	public int countByCategoryIds(java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException;
 
 	public int countByGroupId(long groupId)
@@ -41,12 +41,15 @@ public interface MBThreadFinder {
 	public int countByS_G_U(long groupId, long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByGroupId(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByGroupId(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByG_U(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByG_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByS_G_U(long groupId, long userId, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.messageboards.model.MBThread> findByS_G_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

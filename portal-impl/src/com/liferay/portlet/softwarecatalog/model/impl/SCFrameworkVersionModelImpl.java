@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
+import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersionSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="SCFrameworkVersionModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -98,6 +101,36 @@ public class SCFrameworkVersionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion"),
 			true);
+
+	public static SCFrameworkVersion toModel(SCFrameworkVersionSoap soapModel) {
+		SCFrameworkVersion model = new SCFrameworkVersionImpl();
+
+		model.setFrameworkVersionId(soapModel.getFrameworkVersionId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setName(soapModel.getName());
+		model.setUrl(soapModel.getUrl());
+		model.setActive(soapModel.getActive());
+		model.setPriority(soapModel.getPriority());
+
+		return model;
+	}
+
+	public static List<SCFrameworkVersion> toModels(
+		SCFrameworkVersionSoap[] soapModels) {
+		List<SCFrameworkVersion> models = new ArrayList<SCFrameworkVersion>(soapModels.length);
+
+		for (SCFrameworkVersionSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_SCFRAMEWORKVERSI_SCPRODUCTVERS = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.SCFrameworkVersi_SCProductVers"),
 			true);

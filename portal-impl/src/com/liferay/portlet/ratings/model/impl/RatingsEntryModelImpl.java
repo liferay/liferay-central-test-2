@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.ratings.model.RatingsEntry;
+import com.liferay.portlet.ratings.model.RatingsEntrySoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="RatingsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -92,6 +95,33 @@ public class RatingsEntryModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.ratings.model.RatingsEntry"),
 			true);
+
+	public static RatingsEntry toModel(RatingsEntrySoap soapModel) {
+		RatingsEntry model = new RatingsEntryImpl();
+
+		model.setEntryId(soapModel.getEntryId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setScore(soapModel.getScore());
+
+		return model;
+	}
+
+	public static List<RatingsEntry> toModels(RatingsEntrySoap[] soapModels) {
+		List<RatingsEntry> models = new ArrayList<RatingsEntry>(soapModels.length);
+
+		for (RatingsEntrySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.ratings.model.RatingsEntry"));
 

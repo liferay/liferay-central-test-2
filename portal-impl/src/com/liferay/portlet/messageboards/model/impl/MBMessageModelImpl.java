@@ -30,6 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.model.MBMessageSoap;
 
 import java.io.Serializable;
 
@@ -37,7 +38,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="MBMessageModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -108,6 +111,38 @@ public class MBMessageModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBMessage"),
 			true);
+
+	public static MBMessage toModel(MBMessageSoap soapModel) {
+		MBMessage model = new MBMessageImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setMessageId(soapModel.getMessageId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setCategoryId(soapModel.getCategoryId());
+		model.setThreadId(soapModel.getThreadId());
+		model.setParentMessageId(soapModel.getParentMessageId());
+		model.setSubject(soapModel.getSubject());
+		model.setBody(soapModel.getBody());
+		model.setAttachments(soapModel.getAttachments());
+		model.setAnonymous(soapModel.getAnonymous());
+
+		return model;
+	}
+
+	public static List<MBMessage> toModels(MBMessageSoap[] soapModels) {
+		List<MBMessage> models = new ArrayList<MBMessage>(soapModels.length);
+
+		for (MBMessageSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBMessage"));
 

@@ -64,9 +64,7 @@ public class TagsEntrySoap implements Serializable {
 	public static TagsEntrySoap[] toSoapModels(List<TagsEntry> models) {
 		List<TagsEntrySoap> soapModels = new ArrayList<TagsEntrySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			TagsEntry model = models.get(i);
-
+		for (TagsEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

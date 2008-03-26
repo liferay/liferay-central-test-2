@@ -63,9 +63,7 @@ public class CompanySoap implements Serializable {
 	public static CompanySoap[] toSoapModels(List<Company> models) {
 		List<CompanySoap> soapModels = new ArrayList<CompanySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Company model = models.get(i);
-
+		for (Company model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

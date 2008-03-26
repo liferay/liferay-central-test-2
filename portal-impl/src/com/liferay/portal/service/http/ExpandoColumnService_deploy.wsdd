@@ -4,17 +4,17 @@
 	<service name="Portal_ExpandoColumnService" provider="java:RPC" style="rpc" use="encoded">
 		<parameter name="wsdlTargetNamespace" value="urn:http.service.portal.liferay.com"/>
 		<parameter name="wsdlServiceElement" value="ExpandoColumnServiceSoapService"/>
-		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com,http://xml.apache.org/xml-soap"/>
+		<parameter name="schemaUnqualified" value="urn:http.service.portal.liferay.com,http://model.portal.liferay.com"/>
 		<parameter name="wsdlServicePort" value="Portal_ExpandoColumnService"/>
 		<parameter name="className" value="com.liferay.portal.service.http.ExpandoColumnServiceSoap"/>
 		<parameter name="wsdlPortType" value="ExpandoColumnServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnId" type="tns:long"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://model.portal.liferay.com" name="addColumn" qname="operNS:addColumn" returnQName="addColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
@@ -23,11 +23,11 @@
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addTableColumns" qname="operNS:addTableColumns" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
-			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="columnIds" type="tns:ArrayOf_xsd_long"></parameter>
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="columns" type="tns:ArrayOf_tns2_ExpandoColumnSoap"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="addTableColumns" qname="operNS:addTableColumns" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
-			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="columns" type="tns:ArrayOf_xsd_anyType"></parameter>
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="columnIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteColumn" qname="operNS:deleteColumn" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnId" type="tns:long"></parameter>
@@ -37,27 +37,27 @@
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteTableColumns" qname="operNS:deleteTableColumns" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
-			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="columnIds" type="tns:ArrayOf_xsd_long"></parameter>
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="columns" type="tns:ArrayOf_tns2_ExpandoColumnSoap"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" name="deleteTableColumns" qname="operNS:deleteTableColumns" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
-			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="columns" type="tns:ArrayOf_xsd_anyType"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getTableColumns" qname="operNS:getTableColumns" returnQName="getTableColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
+			<parameter xmlns:tns="urn:http.service.portal.liferay.com" qname="columnIds" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getTableColumns" qname="operNS:getTableColumns" returnQName="getTableColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getColumns" qname="operNS:getColumns" returnQName="getColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getTableColumns" qname="operNS:getTableColumns" returnQName="getTableColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getColumns" qname="operNS:getColumns" returnQName="getColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="urn:http.service.portal.liferay.com" xmlns:tns2="http://model.portal.liferay.com" name="getColumns" qname="operNS:getColumns" returnQName="getColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.portal.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getColumnsCount" qname="operNS:getColumnsCount" returnQName="getColumnsCountReturn" returnType="rtns:int" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
@@ -80,7 +80,6 @@
 		</operation>
 		<parameter name="allowedMethods" value="addColumn addTableColumns updateColumnName updateColumnType getTableColumnsCount deleteTableColumns deleteColumn setColumn getColumn getColumnsCount getColumns getTableColumns"/>
 		<typeMapping xmlns:ns="http://model.portal.liferay.com" qname="ns:ExpandoColumnSoap" type="java:com.liferay.portal.model.ExpandoColumnSoap" serializer="org.apache.axis.encoding.ser.BeanSerializerFactory" deserializer="org.apache.axis.encoding.ser.BeanDeserializerFactory" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></typeMapping>
-		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_anyType" type="java:java.lang.Object[]" innerType="cmp-ns:anyType" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_long" type="java:long[]" innerType="cmp-ns:long" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 		<arrayMapping xmlns:ns="urn:http.service.portal.liferay.com" xmlns:cmp-ns="http://model.portal.liferay.com" qname="ns:ArrayOf_tns2_ExpandoColumnSoap" type="java:com.liferay.portal.model.ExpandoColumnSoap[]" innerType="cmp-ns:ExpandoColumnSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
 	</service>

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.LayoutSet;
+import com.liferay.portal.model.LayoutSetSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="LayoutSetModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -100,6 +104,37 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.LayoutSet"),
 			true);
+
+	public static LayoutSet toModel(LayoutSetSoap soapModel) {
+		LayoutSet model = new LayoutSetImpl();
+
+		model.setLayoutSetId(soapModel.getLayoutSetId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setPrivateLayout(soapModel.getPrivateLayout());
+		model.setLogo(soapModel.getLogo());
+		model.setLogoId(soapModel.getLogoId());
+		model.setThemeId(soapModel.getThemeId());
+		model.setColorSchemeId(soapModel.getColorSchemeId());
+		model.setWapThemeId(soapModel.getWapThemeId());
+		model.setWapColorSchemeId(soapModel.getWapColorSchemeId());
+		model.setCss(soapModel.getCss());
+		model.setPageCount(soapModel.getPageCount());
+		model.setVirtualHost(soapModel.getVirtualHost());
+
+		return model;
+	}
+
+	public static List<LayoutSet> toModels(LayoutSetSoap[] soapModels) {
+		List<LayoutSet> models = new ArrayList<LayoutSet>(soapModels.length);
+
+		for (LayoutSetSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.LayoutSet"));
 

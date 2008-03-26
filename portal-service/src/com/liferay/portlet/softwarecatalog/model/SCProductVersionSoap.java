@@ -70,9 +70,7 @@ public class SCProductVersionSoap implements Serializable {
 		List<SCProductVersion> models) {
 		List<SCProductVersionSoap> soapModels = new ArrayList<SCProductVersionSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			SCProductVersion model = models.get(i);
-
+		for (SCProductVersion model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

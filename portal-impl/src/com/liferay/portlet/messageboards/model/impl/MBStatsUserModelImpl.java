@@ -28,6 +28,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.messageboards.model.MBStatsUser;
+import com.liferay.portlet.messageboards.model.MBStatsUserSoap;
 
 import java.io.Serializable;
 
@@ -35,7 +36,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="MBStatsUserModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -79,6 +82,29 @@ public class MBStatsUserModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBStatsUser"),
 			true);
+
+	public static MBStatsUser toModel(MBStatsUserSoap soapModel) {
+		MBStatsUser model = new MBStatsUserImpl();
+
+		model.setStatsUserId(soapModel.getStatsUserId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setUserId(soapModel.getUserId());
+		model.setMessageCount(soapModel.getMessageCount());
+		model.setLastPostDate(soapModel.getLastPostDate());
+
+		return model;
+	}
+
+	public static List<MBStatsUser> toModels(MBStatsUserSoap[] soapModels) {
+		List<MBStatsUser> models = new ArrayList<MBStatsUser>(soapModels.length);
+
+		for (MBStatsUserSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBStatsUser"));
 

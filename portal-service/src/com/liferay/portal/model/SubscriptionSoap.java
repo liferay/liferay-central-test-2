@@ -66,9 +66,7 @@ public class SubscriptionSoap implements Serializable {
 	public static SubscriptionSoap[] toSoapModels(List<Subscription> models) {
 		List<SubscriptionSoap> soapModels = new ArrayList<SubscriptionSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Subscription model = models.get(i);
-
+		for (Subscription model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

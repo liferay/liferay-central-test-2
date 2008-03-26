@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
+import com.liferay.portlet.announcements.model.AnnouncementsFlagSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="AnnouncementsFlagModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -80,6 +83,30 @@ public class AnnouncementsFlagModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.announcements.model.AnnouncementsFlag"),
 			true);
+
+	public static AnnouncementsFlag toModel(AnnouncementsFlagSoap soapModel) {
+		AnnouncementsFlag model = new AnnouncementsFlagImpl();
+
+		model.setFlagId(soapModel.getFlagId());
+		model.setUserId(soapModel.getUserId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setEntryId(soapModel.getEntryId());
+		model.setValue(soapModel.getValue());
+
+		return model;
+	}
+
+	public static List<AnnouncementsFlag> toModels(
+		AnnouncementsFlagSoap[] soapModels) {
+		List<AnnouncementsFlag> models = new ArrayList<AnnouncementsFlag>(soapModels.length);
+
+		for (AnnouncementsFlagSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.announcements.model.AnnouncementsFlag"));
 

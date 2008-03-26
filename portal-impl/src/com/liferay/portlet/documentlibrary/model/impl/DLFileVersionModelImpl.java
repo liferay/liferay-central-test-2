@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFileVersion;
+import com.liferay.portlet.documentlibrary.model.DLFileVersionSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="DLFileVersionModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -92,6 +95,33 @@ public class DLFileVersionModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFileVersion"),
 			true);
+
+	public static DLFileVersion toModel(DLFileVersionSoap soapModel) {
+		DLFileVersion model = new DLFileVersionImpl();
+
+		model.setFileVersionId(soapModel.getFileVersionId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setFolderId(soapModel.getFolderId());
+		model.setName(soapModel.getName());
+		model.setVersion(soapModel.getVersion());
+		model.setSize(soapModel.getSize());
+
+		return model;
+	}
+
+	public static List<DLFileVersion> toModels(DLFileVersionSoap[] soapModels) {
+		List<DLFileVersion> models = new ArrayList<DLFileVersion>(soapModels.length);
+
+		for (DLFileVersionSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFileVersion"));
 

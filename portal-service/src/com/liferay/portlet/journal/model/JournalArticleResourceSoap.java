@@ -61,9 +61,7 @@ public class JournalArticleResourceSoap implements Serializable {
 		List<JournalArticleResource> models) {
 		List<JournalArticleResourceSoap> soapModels = new ArrayList<JournalArticleResourceSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			JournalArticleResource model = models.get(i);
-
+		for (JournalArticleResource model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

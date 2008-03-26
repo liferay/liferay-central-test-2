@@ -29,12 +29,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalArticleImage;
+import com.liferay.portlet.journal.model.JournalArticleImageSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="JournalArticleImageModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -84,6 +88,32 @@ public class JournalArticleImageModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalArticleImage"),
 			true);
+
+	public static JournalArticleImage toModel(JournalArticleImageSoap soapModel) {
+		JournalArticleImage model = new JournalArticleImageImpl();
+
+		model.setArticleImageId(soapModel.getArticleImageId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setArticleId(soapModel.getArticleId());
+		model.setVersion(soapModel.getVersion());
+		model.setElName(soapModel.getElName());
+		model.setLanguageId(soapModel.getLanguageId());
+		model.setTempImage(soapModel.getTempImage());
+
+		return model;
+	}
+
+	public static List<JournalArticleImage> toModels(
+		JournalArticleImageSoap[] soapModels) {
+		List<JournalArticleImage> models = new ArrayList<JournalArticleImage>(soapModels.length);
+
+		for (JournalArticleImageSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticleImage"));
 

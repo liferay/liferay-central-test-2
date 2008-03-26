@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.JournalArticleSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="JournalArticleModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -152,6 +155,53 @@ public class JournalArticleModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.journal.model.JournalArticle"),
 			true);
+
+	public static JournalArticle toModel(JournalArticleSoap soapModel) {
+		JournalArticle model = new JournalArticleImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setId(soapModel.getId());
+		model.setResourcePrimKey(soapModel.getResourcePrimKey());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setArticleId(soapModel.getArticleId());
+		model.setVersion(soapModel.getVersion());
+		model.setTitle(soapModel.getTitle());
+		model.setDescription(soapModel.getDescription());
+		model.setContent(soapModel.getContent());
+		model.setType(soapModel.getType());
+		model.setStructureId(soapModel.getStructureId());
+		model.setTemplateId(soapModel.getTemplateId());
+		model.setDisplayDate(soapModel.getDisplayDate());
+		model.setApproved(soapModel.getApproved());
+		model.setApprovedByUserId(soapModel.getApprovedByUserId());
+		model.setApprovedByUserName(soapModel.getApprovedByUserName());
+		model.setApprovedDate(soapModel.getApprovedDate());
+		model.setExpired(soapModel.getExpired());
+		model.setExpirationDate(soapModel.getExpirationDate());
+		model.setReviewDate(soapModel.getReviewDate());
+		model.setIndexable(soapModel.getIndexable());
+		model.setSmallImage(soapModel.getSmallImage());
+		model.setSmallImageId(soapModel.getSmallImageId());
+		model.setSmallImageURL(soapModel.getSmallImageURL());
+
+		return model;
+	}
+
+	public static List<JournalArticle> toModels(JournalArticleSoap[] soapModels) {
+		List<JournalArticle> models = new ArrayList<JournalArticle>(soapModels.length);
+
+		for (JournalArticleSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.journal.model.JournalArticle"));
 

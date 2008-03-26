@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksEntrySoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="BookmarksEntryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -101,6 +104,36 @@ public class BookmarksEntryModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.bookmarks.model.BookmarksEntry"),
 			true);
+
+	public static BookmarksEntry toModel(BookmarksEntrySoap soapModel) {
+		BookmarksEntry model = new BookmarksEntryImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setEntryId(soapModel.getEntryId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setFolderId(soapModel.getFolderId());
+		model.setName(soapModel.getName());
+		model.setUrl(soapModel.getUrl());
+		model.setComments(soapModel.getComments());
+		model.setVisits(soapModel.getVisits());
+		model.setPriority(soapModel.getPriority());
+
+		return model;
+	}
+
+	public static List<BookmarksEntry> toModels(BookmarksEntrySoap[] soapModels) {
+		List<BookmarksEntry> models = new ArrayList<BookmarksEntry>(soapModels.length);
+
+		for (BookmarksEntrySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.bookmarks.model.BookmarksEntry"));
 

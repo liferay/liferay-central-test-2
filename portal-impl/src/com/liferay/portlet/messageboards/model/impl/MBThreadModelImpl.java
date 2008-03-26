@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.messageboards.model.MBThread;
+import com.liferay.portlet.messageboards.model.MBThreadSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="MBThreadModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -89,6 +92,32 @@ public class MBThreadModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.messageboards.model.MBThread"),
 			true);
+
+	public static MBThread toModel(MBThreadSoap soapModel) {
+		MBThread model = new MBThreadImpl();
+
+		model.setThreadId(soapModel.getThreadId());
+		model.setCategoryId(soapModel.getCategoryId());
+		model.setRootMessageId(soapModel.getRootMessageId());
+		model.setMessageCount(soapModel.getMessageCount());
+		model.setViewCount(soapModel.getViewCount());
+		model.setLastPostByUserId(soapModel.getLastPostByUserId());
+		model.setLastPostDate(soapModel.getLastPostDate());
+		model.setPriority(soapModel.getPriority());
+
+		return model;
+	}
+
+	public static List<MBThread> toModels(MBThreadSoap[] soapModels) {
+		List<MBThread> models = new ArrayList<MBThread>(soapModels.length);
+
+		for (MBThreadSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.messageboards.model.MBThread"));
 

@@ -65,9 +65,7 @@ public class MBBanSoap implements Serializable {
 	public static MBBanSoap[] toSoapModels(List<MBBan> models) {
 		List<MBBanSoap> soapModels = new ArrayList<MBBanSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			MBBan model = models.get(i);
-
+		for (MBBan model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

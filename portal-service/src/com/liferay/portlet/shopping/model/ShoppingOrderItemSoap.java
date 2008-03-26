@@ -68,9 +68,7 @@ public class ShoppingOrderItemSoap implements Serializable {
 		List<ShoppingOrderItem> models) {
 		List<ShoppingOrderItemSoap> soapModels = new ArrayList<ShoppingOrderItemSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ShoppingOrderItem model = models.get(i);
-
+		for (ShoppingOrderItem model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

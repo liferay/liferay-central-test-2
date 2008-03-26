@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.ExpandoValue;
+import com.liferay.portal.model.ExpandoValueSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="ExpandoValueModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -73,6 +77,28 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ExpandoValue"),
 			true);
+
+	public static ExpandoValue toModel(ExpandoValueSoap soapModel) {
+		ExpandoValue model = new ExpandoValueImpl();
+
+		model.setValueId(soapModel.getValueId());
+		model.setColumnId(soapModel.getColumnId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setValue(soapModel.getValue());
+
+		return model;
+	}
+
+	public static List<ExpandoValue> toModels(ExpandoValueSoap[] soapModels) {
+		List<ExpandoValue> models = new ArrayList<ExpandoValue>(soapModels.length);
+
+		for (ExpandoValueSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.ExpandoValue"));
 

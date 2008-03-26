@@ -80,9 +80,7 @@ public class JournalFeedSoap implements Serializable {
 	public static JournalFeedSoap[] toSoapModels(List<JournalFeed> models) {
 		List<JournalFeedSoap> soapModels = new ArrayList<JournalFeedSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			JournalFeed model = models.get(i);
-
+		for (JournalFeed model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

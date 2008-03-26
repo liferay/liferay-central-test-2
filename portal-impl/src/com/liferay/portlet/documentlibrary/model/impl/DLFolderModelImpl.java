@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.documentlibrary.model.DLFolder;
+import com.liferay.portlet.documentlibrary.model.DLFolderSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="DLFolderModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -101,6 +104,36 @@ public class DLFolderModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.documentlibrary.model.DLFolder"),
 			true);
+
+	public static DLFolder toModel(DLFolderSoap soapModel) {
+		DLFolder model = new DLFolderImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setFolderId(soapModel.getFolderId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setParentFolderId(soapModel.getParentFolderId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setLastPostDate(soapModel.getLastPostDate());
+
+		return model;
+	}
+
+	public static List<DLFolder> toModels(DLFolderSoap[] soapModels) {
+		List<DLFolder> models = new ArrayList<DLFolder>(soapModels.length);
+
+		for (DLFolderSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.documentlibrary.model.DLFolder"));
 

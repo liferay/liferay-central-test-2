@@ -75,9 +75,7 @@ public class ShoppingCouponSoap implements Serializable {
 	public static ShoppingCouponSoap[] toSoapModels(List<ShoppingCoupon> models) {
 		List<ShoppingCouponSoap> soapModels = new ArrayList<ShoppingCouponSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ShoppingCoupon model = models.get(i);
-
+		for (ShoppingCoupon model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

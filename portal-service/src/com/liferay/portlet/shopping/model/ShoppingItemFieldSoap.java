@@ -62,9 +62,7 @@ public class ShoppingItemFieldSoap implements Serializable {
 		List<ShoppingItemField> models) {
 		List<ShoppingItemFieldSoap> soapModels = new ArrayList<ShoppingItemFieldSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ShoppingItemField model = models.get(i);
-
+		for (ShoppingItemField model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

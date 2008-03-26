@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Address;
+import com.liferay.portal.model.AddressSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -35,7 +36,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="AddressModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -118,6 +121,42 @@ public class AddressModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Address"),
 			true);
+
+	public static Address toModel(AddressSoap soapModel) {
+		Address model = new AddressImpl();
+
+		model.setAddressId(soapModel.getAddressId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setStreet1(soapModel.getStreet1());
+		model.setStreet2(soapModel.getStreet2());
+		model.setStreet3(soapModel.getStreet3());
+		model.setCity(soapModel.getCity());
+		model.setZip(soapModel.getZip());
+		model.setRegionId(soapModel.getRegionId());
+		model.setCountryId(soapModel.getCountryId());
+		model.setTypeId(soapModel.getTypeId());
+		model.setMailing(soapModel.getMailing());
+		model.setPrimary(soapModel.getPrimary());
+
+		return model;
+	}
+
+	public static List<Address> toModels(AddressSoap[] soapModels) {
+		List<Address> models = new ArrayList<Address>(soapModels.length);
+
+		for (AddressSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Address"));
 

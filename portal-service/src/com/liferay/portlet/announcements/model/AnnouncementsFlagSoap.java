@@ -63,9 +63,7 @@ public class AnnouncementsFlagSoap implements Serializable {
 		List<AnnouncementsFlag> models) {
 		List<AnnouncementsFlagSoap> soapModels = new ArrayList<AnnouncementsFlagSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			AnnouncementsFlag model = models.get(i);
-
+		for (AnnouncementsFlag model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

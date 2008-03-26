@@ -62,9 +62,7 @@ public class OrgGroupPermissionSoap implements Serializable {
 		List<OrgGroupPermission> models) {
 		List<OrgGroupPermissionSoap> soapModels = new ArrayList<OrgGroupPermissionSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			OrgGroupPermission model = models.get(i);
-
+		for (OrgGroupPermission model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

@@ -59,9 +59,7 @@ public class ResourceSoap implements Serializable {
 	public static ResourceSoap[] toSoapModels(List<Resource> models) {
 		List<ResourceSoap> soapModels = new ArrayList<ResourceSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Resource model = models.get(i);
-
+		for (Resource model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

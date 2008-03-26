@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Phone;
+import com.liferay.portal.model.PhoneSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -35,7 +36,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="PhoneModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -100,6 +103,36 @@ public class PhoneModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Phone"),
 			true);
+
+	public static Phone toModel(PhoneSoap soapModel) {
+		Phone model = new PhoneImpl();
+
+		model.setPhoneId(soapModel.getPhoneId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setNumber(soapModel.getNumber());
+		model.setExtension(soapModel.getExtension());
+		model.setTypeId(soapModel.getTypeId());
+		model.setPrimary(soapModel.getPrimary());
+
+		return model;
+	}
+
+	public static List<Phone> toModels(PhoneSoap[] soapModels) {
+		List<Phone> models = new ArrayList<Phone>(soapModels.length);
+
+		for (PhoneSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Phone"));
 

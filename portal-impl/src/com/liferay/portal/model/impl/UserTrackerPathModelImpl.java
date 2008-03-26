@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.UserTrackerPath;
+import com.liferay.portal.model.UserTrackerPathSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -34,7 +35,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="UserTrackerPathModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -75,6 +78,29 @@ public class UserTrackerPathModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.UserTrackerPath"),
 			true);
+
+	public static UserTrackerPath toModel(UserTrackerPathSoap soapModel) {
+		UserTrackerPath model = new UserTrackerPathImpl();
+
+		model.setUserTrackerPathId(soapModel.getUserTrackerPathId());
+		model.setUserTrackerId(soapModel.getUserTrackerId());
+		model.setPath(soapModel.getPath());
+		model.setPathDate(soapModel.getPathDate());
+
+		return model;
+	}
+
+	public static List<UserTrackerPath> toModels(
+		UserTrackerPathSoap[] soapModels) {
+		List<UserTrackerPath> models = new ArrayList<UserTrackerPath>(soapModels.length);
+
+		for (UserTrackerPathSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserTrackerPath"));
 

@@ -71,9 +71,7 @@ public class MBMessageSoap implements Serializable {
 	public static MBMessageSoap[] toSoapModels(List<MBMessage> models) {
 		List<MBMessageSoap> soapModels = new ArrayList<MBMessageSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			MBMessage model = models.get(i);
-
+		for (MBMessage model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

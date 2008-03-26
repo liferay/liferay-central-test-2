@@ -30,6 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
+import com.liferay.portlet.announcements.model.AnnouncementsEntrySoap;
 
 import java.io.Serializable;
 
@@ -37,7 +38,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="AnnouncementsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -117,6 +120,42 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.announcements.model.AnnouncementsEntry"),
 			true);
+
+	public static AnnouncementsEntry toModel(AnnouncementsEntrySoap soapModel) {
+		AnnouncementsEntry model = new AnnouncementsEntryImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setEntryId(soapModel.getEntryId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setTitle(soapModel.getTitle());
+		model.setContent(soapModel.getContent());
+		model.setUrl(soapModel.getUrl());
+		model.setType(soapModel.getType());
+		model.setDisplayDate(soapModel.getDisplayDate());
+		model.setExpirationDate(soapModel.getExpirationDate());
+		model.setPriority(soapModel.getPriority());
+		model.setAlert(soapModel.getAlert());
+
+		return model;
+	}
+
+	public static List<AnnouncementsEntry> toModels(
+		AnnouncementsEntrySoap[] soapModels) {
+		List<AnnouncementsEntry> models = new ArrayList<AnnouncementsEntry>(soapModels.length);
+
+		for (AnnouncementsEntrySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.announcements.model.AnnouncementsEntry"));
 

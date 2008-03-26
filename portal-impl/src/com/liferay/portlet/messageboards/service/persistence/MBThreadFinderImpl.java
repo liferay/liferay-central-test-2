@@ -69,7 +69,9 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 	public static String FIND_BY_S_G_U =
 		MBThreadFinder.class.getName() + ".findByS_G_U";
 
-	public int countByCategoryIds(List categoryIds) throws SystemException {
+	public int countByCategoryIds(List<Long> categoryIds)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
@@ -87,15 +89,15 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < categoryIds.size(); i++) {
-				Long categoryId = (Long)categoryIds.get(i);
+				Long categoryId = categoryIds.get(i);
 
 				qPos.add(categoryId);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Integer> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Integer count = (Integer)itr.next();
+				Integer count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -128,10 +130,10 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 
 			qPos.add(groupId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -165,10 +167,10 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -203,10 +205,10 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -223,7 +225,7 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 		}
 	}
 
-	public List findByGroupId(long groupId, int begin, int end)
+	public List<MBThread> findByGroupId(long groupId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -241,7 +243,8 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 
 			qPos.add(groupId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<MBThread>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -251,7 +254,7 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 		}
 	}
 
-	public List findByG_U(long groupId, long userId, int begin, int end)
+	public List<MBThread> findByG_U(long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -270,7 +273,8 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<MBThread>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -280,7 +284,8 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 		}
 	}
 
-	public List findByS_G_U(long groupId, long userId, int begin, int end)
+	public List<MBThread> findByS_G_U(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -300,7 +305,8 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<MBThread>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -310,7 +316,7 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 		}
 	}
 
-	protected String getCategoryIds(List categoryIds) {
+	protected String getCategoryIds(List<Long> categoryIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {

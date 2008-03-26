@@ -84,9 +84,7 @@ public class ContactSoap implements Serializable {
 	public static ContactSoap[] toSoapModels(List<Contact> models) {
 		List<ContactSoap> soapModels = new ArrayList<ContactSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Contact model = models.get(i);
-
+		for (Contact model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

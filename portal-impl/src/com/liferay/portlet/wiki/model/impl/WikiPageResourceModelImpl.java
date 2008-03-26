@@ -29,12 +29,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.wiki.model.WikiPageResource;
+import com.liferay.portlet.wiki.model.WikiPageResourceSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="WikiPageResourceModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -72,6 +76,28 @@ public class WikiPageResourceModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.wiki.model.WikiPageResource"),
 			true);
+
+	public static WikiPageResource toModel(WikiPageResourceSoap soapModel) {
+		WikiPageResource model = new WikiPageResourceImpl();
+
+		model.setResourcePrimKey(soapModel.getResourcePrimKey());
+		model.setNodeId(soapModel.getNodeId());
+		model.setTitle(soapModel.getTitle());
+
+		return model;
+	}
+
+	public static List<WikiPageResource> toModels(
+		WikiPageResourceSoap[] soapModels) {
+		List<WikiPageResource> models = new ArrayList<WikiPageResource>(soapModels.length);
+
+		for (WikiPageResourceSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiPageResource"));
 

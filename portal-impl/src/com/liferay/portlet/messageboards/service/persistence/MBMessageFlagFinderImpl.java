@@ -61,10 +61,10 @@ public class MBMessageFlagFinderImpl implements MBMessageFlagFinder {
 			qPos.add(threadId);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();

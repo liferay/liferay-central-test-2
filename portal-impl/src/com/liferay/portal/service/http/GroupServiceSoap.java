@@ -166,10 +166,11 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupSoap[] getOrganizationsGroups(
-		java.util.List<com.liferay.portal.model.Organization> organizations)
+		com.liferay.portal.model.OrganizationSoap[] organizations)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getOrganizationsGroups(organizations);
+			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getOrganizationsGroups(com.liferay.portal.model.impl.OrganizationModelImpl.toModels(
+						organizations));
 
 			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}
@@ -181,10 +182,11 @@ public class GroupServiceSoap {
 	}
 
 	public static com.liferay.portal.model.GroupSoap[] getUserGroupsGroups(
-		java.util.List<com.liferay.portal.model.UserGroup> userGroups)
+		com.liferay.portal.model.UserGroupSoap[] userGroups)
 		throws RemoteException {
 		try {
-			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getUserGroupsGroups(userGroups);
+			java.util.List<com.liferay.portal.model.Group> returnValue = GroupServiceUtil.getUserGroupsGroups(com.liferay.portal.model.impl.UserGroupModelImpl.toModels(
+						userGroups));
 
 			return com.liferay.portal.model.GroupSoap.toSoapModels(returnValue);
 		}

@@ -233,6 +233,30 @@ public class ArrayUtil_IW {
 		return ArrayUtil.toArray(array);
 	}
 
+	public java.lang.Boolean[] toArray(java.util.List<Boolean> list) {
+		return ArrayUtil.toArray(list);
+	}
+
+	public java.lang.Double[] toArray(java.util.List<Double> list) {
+		return ArrayUtil.toArray(list);
+	}
+
+	public java.lang.Float[] toArray(java.util.List<Float> list) {
+		return ArrayUtil.toArray(list);
+	}
+
+	public java.lang.Integer[] toArray(java.util.List<Integer> list) {
+		return ArrayUtil.toArray(list);
+	}
+
+	public java.lang.Long[] toArray(java.util.List<Long> list) {
+		return ArrayUtil.toArray(list);
+	}
+
+	public java.lang.Short[] toArray(java.util.List<Short> list) {
+		return ArrayUtil.toArray(list);
+	}
+
 	private ArrayUtil_IW() {
 	}
 

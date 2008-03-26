@@ -1090,12 +1090,22 @@ public class ServiceBuilder {
 	}
 
 	public Entity getEntity(String name) throws IOException {
+		Entity entity = _entityPool.get(name);
+
+		if (entity != null) {
+			return entity;
+		}
+
 		int pos = name.lastIndexOf(".");
 
 		if (pos == -1) {
 			pos = _ejbList.indexOf(new Entity(name));
 
-			return _ejbList.get(pos);
+			entity = _ejbList.get(pos);
+
+			_entityPool.put(name, entity);
+
+			return entity;
 		}
 		else {
 			String refPackage = name.substring(0, pos);
@@ -1131,13 +1141,28 @@ public class ServiceBuilder {
 				_propsUtilPackage, _springHibernatePackage, _springUtilPackage,
 				_testDir, false);
 
-			Entity entity = serviceBuilder.getEntity(refEntity);
+			entity = serviceBuilder.getEntity(refEntity);
+
+			_entityPool.put(name, entity);
 
 			if (useTempFile) {
 				refFile.deleteOnExit();
 			}
 
 			return entity;
+		}
+	}
+
+	public Entity getEntityByGenericsName(String genericsName) {
+		try {
+			String name = genericsName.substring(1, genericsName.length() - 1);
+
+			name = StringUtil.replace(name, ".model.", ".");
+
+			return getEntity(name);
+		}
+		catch (Exception e) {
+			return null;
 		}
 	}
 
@@ -1248,6 +1273,23 @@ public class ServiceBuilder {
 		}
 		else {
 			return null;
+		}
+	}
+
+	public boolean hasEntityByGenericsName(String genericsName) {
+		if (Validator.isNull(genericsName)) {
+			return false;
+		}
+
+		if (genericsName.indexOf(".model.") == -1) {
+			return false;
+		}
+
+		if (getEntityByGenericsName(genericsName) == null) {
+			return false;
+		}
+		else {
+			return true;
 		}
 	}
 
@@ -3276,5 +3318,6 @@ public class ServiceBuilder {
 	private String _testOutputPath;
 	private String _packagePath;
 	private List<Entity> _ejbList;
+	private Map<String, Entity> _entityPool = new HashMap<String, Entity>();
 
 }

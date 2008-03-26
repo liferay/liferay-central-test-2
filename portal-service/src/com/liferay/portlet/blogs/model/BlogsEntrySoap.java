@@ -69,9 +69,7 @@ public class BlogsEntrySoap implements Serializable {
 	public static BlogsEntrySoap[] toSoapModels(List<BlogsEntry> models) {
 		List<BlogsEntrySoap> soapModels = new ArrayList<BlogsEntrySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			BlogsEntry model = models.get(i);
-
+		for (BlogsEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

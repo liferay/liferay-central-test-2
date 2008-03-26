@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.tags.model.TagsAssetSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="TagsAssetModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -131,6 +134,46 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tags.model.TagsAsset"),
 			true);
+
+	public static TagsAsset toModel(TagsAssetSoap soapModel) {
+		TagsAsset model = new TagsAssetImpl();
+
+		model.setAssetId(soapModel.getAssetId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setStartDate(soapModel.getStartDate());
+		model.setEndDate(soapModel.getEndDate());
+		model.setPublishDate(soapModel.getPublishDate());
+		model.setExpirationDate(soapModel.getExpirationDate());
+		model.setMimeType(soapModel.getMimeType());
+		model.setTitle(soapModel.getTitle());
+		model.setDescription(soapModel.getDescription());
+		model.setSummary(soapModel.getSummary());
+		model.setUrl(soapModel.getUrl());
+		model.setHeight(soapModel.getHeight());
+		model.setWidth(soapModel.getWidth());
+		model.setPriority(soapModel.getPriority());
+		model.setViewCount(soapModel.getViewCount());
+
+		return model;
+	}
+
+	public static List<TagsAsset> toModels(TagsAssetSoap[] soapModels) {
+		List<TagsAsset> models = new ArrayList<TagsAsset>(soapModels.length);
+
+		for (TagsAssetSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_TAGSASSETS_TAGSENTRIES = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.TagsAssets_TagsEntries"),
 			true);

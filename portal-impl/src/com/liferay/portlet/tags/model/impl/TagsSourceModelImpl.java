@@ -29,12 +29,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.model.TagsSource;
+import com.liferay.portlet.tags.model.TagsSourceSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="TagsSourceModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -75,6 +79,28 @@ public class TagsSourceModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tags.model.TagsSource"),
 			true);
+
+	public static TagsSource toModel(TagsSourceSoap soapModel) {
+		TagsSource model = new TagsSourceImpl();
+
+		model.setSourceId(soapModel.getSourceId());
+		model.setParentSourceId(soapModel.getParentSourceId());
+		model.setName(soapModel.getName());
+		model.setAcronym(soapModel.getAcronym());
+
+		return model;
+	}
+
+	public static List<TagsSource> toModels(TagsSourceSoap[] soapModels) {
+		List<TagsSource> models = new ArrayList<TagsSource>(soapModels.length);
+
+		for (TagsSourceSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsSource"));
 

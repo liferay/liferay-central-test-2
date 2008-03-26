@@ -108,9 +108,7 @@ public class ShoppingOrderSoap implements Serializable {
 	public static ShoppingOrderSoap[] toSoapModels(List<ShoppingOrder> models) {
 		List<ShoppingOrderSoap> soapModels = new ArrayList<ShoppingOrderSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ShoppingOrder model = models.get(i);
-
+		for (ShoppingOrder model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

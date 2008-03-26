@@ -28,12 +28,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
+import com.liferay.portlet.softwarecatalog.model.SCProductScreenshotSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="SCProductScreenshotModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -83,6 +87,32 @@ public class SCProductScreenshotModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"),
 			true);
+
+	public static SCProductScreenshot toModel(SCProductScreenshotSoap soapModel) {
+		SCProductScreenshot model = new SCProductScreenshotImpl();
+
+		model.setProductScreenshotId(soapModel.getProductScreenshotId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setProductEntryId(soapModel.getProductEntryId());
+		model.setThumbnailId(soapModel.getThumbnailId());
+		model.setFullImageId(soapModel.getFullImageId());
+		model.setPriority(soapModel.getPriority());
+
+		return model;
+	}
+
+	public static List<SCProductScreenshot> toModels(
+		SCProductScreenshotSoap[] soapModels) {
+		List<SCProductScreenshot> models = new ArrayList<SCProductScreenshot>(soapModels.length);
+
+		for (SCProductScreenshotSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.softwarecatalog.model.SCProductScreenshot"));
 

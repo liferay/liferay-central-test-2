@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.Account;
+import com.liferay.portal.model.AccountSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -34,7 +35,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="AccountModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -111,6 +114,40 @@ public class AccountModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.Account"),
 			true);
+
+	public static Account toModel(AccountSoap soapModel) {
+		Account model = new AccountImpl();
+
+		model.setAccountId(soapModel.getAccountId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setParentAccountId(soapModel.getParentAccountId());
+		model.setName(soapModel.getName());
+		model.setLegalName(soapModel.getLegalName());
+		model.setLegalId(soapModel.getLegalId());
+		model.setLegalType(soapModel.getLegalType());
+		model.setSicCode(soapModel.getSicCode());
+		model.setTickerSymbol(soapModel.getTickerSymbol());
+		model.setIndustry(soapModel.getIndustry());
+		model.setType(soapModel.getType());
+		model.setSize(soapModel.getSize());
+
+		return model;
+	}
+
+	public static List<Account> toModels(AccountSoap[] soapModels) {
+		List<Account> models = new ArrayList<Account>(soapModels.length);
+
+		for (AccountSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.Account"));
 

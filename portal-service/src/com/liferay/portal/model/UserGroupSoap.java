@@ -61,9 +61,7 @@ public class UserGroupSoap implements Serializable {
 	public static UserGroupSoap[] toSoapModels(List<UserGroup> models) {
 		List<UserGroupSoap> soapModels = new ArrayList<UserGroupSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			UserGroup model = models.get(i);
-
+		for (UserGroup model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

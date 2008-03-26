@@ -65,9 +65,7 @@ public class UserTrackerSoap implements Serializable {
 	public static UserTrackerSoap[] toSoapModels(List<UserTracker> models) {
 		List<UserTrackerSoap> soapModels = new ArrayList<UserTrackerSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			UserTracker model = models.get(i);
-
+		for (UserTracker model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

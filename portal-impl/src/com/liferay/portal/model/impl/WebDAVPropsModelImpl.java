@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.WebDAVProps;
+import com.liferay.portal.model.WebDAVPropsSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -34,7 +35,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="WebDAVPropsModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -84,6 +87,31 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.WebDAVProps"),
 			true);
+
+	public static WebDAVProps toModel(WebDAVPropsSoap soapModel) {
+		WebDAVProps model = new WebDAVPropsImpl();
+
+		model.setWebDavPropsId(soapModel.getWebDavPropsId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setClassNameId(soapModel.getClassNameId());
+		model.setClassPK(soapModel.getClassPK());
+		model.setProps(soapModel.getProps());
+
+		return model;
+	}
+
+	public static List<WebDAVProps> toModels(WebDAVPropsSoap[] soapModels) {
+		List<WebDAVProps> models = new ArrayList<WebDAVProps>(soapModels.length);
+
+		for (WebDAVPropsSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.WebDAVProps"));
 

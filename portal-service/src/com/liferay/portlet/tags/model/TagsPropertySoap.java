@@ -66,9 +66,7 @@ public class TagsPropertySoap implements Serializable {
 	public static TagsPropertySoap[] toSoapModels(List<TagsProperty> models) {
 		List<TagsPropertySoap> soapModels = new ArrayList<TagsPropertySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			TagsProperty model = models.get(i);
-
+		for (TagsProperty model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

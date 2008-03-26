@@ -312,11 +312,12 @@ public class ExpandoValueServiceSoap {
 	}
 
 	public static long setRowValues(long tableId,
-		java.util.List<com.liferay.portal.model.ExpandoValue> expandoValues)
+		com.liferay.portal.model.ExpandoValueSoap[] expandoValues)
 		throws RemoteException {
 		try {
 			long returnValue = ExpandoValueServiceUtil.setRowValues(tableId,
-					expandoValues);
+					com.liferay.portal.model.impl.ExpandoValueModelImpl.toModels(
+						expandoValues));
 
 			return returnValue;
 		}
@@ -328,11 +329,13 @@ public class ExpandoValueServiceSoap {
 	}
 
 	public static long setRowValues(long tableId, long rowId,
-		java.util.List<com.liferay.portal.model.ExpandoValue> expandoValues)
+		com.liferay.portal.model.ExpandoValueSoap[] expandoValues)
 		throws RemoteException {
 		try {
 			long returnValue = ExpandoValueServiceUtil.setRowValues(tableId,
-					rowId, expandoValues);
+					rowId,
+					com.liferay.portal.model.impl.ExpandoValueModelImpl.toModels(
+						expandoValues));
 
 			return returnValue;
 		}

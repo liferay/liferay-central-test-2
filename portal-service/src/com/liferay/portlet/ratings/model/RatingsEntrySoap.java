@@ -66,9 +66,7 @@ public class RatingsEntrySoap implements Serializable {
 	public static RatingsEntrySoap[] toSoapModels(List<RatingsEntry> models) {
 		List<RatingsEntrySoap> soapModels = new ArrayList<RatingsEntrySoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			RatingsEntry model = models.get(i);
-
+		for (RatingsEntry model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

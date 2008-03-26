@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.UserGroupRole;
+import com.liferay.portal.model.UserGroupRoleSoap;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
 import com.liferay.portal.util.PropsUtil;
 
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="UserGroupRoleModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -70,6 +74,27 @@ public class UserGroupRoleModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.UserGroupRole"),
 			true);
+
+	public static UserGroupRole toModel(UserGroupRoleSoap soapModel) {
+		UserGroupRole model = new UserGroupRoleImpl();
+
+		model.setUserId(soapModel.getUserId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setRoleId(soapModel.getRoleId());
+
+		return model;
+	}
+
+	public static List<UserGroupRole> toModels(UserGroupRoleSoap[] soapModels) {
+		List<UserGroupRole> models = new ArrayList<UserGroupRole>(soapModels.length);
+
+		for (UserGroupRoleSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserGroupRole"));
 

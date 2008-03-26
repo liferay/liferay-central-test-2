@@ -61,9 +61,7 @@ public class PortletSoap implements Serializable {
 	public static PortletSoap[] toSoapModels(List<Portlet> models) {
 		List<PortletSoap> soapModels = new ArrayList<PortletSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Portlet model = models.get(i);
-
+		for (Portlet model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

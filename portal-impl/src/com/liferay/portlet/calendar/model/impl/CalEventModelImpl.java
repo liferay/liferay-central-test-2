@@ -30,6 +30,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.calendar.model.CalEvent;
+import com.liferay.portlet.calendar.model.CalEventSoap;
 
 import java.io.Serializable;
 
@@ -37,7 +38,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="CalEventModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -132,6 +135,46 @@ public class CalEventModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.calendar.model.CalEvent"),
 			true);
+
+	public static CalEvent toModel(CalEventSoap soapModel) {
+		CalEvent model = new CalEventImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setEventId(soapModel.getEventId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setTitle(soapModel.getTitle());
+		model.setDescription(soapModel.getDescription());
+		model.setStartDate(soapModel.getStartDate());
+		model.setEndDate(soapModel.getEndDate());
+		model.setDurationHour(soapModel.getDurationHour());
+		model.setDurationMinute(soapModel.getDurationMinute());
+		model.setAllDay(soapModel.getAllDay());
+		model.setTimeZoneSensitive(soapModel.getTimeZoneSensitive());
+		model.setType(soapModel.getType());
+		model.setRepeating(soapModel.getRepeating());
+		model.setRecurrence(soapModel.getRecurrence());
+		model.setRemindBy(soapModel.getRemindBy());
+		model.setFirstReminder(soapModel.getFirstReminder());
+		model.setSecondReminder(soapModel.getSecondReminder());
+
+		return model;
+	}
+
+	public static List<CalEvent> toModels(CalEventSoap[] soapModels) {
+		List<CalEvent> models = new ArrayList<CalEvent>(soapModels.length);
+
+		for (CalEventSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.calendar.model.CalEvent"));
 

@@ -69,9 +69,7 @@ public class GroupSoap implements Serializable {
 	public static GroupSoap[] toSoapModels(List<Group> models) {
 		List<GroupSoap> soapModels = new ArrayList<GroupSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Group model = models.get(i);
-
+		for (Group model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

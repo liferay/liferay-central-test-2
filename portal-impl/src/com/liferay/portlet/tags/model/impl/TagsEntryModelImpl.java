@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.model.TagsEntry;
+import com.liferay.portlet.tags.model.TagsEntrySoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="TagsEntryModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -86,6 +89,31 @@ public class TagsEntryModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.tags.model.TagsEntry"),
 			true);
+
+	public static TagsEntry toModel(TagsEntrySoap soapModel) {
+		TagsEntry model = new TagsEntryImpl();
+
+		model.setEntryId(soapModel.getEntryId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setName(soapModel.getName());
+
+		return model;
+	}
+
+	public static List<TagsEntry> toModels(TagsEntrySoap[] soapModels) {
+		List<TagsEntry> models = new ArrayList<TagsEntry>(soapModels.length);
+
+		for (TagsEntrySoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_TAGSASSETS_TAGSENTRIES = com.liferay.portlet.tags.model.impl.TagsAssetModelImpl.CACHE_ENABLED_TAGSASSETS_TAGSENTRIES;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.tags.model.TagsEntry"));

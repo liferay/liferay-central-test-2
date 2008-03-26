@@ -29,12 +29,16 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.softwarecatalog.model.SCLicense;
+import com.liferay.portlet.softwarecatalog.model.SCLicenseSoap;
 
 import java.io.Serializable;
 
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="SCLicenseModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -81,6 +85,30 @@ public class SCLicenseModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.softwarecatalog.model.SCLicense"),
 			true);
+
+	public static SCLicense toModel(SCLicenseSoap soapModel) {
+		SCLicense model = new SCLicenseImpl();
+
+		model.setLicenseId(soapModel.getLicenseId());
+		model.setName(soapModel.getName());
+		model.setUrl(soapModel.getUrl());
+		model.setOpenSource(soapModel.getOpenSource());
+		model.setActive(soapModel.getActive());
+		model.setRecommended(soapModel.getRecommended());
+
+		return model;
+	}
+
+	public static List<SCLicense> toModels(SCLicenseSoap[] soapModels) {
+		List<SCLicense> models = new ArrayList<SCLicense>(soapModels.length);
+
+		for (SCLicenseSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_SCLICENSES_SCPRODUCTENTRIES = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.SCLicenses_SCProductEntries"),
 			true);

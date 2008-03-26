@@ -62,9 +62,7 @@ public class ServiceComponentSoap implements Serializable {
 		List<ServiceComponent> models) {
 		List<ServiceComponentSoap> soapModels = new ArrayList<ServiceComponentSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			ServiceComponent model = models.get(i);
-
+		for (ServiceComponent model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

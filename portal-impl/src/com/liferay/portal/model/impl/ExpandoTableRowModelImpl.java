@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.ExpandoTableRow;
+import com.liferay.portal.model.ExpandoTableRowSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -32,6 +33,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="ExpandoTableRowModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -66,6 +70,27 @@ public class ExpandoTableRowModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ExpandoTableRow"),
 			true);
+
+	public static ExpandoTableRow toModel(ExpandoTableRowSoap soapModel) {
+		ExpandoTableRow model = new ExpandoTableRowImpl();
+
+		model.setRowId(soapModel.getRowId());
+		model.setTableId(soapModel.getTableId());
+
+		return model;
+	}
+
+	public static List<ExpandoTableRow> toModels(
+		ExpandoTableRowSoap[] soapModels) {
+		List<ExpandoTableRow> models = new ArrayList<ExpandoTableRow>(soapModels.length);
+
+		for (ExpandoTableRowSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_EXPANDOTABLEROWS_EXPANDOVALUES = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.ExpandoTableRows_ExpandoValues"),
 			true);

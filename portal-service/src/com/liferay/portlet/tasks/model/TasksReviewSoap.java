@@ -70,9 +70,7 @@ public class TasksReviewSoap implements Serializable {
 	public static TasksReviewSoap[] toSoapModels(List<TasksReview> models) {
 		List<TasksReviewSoap> soapModels = new ArrayList<TasksReviewSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			TasksReview model = models.get(i);
-
+		for (TasksReview model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

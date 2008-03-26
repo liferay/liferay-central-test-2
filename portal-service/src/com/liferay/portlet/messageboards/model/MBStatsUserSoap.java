@@ -62,9 +62,7 @@ public class MBStatsUserSoap implements Serializable {
 	public static MBStatsUserSoap[] toSoapModels(List<MBStatsUser> models) {
 		List<MBStatsUserSoap> soapModels = new ArrayList<MBStatsUserSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			MBStatsUser model = models.get(i);
-
+		for (MBStatsUser model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

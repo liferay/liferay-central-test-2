@@ -60,9 +60,7 @@ public class TagsSourceSoap implements Serializable {
 	public static TagsSourceSoap[] toSoapModels(List<TagsSource> models) {
 		List<TagsSourceSoap> soapModels = new ArrayList<TagsSourceSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			TagsSource model = models.get(i);
-
+		for (TagsSource model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

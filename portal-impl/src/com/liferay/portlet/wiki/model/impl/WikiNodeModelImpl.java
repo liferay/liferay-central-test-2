@@ -29,6 +29,7 @@ import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.wiki.model.WikiNode;
+import com.liferay.portlet.wiki.model.WikiNodeSoap;
 
 import java.io.Serializable;
 
@@ -36,7 +37,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 /**
  * <a href="WikiNodeModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -98,6 +101,35 @@ public class WikiNodeModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.wiki.model.WikiNode"),
 			true);
+
+	public static WikiNode toModel(WikiNodeSoap soapModel) {
+		WikiNode model = new WikiNodeImpl();
+
+		model.setUuid(soapModel.getUuid());
+		model.setNodeId(soapModel.getNodeId());
+		model.setGroupId(soapModel.getGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setUserId(soapModel.getUserId());
+		model.setUserName(soapModel.getUserName());
+		model.setCreateDate(soapModel.getCreateDate());
+		model.setModifiedDate(soapModel.getModifiedDate());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+		model.setLastPostDate(soapModel.getLastPostDate());
+
+		return model;
+	}
+
+	public static List<WikiNode> toModels(WikiNodeSoap[] soapModels) {
+		List<WikiNode> models = new ArrayList<WikiNode>(soapModels.length);
+
+		for (WikiNodeSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portlet.wiki.model.WikiNode"));
 

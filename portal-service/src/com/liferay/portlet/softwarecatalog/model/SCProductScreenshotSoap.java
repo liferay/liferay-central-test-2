@@ -64,9 +64,7 @@ public class SCProductScreenshotSoap implements Serializable {
 		List<SCProductScreenshot> models) {
 		List<SCProductScreenshotSoap> soapModels = new ArrayList<SCProductScreenshotSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			SCProductScreenshot model = models.get(i);
-
+		for (SCProductScreenshot model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

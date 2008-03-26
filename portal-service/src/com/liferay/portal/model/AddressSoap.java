@@ -75,9 +75,7 @@ public class AddressSoap implements Serializable {
 	public static AddressSoap[] toSoapModels(List<Address> models) {
 		List<AddressSoap> soapModels = new ArrayList<AddressSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			Address model = models.get(i);
-
+		for (Address model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

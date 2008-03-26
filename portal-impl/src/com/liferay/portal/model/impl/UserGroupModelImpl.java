@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.model.UserGroupSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="UserGroupModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -76,6 +80,29 @@ public class UserGroupModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.UserGroup"),
 			true);
+
+	public static UserGroup toModel(UserGroupSoap soapModel) {
+		UserGroup model = new UserGroupImpl();
+
+		model.setUserGroupId(soapModel.getUserGroupId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setParentUserGroupId(soapModel.getParentUserGroupId());
+		model.setName(soapModel.getName());
+		model.setDescription(soapModel.getDescription());
+
+		return model;
+	}
+
+	public static List<UserGroup> toModels(UserGroupSoap[] soapModels) {
+		List<UserGroup> models = new ArrayList<UserGroup>(soapModels.length);
+
+		for (UserGroupSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final boolean CACHE_ENABLED_USERS_USERGROUPS = com.liferay.portal.model.impl.UserModelImpl.CACHE_ENABLED_USERS_USERGROUPS;
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.UserGroup"));

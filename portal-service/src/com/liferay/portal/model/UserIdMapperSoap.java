@@ -61,9 +61,7 @@ public class UserIdMapperSoap implements Serializable {
 	public static UserIdMapperSoap[] toSoapModels(List<UserIdMapper> models) {
 		List<UserIdMapperSoap> soapModels = new ArrayList<UserIdMapperSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			UserIdMapper model = models.get(i);
-
+		for (UserIdMapper model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

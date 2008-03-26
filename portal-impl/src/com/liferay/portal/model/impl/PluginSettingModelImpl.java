@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.model.PluginSettingSoap;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -33,6 +34,9 @@ import java.io.Serializable;
 import java.lang.reflect.Proxy;
 
 import java.sql.Types;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * <a href="PluginSettingModelImpl.java.html"><b><i>View Source</i></b></a>
@@ -79,6 +83,30 @@ public class PluginSettingModelImpl extends BaseModelImpl {
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.PluginSetting"),
 			true);
+
+	public static PluginSetting toModel(PluginSettingSoap soapModel) {
+		PluginSetting model = new PluginSettingImpl();
+
+		model.setPluginSettingId(soapModel.getPluginSettingId());
+		model.setCompanyId(soapModel.getCompanyId());
+		model.setPluginId(soapModel.getPluginId());
+		model.setPluginType(soapModel.getPluginType());
+		model.setRoles(soapModel.getRoles());
+		model.setActive(soapModel.getActive());
+
+		return model;
+	}
+
+	public static List<PluginSetting> toModels(PluginSettingSoap[] soapModels) {
+		List<PluginSetting> models = new ArrayList<PluginSetting>(soapModels.length);
+
+		for (PluginSettingSoap soapModel : soapModels) {
+			models.add(toModel(soapModel));
+		}
+
+		return models;
+	}
+
 	public static final long LOCK_EXPIRATION_TIME = GetterUtil.getLong(PropsUtil.get(
 				"lock.expiration.time.com.liferay.portal.model.PluginSetting"));
 

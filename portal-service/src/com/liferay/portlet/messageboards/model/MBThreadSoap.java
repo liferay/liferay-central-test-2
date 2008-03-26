@@ -65,9 +65,7 @@ public class MBThreadSoap implements Serializable {
 	public static MBThreadSoap[] toSoapModels(List<MBThread> models) {
 		List<MBThreadSoap> soapModels = new ArrayList<MBThreadSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			MBThread model = models.get(i);
-
+		for (MBThread model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 

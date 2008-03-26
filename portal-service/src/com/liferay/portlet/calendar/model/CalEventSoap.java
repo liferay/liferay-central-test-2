@@ -79,9 +79,7 @@ public class CalEventSoap implements Serializable {
 	public static CalEventSoap[] toSoapModels(List<CalEvent> models) {
 		List<CalEventSoap> soapModels = new ArrayList<CalEventSoap>(models.size());
 
-		for (int i = 0; i < models.size(); i++) {
-			CalEvent model = models.get(i);
-
+		for (CalEvent model : models) {
 			soapModels.add(toSoapModel(model));
 		}
 
