@@ -412,10 +412,10 @@ public class WikiUtil {
 	}
 
 	private static final Pattern _EDIT_PAGE_URL_PATTERN = Pattern.compile(
-		"\\[\\$BEGIN_PAGE_TITLE_EDIT\\$\\](.*)\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
+		"\\[\\$BEGIN_PAGE_TITLE_EDIT\\$\\](.*?)\\[\\$END_PAGE_TITLE_EDIT\\$\\]");
 
 	private static final Pattern _VIEW_PAGE_URL_PATTERN = Pattern.compile(
-		"\\[\\$BEGIN_PAGE_TITLE\\$\\](.*)\\[\\$END_PAGE_TITLE\\$\\]");
+		"\\[\\$BEGIN_PAGE_TITLE\\$\\](.*?)\\[\\$END_PAGE_TITLE\\$\\]");
 
 	private static WikiUtil _instance = new WikiUtil();
 
