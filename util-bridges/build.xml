@@ -7,7 +7,7 @@
 	<property name="jar.file" value="${ant.project.name}" />
 
 	<target name="jar" depends="build-common-java.jar">
-		<copy file="${jar.file}.jar" todir="${project.dir}/portal-impl/classes/com/liferay/portal/deploy/dependencies" />
-		<copy file="${project.dir}/lib/portal/portals-bridges.jar" todir="${project.dir}/portal-impl/classes/com/liferay/portal/deploy/dependencies" />
+		<copy file="${jar.file}.jar" todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies" />
+		<copy file="${project.dir}/lib/portal/portals-bridges.jar" todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies" />
 	</target>
 </project>

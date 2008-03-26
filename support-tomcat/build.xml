@@ -37,28 +37,12 @@
 
 		<mkdir dir="classes/com/liferay/portal/security/jaas" />
 
-		<if>
-			<and>
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<antelope:endswith string="${app.server.portal.dir}" with="/portal-web/docroot" />
-			</and>
-			<then>
-				<copy todir="classes/com/liferay/portal/security/jaas">
-					<fileset
-						dir="${project.dir}/portal-web/docroot/WEB-INF/classes/com/liferay/portal/security/jaas"
-						includes="PortalPrincipal.class,PortalRole.class"
-					/>
-				</copy>
-			</then>
-			<else>
-				<copy todir="classes/com/liferay/portal/security/jaas">
-					<fileset
-						dir="${project.dir}/portal-impl/classes/com/liferay/portal/security/jaas"
-						includes="PortalPrincipal.class,PortalRole.class"
-					/>
-				</copy>
-			</else>
-		</if>
+		<copy todir="classes/com/liferay/portal/security/jaas">
+			<fileset
+				dir="${portal-impl.classes.dir}/com/liferay/portal/security/jaas"
+				includes="PortalPrincipal.class,PortalRole.class"
+			/>
+		</copy>
 	</target>
 
 	<target name="deploy">

@@ -22,16 +22,12 @@
 			<then>
 				<delete file="${app.server.lib.portal.dir}/portal-impl.jar" />
 
-				<antcall target="compile-dependencies">
-					<param name="dependencies.classes.dir" value="${app.server.classes.portal.dir}" />
-				</antcall>
+				<antcall target="compile-dependencies" />
 
 				<antcall target="compile-fast" />
 			</then>
 			<else>
-				<antcall target="compile-dependencies">
-					<param name="dependencies.classes.dir" value="classes" />
-				</antcall>
+				<antcall target="compile-dependencies" />
 
 				<trycatch property="exception.message">
 					<try>
@@ -75,18 +71,18 @@ ${exception.message}
 	</target>
 
 	<target name="compile-dependencies">
-		<copy todir="${dependencies.classes.dir}/com/liferay/portal/definitions">
+		<copy todir="${portal-impl.classes.dir}/com/liferay/portal/definitions">
 			<fileset dir="${project.dir}/definitions" />
 		</copy>
 
-		<copy todir="${dependencies.classes.dir}/com/liferay/portal/deploy/dependencies">
+		<copy todir="${portal-impl.classes.dir}/com/liferay/portal/deploy/dependencies">
 			<fileset
 				dir="${project.dir}/portal-web/docroot/WEB-INF/tld"
 				includes="*.tld"
 			/>
 		</copy>
 
-		<copy todir="${dependencies.classes.dir}/com/liferay/portal/tools/dependencies">
+		<copy todir="${portal-impl.classes.dir}/com/liferay/portal/tools/dependencies">
 			<fileset
 				dir="src/com/liferay/portal/model/impl"
 				includes="BaseModelImpl.java"
@@ -109,14 +105,14 @@ ${exception.message}
 			/>
 		</copy>
 
-		<copy todir="${dependencies.classes.dir}/com/liferay/portal/tools/sql/dependencies">
+		<copy todir="${portal-impl.classes.dir}/com/liferay/portal/tools/sql/dependencies">
 			<fileset
 				dir="${project.dir}/sql"
 				includes="portal-data-common.sql,portal-data-counter.sql,portal-data-release.sql,portal-data-sample.vm,portal-tables.sql,indexes.sql,sequences.sql,update-*.sql"
 			/>
 		</copy>
 
-		<copy todir="${dependencies.classes.dir}">
+		<copy todir="${portal-impl.classes.dir}">
 			<fileset dir="src" excludes="**/*.java" />
 		</copy>
 	</target>
@@ -160,25 +156,12 @@ ${exception.message}
 	</target>
 
 	<target name="compile-tools">
-		<if>
-			<and>
-				<equals arg1="${app.server.type}" arg2="tomcat" />
-				<antelope:endswith string="${app.server.portal.dir}" with="/portal-web/docroot" />
-			</and>
-			<then>
-				<property name="classes.dir" value="${app.server.classes.portal.dir}" />
-			</then>
-			<else>
-				<property name="classes.dir" value="classes" />
-			</else>
-		</if>
-
 		<javac
 			classpathref="project.classpath"
 			compiler="${javac.compiler}"
 			debug="${javac.debug}"
 			deprecation="${javac.deprecation}"
-			destdir="${classes.dir}"
+			destdir="${portal-impl.classes.dir}"
 			includes="**/portal/tools/*.java,**/portal/tools/**/*.java"
 			nowarn="${javac.nowarn}"
 			srcdir="src"
@@ -190,11 +173,21 @@ ${exception.message}
 		<ant dir="../util-java" target="jar" inheritAll="false" />
 		<ant dir="../util-taglib" target="jar" inheritAll="false" />
 
-		<jar
-			basedir="classes"
-			excludes="portal-ext.properties,system-ext.properties"
-			jarfile="${jar.file}.jar"
-		/>
+		<if>
+			<not>
+				<and>
+					<equals arg1="${app.server.type}" arg2="tomcat" />
+					<antelope:endswith string="${app.server.portal.dir}" with="/portal-web/docroot" />
+				</and>
+			</not>
+			<then>
+				<jar
+					basedir="classes"
+					excludes="portal-ext.properties,system-ext.properties"
+					jarfile="${jar.file}.jar"
+				/>
+			</then>
+		</if>
 	</target>
 
 	<target name="javadoc">
@@ -232,10 +225,6 @@ ${exception.message}
 
 				<copy todir="${app.server.classes.portal.dir}">
 					<fileset dir="src" includes="**/dependencies/**,**/service.xml" />
-				</copy>
-
-				<copy todir="${app.server.classes.portal.dir}">
-					<fileset dir="classes" />
 				</copy>
 
 				<antcall target="compile" />
