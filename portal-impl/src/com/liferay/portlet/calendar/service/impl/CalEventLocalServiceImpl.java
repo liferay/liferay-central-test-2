@@ -52,6 +52,7 @@ import com.liferay.portlet.calendar.EventDurationException;
 import com.liferay.portlet.calendar.EventEndDateException;
 import com.liferay.portlet.calendar.EventStartDateException;
 import com.liferay.portlet.calendar.EventTitleException;
+import com.liferay.portlet.calendar.job.CheckEventJob;
 import com.liferay.portlet.calendar.model.CalEvent;
 import com.liferay.portlet.calendar.model.impl.CalEventImpl;
 import com.liferay.portlet.calendar.service.base.CalEventLocalServiceBaseImpl;
@@ -364,10 +365,11 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 			long diff =
 				(startDate.getTime().getTime() - now.getTime().getTime()) /
-				Time.MINUTE;
+				CheckEventJob.INTERVAL;
 
-			if ((diff == (event.getFirstReminder() / Time.MINUTE)) ||
-				(diff == (event.getSecondReminder() / Time.MINUTE))) {
+			if ((diff == (event.getFirstReminder() / CheckEventJob.INTERVAL)) ||
+				(diff == (event.getSecondReminder() / CheckEventJob.INTERVAL))
+				) {
 
 				remindUser(event, user);
 			}
