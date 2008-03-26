@@ -279,7 +279,9 @@ public class BrowserSniffer {
 	}
 
 	public static boolean is_rtf(HttpServletRequest req) {
-		if (is_ie_5_5_up(req) || is_mozilla_1_3_up(req)) {
+		if (is_ie_5_5_up(req) || is_mozilla_1_3_up(req) ||
+			(is_safari_3(req) && !is_safari_mobile(req))) {
+
 			return true;
 		}
 		else {
@@ -301,6 +303,48 @@ public class BrowserSniffer {
 		agent = agent.toLowerCase();
 
 		if (agent.indexOf("safari") != -1) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean is_safari_3(HttpServletRequest req) {
+		if (req == null) {
+			return false;
+		}
+
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+
+		if (agent == null) {
+			return false;
+		}
+
+		agent = agent.toLowerCase();
+
+		if (is_safari(req) && (agent.indexOf("version/3.") != -1)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean is_safari_mobile(HttpServletRequest req) {
+		if (req == null) {
+			return false;
+		}
+
+		String agent = req.getHeader(HttpHeaders.USER_AGENT);
+
+		if (agent == null) {
+			return false;
+		}
+
+		agent = agent.toLowerCase();
+
+		if (is_safari(req) && (agent.indexOf("mobile") != -1)) {
 			return true;
 		}
 		else {
