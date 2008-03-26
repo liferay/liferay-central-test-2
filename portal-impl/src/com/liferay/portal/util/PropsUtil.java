@@ -921,6 +921,8 @@ public class PropsUtil {
 
 	public static final String CALENDAR_EVENT_TYPES = "calendar.event.types";
 
+	public static final String CALENDAR_EVENT_CHECK_INTERVAL = "calendar.event.check.interval";
+
 	public static final String CALENDAR_EMAIL_FROM_NAME = "calendar.email.from.name";
 
 	public static final String CALENDAR_EMAIL_FROM_ADDRESS = "calendar.email.from.address";

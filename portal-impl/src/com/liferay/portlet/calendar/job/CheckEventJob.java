@@ -23,6 +23,8 @@
 package com.liferay.portlet.calendar.job;
 
 import com.liferay.portal.job.IntervalJob;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.calendar.service.CalEventLocalServiceUtil;
 import com.liferay.util.Time;
 
@@ -40,12 +42,11 @@ import org.quartz.JobExecutionException;
  */
 public class CheckEventJob implements IntervalJob {
 
-	public CheckEventJob() {
-		_interval = Time.MINUTE;
-	}
+	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
+		PropsUtil.CALENDAR_EVENT_CHECK_INTERVAL)) * Time.MINUTE;
 
 	public long getInterval() {
-		return _interval;
+		return INTERVAL;
 	}
 
 	public void execute(JobExecutionContext context)
