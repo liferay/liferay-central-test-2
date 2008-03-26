@@ -368,8 +368,8 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 				CheckEventJob.INTERVAL;
 
 			if ((diff == (event.getFirstReminder() / CheckEventJob.INTERVAL)) ||
-				(diff == (event.getSecondReminder() / CheckEventJob.INTERVAL))
-				) {
+				(diff ==
+					(event.getSecondReminder() / CheckEventJob.INTERVAL))) {
 
 				remindUser(event, user);
 			}
