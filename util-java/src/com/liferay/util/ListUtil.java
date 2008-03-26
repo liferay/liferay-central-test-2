@@ -222,4 +222,64 @@ public class ListUtil {
 		return sm.toString();
 	}
 
+	public static List<Boolean> toList(Boolean[] list) {
+		List<Boolean> newList = new ArrayList<Boolean>(list.length);
+
+		for (Boolean value : list) {
+			newList.add(value);
+		}
+
+		return newList;
+	}
+
+	public static List<Double> toList(Double[] list) {
+		List<Double> newList = new ArrayList<Double>(list.length);
+
+		for (Double value : list) {
+			newList.add(value);
+		}
+
+		return newList;
+	}
+
+	public static List<Float> toList(Float[] list) {
+		List<Float> newList = new ArrayList<Float>(list.length);
+
+		for (Float value : list) {
+			newList.add(value);
+		}
+
+		return newList;
+	}
+
+	public static List<Integer> toList(Integer[] list) {
+		List<Integer> newList = new ArrayList<Integer>(list.length);
+
+		for (Integer value : list) {
+			newList.add(value);
+		}
+
+		return newList;
+	}
+
+	public static List<Long> toList(Long[] list) {
+		List<Long> newList = new ArrayList<Long>(list.length);
+
+		for (Long value : list) {
+			newList.add(value);
+		}
+
+		return newList;
+	}
+
+	public static List<Short> toList(Short[] list) {
+		List<Short> newList = new ArrayList<Short>(list.length);
+
+		for (Short value : list) {
+			newList.add(value);
+		}
+
+		return newList;
+	}
+
 }
