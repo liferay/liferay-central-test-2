@@ -248,6 +248,21 @@
 		<ant dir="support-tomcat" target="jar" inheritAll="false" />
 	</target>
 
+	<target name="dtddoc">
+		<taskdef classname="DTDDoc.DTDDocTask" classpathref="lib.classpath" name="DTDDoc" />
+
+		<DTDDoc
+			destDir="api/definitions"
+			showFixmeTags="false"
+			showHiddenTags="false"
+			sourceDir="definitions"
+		>
+			<include name="liferay-*4_4*.dtd" />
+			<include name="liferay-*4_3*.dtd" />
+			<exclude name="liferay-plugin-repository_4_3_0.dtd" />
+		</DTDDoc>
+	</target>
+
 	<target name="java2html">
 		<delete dir="api" />
 
@@ -261,17 +276,6 @@
 		<ant dir="portal-impl" target="java2html" inheritAll="false" />
 
 		<ant dir="portal-client" target="java2html" inheritAll="false" />
-	</target>
-
-	<target name="dtddoc">
-		<taskdef name="DTDDoc" classname="DTDDoc.DTDDocTask" classpathref="lib.classpath"/>
-		
-		<DTDDoc showHiddenTags="false" showFixmeTags="false" sourceDir="definitions" 	
-			destDir="api/definitions" docTitle="Liferay Portal XML files documentation">
-			<include name="liferay-*4_4*.dtd"/>
-			<include name="liferay-*4_3*.dtd"/>
-			<exclude name="liferay-plugin-repository_4_3_0.dtd"/>
-		</DTDDoc>
 	</target>
 
 	<target name="javadoc">
@@ -1668,6 +1672,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<antcall target="deploy" />
 
 		<antcall target="java2html" />
+		<antcall target="dtddoc" />
 
 		<delete dir="dist" />
 		<mkdir dir="dist" />
