@@ -151,7 +151,7 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ShoppingCoupon shoppingCoupon) method. To improve performance, call update(ShoppingCoupon shoppingCoupon, boolean merge).");
+				"Using the deprecated update(ShoppingCoupon shoppingCoupon) method. Use update(ShoppingCoupon shoppingCoupon, boolean merge) instead.");
 		}
 
 		return update(shoppingCoupon, false);

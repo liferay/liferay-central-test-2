@@ -153,7 +153,7 @@ public class MBMessagePersistenceImpl extends BasePersistence
 	public MBMessage update(MBMessage mbMessage) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(MBMessage mbMessage) method. To improve performance, call update(MBMessage mbMessage, boolean merge).");
+				"Using the deprecated update(MBMessage mbMessage) method. Use update(MBMessage mbMessage, boolean merge) instead.");
 		}
 
 		return update(mbMessage, false);

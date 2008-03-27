@@ -71,7 +71,7 @@ public class OrgGroupRolePersistenceTest extends BasePersistenceTestCase {
 
 		OrgGroupRole newOrgGroupRole = _persistence.create(pk);
 
-		_persistence.update(newOrgGroupRole);
+		_persistence.update(newOrgGroupRole, false);
 
 		OrgGroupRole existingOrgGroupRole = _persistence.findByPrimaryKey(newOrgGroupRole.getPrimaryKey());
 
@@ -127,7 +127,7 @@ public class OrgGroupRolePersistenceTest extends BasePersistenceTestCase {
 
 		OrgGroupRole orgGroupRole = _persistence.create(pk);
 
-		_persistence.update(orgGroupRole);
+		_persistence.update(orgGroupRole, false);
 
 		return orgGroupRole;
 	}

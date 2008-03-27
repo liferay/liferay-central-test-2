@@ -149,7 +149,7 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(UserGroupRole userGroupRole) method. To improve performance, call update(UserGroupRole userGroupRole, boolean merge).");
+				"Using the deprecated update(UserGroupRole userGroupRole) method. Use update(UserGroupRole userGroupRole, boolean merge) instead.");
 		}
 
 		return update(userGroupRole, false);

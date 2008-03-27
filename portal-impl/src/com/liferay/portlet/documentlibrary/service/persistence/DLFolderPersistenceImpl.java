@@ -152,7 +152,7 @@ public class DLFolderPersistenceImpl extends BasePersistence
 	public DLFolder update(DLFolder dlFolder) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(DLFolder dlFolder) method. To improve performance, call update(DLFolder dlFolder, boolean merge).");
+				"Using the deprecated update(DLFolder dlFolder) method. Use update(DLFolder dlFolder, boolean merge) instead.");
 		}
 
 		return update(dlFolder, false);

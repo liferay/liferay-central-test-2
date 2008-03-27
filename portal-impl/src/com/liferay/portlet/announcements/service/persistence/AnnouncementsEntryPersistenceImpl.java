@@ -157,7 +157,7 @@ public class AnnouncementsEntryPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(AnnouncementsEntry announcementsEntry) method. To improve performance, call update(AnnouncementsEntry announcementsEntry, boolean merge).");
+				"Using the deprecated update(AnnouncementsEntry announcementsEntry) method. Use update(AnnouncementsEntry announcementsEntry, boolean merge) instead.");
 		}
 
 		return update(announcementsEntry, false);

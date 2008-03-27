@@ -148,7 +148,7 @@ public class ResourceCodePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ResourceCode resourceCode) method. To improve performance, call update(ResourceCode resourceCode, boolean merge).");
+				"Using the deprecated update(ResourceCode resourceCode) method. Use update(ResourceCode resourceCode, boolean merge) instead.");
 		}
 
 		return update(resourceCode, false);

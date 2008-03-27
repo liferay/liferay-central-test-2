@@ -145,7 +145,7 @@ public class CompanyPersistenceImpl extends BasePersistence
 	public Company update(Company company) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Company company) method. To improve performance, call update(Company company, boolean merge).");
+				"Using the deprecated update(Company company) method. Use update(Company company, boolean merge) instead.");
 		}
 
 		return update(company, false);

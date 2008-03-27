@@ -74,7 +74,7 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 		newExpandoColumn.setType(nextInt());
 		newExpandoColumn.setSettings(randomString());
 
-		_persistence.update(newExpandoColumn);
+		_persistence.update(newExpandoColumn, false);
 
 		ExpandoColumn existingExpandoColumn = _persistence.findByPrimaryKey(newExpandoColumn.getPrimaryKey());
 
@@ -134,7 +134,7 @@ public class ExpandoColumnPersistenceTest extends BasePersistenceTestCase {
 		expandoColumn.setType(nextInt());
 		expandoColumn.setSettings(randomString());
 
-		_persistence.update(expandoColumn);
+		_persistence.update(expandoColumn, false);
 
 		return expandoColumn;
 	}

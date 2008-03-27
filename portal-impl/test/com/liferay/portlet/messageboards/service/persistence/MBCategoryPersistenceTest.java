@@ -82,7 +82,7 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		newMBCategory.setDescription(randomString());
 		newMBCategory.setLastPostDate(nextDate());
 
-		_persistence.update(newMBCategory);
+		_persistence.update(newMBCategory, false);
 
 		MBCategory existingMBCategory = _persistence.findByPrimaryKey(newMBCategory.getPrimaryKey());
 
@@ -161,7 +161,7 @@ public class MBCategoryPersistenceTest extends BasePersistenceTestCase {
 		mbCategory.setDescription(randomString());
 		mbCategory.setLastPostDate(nextDate());
 
-		_persistence.update(mbCategory);
+		_persistence.update(mbCategory, false);
 
 		return mbCategory;
 	}

@@ -74,7 +74,7 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 		newPortlet.setRoles(randomString());
 		newPortlet.setActive(randomBoolean());
 
-		_persistence.update(newPortlet);
+		_persistence.update(newPortlet, false);
 
 		Portlet existingPortlet = _persistence.findByPrimaryKey(newPortlet.getPrimaryKey());
 
@@ -131,7 +131,7 @@ public class PortletPersistenceTest extends BasePersistenceTestCase {
 		portlet.setRoles(randomString());
 		portlet.setActive(randomBoolean());
 
-		_persistence.update(portlet);
+		_persistence.update(portlet, false);
 
 		return portlet;
 	}

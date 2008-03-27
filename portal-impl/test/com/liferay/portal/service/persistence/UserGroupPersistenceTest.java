@@ -74,7 +74,7 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		newUserGroup.setName(randomString());
 		newUserGroup.setDescription(randomString());
 
-		_persistence.update(newUserGroup);
+		_persistence.update(newUserGroup, false);
 
 		UserGroup existingUserGroup = _persistence.findByPrimaryKey(newUserGroup.getPrimaryKey());
 
@@ -135,7 +135,7 @@ public class UserGroupPersistenceTest extends BasePersistenceTestCase {
 		userGroup.setName(randomString());
 		userGroup.setDescription(randomString());
 
-		_persistence.update(userGroup);
+		_persistence.update(userGroup, false);
 
 		return userGroup;
 	}

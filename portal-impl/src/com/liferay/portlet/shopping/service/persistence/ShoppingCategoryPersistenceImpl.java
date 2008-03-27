@@ -152,7 +152,7 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ShoppingCategory shoppingCategory) method. To improve performance, call update(ShoppingCategory shoppingCategory, boolean merge).");
+				"Using the deprecated update(ShoppingCategory shoppingCategory) method. Use update(ShoppingCategory shoppingCategory, boolean merge) instead.");
 		}
 
 		return update(shoppingCategory, false);

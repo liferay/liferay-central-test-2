@@ -152,7 +152,7 @@ public class CalEventPersistenceImpl extends BasePersistence
 	public CalEvent update(CalEvent calEvent) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(CalEvent calEvent) method. To improve performance, call update(CalEvent calEvent, boolean merge).");
+				"Using the deprecated update(CalEvent calEvent) method. Use update(CalEvent calEvent, boolean merge) instead.");
 		}
 
 		return update(calEvent, false);

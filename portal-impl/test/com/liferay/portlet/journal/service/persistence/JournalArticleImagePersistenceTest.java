@@ -77,7 +77,7 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		newJournalArticleImage.setLanguageId(randomString());
 		newJournalArticleImage.setTempImage(randomBoolean());
 
-		_persistence.update(newJournalArticleImage);
+		_persistence.update(newJournalArticleImage, false);
 
 		JournalArticleImage existingJournalArticleImage = _persistence.findByPrimaryKey(newJournalArticleImage.getPrimaryKey());
 
@@ -146,7 +146,7 @@ public class JournalArticleImagePersistenceTest extends BasePersistenceTestCase 
 		journalArticleImage.setLanguageId(randomString());
 		journalArticleImage.setTempImage(randomBoolean());
 
-		_persistence.update(journalArticleImage);
+		_persistence.update(journalArticleImage, false);
 
 		return journalArticleImage;
 	}

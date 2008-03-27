@@ -72,7 +72,7 @@ public class ResourcePersistenceTest extends BasePersistenceTestCase {
 		newResource.setCodeId(nextLong());
 		newResource.setPrimKey(randomString());
 
-		_persistence.update(newResource);
+		_persistence.update(newResource, false);
 
 		Resource existingResource = _persistence.findByPrimaryKey(newResource.getPrimaryKey());
 
@@ -126,7 +126,7 @@ public class ResourcePersistenceTest extends BasePersistenceTestCase {
 		resource.setCodeId(nextLong());
 		resource.setPrimKey(randomString());
 
-		_persistence.update(resource);
+		_persistence.update(resource, false);
 
 		return resource;
 	}

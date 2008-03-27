@@ -182,7 +182,7 @@ public class OrganizationPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Organization organization) method. To improve performance, call update(Organization organization, boolean merge).");
+				"Using the deprecated update(Organization organization) method. Use update(Organization organization, boolean merge) instead.");
 		}
 
 		return update(organization, false);

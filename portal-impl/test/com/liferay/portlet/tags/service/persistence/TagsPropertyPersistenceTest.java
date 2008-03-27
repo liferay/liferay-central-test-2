@@ -79,7 +79,7 @@ public class TagsPropertyPersistenceTest extends BasePersistenceTestCase {
 		newTagsProperty.setKey(randomString());
 		newTagsProperty.setValue(randomString());
 
-		_persistence.update(newTagsProperty);
+		_persistence.update(newTagsProperty, false);
 
 		TagsProperty existingTagsProperty = _persistence.findByPrimaryKey(newTagsProperty.getPrimaryKey());
 
@@ -151,7 +151,7 @@ public class TagsPropertyPersistenceTest extends BasePersistenceTestCase {
 		tagsProperty.setKey(randomString());
 		tagsProperty.setValue(randomString());
 
-		_persistence.update(tagsProperty);
+		_persistence.update(tagsProperty, false);
 
 		return tagsProperty;
 	}

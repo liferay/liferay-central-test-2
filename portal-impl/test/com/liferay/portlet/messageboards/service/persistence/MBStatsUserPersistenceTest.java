@@ -75,7 +75,7 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 		newMBStatsUser.setMessageCount(nextInt());
 		newMBStatsUser.setLastPostDate(nextDate());
 
-		_persistence.update(newMBStatsUser);
+		_persistence.update(newMBStatsUser, false);
 
 		MBStatsUser existingMBStatsUser = _persistence.findByPrimaryKey(newMBStatsUser.getPrimaryKey());
 
@@ -136,7 +136,7 @@ public class MBStatsUserPersistenceTest extends BasePersistenceTestCase {
 		mbStatsUser.setMessageCount(nextInt());
 		mbStatsUser.setLastPostDate(nextDate());
 
-		_persistence.update(mbStatsUser);
+		_persistence.update(mbStatsUser, false);
 
 		return mbStatsUser;
 	}

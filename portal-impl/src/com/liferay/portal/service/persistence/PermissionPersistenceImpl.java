@@ -190,7 +190,7 @@ public class PermissionPersistenceImpl extends BasePersistence
 	public Permission update(Permission permission) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Permission permission) method. To improve performance, call update(Permission permission, boolean merge).");
+				"Using the deprecated update(Permission permission) method. Use update(Permission permission, boolean merge) instead.");
 		}
 
 		return update(permission, false);

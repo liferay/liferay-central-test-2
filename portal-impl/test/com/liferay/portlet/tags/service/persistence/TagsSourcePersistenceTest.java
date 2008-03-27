@@ -74,7 +74,7 @@ public class TagsSourcePersistenceTest extends BasePersistenceTestCase {
 		newTagsSource.setName(randomString());
 		newTagsSource.setAcronym(randomString());
 
-		_persistence.update(newTagsSource);
+		_persistence.update(newTagsSource, false);
 
 		TagsSource existingTagsSource = _persistence.findByPrimaryKey(newTagsSource.getPrimaryKey());
 
@@ -131,7 +131,7 @@ public class TagsSourcePersistenceTest extends BasePersistenceTestCase {
 		tagsSource.setName(randomString());
 		tagsSource.setAcronym(randomString());
 
-		_persistence.update(tagsSource);
+		_persistence.update(tagsSource, false);
 
 		return tagsSource;
 	}

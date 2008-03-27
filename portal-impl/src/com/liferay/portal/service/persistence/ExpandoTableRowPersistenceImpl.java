@@ -171,7 +171,7 @@ public class ExpandoTableRowPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ExpandoTableRow expandoTableRow) method. To improve performance, call update(ExpandoTableRow expandoTableRow, boolean merge).");
+				"Using the deprecated update(ExpandoTableRow expandoTableRow) method. Use update(ExpandoTableRow expandoTableRow, boolean merge) instead.");
 		}
 
 		return update(expandoTableRow, false);

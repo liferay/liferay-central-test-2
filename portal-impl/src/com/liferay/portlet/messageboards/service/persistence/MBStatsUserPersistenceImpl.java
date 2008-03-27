@@ -151,7 +151,7 @@ public class MBStatsUserPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(MBStatsUser mbStatsUser) method. To improve performance, call update(MBStatsUser mbStatsUser, boolean merge).");
+				"Using the deprecated update(MBStatsUser mbStatsUser) method. Use update(MBStatsUser mbStatsUser, boolean merge) instead.");
 		}
 
 		return update(mbStatsUser, false);

@@ -82,7 +82,7 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		newBlogsEntry.setContent(randomString());
 		newBlogsEntry.setDisplayDate(nextDate());
 
-		_persistence.update(newBlogsEntry);
+		_persistence.update(newBlogsEntry, false);
 
 		BlogsEntry existingBlogsEntry = _persistence.findByPrimaryKey(newBlogsEntry.getPrimaryKey());
 
@@ -159,7 +159,7 @@ public class BlogsEntryPersistenceTest extends BasePersistenceTestCase {
 		blogsEntry.setContent(randomString());
 		blogsEntry.setDisplayDate(nextDate());
 
-		_persistence.update(blogsEntry);
+		_persistence.update(blogsEntry, false);
 
 		return blogsEntry;
 	}

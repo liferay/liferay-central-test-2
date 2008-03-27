@@ -77,7 +77,7 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 		newUserTracker.setRemoteHost(randomString());
 		newUserTracker.setUserAgent(randomString());
 
-		_persistence.update(newUserTracker);
+		_persistence.update(newUserTracker, false);
 
 		UserTracker existingUserTracker = _persistence.findByPrimaryKey(newUserTracker.getPrimaryKey());
 
@@ -147,7 +147,7 @@ public class UserTrackerPersistenceTest extends BasePersistenceTestCase {
 		userTracker.setRemoteHost(randomString());
 		userTracker.setUserAgent(randomString());
 
-		_persistence.update(userTracker);
+		_persistence.update(userTracker, false);
 
 		return userTracker;
 	}

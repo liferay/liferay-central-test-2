@@ -82,7 +82,7 @@ public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {
 		newPollsQuestion.setExpirationDate(nextDate());
 		newPollsQuestion.setLastVoteDate(nextDate());
 
-		_persistence.update(newPollsQuestion);
+		_persistence.update(newPollsQuestion, false);
 
 		PollsQuestion existingPollsQuestion = _persistence.findByPrimaryKey(newPollsQuestion.getPrimaryKey());
 
@@ -164,7 +164,7 @@ public class PollsQuestionPersistenceTest extends BasePersistenceTestCase {
 		pollsQuestion.setExpirationDate(nextDate());
 		pollsQuestion.setLastVoteDate(nextDate());
 
-		_persistence.update(pollsQuestion);
+		_persistence.update(pollsQuestion, false);
 
 		return pollsQuestion;
 	}

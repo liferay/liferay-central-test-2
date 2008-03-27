@@ -84,7 +84,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		newMBMessage.setAttachments(randomBoolean());
 		newMBMessage.setAnonymous(randomBoolean());
 
-		_persistence.update(newMBMessage);
+		_persistence.update(newMBMessage, false);
 
 		MBMessage existingMBMessage = _persistence.findByPrimaryKey(newMBMessage.getPrimaryKey());
 
@@ -167,7 +167,7 @@ public class MBMessagePersistenceTest extends BasePersistenceTestCase {
 		mbMessage.setAttachments(randomBoolean());
 		mbMessage.setAnonymous(randomBoolean());
 
-		_persistence.update(mbMessage);
+		_persistence.update(mbMessage, false);
 
 		return mbMessage;
 	}

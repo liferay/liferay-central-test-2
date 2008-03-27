@@ -79,7 +79,7 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		newDLFileVersion.setVersion(nextDouble());
 		newDLFileVersion.setSize(nextInt());
 
-		_persistence.update(newDLFileVersion);
+		_persistence.update(newDLFileVersion, false);
 
 		DLFileVersion existingDLFileVersion = _persistence.findByPrimaryKey(newDLFileVersion.getPrimaryKey());
 
@@ -151,7 +151,7 @@ public class DLFileVersionPersistenceTest extends BasePersistenceTestCase {
 		dlFileVersion.setVersion(nextDouble());
 		dlFileVersion.setSize(nextInt());
 
-		_persistence.update(dlFileVersion);
+		_persistence.update(dlFileVersion, false);
 
 		return dlFileVersion;
 	}

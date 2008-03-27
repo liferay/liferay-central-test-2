@@ -152,7 +152,7 @@ public class IGFolderPersistenceImpl extends BasePersistence
 	public IGFolder update(IGFolder igFolder) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(IGFolder igFolder) method. To improve performance, call update(IGFolder igFolder, boolean merge).");
+				"Using the deprecated update(IGFolder igFolder) method. Use update(IGFolder igFolder, boolean merge) instead.");
 		}
 
 		return update(igFolder, false);

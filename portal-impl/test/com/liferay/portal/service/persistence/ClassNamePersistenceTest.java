@@ -71,7 +71,7 @@ public class ClassNamePersistenceTest extends BasePersistenceTestCase {
 
 		newClassName.setValue(randomString());
 
-		_persistence.update(newClassName);
+		_persistence.update(newClassName, false);
 
 		ClassName existingClassName = _persistence.findByPrimaryKey(newClassName.getPrimaryKey());
 
@@ -123,7 +123,7 @@ public class ClassNamePersistenceTest extends BasePersistenceTestCase {
 
 		className.setValue(randomString());
 
-		_persistence.update(className);
+		_persistence.update(className, false);
 
 		return className;
 	}

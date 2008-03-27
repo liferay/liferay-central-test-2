@@ -77,7 +77,7 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 		newSCProductScreenshot.setFullImageId(nextLong());
 		newSCProductScreenshot.setPriority(nextInt());
 
-		_persistence.update(newSCProductScreenshot);
+		_persistence.update(newSCProductScreenshot, false);
 
 		SCProductScreenshot existingSCProductScreenshot = _persistence.findByPrimaryKey(newSCProductScreenshot.getPrimaryKey());
 
@@ -147,7 +147,7 @@ public class SCProductScreenshotPersistenceTest extends BasePersistenceTestCase 
 		scProductScreenshot.setFullImageId(nextLong());
 		scProductScreenshot.setPriority(nextInt());
 
-		_persistence.update(scProductScreenshot);
+		_persistence.update(scProductScreenshot, false);
 
 		return scProductScreenshot;
 	}

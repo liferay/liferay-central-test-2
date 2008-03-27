@@ -152,7 +152,7 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(AnnouncementsFlag announcementsFlag) method. To improve performance, call update(AnnouncementsFlag announcementsFlag, boolean merge).");
+				"Using the deprecated update(AnnouncementsFlag announcementsFlag) method. Use update(AnnouncementsFlag announcementsFlag, boolean merge) instead.");
 		}
 
 		return update(announcementsFlag, false);

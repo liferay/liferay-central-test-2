@@ -156,7 +156,7 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(PollsQuestion pollsQuestion) method. To improve performance, call update(PollsQuestion pollsQuestion, boolean merge).");
+				"Using the deprecated update(PollsQuestion pollsQuestion) method. Use update(PollsQuestion pollsQuestion, boolean merge) instead.");
 		}
 
 		return update(pollsQuestion, false);

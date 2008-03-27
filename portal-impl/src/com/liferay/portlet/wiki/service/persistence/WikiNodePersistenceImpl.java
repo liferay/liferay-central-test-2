@@ -152,7 +152,7 @@ public class WikiNodePersistenceImpl extends BasePersistence
 	public WikiNode update(WikiNode wikiNode) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(WikiNode wikiNode) method. To improve performance, call update(WikiNode wikiNode, boolean merge).");
+				"Using the deprecated update(WikiNode wikiNode) method. Use update(WikiNode wikiNode, boolean merge) instead.");
 		}
 
 		return update(wikiNode, false);

@@ -75,7 +75,7 @@ public class PollsChoicePersistenceTest extends BasePersistenceTestCase {
 		newPollsChoice.setName(randomString());
 		newPollsChoice.setDescription(randomString());
 
-		_persistence.update(newPollsChoice);
+		_persistence.update(newPollsChoice, false);
 
 		PollsChoice existingPollsChoice = _persistence.findByPrimaryKey(newPollsChoice.getPrimaryKey());
 
@@ -135,7 +135,7 @@ public class PollsChoicePersistenceTest extends BasePersistenceTestCase {
 		pollsChoice.setName(randomString());
 		pollsChoice.setDescription(randomString());
 
-		_persistence.update(pollsChoice);
+		_persistence.update(pollsChoice, false);
 
 		return pollsChoice;
 	}

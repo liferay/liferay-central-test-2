@@ -145,7 +145,7 @@ public class CountryPersistenceImpl extends BasePersistence
 	public Country update(Country country) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Country country) method. To improve performance, call update(Country country, boolean merge).");
+				"Using the deprecated update(Country country) method. Use update(Country country, boolean merge) instead.");
 		}
 
 		return update(country, false);

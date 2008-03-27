@@ -92,7 +92,7 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		newCalEvent.setFirstReminder(nextInt());
 		newCalEvent.setSecondReminder(nextInt());
 
-		_persistence.update(newCalEvent);
+		_persistence.update(newCalEvent, false);
 
 		CalEvent existingCalEvent = _persistence.findByPrimaryKey(newCalEvent.getPrimaryKey());
 
@@ -192,7 +192,7 @@ public class CalEventPersistenceTest extends BasePersistenceTestCase {
 		calEvent.setFirstReminder(nextInt());
 		calEvent.setSecondReminder(nextInt());
 
-		_persistence.update(calEvent);
+		_persistence.update(calEvent, false);
 
 		return calEvent;
 	}

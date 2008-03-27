@@ -151,7 +151,7 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(TagsProperty tagsProperty) method. To improve performance, call update(TagsProperty tagsProperty, boolean merge).");
+				"Using the deprecated update(TagsProperty tagsProperty) method. Use update(TagsProperty tagsProperty, boolean merge) instead.");
 		}
 
 		return update(tagsProperty, false);

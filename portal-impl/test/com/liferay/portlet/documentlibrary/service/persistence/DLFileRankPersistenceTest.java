@@ -76,7 +76,7 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		newDLFileRank.setFolderId(nextLong());
 		newDLFileRank.setName(randomString());
 
-		_persistence.update(newDLFileRank);
+		_persistence.update(newDLFileRank, false);
 
 		DLFileRank existingDLFileRank = _persistence.findByPrimaryKey(newDLFileRank.getPrimaryKey());
 
@@ -139,7 +139,7 @@ public class DLFileRankPersistenceTest extends BasePersistenceTestCase {
 		dlFileRank.setFolderId(nextLong());
 		dlFileRank.setName(randomString());
 
-		_persistence.update(dlFileRank);
+		_persistence.update(dlFileRank, false);
 
 		return dlFileRank;
 	}

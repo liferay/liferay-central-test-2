@@ -79,7 +79,7 @@ public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
 		newRatingsEntry.setClassPK(nextLong());
 		newRatingsEntry.setScore(nextDouble());
 
-		_persistence.update(newRatingsEntry);
+		_persistence.update(newRatingsEntry, false);
 
 		RatingsEntry existingRatingsEntry = _persistence.findByPrimaryKey(newRatingsEntry.getPrimaryKey());
 
@@ -152,7 +152,7 @@ public class RatingsEntryPersistenceTest extends BasePersistenceTestCase {
 		ratingsEntry.setClassPK(nextLong());
 		ratingsEntry.setScore(nextDouble());
 
-		_persistence.update(ratingsEntry);
+		_persistence.update(ratingsEntry, false);
 
 		return ratingsEntry;
 	}

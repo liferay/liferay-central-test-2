@@ -148,7 +148,7 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 	public DLFileRank update(DLFileRank dlFileRank) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(DLFileRank dlFileRank) method. To improve performance, call update(DLFileRank dlFileRank, boolean merge).");
+				"Using the deprecated update(DLFileRank dlFileRank) method. Use update(DLFileRank dlFileRank, boolean merge) instead.");
 		}
 
 		return update(dlFileRank, false);

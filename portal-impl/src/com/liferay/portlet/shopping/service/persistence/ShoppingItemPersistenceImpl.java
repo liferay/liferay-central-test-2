@@ -162,7 +162,7 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ShoppingItem shoppingItem) method. To improve performance, call update(ShoppingItem shoppingItem, boolean merge).");
+				"Using the deprecated update(ShoppingItem shoppingItem) method. Use update(ShoppingItem shoppingItem, boolean merge) instead.");
 		}
 
 		return update(shoppingItem, false);

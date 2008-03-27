@@ -144,7 +144,7 @@ public class MBBanPersistenceImpl extends BasePersistence
 	public MBBan update(MBBan mbBan) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(MBBan mbBan) method. To improve performance, call update(MBBan mbBan, boolean merge).");
+				"Using the deprecated update(MBBan mbBan) method. Use update(MBBan mbBan, boolean merge) instead.");
 		}
 
 		return update(mbBan, false);

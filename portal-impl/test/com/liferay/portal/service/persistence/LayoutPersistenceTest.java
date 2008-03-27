@@ -91,7 +91,7 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		newLayout.setPriority(nextInt());
 		newLayout.setDlFolderId(nextLong());
 
-		_persistence.update(newLayout);
+		_persistence.update(newLayout, false);
 
 		Layout existingLayout = _persistence.findByPrimaryKey(newLayout.getPrimaryKey());
 
@@ -187,7 +187,7 @@ public class LayoutPersistenceTest extends BasePersistenceTestCase {
 		layout.setPriority(nextInt());
 		layout.setDlFolderId(nextLong());
 
-		_persistence.update(layout);
+		_persistence.update(layout, false);
 
 		return layout;
 	}

@@ -78,7 +78,7 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 		newSubscription.setClassPK(nextLong());
 		newSubscription.setFrequency(randomString());
 
-		_persistence.update(newSubscription);
+		_persistence.update(newSubscription, false);
 
 		Subscription existingSubscription = _persistence.findByPrimaryKey(newSubscription.getPrimaryKey());
 
@@ -152,7 +152,7 @@ public class SubscriptionPersistenceTest extends BasePersistenceTestCase {
 		subscription.setClassPK(nextLong());
 		subscription.setFrequency(randomString());
 
-		_persistence.update(subscription);
+		_persistence.update(subscription, false);
 
 		return subscription;
 	}

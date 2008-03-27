@@ -75,7 +75,7 @@ public class ShoppingItemFieldPersistenceTest extends BasePersistenceTestCase {
 		newShoppingItemField.setValues(randomString());
 		newShoppingItemField.setDescription(randomString());
 
-		_persistence.update(newShoppingItemField);
+		_persistence.update(newShoppingItemField, false);
 
 		ShoppingItemField existingShoppingItemField = _persistence.findByPrimaryKey(newShoppingItemField.getPrimaryKey());
 
@@ -138,7 +138,7 @@ public class ShoppingItemFieldPersistenceTest extends BasePersistenceTestCase {
 		shoppingItemField.setValues(randomString());
 		shoppingItemField.setDescription(randomString());
 
-		_persistence.update(shoppingItemField);
+		_persistence.update(shoppingItemField, false);
 
 		return shoppingItemField;
 	}

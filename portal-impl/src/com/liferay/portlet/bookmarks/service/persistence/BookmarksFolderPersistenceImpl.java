@@ -156,7 +156,7 @@ public class BookmarksFolderPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(BookmarksFolder bookmarksFolder) method. To improve performance, call update(BookmarksFolder bookmarksFolder, boolean merge).");
+				"Using the deprecated update(BookmarksFolder bookmarksFolder) method. Use update(BookmarksFolder bookmarksFolder, boolean merge) instead.");
 		}
 
 		return update(bookmarksFolder, false);

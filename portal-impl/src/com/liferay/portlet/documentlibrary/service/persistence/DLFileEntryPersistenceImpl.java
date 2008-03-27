@@ -156,7 +156,7 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(DLFileEntry dlFileEntry) method. To improve performance, call update(DLFileEntry dlFileEntry, boolean merge).");
+				"Using the deprecated update(DLFileEntry dlFileEntry) method. Use update(DLFileEntry dlFileEntry, boolean merge) instead.");
 		}
 
 		return update(dlFileEntry, false);

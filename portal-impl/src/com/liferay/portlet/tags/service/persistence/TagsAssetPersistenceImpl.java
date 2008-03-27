@@ -171,7 +171,7 @@ public class TagsAssetPersistenceImpl extends BasePersistence
 	public TagsAsset update(TagsAsset tagsAsset) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(TagsAsset tagsAsset) method. To improve performance, call update(TagsAsset tagsAsset, boolean merge).");
+				"Using the deprecated update(TagsAsset tagsAsset) method. Use update(TagsAsset tagsAsset, boolean merge) instead.");
 		}
 
 		return update(tagsAsset, false);

@@ -82,7 +82,7 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		newLayoutSet.setPageCount(nextInt());
 		newLayoutSet.setVirtualHost(randomString());
 
-		_persistence.update(newLayoutSet);
+		_persistence.update(newLayoutSet, false);
 
 		LayoutSet existingLayoutSet = _persistence.findByPrimaryKey(newLayoutSet.getPrimaryKey());
 
@@ -163,7 +163,7 @@ public class LayoutSetPersistenceTest extends BasePersistenceTestCase {
 		layoutSet.setPageCount(nextInt());
 		layoutSet.setVirtualHost(randomString());
 
-		_persistence.update(layoutSet);
+		_persistence.update(layoutSet, false);
 
 		return layoutSet;
 	}

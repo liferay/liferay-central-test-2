@@ -80,7 +80,7 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 		newBookmarksFolder.setName(randomString());
 		newBookmarksFolder.setDescription(randomString());
 
-		_persistence.update(newBookmarksFolder);
+		_persistence.update(newBookmarksFolder, false);
 
 		BookmarksFolder existingBookmarksFolder = _persistence.findByPrimaryKey(newBookmarksFolder.getPrimaryKey());
 
@@ -157,7 +157,7 @@ public class BookmarksFolderPersistenceTest extends BasePersistenceTestCase {
 		bookmarksFolder.setName(randomString());
 		bookmarksFolder.setDescription(randomString());
 
-		_persistence.update(bookmarksFolder);
+		_persistence.update(bookmarksFolder, false);
 
 		return bookmarksFolder;
 	}

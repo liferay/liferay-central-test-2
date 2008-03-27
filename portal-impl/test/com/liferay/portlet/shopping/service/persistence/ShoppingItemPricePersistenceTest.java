@@ -80,7 +80,7 @@ public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
 		newShoppingItemPrice.setUseShippingFormula(randomBoolean());
 		newShoppingItemPrice.setStatus(nextInt());
 
-		_persistence.update(newShoppingItemPrice);
+		_persistence.update(newShoppingItemPrice, false);
 
 		ShoppingItemPrice existingShoppingItemPrice = _persistence.findByPrimaryKey(newShoppingItemPrice.getPrimaryKey());
 
@@ -158,7 +158,7 @@ public class ShoppingItemPricePersistenceTest extends BasePersistenceTestCase {
 		shoppingItemPrice.setUseShippingFormula(randomBoolean());
 		shoppingItemPrice.setStatus(nextInt());
 
-		_persistence.update(shoppingItemPrice);
+		_persistence.update(shoppingItemPrice, false);
 
 		return shoppingItemPrice;
 	}

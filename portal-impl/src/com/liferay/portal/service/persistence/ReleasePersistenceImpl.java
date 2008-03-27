@@ -144,7 +144,7 @@ public class ReleasePersistenceImpl extends BasePersistence
 	public Release update(Release release) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Release release) method. To improve performance, call update(Release release, boolean merge).");
+				"Using the deprecated update(Release release) method. Use update(Release release, boolean merge) instead.");
 		}
 
 		return update(release, false);

@@ -78,7 +78,7 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 		newMBBan.setModifiedDate(nextDate());
 		newMBBan.setBanUserId(nextLong());
 
-		_persistence.update(newMBBan);
+		_persistence.update(newMBBan, false);
 
 		MBBan existingMBBan = _persistence.findByPrimaryKey(newMBBan.getPrimaryKey());
 
@@ -141,7 +141,7 @@ public class MBBanPersistenceTest extends BasePersistenceTestCase {
 		mbBan.setModifiedDate(nextDate());
 		mbBan.setBanUserId(nextLong());
 
-		_persistence.update(mbBan);
+		_persistence.update(mbBan, false);
 
 		return mbBan;
 	}

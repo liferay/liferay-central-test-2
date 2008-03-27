@@ -152,7 +152,7 @@ public class IGImagePersistenceImpl extends BasePersistence
 	public IGImage update(IGImage igImage) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(IGImage igImage) method. To improve performance, call update(IGImage igImage, boolean merge).");
+				"Using the deprecated update(IGImage igImage) method. Use update(IGImage igImage, boolean merge) instead.");
 		}
 
 		return update(igImage, false);

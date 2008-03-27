@@ -80,7 +80,7 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 		newEmailAddress.setTypeId(nextInt());
 		newEmailAddress.setPrimary(randomBoolean());
 
-		_persistence.update(newEmailAddress);
+		_persistence.update(newEmailAddress, false);
 
 		EmailAddress existingEmailAddress = _persistence.findByPrimaryKey(newEmailAddress.getPrimaryKey());
 
@@ -160,7 +160,7 @@ public class EmailAddressPersistenceTest extends BasePersistenceTestCase {
 		emailAddress.setTypeId(nextInt());
 		emailAddress.setPrimary(randomBoolean());
 
-		_persistence.update(emailAddress);
+		_persistence.update(emailAddress, false);
 
 		return emailAddress;
 	}

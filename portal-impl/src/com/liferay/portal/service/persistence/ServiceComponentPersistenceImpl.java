@@ -150,7 +150,7 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ServiceComponent serviceComponent) method. To improve performance, call update(ServiceComponent serviceComponent, boolean merge).");
+				"Using the deprecated update(ServiceComponent serviceComponent) method. Use update(ServiceComponent serviceComponent, boolean merge) instead.");
 		}
 
 		return update(serviceComponent, false);

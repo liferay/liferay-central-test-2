@@ -156,7 +156,7 @@ public class JournalStructurePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(JournalStructure journalStructure) method. To improve performance, call update(JournalStructure journalStructure, boolean merge).");
+				"Using the deprecated update(JournalStructure journalStructure) method. Use update(JournalStructure journalStructure, boolean merge) instead.");
 		}
 
 		return update(journalStructure, false);

@@ -81,7 +81,7 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		newWikiNode.setDescription(randomString());
 		newWikiNode.setLastPostDate(nextDate());
 
-		_persistence.update(newWikiNode);
+		_persistence.update(newWikiNode, false);
 
 		WikiNode existingWikiNode = _persistence.findByPrimaryKey(newWikiNode.getPrimaryKey());
 
@@ -154,7 +154,7 @@ public class WikiNodePersistenceTest extends BasePersistenceTestCase {
 		wikiNode.setDescription(randomString());
 		wikiNode.setLastPostDate(nextDate());
 
-		_persistence.update(wikiNode);
+		_persistence.update(wikiNode, false);
 
 		return wikiNode;
 	}

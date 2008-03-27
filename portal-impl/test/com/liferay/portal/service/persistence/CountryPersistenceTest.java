@@ -76,7 +76,7 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 		newCountry.setIdd(randomString());
 		newCountry.setActive(randomBoolean());
 
-		_persistence.update(newCountry);
+		_persistence.update(newCountry, false);
 
 		Country existingCountry = _persistence.findByPrimaryKey(newCountry.getPrimaryKey());
 
@@ -137,7 +137,7 @@ public class CountryPersistenceTest extends BasePersistenceTestCase {
 		country.setIdd(randomString());
 		country.setActive(randomBoolean());
 
-		_persistence.update(country);
+		_persistence.update(country, false);
 
 		return country;
 	}

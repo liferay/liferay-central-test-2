@@ -149,7 +149,7 @@ public class PluginSettingPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(PluginSetting pluginSetting) method. To improve performance, call update(PluginSetting pluginSetting, boolean merge).");
+				"Using the deprecated update(PluginSetting pluginSetting) method. Use update(PluginSetting pluginSetting, boolean merge) instead.");
 		}
 
 		return update(pluginSetting, false);

@@ -151,7 +151,7 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(TasksProposal tasksProposal) method. To improve performance, call update(TasksProposal tasksProposal, boolean merge).");
+				"Using the deprecated update(TasksProposal tasksProposal) method. Use update(TasksProposal tasksProposal, boolean merge) instead.");
 		}
 
 		return update(tasksProposal, false);

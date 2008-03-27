@@ -149,7 +149,7 @@ public class PortletItemPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(PortletItem portletItem) method. To improve performance, call update(PortletItem portletItem, boolean merge).");
+				"Using the deprecated update(PortletItem portletItem) method. Use update(PortletItem portletItem, boolean merge) instead.");
 		}
 
 		return update(portletItem, false);

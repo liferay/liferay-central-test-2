@@ -73,7 +73,7 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 		newExpandoValue.setClassPK(nextLong());
 		newExpandoValue.setValue(randomString());
 
-		_persistence.update(newExpandoValue);
+		_persistence.update(newExpandoValue, false);
 
 		ExpandoValue existingExpandoValue = _persistence.findByPrimaryKey(newExpandoValue.getPrimaryKey());
 
@@ -131,7 +131,7 @@ public class ExpandoValuePersistenceTest extends BasePersistenceTestCase {
 		expandoValue.setClassPK(nextLong());
 		expandoValue.setValue(randomString());
 
-		_persistence.update(expandoValue);
+		_persistence.update(expandoValue, false);
 
 		return expandoValue;
 	}

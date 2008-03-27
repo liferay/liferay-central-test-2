@@ -152,7 +152,7 @@ public class JournalArticleImagePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(JournalArticleImage journalArticleImage) method. To improve performance, call update(JournalArticleImage journalArticleImage, boolean merge).");
+				"Using the deprecated update(JournalArticleImage journalArticleImage) method. Use update(JournalArticleImage journalArticleImage, boolean merge) instead.");
 		}
 
 		return update(journalArticleImage, false);

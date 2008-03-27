@@ -85,7 +85,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		newWikiPage.setParentTitle(randomString());
 		newWikiPage.setRedirectTitle(randomString());
 
-		_persistence.update(newWikiPage);
+		_persistence.update(newWikiPage, false);
 
 		WikiPage existingWikiPage = _persistence.findByPrimaryKey(newWikiPage.getPrimaryKey());
 
@@ -166,7 +166,7 @@ public class WikiPagePersistenceTest extends BasePersistenceTestCase {
 		wikiPage.setParentTitle(randomString());
 		wikiPage.setRedirectTitle(randomString());
 
-		_persistence.update(wikiPage);
+		_persistence.update(wikiPage, false);
 
 		return wikiPage;
 	}

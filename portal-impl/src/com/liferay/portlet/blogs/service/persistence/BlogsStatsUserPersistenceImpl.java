@@ -151,7 +151,7 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(BlogsStatsUser blogsStatsUser) method. To improve performance, call update(BlogsStatsUser blogsStatsUser, boolean merge).");
+				"Using the deprecated update(BlogsStatsUser blogsStatsUser) method. Use update(BlogsStatsUser blogsStatsUser, boolean merge) instead.");
 		}
 
 		return update(blogsStatsUser, false);

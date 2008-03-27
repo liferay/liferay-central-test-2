@@ -144,7 +144,7 @@ public class AccountPersistenceImpl extends BasePersistence
 	public Account update(Account account) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Account account) method. To improve performance, call update(Account account, boolean merge).");
+				"Using the deprecated update(Account account) method. Use update(Account account, boolean merge) instead.");
 		}
 
 		return update(account, false);

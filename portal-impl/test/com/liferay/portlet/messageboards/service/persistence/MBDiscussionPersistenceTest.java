@@ -74,7 +74,7 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 		newMBDiscussion.setClassPK(nextLong());
 		newMBDiscussion.setThreadId(nextLong());
 
-		_persistence.update(newMBDiscussion);
+		_persistence.update(newMBDiscussion, false);
 
 		MBDiscussion existingMBDiscussion = _persistence.findByPrimaryKey(newMBDiscussion.getPrimaryKey());
 
@@ -133,7 +133,7 @@ public class MBDiscussionPersistenceTest extends BasePersistenceTestCase {
 		mbDiscussion.setClassPK(nextLong());
 		mbDiscussion.setThreadId(nextLong());
 
-		_persistence.update(mbDiscussion);
+		_persistence.update(mbDiscussion, false);
 
 		return mbDiscussion;
 	}

@@ -152,7 +152,7 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 		JournalContentSearch journalContentSearch) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(JournalContentSearch journalContentSearch) method. To improve performance, call update(JournalContentSearch journalContentSearch, boolean merge).");
+				"Using the deprecated update(JournalContentSearch journalContentSearch) method. Use update(JournalContentSearch journalContentSearch, boolean merge) instead.");
 		}
 
 		return update(journalContentSearch, false);

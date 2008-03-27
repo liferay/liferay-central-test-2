@@ -169,7 +169,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	public UserGroup update(UserGroup userGroup) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(UserGroup userGroup) method. To improve performance, call update(UserGroup userGroup, boolean merge).");
+				"Using the deprecated update(UserGroup userGroup) method. Use update(UserGroup userGroup, boolean merge) instead.");
 		}
 
 		return update(userGroup, false);

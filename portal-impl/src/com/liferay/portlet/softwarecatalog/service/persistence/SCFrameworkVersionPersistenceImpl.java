@@ -175,7 +175,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(SCFrameworkVersion scFrameworkVersion) method. To improve performance, call update(SCFrameworkVersion scFrameworkVersion, boolean merge).");
+				"Using the deprecated update(SCFrameworkVersion scFrameworkVersion) method. Use update(SCFrameworkVersion scFrameworkVersion, boolean merge) instead.");
 		}
 
 		return update(scFrameworkVersion, false);

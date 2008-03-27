@@ -88,7 +88,7 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 		newShoppingCoupon.setDiscount(nextDouble());
 		newShoppingCoupon.setDiscountType(randomString());
 
-		_persistence.update(newShoppingCoupon);
+		_persistence.update(newShoppingCoupon, false);
 
 		ShoppingCoupon existingShoppingCoupon = _persistence.findByPrimaryKey(newShoppingCoupon.getPrimaryKey());
 
@@ -189,7 +189,7 @@ public class ShoppingCouponPersistenceTest extends BasePersistenceTestCase {
 		shoppingCoupon.setDiscount(nextDouble());
 		shoppingCoupon.setDiscountType(randomString());
 
-		_persistence.update(shoppingCoupon);
+		_persistence.update(shoppingCoupon, false);
 
 		return shoppingCoupon;
 	}

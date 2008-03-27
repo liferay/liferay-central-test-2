@@ -150,7 +150,7 @@ public class OrgGroupPermissionPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(OrgGroupPermission orgGroupPermission) method. To improve performance, call update(OrgGroupPermission orgGroupPermission, boolean merge).");
+				"Using the deprecated update(OrgGroupPermission orgGroupPermission) method. Use update(OrgGroupPermission orgGroupPermission, boolean merge) instead.");
 		}
 
 		return update(orgGroupPermission, false);

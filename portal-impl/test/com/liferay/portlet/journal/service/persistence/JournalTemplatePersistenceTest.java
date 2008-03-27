@@ -88,7 +88,7 @@ public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {
 		newJournalTemplate.setSmallImageId(nextLong());
 		newJournalTemplate.setSmallImageURL(randomString());
 
-		_persistence.update(newJournalTemplate);
+		_persistence.update(newJournalTemplate, false);
 
 		JournalTemplate existingJournalTemplate = _persistence.findByPrimaryKey(newJournalTemplate.getPrimaryKey());
 
@@ -188,7 +188,7 @@ public class JournalTemplatePersistenceTest extends BasePersistenceTestCase {
 		journalTemplate.setSmallImageId(nextLong());
 		journalTemplate.setSmallImageURL(randomString());
 
-		_persistence.update(journalTemplate);
+		_persistence.update(journalTemplate, false);
 
 		return journalTemplate;
 	}

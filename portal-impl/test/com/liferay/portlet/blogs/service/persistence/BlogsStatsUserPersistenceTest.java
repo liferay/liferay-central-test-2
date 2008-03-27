@@ -79,7 +79,7 @@ public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
 		newBlogsStatsUser.setRatingsTotalScore(nextDouble());
 		newBlogsStatsUser.setRatingsAverageScore(nextDouble());
 
-		_persistence.update(newBlogsStatsUser);
+		_persistence.update(newBlogsStatsUser, false);
 
 		BlogsStatsUser existingBlogsStatsUser = _persistence.findByPrimaryKey(newBlogsStatsUser.getPrimaryKey());
 
@@ -153,7 +153,7 @@ public class BlogsStatsUserPersistenceTest extends BasePersistenceTestCase {
 		blogsStatsUser.setRatingsTotalScore(nextDouble());
 		blogsStatsUser.setRatingsAverageScore(nextDouble());
 
-		_persistence.update(blogsStatsUser);
+		_persistence.update(blogsStatsUser, false);
 
 		return blogsStatsUser;
 	}

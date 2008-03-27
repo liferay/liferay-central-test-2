@@ -147,7 +147,7 @@ public class MBThreadPersistenceImpl extends BasePersistence
 	public MBThread update(MBThread mbThread) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(MBThread mbThread) method. To improve performance, call update(MBThread mbThread, boolean merge).");
+				"Using the deprecated update(MBThread mbThread) method. Use update(MBThread mbThread, boolean merge) instead.");
 		}
 
 		return update(mbThread, false);

@@ -155,7 +155,7 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(JournalTemplate journalTemplate) method. To improve performance, call update(JournalTemplate journalTemplate, boolean merge).");
+				"Using the deprecated update(JournalTemplate journalTemplate) method. Use update(JournalTemplate journalTemplate, boolean merge) instead.");
 		}
 
 		return update(journalTemplate, false);

@@ -145,7 +145,7 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 	public OrgLabor update(OrgLabor orgLabor) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(OrgLabor orgLabor) method. To improve performance, call update(OrgLabor orgLabor, boolean merge).");
+				"Using the deprecated update(OrgLabor orgLabor) method. Use update(OrgLabor orgLabor, boolean merge) instead.");
 		}
 
 		return update(orgLabor, false);

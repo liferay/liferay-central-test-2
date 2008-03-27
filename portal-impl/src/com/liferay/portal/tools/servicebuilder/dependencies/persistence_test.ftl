@@ -130,7 +130,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 			</#if>
 		</#list>
 
-		_persistence.update(new${entity.name});
+		_persistence.update(new${entity.name}, false);
 
 		${entity.name} existing${entity.name} = _persistence.findByPrimaryKey(new${entity.name}.getPrimaryKey());
 
@@ -298,7 +298,7 @@ public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 			</#if>
 		</#list>
 
-		_persistence.update(${entity.varName});
+		_persistence.update(${entity.varName}, false);
 
 		return ${entity.varName};
 	}

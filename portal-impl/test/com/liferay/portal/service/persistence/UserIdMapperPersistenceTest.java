@@ -74,7 +74,7 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 		newUserIdMapper.setDescription(randomString());
 		newUserIdMapper.setExternalUserId(randomString());
 
-		_persistence.update(newUserIdMapper);
+		_persistence.update(newUserIdMapper, false);
 
 		UserIdMapper existingUserIdMapper = _persistence.findByPrimaryKey(newUserIdMapper.getPrimaryKey());
 
@@ -135,7 +135,7 @@ public class UserIdMapperPersistenceTest extends BasePersistenceTestCase {
 		userIdMapper.setDescription(randomString());
 		userIdMapper.setExternalUserId(randomString());
 
-		_persistence.update(userIdMapper);
+		_persistence.update(userIdMapper, false);
 
 		return userIdMapper;
 	}

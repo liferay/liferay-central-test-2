@@ -150,7 +150,7 @@ public class ShoppingCartPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ShoppingCart shoppingCart) method. To improve performance, call update(ShoppingCart shoppingCart, boolean merge).");
+				"Using the deprecated update(ShoppingCart shoppingCart) method. Use update(ShoppingCart shoppingCart, boolean merge) instead.");
 		}
 
 		return update(shoppingCart, false);

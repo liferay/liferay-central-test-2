@@ -152,7 +152,7 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(WikiPageResource wikiPageResource) method. To improve performance, call update(WikiPageResource wikiPageResource, boolean merge).");
+				"Using the deprecated update(WikiPageResource wikiPageResource) method. Use update(WikiPageResource wikiPageResource, boolean merge) instead.");
 		}
 
 		return update(wikiPageResource, false);

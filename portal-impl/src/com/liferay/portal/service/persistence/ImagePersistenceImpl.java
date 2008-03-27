@@ -144,7 +144,7 @@ public class ImagePersistenceImpl extends BasePersistence
 	public Image update(Image image) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Image image) method. To improve performance, call update(Image image, boolean merge).");
+				"Using the deprecated update(Image image) method. Use update(Image image, boolean merge) instead.");
 		}
 
 		return update(image, false);

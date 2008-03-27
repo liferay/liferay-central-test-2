@@ -152,7 +152,7 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(SCProductScreenshot scProductScreenshot) method. To improve performance, call update(SCProductScreenshot scProductScreenshot, boolean merge).");
+				"Using the deprecated update(SCProductScreenshot scProductScreenshot) method. Use update(SCProductScreenshot scProductScreenshot, boolean merge) instead.");
 		}
 
 		return update(scProductScreenshot, false);

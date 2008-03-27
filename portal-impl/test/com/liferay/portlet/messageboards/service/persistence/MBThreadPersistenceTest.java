@@ -78,7 +78,7 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		newMBThread.setLastPostDate(nextDate());
 		newMBThread.setPriority(nextDouble());
 
-		_persistence.update(newMBThread);
+		_persistence.update(newMBThread, false);
 
 		MBThread existingMBThread = _persistence.findByPrimaryKey(newMBThread.getPrimaryKey());
 
@@ -146,7 +146,7 @@ public class MBThreadPersistenceTest extends BasePersistenceTestCase {
 		mbThread.setLastPostDate(nextDate());
 		mbThread.setPriority(nextDouble());
 
-		_persistence.update(mbThread);
+		_persistence.update(mbThread, false);
 
 		return mbThread;
 	}

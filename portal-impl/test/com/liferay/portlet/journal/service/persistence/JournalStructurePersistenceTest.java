@@ -82,7 +82,7 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		newJournalStructure.setDescription(randomString());
 		newJournalStructure.setXsd(randomString());
 
-		_persistence.update(newJournalStructure);
+		_persistence.update(newJournalStructure, false);
 
 		JournalStructure existingJournalStructure = _persistence.findByPrimaryKey(newJournalStructure.getPrimaryKey());
 
@@ -165,7 +165,7 @@ public class JournalStructurePersistenceTest extends BasePersistenceTestCase {
 		journalStructure.setDescription(randomString());
 		journalStructure.setXsd(randomString());
 
-		_persistence.update(journalStructure);
+		_persistence.update(journalStructure, false);
 
 		return journalStructure;
 	}

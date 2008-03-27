@@ -151,7 +151,7 @@ public class DLFileVersionPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(DLFileVersion dlFileVersion) method. To improve performance, call update(DLFileVersion dlFileVersion, boolean merge).");
+				"Using the deprecated update(DLFileVersion dlFileVersion) method. Use update(DLFileVersion dlFileVersion, boolean merge) instead.");
 		}
 
 		return update(dlFileVersion, false);

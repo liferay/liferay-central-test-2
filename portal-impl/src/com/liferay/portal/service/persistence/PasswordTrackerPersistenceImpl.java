@@ -149,7 +149,7 @@ public class PasswordTrackerPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(PasswordTracker passwordTracker) method. To improve performance, call update(PasswordTracker passwordTracker, boolean merge).");
+				"Using the deprecated update(PasswordTracker passwordTracker) method. Use update(PasswordTracker passwordTracker, boolean merge) instead.");
 		}
 
 		return update(passwordTracker, false);

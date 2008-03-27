@@ -150,7 +150,7 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(PortletPreferences portletPreferences) method. To improve performance, call update(PortletPreferences portletPreferences, boolean merge).");
+				"Using the deprecated update(PortletPreferences portletPreferences) method. Use update(PortletPreferences portletPreferences, boolean merge) instead.");
 		}
 
 		return update(portletPreferences, false);

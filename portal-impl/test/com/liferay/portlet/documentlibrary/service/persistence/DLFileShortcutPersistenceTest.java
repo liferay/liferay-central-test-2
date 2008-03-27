@@ -80,7 +80,7 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		newDLFileShortcut.setToFolderId(nextLong());
 		newDLFileShortcut.setToName(randomString());
 
-		_persistence.update(newDLFileShortcut);
+		_persistence.update(newDLFileShortcut, false);
 
 		DLFileShortcut existingDLFileShortcut = _persistence.findByPrimaryKey(newDLFileShortcut.getPrimaryKey());
 
@@ -157,7 +157,7 @@ public class DLFileShortcutPersistenceTest extends BasePersistenceTestCase {
 		dlFileShortcut.setToFolderId(nextLong());
 		dlFileShortcut.setToName(randomString());
 
-		_persistence.update(dlFileShortcut);
+		_persistence.update(dlFileShortcut, false);
 
 		return dlFileShortcut;
 	}

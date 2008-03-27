@@ -87,7 +87,7 @@ public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
 		newAnnouncementsEntry.setPriority(nextInt());
 		newAnnouncementsEntry.setAlert(randomBoolean());
 
-		_persistence.update(newAnnouncementsEntry);
+		_persistence.update(newAnnouncementsEntry, false);
 
 		AnnouncementsEntry existingAnnouncementsEntry = _persistence.findByPrimaryKey(newAnnouncementsEntry.getPrimaryKey());
 
@@ -186,7 +186,7 @@ public class AnnouncementsEntryPersistenceTest extends BasePersistenceTestCase {
 		announcementsEntry.setPriority(nextInt());
 		announcementsEntry.setAlert(randomBoolean());
 
-		_persistence.update(announcementsEntry);
+		_persistence.update(announcementsEntry, false);
 
 		return announcementsEntry;
 	}

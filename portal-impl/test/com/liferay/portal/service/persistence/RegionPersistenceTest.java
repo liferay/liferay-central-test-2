@@ -74,7 +74,7 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 		newRegion.setName(randomString());
 		newRegion.setActive(randomBoolean());
 
-		_persistence.update(newRegion);
+		_persistence.update(newRegion, false);
 
 		Region existingRegion = _persistence.findByPrimaryKey(newRegion.getPrimaryKey());
 
@@ -131,7 +131,7 @@ public class RegionPersistenceTest extends BasePersistenceTestCase {
 		region.setName(randomString());
 		region.setActive(randomBoolean());
 
-		_persistence.update(region);
+		_persistence.update(region, false);
 
 		return region;
 	}

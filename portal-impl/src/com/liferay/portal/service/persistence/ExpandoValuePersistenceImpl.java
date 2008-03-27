@@ -148,7 +148,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ExpandoValue expandoValue) method. To improve performance, call update(ExpandoValue expandoValue, boolean merge).");
+				"Using the deprecated update(ExpandoValue expandoValue) method. Use update(ExpandoValue expandoValue, boolean merge) instead.");
 		}
 
 		return update(expandoValue, false);

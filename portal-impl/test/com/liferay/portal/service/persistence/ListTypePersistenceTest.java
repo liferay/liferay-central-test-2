@@ -72,7 +72,7 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 		newListType.setName(randomString());
 		newListType.setType(randomString());
 
-		_persistence.update(newListType);
+		_persistence.update(newListType, false);
 
 		ListType existingListType = _persistence.findByPrimaryKey(newListType.getPrimaryKey());
 
@@ -126,7 +126,7 @@ public class ListTypePersistenceTest extends BasePersistenceTestCase {
 		listType.setName(randomString());
 		listType.setType(randomString());
 
-		_persistence.update(listType);
+		_persistence.update(listType, false);
 
 		return listType;
 	}

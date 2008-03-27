@@ -80,7 +80,7 @@ public class ShoppingOrderItemPersistenceTest extends BasePersistenceTestCase {
 		newShoppingOrderItem.setQuantity(nextInt());
 		newShoppingOrderItem.setShippedDate(nextDate());
 
-		_persistence.update(newShoppingOrderItem);
+		_persistence.update(newShoppingOrderItem, false);
 
 		ShoppingOrderItem existingShoppingOrderItem = _persistence.findByPrimaryKey(newShoppingOrderItem.getPrimaryKey());
 
@@ -158,7 +158,7 @@ public class ShoppingOrderItemPersistenceTest extends BasePersistenceTestCase {
 		shoppingOrderItem.setQuantity(nextInt());
 		shoppingOrderItem.setShippedDate(nextDate());
 
-		_persistence.update(shoppingOrderItem);
+		_persistence.update(shoppingOrderItem, false);
 
 		return shoppingOrderItem;
 	}

@@ -145,7 +145,7 @@ public class ContactPersistenceImpl extends BasePersistence
 	public Contact update(Contact contact) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Contact contact) method. To improve performance, call update(Contact contact, boolean merge).");
+				"Using the deprecated update(Contact contact) method. Use update(Contact contact, boolean merge) instead.");
 		}
 
 		return update(contact, false);

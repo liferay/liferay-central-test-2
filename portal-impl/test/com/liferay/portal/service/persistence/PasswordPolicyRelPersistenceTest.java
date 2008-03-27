@@ -73,7 +73,7 @@ public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
 		newPasswordPolicyRel.setClassNameId(nextLong());
 		newPasswordPolicyRel.setClassPK(nextLong());
 
-		_persistence.update(newPasswordPolicyRel);
+		_persistence.update(newPasswordPolicyRel, false);
 
 		PasswordPolicyRel existingPasswordPolicyRel = _persistence.findByPrimaryKey(newPasswordPolicyRel.getPrimaryKey());
 
@@ -134,7 +134,7 @@ public class PasswordPolicyRelPersistenceTest extends BasePersistenceTestCase {
 		passwordPolicyRel.setClassNameId(nextLong());
 		passwordPolicyRel.setClassPK(nextLong());
 
-		_persistence.update(passwordPolicyRel);
+		_persistence.update(passwordPolicyRel, false);
 
 		return passwordPolicyRel;
 	}

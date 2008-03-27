@@ -146,7 +146,7 @@ public class ClassNamePersistenceImpl extends BasePersistence
 	public ClassName update(ClassName className) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ClassName className) method. To improve performance, call update(ClassName className, boolean merge).");
+				"Using the deprecated update(ClassName className) method. Use update(ClassName className, boolean merge) instead.");
 		}
 
 		return update(className, false);

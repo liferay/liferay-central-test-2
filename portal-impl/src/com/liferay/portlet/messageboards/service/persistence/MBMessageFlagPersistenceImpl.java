@@ -151,7 +151,7 @@ public class MBMessageFlagPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(MBMessageFlag mbMessageFlag) method. To improve performance, call update(MBMessageFlag mbMessageFlag, boolean merge).");
+				"Using the deprecated update(MBMessageFlag mbMessageFlag) method. Use update(MBMessageFlag mbMessageFlag, boolean merge) instead.");
 		}
 
 		return update(mbMessageFlag, false);

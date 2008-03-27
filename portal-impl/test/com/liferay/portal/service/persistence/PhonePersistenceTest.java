@@ -81,7 +81,7 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 		newPhone.setTypeId(nextInt());
 		newPhone.setPrimary(randomBoolean());
 
-		_persistence.update(newPhone);
+		_persistence.update(newPhone, false);
 
 		Phone existingPhone = _persistence.findByPrimaryKey(newPhone.getPrimaryKey());
 
@@ -152,7 +152,7 @@ public class PhonePersistenceTest extends BasePersistenceTestCase {
 		phone.setTypeId(nextInt());
 		phone.setPrimary(randomBoolean());
 
-		_persistence.update(phone);
+		_persistence.update(phone, false);
 
 		return phone;
 	}

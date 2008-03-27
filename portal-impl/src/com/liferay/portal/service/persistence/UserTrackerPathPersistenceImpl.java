@@ -149,7 +149,7 @@ public class UserTrackerPathPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(UserTrackerPath userTrackerPath) method. To improve performance, call update(UserTrackerPath userTrackerPath, boolean merge).");
+				"Using the deprecated update(UserTrackerPath userTrackerPath) method. Use update(UserTrackerPath userTrackerPath, boolean merge) instead.");
 		}
 
 		return update(userTrackerPath, false);

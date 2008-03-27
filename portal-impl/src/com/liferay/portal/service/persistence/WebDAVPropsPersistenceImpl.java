@@ -149,7 +149,7 @@ public class WebDAVPropsPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(WebDAVProps webDAVProps) method. To improve performance, call update(WebDAVProps webDAVProps, boolean merge).");
+				"Using the deprecated update(WebDAVProps webDAVProps) method. Use update(WebDAVProps webDAVProps, boolean merge) instead.");
 		}
 
 		return update(webDAVProps, false);

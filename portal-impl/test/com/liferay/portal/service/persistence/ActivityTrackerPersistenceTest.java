@@ -81,7 +81,7 @@ public class ActivityTrackerPersistenceTest extends BasePersistenceTestCase {
 		newActivityTracker.setReceiverUserId(nextLong());
 		newActivityTracker.setReceiverUserName(randomString());
 
-		_persistence.update(newActivityTracker);
+		_persistence.update(newActivityTracker, false);
 
 		ActivityTracker existingActivityTracker = _persistence.findByPrimaryKey(newActivityTracker.getPrimaryKey());
 
@@ -164,7 +164,7 @@ public class ActivityTrackerPersistenceTest extends BasePersistenceTestCase {
 		activityTracker.setReceiverUserId(nextLong());
 		activityTracker.setReceiverUserName(randomString());
 
-		_persistence.update(activityTracker);
+		_persistence.update(activityTracker, false);
 
 		return activityTracker;
 	}

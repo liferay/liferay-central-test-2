@@ -155,7 +155,7 @@ public class JournalFeedPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(JournalFeed journalFeed) method. To improve performance, call update(JournalFeed journalFeed, boolean merge).");
+				"Using the deprecated update(JournalFeed journalFeed) method. Use update(JournalFeed journalFeed, boolean merge) instead.");
 		}
 
 		return update(journalFeed, false);

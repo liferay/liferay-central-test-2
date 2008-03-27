@@ -171,7 +171,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	public SCLicense update(SCLicense scLicense) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(SCLicense scLicense) method. To improve performance, call update(SCLicense scLicense, boolean merge).");
+				"Using the deprecated update(SCLicense scLicense) method. Use update(SCLicense scLicense, boolean merge) instead.");
 		}
 
 		return update(scLicense, false);

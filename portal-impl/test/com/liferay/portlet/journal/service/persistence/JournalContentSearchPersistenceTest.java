@@ -77,7 +77,7 @@ public class JournalContentSearchPersistenceTest extends BasePersistenceTestCase
 		newJournalContentSearch.setPortletId(randomString());
 		newJournalContentSearch.setArticleId(randomString());
 
-		_persistence.update(newJournalContentSearch);
+		_persistence.update(newJournalContentSearch, false);
 
 		JournalContentSearch existingJournalContentSearch = _persistence.findByPrimaryKey(newJournalContentSearch.getPrimaryKey());
 
@@ -146,7 +146,7 @@ public class JournalContentSearchPersistenceTest extends BasePersistenceTestCase
 		journalContentSearch.setPortletId(randomString());
 		journalContentSearch.setArticleId(randomString());
 
-		_persistence.update(journalContentSearch);
+		_persistence.update(journalContentSearch, false);
 
 		return journalContentSearch;
 	}

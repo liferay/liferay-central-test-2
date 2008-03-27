@@ -156,7 +156,7 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(DLFileShortcut dlFileShortcut) method. To improve performance, call update(DLFileShortcut dlFileShortcut, boolean merge).");
+				"Using the deprecated update(DLFileShortcut dlFileShortcut) method. Use update(DLFileShortcut dlFileShortcut, boolean merge) instead.");
 		}
 
 		return update(dlFileShortcut, false);

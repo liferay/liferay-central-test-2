@@ -149,7 +149,7 @@ public class OrgGroupRolePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(OrgGroupRole orgGroupRole) method. To improve performance, call update(OrgGroupRole orgGroupRole, boolean merge).");
+				"Using the deprecated update(OrgGroupRole orgGroupRole) method. Use update(OrgGroupRole orgGroupRole, boolean merge) instead.");
 		}
 
 		return update(orgGroupRole, false);

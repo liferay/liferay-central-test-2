@@ -151,7 +151,7 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(MBDiscussion mbDiscussion) method. To improve performance, call update(MBDiscussion mbDiscussion, boolean merge).");
+				"Using the deprecated update(MBDiscussion mbDiscussion) method. Use update(MBDiscussion mbDiscussion, boolean merge) instead.");
 		}
 
 		return update(mbDiscussion, false);

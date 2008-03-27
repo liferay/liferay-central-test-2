@@ -150,7 +150,7 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(MembershipRequest membershipRequest) method. To improve performance, call update(MembershipRequest membershipRequest, boolean merge).");
+				"Using the deprecated update(MembershipRequest membershipRequest) method. Use update(MembershipRequest membershipRequest, boolean merge) instead.");
 		}
 
 		return update(membershipRequest, false);

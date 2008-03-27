@@ -83,7 +83,7 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		newIGImage.setCustom1ImageId(nextLong());
 		newIGImage.setCustom2ImageId(nextLong());
 
-		_persistence.update(newIGImage);
+		_persistence.update(newIGImage, false);
 
 		IGImage existingIGImage = _persistence.findByPrimaryKey(newIGImage.getPrimaryKey());
 
@@ -162,7 +162,7 @@ public class IGImagePersistenceTest extends BasePersistenceTestCase {
 		igImage.setCustom1ImageId(nextLong());
 		igImage.setCustom2ImageId(nextLong());
 
-		_persistence.update(igImage);
+		_persistence.update(igImage, false);
 
 		return igImage;
 	}

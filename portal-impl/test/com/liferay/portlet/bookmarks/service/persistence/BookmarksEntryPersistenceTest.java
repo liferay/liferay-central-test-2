@@ -82,7 +82,7 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		newBookmarksEntry.setVisits(nextInt());
 		newBookmarksEntry.setPriority(nextInt());
 
-		_persistence.update(newBookmarksEntry);
+		_persistence.update(newBookmarksEntry, false);
 
 		BookmarksEntry existingBookmarksEntry = _persistence.findByPrimaryKey(newBookmarksEntry.getPrimaryKey());
 
@@ -164,7 +164,7 @@ public class BookmarksEntryPersistenceTest extends BasePersistenceTestCase {
 		bookmarksEntry.setVisits(nextInt());
 		bookmarksEntry.setPriority(nextInt());
 
-		_persistence.update(bookmarksEntry);
+		_persistence.update(bookmarksEntry, false);
 
 		return bookmarksEntry;
 	}

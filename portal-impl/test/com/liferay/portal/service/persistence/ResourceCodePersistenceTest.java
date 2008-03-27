@@ -73,7 +73,7 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 		newResourceCode.setName(randomString());
 		newResourceCode.setScope(nextInt());
 
-		_persistence.update(newResourceCode);
+		_persistence.update(newResourceCode, false);
 
 		ResourceCode existingResourceCode = _persistence.findByPrimaryKey(newResourceCode.getPrimaryKey());
 
@@ -130,7 +130,7 @@ public class ResourceCodePersistenceTest extends BasePersistenceTestCase {
 		resourceCode.setName(randomString());
 		resourceCode.setScope(nextInt());
 
-		_persistence.update(resourceCode);
+		_persistence.update(resourceCode, false);
 
 		return resourceCode;
 	}

@@ -185,7 +185,7 @@ public class RolePersistenceImpl extends BasePersistence
 	public Role update(Role role) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Role role) method. To improve performance, call update(Role role, boolean merge).");
+				"Using the deprecated update(Role role) method. Use update(Role role, boolean merge) instead.");
 		}
 
 		return update(role, false);

@@ -98,7 +98,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		newUser.setAgreedToTermsOfUse(randomBoolean());
 		newUser.setActive(randomBoolean());
 
-		_persistence.update(newUser);
+		_persistence.update(newUser, false);
 
 		User existingUser = _persistence.findByPrimaryKey(newUser.getPrimaryKey());
 
@@ -209,7 +209,7 @@ public class UserPersistenceTest extends BasePersistenceTestCase {
 		user.setAgreedToTermsOfUse(randomBoolean());
 		user.setActive(randomBoolean());
 
-		_persistence.update(user);
+		_persistence.update(user, false);
 
 		return user;
 	}

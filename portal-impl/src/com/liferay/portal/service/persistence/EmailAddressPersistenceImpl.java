@@ -149,7 +149,7 @@ public class EmailAddressPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(EmailAddress emailAddress) method. To improve performance, call update(EmailAddress emailAddress, boolean merge).");
+				"Using the deprecated update(EmailAddress emailAddress) method. Use update(EmailAddress emailAddress, boolean merge) instead.");
 		}
 
 		return update(emailAddress, false);

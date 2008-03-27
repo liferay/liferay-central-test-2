@@ -79,7 +79,7 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 		newOrganization.setStatusId(nextInt());
 		newOrganization.setComments(randomString());
 
-		_persistence.update(newOrganization);
+		_persistence.update(newOrganization, false);
 
 		Organization existingOrganization = _persistence.findByPrimaryKey(newOrganization.getPrimaryKey());
 
@@ -155,7 +155,7 @@ public class OrganizationPersistenceTest extends BasePersistenceTestCase {
 		organization.setStatusId(nextInt());
 		organization.setComments(randomString());
 
-		_persistence.update(organization);
+		_persistence.update(organization, false);
 
 		return organization;
 	}

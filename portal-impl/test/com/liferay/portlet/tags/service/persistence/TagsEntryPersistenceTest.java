@@ -77,7 +77,7 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 		newTagsEntry.setModifiedDate(nextDate());
 		newTagsEntry.setName(randomString());
 
-		_persistence.update(newTagsEntry);
+		_persistence.update(newTagsEntry, false);
 
 		TagsEntry existingTagsEntry = _persistence.findByPrimaryKey(newTagsEntry.getPrimaryKey());
 
@@ -141,7 +141,7 @@ public class TagsEntryPersistenceTest extends BasePersistenceTestCase {
 		tagsEntry.setModifiedDate(nextDate());
 		tagsEntry.setName(randomString());
 
-		_persistence.update(tagsEntry);
+		_persistence.update(tagsEntry, false);
 
 		return tagsEntry;
 	}

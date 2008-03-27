@@ -96,7 +96,7 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		newContact.setJobClass(randomString());
 		newContact.setHoursOfOperation(randomString());
 
-		_persistence.update(newContact);
+		_persistence.update(newContact, false);
 
 		Contact existingContact = _persistence.findByPrimaryKey(newContact.getPrimaryKey());
 
@@ -202,7 +202,7 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		contact.setJobClass(randomString());
 		contact.setHoursOfOperation(randomString());
 
-		_persistence.update(contact);
+		_persistence.update(contact, false);
 
 		return contact;
 	}

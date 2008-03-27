@@ -71,7 +71,7 @@ public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
 
 		OrgGroupPermission newOrgGroupPermission = _persistence.create(pk);
 
-		_persistence.update(newOrgGroupPermission);
+		_persistence.update(newOrgGroupPermission, false);
 
 		OrgGroupPermission existingOrgGroupPermission = _persistence.findByPrimaryKey(newOrgGroupPermission.getPrimaryKey());
 
@@ -129,7 +129,7 @@ public class OrgGroupPermissionPersistenceTest extends BasePersistenceTestCase {
 
 		OrgGroupPermission orgGroupPermission = _persistence.create(pk);
 
-		_persistence.update(orgGroupPermission);
+		_persistence.update(orgGroupPermission, false);
 
 		return orgGroupPermission;
 	}

@@ -83,7 +83,7 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 		newTasksProposal.setPublishDate(nextDate());
 		newTasksProposal.setDueDate(nextDate());
 
-		_persistence.update(newTasksProposal);
+		_persistence.update(newTasksProposal, false);
 
 		TasksProposal existingTasksProposal = _persistence.findByPrimaryKey(newTasksProposal.getPrimaryKey());
 
@@ -168,7 +168,7 @@ public class TasksProposalPersistenceTest extends BasePersistenceTestCase {
 		tasksProposal.setPublishDate(nextDate());
 		tasksProposal.setDueDate(nextDate());
 
-		_persistence.update(tasksProposal);
+		_persistence.update(tasksProposal, false);
 
 		return tasksProposal;
 	}

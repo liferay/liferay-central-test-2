@@ -145,7 +145,7 @@ public class WebsitePersistenceImpl extends BasePersistence
 	public Website update(Website website) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Website website) method. To improve performance, call update(Website website, boolean merge).");
+				"Using the deprecated update(Website website) method. Use update(Website website, boolean merge) instead.");
 		}
 
 		return update(website, false);

@@ -80,7 +80,7 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 		newWebsite.setTypeId(nextInt());
 		newWebsite.setPrimary(randomBoolean());
 
-		_persistence.update(newWebsite);
+		_persistence.update(newWebsite, false);
 
 		Website existingWebsite = _persistence.findByPrimaryKey(newWebsite.getPrimaryKey());
 
@@ -151,7 +151,7 @@ public class WebsitePersistenceTest extends BasePersistenceTestCase {
 		website.setTypeId(nextInt());
 		website.setPrimary(randomBoolean());
 
-		_persistence.update(website);
+		_persistence.update(website, false);
 
 		return website;
 	}

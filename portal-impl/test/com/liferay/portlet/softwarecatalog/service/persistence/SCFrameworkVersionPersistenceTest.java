@@ -81,7 +81,7 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 		newSCFrameworkVersion.setActive(randomBoolean());
 		newSCFrameworkVersion.setPriority(nextInt());
 
-		_persistence.update(newSCFrameworkVersion);
+		_persistence.update(newSCFrameworkVersion, false);
 
 		SCFrameworkVersion existingSCFrameworkVersion = _persistence.findByPrimaryKey(newSCFrameworkVersion.getPrimaryKey());
 
@@ -162,7 +162,7 @@ public class SCFrameworkVersionPersistenceTest extends BasePersistenceTestCase {
 		scFrameworkVersion.setActive(randomBoolean());
 		scFrameworkVersion.setPriority(nextInt());
 
-		_persistence.update(scFrameworkVersion);
+		_persistence.update(scFrameworkVersion, false);
 
 		return scFrameworkVersion;
 	}

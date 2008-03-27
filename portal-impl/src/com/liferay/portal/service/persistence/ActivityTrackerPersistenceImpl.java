@@ -149,7 +149,7 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ActivityTracker activityTracker) method. To improve performance, call update(ActivityTracker activityTracker, boolean merge).");
+				"Using the deprecated update(ActivityTracker activityTracker) method. Use update(ActivityTracker activityTracker, boolean merge) instead.");
 		}
 
 		return update(activityTracker, false);

@@ -87,7 +87,7 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 		newAddress.setMailing(randomBoolean());
 		newAddress.setPrimary(randomBoolean());
 
-		_persistence.update(newAddress);
+		_persistence.update(newAddress, false);
 
 		Address existingAddress = _persistence.findByPrimaryKey(newAddress.getPrimaryKey());
 
@@ -172,7 +172,7 @@ public class AddressPersistenceTest extends BasePersistenceTestCase {
 		address.setMailing(randomBoolean());
 		address.setPrimary(randomBoolean());
 
-		_persistence.update(address);
+		_persistence.update(address, false);
 
 		return address;
 	}

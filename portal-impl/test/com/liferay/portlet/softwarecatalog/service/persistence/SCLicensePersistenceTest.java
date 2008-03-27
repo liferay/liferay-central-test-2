@@ -76,7 +76,7 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 		newSCLicense.setActive(randomBoolean());
 		newSCLicense.setRecommended(randomBoolean());
 
-		_persistence.update(newSCLicense);
+		_persistence.update(newSCLicense, false);
 
 		SCLicense existingSCLicense = _persistence.findByPrimaryKey(newSCLicense.getPrimaryKey());
 
@@ -138,7 +138,7 @@ public class SCLicensePersistenceTest extends BasePersistenceTestCase {
 		scLicense.setActive(randomBoolean());
 		scLicense.setRecommended(randomBoolean());
 
-		_persistence.update(scLicense);
+		_persistence.update(scLicense, false);
 
 		return scLicense;
 	}

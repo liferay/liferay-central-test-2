@@ -149,7 +149,7 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Subscription subscription) method. To improve performance, call update(Subscription subscription, boolean merge).");
+				"Using the deprecated update(Subscription subscription) method. Use update(Subscription subscription, boolean merge) instead.");
 		}
 
 		return update(subscription, false);

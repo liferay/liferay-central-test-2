@@ -174,7 +174,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(SCProductEntry scProductEntry) method. To improve performance, call update(SCProductEntry scProductEntry, boolean merge).");
+				"Using the deprecated update(SCProductEntry scProductEntry) method. Use update(SCProductEntry scProductEntry, boolean merge) instead.");
 		}
 
 		return update(scProductEntry, false);

@@ -75,7 +75,7 @@ public class PollsVotePersistenceTest extends BasePersistenceTestCase {
 		newPollsVote.setChoiceId(nextLong());
 		newPollsVote.setVoteDate(nextDate());
 
-		_persistence.update(newPollsVote);
+		_persistence.update(newPollsVote, false);
 
 		PollsVote existingPollsVote = _persistence.findByPrimaryKey(newPollsVote.getPrimaryKey());
 
@@ -133,7 +133,7 @@ public class PollsVotePersistenceTest extends BasePersistenceTestCase {
 		pollsVote.setChoiceId(nextLong());
 		pollsVote.setVoteDate(nextDate());
 
-		_persistence.update(pollsVote);
+		_persistence.update(pollsVote, false);
 
 		return pollsVote;
 	}

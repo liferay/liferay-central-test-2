@@ -73,7 +73,7 @@ public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
 		newUserTrackerPath.setPath(randomString());
 		newUserTrackerPath.setPathDate(nextDate());
 
-		_persistence.update(newUserTrackerPath);
+		_persistence.update(newUserTrackerPath, false);
 
 		UserTrackerPath existingUserTrackerPath = _persistence.findByPrimaryKey(newUserTrackerPath.getPrimaryKey());
 
@@ -132,7 +132,7 @@ public class UserTrackerPathPersistenceTest extends BasePersistenceTestCase {
 		userTrackerPath.setPath(randomString());
 		userTrackerPath.setPathDate(nextDate());
 
-		_persistence.update(userTrackerPath);
+		_persistence.update(userTrackerPath, false);
 
 		return userTrackerPath;
 	}

@@ -175,7 +175,7 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(SCProductVersion scProductVersion) method. To improve performance, call update(SCProductVersion scProductVersion, boolean merge).");
+				"Using the deprecated update(SCProductVersion scProductVersion) method. Use update(SCProductVersion scProductVersion, boolean merge) instead.");
 		}
 
 		return update(scProductVersion, false);

@@ -153,7 +153,7 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	public MBCategory update(MBCategory mbCategory) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(MBCategory mbCategory) method. To improve performance, call update(MBCategory mbCategory, boolean merge).");
+				"Using the deprecated update(MBCategory mbCategory) method. Use update(MBCategory mbCategory, boolean merge) instead.");
 		}
 
 		return update(mbCategory, false);

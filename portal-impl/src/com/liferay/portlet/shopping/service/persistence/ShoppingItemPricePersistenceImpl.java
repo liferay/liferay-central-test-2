@@ -152,7 +152,7 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ShoppingItemPrice shoppingItemPrice) method. To improve performance, call update(ShoppingItemPrice shoppingItemPrice, boolean merge).");
+				"Using the deprecated update(ShoppingItemPrice shoppingItemPrice) method. Use update(ShoppingItemPrice shoppingItemPrice, boolean merge) instead.");
 		}
 
 		return update(shoppingItemPrice, false);

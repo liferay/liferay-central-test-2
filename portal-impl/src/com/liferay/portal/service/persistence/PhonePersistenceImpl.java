@@ -144,7 +144,7 @@ public class PhonePersistenceImpl extends BasePersistence
 	public Phone update(Phone phone) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Phone phone) method. To improve performance, call update(Phone phone, boolean merge).");
+				"Using the deprecated update(Phone phone) method. Use update(Phone phone, boolean merge) instead.");
 		}
 
 		return update(phone, false);

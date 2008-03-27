@@ -145,7 +145,7 @@ public class ResourcePersistenceImpl extends BasePersistence
 	public Resource update(Resource resource) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Resource resource) method. To improve performance, call update(Resource resource, boolean merge).");
+				"Using the deprecated update(Resource resource) method. Use update(Resource resource, boolean merge) instead.");
 		}
 
 		return update(resource, false);

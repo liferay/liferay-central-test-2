@@ -83,7 +83,7 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 		newTasksReview.setCompleted(randomBoolean());
 		newTasksReview.setRejected(randomBoolean());
 
-		_persistence.update(newTasksReview);
+		_persistence.update(newTasksReview, false);
 
 		TasksReview existingTasksReview = _persistence.findByPrimaryKey(newTasksReview.getPrimaryKey());
 
@@ -167,7 +167,7 @@ public class TasksReviewPersistenceTest extends BasePersistenceTestCase {
 		tasksReview.setCompleted(randomBoolean());
 		tasksReview.setRejected(randomBoolean());
 
-		_persistence.update(tasksReview);
+		_persistence.update(tasksReview, false);
 
 		return tasksReview;
 	}

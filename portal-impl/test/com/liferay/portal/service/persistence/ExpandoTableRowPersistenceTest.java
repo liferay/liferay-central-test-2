@@ -71,7 +71,7 @@ public class ExpandoTableRowPersistenceTest extends BasePersistenceTestCase {
 
 		newExpandoTableRow.setTableId(nextLong());
 
-		_persistence.update(newExpandoTableRow);
+		_persistence.update(newExpandoTableRow, false);
 
 		ExpandoTableRow existingExpandoTableRow = _persistence.findByPrimaryKey(newExpandoTableRow.getPrimaryKey());
 
@@ -124,7 +124,7 @@ public class ExpandoTableRowPersistenceTest extends BasePersistenceTestCase {
 
 		expandoTableRow.setTableId(nextLong());
 
-		_persistence.update(expandoTableRow);
+		_persistence.update(expandoTableRow, false);
 
 		return expandoTableRow;
 	}

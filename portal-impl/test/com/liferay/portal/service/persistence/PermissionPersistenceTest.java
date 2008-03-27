@@ -73,7 +73,7 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 		newPermission.setActionId(randomString());
 		newPermission.setResourceId(nextLong());
 
-		_persistence.update(newPermission);
+		_persistence.update(newPermission, false);
 
 		Permission existingPermission = _persistence.findByPrimaryKey(newPermission.getPrimaryKey());
 
@@ -132,7 +132,7 @@ public class PermissionPersistenceTest extends BasePersistenceTestCase {
 		permission.setActionId(randomString());
 		permission.setResourceId(nextLong());
 
-		_persistence.update(permission);
+		_persistence.update(permission, false);
 
 		return permission;
 	}

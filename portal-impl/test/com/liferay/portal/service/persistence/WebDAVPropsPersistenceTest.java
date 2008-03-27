@@ -76,7 +76,7 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 		newWebDAVProps.setClassPK(nextLong());
 		newWebDAVProps.setProps(randomString());
 
-		_persistence.update(newWebDAVProps);
+		_persistence.update(newWebDAVProps, false);
 
 		WebDAVProps existingWebDAVProps = _persistence.findByPrimaryKey(newWebDAVProps.getPrimaryKey());
 
@@ -143,7 +143,7 @@ public class WebDAVPropsPersistenceTest extends BasePersistenceTestCase {
 		webDAVProps.setClassPK(nextLong());
 		webDAVProps.setProps(randomString());
 
-		_persistence.update(webDAVProps);
+		_persistence.update(webDAVProps, false);
 
 		return webDAVProps;
 	}

@@ -86,7 +86,7 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 		newOrgLabor.setSatOpen(nextInt());
 		newOrgLabor.setSatClose(nextInt());
 
-		_persistence.update(newOrgLabor);
+		_persistence.update(newOrgLabor, false);
 
 		OrgLabor existingOrgLabor = _persistence.findByPrimaryKey(newOrgLabor.getPrimaryKey());
 
@@ -169,7 +169,7 @@ public class OrgLaborPersistenceTest extends BasePersistenceTestCase {
 		orgLabor.setSatOpen(nextInt());
 		orgLabor.setSatClose(nextInt());
 
-		_persistence.update(orgLabor);
+		_persistence.update(orgLabor, false);
 
 		return orgLabor;
 	}

@@ -150,7 +150,7 @@ public class RatingsEntryPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(RatingsEntry ratingsEntry) method. To improve performance, call update(RatingsEntry ratingsEntry, boolean merge).");
+				"Using the deprecated update(RatingsEntry ratingsEntry) method. Use update(RatingsEntry ratingsEntry, boolean merge) instead.");
 		}
 
 		return update(ratingsEntry, false);

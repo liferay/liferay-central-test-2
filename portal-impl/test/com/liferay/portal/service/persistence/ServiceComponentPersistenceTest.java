@@ -74,7 +74,7 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		newServiceComponent.setBuildDate(nextLong());
 		newServiceComponent.setData(randomString());
 
-		_persistence.update(newServiceComponent);
+		_persistence.update(newServiceComponent, false);
 
 		ServiceComponent existingServiceComponent = _persistence.findByPrimaryKey(newServiceComponent.getPrimaryKey());
 
@@ -136,7 +136,7 @@ public class ServiceComponentPersistenceTest extends BasePersistenceTestCase {
 		serviceComponent.setBuildDate(nextLong());
 		serviceComponent.setData(randomString());
 
-		_persistence.update(serviceComponent);
+		_persistence.update(serviceComponent, false);
 
 		return serviceComponent;
 	}

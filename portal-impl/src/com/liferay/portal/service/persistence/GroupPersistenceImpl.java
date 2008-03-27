@@ -207,7 +207,7 @@ public class GroupPersistenceImpl extends BasePersistence
 	public Group update(Group group) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Group group) method. To improve performance, call update(Group group, boolean merge).");
+				"Using the deprecated update(Group group) method. Use update(Group group, boolean merge) instead.");
 		}
 
 		return update(group, false);

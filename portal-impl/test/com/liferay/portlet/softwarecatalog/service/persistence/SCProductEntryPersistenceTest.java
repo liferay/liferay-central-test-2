@@ -86,7 +86,7 @@ public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 		newSCProductEntry.setRepoGroupId(randomString());
 		newSCProductEntry.setRepoArtifactId(randomString());
 
-		_persistence.update(newSCProductEntry);
+		_persistence.update(newSCProductEntry, false);
 
 		SCProductEntry existingSCProductEntry = _persistence.findByPrimaryKey(newSCProductEntry.getPrimaryKey());
 
@@ -181,7 +181,7 @@ public class SCProductEntryPersistenceTest extends BasePersistenceTestCase {
 		scProductEntry.setRepoGroupId(randomString());
 		scProductEntry.setRepoArtifactId(randomString());
 
-		_persistence.update(scProductEntry);
+		_persistence.update(scProductEntry, false);
 
 		return scProductEntry;
 	}

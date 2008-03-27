@@ -82,7 +82,7 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		newDLFolder.setDescription(randomString());
 		newDLFolder.setLastPostDate(nextDate());
 
-		_persistence.update(newDLFolder);
+		_persistence.update(newDLFolder, false);
 
 		DLFolder existingDLFolder = _persistence.findByPrimaryKey(newDLFolder.getPrimaryKey());
 
@@ -158,7 +158,7 @@ public class DLFolderPersistenceTest extends BasePersistenceTestCase {
 		dlFolder.setDescription(randomString());
 		dlFolder.setLastPostDate(nextDate());
 
-		_persistence.update(dlFolder);
+		_persistence.update(dlFolder, false);
 
 		return dlFolder;
 	}

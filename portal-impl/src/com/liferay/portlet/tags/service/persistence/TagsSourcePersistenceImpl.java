@@ -147,7 +147,7 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 	public TagsSource update(TagsSource tagsSource) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(TagsSource tagsSource) method. To improve performance, call update(TagsSource tagsSource, boolean merge).");
+				"Using the deprecated update(TagsSource tagsSource) method. Use update(TagsSource tagsSource, boolean merge) instead.");
 		}
 
 		return update(tagsSource, false);

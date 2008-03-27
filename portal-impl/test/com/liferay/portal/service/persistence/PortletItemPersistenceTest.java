@@ -79,7 +79,7 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 		newPortletItem.setPortletId(randomString());
 		newPortletItem.setClassNameId(nextLong());
 
-		_persistence.update(newPortletItem);
+		_persistence.update(newPortletItem, false);
 
 		PortletItem existingPortletItem = _persistence.findByPrimaryKey(newPortletItem.getPrimaryKey());
 
@@ -154,7 +154,7 @@ public class PortletItemPersistenceTest extends BasePersistenceTestCase {
 		portletItem.setPortletId(randomString());
 		portletItem.setClassNameId(nextLong());
 
-		_persistence.update(portletItem);
+		_persistence.update(portletItem, false);
 
 		return portletItem;
 	}

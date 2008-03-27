@@ -76,7 +76,7 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		newRole.setDescription(randomString());
 		newRole.setType(nextInt());
 
-		_persistence.update(newRole);
+		_persistence.update(newRole, false);
 
 		Role existingRole = _persistence.findByPrimaryKey(newRole.getPrimaryKey());
 
@@ -137,7 +137,7 @@ public class RolePersistenceTest extends BasePersistenceTestCase {
 		role.setDescription(randomString());
 		role.setType(nextInt());
 
-		_persistence.update(role);
+		_persistence.update(role, false);
 
 		return role;
 	}

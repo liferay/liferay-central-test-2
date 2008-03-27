@@ -79,7 +79,7 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 		newMembershipRequest.setReplierUserId(nextLong());
 		newMembershipRequest.setStatusId(nextInt());
 
-		_persistence.update(newMembershipRequest);
+		_persistence.update(newMembershipRequest, false);
 
 		MembershipRequest existingMembershipRequest = _persistence.findByPrimaryKey(newMembershipRequest.getPrimaryKey());
 
@@ -158,7 +158,7 @@ public class MembershipRequestPersistenceTest extends BasePersistenceTestCase {
 		membershipRequest.setReplierUserId(nextLong());
 		membershipRequest.setStatusId(nextInt());
 
-		_persistence.update(membershipRequest);
+		_persistence.update(membershipRequest, false);
 
 		return membershipRequest;
 	}

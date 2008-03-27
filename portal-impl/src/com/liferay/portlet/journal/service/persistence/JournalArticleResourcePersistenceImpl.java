@@ -155,7 +155,7 @@ public class JournalArticleResourcePersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(JournalArticleResource journalArticleResource) method. To improve performance, call update(JournalArticleResource journalArticleResource, boolean merge).");
+				"Using the deprecated update(JournalArticleResource journalArticleResource) method. Use update(JournalArticleResource journalArticleResource, boolean merge) instead.");
 		}
 
 		return update(journalArticleResource, false);

@@ -85,7 +85,7 @@ public class AccountPersistenceTest extends BasePersistenceTestCase {
 		newAccount.setType(randomString());
 		newAccount.setSize(randomString());
 
-		_persistence.update(newAccount);
+		_persistence.update(newAccount, false);
 
 		Account existingAccount = _persistence.findByPrimaryKey(newAccount.getPrimaryKey());
 
@@ -167,7 +167,7 @@ public class AccountPersistenceTest extends BasePersistenceTestCase {
 		account.setType(randomString());
 		account.setSize(randomString());
 
-		_persistence.update(account);
+		_persistence.update(account, false);
 
 		return account;
 	}

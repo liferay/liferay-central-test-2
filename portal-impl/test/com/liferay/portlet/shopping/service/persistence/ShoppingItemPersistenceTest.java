@@ -103,7 +103,7 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 		newShoppingItem.setLargeImageId(nextLong());
 		newShoppingItem.setLargeImageURL(randomString());
 
-		_persistence.update(newShoppingItem);
+		_persistence.update(newShoppingItem, false);
 
 		ShoppingItem existingShoppingItem = _persistence.findByPrimaryKey(newShoppingItem.getPrimaryKey());
 
@@ -245,7 +245,7 @@ public class ShoppingItemPersistenceTest extends BasePersistenceTestCase {
 		shoppingItem.setLargeImageId(nextLong());
 		shoppingItem.setLargeImageURL(randomString());
 
-		_persistence.update(shoppingItem);
+		_persistence.update(shoppingItem, false);
 
 		return shoppingItem;
 	}

@@ -75,7 +75,7 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 		newAnnouncementsFlag.setEntryId(nextLong());
 		newAnnouncementsFlag.setValue(nextInt());
 
-		_persistence.update(newAnnouncementsFlag);
+		_persistence.update(newAnnouncementsFlag, false);
 
 		AnnouncementsFlag existingAnnouncementsFlag = _persistence.findByPrimaryKey(newAnnouncementsFlag.getPrimaryKey());
 
@@ -138,7 +138,7 @@ public class AnnouncementsFlagPersistenceTest extends BasePersistenceTestCase {
 		announcementsFlag.setEntryId(nextLong());
 		announcementsFlag.setValue(nextInt());
 
-		_persistence.update(announcementsFlag);
+		_persistence.update(announcementsFlag, false);
 
 		return announcementsFlag;
 	}

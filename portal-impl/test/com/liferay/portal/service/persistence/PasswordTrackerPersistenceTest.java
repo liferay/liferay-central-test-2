@@ -73,7 +73,7 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 		newPasswordTracker.setCreateDate(nextDate());
 		newPasswordTracker.setPassword(randomString());
 
-		_persistence.update(newPasswordTracker);
+		_persistence.update(newPasswordTracker, false);
 
 		PasswordTracker existingPasswordTracker = _persistence.findByPrimaryKey(newPasswordTracker.getPrimaryKey());
 
@@ -132,7 +132,7 @@ public class PasswordTrackerPersistenceTest extends BasePersistenceTestCase {
 		passwordTracker.setCreateDate(nextDate());
 		passwordTracker.setPassword(randomString());
 
-		_persistence.update(passwordTracker);
+		_persistence.update(passwordTracker, false);
 
 		return passwordTracker;
 	}

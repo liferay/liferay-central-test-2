@@ -99,7 +99,7 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		newJournalArticle.setSmallImageId(nextLong());
 		newJournalArticle.setSmallImageURL(randomString());
 
-		_persistence.update(newJournalArticle);
+		_persistence.update(newJournalArticle, false);
 
 		JournalArticle existingJournalArticle = _persistence.findByPrimaryKey(newJournalArticle.getPrimaryKey());
 
@@ -232,7 +232,7 @@ public class JournalArticlePersistenceTest extends BasePersistenceTestCase {
 		journalArticle.setSmallImageId(nextLong());
 		journalArticle.setSmallImageURL(randomString());
 
-		_persistence.update(journalArticle);
+		_persistence.update(journalArticle, false);
 
 		return journalArticle;
 	}

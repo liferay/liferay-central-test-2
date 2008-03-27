@@ -75,7 +75,7 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		newRelease.setBuildDate(nextDate());
 		newRelease.setVerified(randomBoolean());
 
-		_persistence.update(newRelease);
+		_persistence.update(newRelease, false);
 
 		Release existingRelease = _persistence.findByPrimaryKey(newRelease.getPrimaryKey());
 
@@ -136,7 +136,7 @@ public class ReleasePersistenceTest extends BasePersistenceTestCase {
 		release.setBuildDate(nextDate());
 		release.setVerified(randomBoolean());
 
-		_persistence.update(release);
+		_persistence.update(release, false);
 
 		return release;
 	}

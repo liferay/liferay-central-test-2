@@ -82,7 +82,7 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		newGroup.setFriendlyURL(randomString());
 		newGroup.setActive(randomBoolean());
 
-		_persistence.update(newGroup);
+		_persistence.update(newGroup, false);
 
 		Group existingGroup = _persistence.findByPrimaryKey(newGroup.getPrimaryKey());
 
@@ -157,7 +157,7 @@ public class GroupPersistenceTest extends BasePersistenceTestCase {
 		group.setFriendlyURL(randomString());
 		group.setActive(randomBoolean());
 
-		_persistence.update(group);
+		_persistence.update(group, false);
 
 		return group;
 	}

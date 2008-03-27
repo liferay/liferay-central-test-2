@@ -74,7 +74,7 @@ public class JournalArticleResourcePersistenceTest
 		newJournalArticleResource.setGroupId(nextLong());
 		newJournalArticleResource.setArticleId(randomString());
 
-		_persistence.update(newJournalArticleResource);
+		_persistence.update(newJournalArticleResource, false);
 
 		JournalArticleResource existingJournalArticleResource = _persistence.findByPrimaryKey(newJournalArticleResource.getPrimaryKey());
 
@@ -131,7 +131,7 @@ public class JournalArticleResourcePersistenceTest
 		journalArticleResource.setGroupId(nextLong());
 		journalArticleResource.setArticleId(randomString());
 
-		_persistence.update(journalArticleResource);
+		_persistence.update(journalArticleResource, false);
 
 		return journalArticleResource;
 	}

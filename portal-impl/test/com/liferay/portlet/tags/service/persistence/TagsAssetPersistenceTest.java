@@ -92,7 +92,7 @@ public class TagsAssetPersistenceTest extends BasePersistenceTestCase {
 		newTagsAsset.setPriority(nextDouble());
 		newTagsAsset.setViewCount(nextInt());
 
-		_persistence.update(newTagsAsset);
+		_persistence.update(newTagsAsset, false);
 
 		TagsAsset existingTagsAsset = _persistence.findByPrimaryKey(newTagsAsset.getPrimaryKey());
 
@@ -192,7 +192,7 @@ public class TagsAssetPersistenceTest extends BasePersistenceTestCase {
 		tagsAsset.setPriority(nextDouble());
 		tagsAsset.setViewCount(nextInt());
 
-		_persistence.update(tagsAsset);
+		_persistence.update(tagsAsset, false);
 
 		return tagsAsset;
 	}

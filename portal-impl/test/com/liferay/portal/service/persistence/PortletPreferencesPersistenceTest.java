@@ -75,7 +75,7 @@ public class PortletPreferencesPersistenceTest extends BasePersistenceTestCase {
 		newPortletPreferences.setPortletId(randomString());
 		newPortletPreferences.setPreferences(randomString());
 
-		_persistence.update(newPortletPreferences);
+		_persistence.update(newPortletPreferences, false);
 
 		PortletPreferences existingPortletPreferences = _persistence.findByPrimaryKey(newPortletPreferences.getPrimaryKey());
 
@@ -142,7 +142,7 @@ public class PortletPreferencesPersistenceTest extends BasePersistenceTestCase {
 		portletPreferences.setPortletId(randomString());
 		portletPreferences.setPreferences(randomString());
 
-		_persistence.update(portletPreferences);
+		_persistence.update(portletPreferences, false);
 
 		return portletPreferences;
 	}

@@ -95,7 +95,7 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		newPasswordPolicy.setRequireUnlock(randomBoolean());
 		newPasswordPolicy.setResetFailureCount(nextLong());
 
-		_persistence.update(newPasswordPolicy);
+		_persistence.update(newPasswordPolicy, false);
 
 		PasswordPolicy existingPasswordPolicy = _persistence.findByPrimaryKey(newPasswordPolicy.getPrimaryKey());
 
@@ -220,7 +220,7 @@ public class PasswordPolicyPersistenceTest extends BasePersistenceTestCase {
 		passwordPolicy.setRequireUnlock(randomBoolean());
 		passwordPolicy.setResetFailureCount(nextLong());
 
-		_persistence.update(passwordPolicy);
+		_persistence.update(passwordPolicy, false);
 
 		return passwordPolicy;
 	}

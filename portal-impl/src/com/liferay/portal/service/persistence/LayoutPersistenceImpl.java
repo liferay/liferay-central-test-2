@@ -143,7 +143,7 @@ public class LayoutPersistenceImpl extends BasePersistence
 	public Layout update(Layout layout) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Layout layout) method. To improve performance, call update(Layout layout, boolean merge).");
+				"Using the deprecated update(Layout layout) method. Use update(Layout layout, boolean merge) instead.");
 		}
 
 		return update(layout, false);

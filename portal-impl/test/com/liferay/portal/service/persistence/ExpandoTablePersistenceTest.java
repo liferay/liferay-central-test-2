@@ -72,7 +72,7 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 		newExpandoTable.setClassNameId(nextLong());
 		newExpandoTable.setName(randomString());
 
-		_persistence.update(newExpandoTable);
+		_persistence.update(newExpandoTable, false);
 
 		ExpandoTable existingExpandoTable = _persistence.findByPrimaryKey(newExpandoTable.getPrimaryKey());
 
@@ -127,7 +127,7 @@ public class ExpandoTablePersistenceTest extends BasePersistenceTestCase {
 		expandoTable.setClassNameId(nextLong());
 		expandoTable.setName(randomString());
 
-		_persistence.update(expandoTable);
+		_persistence.update(expandoTable, false);
 
 		return expandoTable;
 	}

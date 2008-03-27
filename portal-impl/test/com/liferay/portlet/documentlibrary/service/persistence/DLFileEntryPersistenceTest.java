@@ -87,7 +87,7 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		newDLFileEntry.setReadCount(nextInt());
 		newDLFileEntry.setExtraSettings(randomString());
 
-		_persistence.update(newDLFileEntry);
+		_persistence.update(newDLFileEntry, false);
 
 		DLFileEntry existingDLFileEntry = _persistence.findByPrimaryKey(newDLFileEntry.getPrimaryKey());
 
@@ -180,7 +180,7 @@ public class DLFileEntryPersistenceTest extends BasePersistenceTestCase {
 		dlFileEntry.setReadCount(nextInt());
 		dlFileEntry.setExtraSettings(randomString());
 
-		_persistence.update(dlFileEntry);
+		_persistence.update(dlFileEntry, false);
 
 		return dlFileEntry;
 	}

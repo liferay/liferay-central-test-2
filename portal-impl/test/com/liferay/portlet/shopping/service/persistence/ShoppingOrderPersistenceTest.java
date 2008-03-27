@@ -121,7 +121,7 @@ public class ShoppingOrderPersistenceTest extends BasePersistenceTestCase {
 		newShoppingOrder.setSendOrderEmail(randomBoolean());
 		newShoppingOrder.setSendShippingEmail(randomBoolean());
 
-		_persistence.update(newShoppingOrder);
+		_persistence.update(newShoppingOrder, false);
 
 		ShoppingOrder existingShoppingOrder = _persistence.findByPrimaryKey(newShoppingOrder.getPrimaryKey());
 
@@ -320,7 +320,7 @@ public class ShoppingOrderPersistenceTest extends BasePersistenceTestCase {
 		shoppingOrder.setSendOrderEmail(randomBoolean());
 		shoppingOrder.setSendShippingEmail(randomBoolean());
 
-		_persistence.update(shoppingOrder);
+		_persistence.update(shoppingOrder, false);
 
 		return shoppingOrder;
 	}

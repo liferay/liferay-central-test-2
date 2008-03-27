@@ -149,7 +149,7 @@ public class PasswordPolicyPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(PasswordPolicy passwordPolicy) method. To improve performance, call update(PasswordPolicy passwordPolicy, boolean merge).");
+				"Using the deprecated update(PasswordPolicy passwordPolicy) method. Use update(PasswordPolicy passwordPolicy, boolean merge) instead.");
 		}
 
 		return update(passwordPolicy, false);

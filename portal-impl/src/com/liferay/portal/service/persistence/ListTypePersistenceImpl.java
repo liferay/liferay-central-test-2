@@ -145,7 +145,7 @@ public class ListTypePersistenceImpl extends BasePersistence
 	public ListType update(ListType listType) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ListType listType) method. To improve performance, call update(ListType listType, boolean merge).");
+				"Using the deprecated update(ListType listType) method. Use update(ListType listType, boolean merge) instead.");
 		}
 
 		return update(listType, false);

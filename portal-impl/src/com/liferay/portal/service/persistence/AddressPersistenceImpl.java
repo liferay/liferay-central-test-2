@@ -145,7 +145,7 @@ public class AddressPersistenceImpl extends BasePersistence
 	public Address update(Address address) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Address address) method. To improve performance, call update(Address address, boolean merge).");
+				"Using the deprecated update(Address address) method. Use update(Address address, boolean merge) instead.");
 		}
 
 		return update(address, false);

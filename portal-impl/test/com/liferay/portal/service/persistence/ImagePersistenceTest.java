@@ -76,7 +76,7 @@ public class ImagePersistenceTest extends BasePersistenceTestCase {
 		newImage.setWidth(nextInt());
 		newImage.setSize(nextInt());
 
-		_persistence.update(newImage);
+		_persistence.update(newImage, false);
 
 		Image existingImage = _persistence.findByPrimaryKey(newImage.getPrimaryKey());
 
@@ -137,7 +137,7 @@ public class ImagePersistenceTest extends BasePersistenceTestCase {
 		image.setWidth(nextInt());
 		image.setSize(nextInt());
 
-		_persistence.update(image);
+		_persistence.update(image, false);
 
 		return image;
 	}

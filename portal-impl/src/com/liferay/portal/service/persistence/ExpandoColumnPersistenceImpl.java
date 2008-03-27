@@ -148,7 +148,7 @@ public class ExpandoColumnPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(ExpandoColumn expandoColumn) method. To improve performance, call update(ExpandoColumn expandoColumn, boolean merge).");
+				"Using the deprecated update(ExpandoColumn expandoColumn) method. Use update(ExpandoColumn expandoColumn, boolean merge) instead.");
 		}
 
 		return update(expandoColumn, false);

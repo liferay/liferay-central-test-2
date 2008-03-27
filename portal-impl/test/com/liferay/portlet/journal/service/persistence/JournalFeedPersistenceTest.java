@@ -93,7 +93,7 @@ public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
 		newJournalFeed.setFeedType(randomString());
 		newJournalFeed.setFeedVersion(nextDouble());
 
-		_persistence.update(newJournalFeed);
+		_persistence.update(newJournalFeed, false);
 
 		JournalFeed existingJournalFeed = _persistence.findByPrimaryKey(newJournalFeed.getPrimaryKey());
 
@@ -202,7 +202,7 @@ public class JournalFeedPersistenceTest extends BasePersistenceTestCase {
 		journalFeed.setFeedType(randomString());
 		journalFeed.setFeedVersion(nextDouble());
 
-		_persistence.update(journalFeed);
+		_persistence.update(journalFeed, false);
 
 		return journalFeed;
 	}

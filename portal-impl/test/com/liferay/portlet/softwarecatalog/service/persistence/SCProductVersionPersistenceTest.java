@@ -82,7 +82,7 @@ public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
 		newSCProductVersion.setDirectDownloadURL(randomString());
 		newSCProductVersion.setRepoStoreArtifact(randomBoolean());
 
-		_persistence.update(newSCProductVersion);
+		_persistence.update(newSCProductVersion, false);
 
 		SCProductVersion existingSCProductVersion = _persistence.findByPrimaryKey(newSCProductVersion.getPrimaryKey());
 
@@ -165,7 +165,7 @@ public class SCProductVersionPersistenceTest extends BasePersistenceTestCase {
 		scProductVersion.setDirectDownloadURL(randomString());
 		scProductVersion.setRepoStoreArtifact(randomBoolean());
 
-		_persistence.update(scProductVersion);
+		_persistence.update(scProductVersion, false);
 
 		return scProductVersion;
 	}

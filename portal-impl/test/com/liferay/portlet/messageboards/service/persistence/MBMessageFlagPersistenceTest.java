@@ -74,7 +74,7 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		newMBMessageFlag.setMessageId(nextLong());
 		newMBMessageFlag.setFlag(nextInt());
 
-		_persistence.update(newMBMessageFlag);
+		_persistence.update(newMBMessageFlag, false);
 
 		MBMessageFlag existingMBMessageFlag = _persistence.findByPrimaryKey(newMBMessageFlag.getPrimaryKey());
 
@@ -132,7 +132,7 @@ public class MBMessageFlagPersistenceTest extends BasePersistenceTestCase {
 		mbMessageFlag.setMessageId(nextLong());
 		mbMessageFlag.setFlag(nextInt());
 
-		_persistence.update(mbMessageFlag);
+		_persistence.update(mbMessageFlag, false);
 
 		return mbMessageFlag;
 	}

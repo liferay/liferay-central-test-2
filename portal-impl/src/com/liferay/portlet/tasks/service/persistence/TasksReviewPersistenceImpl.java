@@ -150,7 +150,7 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(TasksReview tasksReview) method. To improve performance, call update(TasksReview tasksReview, boolean merge).");
+				"Using the deprecated update(TasksReview tasksReview) method. Use update(TasksReview tasksReview, boolean merge) instead.");
 		}
 
 		return update(tasksReview, false);

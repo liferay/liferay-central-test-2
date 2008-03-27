@@ -149,7 +149,7 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 		throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(UserIdMapper userIdMapper) method. To improve performance, call update(UserIdMapper userIdMapper, boolean merge).");
+				"Using the deprecated update(UserIdMapper userIdMapper) method. Use update(UserIdMapper userIdMapper, boolean merge) instead.");
 		}
 
 		return update(userIdMapper, false);

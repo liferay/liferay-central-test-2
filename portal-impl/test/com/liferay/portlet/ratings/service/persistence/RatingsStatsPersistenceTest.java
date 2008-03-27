@@ -76,7 +76,7 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 		newRatingsStats.setTotalScore(nextDouble());
 		newRatingsStats.setAverageScore(nextDouble());
 
-		_persistence.update(newRatingsStats);
+		_persistence.update(newRatingsStats, false);
 
 		RatingsStats existingRatingsStats = _persistence.findByPrimaryKey(newRatingsStats.getPrimaryKey());
 
@@ -141,7 +141,7 @@ public class RatingsStatsPersistenceTest extends BasePersistenceTestCase {
 		ratingsStats.setTotalScore(nextDouble());
 		ratingsStats.setAverageScore(nextDouble());
 
-		_persistence.update(ratingsStats);
+		_persistence.update(ratingsStats, false);
 
 		return ratingsStats;
 	}

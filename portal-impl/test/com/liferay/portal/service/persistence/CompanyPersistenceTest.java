@@ -76,7 +76,7 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		newCompany.setMx(randomString());
 		newCompany.setLogoId(nextLong());
 
-		_persistence.update(newCompany);
+		_persistence.update(newCompany, false);
 
 		Company existingCompany = _persistence.findByPrimaryKey(newCompany.getPrimaryKey());
 
@@ -138,7 +138,7 @@ public class CompanyPersistenceTest extends BasePersistenceTestCase {
 		company.setMx(randomString());
 		company.setLogoId(nextLong());
 
-		_persistence.update(company);
+		_persistence.update(company, false);
 
 		return company;
 	}

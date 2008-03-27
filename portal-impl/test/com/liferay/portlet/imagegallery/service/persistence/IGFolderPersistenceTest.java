@@ -80,7 +80,7 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		newIGFolder.setName(randomString());
 		newIGFolder.setDescription(randomString());
 
-		_persistence.update(newIGFolder);
+		_persistence.update(newIGFolder, false);
 
 		IGFolder existingIGFolder = _persistence.findByPrimaryKey(newIGFolder.getPrimaryKey());
 
@@ -151,7 +151,7 @@ public class IGFolderPersistenceTest extends BasePersistenceTestCase {
 		igFolder.setName(randomString());
 		igFolder.setDescription(randomString());
 
-		_persistence.update(igFolder);
+		_persistence.update(igFolder, false);
 
 		return igFolder;
 	}

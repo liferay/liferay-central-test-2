@@ -75,7 +75,7 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		newPluginSetting.setRoles(randomString());
 		newPluginSetting.setActive(randomBoolean());
 
-		_persistence.update(newPluginSetting);
+		_persistence.update(newPluginSetting, false);
 
 		PluginSetting existingPluginSetting = _persistence.findByPrimaryKey(newPluginSetting.getPrimaryKey());
 
@@ -140,7 +140,7 @@ public class PluginSettingPersistenceTest extends BasePersistenceTestCase {
 		pluginSetting.setRoles(randomString());
 		pluginSetting.setActive(randomBoolean());
 
-		_persistence.update(pluginSetting);
+		_persistence.update(pluginSetting, false);
 
 		return pluginSetting;
 	}

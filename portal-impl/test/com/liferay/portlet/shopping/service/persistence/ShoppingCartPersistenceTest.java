@@ -81,7 +81,7 @@ public class ShoppingCartPersistenceTest extends BasePersistenceTestCase {
 		newShoppingCart.setAltShipping(nextInt());
 		newShoppingCart.setInsure(randomBoolean());
 
-		_persistence.update(newShoppingCart);
+		_persistence.update(newShoppingCart, false);
 
 		ShoppingCart existingShoppingCart = _persistence.findByPrimaryKey(newShoppingCart.getPrimaryKey());
 
@@ -161,7 +161,7 @@ public class ShoppingCartPersistenceTest extends BasePersistenceTestCase {
 		shoppingCart.setAltShipping(nextInt());
 		shoppingCart.setInsure(randomBoolean());
 
-		_persistence.update(shoppingCart);
+		_persistence.update(shoppingCart, false);
 
 		return shoppingCart;
 	}

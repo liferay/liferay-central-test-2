@@ -80,7 +80,7 @@ public class ShoppingCategoryPersistenceTest extends BasePersistenceTestCase {
 		newShoppingCategory.setName(randomString());
 		newShoppingCategory.setDescription(randomString());
 
-		_persistence.update(newShoppingCategory);
+		_persistence.update(newShoppingCategory, false);
 
 		ShoppingCategory existingShoppingCategory = _persistence.findByPrimaryKey(newShoppingCategory.getPrimaryKey());
 
@@ -157,7 +157,7 @@ public class ShoppingCategoryPersistenceTest extends BasePersistenceTestCase {
 		shoppingCategory.setName(randomString());
 		shoppingCategory.setDescription(randomString());
 
-		_persistence.update(shoppingCategory);
+		_persistence.update(shoppingCategory, false);
 
 		return shoppingCategory;
 	}

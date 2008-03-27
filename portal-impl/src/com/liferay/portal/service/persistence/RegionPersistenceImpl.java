@@ -145,7 +145,7 @@ public class RegionPersistenceImpl extends BasePersistence
 	public Region update(Region region) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(Region region) method. To improve performance, call update(Region region, boolean merge).");
+				"Using the deprecated update(Region region) method. Use update(Region region, boolean merge) instead.");
 		}
 
 		return update(region, false);

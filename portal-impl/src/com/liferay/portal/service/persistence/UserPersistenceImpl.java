@@ -210,7 +210,7 @@ public class UserPersistenceImpl extends BasePersistence
 	public User update(User user) throws SystemException {
 		if (_log.isWarnEnabled()) {
 			_log.warn(
-				"Using the deprecated update(User user) method. To improve performance, call update(User user, boolean merge).");
+				"Using the deprecated update(User user) method. Use update(User user, boolean merge) instead.");
 		}
 
 		return update(user, false);
