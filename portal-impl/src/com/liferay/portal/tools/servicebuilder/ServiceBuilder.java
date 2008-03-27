@@ -24,6 +24,7 @@ package com.liferay.portal.tools.servicebuilder;
 
 import com.liferay.portal.freemarker.FreeMarkerUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.ArrayUtil_IW;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -3031,6 +3032,7 @@ public class ServiceBuilder {
 		context.put("packagePath", _packagePath);
 		context.put("serviceBuilder", this);
 
+		context.put("arrayUtil", ArrayUtil_IW.getInstance());
 		context.put(
 			"modelHintsUtil",
 			staticModels.get("com.liferay.portal.model.ModelHintsUtil"));
