@@ -448,21 +448,6 @@ public class JournalArticleLocalServiceImpl
 
 		journalArticlePersistence.update(article, false);
 
-		// Unapprove and expire all other versions
-
-		List<JournalArticle> articles = journalArticlePersistence.findByG_A_A(
-			groupId, articleId, true);
-
-		for (JournalArticle curArticle : articles) {
-			if (curArticle.getVersion() != article.getVersion()) {
-				curArticle.setApproved(false);
-				curArticle.setExpired(true);
-				curArticle.setExpirationDate(now);
-
-				journalArticlePersistence.update(curArticle, false);
-			}
-		}
-
 		// Email
 
 		sendEmail(article, articleURL, prefs, "granted");
@@ -1143,14 +1128,13 @@ public class JournalArticleLocalServiceImpl
 			throw new NoSuchArticleException();
 		}
 
-		Collections.sort(articles, new ArticleDisplayDateComparator());
-
 		Date now = new Date();
 
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = articles.get(i);
 
-			if (article.getDisplayDate().before(now)) {
+			if (article.getDisplayDate().before(now) &&
+					article.getExpirationDate().after(now)) {
 				return article;
 			}
 		}
@@ -1647,23 +1631,6 @@ public class JournalArticleLocalServiceImpl
 		article.setSmallImageURL(smallImageURL);
 
 		journalArticlePersistence.update(article, false);
-
-		// Unapprove and expire all other versions
-
-		if (incrementVersion && approved) {
-			List<JournalArticle> articles =
-				journalArticlePersistence.findByG_A_A(groupId, articleId, true);
-
-			for (JournalArticle curArticle : articles) {
-				if (curArticle.getVersion() != article.getVersion()) {
-					curArticle.setApproved(false);
-					curArticle.setExpired(true);
-					curArticle.setExpirationDate(now);
-
-					journalArticlePersistence.update(curArticle, false);
-				}
-			}
-		}
 
 		// Small image
 
