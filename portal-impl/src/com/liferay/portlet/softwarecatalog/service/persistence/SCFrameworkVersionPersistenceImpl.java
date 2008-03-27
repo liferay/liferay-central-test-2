@@ -168,11 +168,32 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(SCFrameworkVersion scFrameworkVersion, boolean merge)</code>.
+	 */
 	public SCFrameworkVersion update(SCFrameworkVersion scFrameworkVersion)
 		throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(SCFrameworkVersion scFrameworkVersion) method. To improve performance, call update(SCFrameworkVersion scFrameworkVersion, boolean merge).");
+		}
+
 		return update(scFrameworkVersion, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        scFrameworkVersion the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when scFrameworkVersion is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public SCFrameworkVersion update(SCFrameworkVersion scFrameworkVersion,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();

@@ -39,10 +39,26 @@ public interface TagsSourcePersistence {
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * @deprecated Use <code>update(TagsSource tagsSource, boolean merge)</code>.
+	 */
 	public com.liferay.portlet.tags.model.TagsSource update(
 		com.liferay.portlet.tags.model.TagsSource tagsSource)
 		throws com.liferay.portal.SystemException;
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        tagsSource the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when tagsSource is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public com.liferay.portlet.tags.model.TagsSource update(
 		com.liferay.portlet.tags.model.TagsSource tagsSource, boolean merge)
 		throws com.liferay.portal.SystemException;

@@ -143,11 +143,32 @@ public class MembershipRequestPersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(MembershipRequest membershipRequest, boolean merge)</code>.
+	 */
 	public MembershipRequest update(MembershipRequest membershipRequest)
 		throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(MembershipRequest membershipRequest) method. To improve performance, call update(MembershipRequest membershipRequest, boolean merge).");
+		}
+
 		return update(membershipRequest, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        membershipRequest the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when membershipRequest is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public MembershipRequest update(MembershipRequest membershipRequest,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();

@@ -89,7 +89,7 @@ public class ActivityTrackerLocalServiceImpl
 		activityTracker.setReceiverUserId(receiverUserId);
 		activityTracker.setReceiverUserName(receiverUserName);
 
-		activityTrackerPersistence.update(activityTracker);
+		activityTrackerPersistence.update(activityTracker, false);
 
 		return activityTracker;
 	}

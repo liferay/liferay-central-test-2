@@ -86,7 +86,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		address.setMailing(mailing);
 		address.setPrimary(primary);
 
-		addressPersistence.update(address);
+		addressPersistence.update(address, false);
 
 		return address;
 	}
@@ -148,7 +148,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 		address.setMailing(mailing);
 		address.setPrimary(primary);
 
-		addressPersistence.update(address);
+		addressPersistence.update(address, false);
 
 		return address;
 	}
@@ -218,7 +218,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 					address.setMailing(false);
 
-					addressPersistence.update(address);
+					addressPersistence.update(address, false);
 				}
 			}
 		}
@@ -238,7 +238,7 @@ public class AddressLocalServiceImpl extends AddressLocalServiceBaseImpl {
 
 					address.setPrimary(false);
 
-					addressPersistence.update(address);
+					addressPersistence.update(address, false);
 				}
 			}
 		}

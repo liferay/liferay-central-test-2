@@ -139,10 +139,31 @@ public class OrgLaborPersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(OrgLabor orgLabor, boolean merge)</code>.
+	 */
 	public OrgLabor update(OrgLabor orgLabor) throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(OrgLabor orgLabor) method. To improve performance, call update(OrgLabor orgLabor, boolean merge).");
+		}
+
 		return update(orgLabor, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        orgLabor the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when orgLabor is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public OrgLabor update(OrgLabor orgLabor, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();

@@ -129,7 +129,7 @@ public class BookmarksFolderLocalServiceImpl
 		folder.setName(name);
 		folder.setDescription(description);
 
-		bookmarksFolderPersistence.update(folder);
+		bookmarksFolderPersistence.update(folder, false);
 
 		// Resources
 
@@ -418,7 +418,7 @@ public class BookmarksFolderLocalServiceImpl
 		folder.setName(name);
 		folder.setDescription(description);
 
-		bookmarksFolderPersistence.update(folder);
+		bookmarksFolderPersistence.update(folder, false);
 
 		// Merge folders
 
@@ -498,7 +498,7 @@ public class BookmarksFolderLocalServiceImpl
 		for (BookmarksEntry entry : entries) {
 			entry.setFolderId(toFolderId);
 
-			bookmarksEntryPersistence.update(entry);
+			bookmarksEntryPersistence.update(entry, false);
 		}
 
 		bookmarksFolderPersistence.remove(fromFolder.getFolderId());

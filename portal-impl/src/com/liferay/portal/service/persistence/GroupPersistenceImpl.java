@@ -201,10 +201,31 @@ public class GroupPersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(Group group, boolean merge)</code>.
+	 */
 	public Group update(Group group) throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(Group group) method. To improve performance, call update(Group group, boolean merge).");
+		}
+
 		return update(group, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        group the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when group is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public Group update(Group group, boolean merge) throws SystemException {
 		ModelListener listener = _getListener();
 

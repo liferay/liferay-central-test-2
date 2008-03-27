@@ -141,10 +141,31 @@ public class TagsSourcePersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(TagsSource tagsSource, boolean merge)</code>.
+	 */
 	public TagsSource update(TagsSource tagsSource) throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(TagsSource tagsSource) method. To improve performance, call update(TagsSource tagsSource, boolean merge).");
+		}
+
 		return update(tagsSource, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        tagsSource the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when tagsSource is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public TagsSource update(TagsSource tagsSource, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();

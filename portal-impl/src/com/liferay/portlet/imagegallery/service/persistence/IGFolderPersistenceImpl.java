@@ -146,10 +146,31 @@ public class IGFolderPersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(IGFolder igFolder, boolean merge)</code>.
+	 */
 	public IGFolder update(IGFolder igFolder) throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(IGFolder igFolder) method. To improve performance, call update(IGFolder igFolder, boolean merge).");
+		}
+
 		return update(igFolder, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        igFolder the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when igFolder is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public IGFolder update(IGFolder igFolder, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();

@@ -165,10 +165,31 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(SCLicense scLicense, boolean merge)</code>.
+	 */
 	public SCLicense update(SCLicense scLicense) throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(SCLicense scLicense) method. To improve performance, call update(SCLicense scLicense, boolean merge).");
+		}
+
 		return update(scLicense, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        scLicense the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when scLicense is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public SCLicense update(SCLicense scLicense, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();

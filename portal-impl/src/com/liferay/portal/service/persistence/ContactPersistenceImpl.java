@@ -139,10 +139,31 @@ public class ContactPersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(Contact contact, boolean merge)</code>.
+	 */
 	public Contact update(Contact contact) throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(Contact contact) method. To improve performance, call update(Contact contact, boolean merge).");
+		}
+
 		return update(contact, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        contact the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when contact is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public Contact update(Contact contact, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();

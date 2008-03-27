@@ -145,11 +145,32 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(AnnouncementsFlag announcementsFlag, boolean merge)</code>.
+	 */
 	public AnnouncementsFlag update(AnnouncementsFlag announcementsFlag)
 		throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(AnnouncementsFlag announcementsFlag) method. To improve performance, call update(AnnouncementsFlag announcementsFlag, boolean merge).");
+		}
+
 		return update(announcementsFlag, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        announcementsFlag the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when announcementsFlag is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public AnnouncementsFlag update(AnnouncementsFlag announcementsFlag,
 		boolean merge) throws SystemException {
 		ModelListener listener = _getListener();

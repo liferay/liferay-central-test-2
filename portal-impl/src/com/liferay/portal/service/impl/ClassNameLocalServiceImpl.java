@@ -80,7 +80,7 @@ public class ClassNameLocalServiceImpl extends ClassNameLocalServiceBaseImpl {
 
 				classNameModel.setValue(value);
 
-				classNamePersistence.update(classNameModel);
+				classNamePersistence.update(classNameModel, false);
 			}
 
 			_classNames.put(value, classNameModel);

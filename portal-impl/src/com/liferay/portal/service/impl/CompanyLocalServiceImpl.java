@@ -107,7 +107,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		company.setVirtualHost(virtualHost);
 		company.setMx(mx);
 
-		companyPersistence.update(company);
+		companyPersistence.update(company, false);
 
 		// Lucene
 
@@ -165,7 +165,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setVirtualHost(virtualHost);
 			company.setMx(mx);
 
-			companyPersistence.update(company);
+			companyPersistence.update(company, false);
 
 			updateCompany(
 				companyId, virtualHost, mx, name, legalName, legalId, legalType,
@@ -178,7 +178,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 				company.setVirtualHost("demo.liferay.net");
 
-				companyPersistence.update(company);
+				companyPersistence.update(company, false);
 
 				updateSecurity(
 					companyId, CompanyImpl.AUTH_TYPE_EA, true, true, true, true,
@@ -220,7 +220,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			if (!defaultUser.isAgreedToTermsOfUse()) {
 				defaultUser.setAgreedToTermsOfUse(true);
 
-				userPersistence.update(defaultUser);
+				userPersistence.update(defaultUser, false);
 			}
 		}
 		catch (NoSuchUserException nsue) {
@@ -247,7 +247,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultUser.setAgreedToTermsOfUse(true);
 			defaultUser.setActive(true);
 
-			userPersistence.update(defaultUser);
+			userPersistence.update(defaultUser, false);
 
 			// Contact
 
@@ -268,7 +268,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultContact.setMale(true);
 			defaultContact.setBirthday(now);
 
-			contactPersistence.update(defaultContact);
+			contactPersistence.update(defaultContact, false);
 		}
 
 		// System groups
@@ -372,7 +372,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			}
 		}
 
-		companyPersistence.update(company);
+		companyPersistence.update(company, false);
 	}
 
 	public List<Company> getCompanies() throws SystemException {
@@ -494,7 +494,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setMx(mx);
 		}
 
-		companyPersistence.update(company);
+		companyPersistence.update(company, false);
 
 		return company;
 	}
@@ -521,7 +521,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			company.setMx(mx);
 		}
 
-		companyPersistence.update(company);
+		companyPersistence.update(company, false);
 
 		// Account
 
@@ -543,7 +543,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			company.setAccountId(accountId);
 
-			companyPersistence.update(company);
+			companyPersistence.update(company, false);
 		}
 
 		account.setModifiedDate(now);
@@ -557,7 +557,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		account.setType(type);
 		account.setSize(size);
 
-		accountPersistence.update(account);
+		accountPersistence.update(account, false);
 
 		return company;
 	}
@@ -571,7 +571,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		user.setLanguageId(languageId);
 		user.setTimeZoneId(timeZoneId);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 	}
 
 	public void updateLogo(long companyId, File file)

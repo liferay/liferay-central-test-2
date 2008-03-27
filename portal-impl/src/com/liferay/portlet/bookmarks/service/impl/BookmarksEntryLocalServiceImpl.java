@@ -127,7 +127,7 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setUrl(url);
 		entry.setComments(comments);
 
-		bookmarksEntryPersistence.update(entry);
+		bookmarksEntryPersistence.update(entry, false);
 
 		// Resources
 
@@ -338,7 +338,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		entry.setVisits(entry.getVisits() + 1);
 
-		bookmarksEntryPersistence.update(entry);
+		bookmarksEntryPersistence.update(entry, false);
 
 		return entry;
 	}
@@ -367,7 +367,7 @@ public class BookmarksEntryLocalServiceImpl
 		entry.setUrl(url);
 		entry.setComments(comments);
 
-		bookmarksEntryPersistence.update(entry);
+		bookmarksEntryPersistence.update(entry, false);
 
 		// Tags
 

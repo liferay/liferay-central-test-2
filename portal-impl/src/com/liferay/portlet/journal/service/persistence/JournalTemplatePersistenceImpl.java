@@ -148,11 +148,32 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 		}
 	}
 
+	/**
+	 * @deprecated Use <code>update(JournalTemplate journalTemplate, boolean merge)</code>.
+	 */
 	public JournalTemplate update(JournalTemplate journalTemplate)
 		throws SystemException {
+		if (_log.isWarnEnabled()) {
+			_log.warn(
+				"Using the deprecated update(JournalTemplate journalTemplate) method. To improve performance, call update(JournalTemplate journalTemplate, boolean merge).");
+		}
+
 		return update(journalTemplate, false);
 	}
 
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        journalTemplate the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when journalTemplate is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
 	public JournalTemplate update(JournalTemplate journalTemplate, boolean merge)
 		throws SystemException {
 		ModelListener listener = _getListener();
