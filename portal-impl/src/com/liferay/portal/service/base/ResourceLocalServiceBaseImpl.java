@@ -308,7 +308,7 @@ public abstract class ResourceLocalServiceBaseImpl
 	public Resource addResource(Resource resource) throws SystemException {
 		resource.setNew(true);
 
-		return resourcePersistence.update(resource);
+		return resourcePersistence.update(resource, false);
 	}
 
 	public void deleteResource(long resourceId)

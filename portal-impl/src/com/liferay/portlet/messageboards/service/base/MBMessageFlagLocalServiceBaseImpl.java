@@ -98,7 +98,7 @@ public abstract class MBMessageFlagLocalServiceBaseImpl
 		throws SystemException {
 		mbMessageFlag.setNew(true);
 
-		return mbMessageFlagPersistence.update(mbMessageFlag);
+		return mbMessageFlagPersistence.update(mbMessageFlag, false);
 	}
 
 	public void deleteMBMessageFlag(long messageFlagId)

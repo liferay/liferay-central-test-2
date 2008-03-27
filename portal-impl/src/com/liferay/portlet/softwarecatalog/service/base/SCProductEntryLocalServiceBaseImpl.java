@@ -102,7 +102,7 @@ public abstract class SCProductEntryLocalServiceBaseImpl
 		throws SystemException {
 		scProductEntry.setNew(true);
 
-		return scProductEntryPersistence.update(scProductEntry);
+		return scProductEntryPersistence.update(scProductEntry, false);
 	}
 
 	public void deleteSCProductEntry(long productEntryId)

@@ -311,7 +311,7 @@ public abstract class ActivityTrackerLocalServiceBaseImpl
 		throws SystemException {
 		activityTracker.setNew(true);
 
-		return activityTrackerPersistence.update(activityTracker);
+		return activityTrackerPersistence.update(activityTracker, false);
 	}
 
 	public void deleteActivityTracker(long activityTrackerId)

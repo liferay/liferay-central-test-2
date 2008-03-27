@@ -311,7 +311,7 @@ public abstract class WebDAVPropsLocalServiceBaseImpl
 		throws SystemException {
 		webDAVProps.setNew(true);
 
-		return webDAVPropsPersistence.update(webDAVProps);
+		return webDAVPropsPersistence.update(webDAVProps, false);
 	}
 
 	public void deleteWebDAVProps(long webDavPropsId)

@@ -73,7 +73,7 @@ public abstract class TagsSourceLocalServiceBaseImpl
 		throws SystemException {
 		tagsSource.setNew(true);
 
-		return tagsSourcePersistence.update(tagsSource);
+		return tagsSourcePersistence.update(tagsSource, false);
 	}
 
 	public void deleteTagsSource(long sourceId)

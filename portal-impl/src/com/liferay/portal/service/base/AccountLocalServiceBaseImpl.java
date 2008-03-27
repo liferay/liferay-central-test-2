@@ -303,7 +303,7 @@ public abstract class AccountLocalServiceBaseImpl implements AccountLocalService
 	public Account addAccount(Account account) throws SystemException {
 		account.setNew(true);
 
-		return accountPersistence.update(account);
+		return accountPersistence.update(account, false);
 	}
 
 	public void deleteAccount(long accountId)

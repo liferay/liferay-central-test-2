@@ -309,7 +309,7 @@ public abstract class PermissionLocalServiceBaseImpl
 		throws SystemException {
 		permission.setNew(true);
 
-		return permissionPersistence.update(permission);
+		return permissionPersistence.update(permission, false);
 	}
 
 	public void deletePermission(long permissionId)

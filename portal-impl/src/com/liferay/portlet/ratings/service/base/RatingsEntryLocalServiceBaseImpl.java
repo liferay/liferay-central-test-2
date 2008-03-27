@@ -78,7 +78,7 @@ public abstract class RatingsEntryLocalServiceBaseImpl
 		throws SystemException {
 		ratingsEntry.setNew(true);
 
-		return ratingsEntryPersistence.update(ratingsEntry);
+		return ratingsEntryPersistence.update(ratingsEntry, false);
 	}
 
 	public void deleteRatingsEntry(long entryId)

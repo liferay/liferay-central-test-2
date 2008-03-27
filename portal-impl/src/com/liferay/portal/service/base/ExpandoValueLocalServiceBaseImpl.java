@@ -309,7 +309,7 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		throws SystemException {
 		expandoValue.setNew(true);
 
-		return expandoValuePersistence.update(expandoValue);
+		return expandoValuePersistence.update(expandoValue, false);
 	}
 
 	public void deleteExpandoValue(long valueId)

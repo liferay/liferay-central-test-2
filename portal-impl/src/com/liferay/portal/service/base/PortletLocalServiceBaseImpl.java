@@ -308,7 +308,7 @@ public abstract class PortletLocalServiceBaseImpl implements PortletLocalService
 	public Portlet addPortlet(Portlet portlet) throws SystemException {
 		portlet.setNew(true);
 
-		return portletPersistence.update(portlet);
+		return portletPersistence.update(portlet, false);
 	}
 
 	public void deletePortlet(long id) throws PortalException, SystemException {

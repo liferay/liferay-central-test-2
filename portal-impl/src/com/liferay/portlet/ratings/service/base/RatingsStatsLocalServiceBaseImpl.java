@@ -58,7 +58,7 @@ public abstract class RatingsStatsLocalServiceBaseImpl
 		throws SystemException {
 		ratingsStats.setNew(true);
 
-		return ratingsStatsPersistence.update(ratingsStats);
+		return ratingsStatsPersistence.update(ratingsStats, false);
 	}
 
 	public void deleteRatingsStats(long statsId)

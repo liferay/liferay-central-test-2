@@ -339,7 +339,7 @@ public abstract class LayoutLocalServiceBaseImpl implements LayoutLocalService,
 	public Layout addLayout(Layout layout) throws SystemException {
 		layout.setNew(true);
 
-		return layoutPersistence.update(layout);
+		return layoutPersistence.update(layout, false);
 	}
 
 	public void deleteLayout(long plid) throws PortalException, SystemException {

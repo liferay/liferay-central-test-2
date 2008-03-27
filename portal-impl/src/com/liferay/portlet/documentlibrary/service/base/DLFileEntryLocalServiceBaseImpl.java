@@ -128,7 +128,7 @@ public abstract class DLFileEntryLocalServiceBaseImpl
 		throws SystemException {
 		dlFileEntry.setNew(true);
 
-		return dlFileEntryPersistence.update(dlFileEntry);
+		return dlFileEntryPersistence.update(dlFileEntry, false);
 	}
 
 	public void deleteDLFileEntry(long fileEntryId)

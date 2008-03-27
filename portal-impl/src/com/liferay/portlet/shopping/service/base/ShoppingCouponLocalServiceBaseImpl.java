@@ -100,7 +100,7 @@ public abstract class ShoppingCouponLocalServiceBaseImpl
 		throws SystemException {
 		shoppingCoupon.setNew(true);
 
-		return shoppingCouponPersistence.update(shoppingCoupon);
+		return shoppingCouponPersistence.update(shoppingCoupon, false);
 	}
 
 	public void deleteShoppingCoupon(long couponId)

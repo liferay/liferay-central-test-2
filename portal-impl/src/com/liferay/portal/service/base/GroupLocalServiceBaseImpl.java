@@ -449,7 +449,7 @@ public abstract class GroupLocalServiceBaseImpl implements GroupLocalService,
 	public Group addGroup(Group group) throws SystemException {
 		group.setNew(true);
 
-		return groupPersistence.update(group);
+		return groupPersistence.update(group, false);
 	}
 
 	public void deleteGroup(long groupId)

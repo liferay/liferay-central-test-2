@@ -151,7 +151,7 @@ public abstract class JournalArticleLocalServiceBaseImpl
 		throws SystemException {
 		journalArticle.setNew(true);
 
-		return journalArticlePersistence.update(journalArticle);
+		return journalArticlePersistence.update(journalArticle, false);
 	}
 
 	public void deleteJournalArticle(long id)

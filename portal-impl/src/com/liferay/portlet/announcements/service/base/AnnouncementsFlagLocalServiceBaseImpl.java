@@ -60,7 +60,7 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		AnnouncementsFlag announcementsFlag) throws SystemException {
 		announcementsFlag.setNew(true);
 
-		return announcementsFlagPersistence.update(announcementsFlag);
+		return announcementsFlagPersistence.update(announcementsFlag, false);
 	}
 
 	public void deleteAnnouncementsFlag(long flagId)

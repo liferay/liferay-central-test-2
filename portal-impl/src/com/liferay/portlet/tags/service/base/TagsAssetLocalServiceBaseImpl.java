@@ -156,7 +156,7 @@ public abstract class TagsAssetLocalServiceBaseImpl
 		throws SystemException {
 		tagsAsset.setNew(true);
 
-		return tagsAssetPersistence.update(tagsAsset);
+		return tagsAssetPersistence.update(tagsAsset, false);
 	}
 
 	public void deleteTagsAsset(long assetId)

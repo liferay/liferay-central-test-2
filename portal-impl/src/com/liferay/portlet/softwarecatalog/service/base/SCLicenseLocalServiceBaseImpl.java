@@ -74,7 +74,7 @@ public abstract class SCLicenseLocalServiceBaseImpl
 		throws SystemException {
 		scLicense.setNew(true);
 
-		return scLicensePersistence.update(scLicense);
+		return scLicensePersistence.update(scLicense, false);
 	}
 
 	public void deleteSCLicense(long licenseId)

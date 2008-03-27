@@ -309,7 +309,7 @@ public abstract class UserGroupLocalServiceBaseImpl
 		throws SystemException {
 		userGroup.setNew(true);
 
-		return userGroupPersistence.update(userGroup);
+		return userGroupPersistence.update(userGroup, false);
 	}
 
 	public void deleteUserGroup(long userGroupId)

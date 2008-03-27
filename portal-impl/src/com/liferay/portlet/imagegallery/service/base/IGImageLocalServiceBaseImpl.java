@@ -83,7 +83,7 @@ public abstract class IGImageLocalServiceBaseImpl implements IGImageLocalService
 	public IGImage addIGImage(IGImage igImage) throws SystemException {
 		igImage.setNew(true);
 
-		return igImagePersistence.update(igImage);
+		return igImagePersistence.update(igImage, false);
 	}
 
 	public void deleteIGImage(long imageId)

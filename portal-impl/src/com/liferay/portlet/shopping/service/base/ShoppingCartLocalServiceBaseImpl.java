@@ -102,7 +102,7 @@ public abstract class ShoppingCartLocalServiceBaseImpl
 		throws SystemException {
 		shoppingCart.setNew(true);
 
-		return shoppingCartPersistence.update(shoppingCart);
+		return shoppingCartPersistence.update(shoppingCart, false);
 	}
 
 	public void deleteShoppingCart(long cartId)

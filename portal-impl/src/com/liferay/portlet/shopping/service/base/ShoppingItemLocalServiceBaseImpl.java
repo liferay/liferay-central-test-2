@@ -108,7 +108,7 @@ public abstract class ShoppingItemLocalServiceBaseImpl
 		throws SystemException {
 		shoppingItem.setNew(true);
 
-		return shoppingItemPersistence.update(shoppingItem);
+		return shoppingItemPersistence.update(shoppingItem, false);
 	}
 
 	public void deleteShoppingItem(long itemId)

@@ -93,7 +93,8 @@ public abstract class JournalArticleResourceLocalServiceBaseImpl
 		throws SystemException {
 		journalArticleResource.setNew(true);
 
-		return journalArticleResourcePersistence.update(journalArticleResource);
+		return journalArticleResourcePersistence.update(journalArticleResource,
+			false);
 	}
 
 	public void deleteJournalArticleResource(long resourcePrimKey)

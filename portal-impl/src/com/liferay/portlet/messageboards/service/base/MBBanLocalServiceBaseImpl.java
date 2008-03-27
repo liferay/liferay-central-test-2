@@ -95,7 +95,7 @@ public abstract class MBBanLocalServiceBaseImpl implements MBBanLocalService,
 	public MBBan addMBBan(MBBan mbBan) throws SystemException {
 		mbBan.setNew(true);
 
-		return mbBanPersistence.update(mbBan);
+		return mbBanPersistence.update(mbBan, false);
 	}
 
 	public void deleteMBBan(long banId) throws PortalException, SystemException {

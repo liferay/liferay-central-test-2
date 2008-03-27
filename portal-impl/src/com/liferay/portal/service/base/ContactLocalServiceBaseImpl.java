@@ -303,7 +303,7 @@ public abstract class ContactLocalServiceBaseImpl implements ContactLocalService
 	public Contact addContact(Contact contact) throws SystemException {
 		contact.setNew(true);
 
-		return contactPersistence.update(contact);
+		return contactPersistence.update(contact, false);
 	}
 
 	public void deleteContact(long contactId)

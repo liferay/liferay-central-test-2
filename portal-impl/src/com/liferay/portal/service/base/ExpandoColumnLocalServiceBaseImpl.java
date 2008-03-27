@@ -309,7 +309,7 @@ public abstract class ExpandoColumnLocalServiceBaseImpl
 		throws SystemException {
 		expandoColumn.setNew(true);
 
-		return expandoColumnPersistence.update(expandoColumn);
+		return expandoColumnPersistence.update(expandoColumn, false);
 	}
 
 	public void deleteExpandoColumn(long columnId)

@@ -309,7 +309,7 @@ public abstract class PortletPreferencesLocalServiceBaseImpl
 		PortletPreferences portletPreferences) throws SystemException {
 		portletPreferences.setNew(true);
 
-		return portletPreferencesPersistence.update(portletPreferences);
+		return portletPreferencesPersistence.update(portletPreferences, false);
 	}
 
 	public void deletePortletPreferences(long portletPreferencesId)

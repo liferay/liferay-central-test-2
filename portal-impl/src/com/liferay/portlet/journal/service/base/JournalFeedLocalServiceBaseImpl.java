@@ -106,7 +106,7 @@ public abstract class JournalFeedLocalServiceBaseImpl
 		throws SystemException {
 		journalFeed.setNew(true);
 
-		return journalFeedPersistence.update(journalFeed);
+		return journalFeedPersistence.update(journalFeed, false);
 	}
 
 	public void deleteJournalFeed(long id)

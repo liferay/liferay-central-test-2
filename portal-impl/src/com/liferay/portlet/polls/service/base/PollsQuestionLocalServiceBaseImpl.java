@@ -80,7 +80,7 @@ public abstract class PollsQuestionLocalServiceBaseImpl
 		throws SystemException {
 		pollsQuestion.setNew(true);
 
-		return pollsQuestionPersistence.update(pollsQuestion);
+		return pollsQuestionPersistence.update(pollsQuestion, false);
 	}
 
 	public void deletePollsQuestion(long questionId)

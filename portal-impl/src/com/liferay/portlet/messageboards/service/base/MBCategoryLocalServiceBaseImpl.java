@@ -116,7 +116,7 @@ public abstract class MBCategoryLocalServiceBaseImpl
 		throws SystemException {
 		mbCategory.setNew(true);
 
-		return mbCategoryPersistence.update(mbCategory);
+		return mbCategoryPersistence.update(mbCategory, false);
 	}
 
 	public void deleteMBCategory(long categoryId)

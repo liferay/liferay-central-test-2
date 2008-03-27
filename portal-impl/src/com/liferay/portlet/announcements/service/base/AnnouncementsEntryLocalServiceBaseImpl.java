@@ -76,7 +76,7 @@ public abstract class AnnouncementsEntryLocalServiceBaseImpl
 		AnnouncementsEntry announcementsEntry) throws SystemException {
 		announcementsEntry.setNew(true);
 
-		return announcementsEntryPersistence.update(announcementsEntry);
+		return announcementsEntryPersistence.update(announcementsEntry, false);
 	}
 
 	public void deleteAnnouncementsEntry(long entryId)

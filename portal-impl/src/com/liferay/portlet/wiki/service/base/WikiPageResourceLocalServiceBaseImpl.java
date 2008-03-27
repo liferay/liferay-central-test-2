@@ -66,7 +66,7 @@ public abstract class WikiPageResourceLocalServiceBaseImpl
 		WikiPageResource wikiPageResource) throws SystemException {
 		wikiPageResource.setNew(true);
 
-		return wikiPageResourcePersistence.update(wikiPageResource);
+		return wikiPageResourcePersistence.update(wikiPageResource, false);
 	}
 
 	public void deleteWikiPageResource(long resourcePrimKey)

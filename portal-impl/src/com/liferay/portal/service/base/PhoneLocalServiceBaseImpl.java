@@ -308,7 +308,7 @@ public abstract class PhoneLocalServiceBaseImpl implements PhoneLocalService,
 	public Phone addPhone(Phone phone) throws SystemException {
 		phone.setNew(true);
 
-		return phonePersistence.update(phone);
+		return phonePersistence.update(phone, false);
 	}
 
 	public void deletePhone(long phoneId)

@@ -309,7 +309,7 @@ public abstract class PasswordPolicyLocalServiceBaseImpl
 		throws SystemException {
 		passwordPolicy.setNew(true);
 
-		return passwordPolicyPersistence.update(passwordPolicy);
+		return passwordPolicyPersistence.update(passwordPolicy, false);
 	}
 
 	public void deletePasswordPolicy(long passwordPolicyId)

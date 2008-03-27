@@ -92,7 +92,7 @@ public abstract class JournalArticleImageLocalServiceBaseImpl
 		JournalArticleImage journalArticleImage) throws SystemException {
 		journalArticleImage.setNew(true);
 
-		return journalArticleImagePersistence.update(journalArticleImage);
+		return journalArticleImagePersistence.update(journalArticleImage, false);
 	}
 
 	public void deleteJournalArticleImage(long articleImageId)

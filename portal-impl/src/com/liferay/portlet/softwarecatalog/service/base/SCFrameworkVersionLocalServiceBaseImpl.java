@@ -90,7 +90,7 @@ public abstract class SCFrameworkVersionLocalServiceBaseImpl
 		SCFrameworkVersion scFrameworkVersion) throws SystemException {
 		scFrameworkVersion.setNew(true);
 
-		return scFrameworkVersionPersistence.update(scFrameworkVersion);
+		return scFrameworkVersionPersistence.update(scFrameworkVersion, false);
 	}
 
 	public void deleteSCFrameworkVersion(long frameworkVersionId)

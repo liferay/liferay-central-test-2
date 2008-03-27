@@ -168,7 +168,7 @@ public abstract class MBMessageLocalServiceBaseImpl
 		throws SystemException {
 		mbMessage.setNew(true);
 
-		return mbMessagePersistence.update(mbMessage);
+		return mbMessagePersistence.update(mbMessage, false);
 	}
 
 	public void deleteMBMessage(long messageId)

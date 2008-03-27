@@ -311,7 +311,7 @@ public abstract class ResourceCodeLocalServiceBaseImpl
 		throws SystemException {
 		resourceCode.setNew(true);
 
-		return resourceCodePersistence.update(resourceCode);
+		return resourceCodePersistence.update(resourceCode, false);
 	}
 
 	public void deleteResourceCode(long codeId)

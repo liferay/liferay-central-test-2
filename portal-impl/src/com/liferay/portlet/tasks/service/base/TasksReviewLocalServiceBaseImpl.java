@@ -74,7 +74,7 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		throws SystemException {
 		tasksReview.setNew(true);
 
-		return tasksReviewPersistence.update(tasksReview);
+		return tasksReviewPersistence.update(tasksReview, false);
 	}
 
 	public void deleteTasksReview(long reviewId)

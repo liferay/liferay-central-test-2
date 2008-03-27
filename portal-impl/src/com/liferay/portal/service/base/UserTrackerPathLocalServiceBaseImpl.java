@@ -311,7 +311,7 @@ public abstract class UserTrackerPathLocalServiceBaseImpl
 		throws SystemException {
 		userTrackerPath.setNew(true);
 
-		return userTrackerPathPersistence.update(userTrackerPath);
+		return userTrackerPathPersistence.update(userTrackerPath, false);
 	}
 
 	public void deleteUserTrackerPath(long userTrackerPathId)

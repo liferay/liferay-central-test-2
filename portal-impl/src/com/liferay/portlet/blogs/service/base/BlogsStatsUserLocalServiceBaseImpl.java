@@ -70,7 +70,7 @@ public abstract class BlogsStatsUserLocalServiceBaseImpl
 		throws SystemException {
 		blogsStatsUser.setNew(true);
 
-		return blogsStatsUserPersistence.update(blogsStatsUser);
+		return blogsStatsUserPersistence.update(blogsStatsUser, false);
 	}
 
 	public void deleteBlogsStatsUser(long statsUserId)

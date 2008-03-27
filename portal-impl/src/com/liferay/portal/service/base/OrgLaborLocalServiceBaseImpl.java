@@ -308,7 +308,7 @@ public abstract class OrgLaborLocalServiceBaseImpl
 	public OrgLabor addOrgLabor(OrgLabor orgLabor) throws SystemException {
 		orgLabor.setNew(true);
 
-		return orgLaborPersistence.update(orgLabor);
+		return orgLaborPersistence.update(orgLabor, false);
 	}
 
 	public void deleteOrgLabor(long orgLaborId)

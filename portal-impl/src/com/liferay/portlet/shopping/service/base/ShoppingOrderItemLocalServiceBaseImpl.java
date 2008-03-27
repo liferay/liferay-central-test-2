@@ -89,7 +89,7 @@ public abstract class ShoppingOrderItemLocalServiceBaseImpl
 		ShoppingOrderItem shoppingOrderItem) throws SystemException {
 		shoppingOrderItem.setNew(true);
 
-		return shoppingOrderItemPersistence.update(shoppingOrderItem);
+		return shoppingOrderItemPersistence.update(shoppingOrderItem, false);
 	}
 
 	public void deleteShoppingOrderItem(long orderItemId)

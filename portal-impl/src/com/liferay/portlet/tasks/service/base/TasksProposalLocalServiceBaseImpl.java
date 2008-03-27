@@ -90,7 +90,7 @@ public abstract class TasksProposalLocalServiceBaseImpl
 		throws SystemException {
 		tasksProposal.setNew(true);
 
-		return tasksProposalPersistence.update(tasksProposal);
+		return tasksProposalPersistence.update(tasksProposal, false);
 	}
 
 	public void deleteTasksProposal(long proposalId)

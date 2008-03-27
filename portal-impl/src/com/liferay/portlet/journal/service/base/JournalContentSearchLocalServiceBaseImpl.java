@@ -116,7 +116,8 @@ public abstract class JournalContentSearchLocalServiceBaseImpl
 		JournalContentSearch journalContentSearch) throws SystemException {
 		journalContentSearch.setNew(true);
 
-		return journalContentSearchPersistence.update(journalContentSearch);
+		return journalContentSearchPersistence.update(journalContentSearch,
+			false);
 	}
 
 	public void deleteJournalContentSearch(long contentSearchId)

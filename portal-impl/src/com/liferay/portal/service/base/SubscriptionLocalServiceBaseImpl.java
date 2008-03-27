@@ -311,7 +311,7 @@ public abstract class SubscriptionLocalServiceBaseImpl
 		throws SystemException {
 		subscription.setNew(true);
 
-		return subscriptionPersistence.update(subscription);
+		return subscriptionPersistence.update(subscription, false);
 	}
 
 	public void deleteSubscription(long subscriptionId)

@@ -308,7 +308,7 @@ public abstract class RoleLocalServiceBaseImpl implements RoleLocalService,
 	public Role addRole(Role role) throws SystemException {
 		role.setNew(true);
 
-		return rolePersistence.update(role);
+		return rolePersistence.update(role, false);
 	}
 
 	public void deleteRole(long roleId) throws PortalException, SystemException {

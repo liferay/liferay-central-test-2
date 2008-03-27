@@ -126,7 +126,7 @@ public abstract class WikiPageLocalServiceBaseImpl
 	public WikiPage addWikiPage(WikiPage wikiPage) throws SystemException {
 		wikiPage.setNew(true);
 
-		return wikiPagePersistence.update(wikiPage);
+		return wikiPagePersistence.update(wikiPage, false);
 	}
 
 	public void deleteWikiPage(long pageId)

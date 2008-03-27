@@ -312,7 +312,7 @@ public abstract class MembershipRequestLocalServiceBaseImpl
 		MembershipRequest membershipRequest) throws SystemException {
 		membershipRequest.setNew(true);
 
-		return membershipRequestPersistence.update(membershipRequest);
+		return membershipRequestPersistence.update(membershipRequest, false);
 	}
 
 	public void deleteMembershipRequest(long membershipRequestId)

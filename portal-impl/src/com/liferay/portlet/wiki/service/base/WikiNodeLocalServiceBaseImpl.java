@@ -91,7 +91,7 @@ public abstract class WikiNodeLocalServiceBaseImpl
 	public WikiNode addWikiNode(WikiNode wikiNode) throws SystemException {
 		wikiNode.setNew(true);
 
-		return wikiNodePersistence.update(wikiNode);
+		return wikiNodePersistence.update(wikiNode, false);
 	}
 
 	public void deleteWikiNode(long nodeId)

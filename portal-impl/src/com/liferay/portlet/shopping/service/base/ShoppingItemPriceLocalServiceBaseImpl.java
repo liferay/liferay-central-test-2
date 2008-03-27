@@ -89,7 +89,7 @@ public abstract class ShoppingItemPriceLocalServiceBaseImpl
 		ShoppingItemPrice shoppingItemPrice) throws SystemException {
 		shoppingItemPrice.setNew(true);
 
-		return shoppingItemPricePersistence.update(shoppingItemPrice);
+		return shoppingItemPricePersistence.update(shoppingItemPrice, false);
 	}
 
 	public void deleteShoppingItemPrice(long itemPriceId)

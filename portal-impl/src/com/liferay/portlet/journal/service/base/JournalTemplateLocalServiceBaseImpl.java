@@ -110,7 +110,7 @@ public abstract class JournalTemplateLocalServiceBaseImpl
 		throws SystemException {
 		journalTemplate.setNew(true);
 
-		return journalTemplatePersistence.update(journalTemplate);
+		return journalTemplatePersistence.update(journalTemplate, false);
 	}
 
 	public void deleteJournalTemplate(long id)

@@ -90,7 +90,7 @@ public abstract class DLFileRankLocalServiceBaseImpl
 		throws SystemException {
 		dlFileRank.setNew(true);
 
-		return dlFileRankPersistence.update(dlFileRank);
+		return dlFileRankPersistence.update(dlFileRank, false);
 	}
 
 	public void deleteDLFileRank(long fileRankId)

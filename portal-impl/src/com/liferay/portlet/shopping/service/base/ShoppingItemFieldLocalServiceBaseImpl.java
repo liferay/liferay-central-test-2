@@ -89,7 +89,7 @@ public abstract class ShoppingItemFieldLocalServiceBaseImpl
 		ShoppingItemField shoppingItemField) throws SystemException {
 		shoppingItemField.setNew(true);
 
-		return shoppingItemFieldPersistence.update(shoppingItemField);
+		return shoppingItemFieldPersistence.update(shoppingItemField, false);
 	}
 
 	public void deleteShoppingItemField(long itemFieldId)

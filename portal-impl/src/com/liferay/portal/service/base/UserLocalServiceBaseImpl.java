@@ -344,7 +344,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	public User addUser(User user) throws SystemException {
 		user.setNew(true);
 
-		return userPersistence.update(user);
+		return userPersistence.update(user, false);
 	}
 
 	public void deleteUser(long userId) throws PortalException, SystemException {

@@ -309,7 +309,7 @@ public abstract class EmailAddressLocalServiceBaseImpl
 		throws SystemException {
 		emailAddress.setNew(true);
 
-		return emailAddressPersistence.update(emailAddress);
+		return emailAddressPersistence.update(emailAddress, false);
 	}
 
 	public void deleteEmailAddress(long emailAddressId)

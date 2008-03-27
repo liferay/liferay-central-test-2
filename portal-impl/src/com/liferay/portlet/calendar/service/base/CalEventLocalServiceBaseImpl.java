@@ -86,7 +86,7 @@ public abstract class CalEventLocalServiceBaseImpl
 	public CalEvent addCalEvent(CalEvent calEvent) throws SystemException {
 		calEvent.setNew(true);
 
-		return calEventPersistence.update(calEvent);
+		return calEventPersistence.update(calEvent, false);
 	}
 
 	public void deleteCalEvent(long eventId)

@@ -66,7 +66,7 @@ public abstract class PollsChoiceLocalServiceBaseImpl
 		throws SystemException {
 		pollsChoice.setNew(true);
 
-		return pollsChoicePersistence.update(pollsChoice);
+		return pollsChoicePersistence.update(pollsChoice, false);
 	}
 
 	public void deletePollsChoice(long choiceId)

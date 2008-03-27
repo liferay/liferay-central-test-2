@@ -305,7 +305,7 @@ public abstract class UserGroupRoleLocalServiceBaseImpl
 		throws SystemException {
 		userGroupRole.setNew(true);
 
-		return userGroupRolePersistence.update(userGroupRole);
+		return userGroupRolePersistence.update(userGroupRole, false);
 	}
 
 	public void deleteUserGroupRole(UserGroupRolePK userGroupRolePK)

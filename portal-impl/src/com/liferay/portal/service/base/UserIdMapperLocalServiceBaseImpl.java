@@ -311,7 +311,7 @@ public abstract class UserIdMapperLocalServiceBaseImpl
 		throws SystemException {
 		userIdMapper.setNew(true);
 
-		return userIdMapperPersistence.update(userIdMapper);
+		return userIdMapperPersistence.update(userIdMapper, false);
 	}
 
 	public void deleteUserIdMapper(long userIdMapperId)

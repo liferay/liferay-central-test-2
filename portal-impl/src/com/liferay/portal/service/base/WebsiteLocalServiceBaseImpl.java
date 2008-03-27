@@ -308,7 +308,7 @@ public abstract class WebsiteLocalServiceBaseImpl implements WebsiteLocalService
 	public Website addWebsite(Website website) throws SystemException {
 		website.setNew(true);
 
-		return websitePersistence.update(website);
+		return websitePersistence.update(website, false);
 	}
 
 	public void deleteWebsite(long websiteId)

@@ -82,7 +82,7 @@ public abstract class SCProductVersionLocalServiceBaseImpl
 		SCProductVersion scProductVersion) throws SystemException {
 		scProductVersion.setNew(true);
 
-		return scProductVersionPersistence.update(scProductVersion);
+		return scProductVersionPersistence.update(scProductVersion, false);
 	}
 
 	public void deleteSCProductVersion(long productVersionId)

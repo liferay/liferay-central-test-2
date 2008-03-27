@@ -110,7 +110,7 @@ public abstract class JournalStructureLocalServiceBaseImpl
 		JournalStructure journalStructure) throws SystemException {
 		journalStructure.setNew(true);
 
-		return journalStructurePersistence.update(journalStructure);
+		return journalStructurePersistence.update(journalStructure, false);
 	}
 
 	public void deleteJournalStructure(long id)

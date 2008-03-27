@@ -59,7 +59,7 @@ import org.springframework.beans.factory.InitializingBean;
 	public ${entity.name} add${entity.name}(${entity.name} ${entity.varName}) throws SystemException {
 		${entity.varName}.setNew(true);
 
-		return ${entity.varName}Persistence.update(${entity.varName});
+		return ${entity.varName}Persistence.update(${entity.varName}, false);
 	}
 
 	public void delete${entity.name}(${entity.PKClassName} ${entity.PKVarName}) throws PortalException, SystemException {

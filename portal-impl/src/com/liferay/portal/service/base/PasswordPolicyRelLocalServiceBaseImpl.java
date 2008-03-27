@@ -311,7 +311,7 @@ public abstract class PasswordPolicyRelLocalServiceBaseImpl
 		PasswordPolicyRel passwordPolicyRel) throws SystemException {
 		passwordPolicyRel.setNew(true);
 
-		return passwordPolicyRelPersistence.update(passwordPolicyRel);
+		return passwordPolicyRelPersistence.update(passwordPolicyRel, false);
 	}
 
 	public void deletePasswordPolicyRel(long passwordPolicyRelId)

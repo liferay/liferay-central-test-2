@@ -77,7 +77,7 @@ public abstract class DLFileVersionLocalServiceBaseImpl
 		throws SystemException {
 		dlFileVersion.setNew(true);
 
-		return dlFileVersionPersistence.update(dlFileVersion);
+		return dlFileVersionPersistence.update(dlFileVersion, false);
 	}
 
 	public void deleteDLFileVersion(long fileVersionId)

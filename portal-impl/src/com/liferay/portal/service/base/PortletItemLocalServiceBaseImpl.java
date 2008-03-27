@@ -311,7 +311,7 @@ public abstract class PortletItemLocalServiceBaseImpl
 		throws SystemException {
 		portletItem.setNew(true);
 
-		return portletItemPersistence.update(portletItem);
+		return portletItemPersistence.update(portletItem, false);
 	}
 
 	public void deletePortletItem(long portletItemId)

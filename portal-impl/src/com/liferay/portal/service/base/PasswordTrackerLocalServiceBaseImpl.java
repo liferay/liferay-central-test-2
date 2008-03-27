@@ -311,7 +311,7 @@ public abstract class PasswordTrackerLocalServiceBaseImpl
 		throws SystemException {
 		passwordTracker.setNew(true);
 
-		return passwordTrackerPersistence.update(passwordTracker);
+		return passwordTrackerPersistence.update(passwordTracker, false);
 	}
 
 	public void deletePasswordTracker(long passwordTrackerId)

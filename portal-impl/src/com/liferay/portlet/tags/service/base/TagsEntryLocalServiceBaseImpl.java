@@ -86,7 +86,7 @@ public abstract class TagsEntryLocalServiceBaseImpl
 		throws SystemException {
 		tagsEntry.setNew(true);
 
-		return tagsEntryPersistence.update(tagsEntry);
+		return tagsEntryPersistence.update(tagsEntry, false);
 	}
 
 	public void deleteTagsEntry(long entryId)

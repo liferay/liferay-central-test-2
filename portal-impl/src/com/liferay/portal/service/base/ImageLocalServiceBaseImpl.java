@@ -305,7 +305,7 @@ public abstract class ImageLocalServiceBaseImpl implements ImageLocalService,
 	public Image addImage(Image image) throws SystemException {
 		image.setNew(true);
 
-		return imagePersistence.update(image);
+		return imagePersistence.update(image, false);
 	}
 
 	public void deleteImage(long imageId)

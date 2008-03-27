@@ -122,7 +122,7 @@ public abstract class MBThreadLocalServiceBaseImpl
 	public MBThread addMBThread(MBThread mbThread) throws SystemException {
 		mbThread.setNew(true);
 
-		return mbThreadPersistence.update(mbThread);
+		return mbThreadPersistence.update(mbThread, false);
 	}
 
 	public void deleteMBThread(long threadId)

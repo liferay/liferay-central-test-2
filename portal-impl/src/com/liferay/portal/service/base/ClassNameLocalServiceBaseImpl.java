@@ -309,7 +309,7 @@ public abstract class ClassNameLocalServiceBaseImpl
 		throws SystemException {
 		className.setNew(true);
 
-		return classNamePersistence.update(className);
+		return classNamePersistence.update(className, false);
 	}
 
 	public void deleteClassName(long classNameId)

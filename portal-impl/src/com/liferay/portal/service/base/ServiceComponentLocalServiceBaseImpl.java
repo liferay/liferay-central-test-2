@@ -311,7 +311,7 @@ public abstract class ServiceComponentLocalServiceBaseImpl
 		ServiceComponent serviceComponent) throws SystemException {
 		serviceComponent.setNew(true);
 
-		return serviceComponentPersistence.update(serviceComponent);
+		return serviceComponentPersistence.update(serviceComponent, false);
 	}
 
 	public void deleteServiceComponent(long serviceComponentId)

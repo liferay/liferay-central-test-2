@@ -112,7 +112,7 @@ public abstract class DLFolderLocalServiceBaseImpl
 	public DLFolder addDLFolder(DLFolder dlFolder) throws SystemException {
 		dlFolder.setNew(true);
 
-		return dlFolderPersistence.update(dlFolder);
+		return dlFolderPersistence.update(dlFolder, false);
 	}
 
 	public void deleteDLFolder(long folderId)

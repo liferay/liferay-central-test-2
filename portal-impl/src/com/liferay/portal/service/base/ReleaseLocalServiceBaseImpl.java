@@ -305,7 +305,7 @@ public abstract class ReleaseLocalServiceBaseImpl implements ReleaseLocalService
 	public Release addRelease(Release release) throws SystemException {
 		release.setNew(true);
 
-		return releasePersistence.update(release);
+		return releasePersistence.update(release, false);
 	}
 
 	public void deleteRelease(long releaseId)

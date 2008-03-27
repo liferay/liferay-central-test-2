@@ -84,7 +84,7 @@ public abstract class BookmarksFolderLocalServiceBaseImpl
 		throws SystemException {
 		bookmarksFolder.setNew(true);
 
-		return bookmarksFolderPersistence.update(bookmarksFolder);
+		return bookmarksFolderPersistence.update(bookmarksFolder, false);
 	}
 
 	public void deleteBookmarksFolder(long folderId)

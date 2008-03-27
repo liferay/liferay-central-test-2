@@ -91,7 +91,7 @@ public abstract class IGFolderLocalServiceBaseImpl
 	public IGFolder addIGFolder(IGFolder igFolder) throws SystemException {
 		igFolder.setNew(true);
 
-		return igFolderPersistence.update(igFolder);
+		return igFolderPersistence.update(igFolder, false);
 	}
 
 	public void deleteIGFolder(long folderId)

@@ -308,7 +308,7 @@ public abstract class CompanyLocalServiceBaseImpl implements CompanyLocalService
 	public Company addCompany(Company company) throws SystemException {
 		company.setNew(true);
 
-		return companyPersistence.update(company);
+		return companyPersistence.update(company, false);
 	}
 
 	public void deleteCompany(long companyId)

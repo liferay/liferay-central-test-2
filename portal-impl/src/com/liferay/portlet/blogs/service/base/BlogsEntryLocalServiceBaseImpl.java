@@ -126,7 +126,7 @@ public abstract class BlogsEntryLocalServiceBaseImpl
 		throws SystemException {
 		blogsEntry.setNew(true);
 
-		return blogsEntryPersistence.update(blogsEntry);
+		return blogsEntryPersistence.update(blogsEntry, false);
 	}
 
 	public void deleteBlogsEntry(long entryId)

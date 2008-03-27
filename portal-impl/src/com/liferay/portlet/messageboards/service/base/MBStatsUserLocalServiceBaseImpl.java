@@ -90,7 +90,7 @@ public abstract class MBStatsUserLocalServiceBaseImpl
 		throws SystemException {
 		mbStatsUser.setNew(true);
 
-		return mbStatsUserPersistence.update(mbStatsUser);
+		return mbStatsUserPersistence.update(mbStatsUser, false);
 	}
 
 	public void deleteMBStatsUser(long statsUserId)

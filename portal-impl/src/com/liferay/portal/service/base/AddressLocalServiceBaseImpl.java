@@ -308,7 +308,7 @@ public abstract class AddressLocalServiceBaseImpl implements AddressLocalService
 	public Address addAddress(Address address) throws SystemException {
 		address.setNew(true);
 
-		return addressPersistence.update(address);
+		return addressPersistence.update(address, false);
 	}
 
 	public void deleteAddress(long addressId)

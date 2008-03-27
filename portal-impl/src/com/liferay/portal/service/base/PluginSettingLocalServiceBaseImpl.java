@@ -309,7 +309,7 @@ public abstract class PluginSettingLocalServiceBaseImpl
 		throws SystemException {
 		pluginSetting.setNew(true);
 
-		return pluginSettingPersistence.update(pluginSetting);
+		return pluginSettingPersistence.update(pluginSetting, false);
 	}
 
 	public void deletePluginSetting(long pluginSettingId)

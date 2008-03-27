@@ -71,7 +71,7 @@ public abstract class SCProductScreenshotLocalServiceBaseImpl
 		SCProductScreenshot scProductScreenshot) throws SystemException {
 		scProductScreenshot.setNew(true);
 
-		return scProductScreenshotPersistence.update(scProductScreenshot);
+		return scProductScreenshotPersistence.update(scProductScreenshot, false);
 	}
 
 	public void deleteSCProductScreenshot(long productScreenshotId)

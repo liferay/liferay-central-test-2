@@ -96,7 +96,7 @@ public abstract class DLFileShortcutLocalServiceBaseImpl
 		throws SystemException {
 		dlFileShortcut.setNew(true);
 
-		return dlFileShortcutPersistence.update(dlFileShortcut);
+		return dlFileShortcutPersistence.update(dlFileShortcut, false);
 	}
 
 	public void deleteDLFileShortcut(long fileShortcutId)

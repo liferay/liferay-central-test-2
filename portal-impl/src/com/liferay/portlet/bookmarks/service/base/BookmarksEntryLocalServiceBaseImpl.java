@@ -84,7 +84,7 @@ public abstract class BookmarksEntryLocalServiceBaseImpl
 		throws SystemException {
 		bookmarksEntry.setNew(true);
 
-		return bookmarksEntryPersistence.update(bookmarksEntry);
+		return bookmarksEntryPersistence.update(bookmarksEntry, false);
 	}
 
 	public void deleteBookmarksEntry(long entryId)

@@ -86,7 +86,7 @@ public abstract class TagsPropertyLocalServiceBaseImpl
 		throws SystemException {
 		tagsProperty.setNew(true);
 
-		return tagsPropertyPersistence.update(tagsProperty);
+		return tagsPropertyPersistence.update(tagsProperty, false);
 	}
 
 	public void deleteTagsProperty(long propertyId)

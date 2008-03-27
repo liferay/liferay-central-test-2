@@ -309,7 +309,7 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		throws SystemException {
 		expandoTable.setNew(true);
 
-		return expandoTablePersistence.update(expandoTable);
+		return expandoTablePersistence.update(expandoTable, false);
 	}
 
 	public void deleteExpandoTable(long tableId)

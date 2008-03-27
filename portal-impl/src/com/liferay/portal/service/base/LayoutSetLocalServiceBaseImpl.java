@@ -309,7 +309,7 @@ public abstract class LayoutSetLocalServiceBaseImpl
 		throws SystemException {
 		layoutSet.setNew(true);
 
-		return layoutSetPersistence.update(layoutSet);
+		return layoutSetPersistence.update(layoutSet, false);
 	}
 
 	public void deleteLayoutSet(long layoutSetId)

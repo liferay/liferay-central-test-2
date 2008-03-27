@@ -309,7 +309,7 @@ public abstract class OrganizationLocalServiceBaseImpl
 		throws SystemException {
 		organization.setNew(true);
 
-		return organizationPersistence.update(organization);
+		return organizationPersistence.update(organization, false);
 	}
 
 	public void deleteOrganization(long organizationId)

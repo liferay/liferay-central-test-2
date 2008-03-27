@@ -108,7 +108,7 @@ public abstract class ShoppingCategoryLocalServiceBaseImpl
 		ShoppingCategory shoppingCategory) throws SystemException {
 		shoppingCategory.setNew(true);
 
-		return shoppingCategoryPersistence.update(shoppingCategory);
+		return shoppingCategoryPersistence.update(shoppingCategory, false);
 	}
 
 	public void deleteShoppingCategory(long categoryId)
