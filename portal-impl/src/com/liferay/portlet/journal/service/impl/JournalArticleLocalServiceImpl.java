@@ -1133,8 +1133,10 @@ public class JournalArticleLocalServiceImpl
 		for (int i = 0; i < articles.size(); i++) {
 			JournalArticle article = articles.get(i);
 
+			Date expirationDate = article.getExpirationDate();
+
 			if (article.getDisplayDate().before(now) &&
-					article.getExpirationDate().after(now)) {
+					(expirationDate == null || expirationDate.after(now))) {
 				return article;
 			}
 		}
