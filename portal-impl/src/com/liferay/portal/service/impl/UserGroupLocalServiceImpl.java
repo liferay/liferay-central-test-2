@@ -75,7 +75,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		userGroup.setName(name);
 		userGroup.setDescription(description);
 
-		userGroupPersistence.update(userGroup);
+		userGroupPersistence.update(userGroup, false);
 
 		// Group
 
@@ -205,7 +205,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 		userGroup.setName(name);
 		userGroup.setDescription(description);
 
-		userGroupPersistence.update(userGroup);
+		userGroupPersistence.update(userGroup, false);
 
 		return userGroup;
 	}

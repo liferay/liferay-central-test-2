@@ -138,7 +138,7 @@ public class ServiceComponentLocalServiceImpl
 
 			serviceComponent.setData(dataXML);
 
-			serviceComponentPersistence.update(serviceComponent);
+			serviceComponentPersistence.update(serviceComponent, false);
 
 			upgradeDB(
 				portletClassLoader, buildNamespace, buildNumber,

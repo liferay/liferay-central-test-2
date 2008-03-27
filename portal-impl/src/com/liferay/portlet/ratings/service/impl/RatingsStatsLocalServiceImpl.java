@@ -84,7 +84,7 @@ public class RatingsStatsLocalServiceImpl
 			stats.setTotalScore(0.0);
 			stats.setAverageScore(0.0);
 
-			ratingsStatsPersistence.update(stats);
+			ratingsStatsPersistence.update(stats, false);
 		}
 
 		return stats;

@@ -111,7 +111,7 @@ public class DLFileShortcutLocalServiceImpl
 		fileShortcut.setToFolderId(toFolderId);
 		fileShortcut.setToName(toName);
 
-		dlFileShortcutPersistence.update(fileShortcut);
+		dlFileShortcutPersistence.update(fileShortcut, false);
 
 		// Resources
 
@@ -131,7 +131,7 @@ public class DLFileShortcutLocalServiceImpl
 
 		folder.setLastPostDate(fileShortcut.getModifiedDate());
 
-		dlFolderPersistence.update(folder);
+		dlFolderPersistence.update(folder, false);
 
 		return fileShortcut;
 	}
@@ -243,13 +243,13 @@ public class DLFileShortcutLocalServiceImpl
 		fileShortcut.setToFolderId(toFolderId);
 		fileShortcut.setToName(toName);
 
-		dlFileShortcutPersistence.update(fileShortcut);
+		dlFileShortcutPersistence.update(fileShortcut, false);
 
 		// Folder
 
 		folder.setLastPostDate(fileShortcut.getModifiedDate());
 
-		dlFolderPersistence.update(folder);
+		dlFolderPersistence.update(folder, false);
 
 		return fileShortcut;
 	}
@@ -266,7 +266,7 @@ public class DLFileShortcutLocalServiceImpl
 			fileShortcut.setToFolderId(newToFolderId);
 			fileShortcut.setToName(newToName);
 
-			dlFileShortcutPersistence.update(fileShortcut);
+			dlFileShortcutPersistence.update(fileShortcut, false);
 		}
 	}
 

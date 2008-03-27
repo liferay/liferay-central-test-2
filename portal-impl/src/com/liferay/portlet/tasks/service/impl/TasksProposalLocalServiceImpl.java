@@ -99,7 +99,7 @@ public class TasksProposalLocalServiceImpl
 		proposal.setName(name);
 		proposal.setDescription(description);
 
-		proposal = tasksProposalPersistence.update(proposal);
+		proposal = tasksProposalPersistence.update(proposal, false);
 
 		// Resources
 
@@ -321,7 +321,7 @@ public class TasksProposalLocalServiceImpl
 		proposal.setDescription(description);
 		proposal.setDueDate(dueDate);
 
-		tasksProposalPersistence.update(proposal);
+		tasksProposalPersistence.update(proposal, false);
 
 		return proposal;
 	}

@@ -268,7 +268,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		for (MBMessage message : messages) {
 			message.setCategoryId(category.getCategoryId());
 
-			mbMessagePersistence.update(message);
+			mbMessagePersistence.update(message, false);
 
 			// Lucene
 
@@ -291,7 +291,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		thread.setCategoryId(category.getCategoryId());
 
-		mbThreadPersistence.update(thread);
+		mbThreadPersistence.update(thread, false);
 
 		return thread;
 	}
@@ -315,7 +315,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		message.setThreadId(thread.getThreadId());
 		message.setParentMessageId(0);
 
-		mbMessagePersistence.update(message);
+		mbMessagePersistence.update(message, false);
 
 		try {
 			if (!category.isDiscussion()) {
@@ -342,7 +342,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			curMessage.setCategoryId(message.getCategoryId());
 			curMessage.setThreadId(message.getThreadId());
 
-			mbMessagePersistence.update(curMessage);
+			mbMessagePersistence.update(curMessage, false);
 
 			messagesMoved++;
 
@@ -367,7 +367,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		oldThread.setMessageCount(oldThread.getMessageCount() - messagesMoved);
 
-		mbThreadPersistence.update(oldThread);
+		mbThreadPersistence.update(oldThread, false);
 
 		return thread;
 
@@ -380,7 +380,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		thread.setViewCount(viewCount);
 
-		mbThreadPersistence.update(thread);
+		mbThreadPersistence.update(thread, false);
 
 		return thread;
 	}
@@ -410,7 +410,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			thread.setPriority(message.getPriority());
 		}
 
-		mbThreadPersistence.update(thread);
+		mbThreadPersistence.update(thread, false);
 
 		return thread;
 	}

@@ -348,7 +348,7 @@ public class JournalArticleLocalServiceImpl
 		article.setSmallImageId(counterLocalService.increment());
 		article.setSmallImageURL(smallImageURL);
 
-		journalArticlePersistence.update(article);
+		journalArticlePersistence.update(article, false);
 
 		// Small image
 
@@ -446,7 +446,7 @@ public class JournalArticleLocalServiceImpl
 		article.setExpired(false);
 		article.setExpirationDate(null);
 
-		journalArticlePersistence.update(article);
+		journalArticlePersistence.update(article, false);
 
 		// Unapprove and expire all other versions
 
@@ -459,7 +459,7 @@ public class JournalArticleLocalServiceImpl
 				curArticle.setExpired(true);
 				curArticle.setExpirationDate(now);
 
-				journalArticlePersistence.update(curArticle);
+				journalArticlePersistence.update(curArticle, false);
 			}
 		}
 
@@ -507,7 +507,7 @@ public class JournalArticleLocalServiceImpl
 
 		article.setResourcePrimKey(resourcePrimKey);
 
-		journalArticlePersistence.update(article);
+		journalArticlePersistence.update(article, false);
 
 		return article;
 	}
@@ -530,7 +530,7 @@ public class JournalArticleLocalServiceImpl
 			article.setApproved(false);
 			article.setExpired(true);
 
-			journalArticlePersistence.update(article);
+			journalArticlePersistence.update(article, false);
 
 			try {
 				if (article.isIndexable()) {
@@ -603,7 +603,7 @@ public class JournalArticleLocalServiceImpl
 
 			article.setContent(content);
 
-			journalArticlePersistence.update(article);
+			journalArticlePersistence.update(article, false);
 		}
 	}
 
@@ -761,7 +761,7 @@ public class JournalArticleLocalServiceImpl
 		article.setApproved(false);
 		article.setExpired(true);
 
-		journalArticlePersistence.update(article);
+		journalArticlePersistence.update(article, false);
 
 		// Lucene
 
@@ -1365,7 +1365,7 @@ public class JournalArticleLocalServiceImpl
 
 		article.setContent(content);
 
-		journalArticlePersistence.update(article);
+		journalArticlePersistence.update(article, false);
 
 		return article;
 	}
@@ -1646,7 +1646,7 @@ public class JournalArticleLocalServiceImpl
 
 		article.setSmallImageURL(smallImageURL);
 
-		journalArticlePersistence.update(article);
+		journalArticlePersistence.update(article, false);
 
 		// Unapprove and expire all other versions
 
@@ -1660,7 +1660,7 @@ public class JournalArticleLocalServiceImpl
 					curArticle.setExpired(true);
 					curArticle.setExpirationDate(now);
 
-					journalArticlePersistence.update(curArticle);
+					journalArticlePersistence.update(curArticle, false);
 				}
 			}
 		}
@@ -1714,7 +1714,7 @@ public class JournalArticleLocalServiceImpl
 
 		article.setContent(content);
 
-		journalArticlePersistence.update(article);
+		journalArticlePersistence.update(article, false);
 
 		return article;
 	}

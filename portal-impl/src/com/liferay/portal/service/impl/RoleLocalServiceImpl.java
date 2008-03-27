@@ -83,7 +83,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		role.setDescription(description);
 		role.setType(type);
 
-		rolePersistence.update(role);
+		rolePersistence.update(role, false);
 
 		// Resources
 
@@ -124,7 +124,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				if (!role.getDescription().equals(roleDescription)) {
 					role.setDescription(roleDescription);
 
-					rolePersistence.update(role);
+					rolePersistence.update(role, false);
 				}
 			}
 			catch (NoSuchRoleException nsre) {
@@ -149,7 +149,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				if (!role.getDescription().equals(roleDescription)) {
 					role.setDescription(roleDescription);
 
-					rolePersistence.update(role);
+					rolePersistence.update(role, false);
 				}
 			}
 			catch (NoSuchRoleException nsre) {
@@ -175,7 +175,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 				if (!role.getDescription().equals(roleDescription)) {
 					role.setDescription(roleDescription);
 
-					rolePersistence.update(role);
+					rolePersistence.update(role, false);
 				}
 			}
 			catch (NoSuchRoleException nsre) {
@@ -408,7 +408,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		role.setName(name);
 		role.setDescription(description);
 
-		rolePersistence.update(role);
+		rolePersistence.update(role, false);
 
 		return role;
 	}

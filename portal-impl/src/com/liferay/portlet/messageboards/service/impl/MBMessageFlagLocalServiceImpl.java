@@ -64,7 +64,7 @@ public class MBMessageFlagLocalServiceImpl
 				messageFlag.setMessageId(message.getMessageId());
 				messageFlag.setFlag(MBMessageFlagImpl.READ_FLAG);
 
-				mbMessageFlagPersistence.update(messageFlag);
+				mbMessageFlagPersistence.update(messageFlag, false);
 			}
 		}
 	}

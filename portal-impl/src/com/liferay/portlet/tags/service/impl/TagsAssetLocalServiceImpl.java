@@ -330,7 +330,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 		if (asset != null) {
 			asset.setViewCount(asset.getViewCount() + 1);
 
-			tagsAssetPersistence.update(asset);
+			tagsAssetPersistence.update(asset, false);
 		}
 
 		return asset;
@@ -527,7 +527,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			asset.setPriority(priority.intValue());
 		}
 
-		tagsAssetPersistence.update(asset);
+		tagsAssetPersistence.update(asset, false);
 
 		// Entries
 
@@ -561,7 +561,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 
 			entry.setTitle(title);
 
-			blogsEntryPersistence.update(entry);
+			blogsEntryPersistence.update(entry, false);
 		}
 		else if (className.equals(BookmarksEntry.class.getName())) {
 			BookmarksEntry entry = bookmarksEntryPersistence.findByPrimaryKey(
@@ -571,7 +571,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			entry.setComments(description);
 			entry.setUrl(url);
 
-			bookmarksEntryPersistence.update(entry);
+			bookmarksEntryPersistence.update(entry, false);
 		}
 		else if (className.equals(DLFileEntry.class.getName())) {
 			DLFileEntry fileEntry = dlFileEntryPersistence.findByPrimaryKey(
@@ -580,7 +580,7 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			fileEntry.setTitle(title);
 			fileEntry.setDescription(description);
 
-			dlFileEntryPersistence.update(fileEntry);
+			dlFileEntryPersistence.update(fileEntry, false);
 		}
 		else if (className.equals(JournalArticle.class.getName())) {
 			JournalArticle article = journalArticlePersistence.findByPrimaryKey(
@@ -589,21 +589,21 @@ public class TagsAssetLocalServiceImpl extends TagsAssetLocalServiceBaseImpl {
 			article.setTitle(title);
 			article.setDescription(description);
 
-			journalArticlePersistence.update(article);
+			journalArticlePersistence.update(article, false);
 		}
 		else if (className.equals(MBMessage.class.getName())) {
 			MBMessage message = mbMessagePersistence.findByPrimaryKey(classPK);
 
 			message.setSubject(title);
 
-			mbMessagePersistence.update(message);
+			mbMessagePersistence.update(message, false);
 		}
 		else if (className.equals(WikiPage.class.getName())) {
 			WikiPage page = wikiPagePersistence.findByPrimaryKey(classPK);
 
 			page.setTitle(title);
 
-			wikiPagePersistence.update(page);
+			wikiPagePersistence.update(page, false);
 		}
 
 		return asset;

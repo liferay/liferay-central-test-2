@@ -84,7 +84,7 @@ public class RatingsEntryLocalServiceImpl
 			entry.setModifiedDate(now);
 			entry.setScore(score);
 
-			ratingsEntryPersistence.update(entry);
+			ratingsEntryPersistence.update(entry, false);
 
 			// Stats
 
@@ -95,7 +95,7 @@ public class RatingsEntryLocalServiceImpl
 			stats.setAverageScore(
 				stats.getTotalScore() / stats.getTotalEntries());
 
-			ratingsStatsPersistence.update(stats);
+			ratingsStatsPersistence.update(stats, false);
 		}
 		catch (NoSuchEntryException nsee) {
 			newEntry = true;
@@ -115,7 +115,7 @@ public class RatingsEntryLocalServiceImpl
 			entry.setClassPK(classPK);
 			entry.setScore(score);
 
-			ratingsEntryPersistence.update(entry);
+			ratingsEntryPersistence.update(entry, false);
 
 			// Stats
 
@@ -127,7 +127,7 @@ public class RatingsEntryLocalServiceImpl
 			stats.setAverageScore(
 				stats.getTotalScore() / stats.getTotalEntries());
 
-			ratingsStatsPersistence.update(stats);
+			ratingsStatsPersistence.update(stats, false);
 		}
 
 		// Blogs entry
@@ -158,7 +158,7 @@ public class RatingsEntryLocalServiceImpl
 			blogsStasUser.setRatingsTotalScore(ratingsTotalScore);
 			blogsStasUser.setRatingsAverageScore(ratingsAverageScore);
 
-			blogsStatsUserPersistence.update(blogsStasUser);
+			blogsStatsUserPersistence.update(blogsStasUser, false);
 		}
 
 		return entry;

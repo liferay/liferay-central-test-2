@@ -53,7 +53,7 @@ public class ExpandoTableLocalServiceImpl
 		table.setClassNameId(classNameId);
 		table.setName(name);
 
-		expandoTablePersistence.update(table);
+		expandoTablePersistence.update(table, false);
 
 		return table;
 	}
@@ -104,7 +104,7 @@ public class ExpandoTableLocalServiceImpl
 			table.setClassNameId(classNameId);
 			table.setName(name);
 
-			expandoTablePersistence.update(table);
+			expandoTablePersistence.update(table, false);
 		}
 
 		return table;
@@ -120,7 +120,7 @@ public class ExpandoTableLocalServiceImpl
 
 		table.setName(name);
 
-		return expandoTablePersistence.update(table);
+		return expandoTablePersistence.update(table, false);
 	}
 
 	protected void validate(String name)

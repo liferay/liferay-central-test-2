@@ -150,7 +150,7 @@ public class PluginSettingLocalServiceImpl
 		pluginSetting.setRoles(roles);
 		pluginSetting.setActive(active);
 
-		pluginSettingPersistence.update(pluginSetting);
+		pluginSettingPersistence.update(pluginSetting, false);
 
 		return pluginSetting;
 	}

@@ -65,7 +65,7 @@ public class ExpandoValueLocalServiceImpl
 		expandoValue.setColumnId(columnId);
 		expandoValue.setValue(value);
 
-		return expandoValuePersistence.update(expandoValue);
+		return expandoValuePersistence.update(expandoValue, false);
 	}
 
 	public ExpandoValue getValue(long classPK, long columnId)
@@ -182,7 +182,7 @@ public class ExpandoValueLocalServiceImpl
 
 		expandoValue.setValue(value);
 
-		return expandoValuePersistence.update(expandoValue);
+		return expandoValuePersistence.update(expandoValue, false);
 	}
 
 	public long setRowValues(

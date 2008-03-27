@@ -128,7 +128,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		node.setName(name);
 		node.setDescription(description);
 
-		wikiNodePersistence.update(node);
+		wikiNodePersistence.update(node, false);
 
 		// Resources
 
@@ -419,7 +419,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 		node.setName(name);
 		node.setDescription(description);
 
-		wikiNodePersistence.update(node);
+		wikiNodePersistence.update(node, false);
 
 		return node;
 	}

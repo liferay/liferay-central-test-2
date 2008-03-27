@@ -166,7 +166,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 				image.setCustom2ImageId(counterLocalService.increment());
 			}
 
-			igImagePersistence.update(image);
+			igImagePersistence.update(image, false);
 
 			// Images
 
@@ -465,7 +465,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 			image.setName(name);
 			image.setDescription(description);
 
-			igImagePersistence.update(image);
+			igImagePersistence.update(image, false);
 
 			// Images
 

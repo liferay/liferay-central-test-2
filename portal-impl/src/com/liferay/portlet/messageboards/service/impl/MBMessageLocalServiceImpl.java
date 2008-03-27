@@ -136,7 +136,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			discussion.setClassPK(classPK);
 			discussion.setThreadId(message.getThreadId());
 
-			mbDiscussionPersistence.update(discussion);
+			mbDiscussionPersistence.update(discussion, false);
 		}
 
 		return message;
@@ -430,8 +430,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Commit
 
-		mbThreadPersistence.update(thread);
-		mbMessagePersistence.update(message);
+		mbThreadPersistence.update(thread, false);
+		mbMessagePersistence.update(message, false);
 
 		logAddMessage(messageId, stopWatch, 4);
 
@@ -469,7 +469,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		category.setLastPostDate(now);
 
-		mbCategoryPersistence.update(category);
+		mbCategoryPersistence.update(category, false);
 
 		logAddMessage(messageId, stopWatch, 7);
 
@@ -720,11 +720,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 					childMessage.setParentMessageId(
 						MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID);
 
-					mbMessagePersistence.update(childMessage);
+					mbMessagePersistence.update(childMessage, false);
 
 					thread.setRootMessageId(childMessage.getMessageId());
 
-					mbThreadPersistence.update(thread);
+					mbThreadPersistence.update(thread, false);
 				}
 			}
 
@@ -746,7 +746,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 						childMessage.setParentMessageId(
 							message.getParentMessageId());
 
-						mbMessagePersistence.update(childMessage);
+						mbMessagePersistence.update(childMessage, false);
 					}
 				}
 			}
@@ -755,7 +755,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			thread.setMessageCount(count - 1);
 
-			mbThreadPersistence.update(thread);
+			mbThreadPersistence.update(thread, false);
 		}
 
 		// Activity trackers
@@ -865,7 +865,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			discussion.setClassPK(classPK);
 			discussion.setThreadId(message.getThreadId());
 
-			mbDiscussionPersistence.update(discussion);
+			mbDiscussionPersistence.update(discussion, false);
 		}
 
 		return getMessageDisplay(message);
@@ -970,7 +970,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		thread.setViewCount(thread.getViewCount() + 1);
 
-		mbThreadPersistence.update(thread);
+		mbThreadPersistence.update(thread, false);
 
 		MBTreeWalker treeWalker = new MBTreeWalkerImpl(message);
 
@@ -1152,7 +1152,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setBody(body);
 		message.setAttachments(!files.isEmpty() || !existingFiles.isEmpty());
 
-		mbMessagePersistence.update(message);
+		mbMessagePersistence.update(message, false);
 
 		// Thread
 
@@ -1163,13 +1163,13 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			thread.setPriority(priority);
 		}
 
-		mbThreadPersistence.update(thread);
+		mbThreadPersistence.update(thread, false);
 
 		// Category
 
 		category.setLastPostDate(now);
 
-		mbCategoryPersistence.update(category);
+		mbCategoryPersistence.update(category, false);
 
 		// Subscriptions
 
@@ -1208,7 +1208,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		message.setCreateDate(createDate);
 		message.setModifiedDate(modifiedDate);
 
-		mbMessagePersistence.update(message);
+		mbMessagePersistence.update(message, false);
 
 		// Thread
 
@@ -1224,7 +1224,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		thread.setLastPostDate(modifiedDate);
 
-		mbThreadPersistence.update(thread);
+		mbThreadPersistence.update(thread, false);
 
 		// Category
 
@@ -1233,7 +1233,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		category.setLastPostDate(modifiedDate);
 
-		mbCategoryPersistence.update(category);
+		mbCategoryPersistence.update(category, false);
 
 		// Statistics
 
@@ -1243,7 +1243,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (statsUser != null) {
 			statsUser.setLastPostDate(modifiedDate);
 
-			mbStatsUserPersistence.update(statsUser);
+			mbStatsUserPersistence.update(statsUser, false);
 		}
 
 		return message;
@@ -1256,7 +1256,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		message.setBody(body);
 
-		mbMessagePersistence.update(message);
+		mbMessagePersistence.update(message, false);
 
 		return message;
 	}

@@ -63,7 +63,7 @@ public class MBStatsUserLocalServiceImpl
 			statsUser.setGroupId(groupId);
 			statsUser.setUserId(userId);
 
-			mbStatsUserPersistence.update(statsUser);
+			mbStatsUserPersistence.update(statsUser, false);
 		}
 
 		return statsUser;
@@ -87,7 +87,7 @@ public class MBStatsUserLocalServiceImpl
 		statsUser.setMessageCount(statsUser.getMessageCount() + 1);
 		statsUser.setLastPostDate(new Date());
 
-		mbStatsUserPersistence.update(statsUser);
+		mbStatsUserPersistence.update(statsUser, false);
 	}
 
 }

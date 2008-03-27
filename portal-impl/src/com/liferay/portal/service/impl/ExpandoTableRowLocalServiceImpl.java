@@ -47,7 +47,7 @@ public class ExpandoTableRowLocalServiceImpl
 
 		row.setTableId(tableId);
 
-		expandoTableRowPersistence.update(row);
+		expandoTableRowPersistence.update(row, false);
 
 		return row;
 	}
@@ -121,7 +121,7 @@ public class ExpandoTableRowLocalServiceImpl
 
 			row.setTableId(tableId);
 
-			expandoTableRowPersistence.update(row);
+			expandoTableRowPersistence.update(row, false);
 		}
 
 		return row;

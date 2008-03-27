@@ -80,7 +80,7 @@ public class MembershipRequestLocalServiceImpl
 		membershipRequest.setComments(comments);
 		membershipRequest.setStatusId(MembershipRequestImpl.STATUS_PENDING);
 
-		membershipRequestPersistence.update(membershipRequest);
+		membershipRequestPersistence.update(membershipRequest, false);
 
 		notifyCommunityAdministrators(membershipRequest);
 
@@ -132,7 +132,7 @@ public class MembershipRequestLocalServiceImpl
 		membershipRequest.setReplierUserId(replierUserId);
 		membershipRequest.setStatusId(statusId);
 
-		membershipRequestPersistence.update(membershipRequest);
+		membershipRequestPersistence.update(membershipRequest, false);
 
 		if (statusId == MembershipRequestImpl.STATUS_APPROVED) {
 			long[] addUserIds = new long[] {membershipRequest.getUserId()};

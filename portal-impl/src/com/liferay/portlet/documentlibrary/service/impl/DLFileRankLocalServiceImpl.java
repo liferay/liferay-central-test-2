@@ -84,7 +84,7 @@ public class DLFileRankLocalServiceImpl extends DLFileRankLocalServiceBaseImpl {
 		fileRank.setFolderId(folderId);
 		fileRank.setName(name);
 
-		dlFileRankPersistence.update(fileRank);
+		dlFileRankPersistence.update(fileRank, false);
 
 		if (dlFileRankFinder.countByG_U(groupId, userId) > 5) {
 			List<DLFileRank> fileRanks = dlFileRankFinder.findByG_U(

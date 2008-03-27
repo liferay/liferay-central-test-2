@@ -153,7 +153,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		page.setParentTitle(parentTitle);
 		page.setRedirectTitle(redirectTitle);
 
-		wikiPagePersistence.update(page);
+		wikiPagePersistence.update(page, false);
 
 		// Resources
 
@@ -163,7 +163,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		node.setLastPostDate(now);
 
-		wikiNodePersistence.update(node);
+		wikiNodePersistence.update(node, false);
 
 		// Subscriptions
 
@@ -682,7 +682,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		for (WikiPage page : pageVersions) {
 			page.setTitle(newTitle);
 
-			wikiPagePersistence.update(page);
+			wikiPagePersistence.update(page, false);
 		}
 
 		// Children
@@ -692,7 +692,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		for (WikiPage page : children) {
 			page.setParentTitle(newTitle);
 
-			wikiPagePersistence.update(page);
+			wikiPagePersistence.update(page, false);
 		}
 
 		WikiPage page = pageVersions.get(pageVersions.size() - 1);
@@ -705,7 +705,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		wikiPageResource.setTitle(newTitle);
 
-		wikiPageResourcePersistence.update(wikiPageResource);
+		wikiPageResourcePersistence.update(wikiPageResource, false);
 
 		// Create stub page at the old location
 
@@ -730,7 +730,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		for (WikiPage redirectedPage : redirectedPages) {
 			redirectedPage.setRedirectTitle(newTitle);
 
-			wikiPagePersistence.update(redirectedPage);
+			wikiPagePersistence.update(redirectedPage, false);
 		}
 
 		// Tags
@@ -815,7 +815,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		page.setHead(false);
 
-		wikiPagePersistence.update(page);
+		wikiPagePersistence.update(page, false);
 
 		double newVersion = MathUtil.format(oldVersion + 0.1, 1, 1);
 
@@ -843,7 +843,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page.setRedirectTitle(redirectTitle);
 		}
 
-		wikiPagePersistence.update(page);
+		wikiPagePersistence.update(page, false);
 
 		// Node
 
@@ -851,7 +851,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		node.setLastPostDate(now);
 
-		wikiNodePersistence.update(node);
+		wikiNodePersistence.update(node, false);
 
 		// Subscriptions
 

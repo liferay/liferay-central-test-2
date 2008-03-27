@@ -80,7 +80,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			permission.setActionId(actionId);
 			permission.setResourceId(resourceId);
 
-			permissionPersistence.update(permission);
+			permissionPersistence.update(permission, false);
 		}
 
 		return permission;
@@ -490,7 +490,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			OrgGroupPermission orgGroupPermission =
 				orgGroupPermissionPersistence.create(pk);
 
-			orgGroupPermissionPersistence.update(orgGroupPermission);
+			orgGroupPermissionPersistence.update(orgGroupPermission, false);
 		}
 
 		PermissionCacheUtil.clearCache();
@@ -538,7 +538,7 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			permission.setActionId(actionId);
 			permission.setResourceId(resource.getResourceId());
 
-			permissionPersistence.update(permission);
+			permissionPersistence.update(permission, false);
 		}
 
 		rolePersistence.addPermission(roleId, permission);

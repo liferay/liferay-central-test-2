@@ -67,7 +67,7 @@ public class TagsPropertyLocalServiceImpl
 		property.setKey(key);
 		property.setValue(value);
 
-		tagsPropertyPersistence.update(property);
+		tagsPropertyPersistence.update(property, false);
 
 		return property;
 	}
@@ -153,7 +153,7 @@ public class TagsPropertyLocalServiceImpl
 		property.setKey(key);
 		property.setValue(value);
 
-		tagsPropertyPersistence.update(property);
+		tagsPropertyPersistence.update(property, false);
 
 		return property;
 	}

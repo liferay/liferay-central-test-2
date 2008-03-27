@@ -112,7 +112,7 @@ public class OrganizationLocalServiceImpl
 		organization.setStatusId(statusId);
 		organization.setComments(comments);
 
-		organizationPersistence.update(organization);
+		organizationPersistence.update(organization, false);
 
 		// Group
 
@@ -558,7 +558,7 @@ public class OrganizationLocalServiceImpl
 		organization.setStatusId(statusId);
 		organization.setComments(comments);
 
-		organizationPersistence.update(organization);
+		organizationPersistence.update(organization, false);
 
 		return organization;
 	}

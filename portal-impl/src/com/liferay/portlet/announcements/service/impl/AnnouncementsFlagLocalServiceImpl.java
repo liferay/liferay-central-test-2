@@ -52,7 +52,7 @@ public class AnnouncementsFlagLocalServiceImpl
 		flag.setEntryId(entryId);
 		flag.setValue(value);
 
-		announcementsFlagPersistence.update(flag);
+		announcementsFlagPersistence.update(flag, false);
 
 		return flag;
 	}

@@ -203,7 +203,7 @@ public class JournalTemplateLocalServiceImpl
 		template.setSmallImageId(counterLocalService.increment());
 		template.setSmallImageURL(smallImageURL);
 
-		journalTemplatePersistence.update(template);
+		journalTemplatePersistence.update(template, false);
 
 		// Small image
 
@@ -289,7 +289,7 @@ public class JournalTemplateLocalServiceImpl
 
 			template.setXsl(xsl);
 
-			journalTemplatePersistence.update(template);
+			journalTemplatePersistence.update(template, false);
 		}
 	}
 
@@ -544,7 +544,7 @@ public class JournalTemplateLocalServiceImpl
 		template.setSmallImage(smallImage);
 		template.setSmallImageURL(smallImageURL);
 
-		journalTemplatePersistence.update(template);
+		journalTemplatePersistence.update(template, false);
 
 		// Small image
 

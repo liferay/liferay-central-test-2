@@ -68,7 +68,7 @@ public class JournalArticleResourceLocalServiceImpl
 			articleResource.setGroupId(groupId);
 			articleResource.setArticleId(articleId);
 
-			journalArticleResourcePersistence.update(articleResource);
+			journalArticleResourcePersistence.update(articleResource, false);
 		}
 
 		return articleResource.getResourcePrimKey();

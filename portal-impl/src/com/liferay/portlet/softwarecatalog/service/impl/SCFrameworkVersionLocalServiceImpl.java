@@ -101,7 +101,7 @@ public class SCFrameworkVersionLocalServiceImpl
 		frameworkVersion.setActive(active);
 		frameworkVersion.setPriority(priority);
 
-		scFrameworkVersionPersistence.update(frameworkVersion);
+		scFrameworkVersionPersistence.update(frameworkVersion, false);
 
 		// Resources
 
@@ -255,7 +255,7 @@ public class SCFrameworkVersionLocalServiceImpl
 		frameworkVersion.setActive(active);
 		frameworkVersion.setPriority(priority);
 
-		scFrameworkVersionPersistence.update(frameworkVersion);
+		scFrameworkVersionPersistence.update(frameworkVersion, false);
 
 		return frameworkVersion;
 	}

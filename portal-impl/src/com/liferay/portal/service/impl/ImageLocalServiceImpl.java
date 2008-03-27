@@ -85,7 +85,7 @@ public class ImageLocalServiceImpl extends ImageLocalServiceBaseImpl {
 		image.setWidth(width);
 		image.setSize(size);
 
-		imagePersistence.update(image);
+		imagePersistence.update(image, false);
 
 		return image;
 	}

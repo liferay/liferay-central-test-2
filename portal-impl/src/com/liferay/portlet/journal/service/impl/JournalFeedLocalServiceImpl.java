@@ -212,7 +212,7 @@ public class JournalFeedLocalServiceImpl
 			feed.setFeedVersion(feedVersion);
 		}
 
-		journalFeedPersistence.update(feed);
+		journalFeedPersistence.update(feed, false);
 
 		// Resources
 
@@ -408,7 +408,7 @@ public class JournalFeedLocalServiceImpl
 			feed.setFeedVersion(feedVersion);
 		}
 
-		journalFeedPersistence.update(feed);
+		journalFeedPersistence.update(feed, false);
 
 		return feed;
 	}

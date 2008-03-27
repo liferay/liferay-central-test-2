@@ -65,7 +65,7 @@ public class ExpandoColumnLocalServiceImpl
 
 		column.setSettingsProperties(properties);
 
-		expandoColumnPersistence.update(column);
+		expandoColumnPersistence.update(column, false);
 
 		return column;
 	}
@@ -213,7 +213,7 @@ public class ExpandoColumnLocalServiceImpl
 
 			column.setSettingsProperties(properties);
 
-			expandoColumnPersistence.update(column);
+			expandoColumnPersistence.update(column, false);
 		}
 
 		return column;
@@ -230,7 +230,7 @@ public class ExpandoColumnLocalServiceImpl
 		if (column.getType() != type) {
 			column.setType(type);
 
-			expandoColumnPersistence.update(column);
+			expandoColumnPersistence.update(column, false);
 		}
 
 		return column;
@@ -246,7 +246,7 @@ public class ExpandoColumnLocalServiceImpl
 
 		column.setName(name);
 
-		return expandoColumnPersistence.update(column);
+		return expandoColumnPersistence.update(column, false);
 	}
 
 	public ExpandoColumn updateColumnProperties(
@@ -258,7 +258,7 @@ public class ExpandoColumnLocalServiceImpl
 
 		column.setSettingsProperties(properties);
 
-		return expandoColumnPersistence.update(column);
+		return expandoColumnPersistence.update(column, false);
 	}
 
 	protected void validate(String name, int type)

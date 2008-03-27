@@ -74,7 +74,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			ColorSchemeImpl.getDefaultWapColorSchemeId());
 		layoutSet.setCss(StringPool.BLANK);
 
-		layoutSetPersistence.update(layoutSet);
+		layoutSetPersistence.update(layoutSet, false);
 
 		return layoutSet;
 	}
@@ -140,7 +140,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			}
 		}
 
-		layoutSetPersistence.update(layoutSet);
+		layoutSetPersistence.update(layoutSet, false);
 
 		if (logo) {
 			ImageLocalUtil.updateImage(layoutSet.getLogoId(), file);
@@ -168,7 +168,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 			layoutSet.setCss(css);
 		}
 
-		layoutSetPersistence.update(layoutSet);
+		layoutSetPersistence.update(layoutSet, false);
 
 		if (PrefsPropsUtil.getBoolean(
 				PropsUtil.THEME_SYNC_ON_GROUP,
@@ -186,7 +186,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 				otherLayoutSet.setColorSchemeId(colorSchemeId);
 			}
 
-			layoutSetPersistence.update(otherLayoutSet);
+			layoutSetPersistence.update(otherLayoutSet, false);
 		}
 
 		return layoutSet;
@@ -202,7 +202,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		layoutSet.setPageCount(pageCount);
 
-		layoutSetPersistence.update(layoutSet);
+		layoutSetPersistence.update(layoutSet, false);
 
 		return layoutSet;
 	}
@@ -244,7 +244,7 @@ public class LayoutSetLocalServiceImpl extends LayoutSetLocalServiceBaseImpl {
 
 		layoutSet.setVirtualHost(virtualHost);
 
-		layoutSetPersistence.update(layoutSet);
+		layoutSetPersistence.update(layoutSet, false);
 
 		return layoutSet;
 	}

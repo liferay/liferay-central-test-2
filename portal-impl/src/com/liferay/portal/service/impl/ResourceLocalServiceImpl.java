@@ -184,7 +184,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			resource.setCodeId(resourceCode.getCodeId());
 			resource.setPrimKey(primKey);
 
-			resourcePersistence.update(resource);
+			resourcePersistence.update(resource, false);
 		}
 
 		return resource;

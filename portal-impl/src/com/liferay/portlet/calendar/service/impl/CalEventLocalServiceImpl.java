@@ -267,7 +267,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setFirstReminder(firstReminder);
 		event.setSecondReminder(secondReminder);
 
-		calEventPersistence.update(event);
+		calEventPersistence.update(event, false);
 
 		// Resources
 
@@ -511,7 +511,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 						event.setRecurrence(Base64.objectToString(recurrence));
 
-						event = calEventPersistence.update(event);
+						event = calEventPersistence.update(event, false);
 
 						recurrence = event.getRecurrenceObj();
 					}
@@ -708,7 +708,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		event.setFirstReminder(firstReminder);
 		event.setSecondReminder(secondReminder);
 
-		calEventPersistence.update(event);
+		calEventPersistence.update(event, false);
 
 		CalEventLocalUtil.clearEventsPool(event.getGroupId());
 

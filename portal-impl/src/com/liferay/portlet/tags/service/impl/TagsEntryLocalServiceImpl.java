@@ -90,7 +90,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(now);
 		entry.setName(name);
 
-		tagsEntryPersistence.update(entry);
+		tagsEntryPersistence.update(entry, false);
 
 		for (int i = 0; i < properties.length; i++) {
 			String[] property = StringUtil.split(
@@ -326,7 +326,7 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		entry.setModifiedDate(new Date());
 		entry.setName(name);
 
-		tagsEntryPersistence.update(entry);
+		tagsEntryPersistence.update(entry, false);
 
 		return entry;
 	}

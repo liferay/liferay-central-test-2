@@ -144,7 +144,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		folder.setName(name);
 		folder.setDescription(description);
 
-		igFolderPersistence.update(folder);
+		igFolderPersistence.update(folder, false);
 
 		// Resources
 
@@ -443,7 +443,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		folder.setName(name);
 		folder.setDescription(description);
 
-		igFolderPersistence.update(folder);
+		igFolderPersistence.update(folder, false);
 
 		// Merge folders
 
@@ -522,7 +522,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 		for (IGImage image : images) {
 			image.setFolderId(toFolderId);
 
-			igImagePersistence.update(image);
+			igImagePersistence.update(image, false);
 		}
 
 		igFolderPersistence.remove(fromFolder.getFolderId());

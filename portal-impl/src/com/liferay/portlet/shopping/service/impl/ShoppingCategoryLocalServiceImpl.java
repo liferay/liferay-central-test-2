@@ -103,7 +103,7 @@ public class ShoppingCategoryLocalServiceImpl
 		category.setName(name);
 		category.setDescription(description);
 
-		shoppingCategoryPersistence.update(category);
+		shoppingCategoryPersistence.update(category, false);
 
 		// Resources
 
@@ -320,7 +320,7 @@ public class ShoppingCategoryLocalServiceImpl
 		category.setName(name);
 		category.setDescription(description);
 
-		shoppingCategoryPersistence.update(category);
+		shoppingCategoryPersistence.update(category, false);
 
 		// Merge categories
 
@@ -413,7 +413,7 @@ public class ShoppingCategoryLocalServiceImpl
 
 			item.setCategoryId(toCategoryId);
 
-			shoppingItemPersistence.update(item);
+			shoppingItemPersistence.update(item, false);
 		}
 
 		shoppingCategoryPersistence.remove(fromCategory.getCategoryId());

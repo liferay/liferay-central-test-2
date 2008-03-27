@@ -346,7 +346,7 @@ public class ShoppingItemLocalServiceImpl
 		item.setLargeImageId(counterLocalService.increment());
 		item.setLargeImageURL(largeImageURL);
 
-		shoppingItemPersistence.update(item);
+		shoppingItemPersistence.update(item, false);
 
 		// Fields
 
@@ -360,7 +360,7 @@ public class ShoppingItemLocalServiceImpl
 			itemField.setName(checkItemField(itemField.getName()));
 			itemField.setValues(checkItemField(itemField.getValues()));
 
-			shoppingItemFieldPersistence.update(itemField);
+			shoppingItemFieldPersistence.update(itemField, false);
 		}
 
 		// Prices
@@ -375,7 +375,7 @@ public class ShoppingItemLocalServiceImpl
 			itemPrice.setItemPriceId(itemPriceId);
 			itemPrice.setItemId(itemId);
 
-			shoppingItemPricePersistence.update(itemPrice);
+			shoppingItemPricePersistence.update(itemPrice, false);
 		}
 
 		// Images
@@ -713,7 +713,7 @@ public class ShoppingItemLocalServiceImpl
 		item.setLargeImage(largeImage);
 		item.setLargeImageURL(largeImageURL);
 
-		shoppingItemPersistence.update(item);
+		shoppingItemPersistence.update(item, false);
 
 		// Fields
 
@@ -729,7 +729,7 @@ public class ShoppingItemLocalServiceImpl
 			itemField.setName(checkItemField(itemField.getName()));
 			itemField.setValues(checkItemField(itemField.getValues()));
 
-			shoppingItemFieldPersistence.update(itemField);
+			shoppingItemFieldPersistence.update(itemField, false);
 		}
 
 		// Prices
@@ -744,7 +744,7 @@ public class ShoppingItemLocalServiceImpl
 			itemPrice.setItemPriceId(itemPriceId);
 			itemPrice.setItemId(itemId);
 
-			shoppingItemPricePersistence.update(itemPrice);
+			shoppingItemPricePersistence.update(itemPrice, false);
 		}
 
 		// Images

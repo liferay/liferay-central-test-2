@@ -137,7 +137,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folder.setName(name);
 		folder.setDescription(description);
 
-		dlFolderPersistence.update(folder);
+		dlFolderPersistence.update(folder, false);
 
 		// Resources
 
@@ -399,7 +399,7 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 		folder.setName(name);
 		folder.setDescription(description);
 
-		dlFolderPersistence.update(folder);
+		dlFolderPersistence.update(folder, false);
 
 		if (PropsValues.DL_LAYOUTS_SYNC_ENABLED) {
 			String privateFolder = GetterUtil.getString(PropsUtil.get(

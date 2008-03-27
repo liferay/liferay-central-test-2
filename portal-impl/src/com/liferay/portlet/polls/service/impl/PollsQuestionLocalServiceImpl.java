@@ -157,7 +157,7 @@ public class PollsQuestionLocalServiceImpl
 		question.setDescription(description);
 		question.setExpirationDate(expirationDate);
 
-		pollsQuestionPersistence.update(question);
+		pollsQuestionPersistence.update(question, false);
 
 		// Resources
 
@@ -336,7 +336,7 @@ public class PollsQuestionLocalServiceImpl
 		question.setDescription(description);
 		question.setExpirationDate(expirationDate);
 
-		pollsQuestionPersistence.update(question);
+		pollsQuestionPersistence.update(question, false);
 
 		// Choices
 

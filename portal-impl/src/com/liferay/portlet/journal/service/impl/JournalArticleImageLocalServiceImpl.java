@@ -66,7 +66,7 @@ public class JournalArticleImageLocalServiceImpl
 			articleImage.setLanguageId(languageId);
 			articleImage.setTempImage(false);
 
-			journalArticleImagePersistence.update(articleImage);
+			journalArticleImagePersistence.update(articleImage, false);
 		}
 		else if (articleImage.getArticleImageId() == articleImageId) {
 		}
@@ -146,7 +146,7 @@ public class JournalArticleImageLocalServiceImpl
 			articleImage.setLanguageId(languageId);
 			articleImage.setTempImage(tempImage);
 
-			journalArticleImagePersistence.update(articleImage);
+			journalArticleImagePersistence.update(articleImage, false);
 		}
 
 		return articleImage.getArticleImageId();

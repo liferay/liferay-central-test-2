@@ -228,7 +228,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		setLocalizedAttributes(layout, localeNamesMap, localeTitlesMap);
 
-		layoutPersistence.update(layout);
+		layoutPersistence.update(layout, false);
 
 		// Resources
 
@@ -1172,7 +1172,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			fixTypeSettings(layout);
 
-			layoutPersistence.update(layout);
+			layoutPersistence.update(layout, false);
 
 			context.setPlid(layout.getPlid());
 
@@ -1453,7 +1453,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			layout.setPriority(priority++);
 
-			layoutPersistence.update(layout);
+			layoutPersistence.update(layout, false);
 		}
 
 		layoutSetLocalService.updatePageCount(groupId, privateLayout);
@@ -1472,7 +1472,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layout.setFriendlyURL(friendlyURL);
 
-		layoutPersistence.update(layout);
+		layoutPersistence.update(layout, false);
 
 		return layout;
 	}
@@ -1541,7 +1541,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		layoutPersistence.update(layout);
+		layoutPersistence.update(layout, false);
 
 		// Icon
 
@@ -1589,7 +1589,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layout.setTypeSettings(typeSettings);
 
-		layoutPersistence.update(layout);
+		layoutPersistence.update(layout, false);
 
 		return layout;
 	}
@@ -1612,7 +1612,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layout.setCss(css);
 		}
 
-		layoutPersistence.update(layout);
+		layoutPersistence.update(layout, false);
 
 		return layout;
 	}
@@ -1641,7 +1641,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layout.setName(name, LocaleUtil.fromLanguageId(languageId));
 
-		layoutPersistence.update(layout);
+		layoutPersistence.update(layout, false);
 
 		try {
 			if (layout.getDlFolderId() > 0) {
@@ -1694,7 +1694,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layout.setParentLayoutId(parentLayoutId);
 
-		layoutPersistence.update(layout);
+		layoutPersistence.update(layout, false);
 
 		return layout;
 	}
@@ -1720,7 +1720,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layout.setParentLayoutId(parentLayoutId);
 
-		layoutPersistence.update(layout);
+		layoutPersistence.update(layout, false);
 
 		return layout;
 	}
@@ -1758,7 +1758,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		layout.setPriority(priority);
 
-		layoutPersistence.update(layout);
+		layoutPersistence.update(layout, false);
 
 		priority = 0;
 
@@ -1772,7 +1772,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		for (Layout curLayout : layouts) {
 			curLayout.setPriority(priority++);
 
-			layoutPersistence.update(curLayout);
+			layoutPersistence.update(curLayout, false);
 
 			if (curLayout.equals(layout)) {
 				layout = curLayout;
@@ -1836,7 +1836,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				if (preferences != null) {
 					portletPreferences.setPreferences(preferences);
 
-					portletPreferencesPersistence.update(portletPreferences);
+					portletPreferencesPersistence.update(portletPreferences, false);
 				}
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
@@ -3038,7 +3038,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				if (preferences != null) {
 					portletPreferences.setPreferences(preferences);
 
-					portletPreferencesPersistence.update(portletPreferences);
+					portletPreferencesPersistence.update(portletPreferences, false);
 				}
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
@@ -3245,7 +3245,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			portletPreferences.setPreferences(preferences);
 
-			portletPreferencesPersistence.update(portletPreferences);
+			portletPreferencesPersistence.update(portletPreferences, false);
 		}
 	}
 

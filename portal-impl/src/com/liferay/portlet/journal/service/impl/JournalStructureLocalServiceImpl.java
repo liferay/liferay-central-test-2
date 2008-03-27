@@ -168,7 +168,7 @@ public class JournalStructureLocalServiceImpl
 		structure.setDescription(description);
 		structure.setXsd(xsd);
 
-		journalStructurePersistence.update(structure);
+		journalStructurePersistence.update(structure, false);
 
 		// Resources
 
@@ -250,7 +250,7 @@ public class JournalStructureLocalServiceImpl
 
 			structure.setXsd(xsd);
 
-			journalStructurePersistence.update(structure);
+			journalStructurePersistence.update(structure, false);
 		}
 	}
 
@@ -424,7 +424,7 @@ public class JournalStructureLocalServiceImpl
 		structure.setDescription(description);
 		structure.setXsd(xsd);
 
-		journalStructurePersistence.update(structure);
+		journalStructurePersistence.update(structure, false);
 
 		return structure;
 	}

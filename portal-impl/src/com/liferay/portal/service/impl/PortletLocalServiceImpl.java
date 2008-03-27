@@ -418,7 +418,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		portlet.setRoles(roles);
 		portlet.setActive(active);
 
-		portletPersistence.update(portlet);
+		portletPersistence.update(portlet, false);
 
 		portlet = getPortletById(companyId, portletId);
 

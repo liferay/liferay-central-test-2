@@ -121,7 +121,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 			release.setCreateDate(now);
 			release.setModifiedDate(now);
 
-			releasePersistence.update(release);
+			releasePersistence.update(release, false);
 		}
 
 		return release;
@@ -137,7 +137,7 @@ public class ReleaseLocalServiceImpl extends ReleaseLocalServiceBaseImpl {
 		release.setBuildDate(ReleaseInfo.getBuildDate());
 		release.setVerified(verified);
 
-		releasePersistence.update(release);
+		releasePersistence.update(release, false);
 
 		return release;
 	}

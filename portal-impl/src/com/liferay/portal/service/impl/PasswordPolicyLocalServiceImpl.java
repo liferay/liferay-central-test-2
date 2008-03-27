@@ -101,7 +101,7 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setRequireUnlock(lockoutDuration == 0);
 		passwordPolicy.setResetFailureCount(resetFailureCount);
 
-		passwordPolicyPersistence.update(passwordPolicy);
+		passwordPolicyPersistence.update(passwordPolicy, false);
 
 		// Resources
 
@@ -299,7 +299,7 @@ public class PasswordPolicyLocalServiceImpl
 		passwordPolicy.setRequireUnlock(lockoutDuration == 0);
 		passwordPolicy.setResetFailureCount(resetFailureCount);
 
-		passwordPolicyPersistence.update(passwordPolicy);
+		passwordPolicyPersistence.update(passwordPolicy, false);
 
 		return passwordPolicy;
 	}

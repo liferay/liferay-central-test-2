@@ -259,7 +259,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setGreeting(greeting);
 		user.setActive(true);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		// Resources
 
@@ -320,7 +320,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		contact.setBirthday(birthday);
 		contact.setJobTitle(jobTitle);
 
-		contactPersistence.update(contact);
+		contactPersistence.update(contact, false);
 
 		// Organizations
 
@@ -582,7 +582,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setLastFailedLoginDate(now);
 		user.setFailedLoginAttempts(++failedLoginAttempts);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 	}
 
 	public void checkLoginFailureByEmailAddress(
@@ -627,7 +627,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (graceLoginCount < passwordPolicy.getGraceLimit()) {
 				user.setGraceLoginCount(++graceLoginCount);
 
-				userPersistence.update(user);
+				userPersistence.update(user, false);
 			}
 			else {
 				throw new PasswordExpiredException();
@@ -639,7 +639,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		if (isPasswordExpiringSoon(user)) {
 			user.setPasswordReset(true);
 
-			userPersistence.update(user);
+			userPersistence.update(user, false);
 		}
 
 		// Check if user should be forced to change password on first login
@@ -658,7 +658,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 				user.setPasswordReset(passwordReset);
 
-				userPersistence.update(user);
+				userPersistence.update(user, false);
 			}
 		}
 	}
@@ -709,7 +709,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (isPasswordExpired(user)) {
 				user.setPasswordReset(true);
 
-				userPersistence.update(user);
+				userPersistence.update(user, false);
 			}
 
 			return new KeyValuePair(name, password);
@@ -1096,7 +1096,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (user.getPasswordModifiedDate() == null) {
 				user.setPasswordModifiedDate(now);
 
-				userPersistence.update(user);
+				userPersistence.update(user, false);
 			}
 
 			long passwordStartTime = user.getPasswordModifiedDate().getTime();
@@ -1124,7 +1124,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			if (user.getPasswordModifiedDate() == null) {
 				user.setPasswordModifiedDate(now);
 
-				userPersistence.update(user);
+				userPersistence.update(user, false);
 			}
 
 			long timeModified = user.getPasswordModifiedDate().getTime();
@@ -1236,7 +1236,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPasswordEncrypted(true);
 			user.setPasswordReset(passwordReset);
 
-			userPersistence.update(user);
+			userPersistence.update(user, false);
 		}
 		else {
 			newPassword = user.getPassword();
@@ -1398,7 +1398,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setActive(active);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		return user;
 	}
@@ -1411,7 +1411,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setAgreedToTermsOfUse(agreedToTermsOfUse);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		return user;
 	}
@@ -1423,7 +1423,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setCreateDate(createDate);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		return user;
 	}
@@ -1446,7 +1446,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setLastFailedLoginDate(null);
 		user.setFailedLoginAttempts(0);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		return user;
 	}
@@ -1474,7 +1474,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setFailedLoginAttempts(0);
 		}
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		return user;
 	}
@@ -1512,7 +1512,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setModifiedDate(modifiedDate);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		return user;
 	}
@@ -1602,7 +1602,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		try {
-			userPersistence.update(user);
+			userPersistence.update(user, false);
 		}
 		catch (ModelListenerException mle) {
 			String msg = GetterUtil.getString(mle.getCause().getMessage());
@@ -1644,7 +1644,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setPasswordReset(passwordReset);
 		user.setPasswordModifiedDate(passwordModifiedDate);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		return user;
 	}
@@ -1656,7 +1656,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setPasswordReset(passwordReset);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 	}
 
 	public void updatePortrait(long userId, byte[] bytes)
@@ -1697,7 +1697,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		user.setScreenName(screenName);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		// Group
 
@@ -1706,7 +1706,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		group.setFriendlyURL(StringPool.SLASH + screenName);
 
-		groupPersistence.update(group);
+		groupPersistence.update(group, false);
 	}
 
 	public User updateUser(
@@ -1812,7 +1812,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		user.setGreeting(greeting);
 		user.setComments(comments);
 
-		userPersistence.update(user);
+		userPersistence.update(user, false);
 
 		// Contact
 
@@ -1854,7 +1854,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		contact.setYmSn(ymSn);
 		contact.setJobTitle(jobTitle);
 
-		contactPersistence.update(contact);
+		contactPersistence.update(contact, false);
 
 		// Organizations
 
@@ -1867,7 +1867,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		group.setFriendlyURL(StringPool.SLASH + screenName);
 
-		groupPersistence.update(group);
+		groupPersistence.update(group, false);
 
 		// Permission cache
 
@@ -1962,7 +1962,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			user.setPassword(PwdEncryptor.encrypt(user.getPassword()));
 			user.setPasswordEncrypted(true);
 
-			userPersistence.update(user);
+			userPersistence.update(user, false);
 		}
 
 		// Check password policy to see if the is account locked out or if the

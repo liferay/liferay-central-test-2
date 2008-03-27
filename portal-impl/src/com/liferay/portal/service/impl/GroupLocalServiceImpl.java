@@ -115,7 +115,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setFriendlyURL(friendlyURL);
 		group.setActive(active);
 
-		groupPersistence.update(group);
+		groupPersistence.update(group, false);
 
 		// Layout sets
 
@@ -546,7 +546,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		group.setFriendlyURL(friendlyURL);
 
-		groupPersistence.update(group);
+		groupPersistence.update(group, false);
 
 		return group;
 	}
@@ -582,7 +582,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		group.setFriendlyURL(friendlyURL);
 		group.setActive(active);
 
-		groupPersistence.update(group);
+		groupPersistence.update(group, false);
 
 		return group;
 	}
@@ -594,7 +594,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		group.setTypeSettings(typeSettings);
 
-		groupPersistence.update(group);
+		groupPersistence.update(group, false);
 
 		return group;
 	}
@@ -625,7 +625,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		group.setTypeSettings(group.getTypeSettings());
 
-		groupPersistence.update(group);
+		groupPersistence.update(group, false);
 
 		if (!workflowEnabled) {
 			tasksProposalLocalService.deleteProposals(groupId);

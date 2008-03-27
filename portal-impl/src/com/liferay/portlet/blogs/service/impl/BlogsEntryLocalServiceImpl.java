@@ -156,7 +156,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 
-		blogsEntryPersistence.update(entry);
+		blogsEntryPersistence.update(entry, false);
 
 		// Resources
 
@@ -550,7 +550,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		entry.setContent(content);
 		entry.setDisplayDate(displayDate);
 
-		blogsEntryPersistence.update(entry);
+		blogsEntryPersistence.update(entry, false);
 
 		// Statistics
 
@@ -560,7 +560,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		if (statsUser != null) {
 			statsUser.setLastPostDate(now);
 
-			blogsStatsUserPersistence.update(statsUser);
+			blogsStatsUserPersistence.update(statsUser, false);
 		}
 
 		// Tags

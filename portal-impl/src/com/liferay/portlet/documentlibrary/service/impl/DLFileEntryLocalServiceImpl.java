@@ -249,7 +249,7 @@ public class DLFileEntryLocalServiceImpl
 		fileEntry.setReadCount(DLFileEntryImpl.DEFAULT_READ_COUNT);
 		fileEntry.setExtraSettings(extraSettings);
 
-		dlFileEntryPersistence.update(fileEntry);
+		dlFileEntryPersistence.update(fileEntry, false);
 
 		// File
 
@@ -280,7 +280,7 @@ public class DLFileEntryLocalServiceImpl
 
 		folder.setLastPostDate(fileEntry.getModifiedDate());
 
-		dlFolderPersistence.update(folder);
+		dlFolderPersistence.update(folder, false);
 
 		return fileEntry;
 	}
@@ -533,7 +533,7 @@ public class DLFileEntryLocalServiceImpl
 
 		fileEntry.setReadCount(fileEntry.getReadCount() + 1);
 
-		dlFileEntryPersistence.update(fileEntry);
+		dlFileEntryPersistence.update(fileEntry, false);
 
 		if ((version > 0) && (fileEntry.getVersion() != version)) {
 			return dlLocalService.getFileAsStream(
@@ -800,7 +800,7 @@ public class DLFileEntryLocalServiceImpl
 		fileEntry.setDescription(description);
 		fileEntry.setExtraSettings(extraSettings);
 
-		dlFileEntryPersistence.update(fileEntry);
+		dlFileEntryPersistence.update(fileEntry, false);
 
 		// Move file entry
 
@@ -839,7 +839,7 @@ public class DLFileEntryLocalServiceImpl
 			newFileEntry.setReadCount(fileEntry.getReadCount());
 			newFileEntry.setExtraSettings(extraSettings);
 
-			dlFileEntryPersistence.update(newFileEntry);
+			dlFileEntryPersistence.update(newFileEntry, false);
 
 			dlFileEntryPersistence.remove(fileEntry);
 
@@ -863,7 +863,7 @@ public class DLFileEntryLocalServiceImpl
 				newFileVersion.setVersion(fileVersion.getVersion());
 				newFileVersion.setSize(fileVersion.getSize());
 
-				dlFileVersionPersistence.update(newFileVersion);
+				dlFileVersionPersistence.update(newFileVersion, false);
 
 				dlFileVersionPersistence.remove(fileVersion);
 			}
@@ -920,7 +920,7 @@ public class DLFileEntryLocalServiceImpl
 		fileVersion.setVersion(oldVersion);
 		fileVersion.setSize(fileEntry.getSize());
 
-		dlFileVersionPersistence.update(fileVersion);
+		dlFileVersionPersistence.update(fileVersion, false);
 
 		// File entry
 
@@ -930,7 +930,7 @@ public class DLFileEntryLocalServiceImpl
 		fileEntry.setVersion(newVersion);
 		fileEntry.setSize((int)size);
 
-		dlFileEntryPersistence.update(fileEntry);
+		dlFileEntryPersistence.update(fileEntry, false);
 
 		// File
 
@@ -943,7 +943,7 @@ public class DLFileEntryLocalServiceImpl
 
 		folder.setLastPostDate(fileEntry.getModifiedDate());
 
-		dlFolderPersistence.update(folder);
+		dlFolderPersistence.update(folder, false);
 
 		return fileEntry;
 	}

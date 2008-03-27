@@ -133,7 +133,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		category.setName(name);
 		category.setDescription(description);
 
-		mbCategoryPersistence.update(category);
+		mbCategoryPersistence.update(category, false);
 
 		// Resources
 
@@ -330,7 +330,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 			category.setCompanyId(CompanyImpl.SYSTEM);
 			category.setUserId(CompanyImpl.SYSTEM);
 
-			mbCategoryPersistence.update(category);
+			mbCategoryPersistence.update(category, false);
 		}
 
 		return category;
@@ -486,7 +486,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 		category.setName(name);
 		category.setDescription(description);
 
-		mbCategoryPersistence.update(category);
+		mbCategoryPersistence.update(category, false);
 
 		// Merge categories
 
@@ -571,7 +571,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 			thread.setCategoryId(toCategoryId);
 
-			mbThreadPersistence.update(thread);
+			mbThreadPersistence.update(thread, false);
 
 			List<MBMessage> messages = mbMessagePersistence.findByThreadId(
 				thread.getThreadId());
@@ -582,7 +582,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 				message.setCategoryId(toCategoryId);
 
-				mbMessagePersistence.update(message);
+				mbMessagePersistence.update(message, false);
 
 				// Lucene
 

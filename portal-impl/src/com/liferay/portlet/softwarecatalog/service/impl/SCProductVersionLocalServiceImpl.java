@@ -121,13 +121,13 @@ public class SCProductVersionLocalServiceImpl
 		productVersion.setDirectDownloadURL(directDownloadURL);
 		productVersion.setRepoStoreArtifact(repoStoreArtifact);
 
-		scProductVersionPersistence.update(productVersion);
+		scProductVersionPersistence.update(productVersion, false);
 
 		// Product entry
 
 		productEntry.setModifiedDate(now);
 
-		scProductEntryPersistence.update(productEntry);
+		scProductEntryPersistence.update(productEntry, false);
 
 		// Framework versions
 
@@ -235,7 +235,7 @@ public class SCProductVersionLocalServiceImpl
 		productVersion.setDirectDownloadURL(directDownloadURL);
 		productVersion.setRepoStoreArtifact(repoStoreArtifact);
 
-		scProductVersionPersistence.update(productVersion);
+		scProductVersionPersistence.update(productVersion, false);
 
 		// Product entry
 
@@ -245,7 +245,7 @@ public class SCProductVersionLocalServiceImpl
 
 		productEntry.setModifiedDate(now);
 
-		scProductEntryPersistence.update(productEntry);
+		scProductEntryPersistence.update(productEntry, false);
 
 		// Framework versions
 

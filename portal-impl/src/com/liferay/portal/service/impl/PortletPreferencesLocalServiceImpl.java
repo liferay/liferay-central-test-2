@@ -195,7 +195,7 @@ public class PortletPreferencesLocalServiceImpl
 
 				portletPreferences.setPreferences(defaultPreferences);
 
-				portletPreferencesPersistence.update(portletPreferences);
+				portletPreferencesPersistence.update(portletPreferences, false);
 			}
 
 			prefs = PortletPreferencesSerializer.fromXML(
@@ -237,7 +237,7 @@ public class PortletPreferencesLocalServiceImpl
 
 		portletPreferences.setPreferences(xml);
 
-		portletPreferencesPersistence.update(portletPreferences);
+		portletPreferencesPersistence.update(portletPreferences, false);
 
 		PortletPreferencesLocalUtil.clearPreferencesPool(ownerId, ownerType);
 

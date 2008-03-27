@@ -79,7 +79,7 @@ public class TasksReviewLocalServiceImpl
 		review.setCompleted(false);
 		review.setRejected(false);
 
-		tasksReviewPersistence.update(review);
+		tasksReviewPersistence.update(review, false);
 
 		// Activity trackers
 
@@ -213,7 +213,7 @@ public class TasksReviewLocalServiceImpl
 		review.setCompleted(true);
 		review.setRejected(rejected);
 
-		tasksReviewPersistence.update(review);
+		tasksReviewPersistence.update(review, false);
 
 		// Activity trackers
 

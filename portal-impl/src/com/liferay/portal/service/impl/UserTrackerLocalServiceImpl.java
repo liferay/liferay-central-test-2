@@ -63,7 +63,7 @@ public class UserTrackerLocalServiceImpl
 			userTracker.setRemoteHost(remoteHost);
 			userTracker.setUserAgent(userAgent);
 
-			userTrackerPersistence.update(userTracker);
+			userTrackerPersistence.update(userTracker, false);
 
 			Iterator<UserTrackerPath> itr = userTrackerPaths.iterator();
 
@@ -76,7 +76,7 @@ public class UserTrackerLocalServiceImpl
 				userTrackerPath.setUserTrackerPathId(pathId);
 				userTrackerPath.setUserTrackerId(userTrackerId);
 
-				userTrackerPathPersistence.update(userTrackerPath);
+				userTrackerPathPersistence.update(userTrackerPath, false);
 			}
 
 			return userTracker;
