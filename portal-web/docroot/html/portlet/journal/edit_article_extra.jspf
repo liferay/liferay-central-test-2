@@ -37,7 +37,19 @@
 	<tr>
 		<td>
 			<c:if test="<%= article != null %>">
-				<liferay-ui:message key="version" /> <%= version %>
+				<liferay-ui:message key="version" />
+
+				<select onChange="<portlet:namespace />switchVersion(this.value);">
+					<%
+					for (JournalArticle curArticle : articleVersions) {
+						boolean selected = (curArticle.getVersion() == article.getVersion());
+
+					%>
+						<option value="<%= String.valueOf(curArticle.getVersion()) %>" <%= (selected ? "selected" : "") %>><%= String.valueOf(curArticle.getVersion()) %></option>
+					<%
+					}
+					%>
+				</select>
 
 				<br /><br />
 			</c:if>

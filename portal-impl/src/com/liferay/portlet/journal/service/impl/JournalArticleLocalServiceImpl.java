@@ -1108,6 +1108,13 @@ public class JournalArticleLocalServiceImpl
 		return journalArticlePersistence.countByGroupId(groupId);
 	}
 
+	public List<JournalArticle> getArticleVersions(
+			long groupId, String articleId)
+		throws SystemException {
+
+		return journalArticlePersistence.findByG_A(groupId, articleId);
+	}
+
 	public JournalArticle getDisplayArticle(long groupId, String articleId)
 		throws PortalException, SystemException {
 

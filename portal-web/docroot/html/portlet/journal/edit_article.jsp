@@ -69,10 +69,14 @@ boolean incrementVersion = ParamUtil.getBoolean(request, "incrementVersion");
 
 Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
+List<JournalArticle> articleVersions = null;
+
 if (article != null) {
 	if (article.getDisplayDate() != null) {
 		displayDate.setTime(article.getDisplayDate());
 	}
+
+	articleVersions = JournalArticleLocalServiceUtil.getArticleVersions(article.getGroupId(), article.getArticleId());
 }
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
@@ -515,6 +519,17 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			document.getElementById(file).disabled = false;
 			button.value = "<liferay-ui:message key="delete" />";
 		}
+	}
+
+	function <portlet:namespace />switchVersion(version) {
+		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+			<portlet:param name="struts_action" value="/journal/edit_article" />
+			<portlet:param name="redirect" value="<%= redirect %>" />
+			<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
+			<portlet:param name="articleId" value="<%= articleId %>" />
+		</liferay-portlet:renderURL>
+
+		window.location = '<%= editURL.toString() %>&<portlet:namespace />version=' + version;
 	}
 </script>
 

@@ -484,6 +484,10 @@ public interface JournalArticleLocalService {
 	public int getArticlesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticleVersions(
+		long groupId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.journal.model.JournalArticle getDisplayArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException,

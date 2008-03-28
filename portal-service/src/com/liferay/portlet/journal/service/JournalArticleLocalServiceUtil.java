@@ -934,6 +934,14 @@ public class JournalArticleLocalServiceUtil {
 		return journalArticleLocalService.getArticlesCount(groupId);
 	}
 
+	public static java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticleVersions(
+		long groupId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException {
+		JournalArticleLocalService journalArticleLocalService = JournalArticleLocalServiceFactory.getService();
+
+		return journalArticleLocalService.getArticleVersions(groupId, articleId);
+	}
+
 	public static com.liferay.portlet.journal.model.JournalArticle getDisplayArticle(
 		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.PortalException,
