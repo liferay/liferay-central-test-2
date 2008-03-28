@@ -35,6 +35,7 @@ import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
 
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -152,6 +153,11 @@ public class MBMessageConsumer implements MessageListener {
 			boolean htmlFormat)
 		throws Exception {
 
+		List<InternetAddress> addresses =
+			new ArrayList<InternetAddress>();
+
+		InternetAddress userAddress = null;
+
 		for (Subscription subscription : subscriptions) {
 			long subscribedUserId = subscription.getUserId();
 
@@ -193,54 +199,63 @@ public class MBMessageConsumer implements MessageListener {
 				continue;
 			}
 
-			try {
-				InternetAddress from = new InternetAddress(
-					fromAddress, fromName);
+			userAddress = new InternetAddress(
+				user.getEmailAddress(), user.getFullName());
 
-				InternetAddress to = new InternetAddress(
-					user.getEmailAddress(), user.getFullName());
+			addresses.add(userAddress);
+		}
 
-				String curSubject = StringUtil.replace(
-					subject,
-					new String[] {
-						"[$TO_ADDRESS$]",
-						"[$TO_NAME$]"
-					},
-					new String[] {
-						user.getFullName(),
-						user.getEmailAddress()
-					});
+		try {
+			InternetAddress[] bulkAddresses = addresses.toArray(
+				new InternetAddress[addresses.size()]);
 
-				String curBody = StringUtil.replace(
-					body,
-					new String[] {
-						"[$TO_ADDRESS$]",
-						"[$TO_NAME$]"
-					},
-					new String[] {
-						user.getFullName(),
-						user.getEmailAddress()
-					});
+			InternetAddress from = new InternetAddress(
+				fromAddress, fromName);
 
-				InternetAddress replyTo = new InternetAddress(
-					replyToAddress, replyToAddress);
+			InternetAddress[] to = new InternetAddress[] {
+				new InternetAddress(replyToAddress, replyToAddress)};
 
-				if (htmlFormat) {
-					curBody = BBCodeUtil.getHTML(curBody);
-				}
+			String curSubject = StringUtil.replace(
+				subject,
+				new String[] {
+					"[$TO_ADDRESS$]",
+					"[$TO_NAME$]"
+				},
+				new String[] {
+					replyToAddress,
+					replyToAddress
+				});
 
-				MailMessage message = new MailMessage(
-					from, to, curSubject, curBody, htmlFormat);
+			String curBody = StringUtil.replace(
+				body,
+				new String[] {
+					"[$TO_ADDRESS$]",
+					"[$TO_NAME$]"
+				},
+				new String[] {
+					replyToAddress,
+					replyToAddress
+				});
 
-				message.setMessageId(mailId);
-				message.setInReplyTo(inReplyTo);
-				message.setReplyTo(new InternetAddress[] {replyTo});
+			InternetAddress replyTo = new InternetAddress(
+				replyToAddress, replyToAddress);
 
-				MailServiceUtil.sendEmail(message);
+			if (htmlFormat) {
+				curBody = BBCodeUtil.getHTML(curBody);
 			}
-			catch (Exception e) {
-				_log.error(e);
-			}
+
+			MailMessage message = new MailMessage(
+				from, to, null, null, bulkAddresses, curSubject, curBody,
+				htmlFormat);
+
+			message.setMessageId(mailId);
+			message.setInReplyTo(inReplyTo);
+			message.setReplyTo(new InternetAddress[] {replyTo});
+
+			MailServiceUtil.sendEmail(message);
+		}
+		catch (Exception e) {
+			_log.error(e);
 		}
 	}
 
