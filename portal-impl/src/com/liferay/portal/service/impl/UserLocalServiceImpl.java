@@ -2340,12 +2340,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 
-		if (Validator.isNumber(screenName) &&
-			!screenName.equals(String.valueOf(userId))) {
-
-			throw new UserScreenNameException();
-		}
-
 		String[] anonymousNames = PrincipalBean.ANONYMOUS_NAMES;
 
 		for (int i = 0; i < anonymousNames.length; i++) {
