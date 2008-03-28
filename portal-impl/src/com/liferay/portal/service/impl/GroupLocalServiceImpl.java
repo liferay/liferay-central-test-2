@@ -96,7 +96,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		long groupId = counterLocalService.increment();
 
-		friendlyURL = getFriendlyURL(user.getCompanyId(), name, friendlyURL);
+		friendlyURL = getFriendlyURL(groupId, classPK, friendlyURL);
 
 		validateFriendlyURL(
 			groupId, user.getCompanyId(), classNameId, classPK, friendlyURL);
@@ -538,7 +538,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
-		friendlyURL = getFriendlyURL(friendlyURL);
+		friendlyURL = getFriendlyURL(groupId, group.getClassPK(), friendlyURL);
 
 		validateFriendlyURL(
 			group.getGroupId(), group.getCompanyId(), group.getClassNameId(),
@@ -560,7 +560,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		long classNameId = group.getClassNameId();
 		long classPK = group.getClassPK();
-		friendlyURL = getFriendlyURL(friendlyURL);
+		friendlyURL = getFriendlyURL(groupId, classPK, friendlyURL);
 
 		if ((classNameId <= 0) || (classPK <= 0)) {
 			validateName(group.getGroupId(), group.getCompanyId(), name);
@@ -680,32 +680,16 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected String getFriendlyURL(
-			long companyId, String name, String friendlyURL)
-		throws PortalException, SystemException {
+		long groupId, long classPK, String friendlyURL) {
 
 		friendlyURL = getFriendlyURL(friendlyURL);
 
 		if (Validator.isNull(friendlyURL)) {
-			friendlyURL = StringPool.SLASH + getFriendlyURL(name);
-		}
-
-		try {
-			groupPersistence.findByC_F(companyId, friendlyURL);
-		}
-		catch (NoSuchGroupException nsge) {
-			return friendlyURL;
-		}
-
-		for (int i = 1;; i++) {
-			String tempFriendlyURL = friendlyURL + StringPool.PERIOD + i;
-
-			try {
-				groupPersistence.findByC_F(companyId, tempFriendlyURL);
+			if (classPK > 0) {
+				friendlyURL = StringPool.SLASH + classPK;
 			}
-			catch (NoSuchGroupException nsge) {
-				friendlyURL = tempFriendlyURL;
-
-				break;
+			else {
+				friendlyURL = StringPool.SLASH + groupId;
 			}
 		}
 
@@ -736,6 +720,24 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 		catch (NoSuchGroupException nsge) {
+		}
+
+		String groupIdFriendlyURL = friendlyURL.substring(1);
+
+		if (Validator.isNumber(groupIdFriendlyURL)) {
+			if (((classPK > 0) &&
+				 (!groupIdFriendlyURL.equals(String.valueOf(classPK)))) ||
+				((classPK == 0) &&
+				 (!groupIdFriendlyURL.equals(String.valueOf(groupId))))) {
+
+				GroupFriendlyURLException gfurle =
+					new GroupFriendlyURLException(
+						GroupFriendlyURLException.POSSIBLE_DUPLICATE);
+
+				gfurle.setKeywordConflict(groupIdFriendlyURL);
+
+				throw gfurle;
+			}
 		}
 
 		String screenName = friendlyURL.substring(1);
