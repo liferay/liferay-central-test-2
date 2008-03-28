@@ -531,6 +531,13 @@ public class WikiPageLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		java.lang.String format) throws com.liferay.portal.SystemException {
+		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();
+
+		return wikiPageLocalService.getPages(format);
+	}
+
+	public static java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
 		long nodeId, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		WikiPageLocalService wikiPageLocalService = WikiPageLocalServiceFactory.getService();

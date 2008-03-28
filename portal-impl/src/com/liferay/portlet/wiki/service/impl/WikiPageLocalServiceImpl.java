@@ -564,6 +564,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 			page.getRedirectTitle(), page.getAttachmentsFiles());
 	}
 
+	public List<WikiPage> getPages(String format)
+		throws SystemException {
+
+		return wikiPagePersistence.findByFormat(format);
+	}
+
 	public List<WikiPage> getPages(long nodeId, int begin, int end)
 		throws SystemException {
 

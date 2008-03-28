@@ -104,6 +104,36 @@ public interface WikiPagePersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.wiki.NoSuchPageException;
 
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByFormat(
+		java.lang.String format) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByFormat(
+		java.lang.String format, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByFormat(
+		java.lang.String format, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.wiki.model.WikiPage findByFormat_First(
+		java.lang.String format,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException;
+
+	public com.liferay.portlet.wiki.model.WikiPage findByFormat_Last(
+		java.lang.String format,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException;
+
+	public com.liferay.portlet.wiki.model.WikiPage[] findByFormat_PrevAndNext(
+		long pageId, java.lang.String format,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.wiki.NoSuchPageException;
+
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> findByNodeId(
 		long nodeId) throws com.liferay.portal.SystemException;
 
@@ -346,6 +376,9 @@ public interface WikiPagePersistence {
 	public void removeByUuid(java.lang.String uuid)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByFormat(java.lang.String format)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByNodeId(long nodeId)
 		throws com.liferay.portal.SystemException;
 
@@ -375,6 +408,9 @@ public interface WikiPagePersistence {
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException;
+
+	public int countByFormat(java.lang.String format)
 		throws com.liferay.portal.SystemException;
 
 	public int countByNodeId(long nodeId)
