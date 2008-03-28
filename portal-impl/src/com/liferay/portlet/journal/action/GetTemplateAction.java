@@ -22,13 +22,17 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.journal.NoSuchTemplateException;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
@@ -76,36 +80,49 @@ public class GetTemplateAction extends Action {
 
 			boolean transform = ParamUtil.get(req, "transform", true);
 
-			JournalTemplate template =
-				JournalTemplateLocalServiceUtil.getTemplate(
-					groupId, templateId);
+			try {
+				JournalTemplate template =
+					JournalTemplateLocalServiceUtil.getTemplate(
+						groupId, templateId);
 
-			String script = JournalUtil.getTemplateScript(
-				template, tokens, languageId, transform);
+				String script = JournalUtil.getTemplateScript(
+					template, tokens, languageId, transform);
 
-			String extension = JournalTemplateImpl.LANG_TYPE_VM;
+				String extension = JournalTemplateImpl.LANG_TYPE_VM;
 
-			if (template.getLangType() != null) {
-				extension = template.getLangType();
+				if (template.getLangType() != null) {
+					extension = template.getLangType();
+				}
+
+				String fileName = null;
+				byte[] byteArray = script.getBytes();
+
+				String contentType = ContentTypes.TEXT_PLAIN_UTF8;
+
+				if (Validator.equals(
+						extension, JournalTemplateImpl.LANG_TYPE_CSS)) {
+
+					contentType = ContentTypes.TEXT_CSS_UTF8;
+				}
+				else if (Validator.equals(
+						extension, JournalTemplateImpl.LANG_TYPE_XSL)) {
+
+					contentType = ContentTypes.TEXT_XML_UTF8;
+				}
+
+				ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
 			}
-
-			String fileName = null;
-			byte[] byteArray = script.getBytes();
-
-			String contentType = ContentTypes.TEXT_PLAIN_UTF8;
-
-			if (Validator.equals(
-					extension, JournalTemplateImpl.LANG_TYPE_CSS)) {
-
-				contentType = ContentTypes.TEXT_CSS_UTF8;
+			catch (PortalException pe) {
+				if (pe instanceof PrincipalException) {
+					PortalUtil.sendError(
+						HttpServletResponse.SC_FORBIDDEN,
+						new PrincipalException(), req, res);
+				}
+				else if (pe instanceof NoSuchTemplateException) {
+					PortalUtil.sendError(
+						HttpServletResponse.SC_NOT_FOUND, pe, req, res);
+				}
 			}
-			else if (Validator.equals(
-					extension, JournalTemplateImpl.LANG_TYPE_XSL)) {
-
-				contentType = ContentTypes.TEXT_XML_UTF8;
-			}
-
-			ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
 
 			return null;
 		}

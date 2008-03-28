@@ -26,6 +26,20 @@
 
 <%
 String url = PortalUtil.getPortalURL(request) + PortalUtil.getCurrentURL(request);
+
+boolean noSuchResource = false;
+
+if (SessionErrors.contains(request, NoSuchArticleException.class.getName()) ||
+		SessionErrors.contains(request, NoSuchFileException.class.getName()) ||
+		SessionErrors.contains(request, NoSuchFileEntryException.class.getName()) ||
+		SessionErrors.contains(request, NoSuchGroupException.class.getName()) ||
+		SessionErrors.contains(request, NoSuchImageException.class.getName()) ||
+		SessionErrors.contains(request, NoSuchLayoutException.class.getName()) ||
+		SessionErrors.contains(request, NoSuchLayoutSetException.class.getName()) ||
+		SessionErrors.contains(request, NoSuchTemplateException.class.getName()) ||
+		SessionErrors.contains(request, NoSuchStructureException.class.getName())) {
+	noSuchResource = true;
+}
 %>
 
 <c:choose>
@@ -66,7 +80,7 @@ String url = PortalUtil.getPortalURL(request) + PortalUtil.getCurrentURL(request
 			<%= StringUtil.replace(te.getMessage(), new String[] {"<", "\n"}, new String[] {"&lt;", "<br />\n"}) %>
 		</div>
 	</c:when>
-	<c:when test="<%= SessionErrors.contains(request, NoSuchFileException.class.getName()) || SessionErrors.contains(request, NoSuchFileEntryException.class.getName()) || SessionErrors.contains(request, NoSuchGroupException.class.getName()) || SessionErrors.contains(request, NoSuchImageException.class.getName()) || SessionErrors.contains(request, NoSuchLayoutException.class.getName()) || SessionErrors.contains(request, NoSuchLayoutSetException.class.getName()) %>">
+	<c:when test="<%= noSuchResource %>">
 		<h3 class="portlet-msg-error"><liferay-ui:message key="not-found" /></h3><br />
 
 		<liferay-ui:message key="the-requested-resource-was-not-found" />

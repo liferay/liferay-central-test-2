@@ -22,9 +22,13 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.journal.NoSuchStructureException;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -56,15 +60,28 @@ public class GetStructureAction extends Action {
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String structureId = ParamUtil.getString(req, "structureId");
 
-			JournalStructure structure =
-				JournalStructureLocalServiceUtil.getStructure(
-					groupId, structureId);
+			try {
+				JournalStructure structure =
+					JournalStructureLocalServiceUtil.getStructure(
+						groupId, structureId);
 
-			String fileName = null;
-			byte[] byteArray = structure.getXsd().getBytes();
+				String fileName = null;
+				byte[] byteArray = structure.getXsd().getBytes();
 
-			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
+				ServletResponseUtil.sendFile(
+					res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
+			}
+			catch (PortalException pe) {
+				if (pe instanceof PrincipalException) {
+					PortalUtil.sendError(
+						HttpServletResponse.SC_FORBIDDEN,
+						new PrincipalException(), req, res);
+				}
+				else if (pe instanceof NoSuchStructureException) {
+					PortalUtil.sendError(
+						HttpServletResponse.SC_NOT_FOUND, pe, req, res);
+				}
+			}
 
 			return null;
 		}

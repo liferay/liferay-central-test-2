@@ -22,10 +22,14 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -60,16 +64,29 @@ public class GetLatestArticleContentAction extends Action {
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
-			JournalArticle article =
-				JournalArticleLocalServiceUtil.getLatestArticle(
-					groupId, articleId, Boolean.TRUE);
+			try {
+				JournalArticle article =
+					JournalArticleLocalServiceUtil.getLatestArticle(
+						groupId, articleId, Boolean.TRUE);
 
-			String fileName = "content.xml";
-			byte[] byteArray =
-				article.getContentByLocale(languageId).getBytes();
+				String fileName = "content.xml";
+				byte[] byteArray =
+					article.getContentByLocale(languageId).getBytes();
 
-			ServletResponseUtil.sendFile(
-				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
+				ServletResponseUtil.sendFile(
+					res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
+			}
+			catch (PortalException pe) {
+				if (pe instanceof PrincipalException) {
+					PortalUtil.sendError(
+						HttpServletResponse.SC_FORBIDDEN,
+						new PrincipalException(), req, res);
+				}
+				else if (pe instanceof NoSuchArticleException) {
+					PortalUtil.sendError(
+						HttpServletResponse.SC_NOT_FOUND, pe, req, res);
+				}
+			}
 
 			return null;
 		}

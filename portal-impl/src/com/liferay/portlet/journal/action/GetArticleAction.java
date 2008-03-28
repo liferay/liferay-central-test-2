@@ -22,13 +22,17 @@
 
 package com.liferay.portlet.journal.action;
 
+import com.liferay.portal.PortalException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
@@ -77,44 +81,57 @@ public class GetArticleAction extends Action {
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
-			JournalArticle article =
-				JournalArticleLocalServiceUtil.getLatestArticle(
-					groupId, articleId, Boolean.TRUE);
+			try {
+				JournalArticle article =
+					JournalArticleLocalServiceUtil.getLatestArticle(
+						groupId, articleId, Boolean.TRUE);
 
-			ThemeDisplay themeDisplay =
-				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+				ThemeDisplay themeDisplay =
+					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-			Map<String, String> tokens = JournalUtil.getTokens(
-				groupId, themeDisplay);
+				Map<String, String> tokens = JournalUtil.getTokens(
+					groupId, themeDisplay);
 
-			String xml = article.getContentByLocale(languageId);
+				String xml = article.getContentByLocale(languageId);
 
-			String contentType = ContentTypes.TEXT_HTML_UTF8;
+				String contentType = ContentTypes.TEXT_HTML_UTF8;
 
-			Document doc = null;
+				Document doc = null;
 
-			Element root = null;
+				Element root = null;
 
-			if (article.isTemplateDriven()) {
-				SAXReader reader = new SAXReader();
+				if (article.isTemplateDriven()) {
+					SAXReader reader = new SAXReader();
 
-				doc = reader.read(new StringReader(xml));
+					doc = reader.read(new StringReader(xml));
 
-				root = doc.getRootElement();
+					root = doc.getRootElement();
 
-				addProcessingInstructions(doc, themeDisplay, article);
+					addProcessingInstructions(doc, themeDisplay, article);
 
-				JournalUtil.addAllReservedEls(root, tokens, article);
+					JournalUtil.addAllReservedEls(root, tokens, article);
 
-				xml = JournalUtil.formatXML(doc);
+					xml = JournalUtil.formatXML(doc);
 
-				contentType = ContentTypes.TEXT_XML_UTF8;
+					contentType = ContentTypes.TEXT_XML_UTF8;
+				}
+
+				String fileName = null;
+				byte[] byteArray = xml.getBytes();
+
+				ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
 			}
-
-			String fileName = null;
-			byte[] byteArray = xml.getBytes();
-
-			ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
+			catch (PortalException pe) {
+				if (pe instanceof PrincipalException) {
+					PortalUtil.sendError(
+						HttpServletResponse.SC_FORBIDDEN,
+						new PrincipalException(), req, res);
+				}
+				else if (pe instanceof NoSuchArticleException) {
+					PortalUtil.sendError(
+						HttpServletResponse.SC_NOT_FOUND, pe, req, res);
+				}
+			}
 
 			return null;
 		}
