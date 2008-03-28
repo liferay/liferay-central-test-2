@@ -29,7 +29,9 @@ String url = PortalUtil.getPortalURL(request) + PortalUtil.getCurrentURL(request
 
 boolean noSuchResource = false;
 
-for (String key : SessionErrors.iterator(request)) {
+for (String key : SessionErrors.getKeySet(request)) {
+	key = key.substring(key.lastIndexOf('.') + 1);
+
 	if (key.startsWith("NoSuch") && key.endsWith("Exception")) {
 		noSuchResource = true;
 	}

@@ -26,6 +26,7 @@ import java.util.Collections;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 import javax.portlet.PortletRequest;
 import javax.portlet.PortletSession;
@@ -125,6 +126,16 @@ public class SessionErrors {
 		while (itr.hasNext()) {
 			System.out.println(itr.next());
 		}
+	}
+
+	public static Set<String> getKeySet(HttpServletRequest req) {
+		return getKeySet(req.getSession());
+	}
+
+	public static Set<String> getKeySet(HttpSession ses) {
+		Map errors = _getErrors(ses);
+
+		return Collections.unmodifiableSet(errors.keySet());
 	}
 
 	public static int size(HttpServletRequest req) {
