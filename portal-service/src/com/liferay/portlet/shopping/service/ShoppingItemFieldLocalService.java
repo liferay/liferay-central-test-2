@@ -131,6 +131,6 @@ public interface ShoppingItemFieldLocalService {
 
 	public void afterPropertiesSet();
 
-	public java.util.List getItemFields(long itemId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getItemFields(
+		long itemId) throws com.liferay.portal.SystemException;
 }

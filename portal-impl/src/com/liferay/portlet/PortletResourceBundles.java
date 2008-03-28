@@ -80,19 +80,22 @@ public class PortletResourceBundles {
 	}
 
 	private PortletResourceBundles() {
-		_contexts = CollectionFactory.getSyncHashMap(new LinkedHashMap());
+		_contexts = CollectionFactory.getSyncHashMap(
+			new LinkedHashMap<String, Map<String, ResourceBundle>>());
 	}
 
 	private ResourceBundle _getBundle(
 		String servletContextName, String languageId) {
 
-		Map bundles = _getBundles(servletContextName);
+		Map<String, ResourceBundle> bundles = _getBundles(servletContextName);
 
 		return _getBundle(bundles, languageId);
 	}
 
-	private ResourceBundle _getBundle(Map bundles, String languageId) {
-		ResourceBundle bundle = (ResourceBundle)bundles.get(languageId);
+	private ResourceBundle _getBundle(
+		Map<String, ResourceBundle> bundles, String languageId) {
+
+		ResourceBundle bundle = bundles.get(languageId);
 
 		if (bundle == null) {
 			try {
@@ -109,8 +112,8 @@ public class PortletResourceBundles {
 		return bundle;
 	}
 
-	private Map _getBundles(String servletContextName) {
-		Map bundles = (Map)_contexts.get(servletContextName);
+	private Map<String, ResourceBundle> _getBundles(String servletContextName) {
+		Map<String, ResourceBundle> bundles = _contexts.get(servletContextName);
 
 		if (bundles == null) {
 			bundles = CollectionFactory.getHashMap();
@@ -145,12 +148,13 @@ public class PortletResourceBundles {
 			return bundle.getString(key);
 		}
 
-		Iterator itr = _contexts.entrySet().iterator();
+		Iterator<Map.Entry<String, Map<String, ResourceBundle>>> itr =
+			_contexts.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, Map<String, ResourceBundle>> entry = itr.next();
 
-			Map bundles = (Map)entry.getValue();
+			Map<String, ResourceBundle> bundles = entry.getValue();
 
 			ResourceBundle bundle = _getBundle(bundles, languageId);
 
@@ -167,7 +171,7 @@ public class PortletResourceBundles {
 	private void _put(
 		String servletContextName, String languageId, ResourceBundle bundle) {
 
-		Map bundles = _getBundles(servletContextName);
+		Map<String, ResourceBundle> bundles = _getBundles(servletContextName);
 
 		bundles.put(languageId, bundle);
 	}
@@ -181,6 +185,6 @@ public class PortletResourceBundles {
 	private static PortletResourceBundles _instance =
 		new PortletResourceBundles();
 
-	private Map _contexts;
+	private Map<String, Map<String, ResourceBundle>> _contexts;
 
 }

@@ -116,24 +116,27 @@ public interface SCLicenseLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getLicenses()
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses()
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getLicenses(int begin, int end)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getLicenses(boolean active, boolean recommended)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List getLicenses(boolean active, boolean recommended,
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
 		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
+		boolean active, boolean recommended)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
+		boolean active, boolean recommended, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public int getLicensesCount() throws com.liferay.portal.SystemException;
 
 	public int getLicensesCount(boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getProductEntryLicenses(long productEntryId)
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getProductEntryLicenses(
+		long productEntryId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

@@ -48,7 +48,7 @@ public class TextEngine implements WikiEngine {
 	}
 
 	public Map<String, Boolean> getOutgoingLinks(WikiPage page) {
-		return Collections.emptyMap();
+		return Collections.EMPTY_MAP;
 	}
 
 	public boolean isLinkedTo(WikiPage page, String targetTitle) {

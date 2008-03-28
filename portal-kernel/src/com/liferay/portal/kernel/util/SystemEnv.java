@@ -84,10 +84,10 @@ public class SystemEnv {
 	public static void setProperties(Properties props) {
 		Properties envProps = getProperties();
 
-		Enumeration enu = envProps.propertyNames();
+		Enumeration<String> enu = (Enumeration<String>)envProps.propertyNames();
 
 		while (enu.hasMoreElements()) {
-			String key = (String)enu.nextElement();
+			String key = enu.nextElement();
 
 			props.setProperty("env." + key, (String)envProps.get(key));
 		}

@@ -99,7 +99,8 @@ public class SCProductVersionServiceImpl
 		return productVersion;
 	}
 
-	public List getProductVersions(long productEntryId, int begin, int end)
+	public List<SCProductVersion> getProductVersions(
+			long productEntryId, int begin, int end)
 		throws SystemException, PortalException {
 
 		SCProductEntryPermission.check(

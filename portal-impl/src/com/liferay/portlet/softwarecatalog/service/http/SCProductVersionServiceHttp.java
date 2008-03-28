@@ -311,7 +311,7 @@ public class SCProductVersionServiceHttp {
 		}
 	}
 
-	public static java.util.List getProductVersions(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getProductVersions(
 		HttpPrincipal httpPrincipal, long productEntryId, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -343,7 +343,7 @@ public class SCProductVersionServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

@@ -258,7 +258,7 @@ public class UpgradePermission extends UpgradeProcess {
 			Object[] permission = _DELETE_PERMISSIONS[i];
 
 			String actionId = (String)permission[0];
-			String resourceName = ((Class)permission[1]).getName();
+			String resourceName = ((Class<?>)permission[1]).getName();
 
 			deletePermissionByActionIdAndResourceName(actionId, resourceName);
 		}
@@ -268,7 +268,7 @@ public class UpgradePermission extends UpgradeProcess {
 
 			String oldActionId = (String)permission[0];
 			String newActionId = (String)permission[1];
-			String resourceName = ((Class)permission[2]).getName();
+			String resourceName = ((Class<?>)permission[2]).getName();
 
 			updatePermission(oldActionId, newActionId, resourceName);
 		}

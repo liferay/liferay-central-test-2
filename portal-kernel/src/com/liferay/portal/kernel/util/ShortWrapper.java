@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.util;
  */
 public class ShortWrapper extends PrimitiveWrapper {
 
-	public static final Class TYPE = Short.TYPE;
+	public static final Class<?> TYPE = Short.TYPE;
 
 	public ShortWrapper() {
 		this((short)0);

@@ -203,8 +203,7 @@ public class ExpandoValueLocalServiceImpl
 			long tableId, long rowId, ExpandoValue[] expandoValues)
 		throws PortalException, SystemException {
 
-		List<ExpandoValue> list =
-			(List<ExpandoValue>)ListUtil.fromArray(expandoValues);
+		List<ExpandoValue> list = ListUtil.fromArray(expandoValues);
 
 		return setRowValues(tableId, rowId, list);
 	}

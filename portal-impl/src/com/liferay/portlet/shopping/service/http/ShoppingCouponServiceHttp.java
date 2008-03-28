@@ -263,9 +263,10 @@ public class ShoppingCouponServiceHttp {
 		}
 	}
 
-	public static java.util.List search(HttpPrincipal httpPrincipal, long plid,
-		long companyId, java.lang.String code, boolean active,
-		java.lang.String discountType, boolean andOperator, int begin, int end)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
+		HttpPrincipal httpPrincipal, long plid, long companyId,
+		java.lang.String code, boolean active, java.lang.String discountType,
+		boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -317,7 +318,7 @@ public class ShoppingCouponServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

@@ -91,9 +91,7 @@ public class DirectoryOpenSearchImpl extends BaseOpenSearchImpl {
 		org.dom4j.Document doc = (org.dom4j.Document)values[1];
 		Element root = (Element)values[2];
 
-		for (int i = 0; i < results.size(); i++) {
-			User user = (User)results.get(i);
-
+		for (User user : results) {
 			String portletId = PortletKeys.DIRECTORY;
 
 			//String portletTitle = PortalUtil.getPortletTitle(

@@ -29,7 +29,7 @@ package com.liferay.portlet.shopping.service.persistence;
  *
  */
 public interface ShoppingItemFinder {
-	public int countByCategoryIds(java.util.List categoryIds)
+	public int countByCategoryIds(java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException;
 
 	public int countByFeatured(long groupId, long[] categoryIds)
@@ -41,13 +41,15 @@ public interface ShoppingItemFinder {
 	public int countBySale(long groupId, long[] categoryIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findByFeatured(long groupId, long[] categoryIds,
-		int numOfItems) throws com.liferay.portal.SystemException;
-
-	public java.util.List findByKeywords(long groupId, long[] categoryIds,
-		java.lang.String keywords, int begin, int end)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByFeatured(
+		long groupId, long[] categoryIds, int numOfItems)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List findBySale(long groupId, long[] categoryIds,
-		int numOfItems) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findByKeywords(
+		long groupId, long[] categoryIds, java.lang.String keywords, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> findBySale(
+		long groupId, long[] categoryIds, int numOfItems)
+		throws com.liferay.portal.SystemException;
 }

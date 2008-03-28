@@ -35,7 +35,8 @@ import java.util.Map;
  */
 public abstract class RuntimeLogic {
 
-	public abstract void processContent(StringMaker sm, Map attributes)
+	public abstract void processContent(
+			StringMaker sm, Map<String, String> attributes)
 		throws Exception;
 
 }

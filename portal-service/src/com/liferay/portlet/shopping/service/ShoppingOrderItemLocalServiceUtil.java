@@ -250,8 +250,8 @@ public class ShoppingOrderItemLocalServiceUtil {
 		shoppingOrderItemLocalService.afterPropertiesSet();
 	}
 
-	public static java.util.List getOrderItems(long orderId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> getOrderItems(
+		long orderId) throws com.liferay.portal.SystemException {
 		ShoppingOrderItemLocalService shoppingOrderItemLocalService = ShoppingOrderItemLocalServiceFactory.getService();
 
 		return shoppingOrderItemLocalService.getOrderItems(orderId);

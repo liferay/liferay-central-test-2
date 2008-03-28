@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.util;
  */
 public class LongWrapper extends PrimitiveWrapper {
 
-	public static final Class TYPE = Long.TYPE;
+	public static final Class<?> TYPE = Long.TYPE;
 
 	public LongWrapper() {
 		this(0L);

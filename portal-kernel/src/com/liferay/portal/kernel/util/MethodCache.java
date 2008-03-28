@@ -42,7 +42,7 @@ public class MethodCache {
 	}
 
 	public static Method get(
-			String className, String methodName, Class[] parameterTypes)
+			String className, String methodName, Class<?>[] parameterTypes)
 		throws ClassNotFoundException, NoSuchMethodException {
 
 		MethodKey methodKey = new MethodKey(
@@ -58,21 +58,21 @@ public class MethodCache {
 	}
 
 	private MethodCache() {
-		_classes = new HashMap();
-		_methods = new HashMap();
+		_classes = new HashMap<String, Class<?>>();
+		_methods = new HashMap<MethodKey, Method>();
 	}
 
 	private Method _get(MethodKey methodKey)
 		throws ClassNotFoundException, NoSuchMethodException {
 
-		Method method = (Method)_methods.get(methodKey);
+		Method method = _methods.get(methodKey);
 
 		if (method == null) {
 			String className = methodKey.getClassName();
 			String methodName = methodKey.getMethodName();
-			Class[] types = methodKey.getTypes();
+			Class<?>[] types = methodKey.getTypes();
 
-			Class classObj = (Class)_classes.get(className);
+			Class<?> classObj = _classes.get(className);
 
 			if (classObj == null) {
 				ClassLoader contextClassLoader =
@@ -93,7 +93,7 @@ public class MethodCache {
 
 	private static MethodCache _instance = new MethodCache();
 
-	private Map _classes;
-	private Map _methods;
+	private Map<String, Class<?>> _classes;
+	private Map<MethodKey, Method> _methods;
 
 }

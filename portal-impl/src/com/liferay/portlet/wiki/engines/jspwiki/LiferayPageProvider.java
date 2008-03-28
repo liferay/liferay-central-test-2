@@ -25,21 +25,21 @@ package com.liferay.portlet.wiki.engines.jspwiki;
 import com.ecyrd.jspwiki.NoRequiredPropertyException;
 import com.ecyrd.jspwiki.QueryItem;
 import com.ecyrd.jspwiki.WikiEngine;
+import com.ecyrd.jspwiki.WikiPage;
 import com.ecyrd.jspwiki.providers.ProviderException;
 import com.ecyrd.jspwiki.providers.WikiPageProvider;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.wiki.NoSuchPageException;
-import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.io.IOException;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
 
@@ -55,7 +55,7 @@ import org.apache.commons.logging.LogFactory;
 public class LiferayPageProvider implements WikiPageProvider {
 
 	public static com.ecyrd.jspwiki.WikiPage toJSPWikiPage(
-		WikiPage page, WikiEngine engine) {
+		com.liferay.portlet.wiki.model.WikiPage page, WikiEngine engine) {
 
 		com.ecyrd.jspwiki.WikiPage jspWikiPage = new com.ecyrd.jspwiki.WikiPage(
 			engine, page.getTitle());
@@ -82,15 +82,15 @@ public class LiferayPageProvider implements WikiPageProvider {
 		}
 	}
 
-	public Collection findPages(QueryItem[] query) {
+	public Collection<WikiPage> findPages(QueryItem[] query) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking findPages(" + query + ")");
 		}
 
-		return _EMPTY_LIST;
+		return Collections.EMPTY_LIST;
 	}
 
-	public Collection getAllChangedSince(Date date) {
+	public Collection<WikiPage> getAllChangedSince(Date date) {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking getAllChangedSince(" + date + ")");
 		}
@@ -101,27 +101,24 @@ public class LiferayPageProvider implements WikiPageProvider {
 		catch (ProviderException e) {
 			_log.error("Could not get changed pages", e);
 
-			return _EMPTY_LIST;
+			return Collections.EMPTY_LIST;
 		}
 	}
 
-	public Collection getAllPages() throws ProviderException {
+	public Collection<WikiPage> getAllPages() throws ProviderException {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking getAllPages()");
 		}
 
-		List jspWikiPages = new ArrayList();
+		List<WikiPage> jspWikiPages = new ArrayList<WikiPage>();
 
 		try {
 			int count = WikiPageLocalServiceUtil.getPagesCount(_nodeId);
 
-			List pages = WikiPageLocalServiceUtil.getPages(_nodeId, 0, count);
+			List<com.liferay.portlet.wiki.model.WikiPage> pages =
+				WikiPageLocalServiceUtil.getPages(_nodeId, 0, count);
 
-			Iterator itr = pages.iterator();
-
-			while (itr.hasNext()) {
-				WikiPage page = (WikiPage)itr.next();
-
+			for (com.liferay.portlet.wiki.model.WikiPage page : pages) {
 				jspWikiPages.add(toJSPWikiPage(page, _engine));
 			}
 		}
@@ -153,7 +150,8 @@ public class LiferayPageProvider implements WikiPageProvider {
 		}
 
 		try {
-			WikiPage page = WikiPageLocalServiceUtil.getPage(_nodeId, title);
+			com.liferay.portlet.wiki.model.WikiPage page =
+				WikiPageLocalServiceUtil.getPage(_nodeId, title);
 
 			return toJSPWikiPage(page, _engine);
 		}
@@ -173,7 +171,8 @@ public class LiferayPageProvider implements WikiPageProvider {
 		}
 
 		try {
-			WikiPage page = WikiPageLocalServiceUtil.getPage(_nodeId, title);
+			com.liferay.portlet.wiki.model.WikiPage page =
+				WikiPageLocalServiceUtil.getPage(_nodeId, title);
 
 			return page.getContent();
 		}
@@ -190,12 +189,14 @@ public class LiferayPageProvider implements WikiPageProvider {
 		return LiferayPageProvider.class.getName();
 	}
 
-	public List getVersionHistory(String title) throws ProviderException {
+	public List<WikiPage> getVersionHistory(String title)
+		throws ProviderException {
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("Invoking getVersionHistory(" + title + ")");
 		}
 
-		return _EMPTY_LIST;
+		return Collections.EMPTY_LIST;
 	}
 
 	public void initialize(WikiEngine engine, Properties props)
@@ -244,8 +245,6 @@ public class LiferayPageProvider implements WikiPageProvider {
 			_log.debug("Invoking putPageText(" + page + ", " + text + ")");
 		}
 	}
-
-	private static final List _EMPTY_LIST = new ArrayList();
 
 	private static Log _log = LogFactory.getLog(LiferayPageProvider.class);
 

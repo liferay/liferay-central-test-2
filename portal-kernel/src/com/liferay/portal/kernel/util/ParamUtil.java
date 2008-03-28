@@ -246,10 +246,10 @@ public class ParamUtil {
 	}
 
 	public static void print(ServletRequest req) {
-		Enumeration e = req.getParameterNames();
+		Enumeration<String> enu = req.getParameterNames();
 
-		while (e.hasMoreElements()) {
-			String param = (String)e.nextElement();
+		while (enu.hasMoreElements()) {
+			String param = enu.nextElement();
 
 			String[] values = req.getParameterValues(param);
 
@@ -465,10 +465,10 @@ public class ParamUtil {
 	}
 
 	public static void print(PortletRequest req) {
-		Enumeration e = req.getParameterNames();
+		Enumeration<String> enu = req.getParameterNames();
 
-		while (e.hasMoreElements()) {
-			String param = (String)e.nextElement();
+		while (enu.hasMoreElements()) {
+			String param = enu.nextElement();
 
 			String[] values = req.getParameterValues(param);
 

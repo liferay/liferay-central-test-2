@@ -76,8 +76,8 @@ public interface SCProductVersionService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getProductVersions(long productEntryId, int begin,
-		int end)
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> getProductVersions(
+		long productEntryId, int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

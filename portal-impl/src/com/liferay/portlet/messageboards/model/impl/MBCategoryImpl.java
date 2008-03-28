@@ -45,10 +45,10 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 	public MBCategoryImpl() {
 	}
 
-	public List getAncestorCategoryIds()
+	public List<Long> getAncestorCategoryIds()
 		throws PortalException, SystemException {
 
-		List ancestorCategoryIds = new ArrayList();
+		List<Long> ancestorCategoryIds = new ArrayList<Long>();
 
 		MBCategory category = this;
 
@@ -57,7 +57,7 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 				category = MBCategoryLocalServiceUtil.getCategory(
 					category.getParentCategoryId());
 
-				ancestorCategoryIds.add(new Long(category.getCategoryId()));
+				ancestorCategoryIds.add(category.getCategoryId());
 			}
 			else {
 				break;
@@ -67,8 +67,10 @@ public class MBCategoryImpl extends MBCategoryModelImpl implements MBCategory {
 		return ancestorCategoryIds;
 	}
 
-	public List getAncestors() throws PortalException, SystemException {
-		List ancestors = new ArrayList();
+	public List<MBCategory> getAncestors()
+		throws PortalException, SystemException {
+
+		List<MBCategory> ancestors = new ArrayList<MBCategory>();
 
 		MBCategory category = this;
 

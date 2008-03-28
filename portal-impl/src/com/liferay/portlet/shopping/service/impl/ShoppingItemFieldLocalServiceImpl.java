@@ -23,6 +23,7 @@
 package com.liferay.portlet.shopping.service.impl;
 
 import com.liferay.portal.SystemException;
+import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.service.base.ShoppingItemFieldLocalServiceBaseImpl;
 
 import java.util.List;
@@ -37,7 +38,9 @@ import java.util.List;
 public class ShoppingItemFieldLocalServiceImpl
 	extends ShoppingItemFieldLocalServiceBaseImpl {
 
-	public List getItemFields(long itemId) throws SystemException {
+	public List<ShoppingItemField> getItemFields(long itemId)
+		throws SystemException {
+
 		return shoppingItemFieldPersistence.findByItemId(itemId);
 	}
 

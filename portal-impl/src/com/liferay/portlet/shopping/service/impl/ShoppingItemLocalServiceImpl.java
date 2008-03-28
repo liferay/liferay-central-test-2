@@ -63,7 +63,6 @@ import java.io.OutputStream;
 
 import java.util.ArrayList;
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -185,9 +184,11 @@ public class ShoppingItemLocalServiceImpl
 					out.close();
 				}
 
-				List itemFields = new ArrayList();
+				List<ShoppingItemField> itemFields =
+					new ArrayList<ShoppingItemField>();
 
-				List itemPrices = new ArrayList();
+				List<ShoppingItemPrice> itemPrices =
+					new ArrayList<ShoppingItemPrice>();
 
 				itemPrices.add(itemPrice);
 
@@ -219,8 +220,9 @@ public class ShoppingItemLocalServiceImpl
 			Boolean sale, boolean smallImage, String smallImageURL,
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List itemFields, List itemPrices,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			File largeFile, List<ShoppingItemField> itemFields,
+			List<ShoppingItemPrice> itemPrices, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		return addItem(
@@ -239,8 +241,9 @@ public class ShoppingItemLocalServiceImpl
 			Boolean sale, boolean smallImage, String smallImageURL,
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List itemFields, List itemPrices,
-			String[] communityPermissions, String[] guestPermissions)
+			File largeFile, List<ShoppingItemField> itemFields,
+			List<ShoppingItemPrice> itemPrices, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		return addItem(
@@ -258,9 +261,10 @@ public class ShoppingItemLocalServiceImpl
 			Boolean sale, boolean smallImage, String smallImageURL,
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List itemFields, List itemPrices,
-			Boolean addCommunityPermissions, Boolean addGuestPermissions,
-			String[] communityPermissions, String[] guestPermissions)
+			File largeFile, List<ShoppingItemField> itemFields,
+			List<ShoppingItemPrice> itemPrices, Boolean addCommunityPermissions,
+			Boolean addGuestPermissions, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		// Item
@@ -306,9 +310,7 @@ public class ShoppingItemLocalServiceImpl
 		item.setFields(itemFields.size() > 0);
 		item.setFieldsQuantities(fieldsQuantities);
 
-		for (int i = 0; i < itemPrices.size(); i++) {
-			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
-
+		for (ShoppingItemPrice itemPrice : itemPrices) {
 			if (itemPrice.getStatus() ==
 					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) {
 
@@ -350,9 +352,7 @@ public class ShoppingItemLocalServiceImpl
 
 		// Fields
 
-		for (int i = 0; i < itemFields.size(); i++) {
-			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
-
+		for (ShoppingItemField itemField : itemFields) {
 			long itemFieldId = counterLocalService.increment();
 
 			itemField.setItemFieldId(itemFieldId);
@@ -365,17 +365,15 @@ public class ShoppingItemLocalServiceImpl
 
 		// Prices
 
-		for (int i = 0; (i < itemPrices.size()) && (itemPrices.size() > 1);
-				i++) {
+		if (itemPrices.size() > 1) {
+			for (ShoppingItemPrice itemPrice : itemPrices) {
+				long itemPriceId = counterLocalService.increment();
 
-			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
+				itemPrice.setItemPriceId(itemPriceId);
+				itemPrice.setItemId(itemId);
 
-			long itemPriceId = counterLocalService.increment();
-
-			itemPrice.setItemPriceId(itemPriceId);
-			itemPrice.setItemId(itemId);
-
-			shoppingItemPricePersistence.update(itemPrice, false);
+				shoppingItemPricePersistence.update(itemPrice, false);
+			}
 		}
 
 		// Images
@@ -487,39 +485,36 @@ public class ShoppingItemLocalServiceImpl
 	public void deleteItems(long categoryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = shoppingItemPersistence.findByCategoryId(
-			categoryId).iterator();
+		List<ShoppingItem> items = shoppingItemPersistence.findByCategoryId(
+			categoryId);
 
-		while (itr.hasNext()) {
-			ShoppingItem item = (ShoppingItem)itr.next();
-
+		for (ShoppingItem item : items) {
 			deleteItem(item);
 		}
 	}
 
-	public int getCategoriesItemsCount(List categoryIds)
+	public int getCategoriesItemsCount(List<Long> categoryIds)
 		throws SystemException {
 
 		return shoppingItemFinder.countByCategoryIds(categoryIds);
 	}
 
-	public List getFeaturedItems(
+	public List<ShoppingItem> getFeaturedItems(
 			long groupId, long categoryId, int numOfItems)
 		throws SystemException {
 
-		List featuredItems = shoppingItemFinder.findByFeatured(
+		List<ShoppingItem> featuredItems = shoppingItemFinder.findByFeatured(
 			groupId, new long[] {categoryId}, numOfItems);
 
 		if (featuredItems.size() == 0) {
-			List childCategories = shoppingCategoryPersistence.findByG_P(
-				groupId, categoryId);
+			List<ShoppingCategory> childCategories =
+				shoppingCategoryPersistence.findByG_P(groupId, categoryId);
 
 			if (childCategories.size() > 0) {
 				long[] categoryIds = new long[childCategories.size()];
 
 				for (int i = 0; i < childCategories.size(); i++) {
-					ShoppingCategory childCategory =
-						(ShoppingCategory)childCategories.get(i);
+					ShoppingCategory childCategory = childCategories.get(i);
 
 					categoryIds[i] = childCategory.getCategoryId();
 				}
@@ -562,11 +557,11 @@ public class ShoppingItemLocalServiceImpl
 		return shoppingItemPersistence.findBySmallImageId(smallImageId);
 	}
 
-	public List getItems(long categoryId) throws SystemException {
+	public List<ShoppingItem> getItems(long categoryId) throws SystemException {
 		return shoppingItemPersistence.findByCategoryId(categoryId);
 	}
 
-	public List getItems(
+	public List<ShoppingItem> getItems(
 			long categoryId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -588,22 +583,22 @@ public class ShoppingItemLocalServiceImpl
 		return shoppingItemPersistence.countByCategoryId(categoryId);
 	}
 
-	public List getSaleItems(long groupId, long categoryId, int numOfItems)
+	public List<ShoppingItem> getSaleItems(
+			long groupId, long categoryId, int numOfItems)
 		throws SystemException {
 
-		List saleItems = shoppingItemFinder.findBySale(
+		List<ShoppingItem> saleItems = shoppingItemFinder.findBySale(
 			groupId, new long[] {categoryId}, numOfItems);
 
 		if (saleItems.size() == 0) {
-			List childCategories = shoppingCategoryPersistence.findByG_P(
-				groupId, categoryId);
+			List<ShoppingCategory> childCategories =
+				shoppingCategoryPersistence.findByG_P(groupId, categoryId);
 
 			if (childCategories.size() > 0) {
 				long[] categoryIds = new long[childCategories.size()];
 
 				for (int i = 0; i < childCategories.size(); i++) {
-					ShoppingCategory childCategory =
-						(ShoppingCategory)childCategories.get(i);
+					ShoppingCategory childCategory = childCategories.get(i);
 
 					categoryIds[i] = childCategory.getCategoryId();
 				}
@@ -616,7 +611,7 @@ public class ShoppingItemLocalServiceImpl
 		return saleItems;
 	}
 
-	public List search(
+	public List<ShoppingItem> search(
 			long groupId, long[] categoryIds, String keywords, int begin,
 			int end)
 		throws SystemException {
@@ -639,7 +634,8 @@ public class ShoppingItemLocalServiceImpl
 			Boolean sale, boolean smallImage, String smallImageURL,
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List itemFields, List itemPrices)
+			File largeFile, List<ShoppingItemField> itemFields,
+			List<ShoppingItemPrice> itemPrices)
 		throws PortalException, SystemException {
 
 		// Item
@@ -676,9 +672,7 @@ public class ShoppingItemLocalServiceImpl
 		item.setFields(itemFields.size() > 0);
 		item.setFieldsQuantities(fieldsQuantities);
 
-		for (int i = 0; i < itemPrices.size(); i++) {
-			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
-
+		for (ShoppingItemPrice itemPrice : itemPrices) {
 			if (itemPrice.getStatus() ==
 					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT) {
 
@@ -719,9 +713,7 @@ public class ShoppingItemLocalServiceImpl
 
 		shoppingItemFieldPersistence.removeByItemId(itemId);
 
-		for (int i = 0; i < itemFields.size() && itemFields.size() > 0; i++) {
-			ShoppingItemField itemField = (ShoppingItemField)itemFields.get(i);
-
+		for (ShoppingItemField itemField : itemFields) {
 			long itemFieldId = counterLocalService.increment();
 
 			itemField.setItemFieldId(itemFieldId);
@@ -736,15 +728,15 @@ public class ShoppingItemLocalServiceImpl
 
 		shoppingItemPricePersistence.removeByItemId(itemId);
 
-		for (int i = 0; i < itemPrices.size() && itemPrices.size() > 1; i++) {
-			ShoppingItemPrice itemPrice = (ShoppingItemPrice)itemPrices.get(i);
+		if (itemPrices.size() > 1) {
+			for (ShoppingItemPrice itemPrice : itemPrices) {
+				long itemPriceId = counterLocalService.increment();
 
-			long itemPriceId = counterLocalService.increment();
+				itemPrice.setItemPriceId(itemPriceId);
+				itemPrice.setItemId(itemId);
 
-			itemPrice.setItemPriceId(itemPriceId);
-			itemPrice.setItemId(itemId);
-
-			shoppingItemPricePersistence.update(itemPrice, false);
+				shoppingItemPricePersistence.update(itemPrice, false);
+			}
 		}
 
 		// Images

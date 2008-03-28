@@ -45,9 +45,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
@@ -394,8 +391,5 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 		qPos.add(expirationDateTS);
 		qPos.add(expirationDateTS);
 	}
-
-	private static Log _log =
-		LogFactory.getLog(AnnouncementsEntryFinderImpl.class);
 
 }

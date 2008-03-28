@@ -73,7 +73,7 @@ public class AmazonRankingsUtil {
 				_amazonLicenseCount = 0;
 			}
 
-			return (String)_amazonLicenseKeys.get(_amazonLicenseCount);
+			return _amazonLicenseKeys.get(_amazonLicenseCount);
 		}
 		else {
 			return null;

@@ -75,7 +75,7 @@ public class LocaleUtil {
 		Locale locale = null;
 
 		try {
-			locale = (Locale)_locales.get(languageId);
+			locale = _locales.get(languageId);
 
 			if (locale == null) {
 				int pos = languageId.indexOf(StringPool.UNDERLINE);
@@ -175,6 +175,6 @@ public class LocaleUtil {
 	private static LocaleUtil _instance = new LocaleUtil();
 
 	private Locale _locale;
-	private Map _locales = new HashMap();
+	private Map<String, Locale> _locales = new HashMap<String, Locale>();
 
 }

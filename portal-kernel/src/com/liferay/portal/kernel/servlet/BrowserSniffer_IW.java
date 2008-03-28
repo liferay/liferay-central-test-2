@@ -89,6 +89,14 @@ public class BrowserSniffer_IW {
 		return BrowserSniffer.is_safari(req);
 	}
 
+	public boolean is_safari_3(javax.servlet.http.HttpServletRequest req) {
+		return BrowserSniffer.is_safari_3(req);
+	}
+
+	public boolean is_safari_mobile(javax.servlet.http.HttpServletRequest req) {
+		return BrowserSniffer.is_safari_mobile(req);
+	}
+
 	public boolean is_wap_xhtml(javax.servlet.http.HttpServletRequest req) {
 		return BrowserSniffer.is_wap_xhtml(req);
 	}

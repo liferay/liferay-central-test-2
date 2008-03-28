@@ -39,6 +39,7 @@ import com.liferay.portlet.documentlibrary.service.DLFileEntryLocalServiceUtil;
 import com.liferay.portlet.documentlibrary.service.permission.DLFileEntryPermission;
 import com.liferay.portlet.documentlibrary.util.DocumentConversionUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.diff.DiffResult;
 import com.liferay.util.diff.DiffUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -145,7 +146,7 @@ public class CompareVersionsAction extends PortletAction {
 				targetTempFileId, targetIs, extension, "txt");
 		}
 
-		List[] diffResults = DiffUtil.diff(
+		List<DiffResult>[] diffResults = DiffUtil.diff(
 			new InputStreamReader(sourceIs), new InputStreamReader(targetIs));
 
 		req.setAttribute(

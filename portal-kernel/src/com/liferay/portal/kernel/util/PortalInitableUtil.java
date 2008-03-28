@@ -22,7 +22,6 @@
 
 package com.liferay.portal.kernel.util;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -45,20 +44,15 @@ public class PortalInitableUtil {
 
 	public synchronized static void flushInitables() {
 		if (_initables != null) {
-			Iterator itr = _initables.iterator();
-
-			while (itr.hasNext()) {
-				PortalInitable initable = (PortalInitable)itr.next();
-
+			for (PortalInitable initable : _initables) {
 				initable.portalInit();
-
-				itr.remove();
 			}
 
 			_initables = null;
 		}
 	}
 
-	private static List _initables = new Vector();
+	private static List<PortalInitable> _initables =
+		new Vector<PortalInitable>();
 
 }

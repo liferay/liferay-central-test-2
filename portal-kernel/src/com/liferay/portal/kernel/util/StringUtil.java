@@ -445,13 +445,12 @@ public class StringUtil {
 		return sm.toString();
 	}
 
-	public static String merge(List list) {
+	public static String merge(List<?> list) {
 		return merge(list, StringPool.COMMA);
 	}
 
-	public static String merge(List list, String delimiter) {
-		return merge((Object[])list.toArray(
-			new Object[list.size()]), delimiter);
+	public static String merge(List<?> list, String delimiter) {
+		return merge(list.toArray(new Object[list.size()]), delimiter);
 	}
 
 	public static String merge(Object[] array) {
@@ -492,10 +491,10 @@ public class StringUtil {
 		if (all) {
 			StringMaker sm = new StringMaker();
 
-			Enumeration enu = classLoader.getResources(name);
+			Enumeration<URL> enu = classLoader.getResources(name);
 
 			while (enu.hasMoreElements()) {
-				URL url = (URL)enu.nextElement();
+				URL url = enu.nextElement();
 
 				InputStream is = url.openStream();
 
@@ -680,7 +679,7 @@ public class StringUtil {
 	 * @return		a string with replaced values
 	 */
 	public static String replaceValues(
-		String s, String begin, String end, Map values) {
+		String s, String begin, String end, Map<String, String> values) {
 
 		if ((s == null) || (begin == null) || (end == null) ||
 			(values == null) || (values.size() == 0)) {
@@ -706,7 +705,7 @@ public class StringUtil {
 
 				String oldValue = s.substring(x + begin.length(), y);
 
-				String newValue = (String)values.get(oldValue);
+				String newValue = values.get(oldValue);
 
 				if (newValue == null) {
 					newValue = oldValue;
@@ -802,7 +801,7 @@ public class StringUtil {
 			return new String[0];
 		}
 
-		List nodeValues = new ArrayList();
+		List<String> nodeValues = new ArrayList<String>();
 
 		if (delimiter.equals("\n") || delimiter.equals("\r")) {
 			try {
@@ -832,7 +831,7 @@ public class StringUtil {
 			}
 		}
 
-		return (String[])nodeValues.toArray(new String[nodeValues.size()]);
+		return nodeValues.toArray(new String[nodeValues.size()]);
 	}
 
 	public static boolean[] split(String s, boolean x) {
@@ -1165,7 +1164,7 @@ public class StringUtil {
 		char[] chars = s.toCharArray();
 
 		if (chars[0] >= 97 && chars[0] <= 122) {
-			chars[0] = (char) ((int) chars[0] - 32);
+			chars[0] = (char)(chars[0] - 32);
 		}
 
 		return new String(chars);

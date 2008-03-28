@@ -187,14 +187,16 @@ public interface SCFrameworkVersionLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getFrameworkVersions(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFrameworkVersions(long groupId, boolean active)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
+		long groupId, boolean active) throws com.liferay.portal.SystemException;
 
-	public java.util.List getFrameworkVersions(long groupId, boolean active,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
+		long groupId, boolean active, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
 	public int getFrameworkVersionsCount(long groupId)
 		throws com.liferay.portal.SystemException;
@@ -202,7 +204,7 @@ public interface SCFrameworkVersionLocalService {
 	public int getFrameworkVersionsCount(long groupId, boolean active)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getProductVersionFrameworkVersions(
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getProductVersionFrameworkVersions(
 		long productVersionId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

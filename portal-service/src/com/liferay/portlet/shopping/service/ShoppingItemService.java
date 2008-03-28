@@ -62,9 +62,10 @@ public interface ShoppingItemService {
 		java.io.File smallFile, boolean mediumImage,
 		java.lang.String mediumImageURL, java.io.File mediumFile,
 		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices, boolean addCommunityPermissions,
-		boolean addGuestPermissions)
+		java.io.File largeFile,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -77,8 +78,10 @@ public interface ShoppingItemService {
 		java.io.File smallFile, boolean mediumImage,
 		java.lang.String mediumImageURL, java.io.File mediumFile,
 		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices, java.lang.String[] communityPermissions,
+		java.io.File largeFile,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
+		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -101,7 +104,8 @@ public interface ShoppingItemService {
 		boolean mediumImage, java.lang.String mediumImageURL,
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices)
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

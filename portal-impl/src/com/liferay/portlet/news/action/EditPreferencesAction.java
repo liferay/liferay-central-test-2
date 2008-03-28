@@ -75,12 +75,12 @@ public class EditPreferencesAction extends PortletAction {
 			String categoryName = req.getParameter("categoryName");
 			String list = req.getParameter("feeds");
 
-			Set selFeeds = NewsUtil.getSelFeeds(prefs);
+			Set<Feed> selFeeds = NewsUtil.getSelFeeds(prefs);
 
-			Iterator itr = selFeeds.iterator();
+			Iterator<Feed> itr = selFeeds.iterator();
 
 			while (itr.hasNext()) {
-				Feed feed = (Feed)itr.next();
+				Feed feed = itr.next();
 
 				String feedURL = feed.getFeedURL();
 
@@ -97,12 +97,12 @@ public class EditPreferencesAction extends PortletAction {
 				}
 			}
 
-			Map feedMap = NewsUtil.getFeedMap();
+			Map<String, Feed> feedMap = NewsUtil.getFeedMap();
 
 			StringTokenizer st = new StringTokenizer(list, StringPool.COMMA);
 
 			while (st.hasMoreTokens()) {
-				Feed feed = (Feed)feedMap.get(st.nextToken());
+				Feed feed = feedMap.get(st.nextToken());
 
 				if (feed != null) {
 					selFeeds.add(feed);
@@ -118,14 +118,14 @@ public class EditPreferencesAction extends PortletAction {
 			prefs.setValue(
 				"articles-per-news", Integer.toString(articlesPerNews));
 
-			Set selFeeds = new LinkedHashSet();
+			Set<Feed> selFeeds = new LinkedHashSet<Feed>();
 
-			Map feedMap = NewsUtil.getFeedMap();
+			Map<String, Feed> feedMap = NewsUtil.getFeedMap();
 
 			StringTokenizer st = new StringTokenizer(list, StringPool.COMMA);
 
 			while (st.hasMoreTokens()) {
-				Feed feed = (Feed)feedMap.get(st.nextToken());
+				Feed feed = feedMap.get(st.nextToken());
 
 				if (feed != null) {
 					selFeeds.add(feed);

@@ -65,12 +65,12 @@ public class PortletLogic extends RuntimeLogic {
 		_renderResponse = renderResponse;
 	}
 
-	public void processContent(StringMaker sm, Map attributes)
+	public void processContent(StringMaker sm, Map<String, String> attributes)
 		throws Exception {
 
-		String rootPortletId = (String)attributes.get("name");
-		String instanceId = (String)attributes.get("instance");
-		String queryString = (String)attributes.get("queryString");
+		String rootPortletId = attributes.get("name");
+		String instanceId = attributes.get("instance");
+		String queryString = attributes.get("queryString");
 
 		String portletId = _portletId;
 

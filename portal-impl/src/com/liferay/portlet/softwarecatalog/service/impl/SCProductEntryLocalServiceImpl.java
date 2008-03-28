@@ -95,7 +95,7 @@ public class SCProductEntryLocalServiceImpl
 			long userId, long plid, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List thumbnails, List fullImages,
+			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -110,7 +110,7 @@ public class SCProductEntryLocalServiceImpl
 			long userId, long plid, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List thumbnails, List fullImages,
+			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -125,7 +125,7 @@ public class SCProductEntryLocalServiceImpl
 			long userId, long plid, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List thumbnails, List fullImages,
+			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
 			Boolean addCommunityPermissions, Boolean addGuestPermissions,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
@@ -255,12 +255,10 @@ public class SCProductEntryLocalServiceImpl
 	public void deleteProductEntries(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = scProductEntryPersistence.findByGroupId(
-			groupId).iterator();
+		List<SCProductEntry> productEntries =
+			scProductEntryPersistence.findByGroupId(groupId);
 
-		while (itr.hasNext()) {
-			SCProductEntry productEntry = (SCProductEntry)itr.next();
-
+		for (SCProductEntry productEntry : productEntries) {
 			deleteProductEntry(productEntry);
 		}
 	}
@@ -325,13 +323,14 @@ public class SCProductEntryLocalServiceImpl
 		return scProductEntryPersistence.findByPrimaryKey(productEntryId);
 	}
 
-	public List getProductEntries(long groupId, int begin, int end)
+	public List<SCProductEntry> getProductEntries(
+			long groupId, int begin, int end)
 		throws SystemException {
 
 		return scProductEntryPersistence.findByGroupId(groupId, begin, end);
 	}
 
-	public List getProductEntries(
+	public List<SCProductEntry> getProductEntries(
 			long groupId, int begin, int end, OrderByComparator obc)
 		throws SystemException {
 
@@ -339,13 +338,14 @@ public class SCProductEntryLocalServiceImpl
 			groupId, begin, end, obc);
 	}
 
-	public List getProductEntries(long groupId, long userId, int begin, int end)
+	public List<SCProductEntry> getProductEntries(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		return scProductEntryPersistence.findByG_U(groupId, userId, begin, end);
 	}
 
-	public List getProductEntries(
+	public List<SCProductEntry> getProductEntries(
 			long groupId, long userId, int begin, int end,
 			OrderByComparator obc)
 		throws SystemException {
@@ -391,29 +391,24 @@ public class SCProductEntryLocalServiceImpl
 
 		populateSettingsElement(settingsEl, repoSettings);
 
-		List productEntries = scProductEntryPersistence.findByGroupId(groupId);
+		List<SCProductEntry> productEntries =
+			scProductEntryPersistence.findByGroupId(groupId);
 
-		Iterator itr = productEntries.iterator();
-
-		while (itr.hasNext()) {
-			SCProductEntry productEntry = (SCProductEntry)itr.next();
-
+		for (SCProductEntry productEntry : productEntries) {
 			if (Validator.isNull(productEntry.getRepoGroupId()) ||
 				Validator.isNull(productEntry.getRepoArtifactId())) {
 
 				continue;
 			}
 
-			List productVersions =
+			List<SCProductVersion> productVersions =
 				scProductVersionPersistence.findByProductEntryId(
 					productEntry.getProductEntryId());
 
-			Iterator itr2 = productVersions.iterator();
+			for (int i = 0; i < productVersions.size(); i++) {
+				SCProductVersion productVersion = productVersions.get(i);
 
-			for (int i = 1; itr2.hasNext(); i++) {
-				SCProductVersion productVersion = (SCProductVersion)itr2.next();
-
-				if ((maxNumOfVersions > 0) && (maxNumOfVersions < i)) {
+				if ((maxNumOfVersions > 0) && (maxNumOfVersions < (i + 1))) {
 					break;
 				}
 
@@ -456,12 +451,10 @@ public class SCProductEntryLocalServiceImpl
 		try {
 			writer = LuceneUtil.getWriter(companyId);
 
-			Iterator itr = scProductEntryPersistence.findByCompanyId(
-				companyId).iterator();
+			List<SCProductEntry> productEntries =
+				scProductEntryPersistence.findByCompanyId(companyId);
 
-			while (itr.hasNext()) {
-				SCProductEntry productEntry = (SCProductEntry)itr.next();
-
+			for (SCProductEntry productEntry : productEntries) {
 				long productEntryId = productEntry.getProductEntryId();
 
 				String version = StringPool.BLANK;
@@ -565,7 +558,7 @@ public class SCProductEntryLocalServiceImpl
 			long productEntryId, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List thumbnails, List fullImages)
+			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages)
 		throws PortalException, SystemException {
 
 		// Product entry
@@ -613,12 +606,12 @@ public class SCProductEntryLocalServiceImpl
 
 		String version = StringPool.BLANK;
 
-		List productVersions = scProductVersionPersistence.findByProductEntryId(
-			productEntryId, 0, 1);
+		List<SCProductVersion> productVersions =
+			scProductVersionPersistence.findByProductEntryId(
+				productEntryId, 0, 1);
 
 		if (productVersions.size() > 0) {
-			SCProductVersion productVersion =
-				(SCProductVersion)productVersions.get(0);
+			SCProductVersion productVersion = productVersions.get(0);
 
 			productVersion.setModifiedDate(now);
 
@@ -650,16 +643,11 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	protected boolean isVersionSupported(
-		String version, List supportedVersions) {
+		String version, List<SCFrameworkVersion> frameworkVersions) {
 
 		Version currentVersion = Version.getInstance(version);
 
-		Iterator iterator = supportedVersions.iterator();
-
-		while (iterator.hasNext()) {
-			SCFrameworkVersion frameworkVersion =
-				(SCFrameworkVersion)iterator.next();
-
+		for (SCFrameworkVersion frameworkVersion : frameworkVersions) {
 			Version supportedVersion = Version.getInstance(
 				frameworkVersion.getName());
 
@@ -721,11 +709,7 @@ public class SCProductEntryLocalServiceImpl
 
 		Element screenshotsEl = el.addElement("screenshots");
 
-		Iterator itr = productEntry.getScreenshots().iterator();
-
-		while (itr.hasNext()) {
-			SCProductScreenshot screenshot = (SCProductScreenshot)itr.next();
-
+		for (SCProductScreenshot screenshot : productEntry.getScreenshots()) {
 			long thumbnailId = screenshot.getThumbnailId();
 			long fullImageId = screenshot.getFullImageId();
 
@@ -743,11 +727,7 @@ public class SCProductEntryLocalServiceImpl
 
 		Element licensesEl = el.addElement("licenses");
 
-		itr = productEntry.getLicenses().iterator();
-
-		while (itr.hasNext()) {
-			SCLicense license = (SCLicense)itr.next();
-
+		for (SCLicense license : productEntry.getLicenses()) {
 			Element licenseEl = licensesEl.addElement("license");
 
 			licenseEl.addText(license.getName());
@@ -757,11 +737,8 @@ public class SCProductEntryLocalServiceImpl
 
 		Element liferayVersionsEl = el.addElement("liferay-versions");
 
-		itr = productVersion.getFrameworkVersions().iterator();
-
-		while (itr.hasNext()) {
-			SCFrameworkVersion frameworkVersion =
-				(SCFrameworkVersion)itr.next();
+		for (SCFrameworkVersion frameworkVersion :
+				productVersion.getFrameworkVersions()) {
 
 			DocUtil.add(
 				liferayVersionsEl, "liferay-version",
@@ -776,10 +753,10 @@ public class SCProductEntryLocalServiceImpl
 			return;
 		}
 
-		Iterator itr = repoSettings.keySet().iterator();
+		Iterator<Object> itr = repoSettings.keySet().iterator();
 
 		while (itr.hasNext()) {
-			String key = (String) itr.next();
+			String key = (String)itr.next();
 
 			Element settingEl = el.addElement("setting");
 
@@ -789,12 +766,13 @@ public class SCProductEntryLocalServiceImpl
 	}
 
 	protected void saveProductScreenshots(
-			SCProductEntry productEntry, List thumbnails, List fullImages)
+			SCProductEntry productEntry, List<byte[]> thumbnails,
+			List<byte[]> fullImages)
 		throws SystemException {
 
 		long productEntryId = productEntry.getProductEntryId();
 
-		List productScreenshots =
+		List<SCProductScreenshot> productScreenshots =
 			scProductScreenshotPersistence.findByProductEntryId(productEntryId);
 
 		if (thumbnails.size() < productScreenshots.size()) {
@@ -802,7 +780,7 @@ public class SCProductEntryLocalServiceImpl
 					i++) {
 
 				SCProductScreenshot productScreenshot =
-					(SCProductScreenshot)productScreenshots.get(i);
+					productScreenshots.get(i);
 
 				scProductScreenshotLocalService.deleteProductScreenshot(
 					productScreenshot);
@@ -812,8 +790,8 @@ public class SCProductEntryLocalServiceImpl
 		for (int i = 0; i < thumbnails.size(); i++) {
 			int priority = i;
 
-			byte[] thumbnail = (byte[])thumbnails.get(i);
-			byte[] fullImage = (byte[])fullImages.get(i);
+			byte[] thumbnail = thumbnails.get(i);
+			byte[] fullImage = fullImages.get(i);
 
 			SCProductScreenshot productScreenshot =
 				scProductScreenshotPersistence.fetchByP_P(
@@ -849,7 +827,7 @@ public class SCProductEntryLocalServiceImpl
 			long productEntryId, String name, String type,
 			String shortDescription, String pageURL, String author,
 			String repoGroupId, String repoArtifactId, long[] licenseIds,
-			List thumbnails, List fullImages)
+			List<byte[]> thumbnails, List<byte[]> fullImages)
 		throws PortalException, SystemException {
 
 		if (Validator.isNull(name)) {
@@ -899,7 +877,7 @@ public class SCProductEntryLocalServiceImpl
 			throw new ProductEntryScreenshotsException();
 		}
 		else {
-			Iterator itr = thumbnails.iterator();
+			Iterator<byte[]> itr = thumbnails.iterator();
 
 			while (itr.hasNext()) {
 				if (itr.next() == null) {

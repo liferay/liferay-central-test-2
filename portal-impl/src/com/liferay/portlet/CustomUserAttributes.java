@@ -44,16 +44,14 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CustomUserAttributes implements Cloneable {
 
-	public String getValue(String name, Map userInfo) {
+	public String getValue(String name, Map<String, String> userInfo) {
 		if (name == null) {
 			return null;
 		}
 
 		if (_log.isDebugEnabled()) {
-			String companyId = (String)userInfo.get(
-				UserAttributes.LIFERAY_COMPANY_ID);
-			String userId = (String)userInfo.get(
-				UserAttributes.LIFERAY_USER_ID);
+			String companyId = userInfo.get(UserAttributes.LIFERAY_COMPANY_ID);
+			String userId = userInfo.get(UserAttributes.LIFERAY_USER_ID);
 
 			_log.debug("Company id " + companyId);
 			_log.debug("User id " + userId);

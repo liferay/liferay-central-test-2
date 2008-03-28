@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.util;
  */
 public class DoubleWrapper extends PrimitiveWrapper {
 
-	public static final Class TYPE = Double.TYPE;
+	public static final Class<?> TYPE = Double.TYPE;
 
 	public DoubleWrapper() {
 		this(0D);

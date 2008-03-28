@@ -60,7 +60,7 @@ public class GetFoldersAction extends JSONAction {
 		long groupId = ParamUtil.getLong(req, "groupId");
 		long parentFolderId = ParamUtil.getLong(req, "folderId");
 
-		List folders = DLFolderLocalServiceUtil.getFolders(
+		List<DLFolder> folders = DLFolderLocalServiceUtil.getFolders(
 			groupId, parentFolderId);
 
 		JSONArray jsonArray = toJSONArray(folders);
@@ -68,14 +68,12 @@ public class GetFoldersAction extends JSONAction {
 		return jsonArray.toString();
 	}
 
-	protected JSONArray toJSONArray(List folders)
+	protected JSONArray toJSONArray(List<DLFolder> folders)
 		throws PortalException, SystemException {
 
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < folders.size(); i++) {
-			DLFolder folder = (DLFolder)folders.get(i);
-
+		for (DLFolder folder : folders) {
 			jsonArray.put(toJSONObject(folder));
 		}
 
@@ -87,9 +85,9 @@ public class GetFoldersAction extends JSONAction {
 
 		JSONObject jsonObj = DLFolderJSONSerializer.toJSONObject(folder);
 
-		List subfolderIds = new ArrayList();
+		List<Long> subfolderIds = new ArrayList<Long>();
 
-		subfolderIds.add(new Long(folder.getFolderId()));
+		subfolderIds.add(folder.getFolderId());
 
 		DLFolderLocalServiceUtil.getSubfolderIds(
 			subfolderIds, folder.getGroupId(), folder.getFolderId());

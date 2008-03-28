@@ -199,29 +199,30 @@ public class SCLicenseLocalServiceUtil {
 		return scLicenseLocalService.getLicense(licenseId);
 	}
 
-	public static java.util.List getLicenses()
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses()
 		throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
 		return scLicenseLocalService.getLicenses();
 	}
 
-	public static java.util.List getLicenses(int begin, int end)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
+		int begin, int end) throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
 		return scLicenseLocalService.getLicenses(begin, end);
 	}
 
-	public static java.util.List getLicenses(boolean active, boolean recommended)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
+		boolean active, boolean recommended)
 		throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
 		return scLicenseLocalService.getLicenses(active, recommended);
 	}
 
-	public static java.util.List getLicenses(boolean active,
-		boolean recommended, int begin, int end)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getLicenses(
+		boolean active, boolean recommended, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();
 
@@ -242,7 +243,8 @@ public class SCLicenseLocalServiceUtil {
 		return scLicenseLocalService.getLicensesCount(active, recommended);
 	}
 
-	public static java.util.List getProductEntryLicenses(long productEntryId)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCLicense> getProductEntryLicenses(
+		long productEntryId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		SCLicenseLocalService scLicenseLocalService = SCLicenseLocalServiceFactory.getService();

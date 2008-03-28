@@ -30,7 +30,8 @@ import java.util.Comparator;
  * @author Brian Wing Shun Chan
  *
  */
-public class ObjectValuePairComparator implements Comparator {
+public class ObjectValuePairComparator<K, V>
+	implements Comparator<ObjectValuePair<K, V>> {
 
 	public ObjectValuePairComparator() {
 		this(true);
@@ -45,10 +46,7 @@ public class ObjectValuePairComparator implements Comparator {
 		_asc = asc;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		ObjectValuePair ovp1 = (ObjectValuePair)obj1;
-		ObjectValuePair ovp2 = (ObjectValuePair)obj2;
-
+	public int compare(ObjectValuePair<K, V> ovp1, ObjectValuePair<K, V> ovp2) {
 		if (_byKey) {
 			Comparable key1 = (Comparable)ovp1.getKey();
 			Comparable key2 = (Comparable)ovp2.getKey();

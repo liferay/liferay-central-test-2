@@ -46,7 +46,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 			long plid, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List thumbnails, List fullImages,
+			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
@@ -65,7 +65,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 			long plid, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List thumbnails, List fullImages,
+			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages,
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
@@ -102,7 +102,7 @@ public class SCProductEntryServiceImpl extends SCProductEntryServiceBaseImpl {
 			long productEntryId, String name, String type, String tags,
 			String shortDescription, String longDescription, String pageURL,
 			String author, String repoGroupId, String repoArtifactId,
-			long[] licenseIds, List thumbnails, List fullImages)
+			long[] licenseIds, List<byte[]> thumbnails, List<byte[]> fullImages)
 		throws PortalException, SystemException {
 
 		SCProductEntryPermission.check(

@@ -63,9 +63,9 @@ public class CommunitiesUtil {
 	public static void deleteLayout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		HttpServletRequest httpReq = (HttpServletRequest)
+		HttpServletRequest httpReq =
 			((ActionRequestImpl)req).getHttpServletRequest();
-		HttpServletResponse httpRes = (HttpServletResponse)
+		HttpServletResponse httpRes =
 			((ActionResponseImpl)res).getHttpServletResponse();
 
 		deleteLayout(httpReq, httpRes);
@@ -74,9 +74,9 @@ public class CommunitiesUtil {
 	public static void deleteLayout(RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		HttpServletRequest httpReq = (HttpServletRequest)
+		HttpServletRequest httpReq =
 			((RenderRequestImpl)req).getHttpServletRequest();
-		HttpServletResponse httpRes = (HttpServletResponse)
+		HttpServletResponse httpRes =
 			((RenderResponseImpl)res).getHttpServletResponse();
 
 		deleteLayout(httpReq, httpRes);

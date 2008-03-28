@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.shopping.NoSuchCouponException;
 import com.liferay.portlet.shopping.model.ShoppingCart;
+import com.liferay.portlet.shopping.model.ShoppingCartItem;
 import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingCouponLocalServiceUtil;
@@ -52,7 +53,7 @@ public class ShoppingCartImpl
 			getItemIds(), itemId + fields, StringPool.COMMA, true));
 	}
 
-	public Map getItems() throws SystemException {
+	public Map<ShoppingCartItem, Integer> getItems() throws SystemException {
 		return ShoppingCartLocalServiceUtil.getItems(
 			getGroupId(), getItemIds());
 	}

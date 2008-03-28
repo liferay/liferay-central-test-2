@@ -26,10 +26,9 @@ import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 import com.liferay.portlet.news.model.Feed;
 import com.liferay.portlet.news.model.News;
-import com.liferay.util.CollectionFactory;
 
 import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Map;
@@ -45,24 +44,24 @@ import javax.portlet.PortletPreferences;
  */
 public class NewsUtil {
 
-	public static Map getCategoryMap() {
+	public static Map<String, Set<Feed>> getCategoryMap() {
 		return _instance._categoryMap;
 	}
 
-	public static Set getCategorySet() {
+	public static Set<String> getCategorySet() {
 		return _instance._categorySet;
 	}
 
-	public static Map getFeedMap() {
+	public static Map<String, Feed> getFeedMap() {
 		return _instance._feedMap;
 	}
 
-	public static Set getFeedSet() {
+	public static Set<Feed> getFeedSet() {
 		return _instance._feedSet;
 	}
 
 	public static News getNews(String xml) {
-		Feed feed = (Feed)NewsUtil.getFeedMap().get(xml);
+		Feed feed = getFeedMap().get(xml);
 
 		if (feed == null) {
 			return null;
@@ -75,37 +74,30 @@ public class NewsUtil {
 		}
 	}
 
-	public static List getNews(PortletPreferences prefs) {
-		List news = new ArrayList();
+	public static List<News> getNews(PortletPreferences prefs) {
+		List<News> news = new ArrayList<News>();
 
-		Iterator itr = NewsUtil.getSelFeeds(prefs).iterator();
-
-		while (itr.hasNext()) {
-			Feed feed = (Feed)itr.next();
-
-			news.add(NewsUtil.getNews(feed.getFeedURL()));
+		for (Feed feed : getSelFeeds(prefs)) {
+			news.add(getNews(feed.getFeedURL()));
 		}
 
 		return news;
 	}
 
-	public static Map getSelCategories(Set selFeeds) {
-		Map selCategories = CollectionFactory.getHashMap();
+	public static Map<String, List<Feed>> getSelCategories(Set<Feed> selFeeds) {
+		Map<String, List<Feed>> selCategories =
+			new HashMap<String, List<Feed>>();
 
-		Iterator itr = selFeeds.iterator();
-
-		while (itr.hasNext()) {
-			Feed feed = (Feed)itr.next();
-
+		for (Feed feed : selFeeds) {
 			String categoryName = feed.getCategoryName();
 
 			if (selCategories.containsKey(categoryName)) {
-				List feedList = (List)selCategories.get(categoryName);
+				List<Feed> feedList = selCategories.get(categoryName);
 
 				feedList.add(feed);
 			}
 			else {
-				List feedList = new ArrayList();
+				List<Feed> feedList = new ArrayList<Feed>();
 
 				feedList.add(feed);
 
@@ -116,15 +108,15 @@ public class NewsUtil {
 		return selCategories;
 	}
 
-	public static Set getSelFeeds(PortletPreferences prefs) {
-		Map feedMap = getFeedMap();
+	public static Set<Feed> getSelFeeds(PortletPreferences prefs) {
+		Map<String, Feed> feedMap = getFeedMap();
 
-		Set selFeeds = new LinkedHashSet();
+		Set<Feed> selFeeds = new LinkedHashSet<Feed>();
 
 		String[] selFeedsArray = prefs.getValues("sel-feeds", new String[0]);
 
-		for (int i = 0; i < selFeedsArray.length; i++) {
-			Feed feed = (Feed)feedMap.get(selFeedsArray[i]);
+		for (String selFeed : selFeedsArray) {
+			Feed feed = feedMap.get(selFeed);
 
 			selFeeds.add(feed);
 		}
@@ -132,31 +124,27 @@ public class NewsUtil {
 		return selFeeds;
 	}
 
-	public static String[] getSelFeeds(Set selFeeds) {
-		List list = new ArrayList();
+	public static String[] getSelFeeds(Set<Feed> selFeeds) {
+		List<String> list = new ArrayList<String>();
 
-		Iterator itr = selFeeds.iterator();
-
-		while (itr.hasNext()) {
-			Feed feed = (Feed)itr.next();
-
+		for (Feed feed : selFeeds) {
 			list.add(feed.getFeedURL());
 		}
 
-		return (String[])list.toArray(new String[0]);
+		return list.toArray(new String[list.size()]);
 	}
 
 	private NewsUtil() {
 		try {
 			WebCacheItem wci = new CategoryWebCacheItem();
 
-			List list = (List)WebCachePoolUtil.get(
+			Object[] objArray = (Object[])WebCachePoolUtil.get(
 				"http://w.moreover.com/categories/category_list.tsv2", wci);
 
-			_categoryMap = (Map)list.get(0);
-			_categorySet = (Set)list.get(1);
-			_feedMap = (Map)list.get(2);
-			_feedSet = (Set)list.get(3);
+			_categoryMap = (Map<String, Set<Feed>>)objArray[0];
+			_categorySet = (Set<String>)objArray[1];
+			_feedMap = (Map<String, Feed>)objArray[2];
+			_feedSet = (Set<Feed>)objArray[3];
 		}
 		catch (Exception e) {
 			e.printStackTrace();
@@ -165,9 +153,9 @@ public class NewsUtil {
 
 	private static NewsUtil _instance = new NewsUtil();
 
-	private Map _categoryMap;
-	private Set _categorySet;
-	private Map _feedMap;
-	private Set _feedSet;
+	private Map<String, Set<Feed>> _categoryMap;
+	private Set<String> _categorySet;
+	private Map<String, Feed> _feedMap;
+	private Set<Feed> _feedSet;
 
 }

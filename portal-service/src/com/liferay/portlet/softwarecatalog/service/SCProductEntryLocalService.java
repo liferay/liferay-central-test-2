@@ -142,7 +142,7 @@ public interface SCProductEntryLocalService {
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List thumbnails, java.util.List fullImages,
+		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -153,7 +153,7 @@ public interface SCProductEntryLocalService {
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List thumbnails, java.util.List fullImages,
+		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
@@ -165,7 +165,7 @@ public interface SCProductEntryLocalService {
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List thumbnails, java.util.List fullImages,
+		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -215,18 +215,22 @@ public interface SCProductEntryLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getProductEntries(long groupId, int begin, int end)
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
+		long groupId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getProductEntries(long groupId, int begin, int end,
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
+		long groupId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getProductEntries(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
 
-	public java.util.List getProductEntries(long groupId, long userId,
-		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+	public java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> getProductEntries(
+		long groupId, long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
 	public int getProductEntriesCount(long groupId)
@@ -261,7 +265,7 @@ public interface SCProductEntryLocalService {
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List thumbnails, java.util.List fullImages)
+		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

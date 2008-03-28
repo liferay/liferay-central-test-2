@@ -54,7 +54,6 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 
 import javax.portlet.ActionRequest;
@@ -150,23 +149,19 @@ public class EditProductEntryAction extends PortletAction {
 		SCProductEntryServiceUtil.deleteProductEntry(productEntryId);
 	}
 
-	protected List getFullImages(UploadPortletRequest uploadReq)
+	protected List<byte[]> getFullImages(UploadPortletRequest uploadReq)
 		throws Exception {
 
 		return getImages(uploadReq, "fullImage");
 	}
 
-	protected List getImages(UploadPortletRequest uploadReq, String imagePrefix)
+	protected List<byte[]> getImages(
+			UploadPortletRequest uploadReq, String imagePrefix)
 		throws Exception {
 
-		List images = new ArrayList();
+		List<byte[]> images = new ArrayList<byte[]>();
 
-		Iterator itr = getSortedParameterNames(
-			uploadReq, imagePrefix).iterator();
-
-		while (itr.hasNext()) {
-			String name = (String)itr.next();
-
+		for (String name : getSortedParameterNames(uploadReq, imagePrefix)) {
 			int priority = GetterUtil.getInteger(
 				name.substring(imagePrefix.length(), name.length()));
 
@@ -220,16 +215,16 @@ public class EditProductEntryAction extends PortletAction {
 		}
 	}
 
-	protected List getSortedParameterNames(
+	protected List<String> getSortedParameterNames(
 			UploadPortletRequest uploadReq, String imagePrefix)
 		throws Exception {
 
-		List parameterNames = new ArrayList();
+		List<String> parameterNames = new ArrayList<String>();
 
-		Enumeration enu = uploadReq.getParameterNames();
+		Enumeration<String> enu = uploadReq.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (name.startsWith(imagePrefix)) {
 				parameterNames.add(name);
@@ -241,7 +236,7 @@ public class EditProductEntryAction extends PortletAction {
 		return parameterNames;
 	}
 
-	protected List getThumbnails(UploadPortletRequest uploadReq)
+	protected List<byte[]> getThumbnails(UploadPortletRequest uploadReq)
 		throws Exception {
 
 		return getImages(uploadReq, "thumbnail");
@@ -267,8 +262,8 @@ public class EditProductEntryAction extends PortletAction {
 
 		long[] licenseIds = ParamUtil.getLongValues(req, "licenses");
 
-		List thumbnails = getThumbnails(uploadReq);
-		List fullImages = getFullImages(uploadReq);
+		List<byte[]> thumbnails = getThumbnails(uploadReq);
+		List<byte[]> fullImages = getFullImages(uploadReq);
 
 		String[] communityPermissions = req.getParameterValues(
 			"communityPermissions");

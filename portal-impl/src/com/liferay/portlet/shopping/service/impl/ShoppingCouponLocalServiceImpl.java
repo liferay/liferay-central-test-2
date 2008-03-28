@@ -157,7 +157,7 @@ public class ShoppingCouponLocalServiceImpl
 		return shoppingCouponPersistence.findByCode(code);
 	}
 
-	public List search(
+	public List<ShoppingCoupon> search(
 			long plid, long companyId, String code, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws SystemException {
@@ -318,21 +318,21 @@ public class ShoppingCouponLocalServiceImpl
 
 		String[] skus = StringUtil.split(limitSkus);
 
-		List invalidSkus = new ArrayList();
+		List<String> invalidSkus = new ArrayList<String>();
 
-		for (int i = 0; i < skus.length; i++) {
+		for (String sku : skus) {
 			try {
 				ShoppingItem item = shoppingItemPersistence.findByC_S(
-					companyId, skus[i]);
+					companyId, sku);
 
 				ShoppingCategory category = item.getCategory();
 
 				if (category.getGroupId() != groupId) {
-					invalidSkus.add(skus[i]);
+					invalidSkus.add(sku);
 				}
 			}
 			catch (NoSuchItemException nsie) {
-				invalidSkus.add(skus[i]);
+				invalidSkus.add(sku);
 			}
 		}
 

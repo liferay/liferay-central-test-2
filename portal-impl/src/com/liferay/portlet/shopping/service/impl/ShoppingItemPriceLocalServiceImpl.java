@@ -42,15 +42,16 @@ import java.util.List;
 public class ShoppingItemPriceLocalServiceImpl
 	extends ShoppingItemPriceLocalServiceBaseImpl {
 
-	public List getItemPrices(long itemId)
+	public List<ShoppingItemPrice> getItemPrices(long itemId)
 		throws PortalException, SystemException {
 
 		ShoppingItem item = shoppingItemPersistence.findByPrimaryKey(itemId);
 
-		List itemPrices = shoppingItemPricePersistence.findByItemId(itemId);
+		List<ShoppingItemPrice> itemPrices =
+			shoppingItemPricePersistence.findByItemId(itemId);
 
 		if (itemPrices.size() == 0) {
-			itemPrices = new ArrayList();
+			itemPrices = new ArrayList<ShoppingItemPrice>();
 
 			ShoppingItemPrice itemPrice = shoppingItemPricePersistence.create(
 				0);

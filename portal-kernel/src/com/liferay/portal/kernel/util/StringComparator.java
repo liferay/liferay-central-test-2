@@ -32,7 +32,7 @@ import java.util.Comparator;
  * @author Brian Wing Shun Chan
  *
  */
-public class StringComparator implements Comparator, Serializable {
+public class StringComparator implements Comparator<String>, Serializable {
 
 	public StringComparator() {
 		this(true, false);
@@ -43,10 +43,7 @@ public class StringComparator implements Comparator, Serializable {
 		_caseSensitive = caseSensitive;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		String s1 = (String)obj1;
-		String s2 = (String)obj2;
-
+	public int compare(String s1, String s2) {
 		if (s1 == null) {
 			s1 = StringPool.BLANK;
 		}

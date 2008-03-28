@@ -236,28 +236,30 @@ public class RuntimePortletUtil {
 
 		String output = sw.toString();
 
-		Map columnsMap = processor.getColumnsMap();
+		Map<String, String> columnsMap = processor.getColumnsMap();
 
-		Iterator itr = columnsMap.entrySet().iterator();
+		Iterator<Map.Entry<String, String>> columnsMapItr =
+			columnsMap.entrySet().iterator();
 
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+		while (columnsMapItr.hasNext()) {
+			Map.Entry<String, String> entry = columnsMapItr.next();
 
-			String key = (String)entry.getKey();
-			String value = (String)entry.getValue();
+			String key = entry.getKey();
+			String value = entry.getValue();
 
 			output = StringUtil.replace(output, key, value);
 		}
 
-		Map portletsMap = processor.getPortletsMap();
+		Map<Portlet, Object[]> portletsMap = processor.getPortletsMap();
 
-		itr = portletsMap.entrySet().iterator();
+		Iterator<Map.Entry<Portlet, Object[]>> portletsMapItr =
+			portletsMap.entrySet().iterator();
 
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+		while (portletsMapItr.hasNext()) {
+			Map.Entry<Portlet, Object[]> entry = portletsMapItr.next();
 
-			Portlet portlet = (Portlet)entry.getKey();
-			Object[] value = (Object[])entry.getValue();
+			Portlet portlet = entry.getKey();
+			Object[] value = entry.getValue();
 
 			String queryString = (String)value[0];
 			String columnId = (String)value[1];

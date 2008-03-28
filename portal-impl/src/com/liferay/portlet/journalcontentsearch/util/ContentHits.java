@@ -53,8 +53,8 @@ public class ContentHits extends HitsImpl {
 
 		// This can later be optimized according to LEP-915.
 
-		List docs = new ArrayList(hits.getLength());
-		List scores = new ArrayList(hits.getLength());
+		List<Document> docs = new ArrayList<Document>(hits.getLength());
+		List<Float> scores = new ArrayList<Float>(hits.getLength());
 
 		for (int i = 0; i < hits.getLength(); i++) {
 			Document doc = hits.doc(i);
@@ -67,17 +67,17 @@ public class ContentHits extends HitsImpl {
 					groupId, privateLayout, articleId) > 0) {
 
 				docs.add(hits.doc(i));
-				scores.add(new Float(hits.score(i)));
+				scores.add(hits.score(i));
 			}
 			else if (!isShowListed() && (articleGroupId == groupId)) {
 				docs.add(hits.doc(i));
-				scores.add(new Float(hits.score(i)));
+				scores.add(hits.score(i));
 			}
 		}
 
 		setLength(docs.size());
-		setDocs((Document[])docs.toArray(new Document[0]));
-		setScores((Float[])scores.toArray(new Float[0]));
+		setDocs(docs.toArray(new Document[docs.size()]));
+		setScores(scores.toArray(new Float[scores.size()]));
 
 		setSearchTime(
 			(float)(System.currentTimeMillis() - getStart()) / Time.SECOND);

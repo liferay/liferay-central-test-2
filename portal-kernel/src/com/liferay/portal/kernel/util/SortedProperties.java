@@ -42,16 +42,16 @@ public class SortedProperties extends Properties {
 	public SortedProperties() {
 		super();
 
-		_names = new TreeSet();
+		_names = new TreeSet<String>();
 	}
 
 	public void list(PrintStream out) {
 		System.out.println("-- listing properties --");
 
-		Enumeration enu = propertyNames();
+		Enumeration<String> enu = propertyNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			out.println(name + StringPool.EQUAL + getProperty(name));
 		}
@@ -60,20 +60,20 @@ public class SortedProperties extends Properties {
 	public void list(PrintWriter out) {
 		System.out.println("-- listing properties --");
 
-		Enumeration enu = propertyNames();
+		Enumeration<String> enu = propertyNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			out.println(name + StringPool.EQUAL + getProperty(name));
 		}
 	}
 
-	public Enumeration propertyNames() {
+	public Enumeration<String> propertyNames() {
 		return Collections.enumeration(_names);
 	}
 
-	public Object put(Object key, Object value) {
+	public Object put(String key, String value) {
 		if (_names.contains(key)) {
 			_names.remove(key);
 		}
@@ -89,6 +89,6 @@ public class SortedProperties extends Properties {
 		return super.remove(key);
 	}
 
-	private Set _names;
+	private Set<String> _names;
 
 }

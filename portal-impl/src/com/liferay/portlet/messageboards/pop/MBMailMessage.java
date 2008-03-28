@@ -39,10 +39,10 @@ import java.util.List;
 public class MBMailMessage {
 
 	public void addFile(String fileName, byte[] data) {
-		_files.add(new ObjectValuePair(fileName, data));
+		_files.add(new ObjectValuePair<String, byte[]>(fileName, data));
 	}
 
-	public List getFiles() {
+	public List<ObjectValuePair<String, byte[]>> getFiles() {
 		return _files;
 	}
 
@@ -76,6 +76,7 @@ public class MBMailMessage {
 
 	private String _htmlBody;
 	private String _plainBody;
-	private List _files = new ArrayList();
+	private List<ObjectValuePair<String, byte[]>> _files =
+		new ArrayList<ObjectValuePair<String, byte[]>>();
 
 }

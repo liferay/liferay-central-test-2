@@ -62,7 +62,7 @@ public class ShoppingPreferences {
 		String[] ids = null;
 
 		try {
-			Set set = new TreeSet();
+			Set<String> set = new TreeSet<String>();
 
 			Locale[] locales = Locale.getAvailableLocales();
 
@@ -78,7 +78,7 @@ public class ShoppingPreferences {
 				}
 			}
 
-			ids = (String[])set.toArray(new String[0]);
+			ids = set.toArray(new String[set.size()]);
 		}
 		catch (Exception e) {
 			ids = new String[] {"USD", "CAD", "EUR", "GBP", "JPY"};

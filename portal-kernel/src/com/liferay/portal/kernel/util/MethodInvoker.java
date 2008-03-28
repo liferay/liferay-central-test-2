@@ -94,14 +94,14 @@ public class MethodInvoker {
 					wrappedClassName = wrappedClassName.substring(
 						2, wrappedClassName.length() - 1);
 
-					Class wrappedClass = contextClassLoader.loadClass(
+					Class<?> wrappedClass = contextClassLoader.loadClass(
 						wrappedClassName);
 
 					parameterTypes.add(
 						Array.newInstance(wrappedClass, 0).getClass());
 				}
 				else {
-					Class wrappedClass = contextClassLoader.loadClass(
+					Class<?> wrappedClass = contextClassLoader.loadClass(
 						wrappedClassName);
 
 					parameterTypes.add(wrappedClass);

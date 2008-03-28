@@ -275,7 +275,7 @@ public class SCFrameworkVersionServiceHttp {
 		}
 	}
 
-	public static java.util.List getFrameworkVersions(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
 		HttpPrincipal httpPrincipal, long groupId, boolean active)
 		throws com.liferay.portal.SystemException {
 		try {
@@ -300,7 +300,7 @@ public class SCFrameworkVersionServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -309,7 +309,7 @@ public class SCFrameworkVersionServiceHttp {
 		}
 	}
 
-	public static java.util.List getFrameworkVersions(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
 		HttpPrincipal httpPrincipal, long groupId, boolean active, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		try {
@@ -338,7 +338,7 @@ public class SCFrameworkVersionServiceHttp {
 				throw new com.liferay.portal.SystemException(e);
 			}
 
-			return (java.util.List)returnObj;
+			return (java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion>)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

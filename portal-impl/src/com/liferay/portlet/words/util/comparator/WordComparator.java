@@ -32,12 +32,9 @@ import java.util.Comparator;
  * @author Brian Wing Shun Chan
  *
  */
-public class WordComparator implements Comparator, Serializable {
+public class WordComparator implements Comparator<String>, Serializable {
 
-	public int compare(Object obj1, Object obj2) {
-		String s1 = (String)obj1;
-		String s2 = (String)obj2;
-
+	public int compare(String s1, String s2) {
 		if (s1.length() < s2.length()) {
 			return -1;
 		}

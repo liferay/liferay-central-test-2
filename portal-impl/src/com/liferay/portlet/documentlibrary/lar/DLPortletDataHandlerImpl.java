@@ -118,33 +118,33 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Folders
 
-			List folders = DLFolderUtil.findByGroupId(
+			List<DLFolder> folders = DLFolderUtil.findByGroupId(
 				context.getGroupId());
 
-			List entries = new ArrayList();
+			List<DLFileEntry> entries = new ArrayList<DLFileEntry>();
 
-			List shortcuts = new ArrayList();
+			List<DLFileShortcut> shortcuts = new ArrayList<DLFileShortcut>();
 
-			Iterator itr = folders.iterator();
+			Iterator<DLFolder> foldersItr = folders.iterator();
 
-			while (itr.hasNext()) {
-				DLFolder folder = (DLFolder)itr.next();
+			while (foldersItr.hasNext()) {
+				DLFolder folder = foldersItr.next();
 
 				if (context.addPrimaryKey(
 						DLFolder.class, folder.getPrimaryKeyObj())) {
 
-					itr.remove();
+					foldersItr.remove();
 				}
 				else {
 					folder.setUserUuid(folder.getUserUuid());
 
-					List folderEntries = DLFileEntryUtil.findByFolderId(
-						folder.getFolderId());
+					List<DLFileEntry> folderEntries =
+						DLFileEntryUtil.findByFolderId(folder.getFolderId());
 
 					entries.addAll(folderEntries);
 
 					if (context.getBooleanParameter(_NAMESPACE, "shortcuts")) {
-						List folderShortcuts =
+						List<DLFileShortcut> folderShortcuts =
 							DLFileShortcutUtil.findByFolderId(
 								folder.getFolderId());
 
@@ -163,17 +163,17 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Entries
 
-			List ranks = new ArrayList();
+			List<DLFileRank> ranks = new ArrayList<DLFileRank>();
 
-			itr = entries.iterator();
+			Iterator<DLFileEntry> entriesItr = entries.iterator();
 
-			while (itr.hasNext()) {
-				DLFileEntry entry = (DLFileEntry)itr.next();
+			while (entriesItr.hasNext()) {
+				DLFileEntry entry = entriesItr.next();
 
 				if (context.addPrimaryKey(
 						DLFileEntry.class, entry.getPrimaryKeyObj())) {
 
-					itr.remove();
+					entriesItr.remove();
 				}
 				else {
 					entry.setUserUuid(entry.getUserUuid());
@@ -202,7 +202,7 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 						_ZIP_FOLDER + entry.getName(), FileUtil.getBytes(in));
 
 					if (context.getBooleanParameter(_NAMESPACE, "ranks")) {
-						List entryRanks = DLFileRankUtil.findByF_N(
+						List<DLFileRank> entryRanks = DLFileRankUtil.findByF_N(
 							entry.getFolderId(), entry.getName());
 
 						ranks.addAll(entryRanks);
@@ -220,15 +220,15 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Shortcuts
 
-			itr = shortcuts.iterator();
+			Iterator<DLFileShortcut> shortcutsItr = shortcuts.iterator();
 
-			while (itr.hasNext()) {
-				DLFileShortcut shortcut = (DLFileShortcut)itr.next();
+			while (shortcutsItr.hasNext()) {
+				DLFileShortcut shortcut = shortcutsItr.next();
 
 				if (context.addPrimaryKey(
 						DLFileShortcut.class, shortcut.getPrimaryKeyObj())) {
 
-					itr.remove();
+					shortcutsItr.remove();
 				}
 				else {
 					shortcut.setUserUuid(shortcut.getUserUuid());
@@ -245,15 +245,15 @@ public class DLPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Ranks
 
-			itr = ranks.iterator();
+			Iterator<DLFileRank> ranksItr = ranks.iterator();
 
-			while (itr.hasNext()) {
-				DLFileRank rank = (DLFileRank)itr.next();
+			while (ranksItr.hasNext()) {
+				DLFileRank rank = ranksItr.next();
 
 				if (context.addPrimaryKey(
 						DLFileRank.class, rank.getPrimaryKeyObj())) {
 
-					itr.remove();
+					ranksItr.remove();
 				}
 				else {
 					rank.setUserUuid(rank.getUserUuid());

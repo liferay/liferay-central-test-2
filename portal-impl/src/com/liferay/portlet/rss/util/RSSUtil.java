@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
 
+import com.sun.syndication.feed.synd.SyndFeed;
+
 /**
  * <a href="RSSUtil.java.html"><b><i>View Source</i></b></a>
  *
@@ -35,11 +37,13 @@ import com.liferay.portal.kernel.webcache.WebCachePoolUtil;
  */
 public class RSSUtil {
 
-	public static ObjectValuePair getFeed(String url) {
+	public static ObjectValuePair<String, SyndFeed> getFeed(String url) {
 		WebCacheItem wci = new RSSWebCacheItem(url);
 
-		return new ObjectValuePair(url, WebCachePoolUtil.get(
-			RSSUtil.class.getName() + StringPool.PERIOD + url, wci));
+		return new ObjectValuePair<String, SyndFeed>(
+			url,
+			(SyndFeed)WebCachePoolUtil.get(
+				RSSUtil.class.getName() + StringPool.PERIOD + url, wci));
 	}
 
 }

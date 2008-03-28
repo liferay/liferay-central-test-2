@@ -54,7 +54,7 @@ public class RemotePluginPackageRepository {
 		return _repositoryURL;
 	}
 
-	public List getPluginPackages() {
+	public List<PluginPackage> getPluginPackages() {
 		return _pluginPackages;
 	}
 
@@ -66,7 +66,7 @@ public class RemotePluginPackageRepository {
 		_settings = settings;
 	}
 
-	public Set getTags() {
+	public Set<String> getTags() {
 		return _tags;
 	}
 
@@ -74,7 +74,7 @@ public class RemotePluginPackageRepository {
 
 		// Avoid duplicates
 
-		PluginPackage existingPackage = (PluginPackage)_moduleIdIndex.get(
+		PluginPackage existingPackage = _moduleIdIndex.get(
 			pluginPackage.getModuleId());
 
 		if (existingPackage != null) {
@@ -91,17 +91,17 @@ public class RemotePluginPackageRepository {
 	}
 
 	public PluginPackage findPluginByArtifactURL(String artifactURL) {
-		return (PluginPackage)_artifactURLIndex.get(artifactURL);
+		return _artifactURLIndex.get(artifactURL);
 	}
 
 	public PluginPackage findPluginPackageByModuleId(String moduleId) {
-		return (PluginPackage)_moduleIdIndex.get(moduleId);
+		return _moduleIdIndex.get(moduleId);
 	}
 
-	public List findPluginsByGroupIdAndArtifactId(
+	public List<PluginPackage> findPluginsByGroupIdAndArtifactId(
 		String groupId, String artifactId) {
 
-		return (List)_groupAndArtifactIndex.get(
+		return _groupAndArtifactIndex.get(
 			groupId + StringPool.SLASH + artifactId);
 	}
 
@@ -117,28 +117,30 @@ public class RemotePluginPackageRepository {
 	private void _addToGroupAndArtifactIndex(
 		String groupId, String artifactId, PluginPackage pluginPackage) {
 
-		List plugins = findPluginsByGroupIdAndArtifactId(groupId, artifactId);
+		List<PluginPackage> pluginPackages = findPluginsByGroupIdAndArtifactId(
+			groupId, artifactId);
 
-		if (plugins == null) {
-			plugins = new ArrayList();
+		if (pluginPackages == null) {
+			pluginPackages = new ArrayList<PluginPackage>();
 
 			_groupAndArtifactIndex.put(
-				groupId+ StringPool.SLASH + artifactId, plugins);
+				groupId+ StringPool.SLASH + artifactId, pluginPackages);
 		}
 
-		plugins.add(pluginPackage);
+		pluginPackages.add(pluginPackage);
 	}
 
 	private void _removeFromGroupAndArtifactIndex(
 		String groupId, String artifactId, String moduleId) {
 
-		List plugins = findPluginsByGroupIdAndArtifactId(groupId, artifactId);
+		List<PluginPackage> pluginPackages = findPluginsByGroupIdAndArtifactId(
+			groupId, artifactId);
 
-		if (plugins != null) {
-			Iterator itr = plugins.iterator();
+		if (pluginPackages != null) {
+			Iterator<PluginPackage> itr = pluginPackages.iterator();
 
 			while (itr.hasNext()) {
-				PluginPackage pluginPackage = (PluginPackage)itr.next();
+				PluginPackage pluginPackage = itr.next();
 
 				if (pluginPackage.getModuleId().equals(moduleId)) {
 					itr.remove();
@@ -150,11 +152,15 @@ public class RemotePluginPackageRepository {
 	}
 
 	private String _repositoryURL;
-	private Map _artifactURLIndex = new HashMap();
-	private Map _moduleIdIndex = new HashMap();
-	private Map _groupAndArtifactIndex = new HashMap();
-	private List _pluginPackages = new ArrayList();
+	private Map<String, PluginPackage> _artifactURLIndex =
+		new HashMap<String, PluginPackage>();
+	private Map<String, PluginPackage> _moduleIdIndex =
+		new HashMap<String, PluginPackage>();
+	private Map<String, List<PluginPackage>> _groupAndArtifactIndex =
+		new HashMap<String, List<PluginPackage>>();
+	private List<PluginPackage> _pluginPackages =
+		new ArrayList<PluginPackage>();
 	private Properties _settings = null;
-	private Set _tags = new TreeSet();
+	private Set<String> _tags = new TreeSet<String>();
 
 }

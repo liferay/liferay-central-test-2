@@ -32,7 +32,7 @@ import java.util.logging.Logger;
  */
 public class Jdk14LogFactoryImpl implements LogFactory {
 
-	public Log getLog(Class c) {
+	public Log getLog(Class<?> c) {
 		return getLog(c.getName());
 	}
 

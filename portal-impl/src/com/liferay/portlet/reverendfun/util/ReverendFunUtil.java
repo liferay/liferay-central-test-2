@@ -61,7 +61,7 @@ public class ReverendFunUtil {
 	}
 
 	private ReverendFunUtil() {
-		_dates = new ArrayList();
+		_dates = new ArrayList<String>();
 
 		String[] dates = StringUtil.split(ContentUtil.get(
 			"com/liferay/portlet/reverendfun/dependencies/dates.txt"), "\n");
@@ -72,25 +72,25 @@ public class ReverendFunUtil {
 	}
 
 	private String _getCurrentDate() {
-		String dates0 = (String)_dates.get(0);
+		String firstDates = _dates.get(0);
 
 		try {
-			Set moreDates = _getMoreDates(dates0);
+			Set<String> moreDates = _getMoreDates(firstDates);
 
 			if (moreDates.size() > 0) {
-				String moreDates0 = (String)moreDates.iterator().next();
+				String firstMoreDates = moreDates.iterator().next();
 
-				if (!moreDates0.equals(dates0)) {
+				if (!firstMoreDates.equals(firstDates)) {
 					_dates.addAll(0, moreDates);
 
 					// Trim duplicate dates
 
-					Set datesSet = new HashSet();
+					Set<String> datesSet = new HashSet<String>();
 
-					Iterator itr = _dates.iterator();
+					Iterator<String> itr = _dates.iterator();
 
 					while (itr.hasNext()) {
-						String date = (String)itr.next();
+						String date = itr.next();
 
 						if (datesSet.contains(date)) {
 							itr.remove();
@@ -105,15 +105,15 @@ public class ReverendFunUtil {
 		catch (Exception e) {
 		}
 
-		String currentDate = (String)_dates.get(1);
+		String currentDate = _dates.get(1);
 
 		return currentDate;
 	}
 
-	private Set _getMoreDates(String date) {
+	private Set<String> _getMoreDates(String date) {
 		WebCacheItem wci = new ReverendFunWebCacheItem(date);
 
-		return (Set)WebCachePoolUtil.get(
+		return (Set<String>)WebCachePoolUtil.get(
 			ReverendFunUtil.class.getName() + StringPool.PERIOD + date, wci);
 	}
 
@@ -122,7 +122,7 @@ public class ReverendFunUtil {
 			_dates, date, new StringComparator(false, true));
 
 		if (pos > 1) {
-			return (String)_dates.get(pos - 1);
+			return _dates.get(pos - 1);
 		}
 
 		return null;
@@ -133,7 +133,7 @@ public class ReverendFunUtil {
 			_dates, date, new StringComparator(false, true));
 
 		if (pos > -1 && pos < _dates.size() - 1) {
-			return (String)_dates.get(pos + 1);
+			return _dates.get(pos + 1);
 		}
 
 		return null;
@@ -153,6 +153,6 @@ public class ReverendFunUtil {
 
 	private static ReverendFunUtil _instance = new ReverendFunUtil();
 
-	private List _dates;
+	private List<String> _dates;
 
 }

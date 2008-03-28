@@ -30,7 +30,7 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  *
  */
-public class Feed implements Comparable, Serializable {
+public class Feed implements Comparable<Feed>, Serializable {
 
 	public Feed(String feedURL, String fullName, String shortName,
 				String categoryName) {
@@ -57,9 +57,7 @@ public class Feed implements Comparable, Serializable {
 		return _categoryName;
 	}
 
-	public int compareTo(Object obj) {
-		Feed feed = (Feed)obj;
-
+	public int compareTo(Feed feed) {
 		String categoryName = feed.getCategoryName();
 		String fullName = feed.getFullName();
 

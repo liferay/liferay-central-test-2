@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.util;
  */
 public class FloatWrapper extends PrimitiveWrapper {
 
-	public static final Class TYPE = Float.TYPE;
+	public static final Class<?> TYPE = Float.TYPE;
 
 	public FloatWrapper() {
 		this(0F);

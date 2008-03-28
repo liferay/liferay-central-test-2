@@ -201,7 +201,7 @@ public class GetArticleAction extends Action {
 	protected void addStyleSheet(
 		Document doc, String url, Map<String, String> arguments) {
 
-		List content = doc.content();
+		List<Object> content = doc.content();
 
 		ProcessingInstruction pi =
 			DocumentFactory.getInstance().createProcessingInstruction(

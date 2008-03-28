@@ -70,9 +70,9 @@ public interface ShoppingCouponService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(long plid, long companyId,
-		java.lang.String code, boolean active, java.lang.String discountType,
-		boolean andOperator, int begin, int end)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
+		long plid, long companyId, java.lang.String code, boolean active,
+		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

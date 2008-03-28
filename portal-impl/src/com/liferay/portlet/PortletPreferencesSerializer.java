@@ -66,26 +66,26 @@ public class PortletPreferencesSerializer {
 			return prefs;
 		}
 
-		Map preferences = prefs.getPreferences();
+		Map<String, Preference> preferences = prefs.getPreferences();
 
 		try {
 			Document doc = new SAXReader().read(new StringReader(xml));
 
 			Element root = doc.getRootElement();
 
-			Iterator itr1 = root.elements("preference").iterator();
+			Iterator<Element> itr1 = root.elements("preference").iterator();
 
 			while (itr1.hasNext()) {
-				Element prefEl = (Element)itr1.next();
+				Element prefEl = itr1.next();
 
 				String name = prefEl.elementTextTrim("name");
 
-				List values = new ArrayList();
+				List<String> values = new ArrayList<String>();
 
-				Iterator itr2 = prefEl.elements("value").iterator();
+				Iterator<Element> itr2 = prefEl.elements("value").iterator();
 
 				while (itr2.hasNext()) {
-					Element valueEl = (Element)itr2.next();
+					Element valueEl = itr2.next();
 
 					/*if (valueEl.nodeCount() <= 0) {
 						values.add(valueEl.getText());
@@ -101,7 +101,7 @@ public class PortletPreferencesSerializer {
 					prefEl.elementText("read-only"));
 
 				Preference preference = new Preference(
-					name, (String[])values.toArray(new String[0]), readOnly);
+					name, values.toArray(new String[values.size()]), readOnly);
 
 				preferences.put(name, preference);
 			}
@@ -140,19 +140,20 @@ public class PortletPreferencesSerializer {
 		throws SystemException {
 
 		try {
-			Map preferences = prefs.getPreferences();
+			Map<String, Preference> preferences = prefs.getPreferences();
 
 			DocumentFactory docFactory = DocumentFactory.getInstance();
 
 			Element portletPreferences =
 				docFactory.createElement("portlet-preferences");
 
-			Iterator itr = preferences.entrySet().iterator();
+			Iterator<Map.Entry<String, Preference>> itr =
+				preferences.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, Preference> entry = itr.next();
 
-				Preference preference = (Preference)entry.getValue();
+				Preference preference = entry.getValue();
 
 				Element prefEl = docFactory.createElement("preference");
 

@@ -26,6 +26,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.model.ShoppingItemField;
+import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.service.base.ShoppingItemServiceBaseImpl;
 import com.liferay.portlet.shopping.service.permission.ShoppingCategoryPermission;
 import com.liferay.portlet.shopping.service.permission.ShoppingItemPermission;
@@ -58,8 +60,9 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 			Boolean sale, boolean smallImage, String smallImageURL,
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List itemFields, List itemPrices,
-			boolean addCommunityPermissions, boolean addGuestPermissions)
+			File largeFile, List<ShoppingItemField> itemFields,
+			List<ShoppingItemPrice> itemPrices, boolean addCommunityPermissions,
+			boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
@@ -80,8 +83,9 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 			Boolean sale, boolean smallImage, String smallImageURL,
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List itemFields, List itemPrices,
-			String[] communityPermissions, String[] guestPermissions)
+			File largeFile, List<ShoppingItemField> itemFields,
+			List<ShoppingItemPrice> itemPrices, String[] communityPermissions,
+			String[] guestPermissions)
 		throws PortalException, SystemException {
 
 		ShoppingCategoryPermission.check(
@@ -120,7 +124,8 @@ public class ShoppingItemServiceImpl extends ShoppingItemServiceBaseImpl {
 			Boolean sale, boolean smallImage, String smallImageURL,
 			File smallFile, boolean mediumImage, String mediumImageURL,
 			File mediumFile, boolean largeImage, String largeImageURL,
-			File largeFile, List itemFields, List itemPrices)
+			File largeFile, List<ShoppingItemField> itemFields,
+			List<ShoppingItemPrice> itemPrices)
 		throws PortalException, SystemException {
 
 		ShoppingItemPermission.check(

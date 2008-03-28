@@ -74,21 +74,23 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 		return scLicensePersistence.findByPrimaryKey(licenseId);
 	}
 
-	public List getLicenses() throws SystemException {
+	public List<SCLicense> getLicenses() throws SystemException {
 		return scLicensePersistence.findAll();
 	}
 
-	public List getLicenses(int begin, int end) throws SystemException {
+	public List<SCLicense> getLicenses(int begin, int end)
+		throws SystemException {
+
 		return scLicensePersistence.findAll(begin, end);
 	}
 
-	public List getLicenses(boolean active, boolean recommended)
+	public List<SCLicense> getLicenses(boolean active, boolean recommended)
 		throws SystemException {
 
 		return scLicensePersistence.findByA_R(active, recommended);
 	}
 
-	public List getLicenses(
+	public List<SCLicense> getLicenses(
 			boolean active, boolean recommended, int begin, int end)
 		throws SystemException {
 
@@ -105,7 +107,7 @@ public class SCLicenseLocalServiceImpl extends SCLicenseLocalServiceBaseImpl {
 		return scLicensePersistence.countByA_R(active, recommended);
 	}
 
-	public List getProductEntryLicenses(long productEntryId)
+	public List<SCLicense> getProductEntryLicenses(long productEntryId)
 		throws PortalException, SystemException {
 
 		return scProductEntryPersistence.getSCLicenses(productEntryId);

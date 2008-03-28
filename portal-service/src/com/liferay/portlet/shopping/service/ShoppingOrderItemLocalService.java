@@ -131,6 +131,6 @@ public interface ShoppingOrderItemLocalService {
 
 	public void afterPropertiesSet();
 
-	public java.util.List getOrderItems(long orderId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrderItem> getOrderItems(
+		long orderId) throws com.liferay.portal.SystemException;
 }

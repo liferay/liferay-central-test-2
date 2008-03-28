@@ -44,8 +44,8 @@ public class ShoppingOrderFinderUtil {
 			ppPaymentStatus, andOperator);
 	}
 
-	public static java.util.List findByG_C_U_N_PPPS(long groupId,
-		long companyId, long userId, java.lang.String number,
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> findByG_C_U_N_PPPS(
+		long groupId, long companyId, long userId, java.lang.String number,
 		java.lang.String billingFirstName, java.lang.String billingLastName,
 		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,

@@ -39,29 +39,32 @@ import javax.mail.internet.InternetAddress;
  */
 public class MailMessage implements Serializable {
 
-	public MailMessage(InternetAddress from, InternetAddress to,
-					   String subject, String body) {
+	public MailMessage(
+		InternetAddress from, InternetAddress to, String subject, String body) {
 
 		this(from, to, subject, body, false);
 	}
 
-	public MailMessage(InternetAddress from, InternetAddress to,
-					   String subject, String body, boolean htmlFormat) {
+	public MailMessage(
+		InternetAddress from, InternetAddress to, String subject, String body,
+		boolean htmlFormat) {
 
-		this(from, new InternetAddress[] {to}, null, null, subject, body,
-			 htmlFormat);
+		this(
+			from, new InternetAddress[] {to}, null, null, subject, body,
+			htmlFormat);
 	}
 
-	public MailMessage(InternetAddress from, InternetAddress[] to,
-					   InternetAddress[] cc, InternetAddress[] bcc,
-					   String subject, String body) {
+	public MailMessage(
+		InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
+		InternetAddress[] bcc, String subject, String body) {
 
 		this(from, to, cc, bcc, subject, body, false);
 	}
 
-	public MailMessage(InternetAddress from, InternetAddress[] to,
-					   InternetAddress[] cc, InternetAddress[] bcc,
-					   String subject, String body, boolean htmlFormat) {
+	public MailMessage(
+		InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
+		InternetAddress[] bcc, String subject, String body,
+		boolean htmlFormat) {
 
 		_from = from;
 		_to = to;
@@ -70,7 +73,7 @@ public class MailMessage implements Serializable {
 		_subject = subject;
 		_body = body;
 		_htmlFormat = htmlFormat;
-		_attachments = new ArrayList();
+		_attachments = new ArrayList<File>();
 	}
 
 	public InternetAddress getFrom() {
@@ -164,7 +167,7 @@ public class MailMessage implements Serializable {
 	}
 
 	public File[] getAttachments() {
-		return (File[])_attachments.toArray(new File[0]);
+		return _attachments.toArray(new File[_attachments.size()]);
 	}
 
 	private InternetAddress _from;
@@ -177,6 +180,6 @@ public class MailMessage implements Serializable {
 	private InternetAddress[] _replyTo;
 	private String _messageId;
 	private String _inReplyTo;
-	private List _attachments;
+	private List<File> _attachments;
 
 }

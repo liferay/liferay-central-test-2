@@ -59,9 +59,8 @@ public class ActionUtil {
 		WorkflowDefinition definition = null;
 
 		if (definitionId > 0) {
-			definition =
-				(WorkflowDefinition)WorkflowDefinitionServiceUtil.getDefinition(
-					definitionId);
+			definition = WorkflowDefinitionServiceUtil.getDefinition(
+				definitionId);
 		}
 
 		req.setAttribute(WebKeys.WORKFLOW_DEFINITION, definition);

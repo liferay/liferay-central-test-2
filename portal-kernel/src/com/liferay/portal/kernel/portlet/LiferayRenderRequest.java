@@ -34,6 +34,6 @@ import javax.portlet.RenderRequest;
  */
 public interface LiferayRenderRequest extends RenderRequest {
 
-	public Map getRenderParameters();
+	public Map<String, String[]> getRenderParameters();
 
 }

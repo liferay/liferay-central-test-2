@@ -140,8 +140,8 @@ public class LiferayServletContext implements ServletContext {
 		return Collections.enumeration(new ArrayList<String>());
 	}
 
-	public Enumeration getServlets() {
-		return Collections.enumeration(new ArrayList());
+	public Enumeration<Servlet> getServlets() {
+		return Collections.enumeration(new ArrayList<Servlet>());
 	}
 
 	public void log(Exception exception, String message) {

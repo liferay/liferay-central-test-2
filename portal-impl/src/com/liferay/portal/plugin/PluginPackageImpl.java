@@ -128,19 +128,19 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 		_author = author;
 	}
 
-	public List getTypes() {
+	public List<String> getTypes() {
 		return _types;
 	}
 
-	public void setTypes(List types) {
+	public void setTypes(List<String> types) {
 		_types = types;
 	}
 
-	public List getTags() {
+	public List<String> getTags() {
 		return _tags;
 	}
 
-	public void setTags(List tags) {
+	public void setTags(List<String> tags) {
 		_tags = tags;
 	}
 
@@ -319,8 +319,8 @@ public class PluginPackageImpl implements Comparable, PluginPackage {
 	private String _name;
 	private Date _modifiedDate;
 	private String _author;
-	private List _types = new ArrayList();
-	private List _tags = new ArrayList();
+	private List<String> _types = new ArrayList<String>();
+	private List<String> _tags = new ArrayList<String>();
 	private List _licenses = new ArrayList();
 	private List _liferayVersions = new ArrayList();
 	private String _shortDescription = StringPool.BLANK;

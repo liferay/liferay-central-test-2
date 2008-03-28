@@ -41,15 +41,15 @@ import javax.portlet.ValidatorException;
 public class StocksPreferencesValidator implements PreferencesValidator {
 
 	public void validate(PortletPreferences prefs) throws ValidatorException {
-		List badSymbols = new ArrayList();
+		List<String> badSymbols = new ArrayList<String>();
 
 		String[] symbols = prefs.getValues("symbols", new String[0]);
 
-		for (int i = 0; i < symbols.length; i++) {
-			Stocks stocks = StocksUtil.getStocks(symbols[i]);
+		for (String symbol : symbols) {
+			Stocks stocks = StocksUtil.getStocks(symbol);
 
 			if (stocks == null) {
-				badSymbols.add(symbols[i]);
+				badSymbols.add(symbol);
 			}
 		}
 

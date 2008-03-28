@@ -26,6 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -81,10 +82,10 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 			qPos.add(discountType);
 			qPos.add(discountType);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -101,7 +102,7 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 		}
 	}
 
-	public List findByG_C_C_A_DT(
+	public List<ShoppingCoupon> findByG_C_C_A_DT(
 			long groupId, long companyId, String code, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws SystemException {
@@ -131,7 +132,8 @@ public class ShoppingCouponFinderImpl implements ShoppingCouponFinder {
 			qPos.add(discountType);
 			qPos.add(discountType);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<ShoppingCoupon>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

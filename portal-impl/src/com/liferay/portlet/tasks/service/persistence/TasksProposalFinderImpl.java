@@ -25,6 +25,7 @@ package com.liferay.portlet.tasks.service.persistence;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.impl.TasksProposalImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -69,10 +70,10 @@ public class TasksProposalFinderImpl implements TasksProposalFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -89,7 +90,8 @@ public class TasksProposalFinderImpl implements TasksProposalFinder {
 		}
 	}
 
-	public List findByG_U(long groupId, long userId, int begin, int end)
+	public List<TasksProposal> findByG_U(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -108,7 +110,8 @@ public class TasksProposalFinderImpl implements TasksProposalFinder {
 			qPos.add(groupId);
 			qPos.add(userId);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<TasksProposal>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

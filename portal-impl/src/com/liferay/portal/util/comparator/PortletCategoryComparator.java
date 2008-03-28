@@ -36,16 +36,16 @@ import java.util.Locale;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletCategoryComparator implements Comparator, Serializable {
+public class PortletCategoryComparator
+	implements Comparator<PortletCategory>, Serializable {
 
 	public PortletCategoryComparator(long companyId, Locale locale) {
 		_companyId = companyId;
 		_locale = locale;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		PortletCategory portletCategory1 = (PortletCategory)obj1;
-		PortletCategory portletCategory2 = (PortletCategory)obj2;
+	public int compare(
+		PortletCategory portletCategory1, PortletCategory portletCategory2) {
 
 		String name1 = LanguageUtil.get(
 			_companyId, _locale, portletCategory1.getName());

@@ -59,7 +59,8 @@ public class ActivityTrackerInterpreterUtil {
 	}
 
 	private ActivityTrackerInterpreterUtil() {
-		_activityTrackerInterpreters = new ArrayList();
+		_activityTrackerInterpreters =
+			new ArrayList<ActivityTrackerInterpreter>();
 	}
 
 	private void _addActivityTrackerInterpreter(
@@ -104,6 +105,6 @@ public class ActivityTrackerInterpreterUtil {
 	private static ActivityTrackerInterpreterUtil _instance =
 		new ActivityTrackerInterpreterUtil();
 
-	private List _activityTrackerInterpreters;
+	private List<ActivityTrackerInterpreter> _activityTrackerInterpreters;
 
 }

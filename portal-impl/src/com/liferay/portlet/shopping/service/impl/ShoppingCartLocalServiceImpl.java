@@ -75,10 +75,11 @@ public class ShoppingCartLocalServiceImpl
 		return shoppingCartPersistence.findByG_U(groupId, userId);
 	}
 
-	public Map getItems(long groupId, String itemIds)
+	public Map<ShoppingCartItem, Integer> getItems(long groupId, String itemIds)
 		throws SystemException {
 
-		Map items = new TreeMap();
+		Map<ShoppingCartItem, Integer> items =
+			new TreeMap<ShoppingCartItem, Integer>();
 
 		String[] itemIdsArray = StringUtil.split(itemIds);
 
@@ -93,10 +94,10 @@ public class ShoppingCartLocalServiceImpl
 				ShoppingCategory category = item.getCategory();
 
 				if (category.getGroupId() == groupId) {
-					ShoppingCartItem cartItem =
-						new ShoppingCartItemImpl(item, fields);
+					ShoppingCartItem cartItem = new ShoppingCartItemImpl(
+						item, fields);
 
-					Integer count = (Integer)items.get(cartItem);
+					Integer count = items.get(cartItem);
 
 					if (count == null) {
 						count = new Integer(1);
@@ -122,18 +123,19 @@ public class ShoppingCartLocalServiceImpl
 
 		List<Long> badItemIds = new ArrayList<Long>();
 
-		Map items = getItems(groupId, itemIds);
+		Map<ShoppingCartItem, Integer> items = getItems(groupId, itemIds);
 
 		boolean minQtyMultiple = GetterUtil.getBoolean(PropsUtil.get(
 			PropsUtil.SHOPPING_CART_MIN_QTY_MULTIPLE));
 
-		Iterator itr = items.entrySet().iterator();
+		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
+			items.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-			ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
-			Integer count = (Integer)entry.getValue();
+			ShoppingCartItem cartItem = entry.getKey();
+			Integer count = entry.getValue();
 
 			ShoppingItem item = cartItem.getItem();
 
@@ -150,14 +152,14 @@ public class ShoppingCartLocalServiceImpl
 			}
 			else {
 				if (count.intValue() < minQuantity) {
-					badItemIds.add(new Long(item.getItemId()));
+					badItemIds.add(item.getItemId());
 				}
 			}
 		}
 
 		if (badItemIds.size() > 0) {
-			throw new CartMinQuantityException(
-				StringUtil.merge((Long[])badItemIds.toArray(new Long[0])));
+			throw new CartMinQuantityException(StringUtil.merge(
+				badItemIds.toArray(new Long[badItemIds.size()])));
 		}
 
 		String[] couponCodesArray = StringUtil.split(couponCodes);

@@ -362,7 +362,7 @@ public class WikiUtil {
 			return _getEngine(page.getFormat()).getOutgoingLinks(page);
 		}
 		catch (WikiFormatException wfe) {
-			return Collections.emptyMap();
+			return Collections.EMPTY_MAP;
 		}
 	}
 

@@ -70,10 +70,11 @@ public class PayPalNotificationAction extends Action {
 
 			String query = "cmd=_notify-validate";
 
-			Enumeration enu = req.getParameterNames();
+			Enumeration<String> enu = req.getParameterNames();
 
 			while (enu.hasMoreElements()){
-				String name = (String)enu.nextElement();
+				String name = enu.nextElement();
+
 				String value = req.getParameter(name);
 
 				query = query + "&" + name + "=" + HttpUtil.encodeURL(value);

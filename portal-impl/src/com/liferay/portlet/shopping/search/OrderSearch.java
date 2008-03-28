@@ -38,7 +38,7 @@ import javax.portlet.RenderRequest;
  */
 public class OrderSearch extends SearchContainer {
 
-	static List headerNames = new ArrayList();
+	static List<String> headerNames = new ArrayList<String>();
 
 	static {
 		headerNames.add("number");

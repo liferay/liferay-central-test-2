@@ -230,7 +230,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		for (int i = 0; i < locales.length; i++) {
 			String languageId = LocaleUtil.toLanguageId(locales[i]);
 
-			List priorities = new ArrayList();
+			List<String> priorities = new ArrayList<String>();
 
 			for (int j = 0; j < 10; j++) {
 				String name = ParamUtil.getString(
@@ -251,7 +251,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			LocalizationUtil.setPrefsValues(
 				prefs, "priorities", languageId,
-				(String[])priorities.toArray(new String[0]));
+				priorities.toArray(new String[priorities.size()]));
 		}
 	}
 
@@ -267,7 +267,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				ParamUtil.getString(req, "ranks_" + languageId),
 				StringPool.NEW_LINE);
 
-			Map map = new TreeMap();
+			Map<String, String> map = new TreeMap<String, String>();
 
 			for (int j = 0; j < ranks.length; j++) {
 				String[] kvp = StringUtil.split(ranks[j], StringPool.EQUAL);
@@ -282,13 +282,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			int count = 0;
 
-			Iterator itr = map.entrySet().iterator();
+			Iterator<Map.Entry<String, String>> itr =
+				map.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<String, String> entry = itr.next();
 
-				String kvpValue = (String)entry.getKey();
-				String kvpName = (String)entry.getValue();
+				String kvpValue = entry.getKey();
+				String kvpName = entry.getValue();
 
 				ranks[count++] = kvpName + StringPool.EQUAL + kvpValue;
 			}

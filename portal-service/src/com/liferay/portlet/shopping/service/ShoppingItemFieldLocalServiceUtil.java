@@ -250,8 +250,8 @@ public class ShoppingItemFieldLocalServiceUtil {
 		shoppingItemFieldLocalService.afterPropertiesSet();
 	}
 
-	public static java.util.List getItemFields(long itemId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> getItemFields(
+		long itemId) throws com.liferay.portal.SystemException {
 		ShoppingItemFieldLocalService shoppingItemFieldLocalService = ShoppingItemFieldLocalServiceFactory.getService();
 
 		return shoppingItemFieldLocalService.getItemFields(itemId);

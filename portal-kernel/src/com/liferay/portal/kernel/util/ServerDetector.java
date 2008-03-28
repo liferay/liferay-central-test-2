@@ -351,7 +351,7 @@ public class ServerDetector {
 		catch (ClassNotFoundException cnfe) {
 			ServerDetector sd = _instance;
 
-			Class c = sd.getClass();
+			Class<?> c = sd.getClass();
 
 			if (c.getResource(className) != null) {
 				return Boolean.TRUE;

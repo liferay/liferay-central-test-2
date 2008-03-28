@@ -37,9 +37,9 @@ public class ReflectionUtil {
 
 	public static Object newInstance(String className, String p1) {
 		try {
-			Class classObj = Class.forName(className);
+			Class<?> classObj = Class.forName(className);
 
-			Constructor classConstructor =
+			Constructor<?> classConstructor =
 				classObj.getConstructor(new Class[] {String.class});
 
 			Object[] args = new Object[] {p1};

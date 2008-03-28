@@ -46,7 +46,7 @@ public class MakerStats {
 		SizeSample stat = null;
 
 		synchronized (_map) {
-			stat = (SizeSample)_map.get(caller);
+			stat = _map.get(caller);
 
 			if (stat == null) {
 				stat = new SizeSample(caller, initSize);
@@ -65,7 +65,7 @@ public class MakerStats {
 	public void display(PrintStream printer) {
 		printer.println("caller,min,max,range,samples,average,initial");
 
-		List list = new ArrayList(_map.size());
+		List<SizeSample> list = new ArrayList<SizeSample>(_map.size());
 
 		list.addAll(_map.values());
 
@@ -76,7 +76,7 @@ public class MakerStats {
 		int totalSize = 0;
 
 		for (int i = 0; i < list.size(); i++) {
-			SizeSample stat = (SizeSample)list.get(i);
+			SizeSample stat = list.get(i);
 
 			printer.print(stat.getCaller());
 			printer.print(",");
@@ -115,10 +115,10 @@ public class MakerStats {
 	}
 
 	//private String _name;
-	private Map _map = new HashMap();
+	private Map<String, SizeSample> _map = new HashMap<String, SizeSample>();
 	private int _count;
 
-	private class SizeSample implements Comparable {
+	private class SizeSample implements Comparable<SizeSample> {
 
 		public SizeSample(String caller, int initSize) {
 			_caller = caller;
@@ -164,9 +164,7 @@ public class MakerStats {
 			return _totalSize;
 		}
 
-		public int compareTo(Object obj) {
-			SizeSample other = (SizeSample)obj;
-
+		public int compareTo(SizeSample other) {
 			int thisAvg = 0;
 
 			if (_samplesSize > 0) {

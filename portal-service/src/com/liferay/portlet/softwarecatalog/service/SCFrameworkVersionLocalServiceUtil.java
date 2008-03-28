@@ -343,24 +343,25 @@ public class SCFrameworkVersionLocalServiceUtil {
 		return scFrameworkVersionLocalService.getFrameworkVersion(frameworkVersionId);
 	}
 
-	public static java.util.List getFrameworkVersions(long groupId, int begin,
-		int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
+		long groupId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 
 		return scFrameworkVersionLocalService.getFrameworkVersions(groupId,
 			begin, end);
 	}
 
-	public static java.util.List getFrameworkVersions(long groupId,
-		boolean active) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
+		long groupId, boolean active) throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 
 		return scFrameworkVersionLocalService.getFrameworkVersions(groupId,
 			active);
 	}
 
-	public static java.util.List getFrameworkVersions(long groupId,
-		boolean active, int begin, int end)
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getFrameworkVersions(
+		long groupId, boolean active, int begin, int end)
 		throws com.liferay.portal.SystemException {
 		SCFrameworkVersionLocalService scFrameworkVersionLocalService = SCFrameworkVersionLocalServiceFactory.getService();
 
@@ -383,7 +384,7 @@ public class SCFrameworkVersionLocalServiceUtil {
 			active);
 	}
 
-	public static java.util.List getProductVersionFrameworkVersions(
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> getProductVersionFrameworkVersions(
 		long productVersionId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

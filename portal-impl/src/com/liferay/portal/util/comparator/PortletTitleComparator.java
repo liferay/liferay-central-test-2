@@ -38,17 +38,15 @@ import javax.servlet.ServletContext;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletTitleComparator implements Comparator, Serializable {
+public class PortletTitleComparator
+	implements Comparator<Portlet>, Serializable {
 
 	public PortletTitleComparator(ServletContext ctx, Locale locale) {
 		_ctx = ctx;
 		_locale = locale;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		Portlet portlet1 = (Portlet)obj1;
-		Portlet portlet2 = (Portlet)obj2;
-
+	public int compare(Portlet portlet1, Portlet portlet2) {
 		String portletTitle1 = PortalUtil.getPortletTitle(
 			portlet1, _ctx, _locale);
 		String portletTitle2 = PortalUtil.getPortletTitle(

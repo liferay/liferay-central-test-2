@@ -32,11 +32,11 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.portlet.ActionRequest;
@@ -117,11 +117,11 @@ public class AssetPublisherUtil {
 	public static void addRecentFolderId(
 		PortletRequest req, String className, long classPK) {
 
-		_getRecentFolderIds(req).put(className, new Long(classPK));
+		_getRecentFolderIds(req).put(className, classPK);
 	}
 
 	public static long getRecentFolderId(PortletRequest req, String className) {
-		Long classPK = (Long)_getRecentFolderIds(req).get(className);
+		Long classPK = _getRecentFolderIds(req).get(className);
 
 		if (classPK == null) {
 			return 0;
@@ -155,7 +155,7 @@ public class AssetPublisherUtil {
 		return xml;
 	}
 
-	private static Map _getRecentFolderIds(PortletRequest req) {
+	private static Map<String, Long> _getRecentFolderIds(PortletRequest req) {
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		HttpSession ses = httpReq.getSession();
@@ -166,10 +166,11 @@ public class AssetPublisherUtil {
 		String key =
 			AssetPublisherUtil.class + "_" + themeDisplay.getPortletGroupId();
 
-		Map recentFolderIds = (Map)ses.getAttribute(key);
+		Map<String, Long> recentFolderIds =
+			(Map<String, Long>)ses.getAttribute(key);
 
 		if (recentFolderIds == null) {
-			recentFolderIds = CollectionFactory.getHashMap();
+			recentFolderIds = new HashMap<String, Long>();
 		}
 
 		ses.setAttribute(key, recentFolderIds);

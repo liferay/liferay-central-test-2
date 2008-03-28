@@ -116,13 +116,10 @@ public class ShoppingOrderLocalServiceImpl
 		if (updateInventory &&
 			ppPaymentStatus.equals(ShoppingOrderImpl.STATUS_COMPLETED)) {
 
-			List orderItems = shoppingOrderItemLocalService.getOrderItems(
-				order.getOrderId());
+			List<ShoppingOrderItem> orderItems =
+				shoppingOrderItemLocalService.getOrderItems(order.getOrderId());
 
-			for (int i = 0; i < orderItems.size(); i++) {
-				ShoppingOrderItem orderItem =
-					(ShoppingOrderItem)orderItems.get(i);
-
+			for (ShoppingOrderItem orderItem : orderItems) {
 				ShoppingItem item = shoppingItemLocalService.getItem(
 					ShoppingUtil.getItemId(orderItem.getItemId()));
 
@@ -133,13 +130,12 @@ public class ShoppingOrderLocalServiceImpl
 					item.setStockQuantity(quantity);
 				}
 				else {
-					List itemFields =
+					List<ShoppingItemField> itemFields =
 						shoppingItemFieldLocalService.getItemFields(
 							item.getItemId());
 
-					ShoppingItemField[] itemFieldsArray =
-						(ShoppingItemField[])itemFields.toArray(
-							new ShoppingItemField[0]);
+					ShoppingItemField[] itemFieldsArray = itemFields.toArray(
+						new ShoppingItemField[itemFields.size()]);
 
 					String[] fieldsArray = ShoppingCartItemImpl.getFieldsArray(
 						ShoppingUtil.getItemFields(orderItem.getItemId()));
@@ -200,12 +196,10 @@ public class ShoppingOrderLocalServiceImpl
 	public void deleteOrders(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = shoppingOrderPersistence.findByGroupId(
-			groupId).iterator();
+		List<ShoppingOrder> orders = shoppingOrderPersistence.findByGroupId(
+			groupId);
 
-		while (itr.hasNext()) {
-			ShoppingOrder order = (ShoppingOrder)itr.next();
-
+		for (ShoppingOrder order : orders) {
 			deleteOrder(order);
 		}
 	}
@@ -213,13 +207,13 @@ public class ShoppingOrderLocalServiceImpl
 	public ShoppingOrder getLatestOrder(long userId, long groupId)
 		throws PortalException, SystemException {
 
-		List orders = shoppingOrderPersistence.findByG_U_PPPS(
+		List<ShoppingOrder> orders = shoppingOrderPersistence.findByG_U_PPPS(
 			groupId, userId, ShoppingOrderImpl.STATUS_LATEST, 0, 1);
 
 		ShoppingOrder order = null;
 
 		if (orders.size() == 1) {
-			order = (ShoppingOrder)orders.get(0);
+			order = orders.get(0);
 		}
 		else {
 			User user = userPersistence.findByPrimaryKey(userId);
@@ -227,11 +221,12 @@ public class ShoppingOrderLocalServiceImpl
 
 			String number = getNumber();
 
-			List pastOrders = shoppingOrderPersistence.findByG_U_PPPS(
-				groupId, userId, ShoppingOrderImpl.STATUS_CHECKOUT, 0, 1);
+			List<ShoppingOrder> pastOrders =
+				shoppingOrderPersistence.findByG_U_PPPS(
+					groupId, userId, ShoppingOrderImpl.STATUS_CHECKOUT, 0, 1);
 
 			if (pastOrders.size() > 0) {
-				ShoppingOrder pastOrder = (ShoppingOrder)pastOrders.get(0);
+				ShoppingOrder pastOrder = pastOrders.get(0);
 
 				long orderId = counterLocalService.increment();
 
@@ -298,7 +293,7 @@ public class ShoppingOrderLocalServiceImpl
 	public ShoppingOrder saveLatestOrder(ShoppingCart cart)
 		throws PortalException, SystemException {
 
-		Map items = cart.getItems();
+		Map<ShoppingCartItem, Integer> items = cart.getItems();
 		Date now = new Date();
 
 		ShoppingPreferences shoppingPrefs = ShoppingPreferences.getInstance(
@@ -319,13 +314,14 @@ public class ShoppingOrderLocalServiceImpl
 
 		boolean requiresShipping = false;
 
-		Iterator itr = items.entrySet().iterator();
+		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
+			items.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-			ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
-			Integer count = (Integer)entry.getValue();
+			ShoppingCartItem cartItem = entry.getKey();
+			Integer count = entry.getValue();
 
 			ShoppingItem item = cartItem.getItem();
 
@@ -375,7 +371,7 @@ public class ShoppingOrderLocalServiceImpl
 		return order;
 	}
 
-	public List search(
+	public List<ShoppingOrder> search(
 			long groupId, long companyId, long userId, String number,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,

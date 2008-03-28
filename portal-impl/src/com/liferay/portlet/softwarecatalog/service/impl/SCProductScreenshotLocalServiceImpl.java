@@ -28,7 +28,6 @@ import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.service.base.SCProductScreenshotLocalServiceBaseImpl;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -53,13 +52,10 @@ public class SCProductScreenshotLocalServiceImpl
 	public void deleteProductScreenshots(long productEntryId)
 		throws SystemException {
 
-		Iterator itr = scProductScreenshotPersistence.findByProductEntryId(
-			productEntryId).iterator();
+		List<SCProductScreenshot> productScreenshots =
+			scProductScreenshotPersistence.findByProductEntryId(productEntryId);
 
-		while (itr.hasNext()) {
-			SCProductScreenshot productScreenshot =
-				(SCProductScreenshot)itr.next();
-
+		for (SCProductScreenshot productScreenshot : productScreenshots) {
 			deleteProductScreenshot(productScreenshot);
 		}
 	}
@@ -72,7 +68,7 @@ public class SCProductScreenshotLocalServiceImpl
 			productEntryId, priority);
 	}
 
-	public List getProductScreenshots(long productEntryId)
+	public List<SCProductScreenshot> getProductScreenshots(long productEntryId)
 		throws SystemException {
 
 		return scProductScreenshotPersistence.findByProductEntryId(

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -113,10 +114,10 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 			qPos.add(shippingEmailAddress);
 			qPos.add(ppPaymentStatus);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -133,7 +134,7 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 		}
 	}
 
-	public List findByG_C_U_N_PPPS(
+	public List<ShoppingOrder> findByG_C_U_N_PPPS(
 			long groupId, long companyId, long userId, String number,
 			String billingFirstName, String billingLastName,
 			String billingEmailAddress, String shippingFirstName,
@@ -194,7 +195,8 @@ public class ShoppingOrderFinderImpl implements ShoppingOrderFinder {
 			qPos.add(shippingEmailAddress);
 			qPos.add(ppPaymentStatus);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<ShoppingOrder>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

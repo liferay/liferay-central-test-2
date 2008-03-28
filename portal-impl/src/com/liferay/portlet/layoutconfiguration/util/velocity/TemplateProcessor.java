@@ -23,6 +23,7 @@
 package com.liferay.portlet.layoutconfiguration.util.velocity;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.comparator.PortletRenderWeightComparator;
 
 import java.util.HashMap;
@@ -50,12 +51,13 @@ public class TemplateProcessor {
 		_req = req;
 		_res = res;
 		_portletId = portletId;
-		_columnsMap = new HashMap();
-		_portletsMap = new TreeMap(new PortletRenderWeightComparator());
+		_columnsMap = new HashMap<String, String>();
+		_portletsMap = new TreeMap<Portlet, Object[]>(
+			new PortletRenderWeightComparator());
 	}
 
 	public String processColumn(String columnId) throws Exception {
-		Map attributes = new HashMap();
+		Map<String, String> attributes = new HashMap<String, String>();
 
 		attributes.put("id", columnId);
 
@@ -79,7 +81,7 @@ public class TemplateProcessor {
 
 		StringMaker sm = new StringMaker();
 
-		logic.processContent(sm, new HashMap());
+		logic.processContent(sm, new HashMap<String, String>());
 
 		return sm.toString();
 	}
@@ -89,16 +91,16 @@ public class TemplateProcessor {
 
 		StringMaker sm = new StringMaker();
 
-		logic.processContent(sm, new HashMap());
+		logic.processContent(sm, new HashMap<String, String>());
 
 		return sm.toString();
 	}
 
-	public Map getColumnsMap() {
+	public Map<String, String> getColumnsMap() {
 		return _columnsMap;
 	}
 
-	public Map getPortletsMap() {
+	public Map<Portlet, Object[]> getPortletsMap() {
 		return _portletsMap;
 	}
 
@@ -106,7 +108,7 @@ public class TemplateProcessor {
 	private HttpServletRequest _req;
 	private HttpServletResponse _res;
 	private String _portletId;
-	private Map _columnsMap;
-	private Map _portletsMap;
+	private Map<String, String> _columnsMap;
+	private Map<Portlet, Object[]> _portletsMap;
 
 }

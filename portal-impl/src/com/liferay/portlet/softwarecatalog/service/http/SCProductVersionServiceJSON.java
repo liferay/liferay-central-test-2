@@ -121,7 +121,8 @@ public class SCProductVersionServiceJSON {
 		int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		java.util.List returnValue = SCProductVersionServiceUtil.getProductVersions(productEntryId,
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> returnValue =
+			SCProductVersionServiceUtil.getProductVersions(productEntryId,
 				begin, end);
 
 		return SCProductVersionJSONSerializer.toJSONArray(returnValue);

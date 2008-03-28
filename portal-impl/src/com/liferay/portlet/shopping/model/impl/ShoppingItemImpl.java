@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
+import com.liferay.portlet.shopping.model.ShoppingItemPrice;
 import com.liferay.portlet.shopping.service.ShoppingCategoryLocalServiceUtil;
 import com.liferay.portlet.shopping.service.ShoppingItemPriceLocalServiceUtil;
 import com.liferay.portlet.shopping.util.comparator.ItemNameComparator;
@@ -84,7 +85,7 @@ public class ShoppingItemImpl
 		return new ItemNameComparator(true).compare(this, obj);
 	}
 
-	public List getItemPrices()
+	public List<ShoppingItemPrice> getItemPrices()
 		throws PortalException, SystemException {
 
 		return ShoppingItemPriceLocalServiceUtil.getItemPrices(getItemId());

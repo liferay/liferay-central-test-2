@@ -40,7 +40,6 @@ import com.liferay.portlet.softwarecatalog.util.Indexer;
 import java.io.IOException;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -172,12 +171,10 @@ public class SCProductVersionLocalServiceImpl
 	public void deleteProductVersions(long productEntryId)
 		throws PortalException, SystemException {
 
-		Iterator itr = scProductVersionPersistence.findByProductEntryId(
-			productEntryId).iterator();
+		List<SCProductVersion> productVersions =
+			scProductVersionPersistence.findByProductEntryId(productEntryId);
 
-		while (itr.hasNext()) {
-			SCProductVersion productVersion = (SCProductVersion)itr.next();
-
+		for (SCProductVersion productVersion : productVersions) {
 			deleteProductVersion(productVersion);
 		}
 	}
@@ -196,7 +193,8 @@ public class SCProductVersionLocalServiceImpl
 			directDownloadURL);
 	}
 
-	public List getProductVersions(long productEntryId, int begin, int end)
+	public List<SCProductVersion> getProductVersions(
+			long productEntryId, int begin, int end)
 		throws SystemException {
 
 		return scProductVersionPersistence.findByProductEntryId(

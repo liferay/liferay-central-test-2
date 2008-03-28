@@ -91,7 +91,7 @@ public class Validator {
 	}
 
 	public static boolean isDigit(char c) {
-		int x = (int)c;
+		int x = c;
 
 		if ((x >= 48) && (x <= 57)) {
 			return true;

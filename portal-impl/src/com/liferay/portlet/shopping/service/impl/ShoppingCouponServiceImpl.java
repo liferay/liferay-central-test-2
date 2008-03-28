@@ -82,7 +82,7 @@ public class ShoppingCouponServiceImpl extends ShoppingCouponServiceBaseImpl {
 		return shoppingCouponLocalService.getCoupon(couponId);
 	}
 
-	public List search(
+	public List<ShoppingCoupon> search(
 			long plid, long companyId, String code, boolean active,
 			String discountType, boolean andOperator, int begin, int end)
 		throws PortalException, SystemException {

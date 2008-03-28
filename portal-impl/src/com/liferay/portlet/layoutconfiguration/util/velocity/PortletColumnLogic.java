@@ -58,7 +58,8 @@ public class PortletColumnLogic extends RuntimeLogic {
 		_req = req;
 		_res = res;
 		_themeDisplay = (ThemeDisplay)_req.getAttribute(WebKeys.THEME_DISPLAY);
-		_portletsMap = new TreeMap(new PortletRenderWeightComparator());
+		_portletsMap = new TreeMap<Portlet, Object[]>(
+			new PortletRenderWeightComparator());
 
 		_parallelRenderEnable = PropsValues.LAYOUT_PARALLEL_RENDER_ENABLE;
 
@@ -87,15 +88,15 @@ public class PortletColumnLogic extends RuntimeLogic {
 		}
 	}
 
-	public void processContent(StringMaker sm, Map attributes)
+	public void processContent(StringMaker sm, Map<String, String> attributes)
 		throws Exception {
 
 		LayoutTypePortlet layoutTypePortlet =
 			_themeDisplay.getLayoutTypePortlet();
 
-		String columnId = (String)attributes.get("id");
+		String columnId = attributes.get("id");
 
-		List portlets = layoutTypePortlet.getAllPortlets(columnId);
+		List<Portlet> portlets = layoutTypePortlet.getAllPortlets(columnId);
 
 		String columnCssClass = "lfr-portlet-column";
 
@@ -110,7 +111,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 		sm.append("\">");
 
 		for (int i = 0; i < portlets.size(); i++) {
-			Portlet portlet = (Portlet)portlets.get(i);
+			Portlet portlet = portlets.get(i);
 
 			String queryString = null;
 			Integer columnPos = new Integer(i);
@@ -137,7 +138,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 		sm.append("</div>");
 	}
 
-	public Map getPortletsMap() {
+	public Map<Portlet, Object[]> getPortletsMap() {
 		return _portletsMap;
 	}
 
@@ -147,7 +148,7 @@ public class PortletColumnLogic extends RuntimeLogic {
 	private HttpServletRequest _req;
 	private HttpServletResponse _res;
 	private ThemeDisplay _themeDisplay;
-	private Map _portletsMap;
+	private Map<Portlet, Object[]> _portletsMap;
 	private boolean _parallelRenderEnable;
 
 }

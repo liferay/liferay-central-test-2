@@ -32,7 +32,7 @@ import java.io.Serializable;
  */
 public class MethodKey implements Serializable {
 
-	public MethodKey(String className, String methodName, Class[] types) {
+	public MethodKey(String className, String methodName, Class<?>[] types) {
 		_className = className;
 		_methodName = methodName;
 		_types = types;
@@ -46,7 +46,7 @@ public class MethodKey implements Serializable {
 		return _methodName;
 	}
 
-	public Class[] getTypes() {
+	public Class<?>[] getTypes() {
 		return _types;
 	}
 
@@ -96,7 +96,7 @@ public class MethodKey implements Serializable {
 
 	private String _className;
 	private String _methodName;
-	private Class[] _types;
+	private Class<?>[] _types;
 	private String _toString;
 
 }

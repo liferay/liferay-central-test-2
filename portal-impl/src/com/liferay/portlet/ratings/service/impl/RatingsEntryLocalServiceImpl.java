@@ -55,7 +55,7 @@ public class RatingsEntryLocalServiceImpl
 			userId, classNameId, classPK);
 	}
 
-	public List getEntries(String className, long classPK)
+	public List<RatingsEntry> getEntries(String className, long classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);

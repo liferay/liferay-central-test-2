@@ -47,19 +47,19 @@ import org.apache.struts.util.PropertyMessageResources;
  */
 public class MultiMessageResources extends PropertyMessageResources {
 
-	public MultiMessageResources(MessageResourcesFactory factory,
-								 String config) {
+	public MultiMessageResources(
+		MessageResourcesFactory factory, String config) {
 
 		super(factory, config);
 	}
 
-	public MultiMessageResources(MessageResourcesFactory factory,
-								 String config, boolean returnNull) {
+	public MultiMessageResources(
+		MessageResourcesFactory factory, String config, boolean returnNull) {
 
 		super(factory, config, returnNull);
 	}
 
-	public Map getMessages() {
+	public Map<String, String> getMessages() {
 		return messages;
 	}
 
@@ -148,7 +148,7 @@ public class MultiMessageResources extends PropertyMessageResources {
 		}
 
 		synchronized (messages) {
-			Enumeration names = props.keys();
+			Enumeration<Object> names = props.keys();
 
 			while (names.hasMoreElements()) {
 				String key = (String)names.nextElement();

@@ -31,20 +31,10 @@ import java.util.Comparator;
  * @author Jorge Ferrer
  *
  */
-public class PluginPackageNameAndContextComparator implements Comparator {
+public class PluginPackageNameAndContextComparator
+	implements Comparator<PluginPackage> {
 
-	public int compare(Object obj1, Object obj2) {
-		if (!(obj1 instanceof PluginPackage)) {
-			return -1;
-		}
-
-		if (!(obj2 instanceof PluginPackage)) {
-			return 1;
-		}
-
-		PluginPackage package1 = (PluginPackage)obj1;
-		PluginPackage package2 = (PluginPackage)obj2;
-
+	public int compare(PluginPackage package1, PluginPackage package2) {
 		int result = package1.getName().compareTo(package2.getName());
 
 		if (result == 0) {

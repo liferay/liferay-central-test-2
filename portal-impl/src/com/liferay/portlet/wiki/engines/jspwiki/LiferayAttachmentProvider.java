@@ -25,12 +25,12 @@ package com.liferay.portlet.wiki.engines.jspwiki;
 import com.ecyrd.jspwiki.NoRequiredPropertyException;
 import com.ecyrd.jspwiki.QueryItem;
 import com.ecyrd.jspwiki.WikiEngine;
+import com.ecyrd.jspwiki.WikiPage;
 import com.ecyrd.jspwiki.attachment.Attachment;
 import com.ecyrd.jspwiki.providers.ProviderException;
 import com.ecyrd.jspwiki.providers.WikiAttachmentProvider;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 import com.liferay.util.FileUtil;
 
@@ -40,6 +40,7 @@ import java.io.InputStream;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.Properties;
@@ -59,8 +60,8 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 	public void deleteVersion(Attachment attachment) throws ProviderException {
 	}
 
-	public Collection findAttachments(QueryItem[] query) {
-		return _EMPTY_LIST;
+	public Collection<Attachment> findAttachments(QueryItem[] query) {
+		return Collections.emptyList();
 	}
 
 	public InputStream getAttachmentData(Attachment attachment)
@@ -69,11 +70,10 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 		return _EMPTY_STREAM;
 	}
 
-	public Attachment getAttachmentInfo(
-			com.ecyrd.jspwiki.WikiPage page, String name, int version)
+	public Attachment getAttachmentInfo(WikiPage page, String name, int version)
 		throws ProviderException {
 
-		WikiPage wikiPage = null;
+		com.liferay.portlet.wiki.model.WikiPage wikiPage = null;
 
 		try {
 			wikiPage = WikiPageLocalServiceUtil.getPage(
@@ -115,14 +115,16 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 		_nodeId = GetterUtil.getLong(props.getProperty("nodeId"));
 	}
 
-	public List listAllChanged(Date timestamp) throws ProviderException {
-		return _EMPTY_LIST;
-	}
-
-	public Collection listAttachments(com.ecyrd.jspwiki.WikiPage page)
+	public List<Attachment> listAllChanged(Date timestamp)
 		throws ProviderException {
 
-		return _EMPTY_LIST;
+		return Collections.emptyList();
+	}
+
+	public Collection<Attachment> listAttachments(WikiPage page)
+		throws ProviderException {
+
+		return Collections.emptyList();
 	}
 
 	public void moveAttachmentsForPage(String oldParent, String newParent)
@@ -132,8 +134,6 @@ public class LiferayAttachmentProvider implements WikiAttachmentProvider {
 	public void putAttachmentData(Attachment attachment, InputStream data)
 		throws IOException, ProviderException {
 	}
-
-	private static final List _EMPTY_LIST = new ArrayList();
 
 	private static final InputStream _EMPTY_STREAM =
 		new ByteArrayInputStream(new byte[0]);

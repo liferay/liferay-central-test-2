@@ -60,7 +60,7 @@ public interface ShoppingItem extends ShoppingItemModel {
 
 	public int compareTo(java.lang.Object obj);
 
-	public java.util.List getItemPrices()
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

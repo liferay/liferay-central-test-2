@@ -51,7 +51,8 @@ package com.liferay.portlet.shopping.model;
 public interface ShoppingCart extends ShoppingCartModel {
 	public void addItemId(long itemId, java.lang.String fields);
 
-	public java.util.Map getItems() throws com.liferay.portal.SystemException;
+	public java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems()
+		throws com.liferay.portal.SystemException;
 
 	public int getItemsSize();
 

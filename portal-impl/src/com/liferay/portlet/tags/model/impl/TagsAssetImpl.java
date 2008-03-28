@@ -25,6 +25,7 @@ package com.liferay.portlet.tags.model.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portlet.tags.model.TagsAsset;
+import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 
 import java.util.List;
@@ -40,7 +41,9 @@ public class TagsAssetImpl extends TagsAssetModelImpl implements TagsAsset {
 	public TagsAssetImpl() {
 	}
 
-	public List getEntries() throws PortalException, SystemException {
+	public List<TagsEntry> getEntries()
+		throws PortalException, SystemException {
+
 		return TagsEntryLocalServiceUtil.getAssetEntries(getAssetId());
 	}
 

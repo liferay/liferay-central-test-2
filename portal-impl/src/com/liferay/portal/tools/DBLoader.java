@@ -100,7 +100,7 @@ public class DBLoader {
 
 		sql = "insert into " + zInsert.getTable() + " (";
 
-		List columns = zInsert.getColumns();
+		List<String> columns = zInsert.getColumns();
 
 		for (int i = 0; i < columns.size(); i++) {
 			sql += columns.get(i);

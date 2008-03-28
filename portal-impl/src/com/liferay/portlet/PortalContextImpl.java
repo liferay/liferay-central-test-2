@@ -45,8 +45,8 @@ import javax.portlet.WindowState;
 public class PortalContextImpl implements PortalContext {
 
 	static Properties props = new Properties();
-	static List portletModes = new ArrayList();
-	static List windowStates = new ArrayList();
+	static List<PortletMode> portletModes = new ArrayList<PortletMode>();
+	static List<WindowState> windowStates = new ArrayList<WindowState>();
 
 	static {
 		portletModes.add(PortletMode.EDIT);
@@ -66,10 +66,10 @@ public class PortalContextImpl implements PortalContext {
 	}
 
 	public static boolean isSupportedPortletMode(PortletMode portletMode) {
-		Enumeration enu = Collections.enumeration(portletModes);
+		Enumeration<PortletMode> enu = Collections.enumeration(portletModes);
 
 		while (enu.hasMoreElements()) {
-			PortletMode supported = (PortletMode)enu.nextElement();
+			PortletMode supported = enu.nextElement();
 
 			if (supported.equals(portletMode)) {
 				return true;
@@ -80,10 +80,10 @@ public class PortalContextImpl implements PortalContext {
 	}
 
 	public static boolean isSupportedWindowState(WindowState windowState) {
-		Enumeration enu = Collections.enumeration(windowStates);
+		Enumeration<WindowState> enu = Collections.enumeration(windowStates);
 
 		while (enu.hasMoreElements()) {
-			WindowState supported = (WindowState)enu.nextElement();
+			WindowState supported = enu.nextElement();
 
 			if (supported.equals(windowState)) {
 				return true;
@@ -101,15 +101,15 @@ public class PortalContextImpl implements PortalContext {
 		return props.getProperty(name);
 	}
 
-	public Enumeration getPropertyNames() {
-		return props.propertyNames();
+	public Enumeration<String> getPropertyNames() {
+		return (Enumeration<String>)props.propertyNames();
 	}
 
-	public Enumeration getSupportedPortletModes() {
+	public Enumeration<PortletMode> getSupportedPortletModes() {
 		return Collections.enumeration(portletModes);
 	}
 
-	public Enumeration getSupportedWindowStates() {
+	public Enumeration<WindowState> getSupportedWindowStates() {
 		return Collections.enumeration(windowStates);
 	}
 

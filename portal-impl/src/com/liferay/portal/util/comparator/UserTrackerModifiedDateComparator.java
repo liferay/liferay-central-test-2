@@ -37,7 +37,7 @@ import java.util.Comparator;
  *
  */
 public class UserTrackerModifiedDateComparator
-	implements Comparator, Serializable {
+	implements Comparator<UserTracker>, Serializable {
 
 	public UserTrackerModifiedDateComparator() {
 		this(false);
@@ -47,10 +47,7 @@ public class UserTrackerModifiedDateComparator
 		_asc = asc;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		UserTracker userTracker1 = (UserTracker)obj1;
-		UserTracker userTracker2 = (UserTracker)obj2;
-
+	public int compare(UserTracker userTracker1, UserTracker userTracker2) {
 		int value = DateUtil.compareTo(
 			userTracker1.getModifiedDate(), userTracker2.getModifiedDate());
 

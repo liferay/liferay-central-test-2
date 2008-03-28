@@ -196,9 +196,10 @@ public interface ShoppingOrderLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(long groupId, long companyId, long userId,
-		java.lang.String number, java.lang.String billingFirstName,
-		java.lang.String billingLastName, java.lang.String billingEmailAddress,
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingOrder> search(
+		long groupId, long companyId, long userId, java.lang.String number,
+		java.lang.String billingFirstName, java.lang.String billingLastName,
+		java.lang.String billingEmailAddress,
 		java.lang.String shippingFirstName, java.lang.String shippingLastName,
 		java.lang.String shippingEmailAddress,
 		java.lang.String ppPaymentStatus, boolean andOperator, int begin,

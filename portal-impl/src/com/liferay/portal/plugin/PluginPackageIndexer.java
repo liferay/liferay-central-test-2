@@ -59,7 +59,7 @@ public class PluginPackageIndexer implements Indexer {
 
 	public static void addPluginPackage(
 			String moduleId, String name, String version, Date modifiedDate,
-			String author, List types, List tags, List licenses,
+			String author, List<String> types, List<String> tags, List licenses,
 			List liferayVersions, String shortDescription,
 			String longDescription, String changeLog, String pageURL,
 			String repositoryURL, String status, String installedVersion)
@@ -91,7 +91,7 @@ public class PluginPackageIndexer implements Indexer {
 
 	public static Document getAddPluginPackageDocument(
 		String moduleId, String name, String version, Date modifiedDate,
-		String author, List types, List tags, List licenses,
+		String author, List<String> types, List<String> tags, List licenses,
 		List liferayVersions, String shortDescription,
 		String longDescription, String changeLog, String pageURL,
 		String repositoryURL, String status, String installedVersion) {
@@ -205,7 +205,7 @@ public class PluginPackageIndexer implements Indexer {
 
 	public static void updatePluginPackage(
 			String moduleId, String name, String version, Date modifiedDate,
-			String author, List types, List tags, List licenses,
+			String author, List<String> types, List<String> tags, List licenses,
 			List liferayVersions, String shortDescription,
 			String longDescription, String changeLog, String pageURL,
 			String repositoryURL, String status, String installedVersion)

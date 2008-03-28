@@ -30,8 +30,8 @@ import com.ecyrd.jspwiki.search.SearchProvider;
 
 import java.io.IOException;
 
-import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.Properties;
 
 /**
@@ -42,10 +42,10 @@ import java.util.Properties;
  */
 public class LiferaySearchProvider implements SearchProvider {
 
-	public Collection findPages(String query)
+	public Collection<WikiPage> findPages(String query)
 		throws IOException, ProviderException {
 
-		return _EMPTY_COLLECTION;
+		return Collections.EMPTY_LIST;
 	}
 
 	public String getProviderInfo() {
@@ -61,7 +61,5 @@ public class LiferaySearchProvider implements SearchProvider {
 
 	public void reindexPage(WikiPage page) {
 	}
-
-	private static final Collection _EMPTY_COLLECTION = new ArrayList();
 
 }

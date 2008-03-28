@@ -153,11 +153,11 @@ public class StringUtil_IW {
 		return StringUtil.merge(array, delimiter);
 	}
 
-	public java.lang.String merge(java.util.List list) {
+	public java.lang.String merge(java.util.List<Object> list) {
 		return StringUtil.merge(list);
 	}
 
-	public java.lang.String merge(java.util.List list,
+	public java.lang.String merge(java.util.List<Object> list,
 		java.lang.String delimiter) {
 		return StringUtil.merge(list, delimiter);
 	}
@@ -219,7 +219,8 @@ public class StringUtil_IW {
 	}
 
 	public java.lang.String replaceValues(java.lang.String s,
-		java.lang.String begin, java.lang.String end, java.util.Map values) {
+		java.lang.String begin, java.lang.String end,
+		java.util.Map<String, String> values) {
 		return StringUtil.replaceValues(s, begin, end, values);
 	}
 

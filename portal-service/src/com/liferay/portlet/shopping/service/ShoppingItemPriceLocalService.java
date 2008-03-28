@@ -131,7 +131,8 @@ public interface ShoppingItemPriceLocalService {
 
 	public void afterPropertiesSet();
 
-	public java.util.List getItemPrices(long itemId)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> getItemPrices(
+		long itemId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

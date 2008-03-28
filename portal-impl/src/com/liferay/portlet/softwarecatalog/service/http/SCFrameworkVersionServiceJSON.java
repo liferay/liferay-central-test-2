@@ -115,8 +115,8 @@ public class SCFrameworkVersionServiceJSON {
 
 	public static JSONArray getFrameworkVersions(long groupId, boolean active)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List returnValue = SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId,
-				active);
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> returnValue =
+			SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId, active);
 
 		return SCFrameworkVersionJSONSerializer.toJSONArray(returnValue);
 	}
@@ -124,8 +124,9 @@ public class SCFrameworkVersionServiceJSON {
 	public static JSONArray getFrameworkVersions(long groupId, boolean active,
 		int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List returnValue = SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId,
-				active, begin, end);
+		java.util.List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> returnValue =
+			SCFrameworkVersionServiceUtil.getFrameworkVersions(groupId, active,
+				begin, end);
 
 		return SCFrameworkVersionJSONSerializer.toJSONArray(returnValue);
 	}

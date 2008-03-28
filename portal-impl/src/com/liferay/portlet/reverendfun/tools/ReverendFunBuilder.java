@@ -23,6 +23,7 @@
 package com.liferay.portlet.reverendfun.tools;
 
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.util.InitUtil;
@@ -32,7 +33,6 @@ import com.liferay.util.FileUtil;
 import java.io.File;
 
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.Set;
 
 /**
@@ -61,18 +61,14 @@ public class ReverendFunBuilder {
 
 			WebCacheItem wci = new ReverendFunWebCacheItem(dates[0]);
 
-			Set moreDates = (Set)wci.convert("");
+			Set<String> moreDates = (Set<String>)wci.convert(StringPool.BLANK);
 
 			if (moreDates.size() > 0) {
 				StringMaker sm = new StringMaker();
 
-				Set datesSet = new HashSet();
+				Set<String> datesSet = new HashSet<String>();
 
-				Iterator itr = moreDates.iterator();
-
-				while (itr.hasNext()) {
-					String date = (String)itr.next();
-
+				for (String date : moreDates) {
 					datesSet.add(date);
 
 					sm.append(date);
@@ -85,9 +81,9 @@ public class ReverendFunBuilder {
 					if (!datesSet.contains(date)) {
 						datesSet.add(date);
 
-						sm.append(dates[i]);
+						sm.append(date);
 
-						if (i + 1 < dates.length) {
+						if ((i + 1) < dates.length) {
 							sm.append("\n");
 						}
 					}

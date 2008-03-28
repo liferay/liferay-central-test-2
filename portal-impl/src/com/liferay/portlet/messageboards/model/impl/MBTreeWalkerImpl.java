@@ -25,9 +25,9 @@ package com.liferay.portlet.messageboards.model.impl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.MBTreeWalker;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -43,22 +43,21 @@ import org.apache.commons.logging.LogFactory;
 public class MBTreeWalkerImpl implements MBTreeWalker {
 
 	public MBTreeWalkerImpl(MBMessage message) {
-		_messageIdsMap = CollectionFactory.getHashMap();
+		_messageIdsMap = new HashMap<Long, Integer>();
 
 		try {
 			_messages = MBMessageLocalServiceUtil.getThreadMessages(
 				message.getThreadId());
 
 			for (int i = 0; i < _messages.size(); i++) {
-				MBMessage curMessage = (MBMessage)_messages.get(i);
+				MBMessage curMessage = _messages.get(i);
 
-				Long parentMessageIdObj = new Long(
-					curMessage.getParentMessageId());
+				long parentMessageId = curMessage.getParentMessageId();
 
 				if (!curMessage.isRoot() &&
-					!_messageIdsMap.containsKey(parentMessageIdObj)) {
+					!_messageIdsMap.containsKey(parentMessageId)) {
 
-					_messageIdsMap.put(parentMessageIdObj, new Integer(i));
+					_messageIdsMap.put(parentMessageId, i);
 				}
 			}
 		}
@@ -68,11 +67,11 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 	}
 
 	public MBMessage getRoot() {
-		return (MBMessage)_messages.get(0);
+		return _messages.get(0);
 	}
 
-	public List getChildren(MBMessage message) {
-		List children = new ArrayList();
+	public List<MBMessage> getChildren(MBMessage message) {
+		List<MBMessage> children = new ArrayList<MBMessage>();
 
 		int[] range = getChildrenRange(message);
 
@@ -84,9 +83,9 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 	}
 
 	public int[] getChildrenRange(MBMessage message) {
-		Long messageIdObj = new Long(message.getMessageId());
+		long messageId = message.getMessageId();
 
-		Integer pos = (Integer)_messageIdsMap.get(messageIdObj);
+		Integer pos = _messageIdsMap.get(messageId);
 
 		if (pos == null) {
 			return new int[] {0, 0};
@@ -96,9 +95,9 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 		range[0] = pos.intValue();
 
 		for (int i = range[0]; i < _messages.size(); i++) {
-			MBMessage curMessage = (MBMessage)_messages.get(i);
+			MBMessage curMessage = _messages.get(i);
 
-			if (curMessage.getParentMessageId() == messageIdObj.longValue()) {
+			if (curMessage.getParentMessageId() == messageId) {
 				range[1] = i + 1;
 			}
 			else {
@@ -109,7 +108,7 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 		return range;
 	}
 
-	public List getMessages() {
+	public List<MBMessage> getMessages() {
 		return _messages;
 	}
 
@@ -132,8 +131,8 @@ public class MBTreeWalkerImpl implements MBTreeWalker {
 
 	private static Log _log = LogFactory.getLog(MBTreeWalkerImpl.class);
 
-	private List _messages;
-	private Map _messageIdsMap;
+	private List<MBMessage> _messages;
+	private Map<Long, Integer> _messageIdsMap;
 	private boolean _odd;
 
 }

@@ -28,17 +28,14 @@ import com.liferay.portal.kernel.webcache.WebCacheException;
 import com.liferay.portal.kernel.webcache.WebCacheItem;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portlet.news.model.Feed;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.Time;
 
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.StringReader;
 
-import java.util.ArrayList;
 import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
@@ -53,10 +50,11 @@ public class CategoryWebCacheItem implements WebCacheItem {
 
 	public Object convert(String url) throws WebCacheException {
 		try {
-			Map categoryMap = CollectionFactory.getHashMap();
-			Set categorySet = new TreeSet();
-			Map feedMap = CollectionFactory.getHashMap();
-			Set feedSet = new TreeSet();
+			Map<String, Set<Feed>> categoryMap =
+				new HashMap<String, Set<Feed>>();
+			Set<String> categorySet = new TreeSet<String>();
+			Map<String, Feed> feedMap = new HashMap<String, Feed>();
+			Set<Feed> feedSet = new TreeSet<Feed>();
 
 			String xml = null;
 
@@ -101,16 +99,12 @@ public class CategoryWebCacheItem implements WebCacheItem {
 				feedSet.add(feed);
 			}
 
-			categoryMap = CollectionFactory.getHashMap();
+			categoryMap = new HashMap<String, Set<Feed>>();
 
 			String temp = "";
-			Set tempSet = null;
+			Set<Feed> tempSet = null;
 
-			Iterator itr = feedSet.iterator();
-
-			while (itr.hasNext()) {
-				Feed feed = (Feed)itr.next();
-
+			for (Feed feed : feedSet) {
 				if (Validator.isNull(feed.getCategoryName())) {
 					continue;
 				}
@@ -119,7 +113,7 @@ public class CategoryWebCacheItem implements WebCacheItem {
 					tempSet.add(feed);
 				}
 				else {
-					tempSet = new TreeSet();
+					tempSet = new TreeSet<Feed>();
 
 					categoryMap.put(feed.getCategoryName(), tempSet);
 					tempSet.add(feed);
@@ -134,14 +128,14 @@ public class CategoryWebCacheItem implements WebCacheItem {
 			feedMap = Collections.unmodifiableMap(feedMap);
 			feedSet = Collections.unmodifiableSet(feedSet);
 
-			List list = new ArrayList();
+			Object[] objArray = new Object[4];
 
-			list.add(categoryMap);
-			list.add(categorySet);
-			list.add(feedMap);
-			list.add(feedSet);
+			objArray[0] = categoryMap;
+			objArray[1] = categorySet;
+			objArray[2] = feedMap;
+			objArray[3] = feedSet;
 
-			return list;
+			return objArray;
 		}
 		catch (Exception e) {
 			throw new WebCacheException(e);

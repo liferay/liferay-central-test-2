@@ -170,9 +170,9 @@ public interface ShoppingCouponLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List search(long plid, long companyId,
-		java.lang.String code, boolean active, java.lang.String discountType,
-		boolean andOperator, int begin, int end)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
+		long plid, long companyId, java.lang.String code, boolean active,
+		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public int searchCount(long groupId, long companyId, java.lang.String code,

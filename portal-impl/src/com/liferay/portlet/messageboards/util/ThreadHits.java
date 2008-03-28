@@ -62,7 +62,7 @@ public class ThreadHits extends HitsImpl {
 				threadIds.add(threadId);
 
 				docs.add(hits.doc(i));
-				scores.add(new Float(hits.score(i)));
+				scores.add(hits.score(i));
 			}
 		}
 

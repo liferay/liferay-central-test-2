@@ -197,8 +197,8 @@ public class SCProductScreenshotLocalServiceUtil {
 			priority);
 	}
 
-	public static java.util.List getProductScreenshots(long productEntryId)
-		throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.softwarecatalog.model.SCProductScreenshot> getProductScreenshots(
+		long productEntryId) throws com.liferay.portal.SystemException {
 		SCProductScreenshotLocalService scProductScreenshotLocalService = SCProductScreenshotLocalServiceFactory.getService();
 
 		return scProductScreenshotLocalService.getProductScreenshots(productEntryId);

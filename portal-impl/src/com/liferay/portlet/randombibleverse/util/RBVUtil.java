@@ -61,7 +61,7 @@ public class RBVUtil {
 		return _instance._getBible(prefs, locale);
 	}
 
-	public static Map getBibles() {
+	public static Map<String, Bible> getBibles() {
 		return _instance._bibles;
 	}
 
@@ -87,15 +87,16 @@ public class RBVUtil {
 			_log.error(de);
 		}
 
-		_bibles = new LinkedHashMap();
-		_verses = new ArrayList();
+		_bibles = new LinkedHashMap<String, Bible>();
+		_verses = new ArrayList<String>();
 
 		Element root = doc.getRootElement();
 
-		Iterator itr = root.element("bibles").elements("bible").iterator();
+		Iterator<Element> itr = root.element("bibles").elements(
+			"bible").iterator();
 
 		while (itr.hasNext()) {
-			Element bible = (Element)itr.next();
+			Element bible = itr.next();
 
 			_bibles.put(
 				bible.attributeValue("language"),
@@ -110,7 +111,7 @@ public class RBVUtil {
 		itr = root.element("verses").elements("verse").iterator();
 
 		while (itr.hasNext()) {
-			Element verse = (Element)itr.next();
+			Element verse = itr.next();
 
 			_verses.add(verse.attributeValue("location"));
 		}
@@ -119,15 +120,14 @@ public class RBVUtil {
 	}
 
 	private Bible _getBible(PortletPreferences prefs, Locale locale) {
-		Bible bible = (Bible)_bibles.get(
-			prefs.getValue("language", StringPool.BLANK));
+		Bible bible = _bibles.get(prefs.getValue("language", StringPool.BLANK));
 
 		if (bible == null) {
-			bible = (Bible)_bibles.get(locale.getLanguage());
+			bible = _bibles.get(locale.getLanguage());
 		}
 
 		if (bible == null) {
-			bible = (Bible)_bibles.get("en");
+			bible = _bibles.get("en");
 		}
 
 		return bible;
@@ -138,7 +138,7 @@ public class RBVUtil {
 
 		int i = Randomizer.getInstance().nextInt(_verses.size());
 
-		return _getVerse((String)_verses.get(i), bible.getVersionId());
+		return _getVerse(_verses.get(i), bible.getVersionId());
 	}
 
 	private Verse _getVerse(String location, String versionId) {
@@ -154,7 +154,7 @@ public class RBVUtil {
 
 	private static RBVUtil _instance = new RBVUtil();
 
-	private Map _bibles;
-	private List _verses;
+	private Map<String, Bible> _bibles;
+	private List<String> _verses;
 
 }

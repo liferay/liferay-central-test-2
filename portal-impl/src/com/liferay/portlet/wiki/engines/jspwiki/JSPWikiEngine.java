@@ -24,13 +24,13 @@ package com.liferay.portlet.wiki.engines.jspwiki;
 
 import com.ecyrd.jspwiki.WikiContext;
 import com.ecyrd.jspwiki.WikiException;
+import com.ecyrd.jspwiki.WikiPage;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.wiki.PageContentException;
 import com.liferay.portlet.wiki.engines.WikiEngine;
-import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.service.WikiPageLocalServiceUtil;
 
 import java.io.ByteArrayInputStream;
@@ -55,7 +55,8 @@ import org.apache.commons.logging.LogFactory;
  */
 public class JSPWikiEngine implements WikiEngine {
 
-	public String convert(WikiPage page, PortletURL portletURL)
+	public String convert(
+			com.liferay.portlet.wiki.model.WikiPage page, PortletURL portletURL)
 		throws PageContentException {
 
 		try {
@@ -66,14 +67,15 @@ public class JSPWikiEngine implements WikiEngine {
 		}
 	}
 
-	public Map<String, Boolean> getOutgoingLinks(WikiPage page)
+	public Map<String, Boolean> getOutgoingLinks(
+			com.liferay.portlet.wiki.model.WikiPage page)
 		throws PageContentException {
 
 		try {
 			LiferayJSPWikiEngine engine = getEngine(page.getNodeId());
 
-			com.ecyrd.jspwiki.WikiPage jspWikiPage =
-				LiferayPageProvider.toJSPWikiPage(page, engine);
+			WikiPage jspWikiPage = LiferayPageProvider.toJSPWikiPage(
+				page, engine);
 
 			Collection<String> titles = engine.scanWikiLinks(
 				jspWikiPage, page.getContent());
@@ -121,7 +123,8 @@ public class JSPWikiEngine implements WikiEngine {
 		}
 	}
 
-	public boolean isLinkedTo(WikiPage page, String targetTitle)
+	public boolean isLinkedTo(
+			com.liferay.portlet.wiki.model.WikiPage page, String targetTitle)
 		throws PageContentException {
 
 		Map<String, Boolean> links = getOutgoingLinks(page);
@@ -147,7 +150,9 @@ public class JSPWikiEngine implements WikiEngine {
 		return true;
 	}
 
-	protected String convert(WikiPage page) throws WikiException {
+	protected String convert(com.liferay.portlet.wiki.model.WikiPage page)
+		throws WikiException {
+
 		String content = page.getContent();
 
 		if (Validator.isNull(content)) {
@@ -156,8 +161,7 @@ public class JSPWikiEngine implements WikiEngine {
 
 		com.ecyrd.jspwiki.WikiEngine engine = getEngine(page.getNodeId());
 
-		com.ecyrd.jspwiki.WikiPage jspWikiPage =
-			LiferayPageProvider.toJSPWikiPage(page, engine);
+		WikiPage jspWikiPage = LiferayPageProvider.toJSPWikiPage(page, engine);
 
 		WikiContext wikiContext = new WikiContext(engine, jspWikiPage);
 

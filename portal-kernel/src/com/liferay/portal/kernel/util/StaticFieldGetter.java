@@ -43,7 +43,7 @@ public class StaticFieldGetter {
 		Object obj = null;
 
 		try {
-			Class objClass = Class.forName(className);
+			Class<?> objClass = Class.forName(className);
 
 			Field field = objClass.getField(fieldName);
 

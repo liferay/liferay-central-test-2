@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.util;
  */
 public class BooleanWrapper extends PrimitiveWrapper {
 
-	public static final Class TYPE = Boolean.TYPE;
+	public static final Class<?> TYPE = Boolean.TYPE;
 
 	public BooleanWrapper() {
 		this(false);

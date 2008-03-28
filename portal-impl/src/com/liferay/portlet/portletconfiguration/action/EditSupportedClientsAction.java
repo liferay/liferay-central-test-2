@@ -36,7 +36,6 @@ import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.servlet.SessionErrors;
 
-import java.util.Iterator;
 import java.util.Set;
 
 import javax.portlet.ActionRequest;
@@ -130,13 +129,9 @@ public class EditSupportedClientsAction extends PortletAction {
 		Portlet portlet = PortletLocalServiceUtil.getPortletById(
 			themeDisplay.getCompanyId(), portletResource);
 
-		Set allPortletModes = portlet.getAllPortletModes();
+		Set<String> allPortletModes = portlet.getAllPortletModes();
 
-		Iterator itr = allPortletModes.iterator();
-
-		while (itr.hasNext()) {
-			String portletMode = (String)itr.next();
-
+		for (String portletMode : allPortletModes) {
 			String mobileDevicesParam =
 				"portlet-setup-supported-clients-mobile-devices-" + portletMode;
 

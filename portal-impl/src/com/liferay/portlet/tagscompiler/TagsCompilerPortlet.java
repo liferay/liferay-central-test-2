@@ -66,9 +66,10 @@ public class TagsCompilerPortlet extends LiferayPortlet {
 			_log.debug("Entries from friendly URL " + entriesFromURL);
 		}
 
-		Collection entriesFromSession = TagsCompilerSessionUtil.getEntries(req);
-		String[] entriesFromSessionArray =
-			(String[])entriesFromSession.toArray(new String[0]);
+		Collection<String> entriesFromSession =
+			TagsCompilerSessionUtil.getEntries(req);
+		String[] entriesFromSessionArray = entriesFromSession.toArray(
+			new String[entriesFromSession.size()]);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

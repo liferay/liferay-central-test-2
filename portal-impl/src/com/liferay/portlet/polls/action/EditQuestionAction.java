@@ -171,12 +171,12 @@ public class EditQuestionAction extends PortletAction {
 			expirationDateHour += 12;
 		}
 
-		List choices = new ArrayList();
+		List<PollsChoice> choices = new ArrayList<PollsChoice>();
 
-		Enumeration enu = req.getParameterNames();
+		Enumeration<String> enu = req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String param = (String)enu.nextElement();
+			String param = enu.nextElement();
 
 			if (param.startsWith(CHOICE_DESCRIPTION_PREFIX)) {
 				try {

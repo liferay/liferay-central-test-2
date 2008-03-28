@@ -64,32 +64,33 @@ public class NewsWebCacheItem implements WebCacheItem {
 
 			Document doc = new SAXReader().read(bais);
 
-			ArrayList list = new ArrayList();
+			List<Article> articles = new ArrayList<Article>();
 
 			DateFormat df = new SimpleDateFormat("MMM d yyyy K:mma z");
 
 			Element root = doc.getRootElement();
 
-			List articles = root.elements("article");
-			Iterator i = articles.iterator();
+			Iterator<Element> itr = root.elements("article").iterator();
 
-			while (i.hasNext()) {
-				Element article = (Element)i.next();
+			while (itr.hasNext()) {
+				Element articleEl = itr.next();
 
 				String harvestTime =
-					article.element("harvest_time").getTextTrim() + " GMT";
+					articleEl.element("harvest_time").getTextTrim() + " GMT";
 
-				list.add(new Article(
-					article.element("headline_text").getTextTrim(),
-					article.element("url").getTextTrim(),
-					article.element("source").getTextTrim(),
-					article.element("document_url").getTextTrim(),
-					article.element("access_status").getTextTrim(),
-					article.element("access_registration").getTextTrim(),
-					df.parse(harvestTime)));
+				Article article = new Article(
+					articleEl.element("headline_text").getTextTrim(),
+					articleEl.element("url").getTextTrim(),
+					articleEl.element("source").getTextTrim(),
+					articleEl.element("document_url").getTextTrim(),
+					articleEl.element("access_status").getTextTrim(),
+					articleEl.element("access_registration").getTextTrim(),
+					df.parse(harvestTime));
+
+				articles.add(article);
 			}
 
-			return new News(feedURL, categoryName, list);
+			return new News(feedURL, categoryName, articles);
 		}
 		catch (Exception e) {
 			throw new WebCacheException(e);

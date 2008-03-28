@@ -41,16 +41,16 @@ import javax.portlet.ValidatorException;
 public class RSSPreferencesValidator implements PreferencesValidator {
 
 	public void validate(PortletPreferences prefs) throws ValidatorException {
-		List badURLs = new ArrayList();
+		List<String> badURLs = new ArrayList<String>();
 
 		String[] urls = prefs.getValues("urls", new String[0]);
 
-		for (int i = 0; i < urls.length; i++) {
+		for (String url : urls) {
 			try {
-				new URL(urls[i]);
+				new URL(url);
 			}
 			catch (MalformedURLException murle) {
-				badURLs.add(urls[i]);
+				badURLs.add(url);
 			}
 		}
 

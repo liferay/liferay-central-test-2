@@ -32,7 +32,6 @@ import com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion;
 import com.liferay.portlet.softwarecatalog.service.base.SCFrameworkVersionLocalServiceBaseImpl;
 
 import java.util.Date;
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -183,13 +182,10 @@ public class SCFrameworkVersionLocalServiceImpl
 	public void deleteFrameworkVersions(long groupId)
 		throws PortalException, SystemException {
 
-		Iterator itr = scFrameworkVersionPersistence.findByGroupId(
-			groupId).iterator();
+		List<SCFrameworkVersion> frameworkVersions =
+			scFrameworkVersionPersistence.findByGroupId(groupId);
 
-		while (itr.hasNext()) {
-			SCFrameworkVersion frameworkVersion =
-				(SCFrameworkVersion)itr.next();
-
+		for (SCFrameworkVersion frameworkVersion : frameworkVersions) {
 			deleteFrameworkVersion(frameworkVersion);
 		}
 	}
@@ -201,19 +197,21 @@ public class SCFrameworkVersionLocalServiceImpl
 			frameworkVersionId);
 	}
 
-	public List getFrameworkVersions(long groupId, int begin, int end)
+	public List<SCFrameworkVersion> getFrameworkVersions(
+			long groupId, int begin, int end)
 		throws SystemException {
 
 		return scFrameworkVersionPersistence.findByGroupId(groupId, begin, end);
 	}
 
-	public List getFrameworkVersions(long groupId, boolean active)
+	public List<SCFrameworkVersion> getFrameworkVersions(
+			long groupId, boolean active)
 		throws SystemException {
 
 		return scFrameworkVersionPersistence.findByG_A(groupId, active);
 	}
 
-	public List getFrameworkVersions(
+	public List<SCFrameworkVersion> getFrameworkVersions(
 			long groupId, boolean active, int begin, int end)
 		throws SystemException {
 
@@ -233,7 +231,8 @@ public class SCFrameworkVersionLocalServiceImpl
 		return scFrameworkVersionPersistence.countByG_A(groupId, active);
 	}
 
-	public List getProductVersionFrameworkVersions(long productVersionId)
+	public List<SCFrameworkVersion> getProductVersionFrameworkVersions(
+			long productVersionId)
 		throws PortalException, SystemException {
 
 		return scProductVersionPersistence.getSCFrameworkVersions(

@@ -49,7 +49,7 @@ public class InstancePool {
 	}
 
 	private InstancePool() {
-		_classPool = new HashMap();
+		_classPool = new HashMap<String, Object>();
 	}
 
 	private boolean _contains(String className) {
@@ -68,7 +68,7 @@ public class InstancePool {
 				PortalClassLoaderUtil.getClassLoader();
 
 			try {
-				Class classObj = portalClassLoader.loadClass(className);
+				Class<?> classObj = portalClassLoader.loadClass(className);
 
 				obj = classObj.newInstance();
 
@@ -86,7 +86,7 @@ public class InstancePool {
 					Thread.currentThread().getContextClassLoader();
 
 				try {
-					Class classObj = contextClassLoader.loadClass(className);
+					Class<?> classObj = contextClassLoader.loadClass(className);
 
 					obj = classObj.newInstance();
 
@@ -115,6 +115,6 @@ public class InstancePool {
 
 	private static InstancePool _instance = new InstancePool();
 
-	private Map _classPool;
+	private Map<String, Object> _classPool;
 
 }

@@ -40,7 +40,6 @@ import com.liferay.portlet.tags.service.TagsEntryLocalServiceUtil;
 import com.liferay.portlet.tags.service.TagsPropertyLocalServiceUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 
-import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -102,14 +101,10 @@ public class TagsUtil {
 		}
 
 		if (entry != null) {
-			List properties = TagsPropertyLocalServiceUtil.getProperties(
-				entry.getEntryId());
+			List<TagsProperty> properties =
+				TagsPropertyLocalServiceUtil.getProperties(entry.getEntryId());
 
-			Iterator it = properties.iterator();
-
-			while (it.hasNext()) {
-				TagsProperty property = (TagsProperty) it.next();
-
+			for (TagsProperty property : properties) {
 				result = StringUtil.replace(
 					result, "[$" + property.getKey() + "$]",
 					property.getValue());

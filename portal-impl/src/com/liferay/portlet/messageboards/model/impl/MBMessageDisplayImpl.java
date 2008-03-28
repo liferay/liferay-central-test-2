@@ -39,11 +39,10 @@ import java.util.List;
  */
 public class MBMessageDisplayImpl implements MBMessageDisplay {
 
-	public MBMessageDisplayImpl(MBMessage message, MBMessage parentMessage,
-								MBCategory category, MBThread thread,
-								MBTreeWalker treeWalker,
-								MBThread previousThread, MBThread nextThread,
-								MBThread firstThread, MBThread lastThread) {
+	public MBMessageDisplayImpl(
+		MBMessage message, MBMessage parentMessage, MBCategory category,
+		MBThread thread, MBTreeWalker treeWalker, MBThread previousThread,
+		MBThread nextThread, MBThread firstThread, MBThread lastThread) {
 
 		_message = message;
 		_parentMessage = parentMessage;
@@ -55,12 +54,12 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 		_firstThread = firstThread;
 		_lastThread = lastThread;
 
-		List orderedMessages = new ArrayList();
+		List<MBMessage> orderedMessages = new ArrayList<MBMessage>();
 
 		_orderMessages(_treeWalker, treeWalker.getRoot(), orderedMessages);
 
 		for (int i = 0; i < orderedMessages.size(); i++) {
-			MBMessage curMessage = (MBMessage)orderedMessages.get(i);
+			MBMessage curMessage = orderedMessages.get(i);
 
 			if (i == 0) {
 				_firstMessage = curMessage;
@@ -68,11 +67,11 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 
 			if (curMessage.equals(message)) {
 				if ((i - 1) >= 0) {
-					_previousMessage = (MBMessage)orderedMessages.get(i - 1);
+					_previousMessage = orderedMessages.get(i - 1);
 				}
 
 				if ((i + 1) < orderedMessages.size()) {
-					_nextMessage = (MBMessage)orderedMessages.get(i + 1);
+					_nextMessage = orderedMessages.get(i + 1);
 				}
 			}
 
@@ -183,15 +182,16 @@ public class MBMessageDisplayImpl implements MBMessageDisplay {
 	}
 
 	private void _orderMessages(
-		MBTreeWalker treeWalker, MBMessage message, List orderedMessages) {
+		MBTreeWalker treeWalker, MBMessage message,
+		List<MBMessage> orderedMessages) {
 
 		orderedMessages.add(message);
 
-		List messages = treeWalker.getMessages();
+		List<MBMessage> messages = treeWalker.getMessages();
 		int[] range = treeWalker.getChildrenRange(message);
 
 		for (int i = range[0]; i < range[1]; i++) {
-			MBMessage curMessage = (MBMessage)messages.get(i);
+			MBMessage curMessage = messages.get(i);
 
 			_orderMessages(treeWalker, curMessage, orderedMessages);
 		}

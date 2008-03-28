@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.util;
  */
 public class IntegerWrapper extends PrimitiveWrapper {
 
-	public static final Class TYPE = Integer.TYPE;
+	public static final Class<?> TYPE = Integer.TYPE;
 
 	public IntegerWrapper() {
 		this(0);

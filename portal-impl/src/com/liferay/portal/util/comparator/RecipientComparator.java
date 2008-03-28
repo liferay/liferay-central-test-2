@@ -34,14 +34,12 @@ import java.util.Comparator;
  * @author Brian Wing Shun Chan
  *
  */
-public class RecipientComparator implements Comparator, Serializable {
+public class RecipientComparator
+	implements Comparator<Recipient>, Serializable {
 
-	public int compare(Object obj1, Object obj2) {
-		Recipient r1 = (Recipient)obj1;
-		Recipient r2 = (Recipient)obj2;
-
-		String name1 = r1.getRecipientName().toLowerCase();
-		String name2 = r2.getRecipientName().toLowerCase();
+	public int compare(Recipient recipient1, Recipient recipient2) {
+		String name1 = recipient1.getRecipientName().toLowerCase();
+		String name2 = recipient2.getRecipientName().toLowerCase();
 
 		return name1.compareTo(name2);
 	}

@@ -40,7 +40,7 @@ import java.util.Set;
  */
 public class ClassUtil {
 
-	public static Set getClasses(File file) throws IOException {
+	public static Set<String> getClasses(File file) throws IOException {
 		String fileName = file.getName();
 
 		if (fileName.endsWith(".java")) {
@@ -50,10 +50,10 @@ public class ClassUtil {
 		return getClasses(new FileReader(file), fileName);
 	}
 
-	public static Set getClasses(Reader reader, String className)
+	public static Set<String> getClasses(Reader reader, String className)
 		throws IOException {
 
-		Set classes = new HashSet();
+		Set<String> classes = new HashSet<String>();
 
 		StreamTokenizer st = new StreamTokenizer(new BufferedReader(reader));
 
@@ -102,7 +102,7 @@ public class ClassUtil {
 		return classes;
 	}
 
-	public static boolean isSubclass(Class a, Class b) {
+	public static boolean isSubclass(Class<?> a, Class<?> b) {
 		if (a == b) {
 			return true;
 		}
@@ -111,13 +111,13 @@ public class ClassUtil {
 			return false;
 		}
 
-		for (Class x = a; x != null; x = x.getSuperclass()) {
+		for (Class<?> x = a; x != null; x = x.getSuperclass()) {
 			if (x == b) {
 				return true;
 			}
 
 			if (b.isInterface()) {
-				Class[] interfaces = x.getInterfaces();
+				Class<?>[] interfaces = x.getInterfaces();
 
 				for (int i = 0; i < interfaces.length; i++) {
 					if (isSubclass(interfaces[i], b)) {
@@ -130,7 +130,7 @@ public class ClassUtil {
 		return false;
 	}
 
-	public static boolean isSubclass(Class a, String s) {
+	public static boolean isSubclass(Class<?> a, String s) {
 		if (a == null || s == null) {
 			return false;
 		}
@@ -139,12 +139,12 @@ public class ClassUtil {
 			return true;
 		}
 
-		for (Class x = a; x != null; x = x.getSuperclass()) {
+		for (Class<?> x = a; x != null; x = x.getSuperclass()) {
 			if (x.getName().equals(s)) {
 				return true;
 			}
 
-			Class[] interfaces = x.getInterfaces();
+			Class<?>[] interfaces = x.getInterfaces();
 
 			for (int i = 0; i < interfaces.length; i++) {
 				if (isSubclass(interfaces[i], s)) {

@@ -122,7 +122,8 @@ public class ShoppingItemServiceHttp {
 		boolean mediumImage, java.lang.String mediumImageURL,
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -276,7 +277,8 @@ public class ShoppingItemServiceHttp {
 		boolean mediumImage, java.lang.String mediumImageURL,
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
@@ -506,8 +508,9 @@ public class ShoppingItemServiceHttp {
 		java.io.File smallFile, boolean mediumImage,
 		java.lang.String mediumImageURL, java.io.File mediumFile,
 		boolean largeImage, java.lang.String largeImageURL,
-		java.io.File largeFile, java.util.List itemFields,
-		java.util.List itemPrices)
+		java.io.File largeFile,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {

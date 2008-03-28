@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
+import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -49,7 +50,9 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 	public static String COUNT_BY_CATEGORY_IDS =
 		ShoppingItemFinder.class.getName() + ".countByCategoryIds";
 
-	public int countByCategoryIds(List categoryIds) throws SystemException {
+	public int countByCategoryIds(List<Long> categoryIds)
+		throws SystemException {
+
 		Session session = null;
 
 		try {
@@ -67,15 +70,15 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			for (int i = 0; i < categoryIds.size(); i++) {
-				Long categoryId = (Long)categoryIds.get(i);
+				Long categoryId = categoryIds.get(i);
 
 				qPos.add(categoryId);
 			}
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -141,10 +144,10 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(true);
 			qPos.add(true);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -215,10 +218,10 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(keywords);
 			qPos.add(keywords);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -284,10 +287,10 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(true);
 			qPos.add(true);
 
-			Iterator itr = q.list().iterator();
+			Iterator<Long> itr = q.list().iterator();
 
 			if (itr.hasNext()) {
-				Long count = (Long)itr.next();
+				Long count = itr.next();
 
 				if (count != null) {
 					return count.intValue();
@@ -304,7 +307,8 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		}
 	}
 
-	public List findByFeatured(long groupId, long[] categoryIds, int numOfItems)
+	public List<ShoppingItem> findByFeatured(
+			long groupId, long[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		int countByFeatured = countByFeatured(groupId, categoryIds);
@@ -355,7 +359,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(true);
 			qPos.add(true);
 
-			return QueryUtil.randomList(
+			return (List<ShoppingItem>)QueryUtil.randomList(
 				q, HibernateUtil.getDialect(), countByFeatured, numOfItems);
 		}
 		catch (Exception e) {
@@ -366,7 +370,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		}
 	}
 
-	public List findByKeywords(
+	public List<ShoppingItem> findByKeywords(
 			long groupId, long[] categoryIds, String keywords, int begin,
 			int end)
 		throws SystemException {
@@ -421,7 +425,8 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(keywords);
 			qPos.add(keywords);
 
-			return QueryUtil.list(q, HibernateUtil.getDialect(), begin, end);
+			return (List<ShoppingItem>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
@@ -431,7 +436,8 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		}
 	}
 
-	public List findBySale(long groupId, long[] categoryIds, int numOfItems)
+	public List<ShoppingItem> findBySale(
+			long groupId, long[] categoryIds, int numOfItems)
 		throws SystemException {
 
 		int countBySale = countBySale(groupId, categoryIds);
@@ -482,7 +488,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 			qPos.add(true);
 			qPos.add(true);
 
-			return QueryUtil.randomList(
+			return (List<ShoppingItem>)QueryUtil.randomList(
 				q, HibernateUtil.getDialect(), countBySale, numOfItems);
 		}
 		catch (Exception e) {
@@ -493,7 +499,7 @@ public class ShoppingItemFinderImpl implements ShoppingItemFinder {
 		}
 	}
 
-	protected String getCategoryIds(List categoryIds) {
+	protected String getCategoryIds(List<Long> categoryIds) {
 		StringMaker sm = new StringMaker();
 
 		for (int i = 0; i < categoryIds.size(); i++) {

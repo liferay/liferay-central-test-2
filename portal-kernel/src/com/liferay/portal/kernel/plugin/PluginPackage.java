@@ -53,13 +53,13 @@ public interface PluginPackage {
 
 	public void setAuthor(String author);
 
-	public List getTypes();
+	public List<String> getTypes();
 
-	public void setTypes(List types);
+	public void setTypes(List<String> types);
 
-	public List getTags();
+	public List<String> getTags();
 
-	public void setTags(List tags);
+	public void setTags(List<String> tags);
 
 	public List getLicenses();
 

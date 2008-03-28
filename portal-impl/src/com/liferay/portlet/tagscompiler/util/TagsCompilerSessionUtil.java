@@ -40,52 +40,52 @@ import javax.portlet.PortletSession;
  */
 public class TagsCompilerSessionUtil {
 
-	public static void addEntries(PortletRequest req, List entries) {
-		Set entriesSet = _getEntriesSet(req);
+	public static void addEntries(PortletRequest req, List<String> entries) {
+		Set<String> entriesSet = _getEntriesSet(req);
 
 		entriesSet.addAll(entries);
 	}
 
 	public static void addEntry(PortletRequest req, String entry) {
-		Set entriesSet = _getEntriesSet(req);
+		Set<String> entriesSet = _getEntriesSet(req);
 
 		entriesSet.add(entry);
 	}
 
 	public static void clearEntries(PortletRequest req) {
-		Set entriesSet = _getEntriesSet(req);
+		Set<String> entriesSet = _getEntriesSet(req);
 
 		entriesSet.clear();
 	}
 
-	public static Collection getEntries(PortletRequest req) {
-		Set entriesSet = _getEntriesSet(req);
+	public static Collection<String> getEntries(PortletRequest req) {
+		Set<String> entriesSet = _getEntriesSet(req);
 
 		return entriesSet;
 	}
 
-	public static void removeEntries(PortletRequest req, List entries) {
-		Set entriesSet = _getEntriesSet(req);
+	public static void removeEntries(PortletRequest req, List<String> entries) {
+		Set<String> entriesSet = _getEntriesSet(req);
 
 		entriesSet.removeAll(entries);
 	}
 
-	public static void setEntries(PortletRequest req, List entries) {
-		Set entriesSet = _getEntriesSet(req);
+	public static void setEntries(PortletRequest req, List<String> entries) {
+		Set<String> entriesSet = _getEntriesSet(req);
 
 		entriesSet.clear();
 
 		entriesSet.addAll(entries);
 	}
 
-	private static Set _getEntriesSet(PortletRequest req) {
+	private static Set<String> _getEntriesSet(PortletRequest req) {
 		PortletSession ses = req.getPortletSession();
 
-		Set entriesSet = (Set)ses.getAttribute(
+		Set<String> entriesSet = (Set<String>)ses.getAttribute(
 			WebKeys.TAGS_COMPILER_ENTRIES, PortletSession.APPLICATION_SCOPE);
 
 		if (entriesSet == null) {
-			entriesSet = new TreeSet();
+			entriesSet = new TreeSet<String>();
 
 			ses.setAttribute(
 				WebKeys.TAGS_COMPILER_ENTRIES, entriesSet,

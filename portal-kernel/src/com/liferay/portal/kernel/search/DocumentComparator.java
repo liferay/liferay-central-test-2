@@ -32,7 +32,7 @@ import java.util.List;
  * @author Brian Wing Shun Chan
  *
  */
-public class DocumentComparator implements Comparator {
+public class DocumentComparator implements Comparator<Document> {
 
 	public DocumentComparator() {
 		this(true, false);
@@ -54,22 +54,8 @@ public class DocumentComparator implements Comparator {
 		_columns.add(orderBy);
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		if (!(obj1 instanceof Document)) {
-			return -1;
-		}
-
-		if (!(obj2 instanceof Document)) {
-			return 1;
-		}
-
-		Document doc1 = (Document)obj1;
-		Document doc2 = (Document)obj2;
-
-		for (int i = 0; i < _columns.size(); i++) {
-			DocumentComparatorOrderBy orderBy =
-				(DocumentComparatorOrderBy)_columns.get(i);
-
+	public int compare(Document doc1, Document doc2) {
+		for (DocumentComparatorOrderBy orderBy : _columns) {
 			String value1 = doc1.get(orderBy.getName());
 			String value2 = doc2.get(orderBy.getName());
 
@@ -101,6 +87,7 @@ public class DocumentComparator implements Comparator {
 
 	private boolean _asc;
 	private boolean _caseSensitive;
-	private List _columns = new ArrayList();
+	private List<DocumentComparatorOrderBy> _columns =
+		new ArrayList<DocumentComparatorOrderBy>();
 
 }

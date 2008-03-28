@@ -40,7 +40,7 @@ public class EmptyProfile implements Profile {
 		return null;
 	}
 
-	public Set getAttributes() {
+	public Set<Attribute> getAttributes() {
 		return null;
 	}
 
@@ -48,7 +48,7 @@ public class EmptyProfile implements Profile {
 		return null;
 	}
 
-	public Set getComponents() {
+	public Set<Component> getComponents() {
 		return null;
 	}
 

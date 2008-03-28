@@ -88,9 +88,9 @@ public class ShoppingCouponServiceUtil {
 		return shoppingCouponService.getCoupon(plid, couponId);
 	}
 
-	public static java.util.List search(long plid, long companyId,
-		java.lang.String code, boolean active, java.lang.String discountType,
-		boolean andOperator, int begin, int end)
+	public static java.util.List<com.liferay.portlet.shopping.model.ShoppingCoupon> search(
+		long plid, long companyId, java.lang.String code, boolean active,
+		java.lang.String discountType, boolean andOperator, int begin, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ShoppingCouponService shoppingCouponService = ShoppingCouponServiceFactory.getService();

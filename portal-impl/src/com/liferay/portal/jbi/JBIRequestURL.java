@@ -46,7 +46,7 @@ public abstract class JBIRequestURL {
 	}
 
 	public JBIRequestURL(User user) {
-		_params = new LinkedHashMap();
+		_params = new LinkedHashMap<String, String>();
 
 		if (user != null) {
 			_user = user;
@@ -60,14 +60,15 @@ public abstract class JBIRequestURL {
 		}
 	}
 
-	public void addParameterMap(Map parameterMap) {
-		Iterator itr = parameterMap.entrySet().iterator();
+	public void addParameterMap(Map<String, String[]> parameterMap) {
+		Iterator<Map.Entry<String, String[]>> itr =
+			parameterMap.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<String, String[]> entry = itr.next();
 
-			String key = (String)entry.getKey();
-			String[] value = (String[])entry.getValue();
+			String key = entry.getKey();
+			String[] value = entry.getValue();
 
 			if ((Validator.isNotNull(key)) && (value != null) &&
 				(value.length > 0) && (Validator.isNotNull(value[0]))) {
@@ -112,6 +113,6 @@ public abstract class JBIRequestURL {
 	protected abstract String getURL();
 
 	private User _user;
-	private Map _params;
+	private Map<String, String> _params;
 
 }

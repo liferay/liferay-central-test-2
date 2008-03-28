@@ -34,7 +34,7 @@ import java.util.List;
  */
 public class News implements Serializable {
 
-	public News(String feedURL, String name, List articles) {
+	public News(String feedURL, String name, List<Article> articles) {
 		_feedURL = feedURL;
 		_name = name;
 		_articles = articles;
@@ -48,12 +48,12 @@ public class News implements Serializable {
 		return _name;
 	}
 
-	public List getArticles() {
+	public List<Article> getArticles() {
 		return _articles;
 	}
 
 	private String _feedURL;
 	private String _name;
-	private List _articles;
+	private List<Article> _articles;
 
 }

@@ -57,7 +57,7 @@ public class SCProductEntryServiceUtil {
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List thumbnails, java.util.List fullImages,
+		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -75,7 +75,7 @@ public class SCProductEntryServiceUtil {
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List thumbnails, java.util.List fullImages,
+		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.PortalException,
@@ -111,7 +111,7 @@ public class SCProductEntryServiceUtil {
 		java.lang.String longDescription, java.lang.String pageURL,
 		java.lang.String author, java.lang.String repoGroupId,
 		java.lang.String repoArtifactId, long[] licenseIds,
-		java.util.List thumbnails, java.util.List fullImages)
+		java.util.List<byte[]> thumbnails, java.util.List<byte[]> fullImages)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		SCProductEntryService scProductEntryService = SCProductEntryServiceFactory.getService();

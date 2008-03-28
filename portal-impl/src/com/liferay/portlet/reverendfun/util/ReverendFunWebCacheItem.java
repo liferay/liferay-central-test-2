@@ -49,7 +49,8 @@ public class ReverendFunWebCacheItem implements WebCacheItem {
 	}
 
 	public Object convert(String key) throws WebCacheException {
-		Set dates = new TreeSet(new StringComparator(false, true));
+		Set<String> dates = new TreeSet<String>(
+			new StringComparator(false, true));
 
 		try {
 			DateFormat dateFormatYMD = new SimpleDateFormat("yyyyMMdd");

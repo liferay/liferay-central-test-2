@@ -166,7 +166,8 @@ public interface ShoppingItemLocalService {
 		boolean mediumImage, java.lang.String mediumImageURL,
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
 		boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -181,7 +182,8 @@ public interface ShoppingItemLocalService {
 		boolean mediumImage, java.lang.String mediumImageURL,
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
 		java.lang.String[] communityPermissions,
 		java.lang.String[] guestPermissions)
 		throws com.liferay.portal.SystemException,
@@ -197,7 +199,8 @@ public interface ShoppingItemLocalService {
 		boolean mediumImage, java.lang.String mediumImageURL,
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices,
 		java.lang.Boolean addCommunityPermissions,
 		java.lang.Boolean addGuestPermissions,
 		java.lang.String[] communityPermissions,
@@ -243,11 +246,12 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public int getCategoriesItemsCount(java.util.List categoryIds)
+	public int getCategoriesItemsCount(java.util.List<Long> categoryIds)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getFeaturedItems(long groupId, long categoryId,
-		int numOfItems) throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getFeaturedItems(
+		long groupId, long categoryId, int numOfItems)
+		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.shopping.model.ShoppingItem getItem(long itemId)
 		throws com.liferay.portal.SystemException,
@@ -273,10 +277,11 @@ public interface ShoppingItemLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getItems(long categoryId)
-		throws com.liferay.portal.SystemException;
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getItems(
+		long categoryId) throws com.liferay.portal.SystemException;
 
-	public java.util.List getItems(long categoryId, int begin, int end,
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getItems(
+		long categoryId, int begin, int end,
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
@@ -288,12 +293,13 @@ public interface ShoppingItemLocalService {
 	public int getItemsCount(long categoryId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List getSaleItems(long groupId, long categoryId,
-		int numOfItems) throws com.liferay.portal.SystemException;
-
-	public java.util.List search(long groupId, long[] categoryIds,
-		java.lang.String keywords, int begin, int end)
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> getSaleItems(
+		long groupId, long categoryId, int numOfItems)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.shopping.model.ShoppingItem> search(
+		long groupId, long[] categoryIds, java.lang.String keywords, int begin,
+		int end) throws com.liferay.portal.SystemException;
 
 	public int searchCount(long groupId, long[] categoryIds,
 		java.lang.String keywords) throws com.liferay.portal.SystemException;
@@ -308,7 +314,8 @@ public interface ShoppingItemLocalService {
 		boolean mediumImage, java.lang.String mediumImageURL,
 		java.io.File mediumFile, boolean largeImage,
 		java.lang.String largeImageURL, java.io.File largeFile,
-		java.util.List itemFields, java.util.List itemPrices)
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemField> itemFields,
+		java.util.List<com.liferay.portlet.shopping.model.ShoppingItemPrice> itemPrices)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

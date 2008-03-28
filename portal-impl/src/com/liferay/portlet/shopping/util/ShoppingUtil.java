@@ -102,20 +102,19 @@ public class ShoppingUtil {
 		return itemPrice.getPrice() - calculateDiscountPrice(itemPrice);
 	}
 
-	public static double calculateActualSubtotal(Map items)
+	public static double calculateActualSubtotal(
+			Map<ShoppingCartItem, Integer> items)
 		throws PortalException, SystemException {
 
 		return calculateSubtotal(items) - calculateDiscountSubtotal(items);
 	}
 
-	public static double calculateActualSubtotal(List orderItems) {
+	public static double calculateActualSubtotal(
+		List<ShoppingOrderItem> orderItems) {
+
 		double subtotal = 0.0;
 
-		Iterator itr = orderItems.iterator();
-
-		while (itr.hasNext()) {
-			ShoppingOrderItem orderItem = (ShoppingOrderItem)itr.next();
-
+		for (ShoppingOrderItem orderItem : orderItems) {
 			subtotal += orderItem.getPrice() * orderItem.getQuantity();
 		}
 
@@ -123,7 +122,7 @@ public class ShoppingUtil {
 	}
 
 	public static double calculateAlternativeShipping(
-			Map items, int altShipping)
+			Map<ShoppingCartItem, Integer> items, int altShipping)
 		throws PortalException, SystemException {
 
 		double shipping = calculateShipping(items);
@@ -131,12 +130,13 @@ public class ShoppingUtil {
 
 		ShoppingPreferences prefs = null;
 
-		Iterator itr = items.entrySet().iterator();
+		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
+			items.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-			ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
+			ShoppingCartItem cartItem = entry.getKey();
 
 			ShoppingItem item = cartItem.getItem();
 
@@ -175,14 +175,15 @@ public class ShoppingUtil {
 	}
 
 	public static double calculateCouponDiscount(
-			Map items, ShoppingCoupon coupon)
+			Map<ShoppingCartItem, Integer> items, ShoppingCoupon coupon)
 		throws PortalException, SystemException {
 
 		return calculateCouponDiscount(items, null, coupon);
 	}
 
 	public static double calculateCouponDiscount(
-			Map items, String stateId, ShoppingCoupon coupon)
+			Map<ShoppingCartItem, Integer> items, String stateId,
+			ShoppingCoupon coupon)
 		throws PortalException, SystemException {
 
 		double discount = 0.0;
@@ -197,27 +198,29 @@ public class ShoppingUtil {
 		String[] skus = StringUtil.split(coupon.getLimitSkus());
 
 		if ((categoryIds.length > 0) || (skus.length > 0)) {
-			Set categoryIdsSet = new HashSet();
+			Set<String> categoryIdsSet = new HashSet<String>();
 
-			for (int i = 0; i < categoryIds.length; i++) {
-				categoryIdsSet.add(categoryIds[i]);
+			for (String categoryId : categoryIds) {
+				categoryIdsSet.add(categoryId);
 			}
 
-			Set skusSet = new HashSet();
+			Set<String> skusSet = new HashSet<String>();
 
-			for (int i = 0; i < skus.length; i++) {
-				skusSet.add(skus[i]);
+			for (String sku : skus) {
+				skusSet.add(sku);
 			}
 
-			Map newItems = new HashMap();
+			Map<ShoppingCartItem, Integer> newItems =
+				new HashMap<ShoppingCartItem, Integer>();
 
-			Iterator itr = items.entrySet().iterator();
+			Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
+				items.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-				ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
-				Integer count = (Integer)entry.getValue();
+				ShoppingCartItem cartItem = entry.getKey();
+				Integer count = entry.getValue();
 
 				ShoppingItem item = cartItem.getItem();
 
@@ -262,7 +265,8 @@ public class ShoppingUtil {
 		return discount;
 	}
 
-	public static double calculateDiscountPercent(Map items)
+	public static double calculateDiscountPercent(
+			Map<ShoppingCartItem, Integer> items)
 		throws PortalException, SystemException {
 
 		double discount =
@@ -291,18 +295,20 @@ public class ShoppingUtil {
 		return itemPrice.getPrice() * itemPrice.getDiscount();
 	}
 
-	public static double calculateDiscountSubtotal(Map items)
+	public static double calculateDiscountSubtotal(
+			Map<ShoppingCartItem, Integer> items)
 		throws PortalException, SystemException {
 
 		double subtotal = 0.0;
 
-		Iterator itr = items.entrySet().iterator();
+		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
+			items.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-			ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
-			Integer count = (Integer)entry.getValue();
+			ShoppingCartItem cartItem = entry.getKey();
+			Integer count = entry.getValue();
 
 			ShoppingItem item = cartItem.getItem();
 
@@ -312,7 +318,8 @@ public class ShoppingUtil {
 		return subtotal;
 	}
 
-	public static double calculateInsurance(Map items)
+	public static double calculateInsurance(
+			Map<ShoppingCartItem, Integer> items)
 		throws PortalException, SystemException {
 
 		double insurance = 0.0;
@@ -320,13 +327,14 @@ public class ShoppingUtil {
 
 		ShoppingPreferences prefs = null;
 
-		Iterator itr = items.entrySet().iterator();
+		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
+			items.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-			ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
-			Integer count = (Integer)entry.getValue();
+			ShoppingCartItem cartItem = entry.getKey();
+			Integer count = entry.getValue();
 
 			ShoppingItem item = cartItem.getItem();
 
@@ -381,7 +389,7 @@ public class ShoppingUtil {
 		return itemPrice.getPrice() * count;
 	}
 
-	public static double calculateShipping(Map items)
+	public static double calculateShipping(Map<ShoppingCartItem, Integer> items)
 		throws PortalException, SystemException {
 
 		double shipping = 0.0;
@@ -389,13 +397,14 @@ public class ShoppingUtil {
 
 		ShoppingPreferences prefs = null;
 
-		Iterator itr = items.entrySet().iterator();
+		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
+			items.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-			ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
-			Integer count = (Integer)entry.getValue();
+			ShoppingCartItem cartItem = entry.getKey();
+			Integer count = entry.getValue();
 
 			ShoppingItem item = cartItem.getItem();
 
@@ -450,18 +459,19 @@ public class ShoppingUtil {
 		return shipping;
 	}
 
-	public static double calculateSubtotal(Map items)
+	public static double calculateSubtotal(Map<ShoppingCartItem, Integer> items)
 		throws PortalException, SystemException {
 
 		double subtotal = 0.0;
 
-		Iterator itr = items.entrySet().iterator();
+		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
+			items.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-			ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
-			Integer count = (Integer)entry.getValue();
+			ShoppingCartItem cartItem = entry.getKey();
+			Integer count = entry.getValue();
 
 			ShoppingItem item = cartItem.getItem();
 
@@ -471,19 +481,21 @@ public class ShoppingUtil {
 		return subtotal;
 	}
 
-	public static double calculateTax(Map items, String stateId)
+	public static double calculateTax(
+			Map<ShoppingCartItem, Integer> items, String stateId)
 		throws PortalException, SystemException {
 
 		double tax = 0.0;
 
 		ShoppingPreferences prefs = null;
 
-		Iterator itr = items.entrySet().iterator();
+		Iterator<Map.Entry<ShoppingCartItem, Integer>> itr =
+			items.entrySet().iterator();
 
 		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
+			Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-			ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
+			ShoppingCartItem cartItem = entry.getKey();
 
 			ShoppingItem item = cartItem.getItem();
 
@@ -505,10 +517,10 @@ public class ShoppingUtil {
 			itr = items.entrySet().iterator();
 
 			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
+				Map.Entry<ShoppingCartItem, Integer> entry = itr.next();
 
-				ShoppingCartItem cartItem = (ShoppingCartItem)entry.getKey();
-				Integer count = (Integer)entry.getValue();
+				ShoppingCartItem cartItem = entry.getKey();
+				Integer count = entry.getValue();
 
 				ShoppingItem item = cartItem.getItem();
 
@@ -524,8 +536,8 @@ public class ShoppingUtil {
 	}
 
 	public static double calculateTotal(
-			Map items, String stateId, ShoppingCoupon coupon, int altShipping,
-			boolean insure)
+			Map<ShoppingCartItem, Integer> items, String stateId,
+			ShoppingCoupon coupon, int altShipping, boolean insure)
 		throws PortalException, SystemException {
 
 		double actualSubtotal = calculateActualSubtotal(items);
@@ -552,8 +564,8 @@ public class ShoppingUtil {
 	public static double calculateTotal(ShoppingOrder order)
 		throws PortalException, SystemException {
 
-		List orderItems = ShoppingOrderItemLocalServiceUtil.getOrderItems(
-			order.getOrderId());
+		List<ShoppingOrderItem> orderItems =
+			ShoppingOrderItemLocalServiceUtil.getOrderItems(order.getOrderId());
 
 		double total =
 			calculateActualSubtotal(orderItems) + order.getTax() +
@@ -737,19 +749,19 @@ public class ShoppingUtil {
 		ShoppingItem item, ShoppingItemField[] itemFields,
 		String[] fieldsArray) {
 
-		Set fieldsValues = new HashSet();
+		Set<String> fieldsValues = new HashSet<String>();
 
-		for (int i = 0; i < fieldsArray.length; i++) {
-			int pos = fieldsArray[i].indexOf("=");
+		for (String fields : fieldsArray) {
+			int pos = fields.indexOf("=");
 
-			String fieldValue = fieldsArray[i].substring(
-				pos + 1, fieldsArray[i].length()).trim();
+			String fieldValue = fields.substring(
+				pos + 1, fields.length()).trim();
 
 			fieldsValues.add(fieldValue);
 		}
 
-		List names = new ArrayList();
-		List values = new ArrayList();
+		List<String> names = new ArrayList<String>();
+		List<String[]> values = new ArrayList<String[]>();
 
 		for (int i = 0; i < itemFields.length; i++) {
 			names.add(itemFields[i].getName());
@@ -758,9 +770,7 @@ public class ShoppingUtil {
 
 		int numOfRows = 1;
 
-		for (int i = 0; i < values.size(); i++) {
-			String[] vArray = (String[])values.get(i);
-
+		for (String[] vArray : values) {
 			numOfRows = numOfRows * vArray.length;
 		}
 
@@ -773,12 +783,12 @@ public class ShoppingUtil {
 				int numOfRepeats = 1;
 
 				for (int k = j + 1; k < values.size(); k++) {
-					String[] vArray = (String[])values.get(k);
+					String[] vArray = values.get(k);
 
 					numOfRepeats = numOfRepeats * vArray.length;
 				}
 
-				String[] vArray = (String[])values.get(j);
+				String[] vArray = values.get(j);
 
 				int arrayPos;
 				for (arrayPos = i / numOfRepeats;
@@ -859,12 +869,9 @@ public class ShoppingUtil {
 
 		int minQuantity = item.getMinQuantity();
 
-		List itemPrices = item.getItemPrices();
+		List<ShoppingItemPrice> itemPrices = item.getItemPrices();
 
-		for (int i = 0; i < itemPrices.size(); i++) {
-			ShoppingItemPrice itemPrice =
-				(ShoppingItemPrice)itemPrices.get(i);
-
+		for (ShoppingItemPrice itemPrice : itemPrices) {
 			if (minQuantity > itemPrice.getMinQuantity()) {
 				minQuantity = itemPrice.getMinQuantity();
 			}
@@ -1026,7 +1033,8 @@ public class ShoppingUtil {
 		}
 	}
 
-	public static boolean meetsMinOrder(ShoppingPreferences prefs, Map items)
+	public static boolean meetsMinOrder(
+			ShoppingPreferences prefs, Map<ShoppingCartItem, Integer> items)
 		throws PortalException, SystemException {
 
 		if ((prefs.getMinOrder() > 0) &&
@@ -1044,12 +1052,9 @@ public class ShoppingUtil {
 
 		ShoppingItemPrice itemPrice = null;
 
-		List itemPrices = item.getItemPrices();
+		List<ShoppingItemPrice> itemPrices = item.getItemPrices();
 
-		for (int i = 0; i < itemPrices.size(); i++) {
-			ShoppingItemPrice temp =
-				(ShoppingItemPrice)itemPrices.get(i);
-
+		for (ShoppingItemPrice temp : itemPrices) {
 			int minQty = temp.getMinQuantity();
 			int maxQty = temp.getMaxQuantity();
 

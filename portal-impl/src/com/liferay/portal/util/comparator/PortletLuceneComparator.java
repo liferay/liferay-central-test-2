@@ -35,12 +35,10 @@ import java.util.Comparator;
  * @author Brian Wing Shun Chan
  *
  */
-public class PortletLuceneComparator implements Comparator, Serializable {
+public class PortletLuceneComparator
+	implements Comparator<Portlet>, Serializable {
 
-	public int compare(Object obj1, Object obj2) {
-		Portlet portlet1 = (Portlet)obj1;
-		Portlet portlet2 = (Portlet)obj2;
-
+	public int compare(Portlet portlet1, Portlet portlet2) {
 		String portletId1 = portlet1.getPortletId();
 		String portletId2 = portlet2.getPortletId();
 

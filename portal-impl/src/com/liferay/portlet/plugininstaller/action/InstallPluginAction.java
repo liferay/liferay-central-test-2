@@ -25,6 +25,7 @@ package com.liferay.portlet.plugininstaller.action;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.events.GlobalStartupAction;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
+import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Constants;
@@ -203,7 +204,7 @@ public class InstallPluginAction extends PortletAction {
 				_log.info("Registering auto deploy directories");
 			}
 
-			List autoDeployListeners =
+			List<AutoDeployListener> autoDeployListeners =
 				GlobalStartupAction.getAutoDeployListeners();
 
 			AutoDeployDir autoDeployDir = new AutoDeployDir(

@@ -299,7 +299,8 @@ public class ShoppingCartLocalServiceUtil {
 		return shoppingCartLocalService.getCart(userId, groupId);
 	}
 
-	public static java.util.Map getItems(long groupId, java.lang.String itemIds)
+	public static java.util.Map<com.liferay.portlet.shopping.model.ShoppingCartItem, Integer> getItems(
+		long groupId, java.lang.String itemIds)
 		throws com.liferay.portal.SystemException {
 		ShoppingCartLocalService shoppingCartLocalService = ShoppingCartLocalServiceFactory.getService();
 
