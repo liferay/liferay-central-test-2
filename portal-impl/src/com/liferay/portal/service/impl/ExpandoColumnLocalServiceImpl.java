@@ -271,7 +271,7 @@ public class ExpandoColumnLocalServiceImpl
 	protected void validate(String name)
 		throws PortalException, SystemException {
 
-		if (!Validator.isNull(name)) {
+		if (Validator.isNull(name)) {
 			throw new ExpandoColumnNameException();
 		}
 	}

@@ -26,6 +26,7 @@ import com.liferay.portal.ExpandoTableRowException;
 import com.liferay.portal.ExpandoValueClassPKException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ExpandoColumn;
 import com.liferay.portal.model.ExpandoTableRow;
 import com.liferay.portal.model.ExpandoValue;
@@ -66,12 +67,6 @@ public class ExpandoValueLocalServiceImpl
 		expandoValue.setValue(value);
 
 		return expandoValuePersistence.update(expandoValue, false);
-	}
-
-	public ExpandoValue getValue(long classPK, long columnId)
-		throws PortalException, SystemException {
-
-		return expandoValuePersistence.findByC_C(classPK, columnId);
 	}
 
 	public void deleteValue(long valueId)
@@ -144,6 +139,12 @@ public class ExpandoValueLocalServiceImpl
 		return expandoTableRowPersistence.getExpandoValuesSize(rowId);
 	}
 
+	public ExpandoValue getValue(long classPK, long columnId)
+		throws PortalException, SystemException {
+
+		return expandoValuePersistence.findByC_C(classPK, columnId);
+	}
+
 	public List<ExpandoValue> getValues(long classPK)
 		throws PortalException, SystemException {
 
@@ -178,11 +179,18 @@ public class ExpandoValueLocalServiceImpl
 
 			expandoValue.setClassPK(classPK);
 			expandoValue.setColumnId(columnId);
+			expandoValue.setValue(value);
+
+			expandoValuePersistence.update(expandoValue, false);
 		}
 
-		expandoValue.setValue(value);
+		if (Validator.isNotNull(value)) {
+			expandoValue.setValue(value);
 
-		return expandoValuePersistence.update(expandoValue, false);
+			expandoValuePersistence.update(expandoValue, false);
+		}
+
+		return expandoValue;
 	}
 
 	public long setRowValues(
