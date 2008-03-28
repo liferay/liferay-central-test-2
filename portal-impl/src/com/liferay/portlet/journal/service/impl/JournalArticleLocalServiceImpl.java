@@ -548,27 +548,19 @@ public class JournalArticleLocalServiceImpl
 		}
 
 		for (JournalArticle article : articles) {
-			Date reviewDate = article.getReviewDate();
+			String articleURL = StringPool.BLANK;
 
-			if (reviewDate != null) {
-				long diff = reviewDate.getTime() - now.getTime();
+			long ownerId = article.getGroupId();
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+			long plid = PortletKeys.PREFS_PLID_SHARED;
+			String portletId = PortletKeys.JOURNAL;
 
-				if ((diff > 0) && (diff < CheckArticleJob.INTERVAL)) {
-					String articleURL = StringPool.BLANK;
+			PortletPreferences prefs =
+				portletPreferencesLocalService.getPreferences(
+					article.getCompanyId(), ownerId, ownerType, plid,
+					portletId);
 
-					long ownerId = article.getGroupId();
-					int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
-					long plid = PortletKeys.PREFS_PLID_SHARED;
-					String portletId = PortletKeys.JOURNAL;
-
-					PortletPreferences prefs =
-						portletPreferencesLocalService.getPreferences(
-							article.getCompanyId(), ownerId, ownerType, plid,
-							portletId);
-
-					sendEmail(article, articleURL, prefs, "review");
-				}
-			}
+			sendEmail(article, articleURL, prefs, "review");
 		}
 	}
 
