@@ -15345,6 +15345,10 @@ Liferay.Util = {
 				boxObj.append('<option value="' + value[0] + '">' + value[1] + '</option>');
 			}
 		);
+
+		if (Liferay.Browser.is_ie) {
+			boxObj.css('width', 'auto');
+		}
 	},
 
 	sortByAscending: function(a, b) {
@@ -20755,6 +20759,7 @@ Liferay.Session = {
 		instance.banner = new jQuery;
 
 		var urlBase = themeDisplay.getPathMain() + '/portal/';
+
 		instance._sessionUrls = {
 			expire: urlBase + 'expire_session',
 			extend: urlBase + 'extend_session'
@@ -20764,7 +20769,7 @@ Liferay.Session = {
 			function() {
 				instance.checkState();
 			},
-		instance._timeoutDiff);
+			instance._timeoutDiff);
 
 		var timeoutMinutes = instance._timeout;
 		var timeLeft = instance._warning;
@@ -20856,6 +20861,7 @@ Liferay.Session = {
 				}
 			);
 		}
+
 		instance.setCookie('expired');
 
 		if (instance.redirectOnExpire) {
@@ -20869,16 +20875,18 @@ Liferay.Session = {
 		if (instance._countdownTimer) {
 			clearInterval(instance._countdownTimer);
 		}
+
 		jQuery.ajax(
 			{
 				url: instance._sessionUrls.extend
 			}
 		);
+
 		document.title = instance._originalTitle;
 
-		if (instance._sessionWarning) {
-			clearTimeout(instance._sessionWarning);
-		}
+		instance._currentTime = instance.sessionTimeoutWarning;
+
+		clearTimeout(instance._sessionExpired);
 
 		instance._sessionWarning = setTimeout(
 			function() {
@@ -20889,7 +20897,7 @@ Liferay.Session = {
 					instance.extend();
 				}
 			},
-			instance.sessionTimeoutWarning
+			instance._timeoutDiff
 		);
 
 		instance.setCookie();
