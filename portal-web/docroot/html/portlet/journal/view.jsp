@@ -178,11 +178,11 @@ portletURL.setParameter("tabs1", tabs1);
 
 				// Modified date
 
-				row.addText(dateFormatDate.format(article.getModifiedDate()), rowURL);
+				row.addText(dateFormatDateTime.format(article.getModifiedDate()), rowURL);
 
 				// Display date
 
-				row.addText(dateFormatDate.format(article.getDisplayDate()), rowURL);
+				row.addText(dateFormatDateTime.format(article.getDisplayDate()), rowURL);
 
 				// Author
 
