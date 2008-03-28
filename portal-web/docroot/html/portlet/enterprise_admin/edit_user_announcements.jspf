@@ -1,0 +1,131 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<%@ page import="com.liferay.portal.model.ExpandoColumn"%>
+<%@ page import="com.liferay.portal.model.ExpandoValue"%>
+<%@ page import="com.liferay.portal.model.impl.ExpandoColumnImpl"%>
+<%@ page import="com.liferay.portal.service.ExpandoColumnLocalServiceUtil"%>
+<%@ page import="com.liferay.portal.service.ExpandoValueLocalServiceUtil"%>
+<%@ page import="com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl"%>
+
+<%
+long userClassNameId = PortalUtil.getClassNameId(User.class.getName());
+
+List<ExpandoColumn[]> typeOptions = new ArrayList<ExpandoColumn[]>();
+
+String[] types = AnnouncementsEntryImpl.TYPES;
+
+for (int i = 0; i < types.length; i++) {
+	String emailColName =
+		"announcements-delivery-by-email-type-" + types[i];
+
+	String smsColName =
+		"announcements-delivery-by-sms-type-" + types[i];
+
+	ExpandoColumn emailColumn = ExpandoColumnLocalServiceUtil.setColumn(userClassNameId, emailColName, ExpandoColumnImpl.BOOLEAN);
+
+	ExpandoColumn smsColumn = ExpandoColumnLocalServiceUtil.setColumn(userClassNameId, smsColName, ExpandoColumnImpl.BOOLEAN);
+
+	typeOptions.add(new ExpandoColumn[]{emailColumn, smsColumn});
+}
+
+boolean hasSMS = Validator.isNotNull(contact2.getSmsSn());
+%>
+
+<liferay-ui:message key="select-the-delivery-options-for-alerts-and-announcements" />
+
+<br /><br />
+
+<table class="taglib-search-iterator">
+<tr class="portlet-section-header">
+	<th>
+		<liferay-ui:message key="type" />
+	</th>
+	<th>
+		<liferay-ui:message key="email" />
+	</th>
+	<th>
+		<liferay-ui:message key="sms" />
+
+		<c:if test="<%= !hasSMS %>">
+			(<liferay-ui:message key="no-sms-messenger-id" />)
+		</c:if>
+	</th>
+	<th>
+		<liferay-ui:message key="web" />
+	</th>
+</tr>
+<%
+int i = 0;
+
+Boolean emailOption, smsOption;
+
+for (ExpandoColumn[] typeOption : typeOptions) {
+	emailOption = Boolean.FALSE;
+	smsOption = Boolean.FALSE;
+
+	try {
+		ExpandoValue emailValue = ExpandoValueLocalServiceUtil.getValue(user2.getUserId(), typeOption[0].getColumnId());
+
+		emailOption = new Boolean(emailValue.getBoolean());
+	}
+	catch (Exception e) {
+	}
+
+	try {
+		ExpandoValue smsValue = ExpandoValueLocalServiceUtil.getValue(user2.getUserId(), typeOption[1].getColumnId());
+
+		smsOption = new Boolean(smsValue.getBoolean());
+	}
+	catch (Exception e) {
+	}
+
+	String style = "class=\"portlet-section-body\" onmouseover=\"this.className = 'portlet-section-body-hover';\" onmouseout=\"this.className = 'portlet-section-body';\"";
+
+	if (i % 2 == 1) {
+		style = "class=\"portlet-section-alternate\" onmouseover=\"this.className = 'portlet-section-alternate-hover';\" onmouseout=\"this.className = 'portlet-section-alternate';\"";
+	}
+	%>
+
+	<tr <%= style %>>
+		<td>
+			<liferay-ui:message key="<%= types[i] %>" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="<%= typeOption[0].getName() %>" defaultValue="<%= emailOption %>" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="<%= typeOption[1].getName() %>" defaultValue="<%= smsOption %>" disabled="<%= !hasSMS %>" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param='<%= "announcements-delivery-by-web-type-" + types[i] %>' defaultValue="<%= Boolean.TRUE %>" disabled="<%= true %>" />
+		</td>
+	</tr>
+	<%
+	i++;
+}
+%>
+</table>
+
+<br />

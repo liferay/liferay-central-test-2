@@ -55,8 +55,17 @@
 		<!-- References -->
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.mail" entity="Mail" />
+		<reference package-path="com.liferay.portal" entity="Company" />
+		<reference package-path="com.liferay.portal" entity="Contact" />
+		<reference package-path="com.liferay.portal" entity="ExpandoColumn" />
+		<reference package-path="com.liferay.portal" entity="ExpandoValue" />
+		<reference package-path="com.liferay.portal" entity="Group" />
+		<reference package-path="com.liferay.portal" entity="Organization" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
+		<reference package-path="com.liferay.portal" entity="Role" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portal" entity="UserGroup" />
 	</entity>
 	<entity name="AnnouncementsFlag" local-service="true" remote-service="true">
 

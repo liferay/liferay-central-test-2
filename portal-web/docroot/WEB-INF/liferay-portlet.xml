@@ -780,6 +780,7 @@
 		<portlet-name>84</portlet-name>
 		<icon>/html/portlet/announcements/icon.png</icon>
 		<struts-path>announcements</struts-path>
+		<scheduler-class>com.liferay.portlet.announcements.job.Scheduler</scheduler-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<use-default-template>false</use-default-template>

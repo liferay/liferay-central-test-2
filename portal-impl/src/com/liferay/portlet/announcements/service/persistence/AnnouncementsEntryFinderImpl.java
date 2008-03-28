@@ -33,6 +33,9 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl;
+import com.liferay.portlet.journal.model.JournalArticle;
+import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
+import com.liferay.portlet.journal.service.persistence.JournalArticleFinder;
 import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -65,6 +68,9 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 	public static String COUNT_BY_NOT_HIDDEN =
 		AnnouncementsEntryFinder.class.getName() + ".countByNotHidden";
 
+	public static String FIND_BY_DISPLAY_DATE =
+		AnnouncementsEntryFinder.class.getName() + ".findByDisplayDate";
+
 	public static String FIND_BY_HIDDEN =
 		AnnouncementsEntryFinder.class.getName() + ".findByHidden";
 
@@ -72,9 +78,12 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 		AnnouncementsEntryFinder.class.getName() + ".findByNotHidden";
 
 	public int countByScope(
-			long userId, long classNameId, long[] classPKs, int displayMonth,
-			int displayDay, int displayYear, int expirationMonth,
-			int expirationDay, int expirationYear, boolean alert, int flagValue)
+			long userId, long classNameId, long[] classPKs,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute, boolean alert,
+			int flagValue)
 		throws SystemException {
 
 		Session session = null;
@@ -101,8 +110,10 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			setClassPKs(qPos, classNameId, classPKs);
 
 			setDates(
-				qPos, displayMonth, displayDay, displayYear, expirationMonth,
-				expirationDay, expirationYear);
+				qPos, displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute);
 
 			qPos.add(alert);
 			qPos.add(userId);
@@ -130,9 +141,11 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 
 	public int countByScopes(
 			long userId, LinkedHashMap<Long, long[]> scopes,
-			int displayMonth, int displayDay, int displayYear,
-			int expirationMonth, int expirationDay, int expirationYear,
-			boolean alert, int flagValue)
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute, boolean alert,
+			int flagValue)
 		throws SystemException {
 
 		Session session = null;
@@ -158,8 +171,10 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			setClassPKs(qPos, scopes);
 
 			setDates(
-				qPos, displayMonth, displayDay, displayYear, expirationMonth,
-				expirationDay, expirationYear);
+				qPos, displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute);
 
 			qPos.add(alert);
 			qPos.add(userId);
@@ -185,11 +200,47 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 		}
 	}
 
+	public List<AnnouncementsEntry> findByDisplayDate(
+			Date displayDateLT, Date displayDateGT)
+		throws SystemException {
+
+		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(
+			displayDateLT);
+		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(
+			displayDateGT);
+
+		Session session = null;
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_DISPLAY_DATE);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("AnnouncementsEntry", AnnouncementsEntryImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(displayDateGT_TS);
+			qPos.add(displayDateLT_TS);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
 	public List<AnnouncementsEntry> findByScope(
-			long userId, long classNameId, long[] classPKs, int displayMonth,
-			int displayDay, int displayYear, int expirationMonth,
-			int expirationDay, int expirationYear, boolean alert, int flagValue,
-			int begin, int end)
+			long userId, long classNameId, long[] classPKs,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute, boolean alert,
+			int flagValue, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -216,8 +267,10 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			setClassPKs(qPos, classNameId, classPKs);
 
 			setDates(
-				qPos, displayMonth, displayDay, displayYear, expirationMonth,
-				expirationDay, expirationYear);
+				qPos, displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute);
 
 			qPos.add(alert);
 			qPos.add(userId);
@@ -236,9 +289,11 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 
 	public List<AnnouncementsEntry> findByScopes(
 			long userId, LinkedHashMap<Long, long[]> scopes,
-			int displayMonth, int displayDay, int displayYear,
-			int expirationMonth, int expirationDay, int expirationYear,
-			boolean alert, int flagValue, int begin, int end)
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute, boolean alert,
+			int flagValue, int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -264,8 +319,10 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			setClassPKs(qPos, scopes);
 
 			setDates(
-				qPos, displayMonth, displayDay, displayYear, expirationMonth,
-				expirationDay, expirationYear);
+				qPos, displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute);
 
 			qPos.add(alert);
 			qPos.add(userId);
@@ -358,14 +415,17 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 	}
 
 	protected void setDates(
-		QueryPos qPos, int displayMonth, int displayDay, int displayYear,
-		int expirationMonth, int expirationDay, int expirationYear) {
+		QueryPos qPos, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute) {
 
 		Date displayDate = null;
 
 		try {
 			displayDate = PortalUtil.getDate(
-				displayMonth, displayDay, displayYear, new PortalException());
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, new PortalException());
 		}
 		catch (PortalException pe) {
 			displayDate = new Date();
@@ -377,8 +437,9 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 
 		try {
 			expirationDate = PortalUtil.getDate(
-				expirationMonth, expirationDay, expirationYear,
-					new PortalException());
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute,
+				new PortalException());
 		}
 		catch (PortalException pe) {
 			expirationDate = new Date();

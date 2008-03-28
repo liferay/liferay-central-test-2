@@ -903,7 +903,21 @@ public class PropsUtil {
 
 	// Announcements Portlet
 
+	public static final String ANNOUNCEMENTS_EMAIL_FROM_ADDRESS = "announcements.email.from.address";
+
+	public static final String ANNOUNCEMENTS_EMAIL_FROM_NAME = "announcements.email.from.name";
+
+	public static final String ANNOUNCEMENTS_EMAIL_TO_ADDRESS = "announcements.email.to.address";
+
+	public static final String ANNOUNCEMENTS_EMAIL_TO_NAME = "announcements.email.to.name";
+
+	public static final String ANNOUNCEMENTS_EMAIL_SUBJECT = "announcements.email.subject";
+
+	public static final String ANNOUNCEMENTS_EMAIL_BODY = "announcements.email.body";
+
 	public static final String ANNOUNCEMENTS_ENTRY_TYPES = "announcements.entry.types";
+
+	public static final String ANNOUNCEMENTS_ENTRY_CHECK_INTERVAL = "announcements.entry.check.interval";
 
 	// Blogs Portlet
 

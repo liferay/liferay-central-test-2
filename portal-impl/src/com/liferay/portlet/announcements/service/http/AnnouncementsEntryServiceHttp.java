@@ -77,9 +77,11 @@ public class AnnouncementsEntryServiceHttp {
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry addEntry(
 		HttpPrincipal httpPrincipal, long plid, long classNameId, long classPK,
 		java.lang.String title, java.lang.String content, java.lang.String url,
-		java.lang.String type, int displayMonth, int displayDay,
-		int displayYear, int expirationMonth, int expirationDay,
-		int expirationYear, int priority, boolean alert)
+		java.lang.String type, int displayDateMonth, int displayDateDay,
+		int displayDateYear, int displayDateHour, int displayDateMinute,
+		int expirationDateMonth, int expirationDateDay, int expirationDateYear,
+		int expirationDateHour, int expirationDateMinute, int priority,
+		boolean alert)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -113,21 +115,29 @@ public class AnnouncementsEntryServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = new IntegerWrapper(displayMonth);
+			Object paramObj7 = new IntegerWrapper(displayDateMonth);
 
-			Object paramObj8 = new IntegerWrapper(displayDay);
+			Object paramObj8 = new IntegerWrapper(displayDateDay);
 
-			Object paramObj9 = new IntegerWrapper(displayYear);
+			Object paramObj9 = new IntegerWrapper(displayDateYear);
 
-			Object paramObj10 = new IntegerWrapper(expirationMonth);
+			Object paramObj10 = new IntegerWrapper(displayDateHour);
 
-			Object paramObj11 = new IntegerWrapper(expirationDay);
+			Object paramObj11 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj12 = new IntegerWrapper(expirationYear);
+			Object paramObj12 = new IntegerWrapper(expirationDateMonth);
 
-			Object paramObj13 = new IntegerWrapper(priority);
+			Object paramObj13 = new IntegerWrapper(expirationDateDay);
 
-			Object paramObj14 = new BooleanWrapper(alert);
+			Object paramObj14 = new IntegerWrapper(expirationDateYear);
+
+			Object paramObj15 = new IntegerWrapper(expirationDateHour);
+
+			Object paramObj16 = new IntegerWrapper(expirationDateMinute);
+
+			Object paramObj17 = new IntegerWrapper(priority);
+
+			Object paramObj18 = new BooleanWrapper(alert);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsEntryServiceUtil.class.getName(),
 					"addEntry",
@@ -135,7 +145,8 @@ public class AnnouncementsEntryServiceHttp {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
 						paramObj10, paramObj11, paramObj12, paramObj13,
-						paramObj14
+						paramObj14, paramObj15, paramObj16, paramObj17,
+						paramObj18
 					});
 
 			Object returnObj = null;
@@ -198,8 +209,10 @@ public class AnnouncementsEntryServiceHttp {
 	public static com.liferay.portlet.announcements.model.AnnouncementsEntry updateEntry(
 		HttpPrincipal httpPrincipal, long entryId, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,
-		int displayMonth, int displayDay, int displayYear, int expirationMonth,
-		int expirationDay, int expirationYear, int priority)
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, int priority)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -229,26 +242,35 @@ public class AnnouncementsEntryServiceHttp {
 				paramObj4 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new IntegerWrapper(displayMonth);
+			Object paramObj5 = new IntegerWrapper(displayDateMonth);
 
-			Object paramObj6 = new IntegerWrapper(displayDay);
+			Object paramObj6 = new IntegerWrapper(displayDateDay);
 
-			Object paramObj7 = new IntegerWrapper(displayYear);
+			Object paramObj7 = new IntegerWrapper(displayDateYear);
 
-			Object paramObj8 = new IntegerWrapper(expirationMonth);
+			Object paramObj8 = new IntegerWrapper(displayDateHour);
 
-			Object paramObj9 = new IntegerWrapper(expirationDay);
+			Object paramObj9 = new IntegerWrapper(displayDateMinute);
 
-			Object paramObj10 = new IntegerWrapper(expirationYear);
+			Object paramObj10 = new IntegerWrapper(expirationDateMonth);
 
-			Object paramObj11 = new IntegerWrapper(priority);
+			Object paramObj11 = new IntegerWrapper(expirationDateDay);
+
+			Object paramObj12 = new IntegerWrapper(expirationDateYear);
+
+			Object paramObj13 = new IntegerWrapper(expirationDateHour);
+
+			Object paramObj14 = new IntegerWrapper(expirationDateMinute);
+
+			Object paramObj15 = new IntegerWrapper(priority);
 
 			MethodWrapper methodWrapper = new MethodWrapper(AnnouncementsEntryServiceUtil.class.getName(),
 					"updateEntry",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
 						paramObj5, paramObj6, paramObj7, paramObj8, paramObj9,
-						paramObj10, paramObj11
+						paramObj10, paramObj11, paramObj12, paramObj13,
+						paramObj14, paramObj15
 					});
 
 			Object returnObj = null;

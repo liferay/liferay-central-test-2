@@ -38,6 +38,8 @@ import com.liferay.portlet.announcements.NoSuchEntryException;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
 
+import java.util.Calendar;
+
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
@@ -147,13 +149,35 @@ public class EditEntryAction extends PortletAction {
 		String url = ParamUtil.getString(req, "url");
 		String type = ParamUtil.getString(req, "type");
 
-		int displayMonth = ParamUtil.getInteger(req, "displayMonth");
-		int displayDay = ParamUtil.getInteger(req, "displayDay");
-		int displayYear = ParamUtil.getInteger(req, "displayYear");
+		int displayDateMonth = ParamUtil.getInteger(req, "displayDateMonth");
+		int displayDateDay = ParamUtil.getInteger(req, "displayDateDay");
+		int displayDateYear = ParamUtil.getInteger(req, "displayDateYear");
+		int displayDateHour = ParamUtil.getInteger(req, "displayDateHour");
+		int displayDateMinute = ParamUtil.getInteger(req, "displayDateMinute");
 
-		int expirationMonth = ParamUtil.getInteger(req, "expirationMonth");
-		int expirationDay = ParamUtil.getInteger(req, "expirationDay");
-		int expirationYear = ParamUtil.getInteger(req, "expirationYear");
+		int displayDateAmPm = ParamUtil.getInteger(req, "displayDateAmPm");
+
+		if (displayDateAmPm == Calendar.PM) {
+			displayDateHour += 12;
+		}
+
+		int expirationDateMonth = ParamUtil.getInteger(
+			req, "expirationDateMonth");
+		int expirationDateDay = ParamUtil.getInteger(req, "expirationDateDay");
+		int expirationDateYear = ParamUtil.getInteger(
+			req, "expirationDateYear");
+		int expirationDateHour = ParamUtil.getInteger(
+			req, "expirationDateHour");
+		int expirationDateMinute = ParamUtil.getInteger(
+			req, "expirationDateMinute");
+
+		int expirationDateAmPm =
+			ParamUtil.getInteger(req, "expirationDateAmPm");
+
+		if (expirationDateAmPm == Calendar.PM) {
+			expirationDateHour += 12;
+		}
+
 
 		int priority = ParamUtil.getInteger(req, "priority");
 		boolean alert = ParamUtil.getBoolean(req, "alert");
@@ -164,17 +188,20 @@ public class EditEntryAction extends PortletAction {
 
 			AnnouncementsEntryServiceUtil.addEntry(
 				themeDisplay.getPlid(), classNameId, classPK, title, content,
-				url, type, displayMonth, displayDay, displayYear,
-				expirationMonth, expirationDay, expirationYear, priority,
-				alert);
+				url, type, displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, priority, alert);
 		}
 		else {
 
 			// Update entry
 
 			AnnouncementsEntryServiceUtil.updateEntry(
-				entryId, title, content, url, type, displayMonth, displayDay,
-				displayYear, expirationMonth, expirationDay, expirationYear,
+				entryId, title, content, url, type, displayDateMonth,
+				displayDateDay, displayDateYear, displayDateHour,
+				displayDateMinute, expirationDateMonth, expirationDateDay,
+				expirationDateYear, expirationDateHour, expirationDateMinute,
 				priority);
 		}
 	}

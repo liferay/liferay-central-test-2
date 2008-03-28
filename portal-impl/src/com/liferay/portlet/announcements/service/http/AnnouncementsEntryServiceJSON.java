@@ -73,15 +73,19 @@ import org.json.JSONObject;
 public class AnnouncementsEntryServiceJSON {
 	public static JSONObject addEntry(long plid, long classNameId,
 		long classPK, java.lang.String title, java.lang.String content,
-		java.lang.String url, java.lang.String type, int displayMonth,
-		int displayDay, int displayYear, int expirationMonth,
-		int expirationDay, int expirationYear, int priority, boolean alert)
+		java.lang.String url, java.lang.String type, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
+		int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, int priority, boolean alert)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.announcements.model.AnnouncementsEntry returnValue = AnnouncementsEntryServiceUtil.addEntry(plid,
-				classNameId, classPK, title, content, url, type, displayMonth,
-				displayDay, displayYear, expirationMonth, expirationDay,
-				expirationYear, priority, alert);
+				classNameId, classPK, title, content, url, type,
+				displayDateMonth, displayDateDay, displayDateYear,
+				displayDateHour, displayDateMinute, expirationDateMonth,
+				expirationDateDay, expirationDateYear, expirationDateHour,
+				expirationDateMinute, priority, alert);
 
 		return AnnouncementsEntryJSONSerializer.toJSONObject(returnValue);
 	}
@@ -94,14 +98,17 @@ public class AnnouncementsEntryServiceJSON {
 
 	public static JSONObject updateEntry(long entryId, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,
-		int displayMonth, int displayDay, int displayYear, int expirationMonth,
-		int expirationDay, int expirationYear, int priority)
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, int priority)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.announcements.model.AnnouncementsEntry returnValue = AnnouncementsEntryServiceUtil.updateEntry(entryId,
-				title, content, url, type, displayMonth, displayDay,
-				displayYear, expirationMonth, expirationDay, expirationYear,
-				priority);
+				title, content, url, type, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, priority);
 
 		return AnnouncementsEntryJSONSerializer.toJSONObject(returnValue);
 	}

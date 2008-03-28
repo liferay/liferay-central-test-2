@@ -62,6 +62,24 @@ public class PropsValues {
 		PropsUtil.get(PropsUtil.ADMIN_RESERVED_SCREEN_NAMES),
 		StringPool.NEW_LINE);
 
+	public static final String ANNOUNCEMENTS_EMAIL_FROM_ADDRESS =
+		PropsUtil.get(PropsUtil.ANNOUNCEMENTS_EMAIL_FROM_ADDRESS);
+
+	public static final String ANNOUNCEMENTS_EMAIL_FROM_NAME =
+		PropsUtil.get(PropsUtil.ANNOUNCEMENTS_EMAIL_FROM_NAME);
+
+	public static final String ANNOUNCEMENTS_EMAIL_TO_ADDRESS =
+		PropsUtil.get(PropsUtil.ANNOUNCEMENTS_EMAIL_TO_ADDRESS);
+
+	public static final String ANNOUNCEMENTS_EMAIL_TO_NAME =
+		PropsUtil.get(PropsUtil.ANNOUNCEMENTS_EMAIL_TO_NAME);
+
+	public static final String ANNOUNCEMENTS_EMAIL_SUBJECT =
+		PropsUtil.get(PropsUtil.ANNOUNCEMENTS_EMAIL_SUBJECT);
+
+	public static final String ANNOUNCEMENTS_EMAIL_BODY =
+		PropsUtil.get(PropsUtil.ANNOUNCEMENTS_EMAIL_BODY);
+
 	public static final boolean AUTH_FORWARD_BY_LAST_PATH =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_FORWARD_BY_LAST_PATH));

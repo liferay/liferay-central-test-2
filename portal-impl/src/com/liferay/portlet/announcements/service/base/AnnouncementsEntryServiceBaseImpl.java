@@ -27,21 +27,80 @@ import com.liferay.counter.service.CounterLocalServiceFactory;
 import com.liferay.counter.service.CounterService;
 import com.liferay.counter.service.CounterServiceFactory;
 
+import com.liferay.mail.service.MailService;
+import com.liferay.mail.service.MailServiceFactory;
+
+import com.liferay.portal.service.CompanyLocalService;
+import com.liferay.portal.service.CompanyLocalServiceFactory;
+import com.liferay.portal.service.CompanyService;
+import com.liferay.portal.service.CompanyServiceFactory;
+import com.liferay.portal.service.ContactLocalService;
+import com.liferay.portal.service.ContactLocalServiceFactory;
+import com.liferay.portal.service.ContactService;
+import com.liferay.portal.service.ContactServiceFactory;
+import com.liferay.portal.service.ExpandoColumnLocalService;
+import com.liferay.portal.service.ExpandoColumnLocalServiceFactory;
+import com.liferay.portal.service.ExpandoColumnService;
+import com.liferay.portal.service.ExpandoColumnServiceFactory;
+import com.liferay.portal.service.ExpandoValueLocalService;
+import com.liferay.portal.service.ExpandoValueLocalServiceFactory;
+import com.liferay.portal.service.ExpandoValueService;
+import com.liferay.portal.service.ExpandoValueServiceFactory;
+import com.liferay.portal.service.GroupLocalService;
+import com.liferay.portal.service.GroupLocalServiceFactory;
+import com.liferay.portal.service.GroupService;
+import com.liferay.portal.service.GroupServiceFactory;
+import com.liferay.portal.service.OrganizationLocalService;
+import com.liferay.portal.service.OrganizationLocalServiceFactory;
+import com.liferay.portal.service.OrganizationService;
+import com.liferay.portal.service.OrganizationServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
 import com.liferay.portal.service.ResourceServiceFactory;
+import com.liferay.portal.service.RoleLocalService;
+import com.liferay.portal.service.RoleLocalServiceFactory;
+import com.liferay.portal.service.RoleService;
+import com.liferay.portal.service.RoleServiceFactory;
+import com.liferay.portal.service.UserGroupLocalService;
+import com.liferay.portal.service.UserGroupLocalServiceFactory;
+import com.liferay.portal.service.UserGroupService;
+import com.liferay.portal.service.UserGroupServiceFactory;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.CompanyPersistence;
+import com.liferay.portal.service.persistence.CompanyUtil;
+import com.liferay.portal.service.persistence.ContactPersistence;
+import com.liferay.portal.service.persistence.ContactUtil;
+import com.liferay.portal.service.persistence.ExpandoColumnPersistence;
+import com.liferay.portal.service.persistence.ExpandoColumnUtil;
+import com.liferay.portal.service.persistence.ExpandoValuePersistence;
+import com.liferay.portal.service.persistence.ExpandoValueUtil;
+import com.liferay.portal.service.persistence.GroupFinder;
+import com.liferay.portal.service.persistence.GroupFinderUtil;
+import com.liferay.portal.service.persistence.GroupPersistence;
+import com.liferay.portal.service.persistence.GroupUtil;
+import com.liferay.portal.service.persistence.OrganizationFinder;
+import com.liferay.portal.service.persistence.OrganizationFinderUtil;
+import com.liferay.portal.service.persistence.OrganizationPersistence;
+import com.liferay.portal.service.persistence.OrganizationUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
 import com.liferay.portal.service.persistence.ResourceUtil;
+import com.liferay.portal.service.persistence.RoleFinder;
+import com.liferay.portal.service.persistence.RoleFinderUtil;
+import com.liferay.portal.service.persistence.RolePersistence;
+import com.liferay.portal.service.persistence.RoleUtil;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserFinderUtil;
+import com.liferay.portal.service.persistence.UserGroupFinder;
+import com.liferay.portal.service.persistence.UserGroupFinderUtil;
+import com.liferay.portal.service.persistence.UserGroupPersistence;
+import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
@@ -139,6 +198,181 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		this.counterService = counterService;
 	}
 
+	public MailService getMailService() {
+		return mailService;
+	}
+
+	public void setMailService(MailService mailService) {
+		this.mailService = mailService;
+	}
+
+	public CompanyLocalService getCompanyLocalService() {
+		return companyLocalService;
+	}
+
+	public void setCompanyLocalService(CompanyLocalService companyLocalService) {
+		this.companyLocalService = companyLocalService;
+	}
+
+	public CompanyService getCompanyService() {
+		return companyService;
+	}
+
+	public void setCompanyService(CompanyService companyService) {
+		this.companyService = companyService;
+	}
+
+	public CompanyPersistence getCompanyPersistence() {
+		return companyPersistence;
+	}
+
+	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
+		this.companyPersistence = companyPersistence;
+	}
+
+	public ContactLocalService getContactLocalService() {
+		return contactLocalService;
+	}
+
+	public void setContactLocalService(ContactLocalService contactLocalService) {
+		this.contactLocalService = contactLocalService;
+	}
+
+	public ContactService getContactService() {
+		return contactService;
+	}
+
+	public void setContactService(ContactService contactService) {
+		this.contactService = contactService;
+	}
+
+	public ContactPersistence getContactPersistence() {
+		return contactPersistence;
+	}
+
+	public void setContactPersistence(ContactPersistence contactPersistence) {
+		this.contactPersistence = contactPersistence;
+	}
+
+	public ExpandoColumnLocalService getExpandoColumnLocalService() {
+		return expandoColumnLocalService;
+	}
+
+	public void setExpandoColumnLocalService(
+		ExpandoColumnLocalService expandoColumnLocalService) {
+		this.expandoColumnLocalService = expandoColumnLocalService;
+	}
+
+	public ExpandoColumnService getExpandoColumnService() {
+		return expandoColumnService;
+	}
+
+	public void setExpandoColumnService(
+		ExpandoColumnService expandoColumnService) {
+		this.expandoColumnService = expandoColumnService;
+	}
+
+	public ExpandoColumnPersistence getExpandoColumnPersistence() {
+		return expandoColumnPersistence;
+	}
+
+	public void setExpandoColumnPersistence(
+		ExpandoColumnPersistence expandoColumnPersistence) {
+		this.expandoColumnPersistence = expandoColumnPersistence;
+	}
+
+	public ExpandoValueLocalService getExpandoValueLocalService() {
+		return expandoValueLocalService;
+	}
+
+	public void setExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+		this.expandoValueLocalService = expandoValueLocalService;
+	}
+
+	public ExpandoValueService getExpandoValueService() {
+		return expandoValueService;
+	}
+
+	public void setExpandoValueService(ExpandoValueService expandoValueService) {
+		this.expandoValueService = expandoValueService;
+	}
+
+	public ExpandoValuePersistence getExpandoValuePersistence() {
+		return expandoValuePersistence;
+	}
+
+	public void setExpandoValuePersistence(
+		ExpandoValuePersistence expandoValuePersistence) {
+		this.expandoValuePersistence = expandoValuePersistence;
+	}
+
+	public GroupLocalService getGroupLocalService() {
+		return groupLocalService;
+	}
+
+	public void setGroupLocalService(GroupLocalService groupLocalService) {
+		this.groupLocalService = groupLocalService;
+	}
+
+	public GroupService getGroupService() {
+		return groupService;
+	}
+
+	public void setGroupService(GroupService groupService) {
+		this.groupService = groupService;
+	}
+
+	public GroupPersistence getGroupPersistence() {
+		return groupPersistence;
+	}
+
+	public void setGroupPersistence(GroupPersistence groupPersistence) {
+		this.groupPersistence = groupPersistence;
+	}
+
+	public GroupFinder getGroupFinder() {
+		return groupFinder;
+	}
+
+	public void setGroupFinder(GroupFinder groupFinder) {
+		this.groupFinder = groupFinder;
+	}
+
+	public OrganizationLocalService getOrganizationLocalService() {
+		return organizationLocalService;
+	}
+
+	public void setOrganizationLocalService(
+		OrganizationLocalService organizationLocalService) {
+		this.organizationLocalService = organizationLocalService;
+	}
+
+	public OrganizationService getOrganizationService() {
+		return organizationService;
+	}
+
+	public void setOrganizationService(OrganizationService organizationService) {
+		this.organizationService = organizationService;
+	}
+
+	public OrganizationPersistence getOrganizationPersistence() {
+		return organizationPersistence;
+	}
+
+	public void setOrganizationPersistence(
+		OrganizationPersistence organizationPersistence) {
+		this.organizationPersistence = organizationPersistence;
+	}
+
+	public OrganizationFinder getOrganizationFinder() {
+		return organizationFinder;
+	}
+
+	public void setOrganizationFinder(OrganizationFinder organizationFinder) {
+		this.organizationFinder = organizationFinder;
+	}
+
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -172,6 +406,38 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		this.resourceFinder = resourceFinder;
 	}
 
+	public RoleLocalService getRoleLocalService() {
+		return roleLocalService;
+	}
+
+	public void setRoleLocalService(RoleLocalService roleLocalService) {
+		this.roleLocalService = roleLocalService;
+	}
+
+	public RoleService getRoleService() {
+		return roleService;
+	}
+
+	public void setRoleService(RoleService roleService) {
+		this.roleService = roleService;
+	}
+
+	public RolePersistence getRolePersistence() {
+		return rolePersistence;
+	}
+
+	public void setRolePersistence(RolePersistence rolePersistence) {
+		this.rolePersistence = rolePersistence;
+	}
+
+	public RoleFinder getRoleFinder() {
+		return roleFinder;
+	}
+
+	public void setRoleFinder(RoleFinder roleFinder) {
+		this.roleFinder = roleFinder;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -202,6 +468,40 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 
 	public void setUserFinder(UserFinder userFinder) {
 		this.userFinder = userFinder;
+	}
+
+	public UserGroupLocalService getUserGroupLocalService() {
+		return userGroupLocalService;
+	}
+
+	public void setUserGroupLocalService(
+		UserGroupLocalService userGroupLocalService) {
+		this.userGroupLocalService = userGroupLocalService;
+	}
+
+	public UserGroupService getUserGroupService() {
+		return userGroupService;
+	}
+
+	public void setUserGroupService(UserGroupService userGroupService) {
+		this.userGroupService = userGroupService;
+	}
+
+	public UserGroupPersistence getUserGroupPersistence() {
+		return userGroupPersistence;
+	}
+
+	public void setUserGroupPersistence(
+		UserGroupPersistence userGroupPersistence) {
+		this.userGroupPersistence = userGroupPersistence;
+	}
+
+	public UserGroupFinder getUserGroupFinder() {
+		return userGroupFinder;
+	}
+
+	public void setUserGroupFinder(UserGroupFinder userGroupFinder) {
+		this.userGroupFinder = userGroupFinder;
 	}
 
 	public void afterPropertiesSet() {
@@ -237,6 +537,90 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 			counterService = CounterServiceFactory.getImpl();
 		}
 
+		if (mailService == null) {
+			mailService = MailServiceFactory.getImpl();
+		}
+
+		if (companyLocalService == null) {
+			companyLocalService = CompanyLocalServiceFactory.getImpl();
+		}
+
+		if (companyService == null) {
+			companyService = CompanyServiceFactory.getImpl();
+		}
+
+		if (companyPersistence == null) {
+			companyPersistence = CompanyUtil.getPersistence();
+		}
+
+		if (contactLocalService == null) {
+			contactLocalService = ContactLocalServiceFactory.getImpl();
+		}
+
+		if (contactService == null) {
+			contactService = ContactServiceFactory.getImpl();
+		}
+
+		if (contactPersistence == null) {
+			contactPersistence = ContactUtil.getPersistence();
+		}
+
+		if (expandoColumnLocalService == null) {
+			expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getImpl();
+		}
+
+		if (expandoColumnService == null) {
+			expandoColumnService = ExpandoColumnServiceFactory.getImpl();
+		}
+
+		if (expandoColumnPersistence == null) {
+			expandoColumnPersistence = ExpandoColumnUtil.getPersistence();
+		}
+
+		if (expandoValueLocalService == null) {
+			expandoValueLocalService = ExpandoValueLocalServiceFactory.getImpl();
+		}
+
+		if (expandoValueService == null) {
+			expandoValueService = ExpandoValueServiceFactory.getImpl();
+		}
+
+		if (expandoValuePersistence == null) {
+			expandoValuePersistence = ExpandoValueUtil.getPersistence();
+		}
+
+		if (groupLocalService == null) {
+			groupLocalService = GroupLocalServiceFactory.getImpl();
+		}
+
+		if (groupService == null) {
+			groupService = GroupServiceFactory.getImpl();
+		}
+
+		if (groupPersistence == null) {
+			groupPersistence = GroupUtil.getPersistence();
+		}
+
+		if (groupFinder == null) {
+			groupFinder = GroupFinderUtil.getFinder();
+		}
+
+		if (organizationLocalService == null) {
+			organizationLocalService = OrganizationLocalServiceFactory.getImpl();
+		}
+
+		if (organizationService == null) {
+			organizationService = OrganizationServiceFactory.getImpl();
+		}
+
+		if (organizationPersistence == null) {
+			organizationPersistence = OrganizationUtil.getPersistence();
+		}
+
+		if (organizationFinder == null) {
+			organizationFinder = OrganizationFinderUtil.getFinder();
+		}
+
 		if (resourceLocalService == null) {
 			resourceLocalService = ResourceLocalServiceFactory.getImpl();
 		}
@@ -251,6 +635,22 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 
 		if (resourceFinder == null) {
 			resourceFinder = ResourceFinderUtil.getFinder();
+		}
+
+		if (roleLocalService == null) {
+			roleLocalService = RoleLocalServiceFactory.getImpl();
+		}
+
+		if (roleService == null) {
+			roleService = RoleServiceFactory.getImpl();
+		}
+
+		if (rolePersistence == null) {
+			rolePersistence = RoleUtil.getPersistence();
+		}
+
+		if (roleFinder == null) {
+			roleFinder = RoleFinderUtil.getFinder();
 		}
 
 		if (userLocalService == null) {
@@ -268,6 +668,22 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
 		}
+
+		if (userGroupLocalService == null) {
+			userGroupLocalService = UserGroupLocalServiceFactory.getImpl();
+		}
+
+		if (userGroupService == null) {
+			userGroupService = UserGroupServiceFactory.getImpl();
+		}
+
+		if (userGroupPersistence == null) {
+			userGroupPersistence = UserGroupUtil.getPersistence();
+		}
+
+		if (userGroupFinder == null) {
+			userGroupFinder = UserGroupFinderUtil.getFinder();
+		}
 	}
 
 	protected AnnouncementsEntryLocalService announcementsEntryLocalService;
@@ -278,12 +694,41 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 	protected AnnouncementsFlagPersistence announcementsFlagPersistence;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
+	protected MailService mailService;
+	protected CompanyLocalService companyLocalService;
+	protected CompanyService companyService;
+	protected CompanyPersistence companyPersistence;
+	protected ContactLocalService contactLocalService;
+	protected ContactService contactService;
+	protected ContactPersistence contactPersistence;
+	protected ExpandoColumnLocalService expandoColumnLocalService;
+	protected ExpandoColumnService expandoColumnService;
+	protected ExpandoColumnPersistence expandoColumnPersistence;
+	protected ExpandoValueLocalService expandoValueLocalService;
+	protected ExpandoValueService expandoValueService;
+	protected ExpandoValuePersistence expandoValuePersistence;
+	protected GroupLocalService groupLocalService;
+	protected GroupService groupService;
+	protected GroupPersistence groupPersistence;
+	protected GroupFinder groupFinder;
+	protected OrganizationLocalService organizationLocalService;
+	protected OrganizationService organizationService;
+	protected OrganizationPersistence organizationPersistence;
+	protected OrganizationFinder organizationFinder;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;
 	protected ResourceFinder resourceFinder;
+	protected RoleLocalService roleLocalService;
+	protected RoleService roleService;
+	protected RolePersistence rolePersistence;
+	protected RoleFinder roleFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected UserGroupLocalService userGroupLocalService;
+	protected UserGroupService userGroupService;
+	protected UserGroupPersistence userGroupPersistence;
+	protected UserGroupFinder userGroupFinder;
 }

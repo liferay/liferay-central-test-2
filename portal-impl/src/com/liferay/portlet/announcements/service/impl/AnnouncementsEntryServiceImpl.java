@@ -54,9 +54,12 @@ public class AnnouncementsEntryServiceImpl
 
 	public AnnouncementsEntry addEntry(
 			long plid, long classNameId, long classPK, String title,
-			String content, String url, String type, int displayMonth,
-			int displayDay, int displayYear, int expirationMonth,
-			int expirationDay, int expirationYear, int priority, boolean alert)
+			String content, String url, String type, int displayDateMonth,
+			int displayDateDay, int displayDateYear, int displayDateHour,
+			int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute, int priority,
+			boolean alert)
 		throws PortalException, SystemException {
 
 		PermissionChecker permissionChecker = getPermissionChecker();
@@ -104,8 +107,10 @@ public class AnnouncementsEntryServiceImpl
 
 		return announcementsEntryLocalService.addEntry(
 			getUserId(), classNameId, classPK, title, content, url, type,
-			displayMonth, displayDay, displayYear, expirationMonth,
-			expirationDay, expirationYear, priority, alert);
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			priority, alert);
 	}
 
 	public void deleteEntry(long entryId)
@@ -119,18 +124,21 @@ public class AnnouncementsEntryServiceImpl
 
 	public AnnouncementsEntry updateEntry(
 			long entryId, String title, String content, String url,
-			String type, int displayMonth, int displayDay, int displayYear,
-			int expirationMonth, int expirationDay, int expirationYear,
-			int priority)
+			String type, int displayDateMonth, int displayDateDay,
+			int displayDateYear, int displayDateHour, int displayDateMinute,
+			int expirationDateMonth, int expirationDateDay,
+			int expirationDateYear, int expirationDateHour,
+			int expirationDateMinute, int priority)
 		throws PortalException, SystemException {
 
 		AnnouncementsEntryPermission.check(
 			getPermissionChecker(), entryId, ActionKeys.UPDATE);
 
 		return announcementsEntryLocalService.updateEntry(
-			entryId, title, content, url, type, displayMonth, displayDay,
-			displayYear, expirationMonth, expirationDay, expirationYear,
-			priority);
+			entryId, title, content, url, type, displayDateMonth,
+			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
+			expirationDateMonth, expirationDateDay, expirationDateYear,
+			expirationDateHour, expirationDateMinute, priority);
 	}
 
 }

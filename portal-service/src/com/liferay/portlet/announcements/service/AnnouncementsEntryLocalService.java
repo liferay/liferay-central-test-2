@@ -89,6 +89,46 @@ public interface AnnouncementsEntryLocalService {
 	public void setAnnouncementsFlagPersistence(
 		com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence announcementsFlagPersistence);
 
+	public com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence();
+
+	public void setCompanyPersistence(
+		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence);
+
+	public com.liferay.portal.service.persistence.ContactPersistence getContactPersistence();
+
+	public void setContactPersistence(
+		com.liferay.portal.service.persistence.ContactPersistence contactPersistence);
+
+	public com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence();
+
+	public void setExpandoColumnPersistence(
+		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence);
+
+	public com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence();
+
+	public void setExpandoValuePersistence(
+		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence);
+
+	public com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence();
+
+	public void setGroupPersistence(
+		com.liferay.portal.service.persistence.GroupPersistence groupPersistence);
+
+	public com.liferay.portal.service.persistence.GroupFinder getGroupFinder();
+
+	public void setGroupFinder(
+		com.liferay.portal.service.persistence.GroupFinder groupFinder);
+
+	public com.liferay.portal.service.persistence.OrganizationPersistence getOrganizationPersistence();
+
+	public void setOrganizationPersistence(
+		com.liferay.portal.service.persistence.OrganizationPersistence organizationPersistence);
+
+	public com.liferay.portal.service.persistence.OrganizationFinder getOrganizationFinder();
+
+	public void setOrganizationFinder(
+		com.liferay.portal.service.persistence.OrganizationFinder organizationFinder);
+
 	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
 
 	public void setResourcePersistence(
@@ -98,6 +138,16 @@ public interface AnnouncementsEntryLocalService {
 
 	public void setResourceFinder(
 		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
+
+	public com.liferay.portal.service.persistence.RolePersistence getRolePersistence();
+
+	public void setRolePersistence(
+		com.liferay.portal.service.persistence.RolePersistence rolePersistence);
+
+	public com.liferay.portal.service.persistence.RoleFinder getRoleFinder();
+
+	public void setRoleFinder(
+		com.liferay.portal.service.persistence.RoleFinder roleFinder);
 
 	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
 
@@ -109,13 +159,29 @@ public interface AnnouncementsEntryLocalService {
 	public void setUserFinder(
 		com.liferay.portal.service.persistence.UserFinder userFinder);
 
+	public com.liferay.portal.service.persistence.UserGroupPersistence getUserGroupPersistence();
+
+	public void setUserGroupPersistence(
+		com.liferay.portal.service.persistence.UserGroupPersistence userGroupPersistence);
+
+	public com.liferay.portal.service.persistence.UserGroupFinder getUserGroupFinder();
+
+	public void setUserGroupFinder(
+		com.liferay.portal.service.persistence.UserGroupFinder userGroupFinder);
+
 	public void afterPropertiesSet();
 
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry addEntry(
 		long userId, long classNameId, long classPK, java.lang.String title,
 		java.lang.String content, java.lang.String url, java.lang.String type,
-		int displayMonth, int displayDay, int displayYear, int expirationMonth,
-		int expirationDay, int expirationYear, int priority, boolean alert)
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, int priority, boolean alert)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void checkEntries()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -134,10 +200,12 @@ public interface AnnouncementsEntryLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getEntries(
-		long userId, long classNameId, long[] classPKs, int displayMonth,
-		int displayDay, int displayYear, int expirationMonth,
-		int expirationDay, int expirationYear, boolean alert, int flagValue,
-		int begin, int end)
+		long userId, long classNameId, long[] classPKs, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
+		int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean alert, int flagValue, int begin,
+		int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -149,9 +217,11 @@ public interface AnnouncementsEntryLocalService {
 
 	public java.util.List<com.liferay.portlet.announcements.model.AnnouncementsEntry> getEntries(
 		long userId, java.util.LinkedHashMap<Long, long[]> scopes,
-		int displayMonth, int displayDay, int displayYear, int expirationMonth,
-		int expirationDay, int expirationYear, boolean alert, int flagValue,
-		int begin, int end)
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean alert, int flagValue, int begin,
+		int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -165,8 +235,10 @@ public interface AnnouncementsEntryLocalService {
 			com.liferay.portal.PortalException;
 
 	public int getEntriesCount(long userId, long classNameId, long[] classPKs,
-		int displayMonth, int displayDay, int displayYear, int expirationMonth,
-		int expirationDay, int expirationYear, boolean alert, int flagValue)
+		int displayDateMonth, int displayDateDay, int displayDateYear,
+		int displayDateHour, int displayDateMinute, int expirationDateMonth,
+		int expirationDateDay, int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean alert, int flagValue)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -177,9 +249,11 @@ public interface AnnouncementsEntryLocalService {
 			com.liferay.portal.PortalException;
 
 	public int getEntriesCount(long userId,
-		java.util.LinkedHashMap<Long, long[]> scopes, int displayMonth,
-		int displayDay, int displayYear, int expirationMonth,
-		int expirationDay, int expirationYear, boolean alert, int flagValue)
+		java.util.LinkedHashMap<Long, long[]> scopes, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
+		int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, boolean alert, int flagValue)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -192,9 +266,11 @@ public interface AnnouncementsEntryLocalService {
 
 	public com.liferay.portlet.announcements.model.AnnouncementsEntry updateEntry(
 		long entryId, java.lang.String title, java.lang.String content,
-		java.lang.String url, java.lang.String type, int displayMonth,
-		int displayDay, int displayYear, int expirationMonth,
-		int expirationDay, int expirationYear, int priority)
+		java.lang.String url, java.lang.String type, int displayDateMonth,
+		int displayDateDay, int displayDateYear, int displayDateHour,
+		int displayDateMinute, int expirationDateMonth, int expirationDateDay,
+		int expirationDateYear, int expirationDateHour,
+		int expirationDateMinute, int priority)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

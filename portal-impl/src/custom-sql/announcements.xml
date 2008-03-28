@@ -44,6 +44,17 @@
 				)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.findByDisplayDate">
+		<![CDATA[
+			SELECT
+				{AnnouncementsEntry.*}
+			FROM
+				AnnouncementsEntry
+			WHERE
+				(displayDate >= ?) AND
+				(displayDate <= ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder.findByHidden">
 		<![CDATA[
 			SELECT DISTINCT

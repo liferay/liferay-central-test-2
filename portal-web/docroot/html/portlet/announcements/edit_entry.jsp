@@ -282,17 +282,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 		<liferay-ui:message key="display-date" />
 	</td>
 	<td>
-		<liferay-ui:input-date
-			formName="fm"
-			monthParam="displayMonth"
-			monthValue="<%= displayDate.get(Calendar.MONTH) %>"
-			dayParam="displayDay"
-			dayValue="<%= displayDate.get(Calendar.DATE) %>"
-			yearParam="displayYear"
-			yearValue="<%= displayDate.get(Calendar.YEAR) %>"
-			yearRangeStart="<%= displayDate.get(Calendar.YEAR) %>"
-			yearRangeEnd="<%= displayDate.get(Calendar.YEAR) + 100 %>"
-		/>
+		<liferay-ui:input-field formName="fm" model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" />
 	</td>
 </tr>
 <tr>
@@ -300,17 +290,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 		<liferay-ui:message key="expiration-date" />
 	</td>
 	<td>
-		<liferay-ui:input-date
-			formName="fm"
-			monthParam="expirationMonth"
-			monthValue="<%= expirationDate.get(Calendar.MONTH) %>"
-			dayParam="expirationDay"
-			dayValue="<%= expirationDate.get(Calendar.DATE) %>"
-			yearParam="expirationYear"
-			yearValue="<%= expirationDate.get(Calendar.YEAR) %>"
-			yearRangeStart="<%= expirationDate.get(Calendar.YEAR) %>"
-			yearRangeEnd="<%= expirationDate.get(Calendar.YEAR) + 100 %>"
-		/>
+		<liferay-ui:input-field formName="fm" model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="expirationDate" defaultValue="<%= expirationDate %>" />
 	</td>
 </tr>
 </table>
