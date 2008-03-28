@@ -375,6 +375,9 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 			String displayStyle, String feedURL, String entryURL)
 		throws PortalException, SystemException {
 
+		MBCategoryPermission.check(
+			getPermissionChecker(), categoryId, ActionKeys.VIEW);
+
 		MBCategory category = mbCategoryLocalService.getCategory(
 			categoryId);
 
@@ -424,9 +427,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = itr.next();
+			long categoryId = message.getCategoryId();
 
 			if (MBMessagePermission.contains(
-					getPermissionChecker(), message, ActionKeys.VIEW)) {
+					getPermissionChecker(), message, ActionKeys.VIEW) &&
+				MBCategoryPermission.contains(
+					getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
 
 				messages.add(message);
 			}
@@ -455,9 +461,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = itr.next();
+			long categoryId = message.getCategoryId();
 
 			if (MBMessagePermission.contains(
-					getPermissionChecker(), message, ActionKeys.VIEW)) {
+					getPermissionChecker(), message, ActionKeys.VIEW) &&
+				MBCategoryPermission.contains(
+					getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
 
 				messages.add(message);
 			}
@@ -493,9 +502,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = itr.next();
+			long categoryId = message.getCategoryId();
 
 			if (MBMessagePermission.contains(
-					getPermissionChecker(), message, ActionKeys.VIEW)) {
+					getPermissionChecker(), message, ActionKeys.VIEW) &&
+				MBCategoryPermission.contains(
+					getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
 
 				messages.add(message);
 			}
@@ -549,9 +561,12 @@ public class MBMessageServiceImpl extends MBMessageServiceBaseImpl {
 
 		while (itr.hasNext() && (messages.size() < max)) {
 			MBMessage message = itr.next();
+			long categoryId = message.getCategoryId();
 
 			if (MBMessagePermission.contains(
-					getPermissionChecker(), message, ActionKeys.VIEW)) {
+					getPermissionChecker(), message, ActionKeys.VIEW) &&
+				MBCategoryPermission.contains(
+					getPermissionChecker(), categoryId, ActionKeys.VIEW)) {
 
 				messages.add(message);
 			}

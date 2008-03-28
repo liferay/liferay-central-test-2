@@ -623,7 +623,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 			ResultRow row = new ResultRow(message, thread.getThreadId(), i, !readThread);
 
-			row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW));
+			row.setRestricted(!MBMessagePermission.contains(permissionChecker, message, ActionKeys.VIEW) || !MBCategoryPermission.contains(permissionChecker, message.getCategoryId(), ActionKeys.VIEW));
 
 			PortletURL rowURL = renderResponse.createRenderURL();
 
