@@ -116,6 +116,16 @@ public class SessionErrors {
 		return Collections.unmodifiableSet(errors.keySet()).iterator();
 	}
 
+	public static Set<String> keySet(HttpServletRequest req) {
+		return keySet(req.getSession());
+	}
+
+	public static Set<String> keySet(HttpSession ses) {
+		Map errors = _getErrors(ses);
+
+		return Collections.unmodifiableSet(errors.keySet());
+	}
+
 	public static void print(HttpServletRequest req) {
 		print(req.getSession());
 	}
@@ -126,16 +136,6 @@ public class SessionErrors {
 		while (itr.hasNext()) {
 			System.out.println(itr.next());
 		}
-	}
-
-	public static Set<String> getKeySet(HttpServletRequest req) {
-		return getKeySet(req.getSession());
-	}
-
-	public static Set<String> getKeySet(HttpSession ses) {
-		Map errors = _getErrors(ses);
-
-		return Collections.unmodifiableSet(errors.keySet());
 	}
 
 	public static int size(HttpServletRequest req) {
@@ -237,6 +237,16 @@ public class SessionErrors {
 		Map errors = _getErrors(ses);
 
 		return Collections.unmodifiableSet(errors.keySet()).iterator();
+	}
+
+	public static Set<String> keySet(PortletRequest req) {
+		return keySet(req.getPortletSession());
+	}
+
+	public static Set<String> keySet(PortletSession ses) {
+		Map errors = _getErrors(ses);
+
+		return Collections.unmodifiableSet(errors.keySet());
 	}
 
 	public static void print(PortletRequest req) {
