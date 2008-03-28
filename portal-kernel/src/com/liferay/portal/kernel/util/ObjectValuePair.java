@@ -32,6 +32,9 @@ import java.io.Serializable;
  */
 public class ObjectValuePair<K, V> implements Serializable {
 
+	public ObjectValuePair() {
+	}
+
 	public ObjectValuePair(K key, V value) {
 		_key = key;
 		_value = value;
