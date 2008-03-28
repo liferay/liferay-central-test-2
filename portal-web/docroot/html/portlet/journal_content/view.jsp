@@ -116,15 +116,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		</c:choose>
 
 		<%
-		JournalArticle article = null;
-
-		try {
-			article = JournalArticleLocalServiceUtil.getLatestArticle(groupId, articleId);
-		}
-		catch (NoSuchArticleException nsae) {
-		}
-
-		boolean showEditArticleIcon = (article != null) && JournalArticlePermission.contains(permissionChecker, article, ActionKeys.UPDATE);
+		boolean showEditArticleIcon = (articleDisplay != null) && JournalArticlePermission.contains(permissionChecker, articleDisplay.getGroupId(), articleDisplay.getArticleId(), ActionKeys.UPDATE);
 		boolean showSelectArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletDisplay.getId(), ActionKeys.CONFIGURATION);
 		boolean showAddArticleIcon = PortletPermissionUtil.contains(permissionChecker, plid.longValue(), portletDisplay.getId(), ActionKeys.CONFIGURATION) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.ADD_ARTICLE) && PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletKeys.JOURNAL, ActionKeys.APPROVE_ARTICLE);
 		%>
@@ -137,9 +129,9 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 						<portlet:param name="struts_action" value="/journal/edit_article" />
 						<portlet:param name="redirect" value="<%= currentURL %>" />
-						<portlet:param name="groupId" value="<%= String.valueOf(article.getGroupId()) %>" />
-						<portlet:param name="articleId" value="<%= article.getArticleId() %>" />
-						<portlet:param name="version" value="<%= String.valueOf(article.getVersion()) %>" />
+						<portlet:param name="groupId" value="<%= String.valueOf(articleDisplay.getGroupId()) %>" />
+						<portlet:param name="articleId" value="<%= articleDisplay.getArticleId() %>" />
+						<portlet:param name="version" value="<%= String.valueOf(articleDisplay.getVersion()) %>" />
 					</liferay-portlet:renderURL>
 
 					<liferay-ui:icon image="edit" message="edit-article" url="<%= editURL %>" />
