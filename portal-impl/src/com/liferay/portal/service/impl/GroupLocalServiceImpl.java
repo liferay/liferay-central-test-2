@@ -28,6 +28,7 @@ import com.liferay.portal.GroupNameException;
 import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.NoSuchRoleException;
+import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
@@ -96,7 +97,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		long groupId = counterLocalService.increment();
 
-		friendlyURL = getFriendlyURL(groupId, classPK, friendlyURL);
+		friendlyURL = getFriendlyURL(user.getCompanyId(), name, friendlyURL);
 
 		validateFriendlyURL(
 			groupId, user.getCompanyId(), classNameId, classPK, friendlyURL);
@@ -538,7 +539,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 
-		friendlyURL = getFriendlyURL(groupId, group.getClassPK(), friendlyURL);
+		friendlyURL = getFriendlyURL(friendlyURL);
 
 		validateFriendlyURL(
 			group.getGroupId(), group.getCompanyId(), group.getClassNameId(),
@@ -560,7 +561,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		long classNameId = group.getClassNameId();
 		long classPK = group.getClassPK();
-		friendlyURL = getFriendlyURL(groupId, classPK, friendlyURL);
+		friendlyURL = getFriendlyURL(friendlyURL);
 
 		if ((classNameId <= 0) || (classPK <= 0)) {
 			validateName(group.getGroupId(), group.getCompanyId(), name);
@@ -680,16 +681,46 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 	}
 
 	protected String getFriendlyURL(
-		long groupId, long classPK, String friendlyURL) {
+			long companyId, String name, String friendlyURL)
+		throws PortalException, SystemException {
 
 		friendlyURL = getFriendlyURL(friendlyURL);
 
 		if (Validator.isNull(friendlyURL)) {
-			if (classPK > 0) {
-				friendlyURL = StringPool.SLASH + classPK;
+			friendlyURL = StringPool.SLASH + getFriendlyURL(name);
+		}
+
+		String screenName = friendlyURL.substring(1);
+
+		try {
+			groupPersistence.findByC_F(companyId, friendlyURL);
+		}
+		catch (NoSuchGroupException nsge) {
+			try {
+				userPersistence.findByC_SN(companyId, screenName);
 			}
-			else {
-				friendlyURL = StringPool.SLASH + groupId;
+			catch (NoSuchUserException nsue) {
+				return friendlyURL;
+			}
+		}
+
+		for (int i = 1;; i++) {
+			String tempFriendlyURL = friendlyURL + StringPool.PERIOD + i;
+
+			try {
+				groupPersistence.findByC_F(companyId, tempFriendlyURL);
+			}
+			catch (NoSuchGroupException nsge) {
+				String tempScreenName = screenName + StringPool.PERIOD + i;
+
+				try {
+					userPersistence.findByC_SN(companyId, tempScreenName);
+				}
+				catch (NoSuchUserException nsue) {
+					friendlyURL = tempFriendlyURL;
+
+					break;
+				}
 			}
 		}
 
@@ -720,24 +751,6 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 			}
 		}
 		catch (NoSuchGroupException nsge) {
-		}
-
-		String groupIdFriendlyURL = friendlyURL.substring(1);
-
-		if (Validator.isNumber(groupIdFriendlyURL)) {
-			if (((classPK > 0) &&
-				 (!groupIdFriendlyURL.equals(String.valueOf(classPK)))) ||
-				((classPK == 0) &&
-				 (!groupIdFriendlyURL.equals(String.valueOf(groupId))))) {
-
-				GroupFriendlyURLException gfurle =
-					new GroupFriendlyURLException(
-						GroupFriendlyURLException.POSSIBLE_DUPLICATE);
-
-				gfurle.setKeywordConflict(groupIdFriendlyURL);
-
-				throw gfurle;
-			}
 		}
 
 		String screenName = friendlyURL.substring(1);
