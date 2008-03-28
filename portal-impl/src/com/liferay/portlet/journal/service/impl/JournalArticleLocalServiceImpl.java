@@ -72,7 +72,6 @@ import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.base.JournalArticleLocalServiceBaseImpl;
 import com.liferay.portlet.journal.util.Indexer;
 import com.liferay.portlet.journal.util.JournalUtil;
-import com.liferay.portlet.journal.util.comparator.ArticleDisplayDateComparator;
 import com.liferay.portlet.journalcontent.util.JournalContentUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.LocalizationUtil;
@@ -83,7 +82,6 @@ import java.io.File;
 import java.io.IOException;
 import java.io.StringReader;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.List;
