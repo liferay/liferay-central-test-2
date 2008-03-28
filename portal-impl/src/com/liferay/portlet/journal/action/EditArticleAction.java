@@ -227,10 +227,12 @@ public class EditArticleAction extends PortletAction {
 			double version = GetterUtil.getDouble(
 				deleteArticleIds[i].substring(
 					pos + VERSION_SEPARATOR.length()));
-
+			
+			String articleURL = ParamUtil.getString(req, "articleURL");
+			
 			JournalArticleServiceUtil.deleteArticle(
-				groupId, articleId, version, null, null);
-
+				groupId, articleId, version, articleURL, req.getPreferences());
+			
 			JournalUtil.removeRecentArticle(req, deleteArticleIds[i]);
 		}
 	}
@@ -248,9 +250,11 @@ public class EditArticleAction extends PortletAction {
 			double version = GetterUtil.getDouble(
 				expireArticleIds[i].substring(
 					pos + VERSION_SEPARATOR.length()));
-
+ 
+			String articleURL = ParamUtil.getString(req, "articleURL");
+			
 			JournalArticleServiceUtil.expireArticle(
-				groupId, articleId, version, null, null);
+				groupId, articleId, version, articleURL, req.getPreferences());
 		}
 	}
 
