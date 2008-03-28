@@ -88,7 +88,7 @@ public class MailEngine {
 
 		send(
 			mailMessage.getFrom(), mailMessage.getTo(), mailMessage.getCC(),
-			mailMessage.getBCC(), mailMessage.getListAddresses(),
+			mailMessage.getBCC(), mailMessage.getBulkAddresses(),
 			mailMessage.getSubject(), mailMessage.getBody(),
 			mailMessage.isHTMLFormat(), mailMessage.getReplyTo(),
 			mailMessage.getMessageId(), mailMessage.getInReplyTo(),
@@ -182,19 +182,19 @@ public class MailEngine {
 
 	public static void send(
 			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-			InternetAddress[] bcc, InternetAddress[] listAddresses,
+			InternetAddress[] bcc, InternetAddress[] bulkAddresses,
 			String subject, String body, boolean htmlFormat,
 			InternetAddress[] replyTo, String messageId, String inReplyTo)
 		throws MailEngineException {
 
 		send(
-			from, to, cc, bcc, listAddresses, subject, body, htmlFormat,
+			from, to, cc, bcc, bulkAddresses, subject, body, htmlFormat,
 			replyTo, messageId, inReplyTo, null);
 	}
 
 	public static void send(
 			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-			InternetAddress[] bcc, InternetAddress[] listAddresses,
+			InternetAddress[] bcc, InternetAddress[] bulkAddresses,
 			String subject, String body, boolean htmlFormat,
 			InternetAddress[] replyTo, String messageId, String inReplyTo,
 			File[] attachments)
@@ -211,7 +211,7 @@ public class MailEngine {
 			_log.debug("To: " + to);
 			_log.debug("CC: " + cc);
 			_log.debug("BCC: " + bcc);
-			_log.debug("List Addresses: " + listAddresses);
+			_log.debug("List Addresses: " + bulkAddresses);
 			_log.debug("Subject: " + subject);
 			_log.debug("Body: " + body);
 			_log.debug("HTML Format: " + htmlFormat);
@@ -322,7 +322,7 @@ public class MailEngine {
 				msg.setHeader("References", inReplyTo);
 			}
 
-			_send(session, msg, listAddresses);
+			_send(session, msg, bulkAddresses);
 		}
 		catch (SendFailedException sfe) {
 			_log.error(sfe);
@@ -351,7 +351,7 @@ public class MailEngine {
 	}
 
 	private static void _send(
-			Session session, Message msg, InternetAddress[] listAddresses)
+			Session session, Message msg, InternetAddress[] bulkAddresses)
 		throws MessagingException {
 
 		try {
@@ -368,8 +368,8 @@ public class MailEngine {
 
 				transport.connect(smtpHost, user, password);
 
-				if (listAddresses != null && listAddresses.length > 0) {
-					transport.sendMessage(msg, listAddresses);
+				if (bulkAddresses != null && bulkAddresses.length > 0) {
+					transport.sendMessage(msg, bulkAddresses);
 				}
 				else {
 					transport.sendMessage(msg, msg.getAllRecipients());
@@ -378,8 +378,8 @@ public class MailEngine {
 				transport.close();
 			}
 			else {
-				if (listAddresses != null && listAddresses.length > 0) {
-					Transport.send(msg, listAddresses);
+				if ((bulkAddresses != null) && (bulkAddresses.length > 0)) {
+					Transport.send(msg, bulkAddresses);
 				}
 				else {
 					Transport.send(msg);

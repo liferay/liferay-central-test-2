@@ -64,14 +64,14 @@ public class MailMessage implements Serializable {
 
 	public MailMessage(
 		InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-		InternetAddress[] bcc, InternetAddress[] listAddresses, String subject,
+		InternetAddress[] bcc, InternetAddress[] bulkAddresses, String subject,
 		String body, boolean htmlFormat) {
 
 		_from = from;
 		_to = to;
 		_cc = cc;
 		_bcc = bcc;
-		_listAddresses = listAddresses;
+		_bulkAddresses = bulkAddresses;
 		_subject = subject;
 		_body = body;
 		_htmlFormat = htmlFormat;
@@ -110,12 +110,12 @@ public class MailMessage implements Serializable {
 		_bcc = bcc;
 	}
 
-	public InternetAddress[] getListAddresses() {
-		return _listAddresses;
+	public InternetAddress[] getBulkAddresses() {
+		return _bulkAddresses;
 	}
 
-	public void setListAddresses(InternetAddress[] listAddresses) {
-		_listAddresses = listAddresses;
+	public void setBulkAddresses(InternetAddress[] bulkAddresses) {
+		_bulkAddresses = bulkAddresses;
 	}
 
 	public String getSubject() {
@@ -184,7 +184,7 @@ public class MailMessage implements Serializable {
 	private InternetAddress[] _to;
 	private InternetAddress[] _cc;
 	private InternetAddress[] _bcc;
-	private InternetAddress[] _listAddresses;
+	private InternetAddress[] _bulkAddresses;
 	private String _subject;
 	private String _body;
 	private boolean _htmlFormat;
