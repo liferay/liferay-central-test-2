@@ -105,6 +105,7 @@
 .lfr-announcements .entry-title {
 	display: block;
 	margin-bottom: 0.8em;
+	margin-right: 100px;
 }
 
 .lfr-announcements .read-false .entry-title {

@@ -66,13 +66,13 @@ portletURL.setParameter("tabs1", tabs1);
 
 <script type="text/javascript">
 	function <portlet:namespace />hideEntry(entryId) {
-		Liferay.Service.Announcements.AnnouncementsFlag.addAnnouncementsFlag({userId: <%= userId %>, entryId : entryId, flag: 2});
+		Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: 2});
 
 		jQuery('#<portlet:namespace/>' + entryId).hide("slow");
 	}
 
 	function <portlet:namespace />markEntryAsRead(entryId) {
-		Liferay.Service.Announcements.AnnouncementsFlag.addAnnouncementsFlag({userId: <%= userId %>, entryId : entryId, flag: 1});
+		Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: 1});
 	}
 
 	function <portlet:namespace />selectDistributionScope(scope) {
