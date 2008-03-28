@@ -29,16 +29,10 @@ String url = PortalUtil.getPortalURL(request) + PortalUtil.getCurrentURL(request
 
 boolean noSuchResource = false;
 
-if (SessionErrors.contains(request, NoSuchArticleException.class.getName()) ||
-		SessionErrors.contains(request, NoSuchFileException.class.getName()) ||
-		SessionErrors.contains(request, NoSuchFileEntryException.class.getName()) ||
-		SessionErrors.contains(request, NoSuchGroupException.class.getName()) ||
-		SessionErrors.contains(request, NoSuchImageException.class.getName()) ||
-		SessionErrors.contains(request, NoSuchLayoutException.class.getName()) ||
-		SessionErrors.contains(request, NoSuchLayoutSetException.class.getName()) ||
-		SessionErrors.contains(request, NoSuchTemplateException.class.getName()) ||
-		SessionErrors.contains(request, NoSuchStructureException.class.getName())) {
-	noSuchResource = true;
+for (String key : SessionErrors.iterator(request)) {
+	if (key.startsWith("NoSuch") && key.endsWith("Exception")) {
+		noSuchResource = true;
+	}
 }
 %>
 

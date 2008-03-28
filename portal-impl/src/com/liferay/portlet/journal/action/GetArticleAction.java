@@ -81,59 +81,56 @@ public class GetArticleAction extends Action {
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
-			try {
-				JournalArticle article =
-					JournalArticleLocalServiceUtil.getLatestArticle(
-						groupId, articleId, Boolean.TRUE);
+			JournalArticle article =
+				JournalArticleLocalServiceUtil.getLatestArticle(
+					groupId, articleId, Boolean.TRUE);
 
-				ThemeDisplay themeDisplay =
-					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+			ThemeDisplay themeDisplay =
+				(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-				Map<String, String> tokens = JournalUtil.getTokens(
-					groupId, themeDisplay);
+			Map<String, String> tokens = JournalUtil.getTokens(
+				groupId, themeDisplay);
 
-				String xml = article.getContentByLocale(languageId);
+			String xml = article.getContentByLocale(languageId);
 
-				String contentType = ContentTypes.TEXT_HTML_UTF8;
+			String contentType = ContentTypes.TEXT_HTML_UTF8;
 
-				Document doc = null;
+			Document doc = null;
 
-				Element root = null;
+			Element root = null;
 
-				if (article.isTemplateDriven()) {
-					SAXReader reader = new SAXReader();
+			if (article.isTemplateDriven()) {
+				SAXReader reader = new SAXReader();
 
-					doc = reader.read(new StringReader(xml));
+				doc = reader.read(new StringReader(xml));
 
-					root = doc.getRootElement();
+				root = doc.getRootElement();
 
-					addProcessingInstructions(doc, themeDisplay, article);
+				addProcessingInstructions(doc, themeDisplay, article);
 
-					JournalUtil.addAllReservedEls(root, tokens, article);
+				JournalUtil.addAllReservedEls(root, tokens, article);
 
-					xml = JournalUtil.formatXML(doc);
+				xml = JournalUtil.formatXML(doc);
 
-					contentType = ContentTypes.TEXT_XML_UTF8;
-				}
-
-				String fileName = null;
-				byte[] byteArray = xml.getBytes();
-
-				ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
+				contentType = ContentTypes.TEXT_XML_UTF8;
 			}
-			catch (PortalException pe) {
-				if (pe instanceof PrincipalException) {
-					PortalUtil.sendError(
-						HttpServletResponse.SC_FORBIDDEN,
-						new PrincipalException(), req, res);
-				}
-				else if (pe instanceof NoSuchArticleException) {
-					PortalUtil.sendError(
-						HttpServletResponse.SC_NOT_FOUND, pe, req, res);
-				}
-			}
+
+			String fileName = null;
+			byte[] byteArray = xml.getBytes();
+
+			ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
 
 			return null;
+		}
+		catch (PortalException pe) {
+			if (pe instanceof PrincipalException) {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+			}
+			else if (pe instanceof NoSuchArticleException) {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_NOT_FOUND, pe, req, res);
+			}
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);

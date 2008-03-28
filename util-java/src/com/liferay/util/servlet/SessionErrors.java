@@ -105,11 +105,11 @@ public class SessionErrors {
 		return errors.isEmpty();
 	}
 
-	public static Iterator iterator(HttpServletRequest req) {
+	public static Iterator<String> iterator(HttpServletRequest req) {
 		return iterator(req.getSession());
 	}
 
-	public static Iterator iterator(HttpSession ses) {
+	public static Iterator<String> iterator(HttpSession ses) {
 		Map errors = _getErrors(ses);
 
 		return Collections.unmodifiableSet(errors.keySet()).iterator();
@@ -120,7 +120,7 @@ public class SessionErrors {
 	}
 
 	public static void print(HttpSession ses) {
-		Iterator itr = iterator(ses);
+		Iterator<String> itr = iterator(ses);
 
 		while (itr.hasNext()) {
 			System.out.println(itr.next());
@@ -218,11 +218,11 @@ public class SessionErrors {
 		return errors.isEmpty();
 	}
 
-	public static Iterator iterator(PortletRequest req) {
+	public static Iterator<String> iterator(PortletRequest req) {
 		return iterator(req.getPortletSession());
 	}
 
-	public static Iterator iterator(PortletSession ses) {
+	public static Iterator<String> iterator(PortletSession ses) {
 		Map errors = _getErrors(ses);
 
 		return Collections.unmodifiableSet(errors.keySet()).iterator();
@@ -233,7 +233,7 @@ public class SessionErrors {
 	}
 
 	public static void print(PortletSession ses) {
-		Iterator itr = iterator(ses);
+		Iterator<String> itr = iterator(ses);
 
 		while (itr.hasNext()) {
 			System.out.println(itr.next());

@@ -64,31 +64,28 @@ public class GetLatestArticleContentAction extends Action {
 
 			String languageId = LanguageUtil.getLanguageId(req);
 
-			try {
-				JournalArticle article =
-					JournalArticleLocalServiceUtil.getLatestArticle(
-						groupId, articleId, Boolean.TRUE);
+			JournalArticle article =
+				JournalArticleLocalServiceUtil.getLatestArticle(
+					groupId, articleId, Boolean.TRUE);
 
-				String fileName = "content.xml";
-				byte[] byteArray =
-					article.getContentByLocale(languageId).getBytes();
+			String fileName = "content.xml";
+			byte[] byteArray =
+				article.getContentByLocale(languageId).getBytes();
 
-				ServletResponseUtil.sendFile(
-					res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
-			}
-			catch (PortalException pe) {
-				if (pe instanceof PrincipalException) {
-					PortalUtil.sendError(
-						HttpServletResponse.SC_FORBIDDEN,
-						new PrincipalException(), req, res);
-				}
-				else if (pe instanceof NoSuchArticleException) {
-					PortalUtil.sendError(
-						HttpServletResponse.SC_NOT_FOUND, pe, req, res);
-				}
-			}
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
+		}
+		catch (PortalException pe) {
+			if (pe instanceof PrincipalException) {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+			}
+			else if (pe instanceof NoSuchArticleException) {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_NOT_FOUND, pe, req, res);
+			}
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);

@@ -60,30 +60,27 @@ public class GetStructureAction extends Action {
 			long groupId = ParamUtil.getLong(req, "groupId");
 			String structureId = ParamUtil.getString(req, "structureId");
 
-			try {
-				JournalStructure structure =
-					JournalStructureLocalServiceUtil.getStructure(
-						groupId, structureId);
+			JournalStructure structure =
+				JournalStructureLocalServiceUtil.getStructure(
+					groupId, structureId);
 
-				String fileName = null;
-				byte[] byteArray = structure.getXsd().getBytes();
+			String fileName = null;
+			byte[] byteArray = structure.getXsd().getBytes();
 
-				ServletResponseUtil.sendFile(
-					res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
-			}
-			catch (PortalException pe) {
-				if (pe instanceof PrincipalException) {
-					PortalUtil.sendError(
-						HttpServletResponse.SC_FORBIDDEN,
-						new PrincipalException(), req, res);
-				}
-				else if (pe instanceof NoSuchStructureException) {
-					PortalUtil.sendError(
-						HttpServletResponse.SC_NOT_FOUND, pe, req, res);
-				}
-			}
+			ServletResponseUtil.sendFile(
+				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
 
 			return null;
+		}
+		catch (PortalException pe) {
+			if (pe instanceof PrincipalException) {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+			}
+			else if (pe instanceof NoSuchStructureException) {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_NOT_FOUND, pe, req, res);
+			}
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);

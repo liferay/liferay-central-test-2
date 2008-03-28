@@ -80,51 +80,48 @@ public class GetTemplateAction extends Action {
 
 			boolean transform = ParamUtil.get(req, "transform", true);
 
-			try {
-				JournalTemplate template =
-					JournalTemplateLocalServiceUtil.getTemplate(
-						groupId, templateId);
+			JournalTemplate template =
+				JournalTemplateLocalServiceUtil.getTemplate(
+					groupId, templateId);
 
-				String script = JournalUtil.getTemplateScript(
-					template, tokens, languageId, transform);
+			String script = JournalUtil.getTemplateScript(
+				template, tokens, languageId, transform);
 
-				String extension = JournalTemplateImpl.LANG_TYPE_VM;
+			String extension = JournalTemplateImpl.LANG_TYPE_VM;
 
-				if (template.getLangType() != null) {
-					extension = template.getLangType();
-				}
-
-				String fileName = null;
-				byte[] byteArray = script.getBytes();
-
-				String contentType = ContentTypes.TEXT_PLAIN_UTF8;
-
-				if (Validator.equals(
-						extension, JournalTemplateImpl.LANG_TYPE_CSS)) {
-
-					contentType = ContentTypes.TEXT_CSS_UTF8;
-				}
-				else if (Validator.equals(
-						extension, JournalTemplateImpl.LANG_TYPE_XSL)) {
-
-					contentType = ContentTypes.TEXT_XML_UTF8;
-				}
-
-				ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
+			if (template.getLangType() != null) {
+				extension = template.getLangType();
 			}
-			catch (PortalException pe) {
-				if (pe instanceof PrincipalException) {
-					PortalUtil.sendError(
-						HttpServletResponse.SC_FORBIDDEN,
-						new PrincipalException(), req, res);
-				}
-				else if (pe instanceof NoSuchTemplateException) {
-					PortalUtil.sendError(
-						HttpServletResponse.SC_NOT_FOUND, pe, req, res);
-				}
+
+			String fileName = null;
+			byte[] byteArray = script.getBytes();
+
+			String contentType = ContentTypes.TEXT_PLAIN_UTF8;
+
+			if (Validator.equals(
+					extension, JournalTemplateImpl.LANG_TYPE_CSS)) {
+
+				contentType = ContentTypes.TEXT_CSS_UTF8;
 			}
+			else if (Validator.equals(
+					extension, JournalTemplateImpl.LANG_TYPE_XSL)) {
+
+				contentType = ContentTypes.TEXT_XML_UTF8;
+			}
+
+			ServletResponseUtil.sendFile(res, fileName, byteArray, contentType);
 
 			return null;
+		}
+		catch (PortalException pe) {
+			if (pe instanceof PrincipalException) {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_FORBIDDEN, pe, req, res);
+			}
+			else if (pe instanceof NoSuchTemplateException) {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_NOT_FOUND, pe, req, res);
+			}
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
