@@ -41,6 +41,7 @@ import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalStructureUtil;
 import com.liferay.portlet.journal.service.persistence.JournalTemplateUtil;
+import com.liferay.util.MapUtil;
 
 import com.thoughtworks.xstream.XStream;
 
@@ -79,7 +80,7 @@ import org.dom4j.Element;
  * </p>
  *
  * @author Joel Kozikowski
- * @author Raymond AugÃ©
+ * @author Raymond Augé
  * @author Bruno Farache
  *
  * @see com.liferay.portal.kernel.lar.PortletDataHandler
@@ -288,6 +289,9 @@ public class JournalContentPortletDataHandlerImpl
 
 			el = root.element(JournalArticleImpl.class.getName());
 
+			Map<String, String> articleIds = context.getNewPrimaryKeysMap(
+				JournalArticle.class);
+
 			if (el != null) {
 				tempDoc = DocumentHelper.createDocument();
 
@@ -296,12 +300,18 @@ public class JournalContentPortletDataHandlerImpl
 				JournalArticle article = (JournalArticle)xStream.fromXML(
 					tempDoc.asXML());
 
-				article = JournalPortletDataHandlerImpl.importArticle(
-					context, structureIds, templateIds, article);
+				JournalPortletDataHandlerImpl.importArticle(
+					context, structureIds, templateIds, articleIds, article);
+			}
+
+			String articleId = prefs.getValue("article-id", StringPool.BLANK);
+
+			if (Validator.isNotNull(articleId)) {
+				articleId = MapUtil.getString(articleIds, articleId, articleId);
 
 				prefs.setValue(
 					"group-id", String.valueOf(context.getGroupId()));
-				prefs.setValue("article-id", article.getArticleId());
+				prefs.setValue("article-id", articleId);
 			}
 
 			return prefs;

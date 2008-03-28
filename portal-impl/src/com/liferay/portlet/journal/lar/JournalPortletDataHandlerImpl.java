@@ -96,7 +96,7 @@ import org.dom4j.Element;
  * portlet in the layout set.
  * </p>
  *
- * @author Raymond Augï¿½
+ * @author Raymond Augé
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
@@ -325,11 +325,15 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
+			Map<String, String> articleIds = context.getNewPrimaryKeysMap(
+				JournalArticle.class);
+
 			List<JournalArticle> articles =
 				(List<JournalArticle>)xStream.fromXML(tempDoc.asXML());
 
 			for (JournalArticle article : articles) {
-				importArticle(context, structureIds, templateIds, article);
+				importArticle(
+					context, structureIds, templateIds, articleIds, article);
 			}
 
 			return null;
@@ -443,9 +447,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			"." + template.getSmallImageType();
 	}
 
-	protected static JournalArticle importArticle(
+	protected static void importArticle(
 			PortletDataContext context, Map<String, String> structureIds,
-			Map<String, String> templateIds, JournalArticle article)
+			Map<String, String> templateIds, Map<String, String> articleIds,
+			JournalArticle article)
 		throws Exception {
 
 		long userId = context.getUserId(article.getUserUuid());
@@ -692,6 +697,9 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 				new Long(existingArticle.getResourcePrimKey()));
 		}
 
+		articleIds.put(
+			article.getArticleId(), existingArticle.getArticleId());
+
 		if (!articleId.equals(existingArticle.getArticleId())) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
@@ -700,8 +708,6 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 							existingArticle.getArticleId());
 			}
 		}
-
-		return existingArticle;
 	}
 
 	protected static void importStructure(
