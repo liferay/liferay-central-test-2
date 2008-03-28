@@ -56,19 +56,19 @@ public class VerifyWikiCreole extends VerifyProcess {
 	}
 
 	protected void verifyWikiCreole() throws Exception {
-		List<WikiPage> pages =
-			WikiPageLocalServiceUtil.getPages("classic_wiki");
+		List<WikiPage> pages = WikiPageLocalServiceUtil.getPages(
+			"classic_wiki");
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Processing " + pages.size() + " classic_wiki pages");
+			_log.debug("Processing " + pages.size() + " Classic Wiki pages");
 		}
 
 		ClassicToCreoleTranslator translator = new ClassicToCreoleTranslator();
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(
-				"Convertinging " + pages.size() +
-					" pages from classic wiki to creole format");
+				"Converting " + pages.size() +
+					" pages from Classic Wiki to Creole format");
 		}
 
 		for (WikiPage page : pages) {
@@ -80,6 +80,6 @@ public class VerifyWikiCreole extends VerifyProcess {
 		}
 	}
 
-	private static Log _log = LogFactory.getLog(VerifyImage.class);
+	private static Log _log = LogFactory.getLog(VerifyWikiCreole.class);
 
 }

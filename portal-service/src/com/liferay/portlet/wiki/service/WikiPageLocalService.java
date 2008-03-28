@@ -270,11 +270,11 @@ public interface WikiPageLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
-		java.lang.String format) throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
 		long nodeId, int begin, int end)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
+		java.lang.String format) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.wiki.model.WikiPage> getPages(
 		long nodeId, java.lang.String title, int begin, int end)

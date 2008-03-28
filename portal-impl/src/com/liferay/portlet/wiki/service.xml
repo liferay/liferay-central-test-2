@@ -92,11 +92,11 @@
 
 		<!-- Finder methods -->
 
-		<finder name="Format" return-type="Collection">
-			<finder-column name="format" />
-		</finder>
 		<finder name="NodeId" return-type="Collection">
 			<finder-column name="nodeId" />
+		</finder>
+		<finder name="Format" return-type="Collection">
+			<finder-column name="format" />
 		</finder>
 		<finder name="N_T" return-type="Collection">
 			<finder-column name="nodeId" />

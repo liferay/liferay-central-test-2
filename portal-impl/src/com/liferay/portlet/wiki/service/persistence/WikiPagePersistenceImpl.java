@@ -535,6 +535,249 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List<WikiPage> findByNodeId(long nodeId) throws SystemException {
+		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
+		String finderClassName = WikiPage.class.getName();
+		String finderMethodName = "findByNodeId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(nodeId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+
+				query.append("nodeId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("nodeId ASC, ");
+				query.append("title ASC, ");
+				query.append("version ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, nodeId);
+
+				List<WikiPage> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<WikiPage>)result;
+		}
+	}
+
+	public List<WikiPage> findByNodeId(long nodeId, int begin, int end)
+		throws SystemException {
+		return findByNodeId(nodeId, begin, end, null);
+	}
+
+	public List<WikiPage> findByNodeId(long nodeId, int begin, int end,
+		OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
+		String finderClassName = WikiPage.class.getName();
+		String finderMethodName = "findByNodeId";
+		String[] finderParams = new String[] {
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(nodeId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+
+				query.append("nodeId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("nodeId ASC, ");
+					query.append("title ASC, ");
+					query.append("version ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, nodeId);
+
+				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<WikiPage>)result;
+		}
+	}
+
+	public WikiPage findByNodeId_First(long nodeId, OrderByComparator obc)
+		throws NoSuchPageException, SystemException {
+		List<WikiPage> list = findByNodeId(nodeId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No WikiPage exists with the key {");
+
+			msg.append("nodeId=" + nodeId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPageException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public WikiPage findByNodeId_Last(long nodeId, OrderByComparator obc)
+		throws NoSuchPageException, SystemException {
+		int count = countByNodeId(nodeId);
+
+		List<WikiPage> list = findByNodeId(nodeId, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No WikiPage exists with the key {");
+
+			msg.append("nodeId=" + nodeId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchPageException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public WikiPage[] findByNodeId_PrevAndNext(long pageId, long nodeId,
+		OrderByComparator obc) throws NoSuchPageException, SystemException {
+		WikiPage wikiPage = findByPrimaryKey(pageId);
+
+		int count = countByNodeId(nodeId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+
+			query.append("nodeId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("nodeId ASC, ");
+				query.append("title ASC, ");
+				query.append("version ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, nodeId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
+
+			WikiPage[] array = new WikiPageImpl[3];
+
+			array[0] = (WikiPage)objArray[0];
+			array[1] = (WikiPage)objArray[1];
+			array[2] = (WikiPage)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<WikiPage> findByFormat(String format) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
@@ -780,249 +1023,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 			if (format != null) {
 				q.setString(queryPos++, format);
 			}
-
-			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
-
-			WikiPage[] array = new WikiPageImpl[3];
-
-			array[0] = (WikiPage)objArray[0];
-			array[1] = (WikiPage)objArray[1];
-			array[2] = (WikiPage)objArray[2];
-
-			return array;
-		}
-		catch (Exception e) {
-			throw HibernateUtil.processException(e);
-		}
-		finally {
-			closeSession(session);
-		}
-	}
-
-	public List<WikiPage> findByNodeId(long nodeId) throws SystemException {
-		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
-		String finderClassName = WikiPage.class.getName();
-		String finderMethodName = "findByNodeId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(nodeId) };
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
-
-				query.append("nodeId = ?");
-
-				query.append(" ");
-
-				query.append("ORDER BY ");
-
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, nodeId);
-
-				List<WikiPage> list = q.list();
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<WikiPage>)result;
-		}
-	}
-
-	public List<WikiPage> findByNodeId(long nodeId, int begin, int end)
-		throws SystemException {
-		return findByNodeId(nodeId, begin, end, null);
-	}
-
-	public List<WikiPage> findByNodeId(long nodeId, int begin, int end,
-		OrderByComparator obc) throws SystemException {
-		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
-		String finderClassName = WikiPage.class.getName();
-		String finderMethodName = "findByNodeId";
-		String[] finderParams = new String[] {
-				Long.class.getName(),
-				
-				"java.lang.Integer", "java.lang.Integer",
-				"com.liferay.portal.kernel.util.OrderByComparator"
-			};
-		Object[] finderArgs = new Object[] {
-				new Long(nodeId),
-				
-				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
-			};
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
-
-				query.append("nodeId = ?");
-
-				query.append(" ");
-
-				if (obc != null) {
-					query.append("ORDER BY ");
-					query.append(obc.getOrderBy());
-				}
-
-				else {
-					query.append("ORDER BY ");
-
-					query.append("nodeId ASC, ");
-					query.append("title ASC, ");
-					query.append("version ASC");
-				}
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, nodeId);
-
-				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
-						getDialect(), begin, end);
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, list);
-
-				return list;
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return (List<WikiPage>)result;
-		}
-	}
-
-	public WikiPage findByNodeId_First(long nodeId, OrderByComparator obc)
-		throws NoSuchPageException, SystemException {
-		List<WikiPage> list = findByNodeId(nodeId, 0, 1, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No WikiPage exists with the key {");
-
-			msg.append("nodeId=" + nodeId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchPageException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public WikiPage findByNodeId_Last(long nodeId, OrderByComparator obc)
-		throws NoSuchPageException, SystemException {
-		int count = countByNodeId(nodeId);
-
-		List<WikiPage> list = findByNodeId(nodeId, count - 1, count, obc);
-
-		if (list.size() == 0) {
-			StringMaker msg = new StringMaker();
-
-			msg.append("No WikiPage exists with the key {");
-
-			msg.append("nodeId=" + nodeId);
-
-			msg.append(StringPool.CLOSE_CURLY_BRACE);
-
-			throw new NoSuchPageException(msg.toString());
-		}
-		else {
-			return list.get(0);
-		}
-	}
-
-	public WikiPage[] findByNodeId_PrevAndNext(long pageId, long nodeId,
-		OrderByComparator obc) throws NoSuchPageException, SystemException {
-		WikiPage wikiPage = findByPrimaryKey(pageId);
-
-		int count = countByNodeId(nodeId);
-
-		Session session = null;
-
-		try {
-			session = openSession();
-
-			StringMaker query = new StringMaker();
-
-			query.append("FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
-
-			query.append("nodeId = ?");
-
-			query.append(" ");
-
-			if (obc != null) {
-				query.append("ORDER BY ");
-				query.append(obc.getOrderBy());
-			}
-
-			else {
-				query.append("ORDER BY ");
-
-				query.append("nodeId ASC, ");
-				query.append("title ASC, ");
-				query.append("version ASC");
-			}
-
-			Query q = session.createQuery(query.toString());
-
-			int queryPos = 0;
-
-			q.setLong(queryPos++, nodeId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
 
@@ -3106,14 +3106,14 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
-	public void removeByFormat(String format) throws SystemException {
-		for (WikiPage wikiPage : findByFormat(format)) {
+	public void removeByNodeId(long nodeId) throws SystemException {
+		for (WikiPage wikiPage : findByNodeId(nodeId)) {
 			remove(wikiPage);
 		}
 	}
 
-	public void removeByNodeId(long nodeId) throws SystemException {
-		for (WikiPage wikiPage : findByNodeId(nodeId)) {
+	public void removeByFormat(String format) throws SystemException {
+		for (WikiPage wikiPage : findByFormat(format)) {
 			remove(wikiPage);
 		}
 	}
@@ -3246,6 +3246,72 @@ public class WikiPagePersistenceImpl extends BasePersistence
 		}
 	}
 
+	public int countByNodeId(long nodeId) throws SystemException {
+		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
+		String finderClassName = WikiPage.class.getName();
+		String finderMethodName = "countByNodeId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(nodeId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
+
+				query.append("nodeId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, nodeId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
 	public int countByFormat(String format) throws SystemException {
 		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
 		String finderClassName = WikiPage.class.getName();
@@ -3288,72 +3354,6 @@ public class WikiPagePersistenceImpl extends BasePersistence
 				if (format != null) {
 					q.setString(queryPos++, format);
 				}
-
-				Long count = null;
-
-				Iterator<Long> itr = q.list().iterator();
-
-				if (itr.hasNext()) {
-					count = itr.next();
-				}
-
-				if (count == null) {
-					count = new Long(0);
-				}
-
-				FinderCache.putResult(finderClassNameCacheEnabled,
-					finderClassName, finderMethodName, finderParams,
-					finderArgs, count);
-
-				return count.intValue();
-			}
-			catch (Exception e) {
-				throw HibernateUtil.processException(e);
-			}
-			finally {
-				closeSession(session);
-			}
-		}
-		else {
-			return ((Long)result).intValue();
-		}
-	}
-
-	public int countByNodeId(long nodeId) throws SystemException {
-		boolean finderClassNameCacheEnabled = WikiPageModelImpl.CACHE_ENABLED;
-		String finderClassName = WikiPage.class.getName();
-		String finderMethodName = "countByNodeId";
-		String[] finderParams = new String[] { Long.class.getName() };
-		Object[] finderArgs = new Object[] { new Long(nodeId) };
-
-		Object result = null;
-
-		if (finderClassNameCacheEnabled) {
-			result = FinderCache.getResult(finderClassName, finderMethodName,
-					finderParams, finderArgs, getSessionFactory());
-		}
-
-		if (result == null) {
-			Session session = null;
-
-			try {
-				session = openSession();
-
-				StringMaker query = new StringMaker();
-
-				query.append("SELECT COUNT(*) ");
-				query.append(
-					"FROM com.liferay.portlet.wiki.model.WikiPage WHERE ");
-
-				query.append("nodeId = ?");
-
-				query.append(" ");
-
-				Query q = session.createQuery(query.toString());
-
-				int queryPos = 0;
-
-				q.setLong(queryPos++, nodeId);
 
 				Long count = null;
 
