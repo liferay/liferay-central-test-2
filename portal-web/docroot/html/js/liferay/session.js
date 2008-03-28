@@ -26,6 +26,7 @@ Liferay.Session = {
 		instance.banner = new jQuery;
 
 		var urlBase = themeDisplay.getPathMain() + '/portal/';
+
 		instance._sessionUrls = {
 			expire: urlBase + 'expire_session',
 			extend: urlBase + 'extend_session'
@@ -35,7 +36,7 @@ Liferay.Session = {
 			function() {
 				instance.checkState();
 			},
-		instance._timeoutDiff);
+			instance._timeoutDiff);
 
 		var timeoutMinutes = instance._timeout;
 		var timeLeft = instance._warning;
@@ -127,6 +128,7 @@ Liferay.Session = {
 				}
 			);
 		}
+
 		instance.setCookie('expired');
 
 		if (instance.redirectOnExpire) {
@@ -140,14 +142,17 @@ Liferay.Session = {
 		if (instance._countdownTimer) {
 			clearInterval(instance._countdownTimer);
 		}
+
 		jQuery.ajax(
 			{
 				url: instance._sessionUrls.extend
 			}
 		);
+
 		document.title = instance._originalTitle;
 
 		instance._currentTime = instance.sessionTimeoutWarning;
+
 		clearTimeout(instance._sessionExpired);
 
 		instance._sessionWarning = setTimeout(
