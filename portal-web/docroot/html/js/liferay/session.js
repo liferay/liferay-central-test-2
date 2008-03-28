@@ -147,9 +147,8 @@ Liferay.Session = {
 		);
 		document.title = instance._originalTitle;
 
-		if (instance._sessionWarning) {
-			clearTimeout(instance._sessionWarning);
-		}
+		instance._currentTime = instance.sessionTimeoutWarning;
+		clearTimeout(instance._sessionExpired);
 
 		instance._sessionWarning = setTimeout(
 			function() {
@@ -160,7 +159,7 @@ Liferay.Session = {
 					instance.extend();
 				}
 			},
-			instance.sessionTimeoutWarning
+			instance._timeoutDiff
 		);
 
 		instance.setCookie();
