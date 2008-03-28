@@ -122,6 +122,8 @@ public class GetTemplateAction extends Action {
 				PortalUtil.sendError(
 					HttpServletResponse.SC_NOT_FOUND, pe, req, res);
 			}
+
+			return null;
 		}
 		catch (Exception e) {
 			req.setAttribute(PageContext.EXCEPTION, e);
