@@ -88,10 +88,11 @@ public class MailEngine {
 
 		send(
 			mailMessage.getFrom(), mailMessage.getTo(), mailMessage.getCC(),
-			mailMessage.getBCC(), mailMessage.getSubject(),
-			mailMessage.getBody(), mailMessage.isHTMLFormat(),
-			mailMessage.getReplyTo(), mailMessage.getMessageId(),
-			mailMessage.getInReplyTo(), mailMessage.getAttachments());
+			mailMessage.getBCC(), mailMessage.getListAddresses(),
+			mailMessage.getSubject(), mailMessage.getBody(),
+			mailMessage.isHTMLFormat(), mailMessage.getReplyTo(),
+			mailMessage.getMessageId(), mailMessage.getInReplyTo(),
+			mailMessage.getAttachments());
 	}
 
 	public static void send(String from, String to, String subject, String body)
@@ -175,15 +176,28 @@ public class MailEngine {
 		throws MailEngineException {
 
 		send(
-			from, to, cc, bcc, subject, body, htmlFormat, replyTo, messageId,
-			inReplyTo, null);
+			from, to, cc, bcc, null, subject, body, htmlFormat, replyTo,
+			messageId, inReplyTo, null);
 	}
 
 	public static void send(
 			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-			InternetAddress[] bcc, String subject, String body,
-			boolean htmlFormat, InternetAddress[] replyTo, String messageId,
-			String inReplyTo, File[] attachments)
+			InternetAddress[] bcc, InternetAddress[] listAddresses,
+			String subject, String body, boolean htmlFormat,
+			InternetAddress[] replyTo, String messageId, String inReplyTo)
+		throws MailEngineException {
+
+		send(
+			from, to, cc, bcc, listAddresses, subject, body, htmlFormat,
+			replyTo, messageId, inReplyTo, null);
+	}
+
+	public static void send(
+			InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
+			InternetAddress[] bcc, InternetAddress[] listAddresses,
+			String subject, String body, boolean htmlFormat,
+			InternetAddress[] replyTo, String messageId, String inReplyTo,
+			File[] attachments)
 		throws MailEngineException {
 
 		StopWatch stopWatch = null;
@@ -197,6 +211,7 @@ public class MailEngine {
 			_log.debug("To: " + to);
 			_log.debug("CC: " + cc);
 			_log.debug("BCC: " + bcc);
+			_log.debug("List Addresses: " + listAddresses);
 			_log.debug("Subject: " + subject);
 			_log.debug("Body: " + body);
 			_log.debug("HTML Format: " + htmlFormat);
@@ -307,7 +322,7 @@ public class MailEngine {
 				msg.setHeader("References", inReplyTo);
 			}
 
-			_send(session, msg);
+			_send(session, msg, listAddresses);
 		}
 		catch (SendFailedException sfe) {
 			_log.error(sfe);
@@ -328,14 +343,15 @@ public class MailEngine {
 			Message msg = new MimeMessage(
 				session, new ByteArrayInputStream(msgByteArray));
 
-			_send(session, msg);
+			_send(session, msg, null);
 		}
 		catch (Exception e) {
 			throw new MailEngineException(e);
 		}
 	}
 
-	private static void _send(Session session, Message msg)
+	private static void _send(
+			Session session, Message msg, InternetAddress[] listAddresses)
 		throws MessagingException {
 
 		try {
@@ -352,12 +368,22 @@ public class MailEngine {
 
 				transport.connect(smtpHost, user, password);
 
-				transport.sendMessage(msg, msg.getAllRecipients());
+				if (listAddresses != null && listAddresses.length > 0) {
+					transport.sendMessage(msg, listAddresses);
+				}
+				else {
+					transport.sendMessage(msg, msg.getAllRecipients());
+				}
 
 				transport.close();
 			}
 			else {
-				Transport.send(msg);
+				if (listAddresses != null && listAddresses.length > 0) {
+					Transport.send(msg, listAddresses);
+				}
+				else {
+					Transport.send(msg);
+				}
 			}
 		}
 		catch (MessagingException me) {

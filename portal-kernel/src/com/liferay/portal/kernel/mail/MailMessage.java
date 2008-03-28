@@ -35,6 +35,7 @@ import javax.mail.internet.InternetAddress;
  *
  * @author Brian Wing Shun Chan
  * @author Neil Griffin
+ * @author Raymond Augé
  *
  */
 public class MailMessage implements Serializable {
@@ -50,7 +51,7 @@ public class MailMessage implements Serializable {
 		boolean htmlFormat) {
 
 		this(
-			from, new InternetAddress[] {to}, null, null, subject, body,
+			from, new InternetAddress[] {to}, null, null, null, subject, body,
 			htmlFormat);
 	}
 
@@ -58,18 +59,19 @@ public class MailMessage implements Serializable {
 		InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
 		InternetAddress[] bcc, String subject, String body) {
 
-		this(from, to, cc, bcc, subject, body, false);
+		this(from, to, cc, bcc, null, subject, body, false);
 	}
 
 	public MailMessage(
 		InternetAddress from, InternetAddress[] to, InternetAddress[] cc,
-		InternetAddress[] bcc, String subject, String body,
-		boolean htmlFormat) {
+		InternetAddress[] bcc, InternetAddress[] listAddresses, String subject,
+		String body, boolean htmlFormat) {
 
 		_from = from;
 		_to = to;
 		_cc = cc;
 		_bcc = bcc;
+		_listAddresses = listAddresses;
 		_subject = subject;
 		_body = body;
 		_htmlFormat = htmlFormat;
@@ -106,6 +108,14 @@ public class MailMessage implements Serializable {
 
 	public void setBCC(InternetAddress[] bcc) {
 		_bcc = bcc;
+	}
+
+	public InternetAddress[] getListAddresses() {
+		return _listAddresses;
+	}
+
+	public void setListAddresses(InternetAddress[] listAddresses) {
+		_listAddresses = listAddresses;
 	}
 
 	public String getSubject() {
@@ -174,6 +184,7 @@ public class MailMessage implements Serializable {
 	private InternetAddress[] _to;
 	private InternetAddress[] _cc;
 	private InternetAddress[] _bcc;
+	private InternetAddress[] _listAddresses;
 	private String _subject;
 	private String _body;
 	private boolean _htmlFormat;
