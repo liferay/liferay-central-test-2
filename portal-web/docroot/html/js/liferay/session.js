@@ -98,42 +98,20 @@ Liferay.Session = {
 	expire: function() {
 		var instance = this;
 
-		var banner = instance.banner;
-		var warningText = banner.find('#sessionWarningText');
-
 		document.title = instance._originalTitle;
 
-		if (warningText.length) {
-			var sessionHasExpired = instance._expiredText;
-			warningText.html(sessionHasExpired);
-
-			clearTimeout(instance._sessionExpired);
-
-			var okBtn = banner.find('#okBtn');
-
-			okBtn.click(
-				function() {
-					instance.notice.close();
-					window.location = themeDisplay.getURLHome();
+		jQuery.ajax(
+			{
+				url: instance._sessionUrls.expire,
+				success: function() {
+					if (instance.redirectOnExpire) {
+						location.href = themeDisplay.getURLHome();
+					}
 				}
-			);
-
-			var cancelBtn = banner.find('#cancelBtn');
-
-			cancelBtn.hide();
-
-			jQuery.ajax(
-				{
-					url: instance._sessionUrls.expire
-				}
-			);
-		}
+			}
+		);
 
 		instance.setCookie('expired');
-
-		if (instance.redirectOnExpire) {
-			location.href = themeDisplay.getURLHome();
-		}
 	},
 
 	extend: function() {
