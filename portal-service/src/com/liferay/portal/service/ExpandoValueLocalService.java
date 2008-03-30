@@ -381,11 +381,6 @@ public interface ExpandoValueLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portal.model.ExpandoValue getValue(long classPK,
-		long columnId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
 	public void deleteValue(long valueId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -395,6 +390,14 @@ public interface ExpandoValueLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteValues(long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteValues(long classPK, java.lang.String className)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteValues(long classPK, long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -431,6 +434,11 @@ public interface ExpandoValueLocalService {
 			com.liferay.portal.PortalException;
 
 	public int getRowValuesCount(long rowId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portal.model.ExpandoValue getValue(long classPK,
+		long columnId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

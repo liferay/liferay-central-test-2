@@ -892,15 +892,6 @@ public class ExpandoValueLocalServiceUtil {
 		return expandoValueLocalService.addValue(classPK, columnId, value);
 	}
 
-	public static com.liferay.portal.model.ExpandoValue getValue(long classPK,
-		long columnId)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
-
-		return expandoValueLocalService.getValue(classPK, columnId);
-	}
-
 	public static void deleteValue(long valueId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -923,6 +914,22 @@ public class ExpandoValueLocalServiceUtil {
 		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
 
 		expandoValueLocalService.deleteValues(classPK);
+	}
+
+	public static void deleteValues(long classPK, java.lang.String className)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		expandoValueLocalService.deleteValues(classPK, className);
+	}
+
+	public static void deleteValues(long classPK, long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		expandoValueLocalService.deleteValues(classPK, classNameId);
 	}
 
 	public static void deleteColumnValues(long columnId)
@@ -991,6 +998,15 @@ public class ExpandoValueLocalServiceUtil {
 		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
 
 		return expandoValueLocalService.getRowValuesCount(rowId);
+	}
+
+	public static com.liferay.portal.model.ExpandoValue getValue(long classPK,
+		long columnId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		return expandoValueLocalService.getValue(classPK, columnId);
 	}
 
 	public static java.util.List<com.liferay.portal.model.ExpandoValue> getValues(

@@ -30,7 +30,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ExpandoColumn;
 import com.liferay.portal.model.ExpandoTableRow;
 import com.liferay.portal.model.ExpandoValue;
+import com.liferay.portal.model.User;
 import com.liferay.portal.service.base.ExpandoValueLocalServiceBaseImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ListUtil;
 
 import java.util.List;
@@ -85,6 +87,23 @@ public class ExpandoValueLocalServiceImpl
 		throws PortalException, SystemException {
 
 		expandoValuePersistence.removeByClassPK(classPK);
+	}
+
+	public void deleteValues(long classPK, String className)
+		throws PortalException, SystemException {
+
+		deleteValues(classPK, PortalUtil.getClassNameId(className));
+	}
+
+	public void deleteValues(long classPK, long classNameId)
+		throws PortalException, SystemException {
+
+		List<ExpandoColumn> columns = expandoColumnLocalService.getColumns(
+			classNameId);
+
+		for (ExpandoColumn column : columns) {
+			expandoValuePersistence.removeByC_C(classPK, column.getColumnId());
+		}
 	}
 
 	public void deleteColumnValues(long columnId)
