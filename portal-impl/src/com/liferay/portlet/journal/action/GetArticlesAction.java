@@ -142,6 +142,10 @@ public class GetArticlesAction extends Action {
 				displayDateLTParam, displayDateLTFormat);
 		}
 
+		if (displayDateLT == null) {
+			displayDateLT = new Date();
+		}
+
 		if (_log.isDebugEnabled()) {
 			_log.debug("displayDateLT is " + displayDateLT);
 		}
