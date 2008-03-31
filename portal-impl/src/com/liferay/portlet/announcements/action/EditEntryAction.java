@@ -178,7 +178,6 @@ public class EditEntryAction extends PortletAction {
 			expirationDateHour += 12;
 		}
 
-
 		int priority = ParamUtil.getInteger(req, "priority");
 		boolean alert = ParamUtil.getBoolean(req, "alert");
 
