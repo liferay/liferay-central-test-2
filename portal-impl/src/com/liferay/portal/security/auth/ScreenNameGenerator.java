@@ -22,11 +22,9 @@
 
 package com.liferay.portal.security.auth;
 
-import com.liferay.portal.NoSuchGroupException;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 
 /**
@@ -59,15 +57,7 @@ public class ScreenNameGenerator {
 			UserLocalServiceUtil.getUserByScreenName(companyId, screenName);
 		}
 		catch (NoSuchUserException nsue) {
-			String friendlyURL = StringPool.SLASH + screenName;
-
-			try {
-				GroupLocalServiceUtil.getFriendlyURLGroup(
-					companyId, friendlyURL);
-			}
-			catch (NoSuchGroupException nsge) {
-				return screenName;
-			}
+			return screenName;
 		}
 
 		for (int i = 1;; i++) {
@@ -78,17 +68,9 @@ public class ScreenNameGenerator {
 					companyId, tempScreenName);
 			}
 			catch (NoSuchUserException nsue) {
-				String friendlyURL = StringPool.SLASH + tempScreenName;
+				screenName = tempScreenName;
 
-				try {
-					GroupLocalServiceUtil.getFriendlyURLGroup(
-						companyId, friendlyURL);
-				}
-				catch (NoSuchGroupException nsge) {
-					screenName = tempScreenName;
-
-					break;
-				}
+				break;
 			}
 		}
 
