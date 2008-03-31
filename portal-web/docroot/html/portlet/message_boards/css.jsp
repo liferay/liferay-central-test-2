@@ -114,8 +114,8 @@ td.user-info {
 	table-layout: auto;
 }
 
-.portlet-message-boards .user-info {
-	border: 1px solid #f00;
+.portlet-message-boards .message-container .user-info {
+	border-right: 1px solid #ccc;
 	padding: 5px;
 }
 
