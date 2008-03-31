@@ -35,9 +35,6 @@ public class SearchTest extends BaseTestCase {
 		selenium.type("toggle_id_journal_article_searchkeywords", "test");
 		selenium.click("//input[@value='Search Articles']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("password", "test");
-		selenium.click("//input[@value='Sign In']");
-		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
