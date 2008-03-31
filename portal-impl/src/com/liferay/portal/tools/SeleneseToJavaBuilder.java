@@ -266,7 +266,8 @@ public class SeleneseToJavaBuilder {
 				sm.append(param2);
 				sm.append("\", selenium.getTitle());");
 			}
-			else if (param1.equals("waitForElementPresent") ||
+			else if (param1.equals("waitForElementNotPresent") ||
+					 param1.equals("waitForElementPresent") ||
 					 param1.equals("waitForTextPresent")) {
 
 				sm.append("for (int second = 0;; second++) {");
@@ -275,9 +276,17 @@ public class SeleneseToJavaBuilder {
 				sm.append("}");
 
 				sm.append("try {");
-				sm.append("if (selenium.");
+				sm.append("if (");
+				
+				if (param1.equals("waitForElementNotPresent")) {
+					sm.append("!");
+				}
 
-				if (param1.equals("waitForElementPresent")) {
+				sm.append("selenium.");
+
+				if (param1.equals("waitForElementNotPresent") ||
+					param1.equals("waitForElementPresent")) {
+
 					sm.append("isElementPresent");
 				}
 				else if (param1.equals("waitForTextPresent")) {
