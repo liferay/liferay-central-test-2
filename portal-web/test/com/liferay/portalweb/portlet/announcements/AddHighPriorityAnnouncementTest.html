@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddHighPriorityAnnouncementTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddHighPriorityAnnouncementTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage Entries</td>
+	<td></td>
+</tr>
+<tr>
+	<td>selectAndWait</td>
+	<td>_84_distributionScopes</td>
+	<td>label=General</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Entry']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_84_title</td>
+	<td>High Priority Announcement</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_84_url</td>
+	<td>www.liferay.com</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_84_content</td>
+	<td>Medium</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_84_content</td>
+	<td>This is a high priority announcement!</td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_84_priority</td>
+	<td>label=High</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=High Priority Announcement</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

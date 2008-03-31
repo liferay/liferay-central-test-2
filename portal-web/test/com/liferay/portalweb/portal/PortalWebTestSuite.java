@@ -25,6 +25,7 @@ package com.liferay.portalweb.portal;
 import com.liferay.portalweb.portlet.admin.AdminTests;
 import com.liferay.portalweb.portlet.amazonrankings.AmazonRankingsTests;
 import com.liferay.portalweb.portlet.analogclock.AnalogClockTests;
+import com.liferay.portalweb.portlet.announcements.AnnouncementsTests;
 import com.liferay.portalweb.portlet.assetpublisher.AssetPublisherTests;
 import com.liferay.portalweb.portlet.biblegateway.BibleGatewayTests;
 import com.liferay.portalweb.portlet.blogs.BlogsTests;
@@ -34,8 +35,6 @@ import com.liferay.portalweb.portlet.breadcrumb.BreadcrumbTests;
 import com.liferay.portalweb.portlet.calendar.CalendarTests;
 import com.liferay.portalweb.portlet.chat.ChatTests;
 import com.liferay.portalweb.portlet.communities.CommunitiesTests;
-import com.liferay.portalweb.portlet.communityannouncements.CommunityAnnouncementsTests;
-import com.liferay.portalweb.portlet.companyannouncements.CompanyAnnouncementsTests;
 import com.liferay.portalweb.portlet.currencyconverter.CurrencyConverterTests;
 import com.liferay.portalweb.portlet.dictionary.DictionaryTests;
 import com.liferay.portalweb.portlet.directory.DirectoryTests;
@@ -102,6 +101,7 @@ import com.liferay.portalweb.portlet.webproxy.WebProxyTests;
 import com.liferay.portalweb.portlet.wiki.WikiTests;
 import com.liferay.portalweb.portlet.wikidisplay.WikiDisplayTests;
 import com.liferay.portalweb.portlet.words.WordsTests;
+import com.liferay.portalweb.portlet.workflow.WorkflowTests;
 import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 
 /**
@@ -117,6 +117,7 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(AdminTests.class);
 		addTestSuite(AmazonRankingsTests.class);
 		addTestSuite(AnalogClockTests.class);
+		addTestSuite(AnnouncementsTests.class);
 		addTestSuite(BibleGatewayTests.class);
 		addTestSuite(BlogsTests.class);
 		addTestSuite(BlogsAggregatorTests.class);
@@ -126,8 +127,6 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(CalendarTests.class);
 		addTestSuite(ChatTests.class);
 		addTestSuite(CommunitiesTests.class);
-		addTestSuite(CommunityAnnouncementsTests.class);
-		addTestSuite(CompanyAnnouncementsTests.class);
 		addTestSuite(CurrencyConverterTests.class);
 		addTestSuite(DictionaryTests.class);
 		addTestSuite(DirectoryTests.class);
@@ -194,7 +193,8 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(WikiTests.class);
 		addTestSuite(WikiDisplayTests.class);
 		addTestSuite(WordsTests.class);
-		//addTestSuite(WSRPProxyTests.class);
+		addTestSuite(WorkflowTests.class);
+//		addTestSuite(WSRPProxyTests.class);
 		addTestSuite(XSLContentTests.class);
 	}
 
