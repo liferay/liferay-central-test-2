@@ -59,6 +59,21 @@ public class EditConfigurationTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent("Sitening Digg Feed "));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Sitening Digg Feed")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
