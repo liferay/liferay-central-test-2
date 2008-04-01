@@ -797,6 +797,7 @@
 		<icon>/html/portlet/site_map/icon.png</icon>
 		<struts-path>site_map</struts-path>
 		<configuration-action-class>com.liferay.portlet.sitemap.action.ConfigurationActionImpl</configuration-action-class>
+		<portlet-data-handler-class>com.liferay.portlet.sitemap.lar.SitemapPortletDataHandlerImpl</portlet-data-handler-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<layout-cacheable>true</layout-cacheable>
