@@ -50,6 +50,23 @@ public class SearchTest extends BaseTestCase {
 
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_19_keywords1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("_19_keywords1", "T\u00e9st");
 		selenium.click("//input[@value='Search Messages']");
 		selenium.waitForPageToLoad("30000");

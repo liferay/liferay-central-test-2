@@ -38,6 +38,23 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Subcategory']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_19_name")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.type("_19_name", "S\u00e9cond T\u00e9st Subcat\u00e9gory");
 		selenium.type("_19_description",
 			"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!");

@@ -34,6 +34,23 @@ public class AddReplyMessageTest extends BaseTestCase {
 	public void testAddReplyMessage() throws Exception {
 		selenium.click("//a[text()='Reply']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("textArea")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.typeKeys("textArea",
 			"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!");
 		selenium.click("//input[@value='Save']");

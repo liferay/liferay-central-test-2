@@ -32,6 +32,23 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class DeleteMessageTest extends BaseTestCase {
 	public void testDeleteMessage() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click(
 			"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED");
 		selenium.waitForPageToLoad("30000");
@@ -58,6 +75,23 @@ public class DeleteMessageTest extends BaseTestCase {
 
 		verifyFalse(selenium.isTextPresent(
 				"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Delete")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Delete");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
@@ -99,8 +133,23 @@ public class DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		verifyTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"Your request processed successfully.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=T\u00e9st Cat\u00e9gory");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Delete");
