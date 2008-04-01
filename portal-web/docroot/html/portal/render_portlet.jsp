@@ -393,6 +393,8 @@ else {
 	urlConfiguration.setParameter("struts_action", "/portlet_configuration/edit_permissions");
 }
 
+urlConfiguration.setEscapeXml(false);
+
 urlConfiguration.setParameter("redirect", currentURL);
 urlConfiguration.setParameter("returnToFullPageURL", currentURL);
 urlConfiguration.setParameter("portletResource", portletDisplay.getId());
@@ -419,6 +421,8 @@ else {
 	urlEdit.setPortletMode(PortletMode.EDIT);
 }
 
+urlEdit.setEscapeXml(false);
+
 portletDisplay.setURLEdit(urlEdit.toString());
 
 // URL edit defaults
@@ -439,6 +443,8 @@ else {
 
 	urlEditDefaults.setPortletMode(LiferayPortletMode.EDIT_DEFAULTS);
 }
+
+urlEditDefaults.setEscapeXml(false);
 
 portletDisplay.setURLEditDefaults(urlEditDefaults.toString());
 
@@ -461,6 +467,8 @@ else {
 	urlEditGuest.setPortletMode(LiferayPortletMode.EDIT_GUEST);
 }
 
+urlEditGuest.setEscapeXml(false);
+
 portletDisplay.setURLEditGuest(urlEditGuest.toString());
 
 // URL help
@@ -482,6 +490,8 @@ else {
 	urlHelp.setPortletMode(PortletMode.HELP);
 }
 
+urlHelp.setEscapeXml(false);
+
 portletDisplay.setURLHelp(urlHelp.toString());
 
 // URL max
@@ -500,6 +510,8 @@ if (portletDisplay.isStateMax()) {
 else {
 	urlMax.setWindowState(WindowState.MAXIMIZED);
 }
+
+urlMax.setEscapeXml(false);
 
 if (lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 	String portletNamespace = portletDisplay.getNamespace();
@@ -555,6 +567,8 @@ else {
 
 	urlPrint.setPortletMode(LiferayPortletMode.PRINT);
 }
+
+urlPrint.setEscapeXml(false);
 
 portletDisplay.setURLPrint(urlPrint.toString());
 
