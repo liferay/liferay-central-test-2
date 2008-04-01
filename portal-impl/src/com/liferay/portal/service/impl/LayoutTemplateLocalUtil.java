@@ -85,17 +85,15 @@ public class LayoutTemplateLocalUtil {
 					"Layout template " + layoutTemplateId + " does not exist");
 			}
 
-			String defaultUserLayoutTemplateId = PropsUtil.get(
-				PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
-
 			layoutTemplate = getLayoutTemplate(
-				defaultUserLayoutTemplateId, standard, themeId);
+				PropsValues.DEFAULT_USER_LAYOUT_TEMPLATE_ID, standard, themeId);
 
 			if (layoutTemplate == null) {
 				_log.error(
 					"Layout template " + layoutTemplateId +
 						" and default user layout template " +
-							defaultUserLayoutTemplateId + " does not exist");
+							PropsValues.DEFAULT_USER_LAYOUT_TEMPLATE_ID +
+								" does not exist");
 
 				return StringPool.BLANK;
 			}
@@ -242,17 +240,15 @@ public class LayoutTemplateLocalUtil {
 					"Layout template " + layoutTemplateId + " does not exist");
 			}
 
-			String defaultUserLayoutTemplateId = PropsUtil.get(
-				PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
-
 			layoutTemplate = getLayoutTemplate(
-				defaultUserLayoutTemplateId, standard, themeId);
+				PropsValues.DEFAULT_USER_LAYOUT_TEMPLATE_ID, standard, themeId);
 
 			if (layoutTemplate == null) {
 				_log.error(
 					"Layout template " + layoutTemplateId +
 						" and default user layout template " +
-							defaultUserLayoutTemplateId + " does not exist");
+							PropsValues.DEFAULT_USER_LAYOUT_TEMPLATE_ID +
+								" does not exist");
 
 				return StringPool.BLANK;
 			}
