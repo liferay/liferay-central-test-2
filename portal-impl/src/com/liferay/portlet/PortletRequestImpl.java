@@ -664,7 +664,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		}
 		else {
 			if (!_portletName.equals(ppid)) {
-				putPublicRenderParameters(req, plid, oldRenderParameters);
+				putPublicRenderParameters(req, plid, ppid, oldRenderParameters);
 			}
 
 			enu = Collections.enumeration(oldRenderParameters.keySet());
@@ -676,8 +676,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 			if (name.startsWith(portletNamespace) &&
 				!invokerPortlet.isFacesPortlet()) {
 
-				String shortName = name.substring(
-					portletNamespace.length(), name.length());
+				String shortName = name.substring(portletNamespace.length());
 
 				ObjectValuePair<String, String[]> ovp = getParameterValues(
 					req, themeDisplay, portletFocus, oldRenderParameters,
@@ -785,7 +784,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 	}
 
 	protected void putPublicRenderParameters(
-		HttpServletRequest req, long plid,
+		HttpServletRequest req, long plid, String ppid,
 		Map<String, String[]> renderParameters) {
 
 		Enumeration<String> names = req.getParameterNames();
@@ -807,6 +806,30 @@ public abstract class PortletRequestImpl implements PortletRequest {
 				renderParameters.put(
 					publicRenderParameter.getIdentifier(),
 					req.getParameterValues(name));
+			}
+		}
+
+		String ppidNamespace = PortalUtil.getPortletNamespace(ppid);
+
+		Map<String, String[]> ppidRenderParameters = RenderParametersPool.get(
+			req, plid, ppid);
+
+		for (Map.Entry<String, String[]> entry :
+				ppidRenderParameters.entrySet()) {
+
+			String name = entry.getKey();
+			String[] values = entry.getValue();
+
+			if (name.startsWith(ppidNamespace)) {
+				name = name.substring(ppidNamespace.length());
+			}
+
+			PublicRenderParameter publicRenderParameter =
+				_portlet.getPublicRenderParameter(name);
+
+			if (publicRenderParameter != null) {
+				renderParameters.put(
+					publicRenderParameter.getIdentifier(), values);
 			}
 		}
 	}
