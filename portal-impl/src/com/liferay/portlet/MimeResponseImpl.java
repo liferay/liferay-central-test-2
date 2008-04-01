@@ -136,18 +136,19 @@ public abstract class MimeResponseImpl
 
 		boolean valid = false;
 
-		while (enu.hasMoreElements()) {
-			String resContentType = enu.nextElement();
-
-			if (contentType.startsWith(resContentType)) {
-				valid = true;
-
-				break;
-			}
-		}
-
 		if (_req.getWindowState().equals(LiferayWindowState.EXCLUSIVE)) {
 			valid = true;
+		}
+		else {
+			while (enu.hasMoreElements()) {
+				String resContentType = enu.nextElement();
+
+				if (contentType.startsWith(resContentType)) {
+					valid = true;
+
+					break;
+				}
+			}
 		}
 
 		if (!valid) {
