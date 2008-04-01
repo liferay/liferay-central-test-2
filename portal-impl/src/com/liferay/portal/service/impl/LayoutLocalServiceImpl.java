@@ -454,10 +454,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			Element layoutEl = root.addElement("layout");
 
+			layoutEl.addAttribute("plid", String.valueOf(layout.getPlid()));
 			layoutEl.addAttribute(
 				"layout-id", String.valueOf(layout.getLayoutId()));
-			layoutEl.addAttribute(
-				"plid", String.valueOf(layout.getPlid()));
 			layoutEl.addElement("parent-layout-id").addText(
 				String.valueOf(layout.getParentLayoutId()));
 			layoutEl.addElement("name").addCDATA(layout.getName());
@@ -1101,10 +1100,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			Element layoutEl = itr.next();
 
-			long layoutId = GetterUtil.getInteger(
-				layoutEl.attributeValue("layout-id"));
 			long oldPlid = GetterUtil.getInteger(
 				layoutEl.attributeValue("plid"));
+			long layoutId = GetterUtil.getInteger(
+				layoutEl.attributeValue("layout-id"));
 			long parentLayoutId = GetterUtil.getInteger(
 				layoutEl.elementText("parent-layout-id"));
 

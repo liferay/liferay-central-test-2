@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -34,8 +35,8 @@ import com.liferay.util.MapUtil;
 import javax.portlet.PortletPreferences;
 
 /**
- * <a href="SitemapPortletDataHandlerImpl.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="SitemapPortletDataHandlerImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Bruno Farache
  *
@@ -69,13 +70,13 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 	public PortletDataHandlerControl[] getExportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {};
+		return new PortletDataHandlerControl[0];
 	}
 
 	public PortletDataHandlerControl[] getImportControls()
 		throws PortletDataException {
 
-		return new PortletDataHandlerControl[] {};
+		return new PortletDataHandlerControl[0];
 	}
 
 	public PortletPreferences importData(
@@ -84,13 +85,14 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 		throws PortletDataException {
 
 		try {
-			String rootPlid = prefs.getValue("root-plid", StringPool.BLANK);
+			long rootPlid = GetterUtil.getLong(
+				prefs.getValue("root-plid", StringPool.BLANK));
 
 			if (Validator.isNotNull(rootPlid)) {
-				Long newRootPlid = MapUtil.getLong(context.getNewPrimaryKeysMap(
-					Layout.class), Long.parseLong(rootPlid));
+				long newRootPlid = MapUtil.getLong(
+					context.getNewPrimaryKeysMap(Layout.class), rootPlid);
 
-				prefs.setValue("root-plid", Long.toString(newRootPlid));
+				prefs.setValue("root-plid", String.valueOf(newRootPlid));
 			}
 
 			return prefs;
