@@ -140,6 +140,12 @@ body.staging #wrapper {
 #banner .logo a {
 }
 
+#banner:after {
+}
+
+.ie #banner {
+}
+
 .ie6 #banner .logo {
 }
 
