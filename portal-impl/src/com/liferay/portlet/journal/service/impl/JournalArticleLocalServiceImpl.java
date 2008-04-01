@@ -135,8 +135,10 @@ public class JournalArticleLocalServiceImpl
 			boolean addCommunityPermissions, boolean addGuestPermissions)
 		throws PortalException, SystemException {
 
+		double version = JournalArticleImpl.DEFAULT_VERSION;
+
 		return addArticle(
-			null, userId, articleId, autoArticleId, plid, title, description,
+			userId, articleId, autoArticleId, plid, version, title, description,
 			content, type, structureId, templateId, displayDateMonth,
 			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
 			expirationDateMonth, expirationDateDay, expirationDateYear,
@@ -144,13 +146,12 @@ public class JournalArticleLocalServiceImpl
 			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
 			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
 			smallFile, images, articleURL, prefs, tagsEntries,
-			Boolean.valueOf(addCommunityPermissions),
-			Boolean.valueOf(addGuestPermissions), null, null);
+			addCommunityPermissions, addGuestPermissions);
 	}
 
 	public JournalArticle addArticle(
-			String uuid, long userId, String articleId, boolean autoArticleId,
-			long plid, String title, String description, String content,
+			long userId, String articleId, boolean autoArticleId, long plid,
+			double version, String title, String description, String content,
 			String type, String structureId, String templateId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
@@ -165,15 +166,44 @@ public class JournalArticleLocalServiceImpl
 		throws PortalException, SystemException {
 
 		return addArticle(
-			uuid, userId, articleId, autoArticleId, plid, title, description,
-			content, type, structureId, templateId, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
-			smallFile, images, articleURL, prefs, tagsEntries,
-			Boolean.valueOf(addCommunityPermissions),
+			null, userId, articleId, autoArticleId, plid, version, title,
+			description, content, type, structureId, templateId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, indexable,
+			smallImage, smallImageURL, smallFile, images, articleURL, prefs,
+			tagsEntries, Boolean.valueOf(addCommunityPermissions),
+			Boolean.valueOf(addGuestPermissions), null, null);
+	}
+
+	public JournalArticle addArticle(
+			String uuid, long userId, String articleId, boolean autoArticleId,
+			long plid, double version, String title, String description,
+			String content, String type, String structureId, String templateId,
+			int displayDateMonth, int displayDateDay, int displayDateYear,
+			int displayDateHour, int displayDateMinute, int expirationDateMonth,
+			int expirationDateDay, int expirationDateYear,
+			int expirationDateHour, int expirationDateMinute,
+			boolean neverExpire, int reviewDateMonth, int reviewDateDay,
+			int reviewDateYear, int reviewDateHour, int reviewDateMinute,
+			boolean neverReview, boolean indexable, boolean smallImage,
+			String smallImageURL, File smallFile, Map<String, byte[]> images,
+			String articleURL, PortletPreferences prefs, String[] tagsEntries,
+			boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws PortalException, SystemException {
+
+		return addArticle(
+			uuid, userId, articleId, autoArticleId, plid, version, title,
+			description, content, type, structureId, templateId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, indexable,
+			smallImage, smallImageURL, smallFile, images, articleURL, prefs,
+			tagsEntries, Boolean.valueOf(addCommunityPermissions),
 			Boolean.valueOf(addGuestPermissions), null, null);
 	}
 
@@ -193,22 +223,25 @@ public class JournalArticleLocalServiceImpl
 			String[] communityPermissions, String[] guestPermissions)
 		throws PortalException, SystemException {
 
+		double version = JournalArticleImpl.DEFAULT_VERSION;
+
 		return addArticle(
-			null, userId, articleId, autoArticleId, plid, title, description,
-			content, type, structureId, templateId, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
-			smallFile, images, articleURL, prefs, tagsEntries, null, null,
-			communityPermissions, guestPermissions);
+			null, userId, articleId, autoArticleId, plid,
+			version, title, description, content, type, structureId,
+			templateId, displayDateMonth, displayDateDay, displayDateYear,
+			displayDateHour, displayDateMinute, expirationDateMonth,
+			expirationDateDay, expirationDateYear, expirationDateHour,
+			expirationDateMinute, neverExpire, reviewDateMonth, reviewDateDay,
+			reviewDateYear, reviewDateHour, reviewDateMinute, neverReview,
+			indexable, smallImage, smallImageURL, smallFile, images, articleURL,
+			prefs, tagsEntries, null, null, communityPermissions,
+			guestPermissions);
 	}
 
 	public JournalArticle addArticle(
 			String uuid, long userId, String articleId, boolean autoArticleId,
-			long plid, String title, String description, String content,
-			String type, String structureId, String templateId,
+			long plid, double version, String title, String description,
+			String content, String type, String structureId, String templateId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
@@ -225,22 +258,22 @@ public class JournalArticleLocalServiceImpl
 		long groupId = PortalUtil.getPortletGroupId(plid);
 
 		return addArticleToGroup(
-			uuid, userId, articleId, autoArticleId, groupId, title, description,
-			content, type, structureId, templateId, displayDateMonth,
-			displayDateDay, displayDateYear, displayDateHour, displayDateMinute,
-			expirationDateMonth, expirationDateDay, expirationDateYear,
-			expirationDateHour, expirationDateMinute, neverExpire,
-			reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
-			reviewDateMinute, neverReview, indexable, smallImage, smallImageURL,
-			smallFile, images, articleURL, prefs, tagsEntries,
-			addCommunityPermissions, addGuestPermissions, communityPermissions,
-			guestPermissions);
+			uuid, userId, articleId, autoArticleId, groupId, version, title,
+			description, content, type, structureId, templateId,
+			displayDateMonth, displayDateDay, displayDateYear, displayDateHour,
+			displayDateMinute, expirationDateMonth, expirationDateDay,
+			expirationDateYear, expirationDateHour, expirationDateMinute,
+			neverExpire, reviewDateMonth, reviewDateDay, reviewDateYear,
+			reviewDateHour, reviewDateMinute, neverReview, indexable,
+			smallImage, smallImageURL, smallFile, images, articleURL, prefs,
+			tagsEntries, addCommunityPermissions, addGuestPermissions,
+			communityPermissions, guestPermissions);
 	}
 
 	public JournalArticle addArticleToGroup(
 			String uuid, long userId, String articleId, boolean autoArticleId,
-			long groupId, String title, String description, String content,
-			String type, String structureId, String templateId,
+			long groupId, double version, String title, String description,
+			String content, String type, String structureId, String templateId,
 			int displayDateMonth, int displayDateDay, int displayDateYear,
 			int displayDateHour, int displayDateMinute, int expirationDateMonth,
 			int expirationDateDay, int expirationDateYear,
@@ -310,8 +343,7 @@ public class JournalArticleLocalServiceImpl
 		JournalArticle article = journalArticlePersistence.create(id);
 
 		content = format(
-			groupId, articleId, JournalArticleImpl.DEFAULT_VERSION, false,
-			content, structureId, images);
+			groupId, articleId, version, false, content, structureId, images);
 
 		article.setUuid(uuid);
 		article.setResourcePrimKey(resourcePrimKey);
@@ -322,7 +354,7 @@ public class JournalArticleLocalServiceImpl
 		article.setCreateDate(now);
 		article.setModifiedDate(now);
 		article.setArticleId(articleId);
-		article.setVersion(JournalArticleImpl.DEFAULT_VERSION);
+		article.setVersion(version);
 		article.setTitle(title);
 		article.setDescription(description);
 		article.setContent(content);

@@ -616,18 +616,18 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			if (existingArticle == null) {
 				existingArticle =  JournalArticleLocalServiceUtil.addArticle(
 					article.getUuid(), userId, articleId, autoArticleId, plid,
-					article.getTitle(), article.getDescription(),
-					article.getContent(), article.getType(), parentStructureId,
-					parentTemplateId, displayDateMonth, displayDateDay,
-					displayDateYear, displayDateHour, displayDateMinute,
-					expirationDateMonth, expirationDateDay, expirationDateYear,
-					expirationDateHour, expirationDateMinute, neverExpire,
-					reviewDateMonth, reviewDateDay, reviewDateYear,
-					reviewDateHour, reviewDateMinute, neverReview,
-					article.getIndexable(), article.getSmallImage(),
-					article.getSmallImageURL(), smallFile, images, articleURL,
-					prefs, tagsEntries, addCommunityPermissions,
-					addGuestPermissions);
+					article.getVersion(), article.getTitle(),
+					article.getDescription(), article.getContent(),
+					article.getType(), parentStructureId, parentTemplateId,
+					displayDateMonth, displayDateDay, displayDateYear,
+					displayDateHour, displayDateMinute, expirationDateMonth,
+					expirationDateDay, expirationDateYear, expirationDateHour,
+					expirationDateMinute, neverExpire, reviewDateMonth,
+					reviewDateDay, reviewDateYear, reviewDateHour,
+					reviewDateMinute, neverReview, article.getIndexable(),
+					article.getSmallImage(), article.getSmallImageURL(),
+					smallFile, images, articleURL, prefs, tagsEntries,
+					addCommunityPermissions, addGuestPermissions);
 			}
 			else {
 				existingArticle =  JournalArticleLocalServiceUtil.updateArticle(
@@ -650,17 +650,17 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		}
 		else {
 			existingArticle = JournalArticleLocalServiceUtil.addArticle(
-				userId, articleId, autoArticleId, plid, article.getTitle(),
-				article.getDescription(), article.getContent(),
-				article.getType(), parentStructureId, parentTemplateId,
-				displayDateMonth, displayDateDay, displayDateYear,
-				displayDateHour, displayDateMinute, expirationDateMonth,
-				expirationDateDay, expirationDateYear, expirationDateHour,
-				expirationDateMinute, neverExpire, reviewDateMonth,
-				reviewDateDay, reviewDateYear, reviewDateHour, reviewDateMinute,
-				neverReview, article.getIndexable(), article.getSmallImage(),
-				article.getSmallImageURL(), smallFile, images, articleURL,
-				prefs, tagsEntries, addCommunityPermissions,
+				userId, articleId, autoArticleId, plid, article.getVersion(),
+				article.getTitle(), article.getDescription(),
+				article.getContent(), article.getType(), parentStructureId,
+				parentTemplateId, displayDateMonth, displayDateDay,
+				displayDateYear, displayDateHour, displayDateMinute,
+				expirationDateMonth, expirationDateDay, expirationDateYear,
+				expirationDateHour, expirationDateMinute, neverExpire,
+				reviewDateMonth, reviewDateDay, reviewDateYear, reviewDateHour,
+				reviewDateMinute, neverReview, article.getIndexable(),
+				article.getSmallImage(), article.getSmallImageURL(), smallFile,
+				images, articleURL, prefs, tagsEntries, addCommunityPermissions,
 				addGuestPermissions);
 		}
 
