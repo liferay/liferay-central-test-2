@@ -1161,7 +1161,7 @@ public class PropsUtil {
 
 	public static final String MESSAGE_BOARDS_ALLOW_ANONYMOUS_POSTING = "message.boards.anonymous.posting.enabled";
 
-	public static final String MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED = "message.boards.expire.ban.job.interval";
+	public static final String MESSAGE_BOARDS_ANONYMOUS_POSTING_ENABLED = "message.boards.anonymous.posting.enabled";
 
 	public static final String MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL = "message.boards.expire.ban.job.interval";
 
