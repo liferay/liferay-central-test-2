@@ -1913,8 +1913,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException,
 			SystemException {
 		try {
-			for (int i = 0; i < scLicensePKs.length; i++) {
-				addSCLicense.add(pk, scLicensePKs[i]);
+			for (long scLicensePK : scLicensePKs) {
+				addSCLicense.add(pk, scLicensePK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1931,9 +1931,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException,
 			SystemException {
 		try {
-			for (int i = 0; i < scLicenses.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = scLicenses.get(i);
-
+			for (com.liferay.portlet.softwarecatalog.model.SCLicense scLicense : scLicenses) {
 				addSCLicense.add(pk, scLicense.getPrimaryKey());
 			}
 		}
@@ -1994,8 +1992,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException,
 			SystemException {
 		try {
-			for (int i = 0; i < scLicensePKs.length; i++) {
-				removeSCLicense.remove(pk, scLicensePKs[i]);
+			for (long scLicensePK : scLicensePKs) {
+				removeSCLicense.remove(pk, scLicensePK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -2012,9 +2010,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchLicenseException,
 			SystemException {
 		try {
-			for (int i = 0; i < scLicenses.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = scLicenses.get(i);
-
+			for (com.liferay.portlet.softwarecatalog.model.SCLicense scLicense : scLicenses) {
 				removeSCLicense.remove(pk, scLicense.getPrimaryKey());
 			}
 		}
@@ -2033,8 +2029,8 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		try {
 			clearSCLicenses.clear(pk);
 
-			for (int i = 0; i < scLicensePKs.length; i++) {
-				addSCLicense.add(pk, scLicensePKs[i]);
+			for (long scLicensePK : scLicensePKs) {
+				addSCLicense.add(pk, scLicensePK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -2053,9 +2049,7 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 		try {
 			clearSCLicenses.clear(pk);
 
-			for (int i = 0; i < scLicenses.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCLicense scLicense = scLicenses.get(i);
-
+			for (com.liferay.portlet.softwarecatalog.model.SCLicense scLicense : scLicenses) {
 				addSCLicense.add(pk, scLicense.getPrimaryKey());
 			}
 		}

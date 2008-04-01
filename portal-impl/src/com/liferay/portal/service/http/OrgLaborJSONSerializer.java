@@ -79,9 +79,7 @@ public class OrgLaborJSONSerializer {
 		List<com.liferay.portal.model.OrgLabor> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			OrgLabor model = models.get(i);
-
+		for (OrgLabor model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

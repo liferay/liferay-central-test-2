@@ -74,9 +74,7 @@ public class PhoneJSONSerializer {
 		List<com.liferay.portal.model.Phone> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Phone model = models.get(i);
-
+		for (Phone model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

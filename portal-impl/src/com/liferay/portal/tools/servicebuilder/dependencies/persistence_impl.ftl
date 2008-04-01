@@ -1686,8 +1686,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 				public void add${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
 					try {
-						for (int i = 0; i < ${tempEntity.varName}PKs.length; i++) {
-							add${tempEntity.name}.add(pk, ${tempEntity.varName}PKs[i]);
+						for (${tempEntity.PKClassName} ${tempEntity.varName}PK : ${tempEntity.varName}PKs) {
+							add${tempEntity.name}.add(pk, ${tempEntity.varName}PK);
 						}
 					}
 					catch (DataAccessException dae) {
@@ -1700,9 +1700,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 				public void add${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
 					try {
-						for (int i = 0; i < ${tempEntity.varNames}.size(); i++) {
-							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = ${tempEntity.varNames}.get(i);
-
+						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
 						}
 					}
@@ -1752,8 +1750,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 				public void remove${tempEntity.names}(${entity.PKClassName} pk, ${tempEntity.PKClassName}[] ${tempEntity.varName}PKs) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
 					try {
-						for (int i = 0; i < ${tempEntity.varName}PKs.length; i++) {
-							remove${tempEntity.name}.remove(pk, ${tempEntity.varName}PKs[i]);
+						for (${tempEntity.PKClassName} ${tempEntity.varName}PK : ${tempEntity.varName}PKs) {
+							remove${tempEntity.name}.remove(pk, ${tempEntity.varName}PK);
 						}
 					}
 					catch (DataAccessException dae) {
@@ -1766,9 +1764,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 				public void remove${tempEntity.names}(${entity.PKClassName} pk, List<${tempEntity.packagePath}.model.${tempEntity.name}> ${tempEntity.varNames}) throws ${noSuchEntity}Exception, ${tempEntity.packagePath}.${noSuchTempEntity}Exception, SystemException {
 					try {
-						for (int i = 0; i < ${tempEntity.varNames}.size(); i++) {
-							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = ${tempEntity.varNames}.get(i);
-
+						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
 							remove${tempEntity.name}.remove(pk, ${tempEntity.varName}.getPrimaryKey());
 						}
 					}
@@ -1784,8 +1780,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					try {
 						clear${tempEntity.names}.clear(pk);
 
-						for (int i = 0; i < ${tempEntity.varName}PKs.length; i++) {
-							add${tempEntity.name}.add(pk, ${tempEntity.varName}PKs[i]);
+						for (${tempEntity.PKClassName} ${tempEntity.varName}PK : ${tempEntity.varName}PKs) {
+							add${tempEntity.name}.add(pk, ${tempEntity.varName}PK);
 						}
 					}
 					catch (DataAccessException dae) {
@@ -1800,9 +1796,7 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 					try {
 						clear${tempEntity.names}.clear(pk);
 
-						for (int i = 0; i < ${tempEntity.varNames}.size(); i++) {
-							${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} = ${tempEntity.varNames}.get(i);
-
+						for (${tempEntity.packagePath}.model.${tempEntity.name} ${tempEntity.varName} : ${tempEntity.varNames}) {
 							add${tempEntity.name}.add(pk, ${tempEntity.varName}.getPrimaryKey());
 						}
 					}

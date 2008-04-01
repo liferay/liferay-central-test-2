@@ -66,9 +66,7 @@ public class PermissionJSONSerializer {
 		List<com.liferay.portal.model.Permission> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Permission model = models.get(i);
-
+		for (Permission model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

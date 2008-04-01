@@ -1416,8 +1416,8 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
 			SystemException {
 		try {
-			for (int i = 0; i < groupPKs.length; i++) {
-				addGroup.add(pk, groupPKs[i]);
+			for (long groupPK : groupPKs) {
+				addGroup.add(pk, groupPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1432,9 +1432,7 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
 			SystemException {
 		try {
-			for (int i = 0; i < groups.size(); i++) {
-				com.liferay.portal.model.Group group = groups.get(i);
-
+			for (com.liferay.portal.model.Group group : groups) {
 				addGroup.add(pk, group.getPrimaryKey());
 			}
 		}
@@ -1491,8 +1489,8 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
 			SystemException {
 		try {
-			for (int i = 0; i < groupPKs.length; i++) {
-				removeGroup.remove(pk, groupPKs[i]);
+			for (long groupPK : groupPKs) {
+				removeGroup.remove(pk, groupPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1508,9 +1506,7 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchGroupException,
 			SystemException {
 		try {
-			for (int i = 0; i < groups.size(); i++) {
-				com.liferay.portal.model.Group group = groups.get(i);
-
+			for (com.liferay.portal.model.Group group : groups) {
 				removeGroup.remove(pk, group.getPrimaryKey());
 			}
 		}
@@ -1528,8 +1524,8 @@ public class RolePersistenceImpl extends BasePersistence
 		try {
 			clearGroups.clear(pk);
 
-			for (int i = 0; i < groupPKs.length; i++) {
-				addGroup.add(pk, groupPKs[i]);
+			for (long groupPK : groupPKs) {
+				addGroup.add(pk, groupPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1546,9 +1542,7 @@ public class RolePersistenceImpl extends BasePersistence
 		try {
 			clearGroups.clear(pk);
 
-			for (int i = 0; i < groups.size(); i++) {
-				com.liferay.portal.model.Group group = groups.get(i);
-
+			for (com.liferay.portal.model.Group group : groups) {
 				addGroup.add(pk, group.getPrimaryKey());
 			}
 		}
@@ -1784,8 +1778,8 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
 			SystemException {
 		try {
-			for (int i = 0; i < permissionPKs.length; i++) {
-				addPermission.add(pk, permissionPKs[i]);
+			for (long permissionPK : permissionPKs) {
+				addPermission.add(pk, permissionPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1801,9 +1795,7 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
 			SystemException {
 		try {
-			for (int i = 0; i < permissions.size(); i++) {
-				com.liferay.portal.model.Permission permission = permissions.get(i);
-
+			for (com.liferay.portal.model.Permission permission : permissions) {
 				addPermission.add(pk, permission.getPrimaryKey());
 			}
 		}
@@ -1861,8 +1853,8 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
 			SystemException {
 		try {
-			for (int i = 0; i < permissionPKs.length; i++) {
-				removePermission.remove(pk, permissionPKs[i]);
+			for (long permissionPK : permissionPKs) {
+				removePermission.remove(pk, permissionPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1878,9 +1870,7 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchPermissionException,
 			SystemException {
 		try {
-			for (int i = 0; i < permissions.size(); i++) {
-				com.liferay.portal.model.Permission permission = permissions.get(i);
-
+			for (com.liferay.portal.model.Permission permission : permissions) {
 				removePermission.remove(pk, permission.getPrimaryKey());
 			}
 		}
@@ -1898,8 +1888,8 @@ public class RolePersistenceImpl extends BasePersistence
 		try {
 			clearPermissions.clear(pk);
 
-			for (int i = 0; i < permissionPKs.length; i++) {
-				addPermission.add(pk, permissionPKs[i]);
+			for (long permissionPK : permissionPKs) {
+				addPermission.add(pk, permissionPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1917,9 +1907,7 @@ public class RolePersistenceImpl extends BasePersistence
 		try {
 			clearPermissions.clear(pk);
 
-			for (int i = 0; i < permissions.size(); i++) {
-				com.liferay.portal.model.Permission permission = permissions.get(i);
-
+			for (com.liferay.portal.model.Permission permission : permissions) {
 				addPermission.add(pk, permission.getPrimaryKey());
 			}
 		}
@@ -2152,8 +2140,8 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
-			for (int i = 0; i < userPKs.length; i++) {
-				addUser.add(pk, userPKs[i]);
+			for (long userPK : userPKs) {
+				addUser.add(pk, userPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -2168,9 +2156,7 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = users.get(i);
-
+			for (com.liferay.portal.model.User user : users) {
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}
@@ -2226,8 +2212,8 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
-			for (int i = 0; i < userPKs.length; i++) {
-				removeUser.remove(pk, userPKs[i]);
+			for (long userPK : userPKs) {
+				removeUser.remove(pk, userPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -2242,9 +2228,7 @@ public class RolePersistenceImpl extends BasePersistence
 		throws NoSuchRoleException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = users.get(i);
-
+			for (com.liferay.portal.model.User user : users) {
 				removeUser.remove(pk, user.getPrimaryKey());
 			}
 		}
@@ -2262,8 +2246,8 @@ public class RolePersistenceImpl extends BasePersistence
 		try {
 			clearUsers.clear(pk);
 
-			for (int i = 0; i < userPKs.length; i++) {
-				addUser.add(pk, userPKs[i]);
+			for (long userPK : userPKs) {
+				addUser.add(pk, userPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -2280,9 +2264,7 @@ public class RolePersistenceImpl extends BasePersistence
 		try {
 			clearUsers.clear(pk);
 
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = users.get(i);
-
+			for (com.liferay.portal.model.User user : users) {
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}

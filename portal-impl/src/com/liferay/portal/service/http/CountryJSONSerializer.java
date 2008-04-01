@@ -69,9 +69,7 @@ public class CountryJSONSerializer {
 		List<com.liferay.portal.model.Country> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Country model = models.get(i);
-
+		for (Country model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -80,9 +80,7 @@ public class ShoppingCouponJSONSerializer {
 		List<com.liferay.portlet.shopping.model.ShoppingCoupon> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			ShoppingCoupon model = models.get(i);
-
+		for (ShoppingCoupon model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

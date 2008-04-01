@@ -84,9 +84,7 @@ public class LayoutJSONSerializer {
 		List<com.liferay.portal.model.Layout> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Layout model = models.get(i);
-
+		for (Layout model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

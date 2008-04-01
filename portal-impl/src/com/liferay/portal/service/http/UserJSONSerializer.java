@@ -95,9 +95,7 @@ public class UserJSONSerializer {
 		List<com.liferay.portal.model.User> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			User model = models.get(i);
-
+		for (User model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

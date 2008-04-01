@@ -65,9 +65,7 @@ public class ListTypeJSONSerializer {
 		List<com.liferay.portal.model.ListType> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			ListType model = models.get(i);
-
+		for (ListType model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

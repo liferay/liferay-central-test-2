@@ -73,9 +73,7 @@ public class WebsiteJSONSerializer {
 		List<com.liferay.portal.model.Website> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Website model = models.get(i);
-
+		for (Website model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -73,9 +73,7 @@ public class MembershipRequestJSONSerializer {
 		List<com.liferay.portal.model.MembershipRequest> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			MembershipRequest model = models.get(i);
-
+		for (MembershipRequest model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

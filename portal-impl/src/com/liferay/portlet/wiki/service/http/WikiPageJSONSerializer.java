@@ -77,9 +77,7 @@ public class WikiPageJSONSerializer {
 		List<com.liferay.portlet.wiki.model.WikiPage> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			WikiPage model = models.get(i);
-
+		for (WikiPage model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

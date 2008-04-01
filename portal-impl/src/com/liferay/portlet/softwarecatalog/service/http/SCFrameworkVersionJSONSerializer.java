@@ -74,9 +74,7 @@ public class SCFrameworkVersionJSONSerializer {
 		List<com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			SCFrameworkVersion model = models.get(i);
-
+		for (SCFrameworkVersion model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

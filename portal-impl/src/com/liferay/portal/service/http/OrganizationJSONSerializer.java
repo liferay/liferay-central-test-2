@@ -73,9 +73,7 @@ public class OrganizationJSONSerializer {
 		List<com.liferay.portal.model.Organization> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Organization model = models.get(i);
-
+		for (Organization model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

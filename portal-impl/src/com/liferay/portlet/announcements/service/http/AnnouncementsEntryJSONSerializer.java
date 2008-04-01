@@ -79,9 +79,7 @@ public class AnnouncementsEntryJSONSerializer {
 		List<com.liferay.portlet.announcements.model.AnnouncementsEntry> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			AnnouncementsEntry model = models.get(i);
-
+		for (AnnouncementsEntry model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

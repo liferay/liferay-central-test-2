@@ -71,9 +71,7 @@ public class RatingsEntryJSONSerializer {
 		List<com.liferay.portlet.ratings.model.RatingsEntry> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			RatingsEntry model = models.get(i);
-
+		for (RatingsEntry model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

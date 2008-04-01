@@ -74,9 +74,7 @@ public class PollsQuestionJSONSerializer {
 		List<com.liferay.portlet.polls.model.PollsQuestion> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			PollsQuestion model = models.get(i);
-
+		for (PollsQuestion model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

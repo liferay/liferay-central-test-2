@@ -65,9 +65,7 @@ public class UserGroupRoleJSONSerializer {
 		List<com.liferay.portal.model.UserGroupRole> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			UserGroupRole model = models.get(i);
-
+		for (UserGroupRole model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -67,9 +67,7 @@ public class AnnouncementsFlagJSONSerializer {
 		List<com.liferay.portlet.announcements.model.AnnouncementsFlag> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			AnnouncementsFlag model = models.get(i);
-
+		for (AnnouncementsFlag model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -68,9 +68,7 @@ public class PluginSettingJSONSerializer {
 		List<com.liferay.portal.model.PluginSetting> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			PluginSetting model = models.get(i);
-
+		for (PluginSetting model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

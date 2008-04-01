@@ -80,9 +80,7 @@ public class AddressJSONSerializer {
 		List<com.liferay.portal.model.Address> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Address model = models.get(i);
-
+		for (Address model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

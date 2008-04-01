@@ -891,8 +891,8 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		throws NoSuchEntryException,
 			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
 		try {
-			for (int i = 0; i < tagsAssetPKs.length; i++) {
-				addTagsAsset.add(pk, tagsAssetPKs[i]);
+			for (long tagsAssetPK : tagsAssetPKs) {
+				addTagsAsset.add(pk, tagsAssetPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -908,9 +908,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		throws NoSuchEntryException,
 			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
 		try {
-			for (int i = 0; i < tagsAssets.size(); i++) {
-				com.liferay.portlet.tags.model.TagsAsset tagsAsset = tagsAssets.get(i);
-
+			for (com.liferay.portlet.tags.model.TagsAsset tagsAsset : tagsAssets) {
 				addTagsAsset.add(pk, tagsAsset.getPrimaryKey());
 			}
 		}
@@ -968,8 +966,8 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		throws NoSuchEntryException,
 			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
 		try {
-			for (int i = 0; i < tagsAssetPKs.length; i++) {
-				removeTagsAsset.remove(pk, tagsAssetPKs[i]);
+			for (long tagsAssetPK : tagsAssetPKs) {
+				removeTagsAsset.remove(pk, tagsAssetPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -985,9 +983,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		throws NoSuchEntryException,
 			com.liferay.portlet.tags.NoSuchAssetException, SystemException {
 		try {
-			for (int i = 0; i < tagsAssets.size(); i++) {
-				com.liferay.portlet.tags.model.TagsAsset tagsAsset = tagsAssets.get(i);
-
+			for (com.liferay.portlet.tags.model.TagsAsset tagsAsset : tagsAssets) {
 				removeTagsAsset.remove(pk, tagsAsset.getPrimaryKey());
 			}
 		}
@@ -1005,8 +1001,8 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		try {
 			clearTagsAssets.clear(pk);
 
-			for (int i = 0; i < tagsAssetPKs.length; i++) {
-				addTagsAsset.add(pk, tagsAssetPKs[i]);
+			for (long tagsAssetPK : tagsAssetPKs) {
+				addTagsAsset.add(pk, tagsAssetPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1024,9 +1020,7 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		try {
 			clearTagsAssets.clear(pk);
 
-			for (int i = 0; i < tagsAssets.size(); i++) {
-				com.liferay.portlet.tags.model.TagsAsset tagsAsset = tagsAssets.get(i);
-
+			for (com.liferay.portlet.tags.model.TagsAsset tagsAsset : tagsAssets) {
 				addTagsAsset.add(pk, tagsAsset.getPrimaryKey());
 			}
 		}

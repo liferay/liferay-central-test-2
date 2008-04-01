@@ -1709,8 +1709,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			SystemException {
 		try {
-			for (int i = 0; i < scProductVersionPKs.length; i++) {
-				addSCProductVersion.add(pk, scProductVersionPKs[i]);
+			for (long scProductVersionPK : scProductVersionPKs) {
+				addSCProductVersion.add(pk, scProductVersionPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1727,10 +1727,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			SystemException {
 		try {
-			for (int i = 0; i < scProductVersions.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion =
-					scProductVersions.get(i);
-
+			for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
 				addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
 			}
 		}
@@ -1791,8 +1788,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			SystemException {
 		try {
-			for (int i = 0; i < scProductVersionPKs.length; i++) {
-				removeSCProductVersion.remove(pk, scProductVersionPKs[i]);
+			for (long scProductVersionPK : scProductVersionPKs) {
+				removeSCProductVersion.remove(pk, scProductVersionPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1809,10 +1806,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchProductVersionException,
 			SystemException {
 		try {
-			for (int i = 0; i < scProductVersions.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion =
-					scProductVersions.get(i);
-
+			for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
 				removeSCProductVersion.remove(pk,
 					scProductVersion.getPrimaryKey());
 			}
@@ -1832,8 +1826,8 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		try {
 			clearSCProductVersions.clear(pk);
 
-			for (int i = 0; i < scProductVersionPKs.length; i++) {
-				addSCProductVersion.add(pk, scProductVersionPKs[i]);
+			for (long scProductVersionPK : scProductVersionPKs) {
+				addSCProductVersion.add(pk, scProductVersionPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1852,10 +1846,7 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 		try {
 			clearSCProductVersions.clear(pk);
 
-			for (int i = 0; i < scProductVersions.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion =
-					scProductVersions.get(i);
-
+			for (com.liferay.portlet.softwarecatalog.model.SCProductVersion scProductVersion : scProductVersions) {
 				addSCProductVersion.add(pk, scProductVersion.getPrimaryKey());
 			}
 		}

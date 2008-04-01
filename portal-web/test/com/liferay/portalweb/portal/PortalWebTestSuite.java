@@ -101,7 +101,6 @@ import com.liferay.portalweb.portlet.webproxy.WebProxyTests;
 import com.liferay.portalweb.portlet.wiki.WikiTests;
 import com.liferay.portalweb.portlet.wikidisplay.WikiDisplayTests;
 import com.liferay.portalweb.portlet.words.WordsTests;
-import com.liferay.portalweb.portlet.workflow.WorkflowTests;
 import com.liferay.portalweb.portlet.xslcontent.XSLContentTests;
 
 /**
@@ -193,8 +192,6 @@ public class PortalWebTestSuite extends BaseTests {
 		addTestSuite(WikiTests.class);
 		addTestSuite(WikiDisplayTests.class);
 		addTestSuite(WordsTests.class);
-		addTestSuite(WorkflowTests.class);
-//		addTestSuite(WSRPProxyTests.class);
 		addTestSuite(XSLContentTests.class);
 	}
 

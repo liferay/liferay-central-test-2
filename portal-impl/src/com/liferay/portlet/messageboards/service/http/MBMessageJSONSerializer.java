@@ -76,9 +76,7 @@ public class MBMessageJSONSerializer {
 		List<com.liferay.portlet.messageboards.model.MBMessage> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			MBMessage model = models.get(i);
-
+		for (MBMessage model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

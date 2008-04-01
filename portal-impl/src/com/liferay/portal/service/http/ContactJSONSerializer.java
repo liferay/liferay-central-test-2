@@ -89,9 +89,7 @@ public class ContactJSONSerializer {
 		List<com.liferay.portal.model.Contact> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Contact model = models.get(i);
-
+		for (Contact model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

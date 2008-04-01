@@ -72,9 +72,7 @@ public class BookmarksFolderJSONSerializer {
 		List<com.liferay.portlet.bookmarks.model.BookmarksFolder> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			BookmarksFolder model = models.get(i);
-
+		for (BookmarksFolder model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

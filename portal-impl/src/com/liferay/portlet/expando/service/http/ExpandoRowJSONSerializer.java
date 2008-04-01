@@ -64,9 +64,7 @@ public class ExpandoRowJSONSerializer {
 		List<com.liferay.portlet.expando.model.ExpandoRow> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			ExpandoRow model = models.get(i);
-
+		for (ExpandoRow model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

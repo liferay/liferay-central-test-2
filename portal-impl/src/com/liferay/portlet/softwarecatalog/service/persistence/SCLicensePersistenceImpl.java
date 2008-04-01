@@ -1373,8 +1373,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			SystemException {
 		try {
-			for (int i = 0; i < scProductEntryPKs.length; i++) {
-				addSCProductEntry.add(pk, scProductEntryPKs[i]);
+			for (long scProductEntryPK : scProductEntryPKs) {
+				addSCProductEntry.add(pk, scProductEntryPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1391,10 +1391,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			SystemException {
 		try {
-			for (int i = 0; i < scProductEntries.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry =
-					scProductEntries.get(i);
-
+			for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
 				addSCProductEntry.add(pk, scProductEntry.getPrimaryKey());
 			}
 		}
@@ -1455,8 +1452,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			SystemException {
 		try {
-			for (int i = 0; i < scProductEntryPKs.length; i++) {
-				removeSCProductEntry.remove(pk, scProductEntryPKs[i]);
+			for (long scProductEntryPK : scProductEntryPKs) {
+				removeSCProductEntry.remove(pk, scProductEntryPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1473,10 +1470,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 			com.liferay.portlet.softwarecatalog.NoSuchProductEntryException,
 			SystemException {
 		try {
-			for (int i = 0; i < scProductEntries.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry =
-					scProductEntries.get(i);
-
+			for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
 				removeSCProductEntry.remove(pk, scProductEntry.getPrimaryKey());
 			}
 		}
@@ -1495,8 +1489,8 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		try {
 			clearSCProductEntries.clear(pk);
 
-			for (int i = 0; i < scProductEntryPKs.length; i++) {
-				addSCProductEntry.add(pk, scProductEntryPKs[i]);
+			for (long scProductEntryPK : scProductEntryPKs) {
+				addSCProductEntry.add(pk, scProductEntryPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1515,10 +1509,7 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		try {
 			clearSCProductEntries.clear(pk);
 
-			for (int i = 0; i < scProductEntries.size(); i++) {
-				com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry =
-					scProductEntries.get(i);
-
+			for (com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry : scProductEntries) {
 				addSCProductEntry.add(pk, scProductEntry.getPrimaryKey());
 			}
 		}

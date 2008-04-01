@@ -78,9 +78,7 @@ public class SCProductEntryJSONSerializer {
 		List<com.liferay.portlet.softwarecatalog.model.SCProductEntry> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			SCProductEntry model = models.get(i);
-
+		for (SCProductEntry model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

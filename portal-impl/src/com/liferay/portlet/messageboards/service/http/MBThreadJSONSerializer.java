@@ -70,9 +70,7 @@ public class MBThreadJSONSerializer {
 		List<com.liferay.portlet.messageboards.model.MBThread> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			MBThread model = models.get(i);
-
+		for (MBThread model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -66,9 +66,7 @@ public class ExpandoColumnJSONSerializer {
 		List<com.liferay.portlet.expando.model.ExpandoColumn> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			ExpandoColumn model = models.get(i);
-
+		for (ExpandoColumn model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -1543,8 +1543,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
-			for (int i = 0; i < userPKs.length; i++) {
-				addUser.add(pk, userPKs[i]);
+			for (long userPK : userPKs) {
+				addUser.add(pk, userPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1559,9 +1559,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = users.get(i);
-
+			for (com.liferay.portal.model.User user : users) {
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}
@@ -1618,8 +1616,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
-			for (int i = 0; i < userPKs.length; i++) {
-				removeUser.remove(pk, userPKs[i]);
+			for (long userPK : userPKs) {
+				removeUser.remove(pk, userPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1634,9 +1632,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		throws NoSuchUserGroupException, com.liferay.portal.NoSuchUserException,
 			SystemException {
 		try {
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = users.get(i);
-
+			for (com.liferay.portal.model.User user : users) {
 				removeUser.remove(pk, user.getPrimaryKey());
 			}
 		}
@@ -1654,8 +1650,8 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		try {
 			clearUsers.clear(pk);
 
-			for (int i = 0; i < userPKs.length; i++) {
-				addUser.add(pk, userPKs[i]);
+			for (long userPK : userPKs) {
+				addUser.add(pk, userPK);
 			}
 		}
 		catch (DataAccessException dae) {
@@ -1672,9 +1668,7 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		try {
 			clearUsers.clear(pk);
 
-			for (int i = 0; i < users.size(); i++) {
-				com.liferay.portal.model.User user = users.get(i);
-
+			for (com.liferay.portal.model.User user : users) {
 				addUser.add(pk, user.getPrimaryKey());
 			}
 		}

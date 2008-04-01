@@ -72,9 +72,7 @@ public class DLFileShortcutJSONSerializer {
 		List<com.liferay.portlet.documentlibrary.model.DLFileShortcut> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			DLFileShortcut model = models.get(i);
-
+		for (DLFileShortcut model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

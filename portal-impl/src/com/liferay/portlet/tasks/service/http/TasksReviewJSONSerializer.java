@@ -76,9 +76,7 @@ public class TasksReviewJSONSerializer {
 		List<com.liferay.portlet.tasks.model.TasksReview> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			TasksReview model = models.get(i);
-
+		for (TasksReview model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

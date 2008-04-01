@@ -69,9 +69,7 @@ public class PortletPreferencesJSONSerializer {
 		List<com.liferay.portal.model.PortletPreferences> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			PortletPreferences model = models.get(i);
-
+		for (PortletPreferences model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

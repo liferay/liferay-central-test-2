@@ -73,9 +73,7 @@ public class EmailAddressJSONSerializer {
 		List<com.liferay.portal.model.EmailAddress> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			EmailAddress model = models.get(i);
-
+		for (EmailAddress model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

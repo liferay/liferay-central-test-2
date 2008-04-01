@@ -74,9 +74,7 @@ public class MBCategoryJSONSerializer {
 		List<com.liferay.portlet.messageboards.model.MBCategory> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			MBCategory model = models.get(i);
-
+		for (MBCategory model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

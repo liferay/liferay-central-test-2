@@ -96,9 +96,7 @@ public class ShoppingItemJSONSerializer {
 		List<com.liferay.portlet.shopping.model.ShoppingItem> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			ShoppingItem model = models.get(i);
-
+		for (ShoppingItem model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

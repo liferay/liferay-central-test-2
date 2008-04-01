@@ -69,9 +69,7 @@ public class RoleJSONSerializer {
 		List<com.liferay.portal.model.Role> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Role model = models.get(i);
-
+		for (Role model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

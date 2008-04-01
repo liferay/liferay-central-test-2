@@ -65,9 +65,7 @@ public class ResourceJSONSerializer {
 		List<com.liferay.portal.model.Resource> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Resource model = models.get(i);
-
+		for (Resource model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

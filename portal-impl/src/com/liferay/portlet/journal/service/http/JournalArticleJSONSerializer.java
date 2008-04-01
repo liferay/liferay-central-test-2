@@ -92,9 +92,7 @@ public class JournalArticleJSONSerializer {
 		List<com.liferay.portlet.journal.model.JournalArticle> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			JournalArticle model = models.get(i);
-
+		for (JournalArticle model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

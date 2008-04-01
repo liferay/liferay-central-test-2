@@ -74,9 +74,7 @@ public class SCProductVersionJSONSerializer {
 		List<com.liferay.portlet.softwarecatalog.model.SCProductVersion> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			SCProductVersion model = models.get(i);
-
+		for (SCProductVersion model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

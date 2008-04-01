@@ -79,9 +79,7 @@ public class DLFileEntryJSONSerializer {
 		List<com.liferay.portlet.documentlibrary.model.DLFileEntry> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			DLFileEntry model = models.get(i);
-
+		for (DLFileEntry model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

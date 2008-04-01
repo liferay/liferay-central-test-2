@@ -74,9 +74,7 @@ public class JournalStructureJSONSerializer {
 		List<com.liferay.portlet.journal.model.JournalStructure> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			JournalStructure model = models.get(i);
-
+		for (JournalStructure model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

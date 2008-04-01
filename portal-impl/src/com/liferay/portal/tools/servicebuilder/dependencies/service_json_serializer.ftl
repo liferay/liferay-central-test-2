@@ -41,9 +41,7 @@ public class ${entity.name}JSONSerializer {
 	public static JSONArray toJSONArray(List<${packagePath}.model.${entity.name}> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			${entity.name} model = models.get(i);
-
+		for (${entity.name} model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

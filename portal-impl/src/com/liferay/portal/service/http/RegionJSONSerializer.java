@@ -67,9 +67,7 @@ public class RegionJSONSerializer {
 		List<com.liferay.portal.model.Region> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			Region model = models.get(i);
-
+		for (Region model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

@@ -68,9 +68,7 @@ public class SCLicenseJSONSerializer {
 		List<com.liferay.portlet.softwarecatalog.model.SCLicense> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			SCLicense model = models.get(i);
-
+		for (SCLicense model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

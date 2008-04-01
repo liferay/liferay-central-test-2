@@ -75,9 +75,7 @@ public class IGImageJSONSerializer {
 		List<com.liferay.portlet.imagegallery.model.IGImage> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			IGImage model = models.get(i);
-
+		for (IGImage model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

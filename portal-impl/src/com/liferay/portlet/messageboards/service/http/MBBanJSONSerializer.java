@@ -70,9 +70,7 @@ public class MBBanJSONSerializer {
 		List<com.liferay.portlet.messageboards.model.MBBan> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			MBBan model = models.get(i);
-
+		for (MBBan model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

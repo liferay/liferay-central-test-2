@@ -74,9 +74,7 @@ public class BlogsEntryJSONSerializer {
 		List<com.liferay.portlet.blogs.model.BlogsEntry> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			BlogsEntry model = models.get(i);
-
+		for (BlogsEntry model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

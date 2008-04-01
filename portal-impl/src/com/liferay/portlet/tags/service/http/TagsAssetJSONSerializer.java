@@ -84,9 +84,7 @@ public class TagsAssetJSONSerializer {
 		List<com.liferay.portlet.tags.model.TagsAsset> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			TagsAsset model = models.get(i);
-
+		for (TagsAsset model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 

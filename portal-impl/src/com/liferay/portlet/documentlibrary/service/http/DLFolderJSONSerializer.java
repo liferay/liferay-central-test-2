@@ -74,9 +74,7 @@ public class DLFolderJSONSerializer {
 		List<com.liferay.portlet.documentlibrary.model.DLFolder> models) {
 		JSONArray jsonArray = new JSONArray();
 
-		for (int i = 0; i < models.size(); i++) {
-			DLFolder model = models.get(i);
-
+		for (DLFolder model : models) {
 			jsonArray.put(toJSONObject(model));
 		}
 
