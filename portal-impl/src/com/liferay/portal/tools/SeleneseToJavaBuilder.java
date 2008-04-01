@@ -277,7 +277,7 @@ public class SeleneseToJavaBuilder {
 
 				sm.append("try {");
 				sm.append("if (");
-				
+
 				if (param1.equals("waitForElementNotPresent")) {
 					sm.append("!");
 				}
