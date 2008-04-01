@@ -1583,6 +1583,229 @@ Liferay.Service.DL.DLFolder = {
 	}
 };
 
+Liferay.Service.Expando = {
+	servicePackage: "com.liferay.portlet.expando.service.http."
+};
+
+Liferay.Service.Expando.ExpandoColumn = {
+	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoColumn" + Liferay.Service.classNameSuffix,
+
+	addColumn: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addColumn";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteColumn: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteColumn";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getColumn: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getColumn";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getColumns: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getColumns";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getColumnsCount: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getColumnsCount";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateColumn: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateColumn";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
+Liferay.Service.Expando.ExpandoRow = {
+	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoRow" + Liferay.Service.classNameSuffix,
+
+	addRow: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addRow";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteRow: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteRow";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getRows: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getRows";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getRowsCount: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getRowsCount";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
+Liferay.Service.Expando.ExpandoTable = {
+	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoTable" + Liferay.Service.classNameSuffix,
+
+	addTable: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addTable";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteTable: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteTable";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteTables: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteTables";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getTable: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getTable";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getTables: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getTables";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	updateTable: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateTable";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
+Liferay.Service.Expando.ExpandoValue = {
+	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoValue" + Liferay.Service.classNameSuffix,
+
+	addValue: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addValue";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteColumnValues: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteColumnValues";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteRowValues: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteRowValues";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteTableValues: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteTableValues";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteValue: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteValue";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	deleteValues: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "deleteValues";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getColumnValues: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getColumnValues";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getColumnValuesCount: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getColumnValuesCount";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getRowValues: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getRowValues";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getRowValuesCount: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getRowValuesCount";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getTableValues: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getTableValues";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getTableValuesCount: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getTableValuesCount";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
+	getValue: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getValue";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.IG = {
 	servicePackage: "com.liferay.portlet.imagegallery.service.http."
 };
@@ -2943,229 +3166,6 @@ Liferay.Service.Workflow.WorkflowInstance = {
 	signalToken: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "signalToken";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Expando = {
-	servicePackage: "com.liferay.portlet.expando.service.http."
-};
-
-Liferay.Service.Expando.ExpandoColumn = {
-	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoColumn" + Liferay.Service.classNameSuffix,
-
-	addColumn: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addColumn";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteColumn: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteColumn";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getColumn: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getColumn";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getColumns: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getColumns";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getColumnsCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getColumnsCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateColumn: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateColumn";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Expando.ExpandoRow = {
-	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoRow" + Liferay.Service.classNameSuffix,
-
-	addRow: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addRow";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteRow: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteRow";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getRows: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getRows";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getRowsCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getRowsCount";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Expando.ExpandoTable = {
-	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoTable" + Liferay.Service.classNameSuffix,
-
-	addTable: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addTable";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteTable: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteTable";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteTables: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteTables";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getTable: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getTable";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getTables: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getTables";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	updateTable: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "updateTable";
-
-		return Liferay.Service.ajax(params, callback);
-	}
-};
-
-Liferay.Service.Expando.ExpandoValue = {
-	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoValue" + Liferay.Service.classNameSuffix,
-
-	addValue: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addValue";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteColumnValues: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteColumnValues";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteRowValues: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteRowValues";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteTableValues: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteTableValues";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteValue: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteValue";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	deleteValues: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "deleteValues";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getColumnValues: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getColumnValues";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getColumnValuesCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getColumnValuesCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getRowValues: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getRowValues";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getRowValuesCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getRowValuesCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getTableValues: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getTableValues";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getTableValuesCount: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getTableValuesCount";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getValue: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getValue";
 
 		return Liferay.Service.ajax(params, callback);
 	}

@@ -67,8 +67,11 @@ import com.liferay.portal.util.SessionClicks_IW;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactory;
+import com.liferay.portlet.expando.service.ExpandoColumnService;
+import com.liferay.portlet.expando.service.ExpandoRowService;
+import com.liferay.portlet.expando.service.ExpandoTableService;
+import com.liferay.portlet.expando.service.ExpandoValueService;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
@@ -125,29 +128,29 @@ public class VelocityVariables {
 
 		vc.put("escapeTool", new EscapeTool());
 
-		// ExpandoColumn service util
+		// Expando column service
 
-		vc.put("expandoColumnUtil",
-			ServiceLocator.getInstance().findService(
-				"com.liferay.portal.service.ExpandoColumnService"));
+		ServiceLocator serviceLocator = ServiceLocator.getInstance();
 
-		// ExpandoTable service util
+		vc.put(
+			"expandoColumnService",
+			serviceLocator.findService(
+				ExpandoColumnService.class.getName()));
 
-		vc.put("expandoTableUtil",
-			ServiceLocator.getInstance().findService(
-				"com.liferay.portal.service.ExpandoTableService"));
+		// Expando row service
 
-		// ExpandoTableRow service util
+		vc.put("expandoRowService",
+			serviceLocator.findService(ExpandoRowService.class.getName()));
 
-		vc.put("expandoTableRowUtil",
-			ServiceLocator.getInstance().findService(
-				"com.liferay.portal.service.ExpandoTableRowService"));
+		// Expando table service
 
-		// ExpandoValue service util
+		vc.put("expandoTableService",
+			serviceLocator.findService(ExpandoTableService.class.getName()));
 
-		vc.put("expandoValueUtil",
-			ServiceLocator.getInstance().findService(
-				"com.liferay.portal.service.ExpandoValueService"));
+		// Expando value service
+
+		vc.put("expandoValueService",
+			serviceLocator.findService(ExpandoValueService.class.getName()));
 
 		// Getter util
 
@@ -229,8 +232,7 @@ public class VelocityVariables {
 		// Service locator
 
 		_insertHelperUtility(
-			vc, restrictedVariables, "serviceLocator",
-			ServiceLocator.getInstance());
+			vc, restrictedVariables, "serviceLocator", serviceLocator);
 
 		// Session clicks
 
@@ -416,15 +418,12 @@ public class VelocityVariables {
 
 		// Insert custom vm variables
 
-		Map vmVariables = (Map)req.getAttribute(WebKeys.VM_VARIABLES);
+		Map<String, Object> vmVariables = (Map<String, Object>)req.getAttribute(
+			WebKeys.VM_VARIABLES);
 
 		if (vmVariables != null) {
-			Iterator itr = vmVariables.entrySet().iterator();
-
-			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
-
-				String key = (String)entry.getKey();
+			for (Map.Entry<String, Object> entry : vmVariables.entrySet()) {
+				String key = entry.getKey();
 				Object value = entry.getValue();
 
 				if (Validator.isNotNull(key)) {
