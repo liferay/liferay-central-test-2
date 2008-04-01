@@ -289,6 +289,8 @@ public class PropsUtil {
 
 	public static final String SESSION_TIMEOUT_AUTO_EXTEND = "session.timeout.auto.extend";
 
+	public static final String SESSION_TIMEOUT_REDIRECT_ON_EXPIRE = "session.timeout.redirect.on.expire";
+
 	public static final String SESSION_SHARED_ATTRIBUTES = "session.shared.attributes";
 
 	public static final String SESSION_ENABLE_PERSISTENT_COOKIES = "session.enable.persistent.cookies";

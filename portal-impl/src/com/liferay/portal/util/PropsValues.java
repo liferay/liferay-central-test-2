@@ -703,6 +703,10 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.SESSION_TIMEOUT_AUTO_EXTEND));
 
+	public static final boolean SESSION_TIMEOUT_REDIRECT_ON_EXPIRE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE));
+
 	public static final int SESSION_TIMEOUT_WARNING = GetterUtil.getInteger(
 		PropsUtil.get(PropsUtil.SESSION_TIMEOUT_WARNING));
 

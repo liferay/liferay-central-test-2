@@ -51,7 +51,7 @@
 						autoExtend: <%= PropsValues.SESSION_TIMEOUT_AUTO_EXTEND %>,
 						timeout: <%= sessionTimeout %>,
 						timeoutWarning: <%= sessionTimeoutWarning %>,
-						redirectOnExpiration: <%= false /* PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE*/ %>
+						redirectOnExpiration: <%= PropsValues.SESSION_TIMEOUT_REDIRECT_ON_EXPIRE %>
 					}
 				);
 			</c:if>
