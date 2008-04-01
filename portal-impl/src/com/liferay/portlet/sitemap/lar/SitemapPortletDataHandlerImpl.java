@@ -100,4 +100,8 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 		}
 	}
 
+	public boolean isPublishToLiveByDefault() {
+		return true;
+	}
+
 }
