@@ -801,6 +801,10 @@ li.toggle-expand a {
 	height: 1%;
 }
 
+.lfr-meta-actions {
+	padding-top: 1em;
+}
+
 .lfr-table {
 	border-collapse: collapse;
 	clear: both;

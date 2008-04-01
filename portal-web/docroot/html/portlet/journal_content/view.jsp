@@ -70,17 +70,15 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 					%>
 
 					<c:if test="<%= availableLocales.length > 0 %>">
-						<div>
-							<br />
-
+						<div class="lfr-meta-actions locale-controls">
 							<liferay-ui:language languageIds="<%= availableLocales %>" displayStyle="<%= 0 %>" />
 						</div>
 					</c:if>
 				</c:if>
 
-				<span class="journal-content-article" id="<%= articleDisplay.getGroupId() %>_<%= articleDisplay.getArticleId() %>_<%= articleDisplay.getVersion() %>">
+				<div class="journal-content-article" id="<%= articleDisplay.getGroupId() %>_<%= articleDisplay.getArticleId() %>_<%= articleDisplay.getVersion() %>">
 				<%= content %>
-				</span>
+				</div>
 
 				<c:if test="<%= articleDisplay.isPaginate() %>">
 					<liferay-ui:page-iterator
@@ -122,8 +120,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		%>
 
 		<c:if test="<%= themeDisplay.isSignedIn() && (showEditArticleIcon || showSelectArticleIcon || showAddArticleIcon) %>">
-			<div>
-				<br />
+			<div class="lfr-meta-actions edit-controls">
 
 				<c:if test="<%= showEditArticleIcon %>">
 					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
@@ -154,9 +151,8 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		</c:if>
 
 		<c:if test="<%= (articleDisplay != null) && (enableRatings || enableComments) %>">
-			<div>
+			<div class="lfr-meta-actions article-controls">
 				<c:if test="<%= enableRatings %>">
-					<br />
 
 					<liferay-ui:ratings
 						className="<%= JournalArticle.class.getName() %>"
@@ -166,7 +162,6 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 				</c:if>
 
 				<c:if test="<%= enableComments %>">
-					<br />
 
 					<portlet:actionURL var="discussionURL">
 						<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
