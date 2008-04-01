@@ -54,6 +54,8 @@ public interface Http {
 
 	public static final int HTTPS_PORT = 443;
 
+	public static final String PROTOCOL_DELIMITER = "://";
+
 	public String addParameter(String url, String name, boolean value);
 
 	public String addParameter(String url, String name, double value);
@@ -74,9 +76,9 @@ public interface Http {
 
 	public String encodeURL(String url, boolean escapeSpaces);
 
-	public String getDomain(String url);
-
 	public String getCompleteURL(HttpServletRequest req);
+
+	public String getDomain(String url);
 
 	public String getParameter(String url, String name);
 

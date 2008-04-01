@@ -256,7 +256,14 @@ public class HttpImpl implements Http {
 	public String getDomain(String url) {
 		url = removeProtocol(url);
 
-		return url.substring(0, url.indexOf("/"));
+		int pos = url.indexOf(StringPool.SLASH);
+
+		if (pos != -1) {
+			return url.substring(0, pos);
+		}
+		else {
+			return url;
+		}
 	}
 
 	public HostConfiguration getHostConfig(String location) throws IOException {
@@ -322,11 +329,14 @@ public class HttpImpl implements Http {
 	}
 
 	public String getProtocol(String url) {
-		if (url.indexOf("://") != -1) {
-			return url.substring(0, url.indexOf("://"));
-		}
+		int pos = url.indexOf(Http.PROTOCOL_DELIMITER);
 
-		return Http.HTTP;
+		if (pos != -1) {
+			return url.substring(0, pos);
+		}
+		else {
+			return Http.HTTP;
+		}
 	}
 
 	public String getProtocol(HttpServletRequest req) {

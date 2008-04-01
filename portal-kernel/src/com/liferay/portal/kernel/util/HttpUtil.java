@@ -84,12 +84,12 @@ public class HttpUtil {
 		return getHttp().encodeURL(url, escapeSpaces);
 	}
 
-	public static String getDomain(String url) {
-		return getHttp().getDomain(url);
-	}
-
 	public static String getCompleteURL(HttpServletRequest req) {
 		return getHttp().getCompleteURL(req);
+	}
+
+	public static String getDomain(String url) {
+		return getHttp().getDomain(url);
 	}
 
 	public static Http getHttp() {
