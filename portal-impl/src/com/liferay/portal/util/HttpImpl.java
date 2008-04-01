@@ -253,6 +253,12 @@ public class HttpImpl implements Http {
 		return completeURL.toString();
 	}
 
+	public String getDomain(String url) {
+		url = removeProtocol(url);
+
+		return url.substring(0, url.indexOf("/"));
+	}
+
 	public HostConfiguration getHostConfig(String location) throws IOException {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Location is " + location);
@@ -313,6 +319,14 @@ public class HttpImpl implements Http {
 		else {
 			return Http.HTTPS;
 		}
+	}
+
+	public String getProtocol(String url) {
+		if (url.indexOf("://") != -1) {
+			return url.substring(0, url.indexOf("://"));
+		}
+
+		return Http.HTTP;
 	}
 
 	public String getProtocol(HttpServletRequest req) {

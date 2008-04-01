@@ -84,6 +84,10 @@ public class HttpUtil {
 		return getHttp().encodeURL(url, escapeSpaces);
 	}
 
+	public static String getDomain(String url) {
+		return getHttp().getDomain(url);
+	}
+
 	public static String getCompleteURL(HttpServletRequest req) {
 		return getHttp().getCompleteURL(req);
 	}
@@ -108,6 +112,10 @@ public class HttpUtil {
 
 	public static String getProtocol(boolean secure) {
 		return getHttp().getProtocol(secure);
+	}
+
+	public static String getProtocol(String url) {
+		return getHttp().getProtocol(url);
 	}
 
 	public static String getProtocol(HttpServletRequest req) {

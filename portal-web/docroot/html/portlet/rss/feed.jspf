@@ -45,6 +45,13 @@ catch (Exception e) {
 			<%
 			Date publishedDate = feed.getPublishedDate();
 			String description = feed.getDescription();
+
+			StringMaker baseUrl = new StringMaker();
+
+			baseUrl.append(HttpUtil.getProtocol(feed.getLink()));
+			baseUrl.append("://");
+			baseUrl.append(HttpUtil.getDomain(feed.getLink()));
+
 			SyndImage feedImage = feed.getImage();
 			%>
 
@@ -115,9 +122,20 @@ catch (Exception e) {
 								content = (SyndContent)contents.get(k);
 
 								if ((content != null) && Validator.isNotNull(content.getValue())) {
+
+									String text = StringUtil.replace(
+										content.getValue(),
+										new String[] {
+											"src=\"/",
+											"href=\"/"
+										},
+										new String[] {
+											"src=\"" + baseUrl.toString() + "/",
+											"href=\"" + baseUrl.toString() + "/"
+										});
 							%>
 
-									<%= content.getValue() %>
+									<%= text %>
 
 							<%
 								}

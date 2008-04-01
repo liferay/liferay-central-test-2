@@ -74,6 +74,8 @@ public interface Http {
 
 	public String encodeURL(String url, boolean escapeSpaces);
 
+	public String getDomain(String url);
+
 	public String getCompleteURL(HttpServletRequest req);
 
 	public String getParameter(String url, String name);
@@ -83,6 +85,8 @@ public interface Http {
 	public Map getParameterMap(String queryString);
 
 	public String getProtocol(boolean secure);
+
+	public String getProtocol(String url);
 
 	public String getProtocol(HttpServletRequest req);
 
