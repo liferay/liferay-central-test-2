@@ -216,58 +216,6 @@ public class WebsiteLocalServiceUtil {
 		websiteLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		websiteLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		websiteLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		websiteLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		return websiteLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
-
-		websiteLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		WebsiteLocalService websiteLocalService = WebsiteLocalServiceFactory.getService();
 

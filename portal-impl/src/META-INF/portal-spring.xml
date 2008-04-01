@@ -590,322 +590,6 @@
 			<ref bean="com.liferay.portal.service.persistence.EmailAddressPersistence.impl" />
 		</property>
 	</bean>
-	<bean id="com.liferay.portal.service.ExpandoColumnLocalService.impl" class="com.liferay.portal.service.impl.ExpandoColumnLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ExpandoColumnLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.ExpandoColumnLocalService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoColumnLocalServiceFactory" class="com.liferay.portal.service.ExpandoColumnLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.ExpandoColumnLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoColumnService.impl" class="com.liferay.portal.service.impl.ExpandoColumnServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ExpandoColumnService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.ExpandoColumnService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoColumnServiceFactory" class="com.liferay.portal.service.ExpandoColumnServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.ExpandoColumnService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoColumnPersistence.impl" class="com.liferay.portal.service.persistence.ExpandoColumnPersistenceImpl" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoColumnPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.persistence.ExpandoColumnPersistence.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoColumnUtil" class="com.liferay.portal.service.persistence.ExpandoColumnUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ExpandoColumnPersistence.impl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoTableLocalService.impl" class="com.liferay.portal.service.impl.ExpandoTableLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ExpandoTableLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.ExpandoTableLocalService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoTableLocalServiceFactory" class="com.liferay.portal.service.ExpandoTableLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.ExpandoTableLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoTableService.impl" class="com.liferay.portal.service.impl.ExpandoTableServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ExpandoTableService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.ExpandoTableService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoTableServiceFactory" class="com.liferay.portal.service.ExpandoTableServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.ExpandoTableService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoTablePersistence.impl" class="com.liferay.portal.service.persistence.ExpandoTablePersistenceImpl" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoTablePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.persistence.ExpandoTablePersistence.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoTableUtil" class="com.liferay.portal.service.persistence.ExpandoTableUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ExpandoTablePersistence.impl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoTableRowLocalService.impl" class="com.liferay.portal.service.impl.ExpandoTableRowLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ExpandoTableRowLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.ExpandoTableRowLocalService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoTableRowLocalServiceFactory" class="com.liferay.portal.service.ExpandoTableRowLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.ExpandoTableRowLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoTableRowService.impl" class="com.liferay.portal.service.impl.ExpandoTableRowServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ExpandoTableRowService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.ExpandoTableRowService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoTableRowServiceFactory" class="com.liferay.portal.service.ExpandoTableRowServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.ExpandoTableRowService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoTableRowPersistence.impl" class="com.liferay.portal.service.persistence.ExpandoTableRowPersistenceImpl" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoTableRowPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.persistence.ExpandoTableRowPersistence.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoTableRowUtil" class="com.liferay.portal.service.persistence.ExpandoTableRowUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ExpandoTableRowPersistence.impl" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoValueLocalService.impl" class="com.liferay.portal.service.impl.ExpandoValueLocalServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ExpandoValueLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.ExpandoValueLocalService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoValueLocalServiceFactory" class="com.liferay.portal.service.ExpandoValueLocalServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.ExpandoValueLocalService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoValueService.impl" class="com.liferay.portal.service.impl.ExpandoValueServiceImpl" lazy-init="true" />
-	<bean id="com.liferay.portal.service.ExpandoValueService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.ExpandoValueService.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.ExpandoValueServiceFactory" class="com.liferay.portal.service.ExpandoValueServiceFactory" lazy-init="true">
-		<property name="service">
-			<ref bean="com.liferay.portal.service.ExpandoValueService.transaction" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoValuePersistence.impl" class="com.liferay.portal.service.persistence.ExpandoValuePersistenceImpl" lazy-init="true">
-		<property name="dataSource">
-			<ref bean="liferayDataSource" />
-		</property>
-		<property name="sessionFactory">
-			<ref bean="liferaySessionFactory" />
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoValuePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
-		<property name="transactionManager">
-			<ref bean="liferayTransactionManager" />
-		</property>
-		<property name="target">
-			<ref bean="com.liferay.portal.service.persistence.ExpandoValuePersistence.impl" />
-		</property>
-		<property name="transactionAttributes">
-			<props>
-				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
-				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
-			</props>
-		</property>
-	</bean>
-	<bean id="com.liferay.portal.service.persistence.ExpandoValueUtil" class="com.liferay.portal.service.persistence.ExpandoValueUtil" lazy-init="true">
-		<property name="persistence">
-			<ref bean="com.liferay.portal.service.persistence.ExpandoValuePersistence.impl" />
-		</property>
-	</bean>
 	<bean id="com.liferay.portal.service.GroupLocalService.impl" class="com.liferay.portal.service.impl.GroupLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.GroupLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -7402,6 +7086,322 @@
 	<bean id="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" class="com.liferay.portlet.workflow.service.WorkflowTaskServiceFactory" lazy-init="true">
 		<property name="service">
 			<ref bean="com.liferay.portlet.workflow.service.WorkflowTaskService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoColumnLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoColumnLocalService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoColumnLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoColumnServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoColumnService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoColumnServiceFactory" class="com.liferay.portlet.expando.service.ExpandoColumnServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoColumnService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoRowLocalService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoRowLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoRowServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoRowService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoRowServiceFactory" class="com.liferay.portlet.expando.service.ExpandoRowServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoRowService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoTableLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoTableLocalService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoTableLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoTableServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoTableService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoTableServiceFactory" class="com.liferay.portlet.expando.service.ExpandoTableServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoTableService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoTableUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoTableUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence.impl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoValueLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoValueLocalService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" class="com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoValueLocalService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoValueServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoValueService.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="add*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="check*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="clear*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="delete*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.ExpandoValueServiceFactory" class="com.liferay.portlet.expando.service.ExpandoValueServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portlet.expando.service.ExpandoValueService.transaction" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistenceImpl" lazy-init="true">
+		<property name="dataSource">
+			<ref bean="liferayDataSource" />
+		</property>
+		<property name="sessionFactory">
+			<ref bean="liferaySessionFactory" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
+		<property name="transactionManager">
+			<ref bean="liferayTransactionManager" />
+		</property>
+		<property name="target">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" />
+		</property>
+		<property name="transactionAttributes">
+			<props>
+				<prop key="remove*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="set*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="update*">PROPAGATION_REQUIRED,-com.liferay.portal.PortalException,-com.liferay.portal.SystemException</prop>
+				<prop key="*">PROPAGATION_SUPPORTS,readOnly</prop>
+			</props>
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil" lazy-init="true">
+		<property name="persistence">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" />
 		</property>
 	</bean>
 </beans>

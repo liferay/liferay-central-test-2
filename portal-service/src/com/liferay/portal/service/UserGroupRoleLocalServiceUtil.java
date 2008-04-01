@@ -219,58 +219,6 @@ public class UserGroupRoleLocalServiceUtil {
 		userGroupRoleLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
-
-		return userGroupRoleLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
-
-		userGroupRoleLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
-
-		return userGroupRoleLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
-
-		userGroupRoleLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
-
-		return userGroupRoleLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
-
-		userGroupRoleLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
-
-		return userGroupRoleLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
-
-		userGroupRoleLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		UserGroupRoleLocalService userGroupRoleLocalService = UserGroupRoleLocalServiceFactory.getService();
 

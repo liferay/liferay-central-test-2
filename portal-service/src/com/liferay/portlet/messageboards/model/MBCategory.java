@@ -49,11 +49,11 @@ package com.liferay.portlet.messageboards.model;
  *
  */
 public interface MBCategory extends MBCategoryModel {
-	public java.util.List getAncestorCategoryIds()
+	public java.util.List<Long> getAncestorCategoryIds()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.util.List getAncestors()
+	public java.util.List<com.liferay.portlet.messageboards.model.MBCategory> getAncestors()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

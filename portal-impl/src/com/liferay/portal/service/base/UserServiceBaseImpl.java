@@ -58,22 +58,6 @@ import com.liferay.portal.service.EmailAddressLocalService;
 import com.liferay.portal.service.EmailAddressLocalServiceFactory;
 import com.liferay.portal.service.EmailAddressService;
 import com.liferay.portal.service.EmailAddressServiceFactory;
-import com.liferay.portal.service.ExpandoColumnLocalService;
-import com.liferay.portal.service.ExpandoColumnLocalServiceFactory;
-import com.liferay.portal.service.ExpandoColumnService;
-import com.liferay.portal.service.ExpandoColumnServiceFactory;
-import com.liferay.portal.service.ExpandoTableLocalService;
-import com.liferay.portal.service.ExpandoTableLocalServiceFactory;
-import com.liferay.portal.service.ExpandoTableRowLocalService;
-import com.liferay.portal.service.ExpandoTableRowLocalServiceFactory;
-import com.liferay.portal.service.ExpandoTableRowService;
-import com.liferay.portal.service.ExpandoTableRowServiceFactory;
-import com.liferay.portal.service.ExpandoTableService;
-import com.liferay.portal.service.ExpandoTableServiceFactory;
-import com.liferay.portal.service.ExpandoValueLocalService;
-import com.liferay.portal.service.ExpandoValueLocalServiceFactory;
-import com.liferay.portal.service.ExpandoValueService;
-import com.liferay.portal.service.ExpandoValueServiceFactory;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupLocalServiceFactory;
 import com.liferay.portal.service.GroupService;
@@ -194,14 +178,6 @@ import com.liferay.portal.service.persistence.CountryPersistence;
 import com.liferay.portal.service.persistence.CountryUtil;
 import com.liferay.portal.service.persistence.EmailAddressPersistence;
 import com.liferay.portal.service.persistence.EmailAddressUtil;
-import com.liferay.portal.service.persistence.ExpandoColumnPersistence;
-import com.liferay.portal.service.persistence.ExpandoColumnUtil;
-import com.liferay.portal.service.persistence.ExpandoTablePersistence;
-import com.liferay.portal.service.persistence.ExpandoTableRowPersistence;
-import com.liferay.portal.service.persistence.ExpandoTableRowUtil;
-import com.liferay.portal.service.persistence.ExpandoTableUtil;
-import com.liferay.portal.service.persistence.ExpandoValuePersistence;
-import com.liferay.portal.service.persistence.ExpandoValueUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupFinderUtil;
 import com.liferay.portal.service.persistence.GroupPersistence;
@@ -307,6 +283,12 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinder;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankFinderUtil;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersistence;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
+import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory;
+import com.liferay.portlet.expando.service.ExpandoValueService;
+import com.liferay.portlet.expando.service.ExpandoValueServiceFactory;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
+import com.liferay.portlet.expando.service.persistence.ExpandoValueUtil;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
 import com.liferay.portlet.messageboards.service.MBBanLocalServiceFactory;
 import com.liferay.portlet.messageboards.service.MBBanService;
@@ -527,112 +509,6 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	public void setEmailAddressPersistence(
 		EmailAddressPersistence emailAddressPersistence) {
 		this.emailAddressPersistence = emailAddressPersistence;
-	}
-
-	public ExpandoColumnLocalService getExpandoColumnLocalService() {
-		return expandoColumnLocalService;
-	}
-
-	public void setExpandoColumnLocalService(
-		ExpandoColumnLocalService expandoColumnLocalService) {
-		this.expandoColumnLocalService = expandoColumnLocalService;
-	}
-
-	public ExpandoColumnService getExpandoColumnService() {
-		return expandoColumnService;
-	}
-
-	public void setExpandoColumnService(
-		ExpandoColumnService expandoColumnService) {
-		this.expandoColumnService = expandoColumnService;
-	}
-
-	public ExpandoColumnPersistence getExpandoColumnPersistence() {
-		return expandoColumnPersistence;
-	}
-
-	public void setExpandoColumnPersistence(
-		ExpandoColumnPersistence expandoColumnPersistence) {
-		this.expandoColumnPersistence = expandoColumnPersistence;
-	}
-
-	public ExpandoTableLocalService getExpandoTableLocalService() {
-		return expandoTableLocalService;
-	}
-
-	public void setExpandoTableLocalService(
-		ExpandoTableLocalService expandoTableLocalService) {
-		this.expandoTableLocalService = expandoTableLocalService;
-	}
-
-	public ExpandoTableService getExpandoTableService() {
-		return expandoTableService;
-	}
-
-	public void setExpandoTableService(ExpandoTableService expandoTableService) {
-		this.expandoTableService = expandoTableService;
-	}
-
-	public ExpandoTablePersistence getExpandoTablePersistence() {
-		return expandoTablePersistence;
-	}
-
-	public void setExpandoTablePersistence(
-		ExpandoTablePersistence expandoTablePersistence) {
-		this.expandoTablePersistence = expandoTablePersistence;
-	}
-
-	public ExpandoTableRowLocalService getExpandoTableRowLocalService() {
-		return expandoTableRowLocalService;
-	}
-
-	public void setExpandoTableRowLocalService(
-		ExpandoTableRowLocalService expandoTableRowLocalService) {
-		this.expandoTableRowLocalService = expandoTableRowLocalService;
-	}
-
-	public ExpandoTableRowService getExpandoTableRowService() {
-		return expandoTableRowService;
-	}
-
-	public void setExpandoTableRowService(
-		ExpandoTableRowService expandoTableRowService) {
-		this.expandoTableRowService = expandoTableRowService;
-	}
-
-	public ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		return expandoTableRowPersistence;
-	}
-
-	public void setExpandoTableRowPersistence(
-		ExpandoTableRowPersistence expandoTableRowPersistence) {
-		this.expandoTableRowPersistence = expandoTableRowPersistence;
-	}
-
-	public ExpandoValueLocalService getExpandoValueLocalService() {
-		return expandoValueLocalService;
-	}
-
-	public void setExpandoValueLocalService(
-		ExpandoValueLocalService expandoValueLocalService) {
-		this.expandoValueLocalService = expandoValueLocalService;
-	}
-
-	public ExpandoValueService getExpandoValueService() {
-		return expandoValueService;
-	}
-
-	public void setExpandoValueService(ExpandoValueService expandoValueService) {
-		this.expandoValueService = expandoValueService;
-	}
-
-	public ExpandoValuePersistence getExpandoValuePersistence() {
-		return expandoValuePersistence;
-	}
-
-	public void setExpandoValuePersistence(
-		ExpandoValuePersistence expandoValuePersistence) {
-		this.expandoValuePersistence = expandoValuePersistence;
 	}
 
 	public GroupLocalService getGroupLocalService() {
@@ -1505,6 +1381,32 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 		this.blogsStatsUserFinder = blogsStatsUserFinder;
 	}
 
+	public ExpandoValueLocalService getExpandoValueLocalService() {
+		return expandoValueLocalService;
+	}
+
+	public void setExpandoValueLocalService(
+		ExpandoValueLocalService expandoValueLocalService) {
+		this.expandoValueLocalService = expandoValueLocalService;
+	}
+
+	public ExpandoValueService getExpandoValueService() {
+		return expandoValueService;
+	}
+
+	public void setExpandoValueService(ExpandoValueService expandoValueService) {
+		this.expandoValueService = expandoValueService;
+	}
+
+	public ExpandoValuePersistence getExpandoValuePersistence() {
+		return expandoValuePersistence;
+	}
+
+	public void setExpandoValuePersistence(
+		ExpandoValuePersistence expandoValuePersistence) {
+		this.expandoValuePersistence = expandoValuePersistence;
+	}
+
 	public DLFileRankLocalService getDLFileRankLocalService() {
 		return dlFileRankLocalService;
 	}
@@ -1708,54 +1610,6 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 
 		if (emailAddressPersistence == null) {
 			emailAddressPersistence = EmailAddressUtil.getPersistence();
-		}
-
-		if (expandoColumnLocalService == null) {
-			expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getImpl();
-		}
-
-		if (expandoColumnService == null) {
-			expandoColumnService = ExpandoColumnServiceFactory.getImpl();
-		}
-
-		if (expandoColumnPersistence == null) {
-			expandoColumnPersistence = ExpandoColumnUtil.getPersistence();
-		}
-
-		if (expandoTableLocalService == null) {
-			expandoTableLocalService = ExpandoTableLocalServiceFactory.getImpl();
-		}
-
-		if (expandoTableService == null) {
-			expandoTableService = ExpandoTableServiceFactory.getImpl();
-		}
-
-		if (expandoTablePersistence == null) {
-			expandoTablePersistence = ExpandoTableUtil.getPersistence();
-		}
-
-		if (expandoTableRowLocalService == null) {
-			expandoTableRowLocalService = ExpandoTableRowLocalServiceFactory.getImpl();
-		}
-
-		if (expandoTableRowService == null) {
-			expandoTableRowService = ExpandoTableRowServiceFactory.getImpl();
-		}
-
-		if (expandoTableRowPersistence == null) {
-			expandoTableRowPersistence = ExpandoTableRowUtil.getPersistence();
-		}
-
-		if (expandoValueLocalService == null) {
-			expandoValueLocalService = ExpandoValueLocalServiceFactory.getImpl();
-		}
-
-		if (expandoValueService == null) {
-			expandoValueService = ExpandoValueServiceFactory.getImpl();
-		}
-
-		if (expandoValuePersistence == null) {
-			expandoValuePersistence = ExpandoValueUtil.getPersistence();
 		}
 
 		if (groupLocalService == null) {
@@ -2166,6 +2020,18 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 			blogsStatsUserFinder = BlogsStatsUserFinderUtil.getFinder();
 		}
 
+		if (expandoValueLocalService == null) {
+			expandoValueLocalService = ExpandoValueLocalServiceFactory.getImpl();
+		}
+
+		if (expandoValueService == null) {
+			expandoValueService = ExpandoValueServiceFactory.getImpl();
+		}
+
+		if (expandoValuePersistence == null) {
+			expandoValuePersistence = ExpandoValueUtil.getPersistence();
+		}
+
 		if (dlFileRankLocalService == null) {
 			dlFileRankLocalService = DLFileRankLocalServiceFactory.getImpl();
 		}
@@ -2242,18 +2108,6 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	protected EmailAddressLocalService emailAddressLocalService;
 	protected EmailAddressService emailAddressService;
 	protected EmailAddressPersistence emailAddressPersistence;
-	protected ExpandoColumnLocalService expandoColumnLocalService;
-	protected ExpandoColumnService expandoColumnService;
-	protected ExpandoColumnPersistence expandoColumnPersistence;
-	protected ExpandoTableLocalService expandoTableLocalService;
-	protected ExpandoTableService expandoTableService;
-	protected ExpandoTablePersistence expandoTablePersistence;
-	protected ExpandoTableRowLocalService expandoTableRowLocalService;
-	protected ExpandoTableRowService expandoTableRowService;
-	protected ExpandoTableRowPersistence expandoTableRowPersistence;
-	protected ExpandoValueLocalService expandoValueLocalService;
-	protected ExpandoValueService expandoValueService;
-	protected ExpandoValuePersistence expandoValuePersistence;
 	protected GroupLocalService groupLocalService;
 	protected GroupService groupService;
 	protected GroupPersistence groupPersistence;
@@ -2356,6 +2210,9 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
 	protected BlogsStatsUserFinder blogsStatsUserFinder;
+	protected ExpandoValueLocalService expandoValueLocalService;
+	protected ExpandoValueService expandoValueService;
+	protected ExpandoValuePersistence expandoValuePersistence;
 	protected DLFileRankLocalService dlFileRankLocalService;
 	protected DLFileRankPersistence dlFileRankPersistence;
 	protected DLFileRankFinder dlFileRankFinder;

@@ -216,58 +216,6 @@ public class AddressLocalServiceUtil {
 		addressLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		addressLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		addressLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		addressLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		return addressLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
-
-		addressLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		AddressLocalService addressLocalService = AddressLocalServiceFactory.getService();
 

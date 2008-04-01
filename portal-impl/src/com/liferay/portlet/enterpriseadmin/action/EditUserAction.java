@@ -41,14 +41,10 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ExpandoColumn;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ExpandoColumnImpl;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.service.ExpandoColumnLocalServiceUtil;
-import com.liferay.portal.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -56,7 +52,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.admin.util.AdminUtil;
-import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -348,51 +343,9 @@ public class EditUserAction extends PortletAction {
 						PortletSession.APPLICATION_SCOPE);
 				}
 			}
-
-			// Update the Announcement delivery options
-
-			updateAnnouncementDeliveryOptions(req, user);
 		}
 
 		return new Object[] {user, oldScreenName};
-	}
-
-	protected void updateAnnouncementDeliveryOptions(
-			ActionRequest req, User user)
-		throws Exception {
-
-		String[] types = AnnouncementsEntryImpl.TYPES;
-
-		long userClassNameId = PortalUtil.getClassNameId(
-				User.class.getName());
-
-		for (int i = 0; i < types.length ; i++) {
-			String emailColName =
-				"announcements-delivery-by-email-type-" + types[i];
-
-			boolean emailOption = ParamUtil.getBoolean(req, emailColName);
-
-			String smsColName =
-				"announcements-delivery-by-sms-type-" + types[i];
-
-			boolean smsOption = ParamUtil.getBoolean(req, smsColName);
-
-			ExpandoColumn emailColumn =
-				ExpandoColumnLocalServiceUtil.setColumn(
-					userClassNameId, emailColName, ExpandoColumnImpl.BOOLEAN);
-
-			ExpandoColumn smsColumn =
-				ExpandoColumnLocalServiceUtil.setColumn(
-					userClassNameId, smsColName, ExpandoColumnImpl.BOOLEAN);
-
-			ExpandoValueLocalServiceUtil.setValue(
-				user.getUserId(), emailColumn.getColumnId(),
-				String.valueOf(emailOption));
-
-			ExpandoValueLocalServiceUtil.setValue(
-				user.getUserId(), smsColumn.getColumnId(),
-				String.valueOf(smsOption));
-		}
 	}
 
 }

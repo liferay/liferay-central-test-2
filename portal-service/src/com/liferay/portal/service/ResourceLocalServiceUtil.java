@@ -217,58 +217,6 @@ public class ResourceLocalServiceUtil {
 		resourceLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		return resourceLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		resourceLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		return resourceLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		resourceLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		return resourceLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		resourceLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		return resourceLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		resourceLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 

@@ -166,32 +166,6 @@ public class AnnouncementsEntryLocalServiceUtil {
 		announcementsEntryLocalService.setContactPersistence(contactPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		AnnouncementsEntryLocalService announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getService();
-
-		return announcementsEntryLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		AnnouncementsEntryLocalService announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getService();
-
-		announcementsEntryLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		AnnouncementsEntryLocalService announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getService();
-
-		return announcementsEntryLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		AnnouncementsEntryLocalService announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getService();
-
-		announcementsEntryLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		AnnouncementsEntryLocalService announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getService();
 

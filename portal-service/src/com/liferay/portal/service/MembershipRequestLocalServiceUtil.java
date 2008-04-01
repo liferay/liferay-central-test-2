@@ -218,58 +218,6 @@ public class MembershipRequestLocalServiceUtil {
 		membershipRequestLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 

@@ -217,58 +217,6 @@ public class UserTrackerLocalServiceUtil {
 		userTrackerLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		return userTrackerLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		userTrackerLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		return userTrackerLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		userTrackerLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		return userTrackerLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		userTrackerLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		return userTrackerLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
-
-		userTrackerLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		UserTrackerLocalService userTrackerLocalService = UserTrackerLocalServiceFactory.getService();
 

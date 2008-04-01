@@ -218,58 +218,6 @@ public class EmailAddressLocalServiceUtil {
 		emailAddressLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		emailAddressLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		emailAddressLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		emailAddressLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		return emailAddressLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
-
-		emailAddressLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		EmailAddressLocalService emailAddressLocalService = EmailAddressLocalServiceFactory.getService();
 

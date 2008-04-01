@@ -218,58 +218,6 @@ public class UserIdMapperLocalServiceUtil {
 		userIdMapperLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		userIdMapperLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		userIdMapperLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		userIdMapperLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		return userIdMapperLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
-
-		userIdMapperLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		UserIdMapperLocalService userIdMapperLocalService = UserIdMapperLocalServiceFactory.getService();
 

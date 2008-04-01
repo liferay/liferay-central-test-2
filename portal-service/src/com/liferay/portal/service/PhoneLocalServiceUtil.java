@@ -216,58 +216,6 @@ public class PhoneLocalServiceUtil {
 		phoneLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 

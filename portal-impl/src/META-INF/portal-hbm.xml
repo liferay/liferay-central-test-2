@@ -142,40 +142,6 @@
 		<property name="typeId" type="com.liferay.util.dao.hibernate.IntegerType" />
 		<property name="primary" column="primary_" type="com.liferay.util.dao.hibernate.BooleanType" />
 	</class>
-	<class name="com.liferay.portal.model.impl.ExpandoColumnImpl" table="ExpandoColumn">
-		<cache usage="read-write" />
-		<id name="columnId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
-		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.IntegerType" />
-		<property name="settings" column="settings_" type="com.liferay.util.dao.hibernate.StringType" />
-	</class>
-	<class name="com.liferay.portal.model.impl.ExpandoTableImpl" table="ExpandoTable">
-		<cache usage="read-write" />
-		<id name="tableId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
-	</class>
-	<class name="com.liferay.portal.model.impl.ExpandoTableRowImpl" table="ExpandoTableRow">
-		<cache usage="read-write" />
-		<id name="rowId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="tableId" type="com.liferay.util.dao.hibernate.LongType" />
-	</class>
-	<class name="com.liferay.portal.model.impl.ExpandoValueImpl" table="ExpandoValue">
-		<cache usage="read-write" />
-		<id name="valueId" type="long">
-			<generator class="assigned" />
-		</id>
-		<property name="columnId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="value" type="com.liferay.util.dao.hibernate.StringType" />
-	</class>
 	<class name="com.liferay.portal.model.impl.GroupImpl" table="Group_">
 		<cache usage="read-write" />
 		<id name="groupId" type="long">
@@ -1561,5 +1527,41 @@
 		<property name="createDate" />
 		<property name="entryId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="value" type="com.liferay.util.dao.hibernate.IntegerType" />
+	</class>
+	<class name="com.liferay.portlet.expando.model.impl.ExpandoColumnImpl" table="ExpandoColumn">
+		<cache usage="read-write" />
+		<id name="columnId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="tableId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.IntegerType" />
+	</class>
+	<class name="com.liferay.portlet.expando.model.impl.ExpandoRowImpl" table="ExpandoRow">
+		<cache usage="read-write" />
+		<id name="rowId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="tableId" type="com.liferay.util.dao.hibernate.LongType" />
+	</class>
+	<class name="com.liferay.portlet.expando.model.impl.ExpandoTableImpl" table="ExpandoTable">
+		<cache usage="read-write" />
+		<id name="tableId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="name" type="com.liferay.util.dao.hibernate.StringType" />
+	</class>
+	<class name="com.liferay.portlet.expando.model.impl.ExpandoValueImpl" table="ExpandoValue">
+		<cache usage="read-write" />
+		<id name="valueId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="tableId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="columnId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="rowId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="data" column="data_" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 </hibernate-mapping>

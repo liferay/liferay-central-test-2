@@ -61,7 +61,6 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
-import com.liferay.portal.model.ExpandoColumn;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
@@ -767,10 +766,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		subscriptionLocalService.deleteSubscriptions(userId);
 
-		// ExpandoValues
-
-		expandoValueLocalService.deleteValues(userId, User.class.getName());
-
 		// External user ids
 
 		userIdMapperLocalService.deleteUserIdMappers(userId);
@@ -782,6 +777,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Document library
 
 		dlFileRankLocalService.deleteFileRanks(userId);
+
+		// Expando
+
+		expandoValueLocalService.deleteValues(User.class.getName(), userId);
 
 		// Message boards
 

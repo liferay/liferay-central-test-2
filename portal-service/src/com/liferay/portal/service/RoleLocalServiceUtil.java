@@ -216,58 +216,6 @@ public class RoleLocalServiceUtil {
 		roleLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		return roleLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		roleLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		return roleLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		roleLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		return roleLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		roleLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		return roleLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
-
-		roleLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		RoleLocalService roleLocalService = RoleLocalServiceFactory.getService();
 

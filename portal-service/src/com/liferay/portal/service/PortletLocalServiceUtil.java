@@ -216,58 +216,6 @@ public class PortletLocalServiceUtil {
 		portletLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		return portletLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		portletLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		return portletLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		portletLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		return portletLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		portletLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		return portletLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
-
-		portletLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		PortletLocalService portletLocalService = PortletLocalServiceFactory.getService();
 

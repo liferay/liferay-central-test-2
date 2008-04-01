@@ -99,16 +99,6 @@ public interface AnnouncementsEntryLocalService {
 	public void setContactPersistence(
 		com.liferay.portal.service.persistence.ContactPersistence contactPersistence);
 
-	public com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence();
-
-	public void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence);
-
-	public com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence();
-
-	public void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence);
-
 	public com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence();
 
 	public void setGroupPersistence(

@@ -1,0 +1,134 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.expando.service.persistence;
+
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.service.persistence.BasePersistenceTestCase;
+
+import com.liferay.portlet.expando.NoSuchRowException;
+import com.liferay.portlet.expando.model.ExpandoRow;
+
+/**
+ * <a href="ExpandoRowPersistenceTest.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class ExpandoRowPersistenceTest extends BasePersistenceTestCase {
+	protected void setUp() throws Exception {
+		super.setUp();
+
+		_persistence = (ExpandoRowPersistence)BeanLocatorUtil.locate(_TX_IMPL);
+	}
+
+	public void testCreate() throws Exception {
+		long pk = nextLong();
+
+		ExpandoRow expandoRow = _persistence.create(pk);
+
+		assertNotNull(expandoRow);
+
+		assertEquals(expandoRow.getPrimaryKey(), pk);
+	}
+
+	public void testRemove() throws Exception {
+		ExpandoRow newExpandoRow = addExpandoRow();
+
+		_persistence.remove(newExpandoRow);
+
+		ExpandoRow existingExpandoRow = _persistence.fetchByPrimaryKey(newExpandoRow.getPrimaryKey());
+
+		assertNull(existingExpandoRow);
+	}
+
+	public void testUpdateNew() throws Exception {
+		addExpandoRow();
+	}
+
+	public void testUpdateExisting() throws Exception {
+		long pk = nextLong();
+
+		ExpandoRow newExpandoRow = _persistence.create(pk);
+
+		newExpandoRow.setTableId(nextLong());
+
+		_persistence.update(newExpandoRow, false);
+
+		ExpandoRow existingExpandoRow = _persistence.findByPrimaryKey(newExpandoRow.getPrimaryKey());
+
+		assertEquals(existingExpandoRow.getRowId(), newExpandoRow.getRowId());
+		assertEquals(existingExpandoRow.getTableId(), newExpandoRow.getTableId());
+	}
+
+	public void testFindByPrimaryKeyExisting() throws Exception {
+		ExpandoRow newExpandoRow = addExpandoRow();
+
+		ExpandoRow existingExpandoRow = _persistence.findByPrimaryKey(newExpandoRow.getPrimaryKey());
+
+		assertEquals(existingExpandoRow, newExpandoRow);
+	}
+
+	public void testFindByPrimaryKeyMissing() throws Exception {
+		long pk = nextLong();
+
+		try {
+			_persistence.findByPrimaryKey(pk);
+
+			fail("Missing entity did not throw NoSuchRowException");
+		}
+		catch (NoSuchRowException nsee) {
+		}
+	}
+
+	public void testFetchByPrimaryKeyExisting() throws Exception {
+		ExpandoRow newExpandoRow = addExpandoRow();
+
+		ExpandoRow existingExpandoRow = _persistence.fetchByPrimaryKey(newExpandoRow.getPrimaryKey());
+
+		assertEquals(existingExpandoRow, newExpandoRow);
+	}
+
+	public void testFetchByPrimaryKeyMissing() throws Exception {
+		long pk = nextLong();
+
+		ExpandoRow missingExpandoRow = _persistence.fetchByPrimaryKey(pk);
+
+		assertNull(missingExpandoRow);
+	}
+
+	protected ExpandoRow addExpandoRow() throws Exception {
+		long pk = nextLong();
+
+		ExpandoRow expandoRow = _persistence.create(pk);
+
+		expandoRow.setTableId(nextLong());
+
+		_persistence.update(expandoRow, false);
+
+		return expandoRow;
+	}
+
+	private static final String _TX_IMPL = ExpandoRowPersistence.class.getName() +
+		".transaction";
+	private ExpandoRowPersistence _persistence;
+}

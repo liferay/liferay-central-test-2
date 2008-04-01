@@ -36,6 +36,10 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersist
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileShortcutPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileVersionPersistenceTest;
 import com.liferay.portlet.documentlibrary.service.persistence.DLFolderPersistenceTest;
+import com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistenceTest;
+import com.liferay.portlet.expando.service.persistence.ExpandoRowPersistenceTest;
+import com.liferay.portlet.expando.service.persistence.ExpandoTablePersistenceTest;
+import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistenceTest;
 import com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistenceTest;
 import com.liferay.portlet.imagegallery.service.persistence.IGImagePersistenceTest;
 import com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistenceTest;
@@ -154,6 +158,11 @@ public class PersistenceTestSuite extends TestSuite {
 		addTestSuite(DLFileShortcutPersistenceTest.class);
 		addTestSuite(DLFileVersionPersistenceTest.class);
 		addTestSuite(DLFolderPersistenceTest.class);
+
+		addTestSuite(ExpandoColumnPersistenceTest.class);
+		addTestSuite(ExpandoRowPersistenceTest.class);
+		addTestSuite(ExpandoTablePersistenceTest.class);
+		addTestSuite(ExpandoValuePersistenceTest.class);
 
 		addTestSuite(IGFolderPersistenceTest.class);
 		addTestSuite(IGImagePersistenceTest.class);

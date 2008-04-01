@@ -90,17 +90,22 @@ create index IX_551A519F on EmailAddress (companyId, classNameId, classPK);
 create index IX_2A2CB130 on EmailAddress (companyId, classNameId, classPK, primary_);
 create index IX_7B43CD8 on EmailAddress (userId);
 
-create index IX_1421FB3D on ExpandoColumn (classNameId);
-create index IX_72F0293C on ExpandoColumn (classNameId, name);
+create index IX_A8C0CBE8 on ExpandoColumn (tableId);
+create index IX_FEFC8DA7 on ExpandoColumn (tableId, name);
+
+create index IX_D3F5D7AE on ExpandoRow (tableId);
 
 create index IX_F0A86A4F on ExpandoTable (classNameId);
 create index IX_DED782CE on ExpandoTable (classNameId, name);
 
-create index IX_1A55FB92 on ExpandoTableRow (tableId);
-
-create index IX_664BC3E1 on ExpandoValue (classPK);
-create index IX_3B271866 on ExpandoValue (classPK, columnId);
+create index IX_B29FEF17 on ExpandoValue (classNameId, classPK);
 create index IX_F7DD0987 on ExpandoValue (columnId);
+create index IX_B282FA9E on ExpandoValue (columnId, rowId);
+create index IX_2DF85183 on ExpandoValue (rowId);
+create index IX_F0566A77 on ExpandoValue (tableId);
+create index IX_886B68D1 on ExpandoValue (tableId, columnId, classNameId, classPK);
+create index IX_26E3DB09 on ExpandoValue (tableId, columnId, rowId);
+create index IX_C3D7ABAE on ExpandoValue (tableId, rowId);
 
 create index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
 create index IX_5BDDB872 on Group_ (companyId, friendlyURL);

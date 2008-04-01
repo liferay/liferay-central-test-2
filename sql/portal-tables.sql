@@ -328,40 +328,30 @@ create table EmailAddress (
 
 create table ExpandoColumn (
 	columnId LONG not null primary key,
-	classNameId LONG,
-	name VARCHAR(200) null,
-	type_ INTEGER,
-	settings_ STRING null
+	tableId LONG,
+	name VARCHAR(75) null,
+	type_ INTEGER
+);
+
+create table ExpandoRow (
+	rowId LONG not null primary key,
+	tableId LONG
 );
 
 create table ExpandoTable (
 	tableId LONG not null primary key,
 	classNameId LONG,
-	name VARCHAR(200) null
-);
-
-create table ExpandoTables_ExpandoColumns (
-	tableId LONG not null,
-	columnId LONG not null,
-	primary key (tableId, columnId)
-);
-
-create table ExpandoTableRow (
-	rowId LONG not null primary key,
-	tableId LONG
-);
-
-create table ExpandoTableRows_ExpandoValues (
-	rowId LONG not null,
-	valueId LONG not null,
-	primary key (rowId, valueId)
+	name VARCHAR(75) null
 );
 
 create table ExpandoValue (
 	valueId LONG not null primary key,
+	tableId LONG,
 	columnId LONG,
+	rowId LONG,
+	classNameId LONG,
 	classPK LONG,
-	value STRING null
+	data_ VARCHAR(75) null
 );
 
 create table Group_ (

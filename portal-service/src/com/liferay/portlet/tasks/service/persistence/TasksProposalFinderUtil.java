@@ -34,8 +34,9 @@ public class TasksProposalFinderUtil {
 		return getFinder().countByG_U(groupId, userId);
 	}
 
-	public static java.util.List findByG_U(long groupId, long userId,
-		int begin, int end) throws com.liferay.portal.SystemException {
+	public static java.util.List<com.liferay.portlet.tasks.model.TasksProposal> findByG_U(
+		long groupId, long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
 		return getFinder().findByG_U(groupId, userId, begin, end);
 	}
 

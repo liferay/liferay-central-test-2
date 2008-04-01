@@ -216,58 +216,6 @@ public class ReleaseLocalServiceUtil {
 		releaseLocalService.setEmailAddressPersistence(emailAddressPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portal.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		releaseLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portal.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		releaseLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoTableRowPersistence getExpandoTableRowPersistence() {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.getExpandoTableRowPersistence();
-	}
-
-	public static void setExpandoTableRowPersistence(
-		com.liferay.portal.service.persistence.ExpandoTableRowPersistence expandoTableRowPersistence) {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		releaseLocalService.setExpandoTableRowPersistence(expandoTableRowPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		return releaseLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portal.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
-
-		releaseLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
 	public static com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence() {
 		ReleaseLocalService releaseLocalService = ReleaseLocalServiceFactory.getService();
 
