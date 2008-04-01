@@ -478,14 +478,14 @@ public interface JournalArticleLocalService {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticles(
+		long groupId, java.lang.String articleId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticlesBySmallImageId(
 		long smallImageId) throws com.liferay.portal.SystemException;
 
 	public int getArticlesCount(long groupId)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portlet.journal.model.JournalArticle> getArticleVersions(
-		long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.journal.model.JournalArticle getDisplayArticle(

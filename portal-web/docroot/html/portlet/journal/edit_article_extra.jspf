@@ -39,16 +39,21 @@
 			<c:if test="<%= article != null %>">
 				<liferay-ui:message key="version" />
 
-				<select onChange="<portlet:namespace />switchVersion(this.value);">
+				<select onChange="<portlet:namespace />changeVersionView(this.value);">
+
 					<%
+					List<JournalArticle> articleVersions = JournalArticleLocalServiceUtil.getArticles(article.getGroupId(), article.getArticleId());
+
 					for (JournalArticle curArticle : articleVersions) {
-						boolean selected = (curArticle.getVersion() == article.getVersion());
 
 					%>
-						<option value="<%= String.valueOf(curArticle.getVersion()) %>" <%= (selected ? "selected" : "") %>><%= String.valueOf(curArticle.getVersion()) %></option>
+
+						<option <%= (curArticle.getVersion() == article.getVersion()) ? "selected" : "" %> value="<%= curArticle.getVersion() %>"><%= curArticle.getVersion() %></option>
+
 					<%
 					}
 					%>
+
 				</select>
 
 				<br /><br />

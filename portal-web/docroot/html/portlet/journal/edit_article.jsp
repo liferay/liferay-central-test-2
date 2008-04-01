@@ -69,14 +69,10 @@ boolean incrementVersion = ParamUtil.getBoolean(request, "incrementVersion");
 
 Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
-List<JournalArticle> articleVersions = null;
-
 if (article != null) {
 	if (article.getDisplayDate() != null) {
 		displayDate.setTime(article.getDisplayDate());
 	}
-
-	articleVersions = JournalArticleLocalServiceUtil.getArticleVersions(article.getGroupId(), article.getArticleId());
 }
 
 boolean neverExpire = ParamUtil.getBoolean(request, "neverExpire", true);
@@ -228,6 +224,10 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		document.<portlet:namespace />fm1.<portlet:namespace />redirect.value = "<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /><portlet:param name="version" value="<%= String.valueOf(version) %>" /></portlet:renderURL>&<portlet:namespace />languageId=" + document.<portlet:namespace />fm1.<portlet:namespace />languageId.value;
 		document.<portlet:namespace />fm1.<portlet:namespace />content.value = <portlet:namespace />getArticleContent();
 		submitForm(document.<portlet:namespace />fm1);
+	}
+
+	function <portlet:namespace />changeVersionView(version) {
+		self.location = "<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_article" /><portlet:param name="redirect" value="<%= redirect %>" /><portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" /><portlet:param name="articleId" value="<%= articleId %>" /></liferay-portlet:renderURL>&<portlet:namespace />version=" + version;
 	}
 
 	function <portlet:namespace />contentChanged() {
@@ -519,17 +519,6 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 			document.getElementById(file).disabled = false;
 			button.value = "<liferay-ui:message key="delete" />";
 		}
-	}
-
-	function <portlet:namespace />switchVersion(version) {
-		<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
-			<portlet:param name="struts_action" value="/journal/edit_article" />
-			<portlet:param name="redirect" value="<%= redirect %>" />
-			<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-			<portlet:param name="articleId" value="<%= articleId %>" />
-		</liferay-portlet:renderURL>
-
-		window.location = '<%= editURL.toString() %>&<portlet:namespace />version=' + version;
 	}
 </script>
 

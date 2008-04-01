@@ -1098,6 +1098,12 @@ public class JournalArticleLocalServiceImpl
 			groupId, begin, end, obc);
 	}
 
+	public List<JournalArticle> getArticles(long groupId, String articleId)
+		throws SystemException {
+
+		return journalArticlePersistence.findByG_A(groupId, articleId);
+	}
+
 	public List<JournalArticle> getArticlesBySmallImageId(long smallImageId)
 		throws SystemException {
 
@@ -1106,13 +1112,6 @@ public class JournalArticleLocalServiceImpl
 
 	public int getArticlesCount(long groupId) throws SystemException {
 		return journalArticlePersistence.countByGroupId(groupId);
-	}
-
-	public List<JournalArticle> getArticleVersions(
-			long groupId, String articleId)
-		throws SystemException {
-
-		return journalArticlePersistence.findByG_A(groupId, articleId);
 	}
 
 	public JournalArticle getDisplayArticle(long groupId, String articleId)
