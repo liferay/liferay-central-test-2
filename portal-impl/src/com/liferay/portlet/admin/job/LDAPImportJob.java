@@ -26,6 +26,7 @@ import com.liferay.portal.job.IntervalJob;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.Time;
 
 import org.apache.commons.logging.Log;
@@ -45,7 +46,8 @@ public class LDAPImportJob implements IntervalJob {
 	public LDAPImportJob() {
 		try {
 			long rawInterval = PrefsPropsUtil.getLong(
-				PropsUtil.LDAP_IMPORT_INTERVAL);
+				PropsUtil.LDAP_IMPORT_INTERVAL,
+				PropsValues.LDAP_IMPORT_INTERVAL);
 
 			if (_log.isDebugEnabled()) {
 				_log.debug("Interval " + rawInterval + " minutes");

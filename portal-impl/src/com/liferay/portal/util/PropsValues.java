@@ -424,6 +424,9 @@ public class PropsValues {
 	public static final boolean LDAP_IMPORT_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.LDAP_IMPORT_ENABLED));
 
+	public static final long LDAP_IMPORT_INTERVAL = GetterUtil.getLong(
+		PropsUtil.get(PropsUtil.LDAP_IMPORT_INTERVAL));
+
 	public static final boolean LDAP_PASSWORD_POLICY_ENABLED =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LDAP_PASSWORD_POLICY_ENABLED));
@@ -517,6 +520,10 @@ public class PropsValues {
 	public static final int MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL =
 		GetterUtil.getInteger(
 			PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));
+
+	public static final long MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL =
+		GetterUtil.getLong(
+			PropsUtil.get(PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_JOB_INTERVAL));
 
 	public static final boolean
 		MY_PLACES_SHOW_COMMUNITY_PRIVATE_SITES_WITH_NO_LAYOUTS =
