@@ -24,10 +24,9 @@ package com.liferay.portlet.messageboards.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.messageboards.BannedUserException;
 import com.liferay.portlet.messageboards.NoSuchBanException;
 import com.liferay.portlet.messageboards.model.MBBan;
@@ -108,13 +107,11 @@ public class MBBanLocalServiceImpl extends MBBanLocalServiceBaseImpl {
 	public void expireBans() throws SystemException {
 		long now = System.currentTimeMillis();
 
-		int expireInterval = GetterUtil.getInteger(PropsUtil.get(
-			PropsUtil.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL));
-
 		List<MBBan> bans = mbBanPersistence.findAll();
 
 		for (MBBan ban : bans) {
-			long unbanDate = MBUtil.getUnbanDate(ban, expireInterval).getTime();
+			long unbanDate = MBUtil.getUnbanDate(
+				ban, PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL).getTime();
 
 			if (now >= unbanDate) {
 				if (_log.isDebugEnabled()) {
