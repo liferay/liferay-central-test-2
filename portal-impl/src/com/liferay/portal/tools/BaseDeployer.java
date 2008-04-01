@@ -706,9 +706,9 @@ public class BaseDeployer {
 
 		StringMaker sm = new StringMaker();
 
-		sm.append("<display-name>");
+		/*sm.append("<display-name>");
 		sm.append(displayName);
-		sm.append("</display-name>");
+		sm.append("</display-name>");*/
 
 		boolean hasTaglib = false;
 

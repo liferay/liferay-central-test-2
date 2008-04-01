@@ -167,7 +167,16 @@ public abstract class PortletRequestImpl implements PortletRequest {
 
 	public String getContextPath() {
 		//return StringPool.SLASH + _req.getContextPath();
-		return StringPool.SLASH + _portletCtx.getPortletContextName();
+		//return StringPool.SLASH + _portletCtx.getPortletContextName();
+
+		String contextPath = (String)getAttribute(
+			JavaConstants.JAVAX_SERVLET_INCLUDE_CONTEXT_PATH);
+
+		if (Validator.isNull(contextPath)) {
+			return StringPool.SLASH;
+		}
+
+		return contextPath;
 	}
 
 	public Cookie[] getCookies() {
