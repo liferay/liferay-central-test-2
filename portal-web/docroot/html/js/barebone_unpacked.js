@@ -3457,29 +3457,35 @@ jQuery.getOne = function(s, context) {
 	return rt;
 };
 
+Liferay = function() {
+	var $ = jQuery;
+
+	return {};
+}();
+
 jQuery.fn.getOne = function(s) {
 	return jQuery.getOne(s, this);
 };
 
-jQuery.ajaxOld = jQuery.ajax;
+if (!Liferay._ajaxOld) {
+	Liferay._ajaxOld = jQuery.ajax;
+}
 
-jQuery.ajax = function(options) {
-	options.url = Liferay.Util.getURLWithSessionId(options.url);
+if (Liferay._ajaxOld) {
+	jQuery.ajax = function(options) {
+		if (Liferay.Util) {
+			options.url = Liferay.Util.getURLWithSessionId(options.url);
+		}
 
-	return jQuery.ajaxOld(options);
-};
+		return Liferay._ajaxOld(options);
+	};
+}
 
 jQuery.ajaxSetup(
 	{
 		type: 'POST'
 	}
 );
-
-Liferay = function() {
-	var $ = jQuery;
-
-	return {};
-}();
 
 Liferay.Service = {
 	actionUrl: themeDisplay.getPathMain() + "/portal/json_service",
