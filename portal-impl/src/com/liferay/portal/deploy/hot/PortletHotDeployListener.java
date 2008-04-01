@@ -149,6 +149,12 @@ public class PortletHotDeployListener implements HotDeployListener {
 			List<Portlet> portlets = PortletLocalServiceUtil.initWAR(
 				servletContextName, xmls, event.getPluginPackage());
 
+			if (_log.isInfoEnabled()) {
+				_log.info(
+					portlets.size() + " portlets for " + servletContextName +
+						" are ready for registration");
+			}
+
 			// Class loader
 
 			ClassLoader portletClassLoader = event.getContextClassLoader();
@@ -160,8 +166,10 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			boolean strutsBridges = false;
 
-			for (int i = 0; i < portlets.size(); i++) {
-				Portlet portlet = portlets.get(i);
+			Iterator<Portlet> portletsItr = portlets.iterator();
+
+			while (portletsItr.hasNext()) {
+				Portlet portlet = portletsItr.next();
 
 				Class<?> portletClass = null;
 
@@ -171,6 +179,10 @@ public class PortletHotDeployListener implements HotDeployListener {
 				}
 				catch (Exception e1) {
 					_log.error(e1, e1);
+
+					portletsItr.remove();
+
+					PortletLocalServiceUtil.destroyPortlet(portlet);
 
 					continue;
 				}
@@ -335,7 +347,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 				PortletBagPool.put(portlet.getPortletId(), portletBag);
 
-				if (i == 0) {
+				if (!portletsItr.hasNext()) {
 					initPortletApp(portlet, ctx, portletClassLoader);
 				}
 
@@ -426,7 +438,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Portlets for " + servletContextName +
+					portlets.size() + " portlets for " + servletContextName +
 						" registered successfully");
 			}
 		}
@@ -501,7 +513,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			if (_log.isInfoEnabled()) {
 				_log.info(
-					"Portlets for " + servletContextName +
+					portlets.size() + " portlets for " + servletContextName +
 						" unregistered successfully");
 			}
 		}

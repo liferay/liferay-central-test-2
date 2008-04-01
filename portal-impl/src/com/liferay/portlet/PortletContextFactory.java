@@ -34,6 +34,9 @@ import javax.portlet.PortletContext;
 
 import javax.servlet.ServletContext;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="PortletContextFactory.java.html"><b><i>View Source</i></b></a>
  *
@@ -73,6 +76,12 @@ public class PortletContextFactory {
 			if (portletApp.isWARFile()) {
 				PortletBag portletBag = PortletBagPool.get(
 					portlet.getRootPortletId());
+
+				if (portletBag == null) {
+					_log.error(
+						"Portlet " + portlet.getRootPortletId() +
+							" has a null portlet bag");
+				}
 
 				//String mainPath = (String)ctx.getAttribute(WebKeys.MAIN_PATH);
 
@@ -114,6 +123,8 @@ public class PortletContextFactory {
 			VelocityContextPool.remove(portletContext.getPortletContextName());
 		}
 	}
+
+	private static Log _log = LogFactory.getLog(PortletContextFactory.class);
 
 	private static PortletContextFactory _instance =
 		new PortletContextFactory();
