@@ -48,7 +48,7 @@ if (!Liferay._ajaxOld) {
 if (Liferay._ajaxOld) {
 	jQuery.ajax = function(options) {
 		if (Liferay.Util) {
-			options.url = Liferay.Util.getURLWithSessionId(options.url);			
+			options.url = Liferay.Util.getURLWithSessionId(options.url);
 		}
 
 		return Liferay._ajaxOld(options);
