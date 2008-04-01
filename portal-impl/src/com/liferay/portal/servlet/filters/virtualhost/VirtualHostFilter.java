@@ -235,7 +235,7 @@ public class VirtualHostFilter extends BaseFilter {
 	}
 
 	protected boolean isValidFriendlyURL(String friendlyURL) {
-		if (PortalInstances.isIgnorePath(friendlyURL) ||
+		if (PortalInstances.isVirtualHostsIgnorePath(friendlyURL) ||
 			friendlyURL.startsWith(
 				PortalUtil.getPathFriendlyURLPrivateGroup()) ||
 			friendlyURL.startsWith(PortalUtil.getPathFriendlyURLPublic()) ||

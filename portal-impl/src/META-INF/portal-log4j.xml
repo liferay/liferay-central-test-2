@@ -268,6 +268,10 @@
 		<priority value="ERROR" />
 	</category>
 
+	<category name="com.liferay.portal.servlet.filters.autologin.AutoLoginFilter">
+		<priority value="ERROR" />
+	</category>
+
 	<category name="com.liferay.portal.servlet.filters.compression">
 		<priority value="ERROR" />
 	</category>

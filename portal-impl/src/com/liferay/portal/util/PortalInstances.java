@@ -87,19 +87,31 @@ public class PortalInstances {
 		return _instance._initCompany(ctx, webId);
 	}
 
-	public static boolean isIgnoreHost(String host) {
-		return _instance._isIgnoreHost(host);
+	public static boolean isAutoLoginIgnoreHost(String host) {
+		return _instance._isAutoLoginIgnoreHost(host);
 	}
 
-	public static boolean isIgnorePath(String path) {
-		return _instance._isIgnorePath(path);
+	public static boolean isAutoLoginIgnorePath(String path) {
+		return _instance._isAutoLoginIgnorePath(path);
+	}
+
+	public static boolean isVirtualHostsIgnoreHost(String host) {
+		return _instance._isVirtualHostsIgnoreHost(host);
+	}
+
+	public static boolean isVirtualHostsIgnorePath(String path) {
+		return _instance._isVirtualHostsIgnorePath(path);
 	}
 
 	private PortalInstances() {
 		_companyIds = new long[0];
-		_ignoreHosts = SetUtil.fromArray(PropsUtil.getArray(
+		_autoLoginIgnoreHosts = SetUtil.fromArray(PropsUtil.getArray(
+			PropsUtil.AUTO_LOGIN_IGNORE_HOSTS));
+		_autoLoginIgnorePaths = SetUtil.fromArray(PropsUtil.getArray(
+			PropsUtil.AUTO_LOGIN_IGNORE_PATHS));
+		_virtualHostsIgnoreHosts = SetUtil.fromArray(PropsUtil.getArray(
 			PropsUtil.VIRTUAL_HOSTS_IGNORE_HOSTS));
-		_ignorePaths = SetUtil.fromArray(PropsUtil.getArray(
+		_virtualHostsIgnorePaths = SetUtil.fromArray(PropsUtil.getArray(
 			PropsUtil.VIRTUAL_HOSTS_IGNORE_PATHS));
 	}
 
@@ -135,14 +147,14 @@ public class PortalInstances {
 			_log.debug("Host " + host);
 		}
 
-		long companyId = _getCompanyIdByVirtualHost(host);
+		long companyId = _getCompanyIdByVirtualHosts(host);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Company id from host " + companyId);
 		}
 
 		if (companyId <= 0) {
-			LayoutSet layoutSet = _getLayoutSetByVirtualHost(host);
+			LayoutSet layoutSet = _getLayoutSetByVirtualHosts(host);
 
 			if (layoutSet != null) {
 				companyId = layoutSet.getCompanyId();
@@ -185,7 +197,7 @@ public class PortalInstances {
 		return companyId;
 	}
 
-	private long _getCompanyIdByVirtualHost(String host) {
+	private long _getCompanyIdByVirtualHosts(String host) {
 		if (Validator.isNull(host)) {
 			return 0;
 		}
@@ -214,12 +226,12 @@ public class PortalInstances {
 		return _companyIds[0];
 	}
 
-	private LayoutSet _getLayoutSetByVirtualHost(String host) {
+	private LayoutSet _getLayoutSetByVirtualHosts(String host) {
 		if (Validator.isNull(host)) {
 			return null;
 		}
 
-		if (_isIgnoreHost(host)) {
+		if (_isVirtualHostsIgnoreHost(host)) {
 			return null;
 		}
 
@@ -388,12 +400,20 @@ public class PortalInstances {
 		return companyId;
 	}
 
-	private boolean _isIgnoreHost(String host) {
-		return _ignoreHosts.contains(host);
+	private boolean _isAutoLoginIgnoreHost(String host) {
+		return _autoLoginIgnoreHosts.contains(host);
 	}
 
-	private boolean _isIgnorePath(String path) {
-		return _ignorePaths.contains(path);
+	private boolean _isAutoLoginIgnorePath(String path) {
+		return _autoLoginIgnorePaths.contains(path);
+	}
+
+	private boolean _isVirtualHostsIgnoreHost(String host) {
+		return _virtualHostsIgnoreHosts.contains(host);
+	}
+
+	private boolean _isVirtualHostsIgnorePath(String path) {
+		return _virtualHostsIgnorePaths.contains(path);
 	}
 
 	private static Log _log = LogFactory.getLog(PortalInstances.class);
@@ -402,7 +422,9 @@ public class PortalInstances {
 
 	private long[] _companyIds;
 	private String[] _webIds;
-	private Set<String> _ignoreHosts;
-	private Set<String> _ignorePaths;
+	private Set<String> _autoLoginIgnoreHosts;
+	private Set<String> _autoLoginIgnorePaths;
+	private Set<String> _virtualHostsIgnoreHosts;
+	private Set<String> _virtualHostsIgnorePaths;
 
 }

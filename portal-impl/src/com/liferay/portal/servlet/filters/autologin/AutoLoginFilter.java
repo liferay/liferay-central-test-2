@@ -29,11 +29,13 @@ import com.liferay.portal.kernel.servlet.BaseFilter;
 import com.liferay.portal.kernel.servlet.ProtectedServletRequest;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.AutoLogin;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -52,7 +54,7 @@ import javax.servlet.http.HttpSession;
  * <a href="AutoLoginFilter.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Aug�
+ * @author Raymond Augé
  *
  */
 public class AutoLoginFilter extends BaseFilter {
@@ -66,13 +68,45 @@ public class AutoLoginFilter extends BaseFilter {
 
 		HttpSession ses = httpReq.getSession();
 
+		String host = PortalUtil.getHost(httpReq);
+
+		if (PortalInstances.isAutoLoginIgnoreHost(host)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Ignore host " + host);
+			}
+
+			doFilter(AutoLoginFilter.class, req, res, chain);
+
+			return;
+		}
+
+		String contextPath = PortalUtil.getPathContext();
+
+		String path = httpReq.getRequestURI().toLowerCase();
+
+		if ((!contextPath.equals(StringPool.SLASH)) &&
+			(path.indexOf(contextPath) != -1)) {
+
+			path = path.substring(contextPath.length(), path.length());
+		}
+
+		if (PortalInstances.isAutoLoginIgnorePath(path)) {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Ignore path " + path);
+			}
+
+			doFilter(AutoLoginFilter.class, req, res, chain);
+
+			return;
+		}
+
 		String remoteUser = httpReq.getRemoteUser();
 		String jUserName = (String)ses.getAttribute("j_username");
 
 		if ((remoteUser == null) && (jUserName == null)) {
-			for (int i = 0; i < PropsValues.AUTO_LOGIN_HOOKS.length; i++) {
+			for (String autoLoginHook : PropsValues.AUTO_LOGIN_HOOKS) {
 				AutoLogin autoLogin = (AutoLogin)InstancePool.get(
-					PropsValues.AUTO_LOGIN_HOOKS[i]);
+					autoLoginHook);
 
 				try {
 					String[] credentials = autoLogin.login(httpReq, httpRes);

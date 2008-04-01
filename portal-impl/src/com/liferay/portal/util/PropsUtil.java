@@ -463,6 +463,10 @@ public class PropsUtil {
 
 	public static final String AUTO_LOGIN_HOOKS = "auto.login.hooks";
 
+	public static final String AUTO_LOGIN_IGNORE_HOSTS = "auto.login.ignore.hosts";
+
+	public static final String AUTO_LOGIN_IGNORE_PATHS = "auto.login.ignore.paths";
+
 	// SSO with MAC
 
 	public static final String AUTH_MAC_ALLOW = "auth.mac.allow";
