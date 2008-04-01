@@ -35,8 +35,8 @@ import javax.servlet.ServletContext;
  */
 public class HotDeployEvent {
 
-	public HotDeployEvent(ServletContext servletContext,
-						  ClassLoader contextClassLoader) {
+	public HotDeployEvent(
+		ServletContext servletContext, ClassLoader contextClassLoader) {
 
 		_servletContext = servletContext;
 		_contextClassLoader = contextClassLoader;
