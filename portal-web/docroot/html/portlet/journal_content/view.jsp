@@ -77,7 +77,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 				</c:if>
 
 				<div class="journal-content-article" id="<%= articleDisplay.getGroupId() %>_<%= articleDisplay.getArticleId() %>_<%= articleDisplay.getVersion() %>">
-				<%= content %>
+					<%= content %>
 				</div>
 
 				<c:if test="<%= articleDisplay.isPaginate() %>">
@@ -121,7 +121,6 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 
 		<c:if test="<%= themeDisplay.isSignedIn() && (showEditArticleIcon || showSelectArticleIcon || showAddArticleIcon) %>">
 			<div class="lfr-meta-actions edit-controls">
-
 				<c:if test="<%= showEditArticleIcon %>">
 					<liferay-portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL" portletName="<%= PortletKeys.JOURNAL %>">
 						<portlet:param name="struts_action" value="/journal/edit_article" />
@@ -153,7 +152,6 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 		<c:if test="<%= (articleDisplay != null) && (enableRatings || enableComments) %>">
 			<div class="lfr-meta-actions article-controls">
 				<c:if test="<%= enableRatings %>">
-
 					<liferay-ui:ratings
 						className="<%= JournalArticle.class.getName() %>"
 						classPK="<%= articleDisplay.getResourcePrimKey() %>"
@@ -162,7 +160,6 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 				</c:if>
 
 				<c:if test="<%= enableComments %>">
-
 					<portlet:actionURL var="discussionURL">
 						<portlet:param name="struts_action" value="/journal_content/edit_article_discussion" />
 					</portlet:actionURL>
