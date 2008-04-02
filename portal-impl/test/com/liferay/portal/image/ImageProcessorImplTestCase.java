@@ -24,6 +24,7 @@ package com.liferay.portal.image;
 
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessor;
+import com.liferay.portal.kernel.image.ImageProcessorUtil;
 import com.liferay.util.FileUtil;
 
 import java.awt.image.BufferedImage;
@@ -92,9 +93,7 @@ public class ImageProcessorImplTestCase extends TestCase {
 
 		randomAccessFile.readFully(bytes);
 
-		ImageProcessorImpl imageProcessorImpl = new ImageProcessorImpl();
-
-		ImageBag imageBag = imageProcessorImpl.read(bytes);
+		ImageBag imageBag = ImageProcessorUtil.read(bytes);
 
 		RenderedImage resultImage = imageBag.getRenderedImage();
 
