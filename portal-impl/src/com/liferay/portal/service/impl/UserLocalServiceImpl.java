@@ -1272,7 +1272,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					"[$TO_NAME$]",
 					"[$USER_AGENT$]",
 					"[$USER_ID$]",
-					"[$USER_PASSWORD$]"
+					"[$USER_PASSWORD$]",
+					"[$USER_SCREENNAME$]"
 				},
 				new String[] {
 					fromAddress,
@@ -1284,7 +1285,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					toName,
 					HtmlUtil.escape(userAgent),
 					String.valueOf(user.getUserId()),
-					newPassword
+					newPassword,
+					user.getScreenName()
 				});
 
 			body = StringUtil.replace(
@@ -1299,7 +1301,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					"[$TO_NAME$]",
 					"[$USER_AGENT$]",
 					"[$USER_ID$]",
-					"[$USER_PASSWORD$]"
+					"[$USER_PASSWORD$]",
+					"[$USER_SCREENNAME$]"
 				},
 				new String[] {
 					fromAddress,
@@ -1311,7 +1314,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					toName,
 					HtmlUtil.escape(userAgent),
 					String.valueOf(user.getUserId()),
-					newPassword
+					newPassword,
+					user.getScreenName()
 				});
 
 			InternetAddress from = new InternetAddress(fromAddress, fromName);
@@ -2148,7 +2152,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					"[$TO_ADDRESS$]",
 					"[$TO_NAME$]",
 					"[$USER_ID$]",
-					"[$USER_PASSWORD$]"
+					"[$USER_PASSWORD$]",
+					"[$USER_SCREENNAME$]"
 				},
 				new String[] {
 					fromAddress,
@@ -2157,7 +2162,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					toAddress,
 					toName,
 					String.valueOf(user.getUserId()),
-					password
+					password,
+					user.getScreenName()
 				});
 
 			body = StringUtil.replace(
@@ -2169,7 +2175,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					"[$TO_ADDRESS$]",
 					"[$TO_NAME$]",
 					"[$USER_ID$]",
-					"[$USER_PASSWORD$]"
+					"[$USER_PASSWORD$]",
+					"[$USER_SCREENNAME$]"
 				},
 				new String[] {
 					fromAddress,
@@ -2178,7 +2185,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 					toAddress,
 					toName,
 					String.valueOf(user.getUserId()),
-					password
+					password,
+					user.getScreenName()
 				});
 
 			InternetAddress from = new InternetAddress(fromAddress, fromName);

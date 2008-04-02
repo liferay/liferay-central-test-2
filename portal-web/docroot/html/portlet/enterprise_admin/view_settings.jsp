@@ -545,6 +545,14 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 						The user password
 					</td>
 				</tr>
+				<tr>
+					<td>
+						<b>[$USER_SCREENNAME$]</b>
+					</td>
+					<td>
+						The user screen name
+					</td>
+				</tr>
 				</table>
 			</c:when>
 			<c:otherwise>
