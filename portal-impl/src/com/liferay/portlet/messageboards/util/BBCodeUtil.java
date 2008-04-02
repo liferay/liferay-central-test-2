@@ -139,13 +139,13 @@ public class BBCodeUtil {
 
 			sm = new StringMaker(preTag);
 
-			sm.append("<div class='message-board-code'>");
+			sm.append("<div class='code'>");
 
 			for (int i = 0; i < lines.length; i++) {
 				String index = Integer.toString(i + 1);
 				int ld = index.length();
 
-				sm.append("<span class='message-board-code-lines'>");
+				sm.append("<span class='code-lines'>");
 
 				for (int j = 0; j < digits - ld; j++) {
 					sm.append("&nbsp;");
@@ -283,12 +283,12 @@ public class BBCodeUtil {
 			sm = new StringMaker(preTag);
 
 			if (tag.hasParameter()) {
-				sm.append("<div class='message-board-quote-title'>");
+				sm.append("<div class='quote-title'>");
 				sm.append(tag.getParameter() + ":</div>");
 			}
 
-			sm.append("<div class='message-board-quote'>");
-			sm.append("<div class='message-board-quote-content'>");
+			sm.append("<div class='quote'>");
+			sm.append("<div class='quote-content'>");
 			sm.append(tag.getElement());
 			sm.append("</div></div>");
 			sm.append(postTag);
