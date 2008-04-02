@@ -1064,7 +1064,7 @@ public class PluginPackageUtil {
 	}
 
 	private String _readText(String text) {
-		return HtmlUtil.stripHtml(GetterUtil.getString(text));
+		return HtmlUtil.extractText(GetterUtil.getString(text));
 	}
 
 	private void _refreshUpdatesAvailableCache() {

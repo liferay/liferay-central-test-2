@@ -64,7 +64,7 @@ public class EventsWebCacheItem implements WebCacheItem {
 				if (x != -1 && y != -1) {
 					String year = array[i].substring(x + 3, y).trim();
 
-					String description = HtmlUtil.stripHtml(
+					String description = HtmlUtil.extractText(
 						array[i].substring(y, array[i].length())).trim();
 
 					if (description.startsWith("-  ")) {

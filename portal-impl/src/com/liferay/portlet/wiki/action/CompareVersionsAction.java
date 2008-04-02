@@ -106,8 +106,8 @@ public class CompareVersionsAction extends PortletAction {
 			targetContent = HtmlUtil.escape(targetContent);
 		}
 		else if (type.equals("strip")) {
-			sourceContent = HtmlUtil.stripHtml(sourceContent);
-			targetContent = HtmlUtil.stripHtml(targetContent);
+			sourceContent = HtmlUtil.extractText(sourceContent);
+			targetContent = HtmlUtil.extractText(targetContent);
 		}
 
 		List<DiffResult>[] diffResults = DiffUtil.diff(
