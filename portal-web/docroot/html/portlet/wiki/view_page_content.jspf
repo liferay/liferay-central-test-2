@@ -23,6 +23,8 @@
 %>
 
 <%
+double version = ParamUtil.getDouble(request, "version");
+
 String formattedContent = null;
 
 try {
@@ -32,7 +34,7 @@ try {
 
 	WikiPageDisplay pageDisplay = null;
 
-	if (!preview) {
+	if (!preview && Validator.isNull(version)) {
 		pageDisplay = WikiCacheUtil.getDisplay(wikiPage.getNodeId(), title, curViewPageURL, curEditPageURL, attachmentURLPrefix);
 	}
 
