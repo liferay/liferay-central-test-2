@@ -38,8 +38,8 @@ import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.admin.util.OmniadminUtil;
 
+import java.util.Hashtable;
 import java.util.Map;
-import java.util.Properties;
 
 import javax.naming.Context;
 import javax.naming.NamingEnumeration;
@@ -267,7 +267,8 @@ public class LDAPAuth implements Authenticator {
 
 		if (authMethod.equals(AUTH_METHOD_BIND)) {
 			try {
-				Properties env = (Properties)ctx.getEnvironment();
+				Hashtable<String, String> env =
+					(Hashtable<String, String>)ctx.getEnvironment();
 
 				env.put(Context.SECURITY_PRINCIPAL, userDN);
 				env.put(Context.SECURITY_CREDENTIALS, password);
