@@ -403,15 +403,24 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users can always log out
 
-		if ((remoteUser != null || user != null) && (path != null) &&
+		if (((remoteUser != null) || (user != null)) && (path != null) &&
 			(path.equals(_PATH_PORTAL_LOGOUT))) {
 
-			return _PATH_PORTAL_LOGOUT;
+			return path;
+		}
+
+		// Authenticated users can always extend or confirm their session
+
+		if (((remoteUser != null) || (user != null)) && (path != null) &&
+			(path.equals(_PATH_PORTAL_EXPIRE_SESSION) ||
+			 path.equals(_PATH_PORTAL_EXTEND_SESSION))) {
+
+			return path;
 		}
 
 		// Authenticated users can retrieve CSS and JavaScript
 
-		if ((remoteUser != null || user != null) && (path != null) &&
+		if (((remoteUser != null) || (user != null)) && (path != null) &&
 			(path.equals(_PATH_PORTAL_CSS) ||
 			 path.equals(_PATH_PORTAL_CSS_CACHED) ||
 			 path.equals(_PATH_PORTAL_JAVASCRIPT) ||
@@ -422,10 +431,10 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 
 		// Authenticated users can always agree to terms of use
 
-		if ((remoteUser != null || user != null) && (path != null) &&
+		if (((remoteUser != null) || (user != null)) && (path != null) &&
 			(path.equals(_PATH_PORTAL_UPDATE_TERMS_OF_USE))) {
 
-			return _PATH_PORTAL_UPDATE_TERMS_OF_USE;
+			return path;
 		}
 
 		// Authenticated users must still exist in the system
@@ -848,6 +857,12 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 	private static String _PATH_PORTAL_CSS_CACHED = "/portal/css_cached";
 
 	private static String _PATH_PORTAL_ERROR = "/portal/error";
+
+	private static String _PATH_PORTAL_EXPIRE_SESSION =
+		"/portal/expire_session";
+
+	private static String _PATH_PORTAL_EXTEND_SESSION =
+		"/portal/extend_session";
 
 	private static String _PATH_PORTAL_FLASH = "/portal/flash";
 
