@@ -358,6 +358,10 @@ ${exception.message}
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="fi" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="fr" />
 		</antcall>
 
@@ -383,6 +387,14 @@ ${exception.message}
 
 		<antcall target="build-lang-native2ascii">
 			<param name="lang.code" value="ko" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="nb" />
+		</antcall>
+
+		<antcall target="build-lang-native2ascii">
+			<param name="lang.code" value="fa" />
 		</antcall>
 
 		<antcall target="build-lang-native2ascii">
