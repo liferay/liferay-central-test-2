@@ -22,6 +22,7 @@
  */
 %>
 
+<%--
 <%@ page import="com.liferay.portal.model.ExpandoColumn"%>
 <%@ page import="com.liferay.portal.model.ExpandoValue"%>
 <%@ page import="com.liferay.portal.model.impl.ExpandoColumnImpl"%>
@@ -128,4 +129,4 @@ for (ExpandoColumn[] typeOption : typeOptions) {
 %>
 </table>
 
-<br />
+<br />--%>
