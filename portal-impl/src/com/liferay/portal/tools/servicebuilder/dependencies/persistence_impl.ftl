@@ -17,6 +17,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
@@ -35,6 +36,7 @@ import org.springframework.jdbc.object.SqlUpdate;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Iterator;
@@ -99,16 +101,18 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	}
 
 	public ${entity.name} remove(${entity.name} ${entity.varName}) throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(${entity.varName});
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(${entity.varName});
+			}
 		}
 
 		${entity.varName} = removeImpl(${entity.varName});
 
-		if (listener != null) {
-			listener.onAfterRemove(${entity.varName});
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(${entity.varName});
+			}
 		}
 
 		return ${entity.varName};
@@ -177,27 +181,29 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	 * @return		true if the portlet can be displayed via Ajax
 	 */
 	public ${entity.name} update(${entity.name} ${entity.varName}, boolean merge) throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = ${entity.varName}.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(${entity.varName});
-			}
-			else {
-				listener.onBeforeUpdate(${entity.varName});
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(${entity.varName});
+				}
+				else {
+					listener.onBeforeUpdate(${entity.varName});
+				}
 			}
 		}
 
 		${entity.varName} = updateImpl(${entity.varName}, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(${entity.varName});
-			}
-			else {
-				listener.onAfterUpdate(${entity.varName});
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(${entity.varName});
+				}
+				else {
+					listener.onAfterUpdate(${entity.varName});
+				}
 			}
 		}
 
@@ -1812,6 +1818,23 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 	</#list>
 
 	protected void initDao() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(PropsUtil.get("value.object.listener.${packagePath}.model.${entity.name}")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
 		<#list entity.columnList as column>
 			<#if column.isCollection() && (column.isMappingManyToMany() || column.isMappingOneToMany())>
 				<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
@@ -1950,19 +1973,6 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		</#if>
 	</#list>
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	<#list entity.columnList as column>
 		<#if column.isCollection()>
 			<#assign tempEntity = serviceBuilder.getEntity(column.getEJBName())>
@@ -1983,8 +1993,8 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 		</#if>
 	</#list>
 
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get("value.object.listener.${packagePath}.model.${entity.name}"));
-
 	private static Log _log = LogFactory.getLog(${entity.name}PersistenceImpl.class);
+
+	private ModelListener[] _listeners;
 
 }
