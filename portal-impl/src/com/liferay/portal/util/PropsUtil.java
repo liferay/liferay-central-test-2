@@ -671,7 +671,9 @@ public class PropsUtil {
 
 	public static final String IMAGE_DEFAULT_COMPANY_LOGO = "image.default.company.logo";
 
-	public static final String IMAGE_DEFAULT_USER_PORTRAIT = "image.default.user.portrait";
+	public static final String IMAGE_DEFAULT_USER_MALE_PORTRAIT = "image.default.user.male.portrait";
+
+	public static final String IMAGE_DEFAULT_USER_FEMALE_PORTRAIT = "image.default.user.female.portrait";
 
 	// Editors
 

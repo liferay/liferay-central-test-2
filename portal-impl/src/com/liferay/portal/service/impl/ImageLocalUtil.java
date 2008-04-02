@@ -85,8 +85,12 @@ public class ImageLocalUtil {
 		return _instance._defaultSpacer;
 	}
 
-	public static Image getDefaultUserPortrait() {
-		return _instance._defaultUserPortrait;
+	public static Image getDefaultUserFemalePortrait() {
+		return _instance._defaultUserFemalePortrait;
+	}
+
+	public static Image getDefaultUserMalePortrait() {
+		return _instance._defaultUserMalePortrait;
 	}
 
 	public static Image getImage(long imageId) {
@@ -232,17 +236,33 @@ public class ImageLocalUtil {
 
 		try {
 			InputStream is = classLoader.getResourceAsStream(
-				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_USER_PORTRAIT));
+				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_USER_FEMALE_PORTRAIT));
 
 			if (is == null) {
-				_log.error("Default user portrait is not available");
+				_log.error("Default user female portrait is not available");
 			}
 
-			_defaultUserPortrait = _getImage(is);
+			_defaultUserFemalePortrait = _getImage(is);
 		}
 		catch (IOException ioe) {
 			_log.error(
-				"Unable to configure the default use portrait: " +
+				"Unable to configure the default user female portrait: " +
+					ioe.getMessage());
+		}
+
+		try {
+			InputStream is = classLoader.getResourceAsStream(
+				PropsUtil.get(PropsUtil.IMAGE_DEFAULT_USER_MALE_PORTRAIT));
+
+			if (is == null) {
+				_log.error("Default user male portrait is not available");
+			}
+
+			_defaultUserMalePortrait = _getImage(is);
+		}
+		catch (IOException ioe) {
+			_log.error(
+				"Unable to configure the default user male portrait: " +
 					ioe.getMessage());
 		}
 	}
@@ -310,6 +330,7 @@ public class ImageLocalUtil {
 
 	private Image _defaultSpacer;
 	private Image _defaultCompanyLogo;
-	private Image _defaultUserPortrait;
+	private Image _defaultUserFemalePortrait;
+	private Image _defaultUserMalePortrait;
 
 }
