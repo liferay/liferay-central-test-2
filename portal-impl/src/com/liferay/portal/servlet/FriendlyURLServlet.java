@@ -76,7 +76,7 @@ public class FriendlyURLServlet extends HttpServlet {
 		// Do not set the entire full main path. See LEP-456.
 
 		//String mainPath = (String)ctx.getAttribute(WebKeys.MAIN_PATH);
-		String mainPath = PortalUtil.PATH_MAIN;
+		String mainPath = PortalUtil.getPathMain();
 
 		String friendlyURLPath = null;
 

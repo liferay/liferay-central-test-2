@@ -1813,7 +1813,7 @@ public class PortalUtil {
 
 		ServletContext ctx = req.getSession().getServletContext();
 
-		String mainPath = PortalUtil.PATH_MAIN;
+		String mainPath = getPathMain();
 
 		String redirect = mainPath + "/portal/status";
 

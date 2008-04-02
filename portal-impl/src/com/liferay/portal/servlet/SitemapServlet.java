@@ -73,7 +73,7 @@ public class SitemapServlet extends HttpServlet {
 			String portalURL = PortalUtil.getPortalURL(
 				host, req.getServerPort(), req.isSecure());
 
-			String mainPath = PortalUtil.PATH_MAIN;
+			String mainPath = PortalUtil.getPathMain();
 
 			String sitemap = SitemapUtil.getSitemap(
 				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
