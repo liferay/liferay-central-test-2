@@ -216,7 +216,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		int displayDateMinute = displayDateCal.get(Calendar.MINUTE);
 
 		if (displayDateCal.get(Calendar.AM_PM) == Calendar.PM) {
-			displayDateHour = displayDateHour + 12;
+			displayDateHour += 12;
 		}
 
 		String[] tagsEntries = null;

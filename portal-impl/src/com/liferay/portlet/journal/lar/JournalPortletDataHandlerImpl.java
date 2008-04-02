@@ -494,7 +494,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			displayDateMinute = displayCal.get(Calendar.MINUTE);
 
 			if (displayCal.get(Calendar.AM_PM) == Calendar.PM) {
-				displayDateHour = displayDateHour + 12;
+				displayDateHour += 12;
 			}
 		}
 
@@ -520,7 +520,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			neverExpire = false;
 
 			if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
-				expirationDateHour = expirationDateHour + 12;
+				expirationDateHour += 12;
 			}
 		}
 
@@ -546,7 +546,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			neverReview = false;
 
 			if (reviewCal.get(Calendar.AM_PM) == Calendar.PM) {
-				reviewDateHour = reviewDateHour + 12;
+				reviewDateHour += 12;
 			}
 		}
 

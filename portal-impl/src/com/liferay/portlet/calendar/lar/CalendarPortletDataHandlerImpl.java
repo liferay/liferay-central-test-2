@@ -206,7 +206,7 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			startDateMinute = startCal.get(Calendar.MINUTE);
 
 			if (startCal.get(Calendar.AM_PM) == Calendar.PM) {
-				startDateHour = startDateHour + 12;
+				startDateHour += 12;
 			}
 		}
 
