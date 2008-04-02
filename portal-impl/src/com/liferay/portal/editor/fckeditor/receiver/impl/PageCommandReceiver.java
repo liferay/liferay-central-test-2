@@ -147,7 +147,8 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 				fileEl.setAttribute("size", StringPool.BLANK);
 				fileEl.setAttribute(
 					"url",
-					PortalUtil.getLayoutURL(layout,arg.getThemeDisplay()));
+					PortalUtil.getLayoutURL(
+						layout,arg.getThemeDisplay(), false));
 			}
 		}
 		else {
@@ -181,7 +182,8 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 				fileEl.setAttribute("size", getSize());
 				fileEl.setAttribute(
 					"url",
-					PortalUtil.getLayoutURL(layout, arg.getThemeDisplay()));
+					PortalUtil.getLayoutURL(
+						layout, arg.getThemeDisplay(), false));
 			}
 		}
 	}
