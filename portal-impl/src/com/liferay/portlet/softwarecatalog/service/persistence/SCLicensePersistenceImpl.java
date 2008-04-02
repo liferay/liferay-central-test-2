@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -62,6 +62,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -117,16 +118,18 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	public SCLicense remove(SCLicense scLicense) throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(scLicense);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(scLicense);
+			}
 		}
 
 		scLicense = removeImpl(scLicense);
 
-		if (listener != null) {
-			listener.onAfterRemove(scLicense);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(scLicense);
+			}
 		}
 
 		return scLicense;
@@ -192,27 +195,29 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	 */
 	public SCLicense update(SCLicense scLicense, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = scLicense.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scLicense);
-			}
-			else {
-				listener.onBeforeUpdate(scLicense);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(scLicense);
+				}
+				else {
+					listener.onBeforeUpdate(scLicense);
+				}
 			}
 		}
 
 		scLicense = updateImpl(scLicense, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scLicense);
-			}
-			else {
-				listener.onAfterUpdate(scLicense);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(scLicense);
+				}
+				else {
+					listener.onAfterUpdate(scLicense);
+				}
 			}
 		}
 
@@ -1522,6 +1527,26 @@ public class SCLicensePersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCLicense")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
 		containsSCProductEntry = new ContainsSCProductEntry(this);
 
 		addSCProductEntry = new AddSCProductEntry(this);
@@ -1624,23 +1649,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 		}
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _SQL_GETSCPRODUCTENTRIES = "SELECT {SCProductEntry.*} FROM SCProductEntry INNER JOIN SCLicenses_SCProductEntries ON (SCLicenses_SCProductEntries.productEntryId = SCProductEntry.productEntryId) WHERE (SCLicenses_SCProductEntries.licenseId = ?)";
 	private static final String _SQL_GETSCPRODUCTENTRIESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE licenseId = ?";
 	private static final String _SQL_CONTAINSSCPRODUCTENTRY = "SELECT COUNT(*) AS COUNT_VALUE FROM SCLicenses_SCProductEntries WHERE licenseId = ? AND productEntryId = ?";
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCLicense"));
 	private static Log _log = LogFactory.getLog(SCLicensePersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
@@ -50,6 +51,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -109,16 +111,18 @@ public class WikiPagePersistenceImpl extends BasePersistence
 	}
 
 	public WikiPage remove(WikiPage wikiPage) throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(wikiPage);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(wikiPage);
+			}
 		}
 
 		wikiPage = removeImpl(wikiPage);
 
-		if (listener != null) {
-			listener.onAfterRemove(wikiPage);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(wikiPage);
+			}
 		}
 
 		return wikiPage;
@@ -173,27 +177,29 @@ public class WikiPagePersistenceImpl extends BasePersistence
 	 */
 	public WikiPage update(WikiPage wikiPage, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = wikiPage.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(wikiPage);
-			}
-			else {
-				listener.onBeforeUpdate(wikiPage);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(wikiPage);
+				}
+				else {
+					listener.onBeforeUpdate(wikiPage);
+				}
 			}
 		}
 
 		wikiPage = updateImpl(wikiPage, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(wikiPage);
-			}
-			else {
-				listener.onAfterUpdate(wikiPage);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(wikiPage);
+				}
+				else {
+					listener.onAfterUpdate(wikiPage);
+				}
 			}
 		}
 
@@ -4039,22 +4045,27 @@ public class WikiPagePersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
-	}
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portlet.wiki.model.WikiPage")));
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
+		if (listenerClassNames.length > 0) {
 			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
-
-		return null;
 	}
 
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.wiki.model.WikiPage"));
 	private static Log _log = LogFactory.getLog(WikiPagePersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

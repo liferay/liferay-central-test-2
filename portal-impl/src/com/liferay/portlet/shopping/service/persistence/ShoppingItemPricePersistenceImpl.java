@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -49,6 +49,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -107,16 +108,18 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 
 	public ShoppingItemPrice remove(ShoppingItemPrice shoppingItemPrice)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(shoppingItemPrice);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(shoppingItemPrice);
+			}
 		}
 
 		shoppingItemPrice = removeImpl(shoppingItemPrice);
 
-		if (listener != null) {
-			listener.onAfterRemove(shoppingItemPrice);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(shoppingItemPrice);
+			}
 		}
 
 		return shoppingItemPrice;
@@ -173,27 +176,29 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 	 */
 	public ShoppingItemPrice update(ShoppingItemPrice shoppingItemPrice,
 		boolean merge) throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = shoppingItemPrice.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItemPrice);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItemPrice);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(shoppingItemPrice);
+				}
+				else {
+					listener.onBeforeUpdate(shoppingItemPrice);
+				}
 			}
 		}
 
 		shoppingItemPrice = updateImpl(shoppingItemPrice, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItemPrice);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItemPrice);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(shoppingItemPrice);
+				}
+				else {
+					listener.onAfterUpdate(shoppingItemPrice);
+				}
 			}
 		}
 
@@ -766,22 +771,27 @@ public class ShoppingItemPricePersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
-	}
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portlet.shopping.model.ShoppingItemPrice")));
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
+		if (listenerClassNames.length > 0) {
 			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
-
-		return null;
 	}
 
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingItemPrice"));
 	private static Log _log = LogFactory.getLog(ShoppingItemPricePersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

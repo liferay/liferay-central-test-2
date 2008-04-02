@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.RoleImpl;
@@ -60,6 +60,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -112,16 +113,18 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	public Role remove(Role role) throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(role);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(role);
+			}
 		}
 
 		role = removeImpl(role);
 
-		if (listener != null) {
-			listener.onAfterRemove(role);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(role);
+			}
 		}
 
 		return role;
@@ -205,27 +208,29 @@ public class RolePersistenceImpl extends BasePersistence
 	 * @return        true if the portlet can be displayed via Ajax
 	 */
 	public Role update(Role role, boolean merge) throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = role.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(role);
-			}
-			else {
-				listener.onBeforeUpdate(role);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(role);
+				}
+				else {
+					listener.onBeforeUpdate(role);
+				}
 			}
 		}
 
 		role = updateImpl(role, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(role);
-			}
-			else {
-				listener.onAfterUpdate(role);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(role);
+				}
+				else {
+					listener.onAfterUpdate(role);
+				}
 			}
 		}
 
@@ -2277,6 +2282,26 @@ public class RolePersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portal.model.Role")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
 		containsGroup = new ContainsGroup(this);
 
 		addGroup = new AddGroup(this);
@@ -2565,19 +2590,6 @@ public class RolePersistenceImpl extends BasePersistence
 		}
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Roles ON (Groups_Roles.groupId = Group_.groupId) WHERE (Groups_Roles.roleId = ?)";
 	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ?";
 	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Roles WHERE roleId = ? AND groupId = ?";
@@ -2587,7 +2599,6 @@ public class RolePersistenceImpl extends BasePersistence
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_Roles ON (Users_Roles.userId = User_.userId) WHERE (Users_Roles.roleId = ?)";
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE roleId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Roles WHERE roleId = ? AND userId = ?";
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Role"));
 	private static Log _log = LogFactory.getLog(RolePersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

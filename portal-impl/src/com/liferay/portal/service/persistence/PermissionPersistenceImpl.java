@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.impl.PermissionImpl;
@@ -60,6 +60,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -116,16 +117,18 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	public Permission remove(Permission permission) throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(permission);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(permission);
+			}
 		}
 
 		permission = removeImpl(permission);
 
-		if (listener != null) {
-			listener.onAfterRemove(permission);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(permission);
+			}
 		}
 
 		return permission;
@@ -211,27 +214,29 @@ public class PermissionPersistenceImpl extends BasePersistence
 	 */
 	public Permission update(Permission permission, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = permission.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(permission);
-			}
-			else {
-				listener.onBeforeUpdate(permission);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(permission);
+				}
+				else {
+					listener.onBeforeUpdate(permission);
+				}
 			}
 		}
 
 		permission = updateImpl(permission, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(permission);
-			}
-			else {
-				listener.onAfterUpdate(permission);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(permission);
+				}
+				else {
+					listener.onAfterUpdate(permission);
+				}
 			}
 		}
 
@@ -2063,6 +2068,26 @@ public class PermissionPersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portal.model.Permission")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
 		containsGroup = new ContainsGroup(this);
 
 		addGroup = new AddGroup(this);
@@ -2350,19 +2375,6 @@ public class PermissionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _SQL_GETGROUPS = "SELECT {Group_.*} FROM Group_ INNER JOIN Groups_Permissions ON (Groups_Permissions.groupId = Group_.groupId) WHERE (Groups_Permissions.permissionId = ?)";
 	private static final String _SQL_GETGROUPSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE permissionId = ?";
 	private static final String _SQL_CONTAINSGROUP = "SELECT COUNT(*) AS COUNT_VALUE FROM Groups_Permissions WHERE permissionId = ? AND groupId = ?";
@@ -2372,7 +2384,6 @@ public class PermissionPersistenceImpl extends BasePersistence
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_Permissions ON (Users_Permissions.userId = User_.userId) WHERE (Users_Permissions.permissionId = ?)";
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Permissions WHERE permissionId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_Permissions WHERE permissionId = ? AND userId = ?";
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.Permission"));
 	private static Log _log = LogFactory.getLog(PermissionPersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

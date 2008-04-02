@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.UserGroupImpl;
@@ -60,6 +60,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -115,16 +116,18 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	}
 
 	public UserGroup remove(UserGroup userGroup) throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(userGroup);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(userGroup);
+			}
 		}
 
 		userGroup = removeImpl(userGroup);
 
-		if (listener != null) {
-			listener.onAfterRemove(userGroup);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(userGroup);
+			}
 		}
 
 		return userGroup;
@@ -190,27 +193,29 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	 */
 	public UserGroup update(UserGroup userGroup, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = userGroup.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(userGroup);
-			}
-			else {
-				listener.onBeforeUpdate(userGroup);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(userGroup);
+				}
+				else {
+					listener.onBeforeUpdate(userGroup);
+				}
 			}
 		}
 
 		userGroup = updateImpl(userGroup, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(userGroup);
-			}
-			else {
-				listener.onAfterUpdate(userGroup);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(userGroup);
+				}
+				else {
+					listener.onAfterUpdate(userGroup);
+				}
 			}
 		}
 
@@ -1681,6 +1686,26 @@ public class UserGroupPersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portal.model.UserGroup")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
 		containsUser = new ContainsUser(this);
 
 		addUser = new AddUser(this);
@@ -1778,23 +1803,9 @@ public class UserGroupPersistenceImpl extends BasePersistence
 		}
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _SQL_GETUSERS = "SELECT {User_.*} FROM User_ INNER JOIN Users_UserGroups ON (Users_UserGroups.userId = User_.userId) WHERE (Users_UserGroups.userGroupId = ?)";
 	private static final String _SQL_GETUSERSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ?";
 	private static final String _SQL_CONTAINSUSER = "SELECT COUNT(*) AS COUNT_VALUE FROM Users_UserGroups WHERE userGroupId = ? AND userId = ?";
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.UserGroup"));
 	private static Log _log = LogFactory.getLog(UserGroupPersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

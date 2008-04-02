@@ -939,9 +939,9 @@ create table Roles_Permissions (
 );
 
 create table SCFrameworkVersi_SCProductVers (
-	productVersionId LONG not null,
 	frameworkVersionId LONG not null,
-	primary key (productVersionId, frameworkVersionId)
+	productVersionId LONG not null,
+	primary key (frameworkVersionId, productVersionId)
 );
 
 create table SCFrameworkVersion (
@@ -968,9 +968,9 @@ create table SCLicense (
 );
 
 create table SCLicenses_SCProductEntries (
-	productEntryId LONG not null,
 	licenseId LONG not null,
-	primary key (productEntryId, licenseId)
+	productEntryId LONG not null,
+	primary key (licenseId, productEntryId)
 );
 
 create table SCProductEntry (

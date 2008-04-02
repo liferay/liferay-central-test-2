@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ListType;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.ListTypeImpl;
@@ -47,6 +47,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -102,16 +103,18 @@ public class ListTypePersistenceImpl extends BasePersistence
 	}
 
 	public ListType remove(ListType listType) throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(listType);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(listType);
+			}
 		}
 
 		listType = removeImpl(listType);
 
-		if (listener != null) {
-			listener.onAfterRemove(listType);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(listType);
+			}
 		}
 
 		return listType;
@@ -166,27 +169,29 @@ public class ListTypePersistenceImpl extends BasePersistence
 	 */
 	public ListType update(ListType listType, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = listType.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(listType);
-			}
-			else {
-				listener.onBeforeUpdate(listType);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(listType);
+				}
+				else {
+					listener.onBeforeUpdate(listType);
+				}
 			}
 		}
 
 		listType = updateImpl(listType, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(listType);
-			}
-			else {
-				listener.onAfterUpdate(listType);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(listType);
+				}
+				else {
+					listener.onAfterUpdate(listType);
+				}
 			}
 		}
 
@@ -770,22 +775,27 @@ public class ListTypePersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
-	}
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portal.model.ListType")));
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
+		if (listenerClassNames.length > 0) {
 			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
-
-		return null;
 	}
 
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.ListType"));
 	private static Log _log = LogFactory.getLog(ListTypePersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -62,6 +62,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -117,16 +118,18 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	}
 
 	public TagsEntry remove(TagsEntry tagsEntry) throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(tagsEntry);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(tagsEntry);
+			}
 		}
 
 		tagsEntry = removeImpl(tagsEntry);
 
-		if (listener != null) {
-			listener.onAfterRemove(tagsEntry);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(tagsEntry);
+			}
 		}
 
 		return tagsEntry;
@@ -192,27 +195,29 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	 */
 	public TagsEntry update(TagsEntry tagsEntry, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = tagsEntry.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(tagsEntry);
-			}
-			else {
-				listener.onBeforeUpdate(tagsEntry);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(tagsEntry);
+				}
+				else {
+					listener.onBeforeUpdate(tagsEntry);
+				}
 			}
 		}
 
 		tagsEntry = updateImpl(tagsEntry, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(tagsEntry);
-			}
-			else {
-				listener.onAfterUpdate(tagsEntry);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(tagsEntry);
+				}
+				else {
+					listener.onAfterUpdate(tagsEntry);
+				}
 			}
 		}
 
@@ -1033,6 +1038,26 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portlet.tags.model.TagsEntry")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
 		containsTagsAsset = new ContainsTagsAsset(this);
 
 		addTagsAsset = new AddTagsAsset(this);
@@ -1130,23 +1155,9 @@ public class TagsEntryPersistenceImpl extends BasePersistence
 		}
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _SQL_GETTAGSASSETS = "SELECT {TagsAsset.*} FROM TagsAsset INNER JOIN TagsAssets_TagsEntries ON (TagsAssets_TagsEntries.assetId = TagsAsset.assetId) WHERE (TagsAssets_TagsEntries.entryId = ?)";
 	private static final String _SQL_GETTAGSASSETSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE entryId = ?";
 	private static final String _SQL_CONTAINSTAGSASSET = "SELECT COUNT(*) AS COUNT_VALUE FROM TagsAssets_TagsEntries WHERE entryId = ? AND assetId = ?";
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.tags.model.TagsEntry"));
 	private static Log _log = LogFactory.getLog(TagsEntryPersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

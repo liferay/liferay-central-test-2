@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -62,6 +62,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -120,16 +121,18 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 	public SCProductVersion remove(SCProductVersion scProductVersion)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(scProductVersion);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(scProductVersion);
+			}
 		}
 
 		scProductVersion = removeImpl(scProductVersion);
 
-		if (listener != null) {
-			listener.onAfterRemove(scProductVersion);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(scProductVersion);
+			}
 		}
 
 		return scProductVersion;
@@ -196,27 +199,29 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	 */
 	public SCProductVersion update(SCProductVersion scProductVersion,
 		boolean merge) throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = scProductVersion.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(scProductVersion);
-			}
-			else {
-				listener.onBeforeUpdate(scProductVersion);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(scProductVersion);
+				}
+				else {
+					listener.onBeforeUpdate(scProductVersion);
+				}
 			}
 		}
 
 		scProductVersion = updateImpl(scProductVersion, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(scProductVersion);
-			}
-			else {
-				listener.onAfterUpdate(scProductVersion);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(scProductVersion);
+				}
+				else {
+					listener.onAfterUpdate(scProductVersion);
+				}
 			}
 		}
 
@@ -1367,6 +1372,26 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCProductVersion")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
 		containsSCFrameworkVersion = new ContainsSCFrameworkVersion(this);
 
 		addSCFrameworkVersion = new AddSCFrameworkVersion(this);
@@ -1475,23 +1500,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 		}
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _SQL_GETSCFRAMEWORKVERSIONS = "SELECT {SCFrameworkVersion.*} FROM SCFrameworkVersion INNER JOIN SCFrameworkVersi_SCProductVers ON (SCFrameworkVersi_SCProductVers.frameworkVersionId = SCFrameworkVersion.frameworkVersionId) WHERE (SCFrameworkVersi_SCProductVers.productVersionId = ?)";
 	private static final String _SQL_GETSCFRAMEWORKVERSIONSSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ?";
 	private static final String _SQL_CONTAINSSCFRAMEWORKVERSION = "SELECT COUNT(*) AS COUNT_VALUE FROM SCFrameworkVersi_SCProductVers WHERE productVersionId = ? AND frameworkVersionId = ?";
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.softwarecatalog.model.SCProductVersion"));
 	private static Log _log = LogFactory.getLog(SCProductVersionPersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

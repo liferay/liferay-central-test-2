@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -61,6 +61,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -117,16 +118,18 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 	public ShoppingItem remove(ShoppingItem shoppingItem)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(shoppingItem);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(shoppingItem);
+			}
 		}
 
 		shoppingItem = removeImpl(shoppingItem);
 
-		if (listener != null) {
-			listener.onAfterRemove(shoppingItem);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(shoppingItem);
+			}
 		}
 
 		return shoppingItem;
@@ -183,27 +186,29 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	 */
 	public ShoppingItem update(ShoppingItem shoppingItem, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = shoppingItem.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(shoppingItem);
-			}
-			else {
-				listener.onBeforeUpdate(shoppingItem);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(shoppingItem);
+				}
+				else {
+					listener.onBeforeUpdate(shoppingItem);
+				}
 			}
 		}
 
 		shoppingItem = updateImpl(shoppingItem, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(shoppingItem);
-			}
-			else {
-				listener.onAfterUpdate(shoppingItem);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(shoppingItem);
+				}
+				else {
+					listener.onAfterUpdate(shoppingItem);
+				}
 			}
 		}
 
@@ -1681,6 +1686,26 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portlet.shopping.model.ShoppingItem")));
+
+		if (listenerClassNames.length > 0) {
+			try {
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
+			}
+			catch (Exception e) {
+				_log.error(e);
+			}
+		}
+
 		containsShoppingItemPrice = new ContainsShoppingItemPrice(this);
 	}
 
@@ -1720,23 +1745,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 		}
 	}
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
-			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
-
-		return null;
-	}
-
 	private static final String _SQL_GETSHOPPINGITEMPRICES = "SELECT {ShoppingItemPrice.*} FROM ShoppingItemPrice INNER JOIN ShoppingItem ON (ShoppingItem.itemId = ShoppingItemPrice.itemId) WHERE (ShoppingItem.itemId = ?)";
 	private static final String _SQL_GETSHOPPINGITEMPRICESSIZE = "SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItemPrice WHERE itemId = ?";
 	private static final String _SQL_CONTAINSSHOPPINGITEMPRICE = "SELECT COUNT(*) AS COUNT_VALUE FROM ShoppingItemPrice WHERE itemId = ? AND itemPriceId = ?";
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.shopping.model.ShoppingItem"));
 	private static Log _log = LogFactory.getLog(ShoppingItemPersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

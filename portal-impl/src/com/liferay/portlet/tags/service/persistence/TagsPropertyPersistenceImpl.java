@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -49,6 +49,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -106,16 +107,18 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 	public TagsProperty remove(TagsProperty tagsProperty)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(tagsProperty);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(tagsProperty);
+			}
 		}
 
 		tagsProperty = removeImpl(tagsProperty);
 
-		if (listener != null) {
-			listener.onAfterRemove(tagsProperty);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(tagsProperty);
+			}
 		}
 
 		return tagsProperty;
@@ -172,27 +175,29 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 	 */
 	public TagsProperty update(TagsProperty tagsProperty, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = tagsProperty.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(tagsProperty);
-			}
-			else {
-				listener.onBeforeUpdate(tagsProperty);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(tagsProperty);
+				}
+				else {
+					listener.onBeforeUpdate(tagsProperty);
+				}
 			}
 		}
 
 		tagsProperty = updateImpl(tagsProperty, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(tagsProperty);
-			}
-			else {
-				listener.onAfterUpdate(tagsProperty);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(tagsProperty);
+				}
+				else {
+					listener.onAfterUpdate(tagsProperty);
+				}
 			}
 		}
 
@@ -1653,22 +1658,27 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
-	}
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portlet.tags.model.TagsProperty")));
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
+		if (listenerClassNames.length > 0) {
 			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
-
-		return null;
 	}
 
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.tags.model.TagsProperty"));
 	private static Log _log = LogFactory.getLog(TagsPropertyPersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

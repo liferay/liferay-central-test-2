@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ActivityTracker;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.model.impl.ActivityTrackerImpl;
@@ -47,6 +47,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -104,16 +105,18 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 
 	public ActivityTracker remove(ActivityTracker activityTracker)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(activityTracker);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(activityTracker);
+			}
 		}
 
 		activityTracker = removeImpl(activityTracker);
 
-		if (listener != null) {
-			listener.onAfterRemove(activityTracker);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(activityTracker);
+			}
 		}
 
 		return activityTracker;
@@ -170,27 +173,29 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 	 */
 	public ActivityTracker update(ActivityTracker activityTracker, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = activityTracker.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(activityTracker);
-			}
-			else {
-				listener.onBeforeUpdate(activityTracker);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(activityTracker);
+				}
+				else {
+					listener.onBeforeUpdate(activityTracker);
+				}
 			}
 		}
 
 		activityTracker = updateImpl(activityTracker, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(activityTracker);
-			}
-			else {
-				listener.onAfterUpdate(activityTracker);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(activityTracker);
+				}
+				else {
+					listener.onAfterUpdate(activityTracker);
+				}
 			}
 		}
 
@@ -2060,22 +2065,27 @@ public class ActivityTrackerPersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
-	}
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portal.model.ActivityTracker")));
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
+		if (listenerClassNames.length > 0) {
 			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
-
-		return null;
 	}
 
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portal.model.ActivityTracker"));
 	private static Log _log = LogFactory.getLog(ActivityTrackerPersistenceImpl.class);
+	private ModelListener[] _listeners;
 }

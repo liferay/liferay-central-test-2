@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.ModelListener;
@@ -50,6 +51,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -109,16 +111,18 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	}
 
 	public MBCategory remove(MBCategory mbCategory) throws SystemException {
-		ModelListener listener = _getListener();
-
-		if (listener != null) {
-			listener.onBeforeRemove(mbCategory);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onBeforeRemove(mbCategory);
+			}
 		}
 
 		mbCategory = removeImpl(mbCategory);
 
-		if (listener != null) {
-			listener.onAfterRemove(mbCategory);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				listener.onAfterRemove(mbCategory);
+			}
 		}
 
 		return mbCategory;
@@ -174,27 +178,29 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	 */
 	public MBCategory update(MBCategory mbCategory, boolean merge)
 		throws SystemException {
-		ModelListener listener = _getListener();
-
 		boolean isNew = mbCategory.isNew();
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onBeforeCreate(mbCategory);
-			}
-			else {
-				listener.onBeforeUpdate(mbCategory);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onBeforeCreate(mbCategory);
+				}
+				else {
+					listener.onBeforeUpdate(mbCategory);
+				}
 			}
 		}
 
 		mbCategory = updateImpl(mbCategory, merge);
 
-		if (listener != null) {
-			if (isNew) {
-				listener.onAfterCreate(mbCategory);
-			}
-			else {
-				listener.onAfterUpdate(mbCategory);
+		if (_listeners != null) {
+			for (ModelListener listener : _listeners) {
+				if (isNew) {
+					listener.onAfterCreate(mbCategory);
+				}
+				else {
+					listener.onAfterUpdate(mbCategory);
+				}
 			}
 		}
 
@@ -1989,22 +1995,27 @@ public class MBCategoryPersistenceImpl extends BasePersistence
 	}
 
 	protected void initDao() {
-	}
+		String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+					PropsUtil.get(
+						"value.object.listener.com.liferay.portlet.messageboards.model.MBCategory")));
 
-	private static ModelListener _getListener() {
-		if (Validator.isNotNull(_LISTENER)) {
+		if (listenerClassNames.length > 0) {
 			try {
-				return (ModelListener)Class.forName(_LISTENER).newInstance();
+				List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+				for (String listenerClassName : listenerClassNames) {
+					listeners.add((ModelListener)Class.forName(
+							listenerClassName).newInstance());
+				}
+
+				_listeners = listeners.toArray(new ModelListener[listeners.size()]);
 			}
 			catch (Exception e) {
 				_log.error(e);
 			}
 		}
-
-		return null;
 	}
 
-	private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-				"value.object.listener.com.liferay.portlet.messageboards.model.MBCategory"));
 	private static Log _log = LogFactory.getLog(MBCategoryPersistenceImpl.class);
+	private ModelListener[] _listeners;
 }
