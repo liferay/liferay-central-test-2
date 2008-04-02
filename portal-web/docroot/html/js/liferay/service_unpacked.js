@@ -3138,6 +3138,13 @@ Liferay.Service.Workflow.WorkflowDefinition = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	addDefinitionResources: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "addDefinitionResources";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getDefinition: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getDefinition";

@@ -132,6 +132,37 @@ public class WorkflowDefinitionServiceSoap {
 		}
 	}
 
+	public static void addDefinitionResources(
+		com.liferay.portal.model.UserSoap user, long definitionId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws RemoteException {
+		try {
+			WorkflowDefinitionServiceUtil.addDefinitionResources(com.liferay.portal.model.impl.UserModelImpl.toModel(
+					user), definitionId, addCommunityPermissions,
+				addGuestPermissions);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void addDefinitionResources(
+		com.liferay.portal.model.UserSoap user, long definitionId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions) throws RemoteException {
+		try {
+			WorkflowDefinitionServiceUtil.addDefinitionResources(com.liferay.portal.model.impl.UserModelImpl.toModel(
+					user), definitionId, communityPermissions, guestPermissions);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.workflow.model.WorkflowDefinitionSoap getDefinition(
 		long definitionId) throws RemoteException {
 		try {

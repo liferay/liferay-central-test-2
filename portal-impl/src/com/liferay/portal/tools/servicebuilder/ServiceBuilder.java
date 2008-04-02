@@ -1208,6 +1208,19 @@ public class ServiceBuilder {
 		}
 	}
 
+	public Entity getEntityByParameterTypeValue(String parameterTypeValue) {
+		try {
+			String name = parameterTypeValue;
+
+			name = StringUtil.replace(name, ".model.", ".");
+
+			return getEntity(name);
+		}
+		catch (Exception e) {
+			return null;
+		}
+	}
+
 	public String getGeneratorClass(String idType) {
 		if (Validator.isNull(idType)) {
 			idType = "assigned";
@@ -1335,6 +1348,23 @@ public class ServiceBuilder {
 		}
 	}
 
+	public boolean hasEntityByParameterTypeValue(String parameterTypeValue) {
+		if (Validator.isNull(parameterTypeValue)) {
+			return false;
+		}
+
+		if (parameterTypeValue.indexOf(".model.") == -1) {
+			return false;
+		}
+
+		if (getEntityByParameterTypeValue(parameterTypeValue) == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
 	public boolean isCustomMethod(JavaMethod method) {
 		String methodName = method.getName();
 
@@ -1440,9 +1470,7 @@ public class ServiceBuilder {
 				javaParameter.getType().getValue() +
 					_getDimensions(javaParameter.getType());
 
-			if ((parameterTypeName.indexOf(
-					"com.liferay.portal.model.") != -1) ||
-				(parameterTypeName.equals(
+			if ((parameterTypeName.equals(
 					"com.liferay.portal.theme.ThemeDisplay")) ||
 				(parameterTypeName.equals(
 					"com.liferay.portlet.PortletPreferencesImpl")) ||

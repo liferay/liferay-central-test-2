@@ -97,6 +97,10 @@ public class ${entity.name}ServiceSoap {
 					<#assign parameterEntity = serviceBuilder.getEntityByGenericsName(parameter.genericsName)>
 
 					<#assign parameterTypeName = parameterEntity.packagePath + ".model." + parameterEntity.name + "Soap[]">
+				<#elseif serviceBuilder.hasEntityByParameterTypeValue(parameter.type.value)>
+					<#assign parameterEntity = serviceBuilder.getEntityByParameterTypeValue(parameter.type.value)>
+
+					<#assign parameterTypeName = parameterEntity.packagePath + ".model." + parameterEntity.name + "Soap">
 				</#if>
 
 				${parameterTypeName} ${parameter.name}
@@ -123,6 +127,8 @@ public class ${entity.name}ServiceSoap {
 							ListUtil.toList(
 						<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(parameter.genericsName)>
 							${parameterEntity.packagePath}.model.impl.${parameterEntity.name}ModelImpl.toModels(
+						<#elseif serviceBuilder.hasEntityByParameterTypeValue(parameter.type.value)>
+							${parameterEntity.packagePath}.model.impl.${parameterEntity.name}ModelImpl.toModel(
 						</#if>
 
 						${parameter.name}
@@ -132,6 +138,8 @@ public class ${entity.name}ServiceSoap {
 						<#elseif parameterTypeName == "java.util.List<Long>">
 							)
 						<#elseif (parameter.type.value == "java.util.List") && serviceBuilder.hasEntityByGenericsName(parameter.genericsName)>
+							)
+						<#elseif serviceBuilder.hasEntityByParameterTypeValue(parameter.type.value)>
 							)
 						</#if>
 

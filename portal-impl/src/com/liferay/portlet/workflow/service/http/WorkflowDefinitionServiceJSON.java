@@ -106,6 +106,25 @@ public class WorkflowDefinitionServiceJSON {
 		return WorkflowDefinitionJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static void addDefinitionResources(
+		com.liferay.portal.model.User user, long definitionId,
+		boolean addCommunityPermissions, boolean addGuestPermissions)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		WorkflowDefinitionServiceUtil.addDefinitionResources(user,
+			definitionId, addCommunityPermissions, addGuestPermissions);
+	}
+
+	public static void addDefinitionResources(
+		com.liferay.portal.model.User user, long definitionId,
+		java.lang.String[] communityPermissions,
+		java.lang.String[] guestPermissions)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		WorkflowDefinitionServiceUtil.addDefinitionResources(user,
+			definitionId, communityPermissions, guestPermissions);
+	}
+
 	public static JSONObject getDefinition(long definitionId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
