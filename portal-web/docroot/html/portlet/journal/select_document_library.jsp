@@ -25,11 +25,11 @@
 <%@ include file="/html/portlet/document_library/init.jsp" %>
 
 <%
-long groupId = ParamUtil.getLong(request, "groupId");
-
 DLFolder folder = (DLFolder)request.getAttribute(WebKeys.DOCUMENT_LIBRARY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", DLFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+
+long groupId = ParamUtil.getLong(request, "groupId");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -47,7 +47,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 	<%
 	String breadcrumbs = DLUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse);
 
-	breadcrumbs = StringUtil.replace(breadcrumbs, "document_library%2Fselect_folder", "journal%2Fselect_document_library");
+	breadcrumbs = StringUtil.replace(breadcrumbs, "document_library%2Fselect_folder", "journal%2Fselect_document_library&" + renderResponse.getNamespace() + "groupId=" + groupId);
 	%>
 
 	<div class="breadcrumbs">

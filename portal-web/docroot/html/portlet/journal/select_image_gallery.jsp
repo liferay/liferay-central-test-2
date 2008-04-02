@@ -25,11 +25,11 @@
 <%@ include file="/html/portlet/image_gallery/init.jsp" %>
 
 <%
-long groupId = ParamUtil.getLong(request, "groupId");
-
 IGFolder folder = (IGFolder)request.getAttribute(WebKeys.IMAGE_GALLERY_FOLDER);
 
 long folderId = BeanParamUtil.getLong(folder, request, "folderId", IGFolderImpl.DEFAULT_PARENT_FOLDER_ID);
+
+long groupId = ParamUtil.getLong(request, "groupId");
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
@@ -47,7 +47,7 @@ portletURL.setParameter("groupId", String.valueOf(groupId));
 	<%
 	String breadcrumbs = IGUtil.getBreadcrumbs(folder, null, pageContext, renderRequest, renderResponse);
 
-	breadcrumbs = StringUtil.replace(breadcrumbs, "image_gallery%2Fselect_folder", "journal%2Fselect_image_gallery");
+	breadcrumbs = StringUtil.replace(breadcrumbs, "image_gallery%2Fselect_folder", "journal%2Fselect_image_gallery&" + renderResponse.getNamespace() + "groupId=" + groupId);
 	%>
 
 	<div class="breadcrumbs">
