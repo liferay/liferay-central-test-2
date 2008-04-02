@@ -42,7 +42,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
  */
 public class PrincipalBean {
 
-	public static final String JRUN_ANONYMOUS = "anonymus-guest";
+	public static final String JRUN_ANONYMOUS = "anonymous-guest";
 
 	public static final String ORACLE_ANONYMOUS = "guest";
 
