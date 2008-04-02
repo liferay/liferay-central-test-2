@@ -375,6 +375,10 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 			expirationHour = expirationCal.get(Calendar.HOUR);
 			expirationMinute = expirationCal.get(Calendar.MINUTE);
 			neverExpire = false;
+
+			if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
+				expirationHour = expirationHour + 12;
+			}
 		}
 
 		boolean addCommunityPermissions = true;

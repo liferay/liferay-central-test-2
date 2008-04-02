@@ -492,6 +492,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			displayDateYear = displayCal.get(Calendar.YEAR);
 			displayDateHour = displayCal.get(Calendar.HOUR);
 			displayDateMinute = displayCal.get(Calendar.MINUTE);
+
+			if (displayCal.get(Calendar.AM_PM) == Calendar.PM) {
+				displayDateHour = displayDateHour + 12;
+			}
 		}
 
 		Date expirationDate = article.getExpirationDate();
@@ -514,6 +518,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			expirationDateHour = expirationCal.get(Calendar.HOUR);
 			expirationDateMinute = expirationCal.get(Calendar.MINUTE);
 			neverExpire = false;
+
+			if (expirationCal.get(Calendar.AM_PM) == Calendar.PM) {
+				expirationDateHour = expirationDateHour + 12;
+			}
 		}
 
 		Date reviewDate = article.getReviewDate();
@@ -536,6 +544,10 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 			reviewDateHour = reviewCal.get(Calendar.HOUR);
 			reviewDateMinute = reviewCal.get(Calendar.MINUTE);
 			neverReview = false;
+
+			if (reviewCal.get(Calendar.AM_PM) == Calendar.PM) {
+				reviewDateHour = reviewDateHour + 12;
+			}
 		}
 
 		File smallFile = null;

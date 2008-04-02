@@ -204,6 +204,10 @@ public class CalendarPortletDataHandlerImpl implements PortletDataHandler {
 			startDateYear = startCal.get(Calendar.YEAR);
 			startDateHour = startCal.get(Calendar.HOUR);
 			startDateMinute = startCal.get(Calendar.MINUTE);
+
+			if (startCal.get(Calendar.AM_PM) == Calendar.PM) {
+				startDateHour = startDateHour + 12;
+			}
 		}
 
 		Date endDate = event.getEndDate();
