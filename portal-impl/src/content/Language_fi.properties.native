@@ -2729,7 +2729,6 @@ the-email-address-you-requested-is-already-taken=Valitsemasi sähköpostiosoite 
 the-email-address-you-requested-is-not-registered-in-our-database=Antamasi sähköpostiosoite ei löytynyt järjestelmästämme.
 the-email-address-you-requested-is-reserved=Antamasi sähköpostiosoite on varattu.
 the-email-could-not-be-sent=Sähköpostia ei voitu lähettää.
-the-email-was-sent-successfuly=Sähköposti lähetetty onnistuneesti.
 the-entry-could-not-be-found=Merkintää ei löydy.
 the-event-could-not-be-found=Tapahtumaa ei löytynyt.
 the-firm-cannot-be-deleted-because-it-has-associated-projects=Yritystä ei voi poistaa koska siihen liittyy projekteja.
