@@ -99,7 +99,7 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 <br />
 
 <div>
-	<input type="submit" value="<liferay-ui:message key='<%= "search-" + tabs1 %>' />" />
+	<input type="submit" value="<liferay-ui:message key="search-organizations" />" />
 
 	<%
 	boolean showButtons = false;
