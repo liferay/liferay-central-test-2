@@ -1109,7 +1109,15 @@ public class BaseDeployer {
 
 		String content = FileUtil.read(webXml);
 
-		int pos = content.indexOf("</web-app>");
+		int x = content.indexOf("<display-name>");
+
+		if (x != -1) {
+			int y = content.indexOf("</display-name>", x);
+
+			y = content.indexOf(">", y);
+
+			content = content.substring(0, x) + content.substring(y);
+		}
 
 		double webXmlVersion = 2.3;
 
@@ -1124,6 +1132,8 @@ public class BaseDeployer {
 
 		String extraContent = getExtraContent(
 			webXmlVersion, srcFile, displayName);
+
+		int pos = content.indexOf("</web-app>");
 
 		String newContent =
 			content.substring(0, pos) + extraContent +
