@@ -7,12 +7,12 @@ import com.liferay.portal.SystemException;
 import ${beanLocatorUtilPackage}.BeanLocatorUtil;
 import com.liferay.portal.kernel.util.Validator;
 import ${propsUtilPackage}.PropsUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.dao.hibernate.LiferayClassicSession;
 
 import java.sql.Connection;
 import java.sql.SQLException;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.sql.DataSource;
@@ -103,9 +103,8 @@ public class HibernateUtil {
 			return _sessionFactory;
 		}
 		else {
-			SessionFactoryImplementor sessionFactory =
-				(SessionFactoryImplementor)_sessionFactories.get(
-					sessionFactoryName);
+			SessionFactoryImplementor sessionFactory = _sessionFactories.get(
+				sessionFactoryName);
 
 			if (sessionFactory == null) {
 				LocalSessionFactoryBean lsfb =
@@ -198,6 +197,7 @@ public class HibernateUtil {
 
 	private static DataSource _dataSource;
 	private static SessionFactoryImplementor _sessionFactory;
-	private static Map _sessionFactories = CollectionFactory.getHashMap();
+	private static Map<String, SessionFactoryImplementor> _sessionFactories =
+		new HashMap<String, SessionFactoryImplementor>();
 
 }
