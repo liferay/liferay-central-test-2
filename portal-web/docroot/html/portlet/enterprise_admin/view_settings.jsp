@@ -366,7 +366,7 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 			}
 			%>
 
-			function initEditor() {
+			function <portlet:namespace />initEditor() {
 				return "<%= UnicodeFormatter.toString(editorContent) %>";
 			}
 

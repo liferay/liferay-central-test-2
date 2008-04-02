@@ -54,7 +54,7 @@ if (entry != null) {
 		return content;
 	}
 
-	function initEditor() {
+	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 

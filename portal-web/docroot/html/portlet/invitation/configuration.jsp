@@ -40,7 +40,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 	String editorContent = emailMessageBody;
 	%>
 
-	function initEditor() {
+	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}
 

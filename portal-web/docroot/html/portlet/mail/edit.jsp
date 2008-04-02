@@ -54,7 +54,7 @@ portletURL.setParameter("tabs1", tabs1);
 	}
 	%>
 
-	function initEditor() {
+	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}
 

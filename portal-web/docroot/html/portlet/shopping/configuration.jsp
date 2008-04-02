@@ -61,7 +61,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	}
 	%>
 
-	function initEditor() {
+	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}
 

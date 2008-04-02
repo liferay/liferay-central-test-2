@@ -428,7 +428,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 		return null;
 	}
 
-	function initEditor() {
+	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 

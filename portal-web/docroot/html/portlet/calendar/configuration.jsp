@@ -52,7 +52,7 @@ String emailEventReminderBody = ParamUtil.getString(request, "emailEventReminder
 	String editorContent = emailEventReminderBody;
 	%>
 
-	function initEditor() {
+	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}
 

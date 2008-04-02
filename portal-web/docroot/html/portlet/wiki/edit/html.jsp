@@ -30,7 +30,7 @@ String content = BeanParamUtil.getString(wikiPage, request, "content");
 %>
 
 <script type="text/javascript">
-	function initEditor() {
+	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(content) %>";
 	}
 </script>

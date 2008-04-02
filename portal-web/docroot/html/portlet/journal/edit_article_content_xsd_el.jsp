@@ -133,7 +133,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 
 						<c:if test='<%= elType.equals("text_area") %>'>
 							<script type="text/javascript">
-								function initEditor<%= count.getValue() %>() {
+								function <portlet:namespace />initEditor<%= count.getValue() %>() {
 									return "<%= UnicodeFormatter.toString(elContent) %>";
 								}
 							</script>
@@ -142,7 +142,7 @@ Integer depth = (Integer)request.getAttribute(WebKeys.JOURNAL_STRUCTURE_EL_DEPTH
 								name='<%= renderResponse.getNamespace() + "structure_el" + count.getValue() + "_content" %>'
 								editorImpl="<%= EDITOR_WYSIWYG_IMPL_KEY %>"
 								toolbarSet="liferay-article"
-								initMethod='<%= "initEditor" + count.getValue() %>'
+								initMethod='<%= renderResponse.getNamespace() + "initEditor" + count.getValue() %>'
 								onChangeMethod='<%= renderResponse.getNamespace() + "editorContentChanged" %>'
 								height="250"
 								width="600"

@@ -78,7 +78,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 	}
 	%>
 
-	function initEditor() {
+	function <portlet:namespace />initEditor() {
 		return "<%= UnicodeFormatter.toString(editorContent) %>";
 	}
 
