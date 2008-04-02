@@ -89,6 +89,7 @@ import org.dom4j.Element;
  * @author Alexander Chow
  * @author Harry Mark
  * @author Tariq Dweik
+ * @author Glenn Powell
  *
  */
 public class ServiceBuilder {
@@ -612,6 +613,7 @@ public class ServiceBuilder {
 			}
 
 			_ejbList = new ArrayList<Entity>();
+			_entityMappings = new HashMap<String, EntityMapping>();
 
 			List<Element> entities = root.elements("entity");
 
@@ -728,6 +730,23 @@ public class ServiceBuilder {
 					}
 
 					columnList.add(col);
+
+					if (Validator.isNotNull(collectionEntity) &&
+						Validator.isNotNull(mappingTable)) {
+
+						EntityMapping entityMapping = new EntityMapping(
+							mappingTable, ejbName, collectionEntity);
+
+						int ejbNameWeight = StringUtil.startsWithWeight(
+							mappingTable, ejbName);
+						int collectionEntityWeight =
+							StringUtil.startsWithWeight(mappingTable,
+								collectionEntity);
+
+						if (ejbNameWeight > collectionEntityWeight) {
+							_entityMappings.put(mappingTable, entityMapping);
+						}
+					}
 				}
 
 				EntityOrder order = null;
@@ -2789,6 +2808,68 @@ public class ServiceBuilder {
 		FileUtil.write(propsFile, sm.toString(), true);
 	}
 
+	private void _createSQLMappingTables(
+			File sqlFile, String newCreateTableString,
+			EntityMapping entityMapping, boolean addMissingTables)
+		throws IOException {
+
+		if (!sqlFile.exists()) {
+			FileUtil.write(sqlFile, StringPool.BLANK);
+		}
+
+		String content = FileUtil.read(sqlFile);
+
+		int x = content.indexOf(
+			_CREATE_TABLE + entityMapping.getTable() + " (");
+		int y = content.indexOf(");", x);
+
+		if (x != -1) {
+			String oldCreateTableString = content.substring(x + 1, y);
+
+			if (!oldCreateTableString.equals(newCreateTableString)) {
+				content =
+					content.substring(0, x) + newCreateTableString +
+						content.substring(y + 2, content.length());
+
+				FileUtil.write(sqlFile, content);
+			}
+		}
+		else if (addMissingTables) {
+			StringMaker sm = new StringMaker();
+
+			BufferedReader br = new BufferedReader(new StringReader(content));
+
+			String line = null;
+			boolean appendNewTable = true;
+
+			while ((line = br.readLine()) != null) {
+				if (appendNewTable && line.startsWith(_CREATE_TABLE)) {
+					x = _CREATE_TABLE.length();
+					y = line.indexOf(" ", x);
+
+					String tableName = line.substring(x, y);
+
+					if (tableName.compareTo(entityMapping.getTable()) > 0) {
+						sm.append(newCreateTableString + "\n\n");
+
+						appendNewTable = false;
+					}
+				}
+
+				sm.append(line);
+				sm.append("\n");
+			}
+
+			if (appendNewTable) {
+				sm.append("\n" + newCreateTableString);
+			}
+
+			br.close();
+
+			FileUtil.write(sqlFile, sm.toString(), true);
+		}
+	}
+
 	private void _createSQLSequences() throws IOException {
 		if (!FileUtil.exists(_sqlDir)) {
 			return;
@@ -2891,6 +2972,20 @@ public class ServiceBuilder {
 				}
 			}
 		}
+
+		for (Map.Entry<String, EntityMapping> entry :
+				_entityMappings.entrySet()) {
+
+			EntityMapping entityMapping = entry.getValue();
+
+			String createMappingTableSQL = _getCreateMappingTableSQL(
+				entityMapping);
+
+			if (Validator.isNotNull(createMappingTableSQL)) {
+				_createSQLMappingTables(
+					sqlFile, createMappingTableSQL, entityMapping, true);
+			}
+		}
 	}
 
 	private void _createSQLTables(
@@ -2940,7 +3035,8 @@ public class ServiceBuilder {
 					}
 				}
 
-				sm.append(line).append('\n');
+				sm.append(line);
+				sm.append("\n");
 			}
 
 			if (appendNewTable) {
@@ -3067,6 +3163,114 @@ public class ServiceBuilder {
 			staticModels.get("com.liferay.portal.kernel.util.Validator"));
 
 		return context;
+	}
+
+	private String _getCreateMappingTableSQL(EntityMapping entityMapping)
+		throws IOException {
+
+		Entity[] entities = new Entity[2];
+
+		for (int i = 0; i < entities.length; i++) {
+			entities[i] = getEntity(entityMapping.getEntity(i));
+
+			if (entities[i] == null) {
+				return null;
+			}
+		}
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(_CREATE_TABLE + entityMapping.getTable() + " (\n");
+
+		for (Entity entity : entities) {
+			List<EntityColumn> pkList = entity.getPKList();
+
+			for (int i = 0; i < pkList.size(); i++) {
+				EntityColumn col = pkList.get(i);
+
+				String colName = col.getName();
+				String colType = col.getType();
+
+				sm.append("\t" + col.getDBName());
+				sm.append(" ");
+
+				if (colType.equalsIgnoreCase("boolean")) {
+					sm.append("BOOLEAN");
+				}
+				else if (colType.equalsIgnoreCase("double") ||
+						 colType.equalsIgnoreCase("float")) {
+
+					sm.append("DOUBLE");
+				}
+				else if (colType.equals("int") ||
+						 colType.equals("Integer") ||
+						 colType.equalsIgnoreCase("short")) {
+
+					sm.append("INTEGER");
+				}
+				else if (colType.equalsIgnoreCase("long")) {
+					sm.append("LONG");
+				}
+				else if (colType.equals("String")) {
+					Map<String, String> hints = ModelHintsUtil.getHints(
+						_packagePath + ".model." + entity.getName(), colName);
+
+					int maxLength = 75;
+
+					if (hints != null) {
+						maxLength = GetterUtil.getInteger(
+							hints.get("max-length"), maxLength);
+					}
+
+					if (maxLength < 4000) {
+						sm.append("VARCHAR(" + maxLength + ")");
+					}
+					else if (maxLength == 4000) {
+						sm.append("STRING");
+					}
+					else if (maxLength > 4000) {
+						sm.append("TEXT");
+					}
+				}
+				else if (colType.equals("Date")) {
+					sm.append("DATE null");
+				}
+				else {
+					sm.append("invalid");
+				}
+
+				if (col.isPrimary()) {
+					sm.append(" not null");
+				}
+
+				sm.append(",\n");
+			}
+		}
+
+		sm.append("\tprimary key (");
+
+		for (int i = 0; i < entities.length; i++) {
+			Entity entity = entities[i];
+
+			List<EntityColumn> pkList = entity.getPKList();
+
+			for (int j = 0; j < pkList.size(); j++) {
+				EntityColumn col = pkList.get(j);
+
+				String colName = col.getName();
+
+				if ((i != 0) || (j != 0)) {
+					sm.append(", ");
+				}
+
+				sm.append(colName);
+			}
+		}
+
+		sm.append(")\n");
+		sm.append(");");
+
+		return sm.toString();
 	}
 
 	private String _getCreateTableSQL(Entity entity) {
@@ -3346,6 +3550,7 @@ public class ServiceBuilder {
 	private String _testOutputPath;
 	private String _packagePath;
 	private List<Entity> _ejbList;
+	private Map<String, EntityMapping> _entityMappings;
 	private Map<String, Entity> _entityPool = new HashMap<String, Entity>();
 
 }

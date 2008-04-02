@@ -995,6 +995,35 @@ public class StringUtil {
 		}
 	}
 
+	/**
+	 * Return the number of starting letters that s1 and s2 have in common
+	 * before they deviate.
+	 *
+	 * @param		s1 the first string
+	 * @param		s2 the second string
+	 *
+	 * @return		the number of starting letters that s1 and s2 have in common
+	 *				before they deviate
+	 */
+	public static int startsWithWeight(String s1, String s2) {
+		if ((s1 == null) || (s2 == null)) {
+			return 0;
+		}
+
+		char[] charArray1 = s1.toCharArray();
+		char[] charArray2 = s2.toCharArray();
+
+		int i = 0;
+
+		for (; (i < charArray1.length) && (i < charArray2.length); i++) {
+			if (charArray1[i] != charArray2[i]) {
+				break;
+			}
+		}
+
+		return i;
+	}
+
 	public static String stripBetween(String s, String begin, String end) {
 		if ((s == null) || (begin == null) || (end == null)) {
 			return s;

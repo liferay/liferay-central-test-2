@@ -153,11 +153,11 @@ public class StringUtil_IW {
 		return StringUtil.merge(array, delimiter);
 	}
 
-	public java.lang.String merge(java.util.List<Object> list) {
+	public java.lang.String merge(java.util.List<?> list) {
 		return StringUtil.merge(list);
 	}
 
-	public java.lang.String merge(java.util.List<Object> list,
+	public java.lang.String merge(java.util.List<?> list,
 		java.lang.String delimiter) {
 		return StringUtil.merge(list, delimiter);
 	}
@@ -314,6 +314,10 @@ public class StringUtil_IW {
 
 	public boolean startsWith(java.lang.String s, java.lang.String start) {
 		return StringUtil.startsWith(s, start);
+	}
+
+	public int startsWithWeight(java.lang.String s1, java.lang.String s2) {
+		return StringUtil.startsWithWeight(s1, s2);
 	}
 
 	public java.lang.String stripBetween(java.lang.String s,
