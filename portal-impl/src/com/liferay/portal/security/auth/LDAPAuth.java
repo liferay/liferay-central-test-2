@@ -317,10 +317,10 @@ public class LDAPAuth implements Authenticator {
 				else {
 					ldapAuthResult.setAuthenticated(false);
 
-					_log.error(
-						"LDAP password " + ldapPassword +
-							" does not match with given password " +
-								encryptedPassword + " for userDN " + userDN);
+					if (_log.isWarnEnabled()) {
+						_log.warn(
+							"Passwords do not match for userDN " + userDN);
+					}
 				}
 			}
 		}
