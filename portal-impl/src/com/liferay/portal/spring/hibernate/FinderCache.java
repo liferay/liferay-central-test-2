@@ -283,8 +283,8 @@ public class FinderCache implements CacheRegistryItem {
 
 			List<Object> list = new ArrayList<Object>(cachedList.size());
 
-			for (int i = 0; i < cachedList.size(); i++) {
-				Object result = _primaryKeyToResult(session, cachedList.get(i));
+			for (Object curPrimaryKey : cachedList) {
+				Object result = _primaryKeyToResult(session, curPrimaryKey);
 
 				list.add(result);
 			}
@@ -310,8 +310,8 @@ public class FinderCache implements CacheRegistryItem {
 
 			List<Object> cachedList = new ArrayList<Object>(list.size());
 
-			for (int i = 0; i < list.size(); i++) {
-				Object primaryKey = _resultToPrimaryKey(list.get(i));
+			for (Object curResult : list) {
+				Object primaryKey = _resultToPrimaryKey(curResult);
 
 				cachedList.add(primaryKey);
 			}
