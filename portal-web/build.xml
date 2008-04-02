@@ -267,7 +267,7 @@
 		<antcall target="build-fckeditor" />
 		<antcall target="build-tinymce" />
 
-		<copy todir="docroot/WEB-INF/lib" file="${project.dir}/portal-client/portal-client.jar" />
+		<copy todir="docroot/WEB-INF/lib" file="${project.dir}/portal-client/portal-client.jar" failonerror="false" />
 
 		<antcall target="build-common-web.deploy" />
 
