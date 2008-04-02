@@ -106,7 +106,7 @@ public class HttpUtil {
 		return getHttp().getParameter(url, name, escaped);
 	}
 
-	public static Map getParameterMap(String queryString) {
+	public static Map<String, String[]> getParameterMap(String queryString) {
 		return getHttp().getParameterMap(queryString);
 	}
 
@@ -150,16 +150,20 @@ public class HttpUtil {
 		return getHttp().isProxyHost(host);
 	}
 
-	public static Map parameterMapFromString(String queryString) {
+	public static Map<String, String[]> parameterMapFromString(
+		String queryString) {
+
 		return getHttp().parameterMapFromString(queryString);
 	}
 
-	public static String parameterMapToString(Map parameterMap) {
+	public static String parameterMapToString(
+		Map<String, String[]> parameterMap) {
+
 		return getHttp().parameterMapToString(parameterMap);
 	}
 
 	public static String parameterMapToString(
-		Map parameterMap, boolean addQuestion) {
+		Map<String, String[]> parameterMap, boolean addQuestion) {
 
 		return getHttp().parameterMapToString(parameterMap, addQuestion);
 	}
@@ -215,7 +219,8 @@ public class HttpUtil {
 	}
 
 	public static void submit(
-			String location, Cookie[] cookies, Map parts, boolean post)
+			String location, Cookie[] cookies, Map<String, String> parts,
+			boolean post)
 		throws IOException {
 
 		getHttp().submit(location, cookies, parts, post);
@@ -245,7 +250,8 @@ public class HttpUtil {
 	}
 
 	public static byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Map parts, boolean post)
+			String location, Cookie[] cookies, Map<String, String> parts,
+			boolean post)
 		throws IOException {
 
 		return getHttp().URLtoByteArray(location, cookies, parts, post);
@@ -275,10 +281,20 @@ public class HttpUtil {
 	}
 
 	public static String URLtoString(
-			String location, Cookie[] cookies, Map parts, boolean post)
+			String location, Cookie[] cookies, Map<String, String> parts,
+			boolean post)
 		throws IOException {
 
 		return getHttp().URLtoString(location, cookies, parts, post);
+	}
+
+	public static String URLtoString(
+			String location, String host, int port, String realm,
+			String username, String password)
+		throws IOException {
+
+		return getHttp().URLtoString(
+			location, host, port, realm, username, password);
 	}
 
 	/**

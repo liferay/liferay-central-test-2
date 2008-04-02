@@ -82,14 +82,14 @@ public class BaseDeployer {
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();
 
-		for (int i = 0; i < args.length; i++) {
-			String fileName = args[i].toLowerCase();
+		for (String arg : args) {
+			String fileName = arg.toLowerCase();
 
 			if (fileName.endsWith(".war")) {
-				wars.add(args[i]);
+				wars.add(arg);
 			}
 			else if (fileName.endsWith(".jar")) {
-				jars.add(args[i]);
+				jars.add(arg);
 			}
 		}
 

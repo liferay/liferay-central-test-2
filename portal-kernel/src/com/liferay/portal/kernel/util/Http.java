@@ -84,7 +84,7 @@ public interface Http {
 
 	public String getParameter(String url, String name, boolean escaped);
 
-	public Map getParameterMap(String queryString);
+	public Map<String, String[]> getParameterMap(String queryString);
 
 	public String getProtocol(boolean secure);
 
@@ -106,11 +106,12 @@ public interface Http {
 
 	public boolean isProxyHost(String host);
 
-	public Map parameterMapFromString(String queryString);
+	public Map<String, String[]> parameterMapFromString(String queryString);
 
-	public String parameterMapToString(Map parameterMap);
+	public String parameterMapToString(Map<String, String[]> parameterMap);
 
-	public String parameterMapToString(Map parameterMap, boolean addQuestion);
+	public String parameterMapToString(
+		Map<String, String[]> parameterMap, boolean addQuestion);
 
 	public String protocolize(String url, boolean secure);
 
@@ -134,7 +135,8 @@ public interface Http {
 		throws IOException;
 
 	public void submit(
-			String location, Cookie[] cookies, Map parts, boolean post)
+			String location, Cookie[] cookies, Map<String, String> parts,
+			boolean post)
 		throws IOException;
 
 	public byte[] URLtoByteArray(String location) throws IOException;
@@ -150,7 +152,8 @@ public interface Http {
 		throws IOException;
 
 	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Map parts, boolean post)
+			String location, Cookie[] cookies, Map<String, String> parts,
+			boolean post)
 		throws IOException;
 
 	public String URLtoString(String location) throws IOException;
@@ -165,7 +168,13 @@ public interface Http {
 		throws IOException;
 
 	public String URLtoString(
-			String location, Cookie[] cookies, Map parts, boolean post)
+			String location, Cookie[] cookies, Map<String, String> parts,
+			boolean post)
+		throws IOException;
+
+	public String URLtoString(
+			String location, String host, int port, String realm,
+			String username, String password)
 		throws IOException;
 
 	/**

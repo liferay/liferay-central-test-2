@@ -48,12 +48,12 @@ public class ThemeDeployer extends BaseDeployer {
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();
 
-		for (int i = 0; i < args.length; i++) {
-			if (args[i].endsWith(".war")) {
-				wars.add(args[i]);
+		for (String arg : args) {
+			if (arg.endsWith(".war")) {
+				wars.add(arg);
 			}
-			else if (args[i].endsWith(".jar")) {
-				jars.add(args[i]);
+			else if (arg.endsWith(".jar")) {
+				jars.add(arg);
 			}
 		}
 
@@ -226,7 +226,7 @@ public class ThemeDeployer extends BaseDeployer {
 		String moduleVersion = pluginPackage.getVersion();
 
 		String pluginName = pluginPackage.getName();
-		String pluginType = (String)pluginPackage.getTypes().get(0);
+		String pluginType = pluginPackage.getTypes().get(0);
 		String pluginTypeName = TextFormatter.format(
 			pluginType, TextFormatter.J);
 

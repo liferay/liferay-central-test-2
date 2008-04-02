@@ -41,7 +41,6 @@ import java.net.URLDecoder;
 import java.net.URLEncoder;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -315,7 +314,7 @@ public class HttpImpl implements Http {
 		return StringPool.BLANK;
 	}
 
-	public Map getParameterMap(String queryString) {
+	public Map<String, String[]> getParameterMap(String queryString) {
 		return parameterMapFromString(queryString);
 	}
 
@@ -399,12 +398,16 @@ public class HttpImpl implements Http {
 		}
 	}
 
-	public Map parameterMapFromString(String queryString) {
-		Map parameterMap = new LinkedHashMap();
+	public Map<String, String[]> parameterMapFromString(String queryString) {
+		Map<String, String[]> parameterMap =
+			new LinkedHashMap<String, String[]>();
 
 		if (Validator.isNull(queryString)) {
 			return parameterMap;
 		}
+
+		Map<String, List<String>> tempParameterMap =
+			new LinkedHashMap<String, List<String>>();
 
 		StringTokenizer st = new StringTokenizer(
 			queryString, StringPool.AMPERSAND);
@@ -423,37 +426,35 @@ public class HttpImpl implements Http {
 					value = kvp[1];
 				}
 
-				List values = (List)parameterMap.get(key);
+				List<String> values = tempParameterMap.get(key);
 
 				if (values == null) {
-					values = new ArrayList();
+					values = new ArrayList<String>();
 
-					parameterMap.put(key, values);
+					tempParameterMap.put(key, values);
 				}
 
 				values.add(value);
 			}
 		}
 
-		Iterator itr = parameterMap.entrySet().iterator();
+		for (Map.Entry<String, List<String>> entry : tempParameterMap.entrySet()) {
+			String key = entry.getKey();
+			List<String> values = entry.getValue();
 
-		while (itr.hasNext()) {
-			Map.Entry entry = (Map.Entry)itr.next();
-
-			String key = (String)entry.getKey();
-			List values = (List)entry.getValue();
-
-			parameterMap.put(key, (String[])values.toArray(new String[0]));
+			parameterMap.put(key, values.toArray(new String[values.size()]));
 		}
 
 		return parameterMap;
 	}
 
-	public String parameterMapToString(Map parameterMap) {
+	public String parameterMapToString(Map<String, String[]> parameterMap) {
 		return parameterMapToString(parameterMap, true);
 	}
 
-	public String parameterMapToString(Map parameterMap, boolean addQuestion) {
+	public String parameterMapToString(
+		Map<String, String[]> parameterMap, boolean addQuestion) {
+
 		StringMaker sm = new StringMaker();
 
 		if (parameterMap.size() > 0) {
@@ -461,32 +462,14 @@ public class HttpImpl implements Http {
 				sm.append(StringPool.QUESTION);
 			}
 
-			Iterator itr = parameterMap.entrySet().iterator();
+			for (Map.Entry<String, String[]> entry : parameterMap.entrySet()) {
+				String name = entry.getKey();
+				String[] values = entry.getValue();
 
-			while (itr.hasNext()) {
-				Map.Entry entry = (Map.Entry)itr.next();
-
-				String name = (String)entry.getKey();
-				Object value = entry.getValue();
-
-				String[] values = null;
-
-				if (value instanceof String[]) {
-					values = (String[])entry.getValue();
-				}
-				else if (value instanceof String) {
-				    values = new String[] {(String)value};
-				}
-				else {
-					throw new IllegalArgumentException(
-						"Values of type " + value.getClass() + " are not " +
-							"supported");
-				}
-
-				for (int i = 0; i < values.length; i++) {
+				for (String value : values) {
 					sm.append(name);
 					sm.append(StringPool.EQUAL);
-					sm.append(encodeURL(values[i]));
+					sm.append(encodeURL(value));
 					sm.append(StringPool.AMPERSAND);
 				}
 			}
@@ -601,7 +584,8 @@ public class HttpImpl implements Http {
 	}
 
 	public void submit(
-			String location, Cookie[] cookies, Map parts, boolean post)
+			String location, Cookie[] cookies, Map<String, String> parts,
+			boolean post)
 		throws IOException {
 
 		URLtoByteArray(location, cookies, parts, post);
@@ -631,7 +615,8 @@ public class HttpImpl implements Http {
 	}
 
 	public byte[] URLtoByteArray(
-			String location, Cookie[] cookies, Map parts, boolean post)
+			String location, Cookie[] cookies, Map<String, String> parts,
+			boolean post)
 		throws IOException {
 
 		byte[] byteArray = null;
@@ -656,22 +641,19 @@ public class HttpImpl implements Http {
 				method = new PostMethod(location);
 
 				if ((parts != null) && (parts.size() > 0)) {
-					List nvpList = new ArrayList();
+					List<NameValuePair> nvpList =
+						new ArrayList<NameValuePair>();
 
-					Iterator itr = parts.entrySet().iterator();
-
-					while (itr.hasNext()) {
-						Map.Entry entry = (Map.Entry)itr.next();
-
-						String key = (String)entry.getKey();
-						String value = (String)entry.getValue();
+					for (Map.Entry<String, String> entry : parts.entrySet()) {
+						String key = entry.getKey();
+						String value = entry.getValue();
 
 						if (value != null) {
 							nvpList.add(new NameValuePair(key, value));
 						}
 					}
 
-					NameValuePair[] nvpArray = (NameValuePair[])nvpList.toArray(
+					NameValuePair[] nvpArray = nvpList.toArray(
 						new NameValuePair[nvpList.size()]);
 
 					PostMethod postMethod = (PostMethod)method;
@@ -779,10 +761,42 @@ public class HttpImpl implements Http {
 	}
 
 	public String URLtoString(
-			String location, Cookie[] cookies, Map parts, boolean post)
+			String location, Cookie[] cookies, Map<String, String> parts,
+			boolean post)
 		throws IOException {
 
 		return new String(URLtoByteArray(location, cookies, parts, post));
+	}
+
+	public String URLtoString(
+			String location, String host, int port, String realm,
+			String username, String password)
+		throws IOException {
+
+		HostConfiguration hostConfig = getHostConfig(location);
+
+		HttpClient client = getClient(hostConfig);
+
+		GetMethod getMethod = new GetMethod(location);
+
+		getMethod.setDoAuthentication(true);
+
+		HttpState state = new HttpState();
+
+		state.setCredentials(
+			new AuthScope(host, port, realm),
+			new UsernamePasswordCredentials(username, password));
+
+		proxifyState(state, hostConfig);
+
+		try {
+			client.executeMethod(hostConfig, getMethod, state);
+
+			return getMethod.getResponseBodyAsString();
+		}
+		finally {
+			getMethod.releaseConnection();
+		}
 	}
 
 	/**

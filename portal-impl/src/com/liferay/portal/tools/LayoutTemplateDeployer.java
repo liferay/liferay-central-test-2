@@ -41,12 +41,12 @@ public class LayoutTemplateDeployer extends BaseDeployer {
 		List<String> wars = new ArrayList<String>();
 		List<String> jars = new ArrayList<String>();
 
-		for (int i = 0; i < args.length; i++) {
-			if (args[i].endsWith(".war")) {
-				wars.add(args[i]);
+		for (String arg : args) {
+			if (arg.endsWith(".war")) {
+				wars.add(arg);
 			}
-			else if (args[i].endsWith(".jar")) {
-				jars.add(args[i]);
+			else if (arg.endsWith(".jar")) {
+				jars.add(arg);
 			}
 		}
 
