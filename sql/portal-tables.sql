@@ -1197,6 +1197,16 @@ create table SocialActivity (
 	receiverUserName VARCHAR(75) null
 );
 
+create table SocialRelation (
+	uuid_ VARCHAR(75) null,
+	relationId LONG not null primary key,
+	companyId LONG,
+	createDate DATE null,
+	userId1 LONG,
+	userId2 LONG,
+	type_ INTEGER
+);
+
 create table Subscription (
 	subscriptionId LONG not null primary key,
 	companyId LONG,

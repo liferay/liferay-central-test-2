@@ -39,14 +39,12 @@ import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
-import com.liferay.portlet.social.model.SocialActivity;
+import com.liferay.portlet.social.model.SocialRelation;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
 import com.liferay.portlet.social.service.SocialRelationLocalService;
-import com.liferay.portlet.social.service.SocialRelationLocalServiceFactory;
-import com.liferay.portlet.social.service.SocialRelationService;
-import com.liferay.portlet.social.service.SocialRelationServiceFactory;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
@@ -61,47 +59,56 @@ import org.springframework.beans.factory.InitializingBean;
 import java.util.List;
 
 /**
- * <a href="SocialActivityLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialRelationLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class SocialActivityLocalServiceBaseImpl
-	implements SocialActivityLocalService, InitializingBean {
-	public SocialActivity addSocialActivity(SocialActivity socialActivity)
+public abstract class SocialRelationLocalServiceBaseImpl
+	implements SocialRelationLocalService, InitializingBean {
+	public SocialRelation addSocialRelation(SocialRelation socialRelation)
 		throws SystemException {
-		socialActivity.setNew(true);
+		socialRelation.setNew(true);
 
-		return socialActivityPersistence.update(socialActivity, false);
+		return socialRelationPersistence.update(socialRelation, false);
 	}
 
-	public void deleteSocialActivity(long activityId)
+	public void deleteSocialRelation(long relationId)
 		throws PortalException, SystemException {
-		socialActivityPersistence.remove(activityId);
+		socialRelationPersistence.remove(relationId);
 	}
 
-	public void deleteSocialActivity(SocialActivity socialActivity)
+	public void deleteSocialRelation(SocialRelation socialRelation)
 		throws PortalException, SystemException {
-		socialActivityPersistence.remove(socialActivity);
+		socialRelationPersistence.remove(socialRelation);
 	}
 
-	public List<SocialActivity> dynamicQuery(
+	public List<SocialRelation> dynamicQuery(
 		DynamicQueryInitializer queryInitializer) throws SystemException {
-		return socialActivityPersistence.findWithDynamicQuery(queryInitializer);
+		return socialRelationPersistence.findWithDynamicQuery(queryInitializer);
 	}
 
-	public List<SocialActivity> dynamicQuery(
+	public List<SocialRelation> dynamicQuery(
 		DynamicQueryInitializer queryInitializer, int begin, int end)
 		throws SystemException {
-		return socialActivityPersistence.findWithDynamicQuery(queryInitializer,
+		return socialRelationPersistence.findWithDynamicQuery(queryInitializer,
 			begin, end);
 	}
 
-	public SocialActivity updateSocialActivity(SocialActivity socialActivity)
+	public SocialRelation updateSocialRelation(SocialRelation socialRelation)
 		throws SystemException {
-		socialActivity.setNew(false);
+		socialRelation.setNew(false);
 
-		return socialActivityPersistence.update(socialActivity, true);
+		return socialRelationPersistence.update(socialRelation, true);
+	}
+
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
 	}
 
 	public SocialActivityPersistence getSocialActivityPersistence() {
@@ -129,24 +136,6 @@ public abstract class SocialActivityLocalServiceBaseImpl
 	public void setSocialActivityInterpreterLocalService(
 		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService) {
 		this.socialActivityInterpreterLocalService = socialActivityInterpreterLocalService;
-	}
-
-	public SocialRelationLocalService getSocialRelationLocalService() {
-		return socialRelationLocalService;
-	}
-
-	public void setSocialRelationLocalService(
-		SocialRelationLocalService socialRelationLocalService) {
-		this.socialRelationLocalService = socialRelationLocalService;
-	}
-
-	public SocialRelationService getSocialRelationService() {
-		return socialRelationService;
-	}
-
-	public void setSocialRelationService(
-		SocialRelationService socialRelationService) {
-		this.socialRelationService = socialRelationService;
 	}
 
 	public SocialRelationPersistence getSocialRelationPersistence() {
@@ -216,6 +205,10 @@ public abstract class SocialActivityLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
+		if (socialActivityLocalService == null) {
+			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+		}
+
 		if (socialActivityPersistence == null) {
 			socialActivityPersistence = SocialActivityUtil.getPersistence();
 		}
@@ -226,14 +219,6 @@ public abstract class SocialActivityLocalServiceBaseImpl
 
 		if (socialActivityInterpreterLocalService == null) {
 			socialActivityInterpreterLocalService = SocialActivityInterpreterLocalServiceFactory.getImpl();
-		}
-
-		if (socialRelationLocalService == null) {
-			socialRelationLocalService = SocialRelationLocalServiceFactory.getImpl();
-		}
-
-		if (socialRelationService == null) {
-			socialRelationService = SocialRelationServiceFactory.getImpl();
 		}
 
 		if (socialRelationPersistence == null) {
@@ -269,11 +254,10 @@ public abstract class SocialActivityLocalServiceBaseImpl
 		}
 	}
 
+	protected SocialActivityLocalService socialActivityLocalService;
 	protected SocialActivityPersistence socialActivityPersistence;
 	protected SocialActivityFinder socialActivityFinder;
 	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
-	protected SocialRelationLocalService socialRelationLocalService;
-	protected SocialRelationService socialRelationService;
 	protected SocialRelationPersistence socialRelationPersistence;
 	protected SocialRelationFinder socialRelationFinder;
 	protected CounterLocalService counterLocalService;

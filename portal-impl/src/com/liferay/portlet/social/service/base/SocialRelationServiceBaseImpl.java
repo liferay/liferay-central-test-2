@@ -22,13 +22,28 @@
 
 package com.liferay.portlet.social.service.base;
 
+import com.liferay.counter.service.CounterLocalService;
+import com.liferay.counter.service.CounterLocalServiceFactory;
+import com.liferay.counter.service.CounterService;
+import com.liferay.counter.service.CounterServiceFactory;
+
+import com.liferay.portal.service.UserLocalService;
+import com.liferay.portal.service.UserLocalServiceFactory;
+import com.liferay.portal.service.UserService;
+import com.liferay.portal.service.UserServiceFactory;
+import com.liferay.portal.service.impl.PrincipalBean;
+import com.liferay.portal.service.persistence.UserFinder;
+import com.liferay.portal.service.persistence.UserFinderUtil;
+import com.liferay.portal.service.persistence.UserPersistence;
+import com.liferay.portal.service.persistence.UserUtil;
+
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalService;
+import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
 import com.liferay.portlet.social.service.SocialRelationLocalService;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceFactory;
 import com.liferay.portlet.social.service.SocialRelationService;
-import com.liferay.portlet.social.service.SocialRelationServiceFactory;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
@@ -41,13 +56,13 @@ import com.liferay.portlet.social.service.persistence.SocialRelationUtil;
 import org.springframework.beans.factory.InitializingBean;
 
 /**
- * <a href="SocialActivityInterpreterLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialRelationServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public abstract class SocialActivityInterpreterLocalServiceBaseImpl
-	implements SocialActivityInterpreterLocalService, InitializingBean {
+public abstract class SocialRelationServiceBaseImpl extends PrincipalBean
+	implements SocialRelationService, InitializingBean {
 	public SocialActivityLocalService getSocialActivityLocalService() {
 		return socialActivityLocalService;
 	}
@@ -75,6 +90,15 @@ public abstract class SocialActivityInterpreterLocalServiceBaseImpl
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
+	public SocialActivityInterpreterLocalService getSocialActivityInterpreterLocalService() {
+		return socialActivityInterpreterLocalService;
+	}
+
+	public void setSocialActivityInterpreterLocalService(
+		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService) {
+		this.socialActivityInterpreterLocalService = socialActivityInterpreterLocalService;
+	}
+
 	public SocialRelationLocalService getSocialRelationLocalService() {
 		return socialRelationLocalService;
 	}
@@ -82,15 +106,6 @@ public abstract class SocialActivityInterpreterLocalServiceBaseImpl
 	public void setSocialRelationLocalService(
 		SocialRelationLocalService socialRelationLocalService) {
 		this.socialRelationLocalService = socialRelationLocalService;
-	}
-
-	public SocialRelationService getSocialRelationService() {
-		return socialRelationService;
-	}
-
-	public void setSocialRelationService(
-		SocialRelationService socialRelationService) {
-		this.socialRelationService = socialRelationService;
 	}
 
 	public SocialRelationPersistence getSocialRelationPersistence() {
@@ -111,6 +126,54 @@ public abstract class SocialActivityInterpreterLocalServiceBaseImpl
 		this.socialRelationFinder = socialRelationFinder;
 	}
 
+	public CounterLocalService getCounterLocalService() {
+		return counterLocalService;
+	}
+
+	public void setCounterLocalService(CounterLocalService counterLocalService) {
+		this.counterLocalService = counterLocalService;
+	}
+
+	public CounterService getCounterService() {
+		return counterService;
+	}
+
+	public void setCounterService(CounterService counterService) {
+		this.counterService = counterService;
+	}
+
+	public UserLocalService getUserLocalService() {
+		return userLocalService;
+	}
+
+	public void setUserLocalService(UserLocalService userLocalService) {
+		this.userLocalService = userLocalService;
+	}
+
+	public UserService getUserService() {
+		return userService;
+	}
+
+	public void setUserService(UserService userService) {
+		this.userService = userService;
+	}
+
+	public UserPersistence getUserPersistence() {
+		return userPersistence;
+	}
+
+	public void setUserPersistence(UserPersistence userPersistence) {
+		this.userPersistence = userPersistence;
+	}
+
+	public UserFinder getUserFinder() {
+		return userFinder;
+	}
+
+	public void setUserFinder(UserFinder userFinder) {
+		this.userFinder = userFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (socialActivityLocalService == null) {
 			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
@@ -124,12 +187,12 @@ public abstract class SocialActivityInterpreterLocalServiceBaseImpl
 			socialActivityFinder = SocialActivityFinderUtil.getFinder();
 		}
 
-		if (socialRelationLocalService == null) {
-			socialRelationLocalService = SocialRelationLocalServiceFactory.getImpl();
+		if (socialActivityInterpreterLocalService == null) {
+			socialActivityInterpreterLocalService = SocialActivityInterpreterLocalServiceFactory.getImpl();
 		}
 
-		if (socialRelationService == null) {
-			socialRelationService = SocialRelationServiceFactory.getImpl();
+		if (socialRelationLocalService == null) {
+			socialRelationLocalService = SocialRelationLocalServiceFactory.getImpl();
 		}
 
 		if (socialRelationPersistence == null) {
@@ -139,13 +202,43 @@ public abstract class SocialActivityInterpreterLocalServiceBaseImpl
 		if (socialRelationFinder == null) {
 			socialRelationFinder = SocialRelationFinderUtil.getFinder();
 		}
+
+		if (counterLocalService == null) {
+			counterLocalService = CounterLocalServiceFactory.getImpl();
+		}
+
+		if (counterService == null) {
+			counterService = CounterServiceFactory.getImpl();
+		}
+
+		if (userLocalService == null) {
+			userLocalService = UserLocalServiceFactory.getImpl();
+		}
+
+		if (userService == null) {
+			userService = UserServiceFactory.getImpl();
+		}
+
+		if (userPersistence == null) {
+			userPersistence = UserUtil.getPersistence();
+		}
+
+		if (userFinder == null) {
+			userFinder = UserFinderUtil.getFinder();
+		}
 	}
 
 	protected SocialActivityLocalService socialActivityLocalService;
 	protected SocialActivityPersistence socialActivityPersistence;
 	protected SocialActivityFinder socialActivityFinder;
+	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
 	protected SocialRelationLocalService socialRelationLocalService;
-	protected SocialRelationService socialRelationService;
 	protected SocialRelationPersistence socialRelationPersistence;
 	protected SocialRelationFinder socialRelationFinder;
+	protected CounterLocalService counterLocalService;
+	protected CounterService counterService;
+	protected UserLocalService userLocalService;
+	protected UserService userService;
+	protected UserPersistence userPersistence;
+	protected UserFinder userFinder;
 }

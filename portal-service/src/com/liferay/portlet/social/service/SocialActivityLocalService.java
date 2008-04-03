@@ -84,6 +84,16 @@ public interface SocialActivityLocalService {
 	public void setSocialActivityFinder(
 		com.liferay.portlet.social.service.persistence.SocialActivityFinder socialActivityFinder);
 
+	public com.liferay.portlet.social.service.persistence.SocialRelationPersistence getSocialRelationPersistence();
+
+	public void setSocialRelationPersistence(
+		com.liferay.portlet.social.service.persistence.SocialRelationPersistence socialRelationPersistence);
+
+	public com.liferay.portlet.social.service.persistence.SocialRelationFinder getSocialRelationFinder();
+
+	public void setSocialRelationFinder(
+		com.liferay.portlet.social.service.persistence.SocialRelationFinder socialRelationFinder);
+
 	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
 
 	public void setUserPersistence(

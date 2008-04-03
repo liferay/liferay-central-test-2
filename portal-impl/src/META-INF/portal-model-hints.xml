@@ -1356,6 +1356,15 @@
 		<field name="receiverUserId" type="long" />
 		<field name="receiverUserName" type="String" />
 	</model>
+	<model name="com.liferay.portlet.social.model.SocialRelation">
+		<field name="uuid" type="String" />
+		<field name="relationId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="userId1" type="long" />
+		<field name="userId2" type="long" />
+		<field name="type" type="int" />
+	</model>
 	<model name="com.liferay.portlet.softwarecatalog.model.SCLicense">
 		<field name="licenseId" type="long" />
 		<field name="name" type="String" />

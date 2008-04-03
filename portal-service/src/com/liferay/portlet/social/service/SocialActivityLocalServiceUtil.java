@@ -127,6 +127,32 @@ public class SocialActivityLocalServiceUtil {
 		socialActivityLocalService.setSocialActivityFinder(socialActivityFinder);
 	}
 
+	public static com.liferay.portlet.social.service.persistence.SocialRelationPersistence getSocialRelationPersistence() {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getSocialRelationPersistence();
+	}
+
+	public static void setSocialRelationPersistence(
+		com.liferay.portlet.social.service.persistence.SocialRelationPersistence socialRelationPersistence) {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		socialActivityLocalService.setSocialRelationPersistence(socialRelationPersistence);
+	}
+
+	public static com.liferay.portlet.social.service.persistence.SocialRelationFinder getSocialRelationFinder() {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		return socialActivityLocalService.getSocialRelationFinder();
+	}
+
+	public static void setSocialRelationFinder(
+		com.liferay.portlet.social.service.persistence.SocialRelationFinder socialRelationFinder) {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		socialActivityLocalService.setSocialRelationFinder(socialRelationFinder);
+	}
+
 	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
 		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
 

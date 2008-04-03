@@ -1564,4 +1564,16 @@
 		<property name="receiverUserId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="receiverUserName" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
+	<class name="com.liferay.portlet.social.model.impl.SocialRelationImpl" table="SocialRelation">
+		<cache usage="read-write" />
+		<id name="relationId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="createDate" />
+		<property name="userId1" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId2" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.IntegerType" />
+	</class>
 </hibernate-mapping>

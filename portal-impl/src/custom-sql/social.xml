@@ -25,4 +25,51 @@
 				SocialActivity.createDate DESC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.countByU_T">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				SocialRelation
+			WHERE
+				(
+					(SocialRelation.userId1 = ?) OR
+					(SocialRelation.userId2 = ?)
+				) AND
+				(SocialRelation.type_ = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.findByU_T">
+		<![CDATA[
+			SELECT
+				{SocialRelation.*}
+			FROM
+				SocialRelation
+			WHERE
+				(
+					(SocialRelation.userId1 = ?) OR
+					(SocialRelation.userId2 = ?)
+				) AND
+				(SocialRelation.type_ = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.findByU_U_T">
+		<![CDATA[
+			SELECT
+				{SocialRelation.*}
+			FROM
+				SocialRelation
+			WHERE
+				(
+					(SocialRelation.userId1 = ?) AND
+					(SocialRelation.userId2 = ?) AND
+					(SocialRelation.type_ = ?)
+				) OR
+				(
+					(SocialRelation.userId1 = ?) AND
+					(SocialRelation.userId2 = ?) AND
+					(SocialRelation.type_ = ?)
+				)
+		]]>
+	</sql>
 </custom-sql>

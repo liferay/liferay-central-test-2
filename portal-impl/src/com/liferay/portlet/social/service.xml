@@ -60,4 +60,61 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="SocialActivityInterpreter" local-service="true" remote-service="false" tx-manager="none" />
+	<entity name="SocialRelation" uuid="true" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="relationId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="createDate" type="Date" />
+
+		<!-- Other fields -->
+
+		<column name="userId1" type="long" />
+		<column name="userId2" type="long" />
+		<column name="type" type="int" />
+
+		<!-- Finder methods -->
+
+		<finder name="CompanyId" return-type="Collection">
+			<finder-column name="companyId" />
+		</finder>
+		<finder name="UserId1" return-type="Collection">
+			<finder-column name="userId1" />
+		</finder>
+		<finder name="UserId2" return-type="Collection">
+			<finder-column name="userId2" />
+		</finder>
+		<finder name="Type" return-type="Collection">
+			<finder-column name="type" />
+		</finder>
+		<finder name="C_T" return-type="Collection">
+			<finder-column name="companyId" />
+			<finder-column name="type" />
+		</finder>
+		<finder name="U1_T" return-type="Collection">
+			<finder-column name="userId1" />
+			<finder-column name="type" />
+		</finder>
+		<finder name="U2_T" return-type="Collection">
+			<finder-column name="userId2" />
+			<finder-column name="type" />
+		</finder>
+		<finder name="U1_U2_T" return-type="SocialRelation">
+			<finder-column name="userId1" />
+			<finder-column name="userId2" />
+			<finder-column name="type" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="User" />
+	</entity>
+	<exceptions>
+		<exception>RelationUserId</exception>
+	</exceptions>
 </service-builder>

@@ -81,6 +81,36 @@ public class SocialActivityInterpreterLocalServiceUtil {
 		socialActivityInterpreterLocalService.setSocialActivityFinder(socialActivityFinder);
 	}
 
+	public static com.liferay.portlet.social.service.persistence.SocialRelationPersistence getSocialRelationPersistence() {
+		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
+			SocialActivityInterpreterLocalServiceFactory.getService();
+
+		return socialActivityInterpreterLocalService.getSocialRelationPersistence();
+	}
+
+	public static void setSocialRelationPersistence(
+		com.liferay.portlet.social.service.persistence.SocialRelationPersistence socialRelationPersistence) {
+		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
+			SocialActivityInterpreterLocalServiceFactory.getService();
+
+		socialActivityInterpreterLocalService.setSocialRelationPersistence(socialRelationPersistence);
+	}
+
+	public static com.liferay.portlet.social.service.persistence.SocialRelationFinder getSocialRelationFinder() {
+		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
+			SocialActivityInterpreterLocalServiceFactory.getService();
+
+		return socialActivityInterpreterLocalService.getSocialRelationFinder();
+	}
+
+	public static void setSocialRelationFinder(
+		com.liferay.portlet.social.service.persistence.SocialRelationFinder socialRelationFinder) {
+		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
+			SocialActivityInterpreterLocalServiceFactory.getService();
+
+		socialActivityInterpreterLocalService.setSocialRelationFinder(socialRelationFinder);
+	}
+
 	public static void afterPropertiesSet() {
 		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
 			SocialActivityInterpreterLocalServiceFactory.getService();

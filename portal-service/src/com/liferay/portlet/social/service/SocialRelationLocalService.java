@@ -24,7 +24,7 @@ package com.liferay.portlet.social.service;
 
 
 /**
- * <a href="SocialActivityInterpreterLocalService.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialRelationLocalService.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
  * ServiceBuilder generated this class. Modifications in this class will be
@@ -33,7 +33,7 @@ package com.liferay.portlet.social.service;
  *
  * <p>
  * This interface defines the service. The default implementation is
- * <code>com.liferay.portlet.social.service.impl.SocialActivityInterpreterLocalServiceImpl</code>.
+ * <code>com.liferay.portlet.social.service.impl.SocialRelationLocalServiceImpl</code>.
  * Modify methods in that class and rerun ServiceBuilder to populate this class
  * and all other generated classes.
  * </p>
@@ -44,11 +44,36 @@ package com.liferay.portlet.social.service;
  *
  * @author Brian Wing Shun Chan
  *
- * @see com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceFactory
- * @see com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil
+ * @see com.liferay.portlet.social.service.SocialRelationLocalServiceFactory
+ * @see com.liferay.portlet.social.service.SocialRelationLocalServiceUtil
  *
  */
-public interface SocialActivityInterpreterLocalService {
+public interface SocialRelationLocalService {
+	public com.liferay.portlet.social.model.SocialRelation addSocialRelation(
+		com.liferay.portlet.social.model.SocialRelation socialRelation)
+		throws com.liferay.portal.SystemException;
+
+	public void deleteSocialRelation(long relationId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteSocialRelation(
+		com.liferay.portlet.social.model.SocialRelation socialRelation)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialRelation> dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialRelation> dynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.social.model.SocialRelation updateSocialRelation(
+		com.liferay.portlet.social.model.SocialRelation socialRelation)
+		throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.social.service.persistence.SocialActivityPersistence getSocialActivityPersistence();
 
 	public void setSocialActivityPersistence(
@@ -69,15 +94,31 @@ public interface SocialActivityInterpreterLocalService {
 	public void setSocialRelationFinder(
 		com.liferay.portlet.social.service.persistence.SocialRelationFinder socialRelationFinder);
 
+	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
+
+	public void setUserPersistence(
+		com.liferay.portal.service.persistence.UserPersistence userPersistence);
+
+	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
+
+	public void setUserFinder(
+		com.liferay.portal.service.persistence.UserFinder userFinder);
+
 	public void afterPropertiesSet();
 
-	public void addActivityInterpreter(
-		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter);
+	public com.liferay.portlet.social.model.SocialRelation addRelation(
+		long userId1, long userId2, int type)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
-	public void deleteActivityInterpreter(
-		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter);
+	public void deleteRelation(long relationId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.social.model.SocialActivityFeedEntry interpret(
-		com.liferay.portlet.social.model.SocialActivity activityTracker,
-		com.liferay.portal.theme.ThemeDisplay themeDisplay);
+	public void deleteRelations(long userId)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialRelation> getRelations(
+		long userId, int type, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }
