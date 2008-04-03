@@ -34,6 +34,10 @@ public interface ${entity.name}Model extends BaseModel {
 	public void setPrimaryKey(${entity.PKClassName} pk);
 
 	<#list entity.regularColList as column>
+		<#if column.name == "classNameId">
+			public String getClassName();
+		</#if>
+
 		public ${column.type} get${column.methodName}();
 
 		<#if column.type == "boolean">

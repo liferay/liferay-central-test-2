@@ -12,6 +12,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import java.io.Serializable;
 import java.lang.reflect.Proxy;
 import java.sql.Types;
@@ -163,6 +164,12 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 	}
 
 	<#list entity.regularColList as column>
+		<#if column.name == "classNameId">
+			public String getClassName() {
+				return PortalUtil.getClassName(getClassNameId());
+			}
+		</#if>
+
 		public ${column.type} get${column.methodName}() {
 			<#if column.type == "String" && column.isConvertNull()>
 				return GetterUtil.getString(_${column.name});
