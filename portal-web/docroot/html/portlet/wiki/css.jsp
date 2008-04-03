@@ -43,15 +43,17 @@
 }
 .portlet-wiki .toc li.toclevel-1 {
 	margin-left: 0px;
-	list-style-type: decimal;
+	list-style-type: none;
 }
 
 .portlet-wiki .toc li.toclevel-2 {
 	margin-left: 15px;
+	list-style-type: none;
 }
 
 .portlet-wiki .toc li.toclevel-3 {
 	margin-left: 30px;
+	list-style-type: none;
 }
 
 .portlet-wiki .taglib-tags-summary {
