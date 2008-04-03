@@ -92,6 +92,48 @@ public class PortalUtil {
 		}
 	}
 
+	public static String getPathContext()
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETPATHCONTEXT, false);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String getPathImage()
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETPATHIMAGE, false);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	public static String getPathMain()
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETPATHMAIN, false);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
 	public static String getPortletNamespace(String portletId)
 		throws Exception {
 
@@ -200,6 +242,15 @@ public class PortalUtil {
 
 	private static final String _METHOD_GETHTTPSERVLETRESPONSE =
 		"getHttpServletResponse";
+
+	private static final String _METHOD_GETPATHCONTEXT =
+		"getPathContext";
+
+	private static final String _METHOD_GETPATHIMAGE =
+		"getPathImage";
+
+	private static final String _METHOD_GETPATHMAIN =
+		"getPathMain";
 
 	private static final String _METHOD_GETPORTLETNAMESPACE =
 		"getPortletNamespace";
