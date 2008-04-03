@@ -23,6 +23,7 @@
 package com.liferay.portal.model.impl;
 
 import com.liferay.portal.model.ActivityTracker;
+import com.liferay.portal.util.PortalUtil;
 
 /**
  * <a href="ActivityTrackerImpl.java.html"><b><i>View Source</i></b></a>
@@ -36,4 +37,7 @@ public class ActivityTrackerImpl
 	public ActivityTrackerImpl() {
 	}
 
+	public String getClassName() {
+		return PortalUtil.getClassName(super.getClassNameId());
+	}
 }

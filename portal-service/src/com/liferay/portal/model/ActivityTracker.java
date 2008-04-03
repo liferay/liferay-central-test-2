@@ -49,4 +49,5 @@ package com.liferay.portal.model;
  *
  */
 public interface ActivityTracker extends ActivityTrackerModel {
+	public java.lang.String getClassName();
 }
