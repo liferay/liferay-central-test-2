@@ -30,12 +30,13 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 
-import java.util.Enumeration;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 /**
  * <a href="ExtPropertiesLoader.java.html"><b><i>View Source</i></b></a>
@@ -46,8 +47,7 @@ import java.util.Set;
 public class ExtPropertiesLoader {
 
 	public static ExtPropertiesLoader getInstance(String name) {
-		ExtPropertiesLoader props =
-			(ExtPropertiesLoader)_propsPool.get(name);
+		ExtPropertiesLoader props = _propsPool.get(name);
 
 		if (props == null) {
 			props = new ExtPropertiesLoader(name);
@@ -61,8 +61,7 @@ public class ExtPropertiesLoader {
 	public static ExtPropertiesLoader getInstance(String name, long companyId) {
 		String key = name + _COMPANY_ID_SEPARATOR + companyId;
 
-		ExtPropertiesLoader props =
-			(ExtPropertiesLoader)_propsPool.get(key);
+		ExtPropertiesLoader props = _propsPool.get(key);
 
 		if (props == null) {
 			props = new ExtPropertiesLoader(name, companyId);
@@ -78,7 +77,7 @@ public class ExtPropertiesLoader {
 	}
 
 	public String get(String key) {
-		if (false) {
+		if (_PRINT_DUPLICATE_KEYS) {
 			if (_keys.contains(key)) {
 				System.out.println("Duplicate key " + key);
 			}
@@ -133,12 +132,16 @@ public class ExtPropertiesLoader {
 
 		ComponentProperties componentProps = getComponentProperties();
 
-		Enumeration enu = componentProps.getProperties().propertyNames();
+		Iterator<Map.Entry<Object, Object>> itr =
+			componentProps.getProperties().entrySet().iterator();
 
-		while (enu.hasMoreElements()) {
-			String key = (String)enu.nextElement();
+		while (itr.hasNext()) {
+			Map.Entry<Object, Object> entry = itr.next();
 
-			props.setProperty(key, componentProps.getString(key));
+			String key = (String)entry.getKey();
+			String value = (String)entry.getValue();
+
+			props.setProperty(key, value);
 		}
 
 		return props;
@@ -178,10 +181,10 @@ public class ExtPropertiesLoader {
 	}
 
 	private void _printSources(String name, long companyId, String webId) {
-		List sources = getComponentProperties().getLoadedSources();
+		List<String> sources = getComponentProperties().getLoadedSources();
 
 		for (int i = sources.size() - 1; i >= 0; i--) {
-			String source = (String)sources.get(i);
+			String source = sources.get(i);
 
 			String info = "Loading " + source;
 
@@ -194,11 +197,14 @@ public class ExtPropertiesLoader {
 		}
 	}
 
-	private static Map _propsPool = CollectionFactory.getSyncHashMap();
+	private static Map<String, ExtPropertiesLoader> _propsPool =
+		new ConcurrentHashMap<String, ExtPropertiesLoader>();
 
 	private static final String _COMPANY_ID_SEPARATOR = "_COMPANY_ID_";
 
+	private static final boolean _PRINT_DUPLICATE_KEYS = false;
+
 	private ComponentConfiguration _conf;
-	private Set _keys = new HashSet();
+	private Set<String> _keys = new HashSet<String>();
 
 }
