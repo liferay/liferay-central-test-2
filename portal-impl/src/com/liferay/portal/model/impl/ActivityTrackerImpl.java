@@ -40,4 +40,5 @@ public class ActivityTrackerImpl
 	public String getClassName() {
 		return PortalUtil.getClassName(super.getClassNameId());
 	}
+
 }
