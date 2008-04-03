@@ -92,9 +92,7 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getPathContext()
-		throws Exception {
-
+	public static String getPathContext() throws Exception {
 		Object returnObj = PortalClassInvoker.invoke(
 			_CLASS, _METHOD_GETPATHCONTEXT, false);
 
@@ -106,9 +104,7 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getPathImage()
-		throws Exception {
-
+	public static String getPathImage() throws Exception {
 		Object returnObj = PortalClassInvoker.invoke(
 			_CLASS, _METHOD_GETPATHIMAGE, false);
 
@@ -120,9 +116,7 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getPathMain()
-		throws Exception {
-
+	public static String getPathMain() throws Exception {
 		Object returnObj = PortalClassInvoker.invoke(
 			_CLASS, _METHOD_GETPATHMAIN, false);
 
@@ -148,9 +142,7 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getUserPassword(HttpSession ses)
-		throws Exception {
-
+	public static String getUserPassword(HttpSession ses) throws Exception {
 		Object returnObj = PortalClassInvoker.invoke(
 			_CLASS, _METHOD_GETUSERPASSWORD, ses, false);
 
@@ -176,9 +168,7 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getUserPassword(ActionRequest req)
-		throws Exception {
-
+	public static String getUserPassword(ActionRequest req) throws Exception {
 		Object returnObj = PortalClassInvoker.invoke(
 			_CLASS, _METHOD_GETUSERPASSWORD, req, false);
 
@@ -190,9 +180,7 @@ public class PortalUtil {
 		}
 	}
 
-	public static String getUserPassword(RenderRequest req)
-		throws Exception {
-
+	public static String getUserPassword(RenderRequest req) throws Exception {
 		Object returnObj = PortalClassInvoker.invoke(
 			_CLASS, _METHOD_GETUSERPASSWORD, req, false);
 
@@ -216,8 +204,7 @@ public class PortalUtil {
 		}
 	}
 
-	public static void setPageSubtitle(
-			String subtitle, HttpServletRequest req)
+	public static void setPageSubtitle(String subtitle, HttpServletRequest req)
 		throws Exception {
 
 		PortalClassInvoker.invoke(
@@ -243,14 +230,11 @@ public class PortalUtil {
 	private static final String _METHOD_GETHTTPSERVLETRESPONSE =
 		"getHttpServletResponse";
 
-	private static final String _METHOD_GETPATHCONTEXT =
-		"getPathContext";
+	private static final String _METHOD_GETPATHCONTEXT = "getPathContext";
 
-	private static final String _METHOD_GETPATHIMAGE =
-		"getPathImage";
+	private static final String _METHOD_GETPATHIMAGE = "getPathImage";
 
-	private static final String _METHOD_GETPATHMAIN =
-		"getPathMain";
+	private static final String _METHOD_GETPATHMAIN = "getPathMain";
 
 	private static final String _METHOD_GETPORTLETNAMESPACE =
 		"getPortletNamespace";
