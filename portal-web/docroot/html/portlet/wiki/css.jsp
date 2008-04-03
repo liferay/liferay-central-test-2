@@ -42,18 +42,18 @@
  	margin-top: 0px;
 }
 .portlet-wiki .toc li.toclevel-1 {
-	margin-left: 0px;
 	list-style-type: none;
+	margin-left: 0px;
 }
 
 .portlet-wiki .toc li.toclevel-2 {
-	margin-left: 15px;
 	list-style-type: none;
+	margin-left: 15px;
 }
 
 .portlet-wiki .toc li.toclevel-3 {
-	margin-left: 30px;
 	list-style-type: none;
+	margin-left: 30px;
 }
 
 .portlet-wiki .taglib-tags-summary {
