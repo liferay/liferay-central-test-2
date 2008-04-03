@@ -113,32 +113,6 @@ public class PortletItemLocalServiceUtil {
 		portletItemLocalService.setAccountPersistence(accountPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		portletItemLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		return portletItemLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
-
-		portletItemLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		PortletItemLocalService portletItemLocalService = PortletItemLocalServiceFactory.getService();
 

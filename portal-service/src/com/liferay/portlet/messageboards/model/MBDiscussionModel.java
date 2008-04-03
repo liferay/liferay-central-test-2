@@ -53,6 +53,8 @@ public interface MBDiscussionModel extends BaseModel {
 
 	public void setDiscussionId(long discussionId);
 
+	public String getClassName();
+
 	public long getClassNameId();
 
 	public void setClassNameId(long classNameId);

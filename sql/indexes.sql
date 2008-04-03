@@ -1,9 +1,3 @@
-create index IX_125EE7A4 on ActivityTracker (classNameId, classPK);
-create index IX_57B7CA39 on ActivityTracker (companyId);
-create index IX_8EEF8AFB on ActivityTracker (groupId);
-create index IX_A9E541D8 on ActivityTracker (receiverUserId);
-create index IX_B57EB3C9 on ActivityTracker (userId);
-
 create index IX_93D5AD4E on Address (companyId);
 create index IX_ABD7DAC0 on Address (companyId, classNameId);
 create index IX_71CB1123 on Address (companyId, classNameId, classPK);
@@ -355,6 +349,12 @@ create index IX_119B5630 on ShoppingOrder (groupId, userId, ppPaymentStatus);
 create index IX_D7D6E87A on ShoppingOrder (number_);
 
 create index IX_B5F82C7A on ShoppingOrderItem (orderId);
+
+create index IX_A853C757 on SocialActivity (classNameId, classPK);
+create index IX_64B1BC66 on SocialActivity (companyId);
+create index IX_2A2468 on SocialActivity (groupId);
+create index IX_121CA3CB on SocialActivity (receiverUserId);
+create index IX_3504B8BC on SocialActivity (userId);
 
 create index IX_786D171A on Subscription (companyId, classNameId, classPK);
 create index IX_2E1A92D4 on Subscription (companyId, userId, classNameId, classPK);

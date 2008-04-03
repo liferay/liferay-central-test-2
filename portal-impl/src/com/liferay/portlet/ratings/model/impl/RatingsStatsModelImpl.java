@@ -24,6 +24,7 @@ package com.liferay.portlet.ratings.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
@@ -134,6 +135,10 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 		if (statsId != _statsId) {
 			_statsId = statsId;
 		}
+	}
+
+	public String getClassName() {
+		return PortalUtil.getClassName(getClassNameId());
 	}
 
 	public long getClassNameId() {

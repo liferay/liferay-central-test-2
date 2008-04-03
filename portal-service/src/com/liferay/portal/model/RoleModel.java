@@ -56,6 +56,8 @@ public interface RoleModel extends BaseModel {
 
 	public void setCompanyId(long companyId);
 
+	public String getClassName();
+
 	public long getClassNameId();
 
 	public void setClassNameId(long classNameId);

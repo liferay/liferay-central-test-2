@@ -30,21 +30,21 @@ import com.liferay.counter.service.CounterServiceFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.service.ActivityTrackerLocalService;
-import com.liferay.portal.service.ActivityTrackerLocalServiceFactory;
 import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
-import com.liferay.portal.service.persistence.ActivityTrackerFinder;
-import com.liferay.portal.service.persistence.ActivityTrackerFinderUtil;
-import com.liferay.portal.service.persistence.ActivityTrackerPersistence;
-import com.liferay.portal.service.persistence.ActivityTrackerUtil;
 import com.liferay.portal.service.persistence.UserFinder;
 import com.liferay.portal.service.persistence.UserFinderUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.TasksProposalLocalService;
 import com.liferay.portlet.tasks.service.TasksProposalLocalServiceFactory;
@@ -166,33 +166,6 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		this.counterService = counterService;
 	}
 
-	public ActivityTrackerLocalService getActivityTrackerLocalService() {
-		return activityTrackerLocalService;
-	}
-
-	public void setActivityTrackerLocalService(
-		ActivityTrackerLocalService activityTrackerLocalService) {
-		this.activityTrackerLocalService = activityTrackerLocalService;
-	}
-
-	public ActivityTrackerPersistence getActivityTrackerPersistence() {
-		return activityTrackerPersistence;
-	}
-
-	public void setActivityTrackerPersistence(
-		ActivityTrackerPersistence activityTrackerPersistence) {
-		this.activityTrackerPersistence = activityTrackerPersistence;
-	}
-
-	public ActivityTrackerFinder getActivityTrackerFinder() {
-		return activityTrackerFinder;
-	}
-
-	public void setActivityTrackerFinder(
-		ActivityTrackerFinder activityTrackerFinder) {
-		this.activityTrackerFinder = activityTrackerFinder;
-	}
-
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -225,6 +198,33 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		this.userFinder = userFinder;
 	}
 
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (tasksReviewPersistence == null) {
 			tasksReviewPersistence = TasksReviewUtil.getPersistence();
@@ -254,18 +254,6 @@ public abstract class TasksReviewLocalServiceBaseImpl
 			counterService = CounterServiceFactory.getImpl();
 		}
 
-		if (activityTrackerLocalService == null) {
-			activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getImpl();
-		}
-
-		if (activityTrackerPersistence == null) {
-			activityTrackerPersistence = ActivityTrackerUtil.getPersistence();
-		}
-
-		if (activityTrackerFinder == null) {
-			activityTrackerFinder = ActivityTrackerFinderUtil.getFinder();
-		}
-
 		if (userLocalService == null) {
 			userLocalService = UserLocalServiceFactory.getImpl();
 		}
@@ -281,6 +269,18 @@ public abstract class TasksReviewLocalServiceBaseImpl
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
 		}
+
+		if (socialActivityLocalService == null) {
+			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+		}
+
+		if (socialActivityPersistence == null) {
+			socialActivityPersistence = SocialActivityUtil.getPersistence();
+		}
+
+		if (socialActivityFinder == null) {
+			socialActivityFinder = SocialActivityFinderUtil.getFinder();
+		}
 	}
 
 	protected TasksReviewPersistence tasksReviewPersistence;
@@ -290,11 +290,11 @@ public abstract class TasksReviewLocalServiceBaseImpl
 	protected TasksProposalFinder tasksProposalFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
-	protected ActivityTrackerLocalService activityTrackerLocalService;
-	protected ActivityTrackerPersistence activityTrackerPersistence;
-	protected ActivityTrackerFinder activityTrackerFinder;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected SocialActivityLocalService socialActivityLocalService;
+	protected SocialActivityPersistence socialActivityPersistence;
+	protected SocialActivityFinder socialActivityFinder;
 }

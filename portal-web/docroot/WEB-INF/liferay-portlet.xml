@@ -198,8 +198,8 @@
 		<scheduler-class>com.liferay.portlet.messageboards.job.Scheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.messageboards.MBFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.messageboards.lar.MBPortletDataHandlerImpl</portlet-data-handler-class>
-		<activity-tracker-interpreter-class>com.liferay.portlet.messageboards.MBActivityTrackerInterpreter</activity-tracker-interpreter-class>
 		<pop-message-listener-class>com.liferay.portlet.messageboards.pop.MessageListenerImpl</pop-message-listener-class>
+		<social-activity-interpreter-class>com.liferay.portlet.messageboards.social.MBActivityInterpreter</social-activity-interpreter-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -1144,7 +1144,7 @@
 	<portlet>
 		<portlet-name>120</portlet-name>
 		<struts-path>tasks</struts-path>
-		<activity-tracker-interpreter-class>com.liferay.portlet.tasks.TasksActivityTrackerInterpreter</activity-tracker-interpreter-class>
+		<social-activity-interpreter-class>com.liferay.portlet.tasks.social.TasksActivityInterpreter</social-activity-interpreter-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>

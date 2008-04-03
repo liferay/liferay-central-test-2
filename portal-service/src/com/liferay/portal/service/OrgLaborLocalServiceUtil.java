@@ -113,32 +113,6 @@ public class OrgLaborLocalServiceUtil {
 		orgLaborLocalService.setAccountPersistence(accountPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
-
-		return orgLaborLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
-
-		orgLaborLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
-
-		return orgLaborLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
-
-		orgLaborLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		OrgLaborLocalService orgLaborLocalService = OrgLaborLocalServiceFactory.getService();
 

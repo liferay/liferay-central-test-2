@@ -243,32 +243,6 @@ public class MBMessageLocalServiceUtil {
 		mbMessageLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		return mbMessageLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
-
-		mbMessageLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence() {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
@@ -423,6 +397,32 @@ public class MBMessageLocalServiceUtil {
 		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
 
 		mbMessageLocalService.setBlogsEntryFinder(blogsEntryFinder);
+	}
+
+	public static com.liferay.portlet.social.service.persistence.SocialActivityPersistence getSocialActivityPersistence() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getSocialActivityPersistence();
+	}
+
+	public static void setSocialActivityPersistence(
+		com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		mbMessageLocalService.setSocialActivityPersistence(socialActivityPersistence);
+	}
+
+	public static com.liferay.portlet.social.service.persistence.SocialActivityFinder getSocialActivityFinder() {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		return mbMessageLocalService.getSocialActivityFinder();
+	}
+
+	public static void setSocialActivityFinder(
+		com.liferay.portlet.social.service.persistence.SocialActivityFinder socialActivityFinder) {
+		MBMessageLocalService mbMessageLocalService = MBMessageLocalServiceFactory.getService();
+
+		mbMessageLocalService.setSocialActivityFinder(socialActivityFinder);
 	}
 
 	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {

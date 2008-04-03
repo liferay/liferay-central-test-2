@@ -114,32 +114,6 @@ public class PluginSettingLocalServiceUtil {
 		pluginSettingLocalService.setAccountPersistence(accountPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		pluginSettingLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		return pluginSettingLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
-
-		pluginSettingLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		PluginSettingLocalService pluginSettingLocalService = PluginSettingLocalServiceFactory.getService();
 

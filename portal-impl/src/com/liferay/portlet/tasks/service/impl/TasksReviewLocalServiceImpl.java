@@ -26,10 +26,10 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portlet.tasks.DuplicateReviewUserIdException;
-import com.liferay.portlet.tasks.TasksActivityKeys;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.service.base.TasksReviewLocalServiceBaseImpl;
+import com.liferay.portlet.tasks.social.TasksActivityKeys;
 import com.liferay.util.SetUtil;
 
 import java.util.Date;
@@ -81,7 +81,7 @@ public class TasksReviewLocalServiceImpl
 
 		tasksReviewPersistence.update(review, false);
 
-		// Activity trackers
+		// Social
 
 		JSONObject extraData = new JSONObject();
 
@@ -89,7 +89,7 @@ public class TasksReviewLocalServiceImpl
 		extraData.put("completed", review.getCompleted());
 		extraData.put("rejected", review.getRejected());
 
-		activityTrackerLocalService.addActivityTracker(
+		socialActivityLocalService.addActivity(
 			assignedByUserId, proposal.getGroupId(),
 			TasksProposal.class.getName(), review.getProposalId(),
 			TasksActivityKeys.ASSIGN, extraData.toString(), user.getUserId());
@@ -215,7 +215,7 @@ public class TasksReviewLocalServiceImpl
 
 		tasksReviewPersistence.update(review, false);
 
-		// Activity trackers
+		// Social
 
 		JSONObject extraData = new JSONObject();
 
@@ -223,7 +223,7 @@ public class TasksReviewLocalServiceImpl
 		extraData.put("completed", review.getCompleted());
 		extraData.put("rejected", review.getRejected());
 
-		activityTrackerLocalService.addActivityTracker(
+		socialActivityLocalService.addActivity(
 			review.getUserId(), review.getGroupId(),
 			TasksProposal.class.getName(), review.getProposalId(),
 			TasksActivityKeys.REVIEW, extraData.toString(),

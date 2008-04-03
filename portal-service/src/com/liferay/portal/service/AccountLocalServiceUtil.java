@@ -112,32 +112,6 @@ public class AccountLocalServiceUtil {
 		accountLocalService.setAccountPersistence(accountPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		accountLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		return accountLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
-
-		accountLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		AccountLocalService accountLocalService = AccountLocalServiceFactory.getService();
 

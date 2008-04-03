@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.model.EmailAddress;
 import com.liferay.portal.model.EmailAddressSoap;
 import com.liferay.portal.util.PropsUtil;
@@ -214,6 +215,10 @@ public class EmailAddressModelImpl extends BaseModelImpl {
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
+	}
+
+	public String getClassName() {
+		return PortalUtil.getClassName(getClassNameId());
 	}
 
 	public long getClassNameId() {

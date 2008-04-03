@@ -1,3 +1,5 @@
+drop table ActivityTracker;
+
 create table AnnouncementsEntry (
 	uuid_ VARCHAR(75) null,
 	entryId LONG not null primary key,
@@ -73,6 +75,21 @@ create table PortletItem (
 	name VARCHAR(75) null,
 	portletId VARCHAR(75) null,
 	classNameId LONG
+);
+
+create table SocialActivity (
+	activityId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	userName VARCHAR(75) null,
+	createDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	type_ VARCHAR(75) null,
+	extraData TEXT null,
+	receiverUserId LONG,
+	receiverUserName VARCHAR(75) null
 );
 
 create table TasksProposal (

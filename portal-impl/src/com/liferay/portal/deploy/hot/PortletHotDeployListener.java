@@ -45,18 +45,15 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletCategory;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
-import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
-import com.liferay.portal.util.ActivityTrackerInterpreterUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
@@ -73,6 +70,9 @@ import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.PortletURLListenerFactory;
+import com.liferay.portlet.social.model.SocialActivityInterpreter;
+import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
+import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
 import com.liferay.util.CollectionFactory;
 
 import java.util.HashMap;
@@ -256,27 +256,6 @@ public class PortletHotDeployListener implements HotDeployListener {
 								newInstance();
 				}
 
-				ActivityTrackerInterpreter activityTrackerInterpreterInstance =
-					null;
-
-				if (Validator.isNotNull(
-						portlet.getActivityTrackerInterpreterClass())) {
-
-					activityTrackerInterpreterInstance =
-						(ActivityTrackerInterpreter)
-							portletClassLoader.loadClass(
-								portlet.getActivityTrackerInterpreterClass()).
-									newInstance();
-
-					activityTrackerInterpreterInstance =
-						new ActivityTrackerInterpreterImpl(
-							activityTrackerInterpreterInstance);
-
-					ActivityTrackerInterpreterUtil.
-						addActivityTrackerInterpreter(
-							activityTrackerInterpreterInstance);
-				}
-
 				MessageListener popMessageListenerInstance = null;
 
 				if (Validator.isNotNull(
@@ -288,6 +267,27 @@ public class PortletHotDeployListener implements HotDeployListener {
 								newInstance();
 
 					POPServerUtil.addListener(popMessageListenerInstance);
+				}
+
+				SocialActivityInterpreter socialActivityInterpreterInstance =
+					null;
+
+				if (Validator.isNotNull(
+						portlet.getSocialActivityInterpreterClass())) {
+
+					socialActivityInterpreterInstance =
+						(SocialActivityInterpreter)
+							portletClassLoader.loadClass(
+								portlet.getSocialActivityInterpreterClass()).
+									newInstance();
+
+					socialActivityInterpreterInstance =
+						new SocialActivityInterpreterImpl(
+							socialActivityInterpreterInstance);
+
+					SocialActivityInterpreterLocalServiceUtil.
+						addActivityInterpreter(
+							socialActivityInterpreterInstance);
 				}
 
 				PreferencesValidator prefsValidatorInstance = null;
@@ -340,9 +340,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 					configurationActionInstance, indexerInstance,
 					schedulerInstance, friendlyURLMapperInstance,
 					urlEncoderInstance, portletDataHandlerInstance,
-					portletLayoutListenerInstance,
-					activityTrackerInterpreterInstance,
-					popMessageListenerInstance, prefsValidatorInstance,
+					portletLayoutListenerInstance, popMessageListenerInstance,
+					socialActivityInterpreterInstance, prefsValidatorInstance,
 					resourceBundles);
 
 				PortletBagPool.put(portlet.getPortletId(), portletBag);
@@ -483,12 +482,12 @@ public class PortletHotDeployListener implements HotDeployListener {
 				while (itr.hasNext()) {
 					Portlet portlet = itr.next();
 
-					ActivityTrackerInterpreterUtil.
-						deleteActivityTrackerInterpreter(
-							portlet.getActivityTrackerInterpreterInstance());
-
 					POPServerUtil.deleteListener(
 						portlet.getPopMessageListenerInstance());
+
+					SocialActivityInterpreterLocalServiceUtil.
+						deleteActivityInterpreter(
+							portlet.getSocialActivityInterpreterInstance());
 
 					PortletInstanceFactory.destroy(portlet);
 

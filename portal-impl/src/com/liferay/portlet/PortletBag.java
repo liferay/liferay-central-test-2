@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.portlet.PortletLayoutListener;
 import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.portal.model.ActivityTrackerInterpreter;
+import com.liferay.portlet.social.model.SocialActivityInterpreter;
 
 import java.util.Locale;
 import java.util.Map;
@@ -59,8 +59,8 @@ public class PortletBag {
 		URLEncoder urlEncoderInstance,
 		PortletDataHandler portletDataHandlerInstance,
 		PortletLayoutListener portletLayoutListenerInstance,
-		ActivityTrackerInterpreter activityTrackerInterpreterInstance,
 		MessageListener popMessageListenerInstance,
+		SocialActivityInterpreter socialActivityInterpreterInstance,
 		PreferencesValidator prefsValidatorInstance,
 		Map<String, ResourceBundle> resourceBundles) {
 
@@ -74,9 +74,8 @@ public class PortletBag {
 		_urlEncoderInstance = urlEncoderInstance;
 		_portletDataHandlerInstance = portletDataHandlerInstance;
 		_portletLayoutListenerInstance = portletLayoutListenerInstance;
-		_activityTrackerInterpreterInstance =
-			activityTrackerInterpreterInstance;
 		_popMessageListenerInstance = popMessageListenerInstance;
+		_socialActivityInterpreterInstance = socialActivityInterpreterInstance;
 		_prefsValidatorInstance = prefsValidatorInstance;
 		_resourceBundles = resourceBundles;
 	}
@@ -125,12 +124,12 @@ public class PortletBag {
 		return _portletLayoutListenerInstance;
 	}
 
-	public ActivityTrackerInterpreter getActivityTrackerInterpreterInstance() {
-		return _activityTrackerInterpreterInstance;
-	}
-
 	public MessageListener getPopMessageListenerInstance() {
 		return _popMessageListenerInstance;
+	}
+
+	public SocialActivityInterpreter getSocialActivityInterpreterInstance() {
+		return _socialActivityInterpreterInstance;
 	}
 
 	public PreferencesValidator getPreferencesValidatorInstance() {
@@ -163,8 +162,8 @@ public class PortletBag {
 	private URLEncoder _urlEncoderInstance;
 	private PortletDataHandler _portletDataHandlerInstance;
 	private PortletLayoutListener _portletLayoutListenerInstance;
-	private ActivityTrackerInterpreter _activityTrackerInterpreterInstance;
 	private MessageListener _popMessageListenerInstance;
+	private SocialActivityInterpreter _socialActivityInterpreterInstance;
 	private PreferencesValidator _prefsValidatorInstance;
 	private Map<String, ResourceBundle> _resourceBundles;
 

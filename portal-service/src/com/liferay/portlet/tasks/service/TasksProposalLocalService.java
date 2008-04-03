@@ -89,16 +89,6 @@ public interface TasksProposalLocalService {
 	public void setTasksProposalFinder(
 		com.liferay.portlet.tasks.service.persistence.TasksProposalFinder tasksProposalFinder);
 
-	public com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence();
-
-	public void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence);
-
-	public com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder();
-
-	public void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder);
-
 	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
 
 	public void setResourcePersistence(
@@ -128,6 +118,16 @@ public interface TasksProposalLocalService {
 
 	public void setMBMessageFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder);
+
+	public com.liferay.portlet.social.service.persistence.SocialActivityPersistence getSocialActivityPersistence();
+
+	public void setSocialActivityPersistence(
+		com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence);
+
+	public com.liferay.portlet.social.service.persistence.SocialActivityFinder getSocialActivityFinder();
+
+	public void setSocialActivityFinder(
+		com.liferay.portlet.social.service.persistence.SocialActivityFinder socialActivityFinder);
 
 	public void afterPropertiesSet();
 

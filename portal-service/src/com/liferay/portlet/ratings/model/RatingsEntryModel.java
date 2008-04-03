@@ -75,6 +75,8 @@ public interface RatingsEntryModel extends BaseModel {
 
 	public void setModifiedDate(Date modifiedDate);
 
+	public String getClassName();
+
 	public long getClassNameId();
 
 	public void setClassNameId(long classNameId);

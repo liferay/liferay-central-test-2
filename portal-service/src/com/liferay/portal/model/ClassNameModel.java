@@ -48,6 +48,8 @@ public interface ClassNameModel extends BaseModel {
 
 	public void setPrimaryKey(long pk);
 
+	public String getClassName();
+
 	public long getClassNameId();
 
 	public void setClassNameId(long classNameId);

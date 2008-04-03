@@ -758,14 +758,14 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			mbThreadPersistence.update(thread, false);
 		}
 
-		// Activity trackers
-
-		activityTrackerLocalService.deleteActivityTrackers(
-			MBMessage.class.getName(), message.getMessageId());
-
 		// Tags
 
 		tagsAssetLocalService.deleteAsset(
+			MBMessage.class.getName(), message.getMessageId());
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
 			MBMessage.class.getName(), message.getMessageId());
 
 		// Message flags

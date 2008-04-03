@@ -139,32 +139,6 @@ public class TasksReviewLocalServiceUtil {
 		tasksReviewLocalService.setTasksProposalFinder(tasksProposalFinder);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		tasksReviewLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		return tasksReviewLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
-
-		tasksReviewLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.UserPersistence getUserPersistence() {
 		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
 
@@ -189,6 +163,32 @@ public class TasksReviewLocalServiceUtil {
 		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
 
 		tasksReviewLocalService.setUserFinder(userFinder);
+	}
+
+	public static com.liferay.portlet.social.service.persistence.SocialActivityPersistence getSocialActivityPersistence() {
+		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
+
+		return tasksReviewLocalService.getSocialActivityPersistence();
+	}
+
+	public static void setSocialActivityPersistence(
+		com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence) {
+		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
+
+		tasksReviewLocalService.setSocialActivityPersistence(socialActivityPersistence);
+	}
+
+	public static com.liferay.portlet.social.service.persistence.SocialActivityFinder getSocialActivityFinder() {
+		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
+
+		return tasksReviewLocalService.getSocialActivityFinder();
+	}
+
+	public static void setSocialActivityFinder(
+		com.liferay.portlet.social.service.persistence.SocialActivityFinder socialActivityFinder) {
+		TasksReviewLocalService tasksReviewLocalService = TasksReviewLocalServiceFactory.getService();
+
+		tasksReviewLocalService.setSocialActivityFinder(socialActivityFinder);
 	}
 
 	public static void afterPropertiesSet() {

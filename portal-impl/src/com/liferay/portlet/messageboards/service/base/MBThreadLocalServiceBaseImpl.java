@@ -35,8 +35,6 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
-import com.liferay.portal.service.ActivityTrackerLocalService;
-import com.liferay.portal.service.ActivityTrackerLocalServiceFactory;
 import com.liferay.portal.service.ResourceLocalService;
 import com.liferay.portal.service.ResourceLocalServiceFactory;
 import com.liferay.portal.service.ResourceService;
@@ -45,10 +43,6 @@ import com.liferay.portal.service.UserLocalService;
 import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
-import com.liferay.portal.service.persistence.ActivityTrackerFinder;
-import com.liferay.portal.service.persistence.ActivityTrackerFinderUtil;
-import com.liferay.portal.service.persistence.ActivityTrackerPersistence;
-import com.liferay.portal.service.persistence.ActivityTrackerUtil;
 import com.liferay.portal.service.persistence.ResourceFinder;
 import com.liferay.portal.service.persistence.ResourceFinderUtil;
 import com.liferay.portal.service.persistence.ResourcePersistence;
@@ -98,6 +92,12 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
+import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -346,33 +346,6 @@ public abstract class MBThreadLocalServiceBaseImpl
 		this.dlService = dlService;
 	}
 
-	public ActivityTrackerLocalService getActivityTrackerLocalService() {
-		return activityTrackerLocalService;
-	}
-
-	public void setActivityTrackerLocalService(
-		ActivityTrackerLocalService activityTrackerLocalService) {
-		this.activityTrackerLocalService = activityTrackerLocalService;
-	}
-
-	public ActivityTrackerPersistence getActivityTrackerPersistence() {
-		return activityTrackerPersistence;
-	}
-
-	public void setActivityTrackerPersistence(
-		ActivityTrackerPersistence activityTrackerPersistence) {
-		this.activityTrackerPersistence = activityTrackerPersistence;
-	}
-
-	public ActivityTrackerFinder getActivityTrackerFinder() {
-		return activityTrackerFinder;
-	}
-
-	public void setActivityTrackerFinder(
-		ActivityTrackerFinder activityTrackerFinder) {
-		this.activityTrackerFinder = activityTrackerFinder;
-	}
-
 	public ResourceLocalService getResourceLocalService() {
 		return resourceLocalService;
 	}
@@ -436,6 +409,33 @@ public abstract class MBThreadLocalServiceBaseImpl
 
 	public void setUserFinder(UserFinder userFinder) {
 		this.userFinder = userFinder;
+	}
+
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
 	}
 
 	public TagsAssetLocalService getTagsAssetLocalService() {
@@ -565,18 +565,6 @@ public abstract class MBThreadLocalServiceBaseImpl
 			dlService = DLServiceFactory.getImpl();
 		}
 
-		if (activityTrackerLocalService == null) {
-			activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getImpl();
-		}
-
-		if (activityTrackerPersistence == null) {
-			activityTrackerPersistence = ActivityTrackerUtil.getPersistence();
-		}
-
-		if (activityTrackerFinder == null) {
-			activityTrackerFinder = ActivityTrackerFinderUtil.getFinder();
-		}
-
 		if (resourceLocalService == null) {
 			resourceLocalService = ResourceLocalServiceFactory.getImpl();
 		}
@@ -607,6 +595,18 @@ public abstract class MBThreadLocalServiceBaseImpl
 
 		if (userFinder == null) {
 			userFinder = UserFinderUtil.getFinder();
+		}
+
+		if (socialActivityLocalService == null) {
+			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+		}
+
+		if (socialActivityPersistence == null) {
+			socialActivityPersistence = SocialActivityUtil.getPersistence();
+		}
+
+		if (socialActivityFinder == null) {
+			socialActivityFinder = SocialActivityFinderUtil.getFinder();
 		}
 
 		if (tagsAssetLocalService == null) {
@@ -649,9 +649,6 @@ public abstract class MBThreadLocalServiceBaseImpl
 	protected CounterService counterService;
 	protected DLLocalService dlLocalService;
 	protected DLService dlService;
-	protected ActivityTrackerLocalService activityTrackerLocalService;
-	protected ActivityTrackerPersistence activityTrackerPersistence;
-	protected ActivityTrackerFinder activityTrackerFinder;
 	protected ResourceLocalService resourceLocalService;
 	protected ResourceService resourceService;
 	protected ResourcePersistence resourcePersistence;
@@ -660,6 +657,9 @@ public abstract class MBThreadLocalServiceBaseImpl
 	protected UserService userService;
 	protected UserPersistence userPersistence;
 	protected UserFinder userFinder;
+	protected SocialActivityLocalService socialActivityLocalService;
+	protected SocialActivityPersistence socialActivityPersistence;
+	protected SocialActivityFinder socialActivityFinder;
 	protected TagsAssetLocalService tagsAssetLocalService;
 	protected TagsAssetService tagsAssetService;
 	protected TagsAssetPersistence tagsAssetPersistence;

@@ -25,6 +25,7 @@ package com.liferay.portlet.tags.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
@@ -272,6 +273,10 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
+	}
+
+	public String getClassName() {
+		return PortalUtil.getClassName(getClassNameId());
 	}
 
 	public long getClassNameId() {

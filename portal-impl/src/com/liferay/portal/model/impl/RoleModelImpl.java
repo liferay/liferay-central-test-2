@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleSoap;
 import com.liferay.portal.util.PropsUtil;
@@ -151,6 +152,10 @@ public class RoleModelImpl extends BaseModelImpl {
 		if (companyId != _companyId) {
 			_companyId = companyId;
 		}
+	}
+
+	public String getClassName() {
+		return PortalUtil.getClassName(getClassNameId());
 	}
 
 	public long getClassNameId() {

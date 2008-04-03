@@ -24,7 +24,9 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.util.ActivityTrackerInterpreterUtil" %>
+<%@ page import="com.liferay.portlet.social.model.SocialActivity" %>
+<%@ page import="com.liferay.portlet.social.model.SocialActivityFeedEntry" %>
+<%@ page import="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil" %>
 
 <%
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);

@@ -35,8 +35,6 @@ import com.liferay.documentlibrary.service.DLServiceFactory;
 import com.liferay.mail.service.MailService;
 import com.liferay.mail.service.MailServiceFactory;
 
-import com.liferay.portal.service.ActivityTrackerLocalService;
-import com.liferay.portal.service.ActivityTrackerLocalServiceFactory;
 import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
@@ -60,10 +58,6 @@ import com.liferay.portal.service.UserLocalServiceFactory;
 import com.liferay.portal.service.UserService;
 import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
-import com.liferay.portal.service.persistence.ActivityTrackerFinder;
-import com.liferay.portal.service.persistence.ActivityTrackerFinderUtil;
-import com.liferay.portal.service.persistence.ActivityTrackerPersistence;
-import com.liferay.portal.service.persistence.ActivityTrackerUtil;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
@@ -134,6 +128,12 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
+import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -371,33 +371,6 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 		this.mailService = mailService;
 	}
 
-	public ActivityTrackerLocalService getActivityTrackerLocalService() {
-		return activityTrackerLocalService;
-	}
-
-	public void setActivityTrackerLocalService(
-		ActivityTrackerLocalService activityTrackerLocalService) {
-		this.activityTrackerLocalService = activityTrackerLocalService;
-	}
-
-	public ActivityTrackerPersistence getActivityTrackerPersistence() {
-		return activityTrackerPersistence;
-	}
-
-	public void setActivityTrackerPersistence(
-		ActivityTrackerPersistence activityTrackerPersistence) {
-		this.activityTrackerPersistence = activityTrackerPersistence;
-	}
-
-	public ActivityTrackerFinder getActivityTrackerFinder() {
-		return activityTrackerFinder;
-	}
-
-	public void setActivityTrackerFinder(
-		ActivityTrackerFinder activityTrackerFinder) {
-		this.activityTrackerFinder = activityTrackerFinder;
-	}
-
 	public CompanyLocalService getCompanyLocalService() {
 		return companyLocalService;
 	}
@@ -607,6 +580,33 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 		this.blogsEntryFinder = blogsEntryFinder;
 	}
 
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -776,18 +776,6 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 			mailService = MailServiceFactory.getImpl();
 		}
 
-		if (activityTrackerLocalService == null) {
-			activityTrackerLocalService = ActivityTrackerLocalServiceFactory.getImpl();
-		}
-
-		if (activityTrackerPersistence == null) {
-			activityTrackerPersistence = ActivityTrackerUtil.getPersistence();
-		}
-
-		if (activityTrackerFinder == null) {
-			activityTrackerFinder = ActivityTrackerFinderUtil.getFinder();
-		}
-
 		if (companyLocalService == null) {
 			companyLocalService = CompanyLocalServiceFactory.getImpl();
 		}
@@ -888,6 +876,18 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 			blogsEntryFinder = BlogsEntryFinderUtil.getFinder();
 		}
 
+		if (socialActivityLocalService == null) {
+			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+		}
+
+		if (socialActivityPersistence == null) {
+			socialActivityPersistence = SocialActivityUtil.getPersistence();
+		}
+
+		if (socialActivityFinder == null) {
+			socialActivityFinder = SocialActivityFinderUtil.getFinder();
+		}
+
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}
@@ -946,9 +946,6 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 	protected DLLocalService dlLocalService;
 	protected DLService dlService;
 	protected MailService mailService;
-	protected ActivityTrackerLocalService activityTrackerLocalService;
-	protected ActivityTrackerPersistence activityTrackerPersistence;
-	protected ActivityTrackerFinder activityTrackerFinder;
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
@@ -974,6 +971,9 @@ public abstract class MBMessageServiceBaseImpl extends PrincipalBean
 	protected BlogsEntryService blogsEntryService;
 	protected BlogsEntryPersistence blogsEntryPersistence;
 	protected BlogsEntryFinder blogsEntryFinder;
+	protected SocialActivityLocalService socialActivityLocalService;
+	protected SocialActivityPersistence socialActivityPersistence;
+	protected SocialActivityFinder socialActivityFinder;
 	protected TagsAssetLocalService tagsAssetLocalService;
 	protected TagsAssetService tagsAssetService;
 	protected TagsAssetPersistence tagsAssetPersistence;

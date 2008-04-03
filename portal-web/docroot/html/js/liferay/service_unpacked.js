@@ -3177,3 +3177,7 @@ Liferay.Service.Workflow.WorkflowInstance = {
 		return Liferay.Service.ajax(params, callback);
 	}
 };
+
+Liferay.Service.Social = {
+	servicePackage: "com.liferay.portlet.social.service.http."
+};

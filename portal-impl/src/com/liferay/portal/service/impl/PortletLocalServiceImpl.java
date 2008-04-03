@@ -884,14 +884,14 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				portletModel.setPortletLayoutListenerClass(GetterUtil.getString(
 					portlet.elementText("portlet-layout-listener-class"),
 					portletModel.getPortletLayoutListenerClass()));
-				portletModel.setActivityTrackerInterpreterClass(
-					GetterUtil.getString(
-						portlet.elementText(
-							"activity-tracker-interpreter-class"),
-							portletModel.getActivityTrackerInterpreterClass()));
 				portletModel.setPopMessageListenerClass(GetterUtil.getString(
 					portlet.elementText("pop-message-listener-class"),
 					portletModel.getPopMessageListenerClass()));
+				portletModel.setSocialActivityInterpreterClass(
+					GetterUtil.getString(
+						portlet.elementText(
+							"social-activity-interpreter-class"),
+							portletModel.getSocialActivityInterpreterClass()));
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));

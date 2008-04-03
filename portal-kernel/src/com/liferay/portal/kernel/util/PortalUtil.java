@@ -51,6 +51,33 @@ public class PortalUtil {
 		}
 	}
 
+	public static String getClassName(long classNameId) {
+		try {
+			Object returnObj = PortalClassInvoker.invoke(
+				_CLASS, _METHOD_GETCLASSNAME, Long.valueOf(classNameId), false);
+
+			if (returnObj != null) {
+				return (String)returnObj;
+			}
+		}
+		catch (Exception e) {
+		}
+
+		return null;
+	}
+
+	public static long getClassNameId(String value) throws Exception {
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETCLASSNAMEID, value, false);
+
+		if (returnObj != null) {
+			return (Long)returnObj;
+		}
+		else {
+			return 0;
+		}
+	}
+
 	public static String getComputerName() throws Exception {
 		Object returnObj = PortalClassInvoker.invoke(
 			_CLASS, _METHOD_GETCOMPUTERNAME, false);
@@ -221,6 +248,10 @@ public class PortalUtil {
 	private static final String _CLASS = "com.liferay.portal.util.PortalUtil";
 
 	private static final String _METHOD_GETCDNHOST = "getCDNHost";
+
+	private static final String _METHOD_GETCLASSNAME = "getClassName";
+
+	private static final String _METHOD_GETCLASSNAMEID = "getClassNameId";
 
 	private static final String _METHOD_GETCOMPUTERNAME = "getComputerName";
 

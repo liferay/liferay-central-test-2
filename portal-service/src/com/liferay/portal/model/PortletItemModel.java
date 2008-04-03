@@ -85,6 +85,8 @@ public interface PortletItemModel extends BaseModel {
 
 	public void setPortletId(String portletId);
 
+	public String getClassName();
+
 	public long getClassNameId();
 
 	public void setClassNameId(long classNameId);

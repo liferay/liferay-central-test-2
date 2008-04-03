@@ -65,6 +65,8 @@ public interface ExpandoValueModel extends BaseModel {
 
 	public void setRowId(long rowId);
 
+	public String getClassName();
+
 	public long getClassNameId();
 
 	public void setClassNameId(long classNameId);

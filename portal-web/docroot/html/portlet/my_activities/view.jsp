@@ -25,16 +25,14 @@
 <%@ include file="/html/portlet/my_activities/init.jsp" %>
 
 <%
-List activityTrackers = ActivityTrackerLocalServiceUtil.getCompanyActivityTrackers(company.getCompanyId(), 0, SearchContainer.DEFAULT_DELTA);
+List<SocialActivity> activities = SocialActivityLocalServiceUtil.getCompanyActivities(company.getCompanyId(), 0, SearchContainer.DEFAULT_DELTA);
 %>
 
 <table class="lfr-table">
 
 <%
-for (int i = 0; i < activityTrackers.size(); i++) {
-	ActivityTracker activityTracker = (ActivityTracker)activityTrackers.get(i);
-
-	ActivityFeedEntry activityFeedEntry = ActivityTrackerInterpreterUtil.interpret(activityTracker, themeDisplay);
+for (SocialActivity activity : activities) {
+	SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
 
 	if (activityFeedEntry != null) {
 %>

@@ -56,6 +56,8 @@ public interface PasswordPolicyRelModel extends BaseModel {
 
 	public void setPasswordPolicyId(long passwordPolicyId);
 
+	public String getClassName();
+
 	public long getClassNameId();
 
 	public void setClassNameId(long classNameId);

@@ -243,32 +243,6 @@ public class MBThreadLocalServiceUtil {
 		mbThreadLocalService.setMBThreadFinder(mbThreadFinder);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
-
-		return mbThreadLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
-
-		mbThreadLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
-
-		return mbThreadLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
-
-		mbThreadLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence() {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
@@ -319,6 +293,32 @@ public class MBThreadLocalServiceUtil {
 		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
 
 		mbThreadLocalService.setUserFinder(userFinder);
+	}
+
+	public static com.liferay.portlet.social.service.persistence.SocialActivityPersistence getSocialActivityPersistence() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getSocialActivityPersistence();
+	}
+
+	public static void setSocialActivityPersistence(
+		com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		mbThreadLocalService.setSocialActivityPersistence(socialActivityPersistence);
+	}
+
+	public static com.liferay.portlet.social.service.persistence.SocialActivityFinder getSocialActivityFinder() {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		return mbThreadLocalService.getSocialActivityFinder();
+	}
+
+	public static void setSocialActivityFinder(
+		com.liferay.portlet.social.service.persistence.SocialActivityFinder socialActivityFinder) {
+		MBThreadLocalService mbThreadLocalService = MBThreadLocalServiceFactory.getService();
+
+		mbThreadLocalService.setSocialActivityFinder(socialActivityFinder);
 	}
 
 	public static com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence() {

@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletItemSoap;
 import com.liferay.portal.util.PropsUtil;
@@ -244,6 +245,10 @@ public class PortletItemModelImpl extends BaseModelImpl {
 				!portletId.equals(_portletId))) {
 			_portletId = portletId;
 		}
+	}
+
+	public String getClassName() {
+		return PortalUtil.getClassName(getClassNameId());
 	}
 
 	public long getClassNameId() {

@@ -298,7 +298,7 @@ for (int i = 2; i <= workflowStages; i++) {
 
 <br />
 
-<liferay-ui:activities
+<liferay-ui:social-activities
 	className="<%= TasksProposal.class.getName() %>"
 	classPK="<%= proposalId %>"
 />

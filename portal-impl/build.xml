@@ -594,6 +594,12 @@ ${exception.message}
 		</antcall>
 	</target>
 
+	<target name="build-service-portlet-social">
+		<antcall target="build-service">
+			<param name="service.file" value="src/com/liferay/portlet/social/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-service-portlet-softwarecatalog">
 		<antcall target="build-service">
 			<param name="service.file" value="src/com/liferay/portlet/softwarecatalog/service.xml" />
@@ -643,6 +649,7 @@ ${exception.message}
 		<antcall target="build-service-portlet-polls" />
 		<antcall target="build-service-portlet-ratings" />
 		<antcall target="build-service-portlet-shopping" />
+		<antcall target="build-service-portlet-social" />
 		<antcall target="build-service-portlet-softwarecatalog" />
 		<antcall target="build-service-portlet-tags" />
 		<antcall target="build-service-portlet-tasks" />
@@ -757,6 +764,12 @@ ${exception.message}
 		</antcall>
 	</target>
 
+	<target name="build-wsdd-portlet-social">
+		<antcall target="build-wsdd">
+			<param name="service.file" value="src/com/liferay/portlet/social/service.xml" />
+		</antcall>
+	</target>
+
 	<target name="build-wsdd-portlet-tags">
 		<antcall target="build-wsdd">
 			<param name="service.file" value="src/com/liferay/portlet/tags/service.xml" />
@@ -800,6 +813,7 @@ ${exception.message}
 		<antcall target="build-wsdd-portlet-polls" />
 		<antcall target="build-wsdd-portlet-ratings" />
 		<antcall target="build-wsdd-portlet-shopping" />
+		<antcall target="build-wsdd-portlet-social" />
 		<antcall target="build-wsdd-portlet-softwarecatalog" />
 		<antcall target="build-wsdd-portlet-tags" />
 		<antcall target="build-wsdd-portlet-tasks" />

@@ -20,8 +20,8 @@ The portlet element contains the declarative data of a portlet.
 configuration-path?, configuration-action-class?, indexer-class?,
 open-search-class?, scheduler-class?, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
-portlet-layout-listener-class?, activity-tracker-interpreter-class?,
-pop-message-listener-class?, preferences-company-wide?,
+portlet-layout-listener-class?, pop-message-listener-class?,
+social-activity-interpreter-class?, preferences-company-wide?,
 preferences-unique-per-layout?, preferences-owned-by-group?,
 use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
 action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
@@ -78,7 +78,7 @@ users to configure the portlet at runtime.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/action/ConfigurationActionImpl.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/messageboards/action/ConfigurationActionImpl.html
 -->
 <!ELEMENT configuration-action-class (#PCDATA)>
 
@@ -89,8 +89,8 @@ search index for the portlet.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/util/Indexer.html
+http://docs.liferay.com/5.0/javadocs/portal-kernel/com/liferay/portal/kernel/search/Indexer.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/messageboards/util/Indexer.html
 http://lucene.apache.org
 -->
 <!ELEMENT indexer-class (#PCDATA)>
@@ -102,8 +102,8 @@ in the OpenSearch 1.1 standard.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/search/OpenSearch.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
+http://docs.liferay.com/5.0/javadocs/portal-kernel/com/liferay/portal/kernel/search/OpenSearch.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/alfrescocontent/util/OpenSearch.html
 http://www.opensearch.org
 -->
 <!ELEMENT open-search-class (#PCDATA)>
@@ -115,8 +115,8 @@ portlet.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portal/job/Scheduler.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/calendar/job/Scheduler.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portal/job/Scheduler.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/calendar/job/Scheduler.html
 http://www.opensymphony.com/quartz
 -->
 <!ELEMENT scheduler-class (#PCDATA)>
@@ -128,7 +128,7 @@ default portlet URL implementation.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portal/struts/StrutsActionPortletURL.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portal/struts/StrutsActionPortletURL.html
 -->
 <!ELEMENT portlet-url-class (#PCDATA)>
 
@@ -140,7 +140,7 @@ example of its uses.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/messageboards/MBFriendlyURLMapper.html
 -->
 <!ELEMENT friendly-url-mapper-class (#PCDATA)>
 
@@ -159,8 +159,8 @@ tasks are run.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
+http://docs.liferay.com/5.0/javadocs/portal-kernel/com/liferay/portal/kernel/lar/PortletDataHandler.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/journal/lar/PortletDataHandlerImpl.html
 -->
 <!ELEMENT portlet-data-handler-class (#PCDATA)>
 
@@ -171,23 +171,10 @@ is added, moved, or removed from a layout.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/portlet/PortletLayoutListener.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/journalcontent/JournalContentPortletLayoutListener.html
+http://docs.liferay.com/5.0/javadocs/portal-kernel/com/liferay/portal/kernel/portlet/PortletLayoutListener.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/journalcontent/JournalContentPortletLayoutListener.html
 -->
 <!ELEMENT portlet-layout-listener-class (#PCDATA)>
-
-<!--
-The activity-tracker-interpreter-class value must be a class that implements
-com.liferay.portal.model.ActivityTrackerInterpreter and is called to interpret
-activities into friendly messages that are easily understandable by a human
-being.
-
-See:
-
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portal/model/ActivityTrackerInterpreter.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/MBActivityTrackerInterpreter.html
--->
-<!ELEMENT activity-tracker-interpreter-class (#PCDATA)>
 
 <!--
 The pop-message-listener-class value must be a class that implements
@@ -196,10 +183,23 @@ emails.
 
 See:
 
-http://docs.liferay.com/4.4/javadocs/portal-kernel/com/liferay/portal/kernel/pop/MessageListener.html
-http://docs.liferay.com/4.4/javadocs/portal-impl/com/liferay/portlet/messageboards/pop/MessageListenerImpl.html
+http://docs.liferay.com/5.0/javadocs/portal-kernel/com/liferay/portal/kernel/pop/MessageListener.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/messageboards/pop/MessageListenerImpl.html
 -->
 <!ELEMENT pop-message-listener-class (#PCDATA)>
+
+<!--
+The social-activity-interpreter-class value must be a class that implements
+com.liferay.portlet.social.model.SocialActivityInterpreter and is called to
+interpret activities into friendly messages that are easily understandable by a
+human being.
+
+See:
+
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/messageboards/social/MBActivityInterpreter.html
+http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/social/model/SocialActivityInterpreter.html
+-->
+<!ELEMENT social-activity-interpreter-class (#PCDATA)>
 
 <!--
 Set the preferences-company-wide value to true if the preferences for the

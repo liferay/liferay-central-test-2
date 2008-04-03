@@ -35,7 +35,6 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -50,6 +49,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.QNameUtil;
 import com.liferay.portlet.PortletBag;
 import com.liferay.portlet.PortletBagPool;
+import com.liferay.portlet.social.model.SocialActivityInterpreter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -194,7 +194,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String portletURLClass, String friendlyURLMapperClass,
 		String urlEncoderClass, String portletDataHandlerClass,
 		String portletLayoutListenerClass,
-		String activityTrackerInterpreterClass, String popMessageListenerClass,
+		String popMessageListenerClass, String socialActivityInterpreterClass,
 		String defaultPreferences, String prefsValidator,
 		boolean prefsCompanyWide, boolean prefsUniquePerLayout,
 		boolean prefsOwnedByGroup, boolean useDefaultTemplate,
@@ -238,8 +238,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_urlEncoderClass = urlEncoderClass;
 		_portletDataHandlerClass = portletDataHandlerClass;
 		_portletLayoutListenerClass = portletLayoutListenerClass;
-		_activityTrackerInterpreterClass = activityTrackerInterpreterClass;
 		_popMessageListenerClass = popMessageListenerClass;
+		_socialActivityInterpreterClass = socialActivityInterpreterClass;
 		_defaultPreferences = defaultPreferences;
 		_prefsValidator = prefsValidator;
 		_prefsCompanyWide = prefsCompanyWide;
@@ -729,51 +729,6 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	}
 
 	/**
-	 * Gets the name of the activity tracker interpreter class of the portlet.
-	 *
-	 * @return		the name of the activity tracker interpreter class of the
-	 *				portlet
-	 */
-	public String getActivityTrackerInterpreterClass() {
-		return _activityTrackerInterpreterClass;
-	}
-
-	/**
-	 * Sets the name of the activity tracker interpreter class of the portlet.
-	 *
-	 * @param		activityTrackerInterpreterClass the name of the activity
-	 *				tracker interpreter class of the portlet
-	 */
-	public void setActivityTrackerInterpreterClass(
-		String activityTrackerInterpreterClass) {
-
-		_activityTrackerInterpreterClass = activityTrackerInterpreterClass;
-	}
-
-	/**
-	 * Gets the name of the activity tracker interpreter instance of the
-	 * portlet.
-	 *
-	 * @return		the name of the activity tracker interpreter instance of the
-	 *				portlet
-	 */
-	public ActivityTrackerInterpreter getActivityTrackerInterpreterInstance() {
-		if (Validator.isNotNull(getActivityTrackerInterpreterClass())) {
-			if (_portletApp.isWARFile()) {
-				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
-
-				return portletBag.getActivityTrackerInterpreterInstance();
-			}
-			else {
-				return (ActivityTrackerInterpreter)InstancePool.get(
-					getActivityTrackerInterpreterClass());
-			}
-		}
-
-		return null;
-	}
-
-	/**
 	 * Gets the name of the POP message listener class of the portlet.
 	 *
 	 * @return		the name of the POP message listener class of the portlet
@@ -807,6 +762,49 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			else {
 				return (MessageListener)InstancePool.get(
 					getPopMessageListenerClass());
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Gets the name of the social activity interpreter class of the portlet.
+	 *
+	 * @return		the name of the social activity interpreter class of the
+	 *				portlet
+	 */
+	public String getSocialActivityInterpreterClass() {
+		return _socialActivityInterpreterClass;
+	}
+
+	/**
+	 * Sets the name of the social activity interpreter class of the portlet.
+	 *
+	 * @param		socialActivityInterpreterClass the name of the activity
+	 *				interpreter class of the portlet
+	 */
+	public void setSocialActivityInterpreterClass(
+		String socialActivityInterpreterClass) {
+
+		_socialActivityInterpreterClass = socialActivityInterpreterClass;
+	}
+
+	/**
+	 * Gets the name of the activity interpreter instance of the portlet.
+	 *
+	 * @return		the name of the activity interpreter instance of the portlet
+	 */
+	public SocialActivityInterpreter getSocialActivityInterpreterInstance() {
+		if (Validator.isNotNull(getSocialActivityInterpreterClass())) {
+			if (_portletApp.isWARFile()) {
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+				return portletBag.getSocialActivityInterpreterInstance();
+			}
+			else {
+				return (SocialActivityInterpreter)InstancePool.get(
+					getSocialActivityInterpreterClass());
 			}
 		}
 
@@ -2370,24 +2368,23 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getIndexerClass(), getOpenSearchClass(), getSchedulerClass(),
 			getPortletURLClass(), getFriendlyURLMapperClass(),
 			getURLEncoderClass(), getPortletDataHandlerClass(),
-			getPortletLayoutListenerClass(),
-			getActivityTrackerInterpreterClass(), getPopMessageListenerClass(),
-			getDefaultPreferences(), getPreferencesValidator(),
-			isPreferencesCompanyWide(), isPreferencesUniquePerLayout(),
-			isPreferencesOwnedByGroup(), isUseDefaultTemplate(),
-			isShowPortletAccessDenied(), isShowPortletInactive(),
-			isActionURLRedirect(), isRestoreCurrentView(), isMaximizeEdit(),
-			isMaximizeHelp(), isPopUpPrint(), isLayoutCacheable(),
-			isInstanceable(), getUserPrincipalStrategy(),
-			isPrivateRequestAttributes(), isPrivateSessionAttributes(),
-			getRenderWeight(), isAjaxable(), getHeaderPortalCss(),
-			getHeaderPortletCss(), getHeaderPortalJavaScript(),
-			getHeaderPortletJavaScript(), getFooterPortalCss(),
-			getFooterPortletCss(), getFooterPortalJavaScript(),
-			getFooterPortletJavaScript(), getCssClassWrapper(),
-			isAddDefaultResource(), getRoles(), getUnlinkedRoles(),
-			getRoleMappers(), isSystem(), isActive(), isInclude(),
-			getInitParams(), getExpCache(), getPortletModes(),
+			getPortletLayoutListenerClass(), getPopMessageListenerClass(),
+			getSocialActivityInterpreterClass(), getDefaultPreferences(),
+			getPreferencesValidator(), isPreferencesCompanyWide(),
+			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
+			isUseDefaultTemplate(), isShowPortletAccessDenied(),
+			isShowPortletInactive(), isActionURLRedirect(),
+			isRestoreCurrentView(), isMaximizeEdit(), isMaximizeHelp(),
+			isPopUpPrint(), isLayoutCacheable(), isInstanceable(),
+			getUserPrincipalStrategy(), isPrivateRequestAttributes(),
+			isPrivateSessionAttributes(), getRenderWeight(), isAjaxable(),
+			getHeaderPortalCss(), getHeaderPortletCss(),
+			getHeaderPortalJavaScript(), getHeaderPortletJavaScript(),
+			getFooterPortalCss(), getFooterPortletCss(),
+			getFooterPortalJavaScript(), getFooterPortletJavaScript(),
+			getCssClassWrapper(), isAddDefaultResource(), getRoles(),
+			getUnlinkedRoles(), getRoleMappers(), isSystem(), isActive(),
+			isInclude(), getInitParams(), getExpCache(), getPortletModes(),
 			getSupportedLocales(), getResourceBundle(), getPortletInfo(),
 			getPortletFilters(), getProcessingEvents(), getPublishingEvents(),
 			getPublicRenderParameters(), getPortletApp());
@@ -2506,14 +2503,14 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	private String _portletLayoutListenerClass;
 
  	/**
-	 * The name of the activity tracker interpreter class of the portlet.
-	 */
-	private String _activityTrackerInterpreterClass;
-
- 	/**
 	 * The name of the POP message listener class of the portlet.
 	 */
 	private String _popMessageListenerClass;
+
+ 	/**
+	 * The name of the social activity interpreter class of the portlet.
+	 */
+	private String _socialActivityInterpreterClass;
 
 	/**
 	 * The default preferences of the portlet.

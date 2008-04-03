@@ -30,9 +30,9 @@ import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.ProposalDueDateException;
-import com.liferay.portlet.tasks.TasksActivityKeys;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.service.base.TasksProposalLocalServiceBaseImpl;
+import com.liferay.portlet.tasks.social.TasksActivityKeys;
 
 import java.util.Date;
 import java.util.List;
@@ -123,9 +123,9 @@ public class TasksProposalLocalServiceImpl
 		tasksReviewLocalService.addReview(
 			reviewUserId, proposal.getProposalId(), assignedByUserId, stage);
 
-		// Activity trackers
+		// Social
 
-		activityTrackerLocalService.addActivityTracker(
+		socialActivityLocalService.addActivity(
 			user.getUserId(), groupId, TasksProposal.class.getName(),
 			proposal.getProposalId(), TasksActivityKeys.PROPOSE,
 			StringPool.BLANK, 0);
@@ -215,14 +215,14 @@ public class TasksProposalLocalServiceImpl
 
 		tasksReviewLocalService.deleteReviews(proposal.getProposalId());
 
+		// Social
+
+		socialActivityLocalService.deleteActivities(
+			TasksProposal.class.getName(), proposal.getProposalId());
+
 		// Message boards
 
 		mbMessageLocalService.deleteDiscussionMessages(
-			TasksProposal.class.getName(), proposal.getProposalId());
-
-		// Activity trackers
-
-		activityTrackerLocalService.deleteActivityTrackers(
 			TasksProposal.class.getName(), proposal.getProposalId());
 
 		// Resources

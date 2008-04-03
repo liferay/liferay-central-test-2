@@ -129,16 +129,6 @@ public interface MBMessageLocalService {
 	public void setMBThreadFinder(
 		com.liferay.portlet.messageboards.service.persistence.MBThreadFinder mbThreadFinder);
 
-	public com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence();
-
-	public void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence);
-
-	public com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder();
-
-	public void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder);
-
 	public com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence();
 
 	public void setCompanyPersistence(
@@ -198,6 +188,16 @@ public interface MBMessageLocalService {
 
 	public void setBlogsEntryFinder(
 		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder);
+
+	public com.liferay.portlet.social.service.persistence.SocialActivityPersistence getSocialActivityPersistence();
+
+	public void setSocialActivityPersistence(
+		com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence);
+
+	public com.liferay.portlet.social.service.persistence.SocialActivityFinder getSocialActivityFinder();
+
+	public void setSocialActivityFinder(
+		com.liferay.portlet.social.service.persistence.SocialActivityFinder socialActivityFinder);
 
 	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();
 

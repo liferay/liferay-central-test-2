@@ -112,32 +112,6 @@ public class PhoneLocalServiceUtil {
 		phoneLocalService.setAccountPersistence(accountPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		return phoneLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
-
-		phoneLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		PhoneLocalService phoneLocalService = PhoneLocalServiceFactory.getService();
 

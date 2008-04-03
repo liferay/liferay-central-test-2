@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.PortalUtil;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.SubscriptionSoap;
 import com.liferay.portal.util.PropsUtil;
@@ -205,6 +206,10 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 				!modifiedDate.equals(_modifiedDate))) {
 			_modifiedDate = modifiedDate;
 		}
+	}
+
+	public String getClassName() {
+		return PortalUtil.getClassName(getClassNameId());
 	}
 
 	public long getClassNameId() {

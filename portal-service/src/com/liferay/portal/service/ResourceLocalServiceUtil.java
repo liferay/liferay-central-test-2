@@ -113,32 +113,6 @@ public class ResourceLocalServiceUtil {
 		resourceLocalService.setAccountPersistence(accountPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		return resourceLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		resourceLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		return resourceLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
-
-		resourceLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		ResourceLocalService resourceLocalService = ResourceLocalServiceFactory.getService();
 

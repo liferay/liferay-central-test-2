@@ -53,6 +53,8 @@ public interface ExpandoTableModel extends BaseModel {
 
 	public void setTableId(long tableId);
 
+	public String getClassName();
+
 	public long getClassNameId();
 
 	public void setClassNameId(long classNameId);

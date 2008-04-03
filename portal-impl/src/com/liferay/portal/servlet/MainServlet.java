@@ -42,14 +42,12 @@ import com.liferay.portal.kernel.util.PortalInitableUtil;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lastmodified.LastModifiedAction;
-import com.liferay.portal.model.ActivityTrackerInterpreter;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ActivityTrackerInterpreterImpl;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
@@ -60,7 +58,6 @@ import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
-import com.liferay.portal.util.ActivityTrackerInterpreterUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -74,6 +71,9 @@ import com.liferay.portlet.PortletConfigFactory;
 import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletURLListenerFactory;
+import com.liferay.portlet.social.model.SocialActivityInterpreter;
+import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
+import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
 import com.liferay.util.servlet.EncryptedServletRequest;
 
 import java.io.IOException;
@@ -289,38 +289,6 @@ public class MainServlet extends ActionServlet {
 			_log.error(e, e);
 		}
 
-		// Activity tracker interpreter
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Activity tracker interpreter");
-		}
-
-		try {
-			Iterator<Portlet> itr = portlets.iterator();
-
-			while (itr.hasNext()) {
-				Portlet portlet = itr.next();
-
-				ActivityTrackerInterpreter activityTrackerInterpreter =
-					portlet.getActivityTrackerInterpreterInstance();
-
-				if (portlet.isActive() &&
-					(activityTrackerInterpreter != null)) {
-
-					activityTrackerInterpreter =
-						new ActivityTrackerInterpreterImpl(
-							activityTrackerInterpreter);
-
-					ActivityTrackerInterpreterUtil.
-						addActivityTrackerInterpreter(
-							activityTrackerInterpreter);
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-		}
-
 		// POP message listener
 
 		if (_log.isDebugEnabled()) {
@@ -338,6 +306,35 @@ public class MainServlet extends ActionServlet {
 
 				if (portlet.isActive() && (popMessageListener != null)) {
 					POPServerUtil.addListener(popMessageListener);
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Social activity interpreter
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Social activity interpreter");
+		}
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				SocialActivityInterpreter socialActivityInterpreter =
+					portlet.getSocialActivityInterpreterInstance();
+
+				if (portlet.isActive() && (socialActivityInterpreter != null)) {
+					socialActivityInterpreter =
+						new SocialActivityInterpreterImpl(
+							socialActivityInterpreter);
+
+					SocialActivityInterpreterLocalServiceUtil.
+						addActivityInterpreter(socialActivityInterpreter);
 				}
 			}
 		}

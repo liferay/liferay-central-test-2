@@ -114,32 +114,6 @@ public class MembershipRequestLocalServiceUtil {
 		membershipRequestLocalService.setAccountPersistence(accountPersistence);
 	}
 
-	public static com.liferay.portal.service.persistence.ActivityTrackerPersistence getActivityTrackerPersistence() {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getActivityTrackerPersistence();
-	}
-
-	public static void setActivityTrackerPersistence(
-		com.liferay.portal.service.persistence.ActivityTrackerPersistence activityTrackerPersistence) {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.setActivityTrackerPersistence(activityTrackerPersistence);
-	}
-
-	public static com.liferay.portal.service.persistence.ActivityTrackerFinder getActivityTrackerFinder() {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		return membershipRequestLocalService.getActivityTrackerFinder();
-	}
-
-	public static void setActivityTrackerFinder(
-		com.liferay.portal.service.persistence.ActivityTrackerFinder activityTrackerFinder) {
-		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
-
-		membershipRequestLocalService.setActivityTrackerFinder(activityTrackerFinder);
-	}
-
 	public static com.liferay.portal.service.persistence.AddressPersistence getAddressPersistence() {
 		MembershipRequestLocalService membershipRequestLocalService = MembershipRequestLocalServiceFactory.getService();
 

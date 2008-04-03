@@ -30,61 +30,6 @@
 		<column name="type" type="String" />
 		<column name="size" type="String" />
 	</entity>
-	<entity name="ActivityTracker" local-service="true" remote-service="false">
-
-		<!-- PK fields -->
-
-		<column name="activityTrackerId" type="long" primary="true" />
-
-		<!-- Group instance -->
-
-		<column name="groupId" type="long" />
-
-		<!-- Audit fields -->
-
-		<column name="companyId" type="long" />
-		<column name="userId" type="long" />
-		<column name="userName" type="String" />
-		<column name="createDate" type="Date" />
-
-		<!-- Other fields -->
-
-		<column name="classNameId" type="long" />
-		<column name="classPK" type="long" />
-		<column name="activity" type="String" />
-		<column name="extraData" type="String" />
-		<column name="receiverUserId" type="long" />
-		<column name="receiverUserName" type="String" />
-
-		<!-- Order -->
-
-		<order by="desc">
-			<order-column name="createDate" />
-		</order>
-
-		<!-- Finder methods -->
-
-		<finder name="GroupId" return-type="Collection">
-			<finder-column name="groupId" />
-		</finder>
-		<finder name="CompanyId" return-type="Collection">
-			<finder-column name="companyId" />
-		</finder>
-		<finder name="UserId" return-type="Collection">
-			<finder-column name="userId" />
-		</finder>
-		<finder name="ReceiverUserId" return-type="Collection">
-			<finder-column name="receiverUserId" />
-		</finder>
-		<finder name="C_C" return-type="Collection">
-			<finder-column name="classNameId" />
-			<finder-column name="classPK" />
-		</finder>
-
-		<!-- References -->
-
-		<reference package-path="com.liferay.counter" entity="Counter" />
-	</entity>
 	<entity name="Address" local-service="true" remote-service="true" persistence-class="com.liferay.portal.service.persistence.AddressPersistenceImpl2">
 
 		<!-- PK fields -->

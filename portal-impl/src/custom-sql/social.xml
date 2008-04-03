@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByU_R">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				SocialActivity
+			WHERE
+				(SocialActivity.userId = ?) OR
+				(SocialActivity.receiverUserId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByU_R">
+		<![CDATA[
+			SELECT
+				{SocialActivity.*}
+			FROM
+				SocialActivity
+			WHERE
+				(SocialActivity.userId = ?) OR
+				(SocialActivity.receiverUserId = ?)
+			ORDER BY
+				SocialActivity.createDate DESC
+		]]>
+	</sql>
+</custom-sql>
