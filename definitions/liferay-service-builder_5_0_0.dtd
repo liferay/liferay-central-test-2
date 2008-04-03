@@ -85,7 +85,8 @@ used in conjunction with data-source. See data-source-spring-professional.xml
 The tx-manager value specifies the transaction manager that Spring uses. The
 default value is the Spring Hibernate transaction manager that wraps the Liferay
 data source and session factory. See data-source-spring-professional.xml (or
-data-source-spring-enterprise.xml).
+data-source-spring-enterprise.xml). Set this attribute to "none" to disable
+transaction management.
 -->
 <!ATTLIST entity
 	name CDATA #REQUIRED
