@@ -54,7 +54,8 @@ public class PortalUtil {
 	public static String getClassName(long classNameId) {
 		try {
 			Object returnObj = PortalClassInvoker.invoke(
-				_CLASS, _METHOD_GETCLASSNAME, Long.valueOf(classNameId), false);
+				_CLASS, _METHOD_GETCLASSNAME,
+				new LongWrapper(classNameId), false);
 
 			if (returnObj != null) {
 				return (String)returnObj;

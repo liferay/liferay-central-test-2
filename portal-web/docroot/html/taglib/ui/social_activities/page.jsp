@@ -27,6 +27,7 @@
 <%@ page import="com.liferay.portlet.social.model.SocialActivity" %>
 <%@ page import="com.liferay.portlet.social.model.SocialActivityFeedEntry" %>
 <%@ page import="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" %>
 
 <%
 String className = (String)request.getAttribute("liferay-ui:social-activities:className");
@@ -59,13 +60,15 @@ DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
 		<c:when test="<%= activities.size() > 0 %>">
 
 			<%
-			for (SocialActivity activity : activities) {
+			for (int i = 0; i < activities.size(); i++) {
+				SocialActivity activity = activities.get(i);
+
 				SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
 
 				if (activityFeedEntry != null) {
 					String cssClass = "portlet-section-body";
 
-					if (i % 2 == 0) {
+					if ((i % 2) == 0) {
 						cssClass = "portlet-section-alternate";
 					}
 			%>

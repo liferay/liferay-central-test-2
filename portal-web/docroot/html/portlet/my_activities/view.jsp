@@ -42,7 +42,7 @@ for (SocialActivity activity : activities) {
 				<%= activityFeedEntry.getTitle() %>
 			</td>
 			<td>
-				<%= timeFormatDate.format(activityTracker.getCreateDate()) %>
+				<%= timeFormatDate.format(activity.getCreateDate()) %>
 			</td>
 		</tr>
 		<tr>

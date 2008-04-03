@@ -27,6 +27,7 @@
 <%@ page import="com.liferay.portlet.social.model.SocialActivity" %>
 <%@ page import="com.liferay.portlet.social.model.SocialActivityFeedEntry" %>
 <%@ page import="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" %>
 
 <%
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
