@@ -413,7 +413,7 @@
 				</copy>
 
 				<copy todir="${app.server.dir}">
-					<fileset dir="tools/ext_tmpl/servers/jonas" />
+					<fileset dir="tools/servers/jonas" />
 				</copy>
 			</then>
 		</if>
@@ -528,7 +528,7 @@
 					</not>
 					<then>
 						<copy
-							file="tools/ext_tmpl/servers/tomcat/conf/Catalina/localhost/ROOT.xml"
+							file="tools/servers/tomcat/conf/Catalina/localhost/ROOT.xml"
 							tofile="${app.server.dir}/conf/Catalina/localhost/ROOT.xml"
 							overwrite="yes"
 						/>
@@ -536,13 +536,13 @@
 				</if>
 
 				<copy
-					file="tools/ext_tmpl/servers/tomcat/conf/catalina.properties.${app.server.version}"
+					file="tools/servers/tomcat/conf/catalina.properties.${app.server.version}"
 					tofile="${app.server.dir}/conf/catalina.properties"
 					overwrite="yes"
 				/>
 
 				<copy
-					file="tools/ext_tmpl/servers/tomcat/conf/jaas.config"
+					file="tools/servers/tomcat/conf/jaas.config"
 					tofile="${app.server.dir}/conf/jaas.config"
 				/>
 			</then>
@@ -744,7 +744,7 @@
 		<java
 			dir="${app.server.parent.dir}"
 			fork="true"
-			input="tools/ext_tmpl/servers/glassfish/input.txt"
+			input="tools/servers/glassfish/input.txt"
 			jar="${app.server.parent.dir}/glassfish-installer-v2ur1-b09d-${glassfish.os}.jar"
 			maxmemory="256m"
 		>
@@ -818,7 +818,7 @@
 				includes="lportal.properties,lportal.script"
 			/>
 			<zipfileset
-				dir="tools/ext_tmpl/servers/glassfish"
+				dir="tools/servers/glassfish"
 				includes="update-domain.xml"
 			/>
 			<zipfileset
@@ -947,7 +947,7 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 	<target name="build-dist-pramati">
 		<delete dir="${app.server.pramati.dir}" />
 
-		<copy file="tools/ext_tmpl/servers/pramati/silent_install.xml.template" tofile="silent_install.xml" overwrite="yes">
+		<copy file="tools/servers/pramati/silent_install.xml.template" tofile="silent_install.xml" overwrite="yes">
 			<filterset>
 				<filter token="install.path" value="${app.server.pramati.dir}" />
 				<filter token="java.home" value="${env.JAVA_HOME}" />
@@ -998,7 +998,7 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 		<delete dir="${app.server.pramati.dir}/server/lf" />
 
 		<copy todir="${app.server.pramati.dir}/server" overwrite="yes">
-			<fileset dir="tools/ext_tmpl/servers/pramati/server" />
+			<fileset dir="tools/servers/pramati/server" />
 		</copy>
 
 		<echo file="app.server.${user.name}.properties">app.server.type=pramati</echo>
@@ -1019,7 +1019,7 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 				<sleep seconds="300" />
 
 				<copy
-					file="tools/ext_tmpl/servers/pramati/stop.txt"
+					file="tools/servers/pramati/stop.txt"
 					todir="${app.server.pramati.bin.dir}"
 				/>
 
@@ -1037,7 +1037,7 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 		<delete dir="${app.server.pramati.dir}/server/lf" />
 
 		<copy
-			file="tools/ext_tmpl/servers/pramati/server/license.key"
+			file="tools/servers/pramati/server/license.key"
 			todir="${app.server.pramati.dir}/server"
 			overwrite="yes"
 		/>
@@ -1177,18 +1177,6 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<fileset dir="portal-web" includes="portal-web.war" />
 			<fileset dir="tunnel-web" includes="tunnel-web.war" />
 		</copy>
-
-		<mkdir dir="${lp.ext.dir}/servers/geronimo-jetty" />
-		<mkdir dir="${lp.ext.dir}/servers/geronimo-tomcat" />
-		<mkdir dir="${lp.ext.dir}/servers/jboss-jetty" />
-		<mkdir dir="${lp.ext.dir}/servers/jboss-tomcat" />
-		<mkdir dir="${lp.ext.dir}/servers/jetty" />
-		<mkdir dir="${lp.ext.dir}/servers/jonas-jetty" />
-		<mkdir dir="${lp.ext.dir}/servers/jonas-tomcat" />
-		<mkdir dir="${lp.ext.dir}/servers/oc4j" />
-		<mkdir dir="${lp.ext.dir}/servers/resin" />
-		<mkdir dir="${lp.ext.dir}/servers/tomcat" />
-		<mkdir dir="${lp.ext.dir}/servers/weblogic" />
 
 		<ant dir="sql" target="build-db" inheritAll="false" />
 		<ant dir="sql" target="rebuild-hypersonic" inheritAll="false" />
