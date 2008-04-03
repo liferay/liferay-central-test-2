@@ -11,7 +11,7 @@ This is the DTD for the Layout Templates parameters for Liferay Portal.
 <!ELEMENT standard (layout-template*)>
 
 <!ELEMENT layout-template (template-path, wap-template-path, thumbnail-path?,
-screenshot-path?, roles?)>
+roles?)>
 
 <!ATTLIST layout-template
 	id CDATA #REQUIRED
