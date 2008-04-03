@@ -31,9 +31,11 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 
 import java.util.Enumeration;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Properties;
+import java.util.Set;
 
 /**
  * <a href="ExtPropertiesLoader.java.html"><b><i>View Source</i></b></a>
@@ -76,11 +78,13 @@ public class ExtPropertiesLoader {
 	}
 
 	public String get(String key) {
-		if (_keys.contains(key)) {
-			System.out.println("### duplicate key " + key);
-		}
-		else {
-			_keys.add(key);
+		if (false) {
+			if (_keys.contains(key)) {
+				System.out.println("Duplicate key " + key);
+			}
+			else {
+				_keys.add(key);
+			}
 		}
 
 		return getComponentProperties().getString(key);
@@ -195,6 +199,6 @@ public class ExtPropertiesLoader {
 	private static final String _COMPANY_ID_SEPARATOR = "_COMPANY_ID_";
 
 	private ComponentConfiguration _conf;
-	private java.util.Set _keys = new java.util.HashSet();
+	private Set _keys = new HashSet();
 
 }
