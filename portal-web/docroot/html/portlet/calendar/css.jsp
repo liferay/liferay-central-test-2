@@ -64,9 +64,9 @@
 	background: url(<%= themeImagesPath %>/calendar/calendar_drop_shadow.png) repeat-y 0 0;
 	clear: none;
 	float: right;
+	margin-bottom: 0;
 	margin-left: -8px;
 	padding-left: 8px;
-	margin-bottom: 0;
 }
 
 .ie6 .portlet-calendar .taglib-calendar {
