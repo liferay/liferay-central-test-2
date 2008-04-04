@@ -1664,9 +1664,17 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<arg line="/c svn update" />
 		</exec>
 
+		<exec dir="${lp.plugins.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update" />
+		</exec>
+
 		<antcall target="clean" />
 		<antcall target="start" />
 		<antcall target="deploy" />
+
+		<delete dir="${lp.plugins.dir}/dist" />
+
+		<ant dir="${lp.plugins.dir}/themes/liferay-jedi-theme" target="war" inheritAll="false" />
 
 		<antcall target="java2html" />
 		<antcall target="dtddoc" />
@@ -1686,6 +1694,8 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<antcall target="build-dist-pramati" />
 		<antcall target="build-dist-resin" />
 		<antcall target="build-dist-tomcat" />
+
+		<delete dir="${lp.ext.dir}" />
 
 		<antcall target="build-ext" />
 
@@ -1710,5 +1720,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<ant dir="${lp.plugins.dir}" target="extract-plugins-sdk" inheritAll="false" />
 
 		<move file="${lp.plugins.dir}/dist/liferay-plugins-sdk-${lp.version}.zip" todir="dist" />
+
+		<ant dir="${lp.plugins.dir}" target="war" inheritAll="false" />
 	</target>
 </project>
