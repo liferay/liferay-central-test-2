@@ -31,6 +31,7 @@ int year = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:calend
 String headerPattern = (String)request.getAttribute("liferay-ui:calendar:headerPattern");
 DateFormat headerFormat = (DateFormat)request.getAttribute("liferay-ui:calendar:headerFormat");
 Set data = (Set)request.getAttribute("liferay-ui:calendar:data");
+boolean displayAllPotentialWeeks = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:calendar:displayAllPotentialWeeks"));
 
 Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
@@ -59,6 +60,7 @@ Calendar prevCal = (Calendar)selCal.clone();
 prevCal.add(Calendar.DATE, -1);
 
 int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
+int weekNumber = 1;
 %>
 
 <div class="taglib-calendar">
@@ -145,6 +147,7 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 
 		<%
 				dayOfWeek = 1;
+				weekNumber++;
 			}
 
 			Calendar tempCal = (Calendar)selCal.clone();
@@ -200,6 +203,27 @@ int maxDayOfPrevMonth = prevCal.getActualMaximum(Calendar.DATE);
 
 			<td class="<%= className %>"><%= dayOfNextMonth++ %></td>
 
+		<%
+		}
+
+		if (displayAllPotentialWeeks && weekNumber < 6) {
+			%>
+			<tr>
+			<%
+				for (int i = 1; i <= 7; i++) {
+					String className = "calendar-inactive calendar-next-month";
+					if (i == 1) {
+						className += " first";
+					}
+					else if (i == 7) {
+						className += " last";
+					}
+				%>
+					<td class="<%= className %>"><%= dayOfNextMonth++ %></td>
+				<%
+				}
+		%>
+			</tr>
 		<%
 		}
 		%>
