@@ -1368,20 +1368,14 @@ public class ServiceBuilder {
 	public boolean isCustomMethod(JavaMethod method) {
 		String methodName = method.getName();
 
-		if (methodName.equals("hasAdministrator") ||
-			methodName.equals("ejbCreate") ||
-			methodName.equals("ejbRemove") ||
-			methodName.equals("ejbActivate") ||
-			methodName.equals("ejbPassivate") ||
-			methodName.equals("getSessionContext") ||
-			methodName.equals("setSessionContext") ||
-			methodName.equals("hashCode") ||
-			methodName.equals("getClass") ||
-			methodName.equals("wait") ||
+		if (methodName.equals("afterPropertiesSet") ||
 			methodName.equals("equals") ||
-			methodName.equals("toString") ||
+			methodName.equals("getClass") ||
+			methodName.equals("hashCode") ||
 			methodName.equals("notify") ||
-			methodName.equals("notifyAll")) {
+			methodName.equals("notifyAll") ||
+			methodName.equals("toString") ||
+			methodName.equals("wait")) {
 
 			return false;
 		}
@@ -1395,6 +1389,18 @@ public class ServiceBuilder {
 		}
 		else if (methodName.equals("getUserId") &&
 				 method.getParameters().length == 0) {
+
+			return false;
+		}
+		else if ((methodName.endsWith("Finder")) &&
+				 (methodName.startsWith("get") ||
+				  methodName.startsWith("set"))) {
+
+			return false;
+		}
+		else if ((methodName.endsWith("Persistence")) &&
+				 (methodName.startsWith("get") ||
+				  methodName.startsWith("set"))) {
 
 			return false;
 		}
