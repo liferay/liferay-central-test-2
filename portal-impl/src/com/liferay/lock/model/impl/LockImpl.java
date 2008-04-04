@@ -34,8 +34,9 @@ import java.util.Date;
  */
 public class LockImpl implements Lock {
 
-	public LockImpl(String className, Comparable<?> pk, long companyId,
-					long userId, long expirationTime) {
+	public LockImpl(
+		String className, Comparable<?> pk, long companyId, long userId,
+		long expirationTime) {
 
 		_className = className;
 		_pk = pk;
@@ -71,18 +72,19 @@ public class LockImpl implements Lock {
 	}
 
 	public boolean isExpired() {
-        if (_expirationTime <= 0) {
-            return false;
-        } else {
-            Date now = new Date();
+		if (_expirationTime <= 0) {
+			return false;
+		}
+		else {
+			Date now = new Date();
 
-            if (now.getTime() > _date.getTime() + _expirationTime) {
-                return true;
-            }
-            else {
-                return false;
-            }
-        }
+			if (now.getTime() > (_date.getTime() + _expirationTime)) {
+				return true;
+			}
+			else {
+				return false;
+			}
+		}
     }
 
 	public Date getDate() {
