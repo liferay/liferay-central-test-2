@@ -34,6 +34,7 @@ import java.util.Locale;
 
 import javax.portlet.CacheControl;
 import javax.portlet.MimeResponse;
+import javax.portlet.PortletRequest;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -136,7 +137,9 @@ public abstract class MimeResponseImpl
 
 		boolean valid = false;
 
-		if (_req.getWindowState().equals(LiferayWindowState.EXCLUSIVE)) {
+		if (getLifecycle().equals(PortletRequest.RESOURCE_PHASE) ||
+			_req.getWindowState().equals(LiferayWindowState.EXCLUSIVE)) {
+
 			valid = true;
 		}
 		else {
