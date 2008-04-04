@@ -31,7 +31,7 @@ int year = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:calend
 String headerPattern = (String)request.getAttribute("liferay-ui:calendar:headerPattern");
 DateFormat headerFormat = (DateFormat)request.getAttribute("liferay-ui:calendar:headerFormat");
 Set data = (Set)request.getAttribute("liferay-ui:calendar:data");
-boolean displayAllPotentialWeeks = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:calendar:displayAllPotentialWeeks"));
+boolean showAllPotentialWeeks = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:calendar:showAllPotentialWeeks"));
 
 Calendar selCal = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
@@ -206,12 +206,15 @@ int weekNumber = 1;
 		<%
 		}
 
-		if (displayAllPotentialWeeks && weekNumber < 6) {
-			%>
+		if (showAllPotentialWeeks && weekNumber < 6) {
+		%>
+
 			<tr>
-			<%
+
+				<%
 				for (int i = 1; i <= 7; i++) {
 					String className = "calendar-inactive calendar-next-month";
+
 					if (i == 1) {
 						className += " first";
 					}
@@ -219,11 +222,15 @@ int weekNumber = 1;
 						className += " last";
 					}
 				%>
+
 					<td class="<%= className %>"><%= dayOfNextMonth++ %></td>
+
 				<%
 				}
-		%>
+				%>
+
 			</tr>
+
 		<%
 		}
 		%>

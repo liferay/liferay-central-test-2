@@ -91,7 +91,7 @@
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>
 		<attribute>
-			<name>displayAllPotentialWeeks</name>
+			<name>showAllPotentialWeeks</name>
 			<required>false</required>
 			<rtexprvalue>true</rtexprvalue>
 		</attribute>

@@ -132,7 +132,7 @@
 				year="<%= year %>"
 				headerPattern="MMMM"
 				data="<%= data %>"
-				displayAllPotentialWeeks="true"
+				showAllPotentialWeeks="<%= true %>"
 			/>
 		</liferay-ui:table-iterator>
 	</td>

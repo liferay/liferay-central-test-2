@@ -48,8 +48,8 @@ public class CalendarTag extends IncludeTag {
 		req.setAttribute("liferay-ui:calendar:headerFormat", _headerFormat);
 		req.setAttribute("liferay-ui:calendar:data", _data);
 		req.setAttribute(
-			"liferay-ui:calendar:displayAllPotentialWeeks",
-			String.valueOf(_displayAllPotentialWeeks));
+			"liferay-ui:calendar:showAllPotentialWeeks",
+			String.valueOf(_showAllPotentialWeeks));
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -78,8 +78,8 @@ public class CalendarTag extends IncludeTag {
 		_data = data;
 	}
 
-	public void setDisplayAllPotentialWeeks(boolean displayAllPotentialWeeks) {
-		_displayAllPotentialWeeks = displayAllPotentialWeeks;
+	public void setShowAllPotentialWeeks(boolean showAllPotentialWeeks) {
+		_showAllPotentialWeeks = showAllPotentialWeeks;
 	}
 
 	protected String getDefaultPage() {
@@ -94,6 +94,6 @@ public class CalendarTag extends IncludeTag {
 	private String _headerPattern;
 	private DateFormat _headerFormat;
 	private Set<Integer> _data;
-	private boolean _displayAllPotentialWeeks;
+	private boolean _showAllPotentialWeeks;
 
 }
