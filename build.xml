@@ -1656,6 +1656,10 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="dist">
+		<exec dir="${lp.source.dir}" executable="cmd.exe" os="${os.windows}">
+			<arg line="/c svn update" />
+		</exec>
+
 		<antcall target="clean" />
 		<antcall target="start" />
 		<antcall target="deploy" />
