@@ -193,10 +193,10 @@ int weekNumber = 1;
 		for (int i = 7; i >= dayOfWeek; i--) {
 			String className = "calendar-inactive calendar-next-month";
 
-			if (i == 1) {
+			if (dayOfWeek == 1) {
 				className += " first";
 			}
-			else if (i == 7) {
+			else if (i == dayOfWeek) {
 				className += " last";
 			}
 		%>

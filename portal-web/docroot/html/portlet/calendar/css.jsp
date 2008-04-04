@@ -55,13 +55,18 @@
 }
 
 .portlet-calendar .taglib-calendar {
-	background: url(<%= themeImagesPath %>/calendar/calendar_drop_shadow.png) repeat-y 0 0;
 	border-color: #999;
+	margin-bottom: 1.5em;
+	width: 190px;
+}
+
+.portlet-calendar .calendar-container .taglib-calendar {
+	background: url(<%= themeImagesPath %>/calendar/calendar_drop_shadow.png) repeat-y 0 0;
 	clear: none;
 	float: right;
 	margin-left: -8px;
 	padding-left: 8px;
-	width: 190px;
+	margin-bottom: 0;
 }
 
 .ie6 .portlet-calendar .taglib-calendar {
@@ -73,6 +78,9 @@
 }
 
 .portlet-calendar .taglib-calendar table {
+}
+
+.portlet-calendar .calendar-container .taglib-calendar table {
 	border: none;
 }
 
