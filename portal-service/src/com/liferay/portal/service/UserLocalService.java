@@ -564,11 +564,11 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long companyId, long userId, int type, int begin, int end)
+		long userId, int type, int begin, int end)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public int getSocialUsersCount(long companyId, long userId, int type)
+	public int getSocialUsersCount(long userId, int type)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

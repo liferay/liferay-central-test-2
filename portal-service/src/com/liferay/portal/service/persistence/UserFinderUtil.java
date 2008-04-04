@@ -97,17 +97,6 @@ public class UserFinderUtil {
 			params, andOperator, begin, end, obc);
 	}
 
-	public static int countSocialUsers(long companyId, long userId, int type)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countSocialUsers(companyId, userId, type);
-	}
-
-	public static java.util.List<com.liferay.portal.model.User> findSocialUsers(
-		long companyId, long userId, int type, int begin, int end)
-		throws com.liferay.portal.SystemException {
-		return getFinder().findSocialUsers(companyId, userId, type, begin, end);
-	}
-
 	public static UserFinder getFinder() {
 		return _getUtil()._finder;
 	}

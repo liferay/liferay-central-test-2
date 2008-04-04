@@ -958,53 +958,6 @@
 				Contact_.lastName ASC
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.countSocialUsers">
-		<![CDATA[
-			SELECT
-				COUNT(DISTINCT User_.userId) AS COUNT_VALUE
-			FROM
-				User_
-			INNER JOIN
-				SocialRelation ON
-					(SocialRelation.userId1 = User_.userId) OR
-					(SocialRelation.userId2 = User_.userId)
-			WHERE
-				(User_.companyId = ?) AND
-				(User_.userId != ?) AND
-				(
-					(SocialRelation.userId1 = ?) OR
-					(SocialRelation.userId2 = ?)
-				) AND
-				(SocialRelation.type_ = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.findSocialUsers">
-		<![CDATA[
-			SELECT
-				DISTINCT {User_.*}
-			FROM
-				User_
-			INNER JOIN
-				Contact_ ON
-					(Contact_.contactId = User_.contactId)
-			INNER JOIN
-				SocialRelation ON
-					(SocialRelation.userId1 = User_.userId) OR
-					(SocialRelation.userId2 = User_.userId)
-			WHERE
-				(User_.companyId = ?) AND
-				(User_.userId != ?) AND
-				(
-					(SocialRelation.userId1 = ?) OR
-					(SocialRelation.userId2 = ?)
-				) AND
-				(SocialRelation.type_ = ?)
-			ORDER BY
-				Contact_.firstName ASC,
-				Contact_.middleName ASC,
-				Contact_.lastName ASC
-		]]>
-	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByPermission">
 		<![CDATA[
 			INNER JOIN
@@ -1070,6 +1023,21 @@
 					(Users_UserGroups.userId = User_.userId)
 			WHERE
 				(Users_UserGroups.userGroupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelation">
+		<![CDATA[
+			INNER JOIN
+				SocialRelation ON
+					(SocialRelation.userId1 = User_.userId) OR
+					(SocialRelation.userId2 = User_.userId)
+			WHERE
+				(User_.userId != ?) AND
+				(
+					(SocialRelation.userId1 = ?) OR
+					(SocialRelation.userId2 = ?)
+				) AND
+				(SocialRelation.type_ = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserGroupFinder.countByC_N_D">

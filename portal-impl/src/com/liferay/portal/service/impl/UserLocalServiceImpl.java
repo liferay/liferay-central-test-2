@@ -974,18 +974,35 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return searchCount(role.getCompanyId(), null, active, params);
 	}
 
-	public List<User> getSocialUsers(
-			long companyId, long userId, int type, int begin, int end)
+	public List<User> getSocialUsers(long userId, int type, int begin, int end)
 		throws PortalException, SystemException {
 
-		return userFinder.findSocialUsers(companyId, userId, type, begin, end);
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put(
+			"socialRelation",
+			new Long[] {userId, userId, userId, new Long(type)});
+
+		return search(
+			user.getCompanyId(), null, null, params, begin, end, null);
 	}
 
-	public int getSocialUsersCount(
-			long companyId, long userId, int type)
+	public int getSocialUsersCount(long userId, int type)
 		throws PortalException, SystemException {
 
-		return userFinder.countSocialUsers(companyId, userId, type);
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put(
+			"socialRelation",
+			new Long[] {userId, userId, userId, new Long(type)});
+
+		return searchCount(user.getCompanyId(), null, null, params);
 	}
 
 	public List<User> getUserGroupUsers(long userGroupId)

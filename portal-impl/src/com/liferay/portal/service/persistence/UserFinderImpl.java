@@ -56,14 +56,8 @@ public class UserFinderImpl implements UserFinder {
 	public static String COUNT_BY_C_FN_MN_LN_SN_EA_A =
 		UserFinder.class.getName() + ".countByC_FN_MN_LN_SN_EA_A";
 
-	public static String COUNT_SOCIALUSERS =
-		UserFinder.class.getName() + ".countSocialUsers";
-
 	public static String FIND_BY_C_FN_MN_LN_SN_EA_A =
 		UserFinder.class.getName() + ".findByC_FN_MN_LN_SN_EA_A";
-
-	public static String FIND_SOCIALUSERS =
-		UserFinder.class.getName() + ".findSocialUsers";
 
 	public static String JOIN_BY_PERMISSION =
 		UserFinder.class.getName() + ".joinByPermission";
@@ -85,6 +79,9 @@ public class UserFinderImpl implements UserFinder {
 
 	public static String JOIN_BY_USERS_USER_GROUPS =
 		UserFinder.class.getName() + ".joinByUsersUserGroups";
+
+	public static String JOIN_BY_SOCIAL_RELATION =
+		UserFinder.class.getName() + ".joinBySocialRelation";
 
 	public int countByKeywords(
 			long companyId, String keywords, Boolean active,
@@ -328,83 +325,6 @@ public class UserFinderImpl implements UserFinder {
 		}
 	}
 
-	public int countSocialUsers(
-			long companyId, long userId, int type)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(COUNT_SOCIALUSERS);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("User_", UserImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-			qPos.add(userId);
-			qPos.add(userId);
-			qPos.add(userId);
-			qPos.add(type);
-
-			Iterator<Long> itr = q.list().iterator();
-
-			if (itr.hasNext()) {
-				Long count = itr.next();
-
-				if (count != null) {
-					return count.intValue();
-				}
-			}
-
-			return 0;
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
-	public List<User> findSocialUsers(
-			long companyId, long userId, int type, int begin, int end)
-		throws SystemException {
-
-		Session session = null;
-
-		try {
-			session = HibernateUtil.openSession();
-
-			String sql = CustomSQLUtil.get(FIND_SOCIALUSERS);
-
-			SQLQuery q = session.createSQLQuery(sql);
-
-			q.addEntity("User_", UserImpl.class);
-
-			QueryPos qPos = QueryPos.getInstance(q);
-
-			qPos.add(companyId);
-			qPos.add(userId);
-			qPos.add(userId);
-			qPos.add(userId);
-			qPos.add(type);
-
-			return (List<User>)QueryUtil.list(
-				q, HibernateUtil.getDialect(), begin, end);
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
-		}
-		finally {
-			HibernateUtil.closeSession(session);
-		}
-	}
-
 	protected String getJoin(LinkedHashMap<String, Object> params) {
 		if (params == null) {
 			return StringPool.BLANK;
@@ -451,6 +371,9 @@ public class UserFinderImpl implements UserFinder {
 		}
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
+		}
+		else if (key.equals("socialRelation")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);
 		}
 
 		if (Validator.isNotNull(join)) {
@@ -530,6 +453,9 @@ public class UserFinderImpl implements UserFinder {
 		}
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
+		}
+		else if (key.equals("socialRelation")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);
 		}
 
 		if (Validator.isNotNull(join)) {

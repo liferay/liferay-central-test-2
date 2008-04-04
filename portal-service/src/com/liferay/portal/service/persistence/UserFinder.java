@@ -70,11 +70,4 @@ public interface UserFinder {
 		java.util.LinkedHashMap<String, Object> params, boolean andOperator,
 		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
-
-	public int countSocialUsers(long companyId, long userId, int type)
-		throws com.liferay.portal.SystemException;
-
-	public java.util.List<com.liferay.portal.model.User> findSocialUsers(
-		long companyId, long userId, int type, int begin, int end)
-		throws com.liferay.portal.SystemException;
 }
