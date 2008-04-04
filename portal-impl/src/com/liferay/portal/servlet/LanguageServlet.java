@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -106,12 +107,10 @@ public class LanguageServlet extends HttpServlet {
 			}
 		}
 
-		res.setContentType(_CONTENT_TYPE);
+		res.setContentType(ContentTypes.TEXT_PLAIN_UTF8);
 
-		ServletResponseUtil.write(res, value.getBytes("UTF-8"));
+		ServletResponseUtil.write(res, value.getBytes(StringPool.UTF8));
 	}
-
-	private static final String _CONTENT_TYPE = "text/plain; charset=UTF-8";
 
 	private static Log _log = LogFactory.getLog(LanguageServlet.class);
 

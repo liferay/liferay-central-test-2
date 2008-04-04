@@ -1473,7 +1473,7 @@ public class ServiceBuilder {
 			if (parameterTypeName.equals(
 					"com.liferay.portal.theme.ThemeDisplay") ||
 				parameterTypeName.equals(
-					"com.liferay.portlet.PortletPreferencesImpl")) ||
+					"com.liferay.portlet.PortletPreferencesImpl") ||
 				parameterTypeName.startsWith("java.io") ||
 				//parameterTypeName.startsWith("java.util.List") ||
 				//parameterTypeName.startsWith("java.util.Locale") ||
