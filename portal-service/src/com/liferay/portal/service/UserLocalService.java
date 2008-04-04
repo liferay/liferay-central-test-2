@@ -563,6 +563,15 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
+		long companyId, long userId, int type, int begin, int end)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public int getSocialUsersCount(long companyId, long userId, int type)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List<com.liferay.portal.model.User> getUserGroupUsers(
 		long userGroupId)
 		throws com.liferay.portal.SystemException,

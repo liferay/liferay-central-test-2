@@ -974,6 +974,20 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return searchCount(role.getCompanyId(), null, active, params);
 	}
 
+	public List<User> getSocialUsers(
+			long companyId, long userId, int type, int begin, int end)
+		throws PortalException, SystemException {
+
+		return userFinder.findSocialUsers(companyId, userId, type, begin, end);
+	}
+
+	public int getSocialUsersCount(
+			long companyId, long userId, int type)
+		throws PortalException, SystemException {
+
+		return userFinder.countSocialUsers(companyId, userId, type);
+	}
+
 	public List<User> getUserGroupUsers(long userGroupId)
 		throws PortalException, SystemException {
 

@@ -1258,6 +1258,24 @@ public class UserLocalServiceUtil {
 		return userLocalService.getRoleUsersCount(roleId, active);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
+		long companyId, long userId, int type, int begin, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getSocialUsers(companyId, userId, type, begin,
+			end);
+	}
+
+	public static int getSocialUsersCount(long companyId, long userId, int type)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getSocialUsersCount(companyId, userId, type);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> getUserGroupUsers(
 		long userGroupId)
 		throws com.liferay.portal.PortalException,
