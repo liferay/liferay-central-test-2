@@ -14,7 +14,6 @@
 			<fileset dir="src" />
 		</jar>
 
-		<copy file="portal-client.jar" todir="${project.dir}/jbpm-web/docroot/WEB-INF/lib" />
 		<copy file="portal-client.jar" todir="${project.dir}/lib/portal" />
 	</target>
 

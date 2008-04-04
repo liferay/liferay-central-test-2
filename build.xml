@@ -1695,22 +1695,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<antcall target="zip-src" />
 		<antcall target="zip-tomcat" />
 
-		<ant dir="jbpm-web" target="war" inheritAll="false" />
-		<ant dir="mule-web" target="war" inheritAll="false" />
-		<ant dir="servicemix-web" target="war" inheritAll="false" />
-
-		<copy file="cas-web/cas-web.war" tofile="dist/liferay-portal-cas-web-${lp.version.file.name}.war" />
-		<copy file="jbpm-web/jbpm-web.war" tofile="dist/liferay-portal-jbpm-web-${lp.version.file.name}.war" />
-		<copy file="mule-web/mule-web.war" tofile="dist/liferay-portal-mule-web-${lp.version.file.name}.war" />
-		<copy file="servicemix-web/servicemix-web.war" tofile="dist/liferay-portal-servicemix-web-${lp.version.file.name}.war" />
 		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version.file.name}.war" />
-
-		<delete includeemptydirs="true" failonerror="false">
-			<fileset
-				dir="${app.server.tomcat.deploy.dir}"
-				includes="jbpm-web/**,mule-web/**,servicemix-web/**"
-			/>
-		</delete>
 
 		<antcall target="build-dist-sql-oracle-10" />
 
