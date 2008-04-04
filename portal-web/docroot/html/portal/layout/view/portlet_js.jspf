@@ -84,6 +84,12 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 
 		portletBoundary = portletBound;
 
+		var jContainer = jQuery(container);
+
+		if (jContainer.is('.empty')) {
+			jContainer.removeClass('empty');
+		}
+
 		return portletId;
 	};
 
@@ -136,6 +142,13 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 		}
 
 		Liferay.Portlet.remove(portletId);
+
+		var jContainer = jQuery(parent);
+		var portletsLeft = jContainer.find('.portlet-boundary').length;
+
+		if (!portletsLeft) {
+			jContainer.addClass('empty');
+		}
 
 		Liferay.Publisher.register('closePortlet');
 		Liferay.Publisher.deliver('closePortlet', {plid: plid, portletId: portletId});
