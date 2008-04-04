@@ -27,14 +27,7 @@
 <%
 List rootLayouts = null;
 
-if (rootPlid > 0) {
-	Layout rootLayout = LayoutLocalServiceUtil.getLayout(rootPlid);
-
-	rootLayouts = rootLayout.getChildren();
-}
-else {
-	rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout(), LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
-}
+rootLayouts = LayoutLocalServiceUtil.getLayouts(layout.getGroupId(), layout.isPrivateLayout(), rootLayoutId);
 
 StringMaker sm = new StringMaker();
 

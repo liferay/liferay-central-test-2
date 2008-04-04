@@ -54,7 +54,8 @@ public class LayoutLister {
 		_list = new ArrayList<String>();
 
 		_list.add(
-			"1|0|0|" + LayoutImpl.DEFAULT_PLID + "|" + rootNodeName + "|0");
+			"1|0|0|" + LayoutImpl.DEFAULT_PLID + "|" + rootNodeName + "|0|" +
+				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
 		_createList(LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, _nodeId, 0);
 
@@ -98,6 +99,8 @@ public class LayoutLister {
 			sm.append("11");
 			sm.append("|");
 			sm.append(depth);
+			sm.append("|");
+			sm.append(layout.getLayoutId());
 
 			_list.add(sm.toString());
 

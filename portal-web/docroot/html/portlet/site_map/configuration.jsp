@@ -42,18 +42,25 @@ List layoutList = layoutView.getList();
 		<liferay-ui:message key="root-layout" />
 	</td>
 	<td>
-		<select name="<portlet:namespace />rootPlid">
+		<select name="<portlet:namespace />rootLayoutId">
 
 			<%
 			for (int i = 0; i < layoutList.size(); i++) {
 
-				// id | parentId | ls | obj id | name | img | depth
+				// id | parentId | ls | obj id | name | img | depth | layoutId
 
 				String layoutDesc = (String)layoutList.get(i);
 
 				String[] nodeValues = StringUtil.split(layoutDesc, "|");
 
-				long objId = GetterUtil.getLong(nodeValues[3]);
+				long layoutId = 0;
+
+				if (i != 0) {
+					layoutId = GetterUtil.getLong(nodeValues[7]);
+				}
+				else {
+					layoutId = GetterUtil.getLong(nodeValues[6]);
+				}
 				String layoutName = nodeValues[4];
 
 				int depth = 0;
@@ -67,7 +74,7 @@ List layoutList = layoutView.getList();
 				}
 			%>
 
-				<option <%= (rootPlid == objId) ? "selected" : "" %> value="<%= objId %>"><%= layoutName %></option>
+				<option <%= (rootLayoutId == layoutId) ? "selected" : "" %> value="<%= layoutId %>"><%= layoutName %></option>
 
 			<%
 			}

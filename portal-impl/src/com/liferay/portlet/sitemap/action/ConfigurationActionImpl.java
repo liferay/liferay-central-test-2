@@ -53,7 +53,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			return;
 		}
 
-		long rootPlid = ParamUtil.getLong(req, "rootPlid");
+		long rootLayoutId = ParamUtil.getLong(req, "rootLayoutId");
+
 		String displayDepth = ParamUtil.getString(req, "displayDepth");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
@@ -61,7 +62,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		PortletPreferences prefs =
 			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
 
-		prefs.setValue("root-plid", String.valueOf(rootPlid));
+		prefs.setValue("root-layout-id", String.valueOf(rootLayoutId));
 		prefs.setValue("display-depth", displayDepth);
 
 		prefs.store();

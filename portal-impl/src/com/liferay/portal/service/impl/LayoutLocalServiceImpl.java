@@ -454,7 +454,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			Element layoutEl = root.addElement("layout");
 
-			layoutEl.addAttribute("plid", String.valueOf(layout.getPlid()));
 			layoutEl.addAttribute(
 				"layout-id", String.valueOf(layout.getLayoutId()));
 			layoutEl.addElement("parent-layout-id").addText(
@@ -1100,8 +1099,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			Element layoutEl = itr.next();
 
-			long oldPlid = GetterUtil.getInteger(
-				layoutEl.attributeValue("plid"));
 			long layoutId = GetterUtil.getInteger(
 				layoutEl.attributeValue("layout-id"));
 			long parentLayoutId = GetterUtil.getInteger(
@@ -1180,11 +1177,6 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			context.setPlid(layout.getPlid());
 
 			newLayoutIds.add(layoutId);
-
-			Map<Long, Long> plids = context.getNewPrimaryKeysMap(
-				Layout.class);
-
-			plids.put(oldPlid, layout.getPlid());
 
 			Element permissionsEl = layoutEl.element("permissions");
 

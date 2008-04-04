@@ -26,11 +26,7 @@ import com.liferay.portal.kernel.lar.PortletDataContext;
 import com.liferay.portal.kernel.lar.PortletDataException;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Layout;
-import com.liferay.util.MapUtil;
 
 import javax.portlet.PortletPreferences;
 
@@ -84,22 +80,7 @@ public class SitemapPortletDataHandlerImpl implements PortletDataHandler {
 			PortletPreferences prefs, String data)
 		throws PortletDataException {
 
-		try {
-			long rootPlid = GetterUtil.getLong(
-				prefs.getValue("root-plid", StringPool.BLANK));
-
-			if (Validator.isNotNull(rootPlid)) {
-				long newRootPlid = MapUtil.getLong(
-					context.getNewPrimaryKeysMap(Layout.class), rootPlid);
-
-				prefs.setValue("root-plid", String.valueOf(newRootPlid));
-			}
-
-			return prefs;
-		}
-		catch (Exception e) {
-			throw new PortletDataException(e);
-		}
+		return prefs;
 	}
 
 	public boolean isPublishToLiveByDefault() {
