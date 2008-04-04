@@ -60,7 +60,7 @@
 		<reference package-path="com.liferay.portal" entity="User" />
 	</entity>
 	<entity name="SocialActivityInterpreter" local-service="true" remote-service="false" tx-manager="none" />
-	<entity name="SocialRelation" uuid="true" local-service="true" remote-service="true">
+	<entity name="SocialRelation" uuid="true" local-service="true" remote-service="false">
 
 		<!-- PK fields -->
 

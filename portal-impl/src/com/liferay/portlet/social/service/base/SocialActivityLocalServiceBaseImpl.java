@@ -45,8 +45,6 @@ import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceF
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialRelationLocalService;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceFactory;
-import com.liferay.portlet.social.service.SocialRelationService;
-import com.liferay.portlet.social.service.SocialRelationServiceFactory;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
@@ -140,15 +138,6 @@ public abstract class SocialActivityLocalServiceBaseImpl
 		this.socialRelationLocalService = socialRelationLocalService;
 	}
 
-	public SocialRelationService getSocialRelationService() {
-		return socialRelationService;
-	}
-
-	public void setSocialRelationService(
-		SocialRelationService socialRelationService) {
-		this.socialRelationService = socialRelationService;
-	}
-
 	public SocialRelationPersistence getSocialRelationPersistence() {
 		return socialRelationPersistence;
 	}
@@ -232,10 +221,6 @@ public abstract class SocialActivityLocalServiceBaseImpl
 			socialRelationLocalService = SocialRelationLocalServiceFactory.getImpl();
 		}
 
-		if (socialRelationService == null) {
-			socialRelationService = SocialRelationServiceFactory.getImpl();
-		}
-
 		if (socialRelationPersistence == null) {
 			socialRelationPersistence = SocialRelationUtil.getPersistence();
 		}
@@ -273,7 +258,6 @@ public abstract class SocialActivityLocalServiceBaseImpl
 	protected SocialActivityFinder socialActivityFinder;
 	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
 	protected SocialRelationLocalService socialRelationLocalService;
-	protected SocialRelationService socialRelationService;
 	protected SocialRelationPersistence socialRelationPersistence;
 	protected SocialRelationFinder socialRelationFinder;
 	protected CounterLocalService counterLocalService;
