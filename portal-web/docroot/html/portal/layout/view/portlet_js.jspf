@@ -144,6 +144,7 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 		Liferay.Portlet.remove(portletId);
 
 		var jContainer = jQuery(parent);
+
 		var portletsLeft = jContainer.find('.portlet-boundary').length;
 
 		if (!portletsLeft) {
