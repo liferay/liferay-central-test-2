@@ -301,13 +301,15 @@ public class PortletURLImpl
 
 	public void setCacheability(String cacheability) {
 		if (cacheability == null) {
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException("Cacheability is null");
 		}
 
 		if (!cacheability.equals(FULL) && !cacheability.equals(PORTLET) &&
 			!cacheability.equals(PAGE)) {
 
-			throw new IllegalArgumentException();
+			throw new IllegalArgumentException(
+				"Cacheability " + cacheability + " is not " + FULL + ", " +
+					PORTLET + ", or " + PAGE);
 		}
 
 		if (_portletReq instanceof ResourceRequest) {
