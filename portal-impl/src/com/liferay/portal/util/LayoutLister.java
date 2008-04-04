@@ -98,8 +98,6 @@ public class LayoutLister {
 			sm.append("11");
 			sm.append("|");
 			sm.append(depth);
-			sm.append("|");
-			sm.append(layout.getLayoutId());
 
 			_list.add(sm.toString());
 
