@@ -28,9 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.LayoutTemplateImpl;
 import com.liferay.portal.model.impl.PluginSettingImpl;
-import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.base.PluginSettingLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -76,11 +74,11 @@ public class PluginSettingLocalServiceImpl
 		if (pluginSetting == null) {
 			Plugin plugin = null;
 
-			if (pluginType.equals(LayoutTemplateImpl.PLUGIN_TYPE)) {
+			if (pluginType.equals(Plugin.TYPE_LAYOUT_TEMPLATE)) {
 				plugin = LayoutTemplateLocalUtil.getLayoutTemplate(
 					pluginId, false, null);
 			}
-			else if (pluginType.equals(ThemeImpl.PLUGIN_TYPE)) {
+			else if (pluginType.equals(Plugin.TYPE_THEME)) {
 				boolean wapTheme = true;
 
 				plugin = ThemeLocalUtil.getTheme(companyId, pluginId, wapTheme);

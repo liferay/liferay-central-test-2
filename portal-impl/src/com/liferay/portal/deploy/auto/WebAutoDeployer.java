@@ -25,7 +25,7 @@ package com.liferay.portal.deploy.auto;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.tools.LayoutTemplateDeployer;
+import com.liferay.portal.tools.BaseDeployer;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -37,16 +37,14 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="LayoutTemplateAutoDeployer.java.html"><b><i>View Source</i></b></a>
+ * <a href="WebAutoDeployer.java.html"><b><i>View Source</i></b></a>
  *
- * @author Ivica Cardic
- * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
-public class LayoutTemplateAutoDeployer
-	extends LayoutTemplateDeployer implements AutoDeployer {
+public class WebAutoDeployer extends BaseDeployer implements AutoDeployer {
 
-	public LayoutTemplateAutoDeployer() {
+	public WebAutoDeployer() {
 		try {
 			baseDir = PrefsPropsUtil.getString(
 				PropsUtil.AUTO_DEPLOY_DEPLOY_DIR,
@@ -59,9 +57,9 @@ public class LayoutTemplateAutoDeployer
 			jbossPrefix = PrefsPropsUtil.getString(
 				PropsUtil.AUTO_DEPLOY_JBOSS_PREFIX,
 				PropsValues.AUTO_DEPLOY_JBOSS_PREFIX);
-			unpackWar = PrefsPropsUtil.getBoolean(
-				PropsUtil.AUTO_DEPLOY_UNPACK_WAR,
-				PropsValues.AUTO_DEPLOY_UNPACK_WAR);
+			tomcatLibDir = PrefsPropsUtil.getString(
+				PropsUtil.AUTO_DEPLOY_TOMCAT_LIB_DIR,
+				PropsValues.AUTO_DEPLOY_TOMCAT_LIB_DIR);
 
 			List<String> jars = new ArrayList<String>();
 
@@ -89,7 +87,6 @@ public class LayoutTemplateAutoDeployer
 		}
 	}
 
-	private static Log _log =
-		LogFactory.getLog(LayoutTemplateAutoDeployer.class);
+	private static Log _log = LogFactory.getLog(WebAutoDeployer.class);
 
 }

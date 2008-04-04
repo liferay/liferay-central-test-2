@@ -109,10 +109,17 @@ int screenshotsCount = ParamUtil.getInteger(request, "screenshotsCount", product
 	</td>
 	<td>
 		<select name="<portlet:namespace/>type">
-			<option <%= type.equals(PortletImpl.PLUGIN_TYPE) ? "selected" : "" %> value="<%= PortletImpl.PLUGIN_TYPE %>"><liferay-ui:message key="<%= PortletImpl.PLUGIN_TYPE %>" /></option>
-			<option <%= type.equals(ThemeImpl.PLUGIN_TYPE) ? "selected" : "" %> value="<%= ThemeImpl.PLUGIN_TYPE %>"><liferay-ui:message key="<%= ThemeImpl.PLUGIN_TYPE %>" /></option>
-			<option <%= type.equals(LayoutTemplateImpl.PLUGIN_TYPE) ? "selected" : "" %> value="<%= LayoutTemplateImpl.PLUGIN_TYPE %>"><liferay-ui:message key="<%= LayoutTemplateImpl.PLUGIN_TYPE %>" /></option>
-			<%--<option <%= type.equals("extension") ? "selected" : "" %> value="extension"><liferay-ui:message key="extension" /></option>--%>
+
+			<%
+			for (String supportedType : PluginPackageUtil.getSupportedTypes()) {
+			%>
+
+				<option <%= type.equals(supportedType) ? "selected" : "" %> value="<%= supportedType %>"><liferay-ui:message key='<%= supportedType + "-plugin" %>' /></option>
+
+			<%
+			}
+			%>
+
 		</select>
 	</td>
 </tr>

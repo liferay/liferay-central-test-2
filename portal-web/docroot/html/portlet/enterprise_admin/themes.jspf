@@ -53,7 +53,7 @@ for (int i = 0; i < results.size(); i++) {
 	Theme theme2 = (Theme)results.get(i);
 
 	PluginPackage pluginPackage = theme2.getPluginPackage();
-	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), theme2.getThemeId(), ThemeImpl.PLUGIN_TYPE);
+	PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(company.getCompanyId(), theme2.getThemeId(), Plugin.TYPE_THEME);
 
 	ResultRow row = new ResultRow(theme2, theme2.getThemeId(), i);
 
@@ -69,7 +69,7 @@ for (int i = 0; i < results.size(); i++) {
 	}
 
 	rowURL.setParameter("pluginId", theme2.getThemeId());
-	rowURL.setParameter("pluginType", ThemeImpl.PLUGIN_TYPE);
+	rowURL.setParameter("pluginType", Plugin.TYPE_THEME);
 
 	// Name and thumbnail
 

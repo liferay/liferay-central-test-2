@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Plugin;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -371,7 +372,7 @@ public class PortletDeployer extends BaseDeployer {
 		String pluginTypeName = TextFormatter.format(
 			pluginType, TextFormatter.J);
 
-		if (!pluginType.equals("portlet")) {
+		if (!pluginType.equals(Plugin.TYPE_PORTLET)) {
 			return;
 		}
 

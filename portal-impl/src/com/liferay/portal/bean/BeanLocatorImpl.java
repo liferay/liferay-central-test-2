@@ -25,8 +25,8 @@ package com.liferay.portal.bean;
 import com.liferay.portal.kernel.bean.BeanLocator;
 import com.liferay.portal.kernel.bean.BeanLocatorException;
 import com.liferay.portal.spring.util.SpringUtil;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -78,6 +78,6 @@ public class BeanLocatorImpl implements BeanLocator {
 
 	private static Log _log = LogFactory.getLog(BeanLocatorImpl.class);
 
-	private Set<Object> _beans = CollectionFactory.getHashSet();
+	private Set<Object> _beans = new HashSet<Object>();
 
 }

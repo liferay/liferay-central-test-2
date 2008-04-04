@@ -1,8 +1,8 @@
 package ${beanLocatorUtilPackage};
 
 import ${springUtilPackage}.SpringUtil;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -34,6 +34,6 @@ public class BeanLocatorUtil {
 
 	private static Log _log = LogFactory.getLog(BeanLocatorUtil.class);
 
-	private static Set _beans = CollectionFactory.getHashSet();
+	private Set<Object> _beans = new HashSet<Object>();
 
 }

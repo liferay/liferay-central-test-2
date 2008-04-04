@@ -115,6 +115,17 @@ public abstract class BaseAutoDeployListener implements AutoDeployListener {
 		return false;
 	}
 
+	public boolean isWebPlugin(File file) throws AutoDeployException {
+		if ((isMatchingFile(
+				file, "WEB-INF/liferay-plugin-package.properties")) &&
+			(file.getName().indexOf("-web") != -1)) {
+
+			return true;
+		}
+
+		return false;
+	}
+
 	private static Log _log = LogFactory.getLog(BaseAutoDeployListener.class);
 
 }

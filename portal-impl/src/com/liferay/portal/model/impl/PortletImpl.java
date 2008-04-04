@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -77,11 +78,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class PortletImpl extends PortletModelImpl implements Portlet {
-
-	/**
-	 * Plugin type
-	 */
-	public static final String PLUGIN_TYPE = "portlet";
 
 	/**
 	 * War file separator.
@@ -326,7 +322,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return 		the plugin type of the portlet
 	 */
 	public String getPluginType() {
-		return PLUGIN_TYPE;
+		return Plugin.TYPE_PORTLET;
 	}
 
 	/**

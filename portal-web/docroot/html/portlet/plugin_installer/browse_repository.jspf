@@ -31,8 +31,7 @@ String installStatus = ParamUtil.getString(request, "installStatus", PluginPacka
 %>
 
 <liferay-ui:tabs
-	names="portlet-plugins,theme-plugins,layout-template-plugins"
-	tabsValues="portlets,themes,layout-templates"
+	names="portlet-plugins,theme-plugins,layout-template-plugins,web-plugins"
 	param="tabs2"
 	url="<%= portletURLString %>"
 />

@@ -25,7 +25,7 @@ package com.liferay.portal.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.LayoutSet;
-import com.liferay.portal.model.impl.ThemeImpl;
+import com.liferay.portal.model.Plugin;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.service.base.LayoutSetServiceBaseImpl;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
@@ -59,7 +59,7 @@ public class LayoutSetServiceImpl extends LayoutSetServiceBaseImpl {
 			getPermissionChecker(), groupId, ActionKeys.MANAGE_LAYOUTS);
 
 		pluginSettingLocalService.checkPermission(
-			getUserId(), themeId, ThemeImpl.PLUGIN_TYPE);
+			getUserId(), themeId, Plugin.TYPE_THEME);
 
 		return layoutSetLocalService.updateLookAndFeel(
 			groupId, privateLayout, themeId, colorSchemeId, css, wapTheme);

@@ -41,7 +41,7 @@
 		String tabs2 = ParamUtil.getString(request, "tabs2");
 
 		if (Validator.isNull(tabs2)) {
-			tabs2 = "portlets";
+			tabs2 = "portlet-plugins";
 		}
 
 		String redirect = ParamUtil.getString(request, "redirect");
@@ -49,14 +49,17 @@
 
 		String pluginType = null;
 
-		if (tabs2.equals("themes")) {
-			pluginType = ThemeImpl.PLUGIN_TYPE;
+		if (tabs2.equals("portlet-plugins")) {
+			pluginType = Plugin.TYPE_PORTLET;
 		}
-		else if (tabs2.equals("layout-templates")) {
-			pluginType = LayoutTemplateImpl.PLUGIN_TYPE;
+		else if (tabs2.equals("theme-plugins")) {
+			pluginType = Plugin.TYPE_THEME;
 		}
-		else if (tabs2.equals("portlets")) {
-			pluginType = PortletImpl.PLUGIN_TYPE;
+		else if (tabs2.equals("layout-template-plugins")) {
+			pluginType = Plugin.TYPE_LAYOUT_TEMPLATE;
+		}
+		else if (tabs2.equals("web-plugins")) {
+			pluginType = Plugin.TYPE_WEB;
 		}
 
 		String moduleId = ParamUtil.getString(request, "moduleId");

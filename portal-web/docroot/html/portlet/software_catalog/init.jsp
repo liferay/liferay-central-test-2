@@ -27,6 +27,7 @@
 <%@ page import="com.liferay.portal.kernel.search.Document" %>
 <%@ page import="com.liferay.portal.kernel.search.DocumentComparator" %>
 <%@ page import="com.liferay.portal.kernel.search.Hits" %>
+<%@ page import="com.liferay.portal.plugin.PluginPackageUtil" %>
 <%@ page import="com.liferay.portal.service.permission.PortalPermissionUtil" %>
 <%@ page import="com.liferay.portlet.imagegallery.ImageSizeException" %>
 <%@ page import="com.liferay.portlet.softwarecatalog.action.ActionUtil" %>

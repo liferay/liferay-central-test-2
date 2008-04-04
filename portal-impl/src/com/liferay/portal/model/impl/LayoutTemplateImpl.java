@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTemplate;
+import com.liferay.portal.model.Plugin;
 import com.liferay.portal.util.PortalUtil;
 
 import java.io.IOException;
@@ -48,8 +49,6 @@ import org.apache.commons.logging.LogFactory;
 public class LayoutTemplateImpl
 	 extends PluginBaseImpl implements LayoutTemplate {
 
-	public static final String PLUGIN_TYPE = "layout-template";
-
 	public LayoutTemplateImpl() {
 	}
 
@@ -71,7 +70,7 @@ public class LayoutTemplateImpl
 	}
 
 	public String getPluginType() {
-		return PLUGIN_TYPE;
+		return Plugin.TYPE_LAYOUT_TEMPLATE;
 	}
 
 	public boolean getStandard() {

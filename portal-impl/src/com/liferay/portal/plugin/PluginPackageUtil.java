@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PortalUtil;
@@ -862,12 +863,18 @@ public class PluginPackageUtil {
 
 		int pos = displayName.indexOf("-portlet");
 
-		String pluginType = "portlet";
+		String pluginType = Plugin.TYPE_PORTLET;
 
 		if (pos == -1) {
 			pos = displayName.indexOf("-theme");
 
-			pluginType = "theme";
+			pluginType = Plugin.TYPE_THEME;
+		}
+
+		if (pos == -1) {
+			pos = displayName.indexOf("-web");
+
+			pluginType = Plugin.TYPE_WEB;
 		}
 
 		if (pos == -1) {

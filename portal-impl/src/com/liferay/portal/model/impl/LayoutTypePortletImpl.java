@@ -35,6 +35,7 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
@@ -142,7 +143,7 @@ public class LayoutTypePortletImpl
 
 		if (checkPermission &&
 			!PluginSettingLocalServiceUtil.hasPermission(
-				userId, newLayoutTemplateId, LayoutTemplateImpl.PLUGIN_TYPE)) {
+				userId, newLayoutTemplateId, Plugin.TYPE_LAYOUT_TEMPLATE)) {
 
 			return;
 		}

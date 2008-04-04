@@ -36,7 +36,7 @@ PluginSetting pluginSetting = PluginSettingLocalServiceUtil.getPluginSetting(com
 boolean active = pluginSetting.isActive();
 String[] rolesArray = pluginSetting.getRolesArray();
 
-if (pluginType.equals(PortletImpl.PLUGIN_TYPE)) {
+if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 	String portletId = pluginId;
 
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), portletId);

@@ -24,7 +24,7 @@ package com.liferay.portlet.enterpriseadmin.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.Plugin;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PluginSettingServiceUtil;
 import com.liferay.portal.service.PortletServiceUtil;
@@ -98,7 +98,7 @@ public class EditPluginAction extends PortletAction {
 
 		boolean active = ParamUtil.getBoolean(req, "active");
 
-		if (pluginType.equals(PortletImpl.PLUGIN_TYPE)) {
+		if (pluginType.equals(Plugin.TYPE_PORTLET)) {
 			String portletId = pluginId;
 
 			PortletServiceUtil.updatePortlet(

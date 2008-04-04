@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Plugin;
 import com.liferay.util.TextFormatter;
 
 import java.io.File;
@@ -230,7 +231,7 @@ public class ThemeDeployer extends BaseDeployer {
 		String pluginTypeName = TextFormatter.format(
 			pluginType, TextFormatter.J);
 
-		if (!pluginType.equals("theme")) {
+		if (!pluginType.equals(Plugin.TYPE_THEME)) {
 			return;
 		}
 

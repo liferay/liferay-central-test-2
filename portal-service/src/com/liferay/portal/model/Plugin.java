@@ -32,6 +32,14 @@ import com.liferay.portal.kernel.plugin.PluginPackage;
  */
 public interface Plugin {
 
+	public static final String TYPE_LAYOUT_TEMPLATE = "layout-template";
+
+	public static final String TYPE_PORTLET = "portlet";
+
+	public static final String TYPE_THEME = "theme";
+
+	public static final String TYPE_WEB = "web";
+
 	public PluginPackage getPluginPackage();
 
 	public void setPluginPackage(PluginPackage pluginPackage);

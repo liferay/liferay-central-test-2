@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
+import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
@@ -51,8 +52,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class ThemeImpl extends PluginBaseImpl implements Theme {
-
-	public static final String PLUGIN_TYPE = "theme";
 
 	public static String getDefaultRegularThemeId() {
 		return _DEFAULT_REGULAR_THEME_ID;
@@ -83,7 +82,7 @@ public class ThemeImpl extends PluginBaseImpl implements Theme {
 	}
 
 	public String getPluginType() {
-		return PLUGIN_TYPE;
+		return Plugin.TYPE_THEME;
 	}
 
 	public ThemeCompanyLimit getThemeCompanyLimit() {
