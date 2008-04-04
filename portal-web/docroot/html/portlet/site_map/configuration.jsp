@@ -43,25 +43,19 @@ List layoutList = layoutView.getList();
 	</td>
 	<td>
 		<select name="<portlet:namespace />rootLayoutId">
+			<option value=""></option>
 
 			<%
 			for (int i = 0; i < layoutList.size(); i++) {
 
-				// id | parentId | ls | obj id | name | img | depth | layoutId
+				// id | parentId | ls | obj id | name | img | depth
 
 				String layoutDesc = (String)layoutList.get(i);
 
 				String[] nodeValues = StringUtil.split(layoutDesc, "|");
 
-				long layoutId = 0;
-
-				if (i != 0) {
-					layoutId = GetterUtil.getLong(nodeValues[7]);
-				}
-				else {
-					layoutId = GetterUtil.getLong(nodeValues[6]);
-				}
-				String layoutName = nodeValues[4];
+				long objId = GetterUtil.getLong(nodeValues[3]);
+				String name = nodeValues[4];
 
 				int depth = 0;
 
@@ -70,13 +64,24 @@ List layoutList = layoutView.getList();
 				}
 
 				for (int j = 0; j < depth; j++) {
-					layoutName = "-&nbsp;" + layoutName;
+					name = "-&nbsp;" + name;
 				}
+
+				Layout rootLayout = null;
+
+				try {
+					rootLayout = LayoutLocalServiceUtil.getLayout(objId);
+				}
+				catch (Exception e) {
+				}
+
+				if (rootLayout != null) {
 			%>
 
-				<option <%= (rootLayoutId == layoutId) ? "selected" : "" %> value="<%= layoutId %>"><%= layoutName %></option>
+					<option <%= (rootLayoutId == rootLayout.getLayoutId()) ? "selected" : "" %> value="<%= rootLayout.getLayoutId() %>"><%= name %></option>
 
 			<%
+				}
 			}
 			%>
 
