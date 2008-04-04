@@ -1470,16 +1470,16 @@ public class ServiceBuilder {
 				javaParameter.getType().getValue() +
 					_getDimensions(javaParameter.getType());
 
-			if ((parameterTypeName.equals(
-					"com.liferay.portal.theme.ThemeDisplay")) ||
-				(parameterTypeName.equals(
+			if (parameterTypeName.equals(
+					"com.liferay.portal.theme.ThemeDisplay") ||
+				parameterTypeName.equals(
 					"com.liferay.portlet.PortletPreferencesImpl")) ||
-				 parameterTypeName.startsWith("java.io") ||
-				 //parameterTypeName.startsWith("java.util.List") ||
-				 //parameterTypeName.startsWith("java.util.Locale") ||
-				 parameterTypeName.startsWith("java.util.Map") ||
-				 parameterTypeName.startsWith("java.util.Properties") ||
-				 parameterTypeName.startsWith("javax")) {
+				parameterTypeName.startsWith("java.io") ||
+				//parameterTypeName.startsWith("java.util.List") ||
+				//parameterTypeName.startsWith("java.util.Locale") ||
+				parameterTypeName.startsWith("java.util.Map") ||
+				parameterTypeName.startsWith("java.util.Properties") ||
+				parameterTypeName.startsWith("javax")) {
 
 				return false;
 			}
