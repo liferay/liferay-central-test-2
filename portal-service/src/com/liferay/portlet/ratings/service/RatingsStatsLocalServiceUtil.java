@@ -101,38 +101,6 @@ public class RatingsStatsLocalServiceUtil {
 		return ratingsStatsLocalService.updateRatingsStats(ratingsStats);
 	}
 
-	public static com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence getRatingsEntryPersistence() {
-		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
-
-		return ratingsStatsLocalService.getRatingsEntryPersistence();
-	}
-
-	public static void setRatingsEntryPersistence(
-		com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence ratingsEntryPersistence) {
-		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
-
-		ratingsStatsLocalService.setRatingsEntryPersistence(ratingsEntryPersistence);
-	}
-
-	public static com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence() {
-		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
-
-		return ratingsStatsLocalService.getRatingsStatsPersistence();
-	}
-
-	public static void setRatingsStatsPersistence(
-		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence) {
-		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
-
-		ratingsStatsLocalService.setRatingsStatsPersistence(ratingsStatsPersistence);
-	}
-
-	public static void afterPropertiesSet() {
-		RatingsStatsLocalService ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getService();
-
-		ratingsStatsLocalService.afterPropertiesSet();
-	}
-
 	public static void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

@@ -100,64 +100,6 @@ public class PollsChoiceLocalServiceUtil {
 		return pollsChoiceLocalService.updatePollsChoice(pollsChoice);
 	}
 
-	public static com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence() {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getPollsChoicePersistence();
-	}
-
-	public static void setPollsChoicePersistence(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence) {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		pollsChoiceLocalService.setPollsChoicePersistence(pollsChoicePersistence);
-	}
-
-	public static com.liferay.portlet.polls.service.persistence.PollsChoiceFinder getPollsChoiceFinder() {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getPollsChoiceFinder();
-	}
-
-	public static void setPollsChoiceFinder(
-		com.liferay.portlet.polls.service.persistence.PollsChoiceFinder pollsChoiceFinder) {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		pollsChoiceLocalService.setPollsChoiceFinder(pollsChoiceFinder);
-	}
-
-	public static com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence() {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getPollsQuestionPersistence();
-	}
-
-	public static void setPollsQuestionPersistence(
-		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence) {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		pollsChoiceLocalService.setPollsQuestionPersistence(pollsQuestionPersistence);
-	}
-
-	public static com.liferay.portlet.polls.service.persistence.PollsVotePersistence getPollsVotePersistence() {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		return pollsChoiceLocalService.getPollsVotePersistence();
-	}
-
-	public static void setPollsVotePersistence(
-		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence) {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		pollsChoiceLocalService.setPollsVotePersistence(pollsVotePersistence);
-	}
-
-	public static void afterPropertiesSet() {
-		PollsChoiceLocalService pollsChoiceLocalService = PollsChoiceLocalServiceFactory.getService();
-
-		pollsChoiceLocalService.afterPropertiesSet();
-	}
-
 	public static com.liferay.portlet.polls.model.PollsChoice addChoice(
 		long questionId, java.lang.String name, java.lang.String description)
 		throws com.liferay.portal.PortalException,

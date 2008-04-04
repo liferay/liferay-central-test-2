@@ -69,6 +69,17 @@ public class PrincipalBean {
 		}
 	}
 
+	public PermissionChecker getPermissionChecker() throws PrincipalException {
+		PermissionChecker permissionChecker =
+			PermissionThreadLocal.getPermissionChecker();
+
+		if (permissionChecker == null) {
+			throw new PrincipalException("PermissionChecker not initialized");
+		}
+
+		return permissionChecker;
+	}
+
 	public User getUser() throws PortalException, SystemException {
 		return UserLocalServiceUtil.getUserById(getUserId());
 	}
@@ -93,17 +104,6 @@ public class PrincipalBean {
 		}
 
 		return GetterUtil.getLong(name);
-	}
-
-	public PermissionChecker getPermissionChecker() throws PrincipalException {
-		PermissionChecker permissionChecker =
-			PermissionThreadLocal.getPermissionChecker();
-
-		if (permissionChecker == null) {
-			throw new PrincipalException("PermissionChecker not initialized");
-		}
-
-		return permissionChecker;
 	}
 
 }

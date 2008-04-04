@@ -74,58 +74,6 @@ public interface TagsEntryLocalService {
 		com.liferay.portlet.tags.model.TagsEntry tagsEntry)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();
-
-	public void setTagsAssetPersistence(
-		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence);
-
-	public com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder();
-
-	public void setTagsAssetFinder(
-		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder);
-
-	public com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence();
-
-	public void setTagsEntryPersistence(
-		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence);
-
-	public com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder();
-
-	public void setTagsEntryFinder(
-		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder);
-
-	public com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence getTagsPropertyPersistence();
-
-	public void setTagsPropertyPersistence(
-		com.liferay.portlet.tags.service.persistence.TagsPropertyPersistence tagsPropertyPersistence);
-
-	public com.liferay.portlet.tags.service.persistence.TagsPropertyFinder getTagsPropertyFinder();
-
-	public void setTagsPropertyFinder(
-		com.liferay.portlet.tags.service.persistence.TagsPropertyFinder tagsPropertyFinder);
-
-	public com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder getTagsPropertyKeyFinder();
-
-	public void setTagsPropertyKeyFinder(
-		com.liferay.portlet.tags.service.persistence.TagsPropertyKeyFinder tagsPropertyKeyFinder);
-
-	public com.liferay.portlet.tags.service.persistence.TagsSourcePersistence getTagsSourcePersistence();
-
-	public void setTagsSourcePersistence(
-		com.liferay.portlet.tags.service.persistence.TagsSourcePersistence tagsSourcePersistence);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.tags.model.TagsEntry addEntry(long userId,
 		java.lang.String name)
 		throws com.liferay.portal.SystemException,

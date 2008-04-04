@@ -74,68 +74,6 @@ public interface SCProductEntryLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCProductEntry scProductEntry)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence();
-
-	public void setSCLicensePersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence);
-
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence getSCFrameworkVersionPersistence();
-
-	public void setSCFrameworkVersionPersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence);
-
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence getSCProductEntryPersistence();
-
-	public void setSCProductEntryPersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence);
-
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence getSCProductScreenshotPersistence();
-
-	public void setSCProductScreenshotPersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence);
-
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence getSCProductVersionPersistence();
-
-	public void setSCProductVersionPersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence);
-
-	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
-
-	public void setResourcePersistence(
-		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
-
-	public void setResourceFinder(
-		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence();
-
-	public void setMBMessagePersistence(
-		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence);
-
-	public com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder();
-
-	public void setMBMessageFinder(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder);
-
-	public com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence();
-
-	public void setRatingsStatsPersistence(
-		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.softwarecatalog.model.SCProductEntry addProductEntry(
 		long userId, long plid, java.lang.String name, java.lang.String type,
 		java.lang.String tags, java.lang.String shortDescription,

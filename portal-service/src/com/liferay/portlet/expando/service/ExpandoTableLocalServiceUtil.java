@@ -101,64 +101,6 @@ public class ExpandoTableLocalServiceUtil {
 		return expandoTableLocalService.updateExpandoTable(expandoTable);
 	}
 
-	public static com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence() {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		return expandoTableLocalService.getExpandoColumnPersistence();
-	}
-
-	public static void setExpandoColumnPersistence(
-		com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence expandoColumnPersistence) {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		expandoTableLocalService.setExpandoColumnPersistence(expandoColumnPersistence);
-	}
-
-	public static com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence getExpandoRowPersistence() {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		return expandoTableLocalService.getExpandoRowPersistence();
-	}
-
-	public static void setExpandoRowPersistence(
-		com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence expandoRowPersistence) {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		expandoTableLocalService.setExpandoRowPersistence(expandoRowPersistence);
-	}
-
-	public static com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence getExpandoTablePersistence() {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		return expandoTableLocalService.getExpandoTablePersistence();
-	}
-
-	public static void setExpandoTablePersistence(
-		com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence expandoTablePersistence) {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		expandoTableLocalService.setExpandoTablePersistence(expandoTablePersistence);
-	}
-
-	public static com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence getExpandoValuePersistence() {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		return expandoTableLocalService.getExpandoValuePersistence();
-	}
-
-	public static void setExpandoValuePersistence(
-		com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence) {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		expandoTableLocalService.setExpandoValuePersistence(expandoValuePersistence);
-	}
-
-	public static void afterPropertiesSet() {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		expandoTableLocalService.afterPropertiesSet();
-	}
-
 	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
 		java.lang.String className, java.lang.String name)
 		throws com.liferay.portal.PortalException,

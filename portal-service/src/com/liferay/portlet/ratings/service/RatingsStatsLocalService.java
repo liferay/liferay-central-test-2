@@ -74,18 +74,6 @@ public interface RatingsStatsLocalService {
 		com.liferay.portlet.ratings.model.RatingsStats ratingsStats)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence getRatingsEntryPersistence();
-
-	public void setRatingsEntryPersistence(
-		com.liferay.portlet.ratings.service.persistence.RatingsEntryPersistence ratingsEntryPersistence);
-
-	public com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence getRatingsStatsPersistence();
-
-	public void setRatingsStatsPersistence(
-		com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence ratingsStatsPersistence);
-
-	public void afterPropertiesSet();
-
 	public void deleteStats(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

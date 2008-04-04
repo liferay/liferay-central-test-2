@@ -74,63 +74,6 @@ public interface TasksProposalLocalService {
 		com.liferay.portlet.tasks.model.TasksProposal tasksProposal)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence getTasksReviewPersistence();
-
-	public void setTasksReviewPersistence(
-		com.liferay.portlet.tasks.service.persistence.TasksReviewPersistence tasksReviewPersistence);
-
-	public com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence getTasksProposalPersistence();
-
-	public void setTasksProposalPersistence(
-		com.liferay.portlet.tasks.service.persistence.TasksProposalPersistence tasksProposalPersistence);
-
-	public com.liferay.portlet.tasks.service.persistence.TasksProposalFinder getTasksProposalFinder();
-
-	public void setTasksProposalFinder(
-		com.liferay.portlet.tasks.service.persistence.TasksProposalFinder tasksProposalFinder);
-
-	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
-
-	public void setResourcePersistence(
-		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
-
-	public void setResourceFinder(
-		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence getMBMessagePersistence();
-
-	public void setMBMessagePersistence(
-		com.liferay.portlet.messageboards.service.persistence.MBMessagePersistence mbMessagePersistence);
-
-	public com.liferay.portlet.messageboards.service.persistence.MBMessageFinder getMBMessageFinder();
-
-	public void setMBMessageFinder(
-		com.liferay.portlet.messageboards.service.persistence.MBMessageFinder mbMessageFinder);
-
-	public com.liferay.portlet.social.service.persistence.SocialActivityPersistence getSocialActivityPersistence();
-
-	public void setSocialActivityPersistence(
-		com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence);
-
-	public com.liferay.portlet.social.service.persistence.SocialActivityFinder getSocialActivityFinder();
-
-	public void setSocialActivityFinder(
-		com.liferay.portlet.social.service.persistence.SocialActivityFinder socialActivityFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.tasks.model.TasksProposal addProposal(
 		long userId, long groupId, java.lang.String className,
 		java.lang.String classPK, java.lang.String name,

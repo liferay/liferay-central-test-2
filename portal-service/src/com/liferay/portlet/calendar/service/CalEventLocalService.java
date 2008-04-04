@@ -74,53 +74,6 @@ public interface CalEventLocalService {
 		com.liferay.portlet.calendar.model.CalEvent calEvent)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.calendar.service.persistence.CalEventPersistence getCalEventPersistence();
-
-	public void setCalEventPersistence(
-		com.liferay.portlet.calendar.service.persistence.CalEventPersistence calEventPersistence);
-
-	public com.liferay.portlet.calendar.service.persistence.CalEventFinder getCalEventFinder();
-
-	public void setCalEventFinder(
-		com.liferay.portlet.calendar.service.persistence.CalEventFinder calEventFinder);
-
-	public com.liferay.portal.service.persistence.CompanyPersistence getCompanyPersistence();
-
-	public void setCompanyPersistence(
-		com.liferay.portal.service.persistence.CompanyPersistence companyPersistence);
-
-	public com.liferay.portal.service.persistence.PortletPreferencesPersistence getPortletPreferencesPersistence();
-
-	public void setPortletPreferencesPersistence(
-		com.liferay.portal.service.persistence.PortletPreferencesPersistence portletPreferencesPersistence);
-
-	public com.liferay.portal.service.persistence.PortletPreferencesFinder getPortletPreferencesFinder();
-
-	public void setPortletPreferencesFinder(
-		com.liferay.portal.service.persistence.PortletPreferencesFinder portletPreferencesFinder);
-
-	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
-
-	public void setResourcePersistence(
-		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
-
-	public void setResourceFinder(
-		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.calendar.model.CalEvent addEvent(long userId,
 		long plid, java.lang.String title, java.lang.String description,
 		int startDateMonth, int startDateDay, int startDateYear,

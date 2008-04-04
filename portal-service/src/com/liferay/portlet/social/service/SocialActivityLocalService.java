@@ -74,38 +74,6 @@ public interface SocialActivityLocalService {
 		com.liferay.portlet.social.model.SocialActivity socialActivity)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.social.service.persistence.SocialActivityPersistence getSocialActivityPersistence();
-
-	public void setSocialActivityPersistence(
-		com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence);
-
-	public com.liferay.portlet.social.service.persistence.SocialActivityFinder getSocialActivityFinder();
-
-	public void setSocialActivityFinder(
-		com.liferay.portlet.social.service.persistence.SocialActivityFinder socialActivityFinder);
-
-	public com.liferay.portlet.social.service.persistence.SocialRelationPersistence getSocialRelationPersistence();
-
-	public void setSocialRelationPersistence(
-		com.liferay.portlet.social.service.persistence.SocialRelationPersistence socialRelationPersistence);
-
-	public com.liferay.portlet.social.service.persistence.SocialRelationFinder getSocialRelationFinder();
-
-	public void setSocialRelationFinder(
-		com.liferay.portlet.social.service.persistence.SocialRelationFinder socialRelationFinder);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.social.model.SocialActivity addActivity(
 		long userId, long groupId, java.lang.String className, long classPK,
 		java.lang.String type, java.lang.String extraData, long receiverUserId)

@@ -74,53 +74,6 @@ public interface SCFrameworkVersionLocalService {
 		com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion scFrameworkVersion)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence getSCLicensePersistence();
-
-	public void setSCLicensePersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCLicensePersistence scLicensePersistence);
-
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence getSCFrameworkVersionPersistence();
-
-	public void setSCFrameworkVersionPersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCFrameworkVersionPersistence scFrameworkVersionPersistence);
-
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence getSCProductEntryPersistence();
-
-	public void setSCProductEntryPersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCProductEntryPersistence scProductEntryPersistence);
-
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence getSCProductScreenshotPersistence();
-
-	public void setSCProductScreenshotPersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCProductScreenshotPersistence scProductScreenshotPersistence);
-
-	public com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence getSCProductVersionPersistence();
-
-	public void setSCProductVersionPersistence(
-		com.liferay.portlet.softwarecatalog.service.persistence.SCProductVersionPersistence scProductVersionPersistence);
-
-	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
-
-	public void setResourcePersistence(
-		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
-
-	public void setResourceFinder(
-		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.softwarecatalog.model.SCFrameworkVersion addFrameworkVersion(
 		long userId, long plid, java.lang.String name, java.lang.String url,
 		boolean active, int priority, boolean addCommunityPermissions,

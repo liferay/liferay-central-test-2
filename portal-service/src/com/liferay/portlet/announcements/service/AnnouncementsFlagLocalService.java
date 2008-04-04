@@ -74,23 +74,6 @@ public interface AnnouncementsFlagLocalService {
 		com.liferay.portlet.announcements.model.AnnouncementsFlag announcementsFlag)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence getAnnouncementsEntryPersistence();
-
-	public void setAnnouncementsEntryPersistence(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence announcementsEntryPersistence);
-
-	public com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder getAnnouncementsEntryFinder();
-
-	public void setAnnouncementsEntryFinder(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder announcementsEntryFinder);
-
-	public com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence getAnnouncementsFlagPersistence();
-
-	public void setAnnouncementsFlagPersistence(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence announcementsFlagPersistence);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.announcements.model.AnnouncementsFlag addFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.SystemException,

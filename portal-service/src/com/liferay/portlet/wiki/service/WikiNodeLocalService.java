@@ -73,63 +73,6 @@ public interface WikiNodeLocalService {
 		com.liferay.portlet.wiki.model.WikiNode wikiNode)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence();
-
-	public void setWikiNodePersistence(
-		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence);
-
-	public com.liferay.portlet.wiki.service.persistence.WikiPagePersistence getWikiPagePersistence();
-
-	public void setWikiPagePersistence(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence);
-
-	public com.liferay.portlet.wiki.service.persistence.WikiPageFinder getWikiPageFinder();
-
-	public void setWikiPageFinder(
-		com.liferay.portlet.wiki.service.persistence.WikiPageFinder wikiPageFinder);
-
-	public com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence();
-
-	public void setWikiPageResourcePersistence(
-		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
-
-	public void setResourcePersistence(
-		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
-
-	public void setResourceFinder(
-		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
-
-	public com.liferay.portal.service.persistence.SubscriptionPersistence getSubscriptionPersistence();
-
-	public void setSubscriptionPersistence(
-		com.liferay.portal.service.persistence.SubscriptionPersistence subscriptionPersistence);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence();
-
-	public void setTagsEntryPersistence(
-		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence);
-
-	public com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder();
-
-	public void setTagsEntryFinder(
-		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.wiki.model.WikiNode addNode(long userId,
 		long plid, java.lang.String name, java.lang.String description,
 		boolean addCommunityPermissions, boolean addGuestPermissions)

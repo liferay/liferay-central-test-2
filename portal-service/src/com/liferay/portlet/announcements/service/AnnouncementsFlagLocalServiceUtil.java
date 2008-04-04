@@ -101,51 +101,6 @@ public class AnnouncementsFlagLocalServiceUtil {
 		return announcementsFlagLocalService.updateAnnouncementsFlag(announcementsFlag);
 	}
 
-	public static com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence getAnnouncementsEntryPersistence() {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.getAnnouncementsEntryPersistence();
-	}
-
-	public static void setAnnouncementsEntryPersistence(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence announcementsEntryPersistence) {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		announcementsFlagLocalService.setAnnouncementsEntryPersistence(announcementsEntryPersistence);
-	}
-
-	public static com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder getAnnouncementsEntryFinder() {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.getAnnouncementsEntryFinder();
-	}
-
-	public static void setAnnouncementsEntryFinder(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder announcementsEntryFinder) {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		announcementsFlagLocalService.setAnnouncementsEntryFinder(announcementsEntryFinder);
-	}
-
-	public static com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence getAnnouncementsFlagPersistence() {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		return announcementsFlagLocalService.getAnnouncementsFlagPersistence();
-	}
-
-	public static void setAnnouncementsFlagPersistence(
-		com.liferay.portlet.announcements.service.persistence.AnnouncementsFlagPersistence announcementsFlagPersistence) {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		announcementsFlagLocalService.setAnnouncementsFlagPersistence(announcementsFlagPersistence);
-	}
-
-	public static void afterPropertiesSet() {
-		AnnouncementsFlagLocalService announcementsFlagLocalService = AnnouncementsFlagLocalServiceFactory.getService();
-
-		announcementsFlagLocalService.afterPropertiesSet();
-	}
-
 	public static com.liferay.portlet.announcements.model.AnnouncementsFlag addFlag(
 		long userId, long entryId, int value)
 		throws com.liferay.portal.PortalException,

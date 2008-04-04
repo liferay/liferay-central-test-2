@@ -74,28 +74,6 @@ public interface WikiPageResourceLocalService {
 		com.liferay.portlet.wiki.model.WikiPageResource wikiPageResource)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.wiki.service.persistence.WikiNodePersistence getWikiNodePersistence();
-
-	public void setWikiNodePersistence(
-		com.liferay.portlet.wiki.service.persistence.WikiNodePersistence wikiNodePersistence);
-
-	public com.liferay.portlet.wiki.service.persistence.WikiPagePersistence getWikiPagePersistence();
-
-	public void setWikiPagePersistence(
-		com.liferay.portlet.wiki.service.persistence.WikiPagePersistence wikiPagePersistence);
-
-	public com.liferay.portlet.wiki.service.persistence.WikiPageFinder getWikiPageFinder();
-
-	public void setWikiPageFinder(
-		com.liferay.portlet.wiki.service.persistence.WikiPageFinder wikiPageFinder);
-
-	public com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence getWikiPageResourcePersistence();
-
-	public void setWikiPageResourcePersistence(
-		com.liferay.portlet.wiki.service.persistence.WikiPageResourcePersistence wikiPageResourcePersistence);
-
-	public void afterPropertiesSet();
-
 	public void deletePageResource(long nodeId, java.lang.String title)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

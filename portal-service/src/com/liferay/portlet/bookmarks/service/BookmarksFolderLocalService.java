@@ -74,53 +74,6 @@ public interface BookmarksFolderLocalService {
 		com.liferay.portlet.bookmarks.model.BookmarksFolder bookmarksFolder)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence getBookmarksEntryPersistence();
-
-	public void setBookmarksEntryPersistence(
-		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryPersistence bookmarksEntryPersistence);
-
-	public com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder getBookmarksEntryFinder();
-
-	public void setBookmarksEntryFinder(
-		com.liferay.portlet.bookmarks.service.persistence.BookmarksEntryFinder bookmarksEntryFinder);
-
-	public com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence getBookmarksFolderPersistence();
-
-	public void setBookmarksFolderPersistence(
-		com.liferay.portlet.bookmarks.service.persistence.BookmarksFolderPersistence bookmarksFolderPersistence);
-
-	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
-
-	public void setResourcePersistence(
-		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
-
-	public void setResourceFinder(
-		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence();
-
-	public void setTagsEntryPersistence(
-		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence);
-
-	public com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder();
-
-	public void setTagsEntryFinder(
-		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.bookmarks.model.BookmarksFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,

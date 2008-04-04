@@ -74,53 +74,6 @@ public interface IGImageLocalService {
 		com.liferay.portlet.imagegallery.model.IGImage igImage)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence();
-
-	public void setIGFolderPersistence(
-		com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence);
-
-	public com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence getIGImagePersistence();
-
-	public void setIGImagePersistence(
-		com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence);
-
-	public com.liferay.portlet.imagegallery.service.persistence.IGImageFinder getIGImageFinder();
-
-	public void setIGImageFinder(
-		com.liferay.portlet.imagegallery.service.persistence.IGImageFinder igImageFinder);
-
-	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
-
-	public void setResourcePersistence(
-		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
-
-	public void setResourceFinder(
-		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public com.liferay.portlet.tags.service.persistence.TagsAssetPersistence getTagsAssetPersistence();
-
-	public void setTagsAssetPersistence(
-		com.liferay.portlet.tags.service.persistence.TagsAssetPersistence tagsAssetPersistence);
-
-	public com.liferay.portlet.tags.service.persistence.TagsAssetFinder getTagsAssetFinder();
-
-	public void setTagsAssetFinder(
-		com.liferay.portlet.tags.service.persistence.TagsAssetFinder tagsAssetFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.imagegallery.model.IGImage addImage(
 		long userId, long folderId, java.lang.String name,
 		java.lang.String description, java.io.File file,

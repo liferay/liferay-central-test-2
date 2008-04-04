@@ -74,28 +74,6 @@ public interface ExpandoColumnLocalService {
 		com.liferay.portlet.expando.model.ExpandoColumn expandoColumn)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence getExpandoColumnPersistence();
-
-	public void setExpandoColumnPersistence(
-		com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence expandoColumnPersistence);
-
-	public com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence getExpandoRowPersistence();
-
-	public void setExpandoRowPersistence(
-		com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence expandoRowPersistence);
-
-	public com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence getExpandoTablePersistence();
-
-	public void setExpandoTablePersistence(
-		com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence expandoTablePersistence);
-
-	public com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence getExpandoValuePersistence();
-
-	public void setExpandoValuePersistence(
-		com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence expandoValuePersistence);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.expando.model.ExpandoColumn addColumn(
 		long tableId, java.lang.String name, int type)
 		throws com.liferay.portal.SystemException,

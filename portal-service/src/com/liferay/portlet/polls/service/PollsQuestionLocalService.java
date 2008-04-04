@@ -74,48 +74,6 @@ public interface PollsQuestionLocalService {
 		com.liferay.portlet.polls.model.PollsQuestion pollsQuestion)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence();
-
-	public void setPollsChoicePersistence(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence);
-
-	public com.liferay.portlet.polls.service.persistence.PollsChoiceFinder getPollsChoiceFinder();
-
-	public void setPollsChoiceFinder(
-		com.liferay.portlet.polls.service.persistence.PollsChoiceFinder pollsChoiceFinder);
-
-	public com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence();
-
-	public void setPollsQuestionPersistence(
-		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence);
-
-	public com.liferay.portlet.polls.service.persistence.PollsVotePersistence getPollsVotePersistence();
-
-	public void setPollsVotePersistence(
-		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence);
-
-	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
-
-	public void setResourcePersistence(
-		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
-
-	public void setResourceFinder(
-		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.polls.model.PollsQuestion addQuestion(
 		long userId, long plid, java.lang.String title,
 		java.lang.String description, int expirationDateMonth,

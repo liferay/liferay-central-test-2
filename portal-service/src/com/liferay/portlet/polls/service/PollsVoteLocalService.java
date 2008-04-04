@@ -74,28 +74,6 @@ public interface PollsVoteLocalService {
 		com.liferay.portlet.polls.model.PollsVote pollsVote)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.polls.service.persistence.PollsChoicePersistence getPollsChoicePersistence();
-
-	public void setPollsChoicePersistence(
-		com.liferay.portlet.polls.service.persistence.PollsChoicePersistence pollsChoicePersistence);
-
-	public com.liferay.portlet.polls.service.persistence.PollsChoiceFinder getPollsChoiceFinder();
-
-	public void setPollsChoiceFinder(
-		com.liferay.portlet.polls.service.persistence.PollsChoiceFinder pollsChoiceFinder);
-
-	public com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence getPollsQuestionPersistence();
-
-	public void setPollsQuestionPersistence(
-		com.liferay.portlet.polls.service.persistence.PollsQuestionPersistence pollsQuestionPersistence);
-
-	public com.liferay.portlet.polls.service.persistence.PollsVotePersistence getPollsVotePersistence();
-
-	public void setPollsVotePersistence(
-		com.liferay.portlet.polls.service.persistence.PollsVotePersistence pollsVotePersistence);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.polls.model.PollsVote addVote(long userId,
 		long questionId, long choiceId)
 		throws com.liferay.portal.SystemException,

@@ -74,38 +74,6 @@ public interface BlogsStatsUserLocalService {
 		com.liferay.portlet.blogs.model.BlogsStatsUser blogsStatsUser)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence getBlogsEntryPersistence();
-
-	public void setBlogsEntryPersistence(
-		com.liferay.portlet.blogs.service.persistence.BlogsEntryPersistence blogsEntryPersistence);
-
-	public com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder getBlogsEntryFinder();
-
-	public void setBlogsEntryFinder(
-		com.liferay.portlet.blogs.service.persistence.BlogsEntryFinder blogsEntryFinder);
-
-	public com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence getBlogsStatsUserPersistence();
-
-	public void setBlogsStatsUserPersistence(
-		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserPersistence blogsStatsUserPersistence);
-
-	public com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder getBlogsStatsUserFinder();
-
-	public void setBlogsStatsUserFinder(
-		com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder blogsStatsUserFinder);
-
-	public com.liferay.portal.service.persistence.GroupPersistence getGroupPersistence();
-
-	public void setGroupPersistence(
-		com.liferay.portal.service.persistence.GroupPersistence groupPersistence);
-
-	public com.liferay.portal.service.persistence.GroupFinder getGroupFinder();
-
-	public void setGroupFinder(
-		com.liferay.portal.service.persistence.GroupFinder groupFinder);
-
-	public void afterPropertiesSet();
-
 	public void deleteStatsUserByGroupId(long groupId)
 		throws com.liferay.portal.SystemException;
 

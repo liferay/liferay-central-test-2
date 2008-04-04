@@ -74,63 +74,6 @@ public interface JournalArticleResourceLocalService {
 		com.liferay.portlet.journal.model.JournalArticleResource journalArticleResource)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.journal.service.persistence.JournalArticlePersistence getJournalArticlePersistence();
-
-	public void setJournalArticlePersistence(
-		com.liferay.portlet.journal.service.persistence.JournalArticlePersistence journalArticlePersistence);
-
-	public com.liferay.portlet.journal.service.persistence.JournalArticleFinder getJournalArticleFinder();
-
-	public void setJournalArticleFinder(
-		com.liferay.portlet.journal.service.persistence.JournalArticleFinder journalArticleFinder);
-
-	public com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence getJournalArticleImagePersistence();
-
-	public void setJournalArticleImagePersistence(
-		com.liferay.portlet.journal.service.persistence.JournalArticleImagePersistence journalArticleImagePersistence);
-
-	public com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence getJournalArticleResourcePersistence();
-
-	public void setJournalArticleResourcePersistence(
-		com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistence journalArticleResourcePersistence);
-
-	public com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence getJournalContentSearchPersistence();
-
-	public void setJournalContentSearchPersistence(
-		com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistence journalContentSearchPersistence);
-
-	public com.liferay.portlet.journal.service.persistence.JournalFeedPersistence getJournalFeedPersistence();
-
-	public void setJournalFeedPersistence(
-		com.liferay.portlet.journal.service.persistence.JournalFeedPersistence journalFeedPersistence);
-
-	public com.liferay.portlet.journal.service.persistence.JournalFeedFinder getJournalFeedFinder();
-
-	public void setJournalFeedFinder(
-		com.liferay.portlet.journal.service.persistence.JournalFeedFinder journalFeedFinder);
-
-	public com.liferay.portlet.journal.service.persistence.JournalStructurePersistence getJournalStructurePersistence();
-
-	public void setJournalStructurePersistence(
-		com.liferay.portlet.journal.service.persistence.JournalStructurePersistence journalStructurePersistence);
-
-	public com.liferay.portlet.journal.service.persistence.JournalStructureFinder getJournalStructureFinder();
-
-	public void setJournalStructureFinder(
-		com.liferay.portlet.journal.service.persistence.JournalStructureFinder journalStructureFinder);
-
-	public com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence getJournalTemplatePersistence();
-
-	public void setJournalTemplatePersistence(
-		com.liferay.portlet.journal.service.persistence.JournalTemplatePersistence journalTemplatePersistence);
-
-	public com.liferay.portlet.journal.service.persistence.JournalTemplateFinder getJournalTemplateFinder();
-
-	public void setJournalTemplateFinder(
-		com.liferay.portlet.journal.service.persistence.JournalTemplateFinder journalTemplateFinder);
-
-	public void afterPropertiesSet();
-
 	public void deleteArticleResource(long groupId, java.lang.String articleId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

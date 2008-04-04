@@ -49,28 +49,6 @@ package com.liferay.portlet.social.service;
  *
  */
 public interface SocialActivityInterpreterLocalService {
-	public com.liferay.portlet.social.service.persistence.SocialActivityPersistence getSocialActivityPersistence();
-
-	public void setSocialActivityPersistence(
-		com.liferay.portlet.social.service.persistence.SocialActivityPersistence socialActivityPersistence);
-
-	public com.liferay.portlet.social.service.persistence.SocialActivityFinder getSocialActivityFinder();
-
-	public void setSocialActivityFinder(
-		com.liferay.portlet.social.service.persistence.SocialActivityFinder socialActivityFinder);
-
-	public com.liferay.portlet.social.service.persistence.SocialRelationPersistence getSocialRelationPersistence();
-
-	public void setSocialRelationPersistence(
-		com.liferay.portlet.social.service.persistence.SocialRelationPersistence socialRelationPersistence);
-
-	public com.liferay.portlet.social.service.persistence.SocialRelationFinder getSocialRelationFinder();
-
-	public void setSocialRelationFinder(
-		com.liferay.portlet.social.service.persistence.SocialRelationFinder socialRelationFinder);
-
-	public void afterPropertiesSet();
-
 	public void addActivityInterpreter(
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter);
 

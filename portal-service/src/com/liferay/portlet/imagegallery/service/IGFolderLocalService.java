@@ -74,63 +74,6 @@ public interface IGFolderLocalService {
 		com.liferay.portlet.imagegallery.model.IGFolder igFolder)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence getIGFolderPersistence();
-
-	public void setIGFolderPersistence(
-		com.liferay.portlet.imagegallery.service.persistence.IGFolderPersistence igFolderPersistence);
-
-	public com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence getIGImagePersistence();
-
-	public void setIGImagePersistence(
-		com.liferay.portlet.imagegallery.service.persistence.IGImagePersistence igImagePersistence);
-
-	public com.liferay.portlet.imagegallery.service.persistence.IGImageFinder getIGImageFinder();
-
-	public void setIGImageFinder(
-		com.liferay.portlet.imagegallery.service.persistence.IGImageFinder igImageFinder);
-
-	public com.liferay.portal.service.persistence.LayoutPersistence getLayoutPersistence();
-
-	public void setLayoutPersistence(
-		com.liferay.portal.service.persistence.LayoutPersistence layoutPersistence);
-
-	public com.liferay.portal.service.persistence.LayoutFinder getLayoutFinder();
-
-	public void setLayoutFinder(
-		com.liferay.portal.service.persistence.LayoutFinder layoutFinder);
-
-	public com.liferay.portal.service.persistence.ResourcePersistence getResourcePersistence();
-
-	public void setResourcePersistence(
-		com.liferay.portal.service.persistence.ResourcePersistence resourcePersistence);
-
-	public com.liferay.portal.service.persistence.ResourceFinder getResourceFinder();
-
-	public void setResourceFinder(
-		com.liferay.portal.service.persistence.ResourceFinder resourceFinder);
-
-	public com.liferay.portal.service.persistence.UserPersistence getUserPersistence();
-
-	public void setUserPersistence(
-		com.liferay.portal.service.persistence.UserPersistence userPersistence);
-
-	public com.liferay.portal.service.persistence.UserFinder getUserFinder();
-
-	public void setUserFinder(
-		com.liferay.portal.service.persistence.UserFinder userFinder);
-
-	public com.liferay.portlet.tags.service.persistence.TagsEntryPersistence getTagsEntryPersistence();
-
-	public void setTagsEntryPersistence(
-		com.liferay.portlet.tags.service.persistence.TagsEntryPersistence tagsEntryPersistence);
-
-	public com.liferay.portlet.tags.service.persistence.TagsEntryFinder getTagsEntryFinder();
-
-	public void setTagsEntryFinder(
-		com.liferay.portlet.tags.service.persistence.TagsEntryFinder tagsEntryFinder);
-
-	public void afterPropertiesSet();
-
 	public com.liferay.portlet.imagegallery.model.IGFolder addFolder(
 		long userId, long plid, long parentFolderId, java.lang.String name,
 		java.lang.String description, boolean addCommunityPermissions,
