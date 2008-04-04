@@ -23,8 +23,8 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.kernel.util.Html;
+import com.liferay.portal.util.HtmlImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.xml.XMLFormatter;
@@ -48,10 +48,6 @@ import org.dom4j.Element;
  */
 public class WebXMLBuilder {
 
-	static {
-		InitUtil.init();
-	}
-
 	public static void main(String[] args) {
 		if (args.length == 3) {
 			new WebXMLBuilder(args[0], args[1], args[2]);
@@ -64,7 +60,9 @@ public class WebXMLBuilder {
 	public static String organizeWebXML(String webXML)
 		throws DocumentException, IOException {
 
-		webXML = HtmlUtil.stripComments(webXML);
+		Html html = new HtmlImpl();
+
+		webXML = html.stripComments(webXML);
 
 		double version = 2.3;
 
