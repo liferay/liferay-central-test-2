@@ -71,15 +71,19 @@ public class LockImpl implements Lock {
 	}
 
 	public boolean isExpired() {
-		Date now = new Date();
+        if (_expirationTime <= 0) {
+            return false;
+        } else {
+            Date now = new Date();
 
-		if (now.getTime() > _date.getTime() + _expirationTime) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
+            if (now.getTime() > _date.getTime() + _expirationTime) {
+                return true;
+            }
+            else {
+                return false;
+            }
+        }
+    }
 
 	public Date getDate() {
 		return _date;
