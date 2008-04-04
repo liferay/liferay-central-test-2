@@ -49,6 +49,7 @@ import java.io.File;
 import javax.security.auth.login.Configuration;
 
 import org.apache.commons.collections.ExtendedProperties;
+import org.apache.commons.lang.time.StopWatch;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.runtime.RuntimeConstants;
 
@@ -61,6 +62,13 @@ import org.apache.velocity.runtime.RuntimeConstants;
 public class InitAction extends SimpleAction {
 
 	public void run(String[] ids) throws ActionException {
+		StopWatch stopWatch = null;
+
+		if (_PRINT_TIME) {
+			stopWatch = new StopWatch();
+
+			stopWatch.start();
+		}
 
 		// Set the default locale used by Liferay. This locale is no longer set
 		// at the VM level. See LEP-2584.
@@ -219,6 +227,13 @@ public class InitAction extends SimpleAction {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+
+		if (_PRINT_TIME) {
+			System.out.println(
+				"InitAction takes " + stopWatch.getTime() + " ms");
+		}
 	}
+
+	private static final boolean _PRINT_TIME = false;
 
 }
