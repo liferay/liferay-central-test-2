@@ -669,6 +669,19 @@
 				<dirset dir="docroot/html/themes" excludes="_styled,_unstyled" includes="*" />
 			</path>
 			<sequential>
+				<java
+					classname="com.liferay.portal.tools.ThumbnailBuilder"
+					classpathref="project.classpath"
+					fork="true"
+					newenvironment="true"
+				>
+					<jvmarg value="-Dthumbnail.original.file=@{module.name}/_diffs/images/screenshot.png" />
+					<jvmarg value="-Dthumbnail.thumbnail.file=@{module.name}/_diffs/images/thumbnail.png" />
+					<jvmarg value="-Dthumbnail.height=120" />
+					<jvmarg value="-Dthumbnail.width=160" />
+					<jvmarg value="-Dthumbnail.overwrite=false" />
+				</java>
+
 				<copy todir="@{module.name}" overwrite="yes">
 					<fileset
 						dir="docroot/html/themes/_unstyled"

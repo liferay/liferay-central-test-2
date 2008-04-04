@@ -22,10 +22,10 @@
 
 package com.liferay.portal.tools;
 
+import com.liferay.portal.image.ImageProcessorImpl;
 import com.liferay.portal.kernel.image.ImageBag;
-import com.liferay.portal.kernel.image.ImageProcessorUtil;
+import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.util.InitUtil;
 
 import java.awt.image.RenderedImage;
 
@@ -40,10 +40,6 @@ import javax.imageio.ImageIO;
  *
  */
 public class ThumbnailBuilder {
-
-	static {
-		InitUtil.init();
-	}
 
 	public static void main(String[] args) {
 		File originalFile = new File(
@@ -78,9 +74,11 @@ public class ThumbnailBuilder {
 				}
 			}
 
-			ImageBag imageBag = ImageProcessorUtil.read(originalFile);
+			ImageProcessor imageProcessor = new ImageProcessorImpl();
 
-			RenderedImage thumbnail = ImageProcessorUtil.scale(
+			ImageBag imageBag = imageProcessor.read(originalFile);
+
+			RenderedImage thumbnail = imageProcessor.scale(
 				imageBag.getRenderedImage(), height, width);
 
 			ImageIO.write(thumbnail, imageBag.getType(), thumbnailFile);
