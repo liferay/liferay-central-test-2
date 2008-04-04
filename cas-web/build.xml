@@ -1,7 +1,0 @@
-<?xml version="1.0"?>
-
-<project name="cas-web" basedir="." default="war">
-	<import file="../build-common-web.xml" />
-
-	<property name="war.file" value="${ant.project.name}" />
-</project>
