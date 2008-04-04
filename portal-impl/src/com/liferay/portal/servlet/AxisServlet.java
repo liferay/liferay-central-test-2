@@ -22,13 +22,19 @@
 
 package com.liferay.portal.servlet;
 
+import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.util.servlet.ServletResponseUtil;
+import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 
@@ -71,7 +77,18 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 				PermissionThreadLocal.setPermissionChecker(permissionChecker);
 			}
 
-			super.service(req, res);
+			StringServletResponse stringServletRes = new StringServletResponse(
+				res);
+
+			super.service(req, stringServletRes);
+
+			String xml = stringServletRes.getString();
+
+			xml = fixXml(xml);
+
+			res.setContentType(ContentTypes.TEXT_XML_UTF8);
+
+			ServletResponseUtil.write(res, xml.getBytes(StringPool.UTF8));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -84,6 +101,55 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 			}
 		}
 	}
+
+	protected String fixXml(String xml) throws Exception {
+		if (xml.indexOf("<wsdl:definitions") == -1) {
+			return xml;
+		}
+
+		xml = StringUtil.replace(
+			xml,
+			new String[] {
+				"\r\n",
+				"\n",
+				"  ",
+				"> <",
+				_INCORRECT_LONG_ARRAY,
+				_INCORRECT_STRING_ARRAY
+			},
+			new String[] {
+				StringPool.BLANK,
+				StringPool.BLANK,
+				StringPool.BLANK,
+				"><",
+				_CORRECT_LONG_ARRAY,
+				_CORRECT_STRING_ARRAY
+			});
+
+		xml = XMLFormatter.toString(xml);
+
+		return xml;
+	}
+
+	private static final String _INCORRECT_LONG_ARRAY =
+		"<complexType name=\"ArrayOf_xsd_long\"><simpleContent><extension/>" +
+			"</simpleContent></complexType>";
+
+	private static final String _CORRECT_LONG_ARRAY =
+		"<complexType name=\"ArrayOf_xsd_long\"><complexContent>" +
+			"<restriction base=\"soapenc:Array\"><attribute ref=\"soapenc:" +
+				"arrayType\" wsdl:arrayType=\"soapenc:long[]\"/>" +
+					"</restriction></complexContent></complexType>";
+
+	private static final String _INCORRECT_STRING_ARRAY =
+		"<complexType name=\"ArrayOf_xsd_string\"><simpleContent><extension/>" +
+			"</simpleContent></complexType>";
+
+	private static final String _CORRECT_STRING_ARRAY =
+		"<complexType name=\"ArrayOf_xsd_string\"><complexContent>" +
+			"<restriction base=\"soapenc:Array\"><attribute ref=\"soapenc:" +
+				"arrayType\" wsdl:arrayType=\"soapenc:string[]\"/>" +
+					"</restriction></complexContent></complexType>";
 
 	private static Log _log = LogFactory.getLog(AxisServlet.class);
 
