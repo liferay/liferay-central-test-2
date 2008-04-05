@@ -219,6 +219,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 				if (Validator.isNotNull(portlet.getSchedulerClass())) {
 					schedulerInstance = (Scheduler)portletClassLoader.loadClass(
 						portlet.getSchedulerClass()).newInstance();
+
+					schedulerInstance.schedule();
 				}
 
 				FriendlyURLMapper friendlyURLMapperInstance = null;
