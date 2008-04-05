@@ -53,6 +53,9 @@ public interface UserFinder {
 		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.User> findByNoAnnouncementsDeliveries(
+		java.lang.String type) throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
 		long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,

@@ -931,6 +931,24 @@
 				) AND (User_.active_ = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.findByNoAnnouncementsDeliveries">
+		<![CDATA[
+			SELECT
+				{User_.*}
+			FROM
+				User_
+			WHERE
+				(userId NOT IN(
+					SELECT
+						userId
+					FROM
+						AnnouncementsDelivery
+					WHERE
+						type_ = ?
+				)) AND
+				(defaultUser = [$FALSE$])
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.findByC_FN_MN_LN_SN_EA_A">
 		<![CDATA[
 			SELECT
@@ -1023,6 +1041,19 @@
 					(Users_UserGroups.userId = User_.userId)
 			WHERE
 				(Users_UserGroups.userGroupId = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinByAnnouncementsDeliveryEmailOrSms">
+		<![CDATA[
+			INNER JOIN
+				AnnouncementsDelivery ON
+					(AnnouncementsDelivery.userId = User_.userId)
+			WHERE
+				(AnnouncementsDelivery.type_ = ?) AND
+				(
+					(AnnouncementsDelivery.email = [$TRUE$]) OR
+					(AnnouncementsDelivery.sms = [$TRUE$])
+				)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelation">

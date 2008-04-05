@@ -34,10 +34,6 @@ import com.liferay.portal.service.CompanyLocalService;
 import com.liferay.portal.service.CompanyLocalServiceFactory;
 import com.liferay.portal.service.CompanyService;
 import com.liferay.portal.service.CompanyServiceFactory;
-import com.liferay.portal.service.ContactLocalService;
-import com.liferay.portal.service.ContactLocalServiceFactory;
-import com.liferay.portal.service.ContactService;
-import com.liferay.portal.service.ContactServiceFactory;
 import com.liferay.portal.service.GroupLocalService;
 import com.liferay.portal.service.GroupLocalServiceFactory;
 import com.liferay.portal.service.GroupService;
@@ -65,8 +61,6 @@ import com.liferay.portal.service.UserServiceFactory;
 import com.liferay.portal.service.impl.PrincipalBean;
 import com.liferay.portal.service.persistence.CompanyPersistence;
 import com.liferay.portal.service.persistence.CompanyUtil;
-import com.liferay.portal.service.persistence.ContactPersistence;
-import com.liferay.portal.service.persistence.ContactUtil;
 import com.liferay.portal.service.persistence.GroupFinder;
 import com.liferay.portal.service.persistence.GroupFinderUtil;
 import com.liferay.portal.service.persistence.GroupPersistence;
@@ -92,6 +86,10 @@ import com.liferay.portal.service.persistence.UserGroupUtil;
 import com.liferay.portal.service.persistence.UserPersistence;
 import com.liferay.portal.service.persistence.UserUtil;
 
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryService;
@@ -99,6 +97,8 @@ import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagService;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagServiceFactory;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryUtil;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderUtil;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence;
@@ -116,6 +116,33 @@ import org.springframework.beans.factory.InitializingBean;
  */
 public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 	implements AnnouncementsEntryService, InitializingBean {
+	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
+		return announcementsDeliveryLocalService;
+	}
+
+	public void setAnnouncementsDeliveryLocalService(
+		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService) {
+		this.announcementsDeliveryLocalService = announcementsDeliveryLocalService;
+	}
+
+	public AnnouncementsDeliveryService getAnnouncementsDeliveryService() {
+		return announcementsDeliveryService;
+	}
+
+	public void setAnnouncementsDeliveryService(
+		AnnouncementsDeliveryService announcementsDeliveryService) {
+		this.announcementsDeliveryService = announcementsDeliveryService;
+	}
+
+	public AnnouncementsDeliveryPersistence getAnnouncementsDeliveryPersistence() {
+		return announcementsDeliveryPersistence;
+	}
+
+	public void setAnnouncementsDeliveryPersistence(
+		AnnouncementsDeliveryPersistence announcementsDeliveryPersistence) {
+		this.announcementsDeliveryPersistence = announcementsDeliveryPersistence;
+	}
+
 	public AnnouncementsEntryLocalService getAnnouncementsEntryLocalService() {
 		return announcementsEntryLocalService;
 	}
@@ -216,30 +243,6 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 
 	public void setCompanyPersistence(CompanyPersistence companyPersistence) {
 		this.companyPersistence = companyPersistence;
-	}
-
-	public ContactLocalService getContactLocalService() {
-		return contactLocalService;
-	}
-
-	public void setContactLocalService(ContactLocalService contactLocalService) {
-		this.contactLocalService = contactLocalService;
-	}
-
-	public ContactService getContactService() {
-		return contactService;
-	}
-
-	public void setContactService(ContactService contactService) {
-		this.contactService = contactService;
-	}
-
-	public ContactPersistence getContactPersistence() {
-		return contactPersistence;
-	}
-
-	public void setContactPersistence(ContactPersistence contactPersistence) {
-		this.contactPersistence = contactPersistence;
 	}
 
 	public GroupLocalService getGroupLocalService() {
@@ -440,6 +443,18 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 	}
 
 	public void afterPropertiesSet() {
+		if (announcementsDeliveryLocalService == null) {
+			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
+		}
+
+		if (announcementsDeliveryService == null) {
+			announcementsDeliveryService = AnnouncementsDeliveryServiceFactory.getImpl();
+		}
+
+		if (announcementsDeliveryPersistence == null) {
+			announcementsDeliveryPersistence = AnnouncementsDeliveryUtil.getPersistence();
+		}
+
 		if (announcementsEntryLocalService == null) {
 			announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getImpl();
 		}
@@ -486,18 +501,6 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 
 		if (companyPersistence == null) {
 			companyPersistence = CompanyUtil.getPersistence();
-		}
-
-		if (contactLocalService == null) {
-			contactLocalService = ContactLocalServiceFactory.getImpl();
-		}
-
-		if (contactService == null) {
-			contactService = ContactServiceFactory.getImpl();
-		}
-
-		if (contactPersistence == null) {
-			contactPersistence = ContactUtil.getPersistence();
 		}
 
 		if (groupLocalService == null) {
@@ -597,6 +600,9 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 		}
 	}
 
+	protected AnnouncementsDeliveryLocalService announcementsDeliveryLocalService;
+	protected AnnouncementsDeliveryService announcementsDeliveryService;
+	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
 	protected AnnouncementsEntryLocalService announcementsEntryLocalService;
 	protected AnnouncementsEntryPersistence announcementsEntryPersistence;
 	protected AnnouncementsEntryFinder announcementsEntryFinder;
@@ -609,9 +615,6 @@ public abstract class AnnouncementsEntryServiceBaseImpl extends PrincipalBean
 	protected CompanyLocalService companyLocalService;
 	protected CompanyService companyService;
 	protected CompanyPersistence companyPersistence;
-	protected ContactLocalService contactLocalService;
-	protected ContactService contactService;
-	protected ContactPersistence contactPersistence;
 	protected GroupLocalService groupLocalService;
 	protected GroupService groupService;
 	protected GroupPersistence groupPersistence;

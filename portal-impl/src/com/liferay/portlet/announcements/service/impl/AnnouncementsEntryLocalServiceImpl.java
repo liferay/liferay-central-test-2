@@ -26,7 +26,6 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
@@ -43,8 +42,10 @@ import com.liferay.portlet.announcements.EntryDisplayDateException;
 import com.liferay.portlet.announcements.EntryExpirationDateException;
 import com.liferay.portlet.announcements.EntryTitleException;
 import com.liferay.portlet.announcements.job.CheckEntryJob;
+import com.liferay.portlet.announcements.model.AnnouncementsDelivery;
 import com.liferay.portlet.announcements.model.AnnouncementsEntry;
 import com.liferay.portlet.announcements.service.base.AnnouncementsEntryLocalServiceBaseImpl;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.io.IOException;
 
@@ -140,7 +141,12 @@ public class AnnouncementsEntryLocalServiceImpl
 		}
 
 		for (AnnouncementsEntry entry : entries) {
-			sendEmail(entry);
+			try {
+				notifyUsers(entry);
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
 		}
 	}
 
@@ -325,26 +331,14 @@ public class AnnouncementsEntryLocalServiceImpl
 		return entry;
 	}
 
-	protected void sendEmail(AnnouncementsEntry entry)
-		throws PortalException, SystemException {
-
-		long classNameId = entry.getClassNameId();
-		String className = StringPool.BLANK;
-
-		if (classNameId > 0) {
-			className = PortalUtil.getClassName(classNameId);
-		}
-
-		long classPK = entry.getClassPK();
+	protected void notifyUsers(AnnouncementsEntry entry)
+		throws IOException, PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(
 			entry.getCompanyId());
 
-		String subject = ContentUtil.get(
-			PropsValues.ANNOUNCEMENTS_EMAIL_SUBJECT);
-
-		String body = ContentUtil.get(
-			PropsValues.ANNOUNCEMENTS_EMAIL_BODY);
+		String className = entry.getClassName();
+		long classPK = entry.getClassPK();
 
 		String fromName = PropsValues.ANNOUNCEMENTS_EMAIL_FROM_NAME;
 		String fromAddress = PropsValues.ANNOUNCEMENTS_EMAIL_FROM_ADDRESS;
@@ -352,211 +346,175 @@ public class AnnouncementsEntryLocalServiceImpl
 		String toName = PropsValues.ANNOUNCEMENTS_EMAIL_TO_NAME;
 		String toAddress = PropsValues.ANNOUNCEMENTS_EMAIL_TO_ADDRESS;
 
-		List<User> users = new ArrayList<User>();
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
 
-		try {
-			if (classNameId == 0 && classPK == 0) {
-				users = userPersistence.findByCompanyId(company.getCompanyId());
-			}
-			else if (className.equals(Group.class.getName()) &&
-					classPK > 0) {
+		params.put("announcementsDeliveryEmailOrSms", entry.getType());
 
+		if (classPK > 0) {
+			if (className.equals(Group.class.getName())) {
 				Group group = groupPersistence.findByPrimaryKey(classPK);
 
 				toName = group.getName();
 
-				users = userLocalService.getGroupUsers(group.getGroupId());
+				params.put("usersGroups", classPK);
 			}
-			else if (className.equals(Organization.class.getName()) &&
-					classPK > 0) {
+			else if (className.equals(Organization.class.getName())) {
+				Organization organization =
+					organizationPersistence.findByPrimaryKey(classPK);
 
-				Organization org = organizationPersistence.findByPrimaryKey(
-					classPK);
+				toName = organization.getName();
 
-				toName = org.getName();
-
-				users = userLocalService.getOrganizationUsers(
-					org.getOrganizationId());
+				params.put("usersOrgs", classPK);
 			}
-			else if (className.equals(Role.class.getName()) && classPK > 0) {
+			else if (className.equals(Role.class.getName())) {
 				Role role = rolePersistence.findByPrimaryKey(classPK);
 
 				toName = role.getName();
 
-				users = userLocalService.getRoleUsers(role.getRoleId());
+				params.put("usersRoles", classPK);
 			}
-			else if (className.equals(User.class.getName()) && classPK > 0) {
-				User user = userLocalService.getUserById(classPK);
-
-				toName = user.getFullName();
-				toAddress = user.getEmailAddress();
-
-				users.add(user);
-			}
-			else if (className.equals(UserGroup.class.getName()) &&
-					classPK > 0) {
-
+			else if (className.equals(UserGroup.class.getName())) {
 				UserGroup userGroup = userGroupPersistence.findByPrimaryKey(
 					classPK);
 
 				toName = userGroup.getName();
 
-				users = userLocalService.getUserGroupUsers(
-					userGroup.getUserGroupId());
-			}
-
-			if (_log.isDebugEnabled()) {
-				_log.debug("Checking " + users.size() + " users");
-			}
-
-			List<InternetAddress> addresses =
-				new ArrayList<InternetAddress>();
-
-			long userClassNameId = PortalUtil.getClassNameId(
-				User.class.getName());
-
-			String emailColName =
-				"announcements-delivery-by-email-type-" + entry.getType();
-
-			String smsColName =
-				"announcements-delivery-by-sms-type-" + entry.getType();
-
-			/*ExpandoColumn emailColumn =
-				expandoColumnLocalService.setColumn(
-					userClassNameId, emailColName, ExpandoColumnImpl.BOOLEAN);
-
-			ExpandoColumn smsColumn =
-				expandoColumnLocalService.setColumn(
-					userClassNameId, smsColName, ExpandoColumnImpl.BOOLEAN);
-
-			boolean sendEmail, sendSMS;
-
-			for (User user : users) {
-				try {
-					ExpandoValue emailValue =
-						expandoValueLocalService.getValue(
-							user.getUserId(), emailColumn.getColumnId());
-
-					sendEmail = emailValue.getBoolean();
-				}
-				catch (NoSuchExpandoValueException nseve) {
-					sendEmail = Boolean.FALSE;
-				}
-
-				if (sendEmail) {
-					InternetAddress address = new InternetAddress(
-						user.getEmailAddress(), user.getFullName());
-
-					addresses.add(address);
-				}
-
-				try {
-					ExpandoValue smsValue =
-						expandoValueLocalService.getValue(
-							user.getUserId(), smsColumn.getColumnId());
-
-					sendSMS = smsValue.getBoolean();
-				}
-				catch (NoSuchExpandoValueException nseve) {
-					sendSMS = Boolean.FALSE;
-				}
-
-				if (sendSMS) {
-					Contact contact = contactPersistence.findByPrimaryKey(
-						user.getContactId());
-
-					if (Validator.isNotNull(contact.getSmsSn())) {
-						InternetAddress address = new InternetAddress(
-							contact.getSmsSn(), user.getFullName());
-
-						addresses.add(address);
-					}
-				}
-			}*/
-
-			InternetAddress[] bulkAddresses = addresses.toArray(
-				new InternetAddress[addresses.size()]);
-
-			if (bulkAddresses.length > 0) {
-				subject = StringUtil.replace(
-					subject,
-					new String[] {
-						"[$ENTRY_ID$]",
-						"[$ENTRY_TITLE$]",
-						"[$ENTRY_URL$]",
-						"[$ENTRY_CONTENT$]",
-						"[$ENTRY_TYPE$]",
-						"[$FROM_ADDRESS$]",
-						"[$FROM_NAME$]",
-						"[$PORTAL_URL$]",
-						"[$PORTLET_NAME$]",
-						"[$TO_ADDRESS$]",
-						"[$TO_NAME$]"
-					},
-					new String[] {
-						String.valueOf(entry.getEntryId()),
-						entry.getTitle(),
-						entry.getUrl(),
-						entry.getContent(),
-						LanguageUtil.get(
-							company.getCompanyId(), company.getLocale(),
-							entry.getType()),
-						fromAddress,
-						fromName,
-						company.getVirtualHost(),
-						(entry.isAlert()?"Alert":"Announcement"),
-						toAddress,
-						toName
-					});
-
-				body = StringUtil.replace(
-					body,
-					new String[] {
-						"[$ENTRY_ID$]",
-						"[$ENTRY_TITLE$]",
-						"[$ENTRY_URL$]",
-						"[$ENTRY_CONTENT$]",
-						"[$ENTRY_TYPE$]",
-						"[$FROM_ADDRESS$]",
-						"[$FROM_NAME$]",
-						"[$PORTAL_URL$]",
-						"[$PORTLET_NAME$]",
-						"[$TO_ADDRESS$]",
-						"[$TO_NAME$]"
-					},
-					new String[] {
-						String.valueOf(entry.getEntryId()),
-						entry.getTitle(),
-						entry.getUrl(),
-						entry.getContent(),
-						LanguageUtil.get(
-							company.getCompanyId(), company.getLocale(),
-							entry.getType()),
-						fromAddress,
-						fromName,
-						company.getVirtualHost(),
-						(entry.isAlert()?"Alert":"Announcement"),
-						toAddress,
-						toName
-					});
-
-				InternetAddress from = new InternetAddress(fromAddress, fromName);
-
-				InternetAddress[] to = new InternetAddress[] {
-					new InternetAddress(toAddress, toName)};
-
-				MailMessage message = new MailMessage(
-					from, to, null, null, bulkAddresses, subject, body, true);
-
-				mailService.sendEmail(message);
+				params.put("usersUserGroups", classPK);
 			}
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+
+		List<User> users = null;
+
+		if (className.equals(User.class.getName())) {
+			User user = userLocalService.getUserById(classPK);
+
+			toName = user.getFullName();
+			toAddress = user.getEmailAddress();
+
+			users = new ArrayList<User>();
+
+			users.add(user);
 		}
-		catch (PortalException pe) {
-			throw pe;
+		else {
+			users = userLocalService.search(
+				company.getCompanyId(), null, Boolean.TRUE, params,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS, null);
 		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Notifying " + users.size() + " users");
+		}
+
+		List<InternetAddress> bulkAddresses = new ArrayList<InternetAddress>();
+
+		for (User user : users) {
+			AnnouncementsDelivery announcementsDelivery =
+				announcementsDeliveryLocalService.getUserDelivery(
+					user.getUserId(), entry.getType());
+
+			if (announcementsDelivery.isEmail()) {
+				InternetAddress address = new InternetAddress(
+					user.getEmailAddress(), user.getFullName());
+
+				bulkAddresses.add(address);
+			}
+			else if (announcementsDelivery.isSms()) {
+				String smsSn = user.getContact().getSmsSn();
+
+				InternetAddress address = new InternetAddress(
+					smsSn, user.getFullName());
+
+				bulkAddresses.add(address);
+			}
+		}
+
+		if (bulkAddresses.size() == 0) {
+			return;
+		}
+
+		String subject = ContentUtil.get(
+			PropsValues.ANNOUNCEMENTS_EMAIL_SUBJECT);
+		String body = ContentUtil.get(PropsValues.ANNOUNCEMENTS_EMAIL_BODY);
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$ENTRY_CONTENT$]",
+				"[$ENTRY_ID$]",
+				"[$ENTRY_TITLE$]",
+				"[$ENTRY_TYPE$]",
+				"[$ENTRY_URL$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]"
+			},
+			new String[] {
+				entry.getContent(),
+				String.valueOf(entry.getEntryId()),
+				entry.getTitle(),
+				LanguageUtil.get(
+					company.getCompanyId(), company.getLocale(),
+					entry.getType()),
+				entry.getUrl(),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				LanguageUtil.get(
+					company.getCompanyId(), company.getLocale(),
+					(entry.isAlert() ? "alert" : "announcement")),
+				toAddress,
+				toName
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$ENTRY_CONTENT$]",
+				"[$ENTRY_ID$]",
+				"[$ENTRY_TITLE$]",
+				"[$ENTRY_TYPE$]",
+				"[$ENTRY_URL$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]"
+			},
+			new String[] {
+				entry.getContent(),
+				String.valueOf(entry.getEntryId()),
+				entry.getTitle(),
+				LanguageUtil.get(
+					company.getCompanyId(), company.getLocale(),
+					entry.getType()),
+				entry.getUrl(),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				LanguageUtil.get(
+					company.getCompanyId(), company.getLocale(),
+					(entry.isAlert() ? "alert" : "announcement")),
+				toAddress,
+				toName
+			});
+
+		InternetAddress from = new InternetAddress(fromAddress, fromName);
+
+		InternetAddress[] to = new InternetAddress[] {
+			new InternetAddress(toAddress, toName)};
+
+		InternetAddress[] bulkAddressesArray = bulkAddresses.toArray(
+			new InternetAddress[bulkAddresses.size()]);
+
+		MailMessage message = new MailMessage(
+			from, to, null, null, bulkAddressesArray, subject, body, true);
+
+		mailService.sendEmail(message);
 	}
 
 	protected void validate(String title, String content)

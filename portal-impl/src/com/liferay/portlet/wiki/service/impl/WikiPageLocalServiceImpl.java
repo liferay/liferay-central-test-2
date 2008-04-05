@@ -167,7 +167,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		notifySubscribers(node, page, prefs, themeDisplay, false);
+		try {
+			notifySubscribers(node, page, prefs, themeDisplay, false);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 
 		// Tags
 
@@ -859,7 +864,12 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		notifySubscribers(node, page, prefs, themeDisplay, true);
+		try {
+			notifySubscribers(node, page, prefs, themeDisplay, true);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 
 		// Tags
 
@@ -936,211 +946,203 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 	protected void notifySubscribers(
 			WikiNode node, WikiPage page, PortletPreferences prefs,
 			ThemeDisplay themeDisplay, boolean update)
-		throws PortalException, SystemException {
+		throws IOException, PortalException, SystemException {
 
-		try {
-			if (prefs == null) {
-				long ownerId = node.getGroupId();
-				int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
-				long plid = PortletKeys.PREFS_PLID_SHARED;
-				String portletId = PortletKeys.WIKI;
-				String defaultPreferences = null;
+		if (prefs == null) {
+			long ownerId = node.getGroupId();
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+			long plid = PortletKeys.PREFS_PLID_SHARED;
+			String portletId = PortletKeys.WIKI;
+			String defaultPreferences = null;
 
-				prefs = portletPreferencesLocalService.getPreferences(
-					node.getCompanyId(), ownerId, ownerType, plid,
-					portletId, defaultPreferences);
-			}
+			prefs = portletPreferencesLocalService.getPreferences(
+				node.getCompanyId(), ownerId, ownerType, plid, portletId,
+				defaultPreferences);
+		}
 
-			if (!update && WikiUtil.getEmailPageAddedEnabled(prefs)) {
-			}
-			else if (update && WikiUtil.getEmailPageUpdatedEnabled(prefs)) {
-			}
-			else {
-				return;
-			}
+		if (!update && WikiUtil.getEmailPageAddedEnabled(prefs)) {
+		}
+		else if (update && WikiUtil.getEmailPageUpdatedEnabled(prefs)) {
+		}
+		else {
+			return;
+		}
 
-			Company company = companyPersistence.findByPrimaryKey(
-				page.getCompanyId());
+		Company company = companyPersistence.findByPrimaryKey(
+			page.getCompanyId());
 
-			Group group = groupPersistence.findByPrimaryKey(
-				node.getGroupId());
+		Group group = groupPersistence.findByPrimaryKey(node.getGroupId());
 
-			User user = userPersistence.findByPrimaryKey(page.getUserId());
+		User user = userPersistence.findByPrimaryKey(page.getUserId());
 
-			String pageURL = StringPool.BLANK;
+		String pageURL = StringPool.BLANK;
 
-			if (themeDisplay != null) {
-				String portalURL = PortalUtil.getPortalURL(themeDisplay);
-				String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+		if (themeDisplay != null) {
+			String portalURL = PortalUtil.getPortalURL(themeDisplay);
+			String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
 
-				pageURL =
-					portalURL + layoutURL + "/wiki/" + node.getNodeId() + "/" +
-						page.getTitle();
-			}
+			pageURL =
+				portalURL + layoutURL + "/wiki/" + node.getNodeId() + "/" +
+					page.getTitle();
+		}
 
-			String portletName = PortalUtil.getPortletTitle(
-				PortletKeys.WIKI, user);
+		String portletName = PortalUtil.getPortletTitle(
+			PortletKeys.WIKI, user);
 
-			String fromName = WikiUtil.getEmailFromName(prefs);
-			String fromAddress = WikiUtil.getEmailFromAddress(prefs);
+		String fromName = WikiUtil.getEmailFromName(prefs);
+		String fromAddress = WikiUtil.getEmailFromAddress(prefs);
 
-			String replyToAddress = fromAddress;
-			String mailId = WikiUtil.getMailId(
-				company.getMx(), page.getNodeId(), page.getPageId());
+		String replyToAddress = fromAddress;
+		String mailId = WikiUtil.getMailId(
+			company.getMx(), page.getNodeId(), page.getPageId());
 
-			fromName = StringUtil.replace(
-				fromName,
-				new String[] {
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$COMMUNITY_NAME$]",
-					"[$PAGE_USER_ADDRESS$]",
-					"[$PAGE_USER_NAME$]",
-					"[$PORTLET_NAME$]"
-				},
-				new String[] {
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					group.getName(),
-					user.getEmailAddress(),
-					user.getFullName(),
-					portletName
-				});
+		fromName = StringUtil.replace(
+			fromName,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$PAGE_USER_ADDRESS$]",
+				"[$PAGE_USER_NAME$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				user.getEmailAddress(),
+				user.getFullName(),
+				portletName
+			});
 
-			fromAddress = StringUtil.replace(
+		fromAddress = StringUtil.replace(
+			fromAddress,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$PAGE_USER_ADDRESS$]",
+				"[$PAGE_USER_NAME$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				user.getEmailAddress(),
+				user.getFullName(),
+				portletName
+			});
+
+		String subjectPrefix = null;
+		String body = null;
+		String signature = null;
+
+		if (update) {
+			subjectPrefix = WikiUtil.getEmailPageUpdatedSubjectPrefix(prefs);
+			body = WikiUtil.getEmailPageUpdatedBody(prefs);
+			signature = WikiUtil.getEmailPageUpdatedSignature(prefs);
+		}
+		else {
+			subjectPrefix = WikiUtil.getEmailPageAddedSubjectPrefix(prefs);
+			body = WikiUtil.getEmailPageAddedBody(prefs);
+			signature = WikiUtil.getEmailPageAddedSignature(prefs);
+		}
+
+		if (Validator.isNotNull(signature)) {
+			body +=  "\n--\n" + signature;
+		}
+
+		subjectPrefix = StringUtil.replace(
+			subjectPrefix,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$NODE_NAME$]",
+				"[$PAGE_CONTENT$]",
+				"[$PAGE_ID$]",
+				"[$PAGE_TITLE$]",
+				"[$PAGE_USER_ADDRESS$]",
+				"[$PAGE_USER_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
 				fromAddress,
-				new String[] {
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$COMMUNITY_NAME$]",
-					"[$PAGE_USER_ADDRESS$]",
-					"[$PAGE_USER_NAME$]",
-					"[$PORTLET_NAME$]"
-				},
-				new String[] {
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					group.getName(),
-					user.getEmailAddress(),
-					user.getFullName(),
-					portletName
-				});
+				fromName,
+				node.getName(),
+				page.getContent(),
+				String.valueOf(page.getPageId()),
+				page.getTitle(),
+				user.getEmailAddress(),
+				user.getFullName(),
+				company.getVirtualHost(),
+				portletName
+			});
 
-			String subjectPrefix = null;
-			String body = null;
-			String signature = null;
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$NODE_NAME$]",
+				"[$PAGE_CONTENT$]",
+				"[$PAGE_ID$]",
+				"[$PAGE_TITLE$]",
+				"[$PAGE_URL$]",
+				"[$PAGE_USER_ADDRESS$]",
+				"[$PAGE_USER_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				fromAddress,
+				fromName,
+				node.getName(),
+				page.getContent(),
+				String.valueOf(page.getPageId()),
+				page.getTitle(),
+				pageURL,
+				user.getEmailAddress(),
+				user.getFullName(),
+				company.getVirtualHost(),
+				portletName
+			});
 
-			if (update) {
-				subjectPrefix =
-					WikiUtil.getEmailPageUpdatedSubjectPrefix(prefs);
-				body = WikiUtil.getEmailPageUpdatedBody(prefs);
-				signature = WikiUtil.getEmailPageUpdatedSignature(prefs);
-			}
-			else {
-				subjectPrefix = WikiUtil.getEmailPageAddedSubjectPrefix(prefs);
-				body = WikiUtil.getEmailPageAddedBody(prefs);
-				signature = WikiUtil.getEmailPageAddedSignature(prefs);
-			}
+		String subject = page.getTitle();
 
-			if (Validator.isNotNull(signature)) {
-				body +=  "\n--\n" + signature;
-			}
-
-			subjectPrefix = StringUtil.replace(
-				subjectPrefix,
-				new String[] {
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$COMMUNITY_NAME$]",
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$NODE_NAME$]",
-					"[$PAGE_CONTENT$]",
-					"[$PAGE_ID$]",
-					"[$PAGE_TITLE$]",
-					"[$PAGE_USER_ADDRESS$]",
-					"[$PAGE_USER_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]"
-				},
-				new String[] {
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					group.getName(),
-					fromAddress,
-					fromName,
-					node.getName(),
-					page.getContent(),
-					String.valueOf(page.getPageId()),
-					page.getTitle(),
-					user.getEmailAddress(),
-					user.getFullName(),
-					company.getVirtualHost(),
-					portletName
-				});
-
-			body = StringUtil.replace(
-				body,
-				new String[] {
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$COMMUNITY_NAME$]",
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$NODE_NAME$]",
-					"[$PAGE_CONTENT$]",
-					"[$PAGE_ID$]",
-					"[$PAGE_TITLE$]",
-					"[$PAGE_URL$]",
-					"[$PAGE_USER_ADDRESS$]",
-					"[$PAGE_USER_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]"
-				},
-				new String[] {
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					group.getName(),
-					fromAddress,
-					fromName,
-					node.getName(),
-					page.getContent(),
-					String.valueOf(page.getPageId()),
-					page.getTitle(),
-					pageURL,
-					user.getEmailAddress(),
-					user.getFullName(),
-					company.getVirtualHost(),
-					portletName
-				});
-
-			String subject = page.getTitle();
-
-			if (subject.indexOf(subjectPrefix) == -1) {
-				subject = subjectPrefix + subject;
-			}
-
-			WikiPageProducer.produce(
-				new String[] {
-					String.valueOf(node.getCompanyId()),
-					String.valueOf(page.getUserId()),
-					String.valueOf(node.getNodeId()),
-					String.valueOf(page.getResourcePrimKey()),
-					fromName, fromAddress, subject, body, replyToAddress,
-					mailId
-				});
+		if (subject.indexOf(subjectPrefix) == -1) {
+			subject = subjectPrefix + subject;
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+
+		WikiPageProducer.produce(
+			new String[] {
+				String.valueOf(node.getCompanyId()),
+				String.valueOf(page.getUserId()),
+				String.valueOf(node.getNodeId()),
+				String.valueOf(page.getResourcePrimKey()),
+				fromName, fromAddress, subject, body, replyToAddress, mailId
+			});
 	}
 
 	protected void validate(long nodeId, String content, String format)

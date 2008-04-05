@@ -86,10 +86,8 @@ for (int i = 0; i < groups.size(); i++) {
 		results.add(userGroupRole);
 	}
 }
-
-searchContainer.setTotal(results.size());
 %>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <br />

@@ -52,6 +52,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.InvokerPortlet;
 import com.liferay.portlet.admin.util.AdminUtil;
+import com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
 
 import javax.portlet.ActionRequest;
@@ -314,6 +316,18 @@ public class EditUserAction extends PortletAction {
 				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
 				aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
 				organizationIds);
+
+			for (String type : AnnouncementsEntryImpl.TYPES) {
+				boolean email = ParamUtil.getBoolean(
+					req, "announcementsType" + type + "Email");
+				boolean sms = ParamUtil.getBoolean(
+					req, "announcementsType" + type + "Sms");
+				boolean website = ParamUtil.getBoolean(
+					req, "announcementsType" + type + "Website");
+
+				AnnouncementsDeliveryServiceUtil.updateDelivery(
+					user.getUserId(), type,	email, sms, website);
+			}
 
 			if (!tempOldScreenName.equals(user.getScreenName())) {
 				oldScreenName = tempOldScreenName;

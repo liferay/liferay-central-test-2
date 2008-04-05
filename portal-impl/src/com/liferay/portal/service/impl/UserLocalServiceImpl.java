@@ -398,7 +398,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Email
 
 		if (sendEmail) {
-			sendEmail(user, password1);
+			try {
+				sendEmail(user, password1);
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
 		}
 
 		return user;
@@ -770,6 +775,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		userIdMapperLocalService.deleteUserIdMappers(userId);
 
+		// Announcements
+
+		announcementsDeliveryLocalService.deleteDeliveries(userId);
+
 		// Blogs
 
 		blogsStatsUserLocalService.deleteStatsUserByUserId(userId);
@@ -877,6 +886,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		params.put("usersGroups", new Long(groupId));
 
 		return searchCount(group.getCompanyId(), null, active, params);
+	}
+
+	public List<User> getNoAnnouncementsDeliveries(String type)
+		throws SystemException {
+
+		return userFinder.findByNoAnnouncementsDeliveries(type);
 	}
 
 	public List<User> getOrganizationUsers(long organizationId)
@@ -1227,136 +1242,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String remoteHost, String userAgent)
 		throws PortalException, SystemException {
 
-		if (!PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.COMPANY_SECURITY_SEND_PASSWORD) ||
-			!PrefsPropsUtil.getBoolean(
-				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED)) {
-
-			return;
-		}
-
-		emailAddress = emailAddress.trim().toLowerCase();
-
-		if (!Validator.isEmailAddress(emailAddress)) {
-			throw new UserEmailAddressException();
-		}
-
-		Company company = companyPersistence.findByPrimaryKey(companyId);
-
-		User user = userPersistence.findByC_EA(companyId, emailAddress);
-
-		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
-
-		/*if (user.hasCompanyMx()) {
-			throw new SendPasswordException();
-		}*/
-
-		String newPassword = null;
-
-		if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
-				PwdEncryptor.TYPE_NONE)) {
-
-			newPassword = PwdToolkitUtil.generate();
-
-			boolean passwordReset = false;
-
-			if (passwordPolicy.getChangeable() &&
-				passwordPolicy.getChangeRequired()) {
-
-				passwordReset = true;
-			}
-
-			user.setPassword(PwdEncryptor.encrypt(newPassword));
-			user.setPasswordUnencrypted(newPassword);
-			user.setPasswordEncrypted(true);
-			user.setPasswordReset(passwordReset);
-
-			userPersistence.update(user, false);
-		}
-		else {
-			newPassword = user.getPassword();
-		}
-
 		try {
-			String fromName = PrefsPropsUtil.getString(
-				companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
-			String fromAddress = PrefsPropsUtil.getString(
-				companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
-
-			String toName = user.getFullName();
-			String toAddress = user.getEmailAddress();
-
-			String subject = PrefsPropsUtil.getContent(
-				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
-			String body = PrefsPropsUtil.getContent(
-				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY);
-
-			subject = StringUtil.replace(
-				subject,
-				new String[] {
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$REMOTE_ADDRESS$]",
-					"[$REMOTE_HOST$]",
-					"[$TO_ADDRESS$]",
-					"[$TO_NAME$]",
-					"[$USER_AGENT$]",
-					"[$USER_ID$]",
-					"[$USER_PASSWORD$]",
-					"[$USER_SCREENNAME$]"
-				},
-				new String[] {
-					fromAddress,
-					fromName,
-					company.getVirtualHost(),
-					remoteAddr,
-					remoteHost,
-					toAddress,
-					toName,
-					HtmlUtil.escape(userAgent),
-					String.valueOf(user.getUserId()),
-					newPassword,
-					user.getScreenName()
-				});
-
-			body = StringUtil.replace(
-				body,
-				new String[] {
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$REMOTE_ADDRESS$]",
-					"[$REMOTE_HOST$]",
-					"[$TO_ADDRESS$]",
-					"[$TO_NAME$]",
-					"[$USER_AGENT$]",
-					"[$USER_ID$]",
-					"[$USER_PASSWORD$]",
-					"[$USER_SCREENNAME$]"
-				},
-				new String[] {
-					fromAddress,
-					fromName,
-					company.getVirtualHost(),
-					remoteAddr,
-					remoteHost,
-					toAddress,
-					toName,
-					HtmlUtil.escape(userAgent),
-					String.valueOf(user.getUserId()),
-					newPassword,
-					user.getScreenName()
-				});
-
-			InternetAddress from = new InternetAddress(fromAddress, fromName);
-
-			InternetAddress to = new InternetAddress(toAddress, toName);
-
-			MailMessage message = new MailMessage(
-				from, to, subject, body, true);
-
-			mailService.sendEmail(message);
+			doSendPassword(
+				companyId, emailAddress, remoteAddr, remoteHost, userAgent);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -1908,6 +1796,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		groupPersistence.update(group, false);
 
+		// Announcements
+
+		announcementsDeliveryLocalService.getUserDeliveries(user.getUserId());
+
 		// Permission cache
 
 		PermissionCacheUtil.clearCache();
@@ -2142,12 +2034,147 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return authResult;
 	}
 
+	protected void doSendPassword(
+			long companyId, String emailAddress, String remoteAddr,
+			String remoteHost, String userAgent)
+		throws IOException, PortalException, SystemException {
+
+		if (!PrefsPropsUtil.getBoolean(
+				companyId, PropsUtil.COMPANY_SECURITY_SEND_PASSWORD) ||
+			!PrefsPropsUtil.getBoolean(
+				companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_ENABLED)) {
+
+			return;
+		}
+
+		emailAddress = emailAddress.trim().toLowerCase();
+
+		if (!Validator.isEmailAddress(emailAddress)) {
+			throw new UserEmailAddressException();
+		}
+
+		Company company = companyPersistence.findByPrimaryKey(companyId);
+
+		User user = userPersistence.findByC_EA(companyId, emailAddress);
+
+		PasswordPolicy passwordPolicy = user.getPasswordPolicy();
+
+		/*if (user.hasCompanyMx()) {
+			throw new SendPasswordException();
+		}*/
+
+		String newPassword = null;
+
+		if (!PwdEncryptor.PASSWORDS_ENCRYPTION_ALGORITHM.equals(
+				PwdEncryptor.TYPE_NONE)) {
+
+			newPassword = PwdToolkitUtil.generate();
+
+			boolean passwordReset = false;
+
+			if (passwordPolicy.getChangeable() &&
+				passwordPolicy.getChangeRequired()) {
+
+				passwordReset = true;
+			}
+
+			user.setPassword(PwdEncryptor.encrypt(newPassword));
+			user.setPasswordUnencrypted(newPassword);
+			user.setPasswordEncrypted(true);
+			user.setPasswordReset(passwordReset);
+
+			userPersistence.update(user, false);
+		}
+		else {
+			newPassword = user.getPassword();
+		}
+
+		String fromName = PrefsPropsUtil.getString(
+			companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
+		String fromAddress = PrefsPropsUtil.getString(
+			companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
+
+		String toName = user.getFullName();
+		String toAddress = user.getEmailAddress();
+
+		String subject = PrefsPropsUtil.getContent(
+			companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_SUBJECT);
+		String body = PrefsPropsUtil.getContent(
+			companyId, PropsUtil.ADMIN_EMAIL_PASSWORD_SENT_BODY);
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$REMOTE_ADDRESS$]",
+				"[$REMOTE_HOST$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]",
+				"[$USER_AGENT$]",
+				"[$USER_ID$]",
+				"[$USER_PASSWORD$]",
+				"[$USER_SCREENNAME$]"
+			},
+			new String[] {
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				remoteAddr,
+				remoteHost,
+				toAddress,
+				toName,
+				HtmlUtil.escape(userAgent),
+				String.valueOf(user.getUserId()),
+				newPassword,
+				user.getScreenName()
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$REMOTE_ADDRESS$]",
+				"[$REMOTE_HOST$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]",
+				"[$USER_AGENT$]",
+				"[$USER_ID$]",
+				"[$USER_PASSWORD$]",
+				"[$USER_SCREENNAME$]"
+			},
+			new String[] {
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				remoteAddr,
+				remoteHost,
+				toAddress,
+				toName,
+				HtmlUtil.escape(userAgent),
+				String.valueOf(user.getUserId()),
+				newPassword,
+				user.getScreenName()
+			});
+
+		InternetAddress from = new InternetAddress(fromAddress, fromName);
+
+		InternetAddress to = new InternetAddress(toAddress, toName);
+
+		MailMessage message = new MailMessage(from, to, subject, body, true);
+
+		mailService.sendEmail(message);
+	}
+
 	protected String getScreenName(String screenName) {
 		return Normalizer.normalizeToAscii(screenName.trim().toLowerCase());
 	}
 
 	protected void sendEmail(User user, String password)
-		throws PortalException, SystemException {
+		throws IOException, PortalException, SystemException {
 
 		if (!PrefsPropsUtil.getBoolean(
 				user.getCompanyId(),
@@ -2156,82 +2183,76 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			return;
 		}
 
-		try {
-			long companyId = user.getCompanyId();
+		long companyId = user.getCompanyId();
 
-			Company company = companyPersistence.findByPrimaryKey(companyId);
+		Company company = companyPersistence.findByPrimaryKey(companyId);
 
-			String fromName = PrefsPropsUtil.getString(
-				companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
-			String fromAddress = PrefsPropsUtil.getString(
-				companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
+		String fromName = PrefsPropsUtil.getString(
+			companyId, PropsUtil.ADMIN_EMAIL_FROM_NAME);
+		String fromAddress = PrefsPropsUtil.getString(
+			companyId, PropsUtil.ADMIN_EMAIL_FROM_ADDRESS);
 
-			String toName = user.getFullName();
-			String toAddress = user.getEmailAddress();
+		String toName = user.getFullName();
+		String toAddress = user.getEmailAddress();
 
-			String subject = PrefsPropsUtil.getContent(
-				companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT);
-			String body = PrefsPropsUtil.getContent(
-				companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY);
+		String subject = PrefsPropsUtil.getContent(
+			companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_SUBJECT);
+		String body = PrefsPropsUtil.getContent(
+			companyId, PropsUtil.ADMIN_EMAIL_USER_ADDED_BODY);
 
-			subject = StringUtil.replace(
-				subject,
-				new String[] {
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$TO_ADDRESS$]",
-					"[$TO_NAME$]",
-					"[$USER_ID$]",
-					"[$USER_PASSWORD$]",
-					"[$USER_SCREENNAME$]"
-				},
-				new String[] {
-					fromAddress,
-					fromName,
-					company.getVirtualHost(),
-					toAddress,
-					toName,
-					String.valueOf(user.getUserId()),
-					password,
-					user.getScreenName()
-				});
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]",
+				"[$USER_ID$]",
+				"[$USER_PASSWORD$]",
+				"[$USER_SCREENNAME$]"
+			},
+			new String[] {
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				toAddress,
+				toName,
+				String.valueOf(user.getUserId()),
+				password,
+				user.getScreenName()
+			});
 
-			body = StringUtil.replace(
-				body,
-				new String[] {
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$TO_ADDRESS$]",
-					"[$TO_NAME$]",
-					"[$USER_ID$]",
-					"[$USER_PASSWORD$]",
-					"[$USER_SCREENNAME$]"
-				},
-				new String[] {
-					fromAddress,
-					fromName,
-					company.getVirtualHost(),
-					toAddress,
-					toName,
-					String.valueOf(user.getUserId()),
-					password,
-					user.getScreenName()
-				});
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]",
+				"[$USER_ID$]",
+				"[$USER_PASSWORD$]",
+				"[$USER_SCREENNAME$]"
+			},
+			new String[] {
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				toAddress,
+				toName,
+				String.valueOf(user.getUserId()),
+				password,
+				user.getScreenName()
+			});
 
-			InternetAddress from = new InternetAddress(fromAddress, fromName);
+		InternetAddress from = new InternetAddress(fromAddress, fromName);
 
-			InternetAddress to = new InternetAddress(toAddress, toName);
+		InternetAddress to = new InternetAddress(toAddress, toName);
 
-			MailMessage message = new MailMessage(
-				from, to, subject, body, true);
+		MailMessage message = new MailMessage(from, to, subject, body, true);
 
-			mailService.sendEmail(message);
-		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
-		}
+		mailService.sendEmail(message);
 	}
 
 	protected void validate(

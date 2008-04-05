@@ -48,6 +48,14 @@ public abstract class SearchEntry implements Cloneable {
 		_colspan = colspan;
 	}
 
+	public int getIndex() {
+		return _index;
+	}
+
+	public void setIndex(int index) {
+		_index = index;
+	}
+
 	public String getAlign() {
 		return _align;
 	}
@@ -74,6 +82,7 @@ public abstract class SearchEntry implements Cloneable {
 
 	public abstract void print(PageContext pageContext) throws Exception;
 
+	private int _index;
 	private String _align;
 	private String _valign;
 	private int _colspan;

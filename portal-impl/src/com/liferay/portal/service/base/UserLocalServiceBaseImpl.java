@@ -266,6 +266,12 @@ import com.liferay.portal.service.persistence.WebDAVPropsUtil;
 import com.liferay.portal.service.persistence.WebsitePersistence;
 import com.liferay.portal.service.persistence.WebsiteUtil;
 
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryUtil;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalService;
 import com.liferay.portlet.blogs.service.BlogsStatsUserLocalServiceFactory;
 import com.liferay.portlet.blogs.service.persistence.BlogsStatsUserFinder;
@@ -1346,6 +1352,33 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		this.mailService = mailService;
 	}
 
+	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
+		return announcementsDeliveryLocalService;
+	}
+
+	public void setAnnouncementsDeliveryLocalService(
+		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService) {
+		this.announcementsDeliveryLocalService = announcementsDeliveryLocalService;
+	}
+
+	public AnnouncementsDeliveryService getAnnouncementsDeliveryService() {
+		return announcementsDeliveryService;
+	}
+
+	public void setAnnouncementsDeliveryService(
+		AnnouncementsDeliveryService announcementsDeliveryService) {
+		this.announcementsDeliveryService = announcementsDeliveryService;
+	}
+
+	public AnnouncementsDeliveryPersistence getAnnouncementsDeliveryPersistence() {
+		return announcementsDeliveryPersistence;
+	}
+
+	public void setAnnouncementsDeliveryPersistence(
+		AnnouncementsDeliveryPersistence announcementsDeliveryPersistence) {
+		this.announcementsDeliveryPersistence = announcementsDeliveryPersistence;
+	}
+
 	public BlogsStatsUserLocalService getBlogsStatsUserLocalService() {
 		return blogsStatsUserLocalService;
 	}
@@ -1984,6 +2017,18 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 			mailService = MailServiceFactory.getImpl();
 		}
 
+		if (announcementsDeliveryLocalService == null) {
+			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
+		}
+
+		if (announcementsDeliveryService == null) {
+			announcementsDeliveryService = AnnouncementsDeliveryServiceFactory.getImpl();
+		}
+
+		if (announcementsDeliveryPersistence == null) {
+			announcementsDeliveryPersistence = AnnouncementsDeliveryUtil.getPersistence();
+		}
+
 		if (blogsStatsUserLocalService == null) {
 			blogsStatsUserLocalService = BlogsStatsUserLocalServiceFactory.getImpl();
 		}
@@ -2179,6 +2224,9 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
 	protected MailService mailService;
+	protected AnnouncementsDeliveryLocalService announcementsDeliveryLocalService;
+	protected AnnouncementsDeliveryService announcementsDeliveryService;
+	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
 	protected BlogsStatsUserLocalService blogsStatsUserLocalService;
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
 	protected BlogsStatsUserFinder blogsStatsUserFinder;

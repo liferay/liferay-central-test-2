@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -47,9 +48,10 @@ public class PortalCustomSQLUtil
 	extends com.liferay.util.dao.hibernate.CustomSQLUtil {
 
 	public PortalCustomSQLUtil() throws SQLException {
-		super(HibernateUtil.getConnection(),
-			  PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL),
-			  PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNOTNULL));
+		super(
+			HibernateUtil.getConnection(),
+			PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNULL),
+			PropsUtil.get(PropsUtil.CUSTOM_SQL_FUNCTION_ISNOTNULL));
 	}
 
 	protected String[] getConfigs() {
@@ -73,6 +75,8 @@ public class PortalCustomSQLUtil
 		long mbMessageClassNameId = PortalUtil.getClassNameId(MBMessage.class);
 		long wikiPageClassNameId = PortalUtil.getClassNameId(WikiPage.class);
 
+		DBUtil dbUtil = DBUtil.getInstance();
+
 		sql = StringUtil.replace(
 			sql,
 			new String[] {
@@ -84,7 +88,9 @@ public class PortalCustomSQLUtil
 				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.DOCUMENTLIBRARY.MODEL.DLFILEENTRY$]",
 				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.IMAGEGALLERY.MODEL.IGIMAGE$]",
 				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.MESSAGEBOARDS.MODEL.MBMESSAGE$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.WIKI.MODEL.WIKIPAGE$]"
+				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.WIKI.MODEL.WIKIPAGE$]",
+				"[$FALSE$]",
+				"[$TRUE$]"
 			},
 			new String[] {
 				String.valueOf(organizationClassNameId),
@@ -95,7 +101,9 @@ public class PortalCustomSQLUtil
 				String.valueOf(dlFileEntryClassNameId),
 				String.valueOf(igImageClassNameId),
 				String.valueOf(mbMessageClassNameId),
-				String.valueOf(wikiPageClassNameId)
+				String.valueOf(wikiPageClassNameId),
+				dbUtil.getTemplateFalse(),
+				dbUtil.getTemplateTrue()
 			});
 
 		return sql;

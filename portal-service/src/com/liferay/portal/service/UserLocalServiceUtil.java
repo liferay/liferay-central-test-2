@@ -355,6 +355,13 @@ public class UserLocalServiceUtil {
 		return userLocalService.getGroupUsersCount(groupId, active);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> getNoAnnouncementsDeliveries(
+		java.lang.String type) throws com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getNoAnnouncementsDeliveries(type);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
 		long organizationId)
 		throws com.liferay.portal.PortalException,

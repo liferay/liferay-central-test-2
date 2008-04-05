@@ -1394,6 +1394,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.mail" entity="Mail" />
+		<reference package-path="com.liferay.portlet.announcements" entity="AnnouncementsDelivery" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsStatsUser" />
 		<reference package-path="com.liferay.portlet.expando" entity="ExpandoValue" />
 		<reference package-path="com.liferay.portlet.documentlibrary" entity="DLFileRank" />

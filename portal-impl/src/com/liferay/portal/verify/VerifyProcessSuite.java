@@ -48,6 +48,7 @@ public class VerifyProcessSuite extends VerifyProcess {
 		verify(new VerifyJournal());
 		verify(new VerifyLayout());
 		verify(new VerifyMessageBoards());
+		verify(new VerifyUser());
 		verify(new VerifyWiki());
 
 		// VerifyImage is very powerful because it removes all images that it

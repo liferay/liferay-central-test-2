@@ -38,6 +38,16 @@ create table Address (
 	primary_ BOOLEAN
 );
 
+create table AnnouncementsDelivery (
+	deliveryId LONG not null primary key,
+	companyId LONG,
+	userId LONG,
+	type_ VARCHAR(75) null,
+	email BOOLEAN,
+	sms BOOLEAN,
+	website BOOLEAN
+);
+
 create table AnnouncementsEntry (
 	uuid_ VARCHAR(75) null,
 	entryId LONG not null primary key,

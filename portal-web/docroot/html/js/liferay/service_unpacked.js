@@ -1195,6 +1195,17 @@ Liferay.Service.Announcements = {
 	servicePackage: "com.liferay.portlet.announcements.service.http."
 };
 
+Liferay.Service.Announcements.AnnouncementsDelivery = {
+	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementsDelivery" + Liferay.Service.classNameSuffix,
+
+	updateDelivery: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "updateDelivery";
+
+		return Liferay.Service.ajax(params, callback);
+	}
+};
+
 Liferay.Service.Announcements.AnnouncementsEntry = {
 	serviceClassName: Liferay.Service.Announcements.servicePackage + "AnnouncementsEntry" + Liferay.Service.classNameSuffix,
 

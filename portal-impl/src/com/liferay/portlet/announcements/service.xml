@@ -3,6 +3,39 @@
 
 <service-builder package-path="com.liferay.portlet.announcements">
 	<namespace>Announcements</namespace>
+	<entity name="AnnouncementsDelivery" local-service="true" remote-service="true">
+
+		<!-- PK fields -->
+
+		<column name="deliveryId" type="long" primary="true" />
+
+		<!-- Audit fields -->
+
+		<column name="companyId" type="long" />
+		<column name="userId" type="long" />
+
+		<!-- Other fields -->
+
+		<column name="type" type="String" />
+		<column name="email" type="boolean" />
+		<column name="sms" type="boolean" />
+		<column name="website" type="boolean" />
+
+		<!-- Finder methods -->
+
+		<finder name="UserId" return-type="Collection">
+			<finder-column name="userId" />
+		</finder>
+		<finder name="U_T" return-type="AnnouncementsDelivery">
+			<finder-column name="userId" />
+			<finder-column name="type" />
+		</finder>
+
+		<!-- References -->
+
+		<reference package-path="com.liferay.counter" entity="Counter" />
+		<reference package-path="com.liferay.portal" entity="User" />
+	</entity>
 	<entity name="AnnouncementsEntry" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->
@@ -57,7 +90,6 @@
 		<reference package-path="com.liferay.counter" entity="Counter" />
 		<reference package-path="com.liferay.mail" entity="Mail" />
 		<reference package-path="com.liferay.portal" entity="Company" />
-		<reference package-path="com.liferay.portal" entity="Contact" />
 		<reference package-path="com.liferay.portal" entity="Group" />
 		<reference package-path="com.liferay.portal" entity="Organization" />
 		<reference package-path="com.liferay.portal" entity="Resource" />

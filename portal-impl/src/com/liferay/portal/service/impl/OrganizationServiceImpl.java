@@ -90,7 +90,8 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public void deleteOrganization(long organizationId)
 		throws PortalException, SystemException {
 
-		checkPermission(organizationId, ActionKeys.DELETE);
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.DELETE);
 
 		organizationLocalService.deleteOrganization(organizationId);
 	}
@@ -98,7 +99,8 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 	public Organization getOrganization(long organizationId)
 		throws PortalException, SystemException {
 
-		checkPermission(organizationId, ActionKeys.VIEW);
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.VIEW);
 
 		return organizationLocalService.getOrganization(organizationId);
 	}
@@ -152,18 +154,12 @@ public class OrganizationServiceImpl extends OrganizationServiceBaseImpl {
 			int statusId, String comments)
 		throws PortalException, SystemException {
 
-		checkPermission(organizationId, ActionKeys.UPDATE);
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.UPDATE);
 
 		return organizationLocalService.updateOrganization(
 			getUser().getCompanyId(), organizationId, parentOrganizationId,
 			name, type, recursable, regionId, countryId, statusId, comments);
-	}
-
-	protected void checkPermission(long organizationId, String actionId)
-		throws PortalException, SystemException {
-
-		OrganizationPermissionUtil.check(
-			getPermissionChecker(), organizationId, actionId);
 	}
 
 }

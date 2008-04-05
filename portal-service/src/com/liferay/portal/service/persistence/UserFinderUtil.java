@@ -69,6 +69,11 @@ public class UserFinderUtil {
 			end, obc);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> findByNoAnnouncementsDeliveries(
+		java.lang.String type) throws com.liferay.portal.SystemException {
+		return getFinder().findByNoAnnouncementsDeliveries(type);
+	}
+
 	public static java.util.List<com.liferay.portal.model.User> findByC_FN_MN_LN_SN_EA_A(
 		long companyId, java.lang.String firstName,
 		java.lang.String middleName, java.lang.String lastName,

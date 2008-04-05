@@ -201,6 +201,8 @@ if (rowChecker != null) {
 		for (int j = 0; j < entries.size(); j++) {
 			SearchEntry entry = (SearchEntry)entries.get(j);
 
+			entry.setIndex(j);
+
 			request.setAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW_ENTRY, entry);
 		%>
 

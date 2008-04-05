@@ -43,23 +43,23 @@ import org.quartz.JobExecutionException;
 public class CheckEntryJob implements IntervalJob {
 
 	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
-			PropsUtil.ANNOUNCEMENTS_ENTRY_CHECK_INTERVAL)) * Time.MINUTE;
+		PropsUtil.ANNOUNCEMENTS_ENTRY_CHECK_INTERVAL)) * Time.MINUTE;
 
-		public long getInterval() {
-			return INTERVAL;
+	public long getInterval() {
+		return INTERVAL;
+	}
+
+	public void execute(JobExecutionContext context)
+		throws JobExecutionException {
+
+		try {
+			AnnouncementsEntryLocalServiceUtil.checkEntries();
 		}
-
-		public void execute(JobExecutionContext context)
-			throws JobExecutionException {
-
-			try {
-				AnnouncementsEntryLocalServiceUtil.checkEntries();
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
+		catch (Exception e) {
+			_log.error(e);
 		}
+	}
 
-		private static Log _log = LogFactory.getLog(CheckEntryJob.class);
+	private static Log _log = LogFactory.getLog(CheckEntryJob.class);
 
 }

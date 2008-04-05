@@ -584,6 +584,15 @@
 		<field name="typeId" type="int" />
 		<field name="primary" type="boolean" />
 	</model>
+	<model name="com.liferay.portlet.announcements.model.AnnouncementsDelivery">
+		<field name="deliveryId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="type" type="String" />
+		<field name="email" type="boolean" />
+		<field name="sms" type="boolean" />
+		<field name="website" type="boolean" />
+	</model>
 	<model name="com.liferay.portlet.announcements.model.AnnouncementsEntry">
 		<field name="uuid" type="String" />
 		<field name="entryId" type="long" />

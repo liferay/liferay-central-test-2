@@ -201,12 +201,11 @@ public class AnnouncementsEntryFinderImpl implements AnnouncementsEntryFinder {
 			Date displayDateLT, Date displayDateGT)
 		throws SystemException {
 
-		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(
-			displayDateLT);
-		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(
-			displayDateGT);
+		Timestamp displayDateLT_TS = CalendarUtil.getTimestamp(displayDateLT);
+		Timestamp displayDateGT_TS = CalendarUtil.getTimestamp(displayDateGT);
 
 		Session session = null;
+
 		try {
 			session = HibernateUtil.openSession();
 

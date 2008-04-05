@@ -79,134 +79,7 @@ public class ShoppingItemLocalServiceImpl
 		throws PortalException, SystemException {
 
 		try {
-			String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
-
-			for (int i = 0; (i < isbns.length) && (i < 50); i++) {
-				String isbn = isbns[i];
-
-				AmazonRankings amazonRankings =
-					AmazonRankingsUtil.getAmazonRankings(isbn);
-
-				if (amazonRankings == null) {
-					continue;
-				}
-
-				String name = amazonRankings.getProductName();
-				String description = StringPool.BLANK;
-				String properties = getBookProperties(amazonRankings);
-
-				int minQuantity = 0;
-				int maxQuantity = 0;
-				double price = amazonRankings.getListPrice();
-				double discount = 1 - amazonRankings.getOurPrice() / price;
-				boolean taxable = true;
-				double shipping = 0.0;
-				boolean useShippingFormula = true;
-
-				ShoppingItemPrice itemPrice =
-					shoppingItemPricePersistence.create(0);
-
-				itemPrice.setMinQuantity(minQuantity);
-				itemPrice.setMaxQuantity(maxQuantity);
-				itemPrice.setPrice(price);
-				itemPrice.setDiscount(discount);
-				itemPrice.setTaxable(taxable);
-				itemPrice.setShipping(shipping);
-				itemPrice.setUseShippingFormula(useShippingFormula);
-				itemPrice.setStatus(
-					ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT);
-
-				boolean requiresShipping = true;
-				int stockQuantity = 0;
-				boolean featured = false;
-				Boolean sale = null;
-
-				// Small image
-
-				boolean smallImage = true;
-				String smallImageURL = StringPool.BLANK;
-				File smallFile = new File(
-					tmpDir + File.separatorChar +
-					PwdGenerator.getPassword(
-						PwdGenerator.KEY1 + PwdGenerator.KEY2, 12) + ".jpg");
-
-				byte[] smallBytes = HttpUtil.URLtoByteArray(
-					amazonRankings.getSmallImageURL());
-
-				if (smallBytes.length < 1024) {
-					smallImage = false;
-				}
-				else {
-					OutputStream out = new FileOutputStream(smallFile);
-					out.write(smallBytes);
-					out.close();
-				}
-
-				// Medium image
-
-				boolean mediumImage = true;
-				String mediumImageURL = StringPool.BLANK;
-				File mediumFile = new File(
-					tmpDir + File.separatorChar +
-					PwdGenerator.getPassword(
-						PwdGenerator.KEY1 + PwdGenerator.KEY2, 12) + ".jpg");
-
-				byte[] mediumBytes = HttpUtil.URLtoByteArray(
-					amazonRankings.getMediumImageURL());
-
-				if (mediumBytes.length < 1024) {
-					mediumImage = false;
-				}
-				else {
-					OutputStream out = new FileOutputStream(mediumFile);
-					out.write(mediumBytes);
-					out.close();
-				}
-
-				// Large image
-
-				boolean largeImage = true;
-				String largeImageURL = StringPool.BLANK;
-				File largeFile = new File(
-					tmpDir + File.separatorChar +
-					PwdGenerator.getPassword(
-						PwdGenerator.KEY1 + PwdGenerator.KEY2, 12) + ".jpg");
-
-				byte[] largeBytes = HttpUtil.URLtoByteArray(
-					amazonRankings.getLargeImageURL());
-
-				if (largeBytes.length < 1024) {
-					largeImage = false;
-				}
-				else {
-					OutputStream out = new FileOutputStream(largeFile);
-					out.write(largeBytes);
-					out.close();
-				}
-
-				List<ShoppingItemField> itemFields =
-					new ArrayList<ShoppingItemField>();
-
-				List<ShoppingItemPrice> itemPrices =
-					new ArrayList<ShoppingItemPrice>();
-
-				itemPrices.add(itemPrice);
-
-				boolean addCommunityPermissions = true;
-				boolean addGuestPermissions = true;
-
-				addItem(
-					userId, categoryId, isbn, name, description, properties,
-					StringPool.BLANK, requiresShipping, stockQuantity, featured,
-					sale, smallImage, smallImageURL, smallFile, mediumImage,
-					mediumImageURL, mediumFile, largeImage, largeImageURL,
-					largeFile, itemFields, itemPrices, addCommunityPermissions,
-					addGuestPermissions);
-
-				smallFile.delete();
-				mediumFile.delete();
-				largeFile.delete();
-			}
+			doAddBookItems(userId, categoryId, isbns);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
@@ -747,6 +620,138 @@ public class ShoppingItemLocalServiceImpl
 			largeImage, item.getLargeImageId(), largeFile, largeBytes);
 
 		return item;
+	}
+
+	protected void doAddBookItems(long userId, long categoryId, String[] isbns)
+		throws IOException, PortalException, SystemException {
+
+		String tmpDir = SystemProperties.get(SystemProperties.TMP_DIR);
+
+		for (int i = 0; (i < isbns.length) && (i < 50); i++) {
+			String isbn = isbns[i];
+
+			AmazonRankings amazonRankings =
+				AmazonRankingsUtil.getAmazonRankings(isbn);
+
+			if (amazonRankings == null) {
+				continue;
+			}
+
+			String name = amazonRankings.getProductName();
+			String description = StringPool.BLANK;
+			String properties = getBookProperties(amazonRankings);
+
+			int minQuantity = 0;
+			int maxQuantity = 0;
+			double price = amazonRankings.getListPrice();
+			double discount = 1 - amazonRankings.getOurPrice() / price;
+			boolean taxable = true;
+			double shipping = 0.0;
+			boolean useShippingFormula = true;
+
+			ShoppingItemPrice itemPrice =
+				shoppingItemPricePersistence.create(0);
+
+			itemPrice.setMinQuantity(minQuantity);
+			itemPrice.setMaxQuantity(maxQuantity);
+			itemPrice.setPrice(price);
+			itemPrice.setDiscount(discount);
+			itemPrice.setTaxable(taxable);
+			itemPrice.setShipping(shipping);
+			itemPrice.setUseShippingFormula(useShippingFormula);
+			itemPrice.setStatus(ShoppingItemPriceImpl.STATUS_ACTIVE_DEFAULT);
+
+			boolean requiresShipping = true;
+			int stockQuantity = 0;
+			boolean featured = false;
+			Boolean sale = null;
+
+			// Small image
+
+			boolean smallImage = true;
+			String smallImageURL = StringPool.BLANK;
+			File smallFile = new File(
+				tmpDir + File.separatorChar +
+				PwdGenerator.getPassword(
+					PwdGenerator.KEY1 + PwdGenerator.KEY2, 12) + ".jpg");
+
+			byte[] smallBytes = HttpUtil.URLtoByteArray(
+				amazonRankings.getSmallImageURL());
+
+			if (smallBytes.length < 1024) {
+				smallImage = false;
+			}
+			else {
+				OutputStream out = new FileOutputStream(smallFile);
+				out.write(smallBytes);
+				out.close();
+			}
+
+			// Medium image
+
+			boolean mediumImage = true;
+			String mediumImageURL = StringPool.BLANK;
+			File mediumFile = new File(
+				tmpDir + File.separatorChar +
+				PwdGenerator.getPassword(
+					PwdGenerator.KEY1 + PwdGenerator.KEY2, 12) + ".jpg");
+
+			byte[] mediumBytes = HttpUtil.URLtoByteArray(
+				amazonRankings.getMediumImageURL());
+
+			if (mediumBytes.length < 1024) {
+				mediumImage = false;
+			}
+			else {
+				OutputStream out = new FileOutputStream(mediumFile);
+				out.write(mediumBytes);
+				out.close();
+			}
+
+			// Large image
+
+			boolean largeImage = true;
+			String largeImageURL = StringPool.BLANK;
+			File largeFile = new File(
+				tmpDir + File.separatorChar +
+				PwdGenerator.getPassword(
+					PwdGenerator.KEY1 + PwdGenerator.KEY2, 12) + ".jpg");
+
+			byte[] largeBytes = HttpUtil.URLtoByteArray(
+				amazonRankings.getLargeImageURL());
+
+			if (largeBytes.length < 1024) {
+				largeImage = false;
+			}
+			else {
+				OutputStream out = new FileOutputStream(largeFile);
+				out.write(largeBytes);
+				out.close();
+			}
+
+			List<ShoppingItemField> itemFields =
+				new ArrayList<ShoppingItemField>();
+
+			List<ShoppingItemPrice> itemPrices =
+				new ArrayList<ShoppingItemPrice>();
+
+			itemPrices.add(itemPrice);
+
+			boolean addCommunityPermissions = true;
+			boolean addGuestPermissions = true;
+
+			addItem(
+				userId, categoryId, isbn, name, description, properties,
+				StringPool.BLANK, requiresShipping, stockQuantity, featured,
+				sale, smallImage, smallImageURL, smallFile, mediumImage,
+				mediumImageURL, mediumFile, largeImage, largeImageURL,
+				largeFile, itemFields, itemPrices, addCommunityPermissions,
+				addGuestPermissions);
+
+			smallFile.delete();
+			mediumFile.delete();
+			largeFile.delete();
+		}
 	}
 
 	protected String checkItemField(String value) {

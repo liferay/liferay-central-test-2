@@ -46,7 +46,8 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 			int satOpen, int satClose)
 		throws PortalException, SystemException {
 
-		checkPermission(organizationId, ActionKeys.UPDATE);
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.UPDATE);
 
 		return orgLaborLocalService.addOrgLabor(
 			organizationId, typeId, sunOpen, sunClose, monOpen, monClose,
@@ -59,7 +60,9 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 
 		OrgLabor orgLabor = orgLaborPersistence.findByPrimaryKey(orgLaborId);
 
-		checkPermission(orgLabor.getOrganizationId(), ActionKeys.UPDATE);
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), orgLabor.getOrganizationId(),
+			ActionKeys.UPDATE);
 
 		orgLaborLocalService.deleteOrgLabor(orgLaborId);
 	}
@@ -69,7 +72,9 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 
 		OrgLabor orgLabor = orgLaborPersistence.findByPrimaryKey(orgLaborId);
 
-		checkPermission(orgLabor.getOrganizationId(), ActionKeys.VIEW);
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), orgLabor.getOrganizationId(),
+			ActionKeys.VIEW);
 
 		return orgLabor;
 	}
@@ -77,7 +82,8 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 	public List<OrgLabor> getOrgLabors(long organizationId)
 		throws PortalException, SystemException {
 
-		checkPermission(organizationId, ActionKeys.VIEW);
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), organizationId, ActionKeys.VIEW);
 
 		return orgLaborLocalService.getOrgLabors(organizationId);
 	}
@@ -91,19 +97,14 @@ public class OrgLaborServiceImpl extends OrgLaborServiceBaseImpl {
 
 		OrgLabor orgLabor = orgLaborPersistence.findByPrimaryKey(orgLaborId);
 
-		checkPermission(orgLabor.getOrganizationId(), ActionKeys.UPDATE);
+		OrganizationPermissionUtil.check(
+			getPermissionChecker(), orgLabor.getOrganizationId(),
+			ActionKeys.UPDATE);
 
 		return orgLaborLocalService.updateOrgLabor(
 			orgLaborId, typeId ,sunOpen, sunClose, monOpen, monClose, tueOpen,
 			tueClose, wedOpen, wedClose, thuOpen, thuClose, friOpen, friClose,
 			satOpen, satClose);
-	}
-
-	protected void checkPermission(long organizationId, String actionId)
-		throws PortalException, SystemException {
-
-		OrganizationPermissionUtil.check(
-			getPermissionChecker(), organizationId, actionId);
 	}
 
 }

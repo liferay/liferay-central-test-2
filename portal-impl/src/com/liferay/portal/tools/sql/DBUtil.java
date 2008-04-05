@@ -233,6 +233,14 @@ public abstract class DBUtil {
 			template);
 	}
 
+	public String getTemplateFalse() {
+		return getTemplate()[2];
+	}
+
+	public String getTemplateTrue() {
+		return getTemplate()[1];
+	}
+
 	public void runSQL(String sql) throws IOException, SQLException {
 		runSQL(new String[] {sql});
 	}

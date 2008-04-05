@@ -205,6 +205,9 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portal.model.User> getNoAnnouncementsDeliveries(
+		java.lang.String type) throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portal.model.User> getOrganizationUsers(
 		long organizationId)
 		throws com.liferay.portal.SystemException,

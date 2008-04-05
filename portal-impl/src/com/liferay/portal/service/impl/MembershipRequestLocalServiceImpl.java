@@ -82,7 +82,12 @@ public class MembershipRequestLocalServiceImpl
 
 		membershipRequestPersistence.update(membershipRequest, false);
 
-		notifyCommunityAdministrators(membershipRequest);
+		try {
+			notifyCommunityAdministrators(membershipRequest);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 
 		return membershipRequest;
 	}
@@ -141,138 +146,137 @@ public class MembershipRequestLocalServiceImpl
 				membershipRequest.getGroupId(), addUserIds);
 		}
 
-		notify(
-			membershipRequest.getUserId(), membershipRequest,
-			PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_SUBJECT,
-			PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_BODY);
-	}
-
-	protected void notify(
-			long userId, MembershipRequest membershipRequest,
-			String subjectProperty, String bodyProperty)
-		throws PortalException, SystemException {
-
 		try {
-			Company company = companyPersistence.findByPrimaryKey(
-				membershipRequest.getCompanyId());
-
-			Group group = groupPersistence.findByPrimaryKey(
-				membershipRequest.getGroupId());
-
-			User user = userPersistence.findByPrimaryKey(userId);
-
-			String fromName = PrefsPropsUtil.getString(
-				membershipRequest.getCompanyId(),
-				PropsUtil.COMMUNITIES_EMAIL_FROM_NAME);
-
-			String fromAddress = PrefsPropsUtil.getString(
-				membershipRequest.getCompanyId(),
-				PropsUtil.COMMUNITIES_EMAIL_FROM_ADDRESS);
-
-			String toName = user.getFullName();
-			String toAddress = user.getEmailAddress();
-
-			String subject = PrefsPropsUtil.getContent(
-				membershipRequest.getCompanyId(), subjectProperty);
-
-			String body = PrefsPropsUtil.getContent(
-				membershipRequest.getCompanyId(), bodyProperty);
-
-			String statusKey = null;
-
-			if (membershipRequest.getStatusId() ==
-					MembershipRequestImpl.STATUS_APPROVED) {
-
-				statusKey = "approved";
-			}
-			else if (membershipRequest.getStatusId() ==
-						MembershipRequestImpl.STATUS_DENIED) {
-
-				statusKey = "denied";
-			}
-			else {
-				statusKey = "pending";
-			}
-
-			subject = StringUtil.replace(
-				subject,
-				new String[] {
-					"[$COMMUNITY_NAME$]",
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$STATUS$]",
-					"[$TO_NAME$]",
-					"[$USER_ADDRESS$]",
-					"[$USER_NAME$]",
-				},
-				new String[] {
-					group.getName(),
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					fromAddress,
-					fromName,
-					company.getVirtualHost(),
-					LanguageUtil.get(user.getLocale(), statusKey),
-					toName,
-					user.getEmailAddress(),
-					user.getFullName()
-				});
-
-			body = StringUtil.replace(
-				body,
-				new String[] {
-					"[$COMMENTS$]",
-					"[$COMMUNITY_NAME$]",
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$REPLY_COMMENTS$]",
-					"[$STATUS$]",
-					"[$TO_NAME$]",
-					"[$USER_ADDRESS$]",
-					"[$USER_NAME$]",
-				},
-				new String[] {
-					membershipRequest.getComments(),
-					group.getName(),
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					fromAddress,
-					fromName,
-					company.getVirtualHost(),
-					membershipRequest.getReplyComments(),
-					LanguageUtil.get(user.getLocale(), statusKey),
-					toName,
-					user.getEmailAddress(),
-					user.getFullName()
-				});
-
-			InternetAddress from = new InternetAddress(fromAddress, fromName);
-
-			InternetAddress to = new InternetAddress(toAddress, toName);
-
-			MailMessage message = new MailMessage(
-				from, to, subject, body, true);
-
-			mailService.sendEmail(message);
+			notify(
+				membershipRequest.getUserId(), membershipRequest,
+				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_SUBJECT,
+				PropsUtil.COMMUNITIES_EMAIL_MEMBERSHIP_REPLY_BODY);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);
 		}
 	}
 
+	protected void notify(
+			long userId, MembershipRequest membershipRequest,
+			String subjectProperty, String bodyProperty)
+		throws IOException, PortalException, SystemException {
+
+		Company company = companyPersistence.findByPrimaryKey(
+			membershipRequest.getCompanyId());
+
+		Group group = groupPersistence.findByPrimaryKey(
+			membershipRequest.getGroupId());
+
+		User user = userPersistence.findByPrimaryKey(userId);
+
+		String fromName = PrefsPropsUtil.getString(
+			membershipRequest.getCompanyId(),
+			PropsUtil.COMMUNITIES_EMAIL_FROM_NAME);
+
+		String fromAddress = PrefsPropsUtil.getString(
+			membershipRequest.getCompanyId(),
+			PropsUtil.COMMUNITIES_EMAIL_FROM_ADDRESS);
+
+		String toName = user.getFullName();
+		String toAddress = user.getEmailAddress();
+
+		String subject = PrefsPropsUtil.getContent(
+			membershipRequest.getCompanyId(), subjectProperty);
+
+		String body = PrefsPropsUtil.getContent(
+			membershipRequest.getCompanyId(), bodyProperty);
+
+		String statusKey = null;
+
+		if (membershipRequest.getStatusId() ==
+				MembershipRequestImpl.STATUS_APPROVED) {
+
+			statusKey = "approved";
+		}
+		else if (membershipRequest.getStatusId() ==
+					MembershipRequestImpl.STATUS_DENIED) {
+
+			statusKey = "denied";
+		}
+		else {
+			statusKey = "pending";
+		}
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$COMMUNITY_NAME$]",
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$STATUS$]",
+				"[$TO_NAME$]",
+				"[$USER_ADDRESS$]",
+				"[$USER_NAME$]",
+			},
+			new String[] {
+				group.getName(),
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				LanguageUtil.get(user.getLocale(), statusKey),
+				toName,
+				user.getEmailAddress(),
+				user.getFullName()
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$COMMENTS$]",
+				"[$COMMUNITY_NAME$]",
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$REPLY_COMMENTS$]",
+				"[$STATUS$]",
+				"[$TO_NAME$]",
+				"[$USER_ADDRESS$]",
+				"[$USER_NAME$]",
+			},
+			new String[] {
+				membershipRequest.getComments(),
+				group.getName(),
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				membershipRequest.getReplyComments(),
+				LanguageUtil.get(user.getLocale(), statusKey),
+				toName,
+				user.getEmailAddress(),
+				user.getFullName()
+			});
+
+		InternetAddress from = new InternetAddress(fromAddress, fromName);
+
+		InternetAddress to = new InternetAddress(toAddress, toName);
+
+		MailMessage message = new MailMessage(from, to, subject, body, true);
+
+		mailService.sendEmail(message);
+	}
+
 	protected void notifyCommunityAdministrators(
 			MembershipRequest membershipRequest)
-		throws PortalException, SystemException {
+		throws IOException, PortalException, SystemException {
 
 		List<UserGroupRole> admins = new UniqueList<UserGroupRole>();
 

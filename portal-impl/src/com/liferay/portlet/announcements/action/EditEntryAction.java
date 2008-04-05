@@ -154,7 +154,6 @@ public class EditEntryAction extends PortletAction {
 		int displayDateYear = ParamUtil.getInteger(req, "displayDateYear");
 		int displayDateHour = ParamUtil.getInteger(req, "displayDateHour");
 		int displayDateMinute = ParamUtil.getInteger(req, "displayDateMinute");
-
 		int displayDateAmPm = ParamUtil.getInteger(req, "displayDateAmPm");
 
 		if (displayDateAmPm == Calendar.PM) {
@@ -170,9 +169,8 @@ public class EditEntryAction extends PortletAction {
 			req, "expirationDateHour");
 		int expirationDateMinute = ParamUtil.getInteger(
 			req, "expirationDateMinute");
-
-		int expirationDateAmPm =
-			ParamUtil.getInteger(req, "expirationDateAmPm");
+		int expirationDateAmPm = ParamUtil.getInteger(
+			req, "expirationDateAmPm");
 
 		if (expirationDateAmPm == Calendar.PM) {
 			expirationDateHour += 12;

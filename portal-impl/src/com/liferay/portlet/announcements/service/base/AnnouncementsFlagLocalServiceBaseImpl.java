@@ -32,11 +32,17 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 
 import com.liferay.portlet.announcements.model.AnnouncementsFlag;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalService;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryLocalServiceFactory;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryService;
+import com.liferay.portlet.announcements.service.AnnouncementsDeliveryServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryService;
 import com.liferay.portlet.announcements.service.AnnouncementsEntryServiceFactory;
 import com.liferay.portlet.announcements.service.AnnouncementsFlagLocalService;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryPersistence;
+import com.liferay.portlet.announcements.service.persistence.AnnouncementsDeliveryUtil;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinder;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryFinderUtil;
 import com.liferay.portlet.announcements.service.persistence.AnnouncementsEntryPersistence;
@@ -90,6 +96,33 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		announcementsFlag.setNew(false);
 
 		return announcementsFlagPersistence.update(announcementsFlag, true);
+	}
+
+	public AnnouncementsDeliveryLocalService getAnnouncementsDeliveryLocalService() {
+		return announcementsDeliveryLocalService;
+	}
+
+	public void setAnnouncementsDeliveryLocalService(
+		AnnouncementsDeliveryLocalService announcementsDeliveryLocalService) {
+		this.announcementsDeliveryLocalService = announcementsDeliveryLocalService;
+	}
+
+	public AnnouncementsDeliveryService getAnnouncementsDeliveryService() {
+		return announcementsDeliveryService;
+	}
+
+	public void setAnnouncementsDeliveryService(
+		AnnouncementsDeliveryService announcementsDeliveryService) {
+		this.announcementsDeliveryService = announcementsDeliveryService;
+	}
+
+	public AnnouncementsDeliveryPersistence getAnnouncementsDeliveryPersistence() {
+		return announcementsDeliveryPersistence;
+	}
+
+	public void setAnnouncementsDeliveryPersistence(
+		AnnouncementsDeliveryPersistence announcementsDeliveryPersistence) {
+		this.announcementsDeliveryPersistence = announcementsDeliveryPersistence;
 	}
 
 	public AnnouncementsEntryLocalService getAnnouncementsEntryLocalService() {
@@ -154,6 +187,18 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 	}
 
 	public void afterPropertiesSet() {
+		if (announcementsDeliveryLocalService == null) {
+			announcementsDeliveryLocalService = AnnouncementsDeliveryLocalServiceFactory.getImpl();
+		}
+
+		if (announcementsDeliveryService == null) {
+			announcementsDeliveryService = AnnouncementsDeliveryServiceFactory.getImpl();
+		}
+
+		if (announcementsDeliveryPersistence == null) {
+			announcementsDeliveryPersistence = AnnouncementsDeliveryUtil.getPersistence();
+		}
+
 		if (announcementsEntryLocalService == null) {
 			announcementsEntryLocalService = AnnouncementsEntryLocalServiceFactory.getImpl();
 		}
@@ -183,6 +228,9 @@ public abstract class AnnouncementsFlagLocalServiceBaseImpl
 		}
 	}
 
+	protected AnnouncementsDeliveryLocalService announcementsDeliveryLocalService;
+	protected AnnouncementsDeliveryService announcementsDeliveryService;
+	protected AnnouncementsDeliveryPersistence announcementsDeliveryPersistence;
 	protected AnnouncementsEntryLocalService announcementsEntryLocalService;
 	protected AnnouncementsEntryService announcementsEntryService;
 	protected AnnouncementsEntryPersistence announcementsEntryPersistence;

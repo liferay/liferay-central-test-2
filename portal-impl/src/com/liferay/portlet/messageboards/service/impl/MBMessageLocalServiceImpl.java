@@ -475,7 +475,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		notifySubscribers(category, message, prefs, themeDisplay, false);
+		try {
+			notifySubscribers(category, message, prefs, themeDisplay, false);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 
 		logAddMessage(messageId, stopWatch, 8);
 
@@ -1173,7 +1178,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Subscriptions
 
-		notifySubscribers(category, message, prefs, themeDisplay, true);
+		try {
+			notifySubscribers(category, message, prefs, themeDisplay, true);
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 
 		// Tags
 
@@ -1293,248 +1303,240 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	protected void notifySubscribers(
 			MBCategory category, MBMessage message, PortletPreferences prefs,
 			ThemeDisplay themeDisplay, boolean update)
-		throws PortalException, SystemException {
+		throws IOException, PortalException, SystemException {
 
-		try {
-			if (category.isDiscussion()) {
-				return;
-			}
+		if (category.isDiscussion()) {
+			return;
+		}
 
-			if (prefs == null) {
-				long ownerId = category.getGroupId();
-				int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
-				long plid = PortletKeys.PREFS_PLID_SHARED;
-				String portletId = PortletKeys.MESSAGE_BOARDS;
-				String defaultPreferences = null;
+		if (prefs == null) {
+			long ownerId = category.getGroupId();
+			int ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
+			long plid = PortletKeys.PREFS_PLID_SHARED;
+			String portletId = PortletKeys.MESSAGE_BOARDS;
+			String defaultPreferences = null;
 
-				prefs = portletPreferencesLocalService.getPreferences(
-					category.getCompanyId(), ownerId, ownerType, plid,
-					portletId, defaultPreferences);
-			}
+			prefs = portletPreferencesLocalService.getPreferences(
+				category.getCompanyId(), ownerId, ownerType, plid, portletId,
+				defaultPreferences);
+		}
 
-			if (!update && MBUtil.getEmailMessageAddedEnabled(prefs)) {
-			}
-			else if (update && MBUtil.getEmailMessageUpdatedEnabled(prefs)) {
-			}
-			else {
-				return;
-			}
+		if (!update && MBUtil.getEmailMessageAddedEnabled(prefs)) {
+		}
+		else if (update && MBUtil.getEmailMessageUpdatedEnabled(prefs)) {
+		}
+		else {
+			return;
+		}
 
-			Company company = companyPersistence.findByPrimaryKey(
-				message.getCompanyId());
+		Company company = companyPersistence.findByPrimaryKey(
+			message.getCompanyId());
 
-			Group group = groupPersistence.findByPrimaryKey(
-				category.getGroupId());
+		Group group = groupPersistence.findByPrimaryKey(category.getGroupId());
 
-			User user = userPersistence.findByPrimaryKey(message.getUserId());
+		User user = userPersistence.findByPrimaryKey(message.getUserId());
 
-			List<Long> categoryIds = new ArrayList<Long>();
+		List<Long> categoryIds = new ArrayList<Long>();
 
-			categoryIds.add(category.getCategoryId());
-			categoryIds.addAll(category.getAncestorCategoryIds());
+		categoryIds.add(category.getCategoryId());
+		categoryIds.addAll(category.getAncestorCategoryIds());
 
-			String messageURL = StringPool.BLANK;
+		String messageURL = StringPool.BLANK;
 
-			if (themeDisplay != null) {
-				String portalURL = PortalUtil.getPortalURL(themeDisplay);
-				String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
+		if (themeDisplay != null) {
+			String portalURL = PortalUtil.getPortalURL(themeDisplay);
+			String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
 
-				messageURL =
-					portalURL + layoutURL + "/message_boards/message/" +
-						message.getMessageId();
-			}
+			messageURL =
+				portalURL + layoutURL + "/message_boards/message/" +
+					message.getMessageId();
+		}
 
-			String portletName = PortalUtil.getPortletTitle(
-				PortletKeys.MESSAGE_BOARDS, user);
+		String portletName = PortalUtil.getPortletTitle(
+			PortletKeys.MESSAGE_BOARDS, user);
 
-			String fromName = MBUtil.getEmailFromName(prefs);
-			String fromAddress = MBUtil.getEmailFromAddress(prefs);
+		String fromName = MBUtil.getEmailFromName(prefs);
+		String fromAddress = MBUtil.getEmailFromAddress(prefs);
 
-			String mailingListAddress = StringPool.BLANK;
+		String mailingListAddress = StringPool.BLANK;
 
-			if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
-				mailingListAddress = MBUtil.getMailingListAddress(
-					message.getCategoryId(), message.getMessageId(),
-					company.getMx());
-			}
+		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
+			mailingListAddress = MBUtil.getMailingListAddress(
+				message.getCategoryId(), message.getMessageId(),
+				company.getMx());
+		}
 
-			String replyToAddress = mailingListAddress;
-			String mailId = MBUtil.getMailId(
-				company.getMx(), message.getCategoryId(),
-				message.getMessageId());
+		String replyToAddress = mailingListAddress;
+		String mailId = MBUtil.getMailId(
+			company.getMx(), message.getCategoryId(), message.getMessageId());
 
-			fromName = StringUtil.replace(
-				fromName,
-				new String[] {
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$COMMUNITY_NAME$]",
-					"[$MAILING_LIST_ADDRESS$]",
-					"[$MESSAGE_USER_ADDRESS$]",
-					"[$MESSAGE_USER_NAME$]",
-					"[$PORTLET_NAME$]"
-				},
-				new String[] {
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					group.getName(),
-					mailingListAddress,
-					user.getEmailAddress(),
-					user.getFullName(),
-					portletName
-				});
+		fromName = StringUtil.replace(
+			fromName,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$MAILING_LIST_ADDRESS$]",
+				"[$MESSAGE_USER_ADDRESS$]",
+				"[$MESSAGE_USER_NAME$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				mailingListAddress,
+				user.getEmailAddress(),
+				user.getFullName(),
+				portletName
+			});
 
-			fromAddress = StringUtil.replace(
+		fromAddress = StringUtil.replace(
+			fromAddress,
+			new String[] {
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$MAILING_LIST_ADDRESS$]",
+				"[$MESSAGE_USER_ADDRESS$]",
+				"[$MESSAGE_USER_NAME$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				mailingListAddress,
+				user.getEmailAddress(),
+				user.getFullName(),
+				portletName
+			});
+
+		String subjectPrefix = null;
+		String body = null;
+		String signature = null;
+		boolean htmlFormat = MBUtil.getEmailHtmlFormat(prefs);
+
+		if (update) {
+			subjectPrefix = MBUtil.getEmailMessageUpdatedSubjectPrefix(prefs);
+			body = MBUtil.getEmailMessageUpdatedBody(prefs);
+			signature = MBUtil.getEmailMessageUpdatedSignature(prefs);
+		}
+		else {
+			subjectPrefix = MBUtil.getEmailMessageAddedSubjectPrefix(prefs);
+			body = MBUtil.getEmailMessageAddedBody(prefs);
+			signature = MBUtil.getEmailMessageAddedSignature(prefs);
+		}
+
+		if (Validator.isNotNull(signature)) {
+			body +=  "\n--\n" + signature;
+		}
+
+		subjectPrefix = StringUtil.replace(
+			subjectPrefix,
+			new String[] {
+				"[$CATEGORY_NAME$]",
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$MAILING_LIST_ADDRESS$]",
+				"[$MESSAGE_BODY$]",
+				"[$MESSAGE_ID$]",
+				"[$MESSAGE_SUBJECT$]",
+				"[$MESSAGE_USER_ADDRESS$]",
+				"[$MESSAGE_USER_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				category.getName(),
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
 				fromAddress,
-				new String[] {
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$COMMUNITY_NAME$]",
-					"[$MAILING_LIST_ADDRESS$]",
-					"[$MESSAGE_USER_ADDRESS$]",
-					"[$MESSAGE_USER_NAME$]",
-					"[$PORTLET_NAME$]"
-				},
-				new String[] {
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					group.getName(),
-					mailingListAddress,
-					user.getEmailAddress(),
-					user.getFullName(),
-					portletName
-				});
+				fromName,
+				mailingListAddress,
+				message.getBody(),
+				String.valueOf(message.getMessageId()),
+				message.getSubject(),
+				user.getEmailAddress(),
+				user.getFullName(),
+				company.getVirtualHost(),
+				portletName
+			});
 
-			String subjectPrefix = null;
-			String body = null;
-			String signature = null;
-			boolean htmlFormat = MBUtil.getEmailHtmlFormat(prefs);
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$CATEGORY_NAME$]",
+				"[$COMPANY_ID$]",
+				"[$COMPANY_MX$]",
+				"[$COMPANY_NAME$]",
+				"[$COMMUNITY_NAME$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$MAILING_LIST_ADDRESS$]",
+				"[$MESSAGE_BODY$]",
+				"[$MESSAGE_ID$]",
+				"[$MESSAGE_SUBJECT$]",
+				"[$MESSAGE_URL$]",
+				"[$MESSAGE_USER_ADDRESS$]",
+				"[$MESSAGE_USER_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]"
+			},
+			new String[] {
+				category.getName(),
+				String.valueOf(company.getCompanyId()),
+				company.getMx(),
+				company.getName(),
+				group.getName(),
+				fromAddress,
+				fromName,
+				mailingListAddress,
+				message.getBody(),
+				String.valueOf(message.getMessageId()),
+				message.getSubject(),
+				messageURL,
+				user.getEmailAddress(),
+				user.getFullName(),
+				company.getVirtualHost(),
+				portletName
+			});
 
-			if (update) {
-				subjectPrefix = MBUtil.getEmailMessageUpdatedSubjectPrefix(
-					prefs);
-				body = MBUtil.getEmailMessageUpdatedBody(prefs);
-				signature = MBUtil.getEmailMessageUpdatedSignature(prefs);
-			}
-			else {
-				subjectPrefix = MBUtil.getEmailMessageAddedSubjectPrefix(prefs);
-				body = MBUtil.getEmailMessageAddedBody(prefs);
-				signature = MBUtil.getEmailMessageAddedSignature(prefs);
-			}
+		String subject = message.getSubject();
 
-			if (Validator.isNotNull(signature)) {
-				body +=  "\n--\n" + signature;
-			}
-
-			subjectPrefix = StringUtil.replace(
-				subjectPrefix,
-				new String[] {
-					"[$CATEGORY_NAME$]",
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$COMMUNITY_NAME$]",
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-  					"[$MAILING_LIST_ADDRESS$]",
-					"[$MESSAGE_BODY$]",
-					"[$MESSAGE_ID$]",
-					"[$MESSAGE_SUBJECT$]",
-					"[$MESSAGE_USER_ADDRESS$]",
-					"[$MESSAGE_USER_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]"
-				},
-				new String[] {
-					category.getName(),
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					group.getName(),
-					fromAddress,
-					fromName,
-					mailingListAddress,
-					message.getBody(),
-					String.valueOf(message.getMessageId()),
-					message.getSubject(),
-					user.getEmailAddress(),
-					user.getFullName(),
-					company.getVirtualHost(),
-					portletName
-				});
-
-			body = StringUtil.replace(
-				body,
-				new String[] {
-					"[$CATEGORY_NAME$]",
-					"[$COMPANY_ID$]",
-					"[$COMPANY_MX$]",
-					"[$COMPANY_NAME$]",
-					"[$COMMUNITY_NAME$]",
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-  					"[$MAILING_LIST_ADDRESS$]",
-					"[$MESSAGE_BODY$]",
-					"[$MESSAGE_ID$]",
-					"[$MESSAGE_SUBJECT$]",
-					"[$MESSAGE_URL$]",
-					"[$MESSAGE_USER_ADDRESS$]",
-					"[$MESSAGE_USER_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]"
-				},
-				new String[] {
-					category.getName(),
-					String.valueOf(company.getCompanyId()),
-					company.getMx(),
-					company.getName(),
-					group.getName(),
-					fromAddress,
-					fromName,
-					mailingListAddress,
-					message.getBody(),
-					String.valueOf(message.getMessageId()),
-					message.getSubject(),
-					messageURL,
-					user.getEmailAddress(),
-					user.getFullName(),
-					company.getVirtualHost(),
-					portletName
-				});
-
-			String subject = message.getSubject();
-
-			if (subject.indexOf(subjectPrefix) == -1) {
-				subject = subjectPrefix.trim() + " " + subject.trim();
-			}
-
-			String inReplyTo = null;
-
-			if (message.getParentMessageId() !=
-					MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
-
-				inReplyTo = MBUtil.getMailId(
-					company.getMx(), message.getCategoryId(),
-					message.getParentMessageId());
-			}
-
-			MBMessageProducer.produce(
-				new String[] {
-					String.valueOf(message.getCompanyId()),
-					String.valueOf(message.getUserId()),
-					StringUtil.merge(categoryIds),
-					String.valueOf(message.getThreadId()),
-					fromName, fromAddress, subject, body, replyToAddress,
-					mailId, inReplyTo, String.valueOf(htmlFormat)
-				});
+		if (subject.indexOf(subjectPrefix) == -1) {
+			subject = subjectPrefix.trim() + " " + subject.trim();
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+
+		String inReplyTo = null;
+
+		if (message.getParentMessageId() !=
+				MBMessageImpl.DEFAULT_PARENT_MESSAGE_ID) {
+
+			inReplyTo = MBUtil.getMailId(
+				company.getMx(), message.getCategoryId(),
+				message.getParentMessageId());
 		}
+
+		MBMessageProducer.produce(
+			new String[] {
+				String.valueOf(message.getCompanyId()),
+				String.valueOf(message.getUserId()),
+				StringUtil.merge(categoryIds),
+				String.valueOf(message.getThreadId()),
+				fromName, fromAddress, subject, body, replyToAddress, mailId,
+				inReplyTo, String.valueOf(htmlFormat)
+			});
 	}
 
 	protected void sendBlogsCommentsEmail(

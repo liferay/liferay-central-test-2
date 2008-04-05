@@ -22,111 +22,52 @@
  */
 %>
 
-<%--
-<%@ page import="com.liferay.portal.model.ExpandoColumn"%>
-<%@ page import="com.liferay.portal.model.ExpandoValue"%>
-<%@ page import="com.liferay.portal.model.impl.ExpandoColumnImpl"%>
-<%@ page import="com.liferay.portal.service.ExpandoColumnLocalServiceUtil"%>
-<%@ page import="com.liferay.portal.service.ExpandoValueLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl"%>
-
-<%
-long userClassNameId = PortalUtil.getClassNameId(User.class.getName());
-
-List<ExpandoColumn[]> typeOptions = new ArrayList<ExpandoColumn[]>();
-
-String[] types = AnnouncementsEntryImpl.TYPES;
-
-for (int i = 0; i < types.length; i++) {
-	String emailColName =
-		"announcements-delivery-by-email-type-" + types[i];
-
-	String smsColName =
-		"announcements-delivery-by-sms-type-" + types[i];
-
-	ExpandoColumn emailColumn = ExpandoColumnLocalServiceUtil.setColumn(userClassNameId, emailColName, ExpandoColumnImpl.BOOLEAN);
-
-	ExpandoColumn smsColumn = ExpandoColumnLocalServiceUtil.setColumn(userClassNameId, smsColName, ExpandoColumnImpl.BOOLEAN);
-
-	typeOptions.add(new ExpandoColumn[]{emailColumn, smsColumn});
-}
-
-boolean hasSMS = Validator.isNotNull(contact2.getSmsSn());
-%>
-
 <liferay-ui:message key="select-the-delivery-options-for-alerts-and-announcements" />
 
 <br /><br />
 
-<table class="taglib-search-iterator">
-<tr class="portlet-section-header">
-	<th>
-		<liferay-ui:message key="type" />
-	</th>
-	<th>
-		<liferay-ui:message key="email" />
-	</th>
-	<th>
-		<liferay-ui:message key="sms" />
-
-		<c:if test="<%= !hasSMS %>">
-			(<liferay-ui:message key="no-sms-messenger-id" />)
-		</c:if>
-	</th>
-	<th>
-		<liferay-ui:message key="web" />
-	</th>
-</tr>
 <%
-int i = 0;
+SearchContainer searchContainer = new SearchContainer();
 
-Boolean emailOption, smsOption;
+List headerNames = new ArrayList();
 
-for (ExpandoColumn[] typeOption : typeOptions) {
-	emailOption = Boolean.FALSE;
-	smsOption = Boolean.FALSE;
+headerNames.add("type");
+headerNames.add("email");
+headerNames.add("sms");
+headerNames.add("website");
 
-	try {
-		ExpandoValue emailValue = ExpandoValueLocalServiceUtil.getValue(user2.getUserId(), typeOption[0].getColumnId());
+searchContainer.setHeaderNames(headerNames);
 
-		emailOption = new Boolean(emailValue.getBoolean());
-	}
-	catch (Exception e) {
-	}
+List<AnnouncementsDelivery> results = AnnouncementsDeliveryLocalServiceUtil.getUserDeliveries(user2.getUserId());
+List<ResultRow> resultRows = searchContainer.getResultRows();
 
-	try {
-		ExpandoValue smsValue = ExpandoValueLocalServiceUtil.getValue(user2.getUserId(), typeOption[1].getColumnId());
+for (int i = 0; i < results.size(); i++) {
+	AnnouncementsDelivery delivery = results.get(i);
 
-		smsOption = new Boolean(smsValue.getBoolean());
-	}
-	catch (Exception e) {
-	}
+	ResultRow row = new ResultRow(delivery, delivery.getDeliveryId(), i);
 
-	String style = "class=\"portlet-section-body\" onmouseover=\"this.className = 'portlet-section-body-hover';\" onmouseout=\"this.className = 'portlet-section-body';\"";
+	// Type
 
-	if (i % 2 == 1) {
-		style = "class=\"portlet-section-alternate\" onmouseover=\"this.className = 'portlet-section-alternate-hover';\" onmouseout=\"this.className = 'portlet-section-alternate';\"";
-	}
-	%>
+	row.addText(LanguageUtil.get(pageContext, delivery.getType()));
 
-	<tr <%= style %>>
-		<td>
-			<liferay-ui:message key="<%= types[i] %>" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="<%= typeOption[0].getName() %>" defaultValue="<%= emailOption %>" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="<%= typeOption[1].getName() %>" defaultValue="<%= smsOption %>" disabled="<%= !hasSMS %>" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param='<%= "announcements-delivery-by-web-type-" + types[i] %>' defaultValue="<%= Boolean.TRUE %>" disabled="<%= true %>" />
-		</td>
-	</tr>
-	<%
-	i++;
+	// Email
+
+	row.addJSP("/html/portlet/enterprise_admin/user_announcements_checkbox.jsp");
+
+	// SMS
+
+	row.addJSP("/html/portlet/enterprise_admin/user_announcements_checkbox.jsp");
+
+	// Website
+
+	row.addJSP("/html/portlet/enterprise_admin/user_announcements_checkbox.jsp");
+
+	// Add result row
+
+	resultRows.add(row);
 }
 %>
-</table>
 
-<br />--%>
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+
+<br />

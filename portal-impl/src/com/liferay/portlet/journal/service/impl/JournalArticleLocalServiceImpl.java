@@ -405,7 +405,12 @@ public class JournalArticleLocalServiceImpl
 
 		// Email
 
-		sendEmail(article, articleURL, prefs, "requested");
+		try {
+			sendEmail(article, articleURL, prefs, "requested");
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 
 		return article;
 	}
@@ -480,7 +485,12 @@ public class JournalArticleLocalServiceImpl
 
 		// Email
 
-		sendEmail(article, articleURL, prefs, "granted");
+		try {
+			sendEmail(article, articleURL, prefs, "granted");
+		}
+		catch (IOException ioe) {
+			throw new SystemException(ioe);
+		}
 
 		// Lucene
 
@@ -590,7 +600,12 @@ public class JournalArticleLocalServiceImpl
 					article.getCompanyId(), ownerId, ownerType, plid,
 					portletId);
 
-			sendEmail(article, articleURL, prefs, "review");
+			try {
+				sendEmail(article, articleURL, prefs, "review");
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
 		}
 	}
 
@@ -666,7 +681,12 @@ public class JournalArticleLocalServiceImpl
 				article.getGroupId(), article.getArticleId(),
 				article.getVersion())) {
 
-			sendEmail(article, articleURL, prefs, "denied");
+			try {
+				sendEmail(article, articleURL, prefs, "denied");
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
 		}
 
 		// Tags
@@ -758,7 +778,12 @@ public class JournalArticleLocalServiceImpl
 				article.getGroupId(), article.getArticleId(),
 				article.getVersion())) {
 
-			sendEmail(article, articleURL, prefs, "denied");
+			try {
+				sendEmail(article, articleURL, prefs, "denied");
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
 		}
 
 		// Article
@@ -1675,7 +1700,12 @@ public class JournalArticleLocalServiceImpl
 		// Email
 
 		if (incrementVersion) {
-			sendEmail(article, articleURL, prefs, "requested");
+			try {
+				sendEmail(article, articleURL, prefs, "requested");
+			}
+			catch (IOException ioe) {
+				throw new SystemException(ioe);
+			}
 		}
 
 		// Lucene
@@ -2054,152 +2084,142 @@ public class JournalArticleLocalServiceImpl
 	protected void sendEmail(
 			JournalArticle article, String articleURL, PortletPreferences prefs,
 			String emailType)
-		throws PortalException, SystemException {
+		throws IOException, PortalException, SystemException {
 
-		try {
-			if (prefs == null) {
-				return;
-			}
-			else if (emailType.equals("denied") &&
-				JournalUtil.getEmailArticleApprovalDeniedEnabled(prefs)) {
-			}
-			else if (emailType.equals("granted") &&
-					 JournalUtil.getEmailArticleApprovalGrantedEnabled(prefs)) {
-			}
-			else if (emailType.equals("requested") &&
-					 JournalUtil.getEmailArticleApprovalRequestedEnabled(
-						prefs)) {
-			}
-			else if (emailType.equals("review") &&
-					 JournalUtil.getEmailArticleReviewEnabled(prefs)) {
-			}
-			else {
-				return;
-			}
-
-			Company company = companyPersistence.findByPrimaryKey(
-				article.getCompanyId());
-
-			User user = userPersistence.findByPrimaryKey(article.getUserId());
-
-			articleURL +=
-				"&groupId=" + article.getGroupId() + "&articleId=" +
-					article.getArticleId() + "&version=" + article.getVersion();
-
-			String portletName = PortalUtil.getPortletTitle(
-				PortletKeys.JOURNAL, user);
-
-			String fromName = JournalUtil.getEmailFromName(prefs);
-			String fromAddress = JournalUtil.getEmailFromAddress(prefs);
-
-			String toName = user.getFullName();
-			String toAddress = user.getEmailAddress();
-
-			if (emailType.equals("requested") ||
-				emailType.equals("review")) {
-
-				String tempToName = fromName;
-				String tempToAddress = fromAddress;
-
-				fromName = toName;
-				fromAddress = toAddress;
-
-				toName = tempToName;
-				toAddress = tempToAddress;
-			}
-
-			String subject = null;
-			String body = null;
-
-			if (emailType.equals("denied")) {
-				subject =
-					JournalUtil.getEmailArticleApprovalDeniedSubject(prefs);
-				body = JournalUtil.getEmailArticleApprovalDeniedBody(prefs);
-			}
-			else if (emailType.equals("granted")) {
-				subject =
-					JournalUtil.getEmailArticleApprovalGrantedSubject(prefs);
-				body = JournalUtil.getEmailArticleApprovalGrantedBody(prefs);
-			}
-			else if (emailType.equals("requested")) {
-				subject =
-					JournalUtil.getEmailArticleApprovalRequestedSubject(prefs);
-				body = JournalUtil.getEmailArticleApprovalRequestedBody(prefs);
-			}
-			else if (emailType.equals("review")) {
-				subject = JournalUtil.getEmailArticleReviewSubject(prefs);
-				body = JournalUtil.getEmailArticleReviewBody(prefs);
-			}
-
-			subject = StringUtil.replace(
-				subject,
-				new String[] {
-					"[$ARTICLE_ID$]",
-					"[$ARTICLE_TITLE$]",
-					"[$ARTICLE_URL$]",
-					"[$ARTICLE_VERSION$]",
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]",
-					"[$TO_ADDRESS$]",
-					"[$TO_NAME$]"
-				},
-				new String[] {
-					article.getArticleId(),
-					article.getTitle(),
-					articleURL,
-					String.valueOf(article.getVersion()),
-					fromAddress,
-					fromName,
-					company.getVirtualHost(),
-					portletName,
-					toAddress,
-					toName,
-				});
-
-			body = StringUtil.replace(
-				body,
-				new String[] {
-					"[$ARTICLE_ID$]",
-					"[$ARTICLE_TITLE$]",
-					"[$ARTICLE_URL$]",
-					"[$ARTICLE_VERSION$]",
-					"[$FROM_ADDRESS$]",
-					"[$FROM_NAME$]",
-					"[$PORTAL_URL$]",
-					"[$PORTLET_NAME$]",
-					"[$TO_ADDRESS$]",
-					"[$TO_NAME$]"
-				},
-				new String[] {
-					article.getArticleId(),
-					article.getTitle(),
-					articleURL,
-					String.valueOf(article.getVersion()),
-					fromAddress,
-					fromName,
-					company.getVirtualHost(),
-					portletName,
-					toAddress,
-					toName,
-				});
-
-			InternetAddress from = new InternetAddress(fromAddress, fromName);
-
-			InternetAddress to = new InternetAddress(toAddress, toName);
-
-			MailMessage message = new MailMessage(
-				from, to, subject, body, true);
-
-			mailService.sendEmail(message);
+		if (prefs == null) {
+			return;
 		}
-		catch (IOException ioe) {
-			throw new SystemException(ioe);
+		else if (emailType.equals("denied") &&
+			JournalUtil.getEmailArticleApprovalDeniedEnabled(prefs)) {
 		}
-		catch (PortalException pe) {
-			throw pe;
+		else if (emailType.equals("granted") &&
+				 JournalUtil.getEmailArticleApprovalGrantedEnabled(prefs)) {
 		}
+		else if (emailType.equals("requested") &&
+				 JournalUtil.getEmailArticleApprovalRequestedEnabled(prefs)) {
+		}
+		else if (emailType.equals("review") &&
+				 JournalUtil.getEmailArticleReviewEnabled(prefs)) {
+		}
+		else {
+			return;
+		}
+
+		Company company = companyPersistence.findByPrimaryKey(
+			article.getCompanyId());
+
+		User user = userPersistence.findByPrimaryKey(article.getUserId());
+
+		articleURL +=
+			"&groupId=" + article.getGroupId() + "&articleId=" +
+				article.getArticleId() + "&version=" + article.getVersion();
+
+		String portletName = PortalUtil.getPortletTitle(
+			PortletKeys.JOURNAL, user);
+
+		String fromName = JournalUtil.getEmailFromName(prefs);
+		String fromAddress = JournalUtil.getEmailFromAddress(prefs);
+
+		String toName = user.getFullName();
+		String toAddress = user.getEmailAddress();
+
+		if (emailType.equals("requested") ||
+			emailType.equals("review")) {
+
+			String tempToName = fromName;
+			String tempToAddress = fromAddress;
+
+			fromName = toName;
+			fromAddress = toAddress;
+
+			toName = tempToName;
+			toAddress = tempToAddress;
+		}
+
+		String subject = null;
+		String body = null;
+
+		if (emailType.equals("denied")) {
+			subject =
+				JournalUtil.getEmailArticleApprovalDeniedSubject(prefs);
+			body = JournalUtil.getEmailArticleApprovalDeniedBody(prefs);
+		}
+		else if (emailType.equals("granted")) {
+			subject =
+				JournalUtil.getEmailArticleApprovalGrantedSubject(prefs);
+			body = JournalUtil.getEmailArticleApprovalGrantedBody(prefs);
+		}
+		else if (emailType.equals("requested")) {
+			subject =
+				JournalUtil.getEmailArticleApprovalRequestedSubject(prefs);
+			body = JournalUtil.getEmailArticleApprovalRequestedBody(prefs);
+		}
+		else if (emailType.equals("review")) {
+			subject = JournalUtil.getEmailArticleReviewSubject(prefs);
+			body = JournalUtil.getEmailArticleReviewBody(prefs);
+		}
+
+		subject = StringUtil.replace(
+			subject,
+			new String[] {
+				"[$ARTICLE_ID$]",
+				"[$ARTICLE_TITLE$]",
+				"[$ARTICLE_URL$]",
+				"[$ARTICLE_VERSION$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]"
+			},
+			new String[] {
+				article.getArticleId(),
+				article.getTitle(),
+				articleURL,
+				String.valueOf(article.getVersion()),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				portletName,
+				toAddress,
+				toName,
+			});
+
+		body = StringUtil.replace(
+			body,
+			new String[] {
+				"[$ARTICLE_ID$]",
+				"[$ARTICLE_TITLE$]",
+				"[$ARTICLE_URL$]",
+				"[$ARTICLE_VERSION$]",
+				"[$FROM_ADDRESS$]",
+				"[$FROM_NAME$]",
+				"[$PORTAL_URL$]",
+				"[$PORTLET_NAME$]",
+				"[$TO_ADDRESS$]",
+				"[$TO_NAME$]"
+			},
+			new String[] {
+				article.getArticleId(),
+				article.getTitle(),
+				articleURL,
+				String.valueOf(article.getVersion()),
+				fromAddress,
+				fromName,
+				company.getVirtualHost(),
+				portletName,
+				toAddress,
+				toName,
+			});
+
+		InternetAddress from = new InternetAddress(fromAddress, fromName);
+
+		InternetAddress to = new InternetAddress(toAddress, toName);
+
+		MailMessage message = new MailMessage(from, to, subject, body, true);
+
+		mailService.sendEmail(message);
 	}
 
 	protected void validate(

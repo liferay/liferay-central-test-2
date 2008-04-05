@@ -5,6 +5,9 @@ create index IX_923BD178 on Address (companyId, classNameId, classPK, mailing);
 create index IX_9226DBB4 on Address (companyId, classNameId, classPK, primary_);
 create index IX_5BC8B0D4 on Address (userId);
 
+create index IX_6EDB9600 on AnnouncementsDelivery (userId);
+create index IX_BA4413D5 on AnnouncementsDelivery (userId, type_);
+
 create index IX_A6EF0B81 on AnnouncementsEntry (classNameId, classPK);
 create index IX_14F06A6B on AnnouncementsEntry (classNameId, classPK, alert);
 create index IX_D49C2E66 on AnnouncementsEntry (userId);

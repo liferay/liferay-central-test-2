@@ -145,13 +145,13 @@ public class CheckoutAction extends CartAction {
 	protected void forwardCheckout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		ShoppingCart cart = ShoppingUtil.getCart(req);
 
-		ShoppingOrder order =
-			(ShoppingOrder)req.getAttribute(WebKeys.SHOPPING_ORDER);
+		ShoppingOrder order = (ShoppingOrder)req.getAttribute(
+			WebKeys.SHOPPING_ORDER);
 
 		ShoppingPreferences prefs = ShoppingPreferences.getInstance(
 			themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId());

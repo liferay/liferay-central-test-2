@@ -45,9 +45,6 @@ searchContainer.setHeaderNames(headerNames);
 searchContainer.setEmptyResultsMessage("the-organization-does-not-have-any-services");
 
 List results = OrgLaborServiceUtil.getOrgLabors(organization.getOrganizationId());
-
-searchContainer.setTotal(results.size());
-
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
@@ -73,7 +70,7 @@ for (int i = 0; i < results.size(); i++) {
 	<br />
 </c:if>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <c:if test="<%= editable || (results.size() > 0) %>">
 	<br />

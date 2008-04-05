@@ -144,7 +144,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		Company company = companyPersistence.findByPrimaryKey(companyId);
 
 		if (!company.isStrangers()) {
-			checkPermission(0, organizationIds, ActionKeys.ADD_USER);
+			UserPermissionUtil.check(
+				getPermissionChecker(), 0, organizationIds,
+				ActionKeys.ADD_USER);
 		}
 
 		long creatorUserId = 0;
@@ -186,7 +188,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			throw new RequiredUserException();
 		}
 
-		checkPermission(userId, ActionKeys.DELETE);
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.DELETE);
 
 		userLocalService.deleteUser(userId);
 	}
@@ -215,7 +218,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		User user = userLocalService.getUserByEmailAddress(
 			companyId, emailAddress);
 
-		checkPermission(user.getUserId(), ActionKeys.VIEW);
+		UserPermissionUtil.check(
+			getPermissionChecker(), user.getUserId(), ActionKeys.VIEW);
 
 		return user;
 	}
@@ -225,7 +229,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 
 		User user = userLocalService.getUserById(userId);
 
-		checkPermission(user.getUserId(), ActionKeys.VIEW);
+		UserPermissionUtil.check(
+			getPermissionChecker(), user.getUserId(), ActionKeys.VIEW);
 
 		return user;
 	}
@@ -236,7 +241,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 		User user = userLocalService.getUserByScreenName(
 			companyId, screenName);
 
-		checkPermission(user.getUserId(), ActionKeys.VIEW);
+		UserPermissionUtil.check(
+			getPermissionChecker(), user.getUserId(), ActionKeys.VIEW);
 
 		return user;
 	}
@@ -373,7 +379,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			throw new RequiredUserException();
 		}
 
-		checkPermission(userId, ActionKeys.DELETE);
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.DELETE);
 
 		return userLocalService.updateActive(userId, active);
 	}
@@ -382,7 +389,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long userId, boolean agreedToTermsOfUse)
 		throws PortalException, SystemException {
 
-		checkPermission(userId, ActionKeys.UPDATE);
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
 		return userLocalService.updateAgreedToTermsOfUse(
 			userId, agreedToTermsOfUse);
@@ -391,7 +399,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public User updateLockout(long userId, boolean lockout)
 		throws PortalException, SystemException {
 
-		checkPermission(userId, ActionKeys.DELETE);
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.DELETE);
 
 		return userLocalService.updateLockoutById(userId, lockout);
 	}
@@ -399,7 +408,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void updateOrganizations(long userId, long[] organizationIds)
 		throws PortalException, SystemException {
 
-		checkPermission(userId, ActionKeys.UPDATE);
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
 		userLocalService.updateOrganizations(userId, organizationIds);
 	}
@@ -409,7 +419,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			boolean passwordReset)
 		throws PortalException, SystemException {
 
-		checkPermission(userId, ActionKeys.UPDATE);
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
 		return userLocalService.updatePassword(
 			userId, password1, password2, passwordReset);
@@ -418,7 +429,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void updatePortrait(long userId, byte[] bytes)
 		throws PortalException, SystemException {
 
-		checkPermission(userId, ActionKeys.UPDATE);
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
 		userLocalService.updatePortrait(userId, bytes);
 	}
@@ -426,7 +438,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 	public void updateScreenName(long userId, String screenName)
 		throws PortalException, SystemException {
 
-		checkPermission(userId, ActionKeys.UPDATE);
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, ActionKeys.UPDATE);
 
 		userLocalService.updateScreenName(userId, screenName);
 	}
@@ -465,7 +478,8 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			long[] organizationIds)
 		throws PortalException, SystemException {
 
-		checkPermission(userId, organizationIds, ActionKeys.UPDATE);
+		UserPermissionUtil.check(
+			getPermissionChecker(), userId, organizationIds, ActionKeys.UPDATE);
 
 		long curUserId = getUserId();
 
@@ -492,22 +506,6 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
 			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, icqSn,
 			jabberSn, msnSn, skypeSn, ymSn, jobTitle, organizationIds);
-	}
-
-	protected void checkPermission(long userId, String actionId)
-		throws PortalException, SystemException {
-
-		User user = userPersistence.findByPrimaryKey(userId);
-
-		checkPermission(userId, user.getOrganizationIds(), actionId);
-	}
-
-	protected void checkPermission(
-			long userId, long[] organizationIds, String actionId)
-		throws PortalException, SystemException {
-
-		UserPermissionUtil.check(
-			getPermissionChecker(), userId, organizationIds, actionId);
 	}
 
 }

@@ -76,13 +76,13 @@ public class GetUsersCountAction extends AJAXAction {
 		int count = 0;
 
 		for (long organizationId : organizationIds) {
-			LinkedHashMap<String, Object> userParams =
+			LinkedHashMap<String, Object> params =
 				new LinkedHashMap<String, Object>();
 
-			userParams.put("usersOrgs", organizationId);
+			params.put("usersOrgs", organizationId);
 
 			count+= UserLocalServiceUtil.searchCount(
-				companyId, null, active, userParams);
+				companyId, null, active, params);
 		}
 
 		return count;
@@ -95,13 +95,13 @@ public class GetUsersCountAction extends AJAXAction {
 		int count = 0;
 
 		for (long userGroupId : userGroupIds) {
-			LinkedHashMap<String, Object> userParams =
+			LinkedHashMap<String, Object> params =
 				new LinkedHashMap<String, Object>();
 
-			userParams.put("usersUserGroups", userGroupId);
+			params.put("usersUserGroups", userGroupId);
 
 			count+= UserLocalServiceUtil.searchCount(
-				companyId, null, active, userParams);
+				companyId, null, active, params);
 		}
 
 		return count;

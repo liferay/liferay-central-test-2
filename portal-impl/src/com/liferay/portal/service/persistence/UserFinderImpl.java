@@ -56,6 +56,9 @@ public class UserFinderImpl implements UserFinder {
 	public static String COUNT_BY_C_FN_MN_LN_SN_EA_A =
 		UserFinder.class.getName() + ".countByC_FN_MN_LN_SN_EA_A";
 
+	public static String FIND_BY_NO_ANNOUNCEMENTS_DELIVERIES =
+		UserFinder.class.getName() + ".findByNoAnnouncementsDeliveries";
+
 	public static String FIND_BY_C_FN_MN_LN_SN_EA_A =
 		UserFinder.class.getName() + ".findByC_FN_MN_LN_SN_EA_A";
 
@@ -79,6 +82,9 @@ public class UserFinderImpl implements UserFinder {
 
 	public static String JOIN_BY_USERS_USER_GROUPS =
 		UserFinder.class.getName() + ".joinByUsersUserGroups";
+
+	public static String JOIN_BY_ANNOUNCEMENTS_DELIVERY_EMAIL_OR_SMS =
+		UserFinder.class.getName() + ".joinByAnnouncementsDeliveryEmailOrSms";
 
 	public static String JOIN_BY_SOCIAL_RELATION =
 		UserFinder.class.getName() + ".joinBySocialRelation";
@@ -236,6 +242,34 @@ public class UserFinderImpl implements UserFinder {
 			emailAddresses, active, params, andOperator, begin, end, obc);
 	}
 
+	public List<User> findByNoAnnouncementsDeliveries(String type)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_NO_ANNOUNCEMENTS_DELIVERIES);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("User_", UserImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(type);
+
+			return q.list();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
 	public List<User> findByC_FN_MN_LN_SN_EA_A(
 			long companyId, String firstName, String middleName,
 			String lastName, String screenName, String emailAddress,
@@ -372,6 +406,10 @@ public class UserFinderImpl implements UserFinder {
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
 		}
+		else if (key.equals("announcementsDeliveryEmailOrSms")) {
+			join = CustomSQLUtil.get(
+				JOIN_BY_ANNOUNCEMENTS_DELIVERY_EMAIL_OR_SMS);
+		}
 		else if (key.equals("socialRelation")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);
 		}
@@ -453,6 +491,10 @@ public class UserFinderImpl implements UserFinder {
 		}
 		else if (key.equals("usersUserGroups")) {
 			join = CustomSQLUtil.get(JOIN_BY_USERS_USER_GROUPS);
+		}
+		else if (key.equals("announcementsDeliveryEmailOrSms")) {
+			join = CustomSQLUtil.get(
+				JOIN_BY_ANNOUNCEMENTS_DELIVERY_EMAIL_OR_SMS);
 		}
 		else if (key.equals("socialRelation")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);

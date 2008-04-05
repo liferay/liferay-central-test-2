@@ -78,8 +78,6 @@ if (!className.equals(Organization.class.getName()) && (organizationIdsArray.len
 
 results.addAll(AddressServiceUtil.getAddresses(className, classPK));
 
-searchContainer.setTotal(results.size());
-
 List resultRows = searchContainer.getResultRows();
 
 for (int i = 0; i < results.size(); i++) {
@@ -138,7 +136,7 @@ for (int i = 0; i < results.size(); i++) {
 	<br />
 </c:if>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <c:if test="<%= editable || (results.size() > 0) %>">
 	<br />

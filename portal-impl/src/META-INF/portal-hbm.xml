@@ -1479,6 +1479,18 @@
 		<property name="nodeId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="title" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
+	<class name="com.liferay.portlet.announcements.model.impl.AnnouncementsDeliveryImpl" table="AnnouncementsDelivery">
+		<cache usage="read-write" />
+		<id name="deliveryId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="email" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="sms" type="com.liferay.util.dao.hibernate.BooleanType" />
+		<property name="website" type="com.liferay.util.dao.hibernate.BooleanType" />
+	</class>
 	<class name="com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl" table="AnnouncementsEntry">
 		<cache usage="read-write" />
 		<id name="entryId" type="long">

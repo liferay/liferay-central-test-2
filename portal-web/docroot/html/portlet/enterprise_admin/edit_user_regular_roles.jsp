@@ -70,8 +70,6 @@ for (int i = 0; i < results.size(); i++) {
 
 	resultRows.add(row);
 }
-
-searchContainer.setTotal(results.size());
 %>
 
 <c:if test="<%= portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">
@@ -80,6 +78,6 @@ searchContainer.setTotal(results.size());
 	<br /><br />
 </c:if>
 
-<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" paginate="<%= false %>" />
+<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 
 <br />
