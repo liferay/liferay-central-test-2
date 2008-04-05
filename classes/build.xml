@@ -5,12 +5,8 @@
 
 	<target name="clean">
 		<delete>
-			<fileset dir="." excludes="JWhich.class" includes="*.class" />
+			<fileset dir="." includes="*.class" />
 		</delete>
-
-		<delete dir="com" />
-		<delete dir="oasis" />
-		<delete dir="org" />
 	</target>
 
 	<target name="compile">
@@ -25,16 +21,6 @@
 		/>
 	</target>
 
-	<target name="JWhich" depends="compile">
-		<java
-			classname="JWhich"
-			classpathref="project.classpath"
-			fork="true"
-		>
-			<arg value="com.sun.javadoc.ClassDoc" />
-		</java>
-	</target>
-
 	<target name="Test" depends="compile">
 		<java
 			classname="Test"
@@ -42,21 +28,10 @@
 			fork="true"
 		>
 			<!--
-			<jvmarg value="-Djava.endorsed.dirs=C:\Java\jwsdp-1.3\jaxp\lib\endorsed" />
 			<jvmarg value="-Duser.language=pt" />
 			<jvmarg value="-Duser.country=BR" />
 			<jvmarg value="-Duser.timezone=GMT" />
 			-->
-		</java>
-	</target>
-
-	<target name="LiferaySQL" depends="compile">
-		<java
-			classname="LiferaySQL"
-			classpathref="project.classpath"
-			fork="true"
-		>
-			<arg value="SELECT * FROM User_" />
 		</java>
 	</target>
 </project>
