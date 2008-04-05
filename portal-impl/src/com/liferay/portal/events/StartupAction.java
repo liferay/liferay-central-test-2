@@ -70,7 +70,7 @@ public class StartupAction extends SimpleAction {
 				LockServiceUtil.clear();
 			}
 			catch (Exception e) {
-				e.printStackTrace();
+				_log.error(e, e);
 			}
 
 			// Add shutdown hook

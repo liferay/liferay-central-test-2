@@ -672,7 +672,7 @@
 	<target name="build-dist-geronimo-tomcat">
 		<delete dir="${app.server.geronimo-tomcat.dir}" />
 
-		<unzip src="${app.server.parent.dir}/geronimo-tomcat-2.0.2.zip" dest="${app.server.parent.dir}" />
+		<unzip src="${app.server.parent.dir}/geronimo-tomcat-2.1.zip" dest="${app.server.parent.dir}" />
 
 		<ant dir="sql" target="rebuild-derby" inheritAll="false" />
 

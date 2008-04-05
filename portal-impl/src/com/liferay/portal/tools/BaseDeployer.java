@@ -629,9 +629,20 @@ public class BaseDeployer {
 			boolean overwrite, PluginPackage pluginPackage)
 		throws Exception {
 
-		boolean undeployOnRedeploy = PrefsPropsUtil.getBoolean(
-			PropsUtil.HOT_UNDEPLOY_ON_REDEPLOY,
-			PropsValues.HOT_UNDEPLOY_ON_REDEPLOY);
+		boolean undeployOnRedeploy = false;
+
+		try {
+			undeployOnRedeploy = PrefsPropsUtil.getBoolean(
+				PropsUtil.HOT_UNDEPLOY_ON_REDEPLOY,
+				PropsValues.HOT_UNDEPLOY_ON_REDEPLOY);
+		}
+		catch (Exception e) {
+
+			// This will only happen when running the deploy tool in Ant in the
+			// classical way where the WAR file is actually massaged and
+			// packaged.
+
+		}
 
 		if (undeployOnRedeploy) {
 			DeployUtil.undeploy(appServerType, deployDir);

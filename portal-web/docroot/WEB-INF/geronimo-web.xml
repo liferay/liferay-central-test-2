@@ -11,11 +11,6 @@
 		<dependencies>
 			<dependency>
 				<groupId>org.apache.geronimo.configs</groupId>
-				<artifactId>j2ee-security</artifactId>
-				<type>car</type>
-			</dependency>
-			<dependency>
-				<groupId>org.apache.geronimo.configs</groupId>
 				<artifactId>j2ee-server</artifactId>
 				<type>car</type>
 			</dependency>
@@ -26,12 +21,17 @@
 			</dependency>
 			<dependency>
 				<groupId>org.apache.geronimo.configs</groupId>
-				<artifactId>rmi-naming</artifactId>
+				<artifactId>sharedlib</artifactId>
 				<type>car</type>
 			</dependency>
 			<dependency>
-				<groupId>org.apache.geronimo.configs</groupId>
-				<artifactId>sharedlib</artifactId>
+				<groupId>org.apache.geronimo.framework</groupId>
+				<artifactId>j2ee-security</artifactId>
+				<type>car</type>
+			</dependency>
+			<dependency>
+				<groupId>org.apache.geronimo.framework</groupId>
+				<artifactId>rmi-naming</artifactId>
 				<type>car</type>
 			</dependency>
 			<dependency>
