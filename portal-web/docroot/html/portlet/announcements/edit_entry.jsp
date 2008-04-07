@@ -31,7 +31,6 @@ AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(WebKeys.ANNO
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
-String className = BeanParamUtil.getString(entry, request, "className");
 String type = BeanParamUtil.getString(entry, request, "type");
 
 Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
@@ -86,6 +85,11 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 	<td>
 		<c:choose>
 			<c:when test="<%= entry != null %>">
+
+				<%
+				String className = BeanParamUtil.getString(entry, request, "className");
+				%>
+
 				<c:choose>
 					<c:when test="<%= Validator.isNull(className) %>">
 						<liferay-ui:message key="general" />
@@ -133,9 +137,26 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 				</c:choose>
 			</c:when>
 			<c:otherwise>
+
+				<%
+				String distributionScope = ParamUtil.getString(request, "distributionScope");
+
+				long classNameId = -1;
+				long classPK = -1;
+
+				String[] distributionScopeArray = StringUtil.split(distributionScope);
+
+				if (distributionScopeArray.length == 2) {
+					classNameId = GetterUtil.getLong(distributionScopeArray[0]);
+					classPK = GetterUtil.getLong(distributionScopeArray[1]);
+				}
+				%>
+
 				<select name="<portlet:namespace />distributionScope">
+					<option value=""></option>
+
 					<c:if test="<%= permissionChecker.isOmniadmin() %>">
-						<option value="0,0"><liferay-ui:message key="general" /></option>
+						<option <%= ((classNameId == 0) && (classPK == 0)) ? "selected" : "" %> value="0,0"><liferay-ui:message key="general" /></option>
 					</c:if>
 
 					<optgroup label="<liferay-ui:message key="communities" />">
@@ -147,7 +168,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 							if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS)) {
 						%>
 
-								<option value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
+								<option <%= (classPK == group.getGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
 
 						<%
 							}
@@ -164,7 +185,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 							if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.ASSIGN_MEMBERS)) {
 						%>
 
-								<option value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= organization.getName() %></option>
+								<option <%= (classPK == organization.getOrganizationId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= organization.getName() %></option>
 
 						<%
 							}
@@ -181,7 +202,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 							if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS)) {
 						%>
 
-								<option value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= role.getName() %></option>
+								<option <%= (classPK == role.getRoleId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= role.getName() %></option>
 
 						<%
 							}
@@ -198,7 +219,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 							if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_MEMBERS)) {
 						%>
 
-								<option value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
+								<option <%= (classPK == userGroup.getUserGroupId()) ? "selected" : "" %> value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
 
 						<%
 							}

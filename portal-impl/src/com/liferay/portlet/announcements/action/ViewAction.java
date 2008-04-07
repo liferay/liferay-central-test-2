@@ -47,7 +47,7 @@ public class ViewAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		req.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
+		//req.setAttribute(WebKeys.PORTLET_DECORATE, Boolean.FALSE);
 
 		return mapping.findForward("portlet.announcements.view");
 	}

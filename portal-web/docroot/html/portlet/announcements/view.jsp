@@ -67,7 +67,7 @@ portletURL.setParameter("tabs1", tabs1);
 			flagValue = AnnouncementsFlagImpl.HIDDEN;
 		}
 
-		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, null, "no-entries-were-found");
+		SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 3, portletURL, null, "no-entries-were-found");
 
 		int total = AnnouncementsEntryLocalServiceUtil.getEntriesCount(user.getUserId(), scopes, portletName.equals(PortletKeys.ALERTS), flagValue);
 
@@ -107,7 +107,7 @@ portletURL.setParameter("tabs1", tabs1);
 					<tr>
 						<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 							<td class="edit-entry">
-								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+								<portlet:renderURL var="editURL">
 									<portlet:param name="struts_action" value="/announcements/edit_entry" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
 									<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
@@ -159,7 +159,11 @@ portletURL.setParameter("tabs1", tabs1);
 		}
 		%>
 
-		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" />
+		<c:if test="<%= results.size() == 0 %>">
+			<liferay-ui:message key="no-entries-were-found" />
+		</c:if>
+
+		<liferay-ui:search-paginator searchContainer="<%= searchContainer %>" type="article" />
 	</c:when>
 	<c:when test='<%= tabs1.equals("manage-entries") %>'>
 
@@ -278,7 +282,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br />
 
-		<input type="button" value='<liferay-ui:message key="add-entry" />' onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>'" />
+		<input type="button" value='<liferay-ui:message key="add-entry" />' onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>'" />
 
 		<c:if test="<%= Validator.isNotNull(distributionScope) %>">
 			<br /><br />
@@ -315,8 +319,6 @@ portletURL.setParameter("tabs1", tabs1);
 				ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
-
-				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/announcements/edit_entry");
 				rowURL.setParameter("redirect", currentURL);
