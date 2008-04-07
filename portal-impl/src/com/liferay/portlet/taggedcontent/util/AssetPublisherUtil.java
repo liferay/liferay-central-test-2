@@ -137,7 +137,7 @@ public class AssetPublisherUtil {
 		try {
 			DocumentFactory docFactory = DocumentFactory.getInstance();
 
-			Document doc = docFactory.createDocument("UTF-8");
+			Document doc = docFactory.createDocument(StringPool.UTF8);
 
 			Element asset = doc.addElement("asset");
 

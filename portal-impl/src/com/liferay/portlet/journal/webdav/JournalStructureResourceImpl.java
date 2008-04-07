@@ -23,6 +23,7 @@
 package com.liferay.portlet.journal.webdav;
 
 import com.liferay.portal.kernel.util.ContentTypes;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.webdav.BaseResourceImpl;
 import com.liferay.portal.webdav.WebDAVException;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -65,7 +66,7 @@ public class JournalStructureResourceImpl extends BaseResourceImpl {
 	public InputStream getContentAsStream() throws WebDAVException {
 		try {
 			return new ByteArrayInputStream(
-				_structure.getXsd().getBytes("UTF-8"));
+				_structure.getXsd().getBytes(StringPool.UTF8));
 		}
 		catch (Exception e) {
 			throw new WebDAVException(e);

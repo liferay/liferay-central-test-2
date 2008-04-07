@@ -23,6 +23,7 @@
 package com.liferay.util;
 
 import com.liferay.portal.kernel.util.CharPool;
+import com.liferay.portal.kernel.util.StringPool;
 
 import com.sun.syndication.feed.synd.SyndContent;
 import com.sun.syndication.feed.synd.SyndEntry;
@@ -67,7 +68,7 @@ public class RSSUtil {
 	public static String export(SyndFeed feed)
 		throws FeedException, IOException {
 
-		feed.setEncoding("UTF-8");
+		feed.setEncoding(StringPool.UTF8);
 
 		SyndFeedOutput output = new SyndFeedOutput();
 
@@ -88,11 +89,9 @@ public class RSSUtil {
 		feed.setTitle(_regexpStrip(feed.getTitle()));
 		feed.setDescription(_regexpStrip(feed.getDescription()));
 
-		List entries = feed.getEntries();
+		List<SyndEntry> entries = feed.getEntries();
 
-		for (int i = 0; i < entries.size(); i++) {
-			SyndEntry entry = (SyndEntry)entries.get(i);
-
+		for (SyndEntry entry : entries) {
 			entry.setTitle(_regexpStrip(entry.getTitle()));
 
 			SyndContent content = entry.getDescription();

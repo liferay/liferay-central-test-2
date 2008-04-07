@@ -25,6 +25,7 @@ package com.liferay.portlet.journal.util;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.journal.TransformException;
 
 import java.io.StringReader;
@@ -85,7 +86,7 @@ public class JournalXslUtil {
 			throw new TransformException(errorListener.getMessageAndLocation());
 		}
 
-		return bam.toString("UTF-8");
+		return bam.toString(StringPool.UTF8);
 	}
 
 }

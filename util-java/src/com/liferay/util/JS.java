@@ -37,8 +37,6 @@ import java.net.URLEncoder;
  */
 public class JS {
 
-	public static final String ENCODING = "UTF-8";
-
 	public static String getSafeName(String name) {
 		String safeName =
 			StringUtil.replace(
@@ -72,7 +70,7 @@ public class JS {
 		// Encode URL
 
 		try {
-			s = URLEncoder.encode(s, ENCODING);
+			s = URLEncoder.encode(s, StringPool.UTF8);
 		}
 		catch (Exception e) {
 		}
@@ -99,7 +97,7 @@ public class JS {
 		// Decode URL
 
 		try {
-			s = URLDecoder.decode(s, ENCODING);
+			s = URLDecoder.decode(s, StringPool.UTF8);
 		}
 		catch (Exception e) {
 		}

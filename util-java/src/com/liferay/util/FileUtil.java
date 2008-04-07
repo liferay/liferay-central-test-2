@@ -64,7 +64,7 @@ import org.mozilla.intl.chardet.nsPSMDetector;
 public class FileUtil {
 
 	public static final String ENCODING = GetterUtil.getString(
-		SystemProperties.get("file.encoding"), "UTF-8");
+		SystemProperties.get("file.encoding"), StringPool.UTF8);
 
 	public static void copyDirectory(
 		String sourceDirName, String destinationDirName) {

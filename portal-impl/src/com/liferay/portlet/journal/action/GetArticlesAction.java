@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.ActionConstants;
@@ -188,7 +189,7 @@ public class GetArticlesAction extends Action {
 			groupId, themeDisplay);
 
 		Document resultsDoc =
-			DocumentFactory.getInstance().createDocument("UTF-8");
+			DocumentFactory.getInstance().createDocument(StringPool.UTF8);
 
 		Element resultSetEl = resultsDoc.addElement("result-set");
 
@@ -210,7 +211,7 @@ public class GetArticlesAction extends Action {
 			JournalUtil.addAllReservedEls(resultEl, tokens, article);
 		}
 
-		return JournalUtil.formatXML(resultsDoc).getBytes("UTF-8");
+		return JournalUtil.formatXML(resultsDoc).getBytes(StringPool.UTF8);
 	}
 
 	private static Log _log = LogFactory.getLog(GetArticlesAction.class);

@@ -384,7 +384,7 @@ public class SCProductEntryLocalServiceImpl
 
 		Document doc = DocumentHelper.createDocument();
 
-		doc.setXMLEncoding("UTF-8");
+		doc.setXMLEncoding(StringPool.UTF8);
 
 		Element root = doc.addElement("plugin-repository");
 

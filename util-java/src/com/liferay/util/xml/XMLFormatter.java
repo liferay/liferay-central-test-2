@@ -23,6 +23,7 @@
 package com.liferay.util.xml;
 
 import com.liferay.portal.kernel.util.ByteArrayMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
 import java.io.IOException;
@@ -43,8 +44,6 @@ import org.dom4j.io.XMLWriter;
  *
  */
 public class XMLFormatter {
-
-	public static final String ENCODING = "UTF-8";
 
 	public static final String INDENT = "\t";
 
@@ -119,7 +118,7 @@ public class XMLFormatter {
 
 		writer.write(branch);
 
-		String content = bam.toString(ENCODING);
+		String content = bam.toString(StringPool.UTF8);
 
 		// LEP-4257
 

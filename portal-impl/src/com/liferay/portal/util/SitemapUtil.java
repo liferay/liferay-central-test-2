@@ -25,6 +25,7 @@ package com.liferay.portal.util;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -60,7 +61,7 @@ public class SitemapUtil {
 
 		Document doc = DocumentHelper.createDocument();
 
-		doc.setXMLEncoding("UTF-8");
+		doc.setXMLEncoding(StringPool.UTF8);
 
 		Element root = doc.addElement(
 			"urlset", "http://www.google.com/schemas/sitemap/0.84");

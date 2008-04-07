@@ -230,7 +230,7 @@ public class ServletResponseUtil {
 
 			try {
 				if (!ascii) {
-					URLCodec codec = new URLCodec("UTF-8");
+					URLCodec codec = new URLCodec(StringPool.UTF8);
 
 					String encodedFileName =
 						StringUtil.replace(codec.encode(fileName), "+", "%20");

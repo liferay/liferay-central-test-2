@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 
 import java.io.IOException;
@@ -191,7 +192,7 @@ public class PortletPreferencesSerializer {
 
 			writer.write(portletPreferences);
 
-			return bam.toString("UTF-8");
+			return bam.toString(StringPool.UTF8);
 		}
 		catch (IOException ioe) {
 			throw new SystemException(ioe);

@@ -26,6 +26,7 @@ import com.liferay.portal.OldServiceComponentException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
@@ -115,7 +116,7 @@ public class ServiceComponentLocalServiceImpl
 		try {
 			DocumentFactory docFactory = DocumentFactory.getInstance();
 
-			Document doc = docFactory.createDocument("UTF-8");
+			Document doc = docFactory.createDocument(StringPool.UTF8);
 
 			Element data = doc.addElement("data");
 

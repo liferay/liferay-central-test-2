@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.translator.model;
 
+import com.liferay.portal.kernel.util.StringPool;
+
 import java.io.Serializable;
 import java.io.UnsupportedEncodingException;
 
@@ -54,7 +56,7 @@ public class Translation implements Serializable {
 
 	public void setFromText(String fromText) {
 		try {
-			_fromText = new String(fromText.getBytes(), "UTF-8");
+			_fromText = new String(fromText.getBytes(), StringPool.UTF8);
 		}
 		catch (UnsupportedEncodingException uee) {
 		}
@@ -66,7 +68,7 @@ public class Translation implements Serializable {
 
 	public void setToText(String toText) {
 		try {
-			_toText = new String(toText.getBytes(), "UTF-8");
+			_toText = new String(toText.getBytes(), StringPool.UTF8);
 		}
 		catch (UnsupportedEncodingException uee) {
 		}

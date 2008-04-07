@@ -30,7 +30,7 @@ package com.liferay.portal.kernel.util;
  */
 public interface Digester {
 
-	public static final String ENCODING = "UTF-8";
+	public static final String ENCODING = StringPool.UTF8;
 
 	public static final String DIGEST_ALGORITHM = "SHA";
 

@@ -20,50 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
-
-import java.io.Serializable;
-
-import java.util.Properties;
+package com.liferay.portlet.social.model;
 
 /**
- * <a href="ColorScheme.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialRelationConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface ColorScheme extends Comparable<ColorScheme>, Serializable {
+public interface SocialRelationConstants {
 
-	public String getColorSchemeId();
-
-	public String getName();
-
-	public void setName(String name);
-
-	public boolean getDefaultCs();
-
-	public boolean isDefaultCs();
-
-	public void setDefaultCs(boolean defaultCs);
-
-	public String getCssClass();
-
-	public void setCssClass(String cssClass);
-
-	public String getColorSchemeImagesPath();
-
-	public void setColorSchemeImagesPath(String colorSchemeImagesPath);
-
-    public String getColorSchemeThumbnailPath();
-
-	public String getSettings();
-
-	public void setSettings(String settings);
-
-	public Properties getSettingsProperties();
-
-	public void setSettingsProperties(Properties settingsProperties);
-
-	public String getSetting(String key);
+	public static final int TYPE_FRIEND = 1;
 
 }

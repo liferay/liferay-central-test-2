@@ -70,8 +70,6 @@ import org.apache.struts.util.MessageResources;
  */
 public class LanguageImpl implements Language {
 
-	public static final String DEFAULT_ENCODING = "UTF-8";
-
 	public String format(Locale locale, String pattern, Object argument) {
 		long companyId = CompanyThreadLocal.getCompanyId();
 
@@ -470,12 +468,12 @@ public class LanguageImpl implements Language {
 
 			_locales[i] = locale;
 			_localesByLanguageCode.put(language, locale);
-			_charEncodings.put(locale.toString(), DEFAULT_ENCODING);
+			_charEncodings.put(locale.toString(), StringPool.UTF8);
 		}
 	}
 
 	private String _getCharset(Locale locale) {
-		return DEFAULT_ENCODING;
+		return StringPool.UTF8;
 	}
 
 	private Locale _getLocale(String languageCode) {

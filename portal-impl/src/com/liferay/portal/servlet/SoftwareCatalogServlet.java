@@ -91,7 +91,7 @@ public class SoftwareCatalogServlet extends HttpServlet {
 					maxNumOfVersions, repoSettings);
 
 			String fileName = null;
-			byte[] byteArray = repositoryXML.getBytes("UTF-8");
+			byte[] byteArray = repositoryXML.getBytes(StringPool.UTF8);
 
 			ServletResponseUtil.sendFile(
 				res, fileName, byteArray, ContentTypes.TEXT_XML_UTF8);
