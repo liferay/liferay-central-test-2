@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -94,7 +95,7 @@ public class OrganizationPermissionImpl implements OrganizationPermission {
 		throws PortalException, SystemException {
 
 		while (organizationId !=
-					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 
 			if (permissionChecker.hasPermission(
 					groupId, Organization.class.getName(), organizationId,

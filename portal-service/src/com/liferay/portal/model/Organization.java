@@ -55,7 +55,11 @@ public interface Organization extends OrganizationModel {
 
 	public int getType();
 
+	public int getType(boolean location);
+
 	public java.lang.String getTypeLabel();
+
+	public java.lang.String getTypeLabel(int type);
 
 	public com.liferay.portal.model.Group getGroup();
 

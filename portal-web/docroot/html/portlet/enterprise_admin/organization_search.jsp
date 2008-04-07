@@ -80,9 +80,9 @@ OrganizationDisplayTerms displayTerms = (OrganizationDisplayTerms)searchContaine
 	<tr>
 		<td>
 			<select name="<portlet:namespace /><%= displayTerms.TYPE %>">
-				<option <%= (displayTerms.getType() == OrganizationImpl.ANY_TYPE) ? "selected" : "" %> value="<%= OrganizationImpl.ANY_TYPE %>"><liferay-ui:message key="any" /></option>
-				<option <%= (displayTerms.getType() == OrganizationImpl.TYPE_REGULAR) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
-				<option <%= (displayTerms.getType() == OrganizationImpl.TYPE_LOCATION) ? "selected" : "" %> value="<%= OrganizationImpl.TYPE_LOCATION %>"><liferay-ui:message key="location" /></option>
+				<option <%= (displayTerms.getType() == OrganizationConstants.ANY_TYPE) ? "selected" : "" %> value="<%= OrganizationConstants.ANY_TYPE %>"><liferay-ui:message key="any" /></option>
+				<option <%= (displayTerms.getType() == OrganizationConstants.TYPE_REGULAR) ? "selected" : "" %> value="<%= OrganizationConstants.TYPE_REGULAR %>"><liferay-ui:message key="regular" /></option>
+				<option <%= (displayTerms.getType() == OrganizationConstants.TYPE_LOCATION) ? "selected" : "" %> value="<%= OrganizationConstants.TYPE_LOCATION %>"><liferay-ui:message key="location" /></option>
 			</select>
 		</td>
 		<td>

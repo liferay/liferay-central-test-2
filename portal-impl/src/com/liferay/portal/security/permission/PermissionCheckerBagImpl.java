@@ -28,6 +28,8 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.OrganizationConstants;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.UserGroupRoleLocalServiceUtil;
@@ -135,7 +137,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 			long organizationId = group.getClassPK();
 
 			while (organizationId !=
-						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 
 				Organization organization =
 					OrganizationLocalServiceUtil.getOrganization(
@@ -184,7 +186,7 @@ public class PermissionCheckerBagImpl implements PermissionCheckerBag {
 			long organizationId = group.getClassPK();
 
 			while (organizationId !=
-						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 
 				Organization organization =
 					OrganizationLocalServiceUtil.getOrganization(

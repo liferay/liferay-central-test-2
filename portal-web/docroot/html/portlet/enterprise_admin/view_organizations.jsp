@@ -76,10 +76,10 @@ portletURL.setParameter(searchContainer.getCurParam(), String.valueOf(searchCont
 		orgParams.put("organizations", manageableOrganizationIds);
 	}
 
-	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
+	long parentOrganizationId = ParamUtil.getLong(request, "parentOrganizationId", OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 
 	if (parentOrganizationId <= 0) {
-		parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
+		parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 	}
 
 	int total = 0;

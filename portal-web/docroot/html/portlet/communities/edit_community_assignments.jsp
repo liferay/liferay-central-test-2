@@ -320,7 +320,7 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 		<%
 		OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
 
-		long parentOrganizationId = OrganizationImpl.ANY_PARENT_ORGANIZATION_ID;
+		long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
 
 		LinkedHashMap organizationParams = new LinkedHashMap();
 

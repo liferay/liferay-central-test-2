@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
@@ -164,8 +165,8 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			String sql = null;
 
-			if (type == OrganizationImpl.TYPE_LOCATION ||
-				type == OrganizationImpl.TYPE_REGULAR) {
+			if (type == OrganizationConstants.TYPE_LOCATION ||
+				type == OrganizationConstants.TYPE_REGULAR) {
 
 				sql = CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C);
 			}
@@ -217,10 +218,10 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
 
-			if (type == OrganizationImpl.TYPE_LOCATION) {
+			if (type == OrganizationConstants.TYPE_LOCATION) {
 				qPos.add(true);
 			}
-			else if (type == OrganizationImpl.TYPE_REGULAR) {
+			else if (type == OrganizationConstants.TYPE_REGULAR) {
 				qPos.add(false);
 			}
 
@@ -340,8 +341,8 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			String sql = null;
 
-			if (type == OrganizationImpl.TYPE_LOCATION ||
-				type == OrganizationImpl.TYPE_REGULAR) {
+			if (type == OrganizationConstants.TYPE_LOCATION ||
+				type == OrganizationConstants.TYPE_REGULAR) {
 
 				sql = CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C);
 			}
@@ -394,10 +395,10 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 			qPos.add(companyId);
 			qPos.add(parentOrganizationId);
 
-			if (type == OrganizationImpl.TYPE_LOCATION) {
+			if (type == OrganizationConstants.TYPE_LOCATION) {
 				qPos.add(true);
 			}
-			else if (type == OrganizationImpl.TYPE_REGULAR) {
+			else if (type == OrganizationConstants.TYPE_REGULAR) {
 				qPos.add(false);
 			}
 
@@ -458,8 +459,8 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			sm.append("(");
 
-			if (type == OrganizationImpl.TYPE_LOCATION ||
-				type == OrganizationImpl.TYPE_REGULAR) {
+			if (type == OrganizationConstants.TYPE_LOCATION ||
+				type == OrganizationConstants.TYPE_REGULAR) {
 
 				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
 			}
@@ -488,8 +489,8 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			sm.append(") UNION (");
 
-			if (type == OrganizationImpl.TYPE_LOCATION ||
-				type == OrganizationImpl.TYPE_REGULAR) {
+			if (type == OrganizationConstants.TYPE_LOCATION ||
+				type == OrganizationConstants.TYPE_REGULAR) {
 
 				sm.append(CustomSQLUtil.get(COUNT_BY_C_PO_N_L_S_C_Z_R_C));
 			}
@@ -567,10 +568,10 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				qPos.add(companyId);
 				qPos.add(parentOrganizationId);
 
-				if (type == OrganizationImpl.TYPE_LOCATION) {
+				if (type == OrganizationConstants.TYPE_LOCATION) {
 					qPos.add(true);
 				}
-				else if (type == OrganizationImpl.TYPE_REGULAR) {
+				else if (type == OrganizationConstants.TYPE_REGULAR) {
 					qPos.add(false);
 				}
 
@@ -630,8 +631,8 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			sm.append("(");
 
-			if (type == OrganizationImpl.TYPE_LOCATION ||
-				type == OrganizationImpl.TYPE_REGULAR) {
+			if (type == OrganizationConstants.TYPE_LOCATION ||
+				type == OrganizationConstants.TYPE_REGULAR) {
 
 				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
 			}
@@ -660,8 +661,8 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 			sm.append(") UNION (");
 
-			if (type == OrganizationImpl.TYPE_LOCATION ||
-				type == OrganizationImpl.TYPE_REGULAR) {
+			if (type == OrganizationConstants.TYPE_LOCATION ||
+				type == OrganizationConstants.TYPE_REGULAR) {
 
 				sm.append(CustomSQLUtil.get(FIND_BY_C_PO_N_L_S_C_Z_R_C));
 			}
@@ -741,10 +742,10 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 				qPos.add(companyId);
 				qPos.add(parentOrganizationId);
 
-				if (type == OrganizationImpl.TYPE_LOCATION) {
+				if (type == OrganizationConstants.TYPE_LOCATION) {
 					qPos.add(true);
 				}
-				else if (type == OrganizationImpl.TYPE_REGULAR) {
+				else if (type == OrganizationConstants.TYPE_REGULAR) {
 					qPos.add(false);
 				}
 

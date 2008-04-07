@@ -20,47 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
-
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Contact;
+package com.liferay.portal.model;
 
 /**
- * <a href="ContactImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ContactImpl extends ContactModelImpl implements Contact {
+public interface OrganizationConstants {
 
-	public static String getFullName(
-		String firstName, String middleName, String lastName) {
+	public static final int DEFAULT_PARENT_ORGANIZATION_ID = 0;
 
-		StringMaker sm = new StringMaker();
+	public static final int ANY_PARENT_ORGANIZATION_ID = -1;
 
-		if (Validator.isNull(middleName)) {
-			sm.append(firstName);
-			sm.append(StringPool.SPACE);
-			sm.append(lastName);
-		}
-		else {
-			sm.append(firstName);
-			sm.append(StringPool.SPACE);
-			sm.append(middleName);
-			sm.append(StringPool.SPACE);
-			sm.append(lastName);
-		}
+	public static final int ANY_TYPE = -1;
 
-		return sm.toString();
-	}
+	public static final int TYPE_REGULAR = 1;
 
-	public ContactImpl() {
-	}
+	public static final String TYPE_REGULAR_LABEL = "regular";
 
-	public String getFullName() {
-		return getFullName(getFirstName(), getMiddleName(), getLastName());
-	}
+	public static final int TYPE_LOCATION = 2;
+
+	public static final String TYPE_LOCATION_LABEL = "location";
 
 }

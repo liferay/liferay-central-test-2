@@ -33,6 +33,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -340,7 +341,7 @@ public class UserImpl extends UserModelImpl implements User {
 		Organization location = getLocation();
 
 		if (location == null) {
-			return OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+			return OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 		}
 
 		return location.getOrganizationId();

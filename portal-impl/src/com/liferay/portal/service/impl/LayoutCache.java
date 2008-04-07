@@ -35,6 +35,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 import com.liferay.portal.service.RoleLocalServiceUtil;
@@ -83,14 +84,16 @@ public class LayoutCache  {
 
 				if (entityName.equals("organization")) {
 					organizations = OrganizationLocalServiceUtil.search(
-						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    name, OrganizationImpl.TYPE_REGULAR, null, null, null,
+						companyId,
+						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, name,
+						OrganizationConstants.TYPE_REGULAR, null, null, null,
 						null, null, null, true, 0, 1);
 				}
 				else if (entityName.equals("location")) {
 					organizations = OrganizationLocalServiceUtil.search(
-						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    name, OrganizationImpl.TYPE_LOCATION, null, null, null,
+						companyId,
+						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, name,
+						OrganizationConstants.TYPE_LOCATION, null, null, null,
 						null, null, null, true, 0, 1);
 				}
 
@@ -140,14 +143,16 @@ public class LayoutCache  {
 
 				if (entityName.equals("organization")) {
 					organizations = OrganizationLocalServiceUtil.search(
-						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    null, OrganizationImpl.TYPE_REGULAR, null, null, null,
+						companyId,
+						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null,
+						OrganizationConstants.TYPE_REGULAR, null, null, null,
 						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 				}
 				else if (entityName.equals("location")) {
 					organizations = OrganizationLocalServiceUtil.search(
-						companyId, OrganizationImpl.ANY_PARENT_ORGANIZATION_ID,
-					    null, OrganizationImpl.TYPE_LOCATION, null, null, null,
+						companyId,
+						OrganizationConstants.ANY_PARENT_ORGANIZATION_ID, null,
+						OrganizationConstants.TYPE_LOCATION, null, null, null,
 						QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 				}
 

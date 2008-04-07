@@ -40,6 +40,7 @@ import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
@@ -99,7 +100,7 @@ public class OrganizationLocalServiceImpl
 		organization.setParentOrganizationId(parentOrganizationId);
 		organization.setName(name);
 
-		if (type == OrganizationImpl.TYPE_LOCATION) {
+		if (type == OrganizationConstants.TYPE_LOCATION) {
 			organization.setLocation(true);
 		}
 		else {
@@ -311,7 +312,9 @@ public class OrganizationLocalServiceImpl
 	public List<Organization> getParentOrganizations(long organizationId)
 		throws PortalException, SystemException {
 
-		if (organizationId == OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+		if (organizationId ==
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+
 			return new ArrayList<Organization>();
 		}
 
@@ -416,7 +419,7 @@ public class OrganizationLocalServiceImpl
 		String parentOrganizationComparator = StringPool.EQUAL;
 
 		if (parentOrganizationId ==
-				OrganizationImpl.ANY_PARENT_ORGANIZATION_ID) {
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
 
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
@@ -451,7 +454,7 @@ public class OrganizationLocalServiceImpl
 		String parentOrganizationComparator = StringPool.EQUAL;
 
 		if (parentOrganizationId ==
-				OrganizationImpl.ANY_PARENT_ORGANIZATION_ID) {
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
 
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
@@ -471,7 +474,7 @@ public class OrganizationLocalServiceImpl
 		String parentOrganizationComparator = StringPool.EQUAL;
 
 		if (parentOrganizationId ==
-				OrganizationImpl.ANY_PARENT_ORGANIZATION_ID) {
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
 
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
@@ -491,7 +494,7 @@ public class OrganizationLocalServiceImpl
 		String parentOrganizationComparator = StringPool.EQUAL;
 
 		if (parentOrganizationId ==
-				OrganizationImpl.ANY_PARENT_ORGANIZATION_ID) {
+				OrganizationConstants.ANY_PARENT_ORGANIZATION_ID) {
 
 			parentOrganizationComparator = StringPool.NOT_EQUAL;
 		}
@@ -546,7 +549,7 @@ public class OrganizationLocalServiceImpl
 		organization.setParentOrganizationId(parentOrganizationId);
 		organization.setName(name);
 
-		if (type == OrganizationImpl.TYPE_LOCATION) {
+		if (type == OrganizationConstants.TYPE_LOCATION) {
 			organization.setLocation(true);
 		}
 		else {
@@ -588,7 +591,7 @@ public class OrganizationLocalServiceImpl
 		throws PortalException, SystemException {
 
 		if (parentOrganizationId !=
-				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 
 			// Ensure parent organization exists and belongs to the proper
 			// company
@@ -600,12 +603,12 @@ public class OrganizationLocalServiceImpl
 
 				if (companyId != parentOrganization.getCompanyId()) {
 					parentOrganizationId =
-						OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+						OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 				}
 			}
 			catch (NoSuchOrganizationException nsoe) {
 				parentOrganizationId =
-					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID;
+					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID;
 			}
 		}
 
@@ -625,7 +628,7 @@ public class OrganizationLocalServiceImpl
 		long parentOrganizationId = organization.getParentOrganizationId();
 
 		if (parentOrganizationId ==
-				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID) {
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
 
 			return organizations;
 		}
@@ -678,9 +681,9 @@ public class OrganizationLocalServiceImpl
 			String name, int type, long countryId, int statusId)
 		throws PortalException, SystemException {
 
-		if ((type == OrganizationImpl.TYPE_LOCATION) ||
+		if ((type == OrganizationConstants.TYPE_LOCATION) ||
 			(parentOrganizationId !=
-				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID)) {
 
 			try {
 				Organization parentOrganization =
@@ -701,7 +704,7 @@ public class OrganizationLocalServiceImpl
 
 		if ((organizationId > 0) &&
 			(parentOrganizationId !=
-				OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID)) {
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID)) {
 
 			// Prevent circular organizational references
 

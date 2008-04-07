@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -151,7 +152,7 @@ public class EditOrganizationAction extends PortletAction {
 
 		long parentOrganizationId = ParamUtil.getLong(
 			req, "parentOrganizationId",
-			OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID);
+			OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID);
 		String name = ParamUtil.getString(req, "name");
 		boolean recursable = ParamUtil.getBoolean(req, "recursable");
 		int statusId = ParamUtil.getInteger(req, "statusId");

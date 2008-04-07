@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.service.AddressLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 
@@ -36,7 +37,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="OrganizationImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
@@ -44,44 +45,13 @@ import org.apache.commons.logging.LogFactory;
 public class OrganizationImpl
 	extends OrganizationModelImpl implements Organization {
 
-	public static final int DEFAULT_PARENT_ORGANIZATION_ID = 0;
-
-	public static final int ANY_PARENT_ORGANIZATION_ID = -1;
-
-	public static final int ANY_TYPE = -1;
-
-	public static final int TYPE_REGULAR = 1;
-
-	public static final String TYPE_REGULAR_LABEL = "regular";
-
-	public static final int TYPE_LOCATION = 2;
-
-	public static final String TYPE_LOCATION_LABEL = "location";
-
-	public static int getType(boolean location) {
-		int type = OrganizationImpl.TYPE_REGULAR;
-
-		if (location) {
-			type = OrganizationImpl.TYPE_LOCATION;
-		}
-
-		return type;
-	}
-
-	public static String getTypeLabel(int type) {
-		if (type == TYPE_LOCATION) {
-			return TYPE_LOCATION_LABEL;
-		}
-		else {
-			return TYPE_REGULAR_LABEL;
-		}
-	}
-
 	public OrganizationImpl() {
 	}
 
 	public boolean isRoot() {
-		if (getParentOrganizationId() == DEFAULT_PARENT_ORGANIZATION_ID) {
+		if (getParentOrganizationId() ==
+				OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID) {
+
 			return true;
 		}
 		else {
@@ -95,15 +65,34 @@ public class OrganizationImpl
 
 	public int getType() {
 		if (isLocation()) {
-			return TYPE_LOCATION;
+			return OrganizationConstants.TYPE_LOCATION;
 		}
 		else {
-			return TYPE_REGULAR;
+			return OrganizationConstants.TYPE_REGULAR;
 		}
+	}
+
+	public int getType(boolean location) {
+		int type = OrganizationConstants.TYPE_REGULAR;
+
+		if (location) {
+			type = OrganizationConstants.TYPE_LOCATION;
+		}
+
+		return type;
 	}
 
 	public String getTypeLabel() {
 		return getTypeLabel(getType());
+	}
+
+	public String getTypeLabel(int type) {
+		if (type == OrganizationConstants.TYPE_LOCATION) {
+			return OrganizationConstants.TYPE_LOCATION_LABEL;
+		}
+		else {
+			return OrganizationConstants.TYPE_REGULAR_LABEL;
+		}
 	}
 
 	public Group getGroup() {

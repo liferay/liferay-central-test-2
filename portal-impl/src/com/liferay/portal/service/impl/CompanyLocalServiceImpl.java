@@ -42,15 +42,16 @@ import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ContactConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
+import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.model.impl.RegionImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.base.CompanyLocalServiceBaseImpl;
@@ -261,7 +262,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			defaultContact.setModifiedDate(now);
 			defaultContact.setAccountId(company.getAccountId());
 			defaultContact.setParentContactId(
-				ContactImpl.DEFAULT_PARENT_CONTACT_ID);
+				ContactConstants.DEFAULT_PARENT_CONTACT_ID);
 			defaultContact.setFirstName(StringPool.BLANK);
 			defaultContact.setMiddleName(StringPool.BLANK);
 			defaultContact.setLastName(StringPool.BLANK);
@@ -342,15 +343,15 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			Organization organization =
 				organizationLocalService.addOrganization(
 					user.getUserId(),
-					OrganizationImpl.DEFAULT_PARENT_ORGANIZATION_ID,
-					"Test Organization", OrganizationImpl.TYPE_REGULAR, true,
-					RegionImpl.DEFAULT_REGION_ID,
+					OrganizationConstants.DEFAULT_PARENT_ORGANIZATION_ID,
+					"Test Organization", OrganizationConstants.TYPE_REGULAR,
+					true, RegionImpl.DEFAULT_REGION_ID,
 					CountryImpl.DEFAULT_COUNTRY_ID,
 					ListTypeImpl.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK);
 
 			organizationLocalService.addOrganization(
 				user.getUserId(), organization.getOrganizationId(),
-				"Test Location", OrganizationImpl.TYPE_LOCATION, true,
+				"Test Location", OrganizationConstants.TYPE_LOCATION, true,
 				RegionImpl.DEFAULT_REGION_ID, CountryImpl.DEFAULT_COUNTRY_ID,
 				ListTypeImpl.ORGANIZATION_STATUS_DEFAULT, StringPool.BLANK);
 		}
