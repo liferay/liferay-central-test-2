@@ -492,7 +492,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("pages") %>'>
-				<%@ include file="/html/portlet/communities/edit_pages_public_and_private.jsp" %>
+				<%@ include file="/html/portlet/communities/edit_pages_public_and_private.jspf" %>
 			</c:when>
 			<c:when test='<%= tabs2.equals("look-and-feel") %>'>
 				<liferay-util:include page="/html/portlet/communities/edit_pages_look_and_feel.jsp" />
