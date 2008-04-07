@@ -24,33 +24,23 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
-<%@ page import="com.liferay.portal.service.ClassNameLocalServiceUtil"%>
-<%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil"%>
-<%@ page import="com.liferay.portal.service.permission.RolePermissionUtil"%>
-<%@ page import="com.liferay.portal.service.permission.UserGroupPermissionUtil"%>
-<%@ page import="com.liferay.portal.service.persistence.ClassNameUtil"%>
+<%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
+<%@ page import="com.liferay.portal.service.permission.RolePermissionUtil" %>
+<%@ page import="com.liferay.portal.service.permission.UserGroupPermissionUtil" %>
 <%@ page import="com.liferay.portlet.announcements.EntryContentException" %>
 <%@ page import="com.liferay.portlet.announcements.EntryDisplayDateException" %>
 <%@ page import="com.liferay.portlet.announcements.EntryExpirationDateException" %>
 <%@ page import="com.liferay.portlet.announcements.EntryTitleException" %>
-<%@ page import="com.liferay.portlet.announcements.NoSuchFlagException"%>
-<%@ page import="com.liferay.portlet.announcements.model.AnnouncementsEntry"%>
-<%@ page import="com.liferay.portlet.announcements.model.AnnouncementsFlag"%>
-<%@ page import="com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl"%>
-<%@ page import="com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl"%>
-<%@ page import="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceUtil"%>
-<%@ page import="com.liferay.portlet.announcements.service.permission.AnnouncementsEntryPermission"%>
-<%@ page import="com.liferay.portlet.announcements.util.AnnouncementsUtil"%>
+<%@ page import="com.liferay.portlet.announcements.NoSuchEntryException" %>
+<%@ page import="com.liferay.portlet.announcements.NoSuchFlagException" %>
+<%@ page import="com.liferay.portlet.announcements.model.AnnouncementsEntry" %>
+<%@ page import="com.liferay.portlet.announcements.model.impl.AnnouncementsEntryImpl" %>
+<%@ page import="com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl" %>
+<%@ page import="com.liferay.portlet.announcements.service.AnnouncementsEntryLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.announcements.service.AnnouncementsFlagLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.announcements.service.permission.AnnouncementsEntryPermission" %>
+<%@ page import="com.liferay.portlet.announcements.util.AnnouncementsUtil" %>
 
 <%
-PortletPreferences prefs = renderRequest.getPreferences();
-
-String portletResource = ParamUtil.getString(request, "portletResource");
-
-if (Validator.isNotNull(portletResource)) {
-	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
-}
-
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

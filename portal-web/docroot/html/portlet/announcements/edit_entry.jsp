@@ -25,28 +25,14 @@
 <%@ include file="/html/portlet/announcements/init.jsp" %>
 
 <%
+String redirect = ParamUtil.getString(request, "redirect");
+
 AnnouncementsEntry entry = (AnnouncementsEntry)request.getAttribute(WebKeys.ANNOUNCEMENTS_ENTRY);
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
 
-long classNameId = BeanParamUtil.getLong(entry, request, "classNameId");
-
-long classPK = BeanParamUtil.getLong(entry, request, "classPK");
-
-String type = BeanParamUtil.getString(entry, request, "type", AnnouncementsEntryImpl.TYPES[0]);
-
-int priority = BeanParamUtil.getInteger(entry, request, "priority", 1);
-
-String redirect = ParamUtil.getString(request, "redirect");
-String backURL = ParamUtil.getString(request, "backURL", redirect);
-
-boolean alerts = false;
-String strutsPath = "/announcements/edit_entry";
-
-if (portletName.equals(PortletKeys.ALERTS)) {
-	alerts =  true;
-	strutsPath = "/alerts/edit_entry";
-}
+String className = BeanParamUtil.getString(entry, request, "className");
+String type = BeanParamUtil.getString(entry, request, "type");
 
 Calendar displayDate = CalendarFactoryUtil.getCalendar(timeZone, locale);
 
@@ -66,33 +52,170 @@ if (entry != null) {
 	}
 }
 
-PortletURL portletURL = renderResponse.createRenderURL();
-
-portletURL.setWindowState(WindowState.MAXIMIZED);
-
-portletURL.setParameter("struts_action", strutsPath);
-portletURL.setParameter("redirect", redirect);
-portletURL.setParameter("entryId", String.valueOf(entryId));
+int priority = BeanParamUtil.getInteger(entry, request, "priority");
 %>
 
 <script type="text/javascript">
 	function <portlet:namespace />saveEntry() {
+		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= entry == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 </script>
 
-<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="<%= strutsPath %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= (entry == null ? Constants.ADD : Constants.UPDATE) %>">
+<form action="<portlet:actionURL><portlet:param name="struts_action" value="/announcements/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
+<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
-<input name="<portlet:namespace />alert" type="hidden" value="<%= alerts %>" />
+<input name="<portlet:namespace />alert" type="hidden" value="<%= portletName.equals(PortletKeys.ALERTS) %>" />
+
+<liferay-ui:tabs
+	names="entry"
+	backURL="<%= redirect %>"
+/>
 
 <liferay-ui:error exception="<%= EntryContentException.class %>" message="please-enter-valid-content" />
-<liferay-ui:error exception="<%= EntryDisplayDateException.class %>" message="please-enter-valid-display-date" />
-<liferay-ui:error exception="<%= EntryExpirationDateException.class %>" message="please-enter-valid-expiration-date" />
-<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-valid-title" />
+<liferay-ui:error exception="<%= EntryDisplayDateException.class %>" message="please-enter-a-valid-display-date" />
+<liferay-ui:error exception="<%= EntryExpirationDateException.class %>" message="please-enter-a-valid-expiration-date" />
+<liferay-ui:error exception="<%= EntryTitleException.class %>" message="please-enter-a-valid-title" />
 
 <table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="distribution-scope" />
+	</td>
+	<td>
+		<c:choose>
+			<c:when test="<%= entry != null %>">
+				<c:choose>
+					<c:when test="<%= Validator.isNull(className) %>">
+						<liferay-ui:message key="general" />
+					</c:when>
+					<c:when test="<%= className.equals(Group.class.getName()) %>">
+
+						<%
+						Group group = GroupLocalServiceUtil.getGroup(entry.getClassPK());
+						%>
+
+						<liferay-ui:message key="community" /> &raquo; <%= group.getName() %>
+					</c:when>
+					<c:when test="<%= className.equals(Organization.class.getName()) %>">
+
+						<%
+						Organization organization = OrganizationLocalServiceUtil.getOrganization(entry.getClassPK());
+						%>
+
+						<liferay-ui:message key="organization" /> &raquo; <%= organization.getName() %>
+					</c:when>
+					<c:when test="<%= className.equals(Role.class.getName()) %>">
+
+						<%
+						Role role = RoleLocalServiceUtil.getRole(entry.getClassPK());
+						%>
+
+						<liferay-ui:message key="role" /> &raquo; <%= role.getName() %>
+					</c:when>
+					<c:when test="<%= className.equals(User.class.getName()) %>">
+
+						<%
+						User user2 = UserLocalServiceUtil.getUserById(entry.getClassPK());
+						%>
+
+						<liferay-ui:message key="personal" /> &raquo; <%= user2.getFullName() %>
+					</c:when>
+					<c:when test="<%= className.equals(UserGroup.class.getName()) %>">
+
+						<%
+						UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(entry.getClassPK());
+						%>
+
+						<liferay-ui:message key="user-group" /> &raquo;	<%= userGroup.getName() %>
+					</c:when>
+				</c:choose>
+			</c:when>
+			<c:otherwise>
+				<select name="<portlet:namespace />distributionScope">
+					<c:if test="<%= permissionChecker.isOmniadmin() %>">
+						<option value="0,0"><liferay-ui:message key="general" /></option>
+					</c:if>
+
+					<optgroup label="<liferay-ui:message key="communities" />">
+
+						<%
+						List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
+
+						for (Group group : groups) {
+							if (group.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group.getGroupId(), ActionKeys.ASSIGN_MEMBERS)) {
+						%>
+
+								<option value="<%= PortalUtil.getClassNameId(Group.class) %><%= StringPool.COMMA %><%= group.getGroupId() %>"><%= group.getName() %></option>
+
+						<%
+							}
+						}
+						%>
+
+					</optgroup>
+					<optgroup label="<liferay-ui:message key="organizations" />">
+
+						<%
+						List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
+
+						for (Organization organization : organizations) {
+							if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.ASSIGN_MEMBERS)) {
+						%>
+
+								<option value="<%= PortalUtil.getClassNameId(Organization.class) %><%= StringPool.COMMA %><%= organization.getOrganizationId() %>"><%= organization.getName() %></option>
+
+						<%
+							}
+						}
+						%>
+
+					</optgroup>
+					<optgroup label="<liferay-ui:message key="roles" />">
+
+						<%
+						List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
+
+						for (Role role : roles) {
+							if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS)) {
+						%>
+
+								<option value="<%= PortalUtil.getClassNameId(Role.class) %><%= StringPool.COMMA %><%= role.getRoleId() %>"><%= role.getName() %></option>
+
+						<%
+							}
+						}
+						%>
+
+					</optgroup>
+					<optgroup label="<liferay-ui:message key="user-groups" />">
+
+						<%
+						List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
+
+						for (UserGroup userGroup : userGroups) {
+							if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_MEMBERS)) {
+						%>
+
+								<option value="<%= PortalUtil.getClassNameId(UserGroup.class) %><%= StringPool.COMMA %><%= userGroup.getUserGroupId() %>"><%= userGroup.getName() %></option>
+
+						<%
+							}
+						}
+						%>
+
+					</optgroup>
+				</select>
+			</c:otherwise>
+		</c:choose>
+	</td>
+</tr>
+<tr>
+	<td colspan="2">
+		<br />
+	</td>
+</tr>
 <tr>
 	<td>
 		<liferay-ui:message key="title" />
@@ -129,115 +252,35 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="distribution-scope" />
+		<liferay-ui:message key="type" />
 	</td>
 	<td>
-		<c:choose>
-			<c:when test="<%= entry != null %>">
-				<c:choose>
-					<c:when test="<%= entry.getClassNameId() == 0 %>">
-						<liferay-ui:message key="general" />
-					</c:when>
-<%--
-					<c:when test="<%= entry.getClassNameId() == userClassNameId %>">
-						<%
-						User user2 = UserLocalServiceUtil.getUserById(entry.getClassPK());
-						%>
-						<liferay-ui:message key="personal" /> &raquo; <%= user2.getFullName() %>
-					</c:when>
-					<c:when test="<%= entry.getClassNameId() == roleClassNameId %>">
-						<%
-						Role role = RoleLocalServiceUtil.getRole(entry.getClassPK());
-						%>
-						<liferay-ui:message key="role" /> &raquo; <%= role.getName() %>
-					</c:when>
-					<c:when test="<%= entry.getClassNameId() == userGroupClassNameId %>">
-						<%
-						UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(entry.getClassPK());
-						%>
-						<liferay-ui:message key="user-group" /> &raquo;	<%= userGroup.getName() %>
-					</c:when>
-					<c:when test="<%= entry.getClassNameId() == communityClassNameId %>">
-						<%
-						Group group2 = GroupLocalServiceUtil.getGroup(entry.getClassPK());
-						%>
-						<liferay-ui:message key="community" /> &raquo; <%= group2.getName() %>
-					</c:when>
-					<c:when test="<%= entry.getClassNameId() == organizationClassNameId %>">
-						<%
-						Organization org = OrganizationLocalServiceUtil.getOrganization(entry.getClassPK());
-						%>
-						<liferay-ui:message key="organization" /> &raquo; <%= org.getName() %>
-					</c:when>
---%>
-				</c:choose>
-			</c:when>
-			<c:otherwise>
-				<select name="<portlet:namespace />distributionScope">
-					<c:if test="<%= permissionChecker.isOmniadmin() %>">
-						<option value="0,0" ><liferay-ui:message key="general" /></option>
-					</c:if>
+		<select name="<portlet:namespace />type">
 
-<%--
-					<optgroup label='<liferay-ui:message key="roles" />'>
-						<%
-						List<Role> roles = RoleLocalServiceUtil.getRoles(themeDisplay.getCompanyId());
+			<%
+			for (String curType : AnnouncementsEntryImpl.TYPES) {
+			%>
 
-						for (Role role : roles) {
-							if (RolePermissionUtil.contains(permissionChecker, role.getRoleId(), ActionKeys.ASSIGN_MEMBERS)) {
-							%>
-								<option value="<%= roleClassNameId + StringPool.COMMA + role.getRoleId() %>" ><%= role.getName() %></option>
-							<%
-							}
-						}
-						%>
-					</optgroup>
+				<option <%= type.equals(curType) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
 
-					<optgroup label='<liferay-ui:message key="user-groups" />'>
-						<%
-						List<UserGroup> userGroups = UserGroupLocalServiceUtil.getUserGroups(themeDisplay.getCompanyId());
+			<%
+			}
+			%>
 
-						for (UserGroup userGroup : userGroups) {
-							if (UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_MEMBERS)) {
-							%>
-								<option value="<%= userGroupClassNameId + StringPool.COMMA + userGroup.getUserGroupId() %>" ><%= userGroup.getName() %></option>
-							<%
-							}
-						}
-						%>
-					</optgroup>
-
-					<optgroup label='<liferay-ui:message key="communities" />'>
-						<%
-						List<Group> groups = GroupLocalServiceUtil.getUserGroups(user.getUserId());
-
-						for (Group group2 : groups) {
-							if (group2.isCommunity() && GroupPermissionUtil.contains(permissionChecker, group2.getGroupId(), ActionKeys.ASSIGN_MEMBERS)) {
-							%>
-								<option value="<%= communityClassNameId + StringPool.COMMA + group2.getGroupId() %>" ><%= group2.getName() %></option>
-							<%
-							}
-						}
-						%>
-					</optgroup>
-
-					<optgroup label='<liferay-ui:message key="organizations" />'>
-						<%
-						List<Organization> organizations = OrganizationLocalServiceUtil.getUserOrganizations(user.getUserId());
-
-						for (Organization organization : organizations) {
-							if (OrganizationPermissionUtil.contains(permissionChecker, organization.getOrganizationId(), ActionKeys.ASSIGN_MEMBERS)) {
-							%>
-								<option value="<%= organizationClassNameId + StringPool.COMMA + organization.getOrganizationId() %>" ><%= organization.getName() %></option>
-							<%
-							}
-						}
-						%>
-					</optgroup>
---%>
-				</select>
-			</c:otherwise>
-		</c:choose>
+		</select>
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="priority" />
+	</td>
+	<td>
+		<select name="<portlet:namespace />priority">
+			<option value="0" <%= (priority == 0) ? "selected" : "" %>><liferay-ui:message key="low" /></option>
+			<option value="1" <%= (priority == 1) ? "selected" : "" %>><liferay-ui:message key="medium" /></option>
+			<option value="2" <%= (priority == 2) ? "selected" : "" %>><liferay-ui:message key="high" /></option>
+			<option value="3" <%= (priority == 3) ? "selected" : "" %>><liferay-ui:message key="highest" /></option>
+		</select>
 	</td>
 </tr>
 <tr>
@@ -247,42 +290,10 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 </tr>
 <tr>
 	<td>
-		<liferay-ui:message key="priority" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />priority">
-			<option value="0" <%= (priority == 0 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="low" /></option>
-			<option value="1" <%= (priority == 1 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="medium" /></option>
-			<option value="2" <%= (priority == 2 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="high" /></option>
-			<option value="3" <%= (priority == 3 ? "selected=\"selected\"" : "") %>><liferay-ui:message key="highest" /></option>
-		</select>
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="type" />
-	</td>
-	<td>
-		<select name="<portlet:namespace />type">
-			<%
-				for (int i = 0; i < AnnouncementsEntryImpl.TYPES.length; i++) {
-			%>
-
-			<option <%= type.equals(AnnouncementsEntryImpl.TYPES[i]) ? "selected" : "" %> value="<%= AnnouncementsEntryImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, AnnouncementsEntryImpl.TYPES[i]) %></option>
-
-			<%
-				}
-			%>
-
-		</select>
-	</td>
-</tr>
-<tr>
-	<td>
 		<liferay-ui:message key="display-date" />
 	</td>
 	<td>
-		<liferay-ui:input-field formName="fm" model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" />
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="displayDate" defaultValue="<%= displayDate %>" />
 	</td>
 </tr>
 <tr>
@@ -290,7 +301,7 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 		<liferay-ui:message key="expiration-date" />
 	</td>
 	<td>
-		<liferay-ui:input-field formName="fm" model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="expirationDate" defaultValue="<%= expirationDate %>" />
+		<liferay-ui:input-field model="<%= AnnouncementsEntry.class %>" bean="<%= entry %>" field="expirationDate" defaultValue="<%= expirationDate %>" />
 	</td>
 </tr>
 </table>
@@ -305,6 +316,6 @@ portletURL.setParameter("entryId", String.valueOf(entryId));
 
 <c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
 	<script type="text/javascript">
-		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />content);
+		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />title);
 	</script>
 </c:if>

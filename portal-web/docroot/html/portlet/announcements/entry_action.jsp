@@ -25,12 +25,6 @@
 <%@ include file="/html/portlet/announcements/init.jsp" %>
 
 <%
-	String strutsAction = "/announcements/edit_entry";
-
-if (portletName.equals(PortletKeys.ALERTS)) {
-	strutsAction = "/alerts/edit_entry";
-}
-
 ResultRow row = (ResultRow)request.getAttribute(WebKeys.SEARCH_CONTAINER_RESULT_ROW);
 
 AnnouncementsEntry entry = (AnnouncementsEntry)row.getObject();
@@ -38,23 +32,23 @@ AnnouncementsEntry entry = (AnnouncementsEntry)row.getObject();
 
 <liferay-ui:icon-menu>
 	<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
-		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editEntryURL">
-			<portlet:param name="struts_action" value="<%= strutsAction %>" />
+		<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
+			<portlet:param name="struts_action" value="/announcements/edit_entry" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 		</portlet:renderURL>
 
-		<liferay-ui:icon image="edit" url="<%= editEntryURL %>" label="<%= true %>" />
+		<liferay-ui:icon image="edit" url="<%= editURL %>" />
 	</c:if>
 
 	<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
-		<portlet:actionURL var="deleteEntryURL">
-			<portlet:param name="struts_action" value="<%= strutsAction %>" />
+		<portlet:actionURL var="deleteURL">
+			<portlet:param name="struts_action" value="/announcements/edit_entry" />
 			<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 			<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
 		</portlet:actionURL>
 
-		<liferay-ui:icon-delete url="<%= deleteEntryURL %>" label="<%= true %>" />
+		<liferay-ui:icon-delete url="<%= deleteURL %>" />
 	</c:if>
 </liferay-ui:icon-menu>

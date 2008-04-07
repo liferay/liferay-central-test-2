@@ -24,26 +24,26 @@
 
 <%@ include file="/html/portlet/css_init.jsp" %>
 
-.lfr-alerts {
+.portlet-alerts {
 }
 
-.lfr-alerts .entry {
+.portlet-alerts .entry {
 	border: 6px solid #c00;
 	margin: 8px 0px;
 	padding: 6px;
 }
 
-.lfr-alerts .entry-scope {
+.portlet-alerts .entry-scope {
 	display: block;
 }
 
-.lfr-alerts .read-false .entry-title {
+.portlet-alerts .read-false .entry-title {
 	color: #000;
 	display: block;
 	margin-bottom: 4px;
 }
 
-.lfr-alerts .read-true .entry-title {
+.portlet-alerts .read-true .entry-title {
 	color: #CCC;
 	display: block;
 	font-size: 1.5em;
@@ -51,97 +51,97 @@
 	margin: 0px 0px 4px 0px;
 }
 
-.lfr-alerts .read-false .entry-title .entry-url {
+.portlet-alerts .read-false .entry-title .entry-url {
 	color: #000;
 }
 
-.lfr-alerts .read-true .entry-title .entry-url {
+.portlet-alerts .read-true .entry-title .entry-url {
 	color: #CCC;
 }
 
-.lfr-alerts .entry-content {
+.portlet-alerts .entry-content {
 	display: block;
 	padding: 2px 2px 2px 30px;
 }
 
-.lfr-alerts .entry-scope {
+.portlet-alerts .entry-scope {
 	color: #CCC;
 	display: block;
 }
 
-.lfr-alerts .edit-actions {
+.portlet-alerts .edit-actions {
 	float: right;
 }
 
-.lfr-alerts .entry-type-general {
+.portlet-alerts .entry-type-general {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-alerts .entry-type-news {
+.portlet-alerts .entry-type-news {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-alerts .entry-type-test {
+.portlet-alerts .entry-type-test {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') left top no-repeat;
 }
 
-.lfr-announcements {
+.portlet-announcements {
 }
 
-.lfr-announcements .entry {
+.portlet-announcements .entry {
 	border-bottom: 1px solid #ccc;
 	margin: 4px 0px 1.2em;
 	padding-bottom: 0.5em;
 }
 
-.lfr-announcements .entry.last {
+.portlet-announcements .entry.last {
 	border: none;
 }
 
-.lfr-announcements .entry-scope {
+.portlet-announcements .entry-scope {
 	display: block;
 }
 
-.lfr-announcements .entry-title {
+.portlet-announcements .entry-title {
 	display: block;
 	margin-bottom: 0.8em;
 	margin-right: 100px;
 }
 
-.lfr-announcements .read-false .entry-title {
+.portlet-announcements .read-false .entry-title {
 }
 
-.lfr-announcements .read-true .entry-title {
+.portlet-announcements .read-true .entry-title {
 	opacity: 0.5;
 }
 
-.lfr-announcements .entry-content {
+.portlet-announcements .entry-content {
 	display: block;
 	margin-bottom: 0.5em;
 	padding: 2px 2px 2px 30px;
 }
 
-.lfr-announcements .entry-scope {
+.portlet-announcements .entry-scope {
 	color: #555;
 	display: block;
 }
 
-.lfr-announcements .edit-actions {
+.portlet-announcements .edit-actions {
 	float: right;
 }
 
-.lfr-announcements .delete-entry {
+.portlet-announcements .delete-entry {
 	padding-right: 2em;
 }
 
-.lfr-announcements .entry-type-general {
+.portlet-announcements .entry-type-general {
 	background: #fff url('<%= themeImagesPath %>/common/all_pages.png') 4px 4px no-repeat;
 }
 
-.lfr-announcements .entry-type-news {
+.portlet-announcements .entry-type-news {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
 }
 
-.lfr-announcements .entry-type-test {
+.portlet-announcements .entry-type-test {
 	background: #fff url('<%= themeImagesPath %>/common/page.png') 4px 4px no-repeat;
 }

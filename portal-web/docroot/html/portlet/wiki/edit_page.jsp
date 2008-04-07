@@ -184,7 +184,7 @@ if (Validator.isNull(redirect)) {
 <input name="<portlet:namespace />saveAndContinue" type="hidden" value="" />
 
 <liferay-ui:error exception="<%= PageContentException.class %>" message="the-content-is-not-valid" />
-<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-valid-title" />
+<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-title" />
 <liferay-ui:error exception="<%= PageVersionException.class %>" message="another-user-has-made-changes-since-you-started-editing-please-copy-your-changes-and-try-again" />
 <liferay-ui:tags-error />
 

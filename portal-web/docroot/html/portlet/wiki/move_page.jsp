@@ -37,7 +37,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 <liferay-util:include page="/html/portlet/wiki/top_links.jsp" />
 
 <liferay-ui:error exception="<%= DuplicatePageException.class %>" message="there-is-already-a-page-with-the-specified-title" />
-<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-valid-title" />
+<liferay-ui:error exception="<%= PageTitleException.class %>" message="please-enter-a-valid-title" />
 
 <%@ include file="/html/portlet/wiki/page_name.jspf" %>
 
