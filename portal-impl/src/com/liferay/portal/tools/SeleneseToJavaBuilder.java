@@ -268,6 +268,7 @@ public class SeleneseToJavaBuilder {
 			}
 			else if (param1.equals("waitForElementNotPresent") ||
 					 param1.equals("waitForElementPresent") ||
+					 param1.equals("waitForTextNotPresent") ||
 					 param1.equals("waitForTextPresent")) {
 
 				sm.append("for (int second = 0;; second++) {");
@@ -278,7 +279,9 @@ public class SeleneseToJavaBuilder {
 				sm.append("try {");
 				sm.append("if (");
 
-				if (param1.equals("waitForElementNotPresent")) {
+				if (param1.equals("waitForElementNotPresent") ||
+					param1.equals("waitForTextNotPresent")) {
+
 					sm.append("!");
 				}
 
@@ -289,7 +292,9 @@ public class SeleneseToJavaBuilder {
 
 					sm.append("isElementPresent");
 				}
-				else if (param1.equals("waitForTextPresent")) {
+				else if (param1.equals("waitForTextNotPresent") ||
+						 param1.equals("waitForTextPresent")) {
+
 					sm.append("isTextPresent");
 				}
 
