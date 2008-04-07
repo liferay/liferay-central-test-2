@@ -37,6 +37,8 @@ if (PortletPermissionUtil.contains(permissionChecker, plid.longValue(), PortletK
 
 PortletURL portletURL = renderResponse.createRenderURL();
 
+portletURL.setWindowState(WindowState.MAXIMIZED);
+
 portletURL.setParameter("struts_action", "/announcements/view");
 portletURL.setParameter("tabs1", tabs1);
 %>
@@ -107,7 +109,7 @@ portletURL.setParameter("tabs1", tabs1);
 					<tr>
 						<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.UPDATE) %>">
 							<td class="edit-entry">
-								<portlet:renderURL var="editURL">
+								<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="editURL">
 									<portlet:param name="struts_action" value="/announcements/edit_entry" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
 									<portlet:param name="entryId" value="<%= String.valueOf(entry.getEntryId()) %>" />
@@ -119,7 +121,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 						<c:if test="<%= AnnouncementsEntryPermission.contains(permissionChecker, entry, ActionKeys.DELETE) %>">
 							<td class="delete-entry">
-								<portlet:actionURL var="deleteURL">
+								<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="deleteURL">
 									<portlet:param name="struts_action" value="/announcements/edit_entry" />
 									<portlet:param name="<%= Constants.CMD %>" value="<%= Constants.DELETE %>" />
 									<portlet:param name="redirect" value="<%= currentURL %>" />
@@ -282,7 +284,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 		<br />
 
-		<input type="button" value='<liferay-ui:message key="add-entry" />' onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>'" />
+		<input type="button" value='<liferay-ui:message key="add-entry" />' onClick="self.location = '<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /><portlet:param name="redirect" value="<%= currentURL %>" /><portlet:param name="distributionScope" value="<%= distributionScope %>" /></portlet:renderURL>'" />
 
 		<c:if test="<%= Validator.isNotNull(distributionScope) %>">
 			<br /><br />
@@ -319,6 +321,8 @@ portletURL.setParameter("tabs1", tabs1);
 				ResultRow row = new ResultRow(entry, entry.getEntryId(), i);
 
 				PortletURL rowURL = renderResponse.createRenderURL();
+
+				rowURL.setWindowState(WindowState.MAXIMIZED);
 
 				rowURL.setParameter("struts_action", "/announcements/edit_entry");
 				rowURL.setParameter("redirect", currentURL);
