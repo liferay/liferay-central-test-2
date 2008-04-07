@@ -22,7 +22,7 @@
 
 package com.liferay.portlet;
 
-import com.liferay.portal.job.Scheduler;
+import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;

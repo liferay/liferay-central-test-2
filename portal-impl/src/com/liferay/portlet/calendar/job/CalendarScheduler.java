@@ -20,22 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.journal.job;
+package com.liferay.portlet.calendar.job;
 
-import com.liferay.portal.job.JobScheduler;
-
-import org.quartz.SchedulerException;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobSchedulerUtil;
+import com.liferay.portal.kernel.job.Scheduler;
 
 /**
- * <a href="Scheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="CalendarScheduler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class Scheduler implements com.liferay.portal.job.Scheduler {
+public class CalendarScheduler implements Scheduler {
 
-	public void schedule() throws SchedulerException {
-		JobScheduler.schedule(new CheckArticleJob());
+	public void schedule() {
+		JobSchedulerUtil.schedule(_checkEventJob);
 	}
+
+	public void unschedule() {
+		JobSchedulerUtil.unschedule(_checkEventJob);
+	}
+
+	private IntervalJob _checkEventJob = new CheckEventJob();
 
 }

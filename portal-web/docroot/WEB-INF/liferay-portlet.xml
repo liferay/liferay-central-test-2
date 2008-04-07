@@ -94,7 +94,7 @@
 		<icon>/html/portlet/calendar/icon.png</icon>
 		<struts-path>calendar</struts-path>
 		<configuration-action-class>com.liferay.portlet.calendar.action.ConfigurationActionImpl</configuration-action-class>
-		<scheduler-class>com.liferay.portlet.calendar.job.Scheduler</scheduler-class>
+		<scheduler-class>com.liferay.portlet.calendar.job.CalendarScheduler</scheduler-class>
 		<portlet-data-handler-class>com.liferay.portlet.calendar.lar.CalendarPortletDataHandlerImpl</portlet-data-handler-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
 		<use-default-template>false</use-default-template>
@@ -111,7 +111,7 @@
 		<portlet-name>9</portlet-name>
 		<icon>/html/portlet/admin/icon.png</icon>
 		<struts-path>admin</struts-path>
-		<scheduler-class>com.liferay.portlet.admin.job.Scheduler</scheduler-class>
+		<scheduler-class>com.liferay.portlet.admin.job.AdminScheduler</scheduler-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
@@ -164,7 +164,7 @@
 		<configuration-action-class>com.liferay.portlet.journal.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.journal.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.journal.util.JournalOpenSearchImpl</open-search-class>
-		<scheduler-class>com.liferay.portlet.journal.job.Scheduler</scheduler-class>
+		<scheduler-class>com.liferay.portlet.journal.job.JournalScheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.journal.JournalFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.journal.lar.JournalPortletDataHandlerImpl</portlet-data-handler-class>
 		<preferences-unique-per-layout>false</preferences-unique-per-layout>
@@ -195,7 +195,7 @@
 		<configuration-action-class>com.liferay.portlet.messageboards.action.ConfigurationActionImpl</configuration-action-class>
 		<indexer-class>com.liferay.portlet.messageboards.util.Indexer</indexer-class>
 		<open-search-class>com.liferay.portlet.messageboards.util.MBOpenSearchImpl</open-search-class>
-		<scheduler-class>com.liferay.portlet.messageboards.job.Scheduler</scheduler-class>
+		<scheduler-class>com.liferay.portlet.messageboards.job.MBScheduler</scheduler-class>
 		<friendly-url-mapper-class>com.liferay.portlet.messageboards.MBFriendlyURLMapper</friendly-url-mapper-class>
 		<portlet-data-handler-class>com.liferay.portlet.messageboards.lar.MBPortletDataHandlerImpl</portlet-data-handler-class>
 		<pop-message-listener-class>com.liferay.portlet.messageboards.pop.MessageListenerImpl</pop-message-listener-class>
@@ -781,7 +781,7 @@
 		<portlet-name>84</portlet-name>
 		<icon>/html/portlet/announcements/icon.png</icon>
 		<struts-path>announcements</struts-path>
-		<scheduler-class>com.liferay.portlet.announcements.job.Scheduler</scheduler-class>
+		<scheduler-class>com.liferay.portlet.announcements.job.AnnouncementsScheduler</scheduler-class>
 		<portlet-url-class>com.liferay.portal.struts.StrutsActionPortletURL</portlet-url-class>
 		<preferences-company-wide>true</preferences-company-wide>
 		<use-default-template>false</use-default-template>

@@ -22,7 +22,8 @@
 
 package com.liferay.portal.pop;
 
-import com.liferay.portal.job.JobScheduler;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.pop.MessageListener;
 
 import java.util.ArrayList;
@@ -143,11 +144,11 @@ public class POPServerUtil {
 		}
 
 		try {
-			POPNotificationsJob popNotificationsJob = new POPNotificationsJob();
+			_popNotificationsJob = new POPNotificationsJob();
 
-			JobScheduler.schedule(popNotificationsJob);
+			JobSchedulerUtil.schedule(_popNotificationsJob);
 
-			//popNotificationsJob.pollPopServer();
+			//_popNotificationsJob.pollPopServer();
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -160,7 +161,9 @@ public class POPServerUtil {
 		}
 
 		try {
-			JobScheduler.unscheduleJob(POPNotificationsJob.class.getName());
+			if (_popNotificationsJob != null) {
+				JobSchedulerUtil.unschedule(_popNotificationsJob);
+			}
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -171,6 +174,7 @@ public class POPServerUtil {
 
 	private static POPServerUtil _instance = new POPServerUtil();
 
+	private IntervalJob _popNotificationsJob;
 	private List<MessageListener> _listeners = new ArrayList<MessageListener>();
 
 }

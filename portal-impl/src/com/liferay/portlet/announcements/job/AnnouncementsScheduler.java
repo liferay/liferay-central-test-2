@@ -22,20 +22,26 @@
 
 package com.liferay.portlet.announcements.job;
 
-import com.liferay.portal.job.JobScheduler;
-
-import org.quartz.SchedulerException;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobSchedulerUtil;
+import com.liferay.portal.kernel.job.Scheduler;
 
 /**
- * <a href="Scheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="AnnouncementsScheduler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
  */
-public class Scheduler implements com.liferay.portal.job.Scheduler {
+public class AnnouncementsScheduler implements Scheduler {
 
-	public void schedule() throws SchedulerException {
-		JobScheduler.schedule(new CheckEntryJob());
+	public void schedule() {
+		JobSchedulerUtil.schedule(_checkEntryJob);
 	}
+
+	public void unschedule() {
+		JobSchedulerUtil.unschedule(_checkEntryJob);
+	}
+
+	private IntervalJob _checkEntryJob = new CheckEntryJob();
 
 }

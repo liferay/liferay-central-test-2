@@ -22,7 +22,9 @@
 
 package com.liferay.portlet.messageboards.job;
 
-import com.liferay.portal.job.IntervalJob;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.job.JobExecutionException;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -31,9 +33,6 @@ import com.liferay.util.Time;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 
 /**
  * <a href="ExpireBanJob.java.html"><b><i>View Source</i></b></a>
@@ -60,10 +59,6 @@ public class ExpireBanJob implements IntervalJob {
 		}
 	}
 
-	public long getInterval() {
-		return _interval;
-	}
-
 	public void execute(JobExecutionContext context)
 		throws JobExecutionException {
 
@@ -73,6 +68,10 @@ public class ExpireBanJob implements IntervalJob {
 		catch (Exception e) {
 			_log.error(e, e);
 		}
+	}
+
+	public long getInterval() {
+		return _interval;
 	}
 
 	private static Log _log = LogFactory.getLog(ExpireBanJob.class);

@@ -23,10 +23,10 @@
 package com.liferay.portal.deploy.hot;
 
 import com.liferay.portal.apache.bridges.struts.LiferayServletContextProvider;
-import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.deploy.hot.HotDeployEvent;
 import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
+import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.pop.MessageListener;
@@ -483,6 +483,12 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 				while (itr.hasNext()) {
 					Portlet portlet = itr.next();
+
+					Scheduler scheduler = portlet.getSchedulerInstance();
+
+					if (scheduler != null) {
+						scheduler.unschedule();
+					}
 
 					POPServerUtil.deleteListener(
 						portlet.getPopMessageListenerInstance());

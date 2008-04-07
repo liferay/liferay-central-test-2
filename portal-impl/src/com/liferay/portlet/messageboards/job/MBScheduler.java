@@ -20,23 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.admin.job;
+package com.liferay.portlet.messageboards.job;
 
-import com.liferay.portal.job.JobScheduler;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobSchedulerUtil;
+import com.liferay.portal.kernel.job.Scheduler;
+import com.liferay.portal.util.PropsValues;
 
-import org.quartz.SchedulerException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="Scheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="MBScheduler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
  */
-public class Scheduler implements com.liferay.portal.job.Scheduler {
+public class MBScheduler implements Scheduler {
 
-	public void schedule() throws SchedulerException {
-		JobScheduler.schedule(new LDAPImportJob());
-		JobScheduler.schedule(new CheckRemoteRepositoriesJob());
+	public void schedule() {
+		if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL <= 0) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Auto expire of banned message board users is disabled");
+			}
+		}
+		else {
+			JobSchedulerUtil.schedule(_expireBanJob);
+		}
 	}
+
+	public void unschedule() {
+		if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL <= 0) {
+			if (_log.isDebugEnabled()) {
+				_log.debug(
+					"Auto expire of banned message board users is disabled");
+			}
+		}
+		else {
+			JobSchedulerUtil.unschedule(_expireBanJob);
+		}
+	}
+
+	private IntervalJob _expireBanJob = new ExpireBanJob();
+
+	private static Log _log = LogFactory.getLog(Scheduler.class);
 
 }

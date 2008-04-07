@@ -20,22 +20,50 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.calendar.job;
+package com.liferay.portal.kernel.job;
 
-import com.liferay.portal.job.JobScheduler;
-
-import org.quartz.SchedulerException;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 
 /**
- * <a href="Scheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="JobSchedulerUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class Scheduler implements com.liferay.portal.job.Scheduler {
+public class JobSchedulerUtil {
 
-	public void schedule() throws SchedulerException {
-		JobScheduler.schedule(new CheckEventJob());
+	public static JobScheduler getJobScheduler() {
+		return _getUtil()._jobScheduler;
 	}
+
+	public static void schedule(IntervalJob intervalJob) {
+		getJobScheduler().schedule(intervalJob);
+	}
+
+	public void setJobScheduler(JobScheduler jobScheduler) {
+		_jobScheduler = jobScheduler;
+	}
+
+	public static void shutdown() {
+		getJobScheduler().shutdown();
+	}
+
+	public static void unschedule(IntervalJob intervalJob) {
+		getJobScheduler().unschedule(intervalJob);
+	}
+
+	private static JobSchedulerUtil _getUtil() {
+		if (_util == null) {
+			_util = (JobSchedulerUtil)BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = JobSchedulerUtil.class.getName();
+
+	private static JobSchedulerUtil _util;
+
+	private JobScheduler _jobScheduler;
 
 }

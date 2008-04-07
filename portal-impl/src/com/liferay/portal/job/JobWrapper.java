@@ -20,51 +20,60 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lucene;
+package com.liferay.portal.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobExecutionContext;
-import com.liferay.portal.kernel.job.JobExecutionException;
-import com.liferay.util.SystemProperties;
-import com.liferay.util.Time;
-import com.liferay.util.ant.DeleteTask;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.quartz.Job;
+import org.quartz.JobDetail;
+import org.quartz.JobExecutionContext;
+
 /**
- * <a href="CleanUpJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="JobWrapper.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CleanUpJob implements IntervalJob {
+public class JobWrapper implements Job {
 
-	public CleanUpJob() {
-		_interval = Time.DAY;
-	}
-
-	public void execute(JobExecutionContext context)
-		throws JobExecutionException {
-
+	public void execute(JobExecutionContext context) {
 		try {
+			if (_job == null) {
+				JobDetail jobDetail = context.getJobDetail();
 
-			// LEP-2180
+				Class<IntervalJob> intervalJobClass = JobClassUtil.get(
+					jobDetail.getName());
 
-			DeleteTask.deleteFiles(
-				SystemProperties.TMP_DIR, "LUCENE_liferay_com*.ljt", null);
+				_classLoader = intervalJobClass.getClassLoader();
+
+				_job = (IntervalJob)_classLoader.loadClass(
+					intervalJobClass.getName()).newInstance();
+			}
+
+			ClassLoader contextClassLoader =
+				Thread.currentThread().getContextClassLoader();
+
+			try {
+				Thread.currentThread().setContextClassLoader(_classLoader);
+
+				_job.execute(new JobExecutionContextImpl(context));
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(
+					contextClassLoader);
+			}
 		}
 		catch (Exception e) {
-			_log.error(e);
+			_log.error(e, e);
 		}
 	}
 
-	public long getInterval() {
-		return _interval;
-	}
+	private static Log _log = LogFactory.getLog(JobWrapper.class);
 
-	private static Log _log = LogFactory.getLog(CleanUpJob.class);
-
-	private long _interval;
+	private ClassLoader _classLoader;
+	private IntervalJob _job;
 
 }

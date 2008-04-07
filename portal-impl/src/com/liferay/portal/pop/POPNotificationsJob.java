@@ -22,7 +22,9 @@
 
 package com.liferay.portal.pop;
 
-import com.liferay.portal.job.IntervalJob;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.job.JobExecutionException;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -46,9 +48,6 @@ import javax.mail.internet.InternetAddress;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
-
 /**
  * <a href="POPNotificationsJob.java.html"><b><i>View Source</i></b></a>
  *
@@ -59,10 +58,6 @@ public class POPNotificationsJob implements IntervalJob {
 
 	public static final long INTERVAL = GetterUtil.getLong(PropsUtil.get(
 		PropsUtil.POP_SERVER_NOTIFICATIONS_INTERVAL)) * Time.MINUTE;
-
-	public long getInterval() {
-		return INTERVAL;
-	}
 
 	public void execute(JobExecutionContext context)
 		throws JobExecutionException {
@@ -89,6 +84,10 @@ public class POPNotificationsJob implements IntervalJob {
 				_log.debug("Not executing");
 			}
 		}
+	}
+
+	public long getInterval() {
+		return INTERVAL;
 	}
 
 	protected String getEmailAddress(Address[] addresses) {

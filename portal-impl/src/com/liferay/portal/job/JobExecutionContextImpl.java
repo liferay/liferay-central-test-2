@@ -20,51 +20,57 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lucene;
+package com.liferay.portal.job;
 
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobExecutionContext;
-import com.liferay.portal.kernel.job.JobExecutionException;
-import com.liferay.util.SystemProperties;
-import com.liferay.util.Time;
-import com.liferay.util.ant.DeleteTask;
+import java.util.Date;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import org.quartz.JobExecutionContext;
 
 /**
- * <a href="CleanUpJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="JobExecutionContextImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CleanUpJob implements IntervalJob {
+public class JobExecutionContextImpl
+	implements com.liferay.portal.kernel.job.JobExecutionContext {
 
-	public CleanUpJob() {
-		_interval = Time.DAY;
+	public JobExecutionContextImpl(JobExecutionContext context) {
+		_context = context;
 	}
 
-	public void execute(JobExecutionContext context)
-		throws JobExecutionException {
-
-		try {
-
-			// LEP-2180
-
-			DeleteTask.deleteFiles(
-				SystemProperties.TMP_DIR, "LUCENE_liferay_com*.ljt", null);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
+	public Object get(Object key) {
+		return _context.get(key);
 	}
 
-	public long getInterval() {
-		return _interval;
+	public long getJobRunTime() {
+		return _context.getJobRunTime();
 	}
 
-	private static Log _log = LogFactory.getLog(CleanUpJob.class);
+	public Date getNextFireTime() {
+		return _context.getNextFireTime();
+	}
 
-	private long _interval;
+	public Date getPreviousFireTime() {
+		return _context.getPreviousFireTime();
+	}
+
+	public Object getResult() {
+		return _context.getResult();
+	}
+
+	public void put(Object key, Object value) {
+		_context.put(key, value);
+	}
+
+	public void setJobRunTime(long jobRunTime) {
+		_context.setJobRunTime(jobRunTime);
+	}
+
+	public void setResult(Object result) {
+		_context.setResult(result);
+	}
+
+	private JobExecutionContext _context;
 
 }

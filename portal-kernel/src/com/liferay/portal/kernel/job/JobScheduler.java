@@ -20,51 +20,20 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lucene;
-
-import com.liferay.portal.kernel.job.IntervalJob;
-import com.liferay.portal.kernel.job.JobExecutionContext;
-import com.liferay.portal.kernel.job.JobExecutionException;
-import com.liferay.util.SystemProperties;
-import com.liferay.util.Time;
-import com.liferay.util.ant.DeleteTask;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+package com.liferay.portal.kernel.job;
 
 /**
- * <a href="CleanUpJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="JobScheduler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CleanUpJob implements IntervalJob {
+public interface JobScheduler {
 
-	public CleanUpJob() {
-		_interval = Time.DAY;
-	}
+	public void schedule(IntervalJob intervalJob);
 
-	public void execute(JobExecutionContext context)
-		throws JobExecutionException {
+	public void shutdown();
 
-		try {
-
-			// LEP-2180
-
-			DeleteTask.deleteFiles(
-				SystemProperties.TMP_DIR, "LUCENE_liferay_com*.ljt", null);
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-	}
-
-	public long getInterval() {
-		return _interval;
-	}
-
-	private static Log _log = LogFactory.getLog(CleanUpJob.class);
-
-	private long _interval;
+	public void unschedule(IntervalJob intervalJob);
 
 }

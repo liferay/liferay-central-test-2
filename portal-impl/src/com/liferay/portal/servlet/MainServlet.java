@@ -25,9 +25,9 @@ package com.liferay.portal.servlet;
 import com.liferay.portal.deploy.hot.PluginPackageHotDeployListener;
 import com.liferay.portal.events.EventsProcessor;
 import com.liferay.portal.events.StartupAction;
-import com.liferay.portal.job.Scheduler;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
+import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.pop.MessageListener;
 import com.liferay.portal.kernel.servlet.HttpHeaders;
@@ -105,8 +105,6 @@ import org.apache.struts.tiles.TilesUtilImpl;
 import org.dom4j.Document;
 import org.dom4j.DocumentException;
 import org.dom4j.Element;
-
-import org.quartz.ObjectAlreadyExistsException;
 
 /**
  * <a href="MainServlet.java.html"><b><i>View Source</i></b></a>
@@ -275,15 +273,13 @@ public class MainServlet extends ActionServlet {
 					String className = portlet.getSchedulerClass();
 
 					if (portlet.isActive() && Validator.isNotNull(className)) {
-						Scheduler scheduler =
-							(Scheduler)InstancePool.get(className);
+						Scheduler scheduler = (Scheduler)InstancePool.get(
+							className);
 
 						scheduler.schedule();
 					}
 				}
 			}
-		}
-		catch (ObjectAlreadyExistsException oaee) {
 		}
 		catch (Exception e) {
 			_log.error(e, e);

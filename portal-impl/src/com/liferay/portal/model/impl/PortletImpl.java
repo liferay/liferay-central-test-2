@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.job.Scheduler;
 import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.plugin.PluginPackage;
 import com.liferay.portal.kernel.pop.MessageListener;
@@ -549,6 +550,26 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setSchedulerClass(String schedulerClass) {
 		_schedulerClass = schedulerClass;
+	}
+
+	/**
+	 * Gets the scheduler instance of the portlet.
+	 *
+	 * @return		the scheduler instance of the portlet
+	 */
+	public Scheduler getSchedulerInstance() {
+		if (Validator.isNotNull(getSchedulerClass())) {
+			if (_portletApp.isWARFile()) {
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+				return portletBag.getSchedulerInstance();
+			}
+			else {
+				return (Scheduler)InstancePool.get(getSchedulerClass());
+			}
+		}
+
+		return null;
 	}
 
 	/**

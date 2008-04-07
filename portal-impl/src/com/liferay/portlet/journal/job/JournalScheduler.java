@@ -20,18 +20,28 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.job;
+package com.liferay.portlet.journal.job;
 
-import org.quartz.SchedulerException;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobSchedulerUtil;
+import com.liferay.portal.kernel.job.Scheduler;
 
 /**
- * <a href="Scheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="JournalScheduler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface Scheduler {
+public class JournalScheduler implements Scheduler {
 
-	public void schedule() throws SchedulerException;
+	public void schedule() {
+		JobSchedulerUtil.schedule(_checkArticleJob);
+	}
+
+	public void unschedule() {
+		JobSchedulerUtil.unschedule(_checkArticleJob);
+	}
+
+	private IntervalJob _checkArticleJob = new CheckArticleJob();
 
 }

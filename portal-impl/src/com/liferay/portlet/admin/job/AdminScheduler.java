@@ -20,36 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.messageboards.job;
+package com.liferay.portlet.admin.job;
 
-import com.liferay.portal.job.JobScheduler;
-import com.liferay.portal.util.PropsValues;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
-import org.quartz.SchedulerException;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobSchedulerUtil;
+import com.liferay.portal.kernel.job.Scheduler;
 
 /**
- * <a href="Scheduler.java.html"><b><i>View Source</i></b></a>
+ * <a href="AdminScheduler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
  */
-public class Scheduler implements com.liferay.portal.job.Scheduler {
+public class AdminScheduler implements Scheduler {
 
-	public void schedule() throws SchedulerException {
-		if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL <= 0) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Auto expire of banned message board users is disabled");
-			}
-		}
-		else {
-			JobScheduler.schedule(new ExpireBanJob());
-		}
+	public void schedule() {
+		JobSchedulerUtil.schedule(_ldapImportJob);
+		JobSchedulerUtil.schedule(_checkRemoteRepositoriesJob);
 	}
 
-	private static Log _log = LogFactory.getLog(Scheduler.class);
+	public void unschedule() {
+		JobSchedulerUtil.unschedule(_ldapImportJob);
+		JobSchedulerUtil.unschedule(_checkRemoteRepositoriesJob);
+	}
+
+	private IntervalJob _ldapImportJob = new LDAPImportJob();
+	private IntervalJob _checkRemoteRepositoriesJob =
+		new CheckRemoteRepositoriesJob();
 
 }

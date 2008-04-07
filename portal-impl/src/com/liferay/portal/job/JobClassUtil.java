@@ -22,16 +22,34 @@
 
 package com.liferay.portal.job;
 
-import org.quartz.Job;
+import com.liferay.portal.kernel.job.IntervalJob;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
- * <a href="IntervalJob.java.html"><b><i>View Source</i></b></a>
+ * <a href="JobClassUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface IntervalJob extends Job {
+public class JobClassUtil {
 
-	public long getInterval();
+	public static Class<IntervalJob> get(String jobName) {
+		return _jobClasses.get(jobName);
+	}
+
+	public static void remove(String jobName) {
+		_jobClasses.remove(jobName);
+	}
+
+	public static void put(
+		String jobName, Class<IntervalJob> intervalJobClass) {
+
+		_jobClasses.put(jobName, intervalJobClass);
+	}
+
+	private static Map<String, Class<IntervalJob>> _jobClasses =
+		new HashMap<String, Class<IntervalJob>>();
 
 }

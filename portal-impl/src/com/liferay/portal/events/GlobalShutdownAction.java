@@ -27,10 +27,10 @@ import com.liferay.portal.im.ICQConnector;
 import com.liferay.portal.im.MSNConnector;
 import com.liferay.portal.im.YMConnector;
 import com.liferay.portal.jcr.JCRFactoryUtil;
-import com.liferay.portal.job.JobScheduler;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.job.JobSchedulerUtil;
 import com.liferay.portal.kernel.log.Jdk14LogFactoryImpl;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -114,7 +114,7 @@ public class GlobalShutdownAction extends SimpleAction {
 		// Scheduler
 
 		try {
-			JobScheduler.shutdown();
+			JobSchedulerUtil.shutdown();
 		}
 		catch (Exception e) {
 		}

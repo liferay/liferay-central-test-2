@@ -22,12 +22,11 @@
 
 package com.liferay.portlet.admin.job;
 
-import com.liferay.portal.job.IntervalJob;
+import com.liferay.portal.kernel.job.IntervalJob;
+import com.liferay.portal.kernel.job.JobExecutionContext;
+import com.liferay.portal.kernel.job.JobExecutionException;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.util.Time;
-
-import org.quartz.JobExecutionContext;
-import org.quartz.JobExecutionException;
 
 /**
  * <a href="CheckRemoteRepositoriesJob.java.html"><b><i>View Source</i></b></a>
@@ -36,10 +35,6 @@ import org.quartz.JobExecutionException;
  *
  */
 public class CheckRemoteRepositoriesJob implements IntervalJob {
-
-	public long getInterval() {
-		return Time.DAY;
-	}
 
 	public void execute(JobExecutionContext jobExecutionContext)
 		throws JobExecutionException {
@@ -50,6 +45,10 @@ public class CheckRemoteRepositoriesJob implements IntervalJob {
 		catch (Exception e) {
 			throw new JobExecutionException(e);
 		}
+	}
+
+	public long getInterval() {
+		return Time.DAY;
 	}
 
 }

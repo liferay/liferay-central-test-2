@@ -202,7 +202,7 @@ public class ExtPropertiesLoader {
 
 	private static final String _COMPANY_ID_SEPARATOR = "_COMPANY_ID_";
 
-	private static final boolean _PRINT_DUPLICATE_KEYS = false;
+	private static final boolean _PRINT_DUPLICATE_KEYS = true;
 
 	private ComponentConfiguration _conf;
 	private Set<String> _keys = new HashSet<String>();
