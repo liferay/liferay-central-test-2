@@ -60,7 +60,22 @@ public class AddSecondSubcategoryTest extends BaseTestCase {
 			"This is a s\u00e9cond t\u00e9st subcat\u00e9gory!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"S\u00e9cond T\u00e9st Subcat\u00e9gory"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"S\u00e9cond T\u00e9st Subcat\u00e9gory")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

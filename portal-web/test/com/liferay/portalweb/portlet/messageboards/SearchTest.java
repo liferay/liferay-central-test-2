@@ -90,7 +90,22 @@ public class SearchTest extends BaseTestCase {
 
 		selenium.click("link=T\u00e9st M\u00e9ssag\u00e9");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }
