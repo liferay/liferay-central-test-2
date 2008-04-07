@@ -22,14 +22,13 @@
 
 package com.liferay.util.servlet;
 
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
 
 import java.util.Collections;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpSession;
@@ -46,10 +45,12 @@ import org.apache.commons.logging.LogFactory;
 public class SharedSessionWrapper implements HttpSession {
 
 	public SharedSessionWrapper(HttpSession ses) {
-		this(ses, CollectionFactory.getSyncHashMap());
+		this(ses, new ConcurrentHashMap<String, Object>());
 	}
 
-	public SharedSessionWrapper(HttpSession ses, Map sharedAttributes) {
+	public SharedSessionWrapper(
+		HttpSession ses, Map<String, Object> sharedAttributes) {
+
 		if (ses == null) {
 			_ses = new NullSession();
 
@@ -74,15 +75,11 @@ public class SharedSessionWrapper implements HttpSession {
 		return value;
 	}
 
-	public Enumeration getAttributeNames() {
+	public Enumeration<String> getAttributeNames() {
 		if (_sharedAttributes.size() > 0) {
-			List names = ListUtil.fromEnumeration(_ses.getAttributeNames());
+			List<String> names = ListUtil.fromEnumeration(_ses.getAttributeNames());
 
-			Iterator itr = _sharedAttributes.keySet().iterator();
-
-			while (itr.hasNext()) {
-				String name = (String)itr.next();
-
+			for (String name : _sharedAttributes.keySet()) {
 				names.add(name);
 			}
 
@@ -125,9 +122,9 @@ public class SharedSessionWrapper implements HttpSession {
 	}
 
 	public String[] getValueNames() {
-		List names = ListUtil.fromEnumeration(getAttributeNames());
+		List<String> names = ListUtil.fromEnumeration(getAttributeNames());
 
-		return (String[])names.toArray(new String[0]);
+		return names.toArray(new String[names.size()]);
 	}
 
 	public void invalidate() {
@@ -161,6 +158,6 @@ public class SharedSessionWrapper implements HttpSession {
 	private static Log _log = LogFactory.getLog(SharedSessionWrapper.class);
 
 	private HttpSession _ses;
-	private Map _sharedAttributes;
+	private Map<String, Object> _sharedAttributes;
 
 }

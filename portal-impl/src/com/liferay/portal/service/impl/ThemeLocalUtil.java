@@ -42,7 +42,6 @@ import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupId;
 import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.ListUtil;
 import com.liferay.util.Version;
@@ -320,7 +319,7 @@ public class ThemeLocalUtil {
 		Map<String, Theme> themes = _themesPool.get(companyId);
 
 		if (themes == null) {
-			themes = CollectionFactory.getSyncHashMap();
+			themes = new ConcurrentHashMap();
 
 			Iterator<Map.Entry<String, Theme>> itr =
 				_themes.entrySet().iterator();

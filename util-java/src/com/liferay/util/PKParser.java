@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -78,7 +79,7 @@ public class PKParser {
 	}
 
 	public String getString(String key) {
-		String value = (String)_fields.get(key);
+		String value = _fields.get(key);
 
 		if (value == null) {
 			return StringPool.BLANK;
@@ -88,6 +89,6 @@ public class PKParser {
 		}
 	}
 
-	private Map _fields = CollectionFactory.getHashMap();
+	private Map<String, String> _fields = new HashMap<String, String>();
 
 }

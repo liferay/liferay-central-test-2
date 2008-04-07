@@ -23,11 +23,10 @@
 package com.liferay.portlet.mail.util.multiaccount;
 
 import com.liferay.portal.util.WebKeys;
-import com.liferay.util.CollectionFactory;
 
 import java.util.Collection;
-import java.util.Iterator;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.mail.MessagingException;
 import javax.mail.Store;
@@ -59,11 +58,13 @@ public class MailCache {
 		ses.removeAttribute(WebKeys.MAIL_STORE + accountPrefix);
 	}
 
-	public static Collection getUserAccounts(long userId) {
-		return (Collection)_accountsPool.get(new Long(userId));
+	public static Collection<MailAccount> getUserAccounts(long userId) {
+		return _accountsPool.get(new Long(userId));
 	}
 
-	public static void putUserAccounts(long userId, Collection accounts) {
+	public static void putUserAccounts(
+		long userId, Collection<MailAccount> accounts) {
+
 		_accountsPool.put(new Long(userId), accounts);
 	}
 
@@ -78,7 +79,8 @@ public class MailCache {
 			_log.debug("Clearing the mail cache for user " + userIdObj);
 		}
 
-		Collection accounts = getUserAccounts(userIdObj.longValue());
+		Collection<MailAccount> accounts = getUserAccounts(
+			userIdObj.longValue());
 
 		if (accounts != null) {
 			if (_log.isDebugEnabled()) {
@@ -87,11 +89,7 @@ public class MailCache {
 						"need to be closed");
 			}
 
-			Iterator itr = accounts.iterator();
-
-			while (itr.hasNext()) {
-				MailAccount account = (MailAccount)itr.next();
-
+			for (MailAccount account : accounts) {
 				String accountPrefix = account.getName();
 
 				Store store = getStore(ses, accountPrefix);
@@ -109,6 +107,7 @@ public class MailCache {
 
 	private static Log _log = LogFactory.getLog(MailCache.class);
 
-	private static Map _accountsPool = CollectionFactory.getSyncHashMap();
+	private static Map<Long, Collection<MailAccount>> _accountsPool =
+		new ConcurrentHashMap<Long, Collection<MailAccount>>();
 
 }

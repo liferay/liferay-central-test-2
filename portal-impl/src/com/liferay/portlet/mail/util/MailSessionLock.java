@@ -24,8 +24,8 @@ package com.liferay.portlet.mail.util;
 
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.util.multiaccount.MailCache;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import javax.mail.Folder;
@@ -94,17 +94,17 @@ public class MailSessionLock {
 	}
 
 	private void _lock(String sessionId) {
-		ThreadLocal threadLocal = null;
+		ThreadLocal<Long> threadLocal = null;
 
 		for (;;) {
 			synchronized (_sessionMap) {
-				threadLocal = (ThreadLocal)_sessionMap.get(sessionId);
+				threadLocal = _sessionMap.get(sessionId);
 
 				if (threadLocal == null) {
 
 					// Initialize reentrant counter.
 
-					threadLocal = new ThreadLocal();
+					threadLocal = new ThreadLocal<Long>();
 
 					threadLocal.set(new Long(0));
 
@@ -117,7 +117,7 @@ public class MailSessionLock {
 					// This thread instantiated the thread local. Increment the
 					// reentrant counter.
 
-					Long count = (Long)threadLocal.get();
+					Long count = threadLocal.get();
 
 					threadLocal.set(new Long(count.longValue() + 1L));
 
@@ -137,16 +137,16 @@ public class MailSessionLock {
 	}
 
 	private void _unlock(String sessionId) {
-		ThreadLocal threadLocal = null;
+		ThreadLocal<Long> threadLocal = null;
 
 		synchronized (_sessionMap) {
-			threadLocal = (ThreadLocal)_sessionMap.get(sessionId);
+			threadLocal = _sessionMap.get(sessionId);
 
 			// The variable can be null at this time if a method called unlock()
 			// twice or cleanUp() was called.
 
 			if (threadLocal != null) {
-				Long count = (Long)threadLocal.get();
+				Long count = threadLocal.get();
 
 				if (count.longValue() == 0L) {
 
@@ -170,6 +170,7 @@ public class MailSessionLock {
 
 	private static MailSessionLock _instance = new MailSessionLock();
 
-	private Map _sessionMap = CollectionFactory.getHashMap();
+	private Map<String, ThreadLocal<Long>> _sessionMap =
+		new HashMap<String, ThreadLocal<Long>>();
 
 }

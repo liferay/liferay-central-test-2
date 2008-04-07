@@ -37,10 +37,10 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.ratings.model.impl.RatingsEntryImpl;
 import com.liferay.portlet.ratings.model.impl.RatingsStatsImpl;
-import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -76,7 +76,8 @@ public class UpgradeRatings extends UpgradeProcess {
 		ClassNameIdUpgradeColumnImpl classNameIdColumn =
 			new ClassNameIdUpgradeColumnImpl();
 
-		Map classPKContainers = CollectionFactory.getHashMap();
+		Map<Long, ClassPKContainer> classPKContainers =
+			new HashMap<Long, ClassPKContainer>();
 
 		classPKContainers.put(
 			new Long(PortalUtil.getClassNameId(DLFileEntry.class.getName())),

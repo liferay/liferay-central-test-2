@@ -40,7 +40,6 @@ import com.liferay.portlet.tags.NoSuchAssetException;
 import com.liferay.portlet.tags.model.TagsAsset;
 import com.liferay.portlet.tags.model.TagsEntry;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.MapUtil;
 
 import java.util.HashMap;
@@ -192,8 +191,8 @@ public class PortletDataContextImpl implements PortletDataContext {
 			long groupId)
 		throws PortalException, SystemException {
 
-		Map messagePKs = CollectionFactory.getHashMap();
-		Map threadPKs = CollectionFactory.getHashMap();
+		Map messagePKs = new HashMap();
+		Map threadPKs = new HashMap();
 
 		List messages = (List)_commentsMap.get(
 			getPrimaryKeyString(classObj, primaryKey));

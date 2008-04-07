@@ -189,7 +189,7 @@ boolean showAddCategoryButton = ShoppingCategoryPermission.contains(permissionCh
 	headerNames.add("price");
 	headerNames.add(StringPool.BLANK);
 
-	Map orderableHeaders = CollectionFactory.getHashMap();
+	Map orderableHeaders = new HashMap();
 
 	orderableHeaders.put("sku", "sku");
 	orderableHeaders.put("description", "name");

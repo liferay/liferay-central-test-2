@@ -27,8 +27,8 @@ import com.liferay.portal.upgrade.util.PKUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 import com.liferay.portal.upgrade.util.ValueMapper;
 import com.liferay.portal.upgrade.util.ValueMapperFactory;
-import com.liferay.util.CollectionFactory;
 
+import java.util.HashSet;
 import java.util.Set;
 
 import org.apache.commons.logging.Log;
@@ -53,7 +53,7 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 		_folderIdColumn = folderIdColumn;
 		_nameColumn = nameColumn;
 		_dlFileEntryIdMapper = ValueMapperFactory.getValueMapper();
-		_movedFolderIds = CollectionFactory.getHashSet();
+		_movedFolderIds = new HashSet<Long>();
 	}
 
 	public Object getNewValue(Object oldValue) throws Exception {
@@ -99,6 +99,6 @@ public class DLFileEntryIdUpgradeColumnImpl extends PKUpgradeColumnImpl {
 	private UpgradeColumn _folderIdColumn;
 	private UpgradeColumn _nameColumn;
 	private ValueMapper _dlFileEntryIdMapper;
-	private Set _movedFolderIds;
+	private Set<Long> _movedFolderIds;
 
 }

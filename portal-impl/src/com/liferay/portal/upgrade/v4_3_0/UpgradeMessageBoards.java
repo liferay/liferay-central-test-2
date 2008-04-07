@@ -46,10 +46,10 @@ import com.liferay.portlet.messageboards.model.impl.MBMessageFlagImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBStatsUserImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
-import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -209,7 +209,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		ClassNameIdUpgradeColumnImpl classNameIdColumn =
 			new ClassNameIdUpgradeColumnImpl();
 
-		Map classPKContainers = CollectionFactory.getHashMap();
+		Map<Long, ClassPKContainer> classPKContainers =
+			new HashMap<Long, ClassPKContainer>();
 
 		classPKContainers.put(
 			new Long(PortalUtil.getClassNameId(BlogsEntry.class.getName())),

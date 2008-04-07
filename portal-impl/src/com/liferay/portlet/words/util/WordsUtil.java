@@ -26,7 +26,6 @@ import com.liferay.portal.kernel.util.Randomizer;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portlet.words.ScramblerException;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
 import com.liferay.util.jazzy.BasicSpellCheckListener;
 import com.liferay.util.jazzy.InvalidWord;
@@ -41,6 +40,7 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -92,7 +92,7 @@ public class WordsUtil {
 
 		_dictionaryList = Collections.unmodifiableList(_dictionaryList);
 
-		_dictionarySet = CollectionFactory.getHashSet(_dictionaryList.size());
+		_dictionarySet = new HashSet<String>(_dictionaryList.size());
 
 		_dictionarySet.addAll(_dictionaryList);
 

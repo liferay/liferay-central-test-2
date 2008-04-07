@@ -62,10 +62,10 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.ShoppingItem;
 import com.liferay.portlet.wiki.model.WikiNode;
 import com.liferay.portlet.wiki.model.WikiPage;
-import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -91,8 +91,9 @@ public class UpgradeResource extends UpgradeProcess {
 		}
 	}
 
-	protected Map getClassPKContainers() {
-		Map classPKContainers = CollectionFactory.getHashMap();
+	protected Map<Long, ClassPKContainer> getClassPKContainers() {
+		Map<Long, ClassPKContainer> classPKContainers =
+			new HashMap<Long, ClassPKContainer>();
 
 		// BlogsEntry
 
@@ -293,8 +294,7 @@ public class UpgradeResource extends UpgradeProcess {
 			{"name", new Integer(Types.VARCHAR)},
 			{"scope", new Integer(Types.VARCHAR)}
 		};
-		Object[][] resourceColumns2 =
-			(Object[][])ResourceImpl.TABLE_COLUMNS.clone();
+		Object[][] resourceColumns2 = ResourceImpl.TABLE_COLUMNS.clone();
 
 		Object[][] resourceColumns = ArrayUtil.append(
 			resourceColumns1, resourceColumns2);

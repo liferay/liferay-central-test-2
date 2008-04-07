@@ -33,7 +33,6 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.impl.OrganizationImpl;
 import com.liferay.portal.model.OrganizationConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.OrganizationServiceUtil;

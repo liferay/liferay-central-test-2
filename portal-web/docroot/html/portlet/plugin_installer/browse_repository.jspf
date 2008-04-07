@@ -144,7 +144,7 @@ try {
 	headerNames.add("available-version");
 	headerNames.add("modified-date");
 
-	Map orderableHeaders = CollectionFactory.getHashMap();
+	Map orderableHeaders = new HashMap();
 
 	orderableHeaders.put(pluginType + "-plugin", LuceneFields.TITLE);
 	orderableHeaders.put("modified-date", "modified-date");

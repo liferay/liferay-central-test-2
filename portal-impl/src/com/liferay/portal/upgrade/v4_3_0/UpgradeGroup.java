@@ -49,10 +49,10 @@ import com.liferay.portal.upgrade.v4_3_0.util.GroupNameUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutOwnerIdUpgradeColumnImpl;
 import com.liferay.portal.upgrade.v4_3_0.util.LayoutPlidUpgradeColumnImpl;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.util.CollectionFactory;
 
 import java.sql.Types;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.apache.commons.logging.Log;
@@ -88,7 +88,8 @@ public class UpgradeGroup extends UpgradeProcess {
 		ClassNameIdUpgradeColumnImpl classNameIdColumn =
 			new ClassNameIdUpgradeColumnImpl();
 
-		Map classPKContainers = CollectionFactory.getHashMap();
+		Map<Long, ClassPKContainer> classPKContainers =
+			new HashMap<Long, ClassPKContainer>();
 
 		classPKContainers.put(
 			new Long(PortalUtil.getClassNameId(Organization.class.getName())),
@@ -149,8 +150,7 @@ public class UpgradeGroup extends UpgradeProcess {
 				upgradeLayoutOwnerIdPrivateLayoutColumn, upgradeLayoutIdColumn);
 
 		Object[][] layoutColumns1 = {{"ownerId", new Integer(Types.VARCHAR)}};
-		Object[][] layoutColumns2 =
-			(Object[][])LayoutImpl.TABLE_COLUMNS.clone();
+		Object[][] layoutColumns2 = LayoutImpl.TABLE_COLUMNS.clone();
 
 		Object[][] layoutColumns = ArrayUtil.append(
 			layoutColumns1, layoutColumns2);
@@ -179,8 +179,7 @@ public class UpgradeGroup extends UpgradeProcess {
 
 		Object[][] layoutSetColumns1 =
 			{{"ownerId", new Integer(Types.VARCHAR)}};
-		Object[][] layoutSetColumns2 =
-			(Object[][])LayoutSetImpl.TABLE_COLUMNS.clone();
+		Object[][] layoutSetColumns2 = LayoutSetImpl.TABLE_COLUMNS.clone();
 
 		Object[][] layoutSetColumns = ArrayUtil.append(
 			layoutSetColumns1, layoutSetColumns2);

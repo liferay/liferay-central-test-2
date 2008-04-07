@@ -36,7 +36,7 @@ SCProductVersion productVersion = (SCProductVersion)request.getAttribute(WebKeys
 long productEntryId = productEntry.getProductEntryId();
 long productVersionId = BeanParamUtil.getLong(productVersion, request, "productVersionId");
 
-Set frameworkVersionIds = CollectionFactory.getHashSet();
+Set frameworkVersionIds = new HashSet();
 
 String[] frameworkVersions = request.getParameterValues("frameworkVersions");
 

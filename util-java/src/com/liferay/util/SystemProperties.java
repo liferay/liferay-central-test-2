@@ -155,10 +155,6 @@ public class SystemProperties {
 			}
 		}
 
-		// You cannot call CollectionFactory directly because CollectionFactory
-		// also references SystemProperties
-
-		//_props = CollectionFactory.getSyncHashMap();
 		_props = new ConcurrentHashMap();
 
 		// Use a fast concurrent hash map implementation instead of the slower

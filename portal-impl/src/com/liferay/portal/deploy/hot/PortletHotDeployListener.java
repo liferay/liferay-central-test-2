@@ -73,7 +73,6 @@ import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
-import com.liferay.util.CollectionFactory;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -316,7 +315,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 				Map<String, ResourceBundle> resourceBundles = null;
 
 				if (Validator.isNotNull(portlet.getResourceBundle())) {
-					resourceBundles = CollectionFactory.getHashMap();
+					resourceBundles = new HashMap();
 
 					initResourceBundle(
 						resourceBundles, portlet, portletClassLoader,

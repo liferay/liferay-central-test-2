@@ -23,12 +23,12 @@
 package com.liferay.util.servlet;
 
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.ListUtil;
 import com.liferay.util.PwdGenerator;
 
 import java.util.Collections;
 import java.util.Enumeration;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -44,7 +44,7 @@ import javax.servlet.http.HttpSession;
 public class NullSession implements HttpSession {
 
 	public NullSession() {
-		_attributes = CollectionFactory.getSyncHashMap();
+		_attributes = new HashMap<String, Object>();
 		_creationTime = System.currentTimeMillis();
 		_id =
 			NullSession.class.getName() + StringPool.POUND +

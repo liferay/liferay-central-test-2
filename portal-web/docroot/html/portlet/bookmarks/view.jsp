@@ -261,7 +261,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 			headerNames.add("modified-date");
 			headerNames.add(StringPool.BLANK);
 
-			Map orderableHeaders = CollectionFactory.getHashMap();
+			Map orderableHeaders = new HashMap();
 
 			orderableHeaders.put("entry", "name");
 			orderableHeaders.put("url", "url");

@@ -91,7 +91,7 @@ portletURL.setParameter("tabs1", tabs1);
 		headerNames.add("modified-date");
 		headerNames.add(StringPool.BLANK);
 
-		Map orderableHeaders = CollectionFactory.getHashMap();
+		Map orderableHeaders = new HashMap();
 
 		orderableHeaders.put("name", "name");
 		orderableHeaders.put("version", "version");
@@ -300,7 +300,7 @@ portletURL.setParameter("tabs1", tabs1);
 		headerNames.add("modified-date");
 		headerNames.add(StringPool.BLANK);
 
-		Map orderableHeaders = CollectionFactory.getHashMap();
+		Map orderableHeaders = new HashMap();
 
 		orderableHeaders.put("name", "name");
 		orderableHeaders.put("type", "type");

@@ -48,7 +48,7 @@ String name = (String)request.getAttribute("liferay-ui:language:name");
 Locale[] locales = (Locale[])request.getAttribute("liferay-ui:language:locales");
 int displayStyle = GetterUtil.getInteger((String)request.getAttribute("liferay-ui:language:displayStyle"));
 
-Map langCounts = CollectionFactory.getHashMap();
+Map langCounts = new HashMap();
 
 for (int i = 0; i < locales.length; i++) {
 	Integer count = (Integer)langCounts.get(locales[i].getLanguage());
@@ -63,7 +63,7 @@ for (int i = 0; i < locales.length; i++) {
 	langCounts.put(locales[i].getLanguage(), count);
 }
 
-Set duplicateLanguages = CollectionFactory.getHashSet();
+Set duplicateLanguages = new HashSet();
 
 for (int i = 0; i < locales.length; i++) {
 	Integer count = (Integer)langCounts.get(locales[i].getLanguage());

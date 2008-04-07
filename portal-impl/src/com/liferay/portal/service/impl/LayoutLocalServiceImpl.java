@@ -87,7 +87,6 @@ import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFolder;
 import com.liferay.portlet.documentlibrary.model.impl.DLFolderImpl;
-import com.liferay.util.CollectionFactory;
 import com.liferay.util.FileUtil;
 import com.liferay.util.MapUtil;
 import com.liferay.util.Normalizer;
@@ -413,8 +412,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		ZipWriter zipWriter = new ZipWriter();
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, groupId, parameterMap, CollectionFactory.getHashSet(),
-			zipWriter);
+			companyId, groupId, parameterMap, new HashSet(), zipWriter);
 
 		Group guestGroup = groupLocalService.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -665,8 +663,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		ZipWriter zipWriter = new ZipWriter();
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, layout.getGroupId(), parameterMap,
-			CollectionFactory.getHashSet(), zipWriter);
+			companyId, layout.getGroupId(), parameterMap, new HashSet(),
+			zipWriter);
 
 		context.setPlid(plid);
 
@@ -994,8 +992,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		ZipReader zipReader = new ZipReader(is);
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, groupId, parameterMap, CollectionFactory.getHashSet(),
-			strategy, zipReader);
+			companyId, groupId, parameterMap, new HashSet(), strategy,
+			zipReader);
 
 		Group guestGroup = groupLocalService.getGroup(
 			companyId, GroupImpl.GUEST);
@@ -1309,8 +1307,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		ZipReader zipReader = new ZipReader(is);
 
 		PortletDataContext context = new PortletDataContextImpl(
-			companyId, layout.getGroupId(), parameterMap,
-			CollectionFactory.getHashSet(), strategy, zipReader);
+			companyId, layout.getGroupId(), parameterMap, new HashSet(),
+			strategy, zipReader);
 
 		context.setPlid(plid);
 

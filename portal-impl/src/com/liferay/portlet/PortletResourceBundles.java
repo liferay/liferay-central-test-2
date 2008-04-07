@@ -23,11 +23,11 @@
 package com.liferay.portlet;
 
 import com.liferay.portal.kernel.util.LocaleUtil;
-import com.liferay.util.CollectionFactory;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
 
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.Locale;
@@ -35,6 +35,7 @@ import java.util.Map;
 import java.util.MissingResourceException;
 import java.util.PropertyResourceBundle;
 import java.util.ResourceBundle;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.PageContext;
@@ -80,7 +81,7 @@ public class PortletResourceBundles {
 	}
 
 	private PortletResourceBundles() {
-		_contexts = CollectionFactory.getSyncHashMap(
+		_contexts = new ConcurrentHashMap<String, Map<String, ResourceBundle>>(
 			new LinkedHashMap<String, Map<String, ResourceBundle>>());
 	}
 
@@ -116,7 +117,7 @@ public class PortletResourceBundles {
 		Map<String, ResourceBundle> bundles = _contexts.get(servletContextName);
 
 		if (bundles == null) {
-			bundles = CollectionFactory.getHashMap();
+			bundles = new HashMap<String, ResourceBundle>();
 
 			_contexts.put(servletContextName, bundles);
 		}

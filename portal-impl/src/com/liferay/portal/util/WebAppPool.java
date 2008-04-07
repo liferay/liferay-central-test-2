@@ -22,8 +22,6 @@
 
 package com.liferay.portal.util;
 
-import com.liferay.util.CollectionFactory;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -48,7 +46,7 @@ public class WebAppPool {
 	}
 
 	private WebAppPool() {
-		_webAppPool = CollectionFactory.getSyncHashMap();
+		_webAppPool = new ConcurrentHashMap();
 	}
 
 	private Object _get(String webAppId, String key) {

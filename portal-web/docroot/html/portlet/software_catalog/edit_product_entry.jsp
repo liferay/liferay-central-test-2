@@ -33,7 +33,7 @@ long productEntryId = BeanParamUtil.getLong(productEntry, request, "productEntry
 
 String type = BeanParamUtil.getString(productEntry, request, "type");
 
-Set licenseIds = CollectionFactory.getHashSet();
+Set licenseIds = new HashSet();
 
 if ((productEntry != null) && (request.getParameterValues("licenses") == null)) {
 	Iterator itr = productEntry.getLicenses().iterator();

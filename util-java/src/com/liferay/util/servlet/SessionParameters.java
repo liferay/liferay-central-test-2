@@ -23,10 +23,11 @@
 package com.liferay.util.servlet;
 
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.util.CollectionFactory;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.PwdGenerator;
 import com.liferay.util.SystemProperties;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -60,14 +61,13 @@ public class SessionParameters {
 			return parameter;
 		}
 
-		Map parameters = _getParameters(ses);
+		Map<String, String> parameters = _getParameters(ses);
 
-		String newParameter = (String)parameters.get(parameter);
+		String newParameter = parameters.get(parameter);
 
 		if (newParameter == null) {
 			newParameter =
-				PwdGenerator.getPassword(PwdGenerator.KEY3, 10) + "_" +
-				parameter;
+				PwdGenerator.getPassword() + StringPool.UNDERLINE + parameter;
 
 			parameters.put(parameter, newParameter);
 		}
@@ -75,20 +75,20 @@ public class SessionParameters {
 		return newParameter;
 	}
 
-	private static Map _getParameters(HttpSession ses) {
-		Map parameters = null;
+	private static Map<String, String> _getParameters(HttpSession ses) {
+		Map<String, String> parameters = null;
 
 		try {
-			parameters = (Map)ses.getAttribute(KEY);
+			parameters = (Map<String, String>)ses.getAttribute(KEY);
 
 			if (parameters == null) {
-				parameters = CollectionFactory.getHashMap();
+				parameters = new HashMap<String, String>();
 
 				ses.setAttribute(KEY, parameters);
 			}
 		}
 		catch (IllegalStateException ise) {
-			parameters = CollectionFactory.getHashMap();
+			parameters = new HashMap<String, String>();
 		}
 
 		return parameters;
@@ -105,12 +105,13 @@ public class SessionParameters {
 			return parameter;
 		}
 
-		Map parameters = _getParameters(ses);
+		Map<String, String> parameters = _getParameters(ses);
 
-		String newParameter = (String)parameters.get(parameter);
+		String newParameter = parameters.get(parameter);
 
 		if (newParameter == null) {
-			newParameter = PwdGenerator.getPassword() + "_" + parameter;
+			newParameter =
+				PwdGenerator.getPassword() + StringPool.UNDERLINE + parameter;
 
 			parameters.put(parameter, newParameter);
 		}
@@ -118,20 +119,20 @@ public class SessionParameters {
 		return newParameter;
 	}
 
-	private static Map _getParameters(PortletSession ses) {
-		Map parameters = null;
+	private static Map<String, String> _getParameters(PortletSession ses) {
+		Map<String, String> parameters = null;
 
 		try {
-			parameters = (Map)ses.getAttribute(KEY);
+			parameters = (Map<String, String>)ses.getAttribute(KEY);
 
 			if (parameters == null) {
-				parameters = new LinkedHashMap();
+				parameters = new LinkedHashMap<String, String>();
 
 				ses.setAttribute(KEY, parameters);
 			}
 		}
 		catch (IllegalStateException ise) {
-			parameters = new LinkedHashMap();
+			parameters = new LinkedHashMap<String, String>();
 		}
 
 		return parameters;

@@ -37,7 +37,7 @@ import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
 /**
- * <a href="OrganizationConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="OrganizationImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
