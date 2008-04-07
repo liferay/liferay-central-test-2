@@ -1090,7 +1090,7 @@ li.toggle-expand a {
 .taglib-page-iterator {
 	clear: both;
 	height: auto;
-	overflow: auto;
+	overflow: hidden;
 	width: auto;
 }
 

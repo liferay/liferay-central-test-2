@@ -33,30 +33,7 @@
 	padding: 6px;
 }
 
-.portlet-alerts .entry-scope {
-	display: block;
-}
-
-.portlet-alerts .read-false .entry-title {
-	color: #000;
-	display: block;
-	margin-bottom: 4px;
-}
-
-.portlet-alerts .read-true .entry-title {
-	color: #CCC;
-	display: block;
-	font-size: 1.5em;
-	font-weight: bold;
-	margin: 0px 0px 4px 0px;
-}
-
 .portlet-alerts .read-false .entry-title .entry-url {
-	color: #000;
-}
-
-.portlet-alerts .read-true .entry-title .entry-url {
-	color: #CCC;
 }
 
 .portlet-alerts .entry-content {
@@ -65,12 +42,8 @@
 }
 
 .portlet-alerts .entry-scope {
-	color: #CCC;
+	color: #ccc;
 	display: block;
-}
-
-.portlet-alerts .edit-actions {
-	float: right;
 }
 
 .portlet-alerts .entry-type-general {
@@ -96,22 +69,21 @@
 
 .portlet-announcements .entry.last {
 	border: none;
+	margin-bottom: 0;
+	padding-bottom: 0;
 }
 
-.portlet-announcements .entry-scope {
-	display: block;
-}
-
-.portlet-announcements .entry-title {
+.portlet-announcements .entry-title, .portlet-alerts .entry-title {
 	display: block;
 	margin-bottom: 0.8em;
-	margin-right: 100px;
+	margin-right: 135px;
+	margin: 0 135px 0.8em 0;
 }
 
 .portlet-announcements .read-false .entry-title {
 }
 
-.portlet-announcements .read-true .entry-title {
+.portlet-announcements .read-true .entry-title, .portlet-alerts .read-true .entry-title {
 	opacity: 0.5;
 }
 
@@ -126,7 +98,7 @@
 	display: block;
 }
 
-.portlet-announcements .edit-actions {
+.portlet-announcements .edit-actions, .portlet-alerts .edit-actions {
 	float: right;
 }
 

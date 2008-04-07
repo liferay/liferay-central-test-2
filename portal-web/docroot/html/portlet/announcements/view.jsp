@@ -56,7 +56,15 @@ portletURL.setParameter("tabs1", tabs1);
 			function <portlet:namespace />hideEntry(entryId) {
 				Liferay.Service.Announcements.AnnouncementsFlag.addFlag({entryId : entryId, flag: <%= AnnouncementsFlagImpl.HIDDEN %>});
 
-				jQuery('#<portlet:namespace/>' + entryId).hide('slow');
+				jQuery('#<portlet:namespace/>' + entryId).hide(
+					'slow',
+					function() {
+						var container = this.parentNode;
+						var entries = jQuery('.entry', container);
+						jQuery(this).remove();
+						entries.eq(entries.length - 2).addClass('last');
+					}
+				);
 			}
 		</script>
 
@@ -95,15 +103,16 @@ portletURL.setParameter("tabs1", tabs1);
 
 			String className = StringPool.BLANK;
 
-			if (i == 1) {
-				className = "first";
+			if (i == 0) {
+				className += " first";
 			}
-			else if ((i + 1) == results.size()) {
-				className = "last";
+			
+			if ((i + 1) == results.size()) {
+				className += " last";
 			}
 		%>
 
-			<div class="entry read-<%= readEntry %> <%= className %>" id="<portlet:namespace/><%= entry.getEntryId() %>">
+			<div class="entry read-<%= readEntry %><%= className %>" id="<portlet:namespace/><%= entry.getEntryId() %>">
 				<div class="edit-actions">
 					<table class="lfr-table">
 					<tr>
