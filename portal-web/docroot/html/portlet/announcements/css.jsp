@@ -75,8 +75,6 @@
 
 .portlet-announcements .entry-title, .portlet-alerts .entry-title {
 	display: block;
-	margin-bottom: 0.8em;
-	margin-right: 135px;
 	margin: 0 135px 0.8em 0;
 }
 

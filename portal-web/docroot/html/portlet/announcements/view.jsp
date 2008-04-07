@@ -61,7 +61,9 @@ portletURL.setParameter("tabs1", tabs1);
 					function() {
 						var container = this.parentNode;
 						var entries = jQuery('.entry', container);
+
 						jQuery(this).remove();
+
 						entries.eq(entries.length - 2).addClass('last');
 					}
 				);
@@ -106,7 +108,7 @@ portletURL.setParameter("tabs1", tabs1);
 			if (i == 0) {
 				className += " first";
 			}
-			
+
 			if ((i + 1) == results.size()) {
 				className += " last";
 			}
