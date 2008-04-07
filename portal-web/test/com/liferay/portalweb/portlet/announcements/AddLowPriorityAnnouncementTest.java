@@ -34,7 +34,7 @@ public class AddLowPriorityAnnouncementTest extends BaseTestCase {
 	public void testAddLowPriorityAnnouncement() throws Exception {
 		selenium.click("link=Manage Entries");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_84_distributionScopes", "label=General");
+		selenium.select("_84_distributionScope", "label=General");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Entry']");
 		selenium.waitForPageToLoad("30000");
@@ -45,7 +45,7 @@ public class AddLowPriorityAnnouncementTest extends BaseTestCase {
 		selenium.select("_84_priority", "label=Low");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click("link=Entries");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

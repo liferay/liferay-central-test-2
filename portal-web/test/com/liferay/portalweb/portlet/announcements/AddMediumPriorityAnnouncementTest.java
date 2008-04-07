@@ -34,16 +34,16 @@ public class AddMediumPriorityAnnouncementTest extends BaseTestCase {
 	public void testAddMediumPriorityAnnouncement() throws Exception {
 		selenium.click("link=Manage Entries");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_84_distributionScopes", "label=General");
+		selenium.select("_84_distributionScope", "label=General");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Add Entry']");
 		selenium.waitForPageToLoad("30000");
 		selenium.type("_84_title", "Medium Priority Announcement");
 		selenium.type("_84_url", "www.Liferay.com");
-		selenium.type("_84_content", "This is a medium length announcement!");
+		selenium.type("_84_content", "This is a medium priority announcement!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click("link=Entries");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

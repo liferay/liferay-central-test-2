@@ -34,7 +34,7 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 	public void testAddGeneralAnnouncement() throws Exception {
 		selenium.click("link=Manage Entries");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_84_distributionScopes", "label=General");
+		selenium.select("_84_distributionScope", "label=General");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -61,7 +61,7 @@ public class AddGeneralAnnouncementTest extends BaseTestCase {
 			"Hello Everyone! This is a test general announcement for everyone! Yay.");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Return to Full Page");
+		selenium.click("link=Entries");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
