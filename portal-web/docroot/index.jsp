@@ -25,19 +25,18 @@
 <%@ page import="com.liferay.portal.util.PortalUtil" %>
 
 <%
-	// According to http://www.webmasterworld.com/forum91/3087.htm
-	// a semicolon in the URL for a meta-refresh tag does not
-	// work in IE 6.
 
-	// To work around this issue, we use a URL without a session
-	// id for meta-refresh and rely on the load event on the body
-	// element to properly rewrite the URL.
+// According to http://www.webmasterworld.com/forum91/3087.htm a semicolon in
+// the URL for a meta-refresh tag does not work in IE 6.
 
-	String mainPath = PortalUtil.getPathMain();
+// To work around this issue, we use a URL without a session id for meta-refresh
+// and rely on the load event on the body element to properly rewrite the URL.
 
-	if (!request.isRequestedSessionIdFromCookie()) {
-		mainPath = PortalUtil.getURLWithSessionId(mainPath, session.getId());
-	}
+String mainPath = PortalUtil.getPathMain();
+
+if (!request.isRequestedSessionIdFromCookie()) {
+	mainPath = PortalUtil.getURLWithSessionId(mainPath, session.getId());
+}
 %>
 
 <html>

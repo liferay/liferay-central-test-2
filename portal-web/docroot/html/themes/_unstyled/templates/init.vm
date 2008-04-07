@@ -90,7 +90,6 @@
 	#if (!$request.isRequestedSessionIdFromCookie())
 		#set ($home_url = $portalUtil.getURLWithSessionId($home_url, $request.getSession().getId()))
 	#end
-
 #end
 
 #set ($show_my_account = $theme_display.isShowMyAccountIcon())
