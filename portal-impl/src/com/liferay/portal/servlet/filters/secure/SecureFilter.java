@@ -36,7 +36,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
@@ -237,14 +237,14 @@ public class SecureFilter extends BaseFilter {
 		String password = loginAndPassword[1].trim();
 
 		if (login.endsWith("@uid")) {
-			authType = CompanyImpl.AUTH_TYPE_ID;
+			authType = CompanyConstants.AUTH_TYPE_ID;
 
 			int pos = login.indexOf("@uid");
 
 			login = login.substring(0, pos);
 		}
 		else if (login.endsWith("@sn")) {
-			authType = CompanyImpl.AUTH_TYPE_SN;
+			authType = CompanyConstants.AUTH_TYPE_SN;
 
 			int pos = login.indexOf("@sn");
 

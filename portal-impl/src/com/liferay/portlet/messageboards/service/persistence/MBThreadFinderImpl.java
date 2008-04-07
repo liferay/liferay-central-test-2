@@ -254,7 +254,8 @@ public class MBThreadFinderImpl implements MBThreadFinder {
 		}
 	}
 
-	public List<MBThread> findByG_U(long groupId, long userId, int begin, int end)
+	public List<MBThread> findByG_U(
+			long groupId, long userId, int begin, int end)
 		throws SystemException {
 
 		Session session = null;

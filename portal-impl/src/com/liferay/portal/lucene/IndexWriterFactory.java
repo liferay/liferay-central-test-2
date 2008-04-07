@@ -25,7 +25,7 @@ package com.liferay.portal.lucene;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.SystemProperties;
@@ -83,7 +83,7 @@ public class IndexWriterFactory {
 				_lockLookup.put(company.getCompanyId(), new Semaphore(1));
 			}
 
-			_lockLookup.put(CompanyImpl.SYSTEM, new Semaphore(1));
+			_lockLookup.put(CompanyConstants.SYSTEM, new Semaphore(1));
 		}
 		catch (SystemException se) {
 			_log.error(se);

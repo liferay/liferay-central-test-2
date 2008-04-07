@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
@@ -37,7 +38,6 @@ import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PortletURLListener;
 import com.liferay.portal.model.PublicRenderParameter;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.EventDefinitionImpl;
 import com.liferay.portal.model.impl.PortletAppImpl;
 import com.liferay.portal.model.impl.PortletFilterImpl;
@@ -1208,7 +1208,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			Portlet portletModel = portletsPool.get(portletId);
 
 			if (portletModel == null) {
-				portletModel = new PortletImpl(CompanyImpl.SYSTEM, portletId);
+				portletModel = new PortletImpl(
+					CompanyConstants.SYSTEM, portletId);
 
 				portletsPool.put(portletId, portletModel);
 			}

@@ -35,11 +35,11 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -148,7 +148,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
-		long categoryId = CompanyImpl.SYSTEM;
+		long categoryId = CompanyConstants.SYSTEM;
 
 		if (Validator.isNull(subject)) {
 			subject = "N/A";
@@ -390,9 +390,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (files.size() > 0) {
 			long companyId = message.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM_STRING;
+			String portletId = CompanyConstants.SYSTEM_STRING;
 			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			long repositoryId = CompanyImpl.SYSTEM;
+			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -656,8 +656,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		if (message.isAttachments()) {
 			long companyId = message.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM_STRING;
-			long repositoryId = CompanyImpl.SYSTEM;
+			String portletId = CompanyConstants.SYSTEM_STRING;
+			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getAttachmentsDir();
 
 			try {
@@ -680,8 +680,8 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 			// Attachments
 
 			long companyId = message.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM_STRING;
-			long repositoryId = CompanyImpl.SYSTEM;
+			String portletId = CompanyConstants.SYSTEM_STRING;
+			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = message.getThreadAttachmentsDir();
 
 			try {
@@ -1098,9 +1098,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Attachments
 
 		long companyId = message.getCompanyId();
-		String portletId = CompanyImpl.SYSTEM_STRING;
+		String portletId = CompanyConstants.SYSTEM_STRING;
 		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-		long repositoryId = CompanyImpl.SYSTEM;
+		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = message.getAttachmentsDir();
 
 		try {

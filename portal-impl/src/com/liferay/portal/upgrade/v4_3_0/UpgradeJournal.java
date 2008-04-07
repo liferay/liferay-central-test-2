@@ -22,7 +22,7 @@
 
 package com.liferay.portal.upgrade.v4_3_0;
 
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.upgrade.util.DefaultPKMapper;
@@ -191,7 +191,7 @@ public class UpgradeJournal extends UpgradeProcess {
 		// JournalContentSearch
 
 		PropsUtil.set(
-			CompanyImpl.SYSTEM,
+			CompanyConstants.SYSTEM,
 			PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP, "true");
 	}
 

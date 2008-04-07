@@ -49,6 +49,8 @@ package com.liferay.portal.model;
  *
  */
 public interface Company extends CompanyModel {
+	public java.lang.String getDefaultWebId();
+
 	public void setKey(java.lang.String key);
 
 	public java.security.Key getKeyObj();

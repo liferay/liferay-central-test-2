@@ -43,8 +43,8 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -181,10 +181,10 @@ public class AddUserAction extends PortletAction {
 
 		String login = null;
 
-		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
+		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
 			login = String.valueOf(user.getUserId());
 		}
-		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN)) {
+		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
 			login = user.getScreenName();
 		}
 		else {

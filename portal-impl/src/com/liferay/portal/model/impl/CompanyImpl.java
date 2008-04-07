@@ -52,20 +52,11 @@ import org.apache.commons.logging.LogFactory;
  */
 public class CompanyImpl extends CompanyModelImpl implements Company {
 
-	public static final String DEFAULT_WEB_ID =
-		PropsUtil.get(PropsUtil.COMPANY_DEFAULT_WEB_ID);
-
-	public static final String AUTH_TYPE_EA = "emailAddress";
-
-	public static final String AUTH_TYPE_SN = "screenName";
-
-	public static final String AUTH_TYPE_ID = "userId";
-
-	public static final long SYSTEM = 0;
-
-	public static final String SYSTEM_STRING = String.valueOf(SYSTEM);
-
 	public CompanyImpl() {
+	}
+
+	public String getDefaultWebId() {
+		return PropsValues.COMPANY_DEFAULT_WEB_ID;
 	}
 
 	public void setKey(String key) {
@@ -228,10 +219,10 @@ public class CompanyImpl extends CompanyModelImpl implements Company {
 		String webId1 = getWebId();
 		String webId2 = company.getWebId();
 
-		if (webId1.equals(DEFAULT_WEB_ID)) {
+		if (webId1.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 			return -1;
 		}
-		else if (webId2.equals(DEFAULT_WEB_ID)) {
+		else if (webId2.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 			return 1;
 		}
 		else {

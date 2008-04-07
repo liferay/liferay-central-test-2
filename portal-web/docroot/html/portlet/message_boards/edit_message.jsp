@@ -67,7 +67,7 @@ boolean quote = ParamUtil.getBoolean(request, "quote");
 String[] existingAttachments = new String[0];
 
 if ((message != null) && message.isAttachments()) {
-	existingAttachments = DLServiceUtil.getFileNames(message.getCompanyId(), CompanyImpl.SYSTEM, message.getAttachmentsDir());
+	existingAttachments = DLServiceUtil.getFileNames(message.getCompanyId(), CompanyConstants.SYSTEM, message.getAttachmentsDir());
 }
 %>
 

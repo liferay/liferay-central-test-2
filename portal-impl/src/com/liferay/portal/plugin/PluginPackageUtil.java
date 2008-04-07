@@ -38,8 +38,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Plugin;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.util.HttpImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -1088,7 +1088,7 @@ public class PluginPackageUtil {
 		try {
 			PluginPackageIndexer.cleanIndex();
 
-			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
+			writer = LuceneUtil.getWriter(CompanyConstants.SYSTEM);
 
 			for (PluginPackage pluginPackage :
 					_getAllAvailablePluginPackages()) {
@@ -1126,7 +1126,7 @@ public class PluginPackageUtil {
 		finally {
 			try {
 				if (writer != null) {
-					LuceneUtil.write(CompanyImpl.SYSTEM);
+					LuceneUtil.write(CompanyConstants.SYSTEM);
 				}
 			}
 			catch (Exception e) {
@@ -1270,7 +1270,7 @@ public class PluginPackageUtil {
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(CompanyImpl.SYSTEM);
+			searcher = LuceneUtil.getSearcher(CompanyConstants.SYSTEM);
 
 			hits.recordHits(searcher.search(fullQuery), searcher);
 

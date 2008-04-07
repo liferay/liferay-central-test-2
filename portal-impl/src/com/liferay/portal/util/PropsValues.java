@@ -155,6 +155,9 @@ public class PropsValues {
 	public static final boolean COMMONS_POOL_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.COMMONS_POOL_ENABLED));
 
+	public static final String COMPANY_DEFAULT_WEB_ID =
+		PropsUtil.get(PropsUtil.COMPANY_DEFAULT_WEB_ID);
+
 	public static final boolean COMPANY_SECURITY_AUTH_REQUIRES_HTTPS =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.COMPANY_SECURITY_AUTH_REQUIRES_HTTPS));

@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.util.License;
 
 import java.io.IOException;
@@ -73,20 +73,21 @@ public class PluginPackageIndexer implements Indexer {
 		IndexWriter writer = null;
 
 		try {
-			writer = LuceneUtil.getWriter(CompanyImpl.SYSTEM);
+			writer = LuceneUtil.getWriter(CompanyConstants.SYSTEM);
 
 			writer.addDocument(doc);
 		}
 		finally {
 			if (writer != null) {
-				LuceneUtil.write(CompanyImpl.SYSTEM);
+				LuceneUtil.write(CompanyConstants.SYSTEM);
 			}
 		}
 	}
 
 	public static void cleanIndex() throws IOException {
 		LuceneUtil.deleteDocuments(
-			CompanyImpl.SYSTEM, new Term(LuceneFields.PORTLET_ID, PORTLET_ID));
+			CompanyConstants.SYSTEM,
+			new Term(LuceneFields.PORTLET_ID, PORTLET_ID));
 	}
 
 	public static Document getAddPluginPackageDocument(
@@ -198,7 +199,7 @@ public class PluginPackageIndexer implements Indexer {
 		throws IOException {
 
 		LuceneUtil.deleteDocuments(
-			CompanyImpl.SYSTEM,
+			CompanyConstants.SYSTEM,
 			new Term(
 				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, moduleId)));
 	}

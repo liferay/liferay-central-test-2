@@ -25,7 +25,7 @@ package com.liferay.portal.security.auth;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 
 import java.util.Map;
 
@@ -45,7 +45,7 @@ public class AuthPipeline {
 
 		return _authenticate(
 			classes, companyId, emailAddress, password,
-			CompanyImpl.AUTH_TYPE_EA, headerMap, parameterMap);
+			CompanyConstants.AUTH_TYPE_EA, headerMap, parameterMap);
 	}
 
 	public static int authenticateByScreenName(
@@ -55,8 +55,8 @@ public class AuthPipeline {
 		throws AuthException {
 
 		return _authenticate(
-			classes, companyId, screenName, password, CompanyImpl.AUTH_TYPE_SN,
-			headerMap, parameterMap);
+			classes, companyId, screenName, password,
+			CompanyConstants.AUTH_TYPE_SN, headerMap, parameterMap);
 	}
 
 	public static int authenticateByUserId(
@@ -66,7 +66,7 @@ public class AuthPipeline {
 
 		return _authenticate(
 			classes, companyId, String.valueOf(userId), password,
-			CompanyImpl.AUTH_TYPE_ID, headerMap, parameterMap);
+			CompanyConstants.AUTH_TYPE_ID, headerMap, parameterMap);
 	}
 
 	public static void onFailureByEmailAddress(
@@ -75,7 +75,7 @@ public class AuthPipeline {
 		throws AuthException {
 
 		_onFailure(
-			classes, companyId, emailAddress, CompanyImpl.AUTH_TYPE_EA,
+			classes, companyId, emailAddress, CompanyConstants.AUTH_TYPE_EA,
 			headerMap, parameterMap);
 	}
 
@@ -85,8 +85,8 @@ public class AuthPipeline {
 		throws AuthException {
 
 		_onFailure(
-			classes, companyId, screenName, CompanyImpl.AUTH_TYPE_SN, headerMap,
-			parameterMap);
+			classes, companyId, screenName, CompanyConstants.AUTH_TYPE_SN,
+			headerMap, parameterMap);
 	}
 
 	public static void onFailureByUserId(
@@ -96,7 +96,7 @@ public class AuthPipeline {
 
 		_onFailure(
 			classes, companyId, String.valueOf(userId),
-			CompanyImpl.AUTH_TYPE_ID, headerMap, parameterMap);
+			CompanyConstants.AUTH_TYPE_ID, headerMap, parameterMap);
 	}
 
 	public static void onMaxFailuresByEmailAddress(
@@ -145,17 +145,17 @@ public class AuthPipeline {
 				try {
 					int authResult = Authenticator.FAILURE;
 
-					if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+					if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 						authResult = auth.authenticateByEmailAddress(
 							companyId, login, password, headerMap,
 							parameterMap);
 					}
-					else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+					else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 						authResult = auth.authenticateByScreenName(
 							companyId, login, password, headerMap,
 							parameterMap);
 					}
-					else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+					else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 						long userId = GetterUtil.getLong(login);
 
 						authResult = auth.authenticateByUserId(
@@ -196,15 +196,15 @@ public class AuthPipeline {
 					classes[i]);
 
 				try {
-					if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+					if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 						authFailure.onFailureByEmailAddress(
 							companyId, login, headerMap, parameterMap);
 					}
-					else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+					else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 						authFailure.onFailureByScreenName(
 							companyId, login, headerMap, parameterMap);
 					}
-					else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+					else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 						long userId = GetterUtil.getLong(login);
 
 						authFailure.onFailureByUserId(

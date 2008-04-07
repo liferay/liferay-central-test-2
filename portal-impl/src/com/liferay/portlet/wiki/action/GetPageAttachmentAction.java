@@ -26,7 +26,7 @@ import com.liferay.documentlibrary.NoSuchFileException;
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.util.MimeTypesUtil;
@@ -118,7 +118,7 @@ public class GetPageAttachmentAction extends PortletAction {
 			WikiPage page = WikiPageServiceUtil.getPage(nodeId, title);
 
 			is = DLLocalServiceUtil.getFileAsStream(
-				page.getCompanyId(), CompanyImpl.SYSTEM,
+				page.getCompanyId(), CompanyConstants.SYSTEM,
 				page.getAttachmentsDir() + "/" + fileName);
 
 			String contentType = MimeTypesUtil.getContentType(fileName);

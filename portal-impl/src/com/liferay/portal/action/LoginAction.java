@@ -43,8 +43,8 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.security.auth.AuthException;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -99,7 +99,7 @@ public class LoginAction extends Action {
 				CookieKeys.getCookie(req, CookieKeys.LOGIN));
 
 			if (Validator.isNull(login) &&
-				company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA)) {
+				company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
 
 				login = "@" + company.getMx();
 			}
@@ -145,7 +145,7 @@ public class LoginAction extends Action {
 
 		Map<String, String[]> parameterMap = req.getParameterMap();
 
-		if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA)) {
+		if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA)) {
 			authResult = UserLocalServiceUtil.authenticateByEmailAddress(
 				company.getCompanyId(), login, password, headerMap,
 				parameterMap);
@@ -153,7 +153,7 @@ public class LoginAction extends Action {
 			userId = UserLocalServiceUtil.getUserIdByEmailAddress(
 				company.getCompanyId(), login);
 		}
-		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN)) {
+		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN)) {
 			authResult = UserLocalServiceUtil.authenticateByScreenName(
 				company.getCompanyId(), login, password, headerMap,
 				parameterMap);
@@ -161,7 +161,7 @@ public class LoginAction extends Action {
 			userId = UserLocalServiceUtil.getUserIdByScreenName(
 				company.getCompanyId(), login);
 		}
-		else if (company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID)) {
+		else if (company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID)) {
 			authResult = UserLocalServiceUtil.authenticateByUserId(
 				company.getCompanyId(), userId, password, headerMap,
 				parameterMap);

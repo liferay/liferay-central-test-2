@@ -34,7 +34,8 @@ import com.liferay.portlet.expando.service.base.ExpandoValueLocalServiceBaseImpl
 import java.util.List;
 
 /**
- * <a href="ExpandoValueLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpandoValueLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Raymond Augé
  * @author Brian Wing Shun Chan

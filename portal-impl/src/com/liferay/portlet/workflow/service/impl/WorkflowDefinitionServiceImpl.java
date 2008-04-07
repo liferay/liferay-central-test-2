@@ -28,8 +28,8 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portlet.workflow.NoSuchDefinitionException;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
@@ -84,9 +84,9 @@ public class WorkflowDefinitionServiceImpl
 			// File
 
 			long companyId = user.getCompanyId();
-			String portletId = CompanyImpl.SYSTEM_STRING;
+			String portletId = CompanyConstants.SYSTEM_STRING;
 			long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-			long repositoryId = CompanyImpl.SYSTEM;
+			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = "workflow/definitions";
 			String fileName = dirName  + "/" + definitionId + ".xml";
 
@@ -148,7 +148,7 @@ public class WorkflowDefinitionServiceImpl
 
 		try {
 			long companyId = getUser().getCompanyId();
-			long repositoryId = CompanyImpl.SYSTEM;
+			long repositoryId = CompanyConstants.SYSTEM;
 			String dirName = "workflow/definitions";
 			String fileName = dirName  + "/" + definitionId + ".xml";
 

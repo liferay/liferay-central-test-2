@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -187,7 +187,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 							String attachment = attachments[i];
 
 							byte[] byteArray = DLServiceUtil.getFile(
-								context.getCompanyId(), CompanyImpl.SYSTEM,
+								context.getCompanyId(), CompanyConstants.SYSTEM,
 								attachment);
 
 							context.getZipWriter().addEntry(

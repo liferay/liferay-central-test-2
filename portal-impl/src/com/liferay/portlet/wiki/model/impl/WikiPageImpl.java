@@ -27,7 +27,7 @@ import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.wiki.model.WikiNode;
@@ -175,7 +175,7 @@ public class WikiPageImpl extends WikiPageModelImpl implements WikiPage {
 
 		try {
 			fileNames = DLServiceUtil.getFileNames(
-				getCompanyId(), CompanyImpl.SYSTEM, getAttachmentsDir());
+				getCompanyId(), CompanyConstants.SYSTEM, getAttachmentsDir());
 		}
 		catch (NoSuchDirectoryException nsde) {
 		}

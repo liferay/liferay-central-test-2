@@ -93,7 +93,8 @@ public class BookmarksUtil {
 		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);
 
-			foldersURL.setParameter("struts_action", "/bookmarks/select_folder");
+			foldersURL.setParameter(
+				"struts_action", "/bookmarks/select_folder");
 		}
 		else {
 			foldersURL.setWindowState(WindowState.MAXIMIZED);

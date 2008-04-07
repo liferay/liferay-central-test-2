@@ -26,7 +26,7 @@ import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.documentlibrary.service.DLServiceUtil;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -65,7 +65,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 		MBCategory category = null;
 
 		try {
-			if (getCategoryId() == CompanyImpl.SYSTEM) {
+			if (getCategoryId() == CompanyConstants.SYSTEM) {
 				category = MBCategoryLocalServiceUtil.getSystemCategory();
 			}
 			else {
@@ -96,7 +96,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 	}
 
 	public boolean isDiscussion() {
-		if (getCategoryId() == CompanyImpl.SYSTEM) {
+		if (getCategoryId() == CompanyConstants.SYSTEM) {
 			return true;
 		}
 		else {
@@ -136,7 +136,7 @@ public class MBMessageImpl extends MBMessageModelImpl implements MBMessage {
 
 		try {
 			fileNames = DLServiceUtil.getFileNames(
-				getCompanyId(), CompanyImpl.SYSTEM, getAttachmentsDir());
+				getCompanyId(), CompanyConstants.SYSTEM, getAttachmentsDir());
 		}
 		catch (NoSuchDirectoryException nsde) {
 		}

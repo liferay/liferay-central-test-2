@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -63,15 +63,15 @@ public class ParameterAutoLogin implements AutoLogin {
 
 			long userId = 0;
 
-			if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 				userId = UserLocalServiceUtil.getUserIdByEmailAddress(
 					company.getCompanyId(), login);
 			}
-			else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 				userId = UserLocalServiceUtil.getUserIdByScreenName(
 					company.getCompanyId(), login);
 			}
-			else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 				userId = GetterUtil.getLong(login);
 			}
 			else {

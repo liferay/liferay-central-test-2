@@ -40,12 +40,12 @@ import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.CountryImpl;
 import com.liferay.portal.model.impl.GroupImpl;
@@ -94,7 +94,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		virtualHost = getVirtualHost(virtualHost);
 
 		if ((Validator.isNull(webId)) ||
-			(webId.equals(CompanyImpl.DEFAULT_WEB_ID)) ||
+			(webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) ||
 			(companyPersistence.fetchByWebId(webId) != null)) {
 
 			throw new CompanyWebIdException();
@@ -136,7 +136,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		if (company == null) {
 			String virtualHost = webId;
 
-			if (webId.equals(CompanyImpl.DEFAULT_WEB_ID)) {
+			if (webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 				virtualHost = PortalInstances.DEFAULT_VIRTUAL_HOST;
 			}
 
@@ -181,8 +181,8 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 				companyPersistence.update(company, false);
 
 				updateSecurity(
-					companyId, CompanyImpl.AUTH_TYPE_EA, true, true, true, true,
-					false, true);
+					companyId, CompanyConstants.AUTH_TYPE_EA, true, true, true,
+					true, false, true);
 
 				PortletPreferences prefs =
 					PrefsPropsUtil.getPreferences(companyId);
@@ -646,7 +646,7 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 			throw new CompanyVirtualHostException();
 		}
 		else if (virtualHost.equals(PortalInstances.DEFAULT_VIRTUAL_HOST) &&
-				 !webId.equals(CompanyImpl.DEFAULT_WEB_ID)) {
+				 !webId.equals(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 
 			throw new CompanyVirtualHostException();
 		}

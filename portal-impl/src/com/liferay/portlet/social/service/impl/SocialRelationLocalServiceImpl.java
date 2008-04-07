@@ -34,7 +34,8 @@ import java.util.Date;
 import java.util.List;
 
 /**
- * <a href="SocialRelationLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="SocialRelationLocalServiceImpl.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *

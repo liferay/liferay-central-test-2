@@ -24,7 +24,7 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.documentlibrary.service.DLLocalServiceUtil;
 import com.liferay.documentlibrary.service.DLServiceUtil;
-import com.liferay.portal.model.impl.CompanyImpl;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
 
@@ -66,7 +66,7 @@ public class MBMessageAttachmentsUpgradeColumnImpl
 
 			try {
 				DLServiceUtil.addDirectory(
-					newCompanyId.longValue(), CompanyImpl.SYSTEM,
+					newCompanyId.longValue(), CompanyConstants.SYSTEM,
 					"messageboards/" + newThreadId);
 
 				DLLocalServiceUtil.move(

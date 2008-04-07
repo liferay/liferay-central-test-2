@@ -36,10 +36,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserGroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -675,7 +675,7 @@ public class PortalLDAPUtil {
 				companyId, PropsUtil.COMPANY_SECURITY_AUTH_TYPE,
 				PropsValues.COMPANY_SECURITY_AUTH_TYPE);
 
-			if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+			if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 				user = UserLocalServiceUtil.getUserByScreenName(
 					companyId, screenName);
 			}

@@ -20,33 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.expando;
-
-import com.liferay.portal.PortalException;
+package com.liferay.portal.model;
 
 /**
- * <a href="DuplicateColumnNameException.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="CompanyConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DuplicateColumnNameException extends PortalException {
+public interface CompanyConstants {
 
-	public DuplicateColumnNameException() {
-		super();
-	}
+	public static final String AUTH_TYPE_EA = "emailAddress";
 
-	public DuplicateColumnNameException(String msg) {
-		super(msg);
-	}
+	public static final String AUTH_TYPE_SN = "screenName";
 
-	public DuplicateColumnNameException(String msg, Throwable cause) {
-		super(msg, cause);
-	}
+	public static final String AUTH_TYPE_ID = "userId";
 
-	public DuplicateColumnNameException(Throwable cause) {
-		super(cause);
-	}
+	public static final long SYSTEM = 0;
+
+	public static final String SYSTEM_STRING = String.valueOf(SYSTEM);
 
 }

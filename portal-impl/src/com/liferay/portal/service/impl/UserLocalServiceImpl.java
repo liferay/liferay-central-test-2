@@ -60,6 +60,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
@@ -68,7 +69,6 @@ import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.RoleImpl;
@@ -415,7 +415,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return authenticate(
-			companyId, emailAddress, password, CompanyImpl.AUTH_TYPE_EA,
+			companyId, emailAddress, password, CompanyConstants.AUTH_TYPE_EA,
 			headerMap, parameterMap);
 	}
 
@@ -425,7 +425,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return authenticate(
-			companyId, screenName, password, CompanyImpl.AUTH_TYPE_SN,
+			companyId, screenName, password, CompanyConstants.AUTH_TYPE_SN,
 			headerMap, parameterMap);
 	}
 
@@ -436,7 +436,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		return authenticate(
 			companyId, String.valueOf(userId), password,
-			CompanyImpl.AUTH_TYPE_ID, headerMap, parameterMap);
+			CompanyConstants.AUTH_TYPE_ID, headerMap, parameterMap);
 	}
 
 	public long authenticateForBasic(
@@ -446,13 +446,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		try {
 			User user = null;
 
-			if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 				user = getUserByEmailAddress(companyId, login);
 			}
-			else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 				user = getUserByScreenName(companyId, login);
 			}
-			else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 				user = getUserById(companyId, GetterUtil.getLong(login));
 			}
 
@@ -1818,17 +1818,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		// User input validation
 
-		if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 			if (!Validator.isEmailAddress(login)) {
 				throw new UserEmailAddressException();
 			}
 		}
-		else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 			if (Validator.isNull(login)) {
 				throw new UserScreenNameException();
 			}
 		}
-		else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 			if (Validator.isNull(login)) {
 				throw new UserIdException();
 			}
@@ -1846,17 +1846,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		String[] authPipelinePre =
 			PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_PRE);
 
-		if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+		if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 			authResult = AuthPipeline.authenticateByEmailAddress(
 				authPipelinePre, companyId, login, password, headerMap,
 				parameterMap);
 		}
-		else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 			authResult = AuthPipeline.authenticateByScreenName(
 				authPipelinePre, companyId, login, password, headerMap,
 				parameterMap);
 		}
-		else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+		else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 			authResult = AuthPipeline.authenticateByUserId(
 				authPipelinePre, companyId, userId, password, headerMap,
 				parameterMap);
@@ -1867,13 +1867,13 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		User user = null;
 
 		try {
-			if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 				user = userPersistence.findByC_EA(companyId, login);
 			}
-			else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 				user = userPersistence.findByC_SN(companyId, login);
 			}
-			else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 				user = userPersistence.findByC_U(
 					companyId, GetterUtil.getLong(login));
 			}
@@ -1954,17 +1954,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String[] authPipelinePost =
 				PropsUtil.getArray(PropsUtil.AUTH_PIPELINE_POST);
 
-			if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+			if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 				authResult = AuthPipeline.authenticateByEmailAddress(
 					authPipelinePost, companyId, login, password, headerMap,
 					parameterMap);
 			}
-			else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 				authResult = AuthPipeline.authenticateByScreenName(
 					authPipelinePost, companyId, login, password, headerMap,
 					parameterMap);
 			}
-			else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+			else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 				authResult = AuthPipeline.authenticateByUserId(
 					authPipelinePost, companyId, userId, password, headerMap,
 					parameterMap);
@@ -1978,15 +1978,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				String[] authFailure =
 					PropsUtil.getArray(PropsUtil.AUTH_FAILURE);
 
-				if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+				if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 					AuthPipeline.onFailureByEmailAddress(
 						authFailure, companyId, login, headerMap, parameterMap);
 				}
-				else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+				else if (authType.equals(CompanyConstants.AUTH_TYPE_SN)) {
 					AuthPipeline.onFailureByScreenName(
 						authFailure, companyId, login, headerMap, parameterMap);
 				}
-				else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+				else if (authType.equals(CompanyConstants.AUTH_TYPE_ID)) {
 					AuthPipeline.onFailureByUserId(
 						authFailure, companyId, userId, headerMap,
 						parameterMap);
@@ -2008,17 +2008,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 						String[] authMaxFailures =
 							PropsUtil.getArray(PropsUtil.AUTH_MAX_FAILURES);
 
-						if (authType.equals(CompanyImpl.AUTH_TYPE_EA)) {
+						if (authType.equals(CompanyConstants.AUTH_TYPE_EA)) {
 							AuthPipeline.onMaxFailuresByEmailAddress(
 								authMaxFailures, companyId, login, headerMap,
 								parameterMap);
 						}
-						else if (authType.equals(CompanyImpl.AUTH_TYPE_SN)) {
+						else if (authType.equals(
+									CompanyConstants.AUTH_TYPE_SN)) {
+
 							AuthPipeline.onMaxFailuresByScreenName(
 								authMaxFailures, companyId, login, headerMap,
 								parameterMap);
 						}
-						else if (authType.equals(CompanyImpl.AUTH_TYPE_ID)) {
+						else if (authType.equals(
+									CompanyConstants.AUTH_TYPE_ID)) {
+
 							AuthPipeline.onMaxFailuresByUserId(
 								authMaxFailures, companyId, userId, headerMap,
 								parameterMap);

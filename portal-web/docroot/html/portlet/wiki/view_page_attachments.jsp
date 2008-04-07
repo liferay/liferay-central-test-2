@@ -67,7 +67,7 @@ for (int i = 0; i < results.size(); i++) {
 
 	String shortFileName = FileUtil.getShortFileName(fileName);
 
-	long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyImpl.SYSTEM, fileName);
+	long fileSize = DLServiceUtil.getFileSize(company.getCompanyId(), CompanyConstants.SYSTEM, fileName);
 
 	ResultRow row = new ResultRow(new Object[] {node, wikiPage, fileName}, fileName, i);
 

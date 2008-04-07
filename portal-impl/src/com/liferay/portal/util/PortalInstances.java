@@ -27,9 +27,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.PortletCategory;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
@@ -248,7 +248,7 @@ public class PortalInstances {
 			return _webIds;
 		}
 
-		if (Validator.isNull(CompanyImpl.DEFAULT_WEB_ID)) {
+		if (Validator.isNull(PropsValues.COMPANY_DEFAULT_WEB_ID)) {
 			throw new RuntimeException("Default web id must not be null");
 		}
 
@@ -268,7 +268,7 @@ public class PortalInstances {
 		}
 
 		if ((_webIds == null) || (_webIds.length == 0)) {
-			_webIds = new String[] {CompanyImpl.DEFAULT_WEB_ID};
+			_webIds = new String[] {PropsValues.COMPANY_DEFAULT_WEB_ID};
 		}
 
 		return _webIds;
@@ -333,7 +333,7 @@ public class PortalInstances {
 		}
 
 		if (GetterUtil.getBoolean(PropsUtil.get(
-				CompanyImpl.SYSTEM,
+				CompanyConstants.SYSTEM,
 				PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP)) ||
 			GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.JOURNAL_SYNC_CONTENT_SEARCH_ON_STARTUP))) {

@@ -114,7 +114,9 @@ public class TagsPropertyLocalServiceImpl
 		return tagsPropertyPersistence.findAll();
 	}
 
-	public List<TagsProperty> getProperties(long entryId) throws SystemException {
+	public List<TagsProperty> getProperties(long entryId)
+		throws SystemException {
+
 		return tagsPropertyPersistence.findByEntryId(entryId);
 	}
 

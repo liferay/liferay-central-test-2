@@ -438,7 +438,9 @@ public class HttpImpl implements Http {
 			}
 		}
 
-		for (Map.Entry<String, List<String>> entry : tempParameterMap.entrySet()) {
+		for (Map.Entry<String, List<String>> entry :
+				tempParameterMap.entrySet()) {
+
 			String key = entry.getKey();
 			List<String> values = entry.getValue();
 

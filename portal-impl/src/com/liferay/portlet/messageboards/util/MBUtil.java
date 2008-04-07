@@ -353,7 +353,8 @@ public class MBUtil {
 		}
 		else {
 			return ContentUtil.get(
-				PropsValues.MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX);
+				PropsValues.
+					MESSAGE_BOARDS_EMAIL_MESSAGE_UPDATED_SUBJECT_PREFIX);
 		}
 	}
 

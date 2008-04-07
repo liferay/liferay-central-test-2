@@ -33,8 +33,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ReleaseInfo;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Release;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
 import com.liferay.portal.spring.util.SpringUtil;
@@ -255,7 +255,7 @@ public class StartupAction extends SimpleAction {
 
 			// Lucene
 
-			LuceneUtil.checkLuceneDir(CompanyImpl.SYSTEM);
+			LuceneUtil.checkLuceneDir(CompanyConstants.SYSTEM);
 		}
 	}
 

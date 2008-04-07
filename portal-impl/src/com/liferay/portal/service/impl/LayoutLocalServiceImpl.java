@@ -1836,7 +1836,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				if (preferences != null) {
 					portletPreferences.setPreferences(preferences);
 
-					portletPreferencesPersistence.update(portletPreferences, false);
+					portletPreferencesPersistence.update(
+						portletPreferences, false);
 				}
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {
@@ -3039,7 +3040,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				if (preferences != null) {
 					portletPreferences.setPreferences(preferences);
 
-					portletPreferencesPersistence.update(portletPreferences, false);
+					portletPreferencesPersistence.update(
+						portletPreferences, false);
 				}
 			}
 			catch (NoSuchPortletPreferencesException nsppe) {

@@ -219,9 +219,9 @@ String portletURLString = (String)request.getAttribute("view.jsp-portletURLStrin
 					</td>
 					<td>
 						<select name="<portlet:namespace />authType">
-							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_EA %>"><liferay-ui:message key="by-email-address" /></option>
-							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_SN) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_SN %>"><liferay-ui:message key="by-screen-name" /></option>
-							<option <%= company.getAuthType().equals(CompanyImpl.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= CompanyImpl.AUTH_TYPE_ID %>"><liferay-ui:message key="by-user-id" /></option>
+							<option <%= company.getAuthType().equals(CompanyConstants.AUTH_TYPE_EA) ? "selected" : "" %> value="<%= CompanyConstants.AUTH_TYPE_EA %>"><liferay-ui:message key="by-email-address" /></option>
+							<option <%= company.getAuthType().equals(CompanyConstants.AUTH_TYPE_SN) ? "selected" : "" %> value="<%= CompanyConstants.AUTH_TYPE_SN %>"><liferay-ui:message key="by-screen-name" /></option>
+							<option <%= company.getAuthType().equals(CompanyConstants.AUTH_TYPE_ID) ? "selected" : "" %> value="<%= CompanyConstants.AUTH_TYPE_ID %>"><liferay-ui:message key="by-user-id" /></option>
 						</select>
 					</td>
 				</tr>

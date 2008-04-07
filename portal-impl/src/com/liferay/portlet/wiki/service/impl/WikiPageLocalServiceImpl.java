@@ -36,10 +36,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
+import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -209,9 +209,9 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPage page = getPage(nodeId, title);
 
 		long companyId = page.getCompanyId();
-		String portletId = CompanyImpl.SYSTEM_STRING;
+		String portletId = CompanyConstants.SYSTEM_STRING;
 		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
-		long repositoryId = CompanyImpl.SYSTEM;
+		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = page.getAttachmentsDir();
 
 		try {
@@ -329,8 +329,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		// Attachments
 
 		long companyId = page.getCompanyId();
-		String portletId = CompanyImpl.SYSTEM_STRING;
-		long repositoryId = CompanyImpl.SYSTEM;
+		String portletId = CompanyConstants.SYSTEM_STRING;
+		long repositoryId = CompanyConstants.SYSTEM;
 		String dirName = page.getAttachmentsDir();
 
 		try {
@@ -392,8 +392,8 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 		WikiPage page = getPage(nodeId, title);
 
 		long companyId = page.getCompanyId();
-		String portletId = CompanyImpl.SYSTEM_STRING;
-		long repositoryId = CompanyImpl.SYSTEM;
+		String portletId = CompanyConstants.SYSTEM_STRING;
+		long repositoryId = CompanyConstants.SYSTEM;
 
 		try {
 			dlService.deleteFile(companyId, portletId, repositoryId, fileName);
