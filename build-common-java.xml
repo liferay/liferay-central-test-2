@@ -74,14 +74,19 @@
 
 	<target name="java2html">
 		<java
-			classname="com.liferay.util.Java2Html"
+			classname="j2h"
 			classpathref="project.classpath"
 			fork="true"
 		>
-			<arg value="java -classpath ${project.dir}/lib/development/j2h.jar j2h" />
-			<arg value="src" />
-			<arg value="${java2html.dir}" />
+			<arg line="-d ${java2html.dir} -js src -m 4" />
 		</java>
+
+		<replace dir="${java2html.dir}">
+			<replacefilter
+				token="stylesheet.css"
+				value="java2html.css"
+			/>
+		</replace>
 
 		<move file="${java2html.dir}/stylesheet.css" tofile="${java2html.dir}/java2html.css" />
 
@@ -100,10 +105,10 @@
 		<mkdir dir="${javadoc.dir}" />
 
 		<javadoc
-			additionalparam="-J-Xmx128m"
 			breakiterator="yes"
 			classpathref="project.classpath"
 			destdir="${javadoc.dir}"
+			maxmemory="256m"
 			packagenames="*.*"
 			sourcepath="src"
 			stylesheetfile="${project.dir}/tools/javadoc.css"

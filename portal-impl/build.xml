@@ -192,21 +192,6 @@ ${exception.message}
 		</if>
 	</target>
 
-	<target name="javadoc">
-		<mkdir dir="${javadoc.dir}" />
-
-		<javadoc
-			additionalparam="-J-Xmx128m"
-			breakiterator="yes"
-			classpathref="project.classpath"
-			destdir="${javadoc.dir}"
-			excludepackagenames="com.liferay.portlet.alfrescocontent.util"
-			packagenames="*.*"
-			sourcepath="src"
-			stylesheetfile="${project.dir}/tools/javadoc.css"
-		/>
-	</target>
-
 	<target name="deploy">
 		<ant dir="../portal-kernel" target="deploy" inheritAll="false" />
 		<ant dir="../portal-service" target="deploy" inheritAll="false" />
