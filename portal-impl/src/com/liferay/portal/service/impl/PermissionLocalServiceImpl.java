@@ -34,10 +34,10 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.permission.PermissionCheckerBag;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
@@ -501,21 +501,23 @@ public class PermissionLocalServiceImpl extends PermissionLocalServiceBaseImpl {
 			String actionId)
 		throws PortalException, SystemException {
 
-		if (scope == ResourceImpl.SCOPE_COMPANY) {
+		if (scope == ResourceConstants.SCOPE_COMPANY) {
 
 			// Remove group permission
 
 			unsetRolePermissions(
-				roleId, companyId, name, ResourceImpl.SCOPE_GROUP, actionId);
+				roleId, companyId, name, ResourceConstants.SCOPE_GROUP,
+				actionId);
 		}
-		else if (scope == ResourceImpl.SCOPE_GROUP) {
+		else if (scope == ResourceConstants.SCOPE_GROUP) {
 
 			// Remove company permission
 
 			unsetRolePermissions(
-				roleId, companyId, name, ResourceImpl.SCOPE_COMPANY, actionId);
+				roleId, companyId, name, ResourceConstants.SCOPE_COMPANY,
+				actionId);
 		}
-		else if (scope == ResourceImpl.SCOPE_INDIVIDUAL) {
+		else if (scope == ResourceConstants.SCOPE_INDIVIDUAL) {
 			throw new NoSuchPermissionException();
 		}
 

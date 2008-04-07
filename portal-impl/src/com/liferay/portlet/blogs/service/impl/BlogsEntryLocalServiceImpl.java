@@ -35,8 +35,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.blogs.EntryContentException;
@@ -287,7 +287,7 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			entry.getCompanyId(), BlogsEntry.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, entry.getEntryId());
+			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId());
 
 		// Entry
 

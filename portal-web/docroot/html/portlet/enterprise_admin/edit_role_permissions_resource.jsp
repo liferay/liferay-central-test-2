@@ -75,14 +75,14 @@ for (int i = 0; i < curActions.size(); i++) {
 	boolean hasGroupScope = false;
 
 	if (scopeParam > 0) {
-		hasCompanyScope = (scopeParam == ResourceImpl.SCOPE_COMPANY);
-		hasGroupTemplateScope = (scopeParam == ResourceImpl.SCOPE_GROUP_TEMPLATE);
-		hasGroupScope = (scopeParam == ResourceImpl.SCOPE_GROUP);
+		hasCompanyScope = (scopeParam == ResourceConstants.SCOPE_COMPANY);
+		hasGroupTemplateScope = (scopeParam == ResourceConstants.SCOPE_GROUP_TEMPLATE);
+		hasGroupScope = (scopeParam == ResourceConstants.SCOPE_GROUP);
 	}
 	else {
-		hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceImpl.SCOPE_COMPANY, actionId);
-		hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
-		hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceImpl.SCOPE_GROUP, actionId);
+		hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_COMPANY, actionId);
+		hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+		hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), curResource, ResourceConstants.SCOPE_GROUP, actionId);
 	}
 %>
 
@@ -95,10 +95,10 @@ for (int i = 0; i < curActions.size(); i++) {
 				<c:when test="<%= role.getType() == RoleImpl.TYPE_REGULAR %>">
 					<select name="<portlet:namespace />scope<%= target %>" onchange="<portlet:namespace/>toggleGroupDiv('<%= target %>');">
 						<option value=""></option>
-							<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
+							<option <%= hasCompanyScope ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_COMPANY %>"><liferay-ui:message key="enterprise" /></option>
 
 							<c:if test="<%= !portletResource.equals(PortletKeys.ENTERPRISE_ADMIN) && !portletResource.equals(PortletKeys.ORGANIZATION_ADMIN) && !portletResource.equals(PortletKeys.PORTAL) %>">
-								<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceImpl.SCOPE_GROUP %>"><liferay-ui:message key="communities" /></option>
+								<option <%= (hasGroupScope) ? "selected" : "" %> value="<%= ResourceConstants.SCOPE_GROUP %>"><liferay-ui:message key="communities" /></option>
 							</c:if>
 					</select>
 				</c:when>
@@ -115,13 +115,13 @@ for (int i = 0; i < curActions.size(); i++) {
 					<liferay-ui:input-checkbox
 						param='<%= "scope" + target %>'
 						defaultValue="<%= hasGroupTemplateScope %>"
-						onClick='<%= "document.getElementById('" + renderResponse.getNamespace() + "scope" + target + "').value = (this.checked ? '" + ResourceImpl.SCOPE_GROUP + "' : '');" %>'
+						onClick='<%= "document.getElementById('" + renderResponse.getNamespace() + "scope" + target + "').value = (this.checked ? '" + ResourceConstants.SCOPE_GROUP + "' : '');" %>'
 						disabled="<%= disabled %>"
 					/>
 
 					<c:if test="<%= hasGroupTemplateScope %>">
 						<script type="text/javascript">
-							document.getElementById("<%= renderResponse.getNamespace() %>scope<%= target %>").value =	"<%= ResourceImpl.SCOPE_GROUP %>";
+							document.getElementById("<%= renderResponse.getNamespace() %>scope<%= target %>").value =	"<%= ResourceConstants.SCOPE_GROUP %>";
 						</script>
 					</c:if>
 				</c:when>
@@ -146,7 +146,7 @@ for (int i = 0; i < curActions.size(); i++) {
 				List rolePermissions = new ArrayList();
 
 				rolePermissions.add(curResource);
-				rolePermissions.add(new Integer(ResourceImpl.SCOPE_GROUP));
+				rolePermissions.add(new Integer(ResourceConstants.SCOPE_GROUP));
 				rolePermissions.add(actionId);
 				rolePermissions.add(new Long(role.getRoleId()));
 

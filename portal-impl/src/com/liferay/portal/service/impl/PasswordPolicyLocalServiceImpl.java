@@ -35,8 +35,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
 import com.liferay.portal.model.PasswordPolicyRel;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.ldap.PortalLDAPUtil;
 import com.liferay.portal.service.base.PasswordPolicyLocalServiceBaseImpl;
 import com.liferay.portal.util.PropsValues;
@@ -148,7 +148,7 @@ public class PasswordPolicyLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			passwordPolicy.getCompanyId(), PasswordPolicy.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL,
+			ResourceConstants.SCOPE_INDIVIDUAL,
 			passwordPolicy.getPasswordPolicyId());
 
 		// Password policy

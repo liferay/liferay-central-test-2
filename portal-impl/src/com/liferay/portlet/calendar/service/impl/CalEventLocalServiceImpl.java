@@ -43,8 +43,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Contact;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -395,7 +395,7 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			event.getCompanyId(), CalEvent.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, event.getEventId());
+			ResourceConstants.SCOPE_INDIVIDUAL, event.getEventId());
 
 		// Event
 

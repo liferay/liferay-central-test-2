@@ -25,8 +25,8 @@ package com.liferay.portlet.tasks.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.tasks.NoSuchProposalException;
 import com.liferay.portlet.tasks.ProposalDueDateException;
@@ -229,7 +229,7 @@ public class TasksProposalLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			proposal.getCompanyId(), TasksProposal.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, proposal.getProposalId());
+			ResourceConstants.SCOPE_INDIVIDUAL, proposal.getProposalId());
 
 		// Proposal
 

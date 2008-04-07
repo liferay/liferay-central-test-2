@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.imagegallery.DuplicateFolderNameException;
 import com.liferay.portlet.imagegallery.FolderNameException;
@@ -233,7 +233,7 @@ public class IGFolderLocalServiceImpl extends IGFolderLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			folder.getCompanyId(), IGFolder.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, folder.getFolderId());
+			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
 
 		// Folder
 

@@ -24,7 +24,7 @@ package com.liferay.portal.upgrade.v4_3_0.util;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.impl.ResourceImpl;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.util.BaseUpgradeColumnImpl;
 import com.liferay.portal.upgrade.util.UpgradeColumn;
@@ -64,14 +64,14 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		int scope = _codeIdColumn.getScope();
 
-		if (scope == ResourceImpl.SCOPE_COMPANY) {
+		if (scope == ResourceConstants.SCOPE_COMPANY) {
 			return primKey;
 		}
-		else if (scope == ResourceImpl.SCOPE_GROUP) {
+		else if (scope == ResourceConstants.SCOPE_GROUP) {
 			return String.valueOf(_groupIdMapper.getNewValue(
 				new Long(GetterUtil.getLong(primKey))));
 		}
-		else if (scope == ResourceImpl.SCOPE_INDIVIDUAL) {
+		else if (scope == ResourceConstants.SCOPE_INDIVIDUAL) {
 			String name = (String)_nameColumn.getOldValue();
 
 			if (name.startsWith("com.liferay.")) {

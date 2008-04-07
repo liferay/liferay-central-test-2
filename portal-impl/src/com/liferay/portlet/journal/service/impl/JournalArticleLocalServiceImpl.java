@@ -40,8 +40,8 @@ import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.servlet.filters.layoutcache.LayoutCacheUtil;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -725,7 +725,8 @@ public class JournalArticleLocalServiceImpl
 
 			resourceLocalService.deleteResource(
 				article.getCompanyId(), JournalArticle.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL, article.getResourcePrimKey());
+				ResourceConstants.SCOPE_INDIVIDUAL,
+				article.getResourcePrimKey());
 		}
 
 		// Resource

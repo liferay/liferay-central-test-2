@@ -27,8 +27,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portlet.bookmarks.EntryURLException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
@@ -254,7 +254,7 @@ public class BookmarksEntryLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			entry.getCompanyId(), BookmarksEntry.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, entry.getEntryId());
+			ResourceConstants.SCOPE_INDIVIDUAL, entry.getEntryId());
 
 		// Entry
 

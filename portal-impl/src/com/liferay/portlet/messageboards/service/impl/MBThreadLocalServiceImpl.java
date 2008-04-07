@@ -25,9 +25,9 @@ package com.liferay.portlet.messageboards.service.impl;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -126,7 +126,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			if (!message.isDiscussion()) {
 				resourceLocalService.deleteResource(
 					message.getCompanyId(), MBMessage.class.getName(),
-					ResourceImpl.SCOPE_INDIVIDUAL, message.getMessageId());
+					ResourceConstants.SCOPE_INDIVIDUAL, message.getMessageId());
 			}
 
 			// Message

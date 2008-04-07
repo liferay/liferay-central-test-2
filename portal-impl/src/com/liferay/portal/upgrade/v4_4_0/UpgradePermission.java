@@ -25,9 +25,9 @@ package com.liferay.portal.upgrade.v4_4_0;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -279,7 +279,7 @@ public class UpgradePermission extends UpgradeProcess {
 		deleteRolesPermissions("Community Owner");
 		deleteRolesPermissions("Organization Administrator");
 
-		deleteUsersPermissions(ResourceImpl.SCOPE_GROUP);
+		deleteUsersPermissions(ResourceConstants.SCOPE_GROUP);
 	}
 
 	protected void updatePermission(

@@ -33,8 +33,8 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.plugin.ModuleId;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalUtil;
@@ -310,7 +310,8 @@ public class SCProductEntryLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			productEntry.getCompanyId(), SCProductEntry.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, productEntry.getProductEntryId());
+			ResourceConstants.SCOPE_INDIVIDUAL,
+			productEntry.getProductEntryId());
 
 		// Product entry
 

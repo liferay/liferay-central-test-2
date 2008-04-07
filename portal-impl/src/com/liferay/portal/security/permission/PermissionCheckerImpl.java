@@ -29,12 +29,12 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.PortletImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
@@ -360,7 +360,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		try {
 			Resource resource = ResourceLocalServiceUtil.getResource(
-				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
 
 			resourceIds[0] = resource.getResourceId();
 		}
@@ -368,7 +368,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.SCOPE_INDIVIDUAL + " " + primKey +
+						ResourceConstants.SCOPE_INDIVIDUAL + " " + primKey +
 							" does not exist");
 			}
 		}
@@ -378,7 +378,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		try {
 			if (groupId > 0) {
 				Resource resource = ResourceLocalServiceUtil.getResource(
-					companyId, name, ResourceImpl.SCOPE_GROUP,
+					companyId, name, ResourceConstants.SCOPE_GROUP,
 					String.valueOf(groupId));
 
 				resourceIds[1] = resource.getResourceId();
@@ -388,7 +388,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.SCOPE_GROUP + " " + groupId +
+						ResourceConstants.SCOPE_GROUP + " " + groupId +
 							" does not exist");
 			}
 		}
@@ -398,7 +398,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		try {
 			if (groupId > 0) {
 				Resource resource = ResourceLocalServiceUtil.getResource(
-					companyId, name, ResourceImpl.SCOPE_GROUP_TEMPLATE,
+					companyId, name, ResourceConstants.SCOPE_GROUP_TEMPLATE,
 					String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID));
 
 				resourceIds[2] = resource.getResourceId();
@@ -408,7 +408,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.SCOPE_GROUP_TEMPLATE + " " +
+						ResourceConstants.SCOPE_GROUP_TEMPLATE + " " +
 							GroupImpl.DEFAULT_PARENT_GROUP_ID +
 								" does not exist");
 			}
@@ -418,7 +418,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 
 		try {
 			Resource resource = ResourceLocalServiceUtil.getResource(
-				companyId, name, ResourceImpl.SCOPE_COMPANY,
+				companyId, name, ResourceConstants.SCOPE_COMPANY,
 				String.valueOf(companyId));
 
 			resourceIds[3] = resource.getResourceId();
@@ -427,7 +427,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
 					"Resource " + companyId + " " + name + " " +
-						ResourceImpl.SCOPE_COMPANY + " " + companyId +
+						ResourceConstants.SCOPE_COMPANY + " " + companyId +
 							" does not exist");
 			}
 		}

@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.bookmarks.FolderNameException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -221,7 +221,7 @@ public class BookmarksFolderLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			folder.getCompanyId(), BookmarksFolder.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, folder.getFolderId());
+			ResourceConstants.SCOPE_INDIVIDUAL, folder.getFolderId());
 
 		// Folder
 

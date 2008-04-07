@@ -159,7 +159,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 	function <portlet:namespace />toggleGroupDiv(target) {
 		var scope = document.<portlet:namespace />fm['<portlet:namespace />scope' + target].value;
 
-		if (scope == '<%= ResourceImpl.SCOPE_GROUP %>') {
+		if (scope == '<%= ResourceConstants.SCOPE_GROUP %>') {
 			document.getElementById("<portlet:namespace />groupDiv" + target).style.display = "";
 		}
 		else {
@@ -307,9 +307,9 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 			ResultRow row = new ResultRow(new Object[]{permission, role}, actionId, i);
 
-			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceImpl.SCOPE_COMPANY, actionId);
-			boolean hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
-			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceImpl.SCOPE_GROUP, actionId);
+			boolean hasCompanyScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_COMPANY, actionId);
+			boolean hasGroupTemplateScope = ((role.getType() == RoleImpl.TYPE_COMMUNITY) || (role.getType() == RoleImpl.TYPE_ORGANIZATION)) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
+			boolean hasGroupScope = (role.getType() == RoleImpl.TYPE_REGULAR) && PermissionLocalServiceUtil.hasRolePermission(role.getRoleId(), company.getCompanyId(), resource.getName(), ResourceConstants.SCOPE_GROUP, actionId);
 
 			PortletURL editResourcePermissionsURL = renderResponse.createRenderURL();
 

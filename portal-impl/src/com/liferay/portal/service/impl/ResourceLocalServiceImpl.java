@@ -30,8 +30,8 @@ import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceCode;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.PermissionsListFilter;
 import com.liferay.portal.security.permission.PermissionsListFilterFactory;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -75,7 +75,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		// Company
 
 		addResource(
-			companyId, name, ResourceImpl.SCOPE_COMPANY,
+			companyId, name, ResourceConstants.SCOPE_COMPANY,
 			String.valueOf(companyId));
 
 		// Guest
@@ -84,14 +84,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			companyId, GroupImpl.GUEST);
 
 		addResource(
-			companyId, name, ResourceImpl.SCOPE_GROUP,
+			companyId, name, ResourceConstants.SCOPE_GROUP,
 			String.valueOf(guestGroup.getGroupId()));
 
 		// Group
 
 		if ((groupId > 0) && (guestGroup.getGroupId() != groupId)) {
 			addResource(
-				companyId, name, ResourceImpl.SCOPE_GROUP,
+				companyId, name, ResourceConstants.SCOPE_GROUP,
 				String.valueOf(groupId));
 		}
 
@@ -100,7 +100,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			// Individual
 
 			Resource resource = addResource(
-				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
 
 			// Permissions
 
@@ -230,14 +230,14 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 		// Company
 
 		addResource(
-			companyId, name, ResourceImpl.SCOPE_COMPANY,
+			companyId, name, ResourceConstants.SCOPE_COMPANY,
 			String.valueOf(companyId));
 
 		logAddResources(name, primKey, stopWatch, 2);
 
 		if (groupId > 0) {
 			addResource(
-				companyId, name, ResourceImpl.SCOPE_GROUP,
+				companyId, name, ResourceConstants.SCOPE_GROUP,
 				String.valueOf(groupId));
 		}
 
@@ -248,7 +248,7 @@ public class ResourceLocalServiceImpl extends ResourceLocalServiceBaseImpl {
 			// Individual
 
 			Resource resource = addResource(
-				companyId, name, ResourceImpl.SCOPE_INDIVIDUAL, primKey);
+				companyId, name, ResourceConstants.SCOPE_INDIVIDUAL, primKey);
 
 			logAddResources(name, primKey, stopWatch, 4);
 

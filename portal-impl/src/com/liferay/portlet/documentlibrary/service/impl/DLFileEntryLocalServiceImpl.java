@@ -31,8 +31,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.MimeTypesUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -481,7 +481,7 @@ public class DLFileEntryLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			fileEntry.getCompanyId(), DLFileEntry.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, fileEntry.getFileEntryId());
+			ResourceConstants.SCOPE_INDIVIDUAL, fileEntry.getFileEntryId());
 
 		// File entry
 

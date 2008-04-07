@@ -32,8 +32,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -286,7 +286,7 @@ public class IGImageLocalServiceImpl extends IGImageLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			image.getCompanyId(), IGImage.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, image.getImageId());
+			ResourceConstants.SCOPE_INDIVIDUAL, image.getImageId());
 
 		// Images
 

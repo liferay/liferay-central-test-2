@@ -35,11 +35,11 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Location;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ListTypeImpl;
 import com.liferay.portal.model.impl.OrganizationImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.OrganizationLocalServiceBaseImpl;
@@ -226,7 +226,8 @@ public class OrganizationLocalServiceImpl
 		}
 
 		resourceLocalService.deleteResource(
-			organization.getCompanyId(), name, ResourceImpl.SCOPE_INDIVIDUAL,
+			organization.getCompanyId(), name,
+			ResourceConstants.SCOPE_INDIVIDUAL,
 			organization.getOrganizationId());
 
 		// Organization

@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.wiki.DuplicateNodeNameException;
 import com.liferay.portlet.wiki.NodeNameException;
@@ -224,7 +224,7 @@ public class WikiNodeLocalServiceImpl extends WikiNodeLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			node.getCompanyId(), WikiNode.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, node.getNodeId());
+			ResourceConstants.SCOPE_INDIVIDUAL, node.getNodeId());
 
 		// Node
 

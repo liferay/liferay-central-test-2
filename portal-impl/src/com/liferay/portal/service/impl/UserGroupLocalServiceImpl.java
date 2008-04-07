@@ -32,8 +32,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.UserGroupImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupLocalServiceBaseImpl;
@@ -124,7 +124,7 @@ public class UserGroupLocalServiceImpl extends UserGroupLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			userGroup.getCompanyId(), UserGroup.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, userGroup.getUserGroupId());
+			ResourceConstants.SCOPE_INDIVIDUAL, userGroup.getUserGroupId());
 
 		// User Group
 

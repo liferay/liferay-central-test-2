@@ -25,8 +25,8 @@ package com.liferay.portlet.shopping.service.impl;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.shopping.CategoryNameException;
 import com.liferay.portlet.shopping.model.ShoppingCategory;
@@ -209,7 +209,7 @@ public class ShoppingCategoryLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			category.getCompanyId(), ShoppingCategory.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, category.getCategoryId());
+			ResourceConstants.SCOPE_INDIVIDUAL, category.getCategoryId());
 
 		// Category
 

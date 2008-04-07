@@ -44,7 +44,7 @@ boolean runtimePortlet = (renderPortletResource != null) && renderPortletResourc
 boolean denyAccess = false;
 
 try {
-	ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceImpl.SCOPE_INDIVIDUAL, portletPrimaryKey);
+	ResourceLocalServiceUtil.getResource(company.getCompanyId(), rootPortletId, ResourceConstants.SCOPE_INDIVIDUAL, portletPrimaryKey);
 }
 catch (NoSuchResourceException nsre) {
 	boolean addDefaultResource = false;

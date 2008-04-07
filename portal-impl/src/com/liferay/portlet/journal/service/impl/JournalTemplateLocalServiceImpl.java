@@ -29,8 +29,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -326,7 +326,7 @@ public class JournalTemplateLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			template.getCompanyId(), JournalTemplate.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, template.getId());
+			ResourceConstants.SCOPE_INDIVIDUAL, template.getId());
 
 		// Template
 

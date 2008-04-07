@@ -29,9 +29,9 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.messageboards.CategoryNameException;
 import com.liferay.portlet.messageboards.model.MBCategory;
@@ -251,7 +251,7 @@ public class MBCategoryLocalServiceImpl extends MBCategoryLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			category.getCompanyId(), MBCategory.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, category.getCategoryId());
+			ResourceConstants.SCOPE_INDIVIDUAL, category.getCategoryId());
 
 		// Category
 

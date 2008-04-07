@@ -20,30 +20,22 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model.impl;
-
-import com.liferay.portal.PortalException;
-import com.liferay.portal.SystemException;
-import com.liferay.portal.model.Resource;
-import com.liferay.portal.model.ResourceCode;
-import com.liferay.portal.service.ResourceCodeLocalServiceUtil;
+package com.liferay.portal.model;
 
 /**
- * <a href="ResourceImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ResourceConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ResourceImpl extends ResourceModelImpl implements Resource {
+public interface ResourceConstants {
 
-	public ResourceImpl() {
-	}
+	public static final int SCOPE_INDIVIDUAL = 4;
 
-	public String getName() throws PortalException, SystemException {
-		ResourceCode resourceCode =
-			ResourceCodeLocalServiceUtil.getResourceCode(getCodeId());
+	public static final int SCOPE_GROUP = 2;
 
-		return resourceCode.getName();
-	}
+	public static final int SCOPE_GROUP_TEMPLATE = 3;
+
+	public static final int SCOPE_COMPANY = 1;
 
 }

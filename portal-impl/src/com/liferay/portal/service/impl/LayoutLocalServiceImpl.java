@@ -61,6 +61,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.User;
@@ -68,7 +69,6 @@ import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.PortletImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
@@ -317,7 +317,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			layout.getCompanyId(), Layout.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, layout.getPlid());
+			ResourceConstants.SCOPE_INDIVIDUAL, layout.getPlid());
 
 		// Layout
 
@@ -1937,8 +1937,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		List<Permission> permissions =
 			permissionLocalService.getGroupPermissions(
-				groupId, companyId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
-				resourcePrimKey);
+				groupId, companyId, resourceName,
+				ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey);
 
 		List<String> actions = ResourceActionsUtil.getActions(permissions);
 
@@ -1961,7 +1961,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		List<Role> roles = layoutCache.getGroupRoles(groupId);
 
 		Element groupEl = exportRoles(
-			companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+			companyId, resourceName, ResourceConstants.SCOPE_GROUP,
 			String.valueOf(groupId), parentEl, entityName + "-roles", roles);
 
 		if (groupEl.elements().isEmpty()) {
@@ -2029,7 +2029,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			List<Role> entityRoles = layoutCache.getGroupRoles(entityGroupId);
 
 			Element entityEl = exportRoles(
-				companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+				companyId, resourceName, ResourceConstants.SCOPE_GROUP,
 				String.valueOf(groupId), entityRolesEl, entityName,
 				entityRoles);
 
@@ -2627,7 +2627,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			List<Permission> permissions =
 				permissionLocalService.getUserPermissions(
 					user.getUserId(), companyId, resourceName,
-					ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey);
+					ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey);
 
 			List<String> actions = ResourceActionsUtil.getActions(permissions);
 
@@ -2671,7 +2671,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			List<Role> userRoles = layoutCache.getUserRoles(userId);
 
 			Element userEl = exportRoles(
-				companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+				companyId, resourceName, ResourceConstants.SCOPE_GROUP,
 				String.valueOf(groupId), userRolesEl, "user", userRoles);
 
 			if (userEl.elements().isEmpty()) {
@@ -2849,8 +2849,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		List<String> actions = getActions(actionEl);
 
 		Resource resource = layoutCache.getResource(
-			companyId, groupId, resourceName, ResourceImpl.SCOPE_INDIVIDUAL,
-			resourcePrimKey, portletActions);
+			companyId, groupId, resourceName,
+			ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
+			portletActions);
 
 		permissionLocalService.setGroupPermissions(
 			groupId, actions.toArray(new String[actions.size()]),
@@ -2870,7 +2871,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		importRolePermissions(
-			layoutCache, companyId, resourceName, ResourceImpl.SCOPE_GROUP,
+			layoutCache, companyId, resourceName, ResourceConstants.SCOPE_GROUP,
 			String.valueOf(groupId), entityRolesEl, true);
 	}
 
@@ -2945,8 +2946,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			else {
 				importRolePermissions(
 					layoutCache, companyId, resourceName,
-					ResourceImpl.SCOPE_GROUP, String.valueOf(groupId), entityEl,
-					false);
+					ResourceConstants.SCOPE_GROUP, String.valueOf(groupId),
+					entityEl, false);
 			}
 		}
 	}
@@ -3445,7 +3446,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				Resource resource = layoutCache.getResource(
 					companyId, groupId, resourceName,
-					ResourceImpl.SCOPE_INDIVIDUAL, resourcePrimKey,
+					ResourceConstants.SCOPE_INDIVIDUAL, resourcePrimKey,
 					portletActions);
 
 				permissionLocalService.setUserPermissions(
@@ -3486,8 +3487,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			else {
 				importRolePermissions(
 					layoutCache, companyId, resourceName,
-					ResourceImpl.SCOPE_GROUP, String.valueOf(groupId), userEl,
-					false);
+					ResourceConstants.SCOPE_GROUP, String.valueOf(groupId),
+					userEl, false);
 			}
 		}
 	}

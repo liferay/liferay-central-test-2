@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.impl.PortletImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -178,7 +178,7 @@ public class UpdateLayoutAction extends Action {
 
 				ResourceLocalServiceUtil.deleteResource(
 					layout.getCompanyId(), rootPortletId,
-					ResourceImpl.SCOPE_INDIVIDUAL,
+					ResourceConstants.SCOPE_INDIVIDUAL,
 					PortletPermissionUtil.getPrimaryKey(
 						layout.getPlid(), portletId));
 			}

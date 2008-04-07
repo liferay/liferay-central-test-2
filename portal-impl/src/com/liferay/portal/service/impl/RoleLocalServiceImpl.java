@@ -33,8 +33,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.RoleLocalServiceBaseImpl;
@@ -198,7 +198,7 @@ public class RoleLocalServiceImpl extends RoleLocalServiceBaseImpl {
 		if ((role.getClassNameId() <= 0) && (role.getClassPK() <= 0)) {
 			resourceLocalService.deleteResource(
 				role.getCompanyId(), Role.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL, role.getRoleId());
+				ResourceConstants.SCOPE_INDIVIDUAL, role.getRoleId());
 		}
 
 		if ((role.getType() == RoleImpl.TYPE_COMMUNITY) ||

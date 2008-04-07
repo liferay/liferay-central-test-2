@@ -27,8 +27,8 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.DuplicateFeedIdException;
 import com.liferay.portlet.journal.FeedContentFieldException;
@@ -295,7 +295,7 @@ public class JournalFeedLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			feed.getCompanyId(), JournalFeed.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, feed.getId());
+			ResourceConstants.SCOPE_INDIVIDUAL, feed.getId());
 
 		// Feed
 

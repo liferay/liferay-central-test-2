@@ -331,13 +331,13 @@ public class ResourcePersistenceImpl extends BasePersistence
 		String finderMethodName = "findByCodeId";
 		String[] finderParams = new String[] {
 				Long.class.getName(),
-				
+
 				"java.lang.Integer", "java.lang.Integer",
 				"com.liferay.portal.kernel.util.OrderByComparator"
 			};
 		Object[] finderArgs = new Object[] {
 				new Long(codeId),
-				
+
 				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
 			};
 

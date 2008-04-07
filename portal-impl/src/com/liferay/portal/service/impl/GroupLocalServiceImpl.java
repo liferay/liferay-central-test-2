@@ -42,12 +42,12 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Resource;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
@@ -333,7 +333,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 			resourceLocalService.deleteResource(
 				group.getCompanyId(), Group.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL, group.getGroupId());
+				ResourceConstants.SCOPE_INDIVIDUAL, group.getGroupId());
 		}
 
 		// Group

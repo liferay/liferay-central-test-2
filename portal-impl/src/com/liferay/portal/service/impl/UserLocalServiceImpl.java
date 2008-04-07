@@ -64,13 +64,13 @@ import com.liferay.portal.model.Contact;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.PasswordPolicy;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.ContactImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
@@ -818,7 +818,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		resourceLocalService.deleteResource(
 			user.getCompanyId(), User.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, user.getUserId());
+			ResourceConstants.SCOPE_INDIVIDUAL, user.getUserId());
 
 		// Group roles
 

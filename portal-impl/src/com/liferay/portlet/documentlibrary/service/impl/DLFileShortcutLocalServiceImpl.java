@@ -24,8 +24,8 @@ package com.liferay.portlet.documentlibrary.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
 import com.liferay.portlet.documentlibrary.NoSuchFolderException;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
@@ -199,7 +199,8 @@ public class DLFileShortcutLocalServiceImpl
 
 		resourceLocalService.deleteResource(
 			fileShortcut.getCompanyId(), DLFileShortcut.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, fileShortcut.getFileShortcutId());
+			ResourceConstants.SCOPE_INDIVIDUAL,
+			fileShortcut.getFileShortcutId());
 
 		// File shortcut
 

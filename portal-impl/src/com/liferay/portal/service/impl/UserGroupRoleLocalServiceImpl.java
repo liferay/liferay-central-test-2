@@ -26,10 +26,10 @@ import com.liferay.portal.NoSuchUserGroupRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroupRole;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.service.base.UserGroupRoleLocalServiceBaseImpl;
 import com.liferay.portal.service.persistence.UserGroupRolePK;
@@ -229,7 +229,7 @@ public class UserGroupRoleLocalServiceImpl
 
 		resourceLocalService.addResource(
 			group.getCompanyId(), Group.class.getName(),
-			ResourceImpl.SCOPE_INDIVIDUAL, String.valueOf(groupId));
+			ResourceConstants.SCOPE_INDIVIDUAL, String.valueOf(groupId));
 	}
 
 }

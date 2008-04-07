@@ -28,9 +28,9 @@ import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
@@ -188,19 +188,19 @@ public class EditRolePermissionsAction extends PortletAction {
 				int scope = ParamUtil.getInteger(
 					req, "scope" + selResource + actionId);
 
-				if (scope == ResourceImpl.SCOPE_COMPANY) {
+				if (scope == ResourceConstants.SCOPE_COMPANY) {
 					PermissionServiceUtil.setRolePermission(
 						roleId, themeDisplay.getPortletGroupId(), selResource,
 						scope, String.valueOf(themeDisplay.getCompanyId()),
 						actionId);
 				}
-				else if (scope == ResourceImpl.SCOPE_GROUP) {
+				else if (scope == ResourceConstants.SCOPE_GROUP) {
 					if ((role.getType() == RoleImpl.TYPE_COMMUNITY) ||
 						(role.getType() == RoleImpl.TYPE_ORGANIZATION)) {
 
 						PermissionServiceUtil.setRolePermission(
 							roleId, themeDisplay.getPortletGroupId(),
-							selResource, ResourceImpl.SCOPE_GROUP_TEMPLATE,
+							selResource, ResourceConstants.SCOPE_GROUP_TEMPLATE,
 							String.valueOf(GroupImpl.DEFAULT_PARENT_GROUP_ID),
 							actionId);
 					}
@@ -218,12 +218,13 @@ public class EditRolePermissionsAction extends PortletAction {
 
 						PermissionServiceUtil.unsetRolePermissions(
 							roleId, themeDisplay.getPortletGroupId(),
-							selResource, ResourceImpl.SCOPE_GROUP, actionId);
+							selResource, ResourceConstants.SCOPE_GROUP,
+							actionId);
 
 						for (int j = 0; j < groupIds.length; j++) {
 							PermissionServiceUtil.setRolePermission(
 								roleId, themeDisplay.getPortletGroupId(),
-								selResource, ResourceImpl.SCOPE_GROUP,
+								selResource, ResourceConstants.SCOPE_GROUP,
 								groupIds[j], actionId);
 						}
 					}
@@ -234,15 +235,15 @@ public class EditRolePermissionsAction extends PortletAction {
 
 					PermissionServiceUtil.unsetRolePermissions(
 						roleId, themeDisplay.getPortletGroupId(), selResource,
-						ResourceImpl.SCOPE_COMPANY, actionId);
+						ResourceConstants.SCOPE_COMPANY, actionId);
 
 					PermissionServiceUtil.unsetRolePermissions(
 						roleId, themeDisplay.getPortletGroupId(), selResource,
-						ResourceImpl.SCOPE_GROUP_TEMPLATE, actionId);
+						ResourceConstants.SCOPE_GROUP_TEMPLATE, actionId);
 
 					PermissionServiceUtil.unsetRolePermissions(
 						roleId, themeDisplay.getPortletGroupId(), selResource,
-						ResourceImpl.SCOPE_GROUP, actionId);
+						ResourceConstants.SCOPE_GROUP, actionId);
 				}
 			}
 		}

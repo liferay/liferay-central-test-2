@@ -26,8 +26,8 @@ import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -120,7 +120,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 		try {
 			ResourceLocalServiceUtil.getResource(
 				layout.getCompanyId(), Layout.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL,
+				ResourceConstants.SCOPE_INDIVIDUAL,
 				String.valueOf(layout.getPlid()));
 		}
 		catch (NoSuchResourceException nsre) {

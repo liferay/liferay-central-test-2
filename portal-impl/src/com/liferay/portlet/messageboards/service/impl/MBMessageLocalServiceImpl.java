@@ -37,10 +37,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.ModelHintsUtil;
+import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.ResourceImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -782,7 +782,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if (!message.isDiscussion()) {
 			resourceLocalService.deleteResource(
 				message.getCompanyId(), MBMessage.class.getName(),
-				ResourceImpl.SCOPE_INDIVIDUAL, message.getMessageId());
+				ResourceConstants.SCOPE_INDIVIDUAL, message.getMessageId());
 		}
 
 		// Message
