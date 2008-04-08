@@ -30,8 +30,8 @@ import com.liferay.portlet.expando.ColumnNameException;
 import com.liferay.portlet.expando.ColumnTypeException;
 import com.liferay.portlet.expando.DuplicateColumnNameException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
-import com.liferay.portlet.expando.model.impl.ExpandoColumnImpl;
 import com.liferay.portlet.expando.model.impl.ExpandoTableImpl;
 import com.liferay.portlet.expando.service.base.ExpandoColumnLocalServiceBaseImpl;
 
@@ -249,22 +249,22 @@ public class ExpandoColumnLocalServiceImpl
 			throw new DuplicateColumnNameException();
 		}
 
-		if ((type != ExpandoColumnImpl.BOOLEAN) &&
-			(type != ExpandoColumnImpl.BOOLEAN_ARRAY) &&
-			(type != ExpandoColumnImpl.DATE) &&
-			(type != ExpandoColumnImpl.DATE_ARRAY) &&
-			(type != ExpandoColumnImpl.DOUBLE) &&
-			(type != ExpandoColumnImpl.DOUBLE_ARRAY) &&
-			(type != ExpandoColumnImpl.FLOAT) &&
-			(type != ExpandoColumnImpl.FLOAT_ARRAY) &&
-			(type != ExpandoColumnImpl.INTEGER) &&
-			(type != ExpandoColumnImpl.INTEGER_ARRAY) &&
-			(type != ExpandoColumnImpl.LONG) &&
-			(type != ExpandoColumnImpl.LONG_ARRAY) &&
-			(type != ExpandoColumnImpl.SHORT) &&
-			(type != ExpandoColumnImpl.SHORT_ARRAY) &&
-			(type != ExpandoColumnImpl.STRING) &&
-			(type != ExpandoColumnImpl.STRING_ARRAY)) {
+		if ((type != ExpandoColumnConstants.BOOLEAN) &&
+			(type != ExpandoColumnConstants.BOOLEAN_ARRAY) &&
+			(type != ExpandoColumnConstants.DATE) &&
+			(type != ExpandoColumnConstants.DATE_ARRAY) &&
+			(type != ExpandoColumnConstants.DOUBLE) &&
+			(type != ExpandoColumnConstants.DOUBLE_ARRAY) &&
+			(type != ExpandoColumnConstants.FLOAT) &&
+			(type != ExpandoColumnConstants.FLOAT_ARRAY) &&
+			(type != ExpandoColumnConstants.INTEGER) &&
+			(type != ExpandoColumnConstants.INTEGER_ARRAY) &&
+			(type != ExpandoColumnConstants.LONG) &&
+			(type != ExpandoColumnConstants.LONG_ARRAY) &&
+			(type != ExpandoColumnConstants.SHORT) &&
+			(type != ExpandoColumnConstants.SHORT_ARRAY) &&
+			(type != ExpandoColumnConstants.STRING) &&
+			(type != ExpandoColumnConstants.STRING_ARRAY)) {
 
 			throw new ColumnTypeException();
 		}
