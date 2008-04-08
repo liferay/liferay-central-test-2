@@ -25,9 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.WebDAVProps;
 import com.liferay.portal.model.WebDAVPropsSoap;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -64,22 +64,22 @@ public class WebDAVPropsModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "WebDAVProps";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "webDavPropsId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "companyId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "classPK", new Integer(Types.BIGINT) },
-
+			
 
 			{ "props", new Integer(Types.CLOB) }
 		};

@@ -26,9 +26,9 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.Address;
 import com.liferay.portal.model.AddressSoap;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -65,55 +65,55 @@ public class AddressModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "Address";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "addressId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "companyId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userName", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "classPK", new Integer(Types.BIGINT) },
-
+			
 
 			{ "street1", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "street2", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "street3", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "city", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "zip", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "regionId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "countryId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "typeId", new Integer(Types.INTEGER) },
-
+			
 
 			{ "mailing", new Integer(Types.BOOLEAN) },
-
+			
 
 			{ "primary_", new Integer(Types.BOOLEAN) }
 		};

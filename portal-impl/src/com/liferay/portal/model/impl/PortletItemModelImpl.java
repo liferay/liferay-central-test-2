@@ -25,9 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletItemSoap;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -64,31 +64,31 @@ public class PortletItemModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "PortletItem";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "portletItemId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "groupId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "companyId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userName", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "name", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "portletId", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "classNameId", new Integer(Types.BIGINT) }
 		};

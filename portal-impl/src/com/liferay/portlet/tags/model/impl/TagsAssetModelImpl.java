@@ -25,8 +25,8 @@ package com.liferay.portlet.tags.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tags.model.TagsAsset;
@@ -66,67 +66,67 @@ public class TagsAssetModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "TagsAsset";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "assetId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "groupId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "companyId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userName", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "classPK", new Integer(Types.BIGINT) },
-
+			
 
 			{ "startDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "endDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "publishDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "mimeType", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "title", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "description", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "summary", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "url", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "height", new Integer(Types.INTEGER) },
-
+			
 
 			{ "width", new Integer(Types.INTEGER) },
-
+			
 
 			{ "priority", new Integer(Types.DOUBLE) },
-
+			
 
 			{ "viewCount", new Integer(Types.INTEGER) }
 		};

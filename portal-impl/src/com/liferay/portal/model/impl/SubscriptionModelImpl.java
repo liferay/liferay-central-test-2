@@ -25,9 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.SubscriptionSoap;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -64,28 +64,28 @@ public class SubscriptionModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "Subscription";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "subscriptionId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "companyId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userName", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "classPK", new Integer(Types.BIGINT) },
-
+			
 
 			{ "frequency", new Integer(Types.VARCHAR) }
 		};

@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import com.liferay.portlet.tasks.model.TasksProposal;
@@ -67,40 +67,40 @@ public class TasksProposalModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "TasksProposal";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "proposalId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "groupId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "companyId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "userName", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "classPK", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "name", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "description", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "publishDate", new Integer(Types.TIMESTAMP) },
-
+			
 
 			{ "dueDate", new Integer(Types.TIMESTAMP) }
 		};

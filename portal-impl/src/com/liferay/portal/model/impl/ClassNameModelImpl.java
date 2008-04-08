@@ -25,9 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.ClassNameSoap;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -63,7 +63,7 @@ public class ClassNameModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "ClassName_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "classNameId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "value", new Integer(Types.VARCHAR) }
 		};

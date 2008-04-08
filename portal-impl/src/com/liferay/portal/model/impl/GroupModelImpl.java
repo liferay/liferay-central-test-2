@@ -25,9 +25,9 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.GroupSoap;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
 
 import java.io.Serializable;
@@ -63,40 +63,40 @@ public class GroupModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "Group_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "groupId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "companyId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "creatorUserId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "classPK", new Integer(Types.BIGINT) },
-
+			
 
 			{ "parentGroupId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "liveGroupId", new Integer(Types.BIGINT) },
-
+			
 
 			{ "name", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "description", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "type_", new Integer(Types.INTEGER) },
-
+			
 
 			{ "typeSettings", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "friendlyURL", new Integer(Types.VARCHAR) },
-
+			
 
 			{ "active_", new Integer(Types.BOOLEAN) }
 		};
