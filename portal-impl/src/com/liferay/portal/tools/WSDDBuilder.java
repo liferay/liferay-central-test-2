@@ -25,6 +25,7 @@ package com.liferay.portal.tools;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ant.Java2WsddTask;
 
@@ -44,6 +45,10 @@ import org.dom4j.Element;
  *
  */
 public class WSDDBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		if (args.length == 2) {
