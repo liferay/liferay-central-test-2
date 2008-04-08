@@ -24,10 +24,13 @@ package com.liferay.portlet.social.service.persistence;
 
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.model.SocialRelation;
+import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.portlet.social.model.impl.SocialRelationImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
@@ -53,8 +56,11 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 	public static String FIND_BY_U_T =
 		SocialRelationFinder.class.getName() + ".findByU_T";
 
-	public static String FIND_BY_U_U_T =
-		SocialRelationFinder.class.getName() + ".findByU_U_T";
+	public static String FIND_BY_U_U_T_BI =
+		SocialRelationFinder.class.getName() + ".findByU_U_T_BI";
+
+	public static String FIND_BY_U_U_T_UNI =
+		SocialRelationFinder.class.getName() + ".findByU_U_T_UNI";
 
 	public int countByU_T(long userId, int type) throws SystemException {
 		Session session = null;
@@ -64,6 +70,12 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 
 			String sql = CustomSQLUtil.get(COUNT_BY_U_T);
 
+			if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
+					type == SocialRelationConstants.TYPE_UNI_PARENT) {
+				sql = StringUtil.replace(
+					sql,"(SocialRelation.userId2 = ?) OR", StringPool.BLANK);
+			}
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
@@ -71,7 +83,12 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(userId);
-			qPos.add(userId);
+
+			if (type != SocialRelationConstants.TYPE_UNI_CHILD &&
+					type != SocialRelationConstants.TYPE_UNI_PARENT) {
+				qPos.add(userId);
+			}
+
 			qPos.add(type);
 
 			Iterator<Long> itr = q.list().iterator();
@@ -105,6 +122,12 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_U_T);
 
+			if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
+					type == SocialRelationConstants.TYPE_UNI_PARENT) {
+				sql = StringUtil.replace(
+					sql,"(SocialRelation.userId2 = ?) OR", StringPool.BLANK);
+			}
+
 			SQLQuery q = session.createSQLQuery(sql);
 
 			q.addEntity("SocialRelation", SocialRelationImpl.class);
@@ -112,7 +135,12 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(userId);
-			qPos.add(userId);
+
+			if (type != SocialRelationConstants.TYPE_UNI_CHILD &&
+					type != SocialRelationConstants.TYPE_UNI_PARENT) {
+				qPos.add(userId);
+			}
+
 			qPos.add(type);
 
 			return (List<SocialRelation>)QueryUtil.list(
@@ -134,7 +162,12 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_U_U_T);
+			String sql = CustomSQLUtil.get(FIND_BY_U_U_T_BI);
+
+			if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
+					type == SocialRelationConstants.TYPE_UNI_PARENT) {
+				sql = CustomSQLUtil.get(FIND_BY_U_U_T_UNI);
+			}
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -145,9 +178,14 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 			qPos.add(userId1);
 			qPos.add(userId2);
 			qPos.add(type);
-			qPos.add(userId1);
-			qPos.add(userId2);
-			qPos.add(type);
+
+
+			if (type != SocialRelationConstants.TYPE_UNI_CHILD &&
+					type != SocialRelationConstants.TYPE_UNI_PARENT) {
+				qPos.add(userId2);
+				qPos.add(userId1);
+				qPos.add(type);
+			}
 
 			Iterator<SocialRelation> itr = q.list().iterator();
 

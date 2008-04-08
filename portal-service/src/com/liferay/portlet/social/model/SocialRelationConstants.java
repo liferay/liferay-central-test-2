@@ -26,10 +26,21 @@ package com.liferay.portlet.social.model;
  * <a href="SocialRelationConstants.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public interface SocialRelationConstants {
 
-	public static final int TYPE_FRIEND = 1;
+	public static final int TYPE_BI_CO_WORKER = 1;
+
+	public static final int TYPE_BI_FRIEND = 2;
+
+	public static final int TYPE_BI_SIBLING = 3;
+
+	public static final int TYPE_BI_SPOUSE = 4;
+
+	public static final int TYPE_UNI_CHILD = 5;
+
+	public static final int TYPE_UNI_PARENT = 6;
 
 }

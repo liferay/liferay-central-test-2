@@ -33,8 +33,8 @@
 				SocialRelation
 			WHERE
 				(
-					(SocialRelation.userId1 = ?) OR
-					(SocialRelation.userId2 = ?)
+					(SocialRelation.userId2 = ?) OR
+					(SocialRelation.userId1 = ?)
 				) AND
 				(SocialRelation.type_ = ?)
 		]]>
@@ -47,13 +47,13 @@
 				SocialRelation
 			WHERE
 				(
-					(SocialRelation.userId1 = ?) OR
-					(SocialRelation.userId2 = ?)
+					(SocialRelation.userId2 = ?) OR
+					(SocialRelation.userId1 = ?)
 				) AND
 				(SocialRelation.type_ = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.findByU_U_T">
+	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.findByU_U_T_BI">
 		<![CDATA[
 			SELECT
 				{SocialRelation.*}
@@ -70,6 +70,18 @@
 					(SocialRelation.userId2 = ?) AND
 					(SocialRelation.type_ = ?)
 				)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.findByU_U_T_UNI">
+		<![CDATA[
+			SELECT
+				{SocialRelation.*}
+			FROM
+				SocialRelation
+			WHERE
+				(SocialRelation.userId1 = ?) AND
+				(SocialRelation.userId2 = ?) AND
+				(SocialRelation.type_ = ?)
 		]]>
 	</sql>
 </custom-sql>

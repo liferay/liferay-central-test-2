@@ -87,6 +87,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
@@ -116,6 +117,7 @@ import org.apache.commons.logging.LogFactory;
  *
  * @author Brian Wing Shun Chan
  * @author Scott Lee
+ * @author Raymond Augé
  *
  */
 public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
@@ -997,9 +999,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put(
-			"socialRelation",
-			new Long[] {userId, userId, userId, new Long(type)});
+		if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
+				type == SocialRelationConstants.TYPE_UNI_PARENT) {
+			params.put(
+				"socialRelationUnidirectional",
+				new Long[] {userId, new Long(type)});
+		}
+		else {
+			params.put(
+				"socialRelationBidirectional",
+				new Long[] {userId, userId, userId, new Long(type)});
+		}
 
 		return search(
 			user.getCompanyId(), null, null, params, begin, end, null);
@@ -1013,9 +1023,17 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put(
-			"socialRelation",
-			new Long[] {userId, userId, userId, new Long(type)});
+		if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
+				type == SocialRelationConstants.TYPE_UNI_PARENT) {
+			params.put(
+				"socialRelationUnidirectional",
+				new Long[] {userId, new Long(type)});
+		}
+		else {
+			params.put(
+				"socialRelationBidirectional",
+				new Long[] {userId, userId, userId, new Long(type)});
+		}
 
 		return searchCount(user.getCompanyId(), null, null, params);
 	}

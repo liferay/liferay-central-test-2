@@ -49,6 +49,7 @@ import org.hibernate.Session;
  *
  * @author Brian Wing Shun Chan
  * @author Jon Steer
+ * @author Raymond Augé
  *
  */
 public class UserFinderImpl implements UserFinder {
@@ -86,8 +87,11 @@ public class UserFinderImpl implements UserFinder {
 	public static String JOIN_BY_ANNOUNCEMENTS_DELIVERY_EMAIL_OR_SMS =
 		UserFinder.class.getName() + ".joinByAnnouncementsDeliveryEmailOrSms";
 
-	public static String JOIN_BY_SOCIAL_RELATION =
-		UserFinder.class.getName() + ".joinBySocialRelation";
+	public static String JOIN_BY_SOCIAL_RELATION_BI =
+		UserFinder.class.getName() + ".joinBySocialRelationBidirectional";
+
+	public static String JOIN_BY_SOCIAL_RELATION_UNI =
+		UserFinder.class.getName() + ".joinBySocialRelationUnidirectional";
 
 	public int countByKeywords(
 			long companyId, String keywords, Boolean active,
@@ -410,8 +414,11 @@ public class UserFinderImpl implements UserFinder {
 			join = CustomSQLUtil.get(
 				JOIN_BY_ANNOUNCEMENTS_DELIVERY_EMAIL_OR_SMS);
 		}
-		else if (key.equals("socialRelation")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);
+		else if (key.equals("socialRelationBidirectional")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_BI);
+		}
+		else if (key.equals("socialRelationUnidirectional")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_UNI);
 		}
 
 		if (Validator.isNotNull(join)) {
@@ -496,8 +503,11 @@ public class UserFinderImpl implements UserFinder {
 			join = CustomSQLUtil.get(
 				JOIN_BY_ANNOUNCEMENTS_DELIVERY_EMAIL_OR_SMS);
 		}
-		else if (key.equals("socialRelation")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);
+		else if (key.equals("socialRelationBidirectional")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_BI);
+		}
+		else if (key.equals("socialRelationUnidirectional")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_UNI);
 		}
 
 		if (Validator.isNotNull(join)) {
