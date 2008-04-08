@@ -22,6 +22,7 @@
 
 package com.liferay.portal.model.impl;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.ClassName;
 
 /**
@@ -33,6 +34,7 @@ import com.liferay.portal.model.ClassName;
 public class ClassNameImpl extends ClassNameModelImpl implements ClassName {
 
 	public ClassNameImpl() {
+		setValue(StringPool.BLANK);
 	}
 
 }

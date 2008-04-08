@@ -387,8 +387,7 @@ public class AnnouncementsEntryLocalServiceImpl
 
 		List<User> users = null;
 
-		if (Validator.isNotNull(className) &&
-				className.equals(User.class.getName())) {
+		if (className.equals(User.class.getName())) {
 			User user = userLocalService.getUserById(classPK);
 
 			toName = user.getFullName();
