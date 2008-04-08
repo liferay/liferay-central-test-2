@@ -38,8 +38,8 @@
 
 .portlet-tags-admin .drop-zone {
 	background: #dadada;
-	width: 24%;
 	margin-right: 2px;
+	width: 24%;
 }
 
 .portlet-tags-admin .drop-hover {

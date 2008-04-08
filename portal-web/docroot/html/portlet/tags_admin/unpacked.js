@@ -352,8 +352,8 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 							tags.Droppable(
 								{
-									accept : 'tag', 
-									activeclass: 'drop-zone', 
+									accept : 'tag',
+									activeclass: 'drop-zone',
 									hoverclass:	'drop-hover',
 									ondrop:	function (drag) {
 										var from = jQuery(drag).find('a.tag-name');
@@ -364,15 +364,15 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 										var toName = to.text();
 										var toId = to.attr('tagId');
-										
+
 										var mergeText = mergeConfirmation.replace(
-											/\{(SOURCE|DESTINATION)\}/gm, 
+											/\{(SOURCE|DESTINATION)\}/gm,
 											function(completeMatch, match, index, str) {
 												return (match == 'SOURCE') ? fromName : toName;
 											}
 										);
 
-										if (drag!== this && confirm(mergeText)) {
+										if ((drag !== this) && confirm(mergeText)) {
 											Liferay.Service.Tags.TagsEntry.mergeEntries(
 												{
 													fromEntryId: fromId,
@@ -391,7 +391,6 @@ Liferay.Portlet.TagsAdmin = new Class({
 				}
 			}
 		);
-		
 	},
 
 	_displayFilters: function(instance, propertyKey, properties) {
@@ -422,7 +421,6 @@ Liferay.Portlet.TagsAdmin = new Class({
 				}
 			}
 		);
-
 
 		filterHtml = '<select id="' + instanceVar + propertyKey + 'FilterSel"><option>all</option>' + filterHtml + '</select>';
 
@@ -548,7 +546,6 @@ Liferay.Portlet.TagsAdmin = new Class({
 		var addCategoryNameInput = jQuery('#' + params.addCategoryNameInput);
 		var addEntryNameInput = jQuery('#' + params.addEntryNameInput);
 		var keywordsInput = jQuery('#' + params.keywordsInput);
-
 
 		addCategoryNameInput.val('');
 		addEntryNameInput.val('');
