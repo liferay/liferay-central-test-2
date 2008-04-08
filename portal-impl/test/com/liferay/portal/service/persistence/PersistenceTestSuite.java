@@ -47,6 +47,7 @@ import com.liferay.portlet.journal.service.persistence.JournalArticleImagePersis
 import com.liferay.portlet.journal.service.persistence.JournalArticlePersistenceTest;
 import com.liferay.portlet.journal.service.persistence.JournalArticleResourcePersistenceTest;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchPersistenceTest;
+import com.liferay.portlet.journal.service.persistence.JournalFeedPersistenceTest;
 import com.liferay.portlet.journal.service.persistence.JournalStructurePersistenceTest;
 import com.liferay.portlet.journal.service.persistence.JournalTemplatePersistenceTest;
 import com.liferay.portlet.messageboards.service.persistence.MBBanPersistenceTest;
@@ -142,6 +143,7 @@ public class PersistenceTestSuite extends TestSuite {
 		addTestSuite(UserPersistenceTest.class);
 		addTestSuite(UserTrackerPathPersistenceTest.class);
 		addTestSuite(UserTrackerPersistenceTest.class);
+		addTestSuite(WebDAVPropsPersistenceTest.class);
 		addTestSuite(WebsitePersistenceTest.class);
 
 		addTestSuite(AnnouncementsDeliveryPersistenceTest.class);
@@ -174,6 +176,7 @@ public class PersistenceTestSuite extends TestSuite {
 		addTestSuite(JournalArticlePersistenceTest.class);
 		addTestSuite(JournalArticleResourcePersistenceTest.class);
 		addTestSuite(JournalContentSearchPersistenceTest.class);
+		addTestSuite(JournalFeedPersistenceTest.class);
 		addTestSuite(JournalStructurePersistenceTest.class);
 		addTestSuite(JournalTemplatePersistenceTest.class);
 

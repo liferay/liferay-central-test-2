@@ -35,6 +35,7 @@ import java.io.IOException;
 import java.io.StringReader;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
@@ -50,6 +51,7 @@ public class SourceFormatter {
 
 	public static void main(String[] args) {
 		try {
+			_checkPersistenceTestSuite();
 			_formatJava();
 			_formatJSP();
 		}
@@ -129,6 +131,45 @@ public class SourceFormatter {
 				content.substring(y + 1, content.length());
 
 		return content;
+	}
+
+	public static void _checkPersistenceTestSuite() throws IOException {
+		String basedir = "../portal-impl/test";
+
+		if (!FileUtil.exists(basedir)) {
+			return;
+		}
+
+		DirectoryScanner ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setIncludes(new String[] {"**\\*PersistenceTest.java"});
+
+		ds.scan();
+
+		String[] files = ds.getIncludedFiles();
+
+		Set<String> persistenceTests = new HashSet<String>();
+
+		for (String file : files) {
+			String persistenceTest = file.substring(0, file.length() - 5);
+
+			persistenceTest = persistenceTest.substring(
+				persistenceTest.lastIndexOf(File.separator) + 1,
+				persistenceTest.length());
+
+			persistenceTests.add(persistenceTest);
+		}
+
+		String persistenceTestSuite = FileUtil.read(
+			basedir + "/com/liferay/portal/service/persistence/" +
+				"PersistenceTestSuite.java");
+
+		for (String persistenceTest : persistenceTests) {
+			if (persistenceTestSuite.indexOf(persistenceTest) == -1) {
+				System.out.println("PersistenceTestSuite: " + persistenceTest);
+			}
+		}
 	}
 
 	public static String _formatImports(String imports) throws IOException {
