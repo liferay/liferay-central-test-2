@@ -284,6 +284,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		var instanceVar = params.instanceVar;
 		var searchResultsDiv = jQuery('#' + params.searchResultsDiv);
+		var mergeConfirmation = Liferay.Language.get('are-you-sure-you-want-to-merge-x-into-x', ['{SOURCE}', '{DESTINATION}']);
 
 		var html = '<br />';
 
@@ -306,10 +307,10 @@ Liferay.Portlet.TagsAdmin = new Class({
 						},
 						function(entries) {
 							if (category.value != '') {
-								html += '<div style="clear: both;"></div><b>' + category.value + '</b><br />';
+								html += '<div class="tags-category"><b>' + category.value + '</b></div>';
 							}
 
-							html += '<div style="float: left; width: 25%;">';
+							html += '<div class="tags-container">';
 
 							jQuery.each(
 								entries,
@@ -318,14 +319,15 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 									var numEntries = entries.length;
 
-									html += '</div><div style="float: left; width: 25%;">';
-									html += ' <a href="javascript: ' + hrefJS + '">' + entry.name + '</a>';
+									html += '<div class="tag">';
+									html += ' <a class="tag-name" href="javascript: ' + hrefJS + '" tagId="' + entry.entryId + '">' + entry.name + '</a>';
 									html += ' <a href="javascript: ' + instanceVar + '.deleteEntry(' + instanceVar + ', ' + entry.entryId + ')">[x]</a>';
 
 									if ((i + 1) < entries.length) {
 										html += '<br />';
 									}
 
+									html += '</div>';
 								}
 							);
 
@@ -336,11 +338,60 @@ Liferay.Portlet.TagsAdmin = new Class({
 							}
 
 							searchResultsDiv.html(html);
+
+							var tags = searchResultsDiv.find('.tag');
+
+							tags.Draggable(
+								{
+									zIndex: 1000,
+									ghosting: true,
+									opacity: 0.7,
+									revert: true
+								}
+							);
+
+							tags.Droppable(
+								{
+									accept : 'tag', 
+									activeclass: 'drop-zone', 
+									hoverclass:	'drop-hover',
+									ondrop:	function (drag) {
+										var from = jQuery(drag).find('a.tag-name');
+										var to = jQuery(this).find('a.tag-name');
+
+										var fromName = from.text();
+										var fromId = from.attr('tagId');
+
+										var toName = to.text();
+										var toId = to.attr('tagId');
+										
+										var mergeText = mergeConfirmation.replace(
+											/\{(SOURCE|DESTINATION)\}/gm, 
+											function(completeMatch, match, index, str) {
+												return (match == 'SOURCE') ? fromName : toName;
+											}
+										);
+
+										if (drag!== this && confirm(mergeText)) {
+											Liferay.Service.Tags.TagsEntry.mergeEntries(
+												{
+													fromEntryId: fromId,
+													toEntryId: toId
+												},
+												function() {
+													jQuery(drag).remove();
+												}
+											);
+										}
+									}
+								}
+							);
 						}
 					);
 				}
 			}
 		);
+		
 	},
 
 	_displayFilters: function(instance, propertyKey, properties) {

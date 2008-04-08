@@ -294,11 +294,6 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 
 				tagsPropertyPersistence.update(fromProperty, false);
 			}
-			else {
-				toProperty.setValue(fromProperty.getValue());
-
-				tagsPropertyPersistence.update(toProperty, false);
-			}
 		}
 
 		deleteEntry(fromEntryId);
