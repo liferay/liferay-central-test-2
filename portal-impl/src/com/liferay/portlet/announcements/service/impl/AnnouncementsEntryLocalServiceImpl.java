@@ -64,6 +64,7 @@ import org.apache.commons.logging.LogFactory;
  * </b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
 public class AnnouncementsEntryLocalServiceImpl
@@ -386,7 +387,8 @@ public class AnnouncementsEntryLocalServiceImpl
 
 		List<User> users = null;
 
-		if (className.equals(User.class.getName())) {
+		if (Validator.isNotNull(className) &&
+				className.equals(User.class.getName())) {
 			User user = userLocalService.getUserById(classPK);
 
 			toName = user.getFullName();
