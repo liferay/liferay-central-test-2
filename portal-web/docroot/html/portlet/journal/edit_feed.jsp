@@ -51,7 +51,7 @@ if (Validator.isNotNull(structureId)) {
 	}
 }
 
-List templates = new ArrayList();
+List<JournalTemplate> templates = new ArrayList<JournalTemplate>();
 
 if (structure != null) {
 	templates = JournalTemplateLocalServiceUtil.getStructureTemplates(groupId, structureId);
@@ -301,13 +301,13 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 			<option value=""></option>
 
 			<%
-				for (int i = 0; i < JournalArticleImpl.TYPES.length; i++) {
+			for (String curType : JournalArticleImpl.TYPES) {
 			%>
 
-			<option <%= (type.equals(JournalArticleImpl.TYPES[i]) ? "selected" : "") %> value="<%= JournalArticleImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, JournalArticleImpl.TYPES[i]) %></option>
+				<option <%= type.equals(curType) ? "selected" : "" %> value="<%= curType %>"><liferay-ui:message key="<%= curType %>" /></option>
 
 			<%
-				}
+			}
 			%>
 
 		</select>
@@ -407,47 +407,49 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 	</td>
 	<td>
 		<select name="<portlet:namespace />contentField">
-			<option value="<%= JournalFeedImpl.ARTICLE_DESCRIPTION %>" <%= (contentField.equals(JournalFeedImpl.ARTICLE_DESCRIPTION)?"selected":"") %> onclick="<portlet:namespace />selectRendererTemplate('');"><liferay-ui:message key="<%= JournalFeedImpl.ARTICLE_DESCRIPTION %>" /></option>
+			<option <%= contentField.equals(JournalFeedImpl.ARTICLE_DESCRIPTION) ? "selected" : "" %> value="<%= JournalFeedImpl.ARTICLE_DESCRIPTION %>" onClick="<portlet:namespace />selectRendererTemplate('');"><liferay-ui:message key="<%= JournalFeedImpl.ARTICLE_DESCRIPTION %>" /></option>
 			<optgroup label='<liferay-ui:message key="<%= JournalFeedImpl.RENDERED_ARTICLE %>" />'>
-				<option value="<%= JournalFeedImpl.RENDERED_ARTICLE %>" <%= (contentField.equals(JournalFeedImpl.RENDERED_ARTICLE)?"selected":"") %> onclick="<portlet:namespace />selectRendererTemplate('');"><liferay-ui:message key="use-default-template" /></option>
-				<c:if test="<%= structure != null && templates.size() > 1 %>">
+				<option <%= contentField.equals(JournalFeedImpl.RENDERED_ARTICLE) ? "selected" : "" %> value="<%= JournalFeedImpl.RENDERED_ARTICLE %>" onClick="<portlet:namespace />selectRendererTemplate('');"><liferay-ui:message key="use-default-template" /></option>
+
+				<c:if test="<%= (structure != null) && (templates.size() > 1) %>">
+
 					<%
-					Iterator itr1 = templates.iterator();
+					for (JournalTemplate currTemplate : templates) {
+					%>
 
-					while (itr1.hasNext()) {
-						JournalTemplate currTemplate = (JournalTemplate)itr1.next();
+						<option <%= rendererTemplateId.equals(currTemplate.getName()) ? "selected" : "" %> value="<%= JournalFeedImpl.RENDERED_ARTICLE %>" onClick="<portlet:namespace />selectRendererTemplate('<%= currTemplate.getName() %>');"><%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %></option>
 
-						%>
-					<option value="<%= JournalFeedImpl.RENDERED_ARTICLE %>" <%= (rendererTemplateId.equals(currTemplate.getName())?"selected":"") %> onclick="<portlet:namespace />selectRendererTemplate('<%= currTemplate.getName() %>');"><%= LanguageUtil.format(pageContext, "use-template-x", currTemplate.getName()) %></option>
-						<%
+					<%
 					}
 					%>
+
 				</c:if>
 			</optgroup>
+
 			<c:if test="<%= structure != null %>">
-				<optgroup label='<liferay-ui:message key="structure-fields" />'>
+				<optgroup label="<liferay-ui:message key="structure-fields" />">
+
 					<%
 					Document doc = DocumentUtil.readDocumentFromXML(structure.getXsd());
 
 					XPath xpathSelector = DocumentHelper.createXPath("//dynamic-element");
 
-					List els = xpathSelector.selectNodes(doc);
+					List<Element> els = xpathSelector.selectNodes(doc);
 
-					Iterator itr1 = els.iterator();
-
-					while (itr1.hasNext()) {
-						Element el = (Element)itr1.next();
-
+					for (Element el : els) {
 						String elName = el.attributeValue("name");
-						String elType = el.attributeValue("type").replace('_', '-');
+						String elType = StringUtil.replace(el.attributeValue("type"), StringPool.UNDERLINE, StringPool.DASH);
 
 						if (!elType.equals("boolean") && !elType.equals("list") && !elType.equals("multi-list")) {
-							%>
-					<option value="<%= elName %>" <%= (contentField.equals(elName)?"selected":"") %> onclick="<portlet:namespace />selectRendererTemplate('');"><%= TextFormatter.format(elName, TextFormatter.J) %> (<%= LanguageUtil.get(pageContext, elType) %>)</option>
-							<%
+					%>
+
+							<option <%= contentField.equals(elName) ? "selected" : "" %> value="<%= elName %>" onClick="<portlet:namespace />selectRendererTemplate('');"><%= TextFormatter.format(elName, TextFormatter.J) %> (<%= LanguageUtil.get(pageContext, elType) %>)</option>
+
+					<%
 						}
 					}
 					%>
+
 				</optgroup>
 			</c:if>
 		</select>
@@ -459,20 +461,22 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 	</td>
 	<td>
 		<select name="<portlet:namespace />feedTypeAndVersion">
+
 			<%
 			StringMaker sm = new StringMaker();
 
 			for (int i = 4; i < RSSUtil.RSS_VERSIONS.length; i++) {
-				sm.append("<option value=\"");
+				sm.append("<option ");
+
+				if (feedType.equals(RSSUtil.RSS) && (feedVersion == RSSUtil.RSS_VERSIONS[i])) {
+					sm.append("selected ");
+				}
+
+				sm.append("value=\"");
 				sm.append(RSSUtil.RSS);
 				sm.append(":");
 				sm.append(RSSUtil.RSS_VERSIONS[i]);
-				sm.append("\"");
-
-				if (feedType.equals(RSSUtil.RSS) && feedVersion == RSSUtil.RSS_VERSIONS[i]) {
-					sm.append(" selected");
-				}
-				sm.append(">");
+				sm.append("\">");
 				sm.append(LanguageUtil.get(pageContext, RSSUtil.RSS));
 				sm.append(" ");
 				sm.append(RSSUtil.RSS_VERSIONS[i]);
@@ -480,16 +484,17 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 			}
 
 			for (int i = 1; i < RSSUtil.ATOM_VERSIONS.length; i++) {
-				sm.append("<option value=\"");
+				sm.append("<option ");
+
+				if (feedType.equals(RSSUtil.ATOM) && (feedVersion == RSSUtil.ATOM_VERSIONS[i])) {
+					sm.append("selected ");
+				}
+
+				sm.append("value=\"");
 				sm.append(RSSUtil.ATOM);
 				sm.append(":");
 				sm.append(RSSUtil.ATOM_VERSIONS[i]);
-				sm.append("\"");
-
-				if (feedType.equals(RSSUtil.ATOM) && feedVersion == RSSUtil.ATOM_VERSIONS[i]) {
-					sm.append(" selected");
-				}
-				sm.append(">");
+				sm.append("\">");
 				sm.append(LanguageUtil.get(pageContext, RSSUtil.ATOM));
 				sm.append(" ");
 				sm.append(RSSUtil.ATOM_VERSIONS[i]);
@@ -520,8 +525,8 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 	</td>
 	<td>
 		<select name="<portlet:namespace />orderByCol">
-			<option value="modified-date" <%= (orderByCol.equals("modified-date")?"selected":"") %>><liferay-ui:message key="modified-date" /></option>
-			<option value="display-date" <%= (orderByCol.equals("display-date")?"selected":"") %>><liferay-ui:message key="display-date" /></option>
+			<option <%= orderByCol.equals("modified-date") ? "selected" : "" %> value="modified-date"><liferay-ui:message key="modified-date" /></option>
+			<option <%= orderByCol.equals("display-date") ? "selected" : "" %> value="display-date"><liferay-ui:message key="display-date" /></option>
 		</select>
 	</td>
 </tr>
@@ -531,8 +536,8 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 	</td>
 	<td>
 		<select name="<portlet:namespace />orderByType">
-			<option value="asc" <%= (orderByType.equals("asc")?"selected":"") %>><liferay-ui:message key="ascending" /></option>
-			<option value="desc" <%= (orderByType.equals("desc")?"selected":"") %>><liferay-ui:message key="descending" /></option>
+			<option <%= orderByType.equals("asc") ? "selected" : "" %> value="asc"><liferay-ui:message key="ascending" /></option>
+			<option <%= orderByType.equals("desc") ? "selected" : "" %> value="desc"><liferay-ui:message key="descending" /></option>
 		</select>
 	</td>
 </tr>
@@ -543,7 +548,7 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
 <c:if test="<%= feed != null %>">
-	<input type="button" value="<liferay-ui:message key="preview" />" onclick="window.open('<%= PortalUtil.getPortalURL(request) + feed.getTargetLayoutFriendlyUrl() + "/journal/rss/" + groupId + "/" + feedId %>','preview');" />
+	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= PortalUtil.getPortalURL(request) + feed.getTargetLayoutFriendlyUrl() + "/journal/rss/" + groupId + "/" + feedId %>', 'feed');" />
 </c:if>
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
