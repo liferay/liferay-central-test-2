@@ -35,7 +35,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="VerifyWikiCreole.java.html"><b><i>View Source</i></b></a>
  *
  * <p>
- * This class converts all existing wiki pages in the classic wiki format to
+ * This class converts all existing wiki pages in the Classic Wiki format to
  * Creole. Do not run this unless you want to do this.
  * </p>
  *
