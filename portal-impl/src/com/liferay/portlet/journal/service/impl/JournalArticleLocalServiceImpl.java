@@ -84,7 +84,6 @@ import java.io.StringReader;
 
 import java.util.Date;
 import java.util.HashSet;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -1749,64 +1748,28 @@ public class JournalArticleLocalServiceImpl
 		return article;
 	}
 
-	private Date[] setDateIntervalForAsset(long groupId, String articleId, Date earliestDisplayDate, Date latestExpirationDate) throws PortalException, SystemException {
-
-		Date[] dateInterval = new Date[2];
-
-		List<JournalArticle> articles = journalArticlePersistence.findByG_A_A(groupId, articleId, true);
-
-		boolean expiringArticle = true;
-
-		if (latestExpirationDate == null) {
-			expiringArticle = false;
-		}
-
-		if (articles != null && articles.size() > 0) {
-			Iterator<JournalArticle> iterator = articles.iterator();
-
-			while (iterator.hasNext()) {
-				JournalArticle article = (JournalArticle) iterator.next();
-
-				if (earliestDisplayDate == null || (article.getDisplayDate() != null && earliestDisplayDate.after(article.getDisplayDate()))) {
-					earliestDisplayDate = article.getDisplayDate();
-				}
-
-				if (expiringArticle && (latestExpirationDate == null || (article.getExpirationDate() != null && latestExpirationDate.before(article.getExpirationDate())))) {
-					latestExpirationDate = article.getExpirationDate();
-				}
-
-				if (expiringArticle && article.getExpirationDate() == null) {
-					latestExpirationDate = null;
-					expiringArticle = false;
-				}
-			}
-		}
-
-		dateInterval[0] = earliestDisplayDate;
-		dateInterval[1] = latestExpirationDate;
-
-		return dateInterval;
-	}
-
 	public void updateTagsAsset(
 			long userId, JournalArticle article, String[] tagsEntries)
 		throws PortalException, SystemException {
 
 		if (article.isApproved() || (article.getVersion() == 1)) {
-			//
-			// Get earliest display date and latest expiration date among all article versions
-			//
-			Date earliestDisplayDate = article.getDisplayDate();
-			Date latestExpirationDate = article.getExpirationDate();
 
-			Date[] dateInterval = setDateIntervalForAsset(article.getGroupId(),article.getArticleId(),earliestDisplayDate,latestExpirationDate);
+			// Get the earliest display date and latest expiration date among
+			// all article versions
+
+			Date[] dateInterval = getDateInterval(
+				article.getGroupId(), article.getArticleId(),
+				article.getDisplayDate(), article.getExpirationDate());
+
+			Date displayDate = dateInterval[0];
+			Date expirationDate = dateInterval[1];
 
 			tagsAssetLocalService.updateAsset(
 				userId, article.getGroupId(), JournalArticle.class.getName(),
 				article.getResourcePrimKey(), tagsEntries, null, null,
-				dateInterval[0], dateInterval[1],
-				ContentTypes.TEXT_HTML, article.getTitle(),
-				article.getDescription(), null, null, 0, 0, null, false);
+				displayDate, expirationDate, ContentTypes.TEXT_HTML,
+				article.getTitle(), article.getDescription(), null, null, 0, 0,
+				null, false);
 		}
 	}
 
@@ -2099,6 +2062,50 @@ public class JournalArticleLocalServiceImpl
 
 			dynamicContent.setText(StringPool.BLANK);
 		}
+	}
+
+	protected Date[] getDateInterval(
+			long groupId, String articleId, Date earliestDisplayDate,
+			Date latestExpirationDate)
+		throws SystemException {
+
+		Date[] dateInterval = new Date[2];
+
+		List<JournalArticle> articles = journalArticlePersistence.findByG_A_A(
+			groupId, articleId, true);
+
+		boolean expiringArticle = true;
+
+		if (latestExpirationDate == null) {
+			expiringArticle = false;
+		}
+
+		for (JournalArticle article : articles) {
+			if ((earliestDisplayDate == null) ||
+				((article.getDisplayDate() != null) &&
+				 earliestDisplayDate.after(article.getDisplayDate()))) {
+
+				earliestDisplayDate = article.getDisplayDate();
+			}
+
+			if (expiringArticle &&
+				((latestExpirationDate == null) ||
+				 ((article.getExpirationDate() != null) &&
+				  latestExpirationDate.before(article.getExpirationDate())))) {
+
+				latestExpirationDate = article.getExpirationDate();
+			}
+
+			if (expiringArticle && (article.getExpirationDate() == null)) {
+				latestExpirationDate = null;
+				expiringArticle = false;
+			}
+		}
+
+		dateInterval[0] = earliestDisplayDate;
+		dateInterval[1] = latestExpirationDate;
+
+		return dateInterval;
 	}
 
 	protected void saveImages(
