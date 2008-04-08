@@ -106,6 +106,36 @@ public class ExpandoRowServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoRowSoap[] getDefaultTableRows(
+		java.lang.String className, int begin, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.expando.model.ExpandoRow> returnValue =
+				ExpandoRowServiceUtil.getDefaultTableRows(className, begin, end);
+
+			return com.liferay.portlet.expando.model.ExpandoRowSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getDefaultTableRowsCount(java.lang.String className)
+		throws RemoteException {
+		try {
+			int returnValue = ExpandoRowServiceUtil.getDefaultTableRowsCount(className);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoRowSoap[] getRows(
 		long tableId, int begin, int end) throws RemoteException {
 		try {
@@ -121,9 +151,40 @@ public class ExpandoRowServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoRowSoap[] getRows(
+		java.lang.String className, java.lang.String tableName, int begin,
+		int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.expando.model.ExpandoRow> returnValue =
+				ExpandoRowServiceUtil.getRows(className, tableName, begin, end);
+
+			return com.liferay.portlet.expando.model.ExpandoRowSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getRowsCount(long tableId) throws RemoteException {
 		try {
 			int returnValue = ExpandoRowServiceUtil.getRowsCount(tableId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getRowsCount(java.lang.String className,
+		java.lang.String tableName) throws RemoteException {
+		try {
+			int returnValue = ExpandoRowServiceUtil.getRowsCount(className,
+					tableName);
 
 			return returnValue;
 		}

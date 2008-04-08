@@ -68,6 +68,21 @@ public class ExpandoRowServiceUtil {
 		expandoRowService.deleteRow(rowId);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
+		java.lang.String className, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		return expandoRowService.getDefaultTableRows(className, begin, end);
+	}
+
+	public static int getDefaultTableRowsCount(java.lang.String className)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		return expandoRowService.getDefaultTableRowsCount(className);
+	}
+
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
 		long tableId, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -76,10 +91,27 @@ public class ExpandoRowServiceUtil {
 		return expandoRowService.getRows(tableId, begin, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
+		java.lang.String className, java.lang.String tableName, int begin,
+		int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		return expandoRowService.getRows(className, tableName, begin, end);
+	}
+
 	public static int getRowsCount(long tableId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
 
 		return expandoRowService.getRowsCount(tableId);
+	}
+
+	public static int getRowsCount(java.lang.String className,
+		java.lang.String tableName)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		return expandoRowService.getRowsCount(className, tableName);
 	}
 }

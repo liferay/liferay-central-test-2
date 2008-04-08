@@ -50,6 +50,18 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		expandoColumnLocalService.deleteColumn(columnId);
 	}
 
+	public void deleteColumns(String className, String tableName)
+		throws PortalException, SystemException {
+
+		expandoColumnLocalService.deleteColumns(className, tableName);
+	}
+
+	public void deleteColumns(long tableId)
+		throws PortalException, SystemException {
+
+		expandoColumnLocalService.deleteColumns(tableId);
+	}
+
 	public ExpandoColumn getColumn(long columnId)
 		throws PortalException, SystemException {
 
@@ -62,14 +74,51 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		return expandoColumnLocalService.getColumn(tableId, name);
 	}
 
+	public ExpandoColumn getColumn(
+			String className, String tableName, String name)
+		throws PortalException, SystemException {
+
+		return expandoColumnLocalService.getColumn(className, tableName, name);
+	}
+
 	public List<ExpandoColumn> getColumns(long tableId)
 		throws SystemException {
 
 		return expandoColumnLocalService.getColumns(tableId);
 	}
 
+	public List<ExpandoColumn> getColumns(String className, String tableName)
+		throws SystemException {
+
+		return expandoColumnLocalService.getColumns(className, tableName);
+	}
+
 	public int getColumnsCount(long tableId) throws SystemException {
 		return expandoColumnLocalService.getColumnsCount(tableId);
+	}
+
+	public int getColumnsCount(String className, String tableName)
+		throws SystemException {
+
+		return expandoColumnLocalService.getColumnsCount(className, tableName);
+	}
+
+	public ExpandoColumn getDefaultTableColumn(String className, String name)
+		throws PortalException, SystemException {
+
+		return expandoColumnLocalService.getDefaultTableColumn(className, name);
+	}
+
+	public List<ExpandoColumn> getDefaultTableColumns(String className)
+		throws SystemException {
+
+		return expandoColumnLocalService.getDefaultTableColumns(className);
+	}
+
+	public int getDefaultTableColumnsCount(String className)
+		throws SystemException {
+
+		return expandoColumnLocalService.getDefaultTableColumnsCount(className);
 	}
 
 	public ExpandoColumn updateColumn(long columnId, String name, int type)

@@ -82,11 +82,11 @@ import java.rmi.RemoteException;
  */
 public class ExpandoValueServiceSoap {
 	public static com.liferay.portlet.expando.model.ExpandoValueSoap addValue(
-		long columnId, long rowId, java.lang.String data)
+		long columnId, long classPK, long rowId, java.lang.String data)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.addValue(columnId,
-					rowId, data);
+					classPK, rowId, data);
 
 			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModel(returnValue);
 		}
@@ -182,10 +182,77 @@ public class ExpandoValueServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoValueSoap[] getColumnValues(
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, int begin, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+				ExpandoValueServiceUtil.getColumnValues(className, tableName,
+					columnName, begin, end);
+
+			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getColumnValuesCount(long columnId)
 		throws RemoteException {
 		try {
 			int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(columnId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getColumnValuesCount(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName)
+		throws RemoteException {
+		try {
+			int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(className,
+					tableName, columnName);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoValueSoap[] getDefaultTableColumnValues(
+		java.lang.String className, java.lang.String columnName, int begin,
+		int end) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+				ExpandoValueServiceUtil.getDefaultTableColumnValues(className,
+					columnName, begin, end);
+
+			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getDefaultTableColumnValuesCount(
+		java.lang.String className, java.lang.String columnName)
+		throws RemoteException {
+		try {
+			int returnValue = ExpandoValueServiceUtil.getDefaultTableColumnValuesCount(className,
+					columnName);
 
 			return returnValue;
 		}
@@ -239,35 +306,6 @@ public class ExpandoValueServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoValueSoap[] getTableValues(
-		long tableId, int begin, int end) throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
-				ExpandoValueServiceUtil.getTableValues(tableId, begin, end);
-
-			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static int getTableValuesCount(long tableId)
-		throws RemoteException {
-		try {
-			int returnValue = ExpandoValueServiceUtil.getTableValuesCount(tableId);
-
-			return returnValue;
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.expando.model.ExpandoValueSoap getValue(
 		long valueId) throws RemoteException {
 		try {
@@ -287,6 +325,22 @@ public class ExpandoValueServiceSoap {
 		try {
 			com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.getValue(columnId,
 					rowId);
+
+			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoValueSoap getValue(
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String name, long rowId) throws RemoteException {
+		try {
+			com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.getValue(className,
+					tableName, name, rowId);
 
 			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModel(returnValue);
 		}

@@ -3950,6 +3950,12 @@
 			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence.impl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoRowLocalServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portlet.expando.service.ExpandoRowLocalService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -4027,6 +4033,12 @@
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoRowUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence.impl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoRowFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.impl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.expando.service.ExpandoTableLocalService.impl" class="com.liferay.portlet.expando.service.impl.ExpandoTableLocalServiceImpl" lazy-init="true" />
@@ -4185,6 +4197,12 @@
 	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoValueUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence.impl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl" class="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderImpl" lazy-init="true" />
+	<bean id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil" class="com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil" lazy-init="true">
+		<property name="finder">
+			<ref bean="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.impl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portlet.imagegallery.service.IGFolderLocalService.impl" class="com.liferay.portlet.imagegallery.service.impl.IGFolderLocalServiceImpl" lazy-init="true" />

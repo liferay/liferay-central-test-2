@@ -24,7 +24,9 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoRow;
+import com.liferay.portlet.expando.model.impl.ExpandoTableImpl;
 import com.liferay.portlet.expando.service.base.ExpandoRowLocalServiceBaseImpl;
 
 import java.util.List;
@@ -63,14 +65,77 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		expandoRowPersistence.remove(rowId);
 	}
 
+	public List<ExpandoRow> getDefaultTableRows(
+			String className, int begin, int end)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getDefaultTableRows(classNameId, begin, end);
+	}
+
+	public List<ExpandoRow> getDefaultTableRows(
+			long classNameId, int begin, int end)
+		throws SystemException {
+
+		return expandoRowFinder.findByTC_TN(
+			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME, begin, end);
+	}
+
+	public int getDefaultTableRowsCount(String className)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getDefaultTableRowsCount(classNameId);
+	}
+
+	public int getDefaultTableRowsCount(long classNameId)
+		throws SystemException {
+
+		return expandoRowFinder.countByTC_TN(
+			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME);
+	}
+
 	public List<ExpandoRow> getRows(long tableId, int begin, int end)
 		throws SystemException {
 
 		return expandoRowPersistence.findByTableId(tableId, begin, end);
 	}
 
+	public List<ExpandoRow> getRows(
+			String className, String tableName, int begin, int end)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getRows(classNameId, tableName, begin, end);
+	}
+
+	public List<ExpandoRow> getRows(
+			long classNameId, String tableName, int begin, int end)
+		throws SystemException {
+
+		return expandoRowFinder.findByTC_TN(
+			classNameId, tableName, begin, end);
+	}
+
 	public int getRowsCount(long tableId) throws SystemException {
 		return expandoRowPersistence.countByTableId(tableId);
+	}
+
+	public int getRowsCount(String className, String tableName)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getRowsCount(classNameId, tableName);
+	}
+
+	public int getRowsCount(long classNameId, String tableName)
+		throws SystemException {
+
+		return expandoRowFinder.countByTC_TN(classNameId, tableName);
 	}
 
 }

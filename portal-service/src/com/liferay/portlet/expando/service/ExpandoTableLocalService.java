@@ -84,7 +84,25 @@ public interface ExpandoTableLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
+		java.lang.String className)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
+		long classNameId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteTable(long tableId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteTable(java.lang.String className, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteTable(long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -93,6 +111,16 @@ public interface ExpandoTableLocalService {
 			com.liferay.portal.PortalException;
 
 	public void deleteTables(long classNameId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
+		java.lang.String className)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
+		long classNameId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

@@ -49,14 +49,41 @@ public class ExpandoRowServiceImpl extends ExpandoRowServiceBaseImpl {
 		expandoRowLocalService.deleteRow(rowId);
 	}
 
+	public List<ExpandoRow> getDefaultTableRows(
+			String className, int begin, int end)
+		throws SystemException {
+
+		return expandoRowLocalService.getDefaultTableRows(
+			className, begin, end);
+	}
+
+	public int getDefaultTableRowsCount(String className)
+		throws SystemException {
+
+		return expandoRowLocalService.getDefaultTableRowsCount(className);
+	}
+
 	public List<ExpandoRow> getRows(long tableId, int begin, int end)
 		throws SystemException {
 
 		return expandoRowLocalService.getRows(tableId, begin, end);
 	}
 
+	public List<ExpandoRow> getRows(
+			String className, String tableName, int begin, int end)
+		throws SystemException {
+
+		return expandoRowLocalService.getRows(className, tableName, begin, end);
+	}
+
 	public int getRowsCount(long tableId) throws SystemException {
 		return expandoRowLocalService.getRowsCount(tableId);
+	}
+
+	public int getRowsCount(String className, String tableName)
+		throws SystemException {
+
+		return expandoRowLocalService.getRowsCount(className, tableName);
 	}
 
 }

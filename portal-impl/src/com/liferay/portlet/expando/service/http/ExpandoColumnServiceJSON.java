@@ -88,6 +88,19 @@ public class ExpandoColumnServiceJSON {
 		ExpandoColumnServiceUtil.deleteColumn(columnId);
 	}
 
+	public static void deleteColumns(java.lang.String className,
+		java.lang.String tableName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		ExpandoColumnServiceUtil.deleteColumns(className, tableName);
+	}
+
+	public static void deleteColumns(long tableId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		ExpandoColumnServiceUtil.deleteColumns(tableId);
+	}
+
 	public static JSONObject getColumn(long columnId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -105,6 +118,16 @@ public class ExpandoColumnServiceJSON {
 		return ExpandoColumnJSONSerializer.toJSONObject(returnValue);
 	}
 
+	public static JSONObject getColumn(java.lang.String className,
+		java.lang.String tableName, java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.getColumn(className,
+				tableName, name);
+
+		return ExpandoColumnJSONSerializer.toJSONObject(returnValue);
+	}
+
 	public static JSONArray getColumns(long tableId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> returnValue =
@@ -113,9 +136,52 @@ public class ExpandoColumnServiceJSON {
 		return ExpandoColumnJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getColumns(java.lang.String className,
+		java.lang.String tableName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> returnValue =
+			ExpandoColumnServiceUtil.getColumns(className, tableName);
+
+		return ExpandoColumnJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static int getColumnsCount(long tableId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = ExpandoColumnServiceUtil.getColumnsCount(tableId);
+
+		return returnValue;
+	}
+
+	public static int getColumnsCount(java.lang.String className,
+		java.lang.String tableName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoColumnServiceUtil.getColumnsCount(className,
+				tableName);
+
+		return returnValue;
+	}
+
+	public static JSONObject getDefaultTableColumn(java.lang.String className,
+		java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.getDefaultTableColumn(className,
+				name);
+
+		return ExpandoColumnJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONArray getDefaultTableColumns(java.lang.String className)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> returnValue =
+			ExpandoColumnServiceUtil.getDefaultTableColumns(className);
+
+		return ExpandoColumnJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static int getDefaultTableColumnsCount(java.lang.String className)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoColumnServiceUtil.getDefaultTableColumnsCount(className);
 
 		return returnValue;
 	}

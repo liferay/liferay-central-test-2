@@ -82,11 +82,10 @@ public class ExpandoTableServiceJSON {
 		return ExpandoTableJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject addTable(long classNameId, java.lang.String name)
+	public static JSONObject addDefaultTable(java.lang.String className)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		com.liferay.portlet.expando.model.ExpandoTable returnValue = ExpandoTableServiceUtil.addTable(classNameId,
-				name);
+		com.liferay.portlet.expando.model.ExpandoTable returnValue = ExpandoTableServiceUtil.addDefaultTable(className);
 
 		return ExpandoTableJSONSerializer.toJSONObject(returnValue);
 	}
@@ -97,16 +96,25 @@ public class ExpandoTableServiceJSON {
 		ExpandoTableServiceUtil.deleteTable(tableId);
 	}
 
+	public static void deleteTable(java.lang.String className,
+		java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		ExpandoTableServiceUtil.deleteTable(className, name);
+	}
+
 	public static void deleteTables(java.lang.String className)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		ExpandoTableServiceUtil.deleteTables(className);
 	}
 
-	public static void deleteTables(long classNameId)
+	public static JSONObject getDefaultTable(java.lang.String className)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		ExpandoTableServiceUtil.deleteTables(classNameId);
+		com.liferay.portlet.expando.model.ExpandoTable returnValue = ExpandoTableServiceUtil.getDefaultTable(className);
+
+		return ExpandoTableJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject getTable(long tableId)
@@ -127,29 +135,11 @@ public class ExpandoTableServiceJSON {
 		return ExpandoTableJSONSerializer.toJSONObject(returnValue);
 	}
 
-	public static JSONObject getTable(long classNameId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		com.liferay.portlet.expando.model.ExpandoTable returnValue = ExpandoTableServiceUtil.getTable(classNameId,
-				name);
-
-		return ExpandoTableJSONSerializer.toJSONObject(returnValue);
-	}
-
 	public static JSONArray getTables(java.lang.String className)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		java.util.List<com.liferay.portlet.expando.model.ExpandoTable> returnValue =
 			ExpandoTableServiceUtil.getTables(className);
-
-		return ExpandoTableJSONSerializer.toJSONArray(returnValue);
-	}
-
-	public static JSONArray getTables(long classNameId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		java.util.List<com.liferay.portlet.expando.model.ExpandoTable> returnValue =
-			ExpandoTableServiceUtil.getTables(classNameId);
 
 		return ExpandoTableJSONSerializer.toJSONArray(returnValue);
 	}

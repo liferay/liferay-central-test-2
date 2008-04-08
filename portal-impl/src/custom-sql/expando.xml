@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+
+<custom-sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.countByTC_TN">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				ExpandoColumn
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoColumn.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.findByTC_TN">
+		<![CDATA[
+			SELECT
+				{ExpandoColumn.*}
+			FROM
+				ExpandoColumn
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoColumn.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.findByTC_TN_N">
+		<![CDATA[
+			SELECT
+				{ExpandoColumn.*}
+			FROM
+				ExpandoColumn
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoColumn.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?) AND
+				(ExpandoColumn.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.countByTC_TN_CN">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				ExpandoValue
+			INNER JOIN
+				ExpandoColumn ON
+					(ExpandoColumn.columnId = ExpandoValue.columnId)
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoColumn.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?) AND
+				(ExpandoColumn.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN">
+		<![CDATA[
+			SELECT
+				{ExpandoValue.*}
+			FROM
+				ExpandoValue
+			INNER JOIN
+				ExpandoColumn ON
+					(ExpandoColumn.columnId = ExpandoValue.columnId)
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoColumn.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?) AND
+				(ExpandoColumn.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN_R">
+		<![CDATA[
+			SELECT
+				{ExpandoValue.*}
+			FROM
+				ExpandoValue
+			INNER JOIN
+				ExpandoColumn ON
+					(ExpandoColumn.columnId = ExpandoValue.columnId)
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoColumn.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?) AND
+				(ExpandoColumn.name = ?) AND
+				(ExpandoValue.rowId = ?)
+		]]>
+	</sql>
+</custom-sql>

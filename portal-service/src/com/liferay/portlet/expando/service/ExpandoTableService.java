@@ -54,8 +54,8 @@ public interface ExpandoTableService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.expando.model.ExpandoTable addTable(
-		long classNameId, java.lang.String name)
+	public com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
+		java.lang.String className)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -63,11 +63,16 @@ public interface ExpandoTableService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void deleteTable(java.lang.String className, java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteTables(java.lang.String className)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public void deleteTables(long classNameId)
+	public com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
+		java.lang.String className)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -80,18 +85,8 @@ public interface ExpandoTableService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public com.liferay.portlet.expando.model.ExpandoTable getTable(
-		long classNameId, java.lang.String name)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
 		java.lang.String className)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
-		long classNameId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

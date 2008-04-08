@@ -45,12 +45,18 @@ import com.liferay.portlet.expando.service.ExpandoTableLocalServiceFactory;
 import com.liferay.portlet.expando.service.ExpandoTableService;
 import com.liferay.portlet.expando.service.ExpandoTableServiceFactory;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
+import com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder;
+import com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnUtil;
+import com.liferay.portlet.expando.service.persistence.ExpandoRowFinder;
+import com.liferay.portlet.expando.service.persistence.ExpandoRowFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoRowPersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoRowUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoTablePersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoTableUtil;
+import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
+import com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueUtil;
 
@@ -129,6 +135,14 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		this.expandoColumnPersistence = expandoColumnPersistence;
 	}
 
+	public ExpandoColumnFinder getExpandoColumnFinder() {
+		return expandoColumnFinder;
+	}
+
+	public void setExpandoColumnFinder(ExpandoColumnFinder expandoColumnFinder) {
+		this.expandoColumnFinder = expandoColumnFinder;
+	}
+
 	public ExpandoRowLocalService getExpandoRowLocalService() {
 		return expandoRowLocalService;
 	}
@@ -153,6 +167,14 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	public void setExpandoRowPersistence(
 		ExpandoRowPersistence expandoRowPersistence) {
 		this.expandoRowPersistence = expandoRowPersistence;
+	}
+
+	public ExpandoRowFinder getExpandoRowFinder() {
+		return expandoRowFinder;
+	}
+
+	public void setExpandoRowFinder(ExpandoRowFinder expandoRowFinder) {
+		this.expandoRowFinder = expandoRowFinder;
 	}
 
 	public ExpandoTableLocalService getExpandoTableLocalService() {
@@ -190,6 +212,14 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 		this.expandoValuePersistence = expandoValuePersistence;
 	}
 
+	public ExpandoValueFinder getExpandoValueFinder() {
+		return expandoValueFinder;
+	}
+
+	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
+		this.expandoValueFinder = expandoValueFinder;
+	}
+
 	public CounterLocalService getCounterLocalService() {
 		return counterLocalService;
 	}
@@ -219,6 +249,10 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 			expandoColumnPersistence = ExpandoColumnUtil.getPersistence();
 		}
 
+		if (expandoColumnFinder == null) {
+			expandoColumnFinder = ExpandoColumnFinderUtil.getFinder();
+		}
+
 		if (expandoRowLocalService == null) {
 			expandoRowLocalService = ExpandoRowLocalServiceFactory.getImpl();
 		}
@@ -229,6 +263,10 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 
 		if (expandoRowPersistence == null) {
 			expandoRowPersistence = ExpandoRowUtil.getPersistence();
+		}
+
+		if (expandoRowFinder == null) {
+			expandoRowFinder = ExpandoRowFinderUtil.getFinder();
 		}
 
 		if (expandoTableLocalService == null) {
@@ -247,6 +285,10 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 			expandoValuePersistence = ExpandoValueUtil.getPersistence();
 		}
 
+		if (expandoValueFinder == null) {
+			expandoValueFinder = ExpandoValueFinderUtil.getFinder();
+		}
+
 		if (counterLocalService == null) {
 			counterLocalService = CounterLocalServiceFactory.getImpl();
 		}
@@ -259,13 +301,16 @@ public abstract class ExpandoValueLocalServiceBaseImpl
 	protected ExpandoColumnLocalService expandoColumnLocalService;
 	protected ExpandoColumnService expandoColumnService;
 	protected ExpandoColumnPersistence expandoColumnPersistence;
+	protected ExpandoColumnFinder expandoColumnFinder;
 	protected ExpandoRowLocalService expandoRowLocalService;
 	protected ExpandoRowService expandoRowService;
 	protected ExpandoRowPersistence expandoRowPersistence;
+	protected ExpandoRowFinder expandoRowFinder;
 	protected ExpandoTableLocalService expandoTableLocalService;
 	protected ExpandoTableService expandoTableService;
 	protected ExpandoTablePersistence expandoTablePersistence;
 	protected ExpandoValuePersistence expandoValuePersistence;
+	protected ExpandoValueFinder expandoValueFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
 }

@@ -72,12 +72,12 @@ import org.json.JSONObject;
  *
  */
 public class ExpandoValueServiceJSON {
-	public static JSONObject addValue(long columnId, long rowId,
+	public static JSONObject addValue(long columnId, long classPK, long rowId,
 		java.lang.String data)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.addValue(columnId,
-				rowId, data);
+				classPK, rowId, data);
 
 		return ExpandoValueJSONSerializer.toJSONObject(returnValue);
 	}
@@ -123,9 +123,49 @@ public class ExpandoValueServiceJSON {
 		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getColumnValues(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, int begin,
+		int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+			ExpandoValueServiceUtil.getColumnValues(className, tableName,
+				columnName, begin, end);
+
+		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static int getColumnValuesCount(long columnId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(columnId);
+
+		return returnValue;
+	}
+
+	public static int getColumnValuesCount(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(className,
+				tableName, columnName);
+
+		return returnValue;
+	}
+
+	public static JSONArray getDefaultTableColumnValues(
+		java.lang.String className, java.lang.String columnName, int begin,
+		int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+			ExpandoValueServiceUtil.getDefaultTableColumnValues(className,
+				columnName, begin, end);
+
+		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static int getDefaultTableColumnValuesCount(
+		java.lang.String className, java.lang.String columnName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoValueServiceUtil.getDefaultTableColumnValuesCount(className,
+				columnName);
 
 		return returnValue;
 	}
@@ -153,21 +193,6 @@ public class ExpandoValueServiceJSON {
 		return returnValue;
 	}
 
-	public static JSONArray getTableValues(long tableId, int begin, int end)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
-			ExpandoValueServiceUtil.getTableValues(tableId, begin, end);
-
-		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
-	}
-
-	public static int getTableValuesCount(long tableId)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
-		int returnValue = ExpandoValueServiceUtil.getTableValuesCount(tableId);
-
-		return returnValue;
-	}
-
 	public static JSONObject getValue(long valueId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -181,6 +206,16 @@ public class ExpandoValueServiceJSON {
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.getValue(columnId,
 				rowId);
+
+		return ExpandoValueJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject getValue(java.lang.String className,
+		java.lang.String tableName, java.lang.String name, long rowId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.getValue(className,
+				tableName, name, rowId);
 
 		return ExpandoValueJSONSerializer.toJSONObject(returnValue);
 	}

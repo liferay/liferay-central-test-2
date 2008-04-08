@@ -82,10 +82,38 @@ public interface ExpandoRowLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
+		java.lang.String className, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
+		long classNameId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getDefaultTableRowsCount(java.lang.String className)
+		throws com.liferay.portal.SystemException;
+
+	public int getDefaultTableRowsCount(long classNameId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
 		long tableId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
+		java.lang.String className, java.lang.String tableName, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
+		long classNameId, java.lang.String tableName, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public int getRowsCount(long tableId)
+		throws com.liferay.portal.SystemException;
+
+	public int getRowsCount(java.lang.String className,
+		java.lang.String tableName) throws com.liferay.portal.SystemException;
+
+	public int getRowsCount(long classNameId, java.lang.String tableName)
 		throws com.liferay.portal.SystemException;
 }

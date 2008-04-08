@@ -97,11 +97,10 @@ public class ExpandoTableServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoTableSoap addTable(
-		long classNameId, java.lang.String name) throws RemoteException {
+	public static com.liferay.portlet.expando.model.ExpandoTableSoap addDefaultTable(
+		java.lang.String className) throws RemoteException {
 		try {
-			com.liferay.portlet.expando.model.ExpandoTable returnValue = ExpandoTableServiceUtil.addTable(classNameId,
-					name);
+			com.liferay.portlet.expando.model.ExpandoTable returnValue = ExpandoTableServiceUtil.addDefaultTable(className);
 
 			return com.liferay.portlet.expando.model.ExpandoTableSoap.toSoapModel(returnValue);
 		}
@@ -123,6 +122,18 @@ public class ExpandoTableServiceSoap {
 		}
 	}
 
+	public static void deleteTable(java.lang.String className,
+		java.lang.String name) throws RemoteException {
+		try {
+			ExpandoTableServiceUtil.deleteTable(className, name);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteTables(java.lang.String className)
 		throws RemoteException {
 		try {
@@ -135,9 +146,12 @@ public class ExpandoTableServiceSoap {
 		}
 	}
 
-	public static void deleteTables(long classNameId) throws RemoteException {
+	public static com.liferay.portlet.expando.model.ExpandoTableSoap getDefaultTable(
+		java.lang.String className) throws RemoteException {
 		try {
-			ExpandoTableServiceUtil.deleteTables(classNameId);
+			com.liferay.portlet.expando.model.ExpandoTable returnValue = ExpandoTableServiceUtil.getDefaultTable(className);
+
+			return com.liferay.portlet.expando.model.ExpandoTableSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -176,41 +190,11 @@ public class ExpandoTableServiceSoap {
 		}
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoTableSoap getTable(
-		long classNameId, java.lang.String name) throws RemoteException {
-		try {
-			com.liferay.portlet.expando.model.ExpandoTable returnValue = ExpandoTableServiceUtil.getTable(classNameId,
-					name);
-
-			return com.liferay.portlet.expando.model.ExpandoTableSoap.toSoapModel(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
 	public static com.liferay.portlet.expando.model.ExpandoTableSoap[] getTables(
 		java.lang.String className) throws RemoteException {
 		try {
 			java.util.List<com.liferay.portlet.expando.model.ExpandoTable> returnValue =
 				ExpandoTableServiceUtil.getTables(className);
-
-			return com.liferay.portlet.expando.model.ExpandoTableSoap.toSoapModels(returnValue);
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			throw new RemoteException(e.getMessage());
-		}
-	}
-
-	public static com.liferay.portlet.expando.model.ExpandoTableSoap[] getTables(
-		long classNameId) throws RemoteException {
-		try {
-			java.util.List<com.liferay.portlet.expando.model.ExpandoTable> returnValue =
-				ExpandoTableServiceUtil.getTables(classNameId);
 
 			return com.liferay.portlet.expando.model.ExpandoTableSoap.toSoapModels(returnValue);
 		}

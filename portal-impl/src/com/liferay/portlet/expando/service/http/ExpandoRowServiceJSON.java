@@ -86,6 +86,22 @@ public class ExpandoRowServiceJSON {
 		ExpandoRowServiceUtil.deleteRow(rowId);
 	}
 
+	public static JSONArray getDefaultTableRows(java.lang.String className,
+		int begin, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoRow> returnValue =
+			ExpandoRowServiceUtil.getDefaultTableRows(className, begin, end);
+
+		return ExpandoRowJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static int getDefaultTableRowsCount(java.lang.String className)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoRowServiceUtil.getDefaultTableRowsCount(className);
+
+		return returnValue;
+	}
+
 	public static JSONArray getRows(long tableId, int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.expando.model.ExpandoRow> returnValue =
@@ -94,9 +110,27 @@ public class ExpandoRowServiceJSON {
 		return ExpandoRowJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getRows(java.lang.String className,
+		java.lang.String tableName, int begin, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoRow> returnValue =
+			ExpandoRowServiceUtil.getRows(className, tableName, begin, end);
+
+		return ExpandoRowJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static int getRowsCount(long tableId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = ExpandoRowServiceUtil.getRowsCount(tableId);
+
+		return returnValue;
+	}
+
+	public static int getRowsCount(java.lang.String className,
+		java.lang.String tableName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoRowServiceUtil.getRowsCount(className,
+				tableName);
 
 		return returnValue;
 	}

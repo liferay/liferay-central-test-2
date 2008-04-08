@@ -68,6 +68,23 @@ public class ExpandoColumnServiceUtil {
 		expandoColumnService.deleteColumn(columnId);
 	}
 
+	public static void deleteColumns(java.lang.String className,
+		java.lang.String tableName)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		expandoColumnService.deleteColumns(className, tableName);
+	}
+
+	public static void deleteColumns(long tableId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		expandoColumnService.deleteColumns(tableId);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoColumn getColumn(
 		long columnId)
 		throws com.liferay.portal.PortalException,
@@ -86,6 +103,16 @@ public class ExpandoColumnServiceUtil {
 		return expandoColumnService.getColumn(tableId, name);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoColumn getColumn(
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		return expandoColumnService.getColumn(className, tableName, name);
+	}
+
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
 		long tableId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
@@ -94,11 +121,51 @@ public class ExpandoColumnServiceUtil {
 		return expandoColumnService.getColumns(tableId);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
+		java.lang.String className, java.lang.String tableName)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		return expandoColumnService.getColumns(className, tableName);
+	}
+
 	public static int getColumnsCount(long tableId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
 
 		return expandoColumnService.getColumnsCount(tableId);
+	}
+
+	public static int getColumnsCount(java.lang.String className,
+		java.lang.String tableName)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		return expandoColumnService.getColumnsCount(className, tableName);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoColumn getDefaultTableColumn(
+		java.lang.String className, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		return expandoColumnService.getDefaultTableColumn(className, name);
+	}
+
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getDefaultTableColumns(
+		java.lang.String className)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		return expandoColumnService.getDefaultTableColumns(className);
+	}
+
+	public static int getDefaultTableColumnsCount(java.lang.String className)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		return expandoColumnService.getDefaultTableColumnsCount(className);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoColumn updateColumn(

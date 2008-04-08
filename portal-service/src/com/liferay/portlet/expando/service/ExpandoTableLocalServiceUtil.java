@@ -119,12 +119,47 @@ public class ExpandoTableLocalServiceUtil {
 		return expandoTableLocalService.addTable(classNameId, name);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
+		java.lang.String className)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		return expandoTableLocalService.addDefaultTable(className);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
+		long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		return expandoTableLocalService.addDefaultTable(classNameId);
+	}
+
 	public static void deleteTable(long tableId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
 
 		expandoTableLocalService.deleteTable(tableId);
+	}
+
+	public static void deleteTable(java.lang.String className,
+		java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		expandoTableLocalService.deleteTable(className, name);
+	}
+
+	public static void deleteTable(long classNameId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		expandoTableLocalService.deleteTable(classNameId, name);
 	}
 
 	public static void deleteTables(java.lang.String className)
@@ -141,6 +176,24 @@ public class ExpandoTableLocalServiceUtil {
 		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
 
 		expandoTableLocalService.deleteTables(classNameId);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
+		java.lang.String className)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		return expandoTableLocalService.getDefaultTable(className);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
+		long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		return expandoTableLocalService.getDefaultTable(classNameId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getTable(

@@ -119,21 +119,19 @@ public class ExpandoTableServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
-		HttpPrincipal httpPrincipal, long classNameId, java.lang.String name)
+	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
+		HttpPrincipal httpPrincipal, java.lang.String className)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(classNameId);
+			Object paramObj0 = className;
 
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(ExpandoTableServiceUtil.class.getName(),
-					"addTable", new Object[] { paramObj0, paramObj1 });
+					"addDefaultTable", new Object[] { paramObj0 });
 
 			Object returnObj = null;
 
@@ -169,6 +167,48 @@ public class ExpandoTableServiceHttp {
 
 			MethodWrapper methodWrapper = new MethodWrapper(ExpandoTableServiceUtil.class.getName(),
 					"deleteTable", new Object[] { paramObj0 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteTable(HttpPrincipal httpPrincipal,
+		java.lang.String className, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = name;
+
+			if (name == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoTableServiceUtil.class.getName(),
+					"deleteTable", new Object[] { paramObj0, paramObj1 });
 
 			try {
 				TunnelUtil.invoke(httpPrincipal, methodWrapper);
@@ -228,18 +268,24 @@ public class ExpandoTableServiceHttp {
 		}
 	}
 
-	public static void deleteTables(HttpPrincipal httpPrincipal,
-		long classNameId)
+	public static com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
+		HttpPrincipal httpPrincipal, java.lang.String className)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(classNameId);
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(ExpandoTableServiceUtil.class.getName(),
-					"deleteTables", new Object[] { paramObj0 });
+					"getDefaultTable", new Object[] { paramObj0 });
+
+			Object returnObj = null;
 
 			try {
-				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
 			}
 			catch (Exception e) {
 				if (e instanceof com.liferay.portal.SystemException) {
@@ -252,6 +298,8 @@ public class ExpandoTableServiceHttp {
 
 				throw new com.liferay.portal.SystemException(e);
 			}
+
+			return (com.liferay.portlet.expando.model.ExpandoTable)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);
@@ -343,48 +391,6 @@ public class ExpandoTableServiceHttp {
 		}
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoTable getTable(
-		HttpPrincipal httpPrincipal, long classNameId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		try {
-			Object paramObj0 = new LongWrapper(classNameId);
-
-			Object paramObj1 = name;
-
-			if (name == null) {
-				paramObj1 = new NullWrapper("java.lang.String");
-			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ExpandoTableServiceUtil.class.getName(),
-					"getTable", new Object[] { paramObj0, paramObj1 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (com.liferay.portlet.expando.model.ExpandoTable)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
 		HttpPrincipal httpPrincipal, java.lang.String className)
 		throws com.liferay.portal.SystemException,
@@ -395,42 +401,6 @@ public class ExpandoTableServiceHttp {
 			if (className == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
-
-			MethodWrapper methodWrapper = new MethodWrapper(ExpandoTableServiceUtil.class.getName(),
-					"getTables", new Object[] { paramObj0 });
-
-			Object returnObj = null;
-
-			try {
-				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
-			}
-			catch (Exception e) {
-				if (e instanceof com.liferay.portal.SystemException) {
-					throw (com.liferay.portal.SystemException)e;
-				}
-
-				if (e instanceof com.liferay.portal.PortalException) {
-					throw (com.liferay.portal.PortalException)e;
-				}
-
-				throw new com.liferay.portal.SystemException(e);
-			}
-
-			return (java.util.List<com.liferay.portlet.expando.model.ExpandoTable>)returnObj;
-		}
-		catch (com.liferay.portal.SystemException se) {
-			_log.error(se, se);
-
-			throw se;
-		}
-	}
-
-	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
-		HttpPrincipal httpPrincipal, long classNameId)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		try {
-			Object paramObj0 = new LongWrapper(classNameId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(ExpandoTableServiceUtil.class.getName(),
 					"getTables", new Object[] { paramObj0 });

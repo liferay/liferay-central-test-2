@@ -38,10 +38,12 @@ import java.util.List;
  */
 public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 
-	public ExpandoValue addValue(long columnId, long rowId, String data)
+	public ExpandoValue addValue(
+			long columnId, long classPK, long rowId, String data)
 		throws PortalException, SystemException {
 
-		return expandoValueLocalService.addValue(columnId, rowId, data);
+		return expandoValueLocalService.addValue(
+			columnId, classPK, rowId, data);
 	}
 
 	public void deleteColumnValues(long columnId) throws SystemException {
@@ -82,8 +84,42 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 		return expandoValueLocalService.getColumnValues(columnId, begin, end);
 	}
 
+	public List<ExpandoValue> getColumnValues(
+			String className, String tableName, String columnName, int begin,
+			int end)
+		throws SystemException {
+
+		return expandoValueLocalService.getColumnValues(
+			className, tableName, columnName, begin, end);
+	}
+
 	public int getColumnValuesCount(long columnId) throws SystemException {
 		return expandoValueLocalService.getColumnValuesCount(columnId);
+	}
+
+	public int getColumnValuesCount(
+			String className, String tableName, String columnName)
+		throws SystemException {
+
+		return expandoValueLocalService.getColumnValuesCount(
+			className, tableName, columnName);
+	}
+
+	public List<ExpandoValue> getDefaultTableColumnValues(
+			String className, String columnName, int begin,
+			int end)
+		throws SystemException {
+
+		return expandoValueLocalService.getDefaultTableColumnValues(
+			className, columnName, begin, end);
+	}
+
+	public int getDefaultTableColumnValuesCount(
+			String className, String columnName)
+		throws SystemException {
+
+		return expandoValueLocalService.getDefaultTableColumnValuesCount(
+			className, columnName);
 	}
 
 	public List<ExpandoValue> getRowValues(long rowId) throws SystemException {
@@ -100,16 +136,6 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 		return expandoValueLocalService.getRowValuesCount(rowId);
 	}
 
-	public List<ExpandoValue> getTableValues(long tableId, int begin, int end)
-		throws SystemException {
-
-		return expandoValueLocalService.getTableValues(tableId, begin, end);
-	}
-
-	public int getTableValuesCount(long tableId) throws SystemException {
-		return expandoValueLocalService.getTableValuesCount(tableId);
-	}
-
 	public ExpandoValue getValue(long valueId)
 		throws PortalException, SystemException {
 
@@ -120,6 +146,14 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		return expandoValueLocalService.getValue(columnId, rowId);
+	}
+
+	public ExpandoValue getValue(
+			String className, String tableName, String name, long rowId)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getValue(
+			className, tableName, name, rowId);
 	}
 
 }

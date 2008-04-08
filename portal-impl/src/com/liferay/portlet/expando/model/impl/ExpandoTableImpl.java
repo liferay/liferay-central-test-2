@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.expando.model.impl;
 
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.expando.model.ExpandoTable;
 
 /**
@@ -33,7 +34,13 @@ import com.liferay.portlet.expando.model.ExpandoTable;
 public class ExpandoTableImpl
 	extends ExpandoTableModelImpl implements ExpandoTable {
 
+	public static final String DEFAULT_TABLE_NAME = "DEFAULT_TABLE";
+
 	public ExpandoTableImpl() {
+	}
+
+	public boolean isDefaultTable() {
+		return Validator.equals(super.getName(), DEFAULT_TABLE_NAME);
 	}
 
 }

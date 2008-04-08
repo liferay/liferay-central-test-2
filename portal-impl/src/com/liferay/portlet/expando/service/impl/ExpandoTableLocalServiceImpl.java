@@ -29,6 +29,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.DuplicateTableNameException;
 import com.liferay.portlet.expando.TableNameException;
 import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.model.impl.ExpandoTableImpl;
 import com.liferay.portlet.expando.service.base.ExpandoTableLocalServiceBaseImpl;
 
 import java.util.List;
@@ -69,6 +70,18 @@ public class ExpandoTableLocalServiceImpl
 		return table;
 	}
 
+	public ExpandoTable addDefaultTable(String className)
+		throws PortalException, SystemException {
+
+		return addTable(className, ExpandoTableImpl.DEFAULT_TABLE_NAME);
+	}
+
+	public ExpandoTable addDefaultTable(long classNameId)
+		throws PortalException, SystemException {
+
+		return addTable(classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME);
+	}
+
 	public void deleteTable(long tableId)
 		throws PortalException, SystemException {
 
@@ -83,6 +96,25 @@ public class ExpandoTableLocalServiceImpl
 		// Table
 
 		expandoTablePersistence.remove(tableId);
+	}
+
+	public void deleteTable(String className, String name)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		deleteTable(classNameId, name);
+	}
+
+	public void deleteTable(long classNameId, String name)
+		throws PortalException, SystemException {
+
+		// Table
+
+		ExpandoTable table = expandoTablePersistence.findByC_N(
+			classNameId, name);
+
+		deleteTable(table.getTableId());
 	}
 
 	public void deleteTables(String className)
@@ -102,6 +134,20 @@ public class ExpandoTableLocalServiceImpl
 		for (ExpandoTable table : tables) {
 			deleteTable(table.getTableId());
 		}
+	}
+
+	public ExpandoTable getDefaultTable(String className)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getTable(classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME);
+	}
+
+	public ExpandoTable getDefaultTable(long classNameId)
+		throws PortalException, SystemException {
+
+		return getTable(classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME);
 	}
 
 	public ExpandoTable getTable(long tableId)
@@ -142,6 +188,12 @@ public class ExpandoTableLocalServiceImpl
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTablePersistence.findByPrimaryKey(tableId);
+
+		if (Validator.equals(table.getName(),
+				ExpandoTableImpl.DEFAULT_TABLE_NAME)) {
+			throw new TableNameException(
+				"Cannot rename " + ExpandoTableImpl.DEFAULT_TABLE_NAME);
+		}
 
 		validate(tableId, table.getClassNameId(), name);
 

@@ -117,6 +117,37 @@ public class ExpandoRowLocalServiceUtil {
 		expandoRowLocalService.deleteRow(rowId);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
+		java.lang.String className, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getDefaultTableRows(className, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
+		long classNameId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getDefaultTableRows(classNameId, begin,
+			end);
+	}
+
+	public static int getDefaultTableRowsCount(java.lang.String className)
+		throws com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getDefaultTableRowsCount(className);
+	}
+
+	public static int getDefaultTableRowsCount(long classNameId)
+		throws com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getDefaultTableRowsCount(classNameId);
+	}
+
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
 		long tableId, int begin, int end)
 		throws com.liferay.portal.SystemException {
@@ -125,10 +156,40 @@ public class ExpandoRowLocalServiceUtil {
 		return expandoRowLocalService.getRows(tableId, begin, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
+		java.lang.String className, java.lang.String tableName, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getRows(className, tableName, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
+		long classNameId, java.lang.String tableName, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getRows(classNameId, tableName, begin, end);
+	}
+
 	public static int getRowsCount(long tableId)
 		throws com.liferay.portal.SystemException {
 		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
 
 		return expandoRowLocalService.getRowsCount(tableId);
+	}
+
+	public static int getRowsCount(java.lang.String className,
+		java.lang.String tableName) throws com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getRowsCount(className, tableName);
+	}
+
+	public static int getRowsCount(long classNameId, java.lang.String tableName)
+		throws com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getRowsCount(classNameId, tableName);
 	}
 }

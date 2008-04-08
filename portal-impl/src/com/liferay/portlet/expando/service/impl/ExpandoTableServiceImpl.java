@@ -44,10 +44,10 @@ public class ExpandoTableServiceImpl extends ExpandoTableServiceBaseImpl {
 		return expandoTableLocalService.addTable(className, name);
 	}
 
-	public ExpandoTable addTable(long classNameId, String name)
+	public ExpandoTable addDefaultTable(String className)
 		throws PortalException, SystemException {
 
-		return expandoTableLocalService.addTable(classNameId, name);
+		return expandoTableLocalService.addDefaultTable(className);
 	}
 
 	public void deleteTable(long tableId)
@@ -56,16 +56,22 @@ public class ExpandoTableServiceImpl extends ExpandoTableServiceBaseImpl {
 		expandoTableLocalService.deleteTable(tableId);
 	}
 
+	public void deleteTable(String className, String name)
+		throws PortalException, SystemException {
+
+		expandoTableLocalService.deleteTable(className, name);
+	}
+
 	public void deleteTables(String className)
 		throws PortalException, SystemException {
 
 		expandoTableLocalService.deleteTables(className);
 	}
 
-	public void deleteTables(long classNameId)
+	public ExpandoTable getDefaultTable(String className)
 		throws PortalException, SystemException {
 
-		expandoTableLocalService.deleteTables(classNameId);
+		return expandoTableLocalService.getDefaultTable(className);
 	}
 
 	public ExpandoTable getTable(long tableId)
@@ -80,22 +86,10 @@ public class ExpandoTableServiceImpl extends ExpandoTableServiceBaseImpl {
 		return expandoTableLocalService.getTable(className, name);
 	}
 
-	public ExpandoTable getTable(long classNameId, String name)
-		throws PortalException, SystemException {
-
-		return expandoTableLocalService.getTable(classNameId, name);
-	}
-
 	public List<ExpandoTable> getTables(String className)
 		throws PortalException, SystemException {
 
 		return expandoTableLocalService.getTables(className);
-	}
-
-	public List<ExpandoTable> getTables(long classNameId)
-		throws PortalException, SystemException {
-
-		return expandoTableLocalService.getTables(classNameId);
 	}
 
 	public ExpandoTable updateTable(long tableId, String name)

@@ -108,6 +108,29 @@ public class ExpandoColumnServiceSoap {
 		}
 	}
 
+	public static void deleteColumns(java.lang.String className,
+		java.lang.String tableName) throws RemoteException {
+		try {
+			ExpandoColumnServiceUtil.deleteColumns(className, tableName);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteColumns(long tableId) throws RemoteException {
+		try {
+			ExpandoColumnServiceUtil.deleteColumns(tableId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoColumnSoap getColumn(
 		long columnId) throws RemoteException {
 		try {
@@ -137,6 +160,22 @@ public class ExpandoColumnServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoColumnSoap getColumn(
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String name) throws RemoteException {
+		try {
+			com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.getColumn(className,
+					tableName, name);
+
+			return com.liferay.portlet.expando.model.ExpandoColumnSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoColumnSoap[] getColumns(
 		long tableId) throws RemoteException {
 		try {
@@ -152,9 +191,85 @@ public class ExpandoColumnServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoColumnSoap[] getColumns(
+		java.lang.String className, java.lang.String tableName)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> returnValue =
+				ExpandoColumnServiceUtil.getColumns(className, tableName);
+
+			return com.liferay.portlet.expando.model.ExpandoColumnSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getColumnsCount(long tableId) throws RemoteException {
 		try {
 			int returnValue = ExpandoColumnServiceUtil.getColumnsCount(tableId);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getColumnsCount(java.lang.String className,
+		java.lang.String tableName) throws RemoteException {
+		try {
+			int returnValue = ExpandoColumnServiceUtil.getColumnsCount(className,
+					tableName);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoColumnSoap getDefaultTableColumn(
+		java.lang.String className, java.lang.String name)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.expando.model.ExpandoColumn returnValue = ExpandoColumnServiceUtil.getDefaultTableColumn(className,
+					name);
+
+			return com.liferay.portlet.expando.model.ExpandoColumnSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoColumnSoap[] getDefaultTableColumns(
+		java.lang.String className) throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> returnValue =
+				ExpandoColumnServiceUtil.getDefaultTableColumns(className);
+
+			return com.liferay.portlet.expando.model.ExpandoColumnSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getDefaultTableColumnsCount(java.lang.String className)
+		throws RemoteException {
+		try {
+			int returnValue = ExpandoColumnServiceUtil.getDefaultTableColumnsCount(className);
 
 			return returnValue;
 		}
