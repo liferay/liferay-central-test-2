@@ -36,6 +36,7 @@ import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;
+import com.liferay.util.SetUtil;
 import com.liferay.util.TextFormatter;
 import com.liferay.util.Time;
 import com.liferay.util.log4j.Log4JUtil;
@@ -66,7 +67,6 @@ import java.io.StringReader;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -180,9 +180,9 @@ public class ServiceBuilder {
 				"Please set these required system properties. Sample values are:\n" +
 				"\n" +
 				"\t-Dservice.input.file=${service.file}\n" +
-				"\t-Dservice.hbm.file=classes/META-INF/portal-hbm.xml\n" +
-				"\t-Dservice.model.hints.file=classes/META-INF/portal-model-hints.xml\n" +
-				"\t-Dservice.spring.file=classes/META-INF/portal-spring.xml\n" +
+				"\t-Dservice.hbm.file=src/META-INF/portal-hbm.xml\n" +
+				"\t-Dservice.model.hints.file=src/META-INF/portal-model-hints.xml\n" +
+				"\t-Dservice.spring.file=src/META-INF/portal-spring.xml\n" +
 				"\t-Dservice.api.dir=${project.dir}/portal-service/src\n" +
 				"\t-Dservice.impl.dir=src\n" +
 				"\t-Dservice.json.file=${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js\n" +
@@ -202,106 +202,50 @@ public class ServiceBuilder {
 				"\n" +
 				"You can also customize the generated code by overriding the default templates with these optional properties:\n" +
 				"\n" +
-				"\t-Dservice.tpl.base_mode_impl.ftl=" + _TPL_ROOT + "base_mode_impl.ftl\n"+
-				"\t-Dservice.tpl.base_persistence.ftl=" + _TPL_ROOT + "base_persistence.ftl\n"+
-				"\t-Dservice.tpl.bean_locator_util.ftl=" + _TPL_ROOT + "bean_locator_util.ftl\n"+
+				"\t-Dservice.tpl.bad_column_names=" + _TPL_ROOT + "bad_column_names.txt\n"+
+				"\t-Dservice.tpl.bad_table_names=" + _TPL_ROOT + "bad_table_names.txt\n"+
+				"\t-Dservice.tpl.base_mode_impl=" + _TPL_ROOT + "base_mode_impl.ftl\n"+
+				"\t-Dservice.tpl.base_persistence=" + _TPL_ROOT + "base_persistence.ftl\n"+
+				"\t-Dservice.tpl.bean_locator_util=" + _TPL_ROOT + "bean_locator_util.ftl\n"+
 				"\t-Dservice.tpl.copyright.txt=copyright.txt\n"+
-				"\t-Dservice.tpl.dynamic_dialect.ftl=" + _TPL_ROOT + "dynamic_dialect.ftl\n"+
-				"\t-Dservice.tpl.ejb_pk.ftl=" + _TPL_ROOT + "ejb_pk.ftl\n"+
-				"\t-Dservice.tpl.exception.ftl=" + _TPL_ROOT + "exception.ftl\n"+
-				"\t-Dservice.tpl.extended_model.ftl=" + _TPL_ROOT + "extended_model.ftl\n"+
-				"\t-Dservice.tpl.extended_model_impl.ftl=" + _TPL_ROOT + "extended_model_impl.ftl\n"+
-				"\t-Dservice.tpl.finder.ftl=" + _TPL_ROOT + "finder.ftl\n"+
-				"\t-Dservice.tpl.finder_cache.ftl=" + _TPL_ROOT + "finder_cache.ftl\n"+
-				"\t-Dservice.tpl.finder_util.ftl=" + _TPL_ROOT + "finder_util.ftl\n"+
-				"\t-Dservice.tpl.hbm_xml.ftl=" + _TPL_ROOT + "hbm_xml.ftl\n"+
-				"\t-Dservice.tpl.hibernate_configuration.ftl=" + _TPL_ROOT + "hibernate_configuration.ftl\n"+
-				"\t-Dservice.tpl.hibernate_util.ftl=" + _TPL_ROOT + "hibernate_util.ftl\n"+
-				"\t-Dservice.tpl.json_js.ftl=" + _TPL_ROOT + "json_js.ftl\n"+
-				"\t-Dservice.tpl.json_js_method.ftl=" + _TPL_ROOT + "json_js_method.ftl\n"+
-				"\t-Dservice.tpl.model.ftl=" + _TPL_ROOT + "model.ftl\n"+
-				"\t-Dservice.tpl.model_hints_xml.ftl=" + _TPL_ROOT + "model_hints_xml.ftl\n"+
-				"\t-Dservice.tpl.model_impl.ftl=" + _TPL_ROOT + "model_impl.ftl\n"+
-				"\t-Dservice.tpl.model_soap.ftl=" + _TPL_ROOT + "model_soap.ftl\n"+
-				"\t-Dservice.tpl.persistence.ftl=" + _TPL_ROOT + "persistence.ftl\n"+
-				"\t-Dservice.tpl.persistence_impl.ftl=" + _TPL_ROOT + "persistence_impl.ftl\n"+
-				"\t-Dservice.tpl.persistence_util.ftl=" + _TPL_ROOT + "persistence_util.ftl\n"+
-				"\t-Dservice.tpl.principal_bean.ftl=" + _TPL_ROOT + "principal_bean.ftl\n"+
-				"\t-Dservice.tpl.props.ftl=" + _TPL_ROOT + "props.ftl\n"+
-				"\t-Dservice.tpl.props_util.ftl=" + _TPL_ROOT + "props_util.ftl\n"+
-				"\t-Dservice.tpl.remoting_xml.ftl=" + _TPL_ROOT + "remoting_xml.ftl\n"+
-				"\t-Dservice.tpl.service.ftl=" + _TPL_ROOT + "service.ftl\n"+
-				"\t-Dservice.tpl.service_base_impl.ftl=" + _TPL_ROOT + "service_base_impl.ftl\n"+
-				"\t-Dservice.tpl.service_factory.ftl=" + _TPL_ROOT + "service_factory.ftl\n"+
-				"\t-Dservice.tpl.service_http.ftl=" + _TPL_ROOT + "service_http.ftl\n"+
-				"\t-Dservice.tpl.service_impl.ftl=" + _TPL_ROOT + "service_impl.ftl\n"+
-				"\t-Dservice.tpl.service_json.ftl=" + _TPL_ROOT + "service_json.ftl\n"+
-				"\t-Dservice.tpl.service_json_serializer.ftl=" + _TPL_ROOT + "service_json_serializer.ftl\n"+
-				"\t-Dservice.tpl.service_soap.ftl=" + _TPL_ROOT + "service_soap.ftl\n"+
-				"\t-Dservice.tpl.service_util.ftl=" + _TPL_ROOT + "service_util.ftl\n"+
-				"\t-Dservice.tpl.spring_data_source_xml.ftl=" + _TPL_ROOT + "spring_data_source_xml.ftl\n"+
-				"\t-Dservice.tpl.spring_util.ftl=" + _TPL_ROOT + "spring_util.ftl\n"+
-				"\t-Dservice.tpl.spring_xml.ftl=" + _TPL_ROOT + "spring_xml.ftl\n"+
-				"\t-Dservice.tpl.spring_xml_session.ftl=" + _TPL_ROOT + "spring_xml_session.ftl");
+				"\t-Dservice.tpl.dynamic_dialect=" + _TPL_ROOT + "dynamic_dialect.ftl\n"+
+				"\t-Dservice.tpl.ejb_pk=" + _TPL_ROOT + "ejb_pk.ftl\n"+
+				"\t-Dservice.tpl.exception=" + _TPL_ROOT + "exception.ftl\n"+
+				"\t-Dservice.tpl.extended_model=" + _TPL_ROOT + "extended_model.ftl\n"+
+				"\t-Dservice.tpl.extended_model_impl=" + _TPL_ROOT + "extended_model_impl.ftl\n"+
+				"\t-Dservice.tpl.finder=" + _TPL_ROOT + "finder.ftl\n"+
+				"\t-Dservice.tpl.finder_cache=" + _TPL_ROOT + "finder_cache.ftl\n"+
+				"\t-Dservice.tpl.finder_util=" + _TPL_ROOT + "finder_util.ftl\n"+
+				"\t-Dservice.tpl.hbm_xml=" + _TPL_ROOT + "hbm_xml.ftl\n"+
+				"\t-Dservice.tpl.hibernate_configuration=" + _TPL_ROOT + "hibernate_configuration.ftl\n"+
+				"\t-Dservice.tpl.hibernate_util=" + _TPL_ROOT + "hibernate_util.ftl\n"+
+				"\t-Dservice.tpl.json_js=" + _TPL_ROOT + "json_js.ftl\n"+
+				"\t-Dservice.tpl.json_js_method=" + _TPL_ROOT + "json_js_method.ftl\n"+
+				"\t-Dservice.tpl.model=" + _TPL_ROOT + "model.ftl\n"+
+				"\t-Dservice.tpl.model_hints_xml=" + _TPL_ROOT + "model_hints_xml.ftl\n"+
+				"\t-Dservice.tpl.model_impl=" + _TPL_ROOT + "model_impl.ftl\n"+
+				"\t-Dservice.tpl.model_soap=" + _TPL_ROOT + "model_soap.ftl\n"+
+				"\t-Dservice.tpl.persistence=" + _TPL_ROOT + "persistence.ftl\n"+
+				"\t-Dservice.tpl.persistence_impl=" + _TPL_ROOT + "persistence_impl.ftl\n"+
+				"\t-Dservice.tpl.persistence_util=" + _TPL_ROOT + "persistence_util.ftl\n"+
+				"\t-Dservice.tpl.principal_bean=" + _TPL_ROOT + "principal_bean.ftl\n"+
+				"\t-Dservice.tpl.props=" + _TPL_ROOT + "props.ftl\n"+
+				"\t-Dservice.tpl.props_util=" + _TPL_ROOT + "props_util.ftl\n"+
+				"\t-Dservice.tpl.remoting_xml=" + _TPL_ROOT + "remoting_xml.ftl\n"+
+				"\t-Dservice.tpl.service=" + _TPL_ROOT + "service.ftl\n"+
+				"\t-Dservice.tpl.service_base_impl=" + _TPL_ROOT + "service_base_impl.ftl\n"+
+				"\t-Dservice.tpl.service_factory=" + _TPL_ROOT + "service_factory.ftl\n"+
+				"\t-Dservice.tpl.service_http=" + _TPL_ROOT + "service_http.ftl\n"+
+				"\t-Dservice.tpl.service_impl=" + _TPL_ROOT + "service_impl.ftl\n"+
+				"\t-Dservice.tpl.service_json=" + _TPL_ROOT + "service_json.ftl\n"+
+				"\t-Dservice.tpl.service_json_serializer=" + _TPL_ROOT + "service_json_serializer.ftl\n"+
+				"\t-Dservice.tpl.service_soap=" + _TPL_ROOT + "service_soap.ftl\n"+
+				"\t-Dservice.tpl.service_util=" + _TPL_ROOT + "service_util.ftl\n"+
+				"\t-Dservice.tpl.spring_data_source_xml=" + _TPL_ROOT + "spring_data_source_xml.ftl\n"+
+				"\t-Dservice.tpl.spring_util=" + _TPL_ROOT + "spring_util.ftl\n"+
+				"\t-Dservice.tpl.spring_xml=" + _TPL_ROOT + "spring_xml.ftl\n"+
+				"\t-Dservice.tpl.spring_xml_session=" + _TPL_ROOT + "spring_xml_session.ftl");
 		}
-	}
-
-	public static Set<String> getBadCmpFields() {
-		Set<String> badCmpFields = new HashSet<String>();
-
-		badCmpFields.add("access");
-		badCmpFields.add("active");
-		badCmpFields.add("alias");
-		badCmpFields.add("code");
-		badCmpFields.add("data");
-		badCmpFields.add("date");
-		badCmpFields.add("end");
-		badCmpFields.add("idd");
-		badCmpFields.add("featured");
-		badCmpFields.add("fields");
-		badCmpFields.add("from");
-		badCmpFields.add("hidden");
-		badCmpFields.add("id");
-		badCmpFields.add("index");
-		badCmpFields.add("internal");
-		badCmpFields.add("interval");
-		badCmpFields.add("join");
-		badCmpFields.add("key");
-		badCmpFields.add("log");
-		badCmpFields.add("number");
-		badCmpFields.add("password");
-		badCmpFields.add("path");
-		badCmpFields.add("primary");
-		badCmpFields.add("sale");
-		badCmpFields.add("settings");
-		badCmpFields.add("size");
-		badCmpFields.add("start");
-		badCmpFields.add("text");
-		badCmpFields.add("to");
-		badCmpFields.add("type");
-		badCmpFields.add("uuid");
-		badCmpFields.add("values");
-
-		return badCmpFields;
-	}
-
-	public static Set<String> getBadTableNames() {
-		Set<String> badTableNames = new HashSet<String>();
-
-		badTableNames.add("Account");
-		badTableNames.add("Action");
-		badTableNames.add("Cache");
-		badTableNames.add("ClassName");
-		badTableNames.add("Contact");
-		badTableNames.add("Group");
-		badTableNames.add("Organization");
-		badTableNames.add("Permission");
-		badTableNames.add("Release");
-		badTableNames.add("Resource");
-		badTableNames.add("Role");
-		badTableNames.add("User");
-
-		return badTableNames;
 	}
 
 	public static void writeFile(File file, String content) throws IOException {
@@ -480,6 +424,10 @@ public class ServiceBuilder {
 		String springHibernatePackage, String springUtilPackage, String testDir,
 		boolean build) {
 
+		_tplBadColumnNames = _getTplProperty(
+			"bad_column_names", _tplBadColumnNames);
+		_tplBadTableNames = _getTplProperty(
+			"bad_table_names", _tplBadTableNames);
 		_tplBaseModeImpl = _getTplProperty("base_mode_impl", _tplBaseModeImpl);
 		_tplBasePersistence = _getTplProperty(
 			"base_persistence", _tplBasePersistence);
@@ -536,9 +484,10 @@ public class ServiceBuilder {
 		_tplSpringXml = _getTplProperty("spring_xml", _tplSpringXml);
 
 		try {
-			_badTableNames = ServiceBuilder.getBadTableNames();
-			_badCmpFields = ServiceBuilder.getBadCmpFields();
-
+			_badTableNames = SetUtil.fromString(StringUtil.read(
+				getClass().getClassLoader(), _tplBadTableNames));
+			_badColumnNames = SetUtil.fromString(StringUtil.read(
+				getClass().getClassLoader(), _tplBadColumnNames));
 			_hbmFileName = hbmFileName;
 			_modelHintsFileName = modelHintsFileName;
 			_springFileName = springFileName;
@@ -696,7 +645,7 @@ public class ServiceBuilder {
 					if (Validator.isNull(columnDBName)) {
 						columnDBName = columnName;
 
-						if (_badCmpFields.contains(columnName)) {
+						if (_badColumnNames.contains(columnName)) {
 							columnDBName += "_";
 						}
 					}
@@ -870,7 +819,7 @@ public class ServiceBuilder {
 						if (Validator.isNull(finderColDBName)) {
 							finderColDBName = finderColName;
 
-							if (_badCmpFields.contains(finderColName)) {
+							if (_badColumnNames.contains(finderColName)) {
 								finderColDBName += "_";
 							}
 						}
@@ -3508,6 +3457,8 @@ public class ServiceBuilder {
 
 	private static final String _TPL_ROOT = "com/liferay/portal/tools/servicebuilder/dependencies/";
 
+	private String _tplBadColumnNames = _TPL_ROOT + "bad_column_names.txt";
+	private String _tplBadTableNames = _TPL_ROOT + "bad_table_names.txt";
 	private String _tplBaseModeImpl = _TPL_ROOT + "base_mode_impl.ftl";
 	private String _tplBasePersistence = _TPL_ROOT + "base_persistence.ftl";
 	private String _tplBeanLocatorUtil = _TPL_ROOT + "bean_locator_util.ftl";
@@ -3553,7 +3504,7 @@ public class ServiceBuilder {
 	private String _tplSpringUtil = _TPL_ROOT + "spring_util.ftl";
 	private String _tplSpringXml = _TPL_ROOT + "spring_xml.ftl";
 	private Set<String> _badTableNames;
-	private Set<String> _badCmpFields;
+	private Set<String> _badColumnNames;
 	private String _hbmFileName;
 	private String _modelHintsFileName;
 	private String _springFileName;

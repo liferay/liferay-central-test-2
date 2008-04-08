@@ -465,9 +465,9 @@ ${exception.message}
 		>
 			<!--<jvmarg value="-Dorg.apache.commons.logging.Log=org.apache.commons.logging.impl.Log4JLogger" />
 			<arg value="${service.file}" />
-			<arg value="classes/META-INF/portal-hbm.xml" />
-			<arg value="classes/META-INF/portal-model-hints.xml" />
-			<arg value="classes/META-INF/portal-spring.xml" />
+			<arg value="src/META-INF/portal-hbm.xml" />
+			<arg value="src/META-INF/portal-model-hints.xml" />
+			<arg value="src/META-INF/portal-spring.xml" />
 			<arg value="com.liferay.portal.kernel.bean.BeanLocatorUtil" />
 			<arg value="${project.dir}/portal-service/src" />
 			<arg value="${project.dir}/portal-web/docroot/html/js/liferay/service_unpacked.js" />-->
