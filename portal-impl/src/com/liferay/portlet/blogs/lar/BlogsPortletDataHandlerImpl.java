@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
 import com.liferay.portlet.blogs.service.persistence.BlogsEntryUtil;
@@ -130,7 +130,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("blog-entries");
 
-			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -165,7 +165,7 @@ public class BlogsPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			XStream xStream = new XStream();
 
-			Document doc = PortalUtil.readDocumentFromXML(data);
+			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

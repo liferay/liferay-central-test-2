@@ -59,7 +59,9 @@ import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.InitUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -187,7 +189,7 @@ public class MainServlet extends ActionServlet {
 		try {
 			String[] xmls = new String[] {
 				HttpUtil.URLtoString(ctx.getResource(
-					"/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM)),
+					"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_CUSTOM)),
 				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/portlet-ext.xml")),
 				HttpUtil.URLtoString(ctx.getResource(
@@ -693,7 +695,7 @@ public class MainServlet extends ActionServlet {
 	}
 
 	protected void checkWebSettings(String xml) throws DocumentException {
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 

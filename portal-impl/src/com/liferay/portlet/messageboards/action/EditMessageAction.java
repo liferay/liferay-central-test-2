@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.messageboards.MessageBodyException;
@@ -192,7 +192,7 @@ public class EditMessageAction extends PortletAction {
 
 		if (attachments) {
 			UploadPortletRequest uploadReq =
-				PortalUtil.getUploadPortletRequest(req);
+				UploadRequestUtil.getUploadPortletRequest(req);
 
 			for (int i = 1; i <= 5; i++) {
 				File file = uploadReq.getFile("msgFile" + i);

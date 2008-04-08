@@ -25,7 +25,7 @@ package com.liferay.portal.theme;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.service.impl.ThemeLocalUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
 
@@ -123,7 +123,7 @@ public class ThemeLoader {
 		_ctx = ctx;
 
 		try {
-			Document doc = PortalUtil.readDocumentFromXML(xmls[0], true);
+			Document doc = DocumentUtil.readDocumentFromXML(xmls[0], true);
 
 			Element root = doc.getRootElement();
 

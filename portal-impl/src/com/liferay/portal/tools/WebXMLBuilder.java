@@ -24,8 +24,8 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Html;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.HtmlImpl;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.xml.XMLFormatter;
 import com.liferay.util.xml.XMLMerger;
@@ -66,7 +66,7 @@ public class WebXMLBuilder {
 
 		double version = 2.3;
 
-		Document doc = PortalUtil.readDocumentFromXML(webXML);
+		Document doc = DocumentUtil.readDocumentFromXML(webXML);
 
 		Element root = doc.getRootElement();
 

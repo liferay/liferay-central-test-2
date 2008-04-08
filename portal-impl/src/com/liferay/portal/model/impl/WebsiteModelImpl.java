@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.Website;
 import com.liferay.portal.model.WebsiteSoap;
 import com.liferay.portal.util.PropsUtil;
@@ -65,34 +65,34 @@ public class WebsiteModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "Website";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "websiteId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "companyId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "userId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "userName", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
+
 
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
+
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "classPK", new Integer(Types.BIGINT) },
-			
+
 
 			{ "url", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "typeId", new Integer(Types.INTEGER) },
-			
+
 
 			{ "primary_", new Integer(Types.BOOLEAN) }
 		};

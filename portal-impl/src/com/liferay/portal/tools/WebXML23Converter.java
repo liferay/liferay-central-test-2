@@ -24,7 +24,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.xml.XMLFormatter;
 
@@ -54,7 +54,7 @@ public class WebXML23Converter {
 		try {
 			String webXML24 = FileUtil.read(input);
 
-			Document doc = PortalUtil.readDocumentFromXML(webXML24);
+			Document doc = DocumentUtil.readDocumentFromXML(webXML24);
 
 			Element root = doc.getRootElement();
 

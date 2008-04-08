@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.CalendarFactoryUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portlet.polls.DuplicateVoteException;
 import com.liferay.portlet.polls.NoSuchChoiceException;
 import com.liferay.portlet.polls.NoSuchQuestionException;
@@ -150,7 +150,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("poll-questions");
 
-			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -172,7 +172,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("poll-choices");
 
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
+			tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -197,7 +197,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("poll-votes");
 
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
+			tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -228,7 +228,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			XStream xStream = new XStream();
 
-			Document doc = PortalUtil.readDocumentFromXML(data);
+			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

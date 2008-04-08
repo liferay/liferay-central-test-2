@@ -24,7 +24,7 @@ package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.ant.Java2WsddTask;
 
@@ -58,7 +58,7 @@ public class WSDDBuilder {
 		try {
 			_serverConfigFileName = serverConfigFileName;
 
-			Document doc = PortalUtil.readDocumentFromFile(
+			Document doc = DocumentUtil.readDocumentFromFile(
 				new File(fileName), true);
 
 			Element root = doc.getRootElement();

@@ -34,7 +34,7 @@ import com.liferay.portal.kernel.util.StringUtil_IW;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.tools.SourceFormatter;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SetUtil;
 import com.liferay.util.TextFormatter;
@@ -511,7 +511,7 @@ public class ServiceBuilder {
 			_springUtilPackage = springUtilPackage;
 			_testDir = testDir;
 
-			Document doc = PortalUtil.readDocumentFromFile(
+			Document doc = DocumentUtil.readDocumentFromFile(
 				new File(fileName), true);
 
 			Element root = doc.getRootElement();
@@ -2201,7 +2201,7 @@ public class ServiceBuilder {
 	private void _createRemotingXML() throws Exception {
 		StringMaker sm = new StringMaker();
 
-		Document doc = PortalUtil.readDocumentFromFile(
+		Document doc = DocumentUtil.readDocumentFromFile(
 			new File(_springFileName), true);
 
 		Iterator<Element> itr = doc.getRootElement().elements(

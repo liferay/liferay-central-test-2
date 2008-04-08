@@ -27,6 +27,8 @@ import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Plugin;
+import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -129,7 +131,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		File facesXML = new File(srcFile + "/WEB-INF/faces-config.xml");
 		File portletXML = new File(
-			srcFile + "/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
+			srcFile + "/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD);
 		File webXML = new File(srcFile + "/WEB-INF/web.xml");
 
 		extraContent += getServletContent(portletXML, webXML);
@@ -155,7 +157,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// Add wrappers for portlets
 
-		Document doc = PortalUtil.readDocumentFromFile(portletXML);
+		Document doc = DocumentUtil.readDocumentFromFile(portletXML);
 
 		Element root = doc.getRootElement();
 
@@ -196,7 +198,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// Make sure there is a company id specified
 
-		doc = PortalUtil.readDocumentFromFile(webXML);
+		doc = DocumentUtil.readDocumentFromFile(webXML);
 
 		root = doc.getRootElement();
 
@@ -421,7 +423,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// portlet.xml
 
-		Document doc = PortalUtil.readDocumentFromFile(portletXML, true);
+		Document doc = DocumentUtil.readDocumentFromFile(portletXML, true);
 
 		Element root = doc.getRootElement();
 
@@ -448,7 +450,7 @@ public class PortletDeployer extends BaseDeployer {
 
 		// faces-config.xml
 
-		doc = PortalUtil.readDocumentFromFile(facesXML, true);
+		doc = DocumentUtil.readDocumentFromFile(facesXML, true);
 
 		root = doc.getRootElement();
 
@@ -510,12 +512,11 @@ public class PortletDeployer extends BaseDeployer {
 		}
 
 		File portletXML = new File(
-			srcFile + "/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
+			srcFile + "/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD);
 
 		if (portletXML.exists()) {
 			File portletCustomXML = new File(
-				srcFile + "/WEB-INF/" +
-					PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM);
+				srcFile + "/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_CUSTOM);
 
 			if (portletCustomXML.exists()) {
 				portletCustomXML.delete();

@@ -36,7 +36,7 @@ import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.documentlibrary.DuplicateFolderNameException;
 import com.liferay.portlet.documentlibrary.NoSuchFileEntryException;
@@ -190,7 +190,7 @@ public class EditFileEntryAction extends PortletAction {
 		throws Exception {
 
 		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 

@@ -392,7 +392,7 @@
 		<priority value="ERROR" />
 	</category>
 
-	<category name="com.liferay.portal.util.PortalUtil">
+	<category name="com.liferay.portal.util.PortalImpl">
 		<priority value="INFO" />
 	</category>
 

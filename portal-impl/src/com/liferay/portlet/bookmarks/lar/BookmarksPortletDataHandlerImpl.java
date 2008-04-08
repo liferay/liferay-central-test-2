@@ -28,7 +28,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portlet.bookmarks.NoSuchEntryException;
 import com.liferay.portlet.bookmarks.NoSuchFolderException;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
@@ -136,7 +136,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("bookmark-folders");
 
-			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -166,7 +166,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("bookmark-entries");
 
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
+			tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -197,7 +197,7 @@ public class BookmarksPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			XStream xStream = new XStream();
 
-			Document doc = PortalUtil.readDocumentFromXML(data);
+			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

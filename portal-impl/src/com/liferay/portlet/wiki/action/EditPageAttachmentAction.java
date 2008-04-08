@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portlet.wiki.NoSuchNodeException;
 import com.liferay.portlet.wiki.NoSuchPageException;
 import com.liferay.portlet.wiki.service.WikiPageServiceUtil;
@@ -127,7 +127,7 @@ public class EditPageAttachmentAction extends PortletAction {
 
 	protected void addAttachment(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");

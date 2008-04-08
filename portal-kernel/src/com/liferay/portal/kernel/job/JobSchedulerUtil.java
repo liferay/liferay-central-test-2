@@ -40,16 +40,16 @@ public class JobSchedulerUtil {
 		getJobScheduler().schedule(intervalJob);
 	}
 
-	public void setJobScheduler(JobScheduler jobScheduler) {
-		_jobScheduler = jobScheduler;
-	}
-
 	public static void shutdown() {
 		getJobScheduler().shutdown();
 	}
 
 	public static void unschedule(IntervalJob intervalJob) {
 		getJobScheduler().unschedule(intervalJob);
+	}
+
+	public void setJobScheduler(JobScheduler jobScheduler) {
+		_jobScheduler = jobScheduler;
 	}
 
 	private static JobSchedulerUtil _getUtil() {

@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portlet.imagegallery.DuplicateImageNameException;
 import com.liferay.portlet.imagegallery.ImageNameException;
 import com.liferay.portlet.imagegallery.ImageSizeException;
@@ -166,7 +166,7 @@ public class EditImageAction extends PortletAction {
 
 	protected void updateImage(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		long imageId = ParamUtil.getLong(uploadReq, "imageId");
 

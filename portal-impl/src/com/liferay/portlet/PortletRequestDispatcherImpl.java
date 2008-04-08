@@ -134,8 +134,8 @@ public class PortletRequestDispatcherImpl implements PortletRequestDispatcher {
 
 		try {
 			PortletRequestImpl reqImpl = (PortletRequestImpl)req;
-			PortletResponseImpl resImpl = PortalUtil.getPortletResponseImpl(
-				res);
+			PortletResponseImpl resImpl =
+				PortletResponseImpl.getPortletResponseImpl(res);
 
 			HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 			HttpServletResponse httpRes =

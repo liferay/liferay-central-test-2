@@ -37,6 +37,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
 
 import java.lang.reflect.Constructor;
+import java.lang.reflect.Method;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -69,6 +70,35 @@ import org.w3c.dom.Element;
  *
  */
 public abstract class PortletResponseImpl implements PortletResponse {
+
+	public static PortletResponseImpl getPortletResponseImpl(
+		PortletResponse res) {
+
+		PortletResponseImpl resImpl = null;
+
+		if (res instanceof PortletResponseImpl) {
+			resImpl = (PortletResponseImpl)res;
+		}
+		else {
+
+			// LEP-4033
+
+			try {
+				Method method = res.getClass().getMethod("getResponse");
+
+				Object obj = method.invoke(res, (Object[])null);
+
+				resImpl = getPortletResponseImpl((PortletResponse)obj);
+			}
+			catch (Exception e) {
+				throw new RuntimeException(
+					"Unable to get the HTTP servlet resuest from " +
+						res.getClass().getName());
+			}
+		}
+
+		return resImpl;
+	}
 
 	public void addProperty(Cookie cookie) {
 		if (cookie == null) {

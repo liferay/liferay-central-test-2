@@ -33,7 +33,7 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portlet.messageboards.NoSuchCategoryException;
 import com.liferay.portlet.messageboards.NoSuchMessageException;
 import com.liferay.portlet.messageboards.NoSuchThreadException;
@@ -148,7 +148,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			Element el = root.addElement("message-board-categories");
 
-			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -210,7 +210,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("message-board-messages");
 
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
+			tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -235,7 +235,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("message-board-flags");
 
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
+			tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -268,7 +268,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("message-board-bans");
 
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
+			tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -303,7 +303,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			XStream xStream = new XStream();
 
-			Document doc = PortalUtil.readDocumentFromXML(data);
+			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

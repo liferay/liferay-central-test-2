@@ -37,7 +37,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.service.persistence.ImageUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -96,7 +96,7 @@ import org.dom4j.Element;
  * portlet in the layout set.
  * </p>
  *
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Joel Kozikowski
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
@@ -184,7 +184,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			String xml = xStream.toXML(structures);
 
-			Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+			Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			Element el = root.addElement("journal-structures");
 
@@ -214,7 +214,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("journal-templates");
 
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
+			tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -242,7 +242,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 
 			el = root.addElement("journal-articles");
 
-			tempDoc = PortalUtil.readDocumentFromXML(xml);
+			tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 			el.content().add(tempDoc.getRootElement().createCopy());
 
@@ -277,7 +277,7 @@ public class JournalPortletDataHandlerImpl implements PortletDataHandler {
 		try {
 			XStream xStream = new XStream();
 
-			Document doc = PortalUtil.readDocumentFromXML(data);
+			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

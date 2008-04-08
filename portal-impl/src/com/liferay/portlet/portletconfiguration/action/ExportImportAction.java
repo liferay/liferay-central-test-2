@@ -30,7 +30,7 @@ import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.communities.util.StagingUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
@@ -164,7 +164,7 @@ public class ExportImportAction extends EditConfigurationAction {
 
 		try {
 			UploadPortletRequest uploadReq =
-				PortalUtil.getUploadPortletRequest(req);
+				UploadRequestUtil.getUploadPortletRequest(req);
 
 			long plid = ParamUtil.getLong(uploadReq, "plid");
 			File file = uploadReq.getFile("importFileName");

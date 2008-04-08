@@ -46,6 +46,7 @@ import com.liferay.portal.model.impl.PortletURLListenerImpl;
 import com.liferay.portal.model.impl.PublicRenderParameterImpl;
 import com.liferay.portal.service.base.PortletLocalServiceBaseImpl;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -694,7 +695,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 				"com/liferay/portal/deploy/dependencies/liferay-display.xml");
 		}
 
-		Document doc = PortalUtil.readDocumentFromXML(xml, true);
+		Document doc = DocumentUtil.readDocumentFromXML(xml, true);
 
 		Element root = doc.getRootElement();
 
@@ -763,7 +764,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return liferayPortletIds;
 		}
 
-		Document doc = PortalUtil.readDocumentFromXML(xml, true);
+		Document doc = DocumentUtil.readDocumentFromXML(xml, true);
 
 		Element root = doc.getRootElement();
 
@@ -1103,7 +1104,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return portletIds;
 		}
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -1515,7 +1516,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			return servletURLPatterns;
 		}
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 

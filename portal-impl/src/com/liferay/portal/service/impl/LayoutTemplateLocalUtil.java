@@ -33,7 +33,7 @@ import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.impl.LayoutTemplateImpl;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.layoutconfiguration.util.velocity.InitColumnProcessor;
@@ -510,7 +510,7 @@ public class LayoutTemplateLocalUtil {
 			return layoutTemplateIds;
 		}
 
-		Document doc = PortalUtil.readDocumentFromXML(xml, true);
+		Document doc = DocumentUtil.readDocumentFromXML(xml, true);
 
 		Element root = doc.getRootElement();
 

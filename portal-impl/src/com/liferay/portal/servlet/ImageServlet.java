@@ -175,7 +175,7 @@ public class ImageServlet extends HttpServlet {
 			Date modifiedDate = image.getModifiedDate();
 
 			if (modifiedDate == null) {
-				modifiedDate = PortalUtil.UP_TIME;
+				modifiedDate = PortalUtil.getUptime();
 			}
 
 			// Round down and remove milliseconds

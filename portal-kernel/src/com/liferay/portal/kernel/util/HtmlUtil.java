@@ -54,10 +54,6 @@ public class HtmlUtil {
 		return getHtml().replaceMsWordCharacters(html);
 	}
 
-	public void setHtml(Html html) {
-		_html = html;
-	}
-
 	public static String stripBetween(String html, String tag) {
 		return getHtml().stripBetween(html, tag);
 	}
@@ -76,6 +72,10 @@ public class HtmlUtil {
 
 	public static String unescape(String html) {
 		return getHtml().unescape(html);
+	}
+
+	public void setHtml(Html html) {
+		_html = html;
 	}
 
 	private static HtmlUtil _getUtil() {

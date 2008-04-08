@@ -24,7 +24,7 @@ package com.liferay.portlet.calendar.action;
 
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.calendar.service.CalEventServiceUtil;
 import com.liferay.util.servlet.SessionErrors;
@@ -56,7 +56,7 @@ public class ImportEventsAction extends PortletAction {
 
 		try {
 			UploadPortletRequest uploadReq =
-				PortalUtil.getUploadPortletRequest(req);
+				UploadRequestUtil.getUploadPortletRequest(req);
 
 			Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 

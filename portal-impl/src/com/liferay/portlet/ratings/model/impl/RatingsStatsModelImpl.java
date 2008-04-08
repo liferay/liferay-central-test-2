@@ -24,7 +24,7 @@ package com.liferay.portlet.ratings.model.impl;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
@@ -64,19 +64,19 @@ public class RatingsStatsModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "RatingsStats";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "statsId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "classPK", new Integer(Types.BIGINT) },
-			
+
 
 			{ "totalEntries", new Integer(Types.INTEGER) },
-			
+
 
 			{ "totalScore", new Integer(Types.DOUBLE) },
-			
+
 
 			{ "averageScore", new Integer(Types.DOUBLE) }
 		};

@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
@@ -67,37 +67,37 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "SocialActivity";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "activityId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "groupId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "companyId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "userId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "userName", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
+
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "classPK", new Integer(Types.BIGINT) },
-			
+
 
 			{ "type_", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "extraData", new Integer(Types.CLOB) },
-			
+
 
 			{ "receiverUserId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "receiverUserName", new Integer(Types.VARCHAR) }
 		};

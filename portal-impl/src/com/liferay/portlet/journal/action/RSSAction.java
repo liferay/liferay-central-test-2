@@ -37,6 +37,7 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.WebKeys;
@@ -304,7 +305,8 @@ public class RSSAction extends PortletAction {
 			}
 		}
 		else if (!contentField.equals(JournalFeedImpl.ARTICLE_DESCRIPTION)) {
-			Document doc = PortalUtil.readDocumentFromXML(article.getContent());
+			Document doc = DocumentUtil.readDocumentFromXML(
+				article.getContent());
 
 			XPath xpathSelector = DocumentHelper.createXPath(
 				"//dynamic-element[@name='" + contentField + "']");

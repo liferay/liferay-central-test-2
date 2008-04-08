@@ -25,7 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.RoleSoap;
 import com.liferay.portal.util.PropsUtil;
@@ -63,22 +63,22 @@ public class RoleModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "Role_";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "roleId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "companyId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "classPK", new Integer(Types.BIGINT) },
-			
+
 
 			{ "name", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "description", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "type_", new Integer(Types.INTEGER) }
 		};

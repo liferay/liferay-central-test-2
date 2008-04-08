@@ -59,7 +59,7 @@ import com.liferay.portal.theme.NavItem;
 import com.liferay.portal.theme.RequestVars;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.DateFormats_IW;
-import com.liferay.portal.util.PortalUtil_IW;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil_IW;
 import com.liferay.portal.util.PropsUtil_IW;
 import com.liferay.portal.util.ServiceLocator;
@@ -200,9 +200,9 @@ public class VelocityVariables {
 		// Portal util
 
 		_insertHelperUtility(
-			vc, restrictedVariables, "portalUtil", PortalUtil_IW.getInstance());
+			vc, restrictedVariables, "portalUtil", PortalUtil.getPortal());
 		_insertHelperUtility(
-			vc, restrictedVariables, "portal", PortalUtil_IW.getInstance());
+			vc, restrictedVariables, "portal", PortalUtil.getPortal());
 
 		// Prefs props util
 

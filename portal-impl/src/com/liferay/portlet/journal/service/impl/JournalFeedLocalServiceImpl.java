@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.journal.DuplicateFeedIdException;
 import com.liferay.portlet.journal.FeedContentFieldException;
@@ -426,7 +427,7 @@ public class JournalFeedLocalServiceImpl
 				JournalStructure structure =
 					journalStructurePersistence.findByG_S(groupId, structureId);
 
-				Document doc = PortalUtil.readDocumentFromXML(
+				Document doc = DocumentUtil.readDocumentFromXML(
 					structure.getXsd());
 
 				XPath xpathSelector = DocumentHelper.createXPath(

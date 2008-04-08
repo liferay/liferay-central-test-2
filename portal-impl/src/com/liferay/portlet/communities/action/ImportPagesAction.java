@@ -25,7 +25,7 @@ package com.liferay.portlet.communities.action;
 import com.liferay.portal.LayoutImportException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 import com.liferay.util.servlet.UploadPortletRequest;
@@ -57,7 +57,7 @@ public class ImportPagesAction extends EditPagesAction {
 
 		try {
 			UploadPortletRequest uploadReq =
-				PortalUtil.getUploadPortletRequest(req);
+				UploadRequestUtil.getUploadPortletRequest(req);
 
 			long groupId = ParamUtil.getLong(uploadReq, "groupId");
 			boolean privateLayout = ParamUtil.getBoolean(

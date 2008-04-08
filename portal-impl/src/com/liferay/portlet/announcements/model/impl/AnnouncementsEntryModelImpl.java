@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
@@ -67,52 +67,52 @@ public class AnnouncementsEntryModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "AnnouncementsEntry";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "uuid_", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "entryId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "companyId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "userId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "userName", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "createDate", new Integer(Types.TIMESTAMP) },
-			
+
 
 			{ "modifiedDate", new Integer(Types.TIMESTAMP) },
-			
+
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "classPK", new Integer(Types.BIGINT) },
-			
+
 
 			{ "title", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "content", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "url", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "type_", new Integer(Types.VARCHAR) },
-			
+
 
 			{ "displayDate", new Integer(Types.TIMESTAMP) },
-			
+
 
 			{ "expirationDate", new Integer(Types.TIMESTAMP) },
-			
+
 
 			{ "priority", new Integer(Types.INTEGER) },
-			
+
 
 			{ "alert", new Integer(Types.BOOLEAN) }
 		};

@@ -23,7 +23,7 @@
 package com.liferay.portal.deploy.auto;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.Portal;
 
 import java.io.File;
 
@@ -55,8 +55,7 @@ public class PortletAutoDeployListener extends BaseAutoDeployListener {
 			deployer = getPhpDeployer();
 		}
 		else if (isMatchingFile(
-					file,
-					"WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)) {
+					file, "WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD)) {
 
 			deployer = _deployer;
 		}

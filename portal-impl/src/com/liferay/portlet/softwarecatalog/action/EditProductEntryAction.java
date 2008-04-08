@@ -31,7 +31,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.impl.ImageLocalUtil;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.softwarecatalog.DuplicateProductEntryModuleIdException;
 import com.liferay.portlet.softwarecatalog.NoSuchProductEntryException;
@@ -244,7 +244,7 @@ public class EditProductEntryAction extends PortletAction {
 
 	protected void updateProductEntry(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
 

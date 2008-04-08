@@ -192,10 +192,6 @@ public class HttpUtil {
 		return getHttp().removeProtocol(url);
 	}
 
-	public void setHttp(Http http) {
-		_http = http;
-	}
-
 	public static void submit(String location) throws IOException {
 		getHttp().submit(location);
 	}
@@ -310,6 +306,10 @@ public class HttpUtil {
 	 */
 	public static String URLtoString(URL url) throws IOException {
 		return getHttp().URLtoString(url);
+	}
+
+	public void setHttp(Http http) {
+		_http = http;
 	}
 
 	private static HttpUtil _getUtil() {

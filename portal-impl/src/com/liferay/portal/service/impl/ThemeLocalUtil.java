@@ -41,6 +41,7 @@ import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupId;
 import com.liferay.portal.theme.ThemeGroupLimit;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.ListUtil;
@@ -420,7 +421,7 @@ public class ThemeLocalUtil {
 			return themeIds;
 		}
 
-		Document doc = PortalUtil.readDocumentFromXML(xml, true);
+		Document doc = DocumentUtil.readDocumentFromXML(xml, true);
 
 		Element root = doc.getRootElement();
 

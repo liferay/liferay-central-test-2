@@ -26,7 +26,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 
@@ -82,7 +82,7 @@ public class ContentTransformerListener extends TransformerListener {
 	 */
 	protected String replaceContent(String xml) {
 		try {
-			Document doc = PortalUtil.readDocumentFromXML(xml);
+			Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 			Element root = doc.getRootElement();
 
@@ -154,7 +154,7 @@ public class ContentTransformerListener extends TransformerListener {
 		String content = null;
 
 		try {
-			Document doc = PortalUtil.readDocumentFromXML(xml);
+			Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 			Element root = doc.getRootElement();
 

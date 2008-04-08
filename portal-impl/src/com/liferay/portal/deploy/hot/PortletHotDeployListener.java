@@ -54,8 +54,8 @@ import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.ServiceComponentLocalServiceUtil;
+import com.liferay.portal.util.Portal;
 import com.liferay.portal.util.PortalInstances;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebAppPool;
 import com.liferay.portal.util.WebKeys;
@@ -129,9 +129,9 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 			String[] xmls = new String[] {
 				HttpUtil.URLtoString(ctx.getResource(
-					"/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD)),
+					"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD)),
 				HttpUtil.URLtoString(ctx.getResource(
-					"/WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_CUSTOM)),
+					"/WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_CUSTOM)),
 				HttpUtil.URLtoString(ctx.getResource(
 					"/WEB-INF/liferay-portlet.xml")),
 				HttpUtil.URLtoString(ctx.getResource("/WEB-INF/web.xml"))

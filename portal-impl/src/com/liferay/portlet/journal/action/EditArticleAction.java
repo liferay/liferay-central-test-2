@@ -32,7 +32,7 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -336,7 +336,7 @@ public class EditArticleAction extends PortletAction {
 
 	protected JournalArticle updateArticle(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 

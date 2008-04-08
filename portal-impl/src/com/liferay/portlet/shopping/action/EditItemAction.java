@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portlet.shopping.DuplicateItemSKUException;
 import com.liferay.portlet.shopping.ItemLargeImageNameException;
 import com.liferay.portlet.shopping.ItemLargeImageSizeException;
@@ -150,7 +150,7 @@ public class EditItemAction extends PortletAction {
 
 	protected void updateItem(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		long itemId = ParamUtil.getLong(uploadReq, "itemId");
 

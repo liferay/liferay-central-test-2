@@ -25,7 +25,7 @@ package com.liferay.portal.deploy.auto.exploded.tomcat;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -79,7 +79,7 @@ public abstract class BaseExplodedTomcatListener implements AutoDeployListener {
 		try {
 			String content = FileUtil.read(file);
 
-			Document doc = PortalUtil.readDocumentFromXML(content);
+			Document doc = DocumentUtil.readDocumentFromXML(content);
 
 			Element root = doc.getRootElement();
 

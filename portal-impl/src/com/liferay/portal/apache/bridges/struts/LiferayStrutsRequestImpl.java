@@ -23,7 +23,7 @@
 package com.liferay.portal.apache.bridges.struts;
 
 import com.liferay.portal.struts.StrutsUtil;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionRequestImpl;
 import com.liferay.portlet.RenderRequestImpl;
@@ -167,7 +167,7 @@ public class LiferayStrutsRequestImpl extends HttpServletRequestWrapper {
 		}
 
 		UploadServletRequest uploadReq =
-			PortalUtil.getUploadServletRequest(req);
+			UploadRequestUtil.getUploadServletRequest(req);
 
 		if (uploadReq != null) {
 			_multipartParams = uploadReq.getMultipartParameterMap();

@@ -25,7 +25,7 @@ package com.liferay.portlet.workflow.jbi;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portlet.workflow.model.WorkflowDefinition;
 import com.liferay.portlet.workflow.model.WorkflowInstance;
 import com.liferay.portlet.workflow.model.WorkflowTask;
@@ -80,7 +80,7 @@ public class WorkflowXMLUtil {
 	public static WorkflowDefinition parseDefinition(String xml)
 		throws DocumentException, ParseException {
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -123,7 +123,7 @@ public class WorkflowXMLUtil {
 	public static Map parseErrors(String xml) throws DocumentException {
 		Map errors = new LinkedHashMap();
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -144,7 +144,7 @@ public class WorkflowXMLUtil {
 	public static WorkflowInstance parseInstance(String xml)
 		throws DocumentException, ParseException {
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -209,7 +209,7 @@ public class WorkflowXMLUtil {
 	public static List parseList(String xml, String name)
 		throws DocumentException, ParseException {
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -240,7 +240,7 @@ public class WorkflowXMLUtil {
 		throws DocumentException {
 
 		try {
-			Document doc = PortalUtil.readDocumentFromXML(xml);
+			Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 			Element root = doc.getRootElement();
 
@@ -311,7 +311,7 @@ public class WorkflowXMLUtil {
 	public static WorkflowTask parseTask(String xml)
 		throws DocumentException, ParseException {
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 

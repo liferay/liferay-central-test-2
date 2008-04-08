@@ -30,7 +30,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portlet.journal.NoSuchArticleException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
@@ -80,7 +80,7 @@ import org.dom4j.Element;
  * </p>
  *
  * @author Joel Kozikowski
- * @author Raymond Augé
+ * @author Raymond Augï¿½
  * @author Bruno Farache
  *
  * @see com.liferay.portal.kernel.lar.PortletDataHandler
@@ -169,7 +169,7 @@ public class JournalContentPortletDataHandlerImpl
 
 				String xml = xStream.toXML(article);
 
-				Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+				Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 				content.add(tempDoc.getRootElement().createCopy());
 			}
@@ -187,7 +187,7 @@ public class JournalContentPortletDataHandlerImpl
 
 					String xml = xStream.toXML(structure);
 
-					Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+					Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 					content.add(tempDoc.getRootElement().createCopy());
 				}
@@ -207,7 +207,7 @@ public class JournalContentPortletDataHandlerImpl
 
 					String xml = xStream.toXML(template);
 
-					Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+					Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 					content.add(tempDoc.getRootElement().createCopy());
 				}
@@ -249,7 +249,7 @@ public class JournalContentPortletDataHandlerImpl
 
 			XStream xStream = new XStream();
 
-			Document doc = PortalUtil.readDocumentFromXML(data);
+			Document doc = DocumentUtil.readDocumentFromXML(data);
 
 			Element root = doc.getRootElement();
 

@@ -35,6 +35,7 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentTypeUtil;
 import com.liferay.portal.util.DateFormats;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.mail.RecipientException;
 import com.liferay.portlet.mail.model.MailAttachment;
@@ -333,7 +334,7 @@ public class EditMessageAction extends PortletAction {
 
 	protected Map getAttachments(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		Map attachments = new HashMap();
 

@@ -40,8 +40,8 @@ import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Plugin;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.HttpImpl;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -736,7 +736,7 @@ public class PluginPackageUtil {
 			return pluginPackageRepository;
 		}
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 
@@ -972,7 +972,7 @@ public class PluginPackageUtil {
 	private PluginPackage _readPluginPackageXml(String xml)
 		throws DocumentException {
 
-		Document doc = PortalUtil.readDocumentFromXML(xml);
+		Document doc = DocumentUtil.readDocumentFromXML(xml);
 
 		Element root = doc.getRootElement();
 

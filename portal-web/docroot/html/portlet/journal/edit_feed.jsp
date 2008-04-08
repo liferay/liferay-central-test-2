@@ -427,7 +427,7 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 			<c:if test="<%= structure != null %>">
 				<optgroup label='<liferay-ui:message key="structure-fields" />'>
 					<%
-					Document doc = PortalUtil.readDocumentFromXML(structure.getXsd());
+					Document doc = DocumentUtil.readDocumentFromXML(structure.getXsd());
 
 					XPath xpathSelector = DocumentHelper.createXPath("//dynamic-element");
 

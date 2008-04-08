@@ -69,6 +69,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -377,8 +378,8 @@ public class EditPagesAction extends PortletAction {
 	protected void updateLayout(ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+		UploadPortletRequest uploadReq =
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		String cmd = ParamUtil.getString(uploadReq, Constants.CMD);
 
@@ -522,8 +523,8 @@ public class EditPagesAction extends PortletAction {
 	}
 
 	protected void updateLogo(ActionRequest req) throws Exception {
-		UploadPortletRequest uploadReq = PortalUtil.getUploadPortletRequest(
-			req);
+		UploadPortletRequest uploadReq =
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		long liveGroupId = ParamUtil.getLong(req, "liveGroupId");
 		long stagingGroupId = ParamUtil.getLong(req, "stagingGroupId");

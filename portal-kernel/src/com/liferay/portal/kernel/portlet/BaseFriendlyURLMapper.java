@@ -24,7 +24,7 @@ package com.liferay.portal.kernel.portlet;
 
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.kernel.util.PortalClassInvoker;
 
 import java.util.Map;
 
@@ -41,7 +41,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
 	protected String getNamespace() {
 		try {
-			return PortalUtil.getPortletNamespace(getPortletId());
+			return _getPortletNamespace(getPortletId());
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -90,7 +90,7 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		Map<String, String[]> params, String name, String value) {
 
 		try {
-			if (!PortalUtil.isReservedParameter(name)) {
+			if (!_isReservedParameter(name)) {
 				name = getNamespace() + name;
 			}
 
@@ -100,6 +100,40 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 			_log.error(e, e);
 		}
 	}
+
+	private String _getPortletNamespace(String portletId)
+		throws Exception {
+
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GETPORTLETNAMESPACE, portletId, false);
+
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
+
+	private boolean _isReservedParameter(String name) throws Exception {
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_ISRESERVEDPARAMETER, name, false);
+
+		if (returnObj != null) {
+			return (Boolean)returnObj;
+		}
+		else {
+			return false;
+		}
+	}
+
+	private static final String _CLASS = "com.liferay.portal.util.PortalUtil";
+
+	private static final String _METHOD_GETPORTLETNAMESPACE =
+		"getPortletNamespace";
+
+	private static final String _METHOD_ISRESERVEDPARAMETER =
+		"isReservedParameter";
 
 	private static Log _log =
 		LogFactoryUtil.getLog(BaseFriendlyURLMapper.class);

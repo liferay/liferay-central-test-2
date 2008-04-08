@@ -45,10 +45,10 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.tools.BaseDeployer;
 import com.liferay.portal.util.HttpImpl;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.util.UploadRequestUtil;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.ProgressInputStream;
@@ -249,7 +249,7 @@ public class InstallPluginAction extends PortletAction {
 
 	protected void localDeploy(ActionRequest req) throws Exception {
 		UploadPortletRequest uploadReq =
-			PortalUtil.getUploadPortletRequest(req);
+			UploadRequestUtil.getUploadPortletRequest(req);
 
 		String fileName = null;
 

@@ -25,7 +25,7 @@ package com.liferay.portlet.expando.model.impl;
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
-import com.liferay.portal.kernel.util.PortalUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.model.impl.BaseModelImpl;
 import com.liferay.portal.util.PropsUtil;
 
@@ -65,10 +65,10 @@ public class ExpandoTableModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "ExpandoTable";
 	public static final Object[][] TABLE_COLUMNS = {
 			{ "tableId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "classNameId", new Integer(Types.BIGINT) },
-			
+
 
 			{ "name", new Integer(Types.VARCHAR) }
 		};

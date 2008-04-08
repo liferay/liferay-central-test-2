@@ -76,6 +76,7 @@ import com.liferay.portal.service.permission.PortletPermissionUtil;
 import com.liferay.portal.theme.ThemeLoader;
 import com.liferay.portal.theme.ThemeLoaderFactory;
 import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsValues;
@@ -1917,7 +1918,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				String xml = xStream.toXML(messages);
 
-				Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+				Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 				el.content().add(tempDoc.getRootElement().createCopy());
 			}
@@ -2472,7 +2473,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 				String xml = xStream.toXML(ratingsEntries);
 
-				Document tempDoc = PortalUtil.readDocumentFromXML(xml);
+				Document tempDoc = DocumentUtil.readDocumentFromXML(xml);
 
 				el.content().add(tempDoc.getRootElement().createCopy());
 			}

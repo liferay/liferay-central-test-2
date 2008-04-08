@@ -23,7 +23,7 @@
 package com.liferay.portal.deploy.auto.exploded.tomcat;
 
 import com.liferay.portal.kernel.deploy.auto.AutoDeployException;
-import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.Portal;
 
 import java.io.File;
 
@@ -58,7 +58,7 @@ public class PortletExplodedTomcatListener extends BaseExplodedTomcatListener {
 		}
 		else {
 			docBaseDir = getDocBaseDir(
-				file, "WEB-INF/" + PortalUtil.PORTLET_XML_FILE_NAME_STANDARD);
+				file, "WEB-INF/" + Portal.PORTLET_XML_FILE_NAME_STANDARD);
 
 			if (docBaseDir != null) {
 				deployer = _deployer;

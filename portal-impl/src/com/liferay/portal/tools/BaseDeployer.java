@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.plugin.PluginPackageUtil;
+import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -1058,7 +1059,7 @@ public class BaseDeployer {
 				File file = new File(srcDir + "/WEB-INF/" + files[i]);
 
 				try {
-					Document doc = PortalUtil.readDocumentFromFile(file);
+					Document doc = DocumentUtil.readDocumentFromFile(file);
 
 					String content = XMLFormatter.toString(
 						doc, XMLFormatter.INDENT, true);
@@ -1088,7 +1089,7 @@ public class BaseDeployer {
 
 		File geronimoWebXml = new File(srcFile + "/WEB-INF/geronimo-web.xml");
 
-		Document doc = PortalUtil.readDocumentFromFile(geronimoWebXml);
+		Document doc = DocumentUtil.readDocumentFromFile(geronimoWebXml);
 
 		Element root = doc.getRootElement();
 
@@ -1132,7 +1133,7 @@ public class BaseDeployer {
 
 		double webXmlVersion = 2.3;
 
-		Document webXmlDoc = PortalUtil.readDocumentFromXML(content);
+		Document webXmlDoc = DocumentUtil.readDocumentFromXML(content);
 
 		Element webXmlRoot = webXmlDoc.getRootElement();
 
