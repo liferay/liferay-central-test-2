@@ -29,18 +29,35 @@ package com.liferay.portlet.social.model;
  * @author Raymond Augé
  *
  */
-public interface SocialRelationConstants {
+public class SocialRelationConstants {
 
-	public static final int TYPE_BI_CO_WORKER = 1;
+	public static final int TYPE_BI_COWORKER = 1;
 
 	public static final int TYPE_BI_FRIEND = 2;
 
-	public static final int TYPE_BI_SIBLING = 3;
+	public static final int TYPE_BI_ROMANTIC_PARTNER = 3;
 
-	public static final int TYPE_BI_SPOUSE = 4;
+	public static final int TYPE_BI_SIBLING = 4;
 
-	public static final int TYPE_UNI_CHILD = 5;
+	public static final int TYPE_BI_SPOUSE = 5;
 
-	public static final int TYPE_UNI_PARENT = 6;
+	public static final int TYPE_UNI_CHILD = 6;
+
+	public static final int TYPE_UNI_PARENT = 7;
+
+	public static boolean isTypeBi(int type) {
+		return !isTypeUni(type);
+	}
+
+	public static boolean isTypeUni(int type) {
+		if ((type == SocialRelationConstants.TYPE_UNI_CHILD) ||
+			(type == SocialRelationConstants.TYPE_UNI_PARENT)) {
+
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
 
 }

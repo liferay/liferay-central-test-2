@@ -999,8 +999,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
-				type == SocialRelationConstants.TYPE_UNI_PARENT) {
+		if (SocialRelationConstants.isTypeUni(type)) {
 			params.put(
 				"socialRelationUnidirectional",
 				new Long[] {userId, new Long(type)});
@@ -1023,8 +1022,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
-				type == SocialRelationConstants.TYPE_UNI_PARENT) {
+		if (SocialRelationConstants.isTypeUni(type)) {
 			params.put(
 				"socialRelationUnidirectional",
 				new Long[] {userId, new Long(type)});

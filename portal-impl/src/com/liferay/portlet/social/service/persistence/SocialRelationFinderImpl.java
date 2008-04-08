@@ -70,10 +70,9 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 
 			String sql = CustomSQLUtil.get(COUNT_BY_U_T);
 
-			if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
-					type == SocialRelationConstants.TYPE_UNI_PARENT) {
+			if (SocialRelationConstants.isTypeUni(type)) {
 				sql = StringUtil.replace(
-					sql,"(SocialRelation.userId2 = ?) OR", StringPool.BLANK);
+					sql, "(SocialRelation.userId2 = ?) OR", StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -84,8 +83,7 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 
 			qPos.add(userId);
 
-			if (type != SocialRelationConstants.TYPE_UNI_CHILD &&
-					type != SocialRelationConstants.TYPE_UNI_PARENT) {
+			if (SocialRelationConstants.isTypeBi(type)) {
 				qPos.add(userId);
 			}
 
@@ -122,10 +120,9 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_U_T);
 
-			if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
-					type == SocialRelationConstants.TYPE_UNI_PARENT) {
+			if (SocialRelationConstants.isTypeUni(type)) {
 				sql = StringUtil.replace(
-					sql,"(SocialRelation.userId2 = ?) OR", StringPool.BLANK);
+					sql, "(SocialRelation.userId2 = ?) OR", StringPool.BLANK);
 			}
 
 			SQLQuery q = session.createSQLQuery(sql);
@@ -136,8 +133,7 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 
 			qPos.add(userId);
 
-			if (type != SocialRelationConstants.TYPE_UNI_CHILD &&
-					type != SocialRelationConstants.TYPE_UNI_PARENT) {
+			if (SocialRelationConstants.isTypeBi(type)) {
 				qPos.add(userId);
 			}
 
@@ -164,8 +160,7 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 
 			String sql = CustomSQLUtil.get(FIND_BY_U_U_T_BI);
 
-			if (type == SocialRelationConstants.TYPE_UNI_CHILD ||
-					type == SocialRelationConstants.TYPE_UNI_PARENT) {
+			if (SocialRelationConstants.isTypeUni(type)) {
 				sql = CustomSQLUtil.get(FIND_BY_U_U_T_UNI);
 			}
 
@@ -179,9 +174,7 @@ public class SocialRelationFinderImpl implements SocialRelationFinder {
 			qPos.add(userId2);
 			qPos.add(type);
 
-
-			if (type != SocialRelationConstants.TYPE_UNI_CHILD &&
-					type != SocialRelationConstants.TYPE_UNI_PARENT) {
+			if (SocialRelationConstants.isTypeBi(type)) {
 				qPos.add(userId2);
 				qPos.add(userId1);
 				qPos.add(type);
