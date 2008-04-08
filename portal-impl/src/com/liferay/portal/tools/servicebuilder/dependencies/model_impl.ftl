@@ -6,16 +6,21 @@ package ${packagePath}.model.impl;
 
 import ${packagePath}.model.${entity.name};
 import ${packagePath}.model.${entity.name}Soap;
-import ${baseModelImplPackage}.BaseModelImpl;
-import com.liferay.portal.util.PortalUtil;
-import ${propsUtilPackage}.PropsUtil;
+
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import ${baseModelImplPackage}.BaseModelImpl;
+import com.liferay.portal.util.PortalUtil;
+import ${propsUtilPackage}.PropsUtil;
+
 import java.io.Serializable;
+
 import java.lang.reflect.Proxy;
+
 import java.sql.Types;
+
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;

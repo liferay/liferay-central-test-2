@@ -13,9 +13,11 @@ import ${packagePath}.service.${entity.name}${sessionTypeName}Service;
 
 	import ${packagePath}.model.${entity.name};
 	import ${packagePath}.model.impl.${entity.name}Impl;
+
 	import com.liferay.portal.PortalException;
 	import com.liferay.portal.SystemException;
 	import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
+
 	import java.util.List;
 </#if>
 

@@ -1,7 +1,9 @@
 package ${propsUtilPackage};
 
 import com.germinus.easyconf.ComponentProperties;
+
 import com.liferay.util.ExtPropertiesLoader;
+
 import java.util.Properties;
 
 public class PropsUtil {

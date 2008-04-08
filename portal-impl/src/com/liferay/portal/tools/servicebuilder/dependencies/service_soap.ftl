@@ -1,9 +1,11 @@
 package ${packagePath}.service.http;
 
 import ${packagePath}.service.${entity.name}ServiceUtil;
+
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.util.ListUtil;
+
 import java.rmi.RemoteException;
 
 /**

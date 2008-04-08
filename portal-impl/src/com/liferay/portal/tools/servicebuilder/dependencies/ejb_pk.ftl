@@ -3,7 +3,9 @@ package ${packagePath}.service.persistence;
 import com.liferay.portal.kernel.util.DateUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+
 import java.io.Serializable;
+
 import java.util.Date;
 
 public class ${entity.PKClassName} implements Comparable<${entity.PKClassName}>, Serializable {
@@ -49,7 +51,7 @@ public class ${entity.PKClassName} implements Comparable<${entity.PKClassName}>,
 		</#if>
 	</#list>
 
-	public int compareTo(${entity.PKClassName} pk) { 
+	public int compareTo(${entity.PKClassName} pk) {
 		if (pk == null) {
 			return -1;
 		}

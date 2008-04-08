@@ -5,6 +5,7 @@ package ${packagePath}.model;
 </#if>
 
 import com.liferay.portal.model.BaseModel;
+
 import java.util.Date;
 
 /**

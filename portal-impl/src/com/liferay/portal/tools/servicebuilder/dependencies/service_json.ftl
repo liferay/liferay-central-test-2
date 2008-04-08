@@ -1,6 +1,7 @@
 package ${packagePath}.service.http;
 
 import ${packagePath}.service.${entity.name}ServiceUtil;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

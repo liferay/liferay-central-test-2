@@ -1,9 +1,12 @@
 package ${packagePath}.service.http;
 
 import ${packagePath}.model.${entity.name};
+
 import com.liferay.util.JSONUtil;
+
 import java.util.Date;
 import java.util.List;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 

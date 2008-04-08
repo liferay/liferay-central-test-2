@@ -4,8 +4,9 @@ package ${packagePath}.service.persistence;
 
 import ${packagePath}.${noSuchEntity}Exception;
 import ${packagePath}.model.${entity.name};
-import ${basePersistencePackage}.BasePersistenceTestCase;
+
 import ${beanLocatorUtilPackage}.BeanLocatorUtil;
+import ${basePersistencePackage}.BasePersistenceTestCase;
 
 public class ${entity.name}PersistenceTest extends BasePersistenceTestCase {
 
