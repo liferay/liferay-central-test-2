@@ -262,6 +262,14 @@ public class TagsEntryLocalServiceUtil {
 		return tagsEntryLocalService.getEntryNames(classNameId, classPK);
 	}
 
+	public static void mergeEntries(long fromEntryId, long toEntryId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		TagsEntryLocalService tagsEntryLocalService = TagsEntryLocalServiceFactory.getService();
+
+		tagsEntryLocalService.mergeEntries(fromEntryId, toEntryId);
+	}
+
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws com.liferay.portal.SystemException {

@@ -274,6 +274,36 @@ public class TagsEntryLocalServiceImpl extends TagsEntryLocalServiceBaseImpl {
 		return getEntryNames(getEntries(classNameId, classPK));
 	}
 
+	public void mergeEntries(long fromEntryId, long toEntryId)
+		throws PortalException, SystemException {
+
+		List<TagsAsset> assets = tagsEntryPersistence.getTagsAssets(
+			fromEntryId);
+
+		tagsEntryPersistence.addTagsAssets(toEntryId, assets);
+
+		List<TagsProperty> properties = tagsPropertyPersistence.findByEntryId(
+			fromEntryId);
+
+		for (TagsProperty fromProperty : properties) {
+			TagsProperty toProperty = tagsPropertyPersistence.fetchByE_K(
+				toEntryId, fromProperty.getKey());
+
+			if (toProperty == null) {
+				fromProperty.setEntryId(toEntryId);
+
+				tagsPropertyPersistence.update(fromProperty, false);
+			}
+			else {
+				toProperty.setValue(fromProperty.getValue());
+
+				tagsPropertyPersistence.update(toProperty, false);
+			}
+		}
+
+		deleteEntry(fromEntryId);
+	}
+
 	public List<TagsEntry> search(
 			long companyId, String name, String[] properties)
 		throws SystemException {

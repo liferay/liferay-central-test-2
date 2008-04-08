@@ -154,6 +154,18 @@ public class TagsEntryServiceSoap {
 		}
 	}
 
+	public static void mergeEntries(long fromEntryId, long toEntryId)
+		throws RemoteException {
+		try {
+			TagsEntryServiceUtil.mergeEntries(fromEntryId, toEntryId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.tags.model.TagsEntrySoap[] search(
 		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws RemoteException {

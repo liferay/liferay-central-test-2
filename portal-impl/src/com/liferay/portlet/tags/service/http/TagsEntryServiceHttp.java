@@ -276,6 +276,40 @@ public class TagsEntryServiceHttp {
 		}
 	}
 
+	public static void mergeEntries(HttpPrincipal httpPrincipal,
+		long fromEntryId, long toEntryId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(fromEntryId);
+
+			Object paramObj1 = new LongWrapper(toEntryId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(TagsEntryServiceUtil.class.getName(),
+					"mergeEntries", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		HttpPrincipal httpPrincipal, long companyId, java.lang.String name,
 		java.lang.String[] properties)

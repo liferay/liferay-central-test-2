@@ -2710,6 +2710,13 @@ Liferay.Service.Tags.TagsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	mergeEntries: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "mergeEntries";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	search: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "search";

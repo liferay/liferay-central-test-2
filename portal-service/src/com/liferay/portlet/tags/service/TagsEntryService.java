@@ -72,6 +72,10 @@ public interface TagsEntryService {
 		long groupId, long companyId, long classNameId, java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
+	public void mergeEntries(long fromEntryId, long toEntryId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List<com.liferay.portlet.tags.model.TagsEntry> search(
 		long companyId, java.lang.String name, java.lang.String[] properties)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
