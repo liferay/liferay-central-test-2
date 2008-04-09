@@ -64,21 +64,23 @@ public class JSONServiceAction extends JSONAction {
 		String methodName = ParamUtil.getString(req, "serviceMethodName");
 		String[] parameters = StringUtil.split(
 			ParamUtil.getString(req, "serviceParameters"));
+		String[] parameterTypes = StringUtil.split(
+			ParamUtil.getString(req, "serviceParameterTypes"));
 
 		Class<?> classObj = Class.forName(className);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
-			classObj, methodName, parameters.length);
+			classObj, methodName, parameters, parameterTypes);
 
 		if (methodAndParameterTypes != null) {
 			Method method = (Method)methodAndParameterTypes[0];
-			Class<?>[] parameterTypes = (Class[])methodAndParameterTypes[1];
+			Class<?>[] curParameterTypes = (Class[])methodAndParameterTypes[1];
 			Object[] args = new Object[parameters.length];
 
 			for (int i = 0; i < parameters.length; i++) {
 				args[i] = getArgValue(
 					req, classObj, methodName, parameters[i],
-					parameterTypes[i]);
+					curParameterTypes[i]);
 
 				if (args[i] == null) {
 					return null;
@@ -200,12 +202,15 @@ public class JSONServiceAction extends JSONAction {
 	}
 
 	protected Object[] getMethodAndParameterTypes(
-			Class<?> classObj, String methodName, int paramtersCount)
+			Class<?> classObj, String methodName, String[] parameters,
+			String[] parameterTypes)
 		throws Exception {
+
+		String parameterNames = StringUtil.merge(parameters);
 
 		String key =
 			classObj.getName() + "_METHOD_NAME_" + methodName +
-				"_PARAMETERS_COUNT_" + paramtersCount;
+				"_PARAMETERS_" + parameterNames;
 
 		Object[] methodAndParameterTypes = _methodCache.get(key);
 
@@ -214,7 +219,7 @@ public class JSONServiceAction extends JSONAction {
 		}
 
 		Method method = null;
-		Class<?>[] parameterTypes = null;
+		Class<?>[] methodParameterTypes = null;
 
 		Method[] methods = classObj.getMethods();
 
@@ -224,25 +229,48 @@ public class JSONServiceAction extends JSONAction {
 			if (curMethod.getName().equals(methodName)) {
 				Class<?>[] curParameterTypes = curMethod.getParameterTypes();
 
-				if (curParameterTypes.length == paramtersCount) {
-					if (method != null) {
+				if (curParameterTypes.length == parameters.length) {
+					if (parameterTypes.length > 0 &&
+							parameterTypes.length == curParameterTypes.length) {
+
+						boolean match = true;
+
+						for (int j = 0; j < parameterTypes.length; j++) {
+							String t1 = parameterTypes[j];
+							String t2 = curParameterTypes[j].getName();
+
+							if (!t1.equals(t2)) {
+
+								match = false;
+							}
+						}
+
+						if (match) {
+							method = curMethod;
+							methodParameterTypes = curParameterTypes;
+
+							break;
+						}
+					}
+					else if (method != null) {
 						_log.error(
 							"Obscure method name for class " + classObj +
 								", method " + methodName +
-									", and parameter count " + paramtersCount);
+									", and parameters " + parameterNames);
 
 						return null;
 					}
 					else {
 						method = curMethod;
-						parameterTypes = curParameterTypes;
+						methodParameterTypes = curParameterTypes;
 					}
 				}
 			}
 		}
 
 		if (method != null) {
-			methodAndParameterTypes = new Object[] {method, parameterTypes};
+			methodAndParameterTypes = new Object[] {
+				method, methodParameterTypes};
 
 			_methodCache.put(key, methodAndParameterTypes);
 
@@ -251,7 +279,7 @@ public class JSONServiceAction extends JSONAction {
 		else {
 			_log.error(
 				"No method found for class " + classObj + ", method " +
-					methodName + ", and parameter count " + paramtersCount);
+					methodName + ", and parameters " + parameterNames);
 
 			return null;
 		}
