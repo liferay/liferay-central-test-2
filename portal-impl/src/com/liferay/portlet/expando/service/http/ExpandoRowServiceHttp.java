@@ -180,6 +180,42 @@ public class ExpandoRowServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
+		HttpPrincipal httpPrincipal, long classNameId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
+
+			Object paramObj1 = new IntegerWrapper(begin);
+
+			Object paramObj2 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"getDefaultTableRows",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.expando.model.ExpandoRow>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static int getDefaultTableRowsCount(HttpPrincipal httpPrincipal,
 		java.lang.String className) throws com.liferay.portal.SystemException {
 		try {
@@ -188,6 +224,36 @@ public class ExpandoRowServiceHttp {
 			if (className == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"getDefaultTableRowsCount", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getDefaultTableRowsCount(HttpPrincipal httpPrincipal,
+		long classNameId) throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
 
 			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
 					"getDefaultTableRowsCount", new Object[] { paramObj0 });
@@ -296,6 +362,49 @@ public class ExpandoRowServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
+		HttpPrincipal httpPrincipal, long classNameId,
+		java.lang.String tableName, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
+
+			Object paramObj1 = tableName;
+
+			if (tableName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new IntegerWrapper(begin);
+
+			Object paramObj3 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"getRows",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.expando.model.ExpandoRow>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static int getRowsCount(HttpPrincipal httpPrincipal, long tableId)
 		throws com.liferay.portal.SystemException {
 		try {
@@ -335,6 +444,43 @@ public class ExpandoRowServiceHttp {
 			if (className == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
+
+			Object paramObj1 = tableName;
+
+			if (tableName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"getRowsCount", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getRowsCount(HttpPrincipal httpPrincipal,
+		long classNameId, java.lang.String tableName)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
 
 			Object paramObj1 = tableName;
 

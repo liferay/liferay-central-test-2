@@ -50,8 +50,8 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 	public static String FIND_BY_TC_TN =
 		ExpandoColumnFinder.class.getName() + ".findByTC_TN";
 
-	public static String FIND_BY_TC_TN_N =
-		ExpandoColumnFinder.class.getName() + ".findByTC_TN_N";
+	public static String FIND_BY_TC_TN_CN =
+		ExpandoColumnFinder.class.getName() + ".findByTC_TN_CN";
 
 	public int countByTC_TN(long classNameId, String tableName)
 		throws SystemException {
@@ -121,7 +121,7 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 		}
 	}
 
-	public ExpandoColumn findByTC_TN_N(
+	public ExpandoColumn findByTC_TN_CN(
 			long classNameId, String tableName, String name)
 		throws SystemException {
 
@@ -130,7 +130,7 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_N);
+			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_CN);
 
 			SQLQuery q = session.createSQLQuery(sql);
 

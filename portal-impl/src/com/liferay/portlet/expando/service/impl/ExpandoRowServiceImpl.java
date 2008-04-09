@@ -57,10 +57,24 @@ public class ExpandoRowServiceImpl extends ExpandoRowServiceBaseImpl {
 			className, begin, end);
 	}
 
+	public List<ExpandoRow> getDefaultTableRows(
+			long classNameId, int begin, int end)
+		throws SystemException {
+
+		return expandoRowLocalService.getDefaultTableRows(
+			classNameId, begin, end);
+	}
+
 	public int getDefaultTableRowsCount(String className)
 		throws SystemException {
 
 		return expandoRowLocalService.getDefaultTableRowsCount(className);
+	}
+
+	public int getDefaultTableRowsCount(long classNameId)
+		throws SystemException {
+
+		return expandoRowLocalService.getDefaultTableRowsCount(classNameId);
 	}
 
 	public List<ExpandoRow> getRows(long tableId, int begin, int end)
@@ -76,6 +90,14 @@ public class ExpandoRowServiceImpl extends ExpandoRowServiceBaseImpl {
 		return expandoRowLocalService.getRows(className, tableName, begin, end);
 	}
 
+	public List<ExpandoRow> getRows(
+			long classNameId, String tableName, int begin, int end)
+		throws SystemException {
+
+		return expandoRowLocalService.getRows(
+			classNameId, tableName, begin, end);
+	}
+
 	public int getRowsCount(long tableId) throws SystemException {
 		return expandoRowLocalService.getRowsCount(tableId);
 	}
@@ -84,6 +106,12 @@ public class ExpandoRowServiceImpl extends ExpandoRowServiceBaseImpl {
 		throws SystemException {
 
 		return expandoRowLocalService.getRowsCount(className, tableName);
+	}
+
+	public int getRowsCount(long classNameId, String tableName)
+		throws SystemException {
+
+		return expandoRowLocalService.getRowsCount(classNameId, tableName);
 	}
 
 }

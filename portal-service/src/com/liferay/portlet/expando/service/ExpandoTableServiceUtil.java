@@ -51,6 +51,24 @@ package com.liferay.portlet.expando.service;
  *
  */
 public class ExpandoTableServiceUtil {
+	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
+		java.lang.String className)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
+
+		return expandoTableService.addDefaultTable(className);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
+		long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
+
+		return expandoTableService.addDefaultTable(classNameId);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
 		java.lang.String className, java.lang.String name)
 		throws com.liferay.portal.PortalException,
@@ -60,13 +78,13 @@ public class ExpandoTableServiceUtil {
 		return expandoTableService.addTable(className, name);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
-		java.lang.String className)
+	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
+		long classNameId, java.lang.String name)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
 
-		return expandoTableService.addDefaultTable(className);
+		return expandoTableService.addTable(classNameId, name);
 	}
 
 	public static void deleteTable(long tableId)
@@ -86,12 +104,28 @@ public class ExpandoTableServiceUtil {
 		expandoTableService.deleteTable(className, name);
 	}
 
+	public static void deleteTable(long classNameId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
+
+		expandoTableService.deleteTable(classNameId, name);
+	}
+
 	public static void deleteTables(java.lang.String className)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
 
 		expandoTableService.deleteTables(className);
+	}
+
+	public static void deleteTables(long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
+
+		expandoTableService.deleteTables(classNameId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
@@ -101,6 +135,15 @@ public class ExpandoTableServiceUtil {
 		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
 
 		return expandoTableService.getDefaultTable(className);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoTable getDefaultTable(
+		long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
+
+		return expandoTableService.getDefaultTable(classNameId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable getTable(
@@ -121,6 +164,15 @@ public class ExpandoTableServiceUtil {
 		return expandoTableService.getTable(className, name);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoTable getTable(
+		long classNameId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
+
+		return expandoTableService.getTable(classNameId, name);
+	}
+
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,
@@ -128,6 +180,15 @@ public class ExpandoTableServiceUtil {
 		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
 
 		return expandoTableService.getTables(className);
+	}
+
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoTable> getTables(
+		long classNameId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoTableService expandoTableService = ExpandoTableServiceFactory.getService();
+
+		return expandoTableService.getTables(classNameId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoTable updateTable(

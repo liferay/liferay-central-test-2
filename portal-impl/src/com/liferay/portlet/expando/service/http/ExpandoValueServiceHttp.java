@@ -74,16 +74,16 @@ import com.liferay.portlet.expando.service.ExpandoValueServiceUtil;
  */
 public class ExpandoValueServiceHttp {
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
-		HttpPrincipal httpPrincipal, long columnId, long classPK, long rowId,
+		HttpPrincipal httpPrincipal, long columnId, long rowId, long classPK,
 		java.lang.String data)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(columnId);
 
-			Object paramObj1 = new LongWrapper(classPK);
+			Object paramObj1 = new LongWrapper(rowId);
 
-			Object paramObj2 = new LongWrapper(rowId);
+			Object paramObj2 = new LongWrapper(classPK);
 
 			Object paramObj3 = data;
 
@@ -393,6 +393,57 @@ public class ExpandoValueServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
+		HttpPrincipal httpPrincipal, long classNameId,
+		java.lang.String tableName, java.lang.String columnName, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
+
+			Object paramObj1 = tableName;
+
+			if (tableName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = columnName;
+
+			if (columnName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new IntegerWrapper(begin);
+
+			Object paramObj4 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
+					"getColumnValues",
+					new Object[] {
+						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4
+					});
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.expando.model.ExpandoValue>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static int getColumnValuesCount(HttpPrincipal httpPrincipal,
 		long columnId) throws com.liferay.portal.SystemException {
 		try {
@@ -432,6 +483,50 @@ public class ExpandoValueServiceHttp {
 			if (className == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
+
+			Object paramObj1 = tableName;
+
+			if (tableName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = columnName;
+
+			if (columnName == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
+					"getColumnValuesCount",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getColumnValuesCount(HttpPrincipal httpPrincipal,
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName) throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
 
 			Object paramObj1 = tableName;
 
@@ -518,6 +613,49 @@ public class ExpandoValueServiceHttp {
 		}
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
+		HttpPrincipal httpPrincipal, long classNameId,
+		java.lang.String columnName, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
+
+			Object paramObj1 = columnName;
+
+			if (columnName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new IntegerWrapper(begin);
+
+			Object paramObj3 = new IntegerWrapper(end);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
+					"getDefaultTableColumnValues",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (java.util.List<com.liferay.portlet.expando.model.ExpandoValue>)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static int getDefaultTableColumnValuesCount(
 		HttpPrincipal httpPrincipal, java.lang.String className,
 		java.lang.String columnName) throws com.liferay.portal.SystemException {
@@ -527,6 +665,44 @@ public class ExpandoValueServiceHttp {
 			if (className == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
+
+			Object paramObj1 = columnName;
+
+			if (columnName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
+					"getDefaultTableColumnValuesCount",
+					new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static int getDefaultTableColumnValuesCount(
+		HttpPrincipal httpPrincipal, long classNameId,
+		java.lang.String columnName) throws com.liferay.portal.SystemException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
 
 			Object paramObj1 = columnName;
 
@@ -742,6 +918,58 @@ public class ExpandoValueServiceHttp {
 			if (className == null) {
 				paramObj0 = new NullWrapper("java.lang.String");
 			}
+
+			Object paramObj1 = tableName;
+
+			if (tableName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = name;
+
+			if (name == null) {
+				paramObj2 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj3 = new LongWrapper(rowId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoValueServiceUtil.class.getName(),
+					"getValue",
+					new Object[] { paramObj0, paramObj1, paramObj2, paramObj3 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.expando.model.ExpandoValue)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
+		HttpPrincipal httpPrincipal, long classNameId,
+		java.lang.String tableName, java.lang.String name, long rowId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
 
 			Object paramObj1 = tableName;
 

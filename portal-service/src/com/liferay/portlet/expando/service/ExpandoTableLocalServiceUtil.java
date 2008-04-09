@@ -101,24 +101,6 @@ public class ExpandoTableLocalServiceUtil {
 		return expandoTableLocalService.updateExpandoTable(expandoTable);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
-		java.lang.String className, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		return expandoTableLocalService.addTable(className, name);
-	}
-
-	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
-		long classNameId, java.lang.String name)
-		throws com.liferay.portal.PortalException,
-			com.liferay.portal.SystemException {
-		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
-
-		return expandoTableLocalService.addTable(classNameId, name);
-	}
-
 	public static com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
 		java.lang.String className)
 		throws com.liferay.portal.PortalException,
@@ -135,6 +117,24 @@ public class ExpandoTableLocalServiceUtil {
 		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
 
 		return expandoTableLocalService.addDefaultTable(classNameId);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
+		java.lang.String className, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		return expandoTableLocalService.addTable(className, name);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoTable addTable(
+		long classNameId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoTableLocalService expandoTableLocalService = ExpandoTableLocalServiceFactory.getService();
+
+		return expandoTableLocalService.addTable(classNameId, name);
 	}
 
 	public static void deleteTable(long tableId)

@@ -52,12 +52,12 @@ package com.liferay.portlet.expando.service;
  */
 public class ExpandoValueServiceUtil {
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
-		long columnId, long classPK, long rowId, java.lang.String data)
+		long columnId, long rowId, long classPK, java.lang.String data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
 
-		return expandoValueService.addValue(columnId, classPK, rowId, data);
+		return expandoValueService.addValue(columnId, rowId, classPK, data);
 	}
 
 	public static void deleteColumnValues(long columnId)
@@ -123,6 +123,16 @@ public class ExpandoValueServiceUtil {
 			columnName, begin, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.getColumnValues(classNameId, tableName,
+			columnName, begin, end);
+	}
+
 	public static int getColumnValuesCount(long columnId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
@@ -139,6 +149,15 @@ public class ExpandoValueServiceUtil {
 			columnName);
 	}
 
+	public static int getColumnValuesCount(long classNameId,
+		java.lang.String tableName, java.lang.String columnName)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.getColumnValuesCount(classNameId, tableName,
+			columnName);
+	}
+
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
 		java.lang.String className, java.lang.String columnName, int begin,
 		int end)
@@ -149,12 +168,30 @@ public class ExpandoValueServiceUtil {
 			columnName, begin, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
+		long classNameId, java.lang.String columnName, int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.getDefaultTableColumnValues(classNameId,
+			columnName, begin, end);
+	}
+
 	public static int getDefaultTableColumnValuesCount(
 		java.lang.String className, java.lang.String columnName)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
 
 		return expandoValueService.getDefaultTableColumnValuesCount(className,
+			columnName);
+	}
+
+	public static int getDefaultTableColumnValuesCount(long classNameId,
+		java.lang.String columnName)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.getDefaultTableColumnValuesCount(classNameId,
 			columnName);
 	}
 
@@ -207,5 +244,15 @@ public class ExpandoValueServiceUtil {
 		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
 
 		return expandoValueService.getValue(className, tableName, name, rowId);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
+		long classNameId, java.lang.String tableName, java.lang.String name,
+		long rowId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.getValue(classNameId, tableName, name, rowId);
 	}
 }

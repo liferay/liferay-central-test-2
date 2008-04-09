@@ -29,8 +29,8 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.ValueDataException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.model.ExpandoValue;
-import com.liferay.portlet.expando.model.impl.ExpandoTableImpl;
 import com.liferay.portlet.expando.service.base.ExpandoValueLocalServiceBaseImpl;
 
 import java.util.List;
@@ -46,8 +46,8 @@ import java.util.List;
 public class ExpandoValueLocalServiceImpl
 	extends ExpandoValueLocalServiceBaseImpl {
 
-	public ExpandoValue addValue(long columnId, long classPK, long rowId,
-			String data)
+	public ExpandoValue addValue(
+			long columnId, long rowId, long classPK, String data)
 		throws PortalException, SystemException {
 
 		validate(data);
@@ -55,13 +55,13 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnPersistence.findByPrimaryKey(
 			columnId);
 
-		ExpandoTable table = expandoTablePersistence.findByPrimaryKey(
-			column.getTableId());
-
 		ExpandoValue value = expandoValuePersistence.fetchByT_C_R(
 			column.getTableId(), columnId, rowId);
 
 		if (value == null) {
+			ExpandoTable table = expandoTablePersistence.findByPrimaryKey(
+				column.getTableId());
+
 			long valueId = counterLocalService.increment();
 
 			value = expandoValuePersistence.create(valueId);
@@ -159,8 +159,7 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public List<ExpandoValue> getDefaultTableColumnValues(
-			String className, String columnName, int begin,
-			int end)
+			String className, String columnName, int begin, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -169,13 +168,12 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public List<ExpandoValue> getDefaultTableColumnValues(
-			long classNameId, String columnName, int begin,
-			int end)
+			long classNameId, String columnName, int begin, int end)
 		throws SystemException {
 
 		return getColumnValues(
-			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME, columnName, begin,
-			end);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, columnName,
+			begin, end);
 	}
 
 	public int getDefaultTableColumnValuesCount(
@@ -192,12 +190,10 @@ public class ExpandoValueLocalServiceImpl
 		throws SystemException {
 
 		return getColumnValuesCount(
-				classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME, columnName);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, columnName);
 	}
 
-	public List<ExpandoValue> getRowValues(long rowId)
-		throws SystemException {
-
+	public List<ExpandoValue> getRowValues(long rowId) throws SystemException {
 		return expandoValuePersistence.findByRowId(rowId);
 	}
 

@@ -102,12 +102,12 @@ public class ExpandoValueLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
-		long columnId, long classPK, long rowId, java.lang.String data)
+		long columnId, long rowId, long classPK, java.lang.String data)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
 
-		return expandoValueLocalService.addValue(columnId, classPK, rowId, data);
+		return expandoValueLocalService.addValue(columnId, rowId, classPK, data);
 	}
 
 	public static void deleteColumnValues(long columnId)

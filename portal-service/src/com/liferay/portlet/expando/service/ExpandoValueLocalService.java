@@ -75,7 +75,7 @@ public interface ExpandoValueLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
-		long columnId, long classPK, long rowId, java.lang.String data)
+		long columnId, long rowId, long classPK, java.lang.String data)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

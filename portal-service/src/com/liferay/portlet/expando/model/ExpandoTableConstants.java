@@ -20,23 +20,16 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.expando.service.persistence;
+package com.liferay.portlet.expando.model;
 
 /**
- * <a href="ExpandoColumnFinder.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpandoTableConstants.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Raymond Augé
  *
  */
-public interface ExpandoColumnFinder {
-	public int countByTC_TN(long classNameId, java.lang.String tableName)
-		throws com.liferay.portal.SystemException;
+public class ExpandoTableConstants {
 
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> findByTC_TN(
-		long classNameId, java.lang.String tableName)
-		throws com.liferay.portal.SystemException;
+	public static final String DEFAULT_TABLE_NAME = "DEFAULT_TABLE";
 
-	public com.liferay.portlet.expando.model.ExpandoColumn findByTC_TN_CN(
-		long classNameId, java.lang.String tableName, java.lang.String name)
-		throws com.liferay.portal.SystemException;
 }

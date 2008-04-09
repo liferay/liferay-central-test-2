@@ -1721,16 +1721,16 @@ Liferay.Service.Expando.ExpandoRow = {
 Liferay.Service.Expando.ExpandoTable = {
 	serviceClassName: Liferay.Service.Expando.servicePackage + "ExpandoTable" + Liferay.Service.classNameSuffix,
 
-	addTable: function(params, callback) {
+	addDefaultTable: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addTable";
+		params.serviceMethodName = "addDefaultTable";
 
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	addDefaultTable: function(params, callback) {
+	addTable: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "addDefaultTable";
+		params.serviceMethodName = "addTable";
 
 		return Liferay.Service.ajax(params, callback);
 	},

@@ -95,9 +95,25 @@ public class ExpandoRowServiceJSON {
 		return ExpandoRowJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getDefaultTableRows(long classNameId, int begin,
+		int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoRow> returnValue =
+			ExpandoRowServiceUtil.getDefaultTableRows(classNameId, begin, end);
+
+		return ExpandoRowJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static int getDefaultTableRowsCount(java.lang.String className)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = ExpandoRowServiceUtil.getDefaultTableRowsCount(className);
+
+		return returnValue;
+	}
+
+	public static int getDefaultTableRowsCount(long classNameId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoRowServiceUtil.getDefaultTableRowsCount(classNameId);
 
 		return returnValue;
 	}
@@ -119,6 +135,15 @@ public class ExpandoRowServiceJSON {
 		return ExpandoRowJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getRows(long classNameId,
+		java.lang.String tableName, int begin, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoRow> returnValue =
+			ExpandoRowServiceUtil.getRows(classNameId, tableName, begin, end);
+
+		return ExpandoRowJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static int getRowsCount(long tableId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = ExpandoRowServiceUtil.getRowsCount(tableId);
@@ -130,6 +155,14 @@ public class ExpandoRowServiceJSON {
 		java.lang.String tableName)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = ExpandoRowServiceUtil.getRowsCount(className,
+				tableName);
+
+		return returnValue;
+	}
+
+	public static int getRowsCount(long classNameId, java.lang.String tableName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoRowServiceUtil.getRowsCount(classNameId,
 				tableName);
 
 		return returnValue;

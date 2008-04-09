@@ -29,7 +29,7 @@
 				(ExpandoTable.name = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.findByTC_TN_N">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder.findByTC_TN_CN">
 		<![CDATA[
 			SELECT
 				{ExpandoColumn.*}
@@ -42,6 +42,34 @@
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.countByTC_TN">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				ExpandoRow
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoRow.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoRowFinder.findByTC_TN">
+		<![CDATA[
+			SELECT
+				{ExpandoRow.*}
+			FROM
+				ExpandoRow
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoRow.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.countByTC_TN_CN">

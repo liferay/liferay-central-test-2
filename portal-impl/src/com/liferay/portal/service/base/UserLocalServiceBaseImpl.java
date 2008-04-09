@@ -288,6 +288,8 @@ import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 import com.liferay.portlet.expando.service.ExpandoValueServiceFactory;
+import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
+import com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueUtil;
 import com.liferay.portlet.messageboards.service.MBBanLocalService;
@@ -1432,6 +1434,14 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		this.expandoValuePersistence = expandoValuePersistence;
 	}
 
+	public ExpandoValueFinder getExpandoValueFinder() {
+		return expandoValueFinder;
+	}
+
+	public void setExpandoValueFinder(ExpandoValueFinder expandoValueFinder) {
+		this.expandoValueFinder = expandoValueFinder;
+	}
+
 	public DLFileRankLocalService getDLFileRankLocalService() {
 		return dlFileRankLocalService;
 	}
@@ -2053,6 +2063,10 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 			expandoValuePersistence = ExpandoValueUtil.getPersistence();
 		}
 
+		if (expandoValueFinder == null) {
+			expandoValueFinder = ExpandoValueFinderUtil.getFinder();
+		}
+
 		if (dlFileRankLocalService == null) {
 			dlFileRankLocalService = DLFileRankLocalServiceFactory.getImpl();
 		}
@@ -2233,6 +2247,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected ExpandoValueLocalService expandoValueLocalService;
 	protected ExpandoValueService expandoValueService;
 	protected ExpandoValuePersistence expandoValuePersistence;
+	protected ExpandoValueFinder expandoValueFinder;
 	protected DLFileRankLocalService dlFileRankLocalService;
 	protected DLFileRankPersistence dlFileRankPersistence;
 	protected DLFileRankFinder dlFileRankFinder;

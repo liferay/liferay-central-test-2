@@ -58,12 +58,16 @@ public interface ExpandoColumnService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void deleteColumns(long tableId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteColumns(java.lang.String className,
 		java.lang.String tableName)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public void deleteColumns(long tableId)
+	public void deleteColumns(long classNameId, java.lang.String tableName)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -83,12 +87,21 @@ public interface ExpandoColumnService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public com.liferay.portlet.expando.model.ExpandoColumn getColumn(
+		long classNameId, java.lang.String tableName, java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
 		long tableId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
 		java.lang.String className, java.lang.String tableName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getColumns(
+		long classNameId, java.lang.String tableName)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public int getColumnsCount(long tableId)
@@ -98,8 +111,16 @@ public interface ExpandoColumnService {
 		java.lang.String tableName)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
+	public int getColumnsCount(long classNameId, java.lang.String tableName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.expando.model.ExpandoColumn getDefaultTableColumn(
 		java.lang.String className, java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoColumn getDefaultTableColumn(
+		long classNameId, java.lang.String name)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -107,7 +128,14 @@ public interface ExpandoColumnService {
 		java.lang.String className)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoColumn> getDefaultTableColumns(
+		long classNameId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
 	public int getDefaultTableColumnsCount(java.lang.String className)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public int getDefaultTableColumnsCount(long classNameId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoColumn updateColumn(

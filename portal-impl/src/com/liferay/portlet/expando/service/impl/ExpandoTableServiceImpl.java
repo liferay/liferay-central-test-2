@@ -38,16 +38,28 @@ import java.util.List;
  */
 public class ExpandoTableServiceImpl extends ExpandoTableServiceBaseImpl {
 
+	public ExpandoTable addDefaultTable(String className)
+		throws PortalException, SystemException {
+
+		return expandoTableLocalService.addDefaultTable(className);
+	}
+
+	public ExpandoTable addDefaultTable(long classNameId)
+		throws PortalException, SystemException {
+
+		return expandoTableLocalService.addDefaultTable(classNameId);
+	}
+
 	public ExpandoTable addTable(String className, String name)
 		throws PortalException, SystemException {
 
 		return expandoTableLocalService.addTable(className, name);
 	}
 
-	public ExpandoTable addDefaultTable(String className)
+	public ExpandoTable addTable(long classNameId, String name)
 		throws PortalException, SystemException {
 
-		return expandoTableLocalService.addDefaultTable(className);
+		return expandoTableLocalService.addTable(classNameId, name);
 	}
 
 	public void deleteTable(long tableId)
@@ -62,16 +74,34 @@ public class ExpandoTableServiceImpl extends ExpandoTableServiceBaseImpl {
 		expandoTableLocalService.deleteTable(className, name);
 	}
 
+	public void deleteTable(long classNameId, String name)
+		throws PortalException, SystemException {
+
+		expandoTableLocalService.deleteTable(classNameId, name);
+	}
+
 	public void deleteTables(String className)
 		throws PortalException, SystemException {
 
 		expandoTableLocalService.deleteTables(className);
 	}
 
+	public void deleteTables(long classNameId)
+		throws PortalException, SystemException {
+
+		expandoTableLocalService.deleteTables(classNameId);
+	}
+
 	public ExpandoTable getDefaultTable(String className)
 		throws PortalException, SystemException {
 
 		return expandoTableLocalService.getDefaultTable(className);
+	}
+
+	public ExpandoTable getDefaultTable(long classNameId)
+		throws PortalException, SystemException {
+
+		return expandoTableLocalService.getDefaultTable(classNameId);
 	}
 
 	public ExpandoTable getTable(long tableId)
@@ -86,10 +116,22 @@ public class ExpandoTableServiceImpl extends ExpandoTableServiceBaseImpl {
 		return expandoTableLocalService.getTable(className, name);
 	}
 
+	public ExpandoTable getTable(long classNameId, String name)
+		throws PortalException, SystemException {
+
+		return expandoTableLocalService.getTable(classNameId, name);
+	}
+
 	public List<ExpandoTable> getTables(String className)
 		throws PortalException, SystemException {
 
 		return expandoTableLocalService.getTables(className);
+	}
+
+	public List<ExpandoTable> getTables(long classNameId)
+		throws PortalException, SystemException {
+
+		return expandoTableLocalService.getTables(classNameId);
 	}
 
 	public ExpandoTable updateTable(long tableId, String name)

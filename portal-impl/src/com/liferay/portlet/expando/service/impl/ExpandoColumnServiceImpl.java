@@ -50,16 +50,22 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		expandoColumnLocalService.deleteColumn(columnId);
 	}
 
+	public void deleteColumns(long tableId)
+		throws PortalException, SystemException {
+
+		expandoColumnLocalService.deleteColumns(tableId);
+	}
+
 	public void deleteColumns(String className, String tableName)
 		throws PortalException, SystemException {
 
 		expandoColumnLocalService.deleteColumns(className, tableName);
 	}
 
-	public void deleteColumns(long tableId)
+	public void deleteColumns(long classNameId, String tableName)
 		throws PortalException, SystemException {
 
-		expandoColumnLocalService.deleteColumns(tableId);
+		expandoColumnLocalService.deleteColumns(classNameId, tableName);
 	}
 
 	public ExpandoColumn getColumn(long columnId)
@@ -81,6 +87,14 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		return expandoColumnLocalService.getColumn(className, tableName, name);
 	}
 
+	public ExpandoColumn getColumn(
+			long classNameId, String tableName, String name)
+		throws PortalException, SystemException {
+
+		return expandoColumnLocalService.getColumn(
+			classNameId, tableName, name);
+	}
+
 	public List<ExpandoColumn> getColumns(long tableId)
 		throws SystemException {
 
@@ -93,6 +107,12 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		return expandoColumnLocalService.getColumns(className, tableName);
 	}
 
+	public List<ExpandoColumn> getColumns(long classNameId, String tableName)
+		throws SystemException {
+
+		return expandoColumnLocalService.getColumns(classNameId, tableName);
+	}
+
 	public int getColumnsCount(long tableId) throws SystemException {
 		return expandoColumnLocalService.getColumnsCount(tableId);
 	}
@@ -103,10 +123,24 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		return expandoColumnLocalService.getColumnsCount(className, tableName);
 	}
 
+	public int getColumnsCount(long classNameId, String tableName)
+		throws SystemException {
+
+		return expandoColumnLocalService.getColumnsCount(
+			classNameId, tableName);
+	}
+
 	public ExpandoColumn getDefaultTableColumn(String className, String name)
 		throws PortalException, SystemException {
 
 		return expandoColumnLocalService.getDefaultTableColumn(className, name);
+	}
+
+	public ExpandoColumn getDefaultTableColumn(long classNameId, String name)
+		throws PortalException, SystemException {
+
+		return expandoColumnLocalService.getDefaultTableColumn(
+			classNameId, name);
 	}
 
 	public List<ExpandoColumn> getDefaultTableColumns(String className)
@@ -115,10 +149,23 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		return expandoColumnLocalService.getDefaultTableColumns(className);
 	}
 
+	public List<ExpandoColumn> getDefaultTableColumns(long classNameId)
+		throws SystemException {
+
+		return expandoColumnLocalService.getDefaultTableColumns(classNameId);
+	}
+
 	public int getDefaultTableColumnsCount(String className)
 		throws SystemException {
 
 		return expandoColumnLocalService.getDefaultTableColumnsCount(className);
+	}
+
+	public int getDefaultTableColumnsCount(long classNameId)
+		throws SystemException {
+
+		return expandoColumnLocalService.getDefaultTableColumnsCount(
+			classNameId);
 	}
 
 	public ExpandoColumn updateColumn(long columnId, String name, int type)

@@ -26,7 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoRow;
-import com.liferay.portlet.expando.model.impl.ExpandoTableImpl;
+import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.service.base.ExpandoRowLocalServiceBaseImpl;
 
 import java.util.List;
@@ -79,7 +79,7 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		throws SystemException {
 
 		return expandoRowFinder.findByTC_TN(
-			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME, begin, end);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, begin, end);
 	}
 
 	public int getDefaultTableRowsCount(String className)
@@ -94,7 +94,7 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		throws SystemException {
 
 		return expandoRowFinder.countByTC_TN(
-			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 	}
 
 	public List<ExpandoRow> getRows(long tableId, int begin, int end)

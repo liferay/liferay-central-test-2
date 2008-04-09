@@ -74,16 +74,6 @@ public interface ExpandoTableLocalService {
 		com.liferay.portlet.expando.model.ExpandoTable expandoTable)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.expando.model.ExpandoTable addTable(
-		java.lang.String className, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public com.liferay.portlet.expando.model.ExpandoTable addTable(
-		long classNameId, java.lang.String name)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
 	public com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
 		java.lang.String className)
 		throws com.liferay.portal.SystemException,
@@ -91,6 +81,16 @@ public interface ExpandoTableLocalService {
 
 	public com.liferay.portlet.expando.model.ExpandoTable addDefaultTable(
 		long classNameId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoTable addTable(
+		java.lang.String className, java.lang.String name)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoTable addTable(
+		long classNameId, java.lang.String name)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

@@ -83,16 +83,16 @@ public interface ExpandoColumnLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void deleteColumns(long tableId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteColumns(java.lang.String className,
 		java.lang.String tableName)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public void deleteColumns(long classNameId, java.lang.String tableName)
-		throws com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException;
-
-	public void deleteColumns(long tableId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

@@ -26,7 +26,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.spring.hibernate.CustomSQLUtil;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portlet.expando.model.ExpandoRow;
-import com.liferay.portlet.expando.model.impl.ExpandoColumnImpl;
+import com.liferay.portlet.expando.model.impl.ExpandoRowImpl;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -38,7 +38,7 @@ import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
 /**
- * <a href="ExpandoColumnFinderImpl.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExpandoRowFinderImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
@@ -103,7 +103,7 @@ public class ExpandoRowFinderImpl implements ExpandoRowFinder {
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addEntity("ExpandoColumn", ExpandoColumnImpl.class);
+			q.addEntity("ExpandoRow", ExpandoRowImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 

@@ -32,7 +32,7 @@ import com.liferay.portlet.expando.DuplicateColumnNameException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
-import com.liferay.portlet.expando.model.impl.ExpandoTableImpl;
+import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.service.base.ExpandoColumnLocalServiceBaseImpl;
 
 import java.util.List;
@@ -78,6 +78,17 @@ public class ExpandoColumnLocalServiceImpl
 		expandoColumnPersistence.remove(columnId);
 	}
 
+	public void deleteColumns(long tableId)
+		throws PortalException, SystemException {
+
+		List<ExpandoColumn> columns = expandoColumnPersistence.findByTableId(
+			tableId);
+
+		for (ExpandoColumn column : columns) {
+			deleteColumn(column.getColumnId());
+		}
+	}
+
 	public void deleteColumns(String className, String tableName)
 		throws PortalException, SystemException {
 
@@ -93,17 +104,6 @@ public class ExpandoColumnLocalServiceImpl
 			classNameId, tableName);
 
 		deleteColumns(table.getTableId());
-	}
-
-	public void deleteColumns(long tableId)
-		throws PortalException, SystemException {
-
-		List<ExpandoColumn> columns = expandoColumnPersistence.findByTableId(
-			tableId);
-
-		for (ExpandoColumn column : columns) {
-			deleteColumn(column.getColumnId());
-		}
 	}
 
 	public ExpandoColumn getColumn(long columnId)
@@ -131,7 +131,7 @@ public class ExpandoColumnLocalServiceImpl
 			long classNameId, String tableName, String name)
 		throws PortalException, SystemException {
 
-		return expandoColumnFinder.findByTC_TN_N(classNameId, tableName, name);
+		return expandoColumnFinder.findByTC_TN_CN(classNameId, tableName, name);
 	}
 
 	public List<ExpandoColumn> getColumns(long tableId)
@@ -178,14 +178,14 @@ public class ExpandoColumnLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getColumn(
-			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME, name);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, name);
 	}
 
 	public ExpandoColumn getDefaultTableColumn(long classNameId, String name)
 		throws PortalException, SystemException {
 
 		return getColumn(
-			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME, name);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME, name);
 	}
 
 	public List<ExpandoColumn> getDefaultTableColumns(String className)
@@ -193,14 +193,15 @@ public class ExpandoColumnLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getColumns(classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME);
+		return getColumns(
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 	}
 
 	public List<ExpandoColumn> getDefaultTableColumns(long classNameId)
 		throws SystemException {
 
 		return expandoColumnFinder.findByTC_TN(
-			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 	}
 
 	public int getDefaultTableColumnsCount(String className)
@@ -209,14 +210,14 @@ public class ExpandoColumnLocalServiceImpl
 		long classNameId = PortalUtil.getClassNameId(className);
 
 		return getColumnsCount(
-			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 	}
 
 	public int getDefaultTableColumnsCount(long classNameId)
 		throws SystemException {
 
 		return expandoColumnFinder.countByTC_TN(
-			classNameId, ExpandoTableImpl.DEFAULT_TABLE_NAME);
+			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
 	}
 
 	public ExpandoColumn updateColumn(long columnId, String name, int type)
