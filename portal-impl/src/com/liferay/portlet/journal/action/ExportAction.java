@@ -746,7 +746,9 @@ public class ExportAction extends Action {
 			removeTrailingComma(sm1);
 			sm1.append(");\n");
 
-			sm2.append("<img src=\"http://localhost:8080/image?img_id=");
+			sm2.append("<img alt=\"");
+			sm2.append(imageId);
+			sm2.append("\" src=\"http://localhost:8080/image?img_id=");
 			sm2.append(imageId);
 			sm2.append("\" /><br />\n");
 		}
