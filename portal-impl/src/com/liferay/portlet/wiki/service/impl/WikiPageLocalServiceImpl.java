@@ -767,7 +767,7 @@ public class WikiPageLocalServiceImpl extends WikiPageLocalServiceBaseImpl {
 
 		return updatePage(
 			userId, nodeId, title, 0, oldPage.getContent(), oldPage.getFormat(),
-			null, null, null, prefs, themeDisplay);
+			null, oldPage.getRedirectTitle(), null, prefs, themeDisplay);
 	}
 
 	public void subscribePage(long userId, long nodeId, String title)

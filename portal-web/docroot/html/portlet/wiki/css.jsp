@@ -170,9 +170,14 @@
 
 .portlet-wiki .page-redirect {
 	color: #7d7d7d;
+	cursor: pointer;
 	line-height: 1.2em;
 	margin: -1em 0pt 1.4em 0em;
 	width: auto;
+}
+
+.portlet-wiki .page-redirect:hover {
+	text-decoration: underline;
 }
 
 .portlet-wiki .popup-print {

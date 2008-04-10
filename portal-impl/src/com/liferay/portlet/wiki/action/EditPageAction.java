@@ -24,6 +24,7 @@ package com.liferay.portlet.wiki.action;
 
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
@@ -178,6 +179,7 @@ public class EditPageAction extends PortletAction {
 		long nodeId = ParamUtil.getLong(req, "nodeId");
 		String title = ParamUtil.getString(req, "title");
 		double version = ParamUtil.getDouble(req, "version");
+		boolean removeRedirect = ParamUtil.getBoolean(req, "removeRedirect");
 
 		if (nodeId == 0) {
 			WikiNode node = (WikiNode)req.getAttribute(WebKeys.WIKI_NODE);
@@ -201,6 +203,11 @@ public class EditPageAction extends PortletAction {
 				else {
 					throw nspe;
 				}
+			}
+
+			if (removeRedirect) {
+				page.setContent(StringPool.BLANK);
+				page.setRedirectTitle(StringPool.BLANK);
 			}
 		}
 

@@ -2806,6 +2806,7 @@ this-form-has-already-been-submitted=Detta formulär har redan blivit skickat. S
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Denna funktion kan bara användas när du skickar rich text formaterad e-post. Vill du tillåta rich text formatering?
 this-is-some-sample-help=Detta är ett exempel på hjälptext.
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=Denna sida visar senaste {0} artiklar, strukturer och mallar som du har besökt.
+this-page-is-currently-redirected-to-x=This page is currently redirected to {0}.
 this-page-is-empty-edit-it-to-add-some-text=Sidan är tom. Redigera den för att skapa innehåll.
 this-page-is-part-of-an-inactive-portlet=Denna sida är del av en inaktive portlet.
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=Den här portleten har inte lagts till den offentliga sidan. Publicera sidan först.

@@ -2331,6 +2331,7 @@ this-folder-is-empty=هذا المجلّد فارغ.
 this-form-has-already-been-submitted=تم تسليم هذا النموذج بالفعل. سيتم تفعيل الإرسال خلال {0} ثانية.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=هذه الوظيفة تفعّل في حالة أن محرر النصوص في هيئة النص الغني، هل تريد تفعيل هيئة النص الغني؟
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=هذه الصفحة تعرض آخر {0} مقلات، هياكل و قوالب قمت بزيارتها.
+this-page-is-currently-redirected-to-x=This page is currently redirected to {0}.
 this-page-is-part-of-an-inactive-portlet=هذه الصفحة جزء من بورتليت معطلة.
 this-portlet-is-inactive=هذه البورتلت معطلة.
 this-theme-does-not-have-any-color-schemes=هذا الملمح لا يحتوي على أي تشكيلة ألوان.

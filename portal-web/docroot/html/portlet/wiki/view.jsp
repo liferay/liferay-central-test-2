@@ -27,11 +27,12 @@
 <%
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
+boolean followRedirect = ParamUtil.getBoolean(request, "followRedirect", true);
 
 WikiPage originalPage = null;
 WikiPage redirectPage = wikiPage.getRedirectPage();
 
-if (redirectPage != null) {
+if (followRedirect && redirectPage != null) {
 	originalPage = wikiPage;
 	wikiPage = redirectPage;
 }
@@ -140,8 +141,10 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 <h1 class="page-title">
 	<c:if test="<%= !print %>">
 		<div class="page-actions">
-			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
-				<liferay-ui:icon image="edit" url="<%= editPageURL.toString() %>" />
+			<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE)%>">
+				<c:if test="<%= (redirectPage == null || followRedirect) %>">
+					<liferay-ui:icon image="edit" url="<%= editPageURL.toString() %>" />
+				</c:if>
 			</c:if>
 
 			<liferay-ui:icon image="print" message="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
@@ -163,7 +166,16 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 </h1>
 
 <c:if test="<%= originalPage != null %>">
-	<div class="page-redirect">
+	<%
+	PortletURL originalURL = renderResponse.createRenderURL();
+
+	originalURL.setParameter("struts_action", "/wiki/view");
+	originalURL.setParameter("nodeName", node.getName());
+	originalURL.setParameter("title", originalPage.getTitle());
+	originalURL.setParameter("followRedirect", "false");
+	%>
+
+	<div class="page-redirect" onClick="location.href='<%= originalURL.toString() %>';">
 		(<%= LanguageUtil.format(pageContext, "redirected-from-x", originalPage.getTitle()) %>)
 	</div>
 </c:if>
@@ -184,7 +196,7 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 	<%@ include file="/html/portlet/wiki/view_page_content.jspf" %>
 </div>
 
-<c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) %>">
+<c:if test="<%= (wikiPage != null) && Validator.isNotNull(formattedContent) && (redirectPage == null || followRedirect) %>">
 	<div class="page-actions">
 		<liferay-ui:icon image="clip" message='<%= attachments.length + " " + LanguageUtil.get(pageContext, "attachments") %>' url="<%= viewAttachmentsURL.toString() %>" label="<%= true %>" />
 	</div>

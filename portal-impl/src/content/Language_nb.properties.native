@@ -2808,6 +2808,7 @@ this-form-has-already-been-submitted=This form has already been submitted. Submi
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Denne funksjonen kan bare anvendes når du sender rik tekst format e-post. Vil du tillate rik tekst formattering
 this-is-some-sample-help=Detta er et eksempel på hjelp
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=Denne siden viser de siste {0} artikler, strukturer og maler som du har besøkt
+this-page-is-currently-redirected-to-x=This page is currently redirected to {0}.
 this-page-is-empty-edit-it-to-add-some-text=Siden er tom. Rediger den for å legge til tekst
 this-page-is-part-of-an-inactive-portlet=Denne siden er del av en inaktiv portlet
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=Denne portleten har har ikke blitt lagt til den offentliga siden. Publiser siden først

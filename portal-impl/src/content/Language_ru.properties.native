@@ -1884,6 +1884,7 @@ this-folder-is-empty=Эта папка пуста.
 this-form-has-already-been-submitted=This form has already been submitted. Submit will be enabled in {0} seconds.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Эта функциональность работает только в случае, когда Вы отправляете email в формате rich text. Вы желаете включить rich text форматирование?
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=Эта страница показывает {0} статей, структур, и шаблонов к которым вы обращались.
+this-page-is-currently-redirected-to-x=This page is currently redirected to {0}.
 this-page-is-part-of-an-inactive-portlet=Эта страница является частью неактивного портлета.
 this-portlet-is-inactive=Этот портлет неактивен.
 this-topic-is-empty=Эта тема пуста.

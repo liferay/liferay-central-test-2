@@ -1429,6 +1429,7 @@ this-folder-is-empty=Thư mục này rỗng.
 this-form-has-already-been-submitted=This form has already been submitted. Submit will be enabled in {0} seconds.
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Chức năng này chỉ làm việc khi bạn gửi RTF email. Bạn có muốn bật chức năng định dạng RTF ?
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=This page displays the last {0} articles, structures, and templates that you accessed.
+this-page-is-currently-redirected-to-x=This page is currently redirected to {0}.
 this-page-is-part-of-an-inactive-portlet=Trang này là một phần của portlet không hoạt động.
 this-portlet-is-inactive=Portlet không hoạt động.
 this-topic-is-empty=Chủ đề rỗng.

@@ -1965,6 +1965,7 @@ this-folder-is-empty=اين پوشه خالی است
 this-form-has-already-been-submitted=اين فرم يک بار ارسال شده است
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=اين ويژگی فقط در صورتی کار می کند که شما از متون Rich Text استفاده کنيد، آيا می خواهيد اين عمل صورت گيرد؟
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=اين صفحه {0} مقاله،ساختار و قالب آخر را که شما دسترسی داشتيد نشان می دهد
+this-page-is-currently-redirected-to-x=This page is currently redirected to {0}.
 this-page-is-part-of-an-inactive-portlet=اين صفحه قسمتی از يک پرتلت غير فعال است
 this-portlet-is-inactive=اين پرتلت غير فعال است
 this-topic-is-empty=اين عنوان خالی است

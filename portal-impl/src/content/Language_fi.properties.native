@@ -2901,6 +2901,7 @@ this-form-has-already-been-submitted=Tämä lomake on jo lähetetty. Lomake void
 this-functionality-will-only-work-when-you-send-rich-text-formatted-email.-do-you-want-to-enable-rich-text-formatting=Tämä toiminnallisuus on käytössä vain jos valitset rich text muotoisen sähköpostin. Haluatko kääntää rich text muotoilun päälle?
 this-is-some-sample-help=Tämä on esimerkki apu.
 this-page-displays-the-last-x-articles,-structures,-and-templates-that-you-accessed=Tämä sivu näyttää viimeiset {0} artikkelia, rakennetta ja pohjaa, joita olet käyttänyt.
+this-page-is-currently-redirected-to-x=This page is currently redirected to {0}.
 this-page-is-empty-edit-it-to-add-some-text=Tämä sivu on tyhjä. Muokkaa lisätäksesi tekstiä.
 this-page-is-part-of-an-inactive-portlet=Tämä sivu on osa ei-aktiivista portlettia.
 this-portlet-has-not-been-added-to-the-live-page-publish-the-page-first=Tätä portlettia ei ole liitetty julkaistuun sivuun. Julkaise sivu ensin.
