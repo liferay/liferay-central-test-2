@@ -286,11 +286,16 @@ public class WikiUtil {
 
 		content = matcher.replaceAll(editPageURLString);
 
-		liferayViewPageURL.setParameter("title", "$1", false);
+		liferayViewPageURL.setParameter("title", "__REPLACEMENT__", false);
+
+		String viewPageURLString = viewPageURL.toString();
+
+		viewPageURLString = StringUtil.replace(
+			viewPageURLString, "__REPLACEMENT__", "$1");
 
 		matcher = _VIEW_PAGE_URL_PATTERN.matcher(content);
 
-		content = matcher.replaceAll(liferayViewPageURL.toString());
+		content = matcher.replaceAll(viewPageURLString);
 
 		content = _replaceAttachments(
 			content, page.getTitle(), attachmentURLPrefix);
