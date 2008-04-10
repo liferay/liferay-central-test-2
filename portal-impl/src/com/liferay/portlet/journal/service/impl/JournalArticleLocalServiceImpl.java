@@ -480,8 +480,9 @@ public class JournalArticleLocalServiceImpl
 		article.setApprovedDate(now);
 		article.setExpired(false);
 
-		if( ( article.getExpirationDate()!=null ) &&
-			( article.getExpirationDate().before(now) )) {
+		if ((article.getExpirationDate() != null) &&
+			(article.getExpirationDate().before(now))) {
+
 			article.setExpirationDate(null);
 		}
 
