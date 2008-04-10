@@ -479,7 +479,11 @@ public class JournalArticleLocalServiceImpl
 		article.setApprovedByUserName(user.getFullName());
 		article.setApprovedDate(now);
 		article.setExpired(false);
-		article.setExpirationDate(null);
+
+		if( ( article.getExpirationDate()!=null ) &&
+			( article.getExpirationDate().before(now) )) {
+			article.setExpirationDate(null);
+		}
 
 		journalArticlePersistence.update(article, false);
 
