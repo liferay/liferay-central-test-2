@@ -62,25 +62,25 @@ public class JSONServiceAction extends JSONAction {
 
 		String className = ParamUtil.getString(req, "serviceClassName");
 		String methodName = ParamUtil.getString(req, "serviceMethodName");
-		String[] parameters = StringUtil.split(
+		String[] serviceParameters = StringUtil.split(
 			ParamUtil.getString(req, "serviceParameters"));
-		String[] parameterTypes = StringUtil.split(
+		String[] serviceParameterTypes = StringUtil.split(
 			ParamUtil.getString(req, "serviceParameterTypes"));
 
 		Class<?> classObj = Class.forName(className);
 
 		Object[] methodAndParameterTypes = getMethodAndParameterTypes(
-			classObj, methodName, parameters, parameterTypes);
+			classObj, methodName, serviceParameters, serviceParameterTypes);
 
 		if (methodAndParameterTypes != null) {
 			Method method = (Method)methodAndParameterTypes[0];
-			Class<?>[] curParameterTypes = (Class[])methodAndParameterTypes[1];
-			Object[] args = new Object[parameters.length];
+			Class<?>[] parameterTypes = (Class[])methodAndParameterTypes[1];
+			Object[] args = new Object[serviceParameters.length];
 
-			for (int i = 0; i < parameters.length; i++) {
+			for (int i = 0; i < serviceParameters.length; i++) {
 				args[i] = getArgValue(
-					req, classObj, methodName, parameters[i],
-					curParameterTypes[i]);
+					req, classObj, methodName, serviceParameters[i],
+					parameterTypes[i]);
 
 				if (args[i] == null) {
 					return null;
@@ -230,8 +230,8 @@ public class JSONServiceAction extends JSONAction {
 				Class<?>[] curParameterTypes = curMethod.getParameterTypes();
 
 				if (curParameterTypes.length == parameters.length) {
-					if (parameterTypes.length > 0 &&
-							parameterTypes.length == curParameterTypes.length) {
+					if ((parameterTypes.length > 0) &&
+						(parameterTypes.length == curParameterTypes.length)) {
 
 						boolean match = true;
 
@@ -240,7 +240,6 @@ public class JSONServiceAction extends JSONAction {
 							String t2 = curParameterTypes[j].getName();
 
 							if (!t1.equals(t2)) {
-
 								match = false;
 							}
 						}
@@ -255,8 +254,8 @@ public class JSONServiceAction extends JSONAction {
 					else if (method != null) {
 						_log.error(
 							"Obscure method name for class " + classObj +
-								", method " + methodName +
-									", and parameters " + parameterNames);
+								", method " + methodName + ", and parameters " +
+									parameterNames);
 
 						return null;
 					}
@@ -269,8 +268,8 @@ public class JSONServiceAction extends JSONAction {
 		}
 
 		if (method != null) {
-			methodAndParameterTypes = new Object[] {
-				method, methodParameterTypes};
+			methodAndParameterTypes =
+				new Object[] {method, methodParameterTypes};
 
 			_methodCache.put(key, methodAndParameterTypes);
 

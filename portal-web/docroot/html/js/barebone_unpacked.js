@@ -3539,7 +3539,7 @@ Liferay.Service = {
 		var serviceParameters = "";
 
 		for (var key in params) {
-			if ((key != "serviceClassName") && (key != "serviceMethodName")) {
+			if ((key != "serviceClassName") && (key != "serviceMethodName") && (key != "serviceParameterTypes")) {
 				serviceParameters += key + ",";
 			}
 		}
