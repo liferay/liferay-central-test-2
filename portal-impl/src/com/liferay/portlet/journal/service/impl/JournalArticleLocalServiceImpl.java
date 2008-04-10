@@ -30,6 +30,8 @@ import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
+import com.liferay.portal.kernel.util.Http;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
@@ -2041,6 +2043,25 @@ public class JournalArticleLocalServiceImpl
 				continue;
 			}
 
+			long contentImageId = GetterUtil.getLong(HttpUtil.getParameter(
+				dynamicContent.getText(), "img_id"));
+
+			if (contentImageId <= 0) {
+				contentImageId = GetterUtil.getLong(HttpUtil.getParameter(
+					dynamicContent.getText(), "img_id", false));
+			}
+
+			if (contentImageId > 0) {
+				image = ImageLocalUtil.getImage(contentImageId);
+
+				if (image != null) {
+					dynamicContent.addAttribute(
+						"id", String.valueOf(contentImageId));
+
+					continue;
+				}
+			}
+
 			String defaultElLanguage = "";
 
 			if (!Validator.isNotNull(elLanguage)) {
@@ -2056,11 +2077,12 @@ public class JournalArticleLocalServiceImpl
 
 			if (defaultImage != null) {
 				dynamicContent.setText(elContent);
-				dynamicContent.addAttribute("id", String.valueOf(imageId));
+				dynamicContent.addAttribute(
+					"id", String.valueOf(defaultImageId));
 
 				bytes = defaultImage.getTextObj();
 
-				ImageLocalUtil.updateImage(imageId, bytes);
+				ImageLocalUtil.updateImage(defaultImageId, bytes);
 
 				continue;
 			}
