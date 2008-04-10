@@ -1856,9 +1856,7 @@ public class PortalImpl implements Portal {
 
 		ServletContext ctx = req.getSession().getServletContext();
 
-		String mainPath = getPathMain();
-
-		String redirect = mainPath + "/portal/status";
+		String redirect = PATH_MAIN + "/portal/status";
 
 		if (e instanceof NoSuchLayoutException &&
 			Validator.isNotNull(
