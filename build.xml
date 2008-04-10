@@ -508,13 +508,6 @@
 					</then>
 				</if>
 
-				<move todir="${app.server.lib.endorsed.dir}">
-					<fileset
-						dir="${app.server.lib.portal.dir}"
-						includes="xercesImpl.jar"
-					/>
-				</move>
-
 				<copy todir="${app.server.temp.dir}/liferay/com/liferay/portal/deploy/dependencies">
 					<fileset
 						dir="lib/development"
@@ -1647,7 +1640,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<zip destfile="dist/liferay-portal-tomcat-5.5-${lp.version.file.name}.zip">
 			<zipfileset
 				dir="${app.server.tomcat.dir}"
-				excludes="**/*.sh,bin/jmx.jar,common/endorsed/xercesImpl.jar,common/endorsed/xml-apis.jar"
+				excludes="**/*.sh"
 				prefix="liferay-portal-tomcat-5.5-${lp.version.file.name}"
 			/>
 			<zipfileset
