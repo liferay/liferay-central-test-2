@@ -242,8 +242,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 	public void initEAR(String[] xmls, PluginPackage pluginPackage) {
 
-		// Clear pools every time initEAR is called event it should only be
-		// called once. See LEP-5452.
+		// Clear pools every time initEAR is called. See LEP-5452.
 
 		_portletAppsPool.clear();
 		_portletsPool.clear();
@@ -735,8 +734,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 		}
 
 		if (undefinedPortletIds.size() > 0) {
-			PortletCategory undefinedCategory =
-				new PortletCategory("category.undefined");
+			PortletCategory undefinedCategory = new PortletCategory(
+				"category.undefined");
 
 			portletCategory.addCategory(undefinedCategory);
 
