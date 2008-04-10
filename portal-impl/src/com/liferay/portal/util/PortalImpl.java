@@ -167,7 +167,7 @@ public class PortalImpl implements Portal {
 		ClassLoader classLoader = getClass().getClassLoader();
 
 		URL url = classLoader.getResource(
-			"com/liferay/portal/util/PortalUtil.class");
+			"com/liferay/portal/util/PortalImpl.class");
 
 		String file = url.getFile();
 
