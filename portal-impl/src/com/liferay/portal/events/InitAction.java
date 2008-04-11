@@ -99,8 +99,7 @@ public class InitAction extends SimpleAction {
 		// Log4J
 
 		if (GetterUtil.getBoolean(SystemProperties.get(
-				"log4j.configure.on.startup"), true) &&
-			!ServerDetector.isSun()) {
+				"log4j.configure.on.startup"), true)) {
 
 			ClassLoader classLoader = getClass().getClassLoader();
 
@@ -139,7 +138,7 @@ public class InitAction extends SimpleAction {
 		if ((GetterUtil.getBoolean(PropsUtil.get(
 				PropsUtil.PORTAL_CONFIGURATION))) &&
 			(ServerDetector.isJBoss() || ServerDetector.isPramati() ||
-			 ServerDetector.isSun() || ServerDetector.isWebLogic())) {
+			 ServerDetector.isWebLogic())) {
 
 			PortalConfiguration portalConfig = new PortalConfiguration(
 				Configuration.getConfiguration());
