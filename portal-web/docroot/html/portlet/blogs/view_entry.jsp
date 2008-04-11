@@ -33,7 +33,6 @@ if (Validator.isNull(redirect)) {
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);
 
-// escape html to prevent xss injection
 entry = entry.toEscapedModel();
 
 long entryId = BeanParamUtil.getLong(entry, request, "entryId");
