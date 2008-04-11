@@ -9,7 +9,7 @@ Liferay.Upload = new Class({
 	 * fallbackContainer (jQuery Selector | DOM Element) *Optional - the container holding a fallback (in case flash is not supported)
 	 * namespace (string) *Optional - A unique string so that the global callback methods don't collide
 	 * fileDescription (string) *Optional - a string describing what files can be uploaded
-	 * 
+	 *
 	 * Callbacks
 	 * NOTE: All callbacks are passed in the file object as it's argument, unless otherwise noted.
 	 * onFileComplete (function) *Optional - Gets called whenever a file is completely uploaded
@@ -28,7 +28,7 @@ Liferay.Upload = new Class({
 		instance._maxFileSize = params.maxFileSize || 0;
 		instance._allowedFileTypes = params.allowedFileTypes;
 		instance._uploadFile = params.uploadFile;
-		
+
 		instance._onFileComplete = params.onFileComplete;
 		instance._onUploadsComplete = params.onUploadsComplete;
 		instance._onUploadProgress = params.onUploadProgress;
@@ -82,7 +82,15 @@ Liferay.Upload = new Class({
 		instance._setupUploader();
 	},
 
-	 fileAdded: function(file, listLength) {
+	cancelUploads: function() {
+		var instance = this;
+
+		instance._uploader.cancelQueue();
+		instance._uploadButton.hide();
+		instance._cancelButton.hide();
+	},
+
+	fileAdded: function(file, listLength) {
 		var instance = this;
 
 		var listingFiles = instance._fileList;
@@ -152,56 +160,6 @@ Liferay.Upload = new Class({
 		li.fadeOut('slow');
 	},
 
-	flashLoaded: function() {
-		var instance = this;
-
-		instance._setupControls();
-	},
-
-	uploadStart: function(file, position, listLength) {
-		var instance = this;
-
-		var currentListText = instance._uploadStatusText.replace('[$POS$]', position).replace('[$TOTAL$]', listLength);
-		var fileId = instance._namespace(file.id);
-
-		instance._updateList(listLength, currentListText);
-
-		var li = jQuery('#' + fileId);
-
-		li.addClass('file-uploading');
-
-		return true;
-	},
-
-	uploadProgress: function(file, bytesLoaded) {
-		var instance = this;
-		var fileId = instance._namespace(file.id);
-		var progress = document.getElementById(fileId + 'progress');
-		var percent = Math.ceil((bytesLoaded / file.size) * 100);
-
-		progress.style.width = percent + '%';
-		
-		if (instance._onUploadProgress) {
-			instance._onUploadProgress(file, bytesLoaded);
-		}
-	},
-
-	uploadError: function(errno) {
-		var instance = this;
- 
-		/* Error codes
-			-10 HTTP error
-			-20 No upload script specified
-			-30 IOError
-			-40 Security error
-			-50 Filesize too big
-		*/
-
-		if (instance._onUploadError) {
-			instance._onUploadError(errno);
-		}
-	},
-
 	fileUploadComplete: function(file) {
 		var instance = this;
 
@@ -215,12 +173,40 @@ Liferay.Upload = new Class({
 		}
 	},
 
-	cancelUploads: function() {
+	flashLoaded: function() {
 		var instance = this;
 
-		instance._uploader.cancelQueue();
-		instance._uploadButton.hide();
-		instance._cancelButton.hide();
+		instance._setupControls();
+	},
+
+	uploadError: function(errno) {
+		var instance = this;
+
+		/*
+		Error codes:
+			-10 HTTP error
+			-20 No upload script specified
+			-30 IOError
+			-40 Security error
+			-50 Filesize too big
+		*/
+
+		if (instance._onUploadError) {
+			instance._onUploadError(errno);
+		}
+	},
+
+	uploadProgress: function(file, bytesLoaded) {
+		var instance = this;
+		var fileId = instance._namespace(file.id);
+		var progress = document.getElementById(fileId + 'progress');
+		var percent = Math.ceil((bytesLoaded / file.size) * 100);
+
+		progress.style.width = percent + '%';
+
+		if (instance._onUploadProgress) {
+			instance._onUploadProgress(file, bytesLoaded);
+		}
 	},
 
 	uploadsComplete: function(file) {
@@ -237,6 +223,21 @@ Liferay.Upload = new Class({
 		if (instance._onUploadsComplete) {
 			instance._onUploadsComplete();
 		}
+	},
+
+	uploadStart: function(file, position, listLength) {
+		var instance = this;
+
+		var currentListText = instance._uploadStatusText.replace('[$POS$]', position).replace('[$TOTAL$]', listLength);
+		var fileId = instance._namespace(file.id);
+
+		instance._updateList(listLength, currentListText);
+
+		var li = jQuery('#' + fileId);
+
+		li.addClass('file-uploading');
+
+		return true;
 	},
 
 	_clearUploads: function() {
