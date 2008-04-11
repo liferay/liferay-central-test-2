@@ -80,7 +80,7 @@ public class DownloadPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Sample JSP 4.4.0.1")) {
+				if (selenium.isElementPresent("link=Sample JSP 5.0.0.1")) {
 					break;
 				}
 			}
@@ -90,7 +90,7 @@ public class DownloadPortletTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Sample JSP 4.4.0.1");
+		selenium.click("link=Sample JSP 5.0.0.1");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Install']");
 		selenium.waitForPageToLoad("30000");

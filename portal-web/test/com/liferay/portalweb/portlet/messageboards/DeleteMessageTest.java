@@ -197,6 +197,22 @@ public class DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=T\u00e9st Cat\u00e9gory")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=T\u00e9st Cat\u00e9gory");
 		selenium.waitForPageToLoad("30000");
 
