@@ -36,10 +36,11 @@ else {
 	redirect = originalRedirect;
 }
 
+boolean followRedirect = false;
+
 WikiNode node = (WikiNode)request.getAttribute(WebKeys.WIKI_NODE);
 WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
-boolean followRedirect = false;
 WikiPage redirectPage = null;
 
 long nodeId = BeanParamUtil.getLong(wikiPage, request, "nodeId");

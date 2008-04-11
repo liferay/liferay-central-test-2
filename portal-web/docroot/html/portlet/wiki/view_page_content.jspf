@@ -48,10 +48,11 @@ try {
 
 	<div class="wiki-body">
 		<c:choose>
-			<c:when test="<%= !followRedirect && redirectPage != null %>">
+			<c:when test="<%= !followRedirect && (redirectPage != null) %>">
 				<div class="portlet-msg-info">
 					<%= LanguageUtil.format(pageContext, "this-page-is-currently-redirected-to-x", redirectPage.getTitle()) %>
 				</div>
+
 				<c:if test="<%= WikiPagePermission.contains(permissionChecker, wikiPage, ActionKeys.UPDATE) %>">
 					<div>
 						<input type="button" value="<liferay-ui:message key="remove-redirect" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="title" value="<%= title %>" /><portlet:param name="removeRedirect" value="true" /></portlet:renderURL>'" />
