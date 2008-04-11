@@ -804,7 +804,7 @@
 			/>
 			<zipfileset
 				dir="lib/portal"
-				includes="xercesImpl.jar"
+				includes="log4j.jar,xercesImpl.jar"
 			/>
 			<zipfileset
 				dir="sql"
