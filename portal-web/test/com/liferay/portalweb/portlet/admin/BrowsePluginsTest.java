@@ -55,7 +55,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 		selenium.select("document._9_fm.elements[9]", "label=4");
 		selenium.waitForPageToLoad("30000");
 		verifyTrue(selenium.isTextPresent("Workflow"));
-		selenium.click("link=Themes");
+		selenium.click("link=Theme Plugins");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -75,7 +75,7 @@ public class BrowsePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Layout Templates");
+		selenium.click("link=Layout Template Plugins");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -95,6 +95,8 @@ public class BrowsePluginsTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
+		selenium.click("link=Web Plugins");
+		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
 

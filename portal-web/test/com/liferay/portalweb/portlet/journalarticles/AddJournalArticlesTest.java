@@ -82,7 +82,8 @@ public class AddJournalArticlesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=RSS-Blogs-MattAsay_Bossie")) {
+				if (selenium.isElementPresent(
+							"link=Infoworld's BOSSIE awards demonstrate open source's progress")) {
 					break;
 				}
 			}
@@ -92,7 +93,8 @@ public class AddJournalArticlesTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=RSS-Blogs-MattAsay_Bossie");
+		selenium.click(
+			"link=Infoworld's BOSSIE awards demonstrate open source's progress");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {

@@ -196,7 +196,7 @@ public class LanguageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Ajoutez une page")) {
+				if (selenium.isTextPresent("Ajouter une page")) {
 					break;
 				}
 			}
