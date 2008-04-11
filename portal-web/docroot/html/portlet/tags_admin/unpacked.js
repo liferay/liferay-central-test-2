@@ -253,26 +253,29 @@ Liferay.Portlet.TagsAdmin = new Class({
 	_deleteEntry: function(instance, entryId) {
 		var params = instance.params;
 
-		var instanceVar = params.instanceVar;
-		var editEntryFields = jQuery('#' + params.editEntryFields);
+		var deleteTagText = Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag');
+		if (confirm(deleteTagText)) {
+			var instanceVar = params.instanceVar;
+			var editEntryFields = jQuery('#' + params.editEntryFields);
 
-		Liferay.Service.Tags.TagsEntry.deleteEntry(
-			{
-				entryId: entryId
-			},
-			function() {
-				if (((instance._searchFilters['category'] != 'all') || (instance._categoriesCount == 1)) &&
-					 (instance._entriesInCurCategoryCount == 1)) {
+			Liferay.Service.Tags.TagsEntry.deleteEntry(
+				{
+					entryId: entryId
+				},
+				function() {
+					if (((instance._searchFilters['category'] != 'all') || (instance._categoriesCount == 1)) &&
+						 (instance._entriesInCurCategoryCount == 1)) {
 
-					instance._searchFilters['category'] = 'all';
-					jQuery('#' + params.addCategoryNameInput).show();
+						instance._searchFilters['category'] = 'all';
+						jQuery('#' + params.addCategoryNameInput).show();
+					}
+
+					instance._getEntries(instance);
 				}
+			);
 
-				instance._getEntries(instance);
-			}
-		);
-
-		editEntryFields.hide();
+			editEntryFields.hide();
+		}
 	},
 
 	_deleteProperty: function() {
