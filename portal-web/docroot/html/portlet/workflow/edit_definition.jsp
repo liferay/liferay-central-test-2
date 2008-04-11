@@ -97,7 +97,7 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 
 <input type="submit" value="<liferay-ui:message key="save-new-version" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 
 </form>
 

@@ -279,6 +279,6 @@ if ((task != null) && (task.getTaskId() == taskId)) {
 }
 %>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 
 </form>

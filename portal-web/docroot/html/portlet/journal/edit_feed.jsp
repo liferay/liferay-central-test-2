@@ -551,7 +551,7 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= PortalUtil.getPortalURL(request) + feed.getTargetLayoutFriendlyUrl() + "/journal/rss/" + groupId + "/" + feedId %>', 'feed');" />
 </c:if>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 
 </form>
 

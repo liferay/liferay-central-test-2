@@ -311,7 +311,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 		<input id="<portlet:namespace />editorButton" type="button" value="<liferay-ui:message key="launch-editor" />" />
 
 		<c:if test="<%= template != null %>">
-			<input type="button" value="<liferay-ui:message key="download" />" onClick="self.location = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';" />
+			<input type="button" value="<liferay-ui:message key="download" />" onClick="location.href = '<%= themeDisplay.getPathMain() %>/journal/get_template?groupId=<%= String.valueOf(template.getGroupId()) %>&templateId=<%= template.getTemplateId() %>&transform=0';" />
 		</c:if>
 	</td>
 </tr>
@@ -377,7 +377,7 @@ String smallImageURL = BeanParamUtil.getString(template, request, "smallImageURL
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 
 </form>
 

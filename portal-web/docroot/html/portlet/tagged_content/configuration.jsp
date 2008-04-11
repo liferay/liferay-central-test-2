@@ -241,7 +241,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<br />
 
-						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 					</liferay-ui:section>
 					<liferay-ui:section>
 						<%@ include file="/html/portlet/tagged_content/display_settings.jspf" %>
@@ -250,7 +250,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 						<input type="button" value="<liferay-ui:message key="save" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
-						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+						<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 					</liferay-ui:section>
 				</liferay-ui:tabs>
 			</c:when>
@@ -351,7 +351,7 @@ configurationActionURL.setParameter("portletResource", portletResource);
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />metadataFields.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />currentMetadataFields); submitForm(document.<portlet:namespace />fm);" />
 
-				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+				<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 			</c:when>
 		</c:choose>
 	</c:when>

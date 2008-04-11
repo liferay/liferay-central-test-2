@@ -107,7 +107,7 @@ boolean showAddNodeButton = PortletPermissionUtil.contains(permissionChecker, pl
 <c:if test="<%= showAddNodeButton || (results.size() > 0) %>">
 	<div>
 		<c:if test="<%= showAddNodeButton %>">
-			<input type="button" value="<liferay-ui:message key="add-wiki" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
+			<input type="button" value="<liferay-ui:message key="add-wiki" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_node" /><portlet:param name="redirect" value="<%= currentURL %>" /></portlet:renderURL>';" />
 		</c:if>
 	</div>
 

@@ -186,7 +186,7 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 <div class="button-holder">
 	<input type="submit" value="<liferay-ui:message key="save" />" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 </div>
 
 </form>

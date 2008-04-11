@@ -72,7 +72,7 @@ DateFormat dateFormatMonthAndDay = new SimpleDateFormat("M/d", locale);
 		</table>
 	</td>
 	<td align="right">
-		<select onChange="self.location = '<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=' + this.value;">
+		<select onChange="location.href = '<%= portletURL.toString() %>&<portlet:namespace />month=<%= selMonth %>&<portlet:namespace />day=<%= selDay %>&<portlet:namespace />year=<%= selYear %>&<portlet:namespace />eventType=' + this.value;">
 			<option value=""><liferay-ui:message key="all-events" /></option>
 
 			<%

@@ -52,7 +52,7 @@ userTracker = userTracker.toEscapedModel();
 
 		<br /><br />
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 	</c:when>
 	<c:otherwise>
 
@@ -265,7 +265,7 @@ userTracker = userTracker.toEscapedModel();
 			<input type="submit" value="<liferay-ui:message key="kill-session" />" />
 		</c:if>
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 	</c:otherwise>
 </c:choose>
 

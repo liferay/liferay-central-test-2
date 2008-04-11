@@ -273,7 +273,7 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 	var="permissionURL"
 />
 
-<input type="button" value="<liferay-ui:message key="permissions" />" onClick="self.location = '<%= permissionURL %>';" />
+<input type="button" value="<liferay-ui:message key="permissions" />" onClick="location.href = '<%= permissionURL %>';" />
 
 <input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deletePage();" />
 

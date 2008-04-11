@@ -38,7 +38,7 @@ SCProductVersion productVersion = (SCProductVersion)row.getObject();
 	<c:if test="<%= Validator.isNotNull(productVersion.getDirectDownloadURL()) %>">
 
 		<%
-		String jsDirectDownloadUrl = "javascript: self.location = '" + productVersion.getDirectDownloadURL() + "';";
+		String jsDirectDownloadUrl = "javascript: location.href = '" + productVersion.getDirectDownloadURL() + "';";
 		%>
 
 		<liferay-ui:icon image="download" message="direct-download" url="<%= jsDirectDownloadUrl %>" />

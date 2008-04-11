@@ -148,7 +148,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 				<input type="button" value="<liferay-ui:message key="save" />" onClick="document.<portlet:namespace />fm.<portlet:namespace />feeds.value = Liferay.Util.listChecked(document.<portlet:namespace />fm); submitForm(document.<portlet:namespace />fm);" />
 
-				<input type="button" value="<liferay-ui:message key="back" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/news/edit" /></portlet:renderURL>';" />
+				<input type="button" value="<liferay-ui:message key="back" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/news/edit" /></portlet:renderURL>';" />
 			</c:otherwise>
 		</c:choose>
 	</c:when>

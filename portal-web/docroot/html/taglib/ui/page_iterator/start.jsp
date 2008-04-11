@@ -69,7 +69,7 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			if (<%= Validator.isNotNull(url) %>) {
 				var href = "<%= url + curParam %>" + "=" + curValue + "<%= urlAnchor %>";
 
-				self.location = href;
+				location.href = href;
 			}
 			else {
 				document.<%= formName %>.<%= curParam %>.value = curValue;

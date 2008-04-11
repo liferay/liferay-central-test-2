@@ -294,7 +294,7 @@ for (int i = 0; i < results.size(); i++) {
 
 <c:if test='<%= type.equals("all_pages") && WikiNodePermission.contains(permissionChecker, node.getNodeId(), ActionKeys.ADD_ATTACHMENT) %>'>
 	<div>
-		<input type="button" value="<liferay-ui:message key="add-page" />" onClick="self.location = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="editTitle" value="1" /></portlet:renderURL>'" />
+		<input type="button" value="<liferay-ui:message key="add-page" />" onClick="location.href = '<portlet:renderURL><portlet:param name="struts_action" value="/wiki/edit_page" /><portlet:param name="nodeId" value="<%= String.valueOf(node.getNodeId()) %>" /><portlet:param name="editTitle" value="1" /></portlet:renderURL>'" />
 	</div>
 
 	<br />

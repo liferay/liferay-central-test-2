@@ -193,7 +193,7 @@ if (viewType.equals("user")) {
 					<table class="liferay-table">
 					<tr>
 						<td>
-							<input type="button" onclick="self.location = '<%= addInstanceURL %>';" value="<liferay-ui:message key="start-a-new-workflow" />" />
+							<input type="button" onclick="location.href = '<%= addInstanceURL %>';" value="<liferay-ui:message key="start-a-new-workflow" />" />
 						</td>
 					</tr>
 					</table>

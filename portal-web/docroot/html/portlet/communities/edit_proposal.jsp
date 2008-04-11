@@ -372,7 +372,7 @@ else if (className.equals(Portlet.class.getName())) {
 	</c:when>
 </c:choose>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 
 </form>
 

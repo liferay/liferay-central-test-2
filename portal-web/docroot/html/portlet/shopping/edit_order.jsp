@@ -604,7 +604,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrder();" />
 	</c:if>
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 </c:if>
 
 </form>

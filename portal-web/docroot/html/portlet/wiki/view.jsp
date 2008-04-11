@@ -177,7 +177,7 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 	originalViewPageURL.setParameter("followRedirect", "false");
 	%>
 
-	<div class="page-redirect" onClick="self.location = '<%= originalViewPageURL.toString() %>';">
+	<div class="page-redirect" onClick="location.href = '<%= originalViewPageURL.toString() %>';">
 		(<%= LanguageUtil.format(pageContext, "redirected-from-x", originalPage.getTitle()) %>)
 	</div>
 </c:if>

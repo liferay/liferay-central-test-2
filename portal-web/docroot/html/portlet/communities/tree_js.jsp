@@ -85,7 +85,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			id: '<%= nodeValues[0]  %>',
 			img: '<%= nodeValues[4] %>',
 			ls: '<%= nodeValues[2] %>',
-			href: 'javascript: self.location = \'<%= HttpUtil.encodeURL(portletURL.toString()) %>&<portlet:namespace />selPlid=<%= objId %>\';',
+			href: 'javascript: location.href = \'<%= HttpUtil.encodeURL(portletURL.toString()) %>&<portlet:namespace />selPlid=<%= objId %>\';',
 			parentId: '<%= nodeValues[1] %>',
 			objId: '<%= nodeValues[3] %>',
 			name: '<%= nodeValues[4] %>'

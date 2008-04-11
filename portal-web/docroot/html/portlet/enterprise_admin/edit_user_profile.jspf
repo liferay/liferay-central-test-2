@@ -366,7 +366,7 @@ if (organizations != null) {
 
 	<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveUser('<%= user2 == null ? Constants.ADD : Constants.UPDATE %>');" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= backURL %>';" /><br />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= backURL %>';" /><br />
 </c:if>
 
 <c:if test="<%= user2 != null %>">

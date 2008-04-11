@@ -25,5 +25,5 @@
 <%@ include file="/html/common/forward_common.jsp" %>
 
 <script type="text/javascript">
-	self.location = '<%= forwardURL %>';
+	location.href = '<%= forwardURL %>';
 </script>

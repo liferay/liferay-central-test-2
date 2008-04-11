@@ -25,5 +25,5 @@
 <%@ include file="/html/common/referer_common.jsp" %>
 
 <script type="text/javascript">
-	self.location = '<%= referer %>';
+	location.href = '<%= referer %>';
 </script>

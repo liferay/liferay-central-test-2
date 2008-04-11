@@ -73,6 +73,6 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 
 <input type="submit" value="<liferay-ui:message key="move-page" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 
 </form>

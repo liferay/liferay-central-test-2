@@ -34,7 +34,7 @@
 	<script src="<%= themeDisplay.getPathJavaScript() %>/misc/xp_progress.js" type="text/javascript"></script>
 </head>
 
-<body onLoad="self.location = '<%= themeDisplay.getPathMain() %>/portal/protected';">
+<body onLoad="location.href = '<%= themeDisplay.getPathMain() %>/portal/protected';">
 
 <center>
 

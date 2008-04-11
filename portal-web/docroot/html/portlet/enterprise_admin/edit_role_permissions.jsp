@@ -122,7 +122,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 			addPermissionsURL += "&<portlet:namespace />portletResource=<%= PortletKeys.PORTAL %>";
 		}
 
-		self.location = addPermissionsURL;
+		location.href = addPermissionsURL;
 	}
 
 	function <portlet:namespace />removeGroup(pos, target) {
@@ -477,7 +477,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 		<input type="button" value="<liferay-ui:message key="save" />" onclick="<portlet:namespace />updateActions();" />
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="self.location = '<%= redirect %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 
 		<script type="text/javascript">
 			jQuery(

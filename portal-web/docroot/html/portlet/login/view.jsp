@@ -114,7 +114,7 @@
 		<input type="submit" value="<liferay-ui:message key="sign-in" />" />
 
 		<c:if test="<%= company.isStrangers() %>">
-			<input type="button" value="<liferay-ui:message key="create-account" />" onClick="self.location = '<%= themeDisplay.getURLCreateAccount() %>';" />
+			<input type="button" value="<liferay-ui:message key="create-account" />" onClick="location.href = '<%= themeDisplay.getURLCreateAccount() %>';" />
 		</c:if>
 
 		<c:if test="<%= company.isSendPassword() %>">
