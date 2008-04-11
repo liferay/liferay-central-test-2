@@ -38,8 +38,11 @@ public class ServerDetector {
 
 	public static final String GERONIMO_ID = "geronimo";
 
-	public static final String GLASSFISH_CLASS =
+	public static final String GLASSFISH_2_CLASS =
 		"/com/sun/appserv/ClassLoaderUtil.class";
+
+	public static final String GLASSFISH_3_CLASS =
+		"/com/sun/enterprise/glassfish/bootstrap/ASMainHK2.class";
 
 	public static final String GLASSFISH_ID = "glassfish";
 
@@ -78,16 +81,6 @@ public class ServerDetector {
 	public static final String REXIP_CLASS = "/com/tcc/Main.class";
 
 	public static final String REXIP_ID = "rexip";
-
-	public static final String SUN7_CLASS =
-		"/com/iplanet/ias/tools/cli/IasAdminMain.class";
-
-	public static final String SUN7_ID = "sun7";
-
-	public static final String SUN8_CLASS =
-		"/com/sun/enterprise/cli/framework/CLIMain.class";
-
-	public static final String SUN8_ID = "sun8";
 
 	public static final String TOMCAT_BOOTSTRAP_CLASS =
 		"/org/apache/catalina/startup/Bootstrap.class";
@@ -137,12 +130,6 @@ public class ServerDetector {
 			else if (ServerDetector.isRexIP()) {
 				sd._serverId = REXIP_ID;
 			}
-			else if (ServerDetector.isSun7()) {
-				sd._serverId = SUN7_ID;
-			}
-			else if (ServerDetector.isSun8()) {
-				sd._serverId = SUN8_ID;
-			}
 			else if (ServerDetector.isWebLogic()) {
 				sd._serverId = WEBLOGIC_ID;
 			}
@@ -190,13 +177,32 @@ public class ServerDetector {
 	}
 
 	public static boolean isGlassfish() {
+		if (isGlassfish2() || isGlassfish3()) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public static boolean isGlassfish2() {
 		ServerDetector sd = _instance;
 
-		if (sd._glassfish == null) {
-			sd._glassfish = _detect(GLASSFISH_CLASS);
+		if (sd._glassfish2 == null) {
+			sd._glassfish2 = _detect(GLASSFISH_2_CLASS);
 		}
 
-		return sd._glassfish.booleanValue();
+		return sd._glassfish2.booleanValue();
+	}
+
+	public static boolean isGlassfish3() {
+		ServerDetector sd = _instance;
+
+		if (sd._glassfish3 == null) {
+			sd._glassfish3 = _detect(GLASSFISH_3_CLASS);
+		}
+
+		return sd._glassfish3.booleanValue();
 	}
 
 	public static boolean isJBoss() {
@@ -279,35 +285,6 @@ public class ServerDetector {
 		return sd._rexIP.booleanValue();
 	}
 
-	public static boolean isSun() {
-		if (isSun7() || isSun8()) {
-			return true;
-		}
-		else {
-			return false;
-		}
-	}
-
-	public static boolean isSun7() {
-		ServerDetector sd = _instance;
-
-		if (sd._sun7 == null) {
-			sd._sun7 = _detect(SUN7_CLASS);
-		}
-
-		return sd._sun7.booleanValue();
-	}
-
-	public static boolean isSun8() {
-		ServerDetector sd = _instance;
-
-		if (sd._sun8 == null) {
-			sd._sun8 = _detect(SUN8_CLASS);
-		}
-
-		return sd._sun8.booleanValue();
-	}
-
 	public static boolean isTomcat() {
 		ServerDetector sd = _instance;
 
@@ -371,7 +348,8 @@ public class ServerDetector {
 
 	private String _serverId;
 	private Boolean _geronimo;
-	private Boolean _glassfish;
+	private Boolean _glassfish2;
+	private Boolean _glassfish3;
 	private Boolean _jBoss;
 	private Boolean _jetty;
 	private Boolean _jonas;
@@ -380,8 +358,6 @@ public class ServerDetector {
 	private Boolean _pramati;
 	private Boolean _resin;
 	private Boolean _rexIP;
-	private Boolean _sun7;
-	private Boolean _sun8;
 	private Boolean _tomcat;
 	private Boolean _webLogic;
 	private Boolean _webSphere;
