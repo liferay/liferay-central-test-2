@@ -683,7 +683,7 @@
 					fork="true"
 					jar="${app.server.geronimo-tomcat.dir}/bin/deployer.jar"
 				>
-					<arg line="${app.server.geronimo-tomcat.credentials} deploy dist/liferay-portal-${lp.version.file.name}-with-dependencies.war" />
+					<arg line="${app.server.geronimo-tomcat.credentials} deploy dist/liferay-portal-${lp.version}-with-dependencies.war" />
 				</java>
 
 				<sleep seconds="60" />-->
@@ -756,7 +756,7 @@
 
 		<move
 			file="${app.server.parent.dir}/glassfish-pe-installer.jar"
-			tofile="dist/liferay-portal-glassfish-${glassfish.os}-${lp.version.file.name}.jar"
+			tofile="dist/liferay-portal-glassfish-${glassfish.os}-${lp.version}.jar"
 		/>
 	</target>
 
@@ -766,7 +766,7 @@
 		</tstamp>
 
 		<copy
-			file="dist/liferay-portal-${lp.version.file.name}.war"
+			file="dist/liferay-portal-${lp.version}.war"
 			tofile="${tstamp.value}/liferay-portal.war"
 		/>
 
@@ -1052,14 +1052,14 @@ app.server.jboss-tomcat.dir=${app.server.parent.dir}/jboss-tomcat-4.2.2
 		<ant dir="sql" target="rebuild-oracle" inheritAll="false" />
 		<ant dir="sql" target="export-oracle" inheritAll="false" />
 
-		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-9-${lp.version.file.name}.dmp" />
+		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-9-${lp.version}.dmp" />
 	</target>
 
 	<target name="build-dist-sql-oracle-10">
 		<ant dir="sql" target="rebuild-oracle" inheritAll="false" />
 		<ant dir="sql" target="export-oracle" inheritAll="false" />
 
-		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-10-${lp.version.file.name}.dmp" />
+		<move file="sql/lportal.dmp" tofile="dist/liferay-portal-sql-oracle-10-${lp.version}.dmp" />
 	</target>
 
 	<target name="build-dist-tomcat">
@@ -1093,7 +1093,7 @@ app.server.tomcat.lib.endorsed.dir=$${app.server.tomcat.dir}/lib/ext
 app.server.tomcat.lib.global.dir=$${app.server.tomcat.dir}/lib/ext
 app.server.tomcat.lib.support.dir=$${app.server.tomcat.dir}/lib/ext
 app.server.tomcat.support.dir=$${app.server.tomcat.dir}/lib/ext
-app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.name}.zip
+app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version}.zip
 </echo>
 
 		<ant target="deploy" inheritAll="false" />
@@ -1130,7 +1130,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			/>
 			<filterset>
 				<filter token="lp.version" value="${lp.version}" />
-				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
+				<filter token="lp.version" value="${lp.version}" />
 				<filter token="lp.eclipse.project.name" value="${lp.eclipse.project.name}" />
 			</filterset>
 		</copy>
@@ -1246,35 +1246,35 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-api">
-		<delete file="dist/liferay-portal-doc-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-doc-${lp.version}.zip" failonerror="false" />
 
-		<zip destfile="dist/liferay-portal-doc-${lp.version.file.name}.zip">
+		<zip destfile="dist/liferay-portal-doc-${lp.version}.zip">
 			<zipfileset
 				dir="api"
 				includes="**/*.css,**/*.gif,**/*.html"
-				prefix="liferay-portal-doc-${lp.version.file.name}"
+				prefix="liferay-portal-doc-${lp.version}"
 			/>
 		</zip>
 	</target>
 
 	<target name="zip-executable">
-		<zip destfile="dist/${zip.executable.file}-${lp.version.file.name}.zip">
+		<zip destfile="dist/${zip.executable.file}-${lp.version}.zip">
 			<zipfileset
 				dir="${zip.executable.dir}"
 				excludes="**/*.sh"
-				prefix="${zip.executable.file}-${lp.version.file.name}"
+				prefix="${zip.executable.file}-${lp.version}"
 			/>
 			<zipfileset
 				dir="${zip.executable.dir}"
 				filemode="744"
 				includes="**/*.sh"
-				prefix="${zip.executable.file}-${lp.version.file.name}"
+				prefix="${zip.executable.file}-${lp.version}"
 			/>
 		</zip>
 	</target>
 
 	<target name="zip-ext">
-		<delete file="dist/liferay-portal-ext-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-ext-${lp.version}.zip" failonerror="false" />
 
 		<tstamp>
 			<format property="tstamp.value" pattern="yyyyMMddkkmmssSSS" />
@@ -1284,10 +1284,10 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<antcall target="build-ext" />
 
-		<zip destfile="dist/liferay-portal-ext-${lp.version.file.name}.zip">
+		<zip destfile="dist/liferay-portal-ext-${lp.version}.zip">
 			<zipfileset
 				dir="${lp.ext.dir}"
-				prefix="liferay-portal-ext-${lp.version.file.name}"
+				prefix="liferay-portal-ext-${lp.version}"
 			/>
 		</zip>
 
@@ -1297,7 +1297,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-geronimo-tomcat">
-		<delete file="dist/liferay-portal-geronimo-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-geronimo-tomcat-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="zip-executable">
 			<param name="zip.executable.file" value="liferay-portal-geronimo-tomcat" />
@@ -1306,7 +1306,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-jboss">
-		<delete file="dist/liferay-portal-jboss-jetty-4.0-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jboss-jetty-4.0-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.jboss-jetty.deploy.dir}" />
@@ -1318,7 +1318,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<param name="zip.executable.dir" value="${app.server.jboss-jetty.dir}" />
 		</antcall>
 
-		<delete file="dist/liferay-portal-jboss-tomcat-4.0-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jboss-tomcat-4.0-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.jboss-tomcat.deploy.dir}" />
@@ -1330,7 +1330,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<param name="zip.executable.dir" value="${app.server.jboss-tomcat.dir}" />
 		</antcall>
 
-		<delete file="dist/liferay-portal-jboss-tomcat-4.2-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jboss-tomcat-4.2-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.parent.dir}/jboss-tomcat-4.2.2/server/default/deploy" />
@@ -1344,7 +1344,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-jetty">
-		<delete file="dist/liferay-portal-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jetty-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.jetty.deploy.dir}" />
@@ -1358,7 +1358,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-jonas">
-		<delete file="dist/liferay-portal-jonas-jetty-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jonas-jetty-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.jonas-jetty.deploy.dir}" />
@@ -1370,7 +1370,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<param name="zip.executable.dir" value="${app.server.jonas-jetty.dir}" />
 		</antcall>
 
-		<delete file="dist/liferay-portal-jonas-tomcat-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-jonas-tomcat-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.jonas-tomcat.deploy.dir}" />
@@ -1384,45 +1384,45 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-portal-client">
-		<delete file="dist/liferay-portal-client-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-client-${lp.version}.zip" failonerror="false" />
 
-		<zip destfile="dist/liferay-portal-client-${lp.version.file.name}.zip">
+		<zip destfile="dist/liferay-portal-client-${lp.version}.zip">
 			<zipfileset
 				dir="lib/development"
 				includes="activation.jar,mail.jar"
-				prefix="liferay-portal-client-${lp.version.file.name}"
+				prefix="liferay-portal-client-${lp.version}"
 			/>
 			<zipfileset
 				dir="lib/portal"
 				includes="axis.jar,commons-discovery.jar,commons-logging.jar,jaxrpc.jar,saaj.jar,wsdl4j.jar"
-				prefix="liferay-portal-client-${lp.version.file.name}"
+				prefix="liferay-portal-client-${lp.version}"
 			/>
 			<zipfileset
 				dir="portal-client"
 				includes="portal-client.jar"
-				prefix="liferay-portal-client-${lp.version.file.name}"
+				prefix="liferay-portal-client-${lp.version}"
 			/>
 		</zip>
 	</target>
 
 	<target name="zip-portal-dependencies">
-		<delete file="dist/liferay-portal-dependencies-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-dependencies-${lp.version}.zip" failonerror="false" />
 
-		<zip destfile="dist/liferay-portal-dependencies-${lp.version.file.name}.zip">
+		<zip destfile="dist/liferay-portal-dependencies-${lp.version}.zip">
 			<zipfileset
 				dir="lib/global"
 				includes="portlet.jar"
-				prefix="liferay-portal-dependencies-${lp.version.file.name}"
+				prefix="liferay-portal-dependencies-${lp.version}"
 			/>
 			<zipfileset
 				dir="portal-kernel"
 				includes="portal-kernel.jar"
-				prefix="liferay-portal-dependencies-${lp.version.file.name}"
+				prefix="liferay-portal-dependencies-${lp.version}"
 			/>
 			<zipfileset
 				dir="portal-service"
 				includes="portal-service.jar"
-				prefix="liferay-portal-dependencies-${lp.version.file.name}"
+				prefix="liferay-portal-dependencies-${lp.version}"
 			/>
 		</zip>
 	</target>
@@ -1431,11 +1431,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<!-- Servlet 2.4 WAR -->
 
-		<delete file="dist/liferay-portal-${lp.version.file.name}.war" failonerror="false" />
+		<delete file="dist/liferay-portal-${lp.version}.war" failonerror="false" />
 
 		<zip
 			basedir="${app.server.portal.dir}"
-			destfile="dist/liferay-portal-${lp.version.file.name}.war"
+			destfile="dist/liferay-portal-${lp.version}.war"
 		/>
 
 		<!-- Servlet 2.3 WAR -->
@@ -1456,17 +1456,17 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<arg value="${tstamp.value}/WEB-INF/web.xml" />
 		</java>
 
-		<delete file="dist/liferay-portal-${lp.version.file.name}-servlet23.war" failonerror="false" />
+		<delete file="dist/liferay-portal-${lp.version}-servlet23.war" failonerror="false" />
 
 		<copy
-			file="dist/liferay-portal-${lp.version.file.name}.war"
-			tofile="dist/liferay-portal-${lp.version.file.name}-servlet23.war"
+			file="dist/liferay-portal-${lp.version}.war"
+			tofile="dist/liferay-portal-${lp.version}-servlet23.war"
 			overwrite="yes"
 		/>
 
 		<zip
 			basedir="${tstamp.value}"
-			destfile="dist/liferay-portal-${lp.version.file.name}-servlet23.war"
+			destfile="dist/liferay-portal-${lp.version}-servlet23.war"
 			update="yes"
 		/>
 
@@ -1479,17 +1479,17 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			/>
 		</copy>
 
-		<delete file="dist/liferay-portal-${lp.version.file.name}-servlet23-with-dependencies.war" failonerror="false" />
+		<delete file="dist/liferay-portal-${lp.version}-servlet23-with-dependencies.war" failonerror="false" />
 
 		<copy
-			file="dist/liferay-portal-${lp.version.file.name}-servlet23.war"
-			tofile="dist/liferay-portal-${lp.version.file.name}-servlet23-with-dependencies.war"
+			file="dist/liferay-portal-${lp.version}-servlet23.war"
+			tofile="dist/liferay-portal-${lp.version}-servlet23-with-dependencies.war"
 			overwrite="yes"
 		/>
 
 		<zip
 			basedir="${tstamp.value}"
-			destfile="dist/liferay-portal-${lp.version.file.name}-servlet23-with-dependencies.war"
+			destfile="dist/liferay-portal-${lp.version}-servlet23-with-dependencies.war"
 			update="yes"
 		/>
 
@@ -1497,17 +1497,17 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 
 		<delete file="${tstamp.value}/WEB-INF/web.xml" />
 
-		<delete file="dist/liferay-portal-${lp.version.file.name}-with-dependencies.war" failonerror="false" />
+		<delete file="dist/liferay-portal-${lp.version}-with-dependencies.war" failonerror="false" />
 
 		<copy
-			file="dist/liferay-portal-${lp.version.file.name}.war"
-			tofile="dist/liferay-portal-${lp.version.file.name}-with-dependencies.war"
+			file="dist/liferay-portal-${lp.version}.war"
+			tofile="dist/liferay-portal-${lp.version}-with-dependencies.war"
 			overwrite="yes"
 		/>
 
 		<zip
 			basedir="${tstamp.value}"
-			destfile="dist/liferay-portal-${lp.version.file.name}-with-dependencies.war"
+			destfile="dist/liferay-portal-${lp.version}-with-dependencies.war"
 			update="yes"
 		/>
 
@@ -1515,11 +1515,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-pramati">
-		<delete file="dist/liferay-portal-pramati-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-pramati-${lp.version}.zip" failonerror="false" />
 
 		<zip
 			basedir="${app.server.pramati.dir}"
-			destfile="dist/liferay-portal-pramati-${lp.version.file.name}.zip"
+			destfile="dist/liferay-portal-pramati-${lp.version}.zip"
 			excludes="server/nodes/liferay/archives/autodeploy/*.war"
 		/>
 
@@ -1529,11 +1529,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			name="installer"
 		/>
 
-		<delete file="dist/liferay-portal-pramati-${lp.version.file.name}.jar" failonerror="false" />
+		<delete file="dist/liferay-portal-pramati-${lp.version}.jar" failonerror="false" />
 
 		<copy file="tools/installer/pramati/installer-config.xml.template" tofile="tools/installer/pramati/installer-config.xml" overwrite="yes">
 			<filterset>
-				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
+				<filter token="lp.version" value="${lp.version}" />
 			</filterset>
 		</copy>
 
@@ -1550,7 +1550,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<filterset>
 				<filter token="app.server.pramati.dir" value="${app.server.pramati.dir}" />
 				<filter token="java.home" value="${java.home.path.unix}" />
-				<filter token="lp.version.file.name" value="${lp.version.file.name}" />
+				<filter token="lp.version" value="${lp.version}" />
 			</filterset>
 		</copy>
 
@@ -1561,16 +1561,16 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			compress="true"
 			extractType="SelfExtractor"
 			failOnError="true"
-			file="dist/liferay-portal-pramati-${lp.version.file.name}.jar"
+			file="dist/liferay-portal-pramati-${lp.version}.jar"
 			installConfig="tools/installer/pramati/installer-config.xml"
 			validateConfig="true"
 		>
 			<fileset dir="tools/installer/pramati" includes="installer-build.properties" />
-			<fileset dir="dist" includes="liferay-portal-pramati-${lp.version.file.name}.zip" />
+			<fileset dir="dist" includes="liferay-portal-pramati-${lp.version}.zip" />
 		</installer>
 
 		<jar
-			destfile="dist/liferay-portal-pramati-${lp.version.file.name}.jar"
+			destfile="dist/liferay-portal-pramati-${lp.version}.jar"
 			update="yes"
 		>
 			<fileset
@@ -1579,11 +1579,11 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			/>
 		</jar>
 
-		<delete file="dist/liferay-portal-pramati-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-pramati-${lp.version}.zip" failonerror="false" />
 	</target>
 
 	<target name="zip-resin">
-		<delete file="dist/liferay-portal-resin-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-resin-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.resin.deploy.dir}" />
@@ -1597,24 +1597,24 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-sql">
-		<delete file="dist/liferay-portal-sql-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-sql-${lp.version}.zip" failonerror="false" />
 
-		<zip destfile="dist/liferay-portal-sql-${lp.version.file.name}.zip">
+		<zip destfile="dist/liferay-portal-sql-${lp.version}.zip">
 			<zipfileset
 				dir="sql"
 				includes="**/*.sql"
-				prefix="liferay-portal-sql-${lp.version.file.name}"
+				prefix="liferay-portal-sql-${lp.version}"
 			/>
 		</zip>
 	</target>
 
 	<target name="zip-src">
-		<delete file="dist/liferay-portal-src-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-src-${lp.version}.zip" failonerror="false" />
 
-		<zip destfile="dist/liferay-portal-src-${lp.version.file.name}.zip">
+		<zip destfile="dist/liferay-portal-src-${lp.version}.zip">
 			<zipfileset
 				dir="${lp.source.dir}"
-				prefix="liferay-portal-src-${lp.version.file.name}"
+				prefix="liferay-portal-src-${lp.version}"
 			/>
 		</zip>
 	</target>
@@ -1625,7 +1625,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 	</target>
 
 	<target name="zip-tomcat-5.5">
-		<delete file="dist/liferay-portal-tomcat-5.5-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-tomcat-5.5-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.tomcat.deploy.dir}" />
@@ -1637,23 +1637,23 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 			<param name="zip.executable.dir" value="${app.server.tomcat.dir}" />
 		</antcall>-->
 
-		<zip destfile="dist/liferay-portal-tomcat-5.5-${lp.version.file.name}.zip">
+		<zip destfile="dist/liferay-portal-tomcat-5.5-${lp.version}.zip">
 			<zipfileset
 				dir="${app.server.tomcat.dir}"
 				excludes="**/*.sh"
-				prefix="liferay-portal-tomcat-5.5-${lp.version.file.name}"
+				prefix="liferay-portal-tomcat-5.5-${lp.version}"
 			/>
 			<zipfileset
 				dir="${app.server.tomcat.dir}"
 				filemode="744"
 				includes="**/*.sh"
-				prefix="liferay-portal-tomcat-5.5-${lp.version.file.name}"
+				prefix="liferay-portal-tomcat-5.5-${lp.version}"
 			/>
 		</zip>
 	</target>
 
 	<target name="zip-tomcat-6.0">
-		<delete file="dist/liferay-portal-tomcat-6.0-${lp.version.file.name}.zip" failonerror="false" />
+		<delete file="dist/liferay-portal-tomcat-6.0-${lp.version}.zip" failonerror="false" />
 
 		<antcall target="deploy-default-theme">
 			<param name="deployer.dest.dir" value="${app.server.parent.dir}/tomcat-6.0.16/webapps" />
@@ -1724,7 +1724,7 @@ app.server.tomcat.zip.name=liferay-portal-tomcat-6.0-$${downloads.version.file.n
 		<antcall target="zip-src" />
 		<antcall target="zip-tomcat" />
 
-		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version.file.name}.war" />
+		<copy file="tunnel-web/tunnel-web.war" tofile="dist/liferay-portal-tunnel-web-${lp.version}.war" />
 
 		<antcall target="build-dist-sql-oracle-10" />
 

@@ -3,7 +3,7 @@
 
 <installer
 	lookAndFeel="org.tp23.jgoodies.plaf.plastic.PlasticXPLookAndFeel"
-	minJavaVersion="1.4"
+	minJavaVersion="1.5"
 	name="Liferay Pramati Installer"
 	ui="swing,text"
 	verbose="false"
@@ -15,7 +15,7 @@
 	>
 		<directory
 			create="true"
-			defaultValue="C:\liferay-@lp.version.file.name@\pramati-5.0"
+			defaultValue="C:\liferay-@lp.version@\pramati-5.0"
 			displayText="Select an installation directory"
 			property="app.server.pramati.install.dir"
 		/>
