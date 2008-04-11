@@ -24,6 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
@@ -102,12 +103,17 @@ public class PortletPreferencesImpl
 			values = preference.getValues();
 		}
 
-		if (values != null && values.length > 0) {
-			return _getActualValue(values[0]);
+		String value = null;
+
+		if (Validator.isNotNull(values)) {
+			value = _getActualValue(values[0]);
 		}
-		else {
-			return _getActualValue(def);
+
+		if (Validator.isNull(value)) {
+			value = _getActualValue(def);
 		}
+
+		return value;
 	}
 
 	public void setValue(String key, String value) throws ReadOnlyException {
@@ -145,7 +151,7 @@ public class PortletPreferencesImpl
 			values = preference.getValues();
 		}
 
-		if (values != null && values.length > 0) {
+		if (Validator.isNotNull(values)) {
 			return _getActualValues(values);
 		}
 		else {
