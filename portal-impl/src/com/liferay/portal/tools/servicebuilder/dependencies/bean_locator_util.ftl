@@ -34,6 +34,6 @@ public class BeanLocatorUtil {
 
 	private static Log _log = LogFactory.getLog(BeanLocatorUtil.class);
 
-	private Set<Object> _beans = new HashSet<Object>();
+	private static Set<Object> _beans = new HashSet<Object>();
 
 }
