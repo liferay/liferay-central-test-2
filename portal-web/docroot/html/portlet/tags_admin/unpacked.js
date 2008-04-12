@@ -253,8 +253,7 @@ Liferay.Portlet.TagsAdmin = new Class({
 	_deleteEntry: function(instance, entryId) {
 		var params = instance.params;
 
-		var deleteTagText = Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag');
-		if (confirm(deleteTagText)) {
+		if (confirm(Liferay.Language.get('are-you-sure-you-want-to-delete-this-tag'))) {
 			var instanceVar = params.instanceVar;
 			var editEntryFields = jQuery('#' + params.editEntryFields);
 
