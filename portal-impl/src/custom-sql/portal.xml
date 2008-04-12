@@ -1056,6 +1056,49 @@
 				)
 		]]>
 	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialMutualRelation">
+		<![CDATA[
+			INNER JOIN
+				SocialRelation AS sr1 ON
+					(
+						(sr1.userId1 = User_.userId) OR
+						(sr1.userId2 = User_.userId)
+					) AND
+					(User_.userId != ?) AND
+					(
+						(sr1.userId1 = ?) OR
+						(sr1.userId2 = ?)
+					)
+			INNER JOIN
+				SocialRelation AS sr2 ON
+					(
+						(sr2.userId1 = User_.userId) OR
+						(sr2.userId2 = User_.userId)
+					) AND
+					(User_.userId != ?) AND
+					(
+						(sr2.userId1 = ?) OR
+						(sr2.userId2 = ?)
+					)
+			WHERE
+				(sr1.type_ = ?) AND
+				(sr2.type_ = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelationAll">
+		<![CDATA[
+			INNER JOIN
+				SocialRelation ON
+					(SocialRelation.userId1 = User_.userId) OR
+					(SocialRelation.userId2 = User_.userId)
+			WHERE
+				(User_.userId != ?) AND
+				(
+					(SocialRelation.userId1 = ?) OR
+					(SocialRelation.userId2 = ?)
+				)
+		]]>
+	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelationBidirectional">
 		<![CDATA[
 			INNER JOIN

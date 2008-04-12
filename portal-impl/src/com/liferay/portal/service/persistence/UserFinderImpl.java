@@ -87,6 +87,12 @@ public class UserFinderImpl implements UserFinder {
 	public static String JOIN_BY_ANNOUNCEMENTS_DELIVERY_EMAIL_OR_SMS =
 		UserFinder.class.getName() + ".joinByAnnouncementsDeliveryEmailOrSms";
 
+	public static String JOIN_BY_SOCIAL_MUTUAL_RELATION =
+		UserFinder.class.getName() + ".joinBySocialMutualRelation";
+
+	public static String JOIN_BY_SOCIAL_RELATION_ALL =
+		UserFinder.class.getName() + ".joinBySocialRelationAll";
+
 	public static String JOIN_BY_SOCIAL_RELATION_BI =
 		UserFinder.class.getName() + ".joinBySocialRelationBidirectional";
 
@@ -414,6 +420,12 @@ public class UserFinderImpl implements UserFinder {
 			join = CustomSQLUtil.get(
 				JOIN_BY_ANNOUNCEMENTS_DELIVERY_EMAIL_OR_SMS);
 		}
+		else if (key.equals("socialMutualRelation")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION);
+		}
+		else if (key.equals("socialRelationAll")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_ALL);
+		}
 		else if (key.equals("socialRelationBidirectional")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_BI);
 		}
@@ -502,6 +514,12 @@ public class UserFinderImpl implements UserFinder {
 		else if (key.equals("announcementsDeliveryEmailOrSms")) {
 			join = CustomSQLUtil.get(
 				JOIN_BY_ANNOUNCEMENTS_DELIVERY_EMAIL_OR_SMS);
+		}
+		else if (key.equals("socialMutualRelation")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION);
+		}
+		else if (key.equals("socialRelationAll")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_ALL);
 		}
 		else if (key.equals("socialRelationBidirectional")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_BI);
