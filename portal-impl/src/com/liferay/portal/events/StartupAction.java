@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
-import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.InstancePool;
 import com.liferay.portal.kernel.util.ReleaseInfo;
@@ -88,24 +87,6 @@ public class StartupAction extends SimpleAction {
 				String beanDefinitionName = beanDefinitionNames[i];
 
 				BeanLocatorUtil.locate(beanDefinitionName, false);
-			}
-
-			// JNDI
-
-			try {
-				PortalJNDIUtil.getDataSource();
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-
-			try {
-				PortalJNDIUtil.getMailSession();
-			}
-			catch (Exception e) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(e.getMessage());
-				}
 			}
 
 			// Disable database caching before upgrade

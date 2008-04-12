@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
+import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
@@ -176,6 +177,24 @@ public class GlobalStartupAction extends SimpleAction {
 		// JGroups
 
 		CommLink.getInstance();
+
+		// JNDI
+
+		try {
+			PortalJNDIUtil.getDataSource();
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		try {
+			PortalJNDIUtil.getMailSession();
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e.getMessage());
+			}
+		}
 
 		// POP server
 
