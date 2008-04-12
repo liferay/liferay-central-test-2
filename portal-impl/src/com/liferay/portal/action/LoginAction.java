@@ -431,9 +431,7 @@ public class LoginAction extends Action {
 			}
 		}
 		else {
-
-			String authLoginURL = PortalUtil.getCommunityLoginURL(
-				themeDisplay);
+			String authLoginURL = PortalUtil.getCommunityLoginURL(themeDisplay);
 
 			if (Validator.isNull(authLoginURL)) {
 				authLoginURL = PropsValues.AUTH_LOGIN_URL;

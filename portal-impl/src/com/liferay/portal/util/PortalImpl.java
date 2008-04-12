@@ -407,39 +407,6 @@ public class PortalImpl implements Portal {
 		}
 	}
 
-	public String getCommunityLoginURL(ThemeDisplay themeDisplay)
-		throws PortalException, SystemException {
-
-		String authLoginURL = null;
-
-		if (Validator.isNull(PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
-			return null;
-		}
-
-		boolean pageFound = false;
-
-		for (Layout layout : themeDisplay.getLayouts()) {
-			if (layout.getFriendlyURL().equals(
-				PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
-
-				pageFound = true;
-				break;
-			}
-		}
-
-		if (pageFound && (themeDisplay.getLayout() != null)) {
-			String layoutSetFriendlyURL =
-				PortalUtil.getLayoutSetFriendlyURL(
-					themeDisplay.getLayout().getLayoutSet(),
-					themeDisplay);
-
-			authLoginURL =
-				layoutSetFriendlyURL +
-					PropsValues.AUTH_LOGIN_COMMUNITY_URL;
-		}
-		return authLoginURL;
-	}
-
 	public String getClassNamePortletId(String className) {
 		String portletId = StringPool.BLANK;
 
@@ -466,6 +433,32 @@ public class PortalImpl implements Portal {
 		}
 
 		return portletId;
+	}
+
+	public String getCommunityLoginURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		if (Validator.isNull(PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
+			return null;
+		}
+
+		for (Layout layout : themeDisplay.getLayouts()) {
+			if (layout.getFriendlyURL().equals(
+					PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
+
+				if (themeDisplay.getLayout() != null) {
+					String layoutSetFriendlyURL = getLayoutSetFriendlyURL(
+						themeDisplay.getLayout().getLayoutSet(), themeDisplay);
+
+					return layoutSetFriendlyURL +
+						PropsValues.AUTH_LOGIN_COMMUNITY_URL;
+				}
+
+				break;
+			}
+		}
+
+		return null;
 	}
 
 	public Company getCompany(HttpServletRequest req)
@@ -911,7 +904,7 @@ public class PortalImpl implements Portal {
 				themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
 
 			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
-					(portalURL.startsWith(themeDisplay.getURLPortal()))) {
+				(portalURL.startsWith(themeDisplay.getURLPortal()))) {
 
 				return portalURL + getPathContext();
 			}

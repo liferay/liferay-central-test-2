@@ -1287,6 +1287,7 @@ public class ServicePreAction extends Action {
 		}
 
 		themeDisplay.setURLPortal(themeDisplay.getURLHome());
+
 		String urlSignIn = mainPath + "/portal/login";
 
 		if (layout != null) {
@@ -1295,6 +1296,7 @@ public class ServicePreAction extends Action {
 		}
 
 		themeDisplay.setURLSignIn(urlSignIn);
+
 		themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
 		PortletURL updateManagerURL = new PortletURLImpl(
