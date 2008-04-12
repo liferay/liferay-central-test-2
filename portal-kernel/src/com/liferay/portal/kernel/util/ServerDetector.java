@@ -103,41 +103,41 @@ public class ServerDetector {
 		ServerDetector sd = _instance;
 
 		if (sd._serverId == null) {
-			if (ServerDetector.isGeronimo()) {
+			if (isGeronimo()) {
 				sd._serverId = GERONIMO_ID;
 			}
-			else if (ServerDetector.isGlassfish()) {
+			else if (isGlassfish()) {
 				sd._serverId = GLASSFISH_ID;
 			}
-			else if (ServerDetector.isJBoss()) {
+			else if (isJBoss()) {
 				sd._serverId = JBOSS_ID;
 			}
-			else if (ServerDetector.isJOnAS()) {
+			else if (isJOnAS()) {
 				sd._serverId = JONAS_ID;
 			}
-			else if (ServerDetector.isOC4J()) {
+			else if (isOC4J()) {
 				sd._serverId = OC4J_ID;
 			}
-			else if (ServerDetector.isOrion()) {
+			else if (isOrion()) {
 				sd._serverId = ORION_ID;
 			}
-			else if (ServerDetector.isPramati()) {
+			else if (isPramati()) {
 				sd._serverId = PRAMATI_ID;
 			}
-			else if (ServerDetector.isResin()) {
+			else if (isResin()) {
 				sd._serverId = RESIN_ID;
 			}
-			else if (ServerDetector.isRexIP()) {
+			else if (isRexIP()) {
 				sd._serverId = REXIP_ID;
 			}
-			else if (ServerDetector.isWebLogic()) {
+			else if (isWebLogic()) {
 				sd._serverId = WEBLOGIC_ID;
 			}
-			else if (ServerDetector.isWebSphere()) {
+			else if (isWebSphere()) {
 				sd._serverId = WEBSPHERE_ID;
 			}
 
-			if (ServerDetector.isJetty()) {
+			if (isJetty()) {
 				if (sd._serverId == null) {
 					sd._serverId = JETTY_ID;
 				}
@@ -145,7 +145,7 @@ public class ServerDetector {
 					sd._serverId += "-" + JETTY_ID;
 				}
 			}
-			else if (ServerDetector.isTomcat()) {
+			else if (isTomcat()) {
 				if (sd._serverId == null) {
 					sd._serverId = TOMCAT_ID;
 				}

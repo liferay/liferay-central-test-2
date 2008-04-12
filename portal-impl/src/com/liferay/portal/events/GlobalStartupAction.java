@@ -34,6 +34,7 @@ import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -188,7 +189,9 @@ public class GlobalStartupAction extends SimpleAction {
 		}
 
 		try {
-			PortalJNDIUtil.getMailSession();
+			if (!ServerDetector.isJOnAS()) {
+				PortalJNDIUtil.getMailSession();
+			}
 		}
 		catch (Exception e) {
 			if (_log.isWarnEnabled()) {
