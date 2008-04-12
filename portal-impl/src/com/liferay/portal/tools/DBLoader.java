@@ -22,11 +22,6 @@
 
 package com.liferay.portal.tools;
 
-import Zql.ZConstant;
-import Zql.ZInsert;
-import Zql.ZStatement;
-import Zql.ZqlParser;
-
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -35,15 +30,15 @@ import com.liferay.util.FileUtil;
 
 import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
 import java.io.StringReader;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.Statement;
-import java.sql.Timestamp;
 
-import java.util.List;
+import org.apache.derby.tools.ij;
 
 /**
  * <a href="DBLoader.java.html"><b><i>View Source</i></b></a>
@@ -81,72 +76,6 @@ public class DBLoader {
 		catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-
-	private PreparedStatement _getStatementDerby(Connection con, String sql)
-		throws Exception {
-
-		sql = StringUtil.replace(
-			sql, "current timestamp", "'current timestamp'");
-
-		sql += ";";
-
-		ZqlParser zParser = new ZqlParser(
-			new ByteArrayInputStream(sql.getBytes()));
-
-		ZStatement zStatement = zParser.readStatement();
-
-		ZInsert zInsert = (ZInsert)zStatement;
-
-		sql = "insert into " + zInsert.getTable() + " (";
-
-		List<String> columns = zInsert.getColumns();
-
-		for (int i = 0; i < columns.size(); i++) {
-			sql += columns.get(i);
-
-			if ((i + 1) < columns.size()) {
-				sql += ", ";
-			}
-		}
-
-		sql += ") values (";
-
-		for (int i = 0; i < columns.size(); i++) {
-			sql += "?";
-
-			if ((i + 1) < columns.size()) {
-				sql += ", ";
-			}
-		}
-
-		sql += ")";
-
-		PreparedStatement ps = con.prepareStatement(sql);
-
-		List<ZConstant> values = zInsert.getValues();
-
-		for (int i = 0; i < values.size(); i++) {
-			ZConstant zConstant = values.get(i);
-
-			int pos = i + 1;
-
-			String value = zConstant.getValue();
-
-			if (value.equals("current timestamp")) {
-				ps.setTimestamp(
-					pos, new Timestamp(System.currentTimeMillis()));
-			}
-			else if (value.length() < 32000) {
-				ps.setString(pos, zConstant.getValue());
-			}
-			else {
-				ps.setCharacterStream(
-					pos, new StringReader(value), value.length());
-			}
-		}
-
-		return ps;
 	}
 
 	private void _loadDerby() throws Exception {
@@ -207,75 +136,11 @@ public class DBLoader {
 						continue;
 					}
 
-					PreparedStatement ps = null;
-
-					if (sql.startsWith("insert into Image (") ||
-						sql.startsWith("insert into JournalArticle (") ||
-						sql.startsWith("insert into JournalStructure (") ||
-						sql.startsWith("insert into JournalTemplate (") ||
-						sql.startsWith("insert into Layout (") ||
-						sql.startsWith("insert into PortletPreferences (")) {
-
-						// Derby isn't able to process long inserts. Zql parses
-						// the SQL statement so that we can manually set the
-						// insert statement. Zql also isn't able to properly
-						// parse certain unicode characters.
-
-						sql = StringUtil.replace(
-							sql,
-							new String[] {
-								"\u0161",
-								"\u017e",
-								"\u2013",
-								"\u2014",
-								"\u2015",
-								"\u2019",
-								"\u2022",
-								"\u201c",
-								"\u2122"
-							},
-							new String[] {
-								StringPool.BLANK,
-								StringPool.BLANK,
-								StringPool.BLANK,
-								StringPool.BLANK,
-								StringPool.BLANK,
-								StringPool.BLANK,
-								StringPool.BLANK,
-								StringPool.BLANK,
-								StringPool.BLANK
-							});
-
-						try {
-							ps = _getStatementDerby(con, sql);
-						}
-						catch (Exception e) {
-							System.out.println("Unable to parse " + sql);
-
-							e.printStackTrace();
-
-							throw e;
-						}
-					}
-					else {
-						ps = con.prepareStatement(sql);
-					}
-
-					try {
-						ps.executeUpdate();
-					}
-					catch (Exception e) {
-						System.out.println("Unable to execute " + sql);
-
-						e.printStackTrace();
-
-						throw e;
-					}
-					finally {
-						if (ps != null) {
-							ps.close();
-						}
-					}
+					ij.runScript(
+						con,
+						new ByteArrayInputStream(sql.getBytes(StringPool.UTF8)),
+						StringPool.UTF8, new ByteArrayOutputStream(),
+						StringPool.UTF8);
 				}
 			}
 		}

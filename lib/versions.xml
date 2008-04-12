@@ -93,6 +93,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/derbytools.jar</file-name>
+		<version>10.2.2.0</version>
+		<project-name>Derby</project-name>
+		<project-url>http://db.apache.org/derby</project-url>
+		<licenses>
+			<license>
+				<license-name>Apache License 2.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/dtddoc.jar</file-name>
 		<version>1.1.0</version>
 		<project-name>DTDDoc</project-name>
@@ -682,17 +693,6 @@
 		<licenses>
 			<license>
 				<license-name>BSD Style License</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/zql.jar</file-name>
-		<version></version>
-		<project-name>Zql</project-name>
-		<project-url>http://www.experlog.com/gibello/zql</project-url>
-		<licenses>
-			<license>
-				<license-name>Project website contains this: feel free to use it</license-name>
 			</license>
 		</licenses>
 	</library>
