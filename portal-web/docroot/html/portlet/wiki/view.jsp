@@ -150,16 +150,13 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 
 			<liferay-ui:icon image="print" message="print" url='<%= "javascript: " + renderResponse.getNamespace() + "printPage();" %>' />
 
-			<c:if test="<%= portletName.equals(PortletKeys.WIKI) %>">
+			<%
+			PortletURL viewPageGeneralURL = PortletURLUtil.clone(viewPageURL, renderResponse);
 
-				<%
-				PortletURL viewPageGeneralURL = PortletURLUtil.clone(viewPageURL, renderResponse);
+			viewPageGeneralURL.setParameter("struts_action", "/wiki/view_page_general");
+			%>
 
-				viewPageGeneralURL.setParameter("struts_action", "/wiki/view_page_general");
-				%>
-
-				<liferay-ui:icon image="history" message="properties" url="<%= viewPageGeneralURL.toString() %>" />
-			</c:if>
+			<liferay-ui:icon image="history" message="properties" url="<%= viewPageGeneralURL.toString() %>" />
 		</div>
 	</c:if>
 

@@ -1434,13 +1434,30 @@
 
 		<!-- Wiki Display -->
 
+		<action path="/wiki_display/compare_versions" type="com.liferay.portlet.wiki.action.CompareVersionsAction">
+			<forward name="portlet.wiki.compare_versions" path="portlet.wiki.compare_versions" />
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+		</action>
+
 		<action path="/wiki_display/edit_page" type="com.liferay.portlet.wiki.action.EditPageAction">
 			<forward name="portlet.wiki.edit_page" path="portlet.wiki.edit_page" />
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 		</action>
 
+		<action path="/wiki_display/edit_page_attachment" type="com.liferay.portlet.wiki.action.EditPageAttachmentAction">
+			<forward name="portlet.wiki.edit_page_attachment" path="portlet.wiki.edit_page_attachment" />
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+		</action>
+
 		<action path="/wiki_display/edit_page_discussion" type="com.liferay.portlet.messageboards.action.EditDiscussionAction">
 			<forward name="portlet.message_boards.error" path="portlet.wiki.error" />
+		</action>
+
+		<action path="/wiki_display/get_page_attachment" type="com.liferay.portlet.wiki.action.GetPageAttachmentAction" />
+
+		<action path="/wiki_display/move_page" type="com.liferay.portlet.wiki.action.MovePageAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.move_page" path="portlet.wiki.move_page" />
 		</action>
 
 		<action path="/wiki_display/view" type="com.liferay.portlet.wikidisplay.action.ViewAction">
@@ -1451,6 +1468,31 @@
 		<action path="/wiki_display/view_page" type="com.liferay.portlet.wiki.action.ViewPageAction">
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 			<forward name="portlet.wiki.view_page" path="portlet.wiki_display.view" />
+		</action>
+
+		<action path="/wiki_display/view_page_attachments" type="com.liferay.portlet.wiki.action.ViewPageAction">
+			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_attachments" />
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+		</action>
+
+		<action path="/wiki_display/view_page_general" type="com.liferay.portlet.wiki.action.ViewPageAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_general" />
+		</action>
+
+		<action path="/wiki_display/view_page_history" type="com.liferay.portlet.wiki.action.ViewPageAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_history" />
+		</action>
+
+		<action path="/wiki_display/view_page_incoming_links" type="com.liferay.portlet.wiki.action.ViewPageAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_incoming_links" />
+		</action>
+
+		<action path="/wiki_display/view_page_outgoing_links" type="com.liferay.portlet.wiki.action.ViewPageAction">
+			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
+			<forward name="portlet.wiki.view_page" path="portlet.wiki.view_page_outgoing_links" />
 		</action>
 
 		<!-- Words -->
