@@ -63,11 +63,9 @@ public class UpgradeCounter extends UpgradeProcess {
 
 		// Counter
 
-		List names = CounterLocalServiceUtil.getNames();
+		List<String> names = CounterLocalServiceUtil.getNames();
 
-		for (int i = 0; i < names.size(); i++) {
-			String name = (String)names.get(i);
-
+		for (String name : names) {
 			if (name.startsWith("com.liferay.") &&
 				!name.equals(Counter.class.getName()) &&
 				!name.equals(Permission.class.getName()) &&

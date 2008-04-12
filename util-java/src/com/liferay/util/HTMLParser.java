@@ -46,16 +46,16 @@ public class HTMLParser {
 		parser.parse(reader, new HTMLCallback(), true);
 	}
 
-	public List getImages() {
+	public List<String> getImages() {
 		return _images;
 	}
 
-	public List getLinks() {
+	public List<String> getLinks() {
 		return _links;
 	}
 
-	private List _images = new ArrayList();
-	private List _links = new ArrayList();
+	private List<String> _images = new ArrayList<String>();
+	private List<String> _links = new ArrayList<String>();
 
 	private class DefaultParser extends HTMLEditorKit {
 

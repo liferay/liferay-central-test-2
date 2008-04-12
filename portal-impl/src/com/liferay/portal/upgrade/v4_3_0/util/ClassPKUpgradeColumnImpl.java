@@ -39,7 +39,8 @@ import java.util.Map;
 public class ClassPKUpgradeColumnImpl extends TempUpgradeColumnImpl {
 
 	public ClassPKUpgradeColumnImpl(
-		ClassNameIdUpgradeColumnImpl classNameIdColumn, Map classPKContainers) {
+		ClassNameIdUpgradeColumnImpl classNameIdColumn,
+		Map<Long, ClassPKContainer> classPKContainers) {
 
 		super("classPK", new Integer(Types.VARCHAR));
 
@@ -54,8 +55,7 @@ public class ClassPKUpgradeColumnImpl extends TempUpgradeColumnImpl {
 	public Object getNewValue(Object oldValue) throws Exception {
 		Long classNameId = (Long)_classNameIdColumn.getNewValue();
 
-		ClassPKContainer classPKContainer =
-			(ClassPKContainer)_classPKContainers.get(classNameId);
+		ClassPKContainer classPKContainer = _classPKContainers.get(classNameId);
 
 		if (classPKContainer != null) {
 			ValueMapper valueMapper = classPKContainer.getValueMapper();
@@ -79,6 +79,6 @@ public class ClassPKUpgradeColumnImpl extends TempUpgradeColumnImpl {
 	}
 
 	private ClassNameIdUpgradeColumnImpl _classNameIdColumn;
-	private Map _classPKContainers;
+	private Map<Long, ClassPKContainer> _classPKContainers;
 
 }

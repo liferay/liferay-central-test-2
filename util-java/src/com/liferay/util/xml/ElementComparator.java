@@ -34,12 +34,9 @@ import org.dom4j.Element;
  * @author Brian Wing Shun Chan
  *
  */
-public class ElementComparator implements Comparator {
+public class ElementComparator implements Comparator<Element> {
 
-	public int compare(Object obj1, Object obj2) {
-		Element el1 = (Element)obj1;
-		Element el2 = (Element)obj2;
-
+	public int compare(Element el1, Element el2) {
 		String el1Name = el1.getName();
 		String el2Name = el2.getName();
 
@@ -54,8 +51,8 @@ public class ElementComparator implements Comparator {
 			return el1Text.compareTo(el2Text);
 		}
 
-		List el1Attrs = el1.attributes();
-		List el2Attrs = el2.attributes();
+		List<Attribute> el1Attrs = el1.attributes();
+		List<Attribute> el2Attrs = el2.attributes();
 
 		if (el1Attrs.size() < el2Attrs.size()) {
 			return -1;
@@ -64,9 +61,7 @@ public class ElementComparator implements Comparator {
 			return 1;
 		}
 
-		for (int i = 0; i < el1Attrs.size(); i++) {
-			Attribute attr = (Attribute)el1Attrs.get(i);
-
+		for (Attribute attr : el1Attrs) {
 			int value = _compare(el2Attrs, attr, new AttributeComparator());
 
 			if (value != 0) {
@@ -74,8 +69,8 @@ public class ElementComparator implements Comparator {
 			}
 		}
 
-		List el1Elements = el1.elements();
-		List el2Elements = el2.elements();
+		List<Element> el1Elements = el1.elements();
+		List<Element> el2Elements = el2.elements();
 
 		if (el1Elements.size() < el2Elements.size()) {
 			return -1;
@@ -84,9 +79,7 @@ public class ElementComparator implements Comparator {
 			return 1;
 		}
 
-		for (int i = 0; i < el1Elements.size(); i++) {
-			Element el = (Element)el1Elements.get(i);
-
+		for (Element el : el1Elements) {
 			int value = _compare(el2Elements, el, new ElementComparator());
 
 			if (value != 0) {
@@ -97,7 +90,7 @@ public class ElementComparator implements Comparator {
 		return 0;
 	}
 
-	private int _compare(List list, Object obj, Comparator comparator) {
+	private int _compare(List<?> list, Object obj, Comparator comparator) {
 		int firstValue = -1;
 
 		for (int i = 0; i < list.size(); i++) {

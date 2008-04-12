@@ -69,7 +69,7 @@ public class VelocityContextPool {
 	}
 
 	private ServletContext _get(String name) {
-		ServletContext ctx = (ServletContext)_pool.get(name);
+		ServletContext ctx = _pool.get(name);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Get " + name + " " + ctx);
@@ -87,7 +87,7 @@ public class VelocityContextPool {
 	}
 
 	private ServletContext _remove(String name) {
-		ServletContext ctx = (ServletContext)_pool.remove(name);
+		ServletContext ctx = _pool.remove(name);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Remove " + name + " " + ctx);

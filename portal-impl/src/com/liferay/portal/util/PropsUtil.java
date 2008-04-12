@@ -25,7 +25,6 @@ package com.liferay.portal.util;
 import java.util.Properties;
 
 import com.germinus.easyconf.ComponentProperties;
-import com.liferay.portal.model.impl.CompanyImpl;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.util.ExtPropertiesLoader;

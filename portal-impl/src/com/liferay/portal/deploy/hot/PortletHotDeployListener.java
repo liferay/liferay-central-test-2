@@ -315,7 +315,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 				Map<String, ResourceBundle> resourceBundles = null;
 
 				if (Validator.isNotNull(portlet.getResourceBundle())) {
-					resourceBundles = new HashMap();
+					resourceBundles = new HashMap<String, ResourceBundle>();
 
 					initResourceBundle(
 						resourceBundles, portlet, portletClassLoader,

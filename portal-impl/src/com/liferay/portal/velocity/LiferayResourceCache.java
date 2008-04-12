@@ -59,7 +59,7 @@ public class LiferayResourceCache implements ResourceCache {
 		return resource;
 	}
 
-	public Iterator enumerateKeys() {
+	public Iterator<Object> enumerateKeys() {
  		throw new RuntimeException("enumerateKeys is not implemented");
 	}
 

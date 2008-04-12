@@ -128,7 +128,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _primaryKeys;
 	}
 
-	public boolean addPrimaryKey(Class classObj, Object primaryKey) {
+	public boolean addPrimaryKey(Class<?> classObj, Object primaryKey) {
 		boolean value = hasPrimaryKey(classObj, primaryKey);
 
 		if (!value) {
@@ -138,11 +138,11 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return value;
 	}
 
-	public boolean hasPrimaryKey(Class classObj, Object primaryKey) {
+	public boolean hasPrimaryKey(Class<?> classObj, Object primaryKey) {
 		return _primaryKeys.contains(getPrimaryKeyString(classObj, primaryKey));
 	}
 
-	public Map getNewPrimaryKeysMap(Class classObj) {
+	public Map getNewPrimaryKeysMap(Class<?> classObj) {
 		Map map = _newPrimaryKeysMaps.get(classObj.getName());
 
 		if (map == null) {
@@ -158,7 +158,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _commentsMap;
 	}
 
-	public void addComments(Class classObj, Object primaryKey)
+	public void addComments(Class<?> classObj, Object primaryKey)
 		throws PortalException, SystemException {
 
 		List messages = MBMessageLocalServiceUtil.getMessages(
@@ -187,7 +187,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public void importComments(
-			Class classObj, Object primaryKey, Object newPrimaryKey,
+			Class<?> classObj, Object primaryKey, Object newPrimaryKey,
 			long groupId)
 		throws PortalException, SystemException {
 
@@ -231,7 +231,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _ratingsEntriesMap;
 	}
 
-	public void addRatingsEntries(Class classObj, Object primaryKey)
+	public void addRatingsEntries(Class<?> classObj, Object primaryKey)
 		throws PortalException, SystemException {
 
 		List entries = RatingsEntryLocalServiceUtil.getEntries(
@@ -262,7 +262,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 	}
 
 	public void importRatingsEntries(
-			Class classObj, Object primaryKey, Object newPrimaryKey)
+			Class<?> classObj, Object primaryKey, Object newPrimaryKey)
 		throws PortalException, SystemException {
 
 		List entries = (List)_ratingsEntriesMap.get(
@@ -285,7 +285,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		}
 	}
 
-	public String[] getTagsEntries(Class classObj, Object primaryKey) {
+	public String[] getTagsEntries(Class<?> classObj, Object primaryKey) {
 		return (String[])_tagsEntriesMap.get(
 			getPrimaryKeyString(classObj, primaryKey));
 	}
@@ -299,7 +299,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _tagsEntriesMap;
 	}
 
-	public void addTagsEntries(Class classObj, Object classPK)
+	public void addTagsEntries(Class<?> classObj, Object classPK)
 		throws PortalException, SystemException {
 
 		TagsAsset tagsAsset = null;
@@ -362,7 +362,7 @@ public class PortletDataContextImpl implements PortletDataContext {
 		return _zipWriter;
 	}
 
-	protected String getPrimaryKeyString(Class classObj, Object primaryKey) {
+	protected String getPrimaryKeyString(Class<?> classObj, Object primaryKey) {
 		return getPrimaryKeyString(classObj.getName(), primaryKey);
 	}
 

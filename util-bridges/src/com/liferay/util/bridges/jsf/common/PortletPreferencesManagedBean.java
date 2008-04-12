@@ -59,12 +59,13 @@ public class PortletPreferencesManagedBean {
 		// copy each name and its first value into a new map where the name and
 		// value are both strings.
 
-		_preferences = new HashMap();
+		_preferences = new HashMap<String, String>();
 
-		Enumeration enu = _portletPreferences.getNames();
+		Enumeration<String> enu = _portletPreferences.getNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
+
 			String value = _portletPreferences.getValue(name, null);
 
 			_preferences.put(name, value);
@@ -75,16 +76,16 @@ public class PortletPreferencesManagedBean {
 		}
 	}
 
-	public Map getPreferences() {
+	public Map<String, String> getPreferences() {
 		return _preferences;
 	}
 
 	public String resetDefaultValues() {
 		try {
-			Enumeration enu = _portletPreferences.getNames();
+			Enumeration<String> enu = _portletPreferences.getNames();
 
 			while (enu.hasMoreElements()) {
-				String name = (String)enu.nextElement();
+				String name = enu.nextElement();
 
 				if (!_portletPreferences.isReadOnly(name)) {
 					_portletPreferences.reset(name);
@@ -113,13 +114,13 @@ public class PortletPreferencesManagedBean {
 
 	public String submit() {
 		try {
-			Enumeration enu = _portletPreferences.getNames();
+			Enumeration<String> enu = _portletPreferences.getNames();
 
 			while (enu.hasMoreElements()) {
-				String name = (String)enu.nextElement();
+				String name = enu.nextElement();
 
 				if (!_portletPreferences.isReadOnly(name)) {
-					String value = (String)_preferences.get(name);
+					String value = _preferences.get(name);
 
 					_portletPreferences.setValue(name, value);
 				}
@@ -157,6 +158,6 @@ public class PortletPreferencesManagedBean {
 		LogFactory.getLog(PortletPreferencesManagedBean.class);
 
 	private PortletPreferences _portletPreferences;
-	private Map _preferences;
+	private Map<String, String> _preferences;
 
 }

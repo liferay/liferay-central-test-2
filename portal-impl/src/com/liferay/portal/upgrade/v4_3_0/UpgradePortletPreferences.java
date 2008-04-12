@@ -75,10 +75,10 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 
 		ValueMapper companyIdMapper = AvailableMappersUtil.getCompanyIdMapper();
 
-		Iterator itr = companyIdMapper.iterator();
+		Iterator<String> itr = companyIdMapper.iterator();
 
 		while (itr.hasNext()) {
-			String webId = (String)itr.next();
+			String webId = itr.next();
 
 			Long companyIdObj = (Long)companyIdMapper.getNewValue(webId);
 
@@ -89,8 +89,7 @@ public class UpgradePortletPreferences extends UpgradeProcess {
 		}
 
 		Object[][] prefsColumns1 = {{"layoutId", new Integer(Types.VARCHAR)}};
-		Object[][] prefsColumns2 =
-			(Object[][])PortletPreferencesImpl.TABLE_COLUMNS.clone();
+		Object[][] prefsColumns2 = PortletPreferencesImpl.TABLE_COLUMNS.clone();
 
 		Object[][] prefsColumns =
 			ArrayUtil.append(prefsColumns1, prefsColumns2);

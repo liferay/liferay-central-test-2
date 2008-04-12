@@ -344,29 +344,31 @@ public class ArrayUtil {
 		return distinct(array, null);
 	}
 
-	public static String[] distinct(String[] array, Comparator comparator) {
+	public static String[] distinct(
+		String[] array, Comparator<String> comparator) {
+
 		if ((array == null) || (array.length == 0)) {
 			return array;
 		}
 
-		Set set = null;
+		Set<String> set = null;
 
 		if (comparator == null) {
-			set = new TreeSet();
+			set = new TreeSet<String>();
 		}
 		else {
-			set = new TreeSet(comparator);
+			set = new TreeSet<String>(comparator);
 		}
 
 		for (int i = 0; i < array.length; i++) {
-			Object obj = array[i];
+			String s = array[i];
 
-			if (!set.contains(obj)) {
-				set.add(obj);
+			if (!set.contains(s)) {
+				set.add(s);
 			}
 		}
 
-		return (String[])set.toArray(new String[0]);
+		return set.toArray(new String[set.size()]);
 	}
 
 	public static int getLength(Object[] array) {
@@ -388,7 +390,7 @@ public class ArrayUtil {
 	}
 
 	public static String[] removeByPrefix(String[] array, String prefix) {
-		List list = new ArrayList();
+		List<String> list = new ArrayList<String>();
 
 		for (int i = 0; i < array.length; i++) {
 			String s = array[i];
@@ -398,7 +400,7 @@ public class ArrayUtil {
 			}
 		}
 
-		return (String[])list.toArray(new String[list.size()]);
+		return list.toArray(new String[list.size()]);
 	}
 
 	public static Boolean[] toArray(boolean[] array) {

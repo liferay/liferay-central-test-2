@@ -56,7 +56,7 @@ public class SystemProperties {
 	public static final String TMP_DIR = "java.io.tmpdir";
 
 	public static String get(String key) {
-		String value = (String)_instance._props.get(key);
+		String value = _instance._props.get(key);
 
 		if (value == null) {
 			value = System.getProperty(key);
@@ -142,20 +142,20 @@ public class SystemProperties {
 			System.getProperty(SYSTEM_PROPERTIES_FINAL), true);
 
 		if (systemPropertiesLoad) {
-			Enumeration enu = p.propertyNames();
+			Enumeration<String> enu = (Enumeration<String>)p.propertyNames();
 
 			while (enu.hasMoreElements()) {
-				String key = (String)enu.nextElement();
+				String key = enu.nextElement();
 
 				if (systemPropertiesFinal ||
 					Validator.isNull(System.getProperty(key))) {
 
-					System.setProperty(key, (String)p.get(key));
+					System.setProperty(key, p.getProperty(key));
 				}
 			}
 		}
 
-		_props = new ConcurrentHashMap();
+		_props = new ConcurrentHashMap<String, String>();
 
 		// Use a fast concurrent hash map implementation instead of the slower
 		// java.util.Properties
@@ -165,6 +165,6 @@ public class SystemProperties {
 
 	private static SystemProperties _instance = new SystemProperties();
 
-	private Map _props;
+	private Map<String, String> _props;
 
 }

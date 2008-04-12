@@ -43,7 +43,7 @@ public class TransactionAwareConfiguration extends LocalSessionFactoryBean {
 
 		// LEP-2996
 
-		Class sessionFactoryInterface = SessionFactory.class;
+		Class<?> sessionFactoryInterface = SessionFactory.class;
 
 		if (target instanceof SessionFactoryImplementor) {
 			sessionFactoryInterface = SessionFactoryImplementor.class;

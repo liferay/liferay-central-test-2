@@ -47,7 +47,8 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 	public ResourcePrimKeyUpgradeColumnImpl(
 		UpgradeColumn nameColumn, ResourceCodeIdUpgradeColumnImpl codeIdColumn,
-		ValueMapper groupIdMapper, Map classPKContainers,
+		ValueMapper groupIdMapper,
+		Map<Long, ClassPKContainer> classPKContainers,
 		ValueMapper layoutPlidMapper) {
 
 		super("primKey");
@@ -96,8 +97,7 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 
 		Long classNameId = new Long(PortalUtil.getClassNameId(name));
 
-		ClassPKContainer classPKContainer =
-			(ClassPKContainer)_classPKContainers.get(classNameId);
+		ClassPKContainer classPKContainer = _classPKContainers.get(classNameId);
 
 		if (classPKContainer != null) {
 			ValueMapper valueMapper = classPKContainer.getValueMapper();
@@ -145,7 +145,7 @@ public class ResourcePrimKeyUpgradeColumnImpl extends BaseUpgradeColumnImpl {
 	private UpgradeColumn _nameColumn;
 	private ResourceCodeIdUpgradeColumnImpl _codeIdColumn;
 	private ValueMapper _groupIdMapper;
-	private Map _classPKContainers;
+	private Map<Long, ClassPKContainer> _classPKContainers;
 	private ValueMapper _layoutPlidMapper;
 
 }

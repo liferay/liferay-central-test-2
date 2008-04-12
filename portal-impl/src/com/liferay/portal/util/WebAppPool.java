@@ -46,12 +46,11 @@ public class WebAppPool {
 	}
 
 	private WebAppPool() {
-		_webAppPool = new ConcurrentHashMap();
+		_webAppPool = new ConcurrentHashMap<String, Map<String, Object>>();
 	}
 
 	private Object _get(String webAppId, String key) {
-		Map<String, Object> map = (Map<String, Object>)_webAppPool.get(
-			webAppId);
+		Map<String, Object> map = _webAppPool.get(webAppId);
 
 		if (map == null) {
 			return null;
@@ -62,8 +61,7 @@ public class WebAppPool {
 	}
 
 	private void _put(String webAppId, String key, Object obj) {
-		Map<String, Object> map = (Map<String, Object>)_webAppPool.get(
-			webAppId);
+		Map<String, Object> map = _webAppPool.get(webAppId);
 
 		if (map == null) {
 			map = new ConcurrentHashMap<String, Object>();
@@ -75,8 +73,7 @@ public class WebAppPool {
 	}
 
 	private Object _remove(String webAppId, String key) {
-		Map<String, Object> map = (Map<String, Object>)_webAppPool.get(
-			webAppId);
+		Map<String, Object> map = _webAppPool.get(webAppId);
 
 		if (map == null) {
 			return null;
@@ -88,6 +85,6 @@ public class WebAppPool {
 
 	private static WebAppPool _instance = new WebAppPool();
 
-	private Map<String, Object> _webAppPool;
+	private Map<String, Map<String, Object>> _webAppPool;
 
 }

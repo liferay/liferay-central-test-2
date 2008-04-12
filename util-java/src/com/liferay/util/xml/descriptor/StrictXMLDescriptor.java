@@ -80,11 +80,13 @@ public class StrictXMLDescriptor implements XMLDescriptor {
 		}
 
 		int attributeComparison = _compareAttributes(el1, el2);
+
 		if (attributeComparison != 0) {
 			return attributeComparison;
 		}
 
 		int childrenComparison = _compareChildren(el1, el2);
+
 		if (childrenComparison != 0) {
 			return childrenComparison;
 		}
@@ -93,8 +95,8 @@ public class StrictXMLDescriptor implements XMLDescriptor {
 	}
 
 	private int _compareAttributes(Element el1, Element el2) {
-		List el1Attrs = el1.attributes();
-		List el2Attrs = el2.attributes();
+		List<Attribute> el1Attrs = el1.attributes();
+		List<Attribute> el2Attrs = el2.attributes();
 
 		if (el1Attrs.size() < el2Attrs.size()) {
 			return -1;
@@ -103,20 +105,20 @@ public class StrictXMLDescriptor implements XMLDescriptor {
 			return 1;
 		}
 
-		for (int i = 0; i < el1Attrs.size(); i++) {
-			Attribute attr = (Attribute)el1Attrs.get(i);
-
+		for (Attribute attr : el1Attrs) {
 			int value = _contains(el2Attrs, attr, new AttributeComparator());
+
 			if (value != 0) {
 				return value;
 			}
 		}
+
 		return -1;
 	}
 
 	private int _compareChildren(Element el1, Element el2) {
-		List el1Children = el1.elements();
-		List el2Children = el2.elements();
+		List<Element> el1Children = el1.elements();
+		List<Element> el2Children = el2.elements();
 
 		if (el1Children.size() < el2Children.size()) {
 			return -1;
@@ -125,19 +127,18 @@ public class StrictXMLDescriptor implements XMLDescriptor {
 			return 1;
 		}
 
-		for (int i = 0; i < el1Children.size(); i++) {
-			Element el = (Element)el1Children.get(i);
-
+		for (Element el : el1Children) {
 			int value = _contains(el2Children, el, new ElementComparator());
 
 			if (value != 0) {
 				return value;
 			}
 		}
+
 		return -1;
 	}
 
-	private int _contains(List list, Object obj, Comparator comparator) {
+	private int _contains(List<?> list, Object obj, Comparator comparator) {
 		int firstValue = -1;
 
 		for (int i = 0; i < list.size(); i++) {

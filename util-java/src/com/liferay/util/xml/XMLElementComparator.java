@@ -38,10 +38,7 @@ public class XMLElementComparator extends ElementComparator {
 		_descriptor = descriptor;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		Element el1 = (Element)obj1;
-		Element el2 = (Element)obj2;
-
+	public int compare(Element el1, Element el2) {
 		if (_descriptor.areEqual(el1, el2)) {
 			return 0;
 		}

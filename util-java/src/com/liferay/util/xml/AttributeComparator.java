@@ -32,12 +32,9 @@ import org.dom4j.Attribute;
  * @author Brian Wing Shun Chan
  *
  */
-public class AttributeComparator implements Comparator {
+public class AttributeComparator implements Comparator<Attribute> {
 
-	public int compare(Object obj1, Object obj2) {
-		Attribute attr1 = (Attribute)obj1;
-		Attribute attr2 = (Attribute)obj2;
-
+	public int compare(Attribute attr1, Attribute attr2) {
 		String attr1Value = attr1.getValue();
 		String attr2Value = attr2.getValue();
 

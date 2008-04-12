@@ -32,7 +32,7 @@ import javax.faces.model.SelectItem;
  * @author Neil Griffin
  *
  */
-public class SelectItemComparator implements Comparator {
+public class SelectItemComparator implements Comparator<SelectItem> {
 
 	public SelectItemComparator() {
 		this(true);
@@ -42,10 +42,7 @@ public class SelectItemComparator implements Comparator {
 		_asc = asc;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		SelectItem selectItem1 = (SelectItem)obj1;
-		SelectItem selectItem2 = (SelectItem)obj2;
-
+	public int compare(SelectItem selectItem1, SelectItem selectItem2) {
 		int value = selectItem1.getLabel().compareTo(selectItem2.getLabel());
 
 		if (_asc) {

@@ -32,12 +32,9 @@ import java.util.Comparator;
  * @author Brian Wing Shun Chan
  *
  */
-public class FileComparator implements Comparator {
+public class FileComparator implements Comparator<File> {
 
-	public int compare(Object obj1, Object obj2) {
-		File file1 = (File)obj1;
-		File file2 = (File)obj2;
-
+	public int compare(File file1, File file2) {
 		return file1.getName().compareTo(file2.getName());
 	}
 

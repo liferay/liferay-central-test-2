@@ -37,10 +37,10 @@ public class OrderedProperties extends Properties {
 	public OrderedProperties() {
 		super();
 
-		_names = new Vector();
+		_names = new Vector<String>();
 	}
 
-	public Enumeration propertyNames() {
+	public Enumeration<String> propertyNames() {
 		return _names.elements();
 	}
 
@@ -49,7 +49,7 @@ public class OrderedProperties extends Properties {
 			_names.remove(key);
 		}
 
-		_names.add(key);
+		_names.add((String)key);
 
 		return super.put(key, value);
 	}
@@ -60,6 +60,6 @@ public class OrderedProperties extends Properties {
 		return super.remove(key);
 	}
 
-	private Vector _names;
+	private Vector<String> _names;
 
 }

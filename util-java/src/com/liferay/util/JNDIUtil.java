@@ -179,6 +179,6 @@ public class JNDIUtil {
 
 	private static Log _log = LogFactory.getLog(JNDIUtil.class);
 
-	private static Map _cache = new HashMap();
+	private static Map<String, Object> _cache = new HashMap<String, Object>();
 
 }
