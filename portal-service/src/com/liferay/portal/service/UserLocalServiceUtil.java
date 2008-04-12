@@ -441,6 +441,15 @@ public class UserLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
+		long userId, int begin, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getSocialUsers(userId, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
 		long userId, int type, int begin, int end)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
@@ -449,12 +458,38 @@ public class UserLocalServiceUtil {
 		return userLocalService.getSocialUsers(userId, type, begin, end);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
+		long userId1, long userId2, int type, int begin, int end)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getSocialUsers(userId1, userId2, type, begin,
+			end);
+	}
+
+	public static int getSocialUsersCount(long userId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getSocialUsersCount(userId);
+	}
+
 	public static int getSocialUsersCount(long userId, int type)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.getSocialUsersCount(userId, type);
+	}
+
+	public static int getSocialUsersCount(long userId1, long userId2, int type)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		return userLocalService.getSocialUsersCount(userId1, userId2, type);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getUserGroupUsers(
