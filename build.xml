@@ -467,6 +467,13 @@
 						includes="xercesImpl.jar,xml-apis.jar"
 					/>
 				</copy>
+
+				<delete>
+					<fileset
+						dir="${app.server.dir}/lib"
+						includes="portlet-10.jar"
+					/>
+				</delete>
 			</then>
 		</if>
 

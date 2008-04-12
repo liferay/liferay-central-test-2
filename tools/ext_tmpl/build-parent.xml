@@ -285,6 +285,13 @@
 						includes="xercesImpl.jar,xml-apis.jar"
 					/>
 				</copy>
+
+				<delete>
+					<fileset
+						dir="${app.server.dir}/lib"
+						includes="portlet-10.jar"
+					/>
+				</delete>
 			</then>
 		</if>
 
@@ -330,13 +337,6 @@
 						</copy>
 					</then>
 				</if>
-
-				<move todir="${app.server.lib.endorsed.dir}">
-					<fileset
-						dir="${app.server.lib.portal.dir}"
-						includes="xercesImpl.jar"
-					/>
-				</move>
 
 				<copy todir="${app.server.temp.dir}/liferay/com/liferay/portal/deploy/dependencies">
 					<fileset
