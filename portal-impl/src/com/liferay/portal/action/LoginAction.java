@@ -431,8 +431,16 @@ public class LoginAction extends Action {
 			}
 		}
 		else {
-			if (Validator.isNotNull(PropsValues.AUTH_LOGIN_URL)) {
-				res.sendRedirect(PropsValues.AUTH_LOGIN_URL);
+
+			String authLoginURL = PortalUtil.getCommunityLoginURL(
+				themeDisplay);
+
+			if (Validator.isNull(authLoginURL)) {
+				authLoginURL = PropsValues.AUTH_LOGIN_URL;
+			}
+
+			if (Validator.isNotNull(authLoginURL)) {
+				res.sendRedirect(authLoginURL);
 
 				return null;
 			}

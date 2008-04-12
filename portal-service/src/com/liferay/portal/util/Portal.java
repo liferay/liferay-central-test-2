@@ -27,6 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -91,6 +92,9 @@ public interface Portal {
 	public long getClassNameId(String value);
 
 	public String getClassNamePortletId(String className);
+
+	public String getCommunityLoginURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
 
 	public Company getCompany(HttpServletRequest req)
 		throws PortalException, SystemException;
@@ -176,6 +180,10 @@ public interface Portal {
 		throws PortalException, SystemException;
 
 	public String getLayoutFriendlyURL(Layout layout, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException;
+
+	public String getLayoutSetFriendlyURL(
+			LayoutSet layoutSet, ThemeDisplay themeDisplay)
 		throws PortalException, SystemException;
 
 	public String getLayoutTarget(Layout layout);

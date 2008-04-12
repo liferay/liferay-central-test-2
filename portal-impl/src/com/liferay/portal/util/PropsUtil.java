@@ -458,6 +458,8 @@ public class PropsUtil {
 
 	public static final String AUTH_LOGIN_URL = "auth.login.url";
 
+	public static final String AUTH_LOGIN_COMMUNITY_URL = "auth.login.community.url";
+
 	public static final String AUTH_LOGIN_PORTLET_NAME = "auth.login.portlet.name";
 
 	public static final String AUTH_PUBLIC_PATHS = "auth.public.paths";

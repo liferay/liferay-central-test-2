@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.servlet.BrowserSniffer;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -1286,7 +1287,14 @@ public class ServicePreAction extends Action {
 		}
 
 		themeDisplay.setURLPortal(themeDisplay.getURLHome());
-		themeDisplay.setURLSignIn(mainPath + "/portal/login");
+		String urlSignIn = mainPath + "/portal/login";
+
+		if (layout != null) {
+			urlSignIn = HttpUtil.addParameter(
+				urlSignIn, "p_l_id", layout.getPlid());
+		}
+
+		themeDisplay.setURLSignIn(urlSignIn);
 		themeDisplay.setURLSignOut(mainPath + "/portal/logout");
 
 		PortletURL updateManagerURL = new PortletURLImpl(

@@ -407,6 +407,39 @@ public class PortalImpl implements Portal {
 		}
 	}
 
+	public String getCommunityLoginURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		String authLoginURL = null;
+
+		if (Validator.isNull(PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
+			return null;
+		}
+
+		boolean pageFound = false;
+
+		for (Layout layout : themeDisplay.getLayouts()) {
+			if (layout.getFriendlyURL().equals(
+				PropsValues.AUTH_LOGIN_COMMUNITY_URL)) {
+
+				pageFound = true;
+				break;
+			}
+		}
+
+		if (pageFound && (themeDisplay.getLayout() != null)) {
+			String layoutSetFriendlyURL =
+				PortalUtil.getLayoutSetFriendlyURL(
+					themeDisplay.getLayout().getLayoutSet(),
+					themeDisplay);
+
+			authLoginURL =
+				layoutSetFriendlyURL +
+					PropsValues.AUTH_LOGIN_COMMUNITY_URL;
+		}
+		return authLoginURL;
+	}
+
 	public String getClassNamePortletId(String className) {
 		String portletId = StringPool.BLANK;
 
@@ -860,6 +893,47 @@ public class PortalImpl implements Portal {
 		}
 
 		return friendlyURL + group.getFriendlyURL() + layoutFriendlyURL;
+	}
+
+	public String getLayoutSetFriendlyURL(
+			LayoutSet layoutSet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		if (Validator.isNotNull(layoutSet.getVirtualHost())) {
+			String portalURL = getPortalURL(
+				layoutSet.getVirtualHost(), themeDisplay.getServerPort(),
+				themeDisplay.isSecure());
+
+			// Use the layout set's virtual host setting only if the layout set
+			// is already used for the current request
+
+			long curLayoutSetId =
+				themeDisplay.getLayout().getLayoutSet().getLayoutSetId();
+
+			if ((layoutSet.getLayoutSetId() != curLayoutSetId) ||
+					(portalURL.startsWith(themeDisplay.getURLPortal()))) {
+
+				return portalURL + getPathContext();
+			}
+		}
+
+		Group group = GroupLocalServiceUtil.getGroup(layoutSet.getGroupId());
+
+		String friendlyURL = null;
+
+		if (layoutSet.isPrivateLayout()) {
+			if (group.isUser()) {
+				friendlyURL = getPathFriendlyURLPrivateUser();
+			}
+			else {
+				friendlyURL = getPathFriendlyURLPrivateGroup();
+			}
+		}
+		else {
+			friendlyURL = getPathFriendlyURLPublic();
+		}
+
+		return friendlyURL + group.getFriendlyURL();
 	}
 
 	public String getLayoutTarget(Layout layout) {

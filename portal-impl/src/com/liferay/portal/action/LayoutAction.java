@@ -139,8 +139,15 @@ public class LayoutAction extends Action {
 			if (requestedLayout != null) {
 				String redirectParam = "redirect";
 
+				String authLoginURL = PortalUtil.getCommunityLoginURL(
+					themeDisplay);
+
+				if (Validator.isNull(authLoginURL)) {
+					authLoginURL = PropsValues.AUTH_LOGIN_URL;
+				}
+
 				if (Validator.isNotNull(PropsValues.AUTH_LOGIN_PORTLET_NAME) &&
-					Validator.isNotNull(PropsValues.AUTH_LOGIN_URL)) {
+					Validator.isNotNull(authLoginURL)) {
 
 					redirectParam =
 						PortalUtil.getPortletNamespace(

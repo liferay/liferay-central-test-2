@@ -94,6 +94,9 @@ public class PropsValues {
 	public static final String AUTH_LOGIN_URL =
 		PropsUtil.get(PropsUtil.AUTH_LOGIN_URL);
 
+	public static final String AUTH_LOGIN_COMMUNITY_URL =
+		PropsUtil.get(PropsUtil.AUTH_LOGIN_COMMUNITY_URL);
+
 	public static final boolean AUTH_PIPELINE_ENABLE_LIFERAY_CHECK =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.AUTH_PIPELINE_ENABLE_LIFERAY_CHECK));

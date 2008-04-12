@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.User;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -94,6 +95,12 @@ public class PortalUtil {
 
 	public static String getClassNamePortletId(String className) {
 		return getPortal().getClassNamePortletId(className);
+	}
+
+	public static String getCommunityLoginURL(ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().getCommunityLoginURL(themeDisplay);
 	}
 
 	public static Company getCompany(HttpServletRequest req)
@@ -262,6 +269,13 @@ public class PortalUtil {
 		throws PortalException, SystemException {
 
 		return getPortal().getLayoutFriendlyURL(layout, themeDisplay);
+	}
+
+	public static String getLayoutSetFriendlyURL(
+			LayoutSet layoutSet, ThemeDisplay themeDisplay)
+		throws PortalException, SystemException {
+
+		return getPortal().getLayoutSetFriendlyURL(layoutSet, themeDisplay);
 	}
 
 	public static String getLayoutTarget(Layout layout) {
