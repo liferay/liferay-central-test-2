@@ -64,7 +64,7 @@ public class JobSchedulerImpl implements JobScheduler {
 
 		JobClassUtil.put(jobName, (Class<IntervalJob>)intervalJob.getClass());
 
-		Date startTime = new Date(System.currentTimeMillis() + Time.MINUTE * 1);
+		Date startTime = new Date(System.currentTimeMillis() + Time.MINUTE * 3);
 		Date endTime = null;
 
 		JobDetail jobDetail = new JobDetail(
