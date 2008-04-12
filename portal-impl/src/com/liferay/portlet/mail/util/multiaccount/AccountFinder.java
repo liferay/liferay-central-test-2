@@ -48,7 +48,7 @@ public interface AccountFinder {
 			User user, String password, String accountName)
 		throws MailAccountsException, AccountNotFoundException;
 
-	public Collection findAllAccounts(User user, String password)
+	public Collection<MailAccount> findAllAccounts(User user, String password)
 		throws MailAccountsException;
 
 }

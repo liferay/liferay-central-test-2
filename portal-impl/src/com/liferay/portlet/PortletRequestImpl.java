@@ -386,7 +386,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		return _req.getServerPort();
 	}
 
-	public Object getUserInfo() {
+	public LinkedHashMap<String, String> getUserInfo() {
 		if (getRemoteUser() == null) {
 			return null;
 		}

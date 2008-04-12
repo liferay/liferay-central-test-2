@@ -48,14 +48,15 @@ import org.apache.commons.logging.LogFactory;
  */
 public class MailAccount implements Serializable {
 
-	public MailAccount(String accountName, long userId, String password,
-					   String emailAddress) {
+	public MailAccount(
+		String accountName, long userId, String password, String emailAddress) {
 
 		this(accountName, String.valueOf(userId), password, emailAddress);
 	}
 
-	public MailAccount(String accountName, String userId, String password,
-					   String emailAddress) {
+	public MailAccount(
+		String accountName, String userId, String password,
+		String emailAddress) {
 
 		_name = accountName;
 		_userId = userId;

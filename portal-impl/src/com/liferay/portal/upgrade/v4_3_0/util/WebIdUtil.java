@@ -45,7 +45,7 @@ public class WebIdUtil {
 			return _webIds;
 		}
 
-		List webIds = new ArrayList();
+		List<String> webIds = new ArrayList<String>();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -68,7 +68,7 @@ public class WebIdUtil {
 			DataAccess.cleanUp(con, ps, rs);
 		}
 
-		_webIds = (String[])webIds.toArray(new String[0]);
+		_webIds = webIds.toArray(new String[webIds.size()]);
 
 		return _webIds;
 	}

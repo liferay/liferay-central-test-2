@@ -33,16 +33,13 @@ import java.util.Comparator;
  * @author Alexander Chow
  *
  */
-public class StateComparator implements Comparator {
+public class StateComparator implements Comparator<MailEnvelope> {
 
 	public StateComparator(boolean asc) {
 		_asc = asc;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		MailEnvelope mailEnvelope1 = (MailEnvelope)obj1;
-		MailEnvelope mailEnvelope2 = (MailEnvelope)obj2;
-
+	public int compare(MailEnvelope mailEnvelope1, MailEnvelope mailEnvelope2) {
 		int value = 0;
 
 		if (!mailEnvelope1.isRead() && mailEnvelope2.isRead()) {

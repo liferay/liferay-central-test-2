@@ -36,7 +36,7 @@ import org.springframework.beans.factory.config.AbstractFactoryBean;
  */
 public class PortalDataSourceFactoryBean extends AbstractFactoryBean {
 
-	public Class getObjectType() {
+	public Class<?> getObjectType() {
 		return DataSource.class;
 	}
 

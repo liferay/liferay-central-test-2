@@ -55,12 +55,12 @@ public class JSFPortletUtil {
 	public static long getCompanyId(PortletRequest portletRequest) {
 		long companyId = 0;
 
-		Map userInfo = (Map)portletRequest.getAttribute(
-			RenderRequest.USER_INFO);
+		Map<String, String> userInfo =
+			(Map<String, String>)portletRequest.getAttribute(
+				RenderRequest.USER_INFO);
 
 		if (userInfo != null) {
-			companyId = GetterUtil.getLong(
-				(String)userInfo.get("liferay.company.id"));
+			companyId = GetterUtil.getLong(userInfo.get("liferay.company.id"));
 		}
 
 		return companyId;
@@ -104,13 +104,14 @@ public class JSFPortletUtil {
 			}
 
 			try {
-				Class portletArtifactHackClass = portletArtifactHack.getClass();
+				Class<?> portletArtifactHackClass =
+					portletArtifactHack.getClass();
 
 				Method method = portletArtifactHackClass.getMethod(
-					"getPortletRequest", null);
+					"getPortletRequest");
 
 				if (method != null) {
-					Object value = method.invoke(portletArtifactHack, null);
+					Object value = method.invoke(portletArtifactHack);
 
 					if ((value != null) && (value instanceof PortletRequest)) {
 						return (PortletRequest)value;

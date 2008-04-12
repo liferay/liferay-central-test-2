@@ -112,34 +112,36 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Questions
 
-			List questions = PollsQuestionUtil.findByGroupId(
+			List<PollsQuestion> questions = PollsQuestionUtil.findByGroupId(
 				context.getGroupId());
 
-			List choices = new ArrayList();
+			List<PollsChoice> choices = new ArrayList<PollsChoice>();
 
-			List votes = new ArrayList();
+			List<PollsVote> votes = new ArrayList<PollsVote>();
 
-			Iterator itr = questions.iterator();
+			Iterator<PollsQuestion> questionsItr = questions.iterator();
 
-			while (itr.hasNext()) {
-				PollsQuestion question = (PollsQuestion)itr.next();
+			while (questionsItr.hasNext()) {
+				PollsQuestion question = questionsItr.next();
 
 				if (context.addPrimaryKey(
 						PollsQuestion.class, question.getPrimaryKeyObj())) {
 
-					itr.remove();
+					questionsItr.remove();
 				}
 				else {
-					List questionChoices = PollsChoiceUtil.findByQuestionId(
-						question.getQuestionId());
+					List<PollsChoice> questionChoices =
+						PollsChoiceUtil.findByQuestionId(
+							question.getQuestionId());
 
 					choices.addAll(questionChoices);
 
 					if (context.getBooleanParameter(_NAMESPACE, "votes")) {
 						question.setUserUuid(question.getUserUuid());
 
-						List questionVotes = PollsVoteUtil.findByQuestionId(
-							question.getQuestionId());
+						List<PollsVote> questionVotes =
+							PollsVoteUtil.findByQuestionId(
+								question.getQuestionId());
 
 						votes.addAll(questionVotes);
 					}
@@ -156,15 +158,15 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Choices
 
-			itr = choices.iterator();
+			Iterator<PollsChoice> choicesItr = choices.iterator();
 
-			while (itr.hasNext()) {
-				PollsChoice choice = (PollsChoice)itr.next();
+			while (choicesItr.hasNext()) {
+				PollsChoice choice = choicesItr.next();
 
 				if (context.addPrimaryKey(
 						PollsChoice.class, choice.getPrimaryKeyObj())) {
 
-					itr.remove();
+					choicesItr.remove();
 				}
 			}
 
@@ -178,15 +180,15 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Votes
 
-			itr = votes.iterator();
+			Iterator<PollsVote> votesItr = votes.iterator();
 
-			while (itr.hasNext()) {
-				PollsVote vote = (PollsVote)itr.next();
+			while (votesItr.hasNext()) {
+				PollsVote vote = votesItr.next();
 
 				if (context.addPrimaryKey(
 						PollsVote.class, vote.getPrimaryKeyObj())) {
 
-					itr.remove();
+					votesItr.remove();
 				}
 				else {
 					vote.setUserUuid(vote.getUserUuid());
@@ -240,15 +242,13 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map questionPKs = context.getNewPrimaryKeysMap(PollsQuestion.class);
+			Map<Long, Long> questionPKs = context.getNewPrimaryKeysMap(
+				PollsQuestion.class);
 
-			List questions = (List)xStream.fromXML(tempDoc.asXML());
+			List<PollsQuestion> questions =
+				(List<PollsQuestion>)xStream.fromXML(tempDoc.asXML());
 
-			Iterator itr = questions.iterator();
-
-			while (itr.hasNext()) {
-				PollsQuestion question = (PollsQuestion)itr.next();
-
+			for (PollsQuestion question : questions) {
 				importQuestion(context, questionPKs, question);
 			}
 
@@ -260,15 +260,13 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map choicePKs = context.getNewPrimaryKeysMap(PollsChoice.class);
+			Map<Long, Long> choicePKs = context.getNewPrimaryKeysMap(
+				PollsChoice.class);
 
-			List choices = (List)xStream.fromXML(tempDoc.asXML());
+			List<PollsChoice> choices = (List<PollsChoice>)xStream.fromXML(
+				tempDoc.asXML());
 
-			itr = choices.iterator();
-
-			while (itr.hasNext()) {
-				PollsChoice choice = (PollsChoice)itr.next();
-
+			for (PollsChoice choice : choices) {
 				importChoice(context, questionPKs, choicePKs, choice);
 			}
 
@@ -281,13 +279,10 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 
 				tempDoc.content().add(el.createCopy());
 
-				List votes = (List)xStream.fromXML(tempDoc.asXML());
+				List<PollsVote> votes = (List<PollsVote>)xStream.fromXML(
+					tempDoc.asXML());
 
-				itr = votes.iterator();
-
-				while (itr.hasNext()) {
-					PollsVote vote = (PollsVote)itr.next();
-
+				for (PollsVote vote : votes) {
 					importVote(context, questionPKs, choicePKs, vote);
 				}
 			}
@@ -304,8 +299,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importChoice(
-			PortletDataContext context, Map questionPKs, Map choicePKs,
-			PollsChoice choice)
+			PortletDataContext context, Map<Long, Long> questionPKs,
+			Map<Long, Long> choicePKs, PollsChoice choice)
 		throws Exception {
 
 		long questionId = MapUtil.getLong(
@@ -338,8 +333,7 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 					questionId, choice.getName(), choice.getDescription());
 			}
 
-			choicePKs.put(
-				choice.getPrimaryKeyObj(), existingChoice.getPrimaryKeyObj());
+			choicePKs.put(choice.getChoiceId(), existingChoice.getChoiceId());
 		}
 		catch (NoSuchQuestionException nsqe) {
 			_log.error(
@@ -349,7 +343,8 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importQuestion(
-			PortletDataContext context, Map questionPKs, PollsQuestion question)
+			PortletDataContext context, Map<Long, Long> questionPKs,
+			PollsQuestion question)
 		throws SystemException, PortalException {
 
 		long userId = context.getUserId(question.getUserUuid());
@@ -415,12 +410,12 @@ public class PollsPortletDataHandlerImpl implements PortletDataHandler {
 		}
 
 		questionPKs.put(
-			question.getPrimaryKeyObj(), existingQuestion.getPrimaryKeyObj());
+			question.getQuestionId(), existingQuestion.getQuestionId());
 	}
 
 	protected void importVote(
-			PortletDataContext context, Map questionPKs, Map choicePKs,
-			PollsVote vote)
+			PortletDataContext context, Map<Long, Long> questionPKs,
+			Map<Long, Long> choicePKs, PollsVote vote)
 		throws Exception {
 
 		long userId = context.getUserId(vote.getUserUuid());

@@ -42,7 +42,7 @@ import javax.faces.model.SelectItem;
  * @author Neil Griffin
  *
  */
-public class SelectItemList extends ArrayList {
+public class SelectItemList extends ArrayList<SelectItem> {
 
 	public void prependEmptySelectItem(FacesContext facesContext) {
 		Locale locale = facesContext.getExternalContext().getRequestLocale();

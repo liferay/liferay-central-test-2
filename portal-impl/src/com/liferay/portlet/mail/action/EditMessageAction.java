@@ -385,17 +385,18 @@ public class EditMessageAction extends PortletAction {
 		return sm.toString();
 	}
 
-	protected List getRemoteAttachments(PortletRequest req)
+	protected List<RemoteMailAttachment> getRemoteAttachments(
+			PortletRequest req)
 		throws Exception {
 
-		List list = new ArrayList();
+		List<RemoteMailAttachment> list = new ArrayList<RemoteMailAttachment>();
 
 		String prefix = "remoteAttachment";
 
-		Enumeration enu = req.getParameterNames();
+		Enumeration<String> enu = req.getParameterNames();
 
 		while (enu.hasMoreElements()) {
-			String name = (String)enu.nextElement();
+			String name = enu.nextElement();
 
 			if (name.startsWith(prefix)) {
 				String fileName = name.substring(prefix.length());

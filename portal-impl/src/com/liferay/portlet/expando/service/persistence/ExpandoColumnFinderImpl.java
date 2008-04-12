@@ -111,7 +111,7 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 			qPos.add(classNameId);
 			qPos.add(tableName);
 
-			return (List<ExpandoColumn>)q.list();
+			return q.list();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

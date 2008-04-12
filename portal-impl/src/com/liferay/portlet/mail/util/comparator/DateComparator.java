@@ -33,22 +33,19 @@ import java.util.Comparator;
  * @author Alexander Chow
  *
  */
-public class DateComparator implements Comparator {
+public class DateComparator implements Comparator<MailEnvelope> {
 
 	public DateComparator(boolean asc) {
 		_asc = asc;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		MailEnvelope mailEvenlope1 = (MailEnvelope)obj1;
-		MailEnvelope mailEvenlope2 = (MailEnvelope)obj2;
-
+	public int compare(MailEnvelope mailEnvelope1, MailEnvelope mailEnvelope2) {
 		int value = DateUtil.compareTo(
-			mailEvenlope1.getDate(), mailEvenlope2.getDate());
+			mailEnvelope1.getDate(), mailEnvelope2.getDate());
 
 		if (value == 0) {
-			Long messageId1 = new Long(mailEvenlope1.getMessageId());
-			Long messageId2 = new Long(mailEvenlope2.getMessageId());
+			Long messageId1 = new Long(mailEnvelope1.getMessageId());
+			Long messageId2 = new Long(mailEnvelope2.getMessageId());
 
 			value = messageId1.compareTo(messageId2);
 		}

@@ -33,16 +33,13 @@ import java.util.Comparator;
  * @author Alexander Chow
  *
  */
-public class SizeComparator implements Comparator {
+public class SizeComparator implements Comparator<MailEnvelope> {
 
 	public SizeComparator(boolean asc) {
 		_asc = asc;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		MailEnvelope mailEnvelope1 = (MailEnvelope)obj1;
-		MailEnvelope mailEnvelope2 = (MailEnvelope)obj2;
-
+	public int compare(MailEnvelope mailEnvelope1, MailEnvelope mailEnvelope2) {
 		int size1 = mailEnvelope1.getSize();
 		int size2 = mailEnvelope2.getSize();
 

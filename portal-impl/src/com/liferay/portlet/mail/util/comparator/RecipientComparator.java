@@ -34,29 +34,26 @@ import java.util.Comparator;
  * @author Alexander Chow
  *
  */
-public class RecipientComparator implements Comparator {
+public class RecipientComparator implements Comparator<MailEnvelope> {
 
 	public RecipientComparator(boolean asc) {
 		_asc = asc;
 	}
 
-	public int compare(Object obj1, Object obj2) {
-		MailEnvelope mailEvenlope1 = (MailEnvelope)obj1;
-		MailEnvelope mailEvenlope2 = (MailEnvelope)obj2;
-
-		String recipient1 = GetterUtil.getString(mailEvenlope1.getRecipient());
-		String recipient2 = GetterUtil.getString(mailEvenlope2.getRecipient());
+	public int compare(MailEnvelope mailEnvelope1, MailEnvelope mailEnvelope2) {
+		String recipient1 = GetterUtil.getString(mailEnvelope1.getRecipient());
+		String recipient2 = GetterUtil.getString(mailEnvelope2.getRecipient());
 
 		int value = recipient1.compareTo(recipient2);
 
 		if (value == 0) {
 			value = DateUtil.compareTo(
-				mailEvenlope1.getDate(), mailEvenlope2.getDate());
+				mailEnvelope1.getDate(), mailEnvelope2.getDate());
 		}
 
 		if (value == 0) {
-			Long messageId1 = new Long(mailEvenlope1.getMessageId());
-			Long messageId2 = new Long(mailEvenlope2.getMessageId());
+			Long messageId1 = new Long(mailEnvelope1.getMessageId());
+			Long messageId2 = new Long(mailEnvelope2.getMessageId());
 
 			value = messageId1.compareTo(messageId2);
 		}

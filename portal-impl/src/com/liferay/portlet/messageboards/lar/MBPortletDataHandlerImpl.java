@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.lar.PortletDataHandler;
 import com.liferay.portal.kernel.lar.PortletDataHandlerBoolean;
 import com.liferay.portal.kernel.lar.PortletDataHandlerControl;
 import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.util.ObjectValuePair;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.persistence.UserUtil;
@@ -119,26 +120,27 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Categories
 
-			List categories = MBCategoryUtil.findByGroupId(
+			List<MBCategory> categories = MBCategoryUtil.findByGroupId(
 				context.getGroupId());
 
-			List messages = new ArrayList();
+			List<MBMessage> messages = new ArrayList<MBMessage>();
 
-			Iterator itr = categories.iterator();
+			Iterator<MBCategory> categoriesItr = categories.iterator();
 
-			while (itr.hasNext()) {
-				MBCategory category = (MBCategory)itr.next();
+			while (categoriesItr.hasNext()) {
+				MBCategory category = categoriesItr.next();
 
 				if (context.addPrimaryKey(
 						MBCategory.class, category.getPrimaryKeyObj())) {
 
-					itr.remove();
+					categoriesItr.remove();
 				}
 				else {
 					category.setUserUuid(category.getUserUuid());
 
-					List categoryMessages = MBMessageUtil.findByCategoryId(
-						category.getCategoryId());
+					List<MBMessage> categoryMessages =
+						MBMessageUtil.findByCategoryId(
+							category.getCategoryId());
 
 					messages.addAll(categoryMessages);
 				}
@@ -154,17 +156,17 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Messages
 
-			List flags = new ArrayList();
+			List<MBMessageFlag> flags = new ArrayList<MBMessageFlag>();
 
-			itr = messages.iterator();
+			Iterator<MBMessage> messagesItr = messages.iterator();
 
-			while (itr.hasNext()) {
-				MBMessage message = (MBMessage)itr.next();
+			while (messagesItr.hasNext()) {
+				MBMessage message = messagesItr.next();
 
 				if (context.addPrimaryKey(
 						MBMessage.class, message.getPrimaryKeyObj())) {
 
-					itr.remove();
+					messagesItr.remove();
 				}
 				else {
 					message.setUserUuid(message.getUserUuid());
@@ -198,8 +200,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					}
 
 					if (context.getBooleanParameter(_NAMESPACE, "flags")) {
-						List messageFlags = MBMessageFlagUtil.findByMessageId(
-							message.getMessageId());
+						List<MBMessageFlag> messageFlags =
+							MBMessageFlagUtil.findByMessageId(
+								message.getMessageId());
 
 						flags.addAll(messageFlags);
 					}
@@ -216,15 +219,15 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Flags
 
-			itr = flags.iterator();
+			Iterator<MBMessageFlag> flagsItr = flags.iterator();
 
-			while (itr.hasNext()) {
-				MBMessageFlag flag = (MBMessageFlag)itr.next();
+			while (flagsItr.hasNext()) {
+				MBMessageFlag flag = flagsItr.next();
 
 				if (context.addPrimaryKey(
 						MBMessageFlag.class, flag.getPrimaryKeyObj())) {
 
-					itr.remove();
+					flagsItr.remove();
 				}
 				else {
 					flag.setUserUuid(flag.getUserUuid());
@@ -241,20 +244,20 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			// Bans
 
-			List bans = new ArrayList();
+			List<MBBan> bans = new ArrayList<MBBan>();
 
 			if (context.getBooleanParameter(_NAMESPACE, "user-bans")) {
 				bans = MBBanUtil.findByGroupId(context.getGroupId());
 
-				itr = bans.iterator();
+				Iterator<MBBan> bansItr = bans.iterator();
 
-				while (itr.hasNext()) {
-					MBBan ban = (MBBan)itr.next();
+				while (bansItr.hasNext()) {
+					MBBan ban = bansItr.next();
 
 					if (context.addPrimaryKey(
 							MBBan.class, ban.getPrimaryKeyObj())) {
 
-						itr.remove();
+						bansItr.remove();
 					}
 					else {
 						ban.setBanUserUuid(ban.getBanUserUuid());
@@ -316,15 +319,13 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map categoryPKs = context.getNewPrimaryKeysMap(MBCategory.class);
+			Map<Long, Long> categoryPKs = context.getNewPrimaryKeysMap(
+				MBCategory.class);
 
-			List categories = (List)xStream.fromXML(tempDoc.asXML());
+			List<MBCategory> categories = (List<MBCategory>)xStream.fromXML(
+				tempDoc.asXML());
 
-			Iterator itr = categories.iterator();
-
-			while (itr.hasNext()) {
-				MBCategory category = (MBCategory)itr.next();
-
+			for (MBCategory category : categories) {
 				importCategory(context, categoryPKs, category);
 			}
 
@@ -336,16 +337,15 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 			tempDoc.content().add(el.createCopy());
 
-			Map threadPKs = context.getNewPrimaryKeysMap(MBThread.class);
-			Map messagePKs = context.getNewPrimaryKeysMap(MBMessage.class);
+			Map<Long, Long> threadPKs = context.getNewPrimaryKeysMap(
+				MBThread.class);
+			Map<Long, Long> messagePKs = context.getNewPrimaryKeysMap(
+				MBMessage.class);
 
-			List messages = (List)xStream.fromXML(tempDoc.asXML());
+			List<MBMessage> messages = (List<MBMessage>)xStream.fromXML(
+				tempDoc.asXML());
 
-			itr = messages.iterator();
-
-			while (itr.hasNext()) {
-				MBMessage message = (MBMessage)itr.next();
-
+			for (MBMessage message : messages) {
 				importMessage(
 					context, categoryPKs, threadPKs, messagePKs, message);
 			}
@@ -359,13 +359,10 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 				tempDoc.content().add(el.createCopy());
 
-				List flags = (List)xStream.fromXML(tempDoc.asXML());
+				List<MBMessageFlag> flags =
+					(List<MBMessageFlag>)xStream.fromXML(tempDoc.asXML());
 
-				itr = flags.iterator();
-
-				while (itr.hasNext()) {
-					MBMessageFlag flag = (MBMessageFlag)itr.next();
-
+				for (MBMessageFlag flag : flags) {
 					importFlag(context, messagePKs, flag);
 				}
 			}
@@ -379,13 +376,10 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 
 				tempDoc.content().add(el.createCopy());
 
-				List bans = (List)xStream.fromXML(tempDoc.asXML());
+				List<MBBan> bans = (List<MBBan>)xStream.fromXML(
+					tempDoc.asXML());
 
-				itr = bans.iterator();
-
-				while (itr.hasNext()) {
-					MBBan ban = (MBBan)itr.next();
-
+				for (MBBan ban : bans) {
 					importBan(context, ban);
 				}
 			}
@@ -407,12 +401,12 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 		long userId = context.getUserId(ban.getUserUuid());
 		long plid = context.getPlid();
 
-		List users = UserUtil.findByUuid(ban.getBanUserUuid());
+		List<User> users = UserUtil.findByUuid(ban.getBanUserUuid());
 
-		Iterator itr = users.iterator();
+		Iterator<User> itr = users.iterator();
 
 		if (itr.hasNext()) {
-			User user = (User)itr.next();
+			User user = itr.next();
 
 			MBBanLocalServiceUtil.addBan(userId, plid, user.getUserId());
 		}
@@ -423,7 +417,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importCategory(
-			PortletDataContext context, Map categoryPKs, MBCategory category)
+			PortletDataContext context, Map<Long, Long> categoryPKs,
+			MBCategory category)
 		throws Exception {
 
 		long userId = context.getUserId(category.getUserUuid());
@@ -470,8 +465,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			}
 
 			categoryPKs.put(
-				category.getPrimaryKeyObj(),
-				existingCategory.getPrimaryKeyObj());
+				category.getCategoryId(), existingCategory.getCategoryId());
 		}
 		catch (NoSuchCategoryException nsce) {
 			_log.error(
@@ -481,7 +475,8 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importFlag(
-			PortletDataContext context, Map messagePKs, MBMessageFlag flag)
+			PortletDataContext context, Map<Long, Long> messagePKs,
+			MBMessageFlag flag)
 		throws Exception {
 
 		long userId = context.getUserId(flag.getUserUuid());
@@ -489,7 +484,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			messagePKs, flag.getMessageId(), flag.getMessageId());
 
 		try {
-			List messages = new ArrayList();
+			List<MBMessage> messages = new ArrayList<MBMessage>();
 
 			messages.add(MBMessageUtil.findByPrimaryKey(messageId));
 
@@ -503,8 +498,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 	}
 
 	protected void importMessage(
-			PortletDataContext context, Map categoryPKs, Map threadPKs,
-			Map messagePKs, MBMessage message)
+			PortletDataContext context, Map<Long, Long> categoryPKs,
+			Map<Long, Long> threadPKs, Map<Long, Long> messagePKs,
+			MBMessage message)
 		throws Exception {
 
 		long userId = context.getUserId(message.getUserUuid());
@@ -516,8 +512,9 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 			messagePKs, message.getParentMessageId(),
 			message.getParentMessageId());
 
-		List files = new ArrayList();
-		List existingFiles = new ArrayList();
+		List<ObjectValuePair<String, byte[]>> files =
+			new ArrayList<ObjectValuePair<String, byte[]>>();
+		List<String> existingFiles = new ArrayList<String>();
 
 		if (context.getBooleanParameter(_NAMESPACE, "attachments") &&
 			message.isAttachments()) {
@@ -530,7 +527,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 					"Could not find attachments for message " +
 						message.getMessageId());
 
-				files = new ArrayList();
+				files = new ArrayList<ObjectValuePair<String, byte[]>>();
 			}
 		}
 
@@ -594,7 +591,7 @@ public class MBPortletDataHandlerImpl implements PortletDataHandler {
 				new Long(message.getThreadId()),
 				new Long(existingMessage.getThreadId()));
 			messagePKs.put(
-				message.getPrimaryKeyObj(), existingMessage.getPrimaryKeyObj());
+				message.getMessageId(), existingMessage.getMessageId());
 		}
 		catch (NoSuchCategoryException nsce) {
 			_log.error(

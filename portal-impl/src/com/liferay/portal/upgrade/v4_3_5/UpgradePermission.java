@@ -56,7 +56,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 
 import org.apache.commons.logging.Log;
@@ -175,7 +174,7 @@ public class UpgradePermission extends UpgradeProcess {
 			long guestGroupId)
 		throws Exception {
 
-		List permissionIds = getPermissionIds(
+		List<Long> permissionIds = getPermissionIds(
 			className, tableName, tablePKCol, guestGroupId);
 
 		deletePermissionIds(permissionIds, guestGroupId);
@@ -186,19 +185,18 @@ public class UpgradePermission extends UpgradeProcess {
 			String tableName2, String tablePKCol2, long guestGroupId)
 		throws Exception {
 
-		List permissionIds = getPermissionIds(
+		List<Long> permissionIds = getPermissionIds(
 			className, tableName1, tablePKCol1, tableName2, tablePKCol2,
 			guestGroupId);
 
 		deletePermissionIds(permissionIds, guestGroupId);
 	}
 
-	protected void deletePermissionIds(List permissionIds, long guestGroupId)
+	protected void deletePermissionIds(
+			List<Long> permissionIds, long guestGroupId)
 		throws Exception {
 
-		for (int i = 0; i < permissionIds.size(); i++) {
-			long permissionId = ((Long)permissionIds.get(i)).longValue();
-
+		for (long permissionId : permissionIds) {
 			runSQL(
 				"delete from Groups_Permissions where groupId = " +
 					guestGroupId + " and permissionId = " + permissionId);
@@ -215,11 +213,7 @@ public class UpgradePermission extends UpgradeProcess {
 		try {
 			con = HibernateUtil.getConnection();
 
-			Iterator itr = getPlids(guestGroupId).iterator();
-
-			while (itr.hasNext()) {
-				Long plid = (Long)itr.next();
-
+			for (long plid : getPlids(guestGroupId)) {
 				ps = con.prepareStatement(
 					"select primKey from Resource_ where primKey like ?");
 
@@ -230,7 +224,7 @@ public class UpgradePermission extends UpgradeProcess {
 				while (rs.next()) {
 					String primKey = rs.getString("primKey");
 
-					List permissionIds = getPermissionIds(
+					List<Long> permissionIds = getPermissionIds(
 						primKey, guestGroupId);
 
 					deletePermissionIds(permissionIds, guestGroupId);
@@ -326,10 +320,10 @@ public class UpgradePermission extends UpgradeProcess {
 		return groupId;
 	}
 
-	protected List getPermissionIds(String primKey, long guestGroupId)
+	protected List<Long> getPermissionIds(String primKey, long guestGroupId)
 		throws Exception {
 
-		List permissionIds = new ArrayList();
+		List<Long> permissionIds = new ArrayList<Long>();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -348,7 +342,7 @@ public class UpgradePermission extends UpgradeProcess {
 			while (rs.next()) {
 				long permissionId = rs.getLong("permissionId");
 
-				permissionIds.add(new Long(permissionId));
+				permissionIds.add(permissionId);
 			}
 		}
 		finally {
@@ -358,12 +352,12 @@ public class UpgradePermission extends UpgradeProcess {
 		return permissionIds;
 	}
 
-	protected List getPermissionIds(
+	protected List<Long> getPermissionIds(
 			String className, String tableName, String tablePKCol,
 			long guestGroupId)
 		throws Exception {
 
-		List permissionIds = new ArrayList();
+		List<Long> permissionIds = new ArrayList<Long>();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -392,12 +386,12 @@ public class UpgradePermission extends UpgradeProcess {
 		return permissionIds;
 	}
 
-	protected List getPermissionIds(
+	protected List<Long> getPermissionIds(
 			String className, String tableName1, String tablePKCol1,
 			String tableName2, String tablePKCol2, long guestGroupId)
 		throws Exception {
 
-		List permissionIds = new ArrayList();
+		List<Long> permissionIds = new ArrayList<Long>();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -428,11 +422,11 @@ public class UpgradePermission extends UpgradeProcess {
 		return permissionIds;
 	}
 
-	protected List getPermissionIds(
+	protected List<Long> getPermissionIds(
 			String className, String primKey, long guestGroupId)
 		throws Exception {
 
-		List permissionIds = new ArrayList();
+		List<Long> permissionIds = new ArrayList<Long>();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -452,7 +446,7 @@ public class UpgradePermission extends UpgradeProcess {
 			while (rs.next()) {
 				long permissionId = rs.getLong("permissionId");
 
-				permissionIds.add(new Long(permissionId));
+				permissionIds.add(permissionId);
 			}
 		}
 		finally {
@@ -462,8 +456,8 @@ public class UpgradePermission extends UpgradeProcess {
 		return permissionIds;
 	}
 
-	protected List getPlids(long guestGroupId) throws Exception {
-		List plids = new ArrayList();
+	protected List<Long> getPlids(long guestGroupId) throws Exception {
+		List<Long> plids = new ArrayList<Long>();
 
 		Connection con = null;
 		PreparedStatement ps = null;
@@ -481,7 +475,7 @@ public class UpgradePermission extends UpgradeProcess {
 			while (rs.next()) {
 				long plid = rs.getLong("plid");
 
-				plids.add(new Long(plid));
+				plids.add(plid);
 			}
 		}
 		finally {

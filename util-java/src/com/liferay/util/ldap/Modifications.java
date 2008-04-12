@@ -57,12 +57,12 @@ public class Modifications {
 	}
 
 	public ModificationItem[] getItems() {
-		return (ModificationItem[])_items.toArray(new ModificationItem[0]);
+		return _items.toArray(new ModificationItem[_items.size()]);
 	}
 
 	private Modifications() {
 	}
 
-	private List _items = new ArrayList();
+	private List<ModificationItem> _items = new ArrayList<ModificationItem>();
 
 }

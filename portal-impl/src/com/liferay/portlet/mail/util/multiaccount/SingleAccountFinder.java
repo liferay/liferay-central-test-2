@@ -52,10 +52,10 @@ public class SingleAccountFinder implements AccountFinder {
 			accountName, getMailUserId(user), password, user.getEmailAddress());
 	}
 
-	public Collection findAllAccounts(User user, String password)
+	public Collection<MailAccount> findAllAccounts(User user, String password)
 		throws MailAccountsException {
 
-		Collection result = new ArrayList();
+		Collection<MailAccount> result = new ArrayList<MailAccount>();
 
 		result.add(findAccount(user, password, getDefaultAccountName()));
 

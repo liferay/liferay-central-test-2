@@ -163,8 +163,11 @@ public class MailAccounts {
 		return accountFinder.getDefaultAccountName();
 	}
 
-	private static Collection _findAllAccounts(User user, String password) {
-		Collection cachedAccounts = MailCache.getUserAccounts(user.getUserId());
+	private static Collection<MailAccount> _findAllAccounts(
+		User user, String password) {
+
+		Collection<MailAccount> cachedAccounts = MailCache.getUserAccounts(
+			user.getUserId());
 
 		if (cachedAccounts != null) {
 			return cachedAccounts;
@@ -174,7 +177,8 @@ public class MailAccounts {
 			AccountFinder accountFinder =
 				AccountFinderLocator.getAccountFinderInstance();
 
-			Collection accounts = accountFinder.findAllAccounts(user, password);
+			Collection<MailAccount> accounts = accountFinder.findAllAccounts(
+				user, password);
 
 			MailCache.putUserAccounts(user.getUserId(), accounts);
 
@@ -185,7 +189,7 @@ public class MailAccounts {
 				"Error trying to get all accounts for user " + user.getUserId(),
 				mae);
 
-			return new ArrayList();
+			return new ArrayList<MailAccount>();
 		}
 	}
 
