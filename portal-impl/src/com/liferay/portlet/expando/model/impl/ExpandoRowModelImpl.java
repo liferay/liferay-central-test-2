@@ -62,12 +62,12 @@ import java.util.List;
 public class ExpandoRowModelImpl extends BaseModelImpl {
 	public static final String TABLE_NAME = "ExpandoRow";
 	public static final Object[][] TABLE_COLUMNS = {
-			{ "rowId", new Integer(Types.BIGINT) },
+			{ "rowId_", new Integer(Types.BIGINT) },
 			
 
 			{ "tableId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoRow (rowId LONG not null primary key,tableId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoRow (rowId_ LONG not null primary key,tableId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoRow";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.expando.model.ExpandoRow"),

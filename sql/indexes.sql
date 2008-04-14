@@ -97,12 +97,12 @@ create index IX_DED782CE on ExpandoTable (classNameId, name);
 
 create index IX_B29FEF17 on ExpandoValue (classNameId, classPK);
 create index IX_F7DD0987 on ExpandoValue (columnId);
-create index IX_B282FA9E on ExpandoValue (columnId, rowId);
-create index IX_2DF85183 on ExpandoValue (rowId);
+create index IX_9DDD21E5 on ExpandoValue (columnId, rowId_);
+create index IX_9112A7A0 on ExpandoValue (rowId_);
 create index IX_F0566A77 on ExpandoValue (tableId);
 create index IX_886B68D1 on ExpandoValue (tableId, columnId, classNameId, classPK);
-create index IX_26E3DB09 on ExpandoValue (tableId, columnId, rowId);
-create index IX_C3D7ABAE on ExpandoValue (tableId, rowId);
+create index IX_B5984EDA on ExpandoValue (tableId, columnId, rowId_);
+create index IX_B71E92D5 on ExpandoValue (tableId, rowId_);
 
 create index IX_D0D5E397 on Group_ (companyId, classNameId, classPK);
 create index IX_5BDDB872 on Group_ (companyId, friendlyURL);

@@ -1534,7 +1534,7 @@
 	</class>
 	<class name="com.liferay.portlet.expando.model.impl.ExpandoRowImpl" table="ExpandoRow">
 		<cache usage="read-write" />
-		<id name="rowId" type="long">
+		<id name="rowId" column="rowId_" type="long">
 			<generator class="assigned" />
 		</id>
 		<property name="tableId" type="com.liferay.util.dao.hibernate.LongType" />
@@ -1554,7 +1554,7 @@
 		</id>
 		<property name="tableId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="columnId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="rowId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="rowId" column="rowId_" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="data" column="data_" type="com.liferay.util.dao.hibernate.StringType" />

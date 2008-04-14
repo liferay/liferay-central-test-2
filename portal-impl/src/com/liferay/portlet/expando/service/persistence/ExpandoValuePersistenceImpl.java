@@ -304,7 +304,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 
 				Query q = session.createQuery(query.toString());
@@ -386,7 +386,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 
 					query.append("tableId ASC, ");
-					query.append("rowId ASC, ");
+					query.append("rowId_ ASC, ");
 					query.append("columnId ASC");
 				}
 
@@ -488,7 +488,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 			}
 
@@ -550,7 +550,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 
 				Query q = session.createQuery(query.toString());
@@ -632,7 +632,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 
 					query.append("tableId ASC, ");
-					query.append("rowId ASC, ");
+					query.append("rowId_ ASC, ");
 					query.append("columnId ASC");
 				}
 
@@ -735,7 +735,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 			}
 
@@ -789,14 +789,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 
 				Query q = session.createQuery(query.toString());
@@ -865,7 +865,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 
@@ -878,7 +878,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 
 					query.append("tableId ASC, ");
-					query.append("rowId ASC, ");
+					query.append("rowId_ ASC, ");
 					query.append("columnId ASC");
 				}
 
@@ -967,7 +967,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 			query.append(
 				"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
 
-			query.append("rowId = ?");
+			query.append("rowId_ = ?");
 
 			query.append(" ");
 
@@ -980,7 +980,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 			}
 
@@ -1041,14 +1041,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 
 				Query q = session.createQuery(query.toString());
@@ -1123,7 +1123,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 
@@ -1136,7 +1136,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 
 					query.append("tableId ASC, ");
-					query.append("rowId ASC, ");
+					query.append("rowId_ ASC, ");
 					query.append("columnId ASC");
 				}
 
@@ -1239,7 +1239,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 			query.append(" AND ");
 
-			query.append("rowId = ?");
+			query.append("rowId_ = ?");
 
 			query.append(" ");
 
@@ -1252,7 +1252,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 			}
 
@@ -1341,14 +1341,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 
 				Query q = session.createQuery(query.toString());
@@ -1432,7 +1432,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 
 				Query q = session.createQuery(query.toString());
@@ -1520,7 +1520,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 
 					query.append("tableId ASC, ");
-					query.append("rowId ASC, ");
+					query.append("rowId_ ASC, ");
 					query.append("columnId ASC");
 				}
 
@@ -1636,7 +1636,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 			}
 
@@ -1734,14 +1734,14 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 
 				Query q = session.createQuery(query.toString());
@@ -1837,7 +1837,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 
 				Query q = session.createQuery(query.toString());
@@ -1942,7 +1942,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 
 					query.append("tableId ASC, ");
-					query.append("rowId ASC, ");
+					query.append("rowId_ ASC, ");
 					query.append("columnId ASC");
 				}
 
@@ -2085,7 +2085,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append("ORDER BY ");
 
 				query.append("tableId ASC, ");
-				query.append("rowId ASC, ");
+				query.append("rowId_ ASC, ");
 				query.append("columnId ASC");
 			}
 
@@ -2210,7 +2210,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 					query.append("ORDER BY ");
 
 					query.append("tableId ASC, ");
-					query.append("rowId ASC, ");
+					query.append("rowId_ ASC, ");
 					query.append("columnId ASC");
 				}
 
@@ -2458,7 +2458,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 				query.append(
 					"FROM com.liferay.portlet.expando.model.ExpandoValue WHERE ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 
@@ -2530,7 +2530,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 
@@ -2604,7 +2604,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 
@@ -2762,7 +2762,7 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				query.append(" AND ");
 
-				query.append("rowId = ?");
+				query.append("rowId_ = ?");
 
 				query.append(" ");
 

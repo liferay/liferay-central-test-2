@@ -329,7 +329,7 @@ create table ExpandoColumn (
 );
 
 create table ExpandoRow (
-	rowId LONG not null primary key,
+	rowId_ LONG not null primary key,
 	tableId LONG
 );
 
@@ -343,7 +343,7 @@ create table ExpandoValue (
 	valueId LONG not null primary key,
 	tableId LONG,
 	columnId LONG,
-	rowId LONG,
+	rowId_ LONG,
 	classNameId LONG,
 	classPK LONG,
 	data_ VARCHAR(75) null

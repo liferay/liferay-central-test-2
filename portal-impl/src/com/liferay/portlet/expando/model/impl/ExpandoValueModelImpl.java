@@ -73,7 +73,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 			{ "columnId", new Integer(Types.BIGINT) },
 			
 
-			{ "rowId", new Integer(Types.BIGINT) },
+			{ "rowId_", new Integer(Types.BIGINT) },
 			
 
 			{ "classNameId", new Integer(Types.BIGINT) },
@@ -84,7 +84,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 
 			{ "data_", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoValue (valueId LONG not null primary key,tableId LONG,columnId LONG,rowId LONG,classNameId LONG,classPK LONG,data_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoValue (valueId LONG not null primary key,tableId LONG,columnId LONG,rowId_ LONG,classNameId LONG,classPK LONG,data_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoValue";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.expando.model.ExpandoValue"),
