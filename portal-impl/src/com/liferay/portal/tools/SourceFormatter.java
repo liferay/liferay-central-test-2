@@ -229,65 +229,16 @@ public class SourceFormatter {
 	private static void _formatJava() throws IOException {
 		String basedir = "../";
 
-		List<File> list = new ArrayList<File>();
-
-		DirectoryScanner ds = new DirectoryScanner();
-
-		ds.setBasedir(basedir);
-		ds.setExcludes(
-			new String[] {
-				"**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
-				"**\\EARXMLBuilder.java", "**\\EJBXMLBuilder.java",
-				"**\\JSMin.java", "**\\PropsUtil.java",
-				"**\\InstanceWrapperBuilder.java",
-				"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
-				"**\\UserAttributes.java", "**\\WebKeys.java",
-				"**\\*_IW.java", "**\\XHTMLComplianceFormatter.java",
-				"**\\portal-service\\**\\model\\*Model.java",
-				"**\\portal-service\\**\\model\\*Soap.java",
-				"**\\model\\impl\\*ModelImpl.java",
-				"**\\portal\\service\\**", "**\\portal-client\\**",
-				"**\\portal-web\\test\\**\\*Test.java",
-				"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
-				"**\\util-wsrp\\**"
-			});
-		ds.setIncludes(new String[] {"**\\*.java"});
-
-		ds.scan();
-
-		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
-
-		ds = new DirectoryScanner();
-
-		ds.setBasedir(basedir);
-		ds.setExcludes(
-			new String[] {
-				"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
-				"**\\test\\**\\*PersistenceTest.java"
-			});
-		ds.setIncludes(
-			new String[] {
-				"**\\service\\http\\*HttpTest.java",
-				"**\\service\\http\\*SoapTest.java",
-				"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",
-				"**\\service\\permission\\*.java",
-				"**\\service\\persistence\\BasePersistence.java",
-				"**\\service\\persistence\\*FinderImpl.java",
-				"**\\portal-impl\\test\\**\\*.java",
-				"**\\portal-service\\**\\liferay\\counter\\**.java",
-				"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
-				"**\\portal-service\\**\\liferay\\lock\\**.java",
-				"**\\portal-service\\**\\liferay\\mail\\**.java",
-				"**\\util-bridges\\**\\*.java"
-			});
-
-		ds.scan();
-
-		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
-
 		String copyright = FileUtil.read("../copyright.txt");
 
-		String[] files = list.toArray(new String[list.size()]);
+		String[] files = null;
+
+		if (FileUtil.exists(basedir + "portal-impl")) {
+			files = _getPortalJavaFiles();
+		}
+		else {
+			files = _getPluginJavaFiles();
+		}
 
 		for (int i = 0; i < files.length; i++) {
 			File file = new File(basedir + files[i]);
@@ -561,6 +512,102 @@ public class SourceFormatter {
 		}
 
 		return newContent;
+	}
+
+	private static String[] _getPluginJavaFiles() throws IOException {
+		String basedir = "../";
+
+		List<File> list = new ArrayList<File>();
+
+		DirectoryScanner ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setExcludes(
+			new String[] {
+				"**\\com\\liferay\\portlet\\service\\*.java",
+				"**\\model\\*Model.java", "**\\model\\*Soap.java",
+				"**\\model\\impl\\*ModelImpl.java",
+				"**\\service\\*Service.java",
+				"**\\service\\*ServiceFactory.java",
+				"**\\service\\*ServiceUtil.java",
+				"**\\service\\base\\*ServiceBaseImpl.java",
+				"**\\service\\http\\*JSONSerializer.java",
+				"**\\service\\http\\*ServiceHttp.java",
+				"**\\service\\http\\*ServiceJSON.java",
+				"**\\service\\http\\*ServiceSoap.java",
+				"**\\service\\persistence\\*Persistence.java",
+				"**\\service\\persistence\\*PersistenceImpl.java",
+				"**\\service\\persistence\\*Util.java"
+			});
+		ds.setIncludes(new String[] {"**\\*.java"});
+
+		ds.scan();
+
+		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+
+		return list.toArray(new String[list.size()]);
+	}
+
+	private static String[] _getPortalJavaFiles() throws IOException {
+		String basedir = "../";
+
+		List<File> list = new ArrayList<File>();
+
+		DirectoryScanner ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setExcludes(
+			new String[] {
+				"**\\classes\\*", "**\\jsp\\*", "**\\tmp\\**",
+				"**\\EARXMLBuilder.java", "**\\EJBXMLBuilder.java",
+				"**\\JSMin.java", "**\\PropsUtil.java",
+				"**\\InstanceWrapperBuilder.java",
+				"**\\ServiceBuilder.java", "**\\SourceFormatter.java",
+				"**\\UserAttributes.java", "**\\WebKeys.java",
+				"**\\*_IW.java", "**\\XHTMLComplianceFormatter.java",
+				"**\\portal-service\\**\\model\\*Model.java",
+				"**\\portal-service\\**\\model\\*Soap.java",
+				"**\\model\\impl\\*ModelImpl.java",
+				"**\\portal\\service\\**", "**\\portal-client\\**",
+				"**\\portal-web\\test\\**\\*Test.java",
+				"**\\portlet\\**\\service\\**", "**\\tools\\ext_tmpl\\**",
+				"**\\util-wsrp\\**"
+			});
+		ds.setIncludes(new String[] {"**\\*.java"});
+
+		ds.scan();
+
+		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+
+		ds = new DirectoryScanner();
+
+		ds.setBasedir(basedir);
+		ds.setExcludes(
+			new String[] {
+				"**\\tools\\ext_tmpl\\**", "**\\*_IW.java",
+				"**\\test\\**\\*PersistenceTest.java"
+			});
+		ds.setIncludes(
+			new String[] {
+				"**\\service\\http\\*HttpTest.java",
+				"**\\service\\http\\*SoapTest.java",
+				"**\\service\\impl\\*.java", "**\\service\\jms\\*.java",
+				"**\\service\\permission\\*.java",
+				"**\\service\\persistence\\BasePersistence.java",
+				"**\\service\\persistence\\*FinderImpl.java",
+				"**\\portal-impl\\test\\**\\*.java",
+				"**\\portal-service\\**\\liferay\\counter\\**.java",
+				"**\\portal-service\\**\\liferay\\documentlibrary\\**.java",
+				"**\\portal-service\\**\\liferay\\lock\\**.java",
+				"**\\portal-service\\**\\liferay\\mail\\**.java",
+				"**\\util-bridges\\**\\*.java"
+			});
+
+		ds.scan();
+
+		list.addAll(ListUtil.fromArray(ds.getIncludedFiles()));
+
+		return list.toArray(new String[list.size()]);
 	}
 
 	private static final String[] _TAG_LIBRARIES = new String[] {
