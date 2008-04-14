@@ -2219,6 +2219,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>portal/urlrewrite.jar</file-name>
+		<version>2.6.0</version>
+		<project-name>URL Rewrite Filter</project-name>
+		<project-url>http://tuckey.org/urlrewrite</project-url>
+		<licenses>
+			<license>
+				<license-name>BSD Style License</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>portal/velocity.jar</file-name>
 		<version>1.5</version>
 		<project-name>Velocity</project-name>
