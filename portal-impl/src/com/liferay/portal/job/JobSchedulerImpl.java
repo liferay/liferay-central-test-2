@@ -24,6 +24,7 @@ package com.liferay.portal.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobScheduler;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Time;
 
 import java.util.Date;
@@ -60,11 +61,12 @@ public class JobSchedulerImpl implements JobScheduler {
 
 	public void schedule(IntervalJob intervalJob) {
 		String jobName =
-			intervalJob.getClass().getName() + intervalJob.hashCode();
+			intervalJob.getClass().getName() + StringPool.AT +
+				intervalJob.hashCode();
 
 		JobClassUtil.put(jobName, (Class<IntervalJob>)intervalJob.getClass());
 
-		Date startTime = new Date(System.currentTimeMillis() + Time.MINUTE * 3);
+		Date startTime = new Date(System.currentTimeMillis() + Time.MINUTE * 1);
 		Date endTime = null;
 
 		JobDetail jobDetail = new JobDetail(
@@ -96,7 +98,8 @@ public class JobSchedulerImpl implements JobScheduler {
 	public void unschedule(IntervalJob intervalJob) {
 		try {
 			String jobName =
-				intervalJob.getClass().getName() + intervalJob.hashCode();
+				intervalJob.getClass().getName() + StringPool.AT +
+					intervalJob.hashCode();
 
 			_scheduler.unscheduleJob(jobName, Scheduler.DEFAULT_GROUP);
 		}

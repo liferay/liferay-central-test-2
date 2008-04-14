@@ -27,9 +27,9 @@ import com.liferay.portal.kernel.job.IntervalJob;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
-import org.quartz.Job;
 import org.quartz.JobDetail;
 import org.quartz.JobExecutionContext;
+import org.quartz.StatefulJob;
 
 /**
  * <a href="JobWrapper.java.html"><b><i>View Source</i></b></a>
@@ -37,7 +37,7 @@ import org.quartz.JobExecutionContext;
  * @author Brian Wing Shun Chan
  *
  */
-public class JobWrapper implements Job {
+public class JobWrapper implements StatefulJob {
 
 	public void execute(JobExecutionContext context) {
 		try {
