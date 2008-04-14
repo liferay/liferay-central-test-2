@@ -66,6 +66,7 @@ public class DBBuilder {
 			_buildSQLFile("update-4.3.3-4.3.4");
 			_buildSQLFile("update-4.3.6-4.4.0");
 			_buildSQLFile("update-4.4.0-5.0.0");
+			_buildSQLFile("update-5.0.1-5.0.2");
 
 			_buildCreateFile();
 		}
