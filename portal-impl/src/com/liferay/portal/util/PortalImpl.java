@@ -92,6 +92,8 @@ import com.liferay.util.servlet.SessionErrors;
 
 import java.io.IOException;
 
+import java.net.URI;
+import java.net.URISyntaxException;
 import java.net.URL;
 
 import java.rmi.RemoteException;
@@ -169,7 +171,14 @@ public class PortalImpl implements Portal {
 		URL url = classLoader.getResource(
 			"com/liferay/portal/util/PortalImpl.class");
 
-		String file = url.getFile();
+		String file = null;
+
+		try {
+			file = new URI(url.getPath()).getPath();
+		}
+		catch (URISyntaxException urise) {
+			file = url.getFile();
+		}
 
 		if (_log.isInfoEnabled()) {
 			_log.info("Portal lib url " + file);
