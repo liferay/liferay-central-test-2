@@ -48,9 +48,7 @@ public class ReportsEntryJSONSerializer {
         List<com.ext.portlet.reports.model.ReportsEntry> models) {
         JSONArray jsonArray = new JSONArray();
 
-        for (int i = 0; i < models.size(); i++) {
-            ReportsEntry model = models.get(i);
-
+        for (ReportsEntry model : models) {
             jsonArray.put(toJSONObject(model));
         }
 

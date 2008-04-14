@@ -12,7 +12,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ModelListener;
 import com.liferay.portal.service.persistence.BasePersistence;
 import com.liferay.portal.spring.hibernate.FinderCache;
@@ -27,6 +27,7 @@ import org.apache.commons.logging.LogFactory;
 import org.hibernate.Query;
 import org.hibernate.Session;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
@@ -34,9 +35,8 @@ import java.util.List;
 
 public class ReportsEntryPersistenceImpl extends BasePersistence
     implements ReportsEntryPersistence {
-    private static final String _LISTENER = GetterUtil.getString(PropsUtil.get(
-                "value.object.listener.com.ext.portlet.reports.model.ReportsEntry"));
     private static Log _log = LogFactory.getLog(ReportsEntryPersistenceImpl.class);
+    private ModelListener[] _listeners;
 
     public ReportsEntry create(String entryId) {
         ReportsEntry reportsEntry = new ReportsEntryImpl();
@@ -79,16 +79,18 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
 
     public ReportsEntry remove(ReportsEntry reportsEntry)
         throws SystemException {
-        ModelListener listener = _getListener();
-
-        if (listener != null) {
-            listener.onBeforeRemove(reportsEntry);
+        if (_listeners != null) {
+            for (ModelListener listener : _listeners) {
+                listener.onBeforeRemove(reportsEntry);
+            }
         }
 
         reportsEntry = removeImpl(reportsEntry);
 
-        if (listener != null) {
-            listener.onAfterRemove(reportsEntry);
+        if (_listeners != null) {
+            for (ModelListener listener : _listeners) {
+                listener.onAfterRemove(reportsEntry);
+            }
         }
 
         return reportsEntry;
@@ -115,32 +117,55 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
         }
     }
 
+    /**
+     * @deprecated Use <code>update(ReportsEntry reportsEntry, boolean merge)</code>.
+     */
     public ReportsEntry update(ReportsEntry reportsEntry)
         throws SystemException {
+        if (_log.isWarnEnabled()) {
+            _log.warn(
+                "Using the deprecated update(ReportsEntry reportsEntry) method. Use update(ReportsEntry reportsEntry, boolean merge) instead.");
+        }
+
         return update(reportsEntry, false);
     }
 
+    /**
+     * Add, update, or merge, the entity. This method also calls the model
+     * listeners to trigger the proper events associated with adding, deleting,
+     * or updating an entity.
+     *
+     * @param                reportsEntry the entity to add, update, or merge
+     * @param                merge boolean value for whether to merge the entity. The
+     *                                default value is false. Setting merge to true is more
+     *                                expensive and should only be true when reportsEntry is
+     *                                transient. See LEP-5473 for a detailed discussion of this
+     *                                method.
+     * @return                true if the portlet can be displayed via Ajax
+     */
     public ReportsEntry update(ReportsEntry reportsEntry, boolean merge)
         throws SystemException {
-        ModelListener listener = _getListener();
-
         boolean isNew = reportsEntry.isNew();
 
-        if (listener != null) {
-            if (isNew) {
-                listener.onBeforeCreate(reportsEntry);
-            } else {
-                listener.onBeforeUpdate(reportsEntry);
+        if (_listeners != null) {
+            for (ModelListener listener : _listeners) {
+                if (isNew) {
+                    listener.onBeforeCreate(reportsEntry);
+                } else {
+                    listener.onBeforeUpdate(reportsEntry);
+                }
             }
         }
 
         reportsEntry = updateImpl(reportsEntry, merge);
 
-        if (listener != null) {
-            if (isNew) {
-                listener.onAfterCreate(reportsEntry);
-            } else {
-                listener.onAfterUpdate(reportsEntry);
+        if (_listeners != null) {
+            for (ModelListener listener : _listeners) {
+                if (isNew) {
+                    listener.onAfterCreate(reportsEntry);
+                } else {
+                    listener.onAfterUpdate(reportsEntry);
+                }
             }
         }
 
@@ -1021,17 +1046,23 @@ public class ReportsEntryPersistenceImpl extends BasePersistence
     }
 
     protected void initDao() {
-    }
+        String[] listenerClassNames = StringUtil.split(GetterUtil.getString(
+                    PropsUtil.get(
+                        "value.object.listener.com.ext.portlet.reports.model.ReportsEntry")));
 
-    private static ModelListener _getListener() {
-        if (Validator.isNotNull(_LISTENER)) {
+        if (listenerClassNames.length > 0) {
             try {
-                return (ModelListener) Class.forName(_LISTENER).newInstance();
+                List<ModelListener> listeners = new ArrayList<ModelListener>();
+
+                for (String listenerClassName : listenerClassNames) {
+                    listeners.add((ModelListener) Class.forName(
+                            listenerClassName).newInstance());
+                }
+
+                _listeners = listeners.toArray(new ModelListener[listeners.size()]);
             } catch (Exception e) {
                 _log.error(e);
             }
         }
-
-        return null;
     }
 }

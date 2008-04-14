@@ -54,9 +54,7 @@ public class ReportsEntrySoap implements Serializable {
     public static ReportsEntrySoap[] toSoapModels(List<ReportsEntry> models) {
         List<ReportsEntrySoap> soapModels = new ArrayList<ReportsEntrySoap>(models.size());
 
-        for (int i = 0; i < models.size(); i++) {
-            ReportsEntry model = models.get(i);
-
+        for (ReportsEntry model : models) {
             soapModels.add(toSoapModel(model));
         }
 

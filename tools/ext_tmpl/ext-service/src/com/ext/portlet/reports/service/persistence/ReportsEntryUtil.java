@@ -23,12 +23,28 @@ public class ReportsEntryUtil {
         return getPersistence().remove(reportsEntry);
     }
 
+    /**
+     * @deprecated Use <code>update(ReportsEntry reportsEntry, boolean merge)</code>.
+     */
     public static com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry)
         throws com.liferay.portal.SystemException {
         return getPersistence().update(reportsEntry);
     }
 
+    /**
+     * Add, update, or merge, the entity. This method also calls the model
+     * listeners to trigger the proper events associated with adding, deleting,
+     * or updating an entity.
+     *
+     * @param                reportsEntry the entity to add, update, or merge
+     * @param                merge boolean value for whether to merge the entity. The
+     *                                default value is false. Setting merge to true is more
+     *                                expensive and should only be true when reportsEntry is
+     *                                transient. See LEP-5473 for a detailed discussion of this
+     *                                method.
+     * @return                true if the portlet can be displayed via Ajax
+     */
     public static com.ext.portlet.reports.model.ReportsEntry update(
         com.ext.portlet.reports.model.ReportsEntry reportsEntry, boolean merge)
         throws com.liferay.portal.SystemException {
@@ -53,18 +69,20 @@ public class ReportsEntryUtil {
         return getPersistence().fetchByPrimaryKey(entryId);
     }
 
-    public static java.util.List findByCompanyId(java.lang.String companyId)
-        throws com.liferay.portal.SystemException {
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByCompanyId(
+        java.lang.String companyId) throws com.liferay.portal.SystemException {
         return getPersistence().findByCompanyId(companyId);
     }
 
-    public static java.util.List findByCompanyId(java.lang.String companyId,
-        int begin, int end) throws com.liferay.portal.SystemException {
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByCompanyId(
+        java.lang.String companyId, int begin, int end)
+        throws com.liferay.portal.SystemException {
         return getPersistence().findByCompanyId(companyId, begin, end);
     }
 
-    public static java.util.List findByCompanyId(java.lang.String companyId,
-        int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByCompanyId(
+        java.lang.String companyId, int begin, int end,
+        com.liferay.portal.kernel.util.OrderByComparator obc)
         throws com.liferay.portal.SystemException {
         return getPersistence().findByCompanyId(companyId, begin, end, obc);
     }
@@ -94,18 +112,20 @@ public class ReportsEntryUtil {
                    .findByCompanyId_PrevAndNext(entryId, companyId, obc);
     }
 
-    public static java.util.List findByUserId(java.lang.String userId)
-        throws com.liferay.portal.SystemException {
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByUserId(
+        java.lang.String userId) throws com.liferay.portal.SystemException {
         return getPersistence().findByUserId(userId);
     }
 
-    public static java.util.List findByUserId(java.lang.String userId,
-        int begin, int end) throws com.liferay.portal.SystemException {
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByUserId(
+        java.lang.String userId, int begin, int end)
+        throws com.liferay.portal.SystemException {
         return getPersistence().findByUserId(userId, begin, end);
     }
 
-    public static java.util.List findByUserId(java.lang.String userId,
-        int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findByUserId(
+        java.lang.String userId, int begin, int end,
+        com.liferay.portal.kernel.util.OrderByComparator obc)
         throws com.liferay.portal.SystemException {
         return getPersistence().findByUserId(userId, begin, end, obc);
     }
@@ -134,31 +154,31 @@ public class ReportsEntryUtil {
         return getPersistence().findByUserId_PrevAndNext(entryId, userId, obc);
     }
 
-    public static java.util.List findWithDynamicQuery(
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findWithDynamicQuery(
         com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
         throws com.liferay.portal.SystemException {
         return getPersistence().findWithDynamicQuery(queryInitializer);
     }
 
-    public static java.util.List findWithDynamicQuery(
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findWithDynamicQuery(
         com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
         int begin, int end) throws com.liferay.portal.SystemException {
         return getPersistence()
                    .findWithDynamicQuery(queryInitializer, begin, end);
     }
 
-    public static java.util.List findAll()
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findAll()
         throws com.liferay.portal.SystemException {
         return getPersistence().findAll();
     }
 
-    public static java.util.List findAll(int begin, int end)
-        throws com.liferay.portal.SystemException {
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findAll(
+        int begin, int end) throws com.liferay.portal.SystemException {
         return getPersistence().findAll(begin, end);
     }
 
-    public static java.util.List findAll(int begin, int end,
-        com.liferay.portal.kernel.util.OrderByComparator obc)
+    public static java.util.List<com.ext.portlet.reports.model.ReportsEntry> findAll(
+        int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
         throws com.liferay.portal.SystemException {
         return getPersistence().findAll(begin, end, obc);
     }

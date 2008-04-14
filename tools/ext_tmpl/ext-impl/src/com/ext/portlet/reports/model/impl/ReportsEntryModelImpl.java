@@ -1,6 +1,7 @@
 package com.ext.portlet.reports.model.impl;
 
 import com.ext.portlet.reports.model.ReportsEntry;
+import com.ext.portlet.reports.model.ReportsEntrySoap;
 
 import com.liferay.portal.kernel.bean.ReadOnlyBeanHandler;
 import com.liferay.portal.kernel.util.GetterUtil;
@@ -14,7 +15,9 @@ import java.lang.reflect.Proxy;
 
 import java.sql.Types;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 
 /**
@@ -76,6 +79,30 @@ public class ReportsEntryModelImpl extends BaseModelImpl {
     private String _name;
 
     public ReportsEntryModelImpl() {
+    }
+
+    public static ReportsEntry toModel(ReportsEntrySoap soapModel) {
+        ReportsEntry model = new ReportsEntryImpl();
+
+        model.setEntryId(soapModel.getEntryId());
+        model.setCompanyId(soapModel.getCompanyId());
+        model.setUserId(soapModel.getUserId());
+        model.setUserName(soapModel.getUserName());
+        model.setCreateDate(soapModel.getCreateDate());
+        model.setModifiedDate(soapModel.getModifiedDate());
+        model.setName(soapModel.getName());
+
+        return model;
+    }
+
+    public static List<ReportsEntry> toModels(ReportsEntrySoap[] soapModels) {
+        List<ReportsEntry> models = new ArrayList<ReportsEntry>(soapModels.length);
+
+        for (ReportsEntrySoap soapModel : soapModels) {
+            models.add(toModel(soapModel));
+        }
+
+        return models;
     }
 
     public String getPrimaryKey() {
