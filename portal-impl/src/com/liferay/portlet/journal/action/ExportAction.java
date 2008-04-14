@@ -60,12 +60,14 @@ import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalArticleImage;
 import com.liferay.portlet.journal.model.JournalArticleResource;
 import com.liferay.portlet.journal.model.JournalContentSearch;
+import com.liferay.portlet.journal.model.JournalFeed;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalArticleImpl;
 import com.liferay.portlet.journal.service.JournalArticleImageLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalArticleResourceLocalServiceUtil;
+import com.liferay.portlet.journal.service.JournalFeedLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalStructureLocalServiceUtil;
 import com.liferay.portlet.journal.service.JournalTemplateLocalServiceUtil;
 import com.liferay.portlet.journal.service.persistence.JournalContentSearchUtil;
@@ -420,6 +422,47 @@ public class ExportAction extends Action {
 			addColumn(sm, contentSearch.getLayoutId());
 			addColumn(sm, contentSearch.getPortletId());
 			addPKColumn(sm, contentSearch.getArticleId());
+			removeTrailingComma(sm);
+			sm.append(");\n");
+		}
+
+		sm.append("\n");
+
+		List<JournalFeed> feeds = JournalFeedLocalServiceUtil.getFeeds(groupId);
+
+		for (JournalFeed feed : feeds) {
+			sm.append("insert into JournalFeed (");
+			sm.append("id_, groupId, companyId, userId, userName, ");
+			sm.append("createDate, modifiedDate, feedId, name, description, ");
+			sm.append("type_, structureId, templateId, rendererTemplateId, ");
+			sm.append("delta, orderByCol, orderByType, ");
+			sm.append("targetLayoutFriendlyUrl, targetPortletId, ");
+			sm.append("contentField, feedType, feedVersion");
+			sm.append(") values (");
+			addPKColumn(sm, feed.getId());
+			addColumn(sm, feed.getGroupId());
+			addColumn(sm, feed.getCompanyId());
+			//addColumn(sm, feed.getUserId());
+			//addColumn(sm, feed.getUserName());
+			addColumn(sm, DEFAULT_USER_ID);
+			addColumn(sm, DEFAULT_USER_NAME);
+			addColumn(sm, feed.getCreateDate());
+			addColumn(sm, feed.getModifiedDate());
+			addPKColumn(sm, feed.getFeedId());
+			addColumn(sm, feed.getName());
+			addColumn(sm, feed.getDescription());
+			addColumn(sm, feed.getType());
+			addPKColumn(sm, feed.getStructureId());
+			addPKColumn(sm, feed.getTemplateId());
+			addPKColumn(sm, feed.getRendererTemplateId());
+			addColumn(sm, feed.getDelta());
+			addColumn(sm, feed.getOrderByCol());
+			addColumn(sm, feed.getOrderByType());
+			addColumn(sm, feed.getTargetLayoutFriendlyUrl());
+			addColumn(sm, feed.getTargetPortletId());
+			addColumn(sm, feed.getContentField());
+			addColumn(sm, feed.getFeedType());
+			addColumn(sm, feed.getFeedVersion());
 			removeTrailingComma(sm);
 			sm.append(");\n");
 		}
