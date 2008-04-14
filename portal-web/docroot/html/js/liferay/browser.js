@@ -71,10 +71,10 @@ Liferay.Browser = {
 		var instance = this;
 
 		if (!exact) {
-			return jQuery.browser.version.string(true);
+			return jQuery.browser.version.major;
 		}
 		else {
-			return jQuery.browser.version.string();
+			return jQuery.browser.version.string;
 		}
 	},
 
