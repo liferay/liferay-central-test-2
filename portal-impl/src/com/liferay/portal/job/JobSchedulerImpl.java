@@ -60,13 +60,17 @@ public class JobSchedulerImpl implements JobScheduler {
 	}
 
 	public void schedule(IntervalJob intervalJob) {
+		if (intervalJob == null) {
+			return;
+		}
+
 		String jobName =
 			intervalJob.getClass().getName() + StringPool.AT +
 				intervalJob.hashCode();
 
 		JobClassUtil.put(jobName, (Class<IntervalJob>)intervalJob.getClass());
 
-		Date startTime = new Date(System.currentTimeMillis() + Time.MINUTE * 1);
+		Date startTime = new Date(System.currentTimeMillis() + Time.MINUTE * 3);
 		Date endTime = null;
 
 		JobDetail jobDetail = new JobDetail(
@@ -97,6 +101,10 @@ public class JobSchedulerImpl implements JobScheduler {
 
 	public void unschedule(IntervalJob intervalJob) {
 		try {
+			if (intervalJob == null) {
+				return;
+			}
+
 			String jobName =
 				intervalJob.getClass().getName() + StringPool.AT +
 					intervalJob.hashCode();

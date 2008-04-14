@@ -44,22 +44,15 @@ public class MBScheduler implements Scheduler {
 				_log.debug(
 					"Auto expire of banned message board users is disabled");
 			}
+
+			_expireBanJob = null;
 		}
-		else {
-			JobSchedulerUtil.schedule(_expireBanJob);
-		}
+
+		JobSchedulerUtil.schedule(_expireBanJob);
 	}
 
 	public void unschedule() {
-		if (PropsValues.MESSAGE_BOARDS_EXPIRE_BAN_INTERVAL <= 0) {
-			if (_log.isDebugEnabled()) {
-				_log.debug(
-					"Auto expire of banned message board users is disabled");
-			}
-		}
-		else {
-			JobSchedulerUtil.unschedule(_expireBanJob);
-		}
+		JobSchedulerUtil.unschedule(_expireBanJob);
 	}
 
 	private IntervalJob _expireBanJob = new ExpireBanJob();
