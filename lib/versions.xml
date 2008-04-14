@@ -2228,6 +2228,9 @@
 				<license-name>BSD Style License</license-name>
 			</license>
 		</licenses>
+		<comments>
+			This includes modifications to remove extraneous logging.
+		</comments>
 	</library>
 	<library>
 		<file-name>portal/velocity.jar</file-name>
