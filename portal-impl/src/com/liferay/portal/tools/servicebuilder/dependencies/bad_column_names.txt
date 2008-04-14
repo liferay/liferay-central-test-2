@@ -21,6 +21,7 @@ number
 password
 path
 primary
+rowId
 sale
 settings
 size
