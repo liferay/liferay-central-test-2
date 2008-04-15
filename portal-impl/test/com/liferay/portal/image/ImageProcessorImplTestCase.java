@@ -25,6 +25,7 @@ package com.liferay.portal.image;
 import com.liferay.portal.kernel.image.ImageBag;
 import com.liferay.portal.kernel.image.ImageProcessor;
 import com.liferay.portal.kernel.image.ImageProcessorUtil;
+import com.liferay.portal.util.BaseTestCase;
 import com.liferay.util.FileUtil;
 
 import java.awt.image.BufferedImage;
@@ -38,15 +39,13 @@ import java.util.Arrays;
 
 import javax.imageio.ImageIO;
 
-import junit.framework.TestCase;
-
 /**
  * <a href="ImageProcessorImplTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Shuyang Zhou
  *
  */
-public class ImageProcessorImplTestCase extends TestCase {
+public class ImageProcessorImplTestCase extends BaseTestCase {
 
 	public void testReadBMP() throws Exception {
 		testRead("liferay.bmp");

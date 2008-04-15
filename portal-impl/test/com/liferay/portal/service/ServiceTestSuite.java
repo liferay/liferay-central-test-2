@@ -22,13 +22,18 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.jcr.JCRFactoryUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.lucene.LuceneUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.TestPropsUtil;
+import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceTest;
 import com.liferay.portlet.imagegallery.service.IGImageServiceTest;
 import com.liferay.portlet.messageboards.service.MBMessageServiceTest;
+import com.liferay.util.FileUtil;
 
 import junit.framework.TestSuite;
 
@@ -46,6 +51,17 @@ public class ServiceTestSuite extends TestSuite {
 
 			return;
 		}
+
+		FileUtil.deltree(PropsValues.RESOURCE_REPOSITORIES_ROOT);
+
+		try {
+			JCRFactoryUtil.initialize();
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		LuceneUtil.checkLuceneDir(TestPropsValues.COMPANY_ID);
 
 		addTestSuite(BookmarksFolderServiceTest.class);
 		addTestSuite(BookmarksEntryServiceTest.class);

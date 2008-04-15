@@ -20,53 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.service.persistence;
+package com.liferay.portal.util;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.util.BaseTestCase;
-import com.liferay.util.PwdGenerator;
+import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.spring.util.SpringUtil;
 
-import java.util.Date;
-import java.util.Random;
+import junit.framework.TestCase;
+
+import org.springframework.context.ApplicationContext;
 
 /**
- * <a href="BasePersistenceTestCase.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BasePersistenceTestCase extends BaseTestCase {
+public class BaseTestCase extends TestCase {
 
-	protected void assertEquals(double expected, double actual)
-		throws Exception {
+	protected void setUp() throws Exception {
+		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
-		assertEquals(expected, actual, 0);
+		ApplicationContext context = SpringUtil.getContext();
+
+		String[] beanDefinitionNames = context.getBeanDefinitionNames();
+
+		for (String beanDefinitionName: beanDefinitionNames) {
+			BeanLocatorUtil.locate(beanDefinitionName, false);
+		}
 	}
-
-	protected Date nextDate() throws Exception {
-		return new Date();
-	}
-
-	protected double nextDouble() throws Exception {
-		return CounterLocalServiceUtil.increment();
-	}
-
-	protected int nextInt() throws Exception {
-		return (int)CounterLocalServiceUtil.increment();
-	}
-
-	protected long nextLong() throws Exception {
-		return CounterLocalServiceUtil.increment();
-	}
-
-	protected boolean randomBoolean() throws Exception {
-		return _random.nextBoolean();
-	}
-
-	protected String randomString() throws Exception {
-		return PwdGenerator.getPassword();
-	}
-
-	private Random _random = new Random();
 
 }

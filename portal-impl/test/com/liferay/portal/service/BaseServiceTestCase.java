@@ -22,23 +22,17 @@
 
 package com.liferay.portal.service;
 
-import com.liferay.portal.bean.BeanLocatorImpl;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.model.User;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.security.permission.PermissionCheckerFactory;
 import com.liferay.portal.security.permission.PermissionCheckerImpl;
 import com.liferay.portal.security.permission.PermissionThreadLocal;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.spring.util.SpringUtil;
+import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.TestPropsValues;
 
 import java.net.URL;
-
-import junit.framework.TestCase;
-
-import org.springframework.context.ApplicationContext;
 
 /**
  * <a href="BaseServiceTestCase.java.html"><b><i>View Source</i></b></a>
@@ -46,22 +40,14 @@ import org.springframework.context.ApplicationContext;
  * @author Michael Young
  *
  */
-public class BaseServiceTestCase extends TestCase {
+public class BaseServiceTestCase extends BaseTestCase {
 
 	protected URL getClassResource(String name) {
 		return getClass().getClassLoader().getResource(name);
 	}
 
 	protected void setUp() throws Exception {
-		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
-
-		ApplicationContext context = SpringUtil.getContext();
-
-		String[] beanDefinitionNames = context.getBeanDefinitionNames();
-
-		for (String beanDefinitionName: beanDefinitionNames) {
-			BeanLocatorUtil.locate(beanDefinitionName, false);
-		}
+		super.setUp();
 
 		PortalInstances.addCompanyId(TestPropsValues.COMPANY_ID);
 
@@ -75,6 +61,8 @@ public class BaseServiceTestCase extends TestCase {
 	}
 
 	protected void tearDown() throws Exception {
+		super.tearDown();
+
 		PermissionCheckerFactory.recycle(_permissionChecker);
 	}
 
