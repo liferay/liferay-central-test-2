@@ -82,7 +82,7 @@ public class QNameUtil {
 			return new QName(defaultNamespace, nameEl.getTextTrim());
 		}
 
-		String localPart = qNameEl.getText();
+		String localPart = qNameEl.getTextTrim();
 
 		List<Namespace> namespaces = qNameEl.declaredNamespaces();
 
