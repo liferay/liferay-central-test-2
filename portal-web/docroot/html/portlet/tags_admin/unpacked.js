@@ -71,7 +71,10 @@ Liferay.Portlet.TagsAdmin = new Class({
 
 		keywordsInput.keyup(
 			function(event) {
-				instance._searchEntries(instance);
+				// shift, ctrl, alt (option), end, home, left/up/right/down arrows
+				if ([16, 17, 18, 35, 36, 37, 38, 39, 40].indexOf(event.which) == -1) {	
+					instance._searchEntries(instance);
+				}
 			}
 		);
 
@@ -557,22 +560,33 @@ Liferay.Portlet.TagsAdmin = new Class({
 	_searchEntries: function(instance) {
 		var params = instance.params;
 
-		var keywordsInput = jQuery('#' + params.keywordsInput);
-		var keywords = '%' + keywordsInput.val() + '%';
+		if (instance.showTimer) {
+			clearTimeout(instance.showTimer);
+			instance.showTimer = 0;
+		}
 
-		var searchResultsDiv = jQuery('#' + params.searchResultsDiv);
+		instance.showTimer = setTimeout(
+			function() {
+				var keywordsInput = jQuery('#' + params.keywordsInput);
+				var keywords = '%' + keywordsInput.val() + '%';
 
-		searchResultsDiv.html('');
+				var searchResultsDiv = jQuery('#' + params.searchResultsDiv);
 
-		Liferay.Service.Tags.TagsProperty.getPropertyValues(
-			{
-				companyId: themeDisplay.getCompanyId(),
-				key: "category"
+				searchResultsDiv.html('');
+
+				Liferay.Service.Tags.TagsProperty.getPropertyValues(
+					{
+						companyId: themeDisplay.getCompanyId(),
+						key: "category"
+					},
+					function(properties) {
+						instance._displayEntries(instance, properties, keywords);
+					}
+				);
 			},
-			function(properties) {
-				instance._displayEntries(instance, properties, keywords);
-			}
+			250
 		);
+
 	},
 
 	_sendMessage: function(type, key) {
