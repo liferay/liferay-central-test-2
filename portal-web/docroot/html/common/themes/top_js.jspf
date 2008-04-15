@@ -355,6 +355,10 @@
 
 		jQuery(document).ready(
 			function() {
+				if (Liferay.Dock) {
+					Liferay.Dock.init();
+				}
+
 				if (Liferay.Menu) {
 					new Liferay.Menu(
 						{
@@ -364,16 +368,12 @@
 					);
 				}
 
-				if (Liferay.Dock) {
-					Liferay.Dock.init();
+				if (Liferay.Notice) {
+					Liferay.Notice.prototype.setClosing();
 				}
 
 				if (Liferay.Util) {
 					Liferay.Util.toggleControls();
-				}
-
-				if (Liferay.Notice) {
-					Liferay.Notice.prototype.setClosing();
 				}
 			}
 		);

@@ -963,11 +963,13 @@ Liferay.Util = {
 		var instance = this;
 
 		var trigger = jQuery('.toggle-controls');
+
 		trigger.addClass('controls-visible');
 
 		trigger.click(
 			function(event) {
 				jQuery('.lfr-meta-actions, .portlet-borderless-bar, .portlet-icons').toggle();
+
 				trigger.toggleClass('controls-visible').toggleClass('controls-hidden');
 			}
 		);
@@ -979,6 +981,7 @@ Liferay.Util = {
 
 	toJSONString: function (s) {
 		var rt = s;
+
 		var m = {
 			'\b': '\\b',
 			'\t': '\\t',
@@ -992,13 +995,14 @@ Liferay.Util = {
 		if (/["\\\x00-\x1f]/.test(s)) {
 			rt = s.replace(/([\x00-\x1f\\"])/g, function(a, b) {
 				var c = m[b];
+
 				if (c) {
 					return c;
 				}
+
 				c = b.charCodeAt();
-				return '\\u00' +
-					Math.floor(c / 16).toString(16) +
-					(c % 16).toString(16);
+
+				return '\\u00' + Math.floor(c / 16).toString(16) + (c % 16).toString(16);
 			});
 		}
 
