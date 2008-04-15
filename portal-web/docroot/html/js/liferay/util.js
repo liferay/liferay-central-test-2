@@ -959,6 +959,20 @@ Liferay.Util = {
 		);
 	},
 
+	toggleControls: function() {
+		var instance = this;
+
+		var trigger = jQuery('.toggle-controls');
+		trigger.addClass('controls-visible');
+
+		trigger.click(
+			function(event) {
+				jQuery('.lfr-meta-actions, .portlet-borderless-bar, .portlet-icons').toggle();
+				trigger.toggleClass('controls-visible').toggleClass('controls-hidden');
+			}
+		);
+	},
+
 	toJSONObject: function(s) {
 		return jQuery.parseJSON(s);
 	},

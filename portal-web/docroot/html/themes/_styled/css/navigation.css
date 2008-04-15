@@ -142,6 +142,22 @@
 	display: none;
 }
 
+.lfr-dock li.toggle-controls {
+	display: none;
+}
+
+.js .lfr-dock li.toggle-controls {
+	display: block;
+}
+
+.js .lfr-dock li.toggle-controls.controls-visible a {
+	background-image: url(../images/common/checked.png);
+}
+
+.js .lfr-dock li.toggle-controls.controls-hidden a {
+	background-image: url(../images/common/unchecked.png);
+}
+
 /* ---------- Dock with JavaScript ---------- */
 
 .js .interactive-mode {

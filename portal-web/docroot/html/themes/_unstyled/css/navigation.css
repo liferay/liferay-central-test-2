@@ -85,6 +85,18 @@
 .lfr-dock li.my-places {
 }
 
+.lfr-dock li.toggle-controls {
+}
+
+.js .lfr-dock li.toggle-controls {
+}
+
+.js .lfr-dock li.toggle-controls.controls-visible a {
+}
+
+.js .lfr-dock li.toggle-controls.controls-hidden a {
+}
+
 /* ---------- Dock with JavaScript ---------- */
 
 .js .interactive-mode {

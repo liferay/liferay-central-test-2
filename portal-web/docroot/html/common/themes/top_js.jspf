@@ -368,6 +368,10 @@
 					Liferay.Dock.init();
 				}
 
+				if (Liferay.Util) {
+					Liferay.Util.toggleControls();
+				}
+
 				if (Liferay.Notice) {
 					Liferay.Notice.prototype.setClosing();
 				}
