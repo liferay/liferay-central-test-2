@@ -41,7 +41,7 @@ import java.io.File;
  */
 public class IGImageServiceTest extends BaseServiceTestCase {
 
-	public void testImageWithDuplicateName() throws Exception {
+	public void testAddImageWithDuplicateName() throws Exception {
 		String name = "liferay.png";
 		String description = StringPool.BLANK;
 		File image = new File(getClassResource(
