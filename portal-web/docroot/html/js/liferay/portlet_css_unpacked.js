@@ -793,7 +793,7 @@ Liferay.PortletCSS = {
 
 		customCSS.EnableTabs();
 
-		if (!jQuery.browser.safari) {
+		if (!Liferay.Browser.is_safari) {
 			refreshText = Liferay.Language.get('update-the-styles-on-this-page');
 
 			var refreshLink = jQuery('<a href="javascript:;">' + refreshText + '</a>');

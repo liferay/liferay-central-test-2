@@ -327,7 +327,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 										}
 									}
 
-									if (jQuery.browser.msie) {
+									if (Liferay.Browser.is_ie) {
 
 										// Must create a new element to change the onclick attribute for IE
 

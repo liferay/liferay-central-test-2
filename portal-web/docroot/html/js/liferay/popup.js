@@ -30,8 +30,8 @@
 				jQuery(window).unbind("scroll", $.Popup.center);
 			}
 
-			if (jQuery.browser.msie &&
-				jQuery.browser.version.major < 7 &&
+			if (Liferay.Browser.is_ie &&
+				Liferay.Browser.version() < 7 &&
 				$.Popup.count() == 0) {
 
 				jQuery("select").css("visibility", "visible");
@@ -133,7 +133,7 @@
 			jMessage.append(myMessage || "<div class=\"loading-animation\"></div>");
 
 			if (msgHeight) {
-				jMessage.css(jQuery.browser.msie ? "height" : "min-height", msgHeight + "px");
+				jMessage.css(Liferay.Browser.is_ie && Liferay.Browser.version() < 7 ? "height" : "min-height", msgHeight + "px");
 			}
 
 			if (msgWidth) {
@@ -159,8 +159,8 @@
 				}
 			}
 
-			if (jQuery.browser.msie &&
-				jQuery.browser.version.major < 7 &&
+			if (Liferay.Browser.is_ie &&
+				Liferay.Browser.version() < 7 &&
 				$.Popup.count() == 1) {
 
 				jQuery('select').css('visibility', 'hidden');

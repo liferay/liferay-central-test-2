@@ -88,7 +88,7 @@ Liferay.DynamicSelect = new Class({
 		select.html(options);
 		select.find('option[@value=' + selectVal + ']').attr('selected', 'selected');
 
-		if (jQuery.browser.msie && jQuery.browser.version.number() <= 7) {
+		if (Liferay.Browser.is_ie && Liferay.Browser.version() < 7) {
 			select.css('width', 'auto');
 		}
 	}
