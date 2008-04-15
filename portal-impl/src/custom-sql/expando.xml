@@ -124,7 +124,7 @@
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?) AND
-				(ExpandoValue.rowId = ?)
+				(ExpandoValue.rowId_ = ?)
 		]]>
 	</sql>
 </custom-sql>
