@@ -669,6 +669,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.PREFERENCE_VALIDATE_ON_STARTUP));
 
+	public static final String RESOURCE_REPOSITORIES_ROOT =
+		PropsUtil.get(PropsUtil.RESOURCE_REPOSITORIES_ROOT);
+
 	public static final boolean REVERSE_AJAX_ENABLED = GetterUtil.getBoolean(
 		PropsUtil.get(PropsUtil.REVERSE_AJAX_ENABLED));
 
