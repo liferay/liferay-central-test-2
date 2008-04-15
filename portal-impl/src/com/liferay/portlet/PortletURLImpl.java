@@ -858,7 +858,9 @@ public class PortletURLImpl
 
 		String result = sm.toString();
 
-		if (result.endsWith(StringPool.QUESTION)) {
+		if (result.endsWith(StringPool.AMPERSAND) ||
+			result.endsWith(StringPool.QUESTION)) {
+
 			result = result.substring(0, result.length() - 1);
 		}
 
