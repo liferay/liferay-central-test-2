@@ -90,6 +90,9 @@ public class UserFinderImpl implements UserFinder {
 	public static String JOIN_BY_SOCIAL_MUTUAL_RELATION =
 		UserFinder.class.getName() + ".joinBySocialMutualRelation";
 
+	public static String JOIN_BY_SOCIAL_MUTUAL_RELATION_BY_TYPE =
+		UserFinder.class.getName() + ".joinBySocialMutualRelationByType";
+
 	public static String JOIN_BY_SOCIAL_RELATION_ALL =
 		UserFinder.class.getName() + ".joinBySocialRelationAll";
 
@@ -423,6 +426,9 @@ public class UserFinderImpl implements UserFinder {
 		else if (key.equals("socialMutualRelation")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION);
 		}
+		else if (key.equals("socialMutualRelationByType")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION_BY_TYPE);
+		}
 		else if (key.equals("socialRelationAll")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_ALL);
 		}
@@ -517,6 +523,9 @@ public class UserFinderImpl implements UserFinder {
 		}
 		else if (key.equals("socialMutualRelation")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION);
+		}
+		else if (key.equals("socialMutualRelationByType")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION_BY_TYPE);
 		}
 		else if (key.equals("socialRelationAll")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_ALL);

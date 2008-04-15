@@ -1081,6 +1081,34 @@
 						(sr2.userId2 = ?)
 					)
 			WHERE
+				(1 = 1)
+		]]>
+	</sql>
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialMutualRelationByType">
+		<![CDATA[
+			INNER JOIN
+				SocialRelation AS sr1 ON
+					(
+						(sr1.userId1 = User_.userId) OR
+						(sr1.userId2 = User_.userId)
+					) AND
+					(User_.userId != ?) AND
+					(
+						(sr1.userId1 = ?) OR
+						(sr1.userId2 = ?)
+					)
+			INNER JOIN
+				SocialRelation AS sr2 ON
+					(
+						(sr2.userId1 = User_.userId) OR
+						(sr2.userId2 = User_.userId)
+					) AND
+					(User_.userId != ?) AND
+					(
+						(sr2.userId1 = ?) OR
+						(sr2.userId2 = ?)
+					)
+			WHERE
 				(sr1.type_ = ?) AND
 				(sr2.type_ = ?)
 		]]>

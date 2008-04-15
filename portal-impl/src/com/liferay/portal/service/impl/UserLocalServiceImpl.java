@@ -1029,7 +1029,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	}
 
 	public List<User> getSocialUsers(
-			long userId1, long userId2, int type, int begin, int end)
+			long userId1, long userId2, int begin, int end)
 		throws PortalException, SystemException {
 
 		User user1 = userPersistence.findByPrimaryKey(userId1);
@@ -1039,6 +1039,24 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialMutualRelation",
+			new Long[] {
+				userId1, userId1, userId1, userId2, userId2, userId2});
+
+		return search(
+			user1.getCompanyId(), null, null, params, begin, end, null);
+	}
+
+	public List<User> getSocialUsers(
+			long userId1, long userId2, int type, int begin, int end)
+		throws PortalException, SystemException {
+
+		User user1 = userPersistence.findByPrimaryKey(userId1);
+
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put(
+			"socialMutualRelationByType",
 			new Long[] {
 				userId1, userId1, userId1, userId2, userId2, userId2,
 				new Long(type), new Long(type)});
@@ -1082,7 +1100,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return searchCount(user.getCompanyId(), null, null, params);
 	}
 
-	public int getSocialUsersCount(long userId1, long userId2, int type)
+	public int getSocialUsersCount(long userId1, long userId2)
 		throws PortalException, SystemException {
 
 		User user1 = userPersistence.findByPrimaryKey(userId1);
@@ -1092,6 +1110,22 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialMutualRelation",
+			new Long[] {
+				userId1, userId1, userId1, userId2, userId2, userId2});
+
+		return searchCount(user1.getCompanyId(), null, null, params);
+	}
+
+	public int getSocialUsersCount(long userId1, long userId2, int type)
+		throws PortalException, SystemException {
+
+		User user1 = userPersistence.findByPrimaryKey(userId1);
+
+		LinkedHashMap<String, Object> params =
+			new LinkedHashMap<String, Object>();
+
+		params.put(
+			"socialMutualRelationByType",
 			new Long[] {
 				userId1, userId1, userId1, userId2, userId2, userId2,
 				new Long(type), new Long(type)});
