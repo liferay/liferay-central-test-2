@@ -24,7 +24,14 @@ package com.liferay.portal.jcr.jackrabbit;
 
 import com.liferay.portal.jcr.JCRFactory;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.FileUtil;
+import com.liferay.util.SystemProperties;
+import com.liferay.util.Time;
+
+import java.io.File;
+import java.io.IOException;
 
 import javax.jcr.Credentials;
 import javax.jcr.Repository;
@@ -72,25 +79,34 @@ public class JCRFactoryImpl implements JCRFactory {
 		try {
 			session = _repository.login(credentials, workspaceName);
 		}
-		catch (RepositoryException e) {
+		catch (RepositoryException re) {
 			_log.error("Could not login to the workspace " + workspaceName);
 
-			throw e;
+			throw re;
 		}
 
 		return session;
 	}
 
 	public void initialize() throws RepositoryException {
+		try {
+			prepareRepositoryRoot();
+		}
+		catch (IOException ioe) {
+			_log.error("Could not prepare Jackrabbit directory");
+
+			throw new RepositoryException(ioe);
+		}
+
 		Session session = null;
 
 		try {
 			session = createSession(null);
 		}
-		catch (RepositoryException e) {
+		catch (RepositoryException re) {
 			_log.error("Could not initialize Jackrabbit");
 
-			throw e;
+			throw re;
 		}
 		finally {
 			if (session != null) {
@@ -113,10 +129,10 @@ public class JCRFactoryImpl implements JCRFactory {
 
 				repository.shutdown();
 			}
-			catch (RepositoryException e) {
+			catch (RepositoryException re) {
 				_log.error("Could not shutdown Jackrabbit");
 
-				throw e;
+				throw re;
 			}
 		}
 
@@ -140,6 +156,38 @@ public class JCRFactoryImpl implements JCRFactory {
 					CONFIG_FILE_PATH + " and repository home " +
 						REPOSITORY_HOME);
 		}
+	}
+
+	protected void prepareRepositoryRoot() throws IOException {
+		File repositoryRoot = new File(JCRFactoryImpl.REPOSITORY_ROOT);
+
+		if (repositoryRoot.exists()) {
+			return;
+		}
+
+		repositoryRoot.mkdirs();
+
+		File tempFile = new File(
+			SystemProperties.get(SystemProperties.TMP_DIR) +
+				File.separator + Time.getTimestamp());
+
+		String repositoryXmlPath =
+			"com/liferay/portal/jcr/jackrabbit/dependencies/repository-ext.xml";
+
+		ClassLoader classLoader = getClass().getClassLoader();
+
+		if (classLoader.getResource(repositoryXmlPath) == null) {
+			repositoryXmlPath =
+				"com/liferay/portal/jcr/jackrabbit/dependencies/repository.xml";
+		}
+
+		String content = StringUtil.read(classLoader, repositoryXmlPath);
+
+		FileUtil.write(tempFile, content);
+
+		FileUtil.copyFile(tempFile, new File(JCRFactoryImpl.CONFIG_FILE_PATH));
+
+		tempFile.delete();
 	}
 
 	private static Log _log = LogFactory.getLog(JCRFactoryImpl.class);

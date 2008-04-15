@@ -23,7 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
-import com.liferay.portal.jcr.jackrabbit.JCRFactoryImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
@@ -33,18 +32,13 @@ import com.liferay.portal.kernel.util.JavaProps;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.log.CommonsLogFactoryImpl;
 import com.liferay.portal.security.jaas.PortalConfiguration;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.velocity.LiferayResourceLoader;
-import com.liferay.util.FileUtil;
 import com.liferay.util.SystemProperties;
-import com.liferay.util.Time;
 import com.liferay.util.log4j.Log4JUtil;
-
-import java.io.File;
 
 import javax.security.auth.login.Configuration;
 
@@ -144,45 +138,6 @@ public class InitAction extends SimpleAction {
 				Configuration.getConfiguration());
 
 			Configuration.setConfiguration(portalConfig);
-		}
-
-		// JCR
-
-		try {
-			File repositoryRoot = new File(JCRFactoryImpl.REPOSITORY_ROOT);
-
-			if (!repositoryRoot.exists()) {
-				repositoryRoot.mkdirs();
-
-				File tempFile = new File(
-					SystemProperties.get(SystemProperties.TMP_DIR) +
-						File.separator + Time.getTimestamp());
-
-				String repositoryXmlPath =
-					"com/liferay/portal/jcr/jackrabbit/dependencies/" +
-						"repository-ext.xml";
-
-				ClassLoader classLoader = getClass().getClassLoader();
-
-				if (classLoader.getResource(repositoryXmlPath) == null) {
-					repositoryXmlPath =
-						"com/liferay/portal/jcr/jackrabbit/dependencies/" +
-							"repository.xml";
-				}
-
-				String content = StringUtil.read(
-					classLoader, repositoryXmlPath);
-
-				FileUtil.write(tempFile, content);
-
-				FileUtil.copyFile(
-					tempFile, new File(JCRFactoryImpl.CONFIG_FILE_PATH));
-
-				tempFile.delete();
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
 		}
 
 		// Velocity
