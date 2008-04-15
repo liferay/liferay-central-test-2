@@ -50,11 +50,11 @@ public class WeatherWebCacheItem implements WebCacheItem {
 				"http://weather.yahoo.com/search/weather2?p=" +
 					HttpUtil.encodeURL(_zip)));
 
-			int x = text.indexOf("forecast-temperature");
+			int x = text.indexOf("forecast-temp");
 
 			x = text.indexOf("h3>", x) + 3;
 
-			int y = text.indexOf("&deg;", x);
+			int y = text.indexOf("&#176;", x);
 
 			float temperature = GetterUtil.getFloat(text.substring(x, y));
 
