@@ -3463,6 +3463,8 @@ Liferay.Browser = {
 		instance._browserVars = {
 			agent: '',
 
+			is_firefox: false,
+
 			is_ie: false,
 			is_ie_4: false,
 			is_ie_5: false,
@@ -3483,6 +3485,8 @@ Liferay.Browser = {
 		};
 
 		instance._browserVars.agent = instance.browser().toLowerCase();
+
+		instance._browserVars.is_firefox = jQuery.browser.firefox;
 
 		instance._browserVars.is_ie = jQuery.browser.msie;
 		instance._browserVars.is_ie_4 = (instance.is_ie && version == 4);
@@ -3621,7 +3625,7 @@ Liferay.Util = {
 	addInputType: function(el) {
 		var item;
 
-		if (jQuery.browser.msie && jQuery.browser.version.major < 7) {
+		if (Liferay.Browser.is_ie && Liferay.Browser.version() < 7) {
 			if (el) {
 				if (typeof el == 'object') {
 					item = jQuery(el);
@@ -5665,8 +5669,8 @@ jQuery.fn.xySize = function() {
 				jQuery(window).unbind("scroll", $.Popup.center);
 			}
 
-			if (jQuery.browser.msie &&
-				jQuery.browser.version.major < 7 &&
+			if (Liferay.Browser.is_ie &&
+				Liferay.Browser.version() < 7 &&
 				$.Popup.count() == 0) {
 
 				jQuery("select").css("visibility", "visible");
@@ -5768,7 +5772,7 @@ jQuery.fn.xySize = function() {
 			jMessage.append(myMessage || "<div class=\"loading-animation\"></div>");
 
 			if (msgHeight) {
-				jMessage.css(jQuery.browser.msie ? "height" : "min-height", msgHeight + "px");
+				jMessage.css(Liferay.Browser.is_ie && Liferay.Browser.version() < 7 ? "height" : "min-height", msgHeight + "px");
 			}
 
 			if (msgWidth) {
@@ -5794,8 +5798,8 @@ jQuery.fn.xySize = function() {
 				}
 			}
 
-			if (jQuery.browser.msie &&
-				jQuery.browser.version.major < 7 &&
+			if (Liferay.Browser.is_ie &&
+				Liferay.Browser.version() < 7 &&
 				$.Popup.count() == 1) {
 
 				jQuery('select').css('visibility', 'hidden');

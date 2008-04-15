@@ -8,7 +8,7 @@ Liferay.Browser = {
 
 		instance._browserVars = {
 			agent: '',
-			
+
 			is_firefox: false,
 
 			is_ie: false,
@@ -31,7 +31,7 @@ Liferay.Browser = {
 		};
 
 		instance._browserVars.agent = instance.browser().toLowerCase();
-		
+
 		instance._browserVars.is_firefox = jQuery.browser.firefox;
 
 		instance._browserVars.is_ie = jQuery.browser.msie;
