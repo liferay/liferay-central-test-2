@@ -90,17 +90,17 @@ public class UserFinderImpl implements UserFinder {
 	public static String JOIN_BY_SOCIAL_MUTUAL_RELATION =
 		UserFinder.class.getName() + ".joinBySocialMutualRelation";
 
-	public static String JOIN_BY_SOCIAL_MUTUAL_RELATION_BY_TYPE =
-		UserFinder.class.getName() + ".joinBySocialMutualRelationByType";
+	public static String JOIN_BY_SOCIAL_MUTUAL_RELATION_TYPE =
+		UserFinder.class.getName() + ".joinBySocialMutualRelationType";
 
-	public static String JOIN_BY_SOCIAL_RELATION_ALL =
-		UserFinder.class.getName() + ".joinBySocialRelationAll";
+	public static String JOIN_BY_SOCIAL_RELATION =
+		UserFinder.class.getName() + ".joinBySocialRelation";
 
-	public static String JOIN_BY_SOCIAL_RELATION_BI =
-		UserFinder.class.getName() + ".joinBySocialRelationBidirectional";
+	public static String JOIN_BY_SOCIAL_RELATION_TYPE_BI =
+		UserFinder.class.getName() + ".joinBySocialRelationTypeBi";
 
-	public static String JOIN_BY_SOCIAL_RELATION_UNI =
-		UserFinder.class.getName() + ".joinBySocialRelationUnidirectional";
+	public static String JOIN_BY_SOCIAL_RELATION_TYPE_UNI =
+		UserFinder.class.getName() + ".joinBySocialRelationTypeUni";
 
 	public int countByKeywords(
 			long companyId, String keywords, Boolean active,
@@ -426,17 +426,17 @@ public class UserFinderImpl implements UserFinder {
 		else if (key.equals("socialMutualRelation")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION);
 		}
-		else if (key.equals("socialMutualRelationByType")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION_BY_TYPE);
+		else if (key.equals("socialMutualRelationType")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION_TYPE);
 		}
-		else if (key.equals("socialRelationAll")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_ALL);
+		else if (key.equals("socialRelation")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);
 		}
-		else if (key.equals("socialRelationBidirectional")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_BI);
+		else if (key.equals("socialRelationTypeBi")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE_BI);
 		}
-		else if (key.equals("socialRelationUnidirectional")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_UNI);
+		else if (key.equals("socialRelationTypeUni")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE_UNI);
 		}
 
 		if (Validator.isNotNull(join)) {
@@ -524,17 +524,17 @@ public class UserFinderImpl implements UserFinder {
 		else if (key.equals("socialMutualRelation")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION);
 		}
-		else if (key.equals("socialMutualRelationByType")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION_BY_TYPE);
+		else if (key.equals("socialMutualRelationType")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_MUTUAL_RELATION_TYPE);
 		}
-		else if (key.equals("socialRelationAll")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_ALL);
+		else if (key.equals("socialRelation")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);
 		}
-		else if (key.equals("socialRelationBidirectional")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_BI);
+		else if (key.equals("socialRelationTypeBi")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE_BI);
 		}
-		else if (key.equals("socialRelationUnidirectional")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_UNI);
+		else if (key.equals("socialRelationTypeUni")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE_UNI);
 		}
 
 		if (Validator.isNotNull(join)) {

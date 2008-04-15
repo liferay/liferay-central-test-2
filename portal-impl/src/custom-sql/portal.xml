@@ -1084,7 +1084,7 @@
 				(1 = 1)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialMutualRelationByType">
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialMutualRelationType">
 		<![CDATA[
 			INNER JOIN
 				SocialRelation AS sr1 ON
@@ -1113,7 +1113,7 @@
 				(sr2.type_ = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelationAll">
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelation">
 		<![CDATA[
 			INNER JOIN
 				SocialRelation ON
@@ -1127,7 +1127,7 @@
 				)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelationBidirectional">
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelationTypeBi">
 		<![CDATA[
 			INNER JOIN
 				SocialRelation ON
@@ -1142,7 +1142,7 @@
 				(SocialRelation.type_ = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelationUnidirectional">
+	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelationTypeUni">
 		<![CDATA[
 			INNER JOIN
 				SocialRelation ON

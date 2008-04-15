@@ -999,7 +999,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("socialRelationAll", new Long[] {userId, userId, userId});
+		params.put("socialRelation", new Long[] {userId, userId, userId});
 
 		return search(
 			user.getCompanyId(), null, null, params, begin, end, null);
@@ -1015,12 +1015,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (SocialRelationConstants.isTypeUni(type)) {
 			params.put(
-				"socialRelationUnidirectional",
-				new Long[] {userId, new Long(type)});
+				"socialRelationTypeUni", new Long[] {userId, new Long(type)});
 		}
 		else {
 			params.put(
-				"socialRelationBidirectional",
+				"socialRelationTypeBi",
 				new Long[] {userId, userId, userId, new Long(type)});
 		}
 
@@ -1056,7 +1055,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			new LinkedHashMap<String, Object>();
 
 		params.put(
-			"socialMutualRelationByType",
+			"socialMutualRelationType",
 			new Long[] {
 				userId1, userId1, userId1, userId2, userId2, userId2,
 				new Long(type), new Long(type)});
@@ -1073,7 +1072,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("socialRelationAll", new Long[] {userId, userId, userId});
+		params.put("socialRelation", new Long[] {userId, userId, userId});
 
 		return searchCount(user.getCompanyId(), null, null, params);
 	}
@@ -1088,12 +1087,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		if (SocialRelationConstants.isTypeUni(type)) {
 			params.put(
-				"socialRelationUnidirectional",
-				new Long[] {userId, new Long(type)});
+				"socialRelationTypeUni", new Long[] {userId, new Long(type)});
 		}
 		else {
 			params.put(
-				"socialRelationBidirectional",
+				"socialRelationTypeBi",
 				new Long[] {userId, userId, userId, new Long(type)});
 		}
 
@@ -1125,7 +1123,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			new LinkedHashMap<String, Object>();
 
 		params.put(
-			"socialMutualRelationByType",
+			"socialMutualRelationType",
 			new Long[] {
 				userId1, userId1, userId1, userId2, userId2, userId2,
 				new Long(type), new Long(type)});
