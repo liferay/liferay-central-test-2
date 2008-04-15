@@ -1126,7 +1126,7 @@ public class BaseDeployer {
 		if (x != -1) {
 			int y = content.indexOf("</display-name>", x);
 
-			y = content.indexOf(">", y);
+			y = content.indexOf(">", y) + 1;
 
 			content = content.substring(0, x) + content.substring(y);
 		}
