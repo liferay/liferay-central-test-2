@@ -25,7 +25,6 @@ package com.liferay.portal.util;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
-import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -84,28 +83,30 @@ public class QNameUtil {
 
 		String localPart = qNameEl.getTextTrim();
 
-		List<Namespace> namespaces = qNameEl.declaredNamespaces();
+		int pos = localPart.indexOf(StringPool.COLON);
 
-		if (namespaces.size() == 0) {
-			_log.error("qname " + localPart + " does not have a namespace");
+		if (pos == -1) {
+			_log.error("qname " + localPart + " does not have a prefix");
 
 			return null;
 		}
 
-		Namespace namespace = namespaces.get(0);
+		String prefix = localPart.substring(0, pos);
 
-		String uri = namespace.getURI();
-		String prefix = namespace.getPrefix();
+		Namespace namespace = qNameEl.getNamespaceForPrefix(prefix);
 
-		if (localPart.startsWith(prefix + StringPool.COLON)) {
-			localPart = localPart.substring(prefix.length() + 1);
-		}
-		else {
+		if (namespace == null) {
 			if (_log.isWarnEnabled()) {
 				_log.warn(
-					"qname " + localPart + " is not correctly namespaced");
+					"qname " + localPart + " does not have a valid namespace");
 			}
+
+			return null;
 		}
+
+		String uri = namespace.getURI();
+
+		localPart = localPart.substring(prefix.length() + 1);
 
 		return new QName(uri, localPart, prefix);
 	}
