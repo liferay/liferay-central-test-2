@@ -31,7 +31,7 @@
 			}
 
 			if (jQuery.browser.msie &&
-				jQuery.browser.version.number() < 7 &&
+				jQuery.browser.version.major < 7 &&
 				$.Popup.count() == 0) {
 
 				jQuery("select").css("visibility", "visible");
@@ -160,7 +160,7 @@
 			}
 
 			if (jQuery.browser.msie &&
-				jQuery.browser.version.number("round") < 7 &&
+				jQuery.browser.version.major < 7 &&
 				$.Popup.count() == 1) {
 
 				jQuery('select').css('visibility', 'hidden');

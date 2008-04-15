@@ -52,12 +52,14 @@ jQuery Browser Plugin
 
 		// Define the 'addSelectors' function which adds Browser Selectors to a tag; by default <HTML>.
 		addSelectors: function() {
-			jQuery(arguments[0] || 'html').addClass([this.renderer,this.browser,this.browser+this.version.major,this.OS,'js'].join(' ').toLowerCase());
+			var browser = this.msie ? 'ie' : this.browser;
+			jQuery(arguments[0] || 'html').addClass([this.renderer,browser,browser+this.version.major,this.OS,'js'].join(' ').toLowerCase());
 		},
 
 		// Define the 'removeSelectors' function which removes Browser Selectors to a tag; by default <HTML>.
 		removeSelectors: function() {
-			jQuery(arguments[0] || 'html').removeClass([this.renderer,this.browser,this.browser+this.version.major,this.OS,'js'].join(' ').toLowerCase());
+			var browser = this.msie ? 'ie' : this.browser;
+			jQuery(arguments[0] || 'html').removeClass([this.renderer,browser,browser+this.version.major,this.OS,'js'].join(' ').toLowerCase());
 		}
 
 	};
@@ -78,6 +80,7 @@ jQuery Browser Plugin
 					: '';
 	ob.version.number = parseFloat(ob.version.string);
 	ob.version.major = /([^\.]+)/.exec(ob.version.string)[1];
+
 
 	// Run the 'addSelectors' Function if the 'addSelectors' Variable is set as true.
 	if (addSelectors) {

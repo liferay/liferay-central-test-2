@@ -77,7 +77,7 @@ Liferay.Util = {
 	addInputType: function(el) {
 		var item;
 
-		if (jQuery.browser.msie && jQuery.browser.version.number() < 7) {
+		if (jQuery.browser.msie && jQuery.browser.version.major < 7) {
 			if (el) {
 				if (typeof el == 'object') {
 					item = jQuery(el);
