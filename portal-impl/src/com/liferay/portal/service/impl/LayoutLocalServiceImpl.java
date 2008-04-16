@@ -838,8 +838,22 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		friendlyURL = getFriendlyURL(friendlyURL);
 
-		return layoutPersistence.findByG_P_F(
+		Layout layout = layoutPersistence.fetchByG_P_F(
 			groupId, privateLayout, friendlyURL);
+
+		if (layout == null &&
+				friendlyURL.startsWith(StringPool.SLASH)) {
+			long layoutId = GetterUtil.getLong(friendlyURL.substring(1));
+
+			layout = layoutPersistence.fetchByG_P_L(
+				groupId, privateLayout, layoutId);
+		}
+
+		if (layout == null) {
+			throw new NoSuchLayoutException();
+		}
+
+		return layout;
 	}
 
 	public Layout getLayout(long plid)
