@@ -74,19 +74,16 @@ data-source and session-factory values to your custom values.
 
 The data-source value specifies the data source target that is set to the
 persistence class. The default value is the Liferay data source. This is used in
-conjunction with session-factory. See data-source-spring-professional.xml (or
-data-source-spring-enterprise.xml).
+conjunction with session-factory. See data-source-spring.xml.
 
 The session-factory value specifies the session factory that is set to the
 persistence class. The default value is the Liferay session factory. This is
-used in conjunction with data-source. See data-source-spring-professional.xml
-(or data-source-spring-enterprise.xml).
+used in conjunction with data-source. See data-source-spring.xml.
 
 The tx-manager value specifies the transaction manager that Spring uses. The
 default value is the Spring Hibernate transaction manager that wraps the Liferay
-data source and session factory. See data-source-spring-professional.xml (or
-data-source-spring-enterprise.xml). Set this attribute to "none" to disable
-transaction management.
+data source and session factory. See data-source-spring.xml. Set this attribute
+to "none" to disable transaction management.
 -->
 <!ATTLIST entity
 	name CDATA #REQUIRED
