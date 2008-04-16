@@ -89,10 +89,7 @@
 						<portlet:param name="tabs1" value="<%= tabs1 %>" />
 						<portlet:param name="pagesRedirect" value='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "tabs4=" + tabs4 + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>' />
 						<portlet:param name="groupId" value="<%= String.valueOf(groupId) %>" />
-						<portlet:param name="popupId" value="publish-to-live" />
-						<c:if test="<%= selPlid > 0 %>">
-							<portlet:param name="selPlid" value="<%= String.valueOf(selPlid) %>" />
-						</c:if>
+						<portlet:param name="selPlid" value="<%= String.valueOf(selPlid) %>" />
 					</portlet:renderURL>
 
 					<input type="button" value="<liferay-ui:message key="publish-to-live" />" onClick="Liferay.LayoutExporter.publishToLive({url: '<%= exportLayoutsURL %>', messageId: 'publish-to-live'});" />
