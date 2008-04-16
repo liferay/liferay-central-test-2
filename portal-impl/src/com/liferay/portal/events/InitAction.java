@@ -22,8 +22,6 @@
 
 package com.liferay.portal.events;
 
-import com.liferay.portal.bean.BeanLocatorImpl;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
@@ -119,10 +117,6 @@ public class InitAction extends SimpleAction {
 			PropsUtil.RESOURCE_REPOSITORIES_ROOT,
 			PropsUtil.get(PropsUtil.RESOURCE_REPOSITORIES_ROOT));
 
-		// Bean locator
-
-		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
-
 		// Java properties
 
 		JavaProps.isJDK5();
@@ -174,13 +168,6 @@ public class InitAction extends SimpleAction {
 			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER_CATEGORY));
 
 		Velocity.setExtendedProperties(props);
-
-		try {
-			Velocity.init();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
 
 		if (_PRINT_TIME) {
 			System.out.println(

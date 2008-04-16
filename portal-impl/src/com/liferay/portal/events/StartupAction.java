@@ -23,7 +23,6 @@
 package com.liferay.portal.events;
 
 import com.liferay.lock.service.LockServiceUtil;
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.cache.CacheRegistry;
 import com.liferay.portal.kernel.cache.MultiVMPoolUtil;
 import com.liferay.portal.kernel.events.ActionException;
@@ -36,7 +35,6 @@ import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Release;
 import com.liferay.portal.service.ClassNameLocalServiceUtil;
 import com.liferay.portal.service.ReleaseLocalServiceUtil;
-import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.UpgradeProcess;
 import com.liferay.portal.util.PropsUtil;
@@ -44,8 +42,7 @@ import com.liferay.portal.verify.VerifyProcess;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-
-import org.springframework.context.ApplicationContext;
+import org.apache.velocity.app.Velocity;
 
 /**
  * <a href="StartupAction.java.html"><b><i>View Source</i></b></a>
@@ -77,16 +74,13 @@ public class StartupAction extends SimpleAction {
 			Runtime.getRuntime().addShutdownHook(
 				new Thread(new ShutdownHook()));
 
-			// Preinitialize Spring beans. See LEP-4734.
+			// Start Velocity runtime engine
 
-			ApplicationContext context = SpringUtil.getContext();
-
-			String[] beanDefinitionNames = context.getBeanDefinitionNames();
-
-			for (int i = 0; i < beanDefinitionNames.length; i++) {
-				String beanDefinitionName = beanDefinitionNames[i];
-
-				BeanLocatorUtil.locate(beanDefinitionName, false);
+			try {
+				Velocity.init();
+			}
+			catch (Exception e) {
+				e.printStackTrace();
 			}
 
 			// Disable database caching before upgrade

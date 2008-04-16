@@ -1,6 +1,10 @@
 <?xml version="1.0"?>
 
 <web-app xmlns="http://java.sun.com/xml/ns/j2ee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd" version="2.4">
+	<context-param>
+		<param-name>contextClass</param-name>
+		<param-value>com.liferay.portal.spring.context.LazyClassPathApplicationContext</param-value>
+	</context-param>
 	<filter>
 		<filter-name>Auto Login Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.autologin.AutoLoginFilter</filter-class>
@@ -390,6 +394,9 @@
 		<filter-name>Velocity Filter</filter-name>
 		<url-pattern>*.css</url-pattern>
 	</filter-mapping>-->
+	<listener>
+		<listener-class>com.liferay.portal.spring.context.ContextLoaderListener</listener-class>
+	</listener>	
 	<listener>
 		<listener-class>com.liferay.portal.servlet.PortalSessionListener</listener-class>
 	</listener>

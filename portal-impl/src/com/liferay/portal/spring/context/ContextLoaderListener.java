@@ -22,43 +22,49 @@
 
 package com.liferay.portal.spring.context;
 
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.bean.BeanLocatorImpl;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.spring.util.SpringUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 
-import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
-import org.springframework.core.io.DefaultResourceLoader;
-import org.springframework.web.context.support.XmlWebApplicationContext;
+import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
- * <a href="LazyClassPathApplicationContext.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ContextLoaderListener.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Michael Young
  *
  */
-public class LazyClassPathApplicationContext extends XmlWebApplicationContext {
+public class ContextLoaderListener extends
+		org.springframework.web.context.ContextLoaderListener {
 
-	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
-		if (_configLocations != null) {
-			reader.setResourceLoader(new DefaultResourceLoader());
+	public void contextInitialized(ServletContextEvent event) {
 
-			for (int i = 0; i < _configLocations.length; i++) {
-				try {
-					reader.loadBeanDefinitions(_configLocations[i]);
-				}
-				catch (Exception e) {
-					_log.warn(e);
-				}
-			}
+		// Bean locator
+
+		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+
+		super.contextInitialized(event);
+
+		// Preinitialize Spring beans. See LEP-4734.
+
+		ServletContext sc = event.getServletContext();
+
+		ApplicationContext context =
+			WebApplicationContextUtils.getWebApplicationContext(sc);
+
+		SpringUtil.setContext(context);
+
+		String[] beanDefinitionNames = context.getBeanDefinitionNames();
+
+		for (int i = 0; i < beanDefinitionNames.length; i++) {
+			String beanDefinitionName = beanDefinitionNames[i];
+
+			BeanLocatorUtil.locate(beanDefinitionName, false);
 		}
 	}
-
-	private static String[] _configLocations =
-		PropsUtil.getArray(PropsUtil.SPRING_CONFIGS);
-
-	private static Log _log =
-		LogFactory.getLog(LazyClassPathApplicationContext.class);
 
 }
