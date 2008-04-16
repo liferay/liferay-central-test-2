@@ -365,6 +365,7 @@
 						<include name="**/*.jsp" />
 						<include name="**/*.jspf" />
 						<include name="**/*.png" />
+						<include name="**/*.properties" />
 						<include name="**/*.tld" />
 						<include name="**/*.vm" />
 						<include name="**/*.xml" />
