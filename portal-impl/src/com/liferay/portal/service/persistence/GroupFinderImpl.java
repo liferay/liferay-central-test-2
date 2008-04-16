@@ -754,6 +754,9 @@ public class GroupFinderImpl implements GroupFinder {
 
 				join = sm.toString();
 			}
+			else {
+				join = StringPool.BLANK;
+			}
 		}
 
 		return join;

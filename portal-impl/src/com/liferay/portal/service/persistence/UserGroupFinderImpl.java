@@ -316,7 +316,15 @@ public class UserGroupFinderImpl implements UserGroupFinder {
 			int pos = join.indexOf("WHERE");
 
 			if (pos != -1) {
-				join = join.substring(pos + 5, join.length()) + " AND ";
+				StringMaker sm = new StringMaker();
+
+				sm.append(join.substring(pos + 5, join.length()));
+				sm.append(" AND ");
+
+				join = sm.toString();
+			}
+			else {
+				join = StringPool.BLANK;
 			}
 		}
 

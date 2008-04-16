@@ -1080,8 +1080,6 @@
 						(sr2.userId1 = ?) OR
 						(sr2.userId2 = ?)
 					)
-			WHERE
-				(1 = 1)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialMutualRelationType">

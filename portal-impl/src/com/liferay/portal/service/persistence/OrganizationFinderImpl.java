@@ -924,6 +924,9 @@ public class OrganizationFinderImpl implements OrganizationFinder {
 
 				join = sm.toString();
 			}
+			else {
+				join = StringPool.BLANK;
+			}
 		}
 
 		return join;
