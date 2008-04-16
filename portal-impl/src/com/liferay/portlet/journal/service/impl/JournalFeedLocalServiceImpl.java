@@ -172,8 +172,8 @@ public class JournalFeedLocalServiceImpl
 		Date now = new Date();
 
 		validate(
-			groupId, feedId, autoFeedId, name, description, structureId,
-			targetLayoutFriendlyUrl, contentField);
+			user.getCompanyId(), groupId, feedId, autoFeedId, name, description,
+			structureId, targetLayoutFriendlyUrl, contentField);
 
 		if (autoFeedId) {
 			feedId = String.valueOf(counterLocalService.increment());
@@ -380,11 +380,11 @@ public class JournalFeedLocalServiceImpl
 
 		// Feed
 
-		validate(
-			groupId, name, description, structureId, targetLayoutFriendlyUrl,
-			contentField);
-
 		JournalFeed feed = journalFeedPersistence.findByG_F(groupId, feedId);
+
+		validate(
+			feed.getCompanyId(), groupId, name, description, structureId,
+			targetLayoutFriendlyUrl, contentField);
 
 		feed.setModifiedDate(new Date());
 		feed.setName(name);
@@ -447,8 +447,8 @@ public class JournalFeedLocalServiceImpl
 	}
 
 	protected void validate(
-			long groupId, String feedId, boolean autoFeedId, String name,
-			String description, String structureId,
+			long companyId, long groupId, String feedId, boolean autoFeedId,
+			String name, String description, String structureId,
 			String targetLayoutFriendlyUrl, String contentField)
 		throws PortalException, SystemException {
 
@@ -469,13 +469,14 @@ public class JournalFeedLocalServiceImpl
 		}
 
 		validate(
-			groupId, name, description, structureId, targetLayoutFriendlyUrl,
-			contentField);
+			companyId, groupId, name, description, structureId,
+			targetLayoutFriendlyUrl, contentField);
 	}
 
 	protected void validate(
-			long groupId, String name, String description, String structureId,
-			String targetLayoutFriendlyUrl, String contentField)
+			long companyId, long groupId, String name, String description,
+			String structureId, String targetLayoutFriendlyUrl,
+			String contentField)
 		throws PortalException {
 
 		if (Validator.isNull(name)) {
@@ -486,7 +487,10 @@ public class JournalFeedLocalServiceImpl
 			throw new FeedDescriptionException();
 		}
 
-		if (Validator.isNull(targetLayoutFriendlyUrl)) {
+		long plid = PortalUtil.getPlidIdFromFriendlyURL(
+			companyId, targetLayoutFriendlyUrl);
+
+		if (plid <= 0) {
 			throw new FeedTargetLayoutFriendlyUrlException();
 		}
 
