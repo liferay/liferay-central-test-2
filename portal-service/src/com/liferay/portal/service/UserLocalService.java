@@ -250,22 +250,26 @@ public interface UserLocalService {
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId, int begin, int end)
+		long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId, int type, int begin, int end)
+		long userId, int type, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId1, long userId2, int begin, int end)
+		long userId1, long userId2, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId1, long userId2, int type, int begin, int end)
+		long userId1, long userId2, int type, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

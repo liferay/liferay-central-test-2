@@ -991,7 +991,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return searchCount(role.getCompanyId(), null, active, params);
 	}
 
-	public List<User> getSocialUsers(long userId, int begin, int end)
+	public List<User> getSocialUsers(
+			long userId, int begin, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -1002,10 +1003,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		params.put("socialRelation", new Long[] {userId, userId, userId});
 
 		return search(
-			user.getCompanyId(), null, null, params, begin, end, null);
+			user.getCompanyId(), null, null, params, begin, end, obc);
 	}
 
-	public List<User> getSocialUsers(long userId, int type, int begin, int end)
+	public List<User> getSocialUsers(
+			long userId, int type, int begin, int end, OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		User user = userPersistence.findByPrimaryKey(userId);
@@ -1024,11 +1026,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		return search(
-			user.getCompanyId(), null, null, params, begin, end, null);
+			user.getCompanyId(), null, null, params, begin, end, obc);
 	}
 
 	public List<User> getSocialUsers(
-			long userId1, long userId2, int begin, int end)
+			long userId1, long userId2, int begin, int end,
+			OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		User user1 = userPersistence.findByPrimaryKey(userId1);
@@ -1042,11 +1045,12 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				userId1, userId1, userId1, userId2, userId2, userId2});
 
 		return search(
-			user1.getCompanyId(), null, null, params, begin, end, null);
+			user1.getCompanyId(), null, null, params, begin, end, obc);
 	}
 
 	public List<User> getSocialUsers(
-			long userId1, long userId2, int type, int begin, int end)
+			long userId1, long userId2, int type, int begin, int end,
+			OrderByComparator obc)
 		throws PortalException, SystemException {
 
 		User user1 = userPersistence.findByPrimaryKey(userId1);
@@ -1061,7 +1065,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 				new Long(type), new Long(type)});
 
 		return search(
-			user1.getCompanyId(), null, null, params, begin, end, null);
+			user1.getCompanyId(), null, null, params, begin, end, obc);
 	}
 
 	public int getSocialUsersCount(long userId)

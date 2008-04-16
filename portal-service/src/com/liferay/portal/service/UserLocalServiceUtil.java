@@ -441,40 +441,44 @@ public class UserLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId, int begin, int end)
+		long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.getSocialUsers(userId, begin, end);
+		return userLocalService.getSocialUsers(userId, begin, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId, int type, int begin, int end)
+		long userId, int type, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.getSocialUsers(userId, type, begin, end);
+		return userLocalService.getSocialUsers(userId, type, begin, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId1, long userId2, int begin, int end)
+		long userId1, long userId2, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
-		return userLocalService.getSocialUsers(userId1, userId2, begin, end);
+		return userLocalService.getSocialUsers(userId1, userId2, begin, end, obc);
 	}
 
 	public static java.util.List<com.liferay.portal.model.User> getSocialUsers(
-		long userId1, long userId2, int type, int begin, int end)
+		long userId1, long userId2, int type, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		UserLocalService userLocalService = UserLocalServiceFactory.getService();
 
 		return userLocalService.getSocialUsers(userId1, userId2, type, begin,
-			end);
+			end, obc);
 	}
 
 	public static int getSocialUsersCount(long userId)
