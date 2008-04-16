@@ -841,8 +841,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		Layout layout = layoutPersistence.fetchByG_P_F(
 			groupId, privateLayout, friendlyURL);
 
-		if (layout == null &&
-				friendlyURL.startsWith(StringPool.SLASH)) {
+		if ((layout == null) &&
+			(friendlyURL.startsWith(StringPool.SLASH))) {
+
 			long layoutId = GetterUtil.getLong(friendlyURL.substring(1));
 
 			layout = layoutPersistence.fetchByG_P_L(
