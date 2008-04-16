@@ -579,12 +579,13 @@ public class ServiceBuilder {
 					table = ejbName;
 
 					if (_badTableNames.contains(ejbName)) {
-						table += "_";
+						table += StringPool.UNDERLINE;
 					}
-				}
 
-				if (_autoNamespaceTables) {
-					table = _portletShortName + "_" + table;
+					if (_autoNamespaceTables) {
+						table =
+							_portletShortName + StringPool.UNDERLINE + ejbName;
+					}
 				}
 
 				boolean uuid = GetterUtil.getBoolean(
@@ -646,7 +647,7 @@ public class ServiceBuilder {
 						columnDBName = columnName;
 
 						if (_badColumnNames.contains(columnName)) {
-							columnDBName += "_";
+							columnDBName += StringPool.UNDERLINE;
 						}
 					}
 
@@ -2209,7 +2210,7 @@ public class ServiceBuilder {
 				serviceMapping = StringUtil.replace(
 					serviceMapping, ".service.", ".service.spring.");
 				serviceMapping = StringUtil.replace(
-					serviceMapping, ".", "_");
+					serviceMapping, StringPool.PERIOD, StringPool.UNDERLINE);
 
 				Map<String, Object> context = _getContext();
 
