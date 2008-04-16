@@ -70,6 +70,14 @@ if (selGroup.isStagingGroup()) {
 
 long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
 
+Layout selLayout = null;
+
+try {
+	selLayout = LayoutLocalServiceUtil.getLayout(selPlid);
+}
+catch (NoSuchLayoutException nsle) {
+}
+
 long[] selectedPlids = new long[0];
 
 if (selPlid > 0) {

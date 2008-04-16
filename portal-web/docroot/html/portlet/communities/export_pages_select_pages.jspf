@@ -36,7 +36,7 @@
 			<label for="<portlet:namespace />scope_selected_pages"><liferay-ui:message key="selected-pages" /></label>
 		</c:when>
 		<c:otherwise>
-			<input <%= (results.size() == 0) ? "checked":"" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
+			<input <%= (results.size() == 0) ? "checked":"" %> <%= (selLayout != null) ? "disabled" : "" %> id="<portlet:namespace />scope_all_pages" name="<portlet:namespace />scope" type="radio" value="all-pages" onClick="Liferay.LayoutExporter.all({pane: '#<portlet:namespace />pane', obj: this, publish: <%= publish %>});">
 
 			<label for="<portlet:namespace />scope_all_pages"><liferay-ui:message key="all-pages" /></label>
 
@@ -51,7 +51,7 @@
 	</c:choose>
 </fieldset>
 
-<div id="<portlet:namespace />pane" style="border: 1px solid #CCC; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto;">
+<div id="<portlet:namespace />pane" style="border-color: #CCC; border-style: solid; border-width: 0px 1px 1px 1px; <%= (results.size() == 0) ? "display: none;" : "" %> height: 380px; overflow: auto;">
 	<c:choose>
 		<c:when test="<%= !publish %>">
 			<div id="<portlet:namespace />select-tree-output" style="margin: 4px;"></div>

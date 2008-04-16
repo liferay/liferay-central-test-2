@@ -26,7 +26,16 @@
 List portletsList = new ArrayList();
 Set portletIdsSet = new HashSet();
 
-Iterator itr1 = LayoutLocalServiceUtil.getLayouts(selGroup.getGroupId(), privateLayout).iterator();
+List exportLayouts = new ArrayList();
+
+if (selLayout != null) {
+	exportLayouts.add(selLayout);
+}
+else {
+	exportLayouts = LayoutLocalServiceUtil.getLayouts(selGroup.getGroupId(), privateLayout);
+}
+
+Iterator itr1 = exportLayouts.iterator();
 
 while (itr1.hasNext()) {
 	Layout curLayout = (Layout)itr1.next();
@@ -66,6 +75,7 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 	}
 </script>
 
+<div style="border: 1px solid #CCC; height: 445px; overflow: auto;">
 <ul class="gamma lfr-component">
 	<li class="tree-item" <%= (proposalId > 0) ? "style=\"display: none;\"" : "" %>>
 		<input checked disabled="disabled" type="checkbox" />
@@ -178,5 +188,6 @@ Collections.sort(portletsList, new PortletTitleComparator(application, locale));
 	</li>
 
 </ul>
+</div>
 
 <%@ include file="/html/portlet/communities/render_controls.jspf" %>
