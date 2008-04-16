@@ -352,7 +352,6 @@ is a String value.
 -->
 <!ATTLIST finder-column
 	name CDATA #REQUIRED
-	db-name CDATA #IMPLIED
 	case-sensitive CDATA #IMPLIED
 	comparator CDATA #IMPLIED
 >

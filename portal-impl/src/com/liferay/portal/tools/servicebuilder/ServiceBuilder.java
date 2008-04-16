@@ -813,17 +813,6 @@ public class ServiceBuilder {
 						String finderColName =
 							finderColEl.attributeValue("name");
 
-						String finderColDBName =
-							finderColEl.attributeValue("db-name");
-
-						if (Validator.isNull(finderColDBName)) {
-							finderColDBName = finderColName;
-
-							if (_badColumnNames.contains(finderColName)) {
-								finderColDBName += "_";
-							}
-						}
-
 						boolean finderColCaseSensitive = GetterUtil.getBoolean(
 							finderColEl.attributeValue("case-sensitive"),
 							true);
@@ -836,7 +825,6 @@ public class ServiceBuilder {
 
 						col = (EntityColumn)col.clone();
 
-						col.setDBName(finderColDBName);
 						col.setCaseSensitive(finderColCaseSensitive);
 						col.setComparator(finderColComparator);
 
