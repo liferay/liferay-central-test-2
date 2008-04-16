@@ -40,6 +40,10 @@ public class WeatherWebCacheItem implements WebCacheItem {
 
 	public WeatherWebCacheItem(String zip) {
 		_zip = zip;
+
+		if (_zip.equals("Frankfurt/Main")) {
+			_zip = "Frankfurt, Germany";
+		}
 	}
 
 	public Object convert(String key) throws WebCacheException {
@@ -47,23 +51,21 @@ public class WeatherWebCacheItem implements WebCacheItem {
 
 		try {
 			String text = HtmlUtil.stripComments(HttpUtil.URLtoString(
-				"http://weather.yahoo.com/search/weather2?p=" +
+				"http://www.google.com/ig/api?weather=" +
 					HttpUtil.encodeURL(_zip)));
 
-			int x = text.indexOf("forecast-temp");
+			int x = text.indexOf("temp_f data");
 
-			x = text.indexOf("h3>", x) + 3;
+			x = text.indexOf("\"", x) + 1;
 
-			int y = text.indexOf("&#176;", x);
+			int y = text.indexOf("\"", x);
 
 			float temperature = GetterUtil.getFloat(text.substring(x, y));
 
-			x = text.indexOf("background:url(", x);
-			x = text.indexOf("http://", x);
+			x = text.indexOf("/images", x);
+			y = text.indexOf("\"", x);
 
-			y = text.indexOf(".png", x) - 1;
-
-			String iconURL = text.substring(x, y) + "s.png";
+			String iconURL = "http://www.google.com" + text.substring(x, y);
 
 			weather = new Weather(_zip, iconURL, temperature);
 		}
