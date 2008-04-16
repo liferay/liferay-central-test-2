@@ -566,10 +566,11 @@ public class ResourceActionsUtil {
 		// This check can never return an empty list. If the list is empty, it
 		// means that the portlet does not have an explicit resource-actions
 		// configuration file and should therefore be handled as if it has
-		// defaults of CONFIGURATION and VIEW.
+		// defaults of CONFIGURATION, PREFERENCES and VIEW.
 
 		if (actions.size() < 1) {
 			actions.add("CONFIGURATION");
+			actions.add("PREFERENCES");
 			actions.add("VIEW");
 		}
 
