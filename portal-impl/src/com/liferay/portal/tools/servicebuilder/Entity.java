@@ -36,6 +36,13 @@ import java.util.List;
  */
 public class Entity {
 
+	public static final String DEFAULT_DATA_SOURCE = "liferayDataSource";
+
+	public static final String DEFAULT_SESSION_FACTORY =
+		"liferaySessionFactory";
+
+	public static final String DEFAULT_TX_MANAGER = "liferayTransactionManager";
+
 	public static EntityColumn getColumn(
 		String name, List<EntityColumn> columnList) {
 
@@ -74,11 +81,10 @@ public class Entity {
 		_remoteService = remoteService;
 		_persistenceClass = persistenceClass;
 		_finderClass = finderClass;
-		_dataSource = GetterUtil.getString(dataSource, "liferayDataSource");
+		_dataSource = GetterUtil.getString(dataSource, DEFAULT_DATA_SOURCE);
 		_sessionFactory = GetterUtil.getString(
-			sessionFactory, "liferaySessionFactory");
-		_txManager = GetterUtil.getString(
-			txManager, "liferayTransactionManager");
+			sessionFactory, DEFAULT_SESSION_FACTORY);
+		_txManager = GetterUtil.getString(txManager, DEFAULT_TX_MANAGER);
 		_pkList = pkList;
 		_regularColList = regularColList;
 		_collectionList = collectionList;
@@ -163,12 +169,39 @@ public class Entity {
 		return _dataSource;
 	}
 
+	public boolean isDefaultDataSource() {
+		if (_dataSource.equals(DEFAULT_DATA_SOURCE)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public String getSessionFactory() {
 		return _sessionFactory;
 	}
 
+	public boolean isDefaultSessionFactory() {
+		if (_sessionFactory.equals(DEFAULT_SESSION_FACTORY)) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
 	public String getTXManager() {
 		return _txManager;
+	}
+
+	public boolean isDefaultTXManager() {
+		if (_txManager.equals(DEFAULT_TX_MANAGER)) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	public String getPKClassName() {

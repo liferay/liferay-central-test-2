@@ -2672,6 +2672,10 @@ public class ServiceBuilder {
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = _ejbList.get(i);
 
+			if (!entity.isDefaultDataSource()) {
+				continue;
+			}
+
 			List<EntityFinder> finderList = entity.getFinderList();
 
 			for (int j = 0; j < finderList.size(); j++) {
@@ -2874,6 +2878,10 @@ public class ServiceBuilder {
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = _ejbList.get(i);
 
+			if (!entity.isDefaultDataSource()) {
+				continue;
+			}
+
 			List<EntityColumn> columnList = entity.getColumnList();
 
 			for (int j = 0; j < columnList.size(); j++) {
@@ -2929,6 +2937,10 @@ public class ServiceBuilder {
 
 		for (int i = 0; i < _ejbList.size(); i++) {
 			Entity entity = _ejbList.get(i);
+
+			if (!entity.isDefaultDataSource()) {
+				continue;
+			}
 
 			String createTableSQL = _getCreateTableSQL(entity);
 
