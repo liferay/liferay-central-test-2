@@ -195,6 +195,21 @@ public class LayoutTypePortletImpl
 		return getLayoutTemplate().getColumns().size();
 	}
 
+	public List<Portlet> getAllPortlets() throws SystemException {
+		List<Portlet> portlets = new ArrayList<Portlet>();
+
+		List<String> columns = getColumns();
+
+		for (int i = 0; i < columns.size(); i++) {
+			String columnId = columns.get(i);
+
+			portlets.addAll(getAllPortlets(columnId));
+
+		}
+
+		return portlets;
+	}
+
 	public List<Portlet> getAllPortlets(String columnId)
 		throws SystemException {
 

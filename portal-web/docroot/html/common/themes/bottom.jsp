@@ -137,7 +137,7 @@
 List portlets = null;
 
 if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
-	portlets = layoutTypePortlet.getPortlets();
+	portlets = layoutTypePortlet.getAllPortlets();
 }
 %>
 

@@ -45,6 +45,8 @@ public interface LayoutTypePortlet extends LayoutType {
 
 	public int getNumOfColumns();
 
+	public List<Portlet> getAllPortlets() throws SystemException;
+
 	public List<Portlet> getAllPortlets(String columnId) throws SystemException;
 
 	public List<Portlet> addStaticPortlets(
