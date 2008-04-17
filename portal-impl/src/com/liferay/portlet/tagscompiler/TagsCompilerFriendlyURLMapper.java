@@ -24,6 +24,7 @@ package com.liferay.portlet.tagscompiler;
 
 import com.liferay.portal.kernel.portlet.BaseFriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PortletKeys;
@@ -73,20 +74,20 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 			friendlyURLPath.substring(x + 1, y), StringPool.SLASH);
 
 		if (entries.length > 0) {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
 			for (int i = 0; i < entries.length; i++) {
 				String entry = StringUtil.replace(
 					entries[i], StringPool.PLUS, StringPool.SPACE);
 
 				if (i != 0) {
-					sb.append(StringPool.COMMA);
+					sm.append(StringPool.COMMA);
 				}
 
-				sb.append(entry);
+				sm.append(entry);
 			}
 
-			addParam(params, "entries", sb.toString());
+			addParam(params, "entries", sm.toString());
 		}
 	}
 

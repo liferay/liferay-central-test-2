@@ -23,6 +23,7 @@
 package com.liferay.taglib.faces.converter;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.util.StringMaker;
 
 import java.util.Locale;
 
@@ -70,8 +71,8 @@ public class PhoneNumberConverter implements Converter, StateHolder {
 		FacesContext facesContext, UIComponent uiComponent, String value) {
 
 		if (value != null) {
-			StringBuffer integerChars = new StringBuffer();
-			StringBuffer invalidChars = new StringBuffer();
+			StringMaker integerChars = new StringMaker();
+			StringMaker invalidChars = new StringMaker();
 
 			for (int i = 0; i < value.length(); i++) {
 				char curChar = value.charAt(i);
@@ -104,7 +105,7 @@ public class PhoneNumberConverter implements Converter, StateHolder {
 				throw new ConverterException(facesMessage);
 			}
 			else if ((integerChars.length() == 10)) {
-				StringBuffer unitedStatesPhoneNumber = new StringBuffer();
+				StringMaker unitedStatesPhoneNumber = new StringMaker();
 
 				int integerDigitIndex = 0;
 

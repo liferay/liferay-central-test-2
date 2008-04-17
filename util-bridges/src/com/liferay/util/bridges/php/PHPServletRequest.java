@@ -24,6 +24,7 @@ package com.liferay.util.bridges.php;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.util.Enumeration;
@@ -56,14 +57,14 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 		_renderRes = renderRes;
 		_portletConfig = portletConfig;
 
-		StringBuffer sb = new StringBuffer();
+		StringMaker sm = new StringMaker();
 
 		int pos = phpURI.indexOf(StringPool.QUESTION);
 
 		if (pos != -1) {
 			_path = phpURI.substring(0, pos);
 
-			sb.append(phpURI.substring(pos + 1));
+			sm.append(phpURI.substring(pos + 1));
 		}
 		else {
 			_path = phpURI;
@@ -72,17 +73,17 @@ public class PHPServletRequest extends HttpServletRequestWrapper {
 		if (GetterUtil.getBoolean(
 				portletConfig.getInitParameter("add-portlet-params"), true)) {
 
-			sb.append(StringPool.AMPERSAND);
-			sb.append("portlet_namespace");
-			sb.append(StringPool.EQUAL);
-			sb.append(_renderRes.getNamespace());
-			sb.append(StringPool.AMPERSAND);
-			sb.append("portlet_name");
-			sb.append(StringPool.EQUAL);
-			sb.append(_portletConfig.getPortletName());
+			sm.append(StringPool.AMPERSAND);
+			sm.append("portlet_namespace");
+			sm.append(StringPool.EQUAL);
+			sm.append(_renderRes.getNamespace());
+			sm.append(StringPool.AMPERSAND);
+			sm.append("portlet_name");
+			sm.append(StringPool.EQUAL);
+			sm.append(_portletConfig.getPortletName());
 		}
 
-		_queryString = sb.toString();
+		_queryString = sm.toString();
 
 		req.setAttribute(
 			JavaConstants.JAVAX_SERVLET_INCLUDE_QUERY_STRING, getQueryString());

@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.webform.util;
 
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 
 import java.io.BufferedReader;
@@ -52,12 +53,12 @@ public class WebFormUtil {
 		s = s.trim();
 
 		if (!s.endsWith(delimiter)) {
-			StringBuffer sb = new StringBuffer();
+			StringMaker sm = new StringMaker();
 
-			sb.append(s);
-			sb.append(delimiter);
+			sm.append(s);
+			sm.append(delimiter);
 
-			s = sb.toString();
+			s = sm.toString();
 		}
 
 		if (s.equals(delimiter)) {
