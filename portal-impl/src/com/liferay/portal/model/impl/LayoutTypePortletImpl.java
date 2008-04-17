@@ -91,6 +91,13 @@ public class LayoutTypePortletImpl
 
 	public static final String MODE_PRINT = "mode-print";
 
+	public static final String STATIC_PORTLET_COMMUNITY_SELECTOR = "community";
+
+	public static final String STATIC_PORTLET_ORGANIZATION_SELECTOR =
+		"organization";
+
+	public static final String STATIC_PORTLET_USER_SELECTOR = "user";
+
 	public static String getFullInstanceSeparator() {
 		String instanceId = PwdGenerator.getPassword(
 			PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3, 4);
@@ -986,20 +993,16 @@ public class LayoutTypePortletImpl
 		Group group = layout.getGroup();
 
 		if (group.isUser()) {
-			selector1 = "user";
+			selector1 = STATIC_PORTLET_USER_SELECTOR;
 		}
 		else if (group.isCommunity()) {
-			selector1 = "community";
+			selector1 = STATIC_PORTLET_COMMUNITY_SELECTOR;
 		}
 		else if (group.isOrganization()) {
-			selector1 = "organization";
+			selector1 = STATIC_PORTLET_ORGANIZATION_SELECTOR;
 		}
 
-		String selector2 = StringPool.BLANK;
-
-		if (layout.isFirstParent()) {
-			selector2 = "firstLayout";
-		}
+		String selector2 = layout.getFriendlyURL();
 
 		return PropsUtil.getComponentProperties().getStringArray(
 			position, Filter.by(selector1, selector2));
