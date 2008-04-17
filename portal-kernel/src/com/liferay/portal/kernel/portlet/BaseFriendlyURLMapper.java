@@ -43,17 +43,6 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		return _CHECK_MAPPING_WITH_PREFIX;
 	}
 
-	protected String getNamespace() {
-		try {
-			return _getPortletNamespace(getPortletId());
-		}
-		catch (Exception e) {
-			_log.error(e, e);
-
-			return getPortletId();
-		}
-	}
-
 	protected void addParam(
 		Map<String, String[]> params, String name, boolean value) {
 
@@ -102,6 +91,17 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+		}
+	}
+
+	protected String getNamespace() {
+		try {
+			return _getPortletNamespace(getPortletId());
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			return getPortletId();
 		}
 	}
 

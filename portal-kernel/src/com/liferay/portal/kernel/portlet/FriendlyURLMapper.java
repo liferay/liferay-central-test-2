@@ -34,11 +34,11 @@ import java.util.Map;
  */
 public interface FriendlyURLMapper {
 
+	public String buildPath(LiferayPortletURL portletURL);
+
 	public String getMapping();
 
 	public boolean isCheckMappingWithPrefix();
-
-	public String buildPath(LiferayPortletURL portletURL);
 
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> params);

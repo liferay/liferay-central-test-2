@@ -44,14 +44,6 @@ import javax.portlet.PortletRequest;
  */
 public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 
-	public String getMapping() {
-		return _MAPPING;
-	}
-
-	public String getPortletId() {
-		return _PORTLET_ID;
-	}
-
 	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
 
@@ -79,6 +71,14 @@ public class JournalFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		return friendlyURLPath;
+	}
+
+	public String getMapping() {
+		return _MAPPING;
+	}
+
+	public String getPortletId() {
+		return _PORTLET_ID;
 	}
 
 	public void populateParams(

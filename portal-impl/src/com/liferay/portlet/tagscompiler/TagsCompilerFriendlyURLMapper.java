@@ -42,6 +42,10 @@ import javax.portlet.WindowState;
  */
 public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 
+	public String buildPath(LiferayPortletURL portletURL) {
+		return null;
+	}
+
 	public String getMapping() {
 		return _MAPPING;
 	}
@@ -52,10 +56,6 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 	public boolean isCheckMappingWithPrefix() {
 		return _CHECK_MAPPING_WITH_PREFIX;
-	}
-
-	public String buildPath(LiferayPortletURL portletURL) {
-		return null;
 	}
 
 	public void populateParams(

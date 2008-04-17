@@ -44,14 +44,6 @@ import javax.portlet.WindowState;
  */
 public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 
-	public String getMapping() {
-		return _MAPPING;
-	}
-
-	public String getPortletId() {
-		return _PORTLET_ID;
-	}
-
 	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
 
@@ -105,6 +97,14 @@ public class WikiFriendlyURLMapper extends BaseFriendlyURLMapper {
 		}
 
 		return friendlyURLPath;
+	}
+
+	public String getMapping() {
+		return _MAPPING;
+	}
+
+	public String getPortletId() {
+		return _PORTLET_ID;
 	}
 
 	public void populateParams(

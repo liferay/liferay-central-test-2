@@ -43,10 +43,6 @@ import javax.portlet.WindowState;
  */
 public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 
-	public String getMapping() {
-		return _MAPPING;
-	}
-
 	public String buildPath(LiferayPortletURL portletURL) {
 		String friendlyURLPath = null;
 
@@ -88,6 +84,10 @@ public class JournalContentFriendlyURLMapper implements FriendlyURLMapper {
 		}
 
 		return friendlyURLPath;
+	}
+
+	public String getMapping() {
+		return _MAPPING;
 	}
 
 	public void populateParams(
