@@ -30,6 +30,7 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
+import com.liferay.portal.tools.servicebuilder.Entity;
 import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.upgrade.util.DefaultUpgradeTableImpl;
 import com.liferay.portal.upgrade.util.UpgradeTable;
@@ -260,10 +261,16 @@ public class ServiceComponentLocalServiceImpl
 			Field tableNameField = modelClass.getField("TABLE_NAME");
 			Field tableColumnsField = modelClass.getField("TABLE_COLUMNS");
 			Field tableSQLCreateField = modelClass.getField("TABLE_SQL_CREATE");
+			Field dataSourceField = modelClass.getField("DATA_SOURCE");
 
 			String tableName = (String)tableNameField.get(null);
 			Object[][] tableColumns = (Object[][])tableColumnsField.get(null);
 			String tableSQLCreate = (String)tableSQLCreateField.get(null);
+			String dataSource = (String)dataSourceField.get(null);
+
+			if (!dataSource.equals(Entity.DEFAULT_DATA_SOURCE)) {
+				continue;
+			}
 
 			UpgradeTable upgradeTable = new DefaultUpgradeTableImpl(
 				tableName, tableColumns);
