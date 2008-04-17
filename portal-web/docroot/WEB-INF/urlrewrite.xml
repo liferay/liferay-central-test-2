@@ -6,4 +6,8 @@
 		<from>^/c/journal/view_article_content\?groupId=14&amp;articleId=155291$</from>
 		<to type="permanent-redirect">/web/guest/home/journal/rss/14/news</to>
 	</rule>
+	<rule>
+		<from>^/web/guest/community/forums/message_boards(.*)$</from>
+		<to type="permanent-redirect">/web/guest/community/forums/-/message_boards$1</to>
+	</rule>
 </urlrewrite>

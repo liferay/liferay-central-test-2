@@ -1183,9 +1183,17 @@ public class PortalImpl implements Portal {
 				url += StringPool.SLASH;
 			}
 
-			int pos = url.indexOf(
-				StringPool.SLASH + friendlyURLMapper.getMapping() +
-					StringPool.SLASH);
+			int pos = -1;
+
+			if (friendlyURLMapper.isCheckMappingWithPrefix()) {
+				pos = url.indexOf(
+					"/-/" + friendlyURLMapper.getMapping() + StringPool.SLASH);
+			}
+			else {
+				pos = url.indexOf(
+					StringPool.SLASH + friendlyURLMapper.getMapping() +
+						StringPool.SLASH);
+			}
 
 			if (pos != -1) {
 				friendlyURL = url.substring(0, pos);
@@ -1214,8 +1222,14 @@ public class PortalImpl implements Portal {
 						"p_p_state", WindowState.MAXIMIZED.toString());
 				}*/
 
-				friendlyURLMapper.populateParams(
-					url.substring(pos), actualParams);
+				if (friendlyURLMapper.isCheckMappingWithPrefix()) {
+					friendlyURLMapper.populateParams(
+						url.substring(pos + 2), actualParams);
+				}
+				else {
+					friendlyURLMapper.populateParams(
+						url.substring(pos), actualParams);
+				}
 
 				queryString =
 					StringPool.AMPERSAND +

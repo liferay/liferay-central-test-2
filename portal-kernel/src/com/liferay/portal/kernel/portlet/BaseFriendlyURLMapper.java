@@ -39,6 +39,10 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 
 	public abstract String getPortletId();
 
+	public boolean isCheckMappingWithPrefix() {
+		return _CHECK_MAPPING_WITH_PREFIX;
+	}
+
 	protected String getNamespace() {
 		try {
 			return _getPortletNamespace(getPortletId());
@@ -126,6 +130,8 @@ public abstract class BaseFriendlyURLMapper implements FriendlyURLMapper {
 			return false;
 		}
 	}
+
+	private static final boolean _CHECK_MAPPING_WITH_PREFIX = true;
 
 	private static final String _CLASS = "com.liferay.portal.util.PortalUtil";
 

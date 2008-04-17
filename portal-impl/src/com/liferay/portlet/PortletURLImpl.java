@@ -620,6 +620,7 @@ public class PortletURLImpl
 			String friendlyURLPath = getPortletFriendlyURLPath();
 
 			if (Validator.isNotNull(friendlyURLPath)) {
+				sm.append("/-");
 				sm.append(friendlyURLPath);
 
 				if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {

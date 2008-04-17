@@ -36,6 +36,8 @@ public interface FriendlyURLMapper {
 
 	public String getMapping();
 
+	public boolean isCheckMappingWithPrefix();
+
 	public String buildPath(LiferayPortletURL portletURL);
 
 	public void populateParams(

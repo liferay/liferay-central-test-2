@@ -50,6 +50,10 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 		return _PORTLET_ID;
 	}
 
+	public boolean isCheckMappingWithPrefix() {
+		return _CHECK_MAPPING_WITH_PREFIX;
+	}
+
 	public String buildPath(LiferayPortletURL portletURL) {
 		return null;
 	}
@@ -85,6 +89,8 @@ public class TagsCompilerFriendlyURLMapper extends BaseFriendlyURLMapper {
 			addParam(params, "entries", sb.toString());
 		}
 	}
+
+	private static final boolean _CHECK_MAPPING_WITH_PREFIX = false;
 
 	private static final String _MAPPING = "tags";
 
