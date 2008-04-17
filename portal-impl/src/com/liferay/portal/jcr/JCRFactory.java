@@ -46,6 +46,8 @@ public interface JCRFactory {
 
 	public void initialize() throws RepositoryException;
 
+	public void prepare() throws RepositoryException;
+
 	public void shutdown() throws RepositoryException;
 
 }

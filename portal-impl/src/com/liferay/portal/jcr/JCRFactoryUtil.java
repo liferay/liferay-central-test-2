@@ -61,6 +61,10 @@ public class JCRFactoryUtil {
 		getJCRFactory().initialize();
 	}
 
+	public static void prepare() throws RepositoryException {
+		getJCRFactory().prepare();
+	}
+
 	public static void shutdown() throws RepositoryException {
 		getJCRFactory().shutdown();
 	}

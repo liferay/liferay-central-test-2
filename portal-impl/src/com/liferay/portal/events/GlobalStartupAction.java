@@ -165,6 +165,8 @@ public class GlobalStartupAction extends SimpleAction {
 		// JCR
 
 		try {
+			JCRFactoryUtil.prepare();
+
 			if (GetterUtil.getBoolean(PropsUtil.get(
 					PropsUtil.JCR_INITIALIZE_ON_STARTUP))) {
 

@@ -55,7 +55,7 @@ public class ServiceTestSuite extends TestSuite {
 		FileUtil.deltree(PropsValues.RESOURCE_REPOSITORIES_ROOT);
 
 		try {
-			JCRFactoryUtil.initialize();
+			JCRFactoryUtil.prepare();
 		}
 		catch (Exception e) {
 			e.printStackTrace();
