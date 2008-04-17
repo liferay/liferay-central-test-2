@@ -547,7 +547,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		}
 	}
 
-	public boolean hasUserPermissionImpl(
+	protected boolean hasUserPermissionImpl(
 			long groupId, String name, String primKey, String actionId,
 			boolean checkAdmin)
 		throws Exception {
