@@ -41,8 +41,6 @@ List resultRows = searchContainer.getResultRows();
 for (int i = 0; i < results.size(); i++) {
 	CalEvent event = (CalEvent)results.get(i);
 
-	String unescapedType = event.getType();
-
 	event = event.toEscapedModel();
 
 	ResultRow row = new ResultRow(event, event.getEventId(), i);
@@ -74,7 +72,7 @@ for (int i = 0; i < results.size(); i++) {
 	// Title and type
 
 	row.addText(event.getTitle(), rowURL);
-	row.addText(LanguageUtil.get(pageContext, unescapedType), rowURL);
+	row.addText(LanguageUtil.get(pageContext, HtmlUtil.unescape(event.getType())), rowURL);
 
 	// Action
 
