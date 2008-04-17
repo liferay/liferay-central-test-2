@@ -20,42 +20,45 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.spring.util;
+package com.liferay.portal.spring.context;
 
-import com.liferay.portal.util.PropsUtil;
-import com.liferay.util.spring.context.LazyClassPathApplicationContext;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.spring.util.SpringUtil;
+
+import javax.servlet.ServletContext;
+import javax.servlet.ServletContextEvent;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
- * <a href="SpringUtil.java.html"><b><i>View Source</i></b></a>
- *
- * <p>
- * In most cases, SpringUtil.setContext() would have been called by
- * com.liferay.portal.spring.context.ContextLoaderListener, configured in
- * web.xml for the web application.  However, there will be times in which
- * SpringUtil will be called in a non-web application and, therefore, require
- * manual instantiation of the application context.
- * </p>
+ * <a href="ContextLoaderListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
  */
-public class SpringUtil {
+public class ContextLoaderListener extends
+		org.springframework.web.context.ContextLoaderListener {
 
-	public static ApplicationContext getContext() {
-		if (_ctx == null) {
-			_ctx = new LazyClassPathApplicationContext(
-				PropsUtil.getArray(PropsUtil.SPRING_CONFIGS));
+	public void contextInitialized(ServletContextEvent event) {
+		super.contextInitialized(event);
+
+		// Preinitialize Spring beans. See LEP-4734.
+
+		ServletContext sc = event.getServletContext();
+
+		ApplicationContext context =
+			WebApplicationContextUtils.getWebApplicationContext(sc);
+
+		SpringUtil.setContext(context);
+
+		String[] beanDefinitionNames = context.getBeanDefinitionNames();
+
+		for (int i = 0; i < beanDefinitionNames.length; i++) {
+			String beanDefinitionName = beanDefinitionNames[i];
+
+			BeanLocatorUtil.locate(beanDefinitionName, false);
 		}
-
-		return _ctx;
 	}
-
-	public static void setContext(ApplicationContext ctx) {
-		_ctx = ctx;
-	}
-
-	private static ApplicationContext _ctx = null;
 
 }

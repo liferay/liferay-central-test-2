@@ -175,13 +175,6 @@ public class InitAction extends SimpleAction {
 
 		Velocity.setExtendedProperties(props);
 
-		try {
-			Velocity.init();
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
 		if (_PRINT_TIME) {
 			System.out.println(
 				"InitAction takes " + stopWatch.getTime() + " ms");
