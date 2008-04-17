@@ -117,8 +117,9 @@ public class Validator {
 	}
 
 	public static boolean isDomain(String domainName) {
-		// See RFC-1034, section 3, and RFC-1123, section 2.1, and
-		// RFC-952, section B. Lexical grammar
+
+		// See RFC-1034 (section 3), RFC-1123 (section 2.1), and RFC-952
+		// (section B. Lexical grammar)
 
 		if (isNull(domainName)) {
 			return false;
@@ -128,25 +129,26 @@ public class Validator {
 			return false;
 		}
 
-		String[] domainParts = StringUtil.split(domainName, StringPool.PERIOD);
+		String[] domainNameArray = StringUtil.split(
+			domainName, StringPool.PERIOD);
 
-		for (int i = 0; i < domainParts.length; i++) {
-			char[] c = domainParts[i].toCharArray();
+		for (int i = 0; i < domainNameArray.length; i++) {
+			char[] c = domainNameArray[i].toCharArray();
 
 			for (int j = 0; j < c.length; j++) {
 				if ((j == 0) &&
-					(c[j] == '-')) {
+					(c[j] == CharPool.DASH)) {
 
 					return false;
 				}
 				else if ((j == (c.length - 1)) &&
-					(c[j] == '-')) {
+					(c[j] == CharPool.DASH)) {
 
 					return false;
 				}
 				else if ((!isChar(c[j])) &&
 					(!isDigit(c[j])) &&
-					(c[j] != '-')) {
+					(c[j] != CharPool.DASH)) {
 
 					return false;
 				}
