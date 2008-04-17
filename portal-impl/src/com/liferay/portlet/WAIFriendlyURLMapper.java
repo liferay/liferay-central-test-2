@@ -66,6 +66,10 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 		return _MAPPING;
 	}
 
+	public boolean isCheckMappingWithPrefix() {
+		return _CHECK_MAPPING_WITH_PREFIX;
+	}
+
 	public void populateParams(
 		String friendlyURLPath, Map<String, String[]> params) {
 
@@ -113,6 +117,8 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 
 		return false;
 	}
+
+	private static final boolean _CHECK_MAPPING_WITH_PREFIX = true;
 
 	private static final String _MAPPING = "waiapp";
 
