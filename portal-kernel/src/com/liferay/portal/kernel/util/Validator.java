@@ -25,9 +25,6 @@ package com.liferay.portal.kernel.util;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.net.InetAddress;
-import java.net.UnknownHostException;
-
 /**
  * <a href="Validator.java.html"><b><i>View Source</i></b></a>
  *
