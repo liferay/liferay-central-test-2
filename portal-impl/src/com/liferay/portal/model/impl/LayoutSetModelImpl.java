@@ -101,6 +101,9 @@ public class LayoutSetModelImpl extends BaseModelImpl {
 		};
 	public static final String TABLE_SQL_CREATE = "create table LayoutSet (layoutSetId LONG not null primary key,groupId LONG,companyId LONG,privateLayout BOOLEAN,logo BOOLEAN,logoId LONG,themeId VARCHAR(75) null,colorSchemeId VARCHAR(75) null,wapThemeId VARCHAR(75) null,wapColorSchemeId VARCHAR(75) null,css STRING null,pageCount INTEGER,virtualHost VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table LayoutSet";
+	public static final String DATA_SOURCE = "liferayDataSource";
+	public static final String SESSION_FACTORY = "liferaySessionFactory";
+	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.LayoutSet"),
 			true);

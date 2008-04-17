@@ -77,6 +77,9 @@ public class ServiceComponentModelImpl extends BaseModelImpl {
 		};
 	public static final String TABLE_SQL_CREATE = "create table ServiceComponent (serviceComponentId LONG not null primary key,buildNamespace VARCHAR(75) null,buildNumber LONG,buildDate LONG,data_ TEXT null)";
 	public static final String TABLE_SQL_DROP = "drop table ServiceComponent";
+	public static final String DATA_SOURCE = "liferayDataSource";
+	public static final String SESSION_FACTORY = "liferaySessionFactory";
+	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.ServiceComponent"),
 			true);

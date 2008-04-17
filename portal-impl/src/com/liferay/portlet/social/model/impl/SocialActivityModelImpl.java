@@ -103,6 +103,9 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		};
 	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,classNameId LONG,classPK LONG,type_ VARCHAR(75) null,extraData TEXT null,receiverUserId LONG,receiverUserName VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table SocialActivity";
+	public static final String DATA_SOURCE = "liferayDataSource";
+	public static final String SESSION_FACTORY = "liferaySessionFactory";
+	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialActivity"),
 			true);

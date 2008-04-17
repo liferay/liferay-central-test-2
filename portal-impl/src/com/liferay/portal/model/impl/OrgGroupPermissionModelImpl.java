@@ -71,6 +71,9 @@ public class OrgGroupPermissionModelImpl extends BaseModelImpl {
 		};
 	public static final String TABLE_SQL_CREATE = "create table OrgGroupPermission (organizationId LONG not null,groupId LONG not null,permissionId LONG not null,primary key (organizationId, groupId, permissionId))";
 	public static final String TABLE_SQL_DROP = "drop table OrgGroupPermission";
+	public static final String DATA_SOURCE = "liferayDataSource";
+	public static final String SESSION_FACTORY = "liferaySessionFactory";
+	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portal.model.OrgGroupPermission"),
 			true);

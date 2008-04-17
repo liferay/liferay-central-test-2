@@ -86,6 +86,9 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 		};
 	public static final String TABLE_SQL_CREATE = "create table ExpandoValue (valueId LONG not null primary key,tableId LONG,columnId LONG,rowId_ LONG,classNameId LONG,classPK LONG,data_ VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoValue";
+	public static final String DATA_SOURCE = "liferayDataSource";
+	public static final String SESSION_FACTORY = "liferaySessionFactory";
+	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.expando.model.ExpandoValue"),
 			true);

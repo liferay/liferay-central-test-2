@@ -86,6 +86,9 @@ public class SocialRelationModelImpl extends BaseModelImpl {
 		};
 	public static final String TABLE_SQL_CREATE = "create table SocialRelation (uuid_ VARCHAR(75) null,relationId LONG not null primary key,companyId LONG,createDate DATE null,userId1 LONG,userId2 LONG,type_ INTEGER)";
 	public static final String TABLE_SQL_DROP = "drop table SocialRelation";
+	public static final String DATA_SOURCE = "liferayDataSource";
+	public static final String SESSION_FACTORY = "liferaySessionFactory";
+	public static final String TX_MANAGER = "liferayTransactionManager";
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get(
 				"value.object.finder.cache.enabled.com.liferay.portlet.social.model.SocialRelation"),
 			true);
