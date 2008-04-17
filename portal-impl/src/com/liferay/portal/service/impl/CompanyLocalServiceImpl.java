@@ -650,6 +650,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 
 			throw new CompanyVirtualHostException();
 		}
+		else if (!Validator.isDomain(virtualHost)) {
+			throw new CompanyVirtualHostException();
+		}
 		else {
 			try {
 				Company virtualHostCompany = getCompanyByVirtualHost(
@@ -672,6 +675,9 @@ public class CompanyLocalServiceImpl extends CompanyLocalServiceBaseImpl {
 		}
 
 		if (Validator.isNull(mx)) {
+			throw new CompanyMxException();
+		}
+		else if (!Validator.isDomain(mx)) {
 			throw new CompanyMxException();
 		}
 	}
