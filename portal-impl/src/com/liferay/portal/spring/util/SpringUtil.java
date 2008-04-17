@@ -22,6 +22,9 @@
 
 package com.liferay.portal.spring.util;
 
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.util.spring.context.LazyClassPathApplicationContext;
+
 import org.springframework.context.ApplicationContext;
 
 /**
@@ -33,11 +36,12 @@ import org.springframework.context.ApplicationContext;
 public class SpringUtil {
 
 	public static ApplicationContext getContext() {
-		return _ctx;
-	}
+		if (_ctx == null) {
+			_ctx = new LazyClassPathApplicationContext(
+				PropsUtil.getArray(PropsUtil.SPRING_CONFIGS));
+		}
 
-	public static void setContext(ApplicationContext ctx) {
-		_ctx = ctx;
+		return _ctx;
 	}
 
 	private static ApplicationContext _ctx = null;
