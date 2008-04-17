@@ -53,14 +53,14 @@ public class SampleAppStartupAction extends SimpleAction {
 		try {
 			long companyId = GetterUtil.getLong(ids[0]);
 
-			populateSampleDatabase(companyId);
+			doRun(companyId);
 		}
 		catch (Exception e) {
 			throw new ActionException(e);
 		}
 	}
 
-	protected void populateSampleDatabase(long companyId) throws Exception {
+	protected void doRun(long companyId) throws Exception {
 		try {
 			UserLocalServiceUtil.getUserByScreenName(companyId, "paul");
 
