@@ -65,6 +65,12 @@ public class ${entity.name}ModelImpl extends BaseModelImpl {
 
 	public static final String TABLE_SQL_DROP = "drop table ${entity.table}";
 
+	public static final String DATA_SOURCE = "${entity.dataSource}";
+
+	public static final String SESSION_FACTORY = "${entity.sessionFactory}";
+
+	public static final String TX_MANAGER = "${entity.getTXManager()}";
+
 	public static final boolean CACHE_ENABLED = GetterUtil.getBoolean(PropsUtil.get("value.object.finder.cache.enabled.${packagePath}.model.${entity.name}"), true);
 
 	public static ${entity.name} toModel(${entity.name}Soap soapModel) {
