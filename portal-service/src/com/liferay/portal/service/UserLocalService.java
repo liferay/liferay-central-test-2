@@ -421,6 +421,11 @@ public interface UserLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void unsetRoleUsers(long roleId,
+		java.util.List<com.liferay.portal.model.User> users)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

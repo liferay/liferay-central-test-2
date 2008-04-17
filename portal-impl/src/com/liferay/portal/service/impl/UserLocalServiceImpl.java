@@ -1425,6 +1425,14 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		PermissionCacheUtil.clearCache();
 	}
 
+	public void unsetRoleUsers(long roleId, List<User> users)
+		throws PortalException, SystemException {
+
+		rolePersistence.removeUsers(roleId, users);
+
+		PermissionCacheUtil.clearCache();
+	}
+
 	public void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 

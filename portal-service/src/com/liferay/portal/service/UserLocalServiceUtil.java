@@ -773,6 +773,15 @@ public class UserLocalServiceUtil {
 		userLocalService.unsetRoleUsers(roleId, userIds);
 	}
 
+	public static void unsetRoleUsers(long roleId,
+		java.util.List<com.liferay.portal.model.User> users)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		UserLocalService userLocalService = UserLocalServiceFactory.getService();
+
+		userLocalService.unsetRoleUsers(roleId, users);
+	}
+
 	public static void unsetUserGroupUsers(long userGroupId, long[] userIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
