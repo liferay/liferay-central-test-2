@@ -41,22 +41,19 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
 public class LazyClassPathApplicationContext extends XmlWebApplicationContext {
 
 	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
-		if (_configLocations != null) {
-			reader.setResourceLoader(new DefaultResourceLoader());
+		reader.setResourceLoader(new DefaultResourceLoader());
 
-			for (int i = 0; i < _configLocations.length; i++) {
-				try {
-					reader.loadBeanDefinitions(_configLocations[i]);
-				}
-				catch (Exception e) {
-					_log.warn(e);
-				}
+		String[] configLocations = PropsUtil.getArray(PropsUtil.SPRING_CONFIGS);
+
+		for (int i = 0; i < configLocations.length; i++) {
+			try {
+				reader.loadBeanDefinitions(configLocations[i]);
+			}
+			catch (Exception e) {
+				_log.warn(e);
 			}
 		}
 	}
-
-	private static String[] _configLocations =
-		PropsUtil.getArray(PropsUtil.SPRING_CONFIGS);
 
 	private static Log _log =
 		LogFactory.getLog(LazyClassPathApplicationContext.class);

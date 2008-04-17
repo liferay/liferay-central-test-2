@@ -32,8 +32,8 @@ import org.springframework.context.ApplicationContext;
  *
  * <p>
  * In most cases, SpringUtil.setContext() would have been called by
- * com.liferay.portal.spring.context.ContextLoaderListener, configured in
- * web.xml for the web application.  However, there will be times in which
+ * com.liferay.portal.spring.context.PortalContextLoaderListener, configured in
+ * web.xml for the web application. However, there will be times in which
  * SpringUtil will be called in a non-web application and, therefore, require
  * manual instantiation of the application context.
  * </p>

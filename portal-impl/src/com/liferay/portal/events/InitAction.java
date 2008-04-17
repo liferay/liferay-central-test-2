@@ -36,16 +36,12 @@ import com.liferay.portal.kernel.util.TimeZoneUtil;
 import com.liferay.portal.log.CommonsLogFactoryImpl;
 import com.liferay.portal.security.jaas.PortalConfiguration;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portal.velocity.LiferayResourceLoader;
 import com.liferay.util.SystemProperties;
 import com.liferay.util.log4j.Log4JUtil;
 
 import javax.security.auth.login.Configuration;
 
-import org.apache.commons.collections.ExtendedProperties;
 import org.apache.commons.lang.time.StopWatch;
-import org.apache.velocity.app.Velocity;
-import org.apache.velocity.runtime.RuntimeConstants;
 
 /**
  * <a href="InitAction.java.html"><b><i>View Source</i></b></a>
@@ -139,41 +135,6 @@ public class InitAction extends SimpleAction {
 
 			Configuration.setConfiguration(portalConfig);
 		}
-
-		// Velocity
-
-		LiferayResourceLoader.setListeners(PropsUtil.getArray(
-			PropsUtil.VELOCITY_ENGINE_RESOURCE_LISTENERS));
-
-		ExtendedProperties props = new ExtendedProperties();
-
-		props.setProperty(RuntimeConstants.RESOURCE_LOADER, "servlet");
-
-		props.setProperty(
-			"servlet." + RuntimeConstants.RESOURCE_LOADER + ".class",
-			LiferayResourceLoader.class.getName());
-
-		props.setProperty(
-			RuntimeConstants.RESOURCE_MANAGER_CLASS,
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER));
-
-		props.setProperty(
-			RuntimeConstants.RESOURCE_MANAGER_CACHE_CLASS,
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
-
-		props.setProperty(
-			"velocimacro.library",
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_VELOCIMACRO_LIBRARY));
-
-		props.setProperty(
-			RuntimeConstants.RUNTIME_LOG_LOGSYSTEM_CLASS,
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER));
-
-		props.setProperty(
-			"runtime.log.logsystem.log4j.category",
-			PropsUtil.get(PropsUtil.VELOCITY_ENGINE_LOGGER_CATEGORY));
-
-		Velocity.setExtendedProperties(props);
 
 		if (_PRINT_TIME) {
 			System.out.println(

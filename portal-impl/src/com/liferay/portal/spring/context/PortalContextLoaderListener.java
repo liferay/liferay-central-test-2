@@ -29,30 +29,31 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 
 import org.springframework.context.ApplicationContext;
+import org.springframework.web.context.ContextLoaderListener;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 /**
- * <a href="ContextLoaderListener.java.html"><b><i>View Source</i></b></a>
+ * <a href="PortalContextLoaderListener.java.html"><b><i>View Source</i></b></a>
  *
  * @author Michael Young
  *
  */
-public class ContextLoaderListener extends
-		org.springframework.web.context.ContextLoaderListener {
+public class PortalContextLoaderListener extends ContextLoaderListener {
 
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 
 		// Preinitialize Spring beans. See LEP-4734.
 
-		ServletContext sc = event.getServletContext();
+		ServletContext servletContext = event.getServletContext();
 
-		ApplicationContext context =
-			WebApplicationContextUtils.getWebApplicationContext(sc);
+		ApplicationContext applicationContext =
+			WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
-		SpringUtil.setContext(context);
+		SpringUtil.setContext(applicationContext);
 
-		String[] beanDefinitionNames = context.getBeanDefinitionNames();
+		String[] beanDefinitionNames =
+			applicationContext.getBeanDefinitionNames();
 
 		for (int i = 0; i < beanDefinitionNames.length; i++) {
 			String beanDefinitionName = beanDefinitionNames[i];
