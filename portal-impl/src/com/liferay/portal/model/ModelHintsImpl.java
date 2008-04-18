@@ -25,6 +25,7 @@ package com.liferay.portal.model;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.xml.ElementImpl;
 import com.liferay.util.ListUtil;
 
 import java.io.StringReader;
@@ -74,6 +75,20 @@ public class ModelHintsImpl implements ModelHints {
 
 	public Map<String, String> getDefaultHints(String model) {
 		return _defaultHints.get(model);
+	}
+
+	public com.liferay.portal.kernel.xml.Element getFieldsEl(
+		String model, String field) {
+
+		Map fields = (Map)_modelFields.get(model);
+
+		if (fields == null) {
+			return null;
+		}
+		else {
+			return new ElementImpl(
+				(Element)fields.get(field + _ELEMENTS_SUFFIX));
+		}
 	}
 
 	public List<String> getModels() {
@@ -253,17 +268,6 @@ public class ModelHintsImpl implements ModelHints {
 		}
 		else {
 			return value;
-		}
-	}
-
-	private Element _getFieldsEl(String model, String field) {
-		Map fields = (Map)_modelFields.get(model);
-
-		if (fields == null) {
-			return null;
-		}
-		else {
-			return (Element)fields.get(field + _ELEMENTS_SUFFIX);
 		}
 	}
 

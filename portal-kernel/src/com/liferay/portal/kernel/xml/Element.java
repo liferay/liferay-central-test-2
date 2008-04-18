@@ -20,33 +20,24 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
-
-import com.liferay.portal.kernel.xml.Element;
+package com.liferay.portal.kernel.xml;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * <a href="ModelHints.java.html"><b><i>View Source</i></b></a>
+ * <a href="Element.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface ModelHints {
+public interface Element {
 
-	public Map<String, String> getDefaultHints(String model);
+	public String attributeValue(String name);
 
-	public Element getFieldsEl(String model, String field);
+	public String getName();
 
-	public List<String> getModels();
+	public String getText();
 
-	public String getType(String model, String field);
-
-	public Map<String, String> getHints(String model, String field);
-
-	public void read(ClassLoader classLoader, String source) throws Exception;
-
-	public String trimString(String model, String field, String value);
+	public List elements();
 
 }

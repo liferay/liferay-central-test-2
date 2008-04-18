@@ -23,6 +23,7 @@
 package com.liferay.portal.model;
 
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.xml.Element;
 
 import java.util.List;
 import java.util.Map;
@@ -37,6 +38,10 @@ public class ModelHintsUtil {
 
 	public static Map<String, String> getDefaultHints(String model) {
 		return getModelHints().getDefaultHints(model);
+	}
+
+	public static Element getFieldsEl(String model, String field) {
+		return getModelHints().getFieldsEl(model, field);
 	}
 
 	public static ModelHints getModelHints() {

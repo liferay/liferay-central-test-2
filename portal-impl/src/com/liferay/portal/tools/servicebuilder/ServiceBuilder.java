@@ -35,6 +35,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.tools.SourceFormatter;
 import com.liferay.portal.util.DocumentUtil;
+import com.liferay.portal.util.InitUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.SetUtil;
 import com.liferay.util.TextFormatter;
@@ -93,6 +94,10 @@ import org.dom4j.Element;
  *
  */
 public class ServiceBuilder {
+
+	static {
+		InitUtil.init();
+	}
 
 	public static void main(String[] args) {
 		ClassLoader classLoader = ClassLoader.getSystemClassLoader();

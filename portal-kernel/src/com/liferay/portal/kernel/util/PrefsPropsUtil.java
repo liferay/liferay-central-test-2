@@ -20,33 +20,33 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
-
-import com.liferay.portal.kernel.xml.Element;
-
-import java.util.List;
-import java.util.Map;
+package com.liferay.portal.kernel.util;
 
 /**
- * <a href="ModelHints.java.html"><b><i>View Source</i></b></a>
+ * <a href="PrefsPropsUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface ModelHints {
+public class PrefsPropsUtil {
 
-	public Map<String, String> getDefaultHints(String model);
+	public static String getString(long companyId, String key)
+		throws Exception {
 
-	public Element getFieldsEl(String model, String field);
+		Object returnObj = PortalClassInvoker.invoke(
+			_CLASS, _METHOD_GET_STRING, new LongWrapper(companyId), key, false);
 
-	public List<String> getModels();
+		if (returnObj != null) {
+			return (String)returnObj;
+		}
+		else {
+			return null;
+		}
+	}
 
-	public String getType(String model, String field);
+	private static final String _CLASS =
+		"com.liferay.portal.util.PrefsPropsUtil";
 
-	public Map<String, String> getHints(String model, String field);
-
-	public void read(ClassLoader classLoader, String source) throws Exception;
-
-	public String trimString(String model, String field, String value);
+	private static final String _METHOD_GET_STRING = "getString";
 
 }

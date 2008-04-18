@@ -20,33 +20,40 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Element;
 
 import java.util.List;
-import java.util.Map;
 
 /**
- * <a href="ModelHints.java.html"><b><i>View Source</i></b></a>
+ * <a href="ElementImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public interface ModelHints {
+public class ElementImpl implements Element {
 
-	public Map<String, String> getDefaultHints(String model);
+	public ElementImpl(org.dom4j.Element el) {
+		_el = el;
+	}
 
-	public Element getFieldsEl(String model, String field);
+	public String attributeValue(String name) {
+		return _el.attributeValue(name);
+	}
 
-	public List<String> getModels();
+	public String getName() {
+		return _el.getName();
+	}
 
-	public String getType(String model, String field);
+	public String getText() {
+		return _el.getText();
+	}
 
-	public Map<String, String> getHints(String model, String field);
+	public List elements() {
+		return _el.elements();
+	}
 
-	public void read(ClassLoader classLoader, String source) throws Exception;
-
-	public String trimString(String model, String field, String value);
+	private org.dom4j.Element _el;
 
 }
