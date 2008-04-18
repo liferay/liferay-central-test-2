@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,27 +19,30 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%--
+package com.liferay.portal.model;
 
-// Override this file to add your own custom fields for file entries.
+import java.util.List;
+import java.util.Map;
 
---%>
+/**
+ * <a href="ModelHints.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public interface ModelHints {
 
-<%--<tr>
-	<td>
-		<liferay-ui:message key="author" />
-	</td>
-	<td>
-		<input name="ExtraSettingsProperties(author)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(author)" />" />
-	</td>
-</tr>
-<tr>
-	<td>
-		<liferay-ui:message key="type" />
-	</td>
-	<td>
-		<input name="ExtraSettingsProperties(type)" style="width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;" type="text" value="<bean:write name="DOCUMENT_LIBRARY_FILE_ENTRY" property="extraSettingsProperties(type)" />" />
-	</td>
-</tr>--%>
+	public Map<String, String> getDefaultHints(String model);
+
+	public List<String> getModels();
+
+	public String getType(String model, String field);
+
+	public Map<String, String> getHints(String model, String field);
+
+	public void read(ClassLoader classLoader, String source) throws Exception;
+
+	public String trimString(String model, String field, String value);
+
+}

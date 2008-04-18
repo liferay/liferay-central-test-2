@@ -24,7 +24,6 @@ package com.liferay.portal.model;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.util.InitUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.ListUtil;
 
@@ -45,62 +44,14 @@ import org.dom4j.Element;
 import org.dom4j.io.SAXReader;
 
 /**
- * <a href="ModelHintsUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ModelHintsImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ModelHintsUtil {
+public class ModelHintsImpl implements ModelHints {
 
-	static {
-		InitUtil.init();
-	}
-
-	public static Map<String, String> getDefaultHints(String model) {
-		return _instance._getDefaultHints(model);
-	}
-
-	public static Element getFieldsEl(String model, String field) {
-		return _instance._getFieldsEl(model, field);
-	}
-
-	public static List<String> getModels() {
-		return _instance._getModels();
-	}
-
-	public static String getType(String model, String field) {
-		return _instance._getType(model, field);
-	}
-
-	public static Map<String, String> getHints(String model, String field) {
-		return _instance._getHints(model, field);
-	}
-
-	public static String trimString(String model, String field, String value) {
-		if (value == null) {
-			return value;
-		}
-
-		Map<String, String> hints = getHints(model, field);
-
-		if (hints == null) {
-			return value;
-		}
-
-		int maxLength = GetterUtil.getInteger(
-			ModelHintsDefaults.TEXT_MAX_LENGTH);
-
-		maxLength = GetterUtil.getInteger(hints.get("max-length"), maxLength);
-
-		if (value.length() > maxLength) {
-			return value.substring(0, maxLength);
-		}
-		else {
-			return value;
-		}
-	}
-
-	private ModelHintsUtil() {
+	public ModelHintsImpl() {
 		_hintCollections = new HashMap<String, Map<String, String>>();
 		_defaultHints = new HashMap<String, Map<String, String>>();
 		_modelFields = new HashMap();
@@ -113,7 +64,7 @@ public class ModelHintsUtil {
 				PropsUtil.get(PropsUtil.MODEL_HINTS_CONFIGS));
 
 			for (int i = 0; i < configs.length; i++) {
-				_read(classLoader, configs[i]);
+				read(classLoader, configs[i]);
 			}
 		}
 		catch (Exception e) {
@@ -121,26 +72,15 @@ public class ModelHintsUtil {
 		}
 	}
 
-	private Map<String, String> _getDefaultHints(String model) {
+	public Map<String, String> getDefaultHints(String model) {
 		return _defaultHints.get(model);
 	}
 
-	private Element _getFieldsEl(String model, String field) {
-		Map fields = (Map)_modelFields.get(model);
-
-		if (fields == null) {
-			return null;
-		}
-		else {
-			return (Element)fields.get(field + _ELEMENTS_SUFFIX);
-		}
-	}
-
-	private List<String> _getModels() {
+	public List<String> getModels() {
 		return ListUtil.fromCollection(_models);
 	}
 
-	private String _getType(String model, String field) {
+	public String getType(String model, String field) {
 		Map fields = (Map)_modelFields.get(model);
 
 		if (fields == null) {
@@ -151,7 +91,7 @@ public class ModelHintsUtil {
 		}
 	}
 
-	private Map _getHints(String model, String field) {
+	public Map getHints(String model, String field) {
 		Map fields = (Map)_modelFields.get(model);
 
 		if (fields == null) {
@@ -162,9 +102,7 @@ public class ModelHintsUtil {
 		}
 	}
 
-	private void _read(ClassLoader classLoader, String source)
-		throws Exception {
-
+	public void read(ClassLoader classLoader, String source) throws Exception {
 		String xml = null;
 
 		try {
@@ -294,15 +232,48 @@ public class ModelHintsUtil {
 		}
 	}
 
+	public String trimString(String model, String field, String value) {
+		if (value == null) {
+			return value;
+		}
+
+		Map<String, String> hints = getHints(model, field);
+
+		if (hints == null) {
+			return value;
+		}
+
+		int maxLength = GetterUtil.getInteger(
+			ModelHintsConstants.TEXT_MAX_LENGTH);
+
+		maxLength = GetterUtil.getInteger(hints.get("max-length"), maxLength);
+
+		if (value.length() > maxLength) {
+			return value.substring(0, maxLength);
+		}
+		else {
+			return value;
+		}
+	}
+
+	private Element _getFieldsEl(String model, String field) {
+		Map fields = (Map)_modelFields.get(model);
+
+		if (fields == null) {
+			return null;
+		}
+		else {
+			return (Element)fields.get(field + _ELEMENTS_SUFFIX);
+		}
+	}
+
 	private static final String _ELEMENTS_SUFFIX = "_ELEMENTS";
 
 	private static final String _TYPE_SUFFIX = "_TYPE";
 
 	private static final String _HINTS_SUFFIX = "_HINTS";
 
-	private static Log _log = LogFactory.getLog(ModelHintsUtil.class);
-
-	private static ModelHintsUtil _instance = new ModelHintsUtil();
+	private static Log _log = LogFactory.getLog(ModelHintsImpl.class);
 
 	private Map<String, Map<String, String>> _hintCollections;
 	private Map<String, Map<String, String>> _defaultHints;

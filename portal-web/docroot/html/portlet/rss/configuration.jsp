@@ -57,7 +57,7 @@ configurationRenderURL.setParameter("portletResource", portletResource);
 		row.insertCell(2);
 
 		row.cells[0].innerHTML = "<input name=\"<portlet:namespace />title\" />";
-		row.cells[1].innerHTML = "<input name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;\" />";
+		row.cells[1].innerHTML = "<input name=\"<portlet:namespace />url\" style=\"width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;\" />";
 		row.cells[2].innerHTML = "<a href=\"javascript: ;\" onclick=\"Element.remove(this.parentNode.parentNode);\"><img src=\"<%= themeDisplay.getPathThemeImages() %>/common/unsubscribe.png\" /></a>";
 
 		table.appendChild(row);

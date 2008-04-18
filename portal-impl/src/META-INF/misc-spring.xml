@@ -58,6 +58,12 @@
 			<ref bean="com.liferay.portal.language.UnicodeLanguageImpl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.model.ModelHintsImpl" class="com.liferay.portal.model.ModelHintsImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.model.ModelHintsUtil" class="com.liferay.portal.model.ModelHintsUtil" lazy-init="true">
+		<property name="modelHints">
+			<ref bean="com.liferay.portal.model.ModelHintsImpl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.permission.AccountPermissionImpl" class="com.liferay.portal.service.permission.AccountPermissionImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.permission.AccountPermissionUtil" class="com.liferay.portal.service.permission.AccountPermissionUtil" lazy-init="true">
 		<property name="accountPermission">

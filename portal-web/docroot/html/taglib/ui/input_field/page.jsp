@@ -230,9 +230,9 @@ Map hints = ModelHintsUtil.getHints(model, field);
 				value = HtmlUtil.escape(value);
 			}
 
-			String displayHeight = ModelHintsDefaults.TEXT_DISPLAY_HEIGHT;
-			String displayWidth = ModelHintsDefaults.TEXT_DISPLAY_WIDTH;
-			String maxLength = ModelHintsDefaults.TEXT_MAX_LENGTH;
+			String displayHeight = ModelHintsConstants.TEXT_DISPLAY_HEIGHT;
+			String displayWidth = ModelHintsConstants.TEXT_DISPLAY_WIDTH;
+			String maxLength = ModelHintsConstants.TEXT_MAX_LENGTH;
 			boolean upperCase = false;
 			boolean checkTab = false;
 
@@ -246,7 +246,7 @@ Map hints = ModelHintsUtil.getHints(model, field);
 			%>
 
 			<c:choose>
-				<c:when test='<%= displayHeight.equals(ModelHintsDefaults.TEXT_DISPLAY_HEIGHT) %>'>
+				<c:when test='<%= displayHeight.equals(ModelHintsConstants.TEXT_DISPLAY_HEIGHT) %>'>
 
 					<%
 					if (Validator.isNotNull(value)) {

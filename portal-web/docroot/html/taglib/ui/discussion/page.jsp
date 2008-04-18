@@ -138,7 +138,7 @@ String deleteHREF = null;
 		<br />
 
 		<div>
-			<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = (this.value == '');"></textarea>
+			<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = (this.value == '');"></textarea>
 		</div>
 
 		<br />
@@ -332,7 +332,7 @@ List messages = treeWalker.getMessages();
 						<br />
 
 						<div>
-							<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = (this.value == '');"></textarea>
+							<textarea id="<%= namespace %>postReplyBody<%= i %>" name="<%= namespace %>postReplyBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>postReplyButton<%= i %>.disabled = (this.value == '');"></textarea>
 						</div>
 
 						<br />
@@ -349,7 +349,7 @@ List messages = treeWalker.getMessages();
 							<br />
 
 							<div>
-								<textarea id="<%= namespace %>editBody<%= i %>" name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>updateReplyButton<%= i %>.disabled = (this.value == '');"><%= HtmlUtil.escape(message.getBody()) %></textarea>
+								<textarea id="<%= namespace %>editBody<%= i %>" name="<%= namespace %>editBody<%= i %>" style="height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px; width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;" wrap="soft" onKeyUp="document.<%= formName %>.<%= namespace %>updateReplyButton<%= i %>.disabled = (this.value == '');"><%= HtmlUtil.escape(message.getBody()) %></textarea>
 							</div>
 
 							<br />

@@ -837,12 +837,12 @@ li.toggle-expand a {
 /* ---------- Liferay forms ---------- */
 
 .lfr-input-text {
-	width: <%= ModelHintsDefaults.TEXT_DISPLAY_WIDTH %>px;
+	width: <%= ModelHintsConstants.TEXT_DISPLAY_WIDTH %>px;
 }
 
 .lfr-textarea {
-	height: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_HEIGHT %>px;
-	width: <%= ModelHintsDefaults.TEXTAREA_DISPLAY_WIDTH %>px;
+	height: <%= ModelHintsConstants.TEXTAREA_DISPLAY_HEIGHT %>px;
+	width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;
 }
 
 /* ---------- Separator ---------- */

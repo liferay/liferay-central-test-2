@@ -28,6 +28,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.model.ModelHintsUtil;
 import com.liferay.portal.model.ServiceComponent;
 import com.liferay.portal.service.base.ServiceComponentLocalServiceBaseImpl;
 import com.liferay.portal.tools.servicebuilder.Entity;
@@ -70,6 +71,14 @@ public class ServiceComponentLocalServiceImpl
 			ServletContext ctx, ClassLoader portletClassLoader,
 			String buildNamespace, long buildNumber, long buildDate)
 		throws PortalException, SystemException {
+
+		try {
+			ModelHintsUtil.read(
+				portletClassLoader, "META-INF/portlet-model-hints.xml");
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 
 		ServiceComponent serviceComponent = null;
 		ServiceComponent previousServiceComponent = null;
