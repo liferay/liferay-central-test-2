@@ -50,7 +50,13 @@ package com.liferay.portlet.expando.service;
  */
 public interface ExpandoValueService {
 	public com.liferay.portlet.expando.model.ExpandoValue addValue(
-		long columnId, long rowId, long classPK, java.lang.String data)
+		com.liferay.portlet.expando.model.ExpandoValue value)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoValue addValue(
+		long classNameId, long tableId, long columnId, long classPK,
+		java.lang.String data)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -125,7 +131,25 @@ public interface ExpandoValueService {
 		long rowId, int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
+		java.lang.String className, java.lang.String tableName, long classPK,
+		int begin, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
+		long classNameId, java.lang.String tableName, long classPK, int begin,
+		int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
 	public int getRowValuesCount(long rowId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public int getRowValuesCount(java.lang.String className,
+		java.lang.String tableName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public int getRowValuesCount(long classNameId, java.lang.String tableName,
+		long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(long valueId)

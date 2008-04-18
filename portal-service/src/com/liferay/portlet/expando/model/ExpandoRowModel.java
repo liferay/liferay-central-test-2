@@ -57,5 +57,9 @@ public interface ExpandoRowModel extends BaseModel {
 
 	public void setTableId(long tableId);
 
+	public long getClassPK();
+
+	public void setClassPK(long classPK);
+
 	public ExpandoRow toEscapedModel();
 }

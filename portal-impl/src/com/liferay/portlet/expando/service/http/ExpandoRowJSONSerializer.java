@@ -56,6 +56,7 @@ public class ExpandoRowJSONSerializer {
 
 		JSONUtil.put(jsonObj, "rowId", model.getRowId());
 		JSONUtil.put(jsonObj, "tableId", model.getTableId());
+		JSONUtil.put(jsonObj, "classPK", model.getClassPK());
 
 		return jsonObj;
 	}

@@ -52,12 +52,23 @@ package com.liferay.portlet.expando.service;
  */
 public class ExpandoValueServiceUtil {
 	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
-		long columnId, long rowId, long classPK, java.lang.String data)
+		com.liferay.portlet.expando.model.ExpandoValue value)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
 
-		return expandoValueService.addValue(columnId, rowId, classPK, data);
+		return expandoValueService.addValue(value);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoValue addValue(
+		long classNameId, long tableId, long columnId, long classPK,
+		java.lang.String data)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.addValue(classNameId, tableId, columnId,
+			classPK, data);
 	}
 
 	public static void deleteColumnValues(long columnId)
@@ -211,11 +222,49 @@ public class ExpandoValueServiceUtil {
 		return expandoValueService.getRowValues(rowId, begin, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
+		java.lang.String className, java.lang.String tableName, long classPK,
+		int begin, int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.getRowValues(className, tableName, classPK,
+			begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getRowValues(
+		long classNameId, java.lang.String tableName, long classPK, int begin,
+		int end)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.getRowValues(classNameId, tableName,
+			classPK, begin, end);
+	}
+
 	public static int getRowValuesCount(long rowId)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
 
 		return expandoValueService.getRowValuesCount(rowId);
+	}
+
+	public static int getRowValuesCount(java.lang.String className,
+		java.lang.String tableName, long classPK)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.getRowValuesCount(className, tableName,
+			classPK);
+	}
+
+	public static int getRowValuesCount(long classNameId,
+		java.lang.String tableName, long classPK)
+		throws com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		return expandoValueService.getRowValuesCount(classNameId, tableName,
+			classPK);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(

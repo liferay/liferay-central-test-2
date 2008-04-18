@@ -39,7 +39,7 @@ import java.util.List;
  */
 public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 
-	public ExpandoRow addRow(long tableId)
+	public ExpandoRow addRow(long tableId, long classPK)
 		throws PortalException, SystemException {
 
 		long rowId = counterLocalService.increment();
@@ -47,6 +47,7 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		ExpandoRow row = expandoRowPersistence.create(rowId);
 
 		row.setTableId(tableId);
+		row.setClassPK(classPK);
 
 		expandoRowPersistence.update(row, false);
 
@@ -95,6 +96,32 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 
 		return expandoRowFinder.countByTC_TN(
 			classNameId, ExpandoTableConstants.DEFAULT_TABLE_NAME);
+	}
+
+	public ExpandoRow getRow(long rowId)
+		throws PortalException, SystemException {
+
+		return expandoRowPersistence.findByPrimaryKey(rowId);
+	}
+
+	public ExpandoRow getRow(long tableId, long classPK)
+		throws PortalException, SystemException {
+
+		return expandoRowPersistence.findByT_C(tableId, classPK);
+	}
+
+	public ExpandoRow getRow(String className, String tableName, long classPK)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getRow(classNameId, tableName, classPK);
+	}
+
+	public ExpandoRow getRow(long classNameId, String tablename, long classPK)
+		throws PortalException, SystemException {
+
+		return expandoRowFinder.findByTC_TN_C(classNameId, tablename, classPK);
 	}
 
 	public List<ExpandoRow> getRows(long tableId, int begin, int end)

@@ -52,12 +52,12 @@ package com.liferay.portlet.expando.service;
  */
 public class ExpandoRowServiceUtil {
 	public static com.liferay.portlet.expando.model.ExpandoRow addRow(
-		long tableId)
+		long tableId, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
 
-		return expandoRowService.addRow(tableId);
+		return expandoRowService.addRow(tableId, classPK);
 	}
 
 	public static void deleteRow(long rowId)
@@ -96,6 +96,42 @@ public class ExpandoRowServiceUtil {
 		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
 
 		return expandoRowService.getDefaultTableRowsCount(classNameId);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		long rowId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		return expandoRowService.getRow(rowId);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		long tableId, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		return expandoRowService.getRow(tableId, classPK);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		java.lang.String className, java.lang.String tableName, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		return expandoRowService.getRow(className, tableName, classPK);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		long classNameId, java.lang.String tablename, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		return expandoRowService.getRow(classNameId, tablename, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(

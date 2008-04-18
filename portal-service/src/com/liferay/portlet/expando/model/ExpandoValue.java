@@ -65,6 +65,14 @@ public interface ExpandoValue extends ExpandoValueModel {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void setClassName(java.lang.String className)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void setColumnName(java.lang.String columnName)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.Date getDate()
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
@@ -142,6 +150,10 @@ public interface ExpandoValue extends ExpandoValueModel {
 			com.liferay.portal.PortalException;
 
 	public void setLongArray(long[] data)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void setTableName(java.lang.String tableName)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

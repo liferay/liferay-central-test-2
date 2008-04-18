@@ -51,6 +51,9 @@ public class ExpandoRowFinderImpl implements ExpandoRowFinder {
 	public static String FIND_BY_TC_TN =
 		ExpandoRowFinder.class.getName() + ".findByTC_TN";
 
+	public static String FIND_BY_TC_TN_C =
+		ExpandoRowFinder.class.getName() + ".findByTC_TN_C";
+
 	public int countByTC_TN(long classNameId, String tableName)
 		throws SystemException {
 
@@ -112,6 +115,37 @@ public class ExpandoRowFinderImpl implements ExpandoRowFinder {
 
 			return (List<ExpandoRow>)QueryUtil.list(
 				q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public ExpandoRow findByTC_TN_C(
+			long classNameId, String tableName, long classPK)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_C);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("ExpandoRow", ExpandoRowImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(classNameId);
+			qPos.add(tableName);
+			qPos.add(classPK);
+
+			return (ExpandoRow)q.uniqueResult();
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

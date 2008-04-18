@@ -38,11 +38,16 @@
 		<!-- Other fields -->
 
 		<column name="tableId" type="long" />
+		<column name="classPK" type="long" />
 
 		<!-- Finder methods -->
 
 		<finder name="TableId" return-type="Collection">
 			<finder-column name="tableId" />
+		</finder>
+		<finder name="T_C" return-type="ExpandoRow">
+			<finder-column name="tableId" />
+			<finder-column name="classPK" />
 		</finder>
 
 		<!-- References -->

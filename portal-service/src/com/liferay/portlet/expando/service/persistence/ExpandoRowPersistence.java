@@ -103,6 +103,14 @@ public interface ExpandoRowPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.expando.NoSuchRowException;
 
+	public com.liferay.portlet.expando.model.ExpandoRow findByT_C(
+		long tableId, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchRowException;
+
+	public com.liferay.portlet.expando.model.ExpandoRow fetchByT_C(
+		long tableId, long classPK) throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -124,9 +132,16 @@ public interface ExpandoRowPersistence {
 	public void removeByTableId(long tableId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByT_C(long tableId, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchRowException;
+
 	public void removeAll() throws com.liferay.portal.SystemException;
 
 	public int countByTableId(long tableId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByT_C(long tableId, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;

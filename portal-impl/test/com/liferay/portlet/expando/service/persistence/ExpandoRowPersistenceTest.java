@@ -71,6 +71,7 @@ public class ExpandoRowPersistenceTest extends BasePersistenceTestCase {
 		ExpandoRow newExpandoRow = _persistence.create(pk);
 
 		newExpandoRow.setTableId(nextLong());
+		newExpandoRow.setClassPK(nextLong());
 
 		_persistence.update(newExpandoRow, false);
 
@@ -78,6 +79,7 @@ public class ExpandoRowPersistenceTest extends BasePersistenceTestCase {
 
 		assertEquals(existingExpandoRow.getRowId(), newExpandoRow.getRowId());
 		assertEquals(existingExpandoRow.getTableId(), newExpandoRow.getTableId());
+		assertEquals(existingExpandoRow.getClassPK(), newExpandoRow.getClassPK());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -122,6 +124,7 @@ public class ExpandoRowPersistenceTest extends BasePersistenceTestCase {
 		ExpandoRow expandoRow = _persistence.create(pk);
 
 		expandoRow.setTableId(nextLong());
+		expandoRow.setClassPK(nextLong());
 
 		_persistence.update(expandoRow, false);
 

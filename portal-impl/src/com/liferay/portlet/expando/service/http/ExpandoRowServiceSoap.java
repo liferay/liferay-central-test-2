@@ -82,9 +82,10 @@ import java.rmi.RemoteException;
  */
 public class ExpandoRowServiceSoap {
 	public static com.liferay.portlet.expando.model.ExpandoRowSoap addRow(
-		long tableId) throws RemoteException {
+		long tableId, long classPK) throws RemoteException {
 		try {
-			com.liferay.portlet.expando.model.ExpandoRow returnValue = ExpandoRowServiceUtil.addRow(tableId);
+			com.liferay.portlet.expando.model.ExpandoRow returnValue = ExpandoRowServiceUtil.addRow(tableId,
+					classPK);
 
 			return com.liferay.portlet.expando.model.ExpandoRowSoap.toSoapModel(returnValue);
 		}
@@ -158,6 +159,67 @@ public class ExpandoRowServiceSoap {
 			int returnValue = ExpandoRowServiceUtil.getDefaultTableRowsCount(classNameId);
 
 			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRowSoap getRow(
+		long rowId) throws RemoteException {
+		try {
+			com.liferay.portlet.expando.model.ExpandoRow returnValue = ExpandoRowServiceUtil.getRow(rowId);
+
+			return com.liferay.portlet.expando.model.ExpandoRowSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRowSoap getRow(
+		long tableId, long classPK) throws RemoteException {
+		try {
+			com.liferay.portlet.expando.model.ExpandoRow returnValue = ExpandoRowServiceUtil.getRow(tableId,
+					classPK);
+
+			return com.liferay.portlet.expando.model.ExpandoRowSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRowSoap getRow(
+		java.lang.String className, java.lang.String tableName, long classPK)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.expando.model.ExpandoRow returnValue = ExpandoRowServiceUtil.getRow(className,
+					tableName, classPK);
+
+			return com.liferay.portlet.expando.model.ExpandoRowSoap.toSoapModel(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRowSoap getRow(
+		long classNameId, java.lang.String tablename, long classPK)
+		throws RemoteException {
+		try {
+			com.liferay.portlet.expando.model.ExpandoRow returnValue = ExpandoRowServiceUtil.getRow(classNameId,
+					tablename, classPK);
+
+			return com.liferay.portlet.expando.model.ExpandoRowSoap.toSoapModel(returnValue);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

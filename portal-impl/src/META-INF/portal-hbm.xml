@@ -1538,6 +1538,7 @@
 			<generator class="assigned" />
 		</id>
 		<property name="tableId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 	</class>
 	<class name="com.liferay.portlet.expando.model.impl.ExpandoTableImpl" table="ExpandoTable">
 		<cache usage="read-write" />

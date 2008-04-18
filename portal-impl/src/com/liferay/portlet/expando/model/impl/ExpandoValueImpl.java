@@ -26,11 +26,15 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.ValueDataException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoLocalServiceTest;
+import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 
 import java.util.Date;
 
@@ -73,6 +77,21 @@ public class ExpandoValueImpl
 		validate(ExpandoColumnConstants.BOOLEAN_ARRAY);
 
 		setData(StringUtil.merge(data));
+	}
+
+	public void setClassName(String className)
+		throws PortalException, SystemException {
+
+		this.setClassNameId(PortalUtil.getClassNameId(className));
+	}
+
+	public void setColumnName(String columnName)
+		throws PortalException, SystemException {
+
+		ExpandoColumn column = ExpandoColumnLocalServiceUtil.getColumn(
+			this.getTableId(), columnName);
+
+		this.setColumnId(column.getColumnId());
 	}
 
 	public Date getDate() throws PortalException, SystemException {
@@ -211,6 +230,15 @@ public class ExpandoValueImpl
 		validate(ExpandoColumnConstants.LONG_ARRAY);
 
 		setData(StringUtil.merge(data));
+	}
+
+	public void setTableName(String tableName)
+		throws PortalException, SystemException {
+
+		ExpandoTable table = ExpandoTableLocalServiceUtil.getTable(
+			this.getClassName(), tableName);
+
+		this.setTableId(table.getTableId());
 	}
 
 	public short getShort() throws PortalException, SystemException {

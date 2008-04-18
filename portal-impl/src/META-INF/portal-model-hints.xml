@@ -810,6 +810,7 @@
 	<model name="com.liferay.portlet.expando.model.ExpandoRow">
 		<field name="rowId" type="long" />
 		<field name="tableId" type="long" />
+		<field name="classPK" type="long" />
 	</model>
 	<model name="com.liferay.portlet.expando.model.ExpandoTable">
 		<field name="tableId" type="long" />

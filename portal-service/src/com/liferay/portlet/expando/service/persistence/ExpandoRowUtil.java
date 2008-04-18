@@ -133,6 +133,18 @@ public class ExpandoRowUtil {
 		return getPersistence().findByTableId_PrevAndNext(rowId, tableId, obc);
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoRow findByT_C(
+		long tableId, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchRowException {
+		return getPersistence().findByT_C(tableId, classPK);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow fetchByT_C(
+		long tableId, long classPK) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByT_C(tableId, classPK);
+	}
+
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -167,6 +179,12 @@ public class ExpandoRowUtil {
 		getPersistence().removeByTableId(tableId);
 	}
 
+	public static void removeByT_C(long tableId, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.expando.NoSuchRowException {
+		getPersistence().removeByT_C(tableId, classPK);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -174,6 +192,11 @@ public class ExpandoRowUtil {
 	public static int countByTableId(long tableId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByTableId(tableId);
+	}
+
+	public static int countByT_C(long tableId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByT_C(tableId, classPK);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

@@ -74,14 +74,16 @@ import com.liferay.portlet.expando.service.ExpandoRowServiceUtil;
  */
 public class ExpandoRowServiceHttp {
 	public static com.liferay.portlet.expando.model.ExpandoRow addRow(
-		HttpPrincipal httpPrincipal, long tableId)
+		HttpPrincipal httpPrincipal, long tableId, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(tableId);
 
+			Object paramObj1 = new LongWrapper(classPK);
+
 			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
-					"addRow", new Object[] { paramObj0 });
+					"addRow", new Object[] { paramObj0, paramObj1 });
 
 			Object returnObj = null;
 
@@ -272,6 +274,174 @@ public class ExpandoRowServiceHttp {
 			}
 
 			return ((Integer)returnObj).intValue();
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		HttpPrincipal httpPrincipal, long rowId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(rowId);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"getRow", new Object[] { paramObj0 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.expando.model.ExpandoRow)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		HttpPrincipal httpPrincipal, long tableId, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(tableId);
+
+			Object paramObj1 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"getRow", new Object[] { paramObj0, paramObj1 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.expando.model.ExpandoRow)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		HttpPrincipal httpPrincipal, java.lang.String className,
+		java.lang.String tableName, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = tableName;
+
+			if (tableName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"getRow", new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.expando.model.ExpandoRow)returnObj;
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		HttpPrincipal httpPrincipal, long classNameId,
+		java.lang.String tablename, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
+
+			Object paramObj1 = tablename;
+
+			if (tablename == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"getRow", new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			Object returnObj = null;
+
+			try {
+				returnObj = TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+
+			return (com.liferay.portlet.expando.model.ExpandoRow)returnObj;
 		}
 		catch (com.liferay.portal.SystemException se) {
 			_log.error(se, se);

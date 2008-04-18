@@ -1703,6 +1703,13 @@ Liferay.Service.Expando.ExpandoRow = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
+	getRow: function(params, callback) {
+		params.serviceClassName = this.serviceClassName;
+		params.serviceMethodName = "getRow";
+
+		return Liferay.Service.ajax(params, callback);
+	},
+
 	getRows: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getRows";

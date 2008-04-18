@@ -24,6 +24,7 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.service.base.ExpandoValueServiceBaseImpl;
 
@@ -38,12 +39,19 @@ import java.util.List;
  */
 public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 
+	public ExpandoValue addValue(ExpandoValue value)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(value);
+	}
+
 	public ExpandoValue addValue(
-			long columnId, long rowId, long classPK, String data)
+			long classNameId, long tableId, long columnId, long classPK,
+			String data)
 		throws PortalException, SystemException {
 
 		return expandoValueLocalService.addValue(
-			columnId, rowId, classPK, data);
+			classNameId, tableId, columnId, classPK, data);
 	}
 
 	public void deleteColumnValues(long columnId) throws SystemException {
@@ -164,8 +172,42 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 		return expandoValueLocalService.getRowValues(rowId, begin, end);
 	}
 
+	public List<ExpandoValue> getRowValues(
+			String className, String tableName, long classPK, int begin,
+			int end)
+		throws SystemException {
+
+		return expandoValueLocalService.getRowValues(
+			className, tableName, classPK, begin, end);
+	}
+
+	public List<ExpandoValue> getRowValues(
+			long classNameId, String tableName, long classPK, int begin,
+			int end)
+		throws SystemException {
+
+		return expandoValueLocalService.getRowValues(
+			classNameId, tableName, classPK, begin, end);
+	}
+
 	public int getRowValuesCount(long rowId) throws SystemException {
 		return expandoValueLocalService.getRowValuesCount(rowId);
+	}
+
+	public int getRowValuesCount(
+			String className, String tableName, long classPK)
+		throws SystemException {
+
+		return expandoValueLocalService.getRowValuesCount(
+			className, tableName, classPK);
+	}
+
+	public int getRowValuesCount(
+			long classNameId, String tableName, long classPK)
+		throws SystemException {
+
+		return expandoValueLocalService.getRowValuesCount(
+			classNameId, tableName, classPK);
 	}
 
 	public ExpandoValue getValue(long valueId)

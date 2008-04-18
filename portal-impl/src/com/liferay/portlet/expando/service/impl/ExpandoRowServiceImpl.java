@@ -24,6 +24,7 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.service.base.ExpandoRowServiceBaseImpl;
 
@@ -37,10 +38,10 @@ import java.util.List;
  */
 public class ExpandoRowServiceImpl extends ExpandoRowServiceBaseImpl {
 
-	public ExpandoRow addRow(long tableId)
+	public ExpandoRow addRow(long tableId, long classPK)
 		throws PortalException, SystemException {
 
-		return expandoRowLocalService.addRow(tableId);
+		return expandoRowLocalService.addRow(tableId, classPK);
 	}
 
 	public void deleteRow(long rowId)
@@ -75,6 +76,30 @@ public class ExpandoRowServiceImpl extends ExpandoRowServiceBaseImpl {
 		throws SystemException {
 
 		return expandoRowLocalService.getDefaultTableRowsCount(classNameId);
+	}
+
+	public ExpandoRow getRow(long rowId)
+		throws PortalException, SystemException {
+
+		return expandoRowLocalService.getRow(rowId);
+	}
+
+	public ExpandoRow getRow(long tableId, long classPK)
+		throws PortalException, SystemException {
+
+		return expandoRowLocalService.getRow(tableId, classPK);
+	}
+
+	public ExpandoRow getRow(String className, String tableName, long classPK)
+		throws PortalException, SystemException {
+
+		return expandoRowLocalService.getRow(className, tableName, classPK);
+	}
+
+	public ExpandoRow getRow(long classNameId, String tablename, long classPK)
+		throws PortalException, SystemException {
+
+		return expandoRowLocalService.getRow(classNameId, tablename, classPK);
 	}
 
 	public List<ExpandoRow> getRows(long tableId, int begin, int end)

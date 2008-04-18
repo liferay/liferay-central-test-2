@@ -101,12 +101,12 @@ public class ExpandoRowLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow addRow(
-		long tableId)
+		long tableId, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
 
-		return expandoRowLocalService.addRow(tableId);
+		return expandoRowLocalService.addRow(tableId, classPK);
 	}
 
 	public static void deleteRow(long rowId)
@@ -146,6 +146,42 @@ public class ExpandoRowLocalServiceUtil {
 		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
 
 		return expandoRowLocalService.getDefaultTableRowsCount(classNameId);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		long rowId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getRow(rowId);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		long tableId, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getRow(tableId, classPK);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		java.lang.String className, java.lang.String tableName, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getRow(className, tableName, classPK);
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
+		long classNameId, java.lang.String tablename, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
+
+		return expandoRowLocalService.getRow(classNameId, tablename, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(

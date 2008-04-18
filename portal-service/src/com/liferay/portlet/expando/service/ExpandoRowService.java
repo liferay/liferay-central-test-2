@@ -49,7 +49,8 @@ package com.liferay.portlet.expando.service;
  *
  */
 public interface ExpandoRowService {
-	public com.liferay.portlet.expando.model.ExpandoRow addRow(long tableId)
+	public com.liferay.portlet.expando.model.ExpandoRow addRow(long tableId,
+		long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -70,6 +71,25 @@ public interface ExpandoRowService {
 
 	public int getDefaultTableRowsCount(long classNameId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.expando.model.ExpandoRow getRow(long rowId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoRow getRow(long tableId,
+		long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoRow getRow(
+		java.lang.String className, java.lang.String tableName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public com.liferay.portlet.expando.model.ExpandoRow getRow(
+		long classNameId, java.lang.String tablename, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(
 		long tableId, int begin, int end)

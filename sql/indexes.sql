@@ -91,6 +91,7 @@ create index IX_A8C0CBE8 on ExpandoColumn (tableId);
 create index IX_FEFC8DA7 on ExpandoColumn (tableId, name);
 
 create index IX_D3F5D7AE on ExpandoRow (tableId);
+create index IX_81EFBFF5 on ExpandoRow (tableId, classPK);
 
 create index IX_F0A86A4F on ExpandoTable (classNameId);
 create index IX_DED782CE on ExpandoTable (classNameId, name);

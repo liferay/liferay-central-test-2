@@ -490,6 +490,108 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public ExpandoRow findByT_C(long tableId, long classPK)
+		throws NoSuchRowException, SystemException {
+		ExpandoRow expandoRow = fetchByT_C(tableId, classPK);
+
+		if (expandoRow == null) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No ExpandoRow exists with the key {");
+
+			msg.append("tableId=" + tableId);
+
+			msg.append(", ");
+			msg.append("classPK=" + classPK);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			if (_log.isWarnEnabled()) {
+				_log.warn(msg.toString());
+			}
+
+			throw new NoSuchRowException(msg.toString());
+		}
+
+		return expandoRow;
+	}
+
+	public ExpandoRow fetchByT_C(long tableId, long classPK)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = ExpandoRowModelImpl.CACHE_ENABLED;
+		String finderClassName = ExpandoRow.class.getName();
+		String finderMethodName = "fetchByT_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(tableId), new Long(classPK) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.expando.model.ExpandoRow WHERE ");
+
+				query.append("tableId = ?");
+
+				query.append(" AND ");
+
+				query.append("classPK = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, tableId);
+
+				q.setLong(queryPos++, classPK);
+
+				List<ExpandoRow> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				if (list.size() == 0) {
+					return null;
+				}
+				else {
+					return list.get(0);
+				}
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			List<ExpandoRow> list = (List<ExpandoRow>)result;
+
+			if (list.size() == 0) {
+				return null;
+			}
+			else {
+				return list.get(0);
+			}
+		}
+	}
+
 	public List<ExpandoRow> findWithDynamicQuery(
 		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
@@ -609,6 +711,13 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByT_C(long tableId, long classPK)
+		throws NoSuchRowException, SystemException {
+		ExpandoRow expandoRow = findByT_C(tableId, classPK);
+
+		remove(expandoRow);
+	}
+
 	public void removeAll() throws SystemException {
 		for (ExpandoRow expandoRow : findAll()) {
 			remove(expandoRow);
@@ -650,6 +759,80 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, tableId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByT_C(long tableId, long classPK) throws SystemException {
+		boolean finderClassNameCacheEnabled = ExpandoRowModelImpl.CACHE_ENABLED;
+		String finderClassName = ExpandoRow.class.getName();
+		String finderMethodName = "countByT_C";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Long.class.getName()
+			};
+		Object[] finderArgs = new Object[] { new Long(tableId), new Long(classPK) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.expando.model.ExpandoRow WHERE ");
+
+				query.append("tableId = ?");
+
+				query.append(" AND ");
+
+				query.append("classPK = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, tableId);
+
+				q.setLong(queryPos++, classPK);
 
 				Long count = null;
 

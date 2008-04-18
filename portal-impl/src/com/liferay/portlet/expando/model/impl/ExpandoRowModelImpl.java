@@ -65,9 +65,12 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 			{ "rowId_", new Integer(Types.BIGINT) },
 			
 
-			{ "tableId", new Integer(Types.BIGINT) }
+			{ "tableId", new Integer(Types.BIGINT) },
+			
+
+			{ "classPK", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoRow (rowId_ LONG not null primary key,tableId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoRow (rowId_ LONG not null primary key,tableId LONG,classPK LONG)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoRow";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -81,6 +84,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 
 		model.setRowId(soapModel.getRowId());
 		model.setTableId(soapModel.getTableId());
+		model.setClassPK(soapModel.getClassPK());
 
 		return model;
 	}
@@ -133,6 +137,16 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getClassPK() {
+		return _classPK;
+	}
+
+	public void setClassPK(long classPK) {
+		if (classPK != _classPK) {
+			_classPK = classPK;
+		}
+	}
+
 	public ExpandoRow toEscapedModel() {
 		if (isEscapedModel()) {
 			return (ExpandoRow)this;
@@ -144,6 +158,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 
 			model.setRowId(getRowId());
 			model.setTableId(getTableId());
+			model.setClassPK(getClassPK());
 
 			model = (ExpandoRow)Proxy.newProxyInstance(ExpandoRow.class.getClassLoader(),
 					new Class[] { ExpandoRow.class },
@@ -158,6 +173,7 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 
 		clone.setRowId(getRowId());
 		clone.setTableId(getTableId());
+		clone.setClassPK(getClassPK());
 
 		return clone;
 	}
@@ -212,4 +228,5 @@ public class ExpandoRowModelImpl extends BaseModelImpl {
 
 	private long _rowId;
 	private long _tableId;
+	private long _classPK;
 }

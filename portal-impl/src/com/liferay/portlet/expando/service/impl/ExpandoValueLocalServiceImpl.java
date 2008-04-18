@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.ValueDataException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.model.ExpandoValue;
@@ -46,30 +47,46 @@ import java.util.List;
 public class ExpandoValueLocalServiceImpl
 	extends ExpandoValueLocalServiceBaseImpl {
 
+	public ExpandoValue addValue(ExpandoValue value)
+		throws PortalException, SystemException {
+
+		return addValue(
+			value.getClassNameId(), value.getTableId(), value.getColumnId(),
+			value.getClassPK(), value.getData());
+	}
+
 	public ExpandoValue addValue(
-			long columnId, long rowId, long classPK, String data)
+			long classNameId, long tableId, long columnId, long classPK,
+			String data)
 		throws PortalException, SystemException {
 
 		validate(data);
 
-		ExpandoColumn column = expandoColumnPersistence.findByPrimaryKey(
-			columnId);
+		ExpandoRow row = expandoRowPersistence.fetchByT_C(tableId, classPK);
+
+		if (row == null) {
+			long rowId = counterLocalService.increment();
+
+			row = expandoRowPersistence.create(rowId);
+
+			row.setTableId(tableId);
+			row.setClassPK(classPK);
+
+			expandoRowPersistence.update(row, false);
+		}
 
 		ExpandoValue value = expandoValuePersistence.fetchByT_C_R(
-			column.getTableId(), columnId, rowId);
+			tableId, columnId, row.getRowId());
 
 		if (value == null) {
-			ExpandoTable table = expandoTablePersistence.findByPrimaryKey(
-				column.getTableId());
-
 			long valueId = counterLocalService.increment();
 
 			value = expandoValuePersistence.create(valueId);
 
-			value.setTableId(column.getTableId());
+			value.setTableId(tableId);
 			value.setColumnId(columnId);
-			value.setRowId(rowId);
-			value.setClassNameId(table.getClassNameId());
+			value.setRowId(row.getRowId());
+			value.setClassNameId(classNameId);
 			value.setClassPK(classPK);
 		}
 
@@ -203,8 +220,44 @@ public class ExpandoValueLocalServiceImpl
 		return expandoValuePersistence.findByRowId(rowId, begin, end);
 	}
 
+	public List<ExpandoValue> getRowValues(
+			String className, String tableName, long classPK, int begin,
+			int end)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getRowValues(classNameId, tableName, classPK, begin, end);
+	}
+
+	public List<ExpandoValue> getRowValues(
+			long classNameId, String tableName, long classPK, int begin,
+			int end)
+		throws SystemException {
+
+		return expandoValueFinder.findByTC_TN_C(
+			classNameId, tableName, classPK, begin, end);
+	}
+
 	public int getRowValuesCount(long rowId) throws SystemException {
 		return expandoValuePersistence.countByRowId(rowId);
+	}
+
+	public int getRowValuesCount(
+			String className, String tableName, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getRowValuesCount(classNameId, tableName, classPK);
+	}
+
+	public int getRowValuesCount(
+			long classNameId, String tableName, long classPK)
+		throws SystemException {
+
+		return expandoValueFinder.countByTC_TN_C(
+			classNameId, tableName, classPK);
 	}
 
 	public ExpandoValue getValue(long valueId)
@@ -220,20 +273,20 @@ public class ExpandoValueLocalServiceImpl
 	}
 
 	public ExpandoValue getValue(
-			String className, String tableName, String name, long rowId)
+			String className, String tableName, String name, long classPK)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getValue(classNameId, tableName, name, rowId);
+		return getValue(classNameId, tableName, name, classPK);
 	}
 
 	public ExpandoValue getValue(
-			long classNameId, String tableName, String name, long rowId)
+			long classNameId, String tableName, String name, long classPK)
 		throws PortalException, SystemException {
 
-		return expandoValueFinder.findByTC_TN_N(
-			classNameId, tableName, name, rowId);
+		return expandoValueFinder.findByTC_TN_CN_C(
+			classNameId, tableName, name, classPK);
 	}
 
 	protected void validate(String data) throws PortalException {

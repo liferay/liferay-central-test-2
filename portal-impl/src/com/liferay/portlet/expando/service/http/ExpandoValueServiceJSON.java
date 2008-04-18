@@ -72,12 +72,21 @@ import org.json.JSONObject;
  *
  */
 public class ExpandoValueServiceJSON {
-	public static JSONObject addValue(long columnId, long rowId, long classPK,
-		java.lang.String data)
+	public static JSONObject addValue(
+		com.liferay.portlet.expando.model.ExpandoValue value)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
-		com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.addValue(columnId,
-				rowId, classPK, data);
+		com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.addValue(value);
+
+		return ExpandoValueJSONSerializer.toJSONObject(returnValue);
+	}
+
+	public static JSONObject addValue(long classNameId, long tableId,
+		long columnId, long classPK, java.lang.String data)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.addValue(classNameId,
+				tableId, columnId, classPK, data);
 
 		return ExpandoValueJSONSerializer.toJSONObject(returnValue);
 	}
@@ -225,9 +234,47 @@ public class ExpandoValueServiceJSON {
 		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getRowValues(java.lang.String className,
+		java.lang.String tableName, long classPK, int begin, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+			ExpandoValueServiceUtil.getRowValues(className, tableName, classPK,
+				begin, end);
+
+		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static JSONArray getRowValues(long classNameId,
+		java.lang.String tableName, long classPK, int begin, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+			ExpandoValueServiceUtil.getRowValues(classNameId, tableName,
+				classPK, begin, end);
+
+		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static int getRowValuesCount(long rowId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = ExpandoValueServiceUtil.getRowValuesCount(rowId);
+
+		return returnValue;
+	}
+
+	public static int getRowValuesCount(java.lang.String className,
+		java.lang.String tableName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoValueServiceUtil.getRowValuesCount(className,
+				tableName, classPK);
+
+		return returnValue;
+	}
+
+	public static int getRowValuesCount(long classNameId,
+		java.lang.String tableName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoValueServiceUtil.getRowValuesCount(classNameId,
+				tableName, classPK);
 
 		return returnValue;
 	}
