@@ -61,7 +61,7 @@ public class TextSearchEntry extends SearchEntry {
 		String align, String valign, String name, String href, String target,
 		String title) {
 
-		this(align, valign, DEFAULT_COLSPAN, name, href, null, null);
+		this(align, valign, DEFAULT_COLSPAN, name, href, target, title);
 	}
 
 	public TextSearchEntry(
