@@ -197,9 +197,9 @@ public class ServiceComponentLocalServiceImpl
 						" SQL scripts for the first time");
 			}
 
-			dbUtil.runSQLTemplateString(tablesSQL, true, true);
-			dbUtil.runSQLTemplateString(sequencesSQL, true, true);
-			dbUtil.runSQLTemplateString(indexesSQL, true, true);
+			dbUtil.runSQLTemplateString(tablesSQL, true, false);
+			dbUtil.runSQLTemplateString(sequencesSQL, true, false);
+			dbUtil.runSQLTemplateString(indexesSQL, true, false);
 		}
 		else {
 			if (_log.isInfoEnabled()) {
