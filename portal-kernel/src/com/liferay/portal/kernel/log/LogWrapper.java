@@ -225,7 +225,7 @@ public class LogWrapper implements Log {
 	}
 
 	protected void printMsg(Object msg) {
-		printMsg(msg);
+		System.err.println(msg);
 	}
 
 	private Log _log;
