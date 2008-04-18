@@ -24,10 +24,10 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.service.base.ExpandoValueServiceBaseImpl;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -39,10 +39,148 @@ import java.util.List;
  */
 public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 
-	public ExpandoValue addValue(ExpandoValue value)
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			boolean data)
 		throws PortalException, SystemException {
 
-		return expandoValueLocalService.addValue(value);
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			boolean[] data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			Date data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			Date[] data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			double data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			double[] data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			float data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			float[] data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			int data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			int[] data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			long data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			long[] data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			short data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			short[] data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			String data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
+	}
+
+	public ExpandoValue addValue(
+			String className, String tableName, String columnName, long classPK,
+			String[] data)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.addValue(
+			className, tableName, columnName, classPK, data);
 	}
 
 	public ExpandoValue addValue(
@@ -223,19 +361,19 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 	}
 
 	public ExpandoValue getValue(
-			String className, String tableName, String name, long rowId)
+			String className, String tableName, String columnName, long rowId)
 		throws PortalException, SystemException {
 
 		return expandoValueLocalService.getValue(
-			className, tableName, name, rowId);
+			className, tableName, columnName, rowId);
 	}
 
 	public ExpandoValue getValue(
-			long classNameId, String tableName, String name, long rowId)
+			long classNameId, String tableName, String columnName, long rowId)
 		throws PortalException, SystemException {
 
 		return expandoValueLocalService.getValue(
-			classNameId, tableName, name, rowId);
+			classNameId, tableName, columnName, rowId);
 	}
 
 }

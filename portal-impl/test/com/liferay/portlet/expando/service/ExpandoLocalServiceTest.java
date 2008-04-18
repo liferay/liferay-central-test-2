@@ -84,29 +84,17 @@ public class ExpandoLocalServiceTest extends BaseServiceTestCase {
 	}
 
 	public void test4CreateExpandoValuesForRow1() throws Exception {
-		ExpandoValue value1 = new ExpandoValueImpl();
-
-		value1.setClassName(ExpandoLocalServiceTest.class.getName());
-		value1.setTableName(_TABLENAME);
-		value1.setColumnName(_COLUMNNAME1);
-		value1.setClassPK(_CLASSPK1);
-		value1.setString(_VALUE1_COLUMN1);
-
-		value1 = ExpandoValueLocalServiceUtil.addValue(value1);
+		ExpandoValue value1 = ExpandoValueLocalServiceUtil.addValue(
+			ExpandoLocalServiceTest.class.getName(), _TABLENAME, _COLUMNNAME1,
+			_CLASSPK1, _VALUE1_COLUMN1);
 
 		assertNotNull(value1);
 		assertEquals(value1.getClassPK(), _CLASSPK1);
 		assertEquals(value1.getString(), _VALUE1_COLUMN1);
 
-		ExpandoValue value2 = new ExpandoValueImpl();
-
-		value2.setClassName(ExpandoLocalServiceTest.class.getName());
-		value2.setTableName(_TABLENAME);
-		value2.setColumnName(_COLUMNNAME2);
-		value2.setClassPK(_CLASSPK1);
-		value2.setDouble(_VALUE1_COLUMN2);
-
-		value2 = ExpandoValueLocalServiceUtil.addValue(value2);
+		ExpandoValue value2 = ExpandoValueLocalServiceUtil.addValue(
+			ExpandoLocalServiceTest.class.getName(), _TABLENAME, _COLUMNNAME2,
+			_CLASSPK1, _VALUE1_COLUMN2);
 
 		assertNotNull(value2);
 		assertEquals(value2.getClassPK(), _CLASSPK1);
@@ -114,29 +102,17 @@ public class ExpandoLocalServiceTest extends BaseServiceTestCase {
 	}
 
 	public void test4CreateExpandoValuesForRow2() throws Exception {
-		ExpandoValue value1 = new ExpandoValueImpl();
-
-		value1.setClassName(ExpandoLocalServiceTest.class.getName());
-		value1.setTableName(_TABLENAME);
-		value1.setColumnName(_COLUMNNAME1);
-		value1.setClassPK(_CLASSPK2);
-		value1.setString(_VALUE2_COLUMN1);
-
-		value1 = ExpandoValueLocalServiceUtil.addValue(value1);
+		ExpandoValue value1 = ExpandoValueLocalServiceUtil.addValue(
+			ExpandoLocalServiceTest.class.getName(), _TABLENAME, _COLUMNNAME1,
+			_CLASSPK2, _VALUE2_COLUMN1);
 
 		assertNotNull(value1);
 		assertEquals(value1.getClassPK(), _CLASSPK2);
 		assertEquals(value1.getString(), _VALUE2_COLUMN1);
 
-		ExpandoValue value2 = new ExpandoValueImpl();
-
-		value2.setClassName(ExpandoLocalServiceTest.class.getName());
-		value2.setTableName(_TABLENAME);
-		value2.setColumnName(_COLUMNNAME2);
-		value2.setClassPK(_CLASSPK2);
-		value2.setDouble(_VALUE2_COLUMN2);
-
-		value2 = ExpandoValueLocalServiceUtil.addValue(value2);
+		ExpandoValue value2 = ExpandoValueLocalServiceUtil.addValue(
+			ExpandoLocalServiceTest.class.getName(), _TABLENAME, _COLUMNNAME2,
+			_CLASSPK2, _VALUE2_COLUMN2);
 
 		assertNotNull(value2);
 		assertEquals(value2.getClassPK(), _CLASSPK2);
