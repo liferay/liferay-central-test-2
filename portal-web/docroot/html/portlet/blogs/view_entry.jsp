@@ -28,7 +28,7 @@
 String redirect = ParamUtil.getString(request, "redirect");
 
 if (Validator.isNull(redirect)) {
-	redirect = PortalUtil.getLayoutURL(layout, themeDisplay) + "/blogs";
+	redirect = PortalUtil.getLayoutURL(layout, themeDisplay) + "/-/blogs";
 }
 
 BlogsEntry entry = (BlogsEntry)request.getAttribute(WebKeys.BLOGS_ENTRY);

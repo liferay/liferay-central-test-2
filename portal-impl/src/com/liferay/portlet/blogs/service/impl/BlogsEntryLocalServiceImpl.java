@@ -641,9 +641,8 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		StringMaker sm = new StringMaker();
 
 		String name = group.getDescriptiveName();
-		//String url = portalURL + layoutURL + "/blogs/" + entry.getUrlTitle();
-		String url = portalURL + layoutURL + "/blogs";
-		String changesURL = portalURL + layoutURL + "/blogs/rss";
+		String url = portalURL + layoutURL + "/-/blogs";
+		String changesURL = portalURL + layoutURL + "/-/blogs/rss";
 
 		sm.append("http://blogsearch.google.com/ping?name=");
 		sm.append(HttpUtil.encodeURL(name));

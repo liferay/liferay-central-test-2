@@ -1558,7 +1558,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
 
 		String blogsEntryURL =
-			portalURL + layoutURL + "/blogs/" + entry.getUrlTitle();
+			portalURL + layoutURL + "/-/blogs/" + entry.getUrlTitle();
 
 		User blogsUser = userPersistence.findByPrimaryKey(entry.getUserId());
 		User commentsUser = userPersistence.findByPrimaryKey(userId);

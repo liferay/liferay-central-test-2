@@ -172,7 +172,7 @@ public class RSSAction extends PortletAction {
 
 			feedURL =
 				themeDisplay.getURLPortal() +
-					PortalUtil.getLayoutURL(themeDisplay) + "/blogs/rss";
+					PortalUtil.getLayoutURL(themeDisplay) + "/-/blogs/rss";
 
 			entryURL = feedURL;
 

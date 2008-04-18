@@ -37,7 +37,7 @@ for (int i = 0; i < results.size(); i++) {
 StringMaker sm = new StringMaker();
 
 sm.append(themeDisplay.getPathMain());
-sm.append("/blogs/rss?");
+sm.append("/-/blogs/rss?");
 
 if (organizationId > 0) {
 	sm.append("organizationId=" + organizationId);
