@@ -20,25 +20,26 @@
  * SOFTWARE.
  */
 
-package com.liferay.portalweb.portlet.announcements;
+package com.liferay.portalweb.portlet.staging;
 
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddHighPriorityAnnouncementTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="NavigatePrivateTestCommunityTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddHighPriorityAnnouncementTest extends BaseTestCase {
-	public void testAddHighPriorityAnnouncement() throws Exception {
+public class NavigatePrivateTestCommunityTest extends BaseTestCase {
+	public void testNavigatePrivateTestCommunity() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Manage Entries")) {
+				if (selenium.isElementPresent(
+							"//div[@id=\"banner\"]/div/div/ul/li[6]/ul/li[6]/ul/li[2]/a[1]")) {
 					break;
 				}
 			}
@@ -48,20 +49,9 @@ public class AddHighPriorityAnnouncementTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Manage Entries");
+		selenium.click(
+			"//div[@id=\"banner\"]/div/div/ul/li[6]/ul/li[6]/ul/li[2]/a[1]");
 		selenium.waitForPageToLoad("30000");
-		selenium.select("_84_distributionScope", "label=General");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Add Entry']");
-		selenium.waitForPageToLoad("30000");
-		selenium.type("_84_title", "High Priority Announcement");
-		selenium.type("_84_url", "www.liferay.com");
-		selenium.type("_84_content", "Medium");
-		selenium.type("_84_content", "This is a high priority announcement!");
-		selenium.select("_84_priority", "label=High");
-		selenium.click("//input[@value='Save']");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Entries");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -69,7 +59,8 @@ public class AddHighPriorityAnnouncementTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=High Priority Announcement")) {
+				if (selenium.isElementPresent(
+							"//input[@value='Add Blog Entry']")) {
 					break;
 				}
 			}
