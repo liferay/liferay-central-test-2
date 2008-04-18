@@ -5,6 +5,10 @@
 		<param-name>contextClass</param-name>
 		<param-value>com.liferay.portal.spring.context.LazyClassPathApplicationContext</param-value>
 	</context-param>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value></param-value>
+	</context-param>
 	<filter>
 		<filter-name>Auto Login Filter</filter-name>
 		<filter-class>com.liferay.portal.servlet.filters.autologin.AutoLoginFilter</filter-class>

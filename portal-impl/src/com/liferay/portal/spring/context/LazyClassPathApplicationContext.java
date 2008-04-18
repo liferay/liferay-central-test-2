@@ -24,9 +24,12 @@ package com.liferay.portal.spring.context;
 
 import com.liferay.portal.util.PropsUtil;
 
+import java.io.IOException;
+
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 
+import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.core.io.DefaultResourceLoader;
 import org.springframework.web.context.support.XmlWebApplicationContext;
@@ -35,12 +38,28 @@ import org.springframework.web.context.support.XmlWebApplicationContext;
  * <a href="LazyClassPathApplicationContext.java.html"><b><i>View Source</i></b>
  * </a>
  *
+ * <p>
+ * This web application context will first load bean definitions in the
+ * contextConfigLocation parameter in web.xml.  Then, the context will load bean
+ * definitions specified by spring.configs parameter in portal.properties.
+ * </p>
+ *
  * @author Brian Wing Shun Chan
+ * @author Alexander Chow
  *
  */
 public class LazyClassPathApplicationContext extends XmlWebApplicationContext {
 
-	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader) {
+	protected void loadBeanDefinitions(XmlBeanDefinitionReader reader)
+		throws BeansException, IOException {
+
+		try {
+			super.loadBeanDefinitions(reader);
+		}
+		catch (Exception e) {
+			_log.warn(e);
+		}
+
 		reader.setResourceLoader(new DefaultResourceLoader());
 
 		String[] configLocations = PropsUtil.getArray(PropsUtil.SPRING_CONFIGS);
