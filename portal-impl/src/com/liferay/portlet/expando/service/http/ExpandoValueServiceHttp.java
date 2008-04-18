@@ -2115,7 +2115,7 @@ public class ExpandoValueServiceHttp {
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
 		HttpPrincipal httpPrincipal, java.lang.String className,
-		java.lang.String tableName, java.lang.String name, long rowId)
+		java.lang.String tableName, java.lang.String columnName, long rowId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -2131,9 +2131,9 @@ public class ExpandoValueServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = name;
+			Object paramObj2 = columnName;
 
-			if (name == null) {
+			if (columnName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
@@ -2171,7 +2171,7 @@ public class ExpandoValueServiceHttp {
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
 		HttpPrincipal httpPrincipal, long classNameId,
-		java.lang.String tableName, java.lang.String name, long rowId)
+		java.lang.String tableName, java.lang.String columnName, long rowId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -2183,9 +2183,9 @@ public class ExpandoValueServiceHttp {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj2 = name;
+			Object paramObj2 = columnName;
 
-			if (name == null) {
+			if (columnName == null) {
 				paramObj2 = new NullWrapper("java.lang.String");
 			}
 

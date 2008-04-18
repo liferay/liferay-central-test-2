@@ -499,23 +499,23 @@ public class ExpandoValueLocalServiceUtil {
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
 		java.lang.String className, java.lang.String tableName,
-		java.lang.String name, long classPK)
+		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
 
-		return expandoValueLocalService.getValue(className, tableName, name,
-			classPK);
+		return expandoValueLocalService.getValue(className, tableName,
+			columnName, classPK);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
-		long classNameId, java.lang.String tableName, java.lang.String name,
-		long classPK)
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
 
-		return expandoValueLocalService.getValue(classNameId, tableName, name,
-			classPK);
+		return expandoValueLocalService.getValue(classNameId, tableName,
+			columnName, classPK);
 	}
 }

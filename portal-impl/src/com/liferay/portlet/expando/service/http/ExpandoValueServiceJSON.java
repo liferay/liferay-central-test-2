@@ -464,21 +464,21 @@ public class ExpandoValueServiceJSON {
 	}
 
 	public static JSONObject getValue(java.lang.String className,
-		java.lang.String tableName, java.lang.String name, long rowId)
+		java.lang.String tableName, java.lang.String columnName, long rowId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.getValue(className,
-				tableName, name, rowId);
+				tableName, columnName, rowId);
 
 		return ExpandoValueJSONSerializer.toJSONObject(returnValue);
 	}
 
 	public static JSONObject getValue(long classNameId,
-		java.lang.String tableName, java.lang.String name, long rowId)
+		java.lang.String tableName, java.lang.String columnName, long rowId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.getValue(classNameId,
-				tableName, name, rowId);
+				tableName, columnName, rowId);
 
 		return ExpandoValueJSONSerializer.toJSONObject(returnValue);
 	}

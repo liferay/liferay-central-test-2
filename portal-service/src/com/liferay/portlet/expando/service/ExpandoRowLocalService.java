@@ -112,7 +112,7 @@ public interface ExpandoRowLocalService {
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.expando.model.ExpandoRow getRow(
-		long classNameId, java.lang.String tablename, long classPK)
+		long classNameId, java.lang.String tableName, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

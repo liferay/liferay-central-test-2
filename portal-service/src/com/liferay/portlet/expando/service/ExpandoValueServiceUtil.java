@@ -454,21 +454,23 @@ public class ExpandoValueServiceUtil {
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
 		java.lang.String className, java.lang.String tableName,
-		java.lang.String name, long rowId)
+		java.lang.String columnName, long rowId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
 
-		return expandoValueService.getValue(className, tableName, name, rowId);
+		return expandoValueService.getValue(className, tableName, columnName,
+			rowId);
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValue getValue(
-		long classNameId, java.lang.String tableName, java.lang.String name,
-		long rowId)
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long rowId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
 
-		return expandoValueService.getValue(classNameId, tableName, name, rowId);
+		return expandoValueService.getValue(classNameId, tableName, columnName,
+			rowId);
 	}
 }

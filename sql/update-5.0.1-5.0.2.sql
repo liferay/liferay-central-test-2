@@ -1,3 +1,11 @@
+drop table ExpandoRow;
+
+create table ExpandoRow (
+	rowId_ LONG not null primary key,
+	tableId LONG,
+	classPK LONG
+);
+
 drop table ExpandoValue;
 
 create table ExpandoValue (

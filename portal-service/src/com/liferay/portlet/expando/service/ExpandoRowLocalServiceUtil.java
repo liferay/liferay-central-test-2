@@ -176,12 +176,12 @@ public class ExpandoRowLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
-		long classNameId, java.lang.String tablename, long classPK)
+		long classNameId, java.lang.String tableName, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {
 		ExpandoRowLocalService expandoRowLocalService = ExpandoRowLocalServiceFactory.getService();
 
-		return expandoRowLocalService.getRow(classNameId, tablename, classPK);
+		return expandoRowLocalService.getRow(classNameId, tableName, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getRows(

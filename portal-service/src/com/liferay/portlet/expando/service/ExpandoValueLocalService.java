@@ -272,13 +272,13 @@ public interface ExpandoValueLocalService {
 
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		java.lang.String className, java.lang.String tableName,
-		java.lang.String name, long classPK)
+		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
-		long classNameId, java.lang.String tableName, java.lang.String name,
-		long classPK)
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

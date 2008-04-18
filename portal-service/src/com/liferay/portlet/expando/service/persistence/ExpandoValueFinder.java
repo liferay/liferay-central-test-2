@@ -29,27 +29,27 @@ package com.liferay.portlet.expando.service.persistence;
  *
  */
 public interface ExpandoValueFinder {
-	public int countByTC_TN_C(long classNameId, java.lang.String tableName,
-		long classPK) throws com.liferay.portal.SystemException;
-
 	public int countByTC_TN_CN(long classNameId, java.lang.String tableName,
 		java.lang.String columnName) throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_C(
-		long classNameId, java.lang.String tableName, long classPK, int begin,
-		int end) throws com.liferay.portal.SystemException;
+	public int countByTC_TN_C(long classNameId, java.lang.String tableName,
+		long classPK) throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_CN(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_C(
+		long classNameId, java.lang.String tableName, long classPK, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
 	public com.liferay.portlet.expando.model.ExpandoValue findByTC_TN_CN_C(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.expando.model.ExpandoValue findByTC_TN_N(
+	public com.liferay.portlet.expando.model.ExpandoValue findByTC_TN_CN_R(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long rowId)
 		throws com.liferay.portal.SystemException;

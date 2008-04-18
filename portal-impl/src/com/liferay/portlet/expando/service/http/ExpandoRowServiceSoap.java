@@ -213,11 +213,11 @@ public class ExpandoRowServiceSoap {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoRowSoap getRow(
-		long classNameId, java.lang.String tablename, long classPK)
+		long classNameId, java.lang.String tableName, long classPK)
 		throws RemoteException {
 		try {
 			com.liferay.portlet.expando.model.ExpandoRow returnValue = ExpandoRowServiceUtil.getRow(classNameId,
-					tablename, classPK);
+					tableName, classPK);
 
 			return com.liferay.portlet.expando.model.ExpandoRowSoap.toSoapModel(returnValue);
 		}

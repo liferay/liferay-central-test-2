@@ -87,24 +87,6 @@
 				(ExpandoRow.classPK = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.countByTC_TN_C">
-		<![CDATA[
-			SELECT
-				COUNT(*) AS COUNT_VALUE
-			FROM
-				ExpandoValue
-			INNER JOIN
-				ExpandoRow ON
-					(ExpandoRow.rowId_ = ExpandoValue.rowId_)
-			INNER JOIN
-				ExpandoTable ON
-					(ExpandoTable.tableId = ExpandoRow.tableId)
-			WHERE
-				(ExpandoTable.classNameId = ?) AND
-				(ExpandoTable.name = ?) AND
-				(ExpandoRow.classPK = ?)
-		]]>
-	</sql>
 	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.countByTC_TN_CN">
 		<![CDATA[
 			SELECT
@@ -123,10 +105,10 @@
 				(ExpandoColumn.name = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_C">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.countByTC_TN_C">
 		<![CDATA[
 			SELECT
-				{ExpandoValue.*}
+				COUNT(*) AS COUNT_VALUE
 			FROM
 				ExpandoValue
 			INNER JOIN
@@ -157,6 +139,24 @@
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?)
+		]]>
+	</sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_C">
+		<![CDATA[
+			SELECT
+				{ExpandoValue.*}
+			FROM
+				ExpandoValue
+			INNER JOIN
+				ExpandoRow ON
+					(ExpandoRow.rowId_ = ExpandoValue.rowId_)
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoRow.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?) AND
+				(ExpandoRow.classPK = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN_C">

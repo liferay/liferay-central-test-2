@@ -254,13 +254,13 @@ public interface ExpandoValueService {
 
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
 		java.lang.String className, java.lang.String tableName,
-		java.lang.String name, long rowId)
+		java.lang.String columnName, long rowId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
 	public com.liferay.portlet.expando.model.ExpandoValue getValue(
-		long classNameId, java.lang.String tableName, java.lang.String name,
-		long rowId)
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long rowId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

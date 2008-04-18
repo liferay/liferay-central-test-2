@@ -60,13 +60,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setBoolean(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setBoolean(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -80,13 +81,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setBooleanArray(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setBooleanArray(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -100,13 +102,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setDate(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setDate(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -120,13 +123,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setDateArray(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setDateArray(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -140,13 +144,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setDouble(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setDouble(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -160,13 +165,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setDoubleArray(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setDoubleArray(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -180,13 +186,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setFloat(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setFloat(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -200,13 +207,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setFloatArray(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setFloatArray(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -220,13 +228,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setInteger(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setInteger(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -240,13 +249,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setIntegerArray(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setIntegerArray(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -260,13 +270,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setLong(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setLong(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -280,13 +291,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setLongArray(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setLongArray(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -300,13 +312,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setShort(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setShort(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -320,13 +333,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setShortArray(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setShortArray(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -340,13 +354,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setString(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setString(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(
@@ -360,13 +375,14 @@ public class ExpandoValueLocalServiceImpl
 		ExpandoColumn column = expandoColumnLocalService.getColumn(
 			table.getTableId(), columnName);
 
-		ExpandoValue expandoValue = new ExpandoValueImpl();
-		expandoValue.setColumnId(column.getColumnId());
-		expandoValue.setStringArray(data);
+		ExpandoValue value = new ExpandoValueImpl();
+
+		value.setColumnId(column.getColumnId());
+		value.setStringArray(data);
 
 		return addValue(
 			table.getClassNameId(), table.getTableId(), column.getColumnId(),
-			classPK, expandoValue.getData());
+			classPK, value.getData());
 	}
 
 	public ExpandoValue addValue(

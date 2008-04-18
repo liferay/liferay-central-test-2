@@ -47,7 +47,8 @@ create table ExpandoColumn (
 
 create table ExpandoRow (
 	rowId_ LONG not null primary key,
-	tableId LONG
+	tableId LONG,
+	classPK LONG
 );
 
 create table ExpandoTable (

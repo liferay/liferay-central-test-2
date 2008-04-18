@@ -147,11 +147,11 @@ public class ExpandoRowServiceJSON {
 	}
 
 	public static JSONObject getRow(long classNameId,
-		java.lang.String tablename, long classPK)
+		java.lang.String tableName, long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.expando.model.ExpandoRow returnValue = ExpandoRowServiceUtil.getRow(classNameId,
-				tablename, classPK);
+				tableName, classPK);
 
 		return ExpandoRowJSONSerializer.toJSONObject(returnValue);
 	}

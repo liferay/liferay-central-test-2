@@ -29,23 +29,16 @@ package com.liferay.portlet.expando.service.persistence;
  *
  */
 public class ExpandoValueFinderUtil {
-	public static int countByTC_TN_C(long classNameId,
-		java.lang.String tableName, long classPK)
-		throws com.liferay.portal.SystemException {
-		return getFinder().countByTC_TN_C(classNameId, tableName, classPK);
-	}
-
 	public static int countByTC_TN_CN(long classNameId,
 		java.lang.String tableName, java.lang.String columnName)
 		throws com.liferay.portal.SystemException {
 		return getFinder().countByTC_TN_CN(classNameId, tableName, columnName);
 	}
 
-	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_C(
-		long classNameId, java.lang.String tableName, long classPK, int begin,
-		int end) throws com.liferay.portal.SystemException {
-		return getFinder()
-				   .findByTC_TN_C(classNameId, tableName, classPK, begin, end);
+	public static int countByTC_TN_C(long classNameId,
+		java.lang.String tableName, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getFinder().countByTC_TN_C(classNameId, tableName, classPK);
 	}
 
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_CN(
@@ -57,6 +50,13 @@ public class ExpandoValueFinderUtil {
 			end);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_C(
+		long classNameId, java.lang.String tableName, long classPK, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getFinder()
+				   .findByTC_TN_C(classNameId, tableName, classPK, begin, end);
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoValue findByTC_TN_CN_C(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
@@ -65,12 +65,12 @@ public class ExpandoValueFinderUtil {
 				   .findByTC_TN_CN_C(classNameId, tableName, columnName, classPK);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoValue findByTC_TN_N(
+	public static com.liferay.portlet.expando.model.ExpandoValue findByTC_TN_CN_R(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long rowId)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByTC_TN_N(classNameId, tableName, columnName, rowId);
+				   .findByTC_TN_CN_R(classNameId, tableName, columnName, rowId);
 	}
 
 	public static ExpandoValueFinder getFinder() {

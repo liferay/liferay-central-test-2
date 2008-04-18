@@ -95,10 +95,10 @@ public class ExpandoRowServiceImpl extends ExpandoRowServiceBaseImpl {
 		return expandoRowLocalService.getRow(className, tableName, classPK);
 	}
 
-	public ExpandoRow getRow(long classNameId, String tablename, long classPK)
+	public ExpandoRow getRow(long classNameId, String tableName, long classPK)
 		throws PortalException, SystemException {
 
-		return expandoRowLocalService.getRow(classNameId, tablename, classPK);
+		return expandoRowLocalService.getRow(classNameId, tableName, classPK);
 	}
 
 	public List<ExpandoRow> getRows(long tableId, int begin, int end)

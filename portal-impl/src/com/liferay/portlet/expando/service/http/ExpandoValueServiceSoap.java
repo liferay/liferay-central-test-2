@@ -739,10 +739,10 @@ public class ExpandoValueServiceSoap {
 
 	public static com.liferay.portlet.expando.model.ExpandoValueSoap getValue(
 		java.lang.String className, java.lang.String tableName,
-		java.lang.String name, long rowId) throws RemoteException {
+		java.lang.String columnName, long rowId) throws RemoteException {
 		try {
 			com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.getValue(className,
-					tableName, name, rowId);
+					tableName, columnName, rowId);
 
 			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModel(returnValue);
 		}
@@ -754,11 +754,11 @@ public class ExpandoValueServiceSoap {
 	}
 
 	public static com.liferay.portlet.expando.model.ExpandoValueSoap getValue(
-		long classNameId, java.lang.String tableName, java.lang.String name,
-		long rowId) throws RemoteException {
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long rowId) throws RemoteException {
 		try {
 			com.liferay.portlet.expando.model.ExpandoValue returnValue = ExpandoValueServiceUtil.getValue(classNameId,
-					tableName, name, rowId);
+					tableName, columnName, rowId);
 
 			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModel(returnValue);
 		}

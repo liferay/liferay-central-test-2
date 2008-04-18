@@ -407,15 +407,15 @@ public class ExpandoRowServiceHttp {
 
 	public static com.liferay.portlet.expando.model.ExpandoRow getRow(
 		HttpPrincipal httpPrincipal, long classNameId,
-		java.lang.String tablename, long classPK)
+		java.lang.String tableName, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
 			Object paramObj0 = new LongWrapper(classNameId);
 
-			Object paramObj1 = tablename;
+			Object paramObj1 = tableName;
 
-			if (tablename == null) {
+			if (tableName == null) {
 				paramObj1 = new NullWrapper("java.lang.String");
 			}
 
