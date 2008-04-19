@@ -210,7 +210,7 @@ if (message != null) {
 	<td>
 		<liferay-ui:message key="body" />
 	</td>
-	<td>
+	<td class="message-edit-body">
 		<%@ include file="/html/portlet/message_boards/bbcode_editor.jspf" %>
 
 		<input name="<portlet:namespace />body" type="hidden" value="" />

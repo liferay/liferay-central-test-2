@@ -37,6 +37,8 @@ Liferay = function() {
 	return {};
 }();
 
+Liferay.Editor = {};
+
 jQuery.fn.getOne = function(s) {
 	return jQuery.getOne(s, this);
 };

@@ -22,31 +22,19 @@
  */
 %>
 
-<textarea class="lfr-textarea message-edit" id="textArea" name="textArea"></textarea>
+<%@ include file="/html/portal/init.jsp" %>
 
-<script type="text/javascript">
-	jQuery(
-		function () {
-			
-			new Liferay.Editor.bbCode(	
-				{
-					textarea: '#textArea',
+<%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %>
 
-					//Language keys
-					emailPrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-an-email-address") %>',
-					emailNamePrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-name-associated-with-the-email") %>',
-					
-					fontTypeText: '<%= UnicodeLanguageUtil.get(pageContext, "font") %>',
-					fontSizeText: '<%= UnicodeLanguageUtil.get(pageContext, "size") %>',
-					
-					imagePathPrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-address-for-a-picture") %>',
-					
-					listPrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list") %>',
-					
-					urlHrefPrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-address") %>',
-					urlTitlePrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-title-for-the-link") %>'
-				}
-			);
-		}
-	);
-</script>
+<%
+String path = themeDisplay.getPathThemeImages() + "/emoticons/";
+
+for (int i = 0; i < BBCodeUtil.EMOTICONS.length; i++) {
+	String image = StringUtil.replace(BBCodeUtil.EMOTICONS[i][0], "@theme_images_path@", themeDisplay.getPathThemeImages());
+%>
+
+	<a class="lfr-button emoticon" emoticonCode="<%= BBCodeUtil.EMOTICONS[i][1] %>" ><%= image %></a>
+
+<%
+}
+%>

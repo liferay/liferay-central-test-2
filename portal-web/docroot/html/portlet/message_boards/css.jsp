@@ -160,3 +160,7 @@ td.user-info {
 	min-height: 100%;
 	width: 100%;
 }
+
+.portlet-message-boards .message-edit-body {
+	width: 750px;
+}

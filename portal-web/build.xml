@@ -652,6 +652,10 @@
 		</antcall>
 
 		<antcall target="build-javascript-portlet-cmd">
+			<param name="portlet.name" value="message_boards" />
+		</antcall>
+
+		<antcall target="build-javascript-portlet-cmd">
 			<param name="portlet.name" value="tags_admin" />
 		</antcall>
 	</target>

@@ -481,6 +481,85 @@ response.setContentType(ContentTypes.TEXT_CSS);
 	clear: both;
 }
 
+/* ---------- Toolbar ---------- */
+
+.lfr-toolbar {
+	background-color: #e5e4e8;
+/*	min-width: 750px;*/
+	padding-top: 3px;
+/*	white-space: nowrap;*/
+}
+
+.lfr-toolbar:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .lfr-toolbar {
+	height: 1%;
+}
+
+.ie6 .lfr-toolbar {
+	width: 750px;
+}
+
+.lfr-toolbar .lfr-button, .lfr-emoticon-container .lfr-button {
+	border: 1px solid #e5e4e8;
+	cursor: pointer;
+	margin: 0 2px;
+	padding: 2px 4px;
+}
+
+.lfr-toolbar .lfr-button img {
+	vertical-align: text-top;
+}
+
+.lfr-toolbar .lfr-button:focus {
+	border: 1px solid #000;
+}
+
+.lfr-toolbar .lfr-button:hover {
+	border-bottom-color: #777;
+	border-right-color: #777;
+	border: 1px solid #ccc;
+}
+
+.lfr-toolbar .lfr-separator {
+	border-left: 1px solid #fff;
+	border-right: 1px solid #ccc;
+	font-size: 12px;
+	height: 25px;
+	margin: 0 5px;
+}
+
+.lfr-toolbar select, .lfr-toolbar .lfr-button, .lfr-toolbar .lfr-separator, .lfr-emoticon-container .lfr-button {
+	float: left;
+}
+
+.lfr-toolbar select {
+	margin: 0 5px;
+}
+
+.ie .lfr-toolbar select {
+	margin-top: 3px;
+}
+
+.lfr-emoticon-container {
+	background: #e5e4e8;
+	border: 1px solid #ccc;
+	display: none;
+	padding-top: 5px;
+	position: absolute;
+	width: 180px;
+}
+
+.lfr-emoticon-container .lfr-button {
+	margin: 0;
+}
+
 /* ---------- Tree ---------- */
 
 ul.gamma {
@@ -1245,4 +1324,72 @@ input[type="text"].openid_login {
 	background-position: 0 50%;
 	color: #000;
 	padding-left: 18px;
+}
+
+.expose {
+	width: 600px;
+}
+
+.expose-portlet {
+	float: left;
+	border: 3px solid #6DC0F2;
+	margin: 5px;
+	min-width: 22%;
+}
+
+.expose-portlet a {
+	background: url(<%= themeDisplay.getPathThemeImages() %>/common/expose_portlet_bg.png) no-repeat 50% 34px;
+	height: 80px;
+	display: block;
+	padding: 5px;
+	font-size: 1.2em;
+	font-weight: bold;
+	position: relative;
+	text-align: center;
+	text-decoration: none;
+}
+
+.expose-portlet a:hover {
+	background-color: #eee;
+}
+
+.expose-portlet .expose-title {
+	background: #D5E8FF url() no-repeat 5px 50%;
+	display: block;
+	padding: 2px;
+	padding-left: 25px;
+	text-align: center;
+}
+
+.expose-portlet a:hover .expose-title {
+	background-color: #6DC0F2;
+}
+
+.expose-page .expose-page-content {
+	display: none;
+}
+
+.expose-page.current .expose-page-content {
+	display: block;
+}
+.expose-page-title {
+	clear: both;
+	border: 1px solid #ccc;
+	margin-bottom: 5px;
+}
+.expose-page-title a {
+	display: block;
+	background: #eef0f1 url(<%= themeDisplay.getPathThemeImages() %>/common/add.png) no-repeat 3px 50%;
+	margin: 1px;
+	padding: 3px 5px 3px 20px;
+	text-decoration: none;
+	font-weight: bold;
+	font-size: 1.2em;
+}
+.expose-page.current .expose-page-title a {
+	background-image: none;
+	padding-left: 5px;
+}
+.expose-page-title a:hover {
+	background-color: #d5e8ff;
 }
