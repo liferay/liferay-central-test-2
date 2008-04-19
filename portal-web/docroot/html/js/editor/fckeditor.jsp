@@ -48,8 +48,6 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 
 <head>
 	<title>Editor</title>
-	<script src="../jquery/jquery.js" type="text/javascript"></script>
-	<script src="../jquery/j2browse.js" type="text/javascript"></script>
 	<script src="fckeditor/fckeditor.js" type="text/javascript"></script>
 	<script type="text/javascript">
 		function getHTML() {
@@ -88,19 +86,27 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 				fckEditor.ReplaceTextarea();
 
 				// LEP-5707
-				if (jQuery.browser.firefox && jQuery.browser.version.major < 3) {
+				var ua = navigator.userAgent, isFirefox2andBelow = false;
+				var agent = /(Firefox)\/(.+)/.exec(ua);
+
+				if (agent.length && agent.length == 3) {
+					if (parseInt(agent[2])) {
+						isFirefox2andBelow = true;
+					}
+				}
+
+				if (isFirefox2andBelow) {
 					var fckInstanceName = fckEditor.InstanceName;
+					var fckIframe = document.getElementById(fckInstanceName + '___Frame');
 
 					var interval = setInterval(function() {
-						var image = jQuery('.TB_Button_Image', document.getElementById(fckInstanceName + '___Frame').contentDocument);
-						if (image.length) {
-							image.filter(':last').bind(
-								'load',
-								function(event) {
-									clearInterval(interval);
-									parent.stop();
-								}
-							)
+						var iframe = fckIframe.contentDocument.getElementsByTagName('iframe');
+						if (iframe.length) {
+							iframe = iframe[0];
+							iframe.onload = function(event) {
+								clearInterval(interval);
+								parent.stop();
+							};
 						}
 					}, 500);
 				}
