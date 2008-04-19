@@ -3,21 +3,21 @@ if (!Liferay.Editor.bbCode) {
 		initialize: function(options) {
 			var instance = this;
 			options = options || {};
-			
+
 			instance._textarea = jQuery(options.textarea);
 			instance._location = jQuery(options.location || []);
 
 			// Language keys
 			instance._emailPrompt = options.emailPrompt || Liferay.Language.get('enter-an-email-address');
 			instance._emailNamePrompt = options.emailNamePrompt || Liferay.Language.get('enter-a-name-associated-with-the-email');
-			
+
 			instance._fontTypeText = options.fontTypeText || Liferay.Language.get('font');
 			instance._fontSizeText = options.fontSizeText || Liferay.Language.get('size');
-			
+
 			instance._imagePathPrompt = options.imagePathPrompt || Liferay.Language.get('enter-a-address-for-a-picture');
-			
+
 			instance._listPrompt = options.listPrompt || Liferay.Language.get('enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list');
-			
+
 			instance._urlHrefPrompt = options.urlHrefPrompt || Liferay.Language.get('enter-a-address');
 			instance._urlTitlePrompt = options.urlTitlePrompt || Liferay.Language.get('enter-a-title-for-the-link');
 
@@ -28,10 +28,10 @@ if (!Liferay.Editor.bbCode) {
 			if (options.onLoad) {
 				options.onLoad();
 			}
-			
+
 		},
-		
-		
+
+
 		_createEmoticons: function() {
 			var instance = this;
 
@@ -56,10 +56,10 @@ if (!Liferay.Editor.bbCode) {
 				}
 			);
 		},
-		
+
 		_createToolbar: function() {
 			var instance = this;
-			
+
 			var html = '';
 
 			instance._buttons = {
@@ -273,7 +273,7 @@ if (!Liferay.Editor.bbCode) {
 						if (offsetHeight == 0) {
 							offsetHeight = this.offsetHeight;
 						}
-						
+
 						if (offsetWidth == 0) {
 							offsetWidth = this.offsetWidth;
 						}
@@ -294,12 +294,10 @@ if (!Liferay.Editor.bbCode) {
 							}
 						);
 					},
-					out: function(event) {console.log(hoveringOver);
+					out: function(event) {
 						if (!hoveringOver) {
 							instance._emoticons.hide();
 						}
-
-						// return false;
 					}
 				}
 			);
@@ -318,7 +316,7 @@ if (!Liferay.Editor.bbCode) {
 					}			
 				}
 			);
-			
+
 			// Bugfix for Firefox attached mouse(over|out) events and textareas
 			if (Liferay.Browser.is_firefox) {
 				var emoticonDiv = instance._emoticons[0];
@@ -350,22 +348,22 @@ if (!Liferay.Editor.bbCode) {
 					}
 				}
 			);
-			
+
 			var selects = instance._location.find('select');
 			selects.change(
 				function(event) {
 					var selectId = this.getAttribute('selectId');
-					
+
 					if (selectId && instance._buttons[selectId].onChange) {
 						instance._buttons[selectId].onChange.apply(this, [event]);
 					}
 				}
 			);
-			
+
 			instance._fontColorInput = jQuery('<input type="hidden" val="" />');
-			
+
 			instance._location.find('.use-color-picker').before(instance._fontColorInput);
-			
+
 			var colorPicker = new Liferay.ColorPicker(
 				{
 					hasImage: true,
@@ -375,7 +373,7 @@ if (!Liferay.Editor.bbCode) {
 				}
 			);
 		},
-		
+
 		_insertColor: function() {
 			var instance = this;
 
@@ -407,7 +405,7 @@ if (!Liferay.Editor.bbCode) {
 
 			var textarea = instance._textarea;
 			var field = textarea[0];
-			
+
 			textarea.trigger('focus');
 
 			if (Liferay.Browser.is_ie) {
@@ -461,8 +459,7 @@ if (!Liferay.Editor.bbCode) {
 				instance._insertTag('list', ordered, list);
 			}
 		},
-		
-		
+
 		_insertURL: function() {
 			var instance = this;
 
@@ -521,7 +518,7 @@ if (!Liferay.Editor.bbCode) {
 				var preSel = value.substring(0, startPos);
 				var sel = value.substring(startPos, endPos);
 				var postSel = value.substring(endPos, field.value.length);
-				
+
 				var caretPos = startPos + begTag.length;
 
 				if (content != null) {
@@ -555,12 +552,12 @@ if (!Liferay.Editor.bbCode) {
 				field.selectionEnd = field.selectionStart;
 			}
 		},
-		
+
 		_setHTML: function(content) {
 			var instance = this;
 
 			instance._textarea.val(content);
 		}
-		
+
 	});
 }
