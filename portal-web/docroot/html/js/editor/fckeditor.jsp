@@ -98,7 +98,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 								'load',
 								function(event) {
 									clearInterval(interval);
-									window.stop();
+									parent.stop();
 								}
 							)
 						}
