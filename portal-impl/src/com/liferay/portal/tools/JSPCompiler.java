@@ -108,8 +108,8 @@ public class JSPCompiler {
 			String classDestination = _directory;
 
 			String cmd =
-				_compiler + " -classpath " + _classPath +
-				" -d " + classDestination + " " +
+				_compiler + " -classpath \"" + _classPath +
+				"\" -d \"" + classDestination + "\" " +
 				file.toString();
 
 			File classFile = new File(
