@@ -86,10 +86,11 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 				fckEditor.ReplaceTextarea();
 
 				// LEP-5707
+
 				var ua = navigator.userAgent, isFirefox2andBelow = false;
 				var agent = /(Firefox)\/(.+)/.exec(ua);
 
-				if (agent.length && agent.length == 3) {
+				if (agent.length && (agent.length == 3)) {
 					if (parseInt(agent[2])) {
 						isFirefox2andBelow = true;
 					}
@@ -99,16 +100,20 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 					var fckInstanceName = fckEditor.InstanceName;
 					var fckIframe = document.getElementById(fckInstanceName + '___Frame');
 
-					var interval = setInterval(function() {
-						var iframe = fckIframe.contentDocument.getElementsByTagName('iframe');
-						if (iframe.length) {
-							iframe = iframe[0];
-							iframe.onload = function(event) {
-								clearInterval(interval);
-								parent.stop();
-							};
-						}
-					}, 500);
+					var interval = setInterval(
+						function() {
+							var iframe = fckIframe.contentDocument.getElementsByTagName('iframe');
+
+							if (iframe.length) {
+								iframe = iframe[0];
+
+								iframe.onload = function(event) {
+									clearInterval(interval);
+									parent.stop();
+								};
+							}
+						},
+						500);
 				}
 			}
 		}
