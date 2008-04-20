@@ -23,7 +23,6 @@
 %>
 
 <%
-
 long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
 long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
 
@@ -41,17 +40,16 @@ for (TagsAsset asset : assets) {
 	List<TagsEntry> assetEntries = TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId());
 
 	for (TagsEntry assetEntry : assetEntries) {
-		List<TagsProperty> tagProperties = TagsPropertyLocalServiceUtil.getProperties(assetEntry.getEntryId());
+		List<TagsProperty> properties = TagsPropertyLocalServiceUtil.getProperties(assetEntry.getEntryId());
 
-		for (TagsProperty tagProperty : tagProperties) {
-			
-			if (("category").equals(tagProperty.getKey()) && tagProperty.getValue().equals(category)) {
+		for (TagsProperty property : properties) {
+			if (property.getKey().equals("category") && property.getValue().equals(category)) {
 				String tagLabel = null;
 
 				try {
-					TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "description");
+					TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "description");
 
-					tagLabel = property.getValue();
+					tagLabel = descriptionProperty.getValue();
 				}
 				catch (NoSuchPropertyException nspee) {
 					tagLabel = StringUtil.upperCaseFirstLetter(assetEntry.getName());
@@ -66,6 +64,7 @@ for (TagsAsset asset : assets) {
 				}
 
 				assetsList.add(asset);
+
 				break;
 			}
 		}
