@@ -36,7 +36,7 @@ public interface ExpandoRowFinder {
 		long classNameId, java.lang.String tableName, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.expando.model.ExpandoRow findByTC_TN_C(
+	public com.liferay.portlet.expando.model.ExpandoRow fetchByTC_TN_C(
 		long classNameId, java.lang.String tableName, long classPK)
 		throws com.liferay.portal.SystemException;
 }

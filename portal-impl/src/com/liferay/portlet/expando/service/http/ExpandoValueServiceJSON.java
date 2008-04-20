@@ -385,6 +385,182 @@ public class ExpandoValueServiceJSON {
 		return returnValue;
 	}
 
+	public static boolean getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		boolean defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		boolean returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static boolean[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		boolean[] defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		boolean[] returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static java.util.Date getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.util.Date defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.Date returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static java.util.Date[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.util.Date[] defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.util.Date[] returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static double getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		double defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		double returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static double[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		double[] defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		double[] returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static float getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		float defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		float returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static float[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		float[] defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		float[] returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static int getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		int defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		int returnValue = ExpandoValueServiceUtil.getData(className, tableName,
+				columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static int[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		int[] defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		int[] returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static long getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		long defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		long returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static long[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		long[] defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		long[] returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static short getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		short defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		short returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static short[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		short[] defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		short[] returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static java.lang.String getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.lang.String defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.lang.String returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
+	public static java.lang.String[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.lang.String[] defaultData)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		java.lang.String[] returnValue = ExpandoValueServiceUtil.getData(className,
+				tableName, columnName, classPK, defaultData);
+
+		return returnValue;
+	}
+
 	public static JSONArray getRowValues(long rowId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =

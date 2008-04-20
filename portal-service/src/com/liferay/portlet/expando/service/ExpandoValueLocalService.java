@@ -222,6 +222,100 @@ public interface ExpandoValueLocalService {
 		java.lang.String tableName, java.lang.String columnName)
 		throws com.liferay.portal.SystemException;
 
+	public boolean getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		boolean defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public boolean[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		boolean[] defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.Date getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.util.Date defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.util.Date[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.util.Date[] defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public double getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		double defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public double[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		double[] defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public float getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		float defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public float[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		float[] defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public int getData(java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK, int defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public int[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		int[] defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public long getData(java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, long classPK, long defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public long[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		long[] defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public short getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		short defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public short[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		short[] defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.lang.String getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.lang.String defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public java.lang.String[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.lang.String[] defaultData)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(
 		java.lang.String className, java.lang.String columnName, int begin,
 		int end) throws com.liferay.portal.SystemException;

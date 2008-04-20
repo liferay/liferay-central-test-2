@@ -211,7 +211,7 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 		}
 	}
 
-	public ExpandoValue findByTC_TN_CN_C(
+	public ExpandoValue fetchByTC_TN_CN_C(
 			long classNameId, String tableName, String columnName, long classPK)
 		throws SystemException {
 
@@ -243,7 +243,7 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 		}
 	}
 
-	public ExpandoValue findByTC_TN_CN_R(
+	public ExpandoValue fetchByTC_TN_CN_R(
 			long classNameId, String tableName, String columnName, long rowId)
 		throws SystemException {
 

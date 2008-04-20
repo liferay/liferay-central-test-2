@@ -121,7 +121,7 @@ public class ExpandoColumnFinderImpl implements ExpandoColumnFinder {
 		}
 	}
 
-	public ExpandoColumn findByTC_TN_CN(
+	public ExpandoColumn fetchByTC_TN_CN(
 			long classNameId, String tableName, String name)
 		throws SystemException {
 

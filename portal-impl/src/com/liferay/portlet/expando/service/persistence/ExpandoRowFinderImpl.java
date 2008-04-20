@@ -124,7 +124,7 @@ public class ExpandoRowFinderImpl implements ExpandoRowFinder {
 		}
 	}
 
-	public ExpandoRow findByTC_TN_C(
+	public ExpandoRow fetchByTC_TN_C(
 			long classNameId, String tableName, long classPK)
 		throws SystemException {
 

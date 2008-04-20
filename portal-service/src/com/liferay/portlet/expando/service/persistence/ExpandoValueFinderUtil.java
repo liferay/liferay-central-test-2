@@ -57,20 +57,21 @@ public class ExpandoValueFinderUtil {
 				   .findByTC_TN_C(classNameId, tableName, classPK, begin, end);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoValue findByTC_TN_CN_C(
+	public static com.liferay.portlet.expando.model.ExpandoValue fetchByTC_TN_CN_C(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByTC_TN_CN_C(classNameId, tableName, columnName, classPK);
+				   .fetchByTC_TN_CN_C(classNameId, tableName, columnName,
+			classPK);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoValue findByTC_TN_CN_R(
+	public static com.liferay.portlet.expando.model.ExpandoValue fetchByTC_TN_CN_R(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, long rowId)
 		throws com.liferay.portal.SystemException {
 		return getFinder()
-				   .findByTC_TN_CN_R(classNameId, tableName, columnName, rowId);
+				   .fetchByTC_TN_CN_R(classNameId, tableName, columnName, rowId);
 	}
 
 	public static ExpandoValueFinder getFinder() {

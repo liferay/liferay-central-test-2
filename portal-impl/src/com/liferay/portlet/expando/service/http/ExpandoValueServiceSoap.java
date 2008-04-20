@@ -601,6 +601,262 @@ public class ExpandoValueServiceSoap {
 		}
 	}
 
+	public static boolean getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		boolean defaultData) throws RemoteException {
+		try {
+			boolean returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static boolean[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		boolean[] defaultData) throws RemoteException {
+		try {
+			boolean[] returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.util.Date getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.util.Date defaultData) throws RemoteException {
+		try {
+			java.util.Date returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.util.Date[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.util.Date[] defaultData) throws RemoteException {
+		try {
+			java.util.Date[] returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static double getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		double defaultData) throws RemoteException {
+		try {
+			double returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static double[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		double[] defaultData) throws RemoteException {
+		try {
+			double[] returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static float getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		float defaultData) throws RemoteException {
+		try {
+			float returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static float[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		float[] defaultData) throws RemoteException {
+		try {
+			float[] returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		int defaultData) throws RemoteException {
+		try {
+			int returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		int[] defaultData) throws RemoteException {
+		try {
+			int[] returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		long defaultData) throws RemoteException {
+		try {
+			long returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static long[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		long[] defaultData) throws RemoteException {
+		try {
+			long[] returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static short getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		short defaultData) throws RemoteException {
+		try {
+			short returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static short[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		short[] defaultData) throws RemoteException {
+		try {
+			short[] returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.lang.String defaultData) throws RemoteException {
+		try {
+			java.lang.String returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static java.lang.String[] getData(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK,
+		java.lang.String[] defaultData) throws RemoteException {
+		try {
+			java.lang.String[] returnValue = ExpandoValueServiceUtil.getData(className,
+					tableName, columnName, classPK, defaultData);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoValueSoap[] getRowValues(
 		long rowId) throws RemoteException {
 		try {

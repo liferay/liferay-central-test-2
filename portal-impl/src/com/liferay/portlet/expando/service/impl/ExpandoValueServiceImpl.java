@@ -300,6 +300,150 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 			classNameId, columnName);
 	}
 
+	public boolean getData(
+			String className, String tableName, String columnName, long classPK,
+			boolean defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public boolean[] getData(
+			String className, String tableName, String columnName, long classPK,
+			boolean[] defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public Date getData(
+			String className, String tableName, String columnName, long classPK,
+			Date defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public Date[] getData(
+			String className, String tableName, String columnName, long classPK,
+			Date[] defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public double getData(
+			String className, String tableName, String columnName, long classPK,
+			double defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public double[] getData(
+			String className, String tableName, String columnName, long classPK,
+			double[] defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public float getData(
+			String className, String tableName, String columnName, long classPK,
+			float defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public float[] getData(
+			String className, String tableName, String columnName, long classPK,
+			float[] defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public int getData(
+			String className, String tableName, String columnName, long classPK,
+			int defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public int[] getData(
+			String className, String tableName, String columnName, long classPK,
+			int[] defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public long getData(
+			String className, String tableName, String columnName, long classPK,
+			long defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public long[] getData(
+			String className, String tableName, String columnName, long classPK,
+			long[] defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public short getData(
+			String className, String tableName, String columnName, long classPK,
+			short defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public short[] getData(
+			String className, String tableName, String columnName, long classPK,
+			short[] defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public String getData(
+			String className, String tableName, String columnName, long classPK,
+			String defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
+	public String[] getData(
+			String className, String tableName, String columnName, long classPK,
+			String[] defaultData)
+		throws PortalException, SystemException {
+
+		return expandoValueLocalService.getData(
+			className, tableName, columnName, classPK, defaultData);
+	}
+
 	public List<ExpandoValue> getRowValues(long rowId) throws SystemException {
 		return expandoValueLocalService.getRowValues(rowId);
 	}

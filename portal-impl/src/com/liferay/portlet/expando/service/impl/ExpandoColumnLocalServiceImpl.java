@@ -131,7 +131,8 @@ public class ExpandoColumnLocalServiceImpl
 			long classNameId, String tableName, String name)
 		throws PortalException, SystemException {
 
-		return expandoColumnFinder.findByTC_TN_CN(classNameId, tableName, name);
+		return expandoColumnFinder.fetchByTC_TN_CN(
+			classNameId, tableName, name);
 	}
 
 	public List<ExpandoColumn> getColumns(long tableId)

@@ -121,7 +121,7 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 	public ExpandoRow getRow(long classNameId, String tableName, long classPK)
 		throws PortalException, SystemException {
 
-		return expandoRowFinder.findByTC_TN_C(classNameId, tableName, classPK);
+		return expandoRowFinder.fetchByTC_TN_C(classNameId, tableName, classPK);
 	}
 
 	public List<ExpandoRow> getRows(long tableId, int begin, int end)

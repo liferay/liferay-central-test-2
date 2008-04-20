@@ -40,10 +40,10 @@ public class ExpandoColumnFinderUtil {
 		return getFinder().findByTC_TN(classNameId, tableName);
 	}
 
-	public static com.liferay.portlet.expando.model.ExpandoColumn findByTC_TN_CN(
+	public static com.liferay.portlet.expando.model.ExpandoColumn fetchByTC_TN_CN(
 		long classNameId, java.lang.String tableName, java.lang.String name)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByTC_TN_CN(classNameId, tableName, name);
+		return getFinder().fetchByTC_TN_CN(classNameId, tableName, name);
 	}
 
 	public static ExpandoColumnFinder getFinder() {

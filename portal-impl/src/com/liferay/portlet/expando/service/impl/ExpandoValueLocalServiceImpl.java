@@ -24,9 +24,7 @@ package com.liferay.portlet.expando.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortalUtil;
-import com.liferay.portlet.expando.ValueDataException;
 import com.liferay.portlet.expando.model.ExpandoColumn;
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -390,8 +388,6 @@ public class ExpandoValueLocalServiceImpl
 			String data)
 		throws PortalException, SystemException {
 
-		validate(data);
-
 		ExpandoRow row = expandoRowPersistence.fetchByT_C(tableId, classPK);
 
 		if (row == null) {
@@ -505,6 +501,262 @@ public class ExpandoValueLocalServiceImpl
 				classNameId, tableName, columnName);
 	}
 
+	public boolean getData(
+			String className, String tableName, String columnName, long classPK,
+			boolean defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getBoolean();
+		}
+	}
+
+	public boolean[] getData(
+			String className, String tableName, String columnName, long classPK,
+			boolean[] defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getBooleanArray();
+		}
+	}
+
+	public Date getData(
+			String className, String tableName, String columnName, long classPK,
+			Date defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getDate();
+		}
+	}
+
+	public Date[] getData(
+			String className, String tableName, String columnName, long classPK,
+			Date[] defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getDateArray();
+		}
+	}
+
+	public double getData(
+			String className, String tableName, String columnName, long classPK,
+			double defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getDouble();
+		}
+	}
+
+	public double[] getData(
+			String className, String tableName, String columnName, long classPK,
+			double[] defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getDoubleArray();
+		}
+	}
+
+	public float getData(
+			String className, String tableName, String columnName, long classPK,
+			float defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getFloat();
+		}
+	}
+
+	public float[] getData(
+			String className, String tableName, String columnName, long classPK,
+			float[] defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getFloatArray();
+		}
+	}
+
+	public int getData(
+			String className, String tableName, String columnName, long classPK,
+			int defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getInteger();
+		}
+	}
+
+	public int[] getData(
+			String className, String tableName, String columnName, long classPK,
+			int[] defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getIntegerArray();
+		}
+	}
+
+	public long getData(
+			String className, String tableName, String columnName, long classPK,
+			long defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getLong();
+		}
+	}
+
+	public long[] getData(
+			String className, String tableName, String columnName, long classPK,
+			long[] defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getLongArray();
+		}
+	}
+
+	public short getData(
+			String className, String tableName, String columnName, long classPK,
+			short defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getShort();
+		}
+	}
+
+	public short[] getData(
+			String className, String tableName, String columnName, long classPK,
+			short[] defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getShortArray();
+		}
+	}
+
+	public String getData(
+			String className, String tableName, String columnName, long classPK,
+			String defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getString();
+		}
+	}
+
+	public String[] getData(
+			String className, String tableName, String columnName, long classPK,
+			String[] defaultData)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = getValue(
+			className, tableName, columnName, classPK);
+
+		if (value == null) {
+			return defaultData;
+		}
+		else {
+			return value.getStringArray();
+		}
+	}
+
 	public List<ExpandoValue> getDefaultTableColumnValues(
 			String className, String columnName, int begin, int end)
 		throws SystemException {
@@ -615,14 +867,8 @@ public class ExpandoValueLocalServiceImpl
 			long classNameId, String tableName, String columnName, long classPK)
 		throws PortalException, SystemException {
 
-		return expandoValueFinder.findByTC_TN_CN_C(
+		return expandoValueFinder.fetchByTC_TN_CN_C(
 			classNameId, tableName, columnName, classPK);
-	}
-
-	protected void validate(String data) throws PortalException {
-		if (Validator.isNull(data)) {
-			throw new ValueDataException();
-		}
 	}
 
 }
