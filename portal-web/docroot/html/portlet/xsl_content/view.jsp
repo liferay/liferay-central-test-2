@@ -36,7 +36,6 @@ try {
 		bracketEnd = xmlURL.indexOf("]", bracketBegin);
 
 		if (bracketEnd > -1 && ((bracketEnd - bracketBegin) > 0)) {
-
 			String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
 			if (compilerEntries.length > 0) {
@@ -44,39 +43,39 @@ try {
 				String propertyName = null;
 
 				variablePropertyKey = xmlURL.substring(bracketBegin + 1, bracketEnd);
-				
+
 				category = variablePropertyKey;
 
-				// variablePropertyKey will be in format country.iso3 OR projectId
-				int period = variablePropertyKey.indexOf(".");
+				int pos = variablePropertyKey.indexOf(StringPool.PERIOD);
 
-				if (period != -1) {
-
-					category = variablePropertyKey.substring(0, period);
-					propertyName = variablePropertyKey.substring(period + 1);
+				if (pos != -1) {
+					category = variablePropertyKey.substring(0, pos);
+					propertyName = variablePropertyKey.substring(pos + 1);
 				}
 
-				for (int i = 0; i < compilerEntries.length; i++) {
+				for (String compilerEntry : compilerEntries) {
 					try {
-						TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(company.getCompanyId(), compilerEntries[i]);
+						TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(company.getCompanyId(), compilerEntry);
 
 						TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), "category");
+
 						variablePropertyValue = property.getValue();
 
-						if ((category).equals(variablePropertyValue)) {
-							if (period == -1) {
+						if (category.equals(variablePropertyValue)) {
+							if (pos == -1) {
 								variablePropertyValue = entry.getName();
 							}
 							else {
 								property = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), propertyName);
+
 								variablePropertyValue = property.getValue();
 							}
+
 							xmlURL = StringUtil.replace(xmlURL, "[" + variablePropertyKey + "]", variablePropertyValue.toUpperCase());
+
 							break;
 						}
-
 					}
-
 					catch (NoSuchEntryException nsee) {
 						_log.warn(nsee);
 					}
