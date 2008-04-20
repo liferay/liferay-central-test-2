@@ -23,42 +23,51 @@
 %>
 
 <%
+
 long[] entryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), entries);
 long[] notEntryIds = TagsEntryLocalServiceUtil.getEntryIds(company.getCompanyId(), notEntries);
 
 Date now = new Date();
+ 
+int total = TagsAssetLocalServiceUtil.getAssetsCount(portletGroupId.longValue(), classNameIds, entryIds, notEntryIds, andOperator, excludeZeroViewCount, now, now);
+
+searchContainer.setTotal(total);
 
 Map<String, List<TagsAsset>> assetsByCategory = new TreeMap<String, List<TagsAsset>>();
 
-List<TagsAsset> assets = TagsAssetLocalServiceUtil.getAssets(portletGroupId.longValue(), classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), searchContainer.getEnd());
+List<TagsAsset> assets = TagsAssetLocalServiceUtil.getAssets(portletGroupId.longValue(), classNameIds, entryIds, notEntryIds, andOperator, orderByColumn1, orderByColumn2, orderByType1, orderByType2, excludeZeroViewCount, now, now, searchContainer.getStart(), total);
 
 for (TagsAsset asset : assets) {
 	List<TagsEntry> assetEntries = TagsEntryLocalServiceUtil.getAssetEntries(asset.getAssetId());
 
 	for (TagsEntry assetEntry : assetEntries) {
-		TagsProperty assetEntryCategory = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "category");
+		List<TagsProperty> tagProperties = TagsPropertyLocalServiceUtil.getProperties(assetEntry.getEntryId());
 
-		if (assetEntryCategory.getValue().equals(category)) {
-			String tagLabel = null;
+		for (TagsProperty tagProperty : tagProperties) {
+			
+			if (("category").equals(tagProperty.getKey()) && tagProperty.getValue().equals(category)) {
+				String tagLabel = null;
 
-			try {
-				TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "description");
+				try {
+					TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "description");
 
-				tagLabel = property.getValue();
+					tagLabel = property.getValue();
+				}
+				catch (NoSuchPropertyException nspee) {
+					tagLabel = StringUtil.upperCaseFirstLetter(assetEntry.getName());
+				}
+
+				List assetsList = assetsByCategory.get(tagLabel);
+
+				if (assetsList == null) {
+					assetsList = new ArrayList();
+
+					assetsByCategory.put(tagLabel, assetsList);
+				}
+
+				assetsList.add(asset);
+				break;
 			}
-			catch (NoSuchPropertyException nspee) {
-				tagLabel = StringUtil.upperCaseFirstLetter(assetEntry.getName());
-			}
-
-			List assetsList = assetsByCategory.get(tagLabel);
-
-			if (assetsList == null) {
-				assetsList = new ArrayList();
-
-				assetsByCategory.put(tagLabel, assetsList);
-			}
-
-			assetsList.add(asset);
 		}
 	}
 }
