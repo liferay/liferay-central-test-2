@@ -22,16 +22,32 @@
  */
 %>
 
-<textarea class="lfr-textarea message-edit" name="<portlet:namespace />textArea" id="<portlet:namespace />textArea"></textarea>
-
 <script type="text/javascript">
+	function <portlet:namespace />getHTML() {
+		return <portlet:namespace />bbCode.getHTML();
+	}
+
 	jQuery(
 		function () {
-			new Liferay.Editor.bbCode(
+			var <portlet:namespace />bbCode = new Liferay.Editor.bbCode(
 				{
 					textarea: '#<portlet:namespace />textArea'
 				}
 			);
+
+			<c:choose>
+				<c:when test="<%= quote && Validator.isNull(body) && (curParentMessage != null) %>">
+					var respondee = "<%= UnicodeFormatter.toString(parentAuthor) %>";
+					var quote = "<%= UnicodeFormatter.toString(curParentMessage.getBody(false)) %>";
+
+					<portlet:namespace />bbCode.insertTag("quote", respondee, quote);
+				</c:when>
+				<c:otherwise>
+					<portlet:namespace />bbCode.setHTML("<%= UnicodeFormatter.toString(GetterUtil.getString(body)) %>");
+				</c:otherwise>
+			</c:choose>
 		}
 	);
 </script>
+
+<textarea class="lfr-textarea message-edit" name="<portlet:namespace />textArea" id="<portlet:namespace />textArea"></textarea>
