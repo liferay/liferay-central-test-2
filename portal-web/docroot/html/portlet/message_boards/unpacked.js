@@ -15,6 +15,74 @@ if (!Liferay.Editor.bbCode) {
 			}
 		},
 
+		getHTML: function(content) {
+			var instance = this;
+
+			return instance._textarea.val();
+		},
+
+		insertTag: function(tag, param, content) {
+			var instance = this;
+
+			var begTag;
+
+			if (param) {
+				begTag = '[' + tag + '=' + param + ']';
+			}
+			else {
+				begTag = '[' + tag + ']';
+			}
+
+			var endTag = '[/' + tag + ']';
+
+			var textarea = instance._textarea;
+			var field = textarea[0];
+			var value = textarea.val();
+
+			textarea.trigger('focus');
+
+			if (Liferay.Browser.is_ie) {
+				var sel = document.selection.createRange();
+
+				if (content != null) {
+					sel.text = begTag + content + endTag;
+				}
+				else {
+					sel.text = begTag + sel.text + endTag;
+				}
+
+				sel.moveEnd('character', -endTag.length);
+				sel.select();
+			}
+			else if (field.selectionStart || field.selectionStart == 0) {
+				var startPos = field.selectionStart;
+				var endPos = field.selectionEnd;
+
+				var preSel = value.substring(0, startPos);
+				var sel = value.substring(startPos, endPos);
+				var postSel = value.substring(endPos, field.value.length);
+
+				var caretPos = startPos + begTag.length;
+
+				if (content != null) {
+					field.value = preSel + begTag + content + endTag + postSel;
+				}
+				else {
+					field.value = preSel + begTag + sel + endTag + postSel;
+					field.setSelectionRange(caretPos, caretPos);
+				}
+			}
+			else {
+				field.value += begTag + content + endTag;
+			}
+		},
+
+		setHTML: function(content) {
+			var instance = this;
+
+			instance._textarea.val(content);
+		},
+
 		_createEmoticons: function() {
 			var instance = this;
 
@@ -54,7 +122,7 @@ if (!Liferay.Editor.bbCode) {
 						var value = this[this.selectedIndex].value;
 
 						if (value != Liferay.Language.get('font')) {
-							instance._insertTag('font', this[this.selectedIndex].value);
+							instance.insertTag('font', this[this.selectedIndex].value);
 							this.selectedIndex = 0;
 						}
 					}
@@ -66,7 +134,7 @@ if (!Liferay.Editor.bbCode) {
 						var value = this[this.selectedIndex].value;
 
 						if (value != Liferay.Language.get('size')) {
-							instance._insertTag('size', this[this.selectedIndex].value);
+							instance.insertTag('size', this[this.selectedIndex].value);
 							this.selectedIndex = 0;
 						}
 					},
@@ -77,7 +145,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'bold',
 					image: 'message_boards/bold.png',
 					onClick: function(event) {
-						instance._insertTag('b');
+						instance.insertTag('b');
 					}
 				},
 
@@ -85,7 +153,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'italic',
 					image: 'message_boards/italic.png',
 					onClick: function(event) {
-						instance._insertTag('i');
+						instance.insertTag('i');
 					}
 				},
 
@@ -93,7 +161,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'underline',
 					image: 'message_boards/underline.png',
 					onClick: function(event) {
-						instance._insertTag('u');
+						instance.insertTag('u');
 					}
 				},
 
@@ -101,7 +169,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'strikethrough',
 					image: 'message_boards/strike.png',
 					onClick: function(event) {
-						instance._insertTag('s');
+						instance.insertTag('s');
 					}
 				},
 
@@ -156,7 +224,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'left',
 					image: 'message_boards/justify_left.png',
 					onClick: function(event) {
-						instance._insertTag('left');
+						instance.insertTag('left');
 					}
 				},
 
@@ -164,7 +232,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'center',
 					image: 'message_boards/justify_center.png',
 					onClick: function(event) {
-						instance._insertTag('center');
+						instance.insertTag('center');
 					}
 				},
 
@@ -172,7 +240,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'right',
 					image: 'message_boards/justify_right.png',
 					onClick: function(event) {
-						instance._insertTag('right');
+						instance.insertTag('right');
 					}
 				},
 
@@ -180,7 +248,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'indent',
 					image: 'message_boards/indent.png',
 					onClick: function(event) {
-						instance._insertTag('indent');
+						instance.insertTag('indent');
 					}
 				},
 
@@ -188,7 +256,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'quote',
 					image: 'message_boards/quote.png',
 					onClick: function(event) {
-						instance._insertTag('quote');
+						instance.insertTag('quote');
 					}
 				},
 
@@ -196,7 +264,7 @@ if (!Liferay.Editor.bbCode) {
 					text: 'code',
 					image: 'message_boards/code.png',
 					onClick: function(event) {
-						instance._insertTag('code');
+						instance.insertTag('code');
 					}
 				},
 
@@ -368,7 +436,7 @@ if (!Liferay.Editor.bbCode) {
 			var instance = this;
 
 			var color = instance._fontColorInput.val();
-			instance._insertTag('color', color);
+			instance.insertTag('color', color);
 		},
 
 		_insertEmail: function() {
@@ -386,7 +454,7 @@ if (!Liferay.Editor.bbCode) {
 					addy = null;
 				}
 
-				instance._insertTag('email', addy, name);
+				instance.insertTag('email', addy, name);
 			}
 		},
 
@@ -426,7 +494,7 @@ if (!Liferay.Editor.bbCode) {
 
 			if (url) {
 				instance._resetSelection();
-				instance._insertTag('img', null, url);
+				instance.insertTag('img', null, url);
 			}
 		},
 
@@ -446,7 +514,7 @@ if (!Liferay.Editor.bbCode) {
 
 			if (list != '\n') {
 				instance._resetSelection();
-				instance._insertTag('list', ordered, list);
+				instance.insertTag('list', ordered, list);
 			}
 		},
 
@@ -460,67 +528,11 @@ if (!Liferay.Editor.bbCode) {
 
 				if (title) {
 					instance._resetSelection();
-					instance._insertTag('url', url, title);
+					instance.insertTag('url', url, title);
 				}
 				else {
-					instance._insertTag('url', url);
+					instance.insertTag('url', url);
 				}
-			}
-		},
-
-		_insertTag: function(tag, param, content) {
-			var instance = this;
-
-			var begTag;
-
-			if (param) {
-				begTag = '[' + tag + '=' + param + ']';
-			}
-			else {
-				begTag = '[' + tag + ']';
-			}
-
-			var endTag = '[/' + tag + ']';
-
-			var textarea = instance._textarea;
-			var field = textarea[0];
-			var value = textarea.val();
-
-			textarea.trigger('focus');
-
-			if (Liferay.Browser.is_ie) {
-				var sel = document.selection.createRange();
-
-				if (content != null) {
-					sel.text = begTag + content + endTag;
-				}
-				else {
-					sel.text = begTag + sel.text + endTag;
-				}
-
-				sel.moveEnd('character', -endTag.length);
-				sel.select();
-			}
-			else if (field.selectionStart || field.selectionStart == 0) {
-				var startPos = field.selectionStart;
-				var endPos = field.selectionEnd;
-
-				var preSel = value.substring(0, startPos);
-				var sel = value.substring(startPos, endPos);
-				var postSel = value.substring(endPos, field.value.length);
-
-				var caretPos = startPos + begTag.length;
-
-				if (content != null) {
-					field.value = preSel + begTag + content + endTag + postSel;
-				}
-				else {
-					field.value = preSel + begTag + sel + endTag + postSel;
-					field.setSelectionRange(caretPos, caretPos);
-				}
-			}
-			else {
-				field.value += begTag + content + endTag;
 			}
 		},
 
@@ -541,12 +553,6 @@ if (!Liferay.Editor.bbCode) {
 			else if (field.selectionStart) {
 				field.selectionEnd = field.selectionStart;
 			}
-		},
-
-		_setHTML: function(content) {
-			var instance = this;
-
-			instance._textarea.val(content);
 		}
 	});
 }
