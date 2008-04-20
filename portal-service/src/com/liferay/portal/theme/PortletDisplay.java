@@ -29,6 +29,8 @@ import com.liferay.portal.kernel.util.Validator;
 
 import java.io.Serializable;
 
+import javax.portlet.PortletPreferences;
+
 /**
  * <a href="PortletDisplay.java.html"><b><i>View Source</i></b></a>
  *
@@ -481,6 +483,14 @@ public class PortletDisplay implements Serializable {
 		_content = content;
 	}
 
+	public PortletPreferences getPortletSetup() {
+		return _portletSetup;
+	}
+
+	public void setPortletSetup(PortletPreferences portletSetup) {
+		_portletSetup = portletSetup;
+	}
+
 	public void recycle() {
 		if (_log.isDebugEnabled()) {
 			_log.debug("Recycling instance " + hashCode());
@@ -537,6 +547,7 @@ public class PortletDisplay implements Serializable {
 		_urlRefresh = StringPool.BLANK;
 		_restoreCurrentView = false;
 		_content = StringPool.BLANK;
+		_portletSetup = null;
 	}
 
 	public void copyFrom(PortletDisplay master) {
@@ -592,6 +603,7 @@ public class PortletDisplay implements Serializable {
 		_urlRefresh = master.getURLRefresh();
 		_restoreCurrentView = master.isRestoreCurrentView();
 		_content = master.getContent();
+		_portletSetup = master.getPortletSetup();
 	}
 
 	public void copyTo(PortletDisplay slave) {
@@ -647,6 +659,7 @@ public class PortletDisplay implements Serializable {
 		slave.setURLRefresh(_urlRefresh);
 		slave.setRestoreCurrentView(_restoreCurrentView);
 		slave.setContent(_content);
+		slave.setPortletSetup(_portletSetup);
 	}
 
 	private static Log _log = LogFactoryUtil.getLog(PortletDisplay.class);
@@ -705,5 +718,6 @@ public class PortletDisplay implements Serializable {
 	private String _urlRefresh = StringPool.BLANK;
 	private boolean _restoreCurrentView;
 	private String _content = StringPool.BLANK;
+	private PortletPreferences _portletSetup;
 
 }

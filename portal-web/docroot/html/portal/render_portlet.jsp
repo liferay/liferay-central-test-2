@@ -361,6 +361,8 @@ portletDisplay.setShowRefreshIcon(showRefreshIcon);
 
 portletDisplay.setRestoreCurrentView(portlet.isRestoreCurrentView());
 
+portletDisplay.setPortletSetup(portletSetup);
+
 // Portlet icon
 
 String portletIcon = null;
