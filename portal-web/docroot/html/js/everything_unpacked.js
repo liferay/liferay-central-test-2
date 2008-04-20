@@ -13914,6 +13914,8 @@ Liferay = function() {
 	return {};
 }();
 
+Liferay.Editor = {};
+
 jQuery.fn.getOne = function(s) {
 	return jQuery.getOne(s, this);
 };
@@ -14304,10 +14306,10 @@ Liferay.Util = {
 		var inputs = jQuery("input[@type=text], input[@type=password], textarea", item);
 
 		inputs.focus(
-			function() {
+			function(event) {
 				jQuery(this).addClass('focus');
 
-				if (this.createTextRange) {
+				if (this.createTextRange && (this.nodeName.toLowerCase() !== 'textarea')) {
 					var value = this.value;
 					var textRange = this.createTextRange();
 

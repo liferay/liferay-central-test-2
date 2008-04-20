@@ -22,29 +22,14 @@
  */
 %>
 
-<textarea class="lfr-textarea message-edit" id="textArea" name="textArea"></textarea>
+<textarea class="lfr-textarea message-edit" name="<portlet:namespace />textArea" id="<portlet:namespace />textArea"></textarea>
 
 <script type="text/javascript">
 	jQuery(
 		function () {
-			
-			new Liferay.Editor.bbCode(	
+			new Liferay.Editor.bbCode(
 				{
-					textarea: '#textArea',
-
-					//Language keys
-					emailPrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-an-email-address") %>',
-					emailNamePrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-name-associated-with-the-email") %>',
-					
-					fontTypeText: '<%= UnicodeLanguageUtil.get(pageContext, "font") %>',
-					fontSizeText: '<%= UnicodeLanguageUtil.get(pageContext, "size") %>',
-					
-					imagePathPrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-address-for-a-picture") %>',
-					
-					listPrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list") %>',
-					
-					urlHrefPrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-address") %>',
-					urlTitlePrompt: '<%= UnicodeLanguageUtil.get(pageContext, "enter-a-title-for-the-link") %>'
+					textarea: '#<portlet:namespace />textArea'
 				}
 			);
 		}

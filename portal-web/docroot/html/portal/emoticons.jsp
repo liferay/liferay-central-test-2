@@ -27,13 +27,11 @@
 <%@ page import="com.liferay.portlet.messageboards.util.BBCodeUtil" %>
 
 <%
-String path = themeDisplay.getPathThemeImages() + "/emoticons/";
-
 for (int i = 0; i < BBCodeUtil.EMOTICONS.length; i++) {
 	String image = StringUtil.replace(BBCodeUtil.EMOTICONS[i][0], "@theme_images_path@", themeDisplay.getPathThemeImages());
 %>
 
-	<a class="lfr-button emoticon" emoticonCode="<%= BBCodeUtil.EMOTICONS[i][1] %>" ><%= image %></a>
+	<a class="lfr-button emoticon" emoticonCode="<%= BBCodeUtil.EMOTICONS[i][1] %>"><%= image %></a>
 
 <%
 }

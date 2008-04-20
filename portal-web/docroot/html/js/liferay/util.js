@@ -57,7 +57,7 @@ Liferay.Util = {
 			function(event) {
 				jQuery(this).addClass('focus');
 
-				if (this.createTextRange && this.nodeName.toLowerCase() !== 'textarea') {
+				if (this.createTextRange && (this.nodeName.toLowerCase() !== 'textarea')) {
 					var value = this.value;
 					var textRange = this.createTextRange();
 

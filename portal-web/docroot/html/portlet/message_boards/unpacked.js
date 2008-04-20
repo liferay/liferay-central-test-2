@@ -7,30 +7,13 @@ if (!Liferay.Editor.bbCode) {
 			instance._textarea = jQuery(options.textarea);
 			instance._location = jQuery(options.location || []);
 
-			// Language keys
-			instance._emailPrompt = options.emailPrompt || Liferay.Language.get('enter-an-email-address');
-			instance._emailNamePrompt = options.emailNamePrompt || Liferay.Language.get('enter-a-name-associated-with-the-email');
-
-			instance._fontTypeText = options.fontTypeText || Liferay.Language.get('font');
-			instance._fontSizeText = options.fontSizeText || Liferay.Language.get('size');
-
-			instance._imagePathPrompt = options.imagePathPrompt || Liferay.Language.get('enter-a-address-for-a-picture');
-
-			instance._listPrompt = options.listPrompt || Liferay.Language.get('enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list');
-
-			instance._urlHrefPrompt = options.urlHrefPrompt || Liferay.Language.get('enter-a-address');
-			instance._urlTitlePrompt = options.urlTitlePrompt || Liferay.Language.get('enter-a-title-for-the-link');
-
-			//Create the buttons
 			instance._createEmoticons();
 			instance._createToolbar();
 
 			if (options.onLoad) {
 				options.onLoad();
 			}
-
 		},
-
 
 		_createEmoticons: function() {
 			var instance = this;
@@ -45,11 +28,13 @@ if (!Liferay.Editor.bbCode) {
 			var response = xHR.responseText;
 
 			var emoticonsContainer = jQuery('<div class="lfr-emoticon-container"></div>').appendTo('body');
+
 			instance._emoticons = emoticonsContainer.append(response);
 
 			instance._emoticons.find('.emoticon').click(
 				function(event) {
 					var emoticonCode = this.getAttribute('emoticonCode');
+
 					if (emoticonCode) {
 						instance._insertEmoticon(emoticonCode);
 					}
@@ -64,23 +49,25 @@ if (!Liferay.Editor.bbCode) {
 
 			instance._buttons = {
 				fontType: {
-					options: [instance._fontTypeText, 'Arial', 'Comic Sans', 'Courier New', 'Tahoma', 'Times New Roman', 'Verdana', 'Wingdings'],
+					options: [Liferay.Language.get('font'), 'Arial', 'Comic Sans', 'Courier New', 'Tahoma', 'Times New Roman', 'Verdana', 'Wingdings'],
 					onChange: function(event) {
 						var value = this[this.selectedIndex].value;
-						if (value != instance._fontTypeText) {
+
+						if (value != Liferay.Language.get('font')) {
 							instance._insertTag('font', this[this.selectedIndex].value);
-							this.selectedIndex = 0;							
+							this.selectedIndex = 0;
 						}
 					}
 				},
 
 				fontSize: {
-					options: [instance._fontSizeText, 1, 2, 3, 4, 5, 6, 7],
+					options: [Liferay.Language.get('size'), 1, 2, 3, 4, 5, 6, 7],
 					onChange: function(event) {
 						var value = this[this.selectedIndex].value;
-						if (value != instance._fontSizeText) {
-							instance._insertTag('size', this[this.selectedIndex].value);							
-							this.selectedIndex = 0;							
+
+						if (value != Liferay.Language.get('size')) {
+							instance._insertTag('size', this[this.selectedIndex].value);
+							this.selectedIndex = 0;
 						}
 					},
 					groupEnd: true
@@ -134,7 +121,7 @@ if (!Liferay.Editor.bbCode) {
 				},
 
 				email: {
-					text: 'email',
+					text: 'email-address',
 					image: 'message_boards/email.png',
 					onClick: function(event) {
 						instance._insertEmail();
@@ -215,7 +202,7 @@ if (!Liferay.Editor.bbCode) {
 
 				emoticons: {
 					text: 'emoticons',
-					image: 'emoticons/smile.gif'					
+					image: 'emoticons/smile.gif'
 				}
 			};
 
@@ -223,23 +210,26 @@ if (!Liferay.Editor.bbCode) {
 				instance._buttons,
 				function(i, n) {
 					var buttonClass = ' ' + (this.className || '');
-					var buttonText = this.text || '';
+					var buttonText = Liferay.Language.get(this.text) || '';
 
 					if (i != 'insert' && !this.options) {
 						var imagePath = themeDisplay.getPathThemeImages() + '/' + this.image;
 
-						html += '<a buttonId="' + i + '" class="lfr-button ' + buttonClass + '" href="javascript: ;" title="' + buttonText + '">' +
-								'<img alt="' + buttonText + '" buttonId="' + i + '" src="' + imagePath + '" >' +
-								'</a>';
+						html +=
+							'<a buttonId="' + i + '" class="lfr-button ' + buttonClass + '" href="javascript: ;" title="' + buttonText + '">' +
+							'<img alt="' + buttonText + '" buttonId="' + i + '" src="' + imagePath + '" >' +
+							'</a>';
 					}
 					else if (this.options && this.options.length) {
 						html += '<select class="' + buttonClass + '" selectId="' + i + '" title="' + buttonText + '">';
+
 						jQuery.each(
 							this.options,
 							function(i, v) {
 								html += '<option value="' + v + '">' + v + '</option>';
 							}
 						);
+
 						html += '</select>';
 					}
 
@@ -305,7 +295,7 @@ if (!Liferay.Editor.bbCode) {
 			instance._emoticons.hoverIntent(
 				{
 					interval: 0,
-					timeout: 250,	
+					timeout: 250,
 					over: function(event) {
 						hoveringOver = true;
 						instance._emoticons.show();
@@ -313,18 +303,17 @@ if (!Liferay.Editor.bbCode) {
 					out: function(event) {
 						instance._emoticons.hide();
 						hoveringOver = false;
-					}			
+					}
 				}
 			);
 
-			// Bugfix for Firefox attached mouse(over|out) events and textareas
 			if (Liferay.Browser.is_firefox) {
 				var emoticonDiv = instance._emoticons[0];
 				var intent;
 
 				emoticonDiv.onmouseover = function(event) {
 					if (intent) {
-						clearTimeout(intent);	
+						clearTimeout(intent);
 					}
 				};
 
@@ -350,6 +339,7 @@ if (!Liferay.Editor.bbCode) {
 			);
 
 			var selects = instance._location.find('select');
+
 			selects.change(
 				function(event) {
 					var selectId = this.getAttribute('selectId');
@@ -384,10 +374,10 @@ if (!Liferay.Editor.bbCode) {
 		_insertEmail: function() {
 			var instance = this;
 
-			var addy = prompt(instance._emailPrompt, '');
+			var addy = prompt(Liferay.Language.get('enter-an-email-address'), '');
 
 			if (addy) {
-				var name = prompt(instance._emailPrompt, '');
+				var name = prompt(Liferay.Language.get('enter-a-name-for-the-email-address'), '');
 
 				instance._resetSelection();
 
@@ -432,7 +422,7 @@ if (!Liferay.Editor.bbCode) {
 		_insertImage: function() {
 			var instance = this;
 
-			var url = prompt( instance._imagePathPrompt + ':', 'http://');
+			var url = prompt(Liferay.Language.get('enter-an-address-for-the-image'), 'http://');
 
 			if (url) {
 				instance._resetSelection();
@@ -446,7 +436,7 @@ if (!Liferay.Editor.bbCode) {
 			var list = "\n";
 			var entry;
 
-			while (entry = prompt(instance._listPrompt, '')) {
+			while (entry = prompt(Liferay.Language.get('enter-a-list-item-click-cancel-or-leave-blank-to-end-the-list'), '')) {
 				if (!entry) {
 					break;
 				}
@@ -463,10 +453,10 @@ if (!Liferay.Editor.bbCode) {
 		_insertURL: function() {
 			var instance = this;
 
-			var url = prompt(instance._urlHrefPrompt + ':', 'http://');
+			var url = prompt(Liferay.Language.get('enter-an-address'), 'http://');
 
 			if (url != null) {
-				var title = prompt(instance._urlTitlePrompt, ':');
+				var title = prompt(Liferay.Language.get('enter-a-title-for-the-address'), '');
 
 				if (title) {
 					instance._resetSelection();
@@ -507,11 +497,11 @@ if (!Liferay.Editor.bbCode) {
 				else {
 					sel.text = begTag + sel.text + endTag;
 				}
+
 				sel.moveEnd('character', -endTag.length);
 				sel.select();
 			}
 			else if (field.selectionStart || field.selectionStart == 0) {
-
 				var startPos = field.selectionStart;
 				var endPos = field.selectionEnd;
 
@@ -558,6 +548,5 @@ if (!Liferay.Editor.bbCode) {
 
 			instance._textarea.val(content);
 		}
-
 	});
 }
