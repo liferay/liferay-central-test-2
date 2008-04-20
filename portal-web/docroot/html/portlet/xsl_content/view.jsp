@@ -36,26 +36,53 @@ try {
 		bracketEnd = xmlURL.indexOf("]", bracketBegin);
 
 		if (bracketEnd > -1 && ((bracketEnd - bracketBegin) > 0)) {
-			variablePropertyKey = xmlURL.substring(bracketBegin + 1, bracketEnd);
 
 			String[] compilerEntries = (String[])request.getAttribute(WebKeys.TAGS_COMPILER_ENTRIES);
 
 			if (compilerEntries.length > 0) {
-				try {
-					TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(company.getCompanyId(), compilerEntries[0]);
+				String category = null;
+				String propertyName = null;
 
-					TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), variablePropertyKey);
+				variablePropertyKey = xmlURL.substring(bracketBegin + 1, bracketEnd);
+				
+				category = variablePropertyKey;
 
-					variablePropertyValue = property.getValue();
+				// variablePropertyKey will be in format country.iso3 OR projectId
+				int period = variablePropertyKey.indexOf(".");
 
-					xmlURL = StringUtil.replace(xmlURL, "[" + variablePropertyKey + "]", variablePropertyValue.toUpperCase());
+				if (period != -1) {
+
+					category = variablePropertyKey.substring(0, period);
+					propertyName = variablePropertyKey.substring(period + 1);
 				}
 
-				catch (NoSuchEntryException nsee) {
-					_log.warn(nsee);
-				}
-				catch (NoSuchPropertyException nspe) {
-					_log.warn(nspe);
+				for (int i = 0; i < compilerEntries.length; i++) {
+					try {
+						TagsEntry entry = TagsEntryLocalServiceUtil.getEntry(company.getCompanyId(), compilerEntries[i]);
+
+						TagsProperty property = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), "category");
+						variablePropertyValue = property.getValue();
+
+						if ((category).equals(variablePropertyValue)) {
+							if (period == -1) {
+								variablePropertyValue = entry.getName();
+							}
+							else {
+								property = TagsPropertyLocalServiceUtil.getProperty(entry.getEntryId(), propertyName);
+								variablePropertyValue = property.getValue();
+							}
+							xmlURL = StringUtil.replace(xmlURL, "[" + variablePropertyKey + "]", variablePropertyValue.toUpperCase());
+							break;
+						}
+
+					}
+
+					catch (NoSuchEntryException nsee) {
+						_log.warn(nsee);
+					}
+					catch (NoSuchPropertyException nspe) {
+						_log.warn(nspe);
+					}
 				}
 			}
 		}
