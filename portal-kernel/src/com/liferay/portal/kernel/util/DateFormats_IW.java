@@ -20,62 +20,48 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
-
-import java.text.DateFormat;
-
-import java.util.Locale;
-import java.util.TimeZone;
+package com.liferay.portal.kernel.util;
 
 /**
- * <a href="DateFormats.java.html"><b><i>View Source</i></b></a>
+ * <a href="DateFormats_IW.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DateFormats {
-
-	public static DateFormat getDate(Locale locale) {
-		return getDate(locale, null);
+public class DateFormats_IW {
+	public static DateFormats_IW getInstance() {
+		return _instance;
 	}
 
-	public static DateFormat getDate(Locale locale, TimeZone timeZone) {
-		DateFormat df = DateFormat.getDateInstance(DateFormat.SHORT, locale);
-
-		if (timeZone != null) {
-			df.setTimeZone(timeZone);
-		}
-
-		return df;
+	public java.text.DateFormat getDate(java.util.Locale locale) {
+		return DateFormats.getDate(locale);
 	}
 
-	public static DateFormat getDateTime(Locale locale) {
-		return getDateTime(locale, null);
+	public java.text.DateFormat getDate(java.util.Locale locale,
+		java.util.TimeZone timeZone) {
+		return DateFormats.getDate(locale, timeZone);
 	}
 
-	public static DateFormat getDateTime(Locale locale, TimeZone timeZone) {
-		DateFormat df = DateFormat.getDateTimeInstance(
-			DateFormat.SHORT, DateFormat.SHORT, locale);
-
-		if (timeZone != null) {
-			df.setTimeZone(timeZone);
-		}
-
-		return df;
+	public java.text.DateFormat getDateTime(java.util.Locale locale) {
+		return DateFormats.getDateTime(locale);
 	}
 
-	public static DateFormat getTime(Locale locale) {
-		return getTime(locale, null);
+	public java.text.DateFormat getDateTime(java.util.Locale locale,
+		java.util.TimeZone timeZone) {
+		return DateFormats.getDateTime(locale, timeZone);
 	}
 
-	public static DateFormat getTime(Locale locale, TimeZone timeZone) {
-		DateFormat df = DateFormat.getTimeInstance(DateFormat.SHORT, locale);
-
-		if (timeZone != null) {
-			df.setTimeZone(timeZone);
-		}
-
-		return df;
+	public java.text.DateFormat getTime(java.util.Locale locale) {
+		return DateFormats.getTime(locale);
 	}
 
+	public java.text.DateFormat getTime(java.util.Locale locale,
+		java.util.TimeZone timeZone) {
+		return DateFormats.getTime(locale, timeZone);
+	}
+
+	private DateFormats_IW() {
+	}
+
+	private static DateFormats_IW _instance = new DateFormats_IW();
 }

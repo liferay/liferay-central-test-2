@@ -19,6 +19,10 @@
 	/>
 	<instance-wrapper
 		parent-dir="../portal-kernel/src"
+		src-file="com/liferay/portal/kernel/util/DateFormats.java"
+	/>
+	<instance-wrapper
+		parent-dir="../portal-kernel/src"
 		src-file="com/liferay/portal/kernel/util/DateUtil.java"
 	/>
 	<instance-wrapper
@@ -40,9 +44,5 @@
 	<instance-wrapper
 		parent-dir="../portal-kernel/src"
 		src-file="com/liferay/portal/kernel/util/UnicodeFormatter.java"
-	/>
-	<instance-wrapper
-		parent-dir="../portal-service/src"
-		src-file="com/liferay/portal/util/DateFormats.java"
 	/>
 </instance-wrappers>

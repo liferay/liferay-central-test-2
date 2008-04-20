@@ -47,6 +47,11 @@ public class DateUtil_IW {
 		return DateUtil.getDate(date, pattern, locale);
 	}
 
+	public int getDaysBetween(java.util.Date startDate, java.util.Date endDate,
+		java.util.TimeZone timeZone) {
+		return DateUtil.getDaysBetween(startDate, endDate, timeZone);
+	}
+
 	public java.text.DateFormat getISOFormat() {
 		return DateUtil.getISOFormat();
 	}

@@ -20,10 +20,9 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.util;
+package com.liferay.portal.kernel.util;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
-import com.liferay.portal.kernel.util.StringPool;
 
 import java.text.DateFormat;
 import java.text.FieldPosition;
@@ -64,8 +63,8 @@ public class PrettyDateFormat extends DateFormat {
 			Date yesterday = cal.getTime();
 
 			DateFormat dateFormatDate = DateFormats.getDate(_locale, _timeZone);
-			DateFormat dateFormatDateTime =
-				DateFormats.getDateTime(_locale, _timeZone);
+			DateFormat dateFormatDateTime = DateFormats.getDateTime(
+				_locale, _timeZone);
 			DateFormat dateFormatTime = DateFormats.getTime(_locale, _timeZone);
 
 			dateString = dateFormatDate.format(date);
