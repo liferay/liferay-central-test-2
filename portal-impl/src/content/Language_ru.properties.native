@@ -716,7 +716,6 @@ end-date=Дата окончания
 english=Английский
 enter-a-blank-entry-to-disable-email-forwarding=Введите пустую запись для отключения пересылки email.
 enter-a-blank-paypal-email-address-to-disable-paypal=Введите пустой PayPal email адрес для отключения PayPal. Выберите принимаемые кредитные карты для заполнения счетов используя кредитные карты. Счета не требуются если PayPal отключен и нет принимаемых кредитных карт.
-enter-a-name=Введите имя
 enter-a-paypal-email-address-to-send-all-payments-to-paypal=Введите PayPal email адреса для отправки всех счетов PayPal.
 enter-again=Введите еще раз
 enter-one-city-or-zip-code-per-line=Введите только один город или почтовый индекс <b>на каждой строке</b>.

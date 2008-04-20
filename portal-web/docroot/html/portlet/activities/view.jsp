@@ -22,39 +22,75 @@
  */
 %>
 
-<%@ include file="/html/portlet/my_activities/init.jsp" %>
+<%@ include file="/html/portlet/activities/init.jsp" %>
 
 <%
-List<SocialActivity> activities = SocialActivityLocalServiceUtil.getCompanyActivities(company.getCompanyId(), 0, SearchContainer.DEFAULT_DELTA);
+Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getPortletGroupId());
+
+User user2 = user;
+
+if (group.isUser()) {
+	user2 = UserLocalServiceUtil.getUserById(group.getClassPK());
+}
+
+List<SocialActivity> activities = SocialActivityLocalServiceUtil.getUserActivities(user2.getUserId(), 0, SearchContainer.DEFAULT_DELTA);
 %>
 
-<table class="lfr-table">
-
 <%
+Date now = new Date();
+
+int daysBetween = 0;
+
 for (SocialActivity activity : activities) {
 	SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
 
 	if (activityFeedEntry != null) {
+		Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), activityFeedEntry.getPortletId());
+
+		int curDaysBetween = DateUtil.getDaysBetween(activity.getCreateDate(), now, timeZone);
 %>
 
+		<c:if test="<%= curDaysBetween > 0 %>">
+			<c:if test="<%= daysBetween != curDaysBetween %>">
+
+				<%
+				daysBetween = curDaysBetween;
+				%>
+
+				<div class="day-separator">
+					<c:choose>
+						<c:when test="<%= curDaysBetween == 1 %>">
+							<liferay-ui:message key="yesterday" />
+						</c:when>
+						<c:otherwise>
+							<%= dateFormatDate.format(activity.getCreateDate()) %>
+						</c:otherwise>
+					</c:choose>
+				</div>
+			</c:if>
+		</c:if>
+
+		<div style="padding-bottom: 10px;"><!-- --></div>
+
+		<table class="lfr-table">
 		<tr>
+			<td>
+				<img src="<%= portlet.getContextPath() + portlet.getIcon() %>" />
+			</td>
 			<td>
 				<%= activityFeedEntry.getTitle() %>
-			</td>
-			<td>
+
 				<%= timeFormatDate.format(activity.getCreateDate()) %>
 			</td>
-		</tr>
 		<tr>
+			<td></td>
 			<td>
 				<%= activityFeedEntry.getBody() %>
 			</td>
-			<td></td>
 		</tr>
+		</table>
 
 <%
 	}
 }
 %>
-
-</table>

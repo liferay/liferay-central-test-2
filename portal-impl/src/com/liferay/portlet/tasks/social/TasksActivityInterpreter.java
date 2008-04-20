@@ -24,12 +24,10 @@ package com.liferay.portlet.tasks.social;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
-import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 
@@ -44,7 +42,7 @@ import org.json.JSONObject;
  * @author Raymond Augé
  *
  */
-public class TasksActivityInterpreter implements SocialActivityInterpreter {
+public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
@@ -69,21 +67,12 @@ public class TasksActivityInterpreter implements SocialActivityInterpreter {
 			SocialActivity activity, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		User creatorUser = UserLocalServiceUtil.getUserById(
-			activity.getUserId());
-
-		String creatorUserName = "<b>" + creatorUser.getFullName() + "</b>";
+		String creatorUserName = getUserName(
+			activity.getUserId(), themeDisplay);
+		String receiverUserName = getUserName(
+			activity.getReceiverUserId(), themeDisplay);
 
 		String type = activity.getType();
-
-		String receiverUserName = activity.getReceiverUserName();
-
-		if (activity.getReceiverUserId() > 0) {
-			User receiverUser = UserLocalServiceUtil.getUserById(
-				activity.getReceiverUserId());
-
-			receiverUserName = "<b>" + receiverUser.getFullName() + "</b>";
-		}
 
 		// Title
 

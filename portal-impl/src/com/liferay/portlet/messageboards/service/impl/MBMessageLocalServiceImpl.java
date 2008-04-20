@@ -67,6 +67,7 @@ import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.model.impl.MBTreeWalkerImpl;
 import com.liferay.portlet.messageboards.service.base.MBMessageLocalServiceBaseImpl;
 import com.liferay.portlet.messageboards.service.jms.MBMessageProducer;
+import com.liferay.portlet.messageboards.social.MBActivityKeys;
 import com.liferay.portlet.messageboards.util.Indexer;
 import com.liferay.portlet.messageboards.util.MBUtil;
 import com.liferay.portlet.messageboards.util.comparator.MessageThreadComparator;
@@ -493,16 +494,17 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Activity trackers
 
 		if (!message.isDiscussion() && !user.isDefaultUser()) {
-			/*long receiverUserId = 0;
+			String activityType = MBActivityKeys.ADD;
+			long receiverUserId = 0;
 
 			if (parentMessage != null) {
+				activityType = MBActivityKeys.REPLY;
 				receiverUserId = parentMessage.getUserId();
 			}
 
-			activityTrackerLocalService.addActivityTracker(
+			socialActivityLocalService.addActivity(
 				userId, category.getGroupId(), MBMessage.class.getName(),
-				messageId, MBActivityKeys.ADD, StringPool.BLANK,
-				receiverUserId);*/
+				messageId, activityType, StringPool.BLANK, receiverUserId);
 		}
 
 		logAddMessage(messageId, stopWatch, 10);

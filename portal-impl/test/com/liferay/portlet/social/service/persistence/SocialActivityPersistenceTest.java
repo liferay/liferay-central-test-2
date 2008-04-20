@@ -73,14 +73,12 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		newSocialActivity.setGroupId(nextLong());
 		newSocialActivity.setCompanyId(nextLong());
 		newSocialActivity.setUserId(nextLong());
-		newSocialActivity.setUserName(randomString());
 		newSocialActivity.setCreateDate(nextDate());
 		newSocialActivity.setClassNameId(nextLong());
 		newSocialActivity.setClassPK(nextLong());
 		newSocialActivity.setType(randomString());
 		newSocialActivity.setExtraData(randomString());
 		newSocialActivity.setReceiverUserId(nextLong());
-		newSocialActivity.setReceiverUserName(randomString());
 
 		_persistence.update(newSocialActivity, false);
 
@@ -94,8 +92,6 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 			newSocialActivity.getCompanyId());
 		assertEquals(existingSocialActivity.getUserId(),
 			newSocialActivity.getUserId());
-		assertEquals(existingSocialActivity.getUserName(),
-			newSocialActivity.getUserName());
 		assertEquals(existingSocialActivity.getCreateDate(),
 			newSocialActivity.getCreateDate());
 		assertEquals(existingSocialActivity.getClassNameId(),
@@ -108,8 +104,6 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 			newSocialActivity.getExtraData());
 		assertEquals(existingSocialActivity.getReceiverUserId(),
 			newSocialActivity.getReceiverUserId());
-		assertEquals(existingSocialActivity.getReceiverUserName(),
-			newSocialActivity.getReceiverUserName());
 	}
 
 	public void testFindByPrimaryKeyExisting() throws Exception {
@@ -156,14 +150,12 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		socialActivity.setGroupId(nextLong());
 		socialActivity.setCompanyId(nextLong());
 		socialActivity.setUserId(nextLong());
-		socialActivity.setUserName(randomString());
 		socialActivity.setCreateDate(nextDate());
 		socialActivity.setClassNameId(nextLong());
 		socialActivity.setClassPK(nextLong());
 		socialActivity.setType(randomString());
 		socialActivity.setExtraData(randomString());
 		socialActivity.setReceiverUserId(nextLong());
-		socialActivity.setReceiverUserName(randomString());
 
 		_persistence.update(socialActivity, false);
 

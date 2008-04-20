@@ -67,10 +67,6 @@ public interface SocialActivityModel extends BaseModel {
 
 	public void setUserId(long userId);
 
-	public String getUserName();
-
-	public void setUserName(String userName);
-
 	public Date getCreateDate();
 
 	public void setCreateDate(Date createDate);
@@ -96,10 +92,6 @@ public interface SocialActivityModel extends BaseModel {
 	public long getReceiverUserId();
 
 	public void setReceiverUserId(long receiverUserId);
-
-	public String getReceiverUserName();
-
-	public void setReceiverUserName(String receiverUserName);
 
 	public SocialActivity toEscapedModel();
 }

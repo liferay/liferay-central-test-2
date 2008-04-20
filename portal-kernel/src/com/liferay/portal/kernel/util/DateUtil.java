@@ -25,7 +25,9 @@ package com.liferay.portal.kernel.util;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 
+import java.util.Calendar;
 import java.util.Date;
+import java.util.GregorianCalendar;
 import java.util.Locale;
 import java.util.TimeZone;
 
@@ -77,6 +79,30 @@ public class DateUtil {
 		DateFormat dateFormat = new SimpleDateFormat(pattern, locale);
 
 		return dateFormat.format(date);
+	}
+
+	public static int getDaysBetween(
+		Date startDate, Date endDate, TimeZone timeZone) {
+
+		Calendar startCal = new GregorianCalendar(timeZone);
+
+		startCal.setTime(startDate);
+
+		Calendar endCal = new GregorianCalendar(timeZone);
+
+		endCal.setTime(endDate);
+
+		int daysBetween = 0;
+
+		while (startCal.before(endCal)) {
+			startCal.add(Calendar.DAY_OF_MONTH, 1);
+
+			if (startCal.before(endCal)) {
+				daysBetween++;
+			}
+		}
+
+		return daysBetween;
 	}
 
 	public static DateFormat getISOFormat() {

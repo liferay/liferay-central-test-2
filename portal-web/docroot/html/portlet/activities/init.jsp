@@ -22,6 +22,19 @@
  */
 %>
 
-<%@ include file="/html/portlet/our_activities/init.jsp" %>
+<%@ include file="/html/portlet/init.jsp" %>
 
-Our...
+<%@ page import="com.liferay.portlet.social.model.SocialActivity" %>
+<%@ page import="com.liferay.portlet.social.model.SocialActivityFeedEntry" %>
+<%@ page import="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil" %>
+<%@ page import="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" %>
+
+<%
+DateFormat dateFormatDate = new SimpleDateFormat("MMMM d", locale);
+
+if (timeZone != null) {
+	dateFormatDate.setTimeZone(timeZone);
+}
+
+DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
+%>

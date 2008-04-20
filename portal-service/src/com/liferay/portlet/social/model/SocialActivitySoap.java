@@ -54,14 +54,12 @@ public class SocialActivitySoap implements Serializable {
 		soapModel.setGroupId(model.getGroupId());
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
-		soapModel.setUserName(model.getUserName());
 		soapModel.setCreateDate(model.getCreateDate());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setType(model.getType());
 		soapModel.setExtraData(model.getExtraData());
 		soapModel.setReceiverUserId(model.getReceiverUserId());
-		soapModel.setReceiverUserName(model.getReceiverUserName());
 
 		return soapModel;
 	}
@@ -119,14 +117,6 @@ public class SocialActivitySoap implements Serializable {
 		_userId = userId;
 	}
 
-	public String getUserName() {
-		return _userName;
-	}
-
-	public void setUserName(String userName) {
-		_userName = userName;
-	}
-
 	public Date getCreateDate() {
 		return _createDate;
 	}
@@ -175,24 +165,14 @@ public class SocialActivitySoap implements Serializable {
 		_receiverUserId = receiverUserId;
 	}
 
-	public String getReceiverUserName() {
-		return _receiverUserName;
-	}
-
-	public void setReceiverUserName(String receiverUserName) {
-		_receiverUserName = receiverUserName;
-	}
-
 	private long _activityId;
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
-	private String _userName;
 	private Date _createDate;
 	private long _classNameId;
 	private long _classPK;
 	private String _type;
 	private String _extraData;
 	private long _receiverUserId;
-	private String _receiverUserName;
 }

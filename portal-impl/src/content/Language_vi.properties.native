@@ -530,7 +530,6 @@ end-date=Ngày kết thúc
 english=English
 enter-a-blank-entry-to-disable-email-forwarding=Nhập vào một email trống để tắt chức năng chuyển tiếp.
 enter-a-blank-paypal-email-address-to-disable-paypal=Nhập vào một địa chỉ PayPal email trống để tắt PayPal. Chọn credit card được chấp nhận để ghi lại giao dịch sử dụng credit cards.
-enter-a-name=Nhập một tên
 enter-a-paypal-email-address-to-send-all-payments-to-paypal=Nhập vào một địa chỉ PayPal email để gửi thanh toán tới PayPal.
 enter-again=Nhập lại 
 enter-one-city-or-zip-code-per-line=Nhập mỗi thành phố hoặc mã vùng  <b>trên một dòng</b>.

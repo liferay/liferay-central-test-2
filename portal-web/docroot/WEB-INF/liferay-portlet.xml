@@ -106,7 +106,7 @@
 		<render-weight>1</render-weight>
 		<header-portlet-css>/html/portlet/calendar/css.jsp</header-portlet-css>
 		<css-class-wrapper>portlet-calendar</css-class-wrapper>
-	</portlet>
+</portlet>
 	<portlet>
 		<portlet-name>9</portlet-name>
 		<icon>/html/portlet/admin/icon.png</icon>
@@ -1102,25 +1102,14 @@
 	</portlet>
 	<portlet>
 		<portlet-name>116</portlet-name>
-		<icon>/html/portlet/my_activities/icon.png</icon>
-		<struts-path>my_activities</struts-path>
+		<struts-path>activities</struts-path>
 		<use-default-template>false</use-default-template>
 		<restore-current-view>false</restore-current-view>
 		<private-request-attributes>false</private-request-attributes>
 		<private-session-attributes>false</private-session-attributes>
 		<render-weight>1</render-weight>
-		<include>false</include>
-	</portlet>
-	<portlet>
-		<portlet-name>117</portlet-name>
-		<icon>/html/portlet/our_activities/icon.png</icon>
-		<struts-path>our_activities</struts-path>
-		<use-default-template>false</use-default-template>
-		<restore-current-view>false</restore-current-view>
-		<private-request-attributes>false</private-request-attributes>
-		<private-session-attributes>false</private-session-attributes>
-		<render-weight>1</render-weight>
-		<include>false</include>
+		<header-portlet-css>/html/portlet/activities/css.jsp</header-portlet-css>
+		<css-class-wrapper>portlet-activities</css-class-wrapper>
 	</portlet>
 	<portlet>
 		<portlet-name>118</portlet-name>

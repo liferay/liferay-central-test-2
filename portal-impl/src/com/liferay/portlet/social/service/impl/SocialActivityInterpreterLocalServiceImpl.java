@@ -73,6 +73,9 @@ public class SocialActivityInterpreterLocalServiceImpl
 						activityTracker, themeDisplay);
 
 				if (activityFeedEntry != null) {
+					activityFeedEntry.setPortletId(
+						activityInterpreter.getPortletId());
+
 					return activityFeedEntry;
 				}
 			}

@@ -1568,14 +1568,12 @@
 		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="userName" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="createDate" />
 		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="extraData" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="receiverUserId" type="com.liferay.util.dao.hibernate.LongType" />
-		<property name="receiverUserName" type="com.liferay.util.dao.hibernate.StringType" />
 	</class>
 	<class name="com.liferay.portlet.social.model.impl.SocialRelationImpl" table="SocialRelation">
 		<cache usage="read-write" />

@@ -93,14 +93,12 @@ create table SocialActivity (
 	groupId LONG,
 	companyId LONG,
 	userId LONG,
-	userName VARCHAR(75) null,
 	createDate DATE null,
 	classNameId LONG,
 	classPK LONG,
 	type_ VARCHAR(75) null,
 	extraData TEXT null,
-	receiverUserId LONG,
-	receiverUserName VARCHAR(75) null
+	receiverUserId LONG
 );
 
 create table SocialRelation (

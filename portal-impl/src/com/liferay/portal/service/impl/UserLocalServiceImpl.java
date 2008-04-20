@@ -803,6 +803,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		shoppingCartLocalService.deleteUserCarts(userId);
 
+		// Social
+
+		socialActivityLocalService.deleteUserActivities(userId);
+
 		// Mail
 
 		try {

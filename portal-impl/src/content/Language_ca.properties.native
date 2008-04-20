@@ -752,7 +752,6 @@ end-date=Data final
 english=Anglès
 enter-a-blank-entry-to-disable-email-forwarding=Introdueixi una entrada en blanc per a deshabilitar la redirecció del correu.
 enter-a-blank-paypal-email-address-to-disable-paypal=Introdueixi una adreçaen blanc de PayPal per a deshabilitar PayPal. Seleccioni les targes de crédit acceptadas per a registrar pagaments utilitzant targes de crédit. els pagaments no seran requerits si PayPal está deshabilitat i no se accepten targes de crédit.
-enter-a-name=Introdueixi un nom
 enter-a-paypal-email-address-to-send-all-payments-to-paypal=incorpori una adreçade email de PayPal per a enviar tots els pagaments a PayPal
 enter-again=Confirmació
 enter-one-city-or-zip-code-per-line=Introdueixi una sola ciutat o codi postal <b>per línia</b>.

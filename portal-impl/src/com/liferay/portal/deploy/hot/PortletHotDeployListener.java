@@ -284,6 +284,7 @@ public class PortletHotDeployListener implements HotDeployListener {
 
 					socialActivityInterpreterInstance =
 						new SocialActivityInterpreterImpl(
+							portlet.getPortletId(),
 							socialActivityInterpreterInstance);
 
 					SocialActivityInterpreterLocalServiceUtil.

@@ -22,45 +22,53 @@
 
 package com.liferay.portlet.social.model;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.model.Group;
+import com.liferay.portal.model.User;
+import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.theme.ThemeDisplay;
+
 /**
- * <a href="SocialActivityFeedEntry.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseSocialActivityInterpreter.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class SocialActivityFeedEntry {
+public abstract class BaseSocialActivityInterpreter
+	implements SocialActivityInterpreter {
 
-	public SocialActivityFeedEntry(String title, String body) {
-		_title = title;
-		_body = body;
+	public String getUserName(long userId, ThemeDisplay themeDisplay) {
+		try {
+			if (userId <= 0) {
+				return StringPool.BLANK;
+			}
+
+			User user = UserLocalServiceUtil.getUserById(userId);
+
+			if (user.getUserId() == themeDisplay.getUserId()) {
+				return user.getFirstName();
+			}
+
+			String userName = user.getFullName();
+
+			Group group = user.getGroup();
+
+			if (group.getGroupId() == themeDisplay.getPortletGroupId()) {
+				return userName;
+			}
+
+			String userDisplayURL = user.getDisplayURL(
+				themeDisplay.getURLPortal());
+
+			userName =
+				"<a href=\"" + userDisplayURL + "\">" + userName + "</a>";
+
+			return userName;
+		}
+		catch (Exception e) {
+			return StringPool.BLANK;
+		}
 	}
-
-	public String getPortletId() {
-		return _portletId;
-	}
-
-	public void setPortletId(String portletId) {
-		_portletId = portletId;
-	}
-
-	public String getTitle() {
-		return _title;
-	}
-
-	public void setTitle(String title) {
-		_title = title;
-	}
-
-	public String getBody() {
-		return _body;
-	}
-
-	public void setBody(String body) {
-		_body = body;
-	}
-
-	private String _portletId;
-	private String _title;
-	private String _body;
 
 }

@@ -329,7 +329,7 @@ public class MainServlet extends ActionServlet {
 				if (portlet.isActive() && (socialActivityInterpreter != null)) {
 					socialActivityInterpreter =
 						new SocialActivityInterpreterImpl(
-							socialActivityInterpreter);
+							portlet.getPortletId(), socialActivityInterpreter);
 
 					SocialActivityInterpreterLocalServiceUtil.
 						addActivityInterpreter(socialActivityInterpreter);

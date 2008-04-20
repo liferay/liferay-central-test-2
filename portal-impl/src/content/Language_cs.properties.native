@@ -489,7 +489,6 @@ end-date=Konečný datum
 english=Anglicky
 enter-a-blank-entry-to-disable-email-forwarding=Vyprázdni e-mail pro disablování přesměrování e-mailů.
 enter-a-blank-paypal-email-address-to-disable-paypal=Vyprázni PayPal pro disablování PayPal placení. Vyber akceptované platební karty. Payments will not be required if PayPal is disabled and there are no accepted credit cards.
-enter-a-name=Vlož jméno
 enter-a-paypal-email-address-to-send-all-payments-to-paypal=Vlož PayPal e-mail adresu pro odeslání všech plateb do PayPal.
 enter-again=Vlož znovu
 enter-one-city-or-zip-code-per-line=Vlož jedno město nebo PSČ na <b>každý řádek</b>.

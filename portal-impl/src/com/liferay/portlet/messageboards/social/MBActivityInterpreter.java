@@ -25,14 +25,12 @@ package com.liferay.portlet.messageboards.social;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.User;
-import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
-import com.liferay.portlet.social.model.SocialActivityInterpreter;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -43,7 +41,7 @@ import org.apache.commons.logging.LogFactory;
  * @author Brian Wing Shun Chan
  *
  */
-public class MBActivityInterpreter implements SocialActivityInterpreter {
+public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
@@ -68,25 +66,12 @@ public class MBActivityInterpreter implements SocialActivityInterpreter {
 			SocialActivity activity, ThemeDisplay themeDisplay)
 		throws Exception {
 
-		User creatorUser = UserLocalServiceUtil.getUserById(
-			activity.getUserId());
-
-		String creatorUserName = creatorUser.getFullName();
-		String creatorUserDisplayURL = creatorUser.getDisplayURL(
-			themeDisplay.getURLPortal());
-
-		creatorUserName = "<a href=\"" + creatorUserDisplayURL + "\">" + creatorUserName + "</a>";
+		String creatorUserName = getUserName(
+			activity.getUserId(), themeDisplay);
+		String receiverUserName = getUserName(
+			activity.getReceiverUserId(), themeDisplay);
 
 		String type = activity.getType();
-
-		String receiverUserName = activity.getReceiverUserName();
-
-		if (activity.getReceiverUserId() > 0) {
-			User receiverUser = UserLocalServiceUtil.getUserById(
-				activity.getReceiverUserId());
-
-			receiverUserName = receiverUser.getFullName();
-		}
 
 		// Title
 
@@ -107,11 +92,18 @@ public class MBActivityInterpreter implements SocialActivityInterpreter {
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(
 			activity.getClassPK());
 
+		String messageURL =
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				"/message_boards/find_message?messageId=" +
+					activity.getClassPK();
+
 		StringMaker sm = new StringMaker();
 
-		sm.append("<b>");
+		sm.append("<a href=\"");
+		sm.append(messageURL);
+		sm.append("\">");
 		sm.append(message.getSubject());
-		sm.append("</b><br />");
+		sm.append("</a><br />");
 		sm.append(StringUtil.shorten(message.getBody(), 200));
 
 		String body = sm.toString();

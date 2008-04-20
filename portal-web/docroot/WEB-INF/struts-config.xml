@@ -124,6 +124,10 @@
 
 		<action path="/portal/upload_progress_poller" forward="portal.upload_progress_poller" />
 
+		<!-- Activities -->
+
+		<action path="/activities/view" forward="portlet.activities.view" />
+
 		<!-- Admin -->
 
 		<action path="/admin/edit_instance" type="com.liferay.portlet.admin.action.EditInstanceAction">
@@ -907,26 +911,6 @@
 		<action path="/my_account/view" type="com.liferay.portlet.myaccount.action.ViewAction">
 			<forward name="portlet.my_account.view" path="portlet.my_account.view" />
 		</action>
-
-		<!-- My Activities -->
-
-		<action path="/my_activities/view" forward="portlet.my_activities.view" />
-
-		<!-- My Community Tags -->
-
-		<action path="/my_community_tags/edit" type="com.liferay.portlet.mycommunitytags.action.EditPreferencesAction">
-			<forward name="portlet.my_community_tags.edit" path="portlet.my_community_tags.edit" />
-		</action>
-
-		<action path="/my_community_tags/view" forward="portlet.my_community_tags.view" />
-
-		<!-- My Global Tags -->
-
-		<action path="/my_global_tags/edit" type="com.liferay.portlet.myglobaltags.action.EditPreferencesAction">
-			<forward name="portlet.my_global_tags.edit" path="portlet.my_global_tags.edit" />
-		</action>
-
-		<action path="/my_global_tags/view" forward="portlet.my_global_tags.view" />
 
 		<!-- My Places -->
 

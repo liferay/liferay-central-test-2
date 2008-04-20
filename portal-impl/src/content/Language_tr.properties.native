@@ -358,7 +358,6 @@ end-by=Bitişi ile
 end-date=Bitiş Tarihi
 english=İngilizce
 enter-a-blank-entry-to-disable-email-forwarding=Adresi boş bırakarak yönlendirmeyi önleyin.
-enter-a-name=İsim Girin
 enter-one-city-or-zip-code-per-line=<b>Herbir satıra</b> bir şehir ve posta kodu giriniz.
 enter-one-email-address-per-line=Enter one email address <b>per line</b>.
 enter-one-isbn-number-per-line-to-add-books=Kitap eklemek için <b>herbir satıra</b> bir ISBN numarası girin. Bir seferde {0} adet girebilirsiniz.

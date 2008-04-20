@@ -22,14 +22,10 @@
  */
 %>
 
-<%@ include file="/html/portlet/init.jsp" %>
+<%@ include file="/html/portlet/css_init.jsp" %>
 
-<%@ page import="com.liferay.portlet.social.model.SocialActivity" %>
-<%@ page import="com.liferay.portlet.social.model.SocialActivityFeedEntry" %>
-<%@ page import="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil" %>
-<%@ page import="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" %>
-
-<%
-DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
-DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
-%>
+.portlet-activities .day-separator {
+	border-bottom: 1px dotted #CCC;
+	margin-bottom: 0px;
+	padding-bottom: 2px;
+}

@@ -22,14 +22,13 @@
 
 package com.liferay.portlet.social.service.impl;
 
-import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.service.base.SocialActivityLocalServiceBaseImpl;
+import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.Date;
 import java.util.List;
@@ -55,22 +54,6 @@ public class SocialActivityLocalServiceImpl
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		String receiverUserName = StringPool.BLANK;
-
-		if (receiverUserId > 0) {
-			try {
-				User receiverUser = userPersistence.findByPrimaryKey(
-					receiverUserId);
-
-				receiverUserName = receiverUser.getFullName();
-			}
-			catch (NoSuchUserException nsue) {
-				if (_log.isWarnEnabled()) {
-					_log.warn(nsue);
-				}
-			}
-		}
-
 		long activityId = counterLocalService.increment(
 			SocialActivity.class.getName());
 
@@ -80,14 +63,12 @@ public class SocialActivityLocalServiceImpl
 		activity.setGroupId(groupId);
 		activity.setCompanyId(user.getCompanyId());
 		activity.setUserId(user.getUserId());
-		activity.setUserName(user.getFullName());
 		activity.setCreateDate(new Date());
 		activity.setClassNameId(classNameId);
 		activity.setClassPK(classPK);
 		activity.setType(type);
 		activity.setExtraData(extraData);
 		activity.setReceiverUserId(receiverUserId);
-		activity.setReceiverUserName(receiverUserName);
 
 		socialActivityPersistence.update(activity, false);
 
@@ -106,6 +87,15 @@ public class SocialActivityLocalServiceImpl
 		throws SystemException {
 
 		socialActivityPersistence.removeByC_C(classNameId, classPK);
+	}
+
+	public void deleteUserActivities(long userId) throws SystemException {
+		List<SocialActivity> activities = socialActivityFinder.findByU_R(
+			userId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (SocialActivity activity : activities) {
+			socialActivityPersistence.remove(activity);
+		}
 	}
 
 	public List<SocialActivity> getActivities(String className, long classPK)

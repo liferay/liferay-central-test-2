@@ -78,9 +78,6 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 			{ "userId", new Integer(Types.BIGINT) },
 			
 
-			{ "userName", new Integer(Types.VARCHAR) },
-			
-
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			
 
@@ -96,12 +93,9 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 			{ "extraData", new Integer(Types.CLOB) },
 			
 
-			{ "receiverUserId", new Integer(Types.BIGINT) },
-			
-
-			{ "receiverUserName", new Integer(Types.VARCHAR) }
+			{ "receiverUserId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,classNameId LONG,classPK LONG,type_ VARCHAR(75) null,extraData TEXT null,receiverUserId LONG,receiverUserName VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,classNameId LONG,classPK LONG,type_ VARCHAR(75) null,extraData TEXT null,receiverUserId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table SocialActivity";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -117,14 +111,12 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		model.setGroupId(soapModel.getGroupId());
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
-		model.setUserName(soapModel.getUserName());
 		model.setCreateDate(soapModel.getCreateDate());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
 		model.setType(soapModel.getType());
 		model.setExtraData(soapModel.getExtraData());
 		model.setReceiverUserId(soapModel.getReceiverUserId());
-		model.setReceiverUserName(soapModel.getReceiverUserName());
 
 		return model;
 	}
@@ -194,19 +186,6 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 	public void setUserId(long userId) {
 		if (userId != _userId) {
 			_userId = userId;
-		}
-	}
-
-	public String getUserName() {
-		return GetterUtil.getString(_userName);
-	}
-
-	public void setUserName(String userName) {
-		if (((userName == null) && (_userName != null)) ||
-				((userName != null) && (_userName == null)) ||
-				((userName != null) && (_userName != null) &&
-				!userName.equals(_userName))) {
-			_userName = userName;
 		}
 	}
 
@@ -282,19 +261,6 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		}
 	}
 
-	public String getReceiverUserName() {
-		return GetterUtil.getString(_receiverUserName);
-	}
-
-	public void setReceiverUserName(String receiverUserName) {
-		if (((receiverUserName == null) && (_receiverUserName != null)) ||
-				((receiverUserName != null) && (_receiverUserName == null)) ||
-				((receiverUserName != null) && (_receiverUserName != null) &&
-				!receiverUserName.equals(_receiverUserName))) {
-			_receiverUserName = receiverUserName;
-		}
-	}
-
 	public SocialActivity toEscapedModel() {
 		if (isEscapedModel()) {
 			return (SocialActivity)this;
@@ -308,14 +274,12 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 			model.setGroupId(getGroupId());
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
-			model.setUserName(HtmlUtil.escape(getUserName()));
 			model.setCreateDate(getCreateDate());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
 			model.setType(HtmlUtil.escape(getType()));
 			model.setExtraData(HtmlUtil.escape(getExtraData()));
 			model.setReceiverUserId(getReceiverUserId());
-			model.setReceiverUserName(HtmlUtil.escape(getReceiverUserName()));
 
 			model = (SocialActivity)Proxy.newProxyInstance(SocialActivity.class.getClassLoader(),
 					new Class[] { SocialActivity.class },
@@ -332,14 +296,12 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		clone.setGroupId(getGroupId());
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
-		clone.setUserName(getUserName());
 		clone.setCreateDate(getCreateDate());
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setType(getType());
 		clone.setExtraData(getExtraData());
 		clone.setReceiverUserId(getReceiverUserId());
-		clone.setReceiverUserName(getReceiverUserName());
 
 		return clone;
 	}
@@ -397,12 +359,10 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 	private long _groupId;
 	private long _companyId;
 	private long _userId;
-	private String _userName;
 	private Date _createDate;
 	private long _classNameId;
 	private long _classPK;
 	private String _type;
 	private String _extraData;
 	private long _receiverUserId;
-	private String _receiverUserName;
 }

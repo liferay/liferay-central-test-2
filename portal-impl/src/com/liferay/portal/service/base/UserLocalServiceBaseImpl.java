@@ -312,6 +312,12 @@ import com.liferay.portlet.shopping.service.ShoppingCartLocalService;
 import com.liferay.portlet.shopping.service.ShoppingCartLocalServiceFactory;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
+import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -1554,6 +1560,33 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		this.shoppingCartPersistence = shoppingCartPersistence;
 	}
 
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
+	}
+
 	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
@@ -2118,6 +2151,18 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		if (shoppingCartPersistence == null) {
 			shoppingCartPersistence = ShoppingCartUtil.getPersistence();
 		}
+
+		if (socialActivityLocalService == null) {
+			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+		}
+
+		if (socialActivityPersistence == null) {
+			socialActivityPersistence = SocialActivityUtil.getPersistence();
+		}
+
+		if (socialActivityFinder == null) {
+			socialActivityFinder = SocialActivityFinderUtil.getFinder();
+		}
 	}
 
 	protected AccountLocalService accountLocalService;
@@ -2261,4 +2306,7 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected MBStatsUserPersistence mbStatsUserPersistence;
 	protected ShoppingCartLocalService shoppingCartLocalService;
 	protected ShoppingCartPersistence shoppingCartPersistence;
+	protected SocialActivityLocalService socialActivityLocalService;
+	protected SocialActivityPersistence socialActivityPersistence;
+	protected SocialActivityFinder socialActivityFinder;
 }

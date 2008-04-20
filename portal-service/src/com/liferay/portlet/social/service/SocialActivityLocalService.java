@@ -86,6 +86,9 @@ public interface SocialActivityLocalService {
 	public void deleteActivities(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	public void deleteUserActivities(long userId)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException;

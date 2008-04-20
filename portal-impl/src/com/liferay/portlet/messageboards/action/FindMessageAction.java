@@ -22,10 +22,19 @@
 
 package com.liferay.portlet.messageboards.action;
 
+import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
+
+import java.util.List;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -58,6 +67,8 @@ public class FindMessageAction extends Action {
 			long plid = ParamUtil.getLong(req, "p_l_id");
 			long messageId = ParamUtil.getLong(req, "messageId");
 
+			plid = getPlid(plid, messageId);
+
 			PortletURL portletURL = new PortletURLImpl(
 				req, PortletKeys.MESSAGE_BOARDS, plid,
 				PortletRequest.RENDER_PHASE);
@@ -78,6 +89,49 @@ public class FindMessageAction extends Action {
 
 			return mapping.findForward(ActionConstants.COMMON_ERROR);
 		}
+	}
+
+	protected long getPlid(long plid, long messageId) throws Exception {
+		if (plid != 0) {
+			try {
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+				LayoutTypePortlet layoutTypePortlet =
+					(LayoutTypePortlet)layout.getLayoutType();
+
+				if (layoutTypePortlet.hasPortletId(
+						PortletKeys.MESSAGE_BOARDS)) {
+
+					return plid;
+				}
+			}
+			catch (NoSuchLayoutException nsle) {
+			}
+		}
+
+		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
+
+		long groupId = message.getCategory().getGroupId();
+		boolean privateLayout = false;
+
+		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+			groupId, privateLayout);
+
+		for (Layout layout : layouts) {
+			if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+				continue;
+			}
+
+			LayoutTypePortlet layoutTypePortlet =
+				(LayoutTypePortlet)layout.getLayoutType();
+
+			if (layoutTypePortlet.hasPortletId(PortletKeys.MESSAGE_BOARDS)) {
+				return layout.getPlid();
+			}
+		}
+
+		throw new NoSuchLayoutException(
+			"No public page was found with the Blogs portlet.");
 	}
 
 }

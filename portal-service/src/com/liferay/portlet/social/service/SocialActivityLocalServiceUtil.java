@@ -126,6 +126,13 @@ public class SocialActivityLocalServiceUtil {
 		socialActivityLocalService.deleteActivities(classNameId, classPK);
 	}
 
+	public static void deleteUserActivities(long userId)
+		throws com.liferay.portal.SystemException {
+		SocialActivityLocalService socialActivityLocalService = SocialActivityLocalServiceFactory.getService();
+
+		socialActivityLocalService.deleteUserActivities(userId);
+	}
+
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
 		java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException {

@@ -41,8 +41,9 @@ public class SocialActivityInterpreterImpl
 	implements SocialActivityInterpreter {
 
 	public SocialActivityInterpreterImpl(
-		SocialActivityInterpreter socialActivityInterpreter) {
+		String portletId, SocialActivityInterpreter socialActivityInterpreter) {
 
+		_portletId = portletId;
 		_socialActivityInterpreter = socialActivityInterpreter;
 
 		String[] classNames = _socialActivityInterpreter.getClassNames();
@@ -54,6 +55,10 @@ public class SocialActivityInterpreterImpl
 
 	public String[] getClassNames() {
 		return _socialActivityInterpreter.getClassNames();
+	}
+
+	public String getPortletId() {
+		return _portletId;
 	}
 
 	public boolean hasClassName(String className) {
@@ -72,6 +77,7 @@ public class SocialActivityInterpreterImpl
 			socialActivity, themeDisplay);
 	}
 
+	private String _portletId;
 	private SocialActivityInterpreter _socialActivityInterpreter;
 	private Set<String> _classNames = new HashSet<String>();
 

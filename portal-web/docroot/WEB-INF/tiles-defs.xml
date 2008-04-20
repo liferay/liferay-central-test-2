@@ -72,28 +72,12 @@
 
 	<definition name="portal.upload_progress_poller" path="/portal/upload_progress_poller.jsp" />
 
-	<!-- Address Book -->
+	<!-- Activities -->
 
-	<definition name="portlet.address_book" extends="portlet" />
+	<definition name="portlet.activities" extends="portlet" />
 
-	<definition name="portlet.address_book.edit_contact" extends="portlet.address_book">
-		<put name="portlet_content" value="/portlet/address_book/edit_contact.jsp" />
-	</definition>
-
-	<definition name="portlet.address_book.edit_list" extends="portlet.address_book">
-		<put name="portlet_content" value="/portlet/address_book/edit_list.jsp" />
-	</definition>
-
-	<definition name="portlet.address_book.import_export" extends="portlet.address_book">
-		<put name="portlet_content" value="/portlet/address_book/import_export.jsp" />
-	</definition>
-
-	<definition name="portlet.address_book.view" extends="portlet.address_book">
-		<put name="portlet_content" value="/portlet/address_book/view.jsp" />
-	</definition>
-
-	<definition name="portlet.address_book.view_all" extends="portlet.address_book">
-		<put name="portlet_content" value="/portlet/address_book/view_all.jsp" />
+	<definition name="portlet.activities.view" extends="portlet.activities">
+		<put name="portlet_content" value="/portlet/activities/view.jsp" />
 	</definition>
 
 	<!-- Admin -->
@@ -736,38 +720,6 @@
 
 	<definition name="portlet.my_account.view" extends="portlet.my_account">
 		<put name="portlet_content" value="/portlet/my_account/view.jsp" />
-	</definition>
-
-	<!-- My Activities -->
-
-	<definition name="portlet.my_activities" extends="portlet" />
-
-	<definition name="portlet.my_activities.view" extends="portlet.my_activities">
-		<put name="portlet_content" value="/portlet/my_activities/view.jsp" />
-	</definition>
-
-	<!-- My Community Tags -->
-
-	<definition name="portlet.my_community_tags" extends="portlet" />
-
-	<definition name="portlet.my_community_tags.edit" extends="portlet.my_community_tags">
-		<put name="portlet_content" value="/portlet/my_community_tags/edit.jsp" />
-	</definition>
-
-	<definition name="portlet.my_community_tags.view" extends="portlet.my_community_tags">
-		<put name="portlet_content" value="/portlet/my_community_tags/view.jsp" />
-	</definition>
-
-	<!-- My Global Tags -->
-
-	<definition name="portlet.my_global_tags" extends="portlet" />
-
-	<definition name="portlet.my_global_tags.edit" extends="portlet.my_global_tags">
-		<put name="portlet_content" value="/portlet/my_global_tags/edit.jsp" />
-	</definition>
-
-	<definition name="portlet.my_global_tags.view" extends="portlet.my_global_tags">
-		<put name="portlet_content" value="/portlet/my_global_tags/view.jsp" />
 	</definition>
 
 	<!-- My Places -->
