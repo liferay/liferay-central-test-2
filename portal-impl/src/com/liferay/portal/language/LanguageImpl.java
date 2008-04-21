@@ -29,6 +29,7 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.util.CookieKeys;
@@ -97,6 +98,8 @@ public class LanguageImpl implements Language {
 			pattern = get(companyId, locale, pattern);
 
 			if (arguments != null) {
+				pattern = _escapePattern(pattern);
+
 				Object[] formattedArguments = new Object[arguments.length];
 
 				for (int i = 0; i < arguments.length; i++) {
@@ -149,6 +152,8 @@ public class LanguageImpl implements Language {
 			pattern = get(pageContext, pattern);
 
 			if (arguments != null) {
+				pattern = _escapePattern(pattern);
+
 				Object[] formattedArguments = new Object[arguments.length];
 
 				for (int i = 0; i < arguments.length; i++) {
@@ -208,6 +213,8 @@ public class LanguageImpl implements Language {
 			pattern = get(pageContext, pattern);
 
 			if (arguments != null) {
+				pattern = _escapePattern(pattern);
+
 				Object[] formattedArguments = new Object[arguments.length];
 
 				for (int i = 0; i < arguments.length; i++) {
@@ -470,6 +477,11 @@ public class LanguageImpl implements Language {
 			_localesByLanguageCode.put(language, locale);
 			_charEncodings.put(locale.toString(), StringPool.UTF8);
 		}
+	}
+
+	private String _escapePattern(String pattern) {
+		return StringUtil.replace(
+			pattern, StringPool.APOSTROPHE, StringPool.DOUBLE_APOSTROPHE);
 	}
 
 	private String _getCharset(Locale locale) {

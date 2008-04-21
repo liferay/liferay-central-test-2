@@ -60,6 +60,8 @@ public class StringPool {
 
 	public static final String DASH = "-";
 
+	public static final String DOUBLE_APOSTROPHE = "''";
+
 	public static final String DOUBLE_SLASH = "//";
 
 	public static final String EQUAL = "=";
