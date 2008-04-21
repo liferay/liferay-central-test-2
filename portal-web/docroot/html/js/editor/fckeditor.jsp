@@ -90,7 +90,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 				var ua = navigator.userAgent, isFirefox2andBelow = false;
 				var agent = /(Firefox)\/(.+)/.exec(ua);
 
-				if (agent.length && (agent.length == 3)) {
+				if (agent && agent.length && (agent.length == 3)) {
 					if (parseInt(agent[2])) {
 						isFirefox2andBelow = true;
 					}
