@@ -54,6 +54,10 @@ public class OpenIdUtil {
 			result = result.substring(Http.HTTP_WITH_SLASH.length());
 		}
 
+		if (result.startsWith(Http.HTTPS_WITH_SLASH)) {
+			result = result.substring(Http.HTTPS_WITH_SLASH.length());
+		}
+
 		if (result.endsWith(StringPool.SLASH)) {
 			result = result.substring(0, result.length() - 1);
 		}
