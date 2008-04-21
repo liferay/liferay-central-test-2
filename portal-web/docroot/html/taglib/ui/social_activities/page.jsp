@@ -32,75 +32,88 @@
 <%
 String className = (String)request.getAttribute("liferay-ui:social-activities:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:social-activities:classPK"));
+List<SocialActivity> activities = (List<SocialActivity>)request.getAttribute("liferay-ui:social-activities:activities");
 
-List<SocialActivity> activities = SocialActivityLocalServiceUtil.getActivities(className, classPK);
+if (activities == null) {
+	activities = SocialActivityLocalServiceUtil.getActivities(className, classPK);
+}
 
-DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+DateFormat dateFormatDate = new SimpleDateFormat("MMMM d", locale);
+
+if (timeZone != null) {
+	dateFormatDate.setTimeZone(timeZone);
+}
+
+DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 %>
 
-<liferay-ui:toggle-area
-	id='<%= "toggle_id_taglib_ui_activities_" + className + "_" + classPK %>'
-	showMessage='<%= LanguageUtil.get(pageContext, "show-activities") + " &raquo;" %>'
-	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-activities") %>'
-	defaultShowContent="<%= false %>"
->
-	<br />
+<div class="taglib-social-activities">
 
-	<table class="taglib-search-iterator">
-	<tr class="portlet-section-header">
-		<th class="col-1" width="80%">
-			<liferay-ui:message key="activity" />
-		</th>
-		<th class="col-2" width="20%">
-			<liferay-ui:message key="date" />
-		</th>
-	</tr>
+	<%
+	boolean firstDaySeparator = true;
 
-	<c:choose>
-		<c:when test="<%= activities.size() > 0 %>">
+	Date now = new Date();
 
-			<%
-			for (int i = 0; i < activities.size(); i++) {
-				SocialActivity activity = activities.get(i);
+	int daysBetween = -1;
 
-				SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
+	for (SocialActivity activity : activities) {
+		SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
 
-				if (activityFeedEntry != null) {
-					String cssClass = "portlet-section-body";
+		if (activityFeedEntry != null) {
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), activityFeedEntry.getPortletId());
 
-					if ((i % 2) == 0) {
-						cssClass = "portlet-section-alternate";
-					}
-			%>
+			int curDaysBetween = DateUtil.getDaysBetween(activity.getCreateDate(), now, timeZone);
+	%>
 
-					<tr class="<%= cssClass %>">
-						<td>
-							<%= activityFeedEntry.getTitle() %>
-						</td>
-						<td>
-							<%= dateFormatDateTime.format(activity.getCreateDate()) %>
-						</td>
-					</tr>
-					<tr class="<%= cssClass %>">
-						<td colspan="2">
-							<%= activityFeedEntry.getBody() %>
-						</td>
-					</tr>
+			<c:if test="<%= curDaysBetween > daysBetween %>">
 
-			<%
-				}
-			}
-			%>
+				<%
+				daysBetween = curDaysBetween;
+				%>
 
-		</c:when>
-		<c:otherwise>
-			<tr class="portlet-section-body">
-				<td colspan="2">
-					<liferay-ui:message key="no-activities-were-found" />
+				<div class="<%= firstDaySeparator ? "first-" : "" %>day-separator">
+					<c:choose>
+						<c:when test="<%= curDaysBetween == 0 %>">
+							<liferay-ui:message key="today" />
+						</c:when>
+						<c:when test="<%= curDaysBetween == 1 %>">
+							<liferay-ui:message key="yesterday" />
+						</c:when>
+						<c:otherwise>
+							<%= dateFormatDate.format(activity.getCreateDate()) %>
+						</c:otherwise>
+					</c:choose>
+				</div>
+
+				<%
+				firstDaySeparator = false;
+				%>
+
+			</c:if>
+
+			<div class="activity-separator"><!-- --></div>
+
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<img src="<%= portlet.getContextPath() + portlet.getIcon() %>" />
+				</td>
+				<td>
+					<%= activityFeedEntry.getTitle() %>
+
+					<%= timeFormatDate.format(activity.getCreateDate()) %>
+				</td>
+			<tr>
+				<td></td>
+				<td>
+					<%= activityFeedEntry.getBody() %>
 				</td>
 			</tr>
-		</c:otherwise>
-	</c:choose>
+			</table>
 
-	</table>
-</liferay-ui:toggle-area>
+	<%
+		}
+	}
+	%>
+
+</div>

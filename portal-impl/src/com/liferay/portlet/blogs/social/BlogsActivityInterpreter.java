@@ -24,7 +24,6 @@ package com.liferay.portlet.blogs.social;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.blogs.model.BlogsEntry;
@@ -100,7 +99,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-			sm.append(StringUtil.shorten(message.getBody(), 200));
+			sm.append(cleanContent(message.getBody()));
 		}
 		else if (activityType.equals(BlogsActivityKeys.ADD_ENTRY)) {
 			sm.append(entry.getTitle());
@@ -109,7 +108,7 @@ public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 		sm.append("</a><br />");
 
 		if (activityType.equals(BlogsActivityKeys.ADD_ENTRY)) {
-			sm.append(StringUtil.shorten(entry.getContent(), 200));
+			sm.append(cleanContent(entry.getContent()));
 		}
 
 		String body = sm.toString();

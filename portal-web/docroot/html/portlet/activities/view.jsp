@@ -36,61 +36,6 @@ if (group.isUser()) {
 List<SocialActivity> activities = SocialActivityLocalServiceUtil.getUserActivities(user2.getUserId(), 0, SearchContainer.DEFAULT_DELTA);
 %>
 
-<%
-Date now = new Date();
-
-int daysBetween = 0;
-
-for (SocialActivity activity : activities) {
-	SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
-
-	if (activityFeedEntry != null) {
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), activityFeedEntry.getPortletId());
-
-		int curDaysBetween = DateUtil.getDaysBetween(activity.getCreateDate(), now, timeZone);
-%>
-
-		<c:if test="<%= curDaysBetween > 0 %>">
-			<c:if test="<%= daysBetween != curDaysBetween %>">
-
-				<%
-				daysBetween = curDaysBetween;
-				%>
-
-				<div class="day-separator">
-					<c:choose>
-						<c:when test="<%= curDaysBetween == 1 %>">
-							<liferay-ui:message key="yesterday" />
-						</c:when>
-						<c:otherwise>
-							<%= dateFormatDate.format(activity.getCreateDate()) %>
-						</c:otherwise>
-					</c:choose>
-				</div>
-			</c:if>
-		</c:if>
-
-		<div style="padding-bottom: 10px;"><!-- --></div>
-
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<img src="<%= portlet.getContextPath() + portlet.getIcon() %>" />
-			</td>
-			<td>
-				<%= activityFeedEntry.getTitle() %>
-
-				<%= timeFormatDate.format(activity.getCreateDate()) %>
-			</td>
-		<tr>
-			<td></td>
-			<td>
-				<%= activityFeedEntry.getBody() %>
-			</td>
-		</tr>
-		</table>
-
-<%
-	}
-}
-%>
+<liferay-ui:social-activities
+	activities="<%= activities %>"
+/>

@@ -201,7 +201,7 @@ for (int i = 2; i <= workflowStages; i++) {
 	<br />
 
 	<liferay-ui:toggle-area
-		id="toggle_id_communities_edit_proposal_reveiwers"
+		id="toggle_id_communities_edit_proposal_reviewers"
 		showMessage='<%= LanguageUtil.get(pageContext, "show-assign-reviewers") + " &raquo;" %>'
 		hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-assign-reviewers") %>'
 	>
@@ -298,10 +298,19 @@ for (int i = 2; i <= workflowStages; i++) {
 
 <br />
 
-<liferay-ui:social-activities
-	className="<%= TasksProposal.class.getName() %>"
-	classPK="<%= proposalId %>"
-/>
+<liferay-ui:toggle-area
+	id="toggle_id_communities_edit_proposal_activities"
+	showMessage='<%= LanguageUtil.get(pageContext, "show-activities") + " &raquo;" %>'
+	hideMessage='<%= "&laquo; " + LanguageUtil.get(pageContext, "hide-activities") %>'
+	defaultShowContent="<%= false %>"
+>
+	<br />
+
+	<liferay-ui:social-activities
+		className="<%= TasksProposal.class.getName() %>"
+		classPK="<%= proposalId %>"
+	/>
+</liferay-ui:toggle-area>
 
 <br />
 

@@ -22,7 +22,11 @@
 
 package com.liferay.taglib.ui;
 
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.taglib.util.IncludeTag;
+
+import java.util.List;
 
 import javax.servlet.ServletRequest;
 
@@ -41,6 +45,11 @@ public class SocialActivitiesTag extends IncludeTag {
 		req.setAttribute(
 			"liferay-ui:social-activities:classPK", String.valueOf(_classPK));
 
+		if (_activities != null) {
+			req.setAttribute(
+				"liferay-ui:social-activities:activities", _activities);
+		}
+
 		return EVAL_BODY_BUFFERED;
 	}
 
@@ -52,6 +61,10 @@ public class SocialActivitiesTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
+	public void setActivities(List<SocialActivity> activities) {
+		_activities = activities;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -59,7 +72,8 @@ public class SocialActivitiesTag extends IncludeTag {
 	private static final String _PAGE =
 		"/html/taglib/ui/social_activities/page.jsp";
 
-	private String _className;
+	private String _className = StringPool.BLANK;
 	private long _classPK;
+	private List<SocialActivity> _activities;
 
 }

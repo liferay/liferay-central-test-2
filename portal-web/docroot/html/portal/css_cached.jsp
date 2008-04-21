@@ -1236,6 +1236,26 @@ li.toggle-expand a {
 	padding-right: 10px;
 }
 
+/* ---------- Taglib social activities ---------- */
+
+.taglib-social-activities .activity-separator {
+	padding-bottom: 10px;
+}
+
+.taglib-social-activities .day-separator {
+	border-bottom: 1px dotted #CCC;
+	margin-bottom: 0px;
+	margin-top: 10px;
+	padding-bottom: 2px;
+}
+
+.taglib-social-activities .first-day-separator {
+	border-bottom: 1px dotted #CCC;
+	margin-bottom: 0px;
+	margin-top: 0px;
+	padding-bottom: 2px;
+}
+
 /* ---------- Taglib social bookmark ---------- */
 
 .taglib-social-bookmarks li {
