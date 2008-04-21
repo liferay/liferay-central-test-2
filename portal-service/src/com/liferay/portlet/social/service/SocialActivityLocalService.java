@@ -119,6 +119,10 @@ public interface SocialActivityLocalService {
 	public int getGroupActivitiesCount(long groupId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getRelationActivities(
+		long userId, int type, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getUserActivities(
 		long userId, int begin, int end)
 		throws com.liferay.portal.SystemException;

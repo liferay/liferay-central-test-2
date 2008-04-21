@@ -51,6 +51,9 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 	public static String FIND_BY_U_R =
 		SocialActivityFinder.class.getName() + ".findByU_R";
 
+	public static String FIND_BY_RELATION_TYPE_BI =
+		SocialActivityFinder.class.getName() + ".findByRelationTypeBi";
+
 	public int countByU_R(long userId, long receiverUserId)
 		throws SystemException {
 
@@ -109,6 +112,39 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 
 			qPos.add(userId);
 			qPos.add(receiverUserId);
+
+			return (List<SocialActivity>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List<SocialActivity> findByRelationTypeBi(
+			long userId, int type, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_RELATION_TYPE_BI);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
+			qPos.add(type);
+			qPos.add(userId);
+			qPos.add(userId);
 
 			return (List<SocialActivity>)QueryUtil.list(
 				q, HibernateUtil.getDialect(), begin, end);

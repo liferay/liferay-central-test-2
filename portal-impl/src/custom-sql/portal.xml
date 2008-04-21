@@ -1059,56 +1059,56 @@
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialMutualRelation">
 		<![CDATA[
 			INNER JOIN
-				SocialRelation AS sr1 ON
+				SocialRelation AS socialRelation1 ON
 					(
-						(sr1.userId1 = User_.userId) OR
-						(sr1.userId2 = User_.userId)
+						(socialRelation1.userId1 = User_.userId) OR
+						(socialRelation1.userId2 = User_.userId)
 					) AND
 					(User_.userId != ?) AND
 					(
-						(sr1.userId1 = ?) OR
-						(sr1.userId2 = ?)
+						(socialRelation1.userId1 = ?) OR
+						(socialRelation1.userId2 = ?)
 					)
 			INNER JOIN
-				SocialRelation AS sr2 ON
+				SocialRelation AS socialRelation2 ON
 					(
-						(sr2.userId1 = User_.userId) OR
-						(sr2.userId2 = User_.userId)
+						(socialRelation2.userId1 = User_.userId) OR
+						(socialRelation2.userId2 = User_.userId)
 					) AND
 					(User_.userId != ?) AND
 					(
-						(sr2.userId1 = ?) OR
-						(sr2.userId2 = ?)
+						(socialRelation2.userId1 = ?) OR
+						(socialRelation2.userId2 = ?)
 					)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialMutualRelationType">
 		<![CDATA[
 			INNER JOIN
-				SocialRelation AS sr1 ON
+				SocialRelation AS socialRelation1 ON
 					(
-						(sr1.userId1 = User_.userId) OR
-						(sr1.userId2 = User_.userId)
+						(socialRelation1.userId1 = User_.userId) OR
+						(socialRelation1.userId2 = User_.userId)
 					) AND
 					(User_.userId != ?) AND
 					(
-						(sr1.userId1 = ?) OR
-						(sr1.userId2 = ?)
+						(socialRelation1.userId1 = ?) OR
+						(socialRelation1.userId2 = ?)
 					)
 			INNER JOIN
-				SocialRelation AS sr2 ON
+				SocialRelation AS socialRelation2 ON
 					(
-						(sr2.userId1 = User_.userId) OR
-						(sr2.userId2 = User_.userId)
+						(socialRelation2.userId1 = User_.userId) OR
+						(socialRelation2.userId2 = User_.userId)
 					) AND
 					(User_.userId != ?) AND
 					(
-						(sr2.userId1 = ?) OR
-						(sr2.userId2 = ?)
+						(socialRelation2.userId1 = ?) OR
+						(socialRelation2.userId2 = ?)
 					)
 			WHERE
-				(sr1.type_ = ?) AND
-				(sr2.type_ = ?)
+				(socialRelation1.type_ = ?) AND
+				(socialRelation2.type_ = ?)
 		]]>
 	</sql>
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialRelation">

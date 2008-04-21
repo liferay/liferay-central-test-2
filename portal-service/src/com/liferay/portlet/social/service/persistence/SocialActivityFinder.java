@@ -35,4 +35,8 @@ public interface SocialActivityFinder {
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByU_R(
 		long userId, long receiverUserId, int begin, int end)
 		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationTypeBi(
+		long userId, int type, int begin, int end)
+		throws com.liferay.portal.SystemException;
 }

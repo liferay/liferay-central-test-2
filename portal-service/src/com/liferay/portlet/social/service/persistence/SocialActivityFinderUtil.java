@@ -40,6 +40,12 @@ public class SocialActivityFinderUtil {
 		return getFinder().findByU_R(userId, receiverUserId, begin, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationTypeBi(
+		long userId, int type, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByRelationTypeBi(userId, type, begin, end);
+	}
+
 	public static SocialActivityFinder getFinder() {
 		return _getUtil()._finder;
 	}

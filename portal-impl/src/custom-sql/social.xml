@@ -25,6 +25,33 @@
 				SocialActivity.createDate DESC
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByRelationTypeBi">
+		<![CDATA[
+			SELECT
+				DISTINCT {SocialActivity.*}
+			FROM
+				SocialActivity
+			INNER JOIN
+				SocialRelation ON
+					(
+						(SocialRelation.userId1 = SocialActivity.userId) OR
+						(SocialRelation.userId1 = SocialActivity.receiverUserId)
+					) OR
+					(
+						(SocialRelation.userId2 = SocialActivity.userId) OR
+						(SocialRelation.userId2 = SocialActivity.receiverUserId)
+					)
+			WHERE
+				(SocialActivity.userId != ?) AND
+				(SocialRelation.type_ = ?) AND
+				(
+					(SocialRelation.userId1 = ?) OR
+					(SocialRelation.userId2 = ?)
+				)
+			ORDER BY
+				SocialActivity.createDate DESC
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.countByU_T">
 		<![CDATA[
 			SELECT

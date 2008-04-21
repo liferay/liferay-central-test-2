@@ -153,6 +153,14 @@ public class SocialActivityLocalServiceImpl
 		return socialActivityPersistence.countByGroupId(groupId);
 	}
 
+	public List<SocialActivity> getRelationActivities(
+			long userId, int type, int begin, int end)
+		throws SystemException {
+
+		return socialActivityFinder.findByRelationTypeBi(
+			userId, type, begin, end);
+	}
+
 	public List<SocialActivity> getUserActivities(
 			long userId, int begin, int end)
 		throws SystemException {
