@@ -31,6 +31,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -45,6 +46,7 @@ import com.liferay.portlet.blogs.EntryTitleException;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.service.base.BlogsEntryLocalServiceBaseImpl;
+import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.blogs.util.Indexer;
 import com.liferay.util.Normalizer;
 import com.liferay.util.lucene.HitsImpl;
@@ -173,8 +175,13 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 		// Statistics
 
-		blogsStatsUserLocalService.updateStatsUser(
-			entry.getGroupId(), userId, now);
+		blogsStatsUserLocalService.updateStatsUser(groupId, userId, now);
+
+		// Social
+
+		socialActivityLocalService.addActivity(
+			userId, groupId, BlogsEntry.class.getName(), entryId,
+			BlogsActivityKeys.ADD_ENTRY, StringPool.BLANK, 0);
 
 		// Tags
 
@@ -271,6 +278,11 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 		// Tags
 
 		tagsAssetLocalService.deleteAsset(
+			BlogsEntry.class.getName(), entry.getEntryId());
+
+		// Social
+
+		socialActivityLocalService.deleteActivities(
 			BlogsEntry.class.getName(), entry.getEntryId());
 
 		// Ratings

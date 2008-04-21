@@ -92,6 +92,12 @@ import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
 import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
 import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
+import com.liferay.portlet.social.service.SocialActivityLocalService;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
+import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
+import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
+import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.tags.service.TagsAssetLocalService;
 import com.liferay.portlet.tags.service.TagsAssetLocalServiceFactory;
 import com.liferay.portlet.tags.service.TagsAssetService;
@@ -395,6 +401,33 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 		this.ratingsStatsPersistence = ratingsStatsPersistence;
 	}
 
+	public SocialActivityLocalService getSocialActivityLocalService() {
+		return socialActivityLocalService;
+	}
+
+	public void setSocialActivityLocalService(
+		SocialActivityLocalService socialActivityLocalService) {
+		this.socialActivityLocalService = socialActivityLocalService;
+	}
+
+	public SocialActivityPersistence getSocialActivityPersistence() {
+		return socialActivityPersistence;
+	}
+
+	public void setSocialActivityPersistence(
+		SocialActivityPersistence socialActivityPersistence) {
+		this.socialActivityPersistence = socialActivityPersistence;
+	}
+
+	public SocialActivityFinder getSocialActivityFinder() {
+		return socialActivityFinder;
+	}
+
+	public void setSocialActivityFinder(
+		SocialActivityFinder socialActivityFinder) {
+		this.socialActivityFinder = socialActivityFinder;
+	}
+
 	public TagsAssetLocalService getTagsAssetLocalService() {
 		return tagsAssetLocalService;
 	}
@@ -596,6 +629,18 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 			ratingsStatsPersistence = RatingsStatsUtil.getPersistence();
 		}
 
+		if (socialActivityLocalService == null) {
+			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
+		}
+
+		if (socialActivityPersistence == null) {
+			socialActivityPersistence = SocialActivityUtil.getPersistence();
+		}
+
+		if (socialActivityFinder == null) {
+			socialActivityFinder = SocialActivityFinderUtil.getFinder();
+		}
+
 		if (tagsAssetLocalService == null) {
 			tagsAssetLocalService = TagsAssetLocalServiceFactory.getImpl();
 		}
@@ -662,6 +707,9 @@ public abstract class BlogsEntryServiceBaseImpl extends PrincipalBean
 	protected MBMessageFinder mbMessageFinder;
 	protected RatingsStatsLocalService ratingsStatsLocalService;
 	protected RatingsStatsPersistence ratingsStatsPersistence;
+	protected SocialActivityLocalService socialActivityLocalService;
+	protected SocialActivityPersistence socialActivityPersistence;
+	protected SocialActivityFinder socialActivityFinder;
 	protected TagsAssetLocalService tagsAssetLocalService;
 	protected TagsAssetService tagsAssetService;
 	protected TagsAssetPersistence tagsAssetPersistence;

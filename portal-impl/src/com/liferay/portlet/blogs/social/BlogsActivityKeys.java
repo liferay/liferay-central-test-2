@@ -20,20 +20,18 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tasks.social;
+package com.liferay.portlet.blogs.social;
 
 /**
- * <a href="TasksActivityKeys.java.html"><b><i>View Source</i></b></a>
+ * <a href="BlogsActivityKeys.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class TasksActivityKeys {
+public class BlogsActivityKeys {
 
-	public static final String ADD_PROPOSAL = "ADD_PROPOSAL";
+	public static final String ADD_COMMENT = "ADD_COMMENT";
 
-	public static final String ASSIGN_PROPOSAL = "ASSIGN_PROPOSAL";
-
-	public static final String REVIEW_PROPOSAL = "REVIEW_PROPOSAL";
+	public static final String ADD_ENTRY = "ADD_ENTRY";
 
 }

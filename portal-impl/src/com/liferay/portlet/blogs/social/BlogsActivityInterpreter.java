@@ -20,27 +20,30 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.tasks.social;
+package com.liferay.portlet.blogs.social;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
 import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
-import com.liferay.portlet.tasks.model.TasksProposal;
-import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 
 import org.json.JSONObject;
 
 /**
- * <a href="TasksActivityInterpreter.java.html"><b><i>View Source</i></b></a>
+ * <a href="BlogsActivityInterpreter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Raymond Augé
+ * @author Brian Wing Shun Chan
  *
  */
-public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
+public class BlogsActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
@@ -67,61 +70,46 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		String title = StringPool.BLANK;
 
-		if (activityType.equals(TasksActivityKeys.ADD_PROPOSAL)) {
+		if (activityType.equals(BlogsActivityKeys.ADD_COMMENT)) {
 			title = themeDisplay.translate(
-				"activity-tasks-add-proposal", creatorUserName);
-		}
-		else if (activityType.equals(TasksActivityKeys.ASSIGN_PROPOSAL)) {
-			title = themeDisplay.translate(
-				"activity-tasks-assign-proposal",
+				"activity-blogs-add-comment",
 				new Object[] {creatorUserName, receiverUserName});
 		}
-		else if (activityType.equals(TasksActivityKeys.REVIEW_PROPOSAL)) {
+		else if (activityType.equals(BlogsActivityKeys.ADD_ENTRY)) {
 			title = themeDisplay.translate(
-				"activity-tasks-review-proposal",
-				new Object[] {creatorUserName, receiverUserName});
+				"activity-blogs-add-entry", creatorUserName);
 		}
 
 		// Body
 
-		TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(
+		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(
 			activity.getClassPK());
+
+		String entryURL =
+			themeDisplay.getURLPortal() + themeDisplay.getPathMain() +
+				"/blogs/find_entry?entryId=" + activity.getClassPK();
 
 		StringMaker sm = new StringMaker();
 
-		sm.append("<b>");
-		sm.append(proposal.getName());
-		sm.append("</b> (");
-		sm.append(
-			themeDisplay.translate(
-				"model.resource." + proposal.getClassName()));
-		sm.append(")<br />");
-		sm.append(themeDisplay.translate("description"));
-		sm.append(": ");
-		sm.append(proposal.getDescription());
+		sm.append("<a href=\"");
+		sm.append(entryURL);
+		sm.append("\">");
 
-		if (!activityType.equals(TasksActivityKeys.ADD_PROPOSAL)) {
-			int stage = extraData.getInt("stage");
-			boolean completed = extraData.getBoolean("completed");
-			boolean rejected = extraData.getBoolean("rejected");
+		if (activityType.equals(BlogsActivityKeys.ADD_COMMENT)) {
+			long messageId = extraData.getInt("messageId");
 
-			sm.append("<br />");
-			sm.append(themeDisplay.translate("stage"));
-			sm.append(": ");
-			sm.append(stage);
-			sm.append("<br />");
-			sm.append(themeDisplay.translate("status"));
-			sm.append(": ");
+			MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-			if (completed && rejected) {
-				sm.append(themeDisplay.translate("rejected"));
-			}
-			else if (completed && !rejected) {
-				sm.append(themeDisplay.translate("approved"));
-			}
-			else {
-				sm.append(themeDisplay.translate("awaiting-approval"));
-			}
+			sm.append(StringUtil.shorten(message.getBody(), 200));
+		}
+		else if (activityType.equals(BlogsActivityKeys.ADD_ENTRY)) {
+			sm.append(entry.getTitle());
+		}
+
+		sm.append("</a><br />");
+
+		if (activityType.equals(BlogsActivityKeys.ADD_ENTRY)) {
+			sm.append(StringUtil.shorten(entry.getContent(), 200));
 		}
 
 		String body = sm.toString();
@@ -130,7 +118,7 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 	}
 
 	private static final String[] _CLASS_NAMES = new String[] {
-		TasksProposal.class.getName()
+		BlogsEntry.class.getName()
 	};
 
 }

@@ -91,8 +91,8 @@ public class TasksReviewLocalServiceImpl
 
 		socialActivityLocalService.addActivity(
 			assignedByUserId, proposal.getGroupId(),
-			TasksProposal.class.getName(), review.getProposalId(),
-			TasksActivityKeys.ASSIGN, extraData.toString(), user.getUserId());
+			TasksProposal.class.getName(), proposalId,
+			TasksActivityKeys.ASSIGN_PROPOSAL, extraData.toString(), userId);
 
 		return review;
 	}
@@ -224,9 +224,8 @@ public class TasksReviewLocalServiceImpl
 		extraData.put("rejected", review.getRejected());
 
 		socialActivityLocalService.addActivity(
-			review.getUserId(), review.getGroupId(),
-			TasksProposal.class.getName(), review.getProposalId(),
-			TasksActivityKeys.REVIEW, extraData.toString(),
+			userId, review.getGroupId(), TasksProposal.class.getName(),
+			proposalId, TasksActivityKeys.REVIEW_PROPOSAL, extraData.toString(),
 			review.getAssignedByUserId());
 
 		return review;

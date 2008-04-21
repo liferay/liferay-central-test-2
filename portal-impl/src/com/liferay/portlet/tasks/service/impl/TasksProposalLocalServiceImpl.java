@@ -126,9 +126,8 @@ public class TasksProposalLocalServiceImpl
 		// Social
 
 		socialActivityLocalService.addActivity(
-			user.getUserId(), groupId, TasksProposal.class.getName(),
-			proposal.getProposalId(), TasksActivityKeys.PROPOSE,
-			StringPool.BLANK, 0);
+			userId, groupId, TasksProposal.class.getName(), proposalId,
+			TasksActivityKeys.ADD_PROPOSAL, StringPool.BLANK, 0);
 
 		return proposal;
 	}

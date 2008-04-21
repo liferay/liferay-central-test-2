@@ -53,19 +53,19 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 		String receiverUserName = getUserName(
 			activity.getReceiverUserId(), themeDisplay);
 
-		String type = activity.getType();
+		String activityType = activity.getType();
 
 		// Title
 
 		String title = StringPool.BLANK;
 
-		if (type.equals(MBActivityKeys.ADD)) {
+		if (activityType.equals(MBActivityKeys.ADD_MESSAGE)) {
 			title = themeDisplay.translate(
-				"activity-message-boards-add", creatorUserName);
+				"activity-message-boards-add-message", creatorUserName);
 		}
-		else if (type.equals(MBActivityKeys.REPLY)) {
+		else if (activityType.equals(MBActivityKeys.REPLY_MESSAGE)) {
 			title = themeDisplay.translate(
-				"activity-message-boards-reply",
+				"activity-message-boards-reply-message",
 				new Object[] {creatorUserName, receiverUserName});
 		}
 

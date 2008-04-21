@@ -49,6 +49,7 @@ import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.blogs.social.BlogsActivityKeys;
 import com.liferay.portlet.messageboards.MessageBodyException;
 import com.liferay.portlet.messageboards.MessageSubjectException;
 import com.liferay.portlet.messageboards.NoSuchDiscussionException;
@@ -91,6 +92,8 @@ import javax.portlet.PortletPreferences;
 import org.apache.commons.lang.time.StopWatch;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+
+import org.json.JSONObject;
 
 /**
  * <a href="MBMessageLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -174,8 +177,23 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		if ((className.equals(BlogsEntry.class.getName())) &&
 			(themeDisplay != null)) {
 
+			// Social
+
+			BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(classPK);
+
+			JSONObject extraData = new JSONObject();
+
+			extraData.put("messageId", message.getMessageId());
+
+			socialActivityLocalService.addActivity(
+				userId, entry.getGroupId(), BlogsEntry.class.getName(),
+				classPK, BlogsActivityKeys.ADD_COMMENT, extraData.toString(),
+				entry.getUserId());
+
+			// Email
+
 			try {
-				sendBlogsCommentsEmail(userId, classPK, message, themeDisplay);
+				sendBlogsCommentsEmail(userId, entry, message, themeDisplay);
 			}
 			catch (Exception e) {
 				_log.error(e, e);
@@ -488,11 +506,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 		// Social
 
 		if (!message.isDiscussion() && !user.isDefaultUser()) {
-			String activityType = MBActivityKeys.ADD;
+			String activityType = MBActivityKeys.ADD_MESSAGE;
 			long receiverUserId = 0;
 
 			if (parentMessage != null) {
-				activityType = MBActivityKeys.REPLY;
+				activityType = MBActivityKeys.REPLY_MESSAGE;
 				receiverUserId = parentMessage.getUserId();
 			}
 
@@ -1542,7 +1560,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 	}
 
 	protected void sendBlogsCommentsEmail(
-			long userId, long entryId, MBMessage message,
+			long userId, BlogsEntry entry, MBMessage message,
 			ThemeDisplay themeDisplay)
 		throws IOException, PortalException, SystemException {
 
@@ -1553,8 +1571,6 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 			return;
 		}
-
-		BlogsEntry entry = blogsEntryPersistence.findByPrimaryKey(entryId);
 
 		String portalURL = PortalUtil.getPortalURL(themeDisplay);
 		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
