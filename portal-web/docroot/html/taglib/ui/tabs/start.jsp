@@ -135,6 +135,9 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 					}
 				}
 			}
+			else {
+				curURL = HtmlUtil.escape(curURL);
+			}
 
 			String curOnClick = StringPool.BLANK;
 
@@ -146,7 +149,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 			<li <%= (values.length == 1) || value.equals(values[i]) ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
 				<c:choose>
 					<c:when test="<%= Validator.isNotNull(curURL) %>">
-						<a href="<%= curURL %>"
+						<a href="<%= HtmlUtil.escape(curURL) %>"
 							<c:if test="<%= Validator.isNotNull(curOnClick) %>">
 								onClick="<%= curOnClick %>"
 							</c:if>
@@ -175,7 +178,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 
 		<c:if test="<%= Validator.isNotNull(backURL) %>">
 			<li class="toggle">
-				<a href="<%= backURL %>">&laquo; <liferay-ui:message key="back" /></a>
+				<a href="<%= HtmlUtil.escape(backURL) %>">&laquo; <liferay-ui:message key="back" /></a>
 			</li>
 		</c:if>
 	</ul>

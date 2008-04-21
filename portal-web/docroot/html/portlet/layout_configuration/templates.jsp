@@ -32,7 +32,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" method="post" name="layoutTemplates">
 	<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
 	<input name="<%= Constants.CMD %>" type="hidden" value="template" />
-	<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= redirect %>" />
+	<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 	<input name="refresh" type="hidden" value="true" />
 
 	<table border="0" cellpadding="0" cellspacing="10" style="margin-top: 10px;" width="100%">

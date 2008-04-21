@@ -135,7 +135,7 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/journal/edit_feed" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFeed(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= feed == null ? Constants.ADD : Constants.UPDATE %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />feedId" type="hidden" value="<%= feedId %>" />
 <input name="<portlet:namespace />rendererTemplateId" type="hidden" value="<%= rendererTemplateId %>" />
@@ -551,7 +551,7 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= PortalUtil.getPortalURL(request) + feed.getTargetLayoutFriendlyUrl() + "/journal/rss/" + groupId + "/" + feedId %>', 'feed');" />
 </c:if>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 

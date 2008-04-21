@@ -50,11 +50,11 @@ if (image != null) {
 
 <script type="text/javascript">
 	<c:if test="<%= Validator.isNotNull(cmd) && SessionErrors.isEmpty(renderRequest) %>">
-		parent.<%= uploadProgressId %>.sendRedirect();
+		parent.<%= HtmlUtil.escape(uploadProgressId) %>.sendRedirect();
 	</c:if>
 
 	function <portlet:namespace />saveImage() {
-		parent.<%= uploadProgressId %>.startProgress();
+		parent.<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
 
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= image == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
@@ -72,9 +72,9 @@ if (image != null) {
 
 <form action="<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/image_gallery/edit_image" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveImage(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
-<input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escape(referringPortletResource) %>" />
+<input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= HtmlUtil.escape(uploadProgressId) %>" />
 <input name="<portlet:namespace />imageId" type="hidden" value="<%= imageId %>" />
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 
@@ -209,7 +209,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="parent.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="parent.location = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 
@@ -220,7 +220,7 @@ String imageMaxSize = String.valueOf(PropsValues.IG_IMAGE_MAX_SIZE / 1024);
 
 	jQuery(document).ready(
 		function() {
-			parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
+			parent.<%= HtmlUtil.escape(uploadProgressId) %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
 
 			jQuery("#<portlet:namespace />file").change(
 				function() {

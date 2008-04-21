@@ -114,16 +114,16 @@
 		<liferay-portlet:renderURLParams varImpl="portletURL" />
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 		<input name="<portlet:namespace /><%= Constants.PROGRESS_ID %>" type="hidden" value="<%= uploadProgressId %>" />
-		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
-		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+		<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>" />
+		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
 
 		<c:if test="<%= Validator.isNull(moduleId) || Validator.isNull(repositoryURL) %>">
 			<input name="<portlet:namespace />redirect" type="hidden" value="<%= portletURLString %>" />
 		</c:if>
 
 		<input name="<portlet:namespace />pluginType" type="hidden" value="<%= pluginType %>" />
-		<input name="<portlet:namespace />moduleId" type="hidden" value="<%= moduleId %>" />
-		<input name="<portlet:namespace />repositoryURL" type="hidden" value="<%= repositoryURL %>" />
+		<input name="<portlet:namespace />moduleId" type="hidden" value="<%= HtmlUtil.escape(moduleId) %>" />
+		<input name="<portlet:namespace />repositoryURL" type="hidden" value="<%= HtmlUtil.escape(repositoryURL) %>" />
 
 		<c:choose>
 			<c:when test="<%= Validator.isNotNull(moduleId) && Validator.isNotNull(repositoryURL) %>">

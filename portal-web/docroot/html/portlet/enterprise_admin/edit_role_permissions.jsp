@@ -198,10 +198,10 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_role_permissions" /></portlet:actionURL>" id="<portlet:namespace />fm" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= role.getRoleId() %>" />
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
+<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>" />
 <input name="<portlet:namespace />modelResources" type="hidden" value='<%= (modelResources == null) ? "" : StringUtil.merge(modelResources) %>' />
 
 <c:choose>
@@ -477,7 +477,7 @@ request.setAttribute("edit_role_permissions.jsp-portletResource", portletResourc
 
 		<input type="button" value="<liferay-ui:message key="save" />" onclick="<portlet:namespace />updateActions();" />
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 		<script type="text/javascript">
 			jQuery(

@@ -80,9 +80,9 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escape(tabs3) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />ccTypes" type="hidden" value="" />
 
 <liferay-ui:tabs
@@ -398,10 +398,10 @@ String redirect = ParamUtil.getString(request, "redirect");
 					<td>
 						<c:choose>
 							<c:when test='<%= tabs3.equals("confirmation-email") %>'>
-								<input class="lfr-input-text" name="<portlet:namespace />emailOrderConfirmationSubject" type="text" value="<%= emailOrderConfirmationSubject %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />emailOrderConfirmationSubject" type="text" value="<%= HtmlUtil.escape(emailOrderConfirmationSubject) %>" />
 							</c:when>
 							<c:when test='<%= tabs3.equals("shipping-email") %>'>
-								<input class="lfr-input-text" name="<portlet:namespace />emailOrderShippingSubject" type="text" value="<%= emailOrderShippingSubject %>" />
+								<input class="lfr-input-text" name="<portlet:namespace />emailOrderShippingSubject" type="text" value="<%= HtmlUtil.escape(emailOrderShippingSubject) %>" />
 							</c:when>
 						</c:choose>
 					</td>
@@ -527,7 +527,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<liferay-ui:message key="name" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= emailFromName %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailFromName" type="text" value="<%= HtmlUtil.escape(emailFromName) %>" />
 					</td>
 				</tr>
 				<tr>
@@ -535,7 +535,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 						<liferay-ui:message key="address" />
 					</td>
 					<td>
-						<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= emailFromAddress %>" />
+						<input class="lfr-input-text" name="<portlet:namespace />emailFromAddress" type="text" value="<%= HtmlUtil.escape(emailFromAddress) %>" />
 					</td>
 				</tr>
 				</table>
@@ -548,7 +548,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 

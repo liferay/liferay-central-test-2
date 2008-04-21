@@ -65,7 +65,7 @@ try {
 %>
 
 	<div align="right">
-		&laquo; <a href="<%= redirect %>"><liferay-ui:message key="back" /></a>
+		&laquo; <a href="<%= HtmlUtil.escape(redirect) %>"><liferay-ui:message key="back" /></a>
 	</div>
 
 	<div>

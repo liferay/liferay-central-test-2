@@ -65,11 +65,11 @@ if (fileEntry != null) {
 
 <script type="text/javascript">
 	<c:if test="<%= Validator.isNotNull(cmd) && SessionErrors.isEmpty(renderRequest) %>">
-		parent.<%= uploadProgressId %>.sendRedirect();
+		parent.<%= HtmlUtil.escape(uploadProgressId) %>.sendRedirect();
 	</c:if>
 
 	function <portlet:namespace />saveFileEntry() {
-		parent.<%= uploadProgressId %>.startProgress();
+		parent.<%= HtmlUtil.escape(uploadProgressId) %>.startProgress();
 
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= fileEntry == null ? Constants.ADD : Constants.UPDATE %>";
 		submitForm(document.<portlet:namespace />fm);
@@ -91,9 +91,9 @@ if (fileEntry != null) {
 
 <form action="<portlet:actionURL windowState="<%= LiferayWindowState.POP_UP.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_entry" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFileEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
-<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= referringPortletResource %>" />
-<input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= uploadProgressId %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />referringPortletResource" type="hidden" value="<%= HtmlUtil.escape(referringPortletResource) %>" />
+<input name="<portlet:namespace />uploadProgressId" type="hidden" value="<%= HtmlUtil.escape(uploadProgressId) %>" />
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />newFolderId" type="hidden" value="" />
 <input name="<portlet:namespace />name" type="hidden" value="<%= name %>" />
@@ -261,7 +261,7 @@ if (fileEntry == null) {
 	</c:choose>
 </c:if>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="parent.location = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="parent.location = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 
@@ -272,7 +272,7 @@ if (fileEntry == null) {
 
 	jQuery(document).ready(
 		function() {
-			parent.<%= uploadProgressId %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
+			parent.<%= HtmlUtil.escape(uploadProgressId) %>.updateIFrame(document.<portlet:namespace />fm.offsetHeight);
 
 			jQuery("#<portlet:namespace />file").change(
 				function() {

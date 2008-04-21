@@ -153,7 +153,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_item" /></portlet:actionURL>" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveItem(); return false;">
 <input name="scroll" type="hidden" value="" />
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
 <input name="<portlet:namespace />itemId" type="hidden" value="<%= itemId %>" />
 <input name="<portlet:namespace />fieldsCount" type="hidden" value="<%= fieldsCount %>" />
@@ -296,7 +296,7 @@ int priceId = ParamUtil.getInteger(request, "priceId", -1);
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 <br /><br />
 

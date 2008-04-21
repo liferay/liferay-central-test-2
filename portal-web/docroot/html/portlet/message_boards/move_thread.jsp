@@ -156,6 +156,6 @@ long breadcrumbsMessageId = message.getMessageId();
 
 <input type="submit" value='<%= LanguageUtil.get(pageContext, "move-thread") %>' />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>

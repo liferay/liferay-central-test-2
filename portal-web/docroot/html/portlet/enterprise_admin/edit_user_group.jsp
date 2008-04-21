@@ -41,7 +41,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 
 <form method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveUserGroup(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />userGroupId" type="hidden" value="<%= userGroupId %>" />
 
 <liferay-ui:tabs
@@ -88,7 +88,7 @@ long userGroupId = BeanParamUtil.getLong(userGroup, request, "userGroupId");
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 
