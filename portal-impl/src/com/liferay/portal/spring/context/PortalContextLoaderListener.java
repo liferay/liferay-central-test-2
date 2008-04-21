@@ -22,7 +22,6 @@
 
 package com.liferay.portal.spring.context;
 
-import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.spring.util.SpringUtil;
 
 import javax.servlet.ServletContext;
@@ -43,23 +42,12 @@ public class PortalContextLoaderListener extends ContextLoaderListener {
 	public void contextInitialized(ServletContextEvent event) {
 		super.contextInitialized(event);
 
-		// Preinitialize Spring beans. See LEP-4734.
-
 		ServletContext servletContext = event.getServletContext();
 
 		ApplicationContext applicationContext =
 			WebApplicationContextUtils.getWebApplicationContext(servletContext);
 
 		SpringUtil.setContext(applicationContext);
-
-		String[] beanDefinitionNames =
-			applicationContext.getBeanDefinitionNames();
-
-		for (int i = 0; i < beanDefinitionNames.length; i++) {
-			String beanDefinitionName = beanDefinitionNames[i];
-
-			BeanLocatorUtil.locate(beanDefinitionName, false);
-		}
 	}
 
 }

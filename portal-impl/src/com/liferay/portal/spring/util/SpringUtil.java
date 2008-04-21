@@ -22,6 +22,7 @@
 
 package com.liferay.portal.spring.util;
 
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.util.spring.context.LazyClassPathApplicationContext;
 
@@ -47,6 +48,8 @@ public class SpringUtil {
 		if (_ctx == null) {
 			_ctx = new LazyClassPathApplicationContext(
 				PropsUtil.getArray(PropsUtil.SPRING_CONFIGS));
+
+			_initializeContext(_ctx);
 		}
 
 		return _ctx;
@@ -54,6 +57,19 @@ public class SpringUtil {
 
 	public static void setContext(ApplicationContext ctx) {
 		_ctx = ctx;
+
+		_initializeContext(ctx);
+	}
+
+	private static void _initializeContext(ApplicationContext ctx) {
+
+		// Preinitialize Spring beans. See LEP-4734.
+
+		String[] beanDefinitionNames = ctx.getBeanDefinitionNames();
+
+		for (String beanDefinitionName : beanDefinitionNames) {
+			BeanLocatorUtil.locate(beanDefinitionName);
+		}
 	}
 
 	private static ApplicationContext _ctx = null;
