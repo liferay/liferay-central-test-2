@@ -60,7 +60,7 @@ public class MoveThreadTest extends BaseTestCase {
 
 		selenium.type("_19_subject",
 			"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED");
-		selenium.type("textArea",
+		selenium.type("_19_textArea",
 			"This m\u00e9ssag\u00e9 has b\u00e9\u00e9n mov\u00e9d.");
 
 		for (int second = 0;; second++) {
@@ -130,7 +130,7 @@ public class MoveThreadTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("textArea")) {
+				if (selenium.isElementPresent("_19_textArea")) {
 					break;
 				}
 			}
@@ -141,7 +141,7 @@ public class MoveThreadTest extends BaseTestCase {
 		}
 
 		selenium.type("_19_subject", "Mov\u00e9 it back!");
-		selenium.type("textArea",
+		selenium.type("_19_textArea",
 			"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!");
 		selenium.click("//input[@value='Move Thread']");
 		selenium.waitForPageToLoad("30000");

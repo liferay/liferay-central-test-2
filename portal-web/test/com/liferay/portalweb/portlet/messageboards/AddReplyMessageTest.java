@@ -41,7 +41,7 @@ public class AddReplyMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("textArea")) {
+				if (selenium.isElementPresent("_19_textArea")) {
 					break;
 				}
 			}
@@ -51,7 +51,7 @@ public class AddReplyMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.typeKeys("textArea",
+		selenium.typeKeys("_19_textArea",
 			"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");

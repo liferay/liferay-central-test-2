@@ -53,7 +53,7 @@ public class AddDeletableMessageTest extends BaseTestCase {
 
 		selenium.type("_19_subject",
 			"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d");
-		selenium.type("textArea",
+		selenium.type("_19_textArea",
 			"This m\u00e9ssag\u00e9 will b\u00e9 d\u00e9l\u00e9t\u00e9d!");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
