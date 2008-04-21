@@ -25,14 +25,16 @@ package com.liferay.portalweb.portlet.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="GetEventsTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="GetConcertEventsTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class GetEventsTest extends BaseTestCase {
-	public void testGetEvents() throws Exception {
+public class GetConcertEventsTest extends BaseTestCase {
+	public void testGetConcertEvents() throws Exception {
 		selenium.click("link=Day");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("document._8_fm.elements[1]", "label=Concert");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -41,7 +43,39 @@ public class GetEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Event")) {
+				if (selenium.isElementPresent("link=Caedmon's Call Concert!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=Off to Yosemite!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Concert")) {
 					break;
 				}
 			}
@@ -53,6 +87,8 @@ public class GetEventsTest extends BaseTestCase {
 
 		selenium.click("link=Week");
 		selenium.waitForPageToLoad("30000");
+		selenium.select("document._8_fm.elements[1]", "label=Concert");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -60,7 +96,23 @@ public class GetEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Event")) {
+				if (selenium.isElementPresent("link=Caedmon's Call Concert!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=Off to Yosemite!")) {
 					break;
 				}
 			}
@@ -72,6 +124,8 @@ public class GetEventsTest extends BaseTestCase {
 
 		selenium.click("link=Month");
 		selenium.waitForPageToLoad("30000");
+		selenium.select("document._8_fm.elements[1]", "label=Concert");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -79,7 +133,23 @@ public class GetEventsTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Event")) {
+				if (selenium.isElementPresent("link=Caedmon's Call Concert!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=Off to Yosemite!")) {
 					break;
 				}
 			}
@@ -107,5 +177,8 @@ public class GetEventsTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
 }

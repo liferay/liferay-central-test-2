@@ -22,28 +22,39 @@
 
 package com.liferay.portalweb.portlet.calendar;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="CalendarTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddConcertEventTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CalendarTests extends BaseTests {
+public class AddConcertEventTest extends BaseTestCase {
+	public void testAddConcertEvent() throws Exception {
+		selenium.click("//input[@value='Add Event']");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_8_title", "Caedmon's Call Concert!");
+		selenium.type("_8_description",
+			"I love this band guys! Everyone should see them! I've never seen them before. :(");
+		selenium.select("_8_type", "label=Concert");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
 
-	public CalendarTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddAppointmentEventTest.class);
-		addTestSuite(AddConcertEventTest.class);
-		addTestSuite(AddVacationEventTest.class);
-		addTestSuite(GetAppointmentEventsTest.class);
-		addTestSuite(GetConcertEventsTest.class);
-		addTestSuite(GetVacationEventsTest.class);
-		addTestSuite(EditEventTest.class);
-		addTestSuite(AddTemporaryEventTest.class);
-		addTestSuite(DeleteTemporaryEventTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("Link=Caedmon's Call Concert!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }

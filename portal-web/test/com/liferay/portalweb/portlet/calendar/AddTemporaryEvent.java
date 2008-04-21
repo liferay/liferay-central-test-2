@@ -25,16 +25,16 @@ package com.liferay.portalweb.portlet.calendar;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddEventTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddTemporaryEvent.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddEventTest extends BaseTestCase {
-	public void testAddEvent() throws Exception {
+public class AddTemporaryEvent extends BaseTestCase {
+	public void testAddTemporaryE() throws Exception {
 		selenium.click("//input[@value='Add Event']");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_8_title", "Test Event");
+		selenium.type("_8_title", "Test Event 2");
 		selenium.type("_8_description", "This is a test event!");
 		selenium.select("_8_type", "label=Appointment");
 		selenium.click("//input[@value='Save']");
@@ -46,7 +46,7 @@ public class AddEventTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("Link=Test Event")) {
+				if (selenium.isElementPresent("Link=Test Event 2")) {
 					break;
 				}
 			}
