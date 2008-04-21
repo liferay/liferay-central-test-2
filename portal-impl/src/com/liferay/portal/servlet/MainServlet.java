@@ -435,6 +435,10 @@ public class MainServlet extends ActionServlet {
 
 		//CompanyThreadLocal.setCompanyId(companyId);
 
+		// Portal Port
+
+		PortalUtil.setPortalPort(req);
+
 		// CTX
 
 		ServletContext ctx = getServletContext();

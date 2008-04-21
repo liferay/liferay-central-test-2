@@ -364,6 +364,10 @@ public class PortalUtil {
 		return getPortal().getPortalURL(serverName, serverPort, secure);
 	}
 
+	public static int getPortalPort() {
+		return getPortal().getPortalPort();
+	}
+
 	public static Object[] getPortletFriendlyURLMapper(
 			long groupId, boolean privateLayout, String url)
 		throws PortalException, SystemException {
@@ -699,6 +703,15 @@ public class PortalUtil {
 	 */
 	public static void setPageTitle(String title, HttpServletRequest req) {
 		getPortal().setPageTitle(title, req);
+	}
+
+	/**
+	 * Sets the port obtained on the first request to the portal.
+	 *
+	 * @param		req the HTTP servlet request
+	 */
+	public static void setPortalPort(HttpServletRequest req) {
+		getPortal().setPortalPort(req);
 	}
 
 	public static void storePreferences(PortletPreferences prefs)

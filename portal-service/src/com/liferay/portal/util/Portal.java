@@ -226,6 +226,8 @@ public interface Portal {
 	public String getPortalURL(
 		String serverName, int serverPort, boolean secure);
 
+	public int getPortalPort();
+
 	public Object[] getPortletFriendlyURLMapper(
 			long groupId, boolean privateLayout, String url)
 		throws PortalException, SystemException;
@@ -401,6 +403,13 @@ public interface Portal {
 	 * @param		req the HTTP servlet request
 	 */
 	public void setPageTitle(String title, HttpServletRequest req);
+
+	/**
+	 * Sets the port obtained on the first request to the portal.
+	 *
+	 * @param		req the HTTP servlet request
+	 */
+	public void setPortalPort(HttpServletRequest req);
 
 	public void storePreferences(PortletPreferences prefs)
 		throws IOException, ValidatorException;

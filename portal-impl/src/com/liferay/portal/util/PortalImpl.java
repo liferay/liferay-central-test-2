@@ -233,6 +233,10 @@ public class PortalImpl implements Portal {
 		_pathImage = _cdnHost + _pathContext + PATH_IMAGE;
 		_pathMain = _pathContext + PATH_MAIN;
 
+		// Portal port
+
+		_portalPort = -1;
+
 		// Groups
 
 		String customSystemGroups[] =
@@ -1297,6 +1301,10 @@ public class PortalImpl implements Portal {
 		return sm.toString();
 	}
 
+	public int getPortalPort() {
+		return _portalPort.intValue();
+	}
+
 	public String getPortletTitle(
 		String portletId, long companyId, String languageId) {
 
@@ -2005,6 +2013,19 @@ public class PortalImpl implements Portal {
 		req.setAttribute(WebKeys.PAGE_TITLE, title);
 	}
 
+	/**
+	 * Sets the port obtained on the first request to the portal.
+	 *
+	 * @param		req the HTTP servlet request
+	 */
+	public void setPortalPort(HttpServletRequest req) {
+		if (_portalPort == -1) {
+			synchronized (_portalPort) {
+				_portalPort = new Integer(req.getServerPort());
+			}
+		}
+	}
+
 	public void storePreferences(PortletPreferences prefs)
 		throws IOException, ValidatorException {
 
@@ -2391,6 +2412,7 @@ public class PortalImpl implements Portal {
 	private String _pathFriendlyURLPublic;
 	private String _pathImage;
 	private String _pathMain;
+	private Integer _portalPort;
 	private String[] _allSystemCommunityRoles;
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
