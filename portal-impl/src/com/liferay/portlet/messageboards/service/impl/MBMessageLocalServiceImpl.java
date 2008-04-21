@@ -485,13 +485,7 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		logAddMessage(messageId, stopWatch, 8);
 
-		// Tags
-
-		updateTagsAsset(userId, message, tagsEntries);
-
-		logAddMessage(messageId, stopWatch, 9);
-
-		// Activity trackers
+		// Social
 
 		if (!message.isDiscussion() && !user.isDefaultUser()) {
 			String activityType = MBActivityKeys.ADD;
@@ -506,6 +500,12 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				userId, category.getGroupId(), MBMessage.class.getName(),
 				messageId, activityType, StringPool.BLANK, receiverUserId);
 		}
+
+		logAddMessage(messageId, stopWatch, 9);
+
+		// Tags
+
+		updateTagsAsset(userId, message, tagsEntries);
 
 		logAddMessage(messageId, stopWatch, 10);
 

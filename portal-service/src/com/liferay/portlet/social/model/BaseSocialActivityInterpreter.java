@@ -22,6 +22,8 @@
 
 package com.liferay.portlet.social.model;
 
+import com.liferay.portal.kernel.log.Log;
+import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.User;
@@ -70,5 +72,27 @@ public abstract class BaseSocialActivityInterpreter
 			return StringPool.BLANK;
 		}
 	}
+
+	public SocialActivityFeedEntry interpret(
+		SocialActivity activity, ThemeDisplay themeDisplay) {
+
+		try {
+			return doInterpret(activity, themeDisplay);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+
+		return null;
+	}
+
+	protected abstract SocialActivityFeedEntry doInterpret(
+			SocialActivity activity, ThemeDisplay themeDisplay)
+		throws Exception;
+
+	private static Log _log =
+		LogFactoryUtil.getLog(BaseSocialActivityInterpreter.class);
 
 }

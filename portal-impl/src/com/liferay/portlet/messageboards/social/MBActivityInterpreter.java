@@ -32,9 +32,6 @@ import com.liferay.portlet.social.model.BaseSocialActivityInterpreter;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 /**
  * <a href="MBActivityInterpreter.java.html"><b><i>View Source</i></b></a>
  *
@@ -45,21 +42,6 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
-	}
-
-	public SocialActivityFeedEntry interpret(
-		SocialActivity activity, ThemeDisplay themeDisplay) {
-
-		try {
-			return doInterpret(activity, themeDisplay);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-
-		return null;
 	}
 
 	protected SocialActivityFeedEntry doInterpret(
@@ -114,7 +96,5 @@ public class MBActivityInterpreter extends BaseSocialActivityInterpreter {
 	private static final String[] _CLASS_NAMES = new String[] {
 		MBMessage.class.getName()
 	};
-
-	private static Log _log = LogFactory.getLog(MBActivityInterpreter.class);
 
 }

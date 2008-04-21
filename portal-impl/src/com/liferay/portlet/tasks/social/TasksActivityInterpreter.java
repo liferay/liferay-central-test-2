@@ -31,9 +31,6 @@ import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-
 import org.json.JSONObject;
 
 /**
@@ -46,21 +43,6 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 
 	public String[] getClassNames() {
 		return _CLASS_NAMES;
-	}
-
-	public SocialActivityFeedEntry interpret(
-		SocialActivity activity, ThemeDisplay themeDisplay) {
-
-		try {
-			return doInterpret(activity, themeDisplay);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-
-		return null;
 	}
 
 	protected SocialActivityFeedEntry doInterpret(
@@ -80,16 +62,16 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 
 		if (type.equals(TasksActivityKeys.ASSIGN)) {
 			title = themeDisplay.translate(
-				"activity-tasks-x-assigned-proposal-to-x-for-review",
+				"activity-tasks-x-assign-proposal-to-x-for-review",
 				new Object[] {creatorUserName, receiverUserName});
 		}
 		else if (type.equals(TasksActivityKeys.PROPOSE)) {
 			title = themeDisplay.translate(
-				"activity-tasks-x-created-proposal", creatorUserName);
+				"activity-tasks-x-add-proposal", creatorUserName);
 		}
 		else if (type.equals(TasksActivityKeys.REVIEW)) {
 			title = themeDisplay.translate(
-				"activity-tasks-x-reviewed-proposal-from-x",
+				"activity-tasks-x-review-proposal-from-x",
 				new Object[] {creatorUserName, receiverUserName});
 		}
 
@@ -145,7 +127,5 @@ public class TasksActivityInterpreter extends BaseSocialActivityInterpreter {
 	private static final String[] _CLASS_NAMES = new String[] {
 		TasksProposal.class.getName()
 	};
-
-	private static Log _log = LogFactory.getLog(TasksActivityInterpreter.class);
 
 }
