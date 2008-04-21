@@ -233,10 +233,6 @@ public class PortalImpl implements Portal {
 		_pathImage = _cdnHost + _pathContext + PATH_IMAGE;
 		_pathMain = _pathContext + PATH_MAIN;
 
-		// Portal port
-
-		_portalPort = -1;
-
 		// Groups
 
 		String customSystemGroups[] =
@@ -1065,6 +1061,10 @@ public class PortalImpl implements Portal {
 		return _portalLibDir;
 	}
 
+	public int getPortalPort() {
+		return _portalPort.intValue();
+	}
+
 	public String getPortalURL(ThemeDisplay themeDisplay) {
 		String serverName = themeDisplay.getServerName();
 
@@ -1299,10 +1299,6 @@ public class PortalImpl implements Portal {
 		sm.append(StringPool.UNDERLINE);
 
 		return sm.toString();
-	}
-
-	public int getPortalPort() {
-		return _portalPort.intValue();
 	}
 
 	public String getPortletTitle(
@@ -2019,7 +2015,7 @@ public class PortalImpl implements Portal {
 	 * @param		req the HTTP servlet request
 	 */
 	public void setPortalPort(HttpServletRequest req) {
-		if (_portalPort == -1) {
+		if (_portalPort == null) {
 			synchronized (_portalPort) {
 				_portalPort = new Integer(req.getServerPort());
 			}

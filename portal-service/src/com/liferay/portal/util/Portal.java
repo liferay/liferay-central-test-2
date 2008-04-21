@@ -213,6 +213,8 @@ public interface Portal {
 
 	public String getPortalLibDir();
 
+	public int getPortalPort();
+
 	public String getPortalURL(ThemeDisplay themeDisplay);
 
 	public String getPortalURL(HttpServletRequest req);
@@ -225,8 +227,6 @@ public interface Portal {
 
 	public String getPortalURL(
 		String serverName, int serverPort, boolean secure);
-
-	public int getPortalPort();
 
 	public Object[] getPortletFriendlyURLMapper(
 			long groupId, boolean privateLayout, String url)

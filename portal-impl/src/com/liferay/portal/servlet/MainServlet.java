@@ -435,7 +435,7 @@ public class MainServlet extends ActionServlet {
 
 		//CompanyThreadLocal.setCompanyId(companyId);
 
-		// Portal Port
+		// Portal port
 
 		PortalUtil.setPortalPort(req);
 
