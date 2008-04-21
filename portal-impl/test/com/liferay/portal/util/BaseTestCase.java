@@ -24,6 +24,7 @@ package com.liferay.portal.util;
 
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.spring.util.SpringUtil;
 
 import junit.framework.TestCase;
 
@@ -37,6 +38,8 @@ public class BaseTestCase extends TestCase {
 
 	protected void setUp() throws Exception {
 		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+
+		SpringUtil.initContext(SpringUtil.getContext());
 	}
 
 }

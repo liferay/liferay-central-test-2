@@ -48,20 +48,12 @@ public class SpringUtil {
 		if (_ctx == null) {
 			_ctx = new LazyClassPathApplicationContext(
 				PropsUtil.getArray(PropsUtil.SPRING_CONFIGS));
-
-			_initializeContext(_ctx);
 		}
 
 		return _ctx;
 	}
 
-	public static void setContext(ApplicationContext ctx) {
-		_ctx = ctx;
-
-		_initializeContext(ctx);
-	}
-
-	private static void _initializeContext(ApplicationContext ctx) {
+	public static void initContext(ApplicationContext ctx) {
 
 		// Preinitialize Spring beans. See LEP-4734.
 
@@ -70,6 +62,12 @@ public class SpringUtil {
 		for (String beanDefinitionName : beanDefinitionNames) {
 			BeanLocatorUtil.locate(beanDefinitionName);
 		}
+	}
+
+	public static void setContext(ApplicationContext ctx) {
+		_ctx = ctx;
+
+		initContext(ctx);
 	}
 
 	private static ApplicationContext _ctx = null;
