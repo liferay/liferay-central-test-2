@@ -2015,7 +2015,7 @@ public class PortalImpl implements Portal {
 	 * @param		req the HTTP servlet request
 	 */
 	public void setPortalPort(HttpServletRequest req) {
-		if (_portalPort == null) {
+		if (_portalPort.intValue() == -1) {
 			synchronized (_portalPort) {
 				_portalPort = new Integer(req.getServerPort());
 			}
@@ -2408,7 +2408,7 @@ public class PortalImpl implements Portal {
 	private String _pathFriendlyURLPublic;
 	private String _pathImage;
 	private String _pathMain;
-	private Integer _portalPort;
+	private Integer _portalPort = new Integer(-1);
 	private String[] _allSystemCommunityRoles;
 	private String[] _allSystemGroups;
 	private String[] _allSystemOrganizationRoles;
