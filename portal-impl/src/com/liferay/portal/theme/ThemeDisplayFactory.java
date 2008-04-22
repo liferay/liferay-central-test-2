@@ -211,8 +211,7 @@ public class ThemeDisplayFactory {
 		// Set the CDN host first because other methods (setLookAndFeel) depend
 		// on it being set
 
-		themeDisplay.setCDNHost(
-			GetterUtil.getString(cdnHost, PortalUtil.getCDNHost()));
+		themeDisplay.setCDNHost(cdnHost);
 
 		themeDisplay.setCompany(company);
 		themeDisplay.setCompanyLogo(companyLogo);
