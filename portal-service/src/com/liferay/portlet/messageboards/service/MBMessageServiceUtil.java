@@ -263,16 +263,16 @@ public class MBMessageServiceUtil {
 			version, displayStyle, feedURL, entryURL);
 	}
 
-	public static java.lang.String getGroupMessagesRSS(long groupId,
-		long userId, int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
+	public static java.lang.String getGroupMessagesRSS(long companyId,
+		long groupId, long userId, int max, java.lang.String type,
+		double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-		return mbMessageService.getGroupMessagesRSS(groupId, userId, max, type,
-			version, displayStyle, feedURL, entryURL);
+		return mbMessageService.getGroupMessagesRSS(companyId, groupId, userId,
+			max, type, version, displayStyle, feedURL, entryURL);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
@@ -293,15 +293,16 @@ public class MBMessageServiceUtil {
 		return mbMessageService.getMessageDisplay(messageId);
 	}
 
-	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
+	public static java.lang.String getThreadMessagesRSS(long companyId,
+		long threadId, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
-		return mbMessageService.getThreadMessagesRSS(threadId, max, type,
-			version, displayStyle, feedURL, entryURL);
+		return mbMessageService.getThreadMessagesRSS(companyId, threadId, max,
+			type, version, displayStyle, feedURL, entryURL);
 	}
 
 	public static void subscribeMessage(long messageId)

@@ -270,13 +270,15 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static java.lang.String getGroupMessagesRSS(long groupId,
-		long userId, int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL) throws RemoteException {
+	public static java.lang.String getGroupMessagesRSS(long companyId,
+		long groupId, long userId, int max, java.lang.String type,
+		double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
+		throws RemoteException {
 		try {
-			java.lang.String returnValue = MBMessageServiceUtil.getGroupMessagesRSS(groupId,
-					userId, max, type, version, displayStyle, feedURL, entryURL);
+			java.lang.String returnValue = MBMessageServiceUtil.getGroupMessagesRSS(companyId,
+					groupId, userId, max, type, version, displayStyle, feedURL,
+					entryURL);
 
 			return returnValue;
 		}
@@ -316,13 +318,14 @@ public class MBMessageServiceSoap {
 		}
 	}
 
-	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws RemoteException {
+	public static java.lang.String getThreadMessagesRSS(long companyId,
+		long threadId, int max, java.lang.String type, double version,
+		java.lang.String displayStyle, java.lang.String feedURL,
+		java.lang.String entryURL) throws RemoteException {
 		try {
-			java.lang.String returnValue = MBMessageServiceUtil.getThreadMessagesRSS(threadId,
-					max, type, version, displayStyle, feedURL, entryURL);
+			java.lang.String returnValue = MBMessageServiceUtil.getThreadMessagesRSS(companyId,
+					threadId, max, type, version, displayStyle, feedURL,
+					entryURL);
 
 			return returnValue;
 		}
