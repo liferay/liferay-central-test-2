@@ -79,17 +79,7 @@ public class ThemeDisplayFactory {
 
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
-		return setup(null, company, company.getLocale(), null, false);
-	}
-
-	public static ThemeDisplay setup(long companyId, long plid)
-		throws PortalException, SystemException {
-
-		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
-
-		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
-
-		return setup(null, company, company.getLocale(), layout, false);
+		return setup(company, company.getLocale(), null, null, false);
 	}
 
 	public static ThemeDisplay setup(long companyId, String friendlyURL)
@@ -100,8 +90,20 @@ public class ThemeDisplayFactory {
 		return setup(companyId, plid);
 	}
 
+	public static ThemeDisplay setup(long companyId, long plid)
+		throws PortalException, SystemException {
+
+		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
+
+		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+		return setup(
+			company, company.getLocale(), layout, PortalUtil.getCDNHost(),
+			false);
+	}
+
 	public static ThemeDisplay setup(
-			String cdnHost, Company company, Locale locale, Layout layout,
+			Company company, Locale locale, Layout layout, String cdnHost,
 			boolean wapTheme)
 		throws PortalException, SystemException {
 
@@ -112,10 +114,6 @@ public class ThemeDisplayFactory {
 		String serverName = company.getVirtualHost();
 		int serverPort = PortalUtil.getPortalPort();
 		boolean secure = false;
-
-		// CDN host
-
-		cdnHost = GetterUtil.getString(cdnHost, PortalUtil.getCDNHost());
 
 		// Paths
 
