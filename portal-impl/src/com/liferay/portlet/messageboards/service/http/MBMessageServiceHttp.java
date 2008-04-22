@@ -1237,52 +1237,49 @@ public class MBMessageServiceHttp {
 	}
 
 	public static java.lang.String getGroupMessagesRSS(
-		HttpPrincipal httpPrincipal, long companyId, long groupId, long userId,
-		int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
+		HttpPrincipal httpPrincipal, long groupId, long userId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
+			Object paramObj0 = new LongWrapper(groupId);
 
-			Object paramObj1 = new LongWrapper(groupId);
+			Object paramObj1 = new LongWrapper(userId);
 
-			Object paramObj2 = new LongWrapper(userId);
+			Object paramObj2 = new IntegerWrapper(max);
 
-			Object paramObj3 = new IntegerWrapper(max);
-
-			Object paramObj4 = type;
+			Object paramObj3 = type;
 
 			if (type == null) {
-				paramObj4 = new NullWrapper("java.lang.String");
+				paramObj3 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj5 = new DoubleWrapper(version);
+			Object paramObj4 = new DoubleWrapper(version);
 
-			Object paramObj6 = displayStyle;
+			Object paramObj5 = displayStyle;
 
 			if (displayStyle == null) {
+				paramObj5 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj6 = feedURL;
+
+			if (feedURL == null) {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj7 = feedURL;
-
-			if (feedURL == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj8 = entryURL;
+			Object paramObj7 = entryURL;
 
 			if (entryURL == null) {
-				paramObj8 = new NullWrapper("java.lang.String");
+				paramObj7 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getGroupMessagesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7, paramObj8
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;
@@ -1384,49 +1381,47 @@ public class MBMessageServiceHttp {
 	}
 
 	public static java.lang.String getThreadMessagesRSS(
-		HttpPrincipal httpPrincipal, long companyId, long threadId, int max,
+		HttpPrincipal httpPrincipal, long threadId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
 		java.lang.String feedURL, java.lang.String entryURL)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
-			Object paramObj0 = new LongWrapper(companyId);
+			Object paramObj0 = new LongWrapper(threadId);
 
-			Object paramObj1 = new LongWrapper(threadId);
+			Object paramObj1 = new IntegerWrapper(max);
 
-			Object paramObj2 = new IntegerWrapper(max);
-
-			Object paramObj3 = type;
+			Object paramObj2 = type;
 
 			if (type == null) {
-				paramObj3 = new NullWrapper("java.lang.String");
+				paramObj2 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj4 = new DoubleWrapper(version);
+			Object paramObj3 = new DoubleWrapper(version);
 
-			Object paramObj5 = displayStyle;
+			Object paramObj4 = displayStyle;
 
 			if (displayStyle == null) {
+				paramObj4 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj5 = feedURL;
+
+			if (feedURL == null) {
 				paramObj5 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj6 = feedURL;
-
-			if (feedURL == null) {
-				paramObj6 = new NullWrapper("java.lang.String");
-			}
-
-			Object paramObj7 = entryURL;
+			Object paramObj6 = entryURL;
 
 			if (entryURL == null) {
-				paramObj7 = new NullWrapper("java.lang.String");
+				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(MBMessageServiceUtil.class.getName(),
 					"getThreadMessagesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6, paramObj7
+						paramObj5, paramObj6
 					});
 
 			Object returnObj = null;

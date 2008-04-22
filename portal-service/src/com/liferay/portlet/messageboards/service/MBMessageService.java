@@ -172,8 +172,8 @@ public interface MBMessageService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.lang.String getGroupMessagesRSS(long companyId, long groupId,
-		long userId, int max, java.lang.String type, double version,
+	public java.lang.String getGroupMessagesRSS(long groupId, long userId,
+		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
 		java.lang.String entryURL)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
@@ -189,10 +189,9 @@ public interface MBMessageService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
-	public java.lang.String getThreadMessagesRSS(long companyId, long threadId,
-		int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
+	public java.lang.String getThreadMessagesRSS(long threadId, int max,
+		java.lang.String type, double version, java.lang.String displayStyle,
+		java.lang.String feedURL, java.lang.String entryURL)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

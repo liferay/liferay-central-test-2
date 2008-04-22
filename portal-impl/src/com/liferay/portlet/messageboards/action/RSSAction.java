@@ -108,8 +108,8 @@ public class RSSAction extends Action {
 
 			if (userId > 0) {
 				rss = MBMessageServiceUtil.getGroupMessagesRSS(
-					themeDisplay.getCompanyId(), groupId, userId, max, type,
-					version, displayStyle, feedURL, entryURL);
+					groupId, userId, max, type, version, displayStyle, feedURL,
+					entryURL);
 			}
 			else {
 				rss = MBMessageServiceUtil.getGroupMessagesRSS(
@@ -141,8 +141,7 @@ public class RSSAction extends Action {
 						"&threadId=" + threadId;
 
 			rss = MBMessageServiceUtil.getThreadMessagesRSS(
-				themeDisplay.getCompanyId(), threadId, max, type, version,
-				displayStyle, feedURL, entryURL);
+				threadId, max, type, version, displayStyle, feedURL, entryURL);
 		}
 
 		return rss.getBytes(StringPool.UTF8);

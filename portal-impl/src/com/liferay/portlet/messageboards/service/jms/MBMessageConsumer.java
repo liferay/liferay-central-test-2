@@ -26,14 +26,11 @@ import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Subscription;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.SubscriptionLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.theme.ThemeDisplay;
-import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.util.BBCodeUtil;
@@ -52,6 +49,7 @@ import javax.jms.QueueConnectionFactory;
 import javax.jms.QueueReceiver;
 import javax.jms.QueueSession;
 import javax.jms.Session;
+
 import javax.mail.internet.InternetAddress;
 
 import org.apache.commons.logging.Log;
@@ -61,7 +59,6 @@ import org.apache.commons.logging.LogFactory;
  * <a href="MBMessageConsumer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- * @author Raymond Augé
  *
  */
 public class MBMessageConsumer implements MessageListener {
@@ -129,8 +126,8 @@ public class MBMessageConsumer implements MessageListener {
 				GetterUtil.getLong(threadId));
 
 		_sendEmail(
-			companyId, userId, fromName, fromAddress, subject, body,
-			subscriptions, sent, replyToAddress, mailId, inReplyTo, htmlFormat);
+			userId, fromName, fromAddress, subject, body, subscriptions, sent,
+			replyToAddress, mailId, inReplyTo, htmlFormat);
 
 		// Categories
 
@@ -140,9 +137,8 @@ public class MBMessageConsumer implements MessageListener {
 				GetterUtil.getLong(categoryIds[i]));
 
 			_sendEmail(
-				companyId, userId, fromName, fromAddress, subject, body,
-				subscriptions, sent, replyToAddress, mailId, inReplyTo,
-				htmlFormat);
+				userId, fromName, fromAddress, subject, body, subscriptions,
+				sent, replyToAddress, mailId, inReplyTo, htmlFormat);
 		}
 
 		if (_log.isInfoEnabled()) {
@@ -151,10 +147,10 @@ public class MBMessageConsumer implements MessageListener {
 	}
 
 	private void _sendEmail(
-			long companyId, long userId, String fromName, String fromAddress,
-			String subject, String body, List<Subscription> subscriptions,
-			Set<Long> sent, String replyToAddress, String mailId,
-			String inReplyTo, boolean htmlFormat)
+			long userId, String fromName, String fromAddress, String subject,
+			String body, List<Subscription> subscriptions, Set<Long> sent,
+			String replyToAddress, String mailId, String inReplyTo,
+			boolean htmlFormat)
 		throws Exception {
 
 		List<InternetAddress> addresses =
@@ -247,23 +243,6 @@ public class MBMessageConsumer implements MessageListener {
 
 			if (htmlFormat) {
 				curBody = BBCodeUtil.getHTML(curBody);
-
-				ThemeDisplay themeDisplay = ThemeDisplayFactory.setup(
-					companyId);
-
-				curBody = StringUtil.replace(
-					curBody,
-					new String[] {
-						"@theme_images_path@",
-						"href=\"/",
-						"src=\"/"
-					},
-					new String[] {
-						themeDisplay.getURLPortal() +
-							themeDisplay.getPathThemeImages(),
-						"href=\"" + themeDisplay.getURLPortal() + "/",
-						"src=\"" + themeDisplay.getURLPortal() + "/"
-					});
 			}
 
 			MailMessage message = new MailMessage(
