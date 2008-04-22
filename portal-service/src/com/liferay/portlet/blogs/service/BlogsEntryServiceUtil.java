@@ -106,13 +106,14 @@ public class BlogsEntryServiceUtil {
 	public static java.lang.String getCompanyEntriesRSS(long companyId,
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
 		return blogsEntryService.getCompanyEntriesRSS(companyId, max, type,
-			version, displayStyle, feedURL, entryURL);
+			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry getEntry(
@@ -144,13 +145,14 @@ public class BlogsEntryServiceUtil {
 
 	public static java.lang.String getGroupEntriesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
+		java.lang.String feedURL, java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
 		return blogsEntryService.getGroupEntriesRSS(groupId, max, type,
-			version, displayStyle, feedURL, entryURL);
+			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static java.util.List<com.liferay.portlet.blogs.model.BlogsEntry> getOrganizationEntries(
@@ -165,13 +167,14 @@ public class BlogsEntryServiceUtil {
 	public static java.lang.String getOrganizationEntriesRSS(
 		long organizationId, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		BlogsEntryService blogsEntryService = BlogsEntryServiceFactory.getService();
 
 		return blogsEntryService.getOrganizationEntriesRSS(organizationId, max,
-			type, version, displayStyle, feedURL, entryURL);
+			type, version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static com.liferay.portlet.blogs.model.BlogsEntry updateEntry(

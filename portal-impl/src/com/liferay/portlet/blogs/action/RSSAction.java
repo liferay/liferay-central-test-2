@@ -98,8 +98,8 @@ public class RSSAction extends PortletAction {
 	}
 
 	protected byte[] getRSS(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
@@ -129,7 +129,7 @@ public class RSSAction extends PortletAction {
 			try {
 				rss = BlogsEntryServiceUtil.getCompanyEntriesRSS(
 					companyId, max, type, version, displayStyle, feedURL,
-					entryURL);
+					entryURL, themeDisplay);
 			}
 			catch (NoSuchCompanyException nsce) {
 				if (_log.isWarnEnabled()) {
@@ -145,7 +145,7 @@ public class RSSAction extends PortletAction {
 			try {
 				rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
 					groupId, max, type, version, displayStyle, feedURL,
-					entryURL);
+					entryURL, themeDisplay);
 			}
 			catch (NoSuchGroupException nsge) {
 				if (_log.isWarnEnabled()) {
@@ -159,7 +159,7 @@ public class RSSAction extends PortletAction {
 			try {
 				rss = BlogsEntryServiceUtil.getOrganizationEntriesRSS(
 					organizationId, max, type, version, displayStyle, feedURL,
-					entryURL);
+					entryURL, themeDisplay);
 			}
 			catch (NoSuchOrganizationException nsge) {
 				if (_log.isWarnEnabled()) {
@@ -179,7 +179,7 @@ public class RSSAction extends PortletAction {
 			try {
 				rss = BlogsEntryServiceUtil.getGroupEntriesRSS(
 					groupId, max, type, version, displayStyle, feedURL,
-					entryURL);
+					entryURL, themeDisplay);
 			}
 			catch (NoSuchGroupException nsge) {
 				if (_log.isWarnEnabled()) {

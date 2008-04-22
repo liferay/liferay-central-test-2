@@ -79,7 +79,8 @@ public interface BlogsEntryService {
 
 	public java.lang.String getCompanyEntriesRSS(long companyId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
+		java.lang.String feedURL, java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -99,7 +100,8 @@ public interface BlogsEntryService {
 
 	public java.lang.String getGroupEntriesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
+		java.lang.String feedURL, java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -111,7 +113,8 @@ public interface BlogsEntryService {
 	public java.lang.String getOrganizationEntriesRSS(long organizationId,
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 

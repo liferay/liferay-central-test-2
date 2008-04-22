@@ -1277,13 +1277,6 @@ Liferay.Service.Blogs.BlogsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getCompanyEntriesRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyEntriesRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	getEntry: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getEntry";
@@ -1298,23 +1291,9 @@ Liferay.Service.Blogs.BlogsEntry = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getGroupEntriesRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroupEntriesRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	getOrganizationEntries: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getOrganizationEntries";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getOrganizationEntriesRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getOrganizationEntriesRSS";
 
 		return Liferay.Service.ajax(params, callback);
 	}
@@ -2228,27 +2207,6 @@ Liferay.Service.MB.MBMessage = {
 		return Liferay.Service.ajax(params, callback);
 	},
 
-	getCategoryMessagesRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCategoryMessagesRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getCompanyMessagesRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getCompanyMessagesRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getGroupMessagesRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getGroupMessagesRSS";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
 	getMessage: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getMessage";
@@ -2259,13 +2217,6 @@ Liferay.Service.MB.MBMessage = {
 	getMessageDisplay: function(params, callback) {
 		params.serviceClassName = this.serviceClassName;
 		params.serviceMethodName = "getMessageDisplay";
-
-		return Liferay.Service.ajax(params, callback);
-	},
-
-	getThreadMessagesRSS: function(params, callback) {
-		params.serviceClassName = this.serviceClassName;
-		params.serviceMethodName = "getThreadMessagesRSS";
 
 		return Liferay.Service.ajax(params, callback);
 	},

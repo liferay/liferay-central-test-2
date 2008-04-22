@@ -326,7 +326,8 @@ public class BlogsEntryServiceHttp {
 	public static java.lang.String getCompanyEntriesRSS(
 		HttpPrincipal httpPrincipal, long companyId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
+		java.lang.String feedURL, java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -360,11 +361,18 @@ public class BlogsEntryServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj7 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj7 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"getCompanyEntriesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;
@@ -512,7 +520,8 @@ public class BlogsEntryServiceHttp {
 	public static java.lang.String getGroupEntriesRSS(
 		HttpPrincipal httpPrincipal, long groupId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
+		java.lang.String feedURL, java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -546,11 +555,18 @@ public class BlogsEntryServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj7 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj7 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"getGroupEntriesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;
@@ -621,7 +637,8 @@ public class BlogsEntryServiceHttp {
 	public static java.lang.String getOrganizationEntriesRSS(
 		HttpPrincipal httpPrincipal, long organizationId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
+		java.lang.String feedURL, java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		try {
@@ -655,11 +672,18 @@ public class BlogsEntryServiceHttp {
 				paramObj6 = new NullWrapper("java.lang.String");
 			}
 
+			Object paramObj7 = themeDisplay;
+
+			if (themeDisplay == null) {
+				paramObj7 = new NullWrapper(
+						"com.liferay.portal.theme.ThemeDisplay");
+			}
+
 			MethodWrapper methodWrapper = new MethodWrapper(BlogsEntryServiceUtil.class.getName(),
 					"getOrganizationEntriesRSS",
 					new Object[] {
 						paramObj0, paramObj1, paramObj2, paramObj3, paramObj4,
-						paramObj5, paramObj6
+						paramObj5, paramObj6, paramObj7
 					});
 
 			Object returnObj = null;

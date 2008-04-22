@@ -72,8 +72,8 @@ public class RSSAction extends Action {
 	}
 
 	protected byte[] getRSS(HttpServletRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		String plid = ParamUtil.getString(req, "p_l_id");
 		long companyId = ParamUtil.getLong(req, "companyId");
@@ -99,7 +99,8 @@ public class RSSAction extends Action {
 			String feedURL = StringPool.BLANK;
 
 			rss = MBMessageServiceUtil.getCompanyMessagesRSS(
-				companyId, max, type, version, displayStyle, feedURL, entryURL);
+				companyId, max, type, version, displayStyle, feedURL, entryURL,
+				themeDisplay);
 		}
 		else if (groupId > 0) {
 			String feedURL =
@@ -109,12 +110,12 @@ public class RSSAction extends Action {
 			if (userId > 0) {
 				rss = MBMessageServiceUtil.getGroupMessagesRSS(
 					groupId, userId, max, type, version, displayStyle, feedURL,
-					entryURL);
+					entryURL, themeDisplay);
 			}
 			else {
 				rss = MBMessageServiceUtil.getGroupMessagesRSS(
 					groupId, max, type, version, displayStyle, feedURL,
-					entryURL);
+					entryURL, themeDisplay);
 			}
 		}
 		else if (categoryId > 0) {
@@ -126,7 +127,7 @@ public class RSSAction extends Action {
 			try {
 				rss = MBMessageServiceUtil.getCategoryMessagesRSS(
 					categoryId, max, type, version, displayStyle, feedURL,
-					entryURL);
+					entryURL, themeDisplay);
 			}
 			catch (NoSuchCategoryException nsce) {
 				if (_log.isWarnEnabled()) {
@@ -141,7 +142,8 @@ public class RSSAction extends Action {
 						"&threadId=" + threadId;
 
 			rss = MBMessageServiceUtil.getThreadMessagesRSS(
-				threadId, max, type, version, displayStyle, feedURL, entryURL);
+				threadId, max, type, version, displayStyle, feedURL, entryURL,
+				themeDisplay);
 		}
 
 		return rss.getBytes(StringPool.UTF8);

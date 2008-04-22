@@ -134,7 +134,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public String getCompanyEntriesRSS(
 			long companyId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL)
+			String displayStyle, String feedURL, String entryURL,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		Company company = companyPersistence.findByPrimaryKey(companyId);
@@ -145,7 +146,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,
-			blogsEntries);
+			blogsEntries, themeDisplay);
 	}
 
 	public BlogsEntry getEntry(long entryId)
@@ -191,7 +192,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public String getGroupEntriesRSS(
 			long groupId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL)
+			String displayStyle, String feedURL, String entryURL,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		Group group = groupPersistence.findByPrimaryKey(groupId);
@@ -202,7 +204,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,
-			blogsEntries);
+			blogsEntries, themeDisplay);
 	}
 
 	public List<BlogsEntry> getOrganizationEntries(long organizationId, int max)
@@ -228,7 +230,8 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 	public String getOrganizationEntriesRSS(
 			long organizationId, int max, String type, double version,
-			String displayStyle, String feedURL, String entryURL)
+			String displayStyle, String feedURL, String entryURL,
+			ThemeDisplay themeDisplay)
 		throws PortalException, SystemException {
 
 		Organization organization = organizationPersistence.findByPrimaryKey(
@@ -241,7 +244,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		return exportToRSS(
 			name, description, type, version, displayStyle, feedURL, entryURL,
-			blogsEntries);
+			blogsEntries, themeDisplay);
 	}
 
 	public BlogsEntry updateEntry(
@@ -263,7 +266,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 	protected String exportToRSS(
 			String name, String description, String type, double version,
 			String displayStyle, String feedURL, String entryURL,
-			List<BlogsEntry> blogsEntries)
+			List<BlogsEntry> blogsEntries, ThemeDisplay themeDisplay)
 		throws SystemException {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
@@ -306,7 +309,17 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 				value = StringPool.BLANK;
 			}
 			else {
-				value = entry.getContent();
+				value = StringUtil.replace(
+					entry.getContent(),
+					new String[] {
+						"href=\"/",
+						"src=\"/"
+					},
+					new String[] {
+						"href=\"" + themeDisplay.getURLPortal() + "/",
+						"src=\"" + themeDisplay.getURLPortal() + "/"
+					}
+				);
 			}
 
 			SyndEntry syndEntry = new SyndEntryImpl();

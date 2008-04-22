@@ -231,48 +231,52 @@ public class MBMessageServiceUtil {
 	public static java.lang.String getCategoryMessagesRSS(long categoryId,
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.getCategoryMessagesRSS(categoryId, max, type,
-			version, displayStyle, feedURL, entryURL);
+			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static java.lang.String getCompanyMessagesRSS(long companyId,
 		int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.getCompanyMessagesRSS(companyId, max, type,
-			version, displayStyle, feedURL, entryURL);
+			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static java.lang.String getGroupMessagesRSS(long groupId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
+		java.lang.String feedURL, java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.getGroupMessagesRSS(groupId, max, type,
-			version, displayStyle, feedURL, entryURL);
+			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static java.lang.String getGroupMessagesRSS(long groupId,
 		long userId, int max, java.lang.String type, double version,
 		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
+		java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.getGroupMessagesRSS(groupId, userId, max, type,
-			version, displayStyle, feedURL, entryURL);
+			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static com.liferay.portlet.messageboards.model.MBMessage getMessage(
@@ -295,13 +299,14 @@ public class MBMessageServiceUtil {
 
 	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
 		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
+		java.lang.String feedURL, java.lang.String entryURL,
+		com.liferay.portal.theme.ThemeDisplay themeDisplay)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		MBMessageService mbMessageService = MBMessageServiceFactory.getService();
 
 		return mbMessageService.getThreadMessagesRSS(threadId, max, type,
-			version, displayStyle, feedURL, entryURL);
+			version, displayStyle, feedURL, entryURL, themeDisplay);
 	}
 
 	public static void subscribeMessage(long messageId)

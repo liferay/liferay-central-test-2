@@ -163,53 +163,6 @@ public class MBMessageServiceJSON {
 		return returnValue;
 	}
 
-	public static java.lang.String getCategoryMessagesRSS(long categoryId,
-		int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		java.lang.String returnValue = MBMessageServiceUtil.getCategoryMessagesRSS(categoryId,
-				max, type, version, displayStyle, feedURL, entryURL);
-
-		return returnValue;
-	}
-
-	public static java.lang.String getCompanyMessagesRSS(long companyId,
-		int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		java.lang.String returnValue = MBMessageServiceUtil.getCompanyMessagesRSS(companyId,
-				max, type, version, displayStyle, feedURL, entryURL);
-
-		return returnValue;
-	}
-
-	public static java.lang.String getGroupMessagesRSS(long groupId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		java.lang.String returnValue = MBMessageServiceUtil.getGroupMessagesRSS(groupId,
-				max, type, version, displayStyle, feedURL, entryURL);
-
-		return returnValue;
-	}
-
-	public static java.lang.String getGroupMessagesRSS(long groupId,
-		long userId, int max, java.lang.String type, double version,
-		java.lang.String displayStyle, java.lang.String feedURL,
-		java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		java.lang.String returnValue = MBMessageServiceUtil.getGroupMessagesRSS(groupId,
-				userId, max, type, version, displayStyle, feedURL, entryURL);
-
-		return returnValue;
-	}
-
 	public static JSONObject getMessage(long messageId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -223,17 +176,6 @@ public class MBMessageServiceJSON {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
 		com.liferay.portlet.messageboards.model.MBMessageDisplay returnValue = MBMessageServiceUtil.getMessageDisplay(messageId);
-
-		return returnValue;
-	}
-
-	public static java.lang.String getThreadMessagesRSS(long threadId, int max,
-		java.lang.String type, double version, java.lang.String displayStyle,
-		java.lang.String feedURL, java.lang.String entryURL)
-		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
-			com.liferay.portal.PortalException {
-		java.lang.String returnValue = MBMessageServiceUtil.getThreadMessagesRSS(threadId,
-				max, type, version, displayStyle, feedURL, entryURL);
 
 		return returnValue;
 	}
