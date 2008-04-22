@@ -37,7 +37,7 @@ import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutServiceUtil;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
+import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.struts.JSONAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
@@ -73,11 +73,13 @@ public class UpdatePageAction extends JSONAction {
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();
 
-		String portletId = ParamUtil.getString(req, "portletId");
+		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
+		long parentLayoutId = ParamUtil.getLong(req, "parentLayoutId");
 
-		if (!PortletPermissionUtil.contains(
-				permissionChecker, themeDisplay.getPlid(), portletId,
-				ActionKeys.CONFIGURATION)) {
+		if (!LayoutPermissionUtil.contains(
+				permissionChecker, groupId, privateLayout, parentLayoutId,
+				ActionKeys.UPDATE)) {
 
 			return null;
 		}
