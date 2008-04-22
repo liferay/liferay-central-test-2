@@ -20,14 +20,13 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet;
+package com.liferay.util.bridges.wai;
 
 import com.liferay.portal.kernel.portlet.FriendlyURLMapper;
 import com.liferay.portal.kernel.portlet.LiferayPortletURL;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.PortalUtil;
 
 import java.util.Map;
@@ -43,12 +42,14 @@ import javax.portlet.WindowState;
  */
 public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 
+	public static final String WAR_SEPARATOR = "_WAR_";
+
 	public String buildPath(LiferayPortletURL portletURL) {
 		String portletId = portletURL.getPortletId();
 
 		String prefix = portletId;
 
-		int pos = portletId.indexOf(PortletImpl.WAR_SEPARATOR);
+		int pos = portletId.indexOf(WAR_SEPARATOR);
 
 		if (pos != -1) {
 			prefix = portletId.substring(0, pos);
@@ -82,7 +83,7 @@ public class WAIFriendlyURLMapper implements FriendlyURLMapper {
 
 		String prefix = friendlyURLPath.substring(x + _MAPPING.length() + 1, y);
 
-		String portletId = prefix + PortletImpl.WAR_SEPARATOR + prefix;
+		String portletId = prefix + WAR_SEPARATOR + prefix;
 
 		params.put("p_p_id", new String[] {portletId});
 		params.put("p_p_lifecycle", new String[] {"0"});

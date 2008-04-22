@@ -80,7 +80,7 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 				"friendly_url_mapper_class",
 				settings.getProperty(
 					"wai.friendly.url.mapper",
-					"com.liferay.portlet.WAIFriendlyURLMapper"));
+					"com.liferay.util.bridges.wai.WAIFriendlyURLMapper"));
 		}
 		else {
 			filterMap.put(
@@ -88,7 +88,7 @@ public class WAIAutoDeployer extends PortletAutoDeployer {
 
 			filterMap.put(
 				"friendly_url_mapper_class",
-				"com.liferay.portlet.WAIFriendlyURLMapper");
+				"com.liferay.util.bridges.wai.WAIFriendlyURLMapper");
 		}
 
 		_setInitParams(filterMap, pluginPackage);
