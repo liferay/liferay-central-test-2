@@ -1,0 +1,69 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EditCommunityTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">EditCommunityTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=All Communities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=All Communities</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Community 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id="portlet-wrapper-29"]/div[2]/div/div/form/table/tbody/tr[4]/td[6]/ul/li/ul/li/nobr/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id="portlet-wrapper-29"]/div[2]/div/div/form/table/tbody/tr[4]/td[6]/ul/li/ul/li/nobr/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_29_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_29_name</td>
+	<td>Test Community 2 Edited</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_29_description</td>
+	<td>This is a second temporary Test Community! This community has been edited.</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Test Community 2 Edited</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>
