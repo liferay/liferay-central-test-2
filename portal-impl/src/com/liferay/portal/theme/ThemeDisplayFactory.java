@@ -78,7 +78,8 @@ public class ThemeDisplayFactory {
 
 		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 
-		return setup(company, company.getLocale(), null, null, false);
+		return setup(
+			company, company.getLocale(), null, PortalUtil.getCDNHost(), false);
 	}
 
 	public static ThemeDisplay setup(long companyId, String friendlyURL)
@@ -105,6 +106,15 @@ public class ThemeDisplayFactory {
 			Company company, Locale locale, Layout layout, String cdnHost,
 			boolean wapTheme)
 		throws PortalException, SystemException {
+
+		ThemeDisplay themeDisplay = null;
+
+		try {
+			themeDisplay = create();
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
 
 		// Company
 
@@ -196,15 +206,6 @@ public class ThemeDisplayFactory {
 			theme = ThemeLocalUtil.getTheme(companyId, themeId, wapTheme);
 			colorScheme = ThemeLocalUtil.getColorScheme(
 				companyId, theme.getThemeId(), colorSchemeId, wapTheme);
-		}
-
-		ThemeDisplay themeDisplay = null;
-
-		try {
-			themeDisplay = create();
-		}
-		catch (Exception e) {
-			throw new SystemException(e);
 		}
 
 		// Set the CDN host first because other methods (setLookAndFeel) depend
