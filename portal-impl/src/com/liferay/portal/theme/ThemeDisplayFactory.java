@@ -25,7 +25,6 @@ package com.liferay.portal.theme;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
