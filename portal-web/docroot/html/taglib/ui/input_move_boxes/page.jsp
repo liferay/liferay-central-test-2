@@ -43,7 +43,7 @@ List leftList = (List)request.getAttribute("liferay-ui:input-move-boxes:leftList
 List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightList");
 %>
 
-<table>
+<table class="lfr-table">
 <tr>
 	<td>
 		<b><%= leftTitle %></b>
