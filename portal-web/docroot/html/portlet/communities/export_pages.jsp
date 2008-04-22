@@ -182,8 +182,8 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 </style>
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />exportPagesFm">
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>">
-<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= HtmlUtil.escape(pagesRedirect) %>">
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>">
+<input name="<portlet:namespace />pagesRedirect" type="hidden" value="<%= pagesRedirect %>">
 <input name="<portlet:namespace />stagingGroupId" type="hidden" value="<%= stagingGroupId %>">
 
 <liferay-ui:tabs

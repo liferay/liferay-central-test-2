@@ -35,7 +35,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 <script type="text/javascript">
 	function <portlet:namespace />deleteOrder() {
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= HtmlUtil.escape(redirect) %>";
+		document.<portlet:namespace />fm.<portlet:namespace />redirect.value = "<%= redirect %>";
 		submitForm(document.<portlet:namespace />fm);
 	}
 
@@ -53,7 +53,7 @@ long orderId = BeanParamUtil.getLong(order, request, "orderId");
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/shopping/edit_order" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 <input name="<portlet:namespace />orderId" type="hidden" value="<%= orderId %>" />
 <input name="<portlet:namespace />number" type="hidden" value="<%= order.getNumber() %>" />
 <input name="<portlet:namespace />emailType" type="hidden" value="" />
@@ -604,7 +604,7 @@ for (int i = 0; itr.hasNext(); i++) {
 		<input type="button" value="<liferay-ui:message key="delete" />" onClick="<portlet:namespace />deleteOrder();" />
 	</c:if>
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 </c:if>
 
 </form>

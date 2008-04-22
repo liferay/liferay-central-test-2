@@ -55,7 +55,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/edit_page_attachment" /></portlet:actionURL>" class="uni-form" enctype="multipart/form-data" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />nodeId" type="hidden" value="<%= String.valueOf(node.getNodeId()) %>" />
 <input name="<portlet:namespace />title" type="hidden" value="<%= wikiPage.getTitle() %>" />
 <input name="<portlet:namespace />numOfFiles" type="hidden" value="3" />
@@ -88,7 +88,7 @@ WikiPage wikiPage = (WikiPage)request.getAttribute(WebKeys.WIKI_PAGE);
 	<div class="button-holder">
 		<input type="submit" value="<liferay-ui:message key="save" />" />
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="parent.location = '<%= HtmlUtil.escape(redirect) %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="parent.location = '<%= redirect %>';" />
 	</div>
 
 	<br />

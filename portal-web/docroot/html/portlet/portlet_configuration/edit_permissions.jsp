@@ -242,7 +242,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	</c:when>
 	<c:otherwise>
 		<div>
-			<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(redirect) %>"><%= selResourceDescription %></a>
+			<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= redirect %>"><%= selResourceDescription %></a>
 		</div>
 
 		<br />

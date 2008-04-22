@@ -108,7 +108,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 
 		<input type="button" value="<liferay-ui:message key="vote" />" onClick="submitForm(document.<portlet:namespace />fm);" />
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 	</c:when>
 	<c:otherwise>
 		<%@ include file="/html/portlet/polls/view_question_results.jspf" %>
@@ -122,7 +122,7 @@ if (viewResults && !PollsQuestionPermission.contains(permissionChecker, question
 			<c:when test="<%= Validator.isNotNull(redirect) %>">
 				<br />
 
-				<input type="button" value="<liferay-ui:message key="back" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+				<input type="button" value="<liferay-ui:message key="back" />" onClick="location.href = '<%= redirect %>';" />
 			</c:when>
 		</c:choose>
 	</c:otherwise>

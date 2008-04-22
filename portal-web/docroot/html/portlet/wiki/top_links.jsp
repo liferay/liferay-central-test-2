@@ -88,7 +88,7 @@ boolean print = ParamUtil.getBoolean(request, Constants.PRINT);
 
 				<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fmSearch" onSubmit="submitForm(this); return false;">
 				<liferay-portlet:renderURLParams varImpl="searchURL" />
-				<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
+				<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
 				<input name="<portlet:namespace />nodeId" type="hidden" value="<%= node.getNodeId() %>" />
 
 				<%

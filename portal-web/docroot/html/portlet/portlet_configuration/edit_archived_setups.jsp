@@ -46,8 +46,8 @@ PortletURL portletURL = renderResponse.createActionURL();
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_archived_setups" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />tabs1" type="hidden" value="advanced">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>">
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>">
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>">
+<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>">
 
 <%
 List headerNames = new ArrayList();

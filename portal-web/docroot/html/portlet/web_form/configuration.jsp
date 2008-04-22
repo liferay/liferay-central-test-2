@@ -40,7 +40,7 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 
 <fieldset class="block-labels">
 	<legend><liferay-ui:message key="form-information" /></legend>
@@ -186,7 +186,7 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 <div class="button-holder">
 	<input type="submit" value="<liferay-ui:message key="save" />" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 </div>
 
 </form>

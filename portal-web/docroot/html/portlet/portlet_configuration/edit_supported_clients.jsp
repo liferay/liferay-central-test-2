@@ -50,9 +50,9 @@ supportedClientsRedirect.setParameter("portletResource", portletResource);
 </liferay-util:include>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_supported_clients" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />supportedClientsRedirect" type="hidden" value="<%= supportedClientsRedirect %>" />
-<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>" />
+<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>" />
 
 <%
 Iterator itr = allPortletModes.iterator();
@@ -105,6 +105,6 @@ while (itr.hasNext()) {
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 
 </form>

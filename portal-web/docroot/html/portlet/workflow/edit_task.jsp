@@ -80,7 +80,7 @@ Map errors = (Map)SessionErrors.get(renderRequest, EditTaskAction.class.getName(
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/workflow/edit_task" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />taskCmd" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
 <input name="<portlet:namespace />taskId" type="hidden" value="<%= taskId %>" />
 <input name="<portlet:namespace />instanceId" type="hidden" value="<%= instanceId %>" />
 <input name="<portlet:namespace />taskTransition" type="hidden" value="" />
@@ -279,6 +279,6 @@ if ((task != null) && (task.getTaskId() == taskId)) {
 }
 %>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
 
 </form>

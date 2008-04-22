@@ -69,7 +69,7 @@ portletURL.setParameter("tabs1", tabs1);
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/mail/edit" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
 
 <liferay-ui:tabs
 	names="recipients,filters,forward-address,signature,vacation-message"
