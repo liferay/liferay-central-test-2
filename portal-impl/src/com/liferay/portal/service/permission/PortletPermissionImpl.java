@@ -25,13 +25,15 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 
 import java.util.List;
@@ -107,7 +109,7 @@ public class PortletPermissionImpl implements PortletPermission {
 			Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
 			groupId = layout.getGroupId();
-			name = PortletImpl.getRootPortletId(portletId);
+			name = PortletConstants.getRootPortletId(portletId);
 			primKey = getPrimaryKey(plid, portletId);
 
 			if (!strict) {
@@ -163,7 +165,7 @@ public class PortletPermissionImpl implements PortletPermission {
 		StringMaker sm = new StringMaker();
 
 		sm.append(plid);
-		sm.append(PortletImpl.LAYOUT_SEPARATOR);
+		sm.append(PortletConstants.LAYOUT_SEPARATOR);
 		sm.append(portletId);
 
 		return sm.toString();
@@ -186,7 +188,7 @@ public class PortletPermissionImpl implements PortletPermission {
 			String portletId, String actionId)
 		throws SystemException {
 
-		portletId = PortletImpl.getRootPortletId(portletId);
+		portletId = PortletConstants.getRootPortletId(portletId);
 
 		List<String> layoutManagerActions =
 			ResourceActionsUtil.getPortletResourceLayoutManagerActions(
