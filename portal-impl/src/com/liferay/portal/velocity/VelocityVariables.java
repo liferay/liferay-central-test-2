@@ -24,7 +24,6 @@ package com.liferay.portal.velocity;
 
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.language.UnicodeLanguageUtil;
-import com.liferay.portal.kernel.service.ExceptionSafeServiceHandler;
 import com.liferay.portal.kernel.servlet.BrowserSniffer_IW;
 import com.liferay.portal.kernel.servlet.ImageServletTokenUtil;
 import com.liferay.portal.kernel.util.ArrayUtil;
@@ -73,8 +72,6 @@ import com.liferay.portlet.expando.service.ExpandoRowService;
 import com.liferay.portlet.expando.service.ExpandoTableService;
 import com.liferay.portlet.expando.service.ExpandoValueService;
 
-import java.lang.reflect.Proxy;
-
 import java.util.List;
 import java.util.Map;
 
@@ -82,6 +79,7 @@ import javax.portlet.PortletRequest;
 import javax.portlet.PortletResponse;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts.taglib.tiles.ComponentConstants;
@@ -134,39 +132,28 @@ public class VelocityVariables {
 
 		ServiceLocator serviceLocator = ServiceLocator.getInstance();
 
-		vc.put("expandoColumnService",
-			(ExpandoColumnService)Proxy.newProxyInstance(
-				ExpandoColumnService.class.getClassLoader(),
-				new Class[] { ExpandoColumnService.class },
-				new ExceptionSafeServiceHandler(serviceLocator.findService(
-					ExpandoColumnService.class.getName()))));
+		vc.put(
+			"expandoColumnService",
+			serviceLocator.findExceptionSafeService(
+				ExpandoColumnService.class));
 
 		// Expando row service
 
-		vc.put("expandoRowService",
-			(ExpandoRowService)Proxy.newProxyInstance(
-				ExpandoRowService.class.getClassLoader(),
-				new Class[] { ExpandoRowService.class },
-				new ExceptionSafeServiceHandler(serviceLocator.findService(
-					ExpandoRowService.class.getName()))));
+		vc.put(
+			"expandoRowService",
+			serviceLocator.findExceptionSafeService(ExpandoRowService.class));
 
 		// Expando table service
 
-		vc.put("expandoTableService",
-			(ExpandoTableService)Proxy.newProxyInstance(
-				ExpandoTableService.class.getClassLoader(),
-				new Class[] { ExpandoTableService.class },
-				new ExceptionSafeServiceHandler(serviceLocator.findService(
-					ExpandoTableService.class.getName()))));
+		vc.put(
+			"expandoTableService",
+			serviceLocator.findExceptionSafeService(ExpandoTableService.class));
 
 		// Expando value service
 
-		vc.put("expandoValueService",
-			(ExpandoValueService)Proxy.newProxyInstance(
-				ExpandoValueService.class.getClassLoader(),
-				new Class[] { ExpandoValueService.class },
-				new ExceptionSafeServiceHandler(serviceLocator.findService(
-					ExpandoValueService.class.getName()))));
+		vc.put(
+			"expandoValueService",
+			serviceLocator.findExceptionSafeService(ExpandoValueService.class));
 
 		// Getter util
 

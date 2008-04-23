@@ -22,8 +22,11 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.portal.kernel.bean.ExceptionSafeBeanHandler;
 import com.liferay.portal.kernel.util.MethodInvoker;
 import com.liferay.portal.kernel.util.MethodWrapper;
+
+import java.lang.reflect.Proxy;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
@@ -53,6 +56,18 @@ public class ServiceLocator {
 		}
 		catch (Exception e) {
 			_log.error(e);
+		}
+
+		return obj;
+	}
+
+	public Object findExceptionSafeService(Class serviceClass) {
+		Object obj = findService(serviceClass.getName());
+
+		if (obj != null) {
+			obj = Proxy.newProxyInstance(
+				serviceClass.getClassLoader(), new Class[] {serviceClass},
+				new ExceptionSafeBeanHandler(obj));
 		}
 
 		return obj;

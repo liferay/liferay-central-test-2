@@ -20,34 +20,34 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.kernel.service;
+package com.liferay.portal.kernel.bean;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 
 /**
- * <a href="ExceptionSafeServiceHandler.java.html"><b><i>View Source</i></b></a>
+ * <a href="ExceptionSafeBeanHandler.java.html"><b><i>View Source</i></b></a>
  *
  * @author Raymond Augé
  *
  */
-public class ExceptionSafeServiceHandler implements InvocationHandler {
+public class ExceptionSafeBeanHandler implements InvocationHandler {
 
-	public ExceptionSafeServiceHandler(Object service) {
-		_service = service;
+	public ExceptionSafeBeanHandler(Object bean) {
+		_bean = bean;
 	}
 
 	public Object invoke(Object proxy, Method method, Object[] args)
 		throws Throwable {
 
 		try {
-			return method.invoke(_service, args);
+			return method.invoke(_bean, args);
 		}
 		catch (Exception e) {
 			return null;
 		}
 	}
 
-	private Object _service;
+	private Object _bean;
 
 }
