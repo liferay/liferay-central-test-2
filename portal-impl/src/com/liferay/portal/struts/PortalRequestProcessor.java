@@ -36,12 +36,12 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserTracker;
 import com.liferay.portal.model.UserTrackerPath;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -711,7 +711,7 @@ public class PortalRequestProcessor extends TilesRequestProcessor {
 				sm.append(StringPool.QUESTION);
 				sm.append("p_l_id");
 				sm.append(StringPool.EQUAL);
-				sm.append(LayoutImpl.DEFAULT_PLID);
+				sm.append(LayoutConstants.DEFAULT_PLID);
 			}
 
 			return sm.toString();

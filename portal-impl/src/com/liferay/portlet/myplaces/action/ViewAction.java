@@ -25,7 +25,7 @@ package com.liferay.portlet.myplaces.action;
 import com.liferay.portal.NoSuchLayoutSetException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
@@ -68,7 +68,8 @@ public class ViewAction extends PortletAction {
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0,
+			1);
 
 		String redirect = themeDisplay.getPathMain();
 
@@ -106,7 +107,8 @@ public class ViewAction extends PortletAction {
 		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0,
+			1);
 
 		String redirect = themeDisplay.getPathMain();
 

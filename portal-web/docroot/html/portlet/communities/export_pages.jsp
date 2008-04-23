@@ -68,7 +68,7 @@ if (selGroup.isStagingGroup()) {
 	treeKey = "stageLayoutsTree";
 }
 
-long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 Layout selLayout = null;
 
@@ -214,7 +214,7 @@ response.setHeader("Ajax-ID", request.getHeader("Ajax-ID"));
 		<input <%= (results.size() > 0)? "style=\"display: none;\"" :"" %> id="publishBtn" type="button" value="<liferay-ui:message key='<%= selGroup.isStagingGroup() ? "publish" : "copy" %>' />" onClick='if (confirm("<liferay-ui:message key='<%= "are-you-sure-you-want-to-" + (selGroup.isStagingGroup() ? "publish" : "copy") + "-these-pages" %>' />")) { submitForm(document.<portlet:namespace />exportPagesFm); }' />
 	</c:when>
 	<c:otherwise>
-		<c:if test="<%= selPlid <= LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>">
+		<c:if test="<%= selPlid <= LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>">
 			<input id="changeBtn" type="button" value="<liferay-ui:message key="change-selection" />" onClick="Liferay.Popup.update('#<%= popupId %>', '<%= selectURL %>&<portlet:namespace />publish=false');" />
 		</c:if>
 

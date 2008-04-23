@@ -32,9 +32,9 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
@@ -173,10 +173,10 @@ public class DLFolderLocalServiceImpl extends DLFolderLocalServiceBaseImpl {
 					privateLayout = false;
 				}
 
-				long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+				long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 				String title = StringPool.BLANK;
 				String layoutDescription = StringPool.BLANK;
-				String type = LayoutImpl.TYPE_PORTLET;
+				String type = LayoutConstants.TYPE_PORTLET;
 				boolean hidden = false;
 				String friendlyURL = StringPool.BLANK;
 

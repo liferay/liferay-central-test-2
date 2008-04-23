@@ -27,8 +27,8 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
@@ -113,7 +113,7 @@ public class FindEntryAction extends Action {
 	}
 
 	protected long getPlid(long plid, long entryId) throws Exception {
-		if (plid != LayoutImpl.DEFAULT_PLID) {
+		if (plid != LayoutConstants.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -133,7 +133,7 @@ public class FindEntryAction extends Action {
 		plid = PortalUtil.getPlidFromPortletId(
 			entry.getGroupId(), false, PortletKeys.BLOGS);
 
-		if (plid == LayoutImpl.DEFAULT_PLID) {
+		if (plid == LayoutConstants.DEFAULT_PLID) {
 			throw new NoSuchLayoutException(
 				"No public page was found with the Blogs portlet.");
 		}

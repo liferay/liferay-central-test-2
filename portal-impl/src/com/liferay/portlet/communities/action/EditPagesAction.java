@@ -45,10 +45,10 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -436,7 +436,7 @@ public class EditPagesAction extends PortletAction {
 					groupId, privateLayout, parentLayoutId, localeNamesMap,
 					localeTitlesMap, description, type, hidden, friendlyURL);
 
-				if (type.equals(LayoutImpl.TYPE_PORTLET)) {
+				if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 					LayoutTypePortlet layoutTypePortlet =
 						(LayoutTypePortlet)layout.getLayoutType();
 
@@ -468,7 +468,7 @@ public class EditPagesAction extends PortletAction {
 			Properties formTypeSettingsProperties = getTypeSettingsProperties(
 				req);
 
-			if (type.equals(LayoutImpl.TYPE_PORTLET)) {
+			if (type.equals(LayoutConstants.TYPE_PORTLET)) {
 				if ((copyLayoutId > 0) &&
 					(copyLayoutId != layout.getLayoutId())) {
 
@@ -477,7 +477,7 @@ public class EditPagesAction extends PortletAction {
 							groupId, privateLayout, copyLayoutId);
 
 						if (copyLayout.getType().equals(
-								LayoutImpl.TYPE_PORTLET)) {
+								LayoutConstants.TYPE_PORTLET)) {
 
 							LayoutServiceUtil.updateLayout(
 								groupId, privateLayout, layoutId,

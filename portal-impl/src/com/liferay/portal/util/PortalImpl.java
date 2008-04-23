@@ -52,13 +52,13 @@ import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
 import com.liferay.portal.security.permission.ActionKeys;
@@ -754,7 +754,7 @@ public class PortalImpl implements Portal {
 			return themeDisplay.getPathMain() + PATH_PORTAL_LAYOUT;
 		}
 
-		if (!layout.getType().equals(LayoutImpl.TYPE_URL)) {
+		if (!layout.getType().equals(LayoutConstants.TYPE_URL)) {
 			String layoutFriendlyURL = getLayoutFriendlyURL(
 				layout, themeDisplay);
 
@@ -822,7 +822,8 @@ public class PortalImpl implements Portal {
 
 		if (Validator.isNull(friendlyURL)) {
 			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-				groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				groupId, privateLayout,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() > 0) {
 				layout = layouts.get(0);
@@ -1013,7 +1014,7 @@ public class PortalImpl implements Portal {
 		if ((friendlyURL.charAt(0) != CharPool.SLASH) &&
 			(urlParts.length != 4)) {
 
-			return LayoutImpl.DEFAULT_PLID;
+			return LayoutConstants.DEFAULT_PLID;
 		}
 
 		boolean privateLayout = true;
@@ -1029,7 +1030,7 @@ public class PortalImpl implements Portal {
 			privateLayout = true;
 		}
 		else {
-			return LayoutImpl.DEFAULT_PLID;
+			return LayoutConstants.DEFAULT_PLID;
 		}
 
 		Group group = null;
@@ -1055,13 +1056,13 @@ public class PortalImpl implements Portal {
 			}
 		}
 
-		return LayoutImpl.DEFAULT_PLID;
+		return LayoutConstants.DEFAULT_PLID;
 	}
 
 	public long getPlidFromPortletId(
 		long groupId, boolean privateLayout, String portletId) {
 
-		long plid = LayoutImpl.DEFAULT_PLID;
+		long plid = LayoutConstants.DEFAULT_PLID;
 
 		StringMaker sm = new StringMaker();
 
@@ -1078,7 +1079,7 @@ public class PortalImpl implements Portal {
 		if (plidObj == null) {
 			plid = _getPlidFromPortletId(groupId, privateLayout, portletId);
 
-			if (plid != LayoutImpl.DEFAULT_PLID) {
+			if (plid != LayoutConstants.DEFAULT_PLID) {
 				_plidToPortletIdCache.put(key, plid);
 			}
 		}
@@ -1105,7 +1106,7 @@ public class PortalImpl implements Portal {
 
 				plid = _getPlidFromPortletId(groupId, privateLayout, portletId);
 
-				if (plid != LayoutImpl.DEFAULT_PLID) {
+				if (plid != LayoutConstants.DEFAULT_PLID) {
 					_plidToPortletIdCache.put(key, plid);
 				}
 			}
@@ -2451,11 +2452,11 @@ public class PortalImpl implements Portal {
 	private long _getPlidFromPortletId(
 		long groupId, boolean privateLayout, String portletId) {
 
-		long plid = LayoutImpl.DEFAULT_PLID;
+		long plid = LayoutConstants.DEFAULT_PLID;
 
 		try {
 			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-				groupId, privateLayout, LayoutImpl.TYPE_PORTLET);
+				groupId, privateLayout, LayoutConstants.TYPE_PORTLET);
 
 			for (Layout layout : layouts) {
 				LayoutTypePortlet layoutTypePortlet =

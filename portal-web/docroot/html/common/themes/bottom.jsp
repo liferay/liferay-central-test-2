@@ -136,7 +136,7 @@
 <%
 List portlets = null;
 
-if ((layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 	portlets = layoutTypePortlet.getAllPortlets();
 }
 %>

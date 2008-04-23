@@ -32,8 +32,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -126,7 +126,7 @@ public class UpdatePageAction extends JSONAction {
 		String name = ParamUtil.getString(req, "name", "New Page");
 		String title = StringPool.BLANK;
 		String description = StringPool.BLANK;
-		String type = LayoutImpl.TYPE_PORTLET;
+		String type = LayoutConstants.TYPE_PORTLET;
 		boolean hidden = false;
 		String friendlyURL = StringPool.BLANK;
 
@@ -200,7 +200,7 @@ public class UpdatePageAction extends JSONAction {
 		long layoutId = ParamUtil.getLong(req, "layoutId");
 		long parentPlid = ParamUtil.getLong(req, "parentPlid");
 		long parentLayoutId = ParamUtil.getLong(
-			req, "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+			req, "parentLayoutId", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 		if (plid <= 0) {
 			LayoutServiceUtil.updateParentLayoutId(

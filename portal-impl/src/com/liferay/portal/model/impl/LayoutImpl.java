@@ -25,6 +25,7 @@ package com.liferay.portal.model.impl;
 import com.liferay.portal.LayoutFriendlyURLException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.PropertiesUtil;
@@ -35,6 +36,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutType;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -83,21 +85,6 @@ import org.apache.commons.logging.LogFactory;
  */
 public class LayoutImpl extends LayoutModelImpl implements Layout {
 
-	public static final long DEFAULT_PLID = 0;
-
-	public static final long DEFAULT_PARENT_LAYOUT_ID = 0;
-
-	public static final String[] TYPES =
-		PropsUtil.getArray(PropsUtil.LAYOUT_TYPES);
-
-	public static final String TYPE_PORTLET = "portlet";
-
-	public static final String TYPE_EMBEDDED = "embedded";
-
-	public static final String TYPE_URL = "url";
-
-	public static final String TYPE_ARTICLE = "article";
-
 	public static int validateFriendlyURL(String friendlyURL) {
 		if (friendlyURL.length() < 2) {
 			return LayoutFriendlyURLException.TOO_SHORT;
@@ -119,8 +106,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 
 		for (int i = 0; i < c.length; i++) {
 			if ((!Validator.isChar(c[i])) && (!Validator.isDigit(c[i])) &&
-				(c[i] != '/') && (c[i] != '-') && (c[i] != '_') &&
-				(c[i] != '.')) {
+				(c[i] != CharPool.DASH) && (c[i] != CharPool.PERIOD) &&
+				(c[i] != CharPool.SLASH) && (c[i] != CharPool.UNDERLINE)) {
 
 				return LayoutFriendlyURLException.INVALID_CHARACTERS;
 			}
@@ -290,7 +277,9 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 	}
 
 	public boolean isRootLayout() {
-		if (this.getParentLayoutId() == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		if (this.getParentLayoutId() ==
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
+
 			return true;
 		}
 		else {

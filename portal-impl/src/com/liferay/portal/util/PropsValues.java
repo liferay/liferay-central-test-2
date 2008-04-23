@@ -418,6 +418,9 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.LAYOUT_TEMPLATE_CACHE_ENABLED));
 
+	public static final String[] LAYOUT_TYPES =
+		PropsUtil.getArray(PropsUtil.LAYOUT_TYPES);
+
 	public static final String LDAP_ATTRS_TRANSFORMER_IMPL =
 		PropsUtil.get(PropsUtil.LDAP_ATTRS_TRANSFORMER_IMPL);
 

@@ -25,7 +25,7 @@ package com.liferay.portlet.myplaces.action;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.struts.PortletAction;
@@ -67,17 +67,18 @@ public class EditPagesAction extends PortletAction {
 		Layout layout = null;
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0,
+			1);
 
 		if (layouts.size() > 0) {
 			layout = layouts.get(0);
 		}
 		else {
-			long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+			long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 			String name = "New Page";
 			String title = StringPool.BLANK;
 			String description = StringPool.BLANK;
-			String type = LayoutImpl.TYPE_PORTLET;
+			String type = LayoutConstants.TYPE_PORTLET;
 			boolean hidden = false;
 			String friendlyURL = StringPool.BLANK;
 

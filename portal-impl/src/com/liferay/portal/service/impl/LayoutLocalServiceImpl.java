@@ -53,6 +53,7 @@ import com.liferay.portal.lar.CurrentUserIdStrategy;
 import com.liferay.portal.lar.PortletDataContextImpl;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutReference;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
@@ -338,7 +339,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// Layouts
 
 		List<Layout> layouts = layoutPersistence.findByG_P_P(
-			groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+			groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 		for (Layout layout : layouts) {
 			try {
@@ -483,7 +484,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					permissionsEl, exportUserPermissions);
 			}
 
-			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				LayoutTypePortlet layoutTypePortlet =
 					(LayoutTypePortlet)layout.getLayoutType();
 
@@ -646,7 +647,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
-		if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+		if (!layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 			throw new LayoutImportException(
 				"Layout type " + layout.getType() + " is not valid");
 		}
@@ -780,7 +781,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		return LayoutImpl.DEFAULT_PLID;
+		return LayoutConstants.DEFAULT_PLID;
 	}
 
 	public long getDefaultPlid(long groupId, boolean privateLayout)
@@ -797,7 +798,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		return LayoutImpl.DEFAULT_PLID;
+		return LayoutConstants.DEFAULT_PLID;
 	}
 
 	public long getDefaultPlid(
@@ -809,7 +810,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				groupId, privateLayout);
 
 			for (Layout layout : layouts) {
-				if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+				if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 					LayoutTypePortlet layoutTypePortlet =
 						(LayoutTypePortlet)layout.getLayoutType();
 
@@ -820,7 +821,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
-		return LayoutImpl.DEFAULT_PLID;
+		return LayoutConstants.DEFAULT_PLID;
 	}
 
 	public Layout getDLFolderLayout(long dlFolderId)
@@ -1427,7 +1428,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			return;
 		}
 
-		if (parentLayoutId == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		if (parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 			if (layoutIds.length < 1) {
 				throw new RequiredLayoutException(
 					RequiredLayoutException.AT_LEAST_ONE);
@@ -1436,7 +1437,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Layout layout = layoutPersistence.findByG_P_L(
 				groupId, privateLayout, layoutIds[0]);
 
-			if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+			if (!layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				throw new RequiredLayoutException(
 					RequiredLayoutException.FIRST_LAYOUT_TYPE);
 			}
@@ -1687,7 +1688,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		Layout layout = layoutPersistence.findByPrimaryKey(plid);
 
-		long parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+		long parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 		if (parentPlid > 0) {
 			try {
@@ -2712,7 +2713,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	}
 
 	protected void fixTypeSettings(Layout layout) {
-		if (layout.getType().equals(LayoutImpl.TYPE_URL)) {
+		if (layout.getType().equals(LayoutConstants.TYPE_URL)) {
 			Properties typeSettings = layout.getTypeSettingsProperties();
 
 			String url = GetterUtil.getString(typeSettings.getProperty("url"));
@@ -2816,7 +2817,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			long groupId, boolean privateLayout, long parentLayoutId)
 		throws PortalException, SystemException {
 
-		if (parentLayoutId != LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		if (parentLayoutId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 
 			// Ensure parent layout exists
 
@@ -2825,7 +2826,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 					groupId, privateLayout, parentLayoutId);
 			}
 			catch (NoSuchLayoutException nsfe) {
-				parentLayoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+				parentLayoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 			}
 		}
 
@@ -3644,7 +3645,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		boolean firstLayout = false;
 
-		if (parentLayoutId == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		if (parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 			List<Layout> layouts = layoutPersistence.findByG_P_P(
 				groupId, privateLayout, parentLayoutId, 0, 1);
 
@@ -3679,7 +3680,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 	protected void validateFirstLayout(String type, boolean hidden)
 		throws PortalException {
 
-		if (!type.equals(LayoutImpl.TYPE_PORTLET)) {
+		if (!type.equals(LayoutConstants.TYPE_PORTLET)) {
 			throw new LayoutTypeException(LayoutTypeException.FIRST_LAYOUT);
 		}
 
@@ -3758,7 +3759,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			// Layouts can always be moved to the root level
 
-			if (parentLayoutId == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+			if (parentLayoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 				return;
 			}
 
@@ -3782,11 +3783,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			// If layout is moved, the new first layout must be valid
 
 			if (layout.getParentLayoutId() ==
-					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 
 				List<Layout> layouts = layoutPersistence.findByG_P_P(
 					groupId, privateLayout,
-					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 2);
+					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0, 2);
 
 				// You can only reach this point if there are more than two
 				// layouts at the root level because of the descendant check

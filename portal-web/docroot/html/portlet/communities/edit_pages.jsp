@@ -81,8 +81,8 @@ if (stagingGroup != null) {
 	stagingGroupId = stagingGroup.getGroupId();
 }
 
-long selPlid = ParamUtil.getLong(request, "selPlid", LayoutImpl.DEFAULT_PLID);
-long layoutId = LayoutImpl.DEFAULT_PARENT_LAYOUT_ID;
+long selPlid = ParamUtil.getLong(request, "selPlid", LayoutConstants.DEFAULT_PLID);
+long layoutId = LayoutConstants.DEFAULT_PARENT_LAYOUT_ID;
 
 boolean privateLayout = tabs1.equals("private-pages");
 
@@ -142,7 +142,7 @@ if (tabs2.equals("look-and-feel") || tabs3.equals("look-and-feel")) {
 	}
 }
 
-long parentLayoutId = BeanParamUtil.getLong(selLayout, request, "parentLayoutId", LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+long parentLayoutId = BeanParamUtil.getLong(selLayout, request, "parentLayoutId", LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 Organization organization = null;
 User user2 = null;
@@ -254,7 +254,7 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 			<c:otherwise>
 				if (confirm('<%= UnicodeLanguageUtil.get(pageContext, "are-you-sure-you-want-to-delete-the-selected-page") %>')) {
 					document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "<%= Constants.DELETE %>";
-					document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutImpl.DEFAULT_PLID %>";
+					document.<portlet:namespace />fm.<portlet:namespace />pagesRedirect.value = "<%= portletURL.toString() %>&<portlet:namespace />selPlid=<%= LayoutConstants.DEFAULT_PLID %>";
 					submitForm(document.<portlet:namespace />fm);
 				}
 			</c:otherwise>

@@ -102,7 +102,7 @@ private void _buildNavigation(Layout rootLayout, Layout selLayout, List selBranc
 		layoutChildren = rootLayout.getChildren();
 	}
 	else {
-		layoutChildren = LayoutLocalServiceUtil.getLayouts(selLayout.getGroupId(), selLayout.isPrivateLayout(), LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+		layoutChildren = LayoutLocalServiceUtil.getLayouts(selLayout.getGroupId(), selLayout.isPrivateLayout(), LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 	}
 
 	if (layoutChildren.size() > 0) {

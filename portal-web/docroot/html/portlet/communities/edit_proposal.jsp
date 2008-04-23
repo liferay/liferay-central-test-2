@@ -328,7 +328,7 @@ publishToLiveURL.setParameter("pagesRedirect", redirect);
 publishToLiveURL.setParameter("groupId", String.valueOf(stagingGroupId));
 publishToLiveURL.setParameter("proposalId", String.valueOf(proposal.getProposalId()));
 
-long proposedLayoutPlid = LayoutImpl.DEFAULT_PLID;
+long proposedLayoutPlid = LayoutConstants.DEFAULT_PLID;
 
 Layout proposedLayout = null;
 

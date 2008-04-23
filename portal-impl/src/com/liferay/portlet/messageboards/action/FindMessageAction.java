@@ -25,8 +25,8 @@ package com.liferay.portlet.messageboards.action;
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.util.PortalUtil;
@@ -91,7 +91,7 @@ public class FindMessageAction extends Action {
 	}
 
 	protected long getPlid(long plid, long messageId) throws Exception {
-		if (plid != LayoutImpl.DEFAULT_PLID) {
+		if (plid != LayoutConstants.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -114,7 +114,7 @@ public class FindMessageAction extends Action {
 			message.getCategory().getGroupId(), false,
 			PortletKeys.MESSAGE_BOARDS);
 
-		if (plid == LayoutImpl.DEFAULT_PLID) {
+		if (plid == LayoutConstants.DEFAULT_PLID) {
 			throw new NoSuchLayoutException(
 				"No public page was found with the Message Boards portlet.");
 		}

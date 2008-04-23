@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
-<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET) %>">
+<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 
 	<%
 	PortletURL refererURL = renderResponse.createActionURL();

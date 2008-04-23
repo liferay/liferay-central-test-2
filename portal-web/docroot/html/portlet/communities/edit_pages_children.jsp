@@ -42,7 +42,7 @@ if (selLayout != null) {
 	selLayoutChildren = selLayout.getChildren();
 }
 else {
-	selLayoutChildren = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+	selLayoutChildren = LayoutLocalServiceUtil.getLayouts(groupId, privateLayout, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 }
 
 String tabs4Names = "new-page";
@@ -62,7 +62,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 	url='<%= portletURL.toString() + "&" + renderResponse.getNamespace() + "selPlid=" + selPlid %>'
 />
 
-<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutImpl.DEFAULT_PARENT_LAYOUT_ID %>" />
+<input name="<portlet:namespace />parentLayoutId" type="hidden" value="<%= (selLayout != null) ? selLayout.getLayoutId() : LayoutConstants.DEFAULT_PARENT_LAYOUT_ID %>" />
 <input name="<portlet:namespace />layoutIds" type="hidden" value="" />
 
 <c:choose>
@@ -103,10 +103,10 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 				<select name="<portlet:namespace />type">
 
 					<%
-					for (int i = 0; i < LayoutImpl.TYPES.length; i++) {
+					for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 					%>
 
-						<option <%= type.equals(LayoutImpl.TYPES[i]) ? "selected" : "" %> value="<%= LayoutImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + LayoutImpl.TYPES[i]) %></option>
+						<option <%= type.equals(PropsValues.LAYOUT_TYPES[i]) ? "selected" : "" %> value="<%= PropsValues.LAYOUT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + PropsValues.LAYOUT_TYPES[i]) %></option>
 
 					<%
 					}
@@ -124,7 +124,7 @@ if (!StringUtil.contains(tabs4Names, tabs4)) {
 			</td>
 		</tr>
 
-		<c:if test="<%= (selLayout != null) && selLayout.getType().equals(LayoutImpl.TYPE_PORTLET) %>">
+		<c:if test="<%= (selLayout != null) && selLayout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 			<tr>
 				<td>
 					<liferay-ui:message key="inherit" />

@@ -47,7 +47,7 @@ Iterator itr1 = LayoutLocalServiceUtil.getLayouts(liveGroupId, privateLayout).it
 while (itr1.hasNext()) {
 	Layout curLayout = (Layout)itr1.next();
 
-	if (curLayout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+	if (curLayout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 		LayoutTypePortlet curLayoutTypePortlet = (LayoutTypePortlet)curLayout.getLayoutType();
 
 		Iterator itr2 = curLayoutTypePortlet.getPortletIds().iterator();

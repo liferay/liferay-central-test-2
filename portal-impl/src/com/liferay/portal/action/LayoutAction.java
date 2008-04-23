@@ -35,11 +35,11 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletPreferencesIds;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
@@ -201,7 +201,7 @@ public class LayoutAction extends Action {
 
 	protected void forwardLayout(HttpServletRequest req) throws Exception {
 		Layout layout = (Layout)req.getAttribute(WebKeys.LAYOUT);
-		long plid = LayoutImpl.DEFAULT_PLID;
+		long plid = LayoutConstants.DEFAULT_PLID;
 		String layoutFriendlyURL = null;
 
 		ThemeDisplay themeDisplay =
@@ -593,7 +593,7 @@ public class LayoutAction extends Action {
 					actionResImpl.getRenderParameterMap());
 
 				if (actionResImpl.getEvents().size() > 0) {
-					if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+					if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 						LayoutTypePortlet layoutTypePortlet =
 							(LayoutTypePortlet)layout.getLayoutType();
 

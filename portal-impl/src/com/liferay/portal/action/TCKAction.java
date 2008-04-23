@@ -25,9 +25,9 @@ package com.liferay.portal.action;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.PortletConstants;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
@@ -89,9 +89,10 @@ public class TCKAction extends Action {
 			long groupId = 14;
 
 			Layout layout = LayoutLocalServiceUtil.addLayout(
-				userId, groupId, false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID,
-				"TCKAction", StringPool.BLANK, StringPool.BLANK,
-				LayoutImpl.TYPE_PORTLET, false, StringPool.BLANK);
+				userId, groupId, false,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, "TCKAction",
+				StringPool.BLANK, StringPool.BLANK,
+				LayoutConstants.TYPE_PORTLET, false, StringPool.BLANK);
 
 			LayoutTypePortlet layoutType =
 				(LayoutTypePortlet)layout.getLayoutType();

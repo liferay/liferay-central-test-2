@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.util.PropertiesUtil;
 import com.liferay.portal.kernel.util.SafeProperties;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
@@ -370,7 +371,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		try {
 			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 				getGroupId(), privateLayout,
-				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, 0, 1);
 
 			if (layouts.size() > 0) {
 				Layout layout = layouts.get(0);
@@ -384,7 +385,7 @@ public class GroupImpl extends GroupModelImpl implements Group {
 			}
 		}
 
-		return LayoutImpl.DEFAULT_PLID;
+		return LayoutConstants.DEFAULT_PLID;
 	}
 
 	private static Log _log = LogFactory.getLog(GroupImpl.class);

@@ -28,7 +28,7 @@
 String redirect = ParamUtil.getString(request, "redirect");
 %>
 
-<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(LayoutImpl.TYPE_PORTLET) %>">
+<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
 	<form action="<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=<%= plid %>" method="post" name="layoutTemplates">
 	<input name="doAsUserId" type="hidden" value="<%= themeDisplay.getDoAsUserId() %>" />
 	<input name="<%= Constants.CMD %>" type="hidden" value="template" />
@@ -60,7 +60,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 	String selector2 = StringPool.BLANK;
 
-	if ((layout.getPriority() == 0) && (layout.getParentLayoutId() == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID)) {
+	if ((layout.getPriority() == 0) && (layout.getParentLayoutId() == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID)) {
 		selector2 = "firstLayout";
 	}
 

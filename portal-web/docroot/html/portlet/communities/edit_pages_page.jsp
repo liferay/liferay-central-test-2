@@ -148,10 +148,10 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 				<select name="<portlet:namespace />type">
 
 					<%
-					for (int i = 0; i < LayoutImpl.TYPES.length; i++) {
+					for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 					%>
 
-						<option <%= type.equals(LayoutImpl.TYPES[i]) ? "selected" : "" %> value="<%= LayoutImpl.TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + LayoutImpl.TYPES[i]) %></option>
+						<option <%= type.equals(PropsValues.LAYOUT_TYPES[i]) ? "selected" : "" %> value="<%= PropsValues.LAYOUT_TYPES[i] %>"><%= LanguageUtil.get(pageContext, "layout.types." + PropsValues.LAYOUT_TYPES[i]) %></option>
 
 					<%
 					}

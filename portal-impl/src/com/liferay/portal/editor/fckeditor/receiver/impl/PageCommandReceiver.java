@@ -27,7 +27,7 @@ import com.liferay.portal.editor.fckeditor.exception.FCKException;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
-import com.liferay.portal.model.impl.LayoutImpl;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -132,7 +132,8 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 		Group group = arg.getCurrentGroup();
 
 		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+			group.getGroupId(), false,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 		if (("/" + arg.getCurrentGroupName() + "/").equals(
 				arg.getCurrentFolder())) {
@@ -202,7 +203,8 @@ public class PageCommandReceiver extends BaseCommandReceiver {
 			Group group = arg.getCurrentGroup();
 
 			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-				group.getGroupId(), false, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				group.getGroupId(), false,
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (("/" + arg.getCurrentGroupName() + "/").equals(
 					arg.getCurrentFolder())) {

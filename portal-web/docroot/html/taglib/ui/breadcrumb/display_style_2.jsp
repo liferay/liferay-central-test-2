@@ -41,7 +41,7 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 	StringMaker breadCrumbSM = new StringMaker();
 
 	if (selectedLayout) {
-		if (layoutParentId != LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 			breadCrumbSM.append("<br />");
 			breadCrumbSM.append("<br />");
 		}
@@ -63,7 +63,7 @@ private void _buildBreadcrumb(Layout selLayout, String selLayoutParam, PortletUR
 
 	Layout layoutParent = null;
 
-	if (layoutParentId != LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+	if (layoutParentId != LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 		layoutParent = LayoutLocalServiceUtil.getLayout(selLayout.getGroupId(), selLayout.isPrivateLayout(), layoutParentId);
 
 		_buildBreadcrumb(layoutParent, selLayoutParam, portletURL, themeDisplay, false, sm);

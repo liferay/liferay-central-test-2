@@ -38,6 +38,7 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Organization;
@@ -648,8 +649,8 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		Layout layout = layoutLocalService.addLayout(
 			defaultUserId, group.getGroupId(), false,
-			LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
-			StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false, friendlyURL);
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
+			StringPool.BLANK, LayoutConstants.TYPE_PORTLET, false, friendlyURL);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();
