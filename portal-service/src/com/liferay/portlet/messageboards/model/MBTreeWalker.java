@@ -36,11 +36,11 @@ public interface MBTreeWalker extends Serializable {
 
 	public MBMessage getRoot();
 
-	public List getChildren(MBMessage message);
+	public List<MBMessage> getChildren(MBMessage message);
 
 	public int[] getChildrenRange(MBMessage message);
 
-	public List getMessages();
+	public List<MBMessage> getMessages();
 
 	public boolean isOdd();
 

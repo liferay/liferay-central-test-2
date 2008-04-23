@@ -30,7 +30,8 @@ import java.io.Serializable;
  * @author Brian Wing Shun Chan
  *
  */
-public interface ShoppingCartItem extends Comparable, Serializable {
+public interface ShoppingCartItem
+	extends Comparable<ShoppingCartItem>, Serializable {
 
 	public String getCartItemId();
 

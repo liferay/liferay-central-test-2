@@ -25,7 +25,6 @@ package com.liferay.portal.kernel.deploy.hot;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.Vector;
 
@@ -63,8 +62,8 @@ public class HotDeployUtil {
 			_log.info("Initializing hot deploy manager " + this.hashCode());
 		}
 
-		_listeners = new Vector();
-		_events = new Vector();
+		_listeners = new Vector<HotDeployListener>();
+		_events = new Vector<HotDeployEvent>();
 	}
 
 	private synchronized void _fireDeployEvent(HotDeployEvent event) {
@@ -80,11 +79,7 @@ public class HotDeployUtil {
 
 		// Fire current event
 
-		Iterator itr = _listeners.iterator();
-
-		while (itr.hasNext()) {
-			HotDeployListener listener = (HotDeployListener)itr.next();
-
+		for (HotDeployListener listener : _listeners) {
 			try {
 				listener.invokeDeploy(event);
 			}
@@ -95,11 +90,7 @@ public class HotDeployUtil {
 	}
 
 	private void _fireUndeployEvent(HotDeployEvent event) {
-		Iterator itr = _listeners.iterator();
-
-		while (itr.hasNext()) {
-			HotDeployListener listener = (HotDeployListener)itr.next();
-
+		for (HotDeployListener listener : _listeners) {
 			try {
 				listener.invokeUndeploy(event);
 			}
@@ -110,14 +101,8 @@ public class HotDeployUtil {
 	}
 
 	private synchronized void _flushEvents() {
-		for (int i = 0; i < _events.size(); i++) {
-			HotDeployEvent event = (HotDeployEvent)_events.get(i);
-
-			Iterator itr = _listeners.iterator();
-
-			while (itr.hasNext()) {
-				HotDeployListener listener = (HotDeployListener)itr.next();
-
+		for (HotDeployEvent event : _events) {
+			for (HotDeployListener listener : _listeners) {
 				try {
 					listener.invokeDeploy(event);
 				}
@@ -142,7 +127,7 @@ public class HotDeployUtil {
 
 	private static HotDeployUtil _instance = new HotDeployUtil();
 
-	private List _listeners;
-	private List _events;
+	private List<HotDeployListener> _listeners;
+	private List<HotDeployEvent> _events;
 
 }

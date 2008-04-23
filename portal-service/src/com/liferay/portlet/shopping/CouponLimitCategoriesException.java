@@ -51,14 +51,14 @@ public class CouponLimitCategoriesException extends PortalException {
 		super(cause);
 	}
 
-	public List getCategoryIds() {
+	public List<Long> getCategoryIds() {
 		return _categoryIds;
 	}
 
-	public void setCategoryIds(List categoryIds) {
+	public void setCategoryIds(List<Long> categoryIds) {
 		_categoryIds = categoryIds;
 	}
 
-	private List _categoryIds;
+	private List<Long> _categoryIds;
 
 }

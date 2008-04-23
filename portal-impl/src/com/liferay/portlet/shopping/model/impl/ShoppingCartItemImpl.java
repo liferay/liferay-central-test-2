@@ -67,12 +67,10 @@ public class ShoppingCartItemImpl implements ShoppingCartItem {
 		return getFieldsArray(_fields);
 	}
 
-	public int compareTo(Object obj) {
-		if (obj == null) {
+	public int compareTo(ShoppingCartItem cartItem) {
+		if (cartItem == null) {
 			return -1;
 		}
-
-		ShoppingCartItem cartItem = (ShoppingCartItem)obj;
 
 		int value = getItem().compareTo(cartItem.getItem());
 

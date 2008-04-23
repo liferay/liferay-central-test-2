@@ -43,7 +43,7 @@ public class AutoDeployUtil {
 	}
 
 	private AutoDeployUtil() {
-		_dirs = new HashMap();
+		_dirs = new HashMap<String, AutoDeployDir>();
 	}
 
 	private void _registerDir(AutoDeployDir dir) {
@@ -53,7 +53,7 @@ public class AutoDeployUtil {
 	}
 
 	private void _unregisterDir(String name) {
-		AutoDeployDir dir = (AutoDeployDir)_dirs.remove(name);
+		AutoDeployDir dir = _dirs.remove(name);
 
 		if (dir != null) {
 			dir.stop();
@@ -62,6 +62,6 @@ public class AutoDeployUtil {
 
 	private static AutoDeployUtil _instance = new AutoDeployUtil();
 
-	private Map _dirs;
+	private Map<String, AutoDeployDir> _dirs;
 
 }

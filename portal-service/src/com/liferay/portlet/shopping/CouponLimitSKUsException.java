@@ -50,14 +50,14 @@ public class CouponLimitSKUsException extends PortalException {
 		super(cause);
 	}
 
-	public List getSkus() {
+	public List<String> getSkus() {
 		return _skus;
 	}
 
-	public void setSkus(List skus) {
+	public void setSkus(List<String> skus) {
 		_skus = skus;
 	}
 
-	private List _skus;
+	private List<String> _skus;
 
 }

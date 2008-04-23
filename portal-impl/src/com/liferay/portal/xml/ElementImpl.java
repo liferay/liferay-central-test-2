@@ -50,7 +50,7 @@ public class ElementImpl implements Element {
 		return _el.getText();
 	}
 
-	public List elements() {
+	public List<Element> elements() {
 		return _el.elements();
 	}
 
