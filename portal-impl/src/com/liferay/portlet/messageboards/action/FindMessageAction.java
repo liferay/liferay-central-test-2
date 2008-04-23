@@ -29,12 +29,11 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.service.MBMessageLocalServiceUtil;
-
-import java.util.List;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -92,7 +91,7 @@ public class FindMessageAction extends Action {
 	}
 
 	protected long getPlid(long plid, long messageId) throws Exception {
-		if (plid != 0) {
+		if (plid != LayoutImpl.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -111,27 +110,17 @@ public class FindMessageAction extends Action {
 
 		MBMessage message = MBMessageLocalServiceUtil.getMessage(messageId);
 
-		long groupId = message.getCategory().getGroupId();
-		boolean privateLayout = false;
+		plid = PortalUtil.getPlidFromPortletId(
+			message.getCategory().getGroupId(), false,
+			PortletKeys.MESSAGE_BOARDS);
 
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout);
-
-		for (Layout layout : layouts) {
-			if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
-				continue;
-			}
-
-			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet)layout.getLayoutType();
-
-			if (layoutTypePortlet.hasPortletId(PortletKeys.MESSAGE_BOARDS)) {
-				return layout.getPlid();
-			}
+		if (plid == LayoutImpl.DEFAULT_PLID) {
+			throw new NoSuchLayoutException(
+				"No public page was found with the Message Boards portlet.");
 		}
-
-		throw new NoSuchLayoutException(
-			"No public page was found with the Blogs portlet.");
+		else {
+			return plid;
+		}
 	}
 
 }

@@ -31,12 +31,11 @@ import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.service.BlogsEntryLocalServiceUtil;
-
-import java.util.List;
 
 import javax.portlet.PortletMode;
 import javax.portlet.PortletRequest;
@@ -114,7 +113,7 @@ public class FindEntryAction extends Action {
 	}
 
 	protected long getPlid(long plid, long entryId) throws Exception {
-		if (plid != 0) {
+		if (plid != LayoutImpl.DEFAULT_PLID) {
 			try {
 				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
 
@@ -131,27 +130,16 @@ public class FindEntryAction extends Action {
 
 		BlogsEntry entry = BlogsEntryLocalServiceUtil.getEntry(entryId);
 
-		long groupId = entry.getGroupId();
-		boolean privateLayout = false;
+		plid = PortalUtil.getPlidFromPortletId(
+			entry.getGroupId(), false, PortletKeys.BLOGS);
 
-		List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
-			groupId, privateLayout);
-
-		for (Layout layout : layouts) {
-			if (!layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
-				continue;
-			}
-
-			LayoutTypePortlet layoutTypePortlet =
-				(LayoutTypePortlet)layout.getLayoutType();
-
-			if (layoutTypePortlet.hasPortletId(PortletKeys.BLOGS)) {
-				return layout.getPlid();
-			}
+		if (plid == LayoutImpl.DEFAULT_PLID) {
+			throw new NoSuchLayoutException(
+				"No public page was found with the Blogs portlet.");
 		}
-
-		throw new NoSuchLayoutException(
-			"No public page was found with the Blogs portlet.");
+		else {
+			return plid;
+		}
 	}
 
 	protected String getUrlTitle(long entryId) {

@@ -318,6 +318,55 @@ public class LayoutUtil {
 		return getPersistence().fetchByG_P_F(groupId, privateLayout, friendlyURL);
 	}
 
+	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
+		long groupId, boolean privateLayout, java.lang.String type)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByG_P_T(groupId, privateLayout, type);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
+		long groupId, boolean privateLayout, java.lang.String type, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByG_P_T(groupId, privateLayout, type, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Layout> findByG_P_T(
+		long groupId, boolean privateLayout, java.lang.String type, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByG_P_T(groupId, privateLayout, type, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.Layout findByG_P_T_First(
+		long groupId, boolean privateLayout, java.lang.String type,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.NoSuchLayoutException {
+		return getPersistence()
+				   .findByG_P_T_First(groupId, privateLayout, type, obc);
+	}
+
+	public static com.liferay.portal.model.Layout findByG_P_T_Last(
+		long groupId, boolean privateLayout, java.lang.String type,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.NoSuchLayoutException {
+		return getPersistence()
+				   .findByG_P_T_Last(groupId, privateLayout, type, obc);
+	}
+
+	public static com.liferay.portal.model.Layout[] findByG_P_T_PrevAndNext(
+		long plid, long groupId, boolean privateLayout, java.lang.String type,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.NoSuchLayoutException {
+		return getPersistence()
+				   .findByG_P_T_PrevAndNext(plid, groupId, privateLayout, type,
+			obc);
+	}
+
 	public static java.util.List<com.liferay.portal.model.Layout> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -393,6 +442,11 @@ public class LayoutUtil {
 		getPersistence().removeByG_P_F(groupId, privateLayout, friendlyURL);
 	}
 
+	public static void removeByG_P_T(long groupId, boolean privateLayout,
+		java.lang.String type) throws com.liferay.portal.SystemException {
+		getPersistence().removeByG_P_T(groupId, privateLayout, type);
+	}
+
 	public static void removeAll() throws com.liferay.portal.SystemException {
 		getPersistence().removeAll();
 	}
@@ -436,6 +490,11 @@ public class LayoutUtil {
 	public static int countByG_P_F(long groupId, boolean privateLayout,
 		java.lang.String friendlyURL) throws com.liferay.portal.SystemException {
 		return getPersistence().countByG_P_F(groupId, privateLayout, friendlyURL);
+	}
+
+	public static int countByG_P_T(long groupId, boolean privateLayout,
+		java.lang.String type) throws com.liferay.portal.SystemException {
+		return getPersistence().countByG_P_T(groupId, privateLayout, type);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

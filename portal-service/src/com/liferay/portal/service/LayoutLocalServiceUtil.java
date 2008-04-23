@@ -297,6 +297,14 @@ public class LayoutLocalServiceUtil {
 	}
 
 	public static java.util.List<com.liferay.portal.model.Layout> getLayouts(
+		long groupId, boolean privateLayout, java.lang.String type)
+		throws com.liferay.portal.SystemException {
+		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();
+
+		return layoutLocalService.getLayouts(groupId, privateLayout, type);
+	}
+
+	public static java.util.List<com.liferay.portal.model.Layout> getLayouts(
 		long groupId, boolean privateLayout, long parentLayoutId, int begin,
 		int end) throws com.liferay.portal.SystemException {
 		LayoutLocalService layoutLocalService = LayoutLocalServiceFactory.getService();

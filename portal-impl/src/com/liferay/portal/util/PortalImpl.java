@@ -112,6 +112,7 @@ import java.util.Properties;
 import java.util.ResourceBundle;
 import java.util.Set;
 import java.util.TimeZone;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -1055,6 +1056,62 @@ public class PortalImpl implements Portal {
 		}
 
 		return LayoutImpl.DEFAULT_PLID;
+	}
+
+	public long getPlidFromPortletId(
+		long groupId, boolean privateLayout, String portletId) {
+
+		long plid = LayoutImpl.DEFAULT_PLID;
+
+		StringMaker sm = new StringMaker();
+
+		sm.append(groupId);
+		sm.append(StringPool.SPACE);
+		sm.append(privateLayout);
+		sm.append(StringPool.SPACE);
+		sm.append(portletId);
+
+		String key = sm.toString();
+
+		Long plidObj = _plidToPortletIdCache.get(key);
+
+		if (plidObj == null) {
+			plid = _getPlidFromPortletId(groupId, privateLayout, portletId);
+
+			if (plid != LayoutImpl.DEFAULT_PLID) {
+				_plidToPortletIdCache.put(key, plid);
+			}
+		}
+		else {
+			plid = plidObj.longValue();
+
+			boolean validPlid = false;
+
+			try {
+				Layout layout = LayoutLocalServiceUtil.getLayout(plid);
+
+				LayoutTypePortlet layoutTypePortlet =
+					(LayoutTypePortlet)layout.getLayoutType();
+
+				if (layoutTypePortlet.hasPortletId(portletId)) {
+					validPlid = true;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			if (!validPlid) {
+				_plidToPortletIdCache.remove(key);
+
+				plid = _getPlidFromPortletId(groupId, privateLayout, portletId);
+
+				if (plid != LayoutImpl.DEFAULT_PLID) {
+					_plidToPortletIdCache.put(key, plid);
+				}
+			}
+		}
+
+		return plid;
 	}
 
 	public String getPortalLibDir() {
@@ -2391,6 +2448,35 @@ public class PortalImpl implements Portal {
 		return sm.toString();
 	}
 
+	private long _getPlidFromPortletId(
+		long groupId, boolean privateLayout, String portletId) {
+
+		long plid = LayoutImpl.DEFAULT_PLID;
+
+		try {
+			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
+				groupId, privateLayout, LayoutImpl.TYPE_PORTLET);
+
+			for (Layout layout : layouts) {
+				LayoutTypePortlet layoutTypePortlet =
+					(LayoutTypePortlet)layout.getLayoutType();
+
+				if (layoutTypePortlet.hasPortletId(portletId)) {
+					plid = layout.getPlid();
+
+					break;
+				}
+			}
+		}
+		catch (SystemException se) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(se.getMessage());
+			}
+		}
+
+		return plid;
+	}
+
 	private static final String _JSESSIONID = ";jsessionid=";
 
 	private static final String _METHOD_GET = "get";
@@ -2418,5 +2504,7 @@ public class PortalImpl implements Portal {
 	private String[] _sortedSystemOrganizationRoles;
 	private String[] _sortedSystemRoles;
 	private Set<String> _reservedParams;
+	private Map<String, Long> _plidToPortletIdCache =
+		new ConcurrentHashMap<String, Long>();
 
 }

@@ -211,6 +211,9 @@ public interface Portal {
 
 	public long getPlidFromFriendlyURL(long companyId, String friendlyURL);
 
+	public long getPlidFromPortletId(
+		long groupId, boolean privateLayout, String portletId);
+
 	public String getPortalLibDir();
 
 	public int getPortalPort();

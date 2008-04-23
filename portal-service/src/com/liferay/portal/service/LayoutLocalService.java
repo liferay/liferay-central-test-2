@@ -175,6 +175,10 @@ public interface LayoutLocalService {
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
+		long groupId, boolean privateLayout, java.lang.String type)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.Layout> getLayouts(
 		long groupId, boolean privateLayout, long parentLayoutId, int begin,
 		int end) throws com.liferay.portal.SystemException;
 

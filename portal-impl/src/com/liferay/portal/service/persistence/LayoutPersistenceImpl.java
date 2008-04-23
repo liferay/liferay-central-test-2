@@ -1743,6 +1743,329 @@ public class LayoutPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
+		String type) throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
+		String finderClassName = Layout.class.getName();
+		String finderMethodName = "findByG_P_T";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				String.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), Boolean.valueOf(privateLayout),
+				
+				type
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("privateLayout = ?");
+
+				query.append(" AND ");
+
+				if (type == null) {
+					query.append("type_ IS NULL");
+				}
+				else {
+					query.append("type_ = ?");
+				}
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("parentLayoutId ASC, ");
+				query.append("priority ASC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setBoolean(queryPos++, privateLayout);
+
+				if (type != null) {
+					q.setString(queryPos++, type);
+				}
+
+				List<Layout> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<Layout>)result;
+		}
+	}
+
+	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
+		String type, int begin, int end) throws SystemException {
+		return findByG_P_T(groupId, privateLayout, type, begin, end, null);
+	}
+
+	public List<Layout> findByG_P_T(long groupId, boolean privateLayout,
+		String type, int begin, int end, OrderByComparator obc)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
+		String finderClassName = Layout.class.getName();
+		String finderMethodName = "findByG_P_T";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), Boolean.valueOf(privateLayout),
+				
+				type,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("privateLayout = ?");
+
+				query.append(" AND ");
+
+				if (type == null) {
+					query.append("type_ IS NULL");
+				}
+				else {
+					query.append("type_ = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("parentLayoutId ASC, ");
+					query.append("priority ASC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setBoolean(queryPos++, privateLayout);
+
+				if (type != null) {
+					q.setString(queryPos++, type);
+				}
+
+				List<Layout> list = (List<Layout>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<Layout>)result;
+		}
+	}
+
+	public Layout findByG_P_T_First(long groupId, boolean privateLayout,
+		String type, OrderByComparator obc)
+		throws NoSuchLayoutException, SystemException {
+		List<Layout> list = findByG_P_T(groupId, privateLayout, type, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No Layout exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("privateLayout=" + privateLayout);
+
+			msg.append(", ");
+			msg.append("type=" + type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchLayoutException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public Layout findByG_P_T_Last(long groupId, boolean privateLayout,
+		String type, OrderByComparator obc)
+		throws NoSuchLayoutException, SystemException {
+		int count = countByG_P_T(groupId, privateLayout, type);
+
+		List<Layout> list = findByG_P_T(groupId, privateLayout, type,
+				count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No Layout exists with the key {");
+
+			msg.append("groupId=" + groupId);
+
+			msg.append(", ");
+			msg.append("privateLayout=" + privateLayout);
+
+			msg.append(", ");
+			msg.append("type=" + type);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchLayoutException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public Layout[] findByG_P_T_PrevAndNext(long plid, long groupId,
+		boolean privateLayout, String type, OrderByComparator obc)
+		throws NoSuchLayoutException, SystemException {
+		Layout layout = findByPrimaryKey(plid);
+
+		int count = countByG_P_T(groupId, privateLayout, type);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append("FROM com.liferay.portal.model.Layout WHERE ");
+
+			query.append("groupId = ?");
+
+			query.append(" AND ");
+
+			query.append("privateLayout = ?");
+
+			query.append(" AND ");
+
+			if (type == null) {
+				query.append("type_ IS NULL");
+			}
+			else {
+				query.append("type_ = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("parentLayoutId ASC, ");
+				query.append("priority ASC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, groupId);
+
+			q.setBoolean(queryPos++, privateLayout);
+
+			if (type != null) {
+				q.setString(queryPos++, type);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
+
+			Layout[] array = new LayoutImpl[3];
+
+			array[0] = (Layout)objArray[0];
+			array[1] = (Layout)objArray[1];
+			array[2] = (Layout)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<Layout> findWithDynamicQuery(
 		DynamicQueryInitializer queryInitializer) throws SystemException {
 		Session session = null;
@@ -1913,6 +2236,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 		Layout layout = findByG_P_F(groupId, privateLayout, friendlyURL);
 
 		remove(layout);
+	}
+
+	public void removeByG_P_T(long groupId, boolean privateLayout, String type)
+		throws SystemException {
+		for (Layout layout : findByG_P_T(groupId, privateLayout, type)) {
+			remove(layout);
+		}
 	}
 
 	public void removeAll() throws SystemException {
@@ -2485,6 +2815,98 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				if (friendlyURL != null) {
 					q.setString(queryPos++, friendlyURL);
+				}
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByG_P_T(long groupId, boolean privateLayout, String type)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = LayoutModelImpl.CACHE_ENABLED;
+		String finderClassName = Layout.class.getName();
+		String finderMethodName = "countByG_P_T";
+		String[] finderParams = new String[] {
+				Long.class.getName(), Boolean.class.getName(),
+				String.class.getName()
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(groupId), Boolean.valueOf(privateLayout),
+				
+				type
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.Layout WHERE ");
+
+				query.append("groupId = ?");
+
+				query.append(" AND ");
+
+				query.append("privateLayout = ?");
+
+				query.append(" AND ");
+
+				if (type == null) {
+					query.append("type_ IS NULL");
+				}
+				else {
+					query.append("type_ = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, groupId);
+
+				q.setBoolean(queryPos++, privateLayout);
+
+				if (type != null) {
+					q.setString(queryPos++, type);
 				}
 
 				Long count = null;
