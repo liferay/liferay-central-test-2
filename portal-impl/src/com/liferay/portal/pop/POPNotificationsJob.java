@@ -62,27 +62,15 @@ public class POPNotificationsJob implements IntervalJob {
 	public void execute(JobExecutionContext context)
 		throws JobExecutionException {
 
-		if (!_executing) {
-			try {
-				_executing = true;
+		try {
+			if (_log.isDebugEnabled()) {
+				_log.debug("Executing");
 
-				if (_log.isDebugEnabled()) {
-					_log.debug("Executing");
-
-					pollPopServer();
-				}
-			}
-			catch (Exception e) {
-				_log.error(e, e);
-			}
-			finally {
-				_executing = false;
+				pollPopServer();
 			}
 		}
-		else {
-			if (_log.isDebugEnabled()) {
-				_log.debug("Not executing");
-			}
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
 
@@ -202,7 +190,6 @@ public class POPNotificationsJob implements IntervalJob {
 
 	private static Log _log = LogFactory.getLog(POPNotificationsJob.class);
 
-	private boolean _executing;
 	private Store _store;
 	private Folder _inboxFolder;
 
