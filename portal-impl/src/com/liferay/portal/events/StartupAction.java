@@ -96,7 +96,8 @@ public class StartupAction extends SimpleAction {
 
 			props.setProperty(
 				RuntimeConstants.RESOURCE_MANAGER_CACHE_CLASS,
-				PropsUtil.get(PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
+				PropsUtil.get(
+					PropsUtil.VELOCITY_ENGINE_RESOURCE_MANAGER_CACHE));
 
 			props.setProperty(
 				"velocimacro.library",
