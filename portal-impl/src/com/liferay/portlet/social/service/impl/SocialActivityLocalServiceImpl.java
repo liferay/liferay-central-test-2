@@ -89,6 +89,12 @@ public class SocialActivityLocalServiceImpl
 		socialActivityPersistence.removeByC_C(classNameId, classPK);
 	}
 
+	public void deleteActivity(long activityId)
+		throws PortalException, SystemException {
+
+		socialActivityPersistence.remove(activityId);
+	}
+
 	public void deleteUserActivities(long userId) throws SystemException {
 		List<SocialActivity> activities = socialActivityFinder.findByU_R(
 			userId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -98,18 +104,21 @@ public class SocialActivityLocalServiceImpl
 		}
 	}
 
-	public List<SocialActivity> getActivities(String className, long classPK)
+	public List<SocialActivity> getActivities(
+			String className, int begin, int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getActivities(classNameId, classPK);
+		return getActivities(classNameId, begin, end);
 	}
 
-	public List<SocialActivity> getActivities(long classNameId, long classPK)
+	public List<SocialActivity> getActivities(
+			long classNameId, int begin, int end)
 		throws SystemException {
 
-		return socialActivityPersistence.findByC_C(classNameId, classPK);
+		return socialActivityPersistence.findByClassNameId(
+			classNameId, begin, end);
 	}
 
 	public List<SocialActivity> getActivities(
@@ -127,6 +136,31 @@ public class SocialActivityLocalServiceImpl
 
 		return socialActivityPersistence.findByC_C(
 			classNameId, classPK, begin, end);
+	}
+
+	public int getActivitiesCount(String className) throws SystemException {
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getActivitiesCount(classNameId);
+	}
+
+	public int getActivitiesCount(long classNameId) throws SystemException {
+		return socialActivityPersistence.countByClassNameId(classNameId);
+	}
+
+	public int getActivitiesCount(String className, long classPK)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getActivitiesCount(classNameId, classPK);
+	}
+
+	public int getActivitiesCount(long classNameId, long classPK)
+		throws SystemException {
+
+		return socialActivityPersistence.countByC_C(
+			classNameId, classPK);
 	}
 
 	public List<SocialActivity> getCompanyActivities(

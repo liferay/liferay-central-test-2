@@ -996,6 +996,248 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List<SocialActivity> findByClassNameId(long classNameId)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = SocialActivityModelImpl.CACHE_ENABLED;
+		String finderClassName = SocialActivity.class.getName();
+		String finderMethodName = "findByClassNameId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(classNameId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.social.model.SocialActivity WHERE ");
+
+				query.append("classNameId = ?");
+
+				query.append(" ");
+
+				query.append("ORDER BY ");
+
+				query.append("createDate DESC");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, classNameId);
+
+				List<SocialActivity> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<SocialActivity>)result;
+		}
+	}
+
+	public List<SocialActivity> findByClassNameId(long classNameId, int begin,
+		int end) throws SystemException {
+		return findByClassNameId(classNameId, begin, end, null);
+	}
+
+	public List<SocialActivity> findByClassNameId(long classNameId, int begin,
+		int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = SocialActivityModelImpl.CACHE_ENABLED;
+		String finderClassName = SocialActivity.class.getName();
+		String finderMethodName = "findByClassNameId";
+		String[] finderParams = new String[] {
+				Long.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				new Long(classNameId),
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append(
+					"FROM com.liferay.portlet.social.model.SocialActivity WHERE ");
+
+				query.append("classNameId = ?");
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				else {
+					query.append("ORDER BY ");
+
+					query.append("createDate DESC");
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, classNameId);
+
+				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
+						getDialect(), begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<SocialActivity>)result;
+		}
+	}
+
+	public SocialActivity findByClassNameId_First(long classNameId,
+		OrderByComparator obc) throws NoSuchActivityException, SystemException {
+		List<SocialActivity> list = findByClassNameId(classNameId, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No SocialActivity exists with the key {");
+
+			msg.append("classNameId=" + classNameId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchActivityException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialActivity findByClassNameId_Last(long classNameId,
+		OrderByComparator obc) throws NoSuchActivityException, SystemException {
+		int count = countByClassNameId(classNameId);
+
+		List<SocialActivity> list = findByClassNameId(classNameId, count - 1,
+				count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No SocialActivity exists with the key {");
+
+			msg.append("classNameId=" + classNameId);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchActivityException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public SocialActivity[] findByClassNameId_PrevAndNext(long activityId,
+		long classNameId, OrderByComparator obc)
+		throws NoSuchActivityException, SystemException {
+		SocialActivity socialActivity = findByPrimaryKey(activityId);
+
+		int count = countByClassNameId(classNameId);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append(
+				"FROM com.liferay.portlet.social.model.SocialActivity WHERE ");
+
+			query.append("classNameId = ?");
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			else {
+				query.append("ORDER BY ");
+
+				query.append("createDate DESC");
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			int queryPos = 0;
+
+			q.setLong(queryPos++, classNameId);
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
+					socialActivity);
+
+			SocialActivity[] array = new SocialActivityImpl[3];
+
+			array[0] = (SocialActivity)objArray[0];
+			array[1] = (SocialActivity)objArray[1];
+			array[2] = (SocialActivity)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public List<SocialActivity> findByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		boolean finderClassNameCacheEnabled = SocialActivityModelImpl.CACHE_ENABLED;
@@ -1646,6 +1888,12 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public void removeByClassNameId(long classNameId) throws SystemException {
+		for (SocialActivity socialActivity : findByClassNameId(classNameId)) {
+			remove(socialActivity);
+		}
+	}
+
 	public void removeByReceiverUserId(long receiverUserId)
 		throws SystemException {
 		for (SocialActivity socialActivity : findByReceiverUserId(
@@ -1834,6 +2082,72 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 				int queryPos = 0;
 
 				q.setLong(queryPos++, userId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByClassNameId(long classNameId) throws SystemException {
+		boolean finderClassNameCacheEnabled = SocialActivityModelImpl.CACHE_ENABLED;
+		String finderClassName = SocialActivity.class.getName();
+		String finderMethodName = "countByClassNameId";
+		String[] finderParams = new String[] { Long.class.getName() };
+		Object[] finderArgs = new Object[] { new Long(classNameId) };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append(
+					"FROM com.liferay.portlet.social.model.SocialActivity WHERE ");
+
+				query.append("classNameId = ?");
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				int queryPos = 0;
+
+				q.setLong(queryPos++, classNameId);
 
 				Long count = null;
 

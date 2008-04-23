@@ -86,15 +86,19 @@ public interface SocialActivityLocalService {
 	public void deleteActivities(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
+	public void deleteActivity(long activityId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteUserActivities(long userId)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
-		java.lang.String className, long classPK)
+		java.lang.String className, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
-		long classNameId, long classPK)
+		long classNameId, int begin, int end)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
@@ -103,6 +107,18 @@ public interface SocialActivityLocalService {
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getActivities(
 		long classNameId, long classPK, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public int getActivitiesCount(java.lang.String className)
+		throws com.liferay.portal.SystemException;
+
+	public int getActivitiesCount(long classNameId)
+		throws com.liferay.portal.SystemException;
+
+	public int getActivitiesCount(java.lang.String className, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public int getActivitiesCount(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> getCompanyActivities(

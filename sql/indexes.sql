@@ -355,6 +355,7 @@ create index IX_D7D6E87A on ShoppingOrder (number_);
 
 create index IX_B5F82C7A on ShoppingOrderItem (orderId);
 
+create index IX_82E39A0C on SocialActivity (classNameId);
 create index IX_A853C757 on SocialActivity (classNameId, classPK);
 create index IX_64B1BC66 on SocialActivity (companyId);
 create index IX_2A2468 on SocialActivity (groupId);

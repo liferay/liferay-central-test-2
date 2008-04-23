@@ -161,6 +161,34 @@ public interface SocialActivityPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
 
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
+		long classNameId) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
+		long classNameId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
+		long classNameId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.social.model.SocialActivity findByClassNameId_First(
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
+	public com.liferay.portlet.social.model.SocialActivity findByClassNameId_Last(
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
+	public com.liferay.portlet.social.model.SocialActivity[] findByClassNameId_PrevAndNext(
+		long activityId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByReceiverUserId(
 		long receiverUserId) throws com.liferay.portal.SystemException;
 
@@ -249,6 +277,9 @@ public interface SocialActivityPersistence {
 	public void removeByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByClassNameId(long classNameId)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByReceiverUserId(long receiverUserId)
 		throws com.liferay.portal.SystemException;
 
@@ -264,6 +295,9 @@ public interface SocialActivityPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByUserId(long userId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException;
 
 	public int countByReceiverUserId(long receiverUserId)

@@ -215,6 +215,47 @@ public class SocialActivityUtil {
 		return getPersistence().findByUserId_PrevAndNext(activityId, userId, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
+		long classNameId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByClassNameId(classNameId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
+		long classNameId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByClassNameId(classNameId, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
+		long classNameId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByClassNameId(classNameId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivity findByClassNameId_First(
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException {
+		return getPersistence().findByClassNameId_First(classNameId, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivity findByClassNameId_Last(
+		long classNameId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException {
+		return getPersistence().findByClassNameId_Last(classNameId, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivity[] findByClassNameId_PrevAndNext(
+		long activityId, long classNameId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException {
+		return getPersistence()
+				   .findByClassNameId_PrevAndNext(activityId, classNameId, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByReceiverUserId(
 		long receiverUserId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByReceiverUserId(receiverUserId);
@@ -348,6 +389,11 @@ public class SocialActivityUtil {
 		getPersistence().removeByUserId(userId);
 	}
 
+	public static void removeByClassNameId(long classNameId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByClassNameId(classNameId);
+	}
+
 	public static void removeByReceiverUserId(long receiverUserId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByReceiverUserId(receiverUserId);
@@ -375,6 +421,11 @@ public class SocialActivityUtil {
 	public static int countByUserId(long userId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByUserId(userId);
+	}
+
+	public static int countByClassNameId(long classNameId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByClassNameId(classNameId);
 	}
 
 	public static int countByReceiverUserId(long receiverUserId)
