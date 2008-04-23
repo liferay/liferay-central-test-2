@@ -63,7 +63,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/announcements/edit_entry" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveEntry(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />entryId" type="hidden" value="<%= entryId %>" />
 <input name="<portlet:namespace />alert" type="hidden" value="<%= portletName.equals(PortletKeys.ALERTS) %>" />
 
@@ -331,7 +331,7 @@ int priority = BeanParamUtil.getInteger(entry, request, "priority");
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 

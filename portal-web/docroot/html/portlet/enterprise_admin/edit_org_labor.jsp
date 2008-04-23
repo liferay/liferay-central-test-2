@@ -60,7 +60,7 @@ DateFormat timeFormat = new SimpleDateFormat("HH:mm", locale);
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_org_labor" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveOrgLabor(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />orgLaborId" type="hidden" value="<%= orgLaborId %>" />
 <input name="<portlet:namespace />organizationId" type="hidden" value="<%= organizationId %>" />
 
@@ -225,7 +225,7 @@ for (int i = 0; i < days.length; i++) {
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 

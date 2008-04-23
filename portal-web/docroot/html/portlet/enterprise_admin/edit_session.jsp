@@ -37,7 +37,7 @@ userTracker = userTracker.toEscapedModel();
 %>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_session" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />sessionId" type="hidden" value="<%= sessionId %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
@@ -52,7 +52,7 @@ userTracker = userTracker.toEscapedModel();
 
 		<br /><br />
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 	</c:when>
 	<c:otherwise>
 
@@ -265,7 +265,7 @@ userTracker = userTracker.toEscapedModel();
 			<input type="submit" value="<liferay-ui:message key="kill-session" />" />
 		</c:if>
 
-		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+		<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 	</c:otherwise>
 </c:choose>
 

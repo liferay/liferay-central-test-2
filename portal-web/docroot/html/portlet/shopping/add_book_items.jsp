@@ -31,7 +31,7 @@ long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryImpl.
 %>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/shopping/add_book_items" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="alert('<%= UnicodeLanguageUtil.get(pageContext, "please-be-patient") %>'); submitForm(this); return false;">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />categoryId" type="hidden" value="<%= categoryId %>" />
 
 <liferay-util:include page="/html/portlet/shopping/tabs1.jsp">
@@ -52,7 +52,7 @@ long categoryId = ParamUtil.getLong(request, "categoryId", ShoppingCategoryImpl.
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 

@@ -93,8 +93,8 @@ if (role != null) {
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 <input name="<portlet:namespace />roleId" type="hidden" value="<%= roleId %>" />
 

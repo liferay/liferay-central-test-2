@@ -97,11 +97,11 @@ request.setAttribute("edit_user.jsp-user2", user2);
 
 <form method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-<input name="<portlet:namespace />tabs3" type="hidden" value="<%= tabs3 %>" />
-<input name="<portlet:namespace />tabs4" type="hidden" value="<%= tabs4 %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
+<input name="<portlet:namespace />tabs3" type="hidden" value="<%= HtmlUtil.escape(tabs3) %>" />
+<input name="<portlet:namespace />tabs4" type="hidden" value="<%= HtmlUtil.escape(tabs4) %>" />
 <input name="<portlet:namespace />redirect" type="hidden" value="" />
-<input name="<portlet:namespace />backURL" type="hidden" value="<%= backURL %>" />
+<input name="<portlet:namespace />backURL" type="hidden" value="<%= HtmlUtil.escape(backURL) %>" />
 <input name="<portlet:namespace />p_u_i_d" type="hidden" value='<%= (user2 != null) ? user2.getUserId() : 0 %>' />
 
 <c:if test="<%= portletName.equals(PortletKeys.DIRECTORY) || portletName.equals(PortletKeys.ENTERPRISE_ADMIN) || portletName.equals(PortletKeys.ORGANIZATION_ADMIN) %>">

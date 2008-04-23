@@ -93,8 +93,8 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveConfiguration(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.UPDATE %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
 <liferay-ui:tabs
 	names="email-from,article-approval-denied-email,article-approval-granted-email,article-approval-requested-email,article-review-email"
@@ -299,7 +299,7 @@ String emailArticleReviewBody = ParamUtil.getString(request, "emailArticleReview
 
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 

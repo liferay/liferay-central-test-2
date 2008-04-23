@@ -83,8 +83,8 @@ portletURL.setParameter("groupId", String.valueOf(group.getGroupId()));
 
 <form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs1" type="hidden" value="<%= tabs1 %>" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
+<input name="<portlet:namespace />tabs1" type="hidden" value="<%= HtmlUtil.escape(tabs1) %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
 <input name="<portlet:namespace />assignmentsRedirect" type="hidden" value="" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
 

@@ -105,7 +105,7 @@ portletURL.setParameter("proposalId", String.valueOf(proposalId));
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/communities/edit_proposal" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm1" onSubmit="<portlet:namespace />saveProposal(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 <input name="<portlet:namespace />proposalId" type="hidden" value="<%= proposalId %>" />
 
@@ -381,7 +381,7 @@ else if (className.equals(Portlet.class.getName())) {
 	</c:when>
 </c:choose>
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 

@@ -175,7 +175,7 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 
 		<c:if test="<%= Validator.isNotNull(backURL) %>">
 			<li class="toggle">
-				<a href="<%= backURL %>">&laquo; <liferay-ui:message key="back" /></a>
+				<a href="<%= HtmlUtil.escape(backURL) %>">&laquo; <liferay-ui:message key="back" /></a>
 			</li>
 		</c:if>
 	</ul>

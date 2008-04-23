@@ -46,7 +46,7 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 </div>
 
 <form action="<portlet:actionURL><portlet:param name="struts_action" value="/wiki/move_page" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
-<input type="hidden" name="<portlet:namespace />redirect" value="<%= redirect %>" />
+<input type="hidden" name="<portlet:namespace />redirect" value="<%= HtmlUtil.escape(redirect) %>" />
 <input type="hidden" name="<portlet:namespace />nodeId" value="<%= node.getNodeId() %>" />
 <input type="hidden" name="<portlet:namespace />title" value="<%= title %>" />
 
@@ -73,6 +73,6 @@ String newTitle = ParamUtil.get(request, "newTitle", StringPool.BLANK);
 
 <input type="submit" value="<liferay-ui:message key="move-page" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>

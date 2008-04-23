@@ -56,7 +56,7 @@ searchContainer.setResults(results);
 <liferay-portlet:renderURL varImpl="searchURL"><portlet:param name="struts_action" value="/wiki/search" /></liferay-portlet:renderURL>
 
 <form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm">
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>" />
 
 <%
 List resultRows = searchContainer.getResultRows();

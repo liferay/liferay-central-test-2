@@ -120,12 +120,12 @@ boolean supportsSetup = Validator.isNotNull(selPortlet.getConfigurationActionCla
 
 		<form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/export_import" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveData(); return false;">
 		<input name="<portlet:namespace />tabs1" type="hidden" value="export_import">
-		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>">
+		<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>">
 		<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="">
 		<input name="<portlet:namespace />plid" type="hidden" value="<%= layout.getPlid() %>">
 		<input name="<portlet:namespace />groupId" type="hidden" value="<%= layout.getGroupId() %>">
-		<input name="<portlet:namespace />portletResource" type="hidden" value="<%= portletResource %>">
-		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>">
+		<input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>">
+		<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(currentURL) %>">
 
 		<c:choose>
 			<c:when test='<%= tabs2.equals("export") %>'>

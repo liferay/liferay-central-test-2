@@ -40,7 +40,7 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/workflow/edit_definition" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveDefinition(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="<%= Constants.ADD %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />definitionId" type="hidden" value="<%= definitionId %>" />
 
 <liferay-ui:tabs names="definition" />
@@ -97,7 +97,7 @@ long definitionId = BeanParamUtil.getLong(definition, request, "definitionId");
 
 <input type="submit" value="<liferay-ui:message key="save-new-version" />" />
 
-<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 </form>
 

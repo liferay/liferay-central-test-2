@@ -130,8 +130,8 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/document_library/edit_file_shortcut" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm" onSubmit="<portlet:namespace />saveFileShortcut(); return false;">
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />tabs2" type="hidden" value="<%= tabs2 %>" />
-<input name="<portlet:namespace />redirect" type="hidden" value="<%= redirect %>" />
+<input name="<portlet:namespace />tabs2" type="hidden" value="<%= HtmlUtil.escape(tabs2) %>" />
+<input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />fileShortcutId" type="hidden" value="<%= fileShortcutId %>" />
 <input name="<portlet:namespace />folderId" type="hidden" value="<%= folderId %>" />
 <input name="<portlet:namespace />toGroupId" type="hidden" value="<%= toGroupId %>" />
@@ -275,7 +275,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 
 	<input type="submit" value="<liferay-ui:message key="save" />" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= redirect %>';" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 
 	<br />
 </c:if>
