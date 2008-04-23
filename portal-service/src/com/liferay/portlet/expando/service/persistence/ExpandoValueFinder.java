@@ -35,6 +35,10 @@ public interface ExpandoValueFinder {
 	public int countByTC_TN_C(long classNameId, java.lang.String tableName,
 		long classPK) throws com.liferay.portal.SystemException;
 
+	public int countByTC_TN_CN_D(long classNameId, java.lang.String tableName,
+		java.lang.String columnName, java.lang.String data)
+		throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_CN(
 		long classNameId, java.lang.String tableName,
 		java.lang.String columnName, int begin, int end)
@@ -49,8 +53,8 @@ public interface ExpandoValueFinder {
 		java.lang.String columnName, long classPK)
 		throws com.liferay.portal.SystemException;
 
-	public com.liferay.portlet.expando.model.ExpandoValue fetchByTC_TN_CN_R(
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> findByTC_TN_CN_D(
 		long classNameId, java.lang.String tableName,
-		java.lang.String columnName, long rowId)
+		java.lang.String columnName, java.lang.String data, int begin, int end)
 		throws com.liferay.portal.SystemException;
 }

@@ -186,6 +186,16 @@ public interface ExpandoValueService {
 		java.lang.String columnName, int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, int begin, java.lang.String data, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, int begin, java.lang.String data, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
 	public int getColumnValuesCount(long columnId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
@@ -195,6 +205,16 @@ public interface ExpandoValueService {
 
 	public int getColumnValuesCount(long classNameId,
 		java.lang.String tableName, java.lang.String columnName)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public int getColumnValuesCount(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
+
+	public int getColumnValuesCount(long classNameId,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;
 
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getDefaultTableColumnValues(

@@ -480,6 +480,26 @@ public class ExpandoValueLocalServiceImpl
 			classNameId, tableName, columnName, begin, end);
 	}
 
+	public List<ExpandoValue> getColumnValues(
+			String className, String tableName, String columnName, String data,
+			int begin, int end)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getColumnValues(
+			classNameId, tableName, columnName, data, begin, end);
+	}
+
+	public List<ExpandoValue> getColumnValues(
+			long classNameId, String tableName, String columnName, String data,
+			int begin, int end)
+		throws SystemException {
+
+		return expandoValueFinder.findByTC_TN_CN_D(
+			classNameId, tableName, columnName, data, begin, end);
+	}
+
 	public int getColumnValuesCount(long columnId) throws SystemException {
 		return expandoValuePersistence.countByColumnId(columnId);
 	}
@@ -498,7 +518,24 @@ public class ExpandoValueLocalServiceImpl
 		throws SystemException {
 
 		return expandoValueFinder.countByTC_TN_CN(
-				classNameId, tableName, columnName);
+			classNameId, tableName, columnName);
+	}
+
+	public int getColumnValuesCount(
+			String className, String tableName, String columnName, String data)
+		throws SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		return getColumnValuesCount(classNameId, tableName, columnName, data);
+	}
+
+	public int getColumnValuesCount(
+			long classNameId, String tableName, String columnName, String data)
+		throws SystemException {
+
+		return expandoValueFinder.countByTC_TN_CN_D(
+			classNameId, tableName, columnName, data);
 	}
 
 	public boolean getData(

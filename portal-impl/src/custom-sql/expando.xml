@@ -123,6 +123,25 @@
 				(ExpandoRow.classPK = ?)
 		]]>
 	</sql>
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN_D">
+		<![CDATA[
+			SELECT
+				COUNT(*) AS COUNT_VALUE
+			FROM
+				ExpandoValue
+			INNER JOIN
+				ExpandoColumn ON
+					(ExpandoColumn.columnId = ExpandoValue.columnId)
+			INNER JOIN
+				ExpandoTable ON
+					(ExpandoTable.tableId = ExpandoColumn.tableId)
+			WHERE
+				(ExpandoTable.classNameId = ?) AND
+				(ExpandoTable.name = ?) AND
+				(ExpandoColumn.name = ?) AND
+				(ExpandoValue.data_ = ?)
+		]]>
+	</sql>
 	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN">
 		<![CDATA[
 			SELECT
@@ -181,7 +200,7 @@
 				(ExpandoRow.classPK = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN_R">
+	<sql id="com.liferay.portlet.expando.service.persistence.ExpandoValueFinder.findByTC_TN_CN_D">
 		<![CDATA[
 			SELECT
 				{ExpandoValue.*}
@@ -197,7 +216,7 @@
 				(ExpandoTable.classNameId = ?) AND
 				(ExpandoTable.name = ?) AND
 				(ExpandoColumn.name = ?) AND
-				(ExpandoValue.rowId_ = ?)
+				(ExpandoValue.data_ = ?)
 		]]>
 	</sql>
 </custom-sql>

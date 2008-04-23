@@ -490,6 +490,42 @@ public class ExpandoValueServiceSoap {
 		}
 	}
 
+	public static com.liferay.portlet.expando.model.ExpandoValueSoap[] getColumnValues(
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, int begin, java.lang.String data, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+				ExpandoValueServiceUtil.getColumnValues(className, tableName,
+					columnName, begin, data, end);
+
+			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static com.liferay.portlet.expando.model.ExpandoValueSoap[] getColumnValues(
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, int begin, java.lang.String data, int end)
+		throws RemoteException {
+		try {
+			java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+				ExpandoValueServiceUtil.getColumnValues(classNameId, tableName,
+					columnName, begin, data, end);
+
+			return com.liferay.portlet.expando.model.ExpandoValueSoap.toSoapModels(returnValue);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static int getColumnValuesCount(long columnId)
 		throws RemoteException {
 		try {
@@ -526,6 +562,38 @@ public class ExpandoValueServiceSoap {
 		try {
 			int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(classNameId,
 					tableName, columnName);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getColumnValuesCount(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data) throws RemoteException {
+		try {
+			int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(className,
+					tableName, columnName, data);
+
+			return returnValue;
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static int getColumnValuesCount(long classNameId,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data) throws RemoteException {
+		try {
+			int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(classNameId,
+					tableName, columnName, data);
 
 			return returnValue;
 		}

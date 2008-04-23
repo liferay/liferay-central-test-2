@@ -361,6 +361,26 @@ public class ExpandoValueLocalServiceUtil {
 			columnName, begin, end);
 	}
 
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
+		java.lang.String className, java.lang.String tableName,
+		java.lang.String columnName, java.lang.String data, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		return expandoValueLocalService.getColumnValues(className, tableName,
+			columnName, data, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.expando.model.ExpandoValue> getColumnValues(
+		long classNameId, java.lang.String tableName,
+		java.lang.String columnName, java.lang.String data, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		return expandoValueLocalService.getColumnValues(classNameId, tableName,
+			columnName, data, begin, end);
+	}
+
 	public static int getColumnValuesCount(long columnId)
 		throws com.liferay.portal.SystemException {
 		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
@@ -384,6 +404,24 @@ public class ExpandoValueLocalServiceUtil {
 
 		return expandoValueLocalService.getColumnValuesCount(classNameId,
 			tableName, columnName);
+	}
+
+	public static int getColumnValuesCount(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data) throws com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		return expandoValueLocalService.getColumnValuesCount(className,
+			tableName, columnName, data);
+	}
+
+	public static int getColumnValuesCount(long classNameId,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data) throws com.liferay.portal.SystemException {
+		ExpandoValueLocalService expandoValueLocalService = ExpandoValueLocalServiceFactory.getService();
+
+		return expandoValueLocalService.getColumnValuesCount(classNameId,
+			tableName, columnName, data);
 	}
 
 	public static boolean getData(java.lang.String className,

@@ -51,6 +51,9 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 	public static String COUNT_BY_TC_TN_C =
 		ExpandoValueFinder.class.getName() + ".countByTC_TN_C";
 
+	public static String COUNT_BY_TC_TN_CN_D =
+		ExpandoValueFinder.class.getName() + ".countByTC_TN_CN_D";
+
 	public static String FIND_BY_TC_TN_CN =
 		ExpandoValueFinder.class.getName() + ".findByTC_TN_CN";
 
@@ -60,8 +63,8 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 	public static String FIND_BY_TC_TN_CN_C =
 		ExpandoValueFinder.class.getName() + ".findByTC_TN_CN_C";
 
-	public static String FIND_BY_TC_TN_CN_R =
-		ExpandoValueFinder.class.getName() + ".findByTC_TN_CN_R";
+	public static String FIND_BY_TC_TN_CN_D =
+		ExpandoValueFinder.class.getName() + ".findByTC_TN_CN_D";
 
 	public int countByTC_TN_CN(
 			long classNameId, String tableName, String columnName)
@@ -124,6 +127,48 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 			qPos.add(classNameId);
 			qPos.add(tableName);
 			qPos.add(classPK);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public int countByTC_TN_CN_D(
+			long classNameId, String tableName, String columnName, String data)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(COUNT_BY_TC_TN_CN_D);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(classNameId);
+			qPos.add(tableName);
+			qPos.add(columnName);
+			qPos.add(data);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -243,8 +288,9 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 		}
 	}
 
-	public ExpandoValue fetchByTC_TN_CN_R(
-			long classNameId, String tableName, String columnName, long rowId)
+	public List<ExpandoValue> findByTC_TN_CN_D(
+			long classNameId, String tableName, String columnName, String data,
+			int begin, int end)
 		throws SystemException {
 
 		Session session = null;
@@ -252,7 +298,7 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_CN_R);
+			String sql = CustomSQLUtil.get(FIND_BY_TC_TN_CN_D);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -263,9 +309,10 @@ public class ExpandoValueFinderImpl implements ExpandoValueFinder {
 			qPos.add(classNameId);
 			qPos.add(tableName);
 			qPos.add(columnName);
-			qPos.add(rowId);
+			qPos.add(data);
 
-			return (ExpandoValue)q.uniqueResult();
+			return (List<ExpandoValue>)QueryUtil.list(
+				q, HibernateUtil.getDialect(), begin, end);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);

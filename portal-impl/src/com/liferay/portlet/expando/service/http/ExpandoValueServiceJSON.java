@@ -321,6 +321,28 @@ public class ExpandoValueServiceJSON {
 		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
 	}
 
+	public static JSONArray getColumnValues(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, int begin,
+		java.lang.String data, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+			ExpandoValueServiceUtil.getColumnValues(className, tableName,
+				columnName, begin, data, end);
+
+		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
+	}
+
+	public static JSONArray getColumnValues(long classNameId,
+		java.lang.String tableName, java.lang.String columnName, int begin,
+		java.lang.String data, int end)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		java.util.List<com.liferay.portlet.expando.model.ExpandoValue> returnValue =
+			ExpandoValueServiceUtil.getColumnValues(classNameId, tableName,
+				columnName, begin, data, end);
+
+		return ExpandoValueJSONSerializer.toJSONArray(returnValue);
+	}
+
 	public static int getColumnValuesCount(long columnId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(columnId);
@@ -342,6 +364,26 @@ public class ExpandoValueServiceJSON {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
 		int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(classNameId,
 				tableName, columnName);
+
+		return returnValue;
+	}
+
+	public static int getColumnValuesCount(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(className,
+				tableName, columnName, data);
+
+		return returnValue;
+	}
+
+	public static int getColumnValuesCount(long classNameId,
+		java.lang.String tableName, java.lang.String columnName,
+		java.lang.String data)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException {
+		int returnValue = ExpandoValueServiceUtil.getColumnValuesCount(classNameId,
+				tableName, columnName, data);
 
 		return returnValue;
 	}
