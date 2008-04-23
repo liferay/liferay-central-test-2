@@ -78,6 +78,34 @@ public class ExpandoColumnLocalServiceImpl
 		expandoColumnPersistence.remove(columnId);
 	}
 
+	public void deleteColumn(long tableId, String name)
+		throws PortalException, SystemException {
+
+		ExpandoColumn column = expandoColumnPersistence.findByT_N(
+			tableId, name);
+
+		deleteColumn(column.getColumnId());
+	}
+
+	public void deleteColumn(
+			String className, String tableName, String name)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		deleteColumn(classNameId, tableName, name);
+	}
+
+	public void deleteColumn(
+			long classNameId, String tableName, String name)
+		throws PortalException, SystemException {
+
+		ExpandoTable table = expandoTableLocalService.getTable(
+			classNameId, tableName);
+
+		deleteColumn(table.getTableId(), name);
+	}
+
 	public void deleteColumns(long tableId)
 		throws PortalException, SystemException {
 

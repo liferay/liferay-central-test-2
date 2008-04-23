@@ -107,6 +107,42 @@ public class ExpandoRowServiceSoap {
 		}
 	}
 
+	public static void deleteRow(long tableId, long classPK)
+		throws RemoteException {
+		try {
+			ExpandoRowServiceUtil.deleteRow(tableId, classPK);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteRow(java.lang.String className,
+		java.lang.String tableName, long classPK) throws RemoteException {
+		try {
+			ExpandoRowServiceUtil.deleteRow(className, tableName, classPK);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteRow(long classNameId, java.lang.String tableName,
+		long classPK) throws RemoteException {
+		try {
+			ExpandoRowServiceUtil.deleteRow(classNameId, tableName, classPK);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static com.liferay.portlet.expando.model.ExpandoRowSoap[] getDefaultTableRows(
 		java.lang.String className, int begin, int end)
 		throws RemoteException {

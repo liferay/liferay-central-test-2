@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.expando.model.ExpandoRow;
+import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.model.ExpandoTableConstants;
 import com.liferay.portlet.expando.service.base.ExpandoRowLocalServiceBaseImpl;
 
@@ -64,6 +65,31 @@ public class ExpandoRowLocalServiceImpl extends ExpandoRowLocalServiceBaseImpl {
 		// Row
 
 		expandoRowPersistence.remove(rowId);
+	}
+
+	public void deleteRow(long tableId, long classPK)
+		throws PortalException, SystemException {
+
+		ExpandoRow row = expandoRowPersistence.findByT_C(tableId, classPK);
+
+		deleteRow(row.getRowId());
+	}
+
+	public void deleteRow(String className, String tableName, long classPK)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		deleteRow(classNameId, tableName, classPK);
+	}
+
+	public void deleteRow(long classNameId, String tableName, long classPK)
+		throws PortalException, SystemException {
+
+		ExpandoTable table = expandoTableLocalService.getTable(
+			classNameId, tableName);
+
+		deleteRow(table.getTableId(), classPK);
 	}
 
 	public List<ExpandoRow> getDefaultTableRows(

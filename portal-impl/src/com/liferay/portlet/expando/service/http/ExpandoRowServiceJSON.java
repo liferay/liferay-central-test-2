@@ -87,6 +87,26 @@ public class ExpandoRowServiceJSON {
 		ExpandoRowServiceUtil.deleteRow(rowId);
 	}
 
+	public static void deleteRow(long tableId, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		ExpandoRowServiceUtil.deleteRow(tableId, classPK);
+	}
+
+	public static void deleteRow(java.lang.String className,
+		java.lang.String tableName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		ExpandoRowServiceUtil.deleteRow(className, tableName, classPK);
+	}
+
+	public static void deleteRow(long classNameId, java.lang.String tableName,
+		long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		ExpandoRowServiceUtil.deleteRow(classNameId, tableName, classPK);
+	}
+
 	public static JSONArray getDefaultTableRows(java.lang.String className,
 		int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException {

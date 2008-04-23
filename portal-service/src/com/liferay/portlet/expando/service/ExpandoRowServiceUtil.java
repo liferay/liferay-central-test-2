@@ -68,6 +68,32 @@ public class ExpandoRowServiceUtil {
 		expandoRowService.deleteRow(rowId);
 	}
 
+	public static void deleteRow(long tableId, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		expandoRowService.deleteRow(tableId, classPK);
+	}
+
+	public static void deleteRow(java.lang.String className,
+		java.lang.String tableName, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		expandoRowService.deleteRow(className, tableName, classPK);
+	}
+
+	public static void deleteRow(long classNameId, java.lang.String tableName,
+		long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoRowService expandoRowService = ExpandoRowServiceFactory.getService();
+
+		expandoRowService.deleteRow(classNameId, tableName, classPK);
+	}
+
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
 		java.lang.String className, int begin, int end)
 		throws com.liferay.portal.SystemException, java.rmi.RemoteException {

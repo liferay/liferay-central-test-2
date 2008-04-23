@@ -58,6 +58,20 @@ public interface ExpandoRowService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void deleteRow(long tableId, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteRow(java.lang.String className,
+		java.lang.String tableName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteRow(long classNameId, java.lang.String tableName,
+		long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
 		java.lang.String className, int begin, int end)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException;

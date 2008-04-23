@@ -189,6 +189,20 @@ public interface ExpandoValueLocalService {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void deleteValue(long columnId, long rowId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteValue(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteValue(long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteValues(java.lang.String className, long classPK)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

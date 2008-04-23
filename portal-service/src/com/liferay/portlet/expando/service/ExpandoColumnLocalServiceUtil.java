@@ -118,6 +118,32 @@ public class ExpandoColumnLocalServiceUtil {
 		expandoColumnLocalService.deleteColumn(columnId);
 	}
 
+	public static void deleteColumn(long tableId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
+
+		expandoColumnLocalService.deleteColumn(tableId, name);
+	}
+
+	public static void deleteColumn(java.lang.String className,
+		java.lang.String tableName, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
+
+		expandoColumnLocalService.deleteColumn(className, tableName, name);
+	}
+
+	public static void deleteColumn(long classNameId,
+		java.lang.String tableName, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		ExpandoColumnLocalService expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getService();
+
+		expandoColumnLocalService.deleteColumn(classNameId, tableName, name);
+	}
+
 	public static void deleteColumns(long tableId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException {

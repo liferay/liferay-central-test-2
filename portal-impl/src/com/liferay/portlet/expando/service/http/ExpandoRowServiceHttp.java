@@ -142,6 +142,126 @@ public class ExpandoRowServiceHttp {
 		}
 	}
 
+	public static void deleteRow(HttpPrincipal httpPrincipal, long tableId,
+		long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(tableId);
+
+			Object paramObj1 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"deleteRow", new Object[] { paramObj0, paramObj1 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteRow(HttpPrincipal httpPrincipal,
+		java.lang.String className, java.lang.String tableName, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = className;
+
+			if (className == null) {
+				paramObj0 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj1 = tableName;
+
+			if (tableName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"deleteRow",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
+	public static void deleteRow(HttpPrincipal httpPrincipal, long classNameId,
+		java.lang.String tableName, long classPK)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		try {
+			Object paramObj0 = new LongWrapper(classNameId);
+
+			Object paramObj1 = tableName;
+
+			if (tableName == null) {
+				paramObj1 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj2 = new LongWrapper(classPK);
+
+			MethodWrapper methodWrapper = new MethodWrapper(ExpandoRowServiceUtil.class.getName(),
+					"deleteRow",
+					new Object[] { paramObj0, paramObj1, paramObj2 });
+
+			try {
+				TunnelUtil.invoke(httpPrincipal, methodWrapper);
+			}
+			catch (Exception e) {
+				if (e instanceof com.liferay.portal.SystemException) {
+					throw (com.liferay.portal.SystemException)e;
+				}
+
+				if (e instanceof com.liferay.portal.PortalException) {
+					throw (com.liferay.portal.PortalException)e;
+				}
+
+				throw new com.liferay.portal.SystemException(e);
+			}
+		}
+		catch (com.liferay.portal.SystemException se) {
+			_log.error(se, se);
+
+			throw se;
+		}
+	}
+
 	public static java.util.List<com.liferay.portlet.expando.model.ExpandoRow> getDefaultTableRows(
 		HttpPrincipal httpPrincipal, java.lang.String className, int begin,
 		int end) throws com.liferay.portal.SystemException {

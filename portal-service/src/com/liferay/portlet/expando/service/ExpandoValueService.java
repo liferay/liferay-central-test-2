@@ -164,6 +164,20 @@ public interface ExpandoValueService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void deleteValue(long columnId, long rowId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteValue(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteValue(long classNameId, java.lang.String tableName,
+		java.lang.String columnName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteValues(java.lang.String className, long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

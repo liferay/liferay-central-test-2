@@ -49,6 +49,24 @@ public class ExpandoRowServiceImpl extends ExpandoRowServiceBaseImpl {
 		expandoRowLocalService.deleteRow(rowId);
 	}
 
+	public void deleteRow(long tableId, long classPK)
+		throws PortalException, SystemException {
+
+		expandoRowLocalService.deleteRow(tableId, classPK);
+	}
+
+	public void deleteRow(String className, String tableName, long classPK)
+		throws PortalException, SystemException {
+
+		expandoRowLocalService.deleteRow(className, tableName, classPK);
+	}
+
+	public void deleteRow(long classNameId, String tableName, long classPK)
+		throws PortalException, SystemException {
+
+		expandoRowLocalService.deleteRow(classNameId, tableName, classPK);
+	}
+
 	public List<ExpandoRow> getDefaultTableRows(
 			String className, int begin, int end)
 		throws SystemException {

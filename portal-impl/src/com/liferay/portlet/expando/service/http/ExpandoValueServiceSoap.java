@@ -415,6 +415,46 @@ public class ExpandoValueServiceSoap {
 		}
 	}
 
+	public static void deleteValue(long columnId, long rowId)
+		throws RemoteException {
+		try {
+			ExpandoValueServiceUtil.deleteValue(columnId, rowId);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteValue(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws RemoteException {
+		try {
+			ExpandoValueServiceUtil.deleteValue(className, tableName,
+				columnName, classPK);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteValue(long classNameId,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws RemoteException {
+		try {
+			ExpandoValueServiceUtil.deleteValue(classNameId, tableName,
+				columnName, classPK);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteValues(java.lang.String className, long classPK)
 		throws RemoteException {
 		try {

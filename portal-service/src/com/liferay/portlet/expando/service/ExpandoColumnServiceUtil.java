@@ -68,6 +68,32 @@ public class ExpandoColumnServiceUtil {
 		expandoColumnService.deleteColumn(columnId);
 	}
 
+	public static void deleteColumn(long tableId, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		expandoColumnService.deleteColumn(tableId, name);
+	}
+
+	public static void deleteColumn(java.lang.String className,
+		java.lang.String tableName, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		expandoColumnService.deleteColumn(className, tableName, name);
+	}
+
+	public static void deleteColumn(long classNameId,
+		java.lang.String tableName, java.lang.String name)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoColumnService expandoColumnService = ExpandoColumnServiceFactory.getService();
+
+		expandoColumnService.deleteColumn(classNameId, tableName, name);
+	}
+
 	public static void deleteColumns(long tableId)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

@@ -58,6 +58,20 @@ public interface ExpandoColumnService {
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
+	public void deleteColumn(long tableId, java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteColumn(java.lang.String className,
+		java.lang.String tableName, java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
+	public void deleteColumn(long classNameId, java.lang.String tableName,
+		java.lang.String name)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException;
+
 	public void deleteColumns(long tableId)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;

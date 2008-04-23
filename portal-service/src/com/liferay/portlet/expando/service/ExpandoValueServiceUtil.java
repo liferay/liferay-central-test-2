@@ -267,6 +267,34 @@ public class ExpandoValueServiceUtil {
 		expandoValueService.deleteValue(valueId);
 	}
 
+	public static void deleteValue(long columnId, long rowId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		expandoValueService.deleteValue(columnId, rowId);
+	}
+
+	public static void deleteValue(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		expandoValueService.deleteValue(className, tableName, columnName,
+			classPK);
+	}
+
+	public static void deleteValue(long classNameId,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException, java.rmi.RemoteException {
+		ExpandoValueService expandoValueService = ExpandoValueServiceFactory.getService();
+
+		expandoValueService.deleteValue(classNameId, tableName, columnName,
+			classPK);
+	}
+
 	public static void deleteValues(java.lang.String className, long classPK)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {

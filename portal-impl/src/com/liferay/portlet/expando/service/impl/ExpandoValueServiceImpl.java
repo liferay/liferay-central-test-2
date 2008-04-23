@@ -212,6 +212,28 @@ public class ExpandoValueServiceImpl extends ExpandoValueServiceBaseImpl {
 		expandoValueLocalService.deleteValue(valueId);
 	}
 
+	public void deleteValue(long columnId, long rowId)
+		throws PortalException, SystemException {
+
+		expandoValueLocalService.deleteValue(columnId, rowId);
+	}
+
+	public void deleteValue(
+			String className, String tableName, String columnName, long classPK)
+		throws PortalException, SystemException {
+
+		expandoValueLocalService.deleteValue(
+			className, tableName, columnName, classPK);
+	}
+
+	public void deleteValue(
+			long classNameId, String tableName, String columnName, long classPK)
+		throws PortalException, SystemException {
+
+		expandoValueLocalService.deleteValue(
+			classNameId, tableName, columnName, classPK);
+	}
+
 	public void deleteValues(String className, long classPK)
 		throws PortalException, SystemException {
 

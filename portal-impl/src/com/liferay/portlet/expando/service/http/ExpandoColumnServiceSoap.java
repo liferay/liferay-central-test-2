@@ -108,6 +108,44 @@ public class ExpandoColumnServiceSoap {
 		}
 	}
 
+	public static void deleteColumn(long tableId, java.lang.String name)
+		throws RemoteException {
+		try {
+			ExpandoColumnServiceUtil.deleteColumn(tableId, name);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteColumn(java.lang.String className,
+		java.lang.String tableName, java.lang.String name)
+		throws RemoteException {
+		try {
+			ExpandoColumnServiceUtil.deleteColumn(className, tableName, name);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
+	public static void deleteColumn(long classNameId,
+		java.lang.String tableName, java.lang.String name)
+		throws RemoteException {
+		try {
+			ExpandoColumnServiceUtil.deleteColumn(classNameId, tableName, name);
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
+			throw new RemoteException(e.getMessage());
+		}
+	}
+
 	public static void deleteColumns(long tableId) throws RemoteException {
 		try {
 			ExpandoColumnServiceUtil.deleteColumns(tableId);

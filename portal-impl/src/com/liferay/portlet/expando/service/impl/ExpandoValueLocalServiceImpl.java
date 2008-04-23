@@ -441,6 +441,33 @@ public class ExpandoValueLocalServiceImpl
 		expandoValuePersistence.remove(valueId);
 	}
 
+	public void deleteValue(long columnId, long rowId)
+		throws PortalException, SystemException {
+
+		expandoValuePersistence.removeByC_R(columnId, rowId);
+	}
+
+	public void deleteValue(
+			String className, String tableName, String columnName, long classPK)
+		throws PortalException, SystemException {
+
+		long classNameId = PortalUtil.getClassNameId(className);
+
+		deleteValue(classNameId, tableName, columnName, classPK);
+	}
+
+	public void deleteValue(
+			long classNameId, String tableName, String columnName, long classPK)
+		throws PortalException, SystemException {
+
+		ExpandoValue value = expandoValueFinder.fetchByTC_TN_CN_C(
+			classNameId, tableName, columnName, classPK);
+
+		if (value != null) {
+			deleteValue(value.getValueId());
+		}
+	}
+
 	public void deleteValues(String className, long classPK)
 		throws PortalException, SystemException {
 

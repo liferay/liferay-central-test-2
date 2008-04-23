@@ -279,6 +279,28 @@ public class ExpandoValueServiceJSON {
 		ExpandoValueServiceUtil.deleteValue(valueId);
 	}
 
+	public static void deleteValue(long columnId, long rowId)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		ExpandoValueServiceUtil.deleteValue(columnId, rowId);
+	}
+
+	public static void deleteValue(java.lang.String className,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		ExpandoValueServiceUtil.deleteValue(className, tableName, columnName,
+			classPK);
+	}
+
+	public static void deleteValue(long classNameId,
+		java.lang.String tableName, java.lang.String columnName, long classPK)
+		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
+			com.liferay.portal.PortalException {
+		ExpandoValueServiceUtil.deleteValue(classNameId, tableName, columnName,
+			classPK);
+	}
+
 	public static void deleteValues(java.lang.String className, long classPK)
 		throws java.rmi.RemoteException, com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
