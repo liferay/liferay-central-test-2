@@ -340,6 +340,17 @@
 		</licenses>
 	</library>
 	<library>
+		<file-name>development/jsf-facelets.jar</file-name>
+		<version>1.1.13</version>
+		<project-name>Facelets</project-name>
+		<project-url>https://facelets.dev.java.net</project-url>
+		<licenses>
+			<license>
+				<license-name>CDDL 1.0</license-name>
+			</license>
+		</licenses>
+	</library>
+	<library>
 		<file-name>development/jsf-impl.jar</file-name>
 		<version>1.1.01</version>
 		<project-name>JavaServer Faces</project-name>
@@ -350,17 +361,6 @@
 			</license>
 			<license>
 				<license-name>JSF 1.1 Third Party Licenses</license-name>
-			</license>
-		</licenses>
-	</library>
-	<library>
-		<file-name>development/jsf-facelets.jar</file-name>
-		<version>1.1.13</version>
-		<project-name>Facelets</project-name>
-		<project-url>https://facelets.dev.java.net</project-url>
-		<licenses>
-			<license>
-				<license-name>CDDL 1.0</license-name>
 			</license>
 		</licenses>
 	</library>
