@@ -48,6 +48,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
@@ -202,7 +203,7 @@ public class ServicePreAction extends Action {
 		if (layoutSet != null) {
 			List<Layout> layouts = LayoutLocalServiceUtil.getLayouts(
 				layoutSet.getGroupId(), layoutSet.isPrivateLayout(),
-				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() > 0) {
 				Layout layout = layouts.get(0);
@@ -222,12 +223,12 @@ public class ServicePreAction extends Action {
 
 			layouts = LayoutLocalServiceUtil.getLayouts(
 				userGroup.getGroupId(), true,
-				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() == 0) {
 				layouts = LayoutLocalServiceUtil.getLayouts(
 					userGroup.getGroupId(), false,
-					LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+					LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 			}
 
 			if (layouts.size() > 0) {
@@ -251,12 +252,12 @@ public class ServicePreAction extends Action {
 
 					layouts = LayoutLocalServiceUtil.getLayouts(
 						group.getGroupId(), true,
-						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 					if (layouts.size() == 0) {
 						layouts = LayoutLocalServiceUtil.getLayouts(
 							group.getGroupId(), false,
-							LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+							LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 					}
 
 					if (layouts.size() > 0) {
@@ -276,7 +277,7 @@ public class ServicePreAction extends Action {
 
 			layouts = LayoutLocalServiceUtil.getLayouts(
 				guestGroup.getGroupId(), false,
-				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			if (layouts.size() > 0) {
 				layout = layouts.get(0);
@@ -318,9 +319,9 @@ public class ServicePreAction extends Action {
 		String name = PropsValues.DEFAULT_USER_LAYOUT_NAME;
 
 		Layout layout = LayoutLocalServiceUtil.addLayout(
-			userId, groupId, true, LayoutImpl.DEFAULT_PARENT_LAYOUT_ID, name,
-			StringPool.BLANK, StringPool.BLANK, LayoutImpl.TYPE_PORTLET, false,
-			StringPool.BLANK);
+			userId, groupId, true, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			name, StringPool.BLANK, StringPool.BLANK,
+			LayoutConstants.TYPE_PORTLET, false, StringPool.BLANK);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();
@@ -597,7 +598,7 @@ public class ServicePreAction extends Action {
 
 			List<Layout> guestLayouts = LayoutLocalServiceUtil.getLayouts(
 				guestGroup.getGroupId(), false,
-				LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 			layouts.addAll(0, guestLayouts);
 		}
@@ -636,7 +637,7 @@ public class ServicePreAction extends Action {
 				List<Layout> previousLayouts =
 					LayoutLocalServiceUtil.getLayouts(
 						previousGroupId.longValue(), false,
-						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
 				layouts.addAll(previousLayouts);
 			}
@@ -891,7 +892,7 @@ public class ServicePreAction extends Action {
 				else {
 					layouts = LayoutLocalServiceUtil.getLayouts(
 						layout.getGroupId(), layout.isPrivateLayout(),
-						LayoutImpl.DEFAULT_PARENT_LAYOUT_ID);
+						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 				}
 			}
 			catch (NoSuchLayoutException nsle) {
@@ -1149,7 +1150,7 @@ public class ServicePreAction extends Action {
 		if (layout != null) {
 			Group group = layout.getGroup();
 
-			if (layout.getType().equals(LayoutImpl.TYPE_PORTLET)) {
+			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				boolean freeformLayout =
 					layoutTypePortlet.getLayoutTemplateId().equals(
 						"freeform");
