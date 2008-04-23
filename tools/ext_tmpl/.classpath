@@ -31,6 +31,7 @@
 	<classpathentry kind="lib" path="lib/development/jndi.jar"/>
 	<classpathentry kind="lib" path="lib/development/jnet.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-api.jar"/>
+	<classpathentry kind="lib" path="lib/development/jsf-facelets.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-impl.jar"/>
 	<classpathentry kind="lib" path="lib/development/jsf-portlet.jar"/>
 	<classpathentry kind="lib" path="lib/development/jta.jar"/>
