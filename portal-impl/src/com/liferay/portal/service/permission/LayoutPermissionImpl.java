@@ -25,12 +25,14 @@ package com.liferay.portal.service.permission;
 import com.liferay.portal.NoSuchResourceException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.ResourceConstants;
-import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
+import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
 
@@ -88,7 +90,7 @@ public class LayoutPermissionImpl implements LayoutPermission {
 			boolean privateLayout, long layoutId, String actionId)
 		throws PortalException, SystemException {
 
-		if (layoutId == LayoutImpl.DEFAULT_PARENT_LAYOUT_ID) {
+		if (layoutId == LayoutConstants.DEFAULT_PARENT_LAYOUT_ID) {
 			if (GroupPermissionUtil.contains(
 					permissionChecker, groupId, ActionKeys.MANAGE_LAYOUTS)) {
 
