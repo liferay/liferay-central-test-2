@@ -1006,7 +1006,7 @@ public class PortalImpl implements Portal {
 		return _pathMain;
 	}
 
-	public long getPlidIdFromFriendlyURL(long companyId, String friendlyURL) {
+	public long getPlidFromFriendlyURL(long companyId, String friendlyURL) {
 		String[] urlParts = friendlyURL.split("\\/", 4);
 
 		if ((friendlyURL.charAt(0) != CharPool.SLASH) &&

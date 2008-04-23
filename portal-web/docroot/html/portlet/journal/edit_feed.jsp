@@ -272,7 +272,7 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 			<td>
 
 				<%
-				long targetLayoutPlid = PortalUtil.getPlidIdFromFriendlyURL(feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
+				long targetLayoutPlid = PortalUtil.getPlidFromFriendlyURL(feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
 
 				Layout targetLayout = LayoutLocalServiceUtil.getLayout(targetLayoutPlid);
 				%>

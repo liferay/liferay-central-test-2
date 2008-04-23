@@ -209,7 +209,7 @@ public interface Portal {
 
 	public String getPathMain();
 
-	public long getPlidIdFromFriendlyURL(long companyId, String friendlyURL);
+	public long getPlidFromFriendlyURL(long companyId, String friendlyURL);
 
 	public String getPortalLibDir();
 

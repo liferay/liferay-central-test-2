@@ -210,7 +210,7 @@ public class RSSAction extends PortletAction {
 			return PortalUtil.getLayoutFriendlyURL(hitLayout, themeDisplay);
 		}
 		else if (Validator.isNotNull(feed.getTargetLayoutFriendlyUrl())) {
-			long plid = PortalUtil.getPlidIdFromFriendlyURL(
+			long plid = PortalUtil.getPlidFromFriendlyURL(
 				feed.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
 
 			Layout targetLayout = LayoutLocalServiceUtil.getLayout(plid);
@@ -259,7 +259,7 @@ public class RSSAction extends PortletAction {
 
 		String languageId = LanguageUtil.getLanguageId(req);
 
-		long plid = PortalUtil.getPlidIdFromFriendlyURL(
+		long plid = PortalUtil.getPlidFromFriendlyURL(
 			themeDisplay.getCompanyId(), feed.getTargetLayoutFriendlyUrl());
 
 		Layout layout = themeDisplay.getLayout();

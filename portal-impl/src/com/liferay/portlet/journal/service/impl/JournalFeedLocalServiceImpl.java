@@ -487,7 +487,7 @@ public class JournalFeedLocalServiceImpl
 			throw new FeedDescriptionException();
 		}
 
-		long plid = PortalUtil.getPlidIdFromFriendlyURL(
+		long plid = PortalUtil.getPlidFromFriendlyURL(
 			companyId, targetLayoutFriendlyUrl);
 
 		if (plid <= 0) {

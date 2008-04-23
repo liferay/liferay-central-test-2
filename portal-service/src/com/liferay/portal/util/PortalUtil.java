@@ -324,10 +324,10 @@ public class PortalUtil {
 		return getPortal().getPathMain();
 	}
 
-	public static long getPlidIdFromFriendlyURL(
+	public static long getPlidFromFriendlyURL(
 		long companyId, String friendlyURL) {
 
-		return getPortal().getPlidIdFromFriendlyURL(companyId, friendlyURL);
+		return getPortal().getPlidFromFriendlyURL(companyId, friendlyURL);
 	}
 
 	public static Portal getPortal() {
