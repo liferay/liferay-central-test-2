@@ -71,6 +71,9 @@ public class POPNotificationsJob implements IntervalJob {
 		}
 		catch (Exception e) {
 			_log.error(e, e);
+
+			_store = null;
+			_inboxFolder = null;
 		}
 	}
 
