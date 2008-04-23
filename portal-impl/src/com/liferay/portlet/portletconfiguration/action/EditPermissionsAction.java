@@ -29,9 +29,9 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.PermissionServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -159,7 +159,7 @@ public class EditPermissionsAction extends EditConfigurationAction {
 				ResourceLocalServiceUtil.getResource(resourceId);
 
 			if (resource.getPrimKey().startsWith(
-					layout.getPlid() + PortletImpl.LAYOUT_SEPARATOR)) {
+					layout.getPlid() + PortletConstants.LAYOUT_SEPARATOR)) {
 
 				LayoutCacheUtil.clearCache(layout.getCompanyId());
 			}

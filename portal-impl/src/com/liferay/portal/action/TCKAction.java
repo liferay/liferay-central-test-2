@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.struts.ActionConstants;
@@ -76,7 +76,8 @@ public class TCKAction extends Action {
 				String[] nameAndWar = StringUtil.split(portletIds[i], "/");
 
 				portletIds[i] = PortalUtil.getJsSafePortletId(
-					nameAndWar[1] + PortletImpl.WAR_SEPARATOR + nameAndWar[0]);
+					nameAndWar[1] + PortletConstants.WAR_SEPARATOR +
+						nameAndWar[0]);
 			}
 
 			// Default admin

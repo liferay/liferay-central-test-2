@@ -27,9 +27,9 @@ import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PublicRenderParameter;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.util.PortalInstances;
 
 import java.io.ByteArrayInputStream;
@@ -68,7 +68,7 @@ public class PortletConfigImpl implements PortletConfig {
 		_portlet = portlet;
 		_portletName = portlet.getRootPortletId();
 
-		int pos = _portletName.indexOf(PortletImpl.WAR_SEPARATOR);
+		int pos = _portletName.indexOf(PortletConstants.WAR_SEPARATOR);
 
 		if (pos != -1) {
 			_portletName = _portletName.substring(0, pos);

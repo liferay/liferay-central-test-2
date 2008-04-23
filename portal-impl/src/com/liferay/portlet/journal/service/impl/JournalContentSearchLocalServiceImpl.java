@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.service.base.JournalContentSearchLocalServiceBaseImpl;
@@ -89,7 +89,8 @@ public class JournalContentSearchLocalServiceImpl
 			List<String> portletIds = layoutTypePortlet.getPortletIds();
 
 			for (String portletId : portletIds) {
-				String rootPortletId = PortletImpl.getRootPortletId(portletId);
+				String rootPortletId = PortletConstants.getRootPortletId(
+					portletId);
 
 				if (rootPortletId.equals(PortletKeys.JOURNAL_CONTENT)) {
 					PortletPreferences prefs =

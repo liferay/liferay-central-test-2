@@ -35,9 +35,9 @@ TasksProposal proposal = TasksProposalLocalServiceUtil.getProposal(proposalId);
 
 String classPK = proposal.getClassPK();
 
-int pos = classPK.indexOf(PortletImpl.LAYOUT_SEPARATOR);
+int pos = classPK.indexOf(PortletConstants.LAYOUT_SEPARATOR);
 
-String selPortletId = classPK.substring(pos + PortletImpl.LAYOUT_SEPARATOR.length());
+String selPortletId = classPK.substring(pos + PortletConstants.LAYOUT_SEPARATOR.length());
 
 Portlet selPortlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), selPortletId);
 

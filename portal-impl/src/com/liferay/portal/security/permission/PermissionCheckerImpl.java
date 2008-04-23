@@ -28,13 +28,13 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Organization;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
 import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
@@ -568,7 +568,7 @@ public class PermissionCheckerImpl implements PermissionChecker, Serializable {
 		// current portlet
 
 		if ((Validator.isNotNull(name)) && (Validator.isNotNull(primKey)) &&
-			(primKey.indexOf(PortletImpl.LAYOUT_SEPARATOR) != -1)) {
+			(primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR) != -1)) {
 
 			hasLayoutManagerPermission =
 				PortletPermissionUtil.hasLayoutManagerPermission(

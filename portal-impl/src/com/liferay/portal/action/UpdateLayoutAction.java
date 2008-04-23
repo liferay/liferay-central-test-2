@@ -30,8 +30,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.ResourceConstants;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.LayoutServiceUtil;
@@ -174,7 +174,8 @@ public class UpdateLayoutAction extends Action {
 			// only after the user has proven that he has the valid permissions.
 
 			if (deletePortlet) {
-				String rootPortletId = PortletImpl.getRootPortletId(portletId);
+				String rootPortletId = PortletConstants.getRootPortletId(
+					portletId);
 
 				ResourceLocalServiceUtil.deleteResource(
 					layout.getCompanyId(), rootPortletId,

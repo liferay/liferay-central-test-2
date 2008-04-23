@@ -345,7 +345,7 @@ if (className.equals(Layout.class.getName())) {
 else if (className.equals(Portlet.class.getName())) {
 	publishToLiveURL.setParameter("struts_action", "/communities/publish_portlet");
 
-	proposedLayoutPlid = GetterUtil.getLong(classPK.substring(0, classPK.indexOf(PortletImpl.LAYOUT_SEPARATOR)));
+	proposedLayoutPlid = GetterUtil.getLong(classPK.substring(0, classPK.indexOf(PortletConstants.LAYOUT_SEPARATOR)));
 
 	proposedLayout = LayoutLocalServiceUtil.getLayout(proposedLayoutPlid);
 }

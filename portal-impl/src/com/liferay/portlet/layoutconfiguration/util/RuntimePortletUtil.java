@@ -128,7 +128,7 @@ public class RuntimePortletUtil {
 				(instanceId.length() == 4)) {
 
 				/*portletId +=
-					PortletImpl.INSTANCE_SEPARATOR + instanceId;
+					PortletConstants.INSTANCE_SEPARATOR + instanceId;
 
 				portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);*/

@@ -58,6 +58,7 @@ import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Permission;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletItem;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.Resource;
@@ -68,7 +69,6 @@ import com.liferay.portal.model.User;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.base.LayoutLocalServiceBaseImpl;
@@ -306,7 +306,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 		// Resources
 
-		String primKey = layout.getPlid() + PortletImpl.LAYOUT_SEPARATOR + "%";
+		String primKey =
+			layout.getPlid() + PortletConstants.LAYOUT_SEPARATOR + "%";
 
 		List<Resource> resources = resourceFinder.findByC_P(
 			layout.getCompanyId(), primKey);
@@ -725,7 +726,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		}
 
 		if (exportPortletArchivedSetups) {
-			String rootPortletId = PortletImpl.getRootPortletId(portletId);
+			String rootPortletId = PortletConstants.getRootPortletId(portletId);
 
 			List<PortletItem> portletItems =
 				portletItemLocalService.getPortletItems(
@@ -2243,7 +2244,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 
 			if (layoutTypePortlet.hasPortletId(portletId)) {
-				String resourceName = PortletImpl.getRootPortletId(portletId);
+				String resourceName = PortletConstants.getRootPortletId(
+					portletId);
 				String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
 					layout.getPlid(), portletId);
 
@@ -2399,7 +2401,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		throws PortalException, SystemException {
 
 		for (String portletId : portletIds) {
-			String resourceName = PortletImpl.getRootPortletId(portletId);
+			String resourceName = PortletConstants.getRootPortletId(portletId);
 
 			Element portletEl = rolesEl.addElement("portlet");
 
@@ -3133,7 +3135,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String portletId = portletEl.attributeValue("portlet-id");
 
-			String resourceName = PortletImpl.getRootPortletId(portletId);
+			String resourceName = PortletConstants.getRootPortletId(portletId);
 			String resourcePrimKey = PortletPermissionUtil.getPrimaryKey(
 				layout.getPlid(), portletId);
 
@@ -3285,7 +3287,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String portletId = portletEl.attributeValue("portlet-id");
 
-			String resourceName = PortletImpl.getRootPortletId(portletId);
+			String resourceName = PortletConstants.getRootPortletId(portletId);
 
 			Portlet portlet = portletLocalService.getPortletById(
 				companyId, resourceName);
@@ -3430,7 +3432,8 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		commLink.send(methodWrapper);
 
 		themeId +=
-			PortletImpl.WAR_SEPARATOR + themeLoader.getServletContextName();
+			PortletConstants.WAR_SEPARATOR +
+				themeLoader.getServletContextName();
 
 		return PortalUtil.getJsSafePortletId(themeId);
 	}

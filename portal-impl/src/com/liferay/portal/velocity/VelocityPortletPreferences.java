@@ -22,7 +22,7 @@
 
 package com.liferay.portal.velocity;
 
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
 
@@ -64,7 +64,7 @@ public class VelocityPortletPreferences {
 		catch (Exception e) {
 			_log.error(e, e);
 
-			return PortletImpl.DEFAULT_PREFERENCES;
+			return PortletConstants.DEFAULT_PREFERENCES;
 		}
 	}
 

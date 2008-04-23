@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.servlet.ProtectedPrincipal;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
 
@@ -87,7 +87,7 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 		String userPrincipalStrategy = portlet.getUserPrincipalStrategy();
 
 		if (userPrincipalStrategy.equals(
-				PortletImpl.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
+				PortletConstants.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
 
 			try {
 				User user = PortalUtil.getUser(req);

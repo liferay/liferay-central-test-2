@@ -27,10 +27,10 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Resource;
 import com.liferay.portal.model.Role;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -236,14 +236,15 @@ public class PermissionServiceImpl extends PermissionServiceBaseImpl {
 				ActionKeys.PERMISSIONS);
 		}
 		else if ((primKey != null) &&
-				 (primKey.indexOf(PortletImpl.LAYOUT_SEPARATOR) != -1)) {
+				 (primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR) != -1)) {
 
-			int pos = primKey.indexOf(PortletImpl.LAYOUT_SEPARATOR);
+			int pos = primKey.indexOf(PortletConstants.LAYOUT_SEPARATOR);
 
 			long plid = GetterUtil.getLong(primKey.substring(0, pos));
 
 			String portletId = primKey.substring(
-				pos + PortletImpl.LAYOUT_SEPARATOR.length() , primKey.length());
+				pos + PortletConstants.LAYOUT_SEPARATOR.length(),
+				primKey.length());
 
 			if (!PortletPermissionUtil.contains(
 					permissionChecker, plid, portletId,

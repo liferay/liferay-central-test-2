@@ -24,7 +24,7 @@ package com.liferay.portal.upgrade.v4_3_5;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.upgrade.UpgradeException;
 import com.liferay.portal.upgrade.UpgradeProcess;
@@ -143,8 +143,8 @@ public class UpgradePortletId extends UpgradeProcess {
 				"select primKey from Resource_ where primKey like ?");
 
 			String primKeyLike =
-				"%" + PortletImpl.LAYOUT_SEPARATOR + oldRootPortletId +
-					PortletImpl.INSTANCE_SEPARATOR + "%";
+				"%" + PortletConstants.LAYOUT_SEPARATOR + oldRootPortletId +
+					PortletConstants.INSTANCE_SEPARATOR + "%";
 
 			ps.setString(1, primKeyLike);
 
@@ -153,19 +153,19 @@ public class UpgradePortletId extends UpgradeProcess {
 			while (rs.next()) {
 				String oldPrimKey = rs.getString("primKey");
 
-				int pos = oldPrimKey.indexOf(PortletImpl.LAYOUT_SEPARATOR);
+				int pos = oldPrimKey.indexOf(PortletConstants.LAYOUT_SEPARATOR);
 
 				long plid = GetterUtil.getLong(
 					oldPrimKey.substring(0, pos));
 
-				pos = oldPrimKey.indexOf(PortletImpl.INSTANCE_SEPARATOR);
+				pos = oldPrimKey.indexOf(PortletConstants.INSTANCE_SEPARATOR);
 
 				String instanceId = oldPrimKey.substring(
-					pos + PortletImpl.INSTANCE_SEPARATOR.length());
+					pos + PortletConstants.INSTANCE_SEPARATOR.length());
 
 				String newPrimKey =
-					plid + PortletImpl.LAYOUT_SEPARATOR + newRootPortletId +
-						PortletImpl.INSTANCE_SEPARATOR +
+					plid + PortletConstants.LAYOUT_SEPARATOR +
+						newRootPortletId + PortletConstants.INSTANCE_SEPARATOR +
 							instanceId;
 
 				runSQL(
@@ -173,10 +173,10 @@ public class UpgradePortletId extends UpgradeProcess {
 						"' where primKey = '" + oldPrimKey + "'");
 
 				String oldPortletId =
-					oldRootPortletId + PortletImpl.INSTANCE_SEPARATOR +
+					oldRootPortletId + PortletConstants.INSTANCE_SEPARATOR +
 						instanceId;
 				String newPortletId =
-					newRootPortletId + PortletImpl.INSTANCE_SEPARATOR +
+					newRootPortletId + PortletConstants.INSTANCE_SEPARATOR +
 						instanceId;
 
 				upgradeLayout(plid, oldPortletId, newPortletId);

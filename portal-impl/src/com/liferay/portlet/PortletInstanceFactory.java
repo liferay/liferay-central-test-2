@@ -24,7 +24,7 @@ package com.liferay.portlet;
 
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 
 import java.util.Iterator;
@@ -66,7 +66,7 @@ public class PortletInstanceFactory {
 		boolean instanceable = false;
 
 		if ((portlet.isInstanceable()) &&
-			(PortletImpl.getInstanceId(portlet.getPortletId()) != null)) {
+			(PortletConstants.getInstanceId(portlet.getPortletId()) != null)) {
 
 			instanceable = true;
 		}
@@ -166,7 +166,7 @@ public class PortletInstanceFactory {
 			String portletId = entry.getKey();
 			InvokerPortlet invokerPortletInstance = entry.getValue();
 
-			if (PortletImpl.getInstanceId(portletId) == null) {
+			if (PortletConstants.getInstanceId(portletId) == null) {
 				invokerPortletInstance.destroy();
 
 				break;

@@ -37,9 +37,9 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PublicRenderParameter;
 import com.liferay.portal.model.User;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.servlet.NamespaceServletRequest;
 import com.liferay.portal.servlet.SharedSessionUtil;
@@ -720,7 +720,7 @@ public abstract class PortletRequestImpl implements PortletRequest {
 		String userPrincipalStrategy = portlet.getUserPrincipalStrategy();
 
 		if (userPrincipalStrategy.equals(
-				PortletImpl.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
+				PortletConstants.USER_PRINCIPAL_STRATEGY_SCREEN_NAME)) {
 
 			try {
 				User user = PortalUtil.getUser(req);

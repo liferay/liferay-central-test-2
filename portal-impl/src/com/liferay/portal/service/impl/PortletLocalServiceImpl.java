@@ -34,6 +34,7 @@ import com.liferay.portal.model.EventDefinition;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletCategory;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PortletURLListener;
@@ -141,7 +142,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Map<String, Portlet> companyPortletsPool = _getPortletsPool(companyId);
 
-		String rootPortletId = PortletImpl.getRootPortletId(portletId);
+		String rootPortletId = PortletConstants.getRootPortletId(portletId);
 
 		if (portletId.equals(rootPortletId)) {
 			portlet = companyPortletsPool.get(portletId);
@@ -223,7 +224,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 		Map<String, Portlet> companyPortletsPool = _getPortletsPool(companyId);
 
-		String rootPortletId = PortletImpl.getRootPortletId(portletId);
+		String rootPortletId = PortletConstants.getRootPortletId(portletId);
 
 		if (portletId.equals(rootPortletId)) {
 			portlet = companyPortletsPool.get(portletId);
@@ -513,7 +514,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			if (Validator.isNotNull(servletContextName)) {
 				portletId =
-					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
+					portletId + PortletConstants.WAR_SEPARATOR +
+						servletContextName;
 			}
 
 			portletId = PortalUtil.getJsSafePortletId(portletId);
@@ -561,13 +563,13 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			if (Validator.isNotNull(servletContextName)) {
 				if (portletId.endsWith(
-						PortletImpl.WAR_SEPARATOR + servletContextName)) {
+						PortletConstants.WAR_SEPARATOR + servletContextName)) {
 
 					portlets.add(portlet);
 				}
 			}
 			else {
-				if (portletId.indexOf(PortletImpl.WAR_SEPARATOR) == -1) {
+				if (portletId.indexOf(PortletConstants.WAR_SEPARATOR) == -1) {
 					portlets.add(portlet);
 				}
 			}
@@ -662,7 +664,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 				if (Validator.isNotNull(servletContextName)) {
 					portletId =
-						portletId + PortletImpl.WAR_SEPARATOR +
+						portletId + PortletConstants.WAR_SEPARATOR +
 							servletContextName;
 				}
 
@@ -719,7 +721,7 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			if ((servletContextName != null) && (portletApp.isWARFile()) &&
 				(portletId.endsWith(
-					PortletImpl.WAR_SEPARATOR +
+					PortletConstants.WAR_SEPARATOR +
 						PortalUtil.getJsSafePortletId(servletContextName)) &&
 				(!portletIds.contains(portletId)))) {
 
@@ -727,7 +729,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			}
 			else if ((servletContextName == null) &&
 					 (!portletApp.isWARFile()) &&
-					 (portletId.indexOf(PortletImpl.WAR_SEPARATOR) == -1) &&
+					 (portletId.indexOf(PortletConstants.WAR_SEPARATOR) ==
+						-1) &&
 					 (!portletIds.contains(portletId))) {
 
 				undefinedPortletIds.add(portletId);
@@ -815,7 +818,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			if (Validator.isNotNull(servletContextName)) {
 				portletId =
-					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
+					portletId + PortletConstants.WAR_SEPARATOR +
+						servletContextName;
 			}
 
 			portletId = PortalUtil.getJsSafePortletId(portletId);
@@ -1195,7 +1199,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 
 			if (Validator.isNotNull(servletContextName)) {
 				portletId =
-					portletId + PortletImpl.WAR_SEPARATOR + servletContextName;
+					portletId + PortletConstants.WAR_SEPARATOR +
+						servletContextName;
 			}
 
 			portletId = PortalUtil.getJsSafePortletId(portletId);

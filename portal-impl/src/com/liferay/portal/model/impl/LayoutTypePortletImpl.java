@@ -37,6 +37,7 @@ import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -102,7 +103,7 @@ public class LayoutTypePortletImpl
 		String instanceId = PwdGenerator.getPassword(
 			PwdGenerator.KEY1 + PwdGenerator.KEY2 + PwdGenerator.KEY3, 4);
 
-		return PortletImpl.INSTANCE_SEPARATOR + instanceId;
+		return PortletConstants.INSTANCE_SEPARATOR + instanceId;
 	}
 
 	public LayoutTypePortletImpl(LayoutImpl layout) {
@@ -336,7 +337,8 @@ public class LayoutTypePortletImpl
 			}
 
 			if ((portlet.isInstanceable()) &&
-				(PortletImpl.getInstanceId(portlet.getPortletId()) == null)) {
+				(PortletConstants.getInstanceId(
+					portlet.getPortletId()) == null)) {
 
 				portletId = portletId + getFullInstanceSeparator();
 			}

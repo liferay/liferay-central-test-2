@@ -28,7 +28,7 @@ package com.liferay.portal.model;
  * @author Brian Wing Shun Chan
  *
  */
-public interface ContactConstants {
+public class ContactConstants {
 
 	public static final long DEFAULT_PARENT_CONTACT_ID = 0;
 

@@ -24,7 +24,7 @@ package com.liferay.portlet.layoutconfiguration.util.velocity;
 
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portlet.layoutconfiguration.util.RuntimePortletUtil;
 
 import java.util.Map;
@@ -78,7 +78,7 @@ public class PortletLogic extends RuntimeLogic {
 			portletId = rootPortletId;
 
 			if (Validator.isNotNull(instanceId)) {
-				portletId += PortletImpl.INSTANCE_SEPARATOR + instanceId;
+				portletId += PortletConstants.INSTANCE_SEPARATOR + instanceId;
 			}
 		}
 

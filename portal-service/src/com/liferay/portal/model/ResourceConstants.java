@@ -28,7 +28,7 @@ package com.liferay.portal.model;
  * @author Brian Wing Shun Chan
  *
  */
-public interface ResourceConstants {
+public class ResourceConstants {
 
 	public static final int SCOPE_INDIVIDUAL = 4;
 

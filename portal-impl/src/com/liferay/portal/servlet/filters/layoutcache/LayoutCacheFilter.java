@@ -41,8 +41,8 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.impl.LayoutImpl;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
@@ -376,7 +376,7 @@ public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 
 				for (int j = 0; j < portlets.length; j++) {
 					String portletId = StringUtil.extractFirst(
-						portlets[j], PortletImpl.INSTANCE_SEPARATOR);
+						portlets[j], PortletConstants.INSTANCE_SEPARATOR);
 
 					Portlet portlet = PortletLocalServiceUtil.getPortletById(
 						companyId, portletId);

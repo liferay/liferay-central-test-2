@@ -29,9 +29,9 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletPreferences;
 import com.liferay.portal.model.PortletPreferencesIds;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.service.base.PortletPreferencesLocalServiceBaseImpl;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesSerializer;
@@ -186,7 +186,8 @@ public class PortletPreferencesLocalServiceImpl
 
 				if (Validator.isNull(defaultPreferences)) {
 					if (portlet == null) {
-						defaultPreferences = PortletImpl.DEFAULT_PREFERENCES;
+						defaultPreferences =
+							PortletConstants.DEFAULT_PREFERENCES;
 					}
 					else {
 						defaultPreferences = portlet.getDefaultPreferences();

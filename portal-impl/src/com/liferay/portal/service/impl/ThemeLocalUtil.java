@@ -31,9 +31,9 @@ import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.PluginSetting;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.plugin.PluginUtil;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
@@ -514,7 +514,8 @@ public class ThemeLocalUtil {
 
 			if (servletContextName != null) {
 				themeId =
-					themeId + PortletImpl.WAR_SEPARATOR + servletContextName;
+					themeId + PortletConstants.WAR_SEPARATOR +
+						servletContextName;
 			}
 
 			themeId = PortalUtil.getJsSafePortletId(themeId);

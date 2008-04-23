@@ -28,7 +28,7 @@ package com.liferay.portal.model;
  * @author Brian Wing Shun Chan
  *
  */
-public interface OrganizationConstants {
+public class OrganizationConstants {
 
 	public static final int DEFAULT_PARENT_ORGANIZATION_ID = 0;
 

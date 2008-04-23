@@ -28,7 +28,7 @@ package com.liferay.portal.model;
  * @author Brian Wing Shun Chan
  *
  */
-public interface CompanyConstants {
+public class CompanyConstants {
 
 	public static final String AUTH_TYPE_EA = "emailAddress";
 

@@ -31,7 +31,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Group;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
-import com.liferay.portal.model.impl.PortletImpl;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
@@ -201,8 +201,8 @@ public class EditProposalAction extends EditPagesAction {
 			String classPK = proposal.getClassPK();
 
 			String portletId = classPK.substring(
-				classPK.indexOf(PortletImpl.LAYOUT_SEPARATOR) +
-					PortletImpl.LAYOUT_SEPARATOR.length());
+				classPK.indexOf(PortletConstants.LAYOUT_SEPARATOR) +
+					PortletConstants.LAYOUT_SEPARATOR.length());
 
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(
 				proposal.getCompanyId(), portletId);
@@ -250,8 +250,8 @@ public class EditProposalAction extends EditPagesAction {
 			}
 			else if (className.equals(Portlet.class.getName())) {
 				String portletId = classPK.substring(
-					classPK.indexOf(PortletImpl.LAYOUT_SEPARATOR) +
-						PortletImpl.LAYOUT_SEPARATOR.length());
+					classPK.indexOf(PortletConstants.LAYOUT_SEPARATOR) +
+						PortletConstants.LAYOUT_SEPARATOR.length());
 
 				name = PortalUtil.getPortletTitle(
 					portletId, themeDisplay.getCompanyId(),

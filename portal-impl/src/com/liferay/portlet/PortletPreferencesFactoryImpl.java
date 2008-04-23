@@ -33,8 +33,8 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletPreferencesIds;
-import com.liferay.portal.model.impl.PortletImpl;
 import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portal.security.permission.ActionKeys;
 import com.liferay.portal.security.permission.PermissionChecker;
@@ -218,7 +218,7 @@ public class PortletPreferencesFactoryImpl
 			ownerId = themeDisplay.getCompanyId();
 			ownerType = PortletKeys.PREFS_OWNER_TYPE_COMPANY;
 			plid = PortletKeys.PREFS_PLID_SHARED;
-			portletId = PortletImpl.getRootPortletId(portletId);
+			portletId = PortletConstants.getRootPortletId(portletId);
 		}
 		else {
 			if (portlet.isPreferencesUniquePerLayout()) {
@@ -246,7 +246,7 @@ public class PortletPreferencesFactoryImpl
 				if (portlet.isPreferencesOwnedByGroup()) {
 					ownerId = selLayout.getGroupId();
 					ownerType = PortletKeys.PREFS_OWNER_TYPE_GROUP;
-					portletId = PortletImpl.getRootPortletId(portletId);
+					portletId = PortletConstants.getRootPortletId(portletId);
 				}
 				else {
 					long userId = PortalUtil.getUserId(req);
@@ -360,7 +360,7 @@ public class PortletPreferencesFactoryImpl
 		boolean uniquePerGroup = false;
 
 		if (portlet.isPreferencesCompanyWide()) {
-			portletId = PortletImpl.getRootPortletId(portletId);
+			portletId = PortletConstants.getRootPortletId(portletId);
 		}
 		else {
 			if (portlet.isPreferencesUniquePerLayout()) {
@@ -373,7 +373,7 @@ public class PortletPreferencesFactoryImpl
 			else {
 				if (portlet.isPreferencesOwnedByGroup()) {
 					uniquePerGroup = true;
-					portletId = PortletImpl.getRootPortletId(portletId);
+					portletId = PortletConstants.getRootPortletId(portletId);
 				}
 			}
 		}

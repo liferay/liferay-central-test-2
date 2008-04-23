@@ -40,6 +40,7 @@ import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.PluginSetting;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletFilter;
 import com.liferay.portal.model.PortletInfo;
 import com.liferay.portal.model.PublicRenderParameter;
@@ -79,72 +80,6 @@ import org.apache.commons.logging.LogFactory;
  *
  */
 public class PortletImpl extends PortletModelImpl implements Portlet {
-
-	/**
-	 * War file separator.
-	 */
-	public static final String WAR_SEPARATOR = "_WAR_";
-
-	/**
-	 * Instance separator.
-	 */
-	public static final String INSTANCE_SEPARATOR = "_INSTANCE_";
-
-	/**
-	 * Layout separator.
-	 */
-	public static final String LAYOUT_SEPARATOR = "_LAYOUT_";
-
-	/**
-	 * Default preferences.
-	 */
-	public static final String DEFAULT_PREFERENCES = "<portlet-preferences />";
-
-	/**
-	 * User principal strategy for screen name.
-	 */
-	public static final String USER_PRINCIPAL_STRATEGY_SCREEN_NAME =
-		"screenName";
-
-	/**
-	 * User principal strategy for screen name.
-	 */
-	public static final String USER_PRINCIPAL_STRATEGY_USER_ID = "userId";
-
-	/**
-	 * Gets the root portlet id of the portlet.
-	 *
-	 * @param		portletId the portlet id of the portlet
-	 * @return		the root portlet id of the portlet
-	 */
-	public static String getRootPortletId(String portletId) {
-		int pos = portletId.indexOf(INSTANCE_SEPARATOR);
-
-		if (pos == -1) {
-			return portletId;
-		}
-		else {
-			return portletId.substring(0, pos);
-		}
-	}
-
-	/**
-	 * Gets the instance id of the portlet.
-	 *
-	 * @param		portletId the portlet id of the portlet
-	 * @return		the instance id of the portlet
-	 */
-	public static String getInstanceId(String portletId) {
-		int pos = portletId.indexOf(INSTANCE_SEPARATOR);
-
-		if (pos == -1) {
-			return null;
-		}
-		else {
-			return portletId.substring(
-				pos + INSTANCE_SEPARATOR.length(), portletId.length());
-		}
-	}
 
 	/**
 	 * Constructs a portlet with no parameters.
@@ -296,7 +231,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the root portlet id of the portlet
 	 */
 	public String getRootPortletId() {
-		return getRootPortletId(getPortletId());
+		return PortletConstants.getRootPortletId(getPortletId());
 	}
 
 	/**
@@ -305,7 +240,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * @return		the instance id of the portlet
 	 */
 	public String getInstanceId() {
-		return getInstanceId(getPortletId());
+		return PortletConstants.getInstanceId(getPortletId());
 	}
 
 	/**
@@ -835,7 +770,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public String getDefaultPreferences() {
 		if (Validator.isNull(_defaultPreferences)) {
-			return DEFAULT_PREFERENCES;
+			return PortletConstants.DEFAULT_PREFERENCES;
 		}
 		else {
 			return _defaultPreferences;
@@ -2615,7 +2550,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The user principal strategy of the portlet.
 	 */
 	private String _userPrincipalStrategy =
-		PortletImpl.USER_PRINCIPAL_STRATEGY_USER_ID;
+		PortletConstants.USER_PRINCIPAL_STRATEGY_USER_ID;
 
 	/**
 	 * True if the portlet does not share request attributes with the portal or
