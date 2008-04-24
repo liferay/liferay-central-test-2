@@ -51,6 +51,16 @@ public class SocialActivityLocalServiceImpl
 			String type, String extraData, long receiverUserId)
 		throws PortalException, SystemException {
 
+		return addActivity(
+			userId, groupId, new Date(), className, classPK, type, extraData,
+			receiverUserId);
+	}
+
+	public SocialActivity addActivity(
+			long userId, long groupId, Date createDate, String className,
+			long classPK, String type, String extraData, long receiverUserId)
+		throws PortalException, SystemException {
+
 		User user = userPersistence.findByPrimaryKey(userId);
 		long classNameId = PortalUtil.getClassNameId(className);
 
@@ -63,7 +73,7 @@ public class SocialActivityLocalServiceImpl
 		activity.setGroupId(groupId);
 		activity.setCompanyId(user.getCompanyId());
 		activity.setUserId(user.getUserId());
-		activity.setCreateDate(new Date());
+		activity.setCreateDate(createDate);
 		activity.setClassNameId(classNameId);
 		activity.setClassPK(classPK);
 		activity.setType(type);
