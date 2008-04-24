@@ -42,7 +42,7 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 
 	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
 
-	sm.append("<ul class=\"portlet-sitemap\">");
+	sm.append("<ul>");
 
 	for (int i = 0; i < layouts.size(); i++) {
 		Layout layout = (Layout)layouts.get(i);
@@ -65,7 +65,6 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 			}
 
 			sm.append("</li>");
-
 		}
 	}
 
