@@ -68,7 +68,7 @@ public class MinorArticleChangeTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\nOh NOES! I've made a minor change. Please revert this!");
+			"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\nOh NOES! I've made a minor change. Please revert this!");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

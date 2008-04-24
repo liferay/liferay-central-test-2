@@ -69,7 +69,7 @@ public class EditSecondArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!");
+			"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

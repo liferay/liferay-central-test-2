@@ -68,7 +68,7 @@ public class AddLinksTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\n[[Link Me 1]]\n[[Link Me 2]]");
+			"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====\n\nI love Liferay! This Wiki has been EDITED!\n\n[[Link Me 1]]\n[[Link Me 2]]");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

@@ -88,7 +88,7 @@ public class AddSecondArticleTest extends BaseTestCase {
 		}
 
 		selenium.type("_36_content",
-			"&lt;&lt;TableOfContents&gt;&gt;\n\n== This is a second test article ==\n\n====Yes this is a second test article ====");
+			"<<TableOfContents>>\n\n== This is a second test article ==\n\n====Yes this is a second test article ====");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
