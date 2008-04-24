@@ -46,7 +46,7 @@ public class WikiTests extends BaseTests {
 		addTestSuite(EditSecondArticleTest.class);
 		addTestSuite(MinorArticleChangeTest.class);
 		addTestSuite(CompareVersionsTest.class);
-		addTestSuite(RevertMinorArticleChange.class);
+		addTestSuite(RevertMinorArticleChangeTest.class);
 		addTestSuite(AddTemporaryArticleTest.class);
 		addTestSuite(DeleteArticleTest.class);
 		addTestSuite(AddOrphanedArticlesTest.class);

@@ -25,13 +25,13 @@ package com.liferay.portalweb.portlet.wiki;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="RevertMinorArticleChange.java.html"><b><i>View Source</i></b></a>
+ * <a href="RevertMinorArticleChangeTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class RevertMinorArticleChange extends BaseTestCase {
-	public void testRevertMinorArticleCh() throws Exception {
+public class RevertMinorArticleChangeTest extends BaseTestCase {
+	public void testRevertMinorArticleChange() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
