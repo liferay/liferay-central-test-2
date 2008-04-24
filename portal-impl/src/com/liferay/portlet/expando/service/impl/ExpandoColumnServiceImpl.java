@@ -56,15 +56,13 @@ public class ExpandoColumnServiceImpl extends ExpandoColumnServiceBaseImpl {
 		expandoColumnLocalService.deleteColumn(tableId, name);
 	}
 
-	public void deleteColumn(
-			String className, String tableName, String name)
+	public void deleteColumn(String className, String tableName, String name)
 		throws PortalException, SystemException {
 
 		expandoColumnLocalService.deleteColumn(className, tableName, name);
 	}
 
-	public void deleteColumn(
-			long classNameId, String tableName, String name)
+	public void deleteColumn(long classNameId, String tableName, String name)
 		throws PortalException, SystemException {
 
 		expandoColumnLocalService.deleteColumn(classNameId, tableName, name);

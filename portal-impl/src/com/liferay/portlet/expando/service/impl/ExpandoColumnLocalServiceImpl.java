@@ -87,8 +87,7 @@ public class ExpandoColumnLocalServiceImpl
 		deleteColumn(column.getColumnId());
 	}
 
-	public void deleteColumn(
-			String className, String tableName, String name)
+	public void deleteColumn(String className, String tableName, String name)
 		throws PortalException, SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
@@ -96,8 +95,7 @@ public class ExpandoColumnLocalServiceImpl
 		deleteColumn(classNameId, tableName, name);
 	}
 
-	public void deleteColumn(
-			long classNameId, String tableName, String name)
+	public void deleteColumn(long classNameId, String tableName, String name)
 		throws PortalException, SystemException {
 
 		ExpandoTable table = expandoTableLocalService.getTable(
