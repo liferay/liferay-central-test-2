@@ -35,6 +35,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.ResourceLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 
 /**
  * <a href="LayoutPermissionImpl.java.html"><b><i>View Source</i></b></a>
@@ -111,6 +112,21 @@ public class LayoutPermissionImpl implements LayoutPermission {
 	public boolean contains(
 			PermissionChecker permissionChecker, Layout layout, String actionId)
 		throws PortalException, SystemException {
+
+		if ((layout.isPrivateLayout() &&
+			 !PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) ||
+			(layout.isPublicLayout() &&
+			 !PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE)) {
+
+			if (actionId.equals(ActionKeys.UPDATE)) {
+				Group group = GroupLocalServiceUtil.getGroup(
+					layout.getGroupId());
+
+				if (group.isUser()) {
+					return false;
+				}
+			}
+		}
 
 		if (GroupPermissionUtil.contains(
 				permissionChecker, layout.getGroupId(),

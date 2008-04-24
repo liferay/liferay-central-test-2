@@ -34,6 +34,7 @@ import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.UploadServletRequest;
 import com.liferay.util.servlet.fileupload.LiferayFileItemFactory;
@@ -236,7 +237,9 @@ public abstract class BaseCommandReceiver implements CommandReceiver {
 			groups.add(0, organization.getGroup());
 		}
 
-		if (user.isLayoutsRequired()) {
+		if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
+			PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+
 			Group userGroup = user.getGroup();
 
 			groups.add(0, userGroup);

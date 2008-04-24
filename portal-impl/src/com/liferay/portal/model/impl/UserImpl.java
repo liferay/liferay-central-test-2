@@ -41,8 +41,8 @@ import com.liferay.portal.service.ContactLocalServiceUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
 import com.liferay.portal.service.PasswordPolicyLocalServiceUtil;
-import com.liferay.portal.service.RoleLocalServiceUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.OrganizationNameComparator;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -413,16 +413,6 @@ public class UserImpl extends UserModelImpl implements User {
 		}
 	}
 
-	public boolean isLayoutsRequired() {
-		try {
-			return RoleLocalServiceUtil.hasUserRole(
-				getUserId(), getCompanyId(), RoleImpl.POWER_USER, true);
-		}
-		catch (Exception e) {
-			return false;
-		}
-	}
-
 	public List<Group> getMyPlaces() {
 		List<Group> myPlaces = new ArrayList<Group>();
 
@@ -447,7 +437,9 @@ public class UserImpl extends UserModelImpl implements User {
 				myPlaces.add(0, organization.getGroup());
 			}
 
-			if (isLayoutsRequired()) {
+			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
+				PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+
 				Group userGroup = getGroup();
 
 				myPlaces.add(0, userGroup);
@@ -488,7 +480,9 @@ public class UserImpl extends UserModelImpl implements User {
 				return true;
 			}
 
-			if (isLayoutsRequired()) {
+			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED ||
+				PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+
 				return true;
 			}
 		}

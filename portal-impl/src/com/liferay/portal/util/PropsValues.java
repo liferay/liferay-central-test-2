@@ -215,8 +215,42 @@ public class PropsValues {
 	public static final String DEFAULT_ADMIN_SCREEN_NAME =
 		PropsUtil.get(PropsUtil.DEFAULT_ADMIN_SCREEN_NAME);
 
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN =
+		PropsUtil.get(PropsUtil.DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN);
+
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_FRIENDLY_URL =
+		PropsUtil.get(PropsUtil.DEFAULT_GUEST_PUBLIC_LAYOUT_FRIENDLY_URL);
+
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_NAME =
+		PropsUtil.get(PropsUtil.DEFAULT_GUEST_PUBLIC_LAYOUT_NAME);
+
+	public static final String
+		DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID =
+			PropsUtil.get(PropsUtil.
+				DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID);
+
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_THEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_THEME_ID);
+
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_TEMPLATE_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_GUEST_PUBLIC_LAYOUT_TEMPLATE_ID);
+
+	public static final String
+		DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID =
+			PropsUtil.get(PropsUtil.
+				DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID);
+
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_THEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_THEME_ID);
+
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUTS_LAR =
+		PropsUtil.get(PropsUtil.DEFAULT_GUEST_PUBLIC_LAYOUTS_LAR);
+
 	public static final String DEFAULT_LANDING_PAGE_PATH =
 		PropsUtil.get(PropsUtil.DEFAULT_LANDING_PAGE_PATH);
+
+	public static final String DEFAULT_LAYOUT_TEMPLATE_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_LAYOUT_TEMPLATE_ID);
 
 	public static final String DEFAULT_LOGOUT_PAGE_PATH =
 		PropsUtil.get(PropsUtil.DEFAULT_LOGOUT_PAGE_PATH);
@@ -227,29 +261,63 @@ public class PropsValues {
 	public static final String DEFAULT_REGULAR_THEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_REGULAR_THEME_ID);
 
-	public static final String DEFAULT_USER_LAYOUT_NAME =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_LAYOUT_NAME);
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_COLUMN =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_COLUMN);
 
-	public static final String DEFAULT_USER_LAYOUT_TEMPLATE_ID =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_LAYOUT_TEMPLATE_ID);
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_FRIENDLY_URL =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_FRIENDLY_URL);
 
-	public static final String DEFAULT_USER_PRIVATE_LAYOUT_LAR =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_LAR);
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_NAME =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_NAME);
 
-	public static final String DEFAULT_USER_PUBLIC_LAYOUT_LAR =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_LAR);
+	public static final String
+		DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_COLOR_SCHEME_ID =
+			PropsUtil.get(PropsUtil.
+				DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_COLOR_SCHEME_ID);
 
-	public static final String DEFAULT_USER_REGULAR_COLOR_SCHEME_ID =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_REGULAR_COLOR_SCHEME_ID);
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_THEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_THEME_ID);
 
-	public static final String DEFAULT_USER_REGULAR_THEME_ID =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_REGULAR_THEME_ID);
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_TEMPLATE_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_TEMPLATE_ID);
 
-	public static final String DEFAULT_USER_WAP_COLOR_SCHEME_ID =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_WAP_COLOR_SCHEME_ID);
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_WAP_COLOR_SCHEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_WAP_COLOR_SCHEME_ID);
 
-	public static final String DEFAULT_USER_WAP_THEME_ID =
-		PropsUtil.get(PropsUtil.DEFAULT_USER_WAP_THEME_ID);
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_WAP_THEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_WAP_THEME_ID);
+
+	public static final String DEFAULT_USER_PRIVATE_LAYOUTS_LAR =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PRIVATE_LAYOUTS_LAR);
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_COLUMN =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_COLUMN);
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_FRIENDLY_URL =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_FRIENDLY_URL);
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_NAME =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_NAME);
+
+	public static final String
+		DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID =
+			PropsUtil.get(PropsUtil.
+				DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID);
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_THEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_THEME_ID);
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_TEMPLATE_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_TEMPLATE_ID);
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID);
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_WAP_THEME_ID =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_WAP_THEME_ID);
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUTS_LAR =
+		PropsUtil.get(PropsUtil.DEFAULT_USER_PUBLIC_LAYOUTS_LAR);
 
 	public static final String DEFAULT_WAP_COLOR_SCHEME_ID =
 		PropsUtil.get(PropsUtil.DEFAULT_WAP_COLOR_SCHEME_ID);
@@ -420,6 +488,30 @@ public class PropsValues {
 
 	public static final String[] LAYOUT_TYPES =
 		PropsUtil.getArray(PropsUtil.LAYOUT_TYPES);
+
+	public static boolean LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE));
+
+	public static final boolean LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED));
+
+	public static boolean LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE));
+
+	public static boolean LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE));
+
+	public static final boolean LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED));
+
+	public static boolean LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE =
+		GetterUtil.getBoolean(
+			PropsUtil.get(PropsUtil.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE));
 
 	public static final String LDAP_ATTRS_TRANSFORMER_IMPL =
 		PropsUtil.get(PropsUtil.LDAP_ATTRS_TRANSFORMER_IMPL);
@@ -810,5 +902,17 @@ public class PropsValues {
 
 	public static final String WIKI_PAGE_TITLES_REGEXP = PropsUtil.get(
 		PropsUtil.WIKI_PAGE_TITLES_REGEXP);
+
+	static {
+		if (!LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED) {
+			LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE = false;
+			LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE = false;
+		}
+
+		if (!LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+			LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE = false;
+			LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE = false;
+		}
+	}
 
 }

@@ -86,6 +86,7 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletURLImpl;
 import com.liferay.util.ListUtil;
+import com.liferay.util.Normalizer;
 import com.liferay.util.dao.hibernate.QueryUtil;
 import com.liferay.util.servlet.SessionErrors;
 
@@ -152,39 +153,253 @@ public class ServicePreAction extends Action {
 		}
 	}
 
-	protected void addDefaultLayouts(User user)
+	protected void addDefaultLayoutsByLAR(
+			long userId, long groupId, boolean privateLayout, File larFile)
 		throws PortalException, SystemException {
 
-		if (user.hasPrivateLayouts()) {
-			return;
+		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.PERMISSIONS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_SETUP,
+			new String[] {Boolean.TRUE.toString()});
+
+		LayoutLocalServiceUtil.importLayouts(
+			userId, groupId, privateLayout, parameterMap, larFile);
+	}
+
+	protected void addDefaultUserPrivateLayoutByProperties(
+			long userId, long groupId)
+		throws PortalException, SystemException {
+
+		String friendlyURL = getFriendlyURL(
+			PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_FRIENDLY_URL);
+
+		Layout layout = LayoutLocalServiceUtil.addLayout(
+			userId, groupId, true, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_NAME, StringPool.BLANK,
+			StringPool.BLANK, LayoutConstants.TYPE_PORTLET, false, friendlyURL);
+
+		LayoutTypePortlet layoutTypePortlet =
+			(LayoutTypePortlet)layout.getLayoutType();
+
+		layoutTypePortlet.setLayoutTemplateId(
+			0, PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_TEMPLATE_ID, false);
+
+		for (int i = 0; i < 10; i++) {
+			String columnId = "column-" + i;
+			String portletIds = PropsUtil.get(
+				PropsUtil.DEFAULT_USER_PRIVATE_LAYOUT_COLUMN + i);
+
+			String[] portletIdsArray = StringUtil.split(portletIds);
+
+			layoutTypePortlet.addPortletIds(
+				0, portletIdsArray, columnId, false);
 		}
 
-		Group userGroup = user.getGroup();
+		LayoutLocalServiceUtil.updateLayout(
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+			layout.getTypeSettings());
 
-		if (privateLARFile != null) {
-			importLayoutsByLAR(
-				user.getUserId(), userGroup.getGroupId(), true, privateLARFile);
-		}
-		else {
-			importLayoutsByProperties(user.getUserId(), userGroup.getGroupId());
+		boolean updateLayoutSet = false;
+
+		LayoutSet layoutSet = layout.getLayoutSet();
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_THEME_ID)) {
+
+			layoutSet.setThemeId(
+				PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_THEME_ID);
+
+			updateLayoutSet = true;
 		}
 
-		if (publicLARFile != null) {
-			importLayoutsByLAR(
-				user.getUserId(), userGroup.getGroupId(), false, publicLARFile);
+		if (Validator.isNotNull(
+				PropsValues.
+					DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_COLOR_SCHEME_ID)) {
+
+			layoutSet.setColorSchemeId(
+				PropsValues.
+					DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_COLOR_SCHEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_WAP_THEME_ID)) {
+
+			layoutSet.setWapThemeId(
+				PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_WAP_THEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_WAP_COLOR_SCHEME_ID)) {
+
+			layoutSet.setWapColorSchemeId(
+				PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_WAP_COLOR_SCHEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (updateLayoutSet) {
+			LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
 		}
 	}
 
-	protected void deleteDefaultLayouts(User user)
+	protected void addDefaultUserPrivateLayouts(User user)
 		throws PortalException, SystemException {
 
-		if (user.hasPrivateLayouts()) {
+		if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE) {
+			return;
+		}
+
+		if (!user.hasPrivateLayouts()) {
+			Group userGroup = user.getGroup();
+
+			if (privateLARFile != null) {
+				addDefaultLayoutsByLAR(
+					user.getUserId(), userGroup.getGroupId(), true,
+					privateLARFile);
+			}
+			else {
+				addDefaultUserPrivateLayoutByProperties(
+					user.getUserId(), userGroup.getGroupId());
+			}
+		}
+	}
+
+	protected void addDefaultUserPublicLayoutByProperties(
+			long userId, long groupId)
+		throws PortalException, SystemException {
+
+		String friendlyURL = getFriendlyURL(
+			PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_FRIENDLY_URL);
+
+		Layout layout = LayoutLocalServiceUtil.addLayout(
+			userId, groupId, false, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_NAME, StringPool.BLANK,
+			StringPool.BLANK, LayoutConstants.TYPE_PORTLET, false, friendlyURL);
+
+		LayoutTypePortlet layoutTypePortlet =
+			(LayoutTypePortlet)layout.getLayoutType();
+
+		layoutTypePortlet.setLayoutTemplateId(
+			0, PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_TEMPLATE_ID, false);
+
+		for (int i = 0; i < 10; i++) {
+			String columnId = "column-" + i;
+			String portletIds = PropsUtil.get(
+				PropsUtil.DEFAULT_USER_PUBLIC_LAYOUT_COLUMN + i);
+
+			String[] portletIdsArray = StringUtil.split(portletIds);
+
+			layoutTypePortlet.addPortletIds(
+				0, portletIdsArray, columnId, false);
+		}
+
+		LayoutLocalServiceUtil.updateLayout(
+			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
+			layout.getTypeSettings());
+
+		boolean updateLayoutSet = false;
+
+		LayoutSet layoutSet = layout.getLayoutSet();
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_THEME_ID)) {
+
+			layoutSet.setThemeId(
+				PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_THEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(
+				PropsValues.
+					DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID)) {
+
+			layoutSet.setColorSchemeId(
+				PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_WAP_THEME_ID)) {
+
+			layoutSet.setWapThemeId(
+				PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_WAP_THEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID)) {
+
+			layoutSet.setWapColorSchemeId(
+				PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (updateLayoutSet) {
+			LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
+		}
+	}
+
+	protected void addDefaultUserPublicLayouts(User user)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE) {
+			return;
+		}
+
+		if (!user.hasPublicLayouts()) {
+			Group userGroup = user.getGroup();
+
+			if (publicLARFile != null) {
+				addDefaultLayoutsByLAR(
+					user.getUserId(), userGroup.getGroupId(), true,
+					publicLARFile);
+			}
+			else {
+				addDefaultUserPublicLayoutByProperties(
+					user.getUserId(), userGroup.getGroupId());
+			}
+		}
+	}
+
+	protected void deleteDefaultUserPrivateLayouts(User user)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED &&
+			user.hasPrivateLayouts()) {
+
 			Group userGroup = user.getGroup();
 
 			LayoutLocalServiceUtil.deleteLayouts(userGroup.getGroupId(), true);
 		}
+	}
 
-		if (user.hasPublicLayouts()) {
+	protected void deleteDefaultUserPublicLayouts(User user)
+		throws PortalException, SystemException {
+
+		if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED &&
+			user.hasPublicLayouts()) {
+
 			Group userGroup = user.getGroup();
 
 			LayoutLocalServiceUtil.deleteLayouts(userGroup.getGroupId(), false);
@@ -287,99 +502,10 @@ public class ServicePreAction extends Action {
 		return new Object[] {layout, layouts};
 	}
 
-	protected void importLayoutsByLAR(
-			long userId, long groupId, boolean privateLayout, File larFile)
-		throws PortalException, SystemException {
+	protected String getFriendlyURL(String friendlyURL) {
+		friendlyURL = GetterUtil.getString(friendlyURL);
 
-		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
-
-		parameterMap.put(
-			PortletDataHandlerKeys.PERMISSIONS,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.USER_PERMISSIONS,
-			new String[] {Boolean.FALSE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
-			new String[] {Boolean.TRUE.toString()});
-		parameterMap.put(
-			PortletDataHandlerKeys.PORTLET_SETUP,
-			new String[] {Boolean.TRUE.toString()});
-
-		LayoutLocalServiceUtil.importLayouts(
-			userId, groupId, privateLayout, parameterMap, larFile);
-	}
-
-	protected void importLayoutsByProperties(long userId, long groupId)
-		throws PortalException, SystemException {
-
-		String name = PropsValues.DEFAULT_USER_LAYOUT_NAME;
-
-		Layout layout = LayoutLocalServiceUtil.addLayout(
-			userId, groupId, true, LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
-			name, StringPool.BLANK, StringPool.BLANK,
-			LayoutConstants.TYPE_PORTLET, false, StringPool.BLANK);
-
-		LayoutTypePortlet layoutTypePortlet =
-			(LayoutTypePortlet)layout.getLayoutType();
-
-		String layoutTemplateId = PropsValues.DEFAULT_USER_LAYOUT_TEMPLATE_ID;
-
-		layoutTypePortlet.setLayoutTemplateId(0, layoutTemplateId, false);
-
-		for (int i = 0; i < 10; i++) {
-			String columnId = "column-" + i;
-			String portletIds = PropsUtil.get(
-				PropsUtil.DEFAULT_USER_LAYOUT_COLUMN + i);
-
-			String[] portletIdsArray = StringUtil.split(portletIds);
-
-			layoutTypePortlet.addPortletIds(
-				0, portletIdsArray, columnId, false);
-		}
-
-		LayoutLocalServiceUtil.updateLayout(
-			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
-			layout.getTypeSettings());
-
-		boolean updateLayoutSet = false;
-
-		LayoutSet layoutSet = layout.getLayoutSet();
-
-		if (Validator.isNotNull(PropsValues.DEFAULT_USER_REGULAR_THEME_ID)) {
-			layoutSet.setThemeId(PropsValues.DEFAULT_USER_REGULAR_THEME_ID);
-
-			updateLayoutSet = true;
-		}
-
-		if (Validator.isNotNull(
-				PropsValues.DEFAULT_USER_REGULAR_COLOR_SCHEME_ID)) {
-
-			layoutSet.setColorSchemeId(
-				PropsValues.DEFAULT_USER_REGULAR_COLOR_SCHEME_ID);
-
-			updateLayoutSet = true;
-		}
-
-		if (Validator.isNotNull(PropsValues.DEFAULT_WAP_THEME_ID)) {
-			layoutSet.setWapThemeId(PropsValues.DEFAULT_WAP_THEME_ID);
-
-			updateLayoutSet = true;
-		}
-
-		if (Validator.isNotNull(PropsValues.DEFAULT_WAP_COLOR_SCHEME_ID)) {
-			layoutSet.setWapColorSchemeId(
-				PropsValues.DEFAULT_WAP_COLOR_SCHEME_ID);
-
-			updateLayoutSet = true;
-		}
-
-		if (updateLayoutSet) {
-			LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
-		}
+		return Normalizer.normalizeToAscii(friendlyURL.trim().toLowerCase());
 	}
 
 	protected Object[] getViewableLayouts(
@@ -429,7 +555,8 @@ public class ServicePreAction extends Action {
 	}
 
 	protected void initImportLARFiles() {
-		String privateLARFileName = PropsValues.DEFAULT_USER_PRIVATE_LAYOUT_LAR;
+		String privateLARFileName =
+			PropsValues.DEFAULT_USER_PRIVATE_LAYOUTS_LAR;
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Reading private LAR file " + privateLARFileName);
@@ -451,7 +578,7 @@ public class ServicePreAction extends Action {
 			}
 		}
 
-		String publicLARFileName = PropsValues.DEFAULT_USER_PUBLIC_LAYOUT_LAR;
+		String publicLARFileName = PropsValues.DEFAULT_USER_PUBLIC_LAYOUTS_LAR;
 
 		if (_log.isDebugEnabled()) {
 			_log.debug("Reading public LAR file " + publicLARFileName);
@@ -841,13 +968,18 @@ public class ServicePreAction extends Action {
 		// Layouts
 
 		if (signedIn) {
-			boolean layoutsRequired = user.isLayoutsRequired();
-
-			if (layoutsRequired) {
-				addDefaultLayouts(user);
+			if (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED) {
+				addDefaultUserPrivateLayouts(user);
 			}
 			else {
-				deleteDefaultLayouts(user);
+				deleteDefaultUserPrivateLayouts(user);
+			}
+
+			if (PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED) {
+				addDefaultUserPublicLayouts(user);
+			}
+			else {
+				deleteDefaultUserPublicLayouts(user);
 			}
 		}
 

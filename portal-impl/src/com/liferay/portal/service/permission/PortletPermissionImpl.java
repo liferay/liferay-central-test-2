@@ -35,6 +35,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.security.permission.ResourceActionsUtil;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.util.PropsValues;
 
 import java.util.List;
 
@@ -111,6 +112,21 @@ public class PortletPermissionImpl implements PortletPermission {
 			groupId = layout.getGroupId();
 			name = PortletConstants.getRootPortletId(portletId);
 			primKey = getPrimaryKey(plid, portletId);
+
+			if ((layout.isPrivateLayout() &&
+				 !PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) ||
+				(layout.isPublicLayout() &&
+				 !PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE)) {
+
+				if (actionId.equals(ActionKeys.CONFIGURATION)) {
+					Group group = GroupLocalServiceUtil.getGroup(
+						layout.getGroupId());
+
+					if (group.isUser()) {
+						return false;
+					}
+				}
+			}
 
 			if (!strict) {
 				if (LayoutPermissionUtil.contains(

@@ -245,6 +245,7 @@ public class EditPagesAction extends PortletAction {
 			themeDisplay.getPermissionChecker();
 
 		long groupId = ParamUtil.getLong(req, "groupId");
+		boolean privateLayout = ParamUtil.getBoolean(req, "privateLayout");
 
 		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
@@ -283,7 +284,11 @@ public class EditPagesAction extends PortletAction {
 				permissionChecker, groupUserId, organizationIds,
 				ActionKeys.UPDATE);
 
-			if (!groupUser.isLayoutsRequired()) {
+			if ((privateLayout &&
+				 !PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) ||
+				(!privateLayout &&
+				 !PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE)) {
+
 				throw new PrincipalException();
 			}
 		}

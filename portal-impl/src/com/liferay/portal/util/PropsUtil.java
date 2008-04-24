@@ -267,6 +267,8 @@ public class PropsUtil {
 
 	public static final String LOOK_AND_FEEL_MODIFIABLE = "look.and.feel.modifiable";
 
+	public static final String DEFAULT_LAYOUT_TEMPLATE_ID = "default.layout.template.id";
+
 	public static final String DEFAULT_REGULAR_THEME_ID = "default.regular.theme.id";
 
 	public static final String DEFAULT_REGULAR_COLOR_SCHEME_ID = "default.regular.color.scheme.id";
@@ -549,35 +551,65 @@ public class PropsUtil {
 
 	public static final String DEFAULT_LOGOUT_PAGE_PATH = "default.logout.page.path";
 
-	// Default Guest
+	// Default Guest Public Layouts
 
-	public static final String DEFAULT_GUEST_LAYOUT_NAME = "default.guest.layout.name";
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_NAME = "default.guest.public.layout.name";
 
-	public static final String DEFAULT_GUEST_LAYOUT_TEMPLATE_ID = "default.guest.layout.template.id";
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_TEMPLATE_ID = "default.guest.public.layout.template.id";
 
-	public static final String DEFAULT_GUEST_LAYOUT_COLUMN = "default.guest.layout.column-";
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN = "default.guest.public.layout.column-";
 
-	public static final String DEFAULT_GUEST_FRIENDLY_URL = "default.guest.friendly.url";
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_FRIENDLY_URL = "default.guest.public.layout.friendly.url";
 
-	// Default User
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_THEME_ID = "default.guest.public.layout.regular.theme.id";
 
-	public static final String DEFAULT_USER_LAYOUT_NAME = "default.user.layout.name";
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID = "default.guest.public.layout.regular.color.scheme.id";
 
-	public static final String DEFAULT_USER_LAYOUT_TEMPLATE_ID = "default.user.layout.template.id";
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_THEME_ID = "default.guest.public.layout.wap.theme.id";
 
-	public static final String DEFAULT_USER_LAYOUT_COLUMN = "default.user.layout.column-";
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID = "default.guest.public.layout.wap.color.scheme.id";
 
-	public static final String DEFAULT_USER_PRIVATE_LAYOUT_LAR = "default.user.private.layout.lar";
+	public static final String DEFAULT_GUEST_PUBLIC_LAYOUTS_LAR = "default.guest.public.layouts.lar";
 
-	public static final String DEFAULT_USER_PUBLIC_LAYOUT_LAR = "default.user.public.layout.lar";
+	// Default User Private Layouts
 
-	public static final String DEFAULT_USER_REGULAR_THEME_ID = "default.user.regular.theme.id";
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_NAME = "default.user.private.layout.name";
 
-	public static final String DEFAULT_USER_REGULAR_COLOR_SCHEME_ID = "default.user.regular.color.scheme.id";
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_TEMPLATE_ID = "default.user.private.layout.template.id";
 
-	public static final String DEFAULT_USER_WAP_THEME_ID = "default.user.wap.theme.id";
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_COLUMN = "default.user.private.layout.column-";
 
-	public static final String DEFAULT_USER_WAP_COLOR_SCHEME_ID = "default.user.wap.color.scheme.id";
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_FRIENDLY_URL = "default.user.private.layout.friendly.url";
+
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_THEME_ID = "default.user.private.layout.regular.theme.id";
+
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_REGULAR_COLOR_SCHEME_ID = "default.user.private.layout.regular.color.scheme.id";
+
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_WAP_THEME_ID = "default.user.private.layout.wap.theme.id";
+
+	public static final String DEFAULT_USER_PRIVATE_LAYOUT_WAP_COLOR_SCHEME_ID = "default.user.private.layout.wap.color.scheme.id";
+
+	public static final String DEFAULT_USER_PRIVATE_LAYOUTS_LAR = "default.user.private.layouts.lar";
+
+	// Default User Public Layouts
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_NAME = "default.user.public.layout.name";
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_TEMPLATE_ID = "default.user.public.layout.template.id";
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_COLUMN = "default.user.public.layout.column-";
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_FRIENDLY_URL = "default.user.public.layout.friendly.url";
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_THEME_ID = "default.user.public.layout.regular.theme.id";
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID = "default.user.public.layout.regular.color.scheme.id";
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_WAP_THEME_ID = "default.user.public.layout.wap.theme.id";
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID = "default.user.public.layout.wap.color.scheme.id";
+
+	public static final String DEFAULT_USER_PUBLIC_LAYOUTS_LAR = "default.user.public.layouts.lar";
 
 	// Default Admin
 
@@ -596,6 +628,18 @@ public class PropsUtil {
 	// Layouts
 
 	public static final String LAYOUT_TYPES = "layout.types";
+
+	public static final String LAYOUT_USER_PRIVATE_LAYOUTS_ENABLED = "layout.user.private.layouts.enabled";
+
+	public static final String LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE = "layout.user.private.layouts.modifiable";
+
+	public static final String LAYOUT_USER_PRIVATE_LAYOUTS_AUTO_CREATE = "layout.user.private.layouts.auto.create";
+
+	public static final String LAYOUT_USER_PUBLIC_LAYOUTS_ENABLED = "layout.user.public.layouts.enabled";
+
+	public static final String LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE = "layout.user.public.layouts.modifiable";
+
+	public static final String LAYOUT_USER_PUBLIC_LAYOUTS_AUTO_CREATE = "layout.user.public.layouts.auto.create";
 
 	public static final String LAYOUT_CONFIGURATION_ACTION_UPDATE = "layout.configuration.action.update";
 
@@ -626,12 +670,6 @@ public class PropsUtil {
 	public static final String LAYOUT_FRIENDLY_URL_PAGE_NOT_FOUND = "layout.friendly.url.page.not.found";
 
 	public static final String LAYOUT_FRIENDLY_URL_KEYWORDS = "layout.friendly.url.keywords";
-
-	public static final String LAYOUT_ADD_PORTLETS = "layout.add.portlets";
-
-	public static final String LAYOUT_NAME_MAX_LENGTH = "layout.name.max.length";
-
-	public static final String LAYOUT_TABS_PER_ROW = "layout.tabs.per.row";
 
 	public static final String LAYOUT_GUEST_SHOW_MAX_ICON = "layout.guest.show.max.icon";
 

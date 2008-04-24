@@ -62,7 +62,7 @@
 			<liferay-ui:icon image="permissions" url="<%= permissionsUserURL %>" />
 		</c:if>
 
-		<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.UPDATE) && user2.isLayoutsRequired() %>">
+		<c:if test="<%= UserPermissionUtil.contains(permissionChecker, userId, ActionKeys.UPDATE) && (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
 				<portlet:param name="redirect" value="<%= redirect %>" />

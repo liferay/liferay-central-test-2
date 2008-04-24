@@ -125,8 +125,6 @@ public interface User extends UserModel {
 
 	public boolean hasPublicLayouts();
 
-	public boolean isLayoutsRequired();
-
 	public java.util.List<com.liferay.portal.model.Group> getMyPlaces();
 
 	public boolean hasMyPlaces();

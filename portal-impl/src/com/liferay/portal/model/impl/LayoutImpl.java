@@ -158,11 +158,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 		return group;
 	}
 
-	/**
-	 * @deprecated Will always return true.
-	 */
-	public boolean isShared() {
-		return true;
+	public boolean isPublicLayout() {
+		return !isPrivateLayout();
 	}
 
 	public long getAncestorPlid() {

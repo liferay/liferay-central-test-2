@@ -31,6 +31,7 @@ import com.liferay.portal.NoSuchRoleException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.RequiredGroupException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
@@ -51,6 +52,8 @@ import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.security.permission.PermissionCacheUtil;
+import com.liferay.portal.service.LayoutLocalServiceUtil;
+import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.base.GroupLocalServiceBaseImpl;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -58,11 +61,18 @@ import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.comparator.GroupNameComparator;
 import com.liferay.util.Normalizer;
 
+import java.io.File;
+
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="GroupLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
@@ -72,6 +82,10 @@ import java.util.Properties;
  *
  */
 public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
+
+	public GroupLocalServiceImpl() {
+		initImportLARFile();
+	}
 
 	public Group addGroup(
 			long userId, String className, long classPK, String name,
@@ -216,7 +230,7 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 					group.getGroupId(), false);
 
 				if (layoutSet.getPageCount() == 0) {
-					addDefaultLayouts(group);
+					addDefaultGuestPublicLayouts(group);
 				}
 			}
 		}
@@ -635,35 +649,30 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		return group;
 	}
 
-	protected void addDefaultLayouts(Group group)
+	protected void addDefaultGuestPublicLayoutByProperties(Group group)
 		throws PortalException, SystemException {
 
 		long defaultUserId = userLocalService.getDefaultUserId(
 			group.getCompanyId());
-		String name = PropsUtil.get(PropsUtil.DEFAULT_GUEST_LAYOUT_NAME);
-
-		String friendlyURL = PropsUtil.get(
-			PropsUtil.DEFAULT_GUEST_FRIENDLY_URL);
-
-		friendlyURL = getFriendlyURL(friendlyURL);
+		String friendlyURL = getFriendlyURL(
+			PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_FRIENDLY_URL);
 
 		Layout layout = layoutLocalService.addLayout(
 			defaultUserId, group.getGroupId(), false,
-			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID, name, StringPool.BLANK,
+			LayoutConstants.DEFAULT_PARENT_LAYOUT_ID,
+			PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_NAME, StringPool.BLANK,
 			StringPool.BLANK, LayoutConstants.TYPE_PORTLET, false, friendlyURL);
 
 		LayoutTypePortlet layoutTypePortlet =
 			(LayoutTypePortlet)layout.getLayoutType();
 
-		String layoutTemplateId = PropsUtil.get(
-			PropsUtil.DEFAULT_GUEST_LAYOUT_TEMPLATE_ID);
-
-		layoutTypePortlet.setLayoutTemplateId(0, layoutTemplateId, false);
+		layoutTypePortlet.setLayoutTemplateId(
+			0, PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_TEMPLATE_ID, false);
 
 		for (int i = 0; i < 10; i++) {
 			String columnId = "column-" + i;
 			String portletIds = PropsUtil.get(
-				PropsUtil.DEFAULT_GUEST_LAYOUT_COLUMN + i);
+				PropsUtil.DEFAULT_GUEST_PUBLIC_LAYOUT_COLUMN + i);
 
 			layoutTypePortlet.addPortletIds(
 				0, StringUtil.split(portletIds), columnId, false);
@@ -672,6 +681,91 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		layoutLocalService.updateLayout(
 			layout.getGroupId(), layout.isPrivateLayout(), layout.getLayoutId(),
 			layout.getTypeSettings());
+
+		boolean updateLayoutSet = false;
+
+		LayoutSet layoutSet = layout.getLayoutSet();
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_THEME_ID)) {
+
+			layoutSet.setThemeId(
+				PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_THEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(
+				PropsValues.
+					DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID)) {
+
+			layoutSet.setColorSchemeId(
+				PropsValues.
+					DEFAULT_GUEST_PUBLIC_LAYOUT_REGULAR_COLOR_SCHEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_THEME_ID)) {
+
+			layoutSet.setWapThemeId(
+				PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_THEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (Validator.isNotNull(
+				PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID)) {
+
+			layoutSet.setWapColorSchemeId(
+				PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUT_WAP_COLOR_SCHEME_ID);
+
+			updateLayoutSet = true;
+		}
+
+		if (updateLayoutSet) {
+			LayoutSetLocalServiceUtil.updateLayoutSet(layoutSet);
+		}
+	}
+
+	protected void addDefaultGuestPublicLayouts(Group group)
+		throws PortalException, SystemException {
+
+		if (publicLARFile != null) {
+			addDefaultGuestPublicLayoutsByLAR(group, publicLARFile);
+		}
+		else {
+			addDefaultGuestPublicLayoutByProperties(group);
+		}
+	}
+
+	protected void addDefaultGuestPublicLayoutsByLAR(Group group, File larFile)
+		throws PortalException, SystemException {
+
+		long defaultUserId = userLocalService.getDefaultUserId(
+			group.getCompanyId());
+
+		Map<String, String[]> parameterMap = new HashMap<String, String[]>();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.PERMISSIONS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA_CONTROL_DEFAULT,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_SETUP,
+			new String[] {Boolean.TRUE.toString()});
+
+		LayoutLocalServiceUtil.importLayouts(
+			defaultUserId, group.getGroupId(), false, parameterMap, larFile);
 	}
 
 	protected String getFriendlyURL(String friendlyURL) {
@@ -695,6 +789,30 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		}
 
 		return friendlyURL;
+	}
+
+	protected void initImportLARFile() {
+		String publicLARFileName = PropsValues.DEFAULT_GUEST_PUBLIC_LAYOUTS_LAR;
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Reading public LAR file " + publicLARFileName);
+		}
+
+		if (Validator.isNotNull(publicLARFileName)) {
+			publicLARFile = new File(publicLARFileName);
+
+			if (!publicLARFile.exists()) {
+				_log.error(
+					"Public LAR file " + publicLARFile + " does not exist");
+
+				publicLARFile = null;
+			}
+			else {
+				if (_log.isDebugEnabled()) {
+					_log.debug("Using public LAR file " + publicLARFileName);
+				}
+			}
+		}
 	}
 
 	protected void validateFriendlyURL(
@@ -779,5 +897,9 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 		catch (NoSuchGroupException nsge) {
 		}
 	}
+
+	protected File publicLARFile;
+
+	private static Log _log = LogFactory.getLog(GroupLocalServiceImpl.class);
 
 }

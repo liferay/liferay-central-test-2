@@ -51,7 +51,7 @@ package com.liferay.portal.model;
 public interface Layout extends LayoutModel {
 	public com.liferay.portal.model.Group getGroup();
 
-	public boolean isShared();
+	public boolean isPublicLayout();
 
 	public long getAncestorPlid();
 

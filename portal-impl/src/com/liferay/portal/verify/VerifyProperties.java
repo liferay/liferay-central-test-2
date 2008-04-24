@@ -193,6 +193,42 @@ public class VerifyProperties extends VerifyProcess {
 	};
 
 	private static final String[][] _RENAMED_PORTAL_KEYS = new String[][] {
+		new String[] {
+			"default.guest.friendly.url",
+			"default.guest.public.layout.friendly.url"
+		},
+		new String[] {
+			"default.guest.layout.column",
+			"default.guest.public.layout.column"
+		},
+		new String[] {
+			"default.guest.layout.name",
+			"default.guest.public.layout.name"
+		},
+		new String[] {
+			"default.guest.layout.template.id",
+			"default.guest.public.layout.template.id"
+		},
+		new String[] {
+			"default.user.layout.column",
+			"default.user.public.layout.column"
+		},
+		new String[] {
+			"default.user.layout.name",
+			"default.user.public.layout.name"
+		},
+		new String[] {
+			"default.user.layout.template.id",
+			"default.user.public.layout.template.id"
+		},
+		new String[] {
+			"default.user.private.layout.lar",
+			"default.user.private.layouts.lar"
+		},
+		new String[] {
+			"default.user.public.layout.lar",
+			"default.user.public.layouts.lar"
+		}
 	};
 
 	private static final String[][] _RENAMED_SYSTEM_KEYS = new String[][] {

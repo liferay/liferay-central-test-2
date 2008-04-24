@@ -24,11 +24,12 @@
 
 <%@ include file="/html/portlet/my_account/init.jsp" %>
 
-<%
-String backURL = ParamUtil.getString(request, "backURL");
-%>
+<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) && (PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE || PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) %>">
 
-<c:if test="<%= user.isLayoutsRequired() %>">
+	<%
+	String backURL = ParamUtil.getString(request, "backURL");
+	%>
+
 	<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="publicPagesURL">
 		<portlet:param name="struts_action" value="/my_account/edit_pages" />
 		<portlet:param name="tabs1" value="public-pages" />
@@ -43,13 +44,31 @@ String backURL = ParamUtil.getString(request, "backURL");
 		<portlet:param name="groupId" value="<%= String.valueOf(user.getGroup().getGroupId()) %>" />
 	</portlet:renderURL>
 
-	<c:if test="<%= portletName.equals(PortletKeys.MY_ACCOUNT) %>">
-		<liferay-ui:tabs
-			names="profile,public-pages,private-pages"
-			param="tabs1"
-			url0="<%= themeDisplay.getURLMyAccount().toString() %>"
-			url1="<%= publicPagesURL %>"
-			url2="<%= privatePagesURL %>"
-		/>
-	</c:if>
+	<c:choose>
+		<c:when test="<%= PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE && PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE %>">
+			<liferay-ui:tabs
+				names="profile,public-pages,private-pages"
+				param="tabs1"
+				url0="<%= themeDisplay.getURLMyAccount().toString() %>"
+				url1="<%= publicPagesURL %>"
+				url2="<%= privatePagesURL %>"
+			/>
+		</c:when>
+		<c:when test="<%= PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE %>">
+			<liferay-ui:tabs
+				names="profile,public-pages"
+				param="tabs1"
+				url0="<%= themeDisplay.getURLMyAccount().toString() %>"
+				url1="<%= publicPagesURL %>"
+			/>
+		</c:when>
+		<c:when test="<%= PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE %>">
+			<liferay-ui:tabs
+				names="profile,private-pages"
+				param="tabs1"
+				url0="<%= themeDisplay.getURLMyAccount().toString() %>"
+				url1="<%= privatePagesURL %>"
+			/>
+		</c:when>
+	</c:choose>
 </c:if>

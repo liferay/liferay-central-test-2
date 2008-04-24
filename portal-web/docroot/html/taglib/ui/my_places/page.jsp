@@ -121,6 +121,14 @@ List<Group> myPlaces = user.getMyPlaces();
 				privateAddPageURL.setParameter("groupId", String.valueOf(myPlace.getGroupId()));
 
 				privateAddPageHREF = privateAddPageURL.toString();
+
+				if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) {
+					publicAddPageHREF = null;
+				}
+
+				if (!PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) {
+					privateAddPageHREF = null;
+				}
 			}
 
 			boolean showPublicPlace = true;
@@ -134,6 +142,10 @@ List<Group> myPlaces = user.getMyPlaces();
 				}
 				else if (userCommunity) {
 					showPublicPlace = PropsValues.MY_PLACES_SHOW_USER_PUBLIC_SITES_WITH_NO_LAYOUTS;
+
+					if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) {
+						showPublicPlace = false;
+					}
 				}
 			}
 
@@ -148,6 +160,10 @@ List<Group> myPlaces = user.getMyPlaces();
 				}
 				else if (userCommunity) {
 					showPrivatePlace = PropsValues.MY_PLACES_SHOW_USER_PRIVATE_SITES_WITH_NO_LAYOUTS;
+
+					if (!PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE) {
+						showPrivatePlace = false;
+					}
 				}
 			}
 		%>

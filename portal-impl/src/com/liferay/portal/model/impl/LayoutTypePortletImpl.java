@@ -159,7 +159,7 @@ public class LayoutTypePortletImpl
 		String oldLayoutTemplateId = getLayoutTemplateId();
 
 		if (Validator.isNull(oldLayoutTemplateId)) {
-			oldLayoutTemplateId = PropsValues.DEFAULT_USER_LAYOUT_TEMPLATE_ID;
+			oldLayoutTemplateId = PropsValues.DEFAULT_LAYOUT_TEMPLATE_ID;
 		}
 
 		getTypeSettingsProperties().setProperty(
