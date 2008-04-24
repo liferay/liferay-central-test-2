@@ -24,6 +24,7 @@ package com.liferay.portal.job;
 
 import com.liferay.portal.kernel.job.IntervalJob;
 import com.liferay.portal.kernel.job.JobScheduler;
+import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.util.Time;
 
@@ -70,7 +71,15 @@ public class JobSchedulerImpl implements JobScheduler {
 
 		JobClassUtil.put(jobName, (Class<IntervalJob>)intervalJob.getClass());
 
-		Date startTime = new Date(System.currentTimeMillis() + Time.MINUTE * 3);
+		Date startTime = null;
+
+		if (ServerDetector.getServerId().equals(ServerDetector.TOMCAT_ID)) {
+			startTime = new Date(System.currentTimeMillis() + Time.MINUTE);
+		}
+		else {
+			startTime = new Date(System.currentTimeMillis() + Time.MINUTE * 3);
+		}
+
 		Date endTime = null;
 
 		JobDetail jobDetail = new JobDetail(
