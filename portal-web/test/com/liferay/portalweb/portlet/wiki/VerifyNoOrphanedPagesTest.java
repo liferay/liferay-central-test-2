@@ -22,39 +22,68 @@
 
 package com.liferay.portalweb.portlet.wiki;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="WikiTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="VerifyNoOrphanedPagesTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiTests extends BaseTests {
+public class VerifyNoOrphanedPagesTest extends BaseTestCase {
+	public void testVerifyNoOrphanedPages() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public WikiTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddChildTest.class);
-		addTestSuite(AddCommentTest.class);
-		addTestSuite(SearchTest.class);
-		addTestSuite(EditCommentTest.class);
-		addTestSuite(AddWikiNodeTest.class);
-		addTestSuite(EditWikiNodeTest.class);
-		addTestSuite(AddSecondArticleTest.class);
-		addTestSuite(EditSecondArticleTest.class);
-		addTestSuite(MinorArticleChangeTest.class);
-		addTestSuite(CompareVersionsTest.class);
-		addTestSuite(RevertMinorArticleChange.class);
-		addTestSuite(AddTemporaryArticleTest.class);
-		addTestSuite(DeleteArticleTest.class);
-		addTestSuite(AddOrphanedArticlesTest.class);
-		addTestSuite(VerifyRecentChangesTest.class);
-		addTestSuite(VerifyAllPagesTest.class);
-		addTestSuite(VerifyOrphanedPagesTest.class);
-		addTestSuite(AddLinksTest.class);
-		addTestSuite(VerifyNoOrphanedPagesTest.class);
+			try {
+				if (selenium.isElementPresent("link=Orphan Pages")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Orphan Pages");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=Link Me 1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=Link Me 2")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Second Edited Wiki Test");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

@@ -1,0 +1,59 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EditWikiNodeTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">EditWikiNodeTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Second Wiki Test</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id="portlet-wrapper-36"]/div[2]/div/div/form/table/tbody/tr[3]/td[4]/ul/li/ul/li/nobr/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id="portlet-wrapper-36"]/div[2]/div/div/form/table/tbody/tr[3]/td[4]/ul/li/ul/li/nobr/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_36_name</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_36_name</td>
+	<td>Second Edited Wiki Test</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_36_description</td>
+	<td>This is a second edited test wiki!</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Your request processed successfully.</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Second Edited Wiki Test</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

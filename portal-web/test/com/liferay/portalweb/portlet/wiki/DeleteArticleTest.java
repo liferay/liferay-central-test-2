@@ -22,39 +22,69 @@
 
 package com.liferay.portalweb.portlet.wiki;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="WikiTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class WikiTests extends BaseTests {
+public class DeleteArticleTest extends BaseTestCase {
+	public void testDeleteArticle() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public WikiTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddChildTest.class);
-		addTestSuite(AddCommentTest.class);
-		addTestSuite(SearchTest.class);
-		addTestSuite(EditCommentTest.class);
-		addTestSuite(AddWikiNodeTest.class);
-		addTestSuite(EditWikiNodeTest.class);
-		addTestSuite(AddSecondArticleTest.class);
-		addTestSuite(EditSecondArticleTest.class);
-		addTestSuite(MinorArticleChangeTest.class);
-		addTestSuite(CompareVersionsTest.class);
-		addTestSuite(RevertMinorArticleChange.class);
-		addTestSuite(AddTemporaryArticleTest.class);
-		addTestSuite(DeleteArticleTest.class);
-		addTestSuite(AddOrphanedArticlesTest.class);
-		addTestSuite(VerifyRecentChangesTest.class);
-		addTestSuite(VerifyAllPagesTest.class);
-		addTestSuite(VerifyOrphanedPagesTest.class);
-		addTestSuite(AddLinksTest.class);
-		addTestSuite(VerifyNoOrphanedPagesTest.class);
+			try {
+				if (selenium.isElementPresent("//h1/div/nobr[3]/a/img")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//h1/div/nobr[3]/a/img");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Delete")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Delete");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=Delete Me!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }
