@@ -1844,8 +1844,19 @@
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteColumn" qname="operNS:deleteColumn" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnId" type="tns:long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteColumns" qname="operNS:deleteColumns" soapAction="">
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteColumn" qname="operNS:deleteColumn" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteColumn" qname="operNS:deleteColumn" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteColumn" qname="operNS:deleteColumn" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteColumns" qname="operNS:deleteColumns" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -1855,25 +1866,25 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteColumns" qname="operNS:deleteColumns" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnId" type="tns:long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getColumns" qname="operNS:getColumns" returnQName="getColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getColumn" qname="operNS:getColumn" returnQName="getColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getColumns" qname="operNS:getColumns" returnQName="getColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -1882,6 +1893,9 @@
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getColumns" qname="operNS:getColumns" returnQName="getColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getColumns" qname="operNS:getColumns" returnQName="getColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getColumnsCount" qname="operNS:getColumnsCount" returnQName="getColumnsCountReturn" returnType="rtns:int" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -1895,18 +1909,18 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getDefaultTableColumn" qname="operNS:getDefaultTableColumn" returnQName="getDefaultTableColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getDefaultTableColumn" qname="operNS:getDefaultTableColumn" returnQName="getDefaultTableColumnReturn" returnType="rtns:ExpandoColumnSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getDefaultTableColumns" qname="operNS:getDefaultTableColumns" returnQName="getDefaultTableColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getDefaultTableColumns" qname="operNS:getDefaultTableColumns" returnQName="getDefaultTableColumnsReturn" returnType="rtns:ArrayOf_tns2_ExpandoColumnSoap" returnItemType="tns2:ExpandoColumnSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDefaultTableColumnsCount" qname="operNS:getDefaultTableColumnsCount" returnQName="getDefaultTableColumnsCountReturn" returnType="rtns:int" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
@@ -1938,6 +1952,20 @@
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteRow" qname="operNS:deleteRow" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="rowId" type="tns:long"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteRow" qname="operNS:deleteRow" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteRow" qname="operNS:deleteRow" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteRow" qname="operNS:deleteRow" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getDefaultTableRows" qname="operNS:getDefaultTableRows" returnQName="getDefaultTableRowsReturn" returnType="rtns:ArrayOf_tns2_ExpandoRowSoap" returnItemType="tns2:ExpandoRowSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
@@ -1949,27 +1977,32 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDefaultTableRowsCount" qname="operNS:getDefaultTableRowsCount" returnQName="getDefaultTableRowsCountReturn" returnType="rtns:int" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDefaultTableRowsCount" qname="operNS:getDefaultTableRowsCount" returnQName="getDefaultTableRowsCountReturn" returnType="rtns:int" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getRow" qname="operNS:getRow" returnQName="getRowReturn" returnType="rtns:ExpandoRowSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getRow" qname="operNS:getRow" returnQName="getRowReturn" returnType="rtns:ExpandoRowSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getRow" qname="operNS:getRow" returnQName="getRowReturn" returnType="rtns:ExpandoRowSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getRow" qname="operNS:getRow" returnQName="getRowReturn" returnType="rtns:ExpandoRowSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="rowId" type="tns:long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getRow" qname="operNS:getRow" returnQName="getRowReturn" returnType="rtns:ExpandoRowSoap" soapAction="">
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getRows" qname="operNS:getRows" returnQName="getRowsReturn" returnType="rtns:ArrayOf_tns2_ExpandoRowSoap" returnItemType="tns2:ExpandoRowSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getRow" qname="operNS:getRow" returnQName="getRowReturn" returnType="rtns:ExpandoRowSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="getRow" qname="operNS:getRow" returnQName="getRowReturn" returnType="rtns:ExpandoRowSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getRows" qname="operNS:getRows" returnQName="getRowsReturn" returnType="rtns:ArrayOf_tns2_ExpandoRowSoap" returnItemType="tns2:ExpandoRowSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -1980,11 +2013,6 @@
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getRows" qname="operNS:getRows" returnQName="getRowsReturn" returnType="rtns:ArrayOf_tns2_ExpandoRowSoap" returnItemType="tns2:ExpandoRowSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getRows" qname="operNS:getRows" returnQName="getRowsReturn" returnType="rtns:ArrayOf_tns2_ExpandoRowSoap" returnItemType="tns2:ExpandoRowSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
@@ -2100,12 +2128,19 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="rowId" type="tns:long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:ArrayOf_xsd_string" returnItemType="tns2:string" soapAction="">
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:string" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="defaultData" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="defaultData" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:boolean" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="defaultData" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:ArrayOf_xsd_boolean" returnItemType="tns2:boolean" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -2184,20 +2219,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="defaultData" type="tns:ArrayOf_xsd_long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:short" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="defaultData" type="tns:short"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:string" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="defaultData" type="tns:string"></parameter>
-		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:ArrayOf_xsd_short" returnItemType="tns2:short" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
@@ -2205,12 +2226,19 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="defaultData" type="tns:ArrayOf_xsd_short"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:boolean" soapAction="">
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:short" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="defaultData" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="defaultData" type="tns:short"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getData" qname="operNS:getData" returnQName="getDataReturn" returnType="rtns:ArrayOf_xsd_string" returnItemType="tns2:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="defaultData" type="tns:ArrayOf_xsd_string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -2273,14 +2301,14 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:double"></parameter>
+			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="data" type="tns:ArrayOf_xsd_float"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="data" type="tns:ArrayOf_xsd_float"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:double"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -2294,13 +2322,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="data" type="tns:ArrayOf_xsd_dateTime"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="data" type="tns:ArrayOf_xsd_double"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
@@ -2308,7 +2329,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="data" type="tns:ArrayOf_xsd_dateTime"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
@@ -2322,6 +2343,13 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:dateTime"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 			<parameter xmlns:tns="urn:http.service.expando.portlet.liferay.com" qname="data" type="tns:ArrayOf_xsd_boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://model.expando.portlet.liferay.com" name="addValue" qname="operNS:addValue" returnQName="addValueReturn" returnType="rtns:ExpandoValueSoap" soapAction="">
@@ -2329,7 +2357,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:dateTime"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:boolean"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteValues" qname="operNS:deleteValues" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -2349,8 +2377,24 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteValue" qname="operNS:deleteValue" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteValue" qname="operNS:deleteValue" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="valueId" type="tns:long"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteValue" qname="operNS:deleteValue" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="rowId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" name="deleteValue" qname="operNS:deleteValue" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getColumnValues" qname="operNS:getColumnValues" returnQName="getColumnValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
@@ -2363,14 +2407,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getColumnValues" qname="operNS:getColumnValues" returnQName="getColumnValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getColumnValues" qname="operNS:getColumnValues" returnQName="getColumnValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
@@ -2386,24 +2422,27 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getColumnValues" qname="operNS:getColumnValues" returnQName="getColumnValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getColumnValuesCount" qname="operNS:getColumnValuesCount" returnQName="getColumnValuesCountReturn" returnType="rtns:int" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getColumnValuesCount" qname="operNS:getColumnValuesCount" returnQName="getColumnValuesCountReturn" returnType="rtns:int" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getColumnValuesCount" qname="operNS:getColumnValuesCount" returnQName="getColumnValuesCountReturn" returnType="rtns:int" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getColumnValuesCount" qname="operNS:getColumnValuesCount" returnQName="getColumnValuesCountReturn" returnType="rtns:int" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="data" type="tns:string"></parameter>
@@ -2411,14 +2450,19 @@
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getColumnValuesCount" qname="operNS:getColumnValuesCount" returnQName="getColumnValuesCountReturn" returnType="rtns:int" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnId" type="tns:long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getDefaultTableColumnValues" qname="operNS:getDefaultTableColumnValues" returnQName="getDefaultTableColumnValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getColumnValuesCount" qname="operNS:getColumnValuesCount" returnQName="getColumnValuesCountReturn" returnType="rtns:int" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getDefaultTableColumnValues" qname="operNS:getDefaultTableColumnValues" returnQName="getDefaultTableColumnValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getDefaultTableColumnValues" qname="operNS:getDefaultTableColumnValues" returnQName="getDefaultTableColumnValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
@@ -2432,12 +2476,14 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="columnName" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getRowValues" qname="operNS:getRowValues" returnQName="getRowValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="rowId" type="tns:long"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getRowValues" qname="operNS:getRowValues" returnQName="getRowValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getRowValues" qname="operNS:getRowValues" returnQName="getRowValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="rowId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
@@ -2450,11 +2496,11 @@
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="urn:http.service.expando.portlet.liferay.com" xmlns:tns2="http://model.expando.portlet.liferay.com" name="getRowValues" qname="operNS:getRowValues" returnQName="getRowValuesReturn" returnType="rtns:ArrayOf_tns2_ExpandoValueSoap" returnItemType="tns2:ExpandoValueSoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="rowId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getRowValuesCount" qname="operNS:getRowValuesCount" returnQName="getRowValuesCountReturn" returnType="rtns:int" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="rowId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getRowValuesCount" qname="operNS:getRowValuesCount" returnQName="getRowValuesCountReturn" returnType="rtns:int" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="className" type="tns:string"></parameter>
@@ -2462,9 +2508,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.expando.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getRowValuesCount" qname="operNS:getRowValuesCount" returnQName="getRowValuesCountReturn" returnType="rtns:int" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classNameId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tableName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="classPK" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="rowId" type="tns:long"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="getRowValuesCount getValue deleteValues addValue deleteRowValues deleteColumnValues getData getColumnValues getDefaultTableColumnValues getColumnValuesCount deleteValue deleteTableValues getDefaultTableColumnValuesCount getRowValues"/>
 		<arrayMapping xmlns:ns="urn:http.service.expando.portlet.liferay.com" xmlns:cmp-ns="http://model.expando.portlet.liferay.com" qname="ns:ArrayOf_tns2_ExpandoValueSoap" type="java:com.liferay.portlet.expando.model.ExpandoValueSoap[]" innerType="cmp-ns:ExpandoValueSoap" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
