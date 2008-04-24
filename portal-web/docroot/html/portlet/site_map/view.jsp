@@ -36,9 +36,13 @@ _buildSiteMap(rootLayouts, displayDepth, 1, themeDisplay, sm);
 
 <%!
 private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDisplay themeDisplay, StringMaker sm) throws Exception {
+	if (layouts.size() == 0) {
+		return;
+	}
+
 	PermissionChecker permissionChecker = themeDisplay.getPermissionChecker();
 
-	sm.append("<ul style=\"padding-left: 25px\">");
+	sm.append("<ul class=\"portlet-sitemap\">");
 
 	for (int i = 0; i < layouts.size(); i++) {
 		Layout layout = (Layout)layouts.get(i);
@@ -55,11 +59,13 @@ private void _buildSiteMap(List layouts, int displayDepth, int curDepth, ThemeDi
 			sm.append("> ");
 			sm.append(layout.getName(themeDisplay.getLocale()));
 			sm.append("</a>");
-			sm.append("</li>");
 
 			if ((displayDepth == 0) || (displayDepth > curDepth)) {
 				_buildSiteMap(layout.getChildren(), displayDepth, curDepth + 1, themeDisplay, sm);
 			}
+
+			sm.append("</li>");
+
 		}
 	}
 
