@@ -33,17 +33,22 @@ portletURL.setParameter("struts_action", "/blogs_aggregator/view");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, 5, portletURL, null, null);
 
-List results = null;
+List entries = null;
 
 if (organizationId > 0) {
-	results = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
+	entries = BlogsEntryServiceUtil.getOrganizationEntries(organizationId, max);
 }
 else {
-	results = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), max);
+	entries = BlogsEntryServiceUtil.getCompanyEntries(company.getCompanyId(), max);
 }
 
+int total = entries.size();
+
+searchContainer.setTotal(total);
+
+List results = ListUtil.subList(entries, searchContainer.getStart(), searchContainer.getEnd());
+
 searchContainer.setResults(results);
-searchContainer.setTotal(results.size());
 %>
 
 <%@ include file="/html/portlet/blogs_aggregator/view_entries.jspf" %>
