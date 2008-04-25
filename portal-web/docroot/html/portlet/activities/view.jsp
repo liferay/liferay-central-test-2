@@ -33,7 +33,7 @@ if (group.isUser()) {
 	user2 = UserLocalServiceUtil.getUserById(group.getClassPK());
 }
 
-List<SocialActivity> activities = SocialActivityLocalServiceUtil.getUserActivities(user2.getUserId(), 0, SearchContainer.DEFAULT_DELTA);
+List<SocialActivity> activities = SocialActivityLocalServiceUtil.getUserActivities(user2.getUserId(), 0, 10);
 %>
 
 <liferay-ui:social-activities
