@@ -32,9 +32,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddOrphanedArticlesTest extends BaseTestCase {
 	public void testAddOrphanedArticles() throws Exception {
-		selenium.open(
-			"/user/joebloggs/3/-/wiki/Second%20Edited%20Wiki%20Test/FrontPage");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
