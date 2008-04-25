@@ -169,6 +169,8 @@ public class MembershipRequestLocalServiceImpl
 			membershipRequest.getGroupId());
 
 		User user = userPersistence.findByPrimaryKey(userId);
+		User requestUser = userPersistence.findByPrimaryKey(
+			membershipRequest.getUserId());
 
 		String fromName = PrefsPropsUtil.getString(
 			membershipRequest.getCompanyId(),
@@ -180,9 +182,6 @@ public class MembershipRequestLocalServiceImpl
 
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
-
-		User requestUser = userLocalService.getUserById(
-			membershipRequest.getUserId());
 
 		String subject = PrefsPropsUtil.getContent(
 			membershipRequest.getCompanyId(), subjectProperty);
