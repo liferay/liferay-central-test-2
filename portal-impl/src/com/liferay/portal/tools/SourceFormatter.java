@@ -174,42 +174,42 @@ public class SourceFormatter {
 		}
 	}
 
-	private static void _checkForXSSVulnerabilities(String jspFileName, String jspContent) {
-
+	private static void _checkXSS(String fileName, String jspContent) {
 		Matcher stringParamMatcher = _STRING_PARAM_PATTERN.matcher(jspContent);
 
 		while (stringParamMatcher.find()) {
-
-			boolean hasXSSVulnerability = false;
+			boolean xssVulnerable = false;
 
 			String jspVariable = stringParamMatcher.group(1);
 
-			String inputVulnerability = " type=\"hidden\" value=\"<%= " + jspVariable + " %>";
+			String inputVulnerability =
+				" type=\"hidden\" value=\"<%= " + jspVariable + " %>";
 
 			if (jspContent.indexOf(inputVulnerability) != -1) {
-				hasXSSVulnerability = true;
+				xssVulnerable = true;
 			}
 
 			String anchorVulnerability = " href=\"<%= " + jspVariable + " %>";
 
 			if (jspContent.indexOf(anchorVulnerability) != -1) {
-				hasXSSVulnerability = true;
+				xssVulnerable = true;
 			}
 
 			String inlineStringVulnerability = "'<%= " + jspVariable + " %>";
 
 			if (jspContent.indexOf(inlineStringVulnerability) != -1) {
-				hasXSSVulnerability = true;
+				xssVulnerable = true;
 			}
 
 			String documentIdVulnerability = ".<%= " + jspVariable + " %>";
 
 			if (jspContent.indexOf(documentIdVulnerability) != -1) {
-				hasXSSVulnerability = true;
+				xssVulnerable = true;
 			}
 
-			if (hasXSSVulnerability) {
-				System.out.println("(xss): " + jspFileName + " (" + jspVariable + ")");
+			if (xssVulnerable) {
+				System.out.println(
+					"(xss): " + fileName + " (" + jspVariable + ")");
 			}
 		}
 	}
@@ -485,7 +485,7 @@ public class SourceFormatter {
 					"confirm(\"<%= UnicodeLanguageUtil.");
 			}
 
-			_checkForXSSVulnerabilities(files[i], content);
+			_checkXSS(files[i], content);
 
 			if ((newContent != null) && !content.equals(newContent)) {
 				FileUtil.write(file, newContent);
@@ -654,7 +654,8 @@ public class SourceFormatter {
 		return list.toArray(new String[list.size()]);
 	}
 
-	private static final Pattern _STRING_PARAM_PATTERN = Pattern.compile("String ([^\\s]+) = ParamUtil\\.getString\\(");
+	private static final Pattern _STRING_PARAM_PATTERN = Pattern.compile(
+		"String ([^\\s]+) = ParamUtil\\.getString\\(");
 
 	private static final String[] _TAG_LIBRARIES = new String[] {
 		"c", "html", "jsp", "liferay-portlet", "liferay-security",
