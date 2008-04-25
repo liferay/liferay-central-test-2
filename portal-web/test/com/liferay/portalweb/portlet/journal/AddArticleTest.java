@@ -108,6 +108,23 @@ public class AddArticleTest extends BaseTestCase {
 		selenium.typeKeys("//body", "This is a test Journal Article!");
 		selenium.selectFrame("relative=top");
 		selenium.select("_15_type", "label=Announcements");
+		selenium.select("_15_displayDateMonth", "label=April");
+		selenium.select("_15_displayDateDay", "label=10");
+		selenium.select("_15_displayDateYear", "label=2010");
+		selenium.select("_15_displayDateHour", "label=12");
+		selenium.select("_15_displayDateMinute", "label=:00");
+		selenium.click("_15_neverExpireCheckbox");
+		selenium.select("_15_expirationDateMonth", "label=January");
+		selenium.select("_15_expirationDateDay", "label=27");
+		selenium.select("_15_expirationDateYear", "label=2011");
+		selenium.select("_15_expirationDateHour", "label=12");
+		selenium.select("_15_expirationDateMinute", "label=:00");
+		selenium.click("_15_neverReviewCheckbox");
+		selenium.select("_15_reviewDateMonth", "label=September");
+		selenium.select("_15_reviewDateDay", "label=16");
+		selenium.select("_15_reviewDateYear", "label=2011");
+		selenium.select("_15_reviewDateHour", "label=12");
+		selenium.select("_15_reviewDateMinute", "label=:00");
 		selenium.click("//input[@value='Save and Approve']");
 		selenium.waitForPageToLoad("30000");
 	}
