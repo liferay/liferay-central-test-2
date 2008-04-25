@@ -26,7 +26,14 @@ import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.model.Company;
+import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.util.ContentUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portlet.journal.TransformException;
+import com.liferay.util.PwdGenerator;
 
 import java.io.StringReader;
 import java.io.UnsupportedEncodingException;
@@ -45,6 +52,7 @@ import javax.xml.transform.stream.StreamSource;
  * <a href="JournalXslUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Alexander Chow
+ * @author Raymond Augé
  *
  */
 public class JournalXslUtil {
@@ -57,33 +65,100 @@ public class JournalXslUtil {
 		ByteArrayMaker bam = new ByteArrayMaker();
 
 		long companyId = GetterUtil.getLong(tokens.get("company_id"));
+		Company company = null;
+
+		try {
+			company = CompanyLocalServiceUtil.getCompanyById(companyId);
+		}
+		catch (Exception e) {
+		}
+
+		long groupId = GetterUtil.getLong(tokens.get("group_id"));
+
+		String journalTemplatesPath =
+			VelocityResourceListener.JOURNAL_SEPARATOR + StringPool.SLASH +
+				companyId + StringPool.SLASH + groupId;
+		String randomNamespace =
+			PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
+				StringPool.UNDERLINE;
+
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		JournalXslErrorListener errorListener = new JournalXslErrorListener(
 			companyId, locale);
 
+		StreamSource xmlSource = new StreamSource(new StringReader(xml));
+
+		TransformerFactory transformerFactory =
+			TransformerFactory.newInstance();
+
+		transformerFactory.setURIResolver(
+			new URIResolver(tokens, languageId));
+		transformerFactory.setErrorListener(errorListener);
+
 		try {
-			StreamSource xmlSource = new StreamSource(new StringReader(xml));
-			StreamSource scriptSource = new StreamSource(
-				new StringReader(script));
+			try {
+				StreamSource scriptSource = new StreamSource(
+					new StringReader(script));
 
-			TransformerFactory transformerFactory =
-				TransformerFactory.newInstance();
+				Transformer transformer =
+					transformerFactory.newTransformer(scriptSource);
 
-			transformerFactory.setURIResolver(
-				new URIResolver(tokens, languageId));
-			transformerFactory.setErrorListener(errorListener);
+				transformer.setParameter("company", company);
+				transformer.setParameter("companyId", new Long(companyId));
+				transformer.setParameter("groupId", String.valueOf(groupId));
+				transformer.setParameter(
+					"journalTemplatesPath", journalTemplatesPath);
+				transformer.setParameter("locale", locale);
+				transformer.setParameter("randomNamespace", randomNamespace);
 
-			Transformer transformer =
-				transformerFactory.newTransformer(scriptSource);
-
-			transformer.transform(xmlSource, new StreamResult(bam));
+				transformer.transform(xmlSource, new StreamResult(bam));
+			}
+			catch (TransformerConfigurationException tce) {
+				throw new TransformException(
+					errorListener.getMessageAndLocation());
+			}
+			catch (TransformerException te) {
+				throw new TransformException(
+					errorListener.getMessageAndLocation());
+			}
 		}
-		catch (TransformerConfigurationException tce) {
-			throw new TransformException(errorListener.getMessageAndLocation());
-		}
-		catch (TransformerException te) {
-			throw new TransformException(errorListener.getMessageAndLocation());
+		catch (TransformException te1) {
+			try {
+				String errorTemplate = ContentUtil.get(PropsUtil.get(
+					PropsUtil.JOURNAL_XSL_ERROR_TEMPLATE));
+
+				StreamSource scriptSource = new StreamSource(
+					new StringReader(errorTemplate));
+
+				Transformer transformer =
+					transformerFactory.newTransformer(scriptSource);
+
+				transformer.setParameter("company", company);
+				transformer.setParameter("companyId", new Long(companyId));
+				transformer.setParameter("groupId", String.valueOf(groupId));
+				transformer.setParameter(
+					"journalTemplatesPath", journalTemplatesPath);
+				transformer.setParameter("locale", locale);
+				transformer.setParameter("randomNamespace", randomNamespace);
+
+				transformer.setParameter(
+					"exception", errorListener.getMessageAndLocation());
+
+				if (Validator.isNotNull(errorListener.getLocation())) {
+					transformer.setParameter(
+						"column", new Integer(errorListener.getColumnNumber()));
+					transformer.setParameter(
+						"line", new Integer(errorListener.getLineNumber()));
+				}
+
+				transformer.setParameter("script", script);
+
+				transformer.transform(xmlSource, new StreamResult(bam));
+			}
+			catch (Exception e) {
+				throw new TransformException(e);
+			}
 		}
 
 		return bam.toString(StringPool.UTF8);

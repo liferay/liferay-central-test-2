@@ -331,6 +331,38 @@
 
 /* ---------- Miscellaneous portlet styles ---------- */
 
+.journal-template-error .scroll-pane {
+	width: 100%;
+	min-height: 50px;
+	max-height: 200px;
+	overflow: auto;
+	border: 1px solid #ccc;
+}
+
+.journal-template-error .scroll-pane .inner-scroll-pane {
+	min-width: 104%;
+}
+
+.journal-template-error .scroll-pane .error-line {
+	background: #ffcccc;
+}
+
+.journal-template-error .scroll-pane pre {
+	margin: 0px;
+	white-space: pre;
+}
+
+.journal-template-error .scroll-pane pre span {
+	display: block;
+	float: left;
+	width: 40px;
+	border-right: 1px solid #ccc;
+	background: #eee;
+	text-align: right;
+	padding-right: 4px;
+	margin-right: 4px;
+}
+
 .message-board-code {
 	background: #fff;
 	font-family: "Courier New",Courier,Monaco,monospace;
