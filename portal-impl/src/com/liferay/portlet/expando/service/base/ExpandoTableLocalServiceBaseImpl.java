@@ -34,17 +34,11 @@ import com.liferay.portal.kernel.dao.DynamicQueryInitializer;
 import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
 import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceFactory;
-import com.liferay.portlet.expando.service.ExpandoColumnService;
-import com.liferay.portlet.expando.service.ExpandoColumnServiceFactory;
 import com.liferay.portlet.expando.service.ExpandoRowLocalService;
 import com.liferay.portlet.expando.service.ExpandoRowLocalServiceFactory;
-import com.liferay.portlet.expando.service.ExpandoRowService;
-import com.liferay.portlet.expando.service.ExpandoRowServiceFactory;
 import com.liferay.portlet.expando.service.ExpandoTableLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory;
-import com.liferay.portlet.expando.service.ExpandoValueService;
-import com.liferay.portlet.expando.service.ExpandoValueServiceFactory;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoColumnPersistence;
@@ -117,15 +111,6 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 		this.expandoColumnLocalService = expandoColumnLocalService;
 	}
 
-	public ExpandoColumnService getExpandoColumnService() {
-		return expandoColumnService;
-	}
-
-	public void setExpandoColumnService(
-		ExpandoColumnService expandoColumnService) {
-		this.expandoColumnService = expandoColumnService;
-	}
-
 	public ExpandoColumnPersistence getExpandoColumnPersistence() {
 		return expandoColumnPersistence;
 	}
@@ -150,14 +135,6 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	public void setExpandoRowLocalService(
 		ExpandoRowLocalService expandoRowLocalService) {
 		this.expandoRowLocalService = expandoRowLocalService;
-	}
-
-	public ExpandoRowService getExpandoRowService() {
-		return expandoRowService;
-	}
-
-	public void setExpandoRowService(ExpandoRowService expandoRowService) {
-		this.expandoRowService = expandoRowService;
 	}
 
 	public ExpandoRowPersistence getExpandoRowPersistence() {
@@ -193,14 +170,6 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	public void setExpandoValueLocalService(
 		ExpandoValueLocalService expandoValueLocalService) {
 		this.expandoValueLocalService = expandoValueLocalService;
-	}
-
-	public ExpandoValueService getExpandoValueService() {
-		return expandoValueService;
-	}
-
-	public void setExpandoValueService(ExpandoValueService expandoValueService) {
-		this.expandoValueService = expandoValueService;
 	}
 
 	public ExpandoValuePersistence getExpandoValuePersistence() {
@@ -241,10 +210,6 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 			expandoColumnLocalService = ExpandoColumnLocalServiceFactory.getImpl();
 		}
 
-		if (expandoColumnService == null) {
-			expandoColumnService = ExpandoColumnServiceFactory.getImpl();
-		}
-
 		if (expandoColumnPersistence == null) {
 			expandoColumnPersistence = ExpandoColumnUtil.getPersistence();
 		}
@@ -255,10 +220,6 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 
 		if (expandoRowLocalService == null) {
 			expandoRowLocalService = ExpandoRowLocalServiceFactory.getImpl();
-		}
-
-		if (expandoRowService == null) {
-			expandoRowService = ExpandoRowServiceFactory.getImpl();
 		}
 
 		if (expandoRowPersistence == null) {
@@ -275,10 +236,6 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 
 		if (expandoValueLocalService == null) {
 			expandoValueLocalService = ExpandoValueLocalServiceFactory.getImpl();
-		}
-
-		if (expandoValueService == null) {
-			expandoValueService = ExpandoValueServiceFactory.getImpl();
 		}
 
 		if (expandoValuePersistence == null) {
@@ -299,16 +256,13 @@ public abstract class ExpandoTableLocalServiceBaseImpl
 	}
 
 	protected ExpandoColumnLocalService expandoColumnLocalService;
-	protected ExpandoColumnService expandoColumnService;
 	protected ExpandoColumnPersistence expandoColumnPersistence;
 	protected ExpandoColumnFinder expandoColumnFinder;
 	protected ExpandoRowLocalService expandoRowLocalService;
-	protected ExpandoRowService expandoRowService;
 	protected ExpandoRowPersistence expandoRowPersistence;
 	protected ExpandoRowFinder expandoRowFinder;
 	protected ExpandoTablePersistence expandoTablePersistence;
 	protected ExpandoValueLocalService expandoValueLocalService;
-	protected ExpandoValueService expandoValueService;
 	protected ExpandoValuePersistence expandoValuePersistence;
 	protected ExpandoValueFinder expandoValueFinder;
 	protected CounterLocalService counterLocalService;

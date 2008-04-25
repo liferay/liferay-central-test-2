@@ -175,7 +175,8 @@ public class SocialActivityLocalServiceImpl
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getActivities(mirrorActivityId, classNameId, classPK, begin, end);
+		return getActivities(
+			mirrorActivityId, classNameId, classPK, begin, end);
 	}
 
 	public List<SocialActivity> getActivities(

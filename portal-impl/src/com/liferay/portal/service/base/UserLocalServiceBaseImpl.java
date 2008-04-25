@@ -286,8 +286,6 @@ import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankPersist
 import com.liferay.portlet.documentlibrary.service.persistence.DLFileRankUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceFactory;
-import com.liferay.portlet.expando.service.ExpandoValueService;
-import com.liferay.portlet.expando.service.ExpandoValueServiceFactory;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueFinder;
 import com.liferay.portlet.expando.service.persistence.ExpandoValueFinderUtil;
 import com.liferay.portlet.expando.service.persistence.ExpandoValuePersistence;
@@ -1423,14 +1421,6 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 		this.expandoValueLocalService = expandoValueLocalService;
 	}
 
-	public ExpandoValueService getExpandoValueService() {
-		return expandoValueService;
-	}
-
-	public void setExpandoValueService(ExpandoValueService expandoValueService) {
-		this.expandoValueService = expandoValueService;
-	}
-
 	public ExpandoValuePersistence getExpandoValuePersistence() {
 		return expandoValuePersistence;
 	}
@@ -2088,10 +2078,6 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 			expandoValueLocalService = ExpandoValueLocalServiceFactory.getImpl();
 		}
 
-		if (expandoValueService == null) {
-			expandoValueService = ExpandoValueServiceFactory.getImpl();
-		}
-
 		if (expandoValuePersistence == null) {
 			expandoValuePersistence = ExpandoValueUtil.getPersistence();
 		}
@@ -2290,7 +2276,6 @@ public abstract class UserLocalServiceBaseImpl implements UserLocalService,
 	protected BlogsStatsUserPersistence blogsStatsUserPersistence;
 	protected BlogsStatsUserFinder blogsStatsUserFinder;
 	protected ExpandoValueLocalService expandoValueLocalService;
-	protected ExpandoValueService expandoValueService;
 	protected ExpandoValuePersistence expandoValuePersistence;
 	protected ExpandoValueFinder expandoValueFinder;
 	protected DLFileRankLocalService dlFileRankLocalService;

@@ -67,10 +67,10 @@ import com.liferay.portal.util.SessionClicks_IW;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletURLFactory;
-import com.liferay.portlet.expando.service.ExpandoColumnService;
-import com.liferay.portlet.expando.service.ExpandoRowService;
-import com.liferay.portlet.expando.service.ExpandoTableService;
-import com.liferay.portlet.expando.service.ExpandoValueService;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalService;
+import com.liferay.portlet.expando.service.ExpandoRowLocalService;
+import com.liferay.portlet.expando.service.ExpandoTableLocalService;
+import com.liferay.portlet.expando.service.ExpandoValueLocalService;
 
 import java.util.List;
 import java.util.Map;
@@ -133,27 +133,30 @@ public class VelocityVariables {
 		ServiceLocator serviceLocator = ServiceLocator.getInstance();
 
 		vc.put(
-			"expandoColumnService",
+			"expandoColumnLocalService",
 			serviceLocator.findExceptionSafeService(
-				ExpandoColumnService.class));
+				ExpandoColumnLocalService.class));
 
 		// Expando row service
 
 		vc.put(
-			"expandoRowService",
-			serviceLocator.findExceptionSafeService(ExpandoRowService.class));
+			"expandoRowLocalService",
+			serviceLocator.findExceptionSafeService(
+				ExpandoRowLocalService.class));
 
 		// Expando table service
 
 		vc.put(
-			"expandoTableService",
-			serviceLocator.findExceptionSafeService(ExpandoTableService.class));
+			"expandoTableLocalService",
+			serviceLocator.findExceptionSafeService(
+				ExpandoTableLocalService.class));
 
 		// Expando value service
 
 		vc.put(
-			"expandoValueService",
-			serviceLocator.findExceptionSafeService(ExpandoValueService.class));
+			"expandoValueLocalService",
+			serviceLocator.findExceptionSafeService(
+				ExpandoValueLocalService.class));
 
 		// Getter util
 
