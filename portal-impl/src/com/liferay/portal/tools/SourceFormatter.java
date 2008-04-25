@@ -38,6 +38,8 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import org.apache.tools.ant.DirectoryScanner;
 
@@ -168,6 +170,46 @@ public class SourceFormatter {
 		for (String persistenceTest : persistenceTests) {
 			if (persistenceTestSuite.indexOf(persistenceTest) == -1) {
 				System.out.println("PersistenceTestSuite: " + persistenceTest);
+			}
+		}
+	}
+
+	private static void _checkForXSSVulnerabilities(String jspFileName, String jspContent) {
+
+		Matcher stringParamMatcher = _STRING_PARAM_PATTERN.matcher(jspContent);
+
+		while (stringParamMatcher.find()) {
+
+			boolean hasXSSVulnerability = false;
+
+			String jspVariable = stringParamMatcher.group(1);
+
+			String inputVulnerability = " type=\"hidden\" value=\"<%= " + jspVariable + " %>";
+
+			if (jspContent.indexOf(inputVulnerability) != -1) {
+				hasXSSVulnerability = true;
+			}
+
+			String anchorVulnerability = " href=\"<%= " + jspVariable + " %>";
+
+			if (jspContent.indexOf(anchorVulnerability) != -1) {
+				hasXSSVulnerability = true;
+			}
+
+			String inlineStringVulnerability = "'<%= " + jspVariable + " %>";
+
+			if (jspContent.indexOf(inlineStringVulnerability) != -1) {
+				hasXSSVulnerability = true;
+			}
+
+			String documentIdVulnerability = ".<%= " + jspVariable + " %>";
+
+			if (jspContent.indexOf(documentIdVulnerability) != -1) {
+				hasXSSVulnerability = true;
+			}
+
+			if (hasXSSVulnerability) {
+				System.out.println("(xss): " + jspFileName + " (" + jspVariable + ")");
 			}
 		}
 	}
@@ -443,6 +485,8 @@ public class SourceFormatter {
 					"confirm(\"<%= UnicodeLanguageUtil.");
 			}
 
+			_checkForXSSVulnerabilities(files[i], content);
+
 			if ((newContent != null) && !content.equals(newContent)) {
 				FileUtil.write(file, newContent);
 
@@ -609,6 +653,8 @@ public class SourceFormatter {
 
 		return list.toArray(new String[list.size()]);
 	}
+
+	private static final Pattern _STRING_PARAM_PATTERN = Pattern.compile("String ([^\\s]+) = ParamUtil\\.getString\\(");
 
 	private static final String[] _TAG_LIBRARIES = new String[] {
 		"c", "html", "jsp", "liferay-portlet", "liferay-security",
