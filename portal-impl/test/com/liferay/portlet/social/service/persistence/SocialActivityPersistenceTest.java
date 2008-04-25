@@ -74,6 +74,7 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		newSocialActivity.setCompanyId(nextLong());
 		newSocialActivity.setUserId(nextLong());
 		newSocialActivity.setCreateDate(nextDate());
+		newSocialActivity.setMirrorActivityId(nextLong());
 		newSocialActivity.setClassNameId(nextLong());
 		newSocialActivity.setClassPK(nextLong());
 		newSocialActivity.setType(randomString());
@@ -94,6 +95,8 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 			newSocialActivity.getUserId());
 		assertEquals(existingSocialActivity.getCreateDate(),
 			newSocialActivity.getCreateDate());
+		assertEquals(existingSocialActivity.getMirrorActivityId(),
+			newSocialActivity.getMirrorActivityId());
 		assertEquals(existingSocialActivity.getClassNameId(),
 			newSocialActivity.getClassNameId());
 		assertEquals(existingSocialActivity.getClassPK(),
@@ -151,6 +154,7 @@ public class SocialActivityPersistenceTest extends BasePersistenceTestCase {
 		socialActivity.setCompanyId(nextLong());
 		socialActivity.setUserId(nextLong());
 		socialActivity.setCreateDate(nextDate());
+		socialActivity.setMirrorActivityId(nextLong());
 		socialActivity.setClassNameId(nextLong());
 		socialActivity.setClassPK(nextLong());
 		socialActivity.setType(randomString());

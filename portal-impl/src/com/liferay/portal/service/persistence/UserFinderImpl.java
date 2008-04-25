@@ -96,11 +96,8 @@ public class UserFinderImpl implements UserFinder {
 	public static String JOIN_BY_SOCIAL_RELATION =
 		UserFinder.class.getName() + ".joinBySocialRelation";
 
-	public static String JOIN_BY_SOCIAL_RELATION_TYPE_BI =
-		UserFinder.class.getName() + ".joinBySocialRelationTypeBi";
-
-	public static String JOIN_BY_SOCIAL_RELATION_TYPE_UNI =
-		UserFinder.class.getName() + ".joinBySocialRelationTypeUni";
+	public static String JOIN_BY_SOCIAL_RELATION_TYPE =
+		UserFinder.class.getName() + ".joinBySocialRelationType";
 
 	public int countByKeywords(
 			long companyId, String keywords, Boolean active,
@@ -432,11 +429,8 @@ public class UserFinderImpl implements UserFinder {
 		else if (key.equals("socialRelation")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);
 		}
-		else if (key.equals("socialRelationTypeBi")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE_BI);
-		}
-		else if (key.equals("socialRelationTypeUni")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE_UNI);
+		else if (key.equals("socialRelationType")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE);
 		}
 
 		if (Validator.isNotNull(join)) {
@@ -530,11 +524,8 @@ public class UserFinderImpl implements UserFinder {
 		else if (key.equals("socialRelation")) {
 			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION);
 		}
-		else if (key.equals("socialRelationTypeBi")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE_BI);
-		}
-		else if (key.equals("socialRelationTypeUni")) {
-			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE_UNI);
+		else if (key.equals("socialRelationType")) {
+			join = CustomSQLUtil.get(JOIN_BY_SOCIAL_RELATION_TYPE);
 		}
 
 		if (Validator.isNotNull(join)) {

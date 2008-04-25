@@ -28,6 +28,7 @@ import com.liferay.portal.model.User;
 import com.liferay.portlet.social.NoSuchRelationException;
 import com.liferay.portlet.social.RelationUserIdException;
 import com.liferay.portlet.social.model.SocialRelation;
+import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.portlet.social.service.base.SocialRelationLocalServiceBaseImpl;
 
 import java.util.Date;
@@ -60,7 +61,7 @@ public class SocialRelationLocalServiceImpl
 		SocialRelation relation = null;
 
 		try {
-			relation = socialRelationFinder.findByU_U_T(
+			relation = socialRelationPersistence.findByU1_U2_T(
 				userId1, userId2, type);
 		}
 		catch (NoSuchRelationException nsre) {
@@ -77,13 +78,44 @@ public class SocialRelationLocalServiceImpl
 			socialRelationPersistence.update(relation, false);
 		}
 
+		if (SocialRelationConstants.isTypeBi(type)) {
+			try {
+				socialRelationPersistence.findByU1_U2_T(userId2, userId1, type);
+			}
+			catch (NoSuchRelationException nsre) {
+				long biRelationId = counterLocalService.increment();
+
+				SocialRelation biRelation = socialRelationPersistence.create(
+					biRelationId);
+
+				biRelation.setCompanyId(user1.getCompanyId());
+				biRelation.setCreateDate(new Date());
+				biRelation.setUserId1(userId2);
+				biRelation.setUserId2(userId1);
+				biRelation.setType(type);
+
+				socialRelationPersistence.update(biRelation, false);
+			}
+		}
+
 		return relation;
 	}
 
 	public void deleteRelation(long relationId)
 		throws PortalException, SystemException {
 
-		socialRelationPersistence.remove(relationId);
+		SocialRelation relation = socialRelationPersistence.findByPrimaryKey(
+			relationId);
+
+		if (SocialRelationConstants.isTypeBi(relation.getType())) {
+			SocialRelation biRelation = socialRelationPersistence.findByU1_U2_T(
+				relation.getUserId2(), relation.getUserId1(),
+				relation.getType());
+
+			socialRelationPersistence.remove(biRelation);
+		}
+
+		socialRelationPersistence.remove(relation);
 	}
 
 	public void deleteRelations(long userId) throws SystemException {
@@ -95,7 +127,11 @@ public class SocialRelationLocalServiceImpl
 			long userId, int type, int begin, int end)
 		throws SystemException {
 
-		return socialRelationFinder.findByU_T(userId, type, begin, end);
+		return socialRelationPersistence.findByU1_T(userId, type, begin, end);
+	}
+
+	public int getRelationsCount(long userId, int type) throws SystemException {
+		return socialRelationPersistence.countByU1_T(userId, type);
 	}
 
 }

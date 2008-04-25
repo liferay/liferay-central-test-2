@@ -81,6 +81,9 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 			{ "createDate", new Integer(Types.TIMESTAMP) },
 			
 
+			{ "mirrorActivityId", new Integer(Types.BIGINT) },
+			
+
 			{ "classNameId", new Integer(Types.BIGINT) },
 			
 
@@ -95,7 +98,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 
 			{ "receiverUserId", new Integer(Types.BIGINT) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,classNameId LONG,classPK LONG,type_ VARCHAR(75) null,extraData TEXT null,receiverUserId LONG)";
+	public static final String TABLE_SQL_CREATE = "create table SocialActivity (activityId LONG not null primary key,groupId LONG,companyId LONG,userId LONG,createDate DATE null,mirrorActivityId LONG,classNameId LONG,classPK LONG,type_ VARCHAR(75) null,extraData TEXT null,receiverUserId LONG)";
 	public static final String TABLE_SQL_DROP = "drop table SocialActivity";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -112,6 +115,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		model.setCompanyId(soapModel.getCompanyId());
 		model.setUserId(soapModel.getUserId());
 		model.setCreateDate(soapModel.getCreateDate());
+		model.setMirrorActivityId(soapModel.getMirrorActivityId());
 		model.setClassNameId(soapModel.getClassNameId());
 		model.setClassPK(soapModel.getClassPK());
 		model.setType(soapModel.getType());
@@ -202,6 +206,16 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public long getMirrorActivityId() {
+		return _mirrorActivityId;
+	}
+
+	public void setMirrorActivityId(long mirrorActivityId) {
+		if (mirrorActivityId != _mirrorActivityId) {
+			_mirrorActivityId = mirrorActivityId;
+		}
+	}
+
 	public String getClassName() {
 		return PortalUtil.getClassName(getClassNameId());
 	}
@@ -275,6 +289,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 			model.setCompanyId(getCompanyId());
 			model.setUserId(getUserId());
 			model.setCreateDate(getCreateDate());
+			model.setMirrorActivityId(getMirrorActivityId());
 			model.setClassNameId(getClassNameId());
 			model.setClassPK(getClassPK());
 			model.setType(HtmlUtil.escape(getType()));
@@ -297,6 +312,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 		clone.setCompanyId(getCompanyId());
 		clone.setUserId(getUserId());
 		clone.setCreateDate(getCreateDate());
+		clone.setMirrorActivityId(getMirrorActivityId());
 		clone.setClassNameId(getClassNameId());
 		clone.setClassPK(getClassPK());
 		clone.setType(getType());
@@ -360,6 +376,7 @@ public class SocialActivityModelImpl extends BaseModelImpl {
 	private long _companyId;
 	private long _userId;
 	private Date _createDate;
+	private long _mirrorActivityId;
 	private long _classNameId;
 	private long _classPK;
 	private String _type;

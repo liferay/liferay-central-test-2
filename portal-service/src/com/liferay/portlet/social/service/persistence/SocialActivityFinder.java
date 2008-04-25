@@ -29,14 +29,17 @@ package com.liferay.portlet.social.service.persistence;
  *
  */
 public interface SocialActivityFinder {
-	public int countByU_R(long userId, long receiverUserId)
+	public int countByRelationType(long userId)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByU_R(
-		long userId, long receiverUserId, int begin, int end)
+	public int countByRelationType(long userId, int type)
 		throws com.liferay.portal.SystemException;
 
-	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationTypeBi(
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationType(
+		long userId, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationType(
 		long userId, int type, int begin, int end)
 		throws com.liferay.portal.SystemException;
 }

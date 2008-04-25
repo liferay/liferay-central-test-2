@@ -35,7 +35,7 @@ long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:socia
 List<SocialActivity> activities = (List<SocialActivity>)request.getAttribute("liferay-ui:social-activities:activities");
 
 if (activities == null) {
-	activities = SocialActivityLocalServiceUtil.getActivities(className, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+	activities = SocialActivityLocalServiceUtil.getActivities(0, className, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 }
 
 DateFormat dateFormatDate = new SimpleDateFormat("MMMM d", locale);

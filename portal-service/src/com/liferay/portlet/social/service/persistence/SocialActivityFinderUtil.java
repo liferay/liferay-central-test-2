@@ -29,21 +29,26 @@ package com.liferay.portlet.social.service.persistence;
  *
  */
 public class SocialActivityFinderUtil {
-	public static int countByU_R(long userId, long receiverUserId)
+	public static int countByRelationType(long userId)
 		throws com.liferay.portal.SystemException {
-		return getFinder().countByU_R(userId, receiverUserId);
+		return getFinder().countByRelationType(userId);
 	}
 
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByU_R(
-		long userId, long receiverUserId, int begin, int end)
+	public static int countByRelationType(long userId, int type)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByU_R(userId, receiverUserId, begin, end);
+		return getFinder().countByRelationType(userId, type);
 	}
 
-	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationTypeBi(
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationType(
+		long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getFinder().findByRelationType(userId, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByRelationType(
 		long userId, int type, int begin, int end)
 		throws com.liferay.portal.SystemException {
-		return getFinder().findByRelationTypeBi(userId, type, begin, end);
+		return getFinder().findByRelationType(userId, type, begin, end);
 	}
 
 	public static SocialActivityFinder getFinder() {

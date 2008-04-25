@@ -26,15 +26,13 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.model.User;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portlet.social.NoSuchActivityException;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.service.base.SocialActivityLocalServiceBaseImpl;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import java.util.Date;
 import java.util.List;
-
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="SocialActivityLocalServiceImpl.java.html"><b><i>View Source</i></b>
@@ -74,6 +72,7 @@ public class SocialActivityLocalServiceImpl
 		activity.setCompanyId(user.getCompanyId());
 		activity.setUserId(user.getUserId());
 		activity.setCreateDate(createDate);
+		activity.setMirrorActivityId(0);
 		activity.setClassNameId(classNameId);
 		activity.setClassPK(classPK);
 		activity.setType(type);
@@ -81,6 +80,27 @@ public class SocialActivityLocalServiceImpl
 		activity.setReceiverUserId(receiverUserId);
 
 		socialActivityPersistence.update(activity, false);
+
+		if ((receiverUserId > 0) && (userId != receiverUserId)) {
+			long mirrorActivityId = counterLocalService.increment(
+				SocialActivity.class.getName());
+
+			SocialActivity mirrorActivity = socialActivityPersistence.create(
+				mirrorActivityId);
+
+			mirrorActivity.setGroupId(groupId);
+			mirrorActivity.setCompanyId(user.getCompanyId());
+			mirrorActivity.setUserId(receiverUserId);
+			mirrorActivity.setCreateDate(createDate);
+			mirrorActivity.setMirrorActivityId(activityId);
+			mirrorActivity.setClassNameId(classNameId);
+			mirrorActivity.setClassPK(classPK);
+			mirrorActivity.setType(type);
+			mirrorActivity.setExtraData(extraData);
+			mirrorActivity.setReceiverUserId(user.getUserId());
+
+			socialActivityPersistence.update(mirrorActivity, false);
+		}
 
 		return activity;
 	}
@@ -102,12 +122,29 @@ public class SocialActivityLocalServiceImpl
 	public void deleteActivity(long activityId)
 		throws PortalException, SystemException {
 
-		socialActivityPersistence.remove(activityId);
+		SocialActivity activity = socialActivityPersistence.findByPrimaryKey(
+			activityId);
+
+		try {
+			socialActivityPersistence.removeByMirrorActivityId(activityId);
+		}
+		catch (NoSuchActivityException nsae) {
+		}
+
+		socialActivityPersistence.remove(activity);
 	}
 
 	public void deleteUserActivities(long userId) throws SystemException {
-		List<SocialActivity> activities = socialActivityFinder.findByU_R(
-			userId, userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+		List<SocialActivity> activities =
+			socialActivityPersistence.findByUserId(
+				userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
+
+		for (SocialActivity activity : activities) {
+			socialActivityPersistence.remove(activity);
+		}
+
+		activities = socialActivityPersistence.findByReceiverUserId(
+			userId, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
 		for (SocialActivity activity : activities) {
 			socialActivityPersistence.remove(activity);
@@ -132,20 +169,22 @@ public class SocialActivityLocalServiceImpl
 	}
 
 	public List<SocialActivity> getActivities(
-			String className, long classPK, int begin, int end)
+			long mirrorActivityId, String className, long classPK, int begin,
+			int end)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getActivities(classNameId, classPK, begin, end);
+		return getActivities(mirrorActivityId, classNameId, classPK, begin, end);
 	}
 
 	public List<SocialActivity> getActivities(
-			long classNameId, long classPK, int begin, int end)
+			long mirrorActivityId, long classNameId, long classPK, int begin,
+			int end)
 		throws SystemException {
 
-		return socialActivityPersistence.findByC_C(
-			classNameId, classPK, begin, end);
+		return socialActivityPersistence.findByM_C_C(
+			mirrorActivityId, classNameId, classPK, begin, end);
 	}
 
 	public int getActivitiesCount(String className) throws SystemException {
@@ -158,65 +197,59 @@ public class SocialActivityLocalServiceImpl
 		return socialActivityPersistence.countByClassNameId(classNameId);
 	}
 
-	public int getActivitiesCount(String className, long classPK)
+	public int getActivitiesCount(
+			long mirrorActivityId, String className, long classPK)
 		throws SystemException {
 
 		long classNameId = PortalUtil.getClassNameId(className);
 
-		return getActivitiesCount(classNameId, classPK);
+		return getActivitiesCount(mirrorActivityId, classNameId, classPK);
 	}
 
-	public int getActivitiesCount(long classNameId, long classPK)
+	public int getActivitiesCount(
+			long mirrorActivityId, long classNameId, long classPK)
 		throws SystemException {
 
-		return socialActivityPersistence.countByC_C(
-			classNameId, classPK);
+		return socialActivityPersistence.countByM_C_C(
+			mirrorActivityId, classNameId, classPK);
 	}
 
-	public List<SocialActivity> getCompanyActivities(
-			long companyId, int begin, int end)
-		throws SystemException {
+	public SocialActivity getActivity(long activityId)
+		throws PortalException, SystemException {
 
-		return socialActivityPersistence.findByCompanyId(companyId, begin, end);
+		return socialActivityPersistence.findByPrimaryKey(activityId);
 	}
 
-	public int getCompanyActivitiesCount(long companyId)
-		throws SystemException {
+	public SocialActivity getMirrorActivity(long mirrorActivityId)
+		throws PortalException, SystemException {
 
-		return socialActivityPersistence.countByCompanyId(companyId);
-	}
-
-	public List<SocialActivity> getGroupActivities(
-			long groupId, int begin, int end)
-		throws SystemException {
-
-		return socialActivityPersistence.findByGroupId(groupId, begin, end);
-	}
-
-	public int getGroupActivitiesCount(long groupId) throws SystemException {
-		return socialActivityPersistence.countByGroupId(groupId);
+		return socialActivityPersistence.findByMirrorActivityId(
+			mirrorActivityId);
 	}
 
 	public List<SocialActivity> getRelationActivities(
 			long userId, int type, int begin, int end)
 		throws SystemException {
 
-		return socialActivityFinder.findByRelationTypeBi(
+		return socialActivityFinder.findByRelationType(
 			userId, type, begin, end);
+	}
+
+	public int getRelationActivitiesCount(long userId, int type)
+		throws SystemException {
+
+		return socialActivityFinder.countByRelationType(userId, type);
 	}
 
 	public List<SocialActivity> getUserActivities(
 			long userId, int begin, int end)
 		throws SystemException {
 
-		return socialActivityFinder.findByU_R(userId, userId, begin, end);
+		return socialActivityPersistence.findByUserId(userId, begin, end);
 	}
 
 	public int getUserActivitiesCount(long userId) throws SystemException {
-		return socialActivityFinder.countByU_R(userId, userId);
+		return socialActivityPersistence.countByUserId(userId);
 	}
-
-	private static Log _log =
-		LogFactory.getLog(SocialActivityLocalServiceImpl.class);
 
 }

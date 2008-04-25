@@ -56,6 +56,6 @@ public interface SocialActivityInterpreterLocalService {
 		com.liferay.portlet.social.model.SocialActivityInterpreter activityInterpreter);
 
 	public com.liferay.portlet.social.model.SocialActivityFeedEntry interpret(
-		com.liferay.portlet.social.model.SocialActivity activityTracker,
+		com.liferay.portlet.social.model.SocialActivity activity,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay);
 }

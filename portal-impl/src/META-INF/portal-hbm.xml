@@ -1569,6 +1569,7 @@
 		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="createDate" />
+		<property name="mirrorActivityId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.StringType" />

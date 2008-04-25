@@ -33,7 +33,6 @@ import com.liferay.util.dao.hibernate.QueryUtil;
 import java.util.Iterator;
 import java.util.List;
 
-import org.hibernate.Hibernate;
 import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 
@@ -45,33 +44,33 @@ import org.hibernate.Session;
  */
 public class SocialActivityFinderImpl implements SocialActivityFinder {
 
-	public static String COUNT_BY_U_R =
-		SocialActivityFinder.class.getName() + ".countByU_R";
+	public static String COUNT_BY_RELATION =
+		SocialActivityFinder.class.getName() + ".countByRelation";
 
-	public static String FIND_BY_U_R =
-		SocialActivityFinder.class.getName() + ".findByU_R";
+	public static String COUNT_BY_RELATION_TYPE =
+		SocialActivityFinder.class.getName() + ".countByRelationType";
 
-	public static String FIND_BY_RELATION_TYPE_BI =
-		SocialActivityFinder.class.getName() + ".findByRelationTypeBi";
+	public static String FIND_BY_RELATION =
+		SocialActivityFinder.class.getName() + ".findByRelation";
 
-	public int countByU_R(long userId, long receiverUserId)
-		throws SystemException {
+	public static String FIND_BY_RELATION_TYPE =
+		SocialActivityFinder.class.getName() + ".findByRelationType";
 
+	public int countByRelationType(long userId) throws SystemException {
 		Session session = null;
 
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(COUNT_BY_U_R);
+			String sql = CustomSQLUtil.get(COUNT_BY_RELATION);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
-			q.addScalar(HibernateUtil.getCountColumnName(), Hibernate.LONG);
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
 
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(userId);
-			qPos.add(receiverUserId);
 
 			Iterator<Long> itr = q.list().iterator();
 
@@ -93,8 +92,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		}
 	}
 
-	public List<SocialActivity> findByU_R(
-			long userId, long receiverUserId, int begin, int end)
+	public int countByRelationType(long userId, int type)
 		throws SystemException {
 
 		Session session = null;
@@ -102,7 +100,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_U_R);
+			String sql = CustomSQLUtil.get(COUNT_BY_RELATION_TYPE);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -111,7 +109,46 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 			QueryPos qPos = QueryPos.getInstance(q);
 
 			qPos.add(userId);
-			qPos.add(receiverUserId);
+			qPos.add(type);
+
+			Iterator<Long> itr = q.list().iterator();
+
+			if (itr.hasNext()) {
+				Long count = itr.next();
+
+				if (count != null) {
+					return count.intValue();
+				}
+			}
+
+			return 0;
+		}
+		catch (Exception e) {
+			throw new SystemException(e);
+		}
+		finally {
+			HibernateUtil.closeSession(session);
+		}
+	}
+
+	public List<SocialActivity> findByRelationType(
+			long userId, int begin, int end)
+		throws SystemException {
+
+		Session session = null;
+
+		try {
+			session = HibernateUtil.openSession();
+
+			String sql = CustomSQLUtil.get(FIND_BY_RELATION);
+
+			SQLQuery q = session.createSQLQuery(sql);
+
+			q.addEntity("SocialActivity", SocialActivityImpl.class);
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			qPos.add(userId);
 
 			return (List<SocialActivity>)QueryUtil.list(
 				q, HibernateUtil.getDialect(), begin, end);
@@ -124,7 +161,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		}
 	}
 
-	public List<SocialActivity> findByRelationTypeBi(
+	public List<SocialActivity> findByRelationType(
 			long userId, int type, int begin, int end)
 		throws SystemException {
 
@@ -133,7 +170,7 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 		try {
 			session = HibernateUtil.openSession();
 
-			String sql = CustomSQLUtil.get(FIND_BY_RELATION_TYPE_BI);
+			String sql = CustomSQLUtil.get(FIND_BY_RELATION_TYPE);
 
 			SQLQuery q = session.createSQLQuery(sql);
 
@@ -143,8 +180,6 @@ public class SocialActivityFinderImpl implements SocialActivityFinder {
 
 			qPos.add(userId);
 			qPos.add(type);
-			qPos.add(userId);
-			qPos.add(userId);
 
 			return (List<SocialActivity>)QueryUtil.list(
 				q, HibernateUtil.getDialect(), begin, end);

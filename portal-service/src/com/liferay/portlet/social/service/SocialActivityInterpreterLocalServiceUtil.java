@@ -68,12 +68,12 @@ public class SocialActivityInterpreterLocalServiceUtil {
 	}
 
 	public static com.liferay.portlet.social.model.SocialActivityFeedEntry interpret(
-		com.liferay.portlet.social.model.SocialActivity activityTracker,
+		com.liferay.portlet.social.model.SocialActivity activity,
 		com.liferay.portal.theme.ThemeDisplay themeDisplay) {
 		SocialActivityInterpreterLocalService socialActivityInterpreterLocalService =
 			SocialActivityInterpreterLocalServiceFactory.getService();
 
-		return socialActivityInterpreterLocalService.interpret(activityTracker,
+		return socialActivityInterpreterLocalService.interpret(activity,
 			themeDisplay);
 	}
 }

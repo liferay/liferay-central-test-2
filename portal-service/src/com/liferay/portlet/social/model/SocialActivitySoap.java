@@ -55,6 +55,7 @@ public class SocialActivitySoap implements Serializable {
 		soapModel.setCompanyId(model.getCompanyId());
 		soapModel.setUserId(model.getUserId());
 		soapModel.setCreateDate(model.getCreateDate());
+		soapModel.setMirrorActivityId(model.getMirrorActivityId());
 		soapModel.setClassNameId(model.getClassNameId());
 		soapModel.setClassPK(model.getClassPK());
 		soapModel.setType(model.getType());
@@ -125,6 +126,14 @@ public class SocialActivitySoap implements Serializable {
 		_createDate = createDate;
 	}
 
+	public long getMirrorActivityId() {
+		return _mirrorActivityId;
+	}
+
+	public void setMirrorActivityId(long mirrorActivityId) {
+		_mirrorActivityId = mirrorActivityId;
+	}
+
 	public long getClassNameId() {
 		return _classNameId;
 	}
@@ -170,6 +179,7 @@ public class SocialActivitySoap implements Serializable {
 	private long _companyId;
 	private long _userId;
 	private Date _createDate;
+	private long _mirrorActivityId;
 	private long _classNameId;
 	private long _classPK;
 	private String _type;

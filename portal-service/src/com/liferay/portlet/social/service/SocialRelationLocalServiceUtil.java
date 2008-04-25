@@ -132,4 +132,11 @@ public class SocialRelationLocalServiceUtil {
 
 		return socialRelationLocalService.getRelations(userId, type, begin, end);
 	}
+
+	public static int getRelationsCount(long userId, int type)
+		throws com.liferay.portal.SystemException {
+		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
+
+		return socialRelationLocalService.getRelationsCount(userId, type);
+	}
 }

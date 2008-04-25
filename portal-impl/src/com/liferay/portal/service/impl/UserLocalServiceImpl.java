@@ -87,7 +87,6 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
-import com.liferay.portlet.social.model.SocialRelationConstants;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
@@ -1004,7 +1003,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("socialRelation", new Long[] {userId, userId, userId});
+		params.put("socialRelation", new Long[] {userId});
 
 		return search(
 			user.getCompanyId(), null, null, params, begin, end, obc);
@@ -1019,18 +1018,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		if (SocialRelationConstants.isTypeUni(type)) {
-			params.put(
-				"socialRelationTypeUni", new Long[] {userId, new Long(type)});
-		}
-		else {
-			params.put(
-				"socialRelationTypeBi",
-				new Long[] {userId, userId, userId, new Long(type)});
-		}
+		params.put("socialRelationType", new Long[] {userId, new Long(type)});
 
-		return search(
-			user.getCompanyId(), null, null, params, begin, end, obc);
+		return search(user.getCompanyId(), null, null, params, begin, end, obc);
 	}
 
 	public List<User> getSocialUsers(
@@ -1043,10 +1033,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put(
-			"socialMutualRelation",
-			new Long[] {
-				userId1, userId1, userId1, userId2, userId2, userId2});
+		params.put("socialMutualRelation", new Long[] {userId1, userId2});
 
 		return search(
 			user1.getCompanyId(), null, null, params, begin, end, obc);
@@ -1064,9 +1051,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialMutualRelationType",
-			new Long[] {
-				userId1, userId1, userId1, userId2, userId2, userId2,
-				new Long(type), new Long(type)});
+			new Long[] {userId1, new Long(type), userId2, new Long(type)});
 
 		return search(
 			user1.getCompanyId(), null, null, params, begin, end, obc);
@@ -1080,7 +1065,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put("socialRelation", new Long[] {userId, userId, userId});
+		params.put("socialRelation", new Long[] {userId});
 
 		return searchCount(user.getCompanyId(), null, null, params);
 	}
@@ -1093,15 +1078,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		if (SocialRelationConstants.isTypeUni(type)) {
-			params.put(
-				"socialRelationTypeUni", new Long[] {userId, new Long(type)});
-		}
-		else {
-			params.put(
-				"socialRelationTypeBi",
-				new Long[] {userId, userId, userId, new Long(type)});
-		}
+		params.put("socialRelationType", new Long[] {userId, new Long(type)});
 
 		return searchCount(user.getCompanyId(), null, null, params);
 	}
@@ -1114,10 +1091,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		LinkedHashMap<String, Object> params =
 			new LinkedHashMap<String, Object>();
 
-		params.put(
-			"socialMutualRelation",
-			new Long[] {
-				userId1, userId1, userId1, userId2, userId2, userId2});
+		params.put("socialMutualRelation", new Long[] {userId1, userId2});
 
 		return searchCount(user1.getCompanyId(), null, null, params);
 	}
@@ -1132,9 +1106,7 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 		params.put(
 			"socialMutualRelationType",
-			new Long[] {
-				userId1, userId1, userId1, userId2, userId2, userId2,
-				new Long(type), new Long(type)});
+			new Long[] {userId1, new Long(type), userId2, new Long(type)});
 
 		return searchCount(user1.getCompanyId(), null, null, params);
 	}

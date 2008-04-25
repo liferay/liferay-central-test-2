@@ -1,3 +1,5 @@
+alter table SocialActivity add mirrorActivityId LONG;
+
 drop table ExpandoRow;
 
 create table ExpandoRow (

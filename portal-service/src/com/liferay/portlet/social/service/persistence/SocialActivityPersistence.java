@@ -161,6 +161,14 @@ public interface SocialActivityPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
 
+	public com.liferay.portlet.social.model.SocialActivity findByMirrorActivityId(
+		long mirrorActivityId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
+	public com.liferay.portlet.social.model.SocialActivity fetchByMirrorActivityId(
+		long mirrorActivityId) throws com.liferay.portal.SystemException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
 		long classNameId) throws com.liferay.portal.SystemException;
 
@@ -250,6 +258,37 @@ public interface SocialActivityPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portlet.social.NoSuchActivityException;
 
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByM_C_C(
+		long mirrorActivityId, long classNameId, long classPK)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByM_C_C(
+		long mirrorActivityId, long classNameId, long classPK, int begin,
+		int end) throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findByM_C_C(
+		long mirrorActivityId, long classNameId, long classPK, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portlet.social.model.SocialActivity findByM_C_C_First(
+		long mirrorActivityId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
+	public com.liferay.portlet.social.model.SocialActivity findByM_C_C_Last(
+		long mirrorActivityId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
+	public com.liferay.portlet.social.model.SocialActivity[] findByM_C_C_PrevAndNext(
+		long activityId, long mirrorActivityId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
 	public java.util.List<com.liferay.portlet.social.model.SocialActivity> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException;
@@ -277,6 +316,10 @@ public interface SocialActivityPersistence {
 	public void removeByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
+	public void removeByMirrorActivityId(long mirrorActivityId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException;
+
 	public void removeByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException;
 
@@ -285,6 +328,9 @@ public interface SocialActivityPersistence {
 
 	public void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
+
+	public void removeByM_C_C(long mirrorActivityId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException;
 
 	public void removeAll() throws com.liferay.portal.SystemException;
 
@@ -297,6 +343,9 @@ public interface SocialActivityPersistence {
 	public int countByUserId(long userId)
 		throws com.liferay.portal.SystemException;
 
+	public int countByMirrorActivityId(long mirrorActivityId)
+		throws com.liferay.portal.SystemException;
+
 	public int countByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException;
 
@@ -305,6 +354,9 @@ public interface SocialActivityPersistence {
 
 	public int countByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException;
+
+	public int countByM_C_C(long mirrorActivityId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException;
 
 	public int countAll() throws com.liferay.portal.SystemException;
 }

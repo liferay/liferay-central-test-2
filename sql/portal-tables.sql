@@ -1199,6 +1199,7 @@ create table SocialActivity (
 	companyId LONG,
 	userId LONG,
 	createDate DATE null,
+	mirrorActivityId LONG,
 	classNameId LONG,
 	classPK LONG,
 	type_ VARCHAR(75) null,

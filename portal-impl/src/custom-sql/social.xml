@@ -1,31 +1,34 @@
 <?xml version="1.0"?>
 
 <custom-sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByU_R">
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByRelation">
 		<![CDATA[
 			SELECT
-				COUNT(*) AS COUNT_VALUE
+				COUNT(DISTINCT SocialActivity.activityId) AS COUNT_VALUE
 			FROM
 				SocialActivity
+			INNER JOIN
+				SocialRelation ON
+					(SocialRelation.userId2 = SocialActivity.userId)
 			WHERE
-				(SocialActivity.userId = ?) OR
-				(SocialActivity.receiverUserId = ?)
+				(SocialRelation.userId1 = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByU_R">
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.countByRelationType">
 		<![CDATA[
 			SELECT
-				{SocialActivity.*}
+				COUNT(DISTINCT SocialActivity.activityId) AS COUNT_VALUE
 			FROM
 				SocialActivity
+			INNER JOIN
+				SocialRelation ON
+					(SocialRelation.userId2 = SocialActivity.userId)
 			WHERE
-				(SocialActivity.userId = ?) OR
-				(SocialActivity.receiverUserId = ?)
-			ORDER BY
-				SocialActivity.createDate DESC
+				(SocialRelation.userId1 = ?) AND
+				(SocialRelation.type_ = ?)
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByRelationTypeBi">
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByRelation">
 		<![CDATA[
 			SELECT
 				DISTINCT {SocialActivity.*}
@@ -33,82 +36,27 @@
 				SocialActivity
 			INNER JOIN
 				SocialRelation ON
-					(
-						(SocialRelation.userId1 = SocialActivity.userId) OR
-						(SocialRelation.userId1 = SocialActivity.receiverUserId)
-					) OR
-					(
-						(SocialRelation.userId2 = SocialActivity.userId) OR
-						(SocialRelation.userId2 = SocialActivity.receiverUserId)
-					)
+					(SocialRelation.userId2 = SocialActivity.userId)
 			WHERE
-				(SocialActivity.userId != ?) AND
-				(SocialRelation.type_ = ?) AND
-				(
-					(SocialRelation.userId1 = ?) OR
-					(SocialRelation.userId2 = ?)
-				)
+				(SocialRelation.userId1 = ?)
 			ORDER BY
 				SocialActivity.createDate DESC
 		]]>
 	</sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.countByU_T">
+	<sql id="com.liferay.portlet.social.service.persistence.SocialActivityFinder.findByRelationType">
 		<![CDATA[
 			SELECT
-				COUNT(*) AS COUNT_VALUE
+				DISTINCT {SocialActivity.*}
 			FROM
-				SocialRelation
-			WHERE
-				(
-					(SocialRelation.userId2 = ?) OR
-					(SocialRelation.userId1 = ?)
-				) AND
-				(SocialRelation.type_ = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.findByU_T">
-		<![CDATA[
-			SELECT
-				{SocialRelation.*}
-			FROM
-				SocialRelation
-			WHERE
-				(
-					(SocialRelation.userId2 = ?) OR
-					(SocialRelation.userId1 = ?)
-				) AND
-				(SocialRelation.type_ = ?)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.findByU_U_T_BI">
-		<![CDATA[
-			SELECT
-				{SocialRelation.*}
-			FROM
-				SocialRelation
-			WHERE
-				(
-					(SocialRelation.userId1 = ?) AND
-					(SocialRelation.userId2 = ?) AND
-					(SocialRelation.type_ = ?)
-				) OR
-				(
-					(SocialRelation.userId1 = ?) AND
-					(SocialRelation.userId2 = ?) AND
-					(SocialRelation.type_ = ?)
-				)
-		]]>
-	</sql>
-	<sql id="com.liferay.portlet.social.service.persistence.SocialRelationFinder.findByU_U_T_UNI">
-		<![CDATA[
-			SELECT
-				{SocialRelation.*}
-			FROM
-				SocialRelation
+				SocialActivity
+			INNER JOIN
+				SocialRelation ON
+					(SocialRelation.userId2 = SocialActivity.userId)
 			WHERE
 				(SocialRelation.userId1 = ?) AND
-				(SocialRelation.userId2 = ?) AND
 				(SocialRelation.type_ = ?)
+			ORDER BY
+				SocialActivity.createDate DESC
 		]]>
 	</sql>
 </custom-sql>

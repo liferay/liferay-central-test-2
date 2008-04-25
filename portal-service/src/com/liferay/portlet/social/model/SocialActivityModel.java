@@ -71,6 +71,10 @@ public interface SocialActivityModel extends BaseModel {
 
 	public void setCreateDate(Date createDate);
 
+	public long getMirrorActivityId();
+
+	public void setMirrorActivityId(long mirrorActivityId);
+
 	public String getClassName();
 
 	public long getClassNameId();

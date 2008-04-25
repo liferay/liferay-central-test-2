@@ -215,6 +215,18 @@ public class SocialActivityUtil {
 		return getPersistence().findByUserId_PrevAndNext(activityId, userId, obc);
 	}
 
+	public static com.liferay.portlet.social.model.SocialActivity findByMirrorActivityId(
+		long mirrorActivityId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException {
+		return getPersistence().findByMirrorActivityId(mirrorActivityId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivity fetchByMirrorActivityId(
+		long mirrorActivityId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByMirrorActivityId(mirrorActivityId);
+	}
+
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByClassNameId(
 		long classNameId) throws com.liferay.portal.SystemException {
 		return getPersistence().findByClassNameId(classNameId);
@@ -345,6 +357,59 @@ public class SocialActivityUtil {
 				   .findByC_C_PrevAndNext(activityId, classNameId, classPK, obc);
 	}
 
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByM_C_C(
+		long mirrorActivityId, long classNameId, long classPK)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByM_C_C(mirrorActivityId, classNameId, classPK);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByM_C_C(
+		long mirrorActivityId, long classNameId, long classPK, int begin,
+		int end) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByM_C_C(mirrorActivityId, classNameId, classPK, begin,
+			end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findByM_C_C(
+		long mirrorActivityId, long classNameId, long classPK, int begin,
+		int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByM_C_C(mirrorActivityId, classNameId, classPK, begin,
+			end, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivity findByM_C_C_First(
+		long mirrorActivityId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException {
+		return getPersistence()
+				   .findByM_C_C_First(mirrorActivityId, classNameId, classPK,
+			obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivity findByM_C_C_Last(
+		long mirrorActivityId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException {
+		return getPersistence()
+				   .findByM_C_C_Last(mirrorActivityId, classNameId, classPK, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialActivity[] findByM_C_C_PrevAndNext(
+		long activityId, long mirrorActivityId, long classNameId, long classPK,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException {
+		return getPersistence()
+				   .findByM_C_C_PrevAndNext(activityId, mirrorActivityId,
+			classNameId, classPK, obc);
+	}
+
 	public static java.util.List<com.liferay.portlet.social.model.SocialActivity> findWithDynamicQuery(
 		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
 		throws com.liferay.portal.SystemException {
@@ -389,6 +454,12 @@ public class SocialActivityUtil {
 		getPersistence().removeByUserId(userId);
 	}
 
+	public static void removeByMirrorActivityId(long mirrorActivityId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchActivityException {
+		getPersistence().removeByMirrorActivityId(mirrorActivityId);
+	}
+
 	public static void removeByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByClassNameId(classNameId);
@@ -402,6 +473,11 @@ public class SocialActivityUtil {
 	public static void removeByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		getPersistence().removeByC_C(classNameId, classPK);
+	}
+
+	public static void removeByM_C_C(long mirrorActivityId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException {
+		getPersistence().removeByM_C_C(mirrorActivityId, classNameId, classPK);
 	}
 
 	public static void removeAll() throws com.liferay.portal.SystemException {
@@ -423,6 +499,11 @@ public class SocialActivityUtil {
 		return getPersistence().countByUserId(userId);
 	}
 
+	public static int countByMirrorActivityId(long mirrorActivityId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByMirrorActivityId(mirrorActivityId);
+	}
+
 	public static int countByClassNameId(long classNameId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByClassNameId(classNameId);
@@ -436,6 +517,12 @@ public class SocialActivityUtil {
 	public static int countByC_C(long classNameId, long classPK)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByC_C(classNameId, classPK);
+	}
+
+	public static int countByM_C_C(long mirrorActivityId, long classNameId,
+		long classPK) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .countByM_C_C(mirrorActivityId, classNameId, classPK);
 	}
 
 	public static int countAll() throws com.liferay.portal.SystemException {

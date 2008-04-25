@@ -1356,6 +1356,7 @@
 		<field name="companyId" type="long" />
 		<field name="userId" type="long" />
 		<field name="createDate" type="Date" />
+		<field name="mirrorActivityId" type="long" />
 		<field name="classNameId" type="long" />
 		<field name="classPK" type="long" />
 		<field name="type" type="String" />

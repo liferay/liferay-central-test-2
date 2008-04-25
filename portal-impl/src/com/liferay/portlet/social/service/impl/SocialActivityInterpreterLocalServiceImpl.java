@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.social.service.impl;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.model.SocialActivity;
@@ -58,10 +59,27 @@ public class SocialActivityInterpreterLocalServiceImpl
 	}
 
 	public SocialActivityFeedEntry interpret(
-		SocialActivity activityTracker, ThemeDisplay themeDisplay) {
+		SocialActivity activity, ThemeDisplay themeDisplay) {
 
-		String className = PortalUtil.getClassName(
-			activityTracker.getClassNameId());
+		if ((activity.getReceiverUserId() > 0) &&
+			(activity.getUserId() != activity.getReceiverUserId())) {
+
+			SocialActivity mirrorActivity = null;
+
+			try {
+				mirrorActivity =
+					socialActivityPersistence.fetchByMirrorActivityId(
+						activity.getActivityId());
+			}
+			catch (SystemException se) {
+			}
+
+			if (mirrorActivity != null) {
+				activity = mirrorActivity;
+			}
+		}
+
+		String className = PortalUtil.getClassName(activity.getClassNameId());
 
 		for (int i = 0; i < _activityInterpreters.size(); i++) {
 			SocialActivityInterpreterImpl activityInterpreter =
@@ -69,8 +87,7 @@ public class SocialActivityInterpreterLocalServiceImpl
 
 			if (activityInterpreter.hasClassName(className)) {
 				SocialActivityFeedEntry activityFeedEntry =
-					activityInterpreter.interpret(
-						activityTracker, themeDisplay);
+					activityInterpreter.interpret(activity, themeDisplay);
 
 				if (activityFeedEntry != null) {
 					activityFeedEntry.setPortletId(

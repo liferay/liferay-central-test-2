@@ -49,8 +49,6 @@ import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
-import com.liferay.portlet.social.service.persistence.SocialRelationFinder;
-import com.liferay.portlet.social.service.persistence.SocialRelationFinderUtil;
 import com.liferay.portlet.social.service.persistence.SocialRelationPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRelationUtil;
 
@@ -147,15 +145,6 @@ public abstract class SocialRelationLocalServiceBaseImpl
 		this.socialRelationPersistence = socialRelationPersistence;
 	}
 
-	public SocialRelationFinder getSocialRelationFinder() {
-		return socialRelationFinder;
-	}
-
-	public void setSocialRelationFinder(
-		SocialRelationFinder socialRelationFinder) {
-		this.socialRelationFinder = socialRelationFinder;
-	}
-
 	public CounterLocalService getCounterLocalService() {
 		return counterLocalService;
 	}
@@ -225,10 +214,6 @@ public abstract class SocialRelationLocalServiceBaseImpl
 			socialRelationPersistence = SocialRelationUtil.getPersistence();
 		}
 
-		if (socialRelationFinder == null) {
-			socialRelationFinder = SocialRelationFinderUtil.getFinder();
-		}
-
 		if (counterLocalService == null) {
 			counterLocalService = CounterLocalServiceFactory.getImpl();
 		}
@@ -259,7 +244,6 @@ public abstract class SocialRelationLocalServiceBaseImpl
 	protected SocialActivityFinder socialActivityFinder;
 	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
 	protected SocialRelationPersistence socialRelationPersistence;
-	protected SocialRelationFinder socialRelationFinder;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
 	protected UserLocalService userLocalService;
