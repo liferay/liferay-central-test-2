@@ -9,6 +9,12 @@
 		<parameter name="className" value="com.liferay.portlet.workflow.service.http.WorkflowComponentServiceSoap"/>
 		<parameter name="wsdlPortType" value="WorkflowComponentServiceSoap"/>
 		<parameter name="typeMappingVersion" value="1.2"/>
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://model.workflow.portlet.liferay.com" name="getTask" qname="operNS:getTask" returnQName="getTaskReturn" returnType="rtns:WorkflowTask" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="taskId" type="tns:long"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deploy" qname="operNS:deploy" returnQName="deployReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="xml" type="tns:string"></parameter>
+		</operation>
 		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="urn:http.service.workflow.portlet.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getCurrentTasks" qname="operNS:getCurrentTasks" returnQName="getCurrentTasksReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemType="tns2:anyType" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tokenId" type="tns:long"></parameter>
@@ -17,13 +23,7 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="tokenId" type="tns:long"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="deploy" qname="operNS:deploy" returnQName="deployReturn" returnType="rtns:string" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="xml" type="tns:string"></parameter>
-		</operation>
 		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDefinition" qname="operNS:getDefinition" returnQName="getDefinitionReturn" returnType="rtns:anyType" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDefinitionXml" qname="operNS:getDefinitionXml" returnQName="getDefinitionXmlReturn" returnType="rtns:string" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="urn:http.service.workflow.portlet.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getDefinitions" qname="operNS:getDefinitions" returnQName="getDefinitionsReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemType="tns2:anyType" soapAction="">
@@ -46,22 +46,10 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="urn:http.service.workflow.portlet.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getInstances" qname="operNS:getInstances" returnQName="getInstancesReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemType="tns2:anyType" soapAction="">
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getDefinitionXml" qname="operNS:getDefinitionXml" returnQName="getDefinitionXmlReturn" returnType="rtns:string" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionVersion" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDateGT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDateLT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDateGT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDateLT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="hideEndedTasks" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="retrieveUserInstances" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="andOperator" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getInstancesXml" qname="operNS:getInstancesXml" returnQName="getInstancesXmlReturn" returnType="rtns:string" soapAction="">
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="urn:http.service.workflow.portlet.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getInstances" qname="operNS:getInstances" returnQName="getInstancesReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemType="tns2:anyType" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionName" type="tns:string"></parameter>
@@ -102,8 +90,20 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="retrieveUserInstances" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="andOperator" type="tns:boolean"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://model.workflow.portlet.liferay.com" name="getTask" qname="operNS:getTask" returnQName="getTaskReturn" returnType="rtns:WorkflowTask" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="taskId" type="tns:long"></parameter>
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getInstancesXml" qname="operNS:getInstancesXml" returnQName="getInstancesXmlReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionVersion" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDateGT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDateLT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDateGT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDateLT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="hideEndedTasks" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="retrieveUserInstances" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="andOperator" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getTaskXml" qname="operNS:getTaskXml" returnQName="getTaskXmlReturn" returnType="rtns:string" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="taskId" type="tns:long"></parameter>
@@ -121,22 +121,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="taskId" type="tns:long"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="urn:http.service.workflow.portlet.liferay.com" xmlns:tns2="http://www.w3.org/2001/XMLSchema" name="getUserTasks" qname="operNS:getUserTasks" returnQName="getUserTasksReturn" returnType="rtns:ArrayOf_xsd_anyType" returnItemType="tns2:anyType" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="taskName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="assignedTo" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="createDateGT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="createDateLT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDateGT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDateLT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDateGT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDateLT" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="hideEndedTasks" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="andOperator" type="tns:boolean"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
-		</operation>
-		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getUserTasksXml" qname="operNS:getUserTasksXml" returnQName="getUserTasksXmlReturn" returnType="rtns:string" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="taskName" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionName" type="tns:string"></parameter>
@@ -179,6 +163,22 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDateLT" type="tns:string"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="hideEndedTasks" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="andOperator" type="tns:boolean"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" xmlns:rtns="http://www.w3.org/2001/XMLSchema" name="getUserTasksXml" qname="operNS:getUserTasksXml" returnQName="getUserTasksXmlReturn" returnType="rtns:string" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="taskName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="definitionName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="assignedTo" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="createDateGT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="createDateLT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDateGT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="startDateLT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDateGT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="endDateLT" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="hideEndedTasks" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="andOperator" type="tns:boolean"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="begin" type="tns:int"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="end" type="tns:int"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.workflow.portlet.liferay.com" name="signalInstance" qname="operNS:signalInstance" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="instanceId" type="tns:long"></parameter>

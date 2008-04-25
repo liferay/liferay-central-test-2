@@ -31,17 +31,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addCommunityPermissions" type="tns:boolean"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="addGuestPermissions" type="tns:boolean"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.documentlibrary.portlet.liferay.com" xmlns:rtns="http://model.documentlibrary.portlet.liferay.com" name="updateFileEntry" qname="operNS:updateFileEntry" returnQName="updateFileEntryReturn" returnType="rtns:DLFileEntrySoap" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="newFolderId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sourceFileName" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
-			<parameter xmlns:tns="urn:http.service.documentlibrary.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="extraSettings" type="tns:string"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="byteArray" type="tns:base64Binary"></parameter>
-		</operation>
 		<operation xmlns:operNS="urn:http.service.documentlibrary.portlet.liferay.com" name="deleteFileEntry" qname="operNS:deleteFileEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
@@ -50,6 +39,10 @@
 		<operation xmlns:operNS="urn:http.service.documentlibrary.portlet.liferay.com" name="deleteFileEntry" qname="operNS:deleteFileEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.documentlibrary.portlet.liferay.com" name="deleteFileEntryByTitle" qname="operNS:deleteFileEntryByTitle" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="titleWithExtension" type="tns:string"></parameter>
 		</operation>
 		<operation xmlns:operNS="urn:http.service.documentlibrary.portlet.liferay.com" xmlns:rtns="urn:http.service.documentlibrary.portlet.liferay.com" xmlns:tns2="http://model.documentlibrary.portlet.liferay.com" name="getFileEntries" qname="operNS:getFileEntries" returnQName="getFileEntriesReturn" returnType="rtns:ArrayOf_tns2_DLFileEntrySoap" returnItemType="tns2:DLFileEntrySoap" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
@@ -62,10 +55,6 @@
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="titleWithExtension" type="tns:string"></parameter>
 		</operation>
-		<operation xmlns:operNS="urn:http.service.documentlibrary.portlet.liferay.com" name="deleteFileEntryByTitle" qname="operNS:deleteFileEntryByTitle" soapAction="">
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
-			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="titleWithExtension" type="tns:string"></parameter>
-		</operation>
 		<operation xmlns:operNS="urn:http.service.documentlibrary.portlet.liferay.com" name="lockFileEntry" qname="operNS:lockFileEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
@@ -73,6 +62,17 @@
 		<operation xmlns:operNS="urn:http.service.documentlibrary.portlet.liferay.com" name="unlockFileEntry" qname="operNS:unlockFileEntry" soapAction="">
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
 			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+		</operation>
+		<operation xmlns:operNS="urn:http.service.documentlibrary.portlet.liferay.com" xmlns:rtns="http://model.documentlibrary.portlet.liferay.com" name="updateFileEntry" qname="operNS:updateFileEntry" returnQName="updateFileEntryReturn" returnType="rtns:DLFileEntrySoap" soapAction="">
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="folderId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="newFolderId" type="tns:long"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="name" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="sourceFileName" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="title" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="description" type="tns:string"></parameter>
+			<parameter xmlns:tns="urn:http.service.documentlibrary.portlet.liferay.com" qname="tagsEntries" type="tns:ArrayOf_xsd_string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="extraSettings" type="tns:string"></parameter>
+			<parameter xmlns:tns="http://www.w3.org/2001/XMLSchema" qname="byteArray" type="tns:base64Binary"></parameter>
 		</operation>
 		<parameter name="allowedMethods" value="addFileEntry unlockFileEntry deleteFileEntryByTitle deleteFileEntry lockFileEntry getFileEntries getFileEntryByTitle getFileEntry updateFileEntry"/>
 		<arrayMapping xmlns:ns="urn:http.service.documentlibrary.portlet.liferay.com" xmlns:cmp-ns="http://www.w3.org/2001/XMLSchema" qname="ns:ArrayOf_xsd_string" type="java:java.lang.String[]" innerType="cmp-ns:string" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"></arrayMapping>
