@@ -22,13 +22,13 @@
 
 package com.liferay.portlet.social.service.impl;
 
-import com.liferay.portal.SystemException;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.SocialActivityFeedEntry;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
+import com.liferay.portlet.social.service.SocialActivityLocalServiceUtil;
 import com.liferay.portlet.social.service.base.SocialActivityInterpreterLocalServiceBaseImpl;
 
 import java.util.ArrayList;
@@ -68,10 +68,10 @@ public class SocialActivityInterpreterLocalServiceImpl
 
 			try {
 				mirrorActivity =
-					socialActivityPersistence.fetchByMirrorActivityId(
+					SocialActivityLocalServiceUtil.getMirrorActivity(
 						activity.getActivityId());
 			}
-			catch (SystemException se) {
+			catch (Exception e) {
 			}
 
 			if (mirrorActivity != null) {
