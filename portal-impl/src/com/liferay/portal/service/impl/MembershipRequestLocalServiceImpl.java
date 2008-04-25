@@ -181,6 +181,9 @@ public class MembershipRequestLocalServiceImpl
 		String toName = user.getFullName();
 		String toAddress = user.getEmailAddress();
 
+		User requestUser = userLocalService.getUserById(
+			membershipRequest.getUserId());
+
 		String subject = PrefsPropsUtil.getContent(
 			membershipRequest.getCompanyId(), subjectProperty);
 
@@ -213,6 +216,8 @@ public class MembershipRequestLocalServiceImpl
 				"[$FROM_ADDRESS$]",
 				"[$FROM_NAME$]",
 				"[$PORTAL_URL$]",
+				"[$REQUEST_USER_NAME$]",
+				"[$REQUEST_USER_ADDRESS$]",
 				"[$STATUS$]",
 				"[$TO_NAME$]",
 				"[$USER_ADDRESS$]",
@@ -226,6 +231,8 @@ public class MembershipRequestLocalServiceImpl
 				fromAddress,
 				fromName,
 				company.getVirtualHost(),
+				requestUser.getFullName(),
+				requestUser.getEmailAddress(),
 				LanguageUtil.get(user.getLocale(), statusKey),
 				toName,
 				user.getEmailAddress(),
