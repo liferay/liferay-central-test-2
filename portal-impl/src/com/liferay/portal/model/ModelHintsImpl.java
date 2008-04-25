@@ -86,8 +86,14 @@ public class ModelHintsImpl implements ModelHints {
 			return null;
 		}
 		else {
-			return new ElementImpl(
-				(Element)fields.get(field + _ELEMENTS_SUFFIX));
+			Element fieldsEl = (Element)fields.get(field + _ELEMENTS_SUFFIX);
+
+			if (fieldsEl == null) {
+				return null;
+			}
+			else {
+				return new ElementImpl(fieldsEl);
+			}
 		}
 	}
 
