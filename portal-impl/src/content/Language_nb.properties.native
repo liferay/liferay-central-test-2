@@ -439,7 +439,6 @@ always-use-my-user-id=Bruk alltid min brukerid
 always=Alltid
 an-applet-version-of-the-editor-is-also-available=En versjon av redigereren er også tilgjengelig som et appletprogram. Den er mer resurskrevende, men er mer brukervenlig og støtter fargeleging, søk og erstatt samt andre funksjoner. For å kunne bruke denne tekstredigereren endre i det i dine portlet innstillinger.
 an-email-has-been-sent-to-all-journal-administrators-asking-them-to-approve-your-article=En e-post melding har blitt sendt til alle Journal Administratorer for godkjennelse av din artikel.
-an-error-occurred-while-attempting-to-access-the-requested-resource=Feil oppsto når informasjonen skulle hentes
 an-error-occurred-while-communicating-with-the-open-id-provider=Feil oppsto i kommunikasjonen med OpenID-provider
 an-error-occurred-while-discovering-the-open-id-provider=Feil oppsto når Openid-provider skulle lokaliseres
 an-error-occurred-while-establishing-an-association-with-the-open-id-provider=Feil oppsto når forbindelsen med Openid-provider skulle opprettes.

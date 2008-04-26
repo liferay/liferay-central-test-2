@@ -1111,9 +1111,9 @@ public class PropsUtil {
 
 	public static final String JOURNAL_LAR_CREATION_STRATEGY = "journal.lar.creation.strategy";
 
-	public static final String JOURNAL_VELOCITY_ERROR_TEMPLATE = "journal.velocity.error.template";
+	public static final String JOURNAL_ERROR_TEMPLATE_VELOCITY = "journal.error.template.velocity";
 
-	public static final String JOURNAL_XSL_ERROR_TEMPLATE = "journal.xsl.error.template";
+	public static final String JOURNAL_ERROR_TEMPLATE_XSL = "journal.error.template.xsl";
 
 	// Journal Articles Portlet
 

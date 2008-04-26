@@ -31,6 +31,7 @@ import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
 import com.liferay.portal.velocity.VelocityVariables;
 import com.liferay.portlet.journal.TransformException;
@@ -99,7 +100,6 @@ public class JournalVmUtil {
 
 			long companyId = GetterUtil.getLong(tokens.get("company_id"));
 			Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
-
 			long groupId = GetterUtil.getLong(tokens.get("group_id"));
 			String journalTemplatesPath =
 				VelocityResourceListener.JOURNAL_SEPARATOR + StringPool.SLASH +
@@ -125,6 +125,9 @@ public class JournalVmUtil {
 					context, output, JournalVmUtil.class.getName(), script);
 			}
 			catch (VelocityException ve) {
+				context.put("exception", ve.getMessage());
+				context.put("script", script);
+
 				if (ve instanceof ParseErrorException) {
 					ParseErrorException pe = (ParseErrorException)ve;
 
@@ -132,11 +135,8 @@ public class JournalVmUtil {
 					context.put("line", new Integer(pe.getLineNumber()));
 				}
 
-				context.put("exception", ve.getMessage());
-				context.put("script", script);
-
-				String errorTemplate = ContentUtil.get(PropsUtil.get(
-					PropsUtil.JOURNAL_VELOCITY_ERROR_TEMPLATE));
+				String errorTemplate = ContentUtil.get(
+					PropsValues.JOURNAL_ERROR_TEMPLATE_VELOCITY);
 
 				load = Velocity.evaluate(
 					context, output, JournalVmUtil.class.getName(),

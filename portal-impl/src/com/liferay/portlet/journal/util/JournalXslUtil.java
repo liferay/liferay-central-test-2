@@ -26,24 +26,19 @@ import com.liferay.portal.kernel.util.ByteArrayMaker;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.util.ContentUtil;
-import com.liferay.portal.util.PropsUtil;
+import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.velocity.VelocityResourceListener;
-import com.liferay.portlet.journal.TransformException;
 import com.liferay.util.PwdGenerator;
 
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 
 import java.util.Locale;
 import java.util.Map;
 
 import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
 import javax.xml.transform.TransformerFactory;
 import javax.xml.transform.stream.StreamResult;
 import javax.xml.transform.stream.StreamSource;
@@ -60,28 +55,19 @@ public class JournalXslUtil {
 	public static String transform(
 			Map<String, String> tokens, String languageId, String xml,
 			String script)
-		throws TransformException, UnsupportedEncodingException {
+		throws Exception {
 
 		ByteArrayMaker bam = new ByteArrayMaker();
 
 		long companyId = GetterUtil.getLong(tokens.get("company_id"));
-		Company company = null;
-
-		try {
-			company = CompanyLocalServiceUtil.getCompanyById(companyId);
-		}
-		catch (Exception e) {
-		}
-
+		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
 		long groupId = GetterUtil.getLong(tokens.get("group_id"));
-
 		String journalTemplatesPath =
 			VelocityResourceListener.JOURNAL_SEPARATOR + StringPool.SLASH +
 				companyId + StringPool.SLASH + groupId;
 		String randomNamespace =
 			PwdGenerator.getPassword(PwdGenerator.KEY3, 4) +
 				StringPool.UNDERLINE;
-
 		Locale locale = LocaleUtil.fromLanguageId(languageId);
 
 		JournalXslErrorListener errorListener = new JournalXslErrorListener(
@@ -92,73 +78,56 @@ public class JournalXslUtil {
 		TransformerFactory transformerFactory =
 			TransformerFactory.newInstance();
 
-		transformerFactory.setURIResolver(
-			new URIResolver(tokens, languageId));
+		transformerFactory.setURIResolver(new URIResolver(tokens, languageId));
 		transformerFactory.setErrorListener(errorListener);
 
 		try {
-			try {
-				StreamSource scriptSource = new StreamSource(
-					new StringReader(script));
+			StreamSource scriptSource = new StreamSource(
+				new StringReader(script));
 
-				Transformer transformer =
-					transformerFactory.newTransformer(scriptSource);
+			Transformer transformer = transformerFactory.newTransformer(
+				scriptSource);
 
-				transformer.setParameter("company", company);
-				transformer.setParameter("companyId", new Long(companyId));
-				transformer.setParameter("groupId", String.valueOf(groupId));
-				transformer.setParameter(
-					"journalTemplatesPath", journalTemplatesPath);
-				transformer.setParameter("locale", locale);
-				transformer.setParameter("randomNamespace", randomNamespace);
+			transformer.setParameter("company", company);
+			transformer.setParameter("companyId", new Long(companyId));
+			transformer.setParameter("groupId", String.valueOf(groupId));
+			transformer.setParameter(
+				"journalTemplatesPath", journalTemplatesPath);
+			transformer.setParameter("locale", locale);
+			transformer.setParameter("randomNamespace", randomNamespace);
 
-				transformer.transform(xmlSource, new StreamResult(bam));
-			}
-			catch (TransformerConfigurationException tce) {
-				throw new TransformException(
-					errorListener.getMessageAndLocation());
-			}
-			catch (TransformerException te) {
-				throw new TransformException(
-					errorListener.getMessageAndLocation());
-			}
+			transformer.transform(xmlSource, new StreamResult(bam));
 		}
-		catch (TransformException te1) {
-			try {
-				String errorTemplate = ContentUtil.get(PropsUtil.get(
-					PropsUtil.JOURNAL_XSL_ERROR_TEMPLATE));
+		catch (Exception e1) {
+			String errorTemplate = ContentUtil.get(
+				PropsValues.JOURNAL_ERROR_TEMPLATE_XSL);
 
-				StreamSource scriptSource = new StreamSource(
-					new StringReader(errorTemplate));
+			StreamSource scriptSource = new StreamSource(
+				new StringReader(errorTemplate));
 
-				Transformer transformer =
-					transformerFactory.newTransformer(scriptSource);
+			Transformer transformer = transformerFactory.newTransformer(
+				scriptSource);
 
-				transformer.setParameter("company", company);
-				transformer.setParameter("companyId", new Long(companyId));
-				transformer.setParameter("groupId", String.valueOf(groupId));
+			transformer.setParameter("company", company);
+			transformer.setParameter("companyId", new Long(companyId));
+			transformer.setParameter("groupId", String.valueOf(groupId));
+			transformer.setParameter(
+				"journalTemplatesPath", journalTemplatesPath);
+			transformer.setParameter("locale", locale);
+			transformer.setParameter("randomNamespace", randomNamespace);
+
+			transformer.setParameter(
+				"exception", errorListener.getMessageAndLocation());
+			transformer.setParameter("script", script);
+
+			if (errorListener.getLocation() != null) {
 				transformer.setParameter(
-					"journalTemplatesPath", journalTemplatesPath);
-				transformer.setParameter("locale", locale);
-				transformer.setParameter("randomNamespace", randomNamespace);
-
+					"column", new Integer(errorListener.getColumnNumber()));
 				transformer.setParameter(
-					"exception", errorListener.getMessageAndLocation());
-
-				if (Validator.isNotNull(errorListener.getLocation())) {
-					transformer.setParameter(
-						"column", new Integer(errorListener.getColumnNumber()));
-					transformer.setParameter(
-						"line", new Integer(errorListener.getLineNumber()));
-				}
-
-				transformer.setParameter("script", script);
-
-				transformer.transform(xmlSource, new StreamResult(bam));
+					"line", new Integer(errorListener.getLineNumber()));
 			}
-			catch (Exception e) {
-				throw new TransformException(e);
-			}
+
+			transformer.transform(xmlSource, new StreamResult(bam));
 		}
 
 		return bam.toString(StringPool.UTF8);

@@ -2,7 +2,7 @@
 
 <div class="journal-template-error">
 	<span class="portlet-msg-error">
-		#language ("an-error-occurred-while-attempting-to-process-the-template")
+		#language ("an-error-occurred-while-processing-the-template")
 	</span>
 
 	<pre>$htmlUtil.escape($exception)</pre>
@@ -10,11 +10,14 @@
 	<div class="scroll-pane">
 		<div class="inner-scroll-pane">
 			#set ($lines = $script.split("\n"))
+
 			#foreach ($curLine in $lines)
 				#set ($css = '')
+
 				#if ($line == $velocityCount)
 					#set ($css = ' class="error-line"')
 				#end
+
 				<pre${css}><span>${velocityCount}</span>${htmlUtil.escape($curLine)}&nbsp;</pre>
 			#end
 		</div>

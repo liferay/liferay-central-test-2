@@ -92,7 +92,7 @@ catch (Exception e) {
 %>
 
 	<span class="portlet-msg-error">
-		<liferay-ui:message key="an-error-occurred-while-attempting-to-format-the-wiki-page" />
+		<liferay-ui:message key="an-error-occurred-while-formatting-the-wiki-page" />
 	</span>
 
 <%

@@ -8,7 +8,7 @@
 	exclude-result-prefixes="xalan"
 	extension-element-prefixes="languageUtil str xalan">
 
-	<xsl:output method="html" omit-xml-declaration="yes"/>
+	<xsl:output method="html" omit-xml-declaration="yes" />
 
 	<xsl:param name="companyId" />
 	<xsl:param name="exception" />
@@ -19,7 +19,7 @@
 	<xsl:template match="/">
 		<div class="journal-template-error">
 			<span class="portlet-msg-error">
-				<xsl:value-of select="languageUtil:get($companyId, $locale, 'an-error-occurred-while-attempting-to-process-the-template')" />
+				<xsl:value-of select="languageUtil:get($companyId, $locale, 'an-error-occurred-while-processing-the-template')" />
 			</span>
 
 			<pre>

@@ -40,7 +40,6 @@ import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.ContentUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.journal.TransformException;
 import com.liferay.portlet.journal.model.JournalArticle;
 import com.liferay.portlet.journal.model.JournalStructure;
 import com.liferay.portlet.journal.model.JournalTemplate;
@@ -59,7 +58,6 @@ import com.liferay.util.xml.XMLFormatter;
 
 import java.io.IOException;
 import java.io.StringReader;
-import java.io.UnsupportedEncodingException;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -628,7 +626,7 @@ public class JournalUtil {
 					listener.setTokens(tokens);
 				}
 				catch (Exception e) {
-					e.printStackTrace();
+					_log.error(e, e);
 				}
 
 				// Modify transform script
@@ -865,7 +863,7 @@ public class JournalUtil {
 	public static String transform(
 			Map<String, String> tokens, String languageId, String xml,
 			String script, String langType)
-		throws TransformException, UnsupportedEncodingException {
+		throws Exception {
 
 		// Setup Listeners
 

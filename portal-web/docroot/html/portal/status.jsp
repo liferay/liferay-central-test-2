@@ -51,7 +51,7 @@ for (String key : SessionErrors.keySet(request)) {
 	<c:when test="<%= SessionErrors.contains(request, PortalException.class.getName()) || SessionErrors.contains(request, SystemException.class.getName()) %>">
 		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
 
-		<liferay-ui:message key="an-error-occurred-while-attempting-to-access-the-requested-resource" />
+		<liferay-ui:message key="an-error-occurred-while-accessing-the-requested-resource" />
 
 		<br /><br />
 
@@ -60,7 +60,7 @@ for (String key : SessionErrors.keySet(request)) {
 	<c:when test="<%= SessionErrors.contains(request, TransformException.class.getName()) %>">
 		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
 
-		<liferay-ui:message key="an-error-occurred-while-attempting-to-process-the-requested-resource" />
+		<liferay-ui:message key="an-error-occurred-while-processing-the-requested-resource" />
 
 		<br /><br />
 
@@ -88,7 +88,7 @@ for (String key : SessionErrors.keySet(request)) {
 	<c:otherwise>
 		<h3 class="portlet-msg-error"><liferay-ui:message key="internal-server-error" /></h3><br />
 
-		<liferay-ui:message key="an-error-occurred-while-attempting-to-access-the-requested-resource" />
+		<liferay-ui:message key="an-error-occurred-while-accessing-the-requested-resource" />
 
 		<br /><br />
 

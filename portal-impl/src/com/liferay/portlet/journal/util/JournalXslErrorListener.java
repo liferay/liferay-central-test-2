@@ -112,8 +112,8 @@ public class JournalXslErrorListener implements ErrorListener {
 		_message = rootCause.getMessage();
 
 		if (locator != null) {
-			_columnNumber = locator.getColumnNumber();
 			_lineNumber = locator.getLineNumber();
+			_columnNumber = locator.getColumnNumber();
 
 			StringMaker sm = new StringMaker();
 
@@ -145,19 +145,19 @@ public class JournalXslErrorListener implements ErrorListener {
 		return _message + " " + _location;
 	}
 
-	public int getColumnNumber() {
-		return _columnNumber;
-	}
-
 	public int getLineNumber() {
 		return _lineNumber;
 	}
 
-	private int _columnNumber;
-	private int _lineNumber;
+	public int getColumnNumber() {
+		return _columnNumber;
+	}
+
 	private long _companyId;
 	private Locale _locale;
 	private String _location;
 	private String _message;
+	private int _lineNumber;
+	private int _columnNumber;
 
 }

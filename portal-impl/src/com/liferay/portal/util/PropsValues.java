@@ -417,6 +417,12 @@ public class PropsValues {
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JOURNAL_ARTICLE_FORCE_INCREMENT_VERSION));
 
+	public static final String JOURNAL_ERROR_TEMPLATE_VELOCITY =
+		PropsUtil.get(PropsUtil.JOURNAL_ERROR_TEMPLATE_VELOCITY);
+
+	public static final String JOURNAL_ERROR_TEMPLATE_XSL =
+		PropsUtil.get(PropsUtil.JOURNAL_ERROR_TEMPLATE_XSL);
+
 	public static final boolean JOURNAL_FEED_FORCE_AUTOGENERATE_ID =
 		GetterUtil.getBoolean(
 			PropsUtil.get(PropsUtil.JOURNAL_FEED_FORCE_AUTOGENERATE_ID));
