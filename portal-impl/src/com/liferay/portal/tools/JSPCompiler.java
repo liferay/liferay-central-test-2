@@ -23,6 +23,7 @@
 package com.liferay.portal.tools;
 
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.kernel.util.OSDetector;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.util.FileUtil;
@@ -107,10 +108,18 @@ public class JSPCompiler {
 		for (File file : files) {
 			String classDestination = _directory;
 
-			String cmd =
-				_compiler + " -classpath \"" + _classPath +
-				"\" -d \"" + classDestination + "\" " +
-				file.toString();
+			String cmd = null;
+
+			if (OSDetector.isUnix()) {
+				cmd = _compiler + " -classpath " + _classPath +
+					" -d " + classDestination + " " +
+					file.toString();
+			}
+			else {
+				cmd = _compiler + " -classpath \"" + _classPath +
+					"\" -d \"" + classDestination + "\" " +
+					file.toString();
+			}
 
 			File classFile = new File(
 				sourcePath + File.separator +
