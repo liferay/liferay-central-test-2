@@ -61,15 +61,12 @@ public class SocialActivityInterpreterLocalServiceImpl
 	public SocialActivityFeedEntry interpret(
 		SocialActivity activity, ThemeDisplay themeDisplay) {
 
-		if ((activity.getReceiverUserId() > 0) &&
-			(activity.getUserId() != activity.getReceiverUserId())) {
-
+		if (activity.getMirrorActivityId() > 0) {
 			SocialActivity mirrorActivity = null;
 
 			try {
-				mirrorActivity =
-					SocialActivityLocalServiceUtil.getMirrorActivity(
-						activity.getActivityId());
+				mirrorActivity = SocialActivityLocalServiceUtil.getActivity(
+					activity.getMirrorActivityId());
 			}
 			catch (Exception e) {
 			}

@@ -24,6 +24,7 @@
 				SocialRelation ON
 					(SocialRelation.userId2 = SocialActivity.userId)
 			WHERE
+				(SocialActivity.mirrorActivityId = 0) AND
 				(SocialRelation.userId1 = ?) AND
 				(SocialRelation.type_ = ?)
 		]]>
@@ -53,6 +54,7 @@
 				SocialRelation ON
 					(SocialRelation.userId2 = SocialActivity.userId)
 			WHERE
+				(SocialActivity.mirrorActivityId = 0) AND
 				(SocialRelation.userId1 = ?) AND
 				(SocialRelation.type_ = ?)
 			ORDER BY
