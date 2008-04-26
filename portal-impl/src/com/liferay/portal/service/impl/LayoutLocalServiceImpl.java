@@ -450,6 +450,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layouts = getLayouts(groupId, privateLayout, layoutIds);
 		}
 
+		long start = 0;
+		long layoutPermissionsTime = 0;
+		long portletDataTime = 0;
+		long portletSetupTime = 0;
+		long portletUserPreferencesTime = 0;
+		long portletPermissionsTime = 0;
+		long portletPreferencesTime = 0;
+		long portletArchivedSetupsTime = 0;
+		long layoutRolesTime = 0;
+		long portletRolesTime = 0;
+		long commentsTime = 0;
+		long ratingsTime = 0;
+		long tagsTime = 0;
+		long themeTime = 0;
+
 		for (Layout layout : layouts) {
 			context.setPlid(layout.getPlid());
 
@@ -476,12 +491,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			Element permissionsEl = layoutEl.addElement("permissions");
 
+			if (_log.isInfoEnabled()) {
+				start = stopWatch.getTime();
+			}
+
 			// Layout permissions
 
 			if (exportPermissions) {
 				exportLayoutPermissions(
 					layoutCache, companyId, groupId, guestGroup, layout,
 					permissionsEl, exportUserPermissions);
+			}
+
+			if (_log.isInfoEnabled()) {
+				layoutPermissionsTime += stopWatch.getTime() - start;
+				start = stopWatch.getTime();
 			}
 
 			if (layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
@@ -499,6 +523,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				if (exportPortletData) {
 					exportPortletData(
 						context, layout, layoutTypePortlet, layoutEl);
+				}
+
+				if (_log.isInfoEnabled()) {
+					portletDataTime += stopWatch.getTime() - start;
+					start = stopWatch.getTime();
 				}
 
 				// Portlet preferences
@@ -520,11 +549,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 						layout.getPlid(), layoutTypePortlet, layoutEl);
 				}
 
+				if (_log.isInfoEnabled()) {
+					portletSetupTime += stopWatch.getTime() - start;
+					start = stopWatch.getTime();
+				}
+
 				if (exportPortletUserPreferences) {
 					exportPortletPreferences(
 						defaultUserId, PortletKeys.PREFS_OWNER_TYPE_USER,
 						true, layout.getPlid(), layoutTypePortlet,
 						layoutEl);
+				}
+
+				if (_log.isInfoEnabled()) {
+					portletUserPreferencesTime += stopWatch.getTime() - start;
+					start = stopWatch.getTime();
 				}
 
 				// Portlet permissions
@@ -535,7 +574,15 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 						layout, layoutTypePortlet, portletIds, permissionsEl,
 						exportUserPermissions);
 				}
+
+				if (_log.isInfoEnabled()) {
+					portletPermissionsTime += stopWatch.getTime() - start;
+				}
 			}
+		}
+
+		if (_log.isInfoEnabled()) {
+			start = stopWatch.getTime();
 		}
 
 		// Portlet preferences
@@ -544,7 +591,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			exportPortletPreferences(
 				groupId, PortletKeys.PREFS_OWNER_TYPE_GROUP,
 				PortletKeys.PREFS_PLID_SHARED, false, root);
+		}
 
+		if (_log.isInfoEnabled()) {
+			portletPreferencesTime += stopWatch.getTime() - start;
+			start = stopWatch.getTime();
 		}
 
 		// Archived setups
@@ -564,12 +615,22 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			}
 		}
 
+		if (_log.isInfoEnabled()) {
+			portletArchivedSetupsTime += stopWatch.getTime() - start;
+			start = stopWatch.getTime();
+		}
+
 		Element rolesEl = root.addElement("roles");
 
 		// Layout roles
 
 		if (exportPermissions) {
 			exportLayoutRoles(layoutCache, companyId, groupId, rolesEl);
+		}
+
+		if (_log.isInfoEnabled()) {
+			layoutRolesTime += stopWatch.getTime() - start;
+			start = stopWatch.getTime();
 		}
 
 		// Portlet roles
@@ -579,17 +640,37 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				layoutCache, companyId, groupId, portletIds, rolesEl);
 		}
 
+		if (_log.isInfoEnabled()) {
+			portletRolesTime += stopWatch.getTime() - start;
+			start = stopWatch.getTime();
+		}
+
 		// Comments
 
 		exportComments(context, root);
+
+		if (_log.isInfoEnabled()) {
+			commentsTime += stopWatch.getTime() - start;
+			start = stopWatch.getTime();
+		}
 
 		// Ratings
 
 		exportRatings(context, root);
 
+		if (_log.isInfoEnabled()) {
+			ratingsTime += stopWatch.getTime() - start;
+			start = stopWatch.getTime();
+		}
+
 		// Tags
 
 		exportTags(context, root);
+
+		if (_log.isInfoEnabled()) {
+			tagsTime += stopWatch.getTime() - start;
+			start = stopWatch.getTime();
+		}
 
 		// Look and feel
 
@@ -598,6 +679,11 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		try {
 			if (exportTheme) {
 				themeZip = exportTheme(layoutSet);
+
+				if (_log.isInfoEnabled()) {
+					themeTime += stopWatch.getTime() - start;
+					start = stopWatch.getTime();
+				}
 			}
 		}
 		catch (IOException ioe) {
@@ -607,6 +693,20 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// XML
 
 		if (_log.isInfoEnabled()) {
+			_log.info("Exporting layoutPermissions takes " + layoutPermissionsTime + " ms");
+			_log.info("Exporting portletData takes " + portletDataTime + " ms");
+			_log.info("Exporting portletSetup takes " + portletSetupTime + " ms");
+			_log.info("Exporting portletUserPreferences takes " + portletUserPreferencesTime + " ms");
+			_log.info("Exporting portletPermissions takes " + portletPermissionsTime + " ms");
+			_log.info("Exporting portletPreferences takes " + portletPreferencesTime + " ms");
+			_log.info("Exporting portletArchivedSetups takes " + portletArchivedSetupsTime + " ms");
+			_log.info("Exporting layoutRoles takes " + layoutRolesTime + " ms");
+			_log.info("Exporting portletRoles takes " + portletRolesTime + " ms");
+			_log.info("Exporting comments takes " + commentsTime + " ms");
+			_log.info("Exporting ratings takes " + ratingsTime + " ms");
+			_log.info("Exporting tags takes " + tagsTime + " ms");
+			_log.info("Exporting theme takes " + themeTime + " ms");
+
 			_log.info("Exporting layouts takes " + stopWatch.getTime() + " ms");
 		}
 
