@@ -234,6 +234,21 @@
 
 /* ---------- Miscellaneous portlet styles ---------- */
 
+.journal-template-error .scroll-pane {
+}
+
+.journal-template-error .scroll-pane .inner-scroll-pane {
+}
+
+.journal-template-error .scroll-pane .error-line {
+}
+
+.journal-template-error .scroll-pane pre {
+}
+
+.journal-template-error .scroll-pane pre span {
+}
+
 .message-board-code {
 }
 
