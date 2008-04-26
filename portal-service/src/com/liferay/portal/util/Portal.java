@@ -417,6 +417,8 @@ public interface Portal {
 	public void storePreferences(PortletPreferences prefs)
 		throws IOException, ValidatorException;
 
+	public String transformCustomSQL(String sql);
+
 	public PortletMode updatePortletMode(
 			String portletId, User user, Layout layout, PortletMode portletMode,
 			HttpServletRequest req)

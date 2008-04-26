@@ -55,9 +55,11 @@ import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.LayoutTypePortlet;
+import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.plugin.PluginPackageUtil;
@@ -73,6 +75,7 @@ import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.UserServiceUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletBag;
 import com.liferay.portlet.PortletBagPool;
@@ -85,6 +88,12 @@ import com.liferay.portlet.PortletURLImpl;
 import com.liferay.portlet.RenderRequestImpl;
 import com.liferay.portlet.RenderResponseImpl;
 import com.liferay.portlet.UserAttributes;
+import com.liferay.portlet.blogs.model.BlogsEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.documentlibrary.model.DLFileEntry;
+import com.liferay.portlet.imagegallery.model.IGImage;
+import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.BeanUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.JS;
@@ -2091,6 +2100,17 @@ public class PortalImpl implements Portal {
 		prefsImpl.store();
 	}
 
+	public String transformCustomSQL(String sql) {
+		if ((_customSqlClassNames == null) ||
+			(_customSqlClassNameIds == null)) {
+
+			_initCustomSQL();
+		}
+
+		return StringUtil.replace(
+			sql, _customSqlClassNames, _customSqlClassNameIds);
+	}
+
 	public PortletMode updatePortletMode(
 			String portletId, User user, Layout layout, PortletMode portletMode,
 			HttpServletRequest req)
@@ -2478,6 +2498,41 @@ public class PortalImpl implements Portal {
 		return plid;
 	}
 
+	private void _initCustomSQL() {
+		_customSqlClassNames = new String[] {
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USERGROUP$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BLOGS.MODEL.BLOGSENTRY$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BOOKMARKS.MODEL." +
+				"BOOKMARKSENTRY$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.DOCUMENTLIBRARY.MODEL." +
+				"DLFILEENTRY$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.IMAGEGALLERY.MODEL.IGIMAGE$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.MESSAGEBOARDS.MODEL." +
+				"MBMESSAGE$]",
+			"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.WIKI.MODEL.WIKIPAGE$]",
+			"[$FALSE$]",
+			"[$TRUE$]"
+		};
+
+		DBUtil dbUtil = DBUtil.getInstance();
+
+		_customSqlClassNameIds = new String[] {
+			String.valueOf(PortalUtil.getClassNameId(Organization.class)),
+			String.valueOf(PortalUtil.getClassNameId(User.class)),
+			String.valueOf(PortalUtil.getClassNameId(UserGroup.class)),
+			String.valueOf(PortalUtil.getClassNameId(BlogsEntry.class)),
+			String.valueOf(PortalUtil.getClassNameId(BookmarksEntry.class)),
+			String.valueOf(PortalUtil.getClassNameId(DLFileEntry.class)),
+			String.valueOf(PortalUtil.getClassNameId(IGImage.class)),
+			String.valueOf(PortalUtil.getClassNameId(MBMessage.class)),
+			String.valueOf(PortalUtil.getClassNameId(WikiPage.class)),
+			dbUtil.getTemplateFalse(),
+			dbUtil.getTemplateTrue()
+		};
+	}
+
 	private static final String _JSESSIONID = ";jsessionid=";
 
 	private static final String _METHOD_GET = "get";
@@ -2505,6 +2560,8 @@ public class PortalImpl implements Portal {
 	private String[] _sortedSystemOrganizationRoles;
 	private String[] _sortedSystemRoles;
 	private Set<String> _reservedParams;
+	private String[] _customSqlClassNames = null;
+	private String[] _customSqlClassNameIds = null;
 	private Map<String, Long> _plidToPortletIdCache =
 		new ConcurrentHashMap<String, Long>();
 

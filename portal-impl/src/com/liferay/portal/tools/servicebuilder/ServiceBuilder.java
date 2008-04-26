@@ -216,6 +216,7 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.base_persistence=" + _TPL_ROOT + "base_persistence.ftl\n"+
 				"\t-Dservice.tpl.bean_locator_util=" + _TPL_ROOT + "bean_locator_util.ftl\n"+
 				"\t-Dservice.tpl.copyright.txt=copyright.txt\n"+
+				"\t-Dservice.tpl.custom_sql_util=" + _TPL_ROOT + "custom_sql_util.ftl\n"+
 				"\t-Dservice.tpl.dynamic_dialect=" + _TPL_ROOT + "dynamic_dialect.ftl\n"+
 				"\t-Dservice.tpl.ejb_pk=" + _TPL_ROOT + "ejb_pk.ftl\n"+
 				"\t-Dservice.tpl.exception=" + _TPL_ROOT + "exception.ftl\n"+
@@ -238,6 +239,7 @@ public class ServiceBuilder {
 				"\t-Dservice.tpl.persistence_impl=" + _TPL_ROOT + "persistence_impl.ftl\n"+
 				"\t-Dservice.tpl.persistence_util=" + _TPL_ROOT + "persistence_util.ftl\n"+
 				"\t-Dservice.tpl.portal_context_loader_listener=" + _TPL_ROOT + "portal_context_loader_listener.ftl\n"+
+				"\t-Dservice.tpl.portlet_custom_sql_util=" + _TPL_ROOT + "portlet_custom_sql_util.ftl\n"+
 				"\t-Dservice.tpl.principal_bean=" + _TPL_ROOT + "principal_bean.ftl\n"+
 				"\t-Dservice.tpl.props=" + _TPL_ROOT + "props.ftl\n"+
 				"\t-Dservice.tpl.props_util=" + _TPL_ROOT + "props_util.ftl\n"+
@@ -445,6 +447,8 @@ public class ServiceBuilder {
 			"base_persistence", _tplBasePersistence);
 		_tplBeanLocatorUtil = _getTplProperty(
 			"bean_locator_util", _tplBeanLocatorUtil);
+		_tplCustomSQLUtil = _getTplProperty(
+			"custom_sql_util", _tplCustomSQLUtil);
 		_tplDynamicDialect = _getTplProperty(
 			"dynamic_dialect", _tplDynamicDialect);
 		_tplEjbPk = _getTplProperty("ejb_pk", _tplEjbPk);
@@ -478,6 +482,8 @@ public class ServiceBuilder {
 			"persistence_util", _tplPersistenceUtil);
 		_tplPortalContextLoaderListener = _getTplProperty(
 			"portal_context_loader_listener", _tplPortalContextLoaderListener);
+		_tplPortletCustomSQLUtil = _getTplProperty(
+			"portlet_custom_sql_util", _tplPortletCustomSQLUtil);
 		_tplPrincipalBean = _getTplProperty(
 			"principal_bean", _tplPrincipalBean);
 		_tplProps = _getTplProperty("props", _tplProps);
@@ -1002,12 +1008,14 @@ public class ServiceBuilder {
 				_createBaseModelImpl();
 				_createBasePersistence();
 				_createBeanLocatorUtil();
+				_createCustomSQLUtil();
 				_createDynamicDialect();
 				_createFinderCache();
 				_createHibernateConfiguration();
 				_createHibernateUtil();
 				_createLazyClassPathApplicationContext();
 				_createPortalContextLoaderListener();
+				_createPortletCustomSQLUtil();
 				_createPrincipalBean();
 				_createProps();
 				_createPropsUtil();
@@ -1525,6 +1533,27 @@ public class ServiceBuilder {
 					"/BeanLocatorUtil.java");
 
 		writeFile(ejbFile, content);
+	}
+
+	private void _createCustomSQLUtil() throws Exception {
+		if (_springHibernatePackage.equals(
+				"com.liferay.portal.spring.hibernate")) {
+
+			return;
+		}
+
+		// Content
+
+		String content = _processTemplate(_tplCustomSQLUtil);
+
+		// Write file
+
+		File ejbFile = new File(
+			_implDir + "/" +
+				StringUtil.replace(_springHibernatePackage, ".", "/") +
+					"/CustomSQLUtil.java");
+
+		FileUtil.write(ejbFile, content, true);
 	}
 
 	private void _createDynamicDialect() throws Exception {
@@ -2174,6 +2203,25 @@ public class ServiceBuilder {
 			_implDir + "/" +
 				StringUtil.replace(_springContextPackage, ".", "/") +
 					"/PortalContextLoaderListener.java");
+
+		FileUtil.write(ejbFile, content, true);
+	}
+
+	private void _createPortletCustomSQLUtil() throws Exception {
+		if (_springContextPackage.equals("com.liferay.portal.spring.context")) {
+			return;
+		}
+
+		// Content
+
+		String content = _processTemplate(_tplPortletCustomSQLUtil);
+
+		// Write file
+
+		File ejbFile = new File(
+			_implDir + "/" +
+				StringUtil.replace(_springContextPackage, ".", "/") +
+					"/PortletCustomSQLUtil.java");
 
 		FileUtil.write(ejbFile, content, true);
 	}
@@ -3523,6 +3571,7 @@ public class ServiceBuilder {
 	private String _tplBaseModeImpl = _TPL_ROOT + "base_mode_impl.ftl";
 	private String _tplBasePersistence = _TPL_ROOT + "base_persistence.ftl";
 	private String _tplBeanLocatorUtil = _TPL_ROOT + "bean_locator_util.ftl";
+	private String _tplCustomSQLUtil = _TPL_ROOT + "custom_sql_util.ftl";
 	private String _tplDynamicDialect = _TPL_ROOT + "dynamic_dialect.ftl";
 	private String _tplEjbPk = _TPL_ROOT + "ejb_pk.ftl";
 	private String _tplException = _TPL_ROOT + "exception.ftl";
@@ -3550,6 +3599,8 @@ public class ServiceBuilder {
 	private String _tplPersistenceUtil = _TPL_ROOT + "persistence_util.ftl";
 	private String _tplPortalContextLoaderListener =
 		_TPL_ROOT + "portal_context_loader_listener.ftl";
+	private String _tplPortletCustomSQLUtil =
+		_TPL_ROOT + "portlet_custom_sql_util.ftl";
 	private String _tplPrincipalBean = _TPL_ROOT + "principal_bean.ftl";
 	private String _tplProps = _TPL_ROOT + "props.ftl";
 	private String _tplPropsUtil = _TPL_ROOT + "props_util.ftl";

@@ -22,19 +22,8 @@
 
 package com.liferay.portal.spring.hibernate;
 
-import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.model.Organization;
-import com.liferay.portal.model.User;
-import com.liferay.portal.model.UserGroup;
-import com.liferay.portal.tools.sql.DBUtil;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsUtil;
-import com.liferay.portlet.blogs.model.BlogsEntry;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.documentlibrary.model.DLFileEntry;
-import com.liferay.portlet.imagegallery.model.IGImage;
-import com.liferay.portlet.messageboards.model.MBMessage;
-import com.liferay.portlet.wiki.model.WikiPage;
 
 import java.sql.SQLException;
 
@@ -60,51 +49,7 @@ public class PortalCustomSQLUtil
 
 	protected String transform(String sql) {
 		sql = super.transform(sql);
-
-		long organizationClassNameId = PortalUtil.getClassNameId(
-			Organization.class);
-		long userClassNameId = PortalUtil.getClassNameId(User.class);
-		long userGroupClassNameId = PortalUtil.getClassNameId(UserGroup.class);
-		long blogsEntryClassNameId = PortalUtil.getClassNameId(
-			BlogsEntry.class);
-		long bookmarksEntryClassNameId = PortalUtil.getClassNameId(
-			BookmarksEntry.class);
-		long dlFileEntryClassNameId = PortalUtil.getClassNameId(
-			DLFileEntry.class);
-		long igImageClassNameId = PortalUtil.getClassNameId(IGImage.class);
-		long mbMessageClassNameId = PortalUtil.getClassNameId(MBMessage.class);
-		long wikiPageClassNameId = PortalUtil.getClassNameId(WikiPage.class);
-
-		DBUtil dbUtil = DBUtil.getInstance();
-
-		sql = StringUtil.replace(
-			sql,
-			new String[] {
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.ORGANIZATION$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USER$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTAL.MODEL.USERGROUP$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BLOGS.MODEL.BLOGSENTRY$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.BOOKMARKS.MODEL.BOOKMARKSENTRY$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.DOCUMENTLIBRARY.MODEL.DLFILEENTRY$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.IMAGEGALLERY.MODEL.IGIMAGE$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.MESSAGEBOARDS.MODEL.MBMESSAGE$]",
-				"[$CLASS_NAME_ID_COM.LIFERAY.PORTLET.WIKI.MODEL.WIKIPAGE$]",
-				"[$FALSE$]",
-				"[$TRUE$]"
-			},
-			new String[] {
-				String.valueOf(organizationClassNameId),
-				String.valueOf(userClassNameId),
-				String.valueOf(userGroupClassNameId),
-				String.valueOf(blogsEntryClassNameId),
-				String.valueOf(bookmarksEntryClassNameId),
-				String.valueOf(dlFileEntryClassNameId),
-				String.valueOf(igImageClassNameId),
-				String.valueOf(mbMessageClassNameId),
-				String.valueOf(wikiPageClassNameId),
-				dbUtil.getTemplateFalse(),
-				dbUtil.getTemplateTrue()
-			});
+		sql = PortalUtil.transformCustomSQL(sql);
 
 		return sql;
 	}

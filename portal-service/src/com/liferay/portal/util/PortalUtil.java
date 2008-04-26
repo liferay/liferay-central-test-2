@@ -727,6 +727,10 @@ public class PortalUtil {
 		getPortal().storePreferences(prefs);
 	}
 
+	public static String transformCustomSQL(String sql) {
+		return getPortal().transformCustomSQL(sql);
+	}
+
 	public static PortletMode updatePortletMode(
 			String portletId, User user, Layout layout, PortletMode portletMode,
 			HttpServletRequest req)
