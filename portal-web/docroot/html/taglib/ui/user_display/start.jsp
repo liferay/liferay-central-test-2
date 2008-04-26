@@ -52,7 +52,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>"></c:if>
 
 <div>
-	<img border="0" src="<%= themeDisplay.getPathImage() %>/user_<%= userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
+	<img border="0" src="<%= themeDisplay.getPathImage() %>/user_<%= (userDisplay != null) && userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
 </div>
 
 <c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
