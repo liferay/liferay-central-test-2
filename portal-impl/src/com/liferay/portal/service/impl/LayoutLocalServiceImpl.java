@@ -693,15 +693,28 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 		// XML
 
 		if (_log.isInfoEnabled()) {
-			_log.info("Exporting layoutPermissions takes " + layoutPermissionsTime + " ms");
-			_log.info("Exporting portletData takes " + portletDataTime + " ms");
-			_log.info("Exporting portletSetup takes " + portletSetupTime + " ms");
-			_log.info("Exporting portletUserPreferences takes " + portletUserPreferencesTime + " ms");
-			_log.info("Exporting portletPermissions takes " + portletPermissionsTime + " ms");
-			_log.info("Exporting portletPreferences takes " + portletPreferencesTime + " ms");
-			_log.info("Exporting portletArchivedSetups takes " + portletArchivedSetupsTime + " ms");
+			_log.info(
+				"Exporting layoutPermissions takes " + layoutPermissionsTime +
+					" ms");
+			_log.info(
+				"Exporting portletData takes " + portletDataTime + " ms");
+			_log.info(
+				"Exporting portletSetup takes " + portletSetupTime + " ms");
+			_log.info(
+				"Exporting portletUserPreferences takes " +
+					portletUserPreferencesTime + " ms");
+			_log.info(
+				"Exporting portletPermissions takes " + portletPermissionsTime +
+					" ms");
+			_log.info(
+				"Exporting portletPreferences takes " + portletPreferencesTime +
+					" ms");
+			_log.info(
+				"Exporting portletArchivedSetups takes " +
+					portletArchivedSetupsTime + " ms");
 			_log.info("Exporting layoutRoles takes " + layoutRolesTime + " ms");
-			_log.info("Exporting portletRoles takes " + portletRolesTime + " ms");
+			_log.info(
+				"Exporting portletRoles takes " + portletRolesTime + " ms");
 			_log.info("Exporting comments takes " + commentsTime + " ms");
 			_log.info("Exporting ratings takes " + ratingsTime + " ms");
 			_log.info("Exporting tags takes " + tagsTime + " ms");
