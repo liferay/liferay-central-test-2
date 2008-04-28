@@ -156,7 +156,7 @@
 		<delete failonerror="false">
 			<fileset
 				dir="${app.server.classes.portal.dir}"
-				includes="*-ext.properties"
+				includes="portal-*.properties,system-*.properties"
 			/>
 		</delete>
 
@@ -663,9 +663,7 @@
 
 	<target name="deploy-properties">
 		<copy todir="${app.server.classes.portal.dir}" overwrite="yes">
-			<fileset dir="portal-impl/src">
-				<include name="*-ext.properties" />
-			</fileset>
+			<fileset dir="portal-impl/src" includes="portal-*.properties,system-*.properties" />
 		</copy>
 	</target>
 

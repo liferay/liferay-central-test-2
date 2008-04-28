@@ -185,7 +185,7 @@ ${exception.message}
 			<then>
 				<jar
 					basedir="classes"
-					excludes="portal-ext.properties,system-ext.properties"
+					excludes="portal-*.properties,system-*.properties"
 					jarfile="${jar.file}.jar"
 				/>
 			</then>
