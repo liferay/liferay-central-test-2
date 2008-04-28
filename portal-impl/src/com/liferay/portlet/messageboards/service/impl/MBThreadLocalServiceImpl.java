@@ -22,12 +22,16 @@
 
 package com.liferay.portlet.messageboards.service.impl;
 
+import com.liferay.documentlibrary.DuplicateDirectoryException;
 import com.liferay.documentlibrary.NoSuchDirectoryException;
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.impl.GroupImpl;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portlet.messageboards.model.MBCategory;
 import com.liferay.portlet.messageboards.model.MBMessage;
@@ -83,7 +87,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			_log.error("Deleting index " + thread.getThreadId(), pe);
 		}
 
-		// File attachments
+		// Attachments
 
 		long companyId = rootMessage.getCompanyId();
 		String portletId = CompanyConstants.SYSTEM_STRING;
@@ -302,9 +306,9 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		MBMessage message = mbMessagePersistence.findByPrimaryKey(messageId);
 
+		MBCategory category = message.getCategory();
 		long oldThreadId = message.getThreadId();
-		MBCategory category = mbCategoryPersistence.fetchByPrimaryKey(
-			message.getCategoryId());
+		String oldAttachmentsDir = message.getAttachmentsDir();
 
 		// Create new thread
 
@@ -314,8 +318,15 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		message.setThreadId(thread.getThreadId());
 		message.setParentMessageId(0);
+		message.setAttachmentsDir(null);
 
 		mbMessagePersistence.update(message, false);
+
+		// Attachments
+
+		moveAttachmentsFromOldThread(message, oldAttachmentsDir);
+
+		// Lucene
 
 		try {
 			if (!category.isDiscussion()) {
@@ -333,33 +344,16 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 
 		// Update children
 
-		List<MBMessage> messages = mbMessagePersistence.findByT_P(
-			oldThreadId, message.getMessageId());
-
 		int messagesMoved = 1;
 
-		for (MBMessage curMessage : messages) {
-			curMessage.setCategoryId(message.getCategoryId());
-			curMessage.setThreadId(message.getThreadId());
+		messagesMoved += moveChildrenMessages(
+			message, category, oldThreadId);
 
-			mbMessagePersistence.update(curMessage, false);
+		// Update new thread
 
-			messagesMoved++;
+		thread.setMessageCount(messagesMoved);
 
-			try {
-				if (!category.isDiscussion()) {
-					Indexer.updateMessage(
-						curMessage.getCompanyId(), category.getGroupId(),
-						curMessage.getUserName(), category.getCategoryId(),
-						curMessage.getThreadId(), curMessage.getMessageId(),
-						curMessage.getSubject(), curMessage.getBody(),
-						curMessage.getTagsEntries());
-				}
-			}
-			catch (IOException ioe) {
-				_log.error("Indexing " + curMessage.getMessageId(), ioe);
-			}
-		}
+		mbThreadPersistence.update(thread, false);
 
 		// Update old thread
 
@@ -370,7 +364,6 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		mbThreadPersistence.update(oldThread, false);
 
 		return thread;
-
 	}
 
 	public MBThread updateThread(long threadId, int viewCount)
@@ -413,6 +406,97 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		mbThreadPersistence.update(thread, false);
 
 		return thread;
+	}
+
+	protected void moveAttachmentsFromOldThread(
+			MBMessage message, String oldAttachmentsDir)
+		throws PortalException, SystemException {
+
+		long companyId = message.getCompanyId();
+		String portletId = CompanyConstants.SYSTEM_STRING;
+		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
+		long repositoryId = CompanyConstants.SYSTEM;
+		String newAttachmentsDir = message.getAttachmentsDir();
+
+		try {
+			try {
+				dlService.addDirectory(
+					companyId, repositoryId, newAttachmentsDir);
+			}
+			catch (DuplicateDirectoryException dde) {
+			}
+
+			String[] fileNames = dlService.getFileNames(
+				companyId, repositoryId, oldAttachmentsDir);
+
+			for (String fileName : fileNames) {
+				String name = StringUtil.extractLast(
+					fileName, StringPool.SLASH);
+				byte[] fileBytes = dlService.getFile(
+					companyId, repositoryId, fileName);
+
+				dlService.addFile(
+					companyId, portletId, groupId, repositoryId,
+					newAttachmentsDir + "/" + name, StringPool.BLANK,
+					new String[0], fileBytes);
+
+				dlService.deleteFile(
+					companyId, portletId, repositoryId, fileName);
+			}
+
+			try {
+				dlService.deleteDirectory(
+					companyId, portletId, repositoryId, oldAttachmentsDir);
+			}
+			catch (NoSuchDirectoryException nsde) {
+			}
+		}
+		catch (RemoteException re) {
+			throw new SystemException(re);
+		}
+	}
+
+	protected int moveChildrenMessages(
+			MBMessage parentMessage, MBCategory category, long oldThreadId)
+		throws SystemException, PortalException {
+
+		int messagesMoved = 0;
+
+		List<MBMessage> messages = mbMessagePersistence.findByT_P(
+			oldThreadId, parentMessage.getMessageId());
+
+		for (MBMessage message : messages) {
+			String oldAttachmentsDir = message.getAttachmentsDir();
+
+			message.setCategoryId(parentMessage.getCategoryId());
+			message.setThreadId(parentMessage.getThreadId());
+			message.setAttachmentsDir(null);
+
+			mbMessagePersistence.update(message, false);
+
+			moveAttachmentsFromOldThread(message, oldAttachmentsDir);
+
+			try {
+				if (!category.isDiscussion()) {
+					Indexer.updateMessage(
+						message.getCompanyId(), category.getGroupId(),
+						message.getUserName(), category.getCategoryId(),
+						message.getThreadId(), message.getMessageId(),
+						message.getSubject(), message.getBody(),
+						message.getTagsEntries());
+				}
+			}
+			catch (IOException ioe) {
+				_log.error("Indexing " + message.getMessageId(), ioe);
+			}
+
+			messagesMoved++;
+
+			messagesMoved += moveChildrenMessages(
+				message, category, oldThreadId);
+		}
+
+		return messagesMoved;
 	}
 
 	private static Log _log = LogFactory.getLog(MBThreadLocalServiceImpl.class);
