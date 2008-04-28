@@ -102,12 +102,10 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return LayoutFriendlyURLException.ADJACENT_SLASHES;
 		}
 
-		char[] c = friendlyURL.toCharArray();
-
-		for (int i = 0; i < c.length; i++) {
-			if ((!Validator.isChar(c[i])) && (!Validator.isDigit(c[i])) &&
-				(c[i] != CharPool.DASH) && (c[i] != CharPool.PERIOD) &&
-				(c[i] != CharPool.SLASH) && (c[i] != CharPool.UNDERLINE)) {
+		for (char c : friendlyURL.toCharArray()) {
+			if ((!Validator.isChar(c)) && (!Validator.isDigit(c)) &&
+				(c != CharPool.DASH) && (c != CharPool.PERIOD) &&
+				(c != CharPool.SLASH) && (c != CharPool.UNDERLINE)) {
 
 				return LayoutFriendlyURLException.INVALID_CHARACTERS;
 			}

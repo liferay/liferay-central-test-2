@@ -38,9 +38,7 @@ public class ScreenNameValidator {
 	public static final String POSTFIX = "postfix";
 
 	public boolean validate(long companyId, String screenName) {
-		if (Validator.isNull(screenName) ||
-			//Validator.isNumber(screenName) ||
-			Validator.isEmailAddress(screenName) ||
+		if (Validator.isEmailAddress(screenName) ||
 			(screenName.equalsIgnoreCase(CYRUS)) ||
 			(screenName.equalsIgnoreCase(POSTFIX)) ||
 			(screenName.indexOf(StringPool.SLASH) != -1) ||

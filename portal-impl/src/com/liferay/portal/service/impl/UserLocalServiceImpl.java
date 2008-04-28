@@ -51,6 +51,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HtmlUtil;
 import com.liferay.portal.kernel.util.InstancePool;
@@ -2512,6 +2513,15 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			!screenName.equals(String.valueOf(userId))) {
 
 			throw new UserScreenNameException();
+		}
+
+		for (char c : screenName.toCharArray()) {
+			if ((!Validator.isChar(c)) && (!Validator.isDigit(c)) &&
+				(c != CharPool.DASH) && (c != CharPool.PERIOD) &&
+				(c != CharPool.UNDERLINE)) {
+
+				throw new UserScreenNameException();
+			}
 		}
 
 		String[] anonymousNames = PrincipalBean.ANONYMOUS_NAMES;
