@@ -40,20 +40,5 @@ public class AddUserGroupTest extends BaseTestCase {
 		selenium.type("_79_description", "This is a selenium user group.");
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Assign Members");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("link=Available");
-		selenium.waitForPageToLoad("30000");
-		selenium.typeKeys("toggle_id_enterprise_admin_user_searchkeywords",
-			"selenium");
-		selenium.click("//input[@value='Search Users']");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("document._79_fm._79_rowIds[1]");
-		selenium.click("//input[@value='Update Associations']");
-		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"Your request processed successfully."));
-		selenium.click("link=Return to Full Page");
-		selenium.waitForPageToLoad("30000");
 	}
 }

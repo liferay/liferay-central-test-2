@@ -36,8 +36,12 @@ public class EnterpriseAdminTests extends BaseTests {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
 		addTestSuite(AddUserTest.class);
+		addTestSuite(AddUser2Test.class);
+		addTestSuite(SearchUserTest.class);
 		addTestSuite(AddOrganizationTest.class);
+		addTestSuite(ApplyOrganizationTest.class);
 		addTestSuite(AddUserGroupTest.class);
+		addTestSuite(ApplyUserGroupTest.class);
 		addTestSuite(AddRolesTest.class);
 		addTestSuite(AssignRolesTest.class);
 		addTestSuite(BlogsRolesTest.class);
