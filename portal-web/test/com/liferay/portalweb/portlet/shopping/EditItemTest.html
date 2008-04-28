@@ -1,0 +1,84 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>EditItemTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">EditItemTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//div[@id="portlet-wrapper-34"]/div[2]/div/div/form/table/tbody/tr[2]/td[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id="portlet-wrapper-34"]/div[2]/div/div/form/table/tbody/tr[2]/td[1]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Edit</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_34_stockQuantity</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_34_stockQuantity</td>
+	<td>250</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_34_price0</td>
+	<td>$11.99</td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_34_shipping0</td>
+	<td>$2.50</td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Save']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>$11.99</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//div[@id="portlet-wrapper-34"]/div[2]/div/div/form[2]/table/tbody/tr[2]/td[2]/a</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>$11.99</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>//img[@title='Configuration']</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

@@ -35,6 +35,49 @@ public class ShoppingTests extends BaseTests {
 	public ShoppingTests() {
 		addTestSuite(AddPageTest.class);
 		addTestSuite(AddPortletTest.class);
+		addTestSuite(AddCategoryTest.class);
+		addTestSuite(EditCategoryTest.class);
+		addTestSuite(AddTemporaryCategoryTest.class);
+		addTestSuite(DeleteTemporaryCategoryTest.class);
+		addTestSuite(AddSecondCategoryTest.class);
+		addTestSuite(AddItemTest.class);
+		addTestSuite(EditItemTest.class);
+		addTestSuite(AddTemporaryItemTest.class);
+		addTestSuite(DeleteTemporaryItemTest.class);
+		addTestSuite(AddSecondItemTest.class);
+		addTestSuite(SearchItemsTest.class);
+		addTestSuite(MoveItemTest.class);
+		addTestSuite(AddBlankItemTest.class);
+		addTestSuite(AddCouponTest.class);
+		addTestSuite(EditCouponTest.class);
+		addTestSuite(AddBlankCouponTest.class);
+		addTestSuite(AddTemporaryCouponTest.class);
+		addTestSuite(DeleteTemporaryCouponTest.class);
+		addTestSuite(SearchCouponsTest.class);
+		addTestSuite(AddItemToCartTest.class);
+		addTestSuite(ConfirmCartTest.class);
+		addTestSuite(RemoveItemFromCartTest.class);
+		addTestSuite(AddSecondItemToCartTest.class);
+//		addTestSuite(UpdateCartQuantityTest.class);
+		addTestSuite(CheckoutTest.class);
+		addTestSuite(ConfirmOrderTest.class);
+		addTestSuite(ViewInvoiceTest.class);
+		addTestSuite(ConfigureAcceptedCCTest.class);
+		addTestSuite(VerifyAcceptedCCTest.class);
+		addTestSuite(ConfigureStateTaxTest.class);
+		addTestSuite(AddThirdItemToCartTest.class);
+		addTestSuite(VerifyStateTaxTest.class);
+		addTestSuite(ConfigureFlatRateShippingCostTest.class);
+		addTestSuite(VerifyFlatRateShippingCostTest.class);
+		addTestSuite(ConfigurePercentageShippingTest.class);
+		addTestSuite(VerifyPercentageShippingTest.class);
+		addTestSuite(ConfigureFlatRateInsuranceTest.class);
+		addTestSuite(VerifyFlatRateInsuranceTest.class);
+		addTestSuite(ConfigurePercentageInsuranceTest.class);
+		addTestSuite(VerifyPercentageInsuranceTest.class);
+		addTestSuite(SaveCurrentSetupTest.class);
+		addTestSuite(ChangeCurrentSetupTest.class);
+//		addTestSuite(RestoreArchivedSetupTest.class);
 	}
 
 }
