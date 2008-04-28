@@ -113,6 +113,10 @@ public class GroupLocalServiceImpl extends GroupLocalServiceBaseImpl {
 
 		friendlyURL = getFriendlyURL(groupId, classPK, friendlyURL);
 
+		if ((classNameId <= 0) || (classPK <= 0)) {
+			validateName(groupId, user.getCompanyId(), name);
+		}
+
 		validateFriendlyURL(
 			groupId, user.getCompanyId(), classNameId, classPK, friendlyURL);
 
