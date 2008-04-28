@@ -78,7 +78,7 @@ import javax.naming.ldap.LdapContext;
  * @author Brian Wing Shun Chan
  * @author Jerry Niu
  * @author Scott Lee
- * @author Herv� M�nage
+ * @author Hervé Ménage
  *
  */
 public class PortalLDAPUtil {
