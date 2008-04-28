@@ -26,10 +26,10 @@ import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
+import com.liferay.portlet.PortletRequestImpl;
 import com.liferay.portlet.PortletResponseImpl;
 import com.liferay.portlet.PortletServletRequest;
 import com.liferay.portlet.PortletServletResponse;
-import com.liferay.portlet.RenderRequestImpl;
 
 import java.io.IOException;
 
@@ -86,7 +86,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 		String requestURI = null;
 		String servletPath = null;
 
-		RenderRequestImpl renderReq = (RenderRequestImpl)req.getAttribute(
+		PortletRequestImpl portletReq = (PortletRequestImpl)req.getAttribute(
 			JavaConstants.JAVAX_PORTLET_REQUEST);
 
 		PortletResponseImpl portletRes = (PortletResponseImpl)req.getAttribute(
@@ -102,7 +102,7 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				queryString = _path.substring(pos + 1, _path.length());
 			}
 
-			Portlet portlet = renderReq.getPortlet();
+			Portlet portlet = portletReq.getPortlet();
 
 			PortletApp portletApp = portlet.getPortletApp();
 
@@ -129,11 +129,11 @@ public class LiferayRequestDispatcher implements RequestDispatcher {
 				servletPath = pathNoQueryString;
 			}
 
-			requestURI = renderReq.getContextPath() + pathNoQueryString;
+			requestURI = portletReq.getContextPath() + pathNoQueryString;
 		}
 
 		PortletServletRequest portletServletReq = new PortletServletRequest(
-			(HttpServletRequest)req, renderReq, pathInfo, queryString,
+			(HttpServletRequest)req, portletReq, pathInfo, queryString,
 			requestURI, servletPath, false, include);
 
 		PortletServletResponse portletServletRes = new PortletServletResponse(
