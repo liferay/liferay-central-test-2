@@ -2761,6 +2761,7 @@ stage-x-role=Stage {0} Role
 stage=Étape
 stages=Étapes
 staging=live
+stars=Tient le premier rôle
 start-a-new-workflow=Commencer un nouveau workflow
 start-date=Date de début
 start-from=Commencer à partir de
