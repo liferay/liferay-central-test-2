@@ -57,11 +57,9 @@ public class Validator {
 			return false;
 		}
 
-		for (int i = 0; i < tokens.length; i++) {
-			char[] c = tokens[i].toCharArray();
-
-			for (int j = 0; j < c.length; j++) {
-				if (Character.isWhitespace(c[j])) {
+		for (String token : tokens) {
+			for (char c : token.toCharArray()) {
+				if (Character.isWhitespace(c)) {
 					return false;
 				}
 			}
@@ -70,19 +68,36 @@ public class Validator {
 		return true;
 	}
 
+	/**
+	 * Returns true if c is a letter between a-z and A-Z.
+	 *
+	 * @param		c a character
+	 * @return		true if c is a letter between a-z and A-Z
+	 */
 	public static boolean isChar(char c) {
-		return Character.isLetter(c);
+		int x = c;
+
+		if ((x >= _CHAR_BEGIN) && (x <= _CHAR_END)) {
+			return true;
+		}
+
+		return false;
 	}
 
+	/**
+	 * Returns true if s is a string of letters that are between a-z and A-Z.
+	 *
+	 * @param		s a string
+	 * @return		true if s is a string of letters that are between a-z and
+	 *				A-Z
+	 */
 	public static boolean isChar(String s) {
 		if (isNull(s)) {
 			return false;
 		}
 
-		char[] c = s.toCharArray();
-
-		for (int i = 0; i < c.length; i++) {
-			if (!isChar(c[i])) {
+		for (char c: s.toCharArray()) {
+			if (!isChar(c)) {
 				return false;
 			}
 		}
@@ -94,25 +109,35 @@ public class Validator {
 		return isGregorianDate(month, day, year);
 	}
 
+	/**
+	 * Returns true if c is a digit between 0 and 9.
+	 *
+	 * @param		c a character
+	 * @return		true if c is a digit between 0 and 9
+	 */
 	public static boolean isDigit(char c) {
 		int x = c;
 
-		if ((x >= 48) && (x <= 57)) {
+		if ((x >= _DIGIT_BEGIN) && (x <= _DIGIT_END)) {
 			return true;
 		}
 
 		return false;
 	}
 
+	/**
+	 * Returns true if s is a string of letters that are between 0 and 9.
+	 *
+	 * @param		s a string
+	 * @return		true if s is a string of letters that are between 0 and 9
+	 */
 	public static boolean isDigit(String s) {
 		if (isNull(s)) {
 			return false;
 		}
 
-		char[] c = s.toCharArray();
-
-		for (int i = 0; i < c.length; i++) {
-			if (!isDigit(c[i])) {
+		for (char c : s.toCharArray()) {
+			if (!isDigit(c)) {
 				return false;
 			}
 		}
@@ -136,23 +161,22 @@ public class Validator {
 		String[] domainNameArray = StringUtil.split(
 			domainName, StringPool.PERIOD);
 
-		for (int i = 0; i < domainNameArray.length; i++) {
-			char[] c = domainNameArray[i].toCharArray();
+		for (String domainNamePart : domainNameArray) {
+			char[] domainNamePartCharArray = domainNamePart.toCharArray();
 
-			for (int j = 0; j < c.length; j++) {
-				if ((j == 0) &&
-					(c[j] == CharPool.DASH)) {
+			for (int i = 0; i < domainNamePartCharArray.length; i++) {
+				char c = domainNamePartCharArray[i];
+
+				if ((i == 0) && (c == CharPool.DASH)) {
+					return false;
+				}
+				else if ((i == (domainNamePartCharArray.length - 1)) &&
+						 (c == CharPool.DASH)) {
 
 					return false;
 				}
-				else if ((j == (c.length - 1)) &&
-					(c[j] == CharPool.DASH)) {
-
-					return false;
-				}
-				else if ((!isChar(c[j])) &&
-					(!isDigit(c[j])) &&
-					(c[j] != CharPool.DASH)) {
+				else if ((!isChar(c)) && (!isDigit(c)) &&
+						 (c != CharPool.DASH)) {
 
 					return false;
 				}
@@ -313,12 +337,9 @@ public class Validator {
 			return false;
 		}
 
-		char[] c = name.trim().toCharArray();
-
-		for (int i = 0; i < c.length; i++) {
-			if (((!isChar(c[i])) &&
-				(!Character.isWhitespace(c[i]))) ||
-					(c[i] == ',')) {
+		for (char c : name.trim().toCharArray()) {
+			if (((!isChar(c)) &&
+				(!Character.isWhitespace(c))) || (c == CharPool.COMMA)) {
 
 				return false;
 			}
@@ -395,10 +416,8 @@ public class Validator {
 			return false;
 		}
 
-		char[] c = number.toCharArray();
-
-		for (int i = 0; i < c.length; i++) {
-			if (!isDigit(c[i])) {
+		for (char c : number.toCharArray()) {
+			if (!isDigit(c)) {
 				return false;
 			}
 		}
@@ -415,12 +434,8 @@ public class Validator {
 			return false;
 		}
 
-		char[] c = password.toCharArray();
-
-		for (int i = 0; i < c.length; i++) {
-			if ((!isChar(c[i])) &&
-				(!isDigit(c[i]))) {
-
+		for (char c : password.toCharArray()) {
+			if (!isChar(c) && !isDigit(c)) {
 				return false;
 			}
 		}
@@ -433,7 +448,9 @@ public class Validator {
 	}
 
 	public static boolean isVariableTerm(String s) {
-		if (s.startsWith("[$") && s.endsWith("$]")) {
+		if (s.startsWith(_VARIABLE_TERM_BEGIN) &&
+			s.endsWith(_VARIABLE_TERM_END)) {
+
 			return true;
 		}
 		else {
@@ -441,10 +458,22 @@ public class Validator {
 		}
 	}
 
+	private static final int _CHAR_BEGIN = 65;
+
+	private static final int _CHAR_END = 122;
+
+	private static final int _DIGIT_BEGIN = 48;
+
+	private static final int _DIGIT_END = 57;
+
 	private static char[] _EMAIL_ADDRESS_SPECIAL_CHAR = new char[] {
 		'.', '!', '#', '$', '%', '&', '\'', '*', '+', '-', '/', '=', '?', '^',
 		'_', '`', '{', '|', '}', '~'
 	};
+
+	private static String _VARIABLE_TERM_BEGIN = "[$";
+
+	private static String _VARIABLE_TERM_END = "$]";
 
 	private static Log _log = LogFactoryUtil.getLog(Validator.class);
 
