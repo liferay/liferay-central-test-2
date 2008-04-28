@@ -90,6 +90,10 @@ public class Validator {
 		return true;
 	}
 
+	public static boolean isDate(int month, int day, int year) {
+		return isGregorianDate(month, day, year);
+	}
+
 	public static boolean isDigit(char c) {
 		int x = c;
 
@@ -158,6 +162,68 @@ public class Validator {
 		return true;
 	}
 
+	public static boolean isEmailAddress(String emailAddress) {
+		Boolean valid = null;
+
+		try {
+			valid = (Boolean)PortalClassInvoker.invoke(
+				"com.liferay.util.mail.InternetAddressUtil", "isValid",
+				emailAddress);
+		}
+		catch (Exception e) {
+			if (_log.isWarnEnabled()) {
+				_log.warn(e);
+			}
+		}
+
+		if (valid == null) {
+			return false;
+		}
+		else {
+			return valid.booleanValue();
+		}
+	}
+
+	public static boolean isEmailAddressSpecialChar(char c) {
+
+		// LEP-1445
+
+		for (int i = 0; i < _EMAIL_ADDRESS_SPECIAL_CHAR.length; i++) {
+			if (c == _EMAIL_ADDRESS_SPECIAL_CHAR[i]) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public static boolean isGregorianDate(int month, int day, int year) {
+		if ((month < 0) || (month > 11)) {
+			return false;
+		}
+
+		int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+		if (month == 1) {
+			int febMax = 28;
+
+			if (((year % 4) == 0) && ((year % 100) != 0) ||
+				((year % 400) == 0)) {
+
+				febMax = 29;
+			}
+
+			if ((day < 1) || (day > febMax)) {
+				return false;
+			}
+		}
+		else if ((day < 1) || (day > months[month])) {
+			return false;
+		}
+
+		return true;
+	}
+
 	public static boolean isHex(String s) {
 		if (isNull(s)) {
 			return false;
@@ -178,6 +244,31 @@ public class Validator {
 		}
 
 		return false;
+	}
+
+	public static boolean isJulianDate(int month, int day, int year) {
+		if ((month < 0) || (month > 11)) {
+			return false;
+		}
+
+		int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+		if (month == 1) {
+			int febMax = 28;
+
+			if ((year % 4) == 0) {
+				febMax = 29;
+			}
+
+			if ((day < 1) || (day > febMax)) {
+				return false;
+			}
+		}
+		else if ((day < 1) || (day > months[month])) {
+			return false;
+		}
+
+		return true;
 	}
 
 	public static boolean isLUHN(String number) {
@@ -217,104 +308,6 @@ public class Validator {
 		}
 	}
 
-	public static boolean isDate(int month, int day, int year) {
-		return isGregorianDate(month, day, year);
-	}
-
-	public static boolean isGregorianDate(int month, int day, int year) {
-		if ((month < 0) || (month > 11)) {
-			return false;
-		}
-
-		int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-		if (month == 1) {
-			int febMax = 28;
-
-			if (((year % 4) == 0) && ((year % 100) != 0) ||
-				((year % 400) == 0)) {
-
-				febMax = 29;
-			}
-
-			if ((day < 1) || (day > febMax)) {
-				return false;
-			}
-		}
-		else if ((day < 1) || (day > months[month])) {
-			return false;
-		}
-
-		return true;
-	}
-
-	public static boolean isJulianDate(int month, int day, int year) {
-		if ((month < 0) || (month > 11)) {
-			return false;
-		}
-
-		int[] months = {31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
-
-		if (month == 1) {
-			int febMax = 28;
-
-			if ((year % 4) == 0) {
-				febMax = 29;
-			}
-
-			if ((day < 1) || (day > febMax)) {
-				return false;
-			}
-		}
-		else if ((day < 1) || (day > months[month])) {
-			return false;
-		}
-
-		return true;
-	}
-
-	public static boolean isEmailAddress(String emailAddress) {
-		Boolean valid = null;
-
-		try {
-			valid = (Boolean)PortalClassInvoker.invoke(
-				"com.liferay.util.mail.InternetAddressUtil", "isValid",
-				emailAddress);
-		}
-		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
-		}
-
-		if (valid == null) {
-			return false;
-		}
-		else {
-			return valid.booleanValue();
-		}
-	}
-
-	public static boolean isEmailAddressSpecialChar(char c) {
-
-		// LEP-1445
-
-		for (int i = 0; i < _EMAIL_ADDRESS_SPECIAL_CHAR.length; i++) {
-			if (c == _EMAIL_ADDRESS_SPECIAL_CHAR[i]) {
-				return true;
-			}
-		}
-
-		return false;
-	}
-
-	/**
-	 * @deprecated Use <code>isEmailAddress</code>.
-	 */
-	public static boolean isValidEmailAddress(String ea) {
-		return isEmailAddress(ea);
-	}
-
 	public static boolean isName(String name) {
 		if (isNull(name)) {
 			return false;
@@ -334,20 +327,20 @@ public class Validator {
 		return true;
 	}
 
-	public static boolean isNumber(String number) {
-		if (isNull(number)) {
-			return false;
-		}
+	public static boolean isNotNull(Object obj) {
+		return !isNull(obj);
+	}
 
-		char[] c = number.toCharArray();
+	public static boolean isNotNull(Long l) {
+		return !isNull(l);
+	}
 
-		for (int i = 0; i < c.length; i++) {
-			if (!isDigit(c[i])) {
-				return false;
-			}
-		}
+	public static boolean isNotNull(String s) {
+		return !isNull(s);
+	}
 
-		return true;
+	public static boolean isNotNull(Object[] array) {
+		return !isNull(array);
 	}
 
 	public static boolean isNull(Object obj) {
@@ -397,20 +390,20 @@ public class Validator {
 		}
 	}
 
-	public static boolean isNotNull(Object obj) {
-		return !isNull(obj);
-	}
+	public static boolean isNumber(String number) {
+		if (isNull(number)) {
+			return false;
+		}
 
-	public static boolean isNotNull(Long l) {
-		return !isNull(l);
-	}
+		char[] c = number.toCharArray();
 
-	public static boolean isNotNull(String s) {
-		return !isNull(s);
-	}
+		for (int i = 0; i < c.length; i++) {
+			if (!isDigit(c[i])) {
+				return false;
+			}
+		}
 
-	public static boolean isNotNull(Object[] array) {
-		return !isNull(array);
+		return true;
 	}
 
 	public static boolean isPassword(String password) {

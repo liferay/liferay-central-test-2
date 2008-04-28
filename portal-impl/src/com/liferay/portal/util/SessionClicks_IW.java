@@ -22,8 +22,6 @@
 
 package com.liferay.portal.util;
 
-import javax.servlet.http.HttpServletRequest;
-
 /**
  * <a href="SessionClicks_IW.java.html"><b><i>View Source</i></b></a>
  *
@@ -31,20 +29,22 @@ import javax.servlet.http.HttpServletRequest;
  *
  */
 public class SessionClicks_IW {
-
 	public static SessionClicks_IW getInstance() {
 		return _instance;
 	}
 
-	public String get(
-		HttpServletRequest req, String name, String defaultValue) {
+	public java.lang.String get(javax.servlet.http.HttpServletRequest req,
+		java.lang.String key, java.lang.String defaultValue) {
+		return SessionClicks.get(req, key, defaultValue);
+	}
 
-		return SessionClicks.get(req, name, defaultValue);
+	public void put(javax.servlet.http.HttpServletRequest req,
+		java.lang.String key, java.lang.String value) {
+		SessionClicks.put(req, key, value);
 	}
 
 	private SessionClicks_IW() {
 	}
 
 	private static SessionClicks_IW _instance = new SessionClicks_IW();
-
 }
