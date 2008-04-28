@@ -26,6 +26,7 @@ import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.util.ArrayUtil;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
@@ -406,12 +407,12 @@ public class BlogsEntryLocalServiceImpl extends BlogsEntryLocalServiceBaseImpl {
 
 			char newChar = oldChar;
 
-			if ((oldChar == '_') || (Validator.isChar(oldChar)) ||
-				(Validator.isDigit(oldChar))) {
+			if ((oldChar == CharPool.UNDERLINE) ||
+				(Validator.isChar(oldChar)) || (Validator.isDigit(oldChar))) {
 
 			}
 			else if (ArrayUtil.contains(_URL_TITLE_REPLACE_CHARS, oldChar)) {
-				newChar = '_';
+				newChar = CharPool.UNDERLINE;
 			}
 			else {
 				return urlTitle;

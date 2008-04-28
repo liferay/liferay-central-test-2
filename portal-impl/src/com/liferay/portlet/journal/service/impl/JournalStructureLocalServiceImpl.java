@@ -24,6 +24,7 @@ package com.liferay.portlet.journal.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -508,8 +509,8 @@ public class JournalStructureLocalServiceImpl
 
 				for (int i = 0; i < c.length; i++) {
 					if ((!Validator.isChar(c[i])) &&
-						(!Validator.isDigit(c[i])) &&
-						(c[i] != '_') && (c[i] != '-')) {
+						(!Validator.isDigit(c[i])) && (c[i] != CharPool.DASH) &&
+						(c[i] != CharPool.UNDERLINE)) {
 
 						throw new StructureXsdException();
 					}

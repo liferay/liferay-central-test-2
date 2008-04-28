@@ -24,6 +24,7 @@ package com.liferay.portlet.tags.util;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.util.CharPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PortletKeys;
@@ -72,8 +73,11 @@ public class TagsUtil {
 
 			for (int i = 0; i < c.length; i++) {
 				if (!Validator.isChar(c[i]) && !Validator.isDigit(c[i]) &&
-					(c[i] != ' ') && (c[i] != '.') && (c[i] != '-') &&
-					(c[i] != '_') && (c[i] != '(') && (c[i] != ')')) {
+					(c[i] != CharPool.CLOSE_PARENTHESIS) &&
+					(c[i] != CharPool.DASH) &&
+					(c[i] != CharPool.OPEN_PARENTHESIS) &&
+					(c[i] != CharPool.PERIOD) && (c[i] != CharPool.SPACE) &&
+					(c[i] != CharPool.UNDERLINE)) {
 
 					return false;
 				}
