@@ -1315,6 +1315,16 @@ public class ServicePreAction extends Action {
 					permissionChecker, portletGroupId,
 					ActionKeys.MANAGE_LAYOUTS);
 
+			if (group.isUser()) {
+				if ((layout.isPrivateLayout() &&
+					 !PropsValues.LAYOUT_USER_PRIVATE_LAYOUTS_MODIFIABLE) ||
+					(layout.isPublicLayout() &&
+					 !PropsValues.LAYOUT_USER_PUBLIC_LAYOUTS_MODIFIABLE)) {
+
+					hasManageLayoutsPermission = false;
+				}
+			}
+
 			if (hasManageLayoutsPermission) {
 				themeDisplay.setShowPageSettingsIcon(true);
 
