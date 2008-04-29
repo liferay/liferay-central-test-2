@@ -413,14 +413,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						Query q = session.createQuery(query.toString());
 
-						int queryPos = 0;
+						QueryPos qPos = QueryPos.getInstance(q);
 
 						<#list finderColsList as finderCol>
 							<#if !finderCol.isPrimitiveType()>
 								if (${finderCol.name} != null) {
 							</#if>
 
-							q.set${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(queryPos++, ${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+							qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
 
 							<#if !finderCol.isPrimitiveType()>
 								}
@@ -568,14 +568,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						Query q = session.createQuery(query.toString());
 
-						int queryPos = 0;
+						QueryPos qPos = QueryPos.getInstance(q);
 
 						<#list finderColsList as finderCol>
 							<#if !finderCol.isPrimitiveType()>
 								if (${finderCol.name} != null) {
 							</#if>
 
-							q.set${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(queryPos++, ${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+							qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
 
 							<#if !finderCol.isPrimitiveType()>
 								}
@@ -768,14 +768,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 					Query q = session.createQuery(query.toString());
 
-					int queryPos = 0;
+					QueryPos qPos = QueryPos.getInstance(q);
 
 					<#list finderColsList as finderCol>
 						<#if !finderCol.isPrimitiveType()>
 							if (${finderCol.name} != null) {
 						</#if>
 
-						q.set${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(queryPos++, ${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+						qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
 
 						<#if !finderCol.isPrimitiveType()>
 							}
@@ -955,14 +955,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 						Query q = session.createQuery(query.toString());
 
-						int queryPos = 0;
+						QueryPos qPos = QueryPos.getInstance(q);
 
 						<#list finderColsList as finderCol>
 							<#if !finderCol.isPrimitiveType()>
 								if (${finderCol.name} != null) {
 							</#if>
 
-							q.set${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(queryPos++, ${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+							qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
 
 							<#if !finderCol.isPrimitiveType()>
 								}
@@ -1271,14 +1271,14 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 
 					Query q = session.createQuery(query.toString());
 
-					int queryPos = 0;
+					QueryPos qPos = QueryPos.getInstance(q);
 
 					<#list finderColsList as finderCol>
 						<#if !finderCol.isPrimitiveType()>
 							if (${finderCol.name} != null) {
 						</#if>
 
-						q.set${serviceBuilder.getPrimitiveObj("${finderCol.type}")}(queryPos++, ${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+						qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
 
 						<#if !finderCol.isPrimitiveType()>
 							}
