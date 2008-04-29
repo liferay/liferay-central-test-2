@@ -107,5 +107,21 @@ public class SearchTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("This is a second reply message.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

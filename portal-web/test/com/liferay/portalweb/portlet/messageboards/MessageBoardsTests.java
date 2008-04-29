@@ -39,13 +39,15 @@ public class MessageBoardsTests extends BaseTests {
 		addTestSuite(AddSubcategoryTest.class);
 		addTestSuite(AddMessageTest.class);
 		addTestSuite(AddReplyMessageTest.class);
+		addTestSuite(AddSecondReplyMessageTest.class);
+		addTestSuite(AddThirdReplyMessageTest.class);
 		addTestSuite(SearchTest.class);
+		addTestSuite(SplitThreadTest.class);
 		addTestSuite(AddSecondSubcategoryTest.class);
 		addTestSuite(AddIncorrectEntryTest.class);
 		addTestSuite(AddDeletableMessageTest.class);
 		addTestSuite(RecentPostsTest.class);
 		addTestSuite(MoveThreadTest.class);
-		addTestSuite(SplitThreadTest.class);
 		addTestSuite(DeleteMessageTest.class);
 	}
 

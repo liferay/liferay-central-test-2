@@ -25,30 +25,13 @@ package com.liferay.portalweb.portlet.messageboards;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="DeleteMessageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddThirdReplyMessageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteMessageTest extends BaseTestCase {
-	public void testDeleteMessage() throws Exception {
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
+public class AddThirdReplyMessageTest extends BaseTestCase {
+	public void testAddThirdReplyMessage() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
@@ -56,45 +39,7 @@ public class DeleteMessageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[6]/table/tbody/tr[2]/td/ul/li[3]/nobr/a[2]")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//div[6]/table/tbody/tr[2]/td/ul/li[3]/nobr/a[2]");
-		assertTrue(selenium.getConfirmation()
-						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent(
-							"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d")) {
+							"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/nobr/a[2]")) {
 					break;
 				}
 			}
@@ -105,7 +50,7 @@ public class DeleteMessageTest extends BaseTestCase {
 		}
 
 		selenium.click(
-			"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d");
+			"//div[6]/table/tbody/tr[1]/td[2]/div[1]/ul/li[1]/nobr/a[2]");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -114,8 +59,27 @@ public class DeleteMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (!selenium.isTextPresent(
-							"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!")) {
+				if (selenium.isElementPresent("_19_textArea")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_19_textArea", "This is a third reply message.");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("This is a third reply message.")) {
 					break;
 				}
 			}

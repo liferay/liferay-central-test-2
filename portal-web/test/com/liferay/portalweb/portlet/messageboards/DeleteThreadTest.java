@@ -25,21 +25,21 @@ package com.liferay.portalweb.portlet.messageboards;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="DeleteMessageTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteThreadTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class DeleteMessageTest extends BaseTestCase {
-	public void testDeleteMessage() throws Exception {
+public class DeleteThreadTest extends BaseTestCase {
+	public void testDeleteThread() throws Exception {
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!")) {
+				if (selenium.isElementPresent(
+							"link=S\u00e9cond T\u00e9st Subcat\u00e9gory")) {
 					break;
 				}
 			}
@@ -48,6 +48,9 @@ public class DeleteMessageTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
+
+		selenium.click("link=S\u00e9cond T\u00e9st Subcat\u00e9gory");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -56,7 +59,7 @@ public class DeleteMessageTest extends BaseTestCase {
 
 			try {
 				if (selenium.isElementPresent(
-							"//div[6]/table/tbody/tr[2]/td/ul/li[3]/nobr/a[2]")) {
+							"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d")) {
 					break;
 				}
 			}
@@ -66,7 +69,24 @@ public class DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//div[6]/table/tbody/tr[2]/td/ul/li[3]/nobr/a[2]");
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Delete")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Delete");
+		selenium.waitForPageToLoad("30000");
 		assertTrue(selenium.getConfirmation()
 						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 
@@ -93,8 +113,7 @@ public class DeleteMessageTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent(
-							"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d")) {
+				if (!selenium.isElementPresent("link=2")) {
 					break;
 				}
 			}
@@ -104,18 +123,14 @@ public class DeleteMessageTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click(
-			"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d");
-		selenium.waitForPageToLoad("30000");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
 			}
 
 			try {
-				if (!selenium.isTextPresent(
-							"This thr\u00e9ad has b\u00e9\u00e9n mov\u00e9d back!")) {
+				if (selenium.isElementPresent(
+							"link=T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED")) {
 					break;
 				}
 			}

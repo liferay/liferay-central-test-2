@@ -70,10 +70,23 @@ public class SplitThreadTest extends BaseTestCase {
 
 		selenium.click("//input[@value='OK']");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("link=S\u00e9cond T\u00e9st Subcat\u00e9gory");
-		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d"));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isTextPresent(
+							"This is a t\u00e9st m\u00e9ssag\u00e9!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
@@ -82,7 +95,92 @@ public class SplitThreadTest extends BaseTestCase {
 
 			try {
 				if (selenium.isTextPresent(
-							"T\u00e9st M\u00e9ssag\u00e9 to b\u00e9 D\u00e9l\u00e9t\u00e9d - MOVED")) {
+							"This is a t\u00e9st r\u00e9ply m\u00e9ssag\u00e9!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("This is a second reply message.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("This is a third reply message.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=T\u00e9st Subcat\u00e9gory")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=T\u00e9st Subcat\u00e9gory");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=T\u00e9st M\u00e9ssag\u00e9")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent(
+							"link=RE: T\u00e9st M\u00e9ssag\u00e9")) {
 					break;
 				}
 			}

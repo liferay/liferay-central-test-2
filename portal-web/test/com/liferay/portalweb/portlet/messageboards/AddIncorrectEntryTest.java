@@ -56,8 +56,24 @@ public class AddIncorrectEntryTest extends BaseTestCase {
 
 		selenium.click("//input[@value='Save']");
 		selenium.waitForPageToLoad("30000");
-		verifyTrue(selenium.isTextPresent(
-				"You have entered invalid data. Please try again."));
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent(
+							"You have entered invalid data. Please try again.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=\u00ab Back");
 		selenium.waitForPageToLoad("30000");
 	}
