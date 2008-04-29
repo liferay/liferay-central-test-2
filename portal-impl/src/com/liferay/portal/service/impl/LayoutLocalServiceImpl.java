@@ -43,6 +43,7 @@ import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.MethodWrapper;
 import com.liferay.portal.kernel.util.ReleaseInfo;
+import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -52,6 +53,7 @@ import com.liferay.portal.lar.AlwaysCurrentUserIdStrategy;
 import com.liferay.portal.lar.CurrentUserIdStrategy;
 import com.liferay.portal.lar.PortletDataContextImpl;
 import com.liferay.portal.model.Group;
+import com.liferay.portal.model.Image;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutReference;
@@ -476,6 +478,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				String.valueOf(layout.getParentLayoutId()));
 			layoutEl.addElement("name").addCDATA(layout.getName());
 			layoutEl.addElement("title").addCDATA(layout.getTitle());
+			layoutEl.addElement("description").addText(layout.getDescription());
 			layoutEl.addElement("type").addText(layout.getType());
 			layoutEl.addElement("type-settings").addCDATA(
 				layout.getTypeSettings());
@@ -483,9 +486,36 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				String.valueOf(layout.getHidden()));
 			layoutEl.addElement("friendly-url").addText(
 				layout.getFriendlyURL());
+			layoutEl.addElement("icon-image").addText(
+				String.valueOf(layout.getIconImage()));
+
+			if (layout.isIconImage()) {
+				Image image = ImageLocalUtil.getImage(layout.getIconImageId());
+
+				StringMaker sm = new StringMaker();
+				sm.append(LayoutConstants.LAR_LAYOUTS_PATH);
+				sm.append(layout.getLayoutId());
+				sm.append(LayoutConstants.LAR_ICONS_PATH);
+				sm.append(image.getImageId());
+				sm.append(StringPool.PERIOD);
+				sm.append(image.getType());
+
+				layoutEl.addElement("icon-image-path").addText(sm.toString());
+
+				try {
+					zipWriter.addEntry(sm.toString(), image.getTextObj());
+				}
+				catch (IOException ioe) {
+				}
+			}
+
 			layoutEl.addElement("theme-id").addText(layout.getThemeId());
 			layoutEl.addElement("color-scheme-id").addText(
 				layout.getColorSchemeId());
+			layoutEl.addElement("wap-theme-id").addText(layout.getWapThemeId());
+			layoutEl.addElement("wap-color-scheme-id").addText(
+					layout.getWapColorSchemeId());
+			layoutEl.addElement("css").addCDATA(layout.getCss());
 			layoutEl.addElement("priority").addText(
 				String.valueOf(layout.getPriority()));
 
@@ -1248,11 +1278,21 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			String name = layoutEl.elementText("name");
 			String title = layoutEl.elementText("title");
+			String description = layoutEl.elementText("description");
 			String type = layoutEl.elementText("type");
 			String typeSettings = layoutEl.elementText("type-settings");
 			boolean hidden = GetterUtil.getBoolean(
 				layoutEl.elementText("hidden"));
 			String friendlyURL = layoutEl.elementText("friendly-url");
+			boolean iconImage = GetterUtil.getBoolean(
+				layoutEl.elementText("icon-image"));
+			byte[] iconBytes = null;
+
+			if (iconImage) {
+				String iconImagePath = layoutEl.elementText("icon-image-path");
+
+				iconBytes = zipReader.getEntryAsByteArray(iconImagePath);
+			}
 
 			if (useThemeZip) {
 				themeId = StringPool.BLANK;
@@ -1262,6 +1302,12 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				themeId = layoutEl.elementText("theme-id");
 				colorSchemeId = layoutEl.elementText("color-scheme-id");
 			}
+
+			String wapThemeId = layoutEl.elementText("wap-theme-id");
+			String wapColorSchemeId = layoutEl.elementText(
+				"wap-color-scheme-id");
+			String css = layoutEl.elementText(
+				"css");
 
 			int priority = GetterUtil.getInteger(
 				layoutEl.elementText("priority"));
@@ -1298,17 +1344,36 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			layout.setParentLayoutId(parentLayoutId);
 			layout.setName(name);
 			layout.setTitle(title);
+			layout.setDescription(description);
 			layout.setType(type);
 			layout.setTypeSettings(typeSettings);
 			layout.setHidden(hidden);
 			layout.setFriendlyURL(friendlyURL);
+
+			if (iconImage) {
+				layout.setIconImage(iconImage);
+
+				if (layout.isNew()) {
+					long iconImageId = counterLocalService.increment();
+
+					layout.setIconImageId(iconImageId);
+				}
+			}
+
 			layout.setThemeId(themeId);
 			layout.setColorSchemeId(colorSchemeId);
+			layout.setWapThemeId(wapThemeId);
+			layout.setWapColorSchemeId(wapColorSchemeId);
+			layout.setCss(css);
 			layout.setPriority(priority);
 
 			fixTypeSettings(layout);
 
 			layoutPersistence.update(layout, false);
+
+			if ((iconBytes != null) && (iconBytes.length > 0)) {
+				ImageLocalUtil.updateImage(layout.getIconImageId(), iconBytes);
+			}
 
 			context.setPlid(layout.getPlid());
 
