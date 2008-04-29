@@ -73,7 +73,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				_portletRes.addProperty("header." + name, value);
+				HttpServletResponse res = _portletRes.getHttpServletResponse();
+
+				res.addHeader(name, value);
 			}
 		}
 	}
@@ -272,7 +274,9 @@ public class PortletServletResponse extends HttpServletResponseWrapper {
 			if (_lifecycle.equals(PortletRequest.RENDER_PHASE) ||
 				_lifecycle.equals(PortletRequest.RESOURCE_PHASE)) {
 
-				_portletRes.setProperty("header." + name, value);
+				HttpServletResponse res = _portletRes.getHttpServletResponse();
+
+				res.setHeader(name, value);
 			}
 		}
 	}

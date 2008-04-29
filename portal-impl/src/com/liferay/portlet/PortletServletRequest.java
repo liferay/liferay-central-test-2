@@ -221,15 +221,21 @@ public class PortletServletRequest extends HttpServletRequestWrapper {
 	}
 
 	public String getHeader(String name) {
-		return _portletReq.getProperty("header." + name);
+		HttpServletRequest req = _portletReq.getHttpServletRequest();
+
+		return req.getHeader(name);
 	}
 
 	public Enumeration<String> getHeaderNames() {
-		return _portletReq.getProperties("header.");
+		HttpServletRequest req = _portletReq.getHttpServletRequest();
+
+		return req.getHeaderNames();
 	}
 
 	public Enumeration<String> getHeaders(String name) {
-		return _portletReq.getProperties("header." + name);
+		HttpServletRequest req = _portletReq.getHttpServletRequest();
+
+		return req.getHeaders(name);
 	}
 
 	public ServletInputStream getInputStream() throws IOException {
