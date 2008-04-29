@@ -697,6 +697,8 @@ public class PropsUtil {
 
 	public static final String PORTLET_URL_ANCHOR_ENABLE = "portlet.url.anchor.enable";
 
+	public static final String PORTLET_URL_ESCAPE_XML = "portlet.url.escape.xml";
+
 	// Preferences
 
 	public static final String PREFERENCE_VALIDATE_ON_STARTUP = "preference.validate.on.startup";

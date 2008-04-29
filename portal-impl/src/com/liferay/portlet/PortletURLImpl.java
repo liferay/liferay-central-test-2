@@ -121,7 +121,8 @@ public class PortletURLImpl
 
 			_escapeXml = MapUtil.getBoolean(
 				portletApp.getContainerRuntimeOptions(),
-				PortletConfigImpl.RUNTIME_OPTION_ESCAPE_XML, _ESCAPE_XML);
+				PortletConfigImpl.RUNTIME_OPTION_ESCAPE_XML,
+				PropsValues.PORTLET_URL_ESCAPE_XML);
 		}
 	}
 
@@ -910,8 +911,6 @@ public class PortletURLImpl
 		}
 	}
 
-	private static final boolean _ESCAPE_XML = true;
-
 	private static Log _log = LogFactory.getLog(PortletURLImpl.class);
 
 	private HttpServletRequest _req;
@@ -928,7 +927,7 @@ public class PortletURLImpl
 	private boolean _copyCurrentRenderParameters;
 	private long _doAsUserId;
 	private boolean _encrypt;
-	private boolean _escapeXml = _ESCAPE_XML;
+	private boolean _escapeXml = PropsValues.PORTLET_URL_ESCAPE_XML;
 	private Set<String> _parametersIncludedInPath;
 	private Map<String, String[]> _params;
 	private PortletMode _portletMode;
