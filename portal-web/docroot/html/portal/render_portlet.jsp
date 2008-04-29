@@ -572,7 +572,7 @@ else {
 
 urlPrint.setEscapeXml(false);
 
-portletDisplay.setURLPrint(urlPrint.toString());
+portletDisplay.setURLPrint("javascript: location.href = '" + urlPrint.toString() + "';");
 
 // URL refresh
 
