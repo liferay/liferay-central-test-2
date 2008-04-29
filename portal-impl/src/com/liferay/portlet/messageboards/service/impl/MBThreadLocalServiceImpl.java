@@ -412,6 +412,10 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 			MBMessage message, String oldAttachmentsDir)
 		throws PortalException, SystemException {
 
+		if (!message.getAttachments()) {
+			return;
+		}
+		
 		long companyId = message.getCompanyId();
 		String portletId = CompanyConstants.SYSTEM_STRING;
 		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
