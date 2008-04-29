@@ -636,6 +636,9 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 					List actions2 = ResourceActionsUtil.getActions(permissions);
 
+					String leftTitle = "what-they-can-do";
+					String rightTitle = "what-they-cant-do";
+
 					// Left list
 
 					List leftList = new ArrayList();
@@ -663,17 +666,27 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					Collections.sort(rightList, new KeyValuePairComparator(false, true));
 					%>
 
-					<liferay-ui:input-move-boxes
-						formName="fm"
-						leftTitle="current"
-						rightTitle="available"
-						leftBoxName="current_actions"
-						rightBoxName="available_actions"
-						leftList="<%= leftList %>"
-						rightList="<%= rightList %>"
-					/>
+					<div class="assign-permissions">
+						<liferay-ui:input-move-boxes
+							formName="fm"
+							leftTitle="<%= leftTitle %>"
+							rightTitle="<%= rightTitle %>"
+							leftBoxName="current_actions"
+							rightBoxName="available_actions"
+							leftList="<%= leftList %>"
+							rightList="<%= rightList %>"
+						/>
 
-					<br />
+						<br />
+
+						<div class="button-holder">
+							<input class="previous" <%= organizationIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos - 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
+
+							<input class="next" <%= organizationIdsPos + 1 < organizationIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos + 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
+
+							<input class="finished" type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');" />
+						</div>
+					</div>
 
 					<%--<table class="lfr-table">
 					<tr>
@@ -690,19 +703,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					</table>
 
 					<br />--%>
-
-					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-					<tr>
-						<td>
-							<input <%= organizationIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos - 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
-
-							<input <%= organizationIdsPos + 1 < organizationIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos + 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
-						</td>
-						<td align="right">
-							<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');" />
-						</td>
-					</tr>
-					</table>
 				</c:otherwise>
 			</c:choose>
 		</c:when>
@@ -817,6 +817,9 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 					List actions2 = ResourceActionsUtil.getActions(permissions);
 
+					String leftTitle = "what-they-can-do";
+					String rightTitle = "what-they-cant-do";
+
 					// Left list
 
 					List leftList = new ArrayList();
@@ -844,30 +847,27 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					Collections.sort(rightList, new KeyValuePairComparator(false, true));
 					%>
 
-					<liferay-ui:input-move-boxes
-						formName="fm"
-						leftTitle="current"
-						rightTitle="available"
-						leftBoxName="current_actions"
-						rightBoxName="available_actions"
-						leftList="<%= leftList %>"
-						rightList="<%= rightList %>"
-					/>
+					<div class="assign-permissions">
+						<liferay-ui:input-move-boxes
+							formName="fm"
+							leftTitle="<%= leftTitle %>"
+							rightTitle="<%= rightTitle %>"
+							leftBoxName="current_actions"
+							rightBoxName="available_actions"
+							leftList="<%= leftList %>"
+							rightList="<%= rightList %>"
+						/>
 
-					<br />
+						<br />
 
-					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-					<tr>
-						<td>
-							<input <%= userGroupIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos - 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+						<div class="button-holder">
+							<input class="previous" <%= userGroupIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos - 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
 
-							<input <%= userGroupIdsPos + 1 < userGroupIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos + 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
-						</td>
-						<td align="right">
-							<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');" />
-						</td>
-					</tr>
-					</table>
+							<input class="next" <%= userGroupIdsPos + 1 < userGroupIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos + 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+
+							<input class="finished" type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');" />
+						</div>
+					</div>
 				</c:otherwise>
 			</c:choose>
 		</c:when>
@@ -993,6 +993,9 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 					List actions2 = ResourceActionsUtil.getActions(permissions);
 
+					String leftTitle = "what-they-can-do";
+					String rightTitle = "what-they-cant-do";
+
 					// Left list
 
 					List leftList = new ArrayList();
@@ -1020,30 +1023,27 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					Collections.sort(rightList, new KeyValuePairComparator(false, true));
 					%>
 
-					<liferay-ui:input-move-boxes
-						formName="fm"
-						leftTitle="current"
-						rightTitle="available"
-						leftBoxName="current_actions"
-						rightBoxName="available_actions"
-						leftList="<%= leftList %>"
-						rightList="<%= rightList %>"
-					/>
+					<div class="assign-permissions">
+						<liferay-ui:input-move-boxes
+							formName="fm"
+							leftTitle="<%= leftTitle %>"
+							rightTitle="<%= rightTitle %>"
+							leftBoxName="current_actions"
+							rightBoxName="available_actions"
+							leftList="<%= leftList %>"
+							rightList="<%= rightList %>"
+						/>
 
-					<br />
+						<br />
 
-					<table border="0" cellpadding="0" cellspacing="0" width="100%">
-					<tr>
-						<td>
-							<input <%= roleIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos - 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
+						<div class="button-holder">
+							<input  class="previous"<%= roleIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos - 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
 
-							<input <%= roleIdsPos + 1 < roleIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos + 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
-						</td>
-						<td align="right">
-							<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveRolePermissions(-1, '<%= roleIdsArray[roleIdsPos] %>');" />
-						</td>
-					</tr>
-					</table>
+								<input class="next" <%= roleIdsPos + 1 < roleIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos + 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
+
+							<input class="finished" type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveRolePermissions(-1, '<%= roleIdsArray[roleIdsPos] %>');" />
+						</div>
+					</div>
 				</c:otherwise>
 			</c:choose>
 		</c:when>
@@ -1063,6 +1063,9 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			List actions2 = ResourceActionsUtil.getActions(permissions);
 
 			List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
+
+			String leftTitle = "what-they-can-do";
+			String rightTitle = "what-they-cant-do";
 
 			// Left list
 
@@ -1091,25 +1094,23 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			Collections.sort(rightList, new KeyValuePairComparator(false, true));
 			%>
 
-			<liferay-ui:input-move-boxes
-				formName="fm"
-				leftTitle="current"
-				rightTitle="available"
-				leftBoxName="current_actions"
-				rightBoxName="available_actions"
-				leftList="<%= leftList %>"
-				rightList="<%= rightList %>"
-			/>
+			<div class="assign-permissions">
+				<liferay-ui:input-move-boxes
+					formName="fm"
+					leftTitle="<%= leftTitle %>"
+					rightTitle="<%= rightTitle %>"
+					leftBoxName="current_actions"
+					rightBoxName="available_actions"
+					leftList="<%= leftList %>"
+					rightList="<%= rightList %>"
+				/>
 
-			<br />
+				<br />
 
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr>
-				<td align="right">
+				<div class="button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();" />
-				</td>
-			</tr>
-			</table>
+				</div>
+			</div>
 		</c:when>
 		<c:when test='<%= tabs2.equals("guest") %>'>
 			<input name="<portlet:namespace />guestActionIds" type="hidden" value="" />
@@ -1121,6 +1122,9 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 			List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 			List actions2 = ResourceActionsUtil.getActions(permissions);
+
+			String leftTitle = "what-they-can-do";
+			String rightTitle = "what-they-cant-do";
 
 			List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
 
@@ -1155,25 +1159,23 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			Collections.sort(rightList, new KeyValuePairComparator(false, true));
 			%>
 
-			<liferay-ui:input-move-boxes
-				formName="fm"
-				leftTitle="current"
-				rightTitle="available"
-				leftBoxName="current_actions"
-				rightBoxName="available_actions"
-				leftList="<%= leftList %>"
-				rightList="<%= rightList %>"
-			/>
+			<div class="assign-permissions">
+				<liferay-ui:input-move-boxes
+					formName="fm"
+					leftTitle="<%= leftTitle %>"
+					rightTitle="<%= rightTitle %>"
+					leftBoxName="current_actions"
+					rightBoxName="available_actions"
+					leftList="<%= leftList %>"
+					rightList="<%= rightList %>"
+				/>
 
-			<br />
+				<br />
 
-			<table border="0" cellpadding="0" cellspacing="0" width="100%">
-			<tr>
-				<td align="right">
+				<div class="button-holder">
 					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGuestPermissions();" />
-				</td>
-			</tr>
-			</table>
+				</div>
+			</div>
 		</c:when>
 		<c:when test='<%= false && tabs2.equals("associated") %>'>
 
