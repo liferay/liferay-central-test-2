@@ -630,6 +630,7 @@ assign-to-users=Asignar a usuarios
 assign-user-permissions=Asignar permisos de usuario
 assign-user-roles=Asignar roles de usuario
 assign=Asignar
+assigned-issues=Ediciones Asignadas
 assigned-to=Asignado A
 assigned=Asignado
 associate=Asignar
@@ -822,6 +823,7 @@ click-on-any-tag-to-edit-it=Pulse en una etiqueta para editarla.
 click-to-edit-me=Pulse para editarme...
 clickable-emoticons=Seleccione un emoticon
 close=Cerrar
+closed=Cerrado
 club-event=Evento del club
 code=Código
 collapse-all=Colapsar todos
@@ -1594,6 +1596,7 @@ last-thread=Último hilo
 last-trade=Última transacción
 last-update-date=Última actualización
 last-vote-date=Último voto
+last-week=La Semana Pasada
 last-x-articles=Los últimos {0} artículos
 last-x-structures=Las últimas {0} estructuras
 last-x-templates=Las últimas {0} plantillas
@@ -2424,6 +2427,7 @@ reply-to-address=Dirección de respuesta
 reply-with-quote=Responder citando
 reply=Responder
 replying-to=Respondiendo a
+reported-issues=Ediciones Divulgadas
 repositories-require-at-least-one-read-role=Los repositorios necesitan por lo menos un rol de lectura.
 repositories-require-at-least-one-write-role=Los repositorios necesitan por lo menos un rol de escritura.
 repositories=Repositorios
@@ -3353,11 +3357,6 @@ what-she-can-do=Qué Ella Puede Hacer
 what-she-cant-do=Qué Ella No puede Hacer
 what-they-can-do=Qué Él Puede Hacer
 what-they-cant-do=Qué Él No puede Hacer
-
-
-##
-## Currency
-##
 what-type-of-permissions-would-you-like-to-add=¿Qué tipo de permisos desea añadir?
 what-would-you-like-to-copy-from-live-or-publish-to-live=¿Qué le gustaría publicar o copiar de <i>live</i>?
 what-would-you-like-to-export=¿Qué desea exportar?
@@ -3575,6 +3574,10 @@ zh_en=De chino a inglés
 zip-postal=Zip/Postal
 zip=Código postal
 zt_en=De chino (Taiwán) a inglés
+
+##
+## Currency
+##
 
 currency.AED=Dirham de los EAU
 currency.ALL=Lek Albanés

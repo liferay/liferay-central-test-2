@@ -630,6 +630,7 @@ assign-to-users=分配到用户
 assign-user-permissions=分配用户允许
 assign-user-roles=分配用户角色
 assign=分配
+assigned-issues=被分配的问题
 assigned-to=分配
 assigned=指定
 associate=同事
@@ -822,6 +823,7 @@ click-on-any-tag-to-edit-it=点击任一个标记编辑它。
 click-to-edit-me=点击编辑我...
 clickable-emoticons=Clickable 意思号
 close=关闭
+closed=闭合
 club-event=俱乐部事项
 code=代码
 collapse-all=崩溃所有
@@ -1594,6 +1596,7 @@ last-thread=前条讨论绪
 last-trade=前次交易
 last-update-date=最后更新日期
 last-vote-date=前次投票日期
+last-week=上星期
 last-x-articles=前 {0} 文章
 last-x-structures=前 {0} 结构
 last-x-templates=前 {0} 范本
@@ -2424,6 +2427,7 @@ reply-to-address=回覆到地址
 reply-with-quote=回复以行情
 reply=回覆
 replying-to=回复
+reported-issues=被报告的问题
 repositories-require-at-least-one-read-role=贮藏库要求至少一个读取的角色。
 repositories-require-at-least-one-write-role=贮藏库要求至少一写入的角色。
 repositories=贮藏库
@@ -3353,11 +3357,6 @@ what-she-can-do=什么她能做
 what-she-cant-do=什么她无法做
 what-they-can-do=什么他们能做
 what-they-cant-do=什么他们无法做
-
-
-##
-## Currency
-##
 what-type-of-permissions-would-you-like-to-add=什么样的允许您要不要增加?
 what-would-you-like-to-copy-from-live-or-publish-to-live=您要复制从活或出版什么居住?
 what-would-you-like-to-export=您要出口什么?
@@ -3575,6 +3574,10 @@ zh_en=中文(中国) 对英语
 zip-postal=Zip/Postal
 zip=邮递区号
 zt_en=中文(台湾) 对英语
+
+##
+## Currency
+##
 
 currency.AED=阿拉伯联合酋长国迪拉姆
 currency.ALL=阿尔巴尼亚列克

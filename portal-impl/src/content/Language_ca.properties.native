@@ -2087,11 +2087,6 @@ weeks-on=Setmana(es) en:
 weeks=Setmanes
 welcome-x=Welcome{0}!
 welcome=Benvingut
-
-
-##
-## Currency
-##
 when=Quan
 whois=WHOIS
 wide-column=Columna ample
@@ -2243,6 +2238,10 @@ zh_en=Xinès a anglès
 zip-postal=Zip/Postal
 zip=codi postal
 zt_en=Xinès (Taiwan)a l'anglès
+
+##
+## Currency
+##
 
 currency.AED=Dirham dels EAU
 currency.ALL=Lek Albanès

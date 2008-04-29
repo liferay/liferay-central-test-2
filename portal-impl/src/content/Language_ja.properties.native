@@ -630,6 +630,7 @@ assign-to-users=ユーザーに割り当てなさい
 assign-user-permissions=ユーザーの許可を割り当てなさい
 assign-user-roles=ユーザーの役割を割り当てなさい
 assign=割り当てなさい
+assigned-issues=割り当てられた問題
 assigned-to=に割り当てた
 assigned=割り当てられる
 associate=仲間
@@ -822,6 +823,7 @@ click-on-any-tag-to-edit-it=それを編集するために札をつけなさい�
 click-to-edit-me=私を編集するために... かちりと鳴らしなさい
 clickable-emoticons=Clickable のEmoticons
 close=終わり
+closed=閉鎖した
 club-event=クラブでき事
 code=コード
 collapse-all=すべては倒れる
@@ -1594,6 +1596,7 @@ last-thread=最後の糸
 last-trade=最後の貿易
 last-update-date=最後の更新の日付
 last-vote-date=最後の投票日付
+last-week=先週
 last-x-articles=Last {0} Articles
 last-x-structures=Last {0} Structure
 last-x-templates=Last {0} Templates
@@ -2424,6 +2427,7 @@ reply-to-address=住所答えへ
 reply-with-quote=引用の応答
 reply=応答
 replying-to=に応答
+reported-issues=報告された問題
 repositories-require-at-least-one-read-role=貯蔵場所は少なくとも1 つの読まれた役割を要求する。
 repositories-require-at-least-one-write-role=貯蔵場所は少なくとも1 つを書く役割を要求する。
 repositories=貯蔵場所
@@ -3353,11 +3357,6 @@ what-she-can-do=彼女がことができる何をする
 what-she-cant-do=彼女がことができない何をする
 what-they-can-do=ことができる何をする
 what-they-cant-do=ことができない何をする
-
-
-##
-## Currency
-##
 what-type-of-permissions-would-you-like-to-add=どのような許可を加えたいと思うか。
 what-would-you-like-to-copy-from-live-or-publish-to-live=何を出版し生きているからコピーするか、または住むためにたいと思うか。
 what-would-you-like-to-export=何を輸出したいと思うか。
@@ -3575,6 +3574,10 @@ zh_en=中国語から英語
 zip-postal=Zip/Postal
 zip=ジッパー
 zt_en=英語への中国語(台湾)
+
+##
+## Currency
+##
 
 currency.AED=アラブ首長国連邦のディルハム
 currency.ALL=アルバニアのLek

@@ -3044,11 +3044,6 @@ weeks-on=Uker på
 weeks=Uker
 welcome-x=Welcome{0}!
 welcome=Velkommen
-
-
-##
-## Currency
-##
 what-type-of-permissions-would-you-like-to-add=Hvilke rettigheter ønsker du og legge til
 what-would-you-like-to-copy-from-live-or-publish-to-live=Hva vil du kopiere til/fra offentlige sider
 what-would-you-like-to-export=Hva vil du eksportere
@@ -3245,6 +3240,10 @@ zh_en=Kinesisk (Kina) til Engelsk
 zip-postal=Postnummer
 zip=Postnummer
 zt_en=Kinesisk (Taiwan) til Engelsk
+
+##
+## Currency
+##
 
 currency.AED=Arabiske Dirham
 currency.ALL=Albanian Lek

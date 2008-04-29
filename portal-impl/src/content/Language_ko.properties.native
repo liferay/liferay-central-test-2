@@ -630,6 +630,7 @@ assign-to-users=사용자에 할당하십시요
 assign-user-permissions=사용자 허가를 할당하십시요
 assign-user-roles=사용자 역할을 할당하십시요
 assign=할당하십시요
+assigned-issues=할당된 문제점
 assigned-to=에 할당했다
 assigned=할당하는
 associate=동료
@@ -822,6 +823,7 @@ click-on-any-tag-to-edit-it=그것을 편집하기 위하여 위에 어떤 꼬�
 click-to-edit-me=나를 편집하기 위하여... 누르십시요
 clickable-emoticons=Clickable이모티콘
 close=마지막
+closed=닫히는
 club-event=곤봉 사건
 code=부호
 collapse-all=모두는 궤멸한다
@@ -1594,6 +1596,7 @@ last-thread=마지막 실
 last-trade=마지막 무역
 last-update-date=마지막 갱신 날짜
 last-vote-date=마지막 투표 날짜
+last-week=지난 주
 last-x-articles=Last {0} Articles
 last-x-structures=Last {0} Structure
 last-x-templates=Last {0} Templates
@@ -2424,6 +2427,7 @@ reply-to-address=주XX외답하 에
 reply-with-quote=따옴표에 대답
 reply=대답
 replying-to=에 회답
+reported-issues=보고된 문제점
 repositories-require-at-least-one-read-role=창고는 적어도 1개의 읽은 역할을 요구한다.
 repositories-require-at-least-one-write-role=창고는 적어도 1개을 쓴다 역할을 요구한다.
 repositories=창고
@@ -3353,11 +3357,6 @@ what-she-can-do=그녀가 수 있는 무엇을 할
 what-she-cant-do=그녀가 무엇을 할
 what-they-can-do=수 있는 무엇을 할
 what-they-cant-do=무엇을 할
-
-
-##
-## Currency
-##
 what-type-of-permissions-would-you-like-to-add=어떤 타입의 허가를 너는 추가하고는가 싶는가 하고자 했는가?
 what-would-you-like-to-copy-from-live-or-publish-to-live=너는 무엇을 살아있는가에서 베끼는가 살는가 위하여 간행하고는가 싶는가 하고자 했는가?
 what-would-you-like-to-export=너는 무엇을 수출하고는가 싶는가 하고자 했는가?
@@ -3575,6 +3574,10 @@ zh_en=영어에 중국인
 zip-postal=Zip/Postal
 zip=지퍼
 zt_en=영어에 중국어 (대만)
+
+##
+## Currency
+##
 
 currency.AED=아랍 에미리트 연방 Dirham
 currency.ALL=알바니아 Lek

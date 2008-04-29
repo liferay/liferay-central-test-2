@@ -2041,11 +2041,6 @@ weeks-on=недель(и) на:
 weeks=Недели
 welcome-x=Welcome{0}!
 welcome=Добро пожаловать
-
-
-##
-## Currency
-##
 when=Когда
 whois=Кто есть кто
 wide-column=Широкий столбец
@@ -2195,6 +2190,10 @@ zh_en=С Китайского (Китай) на Английский
 zip-postal=Zip/Postal
 zip=Почтовый индекс
 zt_en=С Китайского (Тайвань) на Английский
+
+##
+## Currency
+##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek
