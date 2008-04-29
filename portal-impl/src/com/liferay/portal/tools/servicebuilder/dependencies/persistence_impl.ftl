@@ -22,6 +22,7 @@ import ${basePersistencePackage}.BasePersistence;
 import ${springHibernatePackage}.FinderCache;
 import ${springHibernatePackage}.HibernateUtil;
 import ${propsUtilPackage}.PropsUtil;
+import com.liferay.util.cal.CalendarUtil;
 import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
@@ -420,7 +421,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 								if (${finderCol.name} != null) {
 							</#if>
 
-							qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+							qPos.add(
+
+							<#if finderCol.type == "Date">
+								CalendarUtil.getTimestamp(
+							</#if>
+
+							${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
+
+							<#if finderCol.type == "Date">
+								)
+							</#if>
+
+							);
 
 							<#if !finderCol.isPrimitiveType()>
 								}
@@ -575,7 +588,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 								if (${finderCol.name} != null) {
 							</#if>
 
-							qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+							qPos.add(
+
+							<#if finderCol.type == "Date">
+								CalendarUtil.getTimestamp(
+							</#if>
+
+							${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
+
+							<#if finderCol.type == "Date">
+								)
+							</#if>
+
+							);
 
 							<#if !finderCol.isPrimitiveType()>
 								}
@@ -775,7 +800,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							if (${finderCol.name} != null) {
 						</#if>
 
-						qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+						qPos.add(
+
+						<#if finderCol.type == "Date">
+							CalendarUtil.getTimestamp(
+						</#if>
+
+						${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
+
+						<#if finderCol.type == "Date">
+							)
+						</#if>
+
+						);
 
 						<#if !finderCol.isPrimitiveType()>
 							}
@@ -962,7 +999,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 								if (${finderCol.name} != null) {
 							</#if>
 
-							qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+							qPos.add(
+
+							<#if finderCol.type == "Date">
+								CalendarUtil.getTimestamp(
+							</#if>
+
+							${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
+
+							<#if finderCol.type == "Date">
+								)
+							</#if>
+
+							);
 
 							<#if !finderCol.isPrimitiveType()>
 								}
@@ -1278,7 +1327,19 @@ public class ${entity.name}PersistenceImpl extends BasePersistence implements ${
 							if (${finderCol.name} != null) {
 						</#if>
 
-						qPos.add(${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")});
+						qPos.add(
+
+						<#if finderCol.type == "Date">
+							CalendarUtil.getTimestamp(
+						</#if>
+
+						${finderCol.name}${serviceBuilder.getPrimitiveObjValue("${finderCol.type}")}
+
+						<#if finderCol.type == "Date">
+							)
+						</#if>
+
+						);
 
 						<#if !finderCol.isPrimitiveType()>
 							}
