@@ -418,6 +418,14 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 					List actions2 = ResourceActionsUtil.getActions(permissions);
 
+					String leftTitle = "what-he-can-do";
+					String rightTitle = "what-he-cant-do";
+
+					if (user2.isFemale()) {
+						leftTitle = "what-she-can-do";
+						rightTitle = "what-she-cant-do";
+					}
+
 					// Left list
 
 					List leftList = new ArrayList();
@@ -443,37 +451,27 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					}
 
 					Collections.sort(rightList, new KeyValuePairComparator(false, true));
-
-					String currentPermissionsText = "what-they-can-do";
-					String availablePermissionsText = "what-they-cant-do";
-
-					if (user2.isMale()) {
-						currentPermissionsText = "what-he-can-do";
-						availablePermissionsText = "what-he-cant-do";
-					} else if (user2.isFemale()) {
-						currentPermissionsText = "what-she-can-do";
-						availablePermissionsText = "what-she-cant-do";
-					}
 					%>
 
 					<div class="assign-permissions">
 						<liferay-ui:input-move-boxes
-							leftTitle="<%= currentPermissionsText %>"
-							rightTitle="<%= availablePermissionsText %>"
+							leftTitle="<%= leftTitle %>"
+							rightTitle="<%= rightTitle %>"
 							leftBoxName="current_actions"
 							rightBoxName="available_actions"
 							leftList="<%= leftList %>"
 							rightList="<%= rightList %>"
 						/>
 
-					<br />
+						<br />
 
-					<div class="button-holder">
-						<input class="previous" <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
-						<input class="next" <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
-						<input class="finished" type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');" />
-					</div>
+						<div class="button-holder">
+							<input class="previous" <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
 
+							<input class="next" <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+
+							<input class="finished" type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');" />
+						</div>
 					</div>
 				</c:otherwise>
 			</c:choose>
