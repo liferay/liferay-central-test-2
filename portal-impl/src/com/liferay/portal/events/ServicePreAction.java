@@ -514,41 +514,42 @@ public class ServicePreAction extends Action {
 			List<Layout> layouts)
 		throws PortalException, SystemException {
 
-		if ((layouts != null) && (layouts.size() > 0)) {
-			boolean replaceLayout = true;
+		if ((layouts == null) || (layouts.size() == 0)) {
+			return new Object[] {layout, layouts};
+		}
 
-			if (LayoutPermissionUtil.contains(
-					permissionChecker, layout, ActionKeys.VIEW)) {
+		boolean replaceLayout = true;
 
-				replaceLayout = false;
-			}
+		if (LayoutPermissionUtil.contains(
+				permissionChecker, layout, ActionKeys.VIEW)) {
 
-			List<Layout> accessibleLayouts = new ArrayList<Layout>();
+			replaceLayout = false;
+		}
 
-			for (int i = 0; i < layouts.size(); i++) {
-				Layout curLayout = layouts.get(i);
+		List<Layout> accessibleLayouts = new ArrayList<Layout>();
 
-				if (!curLayout.isHidden() &&
-					LayoutPermissionUtil.contains(
-						permissionChecker, curLayout, ActionKeys.VIEW)) {
+		for (int i = 0; i < layouts.size(); i++) {
+			Layout curLayout = layouts.get(i);
 
-					if ((accessibleLayouts.size() == 0) && replaceLayout) {
-						layout = curLayout;
-					}
+			if (!curLayout.isHidden() &&
+				LayoutPermissionUtil.contains(
+					permissionChecker, curLayout, ActionKeys.VIEW)) {
 
-					accessibleLayouts.add(curLayout);
+				if ((accessibleLayouts.size() == 0) && replaceLayout) {
+					layout = curLayout;
 				}
-			}
 
-			if (accessibleLayouts.size() == 0) {
-				layouts = null;
+				accessibleLayouts.add(curLayout);
+			}
+		}
 
-				SessionErrors.add(
-					req, LayoutPermissionException.class.getName());
-			}
-			else {
-				layouts = accessibleLayouts;
-			}
+		if (accessibleLayouts.size() == 0) {
+			layouts = null;
+
+			SessionErrors.add(req, LayoutPermissionException.class.getName());
+		}
+		else {
+			layouts = accessibleLayouts;
 		}
 
 		return new Object[] {layout, layouts};
@@ -698,8 +699,9 @@ public class ServicePreAction extends Action {
 	}
 
 	protected List<Layout> mergeAdditionalLayouts(
-			User user, Layout layout, List<Layout> layouts,
-			HttpServletRequest req)
+			HttpServletRequest req, User user,
+			PermissionChecker permissionChecker, Layout layout,
+			List<Layout> layouts)
 		throws PortalException, SystemException {
 
 		if ((layout == null) || layout.isPrivateLayout()) {
@@ -726,6 +728,11 @@ public class ServicePreAction extends Action {
 			List<Layout> guestLayouts = LayoutLocalServiceUtil.getLayouts(
 				guestGroup.getGroupId(), false,
 				LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
+
+			Object[] viewableLayouts = getViewableLayouts(
+				req, user, permissionChecker, layout, guestLayouts);
+
+			guestLayouts = (List<Layout>)viewableLayouts[1];
 
 			layouts.addAll(0, guestLayouts);
 		}
@@ -766,6 +773,11 @@ public class ServicePreAction extends Action {
 						previousGroupId.longValue(), false,
 						LayoutConstants.DEFAULT_PARENT_LAYOUT_ID);
 
+				Object[] viewableLayouts = getViewableLayouts(
+					req, user, permissionChecker, layout, previousLayouts);
+
+				previousLayouts = (List<Layout>)viewableLayouts[1];
+
 				layouts.addAll(previousLayouts);
 			}
 		}
@@ -774,7 +786,7 @@ public class ServicePreAction extends Action {
 	}
 
 	protected void rememberVisitedGroupIds(
-		long currentGroupId, HttpServletRequest req) {
+		HttpServletRequest req, long currentGroupId) {
 
 		String requestURI = GetterUtil.getString(req.getRequestURI());
 
@@ -1052,9 +1064,10 @@ public class ServicePreAction extends Action {
 
 		long portletGroupId = PortalUtil.getPortletGroupId(layout);
 
-		rememberVisitedGroupIds(portletGroupId, req);
+		rememberVisitedGroupIds(req, portletGroupId);
 
-		layouts = mergeAdditionalLayouts(user, layout, layouts, req);
+		layouts = mergeAdditionalLayouts(
+			req, user, permissionChecker, layout, layouts);
 
 		if (layout != null) {
 			if (company.isCommunityLogo()) {
