@@ -62,7 +62,7 @@ numberFormat.setMinimumIntegerDigits(2);
 		}
 	%>
 
-		<option <%= value.equals(curTimeZone.getID()) ? "selected" : "" %> value="<%= curTimeZone.getID() %>">(GMT <%= offset %>) <%= curTimeZone.getDisplayName(daylight, displayStyle, locale) %></option>
+		<option <%= value.equals(curTimeZone.getID()) ? "selected" : "" %> value="<%= curTimeZone.getID() %>">(UTC <%= offset %>) <%= curTimeZone.getDisplayName(daylight, displayStyle, locale) %></option>
 
 	<%
 	}
