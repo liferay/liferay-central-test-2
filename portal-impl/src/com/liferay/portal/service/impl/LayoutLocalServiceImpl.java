@@ -493,9 +493,10 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				Image image = ImageLocalUtil.getImage(layout.getIconImageId());
 
 				StringMaker sm = new StringMaker();
-				sm.append(LayoutConstants.LAR_LAYOUTS_PATH);
+
+				sm.append("/layout/");
 				sm.append(layout.getLayoutId());
-				sm.append(LayoutConstants.LAR_ICONS_PATH);
+				sm.append("/icon/");
 				sm.append(image.getImageId());
 				sm.append(StringPool.PERIOD);
 				sm.append(image.getType());
@@ -514,7 +515,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 				layout.getColorSchemeId());
 			layoutEl.addElement("wap-theme-id").addText(layout.getWapThemeId());
 			layoutEl.addElement("wap-color-scheme-id").addText(
-					layout.getWapColorSchemeId());
+				layout.getWapColorSchemeId());
 			layoutEl.addElement("css").addCDATA(layout.getCss());
 			layoutEl.addElement("priority").addText(
 				String.valueOf(layout.getPriority()));
@@ -1286,6 +1287,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String friendlyURL = layoutEl.elementText("friendly-url");
 			boolean iconImage = GetterUtil.getBoolean(
 				layoutEl.elementText("icon-image"));
+
 			byte[] iconBytes = null;
 
 			if (iconImage) {
@@ -1306,9 +1308,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			String wapThemeId = layoutEl.elementText("wap-theme-id");
 			String wapColorSchemeId = layoutEl.elementText(
 				"wap-color-scheme-id");
-			String css = layoutEl.elementText(
-				"css");
-
+			String css = layoutEl.elementText("css");
 			int priority = GetterUtil.getInteger(
 				layoutEl.elementText("priority"));
 
