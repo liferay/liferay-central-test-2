@@ -41,6 +41,7 @@ import java.io.IOException;
 import java.io.StringReader;
 
 import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -75,6 +76,14 @@ public class ServiceComponentLocalServiceImpl
 		try {
 			ModelHintsUtil.read(
 				portletClassLoader, "META-INF/portlet-model-hints.xml");
+
+			Class<?> finderCacheClass = Class.forName(
+				"com.liferay.portlet.service.FinderCache", true,
+				portletClassLoader);
+
+			Method clearCacheMethod = finderCacheClass.getMethod("clearCache");
+
+			clearCacheMethod.invoke(finderCacheClass);
 		}
 		catch (Exception e) {
 			throw new SystemException(e);
