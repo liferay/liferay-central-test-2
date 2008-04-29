@@ -636,9 +636,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 					List actions2 = ResourceActionsUtil.getActions(permissions);
 
-					String leftTitle = "what-they-can-do";
-					String rightTitle = "what-they-cant-do";
-
 					// Left list
 
 					List leftList = new ArrayList();
@@ -669,8 +666,8 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					<div class="assign-permissions">
 						<liferay-ui:input-move-boxes
 							formName="fm"
-							leftTitle="<%= leftTitle %>"
-							rightTitle="<%= rightTitle %>"
+							leftTitle="what-they-can-do"
+							rightTitle="what-they-cant-do"
 							leftBoxName="current_actions"
 							rightBoxName="available_actions"
 							leftList="<%= leftList %>"
@@ -817,9 +814,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 					List actions2 = ResourceActionsUtil.getActions(permissions);
 
-					String leftTitle = "what-they-can-do";
-					String rightTitle = "what-they-cant-do";
-
 					// Left list
 
 					List leftList = new ArrayList();
@@ -850,8 +844,8 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					<div class="assign-permissions">
 						<liferay-ui:input-move-boxes
 							formName="fm"
-							leftTitle="<%= leftTitle %>"
-							rightTitle="<%= rightTitle %>"
+							leftTitle="what-they-can-do"
+							rightTitle="what-they-cant-do"
 							leftBoxName="current_actions"
 							rightBoxName="available_actions"
 							leftList="<%= leftList %>"
@@ -993,9 +987,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 					List actions2 = ResourceActionsUtil.getActions(permissions);
 
-					String leftTitle = "what-they-can-do";
-					String rightTitle = "what-they-cant-do";
-
 					// Left list
 
 					List leftList = new ArrayList();
@@ -1026,8 +1017,8 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					<div class="assign-permissions">
 						<liferay-ui:input-move-boxes
 							formName="fm"
-							leftTitle="<%= leftTitle %>"
-							rightTitle="<%= rightTitle %>"
+							leftTitle="what-they-can-do"
+							rightTitle="what-they-cant-do"
 							leftBoxName="current_actions"
 							rightBoxName="available_actions"
 							leftList="<%= leftList %>"
@@ -1064,9 +1055,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 			List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
 
-			String leftTitle = "what-they-can-do";
-			String rightTitle = "what-they-cant-do";
-
 			// Left list
 
 			List leftList = new ArrayList();
@@ -1097,8 +1085,8 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			<div class="assign-permissions">
 				<liferay-ui:input-move-boxes
 					formName="fm"
-					leftTitle="<%= leftTitle %>"
-					rightTitle="<%= rightTitle %>"
+					leftTitle="what-they-can-do"
+					rightTitle="what-they-cant-do"
 					leftBoxName="current_actions"
 					rightBoxName="available_actions"
 					leftList="<%= leftList %>"
@@ -1122,9 +1110,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 
 			List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 			List actions2 = ResourceActionsUtil.getActions(permissions);
-
-			String leftTitle = "what-they-can-do";
-			String rightTitle = "what-they-cant-do";
 
 			List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
 
@@ -1162,8 +1147,8 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			<div class="assign-permissions">
 				<liferay-ui:input-move-boxes
 					formName="fm"
-					leftTitle="<%= leftTitle %>"
-					rightTitle="<%= rightTitle %>"
+					leftTitle="what-they-can-do"
+					rightTitle="what-they-cant-do"
 					leftBoxName="current_actions"
 					rightBoxName="available_actions"
 					leftList="<%= leftList %>"
