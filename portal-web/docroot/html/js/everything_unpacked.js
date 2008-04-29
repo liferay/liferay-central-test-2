@@ -15108,7 +15108,11 @@ Liferay.Util = {
 		);
 
 		if (Liferay.Browser.is_ie) {
-			boxObj.css('width', 'auto');
+			var currentWidth = boxObj.css('width');
+
+			if (currentWidth == 'auto') {
+				boxObj.css('width', 'auto');
+			}
 		}
 	},
 
