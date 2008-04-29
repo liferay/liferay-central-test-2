@@ -25,20 +25,23 @@ package com.liferay.portalweb.portlet.managepages;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="ManagePagesTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="DisplayOrderTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ManagePagesTest extends BaseTestCase {
-	public void testManagePages() throws Exception {
+public class DisplayOrderTest extends BaseTestCase {
+	public void testDisplayOrder() throws Exception {
 		selenium.click("link=Manage Pages");
 		selenium.waitForPageToLoad("30000");
-		selenium.type("_88_title_en_US", "Home");
-		selenium.click("//tr[3]/td[2]/span/a/span[1]");
-		selenium.type("TypeSettingsProperties(javascript-1)",
-			"&lt;script type=\"text/javascript\"&gt; \n$layout.getTypeSettingsProperties().getProperty(\"javascript-1\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-2\") \n$layout.getTypeSettingsProperties().getProperty(\"javascript-3\") \n&lt;/script&gt;");
-		selenium.click("//input[@value='Save']");
+		selenium.click("link=Children");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Display Order");
+		selenium.waitForPageToLoad("30000");
+		selenium.select("_88_layoutIdsBox", "label=Child Test Page 2");
+		selenium.click("//td[2]/a[1]/img");
+		selenium.click("//a[3]/img");
+		selenium.click("//input[@value='Update Display Order']");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -47,28 +50,7 @@ public class ManagePagesTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent(
-							"Your request processed successfully.")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
-
-		selenium.click("//tr[3]/td[2]/span/a/span[1]");
-		selenium.type("TypeSettingsProperties(javascript-1)", "");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isTextPresent(
-							"&lt;script type=\"text/javascript\"&gt; $layout.getTypeSettingsProperties().getProperty(\"javascript-1\") $layout.getTypeSettingsProperties().getProperty(\"javascript-2\") $layout.getTypeSettingsProperties().getProperty(\"javascript-3\") &lt;/script&gt;")) {
+				if (!selenium.isTextPresent("Child Test Page 2")) {
 					break;
 				}
 			}

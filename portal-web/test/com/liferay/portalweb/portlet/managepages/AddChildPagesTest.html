@@ -1,0 +1,104 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>AddChildPagesTest</title>
+</head>
+<body>
+<table cellpadding="1" cellspacing="1" border="1">
+<thead>
+<tr><td rowspan="1" colspan="3">AddChildPagesTest</td></tr>
+</thead><tbody>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage Pages Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Manage Pages</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>link=Children</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_88_name_en_US</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_88_name_en_US</td>
+	<td>Child Test Page</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_88_inheritFromParentLayoutIdCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_88_hiddenCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Page']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForElementPresent</td>
+	<td>_88_name_en_US</td>
+	<td></td>
+</tr>
+<tr>
+	<td>type</td>
+	<td>_88_name_en_US</td>
+	<td>Child Test Page 2</td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_88_hiddenCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>click</td>
+	<td>_88_inheritFromParentLayoutIdCheckbox</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>//input[@value='Add Page']</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Display Order</td>
+	<td></td>
+</tr>
+<tr>
+	<td>select</td>
+	<td>_88_layoutIdsBox</td>
+	<td>label=Child Test Page</td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Child Test Page</td>
+	<td></td>
+</tr>
+<tr>
+	<td>waitForTextPresent</td>
+	<td>Child Test Page 2</td>
+	<td></td>
+</tr>
+<tr>
+	<td>clickAndWait</td>
+	<td>link=Return to Full Page</td>
+	<td></td>
+</tr>
+
+</tbody></table>
+</body>
+</html>

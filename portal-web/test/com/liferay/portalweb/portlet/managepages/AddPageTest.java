@@ -22,21 +22,58 @@
 
 package com.liferay.portalweb.portlet.managepages;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="ManagePagesTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddPageTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ManagePagesTests extends BaseTests {
+public class AddPageTest extends BaseTestCase {
+	public void testAddPage() throws Exception {
+		selenium.click("link=Manage Pages");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("Link=Joe Bloggs");
+		selenium.waitForPageToLoad("30000");
 
-	public ManagePagesTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddChildPagesTest.class);
-		addTestSuite(DisplayOrderTest.class);
-		addTestSuite(AddJavaScriptTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("_88_name_en_US")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.type("_88_name_en_US", "Manage Pages Test Page");
+		selenium.click("//input[@value='Add Page']");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Manage Pages Test Page")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
