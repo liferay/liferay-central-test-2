@@ -415,7 +415,7 @@ public class MBThreadLocalServiceImpl extends MBThreadLocalServiceBaseImpl {
 		if (!message.getAttachments()) {
 			return;
 		}
-		
+
 		long companyId = message.getCompanyId();
 		String portletId = CompanyConstants.SYSTEM_STRING;
 		long groupId = GroupImpl.DEFAULT_PARENT_GROUP_ID;
