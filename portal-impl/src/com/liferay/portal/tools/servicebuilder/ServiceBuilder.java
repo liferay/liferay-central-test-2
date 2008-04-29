@@ -260,12 +260,21 @@ public class ServiceBuilder {
 		}
 	}
 
-	public static void writeFile(File file, String content) throws IOException {
-		writeFile(file, content, null);
+	public static void writeFile(File file, String content)
+		throws IOException {
+
+		writeFile(file, content, _AUTHOR);
+	}
+
+	public static void writeFile(File file, String content, String author)
+		throws IOException {
+
+		writeFile(file, content, author, null);
 	}
 
 	public static void writeFile(
-			File file, String content, Map<String, Object> jalopySettings)
+			File file, String content, String author,
+			Map<String, Object> jalopySettings)
 		throws IOException {
 
 		String packagePath = _getPackagePath(file);
@@ -310,8 +319,8 @@ public class ServiceBuilder {
 
 		// Author
 
-		String author = GetterUtil.getString(
-			(String)jalopySettings.get("author"), "Brian Wing Shun Chan");
+		author = GetterUtil.getString(
+			(String)jalopySettings.get("author"), author);
 
 		env.set("author", author);
 
@@ -554,6 +563,15 @@ public class ServiceBuilder {
 			}
 
 			_packagePath = packagePath;
+
+			Element author = root.element("author");
+
+			if (author != null) {
+				_author = author.getText();
+			}
+			else {
+				_author = _AUTHOR;
+			}
 
 			Element portlet = root.element("portlet");
 			Element namespace = root.element("namespace");
@@ -828,7 +846,8 @@ public class ServiceBuilder {
 					List<EntityColumn> finderColsList =
 						new ArrayList<EntityColumn>();
 
-					List<Element> finderCols = finderEl.elements("finder-column");
+					List<Element> finderCols = finderEl.elements(
+						"finder-column");
 
 					Iterator<Element> itr3 = finderCols.iterator();
 
@@ -959,19 +978,20 @@ public class ServiceBuilder {
 						_createFinderUtil(entity);
 
 						if (entity.hasLocalService()) {
-							_createServiceBaseImpl(entity, _LOCAL);
-							_createServiceImpl(entity, _LOCAL);
-							_createService(entity, _LOCAL);
-							_createServiceFactory(entity, _LOCAL);
-							_createServiceUtil(entity, _LOCAL);
+							_createServiceBaseImpl(entity, _SESSION_TYPE_LOCAL);
+							_createServiceImpl(entity, _SESSION_TYPE_LOCAL);
+							_createService(entity, _SESSION_TYPE_LOCAL);
+							_createServiceFactory(entity, _SESSION_TYPE_LOCAL);
+							_createServiceUtil(entity, _SESSION_TYPE_LOCAL);
 						}
 
 						if (entity.hasRemoteService()) {
-							_createServiceBaseImpl(entity, _REMOTE);
-							_createServiceImpl(entity, _REMOTE);
-							_createService(entity, _REMOTE);
-							_createServiceFactory(entity, _REMOTE);
-							_createServiceUtil(entity, _REMOTE);
+							_createServiceBaseImpl(
+								entity, _SESSION_TYPE_REMOTE);
+							_createServiceImpl(entity, _SESSION_TYPE_REMOTE);
+							_createService(entity, _SESSION_TYPE_REMOTE);
+							_createServiceFactory(entity, _SESSION_TYPE_REMOTE);
+							_createServiceUtil(entity, _SESSION_TYPE_REMOTE);
 
 							if (Validator.isNotNull(_jsonFileName)) {
 								_createServiceHttp(entity);
@@ -1532,7 +1552,7 @@ public class ServiceBuilder {
 				StringUtil.replace(_beanLocatorUtilPackage, ".", "/") +
 					"/BeanLocatorUtil.java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createCustomSQLUtil() throws Exception {
@@ -1592,7 +1612,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/persistence/" +
 				entity.getPKClassName() + ".java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createExceptions(List<String> exceptions) throws Exception {
@@ -1642,7 +1662,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(modelFile, content, jalopySettings);
+		writeFile(modelFile, content, _author, jalopySettings);
 	}
 
 	private void _createExtendedModelImpl(Entity entity) throws Exception {
@@ -1660,7 +1680,7 @@ public class ServiceBuilder {
 			_outputPath + "/model/impl/" + entity.getName() + "Impl.java");
 
 		if (!modelFile.exists()) {
-			writeFile(modelFile, content);
+			writeFile(modelFile, content, _author);
 		}
 	}
 
@@ -1688,7 +1708,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/persistence/" + entity.getName() +
 				"Finder.java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createFinderCache() throws Exception {
@@ -1734,7 +1754,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/persistence/" + entity.getName() +
 				"FinderUtil.java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createHBM(Entity entity) throws IOException {
@@ -1973,7 +1993,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(modelFile, content, jalopySettings);
+		writeFile(modelFile, content, _author, jalopySettings);
 	}
 
 	private void _createModelHintsXML() throws Exception {
@@ -2046,7 +2066,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(modelFile, content, jalopySettings);
+		writeFile(modelFile, content, _author, jalopySettings);
 	}
 
 	private void _createModelSoap(Entity entity) throws Exception {
@@ -2067,7 +2087,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(modelFile, content, jalopySettings);
+		writeFile(modelFile, content, _author, jalopySettings);
 	}
 
 	private void _createPersistence(Entity entity) throws Exception {
@@ -2090,7 +2110,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/persistence/" + entity.getName() +
 				"Persistence.java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -2120,7 +2140,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/persistence/" + entity.getName() +
 				"PersistenceImpl.java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createPersistenceTest(Entity entity) throws Exception {
@@ -2138,7 +2158,7 @@ public class ServiceBuilder {
 			_testOutputPath + "/service/persistence/" + entity.getName() +
 				"PersistenceTest.java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createPersistenceUtil(Entity entity) throws Exception {
@@ -2161,7 +2181,7 @@ public class ServiceBuilder {
 			_serviceOutputPath + "/service/persistence/" + entity.getName() +
 				"Util.java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 
 		if (!_serviceOutputPath.equals(_outputPath)) {
 			ejbFile = new File(
@@ -2290,7 +2310,7 @@ public class ServiceBuilder {
 			_implDir + "/" + StringUtil.replace(_propsUtilPackage, ".", "/") +
 				"/PropsUtil.java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createRemotingXML() throws Exception {
@@ -2366,11 +2386,11 @@ public class ServiceBuilder {
 
 		String serviceComments = "This is a remote service. Methods of this service are expected to have security checks based on the propagated JAAS credentials because this service can be accessed remotely.";
 
-		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _REMOTE ? "Local" : "") + "ServiceImpl.java");
+		JavaClass javaClass = _getJavaClass(_outputPath + "/service/impl/" + entity.getName() + (sessionType != _SESSION_TYPE_REMOTE ? "Local" : "") + "ServiceImpl.java");
 
 		JavaMethod[] methods = javaClass.getMethods();
 
-		if (sessionType == _LOCAL) {
+		if (sessionType == _SESSION_TYPE_LOCAL) {
 			if (javaClass.getSuperClass().getValue().endsWith(
 					entity.getName() + "LocalServiceBaseImpl")) {
 
@@ -2411,7 +2431,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(ejbFile, content, jalopySettings);
+		writeFile(ejbFile, content, _author, jalopySettings);
 	}
 
 	private void _createServiceBaseImpl(Entity entity, int sessionType)
@@ -2434,7 +2454,7 @@ public class ServiceBuilder {
 			_outputPath + "/service/base/" + entity.getName() +
 				_getSessionTypeName(sessionType) + "ServiceBaseImpl.java");
 
-		writeFile(ejbFile, content);
+		writeFile(ejbFile, content, _author);
 	}
 
 	private void _createServiceFactory(Entity entity, int sessionType)
@@ -2459,7 +2479,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(ejbFile, content, jalopySettings);
+		writeFile(ejbFile, content, _author, jalopySettings);
 	}
 
 	private void _createServiceHttp(Entity entity) throws Exception {
@@ -2487,7 +2507,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(ejbFile, content, jalopySettings);
+		writeFile(ejbFile, content, _author, jalopySettings);
 	}
 
 	private void _createServiceImpl(Entity entity, int sessionType)
@@ -2509,7 +2529,7 @@ public class ServiceBuilder {
 				_getSessionTypeName(sessionType) + "ServiceImpl.java");
 
 		if (!ejbFile.exists()) {
-			writeFile(ejbFile, content);
+			writeFile(ejbFile, content, _author);
 		}
 	}
 
@@ -2537,7 +2557,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(ejbFile, content, jalopySettings);
+		writeFile(ejbFile, content, _author, jalopySettings);
 	}
 
 	private void _createServiceJSONSerializer(Entity entity) throws Exception {
@@ -2559,7 +2579,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(ejbFile, content, jalopySettings);
+		writeFile(ejbFile, content, _author, jalopySettings);
 	}
 
 	private void _createServiceSoap(Entity entity) throws Exception {
@@ -2586,7 +2606,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(ejbFile, content, jalopySettings);
+		writeFile(ejbFile, content, _author, jalopySettings);
 	}
 
 	private void _createServiceUtil(Entity entity, int sessionType)
@@ -2594,7 +2614,7 @@ public class ServiceBuilder {
 
 		JavaClass javaClass = _getJavaClass(
 			_serviceOutputPath + "/service/" + entity.getName() +
-				(sessionType != _REMOTE ? "Local" : "") + "Service.java");
+				(sessionType != _SESSION_TYPE_REMOTE ? "Local" : "") + "Service.java");
 
 		Map<String, Object> context = _getContext();
 
@@ -2616,7 +2636,7 @@ public class ServiceBuilder {
 
 		jalopySettings.put("keepJavadoc", Boolean.TRUE);
 
-		writeFile(ejbFile, content, jalopySettings);
+		writeFile(ejbFile, content, _author, jalopySettings);
 	}
 
 	private void _createSpringDataSourceXML() throws Exception {
@@ -2902,7 +2922,7 @@ public class ServiceBuilder {
 		String content = FileUtil.read(sqlFile);
 
 		int x = content.indexOf(
-			_CREATE_TABLE + entityMapping.getTable() + " (");
+			_SQL_CREATE_TABLE + entityMapping.getTable() + " (");
 		int y = content.indexOf(");", x);
 
 		if (x != -1) {
@@ -2925,8 +2945,8 @@ public class ServiceBuilder {
 			boolean appendNewTable = true;
 
 			while ((line = br.readLine()) != null) {
-				if (appendNewTable && line.startsWith(_CREATE_TABLE)) {
-					x = _CREATE_TABLE.length();
+				if (appendNewTable && line.startsWith(_SQL_CREATE_TABLE)) {
+					x = _SQL_CREATE_TABLE.length();
 					y = line.indexOf(" ", x);
 
 					String tableName = line.substring(x, y);
@@ -3089,7 +3109,7 @@ public class ServiceBuilder {
 
 		String content = FileUtil.read(sqlFile);
 
-		int x = content.indexOf(_CREATE_TABLE + entity.getTable() + " (");
+		int x = content.indexOf(_SQL_CREATE_TABLE + entity.getTable() + " (");
 		int y = content.indexOf(");", x);
 
 		if (x != -1) {
@@ -3112,8 +3132,8 @@ public class ServiceBuilder {
 			boolean appendNewTable = true;
 
 			while ((line = br.readLine()) != null) {
-				if (appendNewTable && line.startsWith(_CREATE_TABLE)) {
-					x = _CREATE_TABLE.length();
+				if (appendNewTable && line.startsWith(_SQL_CREATE_TABLE)) {
+					x = _SQL_CREATE_TABLE.length();
 					y = line.indexOf(" ", x);
 
 					String tableName = line.substring(x, y);
@@ -3271,7 +3291,7 @@ public class ServiceBuilder {
 
 		StringMaker sm = new StringMaker();
 
-		sm.append(_CREATE_TABLE + entityMapping.getTable() + " (\n");
+		sm.append(_SQL_CREATE_TABLE + entityMapping.getTable() + " (\n");
 
 		for (Entity entity : entities) {
 			List<EntityColumn> pkList = entity.getPKList();
@@ -3374,7 +3394,7 @@ public class ServiceBuilder {
 
 		StringMaker sm = new StringMaker();
 
-		sm.append(_CREATE_TABLE + entity.getTable() + " (\n");
+		sm.append(_SQL_CREATE_TABLE + entity.getTable() + " (\n");
 
 		for (int i = 0; i < regularColList.size(); i++) {
 			EntityColumn col = regularColList.get(i);
@@ -3509,7 +3529,7 @@ public class ServiceBuilder {
 	}
 
 	private String _getSessionTypeName(int sessionType) {
-		if (sessionType == _LOCAL) {
+		if (sessionType == _SESSION_TYPE_LOCAL) {
 			return "Local";
 		}
 		else {
@@ -3557,11 +3577,13 @@ public class ServiceBuilder {
 		return FreeMarkerUtil.process(name, context);
 	}
 
-	private static final int _REMOTE = 0;
+	private static final String _AUTHOR = "Brian Wing Shun Chan";
 
-	private static final int _LOCAL = 1;
+	private static final int _SESSION_TYPE_REMOTE = 0;
 
-	private static final String _CREATE_TABLE = "create table ";
+	private static final int _SESSION_TYPE_LOCAL = 1;
+
+	private static final String _SQL_CREATE_TABLE = "create table ";
 
 	private static final String _TPL_ROOT =
 		"com/liferay/portal/tools/servicebuilder/dependencies/";
@@ -3644,6 +3666,7 @@ public class ServiceBuilder {
 	private String _springHibernatePackage;
 	private String _springUtilPackage;
 	private String _testDir;
+	private String _author;
 	private String _portletName = StringPool.BLANK;
 	private String _portletShortName = StringPool.BLANK;
 	private String _portletPackageName = StringPool.BLANK;
