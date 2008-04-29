@@ -42,6 +42,7 @@ boolean rightReorder = GetterUtil.getBoolean((String)request.getAttribute("lifer
 List leftList = (List)request.getAttribute("liferay-ui:input-move-boxes:leftList");
 List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightList");
 %>
+
 <div class="taglib-move-boxes">
 	<table class="lfr-table">
 	<tr>

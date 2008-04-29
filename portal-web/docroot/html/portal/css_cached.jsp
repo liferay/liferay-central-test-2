@@ -911,36 +911,6 @@ li.toggle-expand a {
 	margin-bottom: 1.5em;
 }
 
-/* ---------- Edit permissions ---------- */
-
-.portlet-edit-permissions {
-}
-
-.portlet-edit-permissions form:after {
-	clear: both;
-	content: ".";
-	display: block;
-	height: 0;
-	visibility: hidden;
-}
-
-.ie .portlet-edit-permissions form {
-	height: 1%;
-}
-
-.portlet-edit-permissions .assign-permissions {
-	float: left;
-}
-
-.portlet-edit-permissions .assign-permissions .button-holder {
-	position: relative;
-}
-
-.portlet-edit-permissions .assign-permissions .button-holder .finished {
-	position: absolute;
-	right: 0;
-}
-
 /* ---------- Liferay forms ---------- */
 
 .lfr-input-text {

@@ -228,7 +228,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	}
 </script>
 
-<div class="portlet-edit-permissions">
+<div class="edit-permissions">
 	<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 	<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="" />
@@ -309,7 +309,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			/>
 		</c:otherwise>
 	</c:choose>
-
 
 	<c:choose>
 		<c:when test='<%= tabs2.equals("users") %>'>
@@ -444,10 +443,10 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					}
 
 					Collections.sort(rightList, new KeyValuePairComparator(false, true));
-				
+
 					String currentPermissionsText = "what-they-can-do";
 					String availablePermissionsText = "what-they-cant-do";
-				
+
 					if (user2.isMale()) {
 						currentPermissionsText = "what-he-can-do";
 						availablePermissionsText = "what-he-cant-do";
