@@ -456,26 +456,6 @@
 	</target>
 
 	<target name="build-css">
-		<!--<if>
-			<not>
-				<available file="../tools/csstidy-1.2.exe" />
-			</not>
-			<then>
-				<get
-					src="http://easynews.dl.sourceforge.net/sourceforge/csstidy/csstidy-exe-1.2.zip"
-					dest="../tools/csstidy-exe-1.2.zip"
-					usetimestamp="true"
-					verbose="true"
-				/>
-
-				<unzip src="../tools/csstidy-exe-1.2.zip" dest="../tools" />
-
-				<move file="../tools/csstidy.exe" tofile="../tools/csstidy-1.2.exe" />
-
-				<delete file="../tools/csstidy-exe-1.2.zip" />
-			</then>
-		</if>-->
-
 		<for param="css.file">
 			<path>
 				<fileset
