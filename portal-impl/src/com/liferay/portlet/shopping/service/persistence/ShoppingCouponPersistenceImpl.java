@@ -41,6 +41,7 @@ import com.liferay.portlet.shopping.model.ShoppingCoupon;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCouponModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -308,9 +309,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<ShoppingCoupon> list = q.list();
 
@@ -389,9 +390,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<ShoppingCoupon> list = (List<ShoppingCoupon>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -490,9 +491,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCoupon);
@@ -576,10 +577,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (code != null) {
-					q.setString(queryPos++, code);
+					qPos.add(code);
 				}
 
 				List<ShoppingCoupon> list = q.list();
@@ -784,9 +785,9 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -855,10 +856,10 @@ public class ShoppingCouponPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (code != null) {
-					q.setString(queryPos++, code);
+					qPos.add(code);
 				}
 
 				Long count = null;

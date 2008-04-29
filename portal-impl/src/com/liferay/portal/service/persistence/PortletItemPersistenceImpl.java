@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -309,11 +310,11 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				List<PortletItem> list = q.list();
 
@@ -389,11 +390,11 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				List<PortletItem> list = (List<PortletItem>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -498,11 +499,11 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setLong(queryPos++, classNameId);
+			qPos.add(classNameId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletItem);
@@ -574,15 +575,15 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				List<PortletItem> list = q.list();
 
@@ -671,15 +672,15 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				List<PortletItem> list = (List<PortletItem>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -800,15 +801,15 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			if (portletId != null) {
-				q.setString(queryPos++, portletId);
+				qPos.add(portletId);
 			}
 
-			q.setLong(queryPos++, classNameId);
+			qPos.add(classNameId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletItem);
@@ -925,19 +926,19 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				List<PortletItem> list = q.list();
 
@@ -1152,11 +1153,11 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				Long count = null;
 
@@ -1240,15 +1241,15 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				Long count = null;
 
@@ -1343,19 +1344,19 @@ public class PortletItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				Long count = null;
 

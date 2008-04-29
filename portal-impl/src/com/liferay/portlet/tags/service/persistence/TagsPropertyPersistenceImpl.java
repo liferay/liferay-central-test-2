@@ -41,6 +41,7 @@ import com.liferay.portlet.tags.model.TagsProperty;
 import com.liferay.portlet.tags.model.impl.TagsPropertyImpl;
 import com.liferay.portlet.tags.model.impl.TagsPropertyModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -308,9 +309,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<TagsProperty> list = q.list();
 
@@ -389,9 +390,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -491,9 +492,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tagsProperty);
@@ -550,9 +551,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
 				List<TagsProperty> list = q.list();
 
@@ -631,9 +632,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
 				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -732,9 +733,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, entryId);
+			qPos.add(entryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tagsProperty);
@@ -802,12 +803,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (key != null) {
-					q.setString(queryPos++, key);
+					qPos.add(key);
 				}
 
 				List<TagsProperty> list = q.list();
@@ -898,12 +899,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (key != null) {
-					q.setString(queryPos++, key);
+					qPos.add(key);
 				}
 
 				List<TagsProperty> list = (List<TagsProperty>)QueryUtil.list(q,
@@ -1019,12 +1020,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			if (key != null) {
-				q.setString(queryPos++, key);
+				qPos.add(key);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1119,12 +1120,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
 				if (key != null) {
-					q.setString(queryPos++, key);
+					qPos.add(key);
 				}
 
 				List<TagsProperty> list = q.list();
@@ -1342,9 +1343,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -1408,9 +1409,9 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
 				Long count = null;
 
@@ -1485,12 +1486,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (key != null) {
-					q.setString(queryPos++, key);
+					qPos.add(key);
 				}
 
 				Long count = null;
@@ -1566,12 +1567,12 @@ public class TagsPropertyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
 				if (key != null) {
-					q.setString(queryPos++, key);
+					qPos.add(key);
 				}
 
 				Long count = null;

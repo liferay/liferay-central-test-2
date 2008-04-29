@@ -41,6 +41,7 @@ import com.liferay.portlet.expando.model.ExpandoValue;
 import com.liferay.portlet.expando.model.impl.ExpandoValueImpl;
 import com.liferay.portlet.expando.model.impl.ExpandoValueModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -309,9 +310,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
 				List<ExpandoValue> list = q.list();
 
@@ -392,9 +393,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -494,9 +495,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, tableId);
+			qPos.add(tableId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					expandoValue);
@@ -555,9 +556,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
 				List<ExpandoValue> list = q.list();
 
@@ -638,9 +639,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -741,9 +742,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, columnId);
+			qPos.add(columnId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					expandoValue);
@@ -801,9 +802,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				List<ExpandoValue> list = q.list();
 
@@ -884,9 +885,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -986,9 +987,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, rowId);
+			qPos.add(rowId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					expandoValue);
@@ -1053,11 +1054,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				List<ExpandoValue> list = q.list();
 
@@ -1142,11 +1143,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1258,11 +1259,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, tableId);
+			qPos.add(tableId);
 
-			q.setLong(queryPos++, rowId);
+			qPos.add(rowId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					expandoValue);
@@ -1353,11 +1354,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				List<ExpandoValue> list = q.list();
 
@@ -1437,11 +1438,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<ExpandoValue> list = q.list();
 
@@ -1526,11 +1527,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1642,11 +1643,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, classNameId);
+			qPos.add(classNameId);
 
-			q.setLong(queryPos++, classPK);
+			qPos.add(classPK);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					expandoValue);
@@ -1746,13 +1747,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				List<ExpandoValue> list = q.list();
 
@@ -1842,15 +1843,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<ExpandoValue> list = q.list();
 
@@ -1948,15 +1949,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<ExpandoValue> list = (List<ExpandoValue>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -2091,15 +2092,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, tableId);
+			qPos.add(tableId);
 
-			q.setLong(queryPos++, columnId);
+			qPos.add(columnId);
 
-			q.setLong(queryPos++, classNameId);
+			qPos.add(classNameId);
 
-			q.setLong(queryPos++, classPK);
+			qPos.add(classPK);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					expandoValue);
@@ -2332,9 +2333,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
 				Long count = null;
 
@@ -2398,9 +2399,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
 				Long count = null;
 
@@ -2464,9 +2465,9 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				Long count = null;
 
@@ -2536,11 +2537,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				Long count = null;
 
@@ -2610,11 +2611,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				Long count = null;
 
@@ -2687,11 +2688,11 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				Long count = null;
 
@@ -2768,13 +2769,13 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
-				q.setLong(queryPos++, rowId);
+				qPos.add(rowId);
 
 				Long count = null;
 
@@ -2857,15 +2858,15 @@ public class ExpandoValuePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, columnId);
+				qPos.add(columnId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				Long count = null;
 

@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -292,9 +293,9 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<Portlet> list = q.list();
 
@@ -366,9 +367,9 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<Portlet> list = (List<Portlet>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -459,9 +460,9 @@ public class PortletPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, portlet);
 
@@ -549,12 +550,12 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				List<Portlet> list = q.list();
@@ -750,9 +751,9 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -827,12 +828,12 @@ public class PortletPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				Long count = null;

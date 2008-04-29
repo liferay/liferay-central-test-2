@@ -41,6 +41,7 @@ import com.liferay.portlet.shopping.model.ShoppingCategory;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingCategoryModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -311,9 +312,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<ShoppingCategory> list = q.list();
 
@@ -393,9 +394,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<ShoppingCategory> list = (List<ShoppingCategory>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -496,9 +497,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCategory);
@@ -564,11 +565,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, parentCategoryId);
+				qPos.add(parentCategoryId);
 
 				List<ShoppingCategory> list = q.list();
 
@@ -653,11 +654,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, parentCategoryId);
+				qPos.add(parentCategoryId);
 
 				List<ShoppingCategory> list = (List<ShoppingCategory>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -770,11 +771,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setLong(queryPos++, parentCategoryId);
+			qPos.add(parentCategoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingCategory);
@@ -967,9 +968,9 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -1042,11 +1043,11 @@ public class ShoppingCategoryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, parentCategoryId);
+				qPos.add(parentCategoryId);
 
 				Long count = null;
 

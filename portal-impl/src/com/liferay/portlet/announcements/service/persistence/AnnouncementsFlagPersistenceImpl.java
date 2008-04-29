@@ -41,6 +41,7 @@ import com.liferay.portlet.announcements.model.AnnouncementsFlag;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagImpl;
 import com.liferay.portlet.announcements.model.impl.AnnouncementsFlagModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -310,9 +311,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
 				List<AnnouncementsFlag> list = q.list();
 
@@ -392,9 +393,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
 				List<AnnouncementsFlag> list = (List<AnnouncementsFlag>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -495,9 +496,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, entryId);
+			qPos.add(entryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					announcementsFlag);
@@ -598,13 +599,13 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
-				q.setInteger(queryPos++, value);
+				qPos.add(value);
 
 				List<AnnouncementsFlag> list = q.list();
 
@@ -809,9 +810,9 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
 				Long count = null;
 
@@ -889,13 +890,13 @@ public class AnnouncementsFlagPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, entryId);
+				qPos.add(entryId);
 
-				q.setInteger(queryPos++, value);
+				qPos.add(value);
 
 				Long count = null;
 

@@ -41,6 +41,7 @@ import com.liferay.portlet.wiki.model.WikiPageResource;
 import com.liferay.portlet.wiki.model.impl.WikiPageResourceImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageResourceModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -343,12 +344,12 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
 				List<WikiPageResource> list = q.list();
@@ -552,12 +553,12 @@ public class WikiPageResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
 				Long count = null;

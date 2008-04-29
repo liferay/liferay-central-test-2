@@ -41,6 +41,7 @@ import com.liferay.portlet.messageboards.model.MBDiscussion;
 import com.liferay.portlet.messageboards.model.impl.MBDiscussionImpl;
 import com.liferay.portlet.messageboards.model.impl.MBDiscussionModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -338,11 +339,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<MBDiscussion> list = q.list();
 
@@ -543,11 +544,11 @@ public class MBDiscussionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				Long count = null;
 

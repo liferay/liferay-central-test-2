@@ -346,9 +346,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, resourceId);
+				qPos.add(resourceId);
 
 				List<Permission> list = q.list();
 
@@ -420,9 +420,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, resourceId);
+				qPos.add(resourceId);
 
 				List<Permission> list = (List<Permission>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -517,9 +517,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, resourceId);
+			qPos.add(resourceId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					permission);
@@ -608,13 +608,13 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (actionId != null) {
-					q.setString(queryPos++, actionId);
+					qPos.add(actionId);
 				}
 
-				q.setLong(queryPos++, resourceId);
+				qPos.add(resourceId);
 
 				List<Permission> list = q.list();
 
@@ -810,9 +810,9 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, resourceId);
+				qPos.add(resourceId);
 
 				Long count = null;
 
@@ -887,13 +887,13 @@ public class PermissionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (actionId != null) {
-					q.setString(queryPos++, actionId);
+					qPos.add(actionId);
 				}
 
-				q.setLong(queryPos++, resourceId);
+				qPos.add(resourceId);
 
 				Long count = null;
 

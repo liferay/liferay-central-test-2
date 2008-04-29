@@ -41,6 +41,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileRank;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileRankModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -304,9 +305,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<DLFileRank> list = q.list();
 
@@ -385,9 +386,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<DLFileRank> list = (List<DLFileRank>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -485,9 +486,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileRank);
@@ -555,12 +556,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				List<DLFileRank> list = q.list();
@@ -651,12 +652,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				List<DLFileRank> list = (List<DLFileRank>)QueryUtil.list(q,
@@ -771,12 +772,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, folderId);
+			qPos.add(folderId);
 
 			if (name != null) {
-				q.setString(queryPos++, name);
+				qPos.add(name);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -890,16 +891,16 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				List<DLFileRank> list = q.list();
@@ -1111,9 +1112,9 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -1188,12 +1189,12 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				Long count = null;
@@ -1283,16 +1284,16 @@ public class DLFileRankPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				Long count = null;

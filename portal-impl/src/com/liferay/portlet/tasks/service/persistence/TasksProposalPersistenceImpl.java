@@ -41,6 +41,7 @@ import com.liferay.portlet.tasks.model.TasksProposal;
 import com.liferay.portlet.tasks.model.impl.TasksProposalImpl;
 import com.liferay.portlet.tasks.model.impl.TasksProposalModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -309,9 +310,9 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<TasksProposal> list = q.list();
 
@@ -391,9 +392,9 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<TasksProposal> list = (List<TasksProposal>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -493,9 +494,9 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tasksProposal);
@@ -559,11 +560,11 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<TasksProposal> list = q.list();
 
@@ -647,11 +648,11 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<TasksProposal> list = (List<TasksProposal>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -762,11 +763,11 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tasksProposal);
@@ -861,12 +862,12 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				if (classPK != null) {
-					q.setString(queryPos++, classPK);
+					qPos.add(classPK);
 				}
 
 				List<TasksProposal> list = q.list();
@@ -1079,9 +1080,9 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -1151,11 +1152,11 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -1231,12 +1232,12 @@ public class TasksProposalPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				if (classPK != null) {
-					q.setString(queryPos++, classPK);
+					qPos.add(classPK);
 				}
 
 				Long count = null;

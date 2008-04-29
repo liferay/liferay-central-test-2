@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -301,9 +302,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<UserTracker> list = q.list();
 
@@ -375,9 +376,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -472,9 +473,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTracker);
@@ -526,9 +527,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<UserTracker> list = q.list();
 
@@ -600,9 +601,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -694,9 +695,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userTracker);
@@ -753,10 +754,10 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (sessionId != null) {
-					q.setString(queryPos++, sessionId);
+					qPos.add(sessionId);
 				}
 
 				List<UserTracker> list = q.list();
@@ -834,10 +835,10 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (sessionId != null) {
-					q.setString(queryPos++, sessionId);
+					qPos.add(sessionId);
 				}
 
 				List<UserTracker> list = (List<UserTracker>)QueryUtil.list(q,
@@ -938,10 +939,10 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (sessionId != null) {
-				q.setString(queryPos++, sessionId);
+				qPos.add(sessionId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1130,9 +1131,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -1195,9 +1196,9 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -1265,10 +1266,10 @@ public class UserTrackerPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (sessionId != null) {
-					q.setString(queryPos++, sessionId);
+					qPos.add(sessionId);
 				}
 
 				Long count = null;

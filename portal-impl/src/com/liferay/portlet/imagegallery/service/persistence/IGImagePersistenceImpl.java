@@ -43,6 +43,7 @@ import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.imagegallery.model.impl.IGImageImpl;
 import com.liferay.portlet.imagegallery.model.impl.IGImageModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -317,10 +318,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<IGImage> list = q.list();
@@ -405,10 +406,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
@@ -512,10 +513,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (uuid != null) {
-				q.setString(queryPos++, uuid);
+				qPos.add(uuid);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
@@ -572,9 +573,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				List<IGImage> list = q.list();
 
@@ -653,9 +654,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -753,9 +754,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, folderId);
+			qPos.add(folderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
 
@@ -834,9 +835,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, smallImageId);
+				qPos.add(smallImageId);
 
 				List<IGImage> list = q.list();
 
@@ -929,9 +930,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, largeImageId);
+				qPos.add(largeImageId);
 
 				List<IGImage> list = q.list();
 
@@ -1024,9 +1025,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, custom1ImageId);
+				qPos.add(custom1ImageId);
 
 				List<IGImage> list = q.list();
 
@@ -1119,9 +1120,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, custom2ImageId);
+				qPos.add(custom2ImageId);
 
 				List<IGImage> list = q.list();
 
@@ -1202,12 +1203,12 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				List<IGImage> list = q.list();
@@ -1298,12 +1299,12 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				List<IGImage> list = (List<IGImage>)QueryUtil.list(q,
@@ -1418,12 +1419,12 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, folderId);
+			qPos.add(folderId);
 
 			if (name != null) {
-				q.setString(queryPos++, name);
+				qPos.add(name);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, igImage);
@@ -1652,10 +1653,10 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				Long count = null;
@@ -1720,9 +1721,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				Long count = null;
 
@@ -1786,9 +1787,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, smallImageId);
+				qPos.add(smallImageId);
 
 				Long count = null;
 
@@ -1852,9 +1853,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, largeImageId);
+				qPos.add(largeImageId);
 
 				Long count = null;
 
@@ -1919,9 +1920,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, custom1ImageId);
+				qPos.add(custom1ImageId);
 
 				Long count = null;
 
@@ -1986,9 +1987,9 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, custom2ImageId);
+				qPos.add(custom2ImageId);
 
 				Long count = null;
 
@@ -2063,12 +2064,12 @@ public class IGImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				Long count = null;

@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -303,9 +304,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<UserGroupRole> list = q.list();
 
@@ -378,9 +379,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -472,9 +473,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
@@ -527,9 +528,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<UserGroupRole> list = q.list();
 
@@ -602,9 +603,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -696,9 +697,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
@@ -751,9 +752,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, roleId);
+				qPos.add(roleId);
 
 				List<UserGroupRole> list = q.list();
 
@@ -826,9 +827,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, roleId);
+				qPos.add(roleId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -920,9 +921,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, roleId);
+			qPos.add(roleId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
@@ -981,11 +982,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<UserGroupRole> list = q.list();
 
@@ -1062,11 +1063,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1172,11 +1173,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
@@ -1235,11 +1236,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, roleId);
+				qPos.add(roleId);
 
 				List<UserGroupRole> list = q.list();
 
@@ -1316,11 +1317,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, roleId);
+				qPos.add(roleId);
 
 				List<UserGroupRole> list = (List<UserGroupRole>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1426,11 +1427,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setLong(queryPos++, roleId);
+			qPos.add(roleId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userGroupRole);
@@ -1633,9 +1634,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -1699,9 +1700,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -1765,9 +1766,9 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, roleId);
+				qPos.add(roleId);
 
 				Long count = null;
 
@@ -1837,11 +1838,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -1911,11 +1912,11 @@ public class UserGroupRolePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, roleId);
+				qPos.add(roleId);
 
 				Long count = null;
 

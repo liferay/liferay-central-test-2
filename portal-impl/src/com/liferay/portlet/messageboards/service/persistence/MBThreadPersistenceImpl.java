@@ -41,6 +41,7 @@ import com.liferay.portlet.messageboards.model.MBThread;
 import com.liferay.portlet.messageboards.model.impl.MBThreadImpl;
 import com.liferay.portlet.messageboards.model.impl.MBThreadModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -303,9 +304,9 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
 				List<MBThread> list = q.list();
 
@@ -385,9 +386,9 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
 				List<MBThread> list = (List<MBThread>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -487,9 +488,9 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, categoryId);
+			qPos.add(categoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, mbThread);
 
@@ -672,9 +673,9 @@ public class MBThreadPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
 				Long count = null;
 

@@ -41,6 +41,7 @@ import com.liferay.portlet.blogs.model.BlogsStatsUser;
 import com.liferay.portlet.blogs.model.impl.BlogsStatsUserImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsStatsUserModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -308,9 +309,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<BlogsStatsUser> list = q.list();
 
@@ -389,9 +390,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -490,9 +491,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsStatsUser);
@@ -549,9 +550,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<BlogsStatsUser> list = q.list();
 
@@ -630,9 +631,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -731,9 +732,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsStatsUser);
@@ -822,11 +823,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<BlogsStatsUser> list = q.list();
 
@@ -904,11 +905,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setInteger(queryPos++, entryCount);
+				qPos.add(entryCount);
 
 				List<BlogsStatsUser> list = q.list();
 
@@ -991,11 +992,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setInteger(queryPos++, entryCount);
+				qPos.add(entryCount);
 
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1105,11 +1106,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setInteger(queryPos++, entryCount);
+			qPos.add(entryCount);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsStatsUser);
@@ -1174,11 +1175,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setInteger(queryPos++, entryCount);
+				qPos.add(entryCount);
 
 				List<BlogsStatsUser> list = q.list();
 
@@ -1261,11 +1262,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setInteger(queryPos++, entryCount);
+				qPos.add(entryCount);
 
 				List<BlogsStatsUser> list = (List<BlogsStatsUser>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1375,11 +1376,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
-			q.setInteger(queryPos++, entryCount);
+			qPos.add(entryCount);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsStatsUser);
@@ -1590,9 +1591,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -1656,9 +1657,9 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -1728,11 +1729,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -1805,11 +1806,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setInteger(queryPos++, entryCount);
+				qPos.add(entryCount);
 
 				Long count = null;
 
@@ -1882,11 +1883,11 @@ public class BlogsStatsUserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setInteger(queryPos++, entryCount);
+				qPos.add(entryCount);
 
 				Long count = null;
 

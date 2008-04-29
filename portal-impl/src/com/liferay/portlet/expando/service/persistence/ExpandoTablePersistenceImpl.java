@@ -41,6 +41,7 @@ import com.liferay.portlet.expando.model.ExpandoTable;
 import com.liferay.portlet.expando.model.impl.ExpandoTableImpl;
 import com.liferay.portlet.expando.model.impl.ExpandoTableModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -303,9 +304,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				List<ExpandoTable> list = q.list();
 
@@ -378,9 +379,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				List<ExpandoTable> list = (List<ExpandoTable>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -474,9 +475,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, classNameId);
+			qPos.add(classNameId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					expandoTable);
@@ -566,12 +567,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				List<ExpandoTable> list = q.list();
@@ -770,9 +771,9 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				Long count = null;
 
@@ -848,12 +849,12 @@ public class ExpandoTablePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				Long count = null;

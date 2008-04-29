@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -303,9 +304,9 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<Subscription> list = q.list();
 
@@ -378,9 +379,9 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<Subscription> list = (List<Subscription>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -472,9 +473,9 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					subscription);
@@ -539,13 +540,13 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<Subscription> list = q.list();
 
@@ -627,13 +628,13 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<Subscription> list = (List<Subscription>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -749,13 +750,13 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
-			q.setLong(queryPos++, classNameId);
+			qPos.add(classNameId);
 
-			q.setLong(queryPos++, classPK);
+			qPos.add(classPK);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					subscription);
@@ -860,15 +861,15 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<Subscription> list = q.list();
 
@@ -1074,9 +1075,9 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -1153,13 +1154,13 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				Long count = null;
 
@@ -1242,15 +1243,15 @@ public class SubscriptionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				Long count = null;
 

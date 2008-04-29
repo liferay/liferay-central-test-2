@@ -335,9 +335,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<SCProductEntry> list = q.list();
 
@@ -417,9 +417,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -520,9 +520,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductEntry);
@@ -580,9 +580,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<SCProductEntry> list = q.list();
 
@@ -662,9 +662,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -767,9 +767,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductEntry);
@@ -833,11 +833,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<SCProductEntry> list = q.list();
 
@@ -921,11 +921,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<SCProductEntry> list = (List<SCProductEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1038,11 +1038,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductEntry);
@@ -1142,14 +1142,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (repoGroupId != null) {
-					q.setString(queryPos++, repoGroupId);
+					qPos.add(repoGroupId);
 				}
 
 				if (repoArtifactId != null) {
-					q.setString(queryPos++, repoArtifactId);
+					qPos.add(repoArtifactId);
 				}
 
 				List<SCProductEntry> list = q.list();
@@ -1368,9 +1368,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -1434,9 +1434,9 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -1506,11 +1506,11 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -1591,14 +1591,14 @@ public class SCProductEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (repoGroupId != null) {
-					q.setString(queryPos++, repoGroupId);
+					qPos.add(repoGroupId);
 				}
 
 				if (repoArtifactId != null) {
-					q.setString(queryPos++, repoArtifactId);
+					qPos.add(repoArtifactId);
 				}
 
 				Long count = null;

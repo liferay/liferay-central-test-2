@@ -43,6 +43,7 @@ import com.liferay.portlet.polls.model.PollsQuestion;
 import com.liferay.portlet.polls.model.impl.PollsQuestionImpl;
 import com.liferay.portlet.polls.model.impl.PollsQuestionModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -325,10 +326,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<PollsQuestion> list = q.list();
@@ -413,10 +414,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<PollsQuestion> list = (List<PollsQuestion>)QueryUtil.list(q,
@@ -520,10 +521,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (uuid != null) {
-				q.setString(queryPos++, uuid);
+				qPos.add(uuid);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -618,13 +619,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<PollsQuestion> list = q.list();
 
@@ -694,9 +695,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<PollsQuestion> list = q.list();
 
@@ -775,9 +776,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<PollsQuestion> list = (List<PollsQuestion>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -876,9 +877,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					pollsQuestion);
@@ -1080,10 +1081,10 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				Long count = null;
@@ -1160,13 +1161,13 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -1230,9 +1231,9 @@ public class PollsQuestionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 

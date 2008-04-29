@@ -335,9 +335,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, productEntryId);
+				qPos.add(productEntryId);
 
 				List<SCProductVersion> list = q.list();
 
@@ -416,9 +416,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, productEntryId);
+				qPos.add(productEntryId);
 
 				List<SCProductVersion> list = (List<SCProductVersion>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -521,9 +521,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, productEntryId);
+			qPos.add(productEntryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductVersion);
@@ -608,10 +608,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (directDownloadURL != null) {
-					q.setString(queryPos++, directDownloadURL);
+					qPos.add(directDownloadURL);
 				}
 
 				List<SCProductVersion> list = q.list();
@@ -819,9 +819,9 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, productEntryId);
+				qPos.add(productEntryId);
 
 				Long count = null;
 
@@ -891,10 +891,10 @@ public class SCProductVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (directDownloadURL != null) {
-					q.setString(queryPos++, directDownloadURL);
+					qPos.add(directDownloadURL);
 				}
 
 				Long count = null;

@@ -41,6 +41,7 @@ import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.model.impl.ExpandoRowImpl;
 import com.liferay.portlet.expando.model.impl.ExpandoRowModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -298,9 +299,9 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
 				List<ExpandoRow> list = q.list();
 
@@ -373,9 +374,9 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
 				List<ExpandoRow> list = (List<ExpandoRow>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -467,9 +468,9 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, tableId);
+			qPos.add(tableId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					expandoRow);
@@ -554,11 +555,11 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<ExpandoRow> list = q.list();
 
@@ -756,9 +757,9 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
 				Long count = null;
 
@@ -828,11 +829,11 @@ public class ExpandoRowPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, tableId);
+				qPos.add(tableId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				Long count = null;
 

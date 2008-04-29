@@ -43,6 +43,7 @@ import com.liferay.portlet.blogs.model.BlogsEntry;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryImpl;
 import com.liferay.portlet.blogs.model.impl.BlogsEntryModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -320,10 +321,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<BlogsEntry> list = q.list();
@@ -408,10 +409,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
@@ -515,10 +516,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (uuid != null) {
-				q.setString(queryPos++, uuid);
+				qPos.add(uuid);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -613,13 +614,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<BlogsEntry> list = q.list();
 
@@ -689,9 +690,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<BlogsEntry> list = q.list();
 
@@ -770,9 +771,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -870,9 +871,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
@@ -929,9 +930,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<BlogsEntry> list = q.list();
 
@@ -1010,9 +1011,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1111,9 +1112,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
@@ -1176,11 +1177,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<BlogsEntry> list = q.list();
 
@@ -1263,11 +1264,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1376,11 +1377,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
@@ -1474,12 +1475,12 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (urlTitle != null) {
-					q.setString(queryPos++, urlTitle);
+					qPos.add(urlTitle);
 				}
 
 				List<BlogsEntry> list = q.list();
@@ -1556,11 +1557,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<BlogsEntry> list = q.list();
 
@@ -1643,11 +1644,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<BlogsEntry> list = (List<BlogsEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1757,11 +1758,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					blogsEntry);
@@ -1989,10 +1990,10 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				Long count = null;
@@ -2069,13 +2070,13 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -2139,9 +2140,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -2205,9 +2206,9 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -2277,11 +2278,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -2357,12 +2358,12 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (urlTitle != null) {
-					q.setString(queryPos++, urlTitle);
+					qPos.add(urlTitle);
 				}
 
 				Long count = null;
@@ -2434,11 +2435,11 @@ public class BlogsEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 

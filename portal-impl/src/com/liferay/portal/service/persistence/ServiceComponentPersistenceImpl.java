@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -314,10 +315,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (buildNamespace != null) {
-					q.setString(queryPos++, buildNamespace);
+					qPos.add(buildNamespace);
 				}
 
 				List<ServiceComponent> list = q.list();
@@ -403,10 +404,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (buildNamespace != null) {
-					q.setString(queryPos++, buildNamespace);
+					qPos.add(buildNamespace);
 				}
 
 				List<ServiceComponent> list = (List<ServiceComponent>)QueryUtil.list(q,
@@ -516,10 +517,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (buildNamespace != null) {
-				q.setString(queryPos++, buildNamespace);
+				qPos.add(buildNamespace);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -617,13 +618,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (buildNamespace != null) {
-					q.setString(queryPos++, buildNamespace);
+					qPos.add(buildNamespace);
 				}
 
-				q.setLong(queryPos++, buildNumber);
+				qPos.add(buildNumber);
 
 				List<ServiceComponent> list = q.list();
 
@@ -836,10 +837,10 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (buildNamespace != null) {
-					q.setString(queryPos++, buildNamespace);
+					qPos.add(buildNamespace);
 				}
 
 				Long count = null;
@@ -916,13 +917,13 @@ public class ServiceComponentPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (buildNamespace != null) {
-					q.setString(queryPos++, buildNamespace);
+					qPos.add(buildNamespace);
 				}
 
-				q.setLong(queryPos++, buildNumber);
+				qPos.add(buildNumber);
 
 				Long count = null;
 

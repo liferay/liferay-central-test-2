@@ -43,6 +43,7 @@ import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.portlet.wiki.model.impl.WikiPageImpl;
 import com.liferay.portlet.wiki.model.impl.WikiPageModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -319,10 +320,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<WikiPage> list = q.list();
@@ -409,10 +410,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
@@ -517,10 +518,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (uuid != null) {
-				q.setString(queryPos++, uuid);
+				qPos.add(uuid);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
@@ -578,9 +579,9 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				List<WikiPage> list = q.list();
 
@@ -661,9 +662,9 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -762,9 +763,9 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, nodeId);
+			qPos.add(nodeId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
 
@@ -826,10 +827,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (format != null) {
-					q.setString(queryPos++, format);
+					qPos.add(format);
 				}
 
 				List<WikiPage> list = q.list();
@@ -916,10 +917,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (format != null) {
-					q.setString(queryPos++, format);
+					qPos.add(format);
 				}
 
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
@@ -1024,10 +1025,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (format != null) {
-				q.setString(queryPos++, format);
+				qPos.add(format);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
@@ -1097,12 +1098,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
 				List<WikiPage> list = q.list();
@@ -1195,12 +1196,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
@@ -1316,12 +1317,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, nodeId);
+			qPos.add(nodeId);
 
 			if (title != null) {
-				q.setString(queryPos++, title);
+				qPos.add(title);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
@@ -1388,11 +1389,11 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
-				q.setBoolean(queryPos++, head);
+				qPos.add(head);
 
 				List<WikiPage> list = q.list();
 
@@ -1477,11 +1478,11 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
-				q.setBoolean(queryPos++, head);
+				qPos.add(head);
 
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1591,11 +1592,11 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, nodeId);
+			qPos.add(nodeId);
 
-			q.setBoolean(queryPos++, head);
+			qPos.add(head);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
 
@@ -1664,12 +1665,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (parentTitle != null) {
-					q.setString(queryPos++, parentTitle);
+					qPos.add(parentTitle);
 				}
 
 				List<WikiPage> list = q.list();
@@ -1762,12 +1763,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (parentTitle != null) {
-					q.setString(queryPos++, parentTitle);
+					qPos.add(parentTitle);
 				}
 
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
@@ -1884,12 +1885,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, nodeId);
+			qPos.add(nodeId);
 
 			if (parentTitle != null) {
-				q.setString(queryPos++, parentTitle);
+				qPos.add(parentTitle);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
@@ -1959,12 +1960,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (redirectTitle != null) {
-					q.setString(queryPos++, redirectTitle);
+					qPos.add(redirectTitle);
 				}
 
 				List<WikiPage> list = q.list();
@@ -2057,12 +2058,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (redirectTitle != null) {
-					q.setString(queryPos++, redirectTitle);
+					qPos.add(redirectTitle);
 				}
 
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
@@ -2179,12 +2180,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, nodeId);
+			qPos.add(nodeId);
 
 			if (redirectTitle != null) {
-				q.setString(queryPos++, redirectTitle);
+				qPos.add(redirectTitle);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
@@ -2292,15 +2293,15 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
-				q.setDouble(queryPos++, version);
+				qPos.add(version);
 
 				List<WikiPage> list = q.list();
 
@@ -2392,15 +2393,15 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
-				q.setBoolean(queryPos++, head);
+				qPos.add(head);
 
 				List<WikiPage> list = q.list();
 
@@ -2497,15 +2498,15 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
-				q.setBoolean(queryPos++, head);
+				qPos.add(head);
 
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -2631,15 +2632,15 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, nodeId);
+			qPos.add(nodeId);
 
 			if (title != null) {
-				q.setString(queryPos++, title);
+				qPos.add(title);
 			}
 
-			q.setBoolean(queryPos++, head);
+			qPos.add(head);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
 
@@ -2717,14 +2718,14 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
-				q.setBoolean(queryPos++, head);
+				qPos.add(head);
 
 				if (parentTitle != null) {
-					q.setString(queryPos++, parentTitle);
+					qPos.add(parentTitle);
 				}
 
 				List<WikiPage> list = q.list();
@@ -2823,14 +2824,14 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
-				q.setBoolean(queryPos++, head);
+				qPos.add(head);
 
 				if (parentTitle != null) {
-					q.setString(queryPos++, parentTitle);
+					qPos.add(parentTitle);
 				}
 
 				List<WikiPage> list = (List<WikiPage>)QueryUtil.list(q,
@@ -2959,14 +2960,14 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, nodeId);
+			qPos.add(nodeId);
 
-			q.setBoolean(queryPos++, head);
+			qPos.add(head);
 
 			if (parentTitle != null) {
-				q.setString(queryPos++, parentTitle);
+				qPos.add(parentTitle);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, wikiPage);
@@ -3216,10 +3217,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				Long count = null;
@@ -3284,9 +3285,9 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				Long count = null;
 
@@ -3355,10 +3356,10 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (format != null) {
-					q.setString(queryPos++, format);
+					qPos.add(format);
 				}
 
 				Long count = null;
@@ -3434,12 +3435,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
 				Long count = null;
@@ -3512,11 +3513,11 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
-				q.setBoolean(queryPos++, head);
+				qPos.add(head);
 
 				Long count = null;
 
@@ -3592,12 +3593,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (parentTitle != null) {
-					q.setString(queryPos++, parentTitle);
+					qPos.add(parentTitle);
 				}
 
 				Long count = null;
@@ -3674,12 +3675,12 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (redirectTitle != null) {
-					q.setString(queryPos++, redirectTitle);
+					qPos.add(redirectTitle);
 				}
 
 				Long count = null;
@@ -3765,15 +3766,15 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
-				q.setDouble(queryPos++, version);
+				qPos.add(version);
 
 				Long count = null;
 
@@ -3858,15 +3859,15 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
-				q.setBoolean(queryPos++, head);
+				qPos.add(head);
 
 				Long count = null;
 
@@ -3951,14 +3952,14 @@ public class WikiPagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, nodeId);
+				qPos.add(nodeId);
 
-				q.setBoolean(queryPos++, head);
+				qPos.add(head);
 
 				if (parentTitle != null) {
-					q.setString(queryPos++, parentTitle);
+					qPos.add(parentTitle);
 				}
 
 				Long count = null;

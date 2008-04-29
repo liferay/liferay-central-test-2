@@ -41,6 +41,7 @@ import com.liferay.portlet.journal.model.JournalContentSearch;
 import com.liferay.portlet.journal.model.impl.JournalContentSearchImpl;
 import com.liferay.portlet.journal.model.impl.JournalContentSearchModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -316,11 +317,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				List<JournalContentSearch> list = q.list();
 
@@ -398,11 +399,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -509,11 +510,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setBoolean(queryPos++, privateLayout);
+			qPos.add(privateLayout);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch);
@@ -577,12 +578,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (articleId != null) {
-					q.setString(queryPos++, articleId);
+					qPos.add(articleId);
 				}
 
 				List<JournalContentSearch> list = q.list();
@@ -667,12 +668,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (articleId != null) {
-					q.setString(queryPos++, articleId);
+					qPos.add(articleId);
 				}
 
 				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
@@ -785,12 +786,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			if (articleId != null) {
-				q.setString(queryPos++, articleId);
+				qPos.add(articleId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -858,13 +859,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				List<JournalContentSearch> list = q.list();
 
@@ -949,13 +950,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1073,13 +1074,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setBoolean(queryPos++, privateLayout);
+			qPos.add(privateLayout);
 
-			q.setLong(queryPos++, layoutId);
+			qPos.add(layoutId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalContentSearch);
@@ -1152,14 +1153,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				if (articleId != null) {
-					q.setString(queryPos++, articleId);
+					qPos.add(articleId);
 				}
 
 				List<JournalContentSearch> list = q.list();
@@ -1251,14 +1252,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				if (articleId != null) {
-					q.setString(queryPos++, articleId);
+					qPos.add(articleId);
 				}
 
 				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
@@ -1382,14 +1383,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setBoolean(queryPos++, privateLayout);
+			qPos.add(privateLayout);
 
 			if (articleId != null) {
-				q.setString(queryPos++, articleId);
+				qPos.add(articleId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1469,16 +1470,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				List<JournalContentSearch> list = q.list();
@@ -1576,16 +1577,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				List<JournalContentSearch> list = (List<JournalContentSearch>)QueryUtil.list(q,
@@ -1721,16 +1722,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setBoolean(queryPos++, privateLayout);
+			qPos.add(privateLayout);
 
-			q.setLong(queryPos++, layoutId);
+			qPos.add(layoutId);
 
 			if (portletId != null) {
-				q.setString(queryPos++, portletId);
+				qPos.add(portletId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1859,20 +1860,20 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				if (articleId != null) {
-					q.setString(queryPos++, articleId);
+					qPos.add(articleId);
 				}
 
 				List<JournalContentSearch> list = q.list();
@@ -2116,11 +2117,11 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				Long count = null;
 
@@ -2196,12 +2197,12 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (articleId != null) {
-					q.setString(queryPos++, articleId);
+					qPos.add(articleId);
 				}
 
 				Long count = null;
@@ -2281,13 +2282,13 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				Long count = null;
 
@@ -2372,14 +2373,14 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				if (articleId != null) {
-					q.setString(queryPos++, articleId);
+					qPos.add(articleId);
 				}
 
 				Long count = null;
@@ -2470,16 +2471,16 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				Long count = null;
@@ -2583,20 +2584,20 @@ public class JournalContentSearchPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				if (articleId != null) {
-					q.setString(queryPos++, articleId);
+					qPos.add(articleId);
 				}
 
 				Long count = null;

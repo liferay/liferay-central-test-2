@@ -41,6 +41,7 @@ import com.liferay.portlet.shopping.model.ShoppingItemField;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemFieldImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingItemFieldModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -311,9 +312,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, itemId);
+				qPos.add(itemId);
 
 				List<ShoppingItemField> list = q.list();
 
@@ -393,9 +394,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, itemId);
+				qPos.add(itemId);
 
 				List<ShoppingItemField> list = (List<ShoppingItemField>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -496,9 +497,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, itemId);
+			qPos.add(itemId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingItemField);
@@ -683,9 +684,9 @@ public class ShoppingItemFieldPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, itemId);
+				qPos.add(itemId);
 
 				Long count = null;
 

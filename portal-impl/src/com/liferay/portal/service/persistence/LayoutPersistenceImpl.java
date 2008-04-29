@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -295,9 +296,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<Layout> list = q.list();
 
@@ -376,9 +377,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -476,9 +477,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
 
@@ -534,9 +535,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<Layout> list = q.list();
 
@@ -615,9 +616,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -715,9 +716,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
 
@@ -795,9 +796,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, dlFolderId);
+				qPos.add(dlFolderId);
 
 				List<Layout> list = q.list();
 
@@ -890,9 +891,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, iconImageId);
+				qPos.add(iconImageId);
 
 				List<Layout> list = q.list();
 
@@ -970,11 +971,11 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				List<Layout> list = q.list();
 
@@ -1057,11 +1058,11 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1171,11 +1172,11 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setBoolean(queryPos++, privateLayout);
+			qPos.add(privateLayout);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
 
@@ -1274,13 +1275,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				List<Layout> list = q.list();
 
@@ -1364,13 +1365,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, parentLayoutId);
+				qPos.add(parentLayoutId);
 
 				List<Layout> list = q.list();
 
@@ -1461,13 +1462,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, parentLayoutId);
+				qPos.add(parentLayoutId);
 
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1590,13 +1591,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setBoolean(queryPos++, privateLayout);
+			qPos.add(privateLayout);
 
-			q.setLong(queryPos++, parentLayoutId);
+			qPos.add(parentLayoutId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
 
@@ -1701,14 +1702,14 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				if (friendlyURL != null) {
-					q.setString(queryPos++, friendlyURL);
+					qPos.add(friendlyURL);
 				}
 
 				List<Layout> list = q.list();
@@ -1799,14 +1800,14 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				List<Layout> list = q.list();
@@ -1903,14 +1904,14 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				List<Layout> list = (List<Layout>)QueryUtil.list(q,
@@ -2038,14 +2039,14 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setBoolean(queryPos++, privateLayout);
+			qPos.add(privateLayout);
 
 			if (type != null) {
-				q.setString(queryPos++, type);
+				qPos.add(type);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, layout);
@@ -2282,9 +2283,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -2347,9 +2348,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -2412,9 +2413,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, dlFolderId);
+				qPos.add(dlFolderId);
 
 				Long count = null;
 
@@ -2477,9 +2478,9 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, iconImageId);
+				qPos.add(iconImageId);
 
 				Long count = null;
 
@@ -2551,11 +2552,11 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				Long count = null;
 
@@ -2633,13 +2634,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, layoutId);
+				qPos.add(layoutId);
 
 				Long count = null;
 
@@ -2717,13 +2718,13 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
-				q.setLong(queryPos++, parentLayoutId);
+				qPos.add(parentLayoutId);
 
 				Long count = null;
 
@@ -2807,14 +2808,14 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				if (friendlyURL != null) {
-					q.setString(queryPos++, friendlyURL);
+					qPos.add(friendlyURL);
 				}
 
 				Long count = null;
@@ -2899,14 +2900,14 @@ public class LayoutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				Long count = null;

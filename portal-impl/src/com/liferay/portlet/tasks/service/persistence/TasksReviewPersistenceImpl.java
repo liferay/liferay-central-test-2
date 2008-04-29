@@ -41,6 +41,7 @@ import com.liferay.portlet.tasks.model.TasksReview;
 import com.liferay.portlet.tasks.model.impl.TasksReviewImpl;
 import com.liferay.portlet.tasks.model.impl.TasksReviewModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -307,9 +308,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<TasksReview> list = q.list();
 
@@ -388,9 +389,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -488,9 +489,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tasksReview);
@@ -547,9 +548,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
 				List<TasksReview> list = q.list();
 
@@ -628,9 +629,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -730,9 +731,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, proposalId);
+			qPos.add(proposalId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tasksReview);
@@ -823,11 +824,11 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
 				List<TasksReview> list = q.list();
 
@@ -905,11 +906,11 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
-				q.setInteger(queryPos++, stage);
+				qPos.add(stage);
 
 				List<TasksReview> list = q.list();
 
@@ -992,11 +993,11 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
-				q.setInteger(queryPos++, stage);
+				qPos.add(stage);
 
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1106,11 +1107,11 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, proposalId);
+			qPos.add(proposalId);
 
-			q.setInteger(queryPos++, stage);
+			qPos.add(stage);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tasksReview);
@@ -1181,13 +1182,13 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
-				q.setInteger(queryPos++, stage);
+				qPos.add(stage);
 
-				q.setBoolean(queryPos++, completed);
+				qPos.add(completed);
 
 				List<TasksReview> list = q.list();
 
@@ -1277,13 +1278,13 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
-				q.setInteger(queryPos++, stage);
+				qPos.add(stage);
 
-				q.setBoolean(queryPos++, completed);
+				qPos.add(completed);
 
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1406,13 +1407,13 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, proposalId);
+			qPos.add(proposalId);
 
-			q.setInteger(queryPos++, stage);
+			qPos.add(stage);
 
-			q.setBoolean(queryPos++, completed);
+			qPos.add(completed);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tasksReview);
@@ -1487,15 +1488,15 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
-				q.setInteger(queryPos++, stage);
+				qPos.add(stage);
 
-				q.setBoolean(queryPos++, completed);
+				qPos.add(completed);
 
-				q.setBoolean(queryPos++, rejected);
+				qPos.add(rejected);
 
 				List<TasksReview> list = q.list();
 
@@ -1591,15 +1592,15 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
-				q.setInteger(queryPos++, stage);
+				qPos.add(stage);
 
-				q.setBoolean(queryPos++, completed);
+				qPos.add(completed);
 
-				q.setBoolean(queryPos++, rejected);
+				qPos.add(rejected);
 
 				List<TasksReview> list = (List<TasksReview>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1732,15 +1733,15 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, proposalId);
+			qPos.add(proposalId);
 
-			q.setInteger(queryPos++, stage);
+			qPos.add(stage);
 
-			q.setBoolean(queryPos++, completed);
+			qPos.add(completed);
 
-			q.setBoolean(queryPos++, rejected);
+			qPos.add(rejected);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					tasksReview);
@@ -1959,9 +1960,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -2025,9 +2026,9 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
 				Long count = null;
 
@@ -2100,11 +2101,11 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
 				Long count = null;
 
@@ -2176,11 +2177,11 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
-				q.setInteger(queryPos++, stage);
+				qPos.add(stage);
 
 				Long count = null;
 
@@ -2259,13 +2260,13 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
-				q.setInteger(queryPos++, stage);
+				qPos.add(stage);
 
-				q.setBoolean(queryPos++, completed);
+				qPos.add(completed);
 
 				Long count = null;
 
@@ -2348,15 +2349,15 @@ public class TasksReviewPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, proposalId);
+				qPos.add(proposalId);
 
-				q.setInteger(queryPos++, stage);
+				qPos.add(stage);
 
-				q.setBoolean(queryPos++, completed);
+				qPos.add(completed);
 
-				q.setBoolean(queryPos++, rejected);
+				qPos.add(rejected);
 
 				Long count = null;
 

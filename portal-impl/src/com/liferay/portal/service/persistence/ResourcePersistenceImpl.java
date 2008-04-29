@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -295,9 +296,9 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, codeId);
+				qPos.add(codeId);
 
 				List<Resource> list = q.list();
 
@@ -369,9 +370,9 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, codeId);
+				qPos.add(codeId);
 
 				List<Resource> list = (List<Resource>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -462,9 +463,9 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, codeId);
+			qPos.add(codeId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, resource);
 
@@ -552,12 +553,12 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, codeId);
+				qPos.add(codeId);
 
 				if (primKey != null) {
-					q.setString(queryPos++, primKey);
+					qPos.add(primKey);
 				}
 
 				List<Resource> list = q.list();
@@ -753,9 +754,9 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, codeId);
+				qPos.add(codeId);
 
 				Long count = null;
 
@@ -830,12 +831,12 @@ public class ResourcePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, codeId);
+				qPos.add(codeId);
 
 				if (primKey != null) {
-					q.setString(queryPos++, primKey);
+					qPos.add(primKey);
 				}
 
 				Long count = null;

@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -321,10 +322,10 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (webId != null) {
-					q.setString(queryPos++, webId);
+					qPos.add(webId);
 				}
 
 				List<Company> list = q.list();
@@ -418,10 +419,10 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (virtualHost != null) {
-					q.setString(queryPos++, virtualHost);
+					qPos.add(virtualHost);
 				}
 
 				List<Company> list = q.list();
@@ -514,10 +515,10 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (mx != null) {
-					q.setString(queryPos++, mx);
+					qPos.add(mx);
 				}
 
 				List<Company> list = q.list();
@@ -605,9 +606,9 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, logoId);
+				qPos.add(logoId);
 
 				List<Company> list = q.list();
 
@@ -822,10 +823,10 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (webId != null) {
-					q.setString(queryPos++, webId);
+					qPos.add(webId);
 				}
 
 				Long count = null;
@@ -894,10 +895,10 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (virtualHost != null) {
-					q.setString(queryPos++, virtualHost);
+					qPos.add(virtualHost);
 				}
 
 				Long count = null;
@@ -966,10 +967,10 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (mx != null) {
-					q.setString(queryPos++, mx);
+					qPos.add(mx);
 				}
 
 				Long count = null;
@@ -1033,9 +1034,9 @@ public class CompanyPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, logoId);
+				qPos.add(logoId);
 
 				Long count = null;
 

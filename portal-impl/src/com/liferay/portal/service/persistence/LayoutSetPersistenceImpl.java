@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -297,9 +298,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<LayoutSet> list = q.list();
 
@@ -371,9 +372,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<LayoutSet> list = (List<LayoutSet>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -465,9 +466,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					layoutSet);
@@ -547,10 +548,10 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (virtualHost != null) {
-					q.setString(queryPos++, virtualHost);
+					qPos.add(virtualHost);
 				}
 
 				List<LayoutSet> list = q.list();
@@ -650,11 +651,11 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				List<LayoutSet> list = q.list();
 
@@ -857,9 +858,9 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -927,10 +928,10 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (virtualHost != null) {
-					q.setString(queryPos++, virtualHost);
+					qPos.add(virtualHost);
 				}
 
 				Long count = null;
@@ -1003,11 +1004,11 @@ public class LayoutSetPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, privateLayout);
+				qPos.add(privateLayout);
 
 				Long count = null;
 

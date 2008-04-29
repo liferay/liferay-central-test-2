@@ -330,9 +330,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				List<SCLicense> list = q.list();
 
@@ -411,9 +411,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -511,9 +511,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setBoolean(queryPos++, active);
+			qPos.add(active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scLicense);
@@ -578,11 +578,11 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
-				q.setBoolean(queryPos++, recommended);
+				qPos.add(recommended);
 
 				List<SCLicense> list = q.list();
 
@@ -665,11 +665,11 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
-				q.setBoolean(queryPos++, recommended);
+				qPos.add(recommended);
 
 				List<SCLicense> list = (List<SCLicense>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -779,11 +779,11 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setBoolean(queryPos++, active);
+			qPos.add(active);
 
-			q.setBoolean(queryPos++, recommended);
+			qPos.add(recommended);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scLicense);
@@ -974,9 +974,9 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				Long count = null;
 
@@ -1049,11 +1049,11 @@ public class SCLicensePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
-				q.setBoolean(queryPos++, recommended);
+				qPos.add(recommended);
 
 				Long count = null;
 

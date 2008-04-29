@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -304,9 +305,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				List<PortletPreferences> list = q.list();
 
@@ -379,9 +380,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -474,9 +475,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, plid);
+			qPos.add(plid);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences);
@@ -540,12 +541,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				List<PortletPreferences> list = q.list();
@@ -630,12 +631,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
@@ -748,12 +749,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, plid);
+			qPos.add(plid);
 
 			if (portletId != null) {
-				q.setString(queryPos++, portletId);
+				qPos.add(portletId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -820,13 +821,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, ownerId);
+				qPos.add(ownerId);
 
-				q.setInteger(queryPos++, ownerType);
+				qPos.add(ownerType);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				List<PortletPreferences> list = q.list();
 
@@ -909,13 +910,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, ownerId);
+				qPos.add(ownerId);
 
-				q.setInteger(queryPos++, ownerType);
+				qPos.add(ownerType);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				List<PortletPreferences> list = (List<PortletPreferences>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1033,13 +1034,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, ownerId);
+			qPos.add(ownerId);
 
-			q.setInteger(queryPos++, ownerType);
+			qPos.add(ownerType);
 
-			q.setLong(queryPos++, plid);
+			qPos.add(plid);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					portletPreferences);
@@ -1150,16 +1151,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, ownerId);
+				qPos.add(ownerId);
 
-				q.setInteger(queryPos++, ownerType);
+				qPos.add(ownerType);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				List<PortletPreferences> list = q.list();
@@ -1375,9 +1376,9 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				Long count = null;
 
@@ -1453,12 +1454,12 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				Long count = null;
@@ -1537,13 +1538,13 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, ownerId);
+				qPos.add(ownerId);
 
-				q.setInteger(queryPos++, ownerType);
+				qPos.add(ownerType);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				Long count = null;
 
@@ -1632,16 +1633,16 @@ public class PortletPreferencesPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, ownerId);
+				qPos.add(ownerId);
 
-				q.setInteger(queryPos++, ownerType);
+				qPos.add(ownerType);
 
-				q.setLong(queryPos++, plid);
+				qPos.add(plid);
 
 				if (portletId != null) {
-					q.setString(queryPos++, portletId);
+					qPos.add(portletId);
 				}
 
 				Long count = null;

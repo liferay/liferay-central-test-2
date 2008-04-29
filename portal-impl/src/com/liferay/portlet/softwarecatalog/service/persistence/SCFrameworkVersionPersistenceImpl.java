@@ -336,9 +336,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<SCFrameworkVersion> list = q.list();
 
@@ -418,9 +418,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -523,9 +523,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scFrameworkVersion);
@@ -583,9 +583,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<SCFrameworkVersion> list = q.list();
 
@@ -665,9 +665,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -770,9 +770,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scFrameworkVersion);
@@ -838,11 +838,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				List<SCFrameworkVersion> list = q.list();
 
@@ -926,11 +926,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				List<SCFrameworkVersion> list = (List<SCFrameworkVersion>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1043,11 +1043,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setBoolean(queryPos++, active);
+			qPos.add(active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scFrameworkVersion);
@@ -1245,9 +1245,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -1311,9 +1311,9 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -1386,11 +1386,11 @@ public class SCFrameworkVersionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				Long count = null;
 

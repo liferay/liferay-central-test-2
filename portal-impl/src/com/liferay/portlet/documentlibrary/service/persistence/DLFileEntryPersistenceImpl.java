@@ -43,6 +43,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileEntryModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -325,10 +326,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<DLFileEntry> list = q.list();
@@ -414,10 +415,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
@@ -522,10 +523,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (uuid != null) {
-				q.setString(queryPos++, uuid);
+				qPos.add(uuid);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -584,9 +585,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<DLFileEntry> list = q.list();
 
@@ -666,9 +667,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -769,9 +770,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileEntry);
@@ -829,9 +830,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				List<DLFileEntry> list = q.list();
 
@@ -911,9 +912,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1013,9 +1014,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, folderId);
+			qPos.add(folderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileEntry);
@@ -1110,12 +1111,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				List<DLFileEntry> list = q.list();
@@ -1198,12 +1199,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
 				List<DLFileEntry> list = q.list();
@@ -1295,12 +1296,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
 				List<DLFileEntry> list = (List<DLFileEntry>)QueryUtil.list(q,
@@ -1417,12 +1418,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, folderId);
+			qPos.add(folderId);
 
 			if (title != null) {
-				q.setString(queryPos++, title);
+				qPos.add(title);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1639,10 +1640,10 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				Long count = null;
@@ -1707,9 +1708,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -1773,9 +1774,9 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				Long count = null;
 
@@ -1850,12 +1851,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (name != null) {
-					q.setString(queryPos++, name);
+					qPos.add(name);
 				}
 
 				Long count = null;
@@ -1932,12 +1933,12 @@ public class DLFileEntryPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				if (title != null) {
-					q.setString(queryPos++, title);
+					qPos.add(title);
 				}
 
 				Long count = null;

@@ -43,6 +43,7 @@ import com.liferay.portlet.journal.model.JournalTemplate;
 import com.liferay.portlet.journal.model.impl.JournalTemplateImpl;
 import com.liferay.portlet.journal.model.impl.JournalTemplateModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -323,10 +324,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<JournalTemplate> list = q.list();
@@ -411,10 +412,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
@@ -518,10 +519,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (uuid != null) {
-				q.setString(queryPos++, uuid);
+				qPos.add(uuid);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -616,13 +617,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<JournalTemplate> list = q.list();
 
@@ -692,9 +693,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<JournalTemplate> list = q.list();
 
@@ -773,9 +774,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -874,9 +875,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					journalTemplate);
@@ -938,10 +939,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (templateId != null) {
-					q.setString(queryPos++, templateId);
+					qPos.add(templateId);
 				}
 
 				List<JournalTemplate> list = q.list();
@@ -1026,10 +1027,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (templateId != null) {
-					q.setString(queryPos++, templateId);
+					qPos.add(templateId);
 				}
 
 				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
@@ -1135,10 +1136,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (templateId != null) {
-				q.setString(queryPos++, templateId);
+				qPos.add(templateId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1219,9 +1220,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, smallImageId);
+				qPos.add(smallImageId);
 
 				List<JournalTemplate> list = q.list();
 
@@ -1328,12 +1329,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (templateId != null) {
-					q.setString(queryPos++, templateId);
+					qPos.add(templateId);
 				}
 
 				List<JournalTemplate> list = q.list();
@@ -1415,12 +1416,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (structureId != null) {
-					q.setString(queryPos++, structureId);
+					qPos.add(structureId);
 				}
 
 				List<JournalTemplate> list = q.list();
@@ -1511,12 +1512,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (structureId != null) {
-					q.setString(queryPos++, structureId);
+					qPos.add(structureId);
 				}
 
 				List<JournalTemplate> list = (List<JournalTemplate>)QueryUtil.list(q,
@@ -1632,12 +1633,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			if (structureId != null) {
-				q.setString(queryPos++, structureId);
+				qPos.add(structureId);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1867,10 +1868,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				Long count = null;
@@ -1947,13 +1948,13 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -2017,9 +2018,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -2088,10 +2089,10 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (templateId != null) {
-					q.setString(queryPos++, templateId);
+					qPos.add(templateId);
 				}
 
 				Long count = null;
@@ -2156,9 +2157,9 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, smallImageId);
+				qPos.add(smallImageId);
 
 				Long count = null;
 
@@ -2234,12 +2235,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (templateId != null) {
-					q.setString(queryPos++, templateId);
+					qPos.add(templateId);
 				}
 
 				Long count = null;
@@ -2316,12 +2317,12 @@ public class JournalTemplatePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				if (structureId != null) {
-					q.setString(queryPos++, structureId);
+					qPos.add(structureId);
 				}
 
 				Long count = null;

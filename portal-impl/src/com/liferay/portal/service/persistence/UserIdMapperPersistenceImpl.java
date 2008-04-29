@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -303,9 +304,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<UserIdMapper> list = q.list();
 
@@ -378,9 +379,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<UserIdMapper> list = (List<UserIdMapper>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -472,9 +473,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					userIdMapper);
@@ -564,12 +565,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				List<UserIdMapper> list = q.list();
@@ -678,14 +679,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				if (externalUserId != null) {
-					q.setString(queryPos++, externalUserId);
+					qPos.add(externalUserId);
 				}
 
 				List<UserIdMapper> list = q.list();
@@ -890,9 +891,9 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -967,12 +968,12 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				Long count = null;
@@ -1054,14 +1055,14 @@ public class UserIdMapperPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				if (externalUserId != null) {
-					q.setString(queryPos++, externalUserId);
+					qPos.add(externalUserId);
 				}
 
 				Long count = null;

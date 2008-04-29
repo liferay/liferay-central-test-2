@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -297,9 +298,9 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, countryId);
+				qPos.add(countryId);
 
 				List<Region> list = q.list();
 
@@ -377,9 +378,9 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, countryId);
+				qPos.add(countryId);
 
 				List<Region> list = (List<Region>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -476,9 +477,9 @@ public class RegionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, countryId);
+			qPos.add(countryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
 
@@ -532,9 +533,9 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				List<Region> list = q.list();
 
@@ -612,9 +613,9 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				List<Region> list = (List<Region>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -711,9 +712,9 @@ public class RegionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setBoolean(queryPos++, active);
+			qPos.add(active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
 
@@ -776,11 +777,11 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, countryId);
+				qPos.add(countryId);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				List<Region> list = q.list();
 
@@ -862,11 +863,11 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, countryId);
+				qPos.add(countryId);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				List<Region> list = (List<Region>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -974,11 +975,11 @@ public class RegionPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, countryId);
+			qPos.add(countryId);
 
-			q.setBoolean(queryPos++, active);
+			qPos.add(active);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, region);
 
@@ -1171,9 +1172,9 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, countryId);
+				qPos.add(countryId);
 
 				Long count = null;
 
@@ -1236,9 +1237,9 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				Long count = null;
 
@@ -1310,11 +1311,11 @@ public class RegionPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, countryId);
+				qPos.add(countryId);
 
-				q.setBoolean(queryPos++, active);
+				qPos.add(active);
 
 				Long count = null;
 

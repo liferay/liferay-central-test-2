@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -303,10 +304,10 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				List<ListType> list = q.list();
@@ -390,10 +391,10 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				List<ListType> list = (List<ListType>)QueryUtil.list(q,
@@ -496,10 +497,10 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (type != null) {
-				q.setString(queryPos++, type);
+				qPos.add(type);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, listType);
@@ -685,10 +686,10 @@ public class ListTypePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (type != null) {
-					q.setString(queryPos++, type);
+					qPos.add(type);
 				}
 
 				Long count = null;

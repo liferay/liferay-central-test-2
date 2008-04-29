@@ -41,6 +41,7 @@ import com.liferay.portlet.softwarecatalog.model.SCProductScreenshot;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotImpl;
 import com.liferay.portlet.softwarecatalog.model.impl.SCProductScreenshotModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -311,9 +312,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, productEntryId);
+				qPos.add(productEntryId);
 
 				List<SCProductScreenshot> list = q.list();
 
@@ -393,9 +394,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, productEntryId);
+				qPos.add(productEntryId);
 
 				List<SCProductScreenshot> list = (List<SCProductScreenshot>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -499,9 +500,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, productEntryId);
+			qPos.add(productEntryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					scProductScreenshot);
@@ -582,9 +583,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, thumbnailId);
+				qPos.add(thumbnailId);
 
 				List<SCProductScreenshot> list = q.list();
 
@@ -678,9 +679,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, fullImageId);
+				qPos.add(fullImageId);
 
 				List<SCProductScreenshot> list = q.list();
 
@@ -786,11 +787,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, productEntryId);
+				qPos.add(productEntryId);
 
-				q.setInteger(queryPos++, priority);
+				qPos.add(priority);
 
 				List<SCProductScreenshot> list = q.list();
 
@@ -1013,9 +1014,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, productEntryId);
+				qPos.add(productEntryId);
 
 				Long count = null;
 
@@ -1079,9 +1080,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, thumbnailId);
+				qPos.add(thumbnailId);
 
 				Long count = null;
 
@@ -1145,9 +1146,9 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, fullImageId);
+				qPos.add(fullImageId);
 
 				Long count = null;
 
@@ -1220,11 +1221,11 @@ public class SCProductScreenshotPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, productEntryId);
+				qPos.add(productEntryId);
 
-				q.setInteger(queryPos++, priority);
+				qPos.add(priority);
 
 				Long count = null;
 

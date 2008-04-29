@@ -319,9 +319,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
 				List<ShoppingItem> list = q.list();
 
@@ -400,9 +400,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
 				List<ShoppingItem> list = (List<ShoppingItem>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -502,9 +502,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, categoryId);
+			qPos.add(categoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingItem);
@@ -584,9 +584,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, smallImageId);
+				qPos.add(smallImageId);
 
 				List<ShoppingItem> list = q.list();
 
@@ -679,9 +679,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, mediumImageId);
+				qPos.add(mediumImageId);
 
 				List<ShoppingItem> list = q.list();
 
@@ -774,9 +774,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, largeImageId);
+				qPos.add(largeImageId);
 
 				List<ShoppingItem> list = q.list();
 
@@ -883,12 +883,12 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (sku != null) {
-					q.setString(queryPos++, sku);
+					qPos.add(sku);
 				}
 
 				List<ShoppingItem> list = q.list();
@@ -1114,9 +1114,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
 				Long count = null;
 
@@ -1180,9 +1180,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, smallImageId);
+				qPos.add(smallImageId);
 
 				Long count = null;
 
@@ -1247,9 +1247,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, mediumImageId);
+				qPos.add(mediumImageId);
 
 				Long count = null;
 
@@ -1313,9 +1313,9 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, largeImageId);
+				qPos.add(largeImageId);
 
 				Long count = null;
 
@@ -1390,12 +1390,12 @@ public class ShoppingItemPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (sku != null) {
-					q.setString(queryPos++, sku);
+					qPos.add(sku);
 				}
 
 				Long count = null;

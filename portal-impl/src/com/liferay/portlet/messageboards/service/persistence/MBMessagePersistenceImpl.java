@@ -43,6 +43,7 @@ import com.liferay.portlet.messageboards.model.MBMessage;
 import com.liferay.portlet.messageboards.model.impl.MBMessageImpl;
 import com.liferay.portlet.messageboards.model.impl.MBMessageModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -322,10 +323,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<MBMessage> list = q.list();
@@ -411,10 +412,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
@@ -519,10 +520,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (uuid != null) {
-				q.setString(queryPos++, uuid);
+				qPos.add(uuid);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -581,9 +582,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<MBMessage> list = q.list();
 
@@ -663,9 +664,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -765,9 +766,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
@@ -825,9 +826,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
 				List<MBMessage> list = q.list();
 
@@ -907,9 +908,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1010,9 +1011,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, categoryId);
+			qPos.add(categoryId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
@@ -1070,9 +1071,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, threadId);
+				qPos.add(threadId);
 
 				List<MBMessage> list = q.list();
 
@@ -1152,9 +1153,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, threadId);
+				qPos.add(threadId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1254,9 +1255,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, threadId);
+			qPos.add(threadId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
@@ -1322,11 +1323,11 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
-				q.setLong(queryPos++, threadId);
+				qPos.add(threadId);
 
 				List<MBMessage> list = q.list();
 
@@ -1410,11 +1411,11 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
-				q.setLong(queryPos++, threadId);
+				qPos.add(threadId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1525,11 +1526,11 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, categoryId);
+			qPos.add(categoryId);
 
-			q.setLong(queryPos++, threadId);
+			qPos.add(threadId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
@@ -1595,11 +1596,11 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, threadId);
+				qPos.add(threadId);
 
-				q.setLong(queryPos++, parentMessageId);
+				qPos.add(parentMessageId);
 
 				List<MBMessage> list = q.list();
 
@@ -1683,11 +1684,11 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, threadId);
+				qPos.add(threadId);
 
-				q.setLong(queryPos++, parentMessageId);
+				qPos.add(parentMessageId);
 
 				List<MBMessage> list = (List<MBMessage>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1798,11 +1799,11 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, threadId);
+			qPos.add(threadId);
 
-			q.setLong(queryPos++, parentMessageId);
+			qPos.add(parentMessageId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					mbMessage);
@@ -2024,10 +2025,10 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				Long count = null;
@@ -2092,9 +2093,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -2158,9 +2159,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
 				Long count = null;
 
@@ -2224,9 +2225,9 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, threadId);
+				qPos.add(threadId);
 
 				Long count = null;
 
@@ -2299,11 +2300,11 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, categoryId);
+				qPos.add(categoryId);
 
-				q.setLong(queryPos++, threadId);
+				qPos.add(threadId);
 
 				Long count = null;
 
@@ -2376,11 +2377,11 @@ public class MBMessagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, threadId);
+				qPos.add(threadId);
 
-				q.setLong(queryPos++, parentMessageId);
+				qPos.add(parentMessageId);
 
 				Long count = null;
 

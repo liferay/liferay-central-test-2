@@ -41,6 +41,7 @@ import com.liferay.portlet.social.model.SocialActivity;
 import com.liferay.portlet.social.model.impl.SocialActivityImpl;
 import com.liferay.portlet.social.model.impl.SocialActivityModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -308,9 +309,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<SocialActivity> list = q.list();
 
@@ -389,9 +390,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -490,9 +491,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					socialActivity);
@@ -549,9 +550,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<SocialActivity> list = q.list();
 
@@ -630,9 +631,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -732,9 +733,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					socialActivity);
@@ -791,9 +792,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<SocialActivity> list = q.list();
 
@@ -872,9 +873,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -973,9 +974,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					socialActivity);
@@ -1055,9 +1056,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, mirrorActivityId);
+				qPos.add(mirrorActivityId);
 
 				List<SocialActivity> list = q.list();
 
@@ -1127,9 +1128,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				List<SocialActivity> list = q.list();
 
@@ -1208,9 +1209,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1310,9 +1311,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, classNameId);
+			qPos.add(classNameId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					socialActivity);
@@ -1369,9 +1370,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, receiverUserId);
+				qPos.add(receiverUserId);
 
 				List<SocialActivity> list = q.list();
 
@@ -1450,9 +1451,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, receiverUserId);
+				qPos.add(receiverUserId);
 
 				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1553,9 +1554,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, receiverUserId);
+			qPos.add(receiverUserId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					socialActivity);
@@ -1620,11 +1621,11 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<SocialActivity> list = q.list();
 
@@ -1707,11 +1708,11 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -1821,11 +1822,11 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, classNameId);
+			qPos.add(classNameId);
 
-			q.setLong(queryPos++, classPK);
+			qPos.add(classPK);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					socialActivity);
@@ -1895,13 +1896,13 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, mirrorActivityId);
+				qPos.add(mirrorActivityId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<SocialActivity> list = q.list();
 
@@ -1992,13 +1993,13 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, mirrorActivityId);
+				qPos.add(mirrorActivityId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				List<SocialActivity> list = (List<SocialActivity>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -2121,13 +2122,13 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, mirrorActivityId);
+			qPos.add(mirrorActivityId);
 
-			q.setLong(queryPos++, classNameId);
+			qPos.add(classNameId);
 
-			q.setLong(queryPos++, classPK);
+			qPos.add(classPK);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					socialActivity);
@@ -2359,9 +2360,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -2425,9 +2426,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -2491,9 +2492,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -2558,9 +2559,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, mirrorActivityId);
+				qPos.add(mirrorActivityId);
 
 				Long count = null;
 
@@ -2624,9 +2625,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
 				Long count = null;
 
@@ -2691,9 +2692,9 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, receiverUserId);
+				qPos.add(receiverUserId);
 
 				Long count = null;
 
@@ -2766,11 +2767,11 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				Long count = null;
 
@@ -2848,13 +2849,13 @@ public class SocialActivityPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, mirrorActivityId);
+				qPos.add(mirrorActivityId);
 
-				q.setLong(queryPos++, classNameId);
+				qPos.add(classNameId);
 
-				q.setLong(queryPos++, classPK);
+				qPos.add(classPK);
 
 				Long count = null;
 

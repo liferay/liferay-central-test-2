@@ -374,10 +374,10 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<User> list = q.list();
@@ -455,10 +455,10 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
@@ -555,10 +555,10 @@ public class UserPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (uuid != null) {
-				q.setString(queryPos++, uuid);
+				qPos.add(uuid);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, user);
@@ -609,9 +609,9 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<User> list = q.list();
 
@@ -683,9 +683,9 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
 						begin, end);
@@ -776,9 +776,9 @@ public class UserPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, user);
 
@@ -851,9 +851,9 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, contactId);
+				qPos.add(contactId);
 
 				List<User> list = q.list();
 
@@ -940,9 +940,9 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, portraitId);
+				qPos.add(portraitId);
 
 				List<User> list = q.list();
 
@@ -1039,11 +1039,11 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				List<User> list = q.list();
 
@@ -1142,11 +1142,11 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setBoolean(queryPos++, defaultUser);
+				qPos.add(defaultUser);
 
 				List<User> list = q.list();
 
@@ -1222,12 +1222,12 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (password != null) {
-					q.setString(queryPos++, password);
+					qPos.add(password);
 				}
 
 				List<User> list = q.list();
@@ -1311,12 +1311,12 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (password != null) {
-					q.setString(queryPos++, password);
+					qPos.add(password);
 				}
 
 				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
@@ -1424,12 +1424,12 @@ public class UserPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, companyId);
+			qPos.add(companyId);
 
 			if (password != null) {
-				q.setString(queryPos++, password);
+				qPos.add(password);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, user);
@@ -1518,12 +1518,12 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (screenName != null) {
-					q.setString(queryPos++, screenName);
+					qPos.add(screenName);
 				}
 
 				List<User> list = q.list();
@@ -1626,12 +1626,12 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (emailAddress != null) {
-					q.setString(queryPos++, emailAddress);
+					qPos.add(emailAddress);
 				}
 
 				List<User> list = q.list();
@@ -1880,10 +1880,10 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				Long count = null;
@@ -1947,9 +1947,9 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				Long count = null;
 
@@ -2012,9 +2012,9 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, contactId);
+				qPos.add(contactId);
 
 				Long count = null;
 
@@ -2077,9 +2077,9 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, portraitId);
+				qPos.add(portraitId);
 
 				Long count = null;
 
@@ -2149,11 +2149,11 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				Long count = null;
 
@@ -2225,11 +2225,11 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
-				q.setBoolean(queryPos++, defaultUser);
+				qPos.add(defaultUser);
 
 				Long count = null;
 
@@ -2304,12 +2304,12 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (password != null) {
-					q.setString(queryPos++, password);
+					qPos.add(password);
 				}
 
 				Long count = null;
@@ -2385,12 +2385,12 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (screenName != null) {
-					q.setString(queryPos++, screenName);
+					qPos.add(screenName);
 				}
 
 				Long count = null;
@@ -2466,12 +2466,12 @@ public class UserPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, companyId);
+				qPos.add(companyId);
 
 				if (emailAddress != null) {
-					q.setString(queryPos++, emailAddress);
+					qPos.add(emailAddress);
 				}
 
 				Long count = null;

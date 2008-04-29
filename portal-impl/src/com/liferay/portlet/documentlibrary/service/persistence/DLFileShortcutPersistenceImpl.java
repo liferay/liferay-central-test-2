@@ -43,6 +43,7 @@ import com.liferay.portlet.documentlibrary.model.DLFileShortcut;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutImpl;
 import com.liferay.portlet.documentlibrary.model.impl.DLFileShortcutModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -322,10 +323,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<DLFileShortcut> list = q.list();
@@ -404,10 +405,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
@@ -506,10 +507,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
 			if (uuid != null) {
-				q.setString(queryPos++, uuid);
+				qPos.add(uuid);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -563,9 +564,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				List<DLFileShortcut> list = q.list();
 
@@ -638,9 +639,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -736,9 +737,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, folderId);
+			qPos.add(folderId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					dlFileShortcut);
@@ -802,12 +803,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, toFolderId);
+				qPos.add(toFolderId);
 
 				if (toName != null) {
-					q.setString(queryPos++, toName);
+					qPos.add(toName);
 				}
 
 				List<DLFileShortcut> list = q.list();
@@ -892,12 +893,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, toFolderId);
+				qPos.add(toFolderId);
 
 				if (toName != null) {
-					q.setString(queryPos++, toName);
+					qPos.add(toName);
 				}
 
 				List<DLFileShortcut> list = (List<DLFileShortcut>)QueryUtil.list(q,
@@ -1009,12 +1010,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, toFolderId);
+			qPos.add(toFolderId);
 
 			if (toName != null) {
-				q.setString(queryPos++, toName);
+				qPos.add(toName);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1211,10 +1212,10 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (uuid != null) {
-					q.setString(queryPos++, uuid);
+					qPos.add(uuid);
 				}
 
 				Long count = null;
@@ -1279,9 +1280,9 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, folderId);
+				qPos.add(folderId);
 
 				Long count = null;
 
@@ -1357,12 +1358,12 @@ public class DLFileShortcutPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, toFolderId);
+				qPos.add(toFolderId);
 
 				if (toName != null) {
-					q.setString(queryPos++, toName);
+					qPos.add(toName);
 				}
 
 				Long count = null;

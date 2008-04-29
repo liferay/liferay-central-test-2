@@ -39,6 +39,7 @@ import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.spring.hibernate.HibernateUtil;
 import com.liferay.portal.util.PropsUtil;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -294,9 +295,9 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setInteger(queryPos++, size);
+				qPos.add(size);
 
 				List<Image> list = q.list();
 
@@ -374,9 +375,9 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setInteger(queryPos++, size);
+				qPos.add(size);
 
 				List<Image> list = (List<Image>)QueryUtil.list(q, getDialect(),
 						begin, end);
@@ -473,9 +474,9 @@ public class ImagePersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setInteger(queryPos++, size);
+			qPos.add(size);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, image);
 
@@ -655,9 +656,9 @@ public class ImagePersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setInteger(queryPos++, size);
+				qPos.add(size);
 
 				Long count = null;
 

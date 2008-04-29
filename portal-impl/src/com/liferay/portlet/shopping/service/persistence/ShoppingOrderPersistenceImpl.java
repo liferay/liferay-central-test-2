@@ -41,6 +41,7 @@ import com.liferay.portlet.shopping.model.ShoppingOrder;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderImpl;
 import com.liferay.portlet.shopping.model.impl.ShoppingOrderModelImpl;
 
+import com.liferay.util.dao.hibernate.QueryPos;
 import com.liferay.util.dao.hibernate.QueryUtil;
 
 import org.apache.commons.logging.Log;
@@ -307,9 +308,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<ShoppingOrder> list = q.list();
 
@@ -388,9 +389,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				List<ShoppingOrder> list = (List<ShoppingOrder>)QueryUtil.list(q,
 						getDialect(), begin, end);
@@ -489,9 +490,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
 					shoppingOrder);
@@ -575,10 +576,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (number != null) {
-					q.setString(queryPos++, number);
+					qPos.add(number);
 				}
 
 				List<ShoppingOrder> list = q.list();
@@ -669,14 +670,14 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				if (ppPaymentStatus != null) {
-					q.setString(queryPos++, ppPaymentStatus);
+					qPos.add(ppPaymentStatus);
 				}
 
 				List<ShoppingOrder> list = q.list();
@@ -773,14 +774,14 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				if (ppPaymentStatus != null) {
-					q.setString(queryPos++, ppPaymentStatus);
+					qPos.add(ppPaymentStatus);
 				}
 
 				List<ShoppingOrder> list = (List<ShoppingOrder>)QueryUtil.list(q,
@@ -909,14 +910,14 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 			Query q = session.createQuery(query.toString());
 
-			int queryPos = 0;
+			QueryPos qPos = QueryPos.getInstance(q);
 
-			q.setLong(queryPos++, groupId);
+			qPos.add(groupId);
 
-			q.setLong(queryPos++, userId);
+			qPos.add(userId);
 
 			if (ppPaymentStatus != null) {
-				q.setString(queryPos++, ppPaymentStatus);
+				qPos.add(ppPaymentStatus);
 			}
 
 			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc,
@@ -1116,9 +1117,9 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
 				Long count = null;
 
@@ -1187,10 +1188,10 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
 				if (number != null) {
-					q.setString(queryPos++, number);
+					qPos.add(number);
 				}
 
 				Long count = null;
@@ -1276,14 +1277,14 @@ public class ShoppingOrderPersistenceImpl extends BasePersistence
 
 				Query q = session.createQuery(query.toString());
 
-				int queryPos = 0;
+				QueryPos qPos = QueryPos.getInstance(q);
 
-				q.setLong(queryPos++, groupId);
+				qPos.add(groupId);
 
-				q.setLong(queryPos++, userId);
+				qPos.add(userId);
 
 				if (ppPaymentStatus != null) {
-					q.setString(queryPos++, ppPaymentStatus);
+					qPos.add(ppPaymentStatus);
 				}
 
 				Long count = null;
