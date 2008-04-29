@@ -27,7 +27,7 @@
 .portlet-configuration {
 }
 
-.portlet-configuration form:after {
+.portlet-configuration .edit-permissions form:after {
 	clear: both;
 	content: ".";
 	display: block;
@@ -35,19 +35,19 @@
 	visibility: hidden;
 }
 
-.ie .portlet-configuration form {
+.ie .portlet-configuration .edit-permissions form {
 	height: 1%;
 }
 
-.portlet-configuration .assign-permissions {
+.portlet-configuration .edit-permissions .assign-permissions {
 	float: left;
 }
 
-.portlet-configuration .assign-permissions .button-holder {
+.portlet-configuration .edit-permissions .assign-permissions .button-holder {
 	position: relative;
 }
 
-.portlet-configuration .assign-permissions .button-holder .finished {
+.portlet-configuration .edit-permissions .assign-permissions .button-holder .finished {
 	position: absolute;
 	right: 0;
 }
