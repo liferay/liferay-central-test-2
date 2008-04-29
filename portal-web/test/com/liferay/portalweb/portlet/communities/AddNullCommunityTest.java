@@ -22,26 +22,71 @@
 
 package com.liferay.portalweb.portlet.communities;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="CommunitiesTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddNullCommunityTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class CommunitiesTests extends BaseTests {
+public class AddNullCommunityTest extends BaseTestCase {
+	public void testAddNullCommunity() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
 
-	public CommunitiesTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddCommunitiesTest.class);
-		addTestSuite(AddTemporaryCommunityTest.class);
-		addTestSuite(EditCommunityTest.class);
-		addTestSuite(DeleteCommunityTest.class);
-		addTestSuite(AddNullCommunityTest.class);
-		addTestSuite(MergeLayoutsTest.class);
-		addTestSuite(VerifyMergeLayoutsTest.class);
+			try {
+				if (selenium.isElementPresent("//input[@value='Add Community']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//input[@value='Add Community']");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Save']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("Please enter a valid name.")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
