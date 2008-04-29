@@ -42,81 +42,82 @@ boolean rightReorder = GetterUtil.getBoolean((String)request.getAttribute("lifer
 List leftList = (List)request.getAttribute("liferay-ui:input-move-boxes:leftList");
 List rightList = (List)request.getAttribute("liferay-ui:input-move-boxes:rightList");
 %>
+<div class="taglib-move-boxes">
+	<table class="lfr-table">
+	<tr>
+		<td>
+			<b class="category-header"><%= leftTitle %></b>
 
-<table class="lfr-table">
-<tr>
-	<td>
-		<b><%= leftTitle %></b>
+			<table>
+			<tr>
+				<td>
+					<select class="choice-selector" multiple name="<%= leftBoxName %>" size="10" <%= Validator.isNotNull(leftOnChange) ? "onChange=\"" + leftOnChange + "\"" : "" %> onFocus="document.<%= formName %>.<%= rightBoxName %>.selectedIndex = '-1';">
 
-		<table>
-		<tr>
-			<td>
-				<select multiple name="<%= leftBoxName %>" size="10" <%= Validator.isNotNull(leftOnChange) ? "onChange=\"" + leftOnChange + "\"" : "" %> onFocus="document.<%= formName %>.<%= rightBoxName %>.selectedIndex = '-1';">
+					<%
+					for (int i = 0; i < leftList.size(); i++) {
+						KeyValuePair kvp = (KeyValuePair)leftList.get(i);
+					%>
 
-				<%
-				for (int i = 0; i < leftList.size(); i++) {
-					KeyValuePair kvp = (KeyValuePair)leftList.get(i);
-				%>
+						<option value="<%= kvp.getKey() %>"><%= kvp.getValue() %></option>
 
-					<option value="<%= kvp.getKey() %>"><%= kvp.getValue() %></option>
+					<%
+					}
+					%>
 
-				<%
-				}
-				%>
-
-				</select>
-			</td>
-
-			<c:if test="<%= leftReorder %>">
-				<td valign="top">
-					<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
-
-					<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
+					</select>
 				</td>
-			</c:if>
 
-		</tr>
-		</table>
-	</td>
-	<td>
-		<a href="javascript: Liferay.Util.moveItem(document.<%= formName %>.<%= leftBoxName %>, document.<%= formName %>.<%= rightBoxName %>, <%= !rightReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_right.png" vspace="2" width="16" onClick="self.focus();" /></a>
+				<c:if test="<%= leftReorder %>">
+					<td valign="top">
+						<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
 
-		<br /><br />
+						<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= leftBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
+					</td>
+				</c:if>
 
-		<a href="javascript: Liferay.Util.moveItem(document.<%= formName %>.<%= rightBoxName %>, document.<%= formName %>.<%= leftBoxName %>, <%= !leftReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_left.png" vspace="2" width="16" onClick="self.focus();" /></a>
-	</td>
-	<td>
-		<b><%= rightTitle %></b>
+			</tr>
+			</table>
+		</td>
+		<td>
+			<a href="javascript: Liferay.Util.moveItem(document.<%= formName %>.<%= leftBoxName %>, document.<%= formName %>.<%= rightBoxName %>, <%= !rightReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_right.png" vspace="2" width="16" onClick="self.focus();" /></a>
 
-		<table>
-		<tr>
-			<td>
-				<select multiple name="<%= rightBoxName %>" size="10" <%= Validator.isNotNull(rightOnChange) ? "onChange=\"" + rightOnChange + "\"" : "" %> onFocus="document.<%= formName %>.<%= leftBoxName %>.selectedIndex = '-1';">
+			<br /><br />
 
-				<%
-				for (int i = 0; i < rightList.size(); i++) {
-					KeyValuePair kvp = (KeyValuePair)rightList.get(i);
-				%>
+			<a href="javascript: Liferay.Util.moveItem(document.<%= formName %>.<%= rightBoxName %>, document.<%= formName %>.<%= leftBoxName %>, <%= !leftReorder %>);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_left.png" vspace="2" width="16" onClick="self.focus();" /></a>
+		</td>
+		<td>
+			<b class="category-header"><%= rightTitle %></b>
 
-					<option value="<%= kvp.getKey() %>"><%= kvp.getValue() %></option>
+			<table>
+			<tr>
+				<td>
+					<select class="choice-selector" multiple name="<%= rightBoxName %>" size="10" <%= Validator.isNotNull(rightOnChange) ? "onChange=\"" + rightOnChange + "\"" : "" %> onFocus="document.<%= formName %>.<%= leftBoxName %>.selectedIndex = '-1';">
 
-				<%
-				}
-				%>
+					<%
+					for (int i = 0; i < rightList.size(); i++) {
+						KeyValuePair kvp = (KeyValuePair)rightList.get(i);
+					%>
 
-				</select>
-			</td>
+						<option value="<%= kvp.getKey() %>"><%= kvp.getValue() %></option>
 
-			<c:if test="<%= rightReorder %>">
-				<td valign="top">
-					<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
+					<%
+					}
+					%>
 
-					<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
+					</select>
 				</td>
-			</c:if>
 
-		</tr>
-		</table>
-	</td>
-</tr>
-</table>
+				<c:if test="<%= rightReorder %>">
+					<td valign="top">
+						<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 0);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_up.png" vspace="2" width="16" /></a><br />
+
+						<a href="javascript: Liferay.Util.reorder(document.<%= formName %>.<%= rightBoxName %>, 1);"><img border="0" height="16" hspace="0" src="<%= themeDisplay.getPathThemeImages() %>/arrows/02_down.png" vspace="2" width="16" /></a>
+					</td>
+				</c:if>
+
+			</tr>
+			</table>
+		</td>
+	</tr>
+	</table>
+</div>

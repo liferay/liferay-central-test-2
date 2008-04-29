@@ -1556,6 +1556,11 @@ weeks-on=week(s) on:
 weeks=Các tuần
 welcome-x=Welcome{0}!
 welcome=Chào mừng
+
+
+##
+## Currency
+##
 when=Khi
 whois=Whois
 wide-column=Cột rộng
@@ -1671,10 +1676,6 @@ your-trash-folder-is-taking-up-a-lot-of-space=Thùng rác của bạn chiếm nh
 zh_en=Chinese (China) to English
 zip=Zip
 zt_en=Chinese (Taiwan) to English
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

@@ -2517,6 +2517,11 @@ weeks-on=اسبوع / أسابيع  في :
 weeks=أسابيع
 welcome-x=Welcome{0}!
 welcome=مرحبا
+
+
+##
+## Currency
+##
 when=متى
 whois=من هو
 wide-column=العمود العريض
@@ -2687,10 +2692,6 @@ zh_en=صيني إلى الإنجليزي
 zip-postal=الرمز البريدي
 zip=الرمز البريدي
 zt_en=تايواني إلى إنجليزي
-
-##
-## Currency
-##
 
 currency.AED=درهم اماراتي
 currency.ALL=ليك ألباني

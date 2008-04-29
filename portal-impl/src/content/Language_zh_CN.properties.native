@@ -3347,6 +3347,17 @@ weeks-on=周:
 weeks=几星期
 welcome-x=Welcome{0}!
 welcome=欢迎
+what-he-can-do=什么他能做
+what-he-cant-do=什么他无法做
+what-she-can-do=什么她能做
+what-she-cant-do=什么她无法做
+what-they-can-do=什么他们能做
+what-they-cant-do=什么他们无法做
+
+
+##
+## Currency
+##
 what-type-of-permissions-would-you-like-to-add=什么样的允许您要不要增加?
 what-would-you-like-to-copy-from-live-or-publish-to-live=您要复制从活或出版什么居住?
 what-would-you-like-to-export=您要出口什么?
@@ -3564,10 +3575,6 @@ zh_en=中文(中国) 对英语
 zip-postal=Zip/Postal
 zip=邮递区号
 zt_en=中文(台湾) 对英语
-
-##
-## Currency
-##
 
 currency.AED=阿拉伯联合酋长国迪拉姆
 currency.ALL=阿尔巴尼亚列克

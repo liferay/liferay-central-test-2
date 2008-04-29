@@ -3347,6 +3347,17 @@ weeks-on=week(s):
 weeks=週
 welcome-x=Welcome{0}!
 welcome=歓迎
+what-he-can-do=彼がことができる何をする
+what-he-cant-do=彼がことができない何をする
+what-she-can-do=彼女がことができる何をする
+what-she-cant-do=彼女がことができない何をする
+what-they-can-do=ことができる何をする
+what-they-cant-do=ことができない何をする
+
+
+##
+## Currency
+##
 what-type-of-permissions-would-you-like-to-add=どのような許可を加えたいと思うか。
 what-would-you-like-to-copy-from-live-or-publish-to-live=何を出版し生きているからコピーするか、または住むためにたいと思うか。
 what-would-you-like-to-export=何を輸出したいと思うか。
@@ -3564,10 +3575,6 @@ zh_en=中国語から英語
 zip-postal=Zip/Postal
 zip=ジッパー
 zt_en=英語への中国語(台湾)
-
-##
-## Currency
-##
 
 currency.AED=アラブ首長国連邦のディルハム
 currency.ALL=アルバニアのLek

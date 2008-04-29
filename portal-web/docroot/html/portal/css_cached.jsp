@@ -911,6 +911,36 @@ li.toggle-expand a {
 	margin-bottom: 1.5em;
 }
 
+/* ---------- Edit permissions ---------- */
+
+.portlet-edit-permissions {
+}
+
+.portlet-edit-permissions form:after {
+	clear: both;
+	content: ".";
+	display: block;
+	height: 0;
+	visibility: hidden;
+}
+
+.ie .portlet-edit-permissions form {
+	height: 1%;
+}
+
+.portlet-edit-permissions .assign-permissions {
+	float: left;
+}
+
+.portlet-edit-permissions .assign-permissions .button-holder {
+	position: relative;
+}
+
+.portlet-edit-permissions .assign-permissions .button-holder .finished {
+	position: absolute;
+	right: 0;
+}
+
 /* ---------- Liferay forms ---------- */
 
 .lfr-input-text {
@@ -1139,6 +1169,27 @@ li.toggle-expand a {
 
 .ie .taglib-icon-list {
 	height: 1%;
+}
+
+/* ---------- Taglib input move boxes ---------- */
+
+.taglib-move-boxes {
+}
+
+.taglib-move-boxes .choice-selector {
+	min-width: 150px;
+}
+
+.ie .taglib-move-boxes .choice-selector {
+	width: expression(this.currentStyle.getAttribute('minWidth') || 150 + 'px');
+}
+
+.taglib-move-boxes .category-header {
+	background: #ebf1f9;
+	border-bottom: 1px solid #8db2f3;
+	display: block;
+	margin-bottom: 5px;
+	padding: 5px;
 }
 
 /* ---------- Taglib search iterator ---------- */

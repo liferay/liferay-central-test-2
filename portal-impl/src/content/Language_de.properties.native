@@ -3347,6 +3347,17 @@ weeks-on=Woche(n) an:
 weeks=Wochen
 welcome-x=Welcome{0}!
 welcome=Willkommen
+what-he-can-do=Was Er Tun Kann
+what-he-cant-do=Was Er Nicht Tun Kann
+what-she-can-do=Was Sie Tun Kann
+what-she-cant-do=Was Sie Nicht Tun Kann
+what-they-can-do=Was Sie Tun Können
+what-they-cant-do=Was Sie Nicht Tun Können
+
+
+##
+## Currency
+##
 what-type-of-permissions-would-you-like-to-add=Welche Art von Erlaubnis möchten Sie hinzufügen?
 what-would-you-like-to-copy-from-live-or-publish-to-live=Was möchten Sie von "Live" kopieren oder nach "Live" veröffentlichen?
 what-would-you-like-to-export=Was möchten Sie exportieren?
@@ -3564,10 +3575,6 @@ zh_en=Chinesisch (China) zu Englisch
 zip-postal=PLZ/Postadresse
 zip=PLZ
 zt_en=Chinesisch (Taiwan) zu Englisch
-
-##
-## Currency
-##
 
 currency.AED=Arabische Dirham
 currency.ALL=Albanischer Lek

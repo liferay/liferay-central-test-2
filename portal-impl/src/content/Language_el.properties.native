@@ -3347,6 +3347,17 @@ weeks-on=εβδομάδες λειτουργίας:
 weeks=Εβδομάδες
 welcome-x=Welcome{0}!
 welcome=Καλώς Ήλθατε
+what-he-can-do=Τι μπορεί να κάνει
+what-he-cant-do=Τι δεν μπορεί να κάνει
+what-she-can-do=Τι μπορεί να κάνει
+what-she-cant-do=Τι δεν μπορεί να κάνει
+what-they-can-do=Τι μπορούν να κάνουν
+what-they-cant-do=Τι δεν μπορούν να κάνουν
+
+
+##
+## Currency
+##
 what-type-of-permissions-would-you-like-to-add=Ποιο τύπο αδειών θα επιθυμούσατε να προσθέσετε;
 what-would-you-like-to-copy-from-live-or-publish-to-live=Τι θα επιθυμούσατε να αντιγράψετε από ζωντανό ή να δημοσιεύσετε για να ζήσετε;
 what-would-you-like-to-export=Τι θα επιθυμούσατε να εξαγάγετε;
@@ -3564,10 +3575,6 @@ zh_en=Κινέζικα σε Αγγλικά
 zip-postal=Φερμουάρ/ταχυδρομικός
 zip=Τ.Κ.
 zt_en=Κινέζικα (Ταϊβάν) στα αγγλικά
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Lek Αλβανίας

@@ -228,353 +228,402 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	}
 </script>
 
-<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
-<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
-<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="" />
-<input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>" />
-<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
+<div class="portlet-edit-permissions">
+	<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
+	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
+	<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="" />
+	<input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>" />
+	<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
 
-<c:choose>
-	<c:when test="<%= Validator.isNull(modelResource) %>">
-		<liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
-			<liferay-util:param name="tabs1" value="permissions" />
-		</liferay-util:include>
-	</c:when>
-	<c:otherwise>
-		<div>
-			<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(redirect) %>"><%= selResourceDescription %></a>
-		</div>
+	<c:choose>
+		<c:when test="<%= Validator.isNull(modelResource) %>">
+			<liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
+				<liferay-util:param name="tabs1" value="permissions" />
+			</liferay-util:include>
+		</c:when>
+		<c:otherwise>
+			<div>
+				<liferay-ui:message key="edit-permissions-for" /> <%= selResourceName %>: <a href="<%= HtmlUtil.escape(redirect) %>"><%= selResourceDescription %></a>
+			</div>
 
-		<br />
-	</c:otherwise>
-</c:choose>
+			<br />
+		</c:otherwise>
+	</c:choose>
 
-<%
-String tabs2Names = "users,organizations,user-groups,regular-roles,community-roles,community,guest";
+	<%
+	String tabs2Names = "users,organizations,user-groups,regular-roles,community-roles,community,guest";
 
-if (ResourceActionsUtil.isPortalModelResource(modelResource)) {
-	tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
-	tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
-	tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
-}
-else if (modelResource.equals(Layout.class.getName())) {
-	Group group = GroupLocalServiceUtil.getGroup(groupId);
-
-	// User layouts should not have community assignments
-
-	if (group.isUser()) {
+	if (ResourceActionsUtil.isPortalModelResource(modelResource)) {
 		tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
 		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
-	}
-	else if (group.isOrganization()) {
-		tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
-		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
-	}
-
-	// Private layouts should not have guest assignments
-
-	if (selLayout.isPrivateLayout()) {
 		tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
 	}
-}
-else {
-	Group group = GroupLocalServiceUtil.getGroup(groupId);
+	else if (modelResource.equals(Layout.class.getName())) {
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
-	if (group.isUser()) {
-		tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
-		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+		// User layouts should not have community assignments
+
+		if (group.isUser()) {
+			tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+		}
+		else if (group.isOrganization()) {
+			tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
+			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
+		}
+
+		// Private layouts should not have guest assignments
+
+		if (selLayout.isPrivateLayout()) {
+			tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
+		}
 	}
-	else if (group.isOrganization()) {
-		tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
-		tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
+	else {
+		Group group = GroupLocalServiceUtil.getGroup(groupId);
+
+		if (group.isUser()) {
+			tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
+			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
+		}
+		else if (group.isOrganization()) {
+			tabs2Names = StringUtil.replace(tabs2Names, "community,", "organization,");
+			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", "organization-roles,");
+		}
 	}
-}
-%>
+	%>
 
-<c:choose>
-	<c:when test="<%= Validator.isNull(modelResource) %>">
-		<liferay-ui:tabs
-			names="<%= tabs2Names %>"
-			param="tabs2"
-			url="<%= portletURL.toString() %>"
-		/>
-	</c:when>
-	<c:otherwise>
-		<liferay-ui:tabs
-			names="<%= tabs2Names %>"
-			param="tabs2"
-			url="<%= portletURL.toString() %>"
-			backURL="<%= redirect %>"
-		/>
-	</c:otherwise>
-</c:choose>
+	<c:choose>
+		<c:when test="<%= Validator.isNull(modelResource) %>">
+			<liferay-ui:tabs
+				names="<%= tabs2Names %>"
+				param="tabs2"
+				url="<%= portletURL.toString() %>"
+			/>
+		</c:when>
+		<c:otherwise>
+			<liferay-ui:tabs
+				names="<%= tabs2Names %>"
+				param="tabs2"
+				url="<%= portletURL.toString() %>"
+				backURL="<%= redirect %>"
+			/>
+		</c:otherwise>
+	</c:choose>
 
 
-<c:choose>
-	<c:when test='<%= tabs2.equals("users") %>'>
+	<c:choose>
+		<c:when test='<%= tabs2.equals("users") %>'>
 
-		<%
-		String userIds = ParamUtil.getString(request, "userIds");
-		long[] userIdsArray = StringUtil.split(userIds, 0L);
-		int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
-		%>
+			<%
+			String userIds = ParamUtil.getString(request, "userIds");
+			long[] userIdsArray = StringUtil.split(userIds, 0L);
+			int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
+			%>
 
-		<input name="<portlet:namespace />userIds" type="hidden" value="<%= userIds %>" />
-		<input name="<portlet:namespace />userIdsPos" type="hidden" value="<%= userIdsPos %>" />
-		<input name="<portlet:namespace />userIdsPosValue" type="hidden" value="" />
-		<input name="<portlet:namespace />userIdActionIds" type="hidden" value="" />
+			<input name="<portlet:namespace />userIds" type="hidden" value="<%= userIds %>" />
+			<input name="<portlet:namespace />userIdsPos" type="hidden" value="<%= userIdsPos %>" />
+			<input name="<portlet:namespace />userIdsPosValue" type="hidden" value="" />
+			<input name="<portlet:namespace />userIdActionIds" type="hidden" value="" />
 
-		<c:choose>
-			<c:when test="<%= userIdsArray.length == 0 %>">
-				<liferay-ui:tabs
-					names="current,available"
-					param="tabs3"
-					url="<%= portletURL.toString() %>"
-				/>
+			<c:choose>
+				<c:when test="<%= userIdsArray.length == 0 %>">
+					<liferay-ui:tabs
+						names="current,available"
+						param="tabs3"
+						url="<%= portletURL.toString() %>"
+					/>
 
-				<%
-				UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
+					<%
+					UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
 
-				searchContainer.setRowChecker(new RowChecker(renderResponse));
-				%>
+					searchContainer.setRowChecker(new RowChecker(renderResponse));
+					%>
 
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/user_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
+					<liferay-ui:search-form
+						page="/html/portlet/enterprise_admin/user_search.jsp"
+						searchContainer="<%= searchContainer %>"
+					/>
 
-				<%
-				UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+					<%
+					UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-				LinkedHashMap userParams = new LinkedHashMap();
+					LinkedHashMap userParams = new LinkedHashMap();
 
-				if (tabs3.equals("current")) {
-					userParams.put("permission", new Long(resource.getResourceId()));
-				}
-				else if (tabs3.equals("available") && modelResource.equals(Layout.class.getName())) {
-					userParams.put("usersGroups", new Long(groupId));
-				}
-				%>
+					if (tabs3.equals("current")) {
+						userParams.put("permission", new Long(resource.getResourceId()));
+					}
+					else if (tabs3.equals("available") && modelResource.equals(Layout.class.getName())) {
+						userParams.put("usersGroups", new Long(groupId));
+					}
+					%>
 
-				<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
+					<%@ include file="/html/portlet/enterprise_admin/user_search_results.jspf" %>
 
-				<div class="separator"><!-- --></div>
+					<div class="separator"><!-- --></div>
 
-				<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();" />
+					<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserPermissions();" />
 
-				<br /><br />
+					<br /><br />
 
-				<%
-				List headerNames = new ArrayList();
+					<%
+					List headerNames = new ArrayList();
 
-				headerNames.add("name");
-				headerNames.add("screen-name");
-				//headerNames.add("email-address");
-				headerNames.add("permissions");
+					headerNames.add("name");
+					headerNames.add("screen-name");
+					//headerNames.add("email-address");
+					headerNames.add("permissions");
 
-				searchContainer.setHeaderNames(headerNames);
+					searchContainer.setHeaderNames(headerNames);
 
-				List resultRows = searchContainer.getResultRows();
+					List resultRows = searchContainer.getResultRows();
 
-				for (int i = 0; i < results.size(); i++) {
-					User user2 = (User)results.get(i);
+					for (int i = 0; i < results.size(); i++) {
+						User user2 = (User)results.get(i);
 
-					ResultRow row = new ResultRow(user2, user2.getUserId(), i);
+						ResultRow row = new ResultRow(user2, user2.getUserId(), i);
 
-					// Name, screen name, and email address
+						// Name, screen name, and email address
 
-					row.addText(user2.getFullName());
-					row.addText(user2.getScreenName());
-					//row.addText(user2.getEmailAddress());
+						row.addText(user2.getFullName());
+						row.addText(user2.getScreenName());
+						//row.addText(user2.getEmailAddress());
 
-					// Permissions
+						// Permissions
 
+						List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resource.getResourceId());
+
+						List actions = ResourceActionsUtil.getActions(permissions);
+						List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+
+						row.addText(StringUtil.merge(actionsNames, ", "));
+
+						// Add result row
+
+						resultRows.add(row);
+					}
+					%>
+
+					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				</c:when>
+				<c:otherwise>
+
+					<%
+					User user2 = UserLocalServiceUtil.getUserById(userIdsArray[userIdsPos]);
+					%>
+
+					<liferay-ui:tabs names="<%= user2.getFullName() %>" />
+
+					<%
 					List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resource.getResourceId());
 
-					List actions = ResourceActionsUtil.getActions(permissions);
-					List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+					List actions2 = ResourceActionsUtil.getActions(permissions);
 
-					row.addText(StringUtil.merge(actionsNames, ", "));
+					// Left list
 
-					// Add result row
+					List leftList = new ArrayList();
 
-					resultRows.add(row);
-				}
-				%>
+					for (int i = 0; i < actions2.size(); i++) {
+						String actionId = (String)actions2.get(i);
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:otherwise>
-
-				<%
-				User user2 = UserLocalServiceUtil.getUserById(userIdsArray[userIdsPos]);
-				%>
-
-				<liferay-ui:tabs names="<%= user2.getFullName() %>" />
-
-				<%
-				List permissions = PermissionLocalServiceUtil.getUserPermissions(user2.getUserId(), resource.getResourceId());
-
-				List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
-				List actions2 = ResourceActionsUtil.getActions(permissions);
-
-				// Left list
-
-				List leftList = new ArrayList();
-
-				for (int i = 0; i < actions2.size(); i++) {
-					String actionId = (String)actions2.get(i);
-
-					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
-				}
-
-				Collections.sort(leftList, new KeyValuePairComparator(false, true));
-
-				// Right list
-
-				List rightList = new ArrayList();
-
-				for (int i = 0; i < actions1.size(); i++) {
-					String actionId = (String)actions1.get(i);
-
-					if (!actions2.contains(actionId)) {
-						rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
-				}
 
-				Collections.sort(rightList, new KeyValuePairComparator(false, true));
-				%>
+					Collections.sort(leftList, new KeyValuePairComparator(false, true));
 
-				<liferay-ui:input-move-boxes
-					leftTitle="current"
-					rightTitle="available"
-					leftBoxName="current_actions"
-					rightBoxName="available_actions"
-					leftList="<%= leftList %>"
-					rightList="<%= rightList %>"
-				/>
+					// Right list
 
-				<br />
+					List rightList = new ArrayList();
 
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td>
-						<input <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+					for (int i = 0; i < actions1.size(); i++) {
+						String actionId = (String)actions1.get(i);
 
-						<input <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
-					</td>
-					<td align="right">
-						<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');" />
-					</td>
-				</tr>
-				</table>
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:when test='<%= tabs2.equals("organizations") %>'>
-
-		<%
-		String organizationIds = ParamUtil.getString(request, "organizationIds");
-		long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
-		int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
-		%>
-
-		<input name="<portlet:namespace />organizationIds" type="hidden" value="<%= organizationIds %>" />
-		<input name="<portlet:namespace />organizationIdsPos" type="hidden" value="<%= organizationIdsPos %>" />
-		<input name="<portlet:namespace />organizationIdsPosValue" type="hidden" value="" />
-		<input name="<portlet:namespace />organizationIdActionIds" type="hidden" value="" />
-
-		<c:choose>
-			<c:when test="<%= organizationIdsArray.length == 0 %>">
-				<liferay-ui:tabs
-					names="current,available"
-					param="tabs3"
-					url="<%= portletURL.toString() %>"
-				/>
-
-				<%
-				OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
-
-				searchContainer.setRowChecker(new RowChecker(renderResponse));
-				%>
-
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/organization_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
-
-				<%
-				OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
-
-				long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
-
-				LinkedHashMap organizationParams = new LinkedHashMap();
-
-				if (tabs3.equals("current")) {
-					organizationParams.put("permissionsResourceId", new Long(resource.getResourceId()));
-					organizationParams.put("permissionsGroupId", new Long(groupId));
-				}
-				%>
-
-				<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
-
-				<div class="separator"><!-- --></div>
-
-				<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateOrganizationPermissions();" />
-
-				<br /><br />
-
-				<%
-				List headerNames = new ArrayList();
-
-				headerNames.add("name");
-				headerNames.add("parent-organization");
-				headerNames.add("type");
-				headerNames.add("city");
-				headerNames.add("permissions");
-				//headerNames.add("exclusive");
-
-				searchContainer.setHeaderNames(headerNames);
-
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					Organization organization = (Organization)results.get(i);
-
-					ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
-
-					// Name
-
-					row.addText(organization.getName());
-
-					// Parent organization
-
-					String parentOrganizationName = StringPool.BLANK;
-
-					if (organization.getParentOrganizationId() > 0) {
-						try {
-							Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
-
-							parentOrganizationName = parentOrganization.getName();
-						}
-						catch (Exception e) {
+						if (!actions2.contains(actionId)) {
+							rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 						}
 					}
 
-					row.addText(parentOrganizationName);
+					Collections.sort(rightList, new KeyValuePairComparator(false, true));
+				
+					String currentPermissionsText = "what-they-can-do";
+					String availablePermissionsText = "what-they-cant-do";
+				
+					if (user2.isMale()) {
+						currentPermissionsText = "what-he-can-do";
+						availablePermissionsText = "what-he-cant-do";
+					} else if (user2.isFemale()) {
+						currentPermissionsText = "what-she-can-do";
+						availablePermissionsText = "what-she-cant-do";
+					}
+					%>
 
-					// Type
+					<div class="assign-permissions">
+						<liferay-ui:input-move-boxes
+							leftTitle="<%= currentPermissionsText %>"
+							rightTitle="<%= availablePermissionsText %>"
+							leftBoxName="current_actions"
+							rightBoxName="available_actions"
+							leftList="<%= leftList %>"
+							rightList="<%= rightList %>"
+						/>
 
-					row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
+					<br />
 
-					// City
+					<div class="button-holder">
+						<input class="previous" <%= userIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos - 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+						<input class="next" <%= userIdsPos + 1 < userIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserPermissions(<%= userIdsPos + 1 %>, '<%= userIdsArray[userIdsPos] %>');">
+						<input class="finished" type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserPermissions(-1, '<%= userIdsArray[userIdsPos] %>');" />
+					</div>
 
-					Address address = organization.getAddress();
+					</div>
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:when test='<%= tabs2.equals("organizations") %>'>
 
-					row.addText(address.getCity());
+			<%
+			String organizationIds = ParamUtil.getString(request, "organizationIds");
+			long[] organizationIdsArray = StringUtil.split(organizationIds, 0L);
+			int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
+			%>
 
-					// Permissions
+			<input name="<portlet:namespace />organizationIds" type="hidden" value="<%= organizationIds %>" />
+			<input name="<portlet:namespace />organizationIdsPos" type="hidden" value="<%= organizationIdsPos %>" />
+			<input name="<portlet:namespace />organizationIdsPosValue" type="hidden" value="" />
+			<input name="<portlet:namespace />organizationIdActionIds" type="hidden" value="" />
 
+			<c:choose>
+				<c:when test="<%= organizationIdsArray.length == 0 %>">
+					<liferay-ui:tabs
+						names="current,available"
+						param="tabs3"
+						url="<%= portletURL.toString() %>"
+					/>
+
+					<%
+					OrganizationSearch searchContainer = new OrganizationSearch(renderRequest, portletURL);
+
+					searchContainer.setRowChecker(new RowChecker(renderResponse));
+					%>
+
+					<liferay-ui:search-form
+						page="/html/portlet/enterprise_admin/organization_search.jsp"
+						searchContainer="<%= searchContainer %>"
+					/>
+
+					<%
+					OrganizationSearchTerms searchTerms = (OrganizationSearchTerms)searchContainer.getSearchTerms();
+
+					long parentOrganizationId = OrganizationConstants.ANY_PARENT_ORGANIZATION_ID;
+
+					LinkedHashMap organizationParams = new LinkedHashMap();
+
+					if (tabs3.equals("current")) {
+						organizationParams.put("permissionsResourceId", new Long(resource.getResourceId()));
+						organizationParams.put("permissionsGroupId", new Long(groupId));
+					}
+					%>
+
+					<%@ include file="/html/portlet/enterprise_admin/organization_search_results.jspf" %>
+
+					<div class="separator"><!-- --></div>
+
+					<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateOrganizationPermissions();" />
+
+					<br /><br />
+
+					<%
+					List headerNames = new ArrayList();
+
+					headerNames.add("name");
+					headerNames.add("parent-organization");
+					headerNames.add("type");
+					headerNames.add("city");
+					headerNames.add("permissions");
+					//headerNames.add("exclusive");
+
+					searchContainer.setHeaderNames(headerNames);
+
+					List resultRows = searchContainer.getResultRows();
+
+					for (int i = 0; i < results.size(); i++) {
+						Organization organization = (Organization)results.get(i);
+
+						ResultRow row = new ResultRow(organization, organization.getOrganizationId(), i);
+
+						// Name
+
+						row.addText(organization.getName());
+
+						// Parent organization
+
+						String parentOrganizationName = StringPool.BLANK;
+
+						if (organization.getParentOrganizationId() > 0) {
+							try {
+								Organization parentOrganization = OrganizationLocalServiceUtil.getOrganization(organization.getParentOrganizationId());
+
+								parentOrganizationName = parentOrganization.getName();
+							}
+							catch (Exception e) {
+							}
+						}
+
+						row.addText(parentOrganizationName);
+
+						// Type
+
+						row.addText(LanguageUtil.get(pageContext, organization.getTypeLabel()));
+
+						// City
+
+						Address address = organization.getAddress();
+
+						row.addText(address.getCity());
+
+						// Permissions
+
+						//boolean organizationIntersection = false;
+
+						List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
+
+						/*if (permissions.size() == 0) {
+							permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), groupId, resource.getResourceId());
+
+							if (permissions.size() > 0) {
+								organizationIntersection = true;
+							}
+						}*/
+
+						List actions = ResourceActionsUtil.getActions(permissions);
+						List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+
+						row.addText(StringUtil.merge(actionsNames, ", "));
+
+						/*if (permissions.size() == 0) {
+							row.addText(StringPool.BLANK);
+						}
+						else {
+							row.addText(LanguageUtil.get(pageContext, (organizationIntersection ? "yes" : "no")));
+						}*/
+
+						// Add result row
+
+						resultRows.add(row);
+					}
+					%>
+
+					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				</c:when>
+				<c:otherwise>
+
+					<%
+					Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationIdsArray[organizationIdsPos]);
+					%>
+
+					<liferay-ui:tabs names="<%= HtmlUtil.escape(organization.getName()) %>" />
+
+					<%
 					//boolean organizationIntersection = false;
 
 					List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
@@ -587,683 +636,643 @@ else {
 						}
 					}*/
 
-					List actions = ResourceActionsUtil.getActions(permissions);
-					List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+					List actions2 = ResourceActionsUtil.getActions(permissions);
 
-					row.addText(StringUtil.merge(actionsNames, ", "));
+					// Left list
 
-					/*if (permissions.size() == 0) {
-						row.addText(StringPool.BLANK);
+					List leftList = new ArrayList();
+
+					for (int i = 0; i < actions2.size(); i++) {
+						String actionId = (String)actions2.get(i);
+
+						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
-					else {
-						row.addText(LanguageUtil.get(pageContext, (organizationIntersection ? "yes" : "no")));
-					}*/
 
-					// Add result row
+					Collections.sort(leftList, new KeyValuePairComparator(false, true));
 
-					resultRows.add(row);
-				}
-				%>
+					// Right list
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:otherwise>
+					List rightList = new ArrayList();
 
-				<%
-				Organization organization = OrganizationLocalServiceUtil.getOrganization(organizationIdsArray[organizationIdsPos]);
-				%>
+					for (int i = 0; i < actions1.size(); i++) {
+						String actionId = (String)actions1.get(i);
 
-				<liferay-ui:tabs names="<%= HtmlUtil.escape(organization.getName()) %>" />
-
-				<%
-				//boolean organizationIntersection = false;
-
-				List permissions = PermissionLocalServiceUtil.getGroupPermissions(organization.getGroup().getGroupId(), resource.getResourceId());
-
-				/*if (permissions.size() == 0) {
-					permissions = PermissionLocalServiceUtil.getOrgGroupPermissions(organization.getOrganizationId(), groupId, resource.getResourceId());
-
-					if (permissions.size() > 0) {
-						organizationIntersection = true;
+						if (!actions2.contains(actionId)) {
+							rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+						}
 					}
-				}*/
 
-				List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
-				List actions2 = ResourceActionsUtil.getActions(permissions);
+					Collections.sort(rightList, new KeyValuePairComparator(false, true));
+					%>
 
-				// Left list
+					<liferay-ui:input-move-boxes
+						formName="fm"
+						leftTitle="current"
+						rightTitle="available"
+						leftBoxName="current_actions"
+						rightBoxName="available_actions"
+						leftList="<%= leftList %>"
+						rightList="<%= rightList %>"
+					/>
 
-				List leftList = new ArrayList();
+					<br />
 
-				for (int i = 0; i < actions2.size(); i++) {
-					String actionId = (String)actions2.get(i);
+					<%--<table class="lfr-table">
+					<tr>
+						<td>
+							<liferay-ui:message key="assign-permissions-only-to-users-that-are-also-members-of-the-current-community" />
+						</td>
+						<td>
+							<select name="<portlet:namespace />organizationIntersection">
+								<option <%= organizationIntersection ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
+								<option <%= !organizationIntersection ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
+							</select>
+						</td>
+					</tr>
+					</table>
 
-					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
-				}
+					<br />--%>
 
-				Collections.sort(leftList, new KeyValuePairComparator(false, true));
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td>
+							<input <%= organizationIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos - 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
 
-				// Right list
+							<input <%= organizationIdsPos + 1 < organizationIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos + 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
+						</td>
+						<td align="right">
+							<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');" />
+						</td>
+					</tr>
+					</table>
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:when test='<%= tabs2.equals("user-groups") %>'>
 
-				List rightList = new ArrayList();
+			<%
+			String userGroupIds = ParamUtil.getString(request, "userGroupIds");
+			long[] userGroupIdsArray = StringUtil.split(userGroupIds, 0L);
+			int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
+			%>
 
-				for (int i = 0; i < actions1.size(); i++) {
-					String actionId = (String)actions1.get(i);
+			<input name="<portlet:namespace />userGroupIds" type="hidden" value="<%= userGroupIds %>" />
+			<input name="<portlet:namespace />userGroupIdsPos" type="hidden" value="<%= userGroupIdsPos %>" />
+			<input name="<portlet:namespace />userGroupIdsPosValue" type="hidden" value="" />
+			<input name="<portlet:namespace />userGroupIdActionIds" type="hidden" value="" />
 
-					if (!actions2.contains(actionId)) {
-						rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+			<c:choose>
+				<c:when test="<%= userGroupIdsArray.length == 0 %>">
+					<liferay-ui:tabs
+						names="current,available"
+						param="tabs3"
+						url="<%= portletURL.toString() %>"
+					/>
+
+					<%
+					UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
+
+					searchContainer.setRowChecker(new RowChecker(renderResponse));
+					%>
+
+					<liferay-ui:search-form
+						page="/html/portlet/enterprise_admin/user_group_search.jsp"
+						searchContainer="<%= searchContainer %>"
+					/>
+
+					<%
+					UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+
+					LinkedHashMap userGroupParams = new LinkedHashMap();
+
+					if (tabs3.equals("current")) {
+						userGroupParams.put("permissionsResourceId", new Long(resource.getResourceId()));
 					}
-				}
 
-				Collections.sort(rightList, new KeyValuePairComparator(false, true));
-				%>
+					int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
 
-				<liferay-ui:input-move-boxes
-					formName="fm"
-					leftTitle="current"
-					rightTitle="available"
-					leftBoxName="current_actions"
-					rightBoxName="available_actions"
-					leftList="<%= leftList %>"
-					rightList="<%= rightList %>"
-				/>
+					searchContainer.setTotal(total);
 
-				<br />
+					List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-				<%--<table class="lfr-table">
-				<tr>
-					<td>
-						<liferay-ui:message key="assign-permissions-only-to-users-that-are-also-members-of-the-current-community" />
-					</td>
-					<td>
-						<select name="<portlet:namespace />organizationIntersection">
-							<option <%= organizationIntersection ? "selected" : "" %> value="1"><liferay-ui:message key="yes" /></option>
-							<option <%= !organizationIntersection ? "selected" : "" %> value="0"><liferay-ui:message key="no" /></option>
-						</select>
-					</td>
-				</tr>
-				</table>
+					searchContainer.setResults(results);
+					%>
 
-				<br />--%>
+					<div class="separator"><!-- --></div>
 
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td>
-						<input <%= organizationIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos - 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
+					<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserGroupPermissions();" />
 
-						<input <%= organizationIdsPos + 1 < organizationIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveOrganizationPermissions(<%= organizationIdsPos + 1 %>, '<%= organizationIdsArray[organizationIdsPos] %>');">
-					</td>
-					<td align="right">
-						<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveOrganizationPermissions(-1, '<%= organizationIdsArray[organizationIdsPos] %>');" />
-					</td>
-				</tr>
-				</table>
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:when test='<%= tabs2.equals("user-groups") %>'>
+					<br /><br />
 
-		<%
-		String userGroupIds = ParamUtil.getString(request, "userGroupIds");
-		long[] userGroupIdsArray = StringUtil.split(userGroupIds, 0L);
-		int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
-		%>
+					<%
+					List headerNames = new ArrayList();
 
-		<input name="<portlet:namespace />userGroupIds" type="hidden" value="<%= userGroupIds %>" />
-		<input name="<portlet:namespace />userGroupIdsPos" type="hidden" value="<%= userGroupIdsPos %>" />
-		<input name="<portlet:namespace />userGroupIdsPosValue" type="hidden" value="" />
-		<input name="<portlet:namespace />userGroupIdActionIds" type="hidden" value="" />
+					headerNames.add("name");
+					headerNames.add("description");
+					headerNames.add("permissions");
 
-		<c:choose>
-			<c:when test="<%= userGroupIdsArray.length == 0 %>">
-				<liferay-ui:tabs
-					names="current,available"
-					param="tabs3"
-					url="<%= portletURL.toString() %>"
-				/>
+					searchContainer.setHeaderNames(headerNames);
 
-				<%
-				UserGroupSearch searchContainer = new UserGroupSearch(renderRequest, portletURL);
+					List resultRows = searchContainer.getResultRows();
 
-				searchContainer.setRowChecker(new RowChecker(renderResponse));
-				%>
+					for (int i = 0; i < results.size(); i++) {
+						UserGroup userGroup = (UserGroup)results.get(i);
 
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/user_group_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
+						ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
 
-				<%
-				UserGroupSearchTerms searchTerms = (UserGroupSearchTerms)searchContainer.getSearchTerms();
+						// Name
 
-				LinkedHashMap userGroupParams = new LinkedHashMap();
+						row.addText(userGroup.getName());
 
-				if (tabs3.equals("current")) {
-					userGroupParams.put("permissionsResourceId", new Long(resource.getResourceId()));
-				}
+						// Name
 
-				int total = UserGroupLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams);
+						row.addText(userGroup.getName());
 
-				searchContainer.setTotal(total);
+						// Permissions
 
-				List results = UserGroupLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), userGroupParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+						List permissions = PermissionLocalServiceUtil.getGroupPermissions(userGroup.getGroup().getGroupId(), resource.getResourceId());
 
-				searchContainer.setResults(results);
-				%>
+						List actions = ResourceActionsUtil.getActions(permissions);
+						List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
 
-				<div class="separator"><!-- --></div>
+						row.addText(StringUtil.merge(actionsNames, ", "));
 
-				<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateUserGroupPermissions();" />
+						// Add result row
 
-				<br /><br />
+						resultRows.add(row);
+					}
+					%>
 
-				<%
-				List headerNames = new ArrayList();
+					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				</c:when>
+				<c:otherwise>
 
-				headerNames.add("name");
-				headerNames.add("description");
-				headerNames.add("permissions");
+					<%
+					UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupIdsArray[userGroupIdsPos]);
+					%>
 
-				searchContainer.setHeaderNames(headerNames);
+					<liferay-ui:tabs names="<%= userGroup.getName() %>" />
 
-				List resultRows = searchContainer.getResultRows();
-
-				for (int i = 0; i < results.size(); i++) {
-					UserGroup userGroup = (UserGroup)results.get(i);
-
-					ResultRow row = new ResultRow(userGroup, userGroup.getUserGroupId(), i);
-
-					// Name
-
-					row.addText(userGroup.getName());
-
-					// Name
-
-					row.addText(userGroup.getName());
-
-					// Permissions
-
+					<%
 					List permissions = PermissionLocalServiceUtil.getGroupPermissions(userGroup.getGroup().getGroupId(), resource.getResourceId());
 
-					List actions = ResourceActionsUtil.getActions(permissions);
-					List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+					List actions2 = ResourceActionsUtil.getActions(permissions);
 
-					row.addText(StringUtil.merge(actionsNames, ", "));
+					// Left list
 
-					// Add result row
+					List leftList = new ArrayList();
 
-					resultRows.add(row);
-				}
-				%>
+					for (int i = 0; i < actions2.size(); i++) {
+						String actionId = (String)actions2.get(i);
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:otherwise>
-
-				<%
-				UserGroup userGroup = UserGroupLocalServiceUtil.getUserGroup(userGroupIdsArray[userGroupIdsPos]);
-				%>
-
-				<liferay-ui:tabs names="<%= userGroup.getName() %>" />
-
-				<%
-				List permissions = PermissionLocalServiceUtil.getGroupPermissions(userGroup.getGroup().getGroupId(), resource.getResourceId());
-
-				List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
-				List actions2 = ResourceActionsUtil.getActions(permissions);
-
-				// Left list
-
-				List leftList = new ArrayList();
-
-				for (int i = 0; i < actions2.size(); i++) {
-					String actionId = (String)actions2.get(i);
-
-					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
-				}
-
-				Collections.sort(leftList, new KeyValuePairComparator(false, true));
-
-				// Right list
-
-				List rightList = new ArrayList();
-
-				for (int i = 0; i < actions1.size(); i++) {
-					String actionId = (String)actions1.get(i);
-
-					if (!actions2.contains(actionId)) {
-						rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
-				}
 
-				Collections.sort(rightList, new KeyValuePairComparator(false, true));
-				%>
+					Collections.sort(leftList, new KeyValuePairComparator(false, true));
 
-				<liferay-ui:input-move-boxes
-					formName="fm"
-					leftTitle="current"
-					rightTitle="available"
-					leftBoxName="current_actions"
-					rightBoxName="available_actions"
-					leftList="<%= leftList %>"
-					rightList="<%= rightList %>"
-				/>
+					// Right list
 
-				<br />
+					List rightList = new ArrayList();
 
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td>
-						<input <%= userGroupIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos - 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+					for (int i = 0; i < actions1.size(); i++) {
+						String actionId = (String)actions1.get(i);
 
-						<input <%= userGroupIdsPos + 1 < userGroupIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos + 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
-					</td>
-					<td align="right">
-						<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');" />
-					</td>
-				</tr>
-				</table>
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:when test='<%= tabs2.equals("regular-roles") || tabs2.equals("community-roles") || tabs2.equals("organization-roles") %>'>
+						if (!actions2.contains(actionId)) {
+							rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+						}
+					}
 
-		<%
-		String roleIds = ParamUtil.getString(request, "roleIds");
+					Collections.sort(rightList, new KeyValuePairComparator(false, true));
+					%>
 
-		long[] roleIdsArray = StringUtil.split(roleIds, 0L);
+					<liferay-ui:input-move-boxes
+						formName="fm"
+						leftTitle="current"
+						rightTitle="available"
+						leftBoxName="current_actions"
+						rightBoxName="available_actions"
+						leftList="<%= leftList %>"
+						rightList="<%= rightList %>"
+					/>
 
-		int roleIdsPos = ParamUtil.getInteger(request, "roleIdsPos");
+					<br />
 
-		int type = RoleImpl.TYPE_REGULAR;
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td>
+							<input <%= userGroupIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos - 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
 
-		if (tabs2.equals("community-roles")) {
-			type = RoleImpl.TYPE_COMMUNITY;
-		}
-		else if (tabs2.equals("organization-roles")) {
-			type = RoleImpl.TYPE_ORGANIZATION;
-		}
-		%>
+							<input <%= userGroupIdsPos + 1 < userGroupIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveUserGroupPermissions(<%= userGroupIdsPos + 1 %>, '<%= userGroupIdsArray[userGroupIdsPos] %>');">
+						</td>
+						<td align="right">
+							<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveUserGroupPermissions(-1, '<%= userGroupIdsArray[userGroupIdsPos] %>');" />
+						</td>
+					</tr>
+					</table>
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:when test='<%= tabs2.equals("regular-roles") || tabs2.equals("community-roles") || tabs2.equals("organization-roles") %>'>
 
-		<input name="<portlet:namespace />roleIds" type="hidden" value="<%= roleIds %>" />
-		<input name="<portlet:namespace />roleIdsPos" type="hidden" value="<%= roleIdsPos %>" />
-		<input name="<portlet:namespace />roleIdsPosValue" type="hidden" value="" />
-		<input name="<portlet:namespace />roleIdActionIds" type="hidden" value="" />
+			<%
+			String roleIds = ParamUtil.getString(request, "roleIds");
 
-		<c:choose>
-			<c:when test="<%= roleIdsArray.length == 0 %>">
-				<liferay-ui:tabs
-					names="current,available"
-					param="tabs3"
-					url="<%= portletURL.toString() %>"
-				/>
+			long[] roleIdsArray = StringUtil.split(roleIds, 0L);
 
-				<%
-				RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
+			int roleIdsPos = ParamUtil.getInteger(request, "roleIdsPos");
 
-				searchContainer.setRowChecker(new RowChecker(renderResponse));
-				%>
+			int type = RoleImpl.TYPE_REGULAR;
 
-				<liferay-ui:search-form
-					page="/html/portlet/enterprise_admin/role_search.jsp"
-					searchContainer="<%= searchContainer %>"
-				/>
+			if (tabs2.equals("community-roles")) {
+				type = RoleImpl.TYPE_COMMUNITY;
+			}
+			else if (tabs2.equals("organization-roles")) {
+				type = RoleImpl.TYPE_ORGANIZATION;
+			}
+			%>
 
-				<%
-				RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
+			<input name="<portlet:namespace />roleIds" type="hidden" value="<%= roleIds %>" />
+			<input name="<portlet:namespace />roleIdsPos" type="hidden" value="<%= roleIdsPos %>" />
+			<input name="<portlet:namespace />roleIdsPosValue" type="hidden" value="" />
+			<input name="<portlet:namespace />roleIdActionIds" type="hidden" value="" />
 
-				LinkedHashMap roleParams = new LinkedHashMap();
+			<c:choose>
+				<c:when test="<%= roleIdsArray.length == 0 %>">
+					<liferay-ui:tabs
+						names="current,available"
+						param="tabs3"
+						url="<%= portletURL.toString() %>"
+					/>
 
-				if (tabs3.equals("current")) {
-					roleParams.put("permissionsResourceId", new Long(resource.getResourceId()));
-				}
+					<%
+					RoleSearch searchContainer = new RoleSearch(renderRequest, portletURL);
 
-				int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(type), roleParams);
+					searchContainer.setRowChecker(new RowChecker(renderResponse));
+					%>
 
-				searchContainer.setTotal(total);
+					<liferay-ui:search-form
+						page="/html/portlet/enterprise_admin/role_search.jsp"
+						searchContainer="<%= searchContainer %>"
+					/>
 
-				List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(type), roleParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
+					<%
+					RoleSearchTerms searchTerms = (RoleSearchTerms)searchContainer.getSearchTerms();
 
-				searchContainer.setResults(results);
-				%>
+					LinkedHashMap roleParams = new LinkedHashMap();
 
-				<div class="separator"><!-- --></div>
+					if (tabs3.equals("current")) {
+						roleParams.put("permissionsResourceId", new Long(resource.getResourceId()));
+					}
 
-				<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateRolePermissions();" />
+					int total = RoleLocalServiceUtil.searchCount(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(type), roleParams);
 
-				<br /><br />
+					searchContainer.setTotal(total);
 
-				<%
-				List headerNames = new ArrayList();
+					List results = RoleLocalServiceUtil.search(company.getCompanyId(), searchTerms.getName(), searchTerms.getDescription(), new Integer(type), roleParams, searchContainer.getStart(), searchContainer.getEnd(), searchContainer.getOrderByComparator());
 
-				headerNames.add("name");
-				headerNames.add("type");
-				headerNames.add("permissions");
+					searchContainer.setResults(results);
+					%>
 
-				searchContainer.setHeaderNames(headerNames);
+					<div class="separator"><!-- --></div>
 
-				List resultRows = searchContainer.getResultRows();
+					<input type="button" value="<liferay-ui:message key="update-permissions" />" onClick="<portlet:namespace />updateRolePermissions();" />
 
-				for (int i = 0; i < results.size(); i++) {
-					Role role = (Role)results.get(i);
+					<br /><br />
 
-					ResultRow row = new ResultRow(role, role.getRoleId(), i);
+					<%
+					List headerNames = new ArrayList();
 
-					// Name
+					headerNames.add("name");
+					headerNames.add("type");
+					headerNames.add("permissions");
 
-					row.addText(role.getName());
+					searchContainer.setHeaderNames(headerNames);
 
-					// Type
+					List resultRows = searchContainer.getResultRows();
 
-					row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()));
+					for (int i = 0; i < results.size(); i++) {
+						Role role = (Role)results.get(i);
 
-					// Permissions
+						ResultRow row = new ResultRow(role, role.getRoleId(), i);
 
+						// Name
+
+						row.addText(role.getName());
+
+						// Type
+
+						row.addText(LanguageUtil.get(pageContext, role.getTypeLabel()));
+
+						// Permissions
+
+						List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
+
+						List actions = ResourceActionsUtil.getActions(permissions);
+						List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+
+						row.addText(StringUtil.merge(actionsNames, ", "));
+
+						// Add result row
+
+						resultRows.add(row);
+					}
+					%>
+
+					<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+				</c:when>
+				<c:otherwise>
+
+					<%
+					Role role = RoleLocalServiceUtil.getRole(roleIdsArray[roleIdsPos]);
+					%>
+
+					<liferay-ui:tabs names="<%= role.getName() %>" />
+
+					<%
 					List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
 
-					List actions = ResourceActionsUtil.getActions(permissions);
-					List actionsNames = ResourceActionsUtil.getActionsNames(pageContext, actions);
+					List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+					List actions2 = ResourceActionsUtil.getActions(permissions);
 
-					row.addText(StringUtil.merge(actionsNames, ", "));
+					// Left list
 
-					// Add result row
+					List leftList = new ArrayList();
 
-					resultRows.add(row);
-				}
-				%>
+					for (int i = 0; i < actions2.size(); i++) {
+						String actionId = (String)actions2.get(i);
 
-				<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-			</c:when>
-			<c:otherwise>
-
-				<%
-				Role role = RoleLocalServiceUtil.getRole(roleIdsArray[roleIdsPos]);
-				%>
-
-				<liferay-ui:tabs names="<%= role.getName() %>" />
-
-				<%
-				List permissions = PermissionLocalServiceUtil.getRolePermissions(role.getRoleId(), resource.getResourceId());
-
-				List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
-				List actions2 = ResourceActionsUtil.getActions(permissions);
-
-				// Left list
-
-				List leftList = new ArrayList();
-
-				for (int i = 0; i < actions2.size(); i++) {
-					String actionId = (String)actions2.get(i);
-
-					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
-				}
-
-				Collections.sort(leftList, new KeyValuePairComparator(false, true));
-
-				// Right list
-
-				List rightList = new ArrayList();
-
-				for (int i = 0; i < actions1.size(); i++) {
-					String actionId = (String)actions1.get(i);
-
-					if (!actions2.contains(actionId)) {
-						rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+						leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
-				}
 
-				Collections.sort(rightList, new KeyValuePairComparator(false, true));
-				%>
+					Collections.sort(leftList, new KeyValuePairComparator(false, true));
 
-				<liferay-ui:input-move-boxes
-					formName="fm"
-					leftTitle="current"
-					rightTitle="available"
-					leftBoxName="current_actions"
-					rightBoxName="available_actions"
-					leftList="<%= leftList %>"
-					rightList="<%= rightList %>"
-				/>
+					// Right list
 
-				<br />
+					List rightList = new ArrayList();
 
-				<table border="0" cellpadding="0" cellspacing="0" width="100%">
-				<tr>
-					<td>
-						<input <%= roleIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos - 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
+					for (int i = 0; i < actions1.size(); i++) {
+						String actionId = (String)actions1.get(i);
 
-						<input <%= roleIdsPos + 1 < roleIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos + 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
-					</td>
-					<td align="right">
-						<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveRolePermissions(-1, '<%= roleIdsArray[roleIdsPos] %>');" />
-					</td>
-				</tr>
-				</table>
-			</c:otherwise>
-		</c:choose>
-	</c:when>
-	<c:when test='<%= tabs2.equals("community") || tabs2.equals("organization") %>'>
+						if (!actions2.contains(actionId)) {
+							rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+						}
+					}
 
-		<%
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-		%>
+					Collections.sort(rightList, new KeyValuePairComparator(false, true));
+					%>
 
-		<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
-		<input name="<portlet:namespace />groupIdActionIds" type="hidden" value="" />
+					<liferay-ui:input-move-boxes
+						formName="fm"
+						leftTitle="current"
+						rightTitle="available"
+						leftBoxName="current_actions"
+						rightBoxName="available_actions"
+						leftList="<%= leftList %>"
+						rightList="<%= rightList %>"
+					/>
 
-		<%
-		List permissions = PermissionLocalServiceUtil.getGroupPermissions(group.getGroupId(), resource.getResourceId());
+					<br />
 
-		List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
-		List actions2 = ResourceActionsUtil.getActions(permissions);
+					<table border="0" cellpadding="0" cellspacing="0" width="100%">
+					<tr>
+						<td>
+							<input <%= roleIdsPos > 0 ? "" : "disabled" %> type="button" value="<liferay-ui:message key="previous" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos - 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
 
-		List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
+							<input <%= roleIdsPos + 1 < roleIdsArray.length ? "" : "disabled" %> type="button" value="<liferay-ui:message key="next" />" onClick="<portlet:namespace />saveRolePermissions(<%= roleIdsPos + 1 %>, '<%= roleIdsArray[roleIdsPos] %>');">
+						</td>
+						<td align="right">
+							<input type="button" value="<liferay-ui:message key="finished" />" onClick="<portlet:namespace />saveRolePermissions(-1, '<%= roleIdsArray[roleIdsPos] %>');" />
+						</td>
+					</tr>
+					</table>
+				</c:otherwise>
+			</c:choose>
+		</c:when>
+		<c:when test='<%= tabs2.equals("community") || tabs2.equals("organization") %>'>
 
-		// Left list
+			<%
+			Group group = GroupLocalServiceUtil.getGroup(groupId);
+			%>
 
-		List leftList = new ArrayList();
+			<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
+			<input name="<portlet:namespace />groupIdActionIds" type="hidden" value="" />
 
-		for (int i = 0; i < actions2.size(); i++) {
-			String actionId = (String)actions2.get(i);
+			<%
+			List permissions = PermissionLocalServiceUtil.getGroupPermissions(group.getGroupId(), resource.getResourceId());
 
-			leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
-		}
+			List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+			List actions2 = ResourceActionsUtil.getActions(permissions);
 
-		Collections.sort(leftList, new KeyValuePairComparator(false, true));
+			List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
 
-		// Right list
+			// Left list
 
-		List rightList = new ArrayList();
+			List leftList = new ArrayList();
 
-		for (int i = 0; i < actions1.size(); i++) {
-			String actionId = (String)actions1.get(i);
+			for (int i = 0; i < actions2.size(); i++) {
+				String actionId = (String)actions2.get(i);
 
-			if (!actions2.contains(actionId)) {
-				rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
-			}
-		}
-
-		Collections.sort(rightList, new KeyValuePairComparator(false, true));
-		%>
-
-		<liferay-ui:input-move-boxes
-			formName="fm"
-			leftTitle="current"
-			rightTitle="available"
-			leftBoxName="current_actions"
-			rightBoxName="available_actions"
-			leftList="<%= leftList %>"
-			rightList="<%= rightList %>"
-		/>
-
-		<br />
-
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td align="right">
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();" />
-			</td>
-		</tr>
-		</table>
-	</c:when>
-	<c:when test='<%= tabs2.equals("guest") %>'>
-		<input name="<portlet:namespace />guestActionIds" type="hidden" value="" />
-
-		<%
-		User guestUser = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
-
-		List permissions = PermissionLocalServiceUtil.getUserPermissions(guestUser.getUserId(), resource.getResourceId());
-
-		List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
-		List actions2 = ResourceActionsUtil.getActions(permissions);
-
-		List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
-
-		// Left list
-
-		List leftList = new ArrayList();
-
-		for (int i = 0; i < actions2.size(); i++) {
-			String actionId = (String)actions2.get(i);
-
-			if (!guestUnsupportedActions.contains(actionId)) {
 				leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 			}
-		}
 
-		Collections.sort(leftList, new KeyValuePairComparator(false, true));
+			Collections.sort(leftList, new KeyValuePairComparator(false, true));
 
-		// Right list
+			// Right list
 
-		List rightList = new ArrayList();
+			List rightList = new ArrayList();
 
-		for (int i = 0; i < actions1.size(); i++) {
-			String actionId = (String)actions1.get(i);
+			for (int i = 0; i < actions1.size(); i++) {
+				String actionId = (String)actions1.get(i);
 
-			if (!guestUnsupportedActions.contains(actionId)) {
 				if (!actions2.contains(actionId)) {
 					rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 				}
 			}
-		}
 
-		Collections.sort(rightList, new KeyValuePairComparator(false, true));
-		%>
+			Collections.sort(rightList, new KeyValuePairComparator(false, true));
+			%>
 
-		<liferay-ui:input-move-boxes
-			formName="fm"
-			leftTitle="current"
-			rightTitle="available"
-			leftBoxName="current_actions"
-			rightBoxName="available_actions"
-			leftList="<%= leftList %>"
-			rightList="<%= rightList %>"
-		/>
+			<liferay-ui:input-move-boxes
+				formName="fm"
+				leftTitle="current"
+				rightTitle="available"
+				leftBoxName="current_actions"
+				rightBoxName="available_actions"
+				leftList="<%= leftList %>"
+				rightList="<%= rightList %>"
+			/>
 
-		<br />
+			<br />
 
-		<table border="0" cellpadding="0" cellspacing="0" width="100%">
-		<tr>
-			<td align="right">
-				<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGuestPermissions();" />
-			</td>
-		</tr>
-		</table>
-	</c:when>
-	<c:when test='<%= false && tabs2.equals("associated") %>'>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<td align="right">
+					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGroupPermissions();" />
+				</td>
+			</tr>
+			</table>
+		</c:when>
+		<c:when test='<%= tabs2.equals("guest") %>'>
+			<input name="<portlet:namespace />guestActionIds" type="hidden" value="" />
 
-		<%
-		String selectedActionId = ParamUtil.getString(request, "selectedActionId");
-		%>
+			<%
+			User guestUser = UserLocalServiceUtil.getDefaultUser(company.getCompanyId());
 
-		<table class="lfr-table">
-		<tr>
-			<td>
-				<liferay-ui:message key="list-users-with-the-permission-to-perform-the-action" />:
-			</td>
-			<td>
-				<select name="<portlet:namespace />selectedActionId">
+			List permissions = PermissionLocalServiceUtil.getUserPermissions(guestUser.getUserId(), resource.getResourceId());
 
-					<%
-					List actions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+			List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
+			List actions2 = ResourceActionsUtil.getActions(permissions);
 
-					Collections.sort(actions, new ActionComparator(company.getCompanyId(), locale));
+			List guestUnsupportedActions = ResourceActionsUtil.getResourceGuestUnsupportedActions(portletResource, modelResource);
 
-					for (int i = 0; i < actions.size(); i++) {
-						String actionId = (String)actions.get(i);
+			// Left list
 
-						if (selectedActionId.equals("")) {
-							selectedActionId = actionId;
-						}
+			List leftList = new ArrayList();
 
-						%>
-						<option <%= actionId.equals(selectedActionId) ? "selected" : "" %> value="<%= actionId %>"><%= ResourceActionsUtil.getAction(pageContext, actionId) %></option>
-					<%
+			for (int i = 0; i < actions2.size(); i++) {
+				String actionId = (String)actions2.get(i);
+
+				if (!guestUnsupportedActions.contains(actionId)) {
+					leftList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
+				}
+			}
+
+			Collections.sort(leftList, new KeyValuePairComparator(false, true));
+
+			// Right list
+
+			List rightList = new ArrayList();
+
+			for (int i = 0; i < actions1.size(); i++) {
+				String actionId = (String)actions1.get(i);
+
+				if (!guestUnsupportedActions.contains(actionId)) {
+					if (!actions2.contains(actionId)) {
+						rightList.add(new KeyValuePair(actionId, ResourceActionsUtil.getAction(pageContext, actionId)));
 					}
-					%>
+				}
+			}
 
-				</select>
-			</td>
-		</tr>
-		</table>
+			Collections.sort(rightList, new KeyValuePairComparator(false, true));
+			%>
 
-		<br />
+			<liferay-ui:input-move-boxes
+				formName="fm"
+				leftTitle="current"
+				rightTitle="available"
+				leftBoxName="current_actions"
+				rightBoxName="available_actions"
+				leftList="<%= leftList %>"
+				rightList="<%= rightList %>"
+			/>
 
-		<%
-		portletURL.setParameter("selectedActionId", selectedActionId);
+			<br />
 
-		UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
-		%>
+			<table border="0" cellpadding="0" cellspacing="0" width="100%">
+			<tr>
+				<td align="right">
+					<input type="button" value="<liferay-ui:message key="save" />" onClick="<portlet:namespace />saveGuestPermissions();" />
+				</td>
+			</tr>
+			</table>
+		</c:when>
+		<c:when test='<%= false && tabs2.equals("associated") %>'>
 
-		<liferay-ui:search-form
-			page="/html/portlet/enterprise_admin/user_search.jsp"
-			searchContainer="<%= searchContainer %>"
-		/>
+			<%
+			String selectedActionId = ParamUtil.getString(request, "selectedActionId");
+			%>
 
-		<%
-		UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
+			<table class="lfr-table">
+			<tr>
+				<td>
+					<liferay-ui:message key="list-users-with-the-permission-to-perform-the-action" />:
+				</td>
+				<td>
+					<select name="<portlet:namespace />selectedActionId">
 
-		int total = UserLocalServiceUtil.getPermissionUsersCount(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isAndOperator());
+						<%
+						List actions = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 
-		searchContainer.setTotal(total);
+						Collections.sort(actions, new ActionComparator(company.getCompanyId(), locale));
 
-		List results = UserLocalServiceUtil.getPermissionUsers(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
+						for (int i = 0; i < actions.size(); i++) {
+							String actionId = (String)actions.get(i);
 
-		searchContainer.setResults(results);
-		%>
+							if (selectedActionId.equals("")) {
+								selectedActionId = actionId;
+							}
 
-		<div class="separator"><!-- --></div>
+							%>
+							<option <%= actionId.equals(selectedActionId) ? "selected" : "" %> value="<%= actionId %>"><%= ResourceActionsUtil.getAction(pageContext, actionId) %></option>
+						<%
+						}
+						%>
 
-		<%
-		List headerNames = new ArrayList();
+					</select>
+				</td>
+			</tr>
+			</table>
 
-		headerNames.add("name");
-		headerNames.add("screen-name");
-		//headerNames.add("email-address");
+			<br />
 
-		searchContainer.setHeaderNames(headerNames);
+			<%
+			portletURL.setParameter("selectedActionId", selectedActionId);
 
-		List resultRows = searchContainer.getResultRows();
+			UserSearch searchContainer = new UserSearch(renderRequest, portletURL);
+			%>
 
-		for (int i = 0; i < results.size(); i++) {
-			User user2 = (User)results.get(i);
+			<liferay-ui:search-form
+				page="/html/portlet/enterprise_admin/user_search.jsp"
+				searchContainer="<%= searchContainer %>"
+			/>
 
-			ResultRow row = new ResultRow(user2, user2.getUserId(), i);
+			<%
+			UserSearchTerms searchTerms = (UserSearchTerms)searchContainer.getSearchTerms();
 
-			// Name, screen name, and email address
+			int total = UserLocalServiceUtil.getPermissionUsersCount(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isAndOperator());
 
-			row.addText(user2.getFullName());
-			row.addText(user2.getScreenName());
-			//row.addText(user2.getEmailAddress());
+			searchContainer.setTotal(total);
 
-			// Add result row
+			List results = UserLocalServiceUtil.getPermissionUsers(company.getCompanyId(), groupId, modelResource, resourcePrimKey, selectedActionId, searchTerms.getFirstName(), searchTerms.getMiddleName(), searchTerms.getLastName(), searchTerms.getEmailAddress(), searchTerms.isAndOperator(), searchContainer.getStart(), searchContainer.getEnd());
 
-			resultRows.add(row);
-		}
-		%>
+			searchContainer.setResults(results);
+			%>
 
-		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
-	</c:when>
-</c:choose>
+			<div class="separator"><!-- --></div>
 
-</form>
+			<%
+			List headerNames = new ArrayList();
+
+			headerNames.add("name");
+			headerNames.add("screen-name");
+			//headerNames.add("email-address");
+
+			searchContainer.setHeaderNames(headerNames);
+
+			List resultRows = searchContainer.getResultRows();
+
+			for (int i = 0; i < results.size(); i++) {
+				User user2 = (User)results.get(i);
+
+				ResultRow row = new ResultRow(user2, user2.getUserId(), i);
+
+				// Name, screen name, and email address
+
+				row.addText(user2.getFullName());
+				row.addText(user2.getScreenName());
+				//row.addText(user2.getEmailAddress());
+
+				// Add result row
+
+				resultRows.add(row);
+			}
+			%>
+
+			<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
+		</c:when>
+	</c:choose>
+
+	</form>
+</div>

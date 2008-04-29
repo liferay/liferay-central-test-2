@@ -2123,6 +2123,11 @@ weeks-on=هفته در:
 weeks=هفته
 welcome-x=Welcome{0}!
 welcome=خوش آمديد
+
+
+##
+## Currency
+##
 when=کی
 whois=Whois
 wide-column=ستون پهن
@@ -2277,10 +2282,6 @@ zh_en=چينی )چين( به انگليسی
 zip-postal=کدپستی
 zip=کدپستی
 zt_en=چينی )تايوان( به انگليسی
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

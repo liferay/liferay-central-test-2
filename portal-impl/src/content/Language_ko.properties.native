@@ -3347,6 +3347,17 @@ weeks-on=위에의 week(s):
 weeks=주
 welcome-x=Welcome{0}!
 welcome=환영
+what-he-can-do=그가 수 있는 무엇을 할
+what-he-cant-do=그가 무엇을 할
+what-she-can-do=그녀가 수 있는 무엇을 할
+what-she-cant-do=그녀가 무엇을 할
+what-they-can-do=수 있는 무엇을 할
+what-they-cant-do=무엇을 할
+
+
+##
+## Currency
+##
 what-type-of-permissions-would-you-like-to-add=어떤 타입의 허가를 너는 추가하고는가 싶는가 하고자 했는가?
 what-would-you-like-to-copy-from-live-or-publish-to-live=너는 무엇을 살아있는가에서 베끼는가 살는가 위하여 간행하고는가 싶는가 하고자 했는가?
 what-would-you-like-to-export=너는 무엇을 수출하고는가 싶는가 하고자 했는가?
@@ -3564,10 +3575,6 @@ zh_en=영어에 중국인
 zip-postal=Zip/Postal
 zip=지퍼
 zt_en=영어에 중국어 (대만)
-
-##
-## Currency
-##
 
 currency.AED=아랍 에미리트 연방 Dirham
 currency.ALL=알바니아 Lek

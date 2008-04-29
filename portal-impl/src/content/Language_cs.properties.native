@@ -1558,6 +1558,11 @@ weeks-on=Týden / týdny v:
 weeks=Týdny
 welcome-x=Welcome{0}!
 welcome=Vítejte
+
+
+##
+## Currency
+##
 when=Když
 whois=Whois
 wide-column=Postranní sloupec
@@ -1680,10 +1685,6 @@ your-trash-folder-is-taking-up-a-lot-of-space=Váš koš překročil povolenou v
 zh_en=Čínsky (China) -> Anglicky
 zip=PSČ
 zt_en=Čínsky (Taiwan) -> Anglicky
-
-##
-## Currency
-##
 
 currency.AED=UAE Dirham
 currency.ALL=Albanian Lek

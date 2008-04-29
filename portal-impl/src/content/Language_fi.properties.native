@@ -3141,6 +3141,11 @@ weeks-on=viikkojen päästä:
 weeks=Viikkoa
 welcome-x=Welcome{0}!
 welcome=Tervetuloa
+
+
+##
+## Currency
+##
 what-type-of-permissions-would-you-like-to-add=Minkä tyyppisiä oikeuksia haluat lisätä?
 what-would-you-like-to-copy-from-live-or-publish-to-live=Mitä haluaisit kopioida julkiselta puolelta tai julkaista juliselle puolelle?
 what-would-you-like-to-export=Mitä haluaisit viedä?
@@ -3346,10 +3351,6 @@ zh_en=Kiinasta (Kiina) englanniksi
 zip-postal=Postinumero
 zip=Postinumero
 zt_en=Kiinasta (Taiwan) englanniksi
-
-##
-## Currency
-##
 
 currency.AED=UAE:n dirham
 currency.ALL=Albanian lek

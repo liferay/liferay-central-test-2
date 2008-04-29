@@ -175,6 +175,11 @@ voting-is-disabled-because-this-poll-expired-on-x=Voting is disabled because thi
 warning-due-to-inactivity-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0} minute(s) on {1} {2}. Would you like to extend your session another {3} minute(s)?
 warning-your-session-will-expire=Warning! Due to inactivity, your session will expire in {0}. To extend your session another {1} minute(s), please press the "Extend" button.
 welcome-x=Welcome{0}!
+
+
+##
+## Currency
+##
 write-on-x-wall=Write on {0}'s Wall
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<i>{0}</i> cannot be unassociated from this community.
@@ -208,8 +213,4 @@ your-account-with-login-x-is-not-active={0}, your account with login {1} is not 
 your-new-email-address-is-x=Your new email address is {0}.
 your-order-cannot-be-processed-because-it-falls-below-the-minimum-required-amount-of-x=Your order cannot be processed because it falls below the minimum required amount of {0}.
 your-password-has-been-sent-to-x=Your password has been sent to {0}.
-
-##
-## Currency
-##
 
