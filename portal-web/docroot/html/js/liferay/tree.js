@@ -20,6 +20,8 @@ Liferay.Tree = new Class({
 			revert: true
 		};
 
+		instance._onSelect = params.onSelect || instance._onSelect;
+
 		instance._expandText = Liferay.Language.get('expand-all');
 		instance._collapseText = Liferay.Language.get('collapse-all');
 
@@ -395,14 +397,12 @@ Liferay.Tree = new Class({
 
 			instance._fixParentsOfSelected(currentLi);
 
-			jQuery.ajax(
+			instance._onSelect(
 				{
-					url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
-					data: {
-						nodeId: branchId,
-						openNode: selectedNode,
-						treeId: treeIdSelected
-					}
+					branchId: branchId,
+					openNode: selectedNode,
+					selectedNode: selectedNode,
+					treeId: treeIdSelected
 				}
 			);
 		}
@@ -672,5 +672,24 @@ Liferay.Tree = new Class({
 			window.clearTimeout(obj.expanderTime);
 			obj.expanded = false;
 		}
+	},
+
+	_onSelect: function(params) {
+		var instance = this;
+
+		var branchId = params.branchId;
+		var selectedNode = params.selectedNode;
+		var treeIdSelected = params.treeId;
+
+		jQuery.ajax(
+			{
+				url: themeDisplay.getPathMain() + '/portal/session_tree_js_click',
+				data: {
+					nodeId: branchId,
+					openNode: selectedNode,
+					treeId: treeIdSelected
+				}
+			}
+		);
 	}
 });

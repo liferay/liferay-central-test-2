@@ -20,28 +20,39 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.model;
+package com.liferay.portal.util;
+
+import java.io.Serializable;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
- * <a href="LayoutConstants.java.html"><b><i>View Source</i></b></a>
+ * <a href="TreeView.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
-public class LayoutConstants {
+public class TreeView implements Serializable {
 
-	public static final long DEFAULT_PLID = 0;
+	public TreeView() {
+		this(new ArrayList<TreeNodeView>(), 0);
+	}
 
-	public static final long DEFAULT_PARENT_LAYOUT_ID = 0;
+	public TreeView(List<TreeNodeView> list, int depth) {
+		_list = list;
+		_depth = depth;
+	}
 
-	public static final String TYPE_PORTLET = "portlet";
+	public List<TreeNodeView> getList() {
+		return _list;
+	}
 
-	public static final String TYPE_PANEL = "panel";
+	public int getDepth() {
+		return _depth;
+	}
 
-	public static final String TYPE_EMBEDDED = "embedded";
-
-	public static final String TYPE_URL = "url";
-
-	public static final String TYPE_ARTICLE = "article";
+	private List<TreeNodeView> _list;
+	private int _depth;
 
 }

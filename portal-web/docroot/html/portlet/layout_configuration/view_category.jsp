@@ -57,6 +57,8 @@ Iterator itr = portletCategory.getPortletIds().iterator();
 
 String externalPortletCategory = null;
 
+List selectedPortlets = ListUtil.fromArray(StringUtil.split(layout.getTypeSettingsProperties().getProperty("selectedPortlets")));
+
 while (itr.hasNext()) {
 	String portletId = (String)itr.next();
 
@@ -71,6 +73,8 @@ while (itr.hasNext()) {
 			portlets.add(portlet);
 		}
 		else if (!portlet.hasAddPortletPermission(user.getUserId())) {
+		}
+		else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && !selectedPortlets.contains(portlet.getRootPortletId())) {
 		}
 		else {
 			portlets.add(portlet);
@@ -97,12 +101,12 @@ Collections.sort(portlets, new PortletTitleComparator(application, locale));
 if ((categories.size() > 0) || (portlets.size() > 0)) {
 %>
 
-	<div class="lfr-add-content collapsed" id="<%= newCategoryPath.replace(':', '-') %>">
+	<div class="lfr-add-content <%= (layout.getType().equals(LayoutConstants.TYPE_PORTLET))?"collapsed":"" %>" id="<%= newCategoryPath.replace(':', '-') %>">
 		<h2>
 			<span><%= Validator.isNotNull(externalPortletCategory) ? externalPortletCategory : LanguageUtil.get(pageContext, portletCategory.getName()) %></span>
 		</h2>
 
-		<div class="lfr-content-category hidden">
+		<div class="lfr-content-category <%= (layout.getType().equals(LayoutConstants.TYPE_PORTLET))?"hidden":"" %>">
 
 			<%
 			itr = categories.iterator();
@@ -137,11 +141,23 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 				boolean portletInstanceable = portlet.isInstanceable();
 				boolean portletUsed = layoutTypePortlet.hasPortletId(portlet.getPortletId());
 				boolean portletLocked = (!portletInstanceable && portletUsed);
-			%>
 
-				<div class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"" id="<%= divId.toString().replace(':', '-') %>" instanceable="<%= portletInstanceable %>" plid="<%= plid %>" portletId="<%= portlet.getPortletId() %>">
-					<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %> <a href="javascript: ;"><liferay-ui:message key="add" /></a></p>
-				</div>
+				if (portletInstanceable && layout.getType().equals(LayoutConstants.TYPE_PANEL)) {
+					continue;
+				}
+			%>
+			<c:choose>
+				<c:when test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+					<div class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"" id="<%= divId.toString().replace(':', '-') %>" instanceable="<%= portletInstanceable %>" plid="<%= plid %>" portletId="<%= portlet.getPortletId() %>">
+						<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %><a href="javascript: ;"><liferay-ui:message key="add" /></a></p>
+					</div>
+				</c:when>
+				<c:otherwise>
+					<div>
+						<a href="<liferay-portlet:renderURL portletName="<%= portlet.getRootPortletId() %>" windowState="<%= WindowState.MAXIMIZED.toString() %>"></liferay-portlet:renderURL>"><%= PortalUtil.getPortletTitle(portlet, application, locale) %></a>
+					</div>
+				</c:otherwise>
+			</c:choose>
 
 			<%
 			}

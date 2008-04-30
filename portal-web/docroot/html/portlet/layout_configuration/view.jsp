@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
-<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.getType().equals(LayoutConstants.TYPE_PORTLET) || layout.getType().equals(LayoutConstants.TYPE_PANEL))%>">
 
 	<%
 	PortletURL refererURL = renderResponse.createActionURL();
@@ -40,11 +40,13 @@
 			<input name="<%= WebKeys.REFERER %>" type="hidden" value="<%= refererURL.toString() %>" />
 			<input name="refresh" type="hidden" value="true" />
 
-			<div class="portal-add-content-search">
-				<span id="portal_add_content_title"><liferay-ui:message key="search-content-searches-as-you-type" /></span>
+			<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+				<div class="portal-add-content-search">
+					<span id="portal_add_content_title"><liferay-ui:message key="search-content-searches-as-you-type" /></span>
 
-				<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
-			</div>
+					<input id="layout_configuration_content" type="text" onKeyPress="if (event.keyCode == 13) { return false; }" />
+				</div>
+			</c:if>
 
 			<%
 			PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
@@ -65,11 +67,16 @@
 			}
 			%>
 
-			<p class="portlet-msg-info">
-				<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
-			</p>
+			<c:if test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
+				<p class="portlet-msg-info">
+					<liferay-ui:message key="to-add-a-portlet-to-the-page-just-drag-it" />
+				</p>
+			</c:if>
 
 			</form>
 		</div>
 	</div>
+</c:if>
+<c:if test="<%= !themeDisplay.isSignedIn() %>">
+	<liferay-ui:message key="please-log-back-in" />
 </c:if>

@@ -86,7 +86,7 @@ catch (NoSuchResourceException nsre) {
 		addDefaultResource = false;
 	}
 
-	if (addDefaultResource) {
+	if (addDefaultResource || (layout.getType().equals(LayoutConstants.TYPE_PANEL) && (portlet.hasAddPortletPermission(user.getUserId())))) {
 		ResourceLocalServiceUtil.addResources(company.getCompanyId(), layout.getGroupId(), 0, rootPortletId, portletPrimaryKey, true, true, true);
 	}
 	else {

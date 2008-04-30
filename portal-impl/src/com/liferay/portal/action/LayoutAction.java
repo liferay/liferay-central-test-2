@@ -250,7 +250,12 @@ public class LayoutAction extends Action {
 		if (themeDisplay.isStateExclusive() ||
 			Validator.isNotNull(ParamUtil.getString(req, "p_p_id"))) {
 
-			path += "/portal/layout/view/portlet.jsp";
+			if (layout.getType().equals(LayoutConstants.TYPE_PANEL)) {
+				path += "/portal/layout/view/panel.jsp";
+			}
+			else {
+				path += "/portal/layout/view/portlet.jsp";
+			}
 		}
 		else {
 			path += PortalUtil.getLayoutViewPage(layout);

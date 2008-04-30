@@ -21,6 +21,9 @@
  * SOFTWARE.
  */
 %>
+<%@ page import="com.liferay.portal.util.PortletLister" %>
+<%@ page import="com.liferay.portal.util.TreeView" %>
+<%@ page import="com.liferay.portal.util.TreeNodeView" %>
 
 <%@ include file="/html/portal/init.jsp" %>
 
