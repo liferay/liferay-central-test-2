@@ -25,6 +25,7 @@ package com.liferay.portal.events;
 import com.liferay.portal.comm.CommLink;
 import com.liferay.portal.deploy.DeployUtil;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployDir;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployListener;
 import com.liferay.portal.kernel.deploy.auto.AutoDeployUtil;
@@ -33,8 +34,6 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
-import com.liferay.portal.kernel.messaging.DefaultMessageBus;
-import com.liferay.portal.kernel.messaging.DefaultMessageSender;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
@@ -208,8 +207,10 @@ public class GlobalStartupAction extends SimpleAction {
 
 		// Messaging
 
-		MessageBus messageBus = new DefaultMessageBus();
-		MessageSender messageSender = new DefaultMessageSender(messageBus);
+		MessageBus messageBus = (MessageBus)BeanLocatorUtil.locate(
+			MessageBus.class.getName());
+		MessageSender messageSender = (MessageSender)BeanLocatorUtil.locate(
+			MessageSender.class.getName());
 
 		MessageBusUtil.init(messageBus, messageSender);
 

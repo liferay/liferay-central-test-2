@@ -42,6 +42,14 @@ public class MessageBusUtil {
 		return _instance._createMessageSender(destination);
 	}
 
+	public static MessageBus getMessageBus() {
+		return _instance._messageBus;
+	}
+
+	public static MessageSender getMessageSender() {
+		return _instance._messageSender;
+	}
+
 	public static void init(
 		MessageBus messageBus, MessageSender messageSender) {
 
