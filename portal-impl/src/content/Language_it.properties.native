@@ -1613,6 +1613,7 @@ layout-templates=Modelli di Layout
 layout.types.article=Articolo
 layout.types.embedded=Incorporato
 layout.types.link_to_layout=Collegamento a una Pagina
+layout.types.panel=Pannello
 layout.types.portlet=Portlet
 layout.types.url=URL
 layout=Layout

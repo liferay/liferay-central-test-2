@@ -1613,6 +1613,7 @@ layout-templates=佈局模板
 layout.types.article=文章
 layout.types.embedded=埋置
 layout.types.link_to_layout=頁的鏈接
+layout.types.panel=盤區
 layout.types.portlet=Portlet
 layout.types.url=URL
 layout=版面

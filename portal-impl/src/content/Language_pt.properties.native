@@ -1613,6 +1613,7 @@ layout-templates=Moldes Da Disposição
 layout.types.article=Artigo
 layout.types.embedded=Encaixado
 layout.types.link_to_layout=Ligação à página
+layout.types.panel=Painel
 layout.types.portlet=Portlet
 layout.types.url=URL
 layout=Disposição

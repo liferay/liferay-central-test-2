@@ -1613,6 +1613,7 @@ layout-templates=Πρότυπα σχεδιαγράμματος
 layout.types.article=Αρθρο
 layout.types.embedded=Ενσωματωμένος
 layout.types.link_to_layout=Σύνδεση με τη σελίδα
+layout.types.panel=Επιτροπή
 layout.types.portlet=Portlet
 layout.types.url=URL
 layout=Διάταξη

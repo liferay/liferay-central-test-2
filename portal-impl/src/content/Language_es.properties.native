@@ -1613,6 +1613,7 @@ layout-templates=Plantillas de página
 layout.types.article=Artículo
 layout.types.embedded=Web insertada
 layout.types.link_to_layout=Enlace a página
+layout.types.panel=Panel
 layout.types.portlet=Portlets
 layout.types.url=URL
 layout=Disposición

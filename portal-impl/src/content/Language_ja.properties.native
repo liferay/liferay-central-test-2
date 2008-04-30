@@ -1613,6 +1613,7 @@ layout-templates=レイアウトの型板
 layout.types.article=記事
 layout.types.embedded=埋め込まれる
 layout.types.link_to_layout=ページへのリンク
+layout.types.panel=パネル
 layout.types.portlet=Portlet
 layout.types.url=URL
 layout=レイアウト
