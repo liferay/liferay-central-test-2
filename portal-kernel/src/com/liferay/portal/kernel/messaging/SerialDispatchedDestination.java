@@ -25,6 +25,11 @@ package com.liferay.portal.kernel.messaging;
 /**
  * <a href="SerialDispatchedDestination.java.html"><b><i>View Source</i></b></a>
  *
+ * <p>
+ * Destination that delivers a message to a list of message listeners one at a
+ * time.
+ * </p>
+ *
  * @author Michael C. Han
  *
  */
