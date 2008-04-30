@@ -22,28 +22,43 @@
 
 package com.liferay.portalweb.portlet.journal;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="JournalTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="WorkflowTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalTests extends BaseTests {
+public class WorkflowTest extends BaseTestCase {
+	public void testWorkflow() throws Exception {
+		selenium.click("link=Articles");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("Link=Test Journal Article 2");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("_15_incrementVersionCheckbox");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
 
-	public JournalTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddArticleTest2.class);
-		addTestSuite(WorkflowTest.class);
-		addTestSuite(ExpireArticleTest.class);
-		addTestSuite(DeleteArticleTest.class);
-		addTestSuite(AddStructuresTest.class);
-		addTestSuite(AddFeedTest.class);
-		addTestSuite(SearchTest.class);
-		addTestSuite(RecentPageTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("Link=Not Approved")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
+		selenium.click("link=1.1");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Approve']");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }

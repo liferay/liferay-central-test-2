@@ -22,28 +22,37 @@
 
 package com.liferay.portalweb.portlet.journal;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="JournalTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class JournalTests extends BaseTests {
+public class DeleteArticleTest extends BaseTestCase {
+	public void testDeleteArticle() throws Exception {
+		selenium.click("link=1.1");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("//input[@value='Delete']");
+		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to deactivate this[\\s\\S]$"));
 
-	public JournalTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddArticleTest.class);
-		addTestSuite(AddArticleTest2.class);
-		addTestSuite(WorkflowTest.class);
-		addTestSuite(ExpireArticleTest.class);
-		addTestSuite(DeleteArticleTest.class);
-		addTestSuite(AddStructuresTest.class);
-		addTestSuite(AddFeedTest.class);
-		addTestSuite(SearchTest.class);
-		addTestSuite(RecentPageTest.class);
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (!selenium.isElementPresent("link=1.1")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
-
 }
