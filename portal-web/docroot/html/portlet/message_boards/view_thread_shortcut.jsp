@@ -60,7 +60,7 @@ if (treeWalker.isOdd()) {
 		String portalURL = PortalUtil.getPortalURL(themeDisplay);
 		String layoutURL = PortalUtil.getLayoutURL(themeDisplay);
 
-		String messageURL = portalURL + layoutURL + "/message_boards/message/" + selMessage.getMessageId();
+		String messageURL = portalURL + layoutURL + "/-/message_boards/message/" + selMessage.getMessageId();
 
 		String rowHREF = messageURL + "#" + renderResponse.getNamespace() + "message_" + message.getMessageId();
 		%>
