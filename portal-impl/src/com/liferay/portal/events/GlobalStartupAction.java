@@ -33,6 +33,11 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployUtil;
 import com.liferay.portal.kernel.events.ActionException;
 import com.liferay.portal.kernel.events.SimpleAction;
 import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
+import com.liferay.portal.kernel.messaging.DefaultMessageBus;
+import com.liferay.portal.kernel.messaging.DefaultMessageSender;
+import com.liferay.portal.kernel.messaging.MessageBus;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageSender;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
 import com.liferay.portal.pop.POPServerUtil;
@@ -200,6 +205,13 @@ public class GlobalStartupAction extends SimpleAction {
 				_log.warn(e.getMessage());
 			}
 		}
+
+		// Messaging
+
+		MessageBus messageBus = new DefaultMessageBus();
+		MessageSender messageSender = new DefaultMessageSender(messageBus);
+
+		MessageBusUtil.init(messageBus, messageSender);
 
 		// POP server
 
