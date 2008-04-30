@@ -49,13 +49,16 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 	<div>
 </c:if>
 
+
+<div class="user-profile-image">
+
 <c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>"></c:if>
 
-<div>
 	<img border="0" src="<%= themeDisplay.getPathImage() %>/user_<%= (userDisplay != null) && userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
-</div>
 
 <c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
+
+</div>
 
 <c:if test="<%= displayStyle == 1 %>">
 	</td>
@@ -67,7 +70,7 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 
 <c:choose>
 	<c:when test="<%= userDisplay != null %>">
-		<c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>"></c:if>
+		<c:if test="<%= Validator.isNotNull(url) %>"><a class="user-name" href="<%= url %>"></c:if>
 
 		<%= userDisplay.getFullName() %>
 
@@ -76,8 +79,6 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
 			<a href="javascript: Messaging.chat({toId:'<%= userId %>', toName:'<%= userDisplay.getFullName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
 		</c:if>
-
-		<br />
 	</c:when>
 	<c:otherwise>
 		<%= userName %>
