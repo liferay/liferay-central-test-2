@@ -34,6 +34,22 @@ public class SerialDispatchedDestination extends ParallelDispatchedDestination {
 		super(name, _NUM_WORKERS, _MAX_WORKERS);
 	}
 
+	protected void doDispatch(
+		final MessageListener[] listeners, final String message) {
+
+		Runnable runnable = new Runnable() {
+
+			public void run() {
+				for (MessageListener listener : listeners) {
+					listener.receive(message);
+				}
+			}
+
+		};
+
+		executor.execute(runnable);
+	}
+
 	private static final int _NUM_WORKERS = 1;
 
 	private static final int _MAX_WORKERS = 1;

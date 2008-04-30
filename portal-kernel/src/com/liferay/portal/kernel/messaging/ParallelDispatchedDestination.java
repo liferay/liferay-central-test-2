@@ -48,12 +48,24 @@ public class ParallelDispatchedDestination extends BaseDestination {
 		open();
 	}
 
-	protected void dispatch(MessageListener[] listeners, final String message) {
-		if (_executor.isShutdown()) {
+	protected void dispatch(MessageListener[] listeners, String message) {
+		if (executor.isShutdown()) {
 			throw new IllegalStateException(
 				"Destination " + getName() + " is shutdown and cannot " +
 					"receive more messages");
 		}
+
+		doDispatch(listeners, message);
+	}
+
+	protected void doClose() {
+		if (!executor.isShutdown() && !executor.isTerminating()) {
+			executor.shutdown();
+		}
+	}
+
+	protected void doDispatch(
+		MessageListener[] listeners, final String message) {
 
 		for (final MessageListener listener : listeners) {
 			Runnable runnable = new Runnable() {
@@ -64,19 +76,13 @@ public class ParallelDispatchedDestination extends BaseDestination {
 
 			};
 
-			_executor.execute(runnable);
-		}
-	}
-
-	protected void doClose() {
-		if (!_executor.isShutdown() && !_executor.isTerminating()) {
-			_executor.shutdown();
+			executor.execute(runnable);
 		}
 	}
 
 	protected void doOpen() {
-		if ((_executor == null) || _executor.isShutdown()) {
-			_executor = new ThreadPoolExecutor(
+		if ((executor == null) || executor.isShutdown()) {
+			executor = new ThreadPoolExecutor(
 				_numWorkers, _maxWorkers, 0L, TimeUnit.MILLISECONDS,
 				new LinkedBlockingQueue<Runnable>(),
 				new NamedThreadFactory(getName(), Thread.NORM_PRIORITY));
@@ -84,13 +90,14 @@ public class ParallelDispatchedDestination extends BaseDestination {
 	}
 
 	protected void resetDispatcher(int length) {
-		_executor.setCorePoolSize(length);
-		_executor.setMaximumPoolSize(length + _MAX_SIZE_PADDING);
+		executor.setCorePoolSize(length);
+		executor.setMaximumPoolSize(length + _MAX_SIZE_PADDING);
 	}
+
+	protected ThreadPoolExecutor executor;
 
 	private static final int _MAX_SIZE_PADDING = 5;
 
-	private ThreadPoolExecutor _executor;
 	private int _numWorkers;
 	private int _maxWorkers;
 
