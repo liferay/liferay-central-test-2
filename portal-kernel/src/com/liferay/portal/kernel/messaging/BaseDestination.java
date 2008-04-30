@@ -107,4 +107,47 @@ public abstract class BaseDestination implements Destination {
 	private String _name;
 	private MessageListener[] _listeners;
 
+	private class MessageListenerWrapper implements MessageListener {
+
+		public MessageListenerWrapper(MessageListener messageListener) {
+			this(
+				messageListener,
+				Thread.currentThread().getContextClassLoader());
+		}
+
+		public MessageListenerWrapper(
+			MessageListener messageListener, ClassLoader classLoader) {
+
+			_messageListener = messageListener;
+			_classLoader = classLoader;
+		}
+
+		public void receive(String message) {
+			ClassLoader contextClassLoader =
+				Thread.currentThread().getContextClassLoader();
+
+			Thread.currentThread().setContextClassLoader(_classLoader);
+
+			try {
+				_messageListener.receive(message);
+			}
+			finally {
+				Thread.currentThread().setContextClassLoader(
+					contextClassLoader);
+			}
+		}
+
+		public boolean equals(Object obj) {
+			return _messageListener.equals(obj);
+		}
+
+		public int hashCode() {
+			return _messageListener.hashCode();
+		}
+
+		private MessageListener _messageListener;
+		private ClassLoader _classLoader;
+
+	}
+
 }
