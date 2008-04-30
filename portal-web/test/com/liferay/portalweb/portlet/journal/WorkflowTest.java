@@ -55,10 +55,5 @@ public class WorkflowTest extends BaseTestCase {
 
 			Thread.sleep(1000);
 		}
-
-		selenium.click("link=1.1");
-		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Approve']");
-		selenium.waitForPageToLoad("30000");
 	}
 }

@@ -25,34 +25,18 @@ package com.liferay.portalweb.portlet.journal;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="ExpireArticleTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="ApproveArticleTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class ExpireArticleTest extends BaseTestCase {
-	public void testExpireArticle() throws Exception {
+public class ApproveArticleTest extends BaseTestCase {
+	public void testApproveArticle() throws Exception {
 		selenium.click("link=Articles");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=1.1");
 		selenium.waitForPageToLoad("30000");
-		selenium.click("//input[@value='Expire']");
+		selenium.click("//input[@value='Approve']");
 		selenium.waitForPageToLoad("30000");
-
-		for (int second = 0;; second++) {
-			if (second >= 60) {
-				fail("timeout");
-			}
-
-			try {
-				if (selenium.isElementPresent("link=Expired")) {
-					break;
-				}
-			}
-			catch (Exception e) {
-			}
-
-			Thread.sleep(1000);
-		}
 	}
 }

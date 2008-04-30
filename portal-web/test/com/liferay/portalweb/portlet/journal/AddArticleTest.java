@@ -127,5 +127,21 @@ public class AddArticleTest extends BaseTestCase {
 		selenium.select("_15_reviewDateMinute", "label=:00");
 		selenium.click("//input[@value='Save and Approve']");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("//input[@value='Add Article']")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

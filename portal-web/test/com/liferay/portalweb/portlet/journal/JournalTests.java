@@ -38,10 +38,11 @@ public class JournalTests extends BaseTests {
 		addTestSuite(AddArticleTest.class);
 		addTestSuite(AddArticleTest2.class);
 		addTestSuite(WorkflowTest.class);
+		addTestSuite(ApproveArticleTest.class);
 		addTestSuite(ExpireArticleTest.class);
 		addTestSuite(DeleteArticleTest.class);
 		addTestSuite(AddStructuresTest.class);
-		addTestSuite(AddFeedTest.class);
+//		addTestSuite(AddFeedTest.class);
 		addTestSuite(SearchTest.class);
 		addTestSuite(RecentPageTest.class);
 	}

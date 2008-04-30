@@ -32,6 +32,8 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class DeleteArticleTest extends BaseTestCase {
 	public void testDeleteArticle() throws Exception {
+		selenium.click("link=Articles");
+		selenium.waitForPageToLoad("30000");
 		selenium.click("link=1.1");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//input[@value='Delete']");
