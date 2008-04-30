@@ -30,12 +30,12 @@ package com.liferay.portal.kernel.messaging;
  */
 public class DefaultMessageSender implements MessageSender {
 
-	public DefaultMessageSender(MessageBus messageBus) {
-		_messageBus = messageBus;
-	}
-
 	public void send(String destination, String message) {
 		_messageBus.sendMessage(destination, message);
+	}
+
+	public void setMessageBus(MessageBus messageBus) {
+		_messageBus = messageBus;
 	}
 
 	private MessageBus _messageBus;
