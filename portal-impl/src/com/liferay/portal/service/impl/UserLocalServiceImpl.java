@@ -60,6 +60,8 @@ import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.uuid.PortalUUIDUtil;
+import com.liferay.portal.model.ClassName;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
 import com.liferay.portal.model.Contact;
@@ -74,6 +76,7 @@ import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.model.impl.LayoutImpl;
 import com.liferay.portal.model.impl.RoleImpl;
 import com.liferay.portal.model.impl.UserImpl;
+import com.liferay.portal.model.impl.UserModelImpl;
 import com.liferay.portal.security.auth.AuthPipeline;
 import com.liferay.portal.security.auth.Authenticator;
 import com.liferay.portal.security.auth.PrincipalException;
@@ -84,6 +87,7 @@ import com.liferay.portal.security.permission.PermissionCacheUtil;
 import com.liferay.portal.security.pwd.PwdEncryptor;
 import com.liferay.portal.security.pwd.PwdToolkitUtil;
 import com.liferay.portal.service.base.UserLocalServiceBaseImpl;
+import com.liferay.portal.spring.hibernate.FinderCache;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
@@ -106,6 +110,7 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import javax.mail.internet.InternetAddress;
 
@@ -860,13 +865,21 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public User getDefaultUser(long companyId)
 		throws PortalException, SystemException {
 
-		return userPersistence.findByC_DU(companyId, true);
+		User userModel = _defaultUsers.get(new Long(companyId));
+
+		if (userModel == null) {
+			userModel = userPersistence.findByC_DU(companyId, true);
+
+			_defaultUsers.put(new Long(companyId), userModel);
+		}
+
+		return userModel;
 	}
 
 	public long getDefaultUserId(long companyId)
 		throws PortalException, SystemException {
 
-		User user = userPersistence.findByC_DU(companyId, true);
+		User user = getDefaultUser(companyId);
 
 		return user.getUserId();
 	}
@@ -2563,6 +2576,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			}
 		}
 	}
+
+	private static Map<Long, User> _defaultUsers =
+		new ConcurrentHashMap<Long, User>();
 
 	private static Log _log = LogFactory.getLog(UserLocalServiceImpl.class);
 
