@@ -9,7 +9,9 @@
 #set ($css_class = $theme_display.getColorScheme().getCssClass())
 
 #if ($layout)
-	#if ($layout.getGroup().isStagingGroup())
+	#set ($page_group = $layout.getGroup())
+
+	#if ($page_group.isStagingGroup())
 		#set ($css_class = $css_class + " staging")
 	#end
 #end
@@ -173,7 +175,7 @@
 	#set ($page_javascript_2 = $typeSettingsProperties.getProperty("javascript-2"))
 	#set ($page_javascript_3 = $typeSettingsProperties.getProperty("javascript-3"))
 
-	#set ($community_name = $page.getGroup().getDescriptiveName())
+	#set ($community_name = $page_group.getDescriptiveName())
 
 	#set ($my_places_portlet_url = $portletURLFactory.create($request, "49", $page.getPlid(), "ACTION_PHASE"))
 
