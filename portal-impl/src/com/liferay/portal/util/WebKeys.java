@@ -265,12 +265,6 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ROLE = "ROLE";
 
-	public static final String SEARCH_CONTAINER_RESULT_ROW = "SEARCH_CONTAINER_RESULT_ROW";
-
-	public static final String SEARCH_CONTAINER_RESULT_ROW_ENTRY = "SEARCH_CONTAINER_RESULT_ROW_ENTRY";
-
-	public static final String SEARCH_SEARCH_RESULTS = "SEARCH_SEARCH_RESULTS";
-
 	public static final String SEL_COMPANY = "SEL_COMPANY";
 
 	public static final String SEL_LAYOUT = "SEL_LAYOUT";
