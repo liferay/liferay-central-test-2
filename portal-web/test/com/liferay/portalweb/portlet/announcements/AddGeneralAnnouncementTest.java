@@ -32,6 +32,22 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddGeneralAnnouncementTest extends BaseTestCase {
 	public void testAddGeneralAnnouncement() throws Exception {
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isElementPresent("link=Manage Entries")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
+
 		selenium.click("link=Manage Entries");
 		selenium.waitForPageToLoad("30000");
 		selenium.select("_84_distributionScope", "label=General");

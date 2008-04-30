@@ -32,9 +32,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class AddBlankCouponTest extends BaseTestCase {
 	public void testAddBlankCoupon() throws Exception {
-		selenium.open(
-			"/user/joebloggs/3?p_p_id=34&p_p_lifecycle=0&p_p_state=maximized&p_p_mode=view&p_p_col_id=column-2&p_p_col_count=1&_34_struts_action=%2Fshopping%2Fview&tabs1=coupons");
-
 		for (int second = 0;; second++) {
 			if (second >= 60) {
 				fail("timeout");
