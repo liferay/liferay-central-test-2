@@ -25,13 +25,13 @@ package com.liferay.portalweb.portlet.journal;
 import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="AddArticleTest2.java.html"><b><i>View Source</i></b></a>
+ * <a href="AddArticle2Test.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class AddArticleTest2 extends BaseTestCase {
-	public void testAddArticleT() throws Exception {
+public class AddArticle2Test extends BaseTestCase {
+	public void testAddArticle2() throws Exception {
 		selenium.click("//input[@value='Add Article']");
 		Thread.sleep(5000);
 
