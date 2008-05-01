@@ -301,6 +301,7 @@ activate=激活
 active=活動中
 activity-blogs-add-comment={0} commented on {1}'s blog.
 activity-blogs-add-entry={0} wrote a new blog entry.
+activity-details=活動細節
 activity-message-boards-add-message={0} wrote a new message board post.
 activity-message-boards-reply-message={0} replied to {1}'s message board post.
 activity-tasks-add-proposal={0} created proposal.
