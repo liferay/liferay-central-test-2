@@ -338,7 +338,13 @@ public class CalEventLocalServiceImpl extends CalEventLocalServiceBaseImpl {
 		while (itr.hasNext()) {
 			CalEvent event = itr.next();
 
-			User user = userPersistence.findByPrimaryKey(event.getUserId());
+			User user = userPersistence.fetchByPrimaryKey(event.getUserId());
+
+			if (user == null) {
+				deleteEvent(event);
+
+				continue;
+			}
 
 			Calendar now = CalendarFactoryUtil.getCalendar(
 				user.getTimeZone(), user.getLocale());
