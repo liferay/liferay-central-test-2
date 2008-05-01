@@ -25,16 +25,27 @@
 
 <%@ include file="/html/portal/layout/edit/init.jsp" %>
 
-<liferay-theme:defineObjects/>
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="description" />
+	</td>
+	<td>
+		<textarea name="TypeSettingsProperties(description)" cols="70"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
+	</td>
+</tr>
+</table>
+
+<br />
 
 <div class="portlet-msg-info">
 	<liferay-ui:message key="select-the-applications-that-will-be-available-in-the-panel" />
 </div>
 
-<input name="TypeSettingsProperties(selectedPortlets)" type="hidden" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(selectedPortlets)" />" />
+<input name="TypeSettingsProperties(panelSelectedPortlets)" type="hidden" value="<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />" />
 
 <%
-String panelTreeKey = "selectedPortletsPanelTree";
+String panelTreeKey = "panelSelectedPortletsPanelTree";
 %>
 
 <script src="<%= themeDisplay.getPathJavaScript() %>/liferay/tree.js" type="text/javascript"></script>
@@ -42,7 +53,7 @@ String panelTreeKey = "selectedPortletsPanelTree";
 <div id="<portlet:namespace />panel-select-portlets-output" style="margin: 4px;"></div>
 
 <script type="text/javascript">
-	var <portlet:namespace />layoutIcons = {
+	var <portlet:namespace />treeIcons = {
 		checkbox: '<%= themeDisplay.getPathThemeImages() %>/trees/checkbox.png',
 		checked: '<%= themeDisplay.getPathThemeImages() %>/trees/checked.png',
 		childChecked: '<%= themeDisplay.getPathThemeImages() %>/trees/child_checked.png',
@@ -56,15 +67,14 @@ String panelTreeKey = "selectedPortletsPanelTree";
 	var <portlet:namespace />panelPortletsArray = [];
 
 	<%
-	PortletLister lister = new PortletLister();
+	PortletLister portletLister = new PortletLister();
 
-	TreeView treeView = lister.getTreeView(company, LanguageUtil.get(pageContext, "application"), user, layoutTypePortlet, application, locale);
+	TreeView treeView = portletLister.getTreeView(layoutTypePortlet, LanguageUtil.get(pageContext, "application"), user, application);
 
 	Iterator itr = treeView.getList().iterator();
 
 	for (int i = 0; itr.hasNext(); i++) {
 		TreeNodeView treeNodeView = (TreeNodeView)itr.next();
-
 	%>
 
  		<portlet:namespace />panelPortletsArray[<%= i %>] = {
@@ -81,46 +91,36 @@ String panelTreeKey = "selectedPortletsPanelTree";
 	<%
 	}
 	%>
-</script>
 
-<script type="text/javascript">
 	jQuery(
 		function() {
 			new Liferay.Tree(
 				{
 					className: "gamma",
-					icons: <portlet:namespace />layoutIcons,
+					icons: <portlet:namespace />treeIcons,
 					nodes: <portlet:namespace />panelPortletsArray,
-					openNodes: '<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(selectedPortlets)" />',
+					openNodes: '<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />',
 					outputId: '#<portlet:namespace />panel-select-portlets-output',
 					selectable: true,
-					selectedNodes: '<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(selectedPortlets)" />',
+					selectedNodes: '<bean:write name="SEL_LAYOUT" property="typeSettingsProperties(panelSelectedPortlets)" />',
 					treeId: '<%= panelTreeKey %>',
 					onSelect: function(params) {
 						var portletId = params.branchId;
 						var selectedNode = params.selectedNode;
 
-						var selectedPortletsEl = document.<portlet:namespace />fm['TypeSettingsProperties(selectedPortlets)'];
-						console.debug(selectedPortletsEl);
+						var panelSelectedPortletsEl = document.<portlet:namespace />fm['TypeSettingsProperties(panelSelectedPortlets)'];
 
 						if (portletId) {
 							if (selectedNode) {
-								selectedPortletsEl.value += portletId + ',';
+								panelSelectedPortletsEl.value += portletId + ',';
 							}
 							else {
-								selectedPortletsEl.value = selectedPortletsEl.value.replace(portletId + ',', '');
+								panelSelectedPortletsEl.value = panelSelectedPortletsEl.value.replace(portletId + ',', '');
 							}
 						}
-
-						console.debug(selectedPortletsEl);
-
 					}
 				}
 			);
 		}
 	);
 </script>
-
-<liferay-ui:message key="description" /><br />
-<textarea name="TypeSettingsProperties(description)" cols="70"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
-

@@ -23,52 +23,56 @@
 %>
 <%@ include file="/html/portal/init.jsp" %>
 
-<table width="100%">
-	<tr>
-		<td class="panel-menu <%= (!layoutTypePortlet.hasStateMax())?"panel-menu-frontpage":"panel-menu-application" %>" valign="top" width="200">
-			<liferay-portlet:runtime portletName="87" />
-		</td>
-		<td>&nbsp;</td>
-		<td valign="top">
-			<%
-			if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
-				String ppid = ParamUtil.getString(request, "p_p_id");
+<table>
+<tr>
+	<td class="panel-menu <%= (!layoutTypePortlet.hasStateMax()) ? "panel-menu-frontpage" : "panel-menu-application" %>" valign="top" width="200">
+		<liferay-portlet:runtime portletName="87" />
+	</td>
+	<td valign="top">
 
-				String content = null;
+		<%
+		if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
+			String ppid = ParamUtil.getString(request, "p_p_id");
 
-				if (themeDisplay.isStateExclusive()) {
-					content = LayoutTemplateLocalUtil.getContent("exclusive", true, theme.getThemeId());
-				}
-				else if (themeDisplay.isStatePopUp()) {
-					content = LayoutTemplateLocalUtil.getContent("pop_up", true, theme.getThemeId());
-				}
-				else {
-					ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
+			String content = null;
 
-					content = LayoutTemplateLocalUtil.getContent("max", true, theme.getThemeId());
-				}
-			%>
-
-				<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, content) %>
-
-			<%
+			if (themeDisplay.isStateExclusive()) {
+				content = LayoutTemplateLocalUtil.getContent("exclusive", true, theme.getThemeId());
+			}
+			else if (themeDisplay.isStatePopUp()) {
+				content = LayoutTemplateLocalUtil.getContent("pop_up", true, theme.getThemeId());
 			}
 			else {
-				String description = layout.getTypeSettingsProperties().getProperty("description");
-				if (Validator.isNull(description)) {
-					description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
-				}
-			%>
+				ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
-			<h2><%= layout.getName(locale) %></h2>
+				content = LayoutTemplateLocalUtil.getContent("max", true, theme.getThemeId());
+			}
+		%>
 
+			<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, ppid, content) %>
+
+		<%
+		}
+		else {
+			String description = layout.getTypeSettingsProperties().getProperty("description");
+
+			if (Validator.isNull(description)) {
+				description = LanguageUtil.get(pageContext, "please-select-a-tool-from-the-left-menu");
+			}
+		%>
+
+			<h2>
+				<%= layout.getName(locale) %>
+			</h2>
 
 			<div class="portlet-msg-info">
 				<%= description %>
 			</div>
-			<%
-			}
-			%>
-		</td>
-	</tr>
+
+		<%
+		}
+		%>
+
+	</td>
+</tr>
 </table>

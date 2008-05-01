@@ -433,6 +433,22 @@ public class PortalUtil {
 	}
 
 	public static String getPortletTitle(
+		Portlet portlet, long companyId, String languageId) {
+
+		return getPortletTitle(portlet, companyId, languageId);
+	}
+
+	public static String getPortletTitle(
+		Portlet portlet, long companyId, Locale locale) {
+
+		return getPortal().getPortletTitle(portlet, companyId, locale);
+	}
+
+	public static String getPortletTitle(Portlet portlet, User user) {
+		return getPortal().getPortletTitle(portlet, user);
+	}
+
+	public static String getPortletTitle(
 		Portlet portlet, ServletContext ctx, Locale locale) {
 
 		return getPortal().getPortletTitle(portlet, ctx, locale);

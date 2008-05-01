@@ -22,6 +22,7 @@
 
 package com.liferay.portal.util.comparator;
 
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.util.PortalUtil;
 
@@ -41,20 +42,37 @@ import javax.servlet.ServletContext;
 public class PortletTitleComparator
 	implements Comparator<Portlet>, Serializable {
 
+	public PortletTitleComparator(long companyId, Locale locale) {
+		_companyId = companyId;
+		_locale = locale;
+	}
+
 	public PortletTitleComparator(ServletContext ctx, Locale locale) {
 		_ctx = ctx;
 		_locale = locale;
 	}
 
 	public int compare(Portlet portlet1, Portlet portlet2) {
-		String portletTitle1 = PortalUtil.getPortletTitle(
-			portlet1, _ctx, _locale);
-		String portletTitle2 = PortalUtil.getPortletTitle(
-			portlet2, _ctx, _locale);
+		String portletTitle1 = StringPool.BLANK;
+		String portletTitle2 = StringPool.BLANK;
+
+		if (_ctx != null) {
+			portletTitle1 = PortalUtil.getPortletTitle(
+				portlet1, _ctx, _locale);
+			portletTitle2 = PortalUtil.getPortletTitle(
+				portlet2, _ctx, _locale);
+		}
+		else {
+			portletTitle1 = PortalUtil.getPortletTitle(
+				portlet1, _companyId, _locale);
+			portletTitle2 = PortalUtil.getPortletTitle(
+				portlet2, _companyId, _locale);
+		}
 
 		return portletTitle1.compareTo(portletTitle2);
 	}
 
+	private long _companyId;
 	private ServletContext _ctx;
 	private Locale _locale;
 

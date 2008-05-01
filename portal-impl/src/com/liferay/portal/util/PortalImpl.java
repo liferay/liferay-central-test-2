@@ -1400,6 +1400,22 @@ public class PortalImpl implements Portal {
 	}
 
 	public String getPortletTitle(
+		Portlet portlet, long companyId, String languageId) {
+
+		return getPortletTitle(portlet.getPortletId(), companyId, languageId);
+	}
+
+	public String getPortletTitle(
+		Portlet portlet, long companyId, Locale locale) {
+
+		return getPortletTitle(portlet.getPortletId(), companyId, locale);
+	}
+
+	public String getPortletTitle(Portlet portlet, User user) {
+		return getPortletTitle(portlet.getPortletId(), user);
+	}
+
+	public String getPortletTitle(
 		Portlet portlet, ServletContext ctx, Locale locale) {
 
 		PortletConfig portletConfig = PortletConfigFactory.create(portlet, ctx);

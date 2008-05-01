@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringPool;
  * <a href="TreeNodeView.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class TreeNodeView {
 
@@ -99,13 +100,13 @@ public class TreeNodeView {
 		_parentId = parentId;
 	}
 
-	private int _depth = 0;
-	private String _href = "javascript:;";
+	private int _depth;
+	private String _href = "javascript: ;";
 	private long _id;
 	private String _img = StringPool.BLANK;
 	private String _ls = StringPool.BLANK;
 	private String _name = StringPool.BLANK;
 	private String _objId = StringPool.BLANK;
-	private long _parentId = 0;
+	private long _parentId;
 
 }

@@ -52,6 +52,9 @@ catch (NoSuchResourceException nsre) {
 	if (runtimePortlet) {
 		addDefaultResource = true;
 	}
+	else if (layout.getType().equals(LayoutConstants.TYPE_PANEL)) {
+		addDefaultResource = true;
+	}
 	else if (layoutTypePortlet.hasPortletId(portletId)) {
 		addDefaultResource = true;
 	}
@@ -86,7 +89,7 @@ catch (NoSuchResourceException nsre) {
 		addDefaultResource = false;
 	}
 
-	if (addDefaultResource || (layout.getType().equals(LayoutConstants.TYPE_PANEL) && (portlet.hasAddPortletPermission(user.getUserId())))) {
+	if (addDefaultResource) {
 		ResourceLocalServiceUtil.addResources(company.getCompanyId(), layout.getGroupId(), 0, rootPortletId, portletPrimaryKey, true, true, true);
 	}
 	else {

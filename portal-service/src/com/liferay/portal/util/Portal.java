@@ -261,6 +261,14 @@ public interface Portal {
 	public String getPortletTitle(String portletId, User user);
 
 	public String getPortletTitle(
+		Portlet portlet, long companyId, String languageId);
+
+	public String getPortletTitle(
+		Portlet portlet, long companyId, Locale locale);
+
+	public String getPortletTitle(Portlet portlet, User user);
+
+	public String getPortletTitle(
 		Portlet portlet, ServletContext ctx, Locale locale);
 
 	public String getPortletXmlFileName()

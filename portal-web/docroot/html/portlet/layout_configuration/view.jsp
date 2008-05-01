@@ -24,7 +24,7 @@
 
 <%@ include file="/html/portlet/layout_configuration/init.jsp" %>
 
-<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.getType().equals(LayoutConstants.TYPE_PORTLET) || layout.getType().equals(LayoutConstants.TYPE_PANEL))%>">
+<c:if test="<%= themeDisplay.isSignedIn() && (layout != null) && (layout.getType().equals(LayoutConstants.TYPE_PORTLET) || layout.getType().equals(LayoutConstants.TYPE_PANEL)) %>">
 
 	<%
 	PortletURL refererURL = renderResponse.createActionURL();
@@ -77,6 +77,7 @@
 		</div>
 	</div>
 </c:if>
+
 <c:if test="<%= !themeDisplay.isSignedIn() %>">
-	<liferay-ui:message key="please-log-back-in" />
+	<liferay-ui:message key="please-sign-in-to-continue" />
 </c:if>
