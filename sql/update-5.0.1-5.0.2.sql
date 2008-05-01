@@ -17,7 +17,7 @@ create table ExpandoValue (
 	rowId_ LONG,
 	classNameId LONG,
 	classPK LONG,
-	data_ VARCHAR(75) null
+	data_ STRING null
 );
 
 update SocialActivity set type_ = 'ADD_PROPOSAL' where type_ = 'PROPOSE';

@@ -84,7 +84,7 @@ public class ExpandoValueModelImpl extends BaseModelImpl {
 
 			{ "data_", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table ExpandoValue (valueId LONG not null primary key,tableId LONG,columnId LONG,rowId_ LONG,classNameId LONG,classPK LONG,data_ VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table ExpandoValue (valueId LONG not null primary key,tableId LONG,columnId LONG,rowId_ LONG,classNameId LONG,classPK LONG,data_ STRING null)";
 	public static final String TABLE_SQL_DROP = "drop table ExpandoValue";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";

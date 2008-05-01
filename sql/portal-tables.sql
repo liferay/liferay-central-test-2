@@ -347,7 +347,7 @@ create table ExpandoValue (
 	rowId_ LONG,
 	classNameId LONG,
 	classPK LONG,
-	data_ VARCHAR(75) null
+	data_ STRING null
 );
 
 create table Group_ (
