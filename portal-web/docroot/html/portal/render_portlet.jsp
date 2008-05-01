@@ -821,7 +821,7 @@ else {
 }
 %>
 
-<c:if test="<%= !themeDisplay.isStateExclusive() %>">
+<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 	<script type="text/javascript">
 		<c:if test="<%= !runtimePortlet %>">
 			document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
