@@ -130,7 +130,7 @@ category.test=Test
 category.tools=Hulpmiddelen
 category.undefined=Niet gedefiniëerd
 category.wiki=Wiki
-category.wol=Wereld van Lifecraft
+category.wol=Wereld van Liferay
 category.workflow=Workflow
 category.wsrp=WSRP
 
@@ -2592,6 +2592,7 @@ select-tags=Selecteer de tags
 select-the-action-that-this-role-can-perform-on-the-x-portlet=Selecteer de actie die deze rol op de <i>{0}</i> portlet mag doen.
 select-the-action-that-this-role-can-perform-on-the-x-resource=Selecteer de actie die deze rol op de <i>{0}</i> resource mag doen.
 select-the-actions-that-this-role-can-perform-on-each-resource-of-x-portlet=Selecteer de acties die deze rol kan doen op elke resource van de <i>{0}</i> portlet.
+select-the-applications-that-will-be-available-in-the-panel=Selecteer de toepassingen die in het paneel beschikbaar zullen zijn.
 select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-portlet=Selecteer de communities waar deze rol  de <i>{0}</i> actieop de {1} resource mag portlet.
 select-the-communities-where-this-role-can-perform-the-x-action-on-the-x-resource=Selecteer de communities waar deze rol  de <i>{0}</i> actieop de {1} resource mag doen.
 select-the-delivery-options-for-alerts-and-announcements=Selecteer de leveringsopties voor alarm en aankondigingen.
