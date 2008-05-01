@@ -177,7 +177,7 @@ Liferay.Session = {
 			function() {
 				instance.expire();
 			},
-		instance.sessionTimeoutWarning);
+			instance.sessionTimeoutWarning);
 	},
 
 	_counter: function() {
