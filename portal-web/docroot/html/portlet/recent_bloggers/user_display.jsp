@@ -34,9 +34,7 @@ String rowHREF = (String)objArray[1];
 %>
 
 <liferay-ui:user-display userId="<%= statsUser.getUserId() %>" url="<%= rowHREF %>">
-	<div class="user-details">
-		<liferay-ui:message key="posts" />: <%= statsUser.getEntryCount() %><br />
-		<liferay-ui:message key="stars" />: <%= statsUser.getRatingsTotalEntries() %><br />
-		<liferay-ui:message key="date" />: <%= dateFormatDate.format(statsUser.getLastPostDate()) %>
-	</div>
+	<liferay-ui:message key="posts" />: <%= statsUser.getEntryCount() %><br />
+	<liferay-ui:message key="stars" />: <%= statsUser.getRatingsTotalEntries() %><br />
+	<liferay-ui:message key="date" />: <%= dateFormatDate.format(statsUser.getLastPostDate()) %>
 </liferay-ui:user-display>
