@@ -67,7 +67,7 @@ public class HtmlUtil {
 	}
 
 	public static String toInputSafe(String html) {
-		return getHtml().unescape(html);
+		return getHtml().toInputSafe(html);
 	}
 
 	public static String unescape(String html) {
