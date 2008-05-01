@@ -24,12 +24,14 @@
 
 <%@ include file="/html/taglib/ui/user_display/init.jsp" %>
 
-<c:if test="<%= displayStyle == 1 %>">
-		</td>
-	</tr>
-	</table>
-</c:if>
+		<c:if test="<%= displayStyle == 1 %>">
+				</td>
+			</tr>
+			</table>
+		</c:if>
 
-<c:if test="<%= displayStyle == 2 %>">
+		<c:if test="<%= displayStyle == 2 %>">
+			</div>
+		</c:if>
 	</div>
-</c:if>
+</div>

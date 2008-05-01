@@ -38,49 +38,48 @@ if (Validator.isNull(url) && (userDisplay != null)) {
 }
 %>
 
-<c:if test="<%= displayStyle == 1 %>">
-	<table class="lfr-table">
-	<tr>
-		<td valign="top">
-</c:if>
+<div class="taglib-user-display">
+	<c:if test="<%= displayStyle == 1 %>">
+		<table class="lfr-table">
+		<tr>
+			<td valign="top">
+	</c:if>
 
-<c:if test="<%= displayStyle == 2 %>">
-	<%--<div style="white-space: nowrap;">--%>
-	<div>
-</c:if>
+	<c:if test="<%= displayStyle == 2 %>">
+		<%--<div style="white-space: nowrap;">--%>
+		<div>
+	</c:if>
 
+	<div class="user-profile-image">
+		<c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>"></c:if>
 
-<div class="user-profile-image">
-
-<c:if test="<%= Validator.isNotNull(url) %>"><a href="<%= url %>"></c:if>
-
-	<img border="0" src="<%= themeDisplay.getPathImage() %>/user_<%= (userDisplay != null) && userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
-
-<c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
-
-</div>
-
-<c:if test="<%= displayStyle == 1 %>">
-	</td>
-	<td valign="top">
-</c:if>
-
-<c:if test="<%= displayStyle == 2 %>">
-</c:if>
-
-<c:choose>
-	<c:when test="<%= userDisplay != null %>">
-		<c:if test="<%= Validator.isNotNull(url) %>"><a class="user-name" href="<%= url %>"></c:if>
-
-		<%= userDisplay.getFullName() %>
+		<img border="0" src="<%= themeDisplay.getPathImage() %>/user_<%= (userDisplay != null) && userDisplay.isFemale() ? "female" : "male" %>_portrait?img_id=<%= portraitId %>&t=<%= tokenId %>" width="65" />
 
 		<c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
+	</div>
 
-		<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
-			<a href="javascript: Messaging.chat({toId:'<%= userId %>', toName:'<%= userDisplay.getFullName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
-		</c:if>
-	</c:when>
-	<c:otherwise>
-		<%= userName %>
-	</c:otherwise>
-</c:choose>
+	<c:if test="<%= displayStyle == 1 %>">
+		</td>
+		<td valign="top">
+	</c:if>
+
+	<c:if test="<%= displayStyle == 2 %>">
+	</c:if>
+
+	<div class="user-details">
+		<c:choose>
+			<c:when test="<%= userDisplay != null %>">
+				<c:if test="<%= Validator.isNotNull(url) %>"><a class="user-name" href="<%= url %>"></c:if>
+
+				<%= userDisplay.getFullName() %>
+
+				<c:if test="<%= Validator.isNotNull(url) %>"></a></c:if>
+
+				<c:if test="<%= MessagingUtil.isJabberEnabled() && themeDisplay.isSignedIn() %>">
+					<a href="javascript: Messaging.chat({toId:'<%= userId %>', toName:'<%= userDisplay.getFullName() %>'});"><img src="<%= themeDisplay.getPathThemeImages() %>/chat/user_offline.png" /></a>
+				</c:if>
+			</c:when>
+			<c:otherwise>
+				<%= userName %>
+			</c:otherwise>
+		</c:choose>
