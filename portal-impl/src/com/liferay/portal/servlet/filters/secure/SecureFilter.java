@@ -35,9 +35,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.model.Company;
 import com.liferay.portal.model.CompanyConstants;
-import com.liferay.portal.service.CompanyLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.util.PortalInstances;
 import com.liferay.portal.util.PropsUtil;
@@ -226,33 +224,43 @@ public class SecureFilter extends BaseFilter {
 
 		long companyId = PortalInstances.getCompanyId(req);
 
-		Company company = CompanyLocalServiceUtil.getCompanyById(companyId);
-
-		String authType = company.getAuthType();
-
 		String[] loginAndPassword = StringUtil.split(
 			credentials, StringPool.COLON);
 
 		String login = loginAndPassword[0].trim();
 		String password = loginAndPassword[1].trim();
 
-		if (login.endsWith("@uid")) {
-			authType = CompanyConstants.AUTH_TYPE_ID;
+		// Strip @uid and @sn for backwards compatibility
 
+		if (login.endsWith("@uid")) {
 			int pos = login.indexOf("@uid");
 
 			login = login.substring(0, pos);
 		}
 		else if (login.endsWith("@sn")) {
-			authType = CompanyConstants.AUTH_TYPE_SN;
-
 			int pos = login.indexOf("@sn");
 
 			login = login.substring(0, pos);
 		}
 
+		// Try every authentication type
+
 		userId = UserLocalServiceUtil.authenticateForBasic(
-			companyId, authType, login, password);
+			companyId, CompanyConstants.AUTH_TYPE_EA, login, password);
+
+		if (userId > 0) {
+			return userId;
+		}
+
+		userId = UserLocalServiceUtil.authenticateForBasic(
+			companyId, CompanyConstants.AUTH_TYPE_SN, login, password);
+
+		if (userId > 0) {
+			return userId;
+		}
+
+		userId = UserLocalServiceUtil.authenticateForBasic(
+			companyId, CompanyConstants.AUTH_TYPE_ID, login, password);
 
 		return userId;
 	}
