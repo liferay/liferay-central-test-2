@@ -661,7 +661,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
-<c:if test="<%= !themeDisplay.isStateExclusive() %>">
+<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 
 	<%
 	String freeformStyles = StringPool.BLANK;
@@ -800,7 +800,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	</c:otherwise>
 </c:choose>
 
-<c:if test="<%= !themeDisplay.isStateExclusive() %>">
+<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 	</div>
 </c:if>
 
