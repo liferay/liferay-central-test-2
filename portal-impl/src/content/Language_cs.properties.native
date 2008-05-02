@@ -1577,6 +1577,7 @@ wsrp-service-description-endpoint=Service Description Endpoint
 wsrp-service-url=WSRP Service URL
 wsrp-your-service-url-or-endpoints-are-unreachable=Your service URL or endpoints are unreachable. Please verify your settings.
 x's-commits-on-x={0}'s commits on {1}.
+x's-commits={0}'s Commits
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<i>{0}</i> cannot be unassociated from this community.
 x-cannot-be-unassociated-from-this-location=<i>{0}</i> cannot be unassociated from this location.

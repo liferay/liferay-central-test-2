@@ -1568,6 +1568,7 @@ worm=Sâu
 write-on-x-wall=Write on {0}'s Wall
 write-roles=Quyền viết
 x's-commits-on-x={0}'s commits on {1}.
+x's-commits={0}'s Commits
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<i>{0}</i> cannot be unassociated from this community.
 x-cannot-be-unassociated-from-this-location=<i>{0}</i> cannot be unassociated from this location.

@@ -2105,6 +2105,7 @@ wsrp-service-description-endpoint=Mantingui el punt final de la descripció
 wsrp-service-url=URL del servei de WSRP
 wsrp-your-service-url-or-endpoints-are-unreachable=La seva URL del servei o punts finals son inabastables. verifiqui si us plau els seus ajusts.
 x's-commits-on-x={0}'s commits on {1}.
+x's-commits={0}'s Commits
 x-blog-entries={0} Blog Entries
 x-cannot-be-unassociated-from-this-community=<i>{0}</i> cannot be unassociated from this community.
 x-cannot-be-unassociated-from-this-location=<i>{0}</i> cannot be unassociated from this location.
