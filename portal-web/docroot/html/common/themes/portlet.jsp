@@ -106,7 +106,13 @@ containerStyles = sm.toString();
 %>
 
 <c:choose>
-	<c:when test="<%= themeDisplay.isStateExclusive() %>">
+	<c:when test="<%= themeDisplay.isFacebook() || themeDisplay.isStateExclusive() %>">
+		<c:if test="<%= themeDisplay.isFacebook() %>">
+			<fb:title><%= portletTitle %></fb:title>
+
+			<fb:header><%= portletTitle %></fb:header>
+		</c:if>
+
 		<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 	</c:when>
 	<c:when test="<%= themeDisplay.isStatePopUp() %>">

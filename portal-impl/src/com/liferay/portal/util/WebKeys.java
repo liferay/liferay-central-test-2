@@ -81,6 +81,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String ENCRYPT = "shuo";
 
+	public static final String FACEBOOK_APP_ID = "FACEBOOK_APP_ID";
+
 	public static final String FORM_NAME = "FORM_NAME";
 
 	public static final String FORWARD_URL = "FORWARD_URL";

@@ -565,7 +565,15 @@ public class PortletURLImpl
 
 		Portlet portlet = getPortlet();
 
-		String portalURL = PortalUtil.getPortalURL(_req, _secure);
+		String portalURL = null;
+
+		if (themeDisplay.isFacebook()) {
+			portalURL =
+				"http://apps.facebook.com/" + themeDisplay.getFacebookAppId();
+		}
+		else {
+			portalURL = PortalUtil.getPortalURL(_req, _secure);
+		}
 
 		try {
 			if (_layoutFriendlyURL == null) {
@@ -616,13 +624,27 @@ public class PortletURLImpl
 				sm.append(portalURL);
 			}
 
-			sm.append(_layoutFriendlyURL);
+			if (!themeDisplay.isFacebook()) {
+				sm.append(_layoutFriendlyURL);
+			}
 
 			String friendlyURLPath = getPortletFriendlyURLPath();
 
 			if (Validator.isNotNull(friendlyURLPath)) {
-				sm.append("/-");
-				sm.append(friendlyURLPath);
+				if (themeDisplay.isFacebook()) {
+					int pos = friendlyURLPath.indexOf(StringPool.SLASH, 1);
+
+					if (pos != -1) {
+						sm.append(friendlyURLPath.substring(pos));
+					}
+					else {
+						sm.append(friendlyURLPath);
+					}
+				}
+				else {
+					sm.append("/-");
+					sm.append(friendlyURLPath);
+				}
 
 				if (_lifecycle.equals(PortletRequest.RENDER_PHASE)) {
 					addParameterIncludedInPath("p_p_lifecycle");

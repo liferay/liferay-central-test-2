@@ -29,7 +29,7 @@ String scroll = ParamUtil.getString(request, "scroll");
 %>
 
 <c:choose>
-	<c:when test="<%= themeDisplay.isStateExclusive() %>">
+	<c:when test="<%= themeDisplay.isFacebook() || themeDisplay.isStateExclusive() %>">
 		<%= request.getAttribute(WebKeys.LAYOUT_CONTENT) %>
 	</c:when>
 	<c:when test="<%= themeDisplay.isStatePopUp() %>">

@@ -25,12 +25,12 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
+if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
 	String ppid = ParamUtil.getString(request, "p_p_id");
 
 	String content = null;
 
-	if (themeDisplay.isStateExclusive()) {
+	if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
 		content = LayoutTemplateLocalUtil.getContent("exclusive", true, theme.getThemeId());
 	}
 	else if (themeDisplay.isStatePopUp()) {

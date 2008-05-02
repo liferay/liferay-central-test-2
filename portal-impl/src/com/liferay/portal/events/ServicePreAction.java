@@ -1205,6 +1205,9 @@ public class ServicePreAction extends Action {
 
 		String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
 
+		String facebookAppId = (String)req.getAttribute(
+			WebKeys.FACEBOOK_APP_ID);
+
 		// Theme display
 
 		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
@@ -1249,6 +1252,7 @@ public class ServicePreAction extends Action {
 		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));
 		themeDisplay.setStateMaximized(LiferayWindowState.isMaximized(req));
 		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
+		themeDisplay.setFacebookAppId(facebookAppId);
 		themeDisplay.setPathApplet(contextPath + "/applets");
 		themeDisplay.setPathCms(contextPath + "/cms");
 		themeDisplay.setPathContext(contextPath);

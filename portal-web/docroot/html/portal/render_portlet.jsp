@@ -642,7 +642,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	try {
 		invokerPortlet.render(renderReqImpl, renderResImpl);
 
-		if (themeDisplay.isStateExclusive()) {
+		if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
 			renderReqImpl.setAttribute(WebKeys.STRING_SERVLET_RESPONSE, stringServletRes);
 		}
 	}
@@ -661,7 +661,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 
 <%@ include file="/html/portal/render_portlet-ext.jsp" %>
 
-<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 
 	<%
 	String freeformStyles = StringPool.BLANK;
@@ -800,7 +800,7 @@ if (portlet.isActive() && access && supportsMimeType) {
 	</c:otherwise>
 </c:choose>
 
-<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 	</div>
 </c:if>
 
@@ -821,7 +821,7 @@ else {
 }
 %>
 
-<c:if test="<%= !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
+<c:if test="<%= !themeDisplay.isFacebook() && !themeDisplay.isStateExclusive() && !themeDisplay.isWapTheme() %>">
 	<script type="text/javascript">
 		<c:if test="<%= !runtimePortlet %>">
 			document.getElementById("p_p_id<%= renderResImpl.getNamespace() %>").portletId = "<%= portletDisplay.getId() %>";
@@ -861,7 +861,7 @@ if (showPortletCssIcon) {
 SessionMessages.clear(renderReqImpl);
 SessionErrors.clear(renderReqImpl);
 
-if (themeDisplay.isStateExclusive()) {
+if (themeDisplay.isFacebook() || themeDisplay.isStateExclusive()) {
 	request.setAttribute(JavaConstants.JAVAX_PORTLET_REQUEST, renderReqImpl);
 	request.setAttribute(JavaConstants.JAVAX_PORTLET_RESPONSE, renderResImpl);
 }

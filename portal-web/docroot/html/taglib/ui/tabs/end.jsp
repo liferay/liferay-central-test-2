@@ -24,6 +24,8 @@
 
 <%@ include file="/html/taglib/ui/tabs/init.jsp" %>
 
-<script type="text/javascript">
-	Tabs.show("<%= namespace + param %>", <%= namesJS %>, "<%= value %>");
-</script>
+<c:if test="<%= !themeDisplay.isFacebook() %>">
+	<script type="text/javascript">
+		Tabs.show("<%= namespace + param %>", <%= namesJS %>, "<%= value %>");
+	</script>
+</c:if>

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
@@ -457,6 +458,22 @@ public class ThemeDisplay implements Serializable {
 
 	public void setStatePopUp(boolean statePopUp) {
 		_statePopUp = statePopUp;
+	}
+
+	public boolean isFacebook() {
+		return _facebook;
+	}
+
+	public String getFacebookAppId() {
+		return _facebookAppId;
+	}
+
+	public void setFacebookAppId(String facebookAppId) {
+		_facebookAppId = facebookAppId;
+
+		if (Validator.isNotNull(facebookAppId)) {
+			_facebook = true;
+		}
 	}
 
 	public String getCDNHost() {
@@ -897,6 +914,8 @@ public class ThemeDisplay implements Serializable {
 		_stateExclusive = false;
 		_stateMaximized = false;
 		_statePopUp = false;
+		_facebook = false;
+		_facebookAppId = StringPool.BLANK;
 		_cdnHost = StringPool.BLANK;
 		_pathApplet = StringPool.BLANK;
 		_pathCms = StringPool.BLANK;
@@ -986,6 +1005,8 @@ public class ThemeDisplay implements Serializable {
 	private boolean _stateExclusive;
 	private boolean _stateMaximized;
 	private boolean _statePopUp;
+	private boolean _facebook;
+	private String _facebookAppId;
 	private String _cdnHost = StringPool.BLANK;
 	private String _pathApplet = StringPool.BLANK;
 	private String _pathCms = StringPool.BLANK;

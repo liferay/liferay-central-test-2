@@ -94,91 +94,120 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 	}
 	%>
 
-	<input name="<%= namespace %><%= param %>TabsScroll" type="hidden" />
+	<c:choose>
+		<c:when test="<%= themeDisplay.isFacebook() %>">
+			<fb:tabs>
+		</c:when>
+		<c:otherwise>
+			<input name="<%= namespace %><%= param %>TabsScroll" type="hidden" />
 
-	<ul class="tabs">
+			<ul class="tabs">
+		</c:otherwise>
+	</c:choose>
 
-		<%
-		for (int i = 0; i < values.length; i++) {
-			String curURL = (String)request.getAttribute("liferay-ui:tabs:url" + i);
+	<%
+	for (int i = 0; i < values.length; i++) {
+		String curURL = (String)request.getAttribute("liferay-ui:tabs:url" + i);
 
-			if (Validator.isNull(curURL)) {
-				if (values.length == 1) {
-					/*if (Validator.isNotNull(backURL)) {
-						curURL = backURL;
-					}*/
-				}
-				else {
-					if (refresh) {
-						if (portletURL != null) {
-							portletURL.setParameter(param, values[i]);
+		if (Validator.isNull(curURL)) {
+			if (values.length == 1) {
+				/*if (Validator.isNotNull(backURL)) {
+					curURL = backURL;
+				}*/
+			}
+			else {
+				if (refresh) {
+					if (portletURL != null) {
+						portletURL.setParameter(param, values[i]);
 
-							curURL = portletURL.toString();
-						}
-						else {
-							if (values[i].equals("&raquo;")) {
-								curURL = url + "&" + param + "=" + values[0] + anchor;
-							}
-							else {
-								curURL = url + "&" + param + "=" + values[i] + anchor;
-							}
-						}
+						curURL = portletURL.toString();
 					}
 					else {
-						curURL = "javascript: ";
-
-						if (Validator.isNotNull(formName)) {
-							curURL += "document." + namespace + formName + "." + namespace + param + ".value = '" + names[i] + "';";
+						if (values[i].equals("&raquo;")) {
+							curURL = url + "&" + param + "=" + values[0] + anchor;
 						}
-
-						curURL += "Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
+						else {
+							curURL = url + "&" + param + "=" + values[i] + anchor;
+						}
 					}
 				}
+				else {
+					curURL = "javascript: ";
+
+					if (Validator.isNotNull(formName)) {
+						curURL += "document." + namespace + formName + "." + namespace + param + ".value = '" + names[i] + "';";
+					}
+
+					curURL += "Tabs.show('" + namespace + param + "', " + namesJS + ", '" + names[i] + "');";
+				}
 			}
-
-			String curOnClick = StringPool.BLANK;
-
-			if (Validator.isNotNull(onClick)) {
-				curOnClick = onClick + "('" + curURL + "', '" + values[i] + "'); return false;";
-			}
-		%>
-
-			<li <%= (values.length == 1) || value.equals(values[i]) ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
-				<c:choose>
-					<c:when test="<%= Validator.isNotNull(curURL) %>">
-						<a href="<%= curURL %>"
-							<c:if test="<%= Validator.isNotNull(curOnClick) %>">
-								onClick="<%= curOnClick %>"
-							</c:if>
-						>
-					</c:when>
-					<c:otherwise>
-						<span>
-					</c:otherwise>
-				</c:choose>
-
-				<%= LanguageUtil.get(pageContext, names[i]) %>
-
-				<c:choose>
-					<c:when test="<%= Validator.isNotNull(curURL) %>">
-						</a>
-					</c:when>
-					<c:otherwise>
-						</span>
-					</c:otherwise>
-				</c:choose>
-			</li>
-
-		<%
 		}
-		%>
 
-		<c:if test="<%= Validator.isNotNull(backURL) %>">
-			<li class="toggle">
-				<a href="<%= HtmlUtil.escape(backURL) %>">&laquo; <liferay-ui:message key="back" /></a>
-			</li>
-		</c:if>
-	</ul>
+		String curOnClick = StringPool.BLANK;
+
+		if (Validator.isNotNull(onClick)) {
+			curOnClick = onClick + "('" + curURL + "', '" + values[i] + "'); return false;";
+		}
+
+		boolean selected = (values.length == 1) || value.equals(values[i]);
+	%>
+
+		<c:choose>
+			<c:when test="<%= themeDisplay.isFacebook() %>">
+				<fb:tab_item
+					align="left"
+					href="<%= curURL %>"
+					selected="<%= selected %>"
+					title="<%= LanguageUtil.get(pageContext, names[i]) %>"
+				/>
+			</c:when>
+			<c:otherwise>
+				<li <%= selected ? "class=\"current\"" : "" %> id="<%= namespace %><%= param %><%= values[i] %>TabsId">
+					<c:choose>
+						<c:when test="<%= Validator.isNotNull(curURL) %>">
+							<a href="<%= curURL %>"
+								<c:if test="<%= Validator.isNotNull(curOnClick) %>">
+									onClick="<%= curOnClick %>"
+								</c:if>
+							>
+						</c:when>
+						<c:otherwise>
+							<span>
+						</c:otherwise>
+					</c:choose>
+
+					<%= LanguageUtil.get(pageContext, names[i]) %>
+
+					<c:choose>
+						<c:when test="<%= Validator.isNotNull(curURL) %>">
+							</a>
+						</c:when>
+						<c:otherwise>
+							</span>
+						</c:otherwise>
+					</c:choose>
+				</li>
+			</c:otherwise>
+		</c:choose>
+
+	<%
+	}
+	%>
+
+	<c:if test="<%= Validator.isNotNull(backURL) %>">
+		<li class="toggle">
+			<a href="<%= HtmlUtil.escape(backURL) %>">&laquo; <liferay-ui:message key="back" /></a>
+		</li>
+	</c:if>
+
+	<c:choose>
+		<c:when test="<%= themeDisplay.isFacebook() %>">
+			</fb:tabs>
+		</c:when>
+		<c:otherwise>
+			</ul>
+		</c:otherwise>
+	</c:choose>
 
 	<%
 	if (portletURL != null) {

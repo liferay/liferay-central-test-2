@@ -431,6 +431,11 @@
 		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet>
+		<servlet-name>FacebookServlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.FacebookServlet</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet>
 		<servlet-name>FriendlyURLPrivateGroupServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.FriendlyURLServlet</servlet-class>
 		<init-param>
@@ -441,7 +446,7 @@
 			<param-name>user</param-name>
 			<param-value>false</param-value>
 		</init-param>
-		<load-on-startup>2</load-on-startup>
+		<load-on-startup>3</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>FriendlyURLPrivateUserServlet</servlet-name>
@@ -454,7 +459,7 @@
 			<param-name>user</param-name>
 			<param-value>true</param-value>
 		</init-param>
-		<load-on-startup>3</load-on-startup>
+		<load-on-startup>4</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>FriendlyURLPublicServlet</servlet-name>
@@ -463,32 +468,42 @@
 			<param-name>private</param-name>
 			<param-value>false</param-value>
 		</init-param>
-		<load-on-startup>4</load-on-startup>
+		<load-on-startup>5</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>ImageServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.ImageServlet</servlet-class>
-		<load-on-startup>5</load-on-startup>
+		<load-on-startup>6</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>LanguageServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.LanguageServlet</servlet-class>
-		<load-on-startup>6</load-on-startup>
+		<load-on-startup>7</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>LuceneServlet</servlet-name>
 		<servlet-class>com.liferay.portal.servlet.LuceneServlet</servlet-class>
-		<load-on-startup>7</load-on-startup>
-	</servlet>
-	<servlet>
-		<servlet-name>SitemapServlet</servlet-name>
-		<servlet-class>com.liferay.portal.servlet.SitemapServlet</servlet-class>
 		<load-on-startup>8</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>PortalDelegatorServlet</servlet-name>
 		<servlet-class>com.liferay.portal.kernel.servlet.PortalDelegatorServlet</servlet-class>
 		<load-on-startup>9</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>SitemapServlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.SitemapServlet</servlet-class>
+		<load-on-startup>10</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>SoftwareCatalogServlet</servlet-name>
+		<servlet-class>com.liferay.portal.servlet.SoftwareCatalogServlet</servlet-class>
+		<load-on-startup>11</load-on-startup>
+	</servlet>
+	<servlet>
+		<servlet-name>DisplayChart</servlet-name>
+		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
+		<load-on-startup>12</load-on-startup>
 	</servlet>
 	<servlet>
 		<servlet-name>PortletBridgeServlet</servlet-name>
@@ -513,21 +528,15 @@
 			<param-name>ignorePostToGetRequestHeaders</param-name>
 			<param-value>content-type,content-length</param-value>
 		</init-param>
-		<load-on-startup>10</load-on-startup>
-	</servlet>
-	<servlet>
-		<servlet-name>SoftwareCatalogServlet</servlet-name>
-		<servlet-class>com.liferay.portal.servlet.SoftwareCatalogServlet</servlet-class>
-		<load-on-startup>11</load-on-startup>
-	</servlet>
-	<servlet>
-		<servlet-name>DisplayChart</servlet-name>
-		<servlet-class>org.jfree.chart.servlet.DisplayChart</servlet-class>
-		<load-on-startup>12</load-on-startup>
+		<load-on-startup>13</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>MainServlet</servlet-name>
 		<url-pattern>/c/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>FacebookServlet</servlet-name>
+		<url-pattern>/facebook/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>FriendlyURLPrivateGroupServlet</servlet-name>
@@ -550,16 +559,12 @@
 		<url-pattern>/language/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>SitemapServlet</servlet-name>
-		<url-pattern>/sitemap.xml</url-pattern>
-	</servlet-mapping>
-	<servlet-mapping>
 		<servlet-name>PortalDelegatorServlet</servlet-name>
 		<url-pattern>/delegate/*</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
-		<servlet-name>PortletBridgeServlet</servlet-name>
-		<url-pattern>/pbhs/*</url-pattern>
+		<servlet-name>SitemapServlet</servlet-name>
+		<url-pattern>/sitemap.xml</url-pattern>
 	</servlet-mapping>
 	<servlet-mapping>
 		<servlet-name>SoftwareCatalogServlet</servlet-name>
@@ -568,6 +573,10 @@
 	<servlet-mapping>
 		<servlet-name>DisplayChart</servlet-name>
 		<url-pattern>/display_chart/*</url-pattern>
+	</servlet-mapping>
+	<servlet-mapping>
+		<servlet-name>PortletBridgeServlet</servlet-name>
+		<url-pattern>/pbhs/*</url-pattern>
 	</servlet-mapping>
 	<session-config>
 		<session-timeout>30</session-timeout>
