@@ -112,6 +112,7 @@ public class WrapPortletTag extends ParamAndPropertyAncestorTagImpl {
 		}
 		finally {
 			clearParams();
+			clearProperties();
 		}
 	}
 

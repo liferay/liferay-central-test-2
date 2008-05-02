@@ -84,6 +84,7 @@ public class IncludeTag extends ParamAndPropertyAncestorTagImpl {
 		}
 		finally {
 			clearParams();
+			clearProperties();
 		}
 	}
 

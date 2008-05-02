@@ -211,6 +211,7 @@ public class ActionURLTag extends ParamAndPropertyAncestorTagImpl {
 		}
 		finally {
 			clearParams();
+			clearProperties();
 		}
 
 		return EVAL_PAGE;

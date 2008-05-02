@@ -101,6 +101,7 @@ public class BoxTag extends ParamAndPropertyAncestorTagImpl {
 		}
 		finally {
 			clearParams();
+			clearProperties();
 		}
 	}
 
