@@ -266,7 +266,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
-		syndFeed.setFeedType(type + "_" + version);
+		syndFeed.setFeedType(RSSUtil.getFeedType(type, version));
 		syndFeed.setTitle(name);
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(description);
@@ -292,7 +292,7 @@ public class WikiPageServiceImpl extends WikiPageServiceBaseImpl {
 
 			SyndContent syndContent = new SyndContentImpl();
 
-			syndContent.setType("html");
+			syndContent.setType(RSSUtil.DEFAULT_ENTRY_TYPE);
 
 			if (diff) {
 				if (latestPage != null) {

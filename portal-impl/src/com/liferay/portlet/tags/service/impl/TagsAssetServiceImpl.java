@@ -173,7 +173,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
-		syndFeed.setFeedType(type + "_" + version);
+		syndFeed.setFeedType(RSSUtil.getFeedType(type, version));
 		syndFeed.setTitle(name);
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(GetterUtil.getString(description, name));
@@ -199,7 +199,7 @@ public class TagsAssetServiceImpl extends TagsAssetServiceBaseImpl {
 
 			SyndContent syndContent = new SyndContentImpl();
 
-			syndContent.setType("html");
+			syndContent.setType(RSSUtil.DEFAULT_ENTRY_TYPE);
 			syndContent.setValue(value);
 
 			syndEntry.setDescription(syndContent);

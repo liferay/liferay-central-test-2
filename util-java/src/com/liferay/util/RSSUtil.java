@@ -59,6 +59,11 @@ public class RSSUtil {
 
 	public static final double DEFAULT_VERSION = 1.0;
 
+	public static final String DEFAULT_ENTRY_TYPE = "html";
+
+	public static final String DEFAULT_FEED_TYPE = getFeedType(
+		DEFAULT_TYPE, DEFAULT_VERSION);
+
 	public static final String DISPLAY_STYLE_ABSTRACT = "abstract";
 
 	public static final String DISPLAY_STYLE_FULL_CONTENT = "full-content";
@@ -83,6 +88,10 @@ public class RSSUtil {
 
 			return output.outputString(feed);
 		}
+	}
+
+	public static String getFeedType(String type, double version) {
+		return type + StringPool.UNDERLINE + version;
 	}
 
 	private static void _regexpStrip(SyndFeed feed) {

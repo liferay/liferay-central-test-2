@@ -169,7 +169,7 @@ public class RSSAction extends PortletAction {
 				}
 			}
 
-			syndContent.setType("html");
+			syndContent.setType(RSSUtil.DEFAULT_ENTRY_TYPE);
 			syndContent.setValue(value);
 
 			syndEntry.setDescription(syndContent);

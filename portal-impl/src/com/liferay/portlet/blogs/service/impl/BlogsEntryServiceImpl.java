@@ -271,7 +271,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 		SyndFeed syndFeed = new SyndFeedImpl();
 
-		syndFeed.setFeedType(type + "_" + version);
+		syndFeed.setFeedType(RSSUtil.getFeedType(type, version));
 		syndFeed.setTitle(name);
 		syndFeed.setLink(feedURL);
 		syndFeed.setDescription(description);
@@ -331,7 +331,7 @@ public class BlogsEntryServiceImpl extends BlogsEntryServiceBaseImpl {
 
 			SyndContent syndContent = new SyndContentImpl();
 
-			syndContent.setType("html");
+			syndContent.setType(RSSUtil.DEFAULT_ENTRY_TYPE);
 			syndContent.setValue(value);
 
 			syndEntry.setDescription(syndContent);
