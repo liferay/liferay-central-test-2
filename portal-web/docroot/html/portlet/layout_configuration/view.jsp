@@ -53,7 +53,7 @@
 
 			PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
 
-			portletCategory = removeEmptyCategories(user, layout, layoutTypePortlet, portletCategory, panelSelectedPortlets);
+			portletCategory = _getRelevantPortletCategory(portletCategory, panelSelectedPortlets, layoutTypePortlet, layout, user);
 
 			List categories = ListUtil.fromCollection(portletCategory.getCategories());
 
@@ -87,22 +87,13 @@
 </c:if>
 
 <%!
-public PortletCategory removeEmptyCategories(User user, Layout layout, LayoutTypePortlet layoutTypePortlet, PortletCategory portletCategory, Set panelSelectedPortlets) throws SystemException {
-	PortletCategory cleanCategory = new PortletCategory(portletCategory.getName(), portletCategory.getPortletIds());
+private PortletCategory _getRelevantPortletCategory(PortletCategory portletCategory, Set panelSelectedPortlets, LayoutTypePortlet layoutTypePortlet, Layout layout, User user) throws Exception {
+	PortletCategory relevantPortletCategory = new PortletCategory(portletCategory.getName(), portletCategory.getPortletIds());
 
-	Iterator<PortletCategory> itr = portletCategory.getCategories().iterator();
+	for (PortletCategory curPortletCategory : portletCategory.getCategories()) {
+		Set<String> portletIds = new HashSet<String>();
 
-	while (itr.hasNext()) {
-		PortletCategory curCategory = itr.next();
-
-		List portlets = new ArrayList();
-		Set<String> portletIds = new HashSet();
-		
-		Iterator itr2 = curCategory.getPortletIds().iterator();
-
-		while (itr2.hasNext()) {
-			String portletId = (String)itr2.next();
-
+		for (String portletId : curPortletCategory.getPortletIds()) {
 			Portlet portlet = PortletLocalServiceUtil.getPortletById(user.getCompanyId(), portletId);
 
 			if (portlet != null) {
@@ -110,29 +101,28 @@ public PortletCategory removeEmptyCategories(User user, Layout layout, LayoutTyp
 				}
 				else if (!portlet.isActive()) {
 				}
-				else if (!portlet.isInstanceable() && layoutTypePortlet.hasPortletId(portlet.getPortletId())) {
-					portlets.add(portlet);
-				}
 				else if (!portlet.hasAddPortletPermission(user.getUserId())) {
 				}
 				else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && !panelSelectedPortlets.contains(portlet.getRootPortletId())) {
 				}
+				else if (!portlet.isInstanceable() && layoutTypePortlet.hasPortletId(portlet.getPortletId())) {
+					portletIds.add(portlet.getPortletId());
+				}
 				else {
-					portlets.add(portlet);
-					portletIds.add(String.valueOf(portlet.getPortletId()));
+					portletIds.add(portlet.getPortletId());
 				}
 			}
 		}
 
-		PortletCategory curCleanCategory = removeEmptyCategories(user, layout, layoutTypePortlet, curCategory, panelSelectedPortlets);
+		PortletCategory curRelevantPortletCategory = _getRelevantPortletCategory(curPortletCategory, panelSelectedPortlets, layoutTypePortlet, layout, user);
 
-		curCleanCategory.setPortletIds(portletIds);
+		curRelevantPortletCategory.setPortletIds(portletIds);
 
-		if ((curCleanCategory.getCategories().size() > 0) || (portlets.size() > 0)) {
-			cleanCategory.addCategory(curCleanCategory);
+		if ((curRelevantPortletCategory.getCategories().size() > 0) || (portletIds.size() > 0)) {
+			relevantPortletCategory.addCategory(curRelevantPortletCategory);
 		}
 	}
 
-	return cleanCategory;
+	return relevantPortletCategory;
 }
 %>

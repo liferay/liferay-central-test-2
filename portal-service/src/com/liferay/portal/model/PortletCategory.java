@@ -45,9 +45,7 @@ public class PortletCategory implements Serializable {
 	}
 
 	public PortletCategory(String name) {
-		_name = name;
-		_categories = new HashMap<String, PortletCategory>();
-		_portletIds = new HashSet<String>();
+		this(name, new HashSet<String>());
 	}
 
 	public PortletCategory(String name, Set<String> portletIds) {
