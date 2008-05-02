@@ -50,6 +50,12 @@ public class PortletCategory implements Serializable {
 		_portletIds = new HashSet<String>();
 	}
 
+	public PortletCategory(String name, Set<String> portletIds) {
+		_name = name;
+		_categories = new HashMap<String, PortletCategory>();
+		_portletIds = portletIds;
+	}
+
 	public String getName() {
 		return _name;
 	}
@@ -68,6 +74,10 @@ public class PortletCategory implements Serializable {
 
 	public Set<String> getPortletIds() {
 		return _portletIds;
+	}
+
+	public void setPortletIds(Set<String> portletIds) {
+		_portletIds = portletIds;
 	}
 
 	public void merge(PortletCategory newPortletCategory) {

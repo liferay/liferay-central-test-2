@@ -49,7 +49,11 @@
 			</c:if>
 
 			<%
+			Set panelSelectedPortlets = SetUtil.fromArray(StringUtil.split(layout.getTypeSettingsProperties().getProperty("panelSelectedPortlets")));
+
 			PortletCategory portletCategory = (PortletCategory)WebAppPool.get(String.valueOf(company.getCompanyId()), WebKeys.PORTLET_CATEGORY);
+
+			portletCategory = removeEmptyCategories(user, layout, layoutTypePortlet, portletCategory, panelSelectedPortlets);
 
 			List categories = ListUtil.fromCollection(portletCategory.getCategories());
 
@@ -81,3 +85,54 @@
 <c:if test="<%= !themeDisplay.isSignedIn() %>">
 	<liferay-ui:message key="please-sign-in-to-continue" />
 </c:if>
+
+<%!
+public PortletCategory removeEmptyCategories(User user, Layout layout, LayoutTypePortlet layoutTypePortlet, PortletCategory portletCategory, Set panelSelectedPortlets) throws SystemException {
+	PortletCategory cleanCategory = new PortletCategory(portletCategory.getName(), portletCategory.getPortletIds());
+
+	Iterator<PortletCategory> itr = portletCategory.getCategories().iterator();
+
+	while (itr.hasNext()) {
+		PortletCategory curCategory = itr.next();
+
+		List portlets = new ArrayList();
+		Set<String> portletIds = new HashSet();
+		
+		Iterator itr2 = curCategory.getPortletIds().iterator();
+
+		while (itr2.hasNext()) {
+			String portletId = (String)itr2.next();
+
+			Portlet portlet = PortletLocalServiceUtil.getPortletById(user.getCompanyId(), portletId);
+
+			if (portlet != null) {
+				if (portlet.isSystem()) {
+				}
+				else if (!portlet.isActive()) {
+				}
+				else if (!portlet.isInstanceable() && layoutTypePortlet.hasPortletId(portlet.getPortletId())) {
+					portlets.add(portlet);
+				}
+				else if (!portlet.hasAddPortletPermission(user.getUserId())) {
+				}
+				else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && !panelSelectedPortlets.contains(portlet.getRootPortletId())) {
+				}
+				else {
+					portlets.add(portlet);
+					portletIds.add(String.valueOf(portlet.getPortletId()));
+				}
+			}
+		}
+
+		PortletCategory curCleanCategory = removeEmptyCategories(user, layout, layoutTypePortlet, curCategory, panelSelectedPortlets);
+
+		curCleanCategory.setPortletIds(portletIds);
+
+		if ((curCleanCategory.getCategories().size() > 0) || (portlets.size() > 0)) {
+			cleanCategory.addCategory(curCleanCategory);
+		}
+	}
+
+	return cleanCategory;
+}
+%>

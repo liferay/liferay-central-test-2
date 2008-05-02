@@ -47,8 +47,6 @@ if (Validator.isNotNull(oldCategoryPath)) {
 	newCategoryPath = oldCategoryPath + ":" + newCategoryPath;
 }
 
-Set panelSelectedPortlets = SetUtil.fromArray(StringUtil.split(layout.getTypeSettingsProperties().getProperty("panelSelectedPortlets")));
-
 List categories = ListUtil.fromCollection(portletCategory.getCategories());
 
 Collections.sort(categories, new PortletCategoryComparator(company.getCompanyId(), locale));
@@ -65,20 +63,7 @@ while (itr.hasNext()) {
 	Portlet portlet = PortletLocalServiceUtil.getPortletById(user.getCompanyId(), portletId);
 
 	if (portlet != null) {
-		if (portlet.isSystem()) {
-		}
-		else if (!portlet.isActive()) {
-		}
-		else if (!portlet.isInstanceable() && layoutTypePortlet.hasPortletId(portlet.getPortletId())) {
-			portlets.add(portlet);
-		}
-		else if (!portlet.hasAddPortletPermission(user.getUserId())) {
-		}
-		else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && !panelSelectedPortlets.contains(portlet.getRootPortletId())) {
-		}
-		else {
-			portlets.add(portlet);
-		}
+		portlets.add(portlet);
 
 		PortletApp portletApp = portlet.getPortletApp();
 

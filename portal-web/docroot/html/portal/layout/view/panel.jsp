@@ -23,7 +23,7 @@
 %>
 <%@ include file="/html/portal/init.jsp" %>
 
-<table>
+<table width="100%">
 <tr>
 	<td class="panel-menu <%= (!layoutTypePortlet.hasStateMax()) ? "panel-menu-frontpage" : "panel-menu-application" %>" valign="top" width="200">
 		<liferay-portlet:runtime portletName="87" />
