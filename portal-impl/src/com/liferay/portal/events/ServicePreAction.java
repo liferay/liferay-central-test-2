@@ -846,6 +846,10 @@ public class ServicePreAction extends Action {
 		String cdnHost = ParamUtil.getString(
 			req, "cdn_host", PortalUtil.getCDNHost());
 
+		// Portal URL
+
+		String portalURL = PortalUtil.getPortalURL(req);
+
 		// Paths
 
 		String contextPath = PortalUtil.getPathContext();
@@ -1212,10 +1216,12 @@ public class ServicePreAction extends Action {
 
 		ThemeDisplay themeDisplay = ThemeDisplayFactory.create();
 
-		// Set the CDN host first because other methods (setLookAndFeel) depend
-		// on it being set
+		// Set the CDN host, portal URL, and Facebook application ID first
+		// because other methods (setLookAndFeel) depend on them being set
 
 		themeDisplay.setCDNHost(cdnHost);
+		themeDisplay.setPortalURL(portalURL);
+		themeDisplay.setFacebookAppId(facebookAppId);
 
 		themeDisplay.setCompany(company);
 		themeDisplay.setCompanyLogo(companyLogo);
@@ -1252,7 +1258,6 @@ public class ServicePreAction extends Action {
 		themeDisplay.setStateExclusive(LiferayWindowState.isExclusive(req));
 		themeDisplay.setStateMaximized(LiferayWindowState.isMaximized(req));
 		themeDisplay.setStatePopUp(LiferayWindowState.isPopUp(req));
-		themeDisplay.setFacebookAppId(facebookAppId);
 		themeDisplay.setPathApplet(contextPath + "/applets");
 		themeDisplay.setPathCms(contextPath + "/cms");
 		themeDisplay.setPathContext(contextPath);
@@ -1292,7 +1297,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setURLCurrent(currentURL);
 
-		String urlHome = PortalUtil.getPortalURL(req) + contextPath;
+		String urlHome = portalURL + contextPath;
 
 		themeDisplay.setURLHome(urlHome);
 

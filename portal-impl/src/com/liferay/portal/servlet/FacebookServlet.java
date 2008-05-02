@@ -23,11 +23,15 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
+import com.liferay.portal.kernel.servlet.StringServletResponse;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.servlet.filters.compression.CompressionFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
 
@@ -52,25 +56,60 @@ public class FacebookServlet extends HttpServlet {
 	public void service(HttpServletRequest req, HttpServletResponse res)
 		throws IOException, ServletException {
 
-		String[] facebookData = getFacebookData(req, res);
+		try {
+			String[] facebookData = getFacebookData(req, res);
 
-		if (facebookData == null) {
+			if (facebookData == null) {
+				PortalUtil.sendError(
+					HttpServletResponse.SC_NOT_FOUND,
+					new NoSuchLayoutException(), req, res);
+			}
+			else {
+				String appId = facebookData[0];
+				String redirect = facebookData[1];
+
+				req.setAttribute(WebKeys.FACEBOOK_APP_ID, appId);
+				req.setAttribute(CompressionFilter.SKIP_FILTER, Boolean.TRUE);
+
+				ServletContext ctx = getServletContext();
+
+				RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
+
+				StringServletResponse stringServletRes =
+					new StringServletResponse(res);
+
+				rd.forward(req, stringServletRes);
+
+				String fbml = stringServletRes.getString();
+
+				if (req.getAttribute(WebKeys.FACEBOOK_APP_ID) != null) {
+					fbml = fixFbml(fbml);
+				}
+
+				ServletResponseUtil.write(res, fbml);
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+
 			PortalUtil.sendError(
-				HttpServletResponse.SC_NOT_FOUND,
-				new NoSuchLayoutException(), req, res);
+				HttpServletResponse.SC_INTERNAL_SERVER_ERROR, e, req, res);
 		}
-		else {
-			String appId = facebookData[0];
-			String redirect = facebookData[1];
+	}
 
-			req.setAttribute(WebKeys.FACEBOOK_APP_ID, appId);
+	protected String fixFbml(String fbml) {
+		fbml = StringUtil.replace(
+			fbml,
+			new String[] {
+				"<nobr>",
+				"</nobr>"
+			},
+			new String[] {
+				StringPool.BLANK,
+				StringPool.BLANK
+			});
 
-			ServletContext ctx = getServletContext();
-
-			RequestDispatcher rd = ctx.getRequestDispatcher(redirect);
-
-			rd.forward(req, res);
-		}
+		return fbml;
 	}
 
 	protected String[] getFacebookData(

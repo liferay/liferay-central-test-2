@@ -59,6 +59,9 @@ public class CompressionFilter extends BaseFilter {
 	public static final String ENCODING = GetterUtil.getString(
 		SystemProperties.get("file.encoding"), StringPool.UTF8);
 
+	public static final String SKIP_FILTER =
+		CompressionFilter.class.getName() + "SKIP_FILTER";
+
 	static {
 
 		// The compression filter will work on JBoss, Jetty, JOnAS, OC4J, Orion,
@@ -103,7 +106,7 @@ public class CompressionFilter extends BaseFilter {
 				_log.debug("Compressing " + completeURL);
 			}
 
-			httpReq.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
+			httpReq.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
 			CompressionResponse compressionResponse =
 				new CompressionResponse(httpRes);
@@ -122,7 +125,7 @@ public class CompressionFilter extends BaseFilter {
 	}
 
 	protected boolean isAlreadyFiltered(HttpServletRequest req) {
-		if (req.getAttribute(_ALREADY_FILTERED) != null) {
+		if (req.getAttribute(SKIP_FILTER) != null) {
 			return true;
 		}
 		else {
@@ -163,9 +166,6 @@ public class CompressionFilter extends BaseFilter {
 			return true;
 		}
 	}
-
-	private static final String _ALREADY_FILTERED =
-		CompressionFilter.class.getName() + "_ALREADY_FILTERED";
 
 	private static final String _COMPRESS = "compress";
 

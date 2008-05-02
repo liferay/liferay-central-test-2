@@ -128,7 +128,6 @@
 	<filter-mapping>
 		<filter-name>URL Rewrite Filter</filter-name>
 		<url-pattern>/*</url-pattern>
-		<dispatcher>REQUEST</dispatcher>
 	</filter-mapping>
 	<filter-mapping>
 		<filter-name>Session Id Filter</filter-name>

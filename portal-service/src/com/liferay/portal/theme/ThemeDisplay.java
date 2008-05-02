@@ -333,17 +333,20 @@ public class ThemeDisplay implements Serializable {
 				themeContextPath = theme.getContextPath();
 			}
 
-			String cdnHost = getCDNHost();
+			String host = getCDNHost();
+
+			if (Validator.isNull(host) && isFacebook()) {
+				host = getPortalURL();
+			}
 
 			setPathColorSchemeImages(
-				cdnHost + themeContextPath +
+				host + themeContextPath +
 					colorScheme.getColorSchemeImagesPath());
 
-			setPathThemeCss(cdnHost + themeContextPath + theme.getCssPath());
-			setPathThemeImages(
-				cdnHost + themeContextPath + theme.getImagesPath());
+			setPathThemeCss(host + themeContextPath + theme.getCssPath());
+			setPathThemeImages(host + themeContextPath + theme.getImagesPath());
 			setPathThemeJavaScript(
-				cdnHost + themeContextPath + theme.getJavaScriptPath());
+				host + themeContextPath + theme.getJavaScriptPath());
 			setPathThemeRoot(themeContextPath + theme.getRootPath());
 		}
 	}
@@ -482,6 +485,14 @@ public class ThemeDisplay implements Serializable {
 
 	public void setCDNHost(String cdnHost) {
 		_cdnHost = cdnHost;
+	}
+
+	public String getPortalURL() {
+		return _portalURL;
+	}
+
+	public void setPortalURL(String portalURL) {
+		_portalURL = portalURL;
 	}
 
 	public String getPathApplet() {
@@ -917,6 +928,7 @@ public class ThemeDisplay implements Serializable {
 		_facebook = false;
 		_facebookAppId = StringPool.BLANK;
 		_cdnHost = StringPool.BLANK;
+		_portalURL = StringPool.BLANK;
 		_pathApplet = StringPool.BLANK;
 		_pathCms = StringPool.BLANK;
 		_pathColorSchemeImages = StringPool.BLANK;
@@ -1008,6 +1020,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _facebook;
 	private String _facebookAppId;
 	private String _cdnHost = StringPool.BLANK;
+	private String _portalURL = StringPool.BLANK;
 	private String _pathApplet = StringPool.BLANK;
 	private String _pathCms = StringPool.BLANK;
 	private String _pathColorSchemeImages = StringPool.BLANK;

@@ -86,6 +86,9 @@ public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 	public static final String ENCODING = GetterUtil.getString(
 		SystemProperties.get("file.encoding"), StringPool.UTF8);
 
+	public static final String SKIP_FILTER =
+		LayoutCacheFilter.class + "SKIP_FILTER";
+
 	public void portalInit() {
 		_pattern = GetterUtil.getInteger(
 			_config.getInitParameter("pattern"));
@@ -126,7 +129,7 @@ public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 			!isSignedIn(httpReq) && !isInclude(httpReq) &&
 			!isAlreadyFiltered(httpReq)) {
 
-			httpReq.setAttribute(_ALREADY_FILTERED, Boolean.TRUE);
+			httpReq.setAttribute(SKIP_FILTER, Boolean.TRUE);
 
 			String key = getCacheKey(httpReq);
 
@@ -337,7 +340,7 @@ public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 	}
 
 	protected boolean isAlreadyFiltered(HttpServletRequest req) {
-		if (req.getAttribute(_ALREADY_FILTERED) != null) {
+		if (req.getAttribute(SKIP_FILTER) != null) {
 			return true;
 		}
 		else {
@@ -446,9 +449,6 @@ public class LayoutCacheFilter extends BaseFilter implements PortalInitable {
 			return true;
 		}
 	}
-
-	private static final String _ALREADY_FILTERED =
-		LayoutCacheFilter.class + "_ALREADY_FILTERED";
 
 	private static final int _PATTERN_FRIENDLY = 0;
 
