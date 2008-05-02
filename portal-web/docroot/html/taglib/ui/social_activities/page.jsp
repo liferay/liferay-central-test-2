@@ -96,7 +96,7 @@ DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 			<table class="lfr-table">
 			<tr>
 				<td>
-					<img src="<%= portlet.getContextPath() + portlet.getIcon() %>" />
+					<liferay-ui:icon message="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" src="<%= portlet.getContextPath() + portlet.getIcon() %>" />
 				</td>
 				<td>
 					<%= activityFeedEntry.getTitle() %>

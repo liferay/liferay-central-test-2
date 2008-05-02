@@ -55,7 +55,7 @@ if (Validator.isNull(src)) {
 	src = themeDisplay.getPathThemeImages() + "/common/" + image + ".png";
 }
 
-String url = (String)request.getAttribute("liferay-ui:icon:url");
+String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:url"));
 String target = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:target"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
 boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));

@@ -25,6 +25,7 @@ package com.liferay.taglib.ui;
 import com.liferay.taglib.util.IncludeTag;
 
 import javax.servlet.ServletRequest;
+import javax.servlet.jsp.JspException;
 
 /**
  * <a href="IconTag.java.html"><b><i>View Source</i></b></a>
@@ -46,6 +47,36 @@ public class IconTag extends IncludeTag {
 		req.setAttribute("liferay-ui:icon:toolTip", String.valueOf(_toolTip));
 
 		return EVAL_BODY_BUFFERED;
+	}
+
+	public int doEndTag() throws JspException {
+		int value = super.doEndTag();
+
+		try {
+			ServletRequest req = pageContext.getRequest();
+
+			req.removeAttribute("liferay-ui:icon:image");
+			req.removeAttribute("liferay-ui:icon:message");
+			req.removeAttribute("liferay-ui:icon:src");
+			req.removeAttribute("liferay-ui:icon:url");
+			req.removeAttribute("liferay-ui:icon:target");
+			req.removeAttribute("liferay-ui:icon:label");
+			req.removeAttribute("liferay-ui:icon:toolTip");
+
+			return value;
+		}
+		catch (Exception e) {
+			throw new JspException(e);
+		}
+		finally {
+			_image = null;
+			_message = null;
+			_src = null;
+			_url = null;
+			_target = null;
+			_label = false;
+			_toolTip = false;
+		}
 	}
 
 	public void setImage(String image) {
