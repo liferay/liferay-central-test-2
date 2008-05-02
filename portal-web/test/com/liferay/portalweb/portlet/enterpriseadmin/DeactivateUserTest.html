@@ -1,17 +1,17 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>SearchUserTest</title>
+<title>DeactivateUserTest</title>
 </head>
 <body>
 <table cellpadding="1" cellspacing="1" border="1">
 <thead>
-<tr><td rowspan="1" colspan="3">SearchUserTest</td></tr>
+<tr><td rowspan="1" colspan="3">DeactivateUserTest</td></tr>
 </thead><tbody>
 <tr>
 	<td>type</td>
 	<td>toggle_id_enterprise_admin_user_searchkeywords</td>
-	<td>selenium</td>
+	<td>n03</td>
 </tr>
 <tr>
 	<td>clickAndWait</td>
@@ -19,23 +19,13 @@
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>selen01</td>
+	<td>click</td>
+	<td>link=Deactivate</td>
 	<td></td>
 </tr>
 <tr>
-	<td>waitForTextPresent</td>
-	<td>selen02</td>
-	<td></td>
-</tr>
-<tr>
-	<td>waitForTextPresent</td>
-	<td>selen03</td>
-	<td></td>
-</tr>
-<tr>
-	<td>clickAndWait</td>
-	<td>link=Return to Full Page</td>
+	<td>assertConfirmation</td>
+	<td>Are you sure you want to deactivate this?</td>
 	<td></td>
 </tr>
 

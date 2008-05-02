@@ -53,6 +53,8 @@ public class AddPortletTest extends BaseTestCase {
 
 		selenium.mouseDown("//div[@id=\"CMS-JournalContent\"]/p/a");
 		selenium.mouseUp("//div[@id=\"CMS-JournalContent\"]/p/a");
+		selenium.mouseDown("//div[@id=\"CMS-JournalContent\"]/p/a");
+		selenium.mouseUp("//div[@id=\"CMS-JournalContent\"]/p/a");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {

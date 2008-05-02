@@ -22,36 +22,24 @@
 
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="DeleteUserTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
-
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddUserTest.class);
-		addTestSuite(AddUser2Test.class);
-		addTestSuite(AddUser3Test.class);
-		addTestSuite(SearchUserTest.class);
-		addTestSuite(DeactivateUserTest.class);
-		addTestSuite(DeleteUserTest.class);
-		addTestSuite(AddOrganizationTest.class);
-		addTestSuite(ApplyOrganizationTest.class);
-		addTestSuite(AddUserGroupTest.class);
-		addTestSuite(ApplyUserGroupTest.class);
-		addTestSuite(AddRolesTest.class);
-		addTestSuite(AssignRolesTest.class);
-		addTestSuite(BlogsRolesTest.class);
-		addTestSuite(CalendarRolesTest.class);
-		addTestSuite(LoginTest.class);
-		addTestSuite(AddPasswordPoliciesTest.class);
-		addTestSuite(EditSettingsTest.class);
+public class DeleteUserTest extends BaseTestCase {
+	public void testDeleteUser() throws Exception {
+		selenium.click("link=Users");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Advanced \u00bb");
+		selenium.type("_79_firstName", "n03");
+		selenium.select("_79_active", "label=No");
+		selenium.click("//input[@value='Search Users']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Delete");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
