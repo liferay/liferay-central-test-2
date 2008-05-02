@@ -104,9 +104,9 @@ private PortletCategory _getRelevantPortletCategory(PortletCategory portletCateg
 				else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && panelSelectedPortlets.contains(portlet.getRootPortletId())) {
 					portletIds.add(portlet.getPortletId());
 				}
-				else if (!portlet.hasAddPortletPermission(user.getUserId())) {
-				}
 				else if (layout.getType().equals(LayoutConstants.TYPE_PANEL) && !panelSelectedPortlets.contains(portlet.getRootPortletId())) {
+				}
+				else if (!portlet.hasAddPortletPermission(user.getUserId())) {
 				}
 				else if (!portlet.isInstanceable() && layoutTypePortlet.hasPortletId(portlet.getPortletId())) {
 					portletIds.add(portlet.getPortletId());
