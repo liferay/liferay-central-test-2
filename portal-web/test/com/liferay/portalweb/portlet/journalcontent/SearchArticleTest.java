@@ -38,7 +38,7 @@ public class SearchArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("//img[@title='Configuration']")) {
+				if (selenium.isElementPresent("//img[@title='Select Article']")) {
 					break;
 				}
 			}
@@ -48,7 +48,7 @@ public class SearchArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("//img[@title='Configuration']");
+		selenium.click("//img[@title='Select Article']");
 		selenium.waitForPageToLoad("30000");
 		selenium.type("toggle_id_journal_article_searchkeywords", "test");
 		selenium.click("//input[@value='Search Articles']");
