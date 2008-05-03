@@ -1,0 +1,120 @@
+<%
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+%>
+
+<fb:title><%= portletTitle %></fb:title>
+
+<fb:header><%= portletTitle %></fb:header>
+
+<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPortalURL() %>/c/portal/css_cached?themeId=classic&colorSchemeId=01&t=<%= themeDisplay.getTheme().getTimestamp() %>" />
+<link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPortalURL() %>/html/themes/classic/css/portlet.css" />
+
+<%
+Set headerPortalCssPaths = new LinkedHashSet();
+
+List headerPortalCssList = portlet.getHeaderPortalCss();
+
+for (int j = 0; j < headerPortalCssList.size(); j++) {
+	String headerPortalCss = (String)headerPortalCssList.get(j);
+
+	String headerPortalCssPath = request.getContextPath() + headerPortalCss;
+
+	if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
+		headerPortalCssPaths.add(headerPortalCssPath);
+%>
+
+		<link href="<%= headerPortalCssPath %>" rel="stylesheet" type="text/css" />
+
+<%
+	}
+}
+
+Set headerPortletCssPaths = new LinkedHashSet();
+
+List headerPortletCssList = portlet.getHeaderPortletCss();
+
+for (int j = 0; j < headerPortletCssList.size(); j++) {
+	String headerPortletCss = (String)headerPortletCssList.get(j);
+
+	String headerPortletCssPath = portlet.getContextPath() + headerPortletCss;
+
+	if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
+		headerPortletCssPaths.add(headerPortletCssPath);
+
+		if (headerPortletCssPath.endsWith(".jsp")) {
+			headerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + theme.getTimestamp();
+		}
+%>
+
+		<link href="<%= headerPortletCssPath %>" rel="stylesheet" type="text/css" />
+
+<%
+	}
+}
+%>
+
+<%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
+
+<%
+Set footerPortalCssPaths = new LinkedHashSet();
+
+List footerPortalCssList = portlet.getFooterPortalCss();
+
+for (int j = 0; j < footerPortalCssList.size(); j++) {
+	String footerPortalCss = (String)footerPortalCssList.get(j);
+
+	String footerPortalCssPath = request.getContextPath() + footerPortalCss;
+
+	if (!footerPortalCssPaths.contains(footerPortalCssPath) && !themeDisplay.isIncludedJs(footerPortalCssPath)) {
+		footerPortalCssPaths.add(footerPortalCssPath);
+%>
+
+		<link href="<%= footerPortalCssPath %>" rel="stylesheet" type="text/css" />
+
+<%
+	}
+}
+
+Set footerPortletCssPaths = new LinkedHashSet();
+
+List footerPortletCssList = portlet.getFooterPortletCss();
+
+for (int j = 0; j < footerPortletCssList.size(); j++) {
+	String footerPortletCss = (String)footerPortletCssList.get(j);
+
+	String footerPortletCssPath = portlet.getContextPath() + footerPortletCss;
+
+	if (!footerPortletCssPaths.contains(footerPortletCssPath)) {
+		footerPortletCssPaths.add(footerPortletCssPath);
+
+		if (footerPortletCssPath.endsWith(".jsp")) {
+			footerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + theme.getTimestamp();
+		}
+%>
+
+		<link href="<%= footerPortletCssPath %>" rel="stylesheet" type="text/css" />
+
+<%
+	}
+}
+%>

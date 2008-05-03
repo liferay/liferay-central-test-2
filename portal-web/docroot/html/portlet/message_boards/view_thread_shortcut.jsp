@@ -62,7 +62,12 @@ if (treeWalker.isOdd()) {
 
 		String messageURL = portalURL + layoutURL + "/-/message_boards/message/" + selMessage.getMessageId();
 
-		String rowHREF = messageURL + "#" + renderResponse.getNamespace() + "message_" + message.getMessageId();
+		String rowHREF = "#" + renderResponse.getNamespace() + "message_" + message.getMessageId();
+
+		if (!themeDisplay.isFacebook()) {
+			rowHREF = messageURL + rowHREF;
+		}
+
 		%>
 
 		<a href="<%= rowHREF %>">
