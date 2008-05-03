@@ -569,7 +569,7 @@ public class PortletURLImpl
 
 		if (themeDisplay.isFacebook()) {
 			portalURL =
-				"http://apps.facebook.com/" + themeDisplay.getFacebookAppId();
+				"http://apps.facebook.com/" + themeDisplay.getFacebookAppName();
 		}
 		else {
 			portalURL = PortalUtil.getPortalURL(_req, _secure);
