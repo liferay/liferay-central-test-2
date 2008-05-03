@@ -184,6 +184,50 @@ public class UserUtil {
 		return getPersistence().fetchByContactId(contactId);
 	}
 
+	public static java.util.List<com.liferay.portal.model.User> findByEmailAddress(
+		java.lang.String emailAddress)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByEmailAddress(emailAddress);
+	}
+
+	public static java.util.List<com.liferay.portal.model.User> findByEmailAddress(
+		java.lang.String emailAddress, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByEmailAddress(emailAddress, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portal.model.User> findByEmailAddress(
+		java.lang.String emailAddress, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByEmailAddress(emailAddress, begin, end, obc);
+	}
+
+	public static com.liferay.portal.model.User findByEmailAddress_First(
+		java.lang.String emailAddress,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.NoSuchUserException {
+		return getPersistence().findByEmailAddress_First(emailAddress, obc);
+	}
+
+	public static com.liferay.portal.model.User findByEmailAddress_Last(
+		java.lang.String emailAddress,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.NoSuchUserException {
+		return getPersistence().findByEmailAddress_Last(emailAddress, obc);
+	}
+
+	public static com.liferay.portal.model.User[] findByEmailAddress_PrevAndNext(
+		long userId, java.lang.String emailAddress,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.NoSuchUserException {
+		return getPersistence()
+				   .findByEmailAddress_PrevAndNext(userId, emailAddress, obc);
+	}
+
 	public static com.liferay.portal.model.User findByPortraitId(
 		long portraitId)
 		throws com.liferay.portal.SystemException,
@@ -334,6 +378,11 @@ public class UserUtil {
 		getPersistence().removeByContactId(contactId);
 	}
 
+	public static void removeByEmailAddress(java.lang.String emailAddress)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByEmailAddress(emailAddress);
+	}
+
 	public static void removeByPortraitId(long portraitId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException {
@@ -387,6 +436,11 @@ public class UserUtil {
 	public static int countByContactId(long contactId)
 		throws com.liferay.portal.SystemException {
 		return getPersistence().countByContactId(contactId);
+	}
+
+	public static int countByEmailAddress(java.lang.String emailAddress)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByEmailAddress(emailAddress);
 	}
 
 	public static int countByPortraitId(long portraitId)

@@ -887,6 +887,248 @@ public class UserPersistenceImpl extends BasePersistence
 		}
 	}
 
+	public List<User> findByEmailAddress(String emailAddress)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "findByEmailAddress";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { emailAddress };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+
+				if (emailAddress == null) {
+					query.append("emailAddress IS NULL");
+				}
+				else {
+					query.append("emailAddress = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (emailAddress != null) {
+					qPos.add(emailAddress);
+				}
+
+				List<User> list = q.list();
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<User>)result;
+		}
+	}
+
+	public List<User> findByEmailAddress(String emailAddress, int begin, int end)
+		throws SystemException {
+		return findByEmailAddress(emailAddress, begin, end, null);
+	}
+
+	public List<User> findByEmailAddress(String emailAddress, int begin,
+		int end, OrderByComparator obc) throws SystemException {
+		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "findByEmailAddress";
+		String[] finderParams = new String[] {
+				String.class.getName(),
+				
+				"java.lang.Integer", "java.lang.Integer",
+				"com.liferay.portal.kernel.util.OrderByComparator"
+			};
+		Object[] finderArgs = new Object[] {
+				emailAddress,
+				
+				String.valueOf(begin), String.valueOf(end), String.valueOf(obc)
+			};
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+
+				if (emailAddress == null) {
+					query.append("emailAddress IS NULL");
+				}
+				else {
+					query.append("emailAddress = ?");
+				}
+
+				query.append(" ");
+
+				if (obc != null) {
+					query.append("ORDER BY ");
+					query.append(obc.getOrderBy());
+				}
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (emailAddress != null) {
+					qPos.add(emailAddress);
+				}
+
+				List<User> list = (List<User>)QueryUtil.list(q, getDialect(),
+						begin, end);
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, list);
+
+				return list;
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return (List<User>)result;
+		}
+	}
+
+	public User findByEmailAddress_First(String emailAddress,
+		OrderByComparator obc) throws NoSuchUserException, SystemException {
+		List<User> list = findByEmailAddress(emailAddress, 0, 1, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No User exists with the key {");
+
+			msg.append("emailAddress=" + emailAddress);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchUserException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public User findByEmailAddress_Last(String emailAddress,
+		OrderByComparator obc) throws NoSuchUserException, SystemException {
+		int count = countByEmailAddress(emailAddress);
+
+		List<User> list = findByEmailAddress(emailAddress, count - 1, count, obc);
+
+		if (list.size() == 0) {
+			StringMaker msg = new StringMaker();
+
+			msg.append("No User exists with the key {");
+
+			msg.append("emailAddress=" + emailAddress);
+
+			msg.append(StringPool.CLOSE_CURLY_BRACE);
+
+			throw new NoSuchUserException(msg.toString());
+		}
+		else {
+			return list.get(0);
+		}
+	}
+
+	public User[] findByEmailAddress_PrevAndNext(long userId,
+		String emailAddress, OrderByComparator obc)
+		throws NoSuchUserException, SystemException {
+		User user = findByPrimaryKey(userId);
+
+		int count = countByEmailAddress(emailAddress);
+
+		Session session = null;
+
+		try {
+			session = openSession();
+
+			StringMaker query = new StringMaker();
+
+			query.append("FROM com.liferay.portal.model.User WHERE ");
+
+			if (emailAddress == null) {
+				query.append("emailAddress IS NULL");
+			}
+			else {
+				query.append("emailAddress = ?");
+			}
+
+			query.append(" ");
+
+			if (obc != null) {
+				query.append("ORDER BY ");
+				query.append(obc.getOrderBy());
+			}
+
+			Query q = session.createQuery(query.toString());
+
+			QueryPos qPos = QueryPos.getInstance(q);
+
+			if (emailAddress != null) {
+				qPos.add(emailAddress);
+			}
+
+			Object[] objArray = QueryUtil.getPrevAndNext(q, count, obc, user);
+
+			User[] array = new UserImpl[3];
+
+			array[0] = (User)objArray[0];
+			array[1] = (User)objArray[1];
+			array[2] = (User)objArray[2];
+
+			return array;
+		}
+		catch (Exception e) {
+			throw HibernateUtil.processException(e);
+		}
+		finally {
+			closeSession(session);
+		}
+	}
+
 	public User findByPortraitId(long portraitId)
 		throws NoSuchUserException, SystemException {
 		User user = fetchByPortraitId(portraitId);
@@ -1796,6 +2038,13 @@ public class UserPersistenceImpl extends BasePersistence
 		remove(user);
 	}
 
+	public void removeByEmailAddress(String emailAddress)
+		throws SystemException {
+		for (User user : findByEmailAddress(emailAddress)) {
+			remove(user);
+		}
+	}
+
 	public void removeByPortraitId(long portraitId)
 		throws NoSuchUserException, SystemException {
 		User user = findByPortraitId(portraitId);
@@ -2015,6 +2264,79 @@ public class UserPersistenceImpl extends BasePersistence
 				QueryPos qPos = QueryPos.getInstance(q);
 
 				qPos.add(contactId);
+
+				Long count = null;
+
+				Iterator<Long> itr = q.list().iterator();
+
+				if (itr.hasNext()) {
+					count = itr.next();
+				}
+
+				if (count == null) {
+					count = new Long(0);
+				}
+
+				FinderCache.putResult(finderClassNameCacheEnabled,
+					finderClassName, finderMethodName, finderParams,
+					finderArgs, count);
+
+				return count.intValue();
+			}
+			catch (Exception e) {
+				throw HibernateUtil.processException(e);
+			}
+			finally {
+				closeSession(session);
+			}
+		}
+		else {
+			return ((Long)result).intValue();
+		}
+	}
+
+	public int countByEmailAddress(String emailAddress)
+		throws SystemException {
+		boolean finderClassNameCacheEnabled = UserModelImpl.CACHE_ENABLED;
+		String finderClassName = User.class.getName();
+		String finderMethodName = "countByEmailAddress";
+		String[] finderParams = new String[] { String.class.getName() };
+		Object[] finderArgs = new Object[] { emailAddress };
+
+		Object result = null;
+
+		if (finderClassNameCacheEnabled) {
+			result = FinderCache.getResult(finderClassName, finderMethodName,
+					finderParams, finderArgs, getSessionFactory());
+		}
+
+		if (result == null) {
+			Session session = null;
+
+			try {
+				session = openSession();
+
+				StringMaker query = new StringMaker();
+
+				query.append("SELECT COUNT(*) ");
+				query.append("FROM com.liferay.portal.model.User WHERE ");
+
+				if (emailAddress == null) {
+					query.append("emailAddress IS NULL");
+				}
+				else {
+					query.append("emailAddress = ?");
+				}
+
+				query.append(" ");
+
+				Query q = session.createQuery(query.toString());
+
+				QueryPos qPos = QueryPos.getInstance(q);
+
+				if (emailAddress != null) {
+					qPos.add(emailAddress);
+				}
 
 				Long count = null;
 

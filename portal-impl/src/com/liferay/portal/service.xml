@@ -1371,6 +1371,9 @@
 		<finder name="ContactId" return-type="User">
 			<finder-column name="contactId" />
 		</finder>
+		<finder name="EmailAddress" return-type="Collection">
+			<finder-column name="emailAddress" />
+		</finder>
 		<finder name="PortraitId" return-type="User">
 			<finder-column name="portraitId" />
 		</finder>

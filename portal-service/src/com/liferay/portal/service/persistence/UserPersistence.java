@@ -139,6 +139,37 @@ public interface UserPersistence {
 	public com.liferay.portal.model.User fetchByContactId(long contactId)
 		throws com.liferay.portal.SystemException;
 
+	public java.util.List<com.liferay.portal.model.User> findByEmailAddress(
+		java.lang.String emailAddress)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.User> findByEmailAddress(
+		java.lang.String emailAddress, int begin, int end)
+		throws com.liferay.portal.SystemException;
+
+	public java.util.List<com.liferay.portal.model.User> findByEmailAddress(
+		java.lang.String emailAddress, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException;
+
+	public com.liferay.portal.model.User findByEmailAddress_First(
+		java.lang.String emailAddress,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.NoSuchUserException;
+
+	public com.liferay.portal.model.User findByEmailAddress_Last(
+		java.lang.String emailAddress,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.NoSuchUserException;
+
+	public com.liferay.portal.model.User[] findByEmailAddress_PrevAndNext(
+		long userId, java.lang.String emailAddress,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portal.NoSuchUserException;
+
 	public com.liferay.portal.model.User findByPortraitId(long portraitId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
@@ -237,6 +268,9 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
 
+	public void removeByEmailAddress(java.lang.String emailAddress)
+		throws com.liferay.portal.SystemException;
+
 	public void removeByPortraitId(long portraitId)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.NoSuchUserException;
@@ -269,6 +303,9 @@ public interface UserPersistence {
 		throws com.liferay.portal.SystemException;
 
 	public int countByContactId(long contactId)
+		throws com.liferay.portal.SystemException;
+
+	public int countByEmailAddress(java.lang.String emailAddress)
 		throws com.liferay.portal.SystemException;
 
 	public int countByPortraitId(long portraitId)
