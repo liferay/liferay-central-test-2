@@ -40,9 +40,9 @@ public class IconTag extends IncludeTag {
 
 		req.setAttribute("liferay-ui:icon:image", _image);
 		req.setAttribute("liferay-ui:icon:message", _message);
-		req.setAttribute("liferay-ui:icon:method", _method);
 		req.setAttribute("liferay-ui:icon:src", _src);
 		req.setAttribute("liferay-ui:icon:url", _url);
+		req.setAttribute("liferay-ui:icon:method", _method);
 		req.setAttribute("liferay-ui:icon:target", _target);
 		req.setAttribute("liferay-ui:icon:label", String.valueOf(_label));
 		req.setAttribute("liferay-ui:icon:toolTip", String.valueOf(_toolTip));
@@ -60,6 +60,7 @@ public class IconTag extends IncludeTag {
 			req.removeAttribute("liferay-ui:icon:message");
 			req.removeAttribute("liferay-ui:icon:src");
 			req.removeAttribute("liferay-ui:icon:url");
+			req.removeAttribute("liferay-ui:icon:method");
 			req.removeAttribute("liferay-ui:icon:target");
 			req.removeAttribute("liferay-ui:icon:label");
 			req.removeAttribute("liferay-ui:icon:toolTip");
@@ -74,6 +75,7 @@ public class IconTag extends IncludeTag {
 			_message = null;
 			_src = null;
 			_url = null;
+			_method = null;
 			_target = null;
 			_label = false;
 			_toolTip = false;
@@ -88,16 +90,16 @@ public class IconTag extends IncludeTag {
 		_message = message;
 	}
 
-	public void setMethod(String method) {
-		_method = method;
-	}
-
 	public void setSrc(String src) {
 		_src = src;
 	}
 
 	public void setUrl(String url) {
 		_url = url;
+	}
+
+	public void setMethod(String method) {
+		_method = method;
 	}
 
 	public void setTarget(String target) {
@@ -120,9 +122,9 @@ public class IconTag extends IncludeTag {
 
 	private String _image;
 	private String _message;
-	private String _method;
 	private String _src;
 	private String _url;
+	private String _method;
 	private String _target = "_self";
 	private boolean _label;
 	private boolean _toolTip = true;

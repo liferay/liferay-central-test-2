@@ -23,8 +23,11 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.struts.PortletAction;
+import com.liferay.portal.model.Portlet;
+import com.liferay.portal.security.auth.PrincipalException;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.util.servlet.SessionErrors;
+import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -43,30 +46,44 @@ import org.apache.struts.action.ActionMapping;
  * @author Jorge Ferrer
  *
  */
-public class EditFacebookAction extends PortletAction {
+public class EditFacebookAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		String portletResource =
-			ParamUtil.getString(req, "portletResource");
+		Portlet portlet = null;
 
-		String facebookAppName =
-			ParamUtil.getString(req, "facebookAppName");
+		try {
+			portlet = getPortlet(req);
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			setForward(req, "portlet.portlet_configuration.error");
+		}
+
+		String portletResource = ParamUtil.getString(req, "portletResource");
+
+		String facebookAppName = ParamUtil.getString(req, "facebookAppName");
 		String facebookAPIKey = ParamUtil.getString(req, "facebookAPIKey");
-		String facebookShowAddAppLink =
-			ParamUtil.getString(req, "facebookShowAddAppLink");
+		boolean facebookShowAddAppLink = ParamUtil.getBoolean(
+			req, "facebookShowAddAppLink");
 
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletResource);
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				req, portlet.getPortletId());
 
 		prefs.setValue("lfr-facebook-app-name", facebookAppName);
 		prefs.setValue("lfr-facebook-api-key", facebookAPIKey);
-		prefs.setValue("lfr-facebook-show-add-app-link", facebookShowAddAppLink);
+		prefs.setValue(
+			"lfr-facebook-show-add-app-link",
+			String.valueOf(facebookShowAddAppLink));
 
 		prefs.store();
+
+		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
 	}
 
 	public ActionForward render(
@@ -74,9 +91,21 @@ public class EditFacebookAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		return mapping.findForward(getForward(
-			req, "portlet.portlet_configuration.edit_facebook"));
-	}
+		Portlet portlet = null;
 
+		try {
+			portlet = getPortlet(req);
+		}
+		catch (PrincipalException pe) {
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			return mapping.findForward("portlet.portlet_configuration.error");
+		}
+
+		res.setTitle(getTitle(portlet, req));
+
+		return mapping.findForward(
+			getForward(req, "portlet.portlet_configuration.edit_facebook"));
+	}
 
 }

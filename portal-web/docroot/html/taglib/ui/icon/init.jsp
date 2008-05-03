@@ -49,12 +49,6 @@ if (message == null) {
 	message = StringUtil.replace(image, StringPool.UNDERLINE, StringPool.DASH);
 }
 
-String method = (String)request.getAttribute("liferay-ui:icon:method");
-
-if (method == null) {
-	method = "post";
-}
-
 String src = (String)request.getAttribute("liferay-ui:icon:src");
 
 if (Validator.isNull(src)) {
@@ -62,6 +56,13 @@ if (Validator.isNull(src)) {
 }
 
 String url = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:url"));
+
+String method = (String)request.getAttribute("liferay-ui:icon:method");
+
+if (Validator.isNull(method)) {
+	method = "post";
+}
+
 String target = GetterUtil.getString((String)request.getAttribute("liferay-ui:icon:target"));
 boolean label = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:label"));
 boolean toolTip = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:icon:toolTip"));

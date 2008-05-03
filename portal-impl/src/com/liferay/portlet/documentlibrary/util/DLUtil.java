@@ -82,6 +82,8 @@ public class DLUtil {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
+		String strutsAction = ParamUtil.getString(req, "struts_action");
+
 		long groupId = ParamUtil.getLong(req, "groupId");
 
 		if ((fileEntry != null) && (folder == null)) {
@@ -91,8 +93,6 @@ public class DLUtil {
 		PortletURL foldersURL = res.createRenderURL();
 
 		WindowState windowState = req.getWindowState();
-
-		String strutsAction = ParamUtil.getString(req, "struts_action");
 
 		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);

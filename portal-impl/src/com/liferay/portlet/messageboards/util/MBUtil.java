@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.LocaleUtil;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
@@ -112,15 +113,18 @@ public class MBUtil {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
+		String strutsAction = ParamUtil.getString(req, "struts_action");
+
+		boolean selectCategory = strutsAction.equals(
+			"/message_boards/select_category");
+
 		if ((message != null) && (category == null)) {
 			category = message.getCategory();
 		}
 
 		PortletURL categoriesURL = res.createRenderURL();
 
-		WindowState windowState = req.getWindowState();
-
-		if (windowState.equals(LiferayWindowState.POP_UP)) {
+		if (selectCategory) {
 			categoriesURL.setWindowState(LiferayWindowState.POP_UP);
 
 			categoriesURL.setParameter(
@@ -151,7 +155,7 @@ public class MBUtil {
 
 				PortletURL portletURL = res.createRenderURL();
 
-				if (windowState.equals(LiferayWindowState.POP_UP)) {
+				if (selectCategory) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 					portletURL.setParameter(

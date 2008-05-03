@@ -65,10 +65,10 @@ public class FacebookServlet extends HttpServlet {
 					new NoSuchLayoutException(), req, res);
 			}
 			else {
-				String appId = facebookData[0];
+				String facebookAppName = facebookData[0];
 				String redirect = facebookData[1];
 
-				req.setAttribute(WebKeys.FACEBOOK_APP_ID, appId);
+				req.setAttribute(WebKeys.FACEBOOK_APP_NAME, facebookAppName);
 				req.setAttribute(CompressionFilter.SKIP_FILTER, Boolean.TRUE);
 
 				ServletContext ctx = getServletContext();
@@ -82,9 +82,7 @@ public class FacebookServlet extends HttpServlet {
 
 				String fbml = stringServletRes.getString();
 
-				if (req.getAttribute(WebKeys.FACEBOOK_APP_ID) != null) {
-					fbml = fixFbml(fbml);
-				}
+				fbml = fixFbml(fbml);
 
 				ServletResponseUtil.write(res, fbml);
 			}
@@ -127,13 +125,13 @@ public class FacebookServlet extends HttpServlet {
 			return null;
 		}
 
-		String appId = path.substring(1, pos);
+		String facebookAppName = path.substring(1, pos);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Application ID " + appId);
+			_log.debug("Facebook application name " + facebookAppName);
 		}
 
-		if (Validator.isNull(appId)) {
+		if (Validator.isNull(facebookAppName)) {
 			return null;
 		}
 
@@ -147,7 +145,7 @@ public class FacebookServlet extends HttpServlet {
 			return null;
 		}
 
-		return new String[] {appId, redirect};
+		return new String[] {facebookAppName, redirect};
 	}
 
 	private static Log _log = LogFactory.getLog(FacebookServlet.class);

@@ -62,8 +62,8 @@
 						<liferay-ui:icon
 							image="view"
 							message="recent-posts"
-							method="get"
 							url="<%= recentPostsURL.toString() %>"
+							method="get"
 							label="<%= true %>"
 						/>
 

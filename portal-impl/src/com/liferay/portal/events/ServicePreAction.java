@@ -1209,8 +1209,8 @@ public class ServicePreAction extends Action {
 
 		String lifecycle = ParamUtil.getString(req, "p_p_lifecycle");
 
-		String facebookAppId = (String)req.getAttribute(
-			WebKeys.FACEBOOK_APP_ID);
+		String facebookAppName = (String)req.getAttribute(
+			WebKeys.FACEBOOK_APP_NAME);
 
 		// Theme display
 
@@ -1221,7 +1221,7 @@ public class ServicePreAction extends Action {
 
 		themeDisplay.setCDNHost(cdnHost);
 		themeDisplay.setPortalURL(portalURL);
-		themeDisplay.setFacebookAppId(facebookAppId);
+		themeDisplay.setFacebookAppName(facebookAppName);
 
 		themeDisplay.setCompany(company);
 		themeDisplay.setCompanyLogo(companyLogo);

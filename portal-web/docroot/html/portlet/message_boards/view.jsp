@@ -446,8 +446,8 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					<liferay-ui:icon
 						image="rss"
 						message="recent-posts-rss"
-						method="get"
 						url="<%= rssURL %>"
+						method="get"
 						target="_blank"
 						label="<%= true %>"
 					/>
@@ -822,5 +822,9 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 </c:choose>
 
 <c:if test="<%= !themeDisplay.isFacebook() && Validator.isNotNull(facebookAppName) && Validator.isNotNull(facebookAPIKey) && facebookShowAddAppLink %>">
-	<a href="http://www.facebook.com/add.php?api_key=<%= facebookAPIKey %>&ref=pd"><liferay-ui:message key="add-to-my-facebook-profile"/></a>
+	<br />
+
+	<div>
+		<a href="http://www.facebook.com/add.php?api_key=<%= facebookAPIKey %>&ref=pd"><liferay-ui:message key="add-application-to-my-facebook-profile" /></a>
+	</div>
 </c:if>

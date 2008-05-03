@@ -70,6 +70,10 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
+String facebookAppName = PrefsParamUtil.getString(prefs, request, "lfr-facebook-app-name");
+String facebookAPIKey = PrefsParamUtil.getString(prefs, request, "lfr-facebook-api-key");
+boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link");
+
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 Locale currentLocale = LocaleUtil.fromLanguageId(currentLanguageId);
 Locale defaultLocale = LocaleUtil.getDefault();
@@ -83,10 +87,6 @@ int rssDelta = GetterUtil.getInteger(prefs.getValue("rss-delta", StringPool.BLAN
 String rssDisplayStyle = prefs.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
 String rssFormat = prefs.getValue("rss-format", "atom10");
 boolean allowAnonymousPosting = MBUtil.isAllowAnonymousPosting(prefs);
-
-String facebookAppName = PrefsParamUtil.getString(prefs, request, "lfr-facebook-app-name");
-String facebookAPIKey = PrefsParamUtil.getString(prefs, request, "lfr-facebook-api-key");
-boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link");
 
 String rssFormatType = RSSUtil.DEFAULT_TYPE;
 double rssFormatVersion = RSSUtil.DEFAULT_VERSION;

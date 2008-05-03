@@ -26,6 +26,7 @@
 
 <%
 String redirect = ParamUtil.getString(request, "redirect");
+
 String portletResource = ParamUtil.getString(request, "portletResource");
 
 PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
@@ -34,66 +35,79 @@ String facebookAppName = PrefsParamUtil.getString(prefs, request, "lfr-facebook-
 boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link");
 String facebookAPIKey = PrefsParamUtil.getString(prefs, request, "lfr-facebook-api-key");
 
-PortletURL portletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
-portletURL.setWindowState(WindowState.MAXIMIZED);
-portletURL.setParameter("struts_action", "/message_boards/view");
+PortletURL fbmlPortletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
 
-PortletURL popupPortletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
-popupPortletURL.setWindowState(LiferayWindowState.POP_UP);
-popupPortletURL.setParameter("struts_action", "/message_boards/view");
+fbmlPortletURL.setWindowState(WindowState.MAXIMIZED);
+
+fbmlPortletURL.setParameter("struts_action", "/message_boards/view");
+
+PortletURL iframePortletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
+
+iframePortletURL.setWindowState(LiferayWindowState.POP_UP);
+
+iframePortletURL.setParameter("struts_action", "/message_boards/view");
 %>
 
 <liferay-util:include page="/html/portlet/portlet_configuration/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="facebook" />
 </liferay-util:include>
 
-<c:choose>
-	<c:when test="<%= Validator.isNull(facebookAppName) %>">
-		<div class="portlet-msg-alert">
-			<a href="http://www.facebook.com/developers/editapp.php?new" target="_blank"><liferay-ui:message key="register-this-portlet-as-an-app-in-facebook-and-fill-the-details-in-the-form-below"/></a>
-		</div>
-	</c:when>
-	<c:otherwise>
-		<div class="portlet-msg-info">
-			<liferay-ui:message key="use-the-following-callback-urls-in-facebook-depending-on-the-type-of-integration-you-have-chosen"/>
-			<ul>
-				<li><b><liferay-ui:message key="fbml"/></b>: <%= _getCallbackURL(portletURL.toString(), facebookAppName) %></li>
-				<li><b><liferay-ui:message key="iframe"/></b>: <%= popupPortletURL.toString() %></li>
-			</ul>
-		</div>
-
-	</c:otherwise>
-</c:choose>
+<c:if test="<%= Validator.isNull(facebookAppName) %>">
+	<div class="portlet-msg-alert">
+		<a href="http://www.facebook.com/developers/editapp.php?new" target="_blank"><%= LanguageUtil.format(pageContext, "register-x-as-an-application-in-facebook", portletDisplay.getTitle()) %></a>
+	</div>
+</c:if>
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_facebook" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>">
 
-<fieldset class="block-labels">
-	<legend><liferay-ui:message key="application-details" /></legend>
-
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace/>facebookAppName"><liferay-ui:message key="application-name" /></label>
-
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="application-name" />
+	</td>
+	<td>
 		<input class="lfr-input-text" id="<portlet:namespace />facebookAppName" name="<portlet:namespace />facebookAppName" type="text" value="<%= HtmlUtil.toInputSafe(facebookAppName) %>" />
-	</div>
-
-	<div class="ctrl-holder">
-		<label for="<portlet:namespace />facebookAPIKey"><liferay-ui:message key="api-key" /></label>
-
+	</td>
+</tr>
+<tr>
+	<td>
+		<liferay-ui:message key="api-key" />
+	</td>
+	<td>
 		<input class="lfr-input-text" id="<portlet:namespace />facebookAPIKey" name="<portlet:namespace />facebookAPIKey" type="text" value="<%= HtmlUtil.toInputSafe(facebookAPIKey) %>" />
+	</td>
+</tr>
+
+<c:if test="<%= Validator.isNotNull(facebookAppName) %>">
+	<tr>
+		<td>
+			<liferay-ui:message key="fbml-callback-url" />
+		</td>
+		<td>
+			<liferay-ui:input-resource url="<%= _getCallbackURL(fbmlPortletURL.toString(), facebookAppName) %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="iframe-callback-url" />
+		</td>
+		<td>
+			<liferay-ui:input-resource url="<%= iframePortletURL.toString() %>" />
+		</td>
+	</tr>
+</c:if>
+
+</table>
+
+<c:if test="<%= Validator.isNotNull(facebookAppName) %>">
+	<br />
+
+	<div>
+		<%= LanguageUtil.format(pageContext, "show-link-to-add-x-to-facebook", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="facebookShowAddAppLink" defaultValue="<%= facebookShowAddAppLink %>" />
 	</div>
-
-</fieldset>
-
-<fieldset class="block-labels">
-	<legend><liferay-ui:message key="integration" /></legend>
-
-	<div class="ctrl-holder">
-		<label><liferay-ui:message key="show-link-to-add-app-to-facebook" /> <liferay-ui:input-checkbox param="facebookShowAddAppLink" defaultValue="<%= facebookShowAddAppLink %>" /></label>
-	</div>
-
-</fieldset>
+</c:if>
 
 <br />
 
@@ -104,23 +118,24 @@ popupPortletURL.setParameter("struts_action", "/message_boards/view");
 </div>
 
 </form>
+
 <%!
-	private String _getCallbackURL(String portletURL, String facebookAppName) {
-		int pos = portletURL.indexOf('/', Http.HTTPS_WITH_SLASH.length());
+private static String _getCallbackURL(String fbmlPortletURL, String facebookAppName) {
+	int pos = fbmlPortletURL.indexOf(StringPool.SLASH, Http.HTTPS_WITH_SLASH.length());
 
-		StringMaker callbackURL = new StringMaker();
+	StringMaker sm = new StringMaker();
 
-		callbackURL.append(portletURL.substring(0, pos));
-		callbackURL.append("/facebook/");
-		callbackURL.append(facebookAppName);
-		callbackURL.append(portletURL.substring(pos));
+	sm.append(fbmlPortletURL.substring(0, pos));
+	sm.append("/facebook/");
+	sm.append(facebookAppName);
+	sm.append(fbmlPortletURL.substring(pos));
 
-		String callbackURLString = callbackURL.toString();
+	String callbackURL = sm.toString();
 
-		if (!callbackURLString.endsWith(StringPool.SLASH)) {
-			callbackURLString += StringPool.SLASH;
-		}
-
-		return callbackURLString;
+	if (!callbackURL.endsWith(StringPool.SLASH)) {
+		callbackURL += StringPool.SLASH;
 	}
+
+	return callbackURL;
+}
 %>

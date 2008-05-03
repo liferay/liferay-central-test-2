@@ -25,9 +25,9 @@ package com.liferay.portal.theme;
 import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
@@ -468,14 +468,14 @@ public class ThemeDisplay implements Serializable {
 		return _facebook;
 	}
 
-	public String getFacebookAppId() {
-		return _facebookAppId;
+	public String getFacebookAppName() {
+		return _facebookAppName;
 	}
 
-	public void setFacebookAppId(String facebookAppId) {
-		_facebookAppId = facebookAppId;
+	public void setFacebookAppName(String facebookAppName) {
+		_facebookAppName = facebookAppName;
 
-		if (Validator.isNotNull(facebookAppId)) {
+		if (Validator.isNotNull(facebookAppName)) {
 			_facebook = true;
 		}
 	}
@@ -570,8 +570,9 @@ public class ThemeDisplay implements Serializable {
 
 	public void setPathImage(String pathImage) {
 		if (isFacebook() &&
-				!(pathImage.startsWith(Http.HTTP_WITH_SLASH) ||
-					pathImage.startsWith(Http.HTTPS_WITH_SLASH))) {
+			!pathImage.startsWith(Http.HTTP_WITH_SLASH) &&
+			!pathImage.startsWith(Http.HTTPS_WITH_SLASH))) {
+
 			pathImage = getPortalURL() + pathImage;
 		}
 
@@ -933,7 +934,7 @@ public class ThemeDisplay implements Serializable {
 		_stateMaximized = false;
 		_statePopUp = false;
 		_facebook = false;
-		_facebookAppId = StringPool.BLANK;
+		_facebookAppName = StringPool.BLANK;
 		_cdnHost = StringPool.BLANK;
 		_portalURL = StringPool.BLANK;
 		_pathApplet = StringPool.BLANK;
@@ -1025,7 +1026,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _stateMaximized;
 	private boolean _statePopUp;
 	private boolean _facebook;
-	private String _facebookAppId;
+	private String _facebookAppName;
 	private String _cdnHost = StringPool.BLANK;
 	private String _portalURL = StringPool.BLANK;
 	private String _pathApplet = StringPool.BLANK;
