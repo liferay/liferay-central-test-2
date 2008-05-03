@@ -25,7 +25,7 @@
 <%@ include file="/html/taglib/ui/icon/init.jsp" %>
 
 <%
-if (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH)) {
+if (!method.toLowerCase().equals("get") && (url.startsWith(Http.HTTP_WITH_SLASH) || url.startsWith(Http.HTTPS_WITH_SLASH))) {
 	url = "javascript: submitForm(document.hrefFm, '" + HttpUtil.encodeURL(url) + "');";
 }
 

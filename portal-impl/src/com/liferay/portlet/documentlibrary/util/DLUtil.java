@@ -92,10 +92,10 @@ public class DLUtil {
 
 		WindowState windowState = req.getWindowState();
 
+		String strutsAction = ParamUtil.getString(req, "struts_action");
+
 		if (windowState.equals(LiferayWindowState.POP_UP)) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);
-
-			String strutsAction = ParamUtil.getString(req, "struts_action");
 
 			foldersURL.setParameter("struts_action", strutsAction);
 			foldersURL.setParameter("groupId", String.valueOf(groupId));
@@ -124,9 +124,6 @@ public class DLUtil {
 
 				if (windowState.equals(LiferayWindowState.POP_UP)) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
-
-					String strutsAction = ParamUtil.getString(
-						req, "struts_action");
 
 					portletURL.setParameter("struts_action", strutsAction);
 					portletURL.setParameter("groupId", String.valueOf(groupId));

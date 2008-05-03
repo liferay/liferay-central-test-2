@@ -27,6 +27,7 @@ import com.liferay.portal.kernel.log.Log;
 import com.liferay.portal.kernel.log.LogFactoryUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.Http;
 import com.liferay.portal.model.Account;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
@@ -568,6 +569,12 @@ public class ThemeDisplay implements Serializable {
 	}
 
 	public void setPathImage(String pathImage) {
+		if (isFacebook() &&
+				!(pathImage.startsWith(Http.HTTP_WITH_SLASH) ||
+					pathImage.startsWith(Http.HTTPS_WITH_SLASH))) {
+			pathImage = getPortalURL() + pathImage;
+		}
+
 		_pathImage = pathImage;
 	}
 

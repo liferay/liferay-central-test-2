@@ -81,6 +81,17 @@ larURL.setParameter("redirect", redirect);
 larURL.setParameter("returnToFullPageURL", returnToFullPageURL);
 larURL.setParameter("portletResource", portletResource);
 
+// Facebook
+
+PortletURL facebookURL = renderResponse.createRenderURL();
+
+facebookURL.setWindowState(WindowState.MAXIMIZED);
+
+facebookURL.setParameter("struts_action", "/portlet_configuration/edit_facebook");
+facebookURL.setParameter("redirect", redirect);
+facebookURL.setParameter("returnToFullPageURL", returnToFullPageURL);
+facebookURL.setParameter("portletResource", portletResource);
+
 int pos = 0;
 
 String tabsNames = StringPool.BLANK;
@@ -104,6 +115,10 @@ request.setAttribute("liferay-ui:tabs:url" + pos++, permissionsURL.toString());
 tabsNames += ",export-import";
 
 request.setAttribute("liferay-ui:tabs:url" + pos++, larURL.toString());
+
+tabsNames += ",facebook";
+
+request.setAttribute("liferay-ui:tabs:url" + pos++, facebookURL.toString());
 
 if (tabsNames.startsWith(",")) {
 	tabsNames = tabsNames.substring(1);

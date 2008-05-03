@@ -49,6 +49,12 @@ if (message == null) {
 	message = StringUtil.replace(image, StringPool.UNDERLINE, StringPool.DASH);
 }
 
+String method = (String)request.getAttribute("liferay-ui:icon:method");
+
+if (method == null) {
+	method = "post";
+}
+
 String src = (String)request.getAttribute("liferay-ui:icon:src");
 
 if (Validator.isNull(src)) {

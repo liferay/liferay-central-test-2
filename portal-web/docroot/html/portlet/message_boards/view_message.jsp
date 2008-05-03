@@ -96,6 +96,7 @@ else {
 		<liferay-ui:icon
 			image="../message_boards/thread_view_combination"
 			message="combination-view"
+			method="get"
 			url="<%= currentURLObj.toString() %>"
 		/>
 	</td>
@@ -108,6 +109,7 @@ else {
 		<liferay-ui:icon
 			image="../message_boards/thread_view_flat"
 			message="flat-view"
+			method="get"
 			url="<%= currentURLObj.toString() %>"
 		/>
 	</td>
@@ -120,6 +122,7 @@ else {
 		<liferay-ui:icon
 			image="../message_boards/thread_view_tree"
 			message="tree-view"
+			method="get"
 			url="<%= currentURLObj.toString() %>"
 		/>
 	</td>

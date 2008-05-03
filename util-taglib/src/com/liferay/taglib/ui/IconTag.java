@@ -40,6 +40,7 @@ public class IconTag extends IncludeTag {
 
 		req.setAttribute("liferay-ui:icon:image", _image);
 		req.setAttribute("liferay-ui:icon:message", _message);
+		req.setAttribute("liferay-ui:icon:method", _method);
 		req.setAttribute("liferay-ui:icon:src", _src);
 		req.setAttribute("liferay-ui:icon:url", _url);
 		req.setAttribute("liferay-ui:icon:target", _target);
@@ -87,6 +88,10 @@ public class IconTag extends IncludeTag {
 		_message = message;
 	}
 
+	public void setMethod(String method) {
+		_method = method;
+	}
+
 	public void setSrc(String src) {
 		_src = src;
 	}
@@ -115,6 +120,7 @@ public class IconTag extends IncludeTag {
 
 	private String _image;
 	private String _message;
+	private String _method;
 	private String _src;
 	private String _url;
 	private String _target = "_self";

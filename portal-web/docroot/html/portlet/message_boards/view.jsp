@@ -431,7 +431,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		<c:if test='<%= tabs1.equals("recent_posts") %>'>
 
 			<%
-			String rssURL = themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue();
+			String rssURL = themeDisplay.getPortalURL() + themeDisplay.getPathMain() + "/message_boards/rss?p_l_id=" + plid + "&groupId=" + portletGroupId.longValue();
 
 			if (groupThreadsUserId > 0) {
 				rssURL += "&userId=" + groupThreadsUserId;
@@ -446,6 +446,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					<liferay-ui:icon
 						image="rss"
 						message="recent-posts-rss"
+						method="get"
 						url="<%= rssURL %>"
 						target="_blank"
 						label="<%= true %>"
@@ -819,3 +820,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
+
+<c:if test="<%= !themeDisplay.isFacebook() && Validator.isNotNull(facebookAppName) && Validator.isNotNull(facebookAPIKey) && facebookShowAddAppLink %>">
+	<a href="http://www.facebook.com/add.php?api_key=<%= facebookAPIKey %>&ref=pd"><liferay-ui:message key="add-to-my-facebook-profile"/></a>
+</c:if>

@@ -26,6 +26,7 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.kernel.portlet.LiferayWindowState;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryLocalServiceUtil;
@@ -88,9 +89,11 @@ public class BookmarksUtil {
 
 		PortletURL foldersURL = res.createRenderURL();
 
-		WindowState windowState = req.getWindowState();
+		boolean selectFolder = ParamUtil.get(
+			req, "struts_action", StringPool.BLANK).equals(
+				"/bookmarks/select_folder");
 
-		if (windowState.equals(LiferayWindowState.POP_UP)) {
+		if (selectFolder) {
 			foldersURL.setWindowState(LiferayWindowState.POP_UP);
 
 			foldersURL.setParameter(
@@ -118,7 +121,7 @@ public class BookmarksUtil {
 
 				PortletURL portletURL = res.createRenderURL();
 
-				if (windowState.equals(LiferayWindowState.POP_UP)) {
+				if (selectFolder) {
 					portletURL.setWindowState(LiferayWindowState.POP_UP);
 
 					portletURL.setParameter(

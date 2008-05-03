@@ -56,36 +56,40 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String strutsAction = GetterUtil.getString(
 			portletURL.getParameter("struts_action"));
 
-		if (strutsAction.equals("/message_boards/view")) {
-			String categoryId = GetterUtil.getString(
-				portletURL.getParameter("categoryId"));
+		if (portletURL.getWindowState().equals(WindowState.MAXIMIZED)) {
+			if (strutsAction.equals("/message_boards/view")) {
+				String categoryId = GetterUtil.getString(
+					portletURL.getParameter("categoryId"));
 
-			if (Validator.isNotNull(categoryId) && !categoryId.equals("0")) {
-				friendlyURLPath = "/message_boards/category/" + categoryId;
+				if (Validator.isNotNull(categoryId) &&
+						!categoryId.equals("0")) {
+					friendlyURLPath = "/message_boards/category/" + categoryId;
 
-				portletURL.addParameterIncludedInPath("categoryId");
-			}
-			else {
-				friendlyURLPath = "/message_boards";
-
-				if (Validator.isNotNull(tabs1) && !tabs1.equals("categories")) {
-					friendlyURLPath += "/" + tabs1;
-				}
-
-				portletURL.addParameterIncludedInPath("tabs1");
-
-				if (categoryId.equals("0")) {
 					portletURL.addParameterIncludedInPath("categoryId");
 				}
+				else {
+					friendlyURLPath = "/message_boards";
+
+					if (Validator.isNotNull(tabs1) &&
+						!tabs1.equals("categories")) {
+						friendlyURLPath += "/" + tabs1;
+					}
+
+					portletURL.addParameterIncludedInPath("tabs1");
+
+					if (categoryId.equals("0")) {
+						portletURL.addParameterIncludedInPath("categoryId");
+					}
+				}
 			}
-		}
-		else if (strutsAction.equals("/message_boards/view_message")) {
-			String messageId = portletURL.getParameter("messageId");
+			else if (strutsAction.equals("/message_boards/view_message")) {
+				String messageId = portletURL.getParameter("messageId");
 
-			if (Validator.isNotNull(messageId)) {
-				friendlyURLPath = "/message_boards/message/" + messageId;
+				if (Validator.isNotNull(messageId)) {
+					friendlyURLPath = "/message_boards/message/" + messageId;
 
-				portletURL.addParameterIncludedInPath("messageId");
+					portletURL.addParameterIncludedInPath("messageId");
+				}
 			}
 		}
 
