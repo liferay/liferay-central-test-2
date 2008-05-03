@@ -86,9 +86,7 @@ public abstract class BaseSocialActivityInterpreter
 			return doInterpret(activity, themeDisplay);
 		}
 		catch (Exception e) {
-			if (_log.isWarnEnabled()) {
-				_log.warn(e);
-			}
+			_log.error(e);
 		}
 
 		return null;
