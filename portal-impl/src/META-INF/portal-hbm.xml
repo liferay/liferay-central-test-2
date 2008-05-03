@@ -86,9 +86,11 @@
 		<property name="birthday" />
 		<property name="smsSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="aimSn" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="facebookSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="icqSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="jabberSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="msnSn" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="mySpaceSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="skypeSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="ymSn" type="com.liferay.util.dao.hibernate.StringType" />
 		<property name="employeeStatusId" type="com.liferay.util.dao.hibernate.StringType" />

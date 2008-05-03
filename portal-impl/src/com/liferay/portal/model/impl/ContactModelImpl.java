@@ -113,6 +113,9 @@ public class ContactModelImpl extends BaseModelImpl {
 			{ "aimSn", new Integer(Types.VARCHAR) },
 			
 
+			{ "facebookSn", new Integer(Types.VARCHAR) },
+			
+
 			{ "icqSn", new Integer(Types.VARCHAR) },
 			
 
@@ -120,6 +123,9 @@ public class ContactModelImpl extends BaseModelImpl {
 			
 
 			{ "msnSn", new Integer(Types.VARCHAR) },
+			
+
+			{ "mySpaceSn", new Integer(Types.VARCHAR) },
 			
 
 			{ "skypeSn", new Integer(Types.VARCHAR) },
@@ -142,7 +148,7 @@ public class ContactModelImpl extends BaseModelImpl {
 
 			{ "hoursOfOperation", new Integer(Types.VARCHAR) }
 		};
-	public static final String TABLE_SQL_CREATE = "create table Contact_ (contactId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,accountId LONG,parentContactId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,prefixId INTEGER,suffixId INTEGER,male BOOLEAN,birthday DATE null,smsSn VARCHAR(75) null,aimSn VARCHAR(75) null,icqSn VARCHAR(75) null,jabberSn VARCHAR(75) null,msnSn VARCHAR(75) null,skypeSn VARCHAR(75) null,ymSn VARCHAR(75) null,employeeStatusId VARCHAR(75) null,employeeNumber VARCHAR(75) null,jobTitle VARCHAR(100) null,jobClass VARCHAR(75) null,hoursOfOperation VARCHAR(75) null)";
+	public static final String TABLE_SQL_CREATE = "create table Contact_ (contactId LONG not null primary key,companyId LONG,userId LONG,userName VARCHAR(75) null,createDate DATE null,modifiedDate DATE null,accountId LONG,parentContactId LONG,firstName VARCHAR(75) null,middleName VARCHAR(75) null,lastName VARCHAR(75) null,prefixId INTEGER,suffixId INTEGER,male BOOLEAN,birthday DATE null,smsSn VARCHAR(75) null,aimSn VARCHAR(75) null,facebookSn VARCHAR(75) null,icqSn VARCHAR(75) null,jabberSn VARCHAR(75) null,msnSn VARCHAR(75) null,mySpaceSn VARCHAR(75) null,skypeSn VARCHAR(75) null,ymSn VARCHAR(75) null,employeeStatusId VARCHAR(75) null,employeeNumber VARCHAR(75) null,jobTitle VARCHAR(100) null,jobClass VARCHAR(75) null,hoursOfOperation VARCHAR(75) null)";
 	public static final String TABLE_SQL_DROP = "drop table Contact_";
 	public static final String DATA_SOURCE = "liferayDataSource";
 	public static final String SESSION_FACTORY = "liferaySessionFactory";
@@ -171,9 +177,11 @@ public class ContactModelImpl extends BaseModelImpl {
 		model.setBirthday(soapModel.getBirthday());
 		model.setSmsSn(soapModel.getSmsSn());
 		model.setAimSn(soapModel.getAimSn());
+		model.setFacebookSn(soapModel.getFacebookSn());
 		model.setIcqSn(soapModel.getIcqSn());
 		model.setJabberSn(soapModel.getJabberSn());
 		model.setMsnSn(soapModel.getMsnSn());
+		model.setMySpaceSn(soapModel.getMySpaceSn());
 		model.setSkypeSn(soapModel.getSkypeSn());
 		model.setYmSn(soapModel.getYmSn());
 		model.setEmployeeStatusId(soapModel.getEmployeeStatusId());
@@ -412,6 +420,19 @@ public class ContactModelImpl extends BaseModelImpl {
 		}
 	}
 
+	public String getFacebookSn() {
+		return GetterUtil.getString(_facebookSn);
+	}
+
+	public void setFacebookSn(String facebookSn) {
+		if (((facebookSn == null) && (_facebookSn != null)) ||
+				((facebookSn != null) && (_facebookSn == null)) ||
+				((facebookSn != null) && (_facebookSn != null) &&
+				!facebookSn.equals(_facebookSn))) {
+			_facebookSn = facebookSn;
+		}
+	}
+
 	public String getIcqSn() {
 		return GetterUtil.getString(_icqSn);
 	}
@@ -446,6 +467,19 @@ public class ContactModelImpl extends BaseModelImpl {
 				((msnSn != null) && (_msnSn == null)) ||
 				((msnSn != null) && (_msnSn != null) && !msnSn.equals(_msnSn))) {
 			_msnSn = msnSn;
+		}
+	}
+
+	public String getMySpaceSn() {
+		return GetterUtil.getString(_mySpaceSn);
+	}
+
+	public void setMySpaceSn(String mySpaceSn) {
+		if (((mySpaceSn == null) && (_mySpaceSn != null)) ||
+				((mySpaceSn != null) && (_mySpaceSn == null)) ||
+				((mySpaceSn != null) && (_mySpaceSn != null) &&
+				!mySpaceSn.equals(_mySpaceSn))) {
+			_mySpaceSn = mySpaceSn;
 		}
 	}
 
@@ -565,9 +599,11 @@ public class ContactModelImpl extends BaseModelImpl {
 			model.setBirthday(getBirthday());
 			model.setSmsSn(HtmlUtil.escape(getSmsSn()));
 			model.setAimSn(HtmlUtil.escape(getAimSn()));
+			model.setFacebookSn(HtmlUtil.escape(getFacebookSn()));
 			model.setIcqSn(HtmlUtil.escape(getIcqSn()));
 			model.setJabberSn(HtmlUtil.escape(getJabberSn()));
 			model.setMsnSn(HtmlUtil.escape(getMsnSn()));
+			model.setMySpaceSn(HtmlUtil.escape(getMySpaceSn()));
 			model.setSkypeSn(HtmlUtil.escape(getSkypeSn()));
 			model.setYmSn(HtmlUtil.escape(getYmSn()));
 			model.setEmployeeStatusId(HtmlUtil.escape(getEmployeeStatusId()));
@@ -604,9 +640,11 @@ public class ContactModelImpl extends BaseModelImpl {
 		clone.setBirthday(getBirthday());
 		clone.setSmsSn(getSmsSn());
 		clone.setAimSn(getAimSn());
+		clone.setFacebookSn(getFacebookSn());
 		clone.setIcqSn(getIcqSn());
 		clone.setJabberSn(getJabberSn());
 		clone.setMsnSn(getMsnSn());
+		clone.setMySpaceSn(getMySpaceSn());
 		clone.setSkypeSn(getSkypeSn());
 		clone.setYmSn(getYmSn());
 		clone.setEmployeeStatusId(getEmployeeStatusId());
@@ -683,9 +721,11 @@ public class ContactModelImpl extends BaseModelImpl {
 	private Date _birthday;
 	private String _smsSn;
 	private String _aimSn;
+	private String _facebookSn;
 	private String _icqSn;
 	private String _jabberSn;
 	private String _msnSn;
+	private String _mySpaceSn;
 	private String _skypeSn;
 	private String _ymSn;
 	private String _employeeStatusId;

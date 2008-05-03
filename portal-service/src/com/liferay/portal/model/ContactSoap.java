@@ -67,9 +67,11 @@ public class ContactSoap implements Serializable {
 		soapModel.setBirthday(model.getBirthday());
 		soapModel.setSmsSn(model.getSmsSn());
 		soapModel.setAimSn(model.getAimSn());
+		soapModel.setFacebookSn(model.getFacebookSn());
 		soapModel.setIcqSn(model.getIcqSn());
 		soapModel.setJabberSn(model.getJabberSn());
 		soapModel.setMsnSn(model.getMsnSn());
+		soapModel.setMySpaceSn(model.getMySpaceSn());
 		soapModel.setSkypeSn(model.getSkypeSn());
 		soapModel.setYmSn(model.getYmSn());
 		soapModel.setEmployeeStatusId(model.getEmployeeStatusId());
@@ -242,6 +244,14 @@ public class ContactSoap implements Serializable {
 		_aimSn = aimSn;
 	}
 
+	public String getFacebookSn() {
+		return _facebookSn;
+	}
+
+	public void setFacebookSn(String facebookSn) {
+		_facebookSn = facebookSn;
+	}
+
 	public String getIcqSn() {
 		return _icqSn;
 	}
@@ -264,6 +274,14 @@ public class ContactSoap implements Serializable {
 
 	public void setMsnSn(String msnSn) {
 		_msnSn = msnSn;
+	}
+
+	public String getMySpaceSn() {
+		return _mySpaceSn;
+	}
+
+	public void setMySpaceSn(String mySpaceSn) {
+		_mySpaceSn = mySpaceSn;
 	}
 
 	public String getSkypeSn() {
@@ -339,9 +357,11 @@ public class ContactSoap implements Serializable {
 	private Date _birthday;
 	private String _smsSn;
 	private String _aimSn;
+	private String _facebookSn;
 	private String _icqSn;
 	private String _jabberSn;
 	private String _msnSn;
+	private String _mySpaceSn;
 	private String _skypeSn;
 	private String _ymSn;
 	private String _employeeStatusId;

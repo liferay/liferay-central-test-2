@@ -180,9 +180,11 @@
 		<column name="birthday" type="Date" />
 		<column name="smsSn" type="String" />
 		<column name="aimSn" type="String" />
+		<column name="facebookSn" type="String" />
 		<column name="icqSn" type="String" />
 		<column name="jabberSn" type="String" />
 		<column name="msnSn" type="String" />
+		<column name="mySpaceSn" type="String" />
 		<column name="skypeSn" type="String" />
 		<column name="ymSn" type="String" />
 		<column name="employeeStatusId" type="String" />

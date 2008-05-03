@@ -517,10 +517,11 @@ public interface UserLocalService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
-		java.lang.String skypeSn, java.lang.String ymSn,
-		java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String mySpaceSn, java.lang.String skypeSn,
+		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 
@@ -533,10 +534,11 @@ public interface UserLocalService {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
-		java.lang.String skypeSn, java.lang.String ymSn,
-		java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String mySpaceSn, java.lang.String skypeSn,
+		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException;
 }

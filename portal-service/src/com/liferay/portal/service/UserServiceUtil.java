@@ -342,10 +342,11 @@ public class UserServiceUtil {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
-		java.lang.String skypeSn, java.lang.String ymSn,
-		java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String mySpaceSn, java.lang.String skypeSn,
+		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
@@ -354,7 +355,8 @@ public class UserServiceUtil {
 			screenName, emailAddress, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId,
 			male, birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn,
-			icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle, organizationIds);
+			facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn,
+			jobTitle, organizationIds);
 	}
 
 	public static com.liferay.portal.model.User updateUser(long userId,
@@ -366,10 +368,11 @@ public class UserServiceUtil {
 		java.lang.String firstName, java.lang.String middleName,
 		java.lang.String lastName, int prefixId, int suffixId, boolean male,
 		int birthdayMonth, int birthdayDay, int birthdayYear,
-		java.lang.String smsSn, java.lang.String aimSn, java.lang.String icqSn,
+		java.lang.String smsSn, java.lang.String aimSn,
+		java.lang.String facebookSn, java.lang.String icqSn,
 		java.lang.String jabberSn, java.lang.String msnSn,
-		java.lang.String skypeSn, java.lang.String ymSn,
-		java.lang.String jobTitle, long[] organizationIds)
+		java.lang.String mySpaceSn, java.lang.String skypeSn,
+		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.PortalException,
 			com.liferay.portal.SystemException, java.rmi.RemoteException {
 		UserService userService = UserServiceFactory.getService();
@@ -378,7 +381,7 @@ public class UserServiceUtil {
 			newPassword2, passwordReset, screenName, emailAddress, languageId,
 			timeZoneId, greeting, comments, firstName, middleName, lastName,
 			prefixId, suffixId, male, birthdayMonth, birthdayDay, birthdayYear,
-			smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
-			organizationIds);
+			smsSn, aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn,
+			skypeSn, ymSn, jobTitle, organizationIds);
 	}
 }

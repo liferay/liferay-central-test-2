@@ -70,8 +70,8 @@ public class AdminUtil {
 			HttpServletRequest req, long userId, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
 			String greeting, String comments, String smsSn, String aimSn,
-			String icqSn, String jabberSn, String msnSn, String skypeSn,
-			String ymSn)
+			String facebookSn, String icqSn, String jabberSn, String msnSn,
+			String mySpaceSn, String skypeSn, String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
 		String password = getUpdateUserPassword(req, userId);
@@ -93,25 +93,25 @@ public class AdminUtil {
 			languageId, timeZoneId, greeting, comments, contact.getFirstName(),
 			contact.getMiddleName(), contact.getLastName(),
 			contact.getPrefixId(), contact.getSuffixId(), contact.isMale(),
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, icqSn,
-			jabberSn, msnSn, skypeSn, ymSn, contact.getJobTitle(),
-			user.getOrganizationIds());
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn,
+			contact.getJobTitle(), user.getOrganizationIds());
 	}
 
 	public static User updateUser(
 			ActionRequest req, long userId, String screenName,
 			String emailAddress, String languageId, String timeZoneId,
 			String greeting, String comments, String smsSn, String aimSn,
-			String icqSn, String jabberSn, String msnSn, String skypeSn,
-			String ymSn)
+			String facebookSn, String icqSn, String jabberSn, String msnSn,
+			String mySpaceSn, String skypeSn, String ymSn)
 		throws PortalException, RemoteException, SystemException {
 
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
 
 		return updateUser(
 			httpReq, userId, screenName, emailAddress, languageId, timeZoneId,
-			greeting, comments, smsSn, aimSn, icqSn, jabberSn, msnSn, skypeSn,
-			ymSn);
+			greeting, comments, smsSn, aimSn, facebookSn, icqSn, jabberSn,
+			msnSn, mySpaceSn, skypeSn, ymSn);
 	}
 
 }

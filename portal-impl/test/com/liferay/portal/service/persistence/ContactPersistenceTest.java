@@ -85,9 +85,11 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		newContact.setBirthday(nextDate());
 		newContact.setSmsSn(randomString());
 		newContact.setAimSn(randomString());
+		newContact.setFacebookSn(randomString());
 		newContact.setIcqSn(randomString());
 		newContact.setJabberSn(randomString());
 		newContact.setMsnSn(randomString());
+		newContact.setMySpaceSn(randomString());
 		newContact.setSkypeSn(randomString());
 		newContact.setYmSn(randomString());
 		newContact.setEmployeeStatusId(randomString());
@@ -119,9 +121,11 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		assertEquals(existingContact.getBirthday(), newContact.getBirthday());
 		assertEquals(existingContact.getSmsSn(), newContact.getSmsSn());
 		assertEquals(existingContact.getAimSn(), newContact.getAimSn());
+		assertEquals(existingContact.getFacebookSn(), newContact.getFacebookSn());
 		assertEquals(existingContact.getIcqSn(), newContact.getIcqSn());
 		assertEquals(existingContact.getJabberSn(), newContact.getJabberSn());
 		assertEquals(existingContact.getMsnSn(), newContact.getMsnSn());
+		assertEquals(existingContact.getMySpaceSn(), newContact.getMySpaceSn());
 		assertEquals(existingContact.getSkypeSn(), newContact.getSkypeSn());
 		assertEquals(existingContact.getYmSn(), newContact.getYmSn());
 		assertEquals(existingContact.getEmployeeStatusId(),
@@ -191,9 +195,11 @@ public class ContactPersistenceTest extends BasePersistenceTestCase {
 		contact.setBirthday(nextDate());
 		contact.setSmsSn(randomString());
 		contact.setAimSn(randomString());
+		contact.setFacebookSn(randomString());
 		contact.setIcqSn(randomString());
 		contact.setJabberSn(randomString());
 		contact.setMsnSn(randomString());
+		contact.setMySpaceSn(randomString());
 		contact.setSkypeSn(randomString());
 		contact.setYmSn(randomString());
 		contact.setEmployeeStatusId(randomString());

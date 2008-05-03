@@ -22,6 +22,8 @@ create table ExpandoValue (
 
 update SocialActivity set type_ = 'ADD_PROPOSAL' where type_ = 'PROPOSE';
 
+alter table User_ add facebookSn VARCHAR(75) null;
+alter table User_ add mySpaceSn VARCHAR(75) null;
 update User_ set timeZoneId = 'America/Anchorage' where timeZoneId = 'AST';
 update User_ set timeZoneId = 'America/Los_Angeles' where timeZoneId = 'PST';
 update User_ set timeZoneId = 'America/Denver' where timeZoneId = 'MST';

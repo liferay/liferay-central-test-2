@@ -92,8 +92,9 @@ public class RegisterAction extends PortletAction {
 			req, user.getUserId(), user.getScreenName(), emailAddress,
 			user.getLanguageId(), user.getTimeZoneId(), user.getGreeting(),
 			user.getComments(), contact.getSmsSn(), contact.getAimSn(),
-			contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
-			contact.getSkypeSn(), contact.getYmSn());
+			contact.getFacebookSn(), contact.getIcqSn(), contact.getJabberSn(),
+			contact.getMsnSn(), contact.getMySpaceSn(), contact.getSkypeSn(),
+			contact.getYmSn());
 
 		SessionMessages.add(req, "user_name_registered");
 	}

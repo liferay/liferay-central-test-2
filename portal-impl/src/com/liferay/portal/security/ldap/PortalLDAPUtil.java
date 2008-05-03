@@ -749,9 +749,10 @@ public class PortalLDAPUtil {
 				user.getGreeting(), user.getComments(), firstName, middleName,
 				lastName, contact.getPrefixId(), contact.getSuffixId(),
 				contact.getMale(), birthdayMonth, birthdayDay, birthdayYear,
-				contact.getSmsSn(), contact.getAimSn(), contact.getIcqSn(),
-				contact.getJabberSn(), contact.getMsnSn(), contact.getSkypeSn(),
-				contact.getYmSn(), jobTitle, user.getOrganizationIds());
+				contact.getSmsSn(), contact.getAimSn(), contact.getFacebookSn(),
+				contact.getIcqSn(), contact.getJabberSn(), contact.getMsnSn(),
+				contact.getMySpaceSn(), contact.getSkypeSn(), contact.getYmSn(),
+				jobTitle, user.getOrganizationIds());
 
 			if (ldapUserModifiedDate != null) {
 				UserLocalServiceUtil.updateModifiedDate(

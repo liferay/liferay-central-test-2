@@ -1407,8 +1407,9 @@ public class UserServiceHttp {
 		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
-		java.lang.String icqSn, java.lang.String jabberSn,
-		java.lang.String msnSn, java.lang.String skypeSn,
+		java.lang.String facebookSn, java.lang.String icqSn,
+		java.lang.String jabberSn, java.lang.String msnSn,
+		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -1501,46 +1502,58 @@ public class UserServiceHttp {
 				paramObj19 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj20 = icqSn;
+			Object paramObj20 = facebookSn;
 
-			if (icqSn == null) {
+			if (facebookSn == null) {
 				paramObj20 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj21 = jabberSn;
+			Object paramObj21 = icqSn;
 
-			if (jabberSn == null) {
+			if (icqSn == null) {
 				paramObj21 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj22 = msnSn;
+			Object paramObj22 = jabberSn;
 
-			if (msnSn == null) {
+			if (jabberSn == null) {
 				paramObj22 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj23 = skypeSn;
+			Object paramObj23 = msnSn;
 
-			if (skypeSn == null) {
+			if (msnSn == null) {
 				paramObj23 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj24 = ymSn;
+			Object paramObj24 = mySpaceSn;
 
-			if (ymSn == null) {
+			if (mySpaceSn == null) {
 				paramObj24 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj25 = jobTitle;
+			Object paramObj25 = skypeSn;
 
-			if (jobTitle == null) {
+			if (skypeSn == null) {
 				paramObj25 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj26 = organizationIds;
+			Object paramObj26 = ymSn;
+
+			if (ymSn == null) {
+				paramObj26 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj27 = jobTitle;
+
+			if (jobTitle == null) {
+				paramObj27 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj28 = organizationIds;
 
 			if (organizationIds == null) {
-				paramObj26 = new NullWrapper("[J");
+				paramObj28 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -1552,7 +1565,7 @@ public class UserServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26
+						paramObj26, paramObj27, paramObj28
 					});
 
 			Object returnObj = null;
@@ -1591,8 +1604,9 @@ public class UserServiceHttp {
 		java.lang.String middleName, java.lang.String lastName, int prefixId,
 		int suffixId, boolean male, int birthdayMonth, int birthdayDay,
 		int birthdayYear, java.lang.String smsSn, java.lang.String aimSn,
-		java.lang.String icqSn, java.lang.String jabberSn,
-		java.lang.String msnSn, java.lang.String skypeSn,
+		java.lang.String facebookSn, java.lang.String icqSn,
+		java.lang.String jabberSn, java.lang.String msnSn,
+		java.lang.String mySpaceSn, java.lang.String skypeSn,
 		java.lang.String ymSn, java.lang.String jobTitle, long[] organizationIds)
 		throws com.liferay.portal.SystemException,
 			com.liferay.portal.PortalException {
@@ -1697,46 +1711,58 @@ public class UserServiceHttp {
 				paramObj21 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj22 = icqSn;
+			Object paramObj22 = facebookSn;
 
-			if (icqSn == null) {
+			if (facebookSn == null) {
 				paramObj22 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj23 = jabberSn;
+			Object paramObj23 = icqSn;
 
-			if (jabberSn == null) {
+			if (icqSn == null) {
 				paramObj23 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj24 = msnSn;
+			Object paramObj24 = jabberSn;
 
-			if (msnSn == null) {
+			if (jabberSn == null) {
 				paramObj24 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj25 = skypeSn;
+			Object paramObj25 = msnSn;
 
-			if (skypeSn == null) {
+			if (msnSn == null) {
 				paramObj25 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj26 = ymSn;
+			Object paramObj26 = mySpaceSn;
 
-			if (ymSn == null) {
+			if (mySpaceSn == null) {
 				paramObj26 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj27 = jobTitle;
+			Object paramObj27 = skypeSn;
 
-			if (jobTitle == null) {
+			if (skypeSn == null) {
 				paramObj27 = new NullWrapper("java.lang.String");
 			}
 
-			Object paramObj28 = organizationIds;
+			Object paramObj28 = ymSn;
+
+			if (ymSn == null) {
+				paramObj28 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj29 = jobTitle;
+
+			if (jobTitle == null) {
+				paramObj29 = new NullWrapper("java.lang.String");
+			}
+
+			Object paramObj30 = organizationIds;
 
 			if (organizationIds == null) {
-				paramObj28 = new NullWrapper("[J");
+				paramObj30 = new NullWrapper("[J");
 			}
 
 			MethodWrapper methodWrapper = new MethodWrapper(UserServiceUtil.class.getName(),
@@ -1748,7 +1774,8 @@ public class UserServiceHttp {
 						paramObj14, paramObj15, paramObj16, paramObj17,
 						paramObj18, paramObj19, paramObj20, paramObj21,
 						paramObj22, paramObj23, paramObj24, paramObj25,
-						paramObj26, paramObj27, paramObj28
+						paramObj26, paramObj27, paramObj28, paramObj29,
+						paramObj30
 					});
 
 			Object returnObj = null;

@@ -119,6 +119,10 @@ public interface ContactModel extends BaseModel {
 
 	public void setAimSn(String aimSn);
 
+	public String getFacebookSn();
+
+	public void setFacebookSn(String facebookSn);
+
 	public String getIcqSn();
 
 	public void setIcqSn(String icqSn);
@@ -130,6 +134,10 @@ public interface ContactModel extends BaseModel {
 	public String getMsnSn();
 
 	public void setMsnSn(String msnSn);
+
+	public String getMySpaceSn();
+
+	public void setMySpaceSn(String mySpaceSn);
 
 	public String getSkypeSn();
 

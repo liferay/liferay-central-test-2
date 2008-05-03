@@ -450,9 +450,10 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String timeZoneId, String greeting, String comments,
 			String firstName, String middleName, String lastName, int prefixId,
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String smsSn, String aimSn, String icqSn,
-			String jabberSn, String msnSn, String skypeSn, String ymSn,
-			String jobTitle, long[] organizationIds)
+			int birthdayYear, String smsSn, String aimSn, String facebookSn,
+			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
+			String skypeSn, String ymSn, String jobTitle,
+			long[] organizationIds)
 		throws PortalException, SystemException {
 
 		String newPassword1 = StringPool.BLANK;
@@ -462,8 +463,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			userId, oldPassword, newPassword1, newPassword2, passwordReset,
 			screenName, emailAddress, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, icqSn,
-			jabberSn, msnSn, skypeSn, ymSn, jobTitle, organizationIds);
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn, jobTitle,
+			organizationIds);
 	}
 
 	public User updateUser(
@@ -473,9 +475,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			String greeting, String comments, String firstName,
 			String middleName, String lastName, int prefixId, int suffixId,
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String smsSn, String aimSn, String icqSn, String jabberSn,
-			String msnSn, String skypeSn, String ymSn, String jobTitle,
-			long[] organizationIds)
+			String smsSn, String aimSn, String facebookSn, String icqSn,
+			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
+			String ymSn, String jobTitle, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		UserPermissionUtil.check(
@@ -504,8 +506,9 @@ public class UserServiceImpl extends UserServiceBaseImpl {
 			userId, oldPassword, newPassword1, newPassword2, passwordReset,
 			screenName, emailAddress, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, icqSn,
-			jabberSn, msnSn, skypeSn, ymSn, jobTitle, organizationIds);
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn, jobTitle,
+			organizationIds);
 	}
 
 }

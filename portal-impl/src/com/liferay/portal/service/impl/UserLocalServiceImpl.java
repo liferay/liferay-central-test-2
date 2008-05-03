@@ -1751,9 +1751,10 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String timeZoneId, String greeting, String comments,
 			String firstName, String middleName, String lastName, int prefixId,
 			int suffixId, boolean male, int birthdayMonth, int birthdayDay,
-			int birthdayYear, String smsSn, String aimSn, String icqSn,
-			String jabberSn, String msnSn, String skypeSn, String ymSn,
-			String jobTitle, long[] organizationIds)
+			int birthdayYear, String smsSn, String aimSn, String facebookSn,
+			String icqSn, String jabberSn, String msnSn, String mySpaceSn,
+			String skypeSn, String ymSn, String jobTitle,
+			long[] organizationIds)
 		throws PortalException, SystemException {
 
 		String newPassword1 = StringPool.BLANK;
@@ -1763,8 +1764,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			userId, oldPassword, newPassword1, newPassword2, passwordReset,
 			screenName, emailAddress, languageId, timeZoneId, greeting,
 			comments, firstName, middleName, lastName, prefixId, suffixId, male,
-			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, icqSn,
-			jabberSn, msnSn, skypeSn, ymSn, jobTitle, organizationIds);
+			birthdayMonth, birthdayDay, birthdayYear, smsSn, aimSn, facebookSn,
+			icqSn, jabberSn, msnSn, mySpaceSn, skypeSn, ymSn, jobTitle,
+			organizationIds);
 	}
 
 	public User updateUser(
@@ -1774,9 +1776,9 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 			String greeting, String comments, String firstName,
 			String middleName, String lastName, int prefixId, int suffixId,
 			boolean male, int birthdayMonth, int birthdayDay, int birthdayYear,
-			String smsSn, String aimSn, String icqSn, String jabberSn,
-			String msnSn, String skypeSn, String ymSn, String jobTitle,
-			long[] organizationIds)
+			String smsSn, String aimSn, String facebookSn, String icqSn,
+			String jabberSn, String msnSn, String mySpaceSn, String skypeSn,
+			String ymSn, String jobTitle, long[] organizationIds)
 		throws PortalException, SystemException {
 
 		// User
@@ -1884,9 +1886,11 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		contact.setBirthday(birthday);
 		contact.setSmsSn(smsSn);
 		contact.setAimSn(aimSn);
+		contact.setFacebookSn(facebookSn);
 		contact.setIcqSn(icqSn);
 		contact.setJabberSn(jabberSn);
 		contact.setMsnSn(msnSn);
+		contact.setMySpaceSn(mySpaceSn);
 		contact.setSkypeSn(skypeSn);
 		contact.setYmSn(ymSn);
 		contact.setJobTitle(jobTitle);

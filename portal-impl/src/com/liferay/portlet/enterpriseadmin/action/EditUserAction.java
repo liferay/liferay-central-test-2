@@ -271,9 +271,11 @@ public class EditUserAction extends PortletAction {
 		String comments = ParamUtil.getString(req, "comments");
 		String smsSn = ParamUtil.getString(req, "smsSn");
 		String aimSn = ParamUtil.getString(req, "aimSn");
+		String facebookSn = ParamUtil.getString(req, "facebookSn");
 		String icqSn = ParamUtil.getString(req, "icqSn");
 		String jabberSn = ParamUtil.getString(req, "jabberSn");
 		String msnSn = ParamUtil.getString(req, "msnSn");
+		String mySpaceSn = ParamUtil.getString(req, "mySpaceSn");
 		String skypeSn = ParamUtil.getString(req, "skypeSn");
 		String ymSn = ParamUtil.getString(req, "ymSn");
 		String jobTitle = ParamUtil.getString(req, "jobTitle");
@@ -314,8 +316,8 @@ public class EditUserAction extends PortletAction {
 				passwordReset, screenName, emailAddress, languageId, timeZoneId,
 				greeting, comments, firstName, middleName, lastName, prefixId,
 				suffixId, male, birthdayMonth, birthdayDay, birthdayYear, smsSn,
-				aimSn, icqSn, jabberSn, msnSn, skypeSn, ymSn, jobTitle,
-				organizationIds);
+				aimSn, facebookSn, icqSn, jabberSn, msnSn, mySpaceSn, skypeSn,
+				ymSn, jobTitle, organizationIds);
 
 			for (String type : AnnouncementsEntryImpl.TYPES) {
 				boolean email = ParamUtil.getBoolean(
