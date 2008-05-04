@@ -50,6 +50,7 @@
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserGroupSearchTerms" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearch" %>
 <%@ page import="com.liferay.portlet.enterpriseadmin.search.UserSearchTerms" %>
+<%@ page import="com.liferay.portlet.social.util.FacebookUtil" %>
 <%@ page import="com.liferay.portlet.tasks.NoSuchProposalException" %>
 <%@ page import="com.liferay.portlet.tasks.model.TasksProposal" %>
 <%@ page import="com.liferay.portlet.tasks.service.TasksProposalLocalServiceUtil" %>
