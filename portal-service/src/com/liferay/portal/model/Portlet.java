@@ -153,6 +153,13 @@ public interface Portlet extends PortletModel {
 
 	public com.liferay.portlet.social.model.SocialActivityInterpreter getSocialActivityInterpreterInstance();
 
+	public java.lang.String getSocialRequestInterpreterClass();
+
+	public void setSocialRequestInterpreterClass(
+		java.lang.String socialRequestInterpreterClass);
+
+	public com.liferay.portlet.social.model.SocialRequestInterpreter getSocialRequestInterpreterInstance();
+
 	public java.lang.String getDefaultPreferences();
 
 	public void setDefaultPreferences(java.lang.String defaultPreferences);

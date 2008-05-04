@@ -1150,6 +1150,16 @@
 		<render-weight>1</render-weight>
 		<system>true</system>
 	</portlet>
+	<portlet>
+		<portlet-name>121</portlet-name>
+		<struts-path>requests</struts-path>
+		<use-default-template>false</use-default-template>
+		<restore-current-view>false</restore-current-view>
+		<private-request-attributes>false</private-request-attributes>
+		<private-session-attributes>false</private-session-attributes>
+		<render-weight>1</render-weight>
+		<css-class-wrapper>portlet-activities</css-class-wrapper>
+	</portlet>
 	<role-mapper>
 		<role-name>administrator</role-name>
 		<role-link>Administrator</role-link>

@@ -478,6 +478,11 @@
 		<struts-path>tasks</struts-path>
 		<include>true</include>
 	</portlet>
+	<portlet>
+		<portlet-name>121</portlet-name>
+		<struts-path>requests</struts-path>
+		<include>true</include>
+	</portlet>
 	-->
 
 	<role-mapper>

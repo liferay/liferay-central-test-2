@@ -374,6 +374,20 @@ create index IX_5A40D18D on SocialRelation (userId2);
 create index IX_3F9C2FA8 on SocialRelation (userId2, type_);
 create index IX_F0CA24A5 on SocialRelation (uuid_);
 
+create index IX_A90FE5A0 on SocialRequest (companyId);
+create index IX_32292ED1 on SocialRequest (receiverUserId);
+create index IX_D9380CB7 on SocialRequest (receiverUserId, status);
+create index IX_80F7A9C2 on SocialRequest (userId);
+create index IX_8EF981C6 on SocialRequest (userId, classNameId, classPK, status, receiverUserId);
+create index IX_36A90CA7 on SocialRequest (userId, classNameId, classPK, type_, receiverUserId);
+create index IX_F3BFB48D on SocialRequest (userId, classNameId, classPK, type_, receiverUserId, status);
+create index IX_8952818D on SocialRequest (userId, classNameId, classPK, type_, status, receiverUserId);
+create index IX_AB5906A8 on SocialRequest (userId, status);
+create index IX_9DFDAA93 on SocialRequest (userId1);
+create index IX_9DFDAE54 on SocialRequest (userId2);
+create index IX_49D5872C on SocialRequest (uuid_);
+create index IX_4F973EFE on SocialRequest (uuid_, groupId);
+
 create index IX_786D171A on Subscription (companyId, classNameId, classPK);
 create index IX_2E1A92D4 on Subscription (companyId, userId, classNameId, classPK);
 create index IX_54243AFD on Subscription (userId);

@@ -897,6 +897,11 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 						portlet.elementText(
 							"social-activity-interpreter-class"),
 							portletModel.getSocialActivityInterpreterClass()));
+				portletModel.setSocialRequestInterpreterClass(
+					GetterUtil.getString(
+						portlet.elementText(
+							"social-request-interpreter-class"),
+							portletModel.getSocialRequestInterpreterClass()));
 				portletModel.setPreferencesCompanyWide(GetterUtil.getBoolean(
 					portlet.elementText("preferences-company-wide"),
 					portletModel.isPreferencesCompanyWide()));

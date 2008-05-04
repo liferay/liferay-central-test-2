@@ -53,6 +53,7 @@ import com.liferay.portal.util.QNameUtil;
 import com.liferay.portlet.PortletBag;
 import com.liferay.portlet.PortletBagPool;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
+import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -127,13 +128,13 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		String urlEncoderClass, String portletDataHandlerClass,
 		String portletLayoutListenerClass,
 		String popMessageListenerClass, String socialActivityInterpreterClass,
-		String defaultPreferences, String prefsValidator,
-		boolean prefsCompanyWide, boolean prefsUniquePerLayout,
-		boolean prefsOwnedByGroup, boolean useDefaultTemplate,
-		boolean showPortletAccessDenied, boolean showPortletInactive,
-		boolean actionURLRedirect, boolean restoreCurrentView,
-		boolean maximizeEdit, boolean maximizeHelp, boolean popUpPrint,
-		boolean layoutCacheable, boolean instanceable,
+		String socialRequestInterpreterClass, String defaultPreferences,
+		String prefsValidator, boolean prefsCompanyWide,
+		boolean prefsUniquePerLayout, boolean prefsOwnedByGroup,
+		boolean useDefaultTemplate, boolean showPortletAccessDenied,
+		boolean showPortletInactive, boolean actionURLRedirect,
+		boolean restoreCurrentView, boolean maximizeEdit, boolean maximizeHelp,
+		boolean popUpPrint, boolean layoutCacheable, boolean instanceable,
 		String userPrincipalStrategy, boolean privateRequestAttributes,
 		boolean privateSessionAttributes, int renderWeight, boolean ajaxable,
 		List<String> headerPortalCss, List<String> headerPortletCss,
@@ -172,6 +173,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_portletLayoutListenerClass = portletLayoutListenerClass;
 		_popMessageListenerClass = popMessageListenerClass;
 		_socialActivityInterpreterClass = socialActivityInterpreterClass;
+		_socialRequestInterpreterClass = socialRequestInterpreterClass;
 		_defaultPreferences = defaultPreferences;
 		_prefsValidator = prefsValidator;
 		_prefsCompanyWide = prefsCompanyWide;
@@ -757,6 +759,49 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			else {
 				return (SocialActivityInterpreter)InstancePool.get(
 					getSocialActivityInterpreterClass());
+			}
+		}
+
+		return null;
+	}
+
+	/**
+	 * Gets the name of the social request interpreter class of the portlet.
+	 *
+	 * @return		the name of the social request interpreter class of the
+	 *				portlet
+	 */
+	public String getSocialRequestInterpreterClass() {
+		return _socialRequestInterpreterClass;
+	}
+
+	/**
+	 * Sets the name of the social request interpreter class of the portlet.
+	 *
+	 * @param		socialRequestInterpreterClass the name of the request
+	 *				interpreter class of the portlet
+	 */
+	public void setSocialRequestInterpreterClass(
+		String socialRequestInterpreterClass) {
+
+		_socialRequestInterpreterClass = socialRequestInterpreterClass;
+	}
+
+	/**
+	 * Gets the name of the request interpreter instance of the portlet.
+	 *
+	 * @return		the name of the request interpreter instance of the portlet
+	 */
+	public SocialRequestInterpreter getSocialRequestInterpreterInstance() {
+		if (Validator.isNotNull(getSocialRequestInterpreterClass())) {
+			if (_portletApp.isWARFile()) {
+				PortletBag portletBag = PortletBagPool.get(getRootPortletId());
+
+				return portletBag.getSocialRequestInterpreterInstance();
+			}
+			else {
+				return (SocialRequestInterpreter)InstancePool.get(
+					getSocialRequestInterpreterClass());
 			}
 		}
 
@@ -2321,7 +2366,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 			getPortletURLClass(), getFriendlyURLMapperClass(),
 			getURLEncoderClass(), getPortletDataHandlerClass(),
 			getPortletLayoutListenerClass(), getPopMessageListenerClass(),
-			getSocialActivityInterpreterClass(), getDefaultPreferences(),
+			getSocialActivityInterpreterClass(),
+			getSocialRequestInterpreterClass(), getDefaultPreferences(),
 			getPreferencesValidator(), isPreferencesCompanyWide(),
 			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
 			isUseDefaultTemplate(), isShowPortletAccessDenied(),
@@ -2463,6 +2509,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * The name of the social activity interpreter class of the portlet.
 	 */
 	private String _socialActivityInterpreterClass;
+
+ 	/**
+	 * The name of the social request interpreter class of the portlet.
+	 */
+	private String _socialRequestInterpreterClass;
 
 	/**
 	 * The default preferences of the portlet.

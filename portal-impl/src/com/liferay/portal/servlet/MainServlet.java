@@ -74,8 +74,11 @@ import com.liferay.portlet.PortletFilterFactory;
 import com.liferay.portlet.PortletInstanceFactory;
 import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
+import com.liferay.portlet.social.model.SocialRequestInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
+import com.liferay.portlet.social.model.impl.SocialRequestInterpreterImpl;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
+import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
 import com.liferay.util.servlet.EncryptedServletRequest;
 
 import java.io.IOException;
@@ -333,6 +336,34 @@ public class MainServlet extends ActionServlet {
 
 					SocialActivityInterpreterLocalServiceUtil.
 						addActivityInterpreter(socialActivityInterpreter);
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e, e);
+		}
+
+		// Social request interpreter
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Social request interpreter");
+		}
+
+		try {
+			Iterator<Portlet> itr = portlets.iterator();
+
+			while (itr.hasNext()) {
+				Portlet portlet = itr.next();
+
+				SocialRequestInterpreter socialRequestInterpreter =
+					portlet.getSocialRequestInterpreterInstance();
+
+				if (portlet.isActive() && (socialRequestInterpreter != null)) {
+					socialRequestInterpreter = new SocialRequestInterpreterImpl(
+						portlet.getPortletId(), socialRequestInterpreter);
+
+					SocialRequestInterpreterLocalServiceUtil.
+						addRequestInterpreter(socialRequestInterpreter);
 				}
 			}
 		}

@@ -1378,6 +1378,21 @@
 		<field name="userId2" type="long" />
 		<field name="type" type="int" />
 	</model>
+	<model name="com.liferay.portlet.social.model.SocialRequest">
+		<field name="uuid" type="String" />
+		<field name="requestId" type="long" />
+		<field name="groupId" type="long" />
+		<field name="companyId" type="long" />
+		<field name="userId" type="long" />
+		<field name="createDate" type="Date" />
+		<field name="modifiedDate" type="Date" />
+		<field name="classNameId" type="long" />
+		<field name="classPK" type="long" />
+		<field name="type" type="int" />
+		<field name="extraData" type="String" />
+		<field name="receiverUserId" type="long" />
+		<field name="status" type="int" />
+	</model>
 	<model name="com.liferay.portlet.softwarecatalog.model.SCLicense">
 		<field name="licenseId" type="long" />
 		<field name="name" type="String" />

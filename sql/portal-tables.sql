@@ -1219,6 +1219,22 @@ create table SocialRelation (
 	type_ INTEGER
 );
 
+create table SocialRequest (
+	uuid_ VARCHAR(75) null,
+	requestId LONG not null primary key,
+	groupId LONG,
+	companyId LONG,
+	userId LONG,
+	createDate DATE null,
+	modifiedDate DATE null,
+	classNameId LONG,
+	classPK LONG,
+	type_ INTEGER,
+	extraData VARCHAR(75) null,
+	receiverUserId LONG,
+	status INTEGER
+);
+
 create table Subscription (
 	subscriptionId LONG not null primary key,
 	companyId LONG,

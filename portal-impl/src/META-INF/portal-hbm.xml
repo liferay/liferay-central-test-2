@@ -1590,4 +1590,22 @@
 		<property name="userId2" type="com.liferay.util.dao.hibernate.LongType" />
 		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.IntegerType" />
 	</class>
+	<class name="com.liferay.portlet.social.model.impl.SocialRequestImpl" table="SocialRequest">
+		<cache usage="read-write" />
+		<id name="requestId" type="long">
+			<generator class="assigned" />
+		</id>
+		<property name="uuid" column="uuid_" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="groupId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="companyId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="userId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="createDate" />
+		<property name="modifiedDate" />
+		<property name="classNameId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="classPK" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="type" column="type_" type="com.liferay.util.dao.hibernate.IntegerType" />
+		<property name="extraData" type="com.liferay.util.dao.hibernate.StringType" />
+		<property name="receiverUserId" type="com.liferay.util.dao.hibernate.LongType" />
+		<property name="status" type="com.liferay.util.dao.hibernate.IntegerType" />
+	</class>
 </hibernate-mapping>

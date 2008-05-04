@@ -807,6 +807,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		// Social
 
 		socialActivityLocalService.deleteUserActivities(userId);
+		socialRequestLocalService.deleteReceiverUserRequests(userId);
+		socialRequestLocalService.deleteUserRequests(userId);
 
 		// Mail
 

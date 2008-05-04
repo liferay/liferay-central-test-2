@@ -41,12 +41,12 @@ public class SocialActivityInterpreterImpl
 	implements SocialActivityInterpreter {
 
 	public SocialActivityInterpreterImpl(
-		String portletId, SocialActivityInterpreter socialActivityInterpreter) {
+		String portletId, SocialActivityInterpreter activityInterpreter) {
 
 		_portletId = portletId;
-		_socialActivityInterpreter = socialActivityInterpreter;
+		_activityInterpreter = activityInterpreter;
 
-		String[] classNames = _socialActivityInterpreter.getClassNames();
+		String[] classNames = _activityInterpreter.getClassNames();
 
 		for (String className : classNames) {
 			_classNames.add(className);
@@ -54,7 +54,7 @@ public class SocialActivityInterpreterImpl
 	}
 
 	public String[] getClassNames() {
-		return _socialActivityInterpreter.getClassNames();
+		return _activityInterpreter.getClassNames();
 	}
 
 	public String getPortletId() {
@@ -71,14 +71,14 @@ public class SocialActivityInterpreterImpl
 	}
 
 	public SocialActivityFeedEntry interpret(
-		SocialActivity socialActivity, ThemeDisplay themeDisplay) {
+		SocialActivity activity, ThemeDisplay themeDisplay) {
 
-		return _socialActivityInterpreter.interpret(
-			socialActivity, themeDisplay);
+		return _activityInterpreter.interpret(
+			activity, themeDisplay);
 	}
 
 	private String _portletId;
-	private SocialActivityInterpreter _socialActivityInterpreter;
+	private SocialActivityInterpreter _activityInterpreter;
 	private Set<String> _classNames = new HashSet<String>();
 
 }

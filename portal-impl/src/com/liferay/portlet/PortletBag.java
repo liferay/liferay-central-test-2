@@ -32,6 +32,7 @@ import com.liferay.portal.kernel.search.Indexer;
 import com.liferay.portal.kernel.servlet.URLEncoder;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
+import com.liferay.portlet.social.model.SocialRequestInterpreter;
 
 import java.util.Locale;
 import java.util.Map;
@@ -61,6 +62,7 @@ public class PortletBag {
 		PortletLayoutListener portletLayoutListenerInstance,
 		MessageListener popMessageListenerInstance,
 		SocialActivityInterpreter socialActivityInterpreterInstance,
+		SocialRequestInterpreter socialRequestInterpreterInstance,
 		PreferencesValidator prefsValidatorInstance,
 		Map<String, ResourceBundle> resourceBundles) {
 
@@ -76,6 +78,7 @@ public class PortletBag {
 		_portletLayoutListenerInstance = portletLayoutListenerInstance;
 		_popMessageListenerInstance = popMessageListenerInstance;
 		_socialActivityInterpreterInstance = socialActivityInterpreterInstance;
+		_socialRequestInterpreterInstance = socialRequestInterpreterInstance;
 		_prefsValidatorInstance = prefsValidatorInstance;
 		_resourceBundles = resourceBundles;
 	}
@@ -132,6 +135,10 @@ public class PortletBag {
 		return _socialActivityInterpreterInstance;
 	}
 
+	public SocialRequestInterpreter getSocialRequestInterpreterInstance() {
+		return _socialRequestInterpreterInstance;
+	}
+
 	public PreferencesValidator getPreferencesValidatorInstance() {
 		return _prefsValidatorInstance;
 	}
@@ -164,6 +171,7 @@ public class PortletBag {
 	private PortletLayoutListener _portletLayoutListenerInstance;
 	private MessageListener _popMessageListenerInstance;
 	private SocialActivityInterpreter _socialActivityInterpreterInstance;
+	private SocialRequestInterpreter _socialRequestInterpreterInstance;
 	private PreferencesValidator _prefsValidatorInstance;
 	private Map<String, ResourceBundle> _resourceBundles;
 

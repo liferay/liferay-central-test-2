@@ -281,6 +281,8 @@ public class WebKeys implements com.liferay.portal.kernel.util.WebKeys {
 
 	public static final String SHOPPING_ORDER = "SHOPPING_ORDER";
 
+	public static final String SOCIAL_REQUESTS = "SOCIAL_REQUESTS";
+
 	public static final String SOFTWARE_CATALOG_FRAMEWORK_VERSION = "SOFTWARE_CATALOG_FRAMEWORK_VERSION";
 
 	public static final String SOFTWARE_CATALOG_LICENSE = "SOFTWARE_CATALOG_LICENSE";

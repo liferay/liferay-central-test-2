@@ -311,10 +311,14 @@ import com.liferay.portlet.shopping.service.persistence.ShoppingCartPersistence;
 import com.liferay.portlet.shopping.service.persistence.ShoppingCartUtil;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
+import com.liferay.portlet.social.service.SocialRequestLocalService;
+import com.liferay.portlet.social.service.SocialRequestLocalServiceFactory;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
+import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
+import com.liferay.portlet.social.service.persistence.SocialRequestUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -1552,6 +1556,24 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 		this.socialActivityFinder = socialActivityFinder;
 	}
 
+	public SocialRequestLocalService getSocialRequestLocalService() {
+		return socialRequestLocalService;
+	}
+
+	public void setSocialRequestLocalService(
+		SocialRequestLocalService socialRequestLocalService) {
+		this.socialRequestLocalService = socialRequestLocalService;
+	}
+
+	public SocialRequestPersistence getSocialRequestPersistence() {
+		return socialRequestPersistence;
+	}
+
+	public void setSocialRequestPersistence(
+		SocialRequestPersistence socialRequestPersistence) {
+		this.socialRequestPersistence = socialRequestPersistence;
+	}
+
 	public void afterPropertiesSet() {
 		if (accountLocalService == null) {
 			accountLocalService = AccountLocalServiceFactory.getImpl();
@@ -2128,6 +2150,14 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 		if (socialActivityFinder == null) {
 			socialActivityFinder = SocialActivityFinderUtil.getFinder();
 		}
+
+		if (socialRequestLocalService == null) {
+			socialRequestLocalService = SocialRequestLocalServiceFactory.getImpl();
+		}
+
+		if (socialRequestPersistence == null) {
+			socialRequestPersistence = SocialRequestUtil.getPersistence();
+		}
 	}
 
 	protected AccountLocalService accountLocalService;
@@ -2274,4 +2304,6 @@ public abstract class UserServiceBaseImpl extends PrincipalBean
 	protected SocialActivityLocalService socialActivityLocalService;
 	protected SocialActivityPersistence socialActivityPersistence;
 	protected SocialActivityFinder socialActivityFinder;
+	protected SocialRequestLocalService socialRequestLocalService;
+	protected SocialRequestPersistence socialRequestPersistence;
 }

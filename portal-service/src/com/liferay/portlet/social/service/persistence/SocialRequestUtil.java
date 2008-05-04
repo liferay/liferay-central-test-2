@@ -1,0 +1,563 @@
+/**
+ * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to deal
+ * in the Software without restriction, including without limitation the rights
+ * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+ * copies of the Software, and to permit persons to whom the Software is
+ * furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in
+ * all copies or substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+ * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+ * SOFTWARE.
+ */
+
+package com.liferay.portlet.social.service.persistence;
+
+/**
+ * <a href="SocialRequestUtil.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class SocialRequestUtil {
+	public static com.liferay.portlet.social.model.SocialRequest create(
+		long requestId) {
+		return getPersistence().create(requestId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest remove(
+		long requestId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().remove(requestId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest remove(
+		com.liferay.portlet.social.model.SocialRequest socialRequest)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().remove(socialRequest);
+	}
+
+	/**
+	 * @deprecated Use <code>update(SocialRequest socialRequest, boolean merge)</code>.
+	 */
+	public static com.liferay.portlet.social.model.SocialRequest update(
+		com.liferay.portlet.social.model.SocialRequest socialRequest)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().update(socialRequest);
+	}
+
+	/**
+	 * Add, update, or merge, the entity. This method also calls the model
+	 * listeners to trigger the proper events associated with adding, deleting,
+	 * or updating an entity.
+	 *
+	 * @param        socialRequest the entity to add, update, or merge
+	 * @param        merge boolean value for whether to merge the entity. The
+	 *                default value is false. Setting merge to true is more
+	 *                expensive and should only be true when socialRequest is
+	 *                transient. See LEP-5473 for a detailed discussion of this
+	 *                method.
+	 * @return        true if the portlet can be displayed via Ajax
+	 */
+	public static com.liferay.portlet.social.model.SocialRequest update(
+		com.liferay.portlet.social.model.SocialRequest socialRequest,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().update(socialRequest, merge);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest updateImpl(
+		com.liferay.portlet.social.model.SocialRequest socialRequest,
+		boolean merge) throws com.liferay.portal.SystemException {
+		return getPersistence().updateImpl(socialRequest, merge);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByPrimaryKey(
+		long requestId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByPrimaryKey(requestId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest fetchByPrimaryKey(
+		long requestId) throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByPrimaryKey(requestId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByUuid(
+		java.lang.String uuid) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByUuid(
+		java.lang.String uuid, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByUuid(
+		java.lang.String uuid, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUuid(uuid, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByUuid_First(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByUuid_First(uuid, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByUuid_Last(
+		java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByUuid_Last(uuid, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest[] findByUuid_PrevAndNext(
+		long requestId, java.lang.String uuid,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByUuid_PrevAndNext(requestId, uuid, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByUUID_G(uuid, groupId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest fetchByUUID_G(
+		java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().fetchByUUID_G(uuid, groupId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByCompanyId(
+		long companyId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByCompanyId(
+		long companyId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByCompanyId(
+		long companyId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByCompanyId(companyId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByCompanyId_First(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByCompanyId_First(companyId, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByCompanyId_Last(
+		long companyId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByCompanyId_Last(companyId, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest[] findByCompanyId_PrevAndNext(
+		long requestId, long companyId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence()
+				   .findByCompanyId_PrevAndNext(requestId, companyId, obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByUserId(
+		long userId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByUserId(userId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByUserId(
+		long userId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUserId(userId, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByUserId(
+		long userId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByUserId(userId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByUserId_First(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByUserId_First(userId, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByUserId_Last(
+		long userId, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByUserId_Last(userId, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest[] findByUserId_PrevAndNext(
+		long requestId, long userId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByUserId_PrevAndNext(requestId, userId, obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByReceiverUserId(
+		long receiverUserId) throws com.liferay.portal.SystemException {
+		return getPersistence().findByReceiverUserId(receiverUserId);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByReceiverUserId(
+		long receiverUserId, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByReceiverUserId(receiverUserId, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByReceiverUserId(
+		long receiverUserId, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByReceiverUserId(receiverUserId, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByReceiverUserId_First(
+		long receiverUserId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByReceiverUserId_First(receiverUserId, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByReceiverUserId_Last(
+		long receiverUserId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByReceiverUserId_Last(receiverUserId, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest[] findByReceiverUserId_PrevAndNext(
+		long requestId, long receiverUserId,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence()
+				   .findByReceiverUserId_PrevAndNext(requestId, receiverUserId,
+			obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByU_S(
+		long userId, int status) throws com.liferay.portal.SystemException {
+		return getPersistence().findByU_S(userId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByU_S(
+		long userId, int status, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByU_S(userId, status, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByU_S(
+		long userId, int status, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByU_S(userId, status, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByU_S_First(
+		long userId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByU_S_First(userId, status, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByU_S_Last(
+		long userId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByU_S_Last(userId, status, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest[] findByU_S_PrevAndNext(
+		long requestId, long userId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence()
+				   .findByU_S_PrevAndNext(requestId, userId, status, obc);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByR_S(
+		long receiverUserId, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByR_S(receiverUserId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByR_S(
+		long receiverUserId, int status, int begin, int end)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findByR_S(receiverUserId, status, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findByR_S(
+		long receiverUserId, int status, int begin, int end,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findByR_S(receiverUserId, status, begin, end, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByR_S_First(
+		long receiverUserId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByR_S_First(receiverUserId, status, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByR_S_Last(
+		long receiverUserId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence().findByR_S_Last(receiverUserId, status, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest[] findByR_S_PrevAndNext(
+		long requestId, long receiverUserId, int status,
+		com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence()
+				   .findByR_S_PrevAndNext(requestId, receiverUserId, status, obc);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByU_C_C_T_R(
+		long userId, long classNameId, long classPK, int type,
+		long receiverUserId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence()
+				   .findByU_C_C_T_R(userId, classNameId, classPK, type,
+			receiverUserId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest fetchByU_C_C_T_R(
+		long userId, long classNameId, long classPK, int type,
+		long receiverUserId) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByU_C_C_T_R(userId, classNameId, classPK, type,
+			receiverUserId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest findByU_C_C_T_R_S(
+		long userId, long classNameId, long classPK, int type,
+		long receiverUserId, int status)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		return getPersistence()
+				   .findByU_C_C_T_R_S(userId, classNameId, classPK, type,
+			receiverUserId, status);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRequest fetchByU_C_C_T_R_S(
+		long userId, long classNameId, long classPK, int type,
+		long receiverUserId, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .fetchByU_C_C_T_R_S(userId, classNameId, classPK, type,
+			receiverUserId, status);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findWithDynamicQuery(queryInitializer);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findWithDynamicQuery(
+		com.liferay.portal.kernel.dao.DynamicQueryInitializer queryInitializer,
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .findWithDynamicQuery(queryInitializer, begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findAll()
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll();
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findAll(
+		int begin, int end) throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(begin, end);
+	}
+
+	public static java.util.List<com.liferay.portlet.social.model.SocialRequest> findAll(
+		int begin, int end, com.liferay.portal.kernel.util.OrderByComparator obc)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().findAll(begin, end, obc);
+	}
+
+	public static void removeByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByUuid(uuid);
+	}
+
+	public static void removeByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		getPersistence().removeByUUID_G(uuid, groupId);
+	}
+
+	public static void removeByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByCompanyId(companyId);
+	}
+
+	public static void removeByUserId(long userId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByUserId(userId);
+	}
+
+	public static void removeByReceiverUserId(long receiverUserId)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByReceiverUserId(receiverUserId);
+	}
+
+	public static void removeByU_S(long userId, int status)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByU_S(userId, status);
+	}
+
+	public static void removeByR_S(long receiverUserId, int status)
+		throws com.liferay.portal.SystemException {
+		getPersistence().removeByR_S(receiverUserId, status);
+	}
+
+	public static void removeByU_C_C_T_R(long userId, long classNameId,
+		long classPK, int type, long receiverUserId)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		getPersistence()
+			.removeByU_C_C_T_R(userId, classNameId, classPK, type,
+			receiverUserId);
+	}
+
+	public static void removeByU_C_C_T_R_S(long userId, long classNameId,
+		long classPK, int type, long receiverUserId, int status)
+		throws com.liferay.portal.SystemException,
+			com.liferay.portlet.social.NoSuchRequestException {
+		getPersistence()
+			.removeByU_C_C_T_R_S(userId, classNameId, classPK, type,
+			receiverUserId, status);
+	}
+
+	public static void removeAll() throws com.liferay.portal.SystemException {
+		getPersistence().removeAll();
+	}
+
+	public static int countByUuid(java.lang.String uuid)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUuid(uuid);
+	}
+
+	public static int countByUUID_G(java.lang.String uuid, long groupId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUUID_G(uuid, groupId);
+	}
+
+	public static int countByCompanyId(long companyId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByCompanyId(companyId);
+	}
+
+	public static int countByUserId(long userId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByUserId(userId);
+	}
+
+	public static int countByReceiverUserId(long receiverUserId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByReceiverUserId(receiverUserId);
+	}
+
+	public static int countByU_S(long userId, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByU_S(userId, status);
+	}
+
+	public static int countByR_S(long receiverUserId, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence().countByR_S(receiverUserId, status);
+	}
+
+	public static int countByU_C_C_T_R(long userId, long classNameId,
+		long classPK, int type, long receiverUserId)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .countByU_C_C_T_R(userId, classNameId, classPK, type,
+			receiverUserId);
+	}
+
+	public static int countByU_C_C_T_R_S(long userId, long classNameId,
+		long classPK, int type, long receiverUserId, int status)
+		throws com.liferay.portal.SystemException {
+		return getPersistence()
+				   .countByU_C_C_T_R_S(userId, classNameId, classPK, type,
+			receiverUserId, status);
+	}
+
+	public static int countAll() throws com.liferay.portal.SystemException {
+		return getPersistence().countAll();
+	}
+
+	public static SocialRequestPersistence getPersistence() {
+		return _getUtil()._persistence;
+	}
+
+	public void setPersistence(SocialRequestPersistence persistence) {
+		_persistence = persistence;
+	}
+
+	private static SocialRequestUtil _getUtil() {
+		if (_util == null) {
+			_util = (SocialRequestUtil)com.liferay.portal.kernel.bean.BeanLocatorUtil.locate(_UTIL);
+		}
+
+		return _util;
+	}
+
+	private static final String _UTIL = SocialRequestUtil.class.getName();
+	private static SocialRequestUtil _util;
+	private SocialRequestPersistence _persistence;
+}

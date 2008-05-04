@@ -35,6 +35,6 @@ public interface SocialActivityInterpreter {
 	public String[] getClassNames();
 
 	public SocialActivityFeedEntry interpret(
-		SocialActivity socialActivity, ThemeDisplay themeDisplay);
+		SocialActivity activity, ThemeDisplay themeDisplay);
 
 }

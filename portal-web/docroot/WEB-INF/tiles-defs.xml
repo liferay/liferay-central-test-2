@@ -889,6 +889,18 @@
 		<put name="portlet_decorate" value="false" />
 	</definition>
 
+	<!-- Requests -->
+
+	<definition name="portlet.requests" extends="portlet" />
+
+	<definition name="portlet.requests.error" extends="portlet.requests">
+		<put name="portlet_content" value="/portlet/requests/error.jsp" />
+	</definition>
+
+	<definition name="portlet.requests.view" extends="portlet.requests">
+		<put name="portlet_content" value="/portlet/requests/view.jsp" />
+	</definition>
+
 	<!-- Software Catalog -->
 
 	<definition name="portlet.software_catalog" extends="portlet" />

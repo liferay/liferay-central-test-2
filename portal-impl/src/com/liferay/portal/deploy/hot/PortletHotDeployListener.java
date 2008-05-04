@@ -71,8 +71,11 @@ import com.liferay.portlet.PortletPreferencesSerializer;
 import com.liferay.portlet.PortletResourceBundles;
 import com.liferay.portlet.PortletURLListenerFactory;
 import com.liferay.portlet.social.model.SocialActivityInterpreter;
+import com.liferay.portlet.social.model.SocialRequestInterpreter;
 import com.liferay.portlet.social.model.impl.SocialActivityInterpreterImpl;
+import com.liferay.portlet.social.model.impl.SocialRequestInterpreterImpl;
 import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil;
+import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceUtil;
 
 import java.util.HashMap;
 import java.util.HashSet;
@@ -292,6 +295,28 @@ public class PortletHotDeployListener implements HotDeployListener {
 							socialActivityInterpreterInstance);
 				}
 
+				SocialRequestInterpreter socialRequestInterpreterInstance =
+					null;
+
+				if (Validator.isNotNull(
+						portlet.getSocialRequestInterpreterClass())) {
+
+					socialRequestInterpreterInstance =
+						(SocialRequestInterpreter)
+							portletClassLoader.loadClass(
+								portlet.getSocialRequestInterpreterClass()).
+									newInstance();
+
+					socialRequestInterpreterInstance =
+						new SocialRequestInterpreterImpl(
+							portlet.getPortletId(),
+							socialRequestInterpreterInstance);
+
+					SocialRequestInterpreterLocalServiceUtil.
+						addRequestInterpreter(
+							socialRequestInterpreterInstance);
+				}
+
 				PreferencesValidator prefsValidatorInstance = null;
 
 				if (Validator.isNotNull(portlet.getPreferencesValidator())) {
@@ -343,7 +368,8 @@ public class PortletHotDeployListener implements HotDeployListener {
 					schedulerInstance, friendlyURLMapperInstance,
 					urlEncoderInstance, portletDataHandlerInstance,
 					portletLayoutListenerInstance, popMessageListenerInstance,
-					socialActivityInterpreterInstance, prefsValidatorInstance,
+					socialActivityInterpreterInstance,
+					socialRequestInterpreterInstance, prefsValidatorInstance,
 					resourceBundles);
 
 				PortletBagPool.put(portlet.getPortletId(), portletBag);
@@ -496,6 +522,10 @@ public class PortletHotDeployListener implements HotDeployListener {
 					SocialActivityInterpreterLocalServiceUtil.
 						deleteActivityInterpreter(
 							portlet.getSocialActivityInterpreterInstance());
+
+					SocialRequestInterpreterLocalServiceUtil.
+						deleteRequestInterpreter(
+							portlet.getSocialRequestInterpreterInstance());
 
 					PortletInstanceFactory.destroy(portlet);
 

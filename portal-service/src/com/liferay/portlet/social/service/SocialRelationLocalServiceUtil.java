@@ -118,11 +118,37 @@ public class SocialRelationLocalServiceUtil {
 		socialRelationLocalService.deleteRelation(relationId);
 	}
 
+	public static void deleteRelation(long userId1, long userId2, int type)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
+
+		socialRelationLocalService.deleteRelation(userId1, userId2, type);
+	}
+
 	public static void deleteRelations(long userId)
 		throws com.liferay.portal.SystemException {
 		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
 
 		socialRelationLocalService.deleteRelations(userId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRelation getRelation(
+		long relationId)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
+
+		return socialRelationLocalService.getRelation(relationId);
+	}
+
+	public static com.liferay.portlet.social.model.SocialRelation getRelation(
+		long userId1, long userId2, int type)
+		throws com.liferay.portal.PortalException,
+			com.liferay.portal.SystemException {
+		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
+
+		return socialRelationLocalService.getRelation(userId1, userId2, type);
 	}
 
 	public static java.util.List<com.liferay.portlet.social.model.SocialRelation> getRelations(
@@ -138,5 +164,19 @@ public class SocialRelationLocalServiceUtil {
 		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
 
 		return socialRelationLocalService.getRelationsCount(userId, type);
+	}
+
+	public static boolean hasRelation(long userId1, long userId2, int type)
+		throws com.liferay.portal.SystemException {
+		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
+
+		return socialRelationLocalService.hasRelation(userId1, userId2, type);
+	}
+
+	public static boolean isRelatable(long userId1, long userId2, int type)
+		throws com.liferay.portal.SystemException {
+		SocialRelationLocalService socialRelationLocalService = SocialRelationLocalServiceFactory.getService();
+
+		return socialRelationLocalService.isRelatable(userId1, userId2, type);
 	}
 }

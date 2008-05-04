@@ -118,9 +118,31 @@ public class SocialRelationLocalServiceImpl
 		socialRelationPersistence.remove(relation);
 	}
 
+	public void deleteRelation(long userId1, long userId2, int type)
+		throws PortalException, SystemException {
+
+		SocialRelation relation = socialRelationPersistence.findByU1_U2_T(
+			userId1, userId2, type);
+
+		deleteRelation(relation.getRelationId());
+	}
+
 	public void deleteRelations(long userId) throws SystemException {
 		socialRelationPersistence.removeByUserId1(userId);
 		socialRelationPersistence.removeByUserId2(userId);
+	}
+
+	public SocialRelation getRelation(long relationId)
+		throws PortalException, SystemException {
+
+		return socialRelationPersistence.findByPrimaryKey(relationId);
+	}
+
+	public SocialRelation getRelation(long userId1, long userId2, int type)
+		throws PortalException, SystemException {
+
+		return socialRelationPersistence.findByU1_U2_T(
+			userId1, userId2, type);
 	}
 
 	public List<SocialRelation> getRelations(
@@ -132,6 +154,42 @@ public class SocialRelationLocalServiceImpl
 
 	public int getRelationsCount(long userId, int type) throws SystemException {
 		return socialRelationPersistence.countByU1_T(userId, type);
+	}
+
+	public boolean hasRelation(long userId1, long userId2, int type)
+		throws SystemException {
+
+		SocialRelation relation = socialRelationPersistence.fetchByU1_U2_T(
+			userId1, userId2, type);
+
+		if (relation == null) {
+			return false;
+		}
+		else {
+			return true;
+		}
+	}
+
+	public boolean isRelatable(long userId1, long userId2, int type)
+		throws SystemException {
+
+		if (userId1 == userId2) {
+			return false;
+		}
+
+		User user1 = userPersistence.fetchByPrimaryKey(userId1);
+
+		if ((user1 == null) || user1.isDefaultUser()) {
+			return false;
+		}
+
+		User user2 = userPersistence.fetchByPrimaryKey(userId2);
+
+		if ((user2 == null) || user2.isDefaultUser()) {
+			return false;
+		}
+
+		return !hasRelation(userId1, userId2, type);
 	}
 
 }

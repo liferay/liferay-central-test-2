@@ -21,16 +21,17 @@ configuration-path?, configuration-action-class?, indexer-class?,
 open-search-class?, scheduler-class?, portlet-url-class?,
 friendly-url-mapper-class?, url-encoder-class?, portlet-data-handler-class?,
 portlet-layout-listener-class?, pop-message-listener-class?,
-social-activity-interpreter-class?, preferences-company-wide?,
-preferences-unique-per-layout?, preferences-owned-by-group?,
-use-default-template?, show-portlet-access-denied?, show-portlet-inactive?,
-action-url-redirect?, restore-current-view?, maximize-edit?, maximize-help?,
-pop-up-print?, layout-cacheable?, instanceable?, user-principal-strategy?,
-private-request-attributes?, private-session-attributes?, render-weight?,
-ajaxable?, header-portal-css*, header-portlet-css*, header-portal-javascript*,
-header-portlet-javascript*, footer-portal-css*, footer-portlet-css*,
-footer-portal-javascript*, footer-portlet-javascript*, css-class-wrapper?,
-add-default-resource?, system?, active?, include?)>
+social-activity-interpreter-class?, social-request-interpreter-class?,
+preferences-company-wide?, preferences-unique-per-layout?,
+preferences-owned-by-group?, use-default-template?, show-portlet-access-denied?,
+show-portlet-inactive?, action-url-redirect?, restore-current-view?,
+maximize-edit?, maximize-help?, pop-up-print?, layout-cacheable?, instanceable?,
+user-principal-strategy?, private-request-attributes?,
+private-session-attributes?, render-weight?, ajaxable?, header-portal-css*,
+header-portlet-css*, header-portal-javascript*, header-portlet-javascript*,
+footer-portal-css*, footer-portlet-css*, footer-portal-javascript*,
+footer-portlet-javascript*, css-class-wrapper?, add-default-resource?, system?,
+active?, include?)>
 
 <!--
 The portlet-name element contains the unique name of the portlet. This name must
@@ -201,6 +202,18 @@ http://docs.liferay.com/5.0/javadocs/portal-impl/com/liferay/portlet/messageboar
 http://docs.liferay.com/5.0/javadocs/portal-service/com/liferay/portlet/social/model/SocialActivityInterpreter.html
 -->
 <!ELEMENT social-activity-interpreter-class (#PCDATA)>
+
+<!--
+The social-request-interpreter-class value must be a class that implements
+com.liferay.portlet.social.model.SocialRequestInterpreter and is called to
+interpret requests into friendly messages that are easily understandable by a
+human being.
+
+See:
+
+http://docs.liferay.com/5.0/javadocs/portal-service/com/liferay/portlet/social/model/SocialRequestInterpreter.html
+-->
+<!ELEMENT social-request-interpreter-class (#PCDATA)>
 
 <!--
 Set the preferences-company-wide value to true if the preferences for the

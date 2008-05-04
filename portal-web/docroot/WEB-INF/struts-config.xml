@@ -1129,6 +1129,16 @@
 
 		<action path="/quick_note/view" forward="portlet.quick_note.view" />
 
+		<!-- Requests -->
+
+		<action path="/requests/update_request" type="com.liferay.portlet.requests.action.UpdateRequestAction">
+			<forward name="portlet.requests.error" path="portlet.requests.error" />
+		</action>
+
+		<action path="/requests/view" type="com.liferay.portlet.requests.action.ViewAction">
+			<forward name="portlet.requests.view" path="portlet.requests.view" />
+		</action>
+
 		<!-- Software Catalog -->
 
 		<action path="/software_catalog/edit_framework_version" type="com.liferay.portlet.softwarecatalog.action.EditFrameworkVersionAction">

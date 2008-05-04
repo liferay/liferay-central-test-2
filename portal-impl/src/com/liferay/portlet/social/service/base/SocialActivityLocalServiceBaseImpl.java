@@ -45,12 +45,18 @@ import com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceF
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialRelationLocalService;
 import com.liferay.portlet.social.service.SocialRelationLocalServiceFactory;
+import com.liferay.portlet.social.service.SocialRequestInterpreterLocalService;
+import com.liferay.portlet.social.service.SocialRequestInterpreterLocalServiceFactory;
+import com.liferay.portlet.social.service.SocialRequestLocalService;
+import com.liferay.portlet.social.service.SocialRequestLocalServiceFactory;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinderUtil;
 import com.liferay.portlet.social.service.persistence.SocialActivityPersistence;
 import com.liferay.portlet.social.service.persistence.SocialActivityUtil;
 import com.liferay.portlet.social.service.persistence.SocialRelationPersistence;
 import com.liferay.portlet.social.service.persistence.SocialRelationUtil;
+import com.liferay.portlet.social.service.persistence.SocialRequestPersistence;
+import com.liferay.portlet.social.service.persistence.SocialRequestUtil;
 
 import org.springframework.beans.factory.InitializingBean;
 
@@ -145,6 +151,33 @@ public abstract class SocialActivityLocalServiceBaseImpl
 		this.socialRelationPersistence = socialRelationPersistence;
 	}
 
+	public SocialRequestLocalService getSocialRequestLocalService() {
+		return socialRequestLocalService;
+	}
+
+	public void setSocialRequestLocalService(
+		SocialRequestLocalService socialRequestLocalService) {
+		this.socialRequestLocalService = socialRequestLocalService;
+	}
+
+	public SocialRequestPersistence getSocialRequestPersistence() {
+		return socialRequestPersistence;
+	}
+
+	public void setSocialRequestPersistence(
+		SocialRequestPersistence socialRequestPersistence) {
+		this.socialRequestPersistence = socialRequestPersistence;
+	}
+
+	public SocialRequestInterpreterLocalService getSocialRequestInterpreterLocalService() {
+		return socialRequestInterpreterLocalService;
+	}
+
+	public void setSocialRequestInterpreterLocalService(
+		SocialRequestInterpreterLocalService socialRequestInterpreterLocalService) {
+		this.socialRequestInterpreterLocalService = socialRequestInterpreterLocalService;
+	}
+
 	public CounterLocalService getCounterLocalService() {
 		return counterLocalService;
 	}
@@ -214,6 +247,18 @@ public abstract class SocialActivityLocalServiceBaseImpl
 			socialRelationPersistence = SocialRelationUtil.getPersistence();
 		}
 
+		if (socialRequestLocalService == null) {
+			socialRequestLocalService = SocialRequestLocalServiceFactory.getImpl();
+		}
+
+		if (socialRequestPersistence == null) {
+			socialRequestPersistence = SocialRequestUtil.getPersistence();
+		}
+
+		if (socialRequestInterpreterLocalService == null) {
+			socialRequestInterpreterLocalService = SocialRequestInterpreterLocalServiceFactory.getImpl();
+		}
+
 		if (counterLocalService == null) {
 			counterLocalService = CounterLocalServiceFactory.getImpl();
 		}
@@ -244,6 +289,9 @@ public abstract class SocialActivityLocalServiceBaseImpl
 	protected SocialActivityInterpreterLocalService socialActivityInterpreterLocalService;
 	protected SocialRelationLocalService socialRelationLocalService;
 	protected SocialRelationPersistence socialRelationPersistence;
+	protected SocialRequestLocalService socialRequestLocalService;
+	protected SocialRequestPersistence socialRequestPersistence;
+	protected SocialRequestInterpreterLocalService socialRequestInterpreterLocalService;
 	protected CounterLocalService counterLocalService;
 	protected CounterService counterService;
 	protected UserLocalService userLocalService;
