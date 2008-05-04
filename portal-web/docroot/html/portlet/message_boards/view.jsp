@@ -50,9 +50,10 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 
 <c:choose>
 	<c:when test='<%= tabs1.equals("categories") %>'>
-		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" onSubmit="submitForm(this); return false;">
+		<form action="<%= searchURL %>" method="get" name="<portlet:namespace />fm1" >
 		<liferay-portlet:renderURLParams varImpl="searchURL" />
 		<input name="<portlet:namespace />redirect" type="hidden" value="<%= currentURL %>" />
+
 		<input name="<portlet:namespace />breadcrumbsCategoryId" type="hidden" value="<%= categoryId %>" />
 		<input name="<portlet:namespace />searchCategoryIds" type="hidden" value="<%= categoryId %>" />
 
@@ -237,7 +238,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 				submitForm(document.hrefFm, url);
 			}
 
-			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+			<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) && !themeDisplay.isFacebook() %>">
 				Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 			</c:if>
 		</script>
@@ -407,7 +408,7 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 					submitForm(document.hrefFm, url);
 				}
 
-				<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+				<c:if test="<%= windowState.equals(WindowState.MAXIMIZED)  && !themeDisplay.isFacebook() %>">
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm2.<portlet:namespace />keywords);
 					Liferay.Util.focusFormField(document.<portlet:namespace />fm1.<portlet:namespace />keywords);
 				</c:if>

@@ -195,9 +195,21 @@ String onClick = GetterUtil.getString((String)request.getAttribute("liferay-ui:t
 	%>
 
 	<c:if test="<%= Validator.isNotNull(backURL) %>">
-		<li class="toggle">
-			<a href="<%= HtmlUtil.escape(backURL) %>">&laquo; <liferay-ui:message key="back" /></a>
-		</li>
+		<c:choose>
+			<c:when test="<%= themeDisplay.isFacebook() %>">
+				<fb:tab_item
+					align="left"
+					href="<%= HtmlUtil.escape(backURL) %>"
+					selected="<%= false %>"
+					title="&laquo; <%= LanguageUtil.get(pageContext, "back") %>"
+				/>
+			</c:when>
+			<c:otherwise>
+				<li class="toggle">
+					<a href="<%= HtmlUtil.escape(backURL) %>">&laquo; <liferay-ui:message key="back" /></a>
+				</li>
+			</c:otherwise>
+		</c:choose>
 	</c:if>
 
 	<c:choose>

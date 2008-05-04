@@ -86,7 +86,7 @@ iframePortletURL.setParameter("struts_action", "/message_boards/view");
 			<liferay-ui:message key="fbml-callback-url" />
 		</td>
 		<td>
-			<liferay-ui:input-resource url="<%= _getCallbackURL(fbmlPortletURL.toString(), facebookAppName) %>" />
+			<liferay-ui:input-resource url="<%= FacebookUtil.getCallbackURL(fbmlPortletURL.toString(), facebookAppName) %>" />
 		</td>
 	</tr>
 	<tr>
@@ -118,24 +118,3 @@ iframePortletURL.setParameter("struts_action", "/message_boards/view");
 </div>
 
 </form>
-
-<%!
-private static String _getCallbackURL(String fbmlPortletURL, String facebookAppName) {
-	int pos = fbmlPortletURL.indexOf(StringPool.SLASH, Http.HTTPS_WITH_SLASH.length());
-
-	StringMaker sm = new StringMaker();
-
-	sm.append(fbmlPortletURL.substring(0, pos));
-	sm.append("/facebook/");
-	sm.append(facebookAppName);
-	sm.append(fbmlPortletURL.substring(pos));
-
-	String callbackURL = sm.toString();
-
-	if (!callbackURL.endsWith(StringPool.SLASH)) {
-		callbackURL += StringPool.SLASH;
-	}
-
-	return callbackURL;
-}
-%>

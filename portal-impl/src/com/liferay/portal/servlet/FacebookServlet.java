@@ -24,13 +24,12 @@ package com.liferay.portal.servlet;
 
 import com.liferay.portal.NoSuchLayoutException;
 import com.liferay.portal.kernel.servlet.StringServletResponse;
-import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.servlet.filters.compression.CompressionFilter;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.util.servlet.ServletResponseUtil;
 
 import java.io.IOException;
@@ -57,7 +56,7 @@ public class FacebookServlet extends HttpServlet {
 		throws IOException, ServletException {
 
 		try {
-			String[] facebookData = getFacebookData(req, res);
+			String[] facebookData = FacebookUtil.getFacebookData(req);
 
 			if (facebookData == null) {
 				PortalUtil.sendError(
@@ -108,44 +107,6 @@ public class FacebookServlet extends HttpServlet {
 			});
 
 		return fbml;
-	}
-
-	protected String[] getFacebookData(
-		HttpServletRequest req, HttpServletResponse res) {
-
-		String path = GetterUtil.getString(req.getPathInfo());
-
-		if (Validator.isNull(path)) {
-			return null;
-		}
-
-		int pos = path.indexOf(StringPool.SLASH, 1);
-
-		if (pos == -1) {
-			return null;
-		}
-
-		String facebookAppName = path.substring(1, pos);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Facebook application name " + facebookAppName);
-		}
-
-		if (Validator.isNull(facebookAppName)) {
-			return null;
-		}
-
-		String redirect = path.substring(pos);
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Redirect " + redirect);
-		}
-
-		if (Validator.isNull(redirect)) {
-			return null;
-		}
-
-		return new String[] {facebookAppName, redirect};
 	}
 
 	private static Log _log = LogFactory.getLog(FacebookServlet.class);

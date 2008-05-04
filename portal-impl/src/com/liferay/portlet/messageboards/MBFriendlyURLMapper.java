@@ -92,6 +92,9 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 				portletURL.addParameterIncludedInPath("messageId");
 			}
 		}
+		else if (strutsAction.equals("/message_boards/search")) {
+			friendlyURLPath = "/message_boards/search";
+		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
 			portletURL.addParameterIncludedInPath("p_p_id");
@@ -120,11 +123,16 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		int x = friendlyURLPath.indexOf("/", 1);
 
 		if ((x + 1) == friendlyURLPath.length()) {
-			addParam(params, "struts_action", "/message_boards/view");
-			addParam(
-				params, "categoryId",
-				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+			if (!params.containsKey(getNamespace() + "struts_action")) {
+				addParam(params, "struts_action", "/message_boards/view");
+			}
 
+			if (!params.containsKey(getNamespace() + "categoryId")) {
+				addParam(
+					params, "categoryId",
+					MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
+			}
+			
 			return;
 		}
 
@@ -156,6 +164,11 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 
 			addParam(params, "struts_action", "/message_boards/view");
 			addParam(params, "tabs1", type);
+		}
+		else if (type.equals("search")) {
+
+			addParam(params, "struts_action", "/message_boards/search");
+			addParam(params, "tabs1", "category");
 		}
 	}
 

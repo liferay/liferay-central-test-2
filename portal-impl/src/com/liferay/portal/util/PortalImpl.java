@@ -93,6 +93,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.documentlibrary.model.DLFileEntry;
 import com.liferay.portlet.imagegallery.model.IGImage;
 import com.liferay.portlet.messageboards.model.MBMessage;
+import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.portlet.wiki.model.WikiPage;
 import com.liferay.util.BeanUtil;
 import com.liferay.util.Encryptor;
@@ -588,6 +589,15 @@ public class PortalImpl implements Portal {
 
 					currentURL = currentURL.substring(
 						currentURL.indexOf("/"), currentURL.length());
+				}
+
+				if (Validator.isNotNull(currentURL) &&
+						FacebookUtil.isFacebook(currentURL)) {
+					String[] facebookData = FacebookUtil.getFacebookData(req);
+
+					currentURL =
+						FacebookUtil.FACEBOOK_APPS_URL + facebookData[0] +
+							facebookData[2];
 				}
 			}
 

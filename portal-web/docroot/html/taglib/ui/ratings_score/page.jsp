@@ -37,15 +37,22 @@ numberFormat.setMinimumFractionDigits(0);
 String scoreString = numberFormat.format(score);
 %>
 
-<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= scoreString %> Stars')">
-	<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
-</div>
+<c:choose>
+	<c:when test="<%= themeDisplay.isFacebook() %>">
+		<%= scoreString + " Stars" %>
+	</c:when>
+	<c:otherwise>
+		<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= scoreString %> Stars')">
+			<img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" /><img src="<%= themeDisplay.getPathThemeImages() %>/ratings/star_off.png" />
+		</div>
 
-<script type="text/javascript">
-	<%= randomNamespace %>averageRatingObj = new StarRating(
-		"<%= randomNamespace %>averageRating",
-		{
-			displayOnly: true,
-			rating: <%= scoreString %>
-		});
-</script>
+		<script type="text/javascript">
+			<%= randomNamespace %>averageRatingObj = new StarRating(
+				"<%= randomNamespace %>averageRating",
+				{
+					displayOnly: true,
+					rating: <%= scoreString %>
+				});
+		</script>
+	</c:otherwise>
+</c:choose>

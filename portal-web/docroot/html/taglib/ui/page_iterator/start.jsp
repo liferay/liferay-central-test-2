@@ -61,7 +61,7 @@ else {
 NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 %>
 
-<c:if test='<%= type.equals("regular") %>'>
+<c:if test='<%= type.equals("regular")  && !themeDisplay.isFacebook() %>'>
 	<script type="text/javascript">
 		function <%= namespace %>submitPageIterator() {
 			var curValue = jQuery("option:selected", this).val();
@@ -167,36 +167,43 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 			<div class="page-selector">
 				<liferay-ui:message key="page" />
 
-				<select class="pages <%= namespace %>pageIteratorValue">
+				<c:choose>
+					<c:when test="<%= !themeDisplay.isFacebook() %>">
+						<select class="pages <%= namespace %>pageIteratorValue">
 
-					<%
-					int pagesIteratorMax = maxPages;
-					int pagesIteratorBegin = 1;
-					int pagesIteratorEnd = pages;
+							<%
+							int pagesIteratorMax = maxPages;
+							int pagesIteratorBegin = 1;
+							int pagesIteratorEnd = pages;
 
-					if (pages > pagesIteratorMax) {
-						pagesIteratorBegin = curValue - pagesIteratorMax;
-						pagesIteratorEnd = curValue + pagesIteratorMax;
+							if (pages > pagesIteratorMax) {
+								pagesIteratorBegin = curValue - pagesIteratorMax;
+								pagesIteratorEnd = curValue + pagesIteratorMax;
 
-						if (pagesIteratorBegin < 1) {
-							pagesIteratorBegin = 1;
-						}
+								if (pagesIteratorBegin < 1) {
+									pagesIteratorBegin = 1;
+								}
 
-						if (pagesIteratorEnd > pages) {
-							pagesIteratorEnd = pages;
-						}
-					}
+								if (pagesIteratorEnd > pages) {
+									pagesIteratorEnd = pages;
+								}
+							}
 
-					for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
-					%>
+							for (int i = pagesIteratorBegin; i <= pagesIteratorEnd; i++) {
+							%>
 
-						<option <%= (i == curValue) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
+								<option <%= (i == curValue) ? "selected=\"selected\"" : "" %> value="<%= i %>"><%= i %></option>
 
-					<%
-					}
-					%>
+							<%
+							}
+							%>
 
-				</select>
+						</select>
+					</c:when>
+					<c:otherwise>
+						<%= curValue %>
+					</c:otherwise>
+				</c:choose>
 
 				<liferay-ui:message key="of" />
 

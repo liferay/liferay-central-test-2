@@ -49,6 +49,7 @@ import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.QNameUtil;
 import com.liferay.portal.util.WebKeys;
+import com.liferay.portlet.social.util.FacebookUtil;
 import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.MapUtil;
@@ -569,7 +570,8 @@ public class PortletURLImpl
 
 		if (themeDisplay.isFacebook()) {
 			portalURL =
-				"http://apps.facebook.com/" + themeDisplay.getFacebookAppName();
+				FacebookUtil.FACEBOOK_APPS_URL +
+					themeDisplay.getFacebookAppName();
 		}
 		else {
 			portalURL = PortalUtil.getPortalURL(_req, _secure);
@@ -897,6 +899,26 @@ public class PortletURLImpl
 			result = URLHelper.escapeURL(result);
 		}
 
+		if (themeDisplay.isFacebook()) {
+
+			// Facebook requires the path portion of the URL to end with a
+ 			// slash
+
+			int pos = result.indexOf(StringPool.QUESTION);
+
+			if (pos == -1) {
+				if (!result.endsWith(StringPool.SLASH)) {
+					result += StringPool.SLASH;
+				}
+			}
+			else {
+				String path = result.substring(0, pos);
+				if (!result.endsWith(StringPool.SLASH)) {
+					result = path + StringPool.SLASH + result.substring(pos);
+				}
+
+			}
+		}
 		return result;
 	}
 

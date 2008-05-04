@@ -179,7 +179,7 @@ long parentCategoryId = BeanParamUtil.getLong(category, request, "parentCategory
 
 </form>
 
-<c:if test="<%= windowState.equals(WindowState.MAXIMIZED) %>">
+<c:if test="<%= windowState.equals(WindowState.MAXIMIZED)  && !themeDisplay.isFacebook() %>">
 	<script type="text/javascript">
 		Liferay.Util.focusFormField(document.<portlet:namespace />fm.<portlet:namespace />name);
 	</script>
