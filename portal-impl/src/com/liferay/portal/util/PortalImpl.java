@@ -592,7 +592,8 @@ public class PortalImpl implements Portal {
 				}
 
 				if (Validator.isNotNull(currentURL) &&
-						FacebookUtil.isFacebook(currentURL)) {
+					FacebookUtil.isFacebook(currentURL)) {
+
 					String[] facebookData = FacebookUtil.getFacebookData(req);
 
 					currentURL =

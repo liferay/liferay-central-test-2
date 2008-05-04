@@ -67,7 +67,6 @@ if (treeWalker.isOdd()) {
 		if (!themeDisplay.isFacebook()) {
 			rowHREF = messageURL + rowHREF;
 		}
-
 		%>
 
 		<a href="<%= rowHREF %>">

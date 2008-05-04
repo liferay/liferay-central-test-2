@@ -34,6 +34,9 @@ import java.util.Map;
 import javax.portlet.PortletMode;
 import javax.portlet.WindowState;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+
 /**
  * <a href="MBFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
  *
@@ -60,7 +63,10 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		String strutsAction = GetterUtil.getString(
 			portletURL.getParameter("struts_action"));
 
-		if (strutsAction.equals("/message_boards/view")) {
+		if (strutsAction.equals("/message_boards/search")) {
+			friendlyURLPath = "/message_boards/search";
+		}
+		else if (strutsAction.equals("/message_boards/view")) {
 			String categoryId = GetterUtil.getString(
 				portletURL.getParameter("categoryId"));
 
@@ -92,8 +98,12 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 				portletURL.addParameterIncludedInPath("messageId");
 			}
 		}
-		else if (strutsAction.equals("/message_boards/search")) {
-			friendlyURLPath = "/message_boards/search";
+		else {
+			if (_log.isWarnEnabled()) {
+				_log.warn(
+					"Struts action " + strutsAction +
+						" does not have a friendly URL path ");
+			}
 		}
 
 		if (Validator.isNotNull(friendlyURLPath)) {
@@ -123,16 +133,11 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 		int x = friendlyURLPath.indexOf("/", 1);
 
 		if ((x + 1) == friendlyURLPath.length()) {
-			if (!params.containsKey(getNamespace() + "struts_action")) {
-				addParam(params, "struts_action", "/message_boards/view");
-			}
+			addParam(params, "struts_action", "/message_boards/view");
+			addParam(
+				params, "categoryId",
+				MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
 
-			if (!params.containsKey(getNamespace() + "categoryId")) {
-				addParam(
-					params, "categoryId",
-					MBCategoryImpl.DEFAULT_PARENT_CATEGORY_ID);
-			}
-			
 			return;
 		}
 
@@ -166,7 +171,6 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 			addParam(params, "tabs1", type);
 		}
 		else if (type.equals("search")) {
-
 			addParam(params, "struts_action", "/message_boards/search");
 			addParam(params, "tabs1", "category");
 		}
@@ -175,5 +179,7 @@ public class MBFriendlyURLMapper extends BaseFriendlyURLMapper {
 	private static final String _MAPPING = "message_boards";
 
 	private static final String _PORTLET_ID = PortletKeys.MESSAGE_BOARDS;
+
+	private static Log _log = LogFactory.getLog(MBFriendlyURLMapper.class);
 
 }

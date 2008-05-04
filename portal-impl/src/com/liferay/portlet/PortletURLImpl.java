@@ -890,19 +890,9 @@ public class PortletURLImpl
 			result = result.substring(0, result.length() - 1);
 		}
 
-		if (!CookieKeys.hasSessionId(_req)) {
-			result = PortalUtil.getURLWithSessionId(
-				result, _req.getSession().getId());
-		}
-
-		if (_escapeXml) {
-			result = URLHelper.escapeURL(result);
-		}
-
 		if (themeDisplay.isFacebook()) {
 
-			// Facebook requires the path portion of the URL to end with a
- 			// slash
+			// Facebook requires the path portion of the URL to end with a slash
 
 			int pos = result.indexOf(StringPool.QUESTION);
 
@@ -913,12 +903,22 @@ public class PortletURLImpl
 			}
 			else {
 				String path = result.substring(0, pos);
+
 				if (!result.endsWith(StringPool.SLASH)) {
 					result = path + StringPool.SLASH + result.substring(pos);
 				}
-
 			}
 		}
+
+		if (!CookieKeys.hasSessionId(_req)) {
+			result = PortalUtil.getURLWithSessionId(
+				result, _req.getSession().getId());
+		}
+
+		if (_escapeXml) {
+			result = URLHelper.escapeURL(result);
+		}
+
 		return result;
 	}
 

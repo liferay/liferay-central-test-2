@@ -37,9 +37,13 @@ import org.apache.commons.logging.LogFactory;
  * <a href="FacebookUtil.java.html"><b><i>View Source</i></b></a>
  *
  * @author Jorge Ferrer
+ *
  */
 public class FacebookUtil {
+
 	public static final String FACEBOOK_APPS_URL = "http://apps.facebook.com/";
+
+	public static final String FACEBOOK_SERVLET_PATH = "/facebook/";
 
 	public static String getCallbackURL(
 		String fbmlPortletURL, String facebookAppName) {
@@ -50,7 +54,7 @@ public class FacebookUtil {
 		StringMaker sm = new StringMaker();
 
 		sm.append(fbmlPortletURL.substring(0, pos));
-		sm.append("/facebook/");
+		sm.append(FACEBOOK_SERVLET_PATH);
 		sm.append(facebookAppName);
 		sm.append(fbmlPortletURL.substring(pos));
 
@@ -63,9 +67,7 @@ public class FacebookUtil {
 		return callbackURL;
 	}
 
-	public static String[] getFacebookData(
-		HttpServletRequest req) {
-
+	public static String[] getFacebookData(HttpServletRequest req) {
 		String path = GetterUtil.getString(req.getPathInfo());
 
 		if (Validator.isNull(path)) {
@@ -122,8 +124,8 @@ public class FacebookUtil {
 
 			path = currentURL.substring(pos);
 		}
-		
-		if (path.startsWith("/facebook/")) {
+
+		if (path.startsWith(FACEBOOK_SERVLET_PATH)) {
 			return true;
 		}
 		else {

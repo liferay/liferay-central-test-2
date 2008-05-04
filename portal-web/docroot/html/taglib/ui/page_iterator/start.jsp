@@ -168,7 +168,10 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 				<liferay-ui:message key="page" />
 
 				<c:choose>
-					<c:when test="<%= !themeDisplay.isFacebook() %>">
+					<c:when test="<%= themeDisplay.isFacebook() %>">
+						<%= curValue %>
+					</c:when>
+					<c:otherwise>
 						<select class="pages <%= namespace %>pageIteratorValue">
 
 							<%
@@ -199,9 +202,6 @@ NumberFormat numberFormat = NumberFormat.getNumberInstance(locale);
 							%>
 
 						</select>
-					</c:when>
-					<c:otherwise>
-						<%= curValue %>
 					</c:otherwise>
 				</c:choose>
 

@@ -39,7 +39,7 @@ String scoreString = numberFormat.format(score);
 
 <c:choose>
 	<c:when test="<%= themeDisplay.isFacebook() %>">
-		<%= scoreString + " Stars" %>
+		<%= scoreString %> Stars
 	</c:when>
 	<c:otherwise>
 		<div id="<%= randomNamespace %>averageRating" onmousemove="ToolTip.show(event, this, '<%= scoreString %> Stars')">
