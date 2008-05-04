@@ -1296,39 +1296,41 @@ li.toggle-expand a {
 	height: 1%;
 }
 
-.taglib-social-bookmark-blinklist {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/blinklist.gif) no-repeat 0 50%;
+.taglib-social-bookmarks a {
+	background: url() no-repeat 0 50%;
 	padding: 3px 2px 3px 20px;
 }
 
-.taglib-social-bookmark-delicious {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/delicious.gif) no-repeat 0 50%;
-	padding: 3px 2px 3px 20px;
+a.taglib-social-bookmark-blinklist {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/blinklist.png);
 }
 
-.taglib-social-bookmark-digg {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/digg.gif) no-repeat 0 50%;
-	padding: 3px 2px 3px 20px;
+a.taglib-social-bookmark-delicious {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/delicious.png);
 }
 
-.taglib-social-bookmark-furl {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/furl.gif) no-repeat 0 50%;
-	padding: 3px 2px 3px 20px;
+a.taglib-social-bookmark-digg {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/digg.png);
 }
 
-.taglib-social-bookmark-newsvine {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/newsvine.gif) no-repeat 0 50%;
-	padding: 3px 2px 3px 20px;
+a.taglib-social-bookmark-facebook {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/facebook.png);
 }
 
-.taglib-social-bookmark-reddit {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/reddit.gif) no-repeat 0 50%;
-	padding: 3px 2px 3px 20px;
+a.taglib-social-bookmark-furl {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/furl.png);
 }
 
-.taglib-social-bookmark-technorati {
-	background: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/technorati.gif) no-repeat 0 50%;
-	padding: 3px 2px 3px 20px;
+a.taglib-social-bookmark-newsvine {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/newsvine.png);
+}
+
+a.taglib-social-bookmark-reddit {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/reddit.png);
+}
+
+a.taglib-social-bookmark-technorati {
+	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/technorati.png);
 }
 
 /* ---------- jQuery plugins ---------- */
