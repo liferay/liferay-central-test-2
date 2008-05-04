@@ -25,7 +25,7 @@
 <%@ include file="/html/portal/init.jsp" %>
 
 <%
-String url = PortalUtil.getPortalURL(request) + PortalUtil.getCurrentURL(request);
+String url = themeDisplay.getPortalURL() + PortalUtil.getCurrentURL(request);
 
 boolean noSuchResource = false;
 

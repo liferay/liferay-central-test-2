@@ -105,7 +105,7 @@ if (image != null) {
 		</td>
 		<td>
 			<liferay-ui:input-resource
-				url='<%= PortalUtil.getPortalURL(request) + themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +"&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>'
+				url='<%= themeDisplay.getPortalURL() + themeDisplay.getPathImage() + "/image_gallery?img_id=" + image.getLargeImageId() +"&t=" + ImageServletTokenUtil.getToken(image.getLargeImageId()) %>'
 			/>
 		</td>
 	</tr>
@@ -141,7 +141,7 @@ if (image != null) {
 				%>
 
 				<liferay-ui:input-resource
-					url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
+					url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/image_gallery" + sb.toString() %>'
 				/>
 			</td>
 		</tr>

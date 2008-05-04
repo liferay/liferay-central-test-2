@@ -110,7 +110,7 @@ String emailMessageBody = ParamUtil.getString(request, "emailMessageBody", Invit
 		<b>[$PAGE_URL$]</b>
 	</td>
 	<td>
-		<%= PortalUtil.getPortalURL(request) %><%= PortalUtil.getLayoutURL(layout, themeDisplay) %>
+		<%= themeDisplay.getPortalURL() %><%= PortalUtil.getLayoutURL(layout, themeDisplay) %>
 	</td>
 </tr>
 <tr>

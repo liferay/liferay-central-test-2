@@ -33,5 +33,5 @@ response.setContentType(ContentTypes.TEXT_XML_UTF8);
 <OpenSearchDescription xmlns="http://a9.com/-/spec/opensearch/1.1/">
 	<ShortName>Liferay Search</ShortName>
 	<Description>Liferay Portal Search</Description>
-	<Url type="application/atom+xml" template="<%= PortalUtil.getPortalURL(request) %><%= PortalUtil.getPathMain() %>/search/open_search?keywords={searchTerms}&amp;p={startPage?}&amp;c={count?}&amp;format=atom" />
+	<Url type="application/atom+xml" template="<%= themeDisplay.getPortalURL() %><%= PortalUtil.getPathMain() %>/search/open_search?keywords={searchTerms}&amp;p={startPage?}&amp;c={count?}&amp;format=atom" />
 </OpenSearchDescription>

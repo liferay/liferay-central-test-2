@@ -548,7 +548,7 @@ String orderByType = BeanParamUtil.getString(feed, request, "orderByType");
 <input type="submit" value="<liferay-ui:message key="save" />" />
 
 <c:if test="<%= feed != null %>">
-	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= PortalUtil.getPortalURL(request) + feed.getTargetLayoutFriendlyUrl() + "/journal/rss/" + groupId + "/" + feedId %>', 'feed');" />
+	<input type="button" value="<liferay-ui:message key="preview" />" onClick="window.open('<%= themeDisplay.getPortalURL() + feed.getTargetLayoutFriendlyUrl() + "/journal/rss/" + groupId + "/" + feedId %>', 'feed');" />
 </c:if>
 
 <input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />

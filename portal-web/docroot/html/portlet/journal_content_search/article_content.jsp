@@ -68,7 +68,7 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 			String hitLayoutURL = PortalUtil.getLayoutURL(hitLayout, themeDisplay);
 		%>
 
-			<br /><a href="<%= hitLayoutURL %>"><%= PortalUtil.getPortalURL(request) %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
+			<br /><a href="<%= hitLayoutURL %>"><%= themeDisplay.getPortalURL() %><%= StringUtil.shorten(hitLayoutURL, 100) %></a>
 
 		<%
 		}
@@ -98,7 +98,7 @@ List hitLayoutIds = JournalContentSearchLocalServiceUtil.getLayoutIds(layout.get
 		sm.append(articleId);
 		%>
 
-		<br /><a href="<%= sm.toString() %>"><%= PortalUtil.getPortalURL(request) %><%= StringUtil.shorten(sm.toString(), 100) %></a>
+		<br /><a href="<%= sm.toString() %>"><%= themeDisplay.getPortalURL() %><%= StringUtil.shorten(sm.toString(), 100) %></a>
 
 		</span>
 	</c:otherwise>

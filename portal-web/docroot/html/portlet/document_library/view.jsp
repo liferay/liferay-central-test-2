@@ -427,7 +427,7 @@ portletURL.setParameter("folderId", String.valueOf(folderId));
 					%>
 
 					<liferay-ui:input-resource
-						url='<%= PortalUtil.getPortalURL(request) + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
+						url='<%= themeDisplay.getPortalURL() + "/tunnel-web/secure/webdav/" + company.getWebId() + group.getFriendlyURL() + "/document_library" + sb.toString() %>'
 					/>
 				</td>
 			</tr>

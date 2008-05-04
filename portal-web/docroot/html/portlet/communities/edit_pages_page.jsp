@@ -179,7 +179,7 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 					<%
 					StringMaker friendlyURLBase = new StringMaker();
 
-					friendlyURLBase.append(PortalUtil.getPortalURL(request));
+					friendlyURLBase.append(themeDisplay.getPortalURL());
 
 					String virtualHost = selLayout.getLayoutSet().getVirtualHost();
 
