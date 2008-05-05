@@ -365,7 +365,9 @@ public class BrowserSniffer {
 
 		accept = accept.toLowerCase();
 
-		if ((accept.indexOf("application/xhtml+xml") == -1) && (accept.indexOf("wap.xhtml") != -1)) {
+		if ((accept.indexOf("application/xhtml+xml") == -1) &&
+			(accept.indexOf("wap.xhtml") != -1)) {
+
 			return true;
 		}
 		else {
