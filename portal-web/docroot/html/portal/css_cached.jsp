@@ -1333,6 +1333,13 @@ a.taglib-social-bookmark-technorati {
 	background-image: url(<%= themeDisplay.getPathThemeImages() %>/social_bookmarks/technorati.png);
 }
 
+/* ---------- Taglib user display ---------- */
+
+.taglib-user-display .user-details .user-name {
+	display: block;
+	clear: both;
+}
+
 /* ---------- jQuery plugins ---------- */
 
 /* ---------- Tabs ---------- */
