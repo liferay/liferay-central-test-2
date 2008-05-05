@@ -820,11 +820,3 @@ portletURL.setParameter("categoryId", String.valueOf(categoryId));
 		<liferay-ui:search-iterator searchContainer="<%= searchContainer %>" />
 	</c:when>
 </c:choose>
-
-<c:if test="<%= !themeDisplay.isFacebook() && Validator.isNotNull(facebookAppName) && Validator.isNotNull(facebookAPIKey) && facebookShowAddAppLink %>">
-	<br />
-
-	<div>
-		<a href="http://www.facebook.com/add.php?api_key=<%= facebookAPIKey %>&ref=pd"><liferay-ui:message key="add-application-to-my-facebook-profile" /></a>
-	</div>
-</c:if>

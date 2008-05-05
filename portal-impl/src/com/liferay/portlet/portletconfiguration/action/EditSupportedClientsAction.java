@@ -26,11 +26,6 @@ import com.liferay.portal.kernel.util.ParamUtil;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
-import com.liferay.portal.security.permission.ActionKeys;
-import com.liferay.portal.security.permission.PermissionChecker;
-import com.liferay.portal.service.PortletLocalServiceUtil;
-import com.liferay.portal.service.permission.PortletPermissionUtil;
-import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
@@ -42,7 +37,6 @@ import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
-import javax.portlet.PortletRequest;
 import javax.portlet.RenderRequest;
 import javax.portlet.RenderResponse;
 
@@ -56,21 +50,25 @@ import org.apache.struts.action.ActionMapping;
  * @author Brian Wing Shun Chan
  *
  */
-public class EditSupportedClientsAction extends PortletAction {
+public class EditSupportedClientsAction extends EditConfigurationAction {
 
 	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
+		Portlet portlet = null;
+
 		try {
-			checkPermissions(req);
+			portlet = getPortlet(req);
 		}
 		catch (PrincipalException pe) {
-			return;
+			SessionErrors.add(req, PrincipalException.class.getName());
+
+			setForward(req, "portlet.portlet_configuration.error");
 		}
 
-		updateSupportedClients(req);
+		updateSupportedClients(portlet, req);
 
 		String redirect = ParamUtil.getString(req, "supportedClientsRedirect");
 
@@ -82,8 +80,10 @@ public class EditSupportedClientsAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
+		Portlet portlet = null;
+
 		try {
-			checkPermissions(req);
+			portlet = getPortlet(req);
 		}
 		catch (PrincipalException pe) {
 			SessionErrors.add(req, PrincipalException.class.getName());
@@ -91,43 +91,23 @@ public class EditSupportedClientsAction extends PortletAction {
 			return mapping.findForward("portlet.portlet_configuration.error");
 		}
 
-		return mapping.findForward(
-			"portlet.portlet_configuration.edit_supported_clients");
+		res.setTitle(getTitle(portlet, req));
+
+		return mapping.findForward(getForward(
+			req, "portlet.portlet_configuration.edit_supported_clients"));
 	}
 
-	protected void checkPermissions(PortletRequest req) throws Exception {
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
-
-		PermissionChecker permissionChecker =
-			themeDisplay.getPermissionChecker();
-
-		String portletId = ParamUtil.getString(req, "portletResource");
-
-		if (!PortletPermissionUtil.contains(
-				permissionChecker, themeDisplay.getPlid(), portletId,
-				ActionKeys.CONFIGURATION)) {
-
-			throw new PrincipalException();
-		}
-	}
-
-	protected void updateSupportedClients(ActionRequest req)
+	protected void updateSupportedClients(Portlet portlet, ActionRequest req)
 		throws Exception {
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		Layout layout = themeDisplay.getLayout();
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
-
 		PortletPreferences portletSetup =
 			PortletPreferencesFactoryUtil.getPortletSetup(
-				layout, portletResource);
-
-		Portlet portlet = PortletLocalServiceUtil.getPortletById(
-			themeDisplay.getCompanyId(), portletResource);
+				layout, portlet.getPortletId());
 
 		Set<String> allPortletModes = portlet.getAllPortletModes();
 

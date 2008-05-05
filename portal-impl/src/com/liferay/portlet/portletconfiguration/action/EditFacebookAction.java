@@ -23,11 +23,13 @@
 package com.liferay.portlet.portletconfiguration.action;
 
 import com.liferay.portal.kernel.util.ParamUtil;
+import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.security.auth.PrincipalException;
+import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.WebKeys;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.util.servlet.SessionErrors;
-import com.liferay.util.servlet.SessionMessages;
 
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
@@ -64,26 +66,7 @@ public class EditFacebookAction extends EditConfigurationAction {
 			setForward(req, "portlet.portlet_configuration.error");
 		}
 
-		String portletResource = ParamUtil.getString(req, "portletResource");
-
-		String facebookAppName = ParamUtil.getString(req, "facebookAppName");
-		String facebookAPIKey = ParamUtil.getString(req, "facebookAPIKey");
-		boolean facebookShowAddAppLink = ParamUtil.getBoolean(
-			req, "facebookShowAddAppLink");
-
-		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(
-				req, portlet.getPortletId());
-
-		prefs.setValue("lfr-facebook-app-name", facebookAppName);
-		prefs.setValue("lfr-facebook-api-key", facebookAPIKey);
-		prefs.setValue(
-			"lfr-facebook-show-add-app-link",
-			String.valueOf(facebookShowAddAppLink));
-
-		prefs.store();
-
-		SessionMessages.add(req, config.getPortletName() + ".doConfigure");
+		updateFacebook(portlet, req);
 	}
 
 	public ActionForward render(
@@ -106,6 +89,32 @@ public class EditFacebookAction extends EditConfigurationAction {
 
 		return mapping.findForward(
 			getForward(req, "portlet.portlet_configuration.edit_facebook"));
+	}
+
+	protected void updateFacebook(Portlet portlet, ActionRequest req)
+		throws Exception {
+
+		ThemeDisplay themeDisplay =
+			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+
+		Layout layout = themeDisplay.getLayout();
+
+		String facebookAppName = ParamUtil.getString(req, "facebookAppName");
+		String facebookAPIKey = ParamUtil.getString(req, "facebookAPIKey");
+		boolean facebookShowAddAppLink = ParamUtil.getBoolean(
+			req, "facebookShowAddAppLink");
+
+		PortletPreferences prefs =
+			PortletPreferencesFactoryUtil.getPortletSetup(
+				layout, portlet.getPortletId());
+
+		prefs.setValue("lfr-facebook-app-name", facebookAppName);
+		prefs.setValue("lfr-facebook-api-key", facebookAPIKey);
+		prefs.setValue(
+			"lfr-facebook-show-add-app-link",
+			String.valueOf(facebookShowAddAppLink));
+
+		prefs.store();
 	}
 
 }

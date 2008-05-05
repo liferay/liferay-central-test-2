@@ -70,10 +70,6 @@ if (Validator.isNotNull(portletResource)) {
 	prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
 }
 
-String facebookAppName = PrefsParamUtil.getString(prefs, request, "lfr-facebook-app-name");
-String facebookAPIKey = PrefsParamUtil.getString(prefs, request, "lfr-facebook-api-key");
-boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link");
-
 String currentLanguageId = LanguageUtil.getLanguageId(request);
 Locale currentLocale = LocaleUtil.fromLanguageId(currentLanguageId);
 Locale defaultLocale = LocaleUtil.getDefault();

@@ -29,7 +29,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 
 String portletResource = ParamUtil.getString(request, "portletResource");
 
-PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(request, portletResource);
+PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(layout, portletResource);
 
 String facebookAppName = PrefsParamUtil.getString(prefs, request, "lfr-facebook-app-name");
 boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link");

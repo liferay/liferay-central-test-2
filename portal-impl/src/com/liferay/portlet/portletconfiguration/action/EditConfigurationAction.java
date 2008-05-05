@@ -145,8 +145,8 @@ public class EditConfigurationAction extends PortletAction {
 	protected Portlet getPortlet(PortletRequest req) throws Exception {
 		long companyId = PortalUtil.getCompanyId(req);
 
-		ThemeDisplay themeDisplay =
-			(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
+		ThemeDisplay themeDisplay = (ThemeDisplay)req.getAttribute(
+			WebKeys.THEME_DISPLAY);
 
 		PermissionChecker permissionChecker =
 			themeDisplay.getPermissionChecker();

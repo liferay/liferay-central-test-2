@@ -179,6 +179,14 @@ public class PortletDisplay implements Serializable {
 		_stateMin = stateMin;
 	}
 
+	public boolean isStateNormal() {
+		return _stateNormal;
+	}
+
+	public void setStateNormal(boolean stateNormal) {
+		_stateNormal = stateNormal;
+	}
+
 	public boolean isStatePopUp() {
 		return _statePopUp;
 	}
@@ -509,6 +517,7 @@ public class PortletDisplay implements Serializable {
 		_stateExclusive = false;
 		_stateMax = false;
 		_stateMin = false;
+		_stateNormal = false;
 		_statePopUp = false;
 		_modeAbout = false;
 		_modeConfig = false;
@@ -565,6 +574,7 @@ public class PortletDisplay implements Serializable {
 		_stateExclusive = master.isStateExclusive();
 		_stateMax = master.isStateMax();
 		_stateMin = master.isStateMin();
+		_stateNormal = master.isStateNormal();
 		_statePopUp = master.isStatePopUp();
 		_modeAbout = master.isModeAbout();
 		_modeConfig = master.isModeConfig();
@@ -621,6 +631,7 @@ public class PortletDisplay implements Serializable {
 		slave.setStateExclusive(_stateExclusive);
 		slave.setStateMax(_stateMax);
 		slave.setStateMin(_stateMin);
+		slave.setStateNormal(_stateNormal);
 		slave.setStatePopUp(_statePopUp);
 		slave.setModeAbout(_modeAbout);
 		slave.setModeConfig(_modeConfig);
@@ -680,6 +691,7 @@ public class PortletDisplay implements Serializable {
 	private boolean _stateExclusive;
 	private boolean _stateMax;
 	private boolean _stateMin;
+	private boolean _stateNormal;
 	private boolean _statePopUp;
 	private boolean _modeAbout;
 	private boolean _modeConfig;

@@ -337,6 +337,7 @@ portletDisplay.setColumnCount(columnCount.intValue());
 portletDisplay.setStateExclusive(themeDisplay.isStateExclusive());
 portletDisplay.setStateMax(stateMax);
 portletDisplay.setStateMin(stateMin);
+portletDisplay.setStateNormal(windowState.equals(WindowState.NORMAL));
 portletDisplay.setStatePopUp(themeDisplay.isStatePopUp());
 
 portletDisplay.setModeAbout(modeAbout);
