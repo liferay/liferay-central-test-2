@@ -34,26 +34,3 @@
 		<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + tilesPortletContent %>" />
 	</c:otherwise>
 </c:choose>
-
-<c:if test="<%= !themeDisplay.isFacebook() && portletDisplay.isStateNormal() %>">
-
-	<%
-	String facebookAppName = portletSetup.getValue("lfr-facebook-app-name", StringPool.BLANK);
-	String facebookAPIKey = portletSetup.getValue("lfr-facebook-api-key", StringPool.BLANK);
-	boolean facebookShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-facebook-show-add-app-link", StringPool.BLANK));
-	%>
-
-	<c:if test="<%= Validator.isNotNull(facebookAppName) && Validator.isNotNull(facebookAPIKey) && facebookShowAddAppLink %>">
-		<br />
-
-		<div>
-			<liferay-ui:icon
-				image="../social_bookmarks/facebook"
-				message="add-to-facebook"
-				url='<%= "http://www.facebook.com/add.php?api_key=" + facebookAPIKey + "&ref=pd" %>'
-				method="get"
-				label="<%= true %>"
-			/>
-		</div>
-	</c:if>
-</c:if>
