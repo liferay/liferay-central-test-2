@@ -24,6 +24,7 @@ package com.liferay.portal.xml;
 
 import com.liferay.portal.kernel.xml.Element;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -51,19 +52,36 @@ public class ElementImpl implements Element {
 	}
 
 	public Element element(String name) {
-		return new ElementImpl(_el.element(name));
+		org.dom4j.Element el = _el.element(name);
+
+		if (el == null) {
+			return null;
+		}
+		else {
+			return new ElementImpl(el);
+		}
 	}
 
 	public List<Element> elements() {
-		return _el.elements();
+		return toNewElements(_el.elements());
 	}
 
 	public List<Element> elements(String name) {
-		return _el.elements(name);
+		return toNewElements(_el.elements(name));
 	}
 
 	public String elementText(String name) {
 		return _el.elementText(name);
+	}
+
+	private List<Element> toNewElements(List<org.dom4j.Element> oldElements) {
+		List<Element> newElements = new ArrayList<Element>(oldElements.size());
+
+		for (org.dom4j.Element oldEl : oldElements) {
+			newElements.add(new ElementImpl(oldEl));
+		}
+
+		return newElements;
 	}
 
 	private org.dom4j.Element _el;
