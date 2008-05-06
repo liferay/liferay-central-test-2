@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
+import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
@@ -81,7 +81,7 @@ public class ViewAction extends PortletAction {
 			Theme theme = themeDisplay.getTheme();
 
 			LayoutTemplate layoutTemplate =
-				LayoutTemplateLocalUtil.getLayoutTemplate(
+				LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 					layoutTemplateId, false, theme.getThemeId());
 
 			content = renameTemplateColumnsAndIds(

@@ -37,7 +37,7 @@ headerNames.add("roles");
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, null);
 
-List layoutTemplates = layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates();
+List layoutTemplates = layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates();
 
 int total = layoutTemplates.size();
 

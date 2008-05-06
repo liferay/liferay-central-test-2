@@ -833,6 +833,12 @@
 			<ref bean="com.liferay.portal.service.persistence.LayoutSetPersistence.impl" />
 		</property>
 	</bean>
+	<bean id="com.liferay.portal.service.LayoutTemplateLocalService.impl" class="com.liferay.portal.service.impl.LayoutTemplateLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.LayoutTemplateLocalServiceFactory" class="com.liferay.portal.service.LayoutTemplateLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.LayoutTemplateLocalService.impl" />
+		</property>
+	</bean>
 	<bean id="com.liferay.portal.service.ListTypeService.impl" class="com.liferay.portal.service.impl.ListTypeServiceImpl" lazy-init="true" />
 	<bean id="com.liferay.portal.service.ListTypeService.transaction" class="org.springframework.transaction.interceptor.TransactionProxyFactoryBean" lazy-init="true">
 		<property name="transactionManager">
@@ -2317,6 +2323,12 @@
 	<bean id="com.liferay.portal.service.persistence.SubscriptionUtil" class="com.liferay.portal.service.persistence.SubscriptionUtil" lazy-init="true">
 		<property name="persistence">
 			<ref bean="com.liferay.portal.service.persistence.SubscriptionPersistence.impl" />
+		</property>
+	</bean>
+	<bean id="com.liferay.portal.service.ThemeLocalService.impl" class="com.liferay.portal.service.impl.ThemeLocalServiceImpl" lazy-init="true" />
+	<bean id="com.liferay.portal.service.ThemeLocalServiceFactory" class="com.liferay.portal.service.ThemeLocalServiceFactory" lazy-init="true">
+		<property name="service">
+			<ref bean="com.liferay.portal.service.ThemeLocalService.impl" />
 		</property>
 	</bean>
 	<bean id="com.liferay.portal.service.UserLocalService.impl" class="com.liferay.portal.service.impl.UserLocalServiceImpl" lazy-init="true" />

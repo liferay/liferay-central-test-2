@@ -40,7 +40,7 @@ String redirect = ParamUtil.getString(request, "redirect");
 	<%
 	int CELLS_PER_ROW = 4;
 
-	List layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates(theme.getThemeId());
+	List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(theme.getThemeId());
 
 	layoutTemplates = PluginUtil.restrictPlugins(layoutTemplates, user);
 

@@ -29,7 +29,6 @@
 <%@ page import="com.liferay.portal.CompanyVirtualHostException" %>
 <%@ page import="com.liferay.portal.CompanyWebIdException" %>
 <%@ page import="com.liferay.portal.kernel.plugin.PluginPackage" %>
-<%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.servlet.PortalSessionContext" %>
 
 <%@ page import="java.awt.BasicStroke" %>

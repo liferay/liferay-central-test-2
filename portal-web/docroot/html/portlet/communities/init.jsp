@@ -51,7 +51,6 @@
 <%@ page import="com.liferay.portal.kernel.lar.PortletDataHandlerKeys" %>
 <%@ page import="com.liferay.portal.kernel.lar.UserIdStrategy" %>
 <%@ page import="com.liferay.portal.plugin.PluginUtil" %>
-<%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>
 <%@ page import="com.liferay.portal.util.LayoutLister" %>
 <%@ page import="com.liferay.portal.util.LayoutView" %>

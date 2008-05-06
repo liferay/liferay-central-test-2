@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,32 +19,21 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
-<%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
-<%@ page import="com.liferay.portal.model.Theme" %>
-<%@ page import="com.liferay.portal.service.ThemeLocalServiceUtil" %>
-<%@ page import="com.liferay.portal.util.PortalUtil" %>
+package com.liferay.portal.service.base;
 
-<%
-long companyId = PortalUtil.getCompanyId(request);
+import com.liferay.portal.service.ThemeLocalService;
 
-String themeId = ParamUtil.getString(request, "themeId");
+import org.springframework.beans.factory.InitializingBean;
 
-Theme theme = ThemeLocalServiceUtil.getTheme(companyId, themeId, false);
-
-String themeContextPath = request.getContextPath();
-
-if (theme.isWARFile()) {
-	themeContextPath = theme.getContextPath();
+/**
+ * <a href="ThemeLocalServiceBaseImpl.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public abstract class ThemeLocalServiceBaseImpl implements ThemeLocalService,
+	InitializingBean {
+	public void afterPropertiesSet() {
+	}
 }
-
-String cdnHost = PortalUtil.getCDNHost();
-
-String themeImagesPath = cdnHost + themeContextPath + theme.getImagesPath();
-
-response.addHeader("Cache-Control", "max-age=172801, public");
-response.addHeader("Content-type", ContentTypes.TEXT_CSS);
-response.addHeader("Expires", "172801");
-%>

@@ -45,7 +45,6 @@
 <%@ page import="com.liferay.portal.UserScreenNameException" %>
 <%@ page import="com.liferay.portal.action.LoginAction" %>
 <%@ page import="com.liferay.portal.security.auth.AuthException" %>
-<%@ page import="com.liferay.portal.service.impl.ThemeLocalUtil" %>
 <%@ page import="com.liferay.portal.service.permission.GroupPermissionUtil" %>
 <%@ page import="com.liferay.portal.service.permission.OrganizationPermissionUtil" %>
 <%@ page import="com.liferay.portal.struts.PortletRequestProcessor" %>

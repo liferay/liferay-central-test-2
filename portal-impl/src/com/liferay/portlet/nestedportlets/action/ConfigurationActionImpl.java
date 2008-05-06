@@ -33,7 +33,7 @@ import com.liferay.portal.model.LayoutTemplate;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
-import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
+import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.portal.util.WebKeys;
@@ -135,14 +135,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		Theme theme = themeDisplay.getTheme();
 
 		LayoutTemplate newLayoutTemplate =
-			LayoutTemplateLocalUtil.getLayoutTemplate(
+			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 				newLayoutTemplateId, false, theme.getThemeId());
 
 		List<String> newColumns = getColumnNames(
 			newLayoutTemplate.getContent(), portletResource);
 
 		LayoutTemplate oldLayoutTemplate =
-			LayoutTemplateLocalUtil.getLayoutTemplate(
+			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 				oldLayoutTemplateId, false, theme.getThemeId());
 
 		List<String> oldColumns = getColumnNames(

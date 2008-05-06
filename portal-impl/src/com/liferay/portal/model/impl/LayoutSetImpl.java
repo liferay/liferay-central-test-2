@@ -27,7 +27,7 @@ import com.liferay.portal.SystemException;
 import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Theme;
-import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.service.ThemeLocalServiceUtil;
 
 /**
  * <a href="LayoutSetImpl.java.html"><b><i>View Source</i></b></a>
@@ -41,24 +41,26 @@ public class LayoutSetImpl extends LayoutSetModelImpl implements LayoutSet {
 	}
 
 	public Theme getTheme() throws PortalException, SystemException {
-		return ThemeLocalUtil.getTheme(getCompanyId(), getThemeId(), false);
+		return ThemeLocalServiceUtil.getTheme(
+			getCompanyId(), getThemeId(), false);
 	}
 
 	public ColorScheme getColorScheme()
 		throws PortalException, SystemException {
 
-		return ThemeLocalUtil.getColorScheme(
+		return ThemeLocalServiceUtil.getColorScheme(
 			getCompanyId(), getTheme().getThemeId(), getColorSchemeId(), false);
 	}
 
 	public Theme getWapTheme() throws PortalException, SystemException {
-		return ThemeLocalUtil.getTheme(getCompanyId(), getWapThemeId(), true);
+		return ThemeLocalServiceUtil.getTheme(
+			getCompanyId(), getWapThemeId(), true);
 	}
 
 	public ColorScheme getWapColorScheme()
 		throws PortalException, SystemException {
 
-		return ThemeLocalUtil.getColorScheme(
+		return ThemeLocalServiceUtil.getColorScheme(
 			getCompanyId(), getWapTheme().getThemeId(), getWapColorSchemeId(),
 			true);
 	}

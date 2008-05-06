@@ -58,8 +58,8 @@ import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutServiceUtil;
 import com.liferay.portal.service.LayoutSetServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
+import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
 import com.liferay.portal.service.permission.UserPermissionUtil;
@@ -585,7 +585,7 @@ public class EditPagesAction extends PortletAction {
 		throws Exception {
 
 		if (Validator.isNotNull(themeId) && Validator.isNull(colorSchemeId)) {
-			ColorScheme colorScheme = ThemeLocalUtil.getColorScheme(
+			ColorScheme colorScheme = ThemeLocalServiceUtil.getColorScheme(
 				companyId, themeId, colorSchemeId, wapTheme);
 
 			colorSchemeId = colorScheme.getColorSchemeId();

@@ -29,7 +29,7 @@ import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
 import com.liferay.portal.lastmodified.LastModifiedCSS;
 import com.liferay.portal.lastmodified.LastModifiedJavaScript;
-import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.velocity.LiferayResourceCacheUtil;
 import com.liferay.portal.velocity.VelocityContextPool;
 
@@ -77,7 +77,7 @@ public class ThemeHotDeployListener implements HotDeployListener {
 				_log.info("Registering themes for " + servletContextName);
 			}
 
-			List<String> themeIds = ThemeLocalUtil.init(
+			List<String> themeIds = ThemeLocalServiceUtil.init(
 				servletContextName, ctx, null, true, xmls,
 				event.getPluginPackage());
 
@@ -117,7 +117,7 @@ public class ThemeHotDeployListener implements HotDeployListener {
 				}
 
 				try {
-					ThemeLocalUtil.uninstallThemes(themeIds);
+					ThemeLocalServiceUtil.uninstallThemes(themeIds);
 				}
 				catch (Exception e1) {
 					_log.error(e1.getMessage());

@@ -533,6 +533,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
+	<entity name="LayoutTemplate" local-service="true" remote-service="false" tx-manager="none" />
 	<entity name="ListType" local-service="false" remote-service="true">
 
 		<!-- PK fields -->
@@ -1318,6 +1319,7 @@
 
 		<reference package-path="com.liferay.counter" entity="Counter" />
 	</entity>
+	<entity name="Theme" local-service="true" remote-service="false" tx-manager="none" />
 	<entity name="User" uuid="true" local-service="true" remote-service="true">
 
 		<!-- PK fields -->

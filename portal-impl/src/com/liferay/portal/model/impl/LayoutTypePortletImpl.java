@@ -39,10 +39,10 @@ import com.liferay.portal.model.Plugin;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletConstants;
 import com.liferay.portal.model.PortletPreferences;
+import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
 import com.liferay.portal.service.PortletPreferencesLocalServiceUtil;
-import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
@@ -112,7 +112,7 @@ public class LayoutTypePortletImpl
 
 	public LayoutTemplate getLayoutTemplate() {
 		LayoutTemplate layoutTemplate =
-			LayoutTemplateLocalUtil.getLayoutTemplate(
+			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 				getLayoutTemplateId(), false, null);
 
 		if (layoutTemplate == null) {
@@ -175,7 +175,7 @@ public class LayoutTypePortletImpl
 		}
 
 		LayoutTemplate oldLayoutTemplate =
-			LayoutTemplateLocalUtil.getLayoutTemplate(
+			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 				oldLayoutTemplateId, false, themeId);
 
 		if (oldLayoutTemplate == null) {
@@ -183,7 +183,7 @@ public class LayoutTypePortletImpl
 		}
 
 		LayoutTemplate newLayoutTemplate =
-			LayoutTemplateLocalUtil.getLayoutTemplate(
+			LayoutTemplateLocalServiceUtil.getLayoutTemplate(
 				newLayoutTemplateId, false, themeId);
 
 		List<String> oldColumns = oldLayoutTemplate.getColumns();

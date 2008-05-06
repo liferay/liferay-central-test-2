@@ -46,7 +46,7 @@ import com.liferay.portal.security.permission.PermissionChecker;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
-import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.CookieKeys;
@@ -486,7 +486,8 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return getLayoutSet().getTheme();
 		}
 		else {
-			return ThemeLocalUtil.getTheme(getCompanyId(), getThemeId(), false);
+			return ThemeLocalServiceUtil.getTheme(
+				getCompanyId(), getThemeId(), false);
 		}
 	}
 
@@ -497,7 +498,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return getLayoutSet().getColorScheme();
 		}
 		else {
-			return ThemeLocalUtil.getColorScheme(
+			return ThemeLocalServiceUtil.getColorScheme(
 				getCompanyId(), getTheme().getThemeId(), getColorSchemeId(),
 				false);
 		}
@@ -519,7 +520,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return getLayoutSet().getWapTheme();
 		}
 		else {
-			return ThemeLocalUtil.getTheme(
+			return ThemeLocalServiceUtil.getTheme(
 				getCompanyId(), getWapThemeId(), true);
 		}
 	}
@@ -531,7 +532,7 @@ public class LayoutImpl extends LayoutModelImpl implements Layout {
 			return getLayoutSet().getWapColorScheme();
 		}
 		else {
-			return ThemeLocalUtil.getColorScheme(
+			return ThemeLocalServiceUtil.getColorScheme(
 				getCompanyId(), getWapTheme().getThemeId(),
 				getWapColorSchemeId(), true);
 		}

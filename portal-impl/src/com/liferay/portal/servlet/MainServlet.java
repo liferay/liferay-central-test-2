@@ -52,10 +52,10 @@ import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.security.auth.CompanyThreadLocal;
 import com.liferay.portal.security.auth.PrincipalThreadLocal;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
+import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PortletLocalServiceUtil;
+import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
-import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
-import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.struts.PortletRequestProcessor;
 import com.liferay.portal.struts.StrutsUtil;
 import com.liferay.portal.util.ContentUtil;
@@ -234,7 +234,7 @@ public class MainServlet extends ActionServlet {
 					"/WEB-INF/liferay-layout-templates-ext.xml"))
 			};
 
-			LayoutTemplateLocalUtil.init(ctx, xmls, pluginPackage);
+			LayoutTemplateLocalServiceUtil.init(ctx, xmls, pluginPackage);
 		}
 		catch (Exception e) {
 			_log.error(e, e);
@@ -254,7 +254,7 @@ public class MainServlet extends ActionServlet {
 					"/WEB-INF/liferay-look-and-feel-ext.xml"))
 			};
 
-			ThemeLocalUtil.init(ctx, null, true, xmls, pluginPackage);
+			ThemeLocalServiceUtil.init(ctx, null, true, xmls, pluginPackage);
 		}
 		catch (Exception e) {
 			_log.error(e, e);

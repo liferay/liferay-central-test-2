@@ -50,8 +50,20 @@ public class ElementImpl implements Element {
 		return _el.getText();
 	}
 
+	public Element element(String name) {
+		return new ElementImpl(_el.element(name));
+	}
+
 	public List<Element> elements() {
 		return _el.elements();
+	}
+
+	public List<Element> elements(String name) {
+		return _el.elements(name);
+	}
+
+	public String elementText(String name) {
+		return _el.elementText(name);
 	}
 
 	private org.dom4j.Element _el;

@@ -24,7 +24,7 @@ package com.liferay.portal.theme;
 
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PropsValues;
 import com.liferay.util.FileUtil;
@@ -175,7 +175,7 @@ public class ThemeLoader {
 		try {
 			String content = FileUtil.read(liferayLookAndFeelXML);
 
-			ThemeLocalUtil.init(
+			ThemeLocalServiceUtil.init(
 				_servletContextName, _ctx, _themesPath, _loadFromServletContext,
 				new String[] {content}, null);
 		}

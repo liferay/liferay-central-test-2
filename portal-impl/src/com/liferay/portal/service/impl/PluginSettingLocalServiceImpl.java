@@ -75,13 +75,14 @@ public class PluginSettingLocalServiceImpl
 			Plugin plugin = null;
 
 			if (pluginType.equals(Plugin.TYPE_LAYOUT_TEMPLATE)) {
-				plugin = LayoutTemplateLocalUtil.getLayoutTemplate(
+				plugin = layoutTemplateLocalService.getLayoutTemplate(
 					pluginId, false, null);
 			}
 			else if (pluginType.equals(Plugin.TYPE_THEME)) {
 				boolean wapTheme = true;
 
-				plugin = ThemeLocalUtil.getTheme(companyId, pluginId, wapTheme);
+				plugin = themeLocalService.getTheme(
+					companyId, pluginId, wapTheme);
 			}
 
 			if ((plugin == null) ||

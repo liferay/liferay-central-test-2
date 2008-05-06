@@ -37,15 +37,15 @@
 			String content = null;
 
 			if (themeDisplay.isStateExclusive()) {
-				content = LayoutTemplateLocalUtil.getContent("exclusive", true, theme.getThemeId());
+				content = LayoutTemplateLocalServiceUtil.getContent("exclusive", true, theme.getThemeId());
 			}
 			else if (themeDisplay.isStatePopUp()) {
-				content = LayoutTemplateLocalUtil.getContent("pop_up", true, theme.getThemeId());
+				content = LayoutTemplateLocalServiceUtil.getContent("pop_up", true, theme.getThemeId());
 			}
 			else {
 				ppid = StringUtil.split(layoutTypePortlet.getStateMax())[0];
 
-				content = LayoutTemplateLocalUtil.getContent("max", true, theme.getThemeId());
+				content = LayoutTemplateLocalServiceUtil.getContent("max", true, theme.getThemeId());
 			}
 		%>
 

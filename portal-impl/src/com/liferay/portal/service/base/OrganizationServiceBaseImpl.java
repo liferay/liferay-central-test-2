@@ -67,6 +67,8 @@ import com.liferay.portal.service.LayoutSetLocalService;
 import com.liferay.portal.service.LayoutSetLocalServiceFactory;
 import com.liferay.portal.service.LayoutSetService;
 import com.liferay.portal.service.LayoutSetServiceFactory;
+import com.liferay.portal.service.LayoutTemplateLocalService;
+import com.liferay.portal.service.LayoutTemplateLocalServiceFactory;
 import com.liferay.portal.service.ListTypeService;
 import com.liferay.portal.service.ListTypeServiceFactory;
 import com.liferay.portal.service.MembershipRequestLocalService;
@@ -130,6 +132,8 @@ import com.liferay.portal.service.ServiceComponentLocalService;
 import com.liferay.portal.service.ServiceComponentLocalServiceFactory;
 import com.liferay.portal.service.SubscriptionLocalService;
 import com.liferay.portal.service.SubscriptionLocalServiceFactory;
+import com.liferay.portal.service.ThemeLocalService;
+import com.liferay.portal.service.ThemeLocalServiceFactory;
 import com.liferay.portal.service.UserGroupLocalService;
 import com.liferay.portal.service.UserGroupLocalServiceFactory;
 import com.liferay.portal.service.UserGroupRoleLocalService;
@@ -540,6 +544,15 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 	public void setLayoutSetPersistence(
 		LayoutSetPersistence layoutSetPersistence) {
 		this.layoutSetPersistence = layoutSetPersistence;
+	}
+
+	public LayoutTemplateLocalService getLayoutTemplateLocalService() {
+		return layoutTemplateLocalService;
+	}
+
+	public void setLayoutTemplateLocalService(
+		LayoutTemplateLocalService layoutTemplateLocalService) {
+		this.layoutTemplateLocalService = layoutTemplateLocalService;
 	}
 
 	public ListTypeService getListTypeService() {
@@ -1066,6 +1079,14 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 		this.subscriptionPersistence = subscriptionPersistence;
 	}
 
+	public ThemeLocalService getThemeLocalService() {
+		return themeLocalService;
+	}
+
+	public void setThemeLocalService(ThemeLocalService themeLocalService) {
+		this.themeLocalService = themeLocalService;
+	}
+
 	public UserLocalService getUserLocalService() {
 		return userLocalService;
 	}
@@ -1404,6 +1425,10 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 			layoutSetPersistence = LayoutSetUtil.getPersistence();
 		}
 
+		if (layoutTemplateLocalService == null) {
+			layoutTemplateLocalService = LayoutTemplateLocalServiceFactory.getImpl();
+		}
+
 		if (listTypeService == null) {
 			listTypeService = ListTypeServiceFactory.getImpl();
 		}
@@ -1648,6 +1673,10 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 			subscriptionPersistence = SubscriptionUtil.getPersistence();
 		}
 
+		if (themeLocalService == null) {
+			themeLocalService = ThemeLocalServiceFactory.getImpl();
+		}
+
 		if (userLocalService == null) {
 			userLocalService = UserLocalServiceFactory.getImpl();
 		}
@@ -1778,6 +1807,7 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 	protected LayoutSetLocalService layoutSetLocalService;
 	protected LayoutSetService layoutSetService;
 	protected LayoutSetPersistence layoutSetPersistence;
+	protected LayoutTemplateLocalService layoutTemplateLocalService;
 	protected ListTypeService listTypeService;
 	protected ListTypePersistence listTypePersistence;
 	protected MembershipRequestLocalService membershipRequestLocalService;
@@ -1839,6 +1869,7 @@ public abstract class OrganizationServiceBaseImpl extends PrincipalBean
 	protected PortletItemPersistence portletItemPersistence;
 	protected SubscriptionLocalService subscriptionLocalService;
 	protected SubscriptionPersistence subscriptionPersistence;
+	protected ThemeLocalService themeLocalService;
 	protected UserLocalService userLocalService;
 	protected UserService userService;
 	protected UserPersistence userPersistence;

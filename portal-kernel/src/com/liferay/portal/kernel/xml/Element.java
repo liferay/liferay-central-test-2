@@ -38,6 +38,12 @@ public interface Element {
 
 	public String getText();
 
+	public Element element(String name);
+
 	public List<Element> elements();
+
+	public List<Element> elements(String name);
+
+	public String elementText(String name);
 
 }

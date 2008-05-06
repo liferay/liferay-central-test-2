@@ -27,7 +27,7 @@ import com.liferay.portal.kernel.deploy.hot.HotDeployException;
 import com.liferay.portal.kernel.deploy.hot.HotDeployListener;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.ObjectValuePair;
-import com.liferay.portal.service.impl.LayoutTemplateLocalUtil;
+import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -77,7 +77,7 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 			}
 
 			List<ObjectValuePair<String, Boolean>> layoutTemplateIds =
-				LayoutTemplateLocalUtil.init(
+				LayoutTemplateLocalServiceUtil.init(
 					servletContextName, ctx, xmls, event.getPluginPackage());
 
 			_vars.put(servletContextName, layoutTemplateIds);
@@ -127,7 +127,7 @@ public class LayoutTemplateHotDeployListener implements HotDeployListener {
 					Boolean standard = ovp.getValue();
 
 					try {
-						LayoutTemplateLocalUtil.uninstallLayoutTemplate(
+						LayoutTemplateLocalServiceUtil.uninstallLayoutTemplate(
 							layoutTemplateId, standard.booleanValue());
 					}
 					catch (Exception e) {

@@ -67,9 +67,9 @@ import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
 import com.liferay.portal.service.OrganizationLocalServiceUtil;
+import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.service.UserLocalServiceUtil;
 import com.liferay.portal.service.impl.ImageLocalUtil;
-import com.liferay.portal.service.impl.ThemeLocalUtil;
 import com.liferay.portal.service.permission.GroupPermissionUtil;
 import com.liferay.portal.service.permission.LayoutPermissionUtil;
 import com.liferay.portal.service.permission.OrganizationPermissionUtil;
@@ -1185,8 +1185,9 @@ public class ServicePreAction extends Action {
 					ColorSchemeImpl.getDefaultRegularColorSchemeId();
 			}
 
-			theme = ThemeLocalUtil.getTheme(companyId, themeId, wapTheme);
-			colorScheme = ThemeLocalUtil.getColorScheme(
+			theme = ThemeLocalServiceUtil.getTheme(
+				companyId, themeId, wapTheme);
+			colorScheme = ThemeLocalServiceUtil.getColorScheme(
 				companyId, theme.getThemeId(), colorSchemeId, wapTheme);
 		}
 

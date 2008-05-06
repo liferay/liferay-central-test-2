@@ -36,7 +36,7 @@
 
 	String layoutTemplateId = prefs.getValue("layout-template-id", PropsValues.NESTED_PORTLETS_LAYOUT_TEMPLATE_DEFAULT);
 
-	List layoutTemplates = LayoutTemplateLocalUtil.getLayoutTemplates(theme.getThemeId());
+	List layoutTemplates = LayoutTemplateLocalServiceUtil.getLayoutTemplates(theme.getThemeId());
 
 	layoutTemplates = PluginUtil.restrictPlugins(layoutTemplates, user);
 

@@ -31,7 +31,7 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Layout;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.LayoutServiceUtil;
-import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.WebKeys;
@@ -92,7 +92,7 @@ public class RandomLookAndFeelAction extends Action {
 
 			boolean wapTheme = BrowserSniffer.is_wap_xhtml(req);
 
-			List<Theme> themes = ThemeLocalUtil.getThemes(
+			List<Theme> themes = ThemeLocalServiceUtil.getThemes(
 				themeDisplay.getCompanyId(), themeDisplay.getPortletGroupId(),
 				themeDisplay.getUserId(), wapTheme);
 

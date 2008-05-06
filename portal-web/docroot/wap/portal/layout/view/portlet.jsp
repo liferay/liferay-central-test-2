@@ -30,7 +30,7 @@
 boolean layoutMaximized = layoutTypePortlet.hasStateMax();
 
 if (!layoutMaximized) {
-	String content = LayoutTemplateLocalUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
+	String content = LayoutTemplateLocalServiceUtil.getWapContent(layoutTypePortlet.getLayoutTemplateId(), false, theme.getThemeId());
 %>
 
 	<%= RuntimePortletUtil.processTemplate(application, request, response, pageContext, content) %>
@@ -41,10 +41,10 @@ else {
 	String content = null;
 
 	if (themeDisplay.isStateExclusive()) {
-		content = LayoutTemplateLocalUtil.getWapContent("exclusive", true, theme.getThemeId());
+		content = LayoutTemplateLocalServiceUtil.getWapContent("exclusive", true, theme.getThemeId());
 	}
 	else {
-		content = LayoutTemplateLocalUtil.getWapContent("max", true, theme.getThemeId());
+		content = LayoutTemplateLocalServiceUtil.getWapContent("max", true, theme.getThemeId());
 	}
 %>
 

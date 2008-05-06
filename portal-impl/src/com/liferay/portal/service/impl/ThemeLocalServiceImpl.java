@@ -36,13 +36,16 @@ import com.liferay.portal.model.Theme;
 import com.liferay.portal.model.impl.ColorSchemeImpl;
 import com.liferay.portal.model.impl.ThemeImpl;
 import com.liferay.portal.plugin.PluginUtil;
+import com.liferay.portal.service.LayoutTemplateLocalServiceUtil;
 import com.liferay.portal.service.PluginSettingLocalServiceUtil;
+import com.liferay.portal.service.base.ThemeLocalServiceBaseImpl;
 import com.liferay.portal.theme.ThemeCompanyId;
 import com.liferay.portal.theme.ThemeCompanyLimit;
 import com.liferay.portal.theme.ThemeGroupId;
 import com.liferay.portal.theme.ThemeGroupLimit;
 import com.liferay.portal.util.DocumentUtil;
 import com.liferay.portal.util.PortalUtil;
+import com.liferay.portal.xml.ElementImpl;
 import com.liferay.util.ContextReplace;
 import com.liferay.util.ListUtil;
 import com.liferay.util.Version;
@@ -68,15 +71,15 @@ import org.dom4j.DocumentException;
 import org.dom4j.Element;
 
 /**
- * <a href="ThemeLocalUtil.java.html"><b><i>View Source</i></b></a>
+ * <a href="ThemeLocalServiceImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  * @author Jorge Ferrer
  *
  */
-public class ThemeLocalUtil {
+public class ThemeLocalServiceImpl extends ThemeLocalServiceBaseImpl {
 
-	public static ColorScheme getColorScheme(
+	public ColorScheme getColorScheme(
 			long companyId, String themeId, String colorSchemeId,
 			boolean wapTheme)
 		throws PortalException, SystemException {
@@ -120,8 +123,7 @@ public class ThemeLocalUtil {
 		return colorScheme;
 	}
 
-	public static Theme getTheme(
-			long companyId, String themeId, boolean wapTheme)
+	public Theme getTheme(long companyId, String themeId, boolean wapTheme)
 		throws PortalException, SystemException {
 
 		themeId = GetterUtil.getString(themeId);
@@ -163,7 +165,7 @@ public class ThemeLocalUtil {
 		return theme;
 	}
 
-	public static List<Theme> getThemes(long companyId) {
+	public List<Theme> getThemes(long companyId) {
 		List<Theme> themes = ListUtil.fromCollection(
 			_getThemes(companyId).values());
 
@@ -172,7 +174,7 @@ public class ThemeLocalUtil {
 		return themes;
 	}
 
-	public static List<Theme> getThemes(
+	public List<Theme> getThemes(
 			long companyId, long groupId, long userId, boolean wapTheme)
 		throws PortalException, SystemException {
 
@@ -195,7 +197,7 @@ public class ThemeLocalUtil {
 		return themes;
 	}
 
-	public static List<String> init(
+	public List<String> init(
 		ServletContext ctx, String themesPath, boolean loadFromServletContext,
 		String[] xmls, PluginPackage pluginPackage) {
 
@@ -203,7 +205,7 @@ public class ThemeLocalUtil {
 			null, ctx, themesPath, loadFromServletContext, xmls, pluginPackage);
 	}
 
-	public static List<String> init(
+	public List<String> init(
 		String servletContextName, ServletContext ctx, String themesPath,
 		boolean loadFromServletContext, String[] xmls,
 		PluginPackage pluginPackage) {
@@ -236,19 +238,19 @@ public class ThemeLocalUtil {
 		return themeIds;
 	}
 
-	public static void uninstallThemes(List<String> themeIds) {
+	public void uninstallThemes(List<String> themeIds) {
 		for (int i = 0; i < themeIds.size(); i++) {
 			String themeId = themeIds.get(i);
 
 			_themes.remove(themeId);
 
-			LayoutTemplateLocalUtil.uninstallLayoutTemplates(themeId);
+			LayoutTemplateLocalServiceUtil.uninstallLayoutTemplates(themeId);
 		}
 
 		_themesPool.clear();
 	}
 
-	private static List<ThemeCompanyId> _getCompanyLimitExcludes(Element el) {
+	private List<ThemeCompanyId> _getCompanyLimitExcludes(Element el) {
 		List<ThemeCompanyId> includes = new ArrayList<ThemeCompanyId>();
 
 		if (el != null) {
@@ -278,11 +280,11 @@ public class ThemeLocalUtil {
 		return includes;
 	}
 
-	private static List<ThemeCompanyId> _getCompanyLimitIncludes(Element el) {
+	private List<ThemeCompanyId> _getCompanyLimitIncludes(Element el) {
 		return _getCompanyLimitExcludes(el);
 	}
 
-	private static List<ThemeGroupId> _getGroupLimitExcludes(Element el) {
+	private List<ThemeGroupId> _getGroupLimitExcludes(Element el) {
 		List<ThemeGroupId> includes = new ArrayList<ThemeGroupId>();
 
 		if (el != null) {
@@ -312,11 +314,11 @@ public class ThemeLocalUtil {
 		return includes;
 	}
 
-	private static List<ThemeGroupId> _getGroupLimitIncludes(Element el) {
+	private List<ThemeGroupId> _getGroupLimitIncludes(Element el) {
 		return _getGroupLimitExcludes(el);
 	}
 
-	private static Map<String, Theme> _getThemes(long companyId) {
+	private Map<String, Theme> _getThemes(long companyId) {
 		Map<String, Theme> themes = _themesPool.get(companyId);
 
 		if (themes == null) {
@@ -342,7 +344,7 @@ public class ThemeLocalUtil {
 		return themes;
 	}
 
-	private static Version _getVersion(String version) {
+	private Version _getVersion(String version) {
 		if (version.equals("${current-version}")) {
 			version = ReleaseInfo.getVersion();
 		}
@@ -350,7 +352,7 @@ public class ThemeLocalUtil {
 		return Version.getInstance(version);
 	}
 
-	private static void _readColorSchemes(
+	private void _readColorSchemes(
 			Element theme, Map<String, ColorScheme> colorSchemes,
 			ContextReplace themeContextReplace)
 		throws IOException {
@@ -409,7 +411,7 @@ public class ThemeLocalUtil {
 		}
 	}
 
-	private static Set<String> _readThemes(
+	private Set<String> _readThemes(
 			String servletContextName, ServletContext ctx, String themesPath,
 			boolean loadFromServletContext, String xml,
 			PluginPackage pluginPackage)
@@ -653,16 +655,17 @@ public class ThemeLocalUtil {
 				Element standardEl = layoutTemplatesEl.element("standard");
 
 				if (standardEl != null) {
-					LayoutTemplateLocalUtil.readLayoutTemplate(
-						servletContextName, ctx, null, standardEl, true,
-						themeId, pluginPackage);
+					LayoutTemplateLocalServiceUtil.readLayoutTemplate(
+						servletContextName, ctx, null,
+						new ElementImpl(standardEl), true, themeId, pluginPackage);
 				}
 
 				Element customEl = layoutTemplatesEl.element("custom");
 
 				if (customEl != null) {
-					LayoutTemplateLocalUtil.readLayoutTemplate(
-						servletContextName, ctx, null, customEl, false, themeId,
+					LayoutTemplateLocalServiceUtil.readLayoutTemplate(
+						servletContextName, ctx, null,
+						new ElementImpl(customEl), false, themeId,
 						pluginPackage);
 				}
 			}
@@ -671,7 +674,7 @@ public class ThemeLocalUtil {
 		return themeIds;
 	}
 
-	private static Log _log = LogFactory.getLog(ThemeLocalUtil.class);
+	private static Log _log = LogFactory.getLog(ThemeLocalServiceImpl.class);
 
 	private static Map<String, Theme> _themes =
 		new ConcurrentHashMap<String, Theme>();

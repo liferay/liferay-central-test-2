@@ -35,7 +35,7 @@ import com.liferay.portal.model.ColorScheme;
 import com.liferay.portal.model.Company;
 import com.liferay.portal.model.Theme;
 import com.liferay.portal.service.CompanyLocalServiceUtil;
-import com.liferay.portal.service.impl.ThemeLocalUtil;
+import com.liferay.portal.service.ThemeLocalServiceUtil;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.theme.ThemeDisplayFactory;
 import com.liferay.portal.util.PortalUtil;
@@ -152,9 +152,9 @@ public class VelocityFilter extends BaseFilter {
 
 				boolean wapTheme = BrowserSniffer.is_wap_xhtml(httpReq);
 
-				Theme theme = ThemeLocalUtil.getTheme(
+				Theme theme = ThemeLocalServiceUtil.getTheme(
 					companyId, themeId, wapTheme);
-				ColorScheme colorScheme = ThemeLocalUtil.getColorScheme(
+				ColorScheme colorScheme = ThemeLocalServiceUtil.getColorScheme(
 					companyId, theme.getThemeId(), colorSchemeId, wapTheme);
 
 				// Theme display

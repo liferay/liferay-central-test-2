@@ -86,7 +86,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 			<liferay-ui:section>
 
 				<%
-				List themes = ThemeLocalUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), false);
+				List themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), false);
 				%>
 
 				<liferay-ui:table-iterator
@@ -209,7 +209,7 @@ PortletURL portletURL = (PortletURL)request.getAttribute("edit_pages.jsp-portlet
 		<liferay-ui:tabs names="themes" />
 
 		<%
-		List themes = ThemeLocalUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), true);
+		List themes = ThemeLocalServiceUtil.getThemes(company.getCompanyId(), liveGroupId, user.getUserId(), true);
 		%>
 
 		<liferay-ui:table-iterator
