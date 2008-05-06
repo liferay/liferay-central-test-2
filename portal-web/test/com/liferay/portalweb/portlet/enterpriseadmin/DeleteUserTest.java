@@ -39,7 +39,9 @@ public class DeleteUserTest extends BaseTestCase {
 		selenium.select("_79_active", "label=No");
 		selenium.click("//input[@value='Search Users']");
 		selenium.waitForPageToLoad("30000");
+		selenium.click("_79_allRowIds");
 		selenium.click("link=Delete");
-		selenium.waitForPageToLoad("30000");
+		assertTrue(selenium.getConfirmation()
+						   .matches("^Are you sure you want to delete this[\\s\\S]$"));
 	}
 }

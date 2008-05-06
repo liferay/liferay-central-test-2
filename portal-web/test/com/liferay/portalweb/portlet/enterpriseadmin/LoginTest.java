@@ -38,6 +38,7 @@ public class LoginTest extends BaseTestCase {
 		selenium.waitForPageToLoad("30000");
 		selenium.type("login", "test@liferay.com");
 		selenium.type("password", "test");
+		selenium.click("rememberMeCheckbox");
 		selenium.click("//input[@value='Sign In']");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//a[@id=\"my-community-private-pages\"]");
