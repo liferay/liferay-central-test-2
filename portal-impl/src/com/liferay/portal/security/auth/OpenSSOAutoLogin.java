@@ -24,6 +24,7 @@ package com.liferay.portal.security.auth;
 
 import com.liferay.portal.NoSuchUserException;
 import com.liferay.portal.kernel.util.HttpUtil;
+import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.model.User;
 import com.liferay.portal.service.UserLocalServiceUtil;
@@ -99,7 +100,7 @@ public class OpenSSOAutoLogin implements AutoLogin {
 			URLConnection con = urlObj.openConnection();
 
 			BufferedReader reader = new BufferedReader(
-				new InputStreamReader((InputStream)con.getContent()));
+				new InputStreamReader((InputStream)con.getInputStream()));
 
 			String line = null;
 
@@ -156,9 +157,19 @@ public class OpenSSOAutoLogin implements AutoLogin {
 				ThemeDisplay themeDisplay =
 					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
+				Locale locale = LocaleUtil.getDefault();
+
+				if (themeDisplay != null) {
+
+					// ThemeDisplay should never be null, but some users
+					// complain of this error. Cause is unknown.
+
+					locale = themeDisplay.getLocale();
+				}
+
 				user = addUser(
 					companyId, firstName, lastName, emailAddress, screenName,
-					themeDisplay.getLocale());
+					locale);
 			}
 
 			credentials = new String[3];
