@@ -53,6 +53,8 @@ public class PortletDataHandlerKeys {
 
 	public static final String THEME = "THEME";
 
+	public static final String ADD_AS_NEW_LAYOUTS = "ADD_AS_NEW_LAYOUTS";
+
 	public static final String DELETE_MISSING_LAYOUTS =
 		"DELETE_MISSING_LAYOUTS";
 

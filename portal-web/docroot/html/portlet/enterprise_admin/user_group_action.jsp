@@ -57,6 +57,16 @@ UserGroup userGroup = (UserGroup)row.getObject();
 			<liferay-ui:icon image="permissions" url="<%= permissionsURL %>" />
 		</c:if>
 
+		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.MANAGE_LAYOUTS) %>">
+			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="managePagesURL">
+				<portlet:param name="struts_action" value="/enterprise_admin/edit_pages" />
+				<portlet:param name="redirect" value="<%= redirect %>" />
+				<portlet:param name="groupId" value="<%= String.valueOf(userGroup.getGroup().getGroupId()) %>" />
+			</portlet:renderURL>
+
+			<liferay-ui:icon image="pages" message="manage-pages" url="<%= managePagesURL %>" />
+		</c:if>
+
 		<c:if test="<%= UserGroupPermissionUtil.contains(permissionChecker, userGroup.getUserGroupId(), ActionKeys.ASSIGN_MEMBERS) %>">
 			<portlet:renderURL windowState="<%= WindowState.MAXIMIZED.toString() %>" var="assignURL">
 				<portlet:param name="struts_action" value="/enterprise_admin/edit_user_group_assignments" />

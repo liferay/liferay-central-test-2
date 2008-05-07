@@ -48,6 +48,8 @@ import com.liferay.portal.UserPortraitException;
 import com.liferay.portal.UserScreenNameException;
 import com.liferay.portal.UserSmsException;
 import com.liferay.portal.kernel.language.LanguageUtil;
+import com.liferay.portal.kernel.lar.PortletDataHandlerKeys;
+import com.liferay.portal.kernel.lar.UserIdStrategy;
 import com.liferay.portal.kernel.mail.MailMessage;
 import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.Base64;
@@ -92,6 +94,7 @@ import com.liferay.util.Encryptor;
 import com.liferay.util.EncryptorException;
 import com.liferay.util.Normalizer;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 
@@ -185,6 +188,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 	public void addUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
+
+		copyUserGroupLayouts(userGroupId, userIds);
 
 		userGroupPersistence.addUsers(userGroupId, userIds);
 
@@ -1365,6 +1370,8 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 	public void setUserGroupUsers(long userGroupId, long[] userIds)
 		throws PortalException, SystemException {
 
+		copyUserGroupLayouts(userGroupId, userIds);
+
 		userGroupPersistence.setUsers(userGroupId, userIds);
 
 		PermissionCacheUtil.clearCache();
@@ -2154,6 +2161,54 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return authResult;
 	}
 
+	protected void copyUserGroupLayouts(long userGroupId, long userIds[])
+		throws PortalException, SystemException {
+
+		for (int i = 0; i < userIds.length; i++) {
+			if (!userGroupPersistence.containsUser(userGroupId, userIds[i])) {
+
+				copyUserGroupLayouts(userGroupId, userIds[i]);
+			}
+		}
+	}
+
+	protected void copyUserGroupLayouts(long userGroupId, long userId)
+		throws PortalException, SystemException {
+
+		UserGroup userGroup = userGroupLocalService.getUserGroup(userGroupId);
+		User user = getUserById(userId);
+
+		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
+
+		if (userGroup.hasPrivateLayouts()) {
+
+			long sourceGroupId = userGroup.getGroup().getGroupId();
+			long targetGroupId = user.getGroup().getGroupId();
+
+			byte[] data = layoutLocalService.exportLayouts(
+				sourceGroupId, true, parameterMap);
+
+			ByteArrayInputStream bais = new ByteArrayInputStream(data);
+
+			layoutLocalService.importLayouts(
+				userId, targetGroupId, true, parameterMap, bais);
+		}
+
+		if (userGroup.hasPublicLayouts()) {
+
+			long sourceGroupId = userGroup.getGroup().getGroupId();
+			long targetGroupId = user.getGroup().getGroupId();
+
+			byte[] data = layoutLocalService.exportLayouts(
+				sourceGroupId, false, parameterMap);
+
+			ByteArrayInputStream bais = new ByteArrayInputStream(data);
+
+			layoutLocalService.importLayouts(
+				userId, targetGroupId, false, parameterMap, bais);
+		}
+	}
+
 	protected void doSendPassword(
 			long companyId, String emailAddress, String remoteAddr,
 			String remoteHost, String userAgent)
@@ -2287,6 +2342,50 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		MailMessage message = new MailMessage(from, to, subject, body, true);
 
 		mailService.sendEmail(message);
+	}
+
+	protected Map<String, String[]> getLayoutTemplatesParameters() {
+		Map<String, String[]> parameterMap =
+			new LinkedHashMap<String, String[]>();
+
+		parameterMap.put(
+			PortletDataHandlerKeys.PERMISSIONS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_PERMISSIONS,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_DATA_ALL,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_SETUP,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.PORTLET_USER_PREFERENCES,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.THEME,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.ADD_AS_NEW_LAYOUTS,
+			new String[] {Boolean.TRUE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DELETE_PORTLET_DATA,
+			new String[] {Boolean.FALSE.toString()});
+		parameterMap.put(
+			PortletDataHandlerKeys.DATA_STRATEGY,
+			new String[] {PortletDataHandlerKeys.DATA_STRATEGY_MIRROR});
+		parameterMap.put(
+			PortletDataHandlerKeys.USER_ID_STRATEGY,
+			new String[] {UserIdStrategy.CURRENT_USER_ID});
+
+		return parameterMap;
 	}
 
 	protected String getScreenName(String screenName) {

@@ -50,4 +50,12 @@ package com.liferay.portal.model;
  */
 public interface UserGroup extends UserGroupModel {
 	public com.liferay.portal.model.Group getGroup();
+
+	public int getPrivateLayoutsPageCount();
+
+	public boolean hasPrivateLayouts();
+
+	public int getPublicLayoutsPageCount();
+
+	public boolean hasPublicLayouts();
 }

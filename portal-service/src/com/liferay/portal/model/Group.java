@@ -55,6 +55,8 @@ public interface Group extends GroupModel {
 
 	public boolean isUser();
 
+	public boolean isUserGroup();
+
 	public com.liferay.portal.model.Group getLiveGroup();
 
 	public com.liferay.portal.model.Group getStagingGroup();

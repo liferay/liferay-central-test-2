@@ -33,6 +33,7 @@ import org.apache.commons.logging.LogFactory;
  * <a href="UserGroupImpl.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Jorge Ferrer
  *
  */
 public class UserGroupImpl extends UserGroupModelImpl implements UserGroup {
@@ -56,6 +57,60 @@ public class UserGroupImpl extends UserGroupModelImpl implements UserGroup {
 		}
 
 		return group;
+	}
+
+	public int getPrivateLayoutsPageCount() {
+		try {
+			Group group = getGroup();
+
+			if (group == null) {
+				return 0;
+			}
+			else {
+				return group.getPrivateLayoutsPageCount();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return 0;
+	}
+
+	public boolean hasPrivateLayouts() {
+		if (getPrivateLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	public int getPublicLayoutsPageCount() {
+		try {
+			Group group = getGroup();
+
+			if (group == null) {
+				return 0;
+			}
+			else {
+				return group.getPublicLayoutsPageCount();
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		return 0;
+	}
+
+	public boolean hasPublicLayouts() {
+		if (getPublicLayoutsPageCount() > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
 	}
 
 	private static Log _log = LogFactory.getLog(UserGroupImpl.class);

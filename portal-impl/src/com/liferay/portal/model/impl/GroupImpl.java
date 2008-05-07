@@ -31,6 +31,7 @@ import com.liferay.portal.model.LayoutConstants;
 import com.liferay.portal.model.LayoutSet;
 import com.liferay.portal.model.Organization;
 import com.liferay.portal.model.User;
+import com.liferay.portal.model.UserGroup;
 import com.liferay.portal.service.GroupLocalServiceUtil;
 import com.liferay.portal.service.LayoutLocalServiceUtil;
 import com.liferay.portal.service.LayoutSetLocalServiceUtil;
@@ -126,6 +127,21 @@ public class GroupImpl extends GroupModelImpl implements Group {
 
 		if ((classNameId > 0) && (classPK > 0)) {
 			long userClassNameId = PortalUtil.getClassNameId(User.class);
+
+			if (classNameId == userClassNameId) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
+	public boolean isUserGroup() {
+		long classNameId = getClassNameId();
+		long classPK = getClassPK();
+
+		if ((classNameId > 0) && (classPK > 0)) {
+			long userClassNameId = PortalUtil.getClassNameId(UserGroup.class);
 
 			if (classNameId == userClassNameId) {
 				return true;

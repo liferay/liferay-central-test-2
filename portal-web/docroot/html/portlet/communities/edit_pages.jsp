@@ -146,12 +146,16 @@ long parentLayoutId = BeanParamUtil.getLong(selLayout, request, "parentLayoutId"
 
 Organization organization = null;
 User user2 = null;
+UserGroup userGroup = null;
 
 if (liveGroup.isOrganization()) {
 	organization = OrganizationLocalServiceUtil.getOrganization(liveGroup.getClassPK());
 }
 else if (liveGroup.isUser()) {
 	user2 = UserLocalServiceUtil.getUserById(liveGroup.getClassPK());
+}
+else if (liveGroup.isUserGroup()) {
+	userGroup = UserGroupLocalServiceUtil.getUserGroup(liveGroup.getClassPK());
 }
 
 LayoutLister layoutLister = new LayoutLister();
@@ -163,6 +167,9 @@ if (liveGroup.isOrganization()) {
 }
 else if (liveGroup.isUser()) {
 	rootNodeName = user2.getFullName();
+}
+else if (liveGroup.isUserGroup()) {
+	rootNodeName = userGroup.getName();
 }
 
 LayoutView layoutView = layoutLister.getLayoutView(groupId, privateLayout, rootNodeName, locale);
@@ -426,12 +433,12 @@ request.setAttribute("edit_pages.jsp-portletURL", portletURL);
 		</liferay-util:include>
 	</c:if>
 
-	<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() %>">
+	<c:if test="<%= liveGroup.isCommunity() || liveGroup.isOrganization() || liveGroup.isUserGroup() %>">
 
 		<%
 		String tabs1Names = "public-pages,private-pages";
 
-		if ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE))) {
+		if (!liveGroup.isUserGroup() && ((GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.MANAGE_STAGING)) || (GroupPermissionUtil.contains(permissionChecker, liveGroupId, ActionKeys.UPDATE)))) {
 			tabs1Names += ",settings";
 		}
 		%>
