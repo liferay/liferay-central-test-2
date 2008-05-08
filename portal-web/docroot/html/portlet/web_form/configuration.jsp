@@ -1,3 +1,4 @@
+<%@ page import="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -34,8 +35,21 @@ String successURL = PrefsParamUtil.getString(prefs, request, "successURL");
 boolean sendAsEmail = PrefsParamUtil.getBoolean(prefs, request, "sendAsEmail", true);
 String subject = PrefsParamUtil.getString(prefs, request, "subject");
 String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
+boolean saveToDatabase = PrefsParamUtil.getBoolean(prefs, request, "saveToDatabase");
 boolean saveToFile = PrefsParamUtil.getBoolean(prefs, request, "saveToFile");
 String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
+String databaseTableName = prefs.getValue("databaseTableName", StringPool.BLANK);
+
+boolean fieldsEditingBlocked = false;
+
+System.out.println("databaseTableName: " + prefs.getMap()); 
+System.out.println("WebFormUtil.getNumberOfRows(databaseTableName): " +
+	ExpandoRowLocalServiceUtil.getRowsCount(
+		WebFormUtil.class.getName(), databaseTableName)
+);
+if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
+	fieldsEditingBlocked = true;
+}
 %>
 
 <form action="<liferay-portlet:actionURL portletConfiguration="true" />" class="uni-form" method="post" name="<portlet:namespace />fm">
@@ -100,6 +114,14 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 	</fieldset>
 
 	<fieldset class="block-labels">
+		<legend><liferay-ui:message key="database" /></legend>
+
+		<div class="ctrl-holder">
+			<label><liferay-ui:message key="save-to-database" /> <liferay-ui:input-checkbox param="saveToDatabase" defaultValue="<%= saveToDatabase %>" /></label>
+		</div>
+	</fieldset>
+
+	<fieldset class="block-labels">
 		<legend><liferay-ui:message key="file" /></legend>
 
 		<div class="ctrl-holder">
@@ -118,6 +140,30 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 <fieldset class="block-labels" id="<portlet:namespace/>webFields">
 	<legend><liferay-ui:message key="form-fields" /></legend>
 
+	<c:if test="<%= fieldsEditingBlocked %>">
+
+		<div class="portlet-msg-alert">
+			<liferay-ui:message key="there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields" />
+		</div>
+
+		<liferay-portlet:renderURL portletName="<%= portletResource %>" var="exportURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+			<portlet:param name="struts_action" value="/web_form/export_data" />
+		</liferay-portlet:renderURL>
+
+		<input type="button" value="<liferay-ui:message key="export-data" />" onclick="location.href = '<%= exportURL %>'"/>
+
+		<liferay-portlet:actionURL portletName="<%= portletResource %>" var="deleteURL">
+			<portlet:param name="struts_action" value="/web_form/delete_data" />
+			<portlet:param name="redirect" value="<%= currentURL %>" />
+		</liferay-portlet:actionURL>
+
+		<input type="button" value="<liferay-ui:message key="delete-data" />" onclick="submitForm(document.<portlet:namespace/>fm, '<%= deleteURL %>');"/>
+
+		<br/><br/>
+	</c:if>
+
+	<input type="hidden" name="<portlet:namespace/>updateFields" value="true" />
+
 	<%
 	int i = 1;
 
@@ -135,14 +181,26 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 			<div class="ctrl-holder">
 				<label for="<portlet:namespace/>fieldLabel<%= i %>"><liferay-ui:message key="name" /></label>
 
-				<input class="<portlet:namespace/>input-field" id="<portlet:namespace/>fieldLabel<%= i %>" name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" /><br />
+				<c:choose>
+					<c:when test="<%= !fieldsEditingBlocked %>">
+						<input class="<portlet:namespace/>input-field" id="<portlet:namespace/>fieldLabel<%= i %>" name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" />
+					</c:when>
+					<c:otherwise>
+						<b><%= fieldLabel %></b>
+					</c:otherwise>
+				</c:choose>
 
+				<br />
 				<c:choose>
 					<c:when test='<%= fieldType.equals("paragraph") %>'>
 						<input type="hidden" name="<portlet:namespace/>fieldOptional<%= i %>" value="on" />
 					</c:when>
-					<c:otherwise>
+					<c:when test="<%= !fieldsEditingBlocked %>">
 						<input <c:if test="<%= fieldOptional %>">checked</c:if> type="checkbox" name="<portlet:namespace/>fieldOptional<%= i %>" /> <liferay-ui:message key="optional" />
+					</c:when>
+					<c:otherwise>
+						<label><liferay-ui:message key="optional"/></label>
+						<b><%= LanguageUtil.get(pageContext, fieldOptional?"yes":"no") %></b>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -150,22 +208,36 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 			<div class="ctrl-holder">
 				<label for="<portlet:namespace/>fieldType<%= i %>"><liferay-ui:message key="type" /></label>
 
-				<select class="<portlet:namespace/>select-field" id="<portlet:namespace/>fieldType<%= i %>" name="<portlet:namespace/>fieldType<%= i %>">
-					<option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><liferay-ui:message key="text" /></option>
-					<option <%= (fieldType.equals("textarea")) ? "selected" : "" %> value="textarea"><liferay-ui:message key="text-box" /></option>
-					<option <%= (fieldType.equals("options")) ? "selected" : "" %> value="options"><liferay-ui:message key="options" /></option>
-					<option <%= (fieldType.equals("radio")) ? "selected" : "" %> value="radio"><liferay-ui:message key="radiobuttons" /></option>
-					<option <%= (fieldType.equals("paragraph")) ? "selected" : "" %> value="paragraph"><liferay-ui:message key="paragraph" /></option>
-					<option <%= (fieldType.equals("checkbox")) ? "selected" : "" %> value="checkbox"><liferay-ui:message key="checkbox" /></option>
-				</select>
+				<c:choose>
+					<c:when test="<%= !fieldsEditingBlocked %>">
+						<select class="<portlet:namespace/>select-field" id="<portlet:namespace/>fieldType<%= i %>" name="<portlet:namespace/>fieldType<%= i %>">
+							<option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><liferay-ui:message key="text" /></option>
+							<option <%= (fieldType.equals("textarea")) ? "selected" : "" %> value="textarea"><liferay-ui:message key="text-box" /></option>
+							<option <%= (fieldType.equals("options")) ? "selected" : "" %> value="options"><liferay-ui:message key="options" /></option>
+							<option <%= (fieldType.equals("radio")) ? "selected" : "" %> value="radio"><liferay-ui:message key="radiobuttons" /></option>
+							<option <%= (fieldType.equals("paragraph")) ? "selected" : "" %> value="paragraph"><liferay-ui:message key="paragraph" /></option>
+							<option <%= (fieldType.equals("checkbox")) ? "selected" : "" %> value="checkbox"><liferay-ui:message key="checkbox" /></option>
+						</select>
+					</c:when>
+					<c:otherwise>
+						<b><%= LanguageUtil.get(pageContext, fieldType) %></b>
+					</c:otherwise>
+				</c:choose>
 			</div>
 
 			<div class="ctrl-holder" id="<portlet:namespace/>optionsGroup<%= i %>">
 				<label for="<portlet:namespace/>fieldOptions<%= i %>"><liferay-ui:message key="options" /></label>
 
-				<span>(<liferay-ui:message key="add-options-separated-by-commas" />)</span>
+				<c:choose>
+					<c:when test="<%= !fieldsEditingBlocked %>">
+						<span>(<liferay-ui:message key="add-options-separated-by-commas" />)</span>
 
-				<textarea class="<portlet:namespace/>input-field" cols="50" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" rows="1" style="height: auto; width: auto;"><%= fieldOptions %></textarea>
+						<textarea class="<portlet:namespace/>input-field" cols="50" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" rows="1" style="height: auto; width: auto;"><%= fieldOptions %></textarea>
+					</c:when>
+					<c:otherwise>
+						<b><%= fieldOptions %></b>
+					</c:otherwise>
+				</c:choose>
 			</div>
 		</fieldset>
 
@@ -184,9 +256,9 @@ String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 <br />
 
 <div class="button-holder">
-	<input type="submit" value="<liferay-ui:message key="save" />" />
+	<input type="submit" id="<portlet:namespace/>save" name="save" value="<liferay-ui:message key="save" />" />
 
-	<input type="button" value="<liferay-ui:message key="cancel" />" onClick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+	<input type="button" id="<portlet:namespace/>cancel" name="cancel" value="<liferay-ui:message key="cancel" />" onclick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 </div>
 
 </form>

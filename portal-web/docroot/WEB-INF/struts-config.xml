@@ -1333,6 +1333,12 @@
 
 		<action path="/web_form/captcha" type="com.liferay.portal.captcha.CaptchaPortletAction" />
 
+		<action path="/web_form/delete_data" type="com.liferay.portlet.webform.action.DeleteDataAction" />
+
+		<action path="/web_form/export_data" type="com.liferay.portlet.webform.action.ExportDataAction">
+			<forward name="portlet.web_form.export_data" path="portlet.web_form.view" />
+		</action>
+
 		<action path="/web_form/view" type="com.liferay.portlet.webform.action.ViewAction">
 			<forward name="portlet.web_form.view" path="portlet.web_form.view" />
 		</action>

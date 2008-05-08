@@ -32,9 +32,10 @@ import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portal.util.PropsUtil;
 import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
+import com.liferay.portlet.webform.util.WebFormUtil;
 import com.liferay.util.FileUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
@@ -63,6 +64,7 @@ import org.apache.struts.action.ActionMapping;
  *
  * @author Daniel Weisser
  * @author Jorge Ferrer
+ * @author Alberto Montero
  *
  */
 public class ViewAction extends PortletAction {
@@ -85,6 +87,10 @@ public class ViewAction extends PortletAction {
 			prefs.getValue("successURL", StringPool.BLANK));
 		boolean sendAsEmail = GetterUtil.getBoolean(
 			prefs.getValue("sendAsEmail", StringPool.BLANK), true);
+		boolean saveToDatabase = GetterUtil.getBoolean(
+			prefs.getValue("saveToDatabase", StringPool.BLANK));
+		String databaseTableName = GetterUtil.getString(
+			prefs.getValue("databaseTableName", StringPool.BLANK));
 		boolean saveToFile = GetterUtil.getBoolean(
 			prefs.getValue("saveToFile", StringPool.BLANK));
 		String fileName = GetterUtil.getString(
@@ -101,31 +107,36 @@ public class ViewAction extends PortletAction {
 
 		List<String> fieldValues = new ArrayList<String>();
 
-		for (int i = 1; i <= _MAX_FIELDS; i++) {
+		for (int i = 1; i <= WebFormUtil.MAX_FIELDS; i++) {
 			fieldValues.add(req.getParameter("field" + i));
 		}
 
 		if (validate(fieldValues, prefs)) {
-			boolean emailSent = false;
-			boolean fileSaved = false;
+			boolean emailSuccess = true;
+			boolean databaseSuccess = true;
+			boolean fileSuccess = true;
 
 			if (sendAsEmail) {
-				emailSent = sendEmail(fieldValues, prefs);
+				emailSuccess = sendEmail(fieldValues, prefs);
+			}
+
+			if (saveToDatabase) {
+				databaseSuccess = saveDatabase(fieldValues, prefs, databaseTableName);
 			}
 
 			if (saveToFile) {
-				fileSaved = saveFile(fieldValues, prefs, fileName);
+				fileSuccess = saveFile(fieldValues, prefs, fileName);
 			}
 
-			if ((sendAsEmail == emailSent) && (saveToFile == fileSaved)) {
-				SessionMessages.add(req, "emailSent");
+			if (emailSuccess && databaseSuccess && fileSuccess) {
+				SessionMessages.add(req, "success");
 			}
 			else {
-				SessionErrors.add(req, "emailNotSent");
+				SessionErrors.add(req, "error");
 			}
 		}
 		else {
-			SessionErrors.add(req, "allFieldsRequired");
+			SessionErrors.add(req, "requiredFieldMissing");
 		}
 
 		if (SessionErrors.isEmpty(req) && Validator.isNotNull(successURL)) {
@@ -163,6 +174,38 @@ public class ViewAction extends PortletAction {
 		}
 
 		return sm.toString();
+	}
+
+	private boolean saveDatabase(
+			List<String> fieldValues, PortletPreferences prefs,
+			String databaseTableName) {
+
+		long rowClassPK = System.currentTimeMillis();
+
+		Iterator<String> itr = fieldValues.iterator();
+
+		try {
+			for (int i = 1; itr.hasNext(); i++) {
+				String fieldValue = itr.next();
+
+				String fieldLabel = prefs.getValue(
+					"fieldLabel" + i, StringPool.BLANK);
+
+				if (Validator.isNotNull(fieldLabel)) {
+					ExpandoValueLocalServiceUtil.addValue(
+						WebFormUtil.class.getName(), databaseTableName,
+						fieldLabel, rowClassPK, fieldValue);
+				}
+			}
+
+			return true;
+		}
+		catch (Exception e) {
+			_log.error(
+				"The web form data could not be saved to the database", e);
+
+			return false;
+		}
 	}
 
 	protected boolean saveFile(
@@ -241,7 +284,7 @@ public class ViewAction extends PortletAction {
 	protected boolean validate(
 		List<String> fieldValues, PortletPreferences prefs) {
 
-		for (int i = 1; i < _MAX_FIELDS; i++) {
+		for (int i = 1; i < WebFormUtil.MAX_FIELDS; i++) {
 			String fieldValue = fieldValues.get(i - 1);
 
 			String fieldLabel = prefs.getValue(
@@ -258,9 +301,6 @@ public class ViewAction extends PortletAction {
 
 		return true;
 	}
-
-	private static final int _MAX_FIELDS = GetterUtil.getInteger(
-		PropsUtil.get(PropsUtil.WEB_FORM_PORTLET_MAX_FIELDS));
 
 	private static Log _log = LogFactory.getLog(ViewAction.class);
 

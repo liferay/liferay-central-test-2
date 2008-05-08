@@ -22,8 +22,20 @@
 
 package com.liferay.portlet.webform.util;
 
+import com.liferay.portal.PortalException;
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.PropsUtil;
+import com.liferay.portlet.expando.NoSuchTableException;
+import com.liferay.portlet.expando.model.ExpandoColumn;
+import com.liferay.portlet.expando.model.ExpandoRow;
+import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
+import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -40,6 +52,58 @@ import java.util.List;
  *
  */
 public class WebFormUtil {
+
+	public static final int MAX_FIELDS = GetterUtil.getInteger(
+		PropsUtil.get(PropsUtil.WEB_FORM_PORTLET_MAX_FIELDS));
+
+	public static ExpandoTable dropAndCreateTable(String tableName)
+		throws PortalException, SystemException {
+
+	    try {
+		    dropTable(tableName);
+	    }
+	    catch (NoSuchTableException e) {
+	    }
+
+	    return ExpandoTableLocalServiceUtil.addTable(
+		    WebFormUtil.class.getName(), tableName);
+	}
+
+	public static void dropTable(String tableName)
+		throws PortalException, SystemException {
+
+		ExpandoTable expandoTable =
+			ExpandoTableLocalServiceUtil.getTable(
+				WebFormUtil.class.getName(), tableName);
+
+		long tableId = expandoTable.getTableId();
+
+		ExpandoValueLocalServiceUtil.deleteTableValues(tableId);
+
+		List<ExpandoRow> rows = ExpandoRowLocalServiceUtil.getRows(
+				WebFormUtil.class.getName(), tableName, -1, -1);
+
+		for (ExpandoRow expandoRow: rows) {
+			ExpandoRowLocalServiceUtil.deleteRow(expandoRow.getRowId());
+		}
+
+		List<ExpandoColumn> columns =
+			ExpandoColumnLocalServiceUtil.getColumns(tableId);
+
+		for (ExpandoColumn expandoColumn: columns) {
+			ExpandoColumnLocalServiceUtil.deleteColumn(
+				expandoColumn.getColumnId());
+		}
+
+		ExpandoTableLocalServiceUtil.deleteTable(tableId);
+	}
+
+	public static int getNumberOfRows(String databaseTableName)
+		throws SystemException {
+
+		return ExpandoRowLocalServiceUtil.getRowsCount(
+			WebFormUtil.class.getName(), databaseTableName);
+	}
 
 	public static String[] split(String s) {
 		return split(s, StringPool.COMMA);

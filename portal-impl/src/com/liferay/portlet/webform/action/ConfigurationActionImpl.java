@@ -25,9 +25,13 @@ package com.liferay.portlet.webform.action;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
+import com.liferay.portlet.expando.model.ExpandoColumnConstants;
+import com.liferay.portlet.expando.model.ExpandoTable;
+import com.liferay.portlet.expando.service.ExpandoColumnLocalServiceUtil;
+import com.liferay.portlet.webform.util.WebFormUtil;
 import com.liferay.util.servlet.SessionErrors;
 import com.liferay.util.servlet.SessionMessages;
 
@@ -66,8 +70,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean sendAsEmail = ParamUtil.getBoolean(req, "sendAsEmail");
 		String subject = ParamUtil.getString(req, "subject");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
+		boolean saveToDatabase = ParamUtil.getBoolean(req, "saveToDatabase");
 		boolean saveToFile = ParamUtil.getBoolean(req, "saveToFile");
 		String fileName = ParamUtil.getString(req, "fileName");
+		boolean updateFields = ParamUtil.getBoolean(req, "updateFields");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
@@ -82,7 +88,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			SessionErrors.add(req, "subjectRequired");
 		}
 
-		if (!sendAsEmail && !saveToFile){
+		if (!sendAsEmail && !saveToDatabase && !saveToFile){
 			SessionErrors.add(req, "handlingRequired");
 		}
 
@@ -93,6 +99,21 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			else if (!Validator.isEmailAddress(emailAddress)) {
 				SessionErrors.add(req, "emailAddressInvalid");
 			}
+		}
+
+		ExpandoTable expandoTable = null;
+
+		if (saveToDatabase) {
+			String databaseTableName =
+				prefs.getValue("databaseTableName", StringPool.BLANK);
+
+			if (Validator.isNull(databaseTableName)) {
+				databaseTableName = portletResource + title;
+
+				prefs.setValue("databaseTableName", databaseTableName);
+			}
+
+			expandoTable = WebFormUtil.dropAndCreateTable(databaseTableName);
 		}
 
 		if (saveToFile) {
@@ -123,45 +144,56 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("sendAsEmail", String.valueOf(sendAsEmail));
 		prefs.setValue("subject", subject);
 		prefs.setValue("emailAddress", emailAddress);
+		prefs.setValue("saveToDatabase", String.valueOf(saveToDatabase));
 		prefs.setValue("saveToFile", String.valueOf(saveToFile));
 		prefs.setValue("fileName", fileName);
 
-		int i = 1;
+		if (updateFields) {
+			int i = 1;
 
-		String fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
-		String fieldType = ParamUtil.getString(req, "fieldType" + i);
-		boolean fieldOptional = ParamUtil.getBoolean(req, "fieldOptional" + i);
-		String fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
+			String fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
+			String fieldType = ParamUtil.getString(req, "fieldType" + i);
+			boolean fieldOptional =
+				ParamUtil.getBoolean(req, "fieldOptional" + i);
+			String fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
 
-		while ((i == 1) || (fieldLabel.trim().length() > 0)) {
-			prefs.setValue("fieldLabel" + i, fieldLabel);
-			prefs.setValue("fieldType" + i, fieldType);
-			prefs.setValue("fieldOptional" + i, String.valueOf(fieldOptional));
-			prefs.setValue("fieldOptions" + i, fieldOptions);
+			while ((i == 1) || (fieldLabel.trim().length() > 0)) {
+				prefs.setValue("fieldLabel" + i, fieldLabel);
+				prefs.setValue("fieldType" + i, fieldType);
+				prefs.setValue(
+					"fieldOptional" + i, String.valueOf(fieldOptional));
+				prefs.setValue("fieldOptions" + i, fieldOptions);
 
-			i++;
+				if (saveToDatabase) {
+					ExpandoColumnLocalServiceUtil.addColumn(
+						expandoTable.getTableId(), fieldLabel,
+						ExpandoColumnConstants.STRING);
+				}
 
-			fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
-			fieldType = ParamUtil.getString(req, "fieldType" + i);
-			fieldOptional = ParamUtil.getBoolean(req, "fieldOptional" + i);
-			fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
-		}
+				i++;
 
-		// Clear previous preferences that are now blank
+				fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
+				fieldType = ParamUtil.getString(req, "fieldType" + i);
+				fieldOptional = ParamUtil.getBoolean(req, "fieldOptional" + i);
+				fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
+			}
 
-		fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
-
-		while (fieldLabel.trim().length() > 0) {
-			prefs.setValue("fieldLabel" + i, StringPool.BLANK);
-			prefs.setValue("fieldType" + i, StringPool.BLANK);
-			prefs.setValue("fieldOptional" + i, StringPool.BLANK);
-			prefs.setValue("fieldOptions" + i, StringPool.BLANK);
-
-			i++;
+			// Clear previous preferences that are now blank
 
 			fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
-		}
 
+			while (fieldLabel.trim().length() > 0) {
+				prefs.setValue("fieldLabel" + i, StringPool.BLANK);
+				prefs.setValue("fieldType" + i, StringPool.BLANK);
+				prefs.setValue("fieldOptional" + i, StringPool.BLANK);
+				prefs.setValue("fieldOptions" + i, StringPool.BLANK);
+
+				i++;
+
+				fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+			}
+		}
+		
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
 
