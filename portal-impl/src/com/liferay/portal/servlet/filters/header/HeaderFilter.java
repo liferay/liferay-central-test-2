@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet.filters.header;
 
 import com.liferay.portal.kernel.servlet.BaseFilter;
+import com.liferay.portal.kernel.servlet.HttpHeaders;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 
@@ -42,8 +43,8 @@ import javax.servlet.FilterConfig;
 import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
-import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -89,27 +90,24 @@ public class HeaderFilter extends BaseFilter {
 
 				value = dateFormat.format(cal.getTime());
 			}
-			
-			/*
-			 * Note: Don't set Cache-Control if the
-			 * servlet engine sends a JSESSIONID cookie
-			 * Fixes security issue with pre v2 Apache proxies.
-			 */
-			 
-			boolean setHeader = true;
 
-			if( name.toLowerCase().equals("cache-control") ) {
-			
-			    HttpServletRequest httpReq = (HttpServletRequest) req;
-			    HttpSession session = httpReq.getSession(false);
-				
-			    if( session == null || session.isNew()) setHeader = false;
+			// LEP-5895
+
+			boolean addHeader = true;
+
+			if (name.equalsIgnoreCase(HttpHeaders.CACHE_CONTROL)) {
+				HttpServletRequest httpReq = (HttpServletRequest)req;
+
+				HttpSession ses = httpReq.getSession(false);
+
+				if ((ses == null) || ses.isNew()) {
+					addHeader = false;
+				}
 			}
-			
-			if( setHeader ) {
+
+			if (addHeader) {
 				httpRes.addHeader(name, value);
 			}
-			
 		}
 
 		doFilter(HeaderFilter.class, req, res, chain);
