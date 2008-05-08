@@ -43,6 +43,8 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 /**
  * <a href="HeaderFilter.java.html"><b><i>View Source</i></b></a>
@@ -87,8 +89,27 @@ public class HeaderFilter extends BaseFilter {
 
 				value = dateFormat.format(cal.getTime());
 			}
+			
+			/*
+			 * Note: Don't set Cache-Control if the
+			 * servlet engine sends a JSESSIONID cookie
+			 * Fixes security issue with pre v2 Apache proxies.
+			 */
+			 
+			boolean setHeader = true;
 
-			httpRes.addHeader(name, value);
+			if( name.toLowerCase().equals("cache-control") ) {
+			
+			    HttpServletRequest httpReq = (HttpServletRequest) req;
+			    HttpSession session = httpReq.getSession(false);
+				
+			    if( session == null || session.isNew()) setHeader = false;
+			}
+			
+			if( setHeader ) {
+				httpRes.addHeader(name, value);
+			}
+			
 		}
 
 		doFilter(HeaderFilter.class, req, res, chain);
