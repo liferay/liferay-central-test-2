@@ -2161,17 +2161,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		return authResult;
 	}
 
-	protected void copyUserGroupLayouts(long userGroupId, long userIds[])
-		throws PortalException, SystemException {
-
-		for (int i = 0; i < userIds.length; i++) {
-			if (!userGroupPersistence.containsUser(userGroupId, userIds[i])) {
-
-				copyUserGroupLayouts(userGroupId, userIds[i]);
-			}
-		}
-	}
-
 	protected void copyUserGroupLayouts(long userGroupId, long userId)
 		throws PortalException, SystemException {
 
@@ -2181,7 +2170,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		Map<String, String[]> parameterMap = getLayoutTemplatesParameters();
 
 		if (userGroup.hasPrivateLayouts()) {
-
 			long sourceGroupId = userGroup.getGroup().getGroupId();
 			long targetGroupId = user.getGroup().getGroupId();
 
@@ -2195,7 +2183,6 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 		}
 
 		if (userGroup.hasPublicLayouts()) {
-
 			long sourceGroupId = userGroup.getGroup().getGroupId();
 			long targetGroupId = user.getGroup().getGroupId();
 
@@ -2206,6 +2193,16 @@ public class UserLocalServiceImpl extends UserLocalServiceBaseImpl {
 
 			layoutLocalService.importLayouts(
 				userId, targetGroupId, false, parameterMap, bais);
+		}
+	}
+
+	protected void copyUserGroupLayouts(long userGroupId, long userIds[])
+		throws PortalException, SystemException {
+
+		for (long userId : userIds) {
+			if (!userGroupPersistence.containsUser(userGroupId, userId)) {
+				copyUserGroupLayouts(userGroupId, userId);
+			}
 		}
 	}
 

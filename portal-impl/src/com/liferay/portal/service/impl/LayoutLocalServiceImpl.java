@@ -1102,7 +1102,7 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 			Map<String, String[]> parameterMap, InputStream is)
 		throws PortalException, SystemException {
 
-		boolean addLayoutsAsNew = MapUtil.getBoolean(
+		boolean addAsNewLayouts = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.ADD_AS_NEW_LAYOUTS);
 		boolean deleteMissingLayouts = MapUtil.getBoolean(
 			parameterMap, PortletDataHandlerKeys.DELETE_MISSING_LAYOUTS,
@@ -1316,9 +1316,9 @@ public class LayoutLocalServiceImpl extends LayoutLocalServiceBaseImpl {
 
 			Layout layout = null;
 
-			if (addLayoutsAsNew) {
+			if (addAsNewLayouts) {
 				layoutId = getNextLayoutId(groupId, privateLayout);
-				friendlyURL = "/" + layoutId;
+				friendlyURL = StringPool.SLASH + layoutId;
 			}
 			else {
 				layout = layoutPersistence.fetchByG_P_L(

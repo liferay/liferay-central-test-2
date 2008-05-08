@@ -141,9 +141,10 @@ public class GroupImpl extends GroupModelImpl implements Group {
 		long classPK = getClassPK();
 
 		if ((classNameId > 0) && (classPK > 0)) {
-			long userClassNameId = PortalUtil.getClassNameId(UserGroup.class);
+			long userGroupClassNameId = PortalUtil.getClassNameId(
+				UserGroup.class);
 
-			if (classNameId == userClassNameId) {
+			if (classNameId == userGroupClassNameId) {
 				return true;
 			}
 		}
