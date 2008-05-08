@@ -68,7 +68,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.type("_15_title", "Test Journal Article 2");
+		selenium.type("_15_title", "Test Journal Article 3");
 		Thread.sleep(5000);
 
 		for (int second = 0;; second++) {
@@ -122,7 +122,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 		selenium.selectFrame("//iframe[@id=\"_15_editor\"]");
 		selenium.selectFrame("//iframe[@id=\"FCKeditor1___Frame\"]");
 		selenium.selectFrame("//iframe");
-		selenium.typeKeys("//body", "This is a second journal article!");
+		selenium.typeKeys("//body", "This is a third journal article!");
 		selenium.selectFrame("relative=top");
 
 		for (int second = 0;; second++) {
@@ -151,7 +151,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Journal Article 2")) {
+				if (selenium.isElementPresent("link=Test Journal Article 3")) {
 					break;
 				}
 			}
@@ -161,7 +161,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Journal Article 2");
+		selenium.click("link=Test Journal Article 3");
 		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
@@ -202,7 +202,7 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Journal Article 2")) {
+				if (selenium.isElementPresent("link=Test Journal Article 3")) {
 					break;
 				}
 			}
@@ -214,5 +214,21 @@ public class AddArticleThroughConfigurationTest extends BaseTestCase {
 
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
+
+		for (int second = 0;; second++) {
+			if (second >= 60) {
+				fail("timeout");
+			}
+
+			try {
+				if (selenium.isTextPresent("This is a third journal article!")) {
+					break;
+				}
+			}
+			catch (Exception e) {
+			}
+
+			Thread.sleep(1000);
+		}
 	}
 }

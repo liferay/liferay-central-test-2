@@ -60,7 +60,7 @@ public class SearchArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Journal Article 2")) {
+				if (selenium.isElementPresent("link=Test Journal Article 3")) {
 					break;
 				}
 			}
@@ -70,7 +70,7 @@ public class SearchArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Journal Article 2");
+		selenium.click("link=Test Journal Article 3");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
@@ -81,7 +81,7 @@ public class SearchArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("This is a second journal article!")) {
+				if (selenium.isTextPresent("This is a third journal article!")) {
 					break;
 				}
 			}

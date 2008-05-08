@@ -58,7 +58,7 @@ public class SearchPortletTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("Test Journal Article 2")) {
+				if (selenium.isTextPresent("Test Journal Article 3")) {
 					break;
 				}
 			}

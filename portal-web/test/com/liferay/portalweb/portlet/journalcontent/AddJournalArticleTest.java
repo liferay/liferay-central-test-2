@@ -60,7 +60,7 @@ public class AddJournalArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isElementPresent("link=Test Journal Article")) {
+				if (selenium.isElementPresent("link=Test Journal Article 3")) {
 					break;
 				}
 			}
@@ -70,11 +70,11 @@ public class AddJournalArticleTest extends BaseTestCase {
 			Thread.sleep(1000);
 		}
 
-		selenium.click("link=Test Journal Article");
+		selenium.click("link=Test Journal Article 3");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("_86_enableRatingsCheckbox");
 		selenium.click("_86_enableCommentsCheckbox");
-		selenium.click("link=Test Journal Article");
+		selenium.click("link=Test Journal Article 3");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Return to Full Page");
 		selenium.waitForPageToLoad("30000");
@@ -85,7 +85,7 @@ public class AddJournalArticleTest extends BaseTestCase {
 			}
 
 			try {
-				if (selenium.isTextPresent("This is a test Journal Article!")) {
+				if (selenium.isTextPresent("This is a third journal article!")) {
 					break;
 				}
 			}
