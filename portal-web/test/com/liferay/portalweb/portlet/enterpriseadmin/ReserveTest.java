@@ -22,40 +22,27 @@
 
 package com.liferay.portalweb.portlet.enterpriseadmin;
 
-import com.liferay.portalweb.portal.BaseTests;
+import com.liferay.portalweb.portal.BaseTestCase;
 
 /**
- * <a href="EnterpriseAdminTests.java.html"><b><i>View Source</i></b></a>
+ * <a href="ReserveTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class EnterpriseAdminTests extends BaseTests {
-
-	public EnterpriseAdminTests() {
-		addTestSuite(AddPageTest.class);
-		addTestSuite(AddPortletTest.class);
-		addTestSuite(AddUserTest.class);
-		addTestSuite(AddUser2Test.class);
-		addTestSuite(AddUser3Test.class);
-		addTestSuite(SearchUserTest.class);
-		addTestSuite(DeactivateUserTest.class);
-		addTestSuite(DeleteUserTest.class);
-		addTestSuite(AddOrganizationTest.class);
-		addTestSuite(ApplyOrganizationTest.class);
-		addTestSuite(AddUserGroupTest.class);
-		addTestSuite(ApplyUserGroupTest.class);
-		addTestSuite(AddRolesTest.class);
-		addTestSuite(AssignRolesTest.class);
-		addTestSuite(BlogsRolesTest.class);
-		addTestSuite(CalendarRolesTest.class);
-		addTestSuite(LoginTest.class);
-		addTestSuite(AddPasswordPoliciesTest.class);
-		addTestSuite(EditSettingsTest.class);
-		addTestSuite(ReserveTest.class);
-		addTestSuite(PluginsTest.class);
-
-
+public class ReserveTest extends BaseTestCase {
+	public void testReserve() throws Exception {
+		selenium.click("link=\u00bb");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Settings");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Reserved Screen Names");
+		selenium.waitForPageToLoad("30000");
+		selenium.type("_79_reservedScreenNames", "reserve");
+		selenium.type("_79_reservedEmailAddresses", "reserve@reserved.com");
+		selenium.click("//input[@value='Save']");
+		selenium.waitForPageToLoad("30000");
+		selenium.click("link=Return to Full Page");
+		selenium.waitForPageToLoad("30000");
 	}
-
 }
