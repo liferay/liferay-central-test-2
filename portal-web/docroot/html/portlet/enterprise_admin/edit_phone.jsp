@@ -48,7 +48,7 @@ int typeId = BeanParamUtil.getInteger(phone, request, "typeId");
 <input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />phoneId" type="hidden" value="<%= String.valueOf(phoneId) %>" />
-<input name="<portlet:namespace />className" type="hidden" value="<%= className %>" />
+<input name="<portlet:namespace />className" type="hidden" value="<%= HtmlUtil.escape(className) %>" />
 <input name="<portlet:namespace />classPK" type="hidden" value="<%= classPK %>" />
 
 <liferay-ui:tabs

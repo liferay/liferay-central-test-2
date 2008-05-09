@@ -22,6 +22,7 @@
  */
 %>
 
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
 
@@ -91,7 +92,7 @@ String onChangeMethod = ParamUtil.getString(request, "onChangeMethod");
 				if (Validator.isNotNull(onChangeMethod)) {
 				%>
 
-					parent.<%= onChangeMethod %>(getHTML());
+					parent.<%= HtmlUtil.escape(onChangeMethod) %>(getHTML());
 
 				<%
 				}

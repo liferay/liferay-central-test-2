@@ -23,6 +23,7 @@
 %>
 
 <%@ page import="com.liferay.portal.kernel.util.ContentTypes" %>
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.util.PropsUtil" %>
@@ -83,7 +84,7 @@ FCKConfig.ToolbarSets["edit-in-place"] = [
 FCKConfig.BodyClass = 'html-editor <%= cssClasses %>' ;
 FCKConfig.CustomStyles = {};
 FCKConfig.StylesXmlPath = FCKConfig.EditorPath + 'fckstyles.xml' ;
-FCKConfig.EditorAreaCSS = '<%= cssPath %>/main.css' ;
+FCKConfig.EditorAreaCSS = '<%= HtmlUtil.escape(cssPath) %>/main.css' ;
 
 FCKConfig.LinkBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Connector=<%= connectorURL %>";
 FCKConfig.ImageBrowserURL = FCKConfig.BasePath + "filemanager/browser/liferay/browser.html?Type=Image&Connector=<%= connectorURL %>";

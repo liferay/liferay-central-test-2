@@ -131,7 +131,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		}
 
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "organization_permissions";
-		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveOrganizationPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />organizationIds=" + organizationIds + "&<portlet:namespace />organizationIdsPos=" + organizationIdsPos;
+		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveOrganizationPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= HtmlUtil.escape(cur) %>&<portlet:namespace />organizationIds=" + organizationIds + "&<portlet:namespace />organizationIdsPos=" + organizationIdsPos;
 		document.<portlet:namespace />fm.<portlet:namespace />organizationIds.value = organizationIds;
 		document.<portlet:namespace />fm.<portlet:namespace />organizationIdsPosValue.value = organizationIdsPosValue;
 		document.<portlet:namespace />fm.<portlet:namespace />organizationIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
@@ -154,7 +154,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		}
 
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "role_permissions";
-		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveRolePermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />roleIds=" + roleIds + "&<portlet:namespace />roleIdsPos=" + roleIdsPos;
+		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveRolePermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= HtmlUtil.escape(cur) %>&<portlet:namespace />roleIds=" + roleIds + "&<portlet:namespace />roleIdsPos=" + roleIdsPos;
 		document.<portlet:namespace />fm.<portlet:namespace />roleIds.value = roleIds;
 		document.<portlet:namespace />fm.<portlet:namespace />roleIdsPosValue.value = roleIdsPosValue;
 		document.<portlet:namespace />fm.<portlet:namespace />roleIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
@@ -177,7 +177,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		}
 
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_group_permissions";
-		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserGroupPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />userGroupIds=" + userGroupIds + "&<portlet:namespace />userGroupIdsPos=" + userGroupIdsPos;
+		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserGroupPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= HtmlUtil.escape(cur) %>&<portlet:namespace />userGroupIds=" + userGroupIds + "&<portlet:namespace />userGroupIdsPos=" + userGroupIdsPos;
 		document.<portlet:namespace />fm.<portlet:namespace />userGroupIds.value = userGroupIds;
 		document.<portlet:namespace />fm.<portlet:namespace />userGroupIdsPosValue.value = userGroupIdsPosValue;
 		document.<portlet:namespace />fm.<portlet:namespace />userGroupIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
@@ -200,7 +200,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		}
 
 		document.<portlet:namespace />fm.<portlet:namespace /><%= Constants.CMD %>.value = "user_permissions";
-		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= cur %>&<portlet:namespace />userIds=" + userIds + "&<portlet:namespace />userIdsPos=" + userIdsPos;
+		document.<portlet:namespace />fm.<portlet:namespace />permissionsRedirect.value = "<%= saveUserPermissionsRedirectURL.toString() %>&<portlet:namespace />cur=<%= HtmlUtil.escape(cur) %>&<portlet:namespace />userIds=" + userIds + "&<portlet:namespace />userIdsPos=" + userIdsPos;
 		document.<portlet:namespace />fm.<portlet:namespace />userIds.value = userIds;
 		document.<portlet:namespace />fm.<portlet:namespace />userIdsPosValue.value = userIdsPosValue;
 		document.<portlet:namespace />fm.<portlet:namespace />userIdActionIds.value = Liferay.Util.listSelect(document.<portlet:namespace />fm.<portlet:namespace />current_actions);
@@ -232,7 +232,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 	<form action="<%= portletURL.toString() %>" method="post" name="<portlet:namespace />fm" onSubmit="submitForm(this); return false;">
 	<input name="<portlet:namespace /><%= Constants.CMD %>" type="hidden" value="" />
 	<input name="<portlet:namespace />permissionsRedirect" type="hidden" value="" />
-	<input name="<portlet:namespace />cur" type="hidden" value="<%= cur %>" />
+	<input name="<portlet:namespace />cur" type="hidden" value="<%= HtmlUtil.escape(cur) %>" />
 	<input name="<portlet:namespace />resourceId" type="hidden" value="<%= resource.getResourceId() %>" />
 
 	<c:choose>
@@ -319,7 +319,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			int userIdsPos = ParamUtil.getInteger(request, "userIdsPos");
 			%>
 
-			<input name="<portlet:namespace />userIds" type="hidden" value="<%= userIds %>" />
+			<input name="<portlet:namespace />userIds" type="hidden" value="<%= HtmlUtil.escape(userIds) %>" />
 			<input name="<portlet:namespace />userIdsPos" type="hidden" value="<%= userIdsPos %>" />
 			<input name="<portlet:namespace />userIdsPosValue" type="hidden" value="" />
 			<input name="<portlet:namespace />userIdActionIds" type="hidden" value="" />
@@ -484,7 +484,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			int organizationIdsPos = ParamUtil.getInteger(request, "organizationIdsPos");
 			%>
 
-			<input name="<portlet:namespace />organizationIds" type="hidden" value="<%= organizationIds %>" />
+			<input name="<portlet:namespace />organizationIds" type="hidden" value="<%= HtmlUtil.escape(organizationIds) %>" />
 			<input name="<portlet:namespace />organizationIdsPos" type="hidden" value="<%= organizationIdsPos %>" />
 			<input name="<portlet:namespace />organizationIdsPosValue" type="hidden" value="" />
 			<input name="<portlet:namespace />organizationIdActionIds" type="hidden" value="" />
@@ -711,7 +711,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			int userGroupIdsPos = ParamUtil.getInteger(request, "userGroupIdsPos");
 			%>
 
-			<input name="<portlet:namespace />userGroupIds" type="hidden" value="<%= userGroupIds %>" />
+			<input name="<portlet:namespace />userGroupIds" type="hidden" value="<%= HtmlUtil.escape(userGroupIds) %>" />
 			<input name="<portlet:namespace />userGroupIdsPos" type="hidden" value="<%= userGroupIdsPos %>" />
 			<input name="<portlet:namespace />userGroupIdsPosValue" type="hidden" value="" />
 			<input name="<portlet:namespace />userGroupIdActionIds" type="hidden" value="" />
@@ -884,7 +884,7 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			}
 			%>
 
-			<input name="<portlet:namespace />roleIds" type="hidden" value="<%= roleIds %>" />
+			<input name="<portlet:namespace />roleIds" type="hidden" value="<%= HtmlUtil.escape(roleIds) %>" />
 			<input name="<portlet:namespace />roleIdsPos" type="hidden" value="<%= roleIdsPos %>" />
 			<input name="<portlet:namespace />roleIdsPosValue" type="hidden" value="" />
 			<input name="<portlet:namespace />roleIdActionIds" type="hidden" value="" />

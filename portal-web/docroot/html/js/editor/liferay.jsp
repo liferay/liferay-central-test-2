@@ -25,6 +25,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jstl/core_rt" %>
 
 <%@ page import="com.liferay.portal.kernel.servlet.BrowserSniffer" %>
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.StringUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
@@ -500,7 +501,7 @@ boolean pasteText = ParamUtil.get(request, "paste_text", false);
 			%>
 
 				if (getHTML().replace(/\s/g,"") != originalText.replace(/\s/g,"")) {
-					parent.<%= onChangeMethod %>(getText());
+					parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
 				}
 
 			<%

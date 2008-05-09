@@ -22,6 +22,7 @@
  */
 %>
 
+<%@ page import="com.liferay.portal.kernel.util.HtmlUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.HttpUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.ParamUtil" %>
 <%@ page import="com.liferay.portal.kernel.util.Validator" %>
@@ -72,7 +73,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 			else {
 				var textArea = document.getElementById("FCKeditor1");
 
-				textArea.value = parent.<%= initMethod %>();
+				textArea.value = parent.<%= HtmlUtil.escape(initMethod) %>();
 
 				var fckEditor = new FCKeditor("FCKeditor1");
 
@@ -81,7 +82,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 				fckEditor.BasePath = "fckeditor/";
 				fckEditor.Width = "100%";
 				fckEditor.Height = "100%";
-				fckEditor.ToolbarSet = '<%= toolbarSet %>';
+				fckEditor.ToolbarSet = '<%= HtmlUtil.escape(toolbarSet) %>';
 
 				fckEditor.ReplaceTextarea();
 
@@ -127,7 +128,7 @@ String cssClasses = ParamUtil.getString(request, "cssClasses");
 				var dirty = FCKeditorAPI.GetInstance("FCKeditor1").IsDirty();
 
 				if (dirty) {
-					parent.<%= onChangeMethod %>(getText());
+					parent.<%= HtmlUtil.escape(onChangeMethod) %>(getText());
 
 					FCKeditorAPI.GetInstance("FCKeditor1").ResetIsDirty();
 				}

@@ -55,7 +55,7 @@ if (percent.floatValue() >= 100) {
 <body>
 
 <script type="text/javascript">
-	parent.<%= uploadProgressId %>.updateBar(<%= percent.intValue() %>, "<%= fileName %>");
+	parent.<%= HtmlUtil.escape(uploadProgressId) %>.updateBar(<%= percent.intValue() %>, "<%= fileName %>");
 
 	<c:if test="<%= percent.intValue() < 100 %>">
 		setTimeout("window.location.reload();", 1000);

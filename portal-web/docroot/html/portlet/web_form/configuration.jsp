@@ -42,7 +42,7 @@ String databaseTableName = prefs.getValue("databaseTableName", StringPool.BLANK)
 
 boolean fieldsEditingBlocked = false;
 
-System.out.println("databaseTableName: " + prefs.getMap()); 
+System.out.println("databaseTableName: " + prefs.getMap());
 System.out.println("WebFormUtil.getNumberOfRows(databaseTableName): " +
 	ExpandoRowLocalServiceUtil.getRowsCount(
 		WebFormUtil.class.getName(), databaseTableName)
@@ -150,16 +150,16 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 			<portlet:param name="struts_action" value="/web_form/export_data" />
 		</liferay-portlet:renderURL>
 
-		<input type="button" value="<liferay-ui:message key="export-data" />" onclick="location.href = '<%= exportURL %>'"/>
+		<input type="button" value="<liferay-ui:message key="export-data" />" onclick="location.href = '<%= exportURL %>'" />
 
 		<liferay-portlet:actionURL portletName="<%= portletResource %>" var="deleteURL">
 			<portlet:param name="struts_action" value="/web_form/delete_data" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</liferay-portlet:actionURL>
 
-		<input type="button" value="<liferay-ui:message key="delete-data" />" onclick="submitForm(document.<portlet:namespace/>fm, '<%= deleteURL %>');"/>
+		<input type="button" value="<liferay-ui:message key="delete-data" />" onclick="submitForm(document.<portlet:namespace/>fm, '<%= deleteURL %>');" />
 
-		<br/><br/>
+		<br /><br />
 	</c:if>
 
 	<input type="hidden" name="<portlet:namespace/>updateFields" value="true" />
@@ -199,7 +199,7 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 						<input <c:if test="<%= fieldOptional %>">checked</c:if> type="checkbox" name="<portlet:namespace/>fieldOptional<%= i %>" /> <liferay-ui:message key="optional" />
 					</c:when>
 					<c:otherwise>
-						<label><liferay-ui:message key="optional"/></label>
+						<label><liferay-ui:message key="optional" /></label>
 						<b><%= LanguageUtil.get(pageContext, fieldOptional?"yes":"no") %></b>
 					</c:otherwise>
 				</c:choose>

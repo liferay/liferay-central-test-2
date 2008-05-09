@@ -285,7 +285,7 @@ String smallImageURL = BeanParamUtil.getString(article, request, "smallImageURL"
 				var xsd = "<root";
 
 				if (stillLocalized) {
-					xsd += " default-locale='<%= defaultLanguageId %>'";
+					xsd += " default-locale='<%= HtmlUtil.escape(defaultLanguageId) %>'";
 				}
 
 				var availableLocales = document.<portlet:namespace />fm1.<portlet:namespace />available_locales;
@@ -708,7 +708,7 @@ String[] availableLocales = null;
 									else {
 									%>
 
-										<option value="<%= defaultLanguageId %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
+										<option value="<%= HtmlUtil.escape(defaultLanguageId) %>"><%= defaultLocale.getDisplayName(defaultLocale) %></option>
 
 									<%
 									}
@@ -744,7 +744,7 @@ String[] availableLocales = null;
 				if (contentDoc != null) {
 				%>
 
-					<input name="<portlet:namespace />available_locales" type="hidden" value="<%= defaultLanguageId %>" />
+					<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escape(defaultLanguageId) %>" />
 
 				<%
 					boolean languageFound = false;
@@ -796,7 +796,7 @@ String[] availableLocales = null;
 					contentDoc = docFactory.createDocument(docFactory.createElement("root"));
 				%>
 
-					<input name="<portlet:namespace />available_locales" type="hidden" value="<%= defaultLanguageId %>" />
+					<input name="<portlet:namespace />available_locales" type="hidden" value="<%= HtmlUtil.escape(defaultLanguageId) %>" />
 
 				<%
 				}

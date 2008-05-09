@@ -34,7 +34,7 @@ int top = ParamUtil.getInteger(request, "top");
 int left = ParamUtil.getInteger(request, "left");
 %>
 
-<div class="chat-box" id="msg-chat-box_<%= toId.replace('.', '_') %>" style="border: 1px solid #000000; padding: 10px; z-index: <%= zIndex %>; left: <%= left %>px; position: absolute; top: <%= top %>px; background-color: #ffffff; text-align: left" onClick="this.style.zIndex = Liferay.zIndex.CHAT_BOX + Messaging.zIndex++">
+<div class="chat-box" id="msg-chat-box_<%= HtmlUtil.escape(toId.replace('.', '_')) %>" style="border: 1px solid #000000; padding: 10px; z-index: <%= zIndex %>; left: <%= left %>px; position: absolute; top: <%= top %>px; background-color: #ffffff; text-align: left" onClick="this.style.zIndex = Liferay.zIndex.CHAT_BOX + Messaging.zIndex++">
 	<div class="chat-box-width" style="WIDTH: 250px">
 		<div class="chat-title" style="cursor: move">
 			<table cellpadding="0" cellspacing="0" border="0" width="100%">
@@ -43,13 +43,13 @@ int left = ParamUtil.getInteger(request, "left");
 					Chat with <span class="to-name" style="font-weight: bold"><%= toName %></span>
 				</td>
 				<td align="right">
-					<a style="cursor: pointer" href="javascript: Messaging.removeChat('msg-chat-box_<%= toId.replace('.', '_') %>')"><img src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
+					<a style="cursor: pointer" href="javascript: Messaging.removeChat('msg-chat-box_<%= HtmlUtil.escape(toId.replace('.', '_')) %>')"><img src="<%= themeDisplay.getPathThemeImages() %>/portlet/close.png" /></a>
 				</td>
 			</tr>
 			</table>
 		</div>
 
-		<input class="to-input-id" type="hidden" value="<%= toId %>" />
+		<input class="to-input-id" type="hidden" value="<%= HtmlUtil.escape(toId) %>" />
 
 		<div class="chat-area" style="border: #d0d0d0 1px solid; padding: 5px; overflow: auto; margin: 5px 0 5px 0; height: 100px">
 			<%= messages %>
@@ -58,7 +58,7 @@ int left = ParamUtil.getInteger(request, "left");
 		<input class="type-area" style="width: 100%" tabIndex="1" onKeyPress="Messaging.sendChat(this, event)" />
 
 		<c:if test="<%= addUser %>">
-			<img src="<%= themeDisplay.getPathThemeImages() %>/chat/add_user.png" style="cursor: pointer; margin-top: 2px" onclick="MessagingRoster.addEntry('<%= toId %>'); Element.remove(this)" />
+			<img src="<%= themeDisplay.getPathThemeImages() %>/chat/add_user.png" style="cursor: pointer; margin-top: 2px" onclick="MessagingRoster.addEntry('<%= HtmlUtil.escape(toId) %>'); Element.remove(this)" />
 		</c:if>
 	</div>
 </div>

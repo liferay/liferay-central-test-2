@@ -38,7 +38,7 @@ userTracker = userTracker.toEscapedModel();
 
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/enterprise_admin/edit_session" /></portlet:actionURL>" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
-<input name="<portlet:namespace />sessionId" type="hidden" value="<%= sessionId %>" />
+<input name="<portlet:namespace />sessionId" type="hidden" value="<%= HtmlUtil.escape(sessionId) %>" />
 
 <liferay-util:include page="/html/portlet/enterprise_admin/tabs1.jsp">
 	<liferay-util:param name="tabs1" value="monitoring" />
@@ -72,7 +72,7 @@ userTracker = userTracker.toEscapedModel();
 				<liferay-ui:message key="session-id" />:
 			</td>
 			<td>
-				<%= sessionId %>
+				<%= HtmlUtil.escape(sessionId) %>
 			</td>
 		</tr>
 		<tr>
