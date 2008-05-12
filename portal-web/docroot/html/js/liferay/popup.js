@@ -155,7 +155,7 @@
 				else {
 					jPopup.before("<div class='alert-background' style='position:absolute; top:0; left:0'></div>");
 					jBg = jAlertMsgs.find(".alert-background");
-					jBg.css({display: "none", opacity: 0});
+					jBg.css({display: "block", opacity: 0});
 				}
 			}
 
