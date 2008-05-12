@@ -24,7 +24,14 @@ package com.liferay.util;
 
 import com.liferay.portal.kernel.util.StringPool;
 
+import com.metaparadigm.jsonrpc.JSONSerializer;
+import com.metaparadigm.jsonrpc.MarshallException;
+import com.metaparadigm.jsonrpc.UnmarshallException;
+
 import java.util.Date;
+
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 import org.json.JSONObject;
 
@@ -35,6 +42,10 @@ import org.json.JSONObject;
  *
  */
 public class JSONUtil {
+
+	public static Object deserialize(String json) throws UnmarshallException {
+		return _instance._deserialize(json);
+	}
 
 	public static void put(JSONObject jsonObj, String key, boolean value) {
 		jsonObj.put(key, value);
@@ -78,5 +89,34 @@ public class JSONUtil {
 			jsonObj.put(key, value.toString());
 		}
 	}
+
+	public static String serialize(Object obj) throws MarshallException {
+		return _instance._serialize(obj);
+	}
+
+	private JSONUtil() {
+		_serializer = new JSONSerializer();
+
+		 try {
+			 _serializer.registerDefaultSerializers();
+		 }
+		 catch (Exception e) {
+			 _log.error(e, e);
+		 }
+	}
+
+	public Object _deserialize(String json) throws UnmarshallException {
+		return _serializer.fromJSON(json);
+	}
+
+	private String _serialize(Object obj) throws MarshallException {
+		return _serializer.toJSON(obj).toString();
+	}
+
+	private static Log _log = LogFactory.getLog(JSONUtil.class);
+
+	private static JSONUtil _instance = new JSONUtil();
+
+	private JSONSerializer _serializer;
 
 }
