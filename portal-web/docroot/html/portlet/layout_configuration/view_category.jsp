@@ -134,7 +134,76 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 
 				<c:choose>
 					<c:when test="<%= layout.getType().equals(LayoutConstants.TYPE_PORTLET) %>">
-						<div class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"" id="<%= divId.toString().replace(':', '-') %>" instanceable="<%= portletInstanceable %>" plid="<%= plid %>" portletId="<%= portlet.getPortletId() %>">
+
+						<%
+						Set<String> headerPortalCssPaths = new LinkedHashSet<String>();
+
+						List<String> headerPortalCssList = portlet.getHeaderPortalCss();
+
+						for (String headerPortalCss : headerPortalCssList) {
+							String headerPortalCssPath = request.getContextPath() + headerPortalCss;
+
+							if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
+								headerPortalCssPaths.add(headerPortalCssPath);
+							}
+						}
+
+						Set<String> headerPortletCssPaths = new LinkedHashSet<String>();
+
+						List<String> headerPortletCssList = portlet.getHeaderPortletCss();
+
+						for (String headerPortletCss : headerPortletCssList) {
+							String headerPortletCssPath = portlet.getContextPath() + headerPortletCss;
+
+							if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
+								headerPortletCssPaths.add(headerPortletCssPath);
+
+								if (headerPortletCssPath.endsWith(".jsp")) {
+									headerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + theme.getTimestamp();
+								}
+							}
+						}
+
+						Set<String> footerPortalCssPaths = new LinkedHashSet<String>();
+
+						List<String> footerPortalCssList = portlet.getFooterPortalCss();
+
+						for (String footerPortalCss : footerPortalCssList) {
+							String footerPortalCssPath = request.getContextPath() + footerPortalCss;
+
+							if (!footerPortalCssPaths.contains(footerPortalCssPath) && !themeDisplay.isIncludedJs(footerPortalCssPath)) {
+								footerPortalCssPaths.add(footerPortalCssPath);
+							}
+						}
+
+						Set<String> footerPortletCssPaths = new LinkedHashSet<String>();
+
+						List<String> footerPortletCssList = portlet.getFooterPortletCss();
+
+						for (String footerPortletCss : footerPortletCssList) {
+							String footerPortletCssPath = portlet.getContextPath() + footerPortletCss;
+
+							if (!footerPortletCssPaths.contains(footerPortletCssPath)) {
+								footerPortletCssPaths.add(footerPortletCssPath);
+
+								if (footerPortletCssPath.endsWith(".jsp")) {
+									footerPortletCssPath += "?themeId=" + themeDisplay.getTheme().getThemeId() + "&amp;colorSchemeId=" + themeDisplay.getColorScheme().getColorSchemeId() + "&amp;t=" + theme.getTimestamp();
+								}
+							}
+						}
+						%>
+
+						<div
+							class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"
+							footerPortalCssPaths="<%= footerPortalCssPaths %>"
+							footerPortletCssPaths="<%= footerPortletCssPaths %>"
+							headerPortalCssPaths="<%= headerPortalCssPaths %>"
+							headerPortletCssPaths="<%= headerPortletCssPaths %>"
+							id="<%= divId.toString().replace(':', '-') %>"
+							instanceable="<%= portletInstanceable %>"
+							plid="<%= plid %>"
+							portletId="<%= portlet.getPortletId() %>"
+						>
 							<p><%= PortalUtil.getPortletTitle(portlet, application, locale) %> <a href="javascript: ;"><liferay-ui:message key="add" /></a></p>
 						</div>
 					</c:when>
