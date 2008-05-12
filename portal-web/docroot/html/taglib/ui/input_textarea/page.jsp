@@ -32,4 +32,4 @@ boolean disabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-u
 String value = ParamUtil.getString(request, param, defaultValue);
 %>
 
-<textarea <%= disabled ? "disabled" : "" %> id="<%= namespace %>aboutMe" name="<%= namespace %>aboutMe" style="height: 105px; width: 500px;" wrap="soft" onKeyDown="Liferay.Util.disableEsc();" onKeyPress="Liferay.Util.checkMaxLength(this, 4000);"><%= value %></textarea>
+<textarea class="lfr-textarea" <%= disabled ? "disabled" : "" %> id="<%= namespace %><%= param %>" name="<%= namespace %><%= param %>" wrap="soft" onKeyDown="Liferay.Util.disableEsc();" onKeyPress="Liferay.Util.checkMaxLength(this, 4000);"><%= value %></textarea>
