@@ -159,36 +159,6 @@ function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
 	}
 }
 
-function getRefreshPortletList() {
-
-	<%
-	List allPortlets = PortletLocalServiceUtil.getPortlets(company.getCompanyId(), false, false);
-
-	List nonAjaxPortlets = new ArrayList();
-
-	for (int i = 0; i < allPortlets.size(); i++) {
-		Portlet portlet = (Portlet)allPortlets.get(i);
-
-		if (!portlet.isAjaxable()) {
-			nonAjaxPortlets.add(portlet.getPortletId());
-		}
-	}
-
-	StringMaker portletList = new StringMaker();
-
-	for (int i = 0; i < nonAjaxPortlets.size(); i++) {
-		portletList.append("_");
-		portletList.append(nonAjaxPortlets.get(i));
-		portletList.append(":true");
-		portletList.append((i < nonAjaxPortlets.size() - 1) ? "," : "");
-	}
-	%>
-
-	var refreshPortletList = { <%= portletList.toString() %> };
-
-	return refreshPortletList;
-}
-
 function minimizePortlet(plid, portletId, restore, doAsUserId) {
 	if (themeDisplay.layoutMaximized) {
 		location.href = "<%= themeDisplay.getPathMain() %>/portal/update_layout?p_l_id=" + plid + "&p_p_id=" + portletId + "&p_p_restore=" + restore + "&doAsUserId=" + doAsUserId + "&<%= Constants.CMD %>=minimize&referer=" + encodeURIComponent("<%= themeDisplay.getPathMain() %>/portal/layout?p_l_id=" + plid + "&doAsUserId=" + doAsUserId) + "&refresh=1";
