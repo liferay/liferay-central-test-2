@@ -54,8 +54,6 @@ public class EnterpriseAdminTests extends BaseTests {
 		addTestSuite(EditSettingsTest.class);
 		addTestSuite(ReserveTest.class);
 		addTestSuite(PluginsTest.class);
-
-
 	}
 
 }
