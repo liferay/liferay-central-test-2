@@ -114,11 +114,23 @@ public class PortletPreferencesFactoryUtil {
 			req, portletId, defaultPreferences);
 	}
 
+	public static PortletPreferences getPortletSetup(ActionRequest req)
+		throws PortalException, SystemException {
+
+		return getPortletPreferencesFactory().getPortletSetup(req);
+	}
+
 	public static PortletPreferences getPortletSetup(
 			ActionRequest req, String portletId)
 		throws PortalException, SystemException {
 
 		return getPortletPreferencesFactory().getPortletSetup(req, portletId);
+	}
+
+	public static PortletPreferences getPortletSetup(RenderRequest req)
+		throws PortalException, SystemException {
+
+		return getPortletPreferencesFactory().getPortletSetup(req);
 	}
 
 	public static PortletPreferences getPortletSetup(

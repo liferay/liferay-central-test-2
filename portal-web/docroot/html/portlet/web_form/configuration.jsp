@@ -1,4 +1,3 @@
-<%@ page import="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" %>
 <%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
@@ -32,23 +31,21 @@ String title = PrefsParamUtil.getString(prefs, request, "title");
 String description = PrefsParamUtil.getString(prefs, request, "description");
 boolean requireCaptcha = PrefsParamUtil.getBoolean(prefs, request, "requireCaptcha");
 String successURL = PrefsParamUtil.getString(prefs, request, "successURL");
+
 boolean sendAsEmail = PrefsParamUtil.getBoolean(prefs, request, "sendAsEmail", true);
 String subject = PrefsParamUtil.getString(prefs, request, "subject");
 String emailAddress = PrefsParamUtil.getString(prefs, request, "emailAddress");
+
 boolean saveToDatabase = PrefsParamUtil.getBoolean(prefs, request, "saveToDatabase");
-boolean saveToFile = PrefsParamUtil.getBoolean(prefs, request, "saveToFile");
-String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 String databaseTableName = prefs.getValue("databaseTableName", StringPool.BLANK);
 
-boolean fieldsEditingBlocked = false;
+boolean saveToFile = PrefsParamUtil.getBoolean(prefs, request, "saveToFile");
+String fileName = PrefsParamUtil.getString(prefs, request, "fileName");
 
-System.out.println("databaseTableName: " + prefs.getMap());
-System.out.println("WebFormUtil.getNumberOfRows(databaseTableName): " +
-	ExpandoRowLocalServiceUtil.getRowsCount(
-		WebFormUtil.class.getName(), databaseTableName)
-);
-if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
-	fieldsEditingBlocked = true;
+boolean fieldsEditingDisabled = false;
+
+if (WebFormUtil.getTableRowsCount(databaseTableName) > 0) {
+	fieldsEditingDisabled = true;
 }
 %>
 
@@ -134,25 +131,23 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 			<input class="lfr-input-text" id="<portlet:namespace />filename" name="<portlet:namespace />fileName" type="text" value="<%= fileName %>" />
 		</div>
 	</fieldset>
-
 </fieldset>
 
 <fieldset class="block-labels" id="<portlet:namespace/>webFields">
 	<legend><liferay-ui:message key="form-fields" /></legend>
 
-	<c:if test="<%= fieldsEditingBlocked %>">
-
+	<c:if test="<%= fieldsEditingDisabled %>">
 		<div class="portlet-msg-alert">
 			<liferay-ui:message key="there-is-existing-form-data-please-export-and-delete-it-before-making-changes-to-the-fields" />
 		</div>
 
-		<liferay-portlet:renderURL portletName="<%= portletResource %>" var="exportURL" windowState="<%= LiferayWindowState.EXCLUSIVE.toString() %>">
+		<liferay-portlet:actionURL var="exportURL" portletName="<%= portletResource %>">
 			<portlet:param name="struts_action" value="/web_form/export_data" />
-		</liferay-portlet:renderURL>
+		</liferay-portlet:actionURL>
 
-		<input type="button" value="<liferay-ui:message key="export-data" />" onclick="location.href = '<%= exportURL %>'" />
+		<input type="button" value="<liferay-ui:message key="export-data" />" onclick="submitForm(document.hrefFm, '<%= exportURL %>');" />
 
-		<liferay-portlet:actionURL portletName="<%= portletResource %>" var="deleteURL">
+		<liferay-portlet:actionURL var="deleteURL" portletName="<%= portletResource %>">
 			<portlet:param name="struts_action" value="/web_form/delete_data" />
 			<portlet:param name="redirect" value="<%= currentURL %>" />
 		</liferay-portlet:actionURL>
@@ -162,7 +157,7 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 		<br /><br />
 	</c:if>
 
-	<input type="hidden" name="<portlet:namespace/>updateFields" value="true" />
+	<input name="<portlet:namespace/>updateFields" type="hidden" value="true" />
 
 	<%
 	int i = 1;
@@ -182,8 +177,8 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 				<label for="<portlet:namespace/>fieldLabel<%= i %>"><liferay-ui:message key="name" /></label>
 
 				<c:choose>
-					<c:when test="<%= !fieldsEditingBlocked %>">
-						<input class="<portlet:namespace/>input-field" id="<portlet:namespace/>fieldLabel<%= i %>" name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" />
+					<c:when test="<%= !fieldsEditingDisabled %>">
+						<input class="lfr-input-text" id="<portlet:namespace/>fieldLabel<%= i %>" name="<portlet:namespace/>fieldLabel<%= i %>" size="50" type="text" value="<%= fieldLabel %>" />
 					</c:when>
 					<c:otherwise>
 						<b><%= fieldLabel %></b>
@@ -191,16 +186,17 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 				</c:choose>
 
 				<br />
+
 				<c:choose>
 					<c:when test='<%= fieldType.equals("paragraph") %>'>
-						<input type="hidden" name="<portlet:namespace/>fieldOptional<%= i %>" value="on" />
+						<input name="<portlet:namespace/>fieldOptional<%= i %>" type="hidden" value="on" />
 					</c:when>
-					<c:when test="<%= !fieldsEditingBlocked %>">
+					<c:when test="<%= !fieldsEditingDisabled %>">
 						<input <c:if test="<%= fieldOptional %>">checked</c:if> type="checkbox" name="<portlet:namespace/>fieldOptional<%= i %>" /> <liferay-ui:message key="optional" />
 					</c:when>
 					<c:otherwise>
 						<label><liferay-ui:message key="optional" /></label>
-						<b><%= LanguageUtil.get(pageContext, fieldOptional?"yes":"no") %></b>
+						<b><%= LanguageUtil.get(pageContext, fieldOptional ? "yes" : "no") %></b>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -209,8 +205,8 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 				<label for="<portlet:namespace/>fieldType<%= i %>"><liferay-ui:message key="type" /></label>
 
 				<c:choose>
-					<c:when test="<%= !fieldsEditingBlocked %>">
-						<select class="<portlet:namespace/>select-field" id="<portlet:namespace/>fieldType<%= i %>" name="<portlet:namespace/>fieldType<%= i %>">
+					<c:when test="<%= !fieldsEditingDisabled %>">
+						<select id="<portlet:namespace/>fieldType<%= i %>" name="<portlet:namespace/>fieldType<%= i %>">
 							<option <%= (fieldType.equals("text")) ? "selected" : "" %> value="text"><liferay-ui:message key="text" /></option>
 							<option <%= (fieldType.equals("textarea")) ? "selected" : "" %> value="textarea"><liferay-ui:message key="text-box" /></option>
 							<option <%= (fieldType.equals("options")) ? "selected" : "" %> value="options"><liferay-ui:message key="options" /></option>
@@ -229,10 +225,10 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 				<label for="<portlet:namespace/>fieldOptions<%= i %>"><liferay-ui:message key="options" /></label>
 
 				<c:choose>
-					<c:when test="<%= !fieldsEditingBlocked %>">
-						<span>(<liferay-ui:message key="add-options-separated-by-commas" />)</span>
+					<c:when test="<%= !fieldsEditingDisabled %>">
+						<span>(<liferay-ui:message key="add-options-separated-by-commas" />)</span><br />
 
-						<textarea class="<portlet:namespace/>input-field" cols="50" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" rows="1" style="height: auto; width: auto;"><%= fieldOptions %></textarea>
+						<input class="lfr-input-text" id="<portlet:namespace/>fieldOptions<%= i %>" name="<portlet:namespace/>fieldOptions<%= i %>" value="<%= fieldOptions %>" />
 					</c:when>
 					<c:otherwise>
 						<b><%= fieldOptions %></b>
@@ -256,9 +252,9 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 <br />
 
 <div class="button-holder">
-	<input type="submit" id="<portlet:namespace/>save" name="save" value="<liferay-ui:message key="save" />" />
+	<input type="submit" value="<liferay-ui:message key="save" />" />
 
-	<input type="button" id="<portlet:namespace/>cancel" name="cancel" value="<liferay-ui:message key="cancel" />" onclick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
+	<input type="button" value="<liferay-ui:message key="cancel" />" onclick="location.href = '<%= HtmlUtil.escape(redirect) %>';" />
 </div>
 
 </form>
@@ -343,8 +339,11 @@ if (WebFormUtil.getNumberOfRows(databaseTableName) > 0) {
 							function() {
 								var input = jQuery(this);
 								var inputAttr = input.attr('name');
+
 								inputAttr = inputAttr.replace(re, numField);
+
 								this.value = '';
+
 								input.attr(
 									{
 										id: inputAttr,

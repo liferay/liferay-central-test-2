@@ -293,11 +293,29 @@ public class PortletPreferencesFactoryImpl
 		return getPortletSetup(layout, portletId, defaultPreferences);
 	}
 
+	public PortletPreferences getPortletSetup(ActionRequest req)
+		throws PortalException, SystemException {
+
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		String portletId = PortalUtil.getPortletId(req);
+
+		return getPortletSetup(httpReq, portletId);
+	}
+
 	public PortletPreferences getPortletSetup(
 			ActionRequest req, String portletId)
 		throws PortalException, SystemException {
 
 		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+
+		return getPortletSetup(httpReq, portletId);
+	}
+
+	public PortletPreferences getPortletSetup(RenderRequest req)
+		throws PortalException, SystemException {
+
+		HttpServletRequest httpReq = PortalUtil.getHttpServletRequest(req);
+		String portletId = PortalUtil.getPortletId(req);
 
 		return getPortletSetup(httpReq, portletId);
 	}

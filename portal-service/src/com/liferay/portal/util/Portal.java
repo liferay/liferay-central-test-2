@@ -250,6 +250,12 @@ public interface Portal {
 
 	public long getPortletGroupId(RenderRequest req);
 
+	public String getPortletId(HttpServletRequest req);
+
+	public String getPortletId(ActionRequest req);
+
+	public String getPortletId(RenderRequest req);
+
 	public String getPortletNamespace(String portletId);
 
 	public String getPortletTitle(

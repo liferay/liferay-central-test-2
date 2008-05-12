@@ -26,8 +26,8 @@ import com.liferay.portal.kernel.language.LanguageUtil;
 import com.liferay.portal.model.LayoutTypePortlet;
 import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletConfigImpl;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.RenderRequest;
@@ -56,9 +56,7 @@ public class SearchAction extends PortletAction {
 		LayoutTypePortlet layoutTypePortlet =
 			themeDisplay.getLayoutTypePortlet();
 
-		PortletConfigImpl configImpl = (PortletConfigImpl)config;
-
-		String portletId = configImpl.getPortletId();
+		String portletId = PortalUtil.getPortletId(req);
 
 		if (!layoutTypePortlet.hasPortletId(portletId)) {
 			res.setTitle(

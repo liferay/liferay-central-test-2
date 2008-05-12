@@ -22,6 +22,7 @@
 
 package com.liferay.portlet.webform.action;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.mail.service.MailServiceUtil;
 import com.liferay.portal.captcha.CaptchaTextException;
 import com.liferay.portal.captcha.CaptchaUtil;
@@ -121,7 +122,8 @@ public class ViewAction extends PortletAction {
 			}
 
 			if (saveToDatabase) {
-				databaseSuccess = saveDatabase(fieldValues, prefs, databaseTableName);
+				databaseSuccess = saveDatabase(
+					fieldValues, prefs, databaseTableName);
 			}
 
 			if (saveToFile) {
@@ -178,9 +180,11 @@ public class ViewAction extends PortletAction {
 
 	private boolean saveDatabase(
 			List<String> fieldValues, PortletPreferences prefs,
-			String databaseTableName) {
+			String databaseTableName)
+		throws Exception {
 
-		long rowClassPK = System.currentTimeMillis();
+		long classPK = CounterLocalServiceUtil.increment(
+			WebFormUtil.class.getName());
 
 		Iterator<String> itr = fieldValues.iterator();
 
@@ -194,7 +198,7 @@ public class ViewAction extends PortletAction {
 				if (Validator.isNotNull(fieldLabel)) {
 					ExpandoValueLocalServiceUtil.addValue(
 						WebFormUtil.class.getName(), databaseTableName,
-						fieldLabel, rowClassPK, fieldValue);
+						fieldLabel, classPK, fieldValue);
 				}
 			}
 
@@ -240,7 +244,7 @@ public class ViewAction extends PortletAction {
 			return true;
 		}
 		catch (Exception e) {
-			_log.error("The web form email could not be saved", e);
+			_log.error("The web form data could not be saved to a file", e);
 
 			return false;
 		}

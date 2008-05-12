@@ -24,6 +24,7 @@
 
 <%@ include file="/html/portlet/init.jsp" %>
 
+<%@ page import="com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.webform.util.WebFormUtil" %>
 
 <%

@@ -75,8 +75,14 @@ public interface PortletPreferencesFactory {
 			HttpServletRequest req, String portletId, String defaultPreferences)
 		throws PortalException, SystemException;
 
+	public PortletPreferences getPortletSetup(ActionRequest req)
+		throws PortalException, SystemException;
+
 	public PortletPreferences getPortletSetup(
 			ActionRequest req, String portletId)
+		throws PortalException, SystemException;
+
+	public PortletPreferences getPortletSetup(RenderRequest req)
 		throws PortalException, SystemException;
 
 	public PortletPreferences getPortletSetup(

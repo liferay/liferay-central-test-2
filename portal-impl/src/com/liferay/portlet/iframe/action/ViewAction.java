@@ -34,7 +34,6 @@ import com.liferay.portal.struts.PortletAction;
 import com.liferay.portal.theme.ThemeDisplay;
 import com.liferay.portal.util.PortalUtil;
 import com.liferay.portal.util.WebKeys;
-import com.liferay.portlet.PortletConfigImpl;
 
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
@@ -58,7 +57,7 @@ public class ViewAction extends PortletAction {
 			RenderRequest req, RenderResponse res)
 		throws Exception {
 
-		String src = transformSrc(config, req, res);
+		String src = transformSrc(req, res);
 
 		if (Validator.isNull(src)) {
 			return mapping.findForward("/portal/portlet_not_setup");
@@ -105,8 +104,7 @@ public class ViewAction extends PortletAction {
 		return password;
 	}
 
-	protected String transformSrc(
-			PortletConfig config, RenderRequest req, RenderResponse res)
+	protected String transformSrc(RenderRequest req, RenderResponse res)
 		throws PortalException, SystemException {
 
 		PortletPreferences prefs = req.getPreferences();
@@ -134,9 +132,7 @@ public class ViewAction extends PortletAction {
 				ThemeDisplay themeDisplay =
 					(ThemeDisplay)req.getAttribute(WebKeys.THEME_DISPLAY);
 
-				PortletConfigImpl configImpl = (PortletConfigImpl)config;
-
-				String portletId = configImpl.getPortletId();
+				String portletId = PortalUtil.getPortletId(req);
 
 				Portlet portlet = PortletLocalServiceUtil.getPortletById(
 					themeDisplay.getCompanyId(), portletId);

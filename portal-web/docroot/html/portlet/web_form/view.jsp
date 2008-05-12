@@ -37,11 +37,11 @@ boolean requireCaptcha = GetterUtil.getBoolean(prefs.getValue("requireCaptcha", 
 
 	<p class="description"><%= HtmlUtil.escape(description) %></p>
 
-	<liferay-ui:success key="success" message="the-information-was-sent-successfully" />
+	<liferay-ui:success key="success" message="the-form-information-was-sent-successfully" />
 
 	<liferay-ui:error exception="<%= CaptchaTextException.class %>" message="text-verification-failed" />
 	<liferay-ui:error key="requiredFieldMissing" message="please-complete-all-fields" />
-	<liferay-ui:error key="error" message="the-form-information-was-not-sent-successfully" />
+	<liferay-ui:error key="error" message="an-error-occurred-while-sending-the-form-information" />
 
 	<%
 	int i = 1;

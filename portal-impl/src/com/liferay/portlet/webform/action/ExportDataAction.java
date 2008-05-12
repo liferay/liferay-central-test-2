@@ -22,28 +22,35 @@
 
 package com.liferay.portlet.webform.action;
 
+import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.portal.struts.ActionConstants;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.PortletConfigImpl;
+import com.liferay.portal.util.PortalUtil;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.model.ExpandoRow;
 import com.liferay.portlet.expando.service.ExpandoRowLocalServiceUtil;
 import com.liferay.portlet.expando.service.ExpandoValueLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
+import com.liferay.util.dao.hibernate.QueryUtil;
+import com.liferay.util.servlet.ServletResponseUtil;
 
-import java.io.OutputStream;
+import java.io.ByteArrayInputStream;
+import java.io.InputStream;
+
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.portlet.ActionRequest;
+import javax.portlet.ActionResponse;
 import javax.portlet.PortletConfig;
 import javax.portlet.PortletPreferences;
-import javax.portlet.RenderRequest;
-import javax.portlet.RenderResponse;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.apache.struts.action.ActionForm;
-import org.apache.struts.action.ActionForward;
 import org.apache.struts.action.ActionMapping;
 
 /**
@@ -53,82 +60,70 @@ import org.apache.struts.action.ActionMapping;
  *
  */
 public class ExportDataAction extends PortletAction {
-	
-	public ActionForward render(
+
+	public void processAction(
 			ActionMapping mapping, ActionForm form, PortletConfig config,
-			RenderRequest req, RenderResponse res)
+			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		PortletConfigImpl configImpl = (PortletConfigImpl)config;
-
-		String portletId = configImpl.getPortletId();
-
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(req);
 
-		String databaseTableName =
-			prefs.getValue("databaseTableName", StringPool.BLANK);
+		String databaseTableName = prefs.getValue(
+			"databaseTableName", StringPool.BLANK);
 		String title = prefs.getValue("title", "no-title");
 
-        StringMaker csvData = new StringMaker();
+        StringMaker sm = new StringMaker();
 
 		List<String> fieldLabels = new ArrayList<String>();
 
 		for (int i = 1; i <= WebFormUtil.MAX_FIELDS; i++) {
-            String fieldLabel =
-	            prefs.getValue("fieldLabel" + i, StringPool.BLANK);
+            String fieldLabel = prefs.getValue(
+				"fieldLabel" + i, StringPool.BLANK);
 
 			if (Validator.isNotNull(fieldLabel)) {
 				fieldLabels.add(fieldLabel);
 
-				csvData.append("\"");
-				csvData.append(fieldLabel.replaceAll("\"", "\\\""));
-				csvData.append("\";");
+				sm.append("\"");
+				sm.append(fieldLabel.replaceAll("\"", "\\\""));
+				sm.append("\";");
 			}
         }
-        
-        csvData.deleteCharAt(csvData.length() - 1);
-        csvData.append("\n");
+
+        sm.deleteCharAt(sm.length() - 1);
+        sm.append("\n");
 
 		if (Validator.isNotNull(databaseTableName)) {
 			List<ExpandoRow> rows = ExpandoRowLocalServiceUtil.getRows(
-				WebFormUtil.class.getName(), databaseTableName, -1, -1);
+				WebFormUtil.class.getName(), databaseTableName,
+				QueryUtil.ALL_POS, QueryUtil.ALL_POS);
 
-			for (ExpandoRow row: rows) {
-				for (String fieldName: fieldLabels) {
+			for (ExpandoRow row : rows) {
+				for (String fieldName : fieldLabels) {
 					String data = ExpandoValueLocalServiceUtil.getData(
 						WebFormUtil.class.getName(), databaseTableName,
-						fieldName, row.getClassPK(), "");
+						fieldName, row.getClassPK(), StringPool.BLANK);
 
 					data = data.replaceAll("\"", "\\\"");
 
-					csvData.append("\"");
-					csvData.append(data);
-					csvData.append("\";");
+					sm.append("\"");
+					sm.append(data);
+					sm.append("\";");
 				}
 
-				csvData.deleteCharAt(csvData.length() - 1);
-				csvData.append("\n");
+				sm.deleteCharAt(sm.length() - 1);
+				sm.append("\n");
 			}
 		}
-		
-		res.setContentType("application/text");
 
-		String fileName = title + "_form-data.csv";
+		HttpServletResponse httpRes = PortalUtil.getHttpServletResponse(res);
+		String fileName = title + ".csv";
+		InputStream is = new ByteArrayInputStream(sm.toString().getBytes());
+		String contentType = ContentTypes.APPLICATION_TEXT;
 
-		res.setProperty(
-			"Content-disposition", "attachment;filename=" + fileName);
+		ServletResponseUtil.sendFile(httpRes, fileName, is, contentType);
 
-		OutputStream out = res.getPortletOutputStream();
-
-		try {
-			out.write(csvData.toString().getBytes());
-		}
-		finally {
-			out.close();
-		}
-		
-		return null;
+		setForward(req, ActionConstants.COMMON_NULL);
 	}
-	
+
 }

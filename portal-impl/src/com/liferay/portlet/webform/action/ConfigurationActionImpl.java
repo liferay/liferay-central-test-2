@@ -25,8 +25,8 @@ package com.liferay.portlet.webform.action;
 import com.liferay.portal.kernel.portlet.ConfigurationAction;
 import com.liferay.portal.kernel.util.Constants;
 import com.liferay.portal.kernel.util.ParamUtil;
-import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.kernel.util.StringPool;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.model.ExpandoColumnConstants;
 import com.liferay.portlet.expando.model.ExpandoTable;
@@ -67,12 +67,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		String description = ParamUtil.getString(req, "description");
 		boolean requireCaptcha = ParamUtil.getBoolean(req, "requireCaptcha");
 		String successURL = ParamUtil.getString(req, "successURL");
+
 		boolean sendAsEmail = ParamUtil.getBoolean(req, "sendAsEmail");
 		String subject = ParamUtil.getString(req, "subject");
 		String emailAddress = ParamUtil.getString(req, "emailAddress");
+
 		boolean saveToDatabase = ParamUtil.getBoolean(req, "saveToDatabase");
+
 		boolean saveToFile = ParamUtil.getBoolean(req, "saveToFile");
 		String fileName = ParamUtil.getString(req, "fileName");
+
 		boolean updateFields = ParamUtil.getBoolean(req, "updateFields");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
@@ -104,8 +108,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		ExpandoTable expandoTable = null;
 
 		if (saveToDatabase) {
-			String databaseTableName =
-				prefs.getValue("databaseTableName", StringPool.BLANK);
+			String databaseTableName = prefs.getValue(
+				"databaseTableName", StringPool.BLANK);
 
 			if (Validator.isNull(databaseTableName)) {
 				databaseTableName = portletResource + title;
@@ -113,7 +117,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				prefs.setValue("databaseTableName", databaseTableName);
 			}
 
-			expandoTable = WebFormUtil.dropAndCreateTable(databaseTableName);
+			expandoTable = WebFormUtil.addTable(databaseTableName);
 		}
 
 		if (saveToFile) {
@@ -153,8 +157,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 
 			String fieldLabel = ParamUtil.getString(req, "fieldLabel" + i);
 			String fieldType = ParamUtil.getString(req, "fieldType" + i);
-			boolean fieldOptional =
-				ParamUtil.getBoolean(req, "fieldOptional" + i);
+			boolean fieldOptional = ParamUtil.getBoolean(
+				req, "fieldOptional" + i);
 			String fieldOptions = ParamUtil.getString(req, "fieldOptions" + i);
 
 			while ((i == 1) || (fieldLabel.trim().length() > 0)) {
@@ -193,7 +197,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				fieldLabel = prefs.getValue("fieldLabel" + i, StringPool.BLANK);
 			}
 		}
-		
+
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
 

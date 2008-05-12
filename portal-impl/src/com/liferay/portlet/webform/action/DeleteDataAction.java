@@ -25,15 +25,14 @@ package com.liferay.portlet.webform.action;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.struts.PortletAction;
-import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesFactoryUtil;
 import com.liferay.portlet.expando.service.ExpandoTableLocalServiceUtil;
 import com.liferay.portlet.webform.util.WebFormUtil;
 
-import javax.portlet.PortletConfig;
-import javax.portlet.PortletPreferences;
 import javax.portlet.ActionRequest;
 import javax.portlet.ActionResponse;
+import javax.portlet.PortletConfig;
+import javax.portlet.PortletPreferences;
 
 import org.apache.struts.action.ActionForm;
 import org.apache.struts.action.ActionMapping;
@@ -51,21 +50,17 @@ public class DeleteDataAction extends PortletAction {
 			ActionRequest req, ActionResponse res)
 		throws Exception {
 
-		PortletConfigImpl configImpl = (PortletConfigImpl)config;
-
-		String portletId = configImpl.getPortletId();
-
 		PortletPreferences prefs =
-			PortletPreferencesFactoryUtil.getPortletSetup(req, portletId);
+			PortletPreferencesFactoryUtil.getPortletSetup(req);
 
-        String databaseTableName = 
-	        prefs.getValue("databaseTableName", StringPool.BLANK);
+        String databaseTableName = prefs.getValue(
+			"databaseTableName", StringPool.BLANK);
 
 		if (Validator.isNotNull(databaseTableName)) {
 			ExpandoTableLocalServiceUtil.deleteTable(
 				WebFormUtil.class.getName(), databaseTableName);
 		}
-		
+
 		sendRedirect(req, res);
 	}
 

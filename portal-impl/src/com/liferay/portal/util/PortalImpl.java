@@ -80,6 +80,7 @@ import com.liferay.portlet.ActionResponseImpl;
 import com.liferay.portlet.PortletBag;
 import com.liferay.portlet.PortletBagPool;
 import com.liferay.portlet.PortletConfigFactory;
+import com.liferay.portlet.PortletConfigImpl;
 import com.liferay.portlet.PortletPreferencesImpl;
 import com.liferay.portlet.PortletPreferencesWrapper;
 import com.liferay.portlet.PortletRequestImpl;
@@ -1367,6 +1368,27 @@ public class PortalImpl implements Portal {
 
 	public long getPortletGroupId(RenderRequest req) {
 		return getPortletGroupId(getHttpServletRequest(req));
+	}
+
+	public String getPortletId(HttpServletRequest req) {
+		PortletConfigImpl configImpl = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		return configImpl.getPortletId();
+	}
+
+	public String getPortletId(ActionRequest req) {
+		PortletConfigImpl configImpl = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		return configImpl.getPortletId();
+	}
+
+	public String getPortletId(RenderRequest req) {
+		PortletConfigImpl configImpl = (PortletConfigImpl)req.getAttribute(
+			JavaConstants.JAVAX_PORTLET_CONFIG);
+
+		return configImpl.getPortletId();
 	}
 
 	public String getPortletNamespace(String portletId) {
