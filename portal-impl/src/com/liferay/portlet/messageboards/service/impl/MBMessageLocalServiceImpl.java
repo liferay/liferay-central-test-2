@@ -514,9 +514,11 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				receiverUserId = parentMessage.getUserId();
 			}
 
-			socialActivityLocalService.addActivity(
-				userId, category.getGroupId(), MBMessage.class.getName(),
-				messageId, activityType, StringPool.BLANK, receiverUserId);
+			if (!message.isAnonymous()) {
+				socialActivityLocalService.addActivity(
+					userId, category.getGroupId(), MBMessage.class.getName(),
+					messageId, activityType, StringPool.BLANK, receiverUserId);
+			}
 		}
 
 		logAddMessage(messageId, stopWatch, 9);
