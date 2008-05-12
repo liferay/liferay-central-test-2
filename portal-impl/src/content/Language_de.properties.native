@@ -2843,6 +2843,7 @@ subject-prefix=Betreff Präfix
 subject=Betreff
 submit=Abschicken
 subscribe-to-this-blog=Dieses Blog abonnieren
+subscribe-to-x's-activities=Subscribe to {0}'s activities.
 subscribe=Abonnieren
 subscription-required=Abonnement benötigt
 subscription=Subskription

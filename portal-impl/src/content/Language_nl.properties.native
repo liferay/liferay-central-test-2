@@ -2843,6 +2843,7 @@ subject-prefix=Onderworpen prefix
 subject=Onderwerp
 submit=invoeren
 subscribe-to-this-blog=Inschrijven op deze blog.
+subscribe-to-x's-activities=Subscribe to {0}'s activities.
 subscribe=registreer
 subscription-required=Registratie verplicht
 subscription=Abonnement
