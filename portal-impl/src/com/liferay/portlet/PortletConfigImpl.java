@@ -25,6 +25,7 @@ package com.liferay.portlet;
 import com.liferay.portal.kernel.util.JavaConstants;
 import com.liferay.portal.kernel.util.LocaleUtil;
 import com.liferay.portal.kernel.util.StringMaker;
+import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.model.Portlet;
 import com.liferay.portal.model.PortletApp;
 import com.liferay.portal.model.PortletConstants;
@@ -134,7 +135,7 @@ public class PortletConfigImpl implements PortletConfig {
 	public ResourceBundle getResourceBundle(Locale locale) {
 		String resourceBundleClassName = _portlet.getResourceBundle();
 
-		if (resourceBundleClassName == null) {
+		if (Validator.isNull(resourceBundleClassName)) {
 			String poolId = _portlet.getPortletId();
 
 			ResourceBundle bundle = _bundlePool.get(poolId);
