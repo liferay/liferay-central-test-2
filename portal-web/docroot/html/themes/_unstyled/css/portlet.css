@@ -32,6 +32,29 @@
 .portlet-icon-back {
 }
 
+/* ---------- Panel Page ---------- */
+
+.lfr-panel {
+}
+
+.lfr-panel .portlet, .lfr-panel .portlet-topper, .lfr-panel .portlet-content, .lfr-panel .portlet-title {
+}
+
+.lfr-panel .portlet-icons {
+}
+
+.lfr-panel .portlet-topper {
+}
+
+.lfr-panel .portlet-title {
+}
+
+.lfr-panel .portlet {
+}
+
+.lfr-panel .portlet-content {
+}
+
 /* ---------- Drag and drop ---------- */
 
 .portlet-dragging {

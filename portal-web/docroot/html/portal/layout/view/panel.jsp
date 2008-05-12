@@ -23,12 +23,12 @@
 %>
 <%@ include file="/html/portal/init.jsp" %>
 
-<table width="100%">
+<table class="lfr-panel <%= (!layoutTypePortlet.hasStateMax()) ? "panel-frontpage" : "panel-application" %>" width="100%">
 <tr>
-	<td class="panel-menu <%= (!layoutTypePortlet.hasStateMax()) ? "panel-menu-frontpage" : "panel-menu-application" %>" valign="top" width="200">
+	<td class="panel-menu" valign="top" width="200">
 		<liferay-portlet:runtime portletName="87" />
 	</td>
-	<td valign="top">
+	<td class="panel-content" valign="top">
 
 		<%
 		if (themeDisplay.isStateExclusive() || themeDisplay.isStatePopUp() || layoutTypePortlet.hasStateMax()) {
