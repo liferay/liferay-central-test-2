@@ -194,7 +194,7 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 						%>
 
 						<div
-							class="lfr-portlet-item<c:if test="<%= portletLocked %>"> lfr-portlet-used</c:if><c:if test="<%= portletInstanceable %>"> lfr-instanceable</c:if>"
+							class="lfr-portlet-item <c:if test="<%= portletLocked %>">lfr-portlet-used</c:if> <c:if test="<%= portletInstanceable %>">lfr-instanceable</c:if>"
 							footerPortalCssPaths="<%= footerPortalCssPaths %>"
 							footerPortletCssPaths="<%= footerPortletCssPaths %>"
 							headerPortalCssPaths="<%= headerPortalCssPaths %>"
