@@ -505,7 +505,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 
 		// Social
 
-		if (!message.isDiscussion() && !user.isDefaultUser()) {
+		if (!message.isDiscussion() && !message.isAnonymous() &&
+			!user.isDefaultUser()) {
+
 			String activityType = MBActivityKeys.ADD_MESSAGE;
 			long receiverUserId = 0;
 
@@ -514,11 +516,9 @@ public class MBMessageLocalServiceImpl extends MBMessageLocalServiceBaseImpl {
 				receiverUserId = parentMessage.getUserId();
 			}
 
-			if (!message.isAnonymous()) {
-				socialActivityLocalService.addActivity(
-					userId, category.getGroupId(), MBMessage.class.getName(),
-					messageId, activityType, StringPool.BLANK, receiverUserId);
-			}
+			socialActivityLocalService.addActivity(
+				userId, category.getGroupId(), MBMessage.class.getName(),
+				messageId, activityType, StringPool.BLANK, receiverUserId);
 		}
 
 		logAddMessage(messageId, stopWatch, 9);
