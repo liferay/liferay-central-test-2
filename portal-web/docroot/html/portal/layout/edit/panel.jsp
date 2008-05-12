@@ -31,7 +31,7 @@
 		<liferay-ui:message key="description" />
 	</td>
 	<td>
-		<textarea name="TypeSettingsProperties(description)" cols="70"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
+		<textarea class="lfr-textarea" name="TypeSettingsProperties(description)" wrap="soft"><bean:write name="SEL_LAYOUT" property="typeSettingsProperties(description)" /></textarea>
 	</td>
 </tr>
 </table>

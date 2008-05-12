@@ -145,7 +145,7 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 				<liferay-ui:message key="type" />
 			</td>
 			<td colspan="2">
-				<select name="<portlet:namespace />type" id="<portlet:namespace />type">
+				<select id="<portlet:namespace />type" name="<portlet:namespace />type">
 
 					<%
 					for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
@@ -250,23 +250,27 @@ String friendlyURL = BeanParamUtil.getString(selLayout, request, "friendlyURL");
 		<div class="separator"><!-- --></div>
 	</td>
 </tr>
+
 <%
 for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 	String curLayoutType = PropsValues.LAYOUT_TYPES[i];
 %>
-<tr class="layout-type-form layout-type-form-<%= curLayoutType %>">
-	<td>
 
-		<%
-		request.setAttribute(WebKeys.SEL_LAYOUT, selLayout);
-		%>
+	<tr class="layout-type-form layout-type-form-<%= curLayoutType %>" style="display: <%= type.equals(PropsValues.LAYOUT_TYPES[i]) ? "block" : "none" %>;">
+		<td>
 
-		<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + PropsUtil.getComponentProperties().getString(PropsUtil.LAYOUT_EDIT_PAGE, Filter.by(curLayoutType)) %>" />
-	</td>
-</tr>
+			<%
+			request.setAttribute(WebKeys.SEL_LAYOUT, selLayout);
+			%>
+
+			<liferay-util:include page="<%= StrutsUtil.TEXT_HTML_DIR + PropsUtil.getComponentProperties().getString(PropsUtil.LAYOUT_EDIT_PAGE, Filter.by(curLayoutType)) %>" />
+		</td>
+	</tr>
+
 <%
 }
 %>
+
 </table>
 
 <%@ include file="/html/portal/layout/edit/common.jspf" %>
@@ -389,18 +393,10 @@ for (int i = 0; i < PropsValues.LAYOUT_TYPES.length; i++) {
 
 	<portlet:namespace />updateLanguageTemps(lastLanguageId);
 
-	jQuery(
-		function() {
-			jQuery(".layout-type-form").hide();
-			jQuery(".layout-type-form-<%= selLayout.getType() %>").show();
-		}
-	)
-
 	jQuery("#<portlet:namespace />type").change(
 		function() {
 			jQuery(".layout-type-form").hide();
 			jQuery(".layout-type-form-" + this.value).show();
 		}
 	)
-
 </script>
