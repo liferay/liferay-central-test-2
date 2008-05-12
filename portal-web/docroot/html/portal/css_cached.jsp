@@ -960,6 +960,14 @@ li.toggle-expand a {
 	width: <%= ModelHintsConstants.TEXTAREA_DISPLAY_WIDTH %>px;
 }
 
+fieldset, .uni-form fieldset {
+	margin-bottom: 2em;
+}
+
+fieldset:last-child, .uni-form fieldset:last-child {
+	margin-bottom: 0;
+}
+
 /* ---------- Separator ---------- */
 
 .separator {
