@@ -195,10 +195,10 @@ if ((categories.size() > 0) || (portlets.size() > 0)) {
 
 						<div
 							class="lfr-portlet-item <c:if test="<%= portletLocked %>">lfr-portlet-used</c:if> <c:if test="<%= portletInstanceable %>">lfr-instanceable</c:if>"
-							footerPortalCssPaths="<%= footerPortalCssPaths %>"
-							footerPortletCssPaths="<%= footerPortletCssPaths %>"
-							headerPortalCssPaths="<%= headerPortalCssPaths %>"
-							headerPortletCssPaths="<%= headerPortletCssPaths %>"
+							footerPortalCssPaths="<%= StringUtil.merge(footerPortalCssPaths) %>"
+							footerPortletCssPaths="<%= StringUtil.merge(footerPortletCssPaths) %>"
+							headerPortalCssPaths="<%= StringUtil.merge(headerPortalCssPaths) %>"
+							headerPortletCssPaths="<%= StringUtil.merge(headerPortletCssPaths) %>"
 							id="<%= divId.toString().replace(':', '-') %>"
 							instanceable="<%= portletInstanceable %>"
 							plid="<%= plid %>"

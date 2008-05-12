@@ -34,6 +34,7 @@ import java.io.StringReader;
 import java.net.URL;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
@@ -445,12 +446,12 @@ public class StringUtil {
 		return sm.toString();
 	}
 
-	public static String merge(List<?> list) {
-		return merge(list, StringPool.COMMA);
+	public static String merge(Collection<?> col) {
+		return merge(col, StringPool.COMMA);
 	}
 
-	public static String merge(List<?> list, String delimiter) {
-		return merge(list.toArray(new Object[list.size()]), delimiter);
+	public static String merge(Collection<?> col, String delimiter) {
+		return merge(col.toArray(new Object[col.size()]), delimiter);
 	}
 
 	public static String merge(Object[] array) {
