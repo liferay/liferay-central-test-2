@@ -18951,9 +18951,11 @@ var LayoutConfiguration = {
 				}
 			});
 
-			AjaxUtil.update(url, popup,
+			jQuery.ajax(
 				{
-					onComplete: function() {
+					url: url,
+					success: function(message) {
+						jQuery(popup).html(message);
 						instance._loadContent();
 					}
 				}

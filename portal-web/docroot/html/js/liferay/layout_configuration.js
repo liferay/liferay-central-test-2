@@ -76,7 +76,7 @@ var LayoutConfiguration = {
 			jQuery.ajax(
 				{
 					url: url,
-					success: function(message){
+					success: function(message) {
 						jQuery(popup).html(message);
 						instance._loadContent();
 					}
