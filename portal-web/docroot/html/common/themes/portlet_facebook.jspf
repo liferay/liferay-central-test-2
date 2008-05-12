@@ -30,13 +30,11 @@
 <link rel="stylesheet" type="text/css" href="<%= themeDisplay.getPortalURL() %>/html/themes/classic/css/portlet.css" />
 
 <%
-Set headerPortalCssPaths = new LinkedHashSet();
+Set<String> headerPortalCssPaths = new LinkedHashSet<String>();
 
-List headerPortalCssList = portlet.getHeaderPortalCss();
+List<String> headerPortalCssList = portlet.getHeaderPortalCss();
 
-for (int j = 0; j < headerPortalCssList.size(); j++) {
-	String headerPortalCss = (String)headerPortalCssList.get(j);
-
+for (String headerPortalCss : headerPortalCssList) {
 	String headerPortalCssPath = request.getContextPath() + headerPortalCss;
 
 	if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
@@ -49,13 +47,11 @@ for (int j = 0; j < headerPortalCssList.size(); j++) {
 	}
 }
 
-Set headerPortletCssPaths = new LinkedHashSet();
+Set<String> headerPortletCssPaths = new LinkedHashSet<String>();
 
-List headerPortletCssList = portlet.getHeaderPortletCss();
+List<String> headerPortletCssList = portlet.getHeaderPortletCss();
 
-for (int j = 0; j < headerPortletCssList.size(); j++) {
-	String headerPortletCss = (String)headerPortletCssList.get(j);
-
+for (String headerPortletCss : headerPortletCssList) {
 	String headerPortletCssPath = portlet.getContextPath() + headerPortletCss;
 
 	if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
@@ -76,13 +72,11 @@ for (int j = 0; j < headerPortletCssList.size(); j++) {
 <%@ include file="/html/common/themes/portlet_content_wrapper.jspf" %>
 
 <%
-Set footerPortalCssPaths = new LinkedHashSet();
+Set<String> footerPortalCssPaths = new LinkedHashSet<String>();
 
-List footerPortalCssList = portlet.getFooterPortalCss();
+List<String> footerPortalCssList = portlet.getFooterPortalCss();
 
-for (int j = 0; j < footerPortalCssList.size(); j++) {
-	String footerPortalCss = (String)footerPortalCssList.get(j);
-
+for (String footerPortalCss : footerPortalCssList) {
 	String footerPortalCssPath = request.getContextPath() + footerPortalCss;
 
 	if (!footerPortalCssPaths.contains(footerPortalCssPath) && !themeDisplay.isIncludedJs(footerPortalCssPath)) {
@@ -95,13 +89,11 @@ for (int j = 0; j < footerPortalCssList.size(); j++) {
 	}
 }
 
-Set footerPortletCssPaths = new LinkedHashSet();
+Set<String> footerPortletCssPaths = new LinkedHashSet<String>();
 
-List footerPortletCssList = portlet.getFooterPortletCss();
+List<String> footerPortletCssList = portlet.getFooterPortletCss();
 
-for (int j = 0; j < footerPortletCssList.size(); j++) {
-	String footerPortletCss = (String)footerPortletCssList.get(j);
-
+for (String footerPortletCss : footerPortletCssList) {
 	String footerPortletCssPath = portlet.getContextPath() + footerPortletCss;
 
 	if (!footerPortletCssPaths.contains(footerPortletCssPath)) {

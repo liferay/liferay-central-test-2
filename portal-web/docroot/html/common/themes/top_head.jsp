@@ -36,7 +36,7 @@
 <link href="<%= themeDisplay.getCDNHost() %><%= themeDisplay.getPathMain() %>/portal/css_cached?themeId=<%= themeDisplay.getTheme().getThemeId() %>&amp;colorSchemeId=<%= themeDisplay.getColorScheme().getColorSchemeId() %>&amp;t=<%= theme.getTimestamp() %>" type="text/css" rel="stylesheet" />
 
 <%
-List portlets = null;
+List<Portlet> portlets = null;
 
 if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 	portlets = layoutTypePortlet.getAllPortlets();
@@ -46,16 +46,12 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 <c:if test="<%= portlets != null %>">
 
 	<%
-	Set headerPortalCssPaths = new LinkedHashSet();
+	Set<String> headerPortalCssPaths = new LinkedHashSet<String>();
 
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
+	for (Portlet portlet : portlets) {
+		List<String> headerPortalCssList = portlet.getHeaderPortalCss();
 
-		List headerPortalCssList = portlet.getHeaderPortalCss();
-
-		for (int j = 0; j < headerPortalCssList.size(); j++) {
-			String headerPortalCss = (String)headerPortalCssList.get(j);
-
+		for (String headerPortalCss : headerPortalCssList) {
 			String headerPortalCssPath = request.getContextPath() + headerPortalCss;
 
 			if (!headerPortalCssPaths.contains(headerPortalCssPath)) {
@@ -69,16 +65,12 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 		}
 	}
 
-	Set headerPortletCssPaths = new LinkedHashSet();
+	Set<String> headerPortletCssPaths = new LinkedHashSet<String>();
 
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
+	for (Portlet portlet : portlets) {
+		List<String> headerPortletCssList = portlet.getHeaderPortletCss();
 
-		List headerPortletCssList = portlet.getHeaderPortletCss();
-
-		for (int j = 0; j < headerPortletCssList.size(); j++) {
-			String headerPortletCss = (String)headerPortletCssList.get(j);
-
+		for (String headerPortletCss : headerPortletCssList) {
 			String headerPortletCssPath = portlet.getContextPath() + headerPortletCss;
 
 			if (!headerPortletCssPaths.contains(headerPortletCssPath)) {
@@ -100,9 +92,7 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 	<style type="text/css">
 
 		<%
-		for (int i = 0; i < portlets.size(); i++) {
-			Portlet portlet = (Portlet)portlets.get(i);
-
+		for (Portlet portlet : portlets) {
 			PortletPreferences portletSetup = PortletPreferencesFactoryUtil.getPortletSetup(layout, portlet.getPortletId());
 
 			String portletSetupCss = portletSetup.getValue("portlet-setup-css", StringPool.BLANK);
@@ -146,16 +136,12 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 <c:if test="<%= portlets != null %>">
 
 	<%
-	Set headerPortalJavaScriptPaths = new LinkedHashSet();
+	Set<String> headerPortalJavaScriptPaths = new LinkedHashSet<String>();
 
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
+	for (Portlet portlet : portlets) {
+		List<String> headerPortalJavaScriptList = portlet.getHeaderPortalJavaScript();
 
-		List headerPortalJavaScriptList = portlet.getHeaderPortalJavaScript();
-
-		for (int j = 0; j < headerPortalJavaScriptList.size(); j++) {
-			String headerPortalJavaScript = (String)headerPortalJavaScriptList.get(j);
-
+		for (String headerPortalJavaScript : headerPortalJavaScriptList) {
 			String headerPortalJavaScriptPath = request.getContextPath() + headerPortalJavaScript;
 
 			if (!headerPortalJavaScriptPaths.contains(headerPortalJavaScriptPath) && !themeDisplay.isIncludedJs(headerPortalJavaScriptPath)) {
@@ -169,16 +155,12 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 		}
 	}
 
-	Set headerPortletJavaScriptPaths = new LinkedHashSet();
+	Set<String> headerPortletJavaScriptPaths = new LinkedHashSet<String>();
 
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
+	for (Portlet portlet : portlets) {
+		List<String> headerPortletJavaScriptList = portlet.getHeaderPortletJavaScript();
 
-		List headerPortletJavaScriptList = portlet.getHeaderPortletJavaScript();
-
-		for (int j = 0; j < headerPortletJavaScriptList.size(); j++) {
-			String headerPortletJavaScript = (String)headerPortletJavaScriptList.get(j);
-
+		for (String headerPortletJavaScript : headerPortletJavaScriptList) {
 			String headerPortletJavaScriptPath = portlet.getContextPath() + headerPortletJavaScript;
 
 			if (!headerPortletJavaScriptPaths.contains(headerPortletJavaScriptPath)) {

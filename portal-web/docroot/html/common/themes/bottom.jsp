@@ -134,7 +134,7 @@
 </c:if>
 
 <%
-List portlets = null;
+List<Portlet> portlets = null;
 
 if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 	portlets = layoutTypePortlet.getAllPortlets();
@@ -144,16 +144,12 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 <c:if test="<%= portlets != null %>">
 
 	<%
-	Set footerPortalCssPaths = new LinkedHashSet();
+	Set<String> footerPortalCssPaths = new LinkedHashSet<String>();
 
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
+	for (Portlet portlet : portlets) {
+		List<String> footerPortalCssList = portlet.getFooterPortalCss();
 
-		List footerPortalCssList = portlet.getFooterPortalCss();
-
-		for (int j = 0; j < footerPortalCssList.size(); j++) {
-			String footerPortalCss = (String)footerPortalCssList.get(j);
-
+		for (String footerPortalCss : footerPortalCssList) {
 			String footerPortalCssPath = request.getContextPath() + footerPortalCss;
 
 			if (!footerPortalCssPaths.contains(footerPortalCssPath) && !themeDisplay.isIncludedJs(footerPortalCssPath)) {
@@ -167,16 +163,12 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 		}
 	}
 
-	Set footerPortletCssPaths = new LinkedHashSet();
+	Set<String> footerPortletCssPaths = new LinkedHashSet<String>();
 
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
+	for (Portlet portlet : portlets) {
+		List<String> footerPortletCssList = portlet.getFooterPortletCss();
 
-		List footerPortletCssList = portlet.getFooterPortletCss();
-
-		for (int j = 0; j < footerPortletCssList.size(); j++) {
-			String footerPortletCss = (String)footerPortletCssList.get(j);
-
+		for (String footerPortletCss : footerPortletCssList) {
 			String footerPortletCssPath = portlet.getContextPath() + footerPortletCss;
 
 			if (!footerPortletCssPaths.contains(footerPortletCssPath)) {
@@ -194,16 +186,12 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 		}
 	}
 
-	Set footerPortalJavaScriptPaths = new LinkedHashSet();
+	Set<String> footerPortalJavaScriptPaths = new LinkedHashSet<String>();
 
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
+	for (Portlet portlet : portlets) {
+		List<String> footerPortalJavaScriptList = portlet.getFooterPortalJavaScript();
 
-		List footerPortalJavaScriptList = portlet.getFooterPortalJavaScript();
-
-		for (int j = 0; j < footerPortalJavaScriptList.size(); j++) {
-			String footerPortalJavaScript = (String)footerPortalJavaScriptList.get(j);
-
+		for (String footerPortalJavaScript : footerPortalJavaScriptList) {
 			String footerPortalJavaScriptPath = request.getContextPath() + footerPortalJavaScript;
 
 			if (!footerPortalJavaScriptPaths.contains(footerPortalJavaScriptPath)) {
@@ -217,16 +205,12 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 		}
 	}
 
-	Set footerPortletJavaScriptPaths = new LinkedHashSet();
+	Set<String> footerPortletJavaScriptPaths = new LinkedHashSet<String>();
 
-	for (int i = 0; i < portlets.size(); i++) {
-		Portlet portlet = (Portlet)portlets.get(i);
+	for (Portlet portlet : portlets) {
+		List<String> footerPortletJavaScriptList = portlet.getFooterPortletJavaScript();
 
-		List footerPortletJavaScriptList = portlet.getFooterPortletJavaScript();
-
-		for (int j = 0; j < footerPortletJavaScriptList.size(); j++) {
-			String footerPortletJavaScript = (String)footerPortletJavaScriptList.get(j);
-
+		for (String footerPortletJavaScript : footerPortletJavaScriptList) {
 			String footerPortletJavaScriptPath = portlet.getContextPath() + footerPortletJavaScript;
 
 			if (!footerPortletJavaScriptPaths.contains(footerPortletJavaScriptPath)) {
