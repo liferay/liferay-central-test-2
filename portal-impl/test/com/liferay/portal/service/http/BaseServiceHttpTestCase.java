@@ -20,44 +20,37 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.bookmarks.service;
+package com.liferay.portal.service.http;
 
-import com.liferay.portal.service.BaseServiceTestCase;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
+import com.liferay.portal.security.auth.HttpPrincipal;
+import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.TestPropsValues;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
 /**
- * <a href="BookmarksFolderServiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseServiceHttpTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
+public class BaseServiceHttpTestCase extends BaseTestCase {
 
-	public void testAddFolder() throws Exception {
-		addFolder();
+	protected HttpPrincipal getHttpPrincipal() {
+		return getHttpPrincipal(true);
 	}
 
-	public void testAddSubfolder() throws Exception {
-		BookmarksFolder folder = addFolder();
+	protected HttpPrincipal getHttpPrincipal(boolean authenticated) {
+		HttpPrincipal httpPrincipal = null;
 
-		addFolder(folder.getFolderId());
-	}
+		if (authenticated) {
+			httpPrincipal = new HttpPrincipal(
+				TestPropsValues.PORTAL_URL, TestPropsValues.USER_ID,
+				TestPropsValues.USER_PASSWORD);
+		}
+		else {
+			httpPrincipal = new HttpPrincipal(TestPropsValues.PORTAL_URL);
+		}
 
-	public void testDeleteFolder() throws Exception {
-		BookmarksFolder folder = addFolder();
-
-		BookmarksFolderServiceUtil.deleteFolder(folder.getFolderId());
-	}
-
-	public void testGetFolder() throws Exception {
-		BookmarksFolder folder = addFolder();
-
-		BookmarksFolderServiceUtil.getFolder(folder.getFolderId());
+		return httpPrincipal;
 	}
 
 }

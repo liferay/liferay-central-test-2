@@ -38,7 +38,12 @@ public class TestPropsValues {
 	public static final long LAYOUT_PLID = GetterUtil.getLong(
 		TestPropsUtil.get("layout.plid"));
 
+	public static final String PORTAL_URL = TestPropsUtil.get("portal.url");
+
 	public static final long USER_ID = GetterUtil.getLong(
-		TestPropsUtil.get("service.user.id"));
+		TestPropsUtil.get("user.id"));
+
+	public static final String USER_PASSWORD =
+		TestPropsUtil.get("user.password");
 
 }

@@ -22,29 +22,35 @@
 
 package com.liferay.portlet.bookmarks.service;
 
+import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
+import com.liferay.portal.service.BaseServiceTestCase;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
 /**
- * <a href="BookmarksFolderServiceTestHelper.java.html"><b><i>View Source</i>
- * </b></a>
+ * <a href="BookmarksEntryServiceTest.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksFolderServiceTestHelper {
+public class BaseBookmarksServiceTestCase extends BaseServiceTestCase {
 
-	public static BookmarksFolder addFolder() throws Exception {
+	protected BookmarksFolder addFolder() throws Exception {
 		long parentFolderId = BookmarksFolderImpl.DEFAULT_PARENT_FOLDER_ID;
 
 		return addFolder(parentFolderId);
 	}
 
-	public static BookmarksFolder addFolder(long parentFolderId)
-		throws Exception {
-
+	protected BookmarksFolder addFolder(long parentFolderId) throws Exception {
 		long plid = TestPropsValues.LAYOUT_PLID;
 		String name = "Test Folder";
 		String description = "This is a test folder.";

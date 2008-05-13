@@ -36,37 +36,4 @@ import java.util.Random;
  *
  */
 public class BasePersistenceTestCase extends BaseTestCase {
-
-	protected void assertEquals(double expected, double actual)
-		throws Exception {
-
-		assertEquals(expected, actual, 0);
-	}
-
-	protected Date nextDate() throws Exception {
-		return new Date();
-	}
-
-	protected double nextDouble() throws Exception {
-		return CounterLocalServiceUtil.increment();
-	}
-
-	protected int nextInt() throws Exception {
-		return (int)CounterLocalServiceUtil.increment();
-	}
-
-	protected long nextLong() throws Exception {
-		return CounterLocalServiceUtil.increment();
-	}
-
-	protected boolean randomBoolean() throws Exception {
-		return _random.nextBoolean();
-	}
-
-	protected String randomString() throws Exception {
-		return PwdGenerator.getPassword();
-	}
-
-	private Random _random = new Random();
-
 }

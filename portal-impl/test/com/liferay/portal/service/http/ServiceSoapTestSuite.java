@@ -20,35 +20,32 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.bookmarks.service;
+package com.liferay.portal.service.http;
 
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
+import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.util.TestPropsUtil;
+
+import junit.framework.TestSuite;
 
 /**
- * <a href="BookmarksEntryServiceTestHelper.java.html"><b><i>View Source</i></b>
- * </a>
+ * <a href="ServiceSoapTestSuite.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksEntryServiceTestHelper {
+public class ServiceSoapTestSuite extends TestSuite {
 
-	public static BookmarksEntry addEntry() throws Exception {
-		BookmarksFolder folder = BookmarksFolderServiceTestHelper.addFolder();
+	public ServiceSoapTestSuite() {
+		if (!GetterUtil.getBoolean(TestPropsUtil.get(
+				ServiceSoapTestSuite.class.getName() + ".enabled"))) {
 
-		String name = "Test Entry";
-		String url = "http://www.liferay.com";
-		String comments = "This is a test entry.";
-		String[] tagsEntries = new String[0];
+			return;
+		}
 
-		boolean addGommunityPermissions = true;
-		boolean addGuestPermissions = true;
+		addTestSuite(UserServiceSoapTest.class);
+	}
 
-		return BookmarksEntryServiceUtil.addEntry(
-			folder.getFolderId(), name, url, comments, tagsEntries,
-			addGommunityPermissions, addGuestPermissions);
+	public void test() {
 	}
 
 }

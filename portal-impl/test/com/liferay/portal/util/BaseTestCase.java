@@ -26,6 +26,12 @@ import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.spring.util.SpringUtil;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
+import com.liferay.portal.util.BaseTestCase;
+import com.liferay.util.PwdGenerator;
+
+import java.util.Date;
+import java.util.Random;
 import junit.framework.TestCase;
 
 /**
@@ -36,10 +42,42 @@ import junit.framework.TestCase;
  */
 public class BaseTestCase extends TestCase {
 
+	protected void assertEquals(double expected, double actual)
+		throws Exception {
+
+		assertEquals(expected, actual, 0);
+	}
+
+	protected Date nextDate() throws Exception {
+		return new Date();
+	}
+
+	protected double nextDouble() throws Exception {
+		return CounterLocalServiceUtil.increment();
+	}
+
+	protected int nextInt() throws Exception {
+		return (int)CounterLocalServiceUtil.increment();
+	}
+
+	protected long nextLong() throws Exception {
+		return CounterLocalServiceUtil.increment();
+	}
+
+	protected boolean randomBoolean() throws Exception {
+		return _random.nextBoolean();
+	}
+
+	protected String randomString() throws Exception {
+		return PwdGenerator.getPassword();
+	}
+
 	protected void setUp() throws Exception {
 		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
 		SpringUtil.initContext(SpringUtil.getContext());
 	}
+
+	private Random _random = new Random();
 
 }

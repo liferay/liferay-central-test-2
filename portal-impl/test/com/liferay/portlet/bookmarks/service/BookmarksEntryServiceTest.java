@@ -25,6 +25,9 @@ package com.liferay.portlet.bookmarks.service;
 import com.liferay.portal.service.BaseServiceTestCase;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
+import com.liferay.portlet.bookmarks.model.BookmarksEntry;
+import com.liferay.portlet.bookmarks.model.BookmarksFolder;
+import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
 
 /**
  * <a href="BookmarksEntryServiceTest.java.html"><b><i>View Source</i></b></a>
@@ -32,22 +35,38 @@ import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksEntryServiceTest extends BaseServiceTestCase {
+public class BookmarksEntryServiceTest extends BaseBookmarksServiceTestCase {
 
 	public void testAddEntry() throws Exception {
-		BookmarksEntryServiceTestHelper.addEntry();
+		addEntry();
 	}
 
 	public void testDeleteEntry() throws Exception {
-		BookmarksEntry entry = BookmarksEntryServiceTestHelper.addEntry();
+		BookmarksEntry entry = addEntry();
 
 		BookmarksEntryServiceUtil.deleteEntry(entry.getEntryId());
 	}
 
 	public void testGetEntry() throws Exception {
-		BookmarksEntry entry = BookmarksEntryServiceTestHelper.addEntry();
+		BookmarksEntry entry = addEntry();
 
 		BookmarksEntryServiceUtil.getEntry(entry.getEntryId());
+	}
+
+	protected BookmarksEntry addEntry() throws Exception {
+		BookmarksFolder folder = addFolder();
+
+		String name = "Test Entry";
+		String url = "http://www.liferay.com";
+		String comments = "This is a test entry.";
+		String[] tagsEntries = new String[0];
+
+		boolean addGommunityPermissions = true;
+		boolean addGuestPermissions = true;
+
+		return BookmarksEntryServiceUtil.addEntry(
+			folder.getFolderId(), name, url, comments, tagsEntries,
+			addGommunityPermissions, addGuestPermissions);
 	}
 
 }

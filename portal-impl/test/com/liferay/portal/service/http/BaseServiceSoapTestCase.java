@@ -20,44 +20,49 @@
  * SOFTWARE.
  */
 
-package com.liferay.portlet.bookmarks.service;
+package com.liferay.portal.service.http;
 
-import com.liferay.portal.service.BaseServiceTestCase;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
+import com.liferay.portal.util.BaseTestCase;
 import com.liferay.portal.util.TestPropsValues;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
+
+import java.net.MalformedURLException;
+import java.net.URL;
 
 /**
- * <a href="BookmarksFolderServiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseServiceSoapTestCase.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
  *
  */
-public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
+public class BaseServiceSoapTestCase extends BaseTestCase {
 
-	public void testAddFolder() throws Exception {
-		addFolder();
+	protected URL getURL(String serviceName) throws MalformedURLException {
+		return getURL(serviceName, true);
 	}
 
-	public void testAddSubfolder() throws Exception {
-		BookmarksFolder folder = addFolder();
+	protected URL getURL(String serviceName, boolean authenticated)
+		throws MalformedURLException {
 
-		addFolder(folder.getFolderId());
-	}
+		String url = TestPropsValues.PORTAL_URL;
 
-	public void testDeleteFolder() throws Exception {
-		BookmarksFolder folder = addFolder();
+		if (authenticated) {
+			long userId = TestPropsValues.USER_ID;
+			String password = TestPropsValues.USER_PASSWORD;
 
-		BookmarksFolderServiceUtil.deleteFolder(folder.getFolderId());
-	}
+			int pos = url.indexOf("://");
 
-	public void testGetFolder() throws Exception {
-		BookmarksFolder folder = addFolder();
+			String protocol = url.substring(0, pos + 3);
+			String host = url.substring(pos + 3, url.length());
 
-		BookmarksFolderServiceUtil.getFolder(folder.getFolderId());
+			url =
+				protocol + userId + ":" + password + "@" + host +
+					"/tunnel-web/secure/axis/" + serviceName;
+		}
+		else {
+			url += "/tunnel-web/axis/" + serviceName;
+		}
+
+		return new URL(url);
 	}
 
 }
