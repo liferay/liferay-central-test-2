@@ -47,17 +47,16 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		super(res);
 	}
 
+	public int getBufferSize() {
+		return _bufferSize;
+	}
+
+	public ByteArrayMaker getByteArrayMaker() {
+		return _bam;
+	}
+
 	public String getContentType() {
 		return _contentType;
-	}
-
-	public void setContentType(String contentType) {
-		_contentType = contentType;
-
-		super.setContentType(contentType);
-	}
-
-	public void setLocale(Locale locale) {
 	}
 
 	public ServletOutputStream getOutputStream() {
@@ -70,16 +69,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		return _sos;
 	}
 
-	public boolean isCalledGetOutputStream() {
-		return _callGetOutputStream;
-	}
-
 	public int getStatus() {
 		return _status;
-	}
-
-	public void setStatus(int status) {
-		_status = status;
 	}
 
 	public String getString() throws UnsupportedEncodingException {
@@ -97,10 +88,6 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		}
 	}
 
-	public void setString(String string) {
-		_string = string;
-	}
-
 	public PrintWriter getWriter() {
 		/*if (_callGetOutputStream) {
 			throw new IllegalStateException();
@@ -111,27 +98,8 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		return _pw;
 	}
 
-	public ByteArrayMaker getByteArrayMaker() {
-		return _bam;
-	}
-
-	public int getBufferSize() {
-		return _bufferSize;
-	}
-
-	public void setBufferSize(int size) {
-		_bufferSize = size;
-	}
-
-	public void resetBuffer() {
-		if (_callGetOutputStream) {
-			_bam.reset();
-		}
-		else if (_callGetWriter) {
-			StringBuffer sb = _sw.getBuffer();
-
-			sb.delete(0, sb.length());
-		}
+	public boolean isCalledGetOutputStream() {
+		return _callGetOutputStream;
 	}
 
 	public void recycle() {
@@ -145,10 +113,42 @@ public class StringServletResponse extends HttpServletResponseWrapper {
 		_string = null;
 	}
 
+	public void resetBuffer() {
+		if (_callGetOutputStream) {
+			_bam.reset();
+		}
+		else if (_callGetWriter) {
+			StringBuffer sb = _sw.getBuffer();
+
+			sb.delete(0, sb.length());
+		}
+	}
+
+	public void setBufferSize(int size) {
+		_bufferSize = size;
+	}
+
+	public void setContentType(String contentType) {
+		_contentType = contentType;
+
+		super.setContentType(contentType);
+	}
+
+	public void setLocale(Locale locale) {
+	}
+
+	public void setStatus(int status) {
+		_status = status;
+	}
+
+	public void setString(String string) {
+		_string = string;
+	}
+
 	private String _contentType;
+	private int _status = SC_OK;
 	private ByteArrayMaker _bam = new ByteArrayMaker();
 	private ServletOutputStream _sos = new StringServletOutputStream(_bam);
-	private int _status = SC_OK;
 	private StringWriter _sw = new StringWriter();
 	private PrintWriter _pw = new PrintWriter(_sw);
 	private int _bufferSize;
