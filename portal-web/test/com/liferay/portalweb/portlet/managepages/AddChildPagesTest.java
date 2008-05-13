@@ -37,6 +37,7 @@ public class AddChildPagesTest extends BaseTestCase {
 		selenium.click("link=Manage Pages");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("link=Children");
+		selenium.waitForPageToLoad("30000");
 
 		for (int second = 0;; second++) {
 			if (second >= 60) {
