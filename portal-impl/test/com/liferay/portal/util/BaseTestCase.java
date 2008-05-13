@@ -22,16 +22,15 @@
 
 package com.liferay.portal.util;
 
+import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.kernel.bean.BeanLocatorUtil;
 import com.liferay.portal.spring.util.SpringUtil;
-
-import com.liferay.counter.service.CounterLocalServiceUtil;
-import com.liferay.portal.util.BaseTestCase;
 import com.liferay.util.PwdGenerator;
 
 import java.util.Date;
 import java.util.Random;
+
 import junit.framework.TestCase;
 
 /**

@@ -22,12 +22,7 @@
 
 package com.liferay.portal.service.persistence;
 
-import com.liferay.counter.service.CounterLocalServiceUtil;
 import com.liferay.portal.util.BaseTestCase;
-import com.liferay.util.PwdGenerator;
-
-import java.util.Date;
-import java.util.Random;
 
 /**
  * <a href="BasePersistenceTestCase.java.html"><b><i>View Source</i></b></a>

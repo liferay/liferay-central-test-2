@@ -23,21 +23,14 @@
 package com.liferay.portlet.bookmarks.service;
 
 import com.liferay.portal.service.BaseServiceTestCase;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
-import com.liferay.portlet.bookmarks.model.BookmarksEntry;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceUtil;
-import com.liferay.portal.service.BaseServiceTestCase;
-import com.liferay.portlet.bookmarks.model.BookmarksFolder;
-import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
 
 /**
- * <a href="BookmarksEntryServiceTest.java.html"><b><i>View Source</i></b></a>
+ * <a href="BaseBookmarksServiceTestCase.java.html"><b><i>View Source</i></b>
+ * </a>
  *
  * @author Brian Wing Shun Chan
  *
