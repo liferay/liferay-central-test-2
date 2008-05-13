@@ -64,6 +64,7 @@ if (Validator.isNull(modelResource)) {
 	selResourceName = LanguageUtil.get(pageContext, "portlet");
 }
 
+Group group = layout.getGroup();
 long groupId = layout.getGroupId();
 
 Layout selLayout = null;
@@ -71,7 +72,8 @@ Layout selLayout = null;
 if (modelResource.equals(Layout.class.getName())) {
 	selLayout = LayoutLocalServiceUtil.getLayout(GetterUtil.getLong(resourcePrimKey));
 
-	groupId = selLayout.getGroupId();
+	group = selLayout.getGroup();
+	groupId = group.getGroupId();
 }
 
 Resource resource = null;
@@ -259,7 +261,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		tabs2Names = StringUtil.replace(tabs2Names, "guest,", StringPool.BLANK);
 	}
 	else if (modelResource.equals(Layout.class.getName())) {
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
 
 		// User layouts should not have community assignments
 
@@ -279,8 +280,6 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 		}
 	}
 	else {
-		Group group = GroupLocalServiceUtil.getGroup(groupId);
-
 		if (group.isUser()) {
 			tabs2Names = StringUtil.replace(tabs2Names, "community,", StringPool.BLANK);
 			tabs2Names = StringUtil.replace(tabs2Names, "community-roles,", StringPool.BLANK);
@@ -349,13 +348,15 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					LinkedHashMap userParams = new LinkedHashMap();
 
 					if (tabs3.equals("current")) {
-					userParams.put("permission", new Long(resource.getResourceId()));
+						userParams.put("permission", new Long(resource.getResourceId()));
 					}
-					else if (tabs3.equals("available") && layout.getGroup().isOrganization()) {
-						userParams.put("usersOrgs", new Long(layout.getGroup().getClassPK()));
-					}
-					else if (tabs3.equals("available") && modelResource.equals(Layout.class.getName())) {
-						userParams.put("usersGroups", new Long(groupId));
+					else if (tabs3.equals("available")) {
+						if (group.isCommunity()) {
+							userParams.put("usersGroups", new Long(groupId));
+						}
+						else if (group.isOrganization()) {
+							userParams.put("usersOrgs", new Long(group.getClassPK()));
+						}
 					}
 					%>
 
@@ -1042,16 +1043,11 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 			</c:choose>
 		</c:when>
 		<c:when test='<%= tabs2.equals("community") || tabs2.equals("organization") %>'>
-
-			<%
-			Group group = GroupLocalServiceUtil.getGroup(groupId);
-			%>
-
-			<input name="<portlet:namespace />groupId" type="hidden" value="<%= String.valueOf(group.getGroupId()) %>" />
+			<input name="<portlet:namespace />groupId" type="hidden" value="<%= groupId %>" />
 			<input name="<portlet:namespace />groupIdActionIds" type="hidden" value="" />
 
 			<%
-			List permissions = PermissionLocalServiceUtil.getGroupPermissions(group.getGroupId(), resource.getResourceId());
+			List permissions = PermissionLocalServiceUtil.getGroupPermissions(groupId, resource.getResourceId());
 
 			List actions1 = ResourceActionsUtil.getResourceActions(company.getCompanyId(), portletResource, modelResource);
 			List actions2 = ResourceActionsUtil.getActions(permissions);
