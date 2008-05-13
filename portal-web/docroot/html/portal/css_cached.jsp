@@ -1225,7 +1225,7 @@ fieldset:last-child, .uni-form fieldset:last-child {
 .taglib-ratings.thumbs .total-rating {
 	font-size: 1.1em;
 	line-height: 18px;
-	width:1.7em;
+	padding: 0 5px 0 0;
 }
 
 .taglib-ratings.thumbs .total-votes {

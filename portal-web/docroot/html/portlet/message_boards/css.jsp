@@ -93,7 +93,7 @@
 }
 
 .portlet-message-boards .taglib-ratings.thumbs .total-rating {
-	padding: 0 6px 0 10px;
+	padding: 0 5px 0 10px;
 }
 
 td.user-info {
