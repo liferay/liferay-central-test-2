@@ -189,8 +189,14 @@ var LayoutConfiguration = {
 				}
 			},
 			onComplete: function(s) {
+
+				var container = s.container;
+				var footerPortalCssPaths = container.getAttribute('footerPortalCssPaths');
+				var footerPortletCssPaths = container.getAttribute('footerPortletCssPaths'); 
+				var headerPortalCssPaths = container.getAttribute('headerPortalCssPaths');
+                var headerPortletCssPaths = container.getAttribute('headerPortletCssPaths');
+
 				if (!clicked) {
-					var container = s.container;
 
 					var plid = container.getAttribute('plid');
 					var portletId = container.getAttribute('portletId');
@@ -248,6 +254,59 @@ var LayoutConfiguration = {
 							);
 						}
 					}
+				}
+
+				var head = jQuery('head');
+				var docBody = jQuery(document.body);
+
+				if (footerPortletCssPaths) {
+					footerPortletCssPaths = footerPortletCssPaths.split(',');
+				
+					jQuery.each(
+						footerPortletCssPaths,
+						function(i, n) {										
+							docBody.append('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+						}
+					);
+				}
+				
+				if (footerPortalCssPaths) {
+					footerPortalCssPaths = footerPortalCssPaths.split(',');
+				
+					jQuery.each(
+						footerPortalCssPaths,
+						function(i, n) {										
+							docBody.append('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+						}
+					);
+				}
+
+				if (headerPortletCssPaths) {
+					headerPortletCssPaths = headerPortletCssPaths.split(',');
+					var link = document.createElement('link');
+					link.href = headerPortletCssPaths[0];
+					link.type = 'text/css';
+					link.rel = 'stylesheet';
+					
+					document.getElementsByTagName('head')[0].appendChild(link);
+					
+					jQuery.each(
+						headerPortletCssPaths,
+						function(i, n) {										
+							head.append(link);
+						}
+					);
+				}
+
+				if (headerPortalCssPaths) {
+					headerPortalCssPaths = headerPortalCssPaths.split(',');
+
+					jQuery.each(
+						headerPortalCssPaths,
+						function(i, n) {										
+							head.append('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+						}
+					);
 				}
 
 				clicked = false;

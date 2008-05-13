@@ -51,12 +51,6 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 
 		container.replaceChild(portletBound, placeHolder);
 
-		Liferay.Util.evalScripts(addDiv);
-
-		if (!Liferay.Browser.is_firefox) {
-			Liferay.Util.evalScripts(portletBound);
-		}
-
 		<c:if test="<%= (layout != null) && (LayoutPermissionUtil.contains(permissionChecker, layout, ActionKeys.UPDATE)) %>">
 			if (!portletBound.isStatic) {
 				if (themeDisplay.isFreeformLayout()) {
@@ -97,24 +91,18 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 		addPortletReturn(xHR.responseText);
 	}
 
-	if (!returnPortlet) {
-		AjaxUtil.request(url, {
-			onComplete: complete
-		});
-	}
-	else {
-		jQuery.ajax(
-			{
-				url: url,
-				complete: function(xHR) {
-					complete(xHR);
-				},
-				async: false
-			}
-		);
+	jQuery.ajax(
+		{
+			url: url,
+			complete: function(xHR) {
+				complete(xHR);
+			},
+			async: !returnPortlet
+		}
+	);
 
-		return portletBoundary;
-	}
+	return portletBoundary;
+
 }
 
 function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
