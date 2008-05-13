@@ -28,6 +28,7 @@ import com.liferay.portal.kernel.util.StringMaker;
 import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.kernel.util.Validator;
+import com.liferay.util.lucene.JerichoHTMLTextExtractor;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedReader;
@@ -50,6 +51,15 @@ import java.util.Properties;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
+import org.apache.jackrabbit.extractor.MsExcelTextExtractor;
+import org.apache.jackrabbit.extractor.MsPowerPointTextExtractor;
+import org.apache.jackrabbit.extractor.MsWordTextExtractor;
+import org.apache.jackrabbit.extractor.OpenOfficeTextExtractor;
+import org.apache.jackrabbit.extractor.PdfTextExtractor;
+import org.apache.jackrabbit.extractor.PlainTextExtractor;
+import org.apache.jackrabbit.extractor.RTFTextExtractor;
+import org.apache.jackrabbit.extractor.TextExtractor;
+import org.apache.jackrabbit.extractor.XMLTextExtractor;
 
 import org.mozilla.intl.chardet.nsDetector;
 import org.mozilla.intl.chardet.nsPSMDetector;
@@ -222,6 +232,128 @@ public class FileUtil {
 
 	public static boolean exists(File file) {
 		return file.exists();
+	}
+
+	public static String extractText(InputStream is, String fileExt) {
+		String text = null;
+
+		try {
+			fileExt = GetterUtil.getString(fileExt).toLowerCase();
+
+			TextExtractor extractor = null;
+
+			String contentType = null;
+			String encoding = System.getProperty("encoding");
+
+			if (fileExt.equals(".doc")) {
+				extractor = new MsWordTextExtractor();
+
+				contentType = "application/vnd.ms-word";
+			}
+			else if (fileExt.equals(".htm") || fileExt.equals(".html")) {
+				extractor = new JerichoHTMLTextExtractor();
+
+				contentType = "text/html";
+			}
+			else if (fileExt.equals(".odb") || fileExt.equals(".odf") ||
+					 fileExt.equals(".odg") || fileExt.equals(".odp") ||
+					 fileExt.equals(".ods") || fileExt.equals(".odt")) {
+
+				extractor = new OpenOfficeTextExtractor();
+
+				contentType = "application/vnd.oasis.opendocument.";
+
+				if (fileExt.equals(".odb")) {
+					contentType += "database";
+				}
+				else if (fileExt.equals(".odf")) {
+					contentType += "formula";
+				}
+				else if (fileExt.equals(".odg")) {
+					contentType += "graphics";
+				}
+				else if (fileExt.equals(".odp")) {
+					contentType += "presentation";
+				}
+				else if (fileExt.equals(".ods")) {
+					contentType += "spreadsheet";
+				}
+				else if (fileExt.equals(".odt")) {
+					contentType += "text";
+				}
+			}
+			else if (fileExt.equals(".pdf")) {
+				extractor = new PdfTextExtractor();
+
+				contentType = "application/pdf";
+			}
+			else if (fileExt.equals(".ppt")) {
+				extractor = new MsPowerPointTextExtractor();
+
+				contentType = "application/vnd.ms-powerpoint";
+			}
+			else if (fileExt.equals(".rtf")) {
+				extractor = new RTFTextExtractor();
+
+				contentType = "application/rtf";
+			}
+			else if (fileExt.equals(".txt")) {
+				extractor = new PlainTextExtractor();
+
+				contentType = "text/plain";
+			}
+			else if (fileExt.equals(".xls")) {
+				extractor = new MsExcelTextExtractor();
+
+				contentType = "application/vnd.ms-excel";
+			}
+			else if (fileExt.equals(".xml")) {
+				extractor = new XMLTextExtractor();
+
+				contentType = "text/xml";
+			}
+
+			if (extractor != null) {
+				if (_log.isInfoEnabled()) {
+					_log.info(
+						"Using extractor " + extractor.getClass().getName() +
+							" for extension " + fileExt);
+				}
+
+				StringMaker sm = new StringMaker();
+
+				BufferedReader reader = new BufferedReader(
+					extractor.extractText(is, contentType, encoding));
+
+				int i;
+
+				while ((i = reader.read()) != -1) {
+					sm.append((char)i);
+				}
+
+				reader.close();
+
+				text = sm.toString();
+			}
+			else {
+				if (_log.isInfoEnabled()) {
+					_log.info("No extractor found for extension " + fileExt);
+				}
+			}
+		}
+		catch (Exception e) {
+			_log.error(e);
+		}
+
+		if (_log.isDebugEnabled()) {
+			_log.debug("Extractor returned text:\n\n" + text);
+		}
+
+		if (text == null) {
+			text = StringPool.BLANK;
+		}
+
+		return text;
 	}
 
 	public static String getAbsolutePath(File file) {

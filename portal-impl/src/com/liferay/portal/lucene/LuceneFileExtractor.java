@@ -23,14 +23,11 @@
 package com.liferay.portal.lucene;
 
 import com.liferay.portal.kernel.util.CharPool;
-import com.liferay.portal.kernel.util.GetterUtil;
-import com.liferay.portal.kernel.util.StringMaker;
-import com.liferay.portal.kernel.util.StringPool;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.FileUtil;
 
 import java.io.BufferedInputStream;
-import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,15 +36,6 @@ import java.io.InputStream;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.jackrabbit.extractor.MsExcelTextExtractor;
-import org.apache.jackrabbit.extractor.MsPowerPointTextExtractor;
-import org.apache.jackrabbit.extractor.MsWordTextExtractor;
-import org.apache.jackrabbit.extractor.OpenOfficeTextExtractor;
-import org.apache.jackrabbit.extractor.PdfTextExtractor;
-import org.apache.jackrabbit.extractor.PlainTextExtractor;
-import org.apache.jackrabbit.extractor.RTFTextExtractor;
-import org.apache.jackrabbit.extractor.TextExtractor;
-import org.apache.jackrabbit.extractor.XMLTextExtractor;
 import org.apache.lucene.document.Field;
 
 /**
@@ -59,128 +47,12 @@ import org.apache.lucene.document.Field;
 public class LuceneFileExtractor {
 
 	public Field getFile(String field, InputStream is, String fileExt) {
-		String text = null;
+		String text = FileUtil.extractText(is, fileExt);
 
-		try {
-			fileExt = GetterUtil.getString(fileExt).toLowerCase();
+		if (Validator.isNotNull(
+				PropsValues.LUCENE_FILE_EXTRACTOR_REGEXP_STRIP)) {
 
-			TextExtractor extractor = null;
-
-			String contentType = null;
-			String encoding = System.getProperty("encoding");
-
-			if (fileExt.equals(".doc")) {
-				extractor = new MsWordTextExtractor();
-
-				contentType = "application/vnd.ms-word";
-			}
-			else if (fileExt.equals(".htm") || fileExt.equals(".html")) {
-				extractor = new JerichoHTMLTextExtractor();
-
-				contentType = "text/html";
-			}
-			else if (fileExt.equals(".odb") || fileExt.equals(".odf") ||
-					 fileExt.equals(".odg") || fileExt.equals(".odp") ||
-					 fileExt.equals(".ods") || fileExt.equals(".odt")) {
-
-				extractor = new OpenOfficeTextExtractor();
-
-				contentType = "application/vnd.oasis.opendocument.";
-
-				if (fileExt.equals(".odb")) {
-					contentType += "database";
-				}
-				else if (fileExt.equals(".odf")) {
-					contentType += "formula";
-				}
-				else if (fileExt.equals(".odg")) {
-					contentType += "graphics";
-				}
-				else if (fileExt.equals(".odp")) {
-					contentType += "presentation";
-				}
-				else if (fileExt.equals(".ods")) {
-					contentType += "spreadsheet";
-				}
-				else if (fileExt.equals(".odt")) {
-					contentType += "text";
-				}
-			}
-			else if (fileExt.equals(".pdf")) {
-				extractor = new PdfTextExtractor();
-
-				contentType = "application/pdf";
-			}
-			else if (fileExt.equals(".ppt")) {
-				extractor = new MsPowerPointTextExtractor();
-
-				contentType = "application/vnd.ms-powerpoint";
-			}
-			else if (fileExt.equals(".rtf")) {
-				extractor = new RTFTextExtractor();
-
-				contentType = "application/rtf";
-			}
-			else if (fileExt.equals(".txt")) {
-				extractor = new PlainTextExtractor();
-
-				contentType = "text/plain";
-			}
-			else if (fileExt.equals(".xls")) {
-				extractor = new MsExcelTextExtractor();
-
-				contentType = "application/vnd.ms-excel";
-			}
-			else if (fileExt.equals(".xml")) {
-				extractor = new XMLTextExtractor();
-
-				contentType = "text/xml";
-			}
-
-			if (extractor != null) {
-				if (_log.isInfoEnabled()) {
-					_log.info(
-						"Using extractor " + extractor.getClass().getName() +
-							" for extension " + fileExt);
-				}
-
-				StringMaker sm = new StringMaker();
-
-				BufferedReader reader = new BufferedReader(
-					extractor.extractText(is, contentType, encoding));
-
-				int i;
-
-				while ((i = reader.read()) != -1) {
-					sm.append((char)i);
-				}
-
-				reader.close();
-
-				text = sm.toString();
-
-				if (Validator.isNotNull(
-						PropsValues.LUCENE_FILE_EXTRACTOR_REGEXP_STRIP)) {
-
-					text = regexpStrip(text);
-				}
-			}
-			else {
-				if (_log.isInfoEnabled()) {
-					_log.info("No extractor found for extension " + fileExt);
-				}
-			}
-		}
-		catch (Exception e) {
-			_log.error(e);
-		}
-
-		if (_log.isDebugEnabled()) {
-			_log.debug("Extractor returned text:\n\n" + text);
-		}
-
-		if (text == null) {
-			text = StringPool.BLANK;
+			text = regexpStrip(text);
 		}
 
 		return LuceneFields.getText(field, text);

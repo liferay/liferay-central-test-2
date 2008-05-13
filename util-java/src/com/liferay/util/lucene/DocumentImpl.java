@@ -23,6 +23,14 @@
 package com.liferay.util.lucene;
 
 import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.util.Date;
+import java.util.Map;
 
 /**
  * <a href="DocumentImpl.java.html"><b><i>View Source</i></b></a>
@@ -41,5 +49,90 @@ public class DocumentImpl implements Document {
 	}
 
 	private org.apache.lucene.document.Document _luceneDoc;
+
+	// temporarily implementing
+	public void add(Field field) {
+	}
+
+	// temporarily implementing
+	public void addDate(String name, Date value) {
+	}
+
+	// temporarily implementing
+	public void addFile(String name, InputStream is, String fileExt)
+			throws IOException {
+	}
+
+	// temporarily implementing
+	public void addFile(String name, byte[] byteArray, String fileExt)
+			throws IOException {
+	}
+
+	// temporarily implementing
+	public void addFile(String name, File file, String fileExt)
+			throws IOException {
+	}
+
+	// temporarily implementing
+	public void addKeyword(String name, double value) {
+	}
+
+	// temporarily implementing
+	public void addKeyword(String name, long value) {
+	}
+
+	// temporarily implementing
+	public void addKeyword(String name, String value) {
+	}
+
+	// temporarily implementing
+	public void addKeyword(String name, String[] values) {
+	}
+
+	// temporarily implementing
+	public void addModifiedDate() {
+	}
+
+	// temporarily implementing
+	public void addText(String name, long value) {
+	}
+
+	// temporarily implementing
+	public void addText(String name, String value) {
+	}
+
+	// temporarily implementing
+	public void addUID(String portletId, long field1) {
+	}
+
+	// temporarily implementing
+	public void addUID(String portletId, Long field1) {
+	}
+
+	// temporarily implementing
+	public void addUID(String portletId, String field1) {
+	}
+
+	// temporarily implementing
+	public void addUID(String portletId, long field1, String field2) {
+	}
+
+	// temporarily implementing
+	public void addUID(String portletId, Long field1, String field2) {
+	}
+
+	// temporarily implementing
+	public void addUID(String portletId, String field1, String field2) {
+	}
+
+	// temporarily implementing
+	public void addUID(String portletId, String field1, String field2,
+			String field3) {
+	}
+
+	// temporarily implementing
+	public Map<String, Field> getFields() {
+		return null;
+	}
 
 }

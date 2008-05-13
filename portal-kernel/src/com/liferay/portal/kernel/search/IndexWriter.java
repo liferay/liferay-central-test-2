@@ -20,31 +20,23 @@
  * SOFTWARE.
  */
 
-package com.liferay.portal.lucene;
-
-import au.id.jericho.lib.html.Source;
-
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Reader;
-import java.io.StringReader;
-
-import org.apache.jackrabbit.extractor.HTMLTextExtractor;
+package com.liferay.portal.kernel.search;
 
 /**
- * <a href="JerichoHTMLTextExtractor.java.html"><b><i>View Source</i></b></a>
+ * <a href="IndexWriter.java.html"><b><i>View Source</i></b></a>
  *
- * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
-public class JerichoHTMLTextExtractor extends HTMLTextExtractor {
+public interface IndexWriter {
 
-	public Reader extractText(InputStream stream, String type, String encoding)
-		throws IOException {
+	public void addDocument(long companyId, Document doc)
+		throws SearchException;
 
-		Source source = new Source(stream);
+	public void deleteDocument(long companyId, String uid, Document doc)
+		throws SearchException;
 
-		return new StringReader(source.getTextExtractor().toString());
-	}
+	public void updateDocument(long companyId, String uid, Document doc)
+		throws SearchException;
 
 }

@@ -24,6 +24,7 @@ package com.liferay.portlet.bookmarks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.OrderByComparator;
 import com.liferay.portal.kernel.util.Validator;
@@ -34,8 +35,6 @@ import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.base.BookmarksEntryLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
-
-import java.io.IOException;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -154,8 +153,8 @@ public class BookmarksEntryLocalServiceImpl
 				entry.getCompanyId(), folder.getGroupId(), folderId, entryId,
 				name, url, comments, tagsEntries);
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + entryId, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + entryId, se);
 		}
 
 		return entry;
@@ -241,8 +240,8 @@ public class BookmarksEntryLocalServiceImpl
 		try {
 			Indexer.deleteEntry(entry.getCompanyId(), entry.getEntryId());
 		}
-		catch (IOException ioe) {
-			_log.error("Deleting index " + entry.getEntryId(), ioe);
+		catch (SearchException se) {
+			_log.error("Deleting index " + entry.getEntryId(), se);
 		}
 
 		// Tags
@@ -380,8 +379,8 @@ public class BookmarksEntryLocalServiceImpl
 				entry.getCompanyId(), folder.getGroupId(), entry.getFolderId(),
 				entry.getEntryId(), name, url, comments, tagsEntries);
 		}
-		catch (IOException ioe) {
-			_log.error("Indexing " + entryId, ioe);
+		catch (SearchException se) {
+			_log.error("Indexing " + entryId, se);
 		}
 
 		return entry;

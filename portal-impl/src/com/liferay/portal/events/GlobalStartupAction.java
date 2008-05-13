@@ -37,12 +37,15 @@ import com.liferay.portal.kernel.jndi.PortalJNDIUtil;
 import com.liferay.portal.kernel.messaging.MessageBus;
 import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.messaging.MessageSender;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.ServerDetector;
+import com.liferay.portal.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.pop.POPServerUtil;
 import com.liferay.portal.util.PrefsPropsUtil;
 import com.liferay.portal.util.PropsUtil;
 import com.liferay.portal.util.PropsValues;
+import com.liferay.util.search.IndexWriterMessageSender;
 
 import java.io.File;
 
@@ -213,6 +216,12 @@ public class GlobalStartupAction extends SimpleAction {
 			MessageSender.class.getName());
 
 		MessageBusUtil.init(messageBus, messageSender);
+
+		// Search Engines
+
+		SearchEngineUtil.init(
+			LuceneSearchEngineUtil.getSearchEngine(),
+			new IndexWriterMessageSender());
 
 		// POP server
 

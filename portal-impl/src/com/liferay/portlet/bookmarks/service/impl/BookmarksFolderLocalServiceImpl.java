@@ -24,10 +24,13 @@ package com.liferay.portlet.bookmarks.service.impl;
 
 import com.liferay.portal.PortalException;
 import com.liferay.portal.SystemException;
+import com.liferay.portal.kernel.search.Document;
+import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
+import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
-import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.model.ResourceConstants;
 import com.liferay.portal.model.User;
@@ -38,7 +41,7 @@ import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.model.impl.BookmarksFolderImpl;
 import com.liferay.portlet.bookmarks.service.base.BookmarksFolderLocalServiceBaseImpl;
 import com.liferay.portlet.bookmarks.util.Indexer;
-import com.liferay.util.lucene.HitsImpl;
+import com.liferay.util.search.QueryImpl;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -46,12 +49,9 @@ import java.util.List;
 
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
 import org.apache.lucene.index.Term;
 import org.apache.lucene.search.BooleanClause;
 import org.apache.lucene.search.BooleanQuery;
-import org.apache.lucene.search.Searcher;
 import org.apache.lucene.search.TermQuery;
 
 /**
@@ -275,17 +275,13 @@ public class BookmarksFolderLocalServiceImpl
 	}
 
 	public void reIndex(String[] ids) throws SystemException {
-		if (LuceneUtil.INDEX_READ_ONLY) {
+		if (SearchEngineUtil.isIndexReadOnly()) {
 			return;
 		}
 
 		long companyId = GetterUtil.getLong(ids[0]);
 
-		IndexWriter writer = null;
-
 		try {
-			writer = LuceneUtil.getWriter(companyId);
-
 			List<BookmarksFolder> folders =
 				bookmarksFolderPersistence.findByCompanyId(companyId);
 
@@ -306,11 +302,11 @@ public class BookmarksFolderLocalServiceImpl
 						BookmarksEntry.class.getName(), entryId);
 
 					try {
-						Document doc = Indexer.getAddEntryDocument(
+						Document doc = Indexer.getEntryDocument(
 							companyId, groupId, folderId, entryId, title,
 							content, description, tagsEntries);
 
-						writer.addDocument(doc);
+						SearchEngineUtil.addDocument(companyId, doc);
 					}
 					catch (Exception e1) {
 						_log.error("Reindexing " + entryId, e1);
@@ -324,35 +320,21 @@ public class BookmarksFolderLocalServiceImpl
 		catch (Exception e2) {
 			throw new SystemException(e2);
 		}
-		finally {
-			try {
-				if (writer != null) {
-					LuceneUtil.write(companyId);
-				}
-			}
-			catch (Exception e) {
-				_log.error(e);
-			}
-		}
 	}
 
 	public Hits search(
 			long companyId, long groupId, long[] folderIds, String keywords)
 		throws SystemException {
 
-		Searcher searcher = null;
-
 		try {
-			HitsImpl hits = new HitsImpl();
-
 			BooleanQuery contextQuery = new BooleanQuery();
 
 			LuceneUtil.addRequiredTerm(
-				contextQuery, LuceneFields.PORTLET_ID, Indexer.PORTLET_ID);
+				contextQuery, Field.PORTLET_ID, Indexer.PORTLET_ID);
 
 			if (groupId > 0) {
 				LuceneUtil.addRequiredTerm(
-					contextQuery, LuceneFields.GROUP_ID, groupId);
+					contextQuery, Field.GROUP_ID, groupId);
 			}
 
 			if ((folderIds != null) && (folderIds.length > 0)) {
@@ -372,12 +354,10 @@ public class BookmarksFolderLocalServiceImpl
 			BooleanQuery searchQuery = new BooleanQuery();
 
 			if (Validator.isNotNull(keywords)) {
-				LuceneUtil.addTerm(searchQuery, LuceneFields.TITLE, keywords);
-				LuceneUtil.addTerm(searchQuery, LuceneFields.CONTENT, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.DESCRIPTION, keywords);
-				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.TAG_ENTRY, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.NAME, keywords);
+				LuceneUtil.addTerm(searchQuery, "url", keywords);
+				LuceneUtil.addTerm(searchQuery, "comments", keywords);
+				LuceneUtil.addTerm(searchQuery, Field.TAG_ENTRY, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
@@ -388,14 +368,18 @@ public class BookmarksFolderLocalServiceImpl
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			searcher = LuceneUtil.getSearcher(companyId);
-
-			hits.recordHits(searcher.search(fullQuery), searcher);
+			Hits hits = SearchEngineUtil.search(
+				companyId, new QueryImpl(fullQuery));
 
 			return hits;
 		}
 		catch (Exception e) {
-			return LuceneUtil.closeSearcher(searcher, keywords, e);
+			try {
+				return SearchEngineUtil.close(companyId, keywords, e);
+			}
+			catch (SearchException se) {
+				throw new SystemException(se);
+			}
 		}
 	}
 

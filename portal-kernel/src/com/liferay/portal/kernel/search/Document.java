@@ -22,16 +22,65 @@
 
 package com.liferay.portal.kernel.search;
 
-import java.io.Serializable;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
+
+import java.util.Date;
+import java.util.Map;
 
 /**
  * <a href="Document.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
- *
+ * @author Bruno Farache
  */
-public interface Document extends Serializable {
+public interface Document {
+
+	public void add(Field field);
+
+	public void addDate(String name, Date value);
+
+	public void addFile(String name, InputStream is, String fileExt)
+		throws IOException;
+
+	public void addFile(String name, byte[] byteArray, String fileExt)
+		throws IOException;
+
+	public void addFile(String name, File file, String fileExt)
+		throws IOException;
+
+	public void addKeyword(String name, double value);
+
+	public void addKeyword(String name, long value);
+
+	public void addKeyword(String name, String value);
+
+	public void addKeyword(String name, String[] values);
+
+	public void addModifiedDate();
+
+	public void addText(String name, long value);
+
+	public void addText(String name, String value);
+
+	public void addUID(String portletId, long field1);
+
+	public void addUID(String portletId, Long field1);
+
+	public void addUID(String portletId, String field1);
+
+	public void addUID(String portletId, long field1, String field2);
+
+	public void addUID(String portletId, Long field1, String field2);
+
+	public void addUID(String portletId, String field1, String field2);
+
+	public void addUID(String portletId, String field1, String field2,
+			String field3);
 
 	public String get(String name);
+
+	public Map<String, Field> getFields();
 
 }

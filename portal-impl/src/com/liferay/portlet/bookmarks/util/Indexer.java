@@ -22,26 +22,23 @@
 
 package com.liferay.portlet.bookmarks.util;
 
+import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.DocumentSummary;
+import com.liferay.portal.kernel.search.Field;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.kernel.util.StringUtil;
 import com.liferay.portal.lucene.LuceneFields;
-import com.liferay.portal.lucene.LuceneUtil;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
-
-import java.io.IOException;
+import com.liferay.util.search.DocumentImpl;
 
 import javax.portlet.PortletURL;
-
-import org.apache.lucene.document.Document;
-import org.apache.lucene.index.IndexWriter;
-import org.apache.lucene.index.Term;
 
 /**
  * <a href="Indexer.java.html"><b><i>View Source</i></b></a>
  *
  * @author Brian Wing Shun Chan
+ * @author Bruno Farache
  *
  */
 public class Indexer implements com.liferay.portal.kernel.search.Indexer {
@@ -50,102 +47,91 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 	public static void addEntry(
 			long companyId, long groupId, long folderId, long entryId,
-			String title, String content, String description,
-			String[] tagsEntries)
-		throws IOException {
+			String name, String url, String comments, String[] tagsEntries)
+		throws SearchException {
 
-		Document doc = getAddEntryDocument(
-			companyId, groupId, folderId, entryId, title, content, description,
+		Document doc = getEntryDocument(
+			companyId, groupId, folderId, entryId, name, url, comments,
 			tagsEntries);
 
-		IndexWriter writer = null;
-
-		try {
-			writer = LuceneUtil.getWriter(companyId);
-
-			writer.addDocument(doc);
-		}
-		finally {
-			if (writer != null) {
-				LuceneUtil.write(companyId);
-			}
-		}
+		SearchEngineUtil.addDocument(companyId, doc);
 	}
 
 	public static void deleteEntry(long companyId, long entryId)
-		throws IOException {
+		throws SearchException {
 
-		LuceneUtil.deleteDocuments(
-			companyId,
-			new Term(
-				LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, entryId)));
+		Document doc = getEntryDocument(companyId, entryId);
+
+		SearchEngineUtil.deleteDocument(companyId, doc.get(Field.UID), doc);
 	}
 
-	public static Document getAddEntryDocument(
-		long companyId, long groupId, long folderId, long entryId, String title,
-		String content, String description, String[] tagsEntries) {
+	public static Document getEntryDocument(long companyId, long entryId) {
+		Document doc = new DocumentImpl();
 
-		Document doc = new Document();
+		doc.addUID(PORTLET_ID, entryId);
 
-		LuceneUtil.addKeyword(
-			doc, LuceneFields.UID, LuceneFields.getUID(PORTLET_ID, entryId));
+		doc.addKeyword(Field.COMPANY_ID, companyId);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.COMPANY_ID, companyId);
-		LuceneUtil.addKeyword(doc, LuceneFields.PORTLET_ID, PORTLET_ID);
-		LuceneUtil.addKeyword(doc, LuceneFields.GROUP_ID, groupId);
+		return doc;
+	}
 
-		LuceneUtil.addText(doc, LuceneFields.TITLE, title);
-		LuceneUtil.addText(doc, LuceneFields.CONTENT, content);
-		LuceneUtil.addText(doc, LuceneFields.DESCRIPTION, description);
+	public static Document getEntryDocument(
+		long companyId, long groupId, long folderId, long entryId, String name,
+		String url, String comments, String[] tagsEntries) {
 
-		LuceneUtil.addModifiedDate(doc);
+		Document doc = new DocumentImpl();
 
-		LuceneUtil.addKeyword(doc, "folderId", folderId);
-		LuceneUtil.addKeyword(doc, "entryId", entryId);
+		doc.addUID(PORTLET_ID, entryId);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.TAG_ENTRY, tagsEntries);
+		doc.addKeyword(Field.COMPANY_ID, companyId);
+		doc.addKeyword(Field.PORTLET_ID, PORTLET_ID);
+		doc.addKeyword(Field.GROUP_ID, groupId);
+
+		doc.addText(Field.NAME, name);
+		doc.addText("url", url);
+		doc.addText("comments", comments);
+
+		doc.addModifiedDate();
+
+		doc.addKeyword("folderId", folderId);
+		doc.addKeyword("entryId", entryId);
+
+		doc.addKeyword(Field.TAG_ENTRY, tagsEntries);
 
 		return doc;
 	}
 
 	public static void updateEntry(
 			long companyId, long groupId, long folderId, long entryId,
-			String title, String content, String description,
-			String[] tagsEntries)
-		throws IOException {
+			String name, String url, String comments, String[] tagsEntries)
+		throws SearchException {
 
-		try {
-			deleteEntry(companyId, entryId);
-		}
-		catch (IOException ioe) {
-		}
-
-		addEntry(
-			companyId, groupId, folderId, entryId, title, content, description,
+		Document doc = getEntryDocument(
+			companyId, groupId, folderId, entryId, name, url, comments,
 			tagsEntries);
+
+		SearchEngineUtil.updateDocument(companyId, doc.get(Field.UID), doc);
 	}
 
 	public DocumentSummary getDocumentSummary(
 		com.liferay.portal.kernel.search.Document doc, PortletURL portletURL) {
 
-		// Title
+		// Name
 
-		String title = doc.get(LuceneFields.TITLE);
-
-		// Content
-
-		String content = doc.get(LuceneFields.CONTENT);
-
-		content = StringUtil.shorten(content, 200);
+		String name = doc.get(LuceneFields.NAME);
 
 		// URL
+
+		String url = doc.get("url");
+
+		// Portlet URL
 
 		String entryId = doc.get("entryId");
 
 		portletURL.setParameter("struts_action", "/bookmarks/edit_entry");
 		portletURL.setParameter("entryId", entryId);
 
-		return new DocumentSummary(title, content, portletURL);
+		return new DocumentSummary(name, url, portletURL);
 	}
 
 	public void reIndex(String[] ids) throws SearchException {
