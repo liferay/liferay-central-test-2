@@ -259,12 +259,12 @@ var StarRating = new Class({
 			var self = this;
 
 			if (!this.options.displayOnly) {
-				item.bind("mouseout",  {self: this}, this.onHoverOut);
+				item.bind("mouseout", {self: this}, this.onHoverOut);
 
 				this.stars.each(function(index) {
 					this.index = index + 1;
 					jQuery(this).bind("click", {self: self}, self.onClick)
-						   .bind("mouseover", {self: self}, self.onHoverOver);
+						.bind("mouseover", {self: self}, self.onHoverOver);
 				})
 			}
 
@@ -350,7 +350,7 @@ var ThumbRating = new Class({
 				this.select = (index == 0) ? 1 : -1;
 
 				jQuery(this).bind("click", {self: self}, self.onClick)
-					   .bind("mouseover", {self: self}, self.onHoverOver);
+					.bind("mouseover", {self: self}, self.onHoverOver);
 			})
 		}
 
