@@ -148,7 +148,7 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				headerPortalJavaScriptPaths.add(headerPortalJavaScriptPath);
 	%>
 
-				<script src="<%= headerPortalJavaScriptPath %>" type="text/javascript"></script>
+				<script src="<%= headerPortalJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
 
 	<%
 			}
@@ -167,7 +167,7 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				headerPortletJavaScriptPaths.add(headerPortletJavaScriptPath);
 	%>
 
-				<script src="<%= headerPortletJavaScriptPath %>" type="text/javascript"></script>
+				<script src="<%= headerPortletJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
 
 	<%
 			}

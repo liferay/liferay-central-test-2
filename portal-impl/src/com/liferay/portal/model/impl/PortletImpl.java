@@ -120,8 +120,8 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public PortletImpl(
 		String portletId, PluginPackage pluginPackage,
-		PluginSetting pluginSetting, long companyId, String icon,
-		String virtualPath, String strutsPath, String displayName,
+		PluginSetting pluginSetting, long companyId, long timestamp,
+		String icon, String virtualPath, String strutsPath, String displayName,
 		String portletClass, String configurationActionClass,
 		String indexerClass, String openSearchClass, String schedulerClass,
 		String portletURLClass, String friendlyURLMapperClass,
@@ -157,6 +157,7 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 		_pluginPackage = pluginPackage;
 		_defaultPluginSetting = pluginSetting;
 		setCompanyId(companyId);
+		_timestamp = timestamp;
 		_icon = icon;
 		_virtualPath = virtualPath;
 		_strutsPath = strutsPath;
@@ -297,6 +298,24 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 */
 	public void setDefaultPluginSetting(PluginSetting pluginSetting) {
 		_defaultPluginSetting = pluginSetting;
+	}
+
+	/**
+	 * Gets the timestamp of the portlet.
+	 *
+	 * @return		the timestamp of the portlet
+	 */
+	public long getTimestamp() {
+		return _timestamp;
+	}
+
+	/**
+	 * Sets the timestamp of the portlet.
+	 *
+	 * @param		timestamp the timestamp of the portlet
+	 */
+	public void setTimestamp(long timestamp) {
+		_timestamp = timestamp;
 	}
 
 	/**
@@ -2360,13 +2379,13 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	public Object clone() {
 		return new PortletImpl(
 			getPortletId(), getPluginPackage(), getDefaultPluginSetting(),
-			getCompanyId(), getIcon(), getVirtualPath(), getStrutsPath(),
-			getDisplayName(), getPortletClass(), getConfigurationActionClass(),
-			getIndexerClass(), getOpenSearchClass(), getSchedulerClass(),
-			getPortletURLClass(), getFriendlyURLMapperClass(),
-			getURLEncoderClass(), getPortletDataHandlerClass(),
-			getPortletLayoutListenerClass(), getPopMessageListenerClass(),
-			getSocialActivityInterpreterClass(),
+			getCompanyId(), getTimestamp(), getIcon(), getVirtualPath(),
+			getStrutsPath(), getDisplayName(), getPortletClass(),
+			getConfigurationActionClass(), getIndexerClass(),
+			getOpenSearchClass(), getSchedulerClass(), getPortletURLClass(),
+			getFriendlyURLMapperClass(), getURLEncoderClass(),
+			getPortletDataHandlerClass(), getPortletLayoutListenerClass(),
+			getPopMessageListenerClass(), getSocialActivityInterpreterClass(),
 			getSocialRequestInterpreterClass(), getDefaultPreferences(),
 			getPreferencesValidator(), isPreferencesCompanyWide(),
 			isPreferencesUniquePerLayout(), isPreferencesOwnedByGroup(),
@@ -2429,6 +2448,11 @@ public class PortletImpl extends PortletModelImpl implements Portlet {
 	 * Plugin settings associated with the portlet.
 	 */
 	private PluginSetting _defaultPluginSetting;
+
+	/**
+	 * The timestamp of the portlet.
+	 */
+	private long _timestamp;
 
 	/**
 	 * The icon of the portlet.

@@ -67,6 +67,10 @@ public interface Portlet extends PortletModel {
 	public void setDefaultPluginSetting(
 		com.liferay.portal.model.PluginSetting pluginSetting);
 
+	public long getTimestamp();
+
+	public void setTimestamp(long timestamp);
+
 	public java.lang.String getIcon();
 
 	public void setIcon(java.lang.String icon);

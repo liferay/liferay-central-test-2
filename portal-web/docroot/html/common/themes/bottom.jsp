@@ -130,7 +130,7 @@
 </c:if>
 
 <c:if test="<%= themeDisplay.isIncludePortletCssJs() %>">
-	<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/portlet_css_packed.js" type="text/javascript"></script>
+	<script src="<%= themeDisplay.getPathJavaScript() %>/liferay/portlet_css_packed.js?bn=<%= ReleaseInfo.getBuildNumber() %>" type="text/javascript"></script>
 </c:if>
 
 <%
@@ -198,7 +198,7 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				footerPortalJavaScriptPaths.add(footerPortalJavaScriptPath);
 	%>
 
-				<script src="<%= footerPortalJavaScriptPath %>" type="text/javascript"></script>
+				<script src="<%= footerPortalJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
 
 	<%
 			}
@@ -217,7 +217,7 @@ if ((layout != null) && layout.getType().equals(LayoutConstants.TYPE_PORTLET)) {
 				footerPortletJavaScriptPaths.add(footerPortletJavaScriptPath);
 	%>
 
-				<script src="<%= footerPortletJavaScriptPath %>" type="text/javascript"></script>
+				<script src="<%= footerPortletJavaScriptPath %>?t=<%= portlet.getTimestamp() %>" type="text/javascript"></script>
 
 	<%
 			}
@@ -235,13 +235,6 @@ if (layout != null) {
 
 	if (Validator.isNotNull(googleAnalyticsId)) {
 %>
-
-		<%--<script src="<%= themeDisplay.getPathJavaScript() %>/google/urchin.js" type="text/javascript"></script>
-
-		<script type="text/javascript">
-			_uacct = "<%= googleAnalyticsId %>";
-			urchinTracker();
-		</script>--%>
 
 		<script type="text/javascript">
 			var gaJsHost = (("https:" == document.location.protocol) ? "https://ssl." : "http://www.");

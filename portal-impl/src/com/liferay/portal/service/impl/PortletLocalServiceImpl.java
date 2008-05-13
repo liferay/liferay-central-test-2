@@ -1228,6 +1228,8 @@ public class PortletLocalServiceImpl extends PortletLocalServiceBaseImpl {
 			portletModel.setPluginPackage(pluginPackage);
 			portletModel.setPortletApp(portletApp);
 
+			portletModel.setTimestamp(System.currentTimeMillis());
+
 			portletModel.setDisplayName(GetterUtil.getString(
 				portlet.elementText("display-name"),
 				portletModel.getDisplayName()));
