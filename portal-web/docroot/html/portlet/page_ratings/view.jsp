@@ -27,5 +27,5 @@
 <liferay-ui:ratings
 	className="<%= Layout.class.getName() %>"
 	classPK="<%= layout.getPlid() %>"
-	url='<%= themeDisplay.getPathMain() + "/page_ratings/rate_page" %>'
+	url='<%= themeDisplay.getPathMain() + "/page_ratings/rate_entry" %>'
 />

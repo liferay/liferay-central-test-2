@@ -181,6 +181,7 @@
 		<reference package-path="com.liferay.portal" entity="Subscription" />
 		<reference package-path="com.liferay.portal" entity="User" />
 		<reference package-path="com.liferay.portlet.blogs" entity="BlogsEntry" />
+		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsEntry" />
@@ -299,6 +300,7 @@
 		<reference package-path="com.liferay.documentlibrary" entity="DL" />
 		<reference package-path="com.liferay.portal" entity="Resource" />
 		<reference package-path="com.liferay.portal" entity="User" />
+		<reference package-path="com.liferay.portlet.ratings" entity="RatingsStats" />
 		<reference package-path="com.liferay.portlet.social" entity="SocialActivity" />
 		<reference package-path="com.liferay.portlet.tags" entity="TagsAsset" />
 	</entity>

@@ -233,7 +233,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 <liferay-ui:ratings
 	className="<%= SCProductEntry.class.getName() %>"
 	classPK="<%= productEntry.getProductEntryId() %>"
-	url='<%= themeDisplay.getPathMain() + "/software_catalog/rate_product_entry" %>'
+	url='<%= themeDisplay.getPathMain() + "/software_catalog/rate_entry" %>'
 />
 
 <c:if test="<%= SCProductEntryPermission.contains(permissionChecker, productEntryId, ActionKeys.UPDATE) %>">
@@ -264,6 +264,7 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 			classPK="<%= productEntry.getProductEntryId() %>"
 			userId="<%= productEntry.getUserId() %>"
 			subject="<%= productEntry.getName() %>"
+			enableDiscussionRatings="true"
 			redirect="<%= currentURL %>"
 		/>
 	</c:when>

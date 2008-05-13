@@ -452,6 +452,15 @@
 						</li>
 					</c:if>
 				</ul>
+
+				<c:if test="<%= enableMessageRatings %>">
+					<liferay-ui:ratings
+						className="<%= MBMessage.class.getName() %>"
+						classPK="<%= message.getMessageId() %>"
+						isThumbRating="true"
+						url='<%= themeDisplay.getPathMain() + "/message_boards/rate_entry" %>'
+					/>
+				</c:if>
 			</td>
 		</tr>
 	</c:if>

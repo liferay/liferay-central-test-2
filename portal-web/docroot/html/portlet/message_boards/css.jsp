@@ -86,7 +86,10 @@
 
 .portlet-message-boards .thread-bottom {
 	padding: 3px 5px;
-	text-align: right;
+}
+
+.portlet-message-boards .taglib-ratings-thumbs {
+	float: none;
 }
 
 td.user-info {

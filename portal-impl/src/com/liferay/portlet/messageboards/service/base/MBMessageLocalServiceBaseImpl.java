@@ -129,6 +129,10 @@ import com.liferay.portlet.messageboards.service.persistence.MBThreadFinder;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadFinderUtil;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadPersistence;
 import com.liferay.portlet.messageboards.service.persistence.MBThreadUtil;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalService;
+import com.liferay.portlet.ratings.service.RatingsStatsLocalServiceFactory;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsPersistence;
+import com.liferay.portlet.ratings.service.persistence.RatingsStatsUtil;
 import com.liferay.portlet.social.service.SocialActivityLocalService;
 import com.liferay.portlet.social.service.SocialActivityLocalServiceFactory;
 import com.liferay.portlet.social.service.persistence.SocialActivityFinder;
@@ -610,6 +614,24 @@ public abstract class MBMessageLocalServiceBaseImpl
 		this.blogsEntryFinder = blogsEntryFinder;
 	}
 
+	public RatingsStatsLocalService getRatingsStatsLocalService() {
+		return ratingsStatsLocalService;
+	}
+
+	public void setRatingsStatsLocalService(
+		RatingsStatsLocalService ratingsStatsLocalService) {
+		this.ratingsStatsLocalService = ratingsStatsLocalService;
+	}
+
+	public RatingsStatsPersistence getRatingsStatsPersistence() {
+		return ratingsStatsPersistence;
+	}
+
+	public void setRatingsStatsPersistence(
+		RatingsStatsPersistence ratingsStatsPersistence) {
+		this.ratingsStatsPersistence = ratingsStatsPersistence;
+	}
+
 	public SocialActivityLocalService getSocialActivityLocalService() {
 		return socialActivityLocalService;
 	}
@@ -902,6 +924,14 @@ public abstract class MBMessageLocalServiceBaseImpl
 			blogsEntryFinder = BlogsEntryFinderUtil.getFinder();
 		}
 
+		if (ratingsStatsLocalService == null) {
+			ratingsStatsLocalService = RatingsStatsLocalServiceFactory.getImpl();
+		}
+
+		if (ratingsStatsPersistence == null) {
+			ratingsStatsPersistence = RatingsStatsUtil.getPersistence();
+		}
+
 		if (socialActivityLocalService == null) {
 			socialActivityLocalService = SocialActivityLocalServiceFactory.getImpl();
 		}
@@ -996,6 +1026,8 @@ public abstract class MBMessageLocalServiceBaseImpl
 	protected BlogsEntryService blogsEntryService;
 	protected BlogsEntryPersistence blogsEntryPersistence;
 	protected BlogsEntryFinder blogsEntryFinder;
+	protected RatingsStatsLocalService ratingsStatsLocalService;
+	protected RatingsStatsPersistence ratingsStatsPersistence;
 	protected SocialActivityLocalService socialActivityLocalService;
 	protected SocialActivityPersistence socialActivityPersistence;
 	protected SocialActivityFinder socialActivityFinder;

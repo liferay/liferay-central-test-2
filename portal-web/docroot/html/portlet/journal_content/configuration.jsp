@@ -170,6 +170,14 @@ type = ParamUtil.getString(request, "type", type);
 			<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
 		</td>
 	</tr>
+	<tr>
+		<td>
+			<liferay-ui:message key="enable-comment-ratings" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" onClick='<%= renderResponse.getNamespace() + "save();" %>' />
+		</td>
+	</tr>
 	</table>
 </c:if>
 

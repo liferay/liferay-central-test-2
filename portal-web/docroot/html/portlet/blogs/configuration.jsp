@@ -81,6 +81,14 @@
 	</tr>
 	<tr>
 		<td>
+			<liferay-ui:message key="enable-comment-ratings" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<liferay-ui:message key="enable-ratings" />
 		</td>
 		<td>

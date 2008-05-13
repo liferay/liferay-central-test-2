@@ -71,6 +71,7 @@ TagsAssetLocalServiceUtil.incrementViewCounter(BlogsEntry.class.getName(), entry
 		classPK="<%= entry.getEntryId() %>"
 		userId="<%= entry.getUserId() %>"
 		subject="<%= entry.getTitle() %>"
+		enableDiscussionRatings="<%= enableCommentRatings %>"
 		redirect="<%= currentURL %>"
 	/>
 </c:if>

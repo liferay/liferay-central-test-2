@@ -76,6 +76,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				classPK="<%= entry.getEntryId() %>"
 				userId="<%= entry.getUserId() %>"
 				subject="<%= entry.getTitle() %>"
+				enableDiscussionRatings="<%= enableCommentRatings %>"
 				redirect="<%= currentURL %>"
 			/>
 		</c:if>
@@ -225,7 +226,7 @@ boolean show = ((Boolean)request.getAttribute("view.jsp-show")).booleanValue();
 				<liferay-ui:ratings
 					className="<%= JournalArticle.class.getName() %>"
 					classPK="<%= articleDisplay.getResourcePrimKey() %>"
-					url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
+					url='<%= themeDisplay.getPathMain() + "/ratings/rate_entry" %>'
 				/>
 			</c:if>
 

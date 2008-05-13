@@ -66,6 +66,8 @@ if (Validator.isNotNull(portletResource)) {
 
 int rssDelta = GetterUtil.getInteger(prefs.getValue("rss-delta", StringPool.BLANK), SearchContainer.DEFAULT_DELTA);
 String rssDisplayStyle = prefs.getValue("rss-display-style", RSSUtil.DISPLAY_STYLE_FULL_CONTENT);
+boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null), true);
+boolean enableCommentRatings = GetterUtil.getBoolean(prefs.getValue("enable-comment-ratings", null), true);
 
 StringMaker rssURLParams = new StringMaker();
 

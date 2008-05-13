@@ -155,7 +155,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 					<liferay-ui:ratings
 						className="<%= JournalArticle.class.getName() %>"
 						classPK="<%= articleDisplay.getResourcePrimKey() %>"
-						url='<%= themeDisplay.getPathMain() + "/journal_content/rate_article" %>'
+						url='<%= themeDisplay.getPathMain() + "/journal_content/rate_entry" %>'
 					/>
 				</c:if>
 
@@ -170,6 +170,7 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 						classPK="<%= articleDisplay.getResourcePrimKey() %>"
 						userId="<%= articleDisplay.getUserId() %>"
 						subject="<%= articleDisplay.getTitle() %>"
+						enableDiscussionRatings="<%= enableCommentRatings %>"
 						redirect="<%= currentURL %>"
 					/>
 				</c:if>

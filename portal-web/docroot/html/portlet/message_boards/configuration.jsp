@@ -83,7 +83,7 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
 <liferay-ui:tabs
-	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,rss,anonymous-posting"
+	names="email-from,message-added-email,message-updated-email,thread-priorities,user-ranks,rss,anonymous-posting,ratings"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -883,6 +883,18 @@ String emailMessageUpdatedSignature = ParamUtil.getString(request, "emailMessage
 			</td>
 			<td>
 				<liferay-ui:input-checkbox param="allowAnonymousPosting" defaultValue="<%= MBUtil.isAllowAnonymousPosting(prefs) %>" />
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("ratings") %>'>
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="enable-message-ratings" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableMessageRatings" defaultValue="<%= enableMessageRatings %>" />
 			</td>
 		</tr>
 		</table>

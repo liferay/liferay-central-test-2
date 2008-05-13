@@ -372,7 +372,7 @@
 
 		<action path="/document_library/get_folders" type="com.liferay.portlet.documentlibrary.action.GetFoldersAction" />
 
-		<action path="/document_library/rate_file_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
+		<action path="/document_library/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/document_library/search" forward="portlet.document_library.search" />
 
@@ -666,7 +666,7 @@
 
 		<action path="/journal/get_template" type="com.liferay.portlet.journal.action.GetTemplateAction" />
 
-		<action path="/journal/rate_article" type="com.liferay.portlet.ratings.action.RateEntryAction" />
+		<action path="/journal/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/journal/rss" type="com.liferay.portlet.journal.action.RSSAction" />
 
@@ -707,7 +707,7 @@
 			<forward name="portlet.message_boards.error" path="portlet.journal_content.error" />
 		</action>
 
-		<action path="/journal_content/rate_article" type="com.liferay.portlet.ratings.action.RateEntryAction" />
+		<action path="/journal_content/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/journal_content/update_article_field" type="com.liferay.portlet.journalcontent.action.UpdateArticleFieldAction" />
 
@@ -822,6 +822,8 @@
 			<forward name="portlet.message_boards.error" path="portlet.message_boards.error" />
 			<forward name="portlet.message_boards.move_thread" path="portlet.message_boards.move_thread" />
 		</action>
+
+		<action path="/message_boards/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/message_boards/rss" type="com.liferay.portlet.messageboards.action.RSSAction" />
 
@@ -1041,11 +1043,13 @@
 			<forward name="portlet.message_boards.error" path="portlet.page_comments.error" />
 		</action>
 
+		<action path="/page_comments/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
+
 		<action path="/page_comments/view" forward="portlet.page_comments.view" />
 
 		<!-- Page Ratings -->
 
-		<action path="/page_ratings/rate_page" type="com.liferay.portlet.ratings.action.RateEntryAction" />
+		<action path="/page_ratings/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/page_ratings/view" forward="portlet.page_ratings.view" />
 
@@ -1165,7 +1169,7 @@
 			<forward name="portlet.software_catalog.error" path="portlet.software_catalog.error" />
 		</action>
 
-		<action path="/software_catalog/rate_product_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
+		<action path="/software_catalog/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/software_catalog/view" forward="portlet.software_catalog.view" />
 
@@ -1295,6 +1299,8 @@
 			<forward name="portlet.message_boards.error" path="portlet.page_comments.error" />
 		</action>
 
+		<action path="/tagged_content/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
+
 		<action path="/tagged_content/view" type="com.liferay.portlet.taggedcontent.action.ViewAction">
 			<forward name="portlet.tagged_content.view" path="portlet.tagged_content.view" />
 		</action>
@@ -1379,6 +1385,8 @@
 			<forward name="portlet.wiki.error" path="portlet.wiki.error" />
 			<forward name="portlet.wiki.move_page" path="portlet.wiki.move_page" />
 		</action>
+
+		<action path="/wiki/rate_entry" type="com.liferay.portlet.ratings.action.RateEntryAction" />
 
 		<action path="/wiki/rss" type="com.liferay.portlet.wiki.action.RSSAction" />
 

@@ -57,6 +57,7 @@ String templateId = GetterUtil.getString(prefs.getValue("template-id", StringPoo
 boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
 boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", null));
 boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null));
+boolean enableCommentRatings = GetterUtil.getBoolean(prefs.getValue("enable-comment-ratings", null));
 
 DateFormat dateFormatDate = DateFormats.getDate(locale, timeZone);
 %>

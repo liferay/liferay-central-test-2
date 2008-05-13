@@ -79,7 +79,7 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 
 <liferay-ui:tabs
-	names="email-from,page-added-email,page-updated-email,rss"
+	names="email-from,page-added-email,page-updated-email,rss,ratings"
 	param="tabs2"
 	url="<%= portletURL %>"
 />
@@ -427,6 +427,26 @@ String emailPageUpdatedSignature = ParamUtil.getString(request, "emailPageUpdate
 					<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_ABSTRACT)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_ABSTRACT %>"><liferay-ui:message key="abstract" /></option>
 					<option <%= (rssDisplayStyle.equals(RSSUtil.DISPLAY_STYLE_TITLE)) ? "selected" : "" %> value="<%= RSSUtil.DISPLAY_STYLE_TITLE %>"><liferay-ui:message key="title" /></option>
 				</select>
+			</td>
+		</tr>
+		</table>
+	</c:when>
+	<c:when test='<%= tabs2.equals("ratings") %>'>
+		<table class="lfr-table">
+		<tr>
+			<td>
+				<liferay-ui:message key="enable-comments" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<liferay-ui:message key="enable-comment-ratings" />
+			</td>
+			<td>
+				<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
 			</td>
 		</tr>
 		</table>

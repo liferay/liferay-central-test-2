@@ -221,6 +221,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
 		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+		boolean enableCommentRatings = ParamUtil.getBoolean(req, "enableCommentRatings");
 		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 		String medatadaFields = ParamUtil.getString(req, "metadataFields");
 
@@ -244,6 +245,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		prefs.setValue("enable-comments", String.valueOf(enableComments));
+		prefs.setValue("enable-comment-ratings", String.valueOf(enableCommentRatings));
 		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 		prefs.setValue("metadata-fields", medatadaFields);
 
@@ -259,12 +261,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
 		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+		boolean enableCommentRatings = ParamUtil.getBoolean(req, "enableCommentRatings");
 		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 
 		prefs.setValue("display-style", displayStyle);
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		prefs.setValue("enable-comments", String.valueOf(enableComments));
+		prefs.setValue("enable-comment-ratings", String.valueOf(enableCommentRatings));
 		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 	}
 

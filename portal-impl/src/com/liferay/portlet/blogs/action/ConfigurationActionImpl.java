@@ -56,6 +56,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		int pageDelta = ParamUtil.getInteger(req, "pageDelta");
 		String pageDisplayStyle = ParamUtil.getString(req, "pageDisplayStyle");
 		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+		boolean enableCommentRatings = ParamUtil.getBoolean(req, "enableCommentRatings");
 		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 
 		int rssDelta = ParamUtil.getInteger(req, "rssDelta");
@@ -70,6 +71,7 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("page-delta", String.valueOf(pageDelta));
 		prefs.setValue("page-display-style", pageDisplayStyle);
 		prefs.setValue("enable-comments", String.valueOf(enableComments));
+		prefs.setValue("enable-comment-ratings", String.valueOf(enableCommentRatings));
 		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 
 		prefs.setValue("rss-delta", String.valueOf(rssDelta));

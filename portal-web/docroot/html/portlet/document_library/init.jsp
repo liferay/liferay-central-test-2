@@ -84,6 +84,7 @@ if (rootFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
 String folderDisplayStyle = PrefsParamUtil.getString(prefs, request, "folderDisplayStyle", "tree");
 
+boolean enableCommentRatings = PrefsParamUtil.getBoolean(prefs, request, "enable-comment-ratings", true);
 boolean showBreadcrumbs = PrefsParamUtil.getBoolean(prefs, request, "showBreadcrumbs", true);
 boolean showFoldersSearch = PrefsParamUtil.getBoolean(prefs, request, "showFoldersSearch", true);
 boolean showSubfolders = PrefsParamUtil.getBoolean(prefs, request, "showSubfolders", true);

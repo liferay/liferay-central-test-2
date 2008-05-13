@@ -86,6 +86,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		else if (tabs2.equals("message-updated-email")) {
 			updateEmailMessageUpdated(req, prefs);
 		}
+		else if (tabs2.equals("ratings")) {
+			updateRatings(req, prefs);
+		}
 		else if (tabs2.equals("rss")) {
 			updateRSS(req, prefs);
 		}
@@ -207,6 +210,15 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 				"email-message-updated-signature",
 				emailMessageUpdatedSignature);
 		}
+	}
+
+	protected void updateRatings(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		boolean enableMessageRatings = ParamUtil.getBoolean(req, "enableMessageRatings");
+
+		prefs.setValue("enable-message-ratings", String.valueOf(enableMessageRatings));
 	}
 
 	protected void updateRSS(ActionRequest req, PortletPreferences prefs)

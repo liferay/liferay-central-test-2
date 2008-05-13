@@ -41,6 +41,7 @@ String formAction = (String)request.getAttribute("liferay-ui:discussion:formActi
 String className = (String)request.getAttribute("liferay-ui:discussion:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:classPK"));
 long userId = GetterUtil.getLong((String)request.getAttribute("liferay-ui:discussion:userId"));
+boolean enableDiscussionRatings = GetterUtil.getBoolean(String.valueOf(request.getAttribute("liferay-ui:discussion:enableDiscussionRatings")));
 String redirect = (String)request.getAttribute("liferay-ui:discussion:redirect");
 
 MBMessageDisplay messageDisplay = MBMessageLocalServiceUtil.getDiscussionMessageDisplay(userId, className, classPK);
@@ -50,7 +51,9 @@ MBThread thread = messageDisplay.getThread();
 MBTreeWalker treeWalker = messageDisplay.getTreeWalker();
 MBMessage rootMessage = treeWalker.getRoot();
 
+long companyId = PortalUtil.getCompanyId(request);
 DateFormat dateFormatDateTime = DateFormats.getDateTime(locale, timeZone);
+Portlet portlet = PortletLocalServiceUtil.getPortletById(companyId, portletDisplay.getId());
 %>
 
 <script type="text/javascript">
@@ -230,53 +233,70 @@ List messages = treeWalker.getMessages();
 				/>
 			</td>
 			<td valign="top" width="99%">
-				<div>
-
-					<%
-					String msgBody = message.getBody();
-
-					try {
-						msgBody = BBCodeUtil.getHTML(msgBody);
-					}
-					catch (Exception e) {
-						_log.error("Could not parse message " + message.getMessageId() + " " + e.getMessage());
-					}
-
-					msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
-					%>
-
-					<%= msgBody %>
-				</div>
-
-				<br />
-
-				<div>
-					<c:choose>
-						<c:when test="<%= message.getParentMessageId() == rootMessage.getMessageId() %>">
-							<%= LanguageUtil.format(pageContext, "posted-on-x", dateFormatDateTime.format(message.getModifiedDate())) %>
-						</c:when>
-						<c:otherwise>
+				<table class="lfr-table" width="100%">
+				<tr>
+					<td>
+						<div class="msg-body">
+							<c:if test="<%= enableDiscussionRatings %>">
+								<liferay-ui:ratings
+									className="<%= MBMessage.class.getName() %>"
+									classPK="<%= message.getMessageId() %>"
+									isThumbRating="true"
+									url='<%= themeDisplay.getPathMain() + "/" + portlet.getStrutsPath() + "/rate_entry" %>'
+								/>
+							</c:if>
 
 							<%
-							MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
+							String msgBody = message.getBody();
 
-							StringMaker sm = new StringMaker();
+							try {
+								msgBody = BBCodeUtil.getHTML(msgBody);
+							}
+							catch (Exception e) {
+								_log.error("Could not parse message " + message.getMessageId() + " " + e.getMessage());
+							}
 
-							sm.append("<a href=\"javascript: ");
-							sm.append(renderResponse.getNamespace());
-							sm.append("scrollIntoView('");
-							sm.append(parentMessage.getMessageId());
-							sm.append("');\">");
-							sm.append(parentMessage.getUserName());
-							sm.append("</a>");
+							msgBody = StringUtil.replace(msgBody, "@theme_images_path@/emoticons", themeDisplay.getPathThemeImages() + "/emoticons");
 							%>
 
-							<%= LanguageUtil.format(pageContext, "posted-on-x-in-reply-to-x", new Object[] {dateFormatDateTime.format(message.getModifiedDate()), sm.toString()}) %>
-						</c:otherwise>
-					</c:choose>
-				</div>
+							<%= msgBody %>
+						</div>
+					</td>
+				</tr>
+				<tr>
+					<td>
+						<br />
 
-				<br />
+						<div>
+							<c:choose>
+								<c:when test="<%= message.getParentMessageId() == rootMessage.getMessageId() %>">
+									<%= LanguageUtil.format(pageContext, "posted-on-x", dateFormatDateTime.format(message.getModifiedDate())) %>
+								</c:when>
+								<c:otherwise>
+
+									<%
+									MBMessage parentMessage = MBMessageLocalServiceUtil.getMessage(message.getParentMessageId());
+
+									StringMaker sm = new StringMaker();
+
+									sm.append("<a href=\"javascript: ");
+									sm.append(renderResponse.getNamespace());
+									sm.append("scrollIntoView('");
+									sm.append(parentMessage.getMessageId());
+									sm.append("');\">");
+									sm.append(parentMessage.getUserName());
+									sm.append("</a>");
+									%>
+
+									<%= LanguageUtil.format(pageContext, "posted-on-x-in-reply-to-x", new Object[] {dateFormatDateTime.format(message.getModifiedDate()), sm.toString()}) %>
+								</c:otherwise>
+							</c:choose>
+						</div>
+
+						<br />
+					</td>
+				</tr>
+				</table>
 
 				<table class="lfr-table">
 				<tr>

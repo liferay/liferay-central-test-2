@@ -155,6 +155,14 @@
 		<liferay-ui:input-checkbox param="enableComments" defaultValue="<%= enableComments %>" />
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="enable-comment-ratings" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
+	</td>
+</tr>
 
 <c:if test='<%= selectionStyle.equals("dynamic") %>'>
 	<tr>

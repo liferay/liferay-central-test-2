@@ -36,6 +36,7 @@
 		classPK="<%= layout.getPlid() %>"
 		userId="<%= user.getUserId() %>"
 		subject="<%= layout.getName(locale) %>"
+		enableDiscussionRatings="true"
 		redirect="<%= currentURL %>"
 	/>
 </c:if>

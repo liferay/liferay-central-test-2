@@ -145,6 +145,7 @@ boolean showQueryLogic = GetterUtil.getBoolean(prefs.getValue("show-query-logic"
 boolean showAvailableLocales = GetterUtil.getBoolean(prefs.getValue("show-available-locales", StringPool.BLANK));
 boolean enableRatings = GetterUtil.getBoolean(prefs.getValue("enable-ratings", null));
 boolean enableComments = GetterUtil.getBoolean(prefs.getValue("enable-comments", null));
+boolean enableCommentRatings = GetterUtil.getBoolean(prefs.getValue("enable-comment-ratings", null));
 
 String defaultMetadataFields = "";
 String allMetadataFields = "create-date,modified-date,publish-date,expiration-date,priority,author,view-count";

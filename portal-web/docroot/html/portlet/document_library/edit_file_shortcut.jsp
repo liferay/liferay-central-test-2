@@ -373,6 +373,7 @@ portletURL.setParameter("fileShortcutId", String.valueOf(fileShortcutId));
 					classPK="<%= toFileEntry.getFileEntryId() %>"
 					userId="<%= toFileEntry.getUserId() %>"
 					subject="<%= toFileEntry.getTitle() %>"
+					enableDiscussionRatings="<%= enableCommentRatings %>"
 					redirect="<%= currentURL %>"
 				/>
 			</c:if>

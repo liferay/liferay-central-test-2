@@ -71,6 +71,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		else if (tabs2.equals("page-updated-email")) {
 			updateEmailPageUpdated(req, prefs);
 		}
+		else if (tabs2.equals("ratings")) {
+			updateRatings(req, prefs);
+		}
 		else if (tabs2.equals("rss")) {
 			updateRSS(req, prefs);
 		}
@@ -170,6 +173,17 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			prefs.setValue(
 				"email-page-updated-signature", emailPageUpdatedSignature);
 		}
+	}
+
+	protected void updateRatings(
+			ActionRequest req, PortletPreferences prefs)
+		throws Exception {
+
+		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
+		boolean enableCommentRatings = ParamUtil.getBoolean(req, "enableCommentRatings");
+
+		prefs.setValue("enable-comments", String.valueOf(enableComments));
+		prefs.setValue("enable-comment-ratings", String.valueOf(enableCommentRatings));
 	}
 
 	protected void updateRSS(ActionRequest req, PortletPreferences prefs)
