@@ -349,7 +349,10 @@ portletURL.setParameter("resourcePrimKey", resourcePrimKey);
 					LinkedHashMap userParams = new LinkedHashMap();
 
 					if (tabs3.equals("current")) {
-						userParams.put("permission", new Long(resource.getResourceId()));
+					userParams.put("permission", new Long(resource.getResourceId()));
+					}
+					else if (tabs3.equals("available") && layout.getGroup().isOrganization()) {
+						userParams.put("usersOrgs", new Long(layout.getGroup().getClassPK()));
 					}
 					else if (tabs3.equals("available") && modelResource.equals(Layout.class.getName())) {
 						userParams.put("usersGroups", new Long(groupId));
