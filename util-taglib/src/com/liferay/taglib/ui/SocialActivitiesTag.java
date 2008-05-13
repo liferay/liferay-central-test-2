@@ -50,6 +50,14 @@ public class SocialActivitiesTag extends IncludeTag {
 				"liferay-ui:social-activities:activities", _activities);
 		}
 
+		req.setAttribute(
+			"liferay-ui:social-activities:feedEnabled",
+			String.valueOf(_feedEnabled));
+		req.setAttribute("liferay-ui:social-activities:feedTitle", _feedTitle);
+		req.setAttribute("liferay-ui:social-activities:feedLink", _feedLink);
+		req.setAttribute(
+			"liferay-ui:social-activities:feedLinkMessage", _feedLinkMessage);
+
 		return EVAL_BODY_BUFFERED;
 	}
 
@@ -65,6 +73,22 @@ public class SocialActivitiesTag extends IncludeTag {
 		_activities = activities;
 	}
 
+	public void setFeedEnabled(boolean feedEnabled) {
+		_feedEnabled = feedEnabled;
+	}
+
+	public void setFeedTitle(String feedTitle) {
+		_feedTitle = feedTitle;
+	}
+
+	public void setFeedLink(String feedLink) {
+		_feedLink = feedLink;
+	}
+
+	public void setFeedLinkMessage(String feedLinkMessage) {
+		_feedLinkMessage = feedLinkMessage;
+	}
+
 	protected String getDefaultPage() {
 		return _PAGE;
 	}
@@ -75,5 +99,9 @@ public class SocialActivitiesTag extends IncludeTag {
 	private String _className = StringPool.BLANK;
 	private long _classPK;
 	private List<SocialActivity> _activities;
+	private boolean _feedEnabled;
+	private String _feedTitle;
+	private String _feedLink = StringPool.BLANK;
+	private String _feedLinkMessage = StringPool.BLANK;
 
 }

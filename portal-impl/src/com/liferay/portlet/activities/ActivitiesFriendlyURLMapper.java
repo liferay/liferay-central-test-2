@@ -1,4 +1,3 @@
-<%
 /**
  * Copyright (c) 2000-2008 Liferay, Inc. All rights reserved.
  *
@@ -20,30 +19,29 @@
  * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
  * SOFTWARE.
  */
-%>
 
-<%@ include file="/html/portlet/activities/init.jsp" %>
+package com.liferay.portlet.activities;
 
-<%
-Group group = GroupLocalServiceUtil.getGroup(themeDisplay.getPortletGroupId());
+import com.liferay.portal.kernel.portlet.RSSFriendlyURLMapper;
 
-User user2 = user;
+/**
+ * <a href="ActivitiesFriendlyURLMapper.java.html"><b><i>View Source</i></b></a>
+ *
+ * @author Brian Wing Shun Chan
+ *
+ */
+public class ActivitiesFriendlyURLMapper extends RSSFriendlyURLMapper {
 
-if (group.isUser()) {
-	user2 = UserLocalServiceUtil.getUserById(group.getClassPK());
+	public String getMapping() {
+		return _MAPPING;
+	}
+
+	public String getPortletId() {
+		return _PORTLET_ID;
+	}
+
+	private static final String _MAPPING = "activities";
+
+	private static final String _PORTLET_ID = "116";
+
 }
-
-List<SocialActivity> activities = SocialActivityLocalServiceUtil.getUserActivities(user2.getUserId(), 0, 10);
-
-PortletURL rssURL = renderResponse.createRenderURL();
-
-rssURL.setParameter("rss", "1");
-%>
-
-<liferay-ui:social-activities
-	activities="<%= activities %>"
-	feedEnabled="<%= true %>"
-	feedTitle='<%= LanguageUtil.format(pageContext, "subscribe-to-x's-activities", user2.getFirstName()) %>'
-	feedLink="<%= rssURL.toString() %>"
-	feedLinkMessage='<%= LanguageUtil.format(pageContext, "subscribe-to-x's-activities", user2.getFirstName()) %>'
-/>

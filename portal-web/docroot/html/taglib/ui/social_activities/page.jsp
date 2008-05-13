@@ -29,10 +29,23 @@
 <%@ page import="com.liferay.portlet.social.service.SocialActivityInterpreterLocalServiceUtil" %>
 <%@ page import="com.liferay.portlet.social.service.SocialActivityLocalServiceUtil" %>
 
+<%@ page import="com.liferay.util.RSSUtil" %>
+
+<%@ page import="com.sun.syndication.feed.synd.SyndContent" %>
+<%@ page import="com.sun.syndication.feed.synd.SyndContentImpl" %>
+<%@ page import="com.sun.syndication.feed.synd.SyndEntry" %>
+<%@ page import="com.sun.syndication.feed.synd.SyndEntryImpl" %>
+<%@ page import="com.sun.syndication.feed.synd.SyndFeed" %>
+<%@ page import="com.sun.syndication.feed.synd.SyndFeedImpl" %>
+
 <%
 String className = (String)request.getAttribute("liferay-ui:social-activities:className");
 long classPK = GetterUtil.getLong((String)request.getAttribute("liferay-ui:social-activities:classPK"));
 List<SocialActivity> activities = (List<SocialActivity>)request.getAttribute("liferay-ui:social-activities:activities");
+boolean feedEnabled = GetterUtil.getBoolean((String)request.getAttribute("liferay-ui:social-activities:feedEnabled"));
+String feedTitle = (String)request.getAttribute("liferay-ui:social-activities:feedTitle");
+String feedLink = (String)request.getAttribute("liferay-ui:social-activities:feedLink");
+String feedLinkMessage = (String)request.getAttribute("liferay-ui:social-activities:feedLinkMessage");
 
 if (activities == null) {
 	activities = SocialActivityLocalServiceUtil.getActivities(0, className, classPK, QueryUtil.ALL_POS, QueryUtil.ALL_POS);
@@ -47,73 +60,146 @@ if (timeZone != null) {
 DateFormat timeFormatDate = DateFormats.getTime(locale, timeZone);
 %>
 
-<div class="taglib-social-activities">
+<c:choose>
+	<c:when test="<%= themeDisplay.isStateExclusive() %>">
 
-	<%
-	boolean firstDaySeparator = true;
+		<%
+		SyndFeed syndFeed = new SyndFeedImpl();
 
-	Date now = new Date();
+		syndFeed.setFeedType(RSSUtil.DEFAULT_FEED_TYPE);
+		syndFeed.setLink(feedLink);
+		syndFeed.setTitle(feedTitle);
+		syndFeed.setDescription(feedTitle);
 
-	int daysBetween = -1;
+		List<SyndEntry> entries = new ArrayList<SyndEntry>();
 
-	for (SocialActivity activity : activities) {
-		SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
+		syndFeed.setEntries(entries);
 
-		if (activityFeedEntry != null) {
-			Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), activityFeedEntry.getPortletId());
+		for (SocialActivity activity : activities) {
+			SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
 
-			int curDaysBetween = DateUtil.getDaysBetween(activity.getCreateDate(), now, timeZone);
-	%>
+			if (activityFeedEntry == null) {
+				continue;
+			}
 
-			<c:if test="<%= curDaysBetween > daysBetween %>">
+			SyndEntry syndEntry = new SyndEntryImpl();
 
-				<%
-				daysBetween = curDaysBetween;
-				%>
+			syndEntry.setTitle(HtmlUtil.extractText(activityFeedEntry.getTitle()));
+			syndEntry.setPublishedDate(activity.getCreateDate());
 
-				<div class="<%= firstDaySeparator ? "first-" : "" %>day-separator">
-					<c:choose>
-						<c:when test="<%= curDaysBetween == 0 %>">
-							<liferay-ui:message key="today" />
-						</c:when>
-						<c:when test="<%= curDaysBetween == 1 %>">
-							<liferay-ui:message key="yesterday" />
-						</c:when>
-						<c:otherwise>
-							<%= dateFormatDate.format(activity.getCreateDate()) %>
-						</c:otherwise>
-					</c:choose>
-				</div>
+			SyndContent syndContent = new SyndContentImpl();
 
-				<%
-				firstDaySeparator = false;
-				%>
+			syndContent.setType(RSSUtil.DEFAULT_ENTRY_TYPE);
+			syndContent.setValue(activityFeedEntry.getBody());
 
-			</c:if>
+			syndEntry.setDescription(syndContent);
 
-			<div class="activity-separator"><!-- --></div>
-
-			<table class="lfr-table">
-			<tr>
-				<td>
-					<liferay-ui:icon message="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" src="<%= portlet.getContextPath() + portlet.getIcon() %>" />
-				</td>
-				<td>
-					<%= activityFeedEntry.getTitle() %>
-
-					<%= timeFormatDate.format(activity.getCreateDate()) %>
-				</td>
-			<tr>
-				<td></td>
-				<td>
-					<%= activityFeedEntry.getBody() %>
-				</td>
-			</tr>
-			</table>
-
-	<%
+			entries.add(syndEntry);
 		}
-	}
-	%>
 
-</div>
+		String feedXML = StringPool.BLANK;
+
+		try {
+			feedXML = RSSUtil.export(syndFeed);
+		}
+		catch (Exception e) {
+		    _log.error(e, e);
+		}
+
+		response.setContentType(ContentTypes.TEXT_XML_UTF8);
+		%>
+
+		<%= feedXML %>
+	</c:when>
+	<c:otherwise>
+		<div class="taglib-social-activities">
+
+			<%
+			boolean firstDaySeparator = true;
+
+			Date now = new Date();
+
+			int daysBetween = -1;
+
+			for (SocialActivity activity : activities) {
+				SocialActivityFeedEntry activityFeedEntry = SocialActivityInterpreterLocalServiceUtil.interpret(activity, themeDisplay);
+
+				if (activityFeedEntry == null) {
+					continue;
+				}
+
+				Portlet portlet = PortletLocalServiceUtil.getPortletById(company.getCompanyId(), activityFeedEntry.getPortletId());
+
+				int curDaysBetween = DateUtil.getDaysBetween(activity.getCreateDate(), now, timeZone);
+			%>
+
+				<c:if test="<%= curDaysBetween > daysBetween %>">
+
+					<%
+					daysBetween = curDaysBetween;
+					%>
+
+					<div class="<%= firstDaySeparator ? "first-" : "" %>day-separator">
+						<c:choose>
+							<c:when test="<%= curDaysBetween == 0 %>">
+								<liferay-ui:message key="today" />
+							</c:when>
+							<c:when test="<%= curDaysBetween == 1 %>">
+								<liferay-ui:message key="yesterday" />
+							</c:when>
+							<c:otherwise>
+								<%= dateFormatDate.format(activity.getCreateDate()) %>
+							</c:otherwise>
+						</c:choose>
+					</div>
+
+					<%
+					firstDaySeparator = false;
+					%>
+
+				</c:if>
+
+				<div class="activity-separator"><!-- --></div>
+
+				<table class="lfr-table">
+				<tr>
+					<td>
+						<liferay-ui:icon message="<%= PortalUtil.getPortletTitle(portlet, application, locale) %>" src="<%= portlet.getContextPath() + portlet.getIcon() %>" />
+					</td>
+					<td>
+						<%= activityFeedEntry.getTitle() %>
+
+						<%= timeFormatDate.format(activity.getCreateDate()) %>
+					</td>
+				<tr>
+					<td></td>
+					<td>
+						<%= activityFeedEntry.getBody() %>
+					</td>
+				</tr>
+				</table>
+
+			<%
+			}
+			%>
+
+		</div>
+
+		<c:if test="<%= feedEnabled && (activities.size() > 0) %>">
+			<div class="separator"><!-- --></div>
+
+			<liferay-ui:icon
+				image="rss"
+				message="<%= feedLinkMessage %>"
+				url="<%= feedLink %>"
+				method="get"
+				target="_blank"
+				label="<%= true %>"
+			/>
+		</c:if>
+	</c:otherwise>
+</c:choose>
+
+<%!
+private static Log _log = LogFactoryUtil.getLog("portal-web.docroot.html.taglib.ui.social_activities.page.jsp");
+%>
