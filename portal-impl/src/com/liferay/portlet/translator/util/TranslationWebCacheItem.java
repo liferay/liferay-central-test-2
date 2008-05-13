@@ -51,16 +51,20 @@ public class TranslationWebCacheItem implements WebCacheItem {
 		try {
 			StringMaker url = new StringMaker();
 
-			url.append("http://babelfish.altavista.com/babelfish/tr?doit=done");
-			url.append("&urltext=").append(HttpUtil.encodeURL(_fromText));
+			url.append("http://babelfish.yahoo.com/translate_txt?");
+			url.append("&trtext=").append(HttpUtil.encodeURL(_fromText));
 			url.append("&lp=").append(_translationId);
 
 			String text = HttpUtil.URLtoString(new URL(url.toString()));
 
-			int begin = text.indexOf("<div style=padding:10px;>") + 25;
-			int end = text.indexOf("</div>", begin);
+			int x = text.indexOf("<div id=\"result\">");
 
-			String toText = text.substring(begin, end).trim();
+			x = text.indexOf(">", x) + 1;
+			x = text.indexOf(">", x) + 1;
+
+			int y = text.indexOf("</div>", x);
+
+			String toText = text.substring(x, y).trim();
 
 			toText = StringUtil.replace(toText, "\n", " ");
 
