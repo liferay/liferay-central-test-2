@@ -23,6 +23,7 @@
 package com.liferay.portal.servlet;
 
 import com.liferay.portal.kernel.servlet.StringServletResponse;
+import com.liferay.portal.kernel.servlet.UncommittedServletResponse;
 import com.liferay.portal.kernel.util.ContentTypes;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.StringPool;
@@ -88,7 +89,9 @@ public class AxisServlet extends org.apache.axis.transport.http.AxisServlet {
 
 			res.setContentType(ContentTypes.TEXT_XML_UTF8);
 
-			ServletResponseUtil.write(res, xml.getBytes(StringPool.UTF8));
+			ServletResponseUtil.write(
+				new UncommittedServletResponse(res),
+				xml.getBytes(StringPool.UTF8));
 		}
 		catch (Exception e) {
 			_log.error(e, e);
