@@ -32,8 +32,6 @@ import com.liferay.portalweb.portal.BaseTestCase;
  */
 public class PluginsTest extends BaseTestCase {
 	public void testPlugins() throws Exception {
-		selenium.open(
-			"/user/joebloggs/3?p_p_id=79&p_p_lifecycle=1&p_p_state=normal");
 		selenium.click("link=\u00bb");
 		selenium.waitForPageToLoad("30000");
 		selenium.click("//a[contains(text(),'Plugins')]");
