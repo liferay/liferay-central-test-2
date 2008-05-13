@@ -1211,7 +1211,7 @@ fieldset:last-child, .uni-form fieldset:last-child {
 /* ---------- Taglib ratings ---------- */
 
 .taglib-ratings.thumbs {
-	float: right;
+	float: left;
 	margin: 0;
 }
 
@@ -1225,14 +1225,14 @@ fieldset:last-child, .uni-form fieldset:last-child {
 .taglib-ratings.thumbs .total-rating {
 	font-size: 1.1em;
 	line-height: 18px;
-	padding: 0 6px 0 10px;
+	width:1.7em;
 }
 
 .taglib-ratings.thumbs .total-votes {
 	color: #777777;
 	font-size: xx-small;
 	line-height: 2em;
-	padding: 0 6px;
+	padding: 0 0 0 6px;
 	text-align: right;
 }
 

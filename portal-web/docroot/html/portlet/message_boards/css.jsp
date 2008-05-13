@@ -92,6 +92,10 @@
 	float: none;
 }
 
+.portlet-message-boards .taglib-ratings.thumbs .total-rating {
+	padding: 0 6px 0 10px;
+}
+
 td.user-info {
 	border-right: 1px solid #ccc;
 }

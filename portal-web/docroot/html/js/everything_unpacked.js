@@ -17348,7 +17348,7 @@ var ThumbRating = new Class({
 			item.bind("mouseout",  {self: this}, this.onHoverOut);
 
 			this.img.each(function(index) {
-				this.select = index == 0 ? 1 : -1;
+				this.select = (index == 0) ? 1 : -1;
 
 				jQuery(this).bind("click", {self: self}, self.onClick)
 					   .bind("mouseover", {self: self}, self.onHoverOver);
@@ -17399,8 +17399,9 @@ ThumbRating.implement({
 	},
 	onClick: function(event) {
 		var target = this;
-		var newRating = target.select;
 		var self = event.data.self;
+		var newRating = (target.select == self.rating) ? 0 : target.select;
+
 		self.rating = newRating;
 
 		if (self.options.onComplete) {
