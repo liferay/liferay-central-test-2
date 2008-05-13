@@ -6937,6 +6937,7 @@ StarRating.implement({
 		var target = this;
 		var newRating = target.index;
 		var self = event.data.self;
+
 		self.rating = newRating;
 
 		if (self.options.onComplete) {
@@ -7023,6 +7024,7 @@ ThumbRating.implement({
 		if (self.options.onComplete) {
 			self.options.onComplete(newRating);
 		}
+
 		self.display(newRating);
 	}
 });

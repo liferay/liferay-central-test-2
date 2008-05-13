@@ -45,10 +45,10 @@ public class DiscussionTag extends IncludeTag {
 		req.setAttribute(
 			"liferay-ui:discussion:userId", String.valueOf(_userId));
 		req.setAttribute("liferay-ui:discussion:subject", _subject);
-		req.setAttribute(
-			"liferay-ui:discussion:enableDiscussionRatings",
-			_enableDiscussionRatings);
 		req.setAttribute("liferay-ui:discussion:redirect", _redirect);
+		req.setAttribute(
+			"liferay-ui:discussion:ratingsEnabled",
+			String.valueOf(_ratingsEnabled));
 
 		return EVAL_BODY_BUFFERED;
 	}
@@ -77,12 +77,12 @@ public class DiscussionTag extends IncludeTag {
 		_subject = subject;
 	}
 
-	public void setEnableDiscussionRatings(boolean enableDiscussionRatings) {
-		_enableDiscussionRatings = enableDiscussionRatings;
-	}
-
 	public void setRedirect(String redirect) {
 		_redirect = redirect;
+	}
+
+	public void setRatingsEnabled(boolean ratingsEnabled) {
+		_ratingsEnabled = ratingsEnabled;
 	}
 
 	protected String getDefaultPage() {
@@ -97,7 +97,7 @@ public class DiscussionTag extends IncludeTag {
 	private long _classPK;
 	private long _userId;
 	private String _subject;
-	private boolean _enableDiscussionRatings;
 	private String _redirect;
+	private boolean _ratingsEnabled = true;
 
 }

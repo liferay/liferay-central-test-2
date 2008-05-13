@@ -54,7 +54,7 @@
 	margin-bottom: 1.5em;
 }
 
-.portlet-blogs .taglib-ratings {
+.portlet-blogs .taglib-ratings.stars {
 	margin-top: 1.5em;
 }
 

@@ -40,7 +40,7 @@ public class RatingsTag extends IncludeTag {
 		req.setAttribute("liferay-ui:ratings:className", _className);
 		req.setAttribute(
 			"liferay-ui:ratings:classPK", String.valueOf(_classPK));
-		req.setAttribute("liferay-ui:ratings:isThumbRating", _isThumbRating);
+		req.setAttribute("liferay-ui:ratings:type", _type);
 		req.setAttribute("liferay-ui:ratings:url", _url);
 
 		return EVAL_BODY_BUFFERED;
@@ -54,8 +54,8 @@ public class RatingsTag extends IncludeTag {
 		_classPK = classPK;
 	}
 
-	public void setIsThumbRating(boolean isThumbRating) {
-		_isThumbRating = isThumbRating;
+	public void setType(String type) {
+		_type = type;
 	}
 
 	public void setUrl(String url) {
@@ -70,7 +70,7 @@ public class RatingsTag extends IncludeTag {
 
 	private String _className;
 	private long _classPK;
-	private boolean _isThumbRating;
+	private String _type = "stars";
 	private String _url;
 
 }

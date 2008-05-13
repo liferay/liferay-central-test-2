@@ -221,7 +221,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		boolean showAvailableLocales = ParamUtil.getBoolean(
 			req, "showAvailableLocales");
 		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
-		boolean enableCommentRatings = ParamUtil.getBoolean(req, "enableCommentRatings");
+		boolean enableCommentRatings = ParamUtil.getBoolean(
+			req, "enableCommentRatings");
 		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 		String medatadaFields = ParamUtil.getString(req, "metadataFields");
 
@@ -244,9 +245,10 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue("pagination-type", paginationType);
 		prefs.setValue(
 			"show-available-locales", String.valueOf(showAvailableLocales));
-		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue("enable-comment-ratings", String.valueOf(enableCommentRatings));
 		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
+		prefs.setValue("enable-comments", String.valueOf(enableComments));
+		prefs.setValue(
+			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 		prefs.setValue("metadata-fields", medatadaFields);
 
 		TagsEntryLocalServiceUtil.checkEntries(userId, entries);

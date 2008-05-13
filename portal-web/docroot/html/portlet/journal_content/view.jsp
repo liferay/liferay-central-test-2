@@ -170,8 +170,8 @@ JournalArticleDisplay articleDisplay = (JournalArticleDisplay)request.getAttribu
 						classPK="<%= articleDisplay.getResourcePrimKey() %>"
 						userId="<%= articleDisplay.getUserId() %>"
 						subject="<%= articleDisplay.getTitle() %>"
-						enableDiscussionRatings="<%= enableCommentRatings %>"
 						redirect="<%= currentURL %>"
+						ratingsEnabled="<%= enableCommentRatings %>"
 					/>
 				</c:if>
 			</div>

@@ -264,7 +264,6 @@ List productScreenshots = SCProductScreenshotLocalServiceUtil.getProductScreensh
 			classPK="<%= productEntry.getProductEntryId() %>"
 			userId="<%= productEntry.getUserId() %>"
 			subject="<%= productEntry.getName() %>"
-			enableDiscussionRatings="true"
 			redirect="<%= currentURL %>"
 		/>
 	</c:when>

@@ -253,8 +253,8 @@ viewAttachmentsURL.setParameter("struts_action", "/wiki/view_page_attachments");
 			classPK="<%= wikiPage.getResourcePrimKey() %>"
 			userId="<%= wikiPage.getUserId() %>"
 			subject="<%= wikiPage.getTitle() %>"
-			enableDiscussionRatings="<%= enableCommentRatings %>"
 			redirect="<%= currentURL %>"
+			ratingsEnabled="<%= enableCommentRatings %>"
 		/>
 	</c:if>
 </c:if>

@@ -1148,10 +1148,6 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	vertical-align: middle;
 }
 
-.taglib-discussion .msg-body {
-	float: left;
-}
-
 /* ---------- Taglib diff thread ---------- */
 
 .taglib-diff-addedline, #taglib-diff-results ins {
@@ -1214,25 +1210,25 @@ fieldset:last-child, .uni-form fieldset:last-child {
 
 /* ---------- Taglib ratings ---------- */
 
-.taglib-ratings-thumbs {
+.taglib-ratings.thumbs {
 	float: right;
 	margin: 0;
 }
 
-.taglib-ratings-thumbs li {
+.taglib-ratings.thumbs li {
 	float: left;
 	list-style-image: none;
 	list-style-position: outside;
 	list-style-type: none;
 }
 
-.taglib-ratings-thumbs .totalRating {
+.taglib-ratings.thumbs .total-rating {
 	font-size: 1.1em;
 	line-height: 18px;
 	padding: 0 6px 0 10px;
 }
 
-.taglib-ratings-thumbs .totalVotes {
+.taglib-ratings.thumbs .total-votes {
 	color: #777777;
 	font-size: xx-small;
 	line-height: 2em;
@@ -1240,17 +1236,17 @@ fieldset:last-child, .uni-form fieldset:last-child {
 	text-align: right;
 }
 
-.taglib-ratings-thumbs .posTotal {
+.taglib-ratings.thumbs .pos-total {
 	color: #009900;
 	font-weight: bold;
 }
 
-.taglib-ratings-thumbs .negTotal {
+.taglib-ratings.thumbs .neg-total {
 	color: #cc3333;
 	font-weight: bold;
 }
 
-.taglib-ratings-thumbs .zeroTotal {
+.taglib-ratings.thumbs .zero-total {
 	color: #aaaaaa;
 }
 

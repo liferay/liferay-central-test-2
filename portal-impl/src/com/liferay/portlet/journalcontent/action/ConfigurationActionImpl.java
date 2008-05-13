@@ -64,7 +64,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			req, "showAvailableLocales");
 		boolean enableRatings = ParamUtil.getBoolean(req, "enableRatings");
 		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
-		boolean enableCommentRatings = ParamUtil.getBoolean(req, "enableCommentRatings");
+		boolean enableCommentRatings = ParamUtil.getBoolean(
+			req, "enableCommentRatings");
 
 		String portletResource = ParamUtil.getString(req, "portletResource");
 
@@ -78,7 +79,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			"show-available-locales", String.valueOf(showAvailableLocales));
 		prefs.setValue("enable-ratings", String.valueOf(enableRatings));
 		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue("enable-comment-ratings", String.valueOf(enableCommentRatings));
+		prefs.setValue(
+			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 
 		prefs.store();
 

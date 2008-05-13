@@ -546,8 +546,8 @@ portletURL.setParameter("name", name);
 					classPK="<%= fileEntry.getFileEntryId() %>"
 					userId="<%= fileEntry.getUserId() %>"
 					subject="<%= fileEntry.getTitle() %>"
-					enableDiscussionRatings="<%= enableCommentRatings %>"
 					redirect="<%= currentURL %>"
+					ratingsEnabled="<%= enableCommentRatings %>"
 				/>
 			</c:if>
 		</c:when>

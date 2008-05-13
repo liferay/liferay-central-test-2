@@ -203,14 +203,6 @@ String redirect = ParamUtil.getString(request, "redirect");
 <table class="lfr-table">
 <tr>
 	<td>
-		<liferay-ui:message key="enable-comment-ratings" />
-	</td>
-	<td>
-		<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
-	</td>
-</tr>
-<tr>
-	<td>
 		<liferay-ui:message key="show-search" />
 	</td>
 	<td>
@@ -278,6 +270,21 @@ String redirect = ParamUtil.getString(request, "redirect");
 			leftList="<%= leftList %>"
 			rightList="<%= rightList %>"
 		/>
+	</td>
+</tr>
+</table>
+
+<br />
+
+<liferay-ui:tabs names="ratings" />
+
+<table class="lfr-table">
+<tr>
+	<td>
+		<liferay-ui:message key="enable-comment-ratings" />
+	</td>
+	<td>
+		<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
 	</td>
 </tr>
 </table>

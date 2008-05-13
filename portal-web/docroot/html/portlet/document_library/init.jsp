@@ -84,7 +84,6 @@ if (rootFolderId != DLFolderImpl.DEFAULT_PARENT_FOLDER_ID) {
 
 String folderDisplayStyle = PrefsParamUtil.getString(prefs, request, "folderDisplayStyle", "tree");
 
-boolean enableCommentRatings = PrefsParamUtil.getBoolean(prefs, request, "enable-comment-ratings", true);
 boolean showBreadcrumbs = PrefsParamUtil.getBoolean(prefs, request, "showBreadcrumbs", true);
 boolean showFoldersSearch = PrefsParamUtil.getBoolean(prefs, request, "showFoldersSearch", true);
 boolean showSubfolders = PrefsParamUtil.getBoolean(prefs, request, "showSubfolders", true);
@@ -102,6 +101,8 @@ String defaultFileEntryColumns = "document,size,downloads,locked,action";
 String allFileEntryColumns = defaultFileEntryColumns;
 
 String[] fileEntryColumns = StringUtil.split(PrefsParamUtil.getString(prefs, request, "fileEntryColumns", defaultFileEntryColumns));
+
+boolean enableCommentRatings = PrefsParamUtil.getBoolean(prefs, request, "enable-comment-ratings", true);
 
 boolean showTabs = false;
 boolean showButtons = false;

@@ -73,6 +73,14 @@
 	</tr>
 	<tr>
 		<td>
+			<liferay-ui:message key="enable-ratings" />
+		</td>
+		<td>
+			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
+		</td>
+	</tr>
+	<tr>
+		<td>
 			<liferay-ui:message key="enable-comments" />
 		</td>
 		<td>
@@ -85,14 +93,6 @@
 		</td>
 		<td>
 			<liferay-ui:input-checkbox param="enableCommentRatings" defaultValue="<%= enableCommentRatings %>" />
-		</td>
-	</tr>
-	<tr>
-		<td>
-			<liferay-ui:message key="enable-ratings" />
-		</td>
-		<td>
-			<liferay-ui:input-checkbox param="enableRatings" defaultValue="<%= enableRatings %>" />
 		</td>
 	</tr>
 	</table>

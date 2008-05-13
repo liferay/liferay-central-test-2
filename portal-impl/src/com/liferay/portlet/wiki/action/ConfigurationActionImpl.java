@@ -175,15 +175,16 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 	}
 
-	protected void updateRatings(
-			ActionRequest req, PortletPreferences prefs)
+	protected void updateRatings(ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
 		boolean enableComments = ParamUtil.getBoolean(req, "enableComments");
-		boolean enableCommentRatings = ParamUtil.getBoolean(req, "enableCommentRatings");
+		boolean enableCommentRatings = ParamUtil.getBoolean(
+			req, "enableCommentRatings");
 
 		prefs.setValue("enable-comments", String.valueOf(enableComments));
-		prefs.setValue("enable-comment-ratings", String.valueOf(enableCommentRatings));
+		prefs.setValue(
+			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 	}
 
 	protected void updateRSS(ActionRequest req, PortletPreferences prefs)

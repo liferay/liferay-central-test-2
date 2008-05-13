@@ -212,13 +212,14 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		}
 	}
 
-	protected void updateRatings(
-			ActionRequest req, PortletPreferences prefs)
+	protected void updateRatings(ActionRequest req, PortletPreferences prefs)
 		throws Exception {
 
-		boolean enableMessageRatings = ParamUtil.getBoolean(req, "enableMessageRatings");
+		boolean enableMessageRatings = ParamUtil.getBoolean(
+			req, "enableMessageRatings");
 
-		prefs.setValue("enable-message-ratings", String.valueOf(enableMessageRatings));
+		prefs.setValue(
+			"enable-message-ratings", String.valueOf(enableMessageRatings));
 	}
 
 	protected void updateRSS(ActionRequest req, PortletPreferences prefs)

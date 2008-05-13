@@ -75,7 +75,8 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 			req, "fileEntriesPerPage");
 		String fileEntryColumns = ParamUtil.getString(req, "fileEntryColumns");
 
-		boolean enableCommentRatings = ParamUtil.getBoolean(req, "enableCommentRatings");
+		boolean enableCommentRatings = ParamUtil.getBoolean(
+			req, "enableCommentRatings");
 
 		String portletResource = ParamUtil.getString(
 			req, "portletResource");
@@ -107,7 +108,9 @@ public class ConfigurationActionImpl implements ConfigurationAction {
 		prefs.setValue(
 			"fileEntriesPerPage", String.valueOf(fileEntriesPerPage));
 		prefs.setValue("fileEntryColumns", fileEntryColumns);
-		prefs.setValue("enable-comment-ratings", String.valueOf(enableCommentRatings));
+
+		prefs.setValue(
+			"enable-comment-ratings", String.valueOf(enableCommentRatings));
 
 		if (SessionErrors.isEmpty(req)) {
 			prefs.store();
