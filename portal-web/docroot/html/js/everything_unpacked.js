@@ -19067,9 +19067,14 @@ var LayoutConfiguration = {
 				}
 			},
 			onComplete: function(s) {
-				if (!clicked) {
-					var container = s.container;
+				var container = s.container;
 
+				var headerPortalCssPaths = container.getAttribute('headerPortalCssPaths');
+                var headerPortletCssPaths = container.getAttribute('headerPortletCssPaths');
+				var footerPortalCssPaths = container.getAttribute('footerPortalCssPaths');
+				var footerPortletCssPaths = container.getAttribute('footerPortletCssPaths');
+
+				if (!clicked) {
 					var plid = container.getAttribute('plid');
 					var portletId = container.getAttribute('portletId');
 
@@ -19126,6 +19131,53 @@ var LayoutConfiguration = {
 							);
 						}
 					}
+				}
+
+				var head = jQuery('head');
+				var docBody = jQuery(document.body);
+
+				if (headerPortalCssPaths) {
+					headerPortalCssPaths = headerPortalCssPaths.split(',');
+
+					jQuery.each(
+						headerPortalCssPaths,
+						function(i, n) {
+							head.append('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+						}
+					);
+				}
+
+				if (headerPortletCssPaths) {
+					headerPortletCssPaths = headerPortletCssPaths.split(',');
+
+					jQuery.each(
+						headerPortletCssPaths,
+						function(i, n) {
+							head.append('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+						}
+					);
+				}
+
+				if (footerPortalCssPaths) {
+					footerPortalCssPaths = footerPortalCssPaths.split(',');
+
+					jQuery.each(
+						footerPortalCssPaths,
+						function(i, n) {
+							docBody.append('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+						}
+					);
+				}
+
+				if (footerPortletCssPaths) {
+					footerPortletCssPaths = footerPortletCssPaths.split(',');
+
+					jQuery.each(
+						footerPortletCssPaths,
+						function(i, n) {
+							docBody.append('<link href="' + this + '" rel="stylesheet" type="text/css" />');
+						}
+					);
 				}
 
 				clicked = false;

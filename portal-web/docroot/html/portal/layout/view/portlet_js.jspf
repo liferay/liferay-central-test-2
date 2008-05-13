@@ -102,7 +102,6 @@ function addPortletHTML(url, placeHolder, returnPortlet) {
 	);
 
 	return portletBoundary;
-
 }
 
 function closePortlet(plid, portletId, doAsUserId, skipConfirm) {
