@@ -38,16 +38,21 @@ import com.liferay.portal.kernel.search.SearchEngineUtil;
  */
 public class LuceneSearchEngineImpl implements SearchEngine {
 
-	public LuceneSearchEngineImpl(){
-		_writer = new LuceneIndexWriterImpl();
+	public LuceneSearchEngineImpl() {
 		_searcher = new LuceneIndexSearcherImpl();
+		_writer = new LuceneIndexWriterImpl();
 
 		Destination destination = new ParallelDispatchedDestination(
 			SearchEngineUtil.INDEX_WRITER_DESTINATION, 5, 10);
+
 		MessageBusUtil.addDestination(destination);
 
 		MessageBusUtil.registerMessageListener(
 			destination.getName(), new LuceneIndexWriterListener());
+	}
+
+	public String getName() {
+		return _NAME;
 	}
 
 	public IndexSearcher getSearcher() {
@@ -58,17 +63,13 @@ public class LuceneSearchEngineImpl implements SearchEngine {
 		return _writer;
 	}
 
-	public String getName() {
-		return _NAME;
-	}
-
 	public boolean isIndexReadOnly() {
 		return LuceneUtil.INDEX_READ_ONLY;
 	}
 
 	private static final String _NAME = "LUCENE";
 
-	private IndexWriter _writer;
 	private IndexSearcher _searcher;
+	private IndexWriter _writer;
 
 }

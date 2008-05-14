@@ -27,7 +27,6 @@ import com.liferay.portal.kernel.search.DocumentSummary;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.search.SearchException;
-import com.liferay.portal.lucene.LuceneFields;
 import com.liferay.portal.util.PortletKeys;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderLocalServiceUtil;
 import com.liferay.util.search.DocumentImpl;
@@ -60,19 +59,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 	public static void deleteEntry(long companyId, long entryId)
 		throws SearchException {
 
-		Document doc = getEntryDocument(companyId, entryId);
-
-		SearchEngineUtil.deleteDocument(companyId, doc.get(Field.UID), doc);
-	}
-
-	public static Document getEntryDocument(long companyId, long entryId) {
-		Document doc = new DocumentImpl();
-
-		doc.addUID(PORTLET_ID, entryId);
-
-		doc.addKeyword(Field.COMPANY_ID, companyId);
-
-		return doc;
+		SearchEngineUtil.deleteDocument(companyId, getEntryUID(entryId));
 	}
 
 	public static Document getEntryDocument(
@@ -88,17 +75,25 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		doc.addKeyword(Field.GROUP_ID, groupId);
 
 		doc.addText(Field.NAME, name);
-		doc.addText("url", url);
-		doc.addText("comments", comments);
+		doc.addText(Field.URL, url);
+		doc.addText(Field.COMMENTS, comments);
 
 		doc.addModifiedDate();
 
 		doc.addKeyword("folderId", folderId);
 		doc.addKeyword("entryId", entryId);
 
-		doc.addKeyword(Field.TAG_ENTRY, tagsEntries);
+		doc.addKeyword(Field.TAGS_ENTRIES, tagsEntries);
 
 		return doc;
+	}
+
+	public static String getEntryUID(long entryId) {
+		Document doc = new DocumentImpl();
+
+		doc.addUID(PORTLET_ID, entryId);
+
+		return doc.get(Field.UID);
 	}
 
 	public static void updateEntry(
@@ -118,11 +113,11 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 
 		// Name
 
-		String name = doc.get(LuceneFields.NAME);
+		String name = doc.get(Field.NAME);
 
 		// URL
 
-		String url = doc.get("url");
+		String url = doc.get(Field.URL);
 
 		// Portlet URL
 

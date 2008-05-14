@@ -294,17 +294,17 @@ public class BookmarksFolderLocalServiceImpl
 				for (BookmarksEntry entry : entries) {
 					long groupId = folder.getGroupId();
 					long entryId = entry.getEntryId();
-					String title = entry.getName();
-					String content = entry.getUrl();
-					String description = entry.getComments();
+					String name = entry.getName();
+					String url = entry.getUrl();
+					String comments = entry.getComments();
 
 					String[] tagsEntries = tagsEntryLocalService.getEntryNames(
 						BookmarksEntry.class.getName(), entryId);
 
 					try {
 						Document doc = Indexer.getEntryDocument(
-							companyId, groupId, folderId, entryId, title,
-							content, description, tagsEntries);
+							companyId, groupId, folderId, entryId, name,
+							url, comments, tagsEntries);
 
 						SearchEngineUtil.addDocument(companyId, doc);
 					}
@@ -355,9 +355,9 @@ public class BookmarksFolderLocalServiceImpl
 
 			if (Validator.isNotNull(keywords)) {
 				LuceneUtil.addTerm(searchQuery, Field.NAME, keywords);
-				LuceneUtil.addTerm(searchQuery, "url", keywords);
-				LuceneUtil.addTerm(searchQuery, "comments", keywords);
-				LuceneUtil.addTerm(searchQuery, Field.TAG_ENTRY, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.URL, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.COMMENTS, keywords);
+				LuceneUtil.addTerm(searchQuery, Field.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();
@@ -368,10 +368,7 @@ public class BookmarksFolderLocalServiceImpl
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			Hits hits = SearchEngineUtil.search(
-				companyId, new QueryImpl(fullQuery));
-
-			return hits;
+			return SearchEngineUtil.search(companyId, new QueryImpl(fullQuery));
 		}
 		catch (Exception e) {
 			try {

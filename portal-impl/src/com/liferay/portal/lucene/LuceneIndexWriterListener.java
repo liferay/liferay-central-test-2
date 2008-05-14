@@ -24,10 +24,10 @@ package com.liferay.portal.lucene;
 
 import com.liferay.portal.kernel.messaging.MessageListener;
 import com.liferay.portal.kernel.search.IndexWriterRequest;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.util.JSONUtil;
 
-import com.metaparadigm.jsonrpc.UnmarshallException;
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
 
 /**
  * <a href="LuceneIndexWriterListener.java.html"><b><i>View Source</i></b></a>
@@ -39,30 +39,30 @@ public class LuceneIndexWriterListener implements MessageListener {
 
 	public void receive(String message) {
 		try {
-			IndexWriterRequest request =
-				(IndexWriterRequest)JSONUtil.deserialize(message);
+			IndexWriterRequest req = (IndexWriterRequest)JSONUtil.deserialize(
+				message);
 
-			if (request.getCommand().equals(IndexWriterRequest.ADD)) {
+			String command = req.getCommand();
+
+			if (command.equals(IndexWriterRequest.ADD)) {
 				LuceneSearchEngineUtil.addDocument(
-					request.getCompanyId(), request.getDocument());
+					req.getCompanyId(), req.getDocument());
 			}
-			else if (request.getCommand().equals(IndexWriterRequest.DELETE)) {
+			else if (command.equals(IndexWriterRequest.DELETE)) {
 				LuceneSearchEngineUtil.deleteDocument(
-					request.getCompanyId(), request.getUid(),
-					request.getDocument());
+					req.getCompanyId(), req.getUid());
 			}
-			else if (request.getCommand().equals(IndexWriterRequest.UPDATE)) {
+			else if (command.equals(IndexWriterRequest.UPDATE)) {
 				LuceneSearchEngineUtil.updateDocument(
-					request.getCompanyId(), request.getUid(),
-					request.getDocument());
+					req.getCompanyId(), req.getUid(), req.getDocument());
 			}
 		}
-		catch (UnmarshallException ue) {
-			ue.printStackTrace();
-		}
-		catch (SearchException se) {
-			se.printStackTrace();
+		catch (Exception e) {
+			_log.error(e, e);
 		}
 	}
+
+	private static Log _log =
+		LogFactory.getLog(LuceneIndexWriterListener.class);
 
 }

@@ -71,7 +71,7 @@ public class LuceneFields {
 
 	public static final String VERSION_LABEL = "versionLabel";
 
-	public static final String TAG_ENTRY = "tag_entry";
+	public static final String TAGS_ENTRIES = "tagsEntries";
 
 	public static String getUID(String portletId, long field1) {
 		return getUID(portletId, String.valueOf(field1));

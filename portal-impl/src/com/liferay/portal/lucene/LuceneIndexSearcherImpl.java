@@ -22,6 +22,7 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.IndexSearcher;
 import com.liferay.portal.kernel.search.Query;
@@ -43,14 +44,17 @@ public class LuceneIndexSearcherImpl implements IndexSearcher {
 
 		Hits hits = new LuceneHitsImpl();
 
-		org.apache.lucene.search.IndexSearcher searcher = null;
-
 		try {
-			searcher = LuceneUtil.getSearcher(companyId);
+			org.apache.lucene.search.IndexSearcher searcher =
+				LuceneUtil.getSearcher(companyId);
+
 			hits = LuceneUtil.closeSearcher(searcher, keywords, e);
 		}
-		catch (Exception e1) {
-			throw new SearchException(e1);
+		catch (IOException ioe) {
+			throw new SearchException(ioe);
+		}
+		catch (SystemException se) {
+			throw new SearchException(se);
 		}
 
 		return hits;

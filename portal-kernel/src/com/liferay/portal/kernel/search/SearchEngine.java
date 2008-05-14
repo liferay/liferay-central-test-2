@@ -30,11 +30,11 @@ package com.liferay.portal.kernel.search;
  */
 public interface SearchEngine {
 
-	public IndexWriter getWriter();
+	public String getName();
 
 	public IndexSearcher getSearcher();
 
-	public String getName();
+	public IndexWriter getWriter();
 
 	public boolean isIndexReadOnly();
 

@@ -31,25 +31,26 @@ package com.liferay.portal.kernel.search;
 public class IndexWriterRequest {
 
 	public static final String ADD = "add";
+
 	public static final String DELETE = "delete";
+
 	public static final String UPDATE = "update";
 
-	public IndexWriterRequest() {
+	public IndexWriterRequest(String command, long companyId, String uid) {
+		this(command, companyId, uid, null);
+	}
+
+	public IndexWriterRequest(String command, long companyId, Document doc) {
+		this(command, companyId, null, doc);
 	}
 
 	public IndexWriterRequest(
-			String command, long companyId, Document document) {
-
-		this(command, companyId, null, document);
-	}
-
-	public IndexWriterRequest(
-			String command, long companyId, String uid, Document document) {
+		String command, long companyId, String uid, Document doc) {
 
 		_command = command;
 		_companyId = companyId;
 		_uid = uid;
-		_document = document;
+		_doc = doc;
 	}
 
 	public String getCommand() {
@@ -77,16 +78,16 @@ public class IndexWriterRequest {
 	}
 
 	public Document getDocument() {
-		return _document;
+		return _doc;
 	}
 
-	public void setDocument(Document document) {
-		_document = document;
+	public void setDocument(Document doc) {
+		_doc = doc;
 	}
 
 	private String _command;
 	private long _companyId;
 	private String _uid;
-	private Document _document;
+	private Document _doc;
 
 }

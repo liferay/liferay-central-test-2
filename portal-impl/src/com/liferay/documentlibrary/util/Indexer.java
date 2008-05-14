@@ -253,7 +253,7 @@ public class Indexer implements com.liferay.portal.kernel.search.Indexer {
 		LuceneUtil.addKeyword(doc, "repositoryId", repositoryId);
 		LuceneUtil.addKeyword(doc, "path", fileName);
 
-		LuceneUtil.addKeyword(doc, LuceneFields.TAG_ENTRY, tagsEntries);
+		LuceneUtil.addKeyword(doc, LuceneFields.TAGS_ENTRIES, tagsEntries);
 
 		if (_log.isDebugEnabled()) {
 			_log.debug(

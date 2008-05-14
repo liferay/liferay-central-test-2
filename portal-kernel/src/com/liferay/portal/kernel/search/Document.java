@@ -34,6 +34,7 @@ import java.util.Map;
  *
  * @author Brian Wing Shun Chan
  * @author Bruno Farache
+ *
  */
 public interface Document {
 
@@ -51,6 +52,8 @@ public interface Document {
 		throws IOException;
 
 	public void addKeyword(String name, double value);
+
+	public void addKeyword(String name, int value);
 
 	public void addKeyword(String name, long value);
 
@@ -76,8 +79,8 @@ public interface Document {
 
 	public void addUID(String portletId, String field1, String field2);
 
-	public void addUID(String portletId, String field1, String field2,
-			String field3);
+	public void addUID(
+		String portletId, String field1, String field2, String field3);
 
 	public String get(String name);
 

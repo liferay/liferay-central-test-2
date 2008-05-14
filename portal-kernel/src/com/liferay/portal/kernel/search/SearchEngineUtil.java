@@ -34,22 +34,89 @@ import java.util.Map;
  */
 public class SearchEngineUtil {
 
-	public static final String INDEX_WRITER_DESTINATION = "index.writer";
+	public static final String INDEX_WRITER_DESTINATION =
+		"liferay/search/IndexWriter";
+
+	public static void addDocument(long companyId, Document doc)
+		throws SearchException {
+
+		_instance._defaultIndexWriter.addDocument(companyId, doc);
+	}
+
+	public static Hits close(long companyId, String keywords, Exception e)
+		throws SearchException {
+
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		Thread.currentThread().setContextClassLoader(
+			_instance._getCurrentSearchEngineClassLoader());
+
+		Hits hits = null;
+
+		try {
+			hits = _instance._getSearcher().close(companyId, keywords, e);
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+
+		return hits;
+	}
+
+	public static void deleteDocument(long companyId, String uid)
+		throws SearchException {
+
+		_instance._defaultIndexWriter.deleteDocument(companyId, uid);
+	}
+
+	public static Collection<SearchEngine> getRegisteredSearchEngines() {
+		return _instance._getRegisteredSearchEngines();
+	}
+
+	public static void init(
+		SearchEngine defaultSearchEngine, IndexWriter defaultIndexWriter) {
+
+		_instance._init(defaultSearchEngine, defaultIndexWriter);
+	}
 
 	public static boolean isIndexReadOnly() {
 		return _instance._isIndexReadOnly();
 	}
 
-	public static void addDocument(
-		long companyId, Document doc) throws SearchException {
+	public static void registerSearchEngine(
+		SearchEngine engine, boolean current) {
 
-		_instance._defaultIndexWriter.addDocument(companyId, doc);
+		_instance._registerSearchEngine(engine, current);
 	}
 
-	public static void deleteDocument(long companyId, String uid, Document doc)
+	public static Hits search(long companyId, Query query)
 		throws SearchException {
 
-		_instance._defaultIndexWriter.deleteDocument(companyId, uid, doc);
+		ClassLoader contextClassLoader =
+			Thread.currentThread().getContextClassLoader();
+
+		Thread.currentThread().setContextClassLoader(
+			_instance._getCurrentSearchEngineClassLoader());
+
+		Hits hits = null;
+
+		try {
+			hits = _instance._getSearcher().search(companyId, query);
+		}
+		finally {
+			Thread.currentThread().setContextClassLoader(contextClassLoader);
+		}
+
+		return hits;
+	}
+
+	public static void setCurrentSearchEngine(String name) {
+		_instance._setCurrentSearchEngine(name);
+	}
+
+	public static void unregisterSearchEngine(String name) {
+		_instance._unregisterSearchEngine(name);
 	}
 
 	public static void updateDocument(long companyId, String uid, Document doc)
@@ -58,105 +125,41 @@ public class SearchEngineUtil {
 		_instance._defaultIndexWriter.updateDocument(companyId, uid, doc);
 	}
 
-	public static Hits close(long companyId, String keywords, Exception e)
-		throws SearchException {
-
-		ClassLoader classLoader =
-			Thread.currentThread().getContextClassLoader();
-
-		Thread.currentThread().setContextClassLoader(
-			_instance._getCurrentSearchEngineClassLoader());;
-
-		Hits hits = null;
-
-		try {
-			hits = _instance._getSearcher().close(companyId, keywords, e);
-		}
-		finally {
-			Thread.currentThread().setContextClassLoader(classLoader);
-		}
-
-		return hits;
-	}
-
-	public static Hits search(long companyId, Query query)
-		throws SearchException {
-
-		ClassLoader classLoader =
-			Thread.currentThread().getContextClassLoader();
-
-		Thread.currentThread().setContextClassLoader(
-			_instance._getCurrentSearchEngineClassLoader());;
-
-		Hits hits = null;
-
-		try {
-			hits = _instance._getSearcher().search(companyId, query);
-		}
-		finally {
-			Thread.currentThread().setContextClassLoader(classLoader);
-		}
-
-		return hits;
-	}
-
-	public static void init(
-			SearchEngine defaultSearchEngine, IndexWriter defaultIndexWriter) {
-
-		_instance._init(defaultSearchEngine, defaultIndexWriter);
-	}
-
-	public static void registerSearchEngine(
-			SearchEngine engine, boolean current) {
-
-		_instance._registerSearchEngine(engine, current);
-	}
-
-	public static void unregisterSearchEngine(String name) {
-		_instance._unregisterSearchEngine(name);
-	}
-
-	public static void setCurrentSearchEngine(String name) {
-		_instance._setCurrentSearchEngine(name);
-	}
-
-	public static Collection<SearchEngine> getRegisteredSearchEngines() {
-		return _instance._getRegisteredSearchEngines();
-	}
-
 	private SearchEngineUtil() {
 	}
 
+	private ClassLoader _getCurrentSearchEngineClassLoader() {
+		return _registeredSearchEnginesClassLoaders.get(
+			_currentSearchEngine.getName());
+	}
+
+	private Collection<SearchEngine> _getRegisteredSearchEngines() {
+		return _registeredSearchEngines.values();
+	}
+
+	private IndexSearcher _getSearcher() {
+		return _currentSearchEngine.getSearcher();
+	}
+
 	private void _init(
-			SearchEngine defaultSearchEngine, IndexWriter defaultIndexWriter) {
+		SearchEngine defaultSearchEngine, IndexWriter defaultIndexWriter) {
 
 		_defaultSearchEngine = defaultSearchEngine;
 		_defaultIndexWriter = defaultIndexWriter;
 		_registerSearchEngine(_defaultSearchEngine, true);
 	}
 
-	private void _registerSearchEngine(
-			SearchEngine engine, boolean current) {
+	private boolean _isIndexReadOnly() {
+		return _currentSearchEngine.isIndexReadOnly();
+	}
 
+	private void _registerSearchEngine(SearchEngine engine, boolean current) {
 		_registeredSearchEngines.put(engine.getName(), engine);
-
 		_registeredSearchEnginesClassLoaders.put(
 			engine.getName(), Thread.currentThread().getContextClassLoader());
 
 		if (current) {
 			_setCurrentSearchEngine(engine.getName());
-		}
-	}
-
-	private void _unregisterSearchEngine(String name) {
-		if (!name.equals(_defaultSearchEngine.getName())) {
-			_registeredSearchEngines.remove(name);
-
-			_registeredSearchEnginesClassLoaders.remove(name);
-
-			if (_currentSearchEngine.getName().equals(name)) {
-				_currentSearchEngine = _defaultSearchEngine;
-			}
 		}
 	}
 
@@ -168,37 +171,25 @@ public class SearchEngineUtil {
 		}
 	}
 
-	private Collection<SearchEngine> _getRegisteredSearchEngines() {
-		return _registeredSearchEngines.values();
-	}
+	private void _unregisterSearchEngine(String name) {
+		if (!name.equals(_defaultSearchEngine.getName())) {
+			_registeredSearchEngines.remove(name);
+			_registeredSearchEnginesClassLoaders.remove(name);
 
-	private IndexSearcher _getSearcher() {
-		return _currentSearchEngine.getSearcher();
-	}
-
-	private boolean _isIndexReadOnly() {
-		return _currentSearchEngine.isIndexReadOnly();
-	}
-
-	private String _getCurrentName() {
-		return _currentSearchEngine.getName();
-	}
-
-	private ClassLoader _getCurrentSearchEngineClassLoader() {
-		return _registeredSearchEnginesClassLoaders.get(_getCurrentName());
+			if (_currentSearchEngine.getName().equals(name)) {
+				_currentSearchEngine = _defaultSearchEngine;
+			}
+		}
 	}
 
 	private static SearchEngineUtil _instance = new SearchEngineUtil();
 
-	private SearchEngine _currentSearchEngine;
-	private SearchEngine _defaultSearchEngine;
-
 	private Map<String, SearchEngine> _registeredSearchEngines =
 		new HashMap<String, SearchEngine>();
-
 	private Map<String, ClassLoader> _registeredSearchEnginesClassLoaders =
 		new HashMap<String, ClassLoader>();
-
+	private SearchEngine _currentSearchEngine;
+	private SearchEngine _defaultSearchEngine;
 	private IndexWriter _defaultIndexWriter;
 
 }

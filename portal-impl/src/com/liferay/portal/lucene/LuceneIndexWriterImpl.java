@@ -66,7 +66,7 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 		}
 	}
 
-	public void deleteDocument(long companyId, String uid, Document doc)
+	public void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
 		try {
@@ -80,13 +80,13 @@ public class LuceneIndexWriterImpl implements IndexWriter {
 	public void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
-		deleteDocument(companyId, uid, doc);
+		deleteDocument(companyId, uid);
 
 		addDocument(companyId, doc);
 	}
 
 	private org.apache.lucene.document.Document _getLuceneDocument(
-			com.liferay.portal.kernel.search.Document doc) {
+		Document doc) {
 
 		org.apache.lucene.document.Document luceneDoc =
 			new org.apache.lucene.document.Document();

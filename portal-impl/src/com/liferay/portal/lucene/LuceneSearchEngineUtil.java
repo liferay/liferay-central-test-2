@@ -40,20 +40,20 @@ public class LuceneSearchEngineUtil {
 		_engine.getWriter().addDocument(companyId, doc);
 	}
 
-	public static void deleteDocument(long companyId, String uid, Document doc)
+	public static void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
-		_engine.getWriter().deleteDocument(companyId, uid, doc);
+		_engine.getWriter().deleteDocument(companyId, uid);
+	}
+
+	public static SearchEngine getSearchEngine() {
+		return _engine;
 	}
 
 	public static void updateDocument(long companyId, String uid, Document doc)
 		throws SearchException {
 
 		_engine.getWriter().updateDocument(companyId, uid, doc);
-	}
-
-	public static SearchEngine getSearchEngine() {
-		return _engine;
 	}
 
 	private static SearchEngine _engine = new LuceneSearchEngineImpl();

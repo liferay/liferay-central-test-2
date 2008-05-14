@@ -40,99 +40,82 @@ import java.util.Map;
  */
 public class DocumentImpl implements Document {
 
-	public DocumentImpl(org.apache.lucene.document.Document luceneDoc) {
-		_luceneDoc = luceneDoc;
+	public DocumentImpl(org.apache.lucene.document.Document doc) {
+		_doc = doc;
 	}
 
-	public String get(String name) {
-		return  _luceneDoc.get(name);
-	}
-
-	private org.apache.lucene.document.Document _luceneDoc;
-
-	// temporarily implementing
 	public void add(Field field) {
 	}
 
-	// temporarily implementing
 	public void addDate(String name, Date value) {
 	}
 
-	// temporarily implementing
 	public void addFile(String name, InputStream is, String fileExt)
-			throws IOException {
+		throws IOException {
 	}
 
-	// temporarily implementing
 	public void addFile(String name, byte[] byteArray, String fileExt)
-			throws IOException {
+		throws IOException {
 	}
 
-	// temporarily implementing
 	public void addFile(String name, File file, String fileExt)
-			throws IOException {
+		throws IOException {
 	}
 
-	// temporarily implementing
 	public void addKeyword(String name, double value) {
 	}
 
-	// temporarily implementing
+	public void addKeyword(String name, int value) {
+	}
+
 	public void addKeyword(String name, long value) {
 	}
 
-	// temporarily implementing
 	public void addKeyword(String name, String value) {
 	}
 
-	// temporarily implementing
 	public void addKeyword(String name, String[] values) {
 	}
 
-	// temporarily implementing
 	public void addModifiedDate() {
 	}
 
-	// temporarily implementing
 	public void addText(String name, long value) {
 	}
 
-	// temporarily implementing
 	public void addText(String name, String value) {
 	}
 
-	// temporarily implementing
 	public void addUID(String portletId, long field1) {
 	}
 
-	// temporarily implementing
 	public void addUID(String portletId, Long field1) {
 	}
 
-	// temporarily implementing
 	public void addUID(String portletId, String field1) {
 	}
 
-	// temporarily implementing
 	public void addUID(String portletId, long field1, String field2) {
 	}
 
-	// temporarily implementing
 	public void addUID(String portletId, Long field1, String field2) {
 	}
 
-	// temporarily implementing
 	public void addUID(String portletId, String field1, String field2) {
 	}
 
-	// temporarily implementing
-	public void addUID(String portletId, String field1, String field2,
-			String field3) {
+	public void addUID(
+		String portletId, String field1, String field2, String field3) {
 	}
 
-	// temporarily implementing
+	public String get(String name) {
+		return  _doc.get(name);
+	}
+
 	public Map<String, Field> getFields() {
 		return null;
 	}
+
+	private org.apache.lucene.document.Document _doc;
 
 }

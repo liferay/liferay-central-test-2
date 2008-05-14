@@ -40,33 +40,32 @@ import com.metaparadigm.jsonrpc.MarshallException;
  */
 public class IndexWriterMessageSender implements IndexWriter {
 
-	public void addDocument(
-			long companyId, Document doc) throws SearchException {
+	public void addDocument(long companyId, Document doc)
+		throws SearchException {
 
 		try {
-			IndexWriterRequest request =
-				new IndexWriterRequest(IndexWriterRequest.ADD, companyId, doc);
+			IndexWriterRequest req = new IndexWriterRequest(
+				IndexWriterRequest.ADD, companyId, doc);
 
 			MessageBusUtil.sendMessage(
 				SearchEngineUtil.INDEX_WRITER_DESTINATION,
-				JSONUtil.serialize(request));
+				JSONUtil.serialize(req));
 		}
 		catch (MarshallException me) {
 			throw new SearchException(me);
 		}
 	}
 
-	public void deleteDocument(long companyId, String uid, Document doc)
+	public void deleteDocument(long companyId, String uid)
 		throws SearchException {
 
 		try {
-			IndexWriterRequest request =
-				new IndexWriterRequest(
-					IndexWriterRequest.DELETE, companyId, uid, doc);
+			IndexWriterRequest req = new IndexWriterRequest(
+				IndexWriterRequest.DELETE, companyId, uid);
 
 			MessageBusUtil.sendMessage(
 				SearchEngineUtil.INDEX_WRITER_DESTINATION,
-				JSONUtil.serialize(request));
+				JSONUtil.serialize(req));
 		}
 		catch (MarshallException me) {
 			throw new SearchException(me);
@@ -77,13 +76,12 @@ public class IndexWriterMessageSender implements IndexWriter {
 		throws SearchException {
 
 		try {
-			IndexWriterRequest request =
-				new IndexWriterRequest(
-					IndexWriterRequest.UPDATE, companyId, uid, doc);
+			IndexWriterRequest req = new IndexWriterRequest(
+				IndexWriterRequest.UPDATE, companyId, uid, doc);
 
 			MessageBusUtil.sendMessage(
-					SearchEngineUtil.INDEX_WRITER_DESTINATION,
-					JSONUtil.serialize(request));
+				SearchEngineUtil.INDEX_WRITER_DESTINATION,
+				JSONUtil.serialize(req));
 		}
 		catch (MarshallException me) {
 			throw new SearchException(me);

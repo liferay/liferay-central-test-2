@@ -1450,7 +1450,7 @@ public class JournalArticleLocalServiceImpl
 				LuceneUtil.addTerm(
 					searchQuery, LuceneFields.DESCRIPTION, keywords);
 				LuceneUtil.addTerm(
-					searchQuery, LuceneFields.TAG_ENTRY, keywords);
+					searchQuery, LuceneFields.TAGS_ENTRIES, keywords);
 			}
 
 			BooleanQuery fullQuery = new BooleanQuery();

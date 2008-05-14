@@ -217,17 +217,17 @@ public class GlobalStartupAction extends SimpleAction {
 
 		MessageBusUtil.init(messageBus, messageSender);
 
-		// Search Engines
-
-		SearchEngineUtil.init(
-			LuceneSearchEngineUtil.getSearchEngine(),
-			new IndexWriterMessageSender());
-
 		// POP server
 
 		if (PropsValues.POP_SERVER_NOTIFICATIONS_ENABLED) {
 			POPServerUtil.start();
 		}
+
+		// Search Engines
+
+		SearchEngineUtil.init(
+			LuceneSearchEngineUtil.getSearchEngine(),
+			new IndexWriterMessageSender());
 	}
 
 	private static Log _log = LogFactory.getLog(GlobalStartupAction.class);

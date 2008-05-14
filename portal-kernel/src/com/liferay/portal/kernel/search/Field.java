@@ -30,35 +30,39 @@ package com.liferay.portal.kernel.search;
  */
 public class Field {
 
-	public static final String UID = "uid";
-
 	public static final String COMPANY_ID = "companyId";
+
+	public static final String COMMENTS = "comments";
+
+	public static final String CONTENT = "content";
+
+	public static final String DESCRIPTION = "description";
+
+	public static final String GROUP_ID = "groupId";
+
+	public static final String MODIFIED = "modified";
+
+	public static final String NAME = "name";
 
 	public static final String PORTLET_ID = "portletId";
 
-	public static final String GROUP_ID = "groupId";
+	public static final String PROPERTIES = "properties";
+
+	public static final String TAGS_ENTRIES = "tagsEntries";
+
+	public static final String TITLE = "title";
+
+	public static final String TYPE = "type";
+
+	public static final String UID = "uid";
+
+	public static final String URL = "url";
 
 	public static final String USER_ID = "userId";
 
 	public static final String USER_NAME = "userName";
 
-	public static final String TYPE = "type";
-
-	public static final String TITLE = "title";
-
-	public static final String NAME = "name";
-
-	public static final String DESCRIPTION = "description";
-
-	public static final String CONTENT = "content";
-
-	public static final String PROPERTIES = "properties";
-
-	public static final String MODIFIED = "modified";
-
 	public static final String VERSION_LABEL = "versionLabel";
-
-	public static final String TAG_ENTRY = "tag_entry";
 
 	public Field() {
 	}

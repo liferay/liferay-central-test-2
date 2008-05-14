@@ -33,7 +33,7 @@ public interface IndexWriter {
 	public void addDocument(long companyId, Document doc)
 		throws SearchException;
 
-	public void deleteDocument(long companyId, String uid, Document doc)
+	public void deleteDocument(long companyId, String uid)
 		throws SearchException;
 
 	public void updateDocument(long companyId, String uid, Document doc)

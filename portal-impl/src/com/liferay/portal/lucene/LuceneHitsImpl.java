@@ -193,10 +193,12 @@ public class LuceneHitsImpl implements Hits {
 		_searcher = searcher;
 	}
 
-	private DocumentImpl _getDocument(org.apache.lucene.document.Document doc) {
+	private DocumentImpl _getDocument(
+		org.apache.lucene.document.Document oldDoc) {
+
 		DocumentImpl newDoc = new DocumentImpl();
 
-		List<org.apache.lucene.document.Field> fields = doc.getFields();
+		List<org.apache.lucene.document.Field> fields = oldDoc.getFields();
 
 		for (org.apache.lucene.document.Field field : fields) {
 			newDoc.add(

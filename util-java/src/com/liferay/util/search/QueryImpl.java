@@ -36,12 +36,12 @@ public class QueryImpl implements Query {
 		_query = query;
 	}
 
-	public String parse() {
-		return _query.toString();
-	}
-
 	public org.apache.lucene.search.Query getQuery() {
 		return _query;
+	}
+
+	public String parse() {
+		return _query.toString();
 	}
 
 	private org.apache.lucene.search.Query _query;

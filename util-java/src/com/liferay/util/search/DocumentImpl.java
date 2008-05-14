@@ -54,16 +54,6 @@ public class DocumentImpl implements Document {
 		_fields.put(field.getName(), field);
 	}
 
-	public String get(String name) {
-		Field field = _fields.get(name);
-
-		if (field == null) {
-			return StringPool.BLANK;
-		}
-
-		return field.getValue();
-	}
-
 	public void addDate(String name, Date value) {
 		addKeyword(
 			name, DateTools.dateToString(value, DateTools.Resolution.SECOND));
@@ -76,10 +66,10 @@ public class DocumentImpl implements Document {
 	public void addFile(String name, byte[] byteArray, String fileExt)
 		throws IOException {
 
-		InputStream in = new BufferedInputStream(
+		InputStream is = new BufferedInputStream(
 			new ByteArrayInputStream(byteArray));
 
-		addFile(name, in, fileExt);
+		addFile(name, is, fileExt);
 	}
 
 	public void addFile(String name, File file, String fileExt)
@@ -91,6 +81,10 @@ public class DocumentImpl implements Document {
 	}
 
 	public void addKeyword(String name, double value) {
+		addKeyword(name, String.valueOf(value));
+	}
+
+	public void addKeyword(String name, int value) {
 		addKeyword(name, String.valueOf(value));
 	}
 
@@ -107,8 +101,8 @@ public class DocumentImpl implements Document {
 			return;
 		}
 
-		for (int i = 0; i < values.length; i++) {
-			addKeyword(name, values[i]);
+		for (String value : values) {
+			addKeyword(name, value);
 		}
 	}
 
@@ -170,6 +164,16 @@ public class DocumentImpl implements Document {
 		}
 
 		addKeyword(Field.UID, uid);
+	}
+
+	public String get(String name) {
+		Field field = _fields.get(name);
+
+		if (field == null) {
+			return StringPool.BLANK;
+		}
+
+		return field.getValue();
 	}
 
 	public Map<String, Field> getFields() {
