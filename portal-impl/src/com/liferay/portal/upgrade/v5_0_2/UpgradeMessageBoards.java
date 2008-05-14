@@ -58,20 +58,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 
 		// LEP-5761
 
-		StringMaker sm = new StringMaker();
-
-		sm.append("update MBMessage as childMessage ");
-		sm.append("inner join MBMessage as parentMessage on ");
-		sm.append("childMessage.parentMessageId = parentMessage.messageId ");
-		sm.append("set childMessage.categoryId = parentMessage.categoryId, ");
-		sm.append("childMessage.threadId = parentMessage.threadId ");
-		sm.append("where parentMessage.categoryId != childMessage.categoryId ");
-		sm.append("or parentMessage.threadId != childMessage.threadId");
-
-		String sql = sm.toString();
-
 		while (getMessageIdsCount() > 0) {
-			runSQL(sql);
+			updateMessage();
 		}
 	}
 
@@ -79,8 +67,8 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 		StringMaker sm = new StringMaker();
 
 		sm.append("select count(*) from ");
-		sm.append("MBMessage as childMessage ");
-		sm.append("inner join MBMessage as parentMessage on ");
+		sm.append("MBMessage childMessage ");
+		sm.append("inner join MBMessage parentMessage on ");
 		sm.append("childMessage.parentMessageId = parentMessage.messageId ");
 		sm.append("where parentMessage.categoryId != childMessage.categoryId ");
 		sm.append("or parentMessage.threadId != childMessage.threadId");
@@ -103,6 +91,46 @@ public class UpgradeMessageBoards extends UpgradeProcess {
 			}
 
 			return 0;
+		}
+		finally {
+			DataAccess.cleanUp(con, ps, rs);
+		}
+	}
+
+	protected void updateMessage() throws Exception {
+		StringMaker sm = new StringMaker();
+
+		sm.append("select childMessage.messageId, parentMessage.categoryId, ");
+		sm.append("parentMessage.threadId ");
+		sm.append("from MBMessage childMessage ");
+		sm.append("inner join MBMessage parentMessage on ");
+		sm.append("childMessage.parentMessageId = parentMessage.messageId ");
+		sm.append("where parentMessage.categoryId != childMessage.categoryId ");
+		sm.append("or parentMessage.threadId != childMessage.threadId");
+
+		String sql = sm.toString();
+
+		Connection con = null;
+		PreparedStatement ps = null;
+		ResultSet rs = null;
+
+		try {
+			con = HibernateUtil.getConnection();
+
+			ps = con.prepareStatement(sql);
+
+			rs = ps.executeQuery();
+
+			while (rs.next()) {
+				long messageId = rs.getLong(1);
+				long categoryId = rs.getLong(2);
+				long threadId = rs.getLong(3);
+
+				runSQL(
+					"update MBMessage set categoryId = " + categoryId +
+						", threadId = " + threadId + " where messageId = " +
+							messageId);
+			}
 		}
 		finally {
 			DataAccess.cleanUp(con, ps, rs);

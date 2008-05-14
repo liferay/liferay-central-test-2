@@ -1059,10 +1059,10 @@
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialMutualRelation">
 		<![CDATA[
 			INNER JOIN
-				SocialRelation AS socialRelation1 ON
+				SocialRelation socialRelation1 ON
 					(socialRelation1.userId2 = User_.userId)
 			INNER JOIN
-				SocialRelation AS socialRelation2 ON
+				SocialRelation socialRelation2 ON
 					(socialRelation2.userId2 = User_.userId)
 			WHERE
 				(socialRelation1.userId1 = ?) AND
@@ -1072,10 +1072,10 @@
 	<sql id="com.liferay.portal.service.persistence.UserFinder.joinBySocialMutualRelationType">
 		<![CDATA[
 			INNER JOIN
-				SocialRelation AS socialRelation1 ON
+				SocialRelation socialRelation1 ON
 					(socialRelation1.userId2 = User_.userId)
 			INNER JOIN
-				SocialRelation AS socialRelation2 ON
+				SocialRelation socialRelation2 ON
 					(socialRelation2.userId2 = User_.userId)
 			WHERE
 				(socialRelation1.userId1 = ?) AND
