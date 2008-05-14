@@ -47,12 +47,21 @@ for (TagsAsset asset : assets) {
 				String tagLabel = null;
 
 				try {
-					TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "description");
+					String languageId = LanguageUtil.getLanguageId(request);
+					
+					TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), languageId);
 
 					tagLabel = descriptionProperty.getValue();
 				}
 				catch (NoSuchPropertyException nspee) {
-					tagLabel = StringUtil.upperCaseFirstLetter(assetEntry.getName());
+					try {
+						TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "en_US");
+
+						tagLabel = descriptionProperty.getValue();
+					}
+					catch (NoSuchPropertyException nspee2) {
+						tagLabel = StringUtil.upperCaseFirstLetter(assetEntry.getName());
+					}
 				}
 
 				List assetsList = assetsByCategory.get(tagLabel);
@@ -81,8 +90,7 @@ while (itr.hasNext()) {
 
 	request.setAttribute("view.jsp-results", results);
 %>
-
-	<h2 class="journal-content-tag-label"><%= tagLabel %></h2>
+	<p class="journal-content-tag-label"><%= tagLabel %></p>
 
 	<div class="journal-content-tag-entries">
 
