@@ -22,6 +22,7 @@
 
 package com.liferay.portal.lucene;
 
+import com.liferay.portal.SystemException;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
@@ -33,6 +34,10 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.logging.Log;
+import org.apache.commons.logging.LogFactory;
+import org.apache.lucene.queryParser.ParseException;
+import org.apache.lucene.search.BooleanQuery;
 import org.apache.lucene.search.Searcher;
 
 /**
@@ -115,6 +120,23 @@ public class LuceneHitsImpl implements Hits {
 			}
 		}
 		catch (Exception e) {
+		}
+	}
+	
+	public Hits closeSearcher(String keywords, Exception e)
+		throws SystemException {
+
+		closeSearcher();
+
+		if (e instanceof BooleanQuery.TooManyClauses ||
+			e instanceof ParseException) {
+
+			_log.error("Parsing keywords " + keywords, e);
+
+			return new LuceneHitsImpl();
+		}
+		else {
+			throw new SystemException(e);
 		}
 	}
 
@@ -208,6 +230,8 @@ public class LuceneHitsImpl implements Hits {
 
 		return newDoc;
 	}
+
+	private static Log _log = LogFactory.getLog(LuceneHitsImpl.class);
 
 	private org.apache.lucene.search.Hits _hits;
 	private long _start;

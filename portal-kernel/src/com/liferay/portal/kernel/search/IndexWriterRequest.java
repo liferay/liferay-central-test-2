@@ -36,7 +36,10 @@ public class IndexWriterRequest {
 
 	public static final String UPDATE = "update";
 
-	public IndexWriterRequest(String command, long companyId, String uid) {
+	public IndexWriterRequest() {
+	}
+
+    public IndexWriterRequest(String command, long companyId, String uid) {
 		this(command, companyId, uid, null);
 	}
 

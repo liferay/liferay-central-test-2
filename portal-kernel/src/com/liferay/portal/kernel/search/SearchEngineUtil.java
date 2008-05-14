@@ -43,27 +43,6 @@ public class SearchEngineUtil {
 		_instance._defaultIndexWriter.addDocument(companyId, doc);
 	}
 
-	public static Hits close(long companyId, String keywords, Exception e)
-		throws SearchException {
-
-		ClassLoader contextClassLoader =
-			Thread.currentThread().getContextClassLoader();
-
-		Thread.currentThread().setContextClassLoader(
-			_instance._getCurrentSearchEngineClassLoader());
-
-		Hits hits = null;
-
-		try {
-			hits = _instance._getSearcher().close(companyId, keywords, e);
-		}
-		finally {
-			Thread.currentThread().setContextClassLoader(contextClassLoader);
-		}
-
-		return hits;
-	}
-
 	public static void deleteDocument(long companyId, String uid)
 		throws SearchException {
 

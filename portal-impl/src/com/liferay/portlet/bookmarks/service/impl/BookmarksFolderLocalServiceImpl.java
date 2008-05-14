@@ -28,7 +28,6 @@ import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.kernel.search.SearchException;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.Validator;
 import com.liferay.portal.lucene.LuceneUtil;
@@ -326,6 +325,8 @@ public class BookmarksFolderLocalServiceImpl
 			long companyId, long groupId, long[] folderIds, String keywords)
 		throws SystemException {
 
+		Hits hits = null;
+
 		try {
 			BooleanQuery contextQuery = new BooleanQuery();
 
@@ -368,16 +369,13 @@ public class BookmarksFolderLocalServiceImpl
 				fullQuery.add(searchQuery, BooleanClause.Occur.MUST);
 			}
 
-			return SearchEngineUtil.search(companyId, new QueryImpl(fullQuery));
+			hits = SearchEngineUtil.search(companyId, new QueryImpl(fullQuery));
 		}
 		catch (Exception e) {
-			try {
-				return SearchEngineUtil.close(companyId, keywords, e);
-			}
-			catch (SearchException se) {
-				throw new SystemException(se);
-			}
+			return hits.closeSearcher(keywords, e);
 		}
+		
+		return hits;
 	}
 
 	public BookmarksFolder updateFolder(
