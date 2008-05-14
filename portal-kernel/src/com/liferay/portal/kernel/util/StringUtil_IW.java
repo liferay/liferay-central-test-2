@@ -153,13 +153,13 @@ public class StringUtil_IW {
 		return StringUtil.merge(array, delimiter);
 	}
 
-	public java.lang.String merge(java.util.List<?> list) {
-		return StringUtil.merge(list);
+	public java.lang.String merge(java.util.Collection<?> col) {
+		return StringUtil.merge(col);
 	}
 
-	public java.lang.String merge(java.util.List<?> list,
+	public java.lang.String merge(java.util.Collection<?> col,
 		java.lang.String delimiter) {
-		return StringUtil.merge(list, delimiter);
+		return StringUtil.merge(col, delimiter);
 	}
 
 	public java.lang.String merge(java.lang.Object[] array) {
