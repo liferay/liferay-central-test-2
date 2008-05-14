@@ -34,10 +34,10 @@ import java.util.Map;
  */
 public class SearchEngineUtil {
 
+	public static final int ALL_POS = -1;
+
 	public static final String INDEX_WRITER_DESTINATION =
 		"liferay/search/IndexWriter";
-
-	public static final int ALL_POS = -1;
 
 	public static void addDocument(long companyId, Document doc)
 		throws SearchException {

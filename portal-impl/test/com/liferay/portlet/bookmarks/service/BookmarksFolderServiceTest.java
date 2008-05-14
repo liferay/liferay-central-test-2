@@ -22,20 +22,14 @@
 
 package com.liferay.portlet.bookmarks.service;
 
-import com.liferay.portal.kernel.messaging.DefaultMessageBus;
-import com.liferay.portal.kernel.messaging.DefaultMessageSender;
-import com.liferay.portal.kernel.messaging.MessageBusUtil;
 import com.liferay.portal.kernel.search.Document;
 import com.liferay.portal.kernel.search.Field;
 import com.liferay.portal.kernel.search.Hits;
 import com.liferay.portal.kernel.search.SearchEngineUtil;
-import com.liferay.portal.lucene.LuceneSearchEngineImpl;
-import com.liferay.portal.util.PortalUtil;
-import com.liferay.portal.util.TestPropsValues;
+import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portlet.bookmarks.model.BookmarksEntry;
 import com.liferay.portlet.bookmarks.model.BookmarksFolder;
 import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceUtil;
-import com.liferay.util.search.IndexWriterMessageSender;
 
 import java.util.List;
 
@@ -70,66 +64,58 @@ public class BookmarksFolderServiceTest extends BaseBookmarksServiceTestCase {
 	}
 
 	public void testSearch() throws Exception {
-		MessageBusUtil.init(
-			new DefaultMessageBus(), new DefaultMessageSender());
-
-		SearchEngineUtil.init(
-			new LuceneSearchEngineImpl(), new IndexWriterMessageSender());
-
 		BookmarksEntry entry = addEntry();
 
 		Thread.sleep(1000);
 
-		long groupId = PortalUtil.getPortletGroupId(
-			TestPropsValues.LAYOUT_PLID);
-
+		long companyId = entry.getCompanyId();
+		long groupId = entry.getFolder().getGroupId();
+		long folderId = entry.getFolderId();
 		String keywords = "test";
 
 		Hits hits = BookmarksFolderLocalServiceUtil.search(
-			entry.getCompanyId(), groupId, new long[] {entry.getFolderId()},
-			keywords, SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+			companyId, groupId, new long[] {folderId}, keywords,
+			SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
 
 		assertEquals(1, hits.getLength());
 
 		List<Document> results =  hits.toList();
 
-		for (Document document : results) {
+		for (Document doc : results) {
 			assertEquals(
-				entry.getCompanyId(),
-				Long.parseLong(document.get(Field.COMPANY_ID)));
+				companyId,
+				GetterUtil.getLong(doc.get(Field.COMPANY_ID)));
 
-			assertEquals(
-				groupId, Long.parseLong(document.get(Field.GROUP_ID)));
+			assertEquals(groupId, GetterUtil.getLong(doc.get(Field.GROUP_ID)));
 
-			assertEquals(entry.getName(), document.get(Field.NAME));
-			assertEquals(entry.getUrl(), document.get(Field.URL));
-			assertEquals(entry.getComments(), document.get(Field.COMMENTS));
+			assertEquals(entry.getName(), doc.get(Field.NAME));
+			assertEquals(entry.getUrl(), doc.get(Field.URL));
+			assertEquals(entry.getComments(), doc.get(Field.COMMENTS));
 
+			assertEquals(folderId, GetterUtil.getLong(doc.get("folderId")));
 			assertEquals(
-				entry.getFolderId(), Long.parseLong(document.get("folderId")));
-			assertEquals(
-				entry.getEntryId(), Long.parseLong(document.get("entryId")));
+				entry.getEntryId(), GetterUtil.getLong(doc.get("entryId")));
 		}
 
-		BookmarksFolderLocalServiceUtil.deleteFolder(entry.getFolderId());
+		BookmarksFolderLocalServiceUtil.deleteFolder(folderId);
 
 		Thread.sleep(1000);
 
 		hits = BookmarksFolderLocalServiceUtil.search(
-			entry.getCompanyId(), groupId, new long[] {entry.getFolderId()},
-			keywords, SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
+			companyId, groupId, new long[] {folderId}, keywords,
+			SearchEngineUtil.ALL_POS, SearchEngineUtil.ALL_POS);
 
 		assertEquals(0, hits.getLength());
 
 		addEntry();
 		addEntry();
 		addEntry();
-		entry = addEntry();
+		addEntry();
 
 		Thread.sleep(1000);
 
 		hits = BookmarksFolderLocalServiceUtil.search(
-			entry.getCompanyId(), groupId, null, keywords, 1, 3);
+			companyId, groupId, null, keywords, 1, 3);
 
 		assertEquals(4, hits.getLength());
 		assertEquals(2, hits.getDocs().length);

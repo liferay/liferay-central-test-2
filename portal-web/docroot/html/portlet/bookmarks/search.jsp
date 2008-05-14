@@ -86,19 +86,17 @@ headerNames.add(StringPool.BLANK);
 
 SearchContainer searchContainer = new SearchContainer(renderRequest, null, null, SearchContainer.DEFAULT_CUR_PARAM, SearchContainer.DEFAULT_DELTA, portletURL, headerNames, LanguageUtil.format(pageContext, "no-entries-were-found-that-matched-the-keywords-x", "<b>" + HtmlUtil.escape(keywords) + "</b>"));
 
-Hits hits = null;
-
 try {
-	hits = BookmarksFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
+	Hits results = BookmarksFolderLocalServiceUtil.search(company.getCompanyId(), portletGroupId.longValue(), folderIdsArray, keywords, searchContainer.getStart(), searchContainer.getEnd());
 
-	int total = hits.getLength();
+	int total = results.getLength();
 
 	searchContainer.setTotal(total);
 
 	List resultRows = searchContainer.getResultRows();
 
-	for (int i = 0; i < hits.getDocs().length; i++) {
-		Document doc = hits.doc(i);
+	for (int i = 0; i < results.getDocs().length; i++) {
+		Document doc = results.doc(i);
 
 		ResultRow row = new ResultRow(doc, i, i);
 
@@ -147,7 +145,7 @@ try {
 
 		// Score
 
-		row.addScore(hits.score(i));
+		row.addScore(results.score(i));
 
 		// Action
 

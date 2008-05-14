@@ -107,11 +107,15 @@ public class LuceneHitsImpl implements Hits {
 		_searcher = searcher;
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public void closeSearcher() {
 	}
 
-	@Deprecated
+	/**
+	 * @deprecated
+	 */
 	public Hits closeSearcher(String keywords, Exception e)
 		throws SearchException {
 
