@@ -972,7 +972,7 @@ Liferay.Util = {
 		var visibleClass = 'controls-visible';
 		var currentClass = visibleClass;
 
-		if (Liferay._editControlsState != 'visible') {		
+		if (Liferay._editControlsState != 'visible') {
 			currentClass = hiddenClass;
 		}
 
@@ -983,7 +983,8 @@ Liferay.Util = {
 				docBody.toggleClass(visibleClass).toggleClass(hiddenClass);
 
 				Liferay._editControlsState = (docBody.is('.' + visibleClass) ? 'visible' : 'hidden');
-				loadPage(mainPath + "/portal/session_click", "LFR_toggle_controls=" + Liferay._editControlsState);
+
+				loadPage(mainPath + "/portal/session_click", "liferay_toggle_controls=" + Liferay._editControlsState);
 			}
 		);
 	},

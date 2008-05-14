@@ -16,9 +16,9 @@
 	#end
 #end
 
-#set ($toggle_control_state = $sessionClicks.get($request, "LFR_toggle_controls", "visible"))
+#set (liferay_toggle_controls = $sessionClicks.get($request, "liferay_toggle_controls", "visible"))
 
-#if ($toggle_control_state == "visible")
+#if (liferay_toggle_controls == "visible")
 	#set ($css_class = $css_class + " controls-visible")
 #else
 	#set ($css_class = $css_class + " controls-hidden")

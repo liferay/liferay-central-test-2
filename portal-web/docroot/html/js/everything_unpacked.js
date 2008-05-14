@@ -15219,14 +15219,24 @@ Liferay.Util = {
 		var instance = this;
 
 		var trigger = jQuery('.toggle-controls');
+		var docBody = jQuery(document.body);
+		var hiddenClass = 'controls-hidden';
+		var visibleClass = 'controls-visible';
+		var currentClass = visibleClass;
 
-		trigger.addClass('controls-visible');
+		if (Liferay._editControlsState != 'visible') {
+			currentClass = hiddenClass;
+		}
+
+		docBody.addClass(currentClass);
 
 		trigger.click(
 			function(event) {
-				jQuery('.lfr-meta-actions, .portlet-borderless-bar, .portlet-icons').toggle();
+				docBody.toggleClass(visibleClass).toggleClass(hiddenClass);
 
-				trigger.toggleClass('controls-visible').toggleClass('controls-hidden');
+				Liferay._editControlsState = (docBody.is('.' + visibleClass) ? 'visible' : 'hidden');
+
+				loadPage(mainPath + "/portal/session_click", "liferay_toggle_controls=" + Liferay._editControlsState);
 			}
 		);
 	},
