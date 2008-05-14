@@ -47,13 +47,11 @@ for (TagsAsset asset : assets) {
 				String tagLabel = null;
 
 				try {
-					String languageId = LanguageUtil.getLanguageId(request);
-					
-					TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), languageId);
+					TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), themeDisplay.getLanguageId());
 
 					tagLabel = descriptionProperty.getValue();
 				}
-				catch (NoSuchPropertyException nspee) {
+				catch (NoSuchPropertyException nspee1) {
 					try {
 						TagsProperty descriptionProperty = TagsPropertyLocalServiceUtil.getProperty(assetEntry.getEntryId(), "en_US");
 
@@ -90,6 +88,7 @@ while (itr.hasNext()) {
 
 	request.setAttribute("view.jsp-results", results);
 %>
+
 	<p class="journal-content-tag-label"><%= tagLabel %></p>
 
 	<div class="journal-content-tag-entries">
