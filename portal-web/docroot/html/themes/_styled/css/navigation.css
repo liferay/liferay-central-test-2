@@ -146,18 +146,6 @@
 	display: none;
 }
 
-.js .lfr-dock li.toggle-controls {
-	display: block;
-}
-
-.js .lfr-dock li.toggle-controls.controls-visible a {
-	background-image: url(../images/common/checked.png);
-}
-
-.js .lfr-dock li.toggle-controls.controls-hidden a {
-	background-image: url(../images/common/unchecked.png);
-}
-
 /* ---------- Dock with JavaScript ---------- */
 
 .js .interactive-mode {
@@ -301,6 +289,18 @@
 
 .ie6.js .interactive-mode .lfr-flyout.has-children {
 	width: 150px;
+}
+
+.js .interactive-mode li.toggle-controls {
+	display: block;
+}
+
+.js .interactive-mode li.toggle-controls a {
+	background-image: url(../images/common/checked.png);
+}
+
+.js .controls-hidden .interactive-mode li.toggle-controls a {
+	background-image: url(../images/common/unchecked.png);
 }
 
 /* ---------- Add/sort/remove page ---------- */

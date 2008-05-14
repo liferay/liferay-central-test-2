@@ -311,6 +311,8 @@
 						);
 					}
 
+					Liferay._editControlsState = '<%= GetterUtil.getString(SessionClicks.get(request, "LFR_toggle_controls", null), "visible") %>';
+
 					<%--/*jQuery(".journal-content-eip-text").leditable(
 						"<%= themeDisplay.getPathMain() %>/journal_content/update_article_field",
 						{

@@ -16,6 +16,14 @@
 	#end
 #end
 
+#set ($toggle_control_state = $sessionClicks.get($request, "LFR_toggle_controls", "visible"))
+
+#if ($toggle_control_state == "visible")
+	#set ($css_class = $css_class + " controls-visible")
+#else
+	#set ($css_class = $css_class + " controls-hidden")
+#end
+
 #set ($css_folder = "$theme_display.getPathThemeCss()")
 #set ($images_folder = "$theme_display.getPathThemeImages()")
 #set ($javascript_folder = "$theme_display.getPathThemeJavaScript()")
