@@ -31,9 +31,9 @@ String portletResource = ParamUtil.getString(request, "portletResource");
 
 PortletPreferences prefs = PortletPreferencesFactoryUtil.getPortletSetup(layout, portletResource);
 
-String facebookAppName = PrefsParamUtil.getString(prefs, request, "lfr-facebook-app-name");
-boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link");
 String facebookAPIKey = PrefsParamUtil.getString(prefs, request, "lfr-facebook-api-key");
+String facebookCanvasPageURL = PrefsParamUtil.getString(prefs, request, "lfr-facebook-canvas-page-url");
+boolean facebookShowAddAppLink = PrefsParamUtil.getBoolean(prefs, request, "lfr-facebook-show-add-app-link");
 
 PortletURL fbmlPortletURL = new PortletURLImpl(request, portletResource, plid, PortletRequest.RENDER_PHASE);
 
@@ -52,25 +52,15 @@ iframePortletURL.setParameter("struts_action", "/message_boards/view");
 	<liferay-util:param name="tabs1" value="facebook" />
 </liferay-util:include>
 
-<c:if test="<%= Validator.isNull(facebookAppName) %>">
-	<div class="portlet-msg-alert">
-		<a href="http://www.facebook.com/developers/editapp.php?new" target="_blank"><%= LanguageUtil.format(pageContext, "register-x-as-an-application-in-facebook", portletDisplay.getTitle()) %></a>
-	</div>
-</c:if>
-
 <form action="<portlet:actionURL windowState="<%= WindowState.MAXIMIZED.toString() %>"><portlet:param name="struts_action" value="/portlet_configuration/edit_facebook" /><portlet:param name="<%= Constants.CMD %>" value="<%= Constants.SAVE %>" /></portlet:actionURL>" class="uni-form" method="post" name="<portlet:namespace />fm">
 <input name="<portlet:namespace />redirect" type="hidden" value="<%= HtmlUtil.escape(redirect) %>" />
 <input name="<portlet:namespace />portletResource" type="hidden" value="<%= HtmlUtil.escape(portletResource) %>">
 
+<div class="portlet-msg-info">
+	<a href="http://www.facebook.com/developers/editapp.php?new" target="_blank"><liferay-ui:message key="get-the-api-key-and-canvas-page-url-from-facebook" /></a>
+</div>
+
 <table class="lfr-table">
-<tr>
-	<td>
-		<liferay-ui:message key="application-name" />
-	</td>
-	<td>
-		<input class="lfr-input-text" id="<portlet:namespace />facebookAppName" name="<portlet:namespace />facebookAppName" type="text" value="<%= HtmlUtil.toInputSafe(facebookAppName) %>" />
-	</td>
-</tr>
 <tr>
 	<td>
 		<liferay-ui:message key="api-key" />
@@ -79,14 +69,30 @@ iframePortletURL.setParameter("struts_action", "/message_boards/view");
 		<input class="lfr-input-text" id="<portlet:namespace />facebookAPIKey" name="<portlet:namespace />facebookAPIKey" type="text" value="<%= HtmlUtil.toInputSafe(facebookAPIKey) %>" />
 	</td>
 </tr>
+<tr>
+	<td>
+		<liferay-ui:message key="canvas-page-url" />
+	</td>
+	<td>
+		http://apps.facebook.com/<input class="lfr-input-text" id="<portlet:namespace />facebookCanvasPageURL" name="<portlet:namespace />facebookCanvasPageURL" type="text" value="<%= HtmlUtil.toInputSafe(facebookCanvasPageURL) %>" />/
+	</td>
+</tr>
+</table>
 
-<c:if test="<%= Validator.isNotNull(facebookAppName) %>">
+<c:if test="<%= Validator.isNotNull(facebookCanvasPageURL) %>">
+	<br />
+
+	<div class="portlet-msg-info">
+		<liferay-ui:message key="copy-one-of-the-callback-urls-to-facebook" />
+	</div>
+
+	<table class="lfr-table">
 	<tr>
 		<td>
 			<liferay-ui:message key="fbml-callback-url" />
 		</td>
 		<td>
-			<liferay-ui:input-resource url="<%= FacebookUtil.getCallbackURL(fbmlPortletURL.toString(), facebookAppName) %>" />
+			<liferay-ui:input-resource url="<%= FacebookUtil.getCallbackURL(fbmlPortletURL.toString(), facebookCanvasPageURL) %>" />
 		</td>
 	</tr>
 	<tr>
@@ -97,15 +103,12 @@ iframePortletURL.setParameter("struts_action", "/message_boards/view");
 			<liferay-ui:input-resource url="<%= iframePortletURL.toString() %>" />
 		</td>
 	</tr>
-</c:if>
+	</table>
 
-</table>
-
-<c:if test="<%= Validator.isNotNull(facebookAppName) %>">
 	<br />
 
 	<div>
-		<%= LanguageUtil.format(pageContext, "show-link-to-add-x-to-facebook", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="facebookShowAddAppLink" defaultValue="<%= facebookShowAddAppLink %>" />
+		<%= LanguageUtil.format(pageContext, "allow-users-to-add-x-to-facebook", portletDisplay.getTitle()) %> <liferay-ui:input-checkbox param="facebookShowAddAppLink" defaultValue="<%= facebookShowAddAppLink %>" />
 	</div>
 </c:if>
 

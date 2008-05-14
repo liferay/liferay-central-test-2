@@ -99,8 +99,9 @@ public class EditFacebookAction extends EditConfigurationAction {
 
 		Layout layout = themeDisplay.getLayout();
 
-		String facebookAppName = ParamUtil.getString(req, "facebookAppName");
 		String facebookAPIKey = ParamUtil.getString(req, "facebookAPIKey");
+		String facebookCanvasPageURL = ParamUtil.getString(
+			req, "facebookCanvasPageURL");
 		boolean facebookShowAddAppLink = ParamUtil.getBoolean(
 			req, "facebookShowAddAppLink");
 
@@ -108,8 +109,8 @@ public class EditFacebookAction extends EditConfigurationAction {
 			PortletPreferencesFactoryUtil.getPortletSetup(
 				layout, portlet.getPortletId());
 
-		prefs.setValue("lfr-facebook-app-name", facebookAppName);
 		prefs.setValue("lfr-facebook-api-key", facebookAPIKey);
+		prefs.setValue("lfr-facebook-canvas-page-url", facebookCanvasPageURL);
 		prefs.setValue(
 			"lfr-facebook-show-add-app-link",
 			String.valueOf(facebookShowAddAppLink));

@@ -64,10 +64,11 @@ public class FacebookServlet extends HttpServlet {
 					new NoSuchLayoutException(), req, res);
 			}
 			else {
-				String facebookAppName = facebookData[0];
+				String facebookCanvasPageURL = facebookData[0];
 				String redirect = facebookData[1];
 
-				req.setAttribute(WebKeys.FACEBOOK_APP_NAME, facebookAppName);
+				req.setAttribute(
+					WebKeys.FACEBOOK_CANVAS_PAGE_URL, facebookCanvasPageURL);
 				req.setAttribute(CompressionFilter.SKIP_FILTER, Boolean.TRUE);
 
 				ServletContext ctx = getServletContext();

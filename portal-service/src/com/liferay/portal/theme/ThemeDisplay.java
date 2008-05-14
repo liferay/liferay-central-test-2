@@ -468,14 +468,14 @@ public class ThemeDisplay implements Serializable {
 		return _facebook;
 	}
 
-	public String getFacebookAppName() {
-		return _facebookAppName;
+	public String getFacebookCanvasPageURL() {
+		return _facebookCanvasPageURL;
 	}
 
-	public void setFacebookAppName(String facebookAppName) {
-		_facebookAppName = facebookAppName;
+	public void setFacebookCanvasPageURL(String facebookCanvasPageURL) {
+		_facebookCanvasPageURL = facebookCanvasPageURL;
 
-		if (Validator.isNotNull(facebookAppName)) {
+		if (Validator.isNotNull(facebookCanvasPageURL)) {
 			_facebook = true;
 		}
 	}
@@ -934,7 +934,7 @@ public class ThemeDisplay implements Serializable {
 		_stateMaximized = false;
 		_statePopUp = false;
 		_facebook = false;
-		_facebookAppName = StringPool.BLANK;
+		_facebookCanvasPageURL = StringPool.BLANK;
 		_cdnHost = StringPool.BLANK;
 		_portalURL = StringPool.BLANK;
 		_pathApplet = StringPool.BLANK;
@@ -1026,7 +1026,7 @@ public class ThemeDisplay implements Serializable {
 	private boolean _stateMaximized;
 	private boolean _statePopUp;
 	private boolean _facebook;
-	private String _facebookAppName;
+	private String _facebookCanvasPageURL;
 	private String _cdnHost = StringPool.BLANK;
 	private String _portalURL = StringPool.BLANK;
 	private String _pathApplet = StringPool.BLANK;

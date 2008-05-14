@@ -39,12 +39,12 @@
 					<c:if test="<%= !themeDisplay.isFacebook() && (portletDisplay.isStateMax() || portletDisplay.isStateNormal()) %>">
 
 						<%
-						String facebookAppName = portletSetup.getValue("lfr-facebook-app-name", StringPool.BLANK);
 						String facebookAPIKey = portletSetup.getValue("lfr-facebook-api-key", StringPool.BLANK);
+						String facebookCanvasPageURL = portletSetup.getValue("lfr-facebook-canvas-page-url", StringPool.BLANK);
 						boolean facebookShowAddAppLink = GetterUtil.getBoolean(portletSetup.getValue("lfr-facebook-show-add-app-link", StringPool.BLANK));
 						%>
 
-						<c:if test="<%= Validator.isNotNull(facebookAppName) && Validator.isNotNull(facebookAPIKey) && facebookShowAddAppLink %>">
+						<c:if test="<%= Validator.isNotNull(facebookCanvasPageURL) && Validator.isNotNull(facebookAPIKey) && facebookShowAddAppLink %>">
 							<br />
 
 							<div>

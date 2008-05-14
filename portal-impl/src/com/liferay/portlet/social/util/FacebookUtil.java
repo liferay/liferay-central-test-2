@@ -46,7 +46,7 @@ public class FacebookUtil {
 	public static final String FACEBOOK_SERVLET_PATH = "/facebook/";
 
 	public static String getCallbackURL(
-		String fbmlPortletURL, String facebookAppName) {
+		String fbmlPortletURL, String facebookCanvasPageURL) {
 
 		int pos = fbmlPortletURL.indexOf(
 			StringPool.SLASH, Http.HTTPS_WITH_SLASH.length());
@@ -55,7 +55,7 @@ public class FacebookUtil {
 
 		sm.append(fbmlPortletURL.substring(0, pos));
 		sm.append(FACEBOOK_SERVLET_PATH);
-		sm.append(facebookAppName);
+		sm.append(facebookCanvasPageURL);
 		sm.append(fbmlPortletURL.substring(pos));
 
 		String callbackURL = sm.toString();
@@ -80,13 +80,13 @@ public class FacebookUtil {
 			return null;
 		}
 
-		String facebookAppName = path.substring(1, pos);
+		String facebookCanvasPageURL = path.substring(1, pos);
 
 		if (_log.isDebugEnabled()) {
-			_log.debug("Facebook application name " + facebookAppName);
+			_log.debug("Facebook canvas page URL " + facebookCanvasPageURL);
 		}
 
-		if (Validator.isNull(facebookAppName)) {
+		if (Validator.isNull(facebookCanvasPageURL)) {
 			return null;
 		}
 
@@ -112,7 +112,7 @@ public class FacebookUtil {
 			}
 		}
 
-		return new String[] {facebookAppName, redirect, appPath};
+		return new String[] {facebookCanvasPageURL, redirect, appPath};
 	}
 
 	public static boolean isFacebook(String currentURL) {

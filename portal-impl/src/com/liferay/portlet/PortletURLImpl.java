@@ -571,7 +571,7 @@ public class PortletURLImpl
 		if (themeDisplay.isFacebook()) {
 			portalURL =
 				FacebookUtil.FACEBOOK_APPS_URL +
-					themeDisplay.getFacebookAppName();
+					themeDisplay.getFacebookCanvasPageURL();
 		}
 		else {
 			portalURL = PortalUtil.getPortalURL(_req, _secure);
