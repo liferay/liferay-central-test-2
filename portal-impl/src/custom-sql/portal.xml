@@ -863,7 +863,7 @@
 	<sql id="com.liferay.portal.service.persistence.RoleFinder.findByC_N_S_P">
 		<![CDATA[
 			SELECT
-				Role_.name AS roleName, Permission_.actionId As actionId
+				Role_.name AS roleName, Permission_.actionId AS actionId
 			FROM
 				Permission_
 			INNER JOIN
