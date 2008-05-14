@@ -72,9 +72,11 @@ public class BaseTestCase extends TestCase {
 	}
 
 	protected void setUp() throws Exception {
-		BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+		if (BeanLocatorUtil.getBeanLocator() == null) {
+			BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
 
-		SpringUtil.initContext(SpringUtil.getContext());
+			SpringUtil.initContext(SpringUtil.getContext());
+		}
 	}
 
 	private Random _random = new Random();

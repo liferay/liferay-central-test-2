@@ -2,16 +2,15 @@
 <!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
 
 <beans>
-	<bean id="liferayDataSourceTarget" class="org.springframework.jdbc.datasource.DriverManagerDataSource" lazy-init="true">
-	    <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-	    <property name="url" value="jdbc:mysql://localhost/lportal" />
-	    <!--<property name="username" value="root" />-->
-		<!--<property name="connectionProperties">
-			<bean class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-				<property name="location">
-					<value>classpath:hibernate-test.properties</value>
-				</property>
-			</bean>
-		</property>-->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location">
+			<value>classpath:test-jdbc.properties</value>
+		</property>
+	</bean>
+	<bean id="liferayDataSourceTarget" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" lazy-init="true">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
 	</bean>
 </beans>

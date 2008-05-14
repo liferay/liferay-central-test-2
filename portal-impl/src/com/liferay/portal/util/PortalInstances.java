@@ -23,6 +23,7 @@
 package com.liferay.portal.util;
 
 import com.liferay.portal.events.EventsProcessor;
+import com.liferay.portal.kernel.util.ArrayUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
 import com.liferay.portal.kernel.util.HttpUtil;
 import com.liferay.portal.kernel.util.Validator;
@@ -116,6 +117,10 @@ public class PortalInstances {
 	}
 
 	private void _addCompanyId(long companyId) {
+		if (ArrayUtil.contains(_companyIds, companyId)) {
+			return;
+		}
+
 		long[] companyIds = new long[_companyIds.length + 1];
 
 		System.arraycopy(

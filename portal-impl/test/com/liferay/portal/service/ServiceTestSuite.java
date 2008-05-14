@@ -22,10 +22,17 @@
 
 package com.liferay.portal.service;
 
+import com.liferay.portal.bean.BeanLocatorImpl;
 import com.liferay.portal.jcr.JCRFactoryUtil;
+import com.liferay.portal.kernel.bean.BeanLocatorUtil;
+import com.liferay.portal.kernel.messaging.MessageBus;
+import com.liferay.portal.kernel.messaging.MessageBusUtil;
+import com.liferay.portal.kernel.messaging.MessageSender;
+import com.liferay.portal.kernel.search.SearchEngineUtil;
 import com.liferay.portal.kernel.util.GetterUtil;
+import com.liferay.portal.lucene.LuceneSearchEngineUtil;
 import com.liferay.portal.lucene.LuceneUtil;
-import com.liferay.portal.util.PropsValues;
+import com.liferay.portal.spring.util.SpringUtil;
 import com.liferay.portal.util.TestPropsUtil;
 import com.liferay.portal.util.TestPropsValues;
 import com.liferay.portlet.bookmarks.service.BookmarksEntryServiceTest;
@@ -33,7 +40,8 @@ import com.liferay.portlet.bookmarks.service.BookmarksFolderServiceTest;
 import com.liferay.portlet.documentlibrary.service.DLFileEntryServiceTest;
 import com.liferay.portlet.imagegallery.service.IGImageServiceTest;
 import com.liferay.portlet.messageboards.service.MBMessageServiceTest;
-import com.liferay.util.FileUtil;
+import com.liferay.portlet.social.service.SocialRelationLocalServiceTest;
+import com.liferay.util.search.IndexWriterMessageSender;
 
 import junit.framework.TestSuite;
 
@@ -52,7 +60,15 @@ public class ServiceTestSuite extends TestSuite {
 			return;
 		}
 
-		FileUtil.deltree(PropsValues.RESOURCE_REPOSITORIES_ROOT);
+		// Bean locator
+
+		if (BeanLocatorUtil.getBeanLocator() == null) {
+			BeanLocatorUtil.setBeanLocator(new BeanLocatorImpl());
+
+			SpringUtil.initContext(SpringUtil.getContext());
+		}
+
+		// JCR
 
 		try {
 			JCRFactoryUtil.prepare();
@@ -61,13 +77,31 @@ public class ServiceTestSuite extends TestSuite {
 			e.printStackTrace();
 		}
 
+		// Lucene
+
 		LuceneUtil.checkLuceneDir(TestPropsValues.COMPANY_ID);
+
+		// Messaging
+
+		MessageBus messageBus = (MessageBus)BeanLocatorUtil.locate(
+			MessageBus.class.getName());
+		MessageSender messageSender = (MessageSender)BeanLocatorUtil.locate(
+			MessageSender.class.getName());
+
+		MessageBusUtil.init(messageBus, messageSender);
+
+		// Search Engines
+
+		SearchEngineUtil.init(
+			LuceneSearchEngineUtil.getSearchEngine(),
+			new IndexWriterMessageSender());
 
 		addTestSuite(BookmarksFolderServiceTest.class);
 		addTestSuite(BookmarksEntryServiceTest.class);
 		addTestSuite(DLFileEntryServiceTest.class);
 		addTestSuite(IGImageServiceTest.class);
 		addTestSuite(MBMessageServiceTest.class);
+		addTestSuite(SocialRelationLocalServiceTest.class);
 	}
 
 	public void test() {

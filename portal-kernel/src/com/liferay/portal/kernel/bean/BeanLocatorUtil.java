@@ -34,6 +34,10 @@ import com.liferay.portal.kernel.util.PortalClassLoaderUtil;
  */
 public class BeanLocatorUtil {
 
+	public static BeanLocator getBeanLocator() {
+		return _beanLocator;
+	}
+
 	public static Object locate(String name) throws BeanLocatorException {
 		if (_beanLocator == null) {
 			_log.error("BeanLocator is null");
